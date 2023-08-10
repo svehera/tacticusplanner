@@ -44,5 +44,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://svehera.github.io/tacticusplanner"
+  "homepage": "https://svehera.github.io/tacticusplanner",
+  "devDependencies": {
+    "eslint": "^8.46.0"
+  }
 }
