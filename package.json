@@ -1,6 +1,7 @@
 {
   "name": "tacticusplanner",
   "version": "0.1.0",
+  "homepage": "https://svehera.github.io/tacticusplanner",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -51,6 +52,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "homepage": "https://svehera.github.io/tacticusplanner/"
+  }
 }
