@@ -5,9 +5,10 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef } from 'ag-grid-community';
+import ButtonAppBar from './AppBar/AppBar';
 
 
-function App() {
+const App = () => {
     
     const [rowData] = useState([
         { make: 'Toyota', model: 'Celica', price: 35000 },
@@ -23,13 +24,16 @@ function App() {
     ]);
 
     return (
-        <div className="ag-theme-material" style={{ height: 400, width: 600 }}>
-            <AgGridReact
-                rowData={rowData}
-                columnDefs={columnDefs}>
-            </AgGridReact>
+        <div>
+            <ButtonAppBar></ButtonAppBar>
+            <div className="ag-theme-material" style={{ height: 400, width: 600 }}>
+                <AgGridReact
+                    rowData={rowData}
+                    columnDefs={columnDefs}>
+                </AgGridReact>
+            </div>
         </div>
     );
-}
+};
 
 export default App;
