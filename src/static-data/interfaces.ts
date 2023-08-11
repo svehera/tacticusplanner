@@ -18,8 +18,8 @@ export interface UnitDataRaw {
     'Trait 2'?: TraitTypeRaw;
     'Trait 3'?: TraitTypeRaw;
     'Trait 4'?: TraitTypeRaw;
-    'Active Ability': string;
-    'Passive Ability': string;
+    'Active Ability'?: DamageTypeRaw;
+    'Passive Ability'?: DamageTypeRaw;
     Number: number;
 }
 
@@ -36,4 +36,22 @@ export interface UnitData {
     rangeHits?: number,
     rangeDistance?: number,
     movement: number
+}
+
+
+export interface LegendaryEvent {
+    alphaTrack: LegendaryEventTrack;   
+    betaTrack: LegendaryEventTrack;   
+    gammaTrack: LegendaryEventTrack;   
+}
+
+export interface LegendaryEventTrack {
+    factionRestriction: (unit: UnitData) => boolean; 
+    unitsRestrictions: Array<LegendaryEventTrackRestriction>
+}
+
+export interface LegendaryEventTrackRestriction {
+    name: string,
+    points: number,
+    restriction: (unit: UnitData) => boolean;
 }

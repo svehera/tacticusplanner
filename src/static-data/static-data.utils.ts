@@ -45,7 +45,6 @@ const damageTypeToEnum: Record<string, DamageTypes> = {
     [DamageTypeRaw.Chain]: DamageTypes.Chain,
     [DamageTypeRaw.Projectile]: DamageTypes.Projectile,
     [DamageTypeRaw.Flame]: DamageTypes.Flame,
-    [DamageTypeRaw.Gauss]: DamageTypes.Gauss,
     [DamageTypeRaw.Molecular]: DamageTypes.Molecular,
     [DamageTypeRaw.Particle]: DamageTypes.Particle,
     [DamageTypeRaw.Plasma]: DamageTypes.Plasma,
@@ -82,7 +81,13 @@ export class StaticDataUtils {
             unitData.damageTypes |= damageTypeToEnum[rawData['Melee Damage']];
         }
         if (rawData['Ranged Damage']) {
-            unitData.damageTypes |=  damageTypeToEnum[rawData['Melee Damage']];
+            unitData.damageTypes |=  damageTypeToEnum[rawData['Ranged Damage']];
+        }
+        if (rawData['Active Ability']) {
+            unitData.damageTypes |= damageTypeToEnum[rawData['Active Ability']];
+        }
+        if (rawData['Passive Ability']) {
+            unitData.damageTypes |=  damageTypeToEnum[rawData['Passive Ability']];
         }
 
         // Calculate traits based on rawData values

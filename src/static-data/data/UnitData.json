@@ -17,10 +17,8 @@
     "Equipement slot 2": "Defense",
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Psyker",
-    "Active Ability": "Storm of Wrath",
-    "Passive Ability": "Psychic Fortress",
-    "Number": 1,
-    "flavour tet": "Varro Tigurius is the Ultramarine's Chief Librarian and as such is one of the most powerful psykers in the Imperium. Since crossing the Rubicon Primaris he can push his abilities even further."
+    "Active Ability": "Psychic",
+    "Number": 1
   },
   {
     "Name": "Certus",
@@ -42,10 +40,8 @@
     "Trait 1": "Overwatch",
     "Trait 2": "Heavy Weapon",
     "Trait 3": "Infiltrate",
-    "Active Ability": "Mortis Round",
-    "Passive Ability": "Camo Cloak",
-    "Number": 2,
-    "flavour tet": "Dedicated marksmen, Eliminators haunt the shadows of the battlefield, seeking out targets of opportunity and bringing them down. Then, these silent assassins slip away looking for their next prey."
+    "Active Ability": "Heavy Round",
+    "Number": 2
   },
   {
     "Name": "Bellator",
@@ -63,10 +59,8 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Flying",
     "Trait 2": "MK X Gravis",
-    "Active Ability": "Death from Above",
-    "Passive Ability": "Shock Assault",
-    "Number": 3,
-    "flavour tet": "Equipped with jump packs and reinforced armour, Inceptors hit the enemy in one sudden and overwhelming blow, leaving them reeling as follow-up waves of Space Marines drive home the attack."
+    "Active Ability": "Bolter",
+    "Number": 3
   },
   {
     "Name": "Incisus",
@@ -83,10 +77,7 @@
     "Equipement slot 2": "Defense",
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Healer",
-    "Active Ability": "Combat Restoratives",
-    "Passive Ability": "Narthecium",
-    "Number": 4,
-    "flavour tet": "Amongst the most honoured Space Marines of a Chapter are its Apothecaries. It is their role to mind the physical well-being of their battle-brothers. On the battlefield, they serve as medics."
+    "Number": 4
   },
   {
     "Name": "Marneus Calgar",
@@ -104,10 +95,8 @@
     "Equipemnt slot 3": "Block Booster",
     "Trait 1": "MK X Gravis",
     "Trait 2": "Final Vengeance",
-    "Active Ability": "Gauntlets of Ultramar",
-    "Passive Ability": "Rites of Battle",
-    "Number": 5,
-    "flavour tet": "Marneus Calgar, Chapter Master of the Ultramarines, is not only a consummate warrior, but also a highly talented strategist. He is master of Ultramar, a vast swathe of space on the embattled Eastern Fringe."
+    "Active Ability": "Bolter",
+    "Number": 5
   },
   {
     "Name": "Angrax",
@@ -126,10 +115,9 @@
     "Trait 1": "Let the Galaxy Burn",
     "Trait 2": "Deep Strike",
     "Trait 3": "Terminator Armour",
-    "Active Ability": "Bringer of despair",
-    "Passive Ability": "Hateful Assault",
-    "Number": 6,
-    "flavour tet": "This Champion of Chaos has dedicated his life to further the cause of Chaos. An extremely powerful warrior, wearing an indomitable suit of Terminator armour most likely acquired through killing the previous owner."
+    "Active Ability": "Power",
+    "Passive Ability": "Power",
+    "Number": 6
   },
   {
     "Name": "Volk",
@@ -152,10 +140,9 @@
     "Trait 2": "Suppressive Fire",
     "Trait 3": "Daemon",
     "Trait 4": "Big Target",
-    "Active Ability": "Frenzied Firing",
-    "Passive Ability": "Fleshmetal Guns",
-    "Number": 7,
-    "flavour tet": "Some believe Obliterators are the by-product of a heretical quest to embody the Omnissiah, whilst others think they are infected with a daemonic technovirus. Whatever creates them, they are a blasphemy against nature and Machine God alike."
+    "Active Ability": "Heavy Round",
+    "Passive Ability": "Heavy Round",
+    "Number": 7
   },
   {
     "Name": "Archimatos",
@@ -176,10 +163,7 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Let the Galaxy Burn",
     "Trait 2": "Psyker",
-    "Active Ability": "Incursion",
-    "Passive Ability": "Possession",
-    "Number": 8,
-    "flavour tet": "Masters of Possession exert the darkest and most blasphemous lore: The art of using hosts of living flesh to house daemons. So thoroughly are they steeped in desecrating sorcery that where they walk, reality itself recoils."
+    "Number": 8
   },
   {
     "Name": "Haarken Worldclaimer",
@@ -197,10 +181,8 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Let the Galaxy Burn",
     "Trait 2": "Flying",
-    "Active Ability": "Herald of the Apocalypse",
-    "Passive Ability": "Head-Claimer",
-    "Number": 9,
-    "flavour tet": "Before every doom, there is a portent, before every apocalypse a sign. Haarken Worldclaimer is that dark omen given form, and the otherworldly destruction he heralds is the coming of the Warmaster himself."
+    "Active Ability": "Piercing",
+    "Number": 9
   },
   {
     "Name": "Abaddon the despolier",
@@ -222,10 +204,8 @@
     "Trait 1": "Let the Galaxy Burn",
     "Trait 2": "Terminator Armour",
     "Trait 3": "Resilient",
-    "Active Ability": "Drach'nyen",
-    "Passive Ability": "First Among Traitors",
-    "Number": 10,
-    "flavour tet": "The name of Abaddon, Warmaster of Chaos, favoured champion of all Chaos gods, has become a bitter curse for the Imperium. It is said that he alone has the power to unite the Traitor Legions and finish the treachery begun ten thousand years ago."
+    "Active Ability": "Piercing",
+    "Number": 10
   },
   {
     "Name": "Snotflogga",
@@ -242,10 +222,8 @@
     "Equipement slot 2": "Defense",
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Beast Snagga",
-    "Active Ability": "Get 'em Runtz",
-    "Passive Ability": "Squig Hound",
-    "Number": 11,
-    "flavour tet": "It takes an Ork of infinite patience - by Ork standards - and a gimlet flare to wrangle a war band's grots and snots. Of course, a savage squig hound with which to make a few examples doesn't hurt either."
+    "Passive Ability": "Physical",
+    "Number": 11
   },
   {
     "Name": "Gibbascrapz",
@@ -262,10 +240,7 @@
     "Equipement slot 2": "Defense",
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Mechanic",
-    "Active Ability": "Grot Tank",
-    "Passive Ability": "Kustom Force Field",
-    "Number": 12,
-    "flavour tet": "Projected from a mass of whirly bits and alarmingly-sparking gubbinz, the kustom force field is a wobbling energy dome, leaving the Mek and his oblivious mates protected from incoming fire and free to storm onward into battle."
+    "Number": 12
   },
   {
     "Name": "Snappawrecka",
@@ -288,10 +263,8 @@
     "Trait 2": "Big Target",
     "Trait 3": "Explodes",
     "Trait 4": "Dakka",
-    "Active Ability": "Ramming Speed",
-    "Passive Ability": "Kan Opener",
-    "Number": 13,
-    "flavour tet": "Surgically wiring grots into combat walkers is risky: the runty loons tend to go on a bit of a power trip, hazardous to every Ork that ever treated them badly. It is, however, also hazardous to every enemy in the way."
+    "Active Ability": "Physical",
+    "Number": 13
   },
   {
     "Name": "Tanksmasha",
@@ -309,10 +282,9 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Mounted",
     "Trait 2": "Beast Snagga",
-    "Active Ability": "Unstoppable Momentum",
-    "Passive Ability": "Smasha Squig Jaws",
-    "Number": 14,
-    "flavour tet": "To compensate for a lifetime of perpetual concussion, nature has furnished smasha squigs with virtually no brain. Only the most belligerent Nobz can keep these beasts pointed forward long enough to make metal- and bone-pulverizing impacts."
+    "Active Ability": "Direct",
+    "Passive Ability": "Physical",
+    "Number": 14
   },
   {
     "Name": "Boss Gulgortz",
@@ -335,10 +307,8 @@
     "Trait 2": "Big Target",
     "Trait 3": "Final Vengeance",
     "Trait 4": "Dakka",
-    "Active Ability": "WAAAGH !",
-    "Passive Ability": "Allume-le !",
-    "Number": 15,
-    "flavour tet": "A towering slab of muscle, metal and bad attitude, a Warboss who leads the charge from the very front, bulldozing a bloody path through the enemy. Mwanwhile, his window-rattling war cry motivates his ladz to ever more gratuitous violence."
+    "Passive Ability": "Projectile",
+    "Number": 15
   },
   {
     "Name": "Vindicta",
@@ -359,10 +329,9 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Act of Faith",
     "Trait 2": "Heavy Weapon",
-    "Active Ability": "Armorium Cherub",
-    "Passive Ability": "Fire of Absolution",
-    "Number": 16,
-    "flavour tet": "Celestians are the finest and noblest warriors of the Order, inspirational figures who punish the faithless with relentless barrages of bolter fire and gouts of sacred flame."
+    "Active Ability": "Flame",
+    "Passive Ability": "Flame",
+    "Number": 16
   },
   {
     "Name": "Isabella",
@@ -380,10 +349,7 @@
     "Equipemnt slot 3": "Block Booster",
     "Trait 1": "Act of Faith",
     "Trait 2": "Healer",
-    "Active Ability": "Rites of Restoration",
-    "Passive Ability": "Medicos Mimistorum",
-    "Number": 17,
-    "flavour tet": "Sisters of the Orders Hospitaller are the physical and spiritual healers of the Adepta Sororitas. As much as their medicinal expertise and surgical skill, they provide a source of faith to those in need."
+    "Number": 17
   },
   {
     "Name": "Morvenn Vahl",
@@ -406,10 +372,9 @@
     "Trait 2": "Mechanical",
     "Trait 3": "Explodes",
     "Trait 4": "Big Target",
-    "Active Ability": "Sanctorum Missile",
-    "Passive Ability": "Sweeping Blow",
-    "Number": 18,
-    "flavour tet": "Morvenn Vahl is the current Abbess Sanctorum of the Adepta Sororitas and a High Lord of Terra. She goes to battle in the Paragon Warsuit Purgator Mirabilis."
+    "Active Ability": "Blast",
+    "Passive Ability": "Power",
+    "Number": 18
   },
   {
     "Name": "Roswitha",
@@ -429,10 +394,8 @@
     "Equipement slot 2": "Block",
     "Equipemnt slot 3": "Block Booster",
     "Trait 1": "Act of Faith",
-    "Active Ability": "Brazier of Holy Fire",
-    "Passive Ability": "Condemnor of Stake",
-    "Number": 19,
-    "flavour tet": "Canonesses are the martial and spiritual commanders of the Orders Militant. Each is a shining example of purity and dedication of purpose, a veteran warrior and a slayer of the faithless of many hundreds of battles."
+    "Active Ability": "Flame",
+    "Number": 19
   },
   {
     "Name": "Celestine",
@@ -450,10 +413,8 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Act of Faith",
     "Trait 2": "Flying",
-    "Active Ability": "Sky Strike",
-    "Passive Ability": "Geminae Superia",
-    "Number": 20,
-    "flavour tet": "Saint Celestine is a living embodiment of the Emperor's might, and she radiates holy light. Beneath her, the faithful are filled with courage, while heretics experience overwhelming terror."
+    "Active Ability": "Power",
+    "Number": 20
   },
   {
     "Name": "Makhotep",
@@ -465,7 +426,7 @@
     "Initial rarity": "Common",
     "Melee Damage": "Physical",
     "Melee Hits": 1,
-    "Ranged Damage": "Gauss",
+    "Ranged Damage": "Molecular",
     "Ranged Hits": 2,
     "Distance": 3,
     "Movement": 3,
@@ -473,10 +434,7 @@
     "Equipement slot 2": "Defense",
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Living Metal",
-    "Active Ability": "Adaptive Strategy",
-    "Passive Ability": "Relentless March",
-    "Number": 21,
-    "flavour tet": "Royal Wardens serve directly under an Overlord and ensure their lord's will is carried out by the Dynasty's armies. Royal Wardens can modify the orders to phalanxes of Necron Infantry, increasing their efficiency."
+    "Number": 21
   },
   {
     "Name": "Imospekh",
@@ -497,10 +455,8 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Living Metal",
     "Trait 2": "Overwatch",
-    "Active Ability": "Multi-Threat Eliminator",
-    "Passive Ability": "Inescapable Death",
-    "Number": 22,
-    "flavour tet": "Lethal ambush predators, Hexmark Destroyers unleash inescapable hails of Molecular fire. Independent ocular targeting and optimised firing patterns leave their prey with no escape."
+    "Active Ability": "Molecular",
+    "Number": 22
   },
   {
     "Name": "Aleph-null",
@@ -520,10 +476,7 @@
     "Trait 2": "Explodes",
     "Trait 3": "Flying",
     "Trait 4": "Mechanic",
-    "Active Ability": "Scarab Hive",
-    "Passive Ability": "Fabricator Claw Array",
-    "Number": 23,
-    "flavour tet": "Canoptek Spyders never sleep, but while away the aeons servicing the structures of their Tomb World. The Canoptek Spyder is essentially a drone, but still a formidable foe when the situation demands."
+    "Number": 23
   },
   {
     "Name": "Thutmose",
@@ -543,10 +496,9 @@
     "Equipement slot 2": "Defense",
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Living Metal",
-    "Active Ability": "Harbinger of Destruction",
-    "Passive Ability": "Living Lighting",
-    "Number": 24,
-    "flavour tet": "Plasmancers are unsubtle annihilators. They are capable of wielding energy as a weapon itself rather than needing to bind it to other forms."
+    "Active Ability": "Direct",
+    "Passive Ability": "Direct",
+    "Number": 24
   },
   {
     "Name": "Anuphet",
@@ -566,10 +518,8 @@
     "Equipement slot 2": "Defense",
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Living Metal",
-    "Active Ability": "Resurrection Orb",
-    "Passive Ability": "Martial Apotheosis",
-    "Number": 25,
-    "flavour tet": "Commanding legion upon legion of deathless soldiers whose only purpose is to obey his every order, Anuphet is a cold, calculating demigod."
+    "Passive Ability": "Energy",
+    "Number": 25
   },
   {
     "Name": "Sibyll",
@@ -589,10 +539,7 @@
     "Equipement slot 2": "Defense",
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Psyker",
-    "Active Ability": "Psychic Maelstrom",
-    "Passive Ability": "Nightshroud",
-    "Number": 26,
-    "flavour tet": "Primaris Psykers are rare and extraordinary individuals who wield the destructive power of the warp as a weapon to smite the enemies of the Emperor, their every action a walk on a fine line between heroic service and eternal damnation."
+    "Number": 26
   },
   {
     "Name": "Commissar Yarrick",
@@ -612,10 +559,7 @@
     "Equipement slot 2": "Block",
     "Equipemnt slot 3": "Block Booster",
     "Trait 1": "Resilient",
-    "Active Ability": "Send in the Next Wave",
-    "Passive Ability": "Summary Execution",
-    "Number": 27,
-    "flavour tet": "At Hades Hive, Commissar Yarrick lost his right arm to the snapping battle klaw of an Ork Warboss. Fighting through pain and shock, Yarrick beheaded the Warboss and took that same klaw as his own."
+    "Number": 27
   },
   {
     "Name": "Kut skoden",
@@ -632,10 +576,8 @@
     "Equipement slot 2": "Defense",
     "Equipemnt slot 3": "Defense",
     "Trait 1": "Big Target",
-    "Active Ability": "Frag Bomb",
-    "Passive Ability": "Avalanche of Muscle",
-    "Number": 28,
-    "flavour tet": "With their overwhelming physicality Ogryns are exceptional shock troops, and are regularly deployed on the front lines of battle. While often not the brightest stars, they take their duties very seriously."
+    "Active Ability": "Blast",
+    "Number": 28
   },
   {
     "Name": "Thaddeus noble",
@@ -656,10 +598,8 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Suppressive Fire",
     "Trait 2": "Indirect Fire",
-    "Active Ability": "Basilisk Barrage",
-    "Passive Ability": "Spotter",
-    "Number": 29,
-    "flavour tet": "Masters of Ordnance are the eyes on the battlefield, spotting for batteries of long-range weaponry nested far from the front lines. Wherever they direct their gaze, a rain of exploding shells is sure to follow."
+    "Active Ability": "Blast",
+    "Number": 29
   },
   {
     "Name": "Castellan creed",
@@ -675,10 +615,7 @@
     "Equipement slot 1": "Crit",
     "Equipement slot 2": "Block",
     "Equipemnt slot 3": "Block Booster",
-    "Active Ability": "Supreme Commander",
-    "Passive Ability": "Sworn Protector",
-    "Number": 30,
-    "flavour tet": "Blistering assaults, devious traps and impenetrable defenses as his trademarks, within three decades the ragged orphan boy Creed had earned acclaim as Cadia's greatest commander and in Colour Sgt. Kell the most loyal voice to his command."
+    "Number": 30
   },
   {
     "Name": "Typhus",
@@ -701,10 +638,9 @@
     "Trait 2": "Resilient",
     "Trait 3": "Psyker",
     "Trait 4": "Terminator Armour",
-    "Active Ability": "Plague Wind",
-    "Passive Ability": "Destroyer Hive",
-    "Number": 31,
-    "flavour tet": "Once first Captain of the Death Guard, Callas Typhon led his whole legion into the rotten embrace of the God of Plagues. Now he is Typhus, the Herald of Nurgle, spreading his god's devastating gifts throughout the galaxy."
+    "Active Ability": "Psychic",
+    "Passive Ability": "Direct",
+    "Number": 31
   },
   {
     "Name": "Maladus",
@@ -723,10 +659,9 @@
     "Trait 1": "Contagions of Nurgle",
     "Trait 2": "Resilient",
     "Trait 4": "Terminator Armour",
-    "Active Ability": "Flail Swing",
-    "Passive Ability": "Haze of Corruption",
-    "Number": 32,
-    "flavour tet": "Relentless and unstoppably tough, Blightlord Terminators are elite Death Guard warriors who are bound forever to their mutated Armour. They are saturated with foulness, which pours off them to rot flesh and corrode metal."
+    "Active Ability": "Power",
+    "Passive Ability": "Power",
+    "Number": 32
   },
   {
     "Name": "Nauseous rotbone",
@@ -745,10 +680,7 @@
     "Trait 1": "Contagions of Nurgle",
     "Trait 2": "Resilient",
     "Trait 3": "Healer",
-    "Active Ability": "Revitalising Malignancy",
-    "Passive Ability": "Tainted Narthecium",
-    "Number": 33,
-    "flavour tet": "Relentless and unstoppably tough, Blightlord Terminators are elite Death Guard warriors who are bound forever to their mutated Armour. They are saturated with foulness, which pours off them to rot flesh and corrode metal."
+    "Number": 33
   },
   {
     "Name": "Pestillian",
@@ -767,10 +699,9 @@
     "Trait 1": "Contagions of Nurgle",
     "Trait 2": "Resilient",
     "Trait 3": "Putrid Explosion",
-    "Active Ability": "Foul Infusion",
-    "Passive Ability": "Blight Racks",
-    "Number": 34,
-    "flavour tet": "Biologus Putrifiers take obscene delight in developing myriad plagues and spreading them with blight grenades during battle. With their injector pistols they implant killing maladies into the enemy before extracting samples for their next experiment."
+    "Active Ability": "Direct",
+    "Passive Ability": "Blast",
+    "Number": 34
   },
   {
     "Name": "Corrodius",
@@ -788,10 +719,8 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Contagions of Nurgle",
     "Trait 2": "Resilient",
-    "Active Ability": "Poxwalkers",
-    "Passive Ability": "Cursed Plague Bell",
-    "Number": 35,
-    "flavour tet": "Cursed plague bells tolling, Noxious Blightbringers erode the enemy's will to fight and spawn maggots in the minds of psykers. To the Death Guard the sound is beautiful, and upon hearing it they surge eagerly into the fray."
+    "Passive Ability": "Psychic",
+    "Number": 35
   },
   {
     "Name": "Sword Brother Godswyl",
@@ -808,10 +737,8 @@
     "Equipement slot 2": "Defense",
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Parry",
-    "Active Ability": "Thunderous Assault",
-    "Passive Ability": "Champion of the Feast",
-    "Number": 36,
-    "flavour tet": "An unstoppable, uncompromising and reaping whirlwind on the battlefield, every Sword Brother has earned their place amongst the Marshal's household through acts of unswerving faith and spectacular violence."
+    "Active Ability": "Power",
+    "Number": 36
   },
   {
     "Name": "Brother Burchard",
@@ -832,10 +759,9 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "MK X Gravis",
     "Trait 2": "Suppressive Fire",
-    "Active Ability": "Fragstorm Grenade Launcher",
-    "Passive Ability": "Boltstorm",
-    "Number": 37,
-    "flavour tet": "Capable of spearheading devastating offences, Aggressors are walking ceramite strong-points. They excel at close-quarters combat and laying down torrents of withering fire before crushing their foes with their energised fists."
+    "Active Ability": "Blast",
+    "Passive Ability": "Bolter",
+    "Number": 37
   },
   {
     "Name": "Ancient Thoread",
@@ -853,10 +779,7 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Final Vengeance",
     "Trait 2": "Parry",
-    "Active Ability": "The Aurelian Shroud",
-    "Passive Ability": "Astarte Banner",
-    "Number": 38,
-    "flavour tet": "Ancients bear the honour of carrying their Chapter's precious standards into battle, which incorporate the remains of fallen heroes. In their presence, battle-brothers are inspired to emulate the legendary deeds of these paragons of old."
+    "Number": 38
   },
   {
     "Name": "Brother Jaeger",
@@ -874,10 +797,8 @@
     "Equipemnt slot 3": "Block Booster",
     "Trait 1": "Final Vengeance",
     "Trait 2": "Parry",
-    "Active Ability": "Holy Duel",
-    "Passive Ability": "Martial Superiority",
-    "Number": 39,
-    "flavour tet": "On the eve of battle, one among the Black Templars will receive a vision from the Emperor. The Chaplains will bless him and adorn him with the finest weapons, for he will seek out and strike down the enemy leaders as the Emperor's Chosen."
+    "Passive Ability": "Power",
+    "Number": 39
   },
   {
     "Name": "High Marshal Helbrecht",
@@ -897,10 +818,7 @@
     "Equipement slot 2": "Block",
     "Equipemnt slot 3": "Block Booster",
     "Trait 1": "Parry",
-    "Active Ability": "Crusade of Wrath",
-    "Passive Ability": "Destroy the Witch",
-    "Number": 40,
-    "flavour tet": "Helbrecht is the living embodiment of his Chapter's warrior spirit. His battle-brothers follow him without question, for they believe where High Marshal Helbrecht treads, so too walks the Emperor himself."
+    "Number": 40
   },
   {
     "Name": "Aethana",
@@ -918,10 +836,8 @@
     "Equipemnt slot 3": "Block Booster",
     "Trait 1": "Flying",
     "Trait 2": "Deep Strike",
-    "Active Ability": "Swooping Hawk",
-    "Passive Ability": "Path of Command",
-    "Number": 41,
-    "flavour tet": "Rangers are outcast wanderers who left the regimented lives of the craftworlds behind them. Adepts in the arts of stealth warfare, marksmanship, and tracking enemies through harsh terrain, the Rangers aid their brethren as scouts and snipers."
+    "Active Ability": "Piercing",
+    "Number": 41
   },
   {
     "Name": "Calandis",
@@ -942,10 +858,8 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Heavy Weapon",
     "Trait 2": "Overwatch",
-    "Active Ability": "Fire and Reposition",
-    "Passive Ability": "Wireweave Net",
-    "Number": 42,
-    "flavour tet": "Autarchs are renowned for their strategic brilliance, sublime martial skill and indomitable strength of will. Wielding tactics mastered across millenia of battle, they apply all that they have learned to their command of the Asuryani war hosts."
+    "Passive Ability": "Piercing",
+    "Number": 42
   },
   {
     "Name": "Eldryon",
@@ -965,10 +879,8 @@
     "Equipement slot 2": "Block",
     "Equipemnt slot 3": "Block Booster",
     "Trait 1": "Psyker",
-    "Active Ability": "Executioner",
-    "Passive Ability": "Doom",
-    "Number": 43,
-    "flavour tet": "Psykers of unparalleled ability and renown, the Farseers meticulously plan and execute strategies covering thousands of years. Even their smallest actions can bring enormous change; they are the butterfly's\nwings and the hurricane in one."
+    "Active Ability": "Psychic",
+    "Number": 43
   },
   {
     "Name": "Maugan Ra",
@@ -990,10 +902,8 @@
     "Trait 1": "Terrifying",
     "Trait 2": "Heavy Weapon",
     "Trait 3": "Overwatch",
-    "Active Ability": "Maugetar",
-    "Passive Ability": "Inescapable Accuracy",
-    "Number": 44,
-    "flavour tet": "Maugan Ra, the Harvester of Souls, is a master at killing from a distance. Maugetar, his scythe-like weapon, fires mind-linked shuriken discs large enough to decapitate swaths of foes and can end even more lives with its built-in reaping blade."
+    "Active Ability": "Heavy Round",
+    "Number": 44
   },
   {
     "Name": "Jain Zar",
@@ -1010,10 +920,8 @@
     "Equipement slot 2": "Block",
     "Equipemnt slot 3": "Block Booster",
     "Trait 1": "Infiltrate",
-    "Active Ability": "Silent Death",
-    "Passive Ability": "Terror's Lament",
-    "Number": 45,
-    "flavour tet": "To watch Jain Zar in combat is to watch an exquisite dance, amidst leg sweeps, dodging twists and graceful pirouettes, the glowing polearm scythes and darts until only Jain Zar is left standing"
+    "Active Ability": "Piercing",
+    "Number": 45
   },
   {
     "Name": "Tjark",
@@ -1031,10 +939,8 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Infiltrate",
     "Trait 2": "Terrifying",
-    "Active Ability": "Grapnel Launcher",
-    "Passive Ability": "Hunters Beyond Death",
-    "Number": 48,
-    "flavour tet": "Hidden behind shimmering stealth fields, a Firesight Marksman transmits targeting data to the MV71 Sniper Drones in their thrall or, when deadly precision shots are not enough, calls in seeker missile strikes from artillery and air support."
+    "Active Ability": "Physical",
+    "Number": 48
   },
   {
     "Name": "Ulf",
@@ -1052,10 +958,9 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Final Vengeance",
     "Trait 2": "Unstoppable",
-    "Active Ability": "Great Frost Axe",
-    "Passive Ability": "Savage Killer",
-    "Number": 49,
-    "flavour tet": "Piloted by courageous Fire Caste veterans, XV8 Crisis Battlesuits are as tough and well armed as other races' light tanks, yet they also boast jet-assisted speed to strike swiftly wherever the battle rages most fiercly."
+    "Active Ability": "Piercing",
+    "Passive Ability": "Power",
+    "Number": 49
   },
   {
     "Name": "Aun'shi",
@@ -1071,10 +976,7 @@
     "Equipement slot 1": "Crit",
     "Equipement slot 2": "Block",
     "Equipemnt slot 3": "Crit Booster",
-    "Active Ability": "Inspired to Greatness",
-    "Passive Ability": "Serene Unifier",
-    "Number": 50,
-    "flavour tet": "As much a maverick as he is a master of covert operations, Darkstrider is a formidable leader of stealth and sabotage missions. Despite often not following protocol, his expertise in guerilla warfare renders him an invaluable asset for the T'au"
+    "Number": 50
   },
   {
     "Name": "Darkstrider",
@@ -1096,10 +998,7 @@
     "Trait 1": "Close Combat Weakness",
     "Trait 2": "Infiltrate",
     "Trait 3": "Suppressive Fire",
-    "Active Ability": "Fighting Retreat",
-    "Passive Ability": "Strutural analyser",
-    "Number": 51,
-    "flavour tet": "Anu-shi is a hero to his people, a humble warrior whose presence inspires the T'au warriors around hi. Marrying the uplifting nature of his Ethereal caste with exceptional martial skill, Anu'shi is a blazing beacon lighting the path to victory"
+    "Number": 51
   },
   {
     "Name": "Re'Vas",
@@ -1122,10 +1021,8 @@
     "Trait 2": "Big Target",
     "Trait 3": "Flying",
     "Trait 4": "Mechanical",
-    "Active Ability": "Early Warning Override",
-    "Passive Ability": "Cyclic Ion Blaster",
-    "Number": 52,
-    "flavour tet": "An exceprion student of legendary commander Puretide, O'shaserra excelled as dealy warrior and brilliant commander. She is now the living spearhead and staunchest defender of the Greater Good and a shining example for the whole T'au empire."
+    "Passive Ability": "Particle",
+    "Number": 52
   },
   {
     "Name": "Arjac",
@@ -1144,10 +1041,8 @@
     "Trait 1": "Terminator Armour",
     "Trait 2": "Deep Strike",
     "Trait 3": "Resilient",
-    "Active Ability": "Foehammer",
-    "Passive Ability": "Anvil Shield",
-    "Number": 53,
-    "flavour tet": "Altered by the Curse lying in the blood of all sions of the Wolf King, Wulfen exist on the brink if constant berserk rages. They are bestial warriors and savage hunters, ripping foes apart with inhuman speed."
+    "Active Ability": "Power",
+    "Number": 53
   },
   {
     "Name": "ShadowSun",
@@ -1170,10 +1065,8 @@
     "Trait 2": "Camouflage",
     "Trait 3": "Flying",
     "Trait 4": "Infiltrate",
-    "Active Ability": "Exemplar of the Kauyon",
-    "Passive Ability": "Defender of the Greater Good",
-    "Number": 53,
-    "flavour tet": "Daubed with runes of wards and adjuration, Hounds of Morkai are obsessed hunters of psykers. Runic circuitry augements their uniquely pitches hunting call, disrupting their prey's powers and sowing feat before the kill."
+    "Active Ability": "Blast",
+    "Number": 53
   },
   {
     "Name": "Azrael",
@@ -1194,10 +1087,9 @@
     "Equipemnt slot 3": "Block Booster",
     "Trait 1": "Final Vengeance",
     "Trait 2": "Overwatch",
-    "Active Ability": "Dark Talon Strike",
-    "Passive Ability": "Lion Helm",
-    "Number": 54,
-    "flavour tet": "A former Iron Priest of the forge, Arjac is a towering mass of muscle and a taciturn anvil of endurance, who upholds the honour of the Chapter. Wielding the enormous Foehammer, Arjac crushes his enemies with pulversing strength"
+    "Active Ability": "Direct",
+    "Passive Ability": "Bolter",
+    "Number": 54
   },
   {
     "Name": "Sho'Syl",
@@ -1218,10 +1110,8 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Camouflage",
     "Trait 2": "Close Combat Weakness",
-    "Active Ability": "Seeker Missile Frquency Lock",
-    "Passive Ability": "MV71 Sniper Drone Squad",
-    "Number": 54,
-    "flavour tet": "As the \"Keeper of the Truth\", Azrael carries the dark burden of this chapter. As masterful commander, he quickly grasps changing battlefield realities and orchestrates his forces to maximum advantage. As a warrior, he never falters."
+    "Active Ability": "Heavy Round",
+    "Number": 55
   },
   {
     "Name": "Abraxas",
@@ -1242,10 +1132,9 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Psyker",
     "Trait 2": "Weaver of Fates",
-    "Active Ability": "Malefic Maelstrom",
-    "Passive Ability": "Infernal Pacts",
-    "Number": 55,
-    "flavour tet": "Infernal Masters forge pacts with daemonic entities, called tutelaries. They can unleash the powers of these malign familiar to engulf their foes in swarms of momentarily corporeal terrors or to master the currents of the empyrean itself."
+    "Active Ability": "Psychic",
+    "Passive Ability": "Psychic",
+    "Number": 56
   },
   {
     "Name": "Toth",
@@ -1267,10 +1156,8 @@
     "Trait 1": "Terminator Armour",
     "Trait 2": "Suppressive Fire",
     "Trait 3": "Weaver of Fates",
-    "Active Ability": "Hellfyre Missle Rack",
-    "Passive Ability": "Time Flux",
-    "Number": 56,
-    "flavour tet": "Undead husks of dust controllled by their Sorcerer masters, the Scarab Occult Terminators advance upon their foes implacably and as silent as the grave, still fighting with all the merciless skill like they did when they were Magnus' elite bodyguards."
+    "Active Ability": "Heavy Round",
+    "Number": 57
   },
   {
     "Name": "Yazaghor",
@@ -1291,10 +1178,9 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Flying",
     "Trait 2": "Weaver of Fates",
-    "Active Ability": "Sorcerous Facade",
-    "Passive Ability": "Reality Unbound",
-    "Number": 57,
-    "flavour tet": "Most blessed of all thier kind, the Enlighted see the skeins of fate through communion with Tzeentch. They surge to battle atop daemonic discs, their Fatecaster Greatbows launching ensorcelled arrows from ectoplasmic strings wih lethal effects."
+    "Active Ability": "Psychic",
+    "Passive Ability": "Psychic",
+    "Number": 58
   },
   {
     "Name": "Thaumachus",
@@ -1316,10 +1202,7 @@
     "Trait 1": "Weaver of Fates",
     "Trait 2": "Flying",
     "Trait 3": "Psyker",
-    "Active Ability": "Attempted Possession",
-    "Passive Ability": "Arcane Shield",
-    "Number": 58,
-    "flavour tet": "Twisated arcanists, wicked of intent and strange of form, these warrior-mystics have an encyclopaedic knowledge of spells and are able to bend reality to their desires"
+    "Number": 59
   },
   {
     "Name": "Sarquael",
@@ -1341,9 +1224,8 @@
     "Trait 1": "Final Vengeance",
     "Trait 2": "Overwatch",
     "Trait 3": "Heavy Weapon",
-    "Active Ability": "Supercharge",
-    "Passive Ability": "Grim Retribution",
-    "Number": 60,
-    "flavour tet": "For ten thousand years, the seeker of truth known as Ahriman has roamed the galaxy in a quest to acquire every artefact, tome and scroll that harbours eldritch knowledge. Worlds burn in his shadows as he plucks these treasures by any means necessary"
+    "Active Ability": "Plasma",
+    "Passive Ability": "Plasma",
+    "Number": 60
   }
 ]
