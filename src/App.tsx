@@ -53,7 +53,6 @@ const App = () => {
             field: 'traits', headerName: 'Traits', valueFormatter: (params: ValueFormatterParams<UnitData, number>) => {
                 const typeNames: string[] = [];
                 const value = params.value ?? 0;
-                console.log(value);
                 for (const key in Traits) {
                     if (typeof Traits[key] === 'number' && value & Traits[key] as any) {
                         typeNames.push(key);
