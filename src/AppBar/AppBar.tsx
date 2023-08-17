@@ -4,10 +4,12 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { PersonalDataService } from '../personal-data/personal-data.service';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useRef } from 'react';
+import { PersonalDataService } from '../store/personal-data/personal-data.service';
 
 const ButtonAppBar = () => {
+    const inputRef = useRef<HTMLInputElement>(null);
+    
     const downloadJson = () => {
         const data = PersonalDataService.data;
         const jsonData = JSON.stringify(data, null, 2);
@@ -46,6 +48,8 @@ const ButtonAppBar = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <input
+                ref={inputRef}
+                style={{ display: 'none' }}
                 type="file"
                 accept=".json"
                 onChange={handleFileUpload}
@@ -56,7 +60,7 @@ const ButtonAppBar = () => {
                         Tacticus Planner
                     </Typography>
                     <Button color="inherit">Who You Own</Button>
-                    <Button color="inherit">Import</Button>
+                    <Button color="inherit" onClick={() => inputRef.current?.click()}>Import</Button>
                     <Button onClick={downloadJson} color="inherit">Export</Button>
                 </Toolbar>
             </AppBar>

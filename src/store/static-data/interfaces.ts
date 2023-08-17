@@ -1,4 +1,5 @@
 ﻿import { Alliance, DamageTypeRaw, DamageTypes, Faction, Rarity, Traits, TraitTypeRaw } from './enums';
+import { PersonalCharacterData } from '../personal-data/personal-data.interfaces';
 
 export interface UnitDataRaw {
     Name: string;
@@ -25,7 +26,7 @@ export interface UnitDataRaw {
 }
 
 
-export interface UnitData {
+export interface IUnitData {
     alliance: Alliance;
     faction: Faction;
     factionColor: string,
@@ -40,20 +41,24 @@ export interface UnitData {
     forcedSummons: boolean;
 }
 
+export type ICharacter = IUnitData & PersonalCharacterData;
 
-export interface LegendaryEvent {
-    alphaTrack: LegendaryEventTrack;   
-    betaTrack: LegendaryEventTrack;   
-    gammaTrack: LegendaryEventTrack;   
+
+export interface ILegendaryEvent {
+    alphaTrack: ILegendaryEventTrack;   
+    betaTrack: ILegendaryEventTrack;   
+    gammaTrack: ILegendaryEventTrack;
+
+    getAllowedUnits(): Array<IUnitData & Partial<PersonalCharacterData>>;
 }
 
-export interface LegendaryEventTrack {
-    getAllowedUnits:() => UnitData[];
-    unitsRestrictions: Array<LegendaryEventTrackRestriction>;
+export interface ILegendaryEventTrack {
+    getAllowedUnits:() => IUnitData[];
+    unitsRestrictions: Array<ILegendaryEventTrackRestriction>;
 }
 
-export interface LegendaryEventTrackRestriction {
+export interface ILegendaryEventTrackRestriction {
     name: string,
     points: number,
-    units: UnitData[],
+    units: IUnitData[],
 }

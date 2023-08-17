@@ -1,5 +1,5 @@
-﻿import unitsData from './data/UnitData.json';
-import { UnitData, UnitDataRaw } from './interfaces';
+﻿import unitsData from '../../data/UnitData.json';
+import { IUnitData, UnitDataRaw } from './interfaces';
 import { DamageTypeRaw, DamageTypes, Faction, Traits, TraitTypeRaw } from './enums';
 
 const rawTraitToEnum: Record<string, Traits> = {
@@ -58,11 +58,11 @@ const damageTypeToEnum: Record<string, DamageTypes> = {
 
 export class StaticDataUtils {
     
-    static readonly unitsData: UnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
+    static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
 
 
-    static convertUnitData(rawData: UnitDataRaw): UnitData {
-        const unitData: UnitData = {
+    static convertUnitData(rawData: UnitDataRaw): IUnitData {
+        const unitData: IUnitData = {
             alliance: rawData.Alliance,
             faction: rawData.Faction,
             factionColor: StaticDataUtils.getFactionColor(rawData.Faction),
