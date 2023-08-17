@@ -21,6 +21,7 @@ export interface UnitDataRaw {
     'Active Ability'?: DamageTypeRaw;
     'Passive Ability'?: DamageTypeRaw;
     Number: number;
+    ForcedSummons: boolean;
 }
 
 
@@ -35,7 +36,8 @@ export interface UnitData {
     meleeHits: number,
     rangeHits?: number,
     rangeDistance?: number,
-    movement: number
+    movement: number,
+    forcedSummons: boolean;
 }
 
 
@@ -46,12 +48,12 @@ export interface LegendaryEvent {
 }
 
 export interface LegendaryEventTrack {
-    factionRestriction: (unit: UnitData) => boolean; 
-    unitsRestrictions: Array<LegendaryEventTrackRestriction>
+    getAllowedUnits:() => UnitData[];
+    unitsRestrictions: Array<LegendaryEventTrackRestriction>;
 }
 
 export interface LegendaryEventTrackRestriction {
     name: string,
     points: number,
-    restriction: (unit: UnitData) => boolean;
+    units: UnitData[],
 }

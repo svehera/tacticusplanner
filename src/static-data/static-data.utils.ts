@@ -74,6 +74,7 @@ export class StaticDataUtils {
             rangeHits: rawData['Ranged Hits'],
             rangeDistance: rawData.Distance,
             movement: rawData.Movement,
+            forcedSummons: rawData.ForcedSummons,
         };
 
         // Calculate damage types based on rawData values
