@@ -33,6 +33,8 @@ const rawTraitToEnum: Record<string, Traits> = {
     [TraitTypeRaw.Camouflage]: Traits.Camouflage,
     [TraitTypeRaw.WeaverOfFates]: Traits.WeaverOfFates,
     [TraitTypeRaw.BigTarget]: Traits.BigTarget,
+    [TraitTypeRaw.ShadowInTheWarp]: Traits.ShadowInTheWarp,
+    [TraitTypeRaw.Synapse]: Traits.Synapse,
 };
 
 const damageTypeToEnum: Record<string, DamageTypes> = {
@@ -130,6 +132,8 @@ export class StaticDataUtils {
         case Faction.Dark_Angels:
             return '#93C47D';
         case Faction.Thousand_Sons:
+            return '#A4C2F4';
+        case Faction.Tyranids:
             return '#A4C2F4';
         default:
             return '#ffffff';

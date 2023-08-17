@@ -42,7 +42,7 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
     
     const rows: Array<IRow> = getRows(legendaryEvent);
 
-    const charactersPoints = legendaryEvent.getCharactersPoints(true);
+    const charactersPoints = legendaryEvent.getCharactersPoints();
     const rows2 = Object.entries(charactersPoints).map(([name, points]) => ({ name, points }));
     
     const colums2: Array<ColDef> = [

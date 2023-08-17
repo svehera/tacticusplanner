@@ -17,7 +17,8 @@ export enum Faction {
     Space_Wolves = 'Space Wolves',
     T_Au = 'T\'au Empire',
     Dark_Angels = 'Dark Angels',
-    Thousand_Sons = 'Thousand Sons'
+    Thousand_Sons = 'Thousand Sons',
+    Tyranids = 'Tyranids',
 }
 
 export enum Rarity {
@@ -59,6 +60,8 @@ export enum TraitTypeRaw {
     Camouflage = 'Camouflage',
     WeaverOfFates = 'Weaver of Fates',
     BigTarget = 'Big Target',
+    ShadowInTheWarp = 'Shadow in the Warp',
+    Synapse = 'Synapse'
 }
 
 export enum Traits {
@@ -93,6 +96,8 @@ export enum Traits {
     Camouflage = 1 << 27,
     WeaverOfFates = 1 << 28,
     BigTarget = 1 << 29,
+    ShadowInTheWarp = 1 << 30,
+    Synapse = 1 << 31,
 }
 
 export enum DamageTypeRaw {

@@ -1286,5 +1286,32 @@
     "Passive Ability": "Plasma",
     "Number": 60,
     "ForcedSummons": false
+  },
+  {
+    "Name": "Neurothrope",
+    "Faction": "Tyranids",
+    "Alliance": "Xenos",
+    "Health": 70,
+    "Damage": 50,
+    "Armour": 20,
+    "Initial rarity": "Rare",
+    "Melee Damage": "Physical",
+    "Melee Hits": 1,
+    "Ranged Damage": "Psychic",
+    "Ranged Hits": 3,
+    "Distance": 2,
+    "Movement": 2,
+    "Equipement slot 1": "Crit",
+    "Equipement slot 2": "Defense",
+    "Equipemnt slot 3": "Crit Booster",
+    "Trait 1": "Close Combat Weakness",
+    "Trait 2": "Flying",
+    "Trait 3": "Psyker",
+    "Trait 4": "Shadow in the Warp",
+    "Trait 5": "Synapse",
+    "Active Ability": "Psychic",
+    "Passive Ability": "Psychic",
+    "Number": 61,
+    "ForcedSummons": false
   }
 ]
