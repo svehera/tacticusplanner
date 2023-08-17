@@ -15,6 +15,7 @@ type LegendaryEventSection = '(Alpha)' | '(Beta)' | '(Gamma)';
 
 const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
     const gridRef = useRef<AgGridReact>(null);
+    const gridRef2 = useRef<AgGridReact>(null);
 
     const legendaryEvent: ILegendaryEvent = props.input;
 
@@ -41,6 +42,20 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
     
     const rows: Array<IRow> = getRows(legendaryEvent);
 
+    const charactersPoints = legendaryEvent.getCharactersPoints(true);
+    const rows2 = Object.entries(charactersPoints).map(([name, points]) => ({ name, points }));
+    
+    const colums2: Array<ColDef> = [
+        {
+            field: 'name',
+            sortable: true
+        },
+        {
+            field: 'points',
+            sortable: true
+        }
+    ];
+
     return (
         <div>
             <Button onClick={() => gridRef.current?.api.sizeColumnsToFit()}>Fit To screen</Button>
@@ -50,6 +65,15 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
                     tooltipShowDelay={100}
                     rowData={rows}
                     columnDefs={columnsDefs}>
+                </AgGridReact>
+            </div>
+
+            <div className="ag-theme-material" style={{ height: 'calc(100vh - 100px)', width: '100%' }}>
+                <AgGridReact
+                    ref={gridRef2}
+                    tooltipShowDelay={100}
+                    rowData={rows2}
+                    columnDefs={colums2}>
                 </AgGridReact>
             </div>
         </div>

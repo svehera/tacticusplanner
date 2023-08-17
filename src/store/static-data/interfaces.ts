@@ -50,6 +50,7 @@ export interface ILegendaryEvent {
     gammaTrack: ILegendaryEventTrack;
 
     getAllowedUnits(): Array<ICharacter>;
+    getCharactersPoints(unlockedOnly?: boolean): Record<string, number>;
 }
 
 export interface ILegendaryEventTrack {
