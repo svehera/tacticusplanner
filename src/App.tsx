@@ -1,4 +1,5 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import './App.css';
 
 import 'ag-grid-community/styles/ag-grid.css';
@@ -14,14 +15,12 @@ import WhoYouOwn from './components/who-you-own/who-you-own';
 const App = () => {
     GlobalStoreService.init();
 
-    const le = new JainZarLegendaryEvent(GlobalStoreService.characters);
+    // const le = new JainZarLegendaryEvent(GlobalStoreService.characters);
 
     return (
         <div>
             <ButtonAppBar></ButtonAppBar>
-            <WhoYouOwn></WhoYouOwn>
-            <h3>Jain Zair alpha</h3>
-            <LegendaryEvent input={le}></LegendaryEvent>
+            <Outlet/>
         </div>
 
     );

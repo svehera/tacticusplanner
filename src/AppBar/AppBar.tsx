@@ -6,6 +6,27 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { ChangeEvent, useRef } from 'react';
 import { PersonalDataService } from '../store/personal-data/personal-data.service';
+import { Link } from 'react-router-dom';
+
+// import {
+//     Link as RouterLink,
+//     LinkProps as RouterLinkProps,
+//     MemoryRouter,
+// } from 'react-router-dom';
+// import { StaticRouter } from 'react-router-dom/server';
+//
+// const LinkBehavior = React.forwardRef<any, Omit<RouterLinkProps, 'to'>>(
+//     (props, ref) => <RouterLink ref={ref} to="/" {...props} role={undefined} />,
+// );
+//
+// function Router(props: { children?: React.ReactNode }) {
+//     const { children } = props;
+//     if (typeof window === 'undefined') {
+//         return <StaticRouter location="/">{children}</StaticRouter>;
+//     }
+//
+//     return <MemoryRouter>{children}</MemoryRouter>;
+// }
 
 const ButtonAppBar = () => {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -56,10 +77,11 @@ const ButtonAppBar = () => {
             />
             <AppBar position="static">
                 <Toolbar>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
                         Tacticus Planner
                     </Typography>
-                    <Button color="inherit">Who You Own</Button>
+                    <Button component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
+                    <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>
                     <Button color="inherit" onClick={() => inputRef.current?.click()}>Import</Button>
                     <Button onClick={downloadJson} color="inherit">Export</Button>
                 </Toolbar>

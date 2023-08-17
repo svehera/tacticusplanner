@@ -1,43 +1,46 @@
-﻿import React, { ChangeEvent } from 'react';
+﻿import React, { useRef } from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
-import { FormControl, NativeSelect } from '@mui/material';
+import { FormControl, ListItemIcon, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { Rank } from '../../store/personal-data/personal-data.interfaces';
 import { ICharacter } from '../../store/static-data/interfaces';
 
+import './rank-selector-cell.css';
 
 const RankSelectorCell = (props: ICellRendererParams<ICharacter>) => {
     const rankEntries: Array<[string, string | Rank]> = Object.entries(Rank);
     const defaultValue = props.data?.rank ?? Rank.Undefined;
 
-    const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        if(props.data) {
+    const handleChange = (event: SelectChangeEvent<Rank>) => {
+        if (props.data) {
             props.api.startEditingCell({ rowIndex: props.rowIndex, colKey: props.column?.getColId() ?? '' });
             props.data.rank = +event.target.value;
             props.api.stopEditing();
         }
     };
 
-
     return (
-        <FormControl fullWidth variant={'filled'}>
-            <NativeSelect
-                disableUnderline={true}
+        <FormControl fullWidth variant={'standard'}>
+            <Select<Rank>
                 defaultValue={defaultValue}
-                inputProps={{
-                    name: 'rank',
-                    id: 'uncontrolled-native',
-                }}
+                value={props.data?.rank}
                 onChange={handleChange}
+                disableUnderline={true}
+                className={Rank[props.data?.rank ?? 0].toLowerCase()}
             >
                 {rankEntries.map(([name, value]) => (
                     typeof value === 'number' && (
-                        <option key={value} value={value} className={name.toLowerCase()}>{name}</option>
+                        <MenuItem key={value} value={value} className={name.toLowerCase()}>{name}
+                            {/*{ props.data?.rank === value ? <ListItemIcon>*/}
+                            {/*    <Check/>*/}
+                            {/*</ListItemIcon> : ''*/}
+                            {/*}*/}
+                        </MenuItem>
                     )
                 ))}
-            </NativeSelect>
+            </Select>
         </FormControl>
     );
-    
+
 };
 
 export default RankSelectorCell;

@@ -4,12 +4,31 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import {
+    createBrowserRouter,
+    RouterProvider,
+} from 'react-router-dom';
+import WhoYouOwn from './components/who-you-own/who-you-own';
+
+const router = createBrowserRouter([
+    {
+        path: '/tacticusplanner',
+        element: <App />,
+        children: [
+            {
+                path: 'wyo',
+                element: <WhoYouOwn />,
+            },
+        ],
+    },
+]);
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <App />
+        <RouterProvider router={router} />
     </React.StrictMode>
 );
 

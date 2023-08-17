@@ -1,5 +1,5 @@
 ﻿import { Alliance, DamageTypeRaw, DamageTypes, Faction, Rarity, Traits, TraitTypeRaw } from './enums';
-import { PersonalCharacterData } from '../personal-data/personal-data.interfaces';
+import { IPersonalCharacterData } from '../personal-data/personal-data.interfaces';
 
 export interface UnitDataRaw {
     Name: string;
@@ -41,7 +41,7 @@ export interface IUnitData {
     forcedSummons: boolean;
 }
 
-export type ICharacter = IUnitData & PersonalCharacterData;
+export type ICharacter = IUnitData & IPersonalCharacterData;
 
 
 export interface ILegendaryEvent {
@@ -49,7 +49,7 @@ export interface ILegendaryEvent {
     betaTrack: ILegendaryEventTrack;   
     gammaTrack: ILegendaryEventTrack;
 
-    getAllowedUnits(): Array<IUnitData & Partial<PersonalCharacterData>>;
+    getAllowedUnits(): Array<IUnitData & Partial<IPersonalCharacterData>>;
 }
 
 export interface ILegendaryEventTrack {

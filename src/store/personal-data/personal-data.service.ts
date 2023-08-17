@@ -1,8 +1,8 @@
-﻿import { PersonalData } from './personal-data.interfaces';
+﻿import { IPersonalData } from './personal-data.interfaces';
 
 export class PersonalDataService {
     static personalDataStorageKey = 'personalData';
-    static data: PersonalData;
+    static data: IPersonalData;
     
     static init(): void {
         const storedData = localStorage.getItem(this.personalDataStorageKey);

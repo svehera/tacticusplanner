@@ -1,8 +1,8 @@
-﻿export interface PersonalData {
-    characters: PersonalCharacterData[];
+﻿export interface IPersonalData {
+    characters: IPersonalCharacterData[];
 }
 
-export interface PersonalCharacterData {
+export interface IPersonalCharacterData {
     name: string;
     unlocked?: boolean;
     rank: Rank;

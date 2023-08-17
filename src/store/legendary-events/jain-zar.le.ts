@@ -1,6 +1,6 @@
 ﻿
 import { sortBy, uniqBy } from 'lodash';
-import { PersonalCharacterData } from '../personal-data/personal-data.interfaces';
+import { IPersonalCharacterData } from '../personal-data/personal-data.interfaces';
 import { ILegendaryEvent, ILegendaryEventTrack, IUnitData } from '../static-data/interfaces';
 import { Alliance, DamageTypes, Faction, Traits } from '../static-data/enums';
 
@@ -10,20 +10,20 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
     betaTrack: ILegendaryEventTrack;
     gammaTrack: ILegendaryEventTrack;
 
-    constructor(unitsData: Array<IUnitData & Partial<PersonalCharacterData>>) {
+    constructor(unitsData: Array<IUnitData & Partial<IPersonalCharacterData>>) {
         this.alphaTrack = this.getAlphaTrack(unitsData);
         this.betaTrack = this.getBetaTrack(unitsData);
         this.gammaTrack = this.getGammaTrack(unitsData);
     }
 
-    getAllowedUnits(): Array<IUnitData & Partial<PersonalCharacterData>> {
+    getAllowedUnits(): Array<IUnitData & Partial<IPersonalCharacterData>> {
         const alpha = this.alphaTrack.getAllowedUnits();
         const beta = this.betaTrack.getAllowedUnits();
         const gamma = this.gammaTrack.getAllowedUnits();
         return sortBy(uniqBy([...alpha, ...beta, ...gamma], 'name'), 'name');
     }
 
-    private getAlphaTrack(unitsData: Array<IUnitData & Partial<PersonalCharacterData>>): ILegendaryEventTrack {
+    private getAlphaTrack(unitsData: Array<IUnitData & Partial<IPersonalCharacterData>>): ILegendaryEventTrack {
         const xenosOnly = unitsData.filter( (unit) => unit.alliance === Alliance.Xenos);
         return {
             unitsRestrictions: [
@@ -53,13 +53,13 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
                     units: xenosOnly.filter(unit => !unit.forcedSummons),
                 },
             ],
-            getAllowedUnits: function (): Array<IUnitData & Partial<PersonalCharacterData>> {
+            getAllowedUnits: function (): Array<IUnitData & Partial<IPersonalCharacterData>> {
                 return sortBy(uniqBy(this.unitsRestrictions.flatMap(r => r.units), 'name'), 'name');
             }
         };
     }
 
-    private getBetaTrack(unitsData: Array<IUnitData & Partial<PersonalCharacterData>>): ILegendaryEventTrack {
+    private getBetaTrack(unitsData: Array<IUnitData & Partial<IPersonalCharacterData>>): ILegendaryEventTrack {
         const imperialOnly = unitsData.filter( (unit) => unit.alliance === Alliance.Imperial);
         return {
             unitsRestrictions: [
@@ -89,13 +89,13 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
                     units: imperialOnly.filter(unit => !unit.forcedSummons),
                 },
             ],
-            getAllowedUnits: function (): Array<IUnitData & Partial<PersonalCharacterData>> {
+            getAllowedUnits: function (): Array<IUnitData & Partial<IPersonalCharacterData>> {
                 return sortBy(uniqBy(this.unitsRestrictions.flatMap(r => r.units), 'name'), 'name');
             }
         };
     }
 
-    private getGammaTrack(unitsData: Array<IUnitData & Partial<PersonalCharacterData>>): ILegendaryEventTrack {
+    private getGammaTrack(unitsData: Array<IUnitData & Partial<IPersonalCharacterData>>): ILegendaryEventTrack {
         const noOrks = unitsData.filter( (unit) => unit.faction !== Faction.Orks);
         return {
             unitsRestrictions: [
@@ -125,7 +125,7 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
                     units: noOrks.filter( (unit) => (!unit.rangeHits && unit.meleeHits >= 4) || (!!unit.rangeHits && unit.rangeHits >= 4)),
                 },
             ],
-            getAllowedUnits: function (): Array<IUnitData & Partial<PersonalCharacterData>> {
+            getAllowedUnits: function (): Array<IUnitData & Partial<IPersonalCharacterData>> {
                 return sortBy(uniqBy(this.unitsRestrictions.flatMap(r => r.units), 'name'), 'name');
             }
         };
