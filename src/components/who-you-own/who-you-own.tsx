@@ -16,8 +16,7 @@ const WhoYouOwn = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
     
     const defaultColDef: ColDef<ICharacter> = {
-        sortable: true,
-        // resizable: true,
+        sortable: true
     };
     
     const columnDefs: Array<ColDef | ColGroupDef> = [

@@ -16,7 +16,7 @@ export default class GlobalStoreService {
         this.characters = staticUnitData.map(staticData => {
             const personalData: IPersonalCharacterData = personalUnitData.characters.find(c => c.name === staticData.name) 
                 ?? { name: '', rank: Rank.Undefined };
-            return { ...staticData, ...personalData };
+            return { ...personalData, ...staticData };
         });
     }
 }

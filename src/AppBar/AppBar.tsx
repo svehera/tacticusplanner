@@ -57,6 +57,7 @@ const ButtonAppBar = () => {
                     const content = e.target?.result as string;
                     PersonalDataService.data = JSON.parse(content);
                     PersonalDataService.save();
+                    location.reload();
                 } catch (error) {
                     console.error('Error parsing JSON:', error);
                 }
@@ -80,7 +81,7 @@ const ButtonAppBar = () => {
                     <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
                         Tacticus Planner
                     </Typography>
-                    <Button component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
+                    <Button component={Link} to={'./'} color="inherit">Who You Own</Button>
                     <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>
                     <Button color="inherit" onClick={() => inputRef.current?.click()}>Import</Button>
                     <Button onClick={downloadJson} color="inherit">Export</Button>
