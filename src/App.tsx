@@ -7,9 +7,6 @@ import 'ag-grid-community/styles/ag-theme-material.css';
 import ButtonAppBar from './AppBar/AppBar';
 
 import GlobalStoreService from './store/global-store.service';
-import LegendaryEvent from './components/legendary-event/legendary-event';
-import { JainZarLegendaryEvent } from './store/legendary-events/jain-zar.le';
-import WhoYouOwn from './components/who-you-own/who-you-own';
 
 
 const App = () => {

@@ -9,6 +9,7 @@ import {
     RouterProvider,
 } from 'react-router-dom';
 import WhoYouOwn from './components/who-you-own/who-you-own';
+import LegendaryEventPage from './components/legendary-events/legendary-events-page';
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
             {
                 path: 'wyo',
                 element: <WhoYouOwn />,
+            },
+            {
+                path: 'le',
+                element: <LegendaryEventPage />,
             },
         ],
     },

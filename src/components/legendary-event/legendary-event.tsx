@@ -1,77 +1,93 @@
-﻿import React from 'react';
+﻿import React, { useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ILegendaryEvent, IUnitData } from '../../store/static-data/interfaces';
+import {
+    ICharacter,
+    ILegendaryEvent, ILegendaryEventTrack,
+    ILegendaryEventTrackRestriction,
+    IUnitData
+} from '../../store/static-data/interfaces';
 import { CellClassParams, ColDef, ColGroupDef, ITooltipParams, ValueFormatterParams } from 'ag-grid-community';
 import { Rank } from '../../store/personal-data/personal-data.interfaces';
+import Button from '@mui/material/Button';
 
-const LegendaryEvent = (props: { input: ILegendaryEvent}) => {
+type IRow = Record<string, ICharacter | string>;
+type LegendaryEventSection = '(Alpha)' | '(Beta)' | '(Gamma)';
+
+const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
+    const gridRef = useRef<AgGridReact>(null);
+
     const legendaryEvent: ILegendaryEvent = props.input;
+
+    const columnsDefs: Array<ColGroupDef<ICharacter | string>> = [
+        {
+            headerName: 'Alpha',
+            headerClass: 'alpha',
+            children: getSectionColumns(legendaryEvent.alphaTrack.unitsRestrictions, '(Alpha)'),
+            openByDefault: true
+        }, 
+        {
+            headerName: 'Beta',
+            headerClass: 'beta',
+            children: getSectionColumns(legendaryEvent.betaTrack.unitsRestrictions, '(Beta)'),
+            openByDefault: true
+        }, 
+        {
+            headerName: 'Gamma',
+            headerClass: 'gamma',
+            children: getSectionColumns(legendaryEvent.gammaTrack.unitsRestrictions, '(Gamma)'),
+            openByDefault: true
+        }
+    ];
     
-    const row2: Array<Record<string, IUnitData | string>> = [];
-    const allUniqSorted = legendaryEvent.getAllowedUnits();
+    const rows: Array<IRow> = getRows(legendaryEvent);
 
-    for (let i = 0; i < allUniqSorted.length; i++) {
-        const row: Record<string, IUnitData | string> = {};
-        legendaryEvent.alphaTrack.unitsRestrictions.forEach(re => {
-            row[re.name + '(Alpha)'] = re.units.some(u => u.name === allUniqSorted[i].name) ? allUniqSorted[i] : '';
-        });
-        legendaryEvent.betaTrack.unitsRestrictions.forEach(re => {
-            row[re.name + '(Beta)'] = re.units.some(u => u.name === allUniqSorted[i].name) ? allUniqSorted[i] : '';
-        });
-        legendaryEvent.gammaTrack.unitsRestrictions.forEach(re => {
-            row[re.name + '(Gamma)'] = re.units.some(u => u.name === allUniqSorted[i].name) ? allUniqSorted[i] : '';
-        });
-        row2.push(row);
-    }
-
-    const alphaCols: Array<ColDef> = legendaryEvent.alphaTrack.unitsRestrictions.map((u, index) => ({
-        field: u.name + '(Alpha)',
-        valueFormatter: (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
-        cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
-        columnGroupShow: index === 0 ? undefined : 'open',
-        tooltipValueGetter: (params: ITooltipParams) =>  typeof params.value === 'string' ? params.value : Rank[params.value?.rank],
-    }));
-
-    const betaCols: Array<ColDef> = legendaryEvent.betaTrack.unitsRestrictions.map((u, index) => ({
-        field: u.name + '(Beta)',
-        valueFormatter: (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
-        cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
-        columnGroupShow: index === 0 ? undefined : 'open',
-        tooltipValueGetter: (params: ITooltipParams) =>  typeof params.value === 'string' ? params.value : Rank[params.value?.rank]
-    }));
-
-    const gammaCols: Array<ColDef> = legendaryEvent.gammaTrack.unitsRestrictions.map((u, index) => ({
-        field: u.name + '(Gamma)',
-        valueFormatter: (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
-        cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
-        columnGroupShow: index === 0 ? undefined : 'open',
-        tooltipValueGetter: (params: ITooltipParams) =>  typeof params.value === 'string' ? params.value : Rank[params.value?.rank]
-    }));
-
-    const coldd: Array<ColGroupDef> = [{
-        headerName: 'Alpha',
-        headerClass: 'alpha',
-        children: alphaCols,
-
-    }, {
-        headerName: 'Beta',
-        headerClass: 'beta',
-        children: betaCols
-    }, {
-        headerName: 'Gamma',
-        headerClass: 'gamma',
-        children: gammaCols
-    }];
-    
     return (
-        <div className="ag-theme-material" style={{ height: 600, width: '100%' }}>
-            <AgGridReact
-                tooltipShowDelay={100}
-                rowData={row2}
-                columnDefs={coldd}>
-            </AgGridReact>
+        <div>
+            <Button onClick={() => gridRef.current?.api.sizeColumnsToFit()}>Fit To screen</Button>
+            <div className="ag-theme-material" style={{ height: 'calc(100vh - 100px)', width: '100%' }}>
+                <AgGridReact
+                    ref={gridRef}
+                    tooltipShowDelay={100}
+                    rowData={rows}
+                    columnDefs={columnsDefs}>
+                </AgGridReact>
+            </div>
         </div>
     );
 };
+
+function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], suffix: LegendaryEventSection): Array<ColDef> {
+    return unitsRestrictions.map((u, index) => ({
+        field: u.name + suffix,
+        headerTooltip: u.name,
+        columnGroupShow: index === 0 ? undefined : 'open',
+        valueFormatter: (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
+        cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
+        tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rank[params.value?.rank ?? 0]
+    }));
+}
+
+function getRows(legendaryEvent: ILegendaryEvent): Array<IRow> {
+    const rows: Array<IRow> = [];
+    const allowedUnits = legendaryEvent.getAllowedUnits();
+
+    allowedUnits.forEach(unit => {
+        const row: IRow = {};
+        
+        populateCells('(Alpha)', legendaryEvent.alphaTrack, unit, row);
+        populateCells('(Beta)', legendaryEvent.betaTrack, unit, row);
+        populateCells('(Gamma)', legendaryEvent.gammaTrack, unit, row);
+        
+        rows.push(row);
+    });
+    
+    return rows;
+}
+
+function populateCells(suffix: LegendaryEventSection, section: ILegendaryEventTrack, character: ICharacter, row: IRow): void {
+    section.unitsRestrictions.forEach(re => {
+        row[re.name + suffix] = re.units.some(u => u.name === character.name) ? character : '';
+    });
+}
 
 export default LegendaryEvent;

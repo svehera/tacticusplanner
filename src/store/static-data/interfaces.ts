@@ -49,16 +49,16 @@ export interface ILegendaryEvent {
     betaTrack: ILegendaryEventTrack;   
     gammaTrack: ILegendaryEventTrack;
 
-    getAllowedUnits(): Array<IUnitData & Partial<IPersonalCharacterData>>;
+    getAllowedUnits(): Array<ICharacter>;
 }
 
 export interface ILegendaryEventTrack {
-    getAllowedUnits:() => IUnitData[];
+    getAllowedUnits:() => ICharacter[];
     unitsRestrictions: Array<ILegendaryEventTrackRestriction>;
 }
 
 export interface ILegendaryEventTrackRestriction {
     name: string,
     points: number,
-    units: IUnitData[],
+    units: ICharacter[],
 }
