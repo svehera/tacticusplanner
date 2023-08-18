@@ -19,7 +19,8 @@
     "Trait 1": "Psyker",
     "Active Ability": "Psychic",
     "Number": 1,
-    "ForcedSummons":false
+    "ForcedSummons":false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Certus",
@@ -43,7 +44,8 @@
     "Trait 3": "Infiltrate",
     "Active Ability": "Heavy Round",
     "Number": 2,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Bellator",
@@ -63,7 +65,8 @@
     "Trait 2": "MK X Gravis",
     "Active Ability": "Bolter",
     "Number": 3,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Incisus",
@@ -81,7 +84,8 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Healer",
     "Number": 4,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Marneus Calgar",
@@ -101,7 +105,8 @@
     "Trait 2": "Final Vengeance",
     "Active Ability": "Bolter",
     "Number": 5,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Angrax",
@@ -123,7 +128,8 @@
     "Active Ability": "Power",
     "Passive Ability": "Power",
     "Number": 6,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Volk",
@@ -149,7 +155,8 @@
     "Active Ability": "Heavy Round",
     "Passive Ability": "Heavy Round",
     "Number": 7,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Archimatos",
@@ -171,7 +178,8 @@
     "Trait 1": "Let the Galaxy Burn",
     "Trait 2": "Psyker",
     "Number": 8,
-    "ForcedSummons": true
+    "ForcedSummons": true,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Haarken Worldclaimer",
@@ -191,7 +199,8 @@
     "Trait 2": "Flying",
     "Active Ability": "Piercing",
     "Number": 9,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Abaddon the despolier",
@@ -215,7 +224,8 @@
     "Trait 3": "Resilient",
     "Active Ability": "Piercing",
     "Number": 10,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Snotflogga",
@@ -234,7 +244,8 @@
     "Trait 1": "Beast Snagga",
     "Passive Ability": "Physical",
     "Number": 11,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Gibbascrapz",
@@ -252,7 +263,8 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Mechanic",
     "Number": 12,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Snappawrecka",
@@ -277,7 +289,8 @@
     "Trait 4": "Dakka",
     "Active Ability": "Physical",
     "Number": 13,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Tanksmasha",
@@ -298,7 +311,8 @@
     "Active Ability": "Direct",
     "Passive Ability": "Physical",
     "Number": 14,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Boss Gulgortz",
@@ -323,7 +337,8 @@
     "Trait 4": "Dakka",
     "Passive Ability": "Projectile",
     "Number": 15,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Vindicta",
@@ -347,7 +362,8 @@
     "Active Ability": "Flame",
     "Passive Ability": "Flame",
     "Number": 16,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Isabella",
@@ -366,7 +382,8 @@
     "Trait 1": "Act of Faith",
     "Trait 2": "Healer",
     "Number": 17,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Morvenn Vahl",
@@ -392,7 +409,8 @@
     "Active Ability": "Blast",
     "Passive Ability": "Power",
     "Number": 18,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Roswitha",
@@ -414,7 +432,8 @@
     "Trait 1": "Act of Faith",
     "Active Ability": "Flame",
     "Number": 19,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Celestine",
@@ -434,7 +453,8 @@
     "Trait 2": "Flying",
     "Active Ability": "Power",
     "Number": 20,
-    "ForcedSummons": true
+    "ForcedSummons": true,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Makhotep",
@@ -455,7 +475,8 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Living Metal",
     "Number": 21,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Imospekh",
@@ -478,7 +499,8 @@
     "Trait 2": "Overwatch",
     "Active Ability": "Molecular",
     "Number": 22,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Aleph-null",
@@ -499,7 +521,8 @@
     "Trait 3": "Flying",
     "Trait 4": "Mechanic",
     "Number": 23,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Thutmose",
@@ -522,7 +545,8 @@
     "Active Ability": "Direct",
     "Passive Ability": "Direct",
     "Number": 24,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Anuphet",
@@ -544,7 +568,8 @@
     "Trait 1": "Living Metal",
     "Passive Ability": "Energy",
     "Number": 25,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Sibyll",
@@ -565,7 +590,8 @@
     "Equipemnt slot 3": "Crit Booster",
     "Trait 1": "Psyker",
     "Number": 26,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Commissar Yarrick",
@@ -586,7 +612,8 @@
     "Equipemnt slot 3": "Block Booster",
     "Trait 1": "Resilient",
     "Number": 27,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Kut skoden",
@@ -605,7 +632,8 @@
     "Trait 1": "Big Target",
     "Active Ability": "Blast",
     "Number": 28,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Thaddeus noble",
@@ -628,7 +656,8 @@
     "Trait 2": "Indirect Fire",
     "Active Ability": "Blast",
     "Number": 29,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Castellan creed",
@@ -645,7 +674,8 @@
     "Equipement slot 2": "Block",
     "Equipemnt slot 3": "Block Booster",
     "Number": 30,
-    "ForcedSummons": true
+    "ForcedSummons": true,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Typhus",
@@ -671,7 +701,8 @@
     "Active Ability": "Psychic",
     "Passive Ability": "Direct",
     "Number": 31,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Maladus",
@@ -693,7 +724,8 @@
     "Active Ability": "Power",
     "Passive Ability": "Power",
     "Number": 32,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Nauseous rotbone",
@@ -713,7 +745,8 @@
     "Trait 2": "Resilient",
     "Trait 3": "Healer",
     "Number": 33,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Pestillian",
@@ -735,7 +768,8 @@
     "Active Ability": "Direct",
     "Passive Ability": "Blast",
     "Number": 34,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Corrodius",
@@ -755,7 +789,8 @@
     "Trait 2": "Resilient",
     "Passive Ability": "Psychic",
     "Number": 35,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Sword Brother Godswyl",
@@ -774,7 +809,8 @@
     "Trait 1": "Parry",
     "Active Ability": "Power",
     "Number": 36,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Brother Burchard",
@@ -798,7 +834,8 @@
     "Active Ability": "Blast",
     "Passive Ability": "Bolter",
     "Number": 37,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Ancient Thoread",
@@ -817,7 +854,8 @@
     "Trait 1": "Final Vengeance",
     "Trait 2": "Parry",
     "Number": 38,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Brother Jaeger",
@@ -837,7 +875,8 @@
     "Trait 2": "Parry",
     "Passive Ability": "Power",
     "Number": 39,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "High Marshal Helbrecht",
@@ -858,7 +897,8 @@
     "Equipemnt slot 3": "Block Booster",
     "Trait 1": "Parry",
     "Number": 40,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Aethana",
@@ -878,7 +918,8 @@
     "Trait 2": "Deep Strike",
     "Active Ability": "Piercing",
     "Number": 41,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Calandis",
@@ -901,7 +942,8 @@
     "Trait 2": "Overwatch",
     "Passive Ability": "Piercing",
     "Number": 42,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Eldryon",
@@ -923,7 +965,8 @@
     "Trait 1": "Psyker",
     "Active Ability": "Psychic",
     "Number": 43,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Maugan Ra",
@@ -947,7 +990,8 @@
     "Trait 3": "Overwatch",
     "Active Ability": "Heavy Round",
     "Number": 44,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Jain Zar",
@@ -966,7 +1010,8 @@
     "Trait 1": "Infiltrate",
     "Active Ability": "Piercing",
     "Number": 45,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Tjark",
@@ -986,7 +1031,8 @@
     "Trait 2": "Terrifying",
     "Active Ability": "Physical",
     "Number": 48,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Ulf",
@@ -1007,7 +1053,8 @@
     "Active Ability": "Piercing",
     "Passive Ability": "Power",
     "Number": 49,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Aun'shi",
@@ -1024,7 +1071,8 @@
     "Equipement slot 2": "Block",
     "Equipemnt slot 3": "Crit Booster",
     "Number": 50,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Darkstrider",
@@ -1047,7 +1095,8 @@
     "Trait 2": "Infiltrate",
     "Trait 3": "Suppressive Fire",
     "Number": 51,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Re'Vas",
@@ -1072,7 +1121,8 @@
     "Trait 4": "Mechanical",
     "Passive Ability": "Particle",
     "Number": 52,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Arjac",
@@ -1093,7 +1143,8 @@
     "Trait 3": "Resilient",
     "Active Ability": "Power",
     "Number": 53,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "ShadowSun",
@@ -1118,7 +1169,8 @@
     "Trait 4": "Infiltrate",
     "Active Ability": "Blast",
     "Number": 53,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Azrael",
@@ -1142,7 +1194,8 @@
     "Active Ability": "Direct",
     "Passive Ability": "Bolter",
     "Number": 54,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Sho'Syl",
@@ -1165,7 +1218,8 @@
     "Trait 2": "Close Combat Weakness",
     "Active Ability": "Heavy Round",
     "Number": 55,
-    "ForcedSummons": true
+    "ForcedSummons": true,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Abraxas",
@@ -1189,7 +1243,8 @@
     "Active Ability": "Psychic",
     "Passive Ability": "Psychic",
     "Number": 56,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Toth",
@@ -1213,7 +1268,8 @@
     "Trait 3": "Weaver of Fates",
     "Active Ability": "Heavy Round",
     "Number": 57,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Yazaghor",
@@ -1237,7 +1293,8 @@
     "Active Ability": "Psychic",
     "Passive Ability": "Psychic",
     "Number": 58,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": true
   },
   {
     "Name": "Thaumachus",
@@ -1260,7 +1317,8 @@
     "Trait 2": "Flying",
     "Trait 3": "Psyker",
     "Number": 59,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Sarquael",
@@ -1285,7 +1343,8 @@
     "Active Ability": "Plasma",
     "Passive Ability": "Plasma",
     "Number": 60,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   },
   {
     "Name": "Neurothrope",
@@ -1312,6 +1371,7 @@
     "Active Ability": "Psychic",
     "Passive Ability": "Psychic",
     "Number": 61,
-    "ForcedSummons": false
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   }
 ]

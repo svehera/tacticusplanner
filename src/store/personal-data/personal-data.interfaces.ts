@@ -6,6 +6,7 @@
 export interface IViewPreferences {
     onlyUnlocked: boolean;
     fitToScreen: boolean;
+    usedInCampaigns: boolean;
 }
 
 export interface IPersonalCharacterData {

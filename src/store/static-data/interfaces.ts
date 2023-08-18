@@ -23,6 +23,7 @@ export interface UnitDataRaw {
     'Passive Ability'?: DamageTypeRaw;
     Number: number;
     ForcedSummons: boolean;
+    RequiredInCampaign: boolean;
 }
 
 
@@ -39,6 +40,7 @@ export interface IUnitData {
     rangeDistance?: number,
     movement: number,
     forcedSummons: boolean;
+    requiredInCampaign: boolean;
 }
 
 export type ICharacter = IUnitData & IPersonalCharacterData;

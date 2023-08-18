@@ -6,7 +6,11 @@ export class PersonalDataService {
     
     static init(): void {
         const storedData = localStorage.getItem(this.personalDataStorageKey);
-        const defaultViewPreferences: IViewPreferences = { fitToScreen: true, onlyUnlocked: true };
+        const defaultViewPreferences: IViewPreferences = { 
+            fitToScreen: true, 
+            onlyUnlocked: true,
+            usedInCampaigns: false
+        };
         if(storedData) {
             this.data = JSON.parse(storedData);
             this.data.characters ??= [];

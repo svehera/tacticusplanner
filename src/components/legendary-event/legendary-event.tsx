@@ -6,16 +6,13 @@ import {
     ILegendaryEventTrackRestriction
 } from '../../store/static-data/interfaces';
 import {
-    CellClassParams, CellClickedEvent, CellDoubleClickedEvent,
+    CellClassParams, CellClickedEvent,
     ColDef,
     ColGroupDef,
     ITooltipParams,
-    RowClickedEvent,
     ValueFormatterParams
 } from 'ag-grid-community';
 import { Rank } from '../../store/personal-data/personal-data.interfaces';
-import Button from '@mui/material/Button';
-import PointsTable from '../points-table/points-table';
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import { PersonalDataService } from '../../store/personal-data/personal-data.service';
 
@@ -26,27 +23,28 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
     const gridRef = useRef<AgGridReact>(null);
     const gridRef2 = useRef<AgGridReact>(null);
     const [viewPreferences] = useState(PersonalDataService.data.viewPreferences);
-    
+
     const [unlockedOnly, setUnlockedOnly] = useState(viewPreferences.onlyUnlocked);
+    const [usedInCampaings, setUsedInCampaings] = useState(viewPreferences.usedInCampaigns);
     const [fitToScreen, setFitToScreen] = useState(viewPreferences.fitToScreen);
 
     const [legendaryEvent] = useState(props.input);
 
-    const [columnsDefs] = useState<Array<ColGroupDef<ICharacter | string> & { section?: LegendaryEventSection}>>([
+    const [columnsDefs] = useState<Array<ColGroupDef<ICharacter | string> & { section?: LegendaryEventSection }>>([
         {
             headerName: legendaryEvent.alphaTrack.name,
             headerClass: 'alpha',
             children: getSectionColumns(legendaryEvent.alphaTrack.unitsRestrictions, '(Alpha)'),
             openByDefault: true,
             section: '(Alpha)'
-        }, 
+        },
         {
             headerName: legendaryEvent.betaTrack.name,
             headerClass: 'beta',
             children: getSectionColumns(legendaryEvent.betaTrack.unitsRestrictions, '(Beta)'),
             openByDefault: true,
             section: '(Beta)'
-        }, 
+        },
         {
             headerName: legendaryEvent.gammaTrack.name,
             headerClass: 'gamma',
@@ -55,10 +53,10 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
             section: '(Gamma)'
         }
     ]);
-    
-    const rows: Array<IRow> = useMemo(() => getRows(legendaryEvent, unlockedOnly), [unlockedOnly]);
-    
-    const [selectedTeams, setSelectedTeams]  = useState<Array<IRow>>([
+
+    const rows: Array<IRow> = useMemo(() => getRows(legendaryEvent, unlockedOnly, usedInCampaings), [unlockedOnly, usedInCampaings]);
+
+    const [selectedTeams, setSelectedTeams] = useState<Array<IRow>>([
         {}, {}, {}, {}, {}
     ]);
     const teamSize = 5;
@@ -84,27 +82,15 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
 
         setSelectedTeams([...selectedTeams]);
     };
-
-    const handleMainTableCellDoubleClick = (event: CellDoubleClickedEvent) => {
-        const section = (event.colDef as ColDef & { section: LegendaryEventSection}).section;
-        const selectedChar = event.value as ICharacter;
-        const columnIds = columnsDefs.find(x => x.section === section)!.children
-            .map((colDef: ColDef ) => colDef.field as string);
-        
-        columnIds.forEach(columnId => {
-            updateSelectedChars(columnId, selectedChar);
-        });
-        
-        setSelectedTeams([...selectedTeams]);
-    };
+    
 
     const handleTeamsTableCellClick = (event: CellClickedEvent) => {
         const columnId = event.column.getColId();
         const selectedChar = event.value as ICharacter;
-        
+
         for (const row of selectedTeams) {
             const value = row[columnId];
-            if(typeof value === 'string' ? false : value.name === selectedChar.name) {
+            if (typeof value === 'string' ? false : value.name === selectedChar.name) {
                 row[columnId] = '';
                 break;
             }
@@ -118,19 +104,26 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
         PersonalDataService.data.viewPreferences.onlyUnlocked = checked;
         PersonalDataService.save();
     };
-    
+
+    const updateUsedInCampaigns = (checked: boolean) => {
+        setUsedInCampaings(checked);
+        PersonalDataService.data.viewPreferences.usedInCampaigns = checked;
+        PersonalDataService.save();
+    };
+
     const updateFitToScreen = (checked: boolean) => {
-        if(checked) {
+        if (checked) {
             gridRef.current?.api.sizeColumnsToFit();
+            gridRef2.current?.api.sizeColumnsToFit();
         } else {
             gridRef.current?.columnApi.autoSizeAllColumns();
+            gridRef2.current?.columnApi.autoSizeAllColumns();
         }
         setFitToScreen(checked);
         PersonalDataService.data.viewPreferences.fitToScreen = checked;
         PersonalDataService.save();
     };
-    
-    
+
 
     return (
         <div>
@@ -139,14 +132,19 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
                     checked={unlockedOnly}
                     onChange={(event) => updateOnlyUnlocked(event.target.checked)}
                     inputProps={{ 'aria-label': 'controlled' }}
-                />} label="Unlocked Only" />
+                />} label="Unlocked Only"/>
                 <FormControlLabel control={<Checkbox
                     checked={fitToScreen}
                     onChange={(event) => updateFitToScreen(event.target.checked)}
                     inputProps={{ 'aria-label': 'controlled' }}
-                />} label="Fit To Screen" />
+                />} label="Fit To Screen"/>
+                <FormControlLabel control={<Checkbox
+                    checked={usedInCampaings}
+                    onChange={(event) => updateUsedInCampaigns(event.target.checked)}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                />} label="Used in Campaigns"/>
             </FormGroup>
-            
+
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 420px)', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}
@@ -155,9 +153,7 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
                     rowData={rows as any}
                     columnDefs={columnsDefs}
                     onGridReady={() => updateFitToScreen(viewPreferences.fitToScreen)}
-                    // onRowClicked={handleMainTableRowClick}
                     onCellClicked={handleMainTableCellClick}
-                    onCellDoubleClicked={handleMainTableCellDoubleClick}
                 >
                 </AgGridReact>
             </div>
@@ -193,20 +189,20 @@ function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[],
     }));
 }
 
-function getRows(legendaryEvent: ILegendaryEvent, unlockedOnly: boolean): Array<IRow> {
+function getRows(legendaryEvent: ILegendaryEvent, unlockedOnly: boolean, usedInCampaigns: boolean): Array<IRow> {
     const rows: Array<IRow> = [];
-    const allowedUnits = legendaryEvent.getAllowedUnits().filter(char => unlockedOnly ? char.unlocked : true);
+    const allowedUnits = legendaryEvent.getAllowedUnits().filter(char => (unlockedOnly ? char.unlocked : true) && (usedInCampaigns ? char.requiredInCampaign : true));
 
     allowedUnits.forEach(unit => {
         const row: IRow = {};
-        
+
         populateCells('(Alpha)', legendaryEvent.alphaTrack, unit, row);
         populateCells('(Beta)', legendaryEvent.betaTrack, unit, row);
         populateCells('(Gamma)', legendaryEvent.gammaTrack, unit, row);
-        
+
         rows.push(row);
     });
-    
+
     return rows;
 }
 
