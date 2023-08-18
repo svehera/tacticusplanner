@@ -1,4 +1,4 @@
-﻿import React, { useRef } from 'react';
+﻿import React, { useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ColGroupDef, RowStyle, ValueFormatterParams } from 'ag-grid-community';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
@@ -19,7 +19,7 @@ const WhoYouOwn = () => {
         sortable: true
     };
     
-    const columnDefs: Array<ColDef | ColGroupDef> = [
+    const [columnDefs] = useState<Array<ColDef | ColGroupDef>>([
         {
             headerName: 'Faction Details',
             children: [
@@ -122,9 +122,9 @@ const WhoYouOwn = () => {
             ],
         }
 
-    ];
+    ]);
 
-    const rowsData = GlobalStoreService.characters;
+    const [rowsData] = useState(GlobalStoreService.characters);
 
     const getRowStyle = (params: RowClassParams<ICharacter>): RowStyle => {
         return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'silver' : 'white' };

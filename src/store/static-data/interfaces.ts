@@ -54,6 +54,7 @@ export interface ILegendaryEvent {
 }
 
 export interface ILegendaryEventTrack {
+    name: string;
     getAllowedUnits:() => ICharacter[];
     unitsRestrictions: Array<ILegendaryEventTrackRestriction>;
 }

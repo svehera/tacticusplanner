@@ -1,11 +1,18 @@
 ﻿export interface IPersonalData {
+    viewPreferences: IViewPreferences;
     characters: IPersonalCharacterData[];
+}
+
+export interface IViewPreferences {
+    onlyUnlocked: boolean;
+    fitToScreen: boolean;
 }
 
 export interface IPersonalCharacterData {
     name: string;
     unlocked?: boolean;
     rank: Rank;
+    lePoints?: number;
 }
 
 export enum Rank {

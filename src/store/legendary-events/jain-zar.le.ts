@@ -47,6 +47,7 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
     private getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const xenosOnly = unitsData.filter( (unit) => unit.alliance === Alliance.Xenos);
         return {
+            name: 'Alpha (Xenos only)',
             unitsRestrictions: [
                 {
                     name: 'Physical',
@@ -83,6 +84,7 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
     private getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const imperialOnly = unitsData.filter( (unit) => unit.alliance === Alliance.Imperial);
         return {
+            name: 'Beta (Imperial only)',
             unitsRestrictions: [
                 {
                     name: 'Power',
@@ -119,6 +121,7 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
     private getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const noOrks = unitsData.filter( (unit) => unit.faction !== Faction.Orks);
         return {
+            name: 'Gamma (No Orks)',
             unitsRestrictions: [
                 {
                     name: 'No Mech',

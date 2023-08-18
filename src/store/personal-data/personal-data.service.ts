@@ -1,4 +1,4 @@
-﻿import { IPersonalData } from './personal-data.interfaces';
+﻿import { IPersonalData, IViewPreferences } from './personal-data.interfaces';
 
 export class PersonalDataService {
     static personalDataStorageKey = 'personalData';
@@ -6,7 +6,14 @@ export class PersonalDataService {
     
     static init(): void {
         const storedData = localStorage.getItem(this.personalDataStorageKey);
-        this.data = storedData ?  JSON.parse(storedData) : { characters: [] };
+        const defaultViewPreferences: IViewPreferences = { fitToScreen: true, onlyUnlocked: true };
+        if(storedData) {
+            this.data = JSON.parse(storedData);
+            this.data.characters ??= [];
+            this.data.viewPreferences ??= defaultViewPreferences;
+        }
+        
+        this.data ??=  { characters: [], viewPreferences: defaultViewPreferences };
     }
     
     static save():void {

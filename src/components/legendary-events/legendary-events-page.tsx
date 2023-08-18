@@ -15,7 +15,7 @@ const LegendaryEventPage = () => {
     return (
         <div>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                Jain Zar
+                Jain Zar (September 10)
             </Typography>
             <LegendaryEvent input={jainZarLegendaryEvent}/>
         </div>
