@@ -66,3 +66,5 @@ export interface ILegendaryEventTrackRestriction {
     points: number,
     units: ICharacter[],
 }
+
+export type ITableRow = Record<string, ICharacter | string>;

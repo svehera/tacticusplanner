@@ -131,7 +131,12 @@ const WhoYouOwn = () => {
     };
     
     const saveChanges = () => {
-        PersonalDataService.data.characters = rowsData.map(row => ({ name: row.name, unlocked: row.unlocked, rank: row.rank! }));
+        PersonalDataService.data.characters = rowsData.map(row => ({ 
+            name: row.name, 
+            unlocked: row.unlocked, 
+            rank: row.rank,
+            leSelection: row.leSelection
+        }));
         PersonalDataService.save();
     };
 
@@ -147,6 +152,7 @@ const WhoYouOwn = () => {
                     defaultColDef={defaultColDef}
                     columnDefs={columnDefs}
                     rowData={rowsData}
+                    rowHeight={40}
                     getRowStyle={getRowStyle}
                     onCellEditingStopped={saveChanges}
                     onGridReady={() => gridRef.current?.api.sizeColumnsToFit()}

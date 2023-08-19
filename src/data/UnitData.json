@@ -245,7 +245,7 @@
     "Passive Ability": "Physical",
     "Number": 11,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": true
   },
   {
     "Name": "Gibbascrapz",
@@ -312,7 +312,7 @@
     "Passive Ability": "Physical",
     "Number": 14,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": true
   },
   {
     "Name": "Boss Gulgortz",
@@ -546,7 +546,7 @@
     "Passive Ability": "Direct",
     "Number": 24,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": true
   },
   {
     "Name": "Anuphet",
@@ -569,7 +569,7 @@
     "Passive Ability": "Energy",
     "Number": 25,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": true
   },
   {
     "Name": "Sibyll",
@@ -991,7 +991,7 @@
     "Active Ability": "Heavy Round",
     "Number": 44,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": true
   },
   {
     "Name": "Jain Zar",
@@ -1011,7 +1011,7 @@
     "Active Ability": "Piercing",
     "Number": 45,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": true
   },
   {
     "Name": "Tjark",

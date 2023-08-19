@@ -1,20 +1,24 @@
-﻿import React, { ChangeEvent, useMemo, useRef, useState } from 'react';
+﻿import React, { useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import {
     ICharacter,
-    ILegendaryEvent, ILegendaryEventTrack,
-    ILegendaryEventTrackRestriction
+    ILegendaryEvent,
+    ILegendaryEventTrack,
+    ILegendaryEventTrackRestriction,
+    ITableRow
 } from '../../store/static-data/interfaces';
 import {
-    CellClassParams, CellClickedEvent,
+    CellClassParams,
+    CellClickedEvent,
     ColDef,
     ColGroupDef,
     ITooltipParams,
     ValueFormatterParams
 } from 'ag-grid-community';
-import { Rank } from '../../store/personal-data/personal-data.interfaces';
+import { LegendaryEvents, Rank } from '../../store/personal-data/personal-data.interfaces';
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import { PersonalDataService } from '../../store/personal-data/personal-data.service';
+import PointsTable from '../points-table/points-table';
 
 type IRow = Record<string, ICharacter | string>;
 type LegendaryEventSection = '(Alpha)' | '(Beta)' | '(Gamma)';
@@ -28,7 +32,13 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
     const [usedInCampaings, setUsedInCampaings] = useState(viewPreferences.usedInCampaigns);
     const [fitToScreen, setFitToScreen] = useState(viewPreferences.fitToScreen);
 
+    const [selectedTeams, setSelectedTeams] = useState<Array<IRow>>(PersonalDataService.data.legendaryEvents.jainZar.selectedTeams);
+
     const [legendaryEvent] = useState(props.input);
+
+    // const chars =  (selectedTeams.flatMap(row => Object.values(row).filter(x => !!x));
+    // const uniq = uniqBy(chars)
+    // console.log);
 
     const [columnsDefs] = useState<Array<ColGroupDef<ICharacter | string> & { section?: LegendaryEventSection }>>([
         {
@@ -56,9 +66,6 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
 
     const rows: Array<IRow> = useMemo(() => getRows(legendaryEvent, unlockedOnly, usedInCampaings), [unlockedOnly, usedInCampaings]);
 
-    const [selectedTeams, setSelectedTeams] = useState<Array<IRow>>([
-        {}, {}, {}, {}, {}
-    ]);
     const teamSize = 5;
 
     function updateSelectedChars(columnId: string, selectedChar: ICharacter) {
@@ -69,18 +76,29 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
             for (const row of selectedTeams) {
                 if (!row[columnId]) {
                     row[columnId] = selectedChar;
+                    const storedChar = PersonalDataService.data.characters.find(char => char.name === selectedChar.name);
+                    if(storedChar) {
+                        storedChar.leSelection |= LegendaryEvents.JainZar;
+                        selectedChar.leSelection |= LegendaryEvents.JainZar;
+                    }
                     break;
                 }
             }
         }
     }
+    
+    const updateSelectedTeams = (selected: ITableRow[]) => {
+        setSelectedTeams(selected);
+        PersonalDataService.data.legendaryEvents.jainZar.selectedTeams = selected;
+        PersonalDataService.save();
+    };
 
     const handleMainTableCellClick = (event: CellClickedEvent) => {
         const columnId = event.column.getColId();
         const selectedChar = event.value as ICharacter;
         updateSelectedChars(columnId, selectedChar);
 
-        setSelectedTeams([...selectedTeams]);
+        updateSelectedTeams([...selectedTeams]);
     };
     
 
@@ -89,14 +107,22 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
         const selectedChar = event.value as ICharacter;
 
         for (const row of selectedTeams) {
+            
             const value = row[columnId];
             if (typeof value === 'string' ? false : value.name === selectedChar.name) {
                 row[columnId] = '';
+                const allSelectedChars = selectedTeams.flatMap(x => Object.values(x)).filter(x => typeof x !== 'string') as ICharacter[];
+                const isStillSelected = allSelectedChars.some(char => char.name === selectedChar.name);
+                const storedChar = PersonalDataService.data.characters.find(char => char.name === selectedChar.name);
+                if(!isStillSelected && storedChar) {
+                    storedChar.leSelection &= ~LegendaryEvents.JainZar;
+                    selectedChar.leSelection &= ~LegendaryEvents.JainZar;
+                }
                 break;
             }
         }
 
-        setSelectedTeams([...selectedTeams]);
+        updateSelectedTeams([...selectedTeams]);
     };
 
     const updateOnlyUnlocked = (checked: boolean) => {
@@ -123,8 +149,7 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
         PersonalDataService.data.viewPreferences.fitToScreen = checked;
         PersonalDataService.save();
     };
-
-
+    
     return (
         <div>
             <FormGroup style={{ display: 'flex', flexDirection: 'row' }}>
@@ -151,6 +176,7 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
                     alignedGrids={gridRef2.current ? [gridRef2.current] : undefined}
                     tooltipShowDelay={100}
                     rowData={rows as any}
+                    rowHeight={25}
                     columnDefs={columnsDefs}
                     onGridReady={() => updateFitToScreen(viewPreferences.fitToScreen)}
                     onCellClicked={handleMainTableCellClick}
@@ -158,20 +184,22 @@ const LegendaryEvent = (props: { input: ILegendaryEvent }) => {
                 </AgGridReact>
             </div>
             <h4 style={{ margin: 0 }}> Selected teams</h4>
-            <div className="ag-theme-material" style={{ height: '250px', width: '100%' }}>
+            <div className="ag-theme-material" style={{ height: '150px', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef2}
                     alignedGrids={gridRef.current ? [gridRef.current] : undefined}
                     tooltipShowDelay={100}
                     rowData={selectedTeams as any}
                     headerHeight={1}
+                    rowHeight={25}
                     columnDefs={columnsDefs}
+                    onGridReady={() => updateFitToScreen(viewPreferences.fitToScreen)}
                     onCellClicked={handleTeamsTableCellClick}
                 >
                 </AgGridReact>
             </div>
 
-            {/*<PointsTable legendaryEvent={legendaryEvent} />*/}
+            <PointsTable legendaryEvent={legendaryEvent} />
         </div>
     );
 };

@@ -1,6 +1,17 @@
-﻿export interface IPersonalData {
+﻿import { ICharacter, ITableRow } from '../static-data/interfaces';
+
+export interface IPersonalData {
     viewPreferences: IViewPreferences;
     characters: IPersonalCharacterData[];
+    legendaryEvents: ILegendaryEventsData;
+}
+
+export interface ILegendaryEventsData {
+    jainZar: ILegendaryEventData;
+}
+
+export interface ILegendaryEventData {
+    selectedTeams: ITableRow[];
 }
 
 export interface IViewPreferences {
@@ -14,6 +25,12 @@ export interface IPersonalCharacterData {
     unlocked?: boolean;
     rank: Rank;
     lePoints?: number;
+    leSelection: LegendaryEvents;
+}
+
+export enum LegendaryEvents {
+    None = 0,
+    JainZar = 1 << 0,
 }
 
 export enum Rank {

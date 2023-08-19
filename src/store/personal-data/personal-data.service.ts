@@ -1,4 +1,4 @@
-﻿import { IPersonalData, IViewPreferences } from './personal-data.interfaces';
+﻿import { ILegendaryEventsData, IPersonalData, IViewPreferences } from './personal-data.interfaces';
 
 export class PersonalDataService {
     static personalDataStorageKey = 'personalData';
@@ -8,16 +8,27 @@ export class PersonalDataService {
         const storedData = localStorage.getItem(this.personalDataStorageKey);
         const defaultViewPreferences: IViewPreferences = { 
             fitToScreen: true, 
-            onlyUnlocked: true,
+            onlyUnlocked: false,
             usedInCampaigns: false
         };
+        const defaultLegendaryEventsData: ILegendaryEventsData = {
+            jainZar: {
+                selectedTeams: [{}, {}, {}, {}, {}]
+            }
+        };
+        
         if(storedData) {
             this.data = JSON.parse(storedData);
             this.data.characters ??= [];
             this.data.viewPreferences ??= defaultViewPreferences;
+            this.data.legendaryEvents ??= defaultLegendaryEventsData;
         }
         
-        this.data ??=  { characters: [], viewPreferences: defaultViewPreferences };
+        this.data ??=  { 
+            characters: [], 
+            viewPreferences: defaultViewPreferences, 
+            legendaryEvents: defaultLegendaryEventsData 
+        };
     }
     
     static save():void {
