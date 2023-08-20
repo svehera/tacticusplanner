@@ -4,9 +4,8 @@ import { Alliance, DamageTypes, Faction, Traits } from '../static-data/enums';
 import { LegendaryEvents } from '../personal-data/personal-data.interfaces';
 import { filter } from './filters';
 
-
-export class JainZarLegendaryEvent implements ILegendaryEvent {
-    readonly id = LegendaryEvents.JainZar;
+export class AunShiLegendaryEvent implements ILegendaryEvent {
+    readonly id = LegendaryEvents.AunShi;
     selectedTeams: ITableRow[];
 
     alphaTrack: ILegendaryEventTrack;
@@ -50,34 +49,34 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
     }
 
     private getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
-        const xenosOnly = filter(unitsData).byAlliance(Alliance.Xenos);
+        const noOrks = filter(unitsData).byFaction(Faction.Orks, true);
         return {
-            name: 'Alpha (Xenos only)',
+            name: 'Alpha (No Orks)',
             unitsRestrictions: [
                 {
-                    name: 'Physical',
-                    points: 100,
-                    units: filter(xenosOnly).byDamageType(DamageTypes.Physical),
+                    name: 'Piercing',
+                    points: 115,
+                    units: filter(noOrks).byDamageType(DamageTypes.Piercing),
                 },
                 {
-                    name: 'Ranged',
-                    points: 60,
-                    units: filter(xenosOnly).byAttackType('rangeOnly'),
+                    name: 'No Physical',
+                    points: 40,
+                    units: filter(noOrks).byDamageType(DamageTypes.Physical, true),
                 },
                 {
                     name: 'Max 3 hits',
-                    points: 45,
-                    units: filter(xenosOnly).byMaxHits(3),
+                    points: 70,
+                    units: filter(noOrks).byMaxHits(2),
                 },
                 {
-                    name: 'Necrons only',
-                    points: 110,
-                    units: filter(xenosOnly).byFaction(Faction.Necrons),
+                    name: 'No Range',
+                    points: 80,
+                    units: filter(noOrks).byAttackType('meleeOnly'),
                 },
                 {
-                    name: 'No Summons',
-                    points: 60,
-                    units: filter(xenosOnly).byNoSummons(),
+                    name: 'Min 3 hits',
+                    points: 70,
+                    units: filter(noOrks).byMinHits(3),
                 },
             ],
             getAllowedUnits: function (): Array<ICharacter> {
@@ -87,34 +86,34 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
     }
 
     private getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
-        const imperialOnly = filter(unitsData).byAlliance(Alliance.Imperial);
+        const noImperials = filter(unitsData).byAlliance(Alliance.Imperial, true);
         return {
-            name: 'Beta (Imperial only)',
+            name: 'Beta (No Imperials)',
             unitsRestrictions: [
                 {
-                    name: 'Power',
-                    points: 95,
-                    units: filter(imperialOnly).byDamageType(DamageTypes.Power),
+                    name: 'Mechanical',
+                    points: 105,
+                    units: filter(noImperials).isMechanical(),
                 },
                 {
-                    name: 'Bolter',
-                    points: 95,
-                    units: filter(imperialOnly).byDamageType(DamageTypes.Bolter),
+                    name: 'No Resiliant',
+                    points: 40,
+                    units: filter(noImperials).byTrait(Traits.Resilient, true),
                 },
                 {
-                    name: 'No Blast',
-                    points: 50,
-                    units:  filter(imperialOnly).byDamageType(DamageTypes.Blast, true),
-                },
-                {
-                    name: 'Max 2 hits',
-                    points: 70,
-                    units: filter(imperialOnly).byMaxHits(2),
+                    name: 'No Range',
+                    points: 85,
+                    units:  filter(noImperials).byAttackType('meleeOnly'),
                 },
                 {
                     name: 'No Summons',
-                    points: 60,
-                    units: filter(imperialOnly).byNoSummons(),
+                    points: 45,
+                    units: filter(noImperials).byNoSummons(),
+                },
+                {
+                    name: 'Physical',
+                    points: 100,
+                    units: filter(noImperials).byDamageType(DamageTypes.Physical),
                 },
             ],
             getAllowedUnits: function (): Array<ICharacter> {
@@ -124,34 +123,34 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
     }
 
     private getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
-        const noOrks = filter(unitsData).byFaction(Faction.Orks, true);
+        const noChaos = filter(unitsData).byAlliance(Alliance.Chaos, true);
         return {
-            name: 'Gamma (No Orks)',
+            name: 'Gamma (No Chaos)',
             unitsRestrictions: [
                 {
-                    name: 'No Mech',
-                    points: 45,
-                    units: filter(noOrks).isNotMechanical(),
+                    name: 'Physical',
+                    points: 120,
+                    units: filter(noChaos).byDamageType(DamageTypes.Physical),
                 },
                 {
-                    name: 'Piercing',
-                    points: 100,
-                    units: filter(noOrks).byDamageType(DamageTypes.Piercing),
-                },
-                {
-                    name: 'Bolter',
-                    points: 95,
-                    units:  filter(noOrks).byDamageType(DamageTypes.Bolter),
+                    name: 'Max 1 hit',
+                    points: 125,
+                    units: filter(noChaos).byMaxHits(1),
                 },
                 {
                     name: 'No Flying',
-                    points: 45,
-                    units: filter(noOrks).byTrait(Traits.Flying, true),
+                    points: 40,
+                    units: filter(noChaos).byTrait(Traits.Flying, true),
                 },
                 {
-                    name: 'Min 4 hits',
-                    points: 90,
-                    units: filter(noOrks).byMinHits(4),
+                    name: 'No Overwatch',
+                    points: 40,
+                    units:  filter(noChaos).byTrait(Traits.Overwatch, true),
+                },
+                {
+                    name: 'No Power',
+                    points: 50,
+                    units:  filter(noChaos).byDamageType(DamageTypes.Power, true),
                 },
             ],
             getAllowedUnits: function (): Array<ICharacter> {

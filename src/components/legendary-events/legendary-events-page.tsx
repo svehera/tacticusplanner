@@ -13,11 +13,14 @@ import { ViewSettingsContext } from '../../contexts/view-settings.context';
 import { PersonalDataService } from '../../store/personal-data/personal-data.service';
 import { update } from 'lodash';
 import { ICharacter, ITableRow } from '../../store/static-data/interfaces';
+import { AunShiLegendaryEvent } from '../../store/legendary-events/aun-shi.le';
 
 
 const LegendaryEventPage = () => {
 
     const jainZarLegendaryEvent = new JainZarLegendaryEvent(GlobalStoreService.characters, PersonalDataService.data.legendaryEvents.jainZar.selectedTeams);
+    const aunShiLegendaryEvent = new AunShiLegendaryEvent(GlobalStoreService.characters, PersonalDataService.data.legendaryEvents.aunShi.selectedTeams);
+    
     const [viewPreferences, setViewPreferences] = useState(PersonalDataService.data.viewPreferences);
 
     useEffect(() => {
@@ -43,6 +46,24 @@ const LegendaryEventPage = () => {
         PersonalDataService.save();
     };
 
+    const updateAunShiEventTeams = (selectedTeams: Array<ITableRow>) => {
+        PersonalDataService.data.legendaryEvents.aunShi.selectedTeams = selectedTeams;
+        const selectedChars = selectedTeams
+            .flatMap(row => Object.values(row))
+            .filter(value => typeof value !== 'string')
+            .map(char  => (char as ICharacter).name);
+
+        PersonalDataService.data.characters.forEach(char => {
+            if(selectedChars.includes(char.name)) {
+                char.leSelection |= aunShiLegendaryEvent.id;
+            } else  {
+                char.leSelection &= ~aunShiLegendaryEvent.id;
+            }
+        });
+
+        PersonalDataService.save();
+    };
+
     return (
         <div>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
@@ -58,6 +79,16 @@ const LegendaryEventPage = () => {
                     <AccordionDetails>
                         <LegendaryEvent legendaryEvent={jainZarLegendaryEvent}
                             selectedTeamsChange={updateJainZarEventTeams}/>
+                    </AccordionDetails>
+                </Accordion>
+                <Accordion>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}
+                    >
+                        <Typography>Aun Shi 3/3 (TBA)</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <LegendaryEvent legendaryEvent={aunShiLegendaryEvent}
+                            selectedTeamsChange={updateAunShiEventTeams}/>
                     </AccordionDetails>
                 </Accordion>
             </ViewSettingsContext.Provider>

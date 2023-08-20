@@ -15,6 +15,9 @@ export class PersonalDataService {
         const defaultLegendaryEventsData: ILegendaryEventsData = {
             jainZar: {
                 selectedTeams: [{}, {}, {}, {}, {}]
+            },
+            aunShi: {
+                selectedTeams: [{}, {}, {}, {}, {}]
             }
         };
         
@@ -23,6 +26,8 @@ export class PersonalDataService {
             this.data.characters ??= [];
             this.data.viewPreferences ??= defaultViewPreferences;
             this.data.legendaryEvents ??= defaultLegendaryEventsData;
+            this.data.legendaryEvents.jainZar ??= defaultLegendaryEventsData.jainZar;
+            this.data.legendaryEvents.aunShi ??= defaultLegendaryEventsData.aunShi;
         }
         
         this.data ??=  { 
