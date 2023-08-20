@@ -3,9 +3,10 @@ import { ICharacter, ILegendaryEvent, ILegendaryEventTrack, ITableRow } from '..
 import { Alliance, DamageTypes, Faction, Traits } from '../static-data/enums';
 import { LegendaryEvents } from '../personal-data/personal-data.interfaces';
 import { filter } from './filters';
+import { LegendaryEventBase } from './base.le';
 
 
-export class JainZarLegendaryEvent implements ILegendaryEvent {
+export class JainZarLegendaryEvent extends LegendaryEventBase {
     readonly id = LegendaryEvents.JainZar;
     selectedTeams: ITableRow[];
 
@@ -14,6 +15,7 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
     gammaTrack: ILegendaryEventTrack;
 
     constructor(unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
+        super();
         this.alphaTrack = this.getAlphaTrack(unitsData);
         this.betaTrack = this.getBetaTrack(unitsData);
         this.gammaTrack = this.getGammaTrack(unitsData);

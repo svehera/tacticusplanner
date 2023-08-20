@@ -1,10 +1,11 @@
 ﻿import { sortBy, sum, uniqBy } from 'lodash';
-import { ICharacter, ILegendaryEvent, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
+import { ICharacter, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
 import { Alliance, DamageTypes, Faction, Traits } from '../static-data/enums';
 import { LegendaryEvents } from '../personal-data/personal-data.interfaces';
 import { filter } from './filters';
+import { LegendaryEventBase } from './base.le';
 
-export class AunShiLegendaryEvent implements ILegendaryEvent {
+export class AunShiLegendaryEvent extends LegendaryEventBase {
     readonly id = LegendaryEvents.AunShi;
     selectedTeams: ITableRow[];
 
@@ -13,6 +14,7 @@ export class AunShiLegendaryEvent implements ILegendaryEvent {
     gammaTrack: ILegendaryEventTrack;
 
     constructor(unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
+        super();
         this.alphaTrack = this.getAlphaTrack(unitsData);
         this.betaTrack = this.getBetaTrack(unitsData);
         this.gammaTrack = this.getGammaTrack(unitsData);

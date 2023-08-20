@@ -29,6 +29,7 @@ const LegendaryEventPage = () => {
     
 
     useEffect(() => {
+        PersonalDataService.data.viewPreferences = viewPreferences;
         PersonalDataService.save();
     }, [viewPreferences]);
 
@@ -95,12 +96,13 @@ const LegendaryEventPage = () => {
             </Typography>
             <ViewSettings value={viewPreferences} valueChanges={setViewPreferences}></ViewSettings>
             <ViewSettingsContext.Provider value={viewPreferences}>
-                <Accordion>
+                <Accordion >
                     <AccordionSummary expandIcon={<ExpandMoreIcon/>}
                     >
                         <Typography>Jain Zar 3/3 (September 10)</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
+                        
                         <LegendaryEvent legendaryEvent={jainZarLegendaryEvent}
                             selectedTeamsChange={updateJainZarEventTeams}/>
                     </AccordionDetails>

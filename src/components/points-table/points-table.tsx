@@ -26,6 +26,25 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, }) => {
         }
     ];
 
+
+    const selectedCharsColumnsDef: Array<ColDef> = [
+        {
+            field: 'name',
+            sortable: true,
+            cellClass: (params: CellClassParams) => Rank[params.data?.rank]?.toLowerCase(),
+            tooltipValueGetter: (params: ITooltipParams) => params.data?.name + ' - ' + Rank[params.data?.rank ?? 0]
+        },
+        {
+            field: 'points',
+            headerName: 'Points',
+            sortable: true,
+            sort: 'desc'
+        }
+    ];
+    
+    const selectedChars = legendaryEvent.getSelectedCharactersPoints();
+
+
     return (
         <div style={{ display: 'flex', flexDirection: 'row' }}>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 100px)', width: '100%' }}>
@@ -62,11 +81,11 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, }) => {
                     ref={gridRef}
                     tooltipShowDelay={100}
                     overlayNoRowsTemplate={'Select characters on Event Details'}
-                    rowData={characters.filter(x => (x.leSelection & legendaryEvent.id) === legendaryEvent.id)}
+                    rowData={selectedChars }
                     columnDefs={[
                         {
                             headerName: 'Selected Best characters',
-                            children: columnsDef,
+                            children: selectedCharsColumnsDef,
                         },
                     ]}>
                 </AgGridReact>

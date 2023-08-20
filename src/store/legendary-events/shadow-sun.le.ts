@@ -3,8 +3,9 @@ import { ICharacter, ILegendaryEvent, ILegendaryEventTrack, ITableRow } from '..
 import { Alliance, DamageTypes, Faction, Traits } from '../static-data/enums';
 import { LegendaryEvents } from '../personal-data/personal-data.interfaces';
 import { filter } from './filters';
+import { LegendaryEventBase } from './base.le';
 
-export class ShadowSunLegendaryEvent implements ILegendaryEvent {
+export class ShadowSunLegendaryEvent  extends LegendaryEventBase {
     readonly id = LegendaryEvents.ShadowSun;
     selectedTeams: ITableRow[];
 
@@ -13,6 +14,7 @@ export class ShadowSunLegendaryEvent implements ILegendaryEvent {
     gammaTrack: ILegendaryEventTrack;
 
     constructor(unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
+        super();
         this.alphaTrack = this.getAlphaTrack(unitsData);
         this.betaTrack = this.getBetaTrack(unitsData);
         this.gammaTrack = this.getGammaTrack(unitsData);
