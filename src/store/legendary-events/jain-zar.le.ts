@@ -2,6 +2,7 @@
 import { ICharacter, ILegendaryEvent, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
 import { Alliance, DamageTypes, Faction, Traits } from '../static-data/enums';
 import { LegendaryEvents } from '../personal-data/personal-data.interfaces';
+import { filter } from './filters';
 
 
 export class JainZarLegendaryEvent implements ILegendaryEvent {
@@ -49,34 +50,34 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
     }
 
     private getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
-        const xenosOnly = unitsData.filter( (unit) => unit.alliance === Alliance.Xenos);
+        const xenosOnly = filter(unitsData).byAlliance(Alliance.Xenos);
         return {
             name: 'Alpha (Xenos only)',
             unitsRestrictions: [
                 {
                     name: 'Physical',
                     points: 100,
-                    units: xenosOnly.filter((unit) => (unit.damageTypes & DamageTypes.Physical) === DamageTypes.Physical),
+                    units: filter(xenosOnly).byDamageType(DamageTypes.Physical),
                 },
                 {
                     name: 'Ranged',
                     points: 60,
-                    units: xenosOnly.filter((unit) => !!unit.rangeHits),
+                    units: filter(xenosOnly).byAttackType('rangeOnly'),
                 },
                 {
                     name: 'Max 3 hits',
                     points: 45,
-                    units: xenosOnly.filter( (unit) => (!unit.rangeHits && unit.meleeHits <= 3) || (!!unit.rangeHits && unit.rangeHits <= 3)),
+                    units: filter(xenosOnly).byMaxHits(3),
                 },
                 {
                     name: 'Necrons only',
                     points: 110,
-                    units: xenosOnly.filter((unit) => unit.faction === Faction.Necrons),
+                    units: filter(xenosOnly).byFaction(Faction.Necrons),
                 },
                 {
                     name: 'No Summons',
                     points: 60,
-                    units: xenosOnly.filter(unit => !unit.forcedSummons),
+                    units: filter(xenosOnly).byNoSummons(),
                 },
             ],
             getAllowedUnits: function (): Array<ICharacter> {
@@ -86,34 +87,34 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
     }
 
     private getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
-        const imperialOnly = unitsData.filter( (unit) => unit.alliance === Alliance.Imperial);
+        const imperialOnly = filter(unitsData).byAlliance(Alliance.Imperial);
         return {
             name: 'Beta (Imperial only)',
             unitsRestrictions: [
                 {
                     name: 'Power',
                     points: 95,
-                    units: imperialOnly.filter((unit) => (unit.damageTypes & DamageTypes.Power) === DamageTypes.Power),
+                    units: filter(imperialOnly).byDamageType(DamageTypes.Power),
                 },
                 {
                     name: 'Bolter',
                     points: 95,
-                    units: imperialOnly.filter((unit) => (unit.damageTypes & DamageTypes.Bolter) === DamageTypes.Bolter),
+                    units: filter(imperialOnly).byDamageType(DamageTypes.Bolter),
                 },
                 {
                     name: 'No Blast',
                     points: 50,
-                    units:  imperialOnly.filter((unit) => (unit.damageTypes & DamageTypes.Blast) !== DamageTypes.Blast),
+                    units:  filter(imperialOnly).byDamageType(DamageTypes.Blast, true),
                 },
                 {
                     name: 'Max 2 hits',
                     points: 70,
-                    units: imperialOnly.filter( (unit) => (!unit.rangeHits && unit.meleeHits <= 2) || (!!unit.rangeHits && unit.rangeHits <= 2)),
+                    units: filter(imperialOnly).byMaxHits(2),
                 },
                 {
                     name: 'No Summons',
                     points: 60,
-                    units: imperialOnly.filter(unit => !unit.forcedSummons),
+                    units: filter(imperialOnly).byNoSummons(),
                 },
             ],
             getAllowedUnits: function (): Array<ICharacter> {
@@ -123,7 +124,7 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
     }
 
     private getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
-        const noOrks = unitsData.filter( (unit) => unit.faction !== Faction.Orks);
+        const noOrks = filter(unitsData).byFaction(Faction.Orks, true);
         return {
             name: 'Gamma (No Orks)',
             unitsRestrictions: [
@@ -135,22 +136,22 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
                 {
                     name: 'Piercing',
                     points: 100,
-                    units: noOrks.filter((unit) => (unit.damageTypes & DamageTypes.Piercing) === DamageTypes.Piercing),
+                    units: filter(noOrks).byDamageType(DamageTypes.Piercing),
                 },
                 {
                     name: 'Bolter',
                     points: 95,
-                    units:  noOrks.filter((unit) => (unit.damageTypes & DamageTypes.Bolter) === DamageTypes.Bolter),
+                    units:  filter(noOrks).byDamageType(DamageTypes.Bolter),
                 },
                 {
                     name: 'No Flying',
                     points: 45,
-                    units: noOrks.filter((unit) => (unit.traits & Traits.Flying) !==  Traits.Flying),
+                    units: filter(noOrks).byTrait(Traits.Flying, true),
                 },
                 {
                     name: 'Min 4 hits',
                     points: 90,
-                    units: noOrks.filter( (unit) => (!unit.rangeHits && unit.meleeHits >= 4) || (!!unit.rangeHits && unit.rangeHits >= 4)),
+                    units: filter(noOrks).byMinHits(4),
                 },
             ],
             getAllowedUnits: function (): Array<ICharacter> {
