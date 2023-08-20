@@ -18,6 +18,9 @@ export class PersonalDataService {
             },
             aunShi: {
                 selectedTeams: [{}, {}, {}, {}, {}]
+            },
+            shadowSun: {
+                selectedTeams: [{}, {}, {}, {}, {}]
             }
         };
         
@@ -28,6 +31,7 @@ export class PersonalDataService {
             this.data.legendaryEvents ??= defaultLegendaryEventsData;
             this.data.legendaryEvents.jainZar ??= defaultLegendaryEventsData.jainZar;
             this.data.legendaryEvents.aunShi ??= defaultLegendaryEventsData.aunShi;
+            this.data.legendaryEvents.shadowSun ??= defaultLegendaryEventsData.shadowSun;
         }
         
         this.data ??=  { 

@@ -14,14 +14,19 @@ import { PersonalDataService } from '../../store/personal-data/personal-data.ser
 import { update } from 'lodash';
 import { ICharacter, ITableRow } from '../../store/static-data/interfaces';
 import { AunShiLegendaryEvent } from '../../store/legendary-events/aun-shi.le';
+import { ShadowSunLegendaryEvent } from '../../store/legendary-events/shadow-sun.le';
+import OverallPointsTable from '../overall-points-table/overall-points-table';
 
 
 const LegendaryEventPage = () => {
-
-    const jainZarLegendaryEvent = new JainZarLegendaryEvent(GlobalStoreService.characters, PersonalDataService.data.legendaryEvents.jainZar.selectedTeams);
-    const aunShiLegendaryEvent = new AunShiLegendaryEvent(GlobalStoreService.characters, PersonalDataService.data.legendaryEvents.aunShi.selectedTeams);
+    const [characters, setCharacters] = useState(GlobalStoreService.characters);
+    
+    const jainZarLegendaryEvent = new JainZarLegendaryEvent(characters, PersonalDataService.data.legendaryEvents.jainZar.selectedTeams);
+    const aunShiLegendaryEvent = new AunShiLegendaryEvent(characters, PersonalDataService.data.legendaryEvents.aunShi.selectedTeams);
+    const shadowSunLegendaryEvent = new ShadowSunLegendaryEvent(characters, PersonalDataService.data.legendaryEvents.shadowSun.selectedTeams);
     
     const [viewPreferences, setViewPreferences] = useState(PersonalDataService.data.viewPreferences);
+    
 
     useEffect(() => {
         PersonalDataService.save();
@@ -44,6 +49,7 @@ const LegendaryEventPage = () => {
         });
         
         PersonalDataService.save();
+        setCharacters([...characters]);
     };
 
     const updateAunShiEventTeams = (selectedTeams: Array<ITableRow>) => {
@@ -58,6 +64,24 @@ const LegendaryEventPage = () => {
                 char.leSelection |= aunShiLegendaryEvent.id;
             } else  {
                 char.leSelection &= ~aunShiLegendaryEvent.id;
+            }
+        });
+
+        PersonalDataService.save();
+    };
+
+    const updateShadowSunEventTeams = (selectedTeams: Array<ITableRow>) => {
+        PersonalDataService.data.legendaryEvents.shadowSun.selectedTeams = selectedTeams;
+        const selectedChars = selectedTeams
+            .flatMap(row => Object.values(row))
+            .filter(value => typeof value !== 'string')
+            .map(char  => (char as ICharacter).name);
+
+        PersonalDataService.data.characters.forEach(char => {
+            if(selectedChars.includes(char.name)) {
+                char.leSelection |= shadowSunLegendaryEvent.id;
+            } else  {
+                char.leSelection &= ~shadowSunLegendaryEvent.id;
             }
         });
 
@@ -89,6 +113,27 @@ const LegendaryEventPage = () => {
                     <AccordionDetails>
                         <LegendaryEvent legendaryEvent={aunShiLegendaryEvent}
                             selectedTeamsChange={updateAunShiEventTeams}/>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}
+                    >
+                        <Typography>Shadowsun 2/3 (TBA)</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <LegendaryEvent legendaryEvent={shadowSunLegendaryEvent}
+                            selectedTeamsChange={updateShadowSunEventTeams}/>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}
+                    >
+                        <Typography>Overall Best Characters</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <OverallPointsTable characters={characters}/>
                     </AccordionDetails>
                 </Accordion>
             </ViewSettingsContext.Provider>

@@ -9,6 +9,7 @@ export interface IPersonalData {
 export interface ILegendaryEventsData {
     jainZar: ILegendaryEventData;
     aunShi: ILegendaryEventData;
+    shadowSun: ILegendaryEventData;
 }
 
 export interface ILegendaryEventData {
@@ -31,6 +32,7 @@ export enum LegendaryEvents {
     None = 0,
     JainZar = 1 << 0,
     AunShi = 1 << 1,
+    ShadowSun = 1 << 2,
 }
 
 export enum Rank {
