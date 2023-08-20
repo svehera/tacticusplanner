@@ -16,7 +16,6 @@ export interface ILegendaryEventData {
 
 export interface IViewPreferences {
     onlyUnlocked: boolean;
-    fitToScreen: boolean;
     usedInCampaigns: boolean;
 }
 
@@ -24,7 +23,6 @@ export interface IPersonalCharacterData {
     name: string;
     unlocked?: boolean;
     rank: Rank;
-    lePoints?: number;
     leSelection: LegendaryEvents;
 }
 

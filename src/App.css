@@ -121,3 +121,7 @@
 .diamond3 {
     background-color: #6FA8DC;
 }
+
+.ag-theme-material {
+    --ag-grid-size: 5px;
+}

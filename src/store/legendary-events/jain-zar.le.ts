@@ -1,31 +1,37 @@
 ﻿import { sortBy, sum, uniqBy } from 'lodash';
-import { ICharacter, ILegendaryEvent, ILegendaryEventTrack } from '../static-data/interfaces';
+import { ICharacter, ILegendaryEvent, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
 import { Alliance, DamageTypes, Faction, Traits } from '../static-data/enums';
+import { LegendaryEvents } from '../personal-data/personal-data.interfaces';
 
 
 export class JainZarLegendaryEvent implements ILegendaryEvent {
+    readonly id = LegendaryEvents.JainZar;
+    selectedTeams: ITableRow[];
+
     alphaTrack: ILegendaryEventTrack;
     betaTrack: ILegendaryEventTrack;
     gammaTrack: ILegendaryEventTrack;
 
-    constructor(unitsData: Array<ICharacter>) {
+    constructor(unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
         this.alphaTrack = this.getAlphaTrack(unitsData);
         this.betaTrack = this.getBetaTrack(unitsData);
         this.gammaTrack = this.getGammaTrack(unitsData);
+        this.selectedTeams = selectedTeams;
     }
+
 
     getAllowedUnits(): Array<ICharacter> {
         const alpha = this.alphaTrack.getAllowedUnits();
         const beta = this.betaTrack.getAllowedUnits();
         const gamma = this.gammaTrack.getAllowedUnits();
-        return sortBy(uniqBy([...alpha, ...beta, ...gamma], 'name'), 'name');
+        
+        const allowedCharacters = sortBy(uniqBy([...alpha, ...beta, ...gamma], 'name'), 'name');
+        this.populateLEPoints(allowedCharacters);
+        return allowedCharacters;
     }
     
-    getCharactersPoints(unlockedOnly = false): Record<string, number> {
-        const allowedUnits = unlockedOnly ? this.getAllowedUnits().filter(x => x.unlocked) :  this.getAllowedUnits();
-        const result: Record<string, number> = {};
-
-        allowedUnits.forEach(character => {
+    private populateLEPoints(characters: ICharacter[]): void {
+        characters.forEach(character => {
             const alphaPoints = this.alphaTrack.unitsRestrictions
                 .filter(x => x.units.some(u => u.name === character.name))
                 .map(x => x.points);
@@ -38,10 +44,8 @@ export class JainZarLegendaryEvent implements ILegendaryEvent {
                 .filter(x => x.units.some(u => u.name === character.name))
                 .map(x => x.points);
 
-            result[character.name] = sum([...alphaPoints, ...betaPoints, ...gammaPoints]);
+            character.legendaryEventPoints[this.id] = sum([...alphaPoints, ...betaPoints, ...gammaPoints]);
         });
-
-        return result;
     }
 
     private getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {

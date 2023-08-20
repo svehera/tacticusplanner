@@ -1,7 +1,7 @@
 ﻿import React, { useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { ICharacter, ILegendaryEvent } from '../../store/static-data/interfaces';
-import { CellClassParams, ColDef, ITooltipParams } from 'ag-grid-community';
+import { CellClassParams, ColDef, ITooltipParams, ValueGetterParams } from 'ag-grid-community';
 import { LegendaryEvents, Rank } from '../../store/personal-data/personal-data.interfaces';
 
 const PointsTable = (props: { legendaryEvent: ILegendaryEvent, }) => {
@@ -11,11 +11,6 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, }) => {
 
     const characters: ICharacter[] = legendaryEvent.getAllowedUnits();
     
-    const charactersPoints = legendaryEvent.getCharactersPoints();
-    characters.forEach(char => {
-        char.lePoints = charactersPoints[char.name] ?? 0;
-    });
-    
     const columnsDef: Array<ColDef> = [
         {
             field: 'name',
@@ -24,7 +19,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, }) => {
             tooltipValueGetter: (params: ITooltipParams) => params.data?.name + ' - ' + Rank[params.data?.rank ?? 0]
         },
         {
-            field: 'lePoints',
+            valueGetter: (params: ValueGetterParams) => (params.data as ICharacter).legendaryEventPoints[legendaryEvent.id], 
             headerName: 'Points',
             sortable: true,
             sort: 'desc'
@@ -66,7 +61,8 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, }) => {
                 <AgGridReact
                     ref={gridRef}
                     tooltipShowDelay={100}
-                    rowData={characters.filter(x => (x.leSelection & LegendaryEvents.JainZar) === LegendaryEvents.JainZar)}
+                    overlayNoRowsTemplate={'Select characters on Event Details'}
+                    rowData={characters.filter(x => (x.leSelection & legendaryEvent.id) === legendaryEvent.id)}
                     columnDefs={[
                         {
                             headerName: 'Selected Best characters',

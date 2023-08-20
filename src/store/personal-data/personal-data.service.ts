@@ -1,13 +1,14 @@
 ﻿import { ILegendaryEventsData, IPersonalData, IViewPreferences } from './personal-data.interfaces';
+import { useState } from 'react';
 
 export class PersonalDataService {
     static personalDataStorageKey = 'personalData';
     static data: IPersonalData;
     
     static init(): void {
+        
         const storedData = localStorage.getItem(this.personalDataStorageKey);
         const defaultViewPreferences: IViewPreferences = { 
-            fitToScreen: true, 
             onlyUnlocked: false,
             usedInCampaigns: false
         };

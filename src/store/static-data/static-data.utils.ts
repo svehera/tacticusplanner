@@ -78,6 +78,7 @@ export class StaticDataUtils {
             movement: rawData.Movement,
             forcedSummons: rawData.ForcedSummons,
             requiredInCampaign: rawData.RequiredInCampaign,
+            legendaryEventPoints: {}
         };
 
         // Calculate damage types based on rawData values

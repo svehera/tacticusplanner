@@ -1,5 +1,5 @@
 ﻿import { Alliance, DamageTypeRaw, DamageTypes, Faction, Rarity, Traits, TraitTypeRaw } from './enums';
-import { IPersonalCharacterData } from '../personal-data/personal-data.interfaces';
+import { IPersonalCharacterData, LegendaryEvents } from '../personal-data/personal-data.interfaces';
 
 export interface UnitDataRaw {
     Name: string;
@@ -41,18 +41,22 @@ export interface IUnitData {
     movement: number,
     forcedSummons: boolean;
     requiredInCampaign: boolean;
+    legendaryEventPoints: LegendaryEventPoints;
 }
 
 export type ICharacter = IUnitData & IPersonalCharacterData;
 
+export type LegendaryEventPoints = Record<LegendaryEvents, number>;
 
 export interface ILegendaryEvent {
+    id: LegendaryEvents;
     alphaTrack: ILegendaryEventTrack;   
     betaTrack: ILegendaryEventTrack;   
     gammaTrack: ILegendaryEventTrack;
+    
+    selectedTeams: ITableRow[];
 
     getAllowedUnits(): Array<ICharacter>;
-    getCharactersPoints(unlockedOnly?: boolean): Record<string, number>;
 }
 
 export interface ILegendaryEventTrack {
