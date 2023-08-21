@@ -78,6 +78,8 @@ const About = () => {
             <p>UI/UX improvements</p>
             <p>&quot;Stats&quot; feature - table with characters stats (range/melee hits, range distance, movements,
                 etc.)</p>
+            <p>More Filters - Nandi&apos;s &quot;Dirty Dozed&quot;, Nandi Recommends</p>
+            <p>&quot;My Lists&quot; feature - create your own PvP, Guild raids lists.</p>
             <p>More personal data on Who You Own page - rarity, abilities level, power</p>
             <p>Buying an standalone domain and hosting.</p>
             <p>Login feature - share your data across multiple devices.</p>
