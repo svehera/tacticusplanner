@@ -12,7 +12,7 @@ import { Tooltip } from '@mui/material';
 
 const ButtonAppBar = () => {
     const inputRef = useRef<HTMLInputElement>(null);
-    
+
     const downloadJson = () => {
         const data = PersonalDataService.data;
         const jsonData = JSON.stringify(data, null, 2);
@@ -48,7 +48,7 @@ const ButtonAppBar = () => {
             reader.readAsText(file);
         }
     };
-    
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <input
@@ -59,18 +59,24 @@ const ButtonAppBar = () => {
                 onChange={handleFileUpload}
             />
             <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Button component={Link} to={'./'} color="inherit" > 
+                        <Typography variant="h4" component="div">
                         Tacticus Planner
-                    </Typography>
-                    <Button component={Link} to={'./'} color="inherit">Who You Own</Button>
-                    <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>
-                    <Tooltip title={'Import your personal data'}>
-                        <Button color="inherit" onClick={() => inputRef.current?.click()}>Import</Button>
-                    </Tooltip>
-                    <Tooltip title={'Export your personal data'}>
-                        <Button onClick={downloadJson} color="inherit">Export</Button>
-                    </Tooltip>
+                        </Typography>
+                    </Button>
+                    <div>
+                        <Button component={Link} to={'./'} color="inherit">About</Button>
+                        <Button component={Link} to={'./contacts'} color="inherit">Contacts</Button>
+                        <Tooltip title={'Export your personal data'}>
+                            <Button onClick={downloadJson} color="inherit">Export</Button>
+                        </Tooltip>
+                        <Tooltip title={'Import your personal data'}>
+                            <Button color="inherit" onClick={() => inputRef.current?.click()}>Import</Button>
+                        </Tooltip>
+                        <Button component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
+                        <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>
+                    </div>
                 </Toolbar>
             </AppBar>
         </Box>

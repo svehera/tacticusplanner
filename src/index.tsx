@@ -10,6 +10,8 @@ import {
 } from 'react-router-dom';
 import WhoYouOwn from './components/who-you-own/who-you-own';
 import LegendaryEventPage from './components/legendary-events/legendary-events-page';
+import About from './components/about/about';
+import Contacts from './components/contacts/contacts';
 
 const router = createBrowserRouter([
     {
@@ -18,11 +20,19 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/tacticusplanner/',
+                element: <About />,
+            },
+            {
+                path: 'wyo',
                 element: <WhoYouOwn />,
             },
             {
                 path: 'le',
                 element: <LegendaryEventPage />,
+            },
+            {
+                path: 'contacts',
+                element: <Contacts />,
             },
         ],
     },

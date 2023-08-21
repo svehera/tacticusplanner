@@ -5,7 +5,7 @@ import { CellClassParams, ColDef, ITooltipParams, ValueGetterParams } from 'ag-g
 import { LegendaryEvents, Rank } from '../../store/personal-data/personal-data.interfaces';
 import { sum } from 'lodash';
 
-const OverallPointsTable = (props: { characters: ICharacter[] }) => {
+const OverallPointsTable = (props: { characters: ICharacter[], selectedChars: Array<any> }) => {
     const { characters } = props;
     
     const columnsDef: Array<ColDef> = [
@@ -16,7 +16,22 @@ const OverallPointsTable = (props: { characters: ICharacter[] }) => {
             tooltipValueGetter: (params: ITooltipParams) => params.data?.name + ' - ' + Rank[params.data?.rank ?? 0]
         },
         {
+            // field: 'points',
             valueGetter: (params: ValueGetterParams) => sum(Object.values((params.data as ICharacter).legendaryEventPoints)), 
+            headerName: 'Points',
+            sortable: true,
+            sort: 'desc'
+        }
+    ];
+    const columnsDef2: Array<ColDef> = [
+        {
+            field: 'name',
+            sortable: true,
+            cellClass: (params: CellClassParams) => Rank[params.data?.rank]?.toLowerCase(),
+            tooltipValueGetter: (params: ITooltipParams) => params.data?.name + ' - ' + Rank[params.data?.rank ?? 0]
+        },
+        {
+            field: 'points',
             headerName: 'Points',
             sortable: true,
             sort: 'desc'
@@ -56,11 +71,11 @@ const OverallPointsTable = (props: { characters: ICharacter[] }) => {
                 <AgGridReact
                     tooltipShowDelay={100}
                     overlayNoRowsTemplate={'Select characters on Event Details'}
-                    rowData={characters.filter(x => x.leSelection !== LegendaryEvents.None)}
+                    rowData={props.selectedChars}
                     columnDefs={[
                         {
                             headerName: 'Selected Best characters',
-                            children: columnsDef,
+                            children: columnsDef2,
                         },
                     ]}>
                 </AgGridReact>

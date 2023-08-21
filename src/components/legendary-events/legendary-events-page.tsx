@@ -11,7 +11,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ViewSettings from '../view-settings/view-settings';
 import { ViewSettingsContext } from '../../contexts/view-settings.context';
 import { PersonalDataService } from '../../store/personal-data/personal-data.service';
-import { update } from 'lodash';
+import { cloneDeep, merge, unionBy, unionWith, uniqBy, update } from 'lodash';
 import { ICharacter, ITableRow } from '../../store/static-data/interfaces';
 import { AunShiLegendaryEvent } from '../../store/legendary-events/aun-shi.le';
 import { ShadowSunLegendaryEvent } from '../../store/legendary-events/shadow-sun.le';
@@ -88,15 +88,46 @@ const LegendaryEventPage = () => {
 
         PersonalDataService.save();
     };
+    
+    const jainZarSelectedTeamsPoints = jainZarLegendaryEvent.getSelectedCharactersPoints();
+    const aunShiSelectedTeamsPoints = aunShiLegendaryEvent.getSelectedCharactersPoints();
+    const shadowSunSelectedTeamsPoints = shadowSunLegendaryEvent.getSelectedCharactersPoints();
+
+    
+    const result = uniqBy(cloneDeep([...jainZarSelectedTeamsPoints, ...aunShiSelectedTeamsPoints, ...shadowSunSelectedTeamsPoints]), 'name');
+    result.forEach(x => {
+        x.points = 0;
+        jainZarSelectedTeamsPoints.forEach(char => {
+            if (x.name === char.name) {
+                x.points += char.points;
+            }
+        });
+
+        aunShiSelectedTeamsPoints.forEach(char => {
+            if (x.name === char.name) {
+                x.points += char.points;
+            }
+        });
+
+        shadowSunSelectedTeamsPoints.forEach(char => {
+            if (x.name === char.name) {
+                x.points += char.points;
+            }
+        });
+        
+    });
+    
 
     return (
         <div>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                Legendary Events
-            </Typography>
-            <ViewSettings value={viewPreferences} valueChanges={setViewPreferences}></ViewSettings>
+            <div style={{ marginInlineStart: 10 }}>
+                <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+                    Legendary Events
+                </Typography>
+                <ViewSettings value={viewPreferences} valueChanges={setViewPreferences}></ViewSettings>
+            </div>
             <ViewSettingsContext.Provider value={viewPreferences}>
-                <Accordion >
+                <Accordion TransitionProps={{ unmountOnExit: true }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon/>}
                     >
                         <Typography>Jain Zar 3/3 (September 10)</Typography>
@@ -107,7 +138,7 @@ const LegendaryEventPage = () => {
                             selectedTeamsChange={updateJainZarEventTeams}/>
                     </AccordionDetails>
                 </Accordion>
-                <Accordion>
+                <Accordion TransitionProps={{ unmountOnExit: true }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon/>}
                     >
                         <Typography>Aun Shi 3/3 (TBA)</Typography>
@@ -118,7 +149,7 @@ const LegendaryEventPage = () => {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion>
+                <Accordion TransitionProps={{ unmountOnExit: true }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon/>}
                     >
                         <Typography>Shadowsun 2/3 (TBA)</Typography>
@@ -129,13 +160,13 @@ const LegendaryEventPage = () => {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion>
+                <Accordion TransitionProps={{ unmountOnExit: true }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon/>}
                     >
                         <Typography>Overall Best Characters</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <OverallPointsTable characters={characters}/>
+                        <OverallPointsTable characters={characters} selectedChars={result}/>
                     </AccordionDetails>
                 </Accordion>
             </ViewSettingsContext.Provider>

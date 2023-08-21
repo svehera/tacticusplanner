@@ -73,54 +73,55 @@ const WhoYouOwn = () => {
                 }
             ]
         },
-        {
-            headerName: 'Stats details',
-            openByDefault: true,
-            children: [
-                {
-                    field: 'damageTypes',
-                    headerName: 'Damage Types',
-                    valueFormatter: convertEnumValuesToString(DamageTypes as unknown as EnumLike<number>)
-                },
-                {
-                    field: 'traits',
-                    headerName: 'Traits',
-                    valueFormatter: convertEnumValuesToString(Traits as unknown as EnumLike<number>)
-                },
-                { 
-                    field: 'meleeHits',
-                    headerName: 'Melee Hits', 
-                    columnGroupShow: 'open', 
-                    width: 120, 
-                    minWidth: 120, 
-                    maxWidth: 120, 
-                },
-                { 
-                    field: 'rangeHits', 
-                    headerName: 'Range Hits', 
-                    columnGroupShow: 'open', 
-                    width: 120,
-                    minWidth: 120,
-                    maxWidth: 120,
-                },
-                { 
-                    field: 'rangeDistance', 
-                    headerName: 'Range', 
-                    columnGroupShow: 'open',
-                    width: 120,
-                    minWidth: 120,
-                    maxWidth: 120,
-                },
-                { 
-                    field: 'movement', 
-                    headerName: 'Movement', 
-                    columnGroupShow: 'open',
-                    width: 120,
-                    minWidth: 120,
-                    maxWidth: 120,
-                }
-            ],
-        }
+        // {
+        //     headerName: 'Stats details',
+        //     openByDefault: false,
+        //     children: [
+        //         {
+        //             field: 'damageTypes',
+        //             headerName: 'Damage Types',
+        //             valueFormatter: convertEnumValuesToString(DamageTypes as unknown as EnumLike<number>)
+        //         },
+        //         {
+        //             field: 'traits',
+        //             headerName: 'Traits',
+        //             valueFormatter: convertEnumValuesToString(Traits as unknown as EnumLike<number>),
+        //             columnGroupShow: 'open',
+        //         },
+        //         { 
+        //             field: 'meleeHits',
+        //             headerName: 'Melee Hits', 
+        //             columnGroupShow: 'open', 
+        //             width: 120, 
+        //             minWidth: 120, 
+        //             maxWidth: 120, 
+        //         },
+        //         { 
+        //             field: 'rangeHits', 
+        //             headerName: 'Range Hits', 
+        //             columnGroupShow: 'open', 
+        //             width: 120,
+        //             minWidth: 120,
+        //             maxWidth: 120,
+        //         },
+        //         { 
+        //             field: 'rangeDistance', 
+        //             headerName: 'Range', 
+        //             columnGroupShow: 'open',
+        //             width: 120,
+        //             minWidth: 120,
+        //             maxWidth: 120,
+        //         },
+        //         { 
+        //             field: 'movement', 
+        //             headerName: 'Movement', 
+        //             columnGroupShow: 'open',
+        //             width: 120,
+        //             minWidth: 120,
+        //             maxWidth: 120,
+        //         }
+        //     ],
+        // }
 
     ]);
 

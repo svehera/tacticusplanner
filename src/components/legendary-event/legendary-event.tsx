@@ -116,8 +116,10 @@ const LegendaryEvent = (props: { legendaryEvent: ILegendaryEvent; selectedTeamsC
 
     React.useEffect(() => {
         function handleResize() {
-            gridRef.current?.api.sizeColumnsToFit();
-            gridRef2.current?.api.sizeColumnsToFit();
+            if (window.innerWidth >= 768) {
+                gridRef.current?.api.sizeColumnsToFit();
+                gridRef2.current?.api.sizeColumnsToFit();
+            }
         }
 
         window.addEventListener('resize', handleResize);
@@ -133,7 +135,7 @@ const LegendaryEvent = (props: { legendaryEvent: ILegendaryEvent; selectedTeamsC
             <Accordion>
                 <AccordionSummary expandIcon={<ExpandMoreIcon/>}
                 >
-                    <Typography>Event Details</Typography>
+                    <Typography>Event Details (Click on character to add it to selected teams)</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <div className="ag-theme-material" style={{ height: 'calc(100vh - 420px)', width: '100%' }}>
@@ -153,7 +155,7 @@ const LegendaryEvent = (props: { legendaryEvent: ILegendaryEvent; selectedTeamsC
             <Accordion defaultExpanded={true}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon/>}
                 >
-                    <Typography>Your Selected Teams</Typography>
+                    <Typography>Your Selected Teams (Click on character to remove it from selected teams)</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <Button onClick={() => updateSelectedTeams([])}>Clear All</Button>
