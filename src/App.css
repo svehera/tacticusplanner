@@ -1,38 +1,127 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+.alpha {
+    background-color: #93C47D;
+}
+
+.beta {
+    background-color: #C9DAF8;
+}
+
+.gamma {
+    background-color: #FCE5CD;
+}
+
+.stone1 {
+    background-color: #CDB3A0;
+}
+
+.stone2 {
+    background-color: #B09A8A;
+}
+
+.stone3 {
+    background-color: #8C827A;
+}
+
+.iron1 {
+  background-color: #D9EAD3;
+}
+
+.iron2 {
+  background-color: #B6D7A8;
+}
+
+.iron3 {
+  background-color: #93C47D;
+}
+
+.bronze1 {
+  background-color: #F9CB9C;
+}
+
+.bronze2 {
+  background-color: #F6B26B;
+}
+
+.bronze3 {
+  background-color: #E69138;
+}
+
+.silver1 {
+  background-color: #EFEFEF;
+}
+
+.silver2 {
+  background-color: #D9D9D9;
+}
+
+.silver3 {
+  background-color: #CCCCCC;
+}
+
+.gold1 {
+    background-color: #FFE599;
+}
+
+.gold2 {
+    background-color: #FFD966;
+}
+
+.gold3 {
+    background-color: #F1C232;
+}
+
+.diamond1 {
+    background-color: #CFE2F3;
+}
+
+.diamond2 {
+    background-color: #9FC5E8;
+}
+
+.diamond3 {
+    background-color: #6FA8DC;
+}
+
+.ag-theme-material {
+    --ag-grid-size: 5px;
 }

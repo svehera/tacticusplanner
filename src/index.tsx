@@ -4,12 +4,46 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import {
+    createBrowserRouter,
+    RouterProvider,
+} from 'react-router-dom';
+import WhoYouOwn from './components/who-you-own/who-you-own';
+import LegendaryEventPage from './components/legendary-events/legendary-events-page';
+import About from './components/about/about';
+import Contacts from './components/contacts/contacts';
+
+const router = createBrowserRouter([
+    {
+        path: '/tacticusplanner',
+        element: <App />,
+        children: [
+            {
+                path: '/tacticusplanner/',
+                element: <About />,
+            },
+            {
+                path: 'wyo',
+                element: <WhoYouOwn />,
+            },
+            {
+                path: 'le',
+                element: <LegendaryEventPage />,
+            },
+            {
+                path: 'contacts',
+                element: <Contacts />,
+            },
+        ],
+    },
+]);
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <App />
+        <RouterProvider router={router} />
     </React.StrictMode>
 );
 

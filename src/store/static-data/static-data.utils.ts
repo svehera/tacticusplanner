@@ -1,5 +1,5 @@
-﻿import unitsData from './data/UnitData.json';
-import { UnitData, UnitDataRaw } from './interfaces';
+﻿import unitsData from '../../data/UnitData.json';
+import { IUnitData, UnitDataRaw } from './interfaces';
 import { DamageTypeRaw, DamageTypes, Faction, Traits, TraitTypeRaw } from './enums';
 
 const rawTraitToEnum: Record<string, Traits> = {
@@ -33,6 +33,8 @@ const rawTraitToEnum: Record<string, Traits> = {
     [TraitTypeRaw.Camouflage]: Traits.Camouflage,
     [TraitTypeRaw.WeaverOfFates]: Traits.WeaverOfFates,
     [TraitTypeRaw.BigTarget]: Traits.BigTarget,
+    [TraitTypeRaw.ShadowInTheWarp]: Traits.ShadowInTheWarp,
+    [TraitTypeRaw.Synapse]: Traits.Synapse,
 };
 
 const damageTypeToEnum: Record<string, DamageTypes> = {
@@ -45,7 +47,6 @@ const damageTypeToEnum: Record<string, DamageTypes> = {
     [DamageTypeRaw.Chain]: DamageTypes.Chain,
     [DamageTypeRaw.Projectile]: DamageTypes.Projectile,
     [DamageTypeRaw.Flame]: DamageTypes.Flame,
-    [DamageTypeRaw.Gauss]: DamageTypes.Gauss,
     [DamageTypeRaw.Molecular]: DamageTypes.Molecular,
     [DamageTypeRaw.Particle]: DamageTypes.Particle,
     [DamageTypeRaw.Plasma]: DamageTypes.Plasma,
@@ -59,11 +60,11 @@ const damageTypeToEnum: Record<string, DamageTypes> = {
 
 export class StaticDataUtils {
     
-    static readonly unitsData: UnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
+    static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
 
 
-    static convertUnitData(rawData: UnitDataRaw): UnitData {
-        const unitData: UnitData = {
+    static convertUnitData(rawData: UnitDataRaw): IUnitData {
+        const unitData: IUnitData = {
             alliance: rawData.Alliance,
             faction: rawData.Faction,
             factionColor: StaticDataUtils.getFactionColor(rawData.Faction),
@@ -75,6 +76,9 @@ export class StaticDataUtils {
             rangeHits: rawData['Ranged Hits'],
             rangeDistance: rawData.Distance,
             movement: rawData.Movement,
+            forcedSummons: rawData.ForcedSummons,
+            requiredInCampaign: rawData.RequiredInCampaign,
+            legendaryEventPoints: {}
         };
 
         // Calculate damage types based on rawData values
@@ -82,7 +86,13 @@ export class StaticDataUtils {
             unitData.damageTypes |= damageTypeToEnum[rawData['Melee Damage']];
         }
         if (rawData['Ranged Damage']) {
-            unitData.damageTypes |=  damageTypeToEnum[rawData['Melee Damage']];
+            unitData.damageTypes |=  damageTypeToEnum[rawData['Ranged Damage']];
+        }
+        if (rawData['Active Ability']) {
+            unitData.damageTypes |= damageTypeToEnum[rawData['Active Ability']];
+        }
+        if (rawData['Passive Ability']) {
+            unitData.damageTypes |=  damageTypeToEnum[rawData['Passive Ability']];
         }
 
         // Calculate traits based on rawData values
@@ -124,6 +134,8 @@ export class StaticDataUtils {
         case Faction.Dark_Angels:
             return '#93C47D';
         case Faction.Thousand_Sons:
+            return '#A4C2F4';
+        case Faction.Tyranids:
             return '#A4C2F4';
         default:
             return '#ffffff';
