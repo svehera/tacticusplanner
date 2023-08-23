@@ -97,21 +97,25 @@ const LegendaryEventPage = () => {
     const result = uniqBy(cloneDeep([...jainZarSelectedTeamsPoints, ...aunShiSelectedTeamsPoints, ...shadowSunSelectedTeamsPoints]), 'name');
     result.forEach(x => {
         x.points = 0;
+        x.timesSelected = 0;
         jainZarSelectedTeamsPoints.forEach(char => {
             if (x.name === char.name) {
                 x.points += char.points;
+                x.timesSelected += char.timesSelected;
             }
         });
 
         aunShiSelectedTeamsPoints.forEach(char => {
             if (x.name === char.name) {
                 x.points += char.points;
+                x.timesSelected += char.timesSelected;
             }
         });
 
         shadowSunSelectedTeamsPoints.forEach(char => {
             if (x.name === char.name) {
                 x.points += char.points;
+                x.timesSelected += char.timesSelected;
             }
         });
         
