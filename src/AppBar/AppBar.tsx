@@ -8,6 +8,7 @@ import { ChangeEvent, useRef } from 'react';
 import { PersonalDataService } from '../store/personal-data/personal-data.service';
 import { Link } from 'react-router-dom';
 import { Divider, Menu, MenuItem, Tooltip } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const ButtonAppBar = () => {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -74,6 +75,7 @@ const ButtonAppBar = () => {
                     </Button>
                     <div>
                         <Button component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
+                        <Button component={Link} to={'./characters'} color="inherit">Characters</Button>
                         <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>
                         <Button
                             id="basic-button"
@@ -83,7 +85,7 @@ const ButtonAppBar = () => {
                             color="inherit"
                             onClick={handleClick}
                         >
-                            Menu
+                            <MenuIcon/> Menu 
                         </Button>
                         <Menu
                             id="basic-menu"
@@ -114,6 +116,9 @@ const ButtonAppBar = () => {
                             <Divider/>
                             <MenuItem onClick={handleClose}>
                                 <Button component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Button component={Link} to={'./characters'} color="inherit">Characters</Button>
                             </MenuItem>
                             <MenuItem onClick={handleClose}>
                                 <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>

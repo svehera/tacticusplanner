@@ -1,4 +1,4 @@
-﻿import { Alliance, DamageTypeRaw, DamageTypes, Faction, Rarity, Traits, TraitTypeRaw } from './enums';
+﻿import { Alliance, DamageTypeRaw, DamageTypes, Equipment, Faction, Rarity, Traits, TraitTypeRaw } from './enums';
 import { IPersonalCharacterData, LegendaryEvents, Rank } from '../personal-data/personal-data.interfaces';
  
 export type LegendaryEventSection = '(Alpha)' | '(Beta)' | '(Gamma)';
@@ -24,6 +24,9 @@ export interface UnitDataRaw {
     'Trait 4'?: TraitTypeRaw;
     'Active Ability'?: DamageTypeRaw;
     'Passive Ability'?: DamageTypeRaw;
+    'Equipment1': Equipment;
+    'Equipment2': Equipment;
+    'Equipment3': Equipment;
     Number: number;
     ForcedSummons: boolean;
     RequiredInCampaign: boolean;
@@ -36,8 +39,17 @@ export interface IUnitData {
     factionColor: string,
     name: string;
     numberAdded: number;
+    health: number;
+    damage: number;
+    armour: number;
     damageTypes: DamageTypes,
+    meleeDamage: DamageTypes,
+    rangeDamage: DamageTypes,
+    abilitiesDamage: DamageTypes,
     traits: Traits,
+    equipment1: Equipment;
+    equipment2: Equipment;
+    equipment3: Equipment;
     meleeHits: number,
     rangeHits?: number,
     rangeDistance?: number,

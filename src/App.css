@@ -124,4 +124,9 @@
 
 .ag-theme-material {
     --ag-grid-size: 5px;
+    
+    .ag-cell-wrap-text {
+        word-break: unset;
+        white-space: break-spaces;
+    }
 }

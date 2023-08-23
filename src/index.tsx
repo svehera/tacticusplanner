@@ -12,6 +12,7 @@ import WhoYouOwn from './components/who-you-own/who-you-own';
 import LegendaryEventPage from './components/legendary-events/legendary-events-page';
 import About from './components/about/about';
 import Contacts from './components/contacts/contacts';
+import Characters from './components/characters/characters';
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path: 'wyo',
                 element: <WhoYouOwn />,
+            },
+            {
+                path: 'characters',
+                element: <Characters />,
             },
             {
                 path: 'le',
