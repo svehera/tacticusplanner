@@ -157,6 +157,7 @@ const LegendaryEvent = (props: { legendaryEvent: ILegendaryEvent; selectedTeamsC
                 </AccordionSummary>
                 <AccordionDetails>
                     <Button onClick={() => updateSelectedTeams([])}>Clear All</Button>
+                    <Button onClick={() => updateSelectedTeams([])}>Align</Button>
                     <div className="ag-theme-material" style={{ height: '170px', width: '100%' }}>
                         <AgGridReact
                             ref={gridRef2}

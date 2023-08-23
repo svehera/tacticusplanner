@@ -36,7 +36,13 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, }) => {
             field: 'points',
             headerName: 'Points',
             sortable: true,
+            width: 100,
             sort: 'desc'
+        },
+        {
+            field: 'timesSelected',
+            headerName: 'Times Selected',
+            sortable: true,
         }
     ];
     

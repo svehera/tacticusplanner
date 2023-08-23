@@ -75,7 +75,8 @@ export interface ILegendaryEvent {
     getSelectedCharactersPoints(): Array<{
         name: string,
         points: number,
-        rank: Rank
+        rank: Rank,
+        timesSelected: number
     }>
 }
 

@@ -56,13 +56,15 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     public getSelectedCharactersPoints(): Array<{
         name: string,
         points: number,
-        rank: Rank
+        rank: Rank,
+        timesSelected: number
     }> {
         return this.allowedUnits
             .filter(x => (x.leSelection & this.id) === this.id).map(char => ({
                 name: char.name,
                 points: this.getSelectedCharPoints(char.name),
-                rank: char.rank
+                rank: char.rank,
+                timesSelected: this.characterSelectedRestrictions[char.name].length
             }));
         
     }
