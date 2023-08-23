@@ -37,6 +37,7 @@ const About = () => {
 
             <h4>What features it has?</h4>
             <p> &quot;Who You Own&quot; - You enter which characters you have unlocked and what rank they are.</p>
+            <p> &quot;Characters&quot; - View and filter characters stats.</p>
             <p> &quot;Legendary Events&quot; - page contains all future Legendary events with target dates
                 <br/>
                 <ul>
