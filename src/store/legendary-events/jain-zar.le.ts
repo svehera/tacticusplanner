@@ -1,61 +1,22 @@
-﻿import { sortBy, sum, uniqBy } from 'lodash';
-import { ICharacter, ILegendaryEvent, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
+﻿import { ICharacter, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
 import { Alliance, DamageTypes, Faction, Traits } from '../static-data/enums';
 import { LegendaryEvents } from '../personal-data/personal-data.interfaces';
 import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
-
+import { LETrack } from './base.le.track';
 
 export class JainZarLegendaryEvent extends LegendaryEventBase {
-    readonly id = LegendaryEvents.JainZar;
-    selectedTeams: ITableRow[];
-
-    alphaTrack: ILegendaryEventTrack;
-    betaTrack: ILegendaryEventTrack;
-    gammaTrack: ILegendaryEventTrack;
-
     constructor(unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
-        super();
-        this.alphaTrack = this.getAlphaTrack(unitsData);
-        this.betaTrack = this.getBetaTrack(unitsData);
-        this.gammaTrack = this.getGammaTrack(unitsData);
-        this.selectedTeams = selectedTeams;
+        super(LegendaryEvents.JainZar, unitsData, selectedTeams);
     }
 
-
-    getAllowedUnits(): Array<ICharacter> {
-        const alpha = this.alphaTrack.getAllowedUnits();
-        const beta = this.betaTrack.getAllowedUnits();
-        const gamma = this.gammaTrack.getAllowedUnits();
-        
-        const allowedCharacters = sortBy(uniqBy([...alpha, ...beta, ...gamma], 'name'), 'name');
-        this.populateLEPoints(allowedCharacters);
-        return allowedCharacters;
-    }
-    
-    private populateLEPoints(characters: ICharacter[]): void {
-        characters.forEach(character => {
-            const alphaPoints = this.alphaTrack.unitsRestrictions
-                .filter(x => x.units.some(u => u.name === character.name))
-                .map(x => x.points);
-            
-            const betaPoints = this.betaTrack.unitsRestrictions
-                .filter(x => x.units.some(u => u.name === character.name))
-                .map(x => x.points);
-
-            const gammaPoints = this.gammaTrack.unitsRestrictions
-                .filter(x => x.units.some(u => u.name === character.name))
-                .map(x => x.points);
-
-            character.legendaryEventPoints[this.id] = sum([...alphaPoints, ...betaPoints, ...gammaPoints]);
-        });
-    }
-
-    private getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const xenosOnly = filter(unitsData).byAlliance(Alliance.Xenos);
-        return {
-            name: 'Alpha (Xenos only)',
-            unitsRestrictions: [
+        return new LETrack(
+            'Alpha (Xenos only)',
+            42,
+            xenosOnly,
+            [
                 {
                     name: 'Physical',
                     points: 100,
@@ -81,18 +42,17 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
                     points: 60,
                     units: filter(xenosOnly).byNoSummons(),
                 },
-            ],
-            getAllowedUnits: function (): Array<ICharacter> {
-                return sortBy(uniqBy(this.unitsRestrictions.flatMap(r => r.units), 'name'), 'name');
-            }
-        };
+            ]
+        );
     }
 
-    private getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const imperialOnly = filter(unitsData).byAlliance(Alliance.Imperial);
-        return {
-            name: 'Beta (Imperial only)',
-            unitsRestrictions: [
+        return new LETrack(
+            'Beta (Imperial only)',
+            40,
+            imperialOnly, 
+            [
                 {
                     name: 'Power',
                     points: 95,
@@ -106,7 +66,7 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Blast',
                     points: 50,
-                    units:  filter(imperialOnly).byDamageType(DamageTypes.Blast, true),
+                    units: filter(imperialOnly).byDamageType(DamageTypes.Blast, true),
                 },
                 {
                     name: 'Max 2 hits',
@@ -118,18 +78,17 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
                     points: 60,
                     units: filter(imperialOnly).byNoSummons(),
                 },
-            ],
-            getAllowedUnits: function (): Array<ICharacter> {
-                return sortBy(uniqBy(this.unitsRestrictions.flatMap(r => r.units), 'name'), 'name');
-            }
-        };
+            ]
+        );
     }
 
-    private getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const noOrks = filter(unitsData).byFaction(Faction.Orks, true);
-        return {
-            name: 'Gamma (No Orks)',
-            unitsRestrictions: [
+        return new LETrack(
+            'Gamma (No Orks)',
+            29,
+            noOrks,
+            [
                 {
                     name: 'No Mech',
                     points: 45,
@@ -143,7 +102,7 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Bolter',
                     points: 95,
-                    units:  filter(noOrks).byDamageType(DamageTypes.Bolter),
+                    units: filter(noOrks).byDamageType(DamageTypes.Bolter),
                 },
                 {
                     name: 'No Flying',
@@ -155,11 +114,8 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
                     points: 90,
                     units: filter(noOrks).byMinHits(4),
                 },
-            ],
-            getAllowedUnits: function (): Array<ICharacter> {
-                return sortBy(uniqBy(this.unitsRestrictions.flatMap(r => r.units), 'name'), 'name');
-            }
-        };
+            ]
+        );
     }
 
 }

@@ -1,5 +1,8 @@
 ﻿import { Alliance, DamageTypeRaw, DamageTypes, Faction, Rarity, Traits, TraitTypeRaw } from './enums';
 import { IPersonalCharacterData, LegendaryEvents, Rank } from '../personal-data/personal-data.interfaces';
+ 
+export type LegendaryEventSection = '(Alpha)' | '(Beta)' | '(Gamma)';
+
 
 export interface UnitDataRaw {
     Name: string;
@@ -55,8 +58,8 @@ export interface ILegendaryEvent {
     gammaTrack: ILegendaryEventTrack;
     
     selectedTeams: ITableRow[];
+    allowedUnits: Array<ICharacter>;
 
-    getAllowedUnits(): Array<ICharacter>;
     getSelectedCharactersPoints(): Array<{
         name: string,
         points: number,
@@ -65,9 +68,14 @@ export interface ILegendaryEvent {
 }
 
 export interface ILegendaryEventTrack {
+    section: LegendaryEventSection;
     name: string;
-    getAllowedUnits:() => ICharacter[];
+    killPoints: number;
+    allowedUnits: ICharacter[];
     unitsRestrictions: Array<ILegendaryEventTrackRestriction>;
+    
+    getCharacterPoints(char: ICharacter): number;
+    getRestrictionPoints (name: string): number
 }
 
 export interface ILegendaryEventTrackRestriction {

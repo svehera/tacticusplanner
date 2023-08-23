@@ -1,60 +1,23 @@
-﻿import { sortBy, sum, uniqBy } from 'lodash';
-import { ICharacter, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
+﻿import { ICharacter, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
 import { Alliance, DamageTypes, Faction, Traits } from '../static-data/enums';
 import { LegendaryEvents } from '../personal-data/personal-data.interfaces';
 import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
+import { LETrack } from './base.le.track';
 
 export class AunShiLegendaryEvent extends LegendaryEventBase {
-    readonly id = LegendaryEvents.AunShi;
-    selectedTeams: ITableRow[];
-
-    alphaTrack: ILegendaryEventTrack;
-    betaTrack: ILegendaryEventTrack;
-    gammaTrack: ILegendaryEventTrack;
 
     constructor(unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
-        super();
-        this.alphaTrack = this.getAlphaTrack(unitsData);
-        this.betaTrack = this.getBetaTrack(unitsData);
-        this.gammaTrack = this.getGammaTrack(unitsData);
-        this.selectedTeams = selectedTeams;
+        super(LegendaryEvents.AunShi, unitsData, selectedTeams);
     }
 
-
-    getAllowedUnits(): Array<ICharacter> {
-        const alpha = this.alphaTrack.getAllowedUnits();
-        const beta = this.betaTrack.getAllowedUnits();
-        const gamma = this.gammaTrack.getAllowedUnits();
-        
-        const allowedCharacters = sortBy(uniqBy([...alpha, ...beta, ...gamma], 'name'), 'name');
-        this.populateLEPoints(allowedCharacters);
-        return allowedCharacters;
-    }
-    
-    private populateLEPoints(characters: ICharacter[]): void {
-        characters.forEach(character => {
-            const alphaPoints = this.alphaTrack.unitsRestrictions
-                .filter(x => x.units.some(u => u.name === character.name))
-                .map(x => x.points);
-            
-            const betaPoints = this.betaTrack.unitsRestrictions
-                .filter(x => x.units.some(u => u.name === character.name))
-                .map(x => x.points);
-
-            const gammaPoints = this.gammaTrack.unitsRestrictions
-                .filter(x => x.units.some(u => u.name === character.name))
-                .map(x => x.points);
-
-            character.legendaryEventPoints[this.id] = sum([...alphaPoints, ...betaPoints, ...gammaPoints]);
-        });
-    }
-
-    private getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const noOrks = filter(unitsData).byFaction(Faction.Orks, true);
-        return {
-            name: 'Alpha (No Orks)',
-            unitsRestrictions: [
+        return new LETrack(
+            'Alpha (No Orks)',
+            29,
+            noOrks,
+            [
                 {
                     name: 'Piercing',
                     points: 115,
@@ -81,17 +44,16 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     units: filter(noOrks).byMinHits(3),
                 },
             ],
-            getAllowedUnits: function (): Array<ICharacter> {
-                return sortBy(uniqBy(this.unitsRestrictions.flatMap(r => r.units), 'name'), 'name');
-            }
-        };
+        );
     }
 
-    private getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const noImperials = filter(unitsData).byAlliance(Alliance.Imperial, true);
-        return {
-            name: 'Beta (No Imperials)',
-            unitsRestrictions: [
+        return new LETrack(
+            'Beta (No Imperials)',
+            53,
+            noImperials,
+            [
                 {
                     name: 'Mechanical',
                     points: 105,
@@ -117,18 +79,17 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     points: 100,
                     units: filter(noImperials).byDamageType(DamageTypes.Physical),
                 },
-            ],
-            getAllowedUnits: function (): Array<ICharacter> {
-                return sortBy(uniqBy(this.unitsRestrictions.flatMap(r => r.units), 'name'), 'name');
-            }
-        };
+            ]
+        );
     }
 
-    private getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const noChaos = filter(unitsData).byAlliance(Alliance.Chaos, true);
-        return {
-            name: 'Gamma (No Chaos)',
-            unitsRestrictions: [
+        return new LETrack(
+            'Gamma (No Chaos)',
+            40,
+            noChaos,
+            [
                 {
                     name: 'Physical',
                     points: 120,
@@ -154,11 +115,8 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     points: 50,
                     units:  filter(noChaos).byDamageType(DamageTypes.Power, true),
                 },
-            ],
-            getAllowedUnits: function (): Array<ICharacter> {
-                return sortBy(uniqBy(this.unitsRestrictions.flatMap(r => r.units), 'name'), 'name');
-            }
-        };
+            ]
+        ); 
     }
 
 }

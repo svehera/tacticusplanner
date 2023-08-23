@@ -1,67 +1,105 @@
-﻿import { ICharacter, ILegendaryEvent, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
-import { cloneDeep } from 'lodash';
+﻿import {
+    ICharacter,
+    ILegendaryEvent,
+    ILegendaryEventTrack,
+    ITableRow,
+    LegendaryEventSection
+} from '../static-data/interfaces';
+import { cloneDeep, sortBy, sum, uniqBy } from 'lodash';
 import { LegendaryEvents, Rank } from '../personal-data/personal-data.interfaces';
 
 export abstract class LegendaryEventBase implements ILegendaryEvent {
+    alphaTrack: ILegendaryEventTrack;
+    betaTrack: ILegendaryEventTrack;
+    gammaTrack: ILegendaryEventTrack;
+
+    selectedTeams: ITableRow[];
+
+    characterSelectedRestrictions: Record<string, string[]> = {};
+
+    readonly id: LegendaryEvents;
+
+    protected abstract getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
+
+    protected abstract getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
+
+    protected abstract getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
+
+    protected constructor(id: LegendaryEvents, unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
+        this.id = id;
+        this.selectedTeams = selectedTeams;
+
+        this.alphaTrack = this.getAlphaTrack(unitsData);
+        this.betaTrack = this.getBetaTrack(unitsData);
+        this.gammaTrack = this.getGammaTrack(unitsData);
+
+        this.populateLEPoints(this.allowedUnits);
+
+        this.allowedUnits.forEach(char => {
+            const selected: string[] = [];
+            this.selectedTeams.forEach(row => {
+                for (const rowKey in row) {
+                    const value = row[rowKey];
+                    if (typeof value !== 'string' && value.name === char.name) {
+                        selected.push(rowKey);
+                    }
+                }
+            });
+            this.characterSelectedRestrictions[char.name] = selected;
+        });
+    }
+
+    get allowedUnits(): Array<ICharacter> {
+        return sortBy(uniqBy([...this.alphaTrack.allowedUnits, ...this.betaTrack.allowedUnits, ...this.gammaTrack.allowedUnits], 'name'), 'name');
+    }
+
     public getSelectedCharactersPoints(): Array<{
         name: string,
         points: number,
         rank: Rank
     }> {
-        const legendaryEventPointsA = this.alphaTrack.unitsRestrictions.map(x => ({
-            name: x.name + '(Alpha)',
-            points: x.points
-        }));
-        const legendaryEventPointsB = this.betaTrack.unitsRestrictions.map(x => ({
-            name: x.name + '(Beta)',
-            points: x.points
-        }));
-        const legendaryEventPointsG = this.gammaTrack.unitsRestrictions.map(x => ({
-            name: x.name + '(Gamma)',
-            points: x.points
-        }));
+        return this.allowedUnits
+            .filter(x => (x.leSelection & this.id) === this.id).map(char => ({
+                name: char.name,
+                points: this.getSelectedCharPoints(char.name),
+                rank: char.rank
+            }));
         
-        const points = [...legendaryEventPointsA, ...legendaryEventPointsB, ...legendaryEventPointsG];
-
-        const selectedChars = this.getAllowedUnits().filter(x => (x.leSelection & this.id) === this.id).map(char => ({
-            name: char.name,
-            points: 0,
-            rank: char.rank
-        }));
-
-        const t = cloneDeep(this.selectedTeams).map(row => {
-            const newRow = { ...row };
-            for (const rowKey in newRow) {
-                const value = newRow[rowKey];
-                if (typeof value !== 'string') {
-                    newRow[rowKey] = {
-                        name: value.name,
-                        points: points.find(x => x.name === rowKey)?.points ?? 0
-                    } as any;
-                }
-            }
-            return newRow;
-        }) as Array<Record<string, string | { name: string, points: number }>>;
-
-        selectedChars.forEach(char => {
-            for (const row of t) {
-                for (const rowKey in row) {
-                    const value = row[rowKey];
-                    if (typeof value !== 'string' && value.name === char.name) {
-                        char.points += value.points;
-                    }
-                }
-            }
-        });
-        return selectedChars;
     }
 
+    private getSelectedCharPoints(name: string): number {
+        if (name=== 'Makhotep'){
+            // eslint-disable-next-line no-debugger
+            debugger;
+        }
+        const selectedRestrictions = this.characterSelectedRestrictions[name];
+        const alphaTrack = this.getSectionPoints(selectedRestrictions, this.alphaTrack);
+        const betaTrack = this.getSectionPoints(selectedRestrictions, this.betaTrack);
+        const gammaTrack = this.getSectionPoints(selectedRestrictions, this.gammaTrack);
 
-    abstract alphaTrack: ILegendaryEventTrack;
-    abstract betaTrack: ILegendaryEventTrack;
-    abstract gammaTrack: ILegendaryEventTrack;
-    abstract id: LegendaryEvents;
-    abstract selectedTeams: ITableRow[];
+        return alphaTrack + betaTrack + gammaTrack;
+    }
 
-    abstract getAllowedUnits(): Array<ICharacter>;
+    private getSectionPoints(selectedRestrictions: string[], track: ILegendaryEventTrack): number {
+        if (!selectedRestrictions.filter(x => x.includes(track.section)).length) {
+            return 0;
+        }
+
+        return sum(selectedRestrictions
+            .filter(x => x.includes(track.section))
+            .map(x => x.replace(track.section, ''))
+            .map(x => track.getRestrictionPoints(x))) + track.killPoints;
+    }
+
+    protected populateLEPoints(characters: ICharacter[]): void {
+        characters.forEach(character => {
+            const alphaPoints = this.alphaTrack.getCharacterPoints(character);
+
+            const betaPoints = this.betaTrack.getCharacterPoints(character);
+
+            const gammaPoints = this.gammaTrack.getCharacterPoints(character);
+
+            character.legendaryEventPoints[this.id] = sum([alphaPoints, betaPoints, gammaPoints]);
+        });
+    }
 }
