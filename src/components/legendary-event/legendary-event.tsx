@@ -5,7 +5,7 @@ import {
     ILegendaryEvent,
     ILegendaryEventTrack,
     ILegendaryEventTrackRestriction,
-    ITableRow
+    ITableRow, LegendaryEventSection
 } from '../../store/static-data/interfaces';
 import {
     CellClassParams,
@@ -22,8 +22,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
 import { ViewSettingsContext } from '../../contexts/view-settings.context';
 
-type LegendaryEventSection = '(Alpha)' | '(Beta)' | '(Gamma)';
-
 const LegendaryEvent = (props: { legendaryEvent: ILegendaryEvent; selectedTeamsChange: (selectedTeams: Array<ITableRow>) => void; }) => {
     const gridRef = useRef<AgGridReact>(null);
     const gridRef2 = useRef<AgGridReact>(null);
@@ -35,21 +33,21 @@ const LegendaryEvent = (props: { legendaryEvent: ILegendaryEvent; selectedTeamsC
 
     const [columnsDefs] = useState<Array<ColGroupDef<ICharacter | string> & { section?: LegendaryEventSection }>>([
         {
-            headerName: legendaryEvent.alphaTrack.name,
+            headerName: legendaryEvent.alphaTrack.name + ' - ' + legendaryEvent.alphaTrack.killPoints,
             headerClass: 'alpha',
             children: getSectionColumns(legendaryEvent.alphaTrack.unitsRestrictions, '(Alpha)'),
             openByDefault: true,
             section: '(Alpha)'
         },
         {
-            headerName: legendaryEvent.betaTrack.name,
+            headerName: legendaryEvent.betaTrack.name + ' - ' + legendaryEvent.betaTrack.killPoints,
             headerClass: 'beta',
             children: getSectionColumns(legendaryEvent.betaTrack.unitsRestrictions, '(Beta)'),
             openByDefault: true,
             section: '(Beta)'
         },
         {
-            headerName: legendaryEvent.gammaTrack.name,
+            headerName: legendaryEvent.gammaTrack.name + ' - ' + legendaryEvent.gammaTrack.killPoints,
             headerClass: 'gamma',
             children: getSectionColumns(legendaryEvent.gammaTrack.unitsRestrictions, '(Gamma)'),
             openByDefault: true,
@@ -191,8 +189,8 @@ const LegendaryEvent = (props: { legendaryEvent: ILegendaryEvent; selectedTeamsC
 function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], suffix: LegendaryEventSection): Array<ColDef> {
     return unitsRestrictions.map((u, index) => ({
         field: u.name + suffix,
-        headerName: u.name + ' - ' + u.points,
-        headerTooltip: u.name + ' - ' + u.points,
+        headerName: `(${u.points}) ${u.name}`,
+        headerTooltip:`(${u.points}) ${u.name}`,
         valueFormatter: (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
         cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
         tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rank[params.value?.rank ?? 0],
@@ -202,7 +200,7 @@ function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[],
 
 function getRows(legendaryEvent: ILegendaryEvent, unlockedOnly: boolean, usedInCampaigns: boolean): Array<ITableRow> {
     const rows: Array<ITableRow> = [];
-    const allowedUnits = legendaryEvent.getAllowedUnits().filter(char => (unlockedOnly ? char.unlocked : true) && (usedInCampaigns ? char.requiredInCampaign : true));
+    const allowedUnits = legendaryEvent.allowedUnits.filter(char => (unlockedOnly ? char.unlocked : true) && (usedInCampaigns ? char.requiredInCampaign : true));
 
     allowedUnits.forEach(unit => {
         const row: ITableRow = {};

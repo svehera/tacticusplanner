@@ -1,60 +1,23 @@
-﻿import { sortBy, sum, uniqBy } from 'lodash';
-import { ICharacter, ILegendaryEvent, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
+﻿import { ICharacter, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
 import { Alliance, DamageTypes, Faction, Traits } from '../static-data/enums';
 import { LegendaryEvents } from '../personal-data/personal-data.interfaces';
 import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
+import { LETrack } from './base.le.track';
 
-export class ShadowSunLegendaryEvent  extends LegendaryEventBase {
-    readonly id = LegendaryEvents.ShadowSun;
-    selectedTeams: ITableRow[];
-
-    alphaTrack: ILegendaryEventTrack;
-    betaTrack: ILegendaryEventTrack;
-    gammaTrack: ILegendaryEventTrack;
+export class ShadowSunLegendaryEvent extends LegendaryEventBase {
 
     constructor(unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
-        super();
-        this.alphaTrack = this.getAlphaTrack(unitsData);
-        this.betaTrack = this.getBetaTrack(unitsData);
-        this.gammaTrack = this.getGammaTrack(unitsData);
-        this.selectedTeams = selectedTeams;
+        super(LegendaryEvents.ShadowSun, unitsData, selectedTeams);
     }
 
-
-    getAllowedUnits(): Array<ICharacter> {
-        const alpha = this.alphaTrack.getAllowedUnits();
-        const beta = this.betaTrack.getAllowedUnits();
-        const gamma = this.gammaTrack.getAllowedUnits();
-        
-        const allowedCharacters = sortBy(uniqBy([...alpha, ...beta, ...gamma], 'name'), 'name');
-        this.populateLEPoints(allowedCharacters);
-        return allowedCharacters;
-    }
-    
-    private populateLEPoints(characters: ICharacter[]): void {
-        characters.forEach(character => {
-            const alphaPoints = this.alphaTrack.unitsRestrictions
-                .filter(x => x.units.some(u => u.name === character.name))
-                .map(x => x.points);
-            
-            const betaPoints = this.betaTrack.unitsRestrictions
-                .filter(x => x.units.some(u => u.name === character.name))
-                .map(x => x.points);
-
-            const gammaPoints = this.gammaTrack.unitsRestrictions
-                .filter(x => x.units.some(u => u.name === character.name))
-                .map(x => x.points);
-
-            character.legendaryEventPoints[this.id] = sum([...alphaPoints, ...betaPoints, ...gammaPoints]);
-        });
-    }
-
-    private getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const noNecrons = filter(unitsData).byFaction(Faction.Necrons, true);
-        return {
-            name: 'Alpha (No Necrons)',
-            unitsRestrictions: [
+        return new LETrack(
+            'Alpha (No Necrons)',
+            18,
+            noNecrons,
+            [
                 {
                     name: 'Big Target',
                     points: 115,
@@ -81,17 +44,16 @@ export class ShadowSunLegendaryEvent  extends LegendaryEventBase {
                     units: filter(noNecrons).byAttackType('meleeOnly'),
                 },
             ],
-            getAllowedUnits: function (): Array<ICharacter> {
-                return sortBy(uniqBy(this.unitsRestrictions.flatMap(r => r.units), 'name'), 'name');
-            }
-        };
+        );
     }
 
-    private getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const noTyranids = filter(unitsData).byFaction(Faction.Tyranids, true);
-        return {
-            name: 'Beta (No Tyranids)',
-            unitsRestrictions: [
+        return new LETrack(
+            'Beta (No Tyranids)',
+            19,
+            noTyranids,
+            [
                 {
                     name: 'Mechanical',
                     points: 90,
@@ -117,18 +79,17 @@ export class ShadowSunLegendaryEvent  extends LegendaryEventBase {
                     points: 65,
                     units: filter(noTyranids).byNoSummons(),
                 },
-            ],
-            getAllowedUnits: function (): Array<ICharacter> {
-                return sortBy(uniqBy(this.unitsRestrictions.flatMap(r => r.units), 'name'), 'name');
-            }
-        };
+            ]
+        );
     }
 
-    private getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const noImperials = filter(unitsData).byAlliance(Alliance.Imperial, true);
-        return {
-            name: 'Gamma (No Imperials)',
-            unitsRestrictions: [
+        return new LETrack(
+            'Gamma (No Imperials)',
+            35,
+            noImperials,
+            [
                 {
                     name: 'No Piercing',
                     points: 40,
@@ -154,11 +115,8 @@ export class ShadowSunLegendaryEvent  extends LegendaryEventBase {
                     points: 120,
                     units:  filter(noImperials).byFaction(Faction.Black_Legion),
                 },
-            ],
-            getAllowedUnits: function (): Array<ICharacter> {
-                return sortBy(uniqBy(this.unitsRestrictions.flatMap(r => r.units), 'name'), 'name');
-            }
-        };
+            ]
+        );
     }
 
 }

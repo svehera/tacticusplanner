@@ -8,8 +8,6 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, }) => {
     const { legendaryEvent } = props;
     
     const gridRef = useRef<AgGridReact>(null);
-
-    const characters: ICharacter[] = legendaryEvent.getAllowedUnits();
     
     const columnsDef: Array<ColDef> = [
         {
@@ -51,7 +49,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, }) => {
                 <AgGridReact
                     ref={gridRef}
                     tooltipShowDelay={100}
-                    rowData={characters}
+                    rowData={legendaryEvent.allowedUnits}
                     columnDefs={ [
                         {
                             headerName: 'Best characters overall',
@@ -65,7 +63,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, }) => {
                 <AgGridReact
                     ref={gridRef}
                     tooltipShowDelay={100}
-                    rowData={characters.filter(x => x.unlocked)}
+                    rowData={legendaryEvent.allowedUnits.filter(x => x.unlocked)}
                     columnDefs={[
 
                         {
