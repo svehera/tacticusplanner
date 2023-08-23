@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/tacticusplanner/static/css/main.174e3e95.css",
-    "main.js": "/tacticusplanner/static/js/main.c3eee5fc.js",
+    "main.js": "/tacticusplanner/static/js/main.252d3603.js",
     "static/js/787.5e39a07b.chunk.js": "/tacticusplanner/static/js/787.5e39a07b.chunk.js",
     "index.html": "/tacticusplanner/index.html",
     "main.174e3e95.css.map": "/tacticusplanner/static/css/main.174e3e95.css.map",
-    "main.c3eee5fc.js.map": "/tacticusplanner/static/js/main.c3eee5fc.js.map",
+    "main.252d3603.js.map": "/tacticusplanner/static/js/main.252d3603.js.map",
     "787.5e39a07b.chunk.js.map": "/tacticusplanner/static/js/787.5e39a07b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.174e3e95.css",
-    "static/js/main.c3eee5fc.js"
+    "static/js/main.252d3603.js"
   ]
 }
