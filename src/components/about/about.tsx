@@ -5,7 +5,7 @@ const About = () => {
 
     return (
         <div className="about-root">
-            <h3 style={{ textAlign: 'center' }}>Plan your success in Tacticus</h3>
+            <h3 style={{ textAlign: 'center' }}>Plan your success in Tacticus, No more Google Sh**t</h3>
 
             <div>
                 <p>
