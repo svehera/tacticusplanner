@@ -70,8 +70,17 @@ export class StaticDataUtils {
             factionColor: StaticDataUtils.getFactionColor(rawData.Faction),
             name: rawData.Name,
             numberAdded: rawData.Number,
+            health: rawData.Health,
+            damage: rawData.Damage,
+            armour: rawData.Armour,
             damageTypes: DamageTypes.None, // You need to calculate this based on rawData values
             traits: Traits.None, // You need to calculate this based on rawData values
+            meleeDamage: DamageTypes.None,
+            rangeDamage: DamageTypes.None,
+            abilitiesDamage: DamageTypes.None,
+            equipment1: rawData.Equipment1,
+            equipment2: rawData.Equipment2,
+            equipment3: rawData.Equipment3,
             meleeHits: rawData['Melee Hits'],
             rangeHits: rawData['Ranged Hits'],
             rangeDistance: rawData.Distance,
@@ -84,15 +93,19 @@ export class StaticDataUtils {
         // Calculate damage types based on rawData values
         if (rawData['Melee Damage']) {
             unitData.damageTypes |= damageTypeToEnum[rawData['Melee Damage']];
+            unitData.meleeDamage = damageTypeToEnum[rawData['Melee Damage']];
         }
         if (rawData['Ranged Damage']) {
             unitData.damageTypes |=  damageTypeToEnum[rawData['Ranged Damage']];
+            unitData.rangeDamage = damageTypeToEnum[rawData['Ranged Damage']];
         }
         if (rawData['Active Ability']) {
             unitData.damageTypes |= damageTypeToEnum[rawData['Active Ability']];
+            unitData.abilitiesDamage |= damageTypeToEnum[rawData['Active Ability']];
         }
         if (rawData['Passive Ability']) {
             unitData.damageTypes |=  damageTypeToEnum[rawData['Passive Ability']];
+            unitData.abilitiesDamage |=  damageTypeToEnum[rawData['Passive Ability']];
         }
 
         // Calculate traits based on rawData values

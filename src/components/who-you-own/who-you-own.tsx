@@ -4,13 +4,10 @@ import { ColDef, ColGroupDef, RowStyle, ValueFormatterParams } from 'ag-grid-com
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
 import { ICharacter } from '../../store/static-data/interfaces';
 import GlobalStoreService from '../../store/global-store.service';
-import { DamageTypes, Traits } from '../../store/static-data/enums';
 import { PersonalDataService } from '../../store/personal-data/personal-data.service';
 import RankSelectorCell from '../rank-selector-cell/rank-selector-cell';
 import UnlockedCheckboxCell from '../unlocked-checkbox-cell/unlocked-checkbox-cell';
 import Typography from '@mui/material/Typography';
-
-type EnumLike<T> = Record<string, T>
 
 const WhoYouOwn = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
@@ -73,56 +70,6 @@ const WhoYouOwn = () => {
                 }
             ]
         },
-        // {
-        //     headerName: 'Stats details',
-        //     openByDefault: false,
-        //     children: [
-        //         {
-        //             field: 'damageTypes',
-        //             headerName: 'Damage Types',
-        //             valueFormatter: convertEnumValuesToString(DamageTypes as unknown as EnumLike<number>)
-        //         },
-        //         {
-        //             field: 'traits',
-        //             headerName: 'Traits',
-        //             valueFormatter: convertEnumValuesToString(Traits as unknown as EnumLike<number>),
-        //             columnGroupShow: 'open',
-        //         },
-        //         { 
-        //             field: 'meleeHits',
-        //             headerName: 'Melee Hits', 
-        //             columnGroupShow: 'open', 
-        //             width: 120, 
-        //             minWidth: 120, 
-        //             maxWidth: 120, 
-        //         },
-        //         { 
-        //             field: 'rangeHits', 
-        //             headerName: 'Range Hits', 
-        //             columnGroupShow: 'open', 
-        //             width: 120,
-        //             minWidth: 120,
-        //             maxWidth: 120,
-        //         },
-        //         { 
-        //             field: 'rangeDistance', 
-        //             headerName: 'Range', 
-        //             columnGroupShow: 'open',
-        //             width: 120,
-        //             minWidth: 120,
-        //             maxWidth: 120,
-        //         },
-        //         { 
-        //             field: 'movement', 
-        //             headerName: 'Movement', 
-        //             columnGroupShow: 'open',
-        //             width: 120,
-        //             minWidth: 120,
-        //             maxWidth: 120,
-        //         }
-        //     ],
-        // }
-
     ]);
 
     const [rowsData] = useState(GlobalStoreService.characters);
@@ -163,24 +110,4 @@ const WhoYouOwn = () => {
         </div>
     );
 };
-
-function convertEnumValuesToString (
-    damageTypesEnum: EnumLike<number>
-) {
-    return  (
-        params: ValueFormatterParams<ICharacter, number>
-    ): string => {
-        const typeNames: string[] = [];
-        const value = params.value ?? 0;
-
-        for (const key in damageTypesEnum) {
-            if (typeof damageTypesEnum[key] === 'number' && value & damageTypesEnum[key]) {
-                typeNames.push(key);
-            }
-        }
-
-        return typeNames.join(', ');
-    };
-}
-
 export default WhoYouOwn;
