@@ -1,4 +1,4 @@
-﻿import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+﻿import React, { useContext, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import {
     ICharacter,
@@ -15,14 +15,23 @@ import {
     ITooltipParams,
     ValueFormatterParams
 } from 'ag-grid-community';
-import { LegendaryEvents, Rank } from '../../store/personal-data/personal-data.interfaces';
-import { Accordion, AccordionDetails, AccordionSummary, Button, Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import { Rank } from '../../store/personal-data/personal-data.interfaces';
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Button
+} from '@mui/material';
 import PointsTable from '../points-table/points-table';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
 import { ViewSettingsContext } from '../../contexts/view-settings.context';
+import { sortBy } from 'lodash';
 
-const LegendaryEvent = (props: { legendaryEvent: ILegendaryEvent; selectedTeamsChange: (selectedTeams: Array<ITableRow>) => void; }) => {
+const LegendaryEvent = (props: {
+    legendaryEvent: ILegendaryEvent;
+    selectedTeamsChange: (selectedTeams: Array<ITableRow>) => void;
+}) => {
     const gridRef = useRef<AgGridReact>(null);
     const gridRef2 = useRef<AgGridReact>(null);
     const viewPreferences = useContext(ViewSettingsContext);
@@ -60,7 +69,7 @@ const LegendaryEvent = (props: { legendaryEvent: ILegendaryEvent; selectedTeamsC
     const teamSize = 5;
 
     function updateSelectedChars(columnId: string, selectedChar: ICharacter) {
-        if(!selectedTeams.length) {
+        if (!selectedTeams.length) {
             selectedTeams.push(...[{}, {}, {}, {}, {}]);
         }
         const currentTeam = selectedTeams.map(row => row[columnId]);
@@ -76,10 +85,81 @@ const LegendaryEvent = (props: { legendaryEvent: ILegendaryEvent; selectedTeamsC
             }
         }
     }
-    
+
     const updateSelectedTeams = (selected: ITableRow[]) => {
         setSelectedTeams(selected);
-        selectedTeamsChange(selectedTeams);
+        selectedTeamsChange(selected);
+    };
+
+    const alignChars = () => {
+        const columnNames = Object.keys(selectedTeams[0]);
+
+        // Create an object for each column, initially empty
+        const columns: Record<string, Array<ICharacter | string | undefined>> = columnNames.reduce((columns, columnName) => {
+            columns[columnName] = [];
+            return columns;
+        }, {} as Record<string, Array<ICharacter | string | undefined>>);
+
+        // Populate the columns with data
+        selectedTeams.forEach(row => {
+            columnNames.forEach(columnName => {
+                columns[columnName].push(row[columnName]);
+            });
+        });
+
+        const selectedChars = legendaryEvent.allowedUnits.filter(x => (x.leSelection & legendaryEvent.id) === legendaryEvent.id);
+        const alignedSelectedTeams: Array<ITableRow> = [];
+        selectedChars.forEach(char => {
+            const newRow: ITableRow = {};
+
+            for (const columnsKey in columns) {
+                const selectedTeam = columns[columnsKey];
+                if (selectedTeam.some(x => typeof x !== 'string' && x?.name === char.name)) {
+                    newRow[columnsKey] = char;
+                } else {
+                    newRow[columnsKey] = '';
+                }
+            }
+            alignedSelectedTeams.push(newRow);
+        });
+        updateSelectedTeams(alignedSelectedTeams);
+
+        // Extract column names from the object properties
+
+        // Now you have an object where each key is a column name and the value is an array of column values
+        console.log(alignedSelectedTeams);
+    };
+
+    const compactChars = () => {
+        const columnNames = Object.keys(selectedTeams[0]);
+
+        // Create an object for each column, initially empty
+        const columns: Record<string, Array<ICharacter | string | undefined>> = columnNames.reduce((columns, columnName) => {
+            columns[columnName] = [];
+            return columns;
+        }, {} as Record<string, Array<ICharacter | string | undefined>>);
+
+        // Populate the columns with data
+        selectedTeams.forEach(row => {
+            columnNames.forEach(columnName => {
+                columns[columnName].push(row[columnName]);
+            });
+        });
+
+        for (const columnsKey in columns) {
+            columns[columnsKey] = sortBy(columns[columnsKey], 'name');
+        }
+
+        const compactChars: ITableRow[] = [{}, {}, {}, {}, {}];
+
+        Object.entries(columns).forEach(([key, value]) => {
+            for (let i = 0; i < teamSize; i++) {
+                compactChars[i][key] = value[i] ?? '';
+
+            }
+        });
+
+        updateSelectedTeams(compactChars);
     };
 
     const handleMainTableCellClick = (event: CellClickedEvent) => {
@@ -157,7 +237,8 @@ const LegendaryEvent = (props: { legendaryEvent: ILegendaryEvent; selectedTeamsC
                 </AccordionSummary>
                 <AccordionDetails>
                     <Button onClick={() => updateSelectedTeams([])}>Clear All</Button>
-                    <Button onClick={() => updateSelectedTeams([])}>Align</Button>
+                    <Button onClick={alignChars}>Align Chars</Button>
+                    <Button onClick={compactChars}>Compact</Button>
                     <div className="ag-theme-material" style={{ height: '170px', width: '100%' }}>
                         <AgGridReact
                             ref={gridRef2}
@@ -191,7 +272,7 @@ function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[],
     return unitsRestrictions.map((u, index) => ({
         field: u.name + suffix,
         headerName: `(${u.points}) ${u.name}`,
-        headerTooltip:`(${u.points}) ${u.name}`,
+        headerTooltip: `(${u.points}) ${u.name}`,
         valueFormatter: (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
         cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
         tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rank[params.value?.rank ?? 0],

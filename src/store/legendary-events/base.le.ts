@@ -70,10 +70,6 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     }
 
     private getSelectedCharPoints(name: string): number {
-        if (name=== 'Makhotep'){
-            // eslint-disable-next-line no-debugger
-            debugger;
-        }
         const selectedRestrictions = this.characterSelectedRestrictions[name];
         const alphaTrack = this.getSectionPoints(selectedRestrictions, this.alphaTrack);
         const betaTrack = this.getSectionPoints(selectedRestrictions, this.betaTrack);
