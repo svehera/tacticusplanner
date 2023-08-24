@@ -59,6 +59,17 @@ export interface IUnitData {
     legendaryEventPoints: LegendaryEventPoints;
 }
 
+export interface IDirtyDozenChar {
+    Name: string
+    Rank: number
+    Pvp: number
+    GRTyranid: number
+    GRNecron: number
+    GROrk: number
+    GRMortarion: number
+}
+
+
 export type ICharacter = IUnitData & IPersonalCharacterData;
 
 export type LegendaryEventPoints = Record<LegendaryEvents, number>;

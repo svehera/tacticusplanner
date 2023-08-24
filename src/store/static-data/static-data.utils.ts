@@ -1,5 +1,6 @@
 ﻿import unitsData from '../../data/UnitData.json';
-import { IUnitData, UnitDataRaw } from './interfaces';
+import dirtyDozen from '../../data/DirtyDozen.json';
+import { IDirtyDozenChar, IUnitData, UnitDataRaw } from './interfaces';
 import { DamageTypeRaw, DamageTypes, Faction, Traits, TraitTypeRaw } from './enums';
 
 const rawTraitToEnum: Record<string, Traits> = {
@@ -61,6 +62,7 @@ const damageTypeToEnum: Record<string, DamageTypes> = {
 export class StaticDataUtils {
     
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
+    static readonly dirtyDozenData: IDirtyDozenChar[] = dirtyDozen;
 
 
     static convertUnitData(rawData: UnitDataRaw): IUnitData {

@@ -13,6 +13,7 @@ import LegendaryEventPage from './components/legendary-events/legendary-events-p
 import About from './components/about/about';
 import Contacts from './components/contacts/contacts';
 import Characters from './components/characters/characters';
+import DirtyDozen from './components/dirty-dozen/dirty-dozen';
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: 'characters',
                 element: <Characters />,
+            },
+            {
+                path: 'dirtyDozen',
+                element: <DirtyDozen />,
             },
             {
                 path: 'le',

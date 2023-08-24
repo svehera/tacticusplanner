@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import './about.css';
+import { Link } from 'react-router-dom';
 
 const About = () => {
 
@@ -38,6 +39,7 @@ const About = () => {
             <h4>What features it has?</h4>
             <p> &quot;Who You Own&quot; - You enter which characters you have unlocked and what rank they are.</p>
             <p> &quot;Characters&quot; - View and filter characters stats.</p>
+            <p> &quot;Dirty Dozen&quot; -<Link to={'https://tacticus.fandom.com/wiki/Infographics#Dirty_Dozen_Series'} target={'_blank'}>Nandi&apos;s</Link> DirtyDozen infographic in table format</p>
             <p> &quot;Legendary Events&quot; - page contains all future Legendary events with target dates
                 <br/>
                 <ul>
