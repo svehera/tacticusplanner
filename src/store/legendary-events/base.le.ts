@@ -1,4 +1,4 @@
-﻿import {
+import {
     ICharacter,
     ILegendaryEvent,
     ILegendaryEventTrack,
@@ -41,6 +41,7 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
                 for (const rowKey in row) {
                     const value = row[rowKey];
                     if (typeof value !== 'string' && value.name === char.name) {
+                        value.rank = char.rank;
                         selected.push(rowKey);
                     }
                 }
