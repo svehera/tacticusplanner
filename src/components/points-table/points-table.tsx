@@ -17,10 +17,16 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, }) => {
             tooltipValueGetter: (params: ITooltipParams) => params.data?.name + ' - ' + Rank[params.data?.rank ?? 0]
         },
         {
-            valueGetter: (params: ValueGetterParams) => (params.data as ICharacter).legendaryEventPoints[legendaryEvent.id], 
+            valueGetter: (params: ValueGetterParams) => (params.data as ICharacter).legendaryEvents[legendaryEvent.id].points, 
             headerName: 'Points',
+            width: 100,
             sortable: true,
             sort: 'desc'
+        },
+        {
+            valueGetter: (params: ValueGetterParams) => (params.data as ICharacter).legendaryEvents[legendaryEvent.id].slots,
+            headerName: 'Slots',
+            sortable: true,
         }
     ];
 

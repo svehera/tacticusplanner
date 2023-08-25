@@ -76,6 +76,7 @@ const ButtonAppBar = () => {
                     <div>
                         <Button component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
                         <Button component={Link} to={'./characters'} color="inherit">Characters</Button>
+                        <Button component={Link} to={'./dirtyDozen'} color="inherit">Dirty Dozen</Button>
                         <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>
                         <Button
                             id="basic-button"
@@ -119,6 +120,9 @@ const ButtonAppBar = () => {
                             </MenuItem>
                             <MenuItem onClick={handleClose}>
                                 <Button component={Link} to={'./characters'} color="inherit">Characters</Button>
+                            </MenuItem> 
+                            <MenuItem onClick={handleClose}>
+                                <Button component={Link} to={'./dirtyDozen'} color="inherit">Dirty Dozen</Button>
                             </MenuItem>
                             <MenuItem onClick={handleClose}>
                                 <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>
