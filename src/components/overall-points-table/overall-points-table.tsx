@@ -16,11 +16,16 @@ const OverallPointsTable = (props: { characters: ICharacter[], selectedChars: Ar
             tooltipValueGetter: (params: ITooltipParams) => params.data?.name + ' - ' + Rank[params.data?.rank ?? 0]
         },
         {
-            // field: 'points',
-            valueGetter: (params: ValueGetterParams) => sum(Object.values((params.data as ICharacter).legendaryEventPoints)), 
+            valueGetter: (params: ValueGetterParams) => sum(Object.values((params.data as ICharacter).legendaryEvents).map(x => x.points)), 
             headerName: 'Points',
+            width: 100,
             sortable: true,
             sort: 'desc'
+        },
+        {
+            valueGetter: (params: ValueGetterParams) => sum(Object.values((params.data as ICharacter).legendaryEvents).map(x => x.slots)),
+            headerName: 'Slots',
+            sortable: true,
         }
     ];
     const columnsDef2: Array<ColDef> = [

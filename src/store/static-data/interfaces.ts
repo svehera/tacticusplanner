@@ -56,7 +56,7 @@ export interface IUnitData {
     movement: number,
     forcedSummons: boolean;
     requiredInCampaign: boolean;
-    legendaryEventPoints: LegendaryEventPoints;
+    legendaryEvents: ICharLegendaryEvents;
 }
 
 export interface IDirtyDozenChar {
@@ -72,7 +72,12 @@ export interface IDirtyDozenChar {
 
 export type ICharacter = IUnitData & IPersonalCharacterData;
 
-export type LegendaryEventPoints = Record<LegendaryEvents, number>;
+export type ICharLegendaryEvents = Record<LegendaryEvents, ICharLegendaryEvent>;
+
+export interface ICharLegendaryEvent {
+    points: number;
+    slots: number;
+}
 
 export interface ILegendaryEvent {
     id: LegendaryEvents;
@@ -99,6 +104,7 @@ export interface ILegendaryEventTrack {
     unitsRestrictions: Array<ILegendaryEventTrackRestriction>;
     
     getCharacterPoints(char: ICharacter): number;
+    getCharacterSlots(char: ICharacter): number;
     getRestrictionPoints (name: string): number
 }
 

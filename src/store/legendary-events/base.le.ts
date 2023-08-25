@@ -92,12 +92,17 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     protected populateLEPoints(characters: ICharacter[]): void {
         characters.forEach(character => {
             const alphaPoints = this.alphaTrack.getCharacterPoints(character);
-
             const betaPoints = this.betaTrack.getCharacterPoints(character);
-
             const gammaPoints = this.gammaTrack.getCharacterPoints(character);
 
-            character.legendaryEventPoints[this.id] = sum([alphaPoints, betaPoints, gammaPoints]);
+            const alphaSlots = this.alphaTrack.getCharacterSlots(character);
+            const betaSlots = this.betaTrack.getCharacterSlots(character);
+            const gammaSlots = this.gammaTrack.getCharacterSlots(character);
+
+            character.legendaryEvents[this.id] = {
+                points: sum([alphaPoints, betaPoints, gammaPoints]),
+                slots:  sum([alphaSlots, betaSlots, gammaSlots]),
+            };
         });
     }
 }
