@@ -1,4 +1,4 @@
-﻿import React, { useRef, useState } from 'react';
+﻿import React, { useCallback, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ColGroupDef, RowStyle, ValueFormatterParams } from 'ag-grid-community';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
@@ -11,10 +11,17 @@ import Typography from '@mui/material/Typography';
 
 const WhoYouOwn = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     
     const defaultColDef: ColDef<ICharacter> = {
         sortable: true
     };
+
+    const onFilterTextBoxChanged = useCallback(() => {
+        gridRef.current?.api.setQuickFilter(
+            inputRef.current?.value ?? ''
+        );
+    }, []);
     
     const [columnDefs] = useState<Array<ColDef | ColGroupDef>>([
         {
@@ -93,6 +100,15 @@ const WhoYouOwn = () => {
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
                 Who You Own
             </Typography>
+            <div>
+                <input
+                    ref={inputRef}
+                    type="text"
+                    id="filter-text-box"
+                    placeholder="Quick Filter..."
+                    onInput={onFilterTextBoxChanged}
+                />
+            </div>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 100px)', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}
