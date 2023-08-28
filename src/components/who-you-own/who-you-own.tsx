@@ -1,13 +1,13 @@
 ﻿import React, { useCallback, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ColGroupDef, RowStyle, ValueFormatterParams } from 'ag-grid-community';
+import { ColDef, ColGroupDef, RowStyle } from 'ag-grid-community';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
 import { ICharacter } from '../../store/static-data/interfaces';
 import GlobalStoreService from '../../store/global-store.service';
 import { PersonalDataService } from '../../store/personal-data/personal-data.service';
 import RankSelectorCell from '../rank-selector-cell/rank-selector-cell';
-import UnlockedCheckboxCell from '../unlocked-checkbox-cell/unlocked-checkbox-cell';
 import Typography from '@mui/material/Typography';
+import CheckboxCell from '../checkbox-cell/checkbox-cell';
 
 const WhoYouOwn = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
@@ -60,7 +60,11 @@ const WhoYouOwn = () => {
                 {
                     headerName: 'Unlocked',
                     editable: true,
-                    cellRenderer: UnlockedCheckboxCell,
+                    cellRenderer: CheckboxCell,
+                    cellRendererParams: {
+                        editProperty: 'unlocked',
+                    },
+                    field: 'unlocked',
                     width: 100,
                     minWidth: 100,
                     maxWidth: 100,
@@ -70,11 +74,36 @@ const WhoYouOwn = () => {
                     editable: true,
                     cellRenderer: RankSelectorCell,
                     columnGroupShow: 'open',
+                    field: 'rank',
                     width: 150,
                     minWidth: 150,
                     maxWidth: 150,
-                    cellStyle: { padding: 0 }
-                }
+                    cellStyle: { padding: 0 },
+                },
+                {
+                    headerName: 'Recommend First',
+                    editable: true,
+                    cellRenderer: CheckboxCell,
+                    cellRendererParams: {
+                        editProperty: 'alwaysRecommend',
+                        disableProperty: 'neverRecommend',
+                    },
+                    field: 'alwaysRecommend',
+                    maxWidth: 180,
+                    cellStyle: { display: 'flex', justifyContent: 'center' },
+                },
+                {
+                    headerName: 'Recommend Last',
+                    editable: true,
+                    cellRenderer: CheckboxCell,
+                    cellRendererParams: {
+                        editProperty: 'neverRecommend',
+                        disableProperty: 'alwaysRecommend',
+                    },
+                    field: 'neverRecommend',
+                    maxWidth: 180,
+                    cellStyle: { display: 'flex', justifyContent: 'center' },
+                },
             ]
         },
     ]);
@@ -90,7 +119,9 @@ const WhoYouOwn = () => {
             name: row.name, 
             unlocked: row.unlocked, 
             rank: row.rank,
-            leSelection: row.leSelection
+            leSelection: row.leSelection,
+            alwaysRecommend: row.alwaysRecommend,
+            neverRecommend: row.neverRecommend,
         }));
         PersonalDataService.save();
     };

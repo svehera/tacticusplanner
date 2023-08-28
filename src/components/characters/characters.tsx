@@ -5,9 +5,6 @@ import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions'
 import { ICharacter } from '../../store/static-data/interfaces';
 import GlobalStoreService from '../../store/global-store.service';
 import { DamageTypes, Traits } from '../../store/static-data/enums';
-import { PersonalDataService } from '../../store/personal-data/personal-data.service';
-import RankSelectorCell from '../rank-selector-cell/rank-selector-cell';
-import UnlockedCheckboxCell from '../unlocked-checkbox-cell/unlocked-checkbox-cell';
 import Typography from '@mui/material/Typography';
 
 type EnumLike<T> = Record<string, T>

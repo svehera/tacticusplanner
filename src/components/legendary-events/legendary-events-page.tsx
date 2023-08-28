@@ -11,11 +11,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ViewSettings from '../view-settings/view-settings';
 import { ViewSettingsContext } from '../../contexts/view-settings.context';
 import { PersonalDataService } from '../../store/personal-data/personal-data.service';
-import { cloneDeep, merge, unionBy, unionWith, uniqBy, update } from 'lodash';
+import { cloneDeep, uniqBy } from 'lodash';
 import { ICharacter, ITableRow } from '../../store/static-data/interfaces';
 import { AunShiLegendaryEvent } from '../../store/legendary-events/aun-shi.le';
 import { ShadowSunLegendaryEvent } from '../../store/legendary-events/shadow-sun.le';
 import OverallPointsTable from '../overall-points-table/overall-points-table';
+import AutoTeamsSettings from '../auto-teams-settings/auto-teams-settings';
+import { AutoTeamsSettingsContext } from '../../contexts/auto-teams-settings.context';
 
 
 const LegendaryEventPage = () => {
@@ -26,12 +28,18 @@ const LegendaryEventPage = () => {
     const shadowSunLegendaryEvent = new ShadowSunLegendaryEvent(characters, PersonalDataService.data.legendaryEvents.shadowSun.selectedTeams);
     
     const [viewPreferences, setViewPreferences] = useState(PersonalDataService.data.viewPreferences);
+    const [autoTeamsPreferences, setAutoTeamsPreferences] = useState(PersonalDataService.data.autoTeamsPreferences);
     
 
     useEffect(() => {
         PersonalDataService.data.viewPreferences = viewPreferences;
         PersonalDataService.save();
     }, [viewPreferences]);
+
+    useEffect(() => {
+        PersonalDataService.data.autoTeamsPreferences = autoTeamsPreferences;
+        PersonalDataService.save();
+    }, [autoTeamsPreferences]);
 
 
     const updateJainZarEventTeams = (selectedTeams: Array<ITableRow>) => {
@@ -128,51 +136,67 @@ const LegendaryEventPage = () => {
                 <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
                     Legendary Events
                 </Typography>
-                <ViewSettings value={viewPreferences} valueChanges={setViewPreferences}></ViewSettings>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                        <Typography fontWeight={700}>
+                            View Settings:
+                        </Typography>
+                        <ViewSettings value={viewPreferences} valueChanges={setViewPreferences}></ViewSettings>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                        <Typography fontWeight={700}>
+                            Auto-Teams settings:
+                        </Typography>
+                        <AutoTeamsSettings value={autoTeamsPreferences} valueChanges={setAutoTeamsPreferences}></AutoTeamsSettings>
+                    </div>
+                </div>
             </div>
             <ViewSettingsContext.Provider value={viewPreferences}>
-                <Accordion TransitionProps={{ unmountOnExit: true }}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}
-                    >
-                        <Typography>Jain Zar 3/3 (September 10)</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        
-                        <LegendaryEvent legendaryEvent={jainZarLegendaryEvent}
-                            selectedTeamsChange={updateJainZarEventTeams}/>
-                    </AccordionDetails>
-                </Accordion>
-                <Accordion TransitionProps={{ unmountOnExit: true }}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}
-                    >
-                        <Typography>Aun Shi 3/3 (TBA)</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <LegendaryEvent legendaryEvent={aunShiLegendaryEvent}
-                            selectedTeamsChange={updateAunShiEventTeams}/>
-                    </AccordionDetails>
-                </Accordion>
-
-                <Accordion TransitionProps={{ unmountOnExit: true }}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}
-                    >
-                        <Typography>Shadowsun 2/3 (TBA)</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <LegendaryEvent legendaryEvent={shadowSunLegendaryEvent}
-                            selectedTeamsChange={updateShadowSunEventTeams}/>
-                    </AccordionDetails>
-                </Accordion>
-
-                <Accordion TransitionProps={{ unmountOnExit: true }}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}
-                    >
-                        <Typography>Overall Best Characters</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <OverallPointsTable characters={characters} selectedChars={result}/>
-                    </AccordionDetails>
-                </Accordion>
+                <AutoTeamsSettingsContext.Provider value={autoTeamsPreferences}>
+                    <Accordion TransitionProps={{ unmountOnExit: true }}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon/>}
+                        >
+                            <Typography>Jain Zar 3/3 (September 10)</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            
+                            <LegendaryEvent legendaryEvent={jainZarLegendaryEvent}
+                                selectedTeamsChange={updateJainZarEventTeams}/>
+                        </AccordionDetails>
+                    </Accordion>
+                    
+                    <Accordion TransitionProps={{ unmountOnExit: true }}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon/>}
+                        >
+                            <Typography>Aun Shi 3/3 (TBA)</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <LegendaryEvent legendaryEvent={aunShiLegendaryEvent}
+                                selectedTeamsChange={updateAunShiEventTeams}/>
+                        </AccordionDetails>
+                    </Accordion>
+    
+                    <Accordion TransitionProps={{ unmountOnExit: true }}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon/>}
+                        >
+                            <Typography>Shadowsun 2/3 (TBA)</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <LegendaryEvent legendaryEvent={shadowSunLegendaryEvent}
+                                selectedTeamsChange={updateShadowSunEventTeams}/>
+                        </AccordionDetails>
+                    </Accordion>
+    
+                    <Accordion TransitionProps={{ unmountOnExit: true }}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon/>}
+                        >
+                            <Typography>Overall Best Characters</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <OverallPointsTable characters={characters} selectedChars={result}/>
+                        </AccordionDetails>
+                    </Accordion>
+                </AutoTeamsSettingsContext.Provider>
             </ViewSettingsContext.Provider>
         </div>
 

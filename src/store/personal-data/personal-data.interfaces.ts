@@ -1,7 +1,8 @@
-﻿import { ICharacter, ITableRow } from '../static-data/interfaces';
+﻿import { ITableRow } from '../static-data/interfaces';
 
 export interface IPersonalData {
     viewPreferences: IViewPreferences;
+    autoTeamsPreferences: IAutoTeamsPreferences;
     characters: IPersonalCharacterData[];
     legendaryEvents: ILegendaryEventsData;
 }
@@ -21,11 +22,18 @@ export interface IViewPreferences {
     usedInCampaigns: boolean;
 }
 
+export interface IAutoTeamsPreferences {
+    preferCampaign: boolean;
+    ignoreRank: boolean;
+}
+
 export interface IPersonalCharacterData {
     name: string;
     unlocked?: boolean;
     rank: Rank;
     leSelection: LegendaryEvents;
+    alwaysRecommend: boolean;
+    neverRecommend: boolean;
 }
 
 export enum LegendaryEvents {
