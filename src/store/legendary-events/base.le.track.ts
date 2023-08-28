@@ -57,16 +57,21 @@ export class LETrack implements ILegendaryEventTrack {
                     alwaysRecommend: unit.alwaysRecommend ?? false,
                     neverRecommend: unit.neverRecommend ?? false, 
                 }));
-            const iterates: string[] = ['alwaysRecommend', 'neverRecommend'];
-            const orders: Array<'asc' | 'desc'> = ['desc', 'asc'];
+            const iterates: string[] = [];
+            const orders: Array<'asc' | 'desc'> = [];
+            
+            if (!settings.ignoreRecommended) {
+                iterates.push('alwaysRecommend', 'neverRecommend');
+                orders.push('desc', 'asc');
+            }
+            
+            if (settings.preferCampaign) {
+                iterates.push('requiredInCampaign');
+                orders.push('desc');
+            }
             
             if (!settings.ignoreRank) {
                 iterates.push('rank');
-                orders.push('desc');
-            }
-
-            if (settings.preferCampaign) {
-                iterates.push('requiredInCampaign');
                 orders.push('desc');
             }
             

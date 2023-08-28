@@ -25,6 +25,7 @@ export interface IViewPreferences {
 export interface IAutoTeamsPreferences {
     preferCampaign: boolean;
     ignoreRank: boolean;
+    ignoreRecommended: boolean;
 }
 
 export interface IPersonalCharacterData {

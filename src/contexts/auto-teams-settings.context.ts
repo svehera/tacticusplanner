@@ -3,7 +3,8 @@ import { IAutoTeamsPreferences } from '../store/personal-data/personal-data.inte
 
 export const defaultAutoTeamsPreferences: IAutoTeamsPreferences = {
     preferCampaign: false,
-    ignoreRank: false
+    ignoreRank: false,
+    ignoreRecommended: false
 };
 
 export const AutoTeamsSettingsContext = createContext<IAutoTeamsPreferences>(defaultAutoTeamsPreferences);

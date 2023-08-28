@@ -7,10 +7,11 @@ const AutoTeamsSettings = (props: { value: IAutoTeamsPreferences , valueChanges:
 
     const [preferCampaign, setPreferCampaign] = useState(value.preferCampaign);
     const [ignoreRank, setIgnoreRank] = useState(value.ignoreRank);
+    const [ignoreRecommended, setIgnoreRecommended] = useState(value.ignoreRecommended ?? false);
 
     useEffect(() => {
-        valueChanges({ preferCampaign, ignoreRank });
-    },[preferCampaign, ignoreRank]);
+        valueChanges({ preferCampaign, ignoreRank, ignoreRecommended });
+    },[preferCampaign, ignoreRank, ignoreRecommended]);
 
     return (
         <FormGroup style={{ display: 'flex', flexDirection: 'row' }}>
@@ -25,6 +26,12 @@ const AutoTeamsSettings = (props: { value: IAutoTeamsPreferences , valueChanges:
                 onChange={(event) => setIgnoreRank(event.target.checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
             />} label="Ignore Rank"/>
+
+            <FormControlLabel control={<Checkbox
+                checked={ignoreRecommended}
+                onChange={(event) => setIgnoreRecommended(event.target.checked)}
+                inputProps={{ 'aria-label': 'controlled' }}
+            />} label="Ignore Recommended"/>
         </FormGroup>
     );
 };
