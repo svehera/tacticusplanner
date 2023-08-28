@@ -47,7 +47,7 @@ const ButtonAppBar = () => {
                     const content = e.target?.result as string;
                     PersonalDataService.data = JSON.parse(content);
                     PersonalDataService.save();
-                    location.reload();
+                    window.location = '/' as any;
                 } catch (error) {
                     console.error('Error parsing JSON:', error);
                 }
