@@ -60,13 +60,13 @@ export class LETrack implements ILegendaryEventTrack {
             const iterates: string[] = ['alwaysRecommend', 'neverRecommend'];
             const orders: Array<'asc' | 'desc'> = ['desc', 'asc'];
             
-            if (!settings.ignoreRank) {
-                iterates.push('rank');
-                orders.push('desc');
-            }
-
             if (settings.preferCampaign) {
                 iterates.push('requiredInCampaign');
+                orders.push('desc');
+            }
+            
+            if (!settings.ignoreRank) {
+                iterates.push('rank');
                 orders.push('desc');
             }
             
