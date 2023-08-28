@@ -18,7 +18,8 @@ export class PersonalDataService {
         };
         const defaultAutoTeamsPreferences: IAutoTeamsPreferences = {
             preferCampaign: false,
-            ignoreRank: false
+            ignoreRank: false,
+            ignoreRecommended: false
         };
         
         const defaultLegendaryEventsData: ILegendaryEventsData = {
