@@ -1,4 +1,9 @@
-﻿import { ILegendaryEventsData, IPersonalData, IViewPreferences } from './personal-data.interfaces';
+﻿import {
+    IAutoTeamsPreferences,
+    ILegendaryEventsData,
+    IPersonalData,
+    IViewPreferences
+} from './personal-data.interfaces';
 import { useState } from 'react';
 
 export class PersonalDataService {
@@ -12,6 +17,11 @@ export class PersonalDataService {
             onlyUnlocked: false,
             usedInCampaigns: false
         };
+        const defaultAutoTeamsPreferences: IAutoTeamsPreferences = {
+            preferCampaign: false,
+            ignoreRank: false
+        };
+        
         const defaultLegendaryEventsData: ILegendaryEventsData = {
             jainZar: {
                 selectedTeams: [{}, {}, {}, {}, {}]
@@ -27,8 +37,11 @@ export class PersonalDataService {
         if(storedData) {
             this.data = JSON.parse(storedData);
             this.data.characters ??= [];
+            
             this.data.viewPreferences ??= defaultViewPreferences;
+            this.data.autoTeamsPreferences ??= defaultAutoTeamsPreferences;
             this.data.legendaryEvents ??= defaultLegendaryEventsData;
+            
             this.data.legendaryEvents.jainZar ??= defaultLegendaryEventsData.jainZar;
             this.data.legendaryEvents.aunShi ??= defaultLegendaryEventsData.aunShi;
             this.data.legendaryEvents.shadowSun ??= defaultLegendaryEventsData.shadowSun;
@@ -37,6 +50,7 @@ export class PersonalDataService {
         this.data ??=  { 
             characters: [], 
             viewPreferences: defaultViewPreferences, 
+            autoTeamsPreferences: defaultAutoTeamsPreferences,
             legendaryEvents: defaultLegendaryEventsData 
         };
     }

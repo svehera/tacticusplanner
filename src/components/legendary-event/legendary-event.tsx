@@ -15,7 +15,7 @@ import {
     ITooltipParams,
     ValueFormatterParams
 } from 'ag-grid-community';
-import { Rank } from '../../store/personal-data/personal-data.interfaces';
+import { IViewPreferences, Rank } from '../../store/personal-data/personal-data.interfaces';
 import {
     Accordion,
     AccordionDetails,
@@ -27,6 +27,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
 import { ViewSettingsContext } from '../../contexts/view-settings.context';
 import { sortBy } from 'lodash';
+import { AutoTeamsSettingsContext } from '../../contexts/auto-teams-settings.context';
 
 const LegendaryEvent = (props: {
     legendaryEvent: ILegendaryEvent;
@@ -35,6 +36,7 @@ const LegendaryEvent = (props: {
     const gridRef = useRef<AgGridReact>(null);
     const gridRef2 = useRef<AgGridReact>(null);
     const viewPreferences = useContext(ViewSettingsContext);
+    const autoTeamsPreferences = useContext(AutoTeamsSettingsContext);
     const { legendaryEvent, selectedTeamsChange } = props;
 
     const [selectedTeams, setSelectedTeams] = useState<Array<ITableRow>>(legendaryEvent.selectedTeams);
@@ -64,7 +66,7 @@ const LegendaryEvent = (props: {
         }
     ]);
 
-    const rows: Array<ITableRow> = useMemo(() => getRows(legendaryEvent, viewPreferences.onlyUnlocked, viewPreferences.usedInCampaigns), [viewPreferences.onlyUnlocked, viewPreferences.usedInCampaigns]);
+    const rows: Array<ITableRow> = useMemo(() => getRows(legendaryEvent, viewPreferences), [viewPreferences]);
 
     const teamSize = 5;
 
@@ -169,8 +171,7 @@ const LegendaryEvent = (props: {
 
         updateSelectedTeams([...selectedTeams]);
     };
-
-
+    
     const handleTeamsTableCellClick = (event: CellClickedEvent) => {
         const columnId = event.column.getColId();
         const selectedChar = event.value as ICharacter;
@@ -280,9 +281,9 @@ function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[],
     }));
 }
 
-function getRows(legendaryEvent: ILegendaryEvent, unlockedOnly: boolean, usedInCampaigns: boolean): Array<ITableRow> {
+function getRows(legendaryEvent: ILegendaryEvent, viewPreferences: IViewPreferences): Array<ITableRow> {
     const rows: Array<ITableRow> = [];
-    const allowedUnits = legendaryEvent.allowedUnits.filter(char => (unlockedOnly ? char.unlocked : true) && (usedInCampaigns ? char.requiredInCampaign : true));
+    const allowedUnits = legendaryEvent.allowedUnits.filter(char => (viewPreferences.onlyUnlocked ? char.unlocked : true) && (viewPreferences.usedInCampaigns ? char.requiredInCampaign : true));
 
     allowedUnits.forEach(unit => {
         const row: ITableRow = {};
