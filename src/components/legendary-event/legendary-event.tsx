@@ -15,7 +15,7 @@ import {
     ITooltipParams,
     ValueFormatterParams
 } from 'ag-grid-community';
-import { IViewPreferences, Rank } from '../../store/personal-data/personal-data.interfaces';
+import { IAutoTeamsPreferences, IViewPreferences, Rank } from '../../store/personal-data/personal-data.interfaces';
 import {
     Accordion,
     AccordionDetails,
@@ -35,6 +35,7 @@ const LegendaryEvent = (props: {
 }) => {
     const gridRef = useRef<AgGridReact>(null);
     const gridRef2 = useRef<AgGridReact>(null);
+    const gridRef3 = useRef<AgGridReact>(null);
     const viewPreferences = useContext(ViewSettingsContext);
     const autoTeamsPreferences = useContext(AutoTeamsSettingsContext);
     const { legendaryEvent, selectedTeamsChange } = props;
@@ -42,7 +43,7 @@ const LegendaryEvent = (props: {
     const [selectedTeams, setSelectedTeams] = useState<Array<ITableRow>>(legendaryEvent.selectedTeams);
 
 
-    const [columnsDefs] = useState<Array<ColGroupDef<ICharacter | string> & { section?: LegendaryEventSection }>>([
+    const [columnsDefs] = useState<Array<ColGroupDef & { section?: LegendaryEventSection }>>([
         {
             headerName: legendaryEvent.alphaTrack.name + ' - ' + legendaryEvent.alphaTrack.killPoints,
             headerClass: 'alpha',
@@ -69,6 +70,8 @@ const LegendaryEvent = (props: {
     const rows: Array<ITableRow> = useMemo(() => getRows(legendaryEvent, viewPreferences), [viewPreferences]);
 
     const teamSize = 5;
+    
+    const suggestedTeams: Array<ITableRow> = useMemo(() => getSuggestedTeams(legendaryEvent, autoTeamsPreferences), [autoTeamsPreferences]);
 
     function updateSelectedChars(columnId: string, selectedChar: ICharacter) {
         if (!selectedTeams.length) {
@@ -198,6 +201,7 @@ const LegendaryEvent = (props: {
             if (window.innerWidth >= 768) {
                 gridRef.current?.api.sizeColumnsToFit();
                 gridRef2.current?.api.sizeColumnsToFit();
+                gridRef3.current?.api.sizeColumnsToFit();
             }
         }
 
@@ -211,7 +215,7 @@ const LegendaryEvent = (props: {
 
     return (
         <div>
-            <Accordion>
+            <Accordion TransitionProps={{ unmountOnExit: true }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon/>}
                 >
                     <Typography>Event Details (Click on character to add it to selected teams)</Typography>
@@ -221,7 +225,7 @@ const LegendaryEvent = (props: {
                         <AgGridReact
                             ref={gridRef}
                             tooltipShowDelay={100}
-                            rowData={rows as any}
+                            rowData={rows}
                             columnDefs={columnsDefs}
                             onGridReady={() => gridRef.current?.api.sizeColumnsToFit()}
                             onCellClicked={handleMainTableCellClick}
@@ -231,7 +235,27 @@ const LegendaryEvent = (props: {
                 </AccordionDetails>
             </Accordion>
 
-            <Accordion defaultExpanded={true}>
+            <Accordion defaultExpanded={true} TransitionProps={{ unmountOnExit: true }}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>}
+                >
+                    <Typography>Auto-Generated Teams (Click on character to add it to selected teams)</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <div className="ag-theme-material" style={{ height: '250px', width: '100%' }}>
+                        <AgGridReact
+                            ref={gridRef3}
+                            tooltipShowDelay={100}
+                            rowData={suggestedTeams}
+                            columnDefs={columnsDefs}
+                            onGridReady={() => gridRef3.current?.api.sizeColumnsToFit()}
+                            onCellClicked={handleMainTableCellClick}
+                        >
+                        </AgGridReact>
+                    </div>
+                </AccordionDetails>
+            </Accordion>
+
+            <Accordion defaultExpanded={true} TransitionProps={{ unmountOnExit: true }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon/>}
                 >
                     <Typography>Your Selected Teams (Click on character to remove it from selected teams)</Typography>
@@ -240,12 +264,11 @@ const LegendaryEvent = (props: {
                     <Button onClick={() => updateSelectedTeams([])}>Clear All</Button>
                     <Button onClick={alignChars}>Align Chars</Button>
                     <Button onClick={compactChars}>Compact</Button>
-                    <div className="ag-theme-material" style={{ height: '170px', width: '100%' }}>
+                    <div className="ag-theme-material" style={{ height: '250px', width: '100%' }}>
                         <AgGridReact
                             ref={gridRef2}
                             tooltipShowDelay={100}
-                            rowData={selectedTeams as any}
-                            headerHeight={0}
+                            rowData={selectedTeams}
                             columnDefs={columnsDefs}
                             overlayNoRowsTemplate={'Select characters on Event Details'}
                             onGridReady={() => gridRef2.current?.api.sizeColumnsToFit()}
@@ -255,7 +278,8 @@ const LegendaryEvent = (props: {
                     </div>
                 </AccordionDetails>
             </Accordion>
-            <Accordion>
+            
+            <Accordion TransitionProps={{ unmountOnExit: true }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon/>}
                 >
                     <Typography>Event Best characters table</Typography>
@@ -270,7 +294,7 @@ const LegendaryEvent = (props: {
 };
 
 function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], suffix: LegendaryEventSection): Array<ColDef> {
-    return unitsRestrictions.map((u, index) => ({
+    return unitsRestrictions.map((u) => ({
         field: u.name + suffix,
         headerName: `(${u.points}) ${u.name}`,
         headerTooltip: `(${u.points}) ${u.name}`,
@@ -279,6 +303,37 @@ function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[],
         tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rank[params.value?.rank ?? 0],
         section: suffix
     }));
+}
+
+function getSuggestedTeams(legendaryEvent: ILegendaryEvent, settings: IAutoTeamsPreferences): Array<ITableRow> {
+    const rows: Array<ITableRow> = [{}, {}, {}, {}, {}];
+
+    const alphaTeams =  legendaryEvent.alphaTrack.suggestTeams(legendaryEvent.id, settings);
+    const betaTeams =  legendaryEvent.betaTrack.suggestTeams(legendaryEvent.id, settings);
+    const gammaTeams =  legendaryEvent.gammaTrack.suggestTeams(legendaryEvent.id, settings);
+
+    rows.forEach((row, index) => {
+        alphaTeams.forEach((team, teamIndex) => {
+            const char = team[index];
+            const teamName = legendaryEvent.alphaTrack.unitsRestrictions[teamIndex].name + '(Alpha)';
+            row[teamName] = char;
+        });
+
+        betaTeams.forEach((team, teamIndex) => {
+            const char = team[index];
+            const teamName = legendaryEvent.betaTrack.unitsRestrictions[teamIndex].name + '(Beta)';
+            row[teamName] = char;
+        });
+
+        gammaTeams.forEach((team, teamIndex) => {
+            const char = team[index];
+            const teamName = legendaryEvent.gammaTrack.unitsRestrictions[teamIndex].name + '(Gamma)';
+            row[teamName] = char;
+        });
+    });
+    
+
+    return rows;
 }
 
 function getRows(legendaryEvent: ILegendaryEvent, viewPreferences: IViewPreferences): Array<ITableRow> {

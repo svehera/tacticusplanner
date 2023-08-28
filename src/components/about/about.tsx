@@ -80,8 +80,8 @@ const About = () => {
             <h4>What are future plans for the Tacticus Planner?</h4>
             <p>UI/UX improvements</p>
             <p>Ukrainian localization</p>
-            <p>Legendary Events auto-suggested teams</p>
             <p>Google Drive integration</p>
+            <p>PvP roles</p>
             <p>More Filters - Nandi&apos;s &quot;Dirty Dozed&quot;, Nandi Recommends</p>
             <p>&quot;My Lists&quot; feature - create your own PvP, Guild raids lists.</p>
             <p>More personal data on Who You Own page - rarity, abilities level, power</p>

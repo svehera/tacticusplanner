@@ -12,7 +12,7 @@ const RankSelectorCell = (props: ICellRendererParams<ICharacter>) => {
 
     const handleChange = (event: SelectChangeEvent<Rank>) => {
         if (props.data) {
-            props.api.startEditingCell({ rowIndex: props.rowIndex, colKey: props.column?.getColId() ?? '' });
+            props.api.startEditingCell({ rowIndex: props.node.rowIndex ?? 0, colKey: props.column?.getColId() ?? '' });
             props.data.rank = +event.target.value;
             props.api.stopEditing();
         }

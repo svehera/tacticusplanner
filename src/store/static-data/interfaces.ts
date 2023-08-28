@@ -1,5 +1,5 @@
 ﻿import { Alliance, DamageTypeRaw, DamageTypes, Equipment, Faction, Rarity, Traits, TraitTypeRaw } from './enums';
-import { IPersonalCharacterData, LegendaryEvents, Rank } from '../personal-data/personal-data.interfaces';
+import { IAutoTeamsPreferences, IPersonalCharacterData, LegendaryEvents, Rank } from '../personal-data/personal-data.interfaces';
  
 export type LegendaryEventSection = '(Alpha)' | '(Beta)' | '(Gamma)';
 
@@ -86,6 +86,7 @@ export interface ILegendaryEvent {
     gammaTrack: ILegendaryEventTrack;
     
     selectedTeams: ITableRow[];
+    suggestedTeams: ITableRow[];
     allowedUnits: Array<ICharacter>;
 
     getSelectedCharactersPoints(): Array<{
@@ -105,7 +106,8 @@ export interface ILegendaryEventTrack {
     
     getCharacterPoints(char: ICharacter): number;
     getCharacterSlots(char: ICharacter): number;
-    getRestrictionPoints (name: string): number
+    getRestrictionPoints (name: string): number;
+    suggestTeams(event: LegendaryEvents, settings: IAutoTeamsPreferences): Array<ICharacter[]>;
 }
 
 export interface ILegendaryEventTrackRestriction {

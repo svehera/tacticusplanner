@@ -32,6 +32,8 @@ export interface IPersonalCharacterData {
     unlocked?: boolean;
     rank: Rank;
     leSelection: LegendaryEvents;
+    alwaysRecommend: boolean;
+    neverRecommend: boolean;
 }
 
 export enum LegendaryEvents {

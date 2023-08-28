@@ -11,7 +11,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ViewSettings from '../view-settings/view-settings';
 import { ViewSettingsContext } from '../../contexts/view-settings.context';
 import { PersonalDataService } from '../../store/personal-data/personal-data.service';
-import { cloneDeep, merge, unionBy, unionWith, uniqBy, update } from 'lodash';
+import { cloneDeep, uniqBy } from 'lodash';
 import { ICharacter, ITableRow } from '../../store/static-data/interfaces';
 import { AunShiLegendaryEvent } from '../../store/legendary-events/aun-shi.le';
 import { ShadowSunLegendaryEvent } from '../../store/legendary-events/shadow-sun.le';
@@ -145,7 +145,7 @@ const LegendaryEventPage = () => {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                         <Typography fontWeight={700}>
-                            Auto team settings:
+                            Auto-Teams settings:
                         </Typography>
                         <AutoTeamsSettings value={autoTeamsPreferences} valueChanges={setAutoTeamsPreferences}></AutoTeamsSettings>
                     </div>

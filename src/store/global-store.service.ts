@@ -14,9 +14,20 @@ export default class GlobalStoreService {
         const personalUnitData = PersonalDataService.data;
 
         this.characters = staticUnitData.map(staticData => {
-            const personalData: IPersonalCharacterData = personalUnitData.characters.find(c => c.name === staticData.name) 
-                ?? { name: '', rank: Rank.Undefined, leSelection: LegendaryEvents.None };
-            return { ...personalData, ...staticData };
+            const personalData: IPersonalCharacterData = personalUnitData.characters.find(c => c.name === staticData.name)
+                ?? {
+                    name: '',
+                    rank: Rank.Undefined,
+                    leSelection: LegendaryEvents.None,
+                    alwaysRecommend: false,
+                    neverRecommend: false
+                };
+            return {
+                ...personalData, ...staticData,
+                rank: +(personalData.rank ?? Rank.Undefined),
+                alwaysRecommend: personalData.alwaysRecommend ?? false,
+                neverRecommend: personalData.neverRecommend ?? false
+            };
         });
     }
 }

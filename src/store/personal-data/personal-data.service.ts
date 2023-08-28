@@ -4,7 +4,6 @@
     IPersonalData,
     IViewPreferences
 } from './personal-data.interfaces';
-import { useState } from 'react';
 
 export class PersonalDataService {
     static personalDataStorageKey = 'personalData';

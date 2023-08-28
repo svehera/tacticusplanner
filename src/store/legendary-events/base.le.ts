@@ -1,11 +1,10 @@
-import {
+﻿import {
     ICharacter,
     ILegendaryEvent,
     ILegendaryEventTrack,
-    ITableRow,
-    LegendaryEventSection
+    ITableRow
 } from '../static-data/interfaces';
-import { cloneDeep, sortBy, sum, uniqBy } from 'lodash';
+import { sortBy, sum, uniqBy } from 'lodash';
 import { LegendaryEvents, Rank } from '../personal-data/personal-data.interfaces';
 
 export abstract class LegendaryEventBase implements ILegendaryEvent {
@@ -14,6 +13,7 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     gammaTrack: ILegendaryEventTrack;
 
     selectedTeams: ITableRow[];
+    suggestedTeams: ITableRow[] = [];
 
     characterSelectedRestrictions: Record<string, string[]> = {};
 
