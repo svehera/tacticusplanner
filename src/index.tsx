@@ -17,11 +17,11 @@ import DirtyDozen from './components/dirty-dozen/dirty-dozen';
 
 const router = createBrowserRouter([
     {
-        path: '/tacticusplanner',
+        path: '',
         element: <App />,
         children: [
             {
-                path: '/tacticusplanner/',
+                path: '/',
                 element: <About />,
             },
             {
