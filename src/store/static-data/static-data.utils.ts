@@ -1,7 +1,7 @@
 ﻿import unitsData from '../../data/UnitData.json';
 import dirtyDozen from '../../data/DirtyDozen.json';
 import { IDirtyDozenChar, IUnitData, UnitDataRaw } from './interfaces';
-import { DamageTypeRaw, DamageTypes, Faction, Traits, TraitTypeRaw } from './enums';
+import { DamageTypeRaw, DamageTypes, Faction, Traits, Traits2, TraitTypeRaw } from './enums';
 
 const rawTraitToEnum: Record<string, Traits> = {
     [TraitTypeRaw.Psyker]: Traits.Psyker,
@@ -36,6 +36,10 @@ const rawTraitToEnum: Record<string, Traits> = {
     [TraitTypeRaw.BigTarget]: Traits.BigTarget,
     [TraitTypeRaw.ShadowInTheWarp]: Traits.ShadowInTheWarp,
     [TraitTypeRaw.Synapse]: Traits.Synapse,
+};
+
+const rawTraitToEnum2: Record<string, Traits2> = {
+    [TraitTypeRaw.SuppressiveFire]: Traits2.SuppressiveFire,
 };
 
 const damageTypeToEnum: Record<string, DamageTypes> = {
@@ -75,8 +79,9 @@ export class StaticDataUtils {
             health: rawData.Health,
             damage: rawData.Damage,
             armour: rawData.Armour,
-            damageTypes: DamageTypes.None, // You need to calculate this based on rawData values
-            traits: Traits.None, // You need to calculate this based on rawData values
+            damageTypes: DamageTypes.None,
+            traits: Traits.None,
+            traits2: Traits2.None,
             meleeDamage: DamageTypes.None,
             rangeDamage: DamageTypes.None,
             abilitiesDamage: DamageTypes.None,
@@ -115,7 +120,12 @@ export class StaticDataUtils {
             const traitKey = `Trait ${i}` as 'Trait 1' | 'Trait 2' | 'Trait 3' | 'Trait 4';
             const value = rawData[traitKey] as TraitTypeRaw;
             if (value) {
-                unitData.traits |= rawTraitToEnum[value];
+                if (rawTraitToEnum[value]) {
+                    unitData.traits |= rawTraitToEnum[value];
+                }
+                if(rawTraitToEnum2[value]) {
+                    unitData.traits2 |= rawTraitToEnum2[value];
+                }
             }
         }
 

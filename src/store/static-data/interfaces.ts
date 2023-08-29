@@ -1,4 +1,14 @@
-﻿import { Alliance, DamageTypeRaw, DamageTypes, Equipment, Faction, Rarity, Traits, TraitTypeRaw } from './enums';
+﻿import {
+    Alliance,
+    DamageTypeRaw,
+    DamageTypes,
+    Equipment,
+    Faction,
+    Rarity,
+    Traits,
+    Traits2,
+    TraitTypeRaw
+} from './enums';
 import { IAutoTeamsPreferences, IPersonalCharacterData, LegendaryEvents, Rank } from '../personal-data/personal-data.interfaces';
  
 export type LegendaryEventSection = '(Alpha)' | '(Beta)' | '(Gamma)';
@@ -47,6 +57,7 @@ export interface IUnitData {
     rangeDamage: DamageTypes,
     abilitiesDamage: DamageTypes,
     traits: Traits,
+    traits2: Traits2,
     equipment1: Equipment;
     equipment2: Equipment;
     equipment3: Equipment;
