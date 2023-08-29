@@ -4,7 +4,7 @@ import { ColDef, ColGroupDef, RowStyle, ValueFormatterParams } from 'ag-grid-com
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
 import { ICharacter } from '../../store/static-data/interfaces';
 import GlobalStoreService from '../../store/global-store.service';
-import { DamageTypes, Traits } from '../../store/static-data/enums';
+import { DamageTypes, Traits, Traits2 } from '../../store/static-data/enums';
 import Typography from '@mui/material/Typography';
 
 type EnumLike<T> = Record<string, T>
@@ -40,29 +40,29 @@ const Characters = () => {
         {
             field: 'meleeDamage',
             headerName: 'Melee Damage Type',
-            valueFormatter: convertEnumValuesToString(DamageTypes as unknown as EnumLike<number>),
-            getQuickFilterText: convertEnumValuesToString(DamageTypes as unknown as EnumLike<number>),
+            valueFormatter: convertDamageTypesToString,
+            getQuickFilterText: convertDamageTypesToString,
             minWidth: 170,
         },
         {
             field: 'rangeDamage',
             headerName: 'Range Damage Type',
-            valueFormatter: convertEnumValuesToString(DamageTypes as unknown as EnumLike<number>),
-            getQuickFilterText: convertEnumValuesToString(DamageTypes as unknown as EnumLike<number>),
+            valueFormatter: convertDamageTypesToString,
+            getQuickFilterText: convertDamageTypesToString,
             minWidth: 170,
         },
         {
             field: 'abilitiesDamage',
             headerName: 'Abilities Damage Types',
-            valueFormatter: convertEnumValuesToString(DamageTypes as unknown as EnumLike<number>),
-            getQuickFilterText: convertEnumValuesToString(DamageTypes as unknown as EnumLike<number>),
+            valueFormatter: convertDamageTypesToString,
+            getQuickFilterText: convertDamageTypesToString,
             minWidth: 170,
         },
         {
             field: 'traits',
             headerName: 'Traits',
-            valueFormatter: convertEnumValuesToString(Traits as unknown as EnumLike<number>),
-            getQuickFilterText: convertEnumValuesToString(Traits as unknown as EnumLike<number>),
+            valueFormatter: convertTraitsEnumToString,
+            getQuickFilterText: convertTraitsEnumToString,
             minWidth: 200
         },
         {
@@ -186,23 +186,47 @@ const Characters = () => {
     );
 };
 
-function convertEnumValuesToString (
-    damageTypesEnum: EnumLike<number>
-) {
-    return  (
-        params: ValueFormatterParams<ICharacter, number>
-    ): string => {
-        const typeNames: string[] = [];
-        const value = params.value ?? 0;
+function convertDamageTypesToString  (
+    params: ValueFormatterParams<ICharacter, number>
+): string {
+    const typeNames: string[] = [];
+    const value = params.value ?? 0;
+    const damageTypes: EnumLike<number | string> = DamageTypes;
 
-        for (const key in damageTypesEnum) {
-            if (typeof damageTypesEnum[key] === 'number' && value & damageTypesEnum[key]) {
-                typeNames.push(key);
-            }
+    for (const key in damageTypes) {
+        const enumValue = damageTypes[key];
+        if (typeof enumValue === 'number' && value & enumValue) {
+            typeNames.push(key);
         }
+    }
 
-        return typeNames.join(', ');
-    };
+    return typeNames.join(', ');
+}
+
+function convertTraitsEnumToString (
+    params: ValueFormatterParams<ICharacter, number>
+): string {
+    const typeNames: string[] = [];
+    const traitsValue1: number = params.data?.traits ?? 0;
+    const traitsValue2: number = params.data?.traits2 ?? 0;
+    const traits1: EnumLike<number | string> = Traits;
+    const traits2: EnumLike<number | string> = Traits2;
+
+    for (const key in traits1) {
+        const enumValue = traits1[key];
+        if (typeof enumValue === 'number' && traitsValue1 & enumValue) {
+            typeNames.push(key);
+        }
+    }
+    
+    for (const key in traits2) {
+        const enumValue = traits2[key];
+        if (typeof enumValue === 'number' && traitsValue2 & enumValue) {
+            typeNames.push(key);
+        }
+    }
+
+    return typeNames.join(', ');
 }
 
 export default Characters;

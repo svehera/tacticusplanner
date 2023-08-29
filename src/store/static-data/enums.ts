@@ -70,7 +70,8 @@ export enum TraitTypeRaw {
     WeaverOfFates = 'Weaver of Fates',
     BigTarget = 'Big Target',
     ShadowInTheWarp = 'Shadow in the Warp',
-    Synapse = 'Synapse'
+    Synapse = 'Synapse',
+    SuppressiveFire = 'Suppressive Fire'
 }
 
 export enum Traits {
@@ -107,6 +108,11 @@ export enum Traits {
     BigTarget = 1 << 29,
     ShadowInTheWarp = 1 << 30,
     Synapse = 1 << 31,
+}
+
+export enum Traits2 {
+    None = 0,
+    SuppressiveFire = 1 << 0,
 }
 
 export enum DamageTypeRaw {
