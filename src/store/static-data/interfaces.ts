@@ -45,7 +45,6 @@ export interface UnitDataRaw {
     RequiredInCampaign: boolean;
 }
 
-
 export interface IUnitData {
     alliance: Alliance;
     faction: Faction;
@@ -137,4 +136,4 @@ export interface ILegendaryEventTrackRestriction {
     units: ICharacter[],
 }
 
-export type ITableRow = Record<string, ICharacter | string>;
+export type ITableRow<T = ICharacter | string> = Record<string, T>;

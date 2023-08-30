@@ -12,8 +12,6 @@ import GlobalStoreService from './store/global-store.service';
 const App = () => {
     GlobalStoreService.init();
 
-    // const le = new JainZarLegendaryEvent(GlobalStoreService.characters);
-
     return (
         <div>
             <ButtonAppBar></ButtonAppBar>
