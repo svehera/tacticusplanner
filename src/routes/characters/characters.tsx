@@ -6,7 +6,7 @@ import { ICharacter } from '../../store/static-data/interfaces';
 import GlobalStoreService from '../../store/global-store.service';
 import { DamageType, Trait } from '../../store/static-data/enums';
 import Typography from '@mui/material/Typography';
-import MultipleSelectCheckmarks from '../multiple-select/multiple-select';
+import MultipleSelectCheckmarks from './multiple-select';
 import { IRowNode } from 'ag-grid-community/dist/lib/interfaces/iRowNode';
 import { TextField } from '@mui/material';
 

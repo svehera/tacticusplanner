@@ -1,6 +1,6 @@
-﻿import React, { useRef } from 'react';
+﻿import React from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
-import { FormControl, ListItemIcon, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { Rank } from '../../store/personal-data/personal-data.interfaces';
 import { ICharacter } from '../../store/static-data/interfaces';
 
