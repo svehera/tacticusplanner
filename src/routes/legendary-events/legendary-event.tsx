@@ -12,6 +12,7 @@ import {
     CellClickedEvent,
     ColDef,
     ColGroupDef,
+    IHeaderParams,
     ITooltipParams,
     ValueFormatterParams
 } from 'ag-grid-community';
@@ -28,6 +29,7 @@ import Typography from '@mui/material/Typography';
 import { ViewSettingsContext } from '../../contexts/view-settings.context';
 import { sortBy } from 'lodash';
 import { AutoTeamsSettingsContext } from '../../contexts/auto-teams-settings.context';
+import CustomTableHeader from './custom-table-header';
 
 const LegendaryEvent = (props: {
     legendaryEvent: ILegendaryEvent;
@@ -39,9 +41,13 @@ const LegendaryEvent = (props: {
     const viewPreferences = useContext(ViewSettingsContext);
     const autoTeamsPreferences = useContext(AutoTeamsSettingsContext);
     const { legendaryEvent, selectedTeamsChange } = props;
+    const components = useMemo(() => {
+        return {
+            agColumnHeader: CustomTableHeader,
+        };
+    }, []);
 
     const [selectedTeams, setSelectedTeams] = useState<Array<ITableRow>>(legendaryEvent.selectedTeams);
-
 
     const [columnsDefs] = useState<Array<ColGroupDef & { section?: LegendaryEventSection }>>([
         {
@@ -70,7 +76,7 @@ const LegendaryEvent = (props: {
     const rows: Array<ITableRow> = useMemo(() => getRows(legendaryEvent, viewPreferences), [viewPreferences]);
 
     const teamSize = 5;
-    
+
     const suggestedTeams: Array<ITableRow> = useMemo(() => getSuggestedTeams(legendaryEvent, autoTeamsPreferences), [autoTeamsPreferences]);
 
     function updateSelectedChars(columnId: string, selectedChar: ICharacter) {
@@ -128,11 +134,6 @@ const LegendaryEvent = (props: {
             alignedSelectedTeams.push(newRow);
         });
         updateSelectedTeams(alignedSelectedTeams);
-
-        // Extract column names from the object properties
-
-        // Now you have an object where each key is a column name and the value is an array of column values
-        console.log(alignedSelectedTeams);
     };
 
     const compactChars = () => {
@@ -174,11 +175,8 @@ const LegendaryEvent = (props: {
 
         updateSelectedTeams([...selectedTeams]);
     };
-    
-    const handleTeamsTableCellClick = (event: CellClickedEvent) => {
-        const columnId = event.column.getColId();
-        const selectedChar = event.value as ICharacter;
 
+    function deselectCharacter(columnId: string, selectedChar: ICharacter) {
         for (const row of selectedTeams) {
 
             const value = row[columnId];
@@ -192,7 +190,12 @@ const LegendaryEvent = (props: {
                 break;
             }
         }
+    }
 
+    const handleTeamsTableCellClick = (event: CellClickedEvent) => {
+        const columnId = event.column.getColId();
+        const selectedChar = event.value as ICharacter;
+        deselectCharacter(columnId, selectedChar);
         updateSelectedTeams([...selectedTeams]);
     };
 
@@ -245,7 +248,22 @@ const LegendaryEvent = (props: {
                         <AgGridReact
                             ref={gridRef3}
                             tooltipShowDelay={100}
+                            components={components}
                             rowData={suggestedTeams}
+                            defaultColDef={{
+                                headerComponentParams: {
+                                    onHeaderClick: (params: IHeaderParams) => {
+                                        const columnId = params.column.getColId();
+                                        suggestedTeams.forEach(row => {
+                                            const char = row[columnId];
+                                            if (typeof char !== 'string') {
+                                                updateSelectedChars(columnId, char);
+                                                updateSelectedTeams([...selectedTeams]);
+                                            }
+                                        });
+                                    }
+                                }
+                            }}
                             columnDefs={columnsDefs}
                             onGridReady={() => gridRef3.current?.api.sizeColumnsToFit()}
                             onCellClicked={handleMainTableCellClick}
@@ -269,6 +287,21 @@ const LegendaryEvent = (props: {
                             ref={gridRef2}
                             tooltipShowDelay={100}
                             rowData={selectedTeams}
+                            components={components}
+                            defaultColDef={{
+                                headerComponentParams: {
+                                    onHeaderClick: (params: IHeaderParams) => {
+                                        const columnId = params.column.getColId();
+                                        const chars = selectedTeams.map(row => row[columnId]);
+                                        chars.forEach(char => {
+                                            if (typeof char !== 'string') {
+                                                deselectCharacter(columnId, char);
+                                            }
+                                        });
+                                        updateSelectedTeams([...selectedTeams]);
+                                    }
+                                }
+                            }}
                             columnDefs={columnsDefs}
                             overlayNoRowsTemplate={'Select characters on Event Details'}
                             onGridReady={() => gridRef2.current?.api.sizeColumnsToFit()}
@@ -278,7 +311,7 @@ const LegendaryEvent = (props: {
                     </div>
                 </AccordionDetails>
             </Accordion>
-            
+
             <Accordion TransitionProps={{ unmountOnExit: true }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon/>}
                 >
@@ -301,16 +334,16 @@ function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[],
         valueFormatter: (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
         cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
         tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rank[params.value?.rank ?? 0],
-        section: suffix
+        section: suffix,
     }));
 }
 
 function getSuggestedTeams(legendaryEvent: ILegendaryEvent, settings: IAutoTeamsPreferences): Array<ITableRow> {
     const rows: Array<ITableRow> = [{}, {}, {}, {}, {}];
 
-    const alphaTeams =  legendaryEvent.alphaTrack.suggestTeams(legendaryEvent.id, settings);
-    const betaTeams =  legendaryEvent.betaTrack.suggestTeams(legendaryEvent.id, settings);
-    const gammaTeams =  legendaryEvent.gammaTrack.suggestTeams(legendaryEvent.id, settings);
+    const alphaTeams = legendaryEvent.alphaTrack.suggestTeams(legendaryEvent.id, settings);
+    const betaTeams = legendaryEvent.betaTrack.suggestTeams(legendaryEvent.id, settings);
+    const gammaTeams = legendaryEvent.gammaTrack.suggestTeams(legendaryEvent.id, settings);
 
     rows.forEach((row, index) => {
         alphaTeams.forEach((team, teamIndex) => {
@@ -331,7 +364,7 @@ function getSuggestedTeams(legendaryEvent: ILegendaryEvent, settings: IAutoTeams
             row[teamName] = char;
         });
     });
-    
+
 
     return rows;
 }

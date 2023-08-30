@@ -23,9 +23,9 @@ import { AutoTeamsSettingsContext } from '../../contexts/auto-teams-settings.con
 const LegendaryEventPage = () => {
     const [characters, setCharacters] = useState(GlobalStoreService.characters);
     
-    const jainZarLegendaryEvent = new JainZarLegendaryEvent(characters, PersonalDataService.data.legendaryEvents.jainZar.selectedTeams);
-    const aunShiLegendaryEvent = new AunShiLegendaryEvent(characters, PersonalDataService.data.legendaryEvents.aunShi.selectedTeams);
-    const shadowSunLegendaryEvent = new ShadowSunLegendaryEvent(characters, PersonalDataService.data.legendaryEvents.shadowSun.selectedTeams);
+    const jainZarLegendaryEvent = new JainZarLegendaryEvent(characters, mapSelectedTeams(PersonalDataService.data.legendaryEvents.jainZar.selectedTeams));
+    const aunShiLegendaryEvent = new AunShiLegendaryEvent(characters, mapSelectedTeams(PersonalDataService.data.legendaryEvents.aunShi.selectedTeams));
+    const shadowSunLegendaryEvent = new ShadowSunLegendaryEvent(characters, mapSelectedTeams(PersonalDataService.data.legendaryEvents.shadowSun.selectedTeams));
     
     const [viewPreferences, setViewPreferences] = useState(PersonalDataService.data.viewPreferences);
     const [autoTeamsPreferences, setAutoTeamsPreferences] = useState(PersonalDataService.data.autoTeamsPreferences);
@@ -43,7 +43,14 @@ const LegendaryEventPage = () => {
 
 
     const updateJainZarEventTeams = (selectedTeams: Array<ITableRow>) => {
-        PersonalDataService.data.legendaryEvents.jainZar.selectedTeams = selectedTeams;
+        PersonalDataService.data.legendaryEvents.jainZar.selectedTeams = selectedTeams.map(row => {
+            const newRow: ITableRow<string> = {};
+            for (const rowKey in row) {
+                const value = row[rowKey];
+                newRow[rowKey] = typeof value !== 'string' ? value.name : value;
+            }
+            return newRow;
+        });
         const selectedChars = selectedTeams
             .flatMap(row => Object.values(row))
             .filter(value => typeof value !== 'string')
@@ -62,7 +69,14 @@ const LegendaryEventPage = () => {
     };
 
     const updateAunShiEventTeams = (selectedTeams: Array<ITableRow>) => {
-        PersonalDataService.data.legendaryEvents.aunShi.selectedTeams = selectedTeams;
+        PersonalDataService.data.legendaryEvents.aunShi.selectedTeams = selectedTeams.map(row => {
+            const newRow: ITableRow<string> = {};
+            for (const rowKey in row) {
+                const value = row[rowKey];
+                newRow[rowKey] = typeof value !== 'string' ? value.name : value;
+            }
+            return newRow;
+        });
         const selectedChars = selectedTeams
             .flatMap(row => Object.values(row))
             .filter(value => typeof value !== 'string')
@@ -80,7 +94,14 @@ const LegendaryEventPage = () => {
     };
 
     const updateShadowSunEventTeams = (selectedTeams: Array<ITableRow>) => {
-        PersonalDataService.data.legendaryEvents.shadowSun.selectedTeams = selectedTeams;
+        PersonalDataService.data.legendaryEvents.shadowSun.selectedTeams = selectedTeams.map(row => {
+            const newRow: ITableRow<string> = {};
+            for (const rowKey in row) {
+                const value = row[rowKey];
+                newRow[rowKey] = typeof value !== 'string' ? value.name : value;
+            }
+            return newRow;
+        });
         const selectedChars = selectedTeams
             .flatMap(row => Object.values(row))
             .filter(value => typeof value !== 'string')
@@ -96,6 +117,25 @@ const LegendaryEventPage = () => {
 
         PersonalDataService.save();
     };
+    
+    function mapSelectedTeams(teams: ITableRow[]): ITableRow<ICharacter | ''>[] {
+        return teams.map(row => {
+            const newRow: ITableRow<ICharacter | ''> = {};
+            for (const rowKey in row) {
+                const value = row[rowKey];
+                if(!value) {
+                    newRow[rowKey] = '';
+                } else {
+                    if (typeof value === 'string') {
+                        newRow[rowKey] = characters.find(char => char.name === value) ?? '';
+                    } else {
+                        newRow[rowKey] = value;
+                    }
+                }
+            }
+            return newRow;
+        });
+    }
     
     const jainZarSelectedTeamsPoints = jainZarLegendaryEvent.getSelectedCharactersPoints();
     const aunShiSelectedTeamsPoints = aunShiLegendaryEvent.getSelectedCharactersPoints();

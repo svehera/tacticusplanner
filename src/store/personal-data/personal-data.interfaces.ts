@@ -14,7 +14,7 @@ export interface ILegendaryEventsData {
 }
 
 export interface ILegendaryEventData {
-    selectedTeams: ITableRow[];
+    selectedTeams: ITableRow<string>[];
 }
 
 export interface IViewPreferences {
