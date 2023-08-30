@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useRef, useState } from 'react';
+﻿import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ColGroupDef, RowStyle } from 'ag-grid-community';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
@@ -8,18 +8,18 @@ import { PersonalDataService } from '../../store/personal-data/personal-data.ser
 import RankSelectorCell from '../rank-selector-cell/rank-selector-cell';
 import Typography from '@mui/material/Typography';
 import CheckboxCell from '../checkbox-cell/checkbox-cell';
+import { TextField } from '@mui/material';
 
 const WhoYouOwn = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
     
     const defaultColDef: ColDef<ICharacter> = {
         sortable: true
     };
 
-    const onFilterTextBoxChanged = useCallback(() => {
+    const onFilterTextBoxChanged = useCallback((change: ChangeEvent<HTMLInputElement>) => {
         gridRef.current?.api.setQuickFilter(
-            inputRef.current?.value ?? ''
+            change.target.value
         );
     }, []);
     
@@ -131,16 +131,8 @@ const WhoYouOwn = () => {
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
                 Who You Own
             </Typography>
-            <div>
-                <input
-                    ref={inputRef}
-                    type="text"
-                    id="filter-text-box"
-                    placeholder="Quick Filter..."
-                    onInput={onFilterTextBoxChanged}
-                />
-            </div>
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 100px)', width: '100%' }}>
+            <TextField label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged}/>
+            <div className="ag-theme-material" style={{ height: 'calc(100vh - 170px)', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}
                     suppressCellFocus={true}

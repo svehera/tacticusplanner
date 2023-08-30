@@ -3,7 +3,7 @@ import dirtyDozen from '../../data/DirtyDozen.json';
 import { IDirtyDozenChar, IUnitData, UnitDataRaw } from './interfaces';
 import { DamageTypeRaw, DamageTypes, Faction, Traits, Traits2, TraitTypeRaw } from './enums';
 
-const rawTraitToEnum: Record<string, Traits> = {
+export const rawTraitToEnum: Record<string, Traits> = {
     [TraitTypeRaw.Psyker]: Traits.Psyker,
     [TraitTypeRaw.Overwatch]: Traits.Overwatch,
     [TraitTypeRaw.HeavyWeapon]: Traits.HeavyWeapon,
@@ -38,11 +38,11 @@ const rawTraitToEnum: Record<string, Traits> = {
     [TraitTypeRaw.Synapse]: Traits.Synapse,
 };
 
-const rawTraitToEnum2: Record<string, Traits2> = {
+export const rawTraitToEnum2: Record<string, Traits2> = {
     [TraitTypeRaw.SuppressiveFire]: Traits2.SuppressiveFire,
 };
 
-const damageTypeToEnum: Record<string, DamageTypes> = {
+export const damageTypeToEnum: Record<string, DamageTypes> = {
     [DamageTypeRaw.Physical]: DamageTypes.Physical,
     [DamageTypeRaw.Psychic]: DamageTypes.Psychic,
     [DamageTypeRaw.Bolter]: DamageTypes.Bolter,
