@@ -1,5 +1,5 @@
 ﻿import { ICharacter, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
-import { Alliance, DamageTypes, Faction, Traits } from '../static-data/enums';
+import { Alliance, DamageType, Faction, Trait } from '../static-data/enums';
 import { LegendaryEvents } from '../personal-data/personal-data.interfaces';
 import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
@@ -21,12 +21,12 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Big Target',
                     points: 115,
-                    units: filter(noNecrons).byTrait(Traits.BigTarget),
+                    units: filter(noNecrons).byTrait(Trait.BigTarget),
                 },
                 {
                     name: 'No Psykers',
                     points: 40,
-                    units: filter(noNecrons).byTrait(Traits.Psyker, true),
+                    units: filter(noNecrons).byTrait(Trait.Psyker, true),
                 },
                 {
                     name: 'Min 4 hits',
@@ -36,7 +36,7 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Power',
                     points: 80,
-                    units: filter(noNecrons).byDamageType(DamageTypes.Power),
+                    units: filter(noNecrons).byDamageType(DamageType.Power),
                 },
                 {
                     name: 'No Range',
@@ -67,12 +67,12 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Bolter',
                     points: 50,
-                    units: filter(noTyranids).byDamageType(DamageTypes.Bolter, true),
+                    units: filter(noTyranids).byDamageType(DamageType.Bolter, true),
                 },
                 {
                     name: 'No Piercing',
                     points: 50,
-                    units:  filter(noTyranids).byDamageType(DamageTypes.Piercing, true),
+                    units:  filter(noTyranids).byDamageType(DamageType.Piercing, true),
                 },
                 {
                     name: 'No Summons',
@@ -93,7 +93,7 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Piercing',
                     points: 40,
-                    units: filter(noImperials).byDamageType(DamageTypes.Piercing, true),
+                    units: filter(noImperials).byDamageType(DamageType.Piercing, true),
                 },
                 {
                     name: 'Ranged',
@@ -108,7 +108,7 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Power',
                     points: 100,
-                    units:  filter(noImperials).byDamageType(DamageTypes.Power),
+                    units:  filter(noImperials).byDamageType(DamageType.Power),
                 },
                 {
                     name: 'Black Legion',

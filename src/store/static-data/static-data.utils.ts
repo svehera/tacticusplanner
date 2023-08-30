@@ -1,67 +1,8 @@
 ﻿import unitsData from '../../data/UnitData.json';
 import dirtyDozen from '../../data/DirtyDozen.json';
 import { IDirtyDozenChar, IUnitData, UnitDataRaw } from './interfaces';
-import { DamageTypeRaw, DamageTypes, Faction, Traits, Traits2, TraitTypeRaw } from './enums';
-
-export const rawTraitToEnum: Record<string, Traits> = {
-    [TraitTypeRaw.Psyker]: Traits.Psyker,
-    [TraitTypeRaw.Overwatch]: Traits.Overwatch,
-    [TraitTypeRaw.HeavyWeapon]: Traits.HeavyWeapon,
-    [TraitTypeRaw.Infiltrate]: Traits.Infiltrate,
-    [TraitTypeRaw.Flying]: Traits.Flying,
-    [TraitTypeRaw.MKXGravis]: Traits.MKXGravis,
-    [TraitTypeRaw.Healer]: Traits.Healer,
-    [TraitTypeRaw.FinalVengeance]: Traits.FinalVengeance,
-    [TraitTypeRaw.LetTheGalaxyBurn]: Traits.LetTheGalaxyBurn,
-    [TraitTypeRaw.DeepStrike]: Traits.DeepStrike,
-    [TraitTypeRaw.TerminatorArmour]: Traits.TerminatorArmour,
-    [TraitTypeRaw.Resilient]: Traits.Resilient,
-    [TraitTypeRaw.BeastSnagga]: Traits.BeastSnagga,
-    [TraitTypeRaw.Mechanic]: Traits.Mechanic,
-    [TraitTypeRaw.Mechanical]: Traits.Mechanical,
-    [TraitTypeRaw.Explodes]: Traits.Explodes,
-    [TraitTypeRaw.Dakka]: Traits.Dakka,
-    [TraitTypeRaw.Mounted]: Traits.Mounted,
-    [TraitTypeRaw.ActOfFaith]: Traits.ActOfFaith,
-    [TraitTypeRaw.LivingMetal]: Traits.LivingMetal,
-    [TraitTypeRaw.IndirectFire]: Traits.IndirectFire,
-    [TraitTypeRaw.ContagionsOfNurgle]: Traits.ContagionsOfNurgle,
-    [TraitTypeRaw.PutridExplosion]: Traits.PutridExplosion,
-    [TraitTypeRaw.Parry]: Traits.Parry,
-    [TraitTypeRaw.Terrifying]: Traits.Terrifying,
-    [TraitTypeRaw.Unstoppable]: Traits.Unstoppable,
-    [TraitTypeRaw.CloseCombatWeakness]: Traits.CloseCombatWeakness,
-    [TraitTypeRaw.Camouflage]: Traits.Camouflage,
-    [TraitTypeRaw.WeaverOfFates]: Traits.WeaverOfFates,
-    [TraitTypeRaw.BigTarget]: Traits.BigTarget,
-    [TraitTypeRaw.ShadowInTheWarp]: Traits.ShadowInTheWarp,
-    [TraitTypeRaw.Synapse]: Traits.Synapse,
-};
-
-export const rawTraitToEnum2: Record<string, Traits2> = {
-    [TraitTypeRaw.SuppressiveFire]: Traits2.SuppressiveFire,
-};
-
-export const damageTypeToEnum: Record<string, DamageTypes> = {
-    [DamageTypeRaw.Physical]: DamageTypes.Physical,
-    [DamageTypeRaw.Psychic]: DamageTypes.Psychic,
-    [DamageTypeRaw.Bolter]: DamageTypes.Bolter,
-    [DamageTypeRaw.Piercing]: DamageTypes.Piercing,
-    [DamageTypeRaw.Power]: DamageTypes.Power,
-    [DamageTypeRaw.HeavyRound]: DamageTypes.HeavyRound,
-    [DamageTypeRaw.Chain]: DamageTypes.Chain,
-    [DamageTypeRaw.Projectile]: DamageTypes.Projectile,
-    [DamageTypeRaw.Flame]: DamageTypes.Flame,
-    [DamageTypeRaw.Molecular]: DamageTypes.Molecular,
-    [DamageTypeRaw.Particle]: DamageTypes.Particle,
-    [DamageTypeRaw.Plasma]: DamageTypes.Plasma,
-    [DamageTypeRaw.Energy]: DamageTypes.Energy,
-    [DamageTypeRaw.Las]: DamageTypes.Las,
-    [DamageTypeRaw.Blast]: DamageTypes.Blast,
-    [DamageTypeRaw.Direct]: DamageTypes.Direct,
-    [DamageTypeRaw.Pulse]: DamageTypes.Pulse,
-    [DamageTypeRaw.Melta]: DamageTypes.Melta,
-};
+import { Faction } from './enums';
+import { uniq } from 'lodash';
 
 export class StaticDataUtils {
     
@@ -79,12 +20,6 @@ export class StaticDataUtils {
             health: rawData.Health,
             damage: rawData.Damage,
             armour: rawData.Armour,
-            damageTypes: DamageTypes.None,
-            traits: Traits.None,
-            traits2: Traits2.None,
-            meleeDamage: DamageTypes.None,
-            rangeDamage: DamageTypes.None,
-            abilitiesDamage: DamageTypes.None,
             equipment1: rawData.Equipment1,
             equipment2: rawData.Equipment2,
             equipment3: rawData.Equipment3,
@@ -94,40 +29,27 @@ export class StaticDataUtils {
             movement: rawData.Movement,
             forcedSummons: rawData.ForcedSummons,
             requiredInCampaign: rawData.RequiredInCampaign,
-            legendaryEvents: {}
+            legendaryEvents: {},
+            traits: rawData.Traits,
+            damageTypes: {
+                all: [rawData['Melee Damage']],
+                melee: rawData['Melee Damage'],
+            }
         };
-
-        // Calculate damage types based on rawData values
-        if (rawData['Melee Damage']) {
-            unitData.damageTypes |= damageTypeToEnum[rawData['Melee Damage']];
-            unitData.meleeDamage = damageTypeToEnum[rawData['Melee Damage']];
-        }
+        
         if (rawData['Ranged Damage']) {
-            unitData.damageTypes |=  damageTypeToEnum[rawData['Ranged Damage']];
-            unitData.rangeDamage = damageTypeToEnum[rawData['Ranged Damage']];
+            unitData.damageTypes.all.push(rawData['Ranged Damage']);
+            unitData.damageTypes.range = rawData['Ranged Damage'];
         }
         if (rawData['Active Ability']) {
-            unitData.damageTypes |= damageTypeToEnum[rawData['Active Ability']];
-            unitData.abilitiesDamage |= damageTypeToEnum[rawData['Active Ability']];
+            unitData.damageTypes.all.push(rawData['Active Ability']);
+            unitData.damageTypes.activeAbility =rawData['Active Ability'];
         }
         if (rawData['Passive Ability']) {
-            unitData.damageTypes |=  damageTypeToEnum[rawData['Passive Ability']];
-            unitData.abilitiesDamage |=  damageTypeToEnum[rawData['Passive Ability']];
+            unitData.damageTypes.all.push(rawData['Passive Ability']);
+            unitData.damageTypes.passiveAbility = rawData['Passive Ability'];
         }
-
-        // Calculate traits based on rawData values
-        for (let i = 1; i <= 4; i++) {
-            const traitKey = `Trait ${i}` as 'Trait 1' | 'Trait 2' | 'Trait 3' | 'Trait 4';
-            const value = rawData[traitKey] as TraitTypeRaw;
-            if (value) {
-                if (rawTraitToEnum[value]) {
-                    unitData.traits |= rawTraitToEnum[value];
-                }
-                if(rawTraitToEnum2[value]) {
-                    unitData.traits2 |= rawTraitToEnum2[value];
-                }
-            }
-        }
+        unitData.damageTypes.all = uniq(unitData.damageTypes.all);
 
         return unitData;
     }
@@ -167,4 +89,3 @@ export class StaticDataUtils {
         }
     }
 }
-

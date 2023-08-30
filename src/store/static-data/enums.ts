@@ -38,7 +38,7 @@ export enum Equipment {
 }
 
 
-export enum TraitTypeRaw {
+export enum Trait {
     Psyker = 'Psyker',
     Overwatch = 'Overwatch',
     HeavyWeapon = 'Heavy Weapon',
@@ -74,48 +74,7 @@ export enum TraitTypeRaw {
     SuppressiveFire = 'Suppressive Fire'
 }
 
-export enum Traits {
-    None = 0,
-    Psyker = 1 << 0,
-    Overwatch = 1 << 1,
-    HeavyWeapon = 1 << 2,
-    Infiltrate = 1 << 3,
-    Flying = 1 << 4,
-    MKXGravis = 1 << 5,
-    Healer = 1 << 6,
-    FinalVengeance = 1 << 7,
-    LetTheGalaxyBurn = 1 << 8,
-    DeepStrike = 1 << 9,
-    TerminatorArmour = 1 << 10,
-    Resilient = 1 << 11,
-    BeastSnagga = 1 << 12,
-    Mechanic = 1 << 13,
-    Mechanical = 1 << 14,
-    Explodes = 1 << 15,
-    Dakka = 1 << 16,
-    Mounted = 1 << 17,
-    ActOfFaith = 1 << 18,
-    LivingMetal = 1 << 19,
-    IndirectFire = 1 << 20,
-    ContagionsOfNurgle = 1 << 21,
-    PutridExplosion = 1 << 22,
-    Parry = 1 << 23,
-    Terrifying = 1 << 24,
-    Unstoppable = 1 << 25,
-    CloseCombatWeakness = 1 << 26,
-    Camouflage = 1 << 27,
-    WeaverOfFates = 1 << 28,
-    BigTarget = 1 << 29,
-    ShadowInTheWarp = 1 << 30,
-    Synapse = 1 << 31,
-}
-
-export enum Traits2 {
-    None = 0,
-    SuppressiveFire = 1 << 0,
-}
-
-export enum DamageTypeRaw {
+export enum DamageType {
     Physical = 'Physical',
     Psychic = 'Psychic',
     Bolter = 'Bolter',
@@ -134,26 +93,4 @@ export enum DamageTypeRaw {
     Direct = 'Direct',
     Pulse = 'Pulse',
     Melta = 'Melta',
-}
-
-export enum DamageTypes {
-    None = 0,
-    Physical = 1 << 0,
-    Psychic = 1 << 1,
-    Bolter = 1 << 2,
-    Piercing = 1 << 3,
-    Power = 1 << 4,
-    HeavyRound = 1 << 5,
-    Chain = 1 << 6,
-    Projectile = 1 << 7,
-    Flame = 1 << 8,
-    Molecular = 1 << 10,
-    Particle = 1 << 11,
-    Plasma = 1 << 12,
-    Energy = 1 << 13,
-    Las = 1 << 14,
-    Blast = 1 << 15,
-    Direct = 1 << 16,
-    Pulse = 1 << 17,
-    Melta = 1 << 18,
 }

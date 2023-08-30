@@ -1,16 +1,18 @@
 ﻿import {
     Alliance,
-    DamageTypeRaw,
-    DamageTypes,
+    DamageType,
     Equipment,
     Faction,
     Rarity,
-    Traits,
-    Traits2,
-    TraitTypeRaw
+    Trait
 } from './enums';
-import { IAutoTeamsPreferences, IPersonalCharacterData, LegendaryEvents, Rank } from '../personal-data/personal-data.interfaces';
- 
+import {
+    IAutoTeamsPreferences,
+    IPersonalCharacterData,
+    LegendaryEvents,
+    Rank
+} from '../personal-data/personal-data.interfaces';
+
 export type LegendaryEventSection = '(Alpha)' | '(Beta)' | '(Gamma)';
 
 
@@ -22,18 +24,19 @@ export interface UnitDataRaw {
     Damage: number;
     Armour: number;
     'Initial rarity': Rarity;
-    'Melee Damage': DamageTypeRaw;
+    'Melee Damage': DamageType;
     'Melee Hits': number;
-    'Ranged Damage'?: DamageTypeRaw;
+    'Ranged Damage'?: DamageType;
     'Ranged Hits'?: number;
     Distance?: number;
     Movement: number;
-    'Trait 1'?: TraitTypeRaw;
-    'Trait 2'?: TraitTypeRaw;
-    'Trait 3'?: TraitTypeRaw;
-    'Trait 4'?: TraitTypeRaw;
-    'Active Ability'?: DamageTypeRaw;
-    'Passive Ability'?: DamageTypeRaw;
+    'Trait 1'?: Trait;
+    'Trait 2'?: Trait;
+    'Trait 3'?: Trait;
+    'Trait 4'?: Trait;
+    Traits: Trait[],
+    'Active Ability'?: DamageType;
+    'Passive Ability'?: DamageType;
     'Equipment1': Equipment;
     'Equipment2': Equipment;
     'Equipment3': Equipment;
@@ -52,12 +55,8 @@ export interface IUnitData {
     health: number;
     damage: number;
     armour: number;
-    damageTypes: DamageTypes,
-    meleeDamage: DamageTypes,
-    rangeDamage: DamageTypes,
-    abilitiesDamage: DamageTypes,
-    traits: Traits,
-    traits2: Traits2,
+    damageTypes: IDamageTypes,
+    traits: Trait[],
     equipment1: Equipment;
     equipment2: Equipment;
     equipment3: Equipment;
@@ -70,14 +69,22 @@ export interface IUnitData {
     legendaryEvents: ICharLegendaryEvents;
 }
 
+export interface IDamageTypes {
+    all: DamageType[],
+    melee: DamageType,
+    range?: DamageType,
+    activeAbility?: DamageType,
+    passiveAbility?: DamageType,
+}
+
 export interface IDirtyDozenChar {
-    Name: string
-    Rank: number
-    Pvp: number
-    GRTyranid: number
-    GRNecron: number
-    GROrk: number
-    GRMortarion: number
+    Name: string;
+    Rank: number;
+    Pvp: number;
+    GRTyranid: number;
+    GRNecron: number;
+    GROrk: number;
+    GRMortarion: number;
 }
 
 
@@ -92,10 +99,10 @@ export interface ICharLegendaryEvent {
 
 export interface ILegendaryEvent {
     id: LegendaryEvents;
-    alphaTrack: ILegendaryEventTrack;   
-    betaTrack: ILegendaryEventTrack;   
+    alphaTrack: ILegendaryEventTrack;
+    betaTrack: ILegendaryEventTrack;
     gammaTrack: ILegendaryEventTrack;
-    
+
     selectedTeams: ITableRow[];
     suggestedTeams: ITableRow[];
     allowedUnits: Array<ICharacter>;
@@ -105,7 +112,7 @@ export interface ILegendaryEvent {
         points: number,
         rank: Rank,
         timesSelected: number
-    }>
+    }>;
 }
 
 export interface ILegendaryEventTrack {
@@ -114,10 +121,13 @@ export interface ILegendaryEventTrack {
     killPoints: number;
     allowedUnits: ICharacter[];
     unitsRestrictions: Array<ILegendaryEventTrackRestriction>;
-    
+
     getCharacterPoints(char: ICharacter): number;
+
     getCharacterSlots(char: ICharacter): number;
-    getRestrictionPoints (name: string): number;
+
+    getRestrictionPoints(name: string): number;
+
     suggestTeams(event: LegendaryEvents, settings: IAutoTeamsPreferences): Array<ICharacter[]>;
 }
 
