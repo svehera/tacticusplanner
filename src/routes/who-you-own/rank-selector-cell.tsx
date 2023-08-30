@@ -1,10 +1,10 @@
 ﻿import React from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { Rank } from '../../store/personal-data/personal-data.interfaces';
-import { ICharacter } from '../../store/static-data/interfaces';
 
 import './rank-selector-cell.css';
+import { Rank } from '../../models/enums';
+import { ICharacter } from '../../models/interfaces';
 
 const RankSelectorCell = (props: ICellRendererParams<ICharacter>) => {
     const rankEntries: Array<[string, string | Rank]> = Object.entries(Rank);

@@ -1,6 +1,5 @@
-﻿import { ICharacter, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
-import { Alliance, DamageType, Faction, Trait } from '../static-data/enums';
-import { LegendaryEvents } from '../personal-data/personal-data.interfaces';
+﻿import { ICharacter, ILegendaryEventTrack, ITableRow } from '../interfaces';
+import { Alliance, DamageType, Faction, Trait, LegendaryEvents } from '../enums';
 import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
 import { LETrack } from './base.le.track';

@@ -1,11 +1,12 @@
 ﻿import {
+    IAutoTeamsPreferences,
     ICharacter,
     ILegendaryEventTrack,
     ILegendaryEventTrackRestriction,
     LegendaryEventSection
-} from '../static-data/interfaces';
+} from '../interfaces';
 import { orderBy, sortBy, sum } from 'lodash';
-import { IAutoTeamsPreferences, LegendaryEvents } from '../personal-data/personal-data.interfaces';
+import { LegendaryEvents } from '../enums';
 
 export class LETrack implements ILegendaryEventTrack {
 

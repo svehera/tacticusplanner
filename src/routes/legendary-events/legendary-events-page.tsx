@@ -1,27 +1,22 @@
 ﻿import React, { useEffect, useState } from 'react';
+import { cloneDeep, uniqBy } from 'lodash';
 
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-material.css';
-import GlobalStoreService from '../../store/global-store.service';
-import { JainZarLegendaryEvent } from '../../store/legendary-events/jain-zar.le';
-import LegendaryEvent from './legendary-event';
 import Typography from '@mui/material/Typography';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+import { ViewSettingsContext, AutoTeamsSettingsContext } from '../../contexts';
+import { GlobalService, PersonalDataService } from '../../services';
+import { AunShiLegendaryEvent, JainZarLegendaryEvent, ShadowSunLegendaryEvent } from '../../models/legendary-events';
+import { ICharacter, ITableRow } from '../../models/interfaces';
+
+import LegendaryEvent from './legendary-event';
 import ViewSettings from './view-settings';
-import { ViewSettingsContext } from '../../contexts/view-settings.context';
-import { PersonalDataService } from '../../store/personal-data/personal-data.service';
-import { cloneDeep, uniqBy } from 'lodash';
-import { ICharacter, ITableRow } from '../../store/static-data/interfaces';
-import { AunShiLegendaryEvent } from '../../store/legendary-events/aun-shi.le';
-import { ShadowSunLegendaryEvent } from '../../store/legendary-events/shadow-sun.le';
-import OverallPointsTable from './overall-points-table';
 import AutoTeamsSettings from './auto-teams-settings';
-import { AutoTeamsSettingsContext } from '../../contexts/auto-teams-settings.context';
+import OverallPointsTable from './overall-points-table';
 
-
-const LegendaryEventPage = () => {
-    const [characters, setCharacters] = useState(GlobalStoreService.characters);
+export const LegendaryEventPage = () => {
+    const [characters, setCharacters] = useState(GlobalService.characters);
     
     const jainZarLegendaryEvent = new JainZarLegendaryEvent(characters, mapSelectedTeams(PersonalDataService.data.legendaryEvents.jainZar.selectedTeams));
     const aunShiLegendaryEvent = new AunShiLegendaryEvent(characters, mapSelectedTeams(PersonalDataService.data.legendaryEvents.aunShi.selectedTeams));
@@ -243,5 +238,3 @@ const LegendaryEventPage = () => {
     );
 
 };
-
-export default LegendaryEventPage;

@@ -2,12 +2,12 @@
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ColGroupDef, RowStyle } from 'ag-grid-community';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
-import { ICharacter } from '../../store/static-data/interfaces';
 import Typography from '@mui/material/Typography';
-import { StaticDataUtils } from '../../store/static-data/static-data.utils';
 import { Link } from 'react-router-dom';
+import { ICharacter } from '../../models/interfaces';
+import { StaticDataService } from '../../services';
 
-const DirtyDozen = () => {
+export const DirtyDozen = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
     
     const defaultColDef: ColDef<ICharacter> = {
@@ -46,7 +46,7 @@ const DirtyDozen = () => {
         },
     ]);
 
-    const [rowsData] = useState(StaticDataUtils.dirtyDozenData);
+    const [rowsData] = useState(StaticDataService.dirtyDozenData);
 
     const getRowStyle = (params: RowClassParams): RowStyle => {
         return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'silver' : 'white' };

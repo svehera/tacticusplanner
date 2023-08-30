@@ -1,6 +1,6 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
-import { IViewPreferences } from '../../store/personal-data/personal-data.interfaces';
+import { IViewPreferences } from '../../models/interfaces';
 
 const ViewSettings = (props: { value: IViewPreferences , valueChanges: (settings: IViewPreferences) => void }) => {
     const { value, valueChanges } = props;

@@ -1,5 +1,5 @@
 ﻿import { createContext } from 'react';
-import { IViewPreferences } from '../store/personal-data/personal-data.interfaces';
+import { IViewPreferences } from '../models/interfaces';
 
 export const defaultViewPreferences: IViewPreferences = {
     onlyUnlocked: false,

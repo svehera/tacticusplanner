@@ -2,15 +2,17 @@
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ColGroupDef, RowStyle } from 'ag-grid-community';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
-import { ICharacter } from '../../store/static-data/interfaces';
-import GlobalStoreService from '../../store/global-store.service';
-import { PersonalDataService } from '../../store/personal-data/personal-data.service';
-import RankSelectorCell from './rank-selector-cell';
-import Typography from '@mui/material/Typography';
-import CheckboxCell from './checkbox-cell';
-import { TextField } from '@mui/material';
 
-const WhoYouOwn = () => {
+import { TextField } from '@mui/material';
+import Typography from '@mui/material/Typography';
+
+import { ICharacter } from '../../models/interfaces';
+import { GlobalService, PersonalDataService } from '../../services';
+
+import RankSelectorCell from './rank-selector-cell';
+import CheckboxCell from './checkbox-cell';
+
+export const WhoYouOwn = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
     
     const defaultColDef: ColDef<ICharacter> = {
@@ -108,7 +110,7 @@ const WhoYouOwn = () => {
         },
     ]);
 
-    const [rowsData] = useState(GlobalStoreService.characters);
+    const [rowsData] = useState(GlobalService.characters);
 
     const getRowStyle = (params: RowClassParams<ICharacter>): RowStyle => {
         return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'silver' : 'white' };
@@ -149,4 +151,3 @@ const WhoYouOwn = () => {
         </div>
     );
 };
-export default WhoYouOwn;

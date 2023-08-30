@@ -1,16 +1,16 @@
-﻿import * as React from 'react';
+﻿import React, { ChangeEvent, useRef } from 'react';
+import { Link } from 'react-router-dom';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { ChangeEvent, useRef } from 'react';
-import { PersonalDataService } from './store/personal-data/personal-data.service';
-import { Link } from 'react-router-dom';
 import { Divider, Menu, MenuItem, Tooltip } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { PersonalDataService } from './services';
 
-const ButtonAppBar = () => {
+const TopAppBar = () => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -47,7 +47,7 @@ const ButtonAppBar = () => {
                     const content = e.target?.result as string;
                     PersonalDataService.data = JSON.parse(content);
                     PersonalDataService.save();
-                    window.location = '/' as any;
+                    window.location = '/' as unknown as Location;
                 } catch (error) {
                     console.error('Error parsing JSON:', error);
                 }
@@ -56,6 +56,49 @@ const ButtonAppBar = () => {
             reader.readAsText(file);
         }
     };
+    
+    const menu = (
+        <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+                'aria-labelledby': 'basic-button',
+            }}
+        >
+            <MenuItem onClick={handleClose}>
+                <Button component={Link} to={'./'} color="inherit">About</Button>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+                <Button component={Link} to={'./contacts'} color="inherit">Contacts</Button>
+            </MenuItem>
+            <Divider/>
+            <MenuItem onClick={handleClose}>
+                <Tooltip title={'Import your personal data (Who You Own, etc.)'}>
+                    <Button color="inherit" onClick={() => inputRef.current?.click()}>Import data</Button>
+                </Tooltip>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+                <Tooltip title={'Back up your personal data (Who You Own, etc.)'}>
+                    <Button onClick={downloadJson} color="inherit">Export data</Button>
+                </Tooltip>
+            </MenuItem>
+            <Divider/>
+            <MenuItem onClick={handleClose}>
+                <Button component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+                <Button component={Link} to={'./characters'} color="inherit">Characters</Button>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+                <Button component={Link} to={'./dirtyDozen'} color="inherit">Dirty Dozen</Button>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+                <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>
+            </MenuItem>
+        </Menu>
+    );
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -86,48 +129,9 @@ const ButtonAppBar = () => {
                             color="inherit"
                             onClick={handleClick}
                         >
-                            <MenuIcon/> Menu 
+                            <MenuIcon/> 
                         </Button>
-                        <Menu
-                            id="basic-menu"
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={handleClose}
-                            MenuListProps={{
-                                'aria-labelledby': 'basic-button',
-                            }}
-                        >
-                            <MenuItem onClick={handleClose}>
-                                <Button component={Link} to={'./'} color="inherit">About</Button>
-                            </MenuItem>
-                            <MenuItem onClick={handleClose}> 
-                                <Button component={Link} to={'./contacts'} color="inherit">Contacts</Button>
-                            </MenuItem>
-                            <Divider/>
-                            <MenuItem onClick={handleClose}>
-                                <Tooltip title={'Import your personal data (Who You Own, etc.)'}>
-                                    <Button color="inherit" onClick={() => inputRef.current?.click()}>Import data</Button>
-                                </Tooltip>
-                            </MenuItem>
-                            <MenuItem onClick={handleClose}>
-                                <Tooltip title={'Back up your personal data (Who You Own, etc.)'}>
-                                    <Button onClick={downloadJson} color="inherit">Export data</Button>
-                                </Tooltip>
-                            </MenuItem>
-                            <Divider/>
-                            <MenuItem onClick={handleClose}>
-                                <Button component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
-                            </MenuItem>
-                            <MenuItem onClick={handleClose}>
-                                <Button component={Link} to={'./characters'} color="inherit">Characters</Button>
-                            </MenuItem> 
-                            <MenuItem onClick={handleClose}>
-                                <Button component={Link} to={'./dirtyDozen'} color="inherit">Dirty Dozen</Button>
-                            </MenuItem>
-                            <MenuItem onClick={handleClose}>
-                                <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>
-                            </MenuItem>
-                        </Menu>
+                        {menu}
                     </div>
                 </Toolbar>
             </AppBar>
@@ -135,4 +139,4 @@ const ButtonAppBar = () => {
     );
 };
 
-export default ButtonAppBar;
+export default TopAppBar;

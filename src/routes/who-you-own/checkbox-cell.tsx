@@ -1,7 +1,7 @@
 ﻿import React, { ChangeEvent, useState } from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
 import { Checkbox } from '@mui/material';
-import { ICharacter } from '../../store/static-data/interfaces';
+import { ICharacter } from '../../models/interfaces';
 
 const CheckboxCell = (props: ICellRendererParams<ICharacter> & {
     editProperty: 'unlocked' | 'alwaysRecommend' | 'neverRecommend',

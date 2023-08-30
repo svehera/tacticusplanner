@@ -3,9 +3,9 @@
     ILegendaryEvent,
     ILegendaryEventTrack,
     ITableRow
-} from '../static-data/interfaces';
+} from '../interfaces';
 import { sortBy, sum, uniqBy } from 'lodash';
-import { LegendaryEvents, Rank } from '../personal-data/personal-data.interfaces';
+import { LegendaryEvents, Rank } from '../enums';
 
 export abstract class LegendaryEventBase implements ILegendaryEvent {
     alphaTrack: ILegendaryEventTrack;

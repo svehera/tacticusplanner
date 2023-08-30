@@ -1,59 +1,59 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
 import './index.css';
-import App from './App';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-material.css';
+
+import App from './app';
 import reportWebVitals from './reportWebVitals';
 
 import {
     createBrowserRouter,
     RouterProvider,
 } from 'react-router-dom';
-import WhoYouOwn from './routes/who-you-own/who-you-own';
-import LegendaryEventPage from './routes/legendary-events/legendary-events-page';
-import About from './routes/root/about';
-import Contacts from './routes/contacts/contacts';
-import Characters from './routes/characters/characters';
-import DirtyDozen from './routes/dirty-dozen/dirty-dozen';
+import { About, Characters, Contacts, DirtyDozen, LegendaryEventPage, WhoYouOwn } from './routes';
+
 
 const router = createBrowserRouter([
     {
         path: '',
-        element: <App />,
+        element: <App/>,
         children: [
             {
                 path: '/',
-                element: <About />,
+                element: <About/>,
             },
             {
                 path: 'wyo',
-                element: <WhoYouOwn />,
+                element: <WhoYouOwn/>,
             },
             {
                 path: 'characters',
-                element: <Characters />,
+                element: <Characters/>,
             },
             {
                 path: 'dirtyDozen',
-                element: <DirtyDozen />,
+                element: <DirtyDozen/>,
             },
             {
                 path: 'le',
-                element: <LegendaryEventPage />,
+                element: <LegendaryEventPage/>,
             },
             {
                 path: 'contacts',
-                element: <Contacts />,
+                element: <Contacts/>,
             },
         ],
     },
 ]);
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <RouterProvider router={router}/>
     </React.StrictMode>
 );
 

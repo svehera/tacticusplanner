@@ -1,5 +1,5 @@
 ﻿import { createContext } from 'react';
-import { IAutoTeamsPreferences } from '../store/personal-data/personal-data.interfaces';
+import { IAutoTeamsPreferences } from '../models/interfaces';
 
 export const defaultAutoTeamsPreferences: IAutoTeamsPreferences = {
     preferCampaign: false,
