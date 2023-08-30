@@ -1,6 +1,6 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
-import { IAutoTeamsPreferences } from '../../store/personal-data/personal-data.interfaces';
+import { IAutoTeamsPreferences } from '../../models/interfaces';
 
 const AutoTeamsSettings = (props: { value: IAutoTeamsPreferences , valueChanges: (settings: IAutoTeamsPreferences) => void }) => {
     const { value, valueChanges } = props;

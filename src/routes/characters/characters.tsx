@@ -1,16 +1,17 @@
 ﻿import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
-import { AgGridReact } from 'ag-grid-react';
-import { ColDef, RowStyle } from 'ag-grid-community';
-import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
-import { ICharacter } from '../../store/static-data/interfaces';
-import GlobalStoreService from '../../store/global-store.service';
-import { DamageType, Trait } from '../../store/static-data/enums';
-import Typography from '@mui/material/Typography';
-import MultipleSelectCheckmarks from './multiple-select';
-import { IRowNode } from 'ag-grid-community/dist/lib/interfaces/iRowNode';
-import { TextField } from '@mui/material';
 
-const Characters = () => {
+import { AgGridReact } from 'ag-grid-react';
+import { ColDef, RowStyle, RowClassParams, IRowNode } from 'ag-grid-community';
+
+import { TextField } from '@mui/material';
+import Typography from '@mui/material/Typography';
+
+import MultipleSelectCheckmarks from './multiple-select';
+import { ICharacter } from '../../models/interfaces';
+import { DamageType, Trait } from '../../models/enums';
+import { GlobalService } from '../../services';
+
+export const Characters = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
 
     const [damageTypesFilter, setDamageTypesFilter] = useState<DamageType[]>([]);
@@ -138,7 +139,7 @@ const Characters = () => {
         }
     ]);
 
-    const [rowsData] = useState(GlobalStoreService.characters);
+    const [rowsData] = useState(GlobalService.characters);
 
     const getRowStyle = (params: RowClassParams<ICharacter>): RowStyle => {
         return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'silver' : 'white' };
@@ -246,5 +247,3 @@ const Characters = () => {
         </div>
     );
 };
-
-export default Characters;

@@ -3,7 +3,7 @@
     ILegendaryEventsData,
     IPersonalData,
     IViewPreferences
-} from './personal-data.interfaces';
+} from '../models/interfaces';
 
 export class PersonalDataService {
     static personalDataStorageKey = 'personalData';

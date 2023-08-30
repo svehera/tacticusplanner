@@ -1,12 +1,7 @@
 ﻿import React, { useContext, useMemo, useRef, useState } from 'react';
+import { sortBy } from 'lodash';
+
 import { AgGridReact } from 'ag-grid-react';
-import {
-    ICharacter,
-    ILegendaryEvent,
-    ILegendaryEventTrack,
-    ILegendaryEventTrackRestriction,
-    ITableRow, LegendaryEventSection
-} from '../../store/static-data/interfaces';
 import {
     CellClassParams,
     CellClickedEvent,
@@ -16,19 +11,31 @@ import {
     ITooltipParams,
     ValueFormatterParams
 } from 'ag-grid-community';
-import { IAutoTeamsPreferences, IViewPreferences, Rank } from '../../store/personal-data/personal-data.interfaces';
+
 import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
     Button
 } from '@mui/material';
-import PointsTable from './points-table';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
-import { ViewSettingsContext } from '../../contexts/view-settings.context';
-import { sortBy } from 'lodash';
-import { AutoTeamsSettingsContext } from '../../contexts/auto-teams-settings.context';
+
+import {
+    IAutoTeamsPreferences,
+    ICharacter,
+    ILegendaryEvent,
+    ILegendaryEventTrack,
+    ILegendaryEventTrackRestriction,
+    ITableRow,
+    IViewPreferences, 
+    LegendaryEventSection
+} from '../../models/interfaces';
+import { ViewSettingsContext, AutoTeamsSettingsContext } from '../../contexts';
+import { Rank } from '../../models/enums';
+
+
+import PointsTable from './points-table';
 import CustomTableHeader from './custom-table-header';
 
 const LegendaryEvent = (props: {

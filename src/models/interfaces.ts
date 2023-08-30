@@ -2,19 +2,12 @@
     Alliance,
     DamageType,
     Equipment,
-    Faction,
+    Faction, LegendaryEvents, Rank,
     Rarity,
     Trait
 } from './enums';
-import {
-    IAutoTeamsPreferences,
-    IPersonalCharacterData,
-    LegendaryEvents,
-    Rank
-} from '../personal-data/personal-data.interfaces';
 
 export type LegendaryEventSection = '(Alpha)' | '(Beta)' | '(Gamma)';
-
 
 export interface UnitDataRaw {
     Name: string;
@@ -86,7 +79,6 @@ export interface IDirtyDozenChar {
     GRMortarion: number;
 }
 
-
 export type ICharacter = IUnitData & IPersonalCharacterData;
 
 export type ICharLegendaryEvents = Record<LegendaryEvents, ICharLegendaryEvent>;
@@ -137,3 +129,42 @@ export interface ILegendaryEventTrackRestriction {
 }
 
 export type ITableRow<T = ICharacter | string> = Record<string, T>;
+
+
+export interface IPersonalData {
+    viewPreferences: IViewPreferences;
+    autoTeamsPreferences: IAutoTeamsPreferences;
+    characters: IPersonalCharacterData[];
+    legendaryEvents: ILegendaryEventsData;
+}
+
+export interface ILegendaryEventsData {
+    jainZar: ILegendaryEventData;
+    aunShi: ILegendaryEventData;
+    shadowSun: ILegendaryEventData;
+}
+
+export interface ILegendaryEventData {
+    selectedTeams: ITableRow<string>[];
+}
+
+export interface IViewPreferences {
+    onlyUnlocked: boolean;
+    usedInCampaigns: boolean;
+}
+
+export interface IAutoTeamsPreferences {
+    preferCampaign: boolean;
+    ignoreRank: boolean;
+    ignoreRecommended: boolean;
+}
+
+export interface IPersonalCharacterData {
+    name: string;
+    unlocked?: boolean;
+    rank: Rank;
+    leSelection: LegendaryEvents;
+    alwaysRecommend: boolean;
+    neverRecommend: boolean;
+}
+

@@ -1,16 +1,15 @@
-﻿import { ICharacter } from './static-data/interfaces';
-import { IPersonalCharacterData, LegendaryEvents, Rank } from './personal-data/personal-data.interfaces';
-import { PersonalDataService } from './personal-data/personal-data.service';
-import { StaticDataUtils } from './static-data/static-data.utils';
+﻿import { ICharacter, IPersonalCharacterData } from '../models/interfaces';
+import { PersonalDataService } from './personal-data.service';
+import { StaticDataService } from './static-data.service';
+import { LegendaryEvents, Rank } from '../models/enums';
 
-
-export default class GlobalStoreService {
+export class GlobalService {
 
     static characters: Array<ICharacter>;
 
     static init(): void {
         PersonalDataService.init();
-        const staticUnitData = StaticDataUtils.unitsData;
+        const staticUnitData = StaticDataService.unitsData;
         const personalUnitData = PersonalDataService.data;
 
         this.characters = staticUnitData.map(staticData => {

@@ -1,8 +1,9 @@
 ﻿import React, { useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ICharacter, ILegendaryEvent } from '../../store/static-data/interfaces';
 import { CellClassParams, ColDef, ITooltipParams, ValueGetterParams } from 'ag-grid-community';
-import { Rank } from '../../store/personal-data/personal-data.interfaces';
+
+import { ICharacter, ILegendaryEvent } from '../../models/interfaces';
+import { Rank } from '../../models/enums';
 
 const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
     const { legendaryEvent } = props;

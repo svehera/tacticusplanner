@@ -1,20 +1,20 @@
-﻿import unitsData from '../../data/UnitData.json';
-import dirtyDozen from '../../data/DirtyDozen.json';
-import { IDirtyDozenChar, IUnitData, UnitDataRaw } from './interfaces';
-import { Faction } from './enums';
+﻿import unitsData from '../assets/UnitData.json';
+import dirtyDozen from '../assets/DirtyDozen.json';
+
+import { IDirtyDozenChar, IUnitData, UnitDataRaw } from '../models/interfaces';
+import { Faction } from '../models/enums';
 import { uniq } from 'lodash';
 
-export class StaticDataUtils {
+export class StaticDataService {
     
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
     static readonly dirtyDozenData: IDirtyDozenChar[] = dirtyDozen;
-
-
+    
     static convertUnitData(rawData: UnitDataRaw): IUnitData {
         const unitData: IUnitData = {
             alliance: rawData.Alliance,
             faction: rawData.Faction,
-            factionColor: StaticDataUtils.getFactionColor(rawData.Faction),
+            factionColor: StaticDataService.getFactionColor(rawData.Faction),
             name: rawData.Name,
             numberAdded: rawData.Number,
             health: rawData.Health,
