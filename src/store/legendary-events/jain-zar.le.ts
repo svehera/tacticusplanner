@@ -1,5 +1,5 @@
 ﻿import { ICharacter, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
-import { Alliance, DamageTypes, Faction, Traits } from '../static-data/enums';
+import { Alliance, DamageType, Faction, Trait } from '../static-data/enums';
 import { LegendaryEvents } from '../personal-data/personal-data.interfaces';
 import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
@@ -20,7 +20,7 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Physical',
                     points: 100,
-                    units: filter(xenosOnly).byDamageType(DamageTypes.Physical),
+                    units: filter(xenosOnly).byDamageType(DamageType.Physical),
                 },
                 {
                     name: 'Ranged',
@@ -56,17 +56,17 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Power',
                     points: 95,
-                    units: filter(imperialOnly).byDamageType(DamageTypes.Power),
+                    units: filter(imperialOnly).byDamageType(DamageType.Power),
                 },
                 {
                     name: 'Bolter',
                     points: 95,
-                    units: filter(imperialOnly).byDamageType(DamageTypes.Bolter),
+                    units: filter(imperialOnly).byDamageType(DamageType.Bolter),
                 },
                 {
                     name: 'No Blast',
                     points: 50,
-                    units: filter(imperialOnly).byDamageType(DamageTypes.Blast, true),
+                    units: filter(imperialOnly).byDamageType(DamageType.Blast, true),
                 },
                 {
                     name: 'Max 2 hits',
@@ -97,17 +97,17 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Piercing',
                     points: 100,
-                    units: filter(noOrks).byDamageType(DamageTypes.Piercing),
+                    units: filter(noOrks).byDamageType(DamageType.Piercing),
                 },
                 {
                     name: 'Bolter',
                     points: 95,
-                    units: filter(noOrks).byDamageType(DamageTypes.Bolter),
+                    units: filter(noOrks).byDamageType(DamageType.Bolter),
                 },
                 {
                     name: 'No Flying',
                     points: 45,
-                    units: filter(noOrks).byTrait(Traits.Flying, true),
+                    units: filter(noOrks).byTrait(Trait.Flying, true),
                 },
                 {
                     name: 'Min 4 hits',

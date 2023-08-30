@@ -1,26 +1,20 @@
 ﻿import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, RowStyle, ValueFormatterParams } from 'ag-grid-community';
+import { ColDef, RowStyle } from 'ag-grid-community';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
 import { ICharacter } from '../../store/static-data/interfaces';
 import GlobalStoreService from '../../store/global-store.service';
-import { DamageTypes, Traits, Traits2 } from '../../store/static-data/enums';
+import { DamageType, Trait } from '../../store/static-data/enums';
 import Typography from '@mui/material/Typography';
 import MultipleSelectCheckmarks from '../multiple-select/multiple-select';
-import { damageTypeToEnum, rawTraitToEnum, rawTraitToEnum2 } from '../../store/static-data/static-data.utils';
 import { IRowNode } from 'ag-grid-community/dist/lib/interfaces/iRowNode';
 import { TextField } from '@mui/material';
-import { intersection, pick, union } from 'lodash';
-import Button from '@mui/material/Button';
-
-type EnumLike<T> = Record<string, T>
 
 const Characters = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
 
-    const [damageTypesFilter, setDamageTypesFilter] = useState<Record<string, DamageTypes>>({});
-    const [traitsFilter, setTraitsFilter] = useState<Record<string, Traits>>({});
-    const [traits2Filter, setTraits2Filter] = useState<Record<string, Traits2>>({});
+    const [damageTypesFilter, setDamageTypesFilter] = useState<DamageType[]>([]);
+    const [traitsFilter, setTraitsFilter] = useState<Trait[]>([]);
 
     const defaultColDef: ColDef<ICharacter> = {
         sortable: true,
@@ -56,31 +50,28 @@ const Characters = () => {
             minWidth: 170,
         },
         {
-            field: 'meleeDamage',
+            field: 'damageTypes.melee',
             headerName: 'Melee Damage Type',
-            valueFormatter: convertDamageTypesToString,
-            getQuickFilterText: convertDamageTypesToString,
             minWidth: 170,
         },
         {
-            field: 'rangeDamage',
+            field: 'damageTypes.range',
             headerName: 'Range Damage Type',
-            valueFormatter: convertDamageTypesToString,
-            getQuickFilterText: convertDamageTypesToString,
             minWidth: 170,
         },
         {
-            field: 'abilitiesDamage',
-            headerName: 'Abilities Damage Types',
-            valueFormatter: convertDamageTypesToString,
-            getQuickFilterText: convertDamageTypesToString,
+            field: 'damageTypes.activeAbility',
+            headerName: 'Active Ability Damage Type',
+            minWidth: 170,
+        },
+        {
+            field: 'damageTypes.passiveAbility',
+            headerName: 'Passive Ability Damage Type',
             minWidth: 170,
         },
         {
             field: 'traits',
             headerName: 'Traits',
-            valueFormatter: convertTraitsEnumToString,
-            getQuickFilterText: convertTraitsEnumToString,
             minWidth: 200
         },
         {
@@ -174,65 +165,49 @@ const Characters = () => {
         };
     });
 
-    const damageTypeFilterChanged = useCallback((newValue: Record<string, number>) => {
-        setDamageTypesFilter(newValue);
+    const damageTypeFilterChanged = useCallback((newValue: string[]) => {
+        setDamageTypesFilter(newValue as DamageType[]);
         requestAnimationFrame(() => {
             gridRef.current?.api.onFilterChanged();
         });
     }, []);
 
-    const traitsFilterChanged = useCallback((newValue: Record<string, number>) => {
-        const traitsSharedKeys = intersection(Object.keys(rawTraitToEnum), Object.keys(newValue));
-        setTraitsFilter(pick(rawTraitToEnum, traitsSharedKeys));
-        const traits2SharedKeys = intersection(Object.keys(rawTraitToEnum2), Object.keys(newValue));
-        setTraits2Filter(pick(rawTraitToEnum2, traits2SharedKeys));
+    const traitsFilterChanged = useCallback((newValue: string[]) => {
+        setTraitsFilter(newValue as Trait[]);
         requestAnimationFrame(() => {
             gridRef.current?.api.onFilterChanged();
         });
     }, []);
 
     const isExternalFilterPresent = useCallback(() => {
-        const hasDamageTypeFilter =  Object.keys(damageTypesFilter).length > 0;
-        const hasTraitsFilter =  Object.keys(traitsFilter).length > 0;
-        const hasTraits2Filter =  Object.keys(traits2Filter).length > 0;
-        return hasDamageTypeFilter || hasTraitsFilter || hasTraits2Filter;
-    }, [damageTypesFilter, traitsFilter, traits2Filter]);
+        const hasDamageTypeFilter =  damageTypesFilter.length > 0;
+        const hasTraitsFilter = traitsFilter.length > 0;
+        return hasDamageTypeFilter || hasTraitsFilter;
+    }, [damageTypesFilter, traitsFilter]);
 
     const doesExternalFilterPass = useCallback(
         (node: IRowNode<ICharacter>) => {
             const doesDamageTypeFilterPass = () => {
-                const values = Object.values(damageTypesFilter);
-                if(!values.length) {
+                if(!damageTypesFilter.length) {
                     return true;
                 }
-                const value = values.reduce((prev, curr) => prev | curr, DamageTypes.None);
-                return ((node.data?.damageTypes ?? 0) & value) === value;
+                return damageTypesFilter.every(type => node.data?.damageTypes.all.includes(type));
             };
 
             const doesTraitsFilterPass = () => {
-                const values = Object.values(traitsFilter);
-                if(!values.length) {
+                if(!traitsFilter.length) {
                     return true;
                 }
-                const value = values.reduce((prev, curr) => prev | curr, Traits.None);
-                return ((node.data?.traits ?? 0) & value) === value;
+                return traitsFilter.every(type => node.data?.traits.includes(type));
             };
-
-            const doesTraits2FilterPass = () => {
-                const values = Object.values(traits2Filter);
-                if(!values.length) {
-                    return true;
-                }
-                const value = values.reduce((prev, curr) => prev | curr, Traits2.None);
-                return ((node.data?.traits2 ?? 0) & value) === value;
-            };
+            
 
             if (node.data) {
-                return doesDamageTypeFilterPass() && doesTraitsFilterPass() && doesTraits2FilterPass();
+                return doesDamageTypeFilterPass() && doesTraitsFilterPass();
             }
             return true;
         },
-        [damageTypesFilter, traitsFilter, traits2Filter]
+        [damageTypesFilter, traitsFilter]
     );
 
     const refreshRowNumberColumn = useCallback(() => {
@@ -247,9 +222,9 @@ const Characters = () => {
             </Typography>
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px', margin: '0 20px' }}>
                 <TextField label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged}/>
-                <MultipleSelectCheckmarks placeholder="Damage Types" values={damageTypeToEnum}
+                <MultipleSelectCheckmarks placeholder="Damage Types" selectedValues={damageTypesFilter} values={Object.values(DamageType)}
                     selectionChanges={damageTypeFilterChanged}/>
-                <MultipleSelectCheckmarks placeholder="Traits" values={{ ...rawTraitToEnum, ...rawTraitToEnum2 }}
+                <MultipleSelectCheckmarks placeholder="Traits" selectedValues={traitsFilter} values={ Object.values(Trait)}
                     selectionChanges={traitsFilterChanged}/>
             </div>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
@@ -271,48 +246,5 @@ const Characters = () => {
         </div>
     );
 };
-
-function convertDamageTypesToString(
-    params: ValueFormatterParams<ICharacter, number>
-): string {
-    const typeNames: string[] = [];
-    const value = params.value ?? 0;
-    const damageTypes: EnumLike<number | string> = DamageTypes;
-
-    for (const key in damageTypes) {
-        const enumValue = damageTypes[key];
-        if (typeof enumValue === 'number' && value & enumValue) {
-            typeNames.push(key);
-        }
-    }
-
-    return typeNames.join(', ');
-}
-
-function convertTraitsEnumToString(
-    params: ValueFormatterParams<ICharacter, number>
-): string {
-    const typeNames: string[] = [];
-    const traitsValue1: number = params.data?.traits ?? 0;
-    const traitsValue2: number = params.data?.traits2 ?? 0;
-    const traits1: EnumLike<number | string> = Traits;
-    const traits2: EnumLike<number | string> = Traits2;
-
-    for (const key in traits1) {
-        const enumValue = traits1[key];
-        if (typeof enumValue === 'number' && traitsValue1 & enumValue) {
-            typeNames.push(key);
-        }
-    }
-
-    for (const key in traits2) {
-        const enumValue = traits2[key];
-        if (typeof enumValue === 'number' && traitsValue2 & enumValue) {
-            typeNames.push(key);
-        }
-    }
-
-    return typeNames.join(', ');
-}
 
 export default Characters;

@@ -20,22 +20,18 @@ const MenuProps = {
 };
 
 export default function MultipleSelectCheckmarks(props: {
-    values: Record<string, number>,
+    values: string[],
+    selectedValues: string[],
     placeholder: string,
-    selectionChanges: (value: Record<string, number>) => void
+    selectionChanges: (value: string[]) => void
 }) {
-    const [selectedLabels, setSelectedLabels] = React.useState<string[]>([]);
-    const labels = Object.keys(props.values);
+    const [selectedLabels, setSelectedLabels] = React.useState<string[]>(props.selectedValues);
     const handleChange = (event: SelectChangeEvent<string[]>) => {
         const {
             target: { value },
         } = event;
         const newValue = typeof value === 'string' ? value.split(',') : value;
-        const selectedValues: Record<string, number> = {};
-        newValue.forEach(label => {
-            selectedValues[label] = props.values[label];
-        });
-        props.selectionChanges(selectedValues);
+        props.selectionChanges(newValue);
         setSelectedLabels(newValue);
     };
 
@@ -53,7 +49,7 @@ export default function MultipleSelectCheckmarks(props: {
                     renderValue={(selected) => selected.join(', ')}
                     MenuProps={MenuProps}
                 >
-                    {labels.map((label) => (
+                    {props.values.map((label) => (
                         <MenuItem key={label} value={label}>
                             <Checkbox checked={selectedLabels.indexOf(label) > -1}/>
                             <ListItemText primary={label}/>

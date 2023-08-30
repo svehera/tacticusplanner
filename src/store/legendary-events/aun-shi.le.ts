@@ -1,5 +1,5 @@
 ﻿import { ICharacter, ILegendaryEventTrack, ITableRow } from '../static-data/interfaces';
-import { Alliance, DamageTypes, Faction, Traits } from '../static-data/enums';
+import { Alliance, DamageType, Faction, Trait } from '../static-data/enums';
 import { LegendaryEvents } from '../personal-data/personal-data.interfaces';
 import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
@@ -21,12 +21,12 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Piercing',
                     points: 115,
-                    units: filter(noOrks).byDamageType(DamageTypes.Piercing),
+                    units: filter(noOrks).byDamageType(DamageType.Piercing),
                 },
                 {
                     name: 'No Physical',
                     points: 40,
-                    units: filter(noOrks).byDamageType(DamageTypes.Physical, true),
+                    units: filter(noOrks).byDamageType(DamageType.Physical, true),
                 },
                 {
                     name: 'Max 3 hits',
@@ -62,7 +62,7 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Resiliant',
                     points: 40,
-                    units: filter(noImperials).byTrait(Traits.Resilient, true),
+                    units: filter(noImperials).byTrait(Trait.Resilient, true),
                 },
                 {
                     name: 'No Range',
@@ -77,7 +77,7 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Physical',
                     points: 100,
-                    units: filter(noImperials).byDamageType(DamageTypes.Physical),
+                    units: filter(noImperials).byDamageType(DamageType.Physical),
                 },
             ]
         );
@@ -93,7 +93,7 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Physical',
                     points: 120,
-                    units: filter(noChaos).byDamageType(DamageTypes.Physical),
+                    units: filter(noChaos).byDamageType(DamageType.Physical),
                 },
                 {
                     name: 'Max 1 hit',
@@ -103,17 +103,17 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'No Flying',
                     points: 40,
-                    units: filter(noChaos).byTrait(Traits.Flying, true),
+                    units: filter(noChaos).byTrait(Trait.Flying, true),
                 },
                 {
                     name: 'No Overwatch',
                     points: 40,
-                    units:  filter(noChaos).byTrait(Traits.Overwatch, true),
+                    units:  filter(noChaos).byTrait(Trait.Overwatch, true),
                 },
                 {
                     name: 'No Power',
                     points: 50,
-                    units:  filter(noChaos).byDamageType(DamageTypes.Power, true),
+                    units:  filter(noChaos).byDamageType(DamageType.Power, true),
                 },
             ]
         ); 
