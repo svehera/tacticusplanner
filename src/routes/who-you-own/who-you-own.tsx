@@ -5,9 +5,9 @@ import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions'
 import { ICharacter } from '../../store/static-data/interfaces';
 import GlobalStoreService from '../../store/global-store.service';
 import { PersonalDataService } from '../../store/personal-data/personal-data.service';
-import RankSelectorCell from '../rank-selector-cell/rank-selector-cell';
+import RankSelectorCell from './rank-selector-cell';
 import Typography from '@mui/material/Typography';
-import CheckboxCell from '../checkbox-cell/checkbox-cell';
+import CheckboxCell from './checkbox-cell';
 import { TextField } from '@mui/material';
 
 const WhoYouOwn = () => {

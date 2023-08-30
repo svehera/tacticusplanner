@@ -8,12 +8,12 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from 'react-router-dom';
-import WhoYouOwn from './components/who-you-own/who-you-own';
-import LegendaryEventPage from './components/legendary-events/legendary-events-page';
-import About from './components/about/about';
-import Contacts from './components/contacts/contacts';
-import Characters from './components/characters/characters';
-import DirtyDozen from './components/dirty-dozen/dirty-dozen';
+import WhoYouOwn from './routes/who-you-own/who-you-own';
+import LegendaryEventPage from './routes/legendary-events/legendary-events-page';
+import About from './routes/root/about';
+import Contacts from './routes/contacts/contacts';
+import Characters from './routes/characters/characters';
+import DirtyDozen from './routes/dirty-dozen/dirty-dozen';
 
 const router = createBrowserRouter([
     {

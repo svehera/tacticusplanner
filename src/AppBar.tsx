@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { ChangeEvent, useRef } from 'react';
-import { PersonalDataService } from '../store/personal-data/personal-data.service';
+import { PersonalDataService } from './store/personal-data/personal-data.service';
 import { Link } from 'react-router-dom';
 import { Divider, Menu, MenuItem, Tooltip } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';

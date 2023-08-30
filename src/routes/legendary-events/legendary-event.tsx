@@ -22,7 +22,7 @@ import {
     AccordionSummary,
     Button
 } from '@mui/material';
-import PointsTable from '../points-table/points-table';
+import PointsTable from './points-table';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
 import { ViewSettingsContext } from '../../contexts/view-settings.context';
