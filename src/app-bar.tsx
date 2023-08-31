@@ -1,5 +1,6 @@
 ﻿import React, { ChangeEvent, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { BrowserView } from 'react-device-detect';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -57,6 +58,15 @@ const TopAppBar = () => {
         }
     };
     
+    const nav = (
+        <BrowserView>
+            <Button component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
+            <Button component={Link} to={'./characters'} color="inherit">Characters</Button>
+            <Button component={Link} to={'./dirtyDozen'} color="inherit">Dirty Dozen</Button>
+            <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>
+        </BrowserView>
+    );
+    
     const menu = (
         <Menu
             id="basic-menu"
@@ -68,24 +78,6 @@ const TopAppBar = () => {
             }}
         >
             <MenuItem onClick={handleClose}>
-                <Button component={Link} to={'./'} color="inherit">About</Button>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-                <Button component={Link} to={'./contacts'} color="inherit">Contacts</Button>
-            </MenuItem>
-            <Divider/>
-            <MenuItem onClick={handleClose}>
-                <Tooltip title={'Import your personal data (Who You Own, etc.)'}>
-                    <Button color="inherit" onClick={() => inputRef.current?.click()}>Import data</Button>
-                </Tooltip>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-                <Tooltip title={'Back up your personal data (Who You Own, etc.)'}>
-                    <Button onClick={downloadJson} color="inherit">Export data</Button>
-                </Tooltip>
-            </MenuItem>
-            <Divider/>
-            <MenuItem onClick={handleClose}>
                 <Button component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
             </MenuItem>
             <MenuItem onClick={handleClose}>
@@ -96,6 +88,28 @@ const TopAppBar = () => {
             </MenuItem>
             <MenuItem onClick={handleClose}>
                 <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>
+            </MenuItem>
+            
+            <Divider/>
+            
+            <MenuItem onClick={handleClose}>
+                <Tooltip title={'Import your personal data (Who You Own, etc.)'}>
+                    <Button color="inherit" onClick={() => inputRef.current?.click()}>Import data</Button>
+                </Tooltip>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+                <Tooltip title={'Back up your personal data (Who You Own, etc.)'}>
+                    <Button onClick={downloadJson} color="inherit">Export data</Button>
+                </Tooltip>
+            </MenuItem>
+            
+            <Divider/>
+            
+            <MenuItem onClick={handleClose}>
+                <Button component={Link} to={'./'} color="inherit">About</Button>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+                <Button component={Link} to={'./contacts'} color="inherit">Contacts</Button>
             </MenuItem>
         </Menu>
     );
@@ -116,11 +130,8 @@ const TopAppBar = () => {
                             Tacticus Planner
                         </Typography>
                     </Button>
-                    <div>
-                        <Button component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
-                        <Button component={Link} to={'./characters'} color="inherit">Characters</Button>
-                        <Button component={Link} to={'./dirtyDozen'} color="inherit">Dirty Dozen</Button>
-                        <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>
+                    <div style={{ display: 'flex' }}>
+                        {nav}
                         <Button
                             id="basic-button"
                             aria-controls={open ? 'basic-menu' : undefined}

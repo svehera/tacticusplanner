@@ -4,6 +4,7 @@ import { CellClassParams, ColDef, ITooltipParams, ValueGetterParams } from 'ag-g
 
 import { ICharacter, ILegendaryEvent } from '../../models/interfaces';
 import { Rank } from '../../models/enums';
+import { isMobile } from 'react-device-detect';
 
 const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
     const { legendaryEvent } = props;
@@ -13,6 +14,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
     const columnsDef: Array<ColDef> = [
         {
             field: 'name',
+            width: 150,
             sortable: true,
             cellClass: (params: CellClassParams) => Rank[params.data?.rank]?.toLowerCase(),
             tooltipValueGetter: (params: ITooltipParams) => params.data?.name + ' - ' + Rank[params.data?.rank ?? 0]
@@ -27,6 +29,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
         {
             valueGetter: (params: ValueGetterParams) => (params.data as ICharacter).legendaryEvents[legendaryEvent.id].slots,
             headerName: 'Slots',
+            width: 100,
             sortable: true,
         }
     ];
@@ -36,6 +39,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
         {
             field: 'name',
             sortable: true,
+            width: 150,
             cellClass: (params: CellClassParams) => Rank[params.data?.rank]?.toLowerCase(),
             tooltipValueGetter: (params: ITooltipParams) => params.data?.name + ' - ' + Rank[params.data?.rank ?? 0]
         },
@@ -49,6 +53,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
         {
             field: 'timesSelected',
             headerName: 'Times Selected',
+            width: 150,
             sortable: true,
         }
     ];
@@ -57,7 +62,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
 
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row' }}>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 100px)', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}

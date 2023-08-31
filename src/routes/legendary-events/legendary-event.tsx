@@ -37,6 +37,7 @@ import { Rank, Rarity } from '../../models/enums';
 
 import PointsTable from './points-table';
 import CustomTableHeader from './custom-table-header';
+import { isMobile } from 'react-device-detect';
 
 const LegendaryEvent = (props: {
     legendaryEvent: ILegendaryEvent;
@@ -237,7 +238,7 @@ const LegendaryEvent = (props: {
                             tooltipShowDelay={100}
                             rowData={rows}
                             columnDefs={columnsDefs}
-                            onGridReady={() => gridRef.current?.api.sizeColumnsToFit()}
+                            onGridReady={() => !isMobile ? gridRef.current?.api.sizeColumnsToFit() : undefined}
                             onCellClicked={handleMainTableCellClick}
                         >
                         </AgGridReact>
@@ -272,7 +273,7 @@ const LegendaryEvent = (props: {
                                 }
                             }}
                             columnDefs={columnsDefs}
-                            onGridReady={() => gridRef3.current?.api.sizeColumnsToFit()}
+                            onGridReady={() => !isMobile ? gridRef3.current?.api.sizeColumnsToFit() : undefined}
                             onCellClicked={handleMainTableCellClick}
                         >
                         </AgGridReact>
@@ -311,7 +312,7 @@ const LegendaryEvent = (props: {
                             }}
                             columnDefs={columnsDefs}
                             overlayNoRowsTemplate={'Select characters on Event Details'}
-                            onGridReady={() => gridRef2.current?.api.sizeColumnsToFit()}
+                            onGridReady={() => !isMobile ? gridRef2.current?.api.sizeColumnsToFit() : undefined}
                             onCellClicked={handleTeamsTableCellClick}
                         >
                         </AgGridReact>

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import { ICharacter } from '../../models/interfaces';
 import { StaticDataService } from '../../services';
+import { isMobile } from 'react-device-detect';
 
 export const DirtyDozen = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
@@ -18,31 +19,38 @@ export const DirtyDozen = () => {
         {
             field: 'Rank',
             headerName: 'Rank',
+            width: 100,
             maxWidth: 100
         },       
         {
             field: 'Name',
             headerName: 'Name',
+            width: 150,
         },
         {
             field: 'Pvp',
             headerName: 'PvP',
+            width: 100,
         },
         {
             field: 'GRTyranid',
             headerName: 'GR Tyranid',
+            width: 100,
         },
         {
             field: 'GRNecron',
             headerName: 'GR Necron',
+            width: 100,
         },
         {
             field: 'GROrk',
             headerName: 'GR Ork',
+            width: 100,
         },  
         {
             field: 'GRMortarion',
             headerName: 'GR Mortarion',
+            width: 100,
         },
     ]);
 
@@ -81,7 +89,7 @@ export const DirtyDozen = () => {
                     columnDefs={columnDefs}
                     rowData={rowsData}
                     getRowStyle={getRowStyle}
-                    onGridReady={() => gridRef.current?.api.sizeColumnsToFit()}
+                    onGridReady={() => !isMobile ? gridRef.current?.api.sizeColumnsToFit() : undefined}
                 >
                 </AgGridReact>
             </div>

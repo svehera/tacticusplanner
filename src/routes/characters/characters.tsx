@@ -10,6 +10,7 @@ import MultipleSelectCheckmarks from './multiple-select';
 import { ICharacter } from '../../models/interfaces';
 import { DamageType, Trait } from '../../models/enums';
 import { GlobalService } from '../../services';
+import { isMobile } from 'react-device-detect';
 
 export const Characters = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
@@ -221,7 +222,7 @@ export const Characters = () => {
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
                 Characters details
             </Typography>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '20px', margin: '0 20px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '20px', margin: '0 20px', flexDirection: isMobile ? 'column' : 'row' }}>
                 <TextField label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged}/>
                 <MultipleSelectCheckmarks placeholder="Damage Types" selectedValues={damageTypesFilter} values={Object.values(DamageType)}
                     selectionChanges={damageTypeFilterChanged}/>
@@ -236,7 +237,7 @@ export const Characters = () => {
                     columnDefs={columnDefs}
                     rowData={rowsData}
                     getRowStyle={getRowStyle}
-                    onGridReady={() => gridRef.current?.api.sizeColumnsToFit()}
+                    onGridReady={() => !isMobile ? gridRef.current?.api.sizeColumnsToFit() : undefined}
                     onSortChanged={refreshRowNumberColumn}
                     onFilterChanged={refreshRowNumberColumn}
                     isExternalFilterPresent={isExternalFilterPresent}

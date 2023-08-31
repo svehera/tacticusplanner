@@ -12,6 +12,7 @@ import { GlobalService, PersonalDataService } from '../../services';
 import RankSelectorCell from './rank-selector-cell';
 import CheckboxCell from './checkbox-cell';
 import { Rank, Rarity } from '../../models/enums';
+import { isMobile } from 'react-device-detect';
 
 export const WhoYouOwn = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
@@ -148,6 +149,21 @@ export const WhoYouOwn = () => {
         PersonalDataService.save();
     };
 
+    React.useEffect(() => {
+        function handleResize() {
+            if (window.innerWidth >= 768) {
+                gridRef.current?.api.sizeColumnsToFit();
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+
+        };
+    });
+
     return (
         <div>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
@@ -164,7 +180,7 @@ export const WhoYouOwn = () => {
                     rowHeight={40}
                     getRowStyle={getRowStyle}
                     onCellEditingStopped={saveChanges}
-                    onGridReady={() => gridRef.current?.api.sizeColumnsToFit()}
+                    onGridReady={() => !isMobile ? gridRef.current?.api.sizeColumnsToFit() : undefined}
                 >
                 </AgGridReact>
             </div>
