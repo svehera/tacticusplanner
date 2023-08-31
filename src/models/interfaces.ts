@@ -152,6 +152,9 @@ export interface ILegendaryEventData {
 export interface IViewPreferences {
     onlyUnlocked: boolean;
     usedInCampaigns: boolean;
+    showAlpha: boolean;
+    showBeta: boolean;
+    showGamma: boolean;
 }
 
 export interface IAutoTeamsPreferences {

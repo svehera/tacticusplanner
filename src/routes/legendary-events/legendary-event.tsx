@@ -57,31 +57,31 @@ const LegendaryEvent = (props: {
 
     const [selectedTeams, setSelectedTeams] = useState<Array<ITableRow>>(legendaryEvent.selectedTeams);
 
-    const [columnsDefs] = useState<Array<ColGroupDef & { section?: LegendaryEventSection }>>([
+    const columnsDefs = useMemo<Array<ColGroupDef & { section?: LegendaryEventSection }>>( () =>[
         {
             headerName: legendaryEvent.alphaTrack.name + ' - ' + legendaryEvent.alphaTrack.killPoints,
             headerClass: 'alpha',
-            children: getSectionColumns(legendaryEvent.alphaTrack.unitsRestrictions, '(Alpha)'),
+            children: getSectionColumns(legendaryEvent.alphaTrack.unitsRestrictions, '(Alpha)', viewPreferences.showAlpha),
             openByDefault: true,
             section: '(Alpha)'
         },
         {
             headerName: legendaryEvent.betaTrack.name + ' - ' + legendaryEvent.betaTrack.killPoints,
             headerClass: 'beta',
-            children: getSectionColumns(legendaryEvent.betaTrack.unitsRestrictions, '(Beta)'),
+            children: getSectionColumns(legendaryEvent.betaTrack.unitsRestrictions, '(Beta)', viewPreferences.showBeta),
             openByDefault: true,
             section: '(Beta)'
         },
         {
             headerName: legendaryEvent.gammaTrack.name + ' - ' + legendaryEvent.gammaTrack.killPoints,
             headerClass: 'gamma',
-            children: getSectionColumns(legendaryEvent.gammaTrack.unitsRestrictions, '(Gamma)'),
+            children: getSectionColumns(legendaryEvent.gammaTrack.unitsRestrictions, '(Gamma)', viewPreferences.showGamma),
             openByDefault: true,
             section: '(Gamma)'
         }
-    ]);
+    ], [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma]);
 
-    const rows: Array<ITableRow> = useMemo(() => getRows(legendaryEvent, viewPreferences), [viewPreferences]);
+    const rows: Array<ITableRow> = useMemo(() => getRows(legendaryEvent, viewPreferences), [viewPreferences.onlyUnlocked, viewPreferences.usedInCampaigns]);
 
     const teamSize = 5;
 
@@ -215,7 +215,6 @@ const LegendaryEvent = (props: {
                 gridRef3.current?.api.sizeColumnsToFit();
             }
         }
-
         window.addEventListener('resize', handleResize);
 
         return () => {
@@ -223,6 +222,14 @@ const LegendaryEvent = (props: {
 
         };
     });
+    
+    React.useEffect(() => {
+        if (window.innerWidth >= 768) {
+            gridRef.current?.api?.sizeColumnsToFit();
+            gridRef2.current?.api?.sizeColumnsToFit();
+            gridRef3.current?.api?.sizeColumnsToFit();
+        }
+    }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma]);
 
     return (
         <div>
@@ -334,7 +341,7 @@ const LegendaryEvent = (props: {
     );
 };
 
-function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], suffix: LegendaryEventSection): Array<ColDef> {
+function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], suffix: LegendaryEventSection, showTrack: boolean): Array<ColDef> {
     return unitsRestrictions.map((u) => ({
         field: u.name + suffix,
         headerName: `(${u.points}) ${u.name}`,
@@ -343,6 +350,8 @@ function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[],
         cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
         tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rarity[params.value?.rarity ?? 0] + ' - ' + Rank[params.value?.rank ?? 0],
         section: suffix,
+        suppressMovable: true,
+        hide: !showTrack,
     }));
 }
 
