@@ -63,39 +63,39 @@
 }
 
 .iron1 {
-  background-color: #D9EAD3;
+    background-color: #D9EAD3;
 }
 
 .iron2 {
-  background-color: #B6D7A8;
+    background-color: #B6D7A8;
 }
 
 .iron3 {
-  background-color: #93C47D;
+    background-color: #93C47D;
 }
 
 .bronze1 {
-  background-color: #F9CB9C;
+    background-color: #F9CB9C;
 }
 
 .bronze2 {
-  background-color: #F6B26B;
+    background-color: #F6B26B;
 }
 
 .bronze3 {
-  background-color: #E69138;
+    background-color: #E69138;
 }
 
 .silver1 {
-  background-color: #EFEFEF;
+    background-color: #EFEFEF;
 }
 
 .silver2 {
-  background-color: #D9D9D9;
+    background-color: #D9D9D9;
 }
 
 .silver3 {
-  background-color: #CCCCCC;
+    background-color: #CCCCCC;
 }
 
 .gold1 {
@@ -124,9 +124,31 @@
 
 .ag-theme-material {
     --ag-grid-size: 5px;
-    
+    --ag-row-hover-color: transparent;
+    --ag-colum-hover-color: transparent;
+
     .ag-cell-wrap-text {
         word-break: unset;
         white-space: break-spaces;
     }
+}
+
+.common {
+    background-color: gray;
+}
+
+.uncommon {
+    background-color: saddlebrown;
+}
+
+.rare {
+    background-color: silver;
+}
+
+.epic {
+    background-color: gold;
+}
+
+.legendary {
+    background-color: pink;
 }

@@ -53,6 +53,7 @@ export class LETrack implements ILegendaryEventTrack {
                 .map(unit => ({
                     name: unit.name,
                     rank: +unit.rank,
+                    rarity: +unit.rarity,
                     requiredInCampaign: unit.requiredInCampaign,
                     points: unit.legendaryEvents[event].points,
                     alwaysRecommend: unit.alwaysRecommend ?? false,
@@ -61,16 +62,26 @@ export class LETrack implements ILegendaryEventTrack {
             const iterates: string[] = [];
             const orders: Array<'asc' | 'desc'> = [];
             
-            if (!settings.ignoreRecommended) {
-                iterates.push('alwaysRecommend', 'neverRecommend');
-                orders.push('desc', 'asc');
+            if (!settings.ignoreRecommendedFirst) {
+                iterates.push('alwaysRecommend');
+                orders.push('desc');
+            }
+            
+            if (!settings.ignoreRecommendedLast) {
+                iterates.push('neverRecommend');
+                orders.push('asc');
             }
             
             if (settings.preferCampaign) {
                 iterates.push('requiredInCampaign');
                 orders.push('desc');
             }
-            
+
+            if (!settings.ignoreRarity) {
+                iterates.push('rarity');
+                orders.push('desc');
+            }
+
             if (!settings.ignoreRank) {
                 iterates.push('rank');
                 orders.push('desc');

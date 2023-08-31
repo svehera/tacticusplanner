@@ -7,11 +7,13 @@ const AutoTeamsSettings = (props: { value: IAutoTeamsPreferences , valueChanges:
 
     const [preferCampaign, setPreferCampaign] = useState(value.preferCampaign);
     const [ignoreRank, setIgnoreRank] = useState(value.ignoreRank);
-    const [ignoreRecommended, setIgnoreRecommended] = useState(value.ignoreRecommended ?? false);
+    const [ignoreRarity, setIgnoreRarity] = useState(value.ignoreRarity);
+    const [ignoreRecommendedFirst, setIgnoreRecommendedFirst] = useState(value.ignoreRecommendedFirst);
+    const [ignoreRecommendedLast, setIgnoreRecommendedLast] = useState(value.ignoreRecommendedLast);
 
     useEffect(() => {
-        valueChanges({ preferCampaign, ignoreRank, ignoreRecommended });
-    },[preferCampaign, ignoreRank, ignoreRecommended]);
+        valueChanges({ preferCampaign, ignoreRank, ignoreRecommendedFirst, ignoreRecommendedLast, ignoreRarity });
+    },[preferCampaign, ignoreRank, ignoreRecommendedFirst, ignoreRecommendedLast, ignoreRarity]);
 
     return (
         <FormGroup style={{ display: 'flex', flexDirection: 'row' }}>
@@ -28,10 +30,22 @@ const AutoTeamsSettings = (props: { value: IAutoTeamsPreferences , valueChanges:
             />} label="Ignore Rank"/>
 
             <FormControlLabel control={<Checkbox
-                checked={ignoreRecommended}
-                onChange={(event) => setIgnoreRecommended(event.target.checked)}
+                checked={ignoreRarity}
+                onChange={(event) => setIgnoreRarity(event.target.checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
-            />} label="Ignore Recommended"/>
+            />} label="Ignore Rarity"/>
+
+            <FormControlLabel control={<Checkbox
+                checked={ignoreRecommendedFirst}
+                onChange={(event) => setIgnoreRecommendedFirst(event.target.checked)}
+                inputProps={{ 'aria-label': 'controlled' }}
+            />} label="Ignore Recommended First"/>
+
+            <FormControlLabel control={<Checkbox
+                checked={ignoreRecommendedLast}
+                onChange={(event) => setIgnoreRecommendedLast(event.target.checked)}
+                inputProps={{ 'aria-label': 'controlled' }}
+            />} label="Ignore Recommended Last"/>
         </FormGroup>
     );
 };

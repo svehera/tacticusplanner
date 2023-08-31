@@ -11,6 +11,7 @@ import { GlobalService, PersonalDataService } from '../../services';
 
 import RankSelectorCell from './rank-selector-cell';
 import CheckboxCell from './checkbox-cell';
+import { Rank, Rarity } from '../../models/enums';
 
 export const WhoYouOwn = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
@@ -75,8 +76,26 @@ export const WhoYouOwn = () => {
                     headerName: 'Rank',
                     editable: true,
                     cellRenderer: RankSelectorCell,
-                    columnGroupShow: 'open',
+                    cellRendererParams: {
+                        editProperty: 'rank',
+                        enumObject: Rank
+                    },
                     field: 'rank',
+                    width: 150,
+                    minWidth: 150,
+                    maxWidth: 150,
+                    cellStyle: { padding: 0 },
+                },
+
+                {
+                    headerName: 'Rarity',
+                    editable: true,
+                    cellRenderer: RankSelectorCell,
+                    cellRendererParams: {
+                        editProperty: 'rarity',
+                        enumObject: Rarity
+                    },
+                    field: 'rarity',
                     width: 150,
                     minWidth: 150,
                     maxWidth: 150,
@@ -113,7 +132,7 @@ export const WhoYouOwn = () => {
     const [rowsData] = useState(GlobalService.characters);
 
     const getRowStyle = (params: RowClassParams<ICharacter>): RowStyle => {
-        return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'silver' : 'white' };
+        return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'lightsteelblue' : 'white' };
     };
     
     const saveChanges = () => {
@@ -121,6 +140,7 @@ export const WhoYouOwn = () => {
             name: row.name, 
             unlocked: row.unlocked, 
             rank: row.rank,
+            rarity: row.rarity,
             leSelection: row.leSelection,
             alwaysRecommend: row.alwaysRecommend,
             neverRecommend: row.neverRecommend,

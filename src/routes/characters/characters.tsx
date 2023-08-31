@@ -142,7 +142,7 @@ export const Characters = () => {
     const [rowsData] = useState(GlobalService.characters);
 
     const getRowStyle = (params: RowClassParams<ICharacter>): RowStyle => {
-        return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'silver' : 'white' };
+        return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'lightsteelblue' : 'white' };
     };
 
     const onFilterTextBoxChanged = useCallback((change: ChangeEvent<HTMLInputElement>) => {

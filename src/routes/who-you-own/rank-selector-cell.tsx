@@ -1,39 +1,42 @@
-﻿import React from 'react';
+﻿import React, { useState } from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
 import './rank-selector-cell.css';
-import { Rank } from '../../models/enums';
 import { ICharacter } from '../../models/interfaces';
 
-const RankSelectorCell = (props: ICellRendererParams<ICharacter>) => {
-    const rankEntries: Array<[string, string | Rank]> = Object.entries(Rank);
-    const defaultValue = props.data?.rank ?? Rank.Undefined;
+const RankSelectorCell = (props: ICellRendererParams<ICharacter> & {
+    editProperty: 'rank' | 'rarity',
+    enumObject: Record<string, string | number>
+}) => {
+    const entries: Array<[string, string | number]> = Object.entries(props.enumObject);
+    const defaultValue = (props.data && props.data[props.editProperty]) || 0;
+    const [value, setValue] = useState<number>(defaultValue);
+    const [className, setClassName] = useState<string>((props.enumObject[defaultValue] as string).toLowerCase());
 
-    const handleChange = (event: SelectChangeEvent<Rank>) => {
+    const handleChange = (event: SelectChangeEvent<number>) => {
         if (props.data) {
+            const newValue = +event.target.value;
             props.api.startEditingCell({ rowIndex: props.node.rowIndex ?? 0, colKey: props.column?.getColId() ?? '' });
-            props.data.rank = +event.target.value;
+            props.data[props.editProperty] = newValue as never;
+            setValue(newValue);
+            setClassName((props.enumObject[newValue] as string).toLowerCase());
             props.api.stopEditing();
         }
     };
 
     return (
         <FormControl fullWidth variant={'standard'}>
-            <Select<Rank>
+            <Select
                 defaultValue={defaultValue}
-                value={props.data?.rank}
+                value={value}
                 onChange={handleChange}
                 disableUnderline={true}
-                className={Rank[props.data?.rank ?? 0].toLowerCase()}
+                className={className}
             >
-                {rankEntries.map(([name, value]) => (
+                {entries.map(([name, value]) => (
                     typeof value === 'number' && (
                         <MenuItem key={value} value={value} className={name.toLowerCase()}>{name}
-                            {/*{ props.data?.rank === value ? <ListItemIcon>*/}
-                            {/*    <Check/>*/}
-                            {/*</ListItemIcon> : ''*/}
-                            {/*}*/}
                         </MenuItem>
                     )
                 ))}

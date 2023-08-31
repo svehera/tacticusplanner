@@ -32,7 +32,7 @@ import {
     LegendaryEventSection
 } from '../../models/interfaces';
 import { ViewSettingsContext, AutoTeamsSettingsContext } from '../../contexts';
-import { Rank } from '../../models/enums';
+import { Rank, Rarity } from '../../models/enums';
 
 
 import PointsTable from './points-table';
@@ -340,7 +340,7 @@ function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[],
         headerTooltip: `(${u.points}) ${u.name}`,
         valueFormatter: (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
         cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
-        tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rank[params.value?.rank ?? 0],
+        tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rarity[params.value?.rarity ?? 0] + ' - ' + Rank[params.value?.rank ?? 0],
         section: suffix,
     }));
 }

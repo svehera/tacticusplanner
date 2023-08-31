@@ -49,7 +49,7 @@ export const DirtyDozen = () => {
     const [rowsData] = useState(StaticDataService.dirtyDozenData);
 
     const getRowStyle = (params: RowClassParams): RowStyle => {
-        return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'silver' : 'white' };
+        return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'lightsteelblue' : 'white' };
     };
 
     React.useEffect(() => {

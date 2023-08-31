@@ -16,14 +16,15 @@ export class GlobalService {
             const personalData: IPersonalCharacterData = personalUnitData.characters.find(c => c.name === staticData.name)
                 ?? {
                     name: '',
-                    rank: Rank.Undefined,
+                    rank: Rank.Stone1,
                     leSelection: LegendaryEvents.None,
                     alwaysRecommend: false,
                     neverRecommend: false
                 };
             return {
                 ...personalData, ...staticData,
-                rank: +(personalData.rank ?? Rank.Undefined),
+                rank: +(personalData.rank || Rank.Stone1),
+                rarity: personalData.rarity ?? staticData.rarity,
                 alwaysRecommend: personalData.alwaysRecommend ?? false,
                 neverRecommend: personalData.neverRecommend ?? false
             };
