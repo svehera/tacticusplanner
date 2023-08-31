@@ -119,7 +119,7 @@ export const About = () => {
                     <AccordionDetails>
                         <p>Send email to <a href="mailto: tacticusplanner@gmail.com" target={'_blank'}
                             rel="noreferrer">tacticusplanner@gmail.com</a> or reach me out in <a
-                            href="discordapp.com/users/514327364688281602" target={'_blank'}>Discord</a></p>
+                            href="https://discord.gg/daK7y6f8" target={'_blank'} rel="noreferrer">Discord</a></p>
                     </AccordionDetails>
                 </Accordion>
     
