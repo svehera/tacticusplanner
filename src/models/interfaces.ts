@@ -2,8 +2,8 @@
     Alliance,
     DamageType,
     Equipment,
-    Faction, LegendaryEvents, Rank,
-    Rarity,
+    Faction, LegendaryEvents, Rank, Rarity,
+    RarityString,
     Trait
 } from './enums';
 
@@ -16,7 +16,7 @@ export interface UnitDataRaw {
     Health: number;
     Damage: number;
     Armour: number;
-    'Initial rarity': Rarity;
+    'Initial rarity': RarityString;
     'Melee Damage': DamageType;
     'Melee Hits': number;
     'Ranged Damage'?: DamageType;
@@ -47,6 +47,7 @@ export interface IUnitData {
     health: number;
     damage: number;
     armour: number;
+    rarity: Rarity;
     damageTypes: IDamageTypes,
     traits: Trait[],
     equipment1: Equipment;
@@ -155,14 +156,17 @@ export interface IViewPreferences {
 
 export interface IAutoTeamsPreferences {
     preferCampaign: boolean;
+    ignoreRarity: boolean;
     ignoreRank: boolean;
-    ignoreRecommended: boolean;
+    ignoreRecommendedFirst: boolean;
+    ignoreRecommendedLast: boolean;
 }
 
 export interface IPersonalCharacterData {
     name: string;
     unlocked?: boolean;
     rank: Rank;
+    rarity?: Rarity;
     leSelection: LegendaryEvents;
     alwaysRecommend: boolean;
     neverRecommend: boolean;

@@ -21,12 +21,20 @@ export enum Faction {
     Tyranids = 'Tyranids',
 }
 
-export enum Rarity {
+export enum RarityString {
     Common = 'Common',
     Epic = 'Epic',
     Legendary = 'Legendary',
     Rare = 'Rare',
     Uncommon = 'Uncommon',
+}
+
+export enum Rarity {
+    Common,
+    Uncommon,
+    Rare,
+    Epic,
+    Legendary,
 }
 
 export enum Equipment {

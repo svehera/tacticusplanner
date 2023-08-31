@@ -4,6 +4,7 @@ import { AgGridReact } from 'ag-grid-react';
 import { CellClassParams, ColDef, ITooltipParams, ValueGetterParams } from 'ag-grid-community';
 import { ICharacter } from '../../models/interfaces';
 import { Rank } from '../../models/enums';
+import { isMobile } from 'react-device-detect';
 
 const OverallPointsTable = (props: {
     characters: ICharacter[], selectedChars: Array<{
@@ -16,6 +17,7 @@ const OverallPointsTable = (props: {
         {
             field: 'name',
             sortable: true,
+            width: 150,
             cellClass: (params: CellClassParams) => Rank[params.data?.rank]?.toLowerCase(),
             tooltipValueGetter: (params: ITooltipParams) => params.data?.name + ' - ' + Rank[params.data?.rank ?? 0]
         },
@@ -29,6 +31,7 @@ const OverallPointsTable = (props: {
         {
             valueGetter: (params: ValueGetterParams) => sum(Object.values((params.data as ICharacter).legendaryEvents).map(x => x.slots)),
             headerName: 'Slots',
+            width: 100,
             sortable: true,
         }
     ];
@@ -36,6 +39,7 @@ const OverallPointsTable = (props: {
         {
             field: 'name',
             sortable: true,
+            width: 150,
             cellClass: (params: CellClassParams) => Rank[params.data?.rank]?.toLowerCase(),
             tooltipValueGetter: (params: ITooltipParams) => params.data?.name + ' - ' + Rank[params.data?.rank ?? 0]
         },
@@ -49,12 +53,13 @@ const OverallPointsTable = (props: {
         {
             field: 'timesSelected',
             headerName: 'Times Selected',
+            width: 150,
             sortable: true,
         }
     ];
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row' }}>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 100px)', width: '100%' }}>
                 <AgGridReact
                     tooltipShowDelay={100}

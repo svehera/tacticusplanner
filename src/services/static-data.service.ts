@@ -2,8 +2,16 @@
 import dirtyDozen from '../assets/DirtyDozen.json';
 
 import { IDirtyDozenChar, IUnitData, UnitDataRaw } from '../models/interfaces';
-import { Faction } from '../models/enums';
+import { Faction, Rarity, RarityString } from '../models/enums';
 import { uniq } from 'lodash';
+
+const rarityStringToNumber: Record<RarityString, Rarity> = {
+    [RarityString.Common]: Rarity.Common,
+    [RarityString.Uncommon]: Rarity.Uncommon,
+    [RarityString.Rare]: Rarity.Rare,
+    [RarityString.Epic]: Rarity.Epic,
+    [RarityString.Legendary]: Rarity.Legendary,
+};
 
 export class StaticDataService {
     
@@ -20,6 +28,7 @@ export class StaticDataService {
             health: rawData.Health,
             damage: rawData.Damage,
             armour: rawData.Armour,
+            rarity: rarityStringToNumber[rawData['Initial rarity']],
             equipment1: rawData.Equipment1,
             equipment2: rawData.Equipment2,
             equipment3: rawData.Equipment3,

@@ -32,11 +32,12 @@ import {
     LegendaryEventSection
 } from '../../models/interfaces';
 import { ViewSettingsContext, AutoTeamsSettingsContext } from '../../contexts';
-import { Rank } from '../../models/enums';
+import { Rank, Rarity } from '../../models/enums';
 
 
 import PointsTable from './points-table';
 import CustomTableHeader from './custom-table-header';
+import { isMobile } from 'react-device-detect';
 
 const LegendaryEvent = (props: {
     legendaryEvent: ILegendaryEvent;
@@ -237,7 +238,7 @@ const LegendaryEvent = (props: {
                             tooltipShowDelay={100}
                             rowData={rows}
                             columnDefs={columnsDefs}
-                            onGridReady={() => gridRef.current?.api.sizeColumnsToFit()}
+                            onGridReady={() => !isMobile ? gridRef.current?.api.sizeColumnsToFit() : undefined}
                             onCellClicked={handleMainTableCellClick}
                         >
                         </AgGridReact>
@@ -272,7 +273,7 @@ const LegendaryEvent = (props: {
                                 }
                             }}
                             columnDefs={columnsDefs}
-                            onGridReady={() => gridRef3.current?.api.sizeColumnsToFit()}
+                            onGridReady={() => !isMobile ? gridRef3.current?.api.sizeColumnsToFit() : undefined}
                             onCellClicked={handleMainTableCellClick}
                         >
                         </AgGridReact>
@@ -311,7 +312,7 @@ const LegendaryEvent = (props: {
                             }}
                             columnDefs={columnsDefs}
                             overlayNoRowsTemplate={'Select characters on Event Details'}
-                            onGridReady={() => gridRef2.current?.api.sizeColumnsToFit()}
+                            onGridReady={() => !isMobile ? gridRef2.current?.api.sizeColumnsToFit() : undefined}
                             onCellClicked={handleTeamsTableCellClick}
                         >
                         </AgGridReact>
@@ -340,7 +341,7 @@ function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[],
         headerTooltip: `(${u.points}) ${u.name}`,
         valueFormatter: (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
         cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
-        tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rank[params.value?.rank ?? 0],
+        tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rarity[params.value?.rarity ?? 0] + ' - ' + Rank[params.value?.rank ?? 0],
         section: suffix,
     }));
 }
