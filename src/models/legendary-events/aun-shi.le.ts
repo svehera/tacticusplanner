@@ -28,7 +28,7 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     units: filter(noOrks).byDamageType(DamageType.Physical, true),
                 },
                 {
-                    name: 'Max 3 hits',
+                    name: 'Max 2 hits',
                     points: 70,
                     units: filter(noOrks).byMaxHits(2),
                 },
