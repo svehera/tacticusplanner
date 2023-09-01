@@ -27,6 +27,7 @@ export class PersonalDataService {
         if (storedData) {
             this.data = JSON.parse(storedData);
             this.data.characters ??= [];
+            this.data.charactersPriorityList ??= [];
 
             this.data.viewPreferences ??= defaultViewPreferences;
             this.data.viewPreferences.showAlpha = true;
@@ -43,6 +44,7 @@ export class PersonalDataService {
 
         this.data ??= {
             characters: [],
+            charactersPriorityList: [],
             viewPreferences: defaultViewPreferences,
             autoTeamsPreferences: defaultAutoTeamsPreferences,
             legendaryEvents: defaultLegendaryEventsData

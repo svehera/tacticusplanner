@@ -96,5 +96,3 @@ export const DirtyDozen = () => {
         </div>
     );
 };
-
-export default DirtyDozen;

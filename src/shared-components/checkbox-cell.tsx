@@ -1,11 +1,11 @@
 ﻿import React, { ChangeEvent, useState } from 'react';
 import { ICellRendererParams } from 'ag-grid-community';
 import { Checkbox } from '@mui/material';
-import { ICharacter } from '../../models/interfaces';
+import { ICharacter } from '../models/interfaces';
 
 const CheckboxCell = (props: ICellRendererParams<ICharacter> & {
-    editProperty: 'unlocked' | 'alwaysRecommend' | 'neverRecommend',
-    disableProperty: 'unlocked' | 'alwaysRecommend' | 'neverRecommend'
+    editProperty: 'unlocked' | 'alwaysRecommend' | 'neverRecommend' | 'progress',
+    disableProperty: 'unlocked' | 'alwaysRecommend' | 'neverRecommend' | 'progress'
 }) => {
     const [data] = useState(props.data ?? {} as ICharacter);
     

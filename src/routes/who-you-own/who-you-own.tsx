@@ -9,9 +9,9 @@ import Typography from '@mui/material/Typography';
 import { ICharacter } from '../../models/interfaces';
 import { GlobalService, PersonalDataService } from '../../services';
 
-import RankSelectorCell from './rank-selector-cell';
-import CheckboxCell from './checkbox-cell';
-import { Rank, Rarity } from '../../models/enums';
+import SelectorCell from '../../shared-components/selector-cell';
+import CheckboxCell from '../../shared-components/checkbox-cell';
+import { Rank, Rarity, RarityStars } from '../../models/enums';
 import { isMobile } from 'react-device-detect';
 
 export const WhoYouOwn = () => {
@@ -73,10 +73,23 @@ export const WhoYouOwn = () => {
                     minWidth: 100,
                     maxWidth: 100,
                 },
+                // {
+                //     headerName: 'Progression',
+                //     editable: true,
+                //     cellRenderer: CheckboxCell,
+                //     cellRendererParams: {
+                //         editProperty: 'progress',
+                //     },
+                //     tooltipValueGetter: () => 'When checked character will be displayed on Progression view',
+                //     field: 'progress',
+                //     width: 100,
+                //     minWidth: 100,
+                //     maxWidth: 100,
+                // },
                 {
                     headerName: 'Rank',
                     editable: true,
-                    cellRenderer: RankSelectorCell,
+                    cellRenderer: SelectorCell,
                     cellRendererParams: {
                         editProperty: 'rank',
                         enumObject: Rank
@@ -87,11 +100,10 @@ export const WhoYouOwn = () => {
                     maxWidth: 150,
                     cellStyle: { padding: 0 },
                 },
-
                 {
                     headerName: 'Rarity',
                     editable: true,
-                    cellRenderer: RankSelectorCell,
+                    cellRenderer: SelectorCell,
                     cellRendererParams: {
                         editProperty: 'rarity',
                         enumObject: Rarity
@@ -102,6 +114,20 @@ export const WhoYouOwn = () => {
                     maxWidth: 150,
                     cellStyle: { padding: 0 },
                 },
+                // {
+                //     headerName: 'Stars',
+                //     editable: true,
+                //     cellRenderer: SelectorCell,
+                //     cellRendererParams: {
+                //         editProperty: 'rarityStars',
+                //         enumObject: RarityStars
+                //     },
+                //     field: 'rarityStars',
+                //     width: 150,
+                //     minWidth: 150,
+                //     maxWidth: 150,
+                //     cellStyle: { padding: 0 },
+                // },
                 {
                     headerName: 'Recommend First',
                     editable: true,
@@ -137,15 +163,42 @@ export const WhoYouOwn = () => {
     };
     
     const saveChanges = () => {
-        PersonalDataService.data.characters = rowsData.map(row => ({ 
-            name: row.name, 
-            unlocked: row.unlocked, 
-            rank: row.rank,
-            rarity: row.rarity,
-            leSelection: row.leSelection,
-            alwaysRecommend: row.alwaysRecommend,
-            neverRecommend: row.neverRecommend,
-        }));
+        rowsData.forEach(row => {
+            const existingChar = PersonalDataService.data.characters.find(char => char.name === row.name);
+            if(existingChar) {
+                existingChar.unlocked = row.unlocked;
+                existingChar.progress = row.progress;
+                existingChar.rank = row.rank;
+                existingChar.rarity = row.rarity;
+                existingChar.rarityStars = row.rarityStars;
+                existingChar.leSelection = row.leSelection;
+                existingChar.alwaysRecommend = row.alwaysRecommend;
+                existingChar.neverRecommend = row.neverRecommend;
+            } else {
+                PersonalDataService.data.characters.push({
+                    name: row.name,
+                    unlocked: row.unlocked,
+                    rank: row.rank,
+                    rarity: row.rarity,
+                    leSelection: row.leSelection,
+                    alwaysRecommend: row.alwaysRecommend,
+                    neverRecommend: row.neverRecommend,
+                    progress: row.progress,
+                    rarityStars: row.rarityStars,
+                    currentShards: 0,
+                    targetRarity: row.rarity,
+                    targetRarityStars: row.rarityStars,
+                });
+            }
+            
+            if(row.progress && !PersonalDataService.data.charactersPriorityList.includes(row.name)) {
+                PersonalDataService.data.charactersPriorityList.push(row.name);
+            }
+            if(!row.progress && PersonalDataService.data.charactersPriorityList.includes(row.name)) {
+                const indexToRemove = PersonalDataService.data.charactersPriorityList.indexOf(row.name);
+                PersonalDataService.data.charactersPriorityList.splice(indexToRemove,1);
+            }
+        });
         PersonalDataService.save();
     };
 

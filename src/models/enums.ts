@@ -37,6 +37,20 @@ export enum Rarity {
     Legendary,
 }
 
+export enum RarityStars {
+    OneStar,
+    TwoStars,
+    ThreeStarts,
+    FourStarts,
+    FiveStarts,
+    RedOneStar,
+    RedTwoStarts,
+    RedThreeStarts,
+    RedFourStarts,
+    RedFiveStarts,
+    DiamondStar
+}
+
 export enum Equipment {
     Crit = 'Crit',
     Block = 'Block',

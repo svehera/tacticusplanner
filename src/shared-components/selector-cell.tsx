@@ -2,11 +2,11 @@
 import { ICellRendererParams } from 'ag-grid-community';
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
-import './rank-selector-cell.css';
-import { ICharacter } from '../../models/interfaces';
+import './selector-cell.css';
+import { ICharacter } from '../models/interfaces';
 
-const RankSelectorCell = (props: ICellRendererParams<ICharacter> & {
-    editProperty: 'rank' | 'rarity',
+const SelectorCell = (props: ICellRendererParams<ICharacter> & {
+    editProperty: 'rank' | 'rarity' | 'rarityStars',
     enumObject: Record<string, string | number>
 }) => {
     const entries: Array<[string, string | number]> = Object.entries(props.enumObject);
@@ -46,4 +46,4 @@ const RankSelectorCell = (props: ICellRendererParams<ICharacter> & {
 
 };
 
-export default RankSelectorCell;
+export default SelectorCell;
