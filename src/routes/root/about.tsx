@@ -23,7 +23,7 @@ export const About = () => {
                         rel="noreferrer">Tacticus Wiki</a>
                     and <a
                         href="https://docs.google.com/spreadsheets/u/0/d/1al2IWwvTP3QOhHtfr6P8stdlA48ED4JFrtK8wDKznrk/htmlview"
-                        target={'_blank'} rel="noreferrer">EN Labs T.A.C.T.I.C.U.S</a>
+                        target={'_blank'} rel="noreferrer">(Towen) EN Labs T.A.C.T.I.C.U.S</a>
                     for collecting and publishing game data. It was very helpful in creating this app.
                 </p>
             </div>
