@@ -8,16 +8,20 @@ import 'ag-grid-community/styles/ag-theme-material.css';
 import reportWebVitals from './reportWebVitals';
 
 import {
+    createBrowserRouter,
     RouterProvider,
 } from 'react-router-dom';
 import { appRoutes } from './routes/routes';
+import { mobileAppRoutes } from './mobile-routes/routes';
+
+const routes =  createBrowserRouter([...appRoutes, ...mobileAppRoutes]);
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <RouterProvider router={appRoutes}/>
+        <RouterProvider router={routes}/>
     </React.StrictMode>
 );
 

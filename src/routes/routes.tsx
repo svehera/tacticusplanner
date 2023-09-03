@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 
 import {
-    createBrowserRouter,
+    RouteObject,
 } from 'react-router-dom';
 
 import App from '../app';
@@ -13,7 +13,7 @@ import { LegendaryEventPage } from './legendary-events/legendary-events-page';
 import { Contacts } from './contacts/contacts';
 import { Progression } from './progression/progression';
 
-export const appRoutes = createBrowserRouter([
+export const appRoutes : RouteObject[] =[
     {
         path: '',
         element: <App/>,
@@ -48,4 +48,4 @@ export const appRoutes = createBrowserRouter([
             },
         ],
     },
-]);
+];

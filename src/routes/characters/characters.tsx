@@ -219,9 +219,6 @@ export const Characters = () => {
 
     return (
         <div>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                Characters details
-            </Typography>
             <div style={{ display: 'flex', alignItems: 'center', gap: '20px', margin: '0 20px', flexDirection: isMobile ? 'column' : 'row' }}>
                 <TextField label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged}/>
                 <MultipleSelectCheckmarks placeholder="Damage Types" selectedValues={damageTypesFilter} values={Object.values(DamageType)}

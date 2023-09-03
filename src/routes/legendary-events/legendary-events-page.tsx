@@ -168,9 +168,6 @@ export const LegendaryEventPage = () => {
     return (
         <div>
             <div style={{ marginInlineStart: 10 }}>
-                <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                    Legendary Events
-                </Typography>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                         <Typography fontWeight={700}>

@@ -1,4 +1,5 @@
 ﻿import {
+    ICharacter,
     ILegendaryEventsData,
     IPersonalData,
 } from '../models/interfaces';
@@ -54,5 +55,44 @@ export class PersonalDataService {
     static save(): void {
         const storeData = JSON.stringify(this.data);
         localStorage.setItem(this.personalDataStorageKey, storeData);
+    }
+    
+    static saveCharacterChanges(character: ICharacter): void {
+        const existingChar = PersonalDataService.data.characters.find(char => char.name === character.name);
+
+        if (existingChar) {
+            existingChar.unlocked = character.unlocked;
+            existingChar.progress = character.progress;
+            existingChar.rank = character.rank;
+            existingChar.rarity = character.rarity;
+            existingChar.rarityStars = character.rarityStars;
+            existingChar.leSelection = character.leSelection;
+            existingChar.alwaysRecommend = character.alwaysRecommend;
+            existingChar.neverRecommend = character.neverRecommend;
+        } else {
+            PersonalDataService.data.characters.push({
+                name: character.name,
+                unlocked: character.unlocked,
+                rank: character.rank,
+                rarity: character.rarity,
+                leSelection: character.leSelection,
+                alwaysRecommend: character.alwaysRecommend,
+                neverRecommend: character.neverRecommend,
+                progress: character.progress,
+                rarityStars: character.rarityStars,
+                currentShards: 0,
+                targetRarity: character.rarity,
+                targetRarityStars: character.rarityStars,
+            });
+        }
+
+        if (character.progress && !PersonalDataService.data.charactersPriorityList.includes(character.name)) {
+            PersonalDataService.data.charactersPriorityList.push(character.name);
+        }
+        if (!character.progress && PersonalDataService.data.charactersPriorityList.includes(character.name)) {
+            const indexToRemove = PersonalDataService.data.charactersPriorityList.indexOf(character.name);
+            PersonalDataService.data.charactersPriorityList.splice(indexToRemove, 1);
+        }
+        PersonalDataService.save();
     }
 }
