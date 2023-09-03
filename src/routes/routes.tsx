@@ -13,7 +13,7 @@ import { LegendaryEventPage } from './legendary-events/legendary-events-page';
 import { Contacts } from './contacts/contacts';
 import { Progression } from './progression/progression';
 
-export const appRoutes : RouteObject[] =[
+export const appRoutes : () => RouteObject[] = () => [
     {
         path: '',
         element: <App/>,

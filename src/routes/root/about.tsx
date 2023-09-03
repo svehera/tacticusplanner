@@ -8,8 +8,8 @@ import Typography from '@mui/material/Typography';
 export const About = () => {
 
     return (
-        <div className="about-root">
-            <h3 style={{ textAlign: 'center' }}>Plan your success in Tacticus, No more Google Sh**t</h3>
+        <div>
+            <h3 style={{ textAlign: 'center' }}>Plan your success in Tacticus,<br/> No more Google Sh**t</h3>
 
             <div>
                 <p>

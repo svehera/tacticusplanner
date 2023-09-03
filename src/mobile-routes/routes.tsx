@@ -9,7 +9,7 @@ import { About } from '../routes/root/about';
 import { Characters } from './characters/characters';
 import { LegendaryEvents } from './legendary-events/legendary-events';
 
-export const mobileAppRoutes: RouteObject[] = [
+export const mobileAppRoutes: () => RouteObject[] = () => [
     {
         path: 'mobile',
         element: <MobileApp/>,

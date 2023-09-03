@@ -13,8 +13,11 @@ import {
 } from 'react-router-dom';
 import { appRoutes } from './routes/routes';
 import { mobileAppRoutes } from './mobile-routes/routes';
+import { GlobalService } from './services';
 
-const routes =  createBrowserRouter([...appRoutes, ...mobileAppRoutes]);
+GlobalService.init();
+
+const routes =  createBrowserRouter([...appRoutes(), ...mobileAppRoutes()]);
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
