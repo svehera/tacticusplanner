@@ -26,21 +26,6 @@ const TopAppBar = () => {
         setAnchorEl(null);
     };
 
-    const downloadJson = () => {
-        const data = PersonalDataService.data;
-        const jsonData = JSON.stringify(data, null, 2);
-
-        const blob = new Blob([jsonData], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'tacticus-planner-data.json';
-        link.click();
-
-        URL.revokeObjectURL(url);
-    };
-
     const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
 
@@ -103,7 +88,7 @@ const TopAppBar = () => {
             </MenuItem>
             <MenuItem onClick={handleClose}>
                 <Tooltip title={'Back up your personal data (Who You Own, etc.)'}>
-                    <Button onClick={downloadJson} color="inherit">Export data</Button>
+                    <Button onClick={() => PersonalDataService.downloadJson()} color="inherit">Export data</Button>
                 </Tooltip>
             </MenuItem>
             

@@ -8,6 +8,7 @@ import MobileApp from '../mobile-app';
 import { About } from '../routes/root/about';
 import { Characters } from './characters/characters';
 import { LegendaryEvents } from './legendary-events/legendary-events';
+import { Home } from './home/home';
 
 export const mobileAppRoutes: () => RouteObject[] = () => [
     {
@@ -16,7 +17,7 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
         children: [
             {
                 path: '/mobile',
-                element: <About/>,
+                element: <Home/>,
             },
             {
                 path: 'characters',

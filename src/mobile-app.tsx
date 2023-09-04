@@ -1,6 +1,7 @@
 ﻿import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import ListIcon from '@mui/icons-material/List';
 import LegendIcon from '@mui/icons-material/LegendToggle';
+import BackupIcon from '@mui/icons-material/Backup';
 
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
