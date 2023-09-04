@@ -4,15 +4,14 @@ import { ColDef, ColGroupDef, RowStyle } from 'ag-grid-community';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
 
 import { TextField } from '@mui/material';
-import Typography from '@mui/material/Typography';
 
 import { ICharacter } from '../../models/interfaces';
 import { GlobalService, PersonalDataService } from '../../services';
 
 import SelectorCell from '../../shared-components/selector-cell';
 import CheckboxCell from '../../shared-components/checkbox-cell';
-import { Rank, Rarity, RarityStars } from '../../models/enums';
-import { isMobile } from 'react-device-detect';
+import { Rank, Rarity } from '../../models/enums';
+import { fitGridOnWindowResize } from '../../shared-logic/functions';
 
 export const WhoYouOwn = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
@@ -35,25 +34,19 @@ export const WhoYouOwn = () => {
                     field: 'name', 
                     headerName: 'Name',
                     pinned: true,
-                    width: 200,
                     minWidth: 200,
-                    maxWidth: 200,
                 },
                 { 
                     field: 'alliance', 
                     headerName: 'Alliance', 
                     columnGroupShow: 'open',
-                    width: 100,
                     minWidth: 100,
-                    maxWidth: 100,
                 },
                 { 
                     field: 'faction',
                     headerName: 'Faction',
                     columnGroupShow: 'open',
-                    width: 170,
                     minWidth: 170,
-                    maxWidth: 170,
                 }
             ],
         },
@@ -69,9 +62,7 @@ export const WhoYouOwn = () => {
                         editProperty: 'unlocked',
                     },
                     field: 'unlocked',
-                    width: 100,
                     minWidth: 100,
-                    maxWidth: 100,
                 },
                 // {
                 //     headerName: 'Progression',
@@ -84,7 +75,7 @@ export const WhoYouOwn = () => {
                 //     field: 'progress',
                 //     width: 100,
                 //     minWidth: 100,
-                //     maxWidth: 100,
+                //     minWidth: 100,
                 // },
                 {
                     headerName: 'Rank',
@@ -95,9 +86,7 @@ export const WhoYouOwn = () => {
                         enumObject: Rank
                     },
                     field: 'rank',
-                    width: 150,
                     minWidth: 150,
-                    maxWidth: 150,
                     cellStyle: { padding: 0 },
                 },
                 {
@@ -109,9 +98,7 @@ export const WhoYouOwn = () => {
                         enumObject: Rarity
                     },
                     field: 'rarity',
-                    width: 150,
                     minWidth: 150,
-                    maxWidth: 150,
                     cellStyle: { padding: 0 },
                 },
                 // {
@@ -125,7 +112,7 @@ export const WhoYouOwn = () => {
                 //     field: 'rarityStars',
                 //     width: 150,
                 //     minWidth: 150,
-                //     maxWidth: 150,
+                //     minWidth: 150,
                 //     cellStyle: { padding: 0 },
                 // },
                 {
@@ -137,7 +124,7 @@ export const WhoYouOwn = () => {
                         disableProperty: 'neverRecommend',
                     },
                     field: 'alwaysRecommend',
-                    maxWidth: 180,
+                    minWidth: 180,
                     cellStyle: { display: 'flex', justifyContent: 'center' },
                 },
                 {
@@ -149,7 +136,7 @@ export const WhoYouOwn = () => {
                         disableProperty: 'alwaysRecommend',
                     },
                     field: 'neverRecommend',
-                    maxWidth: 180,
+                    minWidth: 180,
                     cellStyle: { display: 'flex', justifyContent: 'center' },
                 },
             ]
@@ -201,28 +188,11 @@ export const WhoYouOwn = () => {
         });
         PersonalDataService.save();
     };
-
-    React.useEffect(() => {
-        function handleResize() {
-            if (window.innerWidth >= 768) {
-                gridRef.current?.api.sizeColumnsToFit();
-            }
-        }
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-
-        };
-    });
-
+    
+    
     return (
         <div>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                Who You Own
-            </Typography>
-            <TextField label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged}/>
+            <TextField sx={{ margin: '10px', width: '300px' }} label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged}/>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 170px)', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}
@@ -233,7 +203,7 @@ export const WhoYouOwn = () => {
                     rowHeight={40}
                     getRowStyle={getRowStyle}
                     onCellEditingStopped={saveChanges}
-                    onGridReady={() => !isMobile ? gridRef.current?.api.sizeColumnsToFit() : undefined}
+                    onGridReady={fitGridOnWindowResize(gridRef)}
                 >
                 </AgGridReact>
             </div>

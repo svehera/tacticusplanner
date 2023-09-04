@@ -134,20 +134,13 @@ const TopAppBar = () => {
                     </Typography>
                     <div style={{ display: 'flex' }}>
                         {nav}
-                        <Button
-                            id="basic-button"
-                            color="inherit"
-                            component={Link} to={'./mobile'}
-                        >
-                            <SmartphoneIcon/>
-                        </Button>
-                        <Button
-                            id="basic-button"
-                            color="inherit"
-                            component={Link} to={'./'}
-                        >
-                            <ComputerIcon/>
-                        </Button>
+                        {/*<Button*/}
+                        {/*    id="basic-button"*/}
+                        {/*    color="inherit"*/}
+                        {/*    component={Link} to={'./mobile'}*/}
+                        {/*>*/}
+                        {/*    <SmartphoneIcon/>*/}
+                        {/*</Button>*/}
                         <Button
                             id="basic-button"
                             aria-controls={open ? 'basic-menu' : undefined}

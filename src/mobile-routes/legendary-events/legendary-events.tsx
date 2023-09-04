@@ -6,6 +6,7 @@ import { ILegendaryEvent } from '../../models/interfaces';
 import { AunShiLegendaryEvent, JainZarLegendaryEvent, ShadowSunLegendaryEvent } from '../../models/legendary-events';
 import { LegendaryEvent } from './legendary-event';
 import AutoTeamsSettings from '../../routes/legendary-events/auto-teams-settings';
+import { AutoTeamsSettingsContext } from '../../contexts';
 
 export const LegendaryEvents = () => {
     const [value, setValue] = React.useState(0);
@@ -39,7 +40,9 @@ export const LegendaryEvents = () => {
                     <AutoTeamsSettings value={autoTeamsPreferences} valueChanges={setAutoTeamsPreferences}></AutoTeamsSettings>
                 </div>
             </div>
-            <LegendaryEvent legendaryEvent={legendaryEvent}/>
+            <AutoTeamsSettingsContext.Provider value={autoTeamsPreferences}>
+                <LegendaryEvent legendaryEvent={legendaryEvent}/>
+            </AutoTeamsSettingsContext.Provider>
         </Box>
     );
 };

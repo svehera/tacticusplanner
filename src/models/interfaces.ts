@@ -127,8 +127,14 @@ export interface ILegendaryEventTrack {
 
   suggestTeams(
     event: LegendaryEvents,
-    settings: IAutoTeamsPreferences
+    settings: IAutoTeamsPreferences,
   ): Array<ICharacter[]>;
+
+  suggestTeams2(
+      event: LegendaryEvents,
+      settings: IAutoTeamsPreferences,
+      restrictions: string[]
+  ): Array<ICharacter>;
 }
 
 export interface ILegendaryEventTrackRestriction {
