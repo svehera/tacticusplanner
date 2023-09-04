@@ -1,10 +1,13 @@
-﻿import { ICharacter, IPersonalCharacterData } from '../models/interfaces';
+﻿import {
+    ICharacter,
+    IPersonalCharacter,
+    IPersonalCharacterData,
+} from '../models/interfaces';
 import { PersonalDataService } from './personal-data.service';
 import { StaticDataService } from './static-data.service';
 import { LegendaryEvents, Rank } from '../models/enums';
 
 export class GlobalService {
-
     static characters: Array<ICharacter>;
 
     static init(): void {
@@ -12,21 +15,27 @@ export class GlobalService {
         const staticUnitData = StaticDataService.unitsData;
         const personalUnitData = PersonalDataService.data;
 
-        this.characters = staticUnitData.map(staticData => {
-            const personalData: IPersonalCharacterData = personalUnitData.characters.find(c => c.name === staticData.name)
-                ?? {
-                    name: '',
-                    rank: Rank.Stone1,
-                    leSelection: LegendaryEvents.None,
-                    alwaysRecommend: false,
-                    neverRecommend: false
-                };
+        this.characters = staticUnitData.map((staticData) => {
+            const personalData: IPersonalCharacter = personalUnitData.characters.find(
+                (c) => c.name === staticData.name
+            ) ?? {
+                name: staticData.name,
+                unlocked: false,
+                progress: false,
+                rank: Rank.Stone1,
+                rarity: staticData.rarity,
+                rarityStars: staticData.rarityStars,
+                leSelection: LegendaryEvents.None,
+                alwaysRecommend: false,
+                neverRecommend: false,
+                currentShards: 0,
+                targetRarity: staticData.rarity,
+                targetRarityStars: staticData.rarityStars,
+            };
             return {
-                ...personalData, ...staticData,
-                rank: +(personalData.rank || Rank.Stone1),
-                rarity: personalData.rarity ?? staticData.rarity,
-                alwaysRecommend: personalData.alwaysRecommend ?? false,
-                neverRecommend: personalData.neverRecommend ?? false
+                ...staticData,
+                ...personalData,
+                rank: +personalData.rank,
             };
         });
     }

@@ -4,15 +4,14 @@ import { ColDef, ColGroupDef, RowStyle } from 'ag-grid-community';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
 
 import { TextField } from '@mui/material';
-import Typography from '@mui/material/Typography';
 
 import { ICharacter } from '../../models/interfaces';
 import { GlobalService, PersonalDataService } from '../../services';
 
-import RankSelectorCell from './rank-selector-cell';
-import CheckboxCell from './checkbox-cell';
+import SelectorCell from '../../shared-components/selector-cell';
+import CheckboxCell from '../../shared-components/checkbox-cell';
 import { Rank, Rarity } from '../../models/enums';
-import { isMobile } from 'react-device-detect';
+import { fitGridOnWindowResize } from '../../shared-logic/functions';
 
 export const WhoYouOwn = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
@@ -35,25 +34,19 @@ export const WhoYouOwn = () => {
                     field: 'name', 
                     headerName: 'Name',
                     pinned: true,
-                    width: 200,
                     minWidth: 200,
-                    maxWidth: 200,
                 },
                 { 
                     field: 'alliance', 
                     headerName: 'Alliance', 
                     columnGroupShow: 'open',
-                    width: 100,
                     minWidth: 100,
-                    maxWidth: 100,
                 },
                 { 
                     field: 'faction',
                     headerName: 'Faction',
                     columnGroupShow: 'open',
-                    width: 170,
                     minWidth: 170,
-                    maxWidth: 170,
                 }
             ],
         },
@@ -69,39 +62,59 @@ export const WhoYouOwn = () => {
                         editProperty: 'unlocked',
                     },
                     field: 'unlocked',
-                    width: 100,
                     minWidth: 100,
-                    maxWidth: 100,
                 },
+                // {
+                //     headerName: 'Progression',
+                //     editable: true,
+                //     cellRenderer: CheckboxCell,
+                //     cellRendererParams: {
+                //         editProperty: 'progress',
+                //     },
+                //     tooltipValueGetter: () => 'When checked character will be displayed on Progression view',
+                //     field: 'progress',
+                //     width: 100,
+                //     minWidth: 100,
+                //     minWidth: 100,
+                // },
                 {
                     headerName: 'Rank',
                     editable: true,
-                    cellRenderer: RankSelectorCell,
+                    cellRenderer: SelectorCell,
                     cellRendererParams: {
                         editProperty: 'rank',
                         enumObject: Rank
                     },
                     field: 'rank',
-                    width: 150,
                     minWidth: 150,
-                    maxWidth: 150,
                     cellStyle: { padding: 0 },
                 },
-
                 {
                     headerName: 'Rarity',
                     editable: true,
-                    cellRenderer: RankSelectorCell,
+                    cellRenderer: SelectorCell,
                     cellRendererParams: {
                         editProperty: 'rarity',
                         enumObject: Rarity
                     },
                     field: 'rarity',
-                    width: 150,
                     minWidth: 150,
-                    maxWidth: 150,
                     cellStyle: { padding: 0 },
                 },
+                // {
+                //     headerName: 'Stars',
+                //     editable: true,
+                //     cellRenderer: SelectorCell,
+                //     cellRendererParams: {
+                //         editProperty: 'rarityStars',
+                //         enumObject: RarityStars
+                //     },
+                //     field: 'rarityStars',
+                //     width: 150,
+                //     minWidth: 150,
+                //     minWidth: 150,
+                //     cellStyle: { padding: 0 },
+                // },
                 {
                     headerName: 'Recommend First',
                     editable: true,
@@ -111,7 +124,7 @@ export const WhoYouOwn = () => {
                         disableProperty: 'neverRecommend',
                     },
                     field: 'alwaysRecommend',
-                    maxWidth: 180,
+                    minWidth: 180,
                     cellStyle: { display: 'flex', justifyContent: 'center' },
                 },
                 {
@@ -123,7 +136,7 @@ export const WhoYouOwn = () => {
                         disableProperty: 'alwaysRecommend',
                     },
                     field: 'neverRecommend',
-                    maxWidth: 180,
+                    minWidth: 180,
                     cellStyle: { display: 'flex', justifyContent: 'center' },
                 },
             ]
@@ -137,39 +150,49 @@ export const WhoYouOwn = () => {
     };
     
     const saveChanges = () => {
-        PersonalDataService.data.characters = rowsData.map(row => ({ 
-            name: row.name, 
-            unlocked: row.unlocked, 
-            rank: row.rank,
-            rarity: row.rarity,
-            leSelection: row.leSelection,
-            alwaysRecommend: row.alwaysRecommend,
-            neverRecommend: row.neverRecommend,
-        }));
+        rowsData.forEach(row => {
+            const existingChar = PersonalDataService.data.characters.find(char => char.name === row.name);
+            if(existingChar) {
+                existingChar.unlocked = row.unlocked;
+                existingChar.progress = row.progress;
+                existingChar.rank = row.rank;
+                existingChar.rarity = row.rarity;
+                existingChar.rarityStars = row.rarityStars;
+                existingChar.leSelection = row.leSelection;
+                existingChar.alwaysRecommend = row.alwaysRecommend;
+                existingChar.neverRecommend = row.neverRecommend;
+            } else {
+                PersonalDataService.data.characters.push({
+                    name: row.name,
+                    unlocked: row.unlocked,
+                    rank: row.rank,
+                    rarity: row.rarity,
+                    leSelection: row.leSelection,
+                    alwaysRecommend: row.alwaysRecommend,
+                    neverRecommend: row.neverRecommend,
+                    progress: row.progress,
+                    rarityStars: row.rarityStars,
+                    currentShards: 0,
+                    targetRarity: row.rarity,
+                    targetRarityStars: row.rarityStars,
+                });
+            }
+            
+            if(row.progress && !PersonalDataService.data.charactersPriorityList.includes(row.name)) {
+                PersonalDataService.data.charactersPriorityList.push(row.name);
+            }
+            if(!row.progress && PersonalDataService.data.charactersPriorityList.includes(row.name)) {
+                const indexToRemove = PersonalDataService.data.charactersPriorityList.indexOf(row.name);
+                PersonalDataService.data.charactersPriorityList.splice(indexToRemove,1);
+            }
+        });
         PersonalDataService.save();
     };
-
-    React.useEffect(() => {
-        function handleResize() {
-            if (window.innerWidth >= 768) {
-                gridRef.current?.api.sizeColumnsToFit();
-            }
-        }
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-
-        };
-    });
-
+    
+    
     return (
         <div>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                Who You Own
-            </Typography>
-            <TextField label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged}/>
+            <TextField sx={{ margin: '10px', width: '300px' }} label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged}/>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 170px)', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}
@@ -180,7 +203,7 @@ export const WhoYouOwn = () => {
                     rowHeight={40}
                     getRowStyle={getRowStyle}
                     onCellEditingStopped={saveChanges}
-                    onGridReady={() => !isMobile ? gridRef.current?.api.sizeColumnsToFit() : undefined}
+                    onGridReady={fitGridOnWindowResize(gridRef)}
                 >
                 </AgGridReact>
             </div>

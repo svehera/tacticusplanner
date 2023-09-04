@@ -1,23 +1,17 @@
-﻿import unitsData from '../assets/UnitData.json';
+﻿import { uniq } from 'lodash';
+
+import unitsData from '../assets/UnitData.json';
 import dirtyDozen from '../assets/DirtyDozen.json';
 
 import { IDirtyDozenChar, IUnitData, UnitDataRaw } from '../models/interfaces';
-import { Faction, Rarity, RarityString } from '../models/enums';
-import { uniq } from 'lodash';
-
-const rarityStringToNumber: Record<RarityString, Rarity> = {
-    [RarityString.Common]: Rarity.Common,
-    [RarityString.Uncommon]: Rarity.Uncommon,
-    [RarityString.Rare]: Rarity.Rare,
-    [RarityString.Epic]: Rarity.Epic,
-    [RarityString.Legendary]: Rarity.Legendary,
-};
+import { Faction } from '../models/enums';
+import { rarityStringToNumber, rarityToStars } from '../models/constants';
 
 export class StaticDataService {
-    
+
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
     static readonly dirtyDozenData: IDirtyDozenChar[] = dirtyDozen;
-    
+
     static convertUnitData(rawData: UnitDataRaw): IUnitData {
         const unitData: IUnitData = {
             alliance: rawData.Alliance,
@@ -29,6 +23,7 @@ export class StaticDataService {
             damage: rawData.Damage,
             armour: rawData.Armour,
             rarity: rarityStringToNumber[rawData['Initial rarity']],
+            rarityStars: rarityToStars[rarityStringToNumber[rawData['Initial rarity']]],
             equipment1: rawData.Equipment1,
             equipment2: rawData.Equipment2,
             equipment3: rawData.Equipment3,
@@ -45,14 +40,14 @@ export class StaticDataService {
                 melee: rawData['Melee Damage'],
             }
         };
-        
+
         if (rawData['Ranged Damage']) {
             unitData.damageTypes.all.push(rawData['Ranged Damage']);
             unitData.damageTypes.range = rawData['Ranged Damage'];
         }
         if (rawData['Active Ability']) {
             unitData.damageTypes.all.push(rawData['Active Ability']);
-            unitData.damageTypes.activeAbility =rawData['Active Ability'];
+            unitData.damageTypes.activeAbility = rawData['Active Ability'];
         }
         if (rawData['Passive Ability']) {
             unitData.damageTypes.all.push(rawData['Passive Ability']);
@@ -62,7 +57,7 @@ export class StaticDataService {
 
         return unitData;
     }
-    
+
     static getFactionColor(faction: Faction): string {
         switch (faction) {
         case Faction.Ultramarines:

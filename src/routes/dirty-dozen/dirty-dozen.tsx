@@ -77,8 +77,8 @@ export const DirtyDozen = () => {
 
     return (
         <div>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-                Dirty Dozen - Based on <Link to={'https://tacticus.fandom.com/wiki/Infographics#Dirty_Dozen_Series'} target={'_blank'}>Nandi&apos;s infographics </Link> (July 2023) 
+            <Typography variant="subtitle1" component="div" sx={{ flexGrow: 1 }}>
+                Based on <Link to={'https://tacticus.fandom.com/wiki/Infographics#Dirty_Dozen_Series'} target={'_blank'}>Nandi&apos;s infographics </Link> (July 2023) 
             </Typography>
 
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 130px)', width: '100%' }}>
@@ -96,5 +96,3 @@ export const DirtyDozen = () => {
         </div>
     );
 };
-
-export default DirtyDozen;

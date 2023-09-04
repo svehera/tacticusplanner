@@ -1,6 +1,8 @@
 ﻿import React, { useEffect, useState } from 'react';
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import { IAutoTeamsPreferences } from '../../models/interfaces';
+import { isMobile } from 'react-device-detect';
+import { pooEmoji, starEmoji } from '../../models/constants';
 
 const AutoTeamsSettings = (props: { value: IAutoTeamsPreferences , valueChanges: (settings: IAutoTeamsPreferences) => void }) => {
     const { value, valueChanges } = props;
@@ -39,13 +41,13 @@ const AutoTeamsSettings = (props: { value: IAutoTeamsPreferences , valueChanges:
                 checked={ignoreRecommendedFirst}
                 onChange={(event) => setIgnoreRecommendedFirst(event.target.checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
-            />} label="Ignore Recommended First"/>
+            />} label={ isMobile ? 'Ignore ' + starEmoji : 'Ignore recommended first'}/>
 
             <FormControlLabel control={<Checkbox
                 checked={ignoreRecommendedLast}
                 onChange={(event) => setIgnoreRecommendedLast(event.target.checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
-            />} label="Ignore Recommended Last"/>
+            />}  label={ isMobile ? 'Ignore ' + pooEmoji : 'Ignore recommended  last'}/>
         </FormGroup>
     );
 };

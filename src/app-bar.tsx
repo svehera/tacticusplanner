@@ -1,17 +1,21 @@
-﻿import React, { ChangeEvent, useRef } from 'react';
+﻿import React, { ChangeEvent, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BrowserView } from 'react-device-detect';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Divider, Menu, MenuItem, Tooltip } from '@mui/material';
+import { Divider, Menu, MenuItem, Tooltip, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import ComputerIcon from '@mui/icons-material/Computer';
+import SmartphoneIcon from '@mui/icons-material/Smartphone';
 import { PersonalDataService } from './services';
+import { isTabletOrMobileMediaQuery } from './models/constants';
 
 const TopAppBar = () => {
+    const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
+    const [title, setTitle] = useState('Tacticus Planner');
     const inputRef = useRef<HTMLInputElement>(null);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -20,21 +24,6 @@ const TopAppBar = () => {
     };
     const handleClose = () => {
         setAnchorEl(null);
-    };
-
-    const downloadJson = () => {
-        const data = PersonalDataService.data;
-        const jsonData = JSON.stringify(data, null, 2);
-
-        const blob = new Blob([jsonData], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'tacticus-planner-data.json';
-        link.click();
-
-        URL.revokeObjectURL(url);
     };
 
     const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
@@ -58,13 +47,13 @@ const TopAppBar = () => {
         }
     };
     
-    const nav = (
-        <BrowserView>
-            <Button component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
-            <Button component={Link} to={'./characters'} color="inherit">Characters</Button>
-            <Button component={Link} to={'./dirtyDozen'} color="inherit">Dirty Dozen</Button>
-            <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>
-        </BrowserView>
+    const nav = isTabletOrMobile ? undefined : (
+        <div>
+            <Button onClick={() => setTitle('Who You Own')} component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
+            <Button onClick={() => setTitle('Characters')} component={Link} to={'./characters'} color="inherit">Characters</Button>
+            <Button onClick={() => setTitle('Dirty Dozen')} component={Link} to={'./dirtyDozen'} color="inherit">Dirty Dozen</Button>
+            <Button onClick={() => setTitle('Legendary Events')} component={Link} to={'./le'} color="inherit">Legendary Events</Button>
+        </div>
     );
     
     const menu = (
@@ -78,16 +67,16 @@ const TopAppBar = () => {
             }}
         >
             <MenuItem onClick={handleClose}>
-                <Button component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
+                <Button onClick={() => setTitle('Who You Own')} component={Link} to={'./wyo'} color="inherit">Who You Own</Button>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-                <Button component={Link} to={'./characters'} color="inherit">Characters</Button>
+                <Button onClick={() => setTitle('Characters')} component={Link} to={'./characters'} color="inherit">Characters</Button>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-                <Button component={Link} to={'./dirtyDozen'} color="inherit">Dirty Dozen</Button>
+                <Button onClick={() => setTitle('Dirty Dozen')} component={Link} to={'./dirtyDozen'} color="inherit">Dirty Dozen</Button>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-                <Button component={Link} to={'./le'} color="inherit">Legendary Events</Button>
+                <Button onClick={() => setTitle('Legendary Events')} component={Link} to={'./le'} color="inherit">Legendary Events</Button>
             </MenuItem>
             
             <Divider/>
@@ -99,17 +88,17 @@ const TopAppBar = () => {
             </MenuItem>
             <MenuItem onClick={handleClose}>
                 <Tooltip title={'Back up your personal data (Who You Own, etc.)'}>
-                    <Button onClick={downloadJson} color="inherit">Export data</Button>
+                    <Button onClick={() => PersonalDataService.downloadJson()} color="inherit">Export data</Button>
                 </Tooltip>
             </MenuItem>
             
             <Divider/>
             
             <MenuItem onClick={handleClose}>
-                <Button component={Link} to={'./'} color="inherit">About</Button>
+                <Button onClick={() => setTitle('Tacticus Planner')} component={Link} to={'./'} color="inherit">Home/F.A.Q.</Button>
             </MenuItem>
             <MenuItem onClick={handleClose}>
-                <Button component={Link} to={'./contacts'} color="inherit">Contacts</Button>
+                <Button onClick={() => setTitle('Contacts')} component={Link} to={'./contacts'} color="inherit">Contacts</Button>
             </MenuItem>
         </Menu>
     );
@@ -125,13 +114,18 @@ const TopAppBar = () => {
             />
             <AppBar position="static">
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Button component={Link} to={'./'} color="inherit">
-                        <Typography variant="h4" component="div">
-                            Tacticus Planner
-                        </Typography>
-                    </Button>
+                    <Typography variant={ isTabletOrMobile ? 'h5' : 'h4'} component="div">
+                        {title}
+                    </Typography>
                     <div style={{ display: 'flex' }}>
                         {nav}
+                        {/*<Button*/}
+                        {/*    id="basic-button"*/}
+                        {/*    color="inherit"*/}
+                        {/*    component={Link} to={'./mobile'}*/}
+                        {/*>*/}
+                        {/*    <SmartphoneIcon/>*/}
+                        {/*</Button>*/}
                         <Button
                             id="basic-button"
                             aria-controls={open ? 'basic-menu' : undefined}

@@ -1,59 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import './index.css';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-material.css';
+import './index.css';
 
-import App from './app';
 import reportWebVitals from './reportWebVitals';
 
 import {
     createBrowserRouter,
     RouterProvider,
 } from 'react-router-dom';
-import { About, Characters, Contacts, DirtyDozen, LegendaryEventPage, WhoYouOwn } from './routes';
+import { appRoutes } from './routes/routes';
+import { mobileAppRoutes } from './mobile-routes/routes';
+import { GlobalService } from './services';
 
+GlobalService.init();
 
-const router = createBrowserRouter([
-    {
-        path: '',
-        element: <App/>,
-        children: [
-            {
-                path: '/',
-                element: <About/>,
-            },
-            {
-                path: 'wyo',
-                element: <WhoYouOwn/>,
-            },
-            {
-                path: 'characters',
-                element: <Characters/>,
-            },
-            {
-                path: 'dirtyDozen',
-                element: <DirtyDozen/>,
-            },
-            {
-                path: 'le',
-                element: <LegendaryEventPage/>,
-            },
-            {
-                path: 'contacts',
-                element: <Contacts/>,
-            },
-        ],
-    },
-]);
+const routes =  createBrowserRouter([...appRoutes(), ...mobileAppRoutes()]);
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <RouterProvider router={router}/>
+        <RouterProvider router={routes}/>
     </React.StrictMode>
 );
 
