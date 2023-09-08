@@ -48,7 +48,7 @@ export const SelectedTeamsTable = (props: {
 
     const columnsDefs = useMemo<Array<ColGroupDef>>(() => [
         {
-            headerName: track.name + ' - ' + track.killPoints,
+            headerName: track.name,
             headerClass: track.section,
             children: getSectionColumns(track.unitsRestrictions, track.section),
             openByDefault: true
@@ -78,8 +78,8 @@ export const SelectedTeamsTable = (props: {
     function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], suffix: LegendaryEventSection): Array<ColDef> {
         return unitsRestrictions.map((u) => ({
             field: u.name,
-            headerName: `(${u.points}) ${u.name}`,
-            headerTooltip: `(${u.points}) ${u.name}`,
+            headerName: u.name,
+            headerTooltip: u.name,
             valueFormatter: (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
             cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
             tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rarity[params.value?.rarity ?? 0] + ' - ' + Rank[params.value?.rank ?? 0],
@@ -92,7 +92,7 @@ export const SelectedTeamsTable = (props: {
 
     return (
         <div className="ag-theme-material auto-teams"
-            style={{ height: '270px', width: '100%', border: '2px solid black' }}>
+            style={{ height: '240px', width: '100%', border: '2px solid black' }}>
             <AgGridReact
                 ref={gridRef}
                 tooltipShowDelay={100}
