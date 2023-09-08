@@ -120,6 +120,9 @@ export class PersonalDataService {
 
             legendaryEvents[eventKey].selectedTeams.forEach(row => {
                 for (const rowKey in row) {
+                    if(!row[rowKey]) {
+                        continue;
+                    }
                     if(rowKey.includes('(Alpha)')) {
                         const newRowKey: string = rowKey.replace('(Alpha)', '');
                         alphaTeams[newRowKey] = [...(alphaTeams[newRowKey] ?? []), row[rowKey]];
