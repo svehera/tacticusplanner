@@ -1,11 +1,14 @@
 ﻿import { IHeaderParams } from 'ag-grid-community';
 import React from 'react';
+import { Checkbox, FormControlLabel } from '@mui/material';
 
-const CustomTableHeader = (props: IHeaderParams & { onHeaderClick: (props: IHeaderParams) => void }) => {
+const CustomTableHeader = (props: IHeaderParams & { checked: boolean, onCheckboxChange: (selected: boolean) => void }) => {
     return (
-        <div onClick={() => props.onHeaderClick(props)}>
-            <div className="customHeaderLabel">{props.displayName}</div>
-        </div>
+        <FormControlLabel control={<Checkbox
+            defaultChecked={props.checked}
+            onChange={(event) =>  props.onCheckboxChange(event.target.checked)}
+            inputProps={{ 'aria-label': 'controlled' }}
+        />} label={props.displayName} sx={{ margin: 0, width: '100%' }}/>
     );
 };
 

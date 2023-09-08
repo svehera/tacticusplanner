@@ -3,6 +3,7 @@
     DamageType,
     Equipment,
     Faction,
+    LegendaryEvent,
     LegendaryEvents,
     Rank,
     Rarity,
@@ -11,7 +12,7 @@
     Trait,
 } from './enums';
 
-export type LegendaryEventSection = '(Alpha)' | '(Beta)' | '(Gamma)';
+export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
 export interface UnitDataRaw {
   Name: string;
@@ -87,15 +88,25 @@ export interface IDirtyDozenChar {
 
 export type ICharacter = IUnitData & IPersonalCharacter;
 
-export type ICharLegendaryEvents = Record<LegendaryEvents, ICharLegendaryEvent>;
+export type ICharLegendaryEvents = Record<LegendaryEvent, ICharLegendaryEvent>;
 
 export interface ICharLegendaryEvent {
-  points: number;
-  slots: number;
+  alphaPoints: number;
+  alphaSlots: number;
+
+  betaPoints: number;
+  betaSlots: number;
+
+  gammaPoints: number;
+  gammaSlots: number;
+
+  totalPoints: number;
+  totalSlots: number;
 }
 
 export interface ILegendaryEvent {
-  id: LegendaryEvents;
+  id: LegendaryEvent;
+  name: string;
   alphaTrack: ILegendaryEventTrack;
   betaTrack: ILegendaryEventTrack;
   gammaTrack: ILegendaryEventTrack;
@@ -113,6 +124,7 @@ export interface ILegendaryEvent {
 }
 
 export interface ILegendaryEventTrack {
+  eventId: LegendaryEvent;
   section: LegendaryEventSection;
   name: string;
   killPoints: number;
@@ -126,31 +138,31 @@ export interface ILegendaryEventTrack {
   getRestrictionPoints(name: string): number;
 
   suggestTeams(
-    event: LegendaryEvents,
     settings: IAutoTeamsPreferences,
-  ): Array<ICharacter[]>;
+    restrictions: string[]
+  ): Record<string, ICharacter[]>;
 
-  suggestTeams2(
-      event: LegendaryEvents,
-      settings: IAutoTeamsPreferences,
-      restrictions: string[]
+  suggestTeam(
+    settings: IAutoTeamsPreferences,
+    restrictions: string[]
   ): Array<ICharacter>;
 }
 
 export interface ILegendaryEventTrackRestriction {
   name: string;
   points: number;
+  core?: boolean;
   units: ICharacter[];
 }
 
 export type ITableRow<T = ICharacter | string> = Record<string, T>;
 
 export interface IPersonalData {
-  viewPreferences: IViewPreferences;
   autoTeamsPreferences: IAutoTeamsPreferences;
   characters: IPersonalCharacter[];
   charactersPriorityList: string[];
   legendaryEvents: ILegendaryEventsData;
+  legendaryEvents3: ILegendaryEventsData3 | undefined;
 }
 
 export interface ILegendaryEventsData {
@@ -159,19 +171,32 @@ export interface ILegendaryEventsData {
   shadowSun: ILegendaryEventData;
 }
 
+export type ILegendaryEventsData3 = Record<
+  LegendaryEvent,
+  ILegendaryEventData3
+>;
+
+export type SelectedTeams = Record<string, string[]>;
+
+export interface ILegendaryEventData3 {
+  id: LegendaryEvent;
+  alpha: SelectedTeams;
+  beta: SelectedTeams;
+  gamma: SelectedTeams;
+}
+
 export interface ILegendaryEventData {
   selectedTeams: ITableRow<string>[];
 }
 
 export interface IViewPreferences {
-  onlyUnlocked: boolean;
-  usedInCampaigns: boolean;
   showAlpha: boolean;
   showBeta: boolean;
   showGamma: boolean;
 }
 
 export interface IAutoTeamsPreferences {
+  onlyUnlocked: boolean;
   preferCampaign: boolean;
   ignoreRarity: boolean;
   ignoreRank: boolean;

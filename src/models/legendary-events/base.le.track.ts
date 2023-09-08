@@ -5,20 +5,21 @@
     ILegendaryEventTrackRestriction,
     LegendaryEventSection
 } from '../interfaces';
-import { intersectionBy, orderBy, sortBy, sum } from 'lodash';
-import { LegendaryEvents } from '../enums';
+import { intersectionBy, orderBy, sum } from 'lodash';
+import { LegendaryEvent } from '../enums';
 
 export class LETrack implements ILegendaryEventTrack {
 
-    public section: LegendaryEventSection;
 
     constructor(
+        public eventId: LegendaryEvent,
+        public section: LegendaryEventSection,
         public name: string,
         public killPoints: number,
         public allowedUnits: ICharacter[],
         public unitsRestrictions: Array<ILegendaryEventTrackRestriction>
     ) {
-        this.section = name.includes('Alpha') ? '(Alpha)' : name.includes('Beta') ? '(Beta)' : '(Gamma)';
+        this.unitsRestrictions = orderBy(unitsRestrictions, 'points');
     }
 
     getCharacterPoints(character: ICharacter): number {
@@ -46,56 +47,18 @@ export class LETrack implements ILegendaryEventTrack {
         return this.unitsRestrictions.find(x => x.name === name)?.points ?? 0;
     }
 
-    suggestTeams(event: LegendaryEvents, settings: IAutoTeamsPreferences): Array<ICharacter[]> {
-        return this.unitsRestrictions.map(x => {
-            const units = x.units
-                .filter(x => x.unlocked)
-                .map(unit => ({
-                    name: unit.name,
-                    rank: +unit.rank,
-                    rarity: +unit.rarity,
-                    requiredInCampaign: unit.requiredInCampaign,
-                    points: unit.legendaryEvents[event].points,
-                    alwaysRecommend: unit.alwaysRecommend ?? false,
-                    neverRecommend: unit.neverRecommend ?? false, 
-                }));
-            const iterates: string[] = [];
-            const orders: Array<'asc' | 'desc'> = [];
-            
-            if (!settings.ignoreRecommendedFirst) {
-                iterates.push('alwaysRecommend');
-                orders.push('desc');
-            }
-            
-            if (!settings.ignoreRecommendedLast) {
-                iterates.push('neverRecommend');
-                orders.push('asc');
-            }
-            
-            if (settings.preferCampaign) {
-                iterates.push('requiredInCampaign');
-                orders.push('desc');
-            }
-
-            if (!settings.ignoreRarity) {
-                iterates.push('rarity');
-                orders.push('desc');
-            }
-
-            if (!settings.ignoreRank) {
-                iterates.push('rank');
-                orders.push('desc');
-            }
-            
-            iterates.push('points');
-            orders.push('desc');
-
-            const top5 = orderBy(units, iterates, orders).slice(0, 5).map(unit => unit.name);
-            return sortBy(x.units.filter(unit => top5.includes(unit.name)), 'name');
+    suggestTeams(settings: IAutoTeamsPreferences, restrictions: string[]): Record<string, ICharacter[]> {
+        const coreSuggestedTeams = this.suggestTeam(settings, restrictions);
+        const result: Record<string, ICharacter[]> = {};
+        
+        this.unitsRestrictions.forEach(x => {
+            result[x.name] = restrictions.includes(x.name) ? [...coreSuggestedTeams] : this.suggestTeam(settings, [x.name]);
         });
+        
+        return result;
     }
 
-    suggestTeams2(event: LegendaryEvents, settings: IAutoTeamsPreferences, restrictions: string[]): Array<ICharacter> {
+    suggestTeam(settings: IAutoTeamsPreferences, restrictions: string[]): Array<ICharacter> {
         let allowedChars: ICharacter[] = [];
         if(!restrictions.length) {
             allowedChars = this.allowedUnits;
@@ -107,13 +70,13 @@ export class LETrack implements ILegendaryEventTrack {
         }
         
         const sortChars = allowedChars
-            .filter(x => x.unlocked)
+            .filter(x => settings.onlyUnlocked ? x.unlocked : true)
             .map(unit => ({
                 name: unit.name,
                 rank: +unit.rank,
                 rarity: +unit.rarity,
                 requiredInCampaign: unit.requiredInCampaign,
-                points: unit.legendaryEvents[event].points,
+                points: unit.legendaryEvents[this.eventId].totalPoints,
                 alwaysRecommend: unit.alwaysRecommend ?? false,
                 neverRecommend: unit.neverRecommend ?? false,
             }));

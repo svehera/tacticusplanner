@@ -1,53 +1,61 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { useCallback, useState } from 'react';
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import { IAutoTeamsPreferences } from '../../models/interfaces';
 import { isMobile } from 'react-device-detect';
 import { pooEmoji, starEmoji } from '../../models/constants';
 
-const AutoTeamsSettings = (props: { value: IAutoTeamsPreferences , valueChanges: (settings: IAutoTeamsPreferences) => void }) => {
-    const { value, valueChanges } = props;
+const AutoTeamsSettings = (props: {
+    value: IAutoTeamsPreferences,
+    valueChanges: (settings: IAutoTeamsPreferences) => void
+}) => {
+    const [preferences, setPreferences] = useState<IAutoTeamsPreferences>(props.value);
 
-    const [preferCampaign, setPreferCampaign] = useState(value.preferCampaign);
-    const [ignoreRank, setIgnoreRank] = useState(value.ignoreRank);
-    const [ignoreRarity, setIgnoreRarity] = useState(value.ignoreRarity);
-    const [ignoreRecommendedFirst, setIgnoreRecommendedFirst] = useState(value.ignoreRecommendedFirst);
-    const [ignoreRecommendedLast, setIgnoreRecommendedLast] = useState(value.ignoreRecommendedLast);
-
-    useEffect(() => {
-        valueChanges({ preferCampaign, ignoreRank, ignoreRecommendedFirst, ignoreRecommendedLast, ignoreRarity });
-    },[preferCampaign, ignoreRank, ignoreRecommendedFirst, ignoreRecommendedLast, ignoreRarity]);
+    const updatePreferences = useCallback((setting: keyof IAutoTeamsPreferences, value: boolean) => {
+        
+        setPreferences((previousValue) => {
+            const newValue = { ...previousValue, [setting]: value };
+            props.valueChanges(newValue);
+            return newValue;
+        });
+    }, []);
 
     return (
         <FormGroup style={{ display: 'flex', flexDirection: 'row' }}>
             <FormControlLabel control={<Checkbox
-                checked={preferCampaign}
-                onChange={(event) => setPreferCampaign(event.target.checked)}
+                checked={preferences.onlyUnlocked}
+                onChange={(event) => updatePreferences('onlyUnlocked', event.target.checked)}
+                inputProps={{ 'aria-label': 'controlled' }}
+            />} label="Only unlocked"/>
+            
+            <FormControlLabel control={<Checkbox
+                checked={preferences.preferCampaign}
+                onChange={(event) => updatePreferences('preferCampaign', event.target.checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
             />} label="Prefer Campaign Chars"/>
 
             <FormControlLabel control={<Checkbox
-                checked={ignoreRank}
-                onChange={(event) => setIgnoreRank(event.target.checked)}
+                checked={preferences.ignoreRank}
+                onChange={(event) => updatePreferences('ignoreRank', event.target.checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
             />} label="Ignore Rank"/>
 
             <FormControlLabel control={<Checkbox
-                checked={ignoreRarity}
-                onChange={(event) => setIgnoreRarity(event.target.checked)}
+                checked={preferences.ignoreRarity}
+                onChange={(event) => updatePreferences('ignoreRarity', event.target.checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
             />} label="Ignore Rarity"/>
 
             <FormControlLabel control={<Checkbox
-                checked={ignoreRecommendedFirst}
-                onChange={(event) => setIgnoreRecommendedFirst(event.target.checked)}
+                checked={preferences.ignoreRecommendedFirst}
+                onChange={(event) => updatePreferences('ignoreRecommendedFirst', event.target.checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
-            />} label={ isMobile ? 'Ignore ' + starEmoji : 'Ignore recommended first'}/>
+            />} label={isMobile ? 'Ignore ' + starEmoji : 'Ignore recommended first'}/>
 
             <FormControlLabel control={<Checkbox
-                checked={ignoreRecommendedLast}
-                onChange={(event) => setIgnoreRecommendedLast(event.target.checked)}
+                checked={preferences.ignoreRecommendedLast}
+                onChange={(event) => updatePreferences('ignoreRecommendedLast', event.target.checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
-            />}  label={ isMobile ? 'Ignore ' + pooEmoji : 'Ignore recommended  last'}/>
+            />} label={isMobile ? 'Ignore ' + pooEmoji : 'Ignore recommended  last'}/>
         </FormGroup>
     );
 };

@@ -1,11 +1,11 @@
-﻿import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+﻿import React, { useContext, useEffect, useState } from 'react';
 import { ICharacter, ILegendaryEventTrack } from '../../models/interfaces';
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
-import { LegendaryEvents } from '../../models/enums';
+import { LegendaryEvent } from '../../models/enums';
 import { AutoTeamsSettingsContext } from '../../contexts';
 import { getCharName } from '../../shared-logic/functions';
 
-export const LegendaryEventTrack = (props: { track: ILegendaryEventTrack, eventId: LegendaryEvents }) => {
+export const LegendaryEventTrack = (props: { track: ILegendaryEventTrack, eventId: LegendaryEvent }) => {
     const [characters, setCharacters] = useState<ICharacter[]>(props.track.allowedUnits);
     const [restrictions, setRestrictions] = useState<string[]>([]);
 
@@ -25,7 +25,7 @@ export const LegendaryEventTrack = (props: { track: ILegendaryEventTrack, eventI
     };
 
     useEffect(() => {
-        setCharacters(props.track.suggestTeams2(props.eventId, autoTeamsPreferences, restrictions));
+        setCharacters(props.track.suggestTeam(autoTeamsPreferences, restrictions));
     }, [restrictions, autoTeamsPreferences]);
 
     return (
@@ -40,7 +40,7 @@ export const LegendaryEventTrack = (props: { track: ILegendaryEventTrack, eventI
             </FormGroup>
             <ol>
                 {characters.map(x => (<li key={x.name}
-                    style={{ marginBottom: 10 }}>{getCharName(x)} - {x.legendaryEvents[props.eventId].points} pts/ {x.legendaryEvents[props.eventId].slots} slots</li>))}
+                    style={{ marginBottom: 10 }}>{getCharName(x)} - {x.legendaryEvents[props.eventId].totalPoints} pts/ {x.legendaryEvents[props.eventId].totalSlots} slots</li>))}
             </ol>
         </div>
     );

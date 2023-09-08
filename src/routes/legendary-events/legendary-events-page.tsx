@@ -1,236 +1,126 @@
-﻿import React, { useEffect, useState } from 'react';
-import { cloneDeep, uniqBy } from 'lodash';
+﻿import React, { useEffect, useMemo, useState } from 'react';
+import { Popover, Tab, Tabs } from '@mui/material';
+import SettingsIcon from '@mui/icons-material/Settings';
 
-import Typography from '@mui/material/Typography';
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
-import { ViewSettingsContext, AutoTeamsSettingsContext } from '../../contexts';
+import { AutoTeamsSettingsContext, LegendaryEventContext, ViewSettingsContext } from '../../contexts';
 import { GlobalService, PersonalDataService } from '../../services';
 import { AunShiLegendaryEvent, JainZarLegendaryEvent, ShadowSunLegendaryEvent } from '../../models/legendary-events';
-import { ICharacter, ITableRow } from '../../models/interfaces';
+import {
+    ILegendaryEvent,
+    ILegendaryEventData3, IViewPreferences
+} from '../../models/interfaces';
 
 import LegendaryEvent from './legendary-event';
 import ViewSettings from './view-settings';
 import AutoTeamsSettings from './auto-teams-settings';
-import OverallPointsTable from './overall-points-table';
+import Box from '@mui/material/Box';
+import { LegendaryEvent as LegendaryEventEnum } from '../../models/enums';
+import Button from '@mui/material/Button';
 
 export const LegendaryEventPage = () => {
-    const [characters, setCharacters] = useState(GlobalService.characters);
-    
-    const jainZarLegendaryEvent = new JainZarLegendaryEvent(characters, mapSelectedTeams(PersonalDataService.data.legendaryEvents.jainZar.selectedTeams));
-    const aunShiLegendaryEvent = new AunShiLegendaryEvent(characters, mapSelectedTeams(PersonalDataService.data.legendaryEvents.aunShi.selectedTeams));
-    const shadowSunLegendaryEvent = new ShadowSunLegendaryEvent(characters, mapSelectedTeams(PersonalDataService.data.legendaryEvents.shadowSun.selectedTeams));
-    
-    const [viewPreferences, setViewPreferences] = useState(PersonalDataService.data.viewPreferences);
+    const [characters] = useState(GlobalService.characters);
+
+    const jainZarLegendaryEvent = useMemo(() => new JainZarLegendaryEvent(characters, []), [characters]);
+    const aunShiLegendaryEvent = useMemo(() => new AunShiLegendaryEvent(characters,[]), [characters]);
+    const shadowSunLegendaryEvent = useMemo(() => new ShadowSunLegendaryEvent(characters,[]), [characters]);
+
+    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(jainZarLegendaryEvent);
+
+    const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
+
+    const [viewPreferences, setViewPreferences] = useState<IViewPreferences>({
+        showAlpha: true,
+        showBeta: true,
+        showGamma: true,
+    });
     const [autoTeamsPreferences, setAutoTeamsPreferences] = useState(PersonalDataService.data.autoTeamsPreferences);
+
+    const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl2(event.currentTarget);
+    };
     
 
-    useEffect(() => {
-        PersonalDataService.data.viewPreferences = viewPreferences;
-        PersonalDataService.save();
-    }, [viewPreferences]);
-
+    const handleClose2 = () => {
+        setAnchorEl2(null);
+    };
+    
+    const open2 = Boolean(anchorEl2);
+    
     useEffect(() => {
         PersonalDataService.data.autoTeamsPreferences = autoTeamsPreferences;
         PersonalDataService.save();
     }, [autoTeamsPreferences]);
 
 
-    const updateJainZarEventTeams = (selectedTeams: Array<ITableRow>) => {
-        PersonalDataService.data.legendaryEvents.jainZar.selectedTeams = selectedTeams.map(row => {
-            const newRow: ITableRow<string> = {};
-            for (const rowKey in row) {
-                const value = row[rowKey];
-                newRow[rowKey] = typeof value !== 'string' ? value.name : value;
-            }
-            return newRow;
-        });
-        const selectedChars = selectedTeams
-            .flatMap(row => Object.values(row))
-            .filter(value => typeof value !== 'string')
-            .map(char  => (char as ICharacter).name);
-        
-        PersonalDataService.data.characters.forEach(char => {
-            if(selectedChars.includes(char.name)) {
-                char.leSelection |= jainZarLegendaryEvent.id;
-            } else  {
-                char.leSelection &= ~jainZarLegendaryEvent.id;
-            }
-        });
-        
-        PersonalDataService.save();
-        setCharacters([...characters]);
-    };
-
-    const updateAunShiEventTeams = (selectedTeams: Array<ITableRow>) => {
-        PersonalDataService.data.legendaryEvents.aunShi.selectedTeams = selectedTeams.map(row => {
-            const newRow: ITableRow<string> = {};
-            for (const rowKey in row) {
-                const value = row[rowKey];
-                newRow[rowKey] = typeof value !== 'string' ? value.name : value;
-            }
-            return newRow;
-        });
-        const selectedChars = selectedTeams
-            .flatMap(row => Object.values(row))
-            .filter(value => typeof value !== 'string')
-            .map(char  => (char as ICharacter).name);
-
-        PersonalDataService.data.characters.forEach(char => {
-            if(selectedChars.includes(char.name)) {
-                char.leSelection |= aunShiLegendaryEvent.id;
-            } else  {
-                char.leSelection &= ~aunShiLegendaryEvent.id;
-            }
-        });
-
-        PersonalDataService.save();
-    };
-
-    const updateShadowSunEventTeams = (selectedTeams: Array<ITableRow>) => {
-        PersonalDataService.data.legendaryEvents.shadowSun.selectedTeams = selectedTeams.map(row => {
-            const newRow: ITableRow<string> = {};
-            for (const rowKey in row) {
-                const value = row[rowKey];
-                newRow[rowKey] = typeof value !== 'string' ? value.name : value;
-            }
-            return newRow;
-        });
-        const selectedChars = selectedTeams
-            .flatMap(row => Object.values(row))
-            .filter(value => typeof value !== 'string')
-            .map(char  => (char as ICharacter).name);
-
-        PersonalDataService.data.characters.forEach(char => {
-            if(selectedChars.includes(char.name)) {
-                char.leSelection |= shadowSunLegendaryEvent.id;
-            } else  {
-                char.leSelection &= ~shadowSunLegendaryEvent.id;
-            }
-        });
-
-        PersonalDataService.save();
+    const updateLegendaryEventTeams = (data: ILegendaryEventData3) => {
+        // const eventKey = eventKeyById[legendaryEvent.id];
+        if(!PersonalDataService.data.legendaryEvents3) {
+            PersonalDataService.data.legendaryEvents3 = {
+                [LegendaryEventEnum.JainZar]: {},
+                [LegendaryEventEnum.AunShi]: {},
+                [LegendaryEventEnum.ShadowSun]: {},
+            } as never;
+        }
+        if(PersonalDataService.data.legendaryEvents3) {
+            PersonalDataService.data.legendaryEvents3[data.id] = data;
+            PersonalDataService.save();
+        }
     };
     
-    function mapSelectedTeams(teams: ITableRow[]): ITableRow<ICharacter | ''>[] {
-        return teams.map(row => {
-            const newRow: ITableRow<ICharacter | ''> = {};
-            for (const rowKey in row) {
-                const value = row[rowKey];
-                if(!value) {
-                    newRow[rowKey] = '';
-                } else {
-                    if (typeof value === 'string') {
-                        newRow[rowKey] = characters.find(char => char.name === value) ?? '';
-                    } else {
-                        newRow[rowKey] = value;
-                    }
-                }
-            }
-            return newRow;
-        });
-    }
-    
-    const jainZarSelectedTeamsPoints = jainZarLegendaryEvent.getSelectedCharactersPoints();
-    const aunShiSelectedTeamsPoints = aunShiLegendaryEvent.getSelectedCharactersPoints();
-    const shadowSunSelectedTeamsPoints = shadowSunLegendaryEvent.getSelectedCharactersPoints();
-
-    
-    const result = uniqBy(cloneDeep([...jainZarSelectedTeamsPoints, ...aunShiSelectedTeamsPoints, ...shadowSunSelectedTeamsPoints]), 'name');
-    result.forEach(x => {
-        x.points = 0;
-        x.timesSelected = 0;
-        jainZarSelectedTeamsPoints.forEach(char => {
-            if (x.name === char.name) {
-                x.points += char.points;
-                x.timesSelected += char.timesSelected;
-            }
-        });
-
-        aunShiSelectedTeamsPoints.forEach(char => {
-            if (x.name === char.name) {
-                x.points += char.points;
-                x.timesSelected += char.timesSelected;
-            }
-        });
-
-        shadowSunSelectedTeamsPoints.forEach(char => {
-            if (x.name === char.name) {
-                x.points += char.points;
-                x.timesSelected += char.timesSelected;
-            }
-        });
-        
-    });
-    
-
     return (
-        <div>
-            <div style={{ marginInlineStart: 10 }}>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                        <Typography fontWeight={700}>
-                            View Settings:
-                        </Typography>
-                        <ViewSettings value={viewPreferences} valueChanges={setViewPreferences}></ViewSettings>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                        <Typography fontWeight={700}>
-                            Auto-Teams settings:
-                        </Typography>
-                        <AutoTeamsSettings value={autoTeamsPreferences} valueChanges={setAutoTeamsPreferences}></AutoTeamsSettings>
-                    </div>
+        <Box sx={{ padding: 2 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
+                <Box sx={{ bgcolor: 'background.paper' }}>
+                    <Tabs
+                        value={legendaryEvent.id}
+
+                        scrollButtons="auto"
+                        aria-label="scrollable auto tabs example"
+                    >
+                        <Tab label="Jain Zar 3/3 (September 10)" value={LegendaryEventEnum.JainZar}
+                            onClick={() => setLegendaryEvent(jainZarLegendaryEvent)}/>
+                        <Tab label="Shadowsun 2/3 (TBA)" value={LegendaryEventEnum.ShadowSun}
+                            onClick={() => setLegendaryEvent(shadowSunLegendaryEvent)}/>
+                        <Tab label="Aun Shi 3/3 (TBA)" value={LegendaryEventEnum.AunShi}
+                            onClick={() => setLegendaryEvent(aunShiLegendaryEvent)}/>
+
+                    </Tabs>
+                </Box>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                    <ViewSettings value={viewPreferences} valueChanges={setViewPreferences}></ViewSettings>
+                    <Button variant="outlined" onClick={handleClick2}>
+                        Auto-Teams <SettingsIcon/>
+                    </Button>
+                    <Popover
+                        open={open2}
+                        anchorEl={anchorEl2}
+                        onClose={handleClose2}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}
+                    >
+                        <div style={{ margin: 20 }}>
+                            <AutoTeamsSettings value={autoTeamsPreferences}
+                                valueChanges={setAutoTeamsPreferences}></AutoTeamsSettings>
+                        </div>
+                    </Popover>
                 </div>
+
             </div>
+
+
             <ViewSettingsContext.Provider value={viewPreferences}>
                 <AutoTeamsSettingsContext.Provider value={autoTeamsPreferences}>
-                    <Accordion TransitionProps={{ unmountOnExit: true }}>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon/>}
-                        >
-                            <Typography>Jain Zar 3/3 (September 10)</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            
-                            <LegendaryEvent legendaryEvent={jainZarLegendaryEvent}
-                                selectedTeamsChange={updateJainZarEventTeams}/>
-                        </AccordionDetails>
-                    </Accordion>
-                    
-                    <Accordion TransitionProps={{ unmountOnExit: true }}>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon/>}
-                        >
-                            <Typography>Aun Shi 3/3 (TBA)</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <LegendaryEvent legendaryEvent={aunShiLegendaryEvent}
-                                selectedTeamsChange={updateAunShiEventTeams}/>
-                        </AccordionDetails>
-                    </Accordion>
-    
-                    <Accordion TransitionProps={{ unmountOnExit: true }}>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon/>}
-                        >
-                            <Typography>Shadowsun 2/3 (TBA)</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <LegendaryEvent legendaryEvent={shadowSunLegendaryEvent}
-                                selectedTeamsChange={updateShadowSunEventTeams}/>
-                        </AccordionDetails>
-                    </Accordion>
-    
-                    <Accordion TransitionProps={{ unmountOnExit: true }}>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon/>}
-                        >
-                            <Typography>Overall Best Characters</Typography>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <OverallPointsTable characters={characters} selectedChars={result}/>
-                        </AccordionDetails>
-                    </Accordion>
+                    <LegendaryEventContext.Provider value={legendaryEvent}>
+                        <LegendaryEvent key={legendaryEvent.id} legendaryEvent={legendaryEvent}
+                            legendaryEventPersonal={PersonalDataService.getLEPersonalData(legendaryEvent.id)}
+                            legendaryEventPersonalChange={updateLegendaryEventTeams}/>
+                    </LegendaryEventContext.Provider>
                 </AutoTeamsSettingsContext.Provider>
             </ViewSettingsContext.Provider>
-        </div>
+        </Box>
 
     );
 

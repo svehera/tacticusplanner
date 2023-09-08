@@ -144,3 +144,9 @@ export enum LegendaryEvents {
     AunShi = 1 << 1,
     ShadowSun = 1 << 2,
 }
+
+export enum LegendaryEvent {
+    JainZar = 1,
+    AunShi = 2,
+    ShadowSun = 4,
+}

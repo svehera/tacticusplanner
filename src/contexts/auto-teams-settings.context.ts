@@ -2,6 +2,7 @@
 import { IAutoTeamsPreferences } from '../models/interfaces';
 
 export const defaultAutoTeamsPreferences: IAutoTeamsPreferences = {
+    onlyUnlocked: true,
     preferCampaign: false,
     ignoreRank: false,
     ignoreRarity: false,
