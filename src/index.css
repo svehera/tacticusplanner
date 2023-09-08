@@ -107,6 +107,12 @@ code {
     word-break: unset;
     white-space: break-spaces;
   }
+  
+  &.auto-teams {
+    .ag-header-cell {
+      padding: 0;
+    }
+  }
 }
 
 .common {

@@ -5,7 +5,7 @@
     ITableRow
 } from '../interfaces';
 import { sortBy, sum, uniqBy } from 'lodash';
-import { LegendaryEvents, Rank } from '../enums';
+import { LegendaryEvent, Rank } from '../enums';
 
 export abstract class LegendaryEventBase implements ILegendaryEvent {
     alphaTrack: ILegendaryEventTrack;
@@ -17,7 +17,8 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
 
     characterSelectedRestrictions: Record<string, string[]> = {};
 
-    readonly id: LegendaryEvents;
+    readonly id: LegendaryEvent;
+    readonly name: string;
 
     protected abstract getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
 
@@ -25,8 +26,9 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
 
     protected abstract getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
 
-    protected constructor(id: LegendaryEvents, unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
+    protected constructor(id: LegendaryEvent, name: string, unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
         this.id = id;
+        this.name = name;
         this.selectedTeams = selectedTeams;
 
         this.alphaTrack = this.getAlphaTrack(unitsData);
@@ -101,8 +103,14 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
             const gammaSlots = this.gammaTrack.getCharacterSlots(character);
 
             character.legendaryEvents[this.id] = {
-                points: sum([alphaPoints, betaPoints, gammaPoints]),
-                slots:  sum([alphaSlots, betaSlots, gammaSlots]),
+                alphaPoints,
+                alphaSlots,
+                betaPoints,
+                betaSlots,
+                gammaPoints,
+                gammaSlots,
+                totalPoints: sum([alphaPoints, betaPoints, gammaPoints]),
+                totalSlots:  sum([alphaSlots, betaSlots, gammaSlots]),
             };
         });
     }

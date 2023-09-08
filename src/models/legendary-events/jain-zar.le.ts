@@ -1,17 +1,19 @@
 ﻿import { ICharacter, ILegendaryEventTrack, ITableRow } from '../interfaces';
-import { Alliance, DamageType, Faction, Trait, LegendaryEvents } from '../enums';
+import { Alliance, DamageType, Faction, Trait, LegendaryEvent } from '../enums';
 import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
 import { LETrack } from './base.le.track';
 
 export class JainZarLegendaryEvent extends LegendaryEventBase {
     constructor(unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
-        super(LegendaryEvents.JainZar, unitsData, selectedTeams);
+        super(LegendaryEvent.JainZar, 'Jain Zar', unitsData, selectedTeams);
     }
 
     protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const xenosOnly = filter(unitsData).byAlliance(Alliance.Xenos);
         return new LETrack(
+            this.id,
+            'alpha',
             'Alpha (Xenos only)',
             42,
             xenosOnly,
@@ -25,11 +27,13 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
                     name: 'Ranged',
                     points: 60,
                     units: filter(xenosOnly).byAttackType('rangeOnly'),
+                    core: true,
                 },
                 {
                     name: 'Max 3 hits',
                     points: 45,
                     units: filter(xenosOnly).byMaxHits(3),
+                    core: true,
                 },
                 {
                     name: 'Necrons only',
@@ -40,6 +44,7 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
                     name: 'No Summons',
                     points: 60,
                     units: filter(xenosOnly).byNoSummons(),
+                    core: true,
                 },
             ]
         );
@@ -48,6 +53,8 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
     protected getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const imperialOnly = filter(unitsData).byAlliance(Alliance.Imperial);
         return new LETrack(
+            this.id,
+            'beta',
             'Beta (Imperial only)',
             40,
             imperialOnly, 
@@ -66,16 +73,19 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
                     name: 'No Blast',
                     points: 50,
                     units: filter(imperialOnly).byDamageType(DamageType.Blast, true),
+                    core: true,
                 },
                 {
                     name: 'Max 2 hits',
                     points: 70,
                     units: filter(imperialOnly).byMaxHits(2),
+                    core: true,
                 },
                 {
                     name: 'No Summons',
                     points: 60,
                     units: filter(imperialOnly).byNoSummons(),
+                    core: true,
                 },
             ]
         );
@@ -84,6 +94,8 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
     protected getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const noOrks = filter(unitsData).byFaction(Faction.Orks, true);
         return new LETrack(
+            this.id,
+            'gamma',
             'Gamma (No Orks)',
             29,
             noOrks,
@@ -92,6 +104,7 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
                     name: 'No Mech',
                     points: 45,
                     units: filter(noOrks).isNotMechanical(),
+                    core: true,
                 },
                 {
                     name: 'Piercing',
@@ -107,11 +120,13 @@ export class JainZarLegendaryEvent extends LegendaryEventBase {
                     name: 'No Flying',
                     points: 45,
                     units: filter(noOrks).byTrait(Trait.Flying, true),
+                    core: true,
                 },
                 {
                     name: 'Min 4 hits',
                     points: 90,
                     units: filter(noOrks).byMinHits(4),
+                    core: true,
                 },
             ]
         );

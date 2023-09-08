@@ -3,7 +3,7 @@
 import unitsData from '../assets/UnitData.json';
 import dirtyDozen from '../assets/DirtyDozen.json';
 
-import { IDirtyDozenChar, IUnitData, UnitDataRaw } from '../models/interfaces';
+import { ICharLegendaryEvents, IDirtyDozenChar, IUnitData, UnitDataRaw } from '../models/interfaces';
 import { Faction } from '../models/enums';
 import { rarityStringToNumber, rarityToStars } from '../models/constants';
 
@@ -33,7 +33,7 @@ export class StaticDataService {
             movement: rawData.Movement,
             forcedSummons: rawData.ForcedSummons,
             requiredInCampaign: rawData.RequiredInCampaign,
-            legendaryEvents: {},
+            legendaryEvents: {} as ICharLegendaryEvents,
             traits: rawData.Traits,
             damageTypes: {
                 all: [rawData['Melee Damage']],

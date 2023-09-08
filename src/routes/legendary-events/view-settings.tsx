@@ -1,54 +1,41 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { useCallback, useState } from 'react';
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import { IViewPreferences } from '../../models/interfaces';
 
-const ViewSettings = (props: { value: IViewPreferences , valueChanges: (settings: IViewPreferences) => void }) => {
-    const { value, valueChanges } = props;
+const ViewSettings = (props: { value: IViewPreferences, valueChanges: (settings: IViewPreferences) => void }) => {
+    const [preferences, setPreferences] = useState<IViewPreferences>(props.value);
 
-    const [onlyUnlocked, setOnlyUnlocked] = useState(value.onlyUnlocked);
-    const [usedInCampaigns, setUsedInCampaigns] = useState(value.usedInCampaigns);
-    const [showAlpha, setShowAlpha] = useState(value.showAlpha);
-    const [showBeta, setShowBeta] = useState(value.showBeta);
-    const [showGamma, setShowGamma] = useState(value.showGamma);
-    
-    useEffect(() => {
-        valueChanges({ onlyUnlocked, usedInCampaigns, showAlpha, showGamma, showBeta });
-    },[onlyUnlocked, usedInCampaigns, showAlpha, showGamma, showBeta]);
+    const updatePreferences = useCallback((setting: keyof IViewPreferences, value: boolean) => {
+
+        setPreferences((previousValue) => {
+            const newValue = { ...previousValue, [setting]: value };
+            props.valueChanges(newValue);
+            return newValue;
+        });
+    }, []);
 
     return (
         <FormGroup style={{ display: 'flex', flexDirection: 'row' }}>
             <FormControlLabel control={<Checkbox
-                checked={onlyUnlocked}
-                onChange={(event) => setOnlyUnlocked(event.target.checked)}
+                checked={preferences.showAlpha}
+                disabled={!preferences.showBeta && !preferences.showGamma}
+                onChange={(event) => updatePreferences('showAlpha',event.target.checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
-            />} label="Unlocked Only"/>
-           
-            <FormControlLabel control={<Checkbox
-                checked={usedInCampaigns}
-                onChange={(event) => setUsedInCampaigns(event.target.checked)}
-                inputProps={{ 'aria-label': 'controlled' }}
-            />} label="Used in Campaigns"/>
+            />} label="Alpha"/>
 
             <FormControlLabel control={<Checkbox
-                checked={showAlpha}
-                disabled={!showBeta && !showGamma}
-                onChange={(event) => setShowAlpha(event.target.checked)}
+                checked={preferences.showBeta}
+                disabled={!preferences.showAlpha && !preferences.showGamma}
+                onChange={(event) => updatePreferences('showBeta',event.target.checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
-            />} label="Show Alpha Tracks"/>
+            />} label="Beta"/>
 
             <FormControlLabel control={<Checkbox
-                checked={showBeta}
-                disabled={!showAlpha && !showGamma}
-                onChange={(event) => setShowBeta(event.target.checked)}
+                checked={preferences.showGamma}
+                disabled={!preferences.showAlpha && !preferences.showBeta}
+                onChange={(event) => updatePreferences('showGamma',event.target.checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
-            />} label="Show Beta Tracks"/>
-
-            <FormControlLabel control={<Checkbox
-                checked={showGamma}
-                disabled={!showAlpha && !showBeta}
-                onChange={(event) => setShowGamma(event.target.checked)}
-                inputProps={{ 'aria-label': 'controlled' }}
-            />} label="Show Gamma Tracks"/>
+            />} label="Gamma"/>
         </FormGroup>
     );
 };

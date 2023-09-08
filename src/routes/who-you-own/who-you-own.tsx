@@ -151,40 +151,7 @@ export const WhoYouOwn = () => {
     
     const saveChanges = () => {
         rowsData.forEach(row => {
-            const existingChar = PersonalDataService.data.characters.find(char => char.name === row.name);
-            if(existingChar) {
-                existingChar.unlocked = row.unlocked;
-                existingChar.progress = row.progress;
-                existingChar.rank = row.rank;
-                existingChar.rarity = row.rarity;
-                existingChar.rarityStars = row.rarityStars;
-                existingChar.leSelection = row.leSelection;
-                existingChar.alwaysRecommend = row.alwaysRecommend;
-                existingChar.neverRecommend = row.neverRecommend;
-            } else {
-                PersonalDataService.data.characters.push({
-                    name: row.name,
-                    unlocked: row.unlocked,
-                    rank: row.rank,
-                    rarity: row.rarity,
-                    leSelection: row.leSelection,
-                    alwaysRecommend: row.alwaysRecommend,
-                    neverRecommend: row.neverRecommend,
-                    progress: row.progress,
-                    rarityStars: row.rarityStars,
-                    currentShards: 0,
-                    targetRarity: row.rarity,
-                    targetRarityStars: row.rarityStars,
-                });
-            }
-            
-            if(row.progress && !PersonalDataService.data.charactersPriorityList.includes(row.name)) {
-                PersonalDataService.data.charactersPriorityList.push(row.name);
-            }
-            if(!row.progress && PersonalDataService.data.charactersPriorityList.includes(row.name)) {
-                const indexToRemove = PersonalDataService.data.charactersPriorityList.indexOf(row.name);
-                PersonalDataService.data.charactersPriorityList.splice(indexToRemove,1);
-            }
+            PersonalDataService.addOrUpdateCharacterData(row);
         });
         PersonalDataService.save();
     };

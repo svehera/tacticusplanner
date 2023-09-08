@@ -1,5 +1,5 @@
 ﻿import { ICharacter, ILegendaryEventTrack, ITableRow } from '../interfaces';
-import { Alliance, DamageType, Faction, Trait, LegendaryEvents } from '../enums';
+import { Alliance, DamageType, Faction, LegendaryEvent, Trait } from '../enums';
 import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
 import { LETrack } from './base.le.track';
@@ -7,12 +7,14 @@ import { LETrack } from './base.le.track';
 export class AunShiLegendaryEvent extends LegendaryEventBase {
 
     constructor(unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
-        super(LegendaryEvents.AunShi, unitsData, selectedTeams);
+        super(LegendaryEvent.AunShi, 'Aun Shi',  unitsData, selectedTeams);
     }
 
     protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const noOrks = filter(unitsData).byFaction(Faction.Orks, true);
         return new LETrack(
+            this.id,
+            'alpha',
             'Alpha (No Orks)',
             29,
             noOrks,
@@ -26,6 +28,7 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     name: 'No Physical',
                     points: 40,
                     units: filter(noOrks).byDamageType(DamageType.Physical, true),
+                    core: true
                 },
                 {
                     name: 'Max 2 hits',
@@ -36,11 +39,13 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     name: 'No Range',
                     points: 80,
                     units: filter(noOrks).byAttackType('meleeOnly'),
+                    core: true
                 },
                 {
                     name: 'Min 3 hits',
                     points: 70,
                     units: filter(noOrks).byMinHits(3),
+                    core: true
                 },
             ],
         );
@@ -49,6 +54,8 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
     protected getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const noImperials = filter(unitsData).byAlliance(Alliance.Imperial, true);
         return new LETrack(
+            this.id,
+            'beta',
             'Beta (No Imperials)',
             53,
             noImperials,
@@ -62,16 +69,19 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     name: 'No Resiliant',
                     points: 40,
                     units: filter(noImperials).byTrait(Trait.Resilient, true),
+                    core: true
                 },
                 {
                     name: 'No Range',
                     points: 85,
                     units:  filter(noImperials).byAttackType('meleeOnly'),
+                    core: true
                 },
                 {
                     name: 'No Summons',
                     points: 45,
                     units: filter(noImperials).byNoSummons(),
+                    core: true
                 },
                 {
                     name: 'Physical',
@@ -85,6 +95,8 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
     protected getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
         const noChaos = filter(unitsData).byAlliance(Alliance.Chaos, true);
         return new LETrack(
+            this.id,
+            'gamma',
             'Gamma (No Chaos)',
             40,
             noChaos,
@@ -103,16 +115,19 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     name: 'No Flying',
                     points: 40,
                     units: filter(noChaos).byTrait(Trait.Flying, true),
+                    core: true
                 },
                 {
                     name: 'No Overwatch',
                     points: 40,
                     units:  filter(noChaos).byTrait(Trait.Overwatch, true),
+                    core: true
                 },
                 {
                     name: 'No Power',
                     points: 50,
                     units:  filter(noChaos).byDamageType(DamageType.Power, true),
+                    core: true
                 },
             ]
         ); 

@@ -1,4 +1,4 @@
-﻿import React, { useMemo, useState } from 'react';
+﻿import React, { useState } from 'react';
 import { PersonalDataService } from '../../services';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -10,7 +10,8 @@ export const CharacterItem = (props: { character: ICharacter }) => {
     const [charName, setCharName] = useState<string>(getCharName(props.character));
 
     const handleCharacterChange = (character: ICharacter) => {
-        PersonalDataService.saveCharacterChanges(character);
+        PersonalDataService.addOrUpdateCharacterData(character);
+        PersonalDataService.save();
         setCharName(getCharName(character));
     };
 
