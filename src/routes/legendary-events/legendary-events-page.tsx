@@ -53,7 +53,6 @@ export const LegendaryEventPage = () => {
 
 
     const updateLegendaryEventTeams = (data: ILegendaryEventData3) => {
-        // const eventKey = eventKeyById[legendaryEvent.id];
         if(!PersonalDataService.data.legendaryEvents3) {
             PersonalDataService.data.legendaryEvents3 = {
                 [LegendaryEventEnum.JainZar]: {},
@@ -68,7 +67,7 @@ export const LegendaryEventPage = () => {
     };
     
     return (
-        <Box sx={{ padding: 2 }}>
+        <Box sx={{ padding: 2, paddingBottom: 0 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
                 <Box sx={{ bgcolor: 'background.paper' }}>
                     <Tabs
@@ -107,9 +106,7 @@ export const LegendaryEventPage = () => {
                         </div>
                     </Popover>
                 </div>
-
             </div>
-
 
             <ViewSettingsContext.Provider value={viewPreferences}>
                 <AutoTeamsSettingsContext.Provider value={autoTeamsPreferences}>
@@ -121,7 +118,5 @@ export const LegendaryEventPage = () => {
                 </AutoTeamsSettingsContext.Provider>
             </ViewSettingsContext.Provider>
         </Box>
-
     );
-
 };
