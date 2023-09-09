@@ -27,7 +27,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
 
     const gridRef = useRef<AgGridReact>(null);
 
-    const columnsDef: Array<ColDef | ColGroupDef> = [
+    const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() =>[
         {
             headerName: '#',
             colId: 'rowNumber',
@@ -56,7 +56,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
                 },
                 {
                     field: 'totalSlots',
-                    headerName: 'Slots',
+                    headerName: selection === 'selected' ? 'Times selected' : 'Slots',
                     width: 100,
                     sortable: true,
                 }
@@ -73,7 +73,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
                 },
                 {
                     field: 'alphaSlots',
-                    headerName: 'Slots',
+                    headerName: selection === 'selected' ? 'Times selected' : 'Slots',
                     width: 100,
                     sortable: true,
                 }
@@ -90,7 +90,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
                 },
                 {
                     field: 'betaSlots',
-                    headerName: 'Slots',
+                    headerName: selection === 'selected' ? 'Times selected' : 'Slots',
                     width: 100,
                     sortable: true,
                 }
@@ -107,13 +107,13 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
                 },
                 {
                     field: 'gammaSlots',
-                    headerName: 'Slots',
+                    headerName: selection === 'selected' ? 'Times selected' : 'Slots',
                     width: 100,
                     sortable: true,
                 }
             ]
         },
-    ];
+    ], [selection]);
 
     const selectedChars = useMemo(() => {
         const alphaChars = Object.values(personalLegendaryEvent.alpha).flat();
