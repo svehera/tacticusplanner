@@ -16,6 +16,7 @@ import AutoTeamsSettings from './auto-teams-settings';
 import Box from '@mui/material/Box';
 import { LegendaryEvent as LegendaryEventEnum } from '../../models/enums';
 import Button from '@mui/material/Button';
+import { Help } from '@mui/icons-material';
 
 export const LegendaryEventPage = () => {
     const [characters] = useState(GlobalService.characters);
@@ -26,6 +27,7 @@ export const LegendaryEventPage = () => {
 
     const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(jainZarLegendaryEvent);
 
+    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
 
     const [viewPreferences, setViewPreferences] = useState<IViewPreferences>({
@@ -45,10 +47,44 @@ export const LegendaryEventPage = () => {
     };
     
     const open2 = Boolean(anchorEl2);
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
     
     useEffect(() => {
         PersonalDataService.data.autoTeamsPreferences = autoTeamsPreferences;
         PersonalDataService.save();
+    }, [autoTeamsPreferences]);
+    
+    const autoTeamsPriority = useMemo(() => {
+        const result: string[] = [];
+        if (!autoTeamsPreferences.ignoreRecommendedFirst) {
+            result.push('Recommend first');
+        }
+        if (autoTeamsPreferences.preferCampaign) {
+            result.push('Is campaign char');
+        }
+        if (!autoTeamsPreferences.ignoreRarity) {
+            result.push('Rarity');
+        }
+        if (!autoTeamsPreferences.ignoreRank) {
+            result.push('Rank');
+        }
+        result.push('Event points');
+        
+        if (!autoTeamsPreferences.ignoreRecommendedLast) {
+            result.push('Recommend last');
+        }
+        
+        return result;
     }, [autoTeamsPreferences]);
 
 
@@ -103,6 +139,24 @@ export const LegendaryEventPage = () => {
                         <div style={{ margin: 20 }}>
                             <AutoTeamsSettings value={autoTeamsPreferences}
                                 valueChanges={setAutoTeamsPreferences}></AutoTeamsSettings>
+                        </div>
+                    </Popover>
+                    
+                    <Button onClick={handleClick} color={'inherit'}><Help/></Button>
+                    <Popover
+                        open={open}
+                        anchorEl={anchorEl}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}
+                    >
+                        <div style={{ padding: 15 }}>
+                            <p>Current auto-teams priority order:</p>
+                            <ol>
+                                {autoTeamsPriority.map(x => (<li key={x}>{x}</li>))}
+                            </ol>
                         </div>
                     </Popover>
                 </div>
