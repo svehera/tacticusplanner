@@ -159,6 +159,7 @@ export type ITableRow<T = ICharacter | string> = Record<string, T>;
 
 export interface IPersonalData {
   autoTeamsPreferences: IAutoTeamsPreferences;
+  selectedTeamOrder: ISelectedTeamsOrdering;
   characters: IPersonalCharacter[];
   charactersPriorityList: string[];
   legendaryEvents: ILegendaryEventsData;
@@ -202,6 +203,11 @@ export interface IAutoTeamsPreferences {
   ignoreRank: boolean;
   ignoreRecommendedFirst: boolean;
   ignoreRecommendedLast: boolean;
+}
+
+export interface ISelectedTeamsOrdering {
+  orderBy: 'name' | 'rank' | 'rarity';
+  direction: 'asc' | 'desc';
 }
 
 export type IPersonalCharacter = IPersonalCharacterData &

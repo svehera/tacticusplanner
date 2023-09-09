@@ -126,7 +126,7 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
 
     return (
         <div className="ag-theme-material auto-teams"
-            style={{ height: 'calc((100vh - 132px) / 2)', width: '100%', border: '2px solid black' }}>
+            style={{ height: 'calc((100vh - 150px) / 2)', width: '100%', border: '2px solid black' }}>
             <AgGridReact
                 ref={gridRef}
                 tooltipShowDelay={100}

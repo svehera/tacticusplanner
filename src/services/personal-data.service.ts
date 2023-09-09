@@ -40,6 +40,11 @@ export class PersonalDataService {
             this.data.legendaryEvents.aunShi ??= defaultLegendaryEventsData.aunShi;
             this.data.legendaryEvents.shadowSun ??= defaultLegendaryEventsData.shadowSun;
             
+            this.data.selectedTeamOrder ??=  {
+                orderBy: 'name',
+                direction: 'desc',
+            };
+            
             this.data.legendaryEvents3 ??= this.convertLegendaryEventsToV3(this.data.legendaryEvents);
         }
 
@@ -48,6 +53,10 @@ export class PersonalDataService {
             charactersPriorityList: [],
             autoTeamsPreferences: defaultAutoTeamsPreferences,
             legendaryEvents: defaultLegendaryEventsData,
+            selectedTeamOrder: {
+                orderBy: 'name',
+                direction: 'desc',  
+            },
             legendaryEvents3: {} as ILegendaryEventsData3
         };
     }
