@@ -23,11 +23,10 @@ import { fitGridOnWindowResize } from '../../shared-logic/functions';
 
 export const SelectedTeamsTable = (props: {
     track: ILegendaryEventTrack;
-    characters: ICharacter[];
-    teams: SelectedTeams;
+    teams: Record<string, Array<ICharacter | string>>;
     deselectChars: (teamName: string, ...chars: string[]) => void
 }) => {
-    const { track, teams, characters, deselectChars } = props;
+    const { track, teams, deselectChars } = props;
     const gridRef = useRef<AgGridReact>(null);
 
     const rows = useMemo(() => {
@@ -36,8 +35,7 @@ export const SelectedTeamsTable = (props: {
         for (const teamKey in teams) {
             const team = teams[teamKey];
             for (let i = 0; i < team.length; i++) {
-                const charName = team[i];
-                result[i][teamKey] = characters.find(x => charName === x.name) ?? '';
+                result[i][teamKey] = team[i];
             }
         }
         return result;
@@ -50,7 +48,7 @@ export const SelectedTeamsTable = (props: {
         {
             headerName: track.name,
             headerClass: track.section,
-            children: getSectionColumns(track.unitsRestrictions, track.section),
+            children: getSectionColumns(track.unitsRestrictions),
             openByDefault: true
         },
     ], [legendaryEvent.id]);
@@ -60,7 +58,8 @@ export const SelectedTeamsTable = (props: {
         const value = cellClicked.value;
         const shiftKey = (cellClicked.event as MouseEvent).shiftKey;
         if (shiftKey) {
-            deselectChars(teamName, ...teams[teamName]);
+            const team = teams[teamName].map(x => typeof x === 'string' ? x : x.name);
+            deselectChars(teamName, ...team);
             return;
         }
 
@@ -75,7 +74,7 @@ export const SelectedTeamsTable = (props: {
         gridRef.current?.api?.sizeColumnsToFit();
     }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, legendaryEvent.id]);
 
-    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], suffix: LegendaryEventSection): Array<ColDef> {
+    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[]): Array<ColDef> {
         return unitsRestrictions.map((u) => ({
             field: u.name,
             headerName: u.name,
@@ -83,7 +82,6 @@ export const SelectedTeamsTable = (props: {
             valueFormatter: (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
             cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
             tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rarity[params.value?.rarity ?? 0] + ' - ' + Rank[params.value?.rank ?? 0],
-            section: suffix,
             suppressMovable: true,
             wrapHeaderText: true,
         }));
