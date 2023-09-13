@@ -1489,5 +1489,32 @@
     "Number": 61,
     "ForcedSummons": false,
     "RequiredInCampaign": false
+  },
+  {
+    "Name": "Ahriman",
+    "Faction": "Thousand Sons",
+    "Alliance": "Chaos",
+    "Health": 80,
+    "Damage": 18,
+    "Armour": 30,
+    "Initial rarity": "Legendary",
+    "Melee Damage": "Flame",
+    "Melee Hits": 1,
+    "Ranged Damage": "Psychic",
+    "Ranged Hits": 1,
+    "Distance": 2,
+    "Movement": 3,
+    "Equipment1": "Crit",
+    "Equipment2": "Block",
+    "Equipment3": "Crit Booster",
+    "Traits": [
+      "Weaver of Fates",
+      "Flying",
+      "Psyker"
+    ],
+    "Active Ability": "Psychic",
+    "Number": 62,
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   }
 ]

@@ -164,6 +164,7 @@ export interface IPersonalData {
   charactersPriorityList: string[];
   legendaryEvents: ILegendaryEventsData;
   legendaryEvents3: ILegendaryEventsData3 | undefined;
+  modifiedDate?: Date;
 }
 
 export interface ILegendaryEventsData {
