@@ -114,7 +114,7 @@ export const LegendaryEventPage = () => {
                     >
                         <Tab label="Jain Zar 3/3 (September 10)" value={LegendaryEventEnum.JainZar}
                             onClick={() => setLegendaryEvent(jainZarLegendaryEvent)}/>
-                        <Tab label="Shadowsun 2/3 (TBA)" value={LegendaryEventEnum.ShadowSun}
+                        <Tab label="Shadowsun 2/3 (October 15)" value={LegendaryEventEnum.ShadowSun}
                             onClick={() => setLegendaryEvent(shadowSunLegendaryEvent)}/>
                         <Tab label="Aun Shi 3/3 (TBA)" value={LegendaryEventEnum.AunShi}
                             onClick={() => setLegendaryEvent(aunShiLegendaryEvent)}/>
