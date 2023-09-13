@@ -23,7 +23,7 @@ import { CharactersSelection, ITableRow } from './legendary-events.interfaces';
 const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: (selection: CharactersSelection) => void  }) => {
     const { legendaryEvent } = props;
     const personalLegendaryEvent = useMemo(() => PersonalDataService.getLEPersonalData(legendaryEvent.id), [legendaryEvent.id]);
-    const [selection, setSelection] = useState<CharactersSelection>(CharactersSelection.Unlocked);
+    const [selection, setSelection] = useState<CharactersSelection>(CharactersSelection.All);
 
     const gridRef = useRef<AgGridReact>(null);
 
@@ -222,28 +222,15 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
 
     return (
         <div>
-            <TextField sx={{ margin: '10px', width: '300px' }} label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged}/>
-            <div style={{ display: 'flex', flexDirection: 'row', height: 'calc(100vh - 150px)' }}>
-                <div style={{ overflow: 'hidden', flexGrow: '1' }}>
-                    <div className="ag-theme-material" style={{ height: '100%', width: '100%' }}>
-                        <AgGridReact
-                            ref={gridRef}
-                            tooltipShowDelay={100}
-                            rowData={selection === 'selected' ? selectedCharsRows : rows}
-                            columnDefs={columnsDef}
-                            getRowStyle={getRowStyle}
-                            onGridReady={fitGridOnWindowResize(gridRef)}
-                        >
-                        </AgGridReact>
-                    </div>
-                </div>
-
-                <FormControl style={{ padding: '0 2rem', height: '100%' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+                <TextField sx={{ margin: '10px', width: '300px' }} label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged}/>
+                <FormControl>
                     <FormLabel id="demo-radio-buttons-group-label" style={{ fontWeight: 700 }}>Characters
                         Selection</FormLabel>
                     <RadioGroup
+                        style={{ display: 'flex', flexDirection: 'row' }}
                         aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue={CharactersSelection.Unlocked}
+                        defaultValue={CharactersSelection.All}
                         onChange={(_, value) => {
                             setSelection(value as CharactersSelection);
                             props.selectionChange(value as CharactersSelection);
@@ -255,6 +242,19 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
                         <FormControlLabel value={CharactersSelection.Selected} control={<Radio/>} label="Only selected"/>
                     </RadioGroup>
                 </FormControl>
+            </div>
+            <div className="ag-theme-material" style={{ height: 'calc(100vh - 150px)', width: '100%' }}>
+                <AgGridReact
+                    ref={gridRef}
+                    tooltipShowDelay={100}
+                    rowData={selection === 'selected' ? selectedCharsRows : rows}
+                    columnDefs={columnsDef}
+                    getRowStyle={getRowStyle}
+                    onGridReady={fitGridOnWindowResize(gridRef)}
+                    onSortChanged={() => gridRef.current?.api?.refreshCells()}
+                    onFilterChanged={() => gridRef.current?.api?.refreshCells()}
+                >
+                </AgGridReact>
             </div>
         </div>
     );
