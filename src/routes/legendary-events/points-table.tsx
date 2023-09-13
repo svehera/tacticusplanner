@@ -29,13 +29,14 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
 
     const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() =>[
         {
-            headerName: '#',
-            colId: 'rowNumber',
-            valueGetter: (params) => (params.node?.rowIndex ?? 0) + 1,
-            maxWidth: 50,
-            width: 50,
-            minWidth: 50,
+            headerName: 'Position',
+            field: 'position',
+            maxWidth: 100,
+            width: 100,
+            minWidth: 100,
             pinned: true,
+            sortable: true,
+            sort: 'asc'
         },
         {
             field: 'name',
@@ -52,7 +53,6 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
                     headerName: 'Points',
                     width: 100,
                     sortable: true,
-                    sort: 'desc'
                 },
                 {
                     field: 'totalSlots',
@@ -128,19 +128,28 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
         const beta = getPointsAndSlots(legendaryEvent.betaTrack, getRestrictionsByChar(personalLegendaryEvent.beta));
         const gamma = getPointsAndSlots(legendaryEvent.gammaTrack, getRestrictionsByChar(personalLegendaryEvent.gamma));
 
-        return legendaryEvent.allowedUnits.filter(x => selectedChars.includes(x.name)).map(x => ({
-            name: x.name,
-            className: Rank[x.rank].toLowerCase(),
-            tooltip: x.name + ' - ' + Rank[x.rank ?? 0],
-            alphaPoints: alpha[x.name]?.points ?? 0,
-            alphaSlots: alpha[x.name]?.slots ?? 0,
-            betaPoints: beta[x.name]?.points ?? 0,
-            betaSlots: beta[x.name]?.slots ?? 0,
-            gammaPoints: gamma[x.name]?.points ?? 0,
-            gammaSlots: gamma[x.name]?.slots ?? 0,
-            totalPoints: (alpha[x.name]?.points ?? 0) + (beta[x.name]?.points ?? 0) + (gamma[x.name]?.points ?? 0),
-            totalSlots: (alpha[x.name]?.slots ?? 0) + (beta[x.name]?.slots ?? 0) + (gamma[x.name]?.slots ?? 0),
-        }));
+        return legendaryEvent.allowedUnits
+            .filter(x => selectedChars.includes(x.name))
+            .sort((a,b) => {
+                const aTotal = (alpha[a.name]?.points ?? 0) + (beta[a.name]?.points ?? 0) + (gamma[a.name]?.points ?? 0);
+                const bTotal = (alpha[b.name]?.points ?? 0) + (beta[b.name]?.points ?? 0) + (gamma[b.name]?.points ?? 0);
+                
+                return bTotal - aTotal;
+            })
+            .map((x, index) => ({
+                name: x.name,
+                position: index + 1,
+                className: Rank[x.rank].toLowerCase(),
+                tooltip: x.name + ' - ' + Rank[x.rank ?? 0],
+                alphaPoints: alpha[x.name]?.points ?? 0,
+                alphaSlots: alpha[x.name]?.slots ?? 0,
+                betaPoints: beta[x.name]?.points ?? 0,
+                betaSlots: beta[x.name]?.slots ?? 0,
+                gammaPoints: gamma[x.name]?.points ?? 0,
+                gammaSlots: gamma[x.name]?.slots ?? 0,
+                totalPoints: (alpha[x.name]?.points ?? 0) + (beta[x.name]?.points ?? 0) + (gamma[x.name]?.points ?? 0),
+                totalSlots: (alpha[x.name]?.slots ?? 0) + (beta[x.name]?.slots ?? 0) + (gamma[x.name]?.slots ?? 0),
+            }));
 
         function getRestrictionsByChar(selectedTeams: SelectedTeams): Record<string, string[]> {
             const result: Record<string, string[]> = {};
@@ -187,22 +196,25 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
                 ? legendaryEvent.allowedUnits.filter(x => x.unlocked)
                 : [];
 
-        return chars.map(x => ({
-            name: x.name,
-            className: Rank[x.rank].toLowerCase(),
-            tooltip: x.name + ' - ' + Rank[x.rank ?? 0],
-            alphaPoints: x.legendaryEvents[legendaryEvent.id].alphaPoints,
-            alphaSlots: x.legendaryEvents[legendaryEvent.id].alphaSlots,
-
-            betaPoints: x.legendaryEvents[legendaryEvent.id].betaPoints,
-            betaSlots: x.legendaryEvents[legendaryEvent.id].betaSlots,
-
-            gammaPoints: x.legendaryEvents[legendaryEvent.id].gammaPoints,
-            gammaSlots: x.legendaryEvents[legendaryEvent.id].gammaSlots,
-
-            totalPoints: x.legendaryEvents[legendaryEvent.id].totalPoints,
-            totalSlots: x.legendaryEvents[legendaryEvent.id].totalSlots,
-        }));
+        return chars
+            .sort((a,b) => b.legendaryEvents[legendaryEvent.id].totalPoints - a.legendaryEvents[legendaryEvent.id].totalPoints)
+            .map((x, index) => ({
+                name: x.name,
+                position: index + 1,
+                className: Rank[x.rank].toLowerCase(),
+                tooltip: x.name + ' - ' + Rank[x.rank ?? 0],
+                alphaPoints: x.legendaryEvents[legendaryEvent.id].alphaPoints,
+                alphaSlots: x.legendaryEvents[legendaryEvent.id].alphaSlots,
+    
+                betaPoints: x.legendaryEvents[legendaryEvent.id].betaPoints,
+                betaSlots: x.legendaryEvents[legendaryEvent.id].betaSlots,
+    
+                gammaPoints: x.legendaryEvents[legendaryEvent.id].gammaPoints,
+                gammaSlots: x.legendaryEvents[legendaryEvent.id].gammaSlots,
+    
+                totalPoints: x.legendaryEvents[legendaryEvent.id].totalPoints,
+                totalSlots: x.legendaryEvents[legendaryEvent.id].totalSlots,
+            }));
     }
     , [selection]);
 
