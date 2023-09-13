@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useMemo, useRef, useState } from 'react';
+﻿import React, { ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import {
     CellClassParams,
@@ -13,7 +13,7 @@ import {
     SelectedTeams
 } from '../../models/interfaces';
 import { Rank } from '../../models/enums';
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
 import { fitGridOnWindowResize } from '../../shared-logic/functions';
 import { PersonalDataService } from '../../services';
 import { sum, uniq } from 'lodash';
@@ -214,11 +214,18 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
         gridRef.current?.api?.sizeColumnsToFit();
     }, [rows]);
 
+    const onFilterTextBoxChanged = useCallback((change: ChangeEvent<HTMLInputElement>) => {
+        gridRef.current?.api.setQuickFilter(
+            change.target.value
+        );
+    }, []);
+
     return (
         <div>
-            <div style={{ display: 'flex', flexDirection: 'row', height: '100%' }}>
+            <TextField sx={{ margin: '10px', width: '300px' }} label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged}/>
+            <div style={{ display: 'flex', flexDirection: 'row', height: 'calc(100vh - 150px)' }}>
                 <div style={{ overflow: 'hidden', flexGrow: '1' }}>
-                    <div className="ag-theme-material" style={{ height: 'calc(100vh - 100px)', width: '100%' }}>
+                    <div className="ag-theme-material" style={{ height: '100%', width: '100%' }}>
                         <AgGridReact
                             ref={gridRef}
                             tooltipShowDelay={100}
@@ -231,7 +238,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
                     </div>
                 </div>
 
-                <FormControl style={{ padding: '2rem' }}>
+                <FormControl style={{ padding: '0 2rem', height: '100%' }}>
                     <FormLabel id="demo-radio-buttons-group-label" style={{ fontWeight: 700 }}>Characters
                         Selection</FormLabel>
                     <RadioGroup
