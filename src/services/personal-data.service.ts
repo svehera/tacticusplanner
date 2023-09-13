@@ -62,6 +62,7 @@ export class PersonalDataService {
     }
 
     static save(): void {
+        this.data.modifiedDate = new Date();
         const storeData = JSON.stringify(this.data);
         localStorage.setItem(this.personalDataStorageKey, storeData);
     }
