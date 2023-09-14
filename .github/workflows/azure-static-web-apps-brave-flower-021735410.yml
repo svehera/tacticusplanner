@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CI: false
-      TEST_VALUE: ${{ secrets.TEST_VALUE }}
+      REACT_APP_TEST_VALUE: ${{ secrets.TEST_VALUE }}
     name: Build and Deploy Job
     steps:
       - uses: actions/checkout@v3
