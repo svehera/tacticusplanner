@@ -13,6 +13,7 @@ const App = () => {
         if (isMobile) {
             navigate('/mobile');
         }
+        console.log(process.env['TestVlaue']);
         const redirect = searchParams.get('redirect');
         if(redirect) {
             navigate(redirect);
