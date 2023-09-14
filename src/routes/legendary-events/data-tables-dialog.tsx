@@ -13,7 +13,7 @@ import { CharactersSelection } from './legendary-events.interfaces';
 
 export default function DataTablesDialog({ legendaryEvent }: { legendaryEvent: ILegendaryEvent}) {
     const [open, setOpen] = React.useState(false);
-    const [selection, setSelection] = React.useState(CharactersSelection.Unlocked);
+    const [selection, setSelection] = React.useState(CharactersSelection.All);
 
     const handleClickOpen = () => {
         setOpen(true);
