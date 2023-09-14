@@ -29,7 +29,8 @@
   </style>
   <script>
     window.onload=function(){
-      window.location.replace(window.location.origin + `?redirect=${window.location.path}`);
+      const path = window.location.pathname;
+      window.location.replace(window.location.origin + `?redirect=${path}`)
     }
   </script>
 </head>
