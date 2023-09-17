@@ -10,7 +10,7 @@ import { AutoTeamsSettingsContext } from '../../contexts';
 
 export const LegendaryEvents = () => {
     const [value, setValue] = React.useState(0);
-    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(new JainZarLegendaryEvent(GlobalService.characters, PersonalDataService.data.legendaryEvents.jainZar.selectedTeams));
+    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(new ShadowSunLegendaryEvent(GlobalService.characters, PersonalDataService.data.legendaryEvents.shadowSun.selectedTeams));
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
@@ -31,9 +31,9 @@ export const LegendaryEvents = () => {
                 scrollButtons="auto"
                 aria-label="scrollable auto tabs example"
             >
-                <Tab label="Jain Zar" onClick={() => setLegendaryEvent(new JainZarLegendaryEvent(GlobalService.characters, PersonalDataService.data.legendaryEvents.jainZar.selectedTeams))} />
+                <Tab label="Shadowsun 2/3 (Oct 15)" onClick={() => setLegendaryEvent(new ShadowSunLegendaryEvent(GlobalService.characters, PersonalDataService.data.legendaryEvents.shadowSun.selectedTeams))}/>
                 <Tab label="Aun'Shi"  onClick={() => setLegendaryEvent(new AunShiLegendaryEvent(GlobalService.characters, PersonalDataService.data.legendaryEvents.aunShi.selectedTeams))}/>
-                <Tab label="Shadowsun" onClick={() => setLegendaryEvent(new ShadowSunLegendaryEvent(GlobalService.characters, PersonalDataService.data.legendaryEvents.shadowSun.selectedTeams))}/>
+                <Tab label="Jain Zar" onClick={() => setLegendaryEvent(new JainZarLegendaryEvent(GlobalService.characters, PersonalDataService.data.legendaryEvents.jainZar.selectedTeams))} />
             </Tabs>
             <div style={{ marginInlineStart: 10 }}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>

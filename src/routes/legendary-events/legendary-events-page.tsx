@@ -25,7 +25,7 @@ export const LegendaryEventPage = () => {
     const aunShiLegendaryEvent = useMemo(() => new AunShiLegendaryEvent(characters,[]), [characters]);
     const shadowSunLegendaryEvent = useMemo(() => new ShadowSunLegendaryEvent(characters,[]), [characters]);
 
-    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(jainZarLegendaryEvent);
+    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(shadowSunLegendaryEvent);
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
@@ -108,16 +108,15 @@ export const LegendaryEventPage = () => {
                 <Box sx={{ bgcolor: 'background.paper' }}>
                     <Tabs
                         value={legendaryEvent.id}
-
                         scrollButtons="auto"
                         aria-label="scrollable auto tabs example"
                     >
-                        <Tab label="Jain Zar 3/3 (September 10)" value={LegendaryEventEnum.JainZar}
-                            onClick={() => setLegendaryEvent(jainZarLegendaryEvent)}/>
                         <Tab label="Shadowsun 2/3 (October 15)" value={LegendaryEventEnum.ShadowSun}
                             onClick={() => setLegendaryEvent(shadowSunLegendaryEvent)}/>
                         <Tab label="Aun Shi 3/3 (TBA)" value={LegendaryEventEnum.AunShi}
                             onClick={() => setLegendaryEvent(aunShiLegendaryEvent)}/>
+                        <Tab label="Jain Zar 3/3 (Ended)" value={LegendaryEventEnum.JainZar}
+                            onClick={() => setLegendaryEvent(jainZarLegendaryEvent)}/>
 
                     </Tabs>
                 </Box>

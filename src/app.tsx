@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 
 import TopAppBar from './app-bar';
-import { GlobalService } from './services';
 import { isMobile } from 'react-device-detect';
 
 const App = () => {
