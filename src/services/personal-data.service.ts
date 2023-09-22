@@ -34,20 +34,7 @@ export class PersonalDataService {
     static data$: Observable<IPersonalData> = this._data.asObservable();
 
     static init(): void {
-
         const storedData = localStorage.getItem(this.personalDataStorageKey);
-
-        const defaultLegendaryEventsData: ILegendaryEventsData = {
-            jainZar: {
-                selectedTeams: [{}, {}, {}, {}, {}]
-            },
-            aunShi: {
-                selectedTeams: [{}, {}, {}, {}, {}]
-            },
-            shadowSun: {
-                selectedTeams: [{}, {}, {}, {}, {}]
-            }
-        };
         
         let data: IPersonalData = this._data.value;
 

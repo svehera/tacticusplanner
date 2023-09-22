@@ -4,7 +4,7 @@ import { Avatar, Divider, IconButton, Menu, MenuItem } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import RegisterIcon from '@mui/icons-material/PersonAdd';
 import UploadIcon from '@mui/icons-material/Upload';
-import { PersonalDataService } from '../../services';
+import { GlobalService, PersonalDataService } from '../../services';
 import DownloadIcon from '@mui/icons-material/Download';
 import { usePopUpControls } from '../../hooks/pop-up-controls';
 import { RegisterUserDialog } from './register-user-dialog';
@@ -34,19 +34,24 @@ export const UserMenu = () => {
                     const personalData = JSON.parse(content);
                     PersonalDataService._data.next(personalData);
                     PersonalDataService.save();
-                    setUserDataApi(personalData)
-                        .then(() => enqueueSnackbar('Synced local data with server.', { variant: 'info' }))
-                        .catch((err: AxiosError) => {
-                            if (err.response?.status === 401) {
-                                logout();
-                                enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
-                            } else {
-                                enqueueSnackbar('Something went wrong. Try again later', { variant: 'error' });
-                            }
-                        });
-                    window.location = '/' as unknown as Location;
+                    GlobalService.init();
+                    
+                    enqueueSnackbar('Import successful', { variant: 'success' });
+                    
+                    if(isAuthenticated) {
+                        setUserDataApi(personalData)
+                            .then(() => enqueueSnackbar('Synced local data with server.', { variant: 'info' }))
+                            .catch((err: AxiosError) => {
+                                if (err.response?.status === 401) {
+                                    logout();
+                                    enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
+                                } else {
+                                    enqueueSnackbar('Failed to push data to server. Try again later', { variant: 'error' });
+                                }
+                            });
+                    }
                 } catch (error) {
-                    enqueueSnackbar('Error parsing JSON.', { variant: 'error' });
+                    enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
                 }
             };
 
