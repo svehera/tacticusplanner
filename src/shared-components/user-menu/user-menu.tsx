@@ -33,7 +33,7 @@ export const UserMenu = () => {
                     const content = e.target?.result as string;
                     const personalData = JSON.parse(content);
                     PersonalDataService._data.next(personalData);
-                    PersonalDataService.save();
+                    PersonalDataService.save(new Date(), false);
                     GlobalService.init();
                     
                     enqueueSnackbar('Import successful', { variant: 'success' });
