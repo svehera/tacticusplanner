@@ -3,10 +3,10 @@ import { IErrorResponse, ILoginResponse, IRegistrationResponse, IUserDataRespons
 import { IPersonalData } from '../models/interfaces';
 
 export const registerUser = (username: string, password: string) =>
-    callApi<IRegistrationResponse, IErrorResponse>('POST', `RegisterUser?username=${username}&password=${password}`);
+    callApi<IRegistrationResponse, IErrorResponse>('POST', 'RegisterUser', { username, password } as any);
 
 export const loginUser = (username: string, password: string) =>
-    callApi<ILoginResponse, IErrorResponse>('POST', `LoginUser?username=${username}&password=${password}`);
+    callApi<ILoginResponse, IErrorResponse>('POST', 'LoginUser', { username, password } as any);
 
 export const getUserDataApi = () =>
     callApi<IUserDataResponse, IErrorResponse>('GET', 'UserData');

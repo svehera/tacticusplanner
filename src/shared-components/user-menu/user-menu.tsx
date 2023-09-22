@@ -144,7 +144,10 @@ export const UserMenu = () => {
                 <DownloadIcon/> Export
             </MenuItem>
         </Menu>
-        <RegisterUserDialog isOpen={showRegisterUser} onClose={() => setShowRegisterUser(false)}/>
+        <RegisterUserDialog isOpen={showRegisterUser} onClose={(success) => {
+            setShowRegisterUser(false);
+            setShowLoginUser(success);
+        }}/>
         <LoginUserDialog isOpen={showLoginUser} onClose={() => setShowLoginUser(false)}/>
     </Box>);
 };
