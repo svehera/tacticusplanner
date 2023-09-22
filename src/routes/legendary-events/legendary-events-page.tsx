@@ -3,11 +3,11 @@ import { Popover, Tab, Tabs } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 import { AutoTeamsSettingsContext, LegendaryEventContext, ViewSettingsContext } from '../../contexts';
-import { GlobalService, PersonalDataService } from '../../services';
+import { useCharacters, usePersonalData } from '../../services';
 import { AunShiLegendaryEvent, JainZarLegendaryEvent, ShadowSunLegendaryEvent } from '../../models/legendary-events';
 import {
     ILegendaryEvent,
-    ILegendaryEventData3, IViewPreferences
+    IViewPreferences
 } from '../../models/interfaces';
 
 import LegendaryEvent from './legendary-event';
@@ -19,13 +19,9 @@ import Button from '@mui/material/Button';
 import { Help } from '@mui/icons-material';
 
 export const LegendaryEventPage = () => {
-    const [characters] = useState(GlobalService.characters);
-
-    const jainZarLegendaryEvent = useMemo(() => new JainZarLegendaryEvent(characters, []), [characters]);
-    const aunShiLegendaryEvent = useMemo(() => new AunShiLegendaryEvent(characters,[]), [characters]);
-    const shadowSunLegendaryEvent = useMemo(() => new ShadowSunLegendaryEvent(characters,[]), [characters]);
-
-    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(shadowSunLegendaryEvent);
+    const { characters } = useCharacters();
+    const { personalData, updateAutoTeamsSettings } = usePersonalData();
+    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(new ShadowSunLegendaryEvent(characters));
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
@@ -35,17 +31,21 @@ export const LegendaryEventPage = () => {
         showBeta: true,
         showGamma: true,
     });
-    const [autoTeamsPreferences, setAutoTeamsPreferences] = useState(PersonalDataService.data.autoTeamsPreferences);
+    const [autoTeamsPreferences, setAutoTeamsPreferences] = useState(personalData.autoTeamsPreferences);
+
+    useEffect(() => {
+        setLegendaryEvent(new ShadowSunLegendaryEvent(characters));
+    }, [characters]);
 
     const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl2(event.currentTarget);
     };
-    
+
 
     const handleClose2 = () => {
         setAnchorEl2(null);
     };
-    
+
     const open2 = Boolean(anchorEl2);
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -58,12 +58,7 @@ export const LegendaryEventPage = () => {
     };
 
     const open = Boolean(anchorEl);
-    
-    useEffect(() => {
-        PersonalDataService.data.autoTeamsPreferences = autoTeamsPreferences;
-        PersonalDataService.save();
-    }, [autoTeamsPreferences]);
-    
+
     const autoTeamsPriority = useMemo(() => {
         const result: string[] = [];
         if (!autoTeamsPreferences.ignoreRecommendedFirst) {
@@ -79,29 +74,14 @@ export const LegendaryEventPage = () => {
             result.push('Rank');
         }
         result.push('Event points');
-        
+
         if (!autoTeamsPreferences.ignoreRecommendedLast) {
             result.push('Recommend last');
         }
-        
+
         return result;
     }, [autoTeamsPreferences]);
 
-
-    const updateLegendaryEventTeams = (data: ILegendaryEventData3) => {
-        if(!PersonalDataService.data.legendaryEvents3) {
-            PersonalDataService.data.legendaryEvents3 = {
-                [LegendaryEventEnum.JainZar]: {},
-                [LegendaryEventEnum.AunShi]: {},
-                [LegendaryEventEnum.ShadowSun]: {},
-            } as never;
-        }
-        if(PersonalDataService.data.legendaryEvents3) {
-            PersonalDataService.data.legendaryEvents3[data.id] = data;
-            PersonalDataService.save();
-        }
-    };
-    
     return (
         <Box sx={{ padding: 2, paddingBottom: 0 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
@@ -112,11 +92,11 @@ export const LegendaryEventPage = () => {
                         aria-label="scrollable auto tabs example"
                     >
                         <Tab label="Shadowsun 2/3 (October 15)" value={LegendaryEventEnum.ShadowSun}
-                            onClick={() => setLegendaryEvent(shadowSunLegendaryEvent)}/>
+                            onClick={() => setLegendaryEvent(new ShadowSunLegendaryEvent(characters))}/>
                         <Tab label="Aun Shi 3/3 (TBA)" value={LegendaryEventEnum.AunShi}
-                            onClick={() => setLegendaryEvent(aunShiLegendaryEvent)}/>
+                            onClick={() => setLegendaryEvent(new AunShiLegendaryEvent(characters))}/>
                         <Tab label="Jain Zar 3/3 (Ended)" value={LegendaryEventEnum.JainZar}
-                            onClick={() => setLegendaryEvent(jainZarLegendaryEvent)}/>
+                            onClick={() => setLegendaryEvent(new JainZarLegendaryEvent(characters))}/>
 
                     </Tabs>
                 </Box>
@@ -137,10 +117,13 @@ export const LegendaryEventPage = () => {
                     >
                         <div style={{ margin: 20 }}>
                             <AutoTeamsSettings value={autoTeamsPreferences}
-                                valueChanges={setAutoTeamsPreferences}></AutoTeamsSettings>
+                                valueChanges={(value) => {
+                                    setAutoTeamsPreferences(value);
+                                    updateAutoTeamsSettings(value);
+                                }}></AutoTeamsSettings>
                         </div>
                     </Popover>
-                    
+
                     <Button onClick={handleClick} color={'inherit'}><Help/></Button>
                     <Popover
                         open={open}
@@ -164,9 +147,7 @@ export const LegendaryEventPage = () => {
             <ViewSettingsContext.Provider value={viewPreferences}>
                 <AutoTeamsSettingsContext.Provider value={autoTeamsPreferences}>
                     <LegendaryEventContext.Provider value={legendaryEvent}>
-                        <LegendaryEvent key={legendaryEvent.id} legendaryEvent={legendaryEvent}
-                            legendaryEventPersonal={PersonalDataService.getLEPersonalData(legendaryEvent.id)}
-                            legendaryEventPersonalChange={updateLegendaryEventTeams}/>
+                        <LegendaryEvent key={legendaryEvent.id + (personalData.modifiedDate?.toString() ?? '')}/>
                     </LegendaryEventContext.Provider>
                 </AutoTeamsSettingsContext.Provider>
             </ViewSettingsContext.Provider>

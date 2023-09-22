@@ -1,18 +1,18 @@
 ﻿import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import ListIcon from '@mui/icons-material/List';
 import LegendIcon from '@mui/icons-material/LegendToggle';
-import BackupIcon from '@mui/icons-material/Backup';
 
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
-import { GlobalService } from './services';
 import { Home } from '@mui/icons-material';
 import Box from '@mui/material/Box';
+import { getUserData } from './hooks/get-user-data';
 
 const MobileApp = () => {
-    GlobalService.init();
     const [value, setValue] = React.useState(1);
+
+    getUserData();
 
     return (
         <Box sx={{ maxWidth: '600px', margin: 'auto', padding: 1, paddingBottom: 7, }}>
@@ -26,10 +26,10 @@ const MobileApp = () => {
                         setValue(newValue);
                     }}
                 >
-                    <BottomNavigationAction component={Link} to={'./characters'} label="Characters"
+                    <BottomNavigationAction component={Link} to={'./wyo'} label="Characters"
                         icon={<ListIcon/>}/>
                     <BottomNavigationAction component={Link} to={'./'} label="Home" icon={<Home/>}/>
-                    <BottomNavigationAction component={Link} to={'./legendaryEvents'} label="Legendary Events"
+                    <BottomNavigationAction component={Link} to={'./le'} label="Legendary Events"
                         icon={<LegendIcon />}/>
                 </BottomNavigation>
             </Paper>

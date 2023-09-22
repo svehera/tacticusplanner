@@ -6,16 +6,19 @@
 import { PersonalDataService } from './personal-data.service';
 import { StaticDataService } from './static-data.service';
 import { LegendaryEvents, Rank } from '../models/enums';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { useEffect, useState } from 'react';
 
 export class GlobalService {
-    static characters: Array<ICharacter>;
+    static _characters: BehaviorSubject<ICharacter[]> = new BehaviorSubject<ICharacter[]>([]);
+    static characters$: Observable<ICharacter[]> = this._characters.asObservable();
 
     static init(): void {
         PersonalDataService.init();
         const staticUnitData = StaticDataService.unitsData;
-        const personalUnitData = PersonalDataService.data;
+        const personalUnitData = PersonalDataService._data.value;
 
-        this.characters = staticUnitData.map((staticData) => {
+        const characters = staticUnitData.map((staticData) => {
             const personalData: IPersonalCharacter = personalUnitData.characters.find(
                 (c) => c.name === staticData.name
             ) ?? {
@@ -38,5 +41,19 @@ export class GlobalService {
                 rank: +personalData.rank,
             };
         });
+        this._characters.next(characters);
     }
 }
+
+
+export const useCharacters = () => {
+    const [characters, setCharacters] = useState<ICharacter[]>(GlobalService._characters.value);
+    useEffect(() => {
+        const subscription = GlobalService.characters$.subscribe(setCharacters);
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, []);
+
+    return { characters };
+};

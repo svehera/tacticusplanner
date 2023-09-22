@@ -20,11 +20,11 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
                 element: <Home/>,
             },
             {
-                path: 'characters',
+                path: 'wyo',
                 element: <Characters/>,
             },
             {
-                path: 'legendaryEvents',
+                path: 'le',
                 element: <LegendaryEvents/>,
             }
         ],

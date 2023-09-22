@@ -4,7 +4,7 @@ import { ColDef, ColGroupDef, RowDragEndEvent, RowStyle } from 'ag-grid-communit
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
 import Typography from '@mui/material/Typography';
 import { ICharacter } from '../../models/interfaces';
-import { GlobalService, PersonalDataService } from '../../services';
+import { PersonalDataService, useCharacters, usePersonalData } from '../../services';
 import { isMobile } from 'react-device-detect';
 import { Rank, Rarity, RarityStars } from '../../models/enums';
 import SelectorCell from '../../shared-components/selector-cell';
@@ -143,9 +143,12 @@ export const Progression = () => {
             ]
         },
     ]);
+    
+    const { characters } = useCharacters();
+    const { personalData } = usePersonalData();
 
-    const [rowsData] = useState<ICharacter[]>(PersonalDataService.data.charactersPriorityList
-        .map(name => GlobalService.characters.find(x => x.progress && x.name === name))
+    const [rowsData] = useState<ICharacter[]>(personalData.charactersPriorityList
+        .map(name => characters.find(x => x.progress && x.name === name))
         .filter(x => !!x) as ICharacter[]
     );
 
@@ -173,7 +176,7 @@ export const Progression = () => {
         event.api.forEachNode(node => {
             newPriority.push(node.data?.name ?? '');
         });
-        PersonalDataService.data.charactersPriorityList = newPriority;
+        PersonalDataService._data.next({ ...personalData, charactersPriorityList: newPriority });
         PersonalDataService.save();
         const columns = [gridRef.current?.columnApi.getColumn('priority') ?? ''];
         gridRef.current?.api.refreshCells({ columns });
@@ -181,7 +184,7 @@ export const Progression = () => {
 
     const saveChanges = () => {
         rowsData.forEach(row => {
-            const existingChar = PersonalDataService.data.characters.find(char => char.name === row.name);
+            const existingChar = personalData.characters.find(char => char.name === row.name);
             if(existingChar) {
                 existingChar.currentShards = +row.currentShards;
                 existingChar.targetRarity = row.targetRarity;

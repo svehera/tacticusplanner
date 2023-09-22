@@ -6,7 +6,7 @@ import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions'
 import { TextField } from '@mui/material';
 
 import { ICharacter } from '../../models/interfaces';
-import { GlobalService, PersonalDataService } from '../../services';
+import { PersonalDataService, useCharacters, usePersonalData } from '../../services';
 
 import SelectorCell from '../../shared-components/selector-cell';
 import CheckboxCell from '../../shared-components/checkbox-cell';
@@ -15,6 +15,7 @@ import { fitGridOnWindowResize } from '../../shared-logic/functions';
 
 export const WhoYouOwn = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
+    const { addOrUpdateCharacterData } = usePersonalData();
     
     const defaultColDef: ColDef<ICharacter> = {
         sortable: true
@@ -143,15 +144,16 @@ export const WhoYouOwn = () => {
         },
     ]);
 
-    const [rowsData] = useState(GlobalService.characters);
+    const { characters } = useCharacters();
+
 
     const getRowStyle = (params: RowClassParams<ICharacter>): RowStyle => {
         return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'lightsteelblue' : 'white' };
     };
     
     const saveChanges = () => {
-        rowsData.forEach(row => {
-            PersonalDataService.addOrUpdateCharacterData(row);
+        characters.forEach(char => {
+            addOrUpdateCharacterData(char);
         });
         PersonalDataService.save();
     };
@@ -166,7 +168,7 @@ export const WhoYouOwn = () => {
                     suppressCellFocus={true}
                     defaultColDef={defaultColDef}
                     columnDefs={columnDefs}
-                    rowData={rowsData}
+                    rowData={characters}
                     rowHeight={40}
                     getRowStyle={getRowStyle}
                     onCellEditingStopped={saveChanges}

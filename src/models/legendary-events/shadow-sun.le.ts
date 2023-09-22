@@ -6,8 +6,8 @@ import { LETrack } from './base.le.track';
 
 export class ShadowSunLegendaryEvent extends LegendaryEventBase {
 
-    constructor(unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
-        super(LegendaryEvent.ShadowSun, 'Shadowsun',  unitsData, selectedTeams);
+    constructor(unitsData: Array<ICharacter>) {
+        super(LegendaryEvent.ShadowSun, 'Shadowsun',  unitsData);
     }
 
     protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {

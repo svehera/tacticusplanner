@@ -1,16 +1,17 @@
-﻿import React, { useState } from 'react';
-import { GlobalService } from '../../services';
+﻿import React from 'react';
+import { useCharacters } from '../../services';
 import { groupBy } from 'lodash';
 import { CharacterItem } from './character-item';
 
 export const Characters = () => {
-    const [rowsData] = useState(GlobalService.characters);
+    const { characters } = useCharacters();
 
-    const test = groupBy(rowsData, 'faction');
+    const groupedByFaction = groupBy(characters, 'faction');
+    
     const itemList = [];
 
-    for (const testKey in test) {
-        const chars = test[testKey];
+    for (const testKey in groupedByFaction) {
+        const chars = groupedByFaction[testKey];
         itemList.push(<div key={testKey}>
             <h4>{testKey}</h4>
 

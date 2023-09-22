@@ -111,16 +111,8 @@ export interface ILegendaryEvent {
   betaTrack: ILegendaryEventTrack;
   gammaTrack: ILegendaryEventTrack;
 
-  selectedTeams: ITableRow[];
   suggestedTeams: ITableRow[];
   allowedUnits: Array<ICharacter>;
-
-  getSelectedCharactersPoints(): Array<{
-    name: string;
-    points: number;
-    rank: Rank;
-    timesSelected: number;
-  }>;
 }
 
 export interface ILegendaryEventTrack {
@@ -162,9 +154,9 @@ export interface IPersonalData {
   selectedTeamOrder: ISelectedTeamsOrdering;
   characters: IPersonalCharacter[];
   charactersPriorityList: string[];
-  legendaryEvents: ILegendaryEventsData;
+  legendaryEvents: ILegendaryEventsData | undefined;
   legendaryEvents3: ILegendaryEventsData3 | undefined;
-  modifiedDate?: Date;
+  modifiedDate?: Date | string;
 }
 
 export interface ILegendaryEventsData {

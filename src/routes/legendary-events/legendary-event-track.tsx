@@ -51,7 +51,7 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
 
     const [restrictions, setRestrictions] = useState<string[]>(() => track.unitsRestrictions.filter(x => x.core).map((x => x.name)));
     
-    const teams = useMemo(() => track.suggestTeams(autoTeamsPreferences, restrictions), [autoTeamsPreferences, restrictions]);
+    const teams = useMemo(() => track.suggestTeams(autoTeamsPreferences, restrictions), [autoTeamsPreferences, restrictions, legendaryEvent.allowedUnits]);
 
     const rows: Array<ITableRow> = useMemo(() => getRows(track, teams), [teams]);
 
