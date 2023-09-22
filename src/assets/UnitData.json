@@ -1516,5 +1516,27 @@
     "Number": 62,
     "ForcedSummons": false,
     "RequiredInCampaign": false
+  },
+  {
+    "Name": "Tyrant Guard",
+    "Faction": "Tyranids",
+    "Alliance": "Xenos",
+    "Health": 0,
+    "Damage": 0,
+    "Armour": 0,
+    "Initial rarity": "Uncommon",
+    "Melee Damage": "Piercing",
+    "Melee Hits": 2,
+    "Movement": 3,
+    "Equipment1": "Crit",
+    "Equipment2": "Defense",
+    "Equipment3": "Defense",
+    "Traits": [
+      "Big Target"
+    ],
+    "Active Ability": "Piercing",
+    "Number": 63,
+    "ForcedSummons": false,
+    "RequiredInCampaign": false
   }
 ]
