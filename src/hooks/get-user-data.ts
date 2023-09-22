@@ -16,8 +16,9 @@ export const getUserData = () => {
                 .then(data2 => {
                     const localLastModified= personalData.modifiedDate && new Date(personalData.modifiedDate);
                     const serverLastModified= new Date(data2.data.lastModifiedDate);
-                    console.log(localLastModified, serverLastModified);
+
                     setUsername(data2.data.username);
+
                     if(data2.data.data && (!localLastModified || localLastModified < serverLastModified)) {
                         PersonalDataService._data.next(data2.data.data);
                         PersonalDataService.save(serverLastModified, false);
