@@ -7,9 +7,10 @@ import { isMobile } from 'react-device-detect';
 const App = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
+    const preferredView = localStorage.getItem('preferredView');
 
     useEffect(() => {
-        if (isMobile) {
+        if (isMobile && !preferredView) {
             navigate('/mobile');
         }
         const redirect = searchParams.get('redirect');

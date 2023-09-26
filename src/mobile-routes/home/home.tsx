@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { PersonalDataService } from '../../services';
+import ViewSwitch from '../../shared-components/view-switch';
 
 export const Home = () => {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -53,6 +54,7 @@ export const Home = () => {
                 onChange={handleFileUpload}
             />
             <Box sx={{ display: 'flex', textAlign: 'center', justifyContent: 'flex-end' }}>
+                <ViewSwitch/>
                 <IconButton
                     onClick={handleClick}
                     size="small"
