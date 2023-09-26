@@ -10,7 +10,7 @@ const App = () => {
     const preferredView = localStorage.getItem('preferredView');
 
     useEffect(() => {
-        if (isMobile && !preferredView) {
+        if (isMobile && (!preferredView || preferredView === 'mobile')) {
             navigate('/mobile');
         }
         const redirect = searchParams.get('redirect');
