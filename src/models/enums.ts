@@ -92,7 +92,8 @@ export enum Trait {
     BigTarget = 'Big Target',
     ShadowInTheWarp = 'Shadow in the Warp',
     Synapse = 'Synapse',
-    SuppressiveFire = 'Suppressive Fire'
+    SuppressiveFire = 'Suppressive Fire',
+    CrushingStrike = 'Crushing Strike',
 }
 
 export enum DamageType {

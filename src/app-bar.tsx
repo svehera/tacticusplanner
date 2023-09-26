@@ -11,6 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { isTabletOrMobileMediaQuery } from './models/constants';
 import { usePopUpControls } from './hooks/pop-up-controls';
 import { UserMenu } from './shared-components/user-menu/user-menu';
+import ViewSwitch from './shared-components/view-switch';
 
 const TopAppBar = () => {
     const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
@@ -144,6 +145,7 @@ const TopAppBar = () => {
                     </Typography>
                     <div style={{ display: 'flex' }}>
                         {nav}
+                        <ViewSwitch/>
                         <Button
                             id="basic-button"
                             aria-controls={

@@ -3,12 +3,17 @@ import { Link } from 'react-router-dom';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { PersonalDataService } from '../../services';
+import ViewSwitch from '../../shared-components/view-switch';
 import { UserMenu } from '../../shared-components/user-menu/user-menu';
 
 export const Home = () => {
    
     return (
         <div>
+            <ViewSwitch/>
             <UserMenu/>
             <h3 style={{ textAlign: 'center' }}>Plan your success in Tacticus,<br/> No more Google Sh**t</h3>
 

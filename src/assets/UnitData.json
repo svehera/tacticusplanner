@@ -1521,9 +1521,9 @@
     "Name": "Tyrant Guard",
     "Faction": "Tyranids",
     "Alliance": "Xenos",
-    "Health": 0,
-    "Damage": 0,
-    "Armour": 0,
+    "Health": 125,
+    "Damage": 16,
+    "Armour": 22,
     "Initial rarity": "Uncommon",
     "Melee Damage": "Piercing",
     "Melee Hits": 2,
@@ -1532,7 +1532,8 @@
     "Equipment2": "Defense",
     "Equipment3": "Defense",
     "Traits": [
-      "Big Target"
+      "Big Target",
+      "Crushing Strike"
     ],
     "Active Ability": "Piercing",
     "Number": 63,

@@ -117,9 +117,13 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
     ], [selection]);
 
     const selectedChars = useMemo(() => {
-        const alphaChars = Object.values(personalLegendaryEvent.alpha).flat();
-        const betaChars = Object.values(personalLegendaryEvent.beta).flat();
-        const gammaChars = Object.values(personalLegendaryEvent.gamma).flat();
+        const alphaSection = legendaryEvent.alphaTrack.unitsRestrictions.map(x => x.name);
+        const betaSection = legendaryEvent.betaTrack.unitsRestrictions.map(x => x.name);
+        const gammaSection = legendaryEvent.gammaTrack.unitsRestrictions.map(x => x.name);
+        
+        const alphaChars = Object.entries(personalLegendaryEvent.alpha).filter(([key]) => alphaSection.includes(key)).map(([_, value]) => value).flat();
+        const betaChars = Object.entries(personalLegendaryEvent.beta).filter(([key]) => betaSection.includes(key)).map(([_, value]) => value).flat();
+        const gammaChars = Object.entries(personalLegendaryEvent.gamma).filter(([key]) => gammaSection.includes(key)).map(([_, value]) => value).flat();
 
         return uniq([...alphaChars, ...betaChars, ...gammaChars]);
     }, [personalLegendaryEvent.id]);
