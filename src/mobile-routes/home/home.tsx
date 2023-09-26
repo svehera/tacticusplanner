@@ -13,8 +13,10 @@ export const Home = () => {
    
     return (
         <div>
-            <ViewSwitch/>
-            <UserMenu/>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <ViewSwitch/>
+                <UserMenu/>
+            </div>
             <h3 style={{ textAlign: 'center' }}>Plan your success in Tacticus,<br/> No more Google Sh**t</h3>
 
             <div>
