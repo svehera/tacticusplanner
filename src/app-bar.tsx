@@ -8,10 +8,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Divider, Menu, MenuItem, Tooltip, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import ComputerIcon from '@mui/icons-material/Computer';
-import SmartphoneIcon from '@mui/icons-material/Smartphone';
 import { PersonalDataService } from './services';
 import { isTabletOrMobileMediaQuery } from './models/constants';
+import ViewSwitch from './shared-components/view-switch';
 
 const TopAppBar = () => {
     const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
@@ -119,13 +118,7 @@ const TopAppBar = () => {
                     </Typography>
                     <div style={{ display: 'flex' }}>
                         {nav}
-                        {/*<Button*/}
-                        {/*    id="basic-button"*/}
-                        {/*    color="inherit"*/}
-                        {/*    component={Link} to={'./mobile'}*/}
-                        {/*>*/}
-                        {/*    <SmartphoneIcon/>*/}
-                        {/*</Button>*/}
+                        <ViewSwitch/>
                         <Button
                             id="basic-button"
                             aria-controls={open ? 'basic-menu' : undefined}
