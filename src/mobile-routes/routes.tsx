@@ -5,10 +5,10 @@ import {
 } from 'react-router-dom';
 
 import MobileApp from '../mobile-app';
-import { About } from '../routes/root/about';
 import { Characters } from './characters/characters';
 import { LegendaryEvents } from './legendary-events/legendary-events';
 import { Home } from './home/home';
+import { Goals } from '../routes/goals/goals';
 
 export const mobileAppRoutes: () => RouteObject[] = () => [
     {
@@ -26,6 +26,10 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
             {
                 path: 'le',
                 element: <LegendaryEvents/>,
+            },
+            {
+                path: 'goals',
+                element: <Goals/>,
             }
         ],
     },

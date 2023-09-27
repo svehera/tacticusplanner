@@ -5,6 +5,7 @@
     Faction,
     LegendaryEvent,
     LegendaryEvents,
+    PersonalGoalType,
     Rank,
     Rarity,
     RarityStars,
@@ -154,6 +155,7 @@ export interface IPersonalData {
   selectedTeamOrder: ISelectedTeamsOrdering;
   characters: IPersonalCharacter[];
   charactersPriorityList: string[];
+  goals: IPersonalGoal[];
   legendaryEvents: ILegendaryEventsData | undefined;
   legendaryEvents3: ILegendaryEventsData3 | undefined;
   modifiedDate?: Date | string;
@@ -229,4 +231,13 @@ export interface ICharProgression {
   shards: number;
   orbs?: number;
   rarity?: Rarity;
+}
+
+export interface IPersonalGoal {
+  id: string;
+  character: string;
+  type: PersonalGoalType;
+  targetRarity?: Rarity;
+  targetRank?: Rank;
+  notes?: string;
 }

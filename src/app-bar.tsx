@@ -29,6 +29,7 @@ const TopAppBar = () => {
             >
                 Who You Own
             </Button>
+            
             <Button
                 onClick={() => setTitle('Legendary Events')}
                 component={Link}
@@ -37,22 +38,17 @@ const TopAppBar = () => {
             >
                 Legendary Events
             </Button>
+
             <Button
-                onClick={() => setTitle('Characters')}
+                onClick={() => setTitle('My Goals')}
                 component={Link}
-                to={'./characters'}
+                to={'./goals'}
                 color="inherit"
             >
-                Characters
+                Goals
             </Button>
-            <Button
-                onClick={() => setTitle('Dirty Dozen')}
-                component={Link}
-                to={'./dirtyDozen'}
-                color="inherit"
-            >
-                Dirty Dozen
-            </Button>
+           
+            <SimpleMenu setTitle={setTitle}/>
         </div>
     );
 
@@ -85,6 +81,17 @@ const TopAppBar = () => {
                     color="inherit"
                 >
                     Legendary Events
+                </Button>
+            </MenuItem>
+
+            <MenuItem>
+                <Button
+                    onClick={() => setTitle('My Goals')}
+                    component={Link}
+                    to={'./goals'}
+                    color="inherit"
+                >
+                    Goals
                 </Button>
             </MenuItem>
 
@@ -143,7 +150,7 @@ const TopAppBar = () => {
                     <Typography variant={isTabletOrMobile ? 'h5' : 'h4'} component="div">
                         {title}
                     </Typography>
-                    <div style={{ display: 'flex' }}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
                         {nav}
                         <ViewSwitch/>
                         <Button
@@ -166,5 +173,57 @@ const TopAppBar = () => {
         </Box>
     );
 };
+
+function SimpleMenu({ setTitle }: {setTitle: (value: string) => void}) {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    function handleClick(event: any) {
+        if (anchorEl !== event.currentTarget) {
+            setAnchorEl(event.currentTarget);
+        }
+    }
+
+    function handleClose() {
+        setAnchorEl(null);
+    }
+
+    return (
+        <div style={{ display: 'inline-flex' }}>
+            <Button
+                color="inherit"
+                aria-owns={anchorEl ? 'simple-menu' : undefined}
+                aria-haspopup="true"
+                onClick={handleClick}
+                onMouseOver={handleClick}
+            >
+                Tables
+            </Button>
+            <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+                MenuListProps={{ onMouseLeave: handleClose }}
+            >
+                <MenuItem onClick={handleClose}> <Button
+                    onClick={() => setTitle('Characters')}
+                    component={Link}
+                    to={'./characters'}
+                    color="inherit"
+                >
+                    Characters
+                </Button></MenuItem>
+                <MenuItem onClick={handleClose}> <Button
+                    onClick={() => setTitle('Dirty Dozen')}
+                    component={Link}
+                    to={'./dirtyDozen'}
+                    color="inherit"
+                >
+                    Dirty Dozen
+                </Button></MenuItem>
+            </Menu>
+        </div>
+    );
+}
 
 export default TopAppBar;

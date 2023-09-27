@@ -1,10 +1,11 @@
 ﻿import {
     IAutoTeamsPreferences,
-    ICharacter, 
+    ICharacter,
     ILegendaryEventData3,
     ILegendaryEventsData,
     ILegendaryEventsData3,
-    IPersonalData,
+    IPersonalData, 
+    IPersonalGoal,
     SelectedTeams,
 } from '../models/interfaces';
 import { defaultAutoTeamsPreferences } from '../contexts';
@@ -24,6 +25,7 @@ const defaultPersonalData: IPersonalData = {
         orderBy: 'name',
         direction: 'desc',
     },
+    goals: [],
     legendaryEvents: undefined,
     legendaryEvents3: {} as ILegendaryEventsData3
 };
@@ -42,6 +44,7 @@ export class PersonalDataService {
             data = JSON.parse(storedData);
             data.characters ??= [];
             data.charactersPriorityList ??= [];
+            data.goals ??= [];
 
             data.autoTeamsPreferences ??= defaultAutoTeamsPreferences;
             
@@ -218,6 +221,11 @@ export const usePersonalData = () => {
         },
         updateDirection: (value:  'asc' | 'desc' ): void => {
             data.selectedTeamOrder.direction = value;
+            PersonalDataService._data.next(data);
+            PersonalDataService.save();
+        },
+        updateGoals: (value:  IPersonalGoal[] ): void => {
+            data.goals = value;
             PersonalDataService._data.next(data);
             PersonalDataService.save();
         },

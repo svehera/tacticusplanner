@@ -1,6 +1,7 @@
 ﻿import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import ListIcon from '@mui/icons-material/List';
 import LegendIcon from '@mui/icons-material/LegendToggle';
+import TargetIcon from '@mui/icons-material/TrackChanges';
 
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
@@ -15,9 +16,9 @@ const MobileApp = () => {
     getUserData();
 
     return (
-        <Box sx={{ maxWidth: '600px', margin: 'auto', padding: 1, paddingBottom: 7, }}>
+        <Box sx={{ margin: 'auto', padding: 1, paddingBottom: 7, }}>
             <Outlet/>
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, maxWidth: 600, margin: 'auto' }}
+            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, margin: 'auto' }}
                 elevation={3}>
                 <BottomNavigation
                     showLabels
@@ -29,7 +30,9 @@ const MobileApp = () => {
                     <BottomNavigationAction component={Link} to={'./wyo'} label="Characters"
                         icon={<ListIcon/>}/>
                     <BottomNavigationAction component={Link} to={'./'} label="Home" icon={<Home/>}/>
-                    <BottomNavigationAction component={Link} to={'./le'} label="Legendary Events"
+                    <BottomNavigationAction component={Link} to={'./goals'} label="Goals"
+                        icon={<TargetIcon />}/>
+                    <BottomNavigationAction component={Link} to={'./le'} label="Events"
                         icon={<LegendIcon />}/>
                 </BottomNavigation>
             </Paper>

@@ -12,6 +12,7 @@ import { DirtyDozen } from './dirty-dozen/dirty-dozen';
 import { LegendaryEventPage } from './legendary-events/legendary-events-page';
 import { Contacts } from './contacts/contacts';
 import { Progression } from './progression/progression';
+import { Goals } from './goals/goals';
 
 export const appRoutes : () => RouteObject[] = () => [
     {
@@ -41,6 +42,10 @@ export const appRoutes : () => RouteObject[] = () => [
             {
                 path: 'le',
                 element: <LegendaryEventPage/>,
+            },
+            {
+                path: 'goals',
+                element: <Goals/>,
             },
             {
                 path: 'contacts',

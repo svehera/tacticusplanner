@@ -7,7 +7,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export const LegendaryEvent = (props: { legendaryEvent: ILegendaryEvent}) => {
     return (
-        <Box sx={{ maxWidth: 600, bgcolor: 'background.paper' }}>
+        <Box sx={{ bgcolor: 'background.paper' }}>
             
             <Accordion TransitionProps={{ unmountOnExit: true }}>
                 <AccordionSummary expandIcon={

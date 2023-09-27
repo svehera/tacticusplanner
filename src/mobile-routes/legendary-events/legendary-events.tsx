@@ -20,7 +20,7 @@ export const LegendaryEvents = () => {
     const [autoTeamsPreferences, setAutoTeamsPreferences] = useState(personalData.autoTeamsPreferences);
     
     return (
-        <Box sx={{ maxWidth: 600, bgcolor: 'background.paper' }}>
+        <Box sx={{ bgcolor: 'background.paper' }}>
             <Tabs
                 value={value}
                 onChange={handleChange}
