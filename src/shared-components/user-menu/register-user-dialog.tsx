@@ -29,7 +29,7 @@ export const RegisterUserDialog = ({ isOpen, onClose }: { isOpen: boolean, onClo
     const usernamePattern = /^[a-zA-Z0-9_-]{3,20}$/;
 
     return (
-        <Dialog open={isOpen} onClose={onClose}>
+        <Dialog open={isOpen} onClose={() => onClose(false)}>
             <DialogTitle>Register</DialogTitle>
             <DialogContent>
                 <Box component="form" id="registration-form" onSubmit={event => event.preventDefault()}>
