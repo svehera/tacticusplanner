@@ -1,16 +1,18 @@
 ﻿import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
 
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, RowStyle, RowClassParams, IRowNode } from 'ag-grid-community';
+import { ColDef, RowStyle, RowClassParams, IRowNode, ICellRendererParams } from 'ag-grid-community';
 
 import { TextField } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 import MultipleSelectCheckmarks from './multiple-select';
-import { ICharacter } from '../../models/interfaces';
+import { ICharacter, IPersonalGoal } from '../../models/interfaces';
 import { DamageType, Trait } from '../../models/enums';
 import { useCharacters } from '../../services';
 import { isMobile } from 'react-device-detect';
+import { CharacterTitle } from '../../shared-components/character-title';
+import { TextWithTooltip } from '../../shared-components/text-with-tooltip';
 
 export const Characters = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
@@ -36,10 +38,15 @@ export const Characters = () => {
             pinned: true,
         },
         {
-            field: 'name',
             headerName: 'Name',
             pinned: true,
             minWidth: 200,
+            cellRenderer: (props: ICellRendererParams<ICharacter>) => {
+                const character = props.data;
+                if(character) {
+                    return <CharacterTitle character={character} short={true} imageSize={30}/>;
+                }
+            }
         },
         {
             field: 'alliance',
