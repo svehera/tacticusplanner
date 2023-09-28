@@ -52,7 +52,7 @@ const Alliance = ({ alliance, characters }: { alliance: string, characters: ICha
     }
     return (<div>
         <h3>{alliance}</h3>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 50 }}>{itemList}</div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 50 }}>{itemList}</div>
     </div>);
 };
 
