@@ -4,9 +4,10 @@ import { AgGridReact } from 'ag-grid-react';
 import {
     CellClassParams, CellClickedEvent,
     ColDef,
-    ColGroupDef,
-    ITooltipParams, RowStyle,
-    ValueFormatterParams
+    ColGroupDef, 
+    ICellRendererParams,
+    ITooltipParams, 
+    RowStyle,
 } from 'ag-grid-community';
 
 import {
@@ -23,6 +24,7 @@ import { Rank, Rarity } from '../../models/enums';
 import CustomTableHeader from './custom-table-header';
 import { fitGridOnWindowResize } from '../../shared-logic/functions';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
+import { CharacterTitle } from '../../shared-components/character-title';
 
 export const LegendaryEventTrack = ({ track, selectChars }: {
     track: ILegendaryEventTrack;
@@ -95,7 +97,12 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
             field: u.name,
             headerName: `(${u.points}) ${u.name}`,
             headerTooltip: `(${u.points}) ${u.name}`,
-            valueFormatter: (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
+            cellRenderer: (props: ICellRendererParams<ICharacter>) => {
+                const character = props.value;
+                if(character) {
+                    return <CharacterTitle character={character} imageSize={30}/>;
+                }
+            },
             cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
             tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rarity[params.value?.rarity ?? 0] + ' - ' + Rank[params.value?.rank ?? 0],
             section: suffix,
@@ -126,12 +133,13 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
 
     return (
         <div className="ag-theme-material auto-teams"
-            style={{ height: 'calc((100vh - 150px) / 2)', width: '100%', border: '2px solid black' }}>
+            style={{ height: 'calc((100vh - 160px) / 2)', width: '100%', border: '2px solid black' }}>
             <AgGridReact
                 ref={gridRef}
                 tooltipShowDelay={100}
                 components={components}
                 rowData={rows}
+                rowHeight={35}
                 getRowStyle={getRowStyle}
                 columnDefs={columnsDefs}
                 onGridReady={fitGridOnWindowResize(gridRef)}

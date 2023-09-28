@@ -83,7 +83,7 @@ export const LegendaryEventPage = () => {
     }, [autoTeamsPreferences]);
 
     return (
-        <Box sx={{ padding: 2, paddingBottom: 0 }}>
+        <Box sx={{ paddingLeft: 2, paddingRight: 2, paddingBottom: 0 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
                 <Box sx={{ bgcolor: 'background.paper' }}>
                     <Tabs
