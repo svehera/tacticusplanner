@@ -6,6 +6,7 @@ import 'ag-grid-community/styles/ag-theme-material.css';
 import './index.css';
 
 import reportWebVitals from './reportWebVitals';
+import { FluentProvider, webLightTheme } from '@fluentui/react-components';
 
 import {
     createBrowserRouter,
@@ -31,8 +32,10 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <AuthProvider>
-            <SnackbarProvider autoHideDuration={5000} anchorOrigin={ isMobile ? mobileSnackbarOrigin : webSnackbarOrigin } onEntered={(node, isAppearing, key) => node.onclick = () => closeSnackbar(key)} />
-            <RouterProvider router={routes}/>
+            <FluentProvider theme={webLightTheme}>
+                <SnackbarProvider autoHideDuration={5000} anchorOrigin={ isMobile ? mobileSnackbarOrigin : webSnackbarOrigin } onEntered={(node, isAppearing, key) => node.onclick = () => closeSnackbar(key)} />
+                <RouterProvider router={routes}/>
+            </FluentProvider>,
         </AuthProvider>
     </React.StrictMode>
 );

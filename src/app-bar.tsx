@@ -12,6 +12,7 @@ import { isTabletOrMobileMediaQuery } from './models/constants';
 import { usePopUpControls } from './hooks/pop-up-controls';
 import { UserMenu } from './shared-components/user-menu/user-menu';
 import ViewSwitch from './shared-components/view-switch';
+import { AppBarSubMenu } from './app-bar-sub-menu';
 
 const TopAppBar = () => {
     const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
@@ -20,7 +21,7 @@ const TopAppBar = () => {
     const navigationMenuControls = usePopUpControls();
 
     const nav = isTabletOrMobile ? undefined : (
-        <div>
+        <div style={{ display: 'flex', alignItems: 'center', marginInlineEnd: 20 }}>
             <Button
                 onClick={() => setTitle('Who You Own')}
                 component={Link}
@@ -48,7 +49,7 @@ const TopAppBar = () => {
                 Goals
             </Button>
            
-            <SimpleMenu setTitle={setTitle}/>
+            <AppBarSubMenu setTitle={setTitle}/>
         </div>
     );
 
@@ -173,57 +174,5 @@ const TopAppBar = () => {
         </Box>
     );
 };
-
-function SimpleMenu({ setTitle }: {setTitle: (value: string) => void}) {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    function handleClick(event: any) {
-        if (anchorEl !== event.currentTarget) {
-            setAnchorEl(event.currentTarget);
-        }
-    }
-
-    function handleClose() {
-        setAnchorEl(null);
-    }
-
-    return (
-        <div style={{ display: 'inline-flex' }}>
-            <Button
-                color="inherit"
-                aria-owns={anchorEl ? 'simple-menu' : undefined}
-                aria-haspopup="true"
-                onClick={handleClick}
-                onMouseOver={handleClick}
-            >
-                Tables
-            </Button>
-            <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-                MenuListProps={{ onMouseLeave: handleClose }}
-            >
-                <MenuItem onClick={handleClose}> <Button
-                    onClick={() => setTitle('Characters')}
-                    component={Link}
-                    to={'./characters'}
-                    color="inherit"
-                >
-                    Characters
-                </Button></MenuItem>
-                <MenuItem onClick={handleClose}> <Button
-                    onClick={() => setTitle('Dirty Dozen')}
-                    component={Link}
-                    to={'./dirtyDozen'}
-                    color="inherit"
-                >
-                    Dirty Dozen
-                </Button></MenuItem>
-            </Menu>
-        </div>
-    );
-}
 
 export default TopAppBar;

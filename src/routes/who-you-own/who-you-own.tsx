@@ -1,6 +1,7 @@
 ﻿import React, { useMemo, useState } from 'react';
 
-import { DialogActions, DialogContent, DialogTitle, TextField, Tooltip } from '@mui/material';
+import { DialogActions, DialogContent, DialogTitle, TextField, } from '@mui/material';
+import { Tooltip } from '@fluentui/react-components';
 
 import { ICharacter } from '../../models/interfaces';
 import { PersonalDataService, useCharacters, usePersonalData } from '../../services';
@@ -106,11 +107,11 @@ const CharacterTitle =  ({ character }: { character: ICharacter }) => {
     return (
         <div style={{ display: 'flex', gap: 10, alignItems: 'center' }} >
             {/*<img src={images} height={50} alt={character.name}/>*/}
-            <CharacterImage character={character}/>
-            <span>{character.name} {emoji}</span>
-            <Tooltip title={Rarity[character.rarity]}><span>({Rarity[character.rarity][0]})</span></Tooltip>
-            {/*{character.unlocked ?  (<span>{Rank[character.rank]}</span>) : undefined}*/}
-            {character.unlocked ?  (<RankImage rank={character.rank}/>) : undefined}
+            <CharacterImage key={character.name} character={character}/>
+            <span>{character.name} </span>
+            <Tooltip content={Rarity[character.rarity]} relationship="description"><span>({Rarity[character.rarity][0]})</span></Tooltip>
+            {character.unlocked ?  (<RankImage key={character.rank} rank={character.rank}/>) : undefined}
+            <Tooltip content={character.bias === CharacterBias.AlwaysRecommend ? 'Always recommend first' : character.bias === CharacterBias.NeverRecommend ? 'Always recommend last' : ''} relationship={'description'}><span>{emoji}</span></Tooltip> 
         </div>
     );
 };
@@ -141,7 +142,7 @@ const RankImage = ({ rank }: { rank: Rank}) => {
 
         // If the image doesn't exist. return null
         if (!image) return <span>{Rank[rank]}</span>;
-        return <Tooltip title={rankTextValue} ><img src={image} height={30} alt={rankTextValue}/></Tooltip>;
+        return <Tooltip content={rankTextValue} relationship="label"><img src={image} height={30} alt={rankTextValue}/></Tooltip>;
     } catch (error) {
         console.log(`Image with name "${Rank[rank]}" does not exist`);
         return <span>{Rank[rank]}</span>;

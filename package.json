@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@fluentui/react-components": "^9.32.3",
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.4",
     "ag-grid-community": "^30.0.6",
