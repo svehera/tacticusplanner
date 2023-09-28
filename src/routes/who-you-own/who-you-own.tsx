@@ -35,7 +35,6 @@ export const WhoYouOwn = () => {
     );
 };
 
-
 const Alliance = ({ alliance, characters }: { alliance: string, characters: ICharacter[] }) => {
     const tt = groupBy(characters, 'faction');
     const itemList = [];
@@ -110,7 +109,8 @@ const CharacterTitle =  ({ character }: { character: ICharacter }) => {
             <CharacterImage character={character}/>
             <span>{character.name} {emoji}</span>
             <Tooltip title={Rarity[character.rarity]}><span>({Rarity[character.rarity][0]})</span></Tooltip>
-            {character.unlocked ?  (<span>{Rank[character.rank]}</span>) : undefined}
+            {/*{character.unlocked ?  (<span>{Rank[character.rank]}</span>) : undefined}*/}
+            {character.unlocked ?  (<RankImage rank={character.rank}/>) : undefined}
         </div>
     );
 };
@@ -128,5 +128,22 @@ const CharacterImage = ({ character }: { character: ICharacter}) => {
     } catch (error) {
         console.log(`Image with name "${character.icon}" does not exist`);
         return null;
+    }
+};
+
+const RankImage = ({ rank }: { rank: Rank}) => {
+    try {
+        // Import image on demand
+        const rankTextValue = Rank[rank];
+        
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const image = require(`../../assets/images/ranks/${rankTextValue.toLowerCase()}.png`);
+
+        // If the image doesn't exist. return null
+        if (!image) return <span>{Rank[rank]}</span>;
+        return <Tooltip title={rankTextValue} ><img src={image} height={30} alt={rankTextValue}/></Tooltip>;
+    } catch (error) {
+        console.log(`Image with name "${Rank[rank]}" does not exist`);
+        return <span>{Rank[rank]}</span>;
     }
 };
