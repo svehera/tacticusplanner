@@ -4,10 +4,10 @@ import { AgGridReact } from 'ag-grid-react';
 import {
     CellClassParams, CellClickedEvent,
     ColDef,
-    ColGroupDef, 
+    ColGroupDef,
     ICellRendererParams,
-    ITooltipParams, 
-    RowStyle,
+    ITooltipParams,
+    RowStyle, ValueFormatterParams,
 } from 'ag-grid-community';
 
 import {
@@ -46,10 +46,10 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
         {
             headerName: track.name + ' - ' + track.killPoints,
             headerClass: track.section,
-            children: getSectionColumns(track.unitsRestrictions, track.section),
+            children: getSectionColumns(track.unitsRestrictions, track.section, viewPreferences.lightWeight),
             openByDefault: true
         },
-    ], [legendaryEvent.id]);
+    ], [legendaryEvent.id, viewPreferences.lightWeight]);
 
     const [restrictions, setRestrictions] = useState<string[]>(() => track.unitsRestrictions.filter(x => x.core).map((x => x.name)));
     
@@ -92,12 +92,13 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
         }
     };
 
-    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], suffix: LegendaryEventSection): Array<ColDef> {
+    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], suffix: LegendaryEventSection, lightweight: boolean): Array<ColDef> {
         return unitsRestrictions.map((u) => ({
             field: u.name,
             headerName: `(${u.points}) ${u.name}`,
             headerTooltip: `(${u.points}) ${u.name}`,
-            cellRenderer: (props: ICellRendererParams<ICharacter>) => {
+            valueFormatter: !lightweight ? undefined : (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
+            cellRenderer: lightweight ? undefined : (props: ICellRendererParams<ICharacter>) => {
                 const character = props.value;
                 if(character) {
                     return <CharacterTitle character={character} imageSize={30}/>;

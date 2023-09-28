@@ -191,6 +191,7 @@ export interface IViewPreferences {
   showAlpha: boolean;
   showBeta: boolean;
   showGamma: boolean;
+  lightWeight: boolean;
 }
 
 export interface IAutoTeamsPreferences {

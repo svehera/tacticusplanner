@@ -4,9 +4,9 @@ import { AgGridReact } from 'ag-grid-react';
 import {
     CellClassParams, CellClickedEvent,
     ColDef,
-    ColGroupDef, 
+    ColGroupDef,
     ICellRendererParams,
-    ITooltipParams,
+    ITooltipParams, ValueFormatterParams,
 } from 'ag-grid-community';
 
 import {
@@ -27,6 +27,7 @@ export const SelectedTeamsTable = (props: {
     teams: Record<string, Array<ICharacter | string>>;
     deselectChars: (teamName: string, ...chars: string[]) => void
 }) => {
+    const viewSettings = useContext(ViewSettingsContext);
     const { track, teams, deselectChars } = props;
     const gridRef = useRef<AgGridReact>(null);
 
@@ -49,10 +50,10 @@ export const SelectedTeamsTable = (props: {
         {
             headerName: track.name,
             headerClass: track.section,
-            children: getSectionColumns(track.unitsRestrictions),
+            children: getSectionColumns(track.unitsRestrictions, viewSettings.lightWeight),
             openByDefault: true
         },
-    ], [legendaryEvent.id]);
+    ], [legendaryEvent.id, viewSettings.lightWeight]);
 
     const handleCellCLick = (cellClicked: CellClickedEvent<ITableRow[], ICharacter>) => {
         const teamName = cellClicked.column.getColId();
@@ -75,12 +76,13 @@ export const SelectedTeamsTable = (props: {
         gridRef.current?.api?.sizeColumnsToFit();
     }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, legendaryEvent.id]);
 
-    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[]): Array<ColDef> {
+    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], lightweight: boolean): Array<ColDef> {
         return unitsRestrictions.map((u) => ({
             field: u.name,
             headerName: u.name,
             headerTooltip: u.name,
-            cellRenderer: (props: ICellRendererParams<ICharacter>) => {
+            valueFormatter: !lightweight ? undefined : (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
+            cellRenderer: lightweight ? undefined : (props: ICellRendererParams<ICharacter>) => {
                 const character = props.value;
                 if(character) {
                     return <CharacterTitle character={character} imageSize={30}/>;
