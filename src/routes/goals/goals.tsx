@@ -3,7 +3,7 @@ import React, { useMemo, useRef, useState } from 'react';
 import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 import { IPersonalGoal } from '../../models/interfaces';
 import Box from '@mui/material/Box';
-import { PersonalGoalType, Rank, Rarity } from '../../models/enums';
+import { PersonalGoalType } from '../../models/enums';
 
 import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
@@ -15,16 +15,7 @@ import { RankImage } from '../../shared-components/rank-image';
 import { RarityImage } from '../../shared-components/rarity-image';
 import { Tooltip } from '@fluentui/react-components';
 import { TextWithTooltip } from '../../shared-components/text-with-tooltip';
-
-
-export interface IPersonalGoalRow {
-    goalId: string;
-    character: string;
-    goalType: string;
-    current: string;
-    goal: string;
-    notes?: string;
-}
+import { CharacterTitle } from '../../shared-components/character-title';
 
 export const Goals = () => {
     const { characters } = useCharacters();
@@ -85,16 +76,20 @@ export const Goals = () => {
             headerName: 'Priority',
             valueGetter: (params) => (params.node?.rowIndex ?? 0) + 1,
             maxWidth: 75,
-            width: 75,
-            minWidth: 75,
+            minWidth: 50,
             rowDrag: true
         },
         {
             headerName: 'Character',
+            minWidth: 30,
             cellRenderer: (props: ICellRendererParams<IPersonalGoal>) => {
                 const personalGoal = props.data;
                 if(!personalGoal) {
                     return undefined;
+                }
+                const character = characters.find(x => x.name === personalGoal.character);
+                if(character) {
+                    return <CharacterTitle character={character} short={true} imageSize={30}/>;
                 }
                 
                 return <TextWithTooltip text={personalGoal.character}/>;
@@ -102,6 +97,7 @@ export const Goals = () => {
         },
         {
             headerName: 'Goal Type',
+            minWidth: 30,
             cellRenderer: (props: ICellRendererParams<IPersonalGoal>) => {
                 const personalGoal = props.data;
                 if(!personalGoal) {
@@ -120,6 +116,7 @@ export const Goals = () => {
         },
         {
             headerName: 'Current',
+            minWidth: 30,
             cellRenderer: (props: ICellRendererParams<IPersonalGoal>) => {
                 const personalGoal = props.data;
                 if(!personalGoal) {
@@ -139,6 +136,7 @@ export const Goals = () => {
         },
         {
             headerName: 'Goal',
+            minWidth: 30,
             cellRenderer: (props: ICellRendererParams<IPersonalGoal>) => {
                 const personalGoal = props.data;
                 if(!personalGoal) {
@@ -158,6 +156,7 @@ export const Goals = () => {
         },
         {
             headerName: 'Notes',
+            minWidth: 30,
             cellRenderer: (props: ICellRendererParams<IPersonalGoal>) => {
                 const personalGoal = props.data;
                 if(!personalGoal || !personalGoal.notes) {
@@ -168,46 +167,16 @@ export const Goals = () => {
             }
         },
         {
-            maxWidth: 75,
-            width: 75,
-            minWidth: 75,
+            maxWidth: 40,
+            width: 40,
+            minWidth: 40,
             cellRenderer: GoalOptionsCell,
             cellRendererParams: {
                 removeGoal
             }
         },
     ], []);
-
-    const rows = useMemo<Array<IPersonalGoalRow>>(() => {
-        return goals.map(personalGoal => {
-            const character = characters.find(x => x.name === personalGoal.character);
-            let goalType = '';
-            let current = '';
-            let goal = '';
-
-            if (personalGoal.type === PersonalGoalType.UpgradeRank) {
-                goalType = 'Upgrade Rank';
-                current = Rank[character?.rank ?? 0];
-                goal = Rank[personalGoal.targetRank ?? 0];
-            }
-
-            if (personalGoal.type === PersonalGoalType.Ascend) {
-                goalType = 'Ascend';
-                current = Rarity[character?.rarity ?? 0];
-                goal = Rarity[personalGoal.targetRarity ?? 0];
-            }
-
-            return {
-                goalId: personalGoal.id,
-                character: personalGoal.character,
-                goalType,
-                current,
-                goal,
-                notes: personalGoal.notes
-            };
-        });
-    }, [goals]);
-
+    
     return (
         <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -216,7 +185,6 @@ export const Goals = () => {
                         <Button variant={'outlined'} disabled={disableNewGoals} onClick={() => setShowSetGoals(true)}>Set Goal</Button>
                     </span>
                 </Tooltip>
-                { isMobile ? (<span>Use horizontal view</span>): undefined }
             </div>
 
             <SetGoalDialog key={goals.length} isOpen={showSetGoals} onClose={(goal) => {
@@ -228,6 +196,10 @@ export const Goals = () => {
                     <AgGridReact<IPersonalGoal>
                         ref={gridRef}
                         rowData={goals}
+                        defaultColDef={{
+                            cellStyle: { padding: 5 }
+                        }}
+                        rowHeight={45}
                         suppressCellFocus={true}
                         columnDefs={columnsDef}
                         animateRows={true}

@@ -33,3 +33,52 @@ export const getCharName = (character: ICharacter): string => {
         return `${character.name} (${rarity} ${rank}) ${emoji}`;
     }
 };
+
+export const rankToString = (rank: Rank): string => {
+    switch (rank) {
+    case Rank.Stone1:
+        return 'Stone I';
+    case Rank.Stone2:
+        return 'Stone II';
+    case Rank.Stone3:
+        return 'Stone III';
+    case Rank.Iron1:
+        return 'Iron I';
+    case Rank.Iron2:
+        return 'Iron II';
+    case Rank.Iron3:
+        return 'Iron III';
+    case Rank.Bronze1:
+        return 'Bronze I';
+    case Rank.Bronze2:
+        return 'Bronze II';
+    case Rank.Bronze3:
+        return 'Bronze III';
+    case Rank.Silver1:
+        return 'Silver I';
+    case Rank.Silver2:
+        return 'Silver II';
+    case Rank.Silver3:
+        return 'Silver III';
+    case Rank.Gold1:
+        return 'Gold I';
+    case Rank.Gold2:
+        return 'Gold II';
+    case Rank.Gold3:
+        return 'Gold III';
+    case Rank.Diamond1:
+        return 'Diamond I';
+    case Rank.Diamond2:
+        return 'Diamond II';
+    case Rank.Diamond3:
+        return 'Diamond III';
+    default:
+        return '';
+    }
+};
+
+export const getEnumValues = (enumObj: any): number[] => {
+    return Object.keys(enumObj)
+        .filter((key) => typeof enumObj[key] === 'number')
+        .map((key) => enumObj[key]);
+};

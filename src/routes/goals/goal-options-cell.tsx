@@ -3,14 +3,14 @@ import { ICellRendererParams } from 'ag-grid-community';
 import { Tooltip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import { DeleteForever } from '@mui/icons-material';
-import { IPersonalGoalRow } from './goals';
+import { IPersonalGoal } from '../../models/interfaces';
 
-const GoalOptionsCell = (props: ICellRendererParams<IPersonalGoalRow> & {
+const GoalOptionsCell = (props: ICellRendererParams<IPersonalGoal> & {
     removeGoal: (goalId: string) => void
 }) => {
     return (
         <Tooltip title="Remove goal">
-            <IconButton style={{ padding: 0 }} onClick={() => props.removeGoal(props.data?.goalId ?? '')} ><DeleteForever/></IconButton>
+            <IconButton style={{ padding: 0 }} onClick={() => props.removeGoal(props.data?.id ?? '')} ><DeleteForever/></IconButton>
         </Tooltip>
     );
 

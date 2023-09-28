@@ -13,14 +13,19 @@ import {
 import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
-import { IPersonalGoal } from '../../models/interfaces';
+import { ICharacter, IPersonalGoal } from '../../models/interfaces';
 import { v4 } from 'uuid';
 import { PersonalGoalType, Rank, Rarity } from '../../models/enums';
 import { useCharacters } from '../../services';
 import InputLabel from '@mui/material/InputLabel';
+import { CharacterTitle } from '../character-title';
+import { getEnumValues, rankToString } from '../../shared-logic/functions';
+import { RankImage } from '../rank-image';
 
 export const SetGoalDialog = ({ isOpen, onClose }: { isOpen: boolean, onClose: (goal?: IPersonalGoal) => void }) => {
     const { characters } = useCharacters();
+    const [open, setOpen] = React.useState(false);
+    const [character, setCharacter] = React.useState<ICharacter | null>(null);
     const [form, setForm] = useState<IPersonalGoal>(() =>({
         id: v4(),
         character: '',
@@ -28,9 +33,12 @@ export const SetGoalDialog = ({ isOpen, onClose }: { isOpen: boolean, onClose: (
         targetRarity: Rarity.Uncommon,
         targetRank: Rank.Stone1
     }));
-    
-    const charactersNames = useMemo(() => characters.map(x => x.name).sort(), [characters.length]);
-    
+
+    const rarityValues = useMemo(() => {
+        const result = getEnumValues(Rarity).filter(x => x > 0 && (!character || x >= character.rarity));
+        setForm(curr => ({ ...curr, targetRarity: character?.rarity ?? result[0] }));
+        return result;
+    }, [character]);
     
     const targetRaritySelector = (
         <FormControl style={{ marginTop: 20 }} fullWidth >
@@ -39,17 +47,24 @@ export const SetGoalDialog = ({ isOpen, onClose }: { isOpen: boolean, onClose: (
                 id="target-rarity"
                 labelId="target-rarity-label"
                 label="Target Rarity"
-                defaultValue={Rarity.Uncommon}
+                defaultValue={rarityValues[0]}
+                value={form.targetRarity}
                 onChange={event => setForm(curr => ({ ...curr, targetRarity: +event.target.value }))}
             >
-                <MenuItem value={Rarity.Uncommon}>Uncommon</MenuItem>
-                <MenuItem value={Rarity.Rare}>Rare</MenuItem>
-                <MenuItem value={Rarity.Epic}>Epic</MenuItem>
-                <MenuItem value={Rarity.Legendary}>Legendary</MenuItem>
+                {rarityValues.map(rarity => (
+                    <MenuItem key={rarity} value={rarity}>
+                        {Rarity[rarity]}
+                    </MenuItem>))}
             </Select>
         </FormControl>
     );
 
+    const rankValues = useMemo(() => {
+        const result = getEnumValues(Rank).filter(x => x > 0 && (!character || x >= character.rank));
+        setForm(curr => ({ ...curr, targetRank: character?.rank ?? result[0] }));
+        return result;
+    }, [character]);
+    
     const targetRankSelector = (
         <FormControl style={{ marginTop: 20 }} fullWidth >
             <InputLabel id="target-rank-label">Target Rank</InputLabel>
@@ -57,46 +72,69 @@ export const SetGoalDialog = ({ isOpen, onClose }: { isOpen: boolean, onClose: (
                 id="target-rank"
                 labelId="target-rank-label"
                 label="Target Rank"
-                defaultValue={Rank.Stone1}
+                defaultValue={rankValues[0]}
+                value={form.targetRank}
                 onChange={event => setForm(curr => ({ ...curr, targetRank: +event.target.value }))}
             >
-                <MenuItem value={Rank.Stone1}>Stone I</MenuItem>
-                <MenuItem value={Rank.Stone2}>Stone II</MenuItem>
-                <MenuItem value={Rank.Stone3}>Stone III</MenuItem>
-                
-                <MenuItem value={Rank.Iron1}>Iron I</MenuItem>
-                <MenuItem value={Rank.Iron2}>Iron II</MenuItem>
-                <MenuItem value={Rank.Iron3}>Iron III</MenuItem>
-
-                <MenuItem value={Rank.Bronze1}>Bronze I</MenuItem>
-                <MenuItem value={Rank.Bronze2}>Bronze II</MenuItem>
-                <MenuItem value={Rank.Bronze3}>Bronze III</MenuItem>
-
-                <MenuItem value={Rank.Silver1}>Silver I</MenuItem>
-                <MenuItem value={Rank.Silver2}>Silver II</MenuItem>
-                <MenuItem value={Rank.Silver3}>Silver III</MenuItem>
-
-                <MenuItem value={Rank.Gold1}>Gold I</MenuItem>
-                <MenuItem value={Rank.Gold2}>Gold II</MenuItem>
-                <MenuItem value={Rank.Gold3}>Gold III</MenuItem>
-
-                <MenuItem value={Rank.Diamond1}>Diamond I</MenuItem>
-                <MenuItem value={Rank.Diamond2}>Diamond II</MenuItem>
-                <MenuItem value={Rank.Diamond3}>Diamond III</MenuItem>
+                {rankValues.map(rank => (
+                    <MenuItem key={rank} value={rank}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+                            <span>{rankToString(rank)}</span>  
+                            <RankImage rank={rank}/>
+                        </div>
+                    </MenuItem>))}
             </Select>
         </FormControl>
     );
     
+    const updateValue = (value: ICharacter | null): void =>{
+        if(character?.name !== value?.name) {
+            setCharacter(value);
+            setForm(curr => ({ ...curr, character: value?.name ?? '' }));
+            setOpen(false);
+        }
+    };
+    
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+        const key = event.key;
+        if(key === 'Enter') {
+            const value = (event.target as HTMLInputElement).value ?? '';
+            const char = characters.find(x => x.name.toLowerCase().includes(value.toLowerCase()));
+            if(char) {
+                updateValue(char);
+            }
+        }
+    };
+    
+    const handleClose = (value?: IPersonalGoal) => {
+        setCharacter(null);
+        onClose(value);
+    };
+    
     return (
-        <Dialog open={isOpen} onClose={() => onClose()} fullWidth>
-            <DialogTitle>Set Goal</DialogTitle>
+        <Dialog open={isOpen} onClose={() => handleClose()} fullWidth>
+            <DialogTitle style={{ display: 'flex', alignItems: 'center', gap: 15 }}><span>Set Goal</span> { character ? <CharacterTitle character={character}/> : undefined}</DialogTitle>
             <DialogContent>
                 <Box component="form" id="set-goal-form" style={{ padding: 20 }} onSubmit={event => event.preventDefault()}>
                     <Autocomplete
                         id="combo-box-demo"
-                        options={charactersNames}
-                        onChange={(_,value)  => setForm(curr => ({ ...curr, character: value ?? '' }))}
-                        renderInput={(params) => <TextField {...params} label="Character" fullWidth/>}
+                        options={characters}
+                        value={character}
+                        open={open}
+                        onFocus={() => setOpen(true)}
+                        onBlur={() => setOpen(false)}
+                        getOptionLabel={option => option.name}
+                        isOptionEqualToValue={(option, value) => option.name === value.name}
+                        renderOption={(props, option) => (<CharacterTitle {...props} key={option.name} character={option} showLockedWithOpacity={true} onClick={() => updateValue(option)}/>)}
+                        onChange={(_, value) => updateValue(value)}
+                        renderInput={(params) => 
+                            <TextField 
+                                {...params} 
+                                fullWidth
+                                onChange={() => setOpen(true)} 
+                                label="Character"
+                                onKeyDown={handleKeyDown}
+                            />}
                     />
 
                     <FormControl style={{ marginTop: 20 }} fullWidth >
@@ -113,8 +151,8 @@ export const SetGoalDialog = ({ isOpen, onClose }: { isOpen: boolean, onClose: (
                         </Select>
                     </FormControl>
                     
-                    { form.type === PersonalGoalType.UpgradeRank ? targetRankSelector : undefined }
-                    { form.type === PersonalGoalType.Ascend ? targetRaritySelector : undefined }
+                    { character && form.type === PersonalGoalType.UpgradeRank ? targetRankSelector : undefined }
+                    { character && form.type === PersonalGoalType.Ascend ? targetRaritySelector : undefined }
                     
                     <TextField
                         style={{ marginTop: 20 }}
@@ -129,8 +167,8 @@ export const SetGoalDialog = ({ isOpen, onClose }: { isOpen: boolean, onClose: (
                 </Box>
             </DialogContent>
             <DialogActions>
-                <Button onClick={() => onClose()}>Cancel</Button>
-                <Button disabled={!form.character} form="set-goal-form" type="submit" onClick={() => onClose(form)}>Set</Button>
+                <Button onClick={() => handleClose()}>Cancel</Button>
+                <Button disabled={!form.character} onClick={() => handleClose(form)}>Set</Button>
             </DialogActions>
         </Dialog>
     );

@@ -12,7 +12,7 @@ export const RankImage = ({ rank }: { rank: Rank}) => {
 
         // If the image doesn't exist. return null
         if (!image) return <span>{Rank[rank]}</span>;
-        return <Tooltip content={rankTextValue} relationship="label" hideDelay={1000}><img src={image} height={30} alt={rankTextValue}/></Tooltip>;
+        return <Tooltip content={rankTextValue} relationship="label" hideDelay={1000}><span><img style={{ pointerEvents: 'none' }}  src={image} height={30} alt={rankTextValue}/></span></Tooltip>;
     } catch (error) {
         console.log(`Image with name "${Rank[rank]}" does not exist`);
         return <span>{Rank[rank]}</span>;

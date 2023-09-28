@@ -1,20 +1,16 @@
 ﻿import React, { useMemo, useState } from 'react';
 
 import { DialogActions, DialogContent, DialogTitle, TextField, } from '@mui/material';
-import { Tooltip } from '@fluentui/react-components';
 
 import { ICharacter } from '../../models/interfaces';
 import { PersonalDataService, useCharacters, usePersonalData } from '../../services';
 
-import { CharacterBias, Rank, Rarity } from '../../models/enums';
 import { groupBy } from 'lodash';
 import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import { CharacterDetails } from '../../mobile-routes/characters/character-details';
 import Button from '@mui/material/Button';
-import { pooEmoji, starEmoji } from '../../models/constants';
-import { RankImage } from '../../shared-components/rank-image';
-import { RarityImage } from '../../shared-components/rarity-image';
+import { CharacterTitle } from '../../shared-components/character-title';
 
 export const WhoYouOwn = () => {
     const { characters } = useCharacters();
@@ -79,9 +75,9 @@ const CharacterItem = (props: { character: ICharacter }) => {
     };
     
     return (
-        <div style={{ opacity: props.character.unlocked ? 1 : 0.5, cursor: 'pointer' }}>
-            <div onClick={handleClickOpen}>
-                <CharacterTitle character={props.character}/>
+        <div>
+            <div onClick={handleClickOpen} style={{ cursor: 'pointer' }}>
+                <CharacterTitle character={props.character} showLockedWithOpacity={true}/>
             </div>
             
             <Dialog open={open} onClose={handleClose} fullWidth>
@@ -103,35 +99,9 @@ const CharacterItem = (props: { character: ICharacter }) => {
     );
 };
 
-const CharacterTitle =  ({ character }: { character: ICharacter }) => {
-    const emoji = character.bias === CharacterBias.AlwaysRecommend ? starEmoji : character.bias === CharacterBias.NeverRecommend ? pooEmoji : '';
-    
-    return (
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }} >
-            {/*<img src={images} height={50} alt={character.name}/>*/}
-            <CharacterImage key={character.name} character={character}/>
-            <span>{character.name} </span>
-            <RarityImage rarity={character.rarity}/>
-            {character.unlocked ?  (<RankImage key={character.rank} rank={character.rank}/>) : undefined}
-            <Tooltip content={character.bias === CharacterBias.AlwaysRecommend ? 'Always recommend first' : character.bias === CharacterBias.NeverRecommend ? 'Always recommend last' : ''} relationship={'description'}><span>{emoji}</span></Tooltip> 
-        </div>
-    );
-};
 
 
-const CharacterImage = ({ character }: { character: ICharacter}) => {
-    try {
-        // Import image on demand
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const image = require(`../../assets/images/characters/${character.icon}`);
 
-        // If the image doesn't exist. return null
-        if (!image) return null;
-        return <img src={image} height={50} alt={character.name}/>;
-    } catch (error) {
-        console.log(`Image with name "${character.icon}" does not exist`);
-        return null;
-    }
-};
+
 
 
