@@ -37,13 +37,13 @@ export const WhoYouOwn = () => {
 };
 
 const Alliance = ({ alliance, characters }: { alliance: string, characters: ICharacter[] }) => {
-    const tt = groupBy(characters, 'faction');
+    const charactersByFaction = groupBy(characters, 'faction');
     const itemList = [];
 
-    for (const testKey in tt) {
-        const chars = tt[testKey];
-        itemList.push(<div key={testKey}>
-            <h4>{testKey}</h4>
+    for (const faction in charactersByFaction) {
+        const chars = charactersByFaction[faction];
+        itemList.push(<div key={faction}>
+            <h4 style={{ background: chars[0].factionColor }}>{faction}</h4>
 
             {chars.map((item) => {
                 return <CharacterItem key={item.name} character={item} />;

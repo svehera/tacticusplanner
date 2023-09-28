@@ -88,7 +88,7 @@ export class StaticDataService {
         case Faction.Thousand_Sons:
             return '#A4C2F4';
         case Faction.Tyranids:
-            return '#A4C2F4';
+            return 'violet';
         default:
             return '#ffffff';
         }
