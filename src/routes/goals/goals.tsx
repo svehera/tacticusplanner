@@ -5,13 +5,16 @@ import { IPersonalGoal } from '../../models/interfaces';
 import Box from '@mui/material/Box';
 import { PersonalGoalType, Rank, Rarity } from '../../models/enums';
 
-import Tooltip from '@mui/material/Tooltip';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { fitGridOnWindowResize } from '../../shared-logic/functions';
 import { useCharacters, usePersonalData } from '../../services';
 import GoalOptionsCell from './goal-options-cell';
 import { isMobile } from 'react-device-detect';
+import { RankImage } from '../../shared-components/rank-image';
+import { RarityImage } from '../../shared-components/rarity-image';
+import { Tooltip } from '@fluentui/react-components';
+import { TextWithTooltip } from '../../shared-components/text-with-tooltip';
 
 
 export interface IPersonalGoalRow {
@@ -77,7 +80,7 @@ export const Goals = () => {
         });
     };
 
-    const columnsDef = useMemo<Array<ColDef<IPersonalGoalRow>>>(() => [
+    const columnsDef = useMemo<Array<ColDef<IPersonalGoal>>>(() => [
         {
             headerName: 'Priority',
             valueGetter: (params) => (params.node?.rowIndex ?? 0) + 1,
@@ -88,24 +91,81 @@ export const Goals = () => {
         },
         {
             headerName: 'Character',
-            field: 'character'
+            cellRenderer: (props: ICellRendererParams<IPersonalGoal>) => {
+                const personalGoal = props.data;
+                if(!personalGoal) {
+                    return undefined;
+                }
+                
+                return <TextWithTooltip text={personalGoal.character}/>;
+            }
         },
         {
             headerName: 'Goal Type',
-            field: 'goalType'
+            cellRenderer: (props: ICellRendererParams<IPersonalGoal>) => {
+                const personalGoal = props.data;
+                if(!personalGoal) {
+                    return undefined;
+                }
+                if (personalGoal.type === PersonalGoalType.UpgradeRank) {
+                    return <TextWithTooltip text={'Upgrade Rank'}/>;
+                }
+
+                if (personalGoal.type === PersonalGoalType.Ascend) {
+                    return <TextWithTooltip text={'Ascend'}/>;
+                }
+
+                return undefined;
+            }
         },
         {
             headerName: 'Current',
-            field: 'current'
+            cellRenderer: (props: ICellRendererParams<IPersonalGoal>) => {
+                const personalGoal = props.data;
+                if(!personalGoal) {
+                    return undefined;
+                }
+                const character = characters.find(x => x.name === personalGoal.character);
+                if (personalGoal.type === PersonalGoalType.UpgradeRank) {
+                    return <RankImage rank={character?.rank ?? 0}/>;
+                }
+
+                if (personalGoal.type === PersonalGoalType.Ascend) {
+                    return <RarityImage rarity={character?.rarity ?? 0}/>;
+                }
+                
+                return undefined;
+            }
         },
         {
             headerName: 'Goal',
-            field: 'goal'
+            cellRenderer: (props: ICellRendererParams<IPersonalGoal>) => {
+                const personalGoal = props.data;
+                if(!personalGoal) {
+                    return undefined;
+                }
+                
+                if (personalGoal.type === PersonalGoalType.UpgradeRank) {
+                    return <RankImage rank={personalGoal.targetRank ?? 0}/>;
+                }
+
+                if (personalGoal.type === PersonalGoalType.Ascend) {
+                    return <RarityImage rarity={personalGoal?.targetRarity ?? 0}/>;
+                }
+
+                return undefined;
+            }
         },
         {
             headerName: 'Notes',
-            field: 'notes',
-            tooltipField: 'notes'
+            cellRenderer: (props: ICellRendererParams<IPersonalGoal>) => {
+                const personalGoal = props.data;
+                if(!personalGoal || !personalGoal.notes) {
+                    return undefined;
+                }
+
+                return <TextWithTooltip text={personalGoal.notes}/>;
+            }
         },
         {
             maxWidth: 75,
@@ -151,7 +211,7 @@ export const Goals = () => {
     return (
         <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <Tooltip title="You can have only 20 goals at the same time" disableHoverListener={!disableNewGoals}>
+                <Tooltip content="You can have only 20 goals at the same time" relationship={'description'} visible={disableNewGoals}>
                     <span>
                         <Button variant={'outlined'} disabled={disableNewGoals} onClick={() => setShowSetGoals(true)}>Set Goal</Button>
                     </span>
@@ -165,9 +225,10 @@ export const Goals = () => {
             }}/>
             <Box>
                 <div className="ag-theme-material" style={{ height: 'calc(100vh - 150px)', width: '100%' }}>
-                    <AgGridReact<IPersonalGoalRow>
+                    <AgGridReact<IPersonalGoal>
                         ref={gridRef}
-                        rowData={rows}
+                        rowData={goals}
+                        suppressCellFocus={true}
                         columnDefs={columnsDef}
                         animateRows={true}
                         rowDragManaged={true}
@@ -175,7 +236,7 @@ export const Goals = () => {
                         onGridReady={fitGridOnWindowResize(gridRef)}
                         onRowDragEnd={(event) => {
                             gridRef.current?.api?.refreshCells();
-                            reorderGoal(event.node.data?.goalId ?? '', event.overIndex);
+                            reorderGoal(event.node.data?.id ?? '', event.overIndex);
                         }}
                     >
                     </AgGridReact>

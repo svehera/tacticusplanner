@@ -13,6 +13,8 @@ import Dialog from '@mui/material/Dialog';
 import { CharacterDetails } from '../../mobile-routes/characters/character-details';
 import Button from '@mui/material/Button';
 import { pooEmoji, starEmoji } from '../../models/constants';
+import { RankImage } from '../../shared-components/rank-image';
+import { RarityImage } from '../../shared-components/rarity-image';
 
 export const WhoYouOwn = () => {
     const { characters } = useCharacters();
@@ -109,7 +111,7 @@ const CharacterTitle =  ({ character }: { character: ICharacter }) => {
             {/*<img src={images} height={50} alt={character.name}/>*/}
             <CharacterImage key={character.name} character={character}/>
             <span>{character.name} </span>
-            <Tooltip content={Rarity[character.rarity]} relationship="description"><span>({Rarity[character.rarity][0]})</span></Tooltip>
+            <RarityImage rarity={character.rarity}/>
             {character.unlocked ?  (<RankImage key={character.rank} rank={character.rank}/>) : undefined}
             <Tooltip content={character.bias === CharacterBias.AlwaysRecommend ? 'Always recommend first' : character.bias === CharacterBias.NeverRecommend ? 'Always recommend last' : ''} relationship={'description'}><span>{emoji}</span></Tooltip> 
         </div>
@@ -132,19 +134,4 @@ const CharacterImage = ({ character }: { character: ICharacter}) => {
     }
 };
 
-const RankImage = ({ rank }: { rank: Rank}) => {
-    try {
-        // Import image on demand
-        const rankTextValue = Rank[rank];
-        
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const image = require(`../../assets/images/ranks/${rankTextValue.toLowerCase()}.png`);
 
-        // If the image doesn't exist. return null
-        if (!image) return <span>{Rank[rank]}</span>;
-        return <Tooltip content={rankTextValue} relationship="label"><img src={image} height={30} alt={rankTextValue}/></Tooltip>;
-    } catch (error) {
-        console.log(`Image with name "${Rank[rank]}" does not exist`);
-        return <span>{Rank[rank]}</span>;
-    }
-};
