@@ -35,6 +35,7 @@ export class StaticDataService {
             requiredInCampaign: rawData.RequiredInCampaign,
             legendaryEvents: {} as ICharLegendaryEvents,
             traits: rawData.Traits,
+            icon: rawData.Icon,
             damageTypes: {
                 all: [rawData['Melee Damage']],
                 melee: rawData['Melee Damage'],

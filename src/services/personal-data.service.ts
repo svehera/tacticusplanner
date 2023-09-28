@@ -182,6 +182,7 @@ export const usePersonalData = () => {
                 existingChar.leSelection = character.leSelection;
                 existingChar.alwaysRecommend = character.alwaysRecommend;
                 existingChar.neverRecommend = character.neverRecommend;
+                existingChar.bias = character.bias;
             } else {
                 data.characters.push({
                     name: character.name,
@@ -193,9 +194,7 @@ export const usePersonalData = () => {
                     neverRecommend: character.neverRecommend,
                     progress: character.progress,
                     rarityStars: character.rarityStars,
-                    currentShards: 0,
-                    targetRarity: character.rarity,
-                    targetRarityStars: character.rarityStars,
+                    bias: character.bias
                 });
             }
 

@@ -1,181 +1,132 @@
-﻿import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
-import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ColGroupDef, RowStyle } from 'ag-grid-community';
-import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
+﻿import React, { useMemo, useState } from 'react';
 
-import { TextField } from '@mui/material';
+import { DialogActions, DialogContent, DialogTitle, TextField, Tooltip } from '@mui/material';
 
 import { ICharacter } from '../../models/interfaces';
 import { PersonalDataService, useCharacters, usePersonalData } from '../../services';
 
-import SelectorCell from '../../shared-components/selector-cell';
-import CheckboxCell from '../../shared-components/checkbox-cell';
-import { Rank, Rarity } from '../../models/enums';
-import { fitGridOnWindowResize } from '../../shared-logic/functions';
+import { CharacterBias, Rank, Rarity } from '../../models/enums';
+import { groupBy } from 'lodash';
+import Box from '@mui/material/Box';
+import Dialog from '@mui/material/Dialog';
+import { CharacterDetails } from '../../mobile-routes/characters/character-details';
+import Button from '@mui/material/Button';
+import { pooEmoji, starEmoji } from '../../models/constants';
 
 export const WhoYouOwn = () => {
-    const gridRef = useRef<AgGridReact<ICharacter>>(null);
-    const { addOrUpdateCharacterData } = usePersonalData();
-    
-    const defaultColDef: ColDef<ICharacter> = {
-        sortable: true
-    };
-
-    const onFilterTextBoxChanged = useCallback((change: ChangeEvent<HTMLInputElement>) => {
-        gridRef.current?.api.setQuickFilter(
-            change.target.value
-        );
-    }, []);
-    
-    const [columnDefs] = useState<Array<ColDef | ColGroupDef>>([
-        {
-            headerName: 'Faction Details',
-            children: [
-                { 
-                    field: 'name', 
-                    headerName: 'Name',
-                    pinned: true,
-                    minWidth: 200,
-                },
-                { 
-                    field: 'alliance', 
-                    headerName: 'Alliance', 
-                    columnGroupShow: 'open',
-                    minWidth: 100,
-                },
-                { 
-                    field: 'faction',
-                    headerName: 'Faction',
-                    columnGroupShow: 'open',
-                    minWidth: 170,
-                }
-            ],
-        },
-        {
-            headerName: 'Owner data',
-            openByDefault: true,
-            children: [
-                {
-                    headerName: 'Unlocked',
-                    editable: true,
-                    cellRenderer: CheckboxCell,
-                    cellRendererParams: {
-                        editProperty: 'unlocked',
-                    },
-                    field: 'unlocked',
-                    minWidth: 100,
-                },
-                // {
-                //     headerName: 'Progression',
-                //     editable: true,
-                //     cellRenderer: CheckboxCell,
-                //     cellRendererParams: {
-                //         editProperty: 'progress',
-                //     },
-                //     tooltipValueGetter: () => 'When checked character will be displayed on Progression view',
-                //     field: 'progress',
-                //     width: 100,
-                //     minWidth: 100,
-                //     minWidth: 100,
-                // },
-                {
-                    headerName: 'Rank',
-                    editable: true,
-                    cellRenderer: SelectorCell,
-                    cellRendererParams: {
-                        editProperty: 'rank',
-                        enumObject: Rank
-                    },
-                    field: 'rank',
-                    minWidth: 150,
-                    cellStyle: { padding: 0 },
-                },
-                {
-                    headerName: 'Rarity',
-                    editable: true,
-                    cellRenderer: SelectorCell,
-                    cellRendererParams: {
-                        editProperty: 'rarity',
-                        enumObject: Rarity
-                    },
-                    field: 'rarity',
-                    minWidth: 150,
-                    cellStyle: { padding: 0 },
-                },
-                // {
-                //     headerName: 'Stars',
-                //     editable: true,
-                //     cellRenderer: SelectorCell,
-                //     cellRendererParams: {
-                //         editProperty: 'rarityStars',
-                //         enumObject: RarityStars
-                //     },
-                //     field: 'rarityStars',
-                //     width: 150,
-                //     minWidth: 150,
-                //     minWidth: 150,
-                //     cellStyle: { padding: 0 },
-                // },
-                {
-                    headerName: 'Recommend First',
-                    editable: true,
-                    cellRenderer: CheckboxCell,
-                    cellRendererParams: {
-                        editProperty: 'alwaysRecommend',
-                        disableProperty: 'neverRecommend',
-                    },
-                    field: 'alwaysRecommend',
-                    minWidth: 180,
-                    cellStyle: { display: 'flex', justifyContent: 'center' },
-                },
-                {
-                    headerName: 'Recommend Last',
-                    editable: true,
-                    cellRenderer: CheckboxCell,
-                    cellRendererParams: {
-                        editProperty: 'neverRecommend',
-                        disableProperty: 'alwaysRecommend',
-                    },
-                    field: 'neverRecommend',
-                    minWidth: 180,
-                    cellStyle: { display: 'flex', justifyContent: 'center' },
-                },
-            ]
-        },
-    ]);
-
     const { characters } = useCharacters();
+    const [filter, setFilter] = useState('');
+
+    const charactersByAlliance = useMemo(() => {
+        const filteredCharacters = filter ? characters.filter(x => x.name.toLowerCase().includes(filter.toLowerCase())) : characters;
+
+        const charactersByAlliance = groupBy(filteredCharacters, 'alliance');
+
+        return Object.entries(charactersByAlliance).map(([alliance, characters]) => (
+            <Alliance key={alliance} alliance={alliance} characters={characters}/>));
+    }, [filter, characters]);
+
+    return (
+        <Box sx={{ padding: 2 }}>
+            <TextField sx={{ margin: '10px', width: '300px' }} label="Quick Filter" variant="outlined"
+                onChange={event => setFilter(event.target.value)}/>
+            {charactersByAlliance}
+        </Box>
+    );
+};
 
 
-    const getRowStyle = (params: RowClassParams<ICharacter>): RowStyle => {
-        return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'lightsteelblue' : 'white' };
-    };
-    
+const Alliance = ({ alliance, characters }: { alliance: string, characters: ICharacter[] }) => {
+    const tt = groupBy(characters, 'faction');
+    const itemList = [];
+
+    for (const testKey in tt) {
+        const chars = tt[testKey];
+        itemList.push(<div key={testKey}>
+            <h4>{testKey}</h4>
+
+            {chars.map((item) => {
+                return <CharacterItem key={item.name} character={item} />;
+            })}
+        </div>);
+    }
+    return (<div>
+        <h3>{alliance}</h3>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 50 }}>{itemList}</div>
+    </div>);
+};
+
+const CharacterItem = (props: { character: ICharacter }) => {
+    const [open, setOpen] = useState(false);
+    const [character, setCharacter] = useState(() => ({ ...props.character }));
+    const { addOrUpdateCharacterData } = usePersonalData();
+    const { updateCharacterData } = useCharacters();
     const saveChanges = () => {
-        characters.forEach(char => {
-            addOrUpdateCharacterData(char);
-        });
+        updateCharacterData(character);
+        addOrUpdateCharacterData(character);
         PersonalDataService.save();
     };
-    
+
+    const handleClickOpen = () => {
+        setCharacter({ ...props.character });
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
     
     return (
-        <div>
-            <TextField sx={{ margin: '10px', width: '300px' }} label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged}/>
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 170px)', width: '100%' }}>
-                <AgGridReact
-                    ref={gridRef}
-                    suppressCellFocus={true}
-                    defaultColDef={defaultColDef}
-                    columnDefs={columnDefs}
-                    rowData={characters}
-                    rowHeight={40}
-                    getRowStyle={getRowStyle}
-                    onCellEditingStopped={saveChanges}
-                    onGridReady={fitGridOnWindowResize(gridRef)}
-                >
-                </AgGridReact>
+        <div style={{ opacity: props.character.unlocked ? 1 : 0.5, cursor: 'pointer' }}>
+            <div onClick={handleClickOpen}>
+                <CharacterTitle character={props.character}/>
             </div>
+            
+            <Dialog open={open} onClose={handleClose} fullWidth>
+                <DialogTitle>
+                    <CharacterTitle character={character}/>
+                </DialogTitle>
+                <DialogContent>
+                    <CharacterDetails character={character} characterChanges={setCharacter}/>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={() => {
+                        saveChanges();
+                        handleClose();
+                    }}>Save</Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
+};
+
+const CharacterTitle =  ({ character }: { character: ICharacter }) => {
+    const emoji = character.bias === CharacterBias.AlwaysRecommend ? starEmoji : character.bias === CharacterBias.NeverRecommend ? pooEmoji : '';
+    
+    return (
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }} >
+            {/*<img src={images} height={50} alt={character.name}/>*/}
+            <CharacterImage character={character}/>
+            <span>{character.name} {emoji}</span>
+            <Tooltip title={Rarity[character.rarity]}><span>({Rarity[character.rarity][0]})</span></Tooltip>
+            {character.unlocked ?  (<span>{Rank[character.rank]}</span>) : undefined}
+        </div>
+    );
+};
+
+
+const CharacterImage = ({ character }: { character: ICharacter}) => {
+    try {
+        // Import image on demand
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const image = require(`../../assets/images/characters/${character.icon}`);
+
+        // If the image doesn't exist. return null
+        if (!image) return null;
+        return <img src={image} height={50} alt={character.name}/>;
+    } catch (error) {
+        console.log(`Image with name "${character.icon}" does not exist`);
+        return null;
+    }
 };

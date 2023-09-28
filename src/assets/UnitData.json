@@ -22,7 +22,8 @@
     "Active Ability": "Psychic",
     "Number": 1,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "VarroTigurius.png"
   },
   {
     "Name": "Certus",
@@ -49,7 +50,8 @@
     "Active Ability": "Heavy Round",
     "Number": 2,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "certus-removebg-preview.png"
   },
   {
     "Name": "Bellator",
@@ -72,7 +74,8 @@
     "Active Ability": "Bolter",
     "Number": 3,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "bellator.png"
   },
   {
     "Name": "Incisus",
@@ -93,7 +96,8 @@
     ],
     "Number": 4,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "incisus-removebg-preview.png"
   },
   {
     "Name": "Marneus Calgar",
@@ -116,7 +120,8 @@
     "Active Ability": "Bolter",
     "Number": 5,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "marneus_calgar-removebg-preview.png"
   },
   {
     "Name": "Angrax",
@@ -141,7 +146,8 @@
     "Passive Ability": "Power",
     "Number": 6,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Angrax.png"
   },
   {
     "Name": "Volk",
@@ -170,7 +176,8 @@
     "Passive Ability": "Heavy Round",
     "Number": 7,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "volk-removebg-preview.png"
   },
   {
     "Name": "Archimatos",
@@ -195,7 +202,8 @@
     ],
     "Number": 8,
     "ForcedSummons": true,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "archimatos.png"
   },
   {
     "Name": "Haarken Worldclaimer",
@@ -218,7 +226,8 @@
     "Active Ability": "Piercing",
     "Number": 9,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "HaarkenWorldclaimer-removebg-preview.png"
   },
   {
     "Name": "Abaddon the despolier",
@@ -245,7 +254,8 @@
     "Active Ability": "Piercing",
     "Number": 10,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Abaddonthedespolier.png"
   },
   {
     "Name": "Snotflogga",
@@ -267,7 +277,8 @@
     "Passive Ability": "Physical",
     "Number": 11,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "snotflogga-removebg-preview.png"
   },
   {
     "Name": "Gibbascrapz",
@@ -288,7 +299,8 @@
     ],
     "Number": 12,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Gibbascrapz-removebg-preview.png"
   },
   {
     "Name": "Snappawrecka",
@@ -316,7 +328,8 @@
     "Active Ability": "Physical",
     "Number": 13,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Snappawrecka-removebg-preview.png"
   },
   {
     "Name": "Tanksmasha",
@@ -340,7 +353,8 @@
     "Passive Ability": "Physical",
     "Number": 14,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Tanksmasha-removebg-preview.png"
   },
   {
     "Name": "Boss Gulgortz",
@@ -368,7 +382,8 @@
     "Passive Ability": "Projectile",
     "Number": 15,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "BossGulgortz-removebg-preview.png"
   },
   {
     "Name": "Vindicta",
@@ -395,7 +410,8 @@
     "Passive Ability": "Flame",
     "Number": 16,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Vindicta-removebg-preview.png"
   },
   {
     "Name": "Isabella",
@@ -417,7 +433,8 @@
     ],
     "Number": 17,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Isabella-removebg-preview.png"
   },
   {
     "Name": "Morvenn Vahl",
@@ -446,7 +463,8 @@
     "Passive Ability": "Power",
     "Number": 18,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "MorvennVahl-removebg-preview.png"
   },
   {
     "Name": "Roswitha",
@@ -471,7 +489,8 @@
     "Active Ability": "Flame",
     "Number": 19,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Roswitha-removebg-preview.png"
   },
   {
     "Name": "Celestine",
@@ -494,7 +513,8 @@
     "Active Ability": "Power",
     "Number": 20,
     "ForcedSummons": true,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Celestine-removebg-preview.png"
   },
   {
     "Name": "Makhotep",
@@ -518,7 +538,8 @@
     ],
     "Number": 21,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Makhotep-removebg-preview.png"
   },
   {
     "Name": "Imospekh",
@@ -544,7 +565,8 @@
     "Active Ability": "Molecular",
     "Number": 22,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Imospekh-removebg-preview.png"
   },
   {
     "Name": "Aleph-null",
@@ -568,7 +590,8 @@
     ],
     "Number": 23,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Aleph-null.png"
   },
   {
     "Name": "Thutmose",
@@ -594,7 +617,8 @@
     "Passive Ability": "Direct",
     "Number": 24,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Thutmose-removebg-preview.png"
   },
   {
     "Name": "Anuphet",
@@ -619,7 +643,8 @@
     "Passive Ability": "Energy",
     "Number": 25,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Anuphet.png"
   },
   {
     "Name": "Sibyll",
@@ -643,7 +668,8 @@
     ],
     "Number": 26,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Sibyll-removebg-preview.png"
   },
   {
     "Name": "Commissar Yarrick",
@@ -667,7 +693,8 @@
     ],
     "Number": 27,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "CommissarYarrick-removebg-preview.png"
   },
   {
     "Name": "Kut skoden",
@@ -689,7 +716,8 @@
     "Active Ability": "Blast",
     "Number": 28,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Kutskoden-removebg-preview.png"
   },
   {
     "Name": "Thaddeus noble",
@@ -715,7 +743,8 @@
     "Active Ability": "Blast",
     "Number": 29,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Thaddeusnoble-removebg-preview.png"
   },
   {
     "Name": "Castellan creed",
@@ -734,7 +763,8 @@
     "Traits": [],
     "Number": 30,
     "ForcedSummons": true,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Castellancreed-removebg-preview.png"
   },
   {
     "Name": "Typhus",
@@ -763,7 +793,8 @@
     "Passive Ability": "Direct",
     "Number": 31,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Typhus-removebg-preview.png"
   },
   {
     "Name": "Maladus",
@@ -788,7 +819,8 @@
     "Passive Ability": "Power",
     "Number": 32,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Maladus-removebg-preview.png"
   },
   {
     "Name": "Nauseous rotbone",
@@ -811,7 +843,8 @@
     ],
     "Number": 33,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Nauseousrotbone-removebg-preview.png"
   },
   {
     "Name": "Pestillian",
@@ -836,7 +869,8 @@
     "Passive Ability": "Blast",
     "Number": 34,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Pestillian-removebg-preview.png"
   },
   {
     "Name": "Corrodius",
@@ -859,7 +893,8 @@
     "Passive Ability": "Psychic",
     "Number": 35,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Corrodius-removebg-preview.png"
   },
   {
     "Name": "Sword Brother Godswyl",
@@ -881,7 +916,8 @@
     "Active Ability": "Power",
     "Number": 36,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "sbg-removebg-preview.png"
   },
   {
     "Name": "Brother Burchard",
@@ -908,7 +944,8 @@
     "Passive Ability": "Bolter",
     "Number": 37,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "brotherBurchard-removebg-preview.png"
   },
   {
     "Name": "Ancient Thoread",
@@ -930,7 +967,8 @@
     ],
     "Number": 38,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "AncientThoread.png"
   },
   {
     "Name": "Brother Jaeger",
@@ -953,7 +991,8 @@
     "Passive Ability": "Power",
     "Number": 39,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "brotherJaeger-removebg-preview.png"
   },
   {
     "Name": "High Marshal Helbrecht",
@@ -977,7 +1016,8 @@
     ],
     "Number": 40,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "HighMarshalHelbrecht-removebg-preview.png"
   },
   {
     "Name": "Aethana",
@@ -1000,7 +1040,8 @@
     "Active Ability": "Piercing",
     "Number": 41,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Aethana.png"
   },
   {
     "Name": "Calandis",
@@ -1026,7 +1067,8 @@
     "Passive Ability": "Piercing",
     "Number": 42,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Calandis-removebg-preview.png"
   },
   {
     "Name": "Eldryon",
@@ -1051,7 +1093,8 @@
     "Active Ability": "Psychic",
     "Number": 43,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "eldryon-removebg-preview.png"
   },
   {
     "Name": "Maugan Ra",
@@ -1078,7 +1121,8 @@
     "Active Ability": "Heavy Round",
     "Number": 44,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Maugan_Ra-removebg-preview.png"
   },
   {
     "Name": "Jain Zar",
@@ -1100,7 +1144,8 @@
     "Active Ability": "Piercing",
     "Number": 45,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Jain_Zar-removebg-preview.png"
   },
   {
     "Name": "Tjark",
@@ -1123,7 +1168,8 @@
     "Active Ability": "Physical",
     "Number": 48,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Tjark.png"
   },
   {
     "Name": "Ulf",
@@ -1147,7 +1193,8 @@
     "Passive Ability": "Power",
     "Number": 49,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Ulf.png"
   },
   {
     "Name": "Aun'shi",
@@ -1166,7 +1213,8 @@
     "Traits": [],
     "Number": 50,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Aun-shi.png"
   },
   {
     "Name": "Darkstrider",
@@ -1192,7 +1240,8 @@
     ],
     "Number": 51,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "darkstrider-removebg-preview.png"
   },
   {
     "Name": "Re'Vas",
@@ -1220,7 +1269,8 @@
     "Passive Ability": "Particle",
     "Number": 52,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "re_vas-removebg-preview.png"
   },
   {
     "Name": "Arjac",
@@ -1244,7 +1294,8 @@
     "Active Ability": "Power",
     "Number": 53,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "unset.png"
   },
   {
     "Name": "ShadowSun",
@@ -1272,7 +1323,8 @@
     "Active Ability": "Blast",
     "Number": 53,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "ShadowSun.png"
   },
   {
     "Name": "Azrael",
@@ -1299,7 +1351,8 @@
     "Passive Ability": "Bolter",
     "Number": 54,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Azrael-removebg-preview.png"
   },
   {
     "Name": "Sho'Syl",
@@ -1325,7 +1378,8 @@
     "Active Ability": "Heavy Round",
     "Number": 55,
     "ForcedSummons": true,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "sho_syl-removebg-preview.png"
   },
   {
     "Name": "Abraxas",
@@ -1352,7 +1406,8 @@
     "Passive Ability": "Psychic",
     "Number": 56,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "unset.png"
   },
   {
     "Name": "Toth",
@@ -1379,7 +1434,8 @@
     "Active Ability": "Heavy Round",
     "Number": 57,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "unset.png"
   },
   {
     "Name": "Yazaghor",
@@ -1404,7 +1460,8 @@
     ],
     "Number": 58,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "unset.png"
   },
   {
     "Name": "Thaumachus",
@@ -1430,7 +1487,8 @@
     ],
     "Number": 59,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Thaumachus-removebg-preview.png"
   },
   {
     "Name": "Sarquael",
@@ -1458,7 +1516,8 @@
     "Passive Ability": "Plasma",
     "Number": 60,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "unset.png"
   },
   {
     "Name": "Neurothrope",
@@ -1488,7 +1547,8 @@
     "Passive Ability": "Psychic",
     "Number": 61,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Neurothrope-removebg-preview.png"
   },
   {
     "Name": "Ahriman",
@@ -1515,7 +1575,8 @@
     "Active Ability": "Psychic",
     "Number": 62,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "unset.png"
   },
   {
     "Name": "Tyrant Guard",
@@ -1538,6 +1599,7 @@
     "Active Ability": "Piercing",
     "Number": 63,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "unset.png"
   }
 ]

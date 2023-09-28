@@ -1,11 +1,7 @@
-﻿import {
-    ICharacter,
-    IPersonalCharacter,
-    IPersonalCharacterData,
-} from '../models/interfaces';
+﻿import { ICharacter, IPersonalCharacter, } from '../models/interfaces';
 import { PersonalDataService } from './personal-data.service';
 import { StaticDataService } from './static-data.service';
-import { LegendaryEvents, Rank } from '../models/enums';
+import { CharacterBias, LegendaryEvents, Rank } from '../models/enums';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { useEffect, useState } from 'react';
 
@@ -29,16 +25,13 @@ export class GlobalService {
                 rarity: staticData.rarity,
                 rarityStars: staticData.rarityStars,
                 leSelection: LegendaryEvents.None,
-                alwaysRecommend: false,
-                neverRecommend: false,
-                currentShards: 0,
-                targetRarity: staticData.rarity,
-                targetRarityStars: staticData.rarityStars,
+                bias: CharacterBias.None,
             };
             return {
                 ...staticData,
                 ...personalData,
                 rank: +personalData.rank,
+                bias: personalData.bias !== undefined ? personalData.bias : personalData.alwaysRecommend ? CharacterBias.AlwaysRecommend : personalData.neverRecommend ? CharacterBias.NeverRecommend : CharacterBias.None,
             };
         });
         this._characters.next(characters);
@@ -55,5 +48,18 @@ export const useCharacters = () => {
         };
     }, []);
 
-    return { characters };
+    return { 
+        characters,
+        updateCharacterData: (character: ICharacter): void => {
+            const existingChar = characters.find(char => char.name === character.name);
+
+            if (existingChar) {
+                existingChar.unlocked = character.unlocked;
+                existingChar.rank = character.rank;
+                existingChar.rarity = character.rarity;
+                existingChar.bias = character.bias;
+                setCharacters([...characters]);
+            } 
+        },
+    };
 };

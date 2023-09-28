@@ -1,5 +1,5 @@
 ﻿import {
-    Alliance,
+    Alliance, CharacterBias,
     DamageType,
     Equipment,
     Faction,
@@ -42,6 +42,7 @@ export interface UnitDataRaw {
   Number: number;
   ForcedSummons: boolean;
   RequiredInCampaign: boolean;
+  Icon: string;
 }
 
 export interface IUnitData {
@@ -66,6 +67,7 @@ export interface IUnitData {
   movement: number;
   forcedSummons: boolean;
   requiredInCampaign: boolean;
+  icon: string;
   legendaryEvents: ICharLegendaryEvents;
 }
 
@@ -205,8 +207,7 @@ export interface ISelectedTeamsOrdering {
   direction: 'asc' | 'desc';
 }
 
-export type IPersonalCharacter = IPersonalCharacterData &
-  IPersonalCharacterProgression;
+export type IPersonalCharacter = IPersonalCharacterData;
 
 export interface IPersonalCharacterData {
   name: string;
@@ -216,15 +217,9 @@ export interface IPersonalCharacterData {
   rarity: Rarity;
   rarityStars: RarityStars;
   leSelection: LegendaryEvents;
-  alwaysRecommend: boolean;
-  neverRecommend: boolean;
-}
-
-export interface IPersonalCharacterProgression {
-  name: string;
-  currentShards: number;
-  targetRarity: Rarity;
-  targetRarityStars: RarityStars;
+  alwaysRecommend?: boolean;
+  neverRecommend?: boolean;
+  bias: CharacterBias;
 }
 
 export interface ICharProgression {

@@ -157,3 +157,9 @@ export enum PersonalGoalType {
     UpgradeRank = 1,
     Ascend = 2,
 }
+
+export enum CharacterBias {
+    NeverRecommend = -1,
+    None = 0,
+    AlwaysRecommend = 1
+}
