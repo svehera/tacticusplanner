@@ -823,7 +823,7 @@
     "Icon": "Maladus-removebg-preview.png"
   },
   {
-    "Name": "Nauseous rotbone",
+    "Name": "Nauseous Rotbone",
     "Faction": "Death guard",
     "Alliance": "Chaos",
     "Health": 120,
@@ -1300,7 +1300,7 @@
     "Icon": "Aun-shi.png"
   },
   {
-    "Name": "ShadowSun",
+    "Name": "Shadowsun",
     "Faction": "T'au Empire",
     "Alliance": "Xenos",
     "Health": 80,
