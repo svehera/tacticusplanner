@@ -30,17 +30,29 @@ const defaultPersonalData: IPersonalData = {
     legendaryEvents3: {} as ILegendaryEventsData3
 };
 
+const fixReplacedNames: Record<string, string> = {
+    'Nauseous rotbone': 'Nauseous Rotbone',
+    'ShadowSun': 'ShadowSun',
+    'Abaddon the despolier': 'Abaddon The Despolier',
+    'Kut skoden': 'Kut Skoden',
+    'Thaddeus noble': 'Thaddeus Noble',
+    'Castellan creed': 'Castellan Creed'
+};
+
 export class PersonalDataService {
     static personalDataStorageKey = 'personalData';
     static _data: BehaviorSubject<IPersonalData> = new BehaviorSubject<IPersonalData>(defaultPersonalData);
     static data$: Observable<IPersonalData> = this._data.asObservable();
 
     static init(): void {
-        const storedData = localStorage.getItem(this.personalDataStorageKey);
+        let storedData = localStorage.getItem(this.personalDataStorageKey);
         
         let data: IPersonalData = this._data.value;
 
         if (storedData) {
+            for (const fixReplacedNamesKey in fixReplacedNames) {
+                storedData = storedData.replaceAll(fixReplacedNamesKey, fixReplacedNames[fixReplacedNamesKey]);
+            }
             data = JSON.parse(storedData);
             data.characters ??= [];
             data.charactersPriorityList ??= [];
