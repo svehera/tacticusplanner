@@ -7,6 +7,7 @@ import { AunShiLegendaryEvent, JainZarLegendaryEvent, ShadowSunLegendaryEvent } 
 import { LegendaryEvent } from './legendary-event';
 import AutoTeamsSettings from '../../routes/legendary-events/auto-teams-settings';
 import { AutoTeamsSettingsContext } from '../../contexts';
+import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 
 export const LegendaryEvents = () => {
     const [value, setValue] = React.useState(0);
@@ -38,6 +39,7 @@ export const LegendaryEvents = () => {
                         setAutoTeamsPreferences(value);
                         updateAutoTeamsSettings(value);
                     }}></AutoTeamsSettings>
+                    <SetGoalDialog/>
                 </div>
             </div>
             <AutoTeamsSettingsContext.Provider value={autoTeamsPreferences}>

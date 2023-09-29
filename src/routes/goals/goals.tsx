@@ -1,5 +1,4 @@
-﻿import Button from '@mui/material/Button';
-import React, { useMemo, useRef, useState } from 'react';
+﻿import React, { useMemo, useRef, useState } from 'react';
 import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 import { IPersonalGoal } from '../../models/interfaces';
 import Box from '@mui/material/Box';
@@ -10,10 +9,8 @@ import { AgGridReact } from 'ag-grid-react';
 import { fitGridOnWindowResize } from '../../shared-logic/functions';
 import { useCharacters, usePersonalData } from '../../services';
 import GoalOptionsCell from './goal-options-cell';
-import { isMobile } from 'react-device-detect';
 import { RankImage } from '../../shared-components/rank-image';
 import { RarityImage } from '../../shared-components/rarity-image';
-import { Tooltip } from '@fluentui/react-components';
 import { TextWithTooltip } from '../../shared-components/text-with-tooltip';
 import { CharacterTitle } from '../../shared-components/character-title';
 
@@ -21,19 +18,13 @@ export const Goals = () => {
     const { characters } = useCharacters();
     const { personalData, updateGoals } = usePersonalData();
     const gridRef = useRef<AgGridReact>(null);
-    const goalsLimit = 20;
     const [goals, setGoals] = useState<IPersonalGoal[]>(() => personalData.goals);
-    const [showSetGoals, setShowSetGoals] = useState(false);
 
-
-    const disableNewGoals = useMemo(() => goals.length === goalsLimit, [goals.length]);
-
+    
     const addGoal = (goal: IPersonalGoal | undefined): void => {
         if (goal) {
             setGoals(currentGoals => {
-                const result = [...currentGoals, goal];
-                updateGoals(result);
-                return result;
+                return [...currentGoals, goal];
             });
         }
     };
@@ -179,18 +170,8 @@ export const Goals = () => {
     
     return (
         <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <Tooltip content="You can have only 20 goals at the same time" relationship={'description'} visible={disableNewGoals}>
-                    <span>
-                        <Button variant={'outlined'} disabled={disableNewGoals} onClick={() => setShowSetGoals(true)}>Set Goal</Button>
-                    </span>
-                </Tooltip>
-            </div>
-
-            <SetGoalDialog key={goals.length} isOpen={showSetGoals} onClose={(goal) => {
-                setShowSetGoals(false);
-                addGoal(goal);
-            }}/>
+            <SetGoalDialog onClose={addGoal}/>
+            
             <Box>
                 <div className="ag-theme-material" style={{ height: 'calc(100vh - 150px)', width: '100%' }}>
                     <AgGridReact<IPersonalGoal>

@@ -11,6 +11,7 @@ import { Info } from '@mui/icons-material';
 import { FormControl, MenuItem, Select, Tooltip } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import { orderBy } from 'lodash';
+import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 
 const LegendaryEvent = () => {
     const viewPreferences = useContext(ViewSettingsContext);
@@ -100,7 +101,10 @@ const LegendaryEvent = () => {
                     <span>Recommended teams</span>
                     <Tooltip title={'Click - adds single char, Shift + Click - adds top 5 chars'}><Info/></Tooltip>
                 </div>
-                <DataTablesDialog legendaryEvent={legendaryEvent} ></DataTablesDialog>
+                <div  style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <SetGoalDialog/>
+                    <DataTablesDialog legendaryEvent={legendaryEvent} ></DataTablesDialog>
+                </div>
             </div>
             <div style={{ display: 'flex', gap: 15, marginBottom: 10 }}>
                 {viewPreferences.showAlpha ? (<LegendaryEventTrack key={legendaryEvent.alphaTrack.name + legendaryEvent.id + + (personalData.modifiedDate?.toString() ?? '')} track={legendaryEvent.alphaTrack} selectChars={selectChars('alpha')}/>) : undefined }

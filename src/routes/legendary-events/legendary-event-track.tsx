@@ -97,6 +97,7 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
             field: u.name,
             headerName: `(${u.points}) ${u.name}`,
             headerTooltip: `(${u.points}) ${u.name}`,
+            resizable: true,
             valueFormatter: !lightweight ? undefined : (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
             cellRenderer: lightweight ? undefined : (props: ICellRendererParams<ICharacter>) => {
                 const character = props.value;

@@ -16,23 +16,52 @@ import Box from '@mui/material/Box';
 import { ICharacter, IPersonalGoal } from '../../models/interfaces';
 import { v4 } from 'uuid';
 import { PersonalGoalType, Rank, Rarity } from '../../models/enums';
-import { useCharacters } from '../../services';
+import { useCharacters, usePersonalData } from '../../services';
 import InputLabel from '@mui/material/InputLabel';
 import { CharacterTitle } from '../character-title';
 import { getEnumValues, rankToString } from '../../shared-logic/functions';
 import { RankImage } from '../rank-image';
+import { Tooltip } from '@fluentui/react-components';
+import { enqueueSnackbar } from 'notistack';
 
-export const SetGoalDialog = ({ isOpen, onClose }: { isOpen: boolean, onClose: (goal?: IPersonalGoal) => void }) => {
+const getDefaultForm = () =>({
+    id: v4(),
+    character: '',
+    type: PersonalGoalType.UpgradeRank,
+    targetRarity: Rarity.Uncommon,
+    targetRank: Rank.Stone1
+});
+
+export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
     const { characters } = useCharacters();
-    const [open, setOpen] = React.useState(false);
+    const { personalData, updateGoals } = usePersonalData();
+    const [openAutocomplete, setOpenAutocomplete] = React.useState(false);
+    const [openDialog, setOpenDialog] = React.useState(false);
     const [character, setCharacter] = React.useState<ICharacter | null>(null);
-    const [form, setForm] = useState<IPersonalGoal>(() =>({
-        id: v4(),
-        character: '',
-        type: PersonalGoalType.UpgradeRank,
-        targetRarity: Rarity.Uncommon,
-        targetRank: Rank.Stone1
-    }));
+    const [form, setForm] = useState<IPersonalGoal>(() => getDefaultForm());
+    const goalsLimit = 20;
+    const [goals, setGoals] = useState<IPersonalGoal[]>(() => personalData.goals);
+
+
+    const disableNewGoals = useMemo(() => goals.length === goalsLimit, [goals.length]);
+
+    const handleClose = (goal?: IPersonalGoal | undefined): void => {
+        if (goal) {
+            setGoals(currentGoals => {
+                const result = [...currentGoals, goal];
+                updateGoals(result);
+                enqueueSnackbar(`Goal for ${goal.character} is added`, { variant: 'success' });
+                return result;
+            });
+        }
+        setCharacter(null);
+        setForm((getDefaultForm()));
+        setOpenDialog(false);
+        if(onClose) {
+            onClose(goal);
+        }
+    };
+
 
     const rarityValues = useMemo(() => {
         const result = getEnumValues(Rarity).filter(x => x > 0 && (!character || x >= character.rarity));
@@ -91,7 +120,7 @@ export const SetGoalDialog = ({ isOpen, onClose }: { isOpen: boolean, onClose: (
         if(character?.name !== value?.name) {
             setCharacter(value);
             setForm(curr => ({ ...curr, character: value?.name ?? '' }));
-            setOpen(false);
+            setOpenAutocomplete(false);
         }
     };
     
@@ -106,70 +135,75 @@ export const SetGoalDialog = ({ isOpen, onClose }: { isOpen: boolean, onClose: (
         }
     };
     
-    const handleClose = (value?: IPersonalGoal) => {
-        setCharacter(null);
-        onClose(value);
-    };
-    
     return (
-        <Dialog open={isOpen} onClose={() => handleClose()} fullWidth>
-            <DialogTitle style={{ display: 'flex', alignItems: 'center', gap: 15 }}><span>Set Goal</span> { character ? <CharacterTitle character={character}/> : undefined}</DialogTitle>
-            <DialogContent>
-                <Box component="form" id="set-goal-form" style={{ padding: 20 }} onSubmit={event => event.preventDefault()}>
-                    <Autocomplete
-                        id="combo-box-demo"
-                        options={characters}
-                        value={character}
-                        open={open}
-                        onFocus={() => setOpen(true)}
-                        onBlur={() => setOpen(false)}
-                        getOptionLabel={option => option.name}
-                        isOptionEqualToValue={(option, value) => option.name === value.name}
-                        renderOption={(props, option) => (<CharacterTitle {...props} key={option.name} character={option} showLockedWithOpacity={true} onClick={() => updateValue(option)}/>)}
-                        onChange={(_, value) => updateValue(value)}
-                        renderInput={(params) => 
-                            <TextField 
-                                {...params} 
-                                fullWidth
-                                onChange={() => setOpen(true)} 
-                                label="Character"
-                                onKeyDown={handleKeyDown}
-                            />}
-                    />
+        <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <Tooltip content="You can have only 20 goals at the same time" relationship={'description'} visible={disableNewGoals}>
+                    <span>
+                        <Button variant={'contained'} disabled={disableNewGoals} onClick={() => setOpenDialog(true)}>Set Goal</Button>
+                    </span>
+                </Tooltip>
+            </div>
 
-                    <FormControl style={{ marginTop: 20 }} fullWidth >
-                        <InputLabel id="goal-type-label">Goal Type</InputLabel>
-                        <Select<PersonalGoalType>
-                            id="goal-type"
-                            labelId="goal-type-label"
-                            label="Goal Type"
-                            defaultValue={PersonalGoalType.UpgradeRank}
-                            onChange={event => setForm(curr => ({ ...curr, type: +event.target.value }))}
-                        >
-                            <MenuItem value={PersonalGoalType.UpgradeRank}>Upgrade Rank</MenuItem>
-                            <MenuItem value={PersonalGoalType.Ascend}>Ascend</MenuItem>
-                        </Select>
-                    </FormControl>
+            <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
+                <DialogTitle style={{ display: 'flex', alignItems: 'center', gap: 15 }}><span>Set Goal</span> { character ? <CharacterTitle character={character}/> : undefined}</DialogTitle>
+                <DialogContent>
+                    <Box component="form" id="set-goal-form" style={{ padding: 20 }} onSubmit={event => event.preventDefault()}>
+                        <Autocomplete
+                            id="combo-box-demo"
+                            options={characters}
+                            value={character}
+                            open={openAutocomplete}
+                            onFocus={() => setOpenAutocomplete(true)}
+                            onBlur={() => setOpenAutocomplete(false)}
+                            getOptionLabel={option => option.name}
+                            isOptionEqualToValue={(option, value) => option.name === value.name}
+                            renderOption={(props, option) => (<CharacterTitle {...props} key={option.name} character={option} showLockedWithOpacity={true} onClick={() => updateValue(option)}/>)}
+                            onChange={(_, value) => updateValue(value)}
+                            renderInput={(params) => 
+                                <TextField 
+                                    {...params} 
+                                    fullWidth
+                                    onChange={() => setOpenAutocomplete(true)} 
+                                    label="Character"
+                                    onKeyDown={handleKeyDown}
+                                />}
+                        />
+
+                        <FormControl style={{ marginTop: 20 }} fullWidth >
+                            <InputLabel id="goal-type-label">Goal Type</InputLabel>
+                            <Select<PersonalGoalType>
+                                id="goal-type"
+                                labelId="goal-type-label"
+                                label="Goal Type"
+                                defaultValue={PersonalGoalType.UpgradeRank}
+                                onChange={event => setForm(curr => ({ ...curr, type: +event.target.value }))}
+                            >
+                                <MenuItem value={PersonalGoalType.UpgradeRank}>Upgrade Rank</MenuItem>
+                                <MenuItem value={PersonalGoalType.Ascend}>Ascend</MenuItem>
+                            </Select>
+                        </FormControl>
                     
-                    { character && form.type === PersonalGoalType.UpgradeRank ? targetRankSelector : undefined }
-                    { character && form.type === PersonalGoalType.Ascend ? targetRaritySelector : undefined }
+                        { character && form.type === PersonalGoalType.UpgradeRank ? targetRankSelector : undefined }
+                        { character && form.type === PersonalGoalType.Ascend ? targetRaritySelector : undefined }
                     
-                    <TextField
-                        style={{ marginTop: 20 }}
-                        fullWidth
-                        id="outlined-textarea"
-                        label="Notes"
-                        placeholder="Notes"
-                        multiline
-                        helperText="Optional. Max length 200 characters."
-                        onChange={event => setForm(curr => ({ ...curr, notes: event.target.value.slice(0, 200) }))}
-                    />
-                </Box>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={() => handleClose()}>Cancel</Button>
-                <Button disabled={!form.character} onClick={() => handleClose(form)}>Set</Button>
-            </DialogActions>
-        </Dialog>
+                        <TextField
+                            style={{ marginTop: 20 }}
+                            fullWidth
+                            id="outlined-textarea"
+                            label="Notes"
+                            placeholder="Notes"
+                            multiline
+                            helperText="Optional. Max length 200 characters."
+                            onChange={event => setForm(curr => ({ ...curr, notes: event.target.value.slice(0, 200) }))}
+                        />
+                    </Box>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => handleClose()}>Cancel</Button>
+                    <Button disabled={!form.character} onClick={() => handleClose(form)}>Set</Button>
+                </DialogActions>
+            </Dialog>
+        </div>
     );
 };

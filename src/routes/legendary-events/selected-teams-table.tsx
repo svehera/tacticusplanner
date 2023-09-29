@@ -81,6 +81,7 @@ export const SelectedTeamsTable = (props: {
             field: u.name,
             headerName: u.name,
             headerTooltip: u.name,
+            resizable: true,
             valueFormatter: !lightweight ? undefined : (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
             cellRenderer: lightweight ? undefined : (props: ICellRendererParams<ICharacter>) => {
                 const character = props.value;
