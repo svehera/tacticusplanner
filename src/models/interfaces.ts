@@ -154,6 +154,7 @@ export type ITableRow<T = ICharacter | string> = Record<string, T>;
 
 export interface IPersonalData {
   autoTeamsPreferences: IAutoTeamsPreferences;
+  viewPreferences: Pick<IViewPreferences, 'lightWeight'>;
   selectedTeamOrder: ISelectedTeamsOrdering;
   characters: IPersonalCharacter[];
   charactersPriorityList: string[];

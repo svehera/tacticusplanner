@@ -4,11 +4,11 @@
     ILegendaryEventData3,
     ILegendaryEventsData,
     ILegendaryEventsData3,
-    IPersonalData, 
-    IPersonalGoal,
+    IPersonalData,
+    IPersonalGoal, IViewPreferences,
     SelectedTeams,
 } from '../models/interfaces';
-import { defaultAutoTeamsPreferences } from '../contexts';
+import { defaultAutoTeamsPreferences, defaultViewPreferences } from '../contexts';
 import { LegendaryEvent as LegendaryEventEnum, LegendaryEvent } from '../models/enums';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { useEffect, useState } from 'react';
@@ -20,6 +20,7 @@ import { IErrorResponse } from '../api/api-interfaces';
 const defaultPersonalData: IPersonalData = {
     characters: [],
     charactersPriorityList: [],
+    viewPreferences: defaultViewPreferences,
     autoTeamsPreferences: defaultAutoTeamsPreferences,
     selectedTeamOrder: {
         orderBy: 'name',
@@ -58,6 +59,7 @@ export class PersonalDataService {
             data.charactersPriorityList ??= [];
             data.goals ??= [];
 
+            data.viewPreferences ??= defaultViewPreferences;
             data.autoTeamsPreferences ??= defaultAutoTeamsPreferences;
             
             data.selectedTeamOrder ??=  {
@@ -222,6 +224,11 @@ export const usePersonalData = () => {
         },
         updateAutoTeamsSettings: (value: IAutoTeamsPreferences): void => {
             data.autoTeamsPreferences = value;
+            PersonalDataService._data.next(data);
+            PersonalDataService.save();
+        },
+        updateViewSettings: (value: IViewPreferences): void => {
+            data.viewPreferences.lightWeight = value.lightWeight;
             PersonalDataService._data.next(data);
             PersonalDataService.save();
         },

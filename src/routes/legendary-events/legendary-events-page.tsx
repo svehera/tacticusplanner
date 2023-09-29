@@ -30,7 +30,7 @@ export const LegendaryEventPage = () => {
         showAlpha: true,
         showBeta: true,
         showGamma: true,
-        lightWeight: false,
+        lightWeight: personalData.viewPreferences?.lightWeight,
     });
     const [autoTeamsPreferences, setAutoTeamsPreferences] = useState(personalData.autoTeamsPreferences);
 
