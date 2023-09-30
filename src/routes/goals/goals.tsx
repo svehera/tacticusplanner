@@ -7,12 +7,10 @@ import { useCharacters, usePersonalData } from '../../services';
 import { RankImage } from '../../shared-components/rank-image';
 import { RarityImage } from '../../shared-components/rarity-image';
 import { CharacterTitle } from '../../shared-components/character-title';
-import { Card, CardContent, CardHeader, ListItemIcon, Menu, MenuItem } from '@mui/material';
+import { Card, CardContent, CardHeader } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 
-import { DeleteForever, ArrowForward, MoreVert, Edit } from '@mui/icons-material';
-import { bindMenu, bindTrigger, usePopupState } from 'material-ui-popup-state/hooks';
-import ListItemText from '@mui/material/ListItemText';
+import { DeleteForever, ArrowForward, Edit } from '@mui/icons-material';
 
 
 export const Goals = () => {
@@ -58,7 +56,6 @@ export const Goals = () => {
 };
 
 export default function GoalCard({ goal, priority, menuItemSelect }: { goal: IPersonalGoal, priority: number, menuItemSelect: (item: 'edit' | 'delete') => void }) {
-    const menuState = usePopupState({ variant: 'popover', popupId: 'goalMenu' });
     const { characters } = useCharacters();
     const character = characters.find(x => x.name === goal.character) as ICharacter;
 
@@ -67,9 +64,14 @@ export default function GoalCard({ goal, priority, menuItemSelect }: { goal: IPe
             <Card sx={{ width: 350, minHeight: 200, backgroundColor:  (goal.type === PersonalGoalType.UpgradeRank && goal.targetRank === character.rank) || (goal.type === PersonalGoalType.Ascend && goal.targetRarity === character.rarity) ? 'lightgreen' : 'white' }}>
                 <CardHeader
                     action={
-                        <IconButton aria-label="settings"  {...bindTrigger(menuState)}>
-                            <MoreVert />
-                        </IconButton>
+                        <React.Fragment>
+                            <IconButton onClick={() => menuItemSelect('edit')}>
+                                <Edit fontSize="small" />
+                            </IconButton>
+                            <IconButton onClick={() => menuItemSelect('delete')}>
+                                <DeleteForever fontSize="small" />
+                            </IconButton>
+                        </React.Fragment>
                     }
                     title={ <div style={{ display: 'flex', gap: 5 }}><span>#{priority}</span> <CharacterTitle character={character} short={true} imageSize={30}/></div>}
                     subheader={PersonalGoalType[goal.type]}
@@ -97,26 +99,6 @@ export default function GoalCard({ goal, priority, menuItemSelect }: { goal: IPe
                     <span>{goal.notes}</span>
                 </CardContent>
             </Card>
-            <Menu {...bindMenu(menuState)}>
-                <MenuItem onClick={() => {
-                    menuState.close();
-                    menuItemSelect('edit');
-                }}>
-                    <ListItemIcon>
-                        <Edit fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Edit</ListItemText>
-                </MenuItem>
-                <MenuItem onClick={() => {
-                    menuState.close();
-                    menuItemSelect('delete');
-                }}>
-                    <ListItemIcon>
-                        <DeleteForever fontSize="small" />
-                    </ListItemIcon>
-                    <ListItemText>Delete</ListItemText>
-                </MenuItem>
-            </Menu>
         </React.Fragment>
     );
 }
