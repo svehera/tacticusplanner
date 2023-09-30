@@ -24,23 +24,26 @@ import { RankImage } from '../rank-image';
 import { Tooltip } from '@fluentui/react-components';
 import { enqueueSnackbar } from 'notistack';
 
-const getDefaultForm = () =>({
+const getDefaultForm = (priority: number) =>({
     id: v4(),
     character: '',
     type: PersonalGoalType.UpgradeRank,
     targetRarity: Rarity.Uncommon,
-    targetRank: Rank.Stone1
+    targetRank: Rank.Stone1,
+    priority,
 });
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
+    const goalsLimit = 20;
     const { characters } = useCharacters();
     const { personalData, updateGoals } = usePersonalData();
+    
     const [openAutocomplete, setOpenAutocomplete] = React.useState(false);
     const [openDialog, setOpenDialog] = React.useState(false);
-    const [character, setCharacter] = React.useState<ICharacter | null>(null);
-    const [form, setForm] = useState<IPersonalGoal>(() => getDefaultForm());
-    const goalsLimit = 20;
     const [goals, setGoals] = useState<IPersonalGoal[]>(() => personalData.goals);
+    const [character, setCharacter] = React.useState<ICharacter | null>(null);
+
+    const [form, setForm] = useState<IPersonalGoal>(() => getDefaultForm(goals.length + 1));
 
 
     const disableNewGoals = useMemo(() => goals.length === goalsLimit, [goals.length]);
@@ -48,14 +51,12 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     const handleClose = (goal?: IPersonalGoal | undefined): void => {
         if (goal) {
             setGoals(currentGoals => {
-                const result = [...currentGoals, goal];
-                updateGoals(result);
+                currentGoals.splice(goal.priority - 1, 0, goal);
+                updateGoals([...currentGoals]);
                 enqueueSnackbar(`Goal for ${goal.character} is added`, { variant: 'success' });
-                return result;
+                return [...currentGoals];
             });
         }
-        setCharacter(null);
-        setForm((getDefaultForm()));
         setOpenDialog(false);
         if(onClose) {
             onClose(goal);
@@ -171,6 +172,19 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                         />
 
                         <FormControl style={{ marginTop: 20 }} fullWidth >
+                            <InputLabel id="priority-label">Priority</InputLabel>
+                            <Select<number>
+                                id="priority"
+                                labelId="priority-label"
+                                label="Priority"
+                                defaultValue={goals.length + 1}
+                                onChange={event => setForm(curr => ({ ...curr, priority: +event.target.value }))}
+                            >
+                                { Array.from({ length: goals.length + 1 }, (_, index) => index + 1).map(priority => (<MenuItem key={priority} value={priority}>{priority}</MenuItem>)) }
+                            </Select>
+                        </FormControl>
+
+                        <FormControl style={{ marginTop: 20 }} fullWidth >
                             <InputLabel id="goal-type-label">Goal Type</InputLabel>
                             <Select<PersonalGoalType>
                                 id="goal-type"
@@ -186,7 +200,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                     
                         { character && form.type === PersonalGoalType.UpgradeRank ? targetRankSelector : undefined }
                         { character && form.type === PersonalGoalType.Ascend ? targetRaritySelector : undefined }
-                    
+                        
                         <TextField
                             style={{ marginTop: 20 }}
                             fullWidth

@@ -234,6 +234,7 @@ export interface IPersonalGoal {
   id: string;
   character: string;
   type: PersonalGoalType;
+  priority: number;
   targetRarity?: Rarity;
   targetRank?: Rank;
   notes?: string;
