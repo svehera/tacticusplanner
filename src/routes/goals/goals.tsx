@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
+import { EditGoalDialog, SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 import { ICharacter, IPersonalGoal } from '../../models/interfaces';
 import { PersonalGoalType } from '../../models/enums';
 
@@ -16,12 +16,7 @@ import { DeleteForever, ArrowForward, Edit } from '@mui/icons-material';
 export const Goals = () => {
     const { personalData, updateGoals } = usePersonalData();
     const [goals, setGoals] = useState<IPersonalGoal[]>(() => personalData.goals);
-
-    const addGoal = (goal: IPersonalGoal | undefined): void => {
-        if (goal) {
-            setGoals(personalData.goals);
-        }
-    };
+    const [editGoal, setEditGoal] = useState<IPersonalGoal | null>(null);
 
     const removeGoal = (goalId: string): void => {
         setGoals(currentGoals => {
@@ -31,24 +26,32 @@ export const Goals = () => {
         });
     };
     
-    const handleMenuItemSelect = (goalId: string, item: 'edit' | 'delete') => {
+    const handleMenuItemSelect = (goal: IPersonalGoal, item: 'edit' | 'delete') => {
         if(item === 'delete') {
             if (confirm('Are you sure? The goal will be permanently deleted!')) {
-                removeGoal(goalId);
+                removeGoal(goal.id);
             }
+        }
+        
+        if (item === 'edit') {
+            setEditGoal(goal); 
         }
     };
     
     return (
         <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: 10 }}>
-                <SetGoalDialog key={goals.length} onClose={addGoal}/>
+                <SetGoalDialog key={goals.length} onClose={() => setGoals(personalData.goals)}/>
+                { editGoal ? (<EditGoalDialog isOpen={true} goal={editGoal} onClose={() => {
+                    setGoals(personalData.goals);
+                    setEditGoal(null);
+                }}/>) : undefined }
                 <span style={{ fontSize: 20 }}>{goals.length}/{20}</span>
             </div>
 
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }} className={'goals'}>
                 {
-                    goals.map((goal, index) =>   <GoalCard key={goal.id} goal={goal} priority={index + 1} menuItemSelect={item => handleMenuItemSelect(goal.id, item)}/>)
+                    goals.map((goal, index) =>   <GoalCard key={goal.id} goal={goal} priority={index + 1} menuItemSelect={item => handleMenuItemSelect(goal, item)}/>)
                 }
             </div>
         </div>

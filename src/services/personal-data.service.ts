@@ -243,7 +243,7 @@ export const usePersonalData = () => {
             PersonalDataService.save();
         },
         updateGoals: (value:  IPersonalGoal[] ): void => {
-            data.goals = value;
+            data.goals = value.map((x, index) => ({ ...x, priority: index + 1 }));
             PersonalDataService._data.next(data);
             PersonalDataService.save();
         },
