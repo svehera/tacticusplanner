@@ -141,6 +141,17 @@ const TopAppBar = () => {
                     Contacts
                 </Button>
             </MenuItem>
+
+            <MenuItem>
+                <Button
+                    onClick={() => setTitle('Thank You Page')}
+                    component={Link}
+                    to={'./ty'}
+                    color="inherit"
+                >
+                    Thank You
+                </Button>
+            </MenuItem>
         </Menu>
     );
 
