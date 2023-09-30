@@ -1379,7 +1379,7 @@
     "Number": 54,
     "ForcedSummons": false,
     "RequiredInCampaign": false,
-    "Icon": "unset.png"
+    "Icon": "arjac.png"
   },
   {
     "Name": "Yazaghor",
@@ -1405,7 +1405,7 @@
     "Number": 55,
     "ForcedSummons": false,
     "RequiredInCampaign": true,
-    "Icon": "unset.png"
+    "Icon": "Yazaghor.png"
   },
   {
     "Name": "Toth",
@@ -1433,7 +1433,7 @@
     "Number": 56,
     "ForcedSummons": false,
     "RequiredInCampaign": true,
-    "Icon": "unset.png"
+    "Icon": "toth.png"
   },
   {
     "Name": "Abraxas",
@@ -1461,7 +1461,7 @@
     "Number": 57,
     "ForcedSummons": false,
     "RequiredInCampaign": true,
-    "Icon": "unset.png"
+    "Icon": "Abraxas.png"
   },
   {
     "Name": "Thaumachus",
@@ -1517,7 +1517,7 @@
     "Number": 59,
     "ForcedSummons": false,
     "RequiredInCampaign": false,
-    "Icon": "unset.png"
+    "Icon": "Sarquael.png"
   },
   {
     "Name": "Neurothrope",
@@ -1576,7 +1576,7 @@
     "Number": 61,
     "ForcedSummons": false,
     "RequiredInCampaign": false,
-    "Icon": "unset.png"
+    "Icon": "Ahriman.png"
   },
   {
     "Name": "Tyrant Guard",
@@ -1600,6 +1600,6 @@
     "Number": 62,
     "ForcedSummons": false,
     "RequiredInCampaign": false,
-    "Icon": "unset.png"
+    "Icon": "TyrantGuard.png"
   }
 ]
