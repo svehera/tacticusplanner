@@ -39,7 +39,7 @@ export const LegendaryEvents = () => {
                         setAutoTeamsPreferences(value);
                         updateAutoTeamsSettings(value);
                     }}></AutoTeamsSettings>
-                    <SetGoalDialog/>
+                    <SetGoalDialog key={personalData.goals.length}/>
                 </div>
             </div>
             <AutoTeamsSettingsContext.Provider value={autoTeamsPreferences}>

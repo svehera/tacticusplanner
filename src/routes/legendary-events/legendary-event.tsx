@@ -102,7 +102,7 @@ const LegendaryEvent = () => {
                     <Tooltip title={'Click - adds single char, Shift + Click - adds top 5 chars'}><Info/></Tooltip>
                 </div>
                 <div  style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <SetGoalDialog/>
+                    <SetGoalDialog key={personalData.goals.length}/>
                     <DataTablesDialog legendaryEvent={legendaryEvent} ></DataTablesDialog>
                 </div>
             </div>
