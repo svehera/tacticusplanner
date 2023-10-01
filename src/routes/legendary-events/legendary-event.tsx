@@ -1,24 +1,24 @@
 ﻿import React, { useContext, useMemo, useState } from 'react';
 
-import { ICharacter, ILegendaryEvent, ILegendaryEventData3, LegendaryEventSection } from '../../models/interfaces';
-import { ViewSettingsContext } from '../../contexts';
+import { ICharacter, LegendaryEventSection } from '../../models/interfaces';
+import { LegendaryEventContext, ViewSettingsContext } from '../../contexts';
 import { LegendaryEventTrack } from './legendary-event-track';
 import { SelectedTeamsTable } from './selected-teams-table';
-import { GlobalService, PersonalDataService } from '../../services';
+import { useCharacters, usePersonalData } from '../../services';
 
 import DataTablesDialog from './data-tables-dialog';
 import { Info } from '@mui/icons-material';
 import { FormControl, MenuItem, Select, Tooltip } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import { orderBy } from 'lodash';
+import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 
-const LegendaryEvent = (props: {
-    legendaryEvent: ILegendaryEvent;
-    legendaryEventPersonal: ILegendaryEventData3;
-    legendaryEventPersonalChange: (selectedTeams: ILegendaryEventData3) => void;
-}) => {
+const LegendaryEvent = () => {
     const viewPreferences = useContext(ViewSettingsContext);
-    const { legendaryEventPersonal, legendaryEvent, legendaryEventPersonalChange } = props;
+    const legendaryEvent = useContext(LegendaryEventContext);
+    const { characters } = useCharacters();
+    const { personalData, updateOrder, updateDirection, updateLegendaryEventTeams, getLEPersonalData } = usePersonalData();
+    const legendaryEventPersonal = getLEPersonalData(legendaryEvent.id);
     
     const [selectedTeams, setSelectedTeams] = useState({
         alpha: legendaryEventPersonal.alpha,
@@ -26,8 +26,8 @@ const LegendaryEvent = (props: {
         gamma: legendaryEventPersonal.gamma,
     });
 
-    const [order, setOrder] = React.useState<'name' | 'rank' | 'rarity'>(PersonalDataService.data.selectedTeamOrder.orderBy);
-    const [direction, setDirection] = React.useState<'asc' | 'desc'>(PersonalDataService.data.selectedTeamOrder.direction);
+    const [order, setOrder] = React.useState<'name' | 'rank' | 'rarity'>(personalData.selectedTeamOrder.orderBy);
+    const [direction, setDirection] = React.useState<'asc' | 'desc'>(personalData.selectedTeamOrder.direction);
     
     const selectChars = (section: LegendaryEventSection) => ( team: string, ...chars: string[]) => {
         setSelectedTeams((value) => {
@@ -46,7 +46,7 @@ const LegendaryEvent = (props: {
                 [team]: [...currentTeam, ...newChars].slice(0,5).filter(x => !!x)
             };
             const newValue = { ...value };
-            legendaryEventPersonalChange( { id: legendaryEvent.id, ...newValue });
+            updateLegendaryEventTeams( { id: legendaryEvent.id, ...newValue });
             return newValue;
             
         });
@@ -61,7 +61,7 @@ const LegendaryEvent = (props: {
                 [team]: currentTeam.filter(x => !chars.includes(x))
             };
             const newValue = { ...value };
-            legendaryEventPersonalChange( { id: legendaryEvent.id, ...newValue });
+            updateLegendaryEventTeams( { id: legendaryEvent.id, ...newValue });
             return newValue;
         });
     };
@@ -69,7 +69,7 @@ const LegendaryEvent = (props: {
     const alphaSelectedChars = useMemo(() => {
         const result: Record<string, Array<ICharacter | string>> = {};
         for (const teamKey in selectedTeams.alpha) {
-            const team = selectedTeams.alpha[teamKey].map(charName => GlobalService.characters.find(x => x.name === charName) ?? '');
+            const team = selectedTeams.alpha[teamKey].map(charName => characters.find(x => x.name === charName) ?? '');
             result[teamKey] = orderBy(team, order, direction);
         }
         return result;
@@ -78,7 +78,7 @@ const LegendaryEvent = (props: {
     const betaSelectedChars = useMemo(() => {
         const result: Record<string, Array<ICharacter | string>> = {};
         for (const teamKey in selectedTeams.beta) {
-            const team = selectedTeams.beta[teamKey].map(charName => GlobalService.characters.find(x => x.name === charName) ?? '');
+            const team = selectedTeams.beta[teamKey].map(charName => characters.find(x => x.name === charName) ?? '');
             result[teamKey] = orderBy(team, order, direction);
         }
         return result;
@@ -87,7 +87,7 @@ const LegendaryEvent = (props: {
     const gammaSelectedChars = useMemo(() => {
         const result: Record<string, Array<ICharacter | string>> = {};
         for (const teamKey in selectedTeams.gamma) {
-            const team = selectedTeams.gamma[teamKey].map(charName => GlobalService.characters.find(x => x.name === charName) ?? '');
+            const team = selectedTeams.gamma[teamKey].map(charName => characters.find(x => x.name === charName) ?? '');
             result[teamKey] = orderBy(team, order, direction);
         }
         return result;
@@ -101,10 +101,13 @@ const LegendaryEvent = (props: {
                     <span>Recommended teams</span>
                     <Tooltip title={'Click - adds single char, Shift + Click - adds top 5 chars'}><Info/></Tooltip>
                 </div>
-                <DataTablesDialog legendaryEvent={legendaryEvent} ></DataTablesDialog>
+                <div  style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    <SetGoalDialog/>
+                    <DataTablesDialog legendaryEvent={legendaryEvent} ></DataTablesDialog>
+                </div>
             </div>
             <div style={{ display: 'flex', gap: 15, marginBottom: 10 }}>
-                {viewPreferences.showAlpha ? (<LegendaryEventTrack key={legendaryEvent.alphaTrack.name + legendaryEvent.id} track={legendaryEvent.alphaTrack} selectChars={selectChars('alpha')}/>) : undefined }
+                {viewPreferences.showAlpha ? (<LegendaryEventTrack key={legendaryEvent.alphaTrack.name + legendaryEvent.id + + (personalData.modifiedDate?.toString() ?? '')} track={legendaryEvent.alphaTrack} selectChars={selectChars('alpha')}/>) : undefined }
                 {viewPreferences.showBeta ? (<LegendaryEventTrack key={legendaryEvent.betaTrack.name + legendaryEvent.id} track={legendaryEvent.betaTrack} selectChars={selectChars('beta')}/>) : undefined }
                 {viewPreferences.showGamma ? (<LegendaryEventTrack key={legendaryEvent.gammaTrack.name + legendaryEvent.id} track={legendaryEvent.gammaTrack} selectChars={selectChars('gamma')}/>) : undefined }
             </div>
@@ -124,8 +127,7 @@ const LegendaryEvent = (props: {
                         onChange={event => {
                             const value = event.target.value as any;
                             setOrder(value);
-                            PersonalDataService.data.selectedTeamOrder.orderBy = value;
-                            PersonalDataService.save();
+                            updateOrder(value);
                         }}
                     >
                         <MenuItem value={'name'}>Name</MenuItem>
@@ -144,8 +146,7 @@ const LegendaryEvent = (props: {
                         onChange={event => {
                             const value = event.target.value as any;
                             setDirection(value);
-                            PersonalDataService.data.selectedTeamOrder.direction = value;
-                            PersonalDataService.save();
+                            updateDirection(value);
                         }}
                     >
                         <MenuItem value={'asc'}>Ascending</MenuItem>

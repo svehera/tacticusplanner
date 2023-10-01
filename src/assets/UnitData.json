@@ -22,7 +22,8 @@
     "Active Ability": "Psychic",
     "Number": 1,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "VarroTigurius.png"
   },
   {
     "Name": "Certus",
@@ -49,7 +50,8 @@
     "Active Ability": "Heavy Round",
     "Number": 2,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "certus-removebg-preview.png"
   },
   {
     "Name": "Bellator",
@@ -72,7 +74,8 @@
     "Active Ability": "Bolter",
     "Number": 3,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "bellator.png"
   },
   {
     "Name": "Incisus",
@@ -93,7 +96,8 @@
     ],
     "Number": 4,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "incisus-removebg-preview.png"
   },
   {
     "Name": "Marneus Calgar",
@@ -116,7 +120,8 @@
     "Active Ability": "Bolter",
     "Number": 5,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "marneus_calgar-removebg-preview.png"
   },
   {
     "Name": "Angrax",
@@ -141,7 +146,8 @@
     "Passive Ability": "Power",
     "Number": 6,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Angrax.png"
   },
   {
     "Name": "Volk",
@@ -170,7 +176,8 @@
     "Passive Ability": "Heavy Round",
     "Number": 7,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "volk-removebg-preview.png"
   },
   {
     "Name": "Archimatos",
@@ -195,7 +202,8 @@
     ],
     "Number": 8,
     "ForcedSummons": true,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "archimatos.png"
   },
   {
     "Name": "Haarken Worldclaimer",
@@ -218,10 +226,11 @@
     "Active Ability": "Piercing",
     "Number": 9,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "HaarkenWorldclaimer-removebg-preview.png"
   },
   {
-    "Name": "Abaddon the despolier",
+    "Name": "Abaddon The Despolier",
     "Faction": "Black Legion",
     "Alliance": "Chaos",
     "Health": 88,
@@ -245,7 +254,8 @@
     "Active Ability": "Piercing",
     "Number": 10,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Abaddonthedespolier.png"
   },
   {
     "Name": "Snotflogga",
@@ -267,7 +277,8 @@
     "Passive Ability": "Physical",
     "Number": 11,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "snotflogga-removebg-preview.png"
   },
   {
     "Name": "Gibbascrapz",
@@ -288,7 +299,8 @@
     ],
     "Number": 12,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Gibbascrapz-removebg-preview.png"
   },
   {
     "Name": "Snappawrecka",
@@ -316,7 +328,8 @@
     "Active Ability": "Physical",
     "Number": 13,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Snappawrecka-removebg-preview.png"
   },
   {
     "Name": "Tanksmasha",
@@ -340,7 +353,8 @@
     "Passive Ability": "Physical",
     "Number": 14,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Tanksmasha-removebg-preview.png"
   },
   {
     "Name": "Boss Gulgortz",
@@ -368,11 +382,12 @@
     "Passive Ability": "Projectile",
     "Number": 15,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "BossGulgortz-removebg-preview.png"
   },
   {
     "Name": "Vindicta",
-    "Faction": "ADEPTA SOROITAS",
+    "Faction": "Adepta Sororitas",
     "Alliance": "Imperial",
     "Health": 70,
     "Damage": 20,
@@ -395,11 +410,12 @@
     "Passive Ability": "Flame",
     "Number": 16,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Vindicta-removebg-preview.png"
   },
   {
     "Name": "Isabella",
-    "Faction": "ADEPTA SOROITAS",
+    "Faction": "Adepta Sororitas",
     "Alliance": "Imperial",
     "Health": 85,
     "Damage": 18,
@@ -417,11 +433,12 @@
     ],
     "Number": 17,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Isabella-removebg-preview.png"
   },
   {
     "Name": "Morvenn Vahl",
-    "Faction": "ADEPTA SOROITAS",
+    "Faction": "Adepta Sororitas",
     "Alliance": "Imperial",
     "Health": 85,
     "Damage": 12,
@@ -446,11 +463,12 @@
     "Passive Ability": "Power",
     "Number": 18,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "MorvennVahl-removebg-preview.png"
   },
   {
     "Name": "Roswitha",
-    "Faction": "ADEPTA SOROITAS",
+    "Faction": "Adepta Sororitas",
     "Alliance": "Imperial",
     "Health": 85,
     "Damage": 30,
@@ -471,11 +489,12 @@
     "Active Ability": "Flame",
     "Number": 19,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Roswitha-removebg-preview.png"
   },
   {
     "Name": "Celestine",
-    "Faction": "ADEPTA SOROITAS",
+    "Faction": "Adepta Sororitas",
     "Alliance": "Imperial",
     "Health": 60,
     "Damage": 25,
@@ -494,7 +513,8 @@
     "Active Ability": "Power",
     "Number": 20,
     "ForcedSummons": true,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Celestine-removebg-preview.png"
   },
   {
     "Name": "Makhotep",
@@ -518,7 +538,8 @@
     ],
     "Number": 21,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Makhotep-removebg-preview.png"
   },
   {
     "Name": "Imospekh",
@@ -544,7 +565,8 @@
     "Active Ability": "Molecular",
     "Number": 22,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Imospekh-removebg-preview.png"
   },
   {
     "Name": "Aleph-null",
@@ -568,7 +590,8 @@
     ],
     "Number": 23,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Aleph-null.png"
   },
   {
     "Name": "Thutmose",
@@ -594,7 +617,8 @@
     "Passive Ability": "Direct",
     "Number": 24,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Thutmose-removebg-preview.png"
   },
   {
     "Name": "Anuphet",
@@ -619,11 +643,12 @@
     "Passive Ability": "Energy",
     "Number": 25,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Anuphet.png"
   },
   {
     "Name": "Sibyll",
-    "Faction": "Astra militarum",
+    "Faction": "Astra Militarum",
     "Alliance": "Imperial",
     "Health": 55,
     "Damage": 30,
@@ -643,11 +668,12 @@
     ],
     "Number": 26,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Sibyll-removebg-preview.png"
   },
   {
     "Name": "Commissar Yarrick",
-    "Faction": "Astra militarum",
+    "Faction": "Astra Militarum",
     "Alliance": "Imperial",
     "Health": 75,
     "Damage": 30,
@@ -667,11 +693,12 @@
     ],
     "Number": 27,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "CommissarYarrick-removebg-preview.png"
   },
   {
-    "Name": "Kut skoden",
-    "Faction": "Astra militarum",
+    "Name": "Kut Skoden",
+    "Faction": "Astra Militarum",
     "Alliance": "Imperial",
     "Health": 95,
     "Damage": 30,
@@ -689,11 +716,12 @@
     "Active Ability": "Blast",
     "Number": 28,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Kutskoden-removebg-preview.png"
   },
   {
-    "Name": "Thaddeus noble",
-    "Faction": "Astra militarum",
+    "Name": "Thaddeus Noble",
+    "Faction": "Astra Militarum",
     "Alliance": "Imperial",
     "Health": 50,
     "Damage": 38,
@@ -715,11 +743,12 @@
     "Active Ability": "Blast",
     "Number": 29,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Thaddeusnoble-removebg-preview.png"
   },
   {
-    "Name": "Castellan creed",
-    "Faction": "Astra militarum",
+    "Name": "Castellan Creed",
+    "Faction": "Astra Militarum",
     "Alliance": "Imperial",
     "Health": 90,
     "Damage": 38,
@@ -734,7 +763,8 @@
     "Traits": [],
     "Number": 30,
     "ForcedSummons": true,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Castellancreed-removebg-preview.png"
   },
   {
     "Name": "Typhus",
@@ -763,7 +793,8 @@
     "Passive Ability": "Direct",
     "Number": 31,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Typhus-removebg-preview.png"
   },
   {
     "Name": "Maladus",
@@ -788,10 +819,11 @@
     "Passive Ability": "Power",
     "Number": 32,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Maladus-removebg-preview.png"
   },
   {
-    "Name": "Nauseous rotbone",
+    "Name": "Nauseous Rotbone",
     "Faction": "Death guard",
     "Alliance": "Chaos",
     "Health": 120,
@@ -811,7 +843,8 @@
     ],
     "Number": 33,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Nauseousrotbone-removebg-preview.png"
   },
   {
     "Name": "Pestillian",
@@ -836,7 +869,8 @@
     "Passive Ability": "Blast",
     "Number": 34,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Pestillian-removebg-preview.png"
   },
   {
     "Name": "Corrodius",
@@ -859,11 +893,12 @@
     "Passive Ability": "Psychic",
     "Number": 35,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Corrodius-removebg-preview.png"
   },
   {
     "Name": "Sword Brother Godswyl",
-    "Faction": "Black templars",
+    "Faction": "Black Templars",
     "Alliance": "Imperial",
     "Health": 95,
     "Damage": 55,
@@ -881,11 +916,12 @@
     "Active Ability": "Power",
     "Number": 36,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "sbg-removebg-preview.png"
   },
   {
     "Name": "Brother Burchard",
-    "Faction": "Black templars",
+    "Faction": "Black Templars",
     "Alliance": "Imperial",
     "Health": 120,
     "Damage": 9,
@@ -908,11 +944,12 @@
     "Passive Ability": "Bolter",
     "Number": 37,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "brotherBurchard-removebg-preview.png"
   },
   {
     "Name": "Ancient Thoread",
-    "Faction": "Black templars",
+    "Faction": "Black Templars",
     "Alliance": "Imperial",
     "Health": 100,
     "Damage": 32,
@@ -930,11 +967,12 @@
     ],
     "Number": 38,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "AncientThoread.png"
   },
   {
     "Name": "Brother Jaeger",
-    "Faction": "Black templars",
+    "Faction": "Black Templars",
     "Alliance": "Imperial",
     "Health": 110,
     "Damage": 25,
@@ -953,11 +991,12 @@
     "Passive Ability": "Power",
     "Number": 39,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "brotherJaeger-removebg-preview.png"
   },
   {
     "Name": "High Marshal Helbrecht",
-    "Faction": "Black templars",
+    "Faction": "Black Templars",
     "Alliance": "Imperial",
     "Health": 80,
     "Damage": 15,
@@ -977,7 +1016,8 @@
     ],
     "Number": 40,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "HighMarshalHelbrecht-removebg-preview.png"
   },
   {
     "Name": "Aethana",
@@ -1000,7 +1040,8 @@
     "Active Ability": "Piercing",
     "Number": 41,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Aethana.png"
   },
   {
     "Name": "Calandis",
@@ -1026,7 +1067,8 @@
     "Passive Ability": "Piercing",
     "Number": 42,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Calandis-removebg-preview.png"
   },
   {
     "Name": "Eldryon",
@@ -1051,7 +1093,8 @@
     "Active Ability": "Psychic",
     "Number": 43,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "eldryon-removebg-preview.png"
   },
   {
     "Name": "Maugan Ra",
@@ -1078,7 +1121,8 @@
     "Active Ability": "Heavy Round",
     "Number": 44,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Maugan_Ra-removebg-preview.png"
   },
   {
     "Name": "Jain Zar",
@@ -1100,30 +1144,8 @@
     "Active Ability": "Piercing",
     "Number": 45,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
-  },
-  {
-    "Name": "Tjark",
-    "Faction": "Space Wolves",
-    "Alliance": "Imperial",
-    "Health": 85,
-    "Damage": 32,
-    "Armour": 23,
-    "Initial rarity": "Uncommon",
-    "Melee Damage": "Physical",
-    "Melee Hits": 4,
-    "Movement": 3,
-    "Equipment1": "Crit",
-    "Equipment2": "Defense",
-    "Equipment3": "Crit Booster",
-    "Traits": [
-      "Infiltrate",
-      "Terrifying"
-    ],
-    "Active Ability": "Physical",
-    "Number": 48,
-    "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": true,
+    "Icon": "Jain_Zar-removebg-preview.png"
   },
   {
     "Name": "Ulf",
@@ -1145,54 +1167,61 @@
     ],
     "Active Ability": "Piercing",
     "Passive Ability": "Power",
-    "Number": 49,
+    "Number": 46,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Ulf.png"
   },
   {
-    "Name": "Aun'shi",
-    "Faction": "T'au Empire",
-    "Alliance": "Xenos",
-    "Health": 77.3,
-    "Damage": 11.8,
-    "Armour": 14.5,
-    "Initial rarity": "Legendary",
-    "Melee Damage": "Power",
-    "Melee Hits": 5,
-    "Movement": 3,
-    "Equipment1": "Crit",
-    "Equipment2": "Block",
-    "Equipment3": "Crit Booster",
-    "Traits": [],
-    "Number": 50,
-    "ForcedSummons": false,
-    "RequiredInCampaign": false
-  },
-  {
-    "Name": "Darkstrider",
-    "Faction": "T'au Empire",
-    "Alliance": "Xenos",
-    "Health": 73,
-    "Damage": 31.8,
-    "Armour": 15.45,
-    "Initial rarity": "Rare",
+    "Name": "Tjark",
+    "Faction": "Space Wolves",
+    "Alliance": "Imperial",
+    "Health": 85,
+    "Damage": 32,
+    "Armour": 23,
+    "Initial rarity": "Uncommon",
     "Melee Damage": "Physical",
-    "Melee Hits": 3,
-    "Ranged Damage": "Pulse",
-    "Ranged Hits": 2,
-    "Distance": 2,
+    "Melee Hits": 4,
     "Movement": 3,
     "Equipment1": "Crit",
     "Equipment2": "Defense",
     "Equipment3": "Crit Booster",
     "Traits": [
-      "Close Combat Weakness",
       "Infiltrate",
-      "Suppressive Fire"
+      "Terrifying"
     ],
-    "Number": 51,
+    "Active Ability": "Physical",
+    "Number": 47,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Tjark.png"
+  },
+  {
+    "Name": "Sho'Syl",
+    "Faction": "T'au Empire",
+    "Alliance": "Xenos",
+    "Health": 65,
+    "Damage": 53,
+    "Armour": 16,
+    "Initial rarity": "Uncommon",
+    "Melee Damage": "Pulse",
+    "Melee Hits": 1,
+    "Ranged Damage": "Piercing",
+    "Ranged Hits": 1,
+    "Distance": 3,
+    "Movement": 2,
+    "Equipment1": "Crit",
+    "Equipment2": "Defense",
+    "Equipment3": "Crit Booster",
+    "Traits": [
+      "Camouflage",
+      "Close Combat Weakness"
+    ],
+    "Active Ability": "Heavy Round",
+    "Number": 48,
+    "ForcedSummons": true,
+    "RequiredInCampaign": false,
+    "Icon": "sho_syl-removebg-preview.png"
   },
   {
     "Name": "Re'Vas",
@@ -1218,36 +1247,60 @@
       "Mechanical"
     ],
     "Passive Ability": "Particle",
-    "Number": 52,
+    "Number": 49,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "re_vas-removebg-preview.png"
   },
   {
-    "Name": "Arjac",
-    "Faction": "Space Wolves",
-    "Alliance": "Imperial",
-    "Health": 110,
-    "Damage": 23,
-    "Armour": 26,
+    "Name": "Darkstrider",
+    "Faction": "T'au Empire",
+    "Alliance": "Xenos",
+    "Health": 73,
+    "Damage": 31.8,
+    "Armour": 15.45,
     "Initial rarity": "Rare",
-    "Melee Damage": "Power",
+    "Melee Damage": "Physical",
     "Melee Hits": 3,
-    "Movement": 2,
+    "Ranged Damage": "Pulse",
+    "Ranged Hits": 2,
+    "Distance": 2,
+    "Movement": 3,
+    "Equipment1": "Crit",
+    "Equipment2": "Defense",
+    "Equipment3": "Crit Booster",
+    "Traits": [
+      "Close Combat Weakness",
+      "Infiltrate",
+      "Suppressive Fire"
+    ],
+    "Number": 50,
+    "ForcedSummons": false,
+    "RequiredInCampaign": false,
+    "Icon": "darkstrider-removebg-preview.png"
+  },
+  {
+    "Name": "Aun'shi",
+    "Faction": "T'au Empire",
+    "Alliance": "Xenos",
+    "Health": 77.3,
+    "Damage": 11.8,
+    "Armour": 14.5,
+    "Initial rarity": "Legendary",
+    "Melee Damage": "Power",
+    "Melee Hits": 5,
+    "Movement": 3,
     "Equipment1": "Crit",
     "Equipment2": "Block",
-    "Equipment3": "Block Booster",
-    "Traits": [
-      "Terminator Armour",
-      "Deep Strike",
-      "Resilient"
-    ],
-    "Active Ability": "Power",
-    "Number": 53,
+    "Equipment3": "Crit Booster",
+    "Traits": [],
+    "Number": 51,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Aun-shi.png"
   },
   {
-    "Name": "ShadowSun",
+    "Name": "Shadowsun",
     "Faction": "T'au Empire",
     "Alliance": "Xenos",
     "Health": 80,
@@ -1270,9 +1323,10 @@
       "Infiltrate"
     ],
     "Active Ability": "Blast",
-    "Number": 53,
+    "Number": 52,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "ShadowSun.png"
   },
   {
     "Name": "Azrael",
@@ -1297,62 +1351,61 @@
     ],
     "Active Ability": "Direct",
     "Passive Ability": "Bolter",
-    "Number": 54,
+    "Number": 53,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Azrael-removebg-preview.png"
   },
   {
-    "Name": "Sho'Syl",
-    "Faction": "T'au Empire",
-    "Alliance": "Xenos",
-    "Health": 65,
-    "Damage": 53,
-    "Armour": 16,
-    "Initial rarity": "Uncommon",
-    "Melee Damage": "Pulse",
-    "Melee Hits": 1,
-    "Ranged Damage": "Piercing",
-    "Ranged Hits": 1,
-    "Distance": 3,
+    "Name": "Arjac",
+    "Faction": "Space Wolves",
+    "Alliance": "Imperial",
+    "Health": 110,
+    "Damage": 23,
+    "Armour": 26,
+    "Initial rarity": "Rare",
+    "Melee Damage": "Power",
+    "Melee Hits": 3,
     "Movement": 2,
+    "Equipment1": "Crit",
+    "Equipment2": "Block",
+    "Equipment3": "Block Booster",
+    "Traits": [
+      "Terminator Armour",
+      "Deep Strike",
+      "Resilient"
+    ],
+    "Active Ability": "Power",
+    "Number": 54,
+    "ForcedSummons": false,
+    "RequiredInCampaign": false,
+    "Icon": "arjac.png"
+  },
+  {
+    "Name": "Yazaghor",
+    "Faction": "Thousand Sons",
+    "Alliance": "Chaos",
+    "Health": 65,
+    "Damage": 49,
+    "Armour": 14,
+    "Initial rarity": "Common",
+    "Melee Damage": "Physical",
+    "Melee Hits": 1,
+    "Ranged Damage": "Heavy Round",
+    "Ranged Hits": 1,
+    "Distance": 2,
+    "Movement": 4,
     "Equipment1": "Crit",
     "Equipment2": "Defense",
     "Equipment3": "Crit Booster",
     "Traits": [
-      "Camouflage",
-      "Close Combat Weakness"
-    ],
-    "Active Ability": "Heavy Round",
-    "Number": 55,
-    "ForcedSummons": true,
-    "RequiredInCampaign": false
-  },
-  {
-    "Name": "Abraxas",
-    "Faction": "Thousand Sons",
-    "Alliance": "Chaos",
-    "Health": 70,
-    "Damage": 18,
-    "Armour": 20,
-    "Initial rarity": "Rare",
-    "Melee Damage": "Flame",
-    "Melee Hits": 2,
-    "Ranged Damage": "Psychic",
-    "Ranged Hits": 1,
-    "Distance": 2,
-    "Movement": 3,
-    "Equipment1": "Crit",
-    "Equipment2": "Block",
-    "Equipment3": "Crit Booster",
-    "Traits": [
-      "Psyker",
+      "Flying",
       "Weaver of Fates"
     ],
-    "Active Ability": "Psychic",
-    "Passive Ability": "Psychic",
-    "Number": 56,
+    "Number": 55,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Yazaghor.png"
   },
   {
     "Name": "Toth",
@@ -1377,34 +1430,38 @@
       "Weaver of Fates"
     ],
     "Active Ability": "Heavy Round",
-    "Number": 57,
+    "Number": 56,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "toth.png"
   },
   {
-    "Name": "Yazaghor",
+    "Name": "Abraxas",
     "Faction": "Thousand Sons",
     "Alliance": "Chaos",
-    "Health": 65,
-    "Damage": 49,
-    "Armour": 14,
-    "Initial rarity": "Common",
-    "Melee Damage": "Physical",
-    "Melee Hits": 1,
-    "Ranged Damage": "Heavy Round",
+    "Health": 70,
+    "Damage": 18,
+    "Armour": 20,
+    "Initial rarity": "Rare",
+    "Melee Damage": "Flame",
+    "Melee Hits": 2,
+    "Ranged Damage": "Psychic",
     "Ranged Hits": 1,
     "Distance": 2,
-    "Movement": 4,
+    "Movement": 3,
     "Equipment1": "Crit",
-    "Equipment2": "Defense",
+    "Equipment2": "Block",
     "Equipment3": "Crit Booster",
     "Traits": [
-      "Flying",
+      "Psyker",
       "Weaver of Fates"
     ],
-    "Number": 58,
+    "Active Ability": "Psychic",
+    "Passive Ability": "Psychic",
+    "Number": 57,
     "ForcedSummons": false,
-    "RequiredInCampaign": true
+    "RequiredInCampaign": true,
+    "Icon": "Abraxas.png"
   },
   {
     "Name": "Thaumachus",
@@ -1428,9 +1485,10 @@
       "Flying",
       "Psyker"
     ],
-    "Number": 59,
+    "Number": 58,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Thaumachus-removebg-preview.png"
   },
   {
     "Name": "Sarquael",
@@ -1456,9 +1514,10 @@
     ],
     "Active Ability": "Plasma",
     "Passive Ability": "Plasma",
-    "Number": 60,
+    "Number": 59,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Sarquael.png"
   },
   {
     "Name": "Neurothrope",
@@ -1486,9 +1545,10 @@
     ],
     "Active Ability": "Psychic",
     "Passive Ability": "Psychic",
-    "Number": 61,
+    "Number": 60,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Neurothrope-removebg-preview.png"
   },
   {
     "Name": "Ahriman",
@@ -1513,9 +1573,10 @@
       "Psyker"
     ],
     "Active Ability": "Psychic",
-    "Number": 62,
+    "Number": 61,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "Ahriman.png"
   },
   {
     "Name": "Tyrant Guard",
@@ -1536,8 +1597,9 @@
       "Crushing Strike"
     ],
     "Active Ability": "Piercing",
-    "Number": 63,
+    "Number": 62,
     "ForcedSummons": false,
-    "RequiredInCampaign": false
+    "RequiredInCampaign": false,
+    "Icon": "TyrantGuard.png"
   }
 ]

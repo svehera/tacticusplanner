@@ -5,8 +5,8 @@ import { LegendaryEventBase } from './base.le';
 import { LETrack } from './base.le.track';
 
 export class JainZarLegendaryEvent extends LegendaryEventBase {
-    constructor(unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
-        super(LegendaryEvent.JainZar, 'Jain Zar', unitsData, selectedTeams);
+    constructor(unitsData: Array<ICharacter>) {
+        super(LegendaryEvent.JainZar, 'Jain Zar', unitsData);
     }
 
     protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {

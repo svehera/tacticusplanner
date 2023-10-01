@@ -35,6 +35,7 @@ export class StaticDataService {
             requiredInCampaign: rawData.RequiredInCampaign,
             legendaryEvents: {} as ICharLegendaryEvents,
             traits: rawData.Traits,
+            icon: rawData.Icon,
             damageTypes: {
                 all: [rawData['Melee Damage']],
                 melee: rawData['Melee Damage'],
@@ -87,7 +88,7 @@ export class StaticDataService {
         case Faction.Thousand_Sons:
             return '#A4C2F4';
         case Faction.Tyranids:
-            return '#A4C2F4';
+            return 'violet';
         default:
             return '#ffffff';
         }

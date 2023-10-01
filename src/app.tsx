@@ -3,6 +3,7 @@ import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 
 import TopAppBar from './app-bar';
 import { isMobile } from 'react-device-detect';
+import { getUserData } from './hooks/get-user-data';
 
 const App = () => {
     const navigate = useNavigate();
@@ -18,6 +19,8 @@ const App = () => {
             navigate(redirect);
         }
     }, []);
+
+    getUserData();
     
     return (
         <div style={{ width: '100%', height: '100%' }}>

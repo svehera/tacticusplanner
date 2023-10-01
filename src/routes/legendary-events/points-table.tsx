@@ -15,14 +15,15 @@ import {
 import { Rank } from '../../models/enums';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
 import { fitGridOnWindowResize } from '../../shared-logic/functions';
-import { PersonalDataService } from '../../services';
+import { usePersonalData } from '../../services';
 import { sum, uniq } from 'lodash';
 import { CharactersSelection, ITableRow } from './legendary-events.interfaces';
 
 
 const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: (selection: CharactersSelection) => void  }) => {
     const { legendaryEvent } = props;
-    const personalLegendaryEvent = useMemo(() => PersonalDataService.getLEPersonalData(legendaryEvent.id), [legendaryEvent.id]);
+    const {  getLEPersonalData } = usePersonalData();
+    const personalLegendaryEvent = useMemo(() => getLEPersonalData(legendaryEvent.id), [legendaryEvent.id]);
     const [selection, setSelection] = useState<CharactersSelection>(CharactersSelection.All);
 
     const gridRef = useRef<AgGridReact>(null);

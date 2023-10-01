@@ -6,8 +6,8 @@ import { LETrack } from './base.le.track';
 
 export class AunShiLegendaryEvent extends LegendaryEventBase {
 
-    constructor(unitsData: Array<ICharacter>, selectedTeams: ITableRow[]) {
-        super(LegendaryEvent.AunShi, 'Aun Shi',  unitsData, selectedTeams);
+    constructor(unitsData: Array<ICharacter>) {
+        super(LegendaryEvent.AunShi, 'Aun Shi',  unitsData);
     }
 
     protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {

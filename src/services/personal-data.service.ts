@@ -1,107 +1,103 @@
 ﻿import {
-    ICharacter, ILegendaryEventData3,
+    IAutoTeamsPreferences,
+    ICharacter,
+    ILegendaryEventData3,
     ILegendaryEventsData,
     ILegendaryEventsData3,
     IPersonalData,
+    IPersonalGoal, IViewPreferences,
     SelectedTeams,
 } from '../models/interfaces';
-import { defaultAutoTeamsPreferences } from '../contexts';
-import { LegendaryEvent } from '../models/enums';
+import { defaultAutoTeamsPreferences, defaultViewPreferences } from '../contexts';
+import { LegendaryEvent as LegendaryEventEnum, LegendaryEvent } from '../models/enums';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { useEffect, useState } from 'react';
+import { setUserDataApi } from '../api/api-functions';
+import { enqueueSnackbar } from 'notistack';
+import { AxiosError } from 'axios';
+import { IErrorResponse } from '../api/api-interfaces';
+
+const defaultPersonalData: IPersonalData = {
+    characters: [],
+    charactersPriorityList: [],
+    viewPreferences: defaultViewPreferences,
+    autoTeamsPreferences: defaultAutoTeamsPreferences,
+    selectedTeamOrder: {
+        orderBy: 'name',
+        direction: 'desc',
+    },
+    goals: [],
+    legendaryEvents: undefined,
+    legendaryEvents3: {} as ILegendaryEventsData3
+};
+
+const fixReplacedNames: Record<string, string> = {
+    'Nauseous rotbone': 'Nauseous Rotbone',
+    'ShadowSun': 'ShadowSun',
+    'Abaddon the despolier': 'Abaddon The Despolier',
+    'Kut skoden': 'Kut Skoden',
+    'Thaddeus noble': 'Thaddeus Noble',
+    'Castellan creed': 'Castellan Creed'
+};
 
 export class PersonalDataService {
     static personalDataStorageKey = 'personalData';
-    static data: IPersonalData;
+    static _data: BehaviorSubject<IPersonalData> = new BehaviorSubject<IPersonalData>(defaultPersonalData);
+    static data$: Observable<IPersonalData> = this._data.asObservable();
 
     static init(): void {
-
-        const storedData = localStorage.getItem(this.personalDataStorageKey);
-
-        const defaultLegendaryEventsData: ILegendaryEventsData = {
-            jainZar: {
-                selectedTeams: [{}, {}, {}, {}, {}]
-            },
-            aunShi: {
-                selectedTeams: [{}, {}, {}, {}, {}]
-            },
-            shadowSun: {
-                selectedTeams: [{}, {}, {}, {}, {}]
-            }
-        };
+        let storedData = localStorage.getItem(this.personalDataStorageKey);
+        
+        let data: IPersonalData = this._data.value;
 
         if (storedData) {
-            this.data = JSON.parse(storedData);
-            this.data.characters ??= [];
-            this.data.charactersPriorityList ??= [];
+            for (const fixReplacedNamesKey in fixReplacedNames) {
+                storedData = storedData.replaceAll(fixReplacedNamesKey, fixReplacedNames[fixReplacedNamesKey]);
+            }
+            data = JSON.parse(storedData);
+            data.characters ??= [];
+            data.charactersPriorityList ??= [];
+            data.goals ??= [];
 
-            this.data.autoTeamsPreferences ??= defaultAutoTeamsPreferences;
-            this.data.legendaryEvents ??= defaultLegendaryEventsData;
-
-            this.data.legendaryEvents.jainZar ??= defaultLegendaryEventsData.jainZar;
-            this.data.legendaryEvents.aunShi ??= defaultLegendaryEventsData.aunShi;
-            this.data.legendaryEvents.shadowSun ??= defaultLegendaryEventsData.shadowSun;
+            data.viewPreferences ??= defaultViewPreferences;
+            data.autoTeamsPreferences ??= defaultAutoTeamsPreferences;
             
-            this.data.selectedTeamOrder ??=  {
+            data.selectedTeamOrder ??=  {
                 orderBy: 'name',
                 direction: 'desc',
             };
             
-            this.data.legendaryEvents3 ??= this.convertLegendaryEventsToV3(this.data.legendaryEvents);
+            data.legendaryEvents3 ??= data.legendaryEvents ? this.convertLegendaryEventsToV3(data.legendaryEvents) : defaultPersonalData.legendaryEvents3;
+            this._data.next(data);
         }
-
-        this.data ??= {
-            characters: [],
-            charactersPriorityList: [],
-            autoTeamsPreferences: defaultAutoTeamsPreferences,
-            legendaryEvents: defaultLegendaryEventsData,
-            selectedTeamOrder: {
-                orderBy: 'name',
-                direction: 'desc',  
-            },
-            legendaryEvents3: {} as ILegendaryEventsData3
-        };
     }
 
-    static save(): void {
-        this.data.modifiedDate = new Date();
-        const storeData = JSON.stringify(this.data);
-        localStorage.setItem(this.personalDataStorageKey, storeData);
-    }
-    
-    static addOrUpdateCharacterData(character: ICharacter): void {
-        const existingChar = PersonalDataService.data.characters.find(char => char.name === character.name);
-
-        if (existingChar) {
-            existingChar.unlocked = character.unlocked;
-            existingChar.progress = character.progress;
-            existingChar.rank = character.rank;
-            existingChar.rarity = character.rarity;
-            existingChar.rarityStars = character.rarityStars;
-            existingChar.leSelection = character.leSelection;
-            existingChar.alwaysRecommend = character.alwaysRecommend;
-            existingChar.neverRecommend = character.neverRecommend;
-        } else {
-            PersonalDataService.data.characters.push({
-                name: character.name,
-                unlocked: character.unlocked,
-                rank: character.rank,
-                rarity: character.rarity,
-                leSelection: character.leSelection,
-                alwaysRecommend: character.alwaysRecommend,
-                neverRecommend: character.neverRecommend,
-                progress: character.progress,
-                rarityStars: character.rarityStars,
-                currentShards: 0,
-                targetRarity: character.rarity,
-                targetRarityStars: character.rarityStars,
-            });
-        }
-
-        if (character.progress && !PersonalDataService.data.charactersPriorityList.includes(character.name)) {
-            PersonalDataService.data.charactersPriorityList.push(character.name);
-        }
-        if (!character.progress && PersonalDataService.data.charactersPriorityList.includes(character.name)) {
-            const indexToRemove = PersonalDataService.data.charactersPriorityList.indexOf(character.name);
-            PersonalDataService.data.charactersPriorityList.splice(indexToRemove, 1);
+    static saveTimeoutId: NodeJS.Timeout;
+    static save(modifiedDate: Date = new Date(), updateServer = true): void {
+        const data = this._data.value;
+        if(data) {
+            data.modifiedDate = modifiedDate;
+            data.legendaryEvents = undefined;
+            const storeData = JSON.stringify(data);
+            localStorage.setItem(this.personalDataStorageKey, storeData);
+            this._data.next(data);
+            if(updateServer && !!localStorage.getItem('token')) {
+                clearTimeout(this.saveTimeoutId);
+                this.saveTimeoutId = setTimeout(() => {
+                    setUserDataApi(data)
+                        .then(() => {
+                            this.save(new Date(), false);
+                            enqueueSnackbar('Pushed local data to server.', { variant: 'success' });
+                        })
+                        .catch((err: AxiosError<IErrorResponse>) => {
+                            if (err.response?.status === 401) {
+                                enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
+                            } else {
+                                enqueueSnackbar('Failed to push data to server. Please do manual back-up.', { variant: 'error' });
+                            }
+                        });
+                }, 10000);
+            }
         }
     }
 
@@ -156,12 +152,9 @@ export class PersonalDataService {
             };
         }
     }
-
-    static getLEPersonalData(eventId: LegendaryEvent):ILegendaryEventData3 {
-        return (this.data.legendaryEvents3 && this.data.legendaryEvents3[eventId]) || { id: eventId, alpha: {}, beta: {}, gamma: {} };
-    }
+    
     static downloadJson = () => {
-        const data = PersonalDataService.data;
+        const data = PersonalDataService._data.value;
         const jsonData = JSON.stringify(data, null, 2);
 
         const blob = new Blob([jsonData], { type: 'application/json' });
@@ -175,3 +168,98 @@ export class PersonalDataService {
         URL.revokeObjectURL(url);
     };
 }
+
+export const usePersonalData = () => {
+    const [data, setData] = useState<IPersonalData>(() => PersonalDataService._data.value);
+    
+    useEffect(() => {
+        const subscription = PersonalDataService.data$.subscribe(setData);
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, []);
+
+    return { 
+        personalData: data,
+        getLEPersonalData: (eventId: LegendaryEvent): ILegendaryEventData3 => {
+            return (data.legendaryEvents3 && data.legendaryEvents3[eventId]) || { id: eventId, alpha: {}, beta: {}, gamma: {} };
+        },
+        addOrUpdateCharacterData: (character: ICharacter): void => {
+            const existingChar = data.characters.find(char => char.name === character.name);
+
+            if (existingChar) {
+                existingChar.unlocked = character.unlocked;
+                existingChar.progress = character.progress;
+                existingChar.rank = character.rank;
+                existingChar.rarity = character.rarity;
+                existingChar.rarityStars = character.rarityStars;
+                existingChar.leSelection = character.leSelection;
+                existingChar.alwaysRecommend = character.alwaysRecommend;
+                existingChar.neverRecommend = character.neverRecommend;
+                existingChar.bias = character.bias;
+            } else {
+                data.characters.push({
+                    name: character.name,
+                    unlocked: character.unlocked,
+                    rank: character.rank,
+                    rarity: character.rarity,
+                    leSelection: character.leSelection,
+                    alwaysRecommend: character.alwaysRecommend,
+                    neverRecommend: character.neverRecommend,
+                    progress: character.progress,
+                    rarityStars: character.rarityStars,
+                    bias: character.bias
+                });
+            }
+
+            if (character.progress && !data.charactersPriorityList.includes(character.name)) {
+                data.charactersPriorityList.push(character.name);
+            }
+            if (!character.progress && data.charactersPriorityList.includes(character.name)) {
+                const indexToRemove = data.charactersPriorityList.indexOf(character.name);
+                data.charactersPriorityList.splice(indexToRemove, 1);
+            }
+            
+            PersonalDataService._data.next(data);
+        },
+        updateAutoTeamsSettings: (value: IAutoTeamsPreferences): void => {
+            data.autoTeamsPreferences = value;
+            PersonalDataService._data.next(data);
+            PersonalDataService.save();
+        },
+        updateViewSettings: (value: IViewPreferences): void => {
+            data.viewPreferences.lightWeight = value.lightWeight;
+            PersonalDataService._data.next(data);
+            PersonalDataService.save();
+        },
+        updateOrder: (value:  'name' | 'rank' | 'rarity'): void => {
+            data.selectedTeamOrder.orderBy = value;
+            PersonalDataService._data.next(data);
+            PersonalDataService.save();
+        },
+        updateDirection: (value:  'asc' | 'desc' ): void => {
+            data.selectedTeamOrder.direction = value;
+            PersonalDataService._data.next(data);
+            PersonalDataService.save();
+        },
+        updateGoals: (value:  IPersonalGoal[] ): void => {
+            data.goals = value.map((x, index) => ({ ...x, priority: index + 1 }));
+            PersonalDataService._data.next(data);
+            PersonalDataService.save();
+        },
+        updateLegendaryEventTeams: (newData: ILegendaryEventData3) => {
+            if (!data.legendaryEvents3) {
+                data.legendaryEvents3 = {
+                    [LegendaryEventEnum.JainZar]: {},
+                    [LegendaryEventEnum.AunShi]: {},
+                    [LegendaryEventEnum.ShadowSun]: {},
+                } as never;
+            }
+            if (data.legendaryEvents3) {
+                data.legendaryEvents3[newData.id] = newData;
+            }
+            PersonalDataService._data.next(data);
+            PersonalDataService.save();
+        }
+    };
+};

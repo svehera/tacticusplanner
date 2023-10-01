@@ -1,10 +1,11 @@
 ﻿import {
-    Alliance,
+    Alliance, CharacterBias,
     DamageType,
     Equipment,
     Faction,
     LegendaryEvent,
     LegendaryEvents,
+    PersonalGoalType,
     Rank,
     Rarity,
     RarityStars,
@@ -41,6 +42,7 @@ export interface UnitDataRaw {
   Number: number;
   ForcedSummons: boolean;
   RequiredInCampaign: boolean;
+  Icon: string;
 }
 
 export interface IUnitData {
@@ -65,6 +67,7 @@ export interface IUnitData {
   movement: number;
   forcedSummons: boolean;
   requiredInCampaign: boolean;
+  icon: string;
   legendaryEvents: ICharLegendaryEvents;
 }
 
@@ -111,16 +114,8 @@ export interface ILegendaryEvent {
   betaTrack: ILegendaryEventTrack;
   gammaTrack: ILegendaryEventTrack;
 
-  selectedTeams: ITableRow[];
   suggestedTeams: ITableRow[];
   allowedUnits: Array<ICharacter>;
-
-  getSelectedCharactersPoints(): Array<{
-    name: string;
-    points: number;
-    rank: Rank;
-    timesSelected: number;
-  }>;
 }
 
 export interface ILegendaryEventTrack {
@@ -159,12 +154,14 @@ export type ITableRow<T = ICharacter | string> = Record<string, T>;
 
 export interface IPersonalData {
   autoTeamsPreferences: IAutoTeamsPreferences;
+  viewPreferences: Pick<IViewPreferences, 'lightWeight'>;
   selectedTeamOrder: ISelectedTeamsOrdering;
   characters: IPersonalCharacter[];
   charactersPriorityList: string[];
-  legendaryEvents: ILegendaryEventsData;
+  goals: IPersonalGoal[];
+  legendaryEvents: ILegendaryEventsData | undefined;
   legendaryEvents3: ILegendaryEventsData3 | undefined;
-  modifiedDate?: Date;
+  modifiedDate?: Date | string;
 }
 
 export interface ILegendaryEventsData {
@@ -195,6 +192,7 @@ export interface IViewPreferences {
   showAlpha: boolean;
   showBeta: boolean;
   showGamma: boolean;
+  lightWeight: boolean;
 }
 
 export interface IAutoTeamsPreferences {
@@ -211,8 +209,7 @@ export interface ISelectedTeamsOrdering {
   direction: 'asc' | 'desc';
 }
 
-export type IPersonalCharacter = IPersonalCharacterData &
-  IPersonalCharacterProgression;
+export type IPersonalCharacter = IPersonalCharacterData;
 
 export interface IPersonalCharacterData {
   name: string;
@@ -222,19 +219,23 @@ export interface IPersonalCharacterData {
   rarity: Rarity;
   rarityStars: RarityStars;
   leSelection: LegendaryEvents;
-  alwaysRecommend: boolean;
-  neverRecommend: boolean;
-}
-
-export interface IPersonalCharacterProgression {
-  name: string;
-  currentShards: number;
-  targetRarity: Rarity;
-  targetRarityStars: RarityStars;
+  alwaysRecommend?: boolean;
+  neverRecommend?: boolean;
+  bias: CharacterBias;
 }
 
 export interface ICharProgression {
   shards: number;
   orbs?: number;
   rarity?: Rarity;
+}
+
+export interface IPersonalGoal {
+  id: string;
+  character: string;
+  type: PersonalGoalType;
+  priority: number;
+  targetRarity?: Rarity;
+  targetRank?: Rank;
+  notes?: string;
 }

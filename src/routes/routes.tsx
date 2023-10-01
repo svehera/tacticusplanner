@@ -11,7 +11,8 @@ import { Characters } from './characters/characters';
 import { DirtyDozen } from './dirty-dozen/dirty-dozen';
 import { LegendaryEventPage } from './legendary-events/legendary-events-page';
 import { Contacts } from './contacts/contacts';
-import { Progression } from './progression/progression';
+import { Goals } from './goals/goals';
+import { Thanks } from '../shared-components/thanks';
 
 export const appRoutes : () => RouteObject[] = () => [
     {
@@ -31,10 +32,6 @@ export const appRoutes : () => RouteObject[] = () => [
                 element: <Characters/>,
             },
             {
-                path: 'progression',
-                element: <Progression/>,
-            },
-            {
                 path: 'dirtyDozen',
                 element: <DirtyDozen/>,
             },
@@ -43,9 +40,17 @@ export const appRoutes : () => RouteObject[] = () => [
                 element: <LegendaryEventPage/>,
             },
             {
+                path: 'goals',
+                element: <Goals/>,
+            },
+            {
                 path: 'contacts',
                 element: <Contacts/>,
             },
+            {
+                path: 'ty',
+                element: <Thanks/>,
+            }
         ],
     },
 ];

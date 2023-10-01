@@ -5,7 +5,8 @@ import {
     CellClassParams, CellClickedEvent,
     ColDef,
     ColGroupDef,
-    ITooltipParams, ValueFormatterParams
+    ICellRendererParams,
+    ITooltipParams, ValueFormatterParams,
 } from 'ag-grid-community';
 
 import {
@@ -13,19 +14,20 @@ import {
     ILegendaryEventTrack,
     ILegendaryEventTrackRestriction,
     ITableRow,
-    LegendaryEventSection, SelectedTeams
 } from '../../models/interfaces';
 import { ViewSettingsContext, LegendaryEventContext } from '../../contexts';
 import { Rank, Rarity } from '../../models/enums';
 
 
 import { fitGridOnWindowResize } from '../../shared-logic/functions';
+import { CharacterTitle } from '../../shared-components/character-title';
 
 export const SelectedTeamsTable = (props: {
     track: ILegendaryEventTrack;
     teams: Record<string, Array<ICharacter | string>>;
     deselectChars: (teamName: string, ...chars: string[]) => void
 }) => {
+    const viewSettings = useContext(ViewSettingsContext);
     const { track, teams, deselectChars } = props;
     const gridRef = useRef<AgGridReact>(null);
 
@@ -48,10 +50,10 @@ export const SelectedTeamsTable = (props: {
         {
             headerName: track.name,
             headerClass: track.section,
-            children: getSectionColumns(track.unitsRestrictions),
+            children: getSectionColumns(track.unitsRestrictions, viewSettings.lightWeight),
             openByDefault: true
         },
-    ], [legendaryEvent.id]);
+    ], [legendaryEvent.id, viewSettings.lightWeight]);
 
     const handleCellCLick = (cellClicked: CellClickedEvent<ITableRow[], ICharacter>) => {
         const teamName = cellClicked.column.getColId();
@@ -74,12 +76,19 @@ export const SelectedTeamsTable = (props: {
         gridRef.current?.api?.sizeColumnsToFit();
     }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, legendaryEvent.id]);
 
-    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[]): Array<ColDef> {
+    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], lightweight: boolean): Array<ColDef> {
         return unitsRestrictions.map((u) => ({
             field: u.name,
             headerName: u.name,
             headerTooltip: u.name,
-            valueFormatter: (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
+            resizable: true,
+            valueFormatter: !lightweight ? undefined : (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
+            cellRenderer: lightweight ? undefined : (props: ICellRendererParams<ICharacter>) => {
+                const character = props.value;
+                if(character) {
+                    return <CharacterTitle character={character} imageSize={30}/>;
+                }
+            },
             cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
             tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rarity[params.value?.rarity ?? 0] + ' - ' + Rank[params.value?.rank ?? 0],
             suppressMovable: true,
@@ -90,11 +99,12 @@ export const SelectedTeamsTable = (props: {
 
     return (
         <div className="ag-theme-material auto-teams"
-            style={{ height: '240px', width: '100%', border: '2px solid black' }}>
+            style={{ height: '250px', width: '100%', border: '2px solid black' }}>
             <AgGridReact
                 ref={gridRef}
                 tooltipShowDelay={100}
                 rowData={rows}
+                rowHeight={35}
                 columnDefs={columnsDefs}
                 onGridReady={fitGridOnWindowResize(gridRef)}
                 onCellClicked={handleCellCLick}

@@ -4,29 +4,13 @@ import { Link } from 'react-router-dom';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
+import { Thanks } from '../../shared-components/thanks';
 
 export const About = () => {
 
     return (
         <div>
-            <h3 style={{ textAlign: 'center' }}>Plan your success in Tacticus,<br/> No more Google Sh**t</h3>
-
-            <div>
-                <p>
-                    Big Thanks to <b><a href="https://www.youtube.com/@DBPreacherTacticus" target={'_blank'}
-                        rel="noreferrer">DB Preacher: Tacticus</a></b> for his content
-                    and <a href="https://youtu.be/aD2ky2BxX_g?si=43Hk2O84QL23EzMY" target={'_blank'}
-                        rel="noreferrer">work</a> that inspired me for creating this web app
-                </p>
-                <p>
-                    Shout out to <a href="https://tacticus.fandom.com/wiki/Tacticus_Wiki" target={'_blank'}
-                        rel="noreferrer">Tacticus Wiki</a>
-                    and <a
-                        href="https://docs.google.com/spreadsheets/u/0/d/1al2IWwvTP3QOhHtfr6P8stdlA48ED4JFrtK8wDKznrk/htmlview"
-                        target={'_blank'} rel="noreferrer">(Towen) EN Labs T.A.C.T.I.C.U.S</a>
-                    for collecting and publishing game data. It was very helpful in creating this app.
-                </p>
-            </div>
+            <Thanks/>
 
             <h3 style={{ textAlign: 'center' }}>F.A.Q. and Instructions</h3>
 
@@ -119,7 +103,7 @@ export const About = () => {
                     <AccordionDetails>
                         <p>Send email to <a href="mailto: tacticusplanner@gmail.com" target={'_blank'}
                             rel="noreferrer">tacticusplanner@gmail.com</a> or reach me out in <a
-                            href="https://discord.gg/daK7y6f8" target={'_blank'} rel="noreferrer">Discord</a></p>
+                            href="https://discord.gg/B2ze6w7gx" target={'_blank'} rel="noreferrer">Discord</a></p>
                     </AccordionDetails>
                 </Accordion>
     

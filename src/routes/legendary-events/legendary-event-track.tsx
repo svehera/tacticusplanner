@@ -5,8 +5,9 @@ import {
     CellClassParams, CellClickedEvent,
     ColDef,
     ColGroupDef,
-    ITooltipParams, RowStyle,
-    ValueFormatterParams
+    ICellRendererParams,
+    ITooltipParams,
+    RowStyle, ValueFormatterParams,
 } from 'ag-grid-community';
 
 import {
@@ -23,6 +24,7 @@ import { Rank, Rarity } from '../../models/enums';
 import CustomTableHeader from './custom-table-header';
 import { fitGridOnWindowResize } from '../../shared-logic/functions';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
+import { CharacterTitle } from '../../shared-components/character-title';
 
 export const LegendaryEventTrack = ({ track, selectChars }: {
     track: ILegendaryEventTrack;
@@ -44,14 +46,14 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
         {
             headerName: track.name + ' - ' + track.killPoints,
             headerClass: track.section,
-            children: getSectionColumns(track.unitsRestrictions, track.section),
+            children: getSectionColumns(track.unitsRestrictions, track.section, viewPreferences.lightWeight),
             openByDefault: true
         },
-    ], [legendaryEvent.id]);
+    ], [legendaryEvent.id, viewPreferences.lightWeight]);
 
     const [restrictions, setRestrictions] = useState<string[]>(() => track.unitsRestrictions.filter(x => x.core).map((x => x.name)));
     
-    const teams = useMemo(() => track.suggestTeams(autoTeamsPreferences, restrictions), [autoTeamsPreferences, restrictions]);
+    const teams = useMemo(() => track.suggestTeams(autoTeamsPreferences, restrictions), [autoTeamsPreferences, restrictions, legendaryEvent.allowedUnits]);
 
     const rows: Array<ITableRow> = useMemo(() => getRows(track, teams), [teams]);
 
@@ -90,12 +92,19 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
         }
     };
 
-    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], suffix: LegendaryEventSection): Array<ColDef> {
+    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], suffix: LegendaryEventSection, lightweight: boolean): Array<ColDef> {
         return unitsRestrictions.map((u) => ({
             field: u.name,
             headerName: `(${u.points}) ${u.name}`,
             headerTooltip: `(${u.points}) ${u.name}`,
-            valueFormatter: (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
+            resizable: true,
+            valueFormatter: !lightweight ? undefined : (params: ValueFormatterParams) => typeof params.value === 'string' ? params.value : params.value?.name,
+            cellRenderer: lightweight ? undefined : (props: ICellRendererParams<ICharacter>) => {
+                const character = props.value;
+                if(character) {
+                    return <CharacterTitle character={character} imageSize={30}/>;
+                }
+            },
             cellClass: (params: CellClassParams) => typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
             tooltipValueGetter: (params: ITooltipParams) => typeof params.value === 'string' ? params.value : params.value?.name + ' - ' + Rarity[params.value?.rarity ?? 0] + ' - ' + Rank[params.value?.rank ?? 0],
             section: suffix,
@@ -126,12 +135,13 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
 
     return (
         <div className="ag-theme-material auto-teams"
-            style={{ height: 'calc((100vh - 150px) / 2)', width: '100%', border: '2px solid black' }}>
+            style={{ height: 'calc((100vh - 160px) / 2)', width: '100%', border: '2px solid black' }}>
             <AgGridReact
                 ref={gridRef}
                 tooltipShowDelay={100}
                 components={components}
                 rowData={rows}
+                rowHeight={35}
                 getRowStyle={getRowStyle}
                 columnDefs={columnsDefs}
                 onGridReady={fitGridOnWindowResize(gridRef)}

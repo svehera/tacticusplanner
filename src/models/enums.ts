@@ -8,11 +8,11 @@ export enum Faction {
     Ultramarines = 'Ultramarines',
     Black_Legion = 'Black Legion',
     Orks = 'Orks',
-    ADEPTA_SORORITAS = 'ADEPTA SORORITAS',
+    ADEPTA_SORORITAS = 'Adepta Sororitas',
     Necrons = 'Necrons',
-    Astra_militarum = 'Astra militarum',
+    Astra_militarum = 'Astra Militarum',
     Death_Guard = 'Death guard',
-    Black_Templars = 'Black templars',
+    Black_Templars = 'Black Templars',
     Aeldari = 'Aeldari',
     Space_Wolves = 'Space Wolves',
     T_Au = 'T\'au Empire',
@@ -150,4 +150,16 @@ export enum LegendaryEvent {
     JainZar = 1,
     AunShi = 2,
     ShadowSun = 4,
+}
+
+export enum PersonalGoalType {
+    None = 0,
+    UpgradeRank = 1,
+    Ascend = 2,
+}
+
+export enum CharacterBias {
+    NeverRecommend = -1,
+    None = 0,
+    AlwaysRecommend = 1
 }

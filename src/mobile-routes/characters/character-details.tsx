@@ -1,44 +1,50 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { useState } from 'react';
 import { ICharacter } from '../../models/interfaces';
-import { Checkbox, FormControl, FormControlLabel, FormGroup, MenuItem, Select, Tooltip } from '@mui/material';
-import { Rank, Rarity } from '../../models/enums';
-import { pooEmoji, starEmoji } from '../../models/constants';
+import { Checkbox, FormControl, FormControlLabel, FormGroup, MenuItem, Select } from '@mui/material';
+import { CharacterBias, Rank, Rarity } from '../../models/enums';
+import InputLabel from '@mui/material/InputLabel';
+import { getEnumValues, rankToString } from '../../shared-logic/functions';
+import { RankImage } from '../../shared-components/rank-image';
 
-export const CharacterDetails = (props: { character: ICharacter, characterChanges: (character: ICharacter) => void}) => {
-    const [unlocked, setUnlocked] = useState(props.character.unlocked);
-    const [rank, setRank] = useState(props.character.rank);
-    const [rarity, setRarity] = useState(props.character.rarity);
+export const CharacterDetails = ({ character, characterChanges }: { character: ICharacter, characterChanges: (character: ICharacter) => void}) => {
+    const [formData, setFormData] = useState({
+        unlocked: character.unlocked,
+        rank: character.rank,
+        rarity: character.rarity,
+        alwaysRecommend: character.alwaysRecommend,
+        neverRecommend: character.neverRecommend,
+        bias: character.bias
+    });
 
-    const [alwaysRecommend, setAlwaysRecommend] = useState(props.character.alwaysRecommend);
-    const [neverRecommend, setNeverRecommend] = useState(props.character.neverRecommend);
+    const handleInputChange = (name: keyof ICharacter, value: boolean | number) => {
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+        characterChanges({ ...character, [name]: value });
+    };
 
-    const rankEntries: Array<[string, string | number]> = Object.entries(Rank);
-    const rarityEntries: Array<[string, string | number]> = Object.entries(Rarity);
+    const rankEntries: number[] = getEnumValues(Rank).slice(1);
+    const rarityEntries: number[] = getEnumValues(Rarity);
+    const biasEntries: number[] = getEnumValues(CharacterBias);
     
-
-    useEffect(() => {
-        props.character.unlocked = unlocked;
-        props.character.rank = rank;
-        props.character.rarity = rarity;
-        props.character.alwaysRecommend = alwaysRecommend;
-        props.character.neverRecommend = neverRecommend;
-        props.characterChanges(props.character);
-    }, [unlocked, rank, rarity, alwaysRecommend, neverRecommend]);
-    
-    const getNativeSelectControl = (value: number, setValue: (value:number) => void, entries: Array<[string, string | number]>) => (
-        <FormControl variant={'standard'}>
+    const getNativeSelectControl = (value: number, name: keyof ICharacter, entries: Array<number>, getName: (value: number) => string, icon?: boolean) => (
+        <FormControl fullWidth>
+            <InputLabel>{name}</InputLabel>
             <Select
-                native={true}
+                label={name}
                 value={value}
-                onChange={event => setValue(+event.target.value)}
-                disableUnderline={true}
+                onChange={event => handleInputChange(name,+event.target.value)}
+                
             >
-                {entries.map(([name, value]) => (
-                    typeof value === 'number' && (
-                        <option key={value} value={value} >{name}
-                        </option>
-                    )
-                ))}
+                {entries.map(value => ((
+                    <MenuItem key={value} value={value}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                            <span>{getName(value)}</span>  
+                            {icon ? (<RankImage rank={value}/>) : undefined}
+                        </div>
+                    </MenuItem>
+                )))}
             </Select>
         </FormControl>
     );
@@ -46,32 +52,14 @@ export const CharacterDetails = (props: { character: ICharacter, characterChange
     return (
         <FormGroup style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
             <FormControlLabel control={<Checkbox
-                checked={unlocked}
-                onChange={(event) => setUnlocked(event.target.checked)}
+                checked={formData.unlocked}
+                onChange={(event) => handleInputChange('unlocked', event.target.checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
             />} label="Unlocked"/>
 
-            {getNativeSelectControl(rarity, setRarity, rarityEntries)}
-            {getNativeSelectControl(rank, setRank, rankEntries)}
-
-            <Tooltip disableHoverListener  enterTouchDelay={0} leaveTouchDelay={3000} title={'Character will be included in auto-teams whenever possible'}>
-                <FormControlLabel control={<Checkbox
-                    checked={alwaysRecommend}
-                    disabled={neverRecommend}
-                    onChange={(event) => setAlwaysRecommend(event.target.checked)}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                />} label={starEmoji}/>
-            </Tooltip>
-
-            <Tooltip disableHoverListener  enterTouchDelay={0} leaveTouchDelay={3000} title={'Character will be excluded from auto-teams whenever possible'}>
-                <FormControlLabel control={<Checkbox
-                    checked={neverRecommend}
-                    disabled={alwaysRecommend}
-                    onChange={(event) => setNeverRecommend(event.target.checked)}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                />}  label={pooEmoji}/>
-            </Tooltip>
-            
+            {getNativeSelectControl(formData.rarity, 'rarity', rarityEntries, (value) => Rarity[value])}
+            {getNativeSelectControl(formData.rank, 'rank', rankEntries, rankToString, true)}
+            {getNativeSelectControl(formData.bias, 'bias', biasEntries, (value) => CharacterBias[value])}
         </FormGroup>
     );
 };
