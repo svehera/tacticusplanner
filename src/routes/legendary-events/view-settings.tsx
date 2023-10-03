@@ -12,9 +12,7 @@ const ViewSettings = (props: { value: IViewPreferences, valueChanges: (settings:
         setPreferences((previousValue) => {
             const newValue = { ...previousValue, [setting]: value };
             props.valueChanges(newValue);
-            if(setting === 'lightWeight') {
-                updateViewSettings(newValue);
-            }
+            updateViewSettings(newValue);
             return newValue;
         });
     }, []);
