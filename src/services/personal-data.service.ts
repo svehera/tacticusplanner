@@ -228,7 +228,7 @@ export const usePersonalData = () => {
             PersonalDataService.save();
         },
         updateViewSettings: (value: IViewPreferences): void => {
-            data.viewPreferences.lightWeight = value.lightWeight;
+            data.viewPreferences = value;
             PersonalDataService._data.next(data);
             PersonalDataService.save();
         },

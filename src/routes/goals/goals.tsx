@@ -1,9 +1,9 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { EditGoalDialog, SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 import { ICharacter, IPersonalGoal } from '../../models/interfaces';
 import { PersonalGoalType } from '../../models/enums';
 
-import { useCharacters, usePersonalData } from '../../services';
+import { PersonalDataService, useCharacters, usePersonalData } from '../../services';
 import { RankImage } from '../../shared-components/rank-image';
 import { RarityImage } from '../../shared-components/rarity-image';
 import { CharacterTitle } from '../../shared-components/character-title';
@@ -12,11 +12,17 @@ import IconButton from '@mui/material/IconButton';
 
 import { DeleteForever, ArrowForward, Edit } from '@mui/icons-material';
 
-
 export const Goals = () => {
     const { personalData, updateGoals } = usePersonalData();
-    const [goals, setGoals] = useState<IPersonalGoal[]>(() => personalData.goals);
+    const [goals, setGoals] = useState<IPersonalGoal[]>(personalData.goals);
     const [editGoal, setEditGoal] = useState<IPersonalGoal | null>(null);
+
+    useEffect(() => {
+        const subscription = PersonalDataService.data$.subscribe( (value) => setGoals(value.goals));
+        return () => {
+            subscription.unsubscribe();
+        };
+    }, []);
 
     const removeGoal = (goalId: string): void => {
         setGoals(currentGoals => {

@@ -23,6 +23,7 @@ import { getEnumValues, rankToString } from '../../shared-logic/functions';
 import { RankImage } from '../rank-image';
 import { Tooltip } from '@fluentui/react-components';
 import { enqueueSnackbar } from 'notistack';
+import { CharacterItem } from '../character-item';
 
 const getDefaultForm = (priority: number) =>({
     id: v4(),
@@ -149,7 +150,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             </div>
 
             <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
-                <DialogTitle style={{ display: 'flex', alignItems: 'center', gap: 15 }}><span>Set Goal</span> { character ? <CharacterTitle character={character}/> : undefined}</DialogTitle>
+                <DialogTitle style={{ display: 'flex', alignItems: 'center', gap: 15 }}><span>Set Goal</span> { character ? <CharacterItem character={character}/> : undefined}</DialogTitle>
                 <DialogContent>
                     <Box component="form" id="set-goal-form" style={{ padding: 20 }} onSubmit={event => event.preventDefault()}>
                         <Autocomplete
@@ -197,6 +198,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             >
                                 <MenuItem value={PersonalGoalType.UpgradeRank}>Upgrade Rank</MenuItem>
                                 <MenuItem value={PersonalGoalType.Ascend}>Ascend</MenuItem>
+                                <MenuItem value={PersonalGoalType.Unlock}>Unlock</MenuItem>
                             </Select>
                         </FormControl>
                     
@@ -325,7 +327,7 @@ export const EditGoalDialog = ({ isOpen, onClose, goal }: { isOpen: boolean, goa
 
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
-            <DialogTitle style={{ display: 'flex', alignItems: 'center', gap: 15 }}><span>Edit Goal</span> { character ? <CharacterTitle character={character}/> : undefined}</DialogTitle>
+            <DialogTitle style={{ display: 'flex', alignItems: 'center', gap: 15 }}><span>Edit Goal</span> { character ? <CharacterItem character={character}/> : undefined}</DialogTitle>
             <DialogContent>
                 <Box component="form" id="set-goal-form" style={{ padding: 20 }} onSubmit={event => event.preventDefault()}>
                     <Autocomplete

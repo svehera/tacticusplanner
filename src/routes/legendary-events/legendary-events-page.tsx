@@ -26,12 +26,7 @@ export const LegendaryEventPage = () => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
 
-    const [viewPreferences, setViewPreferences] = useState<IViewPreferences>({
-        showAlpha: true,
-        showBeta: true,
-        showGamma: true,
-        lightWeight: personalData.viewPreferences?.lightWeight,
-    });
+    const [viewPreferences, setViewPreferences] = useState<IViewPreferences>(personalData.viewPreferences);
     const [autoTeamsPreferences, setAutoTeamsPreferences] = useState(personalData.autoTeamsPreferences);
 
     useEffect(() => {
