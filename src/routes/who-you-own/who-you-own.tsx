@@ -1,16 +1,13 @@
 ﻿import React, { useMemo, useState } from 'react';
 
-import { DialogActions, DialogContent, DialogTitle, TextField, } from '@mui/material';
+import { TextField, } from '@mui/material';
 
 import { ICharacter } from '../../models/interfaces';
-import { PersonalDataService, useCharacters, usePersonalData } from '../../services';
+import { useCharacters } from '../../services';
 
 import { groupBy } from 'lodash';
 import Box from '@mui/material/Box';
-import Dialog from '@mui/material/Dialog';
-import { CharacterDetails } from '../../mobile-routes/characters/character-details';
-import Button from '@mui/material/Button';
-import { CharacterTitle } from '../../shared-components/character-title';
+import { CharacterItem } from '../../shared-components/character-item';
 
 export const WhoYouOwn = () => {
     const { characters } = useCharacters();
@@ -53,55 +50,3 @@ const Alliance = ({ alliance, characters }: { alliance: string, characters: ICha
         <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 50 }}>{itemList}</div>
     </div>);
 };
-
-const CharacterItem = (props: { character: ICharacter }) => {
-    const [open, setOpen] = useState(false);
-    const [character, setCharacter] = useState(() => ({ ...props.character }));
-    const { addOrUpdateCharacterData } = usePersonalData();
-    const { updateCharacterData } = useCharacters();
-    const saveChanges = () => {
-        updateCharacterData(character);
-        addOrUpdateCharacterData(character);
-        PersonalDataService.save();
-    };
-
-    const handleClickOpen = () => {
-        setCharacter({ ...props.character });
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-    
-    return (
-        <div>
-            <div onClick={handleClickOpen} style={{ cursor: 'pointer' }}>
-                <CharacterTitle character={props.character} showLockedWithOpacity={true}/>
-            </div>
-            
-            <Dialog open={open} onClose={handleClose} fullWidth>
-                <DialogTitle>
-                    <CharacterTitle character={character}/>
-                </DialogTitle>
-                <DialogContent>
-                    <CharacterDetails character={character} characterChanges={setCharacter}/>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={() => {
-                        saveChanges();
-                        handleClose();
-                    }}>Save</Button>
-                </DialogActions>
-            </Dialog>
-        </div>
-    );
-};
-
-
-
-
-
-
-
