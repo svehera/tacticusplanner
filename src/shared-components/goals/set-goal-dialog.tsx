@@ -198,6 +198,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             >
                                 <MenuItem value={PersonalGoalType.UpgradeRank}>Upgrade Rank</MenuItem>
                                 <MenuItem value={PersonalGoalType.Ascend}>Ascend</MenuItem>
+                                <MenuItem value={PersonalGoalType.Unlock}>Unlock</MenuItem>
                             </Select>
                         </FormControl>
                     

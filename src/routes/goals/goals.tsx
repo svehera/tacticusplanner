@@ -12,7 +12,6 @@ import IconButton from '@mui/material/IconButton';
 
 import { DeleteForever, ArrowForward, Edit } from '@mui/icons-material';
 
-
 export const Goals = () => {
     const { personalData, updateGoals } = usePersonalData();
     const [goals, setGoals] = useState<IPersonalGoal[]>(personalData.goals);
