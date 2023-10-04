@@ -1,9 +1,11 @@
 ﻿import {
     IAutoTeamsPreferences,
     ICharacter,
-    ILegendaryEventData3,
+    ILegendaryEventData3, 
+    ILegendaryEventProgressState,
     ILegendaryEventsData,
     ILegendaryEventsData3,
+    ILegendaryEventsProgressState,
     IPersonalData,
     IPersonalGoal, IViewPreferences,
     SelectedTeams,
@@ -28,7 +30,8 @@ const defaultPersonalData: IPersonalData = {
     },
     goals: [],
     legendaryEvents: undefined,
-    legendaryEvents3: {} as ILegendaryEventsData3
+    legendaryEvents3: {} as ILegendaryEventsData3,
+    legendaryEventsProgress: {} as ILegendaryEventsProgressState
 };
 
 const fixReplacedNames: Record<string, string> = {
@@ -68,6 +71,7 @@ export class PersonalDataService {
             };
             
             data.legendaryEvents3 ??= data.legendaryEvents ? this.convertLegendaryEventsToV3(data.legendaryEvents) : defaultPersonalData.legendaryEvents3;
+            data.legendaryEventsProgress ??= {} as ILegendaryEventsProgressState;
             this._data.next(data);
         }
     }
@@ -257,6 +261,21 @@ export const usePersonalData = () => {
             }
             if (data.legendaryEvents3) {
                 data.legendaryEvents3[newData.id] = newData;
+            }
+            PersonalDataService._data.next(data);
+            PersonalDataService.save();
+        },
+        updateLegendaryEventProgress: (newData: ILegendaryEventProgressState) => {
+            if (!data.legendaryEventsProgress) {
+                data.legendaryEventsProgress = {
+                    [LegendaryEventEnum.JainZar]: {},
+                    [LegendaryEventEnum.AunShi]: {},
+                    [LegendaryEventEnum.ShadowSun]: {},
+                } as never;
+            }
+            if (data.legendaryEventsProgress) {
+                data.legendaryEventsProgress[newData.id] = newData;
+                
             }
             PersonalDataService._data.next(data);
             PersonalDataService.save();

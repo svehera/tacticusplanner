@@ -12,6 +12,7 @@ import { FormControl, MenuItem, Select, Tooltip } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import { orderBy } from 'lodash';
 import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
+import { MyProgressDialog } from './my-progress-dialog';
 
 const LegendaryEvent = () => {
     const viewPreferences = useContext(ViewSettingsContext);
@@ -103,6 +104,7 @@ const LegendaryEvent = () => {
                 </div>
                 <div  style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <SetGoalDialog key={personalData.goals.length}/>
+                    <MyProgressDialog legendaryEvent={legendaryEvent}/>
                     <DataTablesDialog legendaryEvent={legendaryEvent} ></DataTablesDialog>
                 </div>
             </div>

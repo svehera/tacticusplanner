@@ -12,7 +12,7 @@ import {
 import {
     ICharacter,
     ILegendaryEventTrack,
-    ILegendaryEventTrackRestriction,
+    ILegendaryEventTrackRequirement,
     ITableRow,
 } from '../../models/interfaces';
 import { ViewSettingsContext, LegendaryEventContext } from '../../contexts';
@@ -76,7 +76,7 @@ export const SelectedTeamsTable = (props: {
         gridRef.current?.api?.sizeColumnsToFit();
     }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, legendaryEvent.id]);
 
-    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], lightweight: boolean): Array<ColDef> {
+    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRequirement[], lightweight: boolean): Array<ColDef> {
         return unitsRestrictions.map((u) => ({
             field: u.name,
             headerName: u.name,

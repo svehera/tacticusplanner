@@ -124,7 +124,7 @@ export interface ILegendaryEventTrack {
   name: string;
   killPoints: number;
   allowedUnits: ICharacter[];
-  unitsRestrictions: Array<ILegendaryEventTrackRestriction>;
+  unitsRestrictions: Array<ILegendaryEventTrackRequirement>;
 
   getCharacterPoints(char: ICharacter): number;
 
@@ -143,7 +143,7 @@ export interface ILegendaryEventTrack {
   ): Array<ICharacter>;
 }
 
-export interface ILegendaryEventTrackRestriction {
+export interface ILegendaryEventTrackRequirement {
   name: string;
   points: number;
   core?: boolean;
@@ -161,6 +161,7 @@ export interface IPersonalData {
   goals: IPersonalGoal[];
   legendaryEvents: ILegendaryEventsData | undefined;
   legendaryEvents3: ILegendaryEventsData3 | undefined;
+  legendaryEventsProgress: ILegendaryEventsProgressState;
   modifiedDate?: Date | string;
 }
 
@@ -238,4 +239,42 @@ export interface IPersonalGoal {
   targetRarity?: Rarity;
   targetRank?: Rank;
   notes?: string;
+}
+
+export type ILegendaryEventsProgressState = Record<
+    LegendaryEvent,
+    ILegendaryEventProgressState
+>;
+
+export interface ILegendaryEventProgressState {
+  id: LegendaryEvent;
+  name: string;
+  alpha: ILegendaryEventProgressTrackState;
+  beta: ILegendaryEventProgressTrackState;
+  gamma: ILegendaryEventProgressTrackState;
+  regularMissions: number;
+  premiumMissions: number;
+}
+
+
+
+export interface ILegendaryEventProgressTrackState {
+  battles: Array<boolean[]>;
+}
+
+export interface ILegendaryEventProgress {
+  alpha: ILegendaryEventProgressTrack;
+  beta: ILegendaryEventProgressTrack;
+  gamma: ILegendaryEventProgressTrack;
+}
+
+export interface ILegendaryEventProgressTrack {
+  name: 'alpha' | 'beta' | 'gamma';
+  requirements: ILegendaryEventTrackRequirement[];
+  battles: ILegendaryEventBattle[];
+}
+
+export interface ILegendaryEventBattle {
+  battleNumber: number;
+  state: boolean[];
 }

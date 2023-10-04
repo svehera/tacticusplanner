@@ -13,7 +13,7 @@ import {
 import {
     ICharacter,
     ILegendaryEventTrack,
-    ILegendaryEventTrackRestriction,
+    ILegendaryEventTrackRequirement,
     ITableRow,
     LegendaryEventSection
 } from '../../models/interfaces';
@@ -92,7 +92,7 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
         }
     };
 
-    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], suffix: LegendaryEventSection, lightweight: boolean): Array<ColDef> {
+    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRequirement[], suffix: LegendaryEventSection, lightweight: boolean): Array<ColDef> {
         return unitsRestrictions.map((u) => ({
             field: u.name,
             headerName: `(${u.points}) ${u.name}`,

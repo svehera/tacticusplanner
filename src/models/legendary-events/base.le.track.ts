@@ -2,7 +2,7 @@
     IAutoTeamsPreferences,
     ICharacter,
     ILegendaryEventTrack,
-    ILegendaryEventTrackRestriction,
+    ILegendaryEventTrackRequirement,
     LegendaryEventSection
 } from '../interfaces';
 import { intersectionBy, orderBy, sum } from 'lodash';
@@ -17,7 +17,7 @@ export class LETrack implements ILegendaryEventTrack {
         public name: string,
         public killPoints: number,
         public allowedUnits: ICharacter[],
-        public unitsRestrictions: Array<ILegendaryEventTrackRestriction>
+        public unitsRestrictions: Array<ILegendaryEventTrackRequirement>
     ) {
         this.unitsRestrictions = orderBy(unitsRestrictions, 'points');
     }
