@@ -4,10 +4,36 @@ import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
 import { LETrack } from './base.le.track';
 
+const regularMissions: string[] = [
+    'Play one Philosophy of War Battle, Deal 1000 damage',
+    'Defeat 30 Necrons',
+    'Defeat 75 Tyranids',
+    'Defeat 100 Ultramarines',
+    'Use abilities 15 times with Xenos units, Deal 10k damage with Abilities',
+    'Use abilities 20 times with Imperial units, Deal 15k damage with Abilities',
+    'Use abilities 25 times with Chaos units, Deal 20k damage with Abilities',
+    'Play 3 Philosophy of War Battles, Deal 25k Bolter damage',
+    'Play 3 Philosophy of War Battles, Deal 25k Psychic damage',
+    'Play 3 Philosophy of War Battles, Deal 25k Power damage'
+];
+
+const premiumMissions: string[] = [
+    'Win 1 battle without Summoning any units',
+    'Defeat 30 enemies with Xenos units',
+    'Defeat 75 enemies with Imperial units',
+    'Defeat 100 enemies with Chaos units',
+    'Win 5 battles without deploying any Resilient characters',
+    'Win 5 battles without deploying any Overwatch characters',
+    'Win 5 battles without deploying any Living Metal characters',
+    'Defeat 75 enemies with Bolter Damage',
+    'Defeat 75 enemies with Psychic Damage',
+    'Defeat 75 enemies with Power Damage'
+];
+
 export class ShadowSunLegendaryEvent extends LegendaryEventBase {
 
     constructor(unitsData: Array<ICharacter>) {
-        super(LegendaryEvent.ShadowSun, 'Shadowsun',  unitsData);
+        super(LegendaryEvent.ShadowSun, 'Shadowsun', unitsData, regularMissions, premiumMissions);
     }
 
     protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {

@@ -116,6 +116,8 @@ export interface ILegendaryEvent {
 
   suggestedTeams: ITableRow[];
   allowedUnits: Array<ICharacter>;
+  regularMission: string[];
+  premiumMissions: string[];
 }
 
 export interface ILegendaryEventTrack {
@@ -266,6 +268,8 @@ export interface ILegendaryEventProgress {
   alpha: ILegendaryEventProgressTrack;
   beta: ILegendaryEventProgressTrack;
   gamma: ILegendaryEventProgressTrack;
+  regularMissions: number;
+  premiumMissions: number;
 }
 
 export interface ILegendaryEventProgressTrack {

@@ -1,6 +1,7 @@
 ﻿import React, { useMemo } from 'react';
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Checkbox, FormControlLabel } from '@mui/material';
 import {
+    ILegendaryEvent,
     ILegendaryEventBattle,
     ILegendaryEventProgress,
     ILegendaryEventProgressTrack,
@@ -9,29 +10,20 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getCompletionRateColor } from '../shared-logic/functions';
 
-export const LeProgressOverview = ({ progress }: { progress: ILegendaryEventProgress }) => {
+export const LeProgressOverview = ({ progress, legendaryEvent }: { progress: ILegendaryEventProgress, legendaryEvent: ILegendaryEvent }) => {
     const [accordionExpanded, setAccordionExpanded] = React.useState<string | false>(false);
+    
+    const [regularMissionsProgress, setRegularMissionsProgress] = React.useState<number>(progress.regularMissions);
+    const [premiumMissionsProgress, setPremiumMissionsProgress] = React.useState<number>(progress.premiumMissions);
 
     const handleAccordionChange =
         (section: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
             setAccordionExpanded(isExpanded ? section : false);
         };
-
-    const getBackgroundColor = (track: 'alpha' | 'beta' | 'gamma'): string => {
-        const trackProgress = progress[track];
-        const numberOfCompleted = trackProgress.battles.flatMap(battle => battle.state).filter(x => x).length;
-        
-        return getCompletionRateColor(numberOfCompleted, trackProgress.battles.length * trackProgress.requirements.length);
-    };
-
-
+    
     return (
         <div>
-            <Accordion TransitionProps={{ unmountOnExit: true }}  expanded={accordionExpanded === 'alpha'} onChange={handleAccordionChange('alpha')} style={{
-                borderInlineStartWidth: 10,
-                borderInlineStartColor: getBackgroundColor('alpha'),
-                borderInlineStartStyle: 'solid'
-            }}>
+            <Accordion TransitionProps={{ unmountOnExit: true }}  expanded={accordionExpanded === 'alpha'} onChange={handleAccordionChange('alpha')}>
                 <AccordionSummary expandIcon={
                     <ExpandMoreIcon/>}>
                     <TrackSummary title={'Alpha'} trackProgress={progress.alpha}/>
@@ -41,11 +33,7 @@ export const LeProgressOverview = ({ progress }: { progress: ILegendaryEventProg
                 </AccordionDetails>
             </Accordion>
 
-            <Accordion TransitionProps={{ unmountOnExit: true }}  expanded={accordionExpanded === 'beta'} onChange={handleAccordionChange('beta')} style={{
-                borderInlineStartWidth: 10,
-                borderInlineStartColor: getBackgroundColor('beta'),
-                borderInlineStartStyle: 'solid'
-            }}>
+            <Accordion TransitionProps={{ unmountOnExit: true }}  expanded={accordionExpanded === 'beta'} onChange={handleAccordionChange('beta')}>
                 <AccordionSummary expandIcon={
                     <ExpandMoreIcon/>}>
                     <TrackSummary title={'Beta'} trackProgress={progress.beta}/>
@@ -55,11 +43,7 @@ export const LeProgressOverview = ({ progress }: { progress: ILegendaryEventProg
                 </AccordionDetails>
             </Accordion>
 
-            <Accordion TransitionProps={{ unmountOnExit: true }}  expanded={accordionExpanded === 'gamma'} onChange={handleAccordionChange('gamma')} style={{
-                borderInlineStartWidth: 10,
-                borderInlineStartColor: getBackgroundColor('gamma'),
-                borderInlineStartStyle: 'solid'
-            }}>
+            <Accordion TransitionProps={{ unmountOnExit: true }}  expanded={accordionExpanded === 'gamma'} onChange={handleAccordionChange('gamma')}>
                 <AccordionSummary expandIcon={
                     <ExpandMoreIcon/>}>
                     <TrackSummary title={'Gamma'} trackProgress={progress.gamma}/>
@@ -68,6 +52,61 @@ export const LeProgressOverview = ({ progress }: { progress: ILegendaryEventProg
                     <TrackDetails trackProgress={progress.gamma}/>
                 </AccordionDetails>
             </Accordion>
+
+            { 
+                legendaryEvent.regularMission.length
+                    ? (
+                        <Accordion TransitionProps={{ unmountOnExit: true }} expanded={accordionExpanded === 'regularMissions'}
+                            onChange={handleAccordionChange('regularMissions')}>
+                            <AccordionSummary expandIcon={
+                                <ExpandMoreIcon/>}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                    <span>Regular Missions</span>
+                                    <span style={{ fontWeight: 700 }}>{progress.regularMissions}/{10}</span>
+                                </div>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    {legendaryEvent.regularMission.map((mission, index) =>
+                                        <FormControlLabel key={mission} control={<Checkbox
+                                            checked={ index < regularMissionsProgress}
+                                            onChange={(_, checked) => setRegularMissionsProgress(checked ? index + 1 : index)}
+                                            inputProps={{ 'aria-label': 'controlled' }}
+                                        />} label={index + 1 + '. ' + mission}/>
+                                    )}
+                                </div>
+                            </AccordionDetails>
+                        </Accordion>
+                    ) 
+                    : undefined 
+            }
+
+            {
+                legendaryEvent.premiumMissions.length
+                    ? (
+                        <Accordion TransitionProps={{ unmountOnExit: true }}  expanded={accordionExpanded === 'premiumMissions'} onChange={handleAccordionChange('premiumMissions')} >
+                            <AccordionSummary expandIcon={
+                                <ExpandMoreIcon/>}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                    <span>Premium Missions</span>
+                                    <span style={{ fontWeight: 700 }}>{progress.premiumMissions}/{10}</span>
+                                </div>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    {legendaryEvent.premiumMissions.map((mission, index) =>
+                                        <FormControlLabel key={mission} control={<Checkbox
+                                            checked={ index < premiumMissionsProgress}
+                                            onChange={(_, checked) => setPremiumMissionsProgress(checked ? index + 1 : index)}
+                                            inputProps={{ 'aria-label': 'controlled' }}
+                                        />} label={index + 1 + '. ' + mission}/>
+                                    )}
+                                </div>
+                            </AccordionDetails>
+                        </Accordion>
+                    )
+                    : undefined
+            }
         </div>
     );
 };

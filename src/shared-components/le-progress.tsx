@@ -107,10 +107,12 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
             </Tabs>
             <TabPanel value={value} index={0}>
                 <p>Total: <span style={{ fontWeight: 700 }}> {currentPoints} / {totalPoints}</span></p>
-                <LeProgressOverview progress={{
+                <LeProgressOverview legendaryEvent={legendaryEvent} progress={{
                     alpha: alphaProgress,
                     beta: betaProgress,
                     gamma: gammaProgress,
+                    regularMissions: personalProgress.regularMissions,
+                    premiumMissions: personalProgress.premiumMissions,
                 }}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
