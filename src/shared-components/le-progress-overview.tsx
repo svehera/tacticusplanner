@@ -122,21 +122,17 @@ export const LeProgressOverview = ({ progress, legendaryEvent, missionProgressCh
 };
 
 const TrackSummary = ({ title, trackProgress }: { title: string, trackProgress: ILegendaryEventProgressTrack}) => {
-    const totalBattles = useMemo(() => trackProgress.requirements.length * trackProgress.battles.length, []) ;
+    const totalBattles = useMemo(() => trackProgress.battles.flatMap(b => b.requirements).length, []) ;
     const currentBattles = useMemo(() => trackProgress.battles.flatMap(x => x.state).filter(x => x).length, []);
 
-    const totalBattlesPoints = useMemo(() =>  trackProgress.battles.map(x => x.battlePoints).reduce((accumulator, currentValue) => accumulator + currentValue, 0), []);
-    const totalPoints = useMemo(() =>  trackProgress.requirements.map(x => x.points).reduce((accumulator, currentValue) => accumulator + currentValue, 0) * trackProgress.battles.length, []) + totalBattlesPoints;
+    const totalPoints = useMemo(() =>  trackProgress.battles.flatMap(b => b.requirements).map(x => x.points).reduce((accumulator, currentValue) => accumulator + currentValue, 0) , []);
     const currentPoints = useMemo(() => {
         let total = 0;
 
         trackProgress.battles.forEach(battle => {
             battle.state.forEach((value, index) => {
                 if(value) {
-                    total += trackProgress.requirements[index].points;
-                }
-                if(value && index === 0) {
-                    total += battle.battlePoints;
+                    total += battle.requirements[index].points;
                 }
             });
         });
@@ -155,16 +151,18 @@ const TrackSummary = ({ title, trackProgress }: { title: string, trackProgress: 
 };
 
 const TrackDetails = ({ trackProgress }: { trackProgress: ILegendaryEventProgressTrack}) => {
+    const requirements = trackProgress.battles[0].requirements.map(x => x.name);
+    
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {trackProgress.requirements.map((req, index) =>
-                <RequirementDetails key={req.name} req={req} battles={trackProgress.battles} reqIndex={index}/>
+            {requirements.map((reqName, index) =>
+                <RequirementDetails key={reqName} reqName={reqName} battles={trackProgress.battles} reqIndex={index}/>
             )}
         </div>
     );
 };
 
-const RequirementDetails = ({ req, battles, reqIndex }: {req: ILegendaryEventTrackRequirement, battles: ILegendaryEventBattle[], reqIndex: number}) => {
+const RequirementDetails = ({ reqName, battles, reqIndex }: {reqName: string, battles: ILegendaryEventBattle[], reqIndex: number}) => {
     const completedBattles = useMemo(() => {
         let total = 0;
         
@@ -182,11 +180,7 @@ const RequirementDetails = ({ req, battles, reqIndex }: {req: ILegendaryEventTra
 
         battles.forEach(battle => {
             if(battle.state[reqIndex]) {
-                total += req.points;
-            }
-            
-            if(battle.state[reqIndex] && reqIndex === 0) {
-                total += battle.battlePoints;
+                total += battle.requirements[reqIndex].points;
             }
         });
 
@@ -194,16 +188,12 @@ const RequirementDetails = ({ req, battles, reqIndex }: {req: ILegendaryEventTra
     },[]);
 
     const totalPoints = useMemo(() => {
-        if (reqIndex === 0) {
-            return battles.map(x => x.battlePoints).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-        }
-        
-        return req.points * battles.length;
+        return battles.map(x => x.requirements[reqIndex].points).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     },[]); 
     
     return (
-        <div key={req.name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span>{req.name}</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span>{reqName}</span>
             <span style={{ fontWeight: 700 }}>{completedBattles}/{battles.length}</span>
             <span style={{ fontWeight: 700 }}>{scoredPoints}/{totalPoints}</span>
             <div style={{

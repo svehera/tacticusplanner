@@ -275,12 +275,11 @@ export interface ILegendaryEventProgress {
 
 export interface ILegendaryEventProgressTrack {
   name: 'alpha' | 'beta' | 'gamma';
-  requirements: ILegendaryEventTrackRequirement[];
   battles: ILegendaryEventBattle[];
 }
 
 export interface ILegendaryEventBattle {
   battleNumber: number;
-  battlePoints: number;
   state: boolean[];
+  requirements: ILegendaryEventTrackRequirement[];
 }

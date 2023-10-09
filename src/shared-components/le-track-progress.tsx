@@ -58,17 +58,17 @@ export const LeTrackProgress = ({ trackProgress, onStateUpdate }: { trackProgres
                         }}>
                         <AccordionSummary expandIcon={
                             <ExpandMoreIcon/>}>
-                            <BattleSummary battle={battle} points={trackProgress.requirements.map(x => x.points)} masterCheckboxChange={value => toggleAll(value, battle)}/>
+                            <BattleSummary battle={battle} masterCheckboxChange={value => toggleAll(value, battle)}/>
                         </AccordionSummary>
                         <AccordionDetails>
                             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                                {trackProgress.requirements.map((req, index) =>
+                                {battle.requirements.map((req, index) =>
                                     <FormControlLabel key={req.name} control={<Checkbox
                                         checked={battle.state[index]}
                                         value={battle.state[index] ?? false}
                                         onChange={event => handleChange(event, battle, index)}
                                         inputProps={{ 'aria-label': 'controlled' }}
-                                    />} label={req.name + `(${req.points || battle.battlePoints})`}/>
+                                    />} label={req.name + `(${req.points})`}/>
                                 )}
                             </div>
                         </AccordionDetails>
@@ -79,25 +79,21 @@ export const LeTrackProgress = ({ trackProgress, onStateUpdate }: { trackProgres
     );
 };
 
-const BattleSummary = ({ battle, points, masterCheckboxChange }: { battle: ILegendaryEventBattle, points: number[], masterCheckboxChange: (value: boolean) => void }) => {
+const BattleSummary = ({ battle, masterCheckboxChange }: { battle: ILegendaryEventBattle, masterCheckboxChange: (value: boolean) => void }) => {
     
     const currentPoints = useMemo(() => {
         let total = 0;
 
         battle.state.forEach((value, index) => {
             if (value) {
-                total += points[index];
-            }
-            
-            if(value && index === 0) {
-                total += battle.battlePoints;
+                total += battle.requirements[index].points;
             }
         });
 
         return total;
     }, [battle.state]);
     
-    const totalPoints = useMemo(() => points.reduce((accumulator, currentValue) => accumulator + currentValue, 0), []) + battle.battlePoints;
+    const totalPoints = useMemo(() => battle.requirements.map(x => x.points).reduce((accumulator, currentValue) => accumulator + currentValue, 0), []);
     
     const completedSections = battle.state.filter(x => x).length;
     const totalSections = battle.state.length;
