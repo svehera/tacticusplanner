@@ -87,7 +87,7 @@ export const LegendaryEventPage = () => {
                         scrollButtons="auto"
                         aria-label="scrollable auto tabs example"
                     >
-                        <Tab label="Shadowsun 2/3 (October 15)" value={LegendaryEventEnum.ShadowSun}
+                        <Tab label="Shadowsun 2/3 (October 15)" value={LegendaryEventEnum.Shadowsun}
                             onClick={() => setLegendaryEvent(new ShadowSunLegendaryEvent(characters))}/>
                         <Tab label="Aun Shi 3/3 (TBA)" value={LegendaryEventEnum.AunShi}
                             onClick={() => setLegendaryEvent(new AunShiLegendaryEvent(characters))}/>

@@ -39,7 +39,7 @@ const battlePoints: [number[], number[], number[]] = [
 export class ShadowSunLegendaryEvent extends LegendaryEventBase {
 
     constructor(unitsData: Array<ICharacter>) {
-        super(LegendaryEvent.ShadowSun, 'Shadowsun', unitsData, regularMissions, premiumMissions, battlePoints);
+        super(LegendaryEvent.Shadowsun, 'Shadowsun', unitsData, regularMissions, premiumMissions, battlePoints);
     }
 
     protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {

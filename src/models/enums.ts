@@ -149,7 +149,7 @@ export enum LegendaryEvents {
 export enum LegendaryEvent {
     JainZar = 1,
     AunShi = 2,
-    ShadowSun = 4,
+    Shadowsun = 4,
 }
 
 export enum PersonalGoalType {

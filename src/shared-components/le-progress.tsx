@@ -12,7 +12,7 @@ import { LeProgressOverview } from './le-progress-overview';
 import { usePersonalData } from '../services';
 import { LegendaryEvent } from '../models/enums';
 
-export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent}) => {
+export const LeProgress = ({ legendaryEvent, sectionChange }: { legendaryEvent: ILegendaryEvent, sectionChange: (value: string) => void}) => {
     const { personalData, updateLegendaryEventProgress } = usePersonalData();
     const [value, setValue] = React.useState(0);
     const [personalProgress, setPersonalProgress] = useState<ILegendaryEventProgressState>(personalData.legendaryEventsProgress[legendaryEvent.id] ?? {
@@ -76,9 +76,17 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
             return current;
         });
     };
+    
+    const labelByIndex: Record<number, string> = {
+        0: 'Overview',
+        1: 'Alpha',
+        2: 'Beta',
+        3: 'Gamma'
+    };
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
+        sectionChange(labelByIndex[newValue]);
     };
     
     const totalPoints = useMemo(() => {

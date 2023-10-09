@@ -8,9 +8,11 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import { ILegendaryEvent } from '../../models/interfaces';
 import { LeProgress } from '../../shared-components/le-progress';
+import { LegendaryEvent } from '../../models/enums';
 
 export function MyProgressDialog({ legendaryEvent }: { legendaryEvent: ILegendaryEvent}) {
     const [open, setOpen] = React.useState(false);
+    const [myProgressSection, setMyProgressSection] = React.useState('Overview');
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -40,11 +42,11 @@ export function MyProgressDialog({ legendaryEvent }: { legendaryEvent: ILegendar
                             <CloseIcon />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                            My Progress
+                            {LegendaryEvent[legendaryEvent.id]} - My Progress - {myProgressSection}
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <LeProgress legendaryEvent={legendaryEvent}/>
+                <LeProgress sectionChange={setMyProgressSection} legendaryEvent={legendaryEvent}/>
             </Dialog>
         </div>
     );

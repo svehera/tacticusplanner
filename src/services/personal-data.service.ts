@@ -117,7 +117,7 @@ export class PersonalDataService {
         }
 
         if(legendaryEvents.shadowSun.selectedTeams.length) {
-            result[LegendaryEvent.ShadowSun] = convertEventToV3('shadowSun', LegendaryEvent.ShadowSun);
+            result[LegendaryEvent.Shadowsun] = convertEventToV3('shadowSun', LegendaryEvent.Shadowsun);
         }
 
 
@@ -256,7 +256,7 @@ export const usePersonalData = () => {
                 data.legendaryEvents3 = {
                     [LegendaryEventEnum.JainZar]: {},
                     [LegendaryEventEnum.AunShi]: {},
-                    [LegendaryEventEnum.ShadowSun]: {},
+                    [LegendaryEventEnum.Shadowsun]: {},
                 } as never;
             }
             if (data.legendaryEvents3) {
@@ -270,7 +270,7 @@ export const usePersonalData = () => {
                 data.legendaryEventsProgress = {
                     [LegendaryEventEnum.JainZar]: {},
                     [LegendaryEventEnum.AunShi]: {},
-                    [LegendaryEventEnum.ShadowSun]: {},
+                    [LegendaryEventEnum.Shadowsun]: {},
                 } as never;
             }
             if (data.legendaryEventsProgress) {
