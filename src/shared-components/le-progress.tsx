@@ -47,7 +47,7 @@ export const LeProgress = ({ legendaryEvent, sectionChange }: { legendaryEvent: 
                         units: []
                     },
                     {
-                        name: 'Defeat All Enemies',
+                        name: 'Defeat All Enemies + High Score',
                         points: (battlesPoints[index] ?? 0) + killPoints,
                         units: []
                     }, ...requirements],
