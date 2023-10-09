@@ -19,13 +19,13 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
         id: legendaryEvent.id,
         name: LegendaryEvent[legendaryEvent.id],
         alpha: {
-            battles: Array.from({ length: 12 }, () => Array.from({ length: 6 }, () => false))
+            battles: Array.from({ length: 12 }, () => Array.from({ length: 7 }, () => false))
         },
         beta: {
-            battles: Array.from({ length: 12 }, () => Array.from({ length: 6 }, () => false))
+            battles: Array.from({ length: 12 }, () => Array.from({ length: 7 }, () => false))
         },
         gamma: {
-            battles: Array.from({ length: 12 }, () => Array.from({ length: 6 }, () => false))
+            battles: Array.from({ length: 12 }, () => Array.from({ length: 7 }, () => false))
         },
         regularMissions: 0,
         premiumMissions: 0
@@ -33,14 +33,26 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
     
     const getTrackProgress = useCallback(( name: 'alpha' | 'beta' | 'gamma', killPoints: number, requirements: ILegendaryEventTrackRequirement[]): ILegendaryEventProgressTrack => {
         const personalBattles = personalProgress[name].battles;
+        const battlesPointsIndex = name === 'alpha' ? 0 : name === 'beta' ? 1 : 2;
+        const battlesPoints = legendaryEvent.battlesPoints[battlesPointsIndex];
         return {
             name,
-            requirements: [{
-                name: 'Defeat All Enemies',
-                points: killPoints,
-                units: []
-            }, ...requirements],
-            battles: personalBattles.map((state, index) => ({ battleNumber: index + 1, state }))
+            requirements: [
+                {
+                    name: 'Kill Points',
+                    points: 0,
+                    units: []
+                },
+                {
+                    name: 'Defeat All Enemies',
+                    points: killPoints,
+                    units: []
+                }, ...requirements],
+            battles: personalBattles.map((state, index) => ({ 
+                battleNumber: index + 1, 
+                battlePoints: battlesPoints[index] ?? 0,
+                state: Array.from({ length: 7 }).map((_, index) => state[index]), 
+            }))
         };
     }, []);
 
@@ -66,7 +78,9 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
         const betaTotalPoints = betaProgress.requirements.map(x => x.points).reduce((accumulator, currentValue) => accumulator + currentValue, 0) * betaProgress.battles.length;
         const gammaTotalPoints = gammaProgress.requirements.map(x => x.points).reduce((accumulator, currentValue) => accumulator + currentValue, 0) * gammaProgress.battles.length;
         
-        return alphaTotalPoints + betaTotalPoints + gammaTotalPoints;
+        const totalBattlePoints = legendaryEvent.battlesPoints.flatMap(x => x).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        
+        return alphaTotalPoints + betaTotalPoints + gammaTotalPoints + totalBattlePoints;
     }, []);
 
     const getCurrentPoints = (trackProgress: ILegendaryEventProgressTrack) => {

@@ -67,7 +67,7 @@ export const LeTrackProgress = ({ trackProgress, onStateUpdate }: { trackProgres
                                         checked={battle.state[index]}
                                         onChange={event => handleChange(event, battle, index)}
                                         inputProps={{ 'aria-label': 'controlled' }}
-                                    />} label={req.name + `(${req.points})`}/>
+                                    />} label={req.name + `(${req.points || battle.battlePoints})`}/>
                                 )}
                             </div>
                         </AccordionDetails>
@@ -92,7 +92,7 @@ const BattleSummary = ({ battle, points, masterCheckboxChange }: { battle: ILege
         return total;
     }, [battle.state]);
     
-    const totalPoints = useMemo(() => points.reduce((accumulator, currentValue) => accumulator + currentValue, 0), []);
+    const totalPoints = useMemo(() => points.reduce((accumulator, currentValue) => accumulator + currentValue, 0), []) + battle.battlePoints;
     
     const completedSections = battle.state.filter(x => x).length;
     const totalSections = battle.state.length;

@@ -115,7 +115,8 @@ const TrackSummary = ({ title, trackProgress }: { title: string, trackProgress: 
     const totalBattles = useMemo(() => trackProgress.requirements.length * trackProgress.battles.length, []) ;
     const currentBattles = useMemo(() => trackProgress.battles.flatMap(x => x.state).filter(x => x).length, []);
 
-    const totalPoints = useMemo(() =>  trackProgress.requirements.map(x => x.points).reduce((accumulator, currentValue) => accumulator + currentValue, 0) * trackProgress.battles.length, []);
+    const totalBattlesPoints = useMemo(() =>  trackProgress.battles.map(x => x.battlePoints).reduce((accumulator, currentValue) => accumulator + currentValue, 0), []);
+    const totalPoints = useMemo(() =>  trackProgress.requirements.map(x => x.points).reduce((accumulator, currentValue) => accumulator + currentValue, 0) * trackProgress.battles.length, []) + totalBattlesPoints;
     const currentPoints = useMemo(() => {
         let total = 0;
 
@@ -123,6 +124,9 @@ const TrackSummary = ({ title, trackProgress }: { title: string, trackProgress: 
             battle.state.forEach((value, index) => {
                 if(value) {
                     total += trackProgress.requirements[index].points;
+                }
+                if(value && index === 0) {
+                    total += battle.battlePoints;
                 }
             });
         });
@@ -170,16 +174,28 @@ const RequirementDetails = ({ req, battles, reqIndex }: {req: ILegendaryEventTra
             if(battle.state[reqIndex]) {
                 total += req.points;
             }
+            
+            if(battle.state[reqIndex] && reqIndex === 0) {
+                total += battle.battlePoints;
+            }
         });
 
         return total;
     },[]);
+
+    const totalPoints = useMemo(() => {
+        if (reqIndex === 0) {
+            return battles.map(x => x.battlePoints).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        }
+        
+        return req.points * battles.length;
+    },[]); 
     
     return (
         <div key={req.name} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <span>{req.name}</span>
             <span style={{ fontWeight: 700 }}>{completedBattles}/{battles.length}</span>
-            <span style={{ fontWeight: 700 }}>{scoredPoints}/{req.points * battles.length}</span>
+            <span style={{ fontWeight: 700 }}>{scoredPoints}/{totalPoints}</span>
             <div style={{
                 width: 15,
                 height: 15,

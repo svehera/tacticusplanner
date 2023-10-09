@@ -30,10 +30,16 @@ const premiumMissions: string[] = [
     'Defeat 75 enemies with Power Damage'
 ];
 
+const battlePoints: [number[], number[], number[]] = [
+    [29, 39, 33, 48, 36, 52, 45, 39, 54, 50, 50, 60],
+    [34, 40, 57, 59, 49, 58, 55, 50, 54, 58, 59, 61],
+    [31, 36, 56, 48, 53, 61, 67, 50, 57, 60, 67, 54]  
+];
+
 export class ShadowSunLegendaryEvent extends LegendaryEventBase {
 
     constructor(unitsData: Array<ICharacter>) {
-        super(LegendaryEvent.ShadowSun, 'Shadowsun', unitsData, regularMissions, premiumMissions);
+        super(LegendaryEvent.ShadowSun, 'Shadowsun', unitsData, regularMissions, premiumMissions, battlePoints);
     }
 
     protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {

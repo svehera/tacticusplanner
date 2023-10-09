@@ -118,6 +118,7 @@ export interface ILegendaryEvent {
   allowedUnits: Array<ICharacter>;
   regularMission: string[];
   premiumMissions: string[];
+  battlesPoints: [number[], number[], number[]];
 }
 
 export interface ILegendaryEventTrack {
@@ -280,5 +281,6 @@ export interface ILegendaryEventProgressTrack {
 
 export interface ILegendaryEventBattle {
   battleNumber: number;
+  battlePoints: number;
   state: boolean[];
 }

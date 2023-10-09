@@ -19,6 +19,7 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
 
     readonly regularMission: string[];
     readonly premiumMissions: string[];
+    readonly battlesPoints: [number[], number[], number[]];
 
     protected abstract getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
 
@@ -26,12 +27,13 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
 
     protected abstract getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
 
-    protected constructor(id: LegendaryEvent, name: string, unitsData: Array<ICharacter>, regularMission?: string[], premiumMissions?: string[]) {
+    protected constructor(id: LegendaryEvent, name: string, unitsData: Array<ICharacter>, regularMission?: string[], premiumMissions?: string[], battlesPoints?: [number[], number[], number[]]) {
         this.id = id;
         this.name = name;
         
         this.regularMission = regularMission ?? [];
         this.premiumMissions = premiumMissions ?? [];
+        this.battlesPoints = battlesPoints ?? [[],[],[]];
 
         this.alphaTrack = this.getAlphaTrack(unitsData);
         this.betaTrack = this.getBetaTrack(unitsData);
@@ -39,8 +41,6 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
 
         this.populateLEPoints(this.allowedUnits);
     }
-
-
 
     get allowedUnits(): Array<ICharacter> {
         return sortBy(uniqBy([...this.alphaTrack.allowedUnits, ...this.betaTrack.allowedUnits, ...this.gammaTrack.allowedUnits], 'name'), 'name');
