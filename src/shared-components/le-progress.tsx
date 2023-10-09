@@ -99,6 +99,10 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                 if(value) {
                     total += trackProgress.requirements[index].points;
                 }
+                
+                if (value && index === 0) {
+                    total += battle.battlePoints;
+                }
             });
         });
 
