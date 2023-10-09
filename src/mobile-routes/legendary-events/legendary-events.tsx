@@ -8,6 +8,7 @@ import { LegendaryEvent } from './legendary-event';
 import AutoTeamsSettings from '../../routes/legendary-events/auto-teams-settings';
 import { AutoTeamsSettingsContext } from '../../contexts';
 import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
+import { MyProgressDialog } from '../../routes/legendary-events/my-progress-dialog';
 
 export const LegendaryEvents = () => {
     const [value, setValue] = React.useState(0);
@@ -39,7 +40,10 @@ export const LegendaryEvents = () => {
                         setAutoTeamsPreferences(value);
                         updateAutoTeamsSettings(value);
                     }}></AutoTeamsSettings>
-                    <SetGoalDialog key={personalData.goals.length}/>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, margin: '10px 0' }}>
+                        <SetGoalDialog key={personalData.goals.length}/>
+                        <MyProgressDialog legendaryEvent={legendaryEvent}/>
+                    </div>
                 </div>
             </div>
             <AutoTeamsSettingsContext.Provider value={autoTeamsPreferences}>

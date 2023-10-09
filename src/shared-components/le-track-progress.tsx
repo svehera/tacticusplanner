@@ -65,6 +65,7 @@ export const LeTrackProgress = ({ trackProgress, onStateUpdate }: { trackProgres
                                 {trackProgress.requirements.map((req, index) =>
                                     <FormControlLabel key={req.name} control={<Checkbox
                                         checked={battle.state[index]}
+                                        value={battle.state[index] ?? false}
                                         onChange={event => handleChange(event, battle, index)}
                                         inputProps={{ 'aria-label': 'controlled' }}
                                     />} label={req.name + `(${req.points || battle.battlePoints})`}/>
@@ -86,6 +87,10 @@ const BattleSummary = ({ battle, points, masterCheckboxChange }: { battle: ILege
         battle.state.forEach((value, index) => {
             if (value) {
                 total += points[index];
+            }
+            
+            if(value && index === 0) {
+                total += battle.battlePoints;
             }
         });
 
