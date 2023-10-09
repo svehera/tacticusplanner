@@ -69,6 +69,14 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
         });
     };
 
+    const handleMissionsProgressChange = (section: 'regularMissions' | 'premiumMissions', value: number): void => {
+        setPersonalProgress(current => {
+            current[section] = value;
+            updateLegendaryEventProgress(current);
+            return current;
+        });
+    };
+
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
@@ -121,7 +129,7 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
             </Tabs>
             <TabPanel value={value} index={0}>
                 <p>Total: <span style={{ fontWeight: 700 }}> {currentPoints} / {totalPoints}</span></p>
-                <LeProgressOverview legendaryEvent={legendaryEvent} progress={{
+                <LeProgressOverview legendaryEvent={legendaryEvent} missionProgressChange={handleMissionsProgressChange} progress={{
                     alpha: alphaProgress,
                     beta: betaProgress,
                     gamma: gammaProgress,

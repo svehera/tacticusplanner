@@ -10,7 +10,11 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getCompletionRateColor } from '../shared-logic/functions';
 
-export const LeProgressOverview = ({ progress, legendaryEvent }: { progress: ILegendaryEventProgress, legendaryEvent: ILegendaryEvent }) => {
+export const LeProgressOverview = ({ progress, legendaryEvent, missionProgressChange }: { 
+    progress: ILegendaryEventProgress, 
+    legendaryEvent: ILegendaryEvent,
+    missionProgressChange: (section: 'regularMissions' | 'premiumMissions', value: number) => void
+}) => {
     const [accordionExpanded, setAccordionExpanded] = React.useState<string | false>(false);
     
     const [regularMissionsProgress, setRegularMissionsProgress] = React.useState<number>(progress.regularMissions);
@@ -62,7 +66,7 @@ export const LeProgressOverview = ({ progress, legendaryEvent }: { progress: ILe
                                 <ExpandMoreIcon/>}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                                     <span>Regular Missions</span>
-                                    <span style={{ fontWeight: 700 }}>{progress.regularMissions}/{10}</span>
+                                    <span style={{ fontWeight: 700 }}>{regularMissionsProgress}/{10}</span>
                                 </div>
                             </AccordionSummary>
                             <AccordionDetails>
@@ -70,7 +74,10 @@ export const LeProgressOverview = ({ progress, legendaryEvent }: { progress: ILe
                                     {legendaryEvent.regularMission.map((mission, index) =>
                                         <FormControlLabel key={mission} control={<Checkbox
                                             checked={ index < regularMissionsProgress}
-                                            onChange={(_, checked) => setRegularMissionsProgress(checked ? index + 1 : index)}
+                                            onChange={(_, checked) => {
+                                                setRegularMissionsProgress(checked ? index + 1 : index);
+                                                missionProgressChange('regularMissions',checked ? index + 1 : index);
+                                            }}
                                             inputProps={{ 'aria-label': 'controlled' }}
                                         />} label={index + 1 + '. ' + mission}/>
                                     )}
@@ -89,7 +96,7 @@ export const LeProgressOverview = ({ progress, legendaryEvent }: { progress: ILe
                                 <ExpandMoreIcon/>}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                                     <span>Premium Missions</span>
-                                    <span style={{ fontWeight: 700 }}>{progress.premiumMissions}/{10}</span>
+                                    <span style={{ fontWeight: 700 }}>{premiumMissionsProgress}/{10}</span>
                                 </div>
                             </AccordionSummary>
                             <AccordionDetails>
@@ -97,7 +104,10 @@ export const LeProgressOverview = ({ progress, legendaryEvent }: { progress: ILe
                                     {legendaryEvent.premiumMissions.map((mission, index) =>
                                         <FormControlLabel key={mission} control={<Checkbox
                                             checked={ index < premiumMissionsProgress}
-                                            onChange={(_, checked) => setPremiumMissionsProgress(checked ? index + 1 : index)}
+                                            onChange={(_, checked) => {
+                                                setPremiumMissionsProgress(checked ? index + 1 : index);
+                                                missionProgressChange('premiumMissions',checked ? index + 1 : index);
+                                            }}
                                             inputProps={{ 'aria-label': 'controlled' }}
                                         />} label={index + 1 + '. ' + mission}/>
                                     )}
