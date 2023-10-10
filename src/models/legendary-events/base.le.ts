@@ -16,13 +16,13 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
 
     readonly id: LegendaryEvent;
     readonly name: string;
+    readonly wikiLink: string;
     readonly eventStage: number;
     readonly nextEventDate: string;
 
     readonly regularMissions: string[];
     readonly premiumMissions: string[];
-
-
+    
     protected abstract getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
 
     protected abstract getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
@@ -32,6 +32,7 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     protected constructor(unitsData: Array<ICharacter>, staticData: ILegendaryEventStatic) {
         this.id = staticData.id;
         this.name = staticData.name;
+        this.wikiLink = staticData.wikiLink;
         
         this.regularMissions = staticData.regularMissions ?? [];
         this.premiumMissions = staticData.premiumMissions ?? [];

@@ -120,6 +120,7 @@ export interface ILegendaryEvent extends ILegendaryEventStatic {
 export interface ILegendaryEventStatic {
   id: number,
   name: string;
+  wikiLink: string;
   eventStage: number;
   nextEventDate: string;
   regularMissions: string[];

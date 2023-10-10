@@ -44,6 +44,7 @@ export function MyProgressDialog({ legendaryEvent }: { legendaryEvent: ILegendar
                         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                             {LegendaryEvent[legendaryEvent.id]} - My Progress - {myProgressSection}
                         </Typography>
+                        <a style={{ textDecoration: 'none', color: 'white', fontWeight: 700 }} href={legendaryEvent.wikiLink} target={'_blank'} rel="noreferrer">WIKI</a>
                     </Toolbar>
                 </AppBar>
                 <LeProgress sectionChange={setMyProgressSection} legendaryEvent={legendaryEvent}/>
