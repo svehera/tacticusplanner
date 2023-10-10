@@ -1,22 +1,21 @@
-﻿import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
+﻿import React, { ChangeEvent, useCallback, useMemo, useRef, useState } from 'react';
 
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, RowStyle, RowClassParams, IRowNode, ICellRendererParams } from 'ag-grid-community';
 
 import { TextField } from '@mui/material';
-import Typography from '@mui/material/Typography';
 
 import MultipleSelectCheckmarks from './multiple-select';
-import { ICharacter, IPersonalGoal } from '../../models/interfaces';
+import { ICharacter } from '../../models/interfaces';
 import { DamageType, Trait } from '../../models/enums';
 import { useCharacters } from '../../services';
 import { isMobile } from 'react-device-detect';
 import { CharacterTitle } from '../../shared-components/character-title';
-import { TextWithTooltip } from '../../shared-components/text-with-tooltip';
 
 export const Characters = () => {
     const gridRef = useRef<AgGridReact<ICharacter>>(null);
 
+    const [nameFilter, setNameFilter] = useState<string>('');
     const [damageTypesFilter, setDamageTypesFilter] = useState<DamageType[]>([]);
     const [traitsFilter, setTraitsFilter] = useState<Trait[]>([]);
 
@@ -148,15 +147,15 @@ export const Characters = () => {
     ]);
 
     const { characters } = useCharacters();
+    
+    const rows = useMemo(() => characters.filter(c => c.name.toLowerCase().includes(nameFilter.toLowerCase())), [nameFilter]);
 
     const getRowStyle = (params: RowClassParams<ICharacter>): RowStyle => {
         return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'lightsteelblue' : 'white' };
     };
 
     const onFilterTextBoxChanged = useCallback((change: ChangeEvent<HTMLInputElement>) => {
-        gridRef.current?.api.setQuickFilter(
-            change.target.value
-        );
+        setNameFilter(change.target.value);
     }, []);
 
     React.useEffect(() => {
@@ -239,7 +238,7 @@ export const Characters = () => {
                     suppressCellFocus={true}
                     defaultColDef={defaultColDef}
                     columnDefs={columnDefs}
-                    rowData={characters}
+                    rowData={rows}
                     getRowStyle={getRowStyle}
                     onGridReady={() => !isMobile ? gridRef.current?.api.sizeColumnsToFit() : undefined}
                     onSortChanged={refreshRowNumberColumn}
