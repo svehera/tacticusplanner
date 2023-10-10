@@ -109,7 +109,7 @@ export class PersonalDataService {
         const result: ILegendaryEventsData3 = { } as ILegendaryEventsData3;
 
         if(legendaryEvents.jainZar.selectedTeams.length) {
-            result[LegendaryEvent.JainZar] = convertEventToV3('jainZar', LegendaryEvent.JainZar); 
+            result[LegendaryEvent.JainZar] = {} as any; 
         }
 
         if(legendaryEvents.aunShi.selectedTeams.length) {
@@ -254,7 +254,6 @@ export const usePersonalData = () => {
         updateLegendaryEventTeams: (newData: ILegendaryEventData3) => {
             if (!data.legendaryEvents3) {
                 data.legendaryEvents3 = {
-                    [LegendaryEventEnum.JainZar]: {},
                     [LegendaryEventEnum.AunShi]: {},
                     [LegendaryEventEnum.Shadowsun]: {},
                 } as never;
@@ -268,7 +267,6 @@ export const usePersonalData = () => {
         updateLegendaryEventProgress: (newData: ILegendaryEventProgressState) => {
             if (!data.legendaryEventsProgress) {
                 data.legendaryEventsProgress = {
-                    [LegendaryEventEnum.JainZar]: {},
                     [LegendaryEventEnum.AunShi]: {},
                     [LegendaryEventEnum.Shadowsun]: {},
                 } as never;

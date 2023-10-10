@@ -64,7 +64,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
             ]
         },
         {
-            headerName: legendaryEvent.alphaTrack.name,
+            headerName: legendaryEvent.alpha.name,
             children: [
                 {
                     field: 'alphaPoints',
@@ -81,7 +81,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
             ]
         },
         {
-            headerName: legendaryEvent.betaTrack.name,
+            headerName: legendaryEvent.beta.name,
             children: [
                 {
                     field: 'betaPoints',
@@ -98,7 +98,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
             ]
         },
         {
-            headerName: legendaryEvent.gammaTrack.name,
+            headerName: legendaryEvent.gamma.name,
             children: [
                 {
                     field: 'gammaPoints',
@@ -117,9 +117,9 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
     ], [selection]);
 
     const selectedChars = useMemo(() => {
-        const alphaSection = legendaryEvent.alphaTrack.unitsRestrictions.map(x => x.name);
-        const betaSection = legendaryEvent.betaTrack.unitsRestrictions.map(x => x.name);
-        const gammaSection = legendaryEvent.gammaTrack.unitsRestrictions.map(x => x.name);
+        const alphaSection = legendaryEvent.alpha.unitsRestrictions.map(x => x.name);
+        const betaSection = legendaryEvent.beta.unitsRestrictions.map(x => x.name);
+        const gammaSection = legendaryEvent.gamma.unitsRestrictions.map(x => x.name);
         
         const alphaChars = Object.entries(personalLegendaryEvent.alpha).filter(([key]) => alphaSection.includes(key)).map(([_, value]) => value).flat();
         const betaChars = Object.entries(personalLegendaryEvent.beta).filter(([key]) => betaSection.includes(key)).map(([_, value]) => value).flat();
@@ -129,9 +129,9 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent, selectionChange: 
     }, [personalLegendaryEvent.id]);
 
     const selectedCharsRows: ITableRow[] = useMemo(() => {
-        const alpha = getPointsAndSlots(legendaryEvent.alphaTrack, getRestrictionsByChar(personalLegendaryEvent.alpha));
-        const beta = getPointsAndSlots(legendaryEvent.betaTrack, getRestrictionsByChar(personalLegendaryEvent.beta));
-        const gamma = getPointsAndSlots(legendaryEvent.gammaTrack, getRestrictionsByChar(personalLegendaryEvent.gamma));
+        const alpha = getPointsAndSlots(legendaryEvent.alpha, getRestrictionsByChar(personalLegendaryEvent.alpha));
+        const beta = getPointsAndSlots(legendaryEvent.beta, getRestrictionsByChar(personalLegendaryEvent.beta));
+        const gamma = getPointsAndSlots(legendaryEvent.gamma, getRestrictionsByChar(personalLegendaryEvent.gamma));
 
         return legendaryEvent.allowedUnits
             .filter(x => selectedChars.includes(x.name))

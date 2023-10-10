@@ -1,5 +1,5 @@
 ﻿import { createContext } from 'react';
 import { ILegendaryEvent } from '../models/interfaces';
-import { LegendaryEvent } from '../models/enums';
+import { defaultLE } from '../models/constants';
 
-export const LegendaryEventContext = createContext<ILegendaryEvent>({ id: LegendaryEvent.JainZar } as ILegendaryEvent);
+export const LegendaryEventContext = createContext<ILegendaryEvent>({ id: defaultLE } as ILegendaryEvent);

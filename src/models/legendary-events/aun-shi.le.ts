@@ -1,13 +1,15 @@
-﻿import { ICharacter, ILegendaryEventTrack, ITableRow } from '../interfaces';
-import { Alliance, DamageType, Faction, LegendaryEvent, Trait } from '../enums';
+﻿import { ICharacter, ILegendaryEventTrack } from '../interfaces';
+import { Alliance, DamageType, Faction, Trait } from '../enums';
 import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
 import { LETrack } from './base.le.track';
 
+import staticData from '../../assets/legendary-events/Aunshi.json';
+
 export class AunShiLegendaryEvent extends LegendaryEventBase {
 
     constructor(unitsData: Array<ICharacter>) {
-        super(LegendaryEvent.AunShi, 'Aun Shi',  unitsData);
+        super(unitsData, staticData);
     }
 
     protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
@@ -15,8 +17,6 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
         return new LETrack(
             this.id,
             'alpha',
-            'Alpha (No Orks)',
-            29,
             noOrks,
             [
                 {
@@ -48,6 +48,7 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     core: true
                 },
             ],
+            staticData.alpha
         );
     }
 
@@ -56,8 +57,6 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
         return new LETrack(
             this.id,
             'beta',
-            'Beta (No Imperials)',
-            53,
             noImperials,
             [
                 {
@@ -88,7 +87,8 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     points: 100,
                     units: filter(noImperials).byDamageType(DamageType.Physical),
                 },
-            ]
+            ],
+            staticData.beta
         );
     }
 
@@ -97,8 +97,6 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
         return new LETrack(
             this.id,
             'gamma',
-            'Gamma (No Chaos)',
-            40,
             noChaos,
             [
                 {
@@ -129,7 +127,8 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     units:  filter(noChaos).byDamageType(DamageType.Power, true),
                     core: true
                 },
-            ]
+            ],
+            staticData.gamma
         ); 
     }
 

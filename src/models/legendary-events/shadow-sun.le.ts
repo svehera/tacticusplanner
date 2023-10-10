@@ -1,45 +1,15 @@
-﻿import { ICharacter, ILegendaryEventTrack, ITableRow } from '../interfaces';
-import { Alliance, DamageType, Faction, Trait,  LegendaryEvent } from '../enums';
+﻿import { ICharacter, ILegendaryEventTrack } from '../interfaces';
+import { Alliance, DamageType, Faction, Trait } from '../enums';
 import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
 import { LETrack } from './base.le.track';
 
-const regularMissions: string[] = [
-    'Play one Philosophy of War Battle, Deal 1000 damage',
-    'Defeat 30 Necrons',
-    'Defeat 75 Tyranids',
-    'Defeat 100 Ultramarines',
-    'Use abilities 15 times with Xenos units, Deal 10k damage with Abilities',
-    'Use abilities 20 times with Imperial units, Deal 15k damage with Abilities',
-    'Use abilities 25 times with Chaos units, Deal 20k damage with Abilities',
-    'Play 3 Philosophy of War Battles, Deal 25k Bolter damage',
-    'Play 3 Philosophy of War Battles, Deal 25k Psychic damage',
-    'Play 3 Philosophy of War Battles, Deal 25k Power damage'
-];
-
-const premiumMissions: string[] = [
-    'Win 1 battle without Summoning any units',
-    'Defeat 30 enemies with Xenos units',
-    'Defeat 75 enemies with Imperial units',
-    'Defeat 100 enemies with Chaos units',
-    'Win 5 battles without deploying any Resilient characters',
-    'Win 5 battles without deploying any Overwatch characters',
-    'Win 5 battles without deploying any Living Metal characters',
-    'Defeat 75 enemies with Bolter Damage',
-    'Defeat 75 enemies with Psychic Damage',
-    'Defeat 75 enemies with Power Damage'
-];
-
-const battlePoints: [number[], number[], number[]] = [
-    [29, 39, 33, 48, 36, 52, 45, 39, 54, 50, 50, 60],
-    [34, 40, 57, 59, 49, 58, 55, 50, 54, 58, 59, 61],
-    [31, 36, 56, 48, 53, 61, 67, 50, 57, 60, 67, 54]  
-];
+import staticData from '../../assets/legendary-events/Shadowsun.json';
 
 export class ShadowSunLegendaryEvent extends LegendaryEventBase {
 
     constructor(unitsData: Array<ICharacter>) {
-        super(LegendaryEvent.Shadowsun, 'Shadowsun', unitsData, regularMissions, premiumMissions, battlePoints);
+        super(unitsData, staticData);
     }
 
     protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
@@ -47,8 +17,6 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
         return new LETrack(
             this.id,
             'alpha',
-            'Alpha (No Necrons)',
-            18,
             noNecrons,
             [
                 {
@@ -80,6 +48,7 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                     core: true
                 },
             ],
+            staticData.alpha
         );
     }
 
@@ -88,8 +57,6 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
         return new LETrack(
             this.id,
             'beta',
-            'Beta (No Tyranids)',
-            19,
             noTyranids,
             [
                 {
@@ -120,7 +87,8 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                     units: filter(noTyranids).byNoSummons(),
                     core: true
                 },
-            ]
+            ],
+            staticData.beta
         );
     }
 
@@ -129,8 +97,6 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
         return new LETrack(
             this.id,
             'gamma',
-            'Gamma (No Imperials)',
-            35,
             noImperials,
             [
                 {
@@ -161,7 +127,8 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                     points: 120,
                     units:  filter(noImperials).byFaction(Faction.Black_Legion),
                 },
-            ]
+            ],
+            staticData.gamma
         );
     }
 

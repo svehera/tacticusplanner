@@ -4,7 +4,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 
 import { AutoTeamsSettingsContext, LegendaryEventContext, ViewSettingsContext } from '../../contexts';
 import { useCharacters, usePersonalData } from '../../services';
-import { AunShiLegendaryEvent, JainZarLegendaryEvent, ShadowSunLegendaryEvent } from '../../models/legendary-events';
+import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from '../../models/legendary-events';
 import {
     ILegendaryEvent,
     IViewPreferences
@@ -17,11 +17,12 @@ import Box from '@mui/material/Box';
 import { LegendaryEvent as LegendaryEventEnum } from '../../models/enums';
 import Button from '@mui/material/Button';
 import { Help } from '@mui/icons-material';
+import { getDefaultLE } from '../../models/constants';
 
 export const LegendaryEventPage = () => {
     const { characters } = useCharacters();
     const { personalData, updateAutoTeamsSettings } = usePersonalData();
-    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(new ShadowSunLegendaryEvent(characters));
+    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(() => getDefaultLE(characters));
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
@@ -30,7 +31,7 @@ export const LegendaryEventPage = () => {
     const [autoTeamsPreferences, setAutoTeamsPreferences] = useState(personalData.autoTeamsPreferences);
 
     useEffect(() => {
-        setLegendaryEvent(new ShadowSunLegendaryEvent(characters));
+        setLegendaryEvent(getDefaultLE(characters));
     }, [characters]);
 
     const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -91,9 +92,6 @@ export const LegendaryEventPage = () => {
                             onClick={() => setLegendaryEvent(new ShadowSunLegendaryEvent(characters))}/>
                         <Tab label="Aun Shi 3/3 (TBA)" value={LegendaryEventEnum.AunShi}
                             onClick={() => setLegendaryEvent(new AunShiLegendaryEvent(characters))}/>
-                        <Tab label="Jain Zar 3/3 (Ended)" value={LegendaryEventEnum.JainZar}
-                            onClick={() => setLegendaryEvent(new JainZarLegendaryEvent(characters))}/>
-
                     </Tabs>
                 </Box>
 

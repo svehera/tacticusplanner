@@ -109,9 +109,9 @@ const LegendaryEvent = () => {
                 </div>
             </div>
             <div style={{ display: 'flex', gap: 15, marginBottom: 10 }}>
-                {viewPreferences.showAlpha ? (<LegendaryEventTrack key={legendaryEvent.alphaTrack.name + legendaryEvent.id + + (personalData.modifiedDate?.toString() ?? '')} track={legendaryEvent.alphaTrack} selectChars={selectChars('alpha')}/>) : undefined }
-                {viewPreferences.showBeta ? (<LegendaryEventTrack key={legendaryEvent.betaTrack.name + legendaryEvent.id} track={legendaryEvent.betaTrack} selectChars={selectChars('beta')}/>) : undefined }
-                {viewPreferences.showGamma ? (<LegendaryEventTrack key={legendaryEvent.gammaTrack.name + legendaryEvent.id} track={legendaryEvent.gammaTrack} selectChars={selectChars('gamma')}/>) : undefined }
+                {viewPreferences.showAlpha ? (<LegendaryEventTrack key={legendaryEvent.alpha.name + legendaryEvent.id + + (personalData.modifiedDate?.toString() ?? '')} track={legendaryEvent.alpha} selectChars={selectChars('alpha')}/>) : undefined }
+                {viewPreferences.showBeta ? (<LegendaryEventTrack key={legendaryEvent.beta.name + legendaryEvent.id} track={legendaryEvent.beta} selectChars={selectChars('beta')}/>) : undefined }
+                {viewPreferences.showGamma ? (<LegendaryEventTrack key={legendaryEvent.gamma.name + legendaryEvent.id} track={legendaryEvent.gamma} selectChars={selectChars('gamma')}/>) : undefined }
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 15, marginBottom: 10 }}>
                 <div style={{ display: 'flex' }}>
@@ -157,9 +157,9 @@ const LegendaryEvent = () => {
                 </FormControl>
             </div>
             <div style={{ display: 'flex', gap: 15 }}>
-                {viewPreferences.showAlpha ? (<SelectedTeamsTable key={legendaryEvent.alphaTrack.name + legendaryEvent.id} track={legendaryEvent.alphaTrack}  teams={alphaSelectedChars} deselectChars={deselectChars('alpha')}/>) : undefined }
-                {viewPreferences.showBeta ? (<SelectedTeamsTable key={legendaryEvent.betaTrack.name + legendaryEvent.id} track={legendaryEvent.betaTrack}  teams={betaSelectedChars} deselectChars={deselectChars('beta')}/> ) : undefined }
-                {viewPreferences.showGamma ? (<SelectedTeamsTable key={legendaryEvent.gammaTrack.name + legendaryEvent.id} track={legendaryEvent.gammaTrack}  teams={gammaSelectedChars} deselectChars={deselectChars('gamma')}/>) : undefined }
+                {viewPreferences.showAlpha ? (<SelectedTeamsTable key={legendaryEvent.alpha.name + legendaryEvent.id} track={legendaryEvent.alpha} teams={alphaSelectedChars} deselectChars={deselectChars('alpha')}/>) : undefined }
+                {viewPreferences.showBeta ? (<SelectedTeamsTable key={legendaryEvent.beta.name + legendaryEvent.id} track={legendaryEvent.beta} teams={betaSelectedChars} deselectChars={deselectChars('beta')}/> ) : undefined }
+                {viewPreferences.showGamma ? (<SelectedTeamsTable key={legendaryEvent.gamma.name + legendaryEvent.id} track={legendaryEvent.gamma} teams={gammaSelectedChars} deselectChars={deselectChars('gamma')}/>) : undefined }
             </div>
         </div>
     );

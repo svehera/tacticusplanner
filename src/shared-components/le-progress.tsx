@@ -33,8 +33,7 @@ export const LeProgress = ({ legendaryEvent, sectionChange }: { legendaryEvent: 
     
     const getTrackProgress = useCallback(( name: 'alpha' | 'beta' | 'gamma', killPoints: number, requirements: ILegendaryEventTrackRequirement[]): ILegendaryEventProgressTrack => {
         const personalBattles = personalProgress[name].battles;
-        const battlesPointsIndex = name === 'alpha' ? 0 : name === 'beta' ? 1 : 2;
-        const battlesPoints = legendaryEvent.battlesPoints[battlesPointsIndex];
+        const battlesPoints = legendaryEvent[name].battlesPoints;
         return {
             name,
             battles: personalBattles.map((state, index) => ({ 
@@ -55,9 +54,9 @@ export const LeProgress = ({ legendaryEvent, sectionChange }: { legendaryEvent: 
         };
     }, []);
 
-    const alphaProgress = useMemo(() => getTrackProgress('alpha', legendaryEvent.alphaTrack.killPoints, legendaryEvent.alphaTrack.unitsRestrictions), [legendaryEvent.id]);
-    const betaProgress = useMemo(() => getTrackProgress('beta', legendaryEvent.betaTrack.killPoints, legendaryEvent.betaTrack.unitsRestrictions), [legendaryEvent.id]);
-    const gammaProgress = useMemo(() => getTrackProgress('gamma',legendaryEvent.gammaTrack.killPoints, legendaryEvent.gammaTrack.unitsRestrictions), [legendaryEvent.id]);
+    const alphaProgress = useMemo(() => getTrackProgress('alpha', legendaryEvent.alpha.killPoints, legendaryEvent.alpha.unitsRestrictions), [legendaryEvent.id]);
+    const betaProgress = useMemo(() => getTrackProgress('beta', legendaryEvent.beta.killPoints, legendaryEvent.beta.unitsRestrictions), [legendaryEvent.id]);
+    const gammaProgress = useMemo(() => getTrackProgress('gamma',legendaryEvent.gamma.killPoints, legendaryEvent.gamma.unitsRestrictions), [legendaryEvent.id]);
     
     const handleBattlesChange = (section: 'alpha' | 'beta' | 'gamma') => (battles: ILegendaryEventBattle[]): void => {
         setPersonalProgress(current => {
@@ -133,7 +132,7 @@ export const LeProgress = ({ legendaryEvent, sectionChange }: { legendaryEvent: 
                 <Tab value={3} label="Gamma" />
             </Tabs>
             <TabPanel value={value} index={0}>
-                <p>Total Points: <span style={{ fontWeight: 700 }}> {currentPoints} / {totalPoints}</span></p>
+                <p>Total Points: <span style={{ fontWeight: 700 }}> {currentPoints} / {totalPoints}</span> 3015 Engrams to unlock char 13k points needed to unlock char</p>
                 <LeProgressOverview legendaryEvent={legendaryEvent} missionProgressChange={handleMissionsProgressChange} progress={{
                     alpha: alphaProgress,
                     beta: betaProgress,

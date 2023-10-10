@@ -29,7 +29,7 @@ export const LeProgressOverview = ({ progress, legendaryEvent, missionProgressCh
     return (
         <div>
             {
-                legendaryEvent.regularMission.length
+                legendaryEvent.regularMissions.length
                     ? (
                         <Accordion TransitionProps={{ unmountOnExit: true }}
                             expanded={accordionExpanded === 'regularMissions'}
@@ -43,7 +43,7 @@ export const LeProgressOverview = ({ progress, legendaryEvent, missionProgressCh
                             </AccordionSummary>
                             <AccordionDetails>
                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                    {legendaryEvent.regularMission.map((mission, index) =>
+                                    {legendaryEvent.regularMissions.map((mission, index) =>
                                         <FormControlLabel key={mission} control={<Checkbox
                                             checked={index < regularMissionsProgress}
                                             onChange={(_, checked) => {

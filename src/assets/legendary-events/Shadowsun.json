@@ -1,0 +1,45 @@
+﻿{
+  "id": 4,
+  "name": "Shadowsun",
+  "eventStage": 2,
+  "nextEventDate": "October 15",
+  "regularMissions": [
+    "Play one Philosophy of War Battle, Deal 1000 damage",
+    "Defeat 30 Necrons",
+    "Defeat 75 Tyranids",
+    "Defeat 100 Ultramarines",
+    "Use abilities 15 times with Xenos units, Deal 10k damage with Abilities",
+    "Use abilities 20 times with Imperial units, Deal 15k damage with Abilities",
+    "Use abilities 25 times with Chaos units, Deal 20k damage with Abilities",
+    "Play 3 Philosophy of War Battles, Deal 25k Bolter damage",
+    "Play 3 Philosophy of War Battles, Deal 25k Psychic damage",
+    "Play 3 Philosophy of War Battles, Deal 25k Power damage"
+  ],
+  "premiumMissions": [
+    "Win 1 battle without Summoning any units",
+    "Defeat 30 enemies with Xenos units",
+    "Defeat 75 enemies with Imperial units",
+    "Defeat 100 enemies with Chaos units",
+    "Win 5 battles without deploying any Resilient characters",
+    "Win 5 battles without deploying any Overwatch characters",
+    "Win 5 battles without deploying any Living Metal characters",
+    "Defeat 75 enemies with Bolter Damage",
+    "Defeat 75 enemies with Psychic Damage",
+    "Defeat 75 enemies with Power Damage"
+  ],
+  "alpha": {
+    "name": "Alpha (No Necrons)",
+    "killPoints": 18,
+    "battlesPoints": [29, 39, 33, 48, 36, 52, 45, 39, 54, 50, 50, 60]
+  },
+  "beta": {
+    "name": "Beta (No Tyranids)",
+    "killPoints": 19,
+    "battlesPoints": [34, 40, 57, 59, 49, 58, 55, 50, 54, 58, 59, 61]
+  },
+  "gamma": {
+    "name": "Gamma (No Imperials)",
+    "killPoints": 35,
+    "battlesPoints": [31, 36, 56, 48, 53, 61, 67, 50, 57, 60, 67, 54]
+  }
+}

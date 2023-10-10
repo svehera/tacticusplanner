@@ -1,6 +1,6 @@
 ﻿import {
     ICharacter,
-    ILegendaryEvent,
+    ILegendaryEvent, ILegendaryEventStatic,
     ILegendaryEventTrack,
     ITableRow
 } from '../interfaces';
@@ -8,18 +8,20 @@ import { sortBy, sum, uniqBy } from 'lodash';
 import { LegendaryEvent } from '../enums';
 
 export abstract class LegendaryEventBase implements ILegendaryEvent {
-    alphaTrack: ILegendaryEventTrack;
-    betaTrack: ILegendaryEventTrack;
-    gammaTrack: ILegendaryEventTrack;
+    alpha: ILegendaryEventTrack;
+    beta: ILegendaryEventTrack;
+    gamma: ILegendaryEventTrack;
     
     suggestedTeams: ITableRow[] = [];
 
     readonly id: LegendaryEvent;
     readonly name: string;
+    readonly eventStage: number;
+    readonly nextEventDate: string;
 
-    readonly regularMission: string[];
+    readonly regularMissions: string[];
     readonly premiumMissions: string[];
-    readonly battlesPoints: [number[], number[], number[]];
+
 
     protected abstract getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
 
@@ -27,34 +29,35 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
 
     protected abstract getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
 
-    protected constructor(id: LegendaryEvent, name: string, unitsData: Array<ICharacter>, regularMission?: string[], premiumMissions?: string[], battlesPoints?: [number[], number[], number[]]) {
-        this.id = id;
-        this.name = name;
+    protected constructor(unitsData: Array<ICharacter>, staticData: ILegendaryEventStatic) {
+        this.id = staticData.id;
+        this.name = staticData.name;
         
-        this.regularMission = regularMission ?? [];
-        this.premiumMissions = premiumMissions ?? [];
-        this.battlesPoints = battlesPoints ?? [[],[],[]];
+        this.regularMissions = staticData.regularMissions ?? [];
+        this.premiumMissions = staticData.premiumMissions ?? [];
+        this.eventStage = staticData.eventStage;
+        this.nextEventDate = staticData.nextEventDate;
 
-        this.alphaTrack = this.getAlphaTrack(unitsData);
-        this.betaTrack = this.getBetaTrack(unitsData);
-        this.gammaTrack = this.getGammaTrack(unitsData);
+        this.alpha = this.getAlphaTrack(unitsData);
+        this.beta = this.getBetaTrack(unitsData);
+        this.gamma = this.getGammaTrack(unitsData);
 
         this.populateLEPoints(this.allowedUnits);
     }
 
     get allowedUnits(): Array<ICharacter> {
-        return sortBy(uniqBy([...this.alphaTrack.allowedUnits, ...this.betaTrack.allowedUnits, ...this.gammaTrack.allowedUnits], 'name'), 'name');
+        return sortBy(uniqBy([...this.alpha.allowedUnits, ...this.beta.allowedUnits, ...this.gamma.allowedUnits], 'name'), 'name');
     }
 
     protected populateLEPoints(characters: ICharacter[]): void {
         characters.forEach(character => {
-            const alphaPoints = this.alphaTrack.getCharacterPoints(character);
-            const betaPoints = this.betaTrack.getCharacterPoints(character);
-            const gammaPoints = this.gammaTrack.getCharacterPoints(character);
+            const alphaPoints = this.alpha.getCharacterPoints(character);
+            const betaPoints = this.beta.getCharacterPoints(character);
+            const gammaPoints = this.gamma.getCharacterPoints(character);
 
-            const alphaSlots = this.alphaTrack.getCharacterSlots(character);
-            const betaSlots = this.betaTrack.getCharacterSlots(character);
-            const gammaSlots = this.gammaTrack.getCharacterSlots(character);
+            const alphaSlots = this.alpha.getCharacterSlots(character);
+            const betaSlots = this.beta.getCharacterSlots(character);
+            const gammaSlots = this.gamma.getCharacterSlots(character);
 
             character.legendaryEvents[this.id] = {
                 alphaPoints,

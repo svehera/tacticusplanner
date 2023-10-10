@@ -107,25 +107,37 @@ export interface ICharLegendaryEvent {
   totalSlots: number;
 }
 
-export interface ILegendaryEvent {
+export interface ILegendaryEvent extends ILegendaryEventStatic {
   id: LegendaryEvent;
-  name: string;
-  alphaTrack: ILegendaryEventTrack;
-  betaTrack: ILegendaryEventTrack;
-  gammaTrack: ILegendaryEventTrack;
+  alpha: ILegendaryEventTrack;
+  beta: ILegendaryEventTrack;
+  gamma: ILegendaryEventTrack;
 
   suggestedTeams: ITableRow[];
   allowedUnits: Array<ICharacter>;
-  regularMission: string[];
-  premiumMissions: string[];
-  battlesPoints: [number[], number[], number[]];
 }
 
-export interface ILegendaryEventTrack {
-  eventId: LegendaryEvent;
-  section: LegendaryEventSection;
+export interface ILegendaryEventStatic {
+  id: number,
+  name: string;
+  eventStage: number;
+  nextEventDate: string;
+  regularMissions: string[];
+  premiumMissions: string[];
+  alpha: ILegendaryEventTrackStatic;
+  beta: ILegendaryEventTrackStatic;
+  gamma: ILegendaryEventTrackStatic;
+}
+
+export interface ILegendaryEventTrackStatic {
   name: string;
   killPoints: number;
+  battlesPoints: number[]; 
+}
+
+export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
+  eventId: LegendaryEvent;
+  section: LegendaryEventSection;
   allowedUnits: ICharacter[];
   unitsRestrictions: Array<ILegendaryEventTrackRequirement>;
 
