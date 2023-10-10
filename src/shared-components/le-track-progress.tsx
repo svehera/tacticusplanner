@@ -6,7 +6,23 @@ import { getCompletionRateColor } from '../shared-logic/functions';
 
 export const LeTrackProgress = ({ trackProgress, onStateUpdate }: { trackProgress: ILegendaryEventProgressTrack, onStateUpdate: (battles: ILegendaryEventBattle[]) => void }) => {
     const [battles, setBattles] = useState<ILegendaryEventBattle[]>(trackProgress.battles);
-    const [accordionExpanded, setAccordionExpanded] = React.useState<number | false>(false);
+    const [accordionExpanded, setAccordionExpanded] = React.useState<number | false>(() => {
+        for (let i = 0; i < trackProgress.battles.length; i++) {
+            const battle = trackProgress.battles[i];
+            if(!battle.state.some(x => x)) {
+                return battle.battleNumber;
+            }
+        }
+        
+        for (let i = 0; i < trackProgress.battles.length; i++) {
+            const battle = trackProgress.battles[i];
+            if(!battle.state.every(x => x)) {
+                return battle.battleNumber; 
+            }
+        }
+        
+        return false;
+    });
     const handleChange = (event: ChangeEvent<HTMLInputElement>, updatedBattle: ILegendaryEventBattle, index: number) => {
         setBattles(currentBattles => {
             const battle = currentBattles.find(x => x.battleNumber === updatedBattle.battleNumber);
@@ -20,14 +36,19 @@ export const LeTrackProgress = ({ trackProgress, onStateUpdate }: { trackProgres
         });
     };
 
-    const toggleAll = (value: boolean, updatedBattle: ILegendaryEventBattle) => {
+    const toggleAll = (selected: boolean, updatedBattle: ILegendaryEventBattle) => {
         setBattles(currentBattles => {
             const battle = currentBattles.find(x => x.battleNumber === updatedBattle.battleNumber);
             if (!battle) {
                 return currentBattles;
             }
-            battle.state = battle.state.map(() => value);
+            battle.state = battle.state.map(() => selected);
             onStateUpdate([...currentBattles]);
+            if (selected) {
+                setAccordionExpanded(battle.battleNumber + 1);
+            } else {
+                setAccordionExpanded(battle.battleNumber);
+            }
             return [...currentBattles];
         });
     };
