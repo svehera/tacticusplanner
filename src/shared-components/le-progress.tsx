@@ -1,7 +1,8 @@
 ﻿import React, { useCallback, useMemo, useState } from 'react';
 import { Tab, Tabs } from '@mui/material';
+import { Info as InfoIcon } from '@mui/icons-material';
 import {
-    ILegendaryEvent, 
+    ILegendaryEvent,
     ILegendaryEventBattle,
     ILegendaryEventProgressState,
     ILegendaryEventProgressTrack,
@@ -11,8 +12,12 @@ import { LeTrackProgress } from './le-track-progress';
 import { LeProgressOverview } from './le-progress-overview';
 import { usePersonalData } from '../services';
 import { LegendaryEvent } from '../models/enums';
+import { Tooltip } from '@fluentui/react-components';
 
-export const LeProgress = ({ legendaryEvent, sectionChange }: { legendaryEvent: ILegendaryEvent, sectionChange: (value: string) => void}) => {
+export const LeProgress = ({ legendaryEvent, sectionChange }: {
+    legendaryEvent: ILegendaryEvent,
+    sectionChange: (value: string) => void
+}) => {
     const { personalData, updateLegendaryEventProgress } = usePersonalData();
     const [value, setValue] = React.useState(0);
     const [personalProgress, setPersonalProgress] = useState<ILegendaryEventProgressState>(personalData.legendaryEventsProgress[legendaryEvent.id] ?? {
@@ -30,14 +35,14 @@ export const LeProgress = ({ legendaryEvent, sectionChange }: { legendaryEvent: 
         regularMissions: 0,
         premiumMissions: 0
     });
-    
-    const getTrackProgress = useCallback(( name: 'alpha' | 'beta' | 'gamma', killPoints: number, requirements: ILegendaryEventTrackRequirement[]): ILegendaryEventProgressTrack => {
+
+    const getTrackProgress = useCallback((name: 'alpha' | 'beta' | 'gamma', killPoints: number, requirements: ILegendaryEventTrackRequirement[]): ILegendaryEventProgressTrack => {
         const personalBattles = personalProgress[name].battles;
         const battlesPoints = legendaryEvent[name].battlesPoints;
         return {
             name,
-            battles: personalBattles.map((state, index) => ({ 
-                battleNumber: index + 1, 
+            battles: personalBattles.map((state, index) => ({
+                battleNumber: index + 1,
                 state: Array.from({ length: 7 }).map((_, index) => state[index]),
                 requirements: [
                     {
@@ -56,8 +61,8 @@ export const LeProgress = ({ legendaryEvent, sectionChange }: { legendaryEvent: 
 
     const alphaProgress = useMemo(() => getTrackProgress('alpha', legendaryEvent.alpha.killPoints, legendaryEvent.alpha.unitsRestrictions), [legendaryEvent.id]);
     const betaProgress = useMemo(() => getTrackProgress('beta', legendaryEvent.beta.killPoints, legendaryEvent.beta.unitsRestrictions), [legendaryEvent.id]);
-    const gammaProgress = useMemo(() => getTrackProgress('gamma',legendaryEvent.gamma.killPoints, legendaryEvent.gamma.unitsRestrictions), [legendaryEvent.id]);
-    
+    const gammaProgress = useMemo(() => getTrackProgress('gamma', legendaryEvent.gamma.killPoints, legendaryEvent.gamma.unitsRestrictions), [legendaryEvent.id]);
+
     const handleBattlesChange = (section: 'alpha' | 'beta' | 'gamma') => (battles: ILegendaryEventBattle[]): void => {
         setPersonalProgress(current => {
             const eventSection = current[section];
@@ -74,7 +79,7 @@ export const LeProgress = ({ legendaryEvent, sectionChange }: { legendaryEvent: 
             return current;
         });
     };
-    
+
     const labelByIndex: Record<number, string> = {
         0: 'Overview',
         1: 'Alpha',
@@ -86,12 +91,12 @@ export const LeProgress = ({ legendaryEvent, sectionChange }: { legendaryEvent: 
         setValue(newValue);
         sectionChange(labelByIndex[newValue]);
     };
-    
+
     const totalPoints = useMemo(() => {
         const alphaTotalPoints = alphaProgress.battles.flatMap(b => b.requirements).map(x => x.points).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
         const betaTotalPoints = betaProgress.battles.flatMap(b => b.requirements).map(x => x.points).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
         const gammaTotalPoints = gammaProgress.battles.flatMap(b => b.requirements).map(x => x.points).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-        
+
         return alphaTotalPoints + betaTotalPoints + gammaTotalPoints;
     }, []);
 
@@ -100,7 +105,7 @@ export const LeProgress = ({ legendaryEvent, sectionChange }: { legendaryEvent: 
 
         trackProgress.battles.forEach(battle => {
             battle.state.forEach((value, index) => {
-                if(value) {
+                if (value) {
                     total += battle.requirements[index].points;
                 }
             });
@@ -117,6 +122,61 @@ export const LeProgress = ({ legendaryEvent, sectionChange }: { legendaryEvent: 
         return alphaTotalPoints + betaTotalPoints + gammaTotalPoints;
     }, [value]);
 
+    const totalCurrency = useMemo(() => {
+        return legendaryEvent.pointsMilestones.map(x => x.engramPayout).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    }, []);
+
+    const currentCurrency = useMemo(() => {
+        const currentMilestone = legendaryEvent.pointsMilestones
+            .find(x => x.cumulativePoints >= currentPoints);
+        if (!currentMilestone) {
+            return 0;
+        }
+
+        const milestoneNumber = currentMilestone.cumulativePoints > currentPoints ? currentMilestone.milestone - 1 : currentMilestone.milestone;
+
+        if (!milestoneNumber) {
+            return 0;
+        }
+
+        return legendaryEvent.pointsMilestones.filter(x => x.milestone <= milestoneNumber).map(x => x.engramPayout).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    }, [currentPoints]);
+
+    const totalChests = useMemo(() => {
+        return legendaryEvent.chestsMilestones.length;
+    }, []);
+
+    const currentChests = useMemo(() => {
+        let currencyLeft = currentCurrency;
+
+        for (const chestMilestone of legendaryEvent.chestsMilestones) {
+            if (currencyLeft >= chestMilestone.engramCost) {
+                currencyLeft -= chestMilestone.engramCost;
+            } else {
+                return chestMilestone.chestLevel - 1;
+            }
+        }
+
+        return legendaryEvent.chestsMilestones.length;
+    }, [currentCurrency]);
+
+    const currencyForUnlock = useMemo(() => {
+        return legendaryEvent.chestsMilestones.filter(x => x.chestLevel <= 15).map(x => x.engramCost).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    }, []);
+    
+    const pointsForUnlock = useMemo(() => {
+        let currencyLeft = currencyForUnlock - 250;
+
+        for (const chestMilestone of legendaryEvent.pointsMilestones) {
+            if (currencyLeft > 0) {
+                currencyLeft -= chestMilestone.engramPayout;
+            } else {
+                return chestMilestone.cumulativePoints;
+            }
+        }
+        
+        return 0;
+    }, [currencyForUnlock]);
 
     return (
         <div>
@@ -127,28 +187,53 @@ export const LeProgress = ({ legendaryEvent, sectionChange }: { legendaryEvent: 
                 scrollButtons="auto"
             >
                 <Tab value={0} label="Overview"/>
-                <Tab value={1} label="Alpha" />
-                <Tab value={2} label="Beta" />
-                <Tab value={3} label="Gamma" />
+                <Tab value={1} label="Alpha"/>
+                <Tab value={2} label="Beta"/>
+                <Tab value={3} label="Gamma"/>
             </Tabs>
             <TabPanel value={value} index={0}>
-                <p>Total Points: <span style={{ fontWeight: 700 }}> {currentPoints} / {totalPoints}</span> 3015 Engrams to unlock char 13k points needed to unlock char</p>
-                <LeProgressOverview legendaryEvent={legendaryEvent} missionProgressChange={handleMissionsProgressChange} progress={{
-                    alpha: alphaProgress,
-                    beta: betaProgress,
-                    gamma: gammaProgress,
-                    regularMissions: personalProgress.regularMissions,
-                    premiumMissions: personalProgress.premiumMissions,
-                }}/>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 15, margin: 10 }}>
+                    <div style={{ display: 'flex', gap: 5 }}>
+                        Total Points: 
+                        <span style={{ fontWeight: 700 }}> {currentPoints} / {totalPoints}</span> 
+                        <Tooltip content={pointsForUnlock +' required to unlock character (regular missions completed, no donate)'} relationship={'description'}>
+                            <InfoIcon/>
+                        </Tooltip>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: 5 }}>
+                        Total Currency: 
+                        <span style={{ fontWeight: 700 }}> {currentCurrency} / {totalCurrency}</span>
+                        <Tooltip content={currencyForUnlock + ' required to unlock character'} relationship={'description'}>
+                            <InfoIcon/>
+                        </Tooltip>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: 5 }}>
+                        Total Chests: 
+                        <span style={{ fontWeight: 700 }}> {currentChests} / {totalChests}</span>
+                        <Tooltip content={'15 required to unlock character'} relationship={'description'}>
+                            <InfoIcon/>
+                        </Tooltip>
+                    </div>
+                </div>
+                <LeProgressOverview legendaryEvent={legendaryEvent} missionProgressChange={handleMissionsProgressChange}
+                    progress={{
+                        alpha: alphaProgress,
+                        beta: betaProgress,
+                        gamma: gammaProgress,
+                        regularMissions: personalProgress.regularMissions,
+                        premiumMissions: personalProgress.premiumMissions,
+                    }}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <LeTrackProgress trackProgress={alphaProgress} onStateUpdate={handleBattlesChange('alpha')} />
+                <LeTrackProgress trackProgress={alphaProgress} onStateUpdate={handleBattlesChange('alpha')}/>
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <LeTrackProgress trackProgress={betaProgress} onStateUpdate={handleBattlesChange('beta')} />
+                <LeTrackProgress trackProgress={betaProgress} onStateUpdate={handleBattlesChange('beta')}/>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <LeTrackProgress trackProgress={gammaProgress} onStateUpdate={handleBattlesChange('gamma')} />
+                <LeTrackProgress trackProgress={gammaProgress} onStateUpdate={handleBattlesChange('gamma')}/>
             </TabPanel>
         </div>
     );

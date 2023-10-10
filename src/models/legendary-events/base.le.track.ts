@@ -13,7 +13,6 @@ export class LETrack implements ILegendaryEventTrack {
     killPoints: number;
     battlesPoints: number[];
 
-
     constructor(
         public eventId: LegendaryEvent,
         public section: LegendaryEventSection,

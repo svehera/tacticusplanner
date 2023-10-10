@@ -123,11 +123,27 @@ export interface ILegendaryEventStatic {
   wikiLink: string;
   eventStage: number;
   nextEventDate: string;
+  
   regularMissions: string[];
   premiumMissions: string[];
+  
   alpha: ILegendaryEventTrackStatic;
   beta: ILegendaryEventTrackStatic;
   gamma: ILegendaryEventTrackStatic;
+  
+  pointsMilestones: IPointsMilestone[];
+  chestsMilestones: IChestMilestone[];
+}
+
+export interface IPointsMilestone {
+  milestone: number;
+  cumulativePoints: number;
+  engramPayout: number;
+}
+
+export interface IChestMilestone {
+  chestLevel: number;
+  engramCost: number;
 }
 
 export interface ILegendaryEventTrackStatic {

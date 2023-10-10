@@ -1,7 +1,7 @@
 ﻿import {
-    ICharacter,
+    ICharacter, IChestMilestone,
     ILegendaryEvent, ILegendaryEventStatic,
-    ILegendaryEventTrack,
+    ILegendaryEventTrack, IPointsMilestone,
     ITableRow
 } from '../interfaces';
 import { sortBy, sum, uniqBy } from 'lodash';
@@ -23,6 +23,9 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     readonly regularMissions: string[];
     readonly premiumMissions: string[];
     
+    readonly pointsMilestones: IPointsMilestone[];
+    readonly chestsMilestones: IChestMilestone[];
+    
     protected abstract getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
 
     protected abstract getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
@@ -38,6 +41,9 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
         this.premiumMissions = staticData.premiumMissions ?? [];
         this.eventStage = staticData.eventStage;
         this.nextEventDate = staticData.nextEventDate;
+        
+        this.pointsMilestones = staticData.pointsMilestones;
+        this.chestsMilestones = staticData.chestsMilestones;
 
         this.alpha = this.getAlphaTrack(unitsData);
         this.beta = this.getBetaTrack(unitsData);
