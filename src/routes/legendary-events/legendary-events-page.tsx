@@ -14,7 +14,7 @@ import LegendaryEvent from './legendary-event';
 import ViewSettings from './view-settings';
 import AutoTeamsSettings from './auto-teams-settings';
 import Box from '@mui/material/Box';
-import { LegendaryEvent as LegendaryEventEnum } from '../../models/enums';
+import { LegendaryEventEnum as LegendaryEventEnum } from '../../models/enums';
 import Button from '@mui/material/Button';
 import { Help } from '@mui/icons-material';
 import { getDefaultLE } from '../../models/constants';
@@ -29,10 +29,35 @@ export const LegendaryEventPage = () => {
 
     const [viewPreferences, setViewPreferences] = useState<IViewPreferences>(personalData.viewPreferences);
     const [autoTeamsPreferences, setAutoTeamsPreferences] = useState(personalData.autoTeamsPreferences);
-
+    
     useEffect(() => {
         setLegendaryEvent(getDefaultLE(characters));
     }, [characters]);
+    
+    const customRequirements = personalData.legendaryEventSelectedRequirements[legendaryEvent.id];
+    if(customRequirements?.alpha) {
+        legendaryEvent.alpha.unitsRestrictions.forEach(req => {
+            if(customRequirements.alpha[req.name] !== undefined) {
+                req.selected = customRequirements.alpha[req.name];
+            }
+        });
+    }
+
+    if(customRequirements?.beta) {
+        legendaryEvent.beta.unitsRestrictions.forEach(req => {
+            if(customRequirements.beta[req.name] !== undefined) {
+                req.selected = customRequirements.beta[req.name];
+            }
+        });
+    }
+
+    if(customRequirements?.gamma) {
+        legendaryEvent.gamma.unitsRestrictions.forEach(req => {
+            if(customRequirements.gamma[req.name] !== undefined) {
+                req.selected = customRequirements.gamma[req.name];
+            }
+        });
+    }
 
     const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl2(event.currentTarget);

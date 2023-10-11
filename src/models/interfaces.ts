@@ -3,7 +3,7 @@
     DamageType,
     Equipment,
     Faction,
-    LegendaryEvent,
+    LegendaryEventEnum,
     LegendaryEvents,
     PersonalGoalType,
     Rank,
@@ -91,7 +91,7 @@ export interface IDirtyDozenChar {
 
 export type ICharacter = IUnitData & IPersonalCharacter;
 
-export type ICharLegendaryEvents = Record<LegendaryEvent, ICharLegendaryEvent>;
+export type ICharLegendaryEvents = Record<LegendaryEventEnum, ICharLegendaryEvent>;
 
 export interface ICharLegendaryEvent {
   alphaPoints: number;
@@ -108,7 +108,7 @@ export interface ICharLegendaryEvent {
 }
 
 export interface ILegendaryEvent extends ILegendaryEventStatic {
-  id: LegendaryEvent;
+  id: LegendaryEventEnum;
   alpha: ILegendaryEventTrack;
   beta: ILegendaryEventTrack;
   gamma: ILegendaryEventTrack;
@@ -153,7 +153,7 @@ export interface ILegendaryEventTrackStatic {
 }
 
 export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
-  eventId: LegendaryEvent;
+  eventId: LegendaryEventEnum;
   section: LegendaryEventSection;
   allowedUnits: ICharacter[];
   unitsRestrictions: Array<ILegendaryEventTrackRequirement>;
@@ -194,6 +194,10 @@ export interface IPersonalData {
   legendaryEvents: ILegendaryEventsData | undefined;
   legendaryEvents3: ILegendaryEventsData3 | undefined;
   legendaryEventsProgress: ILegendaryEventsProgressState;
+  legendaryEventSelectedRequirements: Record<
+      LegendaryEventEnum,
+      ILegendaryEventSelectedRequirements
+  >;
   modifiedDate?: Date | string;
 }
 
@@ -204,17 +208,26 @@ export interface ILegendaryEventsData {
 }
 
 export type ILegendaryEventsData3 = Record<
-  LegendaryEvent,
+  LegendaryEventEnum,
   ILegendaryEventData3
 >;
 
 export type SelectedTeams = Record<string, string[]>;
+export type SelectedRequirements = Record<string, boolean>;
 
 export interface ILegendaryEventData3 {
-  id: LegendaryEvent;
+  id: LegendaryEventEnum;
   alpha: SelectedTeams;
   beta: SelectedTeams;
   gamma: SelectedTeams;
+}
+
+export interface ILegendaryEventSelectedRequirements {
+  id: LegendaryEventEnum;
+  name: string;
+  alpha: SelectedRequirements;
+  beta: SelectedRequirements;
+  gamma: SelectedRequirements;
 }
 
 export interface ILegendaryEventData {
@@ -274,12 +287,12 @@ export interface IPersonalGoal {
 }
 
 export type ILegendaryEventsProgressState = Record<
-    LegendaryEvent,
+    LegendaryEventEnum,
     ILegendaryEventProgressState
 >;
 
 export interface ILegendaryEventProgressState {
-  id: LegendaryEvent;
+  id: LegendaryEventEnum;
   name: string;
   alpha: ILegendaryEventProgressTrackState;
   beta: ILegendaryEventProgressTrackState;

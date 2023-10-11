@@ -5,7 +5,7 @@
     ITableRow
 } from '../interfaces';
 import { sortBy, sum, uniqBy } from 'lodash';
-import { LegendaryEvent } from '../enums';
+import { LegendaryEventEnum } from '../enums';
 
 export abstract class LegendaryEventBase implements ILegendaryEvent {
     alpha: ILegendaryEventTrack;
@@ -14,7 +14,7 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     
     suggestedTeams: ITableRow[] = [];
 
-    readonly id: LegendaryEvent;
+    readonly id: LegendaryEventEnum;
     readonly name: string;
     readonly wikiLink: string;
     readonly eventStage: number;

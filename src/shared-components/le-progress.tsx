@@ -11,7 +11,7 @@ import {
 import { LeTrackProgress } from './le-track-progress';
 import { LeProgressOverview } from './le-progress-overview';
 import { usePersonalData } from '../services';
-import { LegendaryEvent } from '../models/enums';
+import { LegendaryEventEnum } from '../models/enums';
 import { Tooltip } from '@fluentui/react-components';
 
 export const LeProgress = ({ legendaryEvent, sectionChange }: {
@@ -22,7 +22,7 @@ export const LeProgress = ({ legendaryEvent, sectionChange }: {
     const [value, setValue] = React.useState(0);
     const [personalProgress, setPersonalProgress] = useState<ILegendaryEventProgressState>(personalData.legendaryEventsProgress[legendaryEvent.id] ?? {
         id: legendaryEvent.id,
-        name: LegendaryEvent[legendaryEvent.id],
+        name: LegendaryEventEnum[legendaryEvent.id],
         alpha: {
             battles: Array.from({ length: 12 }, () => Array.from({ length: 7 }, () => false))
         },

@@ -1,4 +1,4 @@
-﻿import { LegendaryEvent, Rarity, RarityStars, RarityString } from './enums';
+﻿import { LegendaryEventEnum, Rarity, RarityStars, RarityString } from './enums';
 import { ICharacter, ICharProgression, IUnitData } from './interfaces';
 import { ShadowSunLegendaryEvent } from './legendary-events';
 
@@ -48,7 +48,7 @@ export const charsUnlockShards: Record<Rarity, number> = {
     [Rarity.Legendary]: 500,
 };
 
-export const defaultLE = LegendaryEvent.Shadowsun;
+export const defaultLE = LegendaryEventEnum.Shadowsun;
 export const getDefaultLE = (characters: ICharacter[]) => new ShadowSunLegendaryEvent(characters);
 export const isTabletOrMobileMediaQuery = '(max-width: 1000px)';
 

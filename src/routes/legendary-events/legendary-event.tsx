@@ -1,6 +1,6 @@
 ﻿import React, { useContext, useMemo, useState } from 'react';
 
-import { ICharacter, LegendaryEventSection } from '../../models/interfaces';
+import { ICharacter, ILegendaryEventSelectedRequirements, LegendaryEventSection } from '../../models/interfaces';
 import { LegendaryEventContext, ViewSettingsContext } from '../../contexts';
 import { LegendaryEventTrack } from './legendary-event-track';
 import { SelectedTeamsTable } from './selected-teams-table';
@@ -18,7 +18,7 @@ const LegendaryEvent = () => {
     const viewPreferences = useContext(ViewSettingsContext);
     const legendaryEvent = useContext(LegendaryEventContext);
     const { characters } = useCharacters();
-    const { personalData, updateOrder, updateDirection, updateLegendaryEventTeams, getLEPersonalData } = usePersonalData();
+    const { personalData, updateOrder, updateDirection, updateLegendaryEventTeams, updateLegendaryEventSelectedRequirements,  getLEPersonalData } = usePersonalData();
     const legendaryEventPersonal = getLEPersonalData(legendaryEvent.id);
     
     const [selectedTeams, setSelectedTeams] = useState({
@@ -29,6 +29,19 @@ const LegendaryEvent = () => {
 
     const [order, setOrder] = React.useState<'name' | 'rank' | 'rarity'>(personalData.selectedTeamOrder.orderBy);
     const [direction, setDirection] = React.useState<'asc' | 'desc'>(personalData.selectedTeamOrder.direction);
+
+    const requirementsSelectionChange = (section: LegendaryEventSection) => (selected: boolean, restrictionName: string) => {
+        const newData: ILegendaryEventSelectedRequirements = personalData.legendaryEventSelectedRequirements[legendaryEvent.id] ?? {
+            id: legendaryEvent.id,
+            name: legendaryEvent.name,
+            alpha: {},
+            beta: {},
+            gamma: {}
+        };
+        newData[section][restrictionName] = selected;
+        
+        updateLegendaryEventSelectedRequirements(newData);
+    };
     
     const selectChars = (section: LegendaryEventSection) => ( team: string, ...chars: string[]) => {
         setSelectedTeams((value) => {
@@ -93,7 +106,6 @@ const LegendaryEvent = () => {
         }
         return result;
     }, [order, selectedTeams.gamma, direction]);
-    
 
     return (
         <div>
@@ -109,9 +121,9 @@ const LegendaryEvent = () => {
                 </div>
             </div>
             <div style={{ display: 'flex', gap: 15, marginBottom: 10 }}>
-                {viewPreferences.showAlpha ? (<LegendaryEventTrack key={legendaryEvent.alpha.name + legendaryEvent.id + + (personalData.modifiedDate?.toString() ?? '')} track={legendaryEvent.alpha} selectChars={selectChars('alpha')}/>) : undefined }
-                {viewPreferences.showBeta ? (<LegendaryEventTrack key={legendaryEvent.beta.name + legendaryEvent.id} track={legendaryEvent.beta} selectChars={selectChars('beta')}/>) : undefined }
-                {viewPreferences.showGamma ? (<LegendaryEventTrack key={legendaryEvent.gamma.name + legendaryEvent.id} track={legendaryEvent.gamma} selectChars={selectChars('gamma')}/>) : undefined }
+                {viewPreferences.showAlpha ? (<LegendaryEventTrack key={legendaryEvent.alpha.name + legendaryEvent.id + + (personalData.modifiedDate?.toString() ?? '')} track={legendaryEvent.alpha} selectChars={selectChars('alpha')} requirementsSelectionChange={requirementsSelectionChange('alpha')} />) : undefined }
+                {viewPreferences.showBeta ? (<LegendaryEventTrack key={legendaryEvent.beta.name + legendaryEvent.id} track={legendaryEvent.beta} selectChars={selectChars('beta')} requirementsSelectionChange={requirementsSelectionChange('beta')} />) : undefined }
+                {viewPreferences.showGamma ? (<LegendaryEventTrack key={legendaryEvent.gamma.name + legendaryEvent.id} track={legendaryEvent.gamma} selectChars={selectChars('gamma')} requirementsSelectionChange={requirementsSelectionChange('gamma')}/>) : undefined }
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 15, marginBottom: 10 }}>
                 <div style={{ display: 'flex' }}>

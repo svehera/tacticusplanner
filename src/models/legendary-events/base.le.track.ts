@@ -6,7 +6,7 @@
     LegendaryEventSection
 } from '../interfaces';
 import { intersectionBy, orderBy, sum } from 'lodash';
-import { LegendaryEvent } from '../enums';
+import { LegendaryEventEnum } from '../enums';
 
 export class LETrack implements ILegendaryEventTrack {
     name: string;
@@ -14,7 +14,7 @@ export class LETrack implements ILegendaryEventTrack {
     battlesPoints: number[];
 
     constructor(
-        public eventId: LegendaryEvent,
+        public eventId: LegendaryEventEnum,
         public section: LegendaryEventSection,
         public allowedUnits: ICharacter[],
         public unitsRestrictions: Array<ILegendaryEventTrackRequirement>,

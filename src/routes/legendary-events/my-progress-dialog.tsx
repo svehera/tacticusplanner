@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import { ILegendaryEvent } from '../../models/interfaces';
 import { LeProgress } from '../../shared-components/le-progress';
-import { LegendaryEvent } from '../../models/enums';
+import { LegendaryEventEnum } from '../../models/enums';
 
 export function MyProgressDialog({ legendaryEvent }: { legendaryEvent: ILegendaryEvent}) {
     const [open, setOpen] = React.useState(false);
@@ -42,7 +42,7 @@ export function MyProgressDialog({ legendaryEvent }: { legendaryEvent: ILegendar
                             <CloseIcon />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                            {LegendaryEvent[legendaryEvent.id]} - My Progress - {myProgressSection}
+                            {LegendaryEventEnum[legendaryEvent.id]} - My Progress - {myProgressSection}
                         </Typography>
                         <a style={{ textDecoration: 'none', color: 'white', fontWeight: 700 }} href={legendaryEvent.wikiLink} target={'_blank'} rel="noreferrer">WIKI</a>
                     </Toolbar>

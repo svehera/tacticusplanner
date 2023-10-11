@@ -1,11 +1,11 @@
 ﻿import React, { useContext, useEffect, useState } from 'react';
 import { ICharacter, ILegendaryEventTrack } from '../../models/interfaces';
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
-import { LegendaryEvent } from '../../models/enums';
+import { LegendaryEventEnum } from '../../models/enums';
 import { AutoTeamsSettingsContext } from '../../contexts';
 import { CharacterTitle } from '../../shared-components/character-title';
 
-export const LegendaryEventTrack = (props: { track: ILegendaryEventTrack, eventId: LegendaryEvent }) => {
+export const LegendaryEventTrack = (props: { track: ILegendaryEventTrack, eventId: LegendaryEventEnum }) => {
     const [characters, setCharacters] = useState<ICharacter[]>(props.track.allowedUnits);
     const [restrictions, setRestrictions] = useState<string[]>([]);
 

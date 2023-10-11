@@ -26,9 +26,10 @@ import { fitGridOnWindowResize } from '../../shared-logic/functions';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
 import { CharacterTitle } from '../../shared-components/character-title';
 
-export const LegendaryEventTrack = ({ track, selectChars }: {
+export const LegendaryEventTrack = ({ track, selectChars, requirementsSelectionChange }: {
     track: ILegendaryEventTrack;
-    selectChars: (team: string, ...chars: string[]) => void
+    selectChars: (team: string, ...chars: string[]) => void,
+    requirementsSelectionChange: (selected: boolean, restrictionName: string) => void,
 }) => {
     const gridRef = useRef<AgGridReact>(null);
 
@@ -64,6 +65,7 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
 
 
     const handleChange = (selected: boolean, restrictionName: string) => {
+        requirementsSelectionChange(selected, restrictionName);
         if (selected) {
             setRestrictions(value => [...value, restrictionName]);
         } else {
