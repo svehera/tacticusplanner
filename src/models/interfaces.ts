@@ -239,6 +239,7 @@ export interface IViewPreferences {
   showBeta: boolean;
   showGamma: boolean;
   lightWeight: boolean;
+  hideSelectedTeams: boolean;
 }
 
 export interface IAutoTeamsPreferences {

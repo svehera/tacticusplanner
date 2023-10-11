@@ -165,7 +165,7 @@ export const LegendaryEventPage = () => {
             <ViewSettingsContext.Provider value={viewPreferences}>
                 <AutoTeamsSettingsContext.Provider value={autoTeamsPreferences}>
                     <LegendaryEventContext.Provider value={legendaryEvent}>
-                        <LegendaryEvent key={legendaryEvent.id + (personalData.modifiedDate?.toString() ?? '')}/>
+                        <LegendaryEvent key={legendaryEvent.id}/>
                     </LegendaryEventContext.Provider>
                 </AutoTeamsSettingsContext.Provider>
             </ViewSettingsContext.Provider>

@@ -106,7 +106,7 @@ const LegendaryEvent = () => {
         }
         return result;
     }, [order, selectedTeams.gamma, direction]);
-
+    
     return (
         <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
@@ -121,57 +121,59 @@ const LegendaryEvent = () => {
                 </div>
             </div>
             <div style={{ display: 'flex', gap: 15, marginBottom: 10 }}>
-                {viewPreferences.showAlpha ? (<LegendaryEventTrack key={legendaryEvent.alpha.name + legendaryEvent.id + + (personalData.modifiedDate?.toString() ?? '')} track={legendaryEvent.alpha} selectChars={selectChars('alpha')} requirementsSelectionChange={requirementsSelectionChange('alpha')} />) : undefined }
-                {viewPreferences.showBeta ? (<LegendaryEventTrack key={legendaryEvent.beta.name + legendaryEvent.id} track={legendaryEvent.beta} selectChars={selectChars('beta')} requirementsSelectionChange={requirementsSelectionChange('beta')} />) : undefined }
-                {viewPreferences.showGamma ? (<LegendaryEventTrack key={legendaryEvent.gamma.name + legendaryEvent.id} track={legendaryEvent.gamma} selectChars={selectChars('gamma')} requirementsSelectionChange={requirementsSelectionChange('gamma')}/>) : undefined }
+                <LegendaryEventTrack show={viewPreferences.showAlpha} track={legendaryEvent.alpha} selectChars={selectChars('alpha')} requirementsSelectionChange={requirementsSelectionChange('alpha')} />
+                <LegendaryEventTrack show={viewPreferences.showBeta} track={legendaryEvent.beta} selectChars={selectChars('beta')} requirementsSelectionChange={requirementsSelectionChange('beta')} />
+                <LegendaryEventTrack show={viewPreferences.showGamma} track={legendaryEvent.gamma} selectChars={selectChars('gamma')} requirementsSelectionChange={requirementsSelectionChange('gamma')}/>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 15, marginBottom: 10 }}>
-                <div style={{ display: 'flex' }}>
-                    <span>Selected teams</span>
-                    <Tooltip title={'Click - removes single char, Shift + Click - remove whole team'}><Info/></Tooltip>
+            <div style={{ display: viewPreferences.hideSelectedTeams ? 'none' : 'block' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 15, marginBottom: 10 }}>
+                    <div style={{ display: 'flex' }}>
+                        <span>Selected teams</span>
+                        <Tooltip title={'Click - removes single char, Shift + Click - remove whole team'}><Info/></Tooltip>
+                    </div>
+                    
+                    <FormControl sx={{ width: 200 }} size={'small'}>
+                        <InputLabel id="order-by-label">Order By</InputLabel>
+                        <Select
+                            labelId="order-by-label"
+                            id="order-by"
+                            value={order}
+                            label="Order By"
+                            onChange={event => {
+                                const value = event.target.value as any;
+                                setOrder(value);
+                                updateOrder(value);
+                            }}
+                        >
+                            <MenuItem value={'name'}>Name</MenuItem>
+                            <MenuItem value={'rarity'}>Rarity</MenuItem>
+                            <MenuItem value={'rank'}>Rank</MenuItem>
+                        </Select>
+                    </FormControl>
+    
+                    <FormControl sx={{ width: 200 }} size={'small'}>
+                        <InputLabel id="direction-label">Direction</InputLabel>
+                        <Select
+                            labelId="direction-label"
+                            id="direction"
+                            value={direction}
+                            label="Direction"
+                            onChange={event => {
+                                const value = event.target.value as any;
+                                setDirection(value);
+                                updateDirection(value);
+                            }}
+                        >
+                            <MenuItem value={'asc'}>Ascending</MenuItem>
+                            <MenuItem value={'desc'}>Descending</MenuItem>
+                        </Select>
+                    </FormControl>
                 </div>
-                
-                <FormControl sx={{ width: 200 }} size={'small'}>
-                    <InputLabel id="order-by-label">Order By</InputLabel>
-                    <Select
-                        labelId="order-by-label"
-                        id="order-by"
-                        value={order}
-                        label="Order By"
-                        onChange={event => {
-                            const value = event.target.value as any;
-                            setOrder(value);
-                            updateOrder(value);
-                        }}
-                    >
-                        <MenuItem value={'name'}>Name</MenuItem>
-                        <MenuItem value={'rarity'}>Rarity</MenuItem>
-                        <MenuItem value={'rank'}>Rank</MenuItem>
-                    </Select>
-                </FormControl>
-
-                <FormControl sx={{ width: 200 }} size={'small'}>
-                    <InputLabel id="direction-label">Direction</InputLabel>
-                    <Select
-                        labelId="direction-label"
-                        id="direction"
-                        value={direction}
-                        label="Direction"
-                        onChange={event => {
-                            const value = event.target.value as any;
-                            setDirection(value);
-                            updateDirection(value);
-                        }}
-                    >
-                        <MenuItem value={'asc'}>Ascending</MenuItem>
-                        <MenuItem value={'desc'}>Descending</MenuItem>
-                    </Select>
-                </FormControl>
-            </div>
-            <div style={{ display: 'flex', gap: 15 }}>
-                {viewPreferences.showAlpha ? (<SelectedTeamsTable key={legendaryEvent.alpha.name + legendaryEvent.id} track={legendaryEvent.alpha} teams={alphaSelectedChars} deselectChars={deselectChars('alpha')}/>) : undefined }
-                {viewPreferences.showBeta ? (<SelectedTeamsTable key={legendaryEvent.beta.name + legendaryEvent.id} track={legendaryEvent.beta} teams={betaSelectedChars} deselectChars={deselectChars('beta')}/> ) : undefined }
-                {viewPreferences.showGamma ? (<SelectedTeamsTable key={legendaryEvent.gamma.name + legendaryEvent.id} track={legendaryEvent.gamma} teams={gammaSelectedChars} deselectChars={deselectChars('gamma')}/>) : undefined }
+                <div style={{ display: 'flex', gap: 15 }}>
+                    <SelectedTeamsTable show={viewPreferences.showAlpha} track={legendaryEvent.alpha} teams={alphaSelectedChars} deselectChars={deselectChars('alpha')}/>
+                    <SelectedTeamsTable show={viewPreferences.showBeta} track={legendaryEvent.beta} teams={betaSelectedChars} deselectChars={deselectChars('beta')}/>
+                    <SelectedTeamsTable show={viewPreferences.showGamma} track={legendaryEvent.gamma} teams={gammaSelectedChars} deselectChars={deselectChars('gamma')}/>
+                </div>
             </div>
         </div>
     );

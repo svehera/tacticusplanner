@@ -26,7 +26,8 @@ import { fitGridOnWindowResize } from '../../shared-logic/functions';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
 import { CharacterTitle } from '../../shared-components/character-title';
 
-export const LegendaryEventTrack = ({ track, selectChars, requirementsSelectionChange }: {
+export const LegendaryEventTrack = ({ track, selectChars, requirementsSelectionChange, show }: {
+    show: boolean
     track: ILegendaryEventTrack;
     selectChars: (team: string, ...chars: string[]) => void,
     requirementsSelectionChange: (selected: boolean, restrictionName: string) => void,
@@ -137,7 +138,7 @@ export const LegendaryEventTrack = ({ track, selectChars, requirementsSelectionC
 
     return (
         <div className="ag-theme-material auto-teams"
-            style={{ height: 'calc((100vh - 160px) / 2)', width: '100%', border: '2px solid black' }}>
+            style={{ display: show ? 'block' : 'none', height: `calc((100vh - 200px) / ${viewPreferences.hideSelectedTeams ? 1 : 2})`, width: '100%', border: '2px solid black' }}>
             <AgGridReact
                 ref={gridRef}
                 tooltipShowDelay={100}
