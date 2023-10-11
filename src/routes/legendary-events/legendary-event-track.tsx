@@ -51,7 +51,7 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
         },
     ], [legendaryEvent.id, viewPreferences.lightWeight]);
 
-    const [restrictions, setRestrictions] = useState<string[]>(() => track.unitsRestrictions.filter(x => x.core).map((x => x.name)));
+    const [restrictions, setRestrictions] = useState<string[]>(() => track.unitsRestrictions.filter(x => x.selected).map((x => x.name)));
     
     const teams = useMemo(() => track.suggestTeams(autoTeamsPreferences, restrictions), [autoTeamsPreferences, restrictions, legendaryEvent.allowedUnits]);
 
@@ -113,7 +113,7 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
             autoHeaderHeight: true,
             headerComponentParams: {
                 onCheckboxChange: (selected: boolean) => handleChange(selected, u.name),
-                checked: u.core
+                checked: u.selected
             },
         }));
 

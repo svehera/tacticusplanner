@@ -178,8 +178,8 @@ export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
 export interface ILegendaryEventTrackRequirement {
   name: string;
   points: number;
-  core?: boolean;
   units: ICharacter[];
+  selected?: boolean;
 }
 
 export type ITableRow<T = ICharacter | string> = Record<string, T>;

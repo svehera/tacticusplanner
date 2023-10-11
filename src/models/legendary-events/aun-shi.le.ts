@@ -28,7 +28,7 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     name: 'No Physical',
                     points: 40,
                     units: filter(noOrks).byDamageType(DamageType.Physical, true),
-                    core: true
+                    selected: true
                 },
                 {
                     name: 'Max 2 hits',
@@ -39,13 +39,13 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     name: 'No Range',
                     points: 80,
                     units: filter(noOrks).byAttackType('meleeOnly'),
-                    core: true
+                    selected: true
                 },
                 {
                     name: 'Min 3 hits',
                     points: 70,
                     units: filter(noOrks).byMinHits(3),
-                    core: true
+                    selected: true
                 },
             ],
             staticData.alpha
@@ -68,19 +68,19 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     name: 'No Resiliant',
                     points: 40,
                     units: filter(noImperials).byTrait(Trait.Resilient, true),
-                    core: true
+                    selected: true
                 },
                 {
                     name: 'No Range',
                     points: 85,
                     units:  filter(noImperials).byAttackType('meleeOnly'),
-                    core: true
+                    selected: true
                 },
                 {
                     name: 'No Summons',
                     points: 45,
                     units: filter(noImperials).byNoSummons(),
-                    core: true
+                    selected: true
                 },
                 {
                     name: 'Physical',
@@ -113,19 +113,19 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     name: 'No Flying',
                     points: 40,
                     units: filter(noChaos).byTrait(Trait.Flying, true),
-                    core: true
+                    selected: true
                 },
                 {
                     name: 'No Overwatch',
                     points: 40,
                     units:  filter(noChaos).byTrait(Trait.Overwatch, true),
-                    core: true
+                    selected: true
                 },
                 {
                     name: 'No Power',
                     points: 50,
                     units:  filter(noChaos).byDamageType(DamageType.Power, true),
-                    core: true
+                    selected: true
                 },
             ],
             staticData.gamma
