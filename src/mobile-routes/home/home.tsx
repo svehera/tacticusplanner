@@ -116,16 +116,13 @@ export const Home = () => {
                 <Accordion>
                     <AccordionSummary expandIcon={<ExpandMoreIcon/>}
                     >
-                        <Typography>What are future plans for the Tacticus Planner?</Typography>
+                        <Typography>What is planned for next release?</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <p>UI/UX improvements</p>
-                        <p>Ukrainian localization</p>
-                        <p>Google Drive integration</p>
-                        <p>PvP roles</p>
-                        <p>&quot;My Lists&quot; feature - create your own PvP, Guild raids lists.</p>
-                        <p>More personal data on Who You Own page - abilities level, power</p>
-                        <p>Login feature - share your data across multiple devices.</p>
+                        <p>Add server level data backup</p>
+                        <p>Remove redundant data to decrease size of data file</p>
+                        <p>Reminder to backup your data</p>
+                        <p>Minor improvements and bug fixes</p>
                     </AccordionDetails>
                 </Accordion>
             </div>
