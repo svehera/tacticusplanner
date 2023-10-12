@@ -5,7 +5,8 @@ export const defaultViewPreferences: IViewPreferences = {
     showAlpha: true,
     showBeta: true,
     showGamma: true,
-    lightWeight: false
+    lightWeight: false,
+    hideSelectedTeams: false,
 };
 
 export const ViewSettingsContext = createContext<IViewPreferences>(defaultViewPreferences);

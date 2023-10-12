@@ -1,13 +1,15 @@
-﻿import { ICharacter, ILegendaryEventTrack, ITableRow } from '../interfaces';
-import { Alliance, DamageType, Faction, Trait,  LegendaryEvent } from '../enums';
+﻿import { ICharacter, ILegendaryEventTrack } from '../interfaces';
+import { Alliance, DamageType, Faction, Trait } from '../enums';
 import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
 import { LETrack } from './base.le.track';
 
+import staticData from '../../assets/legendary-events/Shadowsun.json';
+
 export class ShadowSunLegendaryEvent extends LegendaryEventBase {
 
     constructor(unitsData: Array<ICharacter>) {
-        super(LegendaryEvent.ShadowSun, 'Shadowsun',  unitsData);
+        super(unitsData, staticData);
     }
 
     protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
@@ -15,8 +17,6 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
         return new LETrack(
             this.id,
             'alpha',
-            'Alpha (No Necrons)',
-            18,
             noNecrons,
             [
                 {
@@ -28,13 +28,13 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                     name: 'No Psykers',
                     points: 40,
                     units: filter(noNecrons).byTrait(Trait.Psyker, true),
-                    core: true
+                    selected: true
                 },
                 {
                     name: 'Min 4 hits',
                     points: 80,
                     units: filter(noNecrons).byMinHits(4),
-                    core: true
+                    selected: true
                 },
                 {
                     name: 'Power',
@@ -45,9 +45,10 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                     name: 'No Range',
                     points: 60,
                     units: filter(noNecrons).byAttackType('meleeOnly'),
-                    core: true
+                    selected: true
                 },
             ],
+            staticData.alpha
         );
     }
 
@@ -56,8 +57,6 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
         return new LETrack(
             this.id,
             'beta',
-            'Beta (No Tyranids)',
-            19,
             noTyranids,
             [
                 {
@@ -74,21 +73,22 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                     name: 'No Bolter',
                     points: 50,
                     units: filter(noTyranids).byDamageType(DamageType.Bolter, true),
-                    core: true
+                    selected: true
                 },
                 {
                     name: 'No Piercing',
                     points: 50,
                     units:  filter(noTyranids).byDamageType(DamageType.Piercing, true),
-                    core: true
+                    selected: true
                 },
                 {
                     name: 'No Summons',
                     points: 65,
                     units: filter(noTyranids).byNoSummons(),
-                    core: true
+                    selected: true
                 },
-            ]
+            ],
+            staticData.beta
         );
     }
 
@@ -97,27 +97,25 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
         return new LETrack(
             this.id,
             'gamma',
-            'Gamma (No Imperials)',
-            35,
             noImperials,
             [
                 {
                     name: 'No Piercing',
                     points: 40,
                     units: filter(noImperials).byDamageType(DamageType.Piercing, true),
-                    core: true
+                    selected: true
                 },
                 {
                     name: 'Ranged',
                     points: 65,
                     units: filter(noImperials).byAttackType('rangeOnly'),
-                    core: true
+                    selected: true
                 },
                 {
                     name: 'Min 3 hits',
                     points: 50,
                     units: filter(noImperials).byMinHits(3),
-                    core: true
+                    selected: true
                 },
                 {
                     name: 'Power',
@@ -129,7 +127,8 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                     points: 120,
                     units:  filter(noImperials).byFaction(Faction.Black_Legion),
                 },
-            ]
+            ],
+            staticData.gamma
         );
     }
 

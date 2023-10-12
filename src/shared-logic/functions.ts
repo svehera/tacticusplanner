@@ -82,3 +82,24 @@ export const getEnumValues = (enumObj: any): number[] => {
         .filter((key) => typeof enumObj[key] === 'number')
         .map((key) => enumObj[key]);
 };
+
+export const getCompletionRateColor = (curr: number, total: number): string => {
+    if (!curr) {
+        return 'white';
+    }
+    if (curr === total) {
+        return 'lightgreen';
+    }
+
+    const average = total / 2;
+
+    if( curr <= average) {
+        return 'lightcoral';
+    }
+
+    if (curr > average) {
+        return 'yellow';
+    }
+
+    return 'white';
+};

@@ -12,7 +12,7 @@ import {
 import {
     ICharacter,
     ILegendaryEventTrack,
-    ILegendaryEventTrackRestriction,
+    ILegendaryEventTrackRequirement,
     ITableRow,
 } from '../../models/interfaces';
 import { ViewSettingsContext, LegendaryEventContext } from '../../contexts';
@@ -23,6 +23,7 @@ import { fitGridOnWindowResize } from '../../shared-logic/functions';
 import { CharacterTitle } from '../../shared-components/character-title';
 
 export const SelectedTeamsTable = (props: {
+    show: boolean;
     track: ILegendaryEventTrack;
     teams: Record<string, Array<ICharacter | string>>;
     deselectChars: (teamName: string, ...chars: string[]) => void
@@ -74,9 +75,9 @@ export const SelectedTeamsTable = (props: {
 
     useEffect(() => {
         gridRef.current?.api?.sizeColumnsToFit();
-    }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, legendaryEvent.id]);
+    }, [viewPreferences.hideSelectedTeams,viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, legendaryEvent.id]);
 
-    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], lightweight: boolean): Array<ColDef> {
+    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRequirement[], lightweight: boolean): Array<ColDef> {
         return unitsRestrictions.map((u) => ({
             field: u.name,
             headerName: u.name,
@@ -99,7 +100,7 @@ export const SelectedTeamsTable = (props: {
 
     return (
         <div className="ag-theme-material auto-teams"
-            style={{ height: '250px', width: '100%', border: '2px solid black' }}>
+            style={{ display: props.show ? 'block' : 'none', height: '250px', width: '100%', border: '2px solid black' }}>
             <AgGridReact
                 ref={gridRef}
                 tooltipShowDelay={100}

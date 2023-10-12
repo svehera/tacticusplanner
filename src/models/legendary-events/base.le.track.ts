@@ -2,25 +2,30 @@
     IAutoTeamsPreferences,
     ICharacter,
     ILegendaryEventTrack,
-    ILegendaryEventTrackRestriction,
+    ILegendaryEventTrackRequirement, ILegendaryEventTrackStatic,
     LegendaryEventSection
 } from '../interfaces';
 import { intersectionBy, orderBy, sum } from 'lodash';
-import { LegendaryEvent } from '../enums';
+import { LegendaryEventEnum } from '../enums';
 
 export class LETrack implements ILegendaryEventTrack {
-
+    name: string;
+    killPoints: number;
+    battlesPoints: number[];
 
     constructor(
-        public eventId: LegendaryEvent,
+        public eventId: LegendaryEventEnum,
         public section: LegendaryEventSection,
-        public name: string,
-        public killPoints: number,
         public allowedUnits: ICharacter[],
-        public unitsRestrictions: Array<ILegendaryEventTrackRestriction>
+        public unitsRestrictions: Array<ILegendaryEventTrackRequirement>,
+        staticData: ILegendaryEventTrackStatic
     ) {
+        this.name = staticData.name;
+        this.killPoints = staticData.killPoints;
+        this.battlesPoints = staticData.battlesPoints;
         this.unitsRestrictions = orderBy(unitsRestrictions, 'points');
     }
+
 
     getCharacterPoints(character: ICharacter): number {
         const isAllowedUnit = this.allowedUnits.some(u => u.name === character.name);

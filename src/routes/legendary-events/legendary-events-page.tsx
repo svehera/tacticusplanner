@@ -4,7 +4,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 
 import { AutoTeamsSettingsContext, LegendaryEventContext, ViewSettingsContext } from '../../contexts';
 import { useCharacters, usePersonalData } from '../../services';
-import { AunShiLegendaryEvent, JainZarLegendaryEvent, ShadowSunLegendaryEvent } from '../../models/legendary-events';
+import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from '../../models/legendary-events';
 import {
     ILegendaryEvent,
     IViewPreferences
@@ -14,24 +14,50 @@ import LegendaryEvent from './legendary-event';
 import ViewSettings from './view-settings';
 import AutoTeamsSettings from './auto-teams-settings';
 import Box from '@mui/material/Box';
-import { LegendaryEvent as LegendaryEventEnum } from '../../models/enums';
+import { LegendaryEventEnum as LegendaryEventEnum } from '../../models/enums';
 import Button from '@mui/material/Button';
 import { Help } from '@mui/icons-material';
+import { getDefaultLE } from '../../models/constants';
 
 export const LegendaryEventPage = () => {
     const { characters } = useCharacters();
     const { personalData, updateAutoTeamsSettings } = usePersonalData();
-    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(new ShadowSunLegendaryEvent(characters));
+    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(() => getDefaultLE(characters));
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
 
     const [viewPreferences, setViewPreferences] = useState<IViewPreferences>(personalData.viewPreferences);
     const [autoTeamsPreferences, setAutoTeamsPreferences] = useState(personalData.autoTeamsPreferences);
-
+    
     useEffect(() => {
-        setLegendaryEvent(new ShadowSunLegendaryEvent(characters));
+        setLegendaryEvent(getDefaultLE(characters));
     }, [characters]);
+    
+    const customRequirements = personalData.legendaryEventSelectedRequirements[legendaryEvent.id];
+    if(customRequirements?.alpha) {
+        legendaryEvent.alpha.unitsRestrictions.forEach(req => {
+            if(customRequirements.alpha[req.name] !== undefined) {
+                req.selected = customRequirements.alpha[req.name];
+            }
+        });
+    }
+
+    if(customRequirements?.beta) {
+        legendaryEvent.beta.unitsRestrictions.forEach(req => {
+            if(customRequirements.beta[req.name] !== undefined) {
+                req.selected = customRequirements.beta[req.name];
+            }
+        });
+    }
+
+    if(customRequirements?.gamma) {
+        legendaryEvent.gamma.unitsRestrictions.forEach(req => {
+            if(customRequirements.gamma[req.name] !== undefined) {
+                req.selected = customRequirements.gamma[req.name];
+            }
+        });
+    }
 
     const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl2(event.currentTarget);
@@ -47,8 +73,7 @@ export const LegendaryEventPage = () => {
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
-
-
+    
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -87,13 +112,10 @@ export const LegendaryEventPage = () => {
                         scrollButtons="auto"
                         aria-label="scrollable auto tabs example"
                     >
-                        <Tab label="Shadowsun 2/3 (October 15)" value={LegendaryEventEnum.ShadowSun}
+                        <Tab label="Shadowsun 2/3 (October 15)" value={LegendaryEventEnum.Shadowsun}
                             onClick={() => setLegendaryEvent(new ShadowSunLegendaryEvent(characters))}/>
                         <Tab label="Aun Shi 3/3 (TBA)" value={LegendaryEventEnum.AunShi}
                             onClick={() => setLegendaryEvent(new AunShiLegendaryEvent(characters))}/>
-                        <Tab label="Jain Zar 3/3 (Ended)" value={LegendaryEventEnum.JainZar}
-                            onClick={() => setLegendaryEvent(new JainZarLegendaryEvent(characters))}/>
-
                     </Tabs>
                 </Box>
 
@@ -143,7 +165,7 @@ export const LegendaryEventPage = () => {
             <ViewSettingsContext.Provider value={viewPreferences}>
                 <AutoTeamsSettingsContext.Provider value={autoTeamsPreferences}>
                     <LegendaryEventContext.Provider value={legendaryEvent}>
-                        <LegendaryEvent key={legendaryEvent.id + (personalData.modifiedDate?.toString() ?? '')}/>
+                        <LegendaryEvent key={legendaryEvent.id}/>
                     </LegendaryEventContext.Provider>
                 </AutoTeamsSettingsContext.Provider>
             </ViewSettingsContext.Provider>

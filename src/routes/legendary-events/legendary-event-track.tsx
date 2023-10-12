@@ -13,7 +13,7 @@ import {
 import {
     ICharacter,
     ILegendaryEventTrack,
-    ILegendaryEventTrackRestriction,
+    ILegendaryEventTrackRequirement,
     ITableRow,
     LegendaryEventSection
 } from '../../models/interfaces';
@@ -26,9 +26,11 @@ import { fitGridOnWindowResize } from '../../shared-logic/functions';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
 import { CharacterTitle } from '../../shared-components/character-title';
 
-export const LegendaryEventTrack = ({ track, selectChars }: {
+export const LegendaryEventTrack = ({ track, selectChars, requirementsSelectionChange, show }: {
+    show: boolean
     track: ILegendaryEventTrack;
-    selectChars: (team: string, ...chars: string[]) => void
+    selectChars: (team: string, ...chars: string[]) => void,
+    requirementsSelectionChange: (selected: boolean, restrictionName: string) => void,
 }) => {
     const gridRef = useRef<AgGridReact>(null);
 
@@ -51,7 +53,7 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
         },
     ], [legendaryEvent.id, viewPreferences.lightWeight]);
 
-    const [restrictions, setRestrictions] = useState<string[]>(() => track.unitsRestrictions.filter(x => x.core).map((x => x.name)));
+    const [restrictions, setRestrictions] = useState<string[]>(() => track.unitsRestrictions.filter(x => x.selected).map((x => x.name)));
     
     const teams = useMemo(() => track.suggestTeams(autoTeamsPreferences, restrictions), [autoTeamsPreferences, restrictions, legendaryEvent.allowedUnits]);
 
@@ -64,6 +66,7 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
 
 
     const handleChange = (selected: boolean, restrictionName: string) => {
+        requirementsSelectionChange(selected, restrictionName);
         if (selected) {
             setRestrictions(value => [...value, restrictionName]);
         } else {
@@ -92,7 +95,7 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
         }
     };
 
-    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRestriction[], suffix: LegendaryEventSection, lightweight: boolean): Array<ColDef> {
+    function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRequirement[], suffix: LegendaryEventSection, lightweight: boolean): Array<ColDef> {
         return unitsRestrictions.map((u) => ({
             field: u.name,
             headerName: `(${u.points}) ${u.name}`,
@@ -113,7 +116,7 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
             autoHeaderHeight: true,
             headerComponentParams: {
                 onCheckboxChange: (selected: boolean) => handleChange(selected, u.name),
-                checked: u.core
+                checked: u.selected
             },
         }));
 
@@ -135,7 +138,7 @@ export const LegendaryEventTrack = ({ track, selectChars }: {
 
     return (
         <div className="ag-theme-material auto-teams"
-            style={{ height: 'calc((100vh - 160px) / 2)', width: '100%', border: '2px solid black' }}>
+            style={{ display: show ? 'block' : 'none', height: `calc((100vh - 200px) / ${viewPreferences.hideSelectedTeams ? 1 : 2})`, width: '100%', border: '2px solid black' }}>
             <AgGridReact
                 ref={gridRef}
                 tooltipShowDelay={100}

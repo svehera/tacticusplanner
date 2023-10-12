@@ -11,25 +11,25 @@ export const LegendaryEvent = (props: { legendaryEvent: ILegendaryEvent}) => {
             
             <Accordion TransitionProps={{ unmountOnExit: true }}>
                 <AccordionSummary expandIcon={
-                    <ExpandMoreIcon/>}>{props.legendaryEvent.alphaTrack.name} - {props.legendaryEvent.alphaTrack.killPoints} kill points</AccordionSummary>
+                    <ExpandMoreIcon/>}>{props.legendaryEvent.alpha.name} - {props.legendaryEvent.alpha.killPoints} kill points</AccordionSummary>
                 <AccordionDetails>
-                    <LegendaryEventTrack eventId={props.legendaryEvent.id} track={props.legendaryEvent.alphaTrack}/>
+                    <LegendaryEventTrack eventId={props.legendaryEvent.id} track={props.legendaryEvent.alpha}/>
                 </AccordionDetails>
             </Accordion>
             
             <Accordion TransitionProps={{ unmountOnExit: true }}>
                 <AccordionSummary expandIcon={
-                    <ExpandMoreIcon/>}>{props.legendaryEvent.betaTrack.name} - {props.legendaryEvent.betaTrack.killPoints} kill points</AccordionSummary>
+                    <ExpandMoreIcon/>}>{props.legendaryEvent.beta.name} - {props.legendaryEvent.beta.killPoints} kill points</AccordionSummary>
                 <AccordionDetails>
-                    <LegendaryEventTrack eventId={props.legendaryEvent.id} track={props.legendaryEvent.betaTrack}/>
+                    <LegendaryEventTrack eventId={props.legendaryEvent.id} track={props.legendaryEvent.beta}/>
                 </AccordionDetails>
             </Accordion>
             
             <Accordion TransitionProps={{ unmountOnExit: true }}>
                 <AccordionSummary expandIcon={
-                    <ExpandMoreIcon/>}>{props.legendaryEvent.gammaTrack.name} - {props.legendaryEvent.gammaTrack.killPoints} kill points</AccordionSummary>
+                    <ExpandMoreIcon/>}>{props.legendaryEvent.gamma.name} - {props.legendaryEvent.gamma.killPoints} kill points</AccordionSummary>
                 <AccordionDetails>
-                    <LegendaryEventTrack eventId={props.legendaryEvent.id} track={props.legendaryEvent.gammaTrack}/>
+                    <LegendaryEventTrack eventId={props.legendaryEvent.id} track={props.legendaryEvent.gamma}/>
                 </AccordionDetails>
             </Accordion>
         </Box>

@@ -2,14 +2,16 @@
     IAutoTeamsPreferences,
     ICharacter,
     ILegendaryEventData3,
+    ILegendaryEventProgressState,
     ILegendaryEventsData,
-    ILegendaryEventsData3,
+    ILegendaryEventsData3, ILegendaryEventSelectedRequirements,
+    ILegendaryEventsProgressState,
     IPersonalData,
     IPersonalGoal, IViewPreferences,
     SelectedTeams,
 } from '../models/interfaces';
 import { defaultAutoTeamsPreferences, defaultViewPreferences } from '../contexts';
-import { LegendaryEvent as LegendaryEventEnum, LegendaryEvent } from '../models/enums';
+import { LegendaryEventEnum } from '../models/enums';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { useEffect, useState } from 'react';
 import { setUserDataApi } from '../api/api-functions';
@@ -28,7 +30,9 @@ const defaultPersonalData: IPersonalData = {
     },
     goals: [],
     legendaryEvents: undefined,
-    legendaryEvents3: {} as ILegendaryEventsData3
+    legendaryEvents3: {} as ILegendaryEventsData3,
+    legendaryEventsProgress: {} as ILegendaryEventsProgressState,
+    legendaryEventSelectedRequirements: {} as any
 };
 
 const fixReplacedNames: Record<string, string> = {
@@ -68,6 +72,9 @@ export class PersonalDataService {
             };
             
             data.legendaryEvents3 ??= data.legendaryEvents ? this.convertLegendaryEventsToV3(data.legendaryEvents) : defaultPersonalData.legendaryEvents3;
+            data.legendaryEventsProgress ??= {} as ILegendaryEventsProgressState;
+            data.legendaryEventSelectedRequirements ??= {} as any;
+            
             this._data.next(data);
         }
     }
@@ -105,21 +112,21 @@ export class PersonalDataService {
         const result: ILegendaryEventsData3 = { } as ILegendaryEventsData3;
 
         if(legendaryEvents.jainZar.selectedTeams.length) {
-            result[LegendaryEvent.JainZar] = convertEventToV3('jainZar', LegendaryEvent.JainZar); 
+            result[LegendaryEventEnum.JainZar] = {} as any; 
         }
 
         if(legendaryEvents.aunShi.selectedTeams.length) {
-            result[LegendaryEvent.AunShi] = convertEventToV3('aunShi', LegendaryEvent.AunShi);
+            result[LegendaryEventEnum.AunShi] = convertEventToV3('aunShi', LegendaryEventEnum.AunShi);
         }
 
         if(legendaryEvents.shadowSun.selectedTeams.length) {
-            result[LegendaryEvent.ShadowSun] = convertEventToV3('shadowSun', LegendaryEvent.ShadowSun);
+            result[LegendaryEventEnum.Shadowsun] = convertEventToV3('shadowSun', LegendaryEventEnum.Shadowsun);
         }
 
 
         return result;
 
-        function convertEventToV3(eventKey: keyof ILegendaryEventsData, eventId: LegendaryEvent): ILegendaryEventData3 {
+        function convertEventToV3(eventKey: keyof ILegendaryEventsData, eventId: LegendaryEventEnum): ILegendaryEventData3 {
             const alphaTeams: SelectedTeams = {};
             const betaTeams: SelectedTeams = {};
             const gammaTeams: SelectedTeams = {};
@@ -181,7 +188,7 @@ export const usePersonalData = () => {
 
     return { 
         personalData: data,
-        getLEPersonalData: (eventId: LegendaryEvent): ILegendaryEventData3 => {
+        getLEPersonalData: (eventId: LegendaryEventEnum): ILegendaryEventData3 => {
             return (data.legendaryEvents3 && data.legendaryEvents3[eventId]) || { id: eventId, alpha: {}, beta: {}, gamma: {} };
         },
         addOrUpdateCharacterData: (character: ICharacter): void => {
@@ -250,13 +257,40 @@ export const usePersonalData = () => {
         updateLegendaryEventTeams: (newData: ILegendaryEventData3) => {
             if (!data.legendaryEvents3) {
                 data.legendaryEvents3 = {
-                    [LegendaryEventEnum.JainZar]: {},
                     [LegendaryEventEnum.AunShi]: {},
-                    [LegendaryEventEnum.ShadowSun]: {},
+                    [LegendaryEventEnum.Shadowsun]: {},
                 } as never;
             }
             if (data.legendaryEvents3) {
                 data.legendaryEvents3[newData.id] = newData;
+            }
+            PersonalDataService._data.next(data);
+            PersonalDataService.save();
+        },
+        updateLegendaryEventProgress: (newData: ILegendaryEventProgressState) => {
+            if (!data.legendaryEventsProgress) {
+                data.legendaryEventsProgress = {
+                    [LegendaryEventEnum.AunShi]: {},
+                    [LegendaryEventEnum.Shadowsun]: {},
+                } as never;
+            }
+            if (data.legendaryEventsProgress) {
+                data.legendaryEventsProgress[newData.id] = newData;
+                
+            }
+            PersonalDataService._data.next(data);
+            PersonalDataService.save();
+        },
+        updateLegendaryEventSelectedRequirements: (newData: ILegendaryEventSelectedRequirements) => {
+            if (!data.legendaryEventSelectedRequirements) {
+                data.legendaryEventSelectedRequirements = {
+                    [LegendaryEventEnum.AunShi]: {},
+                    [LegendaryEventEnum.Shadowsun]: {},
+                } as never;
+            }
+            if (data.legendaryEventSelectedRequirements) {
+                data.legendaryEventSelectedRequirements[newData.id] = newData;
+
             }
             PersonalDataService._data.next(data);
             PersonalDataService.save();

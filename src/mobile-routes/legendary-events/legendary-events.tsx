@@ -3,17 +3,19 @@ import { useCharacters, usePersonalData } from '../../services';
 import Box from '@mui/material/Box';
 import { Tab, Tabs } from '@mui/material';
 import { ILegendaryEvent } from '../../models/interfaces';
-import { AunShiLegendaryEvent, JainZarLegendaryEvent, ShadowSunLegendaryEvent } from '../../models/legendary-events';
+import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from '../../models/legendary-events';
 import { LegendaryEvent } from './legendary-event';
 import AutoTeamsSettings from '../../routes/legendary-events/auto-teams-settings';
 import { AutoTeamsSettingsContext } from '../../contexts';
 import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
+import { MyProgressDialog } from '../../routes/legendary-events/my-progress-dialog';
+import { getDefaultLE } from '../../models/constants';
 
 export const LegendaryEvents = () => {
     const [value, setValue] = React.useState(0);
     const { characters } = useCharacters();
     const { personalData, updateAutoTeamsSettings } = usePersonalData();
-    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(new ShadowSunLegendaryEvent(characters));
+    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(() => getDefaultLE(characters));
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
@@ -31,7 +33,6 @@ export const LegendaryEvents = () => {
             >
                 <Tab label="Shadowsun 2/3 (Oct 15)" onClick={() => setLegendaryEvent(new ShadowSunLegendaryEvent(characters))}/>
                 <Tab label="Aun'Shi"  onClick={() => setLegendaryEvent(new AunShiLegendaryEvent(characters))}/>
-                <Tab label="Jain Zar" onClick={() => setLegendaryEvent(new JainZarLegendaryEvent(characters))} />
             </Tabs>
             <div style={{ marginInlineStart: 10 }}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -39,7 +40,10 @@ export const LegendaryEvents = () => {
                         setAutoTeamsPreferences(value);
                         updateAutoTeamsSettings(value);
                     }}></AutoTeamsSettings>
-                    <SetGoalDialog key={personalData.goals.length}/>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, margin: '10px 0' }}>
+                        <SetGoalDialog key={personalData.goals.length}/>
+                        <MyProgressDialog legendaryEvent={legendaryEvent}/>
+                    </div>
                 </div>
             </div>
             <AutoTeamsSettingsContext.Provider value={autoTeamsPreferences}>

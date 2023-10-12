@@ -3,7 +3,7 @@
     DamageType,
     Equipment,
     Faction,
-    LegendaryEvent,
+    LegendaryEventEnum,
     LegendaryEvents,
     PersonalGoalType,
     Rank,
@@ -91,7 +91,7 @@ export interface IDirtyDozenChar {
 
 export type ICharacter = IUnitData & IPersonalCharacter;
 
-export type ICharLegendaryEvents = Record<LegendaryEvent, ICharLegendaryEvent>;
+export type ICharLegendaryEvents = Record<LegendaryEventEnum, ICharLegendaryEvent>;
 
 export interface ICharLegendaryEvent {
   alphaPoints: number;
@@ -107,24 +107,56 @@ export interface ICharLegendaryEvent {
   totalSlots: number;
 }
 
-export interface ILegendaryEvent {
-  id: LegendaryEvent;
-  name: string;
-  alphaTrack: ILegendaryEventTrack;
-  betaTrack: ILegendaryEventTrack;
-  gammaTrack: ILegendaryEventTrack;
+export interface ILegendaryEvent extends ILegendaryEventStatic {
+  id: LegendaryEventEnum;
+  alpha: ILegendaryEventTrack;
+  beta: ILegendaryEventTrack;
+  gamma: ILegendaryEventTrack;
 
   suggestedTeams: ITableRow[];
   allowedUnits: Array<ICharacter>;
 }
 
-export interface ILegendaryEventTrack {
-  eventId: LegendaryEvent;
-  section: LegendaryEventSection;
+export interface ILegendaryEventStatic {
+  id: number,
+  name: string;
+  wikiLink: string;
+  eventStage: number;
+  nextEventDate: string;
+  
+  regularMissions: string[];
+  premiumMissions: string[];
+  
+  alpha: ILegendaryEventTrackStatic;
+  beta: ILegendaryEventTrackStatic;
+  gamma: ILegendaryEventTrackStatic;
+  
+  pointsMilestones: IPointsMilestone[];
+  chestsMilestones: IChestMilestone[];
+}
+
+export interface IPointsMilestone {
+  milestone: number;
+  cumulativePoints: number;
+  engramPayout: number;
+}
+
+export interface IChestMilestone {
+  chestLevel: number;
+  engramCost: number;
+}
+
+export interface ILegendaryEventTrackStatic {
   name: string;
   killPoints: number;
+  battlesPoints: number[]; 
+}
+
+export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
+  eventId: LegendaryEventEnum;
+  section: LegendaryEventSection;
   allowedUnits: ICharacter[];
-  unitsRestrictions: Array<ILegendaryEventTrackRestriction>;
+  unitsRestrictions: Array<ILegendaryEventTrackRequirement>;
 
   getCharacterPoints(char: ICharacter): number;
 
@@ -143,11 +175,11 @@ export interface ILegendaryEventTrack {
   ): Array<ICharacter>;
 }
 
-export interface ILegendaryEventTrackRestriction {
+export interface ILegendaryEventTrackRequirement {
   name: string;
   points: number;
-  core?: boolean;
   units: ICharacter[];
+  selected?: boolean;
 }
 
 export type ITableRow<T = ICharacter | string> = Record<string, T>;
@@ -161,6 +193,11 @@ export interface IPersonalData {
   goals: IPersonalGoal[];
   legendaryEvents: ILegendaryEventsData | undefined;
   legendaryEvents3: ILegendaryEventsData3 | undefined;
+  legendaryEventsProgress: ILegendaryEventsProgressState;
+  legendaryEventSelectedRequirements: Record<
+      LegendaryEventEnum,
+      ILegendaryEventSelectedRequirements
+  >;
   modifiedDate?: Date | string;
 }
 
@@ -171,17 +208,26 @@ export interface ILegendaryEventsData {
 }
 
 export type ILegendaryEventsData3 = Record<
-  LegendaryEvent,
+  LegendaryEventEnum,
   ILegendaryEventData3
 >;
 
 export type SelectedTeams = Record<string, string[]>;
+export type SelectedRequirements = Record<string, boolean>;
 
 export interface ILegendaryEventData3 {
-  id: LegendaryEvent;
+  id: LegendaryEventEnum;
   alpha: SelectedTeams;
   beta: SelectedTeams;
   gamma: SelectedTeams;
+}
+
+export interface ILegendaryEventSelectedRequirements {
+  id: LegendaryEventEnum;
+  name: string;
+  alpha: SelectedRequirements;
+  beta: SelectedRequirements;
+  gamma: SelectedRequirements;
 }
 
 export interface ILegendaryEventData {
@@ -193,6 +239,7 @@ export interface IViewPreferences {
   showBeta: boolean;
   showGamma: boolean;
   lightWeight: boolean;
+  hideSelectedTeams: boolean;
 }
 
 export interface IAutoTeamsPreferences {
@@ -238,4 +285,44 @@ export interface IPersonalGoal {
   targetRarity?: Rarity;
   targetRank?: Rank;
   notes?: string;
+}
+
+export type ILegendaryEventsProgressState = Record<
+    LegendaryEventEnum,
+    ILegendaryEventProgressState
+>;
+
+export interface ILegendaryEventProgressState {
+  id: LegendaryEventEnum;
+  name: string;
+  alpha: ILegendaryEventProgressTrackState;
+  beta: ILegendaryEventProgressTrackState;
+  gamma: ILegendaryEventProgressTrackState;
+  regularMissions: number;
+  premiumMissions: number;
+}
+
+
+
+export interface ILegendaryEventProgressTrackState {
+  battles: Array<boolean[]>;
+}
+
+export interface ILegendaryEventProgress {
+  alpha: ILegendaryEventProgressTrack;
+  beta: ILegendaryEventProgressTrack;
+  gamma: ILegendaryEventProgressTrack;
+  regularMissions: number;
+  premiumMissions: number;
+}
+
+export interface ILegendaryEventProgressTrack {
+  name: 'alpha' | 'beta' | 'gamma';
+  battles: ILegendaryEventBattle[];
+}
+
+export interface ILegendaryEventBattle {
+  battleNumber: number;
+  state: boolean[];
+  requirements: ILegendaryEventTrackRequirement[];
 }

@@ -1,0 +1,413 @@
+﻿{
+  "id": 4,
+  "name": "Shadowsun",
+  "wikiLink": "https://tacticus.fandom.com/wiki/LE-Shadowsun",
+  "eventStage": 2,
+  "nextEventDate": "October 15",
+  "regularMissions": [
+    "Play one Philosophy of War Battle, Deal 1000 damage",
+    "Defeat 30 Necrons",
+    "Defeat 75 Tyranids",
+    "Defeat 100 Ultramarines",
+    "Use abilities 15 times with Xenos units, Deal 10k damage with Abilities",
+    "Use abilities 20 times with Imperial units, Deal 15k damage with Abilities",
+    "Use abilities 25 times with Chaos units, Deal 20k damage with Abilities",
+    "Play 3 Philosophy of War Battles, Deal 25k Bolter damage",
+    "Play 3 Philosophy of War Battles, Deal 25k Psychic damage",
+    "Play 3 Philosophy of War Battles, Deal 25k Power damage"
+  ],
+  "premiumMissions": [
+    "Win 1 battle without Summoning any units",
+    "Defeat 30 enemies with Xenos units",
+    "Defeat 75 enemies with Imperial units",
+    "Defeat 100 enemies with Chaos units",
+    "Win 5 battles without deploying any Resilient characters",
+    "Win 5 battles without deploying any Overwatch characters",
+    "Win 5 battles without deploying any Living Metal characters",
+    "Defeat 75 enemies with Bolter Damage",
+    "Defeat 75 enemies with Psychic Damage",
+    "Defeat 75 enemies with Power Damage"
+  ],
+  "alpha": {
+    "name": "Alpha (No Necrons)",
+    "killPoints": 18,
+    "battlesPoints": [
+      29,
+      39,
+      33,
+      48,
+      36,
+      52,
+      45,
+      39,
+      54,
+      50,
+      50,
+      60
+    ]
+  },
+  "beta": {
+    "name": "Beta (No Tyranids)",
+    "killPoints": 19,
+    "battlesPoints": [
+      34,
+      40,
+      57,
+      59,
+      49,
+      58,
+      55,
+      50,
+      54,
+      58,
+      59,
+      61
+    ]
+  },
+  "gamma": {
+    "name": "Gamma (No Imperials)",
+    "killPoints": 35,
+    "battlesPoints": [
+      31,
+      36,
+      56,
+      48,
+      53,
+      61,
+      67,
+      50,
+      57,
+      60,
+      67,
+      54
+    ]
+  },
+  "pointsMilestones": [
+    {
+      "milestone": 1,
+      "cumulativePoints": 100,
+      "engramPayout": 25
+    },
+    {
+      "milestone": 2,
+      "cumulativePoints": 250,
+      "engramPayout": 30
+    },
+    {
+      "milestone": 3,
+      "cumulativePoints": 500,
+      "engramPayout": 35
+    },
+    {
+      "milestone": 4,
+      "cumulativePoints": 1000,
+      "engramPayout": 40
+    },
+    {
+      "milestone": 5,
+      "cumulativePoints": 1500,
+      "engramPayout": 45
+    },
+    {
+      "milestone": 6,
+      "cumulativePoints": 2000,
+      "engramPayout": 50
+    },
+    {
+      "milestone": 7,
+      "cumulativePoints": 2500,
+      "engramPayout": 55
+    },
+    {
+      "milestone": 8,
+      "cumulativePoints": 3000,
+      "engramPayout": 60
+    },
+    {
+      "milestone": 9,
+      "cumulativePoints": 3500,
+      "engramPayout": 65
+    },
+    {
+      "milestone": 10,
+      "cumulativePoints": 4000,
+      "engramPayout": 70
+    },
+    {
+      "milestone": 11,
+      "cumulativePoints": 4500,
+      "engramPayout": 75
+    },
+    {
+      "milestone": 12,
+      "cumulativePoints": 5000,
+      "engramPayout": 80
+    },
+    {
+      "milestone": 13,
+      "cumulativePoints": 5500,
+      "engramPayout": 85
+    },
+    {
+      "milestone": 14,
+      "cumulativePoints": 6000,
+      "engramPayout": 90
+    },
+    {
+      "milestone": 15,
+      "cumulativePoints": 6500,
+      "engramPayout": 95
+    },
+    {
+      "milestone": 16,
+      "cumulativePoints": 7000,
+      "engramPayout": 100
+    },
+    {
+      "milestone": 17,
+      "cumulativePoints": 7500,
+      "engramPayout": 105
+    },
+    {
+      "milestone": 18,
+      "cumulativePoints": 8000,
+      "engramPayout": 110
+    },
+    {
+      "milestone": 19,
+      "cumulativePoints": 8500,
+      "engramPayout": 115
+    },
+    {
+      "milestone": 20,
+      "cumulativePoints": 9000,
+      "engramPayout": 120
+    },
+    {
+      "milestone": 21,
+      "cumulativePoints": 9500,
+      "engramPayout": 125
+    },
+    {
+      "milestone": 22,
+      "cumulativePoints": 10000,
+      "engramPayout": 150
+    },
+    {
+      "milestone": 23,
+      "cumulativePoints": 10500,
+      "engramPayout": 175
+    },
+    {
+      "milestone": 24,
+      "cumulativePoints": 11000,
+      "engramPayout": 200
+    },
+    {
+      "milestone": 25,
+      "cumulativePoints": 11500,
+      "engramPayout": 250
+    },
+    {
+      "milestone": 26,
+      "cumulativePoints": 12000,
+      "engramPayout": 275
+    },
+    {
+      "milestone": 27,
+      "cumulativePoints": 12500,
+      "engramPayout": 300
+    },
+    {
+      "milestone": 28,
+      "cumulativePoints": 13000,
+      "engramPayout": 350
+    },
+    {
+      "milestone": 29,
+      "cumulativePoints": 13500,
+      "engramPayout": 400
+    },
+    {
+      "milestone": 30,
+      "cumulativePoints": 14000,
+      "engramPayout": 450
+    },
+    {
+      "milestone": 31,
+      "cumulativePoints": 14550,
+      "engramPayout": 500
+    },
+    {
+      "milestone": 32,
+      "cumulativePoints": 15150,
+      "engramPayout": 550
+    },
+    {
+      "milestone": 33,
+      "cumulativePoints": 15800,
+      "engramPayout": 650
+    },
+    {
+      "milestone": 34,
+      "cumulativePoints": 16500,
+      "engramPayout": 800
+    },
+    {
+      "milestone": 35,
+      "cumulativePoints": 17250,
+      "engramPayout": 1000
+    },
+    {
+      "milestone": 36,
+      "cumulativePoints": 18000,
+      "engramPayout": 2000
+    }
+  ],
+  "chestsMilestones": [
+    {
+      "chestLevel": 1,
+      "engramCost": 60
+    },
+    {
+      "chestLevel": 2,
+      "engramCost": 80
+    },
+    {
+      "chestLevel": 3,
+      "engramCost": 100
+    },
+    {
+      "chestLevel": 4,
+      "engramCost": 120
+    },
+    {
+      "chestLevel": 5,
+      "engramCost": 140
+    },
+    {
+      "chestLevel": 6,
+      "engramCost": 160
+    },
+    {
+      "chestLevel": 7,
+      "engramCost": 180
+    },
+    {
+      "chestLevel": 8,
+      "engramCost": 200
+    },
+    {
+      "chestLevel": 9,
+      "engramCost": 220
+    },
+    {
+      "chestLevel": 10,
+      "engramCost": 240
+    },
+    {
+      "chestLevel": 11,
+      "engramCost": 260
+    },
+    {
+      "chestLevel": 12,
+      "engramCost": 280
+    },
+    {
+      "chestLevel": 13,
+      "engramCost": 300
+    },
+    {
+      "chestLevel": 14,
+      "engramCost": 325
+    },
+    {
+      "chestLevel": 15,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 16,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 17,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 18,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 19,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 20,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 21,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 22,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 23,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 24,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 25,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 26,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 27,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 28,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 29,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 30,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 31,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 32,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 33,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 34,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 35,
+      "engramCost": 350
+    },
+    {
+      "chestLevel": 36,
+      "engramCost": 350
+    }
+  ]
+}
