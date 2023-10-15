@@ -1,5 +1,5 @@
-﻿import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+﻿import React, { useMemo, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -16,40 +16,47 @@ import { AppBarSubMenu } from './app-bar-sub-menu';
 
 const TopAppBar = () => {
     const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
-    const [title, setTitle] = useState('Tacticus Planner');
-
+    const location = useLocation();
+    const navigate = useNavigate();
     const navigationMenuControls = usePopUpControls();
+
+    const title = useMemo(() => {
+        switch (location.pathname) {
+            case '/wyo':
+                return 'Who You Own';
+            case '/le':
+                return 'Legendary Events';
+            case '/goals':
+                return 'My Goals';
+            case '/characters':
+                return 'Characters';
+            case '/dirtyDozen':
+                return 'Dirty Dozen';
+            case '/contacts':
+                return 'Contacts';
+            case '/ty':
+                return 'Thank You Page';
+            default: {
+                return 'Tacticus Planner';
+            }
+        }
+    }, [location.pathname]);
 
     const nav = isTabletOrMobile ? undefined : (
         <div style={{ display: 'flex', alignItems: 'center', marginInlineEnd: 20 }}>
-            <Button
-                onClick={() => setTitle('Who You Own')}
-                component={Link}
-                to={'./wyo'}
-                color="inherit"
-            >
+            <Button component={Link} to={'./wyo'} color="inherit">
                 Who You Own
             </Button>
-            
-            <Button
-                onClick={() => setTitle('Legendary Events')}
-                component={Link}
-                to={'./le'}
-                color="inherit"
-            >
+
+            <Button component={Link} to={'./le'} color="inherit">
                 Legendary Events
             </Button>
 
-            <Button
-                onClick={() => setTitle('My Goals')}
-                component={Link}
-                to={'./goals'}
-                color="inherit"
-            >
+            <Button component={Link} to={'./goals'} color="inherit">
                 Goals
             </Button>
-           
-            <AppBarSubMenu setTitle={setTitle}/>
+
+            <AppBarSubMenu />
         </div>
     );
 
@@ -62,95 +69,38 @@ const TopAppBar = () => {
             onClick={navigationMenuControls.handleClose}
             MenuListProps={{
                 'aria-labelledby': 'basic-button',
-            }}
-        >
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('Who You Own')}
-                    component={Link}
-                    to={'./wyo'}
-                    color="inherit"
-                >
-                    Who You Own
-                </Button>
+            }}>
+            <MenuItem component={Link} to={'./wyo'} color="inherit">
+                Who You Own
             </MenuItem>
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('Legendary Events')}
-                    component={Link}
-                    to={'./le'}
-                    color="inherit"
-                >
-                    Legendary Events
-                </Button>
+            <MenuItem component={Link} to={'./le'} color="inherit">
+                Legendary Events
             </MenuItem>
 
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('My Goals')}
-                    component={Link}
-                    to={'./goals'}
-                    color="inherit"
-                >
-                    Goals
-                </Button>
+            <MenuItem component={Link} to={'./goals'} color="inherit">
+                Goals
             </MenuItem>
 
-            <Divider/>
+            <Divider />
 
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('Characters')}
-                    component={Link}
-                    to={'./characters'}
-                    color="inherit"
-                >
-                    Characters
-                </Button>
+            <MenuItem component={Link} to={'./characters'} color="inherit">
+                Characters
             </MenuItem>
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('Dirty Dozen')}
-                    component={Link}
-                    to={'./dirtyDozen'}
-                    color="inherit"
-                >
-                    Dirty Dozen
-                </Button>
+            <MenuItem component={Link} to={'./dirtyDozen'} color="inherit">
+                Dirty Dozen
             </MenuItem>
 
-            <Divider/>
+            <Divider />
 
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('Tacticus Planner')}
-                    component={Link}
-                    to={'./'}
-                    color="inherit"
-                >
-                    Home/F.A.Q.
-                </Button>
+            <MenuItem component={Link} to={'./'} color="inherit">
+                Home/F.A.Q.
             </MenuItem>
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('Contacts')}
-                    component={Link}
-                    to={'./contacts'}
-                    color="inherit"
-                >
-                    Contacts
-                </Button>
+            <MenuItem component={Link} to={'./contacts'} color="inherit">
+                Contacts
             </MenuItem>
 
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('Thank You Page')}
-                    component={Link}
-                    to={'./ty'}
-                    color="inherit"
-                >
-                    Thank You
-                </Button>
+            <MenuItem component={Link} to={'./ty'} color="inherit">
+                Thank You
             </MenuItem>
         </Menu>
     );
@@ -159,25 +109,26 @@ const TopAppBar = () => {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Typography variant={isTabletOrMobile ? 'h5' : 'h4'} component="div">
+                    <Typography
+                        style={{ cursor: 'pointer' }}
+                        variant={isTabletOrMobile ? 'h5' : 'h4'}
+                        component="div"
+                        onClick={() => navigate('./')}>
                         {title}
                     </Typography>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         {nav}
-                        <ViewSwitch/>
+                        <ViewSwitch />
                         <Button
                             id="basic-button"
-                            aria-controls={
-                                navigationMenuControls.open ? 'basic-menu' : undefined
-                            }
+                            aria-controls={navigationMenuControls.open ? 'basic-menu' : undefined}
                             aria-haspopup="true"
                             aria-expanded={navigationMenuControls.open ? 'true' : undefined}
                             color="inherit"
-                            onClick={navigationMenuControls.handleClick}
-                        >
-                            <MenuIcon/>
+                            onClick={navigationMenuControls.handleClick}>
+                            <MenuIcon />
                         </Button>
-                        <UserMenu/>
+                        <UserMenu />
                         {navigationMenu}
                     </div>
                 </Toolbar>
