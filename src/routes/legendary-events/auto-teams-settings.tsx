@@ -18,7 +18,7 @@ const AutoTeamsSettings = () => {
     }, []);
 
     return (
-        <FormGroup style={{ display: 'flex', flexDirection: 'row' }}>
+        <FormGroup style={{ display: 'flex', flexDirection: 'column' }}>
             <FormControlLabel
                 control={
                     <Checkbox

@@ -1,6 +1,6 @@
 ﻿import { LegendaryEventEnum, PersonalGoalType, Rank, Rarity, RarityStars, RarityString } from './enums';
 import { ICharacter2, ICharProgression, IPersonalData2 } from './interfaces';
-import { ShadowSunLegendaryEvent } from './legendary-events';
+import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from './legendary-events';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,
@@ -49,7 +49,16 @@ export const charsUnlockShards: Record<Rarity, number> = {
 };
 
 export const defaultLE = LegendaryEventEnum.Shadowsun;
-export const getDefaultLE = (characters: ICharacter2[]) => new ShadowSunLegendaryEvent(characters);
+export const getLegendaryEvent = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
+    switch (id) {
+        case LegendaryEventEnum.Shadowsun:
+            return new ShadowSunLegendaryEvent(characters);
+        case LegendaryEventEnum.AunShi:
+            return new AunShiLegendaryEvent(characters);
+        default:
+            return new ShadowSunLegendaryEvent(characters);
+    }
+};
 export const isTabletOrMobileMediaQuery = '(max-width: 1000px)';
 
 export const pooEmoji = String.fromCodePoint(parseInt('1F4A9', 16));

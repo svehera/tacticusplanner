@@ -16,30 +16,6 @@ const ViewSettings = () => {
             <FormControlLabel
                 control={
                     <Checkbox
-                        checked={viewPreferences.hideSelectedTeams}
-                        onChange={event => updatePreferences('hideSelectedTeams', event.target.checked)}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                }
-                label="Hide selected teams"
-            />
-
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={viewPreferences.lightWeight}
-                        onChange={event => updatePreferences('lightWeight', event.target.checked)}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                }
-                label="Lightweight view"
-            />
-
-            <Divider style={{ height: 42, margin: '0 10px' }} orientation={'vertical'} />
-
-            <FormControlLabel
-                control={
-                    <Checkbox
                         checked={viewPreferences.showAlpha}
                         disabled={viewPreferences.showAlpha && !viewPreferences.showBeta && !viewPreferences.showGamma}
                         onChange={event => updatePreferences('showAlpha', event.target.checked)}
@@ -71,6 +47,30 @@ const ViewSettings = () => {
                     />
                 }
                 label="Gamma"
+            />
+
+            <Divider style={{ height: 42, margin: '0 10px' }} orientation={'vertical'} />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={viewPreferences.hideSelectedTeams}
+                        onChange={event => updatePreferences('hideSelectedTeams', event.target.checked)}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+                label="Hide selected teams"
+            />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={viewPreferences.lightWeight}
+                        onChange={event => updatePreferences('lightWeight', event.target.checked)}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+                label="Lightweight view"
             />
         </FormGroup>
     );

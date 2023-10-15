@@ -12,7 +12,6 @@ import {
 } from 'ag-grid-community';
 
 import { ICharacter2, ILegendaryEventTrack, ILegendaryEventTrackRequirement, ITableRow } from '../../models/interfaces';
-import { LegendaryEventContext } from '../../contexts';
 import { Rank, Rarity } from '../../models/enums';
 
 import { fitGridOnWindowResize } from '../../shared-logic/functions';
@@ -41,8 +40,6 @@ export const SelectedTeamsTable = (props: {
         return result;
     }, [teams]);
 
-    const legendaryEvent = useContext(LegendaryEventContext);
-
     const columnsDefs = useMemo<Array<ColGroupDef>>(
         () => [
             {
@@ -52,7 +49,7 @@ export const SelectedTeamsTable = (props: {
                 openByDefault: true,
             },
         ],
-        [legendaryEvent.id, viewPreferences.lightWeight]
+        [track.eventId, viewPreferences.lightWeight]
     );
 
     const handleCellCLick = (cellClicked: CellClickedEvent<ITableRow[], ICharacter2>) => {
@@ -78,7 +75,6 @@ export const SelectedTeamsTable = (props: {
         viewPreferences.showAlpha,
         viewPreferences.showBeta,
         viewPreferences.showGamma,
-        legendaryEvent.id,
     ]);
 
     function getSectionColumns(

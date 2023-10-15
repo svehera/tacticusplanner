@@ -24,8 +24,10 @@ const TopAppBar = () => {
         switch (location.pathname) {
             case '/wyo':
                 return 'Who You Own';
-            case '/le':
-                return 'Legendary Events';
+            case '/le/shadowsun':
+                return 'Shadowsun 2/3 (October 15)';
+            case '/le/aunshi':
+                return 'Aun Shi 3/3 (TBA)';
             case '/goals':
                 return 'My Goals';
             case '/characters':
@@ -48,15 +50,44 @@ const TopAppBar = () => {
                 Who You Own
             </Button>
 
-            <Button component={Link} to={'./le'} color="inherit">
-                Legendary Events
-            </Button>
+            {/*<Button component={Link} to={'./le'} color="inherit">*/}
+            {/*    Legendary Events*/}
+            {/*</Button>*/}
+            <AppBarSubMenu
+                rootLabel={'Legendary Events'}
+                options={[
+                    {
+                        label: 'Shadowsun',
+                        route: './le/shadowsun',
+                    },
+                    {
+                        label: 'Aun Shi',
+                        route: './le/aunshi',
+                    },
+                    {
+                        label: 'Ragnar',
+                        route: './le/ragnar',
+                    },
+                ]}
+            />
 
             <Button component={Link} to={'./goals'} color="inherit">
                 Goals
             </Button>
 
-            <AppBarSubMenu />
+            <AppBarSubMenu
+                rootLabel={'TABLES'}
+                options={[
+                    {
+                        label: 'Characters',
+                        route: './characters',
+                    },
+                    {
+                        label: 'Dirty Dozen',
+                        route: './dirtyDozen',
+                    },
+                ]}
+            />
         </div>
     );
 

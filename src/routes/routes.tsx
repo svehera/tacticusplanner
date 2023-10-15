@@ -11,6 +11,8 @@ import { LegendaryEventPage } from './legendary-events/legendary-events-page';
 import { Contacts } from './contacts/contacts';
 import { Goals } from './goals/goals';
 import { Thanks } from '../shared-components/thanks';
+import LegendaryEvent from './legendary-events/legendary-event';
+import { LegendaryEventEnum } from '../models/enums';
 
 export const appRoutes: () => RouteObject[] = () => [
     {
@@ -36,6 +38,16 @@ export const appRoutes: () => RouteObject[] = () => [
             {
                 path: 'le',
                 element: <LegendaryEventPage />,
+                children: [
+                    {
+                        path: 'shadowsun',
+                        element: <LegendaryEvent id={LegendaryEventEnum.Shadowsun} />,
+                    },
+                    {
+                        path: 'aunshi',
+                        element: <LegendaryEvent id={LegendaryEventEnum.AunShi} />,
+                    },
+                ],
             },
             {
                 path: 'goals',

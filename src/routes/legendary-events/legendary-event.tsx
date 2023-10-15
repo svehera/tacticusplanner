@@ -1,7 +1,6 @@
 ﻿import React, { useContext, useMemo } from 'react';
 
 import { ICharacter2, LegendaryEventSection, SelectedTeams } from '../../models/interfaces';
-import { LegendaryEventContext } from '../../contexts';
 import { LegendaryEventTrack } from './legendary-event-track';
 import { SelectedTeamsTable } from './selected-teams-table';
 
@@ -13,11 +12,13 @@ import { orderBy } from 'lodash';
 import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 import { MyProgressDialog } from './my-progress-dialog';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
+import { LegendaryEventEnum } from '../../models/enums';
+import { getLegendaryEvent } from '../../models/constants';
 
-const LegendaryEvent = () => {
-    const legendaryEvent = useContext(LegendaryEventContext);
+const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
     const { characters, viewPreferences, selectedTeamOrder, leSelectedTeams } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
+    const legendaryEvent = useMemo(() => getLegendaryEvent(id, characters), [id]);
 
     const selectChars =
         (section: LegendaryEventSection) =>

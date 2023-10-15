@@ -20,7 +20,6 @@ import {
     ITableRow,
     LegendaryEventSection,
 } from '../../models/interfaces';
-import { LegendaryEventContext } from '../../contexts';
 import { LegendaryEventEnum, Rank, Rarity } from '../../models/enums';
 
 import CustomTableHeader from './custom-table-header';
@@ -39,15 +38,14 @@ export const LegendaryEventTrack = ({
     selectChars: (team: string, ...chars: string[]) => void;
 }) => {
     const gridRef = useRef<AgGridReact>(null);
-    const legendaryEvent = useContext(LegendaryEventContext);
 
     const { viewPreferences, autoTeamsPreferences, leSelectedRequirements } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const restrictions = useMemo(() => {
-        const event: ILegendaryEventSelectedRequirements = leSelectedRequirements[legendaryEvent.id] ?? {
-            id: legendaryEvent.id,
-            name: LegendaryEventEnum[legendaryEvent.id],
+        const event: ILegendaryEventSelectedRequirements = leSelectedRequirements[track.eventId] ?? {
+            id: track.eventId,
+            name: LegendaryEventEnum[track.eventId],
             alpha: {},
             beta: {},
             gamma: {},
@@ -85,24 +83,24 @@ export const LegendaryEventTrack = ({
                 openByDefault: true,
             },
         ],
-        [legendaryEvent.id, viewPreferences.lightWeight, restrictions]
+        [track.eventId, viewPreferences.lightWeight, restrictions]
     );
 
     const teams = useMemo(
         () => track.suggestTeams(autoTeamsPreferences, restrictions),
-        [autoTeamsPreferences, restrictions, legendaryEvent.allowedUnits]
+        [autoTeamsPreferences, restrictions]
     );
 
     const rows: Array<ITableRow> = useMemo(() => getRows(track, teams), [teams]);
 
     useEffect(() => {
         gridRef.current?.api?.sizeColumnsToFit();
-    }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, legendaryEvent.id]);
+    }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, track.eventId]);
 
     const handleChange = (selected: boolean, restrictionName: string) => {
         dispatch.leSelectedRequirements({
             type: 'Update',
-            eventId: legendaryEvent.id,
+            eventId: track.eventId,
             section: track.section,
             restrictionName,
             selected,

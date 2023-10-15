@@ -7,13 +7,15 @@ import { LegendaryEvent } from './legendary-event';
 import AutoTeamsSettings from '../../routes/legendary-events/auto-teams-settings';
 import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 import { MyProgressDialog } from '../../routes/legendary-events/my-progress-dialog';
-import { getDefaultLE } from '../../models/constants';
+import { defaultLE, getLegendaryEvent } from '../../models/constants';
 import { StoreContext } from '../../reducers/store.provider';
 
 export const LegendaryEvents = () => {
     const [value, setValue] = useState(0);
     const { characters, goals } = useContext(StoreContext);
-    const [legendaryEvent, setLegendaryEvent] = useState<ILegendaryEvent>(() => getDefaultLE(characters));
+    const [legendaryEvent, setLegendaryEvent] = useState<ILegendaryEvent>(() =>
+        getLegendaryEvent(defaultLE, characters)
+    );
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
