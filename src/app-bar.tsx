@@ -52,9 +52,6 @@ const TopAppBar = () => {
                 Who You Own
             </Button>
 
-            {/*<Button component={Link} to={'./le'} color="inherit">*/}
-            {/*    Legendary Events*/}
-            {/*</Button>*/}
             <AppBarSubMenu
                 rootLabel={'Legendary Events'}
                 options={[
@@ -106,12 +103,23 @@ const TopAppBar = () => {
             <MenuItem component={Link} to={'./wyo'} color="inherit">
                 Who You Own
             </MenuItem>
-            <MenuItem component={Link} to={'./le'} color="inherit">
-                Legendary Events
-            </MenuItem>
 
             <MenuItem component={Link} to={'./goals'} color="inherit">
                 Goals
+            </MenuItem>
+
+            <Divider />
+
+            <MenuItem component={Link} to={'./le/shadowsun'} color="inherit">
+                Shadowsun LE
+            </MenuItem>
+
+            <MenuItem component={Link} to={'./le/aunshi'} color="inherit">
+                Aun Shi LE
+            </MenuItem>
+
+            <MenuItem component={Link} to={'./le/ragnar'} color="inherit">
+                Ragnar LE
             </MenuItem>
 
             <Divider />
