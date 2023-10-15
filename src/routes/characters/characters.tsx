@@ -1,4 +1,4 @@
-﻿import React, { ChangeEvent, useCallback, useMemo, useRef, useState } from 'react';
+﻿import React, { ChangeEvent, useCallback, useContext, useMemo, useRef, useState } from 'react';
 
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, RowStyle, RowClassParams, IRowNode, ICellRendererParams } from 'ag-grid-community';
@@ -6,20 +6,20 @@ import { ColDef, RowStyle, RowClassParams, IRowNode, ICellRendererParams } from 
 import { TextField } from '@mui/material';
 
 import MultipleSelectCheckmarks from './multiple-select';
-import { ICharacter } from '../../models/interfaces';
+import { ICharacter2 } from '../../models/interfaces';
 import { DamageType, Trait } from '../../models/enums';
-import { useCharacters } from '../../services';
 import { isMobile } from 'react-device-detect';
 import { CharacterTitle } from '../../shared-components/character-title';
+import { StoreContext } from '../../reducers/store.provider';
 
 export const Characters = () => {
-    const gridRef = useRef<AgGridReact<ICharacter>>(null);
+    const gridRef = useRef<AgGridReact<ICharacter2>>(null);
 
     const [nameFilter, setNameFilter] = useState<string>('');
     const [damageTypesFilter, setDamageTypesFilter] = useState<DamageType[]>([]);
     const [traitsFilter, setTraitsFilter] = useState<Trait[]>([]);
 
-    const defaultColDef: ColDef<ICharacter> = {
+    const defaultColDef: ColDef<ICharacter2> = {
         sortable: true,
         resizable: true,
         autoHeight: true,
@@ -30,7 +30,7 @@ export const Characters = () => {
         {
             headerName: '#',
             colId: 'rowNumber',
-            valueGetter: (params) => (params.node?.rowIndex ?? 0) + 1,
+            valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
             maxWidth: 50,
             width: 50,
             minWidth: 50,
@@ -40,12 +40,12 @@ export const Characters = () => {
             headerName: 'Name',
             pinned: true,
             minWidth: 200,
-            cellRenderer: (props: ICellRendererParams<ICharacter>) => {
+            cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
                 const character = props.data;
-                if(character) {
-                    return <CharacterTitle character={character} short={true} imageSize={30}/>;
+                if (character) {
+                    return <CharacterTitle character={character} short={true} imageSize={30} />;
                 }
-            }
+            },
         },
         {
             field: 'alliance',
@@ -80,7 +80,7 @@ export const Characters = () => {
         {
             field: 'traits',
             headerName: 'Traits',
-            minWidth: 200
+            minWidth: 200,
         },
         {
             field: 'meleeHits',
@@ -143,14 +143,17 @@ export const Characters = () => {
             headerName: 'Forced Summons',
             cellRenderer: 'agCheckboxCellRenderer',
             minWidth: 100,
-        }
+        },
     ]);
 
-    const { characters } = useCharacters();
-    
-    const rows = useMemo(() => characters.filter(c => c.name.toLowerCase().includes(nameFilter.toLowerCase())), [nameFilter]);
+    const { characters } = useContext(StoreContext);
 
-    const getRowStyle = (params: RowClassParams<ICharacter>): RowStyle => {
+    const rows = useMemo(
+        () => characters.filter(c => c.name.toLowerCase().includes(nameFilter.toLowerCase())),
+        [nameFilter]
+    );
+
+    const getRowStyle = (params: RowClassParams<ICharacter2>): RowStyle => {
         return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'lightsteelblue' : 'white' };
     };
 
@@ -169,7 +172,6 @@ export const Characters = () => {
 
         return () => {
             window.removeEventListener('resize', handleResize);
-
         };
     });
 
@@ -188,27 +190,26 @@ export const Characters = () => {
     }, []);
 
     const isExternalFilterPresent = useCallback(() => {
-        const hasDamageTypeFilter =  damageTypesFilter.length > 0;
+        const hasDamageTypeFilter = damageTypesFilter.length > 0;
         const hasTraitsFilter = traitsFilter.length > 0;
         return hasDamageTypeFilter || hasTraitsFilter;
     }, [damageTypesFilter, traitsFilter]);
 
     const doesExternalFilterPass = useCallback(
-        (node: IRowNode<ICharacter>) => {
+        (node: IRowNode<ICharacter2>) => {
             const doesDamageTypeFilterPass = () => {
-                if(!damageTypesFilter.length) {
+                if (!damageTypesFilter.length) {
                     return true;
                 }
                 return damageTypesFilter.every(type => node.data?.damageTypes.all.includes(type));
             };
 
             const doesTraitsFilterPass = () => {
-                if(!traitsFilter.length) {
+                if (!traitsFilter.length) {
                     return true;
                 }
                 return traitsFilter.every(type => node.data?.traits.includes(type));
             };
-            
 
             if (node.data) {
                 return doesDamageTypeFilterPass() && doesTraitsFilterPass();
@@ -225,12 +226,27 @@ export const Characters = () => {
 
     return (
         <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '20px', margin: '0 20px', flexDirection: isMobile ? 'column' : 'row' }}>
-                <TextField label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged}/>
-                <MultipleSelectCheckmarks placeholder="Damage Types" selectedValues={damageTypesFilter} values={Object.values(DamageType)}
-                    selectionChanges={damageTypeFilterChanged}/>
-                <MultipleSelectCheckmarks placeholder="Traits" selectedValues={traitsFilter} values={ Object.values(Trait)}
-                    selectionChanges={traitsFilterChanged}/>
+            <div
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '20px',
+                    margin: '0 20px',
+                    flexDirection: isMobile ? 'column' : 'row',
+                }}>
+                <TextField label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged} />
+                <MultipleSelectCheckmarks
+                    placeholder="Damage Types"
+                    selectedValues={damageTypesFilter}
+                    values={Object.values(DamageType)}
+                    selectionChanges={damageTypeFilterChanged}
+                />
+                <MultipleSelectCheckmarks
+                    placeholder="Traits"
+                    selectedValues={traitsFilter}
+                    values={Object.values(Trait)}
+                    selectionChanges={traitsFilterChanged}
+                />
             </div>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
                 <AgGridReact
@@ -240,13 +256,11 @@ export const Characters = () => {
                     columnDefs={columnDefs}
                     rowData={rows}
                     getRowStyle={getRowStyle}
-                    onGridReady={() => !isMobile ? gridRef.current?.api.sizeColumnsToFit() : undefined}
+                    onGridReady={() => (!isMobile ? gridRef.current?.api.sizeColumnsToFit() : undefined)}
                     onSortChanged={refreshRowNumberColumn}
                     onFilterChanged={refreshRowNumberColumn}
                     isExternalFilterPresent={isExternalFilterPresent}
-                    doesExternalFilterPass={doesExternalFilterPass}
-                >
-                </AgGridReact>
+                    doesExternalFilterPass={doesExternalFilterPass}></AgGridReact>
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-﻿import { IPersonalData } from '../models/interfaces';
+﻿import { IPersonalData, IPersonalData2 } from '../models/interfaces';
 
 export interface ILoginResponse {
     accessToken: string;
@@ -17,5 +17,5 @@ export interface IUserDataResponse {
     id: number;
     username: string;
     lastModifiedDate: string;
-    data: IPersonalData;
+    data: IPersonalData | IPersonalData2;
 }

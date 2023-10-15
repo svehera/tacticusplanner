@@ -1,4 +1,4 @@
-﻿import { ICharacter, ILegendaryEventTrack } from '../interfaces';
+﻿import { ICharacter2, ILegendaryEventTrack } from '../interfaces';
 import { Alliance, DamageType, Faction, Trait } from '../enums';
 import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
@@ -7,12 +7,11 @@ import { LETrack } from './base.le.track';
 import staticData from '../../assets/legendary-events/Aunshi.json';
 
 export class AunShiLegendaryEvent extends LegendaryEventBase {
-
-    constructor(unitsData: Array<ICharacter>) {
+    constructor(unitsData: Array<ICharacter2>) {
         super(unitsData, staticData);
     }
 
-    protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getAlphaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
         const noOrks = filter(unitsData).byFaction(Faction.Orks, true);
         return new LETrack(
             this.id,
@@ -28,7 +27,7 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     name: 'No Physical',
                     points: 40,
                     units: filter(noOrks).byDamageType(DamageType.Physical, true),
-                    selected: true
+                    selected: true,
                 },
                 {
                     name: 'Max 2 hits',
@@ -39,20 +38,20 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     name: 'No Range',
                     points: 80,
                     units: filter(noOrks).byAttackType('meleeOnly'),
-                    selected: true
+                    selected: true,
                 },
                 {
                     name: 'Min 3 hits',
                     points: 70,
                     units: filter(noOrks).byMinHits(3),
-                    selected: true
+                    selected: true,
                 },
             ],
             staticData.alpha
         );
     }
 
-    protected getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getBetaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
         const noImperials = filter(unitsData).byAlliance(Alliance.Imperial, true);
         return new LETrack(
             this.id,
@@ -68,19 +67,19 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     name: 'No Resiliant',
                     points: 40,
                     units: filter(noImperials).byTrait(Trait.Resilient, true),
-                    selected: true
+                    selected: true,
                 },
                 {
                     name: 'No Range',
                     points: 85,
-                    units:  filter(noImperials).byAttackType('meleeOnly'),
-                    selected: true
+                    units: filter(noImperials).byAttackType('meleeOnly'),
+                    selected: true,
                 },
                 {
                     name: 'No Summons',
                     points: 45,
                     units: filter(noImperials).byNoSummons(),
-                    selected: true
+                    selected: true,
                 },
                 {
                     name: 'Physical',
@@ -92,7 +91,7 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
         );
     }
 
-    protected getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getGammaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
         const noChaos = filter(unitsData).byAlliance(Alliance.Chaos, true);
         return new LETrack(
             this.id,
@@ -113,23 +112,22 @@ export class AunShiLegendaryEvent extends LegendaryEventBase {
                     name: 'No Flying',
                     points: 40,
                     units: filter(noChaos).byTrait(Trait.Flying, true),
-                    selected: true
+                    selected: true,
                 },
                 {
                     name: 'No Overwatch',
                     points: 40,
-                    units:  filter(noChaos).byTrait(Trait.Overwatch, true),
-                    selected: true
+                    units: filter(noChaos).byTrait(Trait.Overwatch, true),
+                    selected: true,
                 },
                 {
                     name: 'No Power',
                     points: 50,
-                    units:  filter(noChaos).byDamageType(DamageType.Power, true),
-                    selected: true
+                    units: filter(noChaos).byDamageType(DamageType.Power, true),
+                    selected: true,
                 },
             ],
             staticData.gamma
-        ); 
+        );
     }
-
 }

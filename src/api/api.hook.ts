@@ -2,22 +2,21 @@
 
 const baseUrl = 'https://helloworldseveryn.azurewebsites.net/api/';
 
-
-export const callApi = <TData = any | null, TError = any | null>(
+export const callApi = <TData = any | null, TError = any | null, TResponse = TData>(
     method: Method,
     url: string,
-    data?: TData,
-): Promise<AxiosResponse<TData, TError>> => {
+    data?: TData
+): Promise<AxiosResponse<TResponse, TError>> => {
     const config: AxiosRequestConfig<TData> = {
         method,
         url: baseUrl + url,
         headers: {
             'Content-Type': 'application/json',
             'x-functions-key': 'HCBedLkPMCgfKqOboAhxkW_Q6SOvw4mQg0Ompp690ca0AzFuUXyDKg==',
-            'Authorization': localStorage.getItem('token')
+            Authorization: localStorage.getItem('token'),
         },
-        data: data
+        data: data,
     };
 
-    return axios.request<TData>(config);
+    return axios.request<TResponse>(config);
 };

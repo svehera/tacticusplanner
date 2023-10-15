@@ -1,4 +1,4 @@
-﻿import React, { useMemo, useState } from 'react';
+﻿import React, { useContext, useMemo, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import {
     Autocomplete,
@@ -13,10 +13,9 @@ import {
 import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
-import { ICharacter, IPersonalGoal } from '../../models/interfaces';
+import { ICharacter2, IPersonalGoal } from '../../models/interfaces';
 import { v4 } from 'uuid';
 import { PersonalGoalType, Rank, Rarity } from '../../models/enums';
-import { useCharacters, usePersonalData } from '../../services';
 import InputLabel from '@mui/material/InputLabel';
 import { CharacterTitle } from '../character-title';
 import { getEnumValues, rankToString } from '../../shared-logic/functions';
@@ -24,6 +23,7 @@ import { RankImage } from '../rank-image';
 import { Tooltip } from '@fluentui/react-components';
 import { enqueueSnackbar } from 'notistack';
 import { CharacterItem } from '../character-item';
+import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 
 const getDefaultForm = (priority: number) =>({
     id: v4(),
@@ -36,13 +36,12 @@ const getDefaultForm = (priority: number) =>({
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
     const goalsLimit = 20;
-    const { characters } = useCharacters();
-    const { personalData, updateGoals } = usePersonalData();
+    const { characters, goals } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
     
     const [openAutocomplete, setOpenAutocomplete] = React.useState(false);
     const [openDialog, setOpenDialog] = React.useState(false);
-    const [goals, setGoals] = useState<IPersonalGoal[]>(() => personalData.goals);
-    const [character, setCharacter] = React.useState<ICharacter | null>(null);
+    const [character, setCharacter] = React.useState<ICharacter2 | null>(null);
 
     const [form, setForm] = useState<IPersonalGoal>(() => getDefaultForm(goals.length + 1));
 
@@ -51,16 +50,12 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
     const handleClose = (goal?: IPersonalGoal | undefined): void => {
         if (goal) {
-            setGoals(currentGoals => {
-                currentGoals.splice(goal.priority - 1, 0, goal);
-                updateGoals([...currentGoals]);
-                enqueueSnackbar(`Goal for ${goal.character} is added`, { variant: 'success' });
-                return [...currentGoals];
-            });
+            dispatch.goals({ type: 'Add', goal });
+            enqueueSnackbar(`Goal for ${goal.character} is added`, { variant: 'success' });
         }
         setOpenDialog(false);
         setCharacter(null);
-        setForm(getDefaultForm(personalData.goals.length + 1));
+        setForm(getDefaultForm(1 + 1));
         if(onClose) {
             onClose(goal);
         }
@@ -68,8 +63,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
 
     const rarityValues = useMemo(() => {
-        const result = getEnumValues(Rarity).filter(x => x > 0 && (!character || x >= character.rarity));
-        setForm(curr => ({ ...curr, targetRarity: character?.rarity ?? result[0] }));
+        const result = getEnumValues(Rarity).filter(x => x > 0 && (!character || x >= character.initialRarity));
+        setForm(curr => ({ ...curr, targetRarity: character?.initialRarity ?? result[0] }));
         return result;
     }, [character]);
     
@@ -120,7 +115,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         </FormControl>
     );
     
-    const updateValue = (value: ICharacter | null): void =>{
+    const updateValue = (value: ICharacter2 | null): void =>{
         if(character?.name !== value?.name) {
             setCharacter(value);
             setForm(curr => ({ ...curr, character: value?.name ?? '' }));
@@ -227,30 +222,19 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 };
 
 export const EditGoalDialog = ({ isOpen, onClose, goal }: { isOpen: boolean, goal: IPersonalGoal, onClose?: (goal?: IPersonalGoal) => void }) => {
-    const { characters } = useCharacters();
-    const { personalData, updateGoals } = usePersonalData();
+    const { characters, goals } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
 
     const [openAutocomplete, setOpenAutocomplete] = React.useState(false);
     const [openDialog, setOpenDialog] = React.useState(isOpen);
-    const [goals, setGoals] = useState<IPersonalGoal[]>(() => personalData.goals);
-    const [character, setCharacter] = React.useState<ICharacter | null>(characters.find(x => x.name === goal.character) ?? null);
+    const [character, setCharacter] = React.useState<ICharacter2 | null>(characters.find(x => x.name === goal.character) ?? null);
 
     const [form, setForm] = useState<IPersonalGoal>(() => ({ ...goal }));
     
     const handleClose = (updatedGoal?: IPersonalGoal | undefined): void => {
         if (updatedGoal) {
-            setGoals(currentGoals => {
-                const updatedGoalIndex = currentGoals.findIndex(x => x.id === goal.id);
-                if(updatedGoalIndex < 0) {
-                    return currentGoals;
-                }
-                
-                currentGoals.splice(updatedGoalIndex, 1);
-                currentGoals.splice(updatedGoal.priority - 1, 0, updatedGoal);
-                updateGoals([...currentGoals]);
-                enqueueSnackbar(`Goal for ${updatedGoal.character} is updated`, { variant: 'success' });
-                return [...currentGoals];
-            });
+            dispatch.goals({ type: 'Update', goal: updatedGoal });
+            enqueueSnackbar(`Goal for ${updatedGoal.character} is updated`, { variant: 'success' });
         }
         setOpenDialog(false);
         if(onClose) {
@@ -260,7 +244,7 @@ export const EditGoalDialog = ({ isOpen, onClose, goal }: { isOpen: boolean, goa
 
 
     const rarityValues = useMemo(() => {
-        return getEnumValues(Rarity).filter(x => x > 0 && (!character || x >= character.rarity));
+        return getEnumValues(Rarity).filter(x => x > 0 && (!character || x >= character.initialRarity));
     }, [character]);
 
     const targetRaritySelector = (
@@ -306,7 +290,7 @@ export const EditGoalDialog = ({ isOpen, onClose, goal }: { isOpen: boolean, goa
         </FormControl>
     );
 
-    const updateValue = (value: ICharacter | null): void =>{
+    const updateValue = (value: ICharacter2 | null): void =>{
         if(character?.name !== value?.name) {
             setCharacter(value);
             setForm(curr => ({ ...curr, character: value?.name ?? '' }));
@@ -375,6 +359,7 @@ export const EditGoalDialog = ({ isOpen, onClose, goal }: { isOpen: boolean, goa
                         >
                             <MenuItem value={PersonalGoalType.UpgradeRank}>Upgrade Rank</MenuItem>
                             <MenuItem value={PersonalGoalType.Ascend}>Ascend</MenuItem>
+                            <MenuItem value={PersonalGoalType.Unlock}>Unlock</MenuItem>
                         </Select>
                     </FormControl>
 

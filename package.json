@@ -36,7 +36,8 @@
     "@types/react-dom": "^18.2.7",
     "@types/uuid": "^9.0.4",
     "eslint": "^8.46.0",
-    "gh-pages": "^5.0.0"
+    "gh-pages": "^5.0.0",
+    "prettier": "^3.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

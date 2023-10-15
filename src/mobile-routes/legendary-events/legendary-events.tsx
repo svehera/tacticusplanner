@@ -1,27 +1,23 @@
-﻿import React, { useState } from 'react';
-import { useCharacters, usePersonalData } from '../../services';
+﻿import React, { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import { Tab, Tabs } from '@mui/material';
 import { ILegendaryEvent } from '../../models/interfaces';
 import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from '../../models/legendary-events';
 import { LegendaryEvent } from './legendary-event';
 import AutoTeamsSettings from '../../routes/legendary-events/auto-teams-settings';
-import { AutoTeamsSettingsContext } from '../../contexts';
 import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 import { MyProgressDialog } from '../../routes/legendary-events/my-progress-dialog';
 import { getDefaultLE } from '../../models/constants';
+import { StoreContext } from '../../reducers/store.provider';
 
 export const LegendaryEvents = () => {
-    const [value, setValue] = React.useState(0);
-    const { characters } = useCharacters();
-    const { personalData, updateAutoTeamsSettings } = usePersonalData();
-    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(() => getDefaultLE(characters));
+    const [value, setValue] = useState(0);
+    const { characters, goals } = useContext(StoreContext);
+    const [legendaryEvent, setLegendaryEvent] = useState<ILegendaryEvent>(() => getDefaultLE(characters));
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
 
-    const [autoTeamsPreferences, setAutoTeamsPreferences] = useState(personalData.autoTeamsPreferences);
-    
     return (
         <Box sx={{ bgcolor: 'background.paper' }}>
             <Tabs
@@ -29,26 +25,23 @@ export const LegendaryEvents = () => {
                 onChange={handleChange}
                 variant="scrollable"
                 scrollButtons="auto"
-                aria-label="scrollable auto tabs example"
-            >
-                <Tab label="Shadowsun 2/3 (Oct 15)" onClick={() => setLegendaryEvent(new ShadowSunLegendaryEvent(characters))}/>
-                <Tab label="Aun'Shi"  onClick={() => setLegendaryEvent(new AunShiLegendaryEvent(characters))}/>
+                aria-label="scrollable auto tabs example">
+                <Tab
+                    label="Shadowsun 2/3 (Oct 15)"
+                    onClick={() => setLegendaryEvent(new ShadowSunLegendaryEvent(characters))}
+                />
+                <Tab label="Aun'Shi" onClick={() => setLegendaryEvent(new AunShiLegendaryEvent(characters))} />
             </Tabs>
             <div style={{ marginInlineStart: 10 }}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <AutoTeamsSettings value={autoTeamsPreferences} valueChanges={value => {
-                        setAutoTeamsPreferences(value);
-                        updateAutoTeamsSettings(value);
-                    }}></AutoTeamsSettings>
+                    <AutoTeamsSettings />
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, margin: '10px 0' }}>
-                        <SetGoalDialog key={personalData.goals.length}/>
-                        <MyProgressDialog legendaryEvent={legendaryEvent}/>
+                        <SetGoalDialog key={goals.length} />
+                        <MyProgressDialog legendaryEvent={legendaryEvent} />
                     </div>
                 </div>
             </div>
-            <AutoTeamsSettingsContext.Provider value={autoTeamsPreferences}>
-                <LegendaryEvent legendaryEvent={legendaryEvent}/>
-            </AutoTeamsSettingsContext.Provider>
+            <LegendaryEvent legendaryEvent={legendaryEvent} />
         </Box>
     );
 };

@@ -1,14 +1,10 @@
-﻿import React, { useEffect, useMemo, useState } from 'react';
+﻿import React, { useContext, useEffect, useMemo } from 'react';
 import { Popover, Tab, Tabs } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 
-import { AutoTeamsSettingsContext, LegendaryEventContext, ViewSettingsContext } from '../../contexts';
-import { useCharacters, usePersonalData } from '../../services';
+import { LegendaryEventContext } from '../../contexts';
 import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from '../../models/legendary-events';
-import {
-    ILegendaryEvent,
-    IViewPreferences
-} from '../../models/interfaces';
+import { ILegendaryEvent, IViewPreferences } from '../../models/interfaces';
 
 import LegendaryEvent from './legendary-event';
 import ViewSettings from './view-settings';
@@ -18,51 +14,22 @@ import { LegendaryEventEnum as LegendaryEventEnum } from '../../models/enums';
 import Button from '@mui/material/Button';
 import { Help } from '@mui/icons-material';
 import { getDefaultLE } from '../../models/constants';
+import { StoreContext } from '../../reducers/store.provider';
 
 export const LegendaryEventPage = () => {
-    const { characters } = useCharacters();
-    const { personalData, updateAutoTeamsSettings } = usePersonalData();
+    const { autoTeamsPreferences, characters } = useContext(StoreContext);
     const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(() => getDefaultLE(characters));
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
 
-    const [viewPreferences, setViewPreferences] = useState<IViewPreferences>(personalData.viewPreferences);
-    const [autoTeamsPreferences, setAutoTeamsPreferences] = useState(personalData.autoTeamsPreferences);
-    
     useEffect(() => {
         setLegendaryEvent(getDefaultLE(characters));
     }, [characters]);
-    
-    const customRequirements = personalData.legendaryEventSelectedRequirements[legendaryEvent.id];
-    if(customRequirements?.alpha) {
-        legendaryEvent.alpha.unitsRestrictions.forEach(req => {
-            if(customRequirements.alpha[req.name] !== undefined) {
-                req.selected = customRequirements.alpha[req.name];
-            }
-        });
-    }
-
-    if(customRequirements?.beta) {
-        legendaryEvent.beta.unitsRestrictions.forEach(req => {
-            if(customRequirements.beta[req.name] !== undefined) {
-                req.selected = customRequirements.beta[req.name];
-            }
-        });
-    }
-
-    if(customRequirements?.gamma) {
-        legendaryEvent.gamma.unitsRestrictions.forEach(req => {
-            if(customRequirements.gamma[req.name] !== undefined) {
-                req.selected = customRequirements.gamma[req.name];
-            }
-        });
-    }
 
     const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl2(event.currentTarget);
     };
-
 
     const handleClose2 = () => {
         setAnchorEl2(null);
@@ -73,7 +40,7 @@ export const LegendaryEventPage = () => {
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
-    
+
     const handleClose = () => {
         setAnchorEl(null);
     };
@@ -107,22 +74,24 @@ export const LegendaryEventPage = () => {
         <Box sx={{ paddingLeft: 2, paddingRight: 2, paddingBottom: 0 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
                 <Box sx={{ bgcolor: 'background.paper' }}>
-                    <Tabs
-                        value={legendaryEvent.id}
-                        scrollButtons="auto"
-                        aria-label="scrollable auto tabs example"
-                    >
-                        <Tab label="Shadowsun 2/3 (October 15)" value={LegendaryEventEnum.Shadowsun}
-                            onClick={() => setLegendaryEvent(new ShadowSunLegendaryEvent(characters))}/>
-                        <Tab label="Aun Shi 3/3 (TBA)" value={LegendaryEventEnum.AunShi}
-                            onClick={() => setLegendaryEvent(new AunShiLegendaryEvent(characters))}/>
+                    <Tabs value={legendaryEvent.id} scrollButtons="auto" aria-label="scrollable auto tabs example">
+                        <Tab
+                            label="Shadowsun 2/3 (October 15)"
+                            value={LegendaryEventEnum.Shadowsun}
+                            onClick={() => setLegendaryEvent(new ShadowSunLegendaryEvent(characters))}
+                        />
+                        <Tab
+                            label="Aun Shi 3/3 (TBA)"
+                            value={LegendaryEventEnum.AunShi}
+                            onClick={() => setLegendaryEvent(new AunShiLegendaryEvent(characters))}
+                        />
                     </Tabs>
                 </Box>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                    <ViewSettings value={viewPreferences} valueChanges={setViewPreferences}></ViewSettings>
+                    <ViewSettings />
                     <Button variant="outlined" onClick={handleClick2}>
-                        Auto-Teams <SettingsIcon/>
+                        Auto-Teams <SettingsIcon />
                     </Button>
                     <Popover
                         open={open2}
@@ -131,18 +100,15 @@ export const LegendaryEventPage = () => {
                         anchorOrigin={{
                             vertical: 'bottom',
                             horizontal: 'left',
-                        }}
-                    >
+                        }}>
                         <div style={{ margin: 20 }}>
-                            <AutoTeamsSettings value={autoTeamsPreferences}
-                                valueChanges={(value) => {
-                                    setAutoTeamsPreferences(value);
-                                    updateAutoTeamsSettings(value);
-                                }}></AutoTeamsSettings>
+                            <AutoTeamsSettings />
                         </div>
                     </Popover>
 
-                    <Button onClick={handleClick} color={'inherit'}><Help/></Button>
+                    <Button onClick={handleClick} color={'inherit'}>
+                        <Help />
+                    </Button>
                     <Popover
                         open={open}
                         anchorEl={anchorEl}
@@ -150,25 +116,22 @@ export const LegendaryEventPage = () => {
                         anchorOrigin={{
                             vertical: 'bottom',
                             horizontal: 'left',
-                        }}
-                    >
+                        }}>
                         <div style={{ padding: 15 }}>
                             <p>Current auto-teams priority order:</p>
                             <ol>
-                                {autoTeamsPriority.map(x => (<li key={x}>{x}</li>))}
+                                {autoTeamsPriority.map(x => (
+                                    <li key={x}>{x}</li>
+                                ))}
                             </ol>
                         </div>
                     </Popover>
                 </div>
             </div>
 
-            <ViewSettingsContext.Provider value={viewPreferences}>
-                <AutoTeamsSettingsContext.Provider value={autoTeamsPreferences}>
-                    <LegendaryEventContext.Provider value={legendaryEvent}>
-                        <LegendaryEvent key={legendaryEvent.id}/>
-                    </LegendaryEventContext.Provider>
-                </AutoTeamsSettingsContext.Provider>
-            </ViewSettingsContext.Provider>
+            <LegendaryEventContext.Provider value={legendaryEvent}>
+                <LegendaryEvent key={legendaryEvent.id} />
+            </LegendaryEventContext.Provider>
         </Box>
     );
 };

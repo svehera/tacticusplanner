@@ -1021,30 +1021,6 @@
     "Icon": "HighMarshalHelbrecht-removebg-preview.png"
   },
   {
-    "Name": "Aethana",
-    "Faction": "Aeldari",
-    "Alliance": "Xenos",
-    "Health": 80,
-    "Damage": 14,
-    "Armour": 17,
-    "Initial rarity": "Uncommon",
-    "Melee Damage": "Piercing",
-    "Melee Hits": 3,
-    "Movement": 5,
-    "Equipment1": "Crit",
-    "Equipment2": "Block",
-    "Equipment3": "Block Booster",
-    "Traits": [
-      "Flying",
-      "Deep Strike"
-    ],
-    "Active Ability": "Piercing",
-    "Number": 41,
-    "ForcedSummons": false,
-    "RequiredInCampaign": true,
-    "Icon": "Aethana.png"
-  },
-  {
     "Name": "Calandis",
     "Faction": "Aeldari",
     "Alliance": "Xenos",
@@ -1066,10 +1042,34 @@
       "Overwatch"
     ],
     "Passive Ability": "Piercing",
-    "Number": 42,
+    "Number": 41,
     "ForcedSummons": false,
     "RequiredInCampaign": true,
     "Icon": "Calandis-removebg-preview.png"
+  },
+  {
+    "Name": "Aethana",
+    "Faction": "Aeldari",
+    "Alliance": "Xenos",
+    "Health": 80,
+    "Damage": 14,
+    "Armour": 17,
+    "Initial rarity": "Uncommon",
+    "Melee Damage": "Piercing",
+    "Melee Hits": 3,
+    "Movement": 5,
+    "Equipment1": "Crit",
+    "Equipment2": "Block",
+    "Equipment3": "Block Booster",
+    "Traits": [
+      "Flying",
+      "Deep Strike"
+    ],
+    "Active Ability": "Piercing",
+    "Number": 42,
+    "ForcedSummons": false,
+    "RequiredInCampaign": true,
+    "Icon": "Aethana.png"
   },
   {
     "Name": "Eldryon",
