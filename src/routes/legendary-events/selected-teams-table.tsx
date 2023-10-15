@@ -105,7 +105,7 @@ export const SelectedTeamsTable = (props: {
             cellClass: (params: CellClassParams) =>
                 typeof params.value === 'string' ? params.value : Rank[params.value?.rank]?.toLowerCase(),
             tooltipValueGetter: (params: ITooltipParams) =>
-                typeof params.value === 'string'
+                typeof params.value === 'string' || !params.value?.name
                     ? params.value
                     : params.value?.name +
                       ' - ' +
