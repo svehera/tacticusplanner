@@ -22,7 +22,7 @@ export const StoreContext = createContext<IGlobalState>({} as any);
 export const DispatchContext = createContext<IDispatchContext>({} as any);
 
 export const StoreProvider = ({ children }: React.PropsWithChildren) => {
-    const { isAuthenticated, setUsername, logout } = useAuth();
+    const { isAuthenticated, setUser, logout } = useAuth();
     const localStore = useMemo(() => new PersonalDataLocalStorage(), []);
 
     const [globalState, setGlobalState] = useState(() => {
@@ -155,12 +155,13 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             return;
         }
         getUserDataApi()
-            .then(data2 => {
-                const serverLastModified = new Date(data2.data.lastModifiedDate);
-                setUsername(data2.data.username);
+            .then(response => {
+                const { data, username, id, lastModifiedDate } = response.data;
+                const serverLastModified = new Date(lastModifiedDate);
+                setUser(username, id);
 
-                if (data2.data.data && (!modifiedDate || modifiedDate < serverLastModified)) {
-                    const serverData = convertData(data2.data.data);
+                if (data && (!modifiedDate || modifiedDate < serverLastModified)) {
+                    const serverData = convertData(data);
                     const localData = GlobalState.toStore(globalState);
 
                     const isDataEqual = isEqual(
