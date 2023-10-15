@@ -71,7 +71,7 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
                     <DataTablesDialog legendaryEvent={legendaryEvent}></DataTablesDialog>
                 </div>
             </div>
-            <div style={{ display: 'flex', gap: 15, marginBottom: 10 }}>
+            <div style={{ display: 'flex', gap: 15, marginBottom: 10 }} key={legendaryEvent.id}>
                 <LegendaryEventTrack
                     show={viewPreferences.showAlpha}
                     track={legendaryEvent.alpha}
@@ -130,7 +130,7 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
                         </Select>
                     </FormControl>
                 </div>
-                <div style={{ display: 'flex', gap: 15 }}>
+                <div style={{ display: 'flex', gap: 15 }} key={legendaryEvent.id}>
                     <SelectedTeamsTable
                         show={viewPreferences.showAlpha}
                         track={legendaryEvent.alpha}

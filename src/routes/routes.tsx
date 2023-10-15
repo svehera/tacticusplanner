@@ -47,6 +47,10 @@ export const appRoutes: () => RouteObject[] = () => [
                         path: 'aunshi',
                         element: <LegendaryEvent id={LegendaryEventEnum.AunShi} />,
                     },
+                    {
+                        path: 'Ragnar',
+                        element: <LegendaryEvent id={LegendaryEventEnum.Ragnar} />,
+                    },
                 ],
             },
             {

@@ -28,6 +28,8 @@ const TopAppBar = () => {
                 return 'Shadowsun 2/3 (October 15)';
             case '/le/aunshi':
                 return 'Aun Shi 3/3 (TBA)';
+            case '/le/ragnar':
+                return 'Ragnar 1/3 (November 19) - Based on Datamines, data can change';
             case '/goals':
                 return 'My Goals';
             case '/characters':

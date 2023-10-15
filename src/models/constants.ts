@@ -1,6 +1,7 @@
 ﻿import { LegendaryEventEnum, PersonalGoalType, Rank, Rarity, RarityStars, RarityString } from './enums';
 import { ICharacter2, ICharProgression, IPersonalData2 } from './interfaces';
 import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from './legendary-events';
+import { RagnarLegendaryEvent } from './legendary-events/ragnar.le';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,
@@ -55,6 +56,8 @@ export const getLegendaryEvent = (id: LegendaryEventEnum, characters: ICharacter
             return new ShadowSunLegendaryEvent(characters);
         case LegendaryEventEnum.AunShi:
             return new AunShiLegendaryEvent(characters);
+        case LegendaryEventEnum.Ragnar:
+            return new RagnarLegendaryEvent(characters);
         default:
             return new ShadowSunLegendaryEvent(characters);
     }

@@ -15,7 +15,7 @@ export enum Faction {
     Black_Templars = 'Black Templars',
     Aeldari = 'Aeldari',
     Space_Wolves = 'Space Wolves',
-    T_Au = 'T\'au Empire',
+    T_Au = "T'au Empire",
     Dark_Angels = 'Dark Angels',
     Thousand_Sons = 'Thousand Sons',
     Tyranids = 'Tyranids',
@@ -48,7 +48,7 @@ export enum RarityStars {
     RedThreeStarts,
     RedFourStarts,
     RedFiveStarts,
-    DiamondStar
+    DiamondStar,
 }
 
 export enum Equipment {
@@ -150,17 +150,18 @@ export enum LegendaryEventEnum {
     JainZar = 1,
     AunShi = 2,
     Shadowsun = 4,
+    Ragnar = 5,
 }
 
 export enum PersonalGoalType {
     None = 0,
     UpgradeRank = 1,
     Ascend = 2,
-    Unlock = 3
+    Unlock = 3,
 }
 
 export enum CharacterBias {
     NeverRecommend = -1,
     None = 0,
-    AlwaysRecommend = 1
+    AlwaysRecommend = 1,
 }
