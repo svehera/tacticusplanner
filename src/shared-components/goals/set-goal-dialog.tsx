@@ -61,8 +61,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     };
 
     const rarityValues = useMemo(() => {
-        const result = getEnumValues(Rarity).filter(x => x > 0 && (!character || x >= character.initialRarity));
-        setForm(curr => ({ ...curr, targetRarity: character?.initialRarity ?? result[0] }));
+        const result = getEnumValues(Rarity).filter(x => x > 0 && (!character || x >= character.rarity));
+        setForm(curr => ({ ...curr, targetRarity: character?.rarity ?? result[0] }));
         return result;
     }, [character]);
 
@@ -275,7 +275,7 @@ export const EditGoalDialog = ({
     };
 
     const rarityValues = useMemo(() => {
-        return getEnumValues(Rarity).filter(x => x > 0 && (!character || x >= character.initialRarity));
+        return getEnumValues(Rarity).filter(x => x > 0 && (!character || x >= character.rarity));
     }, [character]);
 
     const targetRaritySelector = (

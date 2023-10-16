@@ -19,7 +19,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
             if (existingChar) {
                 existingChar.unlocked = updatedCharacter.unlocked;
                 existingChar.rank = updatedCharacter.rank;
-                existingChar.initialRarity = updatedCharacter.initialRarity;
+                existingChar.rarity = updatedCharacter.rarity;
                 existingChar.bias = updatedCharacter.bias;
             }
             return [...state];

@@ -20,17 +20,6 @@ export const fitGridOnWindowResize = (gridRef: React.RefObject<AgGridReact>) => 
     return handleResize;
 };
 
-export const getCharName = (character: ICharacter): string => {
-    if (!character.unlocked) {
-        return character.name;
-    } else {
-        const rarity = Rarity[character.initialRarity];
-        const rank = Rank[character.rank];
-        const emoji = character.alwaysRecommend ? starEmoji : character.neverRecommend ? pooEmoji : '';
-        return `${character.name} (${rarity} ${rank}) ${emoji}`;
-    }
-};
-
 export const rankToString = (rank: Rank): string => {
     switch (rank) {
         case Rank.Stone1:

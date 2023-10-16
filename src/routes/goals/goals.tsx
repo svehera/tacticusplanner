@@ -86,7 +86,7 @@ export default function GoalCard({
                     minHeight: 200,
                     backgroundColor:
                         (goal.type === PersonalGoalType.UpgradeRank && goal.targetRank === character.rank) ||
-                        (goal.type === PersonalGoalType.Ascend && goal.targetRarity === character.initialRarity)
+                        (goal.type === PersonalGoalType.Ascend && goal.targetRarity === character.rarity)
                             ? 'lightgreen'
                             : 'white',
                 }}>
@@ -119,7 +119,7 @@ export default function GoalCard({
 
                     {goal.type === PersonalGoalType.Ascend ? (
                         <div style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                            <RarityImage rarity={character.initialRarity} />
+                            <RarityImage rarity={character.rarity} />
                             <ArrowForward /> <RarityImage rarity={goal.targetRarity ?? 0} />
                         </div>
                     ) : undefined}

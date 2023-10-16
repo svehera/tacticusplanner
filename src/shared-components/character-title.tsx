@@ -33,7 +33,7 @@ export const CharacterTitle = ({
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>
             <CharacterImage key={character.name} icon={character.icon} name={character.name} imageSize={imageSize} />
             <span>{character.name}</span>
-            <RarityImage rarity={character.initialRarity} />
+            <RarityImage rarity={character.rarity} />
             {character.unlocked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
             <Tooltip
                 content={
