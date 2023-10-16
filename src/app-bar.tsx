@@ -14,6 +14,10 @@ import { UserMenu } from './shared-components/user-menu/user-menu';
 import ViewSwitch from './shared-components/view-switch';
 import { AppBarSubMenu } from './app-bar-sub-menu';
 
+import aunshi from './assets/legendary-events/Aunshi.json';
+import ragnar from './assets/legendary-events/Ragnar.json';
+import shadowsun from './assets/legendary-events/Shadowsun.json';
+
 const TopAppBar = () => {
     const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
     const location = useLocation();
@@ -25,11 +29,11 @@ const TopAppBar = () => {
             case '/wyo':
                 return 'Who You Own';
             case '/le/shadowsun':
-                return 'Shadowsun 2/3 (October 15)';
+                return `Shadowsun ${shadowsun.eventStage}/3 (${shadowsun.nextEventDate})`;
             case '/le/aunshi':
-                return 'Aun Shi 3/3 (TBA)';
+                return `Aun Shi  ${aunshi.eventStage}/3 (${aunshi.nextEventDate})`;
             case '/le/ragnar':
-                return 'Ragnar 1/3 (November 19) - Based on Datamines, data can change';
+                return `Ragnar  ${ragnar.eventStage}/3 (${ragnar.nextEventDate}) - *Some data can change`;
             case '/goals':
                 return 'My Goals';
             case '/characters':
