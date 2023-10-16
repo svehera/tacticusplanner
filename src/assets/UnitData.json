@@ -611,7 +611,8 @@
     "Equipment2": "Defense",
     "Equipment3": "Crit Booster",
     "Traits": [
-      "Living Metal"
+      "Living Metal",
+      "Flying"
     ],
     "Active Ability": "Direct",
     "Passive Ability": "Direct",

@@ -154,7 +154,7 @@ export const defaultData: IPersonalData2 = {
     ],
     selectedTeamOrder: {
         orderBy: 'name',
-        direction: 'desc',
+        direction: 'asc',
     },
     leTeams: {},
     leProgress: {},
