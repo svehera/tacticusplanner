@@ -175,13 +175,13 @@ export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
     getRestrictionPoints(name: string): number;
 
     suggestTeams(
-        settings: IAutoTeamsPreferences | null,
+        settings: IAutoTeamsPreferences | ISelectedTeamsOrdering,
         onlyUnlocked: boolean,
         restrictions: string[]
     ): Record<string, Array<ICharacter2 | undefined>>;
 
     suggestTeam(
-        settings: IAutoTeamsPreferences | null,
+        settings: IAutoTeamsPreferences | ISelectedTeamsOrdering,
         onlyUnlocked: boolean,
         restrictions: string[]
     ): Array<ICharacter2>;

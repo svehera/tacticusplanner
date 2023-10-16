@@ -59,11 +59,52 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
     return (
         <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-                <div style={{ display: 'flex' }}>
-                    <span>Recommended teams</span>
-                    <Tooltip title={'Click - adds single char, Shift + Click - adds top 5 chars'}>
-                        <Info />
-                    </Tooltip>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 15, marginBottom: 10 }}>
+                    <div style={{ display: 'flex' }}>
+                        <span>Recommended teams</span>
+                        <Tooltip title={'Click - adds single char, Shift + Click - adds top 5 chars'}>
+                            <Info />
+                        </Tooltip>
+                    </div>
+
+                    <FormControl
+                        sx={{ width: 200 }}
+                        size={'small'}
+                        disabled={viewPreferences.hideSelectedTeams && viewPreferences.autoTeams}>
+                        <InputLabel id="order-by-label">Order By</InputLabel>
+                        <Select
+                            labelId="order-by-label"
+                            id="order-by"
+                            value={selectedTeamOrder.orderBy}
+                            label="Order By"
+                            onChange={event => {
+                                const value = event.target.value as any;
+                                dispatch.selectedTeamOrder({ type: 'UpdateOrder', value });
+                            }}>
+                            <MenuItem value={'name'}>Name</MenuItem>
+                            <MenuItem value={'rarity'}>Rarity</MenuItem>
+                            <MenuItem value={'rank'}>Rank</MenuItem>
+                        </Select>
+                    </FormControl>
+
+                    <FormControl
+                        sx={{ width: 200 }}
+                        size={'small'}
+                        disabled={viewPreferences.hideSelectedTeams && viewPreferences.autoTeams}>
+                        <InputLabel id="direction-label">Direction</InputLabel>
+                        <Select
+                            labelId="direction-label"
+                            id="direction"
+                            value={selectedTeamOrder.direction}
+                            label="Direction"
+                            onChange={event => {
+                                const value = event.target.value as any;
+                                dispatch.selectedTeamOrder({ type: 'UpdateDirection', value });
+                            }}>
+                            <MenuItem value={'asc'}>Ascending</MenuItem>
+                            <MenuItem value={'desc'}>Descending</MenuItem>
+                        </Select>
+                    </FormControl>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <SetGoalDialog />
@@ -89,46 +130,11 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
                 />
             </div>
             <div style={{ display: viewPreferences.hideSelectedTeams ? 'none' : 'block' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 15, marginBottom: 10 }}>
-                    <div style={{ display: 'flex' }}>
-                        <span>Selected teams</span>
-                        <Tooltip title={'Click - removes single char, Shift + Click - remove whole team'}>
-                            <Info />
-                        </Tooltip>
-                    </div>
-
-                    <FormControl sx={{ width: 200 }} size={'small'}>
-                        <InputLabel id="order-by-label">Order By</InputLabel>
-                        <Select
-                            labelId="order-by-label"
-                            id="order-by"
-                            value={selectedTeamOrder.orderBy}
-                            label="Order By"
-                            onChange={event => {
-                                const value = event.target.value as any;
-                                dispatch.selectedTeamOrder({ type: 'UpdateOrder', value });
-                            }}>
-                            <MenuItem value={'name'}>Name</MenuItem>
-                            <MenuItem value={'rarity'}>Rarity</MenuItem>
-                            <MenuItem value={'rank'}>Rank</MenuItem>
-                        </Select>
-                    </FormControl>
-
-                    <FormControl sx={{ width: 200 }} size={'small'}>
-                        <InputLabel id="direction-label">Direction</InputLabel>
-                        <Select
-                            labelId="direction-label"
-                            id="direction"
-                            value={selectedTeamOrder.direction}
-                            label="Direction"
-                            onChange={event => {
-                                const value = event.target.value as any;
-                                dispatch.selectedTeamOrder({ type: 'UpdateDirection', value });
-                            }}>
-                            <MenuItem value={'asc'}>Ascending</MenuItem>
-                            <MenuItem value={'desc'}>Descending</MenuItem>
-                        </Select>
-                    </FormControl>
+                <div style={{ display: 'flex' }}>
+                    <span>Selected teams</span>
+                    <Tooltip title={'Click - removes single char, Shift + Click - remove whole team'}>
+                        <Info />
+                    </Tooltip>
                 </div>
                 <div style={{ display: 'flex', gap: 15 }} key={legendaryEvent.id}>
                     <SelectedTeamsTable

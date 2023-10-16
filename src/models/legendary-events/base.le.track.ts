@@ -4,9 +4,10 @@
     ILegendaryEventTrack,
     ILegendaryEventTrackRequirement,
     ILegendaryEventTrackStatic,
+    ISelectedTeamsOrdering,
     LegendaryEventSection,
 } from '../interfaces';
-import { intersectionBy, orderBy, sum, uniq } from 'lodash';
+import { intersectionBy, orderBy, sum, uniq, uniqBy } from 'lodash';
 import { CharacterBias, LegendaryEventEnum } from '../enums';
 
 export class LETrack implements ILegendaryEventTrack {
@@ -53,7 +54,7 @@ export class LETrack implements ILegendaryEventTrack {
     }
 
     suggestTeams(
-        settings: IAutoTeamsPreferences | null,
+        settings: IAutoTeamsPreferences | ISelectedTeamsOrdering,
         onlyUnlocked: boolean,
         restrictions: string[]
     ): Record<string, Array<ICharacter2 | undefined>> {
@@ -66,20 +67,22 @@ export class LETrack implements ILegendaryEventTrack {
                 : this.suggestTeam(settings, onlyUnlocked, [x.name]);
         });
 
-        if (!settings) {
+        if (!this.isAutoTeams(settings)) {
             const result2: Record<string, Array<ICharacter2 | undefined>> = {};
-            const uniqChars = uniq(
-                Object.values(result)
-                    .flatMap(x => x)
-                    .map(x => x.name)
-            ).sort();
-            console.log(uniqChars);
+            const uniqChars = uniqBy(
+                Object.values(result).flatMap(x => x),
+                'name'
+            );
 
-            for (let i = 0; i < uniqChars.length; i++) {
-                const uniqChar = uniqChars[i];
+            const ordered = orderBy(uniqChars, [settings.orderBy], [settings.direction]).filter(x =>
+                onlyUnlocked ? x.unlocked : true
+            );
+
+            for (let i = 0; i < ordered.length; i++) {
+                const uniqChar = ordered[i];
                 this.unitsRestrictions.forEach(x => {
                     result2[x.name] ??= [];
-                    result2[x.name][i] = result[x.name].find(x => x.name === uniqChar);
+                    result2[x.name][i] = result[x.name].find(x => x.name === uniqChar.name);
                 });
             }
             return result2;
@@ -89,7 +92,7 @@ export class LETrack implements ILegendaryEventTrack {
     }
 
     suggestTeam(
-        settings: IAutoTeamsPreferences | null,
+        settings: IAutoTeamsPreferences | ISelectedTeamsOrdering,
         onlyUnlocked: boolean,
         restrictions: string[]
     ): Array<ICharacter2> {
@@ -102,10 +105,9 @@ export class LETrack implements ILegendaryEventTrack {
                 'name'
             );
         }
-        allowedChars = allowedChars.filter(x => (onlyUnlocked ? x.unlocked : true));
-
-        if (settings) {
-            const sortChars = allowedChars.map(unit => ({
+        const sortChars = allowedChars
+            .filter(x => (onlyUnlocked ? x.unlocked : true))
+            .map(unit => ({
                 name: unit.name,
                 rank: +unit.rank,
                 rarity: +unit.rarity,
@@ -115,6 +117,7 @@ export class LETrack implements ILegendaryEventTrack {
                 neverRecommend: unit.bias === CharacterBias.NeverRecommend,
             }));
 
+        if (this.isAutoTeams(settings)) {
             const iterates: string[] = [];
             const orders: Array<'asc' | 'desc'> = [];
 
@@ -150,7 +153,15 @@ export class LETrack implements ILegendaryEventTrack {
                 unit => allowedChars.find(x => x.name === unit.name) ?? ({} as ICharacter2)
             );
         } else {
-            return orderBy(allowedChars, ['name'], ['asc']);
+            return orderBy(
+                allowedChars.filter(x => (onlyUnlocked ? x.unlocked : true)),
+                [settings.orderBy],
+                [settings.direction]
+            );
         }
+    }
+
+    private isAutoTeams(settings: IAutoTeamsPreferences | ISelectedTeamsOrdering): settings is IAutoTeamsPreferences {
+        return Object.hasOwn(settings, 'preferCampaign');
     }
 }

@@ -39,7 +39,8 @@ export const LegendaryEventTrack = ({
 }) => {
     const gridRef = useRef<AgGridReact>(null);
 
-    const { viewPreferences, autoTeamsPreferences, leSelectedRequirements } = useContext(StoreContext);
+    const { viewPreferences, autoTeamsPreferences, leSelectedRequirements, selectedTeamOrder } =
+        useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const restrictions = useMemo(() => {
@@ -77,11 +78,11 @@ export const LegendaryEventTrack = ({
     const teams = useMemo(
         () =>
             track.suggestTeams(
-                viewPreferences.autoTeams ? autoTeamsPreferences : null,
+                viewPreferences.autoTeams ? autoTeamsPreferences : selectedTeamOrder,
                 viewPreferences.onlyUnlocked,
                 restrictions
             ),
-        [autoTeamsPreferences, restrictions, viewPreferences.autoTeams, viewPreferences.onlyUnlocked]
+        [autoTeamsPreferences, restrictions, viewPreferences.autoTeams, viewPreferences.onlyUnlocked, selectedTeamOrder]
     );
 
     const rows: Array<ITableRow> = useMemo(() => getRows(teams), [teams]);
