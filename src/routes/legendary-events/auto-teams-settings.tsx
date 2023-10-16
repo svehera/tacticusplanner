@@ -22,17 +22,6 @@ const AutoTeamsSettings = () => {
             <FormControlLabel
                 control={
                     <Checkbox
-                        checked={autoTeamsPreferences.onlyUnlocked}
-                        onChange={event => updatePreferences('onlyUnlocked', event.target.checked)}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                }
-                label="Only unlocked"
-            />
-
-            <FormControlLabel
-                control={
-                    <Checkbox
                         checked={autoTeamsPreferences.preferCampaign}
                         onChange={event => updatePreferences('preferCampaign', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}

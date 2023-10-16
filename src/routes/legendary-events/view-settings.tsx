@@ -72,6 +72,28 @@ const ViewSettings = () => {
                 }
                 label="Lightweight view"
             />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={viewPreferences.autoTeams}
+                        onChange={event => updatePreferences('autoTeams', event.target.checked)}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+                label="Auto-teams"
+            />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={viewPreferences.onlyUnlocked}
+                        onChange={event => updatePreferences('onlyUnlocked', event.target.checked)}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+                label="Only unlocked"
+            />
         </FormGroup>
     );
 };

@@ -174,9 +174,17 @@ export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
 
     getRestrictionPoints(name: string): number;
 
-    suggestTeams(settings: IAutoTeamsPreferences, restrictions: string[]): Record<string, ICharacter2[]>;
+    suggestTeams(
+        settings: IAutoTeamsPreferences | null,
+        onlyUnlocked: boolean,
+        restrictions: string[]
+    ): Record<string, Array<ICharacter2 | undefined>>;
 
-    suggestTeam(settings: IAutoTeamsPreferences, restrictions: string[]): Array<ICharacter2>;
+    suggestTeam(
+        settings: IAutoTeamsPreferences | null,
+        onlyUnlocked: boolean,
+        restrictions: string[]
+    ): Array<ICharacter2>;
 }
 
 export interface ILegendaryEventTrackRequirement {
@@ -282,10 +290,11 @@ export interface IViewPreferences {
     showGamma: boolean;
     lightWeight: boolean;
     hideSelectedTeams: boolean;
+    autoTeams: boolean;
+    onlyUnlocked: boolean;
 }
 
 export interface IAutoTeamsPreferences {
-    onlyUnlocked: boolean;
     preferCampaign: boolean;
     ignoreRarity: boolean;
     ignoreRank: boolean;

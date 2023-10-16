@@ -6,7 +6,7 @@
     ILegendaryEventTrackStatic,
     LegendaryEventSection,
 } from '../interfaces';
-import { intersectionBy, orderBy, sum } from 'lodash';
+import { intersectionBy, orderBy, sum, uniq } from 'lodash';
 import { CharacterBias, LegendaryEventEnum } from '../enums';
 
 export class LETrack implements ILegendaryEventTrack {
@@ -52,20 +52,47 @@ export class LETrack implements ILegendaryEventTrack {
         return this.unitsRestrictions.find(x => x.name === name)?.points ?? 0;
     }
 
-    suggestTeams(settings: IAutoTeamsPreferences, restrictions: string[]): Record<string, ICharacter2[]> {
-        const coreSuggestedTeams = this.suggestTeam(settings, restrictions);
+    suggestTeams(
+        settings: IAutoTeamsPreferences | null,
+        onlyUnlocked: boolean,
+        restrictions: string[]
+    ): Record<string, Array<ICharacter2 | undefined>> {
+        const coreSuggestedTeams = this.suggestTeam(settings, onlyUnlocked, restrictions);
         const result: Record<string, ICharacter2[]> = {};
 
         this.unitsRestrictions.forEach(x => {
             result[x.name] = restrictions.includes(x.name)
                 ? [...coreSuggestedTeams]
-                : this.suggestTeam(settings, [x.name]);
+                : this.suggestTeam(settings, onlyUnlocked, [x.name]);
         });
+
+        if (!settings) {
+            const result2: Record<string, Array<ICharacter2 | undefined>> = {};
+            const uniqChars = uniq(
+                Object.values(result)
+                    .flatMap(x => x)
+                    .map(x => x.name)
+            ).sort();
+            console.log(uniqChars);
+
+            for (let i = 0; i < uniqChars.length; i++) {
+                const uniqChar = uniqChars[i];
+                this.unitsRestrictions.forEach(x => {
+                    result2[x.name] ??= [];
+                    result2[x.name][i] = result[x.name].find(x => x.name === uniqChar);
+                });
+            }
+            return result2;
+        }
 
         return result;
     }
 
-    suggestTeam(settings: IAutoTeamsPreferences, restrictions: string[]): Array<ICharacter2> {
+    suggestTeam(
+        settings: IAutoTeamsPreferences | null,
+        onlyUnlocked: boolean,
+        restrictions: string[]
+    ): Array<ICharacter2> {
         let allowedChars: ICharacter2[] = [];
         if (!restrictions.length) {
             allowedChars = this.allowedUnits;
@@ -75,10 +102,10 @@ export class LETrack implements ILegendaryEventTrack {
                 'name'
             );
         }
+        allowedChars = allowedChars.filter(x => (onlyUnlocked ? x.unlocked : true));
 
-        const sortChars = allowedChars
-            .filter(x => (settings.onlyUnlocked ? x.unlocked : true))
-            .map(unit => ({
+        if (settings) {
+            const sortChars = allowedChars.map(unit => ({
                 name: unit.name,
                 rank: +unit.rank,
                 rarity: +unit.rarity,
@@ -88,39 +115,42 @@ export class LETrack implements ILegendaryEventTrack {
                 neverRecommend: unit.bias === CharacterBias.NeverRecommend,
             }));
 
-        const iterates: string[] = [];
-        const orders: Array<'asc' | 'desc'> = [];
+            const iterates: string[] = [];
+            const orders: Array<'asc' | 'desc'> = [];
 
-        if (!settings.ignoreRecommendedFirst) {
-            iterates.push('alwaysRecommend');
+            if (!settings.ignoreRecommendedFirst) {
+                iterates.push('alwaysRecommend');
+                orders.push('desc');
+            }
+
+            if (!settings.ignoreRecommendedLast) {
+                iterates.push('neverRecommend');
+                orders.push('asc');
+            }
+
+            if (settings.preferCampaign) {
+                iterates.push('requiredInCampaign');
+                orders.push('desc');
+            }
+
+            if (!settings.ignoreRarity) {
+                iterates.push('rarity');
+                orders.push('desc');
+            }
+
+            if (!settings.ignoreRank) {
+                iterates.push('rank');
+                orders.push('desc');
+            }
+
+            iterates.push('points');
             orders.push('desc');
+
+            return orderBy(sortChars, iterates, orders).map(
+                unit => allowedChars.find(x => x.name === unit.name) ?? ({} as ICharacter2)
+            );
+        } else {
+            return orderBy(allowedChars, ['name'], ['asc']);
         }
-
-        if (!settings.ignoreRecommendedLast) {
-            iterates.push('neverRecommend');
-            orders.push('asc');
-        }
-
-        if (settings.preferCampaign) {
-            iterates.push('requiredInCampaign');
-            orders.push('desc');
-        }
-
-        if (!settings.ignoreRarity) {
-            iterates.push('rarity');
-            orders.push('desc');
-        }
-
-        if (!settings.ignoreRank) {
-            iterates.push('rank');
-            orders.push('desc');
-        }
-
-        iterates.push('points');
-        orders.push('desc');
-
-        return orderBy(sortChars, iterates, orders).map(
-            unit => allowedChars.find(x => x.name === unit.name) ?? ({} as ICharacter2)
-        );
     }
 }

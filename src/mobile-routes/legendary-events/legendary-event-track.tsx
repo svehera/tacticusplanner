@@ -14,7 +14,7 @@ export const LegendaryEventTrack = (props: { track: ILegendaryEventTrack; eventI
         setRestrictions([]);
     }, [props.eventId]);
 
-    const { autoTeamsPreferences } = useContext(StoreContext);
+    const { autoTeamsPreferences, viewPreferences } = useContext(StoreContext);
 
     const handleChange = (selected: boolean, restrictionName: string) => {
         if (selected) {
@@ -25,7 +25,7 @@ export const LegendaryEventTrack = (props: { track: ILegendaryEventTrack; eventI
     };
 
     useEffect(() => {
-        setCharacters(props.track.suggestTeam(autoTeamsPreferences, restrictions));
+        setCharacters(props.track.suggestTeam(autoTeamsPreferences, viewPreferences.onlyUnlocked, restrictions));
     }, [restrictions, autoTeamsPreferences]);
 
     return (

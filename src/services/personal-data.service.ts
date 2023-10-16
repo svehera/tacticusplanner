@@ -28,9 +28,14 @@ export class PersonalDataLocalStorage {
             result = {
                 schemaVersion: 2,
                 modifiedDate: modifiedDateString ? new Date(modifiedDateString) : defaultData.modifiedDate,
-                autoTeamsPreferences:
-                    this.getItem<IAutoTeamsPreferences>('autoTeamsPreferences') ?? defaultData.autoTeamsPreferences,
-                viewPreferences: this.getItem<IViewPreferences>('viewPreferences') ?? defaultData.viewPreferences,
+                autoTeamsPreferences: {
+                    ...defaultData.autoTeamsPreferences,
+                    ...(this.getItem<IAutoTeamsPreferences>('autoTeamsPreferences') ?? {}),
+                },
+                viewPreferences: {
+                    ...defaultData.viewPreferences,
+                    ...(this.getItem<IViewPreferences>('viewPreferences') ?? {}),
+                },
                 characters: this.getItem<IPersonalCharacterData2[]>('characters') ?? defaultData.characters,
                 goals: this.getItem<IPersonalGoal[]>('goals') ?? defaultData.goals,
                 selectedTeamOrder:

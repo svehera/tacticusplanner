@@ -71,7 +71,6 @@ export const defaultData: IPersonalData2 = {
     schemaVersion: 2,
     modifiedDate: undefined,
     autoTeamsPreferences: {
-        onlyUnlocked: true,
         preferCampaign: false,
         ignoreRank: false,
         ignoreRarity: false,
@@ -84,6 +83,8 @@ export const defaultData: IPersonalData2 = {
         showGamma: true,
         lightWeight: false,
         hideSelectedTeams: false,
+        autoTeams: true,
+        onlyUnlocked: false,
     },
     characters: [
         {

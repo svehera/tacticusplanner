@@ -69,29 +69,22 @@ export const LegendaryEventTrack = ({
         };
     }, [restrictions]);
 
-    const columnsDefs = useMemo<Array<ColGroupDef>>(
-        () => [
-            {
-                headerName: track.name + ' - ' + track.killPoints,
-                headerClass: track.section,
-                children: getSectionColumns(
-                    track.unitsRestrictions,
-                    track.section,
-                    viewPreferences.lightWeight,
-                    restrictions
-                ),
-                openByDefault: true,
-            },
-        ],
+    const columnsDefs = useMemo<Array<ColDef>>(
+        () => [...getSectionColumns(track.unitsRestrictions, track.section, viewPreferences.lightWeight, restrictions)],
         [track.eventId, viewPreferences.lightWeight, restrictions]
     );
 
     const teams = useMemo(
-        () => track.suggestTeams(autoTeamsPreferences, restrictions),
-        [autoTeamsPreferences, restrictions]
+        () =>
+            track.suggestTeams(
+                viewPreferences.autoTeams ? autoTeamsPreferences : null,
+                viewPreferences.onlyUnlocked,
+                restrictions
+            ),
+        [autoTeamsPreferences, restrictions, viewPreferences.autoTeams, viewPreferences.onlyUnlocked]
     );
 
-    const rows: Array<ITableRow> = useMemo(() => getRows(track, teams), [teams]);
+    const rows: Array<ITableRow> = useMemo(() => getRows(teams), [teams]);
 
     useEffect(() => {
         gridRef.current?.api?.sizeColumnsToFit();
@@ -115,8 +108,8 @@ export const LegendaryEventTrack = ({
         const teamName = cellClicked.column.getColId();
         const value = cellClicked.value;
         const shiftKey = (cellClicked.event as MouseEvent).shiftKey;
-        if (shiftKey) {
-            const team = teams[teamName].slice(0, 5).map(x => x.name);
+        if (shiftKey && viewPreferences.autoTeams) {
+            const team = teams[teamName].slice(0, 5).map(x => x?.name ?? '');
             selectChars(teamName, ...team);
             return;
         }
@@ -137,6 +130,7 @@ export const LegendaryEventTrack = ({
             field: u.name,
             headerName: `(${u.points}) ${u.name}`,
             headerTooltip: `(${u.points}) ${u.name}`,
+            headerClass: suffix,
             resizable: true,
             valueFormatter: !lightweight
                 ? undefined
@@ -171,10 +165,7 @@ export const LegendaryEventTrack = ({
         }));
     }
 
-    function getRows(
-        legendaryEventTrack: ILegendaryEventTrack,
-        teams: Record<string, ICharacter2[]>
-    ): Array<ITableRow> {
+    function getRows(teams: Record<string, Array<ICharacter2 | undefined>>): Array<ITableRow> {
         const size = Math.max(...Object.values(teams).map(x => x.length));
         const rows: Array<ITableRow> = Array.from({ length: size }, () => ({}));
 
@@ -189,24 +180,27 @@ export const LegendaryEventTrack = ({
     }
 
     return (
-        <div
-            className="ag-theme-material auto-teams"
-            style={{
-                display: show ? 'block' : 'none',
-                height: `calc((100vh - 200px) / ${viewPreferences.hideSelectedTeams ? 1 : 2})`,
-                width: '100%',
-                border: '2px solid black',
-            }}>
-            <AgGridReact
-                ref={gridRef}
-                tooltipShowDelay={100}
-                components={components}
-                rowData={rows}
-                rowHeight={35}
-                getRowStyle={getRowStyle}
-                columnDefs={columnsDefs}
-                onGridReady={fitGridOnWindowResize(gridRef)}
-                onCellClicked={handleCellCLick}></AgGridReact>
+        <div style={{ width: '100%', display: show ? 'block' : 'none' }}>
+            <span style={{ fontWeight: 700, fontSize: 18 }}>{track.name + ' - ' + track.killPoints}</span>
+            <div
+                className="ag-theme-material auto-teams"
+                style={{
+                    height: `calc((100vh - 250px) / ${viewPreferences.hideSelectedTeams ? 1 : 2})`,
+                    width: '100%',
+                    border: '2px solid black',
+                }}>
+                <AgGridReact
+                    ref={gridRef}
+                    tooltipShowDelay={100}
+                    components={components}
+                    rowData={rows}
+                    headerHeight={80}
+                    rowHeight={35}
+                    getRowStyle={viewPreferences.autoTeams ? getRowStyle : undefined}
+                    columnDefs={columnsDefs}
+                    onGridReady={fitGridOnWindowResize(gridRef)}
+                    onCellClicked={handleCellCLick}></AgGridReact>
+            </div>
         </div>
     );
 };

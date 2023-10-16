@@ -11,7 +11,7 @@ import { StoreContext } from '../../reducers/store.provider';
 import { Outlet } from 'react-router-dom';
 
 export const LegendaryEventPage = () => {
-    const { autoTeamsPreferences } = useContext(StoreContext);
+    const { autoTeamsPreferences, viewPreferences } = useContext(StoreContext);
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
@@ -64,7 +64,7 @@ export const LegendaryEventPage = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between', margin: '10px 0' }}>
                 <ViewSettings />
                 <div>
-                    <Button variant="outlined" onClick={handleClick2}>
+                    <Button disabled={!viewPreferences.autoTeams} variant="outlined" onClick={handleClick2}>
                         Auto-Teams <SettingsIcon />
                     </Button>
                     <Popover
@@ -80,7 +80,7 @@ export const LegendaryEventPage = () => {
                         </div>
                     </Popover>
 
-                    <Button onClick={handleClick} color={'inherit'}>
+                    <Button disabled={!viewPreferences.autoTeams} onClick={handleClick} color={'inherit'}>
                         <Help />
                     </Button>
                     <Popover
