@@ -11,7 +11,13 @@ import { ILegendaryEvent } from '../../models/interfaces';
 import { useMemo } from 'react';
 import { CharactersSelection } from './legendary-events.interfaces';
 
-export default function DataTablesDialog({ legendaryEvent }: { legendaryEvent: ILegendaryEvent}) {
+export default function DataTablesDialog({
+    legendaryEvent,
+    short,
+}: {
+    legendaryEvent: ILegendaryEvent;
+    short?: boolean;
+}) {
     const [open, setOpen] = React.useState(false);
     const [selection, setSelection] = React.useState(CharactersSelection.All);
 
@@ -22,17 +28,17 @@ export default function DataTablesDialog({ legendaryEvent }: { legendaryEvent: I
     const handleClose = () => {
         setOpen(false);
     };
-    
+
     const title = useMemo(() => {
         switch (selection) {
-        case CharactersSelection.All:
-            return 'Best Characters Overall';
-        case CharactersSelection.Unlocked:
-            return 'Your Best Characters';
-        case CharactersSelection.Selected:
-            return 'Selected Teams Best';
-        default:
-            return 'Data Table';
+            case CharactersSelection.All:
+                return 'Best Characters Overall';
+            case CharactersSelection.Unlocked:
+                return 'Your Best Characters';
+            case CharactersSelection.Selected:
+                return 'Selected Teams Best';
+            default:
+                return 'Data Table';
         }
     }, [selection]);
 
@@ -41,19 +47,10 @@ export default function DataTablesDialog({ legendaryEvent }: { legendaryEvent: I
             <Button variant="contained" onClick={handleClickOpen}>
                 Open Data Tables
             </Button>
-            <Dialog
-                fullScreen
-                open={open}
-                onClose={handleClose}
-            >
+            <Dialog fullScreen open={open} onClose={handleClose}>
                 <AppBar sx={{ position: 'relative' }}>
                     <Toolbar>
-                        <IconButton
-                            edge="start"
-                            color="inherit"
-                            onClick={handleClose}
-                            aria-label="close"
-                        >
+                        <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                             <CloseIcon />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
@@ -61,7 +58,7 @@ export default function DataTablesDialog({ legendaryEvent }: { legendaryEvent: I
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <PointsTable legendaryEvent={legendaryEvent} selectionChange={setSelection}/>
+                <PointsTable legendaryEvent={legendaryEvent} selectionChange={setSelection} short={short ?? false} />
             </Dialog>
         </div>
     );

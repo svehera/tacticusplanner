@@ -31,7 +31,7 @@ export const CharacterTitle = ({
 
     const characterFull = (
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>
-            <CharacterImage key={character.name} character={character} imageSize={imageSize} />
+            <CharacterImage key={character.name} icon={character.icon} name={character.name} imageSize={imageSize} />
             <span>{character.name}</span>
             <RarityImage rarity={character.initialRarity} />
             {character.unlocked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
@@ -53,7 +53,12 @@ export const CharacterTitle = ({
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>
             <Tooltip content={character.name} relationship={'description'} hideDelay={1000}>
                 <span style={{ height: imageSize }}>
-                    <CharacterImage key={character.name} character={character} imageSize={imageSize} />
+                    <CharacterImage
+                        key={character.name}
+                        icon={character.icon}
+                        name={character.name}
+                        imageSize={imageSize}
+                    />
                 </span>
             </Tooltip>
             <span>{character.name}</span>

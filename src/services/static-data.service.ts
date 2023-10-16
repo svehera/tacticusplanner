@@ -3,6 +3,10 @@
 import unitsData from '../assets/UnitData.json';
 import dirtyDozen from '../assets/DirtyDozen.json';
 
+import shadowsun from '../assets/legendary-events/Shadowsun.json';
+import aunshi from '../assets/legendary-events/Aunshi.json';
+import ragnar from '../assets/legendary-events/Ragnar.json';
+
 import { ICharLegendaryEvents, IDirtyDozenChar, IUnitData, UnitDataRaw } from '../models/interfaces';
 import { Faction } from '../models/enums';
 import { rarityStringToNumber, rarityToStars } from '../models/constants';
@@ -10,6 +14,33 @@ import { rarityStringToNumber, rarityToStars } from '../models/constants';
 export class StaticDataService {
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
     static readonly dirtyDozenData: IDirtyDozenChar[] = dirtyDozen;
+
+    static readonly legendaryEvents = [
+        {
+            id: shadowsun.id,
+            name: shadowsun.name,
+            stage: shadowsun.eventStage,
+            nextEventDate: shadowsun.nextEventDate,
+            mobileRoute: '/mobile/le/shadowsun',
+            icon: 'ShadowSun.png',
+        },
+        {
+            id: aunshi.id,
+            name: aunshi.name,
+            stage: aunshi.eventStage,
+            nextEventDate: aunshi.nextEventDate,
+            mobileRoute: '/mobile/le/aunshi',
+            icon: 'Aun-shi.png',
+        },
+        {
+            id: ragnar.id,
+            name: ragnar.name,
+            stage: ragnar.eventStage,
+            nextEventDate: ragnar.nextEventDate,
+            mobileRoute: '/mobile/le/ragnar',
+            icon: 'unset.png',
+        },
+    ];
 
     static convertUnitData(rawData: UnitDataRaw): IUnitData {
         const unitData: IUnitData = {

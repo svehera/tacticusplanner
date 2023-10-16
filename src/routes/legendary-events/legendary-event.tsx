@@ -68,7 +68,7 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <SetGoalDialog />
                     <MyProgressDialog legendaryEvent={legendaryEvent} />
-                    <DataTablesDialog legendaryEvent={legendaryEvent}></DataTablesDialog>
+                    <DataTablesDialog legendaryEvent={legendaryEvent} />
                 </div>
             </div>
             <div style={{ display: 'flex', gap: 15, marginBottom: 10 }} key={legendaryEvent.id}>

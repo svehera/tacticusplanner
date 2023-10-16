@@ -18,6 +18,7 @@ import { StoreContext } from '../../reducers/store.provider';
 const PointsTable = (props: {
     legendaryEvent: ILegendaryEvent;
     selectionChange: (selection: CharactersSelection) => void;
+    short: boolean;
 }) => {
     const { legendaryEvent } = props;
     const { leSelectedTeams } = useContext(StoreContext);
@@ -36,14 +37,14 @@ const PointsTable = (props: {
 
     const gridRef = useRef<AgGridReact>(null);
 
-    const columnsDef: Array<ColDef | ColGroupDef> = useMemo(
-        () => [
+    const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() => {
+        const shortTable: Array<ColDef | ColGroupDef> = [
             {
                 headerName: 'Position',
                 field: 'position',
-                maxWidth: 100,
-                width: 100,
-                minWidth: 100,
+                maxWidth: 50,
+                width: 50,
+                minWidth: 50,
                 pinned: true,
                 sortable: true,
                 sort: 'asc',
@@ -72,60 +73,97 @@ const PointsTable = (props: {
                     },
                 ],
             },
-            {
-                headerName: legendaryEvent.alpha.name,
-                children: [
-                    {
-                        field: 'alphaPoints',
-                        headerName: 'Points',
-                        width: 100,
-                        sortable: true,
-                    },
-                    {
-                        field: 'alphaSlots',
-                        headerName: selection === 'selected' ? 'Times selected' : 'Slots',
-                        width: 100,
-                        sortable: true,
-                    },
-                ],
-            },
-            {
-                headerName: legendaryEvent.beta.name,
-                children: [
-                    {
-                        field: 'betaPoints',
-                        headerName: 'Points',
-                        width: 100,
-                        sortable: true,
-                    },
-                    {
-                        field: 'betaSlots',
-                        headerName: selection === 'selected' ? 'Times selected' : 'Slots',
-                        width: 100,
-                        sortable: true,
-                    },
-                ],
-            },
-            {
-                headerName: legendaryEvent.gamma.name,
-                children: [
-                    {
-                        field: 'gammaPoints',
-                        headerName: 'Points',
-                        width: 100,
-                        sortable: true,
-                    },
-                    {
-                        field: 'gammaSlots',
-                        headerName: selection === 'selected' ? 'Times selected' : 'Slots',
-                        width: 100,
-                        sortable: true,
-                    },
-                ],
-            },
-        ],
-        [selection]
-    );
+        ];
+        return props.short
+            ? shortTable
+            : [
+                  {
+                      headerName: 'Position',
+                      field: 'position',
+                      maxWidth: 100,
+                      width: 100,
+                      minWidth: 100,
+                      pinned: true,
+                      sortable: true,
+                      sort: 'asc',
+                  },
+                  {
+                      field: 'name',
+                      width: 150,
+                      sortable: true,
+                      cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
+                      tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
+                  },
+                  {
+                      headerName: 'Total',
+                      children: [
+                          {
+                              field: 'totalPoints',
+                              headerName: 'Points',
+                              width: 100,
+                              sortable: true,
+                          },
+                          {
+                              field: 'totalSlots',
+                              headerName: selection === 'selected' ? 'Times selected' : 'Slots',
+                              width: 100,
+                              sortable: true,
+                          },
+                      ],
+                  },
+                  {
+                      headerName: legendaryEvent.alpha.name,
+                      children: [
+                          {
+                              field: 'alphaPoints',
+                              headerName: 'Points',
+                              width: 100,
+                              sortable: true,
+                          },
+                          {
+                              field: 'alphaSlots',
+                              headerName: selection === 'selected' ? 'Times selected' : 'Slots',
+                              width: 100,
+                              sortable: true,
+                          },
+                      ],
+                  },
+                  {
+                      headerName: legendaryEvent.beta.name,
+                      children: [
+                          {
+                              field: 'betaPoints',
+                              headerName: 'Points',
+                              width: 100,
+                              sortable: true,
+                          },
+                          {
+                              field: 'betaSlots',
+                              headerName: selection === 'selected' ? 'Times selected' : 'Slots',
+                              width: 100,
+                              sortable: true,
+                          },
+                      ],
+                  },
+                  {
+                      headerName: legendaryEvent.gamma.name,
+                      children: [
+                          {
+                              field: 'gammaPoints',
+                              headerName: 'Points',
+                              width: 100,
+                              sortable: true,
+                          },
+                          {
+                              field: 'gammaSlots',
+                              headerName: selection === 'selected' ? 'Times selected' : 'Slots',
+                              width: 100,
+                              sortable: true,
+                          },
+                      ],
+                  },
+              ];
+    }, [selection]);
 
     const selectedChars = useMemo(() => {
         const alphaSection = legendaryEvent.alpha.unitsRestrictions.map(x => x.name);
