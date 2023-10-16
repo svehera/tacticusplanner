@@ -1,6 +1,14 @@
 ﻿import React, { ChangeEvent, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { CellClassParams, ColDef, ColGroupDef, ITooltipParams, RowClassParams, RowStyle } from 'ag-grid-community';
+import {
+    CellClassParams,
+    ColDef,
+    ColGroupDef,
+    ITooltipParams,
+    RowClassParams,
+    RowStyle,
+    ValueFormatterParams,
+} from 'ag-grid-community';
 
 import {
     ILegendaryEvent,
@@ -8,12 +16,13 @@ import {
     ILegendaryEventTrack,
     SelectedTeams,
 } from '../../models/interfaces';
-import { LegendaryEventEnum, Rank } from '../../models/enums';
+import { LegendaryEventEnum, Rank, Rarity } from '../../models/enums';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
-import { fitGridOnWindowResize } from '../../shared-logic/functions';
+import { fitGridOnWindowResize, rankToString } from '../../shared-logic/functions';
 import { sum, uniq } from 'lodash';
 import { CharactersSelection, ITableRow } from './legendary-events.interfaces';
 import { StoreContext } from '../../reducers/store.provider';
+import { rarityStringToNumber } from '../../models/constants';
 
 const PointsTable = (props: {
     legendaryEvent: ILegendaryEvent;
@@ -93,6 +102,21 @@ const PointsTable = (props: {
                       sortable: true,
                       cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
                       tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
+                  },
+                  {
+                      field: 'rank',
+                      width: 100,
+                      sortable: true,
+                      cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
+                      valueFormatter: (params: ValueFormatterParams<ITableRow>) =>
+                          rankToString(params.data?.rank ?? Rank.Locked),
+                  },
+                  {
+                      field: 'rarity',
+                      width: 100,
+                      sortable: true,
+                      cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
+                      valueFormatter: (params: ValueFormatterParams<ITableRow>) => Rarity[params.data?.rarity ?? 0],
                   },
                   {
                       headerName: 'Total',
@@ -203,6 +227,8 @@ const PointsTable = (props: {
             })
             .map((x, index) => ({
                 name: x.name,
+                rank: x.rank,
+                rarity: x.rarity,
                 position: index + 1,
                 className: Rank[x.rank].toLowerCase(),
                 tooltip: x.name + ' - ' + Rank[x.rank ?? 0],
@@ -278,6 +304,8 @@ const PointsTable = (props: {
             )
             .map((x, index) => ({
                 name: x.name,
+                rarity: x.rarity,
+                rank: x.rank,
                 position: index + 1,
                 className: Rank[x.rank].toLowerCase(),
                 tooltip: x.name + ' - ' + Rank[x.rank ?? 0],
