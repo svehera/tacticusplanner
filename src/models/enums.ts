@@ -118,7 +118,7 @@ export enum DamageType {
 }
 
 export enum Rank {
-    Undefined,
+    Locked,
     Stone1,
     Stone2,
     Stone3,

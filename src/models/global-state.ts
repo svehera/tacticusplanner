@@ -43,7 +43,7 @@ export class GlobalState implements IGlobalState {
             const combinedData: IPersonalCharacterData2 = {
                 name: staticData.name,
                 unlocked: personalCharData?.unlocked ?? false,
-                rank: personalCharData?.rank ?? Rank.Stone1,
+                rank: personalCharData?.rank ?? Rank.Locked,
                 rarity: personalCharData?.rarity ?? staticData.initialRarity,
                 bias: personalCharData?.bias ?? CharacterBias.None,
             };
@@ -61,7 +61,7 @@ export class GlobalState implements IGlobalState {
                 x =>
                     x.unlocked ||
                     x.bias !== CharacterBias.None ||
-                    x.rank !== Rank.Stone1 ||
+                    x.rank !== Rank.Locked ||
                     x.rarity !== x.initialRarity
             )
             .map(x => ({ name: x.name, unlocked: x.unlocked, rank: x.rank, rarity: x.rarity, bias: x.bias }));

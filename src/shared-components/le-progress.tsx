@@ -178,11 +178,14 @@ export const LeProgress = ({
             return 0;
         }
 
-        return legendaryEvent.pointsMilestones
-            .filter(x => x.milestone <= milestoneNumber)
-            .map(x => x.engramPayout)
-            .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    }, [currentPoints]);
+        return (
+            legendaryEvent.pointsMilestones
+                .filter(x => x.milestone <= milestoneNumber)
+                .map(x => x.engramPayout)
+                .reduce((accumulator, currentValue) => accumulator + currentValue, 0) +
+            personalProgress.regularMissions * 25
+        );
+    }, [currentPoints, personalProgress.regularMissions]);
 
     const totalChests = useMemo(() => {
         return legendaryEvent.chestsMilestones.length;
@@ -195,6 +198,7 @@ export const LeProgress = ({
             if (currencyLeft >= chestMilestone.engramCost) {
                 currencyLeft -= chestMilestone.engramCost;
             } else {
+                console.log(currencyLeft, chestMilestone);
                 return chestMilestone.chestLevel - 1;
             }
         }
