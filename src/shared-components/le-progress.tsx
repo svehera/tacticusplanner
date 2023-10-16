@@ -39,6 +39,7 @@ export const LeProgress = ({
             },
             regularMissions: 0,
             premiumMissions: 0,
+            notes: '',
         }
     );
 
@@ -101,6 +102,14 @@ export const LeProgress = ({
     const handleMissionsProgressChange = (section: 'regularMissions' | 'premiumMissions', value: number): void => {
         setPersonalProgress(current => {
             current[section] = value;
+            dispatch.leProgress({ type: 'Update', value: current, eventId: current.id });
+            return current;
+        });
+    };
+
+    const handleNotesChange = (value: string): void => {
+        setPersonalProgress(current => {
+            current.notes = value;
             dispatch.leProgress({ type: 'Update', value: current, eventId: current.id });
             return current;
         });
@@ -198,7 +207,6 @@ export const LeProgress = ({
             if (currencyLeft >= chestMilestone.engramCost) {
                 currencyLeft -= chestMilestone.engramCost;
             } else {
-                console.log(currencyLeft, chestMilestone);
                 return chestMilestone.chestLevel - 1;
             }
         }
@@ -280,12 +288,14 @@ export const LeProgress = ({
                 <LeProgressOverview
                     legendaryEvent={legendaryEvent}
                     missionProgressChange={handleMissionsProgressChange}
+                    notesChange={handleNotesChange}
                     progress={{
                         alpha: alphaProgress,
                         beta: betaProgress,
                         gamma: gammaProgress,
                         regularMissions: personalProgress.regularMissions,
                         premiumMissions: personalProgress.premiumMissions,
+                        notes: personalProgress.notes,
                     }}
                 />
             </TabPanel>

@@ -356,6 +356,7 @@ export interface ILegendaryEventProgressState {
     gamma: ILegendaryEventProgressTrackState;
     regularMissions: number;
     premiumMissions: number;
+    notes: string;
 }
 
 export interface ILegendaryEventProgressTrackState {
@@ -368,6 +369,7 @@ export interface ILegendaryEventProgress {
     gamma: ILegendaryEventProgressTrack;
     regularMissions: number;
     premiumMissions: number;
+    notes: string;
 }
 
 export interface ILegendaryEventProgressTrack {
