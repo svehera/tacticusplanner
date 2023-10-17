@@ -13,7 +13,7 @@ const localStorageKey = 'token';
 const localStorageUserKey = 'user';
 
 const AuthContext = createContext<IAuthContext>({
-    username: 'Tactition',
+    username: 'Tactician',
     isAuthenticated: !!localStorage.getItem(localStorageKey),
     token: localStorage.getItem(localStorageKey) ?? '',
     // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -27,7 +27,7 @@ const AuthContext = createContext<IAuthContext>({
 export function AuthProvider({ children }: PropsWithChildren) {
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem(localStorageKey));
     const [token, setToken] = useState(localStorage.getItem(localStorageKey) ?? '');
-    const [username, setUsername] = useState(localStorage.getItem(localStorageUserKey) ?? 'Tactition');
+    const [username, setUsername] = useState(localStorage.getItem(localStorageUserKey) ?? 'Tactician');
 
     const login = (accessToken: string) => {
         setIsAuthenticated(true);
@@ -38,7 +38,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     const logout = () => {
         setIsAuthenticated(false);
         setToken('');
-        setUsername('Tactition');
+        setUsername('Tactician');
         localStorage.removeItem(localStorageKey);
         localStorage.removeItem(localStorageUserKey);
     };
