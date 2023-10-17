@@ -28,6 +28,7 @@ export class PersonalDataLocalStorage {
             result = {
                 schemaVersion: 2,
                 modifiedDate: modifiedDateString ? new Date(modifiedDateString) : defaultData.modifiedDate,
+                seenAppVersion: this.getItem<string>('seenAppVersion') ?? defaultData.seenAppVersion,
                 autoTeamsPreferences: {
                     ...defaultData.autoTeamsPreferences,
                     ...(this.getItem<IAutoTeamsPreferences>('autoTeamsPreferences') ?? {}),

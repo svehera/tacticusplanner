@@ -72,6 +72,7 @@ export const discordInvitationLink = 'https://discord.gg/B2ze6w7gx';
 export const defaultData: IPersonalData2 = {
     schemaVersion: 2,
     modifiedDate: undefined,
+    seenAppVersion: undefined,
     autoTeamsPreferences: {
         preferCampaign: false,
         ignoreRank: false,

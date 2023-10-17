@@ -218,6 +218,7 @@ export type SetStateAction<T> = { type: 'Set'; value: T };
 
 export interface IGlobalState {
     modifiedDate?: Date;
+    seenAppVersion?: string | null | undefined;
     autoTeamsPreferences: IAutoTeamsPreferences;
     viewPreferences: IViewPreferences;
     characters: Array<ICharacter2>;
@@ -237,12 +238,14 @@ export interface IDispatchContext {
     leSelectedTeams: React.Dispatch<LeSelectedTeamsAction>;
     leProgress: React.Dispatch<LeProgressAction>;
     goals: React.Dispatch<GoalsAction>;
+    seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean) => void;
 }
 
 export interface IPersonalData2 {
     schemaVersion: 2;
     modifiedDate?: Date;
+    seenAppVersion?: string | null;
     autoTeamsPreferences: IAutoTeamsPreferences;
     viewPreferences: IViewPreferences;
     selectedTeamOrder: ISelectedTeamsOrdering;

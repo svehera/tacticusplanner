@@ -34,6 +34,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [saveTimeoutId, setSaveTimeoutId] = useState<NodeJS.Timeout>();
 
     const [modifiedDate, setModifiedDate] = useState(globalState.modifiedDate);
+    const [seenAppVersion, setSeenAppVersion] = useState<string | undefined | null>(globalState.seenAppVersion);
 
     const [characters, dispatchCharacters] = React.useReducer(charactersReducer, globalState.characters);
     const [goals, dispatchGoals] = React.useReducer(goalsReducer, globalState.goals);
@@ -93,6 +94,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     setModifiedDate(data.modifiedDate);
                 }
             },
+            seenAppVersion: wrapDispatch(setSeenAppVersion),
         }),
         [
             dispatchCharacters,
@@ -122,6 +124,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             leProgress,
             goals,
             modifiedDate,
+            seenAppVersion,
         };
         const storeValue = GlobalState.toStore(newValue);
 

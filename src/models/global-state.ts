@@ -17,6 +17,7 @@ import { CharacterBias, LegendaryEventEnum, Rank } from './enums';
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
+    readonly seenAppVersion?: string | null;
 
     readonly autoTeamsPreferences: IAutoTeamsPreferences;
     readonly characters: Array<ICharacter2>;
@@ -43,6 +44,7 @@ export class GlobalState implements IGlobalState {
         this.goals = personalData.goals;
 
         this.modifiedDate = personalData.modifiedDate;
+        this.seenAppVersion = personalData.seenAppVersion;
 
         this.characters = StaticDataService.unitsData.map(staticData => {
             const personalCharData = personalData.characters.find(c => c.name === staticData.name);
@@ -75,6 +77,7 @@ export class GlobalState implements IGlobalState {
         return {
             schemaVersion: 2,
             modifiedDate: value.modifiedDate,
+            seenAppVersion: value.seenAppVersion,
             goals: value.goals,
             selectedTeamOrder: value.selectedTeamOrder,
             leTeams: value.leSelectedTeams,

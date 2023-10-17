@@ -1,12 +1,12 @@
 ﻿import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import ListIcon from '@mui/icons-material/List';
-import LegendIcon from '@mui/icons-material/LegendToggle';
+import { Home } from '@mui/icons-material';
 import TargetIcon from '@mui/icons-material/TrackChanges';
+import LegendIcon from '@mui/icons-material/LegendToggle';
 
 import React, { useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
-import { Home } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 
 const MobileApp = () => {
