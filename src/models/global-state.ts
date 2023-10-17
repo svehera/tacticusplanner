@@ -13,7 +13,7 @@
     LegendaryEventData,
 } from './interfaces';
 import { StaticDataService } from '../services';
-import { CharacterBias, Rank } from './enums';
+import { CharacterBias, LegendaryEventEnum, Rank } from './enums';
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
@@ -34,6 +34,12 @@ export class GlobalState implements IGlobalState {
         this.leSelectedRequirements = personalData.leSelectedRequirements;
         this.leSelectedTeams = personalData.leTeams;
         this.leProgress = personalData.leProgress;
+        for (const leProgressKey in this.leProgress) {
+            const leProgress = this.leProgress[+leProgressKey as LegendaryEventEnum];
+            if (leProgress) {
+                leProgress.notes = '';
+            }
+        }
         this.goals = personalData.goals;
 
         this.modifiedDate = personalData.modifiedDate;

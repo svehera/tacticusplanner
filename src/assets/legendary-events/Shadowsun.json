@@ -30,7 +30,7 @@
   ],
   "alpha": {
     "name": "Alpha (No Necrons)",
-    "killPoints": 18,
+    "killPoints": 35,
     "battlesPoints": [
       29,
       39,
@@ -66,7 +66,7 @@
   },
   "gamma": {
     "name": "Gamma (No Imperials)",
-    "killPoints": 35,
+    "killPoints": 18,
     "battlesPoints": [
       31,
       36,

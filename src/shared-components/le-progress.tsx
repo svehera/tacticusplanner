@@ -192,9 +192,10 @@ export const LeProgress = ({
                 .filter(x => x.milestone <= milestoneNumber)
                 .map(x => x.engramPayout)
                 .reduce((accumulator, currentValue) => accumulator + currentValue, 0) +
-            personalProgress.regularMissions * 25
+            personalProgress.regularMissions * 25 +
+            personalProgress.premiumMissions * 40
         );
-    }, [currentPoints, personalProgress.regularMissions]);
+    }, [currentPoints, personalProgress.regularMissions, personalProgress.premiumMissions]);
 
     const totalChests = useMemo(() => {
         return legendaryEvent.chestsMilestones.length;
