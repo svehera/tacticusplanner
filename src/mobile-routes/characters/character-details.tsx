@@ -28,7 +28,7 @@ export const CharacterDetails = ({
         characterChanges({ ...character, [name]: value });
     };
 
-    const rankEntries: number[] = getEnumValues(Rank).slice(1);
+    const rankEntries: number[] = getEnumValues(Rank);
     const rarityEntries: number[] = getEnumValues(Rarity);
     const biasEntries: number[] = getEnumValues(CharacterBias);
 

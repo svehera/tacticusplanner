@@ -1,0 +1,104 @@
+﻿{
+  "currentVersion": "1.0.0",
+  "releaseNotes": [
+    {
+      "version": "1.0.0",
+      "date": "October 22",
+      "type": "Update",
+      "new": [
+        {
+          "text": "Added \"What's New\" dialog"
+        },
+        {
+          "text": "Added placeholders for new characters - Winged Tyrant Prime, Deathleaper, Njal Stormcaller, Ragnar Blackmane"
+        },
+        {
+          "text": "Added LRE for Ragnar Blackmane. *Some data can change",
+          "route": "le/ragnar"
+        },
+        {
+          "text": "Technical improvements for better stability"
+        },
+        {
+          "text": "Desktop: Updated UI for Legendary Events page",
+          "subPoints": [
+            "Removed LRE tabs. Each event now have its own URL",
+            "Changed position of the view preferences. Now it top left corner",
+            "Added \"Auto-team\" option to  view preferences. When unchecked characters in the tables will be aligned by name and \"Auto-teams\" settings will be disabled"
+          ],
+          "images": [
+            {
+              "path": "le1.png"
+            },
+            {
+              "path": "le2.png"
+            }
+          ]
+        },
+        {
+          "text": "Mobile: Updated UI for Legendary Events page",
+          "images": [
+            {
+              "path": "le3.png"
+            },
+            {
+              "path": "le4.png"
+            }
+          ]
+        }
+      ],
+      "minor": [
+        {
+          "text": "Added timestamp of last modified date to the file name when exporting data"
+        },
+        {
+          "text": "Updated top navigation and \"hamburger\" menu"
+        },
+        {
+          "text": "Added separate URL for each legendary event"
+        },
+        {
+          "text": "Click on title navigates to home page"
+        },
+        {
+          "text": "For new users pre-populated default characters (Varro, Certus, Bellator, Vindicta) on \"Who you Own\" and added goals for them"
+        },
+        {
+          "text": "Added sortable \"Rank\" and \"Rarity\" columns to the \"Data Tables\" on LRE page (SergeDavid)"
+        },
+        {
+          "text": "Added notes to the \"My Progress\" on LRE page (xenoblight+)"
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed: order of Calandis and Aethena on \"Who You Own\" page (SergeDavid, Fonzoland)"
+        },
+        {
+          "text": "Fixed: \"Recommend first/last\" not working correctly (SergeDavid)"
+        },
+        {
+          "text": "Fixed: \"Tactician\" spelling is not correct (Fonzoland)"
+        },
+        {
+          "text": "Fixed: on LRE \"My Progress\" regular and premium missions are not accounted for the owned currency (SergeDavid)"
+        },
+        {
+          "text": "Fixed: on mobile toast message is duplicated after first open"
+        },
+        {
+          "text": "Fixed: page title is not correct when navigate by link"
+        },
+        {
+          "text": "Fixed: username is not set for a short time when first load  with already logged in user"
+        },
+        {
+          "text": "Fixed: \"Unlock\" goal type is missing when editing goal"
+        },
+        {
+          "text": "Fixed: \"undefined\" tooltip on empty cell in selected teams on LRE page"
+        }
+      ]
+    }
+  ]
+}

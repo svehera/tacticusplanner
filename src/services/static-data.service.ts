@@ -3,17 +3,20 @@
 import unitsData from '../assets/UnitData.json';
 import dirtyDozen from '../assets/DirtyDozen.json';
 
+import whatsNew from '../assets/WhatsNew.json';
+
 import shadowsun from '../assets/legendary-events/Shadowsun.json';
 import aunshi from '../assets/legendary-events/Aunshi.json';
 import ragnar from '../assets/legendary-events/Ragnar.json';
 
-import { ICharLegendaryEvents, IDirtyDozenChar, IUnitData, UnitDataRaw } from '../models/interfaces';
+import { ICharLegendaryEvents, IDirtyDozenChar, IUnitData, IWhatsNew, UnitDataRaw } from '../models/interfaces';
 import { Faction } from '../models/enums';
 import { rarityStringToNumber, rarityToStars } from '../models/constants';
 
 export class StaticDataService {
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
     static readonly dirtyDozenData: IDirtyDozenChar[] = dirtyDozen;
+    static readonly whatsNew: IWhatsNew = whatsNew;
 
     static readonly legendaryEvents = [
         {

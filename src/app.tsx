@@ -2,10 +2,10 @@
 import { Outlet } from 'react-router-dom';
 import { StoreProvider } from './reducers/store.provider';
 
-const appVersion = '1.0.0';
+import { StaticDataService } from './services';
 
 export const App = () => {
-    localStorage.setItem('appVersion', appVersion);
+    localStorage.setItem('appVersion', StaticDataService.whatsNew.currentVersion);
 
     return (
         <React.Fragment>

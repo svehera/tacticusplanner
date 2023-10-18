@@ -45,7 +45,7 @@ export default function DataTablesDialog({
     return (
         <div>
             <Button variant="contained" onClick={handleClickOpen}>
-                Open Data Tables
+                Data Tables
             </Button>
             <Dialog fullScreen open={open} onClose={handleClose}>
                 <AppBar sx={{ position: 'relative' }}>
