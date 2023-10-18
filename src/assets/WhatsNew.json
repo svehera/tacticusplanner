@@ -49,6 +49,9 @@
       ],
       "minor": [
         {
+          "text": "Removed \"Unlocked\" checkbox on characters details. Whether character is unlocked now is determined by the Rank value."
+        },
+        {
           "text": "Added timestamp of last modified date to the file name when exporting data"
         },
         {
