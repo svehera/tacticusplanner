@@ -1,18 +1,40 @@
-﻿import React from 'react';
+﻿import React, { useContext, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Badge, Tooltip } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
 import ViewSwitch from '../../shared-components/view-switch';
 import { UserMenu } from '../../shared-components/user-menu/user-menu';
 import { Thanks } from '../../shared-components/thanks';
 import { discordInvitationLink } from '../../models/constants';
+import CampaignIcon from '@mui/icons-material/Campaign';
+import { StoreContext } from '../../reducers/store.provider';
+import { WhatsNewDialog } from '../../shared-components/whats-new.dialog';
+import IconButton from '@mui/material/IconButton';
 
 export const Home = () => {
+    const { seenAppVersion } = useContext(StoreContext);
+
+    const [showWhatsNew, setShowWhatsNew] = useState(false);
+
+    const hasNewVersion = useMemo(() => {
+        const currentAppVersion = localStorage.getItem('appVersion');
+        return currentAppVersion === seenAppVersion;
+    }, [seenAppVersion]);
+
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <ViewSwitch />
+                <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                    <ViewSwitch />
+                    <Tooltip title="What's new">
+                        <IconButton onClick={() => setShowWhatsNew(true)}>
+                            <Badge color="secondary" variant="dot" invisible={hasNewVersion}>
+                                <CampaignIcon />
+                            </Badge>
+                        </IconButton>
+                    </Tooltip>
+                </div>
                 <UserMenu />
             </div>
 
@@ -158,6 +180,7 @@ export const Home = () => {
                     </AccordionDetails>
                 </Accordion>
             </div>
+            <WhatsNewDialog isOpen={showWhatsNew} onClose={() => setShowWhatsNew(false)} />
         </div>
     );
 };
