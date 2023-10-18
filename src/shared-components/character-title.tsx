@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { ICharacter2 } from '../models/interfaces';
-import { CharacterBias } from '../models/enums';
+import { CharacterBias, Rank } from '../models/enums';
 import { pooEmoji, starEmoji } from '../models/constants';
 import { RarityImage } from './rarity-image';
 import { RankImage } from './rank-image';
@@ -26,7 +26,7 @@ export const CharacterTitle = ({
             : character.bias === CharacterBias.NeverRecommend
             ? pooEmoji
             : '';
-    const opacity = showLockedWithOpacity ? (character.unlocked ? 1 : 0.5) : 1;
+    const opacity = showLockedWithOpacity ? (character.rank > Rank.Locked ? 1 : 0.5) : 1;
     const cursor = onClick ? 'pointer' : undefined;
 
     const characterFull = (
@@ -34,7 +34,7 @@ export const CharacterTitle = ({
             <CharacterImage key={character.name} icon={character.icon} name={character.name} imageSize={imageSize} />
             <span>{character.name}</span>
             <RarityImage rarity={character.rarity} />
-            {character.unlocked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
+            {character.rank > Rank.Locked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
             <Tooltip
                 content={
                     character.bias === CharacterBias.AlwaysRecommend

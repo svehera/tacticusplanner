@@ -327,7 +327,6 @@ export interface IPersonalCharacterData {
 
 export interface IPersonalCharacterData2 {
     name: string;
-    unlocked: boolean;
     rank: Rank;
     rarity: Rarity;
     bias: CharacterBias;

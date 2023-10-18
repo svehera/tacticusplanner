@@ -12,6 +12,7 @@
     LegendaryEventData,
 } from '../models/interfaces';
 import { defaultData } from '../models/constants';
+import { Rank } from '../models/enums';
 
 export class PersonalDataLocalStorage {
     private readonly v1personalDataStorageKey = 'personalData';
@@ -104,7 +105,13 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             modifiedDate: v1Data.modifiedDate ? new Date(v1Data.modifiedDate) : defaultData.modifiedDate,
             autoTeamsPreferences: v1Data.autoTeamsPreferences ?? defaultData.autoTeamsPreferences,
             viewPreferences: v1Data.viewPreferences ?? defaultData.viewPreferences,
-            characters: v1Data.characters ?? defaultData.characters,
+            characters:
+                v1Data.characters.map(x => ({
+                    name: x.name,
+                    rarity: x.rarity,
+                    bias: x.bias,
+                    rank: x.unlocked ? x.rank : Rank.Locked,
+                })) ?? defaultData.characters,
             goals: v1Data.goals ?? defaultData.goals,
             selectedTeamOrder: v1Data.selectedTeamOrder ?? defaultData.selectedTeamOrder,
             leTeams: v1Data.legendaryEvents3 ?? defaultData.leTeams,

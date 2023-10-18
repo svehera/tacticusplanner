@@ -22,7 +22,6 @@ import { fitGridOnWindowResize, rankToString } from '../../shared-logic/function
 import { sum, uniq } from 'lodash';
 import { CharactersSelection, ITableRow } from './legendary-events.interfaces';
 import { StoreContext } from '../../reducers/store.provider';
-import { rarityStringToNumber } from '../../models/constants';
 
 const PointsTable = (props: {
     legendaryEvent: ILegendaryEvent;
@@ -294,7 +293,7 @@ const PointsTable = (props: {
             selection === 'all'
                 ? legendaryEvent.allowedUnits
                 : selection === 'unlocked'
-                ? legendaryEvent.allowedUnits.filter(x => x.unlocked)
+                ? legendaryEvent.allowedUnits.filter(x => x.rank > Rank.Locked)
                 : [];
 
         return chars

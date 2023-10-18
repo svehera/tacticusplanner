@@ -35,7 +35,7 @@ export const CharacterItem = (props: { character: ICharacter2 }) => {
                 <DialogTitle>
                     <CharacterTitle character={character} />
                 </DialogTitle>
-                <DialogContent>
+                <DialogContent style={{ paddingTop: 20 }}>
                     <CharacterDetails character={character} characterChanges={setCharacter} />
                 </DialogContent>
                 <DialogActions>

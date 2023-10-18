@@ -92,23 +92,23 @@ export const defaultData: IPersonalData2 = {
     characters: [
         {
             name: 'Varro Tigurius',
-            unlocked: true,
+            rank: Rank.Stone1,
         },
         {
             name: 'Certus',
-            unlocked: true,
+            rank: Rank.Stone1,
         },
         {
             name: 'Bellator',
-            unlocked: true,
+            rank: Rank.Stone1,
         },
         {
             name: 'Incisus',
-            unlocked: true,
+            rank: Rank.Stone1,
         },
         {
             name: 'Vindicta',
-            unlocked: true,
+            rank: Rank.Stone1,
         },
     ],
     goals: [

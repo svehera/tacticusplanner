@@ -7,8 +7,8 @@
     ISelectedTeamsOrdering,
     LegendaryEventSection,
 } from '../interfaces';
-import { intersectionBy, orderBy, sum, uniq, uniqBy } from 'lodash';
-import { CharacterBias, LegendaryEventEnum } from '../enums';
+import { intersectionBy, orderBy, sum, uniqBy } from 'lodash';
+import { CharacterBias, LegendaryEventEnum, Rank } from '../enums';
 
 export class LETrack implements ILegendaryEventTrack {
     name: string;
@@ -75,7 +75,7 @@ export class LETrack implements ILegendaryEventTrack {
             );
 
             const ordered = orderBy(uniqChars, [settings.orderBy], [settings.direction]).filter(x =>
-                onlyUnlocked ? x.unlocked : true
+                onlyUnlocked ? x.rank > Rank.Locked : true
             );
 
             for (let i = 0; i < ordered.length; i++) {
@@ -106,7 +106,7 @@ export class LETrack implements ILegendaryEventTrack {
             );
         }
         const sortChars = allowedChars
-            .filter(x => (onlyUnlocked ? x.unlocked : true))
+            .filter(x => (onlyUnlocked ? x.rank > Rank.Locked : true))
             .map(unit => ({
                 name: unit.name,
                 rank: +unit.rank,
@@ -154,7 +154,7 @@ export class LETrack implements ILegendaryEventTrack {
             );
         } else {
             return orderBy(
-                allowedChars.filter(x => (onlyUnlocked ? x.unlocked : true)),
+                allowedChars.filter(x => (onlyUnlocked ? x.rank > Rank.Locked : true)),
                 [settings.orderBy],
                 [settings.direction]
             );

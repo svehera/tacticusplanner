@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
 import { ICharacter, ICharacter2 } from '../../models/interfaces';
-import { Checkbox, FormControl, FormControlLabel, FormGroup, MenuItem, Select } from '@mui/material';
+import { FormControl, FormGroup, MenuItem, Select } from '@mui/material';
 import { CharacterBias, Rank, Rarity } from '../../models/enums';
 import InputLabel from '@mui/material/InputLabel';
 import { getEnumValues, rankToString } from '../../shared-logic/functions';
@@ -14,7 +14,6 @@ export const CharacterDetails = ({
     characterChanges: (character: ICharacter2) => void;
 }) => {
     const [formData, setFormData] = useState({
-        unlocked: character.unlocked,
         rank: character.rank,
         rarity: character.rarity,
         bias: character.bias,
@@ -56,19 +55,8 @@ export const CharacterDetails = ({
 
     return (
         <FormGroup style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={formData.unlocked}
-                        onChange={event => handleInputChange('unlocked', event.target.checked)}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                }
-                label="Unlocked"
-            />
-
-            {getNativeSelectControl(formData.rarity, 'rarity', rarityEntries, value => Rarity[value])}
             {getNativeSelectControl(formData.rank, 'rank', rankEntries, rankToString, true)}
+            {getNativeSelectControl(formData.rarity, 'rarity', rarityEntries, value => Rarity[value])}
             {getNativeSelectControl(formData.bias, 'bias', biasEntries, value => CharacterBias[value])}
         </FormGroup>
     );

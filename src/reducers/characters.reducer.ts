@@ -17,7 +17,6 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
             const existingChar = state.find(char => char.name === updatedCharacter.name);
 
             if (existingChar) {
-                existingChar.unlocked = updatedCharacter.unlocked;
                 existingChar.rank = updatedCharacter.rank;
                 existingChar.rarity = updatedCharacter.rarity;
                 existingChar.bias = updatedCharacter.bias;

@@ -50,7 +50,6 @@ export class GlobalState implements IGlobalState {
             const personalCharData = personalData.characters.find(c => c.name === staticData.name);
             const combinedData: IPersonalCharacterData2 = {
                 name: staticData.name,
-                unlocked: personalCharData?.unlocked ?? false,
                 rank: personalCharData?.rank ?? Rank.Locked,
                 rarity: personalCharData?.rarity ?? staticData.initialRarity,
                 bias: personalCharData?.bias ?? CharacterBias.None,
@@ -65,14 +64,8 @@ export class GlobalState implements IGlobalState {
 
     static toStore(value: IGlobalState): IPersonalData2 {
         const charactersToStore: IPersonalCharacterData2[] = value.characters
-            .filter(
-                x =>
-                    x.unlocked ||
-                    x.bias !== CharacterBias.None ||
-                    x.rank !== Rank.Locked ||
-                    x.rarity !== x.initialRarity
-            )
-            .map(x => ({ name: x.name, unlocked: x.unlocked, rank: x.rank, rarity: x.rarity, bias: x.bias }));
+            .filter(x => x.bias !== CharacterBias.None || x.rank !== Rank.Locked || x.rarity !== x.initialRarity)
+            .map(x => ({ name: x.name, rank: x.rank, rarity: x.rarity, bias: x.bias }));
 
         return {
             schemaVersion: 2,
