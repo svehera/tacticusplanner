@@ -11,6 +11,7 @@ import CampaignIcon from '@mui/icons-material/Campaign';
 import { StoreContext } from '../../reducers/store.provider';
 import { WhatsNewDialog } from '../../shared-components/whats-new.dialog';
 import IconButton from '@mui/material/IconButton';
+import { DiscordIcon } from '../../shared-components/icons/discord.icon';
 
 export const Home = () => {
     const { seenAppVersion } = useContext(StoreContext);
@@ -32,6 +33,12 @@ export const Home = () => {
                             <Badge color="secondary" variant="dot" invisible={hasNewVersion}>
                                 <CampaignIcon />
                             </Badge>
+                        </IconButton>
+                    </Tooltip>
+
+                    <Tooltip title="Join Tacticus Planner community on Discord">
+                        <IconButton component={Link} to={discordInvitationLink} target={'_blank'}>
+                            <DiscordIcon />
                         </IconButton>
                     </Tooltip>
                 </div>
