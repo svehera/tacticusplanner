@@ -69,6 +69,20 @@ export class PersonalDataLocalStorage {
         return result;
     }
 
+    restoreData(): IPersonalData2 | null {
+        const v1StoredData = localStorage.getItem(this.v1personalDataStorageKey);
+        if (!v1StoredData) {
+            return null;
+        } else {
+            try {
+                const v1Data: IPersonalData | IPersonalData2 = JSON.parse(v1StoredData);
+                return convertData(v1Data);
+            } catch {
+                return null;
+            }
+        }
+    }
+
     setData(data: Partial<IPersonalData2>): void {
         for (const dataKey in data) {
             const storeKey = this.storeKeys.find(x => x === dataKey);

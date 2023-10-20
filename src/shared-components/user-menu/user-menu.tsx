@@ -4,7 +4,7 @@ import { Avatar, Divider, IconButton, Menu, MenuItem } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import RegisterIcon from '@mui/icons-material/PersonAdd';
 import UploadIcon from '@mui/icons-material/Upload';
-import { convertData } from '../../services';
+import { convertData, PersonalDataLocalStorage } from '../../services';
 import DownloadIcon from '@mui/icons-material/Download';
 import { usePopUpControls } from '../../hooks/pop-up-controls';
 import { RegisterUserDialog } from './register-user-dialog';
@@ -60,6 +60,17 @@ export const UserMenu = () => {
         link.click();
 
         URL.revokeObjectURL(url);
+    };
+
+    const restoreData = () => {
+        const localStorage = new PersonalDataLocalStorage();
+        const restoredData = localStorage.restoreData();
+        if (!restoredData) {
+            enqueueSnackbar('No Backup Found', { variant: 'error' });
+            return;
+        }
+        setStore(new GlobalState(restoredData), true);
+        enqueueSnackbar('Data restored', { variant: 'success' });
     };
 
     function stringToColor(string: string) {
@@ -143,6 +154,8 @@ export const UserMenu = () => {
                 <MenuItem onClick={() => downloadJson()}>
                     <DownloadIcon /> Export
                 </MenuItem>
+                <Divider />
+                <MenuItem onClick={() => restoreData()}>Restore Data</MenuItem>
             </Menu>
             <RegisterUserDialog
                 isOpen={showRegisterUser}
