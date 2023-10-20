@@ -103,8 +103,14 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
         return {
             schemaVersion: 2,
             modifiedDate: v1Data.modifiedDate ? new Date(v1Data.modifiedDate) : defaultData.modifiedDate,
-            autoTeamsPreferences: v1Data.autoTeamsPreferences ?? defaultData.autoTeamsPreferences,
-            viewPreferences: v1Data.viewPreferences ?? defaultData.viewPreferences,
+            autoTeamsPreferences: {
+                ...defaultData.autoTeamsPreferences,
+                ...(v1Data.autoTeamsPreferences ?? {}),
+            },
+            viewPreferences: {
+                ...defaultData.viewPreferences,
+                ...(v1Data.viewPreferences ?? {}),
+            },
             characters:
                 v1Data.characters.map(x => ({
                     name: x.name,
