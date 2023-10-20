@@ -1,4 +1,4 @@
-﻿import React, { UIEvent, useContext, useMemo } from 'react';
+﻿import React, { useContext, useEffect, useMemo } from 'react';
 import { Popover } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 
@@ -8,13 +8,21 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Help } from '@mui/icons-material';
 import { StoreContext } from '../../reducers/store.provider';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 export const LegendaryEventPage = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
     const { autoTeamsPreferences, viewPreferences } = useContext(StoreContext);
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
+
+    useEffect(() => {
+        if (location.pathname.endsWith('le') || location.pathname.endsWith('le/')) {
+            navigate('/le/ragnar');
+        }
+    }, [location.pathname]);
 
     const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl2(event.currentTarget);
