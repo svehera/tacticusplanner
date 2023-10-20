@@ -1,6 +1,21 @@
 ﻿{
-  "currentVersion": "1.0.0",
+  "currentVersion": "1.0.1",
   "releaseNotes": [
+    {
+      "version": "1.0.1",
+      "date": "October 20",
+      "type": "Patch",
+      "new": [],
+      "minor": [],
+      "bugFixes": [
+        {
+          "text": "Fixed data display after sync with server"
+        },
+        {
+          "text": "Added \"Restore data\" option to user menu. If you've experienced data loss try to use this option. Apologies for any inconvenience."
+        }
+      ]
+    },
     {
       "version": "1.0.0",
       "date": "October 20",
