@@ -13,6 +13,9 @@
         },
         {
           "text": "Added \"Restore data\" option to user menu. If you've experienced data loss try to use this option. Apologies for any inconvenience."
+        },
+        {
+          "text": "Added missing \"Only unlocked\" option on the mobile legendary events"
         }
       ]
     },

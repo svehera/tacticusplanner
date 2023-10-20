@@ -14,6 +14,7 @@ import { LegendaryEventEnum } from '../../models/enums';
 import Typography from '@mui/material/Typography';
 import { StaticDataService } from '../../services';
 import { CharacterImage } from '../../shared-components/character-image';
+import ViewSettings from '../../routes/legendary-events/view-settings';
 
 export const LegendaryEvents = ({ id }: { id: LegendaryEventEnum }) => {
     const { characters, goals } = useContext(StoreContext);
@@ -39,6 +40,7 @@ export const LegendaryEvents = ({ id }: { id: LegendaryEventEnum }) => {
                 {legendaryEventStatic?.name} {legendaryEventStatic?.stage}/3 ({legendaryEventStatic?.nextEventDate})
             </Typography>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, margin: '10px 0' }}>
+                <ViewSettings onlyUnlocked />
                 <Button variant="outlined" onClick={handleClick}>
                     Auto-Teams <SettingsIcon />
                 </Button>

@@ -26,7 +26,7 @@ export const LegendaryEventTrack = (props: { track: ILegendaryEventTrack; eventI
 
     useEffect(() => {
         setCharacters(props.track.suggestTeam(autoTeamsPreferences, viewPreferences.onlyUnlocked, restrictions));
-    }, [restrictions, autoTeamsPreferences]);
+    }, [restrictions, autoTeamsPreferences, viewPreferences.onlyUnlocked]);
 
     return (
         <div>

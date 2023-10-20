@@ -1,15 +1,30 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import React, { useContext } from 'react';
 import { Checkbox, Divider, FormControlLabel, FormGroup } from '@mui/material';
 import { IViewPreferences } from '../../models/interfaces';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 
-const ViewSettings = () => {
+const ViewSettings = ({ onlyUnlocked }: { onlyUnlocked?: boolean }) => {
     const dispatch = useContext(DispatchContext);
     const { viewPreferences } = useContext(StoreContext);
 
     const updatePreferences = (setting: keyof IViewPreferences, value: boolean) => {
         dispatch.viewPreferences({ type: 'Update', setting, value });
     };
+
+    if (onlyUnlocked) {
+        return (
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={viewPreferences.onlyUnlocked}
+                        onChange={event => updatePreferences('onlyUnlocked', event.target.checked)}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+                label="Only unlocked"
+            />
+        );
+    }
 
     return (
         <FormGroup style={{ display: 'flex', flexDirection: 'row' }}>
