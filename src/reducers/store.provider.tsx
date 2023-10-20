@@ -173,7 +173,9 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     );
 
                     if (!isDataEqual) {
-                        dispatch.setStore(new GlobalState(serverData), false);
+                        const newState = new GlobalState(serverData);
+                        dispatch.setStore(newState, false);
+                        localStore.setData(GlobalState.toStore(newState));
                         enqueueSnackbar('Synced with latest server data.', { variant: 'info' });
                     }
 

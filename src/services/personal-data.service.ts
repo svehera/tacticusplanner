@@ -102,7 +102,11 @@ export class PersonalDataLocalStorage {
             return null;
         }
 
-        return JSON.parse(value);
+        try {
+            return JSON.parse(value);
+        } catch {
+            return null;
+        }
     }
 
     private setItem<T>(key: keyof IPersonalData2, item: T): void {
@@ -144,5 +148,6 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
 };
 
 export const isV1Data = (data: IPersonalData | IPersonalData2): data is IPersonalData => {
-    return !Object.hasOwn(data, 'version');
+    const versionKey: keyof IPersonalData2 = 'schemaVersion';
+    return !Object.hasOwn(data, versionKey);
 };
