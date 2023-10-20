@@ -3,14 +3,47 @@
 import unitsData from '../assets/UnitData.json';
 import dirtyDozen from '../assets/DirtyDozen.json';
 
-import { ICharLegendaryEvents, IDirtyDozenChar, IUnitData, UnitDataRaw } from '../models/interfaces';
+import whatsNew from '../assets/WhatsNew.json';
+
+import shadowsun from '../assets/legendary-events/Shadowsun.json';
+import aunshi from '../assets/legendary-events/Aunshi.json';
+import ragnar from '../assets/legendary-events/Ragnar.json';
+
+import { ICharLegendaryEvents, IDirtyDozenChar, IUnitData, IWhatsNew, UnitDataRaw } from '../models/interfaces';
 import { Faction } from '../models/enums';
 import { rarityStringToNumber, rarityToStars } from '../models/constants';
 
 export class StaticDataService {
-
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
     static readonly dirtyDozenData: IDirtyDozenChar[] = dirtyDozen;
+    static readonly whatsNew: IWhatsNew = whatsNew;
+
+    static readonly legendaryEvents = [
+        {
+            id: shadowsun.id,
+            name: shadowsun.name,
+            stage: shadowsun.eventStage,
+            nextEventDate: shadowsun.nextEventDate,
+            mobileRoute: '/mobile/le/shadowsun',
+            icon: 'ShadowSun.png',
+        },
+        {
+            id: aunshi.id,
+            name: aunshi.name,
+            stage: aunshi.eventStage,
+            nextEventDate: aunshi.nextEventDate,
+            mobileRoute: '/mobile/le/aunshi',
+            icon: 'Aun-shi.png',
+        },
+        {
+            id: ragnar.id,
+            name: ragnar.name,
+            stage: ragnar.eventStage,
+            nextEventDate: ragnar.nextEventDate,
+            mobileRoute: '/mobile/le/ragnar',
+            icon: 'unset.png',
+        },
+    ];
 
     static convertUnitData(rawData: UnitDataRaw): IUnitData {
         const unitData: IUnitData = {
@@ -22,7 +55,7 @@ export class StaticDataService {
             health: rawData.Health,
             damage: rawData.Damage,
             armour: rawData.Armour,
-            rarity: rarityStringToNumber[rawData['Initial rarity']],
+            initialRarity: rarityStringToNumber[rawData['Initial rarity']],
             rarityStars: rarityToStars[rarityStringToNumber[rawData['Initial rarity']]],
             equipment1: rawData.Equipment1,
             equipment2: rawData.Equipment2,
@@ -39,7 +72,7 @@ export class StaticDataService {
             damageTypes: {
                 all: [rawData['Melee Damage']],
                 melee: rawData['Melee Damage'],
-            }
+            },
         };
 
         if (rawData['Ranged Damage']) {
@@ -61,36 +94,36 @@ export class StaticDataService {
 
     static getFactionColor(faction: Faction): string {
         switch (faction) {
-        case Faction.Ultramarines:
-            return '#C9DAF8';
-        case Faction.Black_Legion:
-            return '#DD7E6B';
-        case Faction.Orks:
-            return '#FFE599';
-        case Faction.ADEPTA_SORORITAS:
-            return '#F4CCCC';
-        case Faction.Necrons:
-            return '#B6D7A8';
-        case Faction.Astra_militarum:
-            return '#D9EAD3';
-        case Faction.Death_Guard:
-            return '#93C47D';
-        case Faction.Black_Templars:
-            return '#D9D9D9';
-        case Faction.Aeldari:
-            return '#A2C4C9';
-        case Faction.Space_Wolves:
-            return '#A4C2F4';
-        case Faction.T_Au:
-            return '#FCE5CD';
-        case Faction.Dark_Angels:
-            return '#93C47D';
-        case Faction.Thousand_Sons:
-            return '#A4C2F4';
-        case Faction.Tyranids:
-            return 'violet';
-        default:
-            return '#ffffff';
+            case Faction.Ultramarines:
+                return '#C9DAF8';
+            case Faction.Black_Legion:
+                return '#DD7E6B';
+            case Faction.Orks:
+                return '#FFE599';
+            case Faction.ADEPTA_SORORITAS:
+                return '#F4CCCC';
+            case Faction.Necrons:
+                return '#B6D7A8';
+            case Faction.Astra_militarum:
+                return '#D9EAD3';
+            case Faction.Death_Guard:
+                return '#93C47D';
+            case Faction.Black_Templars:
+                return '#D9D9D9';
+            case Faction.Aeldari:
+                return '#A2C4C9';
+            case Faction.Space_Wolves:
+                return '#A4C2F4';
+            case Faction.T_Au:
+                return '#FCE5CD';
+            case Faction.Dark_Angels:
+                return '#93C47D';
+            case Faction.Thousand_Sons:
+                return '#A4C2F4';
+            case Faction.Tyranids:
+                return 'violet';
+            default:
+                return '#ffffff';
         }
     }
 }

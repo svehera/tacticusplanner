@@ -1,34 +1,50 @@
 ﻿import * as React from 'react';
-import {
-    MenuList,
-    MenuItem,
-    Menu,
-    MenuPopover,
-    MenuTrigger, 
-} from '@fluentui/react-components';
 import { useNavigate } from 'react-router-dom';
+import { Collapse, List, ListItemButton } from '@mui/material';
+import ListItemText from '@mui/material/ListItemText';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
-export const AppBarSubMenu = ({ setTitle }: {setTitle: (value: string) => void}) => {
+export const AppBarSubMenu = ({
+    rootLabel,
+    options,
+}: {
+    rootLabel: string;
+    options: Array<{ label: string; route: string }>;
+}) => {
     const navigate = useNavigate();
+    const [open, setOpen] = React.useState(false);
+
+    const handleClick = () => {
+        setOpen(!open);
+    };
     return (
-        <MenuList style={{ width: 70 }}>
-            <Menu>
-                <MenuTrigger disableButtonEnhancement>
-                    <MenuItem style={{ background: '#1976d2', color: 'white', font: 'Roboto', fontWeight: 500, padding: 5 }}>TABLES</MenuItem>
-                </MenuTrigger>
-                <MenuPopover>
-                    <MenuList >
-                        <MenuItem onClick={() => {
-                            navigate('./characters');
-                            setTitle('Characters');
-                        }}>Characters</MenuItem>
-                        <MenuItem onClick={() => {
-                            navigate('./dirtyDozen');
-                            setTitle('Dirty Dozen');
-                        }}>Dirty Dozen</MenuItem>
-                    </MenuList>
-                </MenuPopover>
-            </Menu>
-        </MenuList>
+        <List
+            sx={{ width: 130, maxWidth: 360 }}
+            component="nav"
+            onMouseEnter={() => setOpen(true)}
+            onMouseLeave={() => setOpen(false)}>
+            <ListItemButton onClick={handleClick}>
+                <ListItemText primary={rootLabel} style={{ fontWeight: 500 }} />
+                {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse
+                in={open}
+                timeout="auto"
+                unmountOnExit
+                sx={{ width: 130, position: 'absolute', zIndex: 1000, backgroundColor: '#1976d2' }}>
+                <List component="div" disablePadding>
+                    {options.map(option => (
+                        <ListItemButton
+                            key={option.label}
+                            onClick={() => {
+                                setOpen(false);
+                                navigate(option.route);
+                            }}>
+                            <ListItemText primary={option.label} />
+                        </ListItemButton>
+                    ))}
+                </List>
+            </Collapse>
+        </List>
     );
 };

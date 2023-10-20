@@ -1,34 +1,17 @@
-import React, { useEffect } from 'react';
-import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
+﻿import React from 'react';
+import { Outlet } from 'react-router-dom';
+import { StoreProvider } from './reducers/store.provider';
 
-import TopAppBar from './app-bar';
-import { isMobile } from 'react-device-detect';
-import { getUserData } from './hooks/get-user-data';
+import { StaticDataService } from './services';
 
-const App = () => {
-    const navigate = useNavigate();
-    const [searchParams] = useSearchParams();
-    const preferredView = localStorage.getItem('preferredView');
+export const App = () => {
+    localStorage.setItem('appVersion', StaticDataService.whatsNew.currentVersion);
 
-    useEffect(() => {
-        if (isMobile && (!preferredView || preferredView === 'mobile')) {
-            navigate('/mobile');
-        }
-        const redirect = searchParams.get('redirect');
-        if(redirect) {
-            navigate(redirect);
-        }
-    }, []);
-
-    getUserData();
-    
     return (
-        <div style={{ width: '100%', height: '100%' }}>
-            <TopAppBar></TopAppBar>
-            <Outlet/>
-        </div>
+        <React.Fragment>
+            <StoreProvider>
+                <Outlet />
+            </StoreProvider>
+        </React.Fragment>
     );
-
 };
-
-export default App;

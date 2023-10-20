@@ -1,4 +1,4 @@
-﻿import { ICharacter, ILegendaryEventTrack } from '../interfaces';
+﻿import { ICharacter2, ILegendaryEventTrack } from '../interfaces';
 import { Alliance, DamageType, Faction, Trait } from '../enums';
 import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
@@ -7,12 +7,11 @@ import { LETrack } from './base.le.track';
 import staticData from '../../assets/legendary-events/Shadowsun.json';
 
 export class ShadowSunLegendaryEvent extends LegendaryEventBase {
-
-    constructor(unitsData: Array<ICharacter>) {
+    constructor(unitsData: Array<ICharacter2>) {
         super(unitsData, staticData);
     }
 
-    protected getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getAlphaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
         const noNecrons = filter(unitsData).byFaction(Faction.Necrons, true);
         return new LETrack(
             this.id,
@@ -28,13 +27,13 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                     name: 'No Psykers',
                     points: 40,
                     units: filter(noNecrons).byTrait(Trait.Psyker, true),
-                    selected: true
+                    selected: true,
                 },
                 {
                     name: 'Min 4 hits',
                     points: 80,
                     units: filter(noNecrons).byMinHits(4),
-                    selected: true
+                    selected: true,
                 },
                 {
                     name: 'Power',
@@ -45,14 +44,14 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                     name: 'No Range',
                     points: 60,
                     units: filter(noNecrons).byAttackType('meleeOnly'),
-                    selected: true
+                    selected: true,
                 },
             ],
             staticData.alpha
         );
     }
 
-    protected getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getBetaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
         const noTyranids = filter(unitsData).byFaction(Faction.Tyranids, true);
         return new LETrack(
             this.id,
@@ -73,26 +72,26 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                     name: 'No Bolter',
                     points: 50,
                     units: filter(noTyranids).byDamageType(DamageType.Bolter, true),
-                    selected: true
+                    selected: true,
                 },
                 {
                     name: 'No Piercing',
                     points: 50,
-                    units:  filter(noTyranids).byDamageType(DamageType.Piercing, true),
-                    selected: true
+                    units: filter(noTyranids).byDamageType(DamageType.Piercing, true),
+                    selected: true,
                 },
                 {
                     name: 'No Summons',
                     points: 65,
                     units: filter(noTyranids).byNoSummons(),
-                    selected: true
+                    selected: true,
                 },
             ],
             staticData.beta
         );
     }
 
-    protected getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack {
+    protected getGammaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
         const noImperials = filter(unitsData).byAlliance(Alliance.Imperial, true);
         return new LETrack(
             this.id,
@@ -103,33 +102,32 @@ export class ShadowSunLegendaryEvent extends LegendaryEventBase {
                     name: 'No Piercing',
                     points: 40,
                     units: filter(noImperials).byDamageType(DamageType.Piercing, true),
-                    selected: true
+                    selected: true,
                 },
                 {
                     name: 'Ranged',
                     points: 65,
                     units: filter(noImperials).byAttackType('rangeOnly'),
-                    selected: true
+                    selected: true,
                 },
                 {
                     name: 'Min 3 hits',
                     points: 50,
                     units: filter(noImperials).byMinHits(3),
-                    selected: true
+                    selected: true,
                 },
                 {
                     name: 'Power',
                     points: 100,
-                    units:  filter(noImperials).byDamageType(DamageType.Power),
+                    units: filter(noImperials).byDamageType(DamageType.Power),
                 },
                 {
                     name: 'Black Legion',
                     points: 120,
-                    units:  filter(noImperials).byFaction(Faction.Black_Legion),
+                    units: filter(noImperials).byFaction(Faction.Black_Legion),
                 },
             ],
             staticData.gamma
         );
     }
-
 }

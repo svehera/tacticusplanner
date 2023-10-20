@@ -1,10 +1,8 @@
 ﻿import React from 'react';
 
-import {
-    RouteObject,
-} from 'react-router-dom';
+import { RouteObject } from 'react-router-dom';
 
-import App from '../app';
+import DesktopApp from '../desktop-app';
 import { About } from './root/about';
 import { WhoYouOwn } from './who-you-own/who-you-own';
 import { Characters } from './characters/characters';
@@ -13,44 +11,60 @@ import { LegendaryEventPage } from './legendary-events/legendary-events-page';
 import { Contacts } from './contacts/contacts';
 import { Goals } from './goals/goals';
 import { Thanks } from '../shared-components/thanks';
+import LegendaryEvent from './legendary-events/legendary-event';
+import { LegendaryEventEnum } from '../models/enums';
 
-export const appRoutes : () => RouteObject[] = () => [
+export const appRoutes: () => RouteObject[] = () => [
     {
         path: '',
-        element: <App/>,
+        element: <DesktopApp />,
         children: [
             {
                 path: '/',
-                element: <About/>,
+                element: <About />,
             },
             {
                 path: 'wyo',
-                element: <WhoYouOwn/>,
+                element: <WhoYouOwn />,
             },
             {
                 path: 'characters',
-                element: <Characters/>,
+                element: <Characters />,
             },
             {
                 path: 'dirtyDozen',
-                element: <DirtyDozen/>,
+                element: <DirtyDozen />,
             },
             {
                 path: 'le',
-                element: <LegendaryEventPage/>,
+                element: <LegendaryEventPage />,
+                children: [
+                    {
+                        path: 'shadowsun',
+                        element: <LegendaryEvent id={LegendaryEventEnum.Shadowsun} />,
+                    },
+                    {
+                        path: 'aunshi',
+                        element: <LegendaryEvent id={LegendaryEventEnum.AunShi} />,
+                    },
+                    {
+                        path: 'Ragnar',
+                        element: <LegendaryEvent id={LegendaryEventEnum.Ragnar} />,
+                    },
+                ],
             },
             {
                 path: 'goals',
-                element: <Goals/>,
+                element: <Goals />,
             },
             {
                 path: 'contacts',
-                element: <Contacts/>,
+                element: <Contacts />,
             },
             {
                 path: 'ty',
-                element: <Thanks/>,
-            }
+                element: <Thanks />,
+            },
         ],
     },
 ];

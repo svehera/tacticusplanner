@@ -18,12 +18,8 @@
         "react"
     ],
     "rules": {
-        "indent": [
-            "error",
-            4
-        ],
         "quotes": [
-            "error",
+            "warn",
             "single"
         ],
         "semi": [

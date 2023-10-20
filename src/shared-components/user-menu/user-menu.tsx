@@ -1,20 +1,23 @@
-﻿import React, { ChangeEvent, useRef, useState } from 'react';
+﻿import React, { ChangeEvent, useContext, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
 import { Avatar, Divider, IconButton, Menu, MenuItem } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import RegisterIcon from '@mui/icons-material/PersonAdd';
 import UploadIcon from '@mui/icons-material/Upload';
-import { GlobalService, PersonalDataService } from '../../services';
+import { convertData } from '../../services';
 import DownloadIcon from '@mui/icons-material/Download';
 import { usePopUpControls } from '../../hooks/pop-up-controls';
 import { RegisterUserDialog } from './register-user-dialog';
 import { LoginUserDialog } from './login-user-dialog';
 import { useAuth } from '../../contexts/auth';
-import { setUserDataApi } from '../../api/api-functions';
 import { enqueueSnackbar } from 'notistack';
-import { AxiosError } from 'axios';
+import { DispatchContext, StoreContext } from '../../reducers/store.provider';
+import { IPersonalData2 } from '../../models/interfaces';
+import { GlobalState } from '../../models/global-state';
 
 export const UserMenu = () => {
+    const store = useContext(StoreContext);
+    const { setStore } = useContext(DispatchContext);
     const inputRef = useRef<HTMLInputElement>(null);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
@@ -31,25 +34,10 @@ export const UserMenu = () => {
             reader.onload = (e: ProgressEvent<FileReader>) => {
                 try {
                     const content = e.target?.result as string;
-                    const personalData = JSON.parse(content);
-                    PersonalDataService._data.next(personalData);
-                    PersonalDataService.save(new Date(), false);
-                    GlobalService.init();
-                    
+                    const personalData: IPersonalData2 = convertData(JSON.parse(content));
+
+                    setStore(new GlobalState(personalData), true);
                     enqueueSnackbar('Import successful', { variant: 'success' });
-                    
-                    if(isAuthenticated) {
-                        setUserDataApi(personalData)
-                            .then(() => enqueueSnackbar('Synced local data with server.', { variant: 'info' }))
-                            .catch((err: AxiosError) => {
-                                if (err.response?.status === 401) {
-                                    logout();
-                                    enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
-                                } else {
-                                    enqueueSnackbar('Failed to push data to server. Try again later', { variant: 'error' });
-                                }
-                            });
-                    }
                 } catch (error) {
                     enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
                 }
@@ -57,6 +45,21 @@ export const UserMenu = () => {
 
             reader.readAsText(file);
         }
+    };
+
+    const downloadJson = () => {
+        const data = GlobalState.toStore(store);
+        const jsonData = JSON.stringify(data, null, 2);
+
+        const blob = new Blob([jsonData], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `v${data.schemaVersion}-tp-data-${data.modifiedDate?.toISOString()}.json`;
+        link.click();
+
+        URL.revokeObjectURL(url);
     };
 
     function stringToColor(string: string) {
@@ -82,7 +85,7 @@ export const UserMenu = () => {
     function stringAvatar(name: string) {
         return {
             sx: {
-                width: 32, 
+                width: 32,
                 height: 32,
                 bgcolor: stringToColor(name),
             },
@@ -90,69 +93,65 @@ export const UserMenu = () => {
         };
     }
 
-    return (<Box sx={{ display: 'flex', textAlign: 'center', justifyContent: 'flex-end' }}>
-        <input
-            ref={inputRef}
-            style={{ display: 'none' }}
-            type="file"
-            accept=".json"
-            onChange={handleFileUpload}
-        />
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span style={{ fontSize: 16, fontWeight: 700 }}>Hi, {username}</span>
-            
-            <IconButton
-                onClick={userMenuControls.handleClick}
-                size="small"
-                sx={{ ml: 2 }}
-                aria-controls={userMenuControls.open ? 'account-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={userMenuControls.open ? 'true' : undefined}
-            >
-                { isAuthenticated ? (<Avatar {...stringAvatar(username)}></Avatar>) : (<Avatar  sx={{ width: 32,
-                    height: 32 }}>TP</Avatar>)}
-                
-            </IconButton>
-        </div>
-        <Menu
-            anchorEl={userMenuControls.anchorEl}
-            id="account-menu"
-            open={userMenuControls.open}
-            onClose={userMenuControls.handleClose}
-            onClick={userMenuControls.handleClose}
-            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-        >
-            {!isAuthenticated
-                ? (
+    return (
+        <Box sx={{ display: 'flex', textAlign: 'center', justifyContent: 'flex-end' }}>
+            <input ref={inputRef} style={{ display: 'none' }} type="file" accept=".json" onChange={handleFileUpload} />
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span style={{ fontSize: 16, fontWeight: 700 }}>Hi, {username}</span>
+
+                <IconButton
+                    onClick={userMenuControls.handleClick}
+                    size="small"
+                    sx={{ ml: 2 }}
+                    aria-controls={userMenuControls.open ? 'account-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={userMenuControls.open ? 'true' : undefined}>
+                    {isAuthenticated ? (
+                        <Avatar {...stringAvatar(username)}></Avatar>
+                    ) : (
+                        <Avatar sx={{ width: 32, height: 32 }}>TP</Avatar>
+                    )}
+                </IconButton>
+            </div>
+            <Menu
+                anchorEl={userMenuControls.anchorEl}
+                id="account-menu"
+                open={userMenuControls.open}
+                onClose={userMenuControls.handleClose}
+                onClick={userMenuControls.handleClose}
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
+                {!isAuthenticated ? (
                     <div>
                         <MenuItem onClick={() => setShowLoginUser(true)}>
-                            <LoginIcon/> Login
+                            <LoginIcon /> Login
                         </MenuItem>
                         <MenuItem onClick={() => setShowRegisterUser(true)}>
-                            <RegisterIcon/> Register
+                            <RegisterIcon /> Register
                         </MenuItem>
                     </div>
-                )
-                : (
+                ) : (
                     <MenuItem onClick={() => logout()}>
-                        <LoginIcon/> Logout
+                        <LoginIcon /> Logout
                     </MenuItem>
-                )
-            }
-            
-            <Divider/>
-            <MenuItem onClick={() => inputRef.current?.click()}>
-                <UploadIcon/> Import
-            </MenuItem>
-            <MenuItem onClick={() => PersonalDataService.downloadJson()}>
-                <DownloadIcon/> Export
-            </MenuItem>
-        </Menu>
-        <RegisterUserDialog isOpen={showRegisterUser} onClose={(success) => {
-            setShowRegisterUser(false);
-            setShowLoginUser(success);
-        }}/>
-        <LoginUserDialog isOpen={showLoginUser} onClose={() => setShowLoginUser(false)}/>
-    </Box>);
+                )}
+
+                <Divider />
+                <MenuItem onClick={() => inputRef.current?.click()}>
+                    <UploadIcon /> Import
+                </MenuItem>
+                <MenuItem onClick={() => downloadJson()}>
+                    <DownloadIcon /> Export
+                </MenuItem>
+            </Menu>
+            <RegisterUserDialog
+                isOpen={showRegisterUser}
+                onClose={success => {
+                    setShowRegisterUser(false);
+                    setShowLoginUser(success);
+                }}
+            />
+            <LoginUserDialog isOpen={showLoginUser} onClose={() => setShowLoginUser(false)} />
+        </Box>
+    );
 };

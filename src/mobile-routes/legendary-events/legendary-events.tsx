@@ -1,54 +1,64 @@
-﻿import React, { useState } from 'react';
-import { useCharacters, usePersonalData } from '../../services';
+﻿import React, { useContext, useMemo } from 'react';
 import Box from '@mui/material/Box';
-import { Tab, Tabs } from '@mui/material';
-import { ILegendaryEvent } from '../../models/interfaces';
-import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from '../../models/legendary-events';
+import { Popover } from '@mui/material';
 import { LegendaryEvent } from './legendary-event';
 import AutoTeamsSettings from '../../routes/legendary-events/auto-teams-settings';
-import { AutoTeamsSettingsContext } from '../../contexts';
 import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 import { MyProgressDialog } from '../../routes/legendary-events/my-progress-dialog';
-import { getDefaultLE } from '../../models/constants';
+import { getLegendaryEvent } from '../../models/constants';
+import { StoreContext } from '../../reducers/store.provider';
+import Button from '@mui/material/Button';
+import SettingsIcon from '@mui/icons-material/Settings';
+import DataTablesDialog from '../../routes/legendary-events/data-tables-dialog';
+import { LegendaryEventEnum } from '../../models/enums';
+import Typography from '@mui/material/Typography';
+import { StaticDataService } from '../../services';
+import { CharacterImage } from '../../shared-components/character-image';
 
-export const LegendaryEvents = () => {
-    const [value, setValue] = React.useState(0);
-    const { characters } = useCharacters();
-    const { personalData, updateAutoTeamsSettings } = usePersonalData();
-    const [legendaryEvent, setLegendaryEvent] = React.useState<ILegendaryEvent>(() => getDefaultLE(characters));
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
+export const LegendaryEvents = ({ id }: { id: LegendaryEventEnum }) => {
+    const { characters, goals } = useContext(StoreContext);
+    const legendaryEvent = useMemo(() => getLegendaryEvent(id, characters), [id]);
+    const legendaryEventStatic = useMemo(() => StaticDataService.legendaryEvents.find(x => x.id === id), [id]);
+
+    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
     };
 
-    const [autoTeamsPreferences, setAutoTeamsPreferences] = useState(personalData.autoTeamsPreferences);
-    
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+
     return (
         <Box sx={{ bgcolor: 'background.paper' }}>
-            <Tabs
-                value={value}
-                onChange={handleChange}
-                variant="scrollable"
-                scrollButtons="auto"
-                aria-label="scrollable auto tabs example"
-            >
-                <Tab label="Shadowsun 2/3 (Oct 15)" onClick={() => setLegendaryEvent(new ShadowSunLegendaryEvent(characters))}/>
-                <Tab label="Aun'Shi"  onClick={() => setLegendaryEvent(new AunShiLegendaryEvent(characters))}/>
-            </Tabs>
-            <div style={{ marginInlineStart: 10 }}>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <AutoTeamsSettings value={autoTeamsPreferences} valueChanges={value => {
-                        setAutoTeamsPreferences(value);
-                        updateAutoTeamsSettings(value);
-                    }}></AutoTeamsSettings>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, margin: '10px 0' }}>
-                        <SetGoalDialog key={personalData.goals.length}/>
-                        <MyProgressDialog legendaryEvent={legendaryEvent}/>
+            <Typography component="div" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <CharacterImage icon={legendaryEventStatic?.icon ?? ''} name={legendaryEventStatic?.name ?? ''} />{' '}
+                {legendaryEventStatic?.name} {legendaryEventStatic?.stage}/3 ({legendaryEventStatic?.nextEventDate})
+            </Typography>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, margin: '10px 0' }}>
+                <Button variant="outlined" onClick={handleClick}>
+                    Auto-Teams <SettingsIcon />
+                </Button>
+                <Popover
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}>
+                    <div style={{ margin: 20, width: 300 }}>
+                        <AutoTeamsSettings />
                     </div>
-                </div>
+                </Popover>
+                <SetGoalDialog key={goals.length} />
+                <MyProgressDialog legendaryEvent={legendaryEvent} />
+                <DataTablesDialog legendaryEvent={legendaryEvent} short />
             </div>
-            <AutoTeamsSettingsContext.Provider value={autoTeamsPreferences}>
-                <LegendaryEvent legendaryEvent={legendaryEvent}/>
-            </AutoTeamsSettingsContext.Provider>
+            <LegendaryEvent legendaryEvent={legendaryEvent} />
         </Box>
     );
 };

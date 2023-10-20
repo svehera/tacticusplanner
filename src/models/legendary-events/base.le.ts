@@ -1,8 +1,11 @@
 ﻿import {
-    ICharacter, IChestMilestone,
-    ILegendaryEvent, ILegendaryEventStatic,
-    ILegendaryEventTrack, IPointsMilestone,
-    ITableRow
+    ICharacter2,
+    IChestMilestone,
+    ILegendaryEvent,
+    ILegendaryEventStatic,
+    ILegendaryEventTrack,
+    IPointsMilestone,
+    ITableRow,
 } from '../interfaces';
 import { sortBy, sum, uniqBy } from 'lodash';
 import { LegendaryEventEnum } from '../enums';
@@ -11,7 +14,7 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     alpha: ILegendaryEventTrack;
     beta: ILegendaryEventTrack;
     gamma: ILegendaryEventTrack;
-    
+
     suggestedTeams: ITableRow[] = [];
 
     readonly id: LegendaryEventEnum;
@@ -22,26 +25,26 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
 
     readonly regularMissions: string[];
     readonly premiumMissions: string[];
-    
+
     readonly pointsMilestones: IPointsMilestone[];
     readonly chestsMilestones: IChestMilestone[];
-    
-    protected abstract getAlphaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
 
-    protected abstract getBetaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
+    protected abstract getAlphaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack;
 
-    protected abstract getGammaTrack(unitsData: Array<ICharacter>): ILegendaryEventTrack;
+    protected abstract getBetaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack;
 
-    protected constructor(unitsData: Array<ICharacter>, staticData: ILegendaryEventStatic) {
+    protected abstract getGammaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack;
+
+    protected constructor(unitsData: Array<ICharacter2>, staticData: ILegendaryEventStatic) {
         this.id = staticData.id;
         this.name = staticData.name;
         this.wikiLink = staticData.wikiLink;
-        
+
         this.regularMissions = staticData.regularMissions ?? [];
         this.premiumMissions = staticData.premiumMissions ?? [];
         this.eventStage = staticData.eventStage;
         this.nextEventDate = staticData.nextEventDate;
-        
+
         this.pointsMilestones = staticData.pointsMilestones;
         this.chestsMilestones = staticData.chestsMilestones;
 
@@ -52,11 +55,14 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
         this.populateLEPoints(this.allowedUnits);
     }
 
-    get allowedUnits(): Array<ICharacter> {
-        return sortBy(uniqBy([...this.alpha.allowedUnits, ...this.beta.allowedUnits, ...this.gamma.allowedUnits], 'name'), 'name');
+    get allowedUnits(): Array<ICharacter2> {
+        return sortBy(
+            uniqBy([...this.alpha.allowedUnits, ...this.beta.allowedUnits, ...this.gamma.allowedUnits], 'name'),
+            'name'
+        );
     }
 
-    protected populateLEPoints(characters: ICharacter[]): void {
+    protected populateLEPoints(characters: ICharacter2[]): void {
         characters.forEach(character => {
             const alphaPoints = this.alpha.getCharacterPoints(character);
             const betaPoints = this.beta.getCharacterPoints(character);
@@ -74,7 +80,7 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
                 gammaPoints,
                 gammaSlots,
                 totalPoints: sum([alphaPoints, betaPoints, gammaPoints]),
-                totalSlots:  sum([alphaSlots, betaSlots, gammaSlots]),
+                totalSlots: sum([alphaSlots, betaSlots, gammaSlots]),
             };
         });
     }

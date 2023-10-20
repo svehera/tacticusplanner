@@ -1,55 +1,117 @@
-﻿import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+﻿import React, { useContext, useMemo, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Divider, Menu, MenuItem, useMediaQuery } from '@mui/material';
+import { Badge, Divider, ListItemIcon, Menu, MenuItem, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { isTabletOrMobileMediaQuery } from './models/constants';
+import { discordInvitationLink, isTabletOrMobileMediaQuery } from './models/constants';
 import { usePopUpControls } from './hooks/pop-up-controls';
 import { UserMenu } from './shared-components/user-menu/user-menu';
 import ViewSwitch from './shared-components/view-switch';
 import { AppBarSubMenu } from './app-bar-sub-menu';
 
+import aunshi from './assets/legendary-events/Aunshi.json';
+import ragnar from './assets/legendary-events/Ragnar.json';
+import shadowsun from './assets/legendary-events/Shadowsun.json';
+import { StoreContext } from './reducers/store.provider';
+import { WhatsNewDialog } from './shared-components/whats-new.dialog';
+import { DiscordIcon } from './shared-components/icons/discord.icon';
+import CampaignIcon from '@mui/icons-material/Campaign';
+import ListItemText from '@mui/material/ListItemText';
+import { CharacterImage } from './shared-components/character-image';
+import { Home } from '@mui/icons-material';
+import TargetIcon from '@mui/icons-material/TrackChanges';
+import ListIcon from '@mui/icons-material/List';
+import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
+import DirtyLensIcon from '@mui/icons-material/DirtyLens';
+import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+
 const TopAppBar = () => {
     const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
-    const [title, setTitle] = useState('Tacticus Planner');
-
+    const location = useLocation();
+    const navigate = useNavigate();
     const navigationMenuControls = usePopUpControls();
+    const { seenAppVersion } = useContext(StoreContext);
+
+    const [showWhatsNew, setShowWhatsNew] = useState(false);
+
+    const hasNewVersion = useMemo(() => {
+        const currentAppVersion = localStorage.getItem('appVersion');
+        return currentAppVersion === seenAppVersion;
+    }, [seenAppVersion]);
+
+    const title = useMemo(() => {
+        switch (location.pathname) {
+            case '/wyo':
+                return 'Who You Own';
+            case '/le/shadowsun':
+                return `Shadowsun ${shadowsun.eventStage}/3 (${shadowsun.nextEventDate})`;
+            case '/le/aunshi':
+                return `Aun Shi  ${aunshi.eventStage}/3 (${aunshi.nextEventDate})`;
+            case '/le/ragnar':
+                return `Ragnar  ${ragnar.eventStage}/3 (${ragnar.nextEventDate}) - *Some data can change`;
+            case '/goals':
+                return 'My Goals';
+            case '/characters':
+                return 'Characters';
+            case '/dirtyDozen':
+                return 'Dirty Dozen';
+            case '/contacts':
+                return 'Contacts';
+            case '/ty':
+                return 'Thank You Page';
+            default: {
+                return 'Tacticus Planner';
+            }
+        }
+    }, [location.pathname]);
 
     const nav = isTabletOrMobile ? undefined : (
         <div style={{ display: 'flex', alignItems: 'center', marginInlineEnd: 20 }}>
-            <Button
-                onClick={() => setTitle('Who You Own')}
-                component={Link}
-                to={'./wyo'}
-                color="inherit"
-            >
+            <Button component={Link} to={'./wyo'} color="inherit">
                 Who You Own
             </Button>
-            
-            <Button
-                onClick={() => setTitle('Legendary Events')}
-                component={Link}
-                to={'./le'}
-                color="inherit"
-            >
-                Legendary Events
-            </Button>
 
-            <Button
-                onClick={() => setTitle('My Goals')}
-                component={Link}
-                to={'./goals'}
-                color="inherit"
-            >
+            <AppBarSubMenu
+                rootLabel={'Legendary Events'}
+                options={[
+                    {
+                        label: 'Shadowsun',
+                        route: './le/shadowsun',
+                    },
+                    {
+                        label: 'Aun Shi',
+                        route: './le/aunshi',
+                    },
+                    {
+                        label: 'Ragnar',
+                        route: './le/ragnar',
+                    },
+                ]}
+            />
+
+            <Button component={Link} to={'./goals'} color="inherit">
                 Goals
             </Button>
-           
-            <AppBarSubMenu setTitle={setTitle}/>
+
+            <AppBarSubMenu
+                rootLabel={'TABLES'}
+                options={[
+                    {
+                        label: 'Characters',
+                        route: './characters',
+                    },
+                    {
+                        label: 'Dirty Dozen',
+                        route: './dirtyDozen',
+                    },
+                ]}
+            />
         </div>
     );
 
@@ -62,95 +124,97 @@ const TopAppBar = () => {
             onClick={navigationMenuControls.handleClose}
             MenuListProps={{
                 'aria-labelledby': 'basic-button',
-            }}
-        >
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('Who You Own')}
-                    component={Link}
-                    to={'./wyo'}
-                    color="inherit"
-                >
-                    Who You Own
-                </Button>
-            </MenuItem>
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('Legendary Events')}
-                    component={Link}
-                    to={'./le'}
-                    color="inherit"
-                >
-                    Legendary Events
-                </Button>
+            }}>
+            <MenuItem color="inherit" onClick={() => setShowWhatsNew(true)}>
+                <ListItemIcon>
+                    <Badge color="secondary" variant="dot" invisible={hasNewVersion}>
+                        <CampaignIcon />
+                    </Badge>
+                </ListItemIcon>
+                <ListItemText>{"What's new"}</ListItemText>
             </MenuItem>
 
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('My Goals')}
-                    component={Link}
-                    to={'./goals'}
-                    color="inherit"
-                >
-                    Goals
-                </Button>
+            <MenuItem component={Link} to={discordInvitationLink} target={'_blank'} color="inherit">
+                <ListItemIcon>
+                    <DiscordIcon />
+                </ListItemIcon>
+                <ListItemText>Discord</ListItemText>
             </MenuItem>
 
-            <Divider/>
+            <Divider />
 
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('Characters')}
-                    component={Link}
-                    to={'./characters'}
-                    color="inherit"
-                >
-                    Characters
-                </Button>
-            </MenuItem>
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('Dirty Dozen')}
-                    component={Link}
-                    to={'./dirtyDozen'}
-                    color="inherit"
-                >
-                    Dirty Dozen
-                </Button>
+            <MenuItem component={Link} to={'./wyo'} color="inherit">
+                <ListItemIcon>
+                    <ListIcon />
+                </ListItemIcon>
+                <ListItemText> Who You Own</ListItemText>
             </MenuItem>
 
-            <Divider/>
-
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('Tacticus Planner')}
-                    component={Link}
-                    to={'./'}
-                    color="inherit"
-                >
-                    Home/F.A.Q.
-                </Button>
-            </MenuItem>
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('Contacts')}
-                    component={Link}
-                    to={'./contacts'}
-                    color="inherit"
-                >
-                    Contacts
-                </Button>
+            <MenuItem component={Link} to={'./goals'} color="inherit">
+                <ListItemIcon>
+                    <TargetIcon />
+                </ListItemIcon>
+                <ListItemText>Goals</ListItemText>
             </MenuItem>
 
-            <MenuItem>
-                <Button
-                    onClick={() => setTitle('Thank You Page')}
-                    component={Link}
-                    to={'./ty'}
-                    color="inherit"
-                >
-                    Thank You
-                </Button>
+            <Divider />
+
+            <MenuItem component={Link} to={'./le/shadowsun'} color="inherit">
+                <ListItemIcon>
+                    <CharacterImage icon={'ShadowSun.png'} imageSize={30} />
+                </ListItemIcon>
+                <ListItemText>Shadowsun LE</ListItemText>
+            </MenuItem>
+
+            <MenuItem component={Link} to={'./le/aunshi'} color="inherit">
+                <ListItemIcon>
+                    <CharacterImage icon={'Aun-shi.png'} imageSize={30} />
+                </ListItemIcon>
+                <ListItemText>Aun Shi LE</ListItemText>
+            </MenuItem>
+
+            <MenuItem component={Link} to={'./le/ragnar'} color="inherit">
+                <ListItemIcon>
+                    <CharacterImage icon={'unset.png'} imageSize={30} />
+                </ListItemIcon>
+                <ListItemText> Ragnar LE</ListItemText>
+            </MenuItem>
+
+            <Divider />
+
+            <MenuItem component={Link} to={'./characters'} color="inherit">
+                <ListItemIcon>
+                    <Diversity3Icon />
+                </ListItemIcon>
+                <ListItemText>Characters</ListItemText>
+            </MenuItem>
+            <MenuItem component={Link} to={'./dirtyDozen'} color="inherit">
+                <ListItemIcon>
+                    <DirtyLensIcon />
+                </ListItemIcon>
+                <ListItemText>Dirty Dozen</ListItemText>
+            </MenuItem>
+
+            <Divider />
+
+            <MenuItem component={Link} to={'./'} color="inherit">
+                <ListItemIcon>
+                    <Home />
+                </ListItemIcon>
+                <ListItemText> Home/F.A.Q.</ListItemText>
+            </MenuItem>
+            <MenuItem component={Link} to={'./contacts'} color="inherit">
+                <ListItemIcon>
+                    <ContactEmergencyIcon />
+                </ListItemIcon>
+                <ListItemText>Contacts</ListItemText>
+            </MenuItem>
+
+            <MenuItem component={Link} to={'./ty'} color="inherit">
+                <ListItemIcon>
+                    <HealthAndSafetyIcon />
+                </ListItemIcon>
+                <ListItemText>Thank You</ListItemText>
             </MenuItem>
         </Menu>
     );
@@ -159,29 +223,33 @@ const TopAppBar = () => {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Typography variant={isTabletOrMobile ? 'h5' : 'h4'} component="div">
+                    <Typography
+                        style={{ cursor: 'pointer' }}
+                        variant={isTabletOrMobile ? 'h5' : 'h4'}
+                        component="div"
+                        onClick={() => navigate('./')}>
                         {title}
                     </Typography>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         {nav}
-                        <ViewSwitch/>
+                        <ViewSwitch />
                         <Button
                             id="basic-button"
-                            aria-controls={
-                                navigationMenuControls.open ? 'basic-menu' : undefined
-                            }
+                            aria-controls={navigationMenuControls.open ? 'basic-menu' : undefined}
                             aria-haspopup="true"
                             aria-expanded={navigationMenuControls.open ? 'true' : undefined}
                             color="inherit"
-                            onClick={navigationMenuControls.handleClick}
-                        >
-                            <MenuIcon/>
+                            onClick={navigationMenuControls.handleClick}>
+                            <Badge color="secondary" variant="dot" invisible={hasNewVersion}>
+                                <MenuIcon />
+                            </Badge>
                         </Button>
-                        <UserMenu/>
+                        <UserMenu />
                         {navigationMenu}
                     </div>
                 </Toolbar>
             </AppBar>
+            <WhatsNewDialog isOpen={showWhatsNew} onClose={() => setShowWhatsNew(false)} />
         </Box>
     );
 };

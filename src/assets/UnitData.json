@@ -611,7 +611,8 @@
     "Equipment2": "Defense",
     "Equipment3": "Crit Booster",
     "Traits": [
-      "Living Metal"
+      "Living Metal",
+      "Flying"
     ],
     "Active Ability": "Direct",
     "Passive Ability": "Direct",
@@ -1020,30 +1021,6 @@
     "Icon": "HighMarshalHelbrecht-removebg-preview.png"
   },
   {
-    "Name": "Aethana",
-    "Faction": "Aeldari",
-    "Alliance": "Xenos",
-    "Health": 80,
-    "Damage": 14,
-    "Armour": 17,
-    "Initial rarity": "Uncommon",
-    "Melee Damage": "Piercing",
-    "Melee Hits": 3,
-    "Movement": 5,
-    "Equipment1": "Crit",
-    "Equipment2": "Block",
-    "Equipment3": "Block Booster",
-    "Traits": [
-      "Flying",
-      "Deep Strike"
-    ],
-    "Active Ability": "Piercing",
-    "Number": 41,
-    "ForcedSummons": false,
-    "RequiredInCampaign": true,
-    "Icon": "Aethana.png"
-  },
-  {
     "Name": "Calandis",
     "Faction": "Aeldari",
     "Alliance": "Xenos",
@@ -1065,10 +1042,34 @@
       "Overwatch"
     ],
     "Passive Ability": "Piercing",
-    "Number": 42,
+    "Number": 41,
     "ForcedSummons": false,
     "RequiredInCampaign": true,
     "Icon": "Calandis-removebg-preview.png"
+  },
+  {
+    "Name": "Aethana",
+    "Faction": "Aeldari",
+    "Alliance": "Xenos",
+    "Health": 80,
+    "Damage": 14,
+    "Armour": 17,
+    "Initial rarity": "Uncommon",
+    "Melee Damage": "Piercing",
+    "Melee Hits": 3,
+    "Movement": 5,
+    "Equipment1": "Crit",
+    "Equipment2": "Block",
+    "Equipment3": "Block Booster",
+    "Traits": [
+      "Flying",
+      "Deep Strike"
+    ],
+    "Active Ability": "Piercing",
+    "Number": 42,
+    "ForcedSummons": false,
+    "RequiredInCampaign": true,
+    "Icon": "Aethana.png"
   },
   {
     "Name": "Eldryon",
@@ -1601,5 +1602,93 @@
     "ForcedSummons": false,
     "RequiredInCampaign": false,
     "Icon": "TyrantGuard.png"
+  },
+  {
+    "Name": "Winged Tyrant Prime",
+    "Faction": "Tyranids",
+    "Alliance": "Xenos",
+    "Health": 0,
+    "Damage": 0,
+    "Armour": 0,
+    "Initial rarity": "Rare",
+    "Melee Damage": "",
+    "Melee Hits": 0,
+    "Movement": 0,
+    "Equipment1": "",
+    "Equipment2": "",
+    "Equipment3": "",
+    "Traits": [
+    ],
+    "Active Ability": "",
+    "Number": 63,
+    "ForcedSummons": false,
+    "RequiredInCampaign": false,
+    "Icon": "unset.png"
+  },
+  {
+    "Name": "Deathleaper",
+    "Faction": "Tyranids",
+    "Alliance": "Xenos",
+    "Health": 0,
+    "Damage": 0,
+    "Armour": 0,
+    "Initial rarity": "Epic",
+    "Melee Damage": "",
+    "Melee Hits": 0,
+    "Movement": 0,
+    "Equipment1": "",
+    "Equipment2": "",
+    "Equipment3": "",
+    "Traits": [
+    ],
+    "Active Ability": "",
+    "Number": 64,
+    "ForcedSummons": false,
+    "RequiredInCampaign": false,
+    "Icon": "unset.png"
+  },
+  {
+    "Name": "Njal Stormcaller",
+    "Faction": "Space Wolves",
+    "Alliance": "Imperial",
+    "Health": 0,
+    "Damage": 0,
+    "Armour": 0,
+    "Initial rarity": "Epic",
+    "Melee Damage": "",
+    "Melee Hits": 0,
+    "Movement": 0,
+    "Equipment1": "",
+    "Equipment2": "",
+    "Equipment3": "",
+    "Traits": [
+    ],
+    "Active Ability": "",
+    "Number": 65,
+    "ForcedSummons": false,
+    "RequiredInCampaign": false,
+    "Icon": "unset.png"
+  },
+  {
+    "Name": "Ragnar Blackmane",
+    "Faction": "Space Wolves",
+    "Alliance": "Imperial",
+    "Health": 0,
+    "Damage": 0,
+    "Armour": 0,
+    "Initial rarity": "Legendary",
+    "Melee Damage": "",
+    "Melee Hits": 0,
+    "Movement": 0,
+    "Equipment1": "",
+    "Equipment2": "",
+    "Equipment3": "",
+    "Traits": [
+    ],
+    "Active Ability": "",
+    "Number": 66,
+    "ForcedSummons": false,
+    "RequiredInCampaign": false,
+    "Icon": "unset.png"
   }
 ]
