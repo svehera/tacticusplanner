@@ -78,7 +78,7 @@ export class PersonalDataLocalStorage {
             }
         }
 
-        localStorage.removeItem(this.v1personalDataStorageKey);
+        // localStorage.removeItem(this.v1personalDataStorageKey);
     }
 
     private getItem<T>(key: keyof IPersonalData2): T | null {
