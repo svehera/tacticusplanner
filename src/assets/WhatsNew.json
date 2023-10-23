@@ -1,6 +1,22 @@
 ﻿{
-  "currentVersion": "1.0.1",
+  "currentVersion": "1.0.2",
   "releaseNotes": [
+    {
+      "version": "1.0.2",
+      "date": "October 23",
+      "type": "Patch",
+      "new": [],
+      "minor": [{
+        "text": "Updated new characters(Winged Tyrant Prime, Deathleaper, Njal Stormcaller, Ragnar Blackmane) stats and added icons",
+        "route": "/characters"
+      }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed: issue with exporting JSON data not working in some cases"
+        }
+      ]
+    },
     {
       "version": "1.0.1",
       "date": "October 20",

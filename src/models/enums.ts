@@ -94,6 +94,7 @@ export enum Trait {
     Synapse = 'Synapse',
     SuppressiveFire = 'Suppressive Fire',
     CrushingStrike = 'Crushing Strike',
+    RapidAssault = 'Rapid Assault',
 }
 
 export enum DamageType {

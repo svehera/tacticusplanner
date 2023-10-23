@@ -1611,19 +1611,21 @@
     "Damage": 0,
     "Armour": 0,
     "Initial rarity": "Rare",
-    "Melee Damage": "",
-    "Melee Hits": 0,
-    "Movement": 0,
-    "Equipment1": "",
-    "Equipment2": "",
-    "Equipment3": "",
+    "Melee Damage": "Bio",
+    "Melee Hits": 6,
+    "Movement": 4,
+    "Equipment1": "Crit",
+    "Equipment2": "Defense",
+    "Equipment3": "Crit Booster",
     "Traits": [
+      "Flying",
+      "Synapse",
+      "Final Vengeance"
     ],
-    "Active Ability": "",
     "Number": 63,
-    "ForcedSummons": false,
+    "ForcedSummons": true,
     "RequiredInCampaign": false,
-    "Icon": "unset.png"
+    "Icon": "Winged_Prime.png"
   },
   {
     "Name": "Deathleaper",
@@ -1633,19 +1635,23 @@
     "Damage": 0,
     "Armour": 0,
     "Initial rarity": "Epic",
-    "Melee Damage": "",
-    "Melee Hits": 0,
-    "Movement": 0,
-    "Equipment1": "",
-    "Equipment2": "",
-    "Equipment3": "",
+    "Melee Damage": "Bio",
+    "Melee Hits": 3,
+    "Movement": 3,
+    "Equipment1": "Crit",
+    "Equipment2": "Defense",
+    "Equipment3": "Crit Booster",
     "Traits": [
+      "Camouflage",
+      "Deep Strike",
+      "Infiltrate",
+      "Terrifying"
     ],
-    "Active Ability": "",
+    "Active Ability": "Direct",
     "Number": 64,
     "ForcedSummons": false,
     "RequiredInCampaign": false,
-    "Icon": "unset.png"
+    "Icon": "Deathleaper.png"
   },
   {
     "Name": "Njal Stormcaller",
@@ -1655,19 +1661,24 @@
     "Damage": 0,
     "Armour": 0,
     "Initial rarity": "Epic",
-    "Melee Damage": "",
-    "Melee Hits": 0,
-    "Movement": 0,
-    "Equipment1": "",
-    "Equipment2": "",
-    "Equipment3": "",
+    "Melee Damage": "Psychic",
+    "Melee Hits": 3,
+    "Ranged Damage": "Psychic",
+    "Ranged Hits": 2,
+    "Movement": 2,
+    "Equipment1": "Crit",
+    "Equipment2": "Block",
+    "Equipment3": "Block Booster",
     "Traits": [
+      "Psyker",
+      "Terminator Armour",
+      "Unstoppable"
     ],
-    "Active Ability": "",
+    "Active Ability": "Psychic",
     "Number": 65,
     "ForcedSummons": false,
     "RequiredInCampaign": false,
-    "Icon": "unset.png"
+    "Icon": "Njal.png"
   },
   {
     "Name": "Ragnar Blackmane",
@@ -1677,18 +1688,21 @@
     "Damage": 0,
     "Armour": 0,
     "Initial rarity": "Legendary",
-    "Melee Damage": "",
-    "Melee Hits": 0,
-    "Movement": 0,
-    "Equipment1": "",
-    "Equipment2": "",
-    "Equipment3": "",
+    "Melee Damage": "Chain",
+    "Melee Hits": 7,
+    "Movement": 3,
+    "Equipment1": "Crit",
+    "Equipment2": "Block",
+    "Equipment3": "Crit Booster",
     "Traits": [
+      "Rapid Assault",
+      "Final Vengeance",
+      "Beast Snagga"
     ],
     "Active Ability": "",
     "Number": 66,
     "ForcedSummons": false,
     "RequiredInCampaign": false,
-    "Icon": "unset.png"
+    "Icon": "Ragnar.png"
   }
 ]
