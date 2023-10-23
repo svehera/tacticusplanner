@@ -100,11 +100,7 @@ const ReleaseNotes = ({
                         {releaseNote.text}{' '}
                         {releaseNote.route ? (
                             <span>
-                                (
-                                <Link to={releaseNote.route} target={'_blank'}>
-                                    link
-                                </Link>
-                                )
+                                (<Link to={releaseNote.route}>link</Link>)
                             </span>
                         ) : undefined}
                         {!releaseNote.subPoints?.length ? undefined : (
