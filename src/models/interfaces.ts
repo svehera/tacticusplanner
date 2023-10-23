@@ -1,5 +1,7 @@
 ﻿import {
     Alliance,
+    Campaign,
+    CampaignType,
     CharacterBias,
     DamageType,
     Equipment,
@@ -405,4 +407,36 @@ export interface IReleaseNote {
     imagePath?: string;
     subPoints?: string[];
     images?: Array<{ path: string; size?: number }>;
+}
+
+export type ICampaignConfigs = {
+    [campaignType in `${CampaignType}`]: ICampaignConfig;
+};
+
+export interface ICampaignConfig {
+    type: CampaignType | string;
+    energyCost: number;
+    dailyBattleCount: number;
+    dropRate: IDropRate;
+}
+
+export interface IDropRate {
+    common: number;
+    uncommon: number;
+    rare: number;
+    epic: number;
+    legendary: number;
+    shards: number;
+}
+
+export interface ICampaignsData {
+    [campaignKey: string]: ICampaignBattle;
+}
+
+export interface ICampaignBattle {
+    campaign: Campaign | string;
+    campaignType: CampaignType | string;
+    nodeNumber: number;
+    reward: string; // material name or hero name in case farming shards
+    expectedGold: number;
 }

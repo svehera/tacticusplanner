@@ -166,3 +166,19 @@ export enum CharacterBias {
     None = 0,
     AlwaysRecommend = 1,
 }
+
+export enum CampaignType {
+    Early = 'Early',
+    EarlyChars = 'EarlyChars',
+    EarlyMirrorChars = 'EarlyMirrorChars',
+    Normal = 'Normal',
+    Mirror = 'Mirror',
+    Elite = 'Elite',
+}
+
+export enum Campaign {
+    Indomitus = 'Indomitus',
+    FallOfCadia = 'Fall of Cadia',
+    Octarius = 'Octarius',
+    SaimHann = 'Saim-Hann',
+}

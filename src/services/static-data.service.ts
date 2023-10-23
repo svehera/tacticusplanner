@@ -1,22 +1,38 @@
-﻿import { uniq } from 'lodash';
+﻿import { groupBy, sortBy, uniq } from 'lodash';
 
 import unitsData from '../assets/UnitData.json';
 import dirtyDozen from '../assets/DirtyDozen.json';
 
 import whatsNew from '../assets/WhatsNew.json';
 
+import campaignConfigs from '../assets/campaignConfigs.json';
+import battleData from '../assets/battleData.json';
+
 import shadowsun from '../assets/legendary-events/Shadowsun.json';
 import aunshi from '../assets/legendary-events/Aunshi.json';
 import ragnar from '../assets/legendary-events/Ragnar.json';
 
-import { ICharLegendaryEvents, IDirtyDozenChar, IUnitData, IWhatsNew, UnitDataRaw } from '../models/interfaces';
+import {
+    ICampaignBattle,
+    ICampaignConfigs,
+    ICampaignsData,
+    ICharLegendaryEvents,
+    IDirtyDozenChar,
+    IUnitData,
+    IWhatsNew,
+    UnitDataRaw,
+} from '../models/interfaces';
 import { Faction } from '../models/enums';
 import { rarityStringToNumber, rarityToStars } from '../models/constants';
 
 export class StaticDataService {
-    static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
     static readonly dirtyDozenData: IDirtyDozenChar[] = dirtyDozen;
     static readonly whatsNew: IWhatsNew = whatsNew;
+    static readonly campaignConfigs: ICampaignConfigs = campaignConfigs;
+    static readonly battleData: ICampaignsData = battleData;
+
+    static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
+    static readonly campaignsGrouped: Record<string, ICampaignBattle[]> = this.getCampaignGrouped();
 
     static readonly legendaryEvents = [
         {
@@ -44,6 +60,11 @@ export class StaticDataService {
             icon: 'unset.png',
         },
     ];
+
+    static getCampaignGrouped(): Record<string, ICampaignBattle[]> {
+        const allBattles = sortBy(Object.values(this.battleData), 'nodeNumber');
+        return groupBy(allBattles, 'campaign');
+    }
 
     static convertUnitData(rawData: UnitDataRaw): IUnitData {
         const unitData: IUnitData = {

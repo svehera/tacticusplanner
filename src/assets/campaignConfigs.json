@@ -3,7 +3,7 @@
     "type": "Early",
     "energyCost": 5,
     "dailyBattleCount": 10,
-    "droprate": {
+    "dropRate": {
       "common": 0.75,
       "uncommon": 0.60,
       "rare": 0.33,
@@ -16,7 +16,7 @@
     "type": "EarlyChars",
     "energyCost": 5,
     "dailyBattleCount": 7,
-    "droprate": {
+    "dropRate": {
       "common": 0.75,
       "uncommon": 0.60,
       "rare": 0.33,
@@ -29,7 +29,7 @@
     "type": "EarlyMirrorChars",
     "energyCost": 6,
     "dailyBattleCount": 3,
-    "droprate": {
+    "dropRate": {
       "common": 0.83,
       "uncommon": 0.71,
       "rare": 0.40,
@@ -42,7 +42,7 @@
     "type": "Normal",
     "energyCost": 6,
     "dailyBattleCount": 10,
-    "droprate": {
+    "dropRate": {
       "common": 0.75,
       "uncommon": 0.60,
       "rare": 0.33,
@@ -55,7 +55,7 @@
     "type": "Mirror",
     "energyCost": 6,
     "dailyBattleCount": 10,
-    "droprate": {
+    "dropRate": {
       "common": 0.83,
       "uncommon": 0.71,
       "rare": 0.40,
@@ -68,7 +68,7 @@
     "type": "Elite",
     "energyCost": 10,
     "dailyBattleCount": 3,
-    "droprate": {
+    "dropRate": {
       "common": 1.50,
       "uncommon": 1.25,
       "rare": 1.11,
