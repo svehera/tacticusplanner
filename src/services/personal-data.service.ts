@@ -15,9 +15,11 @@ import { defaultData } from '../models/constants';
 import { Rank } from '../models/enums';
 
 export class PersonalDataLocalStorage {
+    private readonly storePrefix = 'tp-';
+    private readonly backupKey = this.storePrefix + 'backup';
+    private readonly backUpDateKey = this.storePrefix + 'backup-date';
     private readonly v1personalDataStorageKey = 'personalData';
     private readonly schemaVersionStorageKey = 'schemaVersion';
-    private readonly storePrefix = 'tp-';
 
     private readonly storeKeys = Object.keys(defaultData) as Array<keyof IPersonalData2>;
 
@@ -69,20 +71,6 @@ export class PersonalDataLocalStorage {
         return result;
     }
 
-    restoreData(): IPersonalData2 | null {
-        const v1StoredData = localStorage.getItem(this.v1personalDataStorageKey);
-        if (!v1StoredData) {
-            return null;
-        } else {
-            try {
-                const v1Data: IPersonalData | IPersonalData2 = JSON.parse(v1StoredData);
-                return convertData(v1Data);
-            } catch {
-                return null;
-            }
-        }
-    }
-
     setData(data: Partial<IPersonalData2>): void {
         for (const dataKey in data) {
             const storeKey = this.storeKeys.find(x => x === dataKey);
@@ -92,7 +80,36 @@ export class PersonalDataLocalStorage {
             }
         }
 
-        // localStorage.removeItem(this.v1personalDataStorageKey);
+        localStorage.removeItem(this.v1personalDataStorageKey);
+    }
+
+    restoreData(): IPersonalData2 | null {
+        const backup = localStorage.getItem(this.backupKey);
+        if (!backup) {
+            return null;
+        } else {
+            try {
+                const data: IPersonalData | IPersonalData2 = JSON.parse(backup);
+                return convertData(data);
+            } catch {
+                return null;
+            }
+        }
+    }
+
+    public storeBackup(data: IPersonalData2): void {
+        const serialized = JSON.stringify(data);
+        localStorage.setItem(this.backupKey, serialized);
+        localStorage.setItem(this.backUpDateKey, new Date().toISOString());
+    }
+
+    public getBackupDate(): Date | null {
+        const date = localStorage.getItem(this.backUpDateKey);
+        if (!date) {
+            return null;
+        }
+
+        return new Date(date);
     }
 
     private getItem<T>(key: keyof IPersonalData2): T | null {

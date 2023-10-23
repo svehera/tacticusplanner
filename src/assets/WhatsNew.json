@@ -6,10 +6,14 @@
       "date": "October 23",
       "type": "Patch",
       "new": [],
-      "minor": [{
-        "text": "Updated new characters(Winged Tyrant Prime, Deathleaper, Njal Stormcaller, Ragnar Blackmane) stats and added icons",
-        "route": "/characters"
-      }
+      "minor": [
+        {
+          "text": "Updated \"Restore Backup\" logic in user menu"
+        },
+        {
+          "text": "Updated new characters(Winged Tyrant Prime, Deathleaper, Njal Stormcaller, Ragnar Blackmane) stats and added icons",
+          "route": "/characters"
+        }
       ],
       "bugFixes": [
         {
