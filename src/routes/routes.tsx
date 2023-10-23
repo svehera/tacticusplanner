@@ -14,6 +14,7 @@ import { Thanks } from '../shared-components/thanks';
 import LegendaryEvent from './legendary-events/legendary-event';
 import { LegendaryEventEnum } from '../models/enums';
 import { Campaigns } from './tables/campaigns';
+import { Upgrades } from './tables/upgrades';
 
 export const appRoutes: () => RouteObject[] = () => [
     {
@@ -31,6 +32,10 @@ export const appRoutes: () => RouteObject[] = () => [
             {
                 path: 'characters',
                 element: <Characters />,
+            },
+            {
+                path: 'upgrades',
+                element: <Upgrades />,
             },
             {
                 path: 'campaigns',

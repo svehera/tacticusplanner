@@ -59,6 +59,8 @@ const TopAppBar = () => {
                 return 'My Goals';
             case '/characters':
                 return 'Characters';
+            case '/upgrades':
+                return 'Upgrades';
             case '/campaigns':
                 return 'Campaigns';
             case '/dirtyDozen':
@@ -107,6 +109,10 @@ const TopAppBar = () => {
                     {
                         label: 'Characters',
                         route: './characters',
+                    },
+                    {
+                        label: 'Upgrades',
+                        route: './upgrades',
                     },
                     {
                         label: 'Campaigns',
@@ -193,6 +199,10 @@ const TopAppBar = () => {
                     <Diversity3Icon />
                 </ListItemIcon>
                 <ListItemText>Characters</ListItemText>
+            </MenuItem>
+            <MenuItem component={Link} to={'./upgrades'} color="inherit">
+                <ListItemIcon></ListItemIcon>
+                <ListItemText>Upgrades</ListItemText>
             </MenuItem>
             <MenuItem component={Link} to={'./campaigns'} color="inherit">
                 <ListItemIcon></ListItemIcon>

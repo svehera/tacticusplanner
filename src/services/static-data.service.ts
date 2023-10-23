@@ -37,7 +37,7 @@ export class StaticDataService {
     static readonly recipeData: IRecipeData = recipeData;
 
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
-    static readonly campaignsGrouped: Record<string, ICampaignBattleComposed[]> = this.getCampaignGrouped2();
+    static readonly campaignsGrouped: Record<string, ICampaignBattleComposed[]> = this.getCampaignGrouped();
 
     static readonly legendaryEvents = [
         {
@@ -66,16 +66,11 @@ export class StaticDataService {
         },
     ];
 
-    static getCampaignGrouped(): Record<string, ICampaignBattle[]> {
-        const allBattles = sortBy(Object.values(this.battleData), 'nodeNumber');
-        return groupBy(allBattles, 'campaign');
-    }
-
-    static getCampaignGrouped2(): Record<string, ICampaignBattleComposed[]> {
+    static getCampaignGrouped(): Record<string, ICampaignBattleComposed[]> {
         const allBattles = sortBy(Object.values(this.battleData), 'nodeNumber').map(battle => {
             const config = this.campaignConfigs[battle.campaignType as CampaignType];
             const recipe = this.recipeData[battle.reward];
-            const dropRateKey: keyof IDropRate = recipe.rarity.toLowerCase() as keyof IDropRate;
+            const dropRateKey: keyof IDropRate = recipe?.rarity.toLowerCase() as keyof IDropRate;
 
             return {
                 campaign: battle.campaign,
