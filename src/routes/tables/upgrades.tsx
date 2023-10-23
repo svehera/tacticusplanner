@@ -191,7 +191,7 @@ export const Upgrades = () => {
                     key={selection}
                     ref={gridRef}
                     suppressCellFocus={true}
-                    defaultColDef={{ resizable: true, autoHeight: true, wrapText: true }}
+                    defaultColDef={{ resizable: true, sortable: true, autoHeight: true, wrapText: true }}
                     columnDefs={columnDefs}
                     rowData={rows}
                     getRowStyle={getRowStyle}

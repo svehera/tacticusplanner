@@ -107,7 +107,7 @@ export const Campaigns = () => {
                 <AgGridReact
                     ref={gridRef}
                     suppressCellFocus={true}
-                    defaultColDef={{ resizable: true }}
+                    defaultColDef={{ resizable: true, sortable: true }}
                     columnDefs={columnDefs}
                     rowData={rows}
                     getRowStyle={getRowStyle}
