@@ -56,7 +56,9 @@ export const UserMenu = () => {
 
         const link = document.createElement('a');
         link.href = url;
-        link.download = `v${data.schemaVersion}-tp-data-${data.modifiedDate?.toISOString()}.json`;
+        const dateTimestamp =
+            typeof data.modifiedDate === 'string' ? data.modifiedDate : data.modifiedDate?.toISOString();
+        link.download = `v${data.schemaVersion}-tp-data-${dateTimestamp}.json`;
         link.click();
 
         URL.revokeObjectURL(url);
