@@ -3,7 +3,7 @@
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, RowStyle, RowClassParams } from 'ag-grid-community';
 
-import { ICampaignBattle } from '../../models/interfaces';
+import { ICampaignBattleComposed } from '../../models/interfaces';
 import { Campaign } from '../../models/enums';
 import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { StaticDataService } from '../../services';
@@ -12,7 +12,7 @@ import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 
 export const Campaigns = () => {
-    const gridRef = useRef<AgGridReact<ICampaignBattle>>(null);
+    const gridRef = useRef<AgGridReact<ICampaignBattleComposed>>(null);
 
     const [columnDefs] = useState<Array<ColDef>>([
         {
@@ -28,12 +28,40 @@ export const Campaigns = () => {
             headerName: 'Battle',
             pinned: true,
             minWidth: 200,
-            valueGetter: (params: ValueGetterParams<ICampaignBattle>) => {
+            valueGetter: (params: ValueGetterParams<ICampaignBattleComposed>) => {
                 const battle = params.data;
                 if (battle) {
                     return battle.campaign + ' ' + battle.nodeNumber;
                 }
             },
+        },
+        {
+            field: 'energyCost',
+            headerName: 'Energy Cost',
+            maxWidth: 150,
+            width: 150,
+            minWidth: 150,
+        },
+        {
+            field: 'dailyBattleCount',
+            headerName: 'Battles Count',
+            maxWidth: 150,
+            width: 150,
+            minWidth: 150,
+        },
+        {
+            field: 'dropRate',
+            headerName: 'Drop Rate',
+            maxWidth: 150,
+            width: 150,
+            minWidth: 150,
+        },
+        {
+            field: 'rarity',
+            headerName: 'Rarity',
+            maxWidth: 150,
+            width: 150,
+            minWidth: 150,
         },
         {
             field: 'reward',
@@ -55,7 +83,7 @@ export const Campaigns = () => {
 
     const rows = useMemo(() => StaticDataService.campaignsGrouped[campaign], [campaign]);
 
-    const getRowStyle = (params: RowClassParams<ICampaignBattle>): RowStyle => {
+    const getRowStyle = (params: RowClassParams<ICampaignBattleComposed>): RowStyle => {
         return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'lightsteelblue' : 'white' };
     };
 
@@ -79,7 +107,7 @@ export const Campaigns = () => {
                 <AgGridReact
                     ref={gridRef}
                     suppressCellFocus={true}
-                    // defaultColDef={defaultColDef}
+                    defaultColDef={{ resizable: true }}
                     columnDefs={columnDefs}
                     rowData={rows}
                     getRowStyle={getRowStyle}

@@ -9,7 +9,7 @@
       "rare": 0.33,
       "epic": 0.25,
       "legendary": 0.12,
-      "shards": 0.33
+      "shard": 0.33
     }
   },
   "EarlyChars": {
@@ -22,7 +22,7 @@
       "rare": 0.33,
       "epic": 0.25,
       "legendary": 0.12,
-      "shards": 0.33
+      "shard": 0.33
     }
   },
   "EarlyMirrorChars": {
@@ -35,7 +35,7 @@
       "rare": 0.40,
       "epic": 0.33,
       "legendary": 0.17,
-      "shards": 0.33
+      "shard": 0.33
     }
   },
   "Normal": {
@@ -48,7 +48,7 @@
       "rare": 0.33,
       "epic": 0.25,
       "legendary": 0.12,
-      "shards": 0.33
+      "shard": 0.33
     }
   },
   "Mirror": {
@@ -61,7 +61,7 @@
       "rare": 0.40,
       "epic": 0.33,
       "legendary": 0.17,
-      "shards": 0.33
+      "shard": 0.33
     }
   },
   "Elite": {
@@ -74,7 +74,7 @@
       "rare": 1.11,
       "epic": 0.67,
       "legendary": 0.40,
-      "shards": 1.04
+      "shard": 1.04
     }
   }
 }

@@ -7,6 +7,7 @@ import whatsNew from '../assets/WhatsNew.json';
 
 import campaignConfigs from '../assets/campaignConfigs.json';
 import battleData from '../assets/battleData.json';
+import recipeData from '../assets/recipeData.json';
 
 import shadowsun from '../assets/legendary-events/Shadowsun.json';
 import aunshi from '../assets/legendary-events/Aunshi.json';
@@ -14,15 +15,18 @@ import ragnar from '../assets/legendary-events/Ragnar.json';
 
 import {
     ICampaignBattle,
+    ICampaignBattleComposed,
     ICampaignConfigs,
     ICampaignsData,
     ICharLegendaryEvents,
     IDirtyDozenChar,
+    IDropRate,
+    IRecipeData,
     IUnitData,
     IWhatsNew,
     UnitDataRaw,
 } from '../models/interfaces';
-import { Faction } from '../models/enums';
+import { Campaign, CampaignType, Faction } from '../models/enums';
 import { rarityStringToNumber, rarityToStars } from '../models/constants';
 
 export class StaticDataService {
@@ -30,9 +34,10 @@ export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;
     static readonly campaignConfigs: ICampaignConfigs = campaignConfigs;
     static readonly battleData: ICampaignsData = battleData;
+    static readonly recipeData: IRecipeData = recipeData;
 
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
-    static readonly campaignsGrouped: Record<string, ICampaignBattle[]> = this.getCampaignGrouped();
+    static readonly campaignsGrouped: Record<string, ICampaignBattleComposed[]> = this.getCampaignGrouped2();
 
     static readonly legendaryEvents = [
         {
@@ -63,6 +68,26 @@ export class StaticDataService {
 
     static getCampaignGrouped(): Record<string, ICampaignBattle[]> {
         const allBattles = sortBy(Object.values(this.battleData), 'nodeNumber');
+        return groupBy(allBattles, 'campaign');
+    }
+
+    static getCampaignGrouped2(): Record<string, ICampaignBattleComposed[]> {
+        const allBattles = sortBy(Object.values(this.battleData), 'nodeNumber').map(battle => {
+            const config = this.campaignConfigs[battle.campaignType as CampaignType];
+            const recipe = this.recipeData[battle.reward];
+            const dropRateKey: keyof IDropRate = recipe.rarity.toLowerCase() as keyof IDropRate;
+
+            return {
+                campaign: battle.campaign,
+                energyCost: config.energyCost,
+                dailyBattleCount: config.dailyBattleCount,
+                dropRate: config.dropRate[dropRateKey],
+                nodeNumber: battle.nodeNumber,
+                rarity: recipe.rarity,
+                reward: battle.reward,
+                expectedGold: battle.expectedGold,
+            };
+        });
         return groupBy(allBattles, 'campaign');
     }
 

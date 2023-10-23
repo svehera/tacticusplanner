@@ -426,7 +426,7 @@ export interface IDropRate {
     rare: number;
     epic: number;
     legendary: number;
-    shards: number;
+    shard: number;
 }
 
 export interface ICampaignsData {
@@ -439,4 +439,36 @@ export interface ICampaignBattle {
     nodeNumber: number;
     reward: string; // material name or hero name in case farming shards
     expectedGold: number;
+}
+
+export interface ICampaignBattleComposed {
+    campaign: Campaign | string;
+    energyCost: number;
+    dailyBattleCount: number;
+    dropRate: number;
+    nodeNumber: number;
+    rarity: string;
+    reward: string; // material name or hero name in case farming shards
+    expectedGold: number;
+}
+
+type MaterialName = string;
+
+export interface IRecipeData {
+    [material: MaterialName]: IMaterial;
+}
+
+export interface IMaterial {
+    material: MaterialName;
+    rarity: string;
+    craftable: boolean;
+    stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
+    faction?: string; // if not specifor to faction then this property can be omitted ("undefined");
+    recipe?: Array<IMaterialRecipeIngredient>; // if material is not craftable recipe can be omitted ("undefined")
+    locations?: Array<string>; // campaigs locations campaigs can be in short form (IM12) or long (Indomitus mirros) depedings how you decisde to update battleData json.
+}
+
+export interface IMaterialRecipeIngredient {
+    material: MaterialName | 'Gold'; // material name;
+    count: number;
 }
