@@ -18,9 +18,7 @@ export const RestoreBackupDialog = ({ isOpen, onClose }: { isOpen: boolean; onCl
     useEffect(() => {
         const localStorage = new PersonalDataLocalStorage();
         const restoredData = localStorage.restoreData();
-        if (!restoredData) {
-            enqueueSnackbar('No Backup Found', { variant: 'error' });
-        } else {
+        if (restoredData) {
             setData(restoredData);
         }
     }, [isOpen]);
