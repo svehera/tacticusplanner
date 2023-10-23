@@ -1,9 +1,11 @@
 ﻿import React, { ChangeEvent, useContext, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
-import { Avatar, Divider, IconButton, Menu, MenuItem } from '@mui/material';
+import { Avatar, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import RegisterIcon from '@mui/icons-material/PersonAdd';
 import UploadIcon from '@mui/icons-material/Upload';
+import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore';
 import { convertData, PersonalDataLocalStorage } from '../../services';
 import DownloadIcon from '@mui/icons-material/Download';
 import { usePopUpControls } from '../../hooks/pop-up-controls';
@@ -14,6 +16,8 @@ import { enqueueSnackbar } from 'notistack';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { IPersonalData2 } from '../../models/interfaces';
 import { GlobalState } from '../../models/global-state';
+import { RestoreBackupDialog } from './restore-backup-dialog';
+import ListItemText from '@mui/material/ListItemText';
 
 export const UserMenu = () => {
     const store = useContext(StoreContext);
@@ -21,6 +25,7 @@ export const UserMenu = () => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
+    const [showRestoreBackup, setShowRestoreBackup] = useState(false);
     const userMenuControls = usePopUpControls();
 
     const { isAuthenticated, logout, username } = useAuth();
@@ -69,10 +74,9 @@ export const UserMenu = () => {
         const restoredData = localStorage.restoreData();
         if (!restoredData) {
             enqueueSnackbar('No Backup Found', { variant: 'error' });
-            return;
+        } else {
+            setShowRestoreBackup(true);
         }
-        setStore(new GlobalState(restoredData), true);
-        enqueueSnackbar('Data restored', { variant: 'success' });
     };
 
     function stringToColor(string: string) {
@@ -137,27 +141,47 @@ export const UserMenu = () => {
                 {!isAuthenticated ? (
                     <div>
                         <MenuItem onClick={() => setShowLoginUser(true)}>
-                            <LoginIcon /> Login
+                            <ListItemIcon>
+                                <LoginIcon />
+                            </ListItemIcon>
+                            <ListItemText>Login</ListItemText>
                         </MenuItem>
                         <MenuItem onClick={() => setShowRegisterUser(true)}>
-                            <RegisterIcon /> Register
+                            <ListItemIcon>
+                                <RegisterIcon />
+                            </ListItemIcon>
+                            <ListItemText>Register</ListItemText>
                         </MenuItem>
                     </div>
                 ) : (
                     <MenuItem onClick={() => logout()}>
-                        <LoginIcon /> Logout
+                        <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        <ListItemText>Logout</ListItemText>
                     </MenuItem>
                 )}
 
                 <Divider />
                 <MenuItem onClick={() => inputRef.current?.click()}>
-                    <UploadIcon /> Import
+                    <ListItemIcon>
+                        <UploadIcon />
+                    </ListItemIcon>
+                    <ListItemText>Import</ListItemText>
                 </MenuItem>
                 <MenuItem onClick={() => downloadJson()}>
-                    <DownloadIcon /> Export
+                    <ListItemIcon>
+                        <DownloadIcon />
+                    </ListItemIcon>
+                    <ListItemText>Export</ListItemText>
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={() => restoreData()}>Restore Data</MenuItem>
+                <MenuItem onClick={() => restoreData()}>
+                    <ListItemIcon>
+                        <SettingsBackupRestoreIcon />
+                    </ListItemIcon>
+                    <ListItemText>Restore Backup</ListItemText>
+                </MenuItem>
             </Menu>
             <RegisterUserDialog
                 isOpen={showRegisterUser}
@@ -167,6 +191,7 @@ export const UserMenu = () => {
                 }}
             />
             <LoginUserDialog isOpen={showLoginUser} onClose={() => setShowLoginUser(false)} />
+            <RestoreBackupDialog isOpen={showRestoreBackup} onClose={() => setShowRestoreBackup(false)} />
         </Box>
     );
 };

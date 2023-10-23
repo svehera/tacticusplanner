@@ -207,6 +207,28 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             });
     }, [isAuthenticated]);
 
+    useEffect(() => {
+        const sixtySeconds = 1000 * 60;
+        const oneDay = 60 * 60 * 24 * 1000;
+
+        const timerId = setInterval(() => {
+            const lastBackup = localStore.getBackupDate();
+            if (!lastBackup) {
+                const localData = GlobalState.toStore(globalState);
+                localStore.storeBackup(localData);
+            } else {
+                const now = new Date();
+                const timeDifference = now.getTime() - lastBackup.getTime();
+                if (timeDifference > oneDay) {
+                    const localData = GlobalState.toStore(globalState);
+                    localStore.storeBackup(localData);
+                }
+            }
+        }, sixtySeconds);
+
+        return () => clearInterval(timerId);
+    }, []);
+
     return (
         <DispatchContext.Provider value={dispatch}>
             <StoreContext.Provider value={globalState}> {children} </StoreContext.Provider>
