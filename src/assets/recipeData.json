@@ -3,7 +3,7 @@
     "material": "Adamantium Filaments",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I59",
       "O7",
@@ -16,7 +16,7 @@
     "material": "Adamantium Ore",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I48",
       "FoC14",
@@ -32,7 +32,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Tyranids",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O44"
     ]
@@ -41,7 +41,7 @@
     "material": "Advanced Filaments",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I61",
       "SH18",
@@ -54,7 +54,7 @@
     "material": "Advanced Rebreather",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I68",
       "O33",
@@ -65,7 +65,7 @@
     "material": "Air Purificator",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "FoC63",
       "SH65",
@@ -77,7 +77,7 @@
     "material": "Ancient Runes",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O32",
       "SH39",
@@ -90,7 +90,7 @@
     "material": "Archeotech Bionics",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       
     ]
@@ -99,7 +99,7 @@
     "material": "Archeo-Tech Remnant",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "IME38"
     ]
@@ -109,7 +109,7 @@
     "craftable": false,
     "stat": "Armour",
     "faction": "Orks",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O51",
       "OM69",
@@ -120,7 +120,7 @@
     "material": "Armor Trim",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "FoC7",
       "O11",
@@ -133,7 +133,7 @@
     "material": "Artificer Tasset Plate",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O37",
       "SH54",
@@ -147,7 +147,7 @@
     "material": "Artificial Vertebrae",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "FoC38",
       "SH36",
@@ -161,7 +161,7 @@
     "material": "Attack Vector Data-Slate",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I25",
       "FoC35",
@@ -173,7 +173,7 @@
     "material": "Auspex",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "FoC19",
       "O64",
@@ -186,7 +186,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Orks",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O46",
       "OM61",
@@ -197,7 +197,7 @@
     "material": "Ballistics Data",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I47",
       "FoC55",
@@ -211,7 +211,7 @@
     "material": "Barrel of Promethium",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I54",
       "FoC33",
@@ -224,7 +224,7 @@
     "material": "Basic Auxiliary Core",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I22",
       "FoC32",
@@ -239,7 +239,7 @@
     "material": "Battle Scar",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC22",
       "O74",
@@ -253,7 +253,7 @@
     "craftable": false,
     "stat": "Armour",
     "faction": "Space Wolves",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC51",
       "SH62",
@@ -264,7 +264,7 @@
     "material": "Bionic Eye",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC69",
       "SH48",
@@ -277,7 +277,7 @@
     "material": "Bionic Neural Pathways",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Epic",
+    "rarity": "epic",
     "locations": [
       "O43",
       "FoCM29",
@@ -288,7 +288,7 @@
     "material": "Bladesman's Honour",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O22",
       "SH52",
@@ -300,7 +300,7 @@
     "craftable": false,
     "stat": "Armour",
     "faction": "Black Legion",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC65",
       "FoCM65",
@@ -313,7 +313,7 @@
     "craftable": false,
     "stat": "Armour",
     "faction": "Adepta Sororitas",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O50",
       "FoCM67",
@@ -325,7 +325,7 @@
     "material": "Blessed Promethium Canister",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Epic",
+    "rarity": "epic",
     "locations": [
       "FoC73",
       "IM26",
@@ -338,7 +338,7 @@
     "craftable": false,
     "stat": "Armour",
     "faction": "Black Templars",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O54",
       "OM66",
@@ -349,7 +349,7 @@
     "material": "Blessed Tasset Plate",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "FoC23",
       "SH35",
@@ -364,7 +364,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Death Guard",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "FoCM72",
       "FoCE29",
@@ -377,7 +377,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Black Legion",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "FoCM71",
       "FoCE23",
@@ -390,7 +390,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Thousand Sons",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "IME14"
     ]
@@ -400,7 +400,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Black Templars",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "OM70",
       "OE28"
@@ -410,7 +410,7 @@
     "material": "Box of Salvage",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I31",
       "FoC28",
@@ -424,7 +424,7 @@
     "material": "Can of Promethium",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I50",
       "FoC47",
@@ -437,7 +437,7 @@
     "material": "Canister of Chemicals",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I46",
       "FoC24",
@@ -451,7 +451,7 @@
     "material": "Ceramite Lump",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I26",
       "O20",
@@ -465,7 +465,7 @@
     "craftable": false,
     "stat": "Damage",
     "faction": "Black Templars",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O41",
       "OM59",
@@ -477,7 +477,7 @@
     "craftable": false,
     "stat": "Damage",
     "faction": "Dark Angels",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "SH46",
       "IME33",
@@ -488,7 +488,7 @@
     "material": "Chip Damage",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "FoC6",
       "O3",
@@ -501,7 +501,7 @@
     "material": "Classified Data-Slate",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC62",
       "SH42",
@@ -515,7 +515,7 @@
     "material": "Cloak",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "FoC37",
       "O10",
@@ -529,7 +529,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Ultramarines",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "IM70",
       "IE23",
@@ -541,7 +541,7 @@
     "material": "Combat Stimms",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "FoC58",
       "O9",
@@ -553,7 +553,7 @@
     "material": "Crate of Salvage",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC11",
       "SH33",
@@ -567,7 +567,7 @@
     "craftable": false,
     "stat": "Armour",
     "faction": "Dark Angels",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "SH56",
       "IME34",
@@ -578,7 +578,7 @@
     "material": "Divinator Class Auspex",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "O73",
       "IM63"
@@ -589,7 +589,7 @@
     "craftable": false,
     "stat": "Armour",
     "faction": "Tau Empire",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoCM50",
       "IE22",
@@ -600,7 +600,7 @@
     "material": "Duplicate Organ",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Epic",
+    "rarity": "epic",
     "locations": [
       "I73",
       "OM73"
@@ -611,7 +611,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Tau Empire",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "FoCM62",
       "IE30",
@@ -623,7 +623,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Necrons",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "I74",
       "IM71",
@@ -635,7 +635,7 @@
     "material": "Enriched Rations",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I20",
       "SH55",
@@ -651,7 +651,7 @@
     "craftable": false,
     "stat": "Damage",
     "faction": "Astra Militarum",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC53",
       "FoCM59",
@@ -664,7 +664,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Black Legion",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC56",
       "FoCM55",
@@ -676,7 +676,7 @@
     "material": "Field Ration",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I37",
       "FoC50",
@@ -689,7 +689,7 @@
     "material": "Fine Micro-Generator",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I43",
       "FoC31",
@@ -704,7 +704,7 @@
     "material": "Fine Purity Seal",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I32",
       "SH25",
@@ -718,7 +718,7 @@
     "craftable": false,
     "stat": "Armour",
     "faction": "Astra Militarum",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC70",
       "FoCM70",
@@ -730,7 +730,7 @@
     "material": "Frag Grenade",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I17",
       "FoC29",
@@ -742,7 +742,7 @@
     "material": "Golden Ornamental Skull",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Epic",
+    "rarity": "epic",
     "locations": [
       "FoC72",
       "SH73",
@@ -756,7 +756,7 @@
     "material": "Greater Reliquary of Vengeance",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Epic",
+    "rarity": "epic",
     "locations": [
       "IM25",
       "FoCM74",
@@ -767,7 +767,7 @@
     "material": "Healing Ointment",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I53",
       "FoC18",
@@ -780,7 +780,7 @@
     "material": "Helmet Trophy",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "FoC41",
       "O31",
@@ -794,7 +794,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Adepta Sororitas",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "IM72",
       "IE29",
@@ -807,7 +807,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Astra Militarum",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "FoCM66",
       "FoCE28",
@@ -819,7 +819,7 @@
     "craftable": false,
     "stat": "Damage",
     "faction": "Adepta Sororitas",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC57",
       "IM33",
@@ -831,7 +831,7 @@
     "material": "Hypermaterial Shifter",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Epic",
+    "rarity": "epic",
     "locations": [
       "SH59",
       "IM74",
@@ -843,7 +843,7 @@
     "craftable": false,
     "stat": "Damage",
     "faction": "Black Legion",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC54",
       "FoCM44",
@@ -856,7 +856,7 @@
     "craftable": false,
     "stat": "Damage",
     "faction": "Thousand Sons",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "SH41",
       "IME11"
@@ -867,7 +867,7 @@
     "craftable": false,
     "stat": "Damage",
     "faction": "Orks",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O35",
       "OM53",
@@ -879,7 +879,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Dark Angels",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "SH37",
       "IME29",
@@ -890,7 +890,7 @@
     "material": "Kill Count",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC17",
       "O34",
@@ -904,7 +904,7 @@
     "material": "Krak Grenade",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "I70",
       "O39",
@@ -918,7 +918,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Orks",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "OM72",
       "OE23",
@@ -929,7 +929,7 @@
     "material": "Lesser Reliquary of Protection",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I33",
       "FoC27",
@@ -943,7 +943,7 @@
     "material": "Lesser Reliquary of Vengeance",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I51",
       "IM55"
@@ -953,7 +953,7 @@
     "material": "Locator Beacon",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I36",
       "O72",
@@ -967,7 +967,7 @@
     "material": "Marksman's Honour",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I35"
     ]
@@ -976,7 +976,7 @@
     "material": "Master-Crafted Ammo",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "IME15",
       "IME39"
@@ -986,7 +986,7 @@
     "material": "Mesh Weave",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "O23",
       "SH20",
@@ -998,7 +998,7 @@
     "material": "Metal Decorative Skull",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "I71",
       "O36",
@@ -1011,7 +1011,7 @@
     "material": "Metal Joints",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "FoC26",
       "O6",
@@ -1022,7 +1022,7 @@
     "material": "Minor Bionic Enhancement",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I49",
       "FoC10",
@@ -1038,7 +1038,7 @@
     "material": "Mission Assignment",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "FoC52",
       "O13",
@@ -1051,7 +1051,7 @@
     "material": "Mission Objective",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "FoC43",
       "O25",
@@ -1065,7 +1065,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Space Wolves",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "OM71",
       "OE39"
@@ -1075,7 +1075,7 @@
     "material": "Mutation: Scaly Skin",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I66",
       "FoC39",
@@ -1089,7 +1089,7 @@
     "material": "Mutation: Tough Skin",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I64",
       "FoC9",
@@ -1102,7 +1102,7 @@
     "material": "Mutation: Warped Heart",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O49",
       "SH71",
@@ -1115,7 +1115,7 @@
     "material": "Mutation: Warped Lungs",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I65",
       "FoC36",
@@ -1130,7 +1130,7 @@
     "material": "Mutation: Warped Muscles",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "FoC1",
       "SH7",
@@ -1144,7 +1144,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Necrons",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I67",
       "SH61",
@@ -1156,7 +1156,7 @@
     "material": "Nasty Spikes",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "FoC2",
       "O4",
@@ -1171,7 +1171,7 @@
     "material": "Oath Seal",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I40",
       "O26",
@@ -1184,7 +1184,7 @@
     "material": "Otherworldly Energy",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I56",
       "SH51",
@@ -1195,7 +1195,7 @@
     "material": "Pile of Salvage",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I28",
       "FoC16",
@@ -1211,7 +1211,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Death Guard",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC68",
       "OM67",
@@ -1223,7 +1223,7 @@
     "material": "Plasma Cell",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I42",
       "FoC34",
@@ -1238,7 +1238,7 @@
     "material": "Psychic Force Conduit",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "IME7"
     ]
@@ -1247,7 +1247,7 @@
     "material": "Psyk-Conductive Material",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "FoCME38",
       "FoCME7"
@@ -1258,7 +1258,7 @@
     "craftable": false,
     "stat": "Damage",
     "faction": "Aeldari",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "SH44",
       "IM32",
@@ -1269,7 +1269,7 @@
     "material": "Purity Seal",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I19",
       "FoC46",
@@ -1285,7 +1285,7 @@
     "craftable": false,
     "stat": "Armour",
     "faction": "Ultramarines",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       
     ]
@@ -1294,7 +1294,7 @@
     "material": "Rebreather",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "O17",
       "SH66",
@@ -1308,7 +1308,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Necrons",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "I63",
       "IM43",
@@ -1319,7 +1319,7 @@
     "material": "Reinforced Cables",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "FoC40",
       "O27",
@@ -1333,7 +1333,7 @@
     "craftable": false,
     "stat": "Armour",
     "faction": "Tyranids",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "OM56"
     ]
@@ -1342,7 +1342,7 @@
     "material": "Reinforced Scale-Plates",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "O12",
       "IM8",
@@ -1356,7 +1356,7 @@
     "material": "Relic Hilt",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Epic",
+    "rarity": "epic",
     "locations": [
       "FoCM28",
       "OE31",
@@ -1368,7 +1368,7 @@
     "material": "Reliquary of Protection",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I58",
       "O21",
@@ -1381,7 +1381,7 @@
     "material": "Reliquary of Vengeance",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I41",
       "SH43",
@@ -1393,7 +1393,7 @@
     "material": "Repair-Kit",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC66",
       "SH40",
@@ -1406,7 +1406,7 @@
     "material": "Revered Talisman",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Epic",
+    "rarity": "epic",
     "locations": [
       "FoC74"
     ]
@@ -1416,7 +1416,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Black Templars",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O47",
       "OM63",
@@ -1428,7 +1428,7 @@
     "craftable": false,
     "stat": "Armour",
     "faction": "Thousand Sons",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "SH31",
       "IME12"
@@ -1438,7 +1438,7 @@
     "material": "Ropes and Chains",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "FoC5",
       "O1",
@@ -1452,7 +1452,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Adepta Sororitas",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O48",
       "IM73",
@@ -1464,7 +1464,7 @@
     "material": "Round of Ammo",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I38",
       "FoC20",
@@ -1478,7 +1478,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Aeldari",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "OM74",
       "OE29",
@@ -1489,7 +1489,7 @@
     "material": "Satchel",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "FoC4",
       "O18",
@@ -1504,7 +1504,7 @@
     "material": "Scrolls",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "FoC25",
       "O16",
@@ -1517,7 +1517,7 @@
     "material": "Secret Agenda",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Epic",
+    "rarity": "epic",
     "locations": [
       "FoC61",
       "IME13"
@@ -1528,7 +1528,7 @@
     "craftable": false,
     "stat": "Damage",
     "faction": "Tau Empire",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "IM39",
       "IE18",
@@ -1540,7 +1540,7 @@
     "craftable": false,
     "stat": "Damage",
     "faction": "Death Guard",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O38",
       "FoCM64",
@@ -1552,7 +1552,7 @@
     "material": "Single Power Pack",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I55",
       "O68",
@@ -1566,7 +1566,7 @@
     "material": "Slicing Claws",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "O19",
       "SH53",
@@ -1578,7 +1578,7 @@
     "material": "Sophisticated Material",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I57",
       "SH6",
@@ -1591,7 +1591,7 @@
     "material": "Special Issue Ammo",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Epic",
+    "rarity": "epic",
     "locations": [
       "O40",
       "IM28",
@@ -1603,7 +1603,7 @@
     "material": "Standard-Issue Tourniquet",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I39",
       "FoC12",
@@ -1619,7 +1619,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Tau Empire",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "IM38",
       "IE20",
@@ -1631,7 +1631,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Dark Angels",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "IME30",
       "FoCME29"
@@ -1641,7 +1641,7 @@
     "material": "Subdermal Plating",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O29"
     ]
@@ -1651,7 +1651,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Tyranids",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "locations": [
       "OM68"
     ]
@@ -1661,7 +1661,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Thousand Sons",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "SH57",
       "IME10"
@@ -1671,7 +1671,7 @@
     "material": "Tank of Promethium",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "I62",
       "IM44",
@@ -1682,7 +1682,7 @@
     "material": "Targeting Link",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I72",
       "FoC21",
@@ -1697,7 +1697,7 @@
     "material": "Terminator Honours",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Epic",
+    "rarity": "epic",
     "locations": [
       "O42",
       "IM31",
@@ -1709,7 +1709,7 @@
     "material": "The Gold Phoenix",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I23",
       "O28",
@@ -1722,7 +1722,7 @@
     "material": "The Iron Phoenix",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I16",
       "FoCM18",
@@ -1733,7 +1733,7 @@
     "material": "The Phoenix Ascendant",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC64",
       "IM20",
@@ -1746,7 +1746,7 @@
     "material": "The Silver Aquila",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "FoC49",
       "O63",
@@ -1757,7 +1757,7 @@
     "material": "The Silver Eagle with Swords",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I69"
     ]
@@ -1766,7 +1766,7 @@
     "material": "The Silver Scope",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "I34",
       "FoCM5",
@@ -1777,7 +1777,7 @@
     "material": "Thick Skin",
     "craftable": false,
     "stat": "Armour",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "FoC48",
       "O5",
@@ -1789,7 +1789,7 @@
     "craftable": false,
     "stat": "Damage",
     "faction": "Tyranids",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "O52"
     ]
@@ -1799,7 +1799,7 @@
     "craftable": false,
     "stat": "Armour",
     "faction": "Death Guard",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC59",
       "FoCM53",
@@ -1812,7 +1812,7 @@
     "craftable": false,
     "stat": "Damage",
     "faction": "Necrons",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "IM22",
       "FoCM51",
@@ -1824,7 +1824,7 @@
     "material": "Vox-Caster",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "FoC8",
       "O14",
@@ -1836,7 +1836,7 @@
     "material": "Warp Locus",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Epic",
+    "rarity": "epic",
     "locations": [
       "SH67",
       "FoCM25",
@@ -1849,7 +1849,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Aeldari",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "SH32",
       "FoCM33",
@@ -1860,7 +1860,7 @@
     "material": "Weapon Anointment Oils",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I52",
       "FoC44",
@@ -1876,7 +1876,7 @@
     "material": "Weapon Parts",
     "craftable": false,
     "stat": "Damage",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "FoC13",
       "O8",
@@ -1891,7 +1891,7 @@
     "material": "Weathering",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Epic",
+    "rarity": "epic",
     "locations": [
       "FoCM73"
     ]
@@ -1900,7 +1900,7 @@
     "material": "Wires",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Common",
+    "rarity": "common",
     "locations": [
       "I44",
       "FoC3",
@@ -1914,7 +1914,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Space Wolves",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "SH38",
       "OM54",
@@ -1926,7 +1926,7 @@
     "craftable": false,
     "stat": "Damage",
     "faction": "Space Wolves",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "SH50",
       "OM64",
@@ -1938,7 +1938,7 @@
     "craftable": false,
     "stat": "Armour",
     "faction": "Aeldari",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC71",
       "SH58",
@@ -1950,7 +1950,7 @@
     "material": "Writings",
     "craftable": false,
     "stat": "Health",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "locations": [
       "FoC42",
       "O24",
@@ -1964,7 +1964,7 @@
     "craftable": false,
     "stat": "Health",
     "faction": "Astra Militarum",
-    "rarity": "Rare",
+    "rarity": "rare",
     "locations": [
       "FoC67",
       "IM16",
