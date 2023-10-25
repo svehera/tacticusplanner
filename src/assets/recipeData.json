@@ -126,7 +126,7 @@
       "O11",
       "SH5",
       "OM22",
-      "FoC1"
+      "FoCE1"
     ]
   },
   "Artificer Tasset Plate": {
@@ -140,7 +140,7 @@
       "IM18",
       "FoCM47",
       "OM49",
-      "FoC36"
+      "FoCE36"
     ]
   },
   "Artificial Vertebrae": {
@@ -154,7 +154,7 @@
       "SH63",
       "IM11",
       "FoCM63",
-      "FoC35"
+      "FoCE35"
     ]
   },
   "Attack Vector Data-Slate": {
@@ -304,7 +304,7 @@
     "locations": [
       "FoC65",
       "FoCM65",
-      "FoC21",
+      "FoCE21",
       "FoCME36"
     ]
   },
@@ -367,8 +367,8 @@
     "rarity": "Legendary",
     "locations": [
       "FoCM72",
-      "FoC29",
-      "FoC39",
+      "FoCE29",
+      "FoCE39",
       "FoCME31"
     ]
   },
@@ -380,8 +380,8 @@
     "rarity": "Legendary",
     "locations": [
       "FoCM71",
-      "FoC23",
-      "FoC38",
+      "FoCE23",
+      "FoCE38",
       "FoCME37"
     ]
   },
@@ -444,7 +444,7 @@
       "O61",
       "IM62",
       "OM2",
-      "FoC11"
+      "FoCE11"
     ]
   },
   "Ceramite Lump": {
@@ -521,7 +521,7 @@
       "O10",
       "SH22",
       "OM34",
-      "FoC4"
+      "FoCE4"
     ]
   },
   "Codex Astartes Page": {
@@ -655,7 +655,7 @@
     "locations": [
       "FoC53",
       "FoCM59",
-      "FoC25",
+      "FoCE25",
       "FoCME3"
     ]
   },
@@ -668,7 +668,7 @@
     "locations": [
       "FoC56",
       "FoCM55",
-      "FoC19",
+      "FoCE19",
       "FoCME34"
     ]
   },
@@ -697,7 +697,7 @@
       "SH23",
       "IM64",
       "OM29",
-      "FoC14"
+      "FoCE14"
     ]
   },
   "Fine Purity Seal": {
@@ -722,7 +722,7 @@
     "locations": [
       "FoC70",
       "FoCM70",
-      "FoC27",
+      "FoCE27",
       "FoCME4"
     ]
   },
@@ -748,7 +748,7 @@
       "SH73",
       "IM27",
       "FoCM27",
-      "FoC37",
+      "FoCE37",
       "FoCME14"
     ]
   },
@@ -786,7 +786,7 @@
       "O31",
       "IM5",
       "FoCM54",
-      "FoC12"
+      "FoCE12"
     ]
   },
   "Holy Chaplet": {
@@ -810,7 +810,7 @@
     "rarity": "Legendary",
     "locations": [
       "FoCM66",
-      "FoC28",
+      "FoCE28",
       "FoCME6"
     ]
   },
@@ -847,7 +847,7 @@
     "locations": [
       "FoC54",
       "FoCM44",
-      "FoC17",
+      "FoCE17",
       "FoCME35"
     ]
   },
@@ -897,7 +897,7 @@
       "SH29",
       "IM14",
       "OM38",
-      "FoC15"
+      "FoCE15"
     ]
   },
   "Krak Grenade": {
@@ -960,7 +960,7 @@
       "SH16",
       "FoCM3",
       "OM43",
-      "FoC34"
+      "FoCE34"
     ]
   },
   "Marksman's Honour": {
@@ -1004,7 +1004,7 @@
       "O36",
       "IM35",
       "OM52",
-      "FoC30"
+      "FoCE30"
     ]
   },
   "Metal Joints": {
@@ -1044,7 +1044,7 @@
       "O13",
       "SH13",
       "OM12",
-      "FoC33"
+      "FoCE33"
     ]
   },
   "Mission Objective": {
@@ -1056,6 +1056,7 @@
       "FoC43",
       "O25",
       "SH14",
+      "FoCM34",
       "OM47"
     ]
   },
@@ -1081,7 +1082,7 @@
       "SH72",
       "IM40",
       "FoCM38",
-      "FoC13"
+      "FoCE13"
     ]
   },
   "Mutation: Tough Skin": {
@@ -1094,7 +1095,7 @@
       "FoC9",
       "SH11",
       "IM42",
-      "FoC3"
+      "FoCE3"
     ]
   },
   "Mutation: Warped Heart": {
@@ -1107,7 +1108,7 @@
       "SH71",
       "IM17",
       "FoCM46",
-      "FoC7"
+      "FoCE7"
     ]
   },
   "Mutation: Warped Lungs": {
@@ -1122,7 +1123,7 @@
       "SH64",
       "IM41",
       "FoCM68",
-      "FoC6"
+      "FoCE6"
     ]
   },
   "Mutation: Warped Muscles": {
@@ -1135,7 +1136,7 @@
       "SH7",
       "IM3",
       "FoCM24",
-      "FoC10"
+      "FoCE10"
     ]
   },
   "Nano Swarm": {
@@ -1162,7 +1163,7 @@
       "SH9",
       "FoCM21",
       "FoCM69",
-      "FoC9",
+      "FoCE9",
       "IME27"
     ]
   },
@@ -1214,7 +1215,7 @@
     "locations": [
       "FoC68",
       "OM67",
-      "FoC20",
+      "FoCE20",
       "FoCME13"
     ]
   },
@@ -1509,7 +1510,7 @@
       "O16",
       "SH2",
       "FoCM13",
-      "FoC2"
+      "FoCE2"
     ]
   },
   "Secret Agenda": {
@@ -1543,7 +1544,7 @@
     "locations": [
       "O38",
       "FoCM64",
-      "FoC18",
+      "FoCE18",
       "FoCME20"
     ]
   },
@@ -1557,7 +1558,7 @@
       "O68",
       "IM51",
       "OM9",
-      "FoC5",
+      "FoCE5",
       "FoCME27"
     ]
   },
@@ -1802,7 +1803,7 @@
     "locations": [
       "FoC59",
       "FoCM53",
-      "FoC22",
+      "FoCE22",
       "FoCME26"
     ]
   },
@@ -1839,7 +1840,7 @@
     "locations": [
       "SH67",
       "FoCM25",
-      "FoC31",
+      "FoCE31",
       "IME21"
     ]
   },
@@ -1968,13 +1969,13 @@
       "FoC67",
       "IM16",
       "FoCM43",
-      "FoC26",
+      "FoCE26",
       "FoCME2"
     ]
   },
   "Adamantine Mantle": {
     "material": "Adamantine Mantle",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Ultramarines",
     "recipe": [
@@ -1999,7 +2000,7 @@
   },
   "Adamantium Bar": {
     "material": "Adamantium Bar",
-    "rarity": "Rare",
+    "rarity": "rare",
     "stat": "Armour",
     "recipe": [
       {
@@ -2019,7 +2020,7 @@
   },
   "Adamantium Blades": {
     "material": "Adamantium Blades",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "stat": "Damage",
     "recipe": [
       {
@@ -2043,7 +2044,7 @@
   },
   "Adamantium Lump": {
     "material": "Adamantium Lump",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "stat": "Armour",
     "recipe": [
       {
@@ -2059,7 +2060,7 @@
   },
   "Adamantium Plates": {
     "material": "Adamantium Plates",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "recipe": [
       {
@@ -2083,7 +2084,7 @@
   },
   "Adamantium Sheet": {
     "material": "Adamantium Sheet",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "recipe": [
       {
@@ -2103,7 +2104,7 @@
   },
   "Adaptive Adrenal Glands": {
     "material": "Adaptive Adrenal Glands",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Health",
     "faction": "Tyranids",
     "recipe": [
@@ -2120,7 +2121,7 @@
   },
   "Adaptive Chitin Carapace": {
     "material": "Adaptive Chitin Carapace",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "faction": "Tyranids",
     "recipe": [
@@ -2137,7 +2138,7 @@
   },
   "Adaptive Toxin Sacs": {
     "material": "Adaptive Toxin Sacs",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Damage",
     "faction": "Tyranids",
     "recipe": [
@@ -2154,7 +2155,7 @@
   },
   "Advanced Bionics": {
     "material": "Advanced Bionics",
-    "rarity": "Rare",
+    "rarity": "rare",
     "stat": "Health",
     "recipe": [
       {
@@ -2174,7 +2175,7 @@
   },
   "Advanced Combat Stimms": {
     "material": "Advanced Combat Stimms",
-    "rarity": "Rare",
+    "rarity": "rare",
     "stat": "Damage",
     "recipe": [
       {
@@ -2194,7 +2195,7 @@
   },
   "Advanced Drone Controller": {
     "material": "Advanced Drone Controller",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "faction": "Tau Empire",
     "recipe": [
@@ -2211,7 +2212,7 @@
   },
   "Advanced Exospine": {
     "material": "Advanced Exospine",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "recipe": [
       {
@@ -2235,7 +2236,7 @@
   },
   "Advanced Mesh Weave Garment": {
     "material": "Advanced Mesh Weave Garment",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "recipe": [
       {
@@ -2255,7 +2256,7 @@
   },
   "Advanced Sensor Suite": {
     "material": "Advanced Sensor Suite",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Damage",
     "faction": "Tau Empire",
     "recipe": [
@@ -2272,7 +2273,7 @@
   },
   "Advanced Stimm Injector": {
     "material": "Advanced Stimm Injector",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Health",
     "faction": "Tau Empire",
     "recipe": [
@@ -2289,7 +2290,7 @@
   },
   "Ancient Tasset Plate": {
     "material": "Ancient Tasset Plate",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "recipe": [
       {
@@ -2313,7 +2314,7 @@
   },
   "Anointed Auxiliary Core": {
     "material": "Anointed Auxiliary Core",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Damage",
     "recipe": [
       {
@@ -2333,7 +2334,7 @@
   },
   "Anointed Micro-Generator": {
     "material": "Anointed Micro-Generator",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Damage",
     "recipe": [
       {
@@ -2353,7 +2354,7 @@
   },
   "Arbiter's Gaze": {
     "material": "Arbiter's Gaze",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Dark Angels",
     "recipe": [
@@ -2378,7 +2379,7 @@
   },
   "Artificer Flak Plates": {
     "material": "Artificer Flak Plates",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Astra Militarum",
     "recipe": [
@@ -2399,7 +2400,7 @@
   },
   "Athenaean Scroll": {
     "material": "Athenaean Scroll",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "faction": "Thousand Sons",
     "recipe": [
@@ -2420,7 +2421,7 @@
   },
   "Autoloader": {
     "material": "Autoloader",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "recipe": [
       {
@@ -2444,7 +2445,7 @@
   },
   "Auto-Reactive Stimm Injector": {
     "material": "Auto-Reactive Stimm Injector",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "faction": "Tau Empire",
     "recipe": [
@@ -2465,7 +2466,7 @@
   },
   "Bastion Honour": {
     "material": "Bastion Honour",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Astra Militarum",
     "recipe": [
@@ -2490,7 +2491,7 @@
   },
   "Battle Plan": {
     "material": "Battle Plan",
-    "rarity": "Rare",
+    "rarity": "rare",
     "stat": "Health",
     "recipe": [
       {
@@ -2514,7 +2515,7 @@
   },
   "Bell of Despair": {
     "material": "Bell of Despair",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "faction": "Death Guard",
     "recipe": [
@@ -2535,7 +2536,7 @@
   },
   "Belt of Frag Grenades": {
     "material": "Belt of Frag Grenades",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "stat": "Damage",
     "recipe": [
       {
@@ -2551,7 +2552,7 @@
   },
   "Belt of Krak Grenades": {
     "material": "Belt of Krak Grenades",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Damage",
     "recipe": [
       {
@@ -2567,7 +2568,7 @@
   },
   "Bionic Enhancement": {
     "material": "Bionic Enhancement",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "stat": "Health",
     "recipe": [
       {
@@ -2583,7 +2584,7 @@
   },
   "Black Rune": {
     "material": "Black Rune",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Black Legion",
     "recipe": [
@@ -2608,7 +2609,7 @@
   },
   "Blessed Bolts": {
     "material": "Blessed Bolts",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Adepta Sororitas",
     "recipe": [
@@ -2633,7 +2634,7 @@
   },
   "Blessed Promethium Tank": {
     "material": "Blessed Promethium Tank",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "recipe": [
       {
@@ -2653,7 +2654,7 @@
   },
   "Blessed Purity Seal": {
     "material": "Blessed Purity Seal",
-    "rarity": "Rare",
+    "rarity": "rare",
     "stat": "Armour",
     "recipe": [
       {
@@ -2677,7 +2678,7 @@
   },
   "Blessed Weapon Oils": {
     "material": "Blessed Weapon Oils",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "stat": "Damage",
     "recipe": [
       {
@@ -2697,7 +2698,7 @@
   },
   "Bolts of Furious Vengeance": {
     "material": "Bolts of Furious Vengeance",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Dark Angels",
     "recipe": [
@@ -2718,7 +2719,7 @@
   },
   "Bolts of Judgement": {
     "material": "Bolts of Judgement",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Damage",
     "faction": "Dark Angels",
     "recipe": [
@@ -2735,7 +2736,7 @@
   },
   "Boonstone": {
     "material": "Boonstone",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Thousand Sons",
     "recipe": [
@@ -2760,7 +2761,7 @@
   },
   "Bosspole": {
     "material": "Bosspole",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Orks",
     "recipe": [
@@ -2785,7 +2786,7 @@
   },
   "Box of Ammo": {
     "material": "Box of Ammo",
-    "rarity": "Rare",
+    "rarity": "rare",
     "stat": "Damage",
     "recipe": [
       {
@@ -2805,7 +2806,7 @@
   },
   "Box of Rations": {
     "material": "Box of Rations",
-    "rarity": "Rare",
+    "rarity": "rare",
     "stat": "Health",
     "recipe": [
       {
@@ -2825,7 +2826,7 @@
   },
   "Brutal Iron Jaw": {
     "material": "Brutal Iron Jaw",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Damage",
     "faction": "Orks",
     "recipe": [
@@ -2842,7 +2843,7 @@
   },
   "Cabalistic Implements": {
     "material": "Cabalistic Implements",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "faction": "Thousand Sons",
     "recipe": [
@@ -2859,7 +2860,7 @@
   },
   "Calibanite Hood": {
     "material": "Calibanite Hood",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "faction": "Dark Angels",
     "recipe": [
@@ -2876,7 +2877,7 @@
   },
   "Candelabrum of Burning Wrath": {
     "material": "Candelabrum of Burning Wrath",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "faction": "Black Templars",
     "recipe": [
@@ -2897,7 +2898,7 @@
   },
   "Ceramite Bar": {
     "material": "Ceramite Bar",
-    "rarity": "Rare",
+    "rarity": "rare",
     "stat": "Armour",
     "recipe": [
       {
@@ -2917,7 +2918,7 @@
   },
   "Ceramite Plates": {
     "material": "Ceramite Plates",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "recipe": [
       {
@@ -2941,7 +2942,7 @@
   },
   "Ceramite Sheet": {
     "material": "Ceramite Sheet",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "recipe": [
       {
@@ -2961,7 +2962,7 @@
   },
   "Chain of Righteous Zeal": {
     "material": "Chain of Righteous Zeal",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Damage",
     "faction": "Black Templars",
     "recipe": [
@@ -2978,7 +2979,7 @@
   },
   "Chain of Zealous Wrath": {
     "material": "Chain of Zealous Wrath",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Black Templars",
     "recipe": [
@@ -2999,7 +3000,7 @@
   },
   "Cloud of Flies": {
     "material": "Cloud of Flies",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Death Guard",
     "recipe": [
@@ -3024,7 +3025,7 @@
   },
   "Codex Astartes": {
     "material": "Codex Astartes",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "faction": "Ultramarines",
     "recipe": [
@@ -3049,7 +3050,7 @@
   },
   "Crusader's Tabbard": {
     "material": "Crusader's Tabbard",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "faction": "Black Templars",
     "recipe": [
@@ -3066,7 +3067,7 @@
   },
   "Cybork Body Parts": {
     "material": "Cybork Body Parts",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "faction": "Orks",
     "recipe": [
@@ -3091,7 +3092,7 @@
   },
   "Daemon Shells": {
     "material": "Daemon Shells",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Black Legion",
     "recipe": [
@@ -3116,7 +3117,7 @@
   },
   "Daemonic Armor Trim": {
     "material": "Daemonic Armor Trim",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "faction": "Black Legion",
     "recipe": [
@@ -3133,7 +3134,7 @@
   },
   "Death Bell": {
     "material": "Death Bell",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Health",
     "faction": "Death Guard",
     "recipe": [
@@ -3150,7 +3151,7 @@
   },
   "Death Shroud": {
     "material": "Death Shroud",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "faction": "Death Guard",
     "recipe": [
@@ -3167,7 +3168,7 @@
   },
   "Decorated Cloak": {
     "material": "Decorated Cloak",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "recipe": [
       {
@@ -3191,7 +3192,7 @@
   },
   "Ded 'Ard Plate": {
     "material": "Ded 'Ard Plate",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "faction": "Orks",
     "recipe": [
@@ -3208,7 +3209,7 @@
   },
   "Ded Brutal Iron Jaw": {
     "material": "Ded Brutal Iron Jaw",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Orks",
     "recipe": [
@@ -3229,7 +3230,7 @@
   },
   "Ded Shiny 'Ard Plate": {
     "material": "Ded Shiny 'Ard Plate",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Orks",
     "recipe": [
@@ -3250,7 +3251,7 @@
   },
   "Digital Weapons": {
     "material": "Digital Weapons",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "recipe": [
       {
@@ -3274,7 +3275,7 @@
   },
   "Divine Cloak": {
     "material": "Divine Cloak",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "recipe": [
       {
@@ -3298,7 +3299,7 @@
   },
   "Electromantic Cable Bundle": {
     "material": "Electromantic Cable Bundle",
-    "rarity": "Rare",
+    "rarity": "rare",
     "stat": "Health",
     "recipe": [
       {
@@ -3322,7 +3323,7 @@
   },
   "Ensorcelled Infusion": {
     "material": "Ensorcelled Infusion",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Damage",
     "faction": "Thousand Sons",
     "recipe": [
@@ -3339,7 +3340,7 @@
   },
   "Epaulettes": {
     "material": "Epaulettes",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Health",
     "faction": "Astra Militarum",
     "recipe": [
@@ -3356,7 +3357,7 @@
   },
   "Epaulettes of Renown": {
     "material": "Epaulettes of Renown",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "faction": "Astra Militarum",
     "recipe": [
@@ -3377,7 +3378,7 @@
   },
   "Exospine": {
     "material": "Exospine",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Health",
     "recipe": [
       {
@@ -3401,7 +3402,7 @@
   },
   "Exquisite Medical Supplies": {
     "material": "Exquisite Medical Supplies",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Health",
     "recipe": [
       {
@@ -3421,7 +3422,7 @@
   },
   "Filligrane Psytronome": {
     "material": "Filligrane Psytronome",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Damage",
     "faction": "Aeldari",
     "recipe": [
@@ -3438,7 +3439,7 @@
   },
   "Filligrane Wraithbone Plate": {
     "material": "Filligrane Wraithbone Plate",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "faction": "Aeldari",
     "recipe": [
@@ -3455,7 +3456,7 @@
   },
   "Fine Auxiliary Core": {
     "material": "Fine Auxiliary Core",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "stat": "Damage",
     "recipe": [
       {
@@ -3471,7 +3472,7 @@
   },
   "Fine Cloak": {
     "material": "Fine Cloak",
-    "rarity": "Rare",
+    "rarity": "rare",
     "stat": "Armour",
     "recipe": [
       {
@@ -3491,7 +3492,7 @@
   },
   "First Aid Kit": {
     "material": "First Aid Kit",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "stat": "Health",
     "recipe": [
       {
@@ -3511,7 +3512,7 @@
   },
   "Frostblade": {
     "material": "Frostblade",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Space Wolves",
     "recipe": [
@@ -3536,7 +3537,7 @@
   },
   "Grand Helmet Trophy": {
     "material": "Grand Helmet Trophy",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Health",
     "recipe": [
       {
@@ -3556,7 +3557,7 @@
   },
   "Grand Purity Seal": {
     "material": "Grand Purity Seal",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "recipe": [
       {
@@ -3576,7 +3577,7 @@
   },
   "Grand Skull Trophy": {
     "material": "Grand Skull Trophy",
-    "rarity": "Rare",
+    "rarity": "rare",
     "stat": "Health",
     "recipe": [
       {
@@ -3600,7 +3601,7 @@
   },
   "Grand Strategy": {
     "material": "Grand Strategy",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "recipe": [
       {
@@ -3624,7 +3625,7 @@
   },
   "Grandiose Skull Ornament": {
     "material": "Grandiose Skull Ornament",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "recipe": [
       {
@@ -3648,7 +3649,7 @@
   },
   "Great Cult Implements": {
     "material": "Great Cult Implements",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Thousand Sons",
     "recipe": [
@@ -3669,7 +3670,7 @@
   },
   "Greater Reliquary of Protection": {
     "material": "Greater Reliquary of Protection",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Health",
     "recipe": [
       {
@@ -3693,7 +3694,7 @@
   },
   "Heirloom Entrenching Tool": {
     "material": "Heirloom Entrenching Tool",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Astra Militarum",
     "recipe": [
@@ -3714,7 +3715,7 @@
   },
   "Hellfury Bolts": {
     "material": "Hellfury Bolts",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Ultramarines",
     "recipe": [
@@ -3739,7 +3740,7 @@
   },
   "High-Capacity Power Pack": {
     "material": "High-Capacity Power Pack",
-    "rarity": "Rare",
+    "rarity": "rare",
     "stat": "Damage",
     "recipe": [
       {
@@ -3759,7 +3760,7 @@
   },
   "High-Grade Flak Plates": {
     "material": "High-Grade Flak Plates",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "faction": "Astra Militarum",
     "recipe": [
@@ -3776,7 +3777,7 @@
   },
   "Holy Corset Armor": {
     "material": "Holy Corset Armor",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Adepta Sororitas",
     "recipe": [
@@ -3797,7 +3798,7 @@
   },
   "Hymn of Sacrifice": {
     "material": "Hymn of Sacrifice",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Damage",
     "faction": "Adepta Sororitas",
     "recipe": [
@@ -3814,7 +3815,7 @@
   },
   "Hymn of the Divine": {
     "material": "Hymn of the Divine",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Adepta Sororitas",
     "recipe": [
@@ -3835,7 +3836,7 @@
   },
   "Hyper-Adaptive Adrenal Glands": {
     "material": "Hyper-Adaptive Adrenal Glands",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "faction": "Tyranids",
     "recipe": [
@@ -3856,7 +3857,7 @@
   },
   "Hyper-Adaptive Chitin Carapace": {
     "material": "Hyper-Adaptive Chitin Carapace",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Tyranids",
     "recipe": [
@@ -3877,7 +3878,7 @@
   },
   "Hyper-Adaptive Toxin Sacs": {
     "material": "Hyper-Adaptive Toxin Sacs",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Tyranids",
     "recipe": [
@@ -3898,7 +3899,7 @@
   },
   "Hypermetabolic Acceleration": {
     "material": "Hypermetabolic Acceleration",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "faction": "Tyranids",
     "recipe": [
@@ -3923,7 +3924,7 @@
   },
   "Hyperstim": {
     "material": "Hyperstim",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "recipe": [
       {
@@ -3947,7 +3948,7 @@
   },
   "Ice Troll Hide": {
     "material": "Ice Troll Hide",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Armour",
     "faction": "Space Wolves",
     "recipe": [
@@ -3964,7 +3965,7 @@
   },
   "Ice Wyrm Hide": {
     "material": "Ice Wyrm Hide",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Space Wolves",
     "recipe": [
@@ -3985,7 +3986,7 @@
   },
   "Icon of Daemonic Vengeance": {
     "material": "Icon of Daemonic Vengeance",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Damage",
     "faction": "Black Legion",
     "recipe": [
@@ -4002,7 +4003,7 @@
   },
   "Icon of Infernal Vengeance": {
     "material": "Icon of Infernal Vengeance",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Black Legion",
     "recipe": [
@@ -4023,7 +4024,7 @@
   },
   "Immaterial Shroud": {
     "material": "Immaterial Shroud",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Death Guard",
     "recipe": [
@@ -4044,7 +4045,7 @@
   },
   "Implant Attack": {
     "material": "Implant Attack",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Tyranids",
     "recipe": [
@@ -4069,7 +4070,7 @@
   },
   "Imposing Horns": {
     "material": "Imposing Horns",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "recipe": [
       {
@@ -4093,7 +4094,7 @@
   },
   "Impressive Armor Trim": {
     "material": "Impressive Armor Trim",
-    "rarity": "Rare",
+    "rarity": "rare",
     "stat": "Armour",
     "recipe": [
       {
@@ -4113,7 +4114,7 @@
   },
   "Infernal Armor Trim": {
     "material": "Infernal Armor Trim",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Black Legion",
     "recipe": [
@@ -4134,7 +4135,7 @@
   },
   "Infernal Eye of Horus": {
     "material": "Infernal Eye of Horus",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "faction": "Black Legion",
     "recipe": [
@@ -4155,7 +4156,7 @@
   },
   "Inner Circle Hood": {
     "material": "Inner Circle Hood",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Dark Angels",
     "recipe": [
@@ -4176,7 +4177,7 @@
   },
   "Iridium Plating": {
     "material": "Iridium Plating",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Armour",
     "faction": "Tau Empire",
     "recipe": [
@@ -4201,7 +4202,7 @@
   },
   "Key of Achrabael": {
     "material": "Key of Achrabael",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "faction": "Dark Angels",
     "recipe": [
@@ -4222,7 +4223,7 @@
   },
   "Key of Knowledge": {
     "material": "Key of Knowledge",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Health",
     "faction": "Dark Angels",
     "recipe": [
@@ -4239,7 +4240,7 @@
   },
   "Kraken Tooth Necklace": {
     "material": "Kraken Tooth Necklace",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "faction": "Space Wolves",
     "recipe": [
@@ -4260,7 +4261,7 @@
   },
   "Legendary Reliquary of Protection": {
     "material": "Legendary Reliquary of Protection",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "recipe": [
       {
@@ -4284,7 +4285,7 @@
   },
   "Legendary Reliquary of Vengeance": {
     "material": "Legendary Reliquary of Vengeance",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Damage",
     "recipe": [
       {
@@ -4308,7 +4309,7 @@
   },
   "Lights of Purgation": {
     "material": "Lights of Purgation",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Health",
     "faction": "Black Templars",
     "recipe": [
@@ -4325,7 +4326,7 @@
   },
   "Macharian Cross": {
     "material": "Macharian Cross",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Health",
     "faction": "Astra Militarum",
     "recipe": [
@@ -4342,7 +4343,7 @@
   },
   "Magazine": {
     "material": "Magazine",
-    "rarity": "Uncommon",
+    "rarity": "uncommon",
     "stat": "Damage",
     "recipe": [
       {
@@ -4358,7 +4359,7 @@
   },
   "Malefic Scroll": {
     "material": "Malefic Scroll",
-    "rarity": "Epic",
+    "rarity": "epic",
     "stat": "Health",
     "faction": "Thousand Sons",
     "recipe": [
@@ -4375,7 +4376,7 @@
   },
   "Mark of Chaos Undivided": {
     "material": "Mark of Chaos Undivided",
-    "rarity": "Legendary",
+    "rarity": "legendary",
     "stat": "Health",
     "faction": "Black Legion",
     "recipe": [
@@ -6410,9 +6411,9 @@
   "Vindicta": {
     "material": "Vindicta",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Adepta Sororitas",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "I29",
       "IM15",
@@ -6422,64 +6423,64 @@
   "Celestine": {
     "material": "Celestine",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Adepta Sororitas",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "FoC60",
-      "FoC32"
+      "FoCE32"
     ]
   },
   "Sibyll Devine": {
     "material": "Sibyll Devine",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Astra Militarum",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "FoC30",
-      "FoC16"
+      "FoCE16"
     ]
   },
   "Kut Skoden": {
     "material": "Kut Skoden",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Astra Militarum",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "FoC15",
-      "FoC8"
+      "FoCE8"
     ]
   },
   "Thaddeus Noble": {
     "material": "Thaddeus Noble",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Astra Militarum",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "FoC45",
-      "FoC24"
+      "FoCE24"
     ]
   },
   "Castellan Creed": {
     "material": "Castellan Creed",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Astra Militarum",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "FoC75",
-      "FoC40"
+      "FoCE40"
     ]
   },
   "Sword Brother Godswyl": {
     "material": "Sword Brother Godswyl",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Black Templars",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "O30",
       "OE16"
@@ -6488,9 +6489,9 @@
   "Brother Burchard": {
     "material": "Brother Burchard",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Black Templars",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "O15",
       "OE8"
@@ -6499,9 +6500,9 @@
   "Ancient Thoread": {
     "material": "Ancient Thoread",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Black Templars",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "O45",
       "OE24"
@@ -6510,9 +6511,9 @@
   "Brother Jaeger": {
     "material": "Brother Jaeger",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Black Templars",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "O60",
       "OE32"
@@ -6521,9 +6522,9 @@
   "High Marshal Helbrecht": {
     "material": "High Marshal Helbrecht",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Black Templars",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "O75",
       "OE40"
@@ -6532,9 +6533,9 @@
   "Varro Tigurius": {
     "material": "Varro Tigurius",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Ultramarines",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "I18",
       "IM60",
@@ -6544,9 +6545,9 @@
   "Certus": {
     "material": "Certus",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Ultramarines",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "I21",
       "IM45",
@@ -6556,9 +6557,9 @@
   "Bellator": {
     "material": "Bellator",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Ultramarines",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "I24",
       "IM30",
@@ -6568,9 +6569,9 @@
   "Incisus": {
     "material": "Incisus",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Ultramarines",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "I27"
     ]
@@ -6578,20 +6579,20 @@
   "Marneus Calgar": {
     "material": "Marneus Calgar",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Ultramarines",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "IM75",
-      "IME4"
+      "IME40"
     ]
   },
   "Makhotep": {
     "material": "Makhotep",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Necrons",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "I15",
       "IE8"
@@ -6600,9 +6601,9 @@
   "Imospekh": {
     "material": "Imospekh",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Necrons",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "I30",
       "IE16"
@@ -6611,9 +6612,9 @@
   "Aleph-Null": {
     "material": "Aleph-Null",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Necrons",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "I45",
       "IE24"
@@ -6622,9 +6623,9 @@
   "Thutmose": {
     "material": "Thutmose",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Necrons",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "I60",
       "IE32"
@@ -6633,9 +6634,9 @@
   "Anuphet": {
     "material": "Anuphet",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Necrons",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "I75",
       "IE40"
@@ -6644,9 +6645,9 @@
   "Snotflogga": {
     "material": "Snotflogga",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Orks",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "OM45"
     ]
@@ -6654,9 +6655,9 @@
   "Gibbascrapz": {
     "material": "Gibbascrapz",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Orks",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "OM30"
     ]
@@ -6664,9 +6665,9 @@
   "Snappawrecka": {
     "material": "Snappawrecka",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Orks",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "OM15"
     ]
@@ -6674,9 +6675,9 @@
   "Tanksmasha": {
     "material": "Tanksmasha",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Orks",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "OM60"
     ]
@@ -6684,9 +6685,9 @@
   "Boss Gulgortz": {
     "material": "Boss Gulgortz",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Orks",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "OM75"
     ]
@@ -6694,9 +6695,9 @@
   "Angrax": {
     "material": "Angrax",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Black Legion",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "FoCM15",
       "FoCME8"
@@ -6705,9 +6706,9 @@
   "Volk": {
     "material": "Volk",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Black Legion",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "FoCM45",
       "FoCME24"
@@ -6716,9 +6717,9 @@
   "Archimatos": {
     "material": "Archimatos",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Black Legion",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "FoCM30",
       "FoCME16"
@@ -6727,9 +6728,9 @@
   "Haarken Worldclaimer": {
     "material": "Haarken Worldclaimer",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Black Legion",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "FoCM60",
       "FoCME32"
@@ -6738,9 +6739,9 @@
   "Abaddon The Despoiler": {
     "material": "Abaddon The Despoiler",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Black Legion",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "FoCM75",
       "FoCME40"
@@ -6749,9 +6750,9 @@
   "Yazaghor": {
     "material": "Yazaghor",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Thousand Sons",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "SH45"
     ]
@@ -6759,9 +6760,9 @@
   "Toth": {
     "material": "Toth",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Thousand Sons",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "SH15"
     ]
@@ -6769,9 +6770,9 @@
   "Abraxas": {
     "material": "Abraxas",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Thousand Sons",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "SH30"
     ]
@@ -6779,9 +6780,9 @@
   "Thaumachus": {
     "material": "Thaumachus",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Thousand Sons",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "SH60"
     ]
@@ -6789,9 +6790,9 @@
   "Ahriman": {
     "material": "Ahriman",
     "craftable": false,
-    "stat": "Shard",
+    "stat": "shard",
     "faction": "Thousand Sons",
-    "rarity": "Shard",
+    "rarity": "shard",
     "locations": [
       "SH75"
     ]
