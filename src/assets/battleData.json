@@ -409,7 +409,7 @@
     "campaign": "Indomitus",
     "campaignType": "Normal",
     "nodeNumber": 73,
-    "reward": "Hypermaterial Shifter",
+    "reward": "Duplicate Organ",
     "expectedGold": 20
   },
   "I74": {
@@ -927,7 +927,7 @@
     "campaign": "Fall of Cadia",
     "campaignType": "Normal",
     "nodeNumber": 74,
-    "reward": "Purity Seal of the Primarch",
+    "reward": "Revered Talisman",
     "expectedGold": 77
   },
   "FoC75": {
@@ -1025,7 +1025,7 @@
     "campaign": "Octarius",
     "campaignType": "Normal",
     "nodeNumber": 19,
-    "reward": "Blessed Tasset Plate",
+    "reward": "Slicing Claws",
     "expectedGold": 59
   },
   "O2": {
@@ -1816,7 +1816,7 @@
     "campaign": "Saim-Hann",
     "campaignType": "Normal",
     "nodeNumber": 53,
-    "reward": "Air Purificator",
+    "reward": "Slicing Claws",
     "expectedGold": 71
   },
   "SH54": {
@@ -2215,7 +2215,7 @@
     "campaign": "Indomitus Mirror",
     "campaignType": "Mirror",
     "nodeNumber": 37,
-    "reward": "The Silver Eagle with Swords",
+    "reward": "Slicing Claws",
     "expectedGold": 65
   },
   "IM38": {
@@ -2754,7 +2754,7 @@
     "campaign": "Fall of Cadia Mirror",
     "campaignType": "Mirror",
     "nodeNumber": 4,
-    "reward": "Marksman's Honour",
+    "reward": "Slicing Claws",
     "expectedGold": 53
   },
   "FoCM40": {
@@ -4630,7 +4630,7 @@
     "campaign": "Indomitus Mirror Elite",
     "campaignType": "Elite",
     "nodeNumber": 38,
-    "reward": "Purity Seal of the Primarch",
+    "reward": "Archeo-Tech Remnant",
     "expectedGold": 108
   },
   "IME39": {
@@ -4647,10 +4647,10 @@
     "reward": "Nano Swarm",
     "expectedGold": 83
   },
-  "IME4": {
+  "IME40": {
     "campaign": "Indomitus Mirror Elite",
     "campaignType": "Elite",
-    "nodeNumber": 4,
+    "nodeNumber": 40,
     "reward": "Marneus Calgar",
     "expectedGold": 83
   },
@@ -4745,12 +4745,103 @@
     "reward": "Archimatos",
     "expectedGold": 91.5
   },
+  "FoCME17": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 17,
+    "reward": "Hymn of Martyrs",
+    "expectedGold": 101
+  },
+  "FoCME18": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 18,
+    "reward": "Chapter Pendant",
+    "expectedGold": 101
+  },
+  "FoCME19": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 19,
+    "reward": "Ballistics Data",
+    "expectedGold": 101
+  },
   "FoCME2": {
     "campaign": "Fall of Cadia Mirror Elite",
     "campaignType": "Elite",
     "nodeNumber": 2,
     "reward": "Zeidos Ribbon",
     "expectedGold": 83
+  },
+  "FoCME20": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 20,
+    "reward": "Sigil of Decay",
+    "expectedGold": 101
+  },
+  "FoCME21": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 21,
+    "reward": "The Iron Phoenix",
+    "expectedGold": 101
+  },
+  "FoCME22": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 22,
+    "reward": "Blessed Corset Armor",
+    "expectedGold": 101
+  },
+  "FoCME23": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 23,
+    "reward": "Dark Hood",
+    "expectedGold": 101
+  },
+  "FoCME24": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 24,
+    "reward": "Volk",
+    "expectedGold": 101
+  },
+  "FoCME25": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 25,
+    "reward": "Satchel",
+    "expectedGold": 108
+  },
+  "FoCME26": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 26,
+    "reward": "Unnatural Vapour Dispenser",
+    "expectedGold": 108
+  },
+  "FoCME27": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 27,
+    "reward": "Single Power Pack",
+    "expectedGold": 108
+  },
+  "FoCME28": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 28,
+    "reward": "Holy Chaplet",
+    "expectedGold": 108
+  },
+  "FoCME29": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 29,
+    "reward": "Stone Guardian Fragment",
+    "expectedGold": 108
   },
   "FoCME3": {
     "campaign": "Fall of Cadia Mirror Elite",
@@ -4759,12 +4850,89 @@
     "reward": "Entrenching Tool",
     "expectedGold": 83
   },
+  "FoCME30": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 30,
+    "reward": "The Silver Scope",
+    "expectedGold": 108
+  },
+  "FoCME31": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 31,
+    "reward": "Blessing of Nurgle",
+    "expectedGold": 108
+  },
+  "FoCME32": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 32,
+    "reward": "Haarken Worldclaimer",
+    "expectedGold": 108
+  },
+  "FoCME33": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 33,
+    "reward": "Minor Bionic Enhancement",
+    "expectedGold": 108
+  },
+  "FoCME34": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 34,
+    "reward": "Eye of Horus",
+    "expectedGold": 108
+  },
+  "FoCME35": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 35,
+    "reward": "Icon of Vengeance",
+    "expectedGold": 108
+  },
+  "FoCME36": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 36,
+    "reward": "Blasphemous Armor Trim",
+    "expectedGold": 108
+  },
+  "FoCME37": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 37,
+    "reward": "Blessing of the Dark Gods",
+    "expectedGold": 108
+  },
+  "FoCME38": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 38,
+    "reward": "Psyk-Conductive Material",
+    "expectedGold": 108
+  },
+  "FoCME39": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 39,
+    "reward": "Relic Hilt",
+    "expectedGold": 108
+  },
   "FoCME4": {
     "campaign": "Fall of Cadia Mirror Elite",
     "campaignType": "Elite",
     "nodeNumber": 4,
     "reward": "Flak Plates",
     "expectedGold": 83
+  },
+  "FoCME40": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 40,
+    "reward": "Abaddon The Despoiler",
+    "expectedGold": 108
   },
   "FoCME5": {
     "campaign": "Fall of Cadia Mirror Elite",
