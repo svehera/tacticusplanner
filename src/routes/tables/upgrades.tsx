@@ -34,33 +34,35 @@ export const Upgrades = () => {
                 headerName: 'Upgrade',
                 minWidth: 200,
             },
+            {
+                field: 'faction',
+                headerName: 'Faction',
+                maxWidth: 150,
+                width: 150,
+                minWidth: 150,
+            },
+            {
+                field: 'rarity',
+                headerName: 'Rarity',
+                maxWidth: 150,
+                width: 150,
+                minWidth: 150,
+            },
+            {
+                field: 'stat',
+                headerName: 'Type',
+                maxWidth: 150,
+                width: 150,
+                minWidth: 150,
+            },
         ];
 
         switch (selection) {
+            case 'Shards':
             case 'Non Craftable': {
                 return [
                     ...base,
-                    {
-                        field: 'rarity',
-                        headerName: 'Rarity',
-                        maxWidth: 150,
-                        width: 150,
-                        minWidth: 150,
-                    },
-                    {
-                        field: 'stat',
-                        headerName: 'Type',
-                        maxWidth: 150,
-                        width: 150,
-                        minWidth: 150,
-                    },
-                    {
-                        field: 'faction',
-                        headerName: 'Faction',
-                        maxWidth: 150,
-                        width: 150,
-                        minWidth: 150,
-                    },
+
                     {
                         field: 'locations',
                         headerName: 'Locations',
@@ -71,27 +73,6 @@ export const Upgrades = () => {
             case 'Craftable': {
                 return [
                     ...base,
-                    {
-                        field: 'rarity',
-                        headerName: 'Rarity',
-                        maxWidth: 150,
-                        width: 150,
-                        minWidth: 150,
-                    },
-                    {
-                        field: 'stat',
-                        headerName: 'Type',
-                        maxWidth: 150,
-                        width: 150,
-                        minWidth: 150,
-                    },
-                    {
-                        field: 'faction',
-                        headerName: 'Faction',
-                        maxWidth: 150,
-                        width: 150,
-                        minWidth: 150,
-                    },
                     {
                         field: 'recipe',
                         headerName: 'Recipe',
@@ -104,31 +85,6 @@ export const Upgrades = () => {
 
                             return '';
                         },
-                    },
-                ];
-            }
-
-            case 'Shards': {
-                return [
-                    ...base,
-                    {
-                        field: 'stat',
-                        headerName: 'Type',
-                        maxWidth: 150,
-                        width: 150,
-                        minWidth: 150,
-                    },
-                    {
-                        field: 'faction',
-                        headerName: 'Faction',
-                        maxWidth: 150,
-                        width: 150,
-                        minWidth: 150,
-                    },
-                    {
-                        field: 'locations',
-                        headerName: 'Locations',
-                        minWidth: 150,
                     },
                 ];
             }
