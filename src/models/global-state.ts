@@ -33,7 +33,7 @@ export class GlobalState implements IGlobalState {
         this.autoTeamsPreferences = personalData.autoTeamsPreferences;
         this.selectedTeamOrder = personalData.selectedTeamOrder;
         this.leSelectedRequirements = personalData.leSelectedRequirements;
-        this.leSelectedTeams = personalData.leTeams;
+        this.leSelectedTeams = GlobalState.fixNames(personalData.leTeams);
         this.leProgress = personalData.leProgress;
         for (const leProgressKey in this.leProgress) {
             const leProgress = this.leProgress[+leProgressKey as LegendaryEventEnum];
@@ -41,13 +41,15 @@ export class GlobalState implements IGlobalState {
                 leProgress.notes = '';
             }
         }
-        this.goals = personalData.goals;
+        this.goals = GlobalState.fixNames(personalData.goals);
 
         this.modifiedDate = personalData.modifiedDate;
         this.seenAppVersion = personalData.seenAppVersion;
 
+        const chars = GlobalState.fixNames(personalData.characters);
+
         this.characters = StaticDataService.unitsData.map(staticData => {
-            const personalCharData = personalData.characters.find(c => c.name === staticData.name);
+            const personalCharData = chars.find(c => c.name === staticData.name);
             const combinedData: IPersonalCharacterData2 = {
                 name: staticData.name,
                 rank: personalCharData?.rank ?? Rank.Locked,
@@ -60,6 +62,22 @@ export class GlobalState implements IGlobalState {
                 rank: +combinedData.rank,
             };
         });
+    }
+
+    static fixNames<T>(obj: T): T {
+        const fixName = {
+            'Aleph-null': 'Aleph-Null',
+            "Aun'shi": "Aun'Shi",
+        };
+
+        let result = JSON.stringify(obj);
+
+        for (const fixNameKey in fixName) {
+            const value = fixName[fixNameKey as keyof typeof fixName];
+            result = result.replaceAll(fixNameKey, value);
+        }
+
+        return JSON.parse(result);
     }
 
     static toStore(value: IGlobalState): IPersonalData2 {

@@ -78,6 +78,10 @@ export default function GoalCard({
     const { characters } = useContext(StoreContext);
     const character = characters.find(x => x.name === goal.character) as ICharacter;
 
+    if (!character) {
+        console.log('no ', goal.character);
+    }
+
     return (
         <React.Fragment>
             <Card
