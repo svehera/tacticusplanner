@@ -472,3 +472,35 @@ export interface IMaterialRecipeIngredient {
     material: MaterialName | 'Gold'; // material name;
     count: number;
 }
+
+export interface IRecipeDataFull {
+    [material: MaterialName]: IMaterialFull;
+}
+
+export interface IMaterialFull {
+    material: MaterialName;
+    rarity: Rarity;
+    craftable: boolean;
+    stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
+    faction?: string; // if not specifor to faction then this property can be omitted ("undefined");
+    recipe?: Array<IMaterialRecipeIngredientFull>; // if material is not craftable recipe can be omitted ("undefined")
+    allMaterials?: IMaterialRecipeIngredientFull[];
+}
+
+export interface IMaterialRecipeIngredientFull {
+    material: MaterialName | 'Gold'; // material name;
+    count: number;
+    rarity: Rarity;
+    stat: string;
+    recipe?: IMaterialRecipeIngredientFull[];
+    locations?: Array<string>;
+    locationsComposed?: Array<ICampaignBattleComposed>;
+}
+
+export interface IRankUpData {
+    [character: string]: IRankUpData2;
+}
+
+export interface IRankUpData2 {
+    [rank: string]: string[];
+}

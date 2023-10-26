@@ -1,4 +1,4 @@
-﻿import { groupBy, sortBy, uniq } from 'lodash';
+﻿import { groupBy, map, sortBy, sumBy, uniq } from 'lodash';
 
 import unitsData from '../assets/UnitData.json';
 import dirtyDozen from '../assets/DirtyDozen.json';
@@ -8,25 +8,28 @@ import whatsNew from '../assets/WhatsNew.json';
 import campaignConfigs from '../assets/campaignConfigs.json';
 import battleData from '../assets/battleData.json';
 import recipeData from '../assets/recipeData.json';
+import rankUpData from '../assets/rankUpData.json';
 
 import shadowsun from '../assets/legendary-events/Shadowsun.json';
 import aunshi from '../assets/legendary-events/Aunshi.json';
 import ragnar from '../assets/legendary-events/Ragnar.json';
 
 import {
-    ICampaignBattle,
     ICampaignBattleComposed,
     ICampaignConfigs,
     ICampaignsData,
     ICharLegendaryEvents,
     IDirtyDozenChar,
     IDropRate,
+    IMaterialRecipeIngredientFull,
+    IRankUpData,
     IRecipeData,
+    IRecipeDataFull,
     IUnitData,
     IWhatsNew,
     UnitDataRaw,
 } from '../models/interfaces';
-import { Campaign, CampaignType, Faction } from '../models/enums';
+import { CampaignType, Faction, RarityString } from '../models/enums';
 import { rarityStringToNumber, rarityToStars } from '../models/constants';
 
 export class StaticDataService {
@@ -35,9 +38,12 @@ export class StaticDataService {
     static readonly campaignConfigs: ICampaignConfigs = campaignConfigs;
     static readonly battleData: ICampaignsData = battleData;
     static readonly recipeData: IRecipeData = recipeData;
+    static readonly rankUpData: IRankUpData = rankUpData;
+    static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = this.getCampaignComposed();
 
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
     static readonly campaignsGrouped: Record<string, ICampaignBattleComposed[]> = this.getCampaignGrouped();
+    static readonly recipeDataFull: IRecipeDataFull = this.convertRecipeData();
 
     static readonly legendaryEvents = [
         {
@@ -67,12 +73,20 @@ export class StaticDataService {
     ];
 
     static getCampaignGrouped(): Record<string, ICampaignBattleComposed[]> {
-        const allBattles = sortBy(Object.values(this.battleData), 'nodeNumber').map(battle => {
+        const allBattles = sortBy(Object.values(this.campaignsComposed), 'nodeNumber');
+        return groupBy(allBattles, 'campaign');
+    }
+
+    static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
+        const result: Record<string, ICampaignBattleComposed> = {};
+        for (const battleDataKey in this.battleData) {
+            const battle = this.battleData[battleDataKey];
+
             const config = this.campaignConfigs[battle.campaignType as CampaignType];
             const recipe = this.recipeData[battle.reward];
             const dropRateKey: keyof IDropRate = recipe?.rarity.toLowerCase() as keyof IDropRate;
 
-            return {
+            result[battleDataKey] = {
                 campaign: battle.campaign,
                 energyCost: config.energyCost,
                 dailyBattleCount: config.dailyBattleCount,
@@ -82,8 +96,77 @@ export class StaticDataService {
                 reward: battle.reward,
                 expectedGold: battle.expectedGold,
             };
-        });
-        return groupBy(allBattles, 'campaign');
+        }
+
+        return result;
+    }
+
+    static convertRecipeData(): IRecipeDataFull {
+        const result: IRecipeDataFull = {};
+        const upgrades = Object.keys(this.recipeData);
+
+        const getRecipe = (
+            material: string,
+            count: number,
+            allMaterials: IMaterialRecipeIngredientFull[]
+        ): IMaterialRecipeIngredientFull => {
+            const upgrade = this.recipeData[material];
+
+            if (!upgrade || !upgrade.recipe?.length) {
+                const item: IMaterialRecipeIngredientFull = {
+                    material,
+                    count,
+                    rarity: rarityStringToNumber[upgrade?.rarity as RarityString],
+                    stat: upgrade?.stat ?? '',
+                    locations: upgrade?.locations,
+                };
+                allMaterials.push(item);
+                return item;
+            } else {
+                return {
+                    material,
+                    count,
+                    stat: upgrade.stat,
+                    locations: upgrade.locations,
+                    rarity: rarityStringToNumber[upgrade.rarity as RarityString],
+                    recipe: upgrade.recipe.map(item => getRecipe(item.material, count * item.count, allMaterials)),
+                };
+            }
+        };
+
+        for (const upgradeName of upgrades) {
+            const upgrade = this.recipeData[upgradeName];
+            if (!upgrade.craftable) {
+                result[upgradeName] = {
+                    material: upgrade.material,
+                    stat: upgrade.stat,
+                    rarity: rarityStringToNumber[upgrade.rarity as RarityString],
+                    craftable: upgrade.craftable,
+                    allMaterials: [getRecipe(upgrade.material, 1, [])],
+                };
+            } else {
+                const allMaterials: IMaterialRecipeIngredientFull[] = [];
+                result[upgradeName] = {
+                    material: upgrade.material,
+                    stat: upgrade.stat,
+                    rarity: rarityStringToNumber[upgrade.rarity as RarityString],
+                    craftable: upgrade.craftable,
+                    recipe: upgrade.recipe?.map(item => getRecipe(item.material, item.count, allMaterials)),
+                };
+
+                const groupedData = groupBy(allMaterials, 'material');
+
+                result[upgradeName].allMaterials = map(groupedData, (items, material) => ({
+                    material,
+                    count: sumBy(items, 'count'),
+                    rarity: items[0].rarity,
+                    stat: items[0].stat,
+                    locations: items[0].locations,
+                }));
+            }
+        }
+
+        return result;
     }
 
     static convertUnitData(rawData: UnitDataRaw): IUnitData {

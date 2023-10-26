@@ -15,6 +15,7 @@ import LegendaryEvent from './legendary-events/legendary-event';
 import { LegendaryEventEnum } from '../models/enums';
 import { Campaigns } from './tables/campaigns';
 import { Upgrades } from './tables/upgrades';
+import { RankLookup } from './tables/rankLookup';
 
 export const appRoutes: () => RouteObject[] = () => [
     {
@@ -36,6 +37,10 @@ export const appRoutes: () => RouteObject[] = () => [
             {
                 path: 'upgrades',
                 element: <Upgrades />,
+            },
+            {
+                path: 'rankLookup',
+                element: <RankLookup />,
             },
             {
                 path: 'campaigns',

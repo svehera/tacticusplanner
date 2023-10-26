@@ -116,21 +116,21 @@ code {
 }
 
 .common {
-  background-color: gray;
+  background-color:   #CDB3A0;
 }
 
 .uncommon {
-  background-color: saddlebrown;
+  background-color: #F9CB9C;
 }
 
 .rare {
-  background-color: silver;
+  background-color: #EFEFEF;
 }
 
 .epic {
-  background-color: gold;
+  background-color: #FFE599;
 }
 
 .legendary {
-  background-color: pink;
+  background-color:  #CFE2F3;
 }
