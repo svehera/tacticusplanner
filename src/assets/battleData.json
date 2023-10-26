@@ -2715,6 +2715,13 @@
     "reward": "Waystone",
     "expectedGold": 65
   },
+  "FoCM34": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 34,
+    "reward": "Mission Objective",
+    "expectedGold": 65
+  },
   "FoCM35": {
     "campaign": "Fall of Cadia Mirror",
     "campaignType": "Mirror",
@@ -3849,280 +3856,280 @@
     "reward": "Weapon Anointment Oils",
     "expectedGold": 91.5
   },
-  "FoC1": {
+  "FoCE1": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 1,
     "reward": "Armor Trim",
     "expectedGold": 83
   },
-  "FoC10": {
+  "FoCE10": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 10,
     "reward": "Mutation: Warped Muscles",
     "expectedGold": 91.5
   },
-  "FoC11": {
+  "FoCE11": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 11,
     "reward": "Canister of Chemicals",
     "expectedGold": 91.5
   },
-  "FoC12": {
+  "FoCE12": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 12,
     "reward": "Helmet Trophy",
     "expectedGold": 91.5
   },
-  "FoC13": {
+  "FoCE13": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 13,
     "reward": "Mutation: Scaly Skin",
     "expectedGold": 91.5
   },
-  "FoC14": {
+  "FoCE14": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 14,
     "reward": "Fine Micro-Generator",
     "expectedGold": 91.5
   },
-  "FoC15": {
+  "FoCE15": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 15,
     "reward": "Kill Count",
     "expectedGold": 91.5
   },
-  "FoC16": {
+  "FoCE16": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 16,
     "reward": "Sibyll Devine",
     "expectedGold": 91.5
   },
-  "FoC17": {
+  "FoCE17": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 17,
     "reward": "Icon of Vengeance",
     "expectedGold": 101
   },
-  "FoC18": {
+  "FoCE18": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 18,
     "reward": "Sigil of Decay",
     "expectedGold": 101
   },
-  "FoC19": {
+  "FoCE19": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 19,
     "reward": "Eye of Horus",
     "expectedGold": 101
   },
-  "FoC2": {
+  "FoCE2": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 2,
     "reward": "Scrolls",
     "expectedGold": 83
   },
-  "FoC20": {
+  "FoCE20": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 20,
     "reward": "Plague Bell",
     "expectedGold": 101
   },
-  "FoC21": {
+  "FoCE21": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 21,
     "reward": "Blasphemous Armor Trim",
     "expectedGold": 101
   },
-  "FoC22": {
+  "FoCE22": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 22,
     "reward": "Unnatural Vapour Dispenser",
     "expectedGold": 101
   },
-  "FoC23": {
+  "FoCE23": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 23,
     "reward": "Blessing of the Dark Gods",
     "expectedGold": 101
   },
-  "FoC24": {
+  "FoCE24": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 24,
     "reward": "Thaddeus Noble",
     "expectedGold": 101
   },
-  "FoC25": {
+  "FoCE25": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 25,
     "reward": "Entrenching Tool",
     "expectedGold": 108
   },
-  "FoC26": {
+  "FoCE26": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 26,
     "reward": "Zeidos Ribbon",
     "expectedGold": 108
   },
-  "FoC27": {
+  "FoCE27": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 27,
     "reward": "Flak Plates",
     "expectedGold": 108
   },
-  "FoC28": {
+  "FoCE28": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 28,
     "reward": "Honourifica Imperialis",
     "expectedGold": 108
   },
-  "FoC29": {
+  "FoCE29": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 29,
     "reward": "Blessing of Nurgle",
     "expectedGold": 108
   },
-  "FoC3": {
+  "FoCE3": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 3,
     "reward": "Mutation: Tough Skin",
     "expectedGold": 83
   },
-  "FoC30": {
+  "FoCE30": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 30,
     "reward": "Metal Decorative Skull",
     "expectedGold": 108
   },
-  "FoC31": {
+  "FoCE31": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 31,
     "reward": "Warp Locus",
     "expectedGold": 108
   },
-  "FoC32": {
+  "FoCE32": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 32,
     "reward": "Celestine",
     "expectedGold": 108
   },
-  "FoC33": {
+  "FoCE33": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 33,
     "reward": "Mission Assignment",
     "expectedGold": 108
   },
-  "FoC34": {
+  "FoCE34": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 34,
     "reward": "Locator Beacon",
     "expectedGold": 108
   },
-  "FoC35": {
+  "FoCE35": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 35,
     "reward": "Artificial Vertebrae",
     "expectedGold": 108
   },
-  "FoC36": {
+  "FoCE36": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 36,
     "reward": "Artificer Tasset Plate",
     "expectedGold": 108
   },
-  "FoC37": {
+  "FoCE37": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 37,
     "reward": "Golden Ornamental Skull",
     "expectedGold": 108
   },
-  "FoC38": {
+  "FoCE38": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 38,
     "reward": "Blessing of the Dark Gods",
     "expectedGold": 108
   },
-  "FoC39": {
+  "FoCE39": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 39,
     "reward": "Blessing of Nurgle",
     "expectedGold": 108
   },
-  "FoC4": {
+  "FoCE4": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 4,
     "reward": "Cloak",
     "expectedGold": 83
   },
-  "FoC40": {
+  "FoCE40": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 40,
     "reward": "Castellan Creed",
     "expectedGold": 108
   },
-  "FoC5": {
+  "FoCE5": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 5,
     "reward": "Single Power Pack",
     "expectedGold": 83
   },
-  "FoC6": {
+  "FoCE6": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 6,
     "reward": "Mutation: Warped Lungs",
     "expectedGold": 83
   },
-  "FoC7": {
+  "FoCE7": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 7,
     "reward": "Mutation: Warped Heart",
     "expectedGold": 83
   },
-  "FoC8": {
+  "FoCE8": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 8,
     "reward": "Kut Skoden",
     "expectedGold": 83
   },
-  "FoC9": {
+  "FoCE9": {
     "campaign": "Fall of Cadia Elite",
     "campaignType": "Elite",
     "nodeNumber": 9,
@@ -4652,7 +4659,7 @@
     "campaignType": "Elite",
     "nodeNumber": 40,
     "reward": "Marneus Calgar",
-    "expectedGold": 83
+    "expectedGold": 108
   },
   "IME5": {
     "campaign": "Indomitus Mirror Elite",
