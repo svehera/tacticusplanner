@@ -86,11 +86,15 @@ export class StaticDataService {
             const recipe = this.recipeData[battle.reward];
             const dropRateKey: keyof IDropRate = recipe?.rarity.toLowerCase() as keyof IDropRate;
 
+            const dropRate = config.dropRate[dropRateKey];
+            const energyPerItem = 1 / (dropRate / config.energyCost);
+
             result[battleDataKey] = {
                 campaign: battle.campaign,
                 energyCost: config.energyCost,
                 dailyBattleCount: config.dailyBattleCount,
-                dropRate: config.dropRate[dropRateKey],
+                dropRate,
+                energyPerItem,
                 nodeNumber: battle.nodeNumber,
                 rarity: recipe.rarity,
                 reward: battle.reward,

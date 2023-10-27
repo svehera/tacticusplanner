@@ -1,8 +1,13 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
+﻿import React, { useContext, useMemo, useRef, useState } from 'react';
 
-import { ICharacter2, IMaterialFull, IMaterialRecipeIngredientFull } from '../../models/interfaces';
+import {
+    ICampaignBattleComposed,
+    ICharacter2,
+    IMaterialFull,
+    IMaterialRecipeIngredientFull,
+} from '../../models/interfaces';
 import { StaticDataService } from '../../services';
-import { getEnumValues, rankToString } from '../../shared-logic/functions';
+import { fitGridOnWindowResize, getEnumValues, rankToString } from '../../shared-logic/functions';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import { Rank, Rarity } from '../../models/enums';
@@ -10,8 +15,11 @@ import { RankImage } from '../../shared-components/rank-image';
 import { CharactersAutocomplete } from '../../shared-components/characters-autocomplete';
 import { StoreContext } from '../../reducers/store.provider';
 import { groupBy, map, orderBy, sortBy, sum, sumBy } from 'lodash';
+import { AgGridReact } from 'ag-grid-react';
+import { ColDef, ValueFormatterParams } from 'ag-grid-community';
 
 export const RankLookup = () => {
+    const gridRef = useRef<AgGridReact<ICampaignBattleComposed>>(null);
     const { characters } = useContext(StoreContext);
     const charactersOptions = sortBy(characters, 'name');
     const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
@@ -59,7 +67,7 @@ export const RankLookup = () => {
         return recipes.filter(x => !!x);
     }, [character?.name, rank]);
 
-    const totalMaterials = useMemo<IMaterialRecipeIngredientFull[]>(() => {
+    const totalMaterials = useMemo<IMaterialEstimated[]>(() => {
         const groupedData = groupBy(
             upgrades.flatMap(x => x.allMaterials ?? []),
             'material'
@@ -81,34 +89,85 @@ export const RankLookup = () => {
         } else {
             setTotalGold(0);
         }
-        return orderBy(result, ['rarity', 'count'], ['desc', 'desc']);
+        return orderBy(result, ['rarity', 'count'], ['desc', 'desc']).map(x => {
+            const itemResult: IMaterialEstimated = {
+                material: x.material,
+                count: x.count,
+                rarity: x.rarity,
+                locations: x.locations ?? [],
+                expectedEnergy: 0,
+                numberOfBattles: 0,
+            };
+
+            if (x.locationsComposed?.length) {
+                const minEnergy = Math.min(...x.locationsComposed.map(x => x.energyPerItem));
+
+                const locations = x.locationsComposed.filter(location => location.energyPerItem === minEnergy);
+
+                itemResult.locations = locations.map(x => x.campaign + ' ' + x.nodeNumber);
+
+                itemResult.expectedEnergy = parseFloat((x.count * minEnergy).toFixed(2));
+                itemResult.numberOfBattles = Math.ceil(itemResult.expectedEnergy / locations[0].energyCost);
+            }
+
+            return itemResult;
+        });
     }, [upgrades]);
 
     const totalEnergy = useMemo<number>(() => {
-        const total = totalMaterials.map(x => {
-            const minEnergy = x.locationsComposed?.length
-                ? Math.min(...x.locationsComposed.map(x => 1 / (x.dropRate / x.energyCost)))
-                : 0;
-            return parseFloat((x.count * minEnergy).toFixed(2));
-        });
-        return Math.round(sum(total));
+        return Math.round(sum(totalMaterials.map(x => x.expectedEnergy)));
     }, [totalMaterials]);
 
-    const renderUpgradesMaterials = (materials: Array<IMaterialRecipeIngredientFull>, locations = false) => (
+    const renderUpgradesMaterials = (materials: Array<IMaterialRecipeIngredientFull>) => (
         <ul>
             {materials.map(item => (
                 <li key={item.material}>
                     <span className={Rarity[item.rarity]?.toLowerCase()}>{Rarity[item.rarity]}</span> -{' '}
                     <span>{item.material}</span> - <span style={{ fontWeight: 'bold' }}>{item.count}</span>
-                    {locations ? (
-                        <span style={{ fontStyle: 'italic' }}> - {item.locations?.join(', ')}</span>
-                    ) : // <span>{item.locationsComposed?.map(x => `${x.campaign} ${x.nodeNumber}`).join(', ')}</span>
-                    undefined}
                     {item.recipe?.length ? renderUpgradesMaterials(item.recipe) : undefined}
                 </li>
             ))}
         </ul>
     );
+
+    const [columnDefs] = useState<Array<ColDef>>([
+        {
+            headerName: '#',
+            colId: 'rowNumber',
+            valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
+            maxWidth: 50,
+            width: 50,
+            minWidth: 50,
+            pinned: true,
+        },
+        {
+            pinned: true,
+            field: 'material',
+            maxWidth: 300,
+        },
+        {
+            field: 'count',
+            maxWidth: 75,
+        },
+        {
+            field: 'rarity',
+            maxWidth: 120,
+            valueFormatter: (params: ValueFormatterParams<IMaterialEstimated>) => Rarity[params.data?.rarity ?? 0],
+            cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
+        },
+        {
+            field: 'expectedEnergy',
+            maxWidth: 120,
+        },
+        {
+            headerName: '# Of Battles',
+            field: 'numberOfBattles',
+            maxWidth: 100,
+        },
+        {
+            field: 'locations',
+        },
+    ]);
 
     return (
         <div>
@@ -140,8 +199,8 @@ export const RankLookup = () => {
                 </FormControl>
             </div>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                <div>
+            <div style={{ display: 'flex' }}>
+                <div style={{ flexBasis: '25%' }}>
                     <h3>{message}</h3>
                     <ul>
                         {upgrades.map(item => (
@@ -154,14 +213,40 @@ export const RankLookup = () => {
                         ))}
                     </ul>
                 </div>
-                <div>
+
+                <div style={{ flexBasis: '75%' }}>
                     <h3>Total</h3>
                     {totalGold > 0 ? <h4 style={{ paddingInlineStart: 40 }}>Gold - {totalGold}</h4> : undefined}
                     {totalEnergy > 0 ? <h4 style={{ paddingInlineStart: 40 }}>Energy - {totalEnergy}</h4> : undefined}
+                    {totalEnergy > 0 ? (
+                        <h4 style={{ paddingInlineStart: 40 }}>
+                            Battles - {sum(totalMaterials.map(x => x.numberOfBattles))}
+                        </h4>
+                    ) : undefined}
 
-                    {renderUpgradesMaterials(totalMaterials, true)}
+                    <div
+                        className="ag-theme-material"
+                        style={{ height: 50 + totalMaterials.length * 30, width: '100%' }}>
+                        <AgGridReact
+                            ref={gridRef}
+                            suppressCellFocus={true}
+                            defaultColDef={{ resizable: true, sortable: true, autoHeight: true, wrapText: true }}
+                            columnDefs={columnDefs}
+                            rowData={totalMaterials}
+                            // getRowStyle={getRowStyle}
+                            onGridReady={fitGridOnWindowResize(gridRef)}></AgGridReact>
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
+
+interface IMaterialEstimated {
+    material: string;
+    count: number;
+    rarity: Rarity;
+    locations: string[];
+    expectedEnergy: number;
+    numberOfBattles: number;
+}

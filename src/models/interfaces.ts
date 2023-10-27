@@ -446,6 +446,7 @@ export interface ICampaignBattleComposed {
     energyCost: number;
     dailyBattleCount: number;
     dropRate: number;
+    energyPerItem: number;
     nodeNumber: number;
     rarity: string;
     reward: string; // material name or hero name in case farming shards
