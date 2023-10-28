@@ -15,7 +15,12 @@ const DesktopApp = () => {
         }
         const redirect = searchParams.get('redirect');
         if (redirect) {
-            navigate(redirect);
+            searchParams.delete('redirect');
+
+            navigate({
+                pathname: redirect,
+                search: '?' + searchParams.toString(),
+            });
         }
     }, []);
 

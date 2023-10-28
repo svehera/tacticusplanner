@@ -30,7 +30,8 @@
   <script>
     window.onload=function(){
       const path = window.location.pathname;
-      window.location.replace(window.location.origin + `?redirect=${path}`)
+      const params = new URLSearchParams(window.location.search);
+      window.location.replace(window.location.origin + `?redirect=${path}&${params}`)
     }
   </script>
 </head>
