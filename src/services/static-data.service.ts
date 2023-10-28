@@ -15,6 +15,7 @@ import aunshi from '../assets/legendary-events/Aunshi.json';
 import ragnar from '../assets/legendary-events/Ragnar.json';
 
 import {
+    ICampaignBattle,
     ICampaignBattleComposed,
     ICampaignConfigs,
     ICampaignsData,
@@ -105,9 +106,27 @@ export class StaticDataService {
         return result;
     }
 
+    static getUpgradesLocations(): Record<string, string[]> {
+        const result: Record<string, string[]> = {};
+        const battles: ICampaignBattle[] = [];
+        for (const battleDataKey in this.battleData) {
+            battles.push({ ...this.battleData[battleDataKey], shortName: battleDataKey });
+        }
+
+        const groupedData = groupBy(battles, 'reward');
+
+        for (const key in groupedData) {
+            const value = groupedData[key].map(x => x.shortName ?? '');
+            result[key] = value;
+        }
+
+        return result;
+    }
+
     static convertRecipeData(): IRecipeDataFull {
         const result: IRecipeDataFull = {};
         const upgrades = Object.keys(this.recipeData);
+        const upgradeLcoaitons = this.getUpgradesLocations();
 
         const getRecipe = (
             material: string,
@@ -115,6 +134,7 @@ export class StaticDataService {
             allMaterials: IMaterialRecipeIngredientFull[]
         ): IMaterialRecipeIngredientFull => {
             const upgrade = this.recipeData[material];
+            const locations = upgradeLcoaitons[material] ?? [];
 
             if (!upgrade || !upgrade.recipe?.length) {
                 const item: IMaterialRecipeIngredientFull = {
@@ -122,7 +142,7 @@ export class StaticDataService {
                     count,
                     rarity: rarityStringToNumber[upgrade?.rarity as RarityString],
                     stat: upgrade?.stat ?? '',
-                    locations: upgrade?.locations,
+                    locations: locations,
                 };
                 allMaterials.push(item);
                 return item;
@@ -131,7 +151,7 @@ export class StaticDataService {
                     material,
                     count,
                     stat: upgrade.stat,
-                    locations: upgrade.locations,
+                    locations: locations,
                     rarity: rarityStringToNumber[upgrade.rarity as RarityString],
                     recipe: upgrade.recipe.map(item => getRecipe(item.material, count * item.count, allMaterials)),
                 };

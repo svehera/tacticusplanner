@@ -434,6 +434,7 @@ export interface ICampaignsData {
 }
 
 export interface ICampaignBattle {
+    shortName?: string;
     campaign: Campaign | string;
     campaignType: CampaignType | string;
     nodeNumber: number;
@@ -504,4 +505,37 @@ export interface IRankUpData {
 
 export interface IRankUpData2 {
     [rank: string]: string[];
+}
+
+export interface IEquipment {
+    type: EquipmentType;
+    factions: string[];
+    triggerChance?: number; // Block/Crit change can be undefined for Defensive items
+    stats: {
+        common: IEquipmentStat;
+        uncommon: IEquipmentStat;
+        rare: IEquipmentStat;
+        epic: IEquipmentStat;
+        legendary: IEquipmentStat;
+    };
+}
+
+export interface IEquipmentStat {
+    name: string;
+    damageMin: number;
+    damageMax: number;
+
+    healthMin: number; // valid only for defensive items
+    healthMax: number; // valid only for defensive items
+
+    armourMin: number; // valid only for defensive items
+    armourMax: number; // valid only for defensive items
+}
+
+export enum EquipmentType {
+    Crit = 'Crit',
+    Block = 'Block',
+    CritBooster = 'Crit Booster',
+    BlockBooster = 'Block Booster',
+    Defensive = 'Defensive',
 }
