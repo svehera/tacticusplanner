@@ -17,6 +17,8 @@ import { useAuth } from '../contexts/auth';
 import { IErrorResponse } from '../api/api-interfaces';
 import { getUserDataApi, setUserDataApi } from '../api/api-functions';
 import { GlobalState } from '../models/global-state';
+import { campaignsProgressReducer } from './campaigns-progress.reducer';
+import { dailyRaidsPreferencesReducer } from './daily-raids-settings.reducer';
 
 export const StoreContext = createContext<IGlobalState>({} as any);
 export const DispatchContext = createContext<IDispatchContext>({} as any);
@@ -42,6 +44,10 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         viewPreferencesReducer,
         globalState.viewPreferences
     );
+    const [dailyRaidsPreferences, dispatchDailyRaidsPreferences] = React.useReducer(
+        dailyRaidsPreferencesReducer,
+        globalState.dailyRaidsPreferences
+    );
     const [autoTeamsPreferences, dispatchAutoTeamsPreferences] = React.useReducer(
         autoTeamsPreferencesReducer,
         globalState.autoTeamsPreferences
@@ -60,11 +66,16 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     );
     const [leProgress, dispatchLeProgress] = React.useReducer(leProgressReducer, globalState.leProgress);
 
+    const [campaignsProgress, dispatchCampaignsProgress] = React.useReducer(
+        campaignsProgressReducer,
+        globalState.campaignsProgress
+    );
+
     function wrapDispatch<T>(dispatch: React.Dispatch<T>): React.Dispatch<T> {
         return (action: T) => {
             requestAnimationFrame(() => {
-                setModified(true);
                 dispatch(action);
+                setModified(true);
                 setModifiedDate(new Date());
             });
         };
@@ -76,19 +87,23 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             goals: wrapDispatch(dispatchGoals),
             viewPreferences: wrapDispatch(dispatchViewPreferences),
             autoTeamsPreferences: wrapDispatch(dispatchAutoTeamsPreferences),
+            dailyRaidsPreferences: wrapDispatch(dispatchDailyRaidsPreferences),
             selectedTeamOrder: wrapDispatch(dispatchSelectedTeamsOrder),
             leSelectedRequirements: wrapDispatch(dispatchLeSelectedRequirements),
             leSelectedTeams: wrapDispatch(dispatchLeSelectedTeams),
             leProgress: wrapDispatch(dispatchLeProgress),
+            campaignsProgress: wrapDispatch(dispatchCampaignsProgress),
             setStore: (data: IGlobalState, modified: boolean) => {
                 dispatchCharacters({ type: 'Set', value: data.characters });
                 dispatchGoals({ type: 'Set', value: data.goals });
                 dispatchViewPreferences({ type: 'Set', value: data.viewPreferences });
+                dispatchDailyRaidsPreferences({ type: 'Set', value: data.dailyRaidsPreferences });
                 dispatchAutoTeamsPreferences({ type: 'Set', value: data.autoTeamsPreferences });
                 dispatchSelectedTeamsOrder({ type: 'Set', value: data.selectedTeamOrder });
                 dispatchLeSelectedRequirements({ type: 'Set', value: data.leSelectedRequirements });
                 dispatchLeSelectedTeams({ type: 'Set', value: data.leSelectedTeams });
                 dispatchLeProgress({ type: 'Set', value: data.leProgress });
+                dispatchCampaignsProgress({ type: 'Set', value: data.campaignsProgress });
                 if (modified) {
                     setModified(true);
                     setModifiedDate(data.modifiedDate);
@@ -106,6 +121,8 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchLeSelectedTeams,
             dispatchGoals,
             dispatchLeProgress,
+            dispatchCampaignsProgress,
+            dispatchDailyRaidsPreferences,
             setGlobalState,
         ]
     );
@@ -126,6 +143,8 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             goals,
             modifiedDate,
             seenAppVersion,
+            campaignsProgress,
+            dailyRaidsPreferences,
         };
         const storeValue = GlobalState.toStore(newValue);
 

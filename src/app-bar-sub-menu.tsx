@@ -19,7 +19,7 @@ export const AppBarSubMenu = ({
     };
     return (
         <List
-            sx={{ width: 130, maxWidth: 360 }}
+            sx={{ width: 150, maxWidth: 360 }}
             component="nav"
             onMouseEnter={() => setOpen(true)}
             onMouseLeave={() => setOpen(false)}>
@@ -31,7 +31,7 @@ export const AppBarSubMenu = ({
                 in={open}
                 timeout="auto"
                 unmountOnExit
-                sx={{ width: 130, position: 'absolute', zIndex: 1000, backgroundColor: '#1976d2' }}>
+                sx={{ width: 150, position: 'absolute', zIndex: 1000, backgroundColor: '#1976d2' }}>
                 <List component="div" disablePadding>
                     {options.map(option => (
                         <ListItemButton

@@ -1,6 +1,8 @@
 ﻿import {
     IAutoTeamsPreferences,
+    ICampaignsProgress,
     ICharacter2,
+    IDailyRaidsPreferences,
     IGlobalState,
     ILegendaryEventProgressState,
     ILegendaryEventSelectedRequirements,
@@ -22,15 +24,19 @@ export class GlobalState implements IGlobalState {
     readonly autoTeamsPreferences: IAutoTeamsPreferences;
     readonly characters: Array<ICharacter2>;
     readonly viewPreferences: IViewPreferences;
+    readonly dailyRaidsPreferences: IDailyRaidsPreferences;
     readonly selectedTeamOrder: ISelectedTeamsOrdering;
     readonly leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     readonly goals: IPersonalGoal[];
     readonly leProgress: LegendaryEventData<ILegendaryEventProgressState>;
     readonly leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
+    readonly campaignsProgress: ICampaignsProgress;
 
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences;
         this.autoTeamsPreferences = personalData.autoTeamsPreferences;
+        this.dailyRaidsPreferences = personalData.dailyRaidsPreferences;
+
         this.selectedTeamOrder = personalData.selectedTeamOrder;
         this.leSelectedRequirements = personalData.leSelectedRequirements;
         this.leSelectedTeams = GlobalState.fixNames(personalData.leTeams);
@@ -41,10 +47,11 @@ export class GlobalState implements IGlobalState {
                 leProgress.notes = '';
             }
         }
-        this.goals = GlobalState.fixNames(personalData.goals);
+        this.goals = GlobalState.fixNames(personalData.goals).map((goal, index) => ({ ...goal, priority: index + 1 }));
 
         this.modifiedDate = personalData.modifiedDate;
         this.seenAppVersion = personalData.seenAppVersion;
+        this.campaignsProgress = personalData.campaignsProgress;
 
         const chars = GlobalState.fixNames(personalData.characters);
 
@@ -97,6 +104,8 @@ export class GlobalState implements IGlobalState {
             characters: charactersToStore,
             autoTeamsPreferences: value.autoTeamsPreferences,
             viewPreferences: value.viewPreferences,
+            dailyRaidsPreferences: value.dailyRaidsPreferences,
+            campaignsProgress: value.campaignsProgress,
         };
     }
 }

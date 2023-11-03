@@ -49,6 +49,8 @@ const TopAppBar = () => {
         switch (location.pathname) {
             case '/wyo':
                 return 'Who You Own';
+            case '/campaignsProgress':
+                return 'Campaigns Progress';
             case '/le/shadowsun':
                 return `Shadowsun ${shadowsun.eventStage}/3 (${shadowsun.nextEventDate})`;
             case '/le/aunshi':
@@ -63,6 +65,8 @@ const TopAppBar = () => {
                 return 'Upgrades';
             case '/rankLookup':
                 return 'Rank Lookup';
+            case '/dailyRaids':
+                return 'Daily Raids';
             case '/campaigns':
                 return 'Campaigns';
             case '/dirtyDozen':
@@ -79,34 +83,48 @@ const TopAppBar = () => {
 
     const nav = isTabletOrMobile ? undefined : (
         <div style={{ display: 'flex', alignItems: 'center', marginInlineEnd: 20 }}>
-            <Button component={Link} to={'./wyo'} color="inherit">
-                Who You Own
-            </Button>
-
             <AppBarSubMenu
-                rootLabel={'Legendary Events'}
+                rootLabel={'Input'}
                 options={[
                     {
-                        label: 'Shadowsun',
+                        label: 'Who You Own',
+                        route: './wyo',
+                    },
+                    {
+                        label: 'Campaigns Progress',
+                        route: './campaignsProgress',
+                    },
+                ]}
+            />
+
+            <AppBarSubMenu
+                rootLabel={'Plan'}
+                options={[
+                    {
+                        label: 'Goals',
+                        route: './goals',
+                    },
+                    {
+                        label: 'Daily Raids',
+                        route: './dailyRaids',
+                    },
+                    {
+                        label: 'Shadowsun LE',
                         route: './le/shadowsun',
                     },
                     {
-                        label: 'Aun Shi',
+                        label: 'Aun Shi LE',
                         route: './le/aunshi',
                     },
                     {
-                        label: 'Ragnar',
+                        label: 'Ragnar LE',
                         route: './le/ragnar',
                     },
                 ]}
             />
 
-            <Button component={Link} to={'./goals'} color="inherit">
-                Goals
-            </Button>
-
             <AppBarSubMenu
-                rootLabel={'TABLES'}
+                rootLabel={'Learn'}
                 options={[
                     {
                         label: 'Characters',
@@ -165,14 +183,30 @@ const TopAppBar = () => {
                 <ListItemIcon>
                     <ListIcon />
                 </ListItemIcon>
-                <ListItemText> Who You Own</ListItemText>
+                <ListItemText>Who You Own</ListItemText>
             </MenuItem>
+
+            <MenuItem component={Link} to={'./campaignsProgress'} color="inherit">
+                <ListItemIcon>
+                    <ListIcon />
+                </ListItemIcon>
+                <ListItemText>Campaigns Progress</ListItemText>
+            </MenuItem>
+
+            <Divider />
 
             <MenuItem component={Link} to={'./goals'} color="inherit">
                 <ListItemIcon>
                     <TargetIcon />
                 </ListItemIcon>
                 <ListItemText>Goals</ListItemText>
+            </MenuItem>
+
+            <MenuItem component={Link} to={'./dailyRaids'} color="inherit">
+                <ListItemIcon>
+                    <TargetIcon />
+                </ListItemIcon>
+                <ListItemText>Daily Raids</ListItemText>
             </MenuItem>
 
             <Divider />

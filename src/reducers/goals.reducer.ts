@@ -55,16 +55,23 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
         }
         case 'Update': {
             const updatedGoal = action.goal;
+            deleteRedundantData(updatedGoal);
 
             const updatedGoalIndex = state.findIndex(x => x.id === updatedGoal.id);
             if (updatedGoalIndex < 0) {
                 return state;
             }
-            deleteRedundantData(updatedGoal);
-            state.splice(updatedGoalIndex, 1);
-            state.splice(updatedGoal.priority - 1, 0, updatedGoal);
+            const currentGoal = state[updatedGoalIndex];
+            if (currentGoal.priority === updatedGoal.priority) {
+                currentGoal.notes = updatedGoal.notes;
+                currentGoal.targetRank = updatedGoal.targetRank;
+                currentGoal.targetRarity = updatedGoal.targetRarity;
+            } else {
+                state.splice(updatedGoalIndex, 1);
+                state.splice(updatedGoal.priority - 1, 0, updatedGoal);
+            }
 
-            return [...state];
+            return state.map((x, index) => ({ ...x, priority: index + 1 }));
         }
         default: {
             throw new Error();

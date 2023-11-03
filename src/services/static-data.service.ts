@@ -1,4 +1,4 @@
-﻿import { groupBy, map, sortBy, sumBy, uniq } from 'lodash';
+﻿import { groupBy, map, orderBy, sortBy, sum, sumBy, uniq } from 'lodash';
 
 import unitsData from '../assets/UnitData.json';
 import dirtyDozen from '../assets/DirtyDozen.json';
@@ -19,9 +19,17 @@ import {
     ICampaignBattleComposed,
     ICampaignConfigs,
     ICampaignsData,
+    ICampaignsProgress,
+    ICharacterRankRange,
     ICharLegendaryEvents,
+    IDailyRaid,
     IDirtyDozenChar,
     IDropRate,
+    IEstimatedRanks,
+    IEstimatedRanksSettings,
+    IMaterialEstimated2,
+    IMaterialFull,
+    IMaterialRaid,
     IMaterialRecipeIngredientFull,
     IRankUpData,
     IRecipeData,
@@ -30,8 +38,9 @@ import {
     IWhatsNew,
     UnitDataRaw,
 } from '../models/interfaces';
-import { CampaignType, Faction, RarityString } from '../models/enums';
-import { rarityStringToNumber, rarityToStars } from '../models/constants';
+import { Campaign, CampaignType, DailyEnergy, Faction, Rank, RarityString } from '../models/enums';
+import { dailyEnergyOptions, defaultCampaignsProgress, rarityStringToNumber, rarityToStars } from '../models/constants';
+import { getEnumValues, rankToString } from '../shared-logic/functions';
 
 export class StaticDataService {
     static readonly dirtyDozenData: IDirtyDozenChar[] = dirtyDozen;
@@ -95,7 +104,7 @@ export class StaticDataService {
                 energyCost: config.energyCost,
                 dailyBattleCount: config.dailyBattleCount,
                 dropRate,
-                energyPerItem,
+                energyPerItem: parseFloat(energyPerItem.toFixed(2)),
                 nodeNumber: battle.nodeNumber,
                 rarity: recipe.rarity,
                 reward: battle.reward,
@@ -143,6 +152,8 @@ export class StaticDataService {
                     rarity: rarityStringToNumber[upgrade?.rarity as RarityString],
                     stat: upgrade?.stat ?? '',
                     locations: locations,
+                    craftable: upgrade?.craftable,
+                    locationsComposed: locations.map(x => this.campaignsComposed[x]),
                 };
                 allMaterials.push(item);
                 return item;
@@ -151,7 +162,9 @@ export class StaticDataService {
                     material,
                     count,
                     stat: upgrade.stat,
+                    craftable: upgrade.craftable,
                     locations: locations,
+                    locationsComposed: locations.map(x => this.campaignsComposed[x]),
                     rarity: rarityStringToNumber[upgrade.rarity as RarityString],
                     recipe: upgrade.recipe.map(item => getRecipe(item.material, count * item.count, allMaterials)),
                 };
@@ -183,9 +196,11 @@ export class StaticDataService {
                 result[upgradeName].allMaterials = map(groupedData, (items, material) => ({
                     material,
                     count: sumBy(items, 'count'),
+                    craftable: items[0].craftable,
                     rarity: items[0].rarity,
                     stat: items[0].stat,
                     locations: items[0].locations,
+                    locationsComposed: items[0].locationsComposed,
                 }));
             }
         }
@@ -273,5 +288,267 @@ export class StaticDataService {
             default:
                 return '#ffffff';
         }
+    }
+
+    static getRankUpgradeEstimatedDays(
+        settings: IEstimatedRanksSettings,
+        ...characters: Array<ICharacterRankRange>
+    ): IEstimatedRanks {
+        const upgrades = this.getUpgrades(...characters);
+
+        const materials = this.getAllMaterials(
+            settings.campaignsProgress,
+            upgrades,
+            settings.preferences?.useLessEfficientNodes
+        );
+
+        const raids = this.generateDailyRaidsList(
+            settings,
+            materials.filter(x => x.material !== 'Gold')
+        );
+
+        const totalEnergy = sum(raids.map(day => settings.dailyEnergy - day.energyLeft));
+
+        return {
+            raids,
+            upgrades,
+            materials,
+            totalEnergy,
+        };
+    }
+
+    private static getUpgrades(...characters: Array<ICharacterRankRange>): IMaterialFull[] {
+        const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
+        const result: IMaterialFull[] = [];
+
+        for (const character of characters) {
+            const characterUpgrades = StaticDataService.rankUpData[character.id];
+            if (!characterUpgrades) {
+                continue;
+            }
+            const ranksRange = rankEntries.filter(r => r >= character.rankStart && r < character.rankEnd);
+
+            const rankUpgrades = ranksRange.flatMap(rank => characterUpgrades[rankToString(rank)]);
+
+            if (!rankUpgrades) {
+                continue;
+            }
+
+            const upgrades = rankUpgrades.map(upgrade => {
+                const recipe = StaticDataService.recipeDataFull[upgrade];
+                if (!recipe) {
+                    console.error('Recipe for ' + upgrade + ' is not found');
+                }
+                return {
+                    ...recipe,
+                    allMaterials: recipe.allMaterials?.map(material => ({
+                        ...material,
+                        material: `${material.material} (${character.id})`,
+                    })),
+                };
+            });
+
+            result.push(...upgrades);
+        }
+
+        return result;
+    }
+
+    private static getAllMaterials(
+        campaignsProgress: ICampaignsProgress,
+        upgrades: IMaterialFull[],
+        useLessefficientNodes = false
+    ): IMaterialEstimated2[] {
+        const groupedData = groupBy(
+            upgrades.flatMap(x => x.allMaterials ?? []),
+            'material'
+        );
+
+        const result: IMaterialRecipeIngredientFull[] = map(groupedData, (items, material) => ({
+            material,
+            count: sumBy(items, 'count'),
+            rarity: items[0].rarity,
+            stat: items[0].stat,
+            craftable: items[0].craftable,
+            locations: items[0].locations,
+            locationsComposed: items[0].locations?.map(location => StaticDataService.campaignsComposed[location]),
+        }));
+
+        // if (removeGold) {
+        //     const goldIndex = result.findIndex(x => x.material === 'Gold');
+        //
+        //     if (goldIndex > -1) {
+        //         result.splice(goldIndex, 1);
+        //     }
+        // }
+
+        return orderBy(
+            result
+                .map(x =>
+                    this.calculateMaterialData(
+                        x,
+                        this.selectBestLocations(campaignsProgress, x.locationsComposed ?? [], useLessefficientNodes)
+                    )
+                )
+                .filter(x => !!x) as IMaterialEstimated2[],
+            ['daysOfBattles', 'totalEnergy', 'rarity', 'count'],
+            ['desc', 'desc', 'desc', 'desc']
+        );
+    }
+
+    private static generateDailyRaidsList(
+        settings: IEstimatedRanksSettings,
+        allMaterials: IMaterialEstimated2[]
+    ): IDailyRaid[] {
+        const resultDays: IDailyRaid[] = [];
+
+        // const test = orderBy(
+        //     allMaterials.map(x => this.calculateMaterialData(x)).filter(x => !!x) as IMaterialEstimated2[],
+        //     ['daysOfBattles', 'rarity', 'count'],
+        //     ['desc', 'asc', 'desc']
+        // );
+
+        const totalEnergy = sum(allMaterials.map(x => x.totalEnergy));
+        let currEnergy = 0;
+
+        while (currEnergy < totalEnergy) {
+            const day: IDailyRaid = {
+                energyLeft: settings.dailyEnergy,
+                raids: [],
+            };
+            let energyLeft = settings.dailyEnergy;
+
+            for (const material of allMaterials) {
+                const locationsMinEnergyConst = Math.min(...material.locations.map(x => x.energyCost));
+                if (material.totalEnergy < locationsMinEnergyConst) {
+                    currEnergy += material.totalEnergy;
+                    material.totalEnergy = 0;
+                    continue;
+                }
+
+                const materialRaids: IMaterialRaid = {
+                    material: material.material,
+                    locations: [],
+                };
+
+                for (const location of material.locations) {
+                    const locationDailyEnergy = location.energyCost * location.dailyBattleCount;
+
+                    if (material.totalEnergy > locationDailyEnergy) {
+                        if (energyLeft > locationDailyEnergy) {
+                            energyLeft -= locationDailyEnergy;
+                            currEnergy += locationDailyEnergy;
+                            material.totalEnergy -= locationDailyEnergy;
+
+                            materialRaids.locations.push({
+                                location: location.campaign + ' ' + location.nodeNumber,
+                                raidsCount: location.dailyBattleCount,
+                            });
+                        } else if (energyLeft > location.energyCost) {
+                            const numberOfBattles = Math.floor(energyLeft / location.energyCost);
+                            const maxNumberOfBattles =
+                                numberOfBattles > location.dailyBattleCount
+                                    ? location.dailyBattleCount
+                                    : numberOfBattles;
+
+                            if (numberOfBattles <= 0) {
+                                continue;
+                            }
+
+                            const energySpent = maxNumberOfBattles * location.energyCost;
+
+                            energyLeft -= energySpent;
+                            currEnergy += energySpent;
+                            material.totalEnergy -= energySpent;
+
+                            materialRaids.locations.push({
+                                location: location.campaign + ' ' + location.nodeNumber,
+                                raidsCount: maxNumberOfBattles,
+                            });
+                        }
+                    } else {
+                        if (energyLeft > material.totalEnergy) {
+                            const numberOfBattles = Math.floor(material.totalEnergy / location.energyCost);
+                            const maxNumberOfBattles =
+                                numberOfBattles > location.dailyBattleCount
+                                    ? location.dailyBattleCount
+                                    : numberOfBattles;
+
+                            if (numberOfBattles <= 0) {
+                                continue;
+                            }
+                            const energySpent = maxNumberOfBattles * location.energyCost;
+
+                            energyLeft -= energySpent;
+                            currEnergy += energySpent;
+                            material.totalEnergy -= energySpent;
+
+                            materialRaids.locations.push({
+                                location: location.campaign + ' ' + location.nodeNumber,
+                                raidsCount: maxNumberOfBattles,
+                            });
+                        }
+                    }
+                }
+
+                if (materialRaids.locations.length) {
+                    day.raids.push(materialRaids);
+                }
+            }
+            day.energyLeft = energyLeft;
+            if (day.raids.length) {
+                resultDays.push(day);
+            }
+        }
+
+        return resultDays;
+    }
+
+    private static calculateMaterialData(
+        material: IMaterialRecipeIngredientFull,
+        bestLocations: ICampaignBattleComposed[]
+    ): IMaterialEstimated2 | null {
+        if (!bestLocations.length) {
+            console.error('No Locations for ' + material.material);
+            return null;
+        }
+
+        const expectedEnergy = parseFloat((material.count * bestLocations[0].energyPerItem).toFixed(2));
+        const numberOfBattles = Math.ceil(expectedEnergy / bestLocations[0].energyCost);
+        const realEnergy = numberOfBattles * bestLocations[0].energyCost;
+        const dailyEnergy = sum(bestLocations.map(x => x.dailyBattleCount * x.energyCost));
+        const dailyBattles = sum(bestLocations.map(x => x.dailyBattleCount));
+        const locations = bestLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
+        const daysOfBattles = Math.ceil(realEnergy / dailyEnergy);
+        return {
+            expectedEnergy,
+            numberOfBattles,
+            totalEnergy: realEnergy,
+            dailyEnergy,
+            daysOfBattles,
+            dailyBattles,
+            material: material.material,
+            locations: bestLocations,
+            locationsString: locations,
+            count: material.count,
+            rarity: material.rarity,
+        };
+    }
+
+    private static selectBestLocations(
+        campaignsProgress: ICampaignsProgress,
+        locationsComposed: ICampaignBattleComposed[],
+        useLessefficientNodes: boolean
+    ): ICampaignBattleComposed[] {
+        const unlockedLcoations = locationsComposed.filter(location => {
+            const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
+            return location.nodeNumber <= campaignProgress;
+        });
+        const minEnergy = Math.min(...unlockedLcoations.map(x => x.energyPerItem));
+
+        // return orderBy(locationsComposed, ['energyPerItem'], ['asc']); //.filter(location => location.energyPerItem === minEnergy);
+        return orderBy(unlockedLcoations, ['energyPerItem'], ['asc']).filter(location =>
+            useLessefficientNodes ? true : location.energyPerItem === minEnergy
+        );
     }
 }

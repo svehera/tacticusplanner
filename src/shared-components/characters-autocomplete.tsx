@@ -1,5 +1,5 @@
 ﻿import { ICharacter2 } from '../models/interfaces';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
 import { CharacterTitle } from './character-title';
 
@@ -8,11 +8,13 @@ export const CharactersAutocomplete = ({
     characters,
     character,
     shortChar,
+    style,
 }: {
     character: ICharacter2 | null;
     characters: ICharacter2[];
     onCharacterChange: (value: ICharacter2 | null) => void;
     shortChar?: boolean;
+    style?: CSSProperties | undefined;
 }) => {
     const [openAutocomplete, setOpenAutocomplete] = React.useState(false);
 
@@ -39,7 +41,7 @@ export const CharactersAutocomplete = ({
     };
 
     return (
-        <div onClick={() => handleAutocompleteChange(!openAutocomplete)}>
+        <div onClick={() => handleAutocompleteChange(!openAutocomplete)} style={style}>
             <Autocomplete
                 id="combo-box-demo"
                 style={{ minWidth: 300 }}

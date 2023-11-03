@@ -182,3 +182,10 @@ export enum Campaign {
     Octarius = 'Octarius',
     SaimHann = 'Saim-Hann',
 }
+
+export enum DailyEnergy {
+    Base,
+    Adv,
+    BS50,
+    BS110,
+}

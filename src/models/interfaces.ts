@@ -24,6 +24,8 @@ import { LeSelectedRequirementsAction } from '../reducers/le-selected-requiremen
 import { LeSelectedTeamsAction } from '../reducers/le-selected-teams.reducer';
 import { LeProgressAction } from '../reducers/le-progress.reducer';
 import { GoalsAction } from '../reducers/goals.reducer';
+import { CampaignsProgressAction } from '../reducers/campaigns-progress.reducer';
+import { DailyRaidsPreferencesAction } from '../reducers/daily-raids-settings.reducer';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -223,22 +225,26 @@ export interface IGlobalState {
     seenAppVersion?: string | null | undefined;
     autoTeamsPreferences: IAutoTeamsPreferences;
     viewPreferences: IViewPreferences;
+    dailyRaidsPreferences: IDailyRaidsPreferences;
     characters: Array<ICharacter2>;
     goals: IPersonalGoal[];
     selectedTeamOrder: ISelectedTeamsOrdering;
     leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILegendaryEventProgressState>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
+    campaignsProgress: ICampaignsProgress;
 }
 
 export interface IDispatchContext {
     characters: React.Dispatch<CharactersAction>;
     viewPreferences: React.Dispatch<ViewPreferencesAction>;
+    dailyRaidsPreferences: React.Dispatch<DailyRaidsPreferencesAction>;
     autoTeamsPreferences: React.Dispatch<AutoTeamsPreferencesAction>;
     selectedTeamOrder: React.Dispatch<SelectedTeamsOrderingAction>;
     leSelectedRequirements: React.Dispatch<LeSelectedRequirementsAction>;
     leSelectedTeams: React.Dispatch<LeSelectedTeamsAction>;
     leProgress: React.Dispatch<LeProgressAction>;
+    campaignsProgress: React.Dispatch<CampaignsProgressAction>;
     goals: React.Dispatch<GoalsAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean) => void;
@@ -250,12 +256,14 @@ export interface IPersonalData2 {
     seenAppVersion?: string | null;
     autoTeamsPreferences: IAutoTeamsPreferences;
     viewPreferences: IViewPreferences;
+    dailyRaidsPreferences: IDailyRaidsPreferences;
     selectedTeamOrder: ISelectedTeamsOrdering;
     characters: Partial<IPersonalCharacterData2>[];
     goals: IPersonalGoal[];
     leTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILegendaryEventProgressState>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
+    campaignsProgress: ICampaignsProgress;
 }
 
 export interface ILegendaryEventsData {
@@ -305,6 +313,12 @@ export interface IAutoTeamsPreferences {
     ignoreRank: boolean;
     ignoreRecommendedFirst: boolean;
     ignoreRecommendedLast: boolean;
+}
+
+export interface IDailyRaidsPreferences {
+    dailyEnergy: number;
+    useCampaignsProgress: boolean;
+    useLessEfficientNodes: boolean;
 }
 
 export interface ISelectedTeamsOrdering {
@@ -443,7 +457,7 @@ export interface ICampaignBattle {
 }
 
 export interface ICampaignBattleComposed {
-    campaign: Campaign | string;
+    campaign: string;
     energyCost: number;
     dailyBattleCount: number;
     dropRate: number;
@@ -494,6 +508,7 @@ export interface IMaterialRecipeIngredientFull {
     count: number;
     rarity: Rarity;
     stat: string;
+    craftable: boolean;
     recipe?: IMaterialRecipeIngredientFull[];
     locations?: Array<string>;
     locationsComposed?: Array<ICampaignBattleComposed>;
@@ -538,4 +553,77 @@ export enum EquipmentType {
     CritBooster = 'Crit Booster',
     BlockBooster = 'Block Booster',
     Defensive = 'Defensive',
+}
+
+export interface IMaterialEstimated2 {
+    material: string;
+    expectedEnergy: number;
+    numberOfBattles: number;
+    totalEnergy: number;
+    dailyEnergy: number;
+    locations: ICampaignBattleComposed[];
+    locationsString: string;
+    daysOfBattles: number;
+    dailyBattles: number;
+    count: number;
+    rarity: Rarity;
+    // energyPerBattle: number;
+}
+
+export interface IDailyRaid {
+    raids: IMaterialRaid[];
+    energyLeft: number;
+}
+
+export interface IMaterialRaid {
+    material: string;
+    locations: Array<{
+        location: string;
+        raidsCount: number;
+    }>;
+}
+
+export interface ICharacterRankRange {
+    id: string;
+    rankStart: Rank;
+    rankEnd: Rank;
+}
+
+export interface IEstimatedRanks {
+    raids: IDailyRaid[];
+    upgrades: IMaterialFull[];
+    materials: IMaterialEstimated2[];
+    totalEnergy: number;
+}
+
+export interface IEstimatedRanksSettings {
+    campaignsProgress: ICampaignsProgress;
+    dailyEnergy: number;
+    preferences?: IDailyRaidsPreferences;
+}
+
+export type ICampaignsProgress = {
+    Indomitus: number;
+    'Indomitus Mirror': number;
+    'Indomitus Elite': number;
+    'Indomitus Mirror Elite': number;
+
+    'Fall of Cadia': number;
+    'Fall of Cadia Mirror': number;
+    'Fall of Cadia Elite': number;
+    'Fall of Cadia Mirror Elite': number;
+
+    Octarius: number;
+    'Octarius Mirror': number;
+    'Octarius Elite': number;
+    'Octarius Mirror Elite': number;
+
+    'Saim-Hann': number;
+};
+
+interface ICampaignProgress {
+    normal: number;
+    elite: number;
+    mirror: number;
+    mirrorElite: number;
 }

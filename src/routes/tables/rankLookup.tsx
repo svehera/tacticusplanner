@@ -1,6 +1,11 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
+﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 
-import { ICharacter2, IMaterialFull, IMaterialRecipeIngredientFull } from '../../models/interfaces';
+import {
+    ICampaignBattleComposed,
+    ICharacter2,
+    IMaterialFull,
+    IMaterialRecipeIngredientFull,
+} from '../../models/interfaces';
 import { StaticDataService } from '../../services';
 import { getEnumValues, rankToString } from '../../shared-logic/functions';
 import { FormControl, MenuItem, Select } from '@mui/material';
@@ -78,17 +83,18 @@ export const RankLookup = () => {
         return recipes.filter(x => !!x);
     }, [character?.name, rank]);
 
-    const totalMaterials = useMemo<IMaterialEstimated[]>(() => {
+    const allMaterials = useMemo<IMaterialRecipeIngredientFull[]>(() => {
         const groupedData = groupBy(
             upgrades.flatMap(x => x.allMaterials ?? []),
             'material'
         );
 
-        const result = map(groupedData, (items, material) => ({
+        const result: IMaterialRecipeIngredientFull[] = map(groupedData, (items, material) => ({
             material,
             count: sumBy(items, 'count'),
             rarity: items[0].rarity,
             stat: items[0].stat,
+            craftable: items[0].craftable,
             locations: items[0].locations,
             locationsComposed: items[0].locations?.map(location => StaticDataService.campaignsComposed[location]),
         }));
@@ -100,8 +106,12 @@ export const RankLookup = () => {
         } else {
             setTotalGold(0);
         }
+        return orderBy(result, ['rarity', 'count'], ['desc', 'desc']);
+    }, [upgrades]);
+
+    const totalMaterials = useMemo<IMaterialEstimated[]>(() => {
         return orderBy(
-            result.map(x => {
+            allMaterials.map(x => {
                 const itemResult: IMaterialEstimated = {
                     material: x.material,
                     count: x.count,
@@ -127,7 +137,7 @@ export const RankLookup = () => {
             ['rarity', 'count', 'expectedEnergy'],
             ['desc', 'desc', 'desc']
         );
-    }, [upgrades]);
+    }, [allMaterials]);
 
     const totalEnergy = useMemo<number>(() => {
         return Math.ceil(sum(totalMaterials.map(x => x.expectedEnergy)));
@@ -183,7 +193,7 @@ export const RankLookup = () => {
             flex: 1,
         },
     ]);
-
+    
     return (
         <div>
             <div

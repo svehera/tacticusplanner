@@ -1,5 +1,5 @@
-﻿import { LegendaryEventEnum, PersonalGoalType, Rank, Rarity, RarityStars, RarityString } from './enums';
-import { ICharacter2, ICharProgression, IPersonalData2 } from './interfaces';
+﻿import { DailyEnergy, LegendaryEventEnum, PersonalGoalType, Rank, Rarity, RarityStars, RarityString } from './enums';
+import { ICampaignsProgress, ICharacter2, ICharProgression, IPersonalData2 } from './interfaces';
 import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from './legendary-events';
 import { RagnarLegendaryEvent } from './legendary-events/ragnar.le';
 
@@ -69,6 +69,32 @@ export const starEmoji = String.fromCodePoint(parseInt('1F31F', 16));
 
 export const discordInvitationLink = 'https://discord.gg/gyajsMcH7j';
 
+export const dailyEnergyOptions: Record<DailyEnergy, number> = {
+    [DailyEnergy.Base]: 288,
+    [DailyEnergy.Adv]: 288 + 50,
+    [DailyEnergy.BS50]: 288 + 50 + 100,
+    [DailyEnergy.BS110]: 288,
+};
+
+export const defaultCampaignsProgress: ICampaignsProgress = {
+    Indomitus: 75,
+    'Indomitus Mirror': 75,
+    'Indomitus Elite': 40,
+    'Indomitus Mirror Elite': 40,
+
+    'Fall of Cadia': 75,
+    'Fall of Cadia Mirror': 75,
+    'Fall of Cadia Elite': 40,
+    'Fall of Cadia Mirror Elite': 40,
+
+    Octarius: 75,
+    'Octarius Mirror': 75,
+    'Octarius Elite': 40,
+    'Octarius Mirror Elite': 40,
+
+    'Saim-Hann': 75,
+};
+
 export const defaultData: IPersonalData2 = {
     schemaVersion: 2,
     modifiedDate: undefined,
@@ -88,6 +114,11 @@ export const defaultData: IPersonalData2 = {
         hideSelectedTeams: false,
         autoTeams: true,
         onlyUnlocked: false,
+    },
+    dailyRaidsPreferences: {
+        dailyEnergy: 288,
+        useCampaignsProgress: true,
+        useLessEfficientNodes: false,
     },
     characters: [
         {
@@ -162,4 +193,5 @@ export const defaultData: IPersonalData2 = {
     leTeams: {},
     leProgress: {},
     leSelectedRequirements: {},
+    campaignsProgress: defaultCampaignsProgress,
 };

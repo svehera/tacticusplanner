@@ -1,7 +1,7 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import React, { useContext, useMemo, useState } from 'react';
 import { EditGoalDialog, SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
-import { ICharacter, IPersonalGoal } from '../../models/interfaces';
-import { PersonalGoalType } from '../../models/enums';
+import { ICharacter, ICharacterRankRange, IPersonalGoal } from '../../models/interfaces';
+import { PersonalGoalType, Rank } from '../../models/enums';
 
 import { RankImage } from '../../shared-components/rank-image';
 import { RarityImage } from '../../shared-components/rarity-image';
@@ -9,14 +9,42 @@ import { CharacterTitle } from '../../shared-components/character-title';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 
-import { DeleteForever, ArrowForward, Edit } from '@mui/icons-material';
+import { ArrowForward, DeleteForever, Edit } from '@mui/icons-material';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
+import { StaticDataService } from '../../services';
 
 export const Goals = () => {
-    const { goals } = useContext(StoreContext);
+    const { goals, characters, campaignsProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const [editGoal, setEditGoal] = useState<IPersonalGoal | null>(null);
+
+    const estimatedDaysTotal = useMemo(() => {
+        const chars = goals
+            .filter(x => x.type === PersonalGoalType.UpgradeRank)
+            .map(g => {
+                const char = characters.find(c => c.name === g.character);
+                if (char) {
+                    return {
+                        id: g.character,
+                        rankStart: char.rank,
+                        rankEnd: g.targetRank!,
+                    } as ICharacterRankRange;
+                }
+                return null;
+            })
+            .filter(x => !!x) as ICharacterRankRange[];
+
+        const estimate = StaticDataService.getRankUpgradeEstimatedDays(
+            {
+                dailyEnergy: 288 + 50 + 100,
+                campaignsProgress,
+            },
+            ...chars
+        );
+
+        return estimate;
+    }, [goals]);
 
     const removeGoal = (goalId: string): void => {
         dispatch.goals({ type: 'Delete', goalId });
@@ -50,14 +78,17 @@ export const Goals = () => {
                 <span style={{ fontSize: 20 }}>
                     {goals.length}/{20}
                 </span>
+                <span style={{ fontSize: 20 }}>Estimated Total Days Worst: {estimatedDaysTotal.raids.length}</span>
+                <span style={{ fontSize: 20 }}>
+                    Estimated Total Days Best: {estimatedDaysTotal.raids.filter(x => x.energyLeft < 10).length}
+                </span>
             </div>
 
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }} className={'goals'}>
-                {goals.map((goal, index) => (
+                {goals.map(goal => (
                     <GoalCard
-                        key={goal.id}
+                        key={goal.id + goal.priority}
                         goal={goal}
-                        priority={index + 1}
                         menuItemSelect={item => handleMenuItemSelect(goal, item)}
                     />
                 ))}
@@ -68,19 +99,29 @@ export const Goals = () => {
 
 export default function GoalCard({
     goal,
-    priority,
     menuItemSelect,
 }: {
     goal: IPersonalGoal;
-    priority: number;
     menuItemSelect: (item: 'edit' | 'delete') => void;
 }) {
-    const { characters } = useContext(StoreContext);
+    const { characters, campaignsProgress } = useContext(StoreContext);
     const character = characters.find(x => x.name === goal.character) as ICharacter;
 
-    if (!character) {
-        console.log('no ', goal.character);
-    }
+    const estimatedDays = useMemo(() => {
+        const estimate = StaticDataService.getRankUpgradeEstimatedDays(
+            {
+                dailyEnergy: 288 + 50 + 100,
+                campaignsProgress,
+            },
+            {
+                id: character.name,
+                rankStart: character.rank,
+                rankEnd: goal.targetRank!,
+            }
+        );
+
+        return estimate.raids.length;
+    }, [character.name, character.rank, goal.targetRank]);
 
     return (
         <React.Fragment>
@@ -90,7 +131,8 @@ export default function GoalCard({
                     minHeight: 200,
                     backgroundColor:
                         (goal.type === PersonalGoalType.UpgradeRank && goal.targetRank === character.rank) ||
-                        (goal.type === PersonalGoalType.Ascend && goal.targetRarity === character.rarity)
+                        (goal.type === PersonalGoalType.Ascend && goal.targetRarity === character.rarity) ||
+                        (goal.type === PersonalGoalType.Unlock && character.rank > Rank.Locked)
                             ? 'lightgreen'
                             : 'white',
                 }}>
@@ -107,7 +149,7 @@ export default function GoalCard({
                     }
                     title={
                         <div style={{ display: 'flex', gap: 5 }}>
-                            <span>#{priority}</span>{' '}
+                            <span>#{goal.priority}</span>{' '}
                             <CharacterTitle character={character} short={true} imageSize={30} />
                         </div>
                     }
@@ -115,9 +157,12 @@ export default function GoalCard({
                 />
                 <CardContent>
                     {goal.type === PersonalGoalType.UpgradeRank ? (
-                        <div style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                            <RankImage rank={character.rank} /> <ArrowForward />{' '}
-                            <RankImage rank={goal.targetRank ?? 0} />
+                        <div>
+                            <div style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+                                <RankImage rank={character.rank} /> <ArrowForward />{' '}
+                                <RankImage rank={goal.targetRank ?? 0} />
+                            </div>
+                            <div>Estimated Days: {estimatedDays}</div>
                         </div>
                     ) : undefined}
 

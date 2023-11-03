@@ -16,6 +16,8 @@ import { LegendaryEventEnum } from '../models/enums';
 import { Campaigns } from './tables/campaigns';
 import { Upgrades } from './tables/upgrades';
 import { RankLookup } from './tables/rankLookup';
+import { DailyRaids } from './tables/dailyRaids';
+import { CampaignsProgress } from './campaigns-progress';
 
 export const appRoutes: () => RouteObject[] = () => [
     {
@@ -31,6 +33,10 @@ export const appRoutes: () => RouteObject[] = () => [
                 element: <WhoYouOwn />,
             },
             {
+                path: 'campaignsProgress',
+                element: <CampaignsProgress />,
+            },
+            {
                 path: 'characters',
                 element: <Characters />,
             },
@@ -41,6 +47,10 @@ export const appRoutes: () => RouteObject[] = () => [
             {
                 path: 'rankLookup',
                 element: <RankLookup />,
+            },
+            {
+                path: 'dailyRaids',
+                element: <DailyRaids />,
             },
             {
                 path: 'campaigns',
