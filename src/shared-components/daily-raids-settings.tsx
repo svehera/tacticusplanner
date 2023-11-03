@@ -30,7 +30,6 @@ const DailyRaidsSettings = () => {
                     type: 'UpdateEnergy',
                     value,
                 });
-                console.log('updated', value);
             }, 500);
 
             setUpdateTimeout(timeoutId);

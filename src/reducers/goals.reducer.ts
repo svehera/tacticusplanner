@@ -35,6 +35,14 @@ const deleteRedundantData = (goal: IPersonalGoal) => {
     if (!goal.notes) {
         delete goal.notes;
     }
+
+    if (!goal.currentRank) {
+        delete goal.currentRank;
+    }
+
+    if (!goal.currentRarity) {
+        delete goal.currentRarity;
+    }
 };
 
 export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {

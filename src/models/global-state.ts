@@ -62,6 +62,7 @@ export class GlobalState implements IGlobalState {
                 rank: personalCharData?.rank ?? Rank.Locked,
                 rarity: personalCharData?.rarity ?? staticData.initialRarity,
                 bias: personalCharData?.bias ?? CharacterBias.None,
+                upgrades: personalCharData?.upgrades ?? [],
             };
             return {
                 ...staticData,
@@ -89,8 +90,14 @@ export class GlobalState implements IGlobalState {
 
     static toStore(value: IGlobalState): IPersonalData2 {
         const charactersToStore: IPersonalCharacterData2[] = value.characters
-            .filter(x => x.bias !== CharacterBias.None || x.rank !== Rank.Locked || x.rarity !== x.initialRarity)
-            .map(x => ({ name: x.name, rank: x.rank, rarity: x.rarity, bias: x.bias }));
+            .filter(
+                x =>
+                    x.bias !== CharacterBias.None ||
+                    x.rank !== Rank.Locked ||
+                    x.rarity !== x.initialRarity ||
+                    x.upgrades?.length
+            )
+            .map(x => ({ name: x.name, rank: x.rank, rarity: x.rarity, bias: x.bias, upgrades: x.upgrades }));
 
         return {
             schemaVersion: 2,

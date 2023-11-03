@@ -1,11 +1,12 @@
-﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
+﻿import React, { useContext, useMemo, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import {
-    Autocomplete,
+    Checkbox,
     DialogActions,
     DialogContent,
     DialogTitle,
     FormControl,
+    FormControlLabel,
     MenuItem,
     Select,
     TextField,
@@ -17,7 +18,6 @@ import { ICharacter2, IPersonalGoal } from '../../models/interfaces';
 import { v4 } from 'uuid';
 import { PersonalGoalType, Rank, Rarity } from '../../models/enums';
 import InputLabel from '@mui/material/InputLabel';
-import { CharacterTitle } from '../character-title';
 import { getEnumValues, rankToString } from '../../shared-logic/functions';
 import { RankImage } from '../rank-image';
 import { Tooltip } from '@fluentui/react-components';
@@ -25,14 +25,20 @@ import { enqueueSnackbar } from 'notistack';
 import { CharacterItem } from '../character-item';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { CharactersAutocomplete } from '../characters-autocomplete';
+import { RankSelect } from '../rank-select';
+import { RaritySelect } from '../rarity-select';
+import { CharacterTitle } from '../character-title';
+import { StaticDataService } from '../../services';
+import { isEqual } from 'lodash';
 
-const getDefaultForm = (priority: number) => ({
+const getDefaultForm = (priority: number): IPersonalGoal => ({
     id: v4(),
     character: '',
     type: PersonalGoalType.UpgradeRank,
     targetRarity: Rarity.Uncommon,
     targetRank: Rank.Stone1,
     priority,
+    upgrades: [],
 });
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
@@ -235,24 +241,45 @@ export const EditGoalDialog = ({
     isOpen,
     onClose,
     goal,
+    character,
 }: {
     isOpen: boolean;
     goal: IPersonalGoal;
+    character: ICharacter2;
     onClose?: (goal?: IPersonalGoal) => void;
 }) => {
-    const { characters, goals } = useContext(StoreContext);
+    const { goals } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const [openDialog, setOpenDialog] = React.useState(isOpen);
-    const [character, setCharacter] = React.useState<ICharacter2 | null>(
-        characters.find(x => x.name === goal.character) ?? null
-    );
 
-    const [form, setForm] = useState<IPersonalGoal>(() => ({ ...goal }));
-
+    const [form, setForm] = useState<IPersonalGoal>(goal);
     const handleClose = (updatedGoal?: IPersonalGoal | undefined): void => {
         if (updatedGoal) {
             dispatch.goals({ type: 'Update', goal: updatedGoal });
+            if (updatedGoal.currentRank && updatedGoal.currentRank !== character.rank) {
+                dispatch.characters({
+                    type: 'UpdateRank',
+                    character: updatedGoal.character,
+                    value: updatedGoal.currentRank,
+                });
+            }
+            if (updatedGoal.currentRarity && updatedGoal.currentRarity !== character.rarity) {
+                dispatch.characters({
+                    type: 'UpdateRarity',
+                    character: updatedGoal.character,
+                    value: updatedGoal.currentRarity,
+                });
+            }
+
+            if (updatedGoal.upgrades?.length && !isEqual(updatedGoal.upgrades, character.upgrades)) {
+                dispatch.characters({
+                    type: 'UpdateUpgrades',
+                    character: updatedGoal.character,
+                    value: updatedGoal.upgrades,
+                });
+            }
+
             enqueueSnackbar(`Goal for ${updatedGoal.character} is updated`, { variant: 'success' });
         }
         setOpenDialog(false);
@@ -261,57 +288,50 @@ export const EditGoalDialog = ({
         }
     };
 
-    const rarityValues = useMemo(() => {
-        return getEnumValues(Rarity).filter(x => x > 0 && (!character || x >= character.rarity));
-    }, [character]);
+    const handleUpgradeChange = (event: React.ChangeEvent<HTMLInputElement>, value: string) => {
+        let result: string[];
 
-    const targetRaritySelector = (
-        <FormControl style={{ marginTop: 20 }} fullWidth>
-            <InputLabel id="target-rarity-label">Target Rarity</InputLabel>
-            <Select<Rarity>
-                id="target-rarity"
-                labelId="target-rarity-label"
-                label="Target Rarity"
-                value={form.targetRarity}
-                onChange={event => setForm(curr => ({ ...curr, targetRarity: +event.target.value }))}>
-                {rarityValues.map(rarity => (
-                    <MenuItem key={rarity} value={rarity}>
-                        {Rarity[rarity]}
-                    </MenuItem>
-                ))}
-            </Select>
-        </FormControl>
-    );
+        if (event.target.checked) {
+            result = [...form.upgrades, value];
+        } else {
+            result = form.upgrades.filter(x => x !== value);
+        }
 
-    const rankValues = useMemo(() => {
-        return getEnumValues(Rank).filter(x => x > 0 && (!character || x >= character.rank));
-    }, [character]);
+        setForm({
+            ...form,
+            upgrades: result,
+        });
+    };
 
-    const targetRankSelector = (
-        <FormControl style={{ marginTop: 20 }} fullWidth>
-            <InputLabel id="target-rank-label">Target Rank</InputLabel>
-            <Select<Rank>
-                id="target-rank"
-                labelId="target-rank-label"
-                label="Target Rank"
-                value={form.targetRank}
-                onChange={event => setForm(curr => ({ ...curr, targetRank: +event.target.value }))}>
-                {rankValues.map(rank => (
-                    <MenuItem key={rank} value={rank}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
-                            <span>{rankToString(rank)}</span>
-                            <RankImage rank={rank} />
-                        </div>
-                    </MenuItem>
-                ))}
-            </Select>
-        </FormControl>
-    );
+    const targetRarityValues = useMemo(() => {
+        return getEnumValues(Rarity).filter(x => x >= form.currentRarity!);
+    }, [form.currentRarity]);
+
+    const currentRarityValues = useMemo(() => {
+        return getEnumValues(Rarity).filter(x => x <= form.targetRarity!);
+    }, [form.targetRarity]);
+
+    const targetRankValues = useMemo(() => {
+        return getEnumValues(Rank).filter(x => x > 0 && x >= form.currentRank!);
+    }, [form.currentRank]);
+
+    const currentRankValues = useMemo(() => {
+        return getEnumValues(Rank).filter(x => x > 0 && x <= form.targetRank!);
+    }, [form.targetRank]);
+
+    const upgrades = useMemo(() => {
+        return StaticDataService.getUpgrades({
+            id: character.name,
+            rankStart: form.currentRank!,
+            rankEnd: form.currentRank! + 1,
+            appliedUpgrades: [],
+        });
+    }, [form.currentRank]);
 
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
             <DialogTitle style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
-                <span>Edit Goal</span> {character ? <CharacterItem character={character} /> : undefined}
+                <span>Edit Goal</span> <CharacterTitle character={character} />
             </DialogTitle>
             <DialogContent>
                 <Box
@@ -335,8 +355,58 @@ export const EditGoalDialog = ({
                         </Select>
                     </FormControl>
 
-                    {character && form.type === PersonalGoalType.UpgradeRank ? targetRankSelector : undefined}
-                    {character && form.type === PersonalGoalType.Ascend ? targetRaritySelector : undefined}
+                    {form.type === PersonalGoalType.UpgradeRank ? (
+                        <div>
+                            <RankSelect
+                                label={'Current Rank'}
+                                rankValues={currentRankValues}
+                                value={form.currentRank ?? Rank.Stone1}
+                                valueChanges={value => setForm(curr => ({ ...curr, currentRank: value, upgrades: [] }))}
+                            />
+                            <RankSelect
+                                label={'Target Rank'}
+                                rankValues={targetRankValues}
+                                value={form.targetRank ?? Rank.Stone1}
+                                valueChanges={value => setForm(curr => ({ ...curr, targetRank: value }))}
+                            />
+                            {upgrades?.length ? (
+                                <div>
+                                    <h4>Applied upgrades</h4>
+                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                        {upgrades.map(x => (
+                                            <FormControlLabel
+                                                key={x.material}
+                                                control={
+                                                    <Checkbox
+                                                        checked={form.upgrades.includes(x.material)}
+                                                        onChange={event => handleUpgradeChange(event, x.material)}
+                                                        inputProps={{ 'aria-label': 'controlled' }}
+                                                    />
+                                                }
+                                                label={`(${x.stat}) ${x.material}`}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            ) : undefined}
+                        </div>
+                    ) : undefined}
+                    {form.type === PersonalGoalType.Ascend ? (
+                        <div>
+                            <RaritySelect
+                                label={'Current Rarity'}
+                                rarityValues={currentRarityValues}
+                                value={form.currentRarity ?? Rarity.Common}
+                                valueChanges={value => setForm(curr => ({ ...curr, currentRarity: value }))}
+                            />
+                            <RaritySelect
+                                label={'Target Rarity'}
+                                rarityValues={targetRarityValues}
+                                value={form.targetRarity ?? Rarity.Common}
+                                valueChanges={value => setForm(curr => ({ ...curr, targetRarity: value }))}
+                            />
+                        </div>
+                    ) : undefined}
 
                     <TextField
                         style={{ marginTop: 20 }}

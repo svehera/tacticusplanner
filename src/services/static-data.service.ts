@@ -317,7 +317,7 @@ export class StaticDataService {
         };
     }
 
-    private static getUpgrades(...characters: Array<ICharacterRankRange>): IMaterialFull[] {
+    public static getUpgrades(...characters: Array<ICharacterRankRange>): IMaterialFull[] {
         const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
         const result: IMaterialFull[] = [];
 
@@ -328,9 +328,11 @@ export class StaticDataService {
             }
             const ranksRange = rankEntries.filter(r => r >= character.rankStart && r < character.rankEnd);
 
-            const rankUpgrades = ranksRange.flatMap(rank => characterUpgrades[rankToString(rank)]);
+            const rankUpgrades = ranksRange
+                .flatMap(rank => characterUpgrades[rankToString(rank)])
+                .filter(x => !!x && !character.appliedUpgrades.includes(x));
 
-            if (!rankUpgrades) {
+            if (!rankUpgrades.length) {
                 continue;
             }
 
@@ -509,7 +511,9 @@ export class StaticDataService {
         bestLocations: ICampaignBattleComposed[]
     ): IMaterialEstimated2 | null {
         if (!bestLocations.length) {
-            console.error('No Locations for ' + material.material);
+            if (!material.material.includes('Gold')) {
+                console.error('No Locations for ' + material.material, material.locationsComposed);
+            }
             return null;
         }
 
@@ -546,8 +550,7 @@ export class StaticDataService {
         });
         const minEnergy = Math.min(...unlockedLcoations.map(x => x.energyPerItem));
 
-        // return orderBy(locationsComposed, ['energyPerItem'], ['asc']); //.filter(location => location.energyPerItem === minEnergy);
-        return orderBy(unlockedLcoations, ['energyPerItem'], ['asc']).filter(location =>
+        return orderBy(unlockedLcoations, ['energyPerItem', 'expectedGold'], ['asc', 'desc']).filter(location =>
             useLessefficientNodes ? true : location.energyPerItem === minEnergy
         );
     }

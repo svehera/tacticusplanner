@@ -74,7 +74,7 @@ export const DailyRaids = () => {
         },
     ]);
 
-    const charactersList = useMemo(() => {
+    const charactersList = useMemo<ICharacterRankRange[]>(() => {
         return goals
             .filter(x => x.type === PersonalGoalType.UpgradeRank)
             .map(g => {
@@ -84,6 +84,7 @@ export const DailyRaids = () => {
                         id: g.character,
                         rankStart: char.rank,
                         rankEnd: g.targetRank!,
+                        appliedUpgrades: char.upgrades,
                     } as ICharacterRankRange;
                 }
                 return null;

@@ -1,6 +1,6 @@
 ﻿import React, { useContext, useMemo, useState } from 'react';
 import { EditGoalDialog, SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
-import { ICharacter, ICharacterRankRange, IPersonalGoal } from '../../models/interfaces';
+import { ICharacter, ICharacter2, ICharacterRankRange, IPersonalGoal } from '../../models/interfaces';
 import { PersonalGoalType, Rank } from '../../models/enums';
 
 import { RankImage } from '../../shared-components/rank-image';
@@ -12,12 +12,14 @@ import IconButton from '@mui/material/IconButton';
 import { ArrowForward, DeleteForever, Edit } from '@mui/icons-material';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { StaticDataService } from '../../services';
+import { defaultCampaignsProgress } from '../../models/constants';
 
 export const Goals = () => {
-    const { goals, characters, campaignsProgress } = useContext(StoreContext);
+    const { goals, characters, campaignsProgress, dailyRaidsPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const [editGoal, setEditGoal] = useState<IPersonalGoal | null>(null);
+    const [editCharacter, setEditCharacter] = useState<ICharacter2>(characters[0]);
 
     const estimatedDaysTotal = useMemo(() => {
         const chars = goals
@@ -29,6 +31,7 @@ export const Goals = () => {
                         id: g.character,
                         rankStart: char.rank,
                         rankEnd: g.targetRank!,
+                        appliedUpgrades: char.upgrades,
                     } as ICharacterRankRange;
                 }
                 return null;
@@ -37,8 +40,11 @@ export const Goals = () => {
 
         const estimate = StaticDataService.getRankUpgradeEstimatedDays(
             {
-                dailyEnergy: 288 + 50 + 100,
-                campaignsProgress,
+                dailyEnergy: dailyRaidsPreferences.dailyEnergy,
+                campaignsProgress: dailyRaidsPreferences.useCampaignsProgress
+                    ? campaignsProgress
+                    : defaultCampaignsProgress,
+                preferences: dailyRaidsPreferences,
             },
             ...chars
         );
@@ -58,7 +64,16 @@ export const Goals = () => {
         }
 
         if (item === 'edit') {
-            setEditGoal(goal);
+            const relatedCharacter = characters.find(x => x.name === goal.character);
+            if (relatedCharacter) {
+                setEditCharacter(relatedCharacter);
+                setEditGoal({
+                    ...goal,
+                    currentRank: relatedCharacter.rank,
+                    currentRarity: relatedCharacter.rarity,
+                    upgrades: relatedCharacter.upgrades,
+                });
+            }
         }
     };
 
@@ -70,6 +85,7 @@ export const Goals = () => {
                     <EditGoalDialog
                         isOpen={true}
                         goal={editGoal}
+                        character={editCharacter}
                         onClose={() => {
                             setEditGoal(null);
                         }}
@@ -104,19 +120,31 @@ export default function GoalCard({
     goal: IPersonalGoal;
     menuItemSelect: (item: 'edit' | 'delete') => void;
 }) {
-    const { characters, campaignsProgress } = useContext(StoreContext);
-    const character = characters.find(x => x.name === goal.character) as ICharacter;
+    const { characters, campaignsProgress, dailyRaidsPreferences } = useContext(StoreContext);
+    const character = characters.find(x => x.name === goal.character) as ICharacter2;
+
+    const isGoalCompleted = useMemo(() => {
+        return (
+            (goal.type === PersonalGoalType.UpgradeRank && character.rank >= goal.targetRank!) ||
+            (goal.type === PersonalGoalType.Ascend && character.rarity >= goal.targetRarity!) ||
+            (goal.type === PersonalGoalType.Unlock && character.rank > Rank.Locked)
+        );
+    }, []);
 
     const estimatedDays = useMemo(() => {
         const estimate = StaticDataService.getRankUpgradeEstimatedDays(
             {
-                dailyEnergy: 288 + 50 + 100,
-                campaignsProgress,
+                dailyEnergy: dailyRaidsPreferences.dailyEnergy,
+                campaignsProgress: dailyRaidsPreferences.useCampaignsProgress
+                    ? campaignsProgress
+                    : defaultCampaignsProgress,
+                preferences: dailyRaidsPreferences,
             },
             {
                 id: character.name,
                 rankStart: character.rank,
                 rankEnd: goal.targetRank!,
+                appliedUpgrades: character.upgrades,
             }
         );
 
@@ -129,19 +157,16 @@ export default function GoalCard({
                 sx={{
                     width: 350,
                     minHeight: 200,
-                    backgroundColor:
-                        (goal.type === PersonalGoalType.UpgradeRank && goal.targetRank === character.rank) ||
-                        (goal.type === PersonalGoalType.Ascend && goal.targetRarity === character.rarity) ||
-                        (goal.type === PersonalGoalType.Unlock && character.rank > Rank.Locked)
-                            ? 'lightgreen'
-                            : 'white',
+                    backgroundColor: isGoalCompleted ? 'lightgreen' : 'white',
                 }}>
                 <CardHeader
                     action={
                         <React.Fragment>
-                            <IconButton onClick={() => menuItemSelect('edit')}>
-                                <Edit fontSize="small" />
-                            </IconButton>
+                            {!isGoalCompleted ? (
+                                <IconButton onClick={() => menuItemSelect('edit')}>
+                                    <Edit fontSize="small" />
+                                </IconButton>
+                            ) : undefined}
                             <IconButton onClick={() => menuItemSelect('delete')}>
                                 <DeleteForever fontSize="small" />
                             </IconButton>

@@ -346,6 +346,7 @@ export interface IPersonalCharacterData2 {
     rank: Rank;
     rarity: Rarity;
     bias: CharacterBias;
+    upgrades: string[];
 }
 
 export interface ICharProgression {
@@ -359,9 +360,12 @@ export interface IPersonalGoal {
     character: string;
     type: PersonalGoalType;
     priority: number;
+    currentRarity?: Rarity;
     targetRarity?: Rarity;
+    currentRank?: Rank;
     targetRank?: Rank;
     notes?: string;
+    upgrades: string[];
 }
 
 export type ILegendaryEventsProgressState = Record<LegendaryEventEnum, ILegendaryEventProgressState>;
@@ -587,6 +591,7 @@ export interface ICharacterRankRange {
     id: string;
     rankStart: Rank;
     rankEnd: Rank;
+    appliedUpgrades: string[];
 }
 
 export interface IEstimatedRanks {
@@ -620,10 +625,3 @@ export type ICampaignsProgress = {
 
     'Saim-Hann': number;
 };
-
-interface ICampaignProgress {
-    normal: number;
-    elite: number;
-    mirror: number;
-    mirrorElite: number;
-}
