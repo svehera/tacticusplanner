@@ -73,7 +73,7 @@ export const getCompletionRateColor = (curr: number, total: number): string => {
     if (!curr) {
         return 'white';
     }
-    if (curr === total) {
+    if (curr >= total) {
         return 'lightgreen';
     }
 

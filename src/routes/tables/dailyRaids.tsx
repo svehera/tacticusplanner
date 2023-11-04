@@ -89,6 +89,14 @@ export const DailyRaids = () => {
                 field: 'countLeft',
                 headerName: 'Left',
                 maxWidth: 90,
+                cellStyle: cellClassParams => {
+                    const { data } = cellClassParams;
+                    if (data) {
+                        return {
+                            backgroundColor: data.quantity >= data.count ? 'lightgreen' : 'white',
+                        };
+                    }
+                },
             },
             {
                 field: 'rarity',

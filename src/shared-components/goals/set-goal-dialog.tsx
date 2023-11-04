@@ -272,7 +272,7 @@ export const EditGoalDialog = ({
                 });
             }
 
-            if (updatedGoal.upgrades?.length && !isEqual(updatedGoal.upgrades, character.upgrades)) {
+            if (!isEqual(updatedGoal.upgrades, character.upgrades)) {
                 dispatch.characters({
                     type: 'UpdateUpgrades',
                     character: updatedGoal.character,
