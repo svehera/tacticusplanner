@@ -72,6 +72,7 @@ export const DailyRaids = () => {
             {
                 hide: !dailyRaidsPreferences.useInventory,
                 field: 'quantity',
+                headerName: 'Inventory',
                 editable: true,
                 cellEditorPopup: false,
                 cellDataType: 'number',
