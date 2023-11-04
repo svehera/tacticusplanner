@@ -1,7 +1,7 @@
 ﻿import React, { useContext, useMemo, useState } from 'react';
 
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, ICellRendererParams } from 'ag-grid-community';
 
 import { FormControl, MenuItem, Select, TextField } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
@@ -10,8 +10,7 @@ import { Rarity } from '../models/enums';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 import { orderBy } from 'lodash';
 import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
-
-type Selection = 'Craftable' | 'Non Craftable';
+import { UpgradeImage } from '../shared-components/upgrade-image';
 
 interface ITableRow {
     material: string;
@@ -19,16 +18,14 @@ interface ITableRow {
     craftable: boolean;
     stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
     quantity: number;
+    iconPath: string;
 }
 
 export const Inventory = () => {
     const dispatch = useContext(DispatchContext);
     const { inventory } = useContext(StoreContext);
 
-    const selectionOptions: Selection[] = ['Craftable', 'Non Craftable'];
-
     const [nameFilter, setNameFilter] = useState<string>('');
-    const [selection, setSelection] = useState<Selection>('Non Craftable');
 
     const columnDefs = useMemo<Array<ColDef<ITableRow>>>(() => {
         return [
@@ -40,6 +37,17 @@ export const Inventory = () => {
                 width: 60,
                 minWidth: 60,
                 sortable: false,
+            },
+            {
+                headerName: 'Icon',
+                cellRenderer: (params: ICellRendererParams<ITableRow>) => {
+                    const { data } = params;
+                    if (data) {
+                        return <UpgradeImage material={data.material} iconPath={data.iconPath} />;
+                    }
+                },
+                sortable: false,
+                width: 80,
             },
             {
                 field: 'material',
@@ -71,7 +79,7 @@ export const Inventory = () => {
                 minWidth: 150,
             },
         ];
-    }, [selection]);
+    }, []);
 
     const allRows = useMemo<ITableRow[]>(() => {
         return orderBy(
@@ -81,6 +89,7 @@ export const Inventory = () => {
                 craftable: x.craftable,
                 stat: x.stat,
                 quantity: inventory.upgrades[x.material] ?? 0,
+                iconPath: x.icon ?? '',
             })),
             ['quantity', 'rarity', 'material'],
             ['desc', 'desc', 'asc']
@@ -88,19 +97,13 @@ export const Inventory = () => {
     }, []);
 
     const rows = useMemo(() => {
-        return allRows
-            .filter(upgrade => upgrade.material.toLowerCase().includes(nameFilter.toLowerCase()))
-            .filter(upgrade => {
-                switch (selection) {
-                    case 'Craftable': {
-                        return upgrade.craftable && upgrade.stat !== 'Shard';
-                    }
-                    case 'Non Craftable': {
-                        return !upgrade.craftable && upgrade.stat !== 'Shard';
-                    }
-                }
-            });
-    }, [selection, nameFilter]);
+        return allRows.filter(
+            upgrade =>
+                upgrade.material.toLowerCase().includes(nameFilter.toLowerCase()) &&
+                !upgrade.craftable &&
+                upgrade.stat !== 'Shard'
+        );
+    }, [nameFilter]);
 
     const saveChanges = (event: CellEditingStoppedEvent<ITableRow>): void => {
         if (event.data && event.newValue !== event.oldValue) {
@@ -119,31 +122,17 @@ export const Inventory = () => {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '20px',
-                    margin: '0 20px',
+                    margin: '20px',
                 }}>
                 <TextField
                     label="Quick Filter"
                     variant="outlined"
                     onChange={change => setNameFilter(change.target.value)}
                 />
-                <FormControl style={{ width: 250, margin: 20 }}>
-                    <InputLabel>Selection</InputLabel>
-                    <Select
-                        label={'Selection'}
-                        value={selection}
-                        onChange={event => setSelection(event.target.value as Selection)}>
-                        {selectionOptions.map(value => (
-                            <MenuItem key={value} value={value}>
-                                {value}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
             </div>
 
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 220px)', width: '100%' }}>
                 <AgGridReact
-                    key={selection}
                     singleClickEdit={true}
                     defaultColDef={{ sortable: true, autoHeight: true, wrapText: true }}
                     columnDefs={columnDefs}

@@ -490,6 +490,7 @@ export interface IMaterial {
     rarity: string;
     craftable: boolean;
     stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
+    icon?: string;
     faction?: string; // if not specifor to faction then this property can be omitted ("undefined");
     recipe?: Array<IMaterialRecipeIngredient>; // if material is not craftable recipe can be omitted ("undefined")
     locations?: Array<string>; // campaigs locations campaigs can be in short form (IM12) or long (Indomitus mirros) depedings how you decisde to update battleData json.
@@ -512,6 +513,7 @@ export interface IMaterialFull {
     faction?: string; // if not specifor to faction then this property can be omitted ("undefined");
     recipe?: Array<IMaterialRecipeIngredientFull>; // if material is not craftable recipe can be omitted ("undefined")
     allMaterials?: IMaterialRecipeIngredientFull[];
+    iconPath: string;
 }
 
 export interface IMaterialRecipeIngredientFull {
@@ -523,6 +525,7 @@ export interface IMaterialRecipeIngredientFull {
     recipe?: IMaterialRecipeIngredientFull[];
     locations?: Array<string>;
     locationsComposed?: Array<ICampaignBattleComposed>;
+    iconPath: string;
 }
 
 export interface IRankUpData {
@@ -581,7 +584,7 @@ export interface IMaterialEstimated2 {
     // energyPerBattle: number;
     quantity: number;
     countLeft: number;
-    // countByChar: Record<string, number>;
+    iconPath: string;
 }
 
 export interface IDailyRaid {

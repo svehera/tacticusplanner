@@ -4,28 +4,14 @@
     "craftable": false,
     "stat": "Health",
     "rarity": "Common",
-    "locations": [
-      "I59",
-      "O7",
-      "SH1",
-      "IM47",
-      "OE11"
-    ]
+    "icon": "adamantium filaments.png"
   },
   "Adamantium Ore": {
     "material": "Adamantium Ore",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Common",
-    "locations": [
-      "I48",
-      "FoC14",
-      "O71",
-      "SH12",
-      "IM58",
-      "OM27",
-      "IE1"
-    ]
+    "icon": "adamantium ore.png"
   },
   "Adrenal Glands": {
     "material": "Adrenal Glands",
@@ -33,76 +19,49 @@
     "stat": "Health",
     "faction": "Tyranids",
     "rarity": "Rare",
-    "locations": [
-      "O44"
-    ]
+    "icon": "adrenal glands.jpg"
   },
   "Advanced Filaments": {
     "material": "Advanced Filaments",
     "craftable": false,
     "stat": "Health",
     "rarity": "Uncommon",
-    "locations": [
-      "I61",
-      "SH18",
-      "IM46",
-      "OM58",
-      "OE6"
-    ]
+    "icon": "advanced filaments.png"
   },
   "Advanced Rebreather": {
     "material": "Advanced Rebreather",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Uncommon",
-    "locations": [
-      "I68",
-      "O33",
-      "SH74"
-    ]
+    "icon": "advanced rebreather.png"
   },
   "Air Purificator": {
     "material": "Air Purificator",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Uncommon",
-    "locations": [
-      "FoC63",
-      "SH65",
-      "IM9",
-      "FoCM61"
-    ]
+    "icon": "air purificator.png"
   },
   "Ancient Runes": {
     "material": "Ancient Runes",
     "craftable": false,
     "stat": "Health",
     "rarity": "Rare",
-    "locations": [
-      "O32",
-      "SH39",
-      "IM23",
-      "FoCM52",
-      "OE7"
-    ]
+    "icon": "ancient runes.png"
   },
   "Archeotech Bionics": {
     "material": "Archeotech Bionics",
     "craftable": false,
     "stat": "Health",
     "rarity": "Legendary",
-    "locations": [
-      
-    ]
+    "icon": "archeotech bionics.png"
   },
   "Archeo-Tech Remnant": {
     "material": "Archeo-Tech Remnant",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Legendary",
-    "locations": [
-      "IME38"
-    ]
+    "icon": "archeo-tech remnant.jpg"
   },
   "Ard Plate": {
     "material": "Ard Plate",
@@ -110,76 +69,42 @@
     "stat": "Armour",
     "faction": "Orks",
     "rarity": "Rare",
-    "locations": [
-      "O51",
-      "OM69",
-      "OE21"
-    ]
+    "icon": "ard plate.jpg"
   },
   "Armor Trim": {
     "material": "Armor Trim",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Common",
-    "locations": [
-      "FoC7",
-      "O11",
-      "SH5",
-      "OM22",
-      "FoC1"
-    ]
+    "icon": "armor trim.png"
   },
   "Artificer Tasset Plate": {
     "material": "Artificer Tasset Plate",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Rare",
-    "locations": [
-      "O37",
-      "SH54",
-      "IM18",
-      "FoCM47",
-      "OM49",
-      "FoC36"
-    ]
+    "icon": "artificer tasset plate.png"
   },
   "Artificial Vertebrae": {
     "material": "Artificial Vertebrae",
     "craftable": false,
     "stat": "Health",
     "rarity": "Uncommon",
-    "locations": [
-      "FoC38",
-      "SH36",
-      "SH63",
-      "IM11",
-      "FoCM63",
-      "FoC35"
-    ]
+    "icon": "artificial vertebrae.png"
   },
   "Attack Vector Data-Slate": {
     "material": "Attack Vector Data-Slate",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Uncommon",
-    "locations": [
-      "I25",
-      "FoC35",
-      "O70",
-      "FoCM11"
-    ]
+    "icon": "attack vector data-slate.png"
   },
   "Auspex": {
     "material": "Auspex",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "FoC19",
-      "O64",
-      "IM59",
-      "OM19"
-    ]
+    "icon": "auspex.png"
   },
   "Bad Moon Teef": {
     "material": "Bad Moon Teef",
@@ -187,66 +112,35 @@
     "stat": "Health",
     "faction": "Orks",
     "rarity": "Rare",
-    "locations": [
-      "O46",
-      "OM61",
-      "OE19"
-    ]
+    "icon": "bad moon teef.png"
   },
   "Ballistics Data": {
     "material": "Ballistics Data",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "I47",
-      "FoC55",
-      "IM61",
-      "OM46",
-      "OE3",
-      "FoCME19"
-    ]
+    "icon": "ballistics data.png"
   },
   "Barrel of Promethium": {
     "material": "Barrel of Promethium",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Uncommon",
-    "locations": [
-      "I54",
-      "FoC33",
-      "O56",
-      "IM52",
-      "OM28"
-    ]
+    "icon": "barrel of promethium.png"
   },
   "Basic Auxiliary Core": {
     "material": "Basic Auxiliary Core",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "I22",
-      "FoC32",
-      "O53",
-      "FoCM19",
-      "OM14",
-      "IE5",
-      "IME26"
-    ]
+    "icon": "basic auxiliary core.png"
   },
   "Battle Scar": {
     "material": "Battle Scar",
     "craftable": false,
     "stat": "Health",
     "rarity": "Rare",
-    "locations": [
-      "FoC22",
-      "O74",
-      "FoCM42",
-      "OM57",
-      "OE30"
-    ]
+    "icon": "battle scar.png"
   },
   "Beast Hide": {
     "material": "Beast Hide",
@@ -254,46 +148,28 @@
     "stat": "Armour",
     "faction": "Space Wolves",
     "rarity": "Rare",
-    "locations": [
-      "FoC51",
-      "SH62",
-      "OE22"
-    ]
+    "icon": "beast hide.jpg"
   },
   "Bionic Eye": {
     "material": "Bionic Eye",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Rare",
-    "locations": [
-      "FoC69",
-      "SH48",
-      "IM19",
-      "FoCM32",
-      "OE36"
-    ]
+    "icon": "bionic eye.png"
   },
   "Bionic Neural Pathways": {
     "material": "Bionic Neural Pathways",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Epic",
-    "locations": [
-      "O43",
-      "FoCM29",
-      "OE37"
-    ]
+    "icon": "bionic neural pathways.png"
   },
   "Bladesman's Honour": {
     "material": "Bladesman's Honour",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Rare",
-    "locations": [
-      "O22",
-      "SH52",
-      "OM41"
-    ]
+    "icon": "bladesman_s honour.png"
   },
   "Blasphemous Armor Trim": {
     "material": "Blasphemous Armor Trim",
@@ -301,12 +177,7 @@
     "stat": "Armour",
     "faction": "Black Legion",
     "rarity": "Rare",
-    "locations": [
-      "FoC65",
-      "FoCM65",
-      "FoC21",
-      "FoCME36"
-    ]
+    "icon": "blasphemous armor trim.png"
   },
   "Blessed Corset Armor": {
     "material": "Blessed Corset Armor",
@@ -314,24 +185,14 @@
     "stat": "Armour",
     "faction": "Adepta Sororitas",
     "rarity": "Rare",
-    "locations": [
-      "O50",
-      "FoCM67",
-      "IE21",
-      "FoCME22"
-    ]
+    "icon": "blessed corset armor.png"
   },
   "Blessed Promethium Canister": {
     "material": "Blessed Promethium Canister",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Epic",
-    "locations": [
-      "FoC73",
-      "IM26",
-      "FoCM26",
-      "FoCME5"
-    ]
+    "icon": "blessed promethium canister.png"
   },
   "Blessed Tabbard": {
     "material": "Blessed Tabbard",
@@ -339,25 +200,14 @@
     "stat": "Armour",
     "faction": "Black Templars",
     "rarity": "Rare",
-    "locations": [
-      "O54",
-      "OM66",
-      "OE27"
-    ]
+    "icon": "blessed tabbard.jpg"
   },
   "Blessed Tasset Plate": {
     "material": "Blessed Tasset Plate",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Uncommon",
-    "locations": [
-      "FoC23",
-      "SH35",
-      "SH70",
-      "IM10",
-      "OM24",
-      "IE34"
-    ]
+    "icon": "blessed tasset plate.png"
   },
   "Blessing of Nurgle": {
     "material": "Blessing of Nurgle",
@@ -365,12 +215,7 @@
     "stat": "Health",
     "faction": "Death Guard",
     "rarity": "Legendary",
-    "locations": [
-      "FoCM72",
-      "FoC29",
-      "FoC39",
-      "FoCME31"
-    ]
+    "icon": "blessing of nurgle.jpg"
   },
   "Blessing of the Dark Gods": {
     "material": "Blessing of the Dark Gods",
@@ -378,12 +223,7 @@
     "stat": "Health",
     "faction": "Black Legion",
     "rarity": "Legendary",
-    "locations": [
-      "FoCM71",
-      "FoC23",
-      "FoC38",
-      "FoCME37"
-    ]
+    "icon": "blessing of the dark gods.jpg"
   },
   "Blessing of Tzeentch": {
     "material": "Blessing of Tzeentch",
@@ -391,9 +231,7 @@
     "stat": "Health",
     "faction": "Thousand Sons",
     "rarity": "Legendary",
-    "locations": [
-      "IME14"
-    ]
+    "icon": "blessing of tzeentch.jpg"
   },
   "Bones of the Paragons": {
     "material": "Bones of the Paragons",
@@ -401,64 +239,35 @@
     "stat": "Health",
     "faction": "Black Templars",
     "rarity": "Legendary",
-    "locations": [
-      "OM70",
-      "OE28"
-    ]
+    "icon": "bones of the paragons.jpg"
   },
   "Box of Salvage": {
     "material": "Box of Salvage",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Uncommon",
-    "locations": [
-      "I31",
-      "FoC28",
-      "O58",
-      "SH17",
-      "FoCM8",
-      "OE4"
-    ]
+    "icon": "box of salvage.png"
   },
   "Can of Promethium": {
     "material": "Can of Promethium",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "I50",
-      "FoC47",
-      "SH10",
-      "IM56",
-      "OM32"
-    ]
+    "icon": "can of promethium.png"
   },
   "Canister of Chemicals": {
     "material": "Canister of Chemicals",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "I46",
-      "FoC24",
-      "O61",
-      "IM62",
-      "OM2",
-      "FoC11"
-    ]
+    "icon": "canister of chemicals.png"
   },
   "Ceramite Lump": {
     "material": "Ceramite Lump",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Uncommon",
-    "locations": [
-      "I26",
-      "O20",
-      "FoCM10",
-      "OM39",
-      "IE35"
-    ]
+    "icon": "ceramite lump.png"
   },
   "Chain of Zeal": {
     "material": "Chain of Zeal",
@@ -466,11 +275,7 @@
     "stat": "Damage",
     "faction": "Black Templars",
     "rarity": "Rare",
-    "locations": [
-      "O41",
-      "OM59",
-      "OE25"
-    ]
+    "icon": "chain of zeal.jpg"
   },
   "Chapter Pendant": {
     "material": "Chapter Pendant",
@@ -478,51 +283,28 @@
     "stat": "Damage",
     "faction": "Dark Angels",
     "rarity": "Rare",
-    "locations": [
-      "SH46",
-      "IME33",
-      "FoCME18"
-    ]
+    "icon": "chapter pendant.jpg"
   },
   "Chip Damage": {
     "material": "Chip Damage",
     "craftable": false,
     "stat": "Health",
     "rarity": "Common",
-    "locations": [
-      "FoC6",
-      "O3",
-      "IM24",
-      "OM16",
-      "OE2"
-    ]
+    "icon": "chip damage.png"
   },
   "Classified Data-Slate": {
     "material": "Classified Data-Slate",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Rare",
-    "locations": [
-      "FoC62",
-      "SH42",
-      "IM13",
-      "FoCM41",
-      "OM50",
-      "IE25"
-    ]
+    "icon": "classified data-slate.png"
   },
   "Cloak": {
     "material": "Cloak",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Uncommon",
-    "locations": [
-      "FoC37",
-      "O10",
-      "SH22",
-      "OM34",
-      "FoC4"
-    ]
+    "icon": "cloak.png"
   },
   "Codex Astartes Page": {
     "material": "Codex Astartes Page",
@@ -530,37 +312,21 @@
     "stat": "Health",
     "faction": "Ultramarines",
     "rarity": "Legendary",
-    "locations": [
-      "IM70",
-      "IE23",
-      "IE38",
-      "IME23"
-    ]
+    "icon": "codex astartes page.jpg"
   },
   "Combat Stimms": {
     "material": "Combat Stimms",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Uncommon",
-    "locations": [
-      "FoC58",
-      "O9",
-      "IM6",
-      "FoCM56"
-    ]
+    "icon": "combat stimms.png"
   },
   "Crate of Salvage": {
     "material": "Crate of Salvage",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Rare",
-    "locations": [
-      "FoC11",
-      "SH33",
-      "IM12",
-      "FoCM40",
-      "OE15"
-    ]
+    "icon": "crate of salvage.png"
   },
   "Dark Hood": {
     "material": "Dark Hood",
@@ -568,21 +334,14 @@
     "stat": "Armour",
     "faction": "Dark Angels",
     "rarity": "Rare",
-    "locations": [
-      "SH56",
-      "IME34",
-      "FoCME23"
-    ]
+    "icon": "dark hood.jpg"
   },
   "Divinator Class Auspex": {
     "material": "Divinator Class Auspex",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Uncommon",
-    "locations": [
-      "O73",
-      "IM63"
-    ]
+    "icon": "divinator class auspex.png"
   },
   "Drone Controller": {
     "material": "Drone Controller",
@@ -590,21 +349,14 @@
     "stat": "Armour",
     "faction": "Tau Empire",
     "rarity": "Rare",
-    "locations": [
-      "FoCM50",
-      "IE22",
-      "IME37"
-    ]
+    "icon": "drone controller.jpg"
   },
   "Duplicate Organ": {
     "material": "Duplicate Organ",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Epic",
-    "locations": [
-      "I73",
-      "OM73"
-    ]
+    "icon": "duplicate organ.jpg"
   },
   "Engram Neurochip": {
     "material": "Engram Neurochip",
@@ -612,11 +364,7 @@
     "stat": "Health",
     "faction": "Tau Empire",
     "rarity": "Legendary",
-    "locations": [
-      "FoCM62",
-      "IE30",
-      "IME31"
-    ]
+    "icon": "engram neurochip.jpg"
   },
   "Engrammatic Entangler": {
     "material": "Engrammatic Entangler",
@@ -624,27 +372,14 @@
     "stat": "Health",
     "faction": "Necrons",
     "rarity": "Legendary",
-    "locations": [
-      "I74",
-      "IM71",
-      "IE28",
-      "IME6"
-    ]
+    "icon": "engrammatic entangler.jpg"
   },
   "Enriched Rations": {
     "material": "Enriched Rations",
     "craftable": false,
     "stat": "Health",
     "rarity": "Uncommon",
-    "locations": [
-      "I20",
-      "SH55",
-      "SH68",
-      "FoCM14",
-      "OM62",
-      "IE4",
-      "OE34"
-    ]
+    "icon": "enriched rations.png"
   },
   "Entrenching Tool": {
     "material": "Entrenching Tool",
@@ -652,12 +387,7 @@
     "stat": "Damage",
     "faction": "Astra Militarum",
     "rarity": "Rare",
-    "locations": [
-      "FoC53",
-      "FoCM59",
-      "FoC25",
-      "FoCME3"
-    ]
+    "icon": "entrenching tool.png"
   },
   "Eye of Horus": {
     "material": "Eye of Horus",
@@ -665,53 +395,28 @@
     "stat": "Health",
     "faction": "Black Legion",
     "rarity": "Rare",
-    "locations": [
-      "FoC56",
-      "FoCM55",
-      "FoC19",
-      "FoCME34"
-    ]
+    "icon": "eye of horus.png"
   },
   "Field Ration": {
     "material": "Field Ration",
     "craftable": false,
     "stat": "Health",
     "rarity": "Common",
-    "locations": [
-      "I37",
-      "FoC50",
-      "SH47",
-      "FoCM2",
-      "OM17"
-    ]
+    "icon": "field ration.png"
   },
   "Fine Micro-Generator": {
     "material": "Fine Micro-Generator",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Uncommon",
-    "locations": [
-      "I43",
-      "FoC31",
-      "O69",
-      "SH23",
-      "IM64",
-      "OM29",
-      "FoC14"
-    ]
+    "icon": "fine micro-generator.png"
   },
   "Fine Purity Seal": {
     "material": "Fine Purity Seal",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Common",
-    "locations": [
-      "I32",
-      "SH25",
-      "FoCM7",
-      "OM31",
-      "IE10"
-    ]
+    "icon": "fine purity seal.png"
   },
   "Flak Plates": {
     "material": "Flak Plates",
@@ -719,75 +424,42 @@
     "stat": "Armour",
     "faction": "Astra Militarum",
     "rarity": "Rare",
-    "locations": [
-      "FoC70",
-      "FoCM70",
-      "FoC27",
-      "FoCME4"
-    ]
+    "icon": "flak plates.png"
   },
   "Frag Grenade": {
     "material": "Frag Grenade",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "I17",
-      "FoC29",
-      "FoCM17",
-      "OM4"
-    ]
+    "icon": "frag grenade.png"
   },
   "Golden Ornamental Skull": {
     "material": "Golden Ornamental Skull",
     "craftable": false,
     "stat": "Health",
     "rarity": "Epic",
-    "locations": [
-      "FoC72",
-      "SH73",
-      "IM27",
-      "FoCM27",
-      "FoC37",
-      "FoCME14"
-    ]
+    "icon": "golden ornamental skull.png"
   },
   "Greater Reliquary of Vengeance": {
     "material": "Greater Reliquary of Vengeance",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Epic",
-    "locations": [
-      "IM25",
-      "FoCM74",
-      "IE27"
-    ]
+    "icon": "greater reliquary of vengeance.png"
   },
   "Healing Ointment": {
     "material": "Healing Ointment",
     "craftable": false,
     "stat": "Health",
     "rarity": "Common",
-    "locations": [
-      "I53",
-      "FoC18",
-      "SH49",
-      "IM53",
-      "OM6"
-    ]
+    "icon": "healing ointment.png"
   },
   "Helmet Trophy": {
     "material": "Helmet Trophy",
     "craftable": false,
     "stat": "Health",
     "rarity": "Uncommon",
-    "locations": [
-      "FoC41",
-      "O31",
-      "IM5",
-      "FoCM54",
-      "FoC12"
-    ]
+    "icon": "helmet trophy.png"
   },
   "Holy Chaplet": {
     "material": "Holy Chaplet",
@@ -795,12 +467,7 @@
     "stat": "Health",
     "faction": "Adepta Sororitas",
     "rarity": "Legendary",
-    "locations": [
-      "IM72",
-      "IE29",
-      "IE39",
-      "FoCME28"
-    ]
+    "icon": "holy chaplet.jpg"
   },
   "Honourifica Imperialis": {
     "material": "Honourifica Imperialis",
@@ -808,11 +475,7 @@
     "stat": "Health",
     "faction": "Astra Militarum",
     "rarity": "Legendary",
-    "locations": [
-      "FoCM66",
-      "FoC28",
-      "FoCME6"
-    ]
+    "icon": "honourifica imperialis.jpg"
   },
   "Hymn of Martyrs": {
     "material": "Hymn of Martyrs",
@@ -820,23 +483,14 @@
     "stat": "Damage",
     "faction": "Adepta Sororitas",
     "rarity": "Rare",
-    "locations": [
-      "FoC57",
-      "IM33",
-      "IE17",
-      "FoCME17"
-    ]
+    "icon": "hymn of martyrs.png"
   },
   "Hypermaterial Shifter": {
     "material": "Hypermaterial Shifter",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Epic",
-    "locations": [
-      "SH59",
-      "IM74",
-      "IME5"
-    ]
+    "icon": "hypermaterial shifter.png"
   },
   "Icon of Vengeance": {
     "material": "Icon of Vengeance",
@@ -844,12 +498,7 @@
     "stat": "Damage",
     "faction": "Black Legion",
     "rarity": "Rare",
-    "locations": [
-      "FoC54",
-      "FoCM44",
-      "FoC17",
-      "FoCME35"
-    ]
+    "icon": "icon of vengeance.png"
   },
   "Inferno Bolts": {
     "material": "Inferno Bolts",
@@ -857,10 +506,7 @@
     "stat": "Damage",
     "faction": "Thousand Sons",
     "rarity": "Rare",
-    "locations": [
-      "SH41",
-      "IME11"
-    ]
+    "icon": "inferno bolts.jpg"
   },
   "Iron Jaw": {
     "material": "Iron Jaw",
@@ -868,11 +514,7 @@
     "stat": "Damage",
     "faction": "Orks",
     "rarity": "Rare",
-    "locations": [
-      "O35",
-      "OM53",
-      "OE17"
-    ]
+    "icon": "iron jaw.png"
   },
   "Key of Ignorance": {
     "material": "Key of Ignorance",
@@ -880,38 +522,21 @@
     "stat": "Health",
     "faction": "Dark Angels",
     "rarity": "Rare",
-    "locations": [
-      "SH37",
-      "IME29",
-      "FoCME11"
-    ]
+    "icon": "key of ignorance.jpg"
   },
   "Kill Count": {
     "material": "Kill Count",
     "craftable": false,
     "stat": "Health",
     "rarity": "Rare",
-    "locations": [
-      "FoC17",
-      "O34",
-      "SH29",
-      "IM14",
-      "OM38",
-      "FoC15"
-    ]
+    "icon": "kill count.png"
   },
   "Krak Grenade": {
     "material": "Krak Grenade",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Rare",
-    "locations": [
-      "I70",
-      "O39",
-      "IM36",
-      "OM55",
-      "IE36"
-    ]
+    "icon": "krak grenade.png"
   },
   "Kustom Gubbinz": {
     "material": "Kustom Gubbinz",
@@ -919,145 +544,84 @@
     "stat": "Health",
     "faction": "Orks",
     "rarity": "Legendary",
-    "locations": [
-      "OM72",
-      "OE23",
-      "OE38"
-    ]
+    "icon": "kustom gubbinz.jpg"
   },
   "Lesser Reliquary of Protection": {
     "material": "Lesser Reliquary of Protection",
     "craftable": false,
     "stat": "Health",
     "rarity": "Common",
-    "locations": [
-      "I33",
-      "FoC27",
-      "O67",
-      "SH19",
-      "FoCM6",
-      "OM20"
-    ]
+    "icon": "lesser reliquary of protection.png"
   },
   "Lesser Reliquary of Vengeance": {
     "material": "Lesser Reliquary of Vengeance",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "I51",
-      "IM55"
-    ]
+    "icon": "lesser reliquary of vengeance.jpg"
   },
   "Locator Beacon": {
     "material": "Locator Beacon",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Uncommon",
-    "locations": [
-      "I36",
-      "O72",
-      "SH16",
-      "FoCM3",
-      "OM43",
-      "FoC34"
-    ]
+    "icon": "locator beacon.png"
   },
   "Marksman's Honour": {
     "material": "Marksman's Honour",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Uncommon",
-    "locations": [
-      "I35"
-    ]
+    "icon": "marksman_s honour.png"
   },
   "Master-Crafted Ammo": {
     "material": "Master-Crafted Ammo",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Legendary",
-    "locations": [
-      "IME15",
-      "IME39"
-    ]
+    "icon": "master-crafted ammo.png"
   },
   "Mesh Weave": {
     "material": "Mesh Weave",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Uncommon",
-    "locations": [
-      "O23",
-      "SH20",
-      "FoCM35",
-      "OM23"
-    ]
+    "icon": "mesh weave.png"
   },
   "Metal Decorative Skull": {
     "material": "Metal Decorative Skull",
     "craftable": false,
     "stat": "Health",
     "rarity": "Rare",
-    "locations": [
-      "I71",
-      "O36",
-      "IM35",
-      "OM52",
-      "FoC30"
-    ]
+    "icon": "metal decorative skull.png"
   },
   "Metal Joints": {
     "material": "Metal Joints",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Common",
-    "locations": [
-      "FoC26",
-      "O6",
-      "OM35"
-    ]
+    "icon": "metal joints.png"
   },
   "Minor Bionic Enhancement": {
     "material": "Minor Bionic Enhancement",
     "craftable": false,
     "stat": "Health",
     "rarity": "Common",
-    "locations": [
-      "I49",
-      "FoC10",
-      "O62",
-      "IM57",
-      "OM11",
-      "IE2",
-      "IME17",
-      "FoCME33"
-    ]
+    "icon": "minor bionic enhancement.png"
   },
   "Mission Assignment": {
     "material": "Mission Assignment",
     "craftable": false,
     "stat": "Health",
     "rarity": "Common",
-    "locations": [
-      "FoC52",
-      "O13",
-      "SH13",
-      "OM12",
-      "FoC33"
-    ]
+    "icon": "mission assignment.png"
   },
   "Mission Objective": {
     "material": "Mission Objective",
     "craftable": false,
     "stat": "Health",
     "rarity": "Uncommon",
-    "locations": [
-      "FoC43",
-      "O25",
-      "SH14",
-      "OM47"
-    ]
+    "icon": "mission objective.png"
   },
   "Mjod": {
     "material": "Mjod",
@@ -1065,78 +629,42 @@
     "stat": "Health",
     "faction": "Space Wolves",
     "rarity": "Legendary",
-    "locations": [
-      "OM71",
-      "OE39"
-    ]
+    "icon": "mjod.jpg"
   },
   "Mutation: Scaly Skin": {
     "material": "Mutation: Scaly Skin",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Uncommon",
-    "locations": [
-      "I66",
-      "FoC39",
-      "SH72",
-      "IM40",
-      "FoCM38",
-      "FoC13"
-    ]
+    "icon": "mutation_ scaly skin.png"
   },
   "Mutation: Tough Skin": {
     "material": "Mutation: Tough Skin",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Common",
-    "locations": [
-      "I64",
-      "FoC9",
-      "SH11",
-      "IM42",
-      "FoC3"
-    ]
+    "icon": "mutation_ tough skin.png"
   },
   "Mutation: Warped Heart": {
     "material": "Mutation: Warped Heart",
     "craftable": false,
     "stat": "Health",
     "rarity": "Rare",
-    "locations": [
-      "O49",
-      "SH71",
-      "IM17",
-      "FoCM46",
-      "FoC7"
-    ]
+    "icon": "mutation_ warped heart.png"
   },
   "Mutation: Warped Lungs": {
     "material": "Mutation: Warped Lungs",
     "craftable": false,
     "stat": "Health",
     "rarity": "Uncommon",
-    "locations": [
-      "I65",
-      "FoC36",
-      "SH26",
-      "SH64",
-      "IM41",
-      "FoCM68",
-      "FoC6"
-    ]
+    "icon": "mutation_ warped lungs.png"
   },
   "Mutation: Warped Muscles": {
     "material": "Mutation: Warped Muscles",
     "craftable": false,
     "stat": "Health",
     "rarity": "Common",
-    "locations": [
-      "FoC1",
-      "SH7",
-      "IM3",
-      "FoCM24",
-      "FoC10"
-    ]
+    "icon": "mutation_ warped muscles.png"
   },
   "Nano Swarm": {
     "material": "Nano Swarm",
@@ -1144,66 +672,35 @@
     "stat": "Health",
     "faction": "Necrons",
     "rarity": "Common",
-    "locations": [
-      "I67",
-      "SH61",
-      "IM21",
-      "IME4"
-    ]
+    "icon": "nano swarm.png"
   },
   "Nasty Spikes": {
     "material": "Nasty Spikes",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "FoC2",
-      "O4",
-      "SH9",
-      "FoCM21",
-      "FoCM69",
-      "FoC9",
-      "IME27"
-    ]
+    "icon": "nasty spikes.jpg"
   },
   "Oath Seal": {
     "material": "Oath Seal",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Uncommon",
-    "locations": [
-      "I40",
-      "O26",
-      "IM68",
-      "OM40",
-      "IE13"
-    ]
+    "icon": "oath seal.png"
   },
   "Otherworldly Energy": {
     "material": "Otherworldly Energy",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "I56",
-      "SH51",
-      "IM50"
-    ]
+    "icon": "otherworldly energy.png"
   },
   "Pile of Salvage": {
     "material": "Pile of Salvage",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Common",
-    "locations": [
-      "I28",
-      "FoC16",
-      "O57",
-      "FoCM9",
-      "OM18",
-      "OE1",
-      "FoCME1"
-    ]
+    "icon": "pile of salvage.png"
   },
   "Plague Bell": {
     "material": "Plague Bell",
@@ -1211,46 +708,28 @@
     "stat": "Health",
     "faction": "Death Guard",
     "rarity": "Rare",
-    "locations": [
-      "FoC68",
-      "OM67",
-      "FoC20",
-      "FoCME13"
-    ]
+    "icon": "plague bell.png"
   },
   "Plasma Cell": {
     "material": "Plasma Cell",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Uncommon",
-    "locations": [
-      "I42",
-      "FoC34",
-      "O55",
-      "SH28",
-      "IM65",
-      "OM36",
-      "OE14"
-    ]
+    "icon": "plasma cell.png"
   },
   "Psychic Force Conduit": {
     "material": "Psychic Force Conduit",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Legendary",
-    "locations": [
-      "IME7"
-    ]
+    "icon": "psychic force conduit.jpg"
   },
   "Psyk-Conductive Material": {
     "material": "Psyk-Conductive Material",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Legendary",
-    "locations": [
-      "FoCME38",
-      "FoCME7"
-    ]
+    "icon": "psyk-conductive material.jpg"
   },
   "Psytronome": {
     "material": "Psytronome",
@@ -1258,26 +737,14 @@
     "stat": "Damage",
     "faction": "Aeldari",
     "rarity": "Rare",
-    "locations": [
-      "SH44",
-      "IM32",
-      "IME19"
-    ]
+    "icon": "psytronome.png"
   },
   "Purity Seal": {
     "material": "Purity Seal",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Common",
-    "locations": [
-      "I19",
-      "FoC46",
-      "O66",
-      "SH69",
-      "FoCM16",
-      "OM1",
-      "IE3"
-    ]
+    "icon": "purity seal.png"
   },
   "Purity Seal of the Primarch": {
     "material": "Purity Seal of the Primarch",
@@ -1285,22 +752,14 @@
     "stat": "Armour",
     "faction": "Ultramarines",
     "rarity": "Legendary",
-    "locations": [
-      
-    ]
+    "icon": "purity seal of the primarch.png"
   },
   "Rebreather": {
     "material": "Rebreather",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Common",
-    "locations": [
-      "O17",
-      "SH66",
-      "IM1",
-      "FoCM22",
-      "OM7"
-    ]
+    "icon": "rebreather.png"
   },
   "Reconstitution Protocols": {
     "material": "Reconstitution Protocols",
@@ -1308,24 +767,14 @@
     "stat": "Health",
     "faction": "Necrons",
     "rarity": "Rare",
-    "locations": [
-      "I63",
-      "IM43",
-      "IME2"
-    ]
+    "icon": "reconstitution protocols.png"
   },
   "Reinforced Cables": {
     "material": "Reinforced Cables",
     "craftable": false,
     "stat": "Health",
     "rarity": "Uncommon",
-    "locations": [
-      "FoC40",
-      "O27",
-      "IM7",
-      "FoCM57",
-      "OE12"
-    ]
+    "icon": "reinforced cables.png"
   },
   "Reinforced Chitin": {
     "material": "Reinforced Chitin",
@@ -1333,82 +782,49 @@
     "stat": "Armour",
     "faction": "Tyranids",
     "rarity": "Rare",
-    "locations": [
-      "OM56"
-    ]
+    "icon": "reinforced chitin.jpg"
   },
   "Reinforced Scale-Plates": {
     "material": "Reinforced Scale-Plates",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Uncommon",
-    "locations": [
-      "O12",
-      "IM8",
-      "FoCM58",
-      "OM25",
-      "OE13",
-      "IME25"
-    ]
+    "icon": "reinforced scale-plates.png"
   },
   "Relic Hilt": {
     "material": "Relic Hilt",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Epic",
-    "locations": [
-      "FoCM28",
-      "OE31",
-      "FoCME15",
-      "FoCME39"
-    ]
+    "icon": "relic hilt.jpg"
   },
   "Reliquary of Protection": {
     "material": "Reliquary of Protection",
     "craftable": false,
     "stat": "Health",
     "rarity": "Uncommon",
-    "locations": [
-      "I58",
-      "O21",
-      "SH34",
-      "IM48",
-      "OM44"
-    ]
+    "icon": "reliquary of protection.png"
   },
   "Reliquary of Vengeance": {
     "material": "Reliquary of Vengeance",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Uncommon",
-    "locations": [
-      "I41",
-      "SH43",
-      "IM67",
-      "IE14"
-    ]
+    "icon": "reliquary of vengeance.png"
   },
   "Repair-Kit": {
     "material": "Repair-Kit",
     "craftable": false,
     "stat": "Health",
     "rarity": "Rare",
-    "locations": [
-      "FoC66",
-      "SH40",
-      "IM34",
-      "FoCM37",
-      "IE15"
-    ]
+    "icon": "repair-kit.png"
   },
   "Revered Talisman": {
     "material": "Revered Talisman",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Epic",
-    "locations": [
-      "FoC74"
-    ]
+    "icon": "revered talisman.png"
   },
   "Righteous Candle": {
     "material": "Righteous Candle",
@@ -1416,11 +832,7 @@
     "stat": "Health",
     "faction": "Black Templars",
     "rarity": "Rare",
-    "locations": [
-      "O47",
-      "OM63",
-      "OE26"
-    ]
+    "icon": "righteous candle.jpg"
   },
   "Ritual Implements": {
     "material": "Ritual Implements",
@@ -1428,23 +840,14 @@
     "stat": "Armour",
     "faction": "Thousand Sons",
     "rarity": "Rare",
-    "locations": [
-      "SH31",
-      "IME12"
-    ]
+    "icon": "ritual implements.png"
   },
   "Ropes and Chains": {
     "material": "Ropes and Chains",
     "craftable": false,
     "stat": "Health",
     "rarity": "Common",
-    "locations": [
-      "FoC5",
-      "O1",
-      "SH8",
-      "IM29",
-      "OM13"
-    ]
+    "icon": "ropes and chains.png"
   },
   "Rose of Martyrs": {
     "material": "Rose of Martyrs",
@@ -1452,25 +855,14 @@
     "stat": "Health",
     "faction": "Adepta Sororitas",
     "rarity": "Rare",
-    "locations": [
-      "O48",
-      "IM73",
-      "IE19",
-      "FoCME10"
-    ]
+    "icon": "rose of martyrs.png"
   },
   "Round of Ammo": {
     "material": "Round of Ammo",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "I38",
-      "FoC20",
-      "FoCM1",
-      "OM26",
-      "IE11"
-    ]
+    "icon": "round of ammo.png"
   },
   "Runes of Fate": {
     "material": "Runes of Fate",
@@ -1478,49 +870,28 @@
     "stat": "Health",
     "faction": "Aeldari",
     "rarity": "Legendary",
-    "locations": [
-      "OM74",
-      "OE29",
-      "IME22"
-    ]
+    "icon": "runes of fate.jpg"
   },
   "Satchel": {
     "material": "Satchel",
     "craftable": false,
     "stat": "Health",
     "rarity": "Uncommon",
-    "locations": [
-      "FoC4",
-      "O18",
-      "SH27",
-      "FoCM39",
-      "OM42",
-      "OE35",
-      "FoCME25"
-    ]
+    "icon": "satchel.png"
   },
   "Scrolls": {
     "material": "Scrolls",
     "craftable": false,
     "stat": "Health",
     "rarity": "Common",
-    "locations": [
-      "FoC25",
-      "O16",
-      "SH2",
-      "FoCM13",
-      "FoC2"
-    ]
+    "icon": "scrolls.png"
   },
   "Secret Agenda": {
     "material": "Secret Agenda",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Epic",
-    "locations": [
-      "FoC61",
-      "IME13"
-    ]
+    "icon": "secret agenda.jpg"
   },
   "Sensor Suite": {
     "material": "Sensor Suite",
@@ -1528,11 +899,7 @@
     "stat": "Damage",
     "faction": "Tau Empire",
     "rarity": "Rare",
-    "locations": [
-      "IM39",
-      "IE18",
-      "IME36"
-    ]
+    "icon": "sensor suite.jpg"
   },
   "Sigil of Decay": {
     "material": "Sigil of Decay",
@@ -1540,78 +907,42 @@
     "stat": "Damage",
     "faction": "Death Guard",
     "rarity": "Rare",
-    "locations": [
-      "O38",
-      "FoCM64",
-      "FoC18",
-      "FoCME20"
-    ]
+    "icon": "sigil of decay.png"
   },
   "Single Power Pack": {
     "material": "Single Power Pack",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "I55",
-      "O68",
-      "IM51",
-      "OM9",
-      "FoC5",
-      "FoCME27"
-    ]
+    "icon": "single power pack.png"
   },
   "Slicing Claws": {
     "material": "Slicing Claws",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Uncommon",
-    "locations": [
-      "O19",
-      "SH53",
-      "IM37",
-      "FoCM4"
-    ]
+    "icon": "slicing claws.jpg"
   },
   "Sophisticated Material": {
     "material": "Sophisticated Material",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Common",
-    "locations": [
-      "I57",
-      "SH6",
-      "IM49",
-      "IE33",
-      "IME1"
-    ]
+    "icon": "sophisticated material.png"
   },
   "Special Issue Ammo": {
     "material": "Special Issue Ammo",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Epic",
-    "locations": [
-      "O40",
-      "IM28",
-      "FoCM36",
-      "IE37"
-    ]
+    "icon": "special issue ammo.png"
   },
   "Standard-Issue Tourniquet": {
     "material": "Standard-Issue Tourniquet",
     "craftable": false,
     "stat": "Health",
     "rarity": "Common",
-    "locations": [
-      "I39",
-      "FoC12",
-      "O59",
-      "IM69",
-      "OM5",
-      "OE10",
-      "FoCME12"
-    ]
+    "icon": "standard-issue tourniquet.png"
   },
   "Stimm Injector": {
     "material": "Stimm Injector",
@@ -1619,11 +950,7 @@
     "stat": "Health",
     "faction": "Tau Empire",
     "rarity": "Rare",
-    "locations": [
-      "IM38",
-      "IE20",
-      "IME35"
-    ]
+    "icon": "stimm injector.jpg"
   },
   "Stone Guardian Fragment": {
     "material": "Stone Guardian Fragment",
@@ -1631,19 +958,14 @@
     "stat": "Health",
     "faction": "Dark Angels",
     "rarity": "Legendary",
-    "locations": [
-      "IME30",
-      "FoCME29"
-    ]
+    "icon": "stone guardian fragment.jpg"
   },
   "Subdermal Plating": {
     "material": "Subdermal Plating",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Rare",
-    "locations": [
-      "O29"
-    ]
+    "icon": "subdermal plating.jpg"
   },
   "Synaptic Augmentation": {
     "material": "Synaptic Augmentation",
@@ -1651,9 +973,7 @@
     "stat": "Health",
     "faction": "Tyranids",
     "rarity": "Legendary",
-    "locations": [
-      "OM68"
-    ]
+    "icon": "synaptic augmentation.jpg"
   },
   "Tainted Text": {
     "material": "Tainted Text",
@@ -1661,127 +981,77 @@
     "stat": "Health",
     "faction": "Thousand Sons",
     "rarity": "Rare",
-    "locations": [
-      "SH57",
-      "IME10"
-    ]
+    "icon": "tainted text.jpg"
   },
   "Tank of Promethium": {
     "material": "Tank of Promethium",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Rare",
-    "locations": [
-      "I62",
-      "IM44",
-      "OM48"
-    ]
+    "icon": "tank of promethium.png"
   },
   "Targeting Link": {
     "material": "Targeting Link",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "I72",
-      "FoC21",
-      "SH3",
-      "FoCM20",
-      "OM65",
-      "OE9",
-      "IME28"
-    ]
+    "icon": "targeting link.png"
   },
   "Terminator Honours": {
     "material": "Terminator Honours",
     "craftable": false,
     "stat": "Health",
     "rarity": "Epic",
-    "locations": [
-      "O42",
-      "IM31",
-      "FoCM31",
-      "IE31"
-    ]
+    "icon": "terminator honours.png"
   },
   "The Gold Phoenix": {
     "material": "The Gold Phoenix",
     "craftable": false,
     "stat": "Health",
     "rarity": "Uncommon",
-    "locations": [
-      "I23",
-      "O28",
-      "FoCM12",
-      "OM51",
-      "IE6"
-    ]
+    "icon": "the gold phoenix.png"
   },
   "The Iron Phoenix": {
     "material": "The Iron Phoenix",
     "craftable": false,
     "stat": "Health",
     "rarity": "Common",
-    "locations": [
-      "I16",
-      "FoCM18",
-      "FoCME21"
-    ]
+    "icon": "the iron phoenix.png"
   },
   "The Phoenix Ascendant": {
     "material": "The Phoenix Ascendant",
     "craftable": false,
     "stat": "Health",
     "rarity": "Rare",
-    "locations": [
-      "FoC64",
-      "IM20",
-      "FoCM49",
-      "OM37",
-      "IE7"
-    ]
+    "icon": "the phoenix ascendant.png"
   },
   "The Silver Aquila": {
     "material": "The Silver Aquila",
     "craftable": false,
     "stat": "Health",
     "rarity": "Common",
-    "locations": [
-      "FoC49",
-      "O63",
-      "IM66"
-    ]
+    "icon": "the silver aquila.png"
   },
   "The Silver Eagle with Swords": {
     "material": "The Silver Eagle with Swords",
     "craftable": false,
     "stat": "Health",
     "rarity": "Uncommon",
-    "locations": [
-      "I69"
-    ]
+    "icon": "the silver eagle with swords.png"
   },
   "The Silver Scope": {
     "material": "The Silver Scope",
     "craftable": false,
     "stat": "Health",
     "rarity": "Uncommon",
-    "locations": [
-      "I34",
-      "FoCM5",
-      "FoCME30"
-    ]
+    "icon": "the silver scope.png"
   },
   "Thick Skin": {
     "material": "Thick Skin",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Common",
-    "locations": [
-      "FoC48",
-      "O5",
-      "OE5"
-    ]
+    "icon": "thick skin.jpg"
   },
   "Toxin Sacs": {
     "material": "Toxin Sacs",
@@ -1789,9 +1059,7 @@
     "stat": "Damage",
     "faction": "Tyranids",
     "rarity": "Rare",
-    "locations": [
-      "O52"
-    ]
+    "icon": "toxin sacs.jpg"
   },
   "Unnatural Vapour Dispenser": {
     "material": "Unnatural Vapour Dispenser",
@@ -1799,12 +1067,7 @@
     "stat": "Armour",
     "faction": "Death Guard",
     "rarity": "Rare",
-    "locations": [
-      "FoC59",
-      "FoCM53",
-      "FoC22",
-      "FoCME26"
-    ]
+    "icon": "unnatural vapour dispenser.png"
   },
   "Viridian Energy Tesseract": {
     "material": "Viridian Energy Tesseract",
@@ -1812,36 +1075,21 @@
     "stat": "Damage",
     "faction": "Necrons",
     "rarity": "Rare",
-    "locations": [
-      "IM22",
-      "FoCM51",
-      "IE26",
-      "IME3"
-    ]
+    "icon": "viridian energy tesseract.png"
   },
   "Vox-Caster": {
     "material": "Vox-Caster",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "FoC8",
-      "O14",
-      "SH4",
-      "OM21"
-    ]
+    "icon": "vox-caster.png"
   },
   "Warp Locus": {
     "material": "Warp Locus",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Epic",
-    "locations": [
-      "SH67",
-      "FoCM25",
-      "FoC31",
-      "IME21"
-    ]
+    "icon": "warp locus.jpg"
   },
   "Waystone": {
     "material": "Waystone",
@@ -1849,64 +1097,35 @@
     "stat": "Health",
     "faction": "Aeldari",
     "rarity": "Rare",
-    "locations": [
-      "SH32",
-      "FoCM33",
-      "IME18"
-    ]
+    "icon": "waystone.png"
   },
   "Weapon Anointment Oils": {
     "material": "Weapon Anointment Oils",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "I52",
-      "FoC44",
-      "O65",
-      "SH21",
-      "IM54",
-      "OM10",
-      "IE9",
-      "IME9"
-    ]
+    "icon": "weapon anointment oils.jpg"
   },
   "Weapon Parts": {
     "material": "Weapon Parts",
     "craftable": false,
     "stat": "Damage",
     "rarity": "Common",
-    "locations": [
-      "FoC13",
-      "O8",
-      "IM2",
-      "FoCM23",
-      "OM3",
-      "OE33",
-      "FoCME9"
-    ]
+    "icon": "weapon parts.png"
   },
   "Weathering": {
     "material": "Weathering",
     "craftable": false,
     "stat": "Health",
     "rarity": "Epic",
-    "locations": [
-      "FoCM73"
-    ]
+    "icon": "weathering.jpg"
   },
   "Wires": {
     "material": "Wires",
     "craftable": false,
     "stat": "Health",
     "rarity": "Common",
-    "locations": [
-      "I44",
-      "FoC3",
-      "O2",
-      "IM4",
-      "OM8"
-    ]
+    "icon": "wires.png"
   },
   "Wolf Tail Talisman": {
     "material": "Wolf Tail Talisman",
@@ -1914,11 +1133,7 @@
     "stat": "Health",
     "faction": "Space Wolves",
     "rarity": "Rare",
-    "locations": [
-      "SH38",
-      "OM54",
-      "OE20"
-    ]
+    "icon": "wolf tail talisman.jpg"
   },
   "Wolf Tooth Necklace": {
     "material": "Wolf Tooth Necklace",
@@ -1926,11 +1141,7 @@
     "stat": "Damage",
     "faction": "Space Wolves",
     "rarity": "Rare",
-    "locations": [
-      "SH50",
-      "OM64",
-      "OE18"
-    ]
+    "icon": "wolf tooth necklace.jpg"
   },
   "Wraithbone Plate": {
     "material": "Wraithbone Plate",
@@ -1938,25 +1149,14 @@
     "stat": "Armour",
     "faction": "Aeldari",
     "rarity": "Rare",
-    "locations": [
-      "FoC71",
-      "SH58",
-      "FoCM48",
-      "IME20"
-    ]
+    "icon": "wraithbone plate.jpg"
   },
   "Writings": {
     "material": "Writings",
     "craftable": false,
     "stat": "Health",
     "rarity": "Uncommon",
-    "locations": [
-      "FoC42",
-      "O24",
-      "SH24",
-      "OM33",
-      "IE12"
-    ]
+    "icon": "writings.png"
   },
   "Zeidos Ribbon": {
     "material": "Zeidos Ribbon",
@@ -1964,13 +1164,7 @@
     "stat": "Health",
     "faction": "Astra Militarum",
     "rarity": "Rare",
-    "locations": [
-      "FoC67",
-      "IM16",
-      "FoCM43",
-      "FoC26",
-      "FoCME2"
-    ]
+    "icon": "zeidos ribbon.png"
   },
   "Adamantine Mantle": {
     "material": "Adamantine Mantle",

@@ -38,8 +38,8 @@ import {
     IWhatsNew,
     UnitDataRaw,
 } from '../models/interfaces';
-import { Campaign, CampaignType, DailyEnergy, Faction, Rank, RarityString } from '../models/enums';
-import { dailyEnergyOptions, defaultCampaignsProgress, rarityStringToNumber, rarityToStars } from '../models/constants';
+import { CampaignType, Faction, Rank, RarityString } from '../models/enums';
+import { rarityStringToNumber, rarityToStars } from '../models/constants';
 import { getEnumValues, rankToString } from '../shared-logic/functions';
 
 export class StaticDataService {
@@ -154,6 +154,7 @@ export class StaticDataService {
                     locations: locations,
                     craftable: upgrade?.craftable,
                     locationsComposed: locations.map(x => this.campaignsComposed[x]),
+                    iconPath: upgrade?.icon ?? '',
                 };
                 allMaterials.push(item);
                 return item;
@@ -167,6 +168,7 @@ export class StaticDataService {
                     locationsComposed: locations.map(x => this.campaignsComposed[x]),
                     rarity: rarityStringToNumber[upgrade.rarity as RarityString],
                     recipe: upgrade.recipe.map(item => getRecipe(item.material, count * item.count, allMaterials)),
+                    iconPath: upgrade.icon ?? '',
                 };
             }
         };
@@ -180,6 +182,7 @@ export class StaticDataService {
                     rarity: rarityStringToNumber[upgrade.rarity as RarityString],
                     craftable: upgrade.craftable,
                     allMaterials: [getRecipe(upgrade.material, 1, [])],
+                    iconPath: upgrade.icon ?? '',
                 };
             } else {
                 const allMaterials: IMaterialRecipeIngredientFull[] = [];
@@ -189,6 +192,7 @@ export class StaticDataService {
                     rarity: rarityStringToNumber[upgrade.rarity as RarityString],
                     craftable: upgrade.craftable,
                     recipe: upgrade.recipe?.map(item => getRecipe(item.material, item.count, allMaterials)),
+                    iconPath: upgrade.icon ?? '',
                 };
 
                 const groupedData = groupBy(allMaterials, 'material');
@@ -203,6 +207,7 @@ export class StaticDataService {
                     stat: items[0].stat,
                     locations: items[0].locations,
                     locationsComposed: items[0].locationsComposed,
+                    iconPath: items[0].iconPath ?? '',
                 }));
             }
         }
@@ -368,6 +373,7 @@ export class StaticDataService {
                 material,
                 count: sumBy(items, 'count'),
                 rarity: items[0].rarity,
+                iconPath: items[0].iconPath,
                 stat: items[0].stat,
                 craftable: items[0].craftable,
                 locations: items[0].locations,
@@ -569,6 +575,7 @@ export class StaticDataService {
             rarity: material.rarity,
             quantity: ownedCount,
             countLeft: leftCount,
+            iconPath: material.iconPath,
         };
     }
 

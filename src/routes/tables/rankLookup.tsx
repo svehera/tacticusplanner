@@ -97,6 +97,7 @@ export const RankLookup = () => {
             craftable: items[0].craftable,
             locations: items[0].locations,
             locationsComposed: items[0].locations?.map(location => StaticDataService.campaignsComposed[location]),
+            iconPath: items[0].iconPath,
         }));
         const goldIndex = result.findIndex(x => x.material === 'Gold');
 
@@ -193,7 +194,7 @@ export const RankLookup = () => {
             flex: 1,
         },
     ]);
-    
+
     return (
         <div>
             <div

@@ -7,13 +7,14 @@ import { PersonalGoalType, Rarity } from '../../models/enums';
 import { RankImage } from '../../shared-components/rank-image';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ValueFormatterParams } from 'ag-grid-community';
+import { ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
 import { isMobile } from 'react-device-detect';
 import Button from '@mui/material/Button';
 import SettingsIcon from '@mui/icons-material/Settings';
 import DailyRaidsSettings from '../../shared-components/daily-raids-settings';
 import { defaultCampaignsProgress } from '../../models/constants';
 import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
+import { UpgradeImage } from '../../shared-components/upgrade-image';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -41,69 +42,83 @@ export const DailyRaids = () => {
         }
     };
 
-    const [columnDefs] = useState<Array<ColDef<IMaterialEstimated2>>>([
-        {
-            headerName: '#',
-            colId: 'rowNumber',
-            valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
-            maxWidth: 50,
-            pinned: true,
-        },
-        {
-            field: 'material',
-            maxWidth: isMobile ? 125 : 300,
-            pinned: true,
-        },
-        {
-            field: 'count',
-            maxWidth: 75,
-        },
-        {
-            field: 'quantity',
-            editable: true,
-            cellEditorPopup: false,
-            cellDataType: 'number',
-            cellEditor: 'agNumberCellEditor',
-            cellEditorParams: {
-                min: 0,
-                max: 100,
-                precision: 0,
+    const columnDefs = useMemo<Array<ColDef<IMaterialEstimated2>>>(
+        () => [
+            {
+                headerName: '#',
+                colId: 'rowNumber',
+                valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
+                maxWidth: 50,
             },
-            maxWidth: 150,
-            width: 150,
-            minWidth: 150,
-        },
-        {
-            field: 'countLeft',
-            maxWidth: 75,
-        },
-        {
-            field: 'rarity',
-            maxWidth: 120,
-            valueFormatter: (params: ValueFormatterParams<IMaterialEstimated2>) => Rarity[params.data?.rarity ?? 0],
-            cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
-        },
-        {
-            field: 'expectedEnergy',
-            maxWidth: 120,
-        },
-        {
-            headerName: '# Of Battles',
-            field: 'numberOfBattles',
-            maxWidth: 100,
-        },
-        {
-            headerName: 'Days Of Battles',
-            field: 'daysOfBattles',
-            maxWidth: 100,
-        },
-        {
-            headerName: 'Locations',
-            field: 'locationsString',
-            minWidth: 300,
-            flex: 1,
-        },
-    ]);
+            {
+                headerName: 'Icon',
+                cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
+                    const { data } = params;
+                    if (data) {
+                        return <UpgradeImage material={data.material} iconPath={data.iconPath} />;
+                    }
+                },
+                sortable: false,
+                width: 80,
+            },
+            {
+                field: 'material',
+                maxWidth: isMobile ? 125 : 300,
+            },
+            {
+                field: 'count',
+                maxWidth: 75,
+            },
+            {
+                hide: !dailyRaidsPreferences.useInventory,
+                field: 'quantity',
+                editable: true,
+                cellEditorPopup: false,
+                cellDataType: 'number',
+                cellEditor: 'agNumberCellEditor',
+                cellEditorParams: {
+                    min: 0,
+                    max: 100,
+                    precision: 0,
+                },
+                maxWidth: 90,
+            },
+            {
+                hide: !dailyRaidsPreferences.useInventory,
+                field: 'countLeft',
+                headerName: 'Left',
+                maxWidth: 90,
+            },
+            {
+                field: 'rarity',
+                maxWidth: 120,
+                valueFormatter: (params: ValueFormatterParams<IMaterialEstimated2>) => Rarity[params.data?.rarity ?? 0],
+                cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
+            },
+            {
+                field: 'expectedEnergy',
+                headerName: 'Energy',
+                maxWidth: 90,
+            },
+            {
+                headerName: 'Battles',
+                field: 'numberOfBattles',
+                maxWidth: 90,
+            },
+            {
+                headerName: 'Days',
+                field: 'daysOfBattles',
+                maxWidth: 90,
+            },
+            {
+                headerName: 'Locations',
+                field: 'locationsString',
+                minWidth: 300,
+                flex: 1,
+            },
+        ],
+        [dailyRaidsPreferences.useInventory]
+    );
 
     const charactersList = useMemo<ICharacterRankRange[]>(() => {
         return goals
