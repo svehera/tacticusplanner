@@ -2,6 +2,7 @@
     IAutoTeamsPreferences,
     ICampaignsProgress,
     IDailyRaidsPreferences,
+    IInventory,
     ILegendaryEventProgressState,
     ILegendaryEventSelectedRequirements,
     ILegendaryEventSelectedTeams,
@@ -61,6 +62,10 @@ export class PersonalDataLocalStorage {
                 campaignsProgress: {
                     ...defaultData.campaignsProgress,
                     ...(this.getItem<ICampaignsProgress>('campaignsProgress') ?? {}),
+                },
+                inventory: {
+                    ...defaultData.inventory,
+                    ...(this.getItem<IInventory>('inventory') ?? {}),
                 },
             };
         } else {
@@ -170,6 +175,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             leSelectedRequirements: v1Data.legendaryEventSelectedRequirements ?? defaultData.leSelectedRequirements,
             campaignsProgress: defaultData.campaignsProgress,
             dailyRaidsPreferences: defaultData.dailyRaidsPreferences,
+            inventory: defaultData.inventory,
         };
     }
 

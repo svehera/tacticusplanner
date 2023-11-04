@@ -196,6 +196,8 @@ export class StaticDataService {
                 result[upgradeName].allMaterials = map(groupedData, (items, material) => ({
                     material,
                     count: sumBy(items, 'count'),
+                    quantity: 0,
+                    countLeft: 0,
                     craftable: items[0].craftable,
                     rarity: items[0].rarity,
                     stat: items[0].stat,
@@ -296,11 +298,7 @@ export class StaticDataService {
     ): IEstimatedRanks {
         const upgrades = this.getUpgrades(...characters);
 
-        const materials = this.getAllMaterials(
-            settings.campaignsProgress,
-            upgrades,
-            settings.preferences?.useLessEfficientNodes
-        );
+        const materials = this.getAllMaterials(settings, upgrades);
 
         const raids = this.generateDailyRaidsList(
             settings,
@@ -345,7 +343,7 @@ export class StaticDataService {
                     ...recipe,
                     allMaterials: recipe.allMaterials?.map(material => ({
                         ...material,
-                        material: `${material.material} (${character.id})`,
+                        // material: `${material.material} (${character.id})`,
                     })),
                 };
             });
@@ -357,24 +355,25 @@ export class StaticDataService {
     }
 
     private static getAllMaterials(
-        campaignsProgress: ICampaignsProgress,
-        upgrades: IMaterialFull[],
-        useLessefficientNodes = false
+        settings: IEstimatedRanksSettings,
+        upgrades: IMaterialFull[]
     ): IMaterialEstimated2[] {
         const groupedData = groupBy(
             upgrades.flatMap(x => x.allMaterials ?? []),
             'material'
         );
 
-        const result: IMaterialRecipeIngredientFull[] = map(groupedData, (items, material) => ({
-            material,
-            count: sumBy(items, 'count'),
-            rarity: items[0].rarity,
-            stat: items[0].stat,
-            craftable: items[0].craftable,
-            locations: items[0].locations,
-            locationsComposed: items[0].locations?.map(location => StaticDataService.campaignsComposed[location]),
-        }));
+        const result: IMaterialRecipeIngredientFull[] = map(groupedData, (items, material) => {
+            return {
+                material,
+                count: sumBy(items, 'count'),
+                rarity: items[0].rarity,
+                stat: items[0].stat,
+                craftable: items[0].craftable,
+                locations: items[0].locations,
+                locationsComposed: items[0].locations?.map(location => StaticDataService.campaignsComposed[location]),
+            };
+        });
 
         // if (removeGold) {
         //     const goldIndex = result.findIndex(x => x.material === 'Gold');
@@ -389,7 +388,8 @@ export class StaticDataService {
                 .map(x =>
                     this.calculateMaterialData(
                         x,
-                        this.selectBestLocations(campaignsProgress, x.locationsComposed ?? [], useLessefficientNodes)
+                        this.selectBestLocations(settings, x.locationsComposed ?? []),
+                        settings.upgrades
                     )
                 )
                 .filter(x => !!x) as IMaterialEstimated2[],
@@ -508,7 +508,8 @@ export class StaticDataService {
 
     private static calculateMaterialData(
         material: IMaterialRecipeIngredientFull,
-        bestLocations: ICampaignBattleComposed[]
+        bestLocations: ICampaignBattleComposed[],
+        ownedUpgrades: Record<string, number>
     ): IMaterialEstimated2 | null {
         if (!bestLocations.length) {
             if (!material.material.includes('Gold')) {
@@ -517,17 +518,47 @@ export class StaticDataService {
             return null;
         }
 
-        const expectedEnergy = parseFloat((material.count * bestLocations[0].energyPerItem).toFixed(2));
-        const numberOfBattles = Math.ceil(expectedEnergy / bestLocations[0].energyCost);
-        const realEnergy = numberOfBattles * bestLocations[0].energyCost;
+        const ownedCount = ownedUpgrades[material.material] ?? 0;
+        const leftCount = ownedCount > material.count ? 0 : material.count - ownedCount;
+
+        let expectedEnergy = 0;
+        let numberOfBattles = 0;
+        let farmedItems = 0;
+        let daysOfBattles = 0;
+
+        while (farmedItems < leftCount) {
+            let leftToFarm = leftCount - farmedItems;
+            for (const loc of bestLocations) {
+                const dailyEnergy = loc.dailyBattleCount * loc.energyCost;
+                const dailyFarmedItems = dailyEnergy / loc.energyPerItem;
+                if (leftToFarm > dailyFarmedItems) {
+                    leftToFarm -= dailyFarmedItems;
+                    expectedEnergy += dailyEnergy;
+                    farmedItems += dailyFarmedItems;
+                    numberOfBattles += loc.dailyBattleCount;
+                } else {
+                    const energyLeftToFarm = leftToFarm / loc.energyPerItem;
+                    const battlesLeftToFarm = Math.ceil(energyLeftToFarm / loc.energyCost);
+                    farmedItems += leftToFarm;
+                    expectedEnergy += battlesLeftToFarm * loc.energyCost;
+                    numberOfBattles += battlesLeftToFarm;
+                    break;
+                }
+            }
+            daysOfBattles++;
+        }
+
+        // const expectedEnergy = parseFloat((leftCount * bestLocations[0].energyPerItem).toFixed(2));
+        // const numberOfBattles = Math.ceil(expectedEnergy / bestLocations[0].energyCost);
+        // const realEnergy = numberOfBattles * bestLocations[0].energyCost;
         const dailyEnergy = sum(bestLocations.map(x => x.dailyBattleCount * x.energyCost));
         const dailyBattles = sum(bestLocations.map(x => x.dailyBattleCount));
         const locations = bestLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
-        const daysOfBattles = Math.ceil(realEnergy / dailyEnergy);
+        // const daysOfBattles = Math.ceil(expectedEnergy / dailyEnergy);
         return {
             expectedEnergy,
             numberOfBattles,
-            totalEnergy: realEnergy,
+            totalEnergy: expectedEnergy,
             dailyEnergy,
             daysOfBattles,
             dailyBattles,
@@ -536,22 +567,50 @@ export class StaticDataService {
             locationsString: locations,
             count: material.count,
             rarity: material.rarity,
+            quantity: ownedCount,
+            countLeft: leftCount,
         };
     }
 
     private static selectBestLocations(
-        campaignsProgress: ICampaignsProgress,
-        locationsComposed: ICampaignBattleComposed[],
-        useLessefficientNodes: boolean
+        settings: IEstimatedRanksSettings,
+        locationsComposed: ICampaignBattleComposed[]
     ): ICampaignBattleComposed[] {
-        const unlockedLcoations = locationsComposed.filter(location => {
-            const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
+        const unlockedLocations = locationsComposed.filter(location => {
+            const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
             return location.nodeNumber <= campaignProgress;
         });
-        const minEnergy = Math.min(...unlockedLcoations.map(x => x.energyPerItem));
 
-        return orderBy(unlockedLcoations, ['energyPerItem', 'expectedGold'], ['asc', 'desc']).filter(location =>
-            useLessefficientNodes ? true : location.energyPerItem === minEnergy
-        );
+        const minEnergy = Math.min(...unlockedLocations.map(x => x.energyPerItem));
+        const maxEnergy = Math.max(...unlockedLocations.map(x => x.energyPerItem));
+
+        let filteredLocations: ICampaignBattleComposed[] = unlockedLocations;
+
+        if (settings.preferences) {
+            const { useLeastEfficientNodes, useMoreEfficientNodes, useMostEfficientNodes } = settings.preferences;
+            filteredLocations = unlockedLocations.filter(location => {
+                if (!useMostEfficientNodes && !useMoreEfficientNodes && !useLeastEfficientNodes) {
+                    return true;
+                }
+
+                if (useMostEfficientNodes && location.energyPerItem === minEnergy) {
+                    return true;
+                }
+
+                if (useLeastEfficientNodes && location.energyPerItem === maxEnergy) {
+                    return true;
+                }
+
+                return (
+                    useMoreEfficientNodes && location.energyPerItem > minEnergy && location.energyPerItem < maxEnergy
+                );
+            });
+
+            if (!filteredLocations.length && unlockedLocations.length) {
+                filteredLocations = [unlockedLocations[0]];
+            }
+        }
+
+        return orderBy(filteredLocations, ['energyPerItem', 'expectedGold'], ['asc', 'desc']);
     }
 }

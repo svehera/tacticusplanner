@@ -1,11 +1,11 @@
 ﻿import React, { useContext, useMemo, useState } from 'react';
 
-import { ICharacterRankRange, IEstimatedRanks } from '../../models/interfaces';
+import { ICharacterRankRange, IEstimatedRanks, IMaterialEstimated2 } from '../../models/interfaces';
 import { StaticDataService } from '../../services';
 import { Card, CardContent, CardHeader, Popover } from '@mui/material';
 import { PersonalGoalType, Rarity } from '../../models/enums';
 import { RankImage } from '../../shared-components/rank-image';
-import { StoreContext } from '../../reducers/store.provider';
+import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ValueFormatterParams } from 'ag-grid-community';
 import { isMobile } from 'react-device-detect';
@@ -13,9 +13,11 @@ import Button from '@mui/material/Button';
 import SettingsIcon from '@mui/icons-material/Settings';
 import DailyRaidsSettings from '../../shared-components/daily-raids-settings';
 import { defaultCampaignsProgress } from '../../models/constants';
+import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
 
 export const DailyRaids = () => {
-    const { characters, goals, campaignsProgress, dailyRaidsPreferences } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
+    const { characters, goals, campaignsProgress, dailyRaidsPreferences, inventory } = useContext(StoreContext);
 
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
 
@@ -29,7 +31,17 @@ export const DailyRaids = () => {
 
     const open2 = Boolean(anchorEl2);
 
-    const [columnDefs] = useState<Array<ColDef>>([
+    const saveChanges = (event: CellEditingStoppedEvent<IMaterialEstimated2>): void => {
+        if (event.data && event.newValue !== event.oldValue) {
+            dispatch.inventory({
+                type: 'UpdateUpgradeQuantity',
+                upgrade: event.data.material,
+                value: event.data.quantity,
+            });
+        }
+    };
+
+    const [columnDefs] = useState<Array<ColDef<IMaterialEstimated2>>>([
         {
             headerName: '#',
             colId: 'rowNumber',
@@ -47,9 +59,28 @@ export const DailyRaids = () => {
             maxWidth: 75,
         },
         {
+            field: 'quantity',
+            editable: true,
+            cellEditorPopup: false,
+            cellDataType: 'number',
+            cellEditor: 'agNumberCellEditor',
+            cellEditorParams: {
+                min: 0,
+                max: 100,
+                precision: 0,
+            },
+            maxWidth: 150,
+            width: 150,
+            minWidth: 150,
+        },
+        {
+            field: 'countLeft',
+            maxWidth: 75,
+        },
+        {
             field: 'rarity',
             maxWidth: 120,
-            valueFormatter: (params: ValueFormatterParams<IMaterialEstimated>) => Rarity[params.data?.rarity ?? 0],
+            valueFormatter: (params: ValueFormatterParams<IMaterialEstimated2>) => Rarity[params.data?.rarity ?? 0],
             cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
         },
         {
@@ -100,14 +131,11 @@ export const DailyRaids = () => {
                     ? campaignsProgress
                     : defaultCampaignsProgress,
                 preferences: dailyRaidsPreferences,
+                upgrades: dailyRaidsPreferences.useInventory ? inventory.upgrades : {},
             },
             ...charactersList
         );
-    }, [
-        dailyRaidsPreferences.dailyEnergy,
-        dailyRaidsPreferences.useCampaignsProgress,
-        dailyRaidsPreferences.useLessEfficientNodes,
-    ]);
+    }, [dailyRaidsPreferences, inventory.upgrades]);
 
     return (
         <div>
@@ -146,7 +174,8 @@ export const DailyRaids = () => {
                     className="ag-theme-material"
                     style={{ height: 50 + estimatedRanks.materials.length * 30, maxHeight: '40vh', width: '100%' }}>
                     <AgGridReact
-                        suppressCellFocus={true}
+                        onCellEditingStopped={saveChanges}
+                        singleClickEdit={true}
                         defaultColDef={{ suppressMovable: true, sortable: true, autoHeight: true, wrapText: true }}
                         columnDefs={columnDefs}
                         rowData={estimatedRanks.materials}

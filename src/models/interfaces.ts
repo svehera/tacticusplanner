@@ -26,6 +26,7 @@ import { LeProgressAction } from '../reducers/le-progress.reducer';
 import { GoalsAction } from '../reducers/goals.reducer';
 import { CampaignsProgressAction } from '../reducers/campaigns-progress.reducer';
 import { DailyRaidsPreferencesAction } from '../reducers/daily-raids-settings.reducer';
+import { InventoryAction } from '../reducers/inventory.reducer';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -233,6 +234,7 @@ export interface IGlobalState {
     leProgress: LegendaryEventData<ILegendaryEventProgressState>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     campaignsProgress: ICampaignsProgress;
+    inventory: IInventory;
 }
 
 export interface IDispatchContext {
@@ -246,6 +248,7 @@ export interface IDispatchContext {
     leProgress: React.Dispatch<LeProgressAction>;
     campaignsProgress: React.Dispatch<CampaignsProgressAction>;
     goals: React.Dispatch<GoalsAction>;
+    inventory: React.Dispatch<InventoryAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean) => void;
 }
@@ -264,6 +267,7 @@ export interface IPersonalData2 {
     leProgress: LegendaryEventData<ILegendaryEventProgressState>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     campaignsProgress: ICampaignsProgress;
+    inventory: IInventory;
 }
 
 export interface ILegendaryEventsData {
@@ -318,7 +322,10 @@ export interface IAutoTeamsPreferences {
 export interface IDailyRaidsPreferences {
     dailyEnergy: number;
     useCampaignsProgress: boolean;
-    useLessEfficientNodes: boolean;
+    useMostEfficientNodes: boolean;
+    useMoreEfficientNodes: boolean;
+    useLeastEfficientNodes: boolean;
+    useInventory: boolean;
 }
 
 export interface ISelectedTeamsOrdering {
@@ -572,6 +579,9 @@ export interface IMaterialEstimated2 {
     count: number;
     rarity: Rarity;
     // energyPerBattle: number;
+    quantity: number;
+    countLeft: number;
+    // countByChar: Record<string, number>;
 }
 
 export interface IDailyRaid {
@@ -605,6 +615,7 @@ export interface IEstimatedRanksSettings {
     campaignsProgress: ICampaignsProgress;
     dailyEnergy: number;
     preferences?: IDailyRaidsPreferences;
+    upgrades: Record<string, number>;
 }
 
 export type ICampaignsProgress = {
@@ -625,3 +636,7 @@ export type ICampaignsProgress = {
 
     'Saim-Hann': number;
 };
+
+export interface IInventory {
+    upgrades: Record<string, number>;
+}

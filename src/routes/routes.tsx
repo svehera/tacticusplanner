@@ -18,6 +18,7 @@ import { Upgrades } from './tables/upgrades';
 import { RankLookup } from './tables/rankLookup';
 import { DailyRaids } from './tables/dailyRaids';
 import { CampaignsProgress } from './campaigns-progress';
+import { Inventory } from './inventory';
 
 export const appRoutes: () => RouteObject[] = () => [
     {
@@ -43,6 +44,10 @@ export const appRoutes: () => RouteObject[] = () => [
             {
                 path: 'upgrades',
                 element: <Upgrades />,
+            },
+            {
+                path: 'inventory',
+                element: <Inventory />,
             },
             {
                 path: 'rankLookup',

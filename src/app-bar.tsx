@@ -49,6 +49,8 @@ const TopAppBar = () => {
         switch (location.pathname) {
             case '/wyo':
                 return 'Who You Own';
+            case '/inventory':
+                return 'Inventory';
             case '/campaignsProgress':
                 return 'Campaigns Progress';
             case '/le/shadowsun':
@@ -93,6 +95,10 @@ const TopAppBar = () => {
                     {
                         label: 'Campaigns Progress',
                         route: './campaignsProgress',
+                    },
+                    {
+                        label: 'Inventory',
+                        route: './inventory',
                     },
                 ]}
             />
@@ -191,6 +197,13 @@ const TopAppBar = () => {
                     <ListIcon />
                 </ListItemIcon>
                 <ListItemText>Campaigns Progress</ListItemText>
+            </MenuItem>
+
+            <MenuItem component={Link} to={'./inventory'} color="inherit">
+                <ListItemIcon>
+                    <ListIcon />
+                </ListItemIcon>
+                <ListItemText>Inventory</ListItemText>
             </MenuItem>
 
             <Divider />

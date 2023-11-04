@@ -118,7 +118,10 @@ export const defaultData: IPersonalData2 = {
     dailyRaidsPreferences: {
         dailyEnergy: 288,
         useCampaignsProgress: true,
-        useLessEfficientNodes: false,
+        useMostEfficientNodes: true,
+        useMoreEfficientNodes: false,
+        useLeastEfficientNodes: false,
+        useInventory: true,
     },
     characters: [
         {
@@ -200,4 +203,7 @@ export const defaultData: IPersonalData2 = {
     leProgress: {},
     leSelectedRequirements: {},
     campaignsProgress: defaultCampaignsProgress,
+    inventory: {
+        upgrades: {},
+    },
 };

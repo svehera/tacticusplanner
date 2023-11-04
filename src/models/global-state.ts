@@ -4,6 +4,7 @@
     ICharacter2,
     IDailyRaidsPreferences,
     IGlobalState,
+    IInventory,
     ILegendaryEventProgressState,
     ILegendaryEventSelectedRequirements,
     ILegendaryEventSelectedTeams,
@@ -31,6 +32,7 @@ export class GlobalState implements IGlobalState {
     readonly leProgress: LegendaryEventData<ILegendaryEventProgressState>;
     readonly leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     readonly campaignsProgress: ICampaignsProgress;
+    readonly inventory: IInventory;
 
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences;
@@ -52,6 +54,7 @@ export class GlobalState implements IGlobalState {
         this.modifiedDate = personalData.modifiedDate;
         this.seenAppVersion = personalData.seenAppVersion;
         this.campaignsProgress = personalData.campaignsProgress;
+        this.inventory = personalData.inventory;
 
         const chars = GlobalState.fixNames(personalData.characters);
 
@@ -113,6 +116,7 @@ export class GlobalState implements IGlobalState {
             viewPreferences: value.viewPreferences,
             dailyRaidsPreferences: value.dailyRaidsPreferences,
             campaignsProgress: value.campaignsProgress,
+            inventory: value.inventory,
         };
     }
 }

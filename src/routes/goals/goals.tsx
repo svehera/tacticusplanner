@@ -15,7 +15,7 @@ import { StaticDataService } from '../../services';
 import { defaultCampaignsProgress } from '../../models/constants';
 
 export const Goals = () => {
-    const { goals, characters, campaignsProgress, dailyRaidsPreferences } = useContext(StoreContext);
+    const { goals, characters, campaignsProgress, dailyRaidsPreferences, inventory } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const [editGoal, setEditGoal] = useState<IPersonalGoal | null>(null);
@@ -45,6 +45,7 @@ export const Goals = () => {
                     ? campaignsProgress
                     : defaultCampaignsProgress,
                 preferences: dailyRaidsPreferences,
+                upgrades: dailyRaidsPreferences.useInventory ? inventory.upgrades : {},
             },
             ...chars
         );
@@ -120,7 +121,7 @@ export default function GoalCard({
     goal: IPersonalGoal;
     menuItemSelect: (item: 'edit' | 'delete') => void;
 }) {
-    const { characters, campaignsProgress, dailyRaidsPreferences } = useContext(StoreContext);
+    const { characters, campaignsProgress, dailyRaidsPreferences, inventory } = useContext(StoreContext);
     const character = characters.find(x => x.name === goal.character) as ICharacter2;
 
     const isGoalCompleted = useMemo(() => {
@@ -139,6 +140,7 @@ export default function GoalCard({
                     ? campaignsProgress
                     : defaultCampaignsProgress,
                 preferences: dailyRaidsPreferences,
+                upgrades: dailyRaidsPreferences.useInventory ? inventory.upgrades : {},
             },
             {
                 id: character.name,

@@ -100,12 +100,45 @@ const DailyRaidsSettings = () => {
             <FormControlLabel
                 control={
                     <Switch
-                        checked={dailyRaidsPreferences.useLessEfficientNodes}
-                        onChange={event => updatePreferences('useLessEfficientNodes', event.target.checked)}
+                        checked={dailyRaidsPreferences.useMostEfficientNodes}
+                        onChange={event => updatePreferences('useMostEfficientNodes', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
                 }
-                label="Use less efficient nodes"
+                label="Use Most efficient nodes"
+            />
+
+            <FormControlLabel
+                control={
+                    <Switch
+                        checked={dailyRaidsPreferences.useMoreEfficientNodes}
+                        onChange={event => updatePreferences('useMoreEfficientNodes', event.target.checked)}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+                label="Use More efficient nodes"
+            />
+
+            <FormControlLabel
+                control={
+                    <Switch
+                        checked={dailyRaidsPreferences.useLeastEfficientNodes}
+                        onChange={event => updatePreferences('useLeastEfficientNodes', event.target.checked)}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+                label="Use Least efficient nodes"
+            />
+
+            <FormControlLabel
+                control={
+                    <Switch
+                        checked={dailyRaidsPreferences.useInventory}
+                        onChange={event => updatePreferences('useInventory', event.target.checked)}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+                label="Use inventory"
             />
         </FormGroup>
     );
