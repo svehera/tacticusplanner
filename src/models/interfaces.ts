@@ -372,6 +372,7 @@ export interface IPersonalGoal {
     currentRank?: Rank;
     targetRank?: Rank;
     notes?: string;
+    dailyRaids: boolean;
     upgrades: string[];
 }
 

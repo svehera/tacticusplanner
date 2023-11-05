@@ -153,6 +153,7 @@ export const defaultData: IPersonalData2 = {
             targetRarity: Rarity.Rare,
             priority: 1,
             upgrades: [],
+            dailyRaids: true,
         },
         {
             id: 'dc050dcb-bb66-4bbe-9476-c1f5bd291e74',
@@ -161,6 +162,7 @@ export const defaultData: IPersonalData2 = {
             targetRarity: Rarity.Rare,
             priority: 2,
             upgrades: [],
+            dailyRaids: true,
         },
         {
             id: '552c3f54-fae9-47a6-8c99-e10e6c1c3d32',
@@ -169,6 +171,7 @@ export const defaultData: IPersonalData2 = {
             targetRarity: Rarity.Rare,
             priority: 3,
             upgrades: [],
+            dailyRaids: true,
         },
         {
             id: 'aaaac20d-22eb-48e8-9fe5-f06c01dadf0f',
@@ -177,6 +180,7 @@ export const defaultData: IPersonalData2 = {
             targetRank: Rank.Silver1,
             priority: 4,
             upgrades: [],
+            dailyRaids: true,
         },
         {
             id: '22dff600-4820-42a7-8050-973842242f76',
@@ -185,6 +189,7 @@ export const defaultData: IPersonalData2 = {
             targetRank: Rank.Silver1,
             priority: 5,
             upgrades: [],
+            dailyRaids: true,
         },
         {
             id: '2221c67e-b1f7-4436-9981-d8f084922aa0',
@@ -193,6 +198,7 @@ export const defaultData: IPersonalData2 = {
             targetRank: Rank.Silver1,
             priority: 6,
             upgrades: [],
+            dailyRaids: true,
         },
     ],
     selectedTeamOrder: {

@@ -43,21 +43,7 @@ export class GlobalState implements IGlobalState {
         this.leSelectedRequirements = personalData.leSelectedRequirements;
         this.leSelectedTeams = GlobalState.fixNames(personalData.leTeams);
         this.leProgress = personalData.leProgress;
-        for (const leProgressKey in this.leProgress) {
-            const leProgress = this.leProgress[+leProgressKey as LegendaryEventEnum];
-            if (leProgress) {
-                leProgress.notes = '';
-            }
-        }
-        this.goals = GlobalState.fixNames(personalData.goals).map((goal, index) => ({ ...goal, priority: index + 1 }));
-
-        this.modifiedDate = personalData.modifiedDate;
-        this.seenAppVersion = personalData.seenAppVersion;
-        this.campaignsProgress = personalData.campaignsProgress;
-        this.inventory = personalData.inventory;
-
         const chars = GlobalState.fixNames(personalData.characters);
-
         this.characters = StaticDataService.unitsData.map(staticData => {
             const personalCharData = chars.find(c => c.name === staticData.name);
             const combinedData: IPersonalCharacterData2 = {
@@ -73,6 +59,22 @@ export class GlobalState implements IGlobalState {
                 rank: +combinedData.rank,
             };
         });
+
+        for (const leProgressKey in this.leProgress) {
+            const leProgress = this.leProgress[+leProgressKey as LegendaryEventEnum];
+            if (leProgress) {
+                leProgress.notes = '';
+            }
+        }
+        this.goals = GlobalState.fixNames(personalData.goals).map((goal, index) => {
+            const relatedChar = this.characters.find(x => x.name === goal.character);
+            return { ...goal, priority: index + 1, currentRank: relatedChar?.rank, currentRarity: relatedChar?.rarity };
+        });
+
+        this.modifiedDate = personalData.modifiedDate;
+        this.seenAppVersion = personalData.seenAppVersion;
+        this.campaignsProgress = personalData.campaignsProgress;
+        this.inventory = personalData.inventory;
     }
 
     static fixNames<T>(obj: T): T {

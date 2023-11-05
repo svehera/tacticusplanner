@@ -1,18 +1,19 @@
 ﻿import React, { useContext, useMemo, useState } from 'react';
 import { EditGoalDialog, SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
-import { ICharacter, ICharacter2, ICharacterRankRange, IPersonalGoal } from '../../models/interfaces';
+import { ICharacter2, ICharacterRankRange, IPersonalGoal } from '../../models/interfaces';
 import { PersonalGoalType, Rank } from '../../models/enums';
 
 import { RankImage } from '../../shared-components/rank-image';
 import { RarityImage } from '../../shared-components/rarity-image';
 import { CharacterTitle } from '../../shared-components/character-title';
-import { Card, CardContent, CardHeader } from '@mui/material';
+import { Card, CardContent, CardHeader, Tooltip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 
-import { ArrowForward, DeleteForever, Edit } from '@mui/icons-material';
+import { ArrowForward, DeleteForever, Edit, Info } from '@mui/icons-material';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { StaticDataService } from '../../services';
 import { defaultCampaignsProgress } from '../../models/constants';
+import { Link } from 'react-router-dom';
 
 export const Goals = () => {
     const { goals, characters, campaignsProgress, dailyRaidsPreferences, inventory } = useContext(StoreContext);
@@ -95,9 +96,13 @@ export const Goals = () => {
                 <span style={{ fontSize: 20 }}>
                     {goals.length}/{20}
                 </span>
-                <span style={{ fontSize: 20 }}>Estimated Total Days Worst: {estimatedDaysTotal.raids.length}</span>
                 <span style={{ fontSize: 20 }}>
-                    Estimated Total Days Best: {estimatedDaysTotal.raids.filter(x => x.energyLeft < 10).length}
+                    Total Estimated Days: {estimatedDaysTotal.raids.length}{' '}
+                    <IconButton color={'primary'} component={Link} to={'/dailyRaids'}>
+                        <Tooltip title={'Go To Daily Raids'}>
+                            <Info />
+                        </Tooltip>
+                    </IconButton>{' '}
                 </span>
             </div>
 
@@ -106,6 +111,7 @@ export const Goals = () => {
                     <GoalCard
                         key={goal.id + goal.priority}
                         goal={goal}
+                        higherPriorityGoals={goals.filter(g => g.type === goal.type && g.priority < goal.priority)}
                         menuItemSelect={item => handleMenuItemSelect(goal, item)}
                     />
                 ))}
@@ -117,13 +123,14 @@ export const Goals = () => {
 export default function GoalCard({
     goal,
     menuItemSelect,
+    higherPriorityGoals,
 }: {
     goal: IPersonalGoal;
+    higherPriorityGoals: IPersonalGoal[];
     menuItemSelect: (item: 'edit' | 'delete') => void;
 }) {
     const { characters, campaignsProgress, dailyRaidsPreferences, inventory } = useContext(StoreContext);
     const character = characters.find(x => x.name === goal.character) as ICharacter2;
-
     const isGoalCompleted = useMemo(() => {
         return (
             (goal.type === PersonalGoalType.UpgradeRank && character.rank >= goal.targetRank!) ||
@@ -133,6 +140,23 @@ export default function GoalCard({
     }, []);
 
     const estimatedDays = useMemo(() => {
+        if (goal.type !== PersonalGoalType.UpgradeRank) {
+            return 0;
+        }
+        const charactersRankRange = higherPriorityGoals
+            .map(g => {
+                const char = characters.find(c => c.name === g.character);
+                if (char) {
+                    return {
+                        id: g.character,
+                        rankStart: char.rank,
+                        rankEnd: g.targetRank!,
+                        appliedUpgrades: char.upgrades,
+                    } as ICharacterRankRange;
+                }
+            })
+            .filter(x => !!x) as ICharacterRankRange[];
+
         const estimate = StaticDataService.getRankUpgradeEstimatedDays(
             {
                 dailyEnergy: dailyRaidsPreferences.dailyEnergy,
@@ -142,16 +166,19 @@ export default function GoalCard({
                 preferences: dailyRaidsPreferences,
                 upgrades: dailyRaidsPreferences.useInventory ? inventory.upgrades : {},
             },
-            {
-                id: character.name,
-                rankStart: character.rank,
-                rankEnd: goal.targetRank!,
-                appliedUpgrades: character.upgrades,
-            }
+            ...[
+                ...charactersRankRange,
+                {
+                    id: character.name,
+                    rankStart: character.rank,
+                    rankEnd: goal.targetRank!,
+                    appliedUpgrades: character.upgrades,
+                },
+            ]
         );
 
         return estimate.raids.length;
-    }, [character.name, character.rank, goal.targetRank]);
+    }, [character.name, character.rank, goal.targetRank, higherPriorityGoals]);
 
     return (
         <React.Fragment>
@@ -189,7 +216,7 @@ export default function GoalCard({
                                 <RankImage rank={character.rank} /> <ArrowForward />{' '}
                                 <RankImage rank={goal.targetRank ?? 0} />
                             </div>
-                            <div>Estimated Days: {estimatedDays}</div>
+                            <div>Estimated Days Left: {estimatedDays}</div>
                         </div>
                     ) : undefined}
 

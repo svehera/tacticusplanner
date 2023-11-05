@@ -39,6 +39,7 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
     targetRank: Rank.Stone1,
     priority,
     upgrades: [],
+    dailyRaids: true,
 });
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {

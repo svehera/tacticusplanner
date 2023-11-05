@@ -1,8 +1,8 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
+﻿import React, { useContext, useMemo } from 'react';
 
 import { ICharacterRankRange, IEstimatedRanks, IMaterialEstimated2 } from '../../models/interfaces';
 import { StaticDataService } from '../../services';
-import { Card, CardContent, CardHeader, Popover } from '@mui/material';
+import { Card, CardContent, CardHeader, Checkbox, FormControlLabel, Popover, Tooltip } from '@mui/material';
 import { PersonalGoalType, Rarity } from '../../models/enums';
 import { RankImage } from '../../shared-components/rank-image';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
@@ -15,6 +15,10 @@ import DailyRaidsSettings from '../../shared-components/daily-raids-settings';
 import { defaultCampaignsProgress } from '../../models/constants';
 import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
 import { UpgradeImage } from '../../shared-components/upgrade-image';
+import IconButton from '@mui/material/IconButton';
+import { Link } from 'react-router-dom';
+import { Info } from '@mui/icons-material';
+import Box from '@mui/material/Box';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -131,7 +135,7 @@ export const DailyRaids = () => {
 
     const charactersList = useMemo<ICharacterRankRange[]>(() => {
         return goals
-            .filter(x => x.type === PersonalGoalType.UpgradeRank)
+            .filter(x => x.dailyRaids && x.type === PersonalGoalType.UpgradeRank)
             .map(g => {
                 const char = characters.find(c => c.name === g.character);
                 if (char) {
@@ -159,7 +163,7 @@ export const DailyRaids = () => {
             },
             ...charactersList
         );
-    }, [dailyRaidsPreferences, inventory.upgrades]);
+    }, [charactersList, dailyRaidsPreferences, inventory.upgrades]);
 
     return (
         <div>
@@ -185,14 +189,15 @@ export const DailyRaids = () => {
                     <h4>Days - {estimatedRanks.raids.length}</h4>
                     <h4>Energy - {estimatedRanks.totalEnergy}</h4>
                 </div>
-
-                <ul>
-                    {charactersList.map(x => (
-                        <li key={x.id}>
-                            {x.id} <RankImage rank={x.rankStart} /> - <RankImage rank={x.rankEnd} />
-                        </li>
-                    ))}
-                </ul>
+                <span style={{ fontSize: 20 }}>
+                    Total Characters: {charactersList.length}{' '}
+                    <IconButton color={'primary'} component={Link} to={'/goals'}>
+                        <Tooltip title={'Go To Goals'}>
+                            <Info />
+                        </Tooltip>
+                    </IconButton>{' '}
+                </span>
+                <CharactersList />
 
                 <div
                     className="ag-theme-material"
@@ -238,11 +243,59 @@ export const DailyRaids = () => {
     );
 };
 
-interface IMaterialEstimated {
-    material: string;
-    count: number;
-    rarity: Rarity;
-    locations: string[];
-    expectedEnergy: number;
-    numberOfBattles: number;
-}
+const CharactersList = () => {
+    const dispatch = useContext(DispatchContext);
+    const { goals } = useContext(StoreContext);
+
+    const upgradeRankGoals = useMemo(() => goals.filter(g => g.type === PersonalGoalType.UpgradeRank), []);
+    const [checked, setChecked] = React.useState<boolean[]>(() => upgradeRankGoals.map(x => x.dailyRaids ?? false));
+
+    const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked(upgradeRankGoals.map(() => event.target.checked));
+        upgradeRankGoals.forEach(goal => {
+            dispatch.goals({ type: 'UpdateDailyRaids', goalId: goal.id, value: event.target.checked });
+        });
+    };
+
+    const handleChildChange = (index: number, goalId: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked(result => {
+            result[index] = event.target.checked;
+
+            return [...result];
+        });
+        dispatch.goals({ type: 'UpdateDailyRaids', goalId, value: event.target.checked });
+    };
+
+    const children = (
+        <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+            {upgradeRankGoals.map((goal, index) => (
+                <FormControlLabel
+                    key={goal.id}
+                    label={
+                        <span>
+                            {goal.character} <RankImage rank={goal.currentRank ?? 1} /> -{' '}
+                            <RankImage rank={goal.targetRank ?? 1} />{' '}
+                        </span>
+                    }
+                    control={<Checkbox checked={checked[index]} onChange={handleChildChange(index, goal.id)} />}
+                />
+            ))}
+        </Box>
+    );
+
+    return (
+        <div>
+            <FormControlLabel
+                label=""
+                control={
+                    <Checkbox
+                        checked={checked.every(x => x)}
+                        indeterminate={checked.some(x => x) && !checked.every(x => x)}
+                        onChange={handleSelectAll}
+                    />
+                }
+            />
+            {children}
+        </div>
+    );
+};

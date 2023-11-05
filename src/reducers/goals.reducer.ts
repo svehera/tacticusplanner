@@ -14,6 +14,11 @@ export type GoalsAction =
           type: 'Delete';
           goalId: string;
       }
+    | {
+          type: 'UpdateDailyRaids';
+          goalId: string;
+          value: boolean;
+      }
     | SetStateAction<IPersonalGoal[]>;
 
 const deleteRedundantData = (goal: IPersonalGoal) => {
@@ -80,6 +85,18 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             }
 
             return state.map((x, index) => ({ ...x, priority: index + 1 }));
+        }
+        case 'UpdateDailyRaids': {
+            const { goalId, value } = action;
+
+            const updatedGoalIndex = state.findIndex(x => x.id === goalId);
+            if (updatedGoalIndex < 0) {
+                return state;
+            }
+            const currentGoal = state[updatedGoalIndex];
+            currentGoal.dailyRaids = value;
+
+            return [...state];
         }
         default: {
             throw new Error();
