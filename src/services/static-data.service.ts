@@ -332,8 +332,11 @@ export class StaticDataService {
             const ranksRange = rankEntries.filter(r => r >= character.rankStart && r < character.rankEnd);
 
             const rankUpgrades = ranksRange
-                .flatMap(rank => characterUpgrades[rankToString(rank)])
-                .filter(x => !!x && !character.appliedUpgrades.includes(x));
+                .flatMap((rank, index) => {
+                    const result = characterUpgrades[rankToString(rank)] ?? [];
+                    return index === 0 ? result.filter(x => !character.appliedUpgrades.includes(x)) : result;
+                })
+                .filter(x => !!x);
 
             if (!rankUpgrades.length) {
                 continue;
