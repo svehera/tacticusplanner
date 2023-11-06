@@ -67,7 +67,7 @@ const TopAppBar = () => {
                 return 'Upgrades';
             case '/rankLookup':
                 return 'Rank Lookup';
-            case '/dailyRaids':
+            case '/plan/dailyRaids':
                 return 'Daily Raids';
             case '/campaigns':
                 return 'Campaigns';
@@ -112,7 +112,7 @@ const TopAppBar = () => {
                     },
                     {
                         label: 'Daily Raids',
-                        route: './dailyRaids',
+                        route: '/plan/dailyRaids',
                     },
                     {
                         label: 'Shadowsun LE',
@@ -215,7 +215,7 @@ const TopAppBar = () => {
                 <ListItemText>Goals</ListItemText>
             </MenuItem>
 
-            <MenuItem component={Link} to={'./dailyRaids'} color="inherit">
+            <MenuItem component={Link} to={'/plan/dailyRaids'} color="inherit">
                 <ListItemIcon>
                     <TargetIcon />
                 </ListItemIcon>
@@ -240,7 +240,7 @@ const TopAppBar = () => {
 
             <MenuItem component={Link} to={'./le/ragnar'} color="inherit">
                 <ListItemIcon>
-                    <CharacterImage icon={'unset.png'} imageSize={30} />
+                    <CharacterImage icon={'Ragnar.png'} imageSize={30} />
                 </ListItemIcon>
                 <ListItemText> Ragnar LE</ListItemText>
             </MenuItem>

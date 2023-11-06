@@ -54,7 +54,7 @@ export const appRoutes: () => RouteObject[] = () => [
                 element: <RankLookup />,
             },
             {
-                path: 'dailyRaids',
+                path: 'plan/dailyRaids',
                 element: <DailyRaids />,
             },
             {

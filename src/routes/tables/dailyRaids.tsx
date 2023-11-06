@@ -191,7 +191,7 @@ export const DailyRaids = () => {
                 </div>
                 <span style={{ fontSize: 20 }}>
                     Total Characters: {charactersList.length}{' '}
-                    <IconButton color={'primary'} component={Link} to={'/goals'}>
+                    <IconButton color={'primary'} component={Link} to={isMobile ? '/mobile/goals' : '/goals'}>
                         <Tooltip title={'Go To Goals'}>
                             <Info />
                         </Tooltip>

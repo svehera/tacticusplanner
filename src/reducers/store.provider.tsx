@@ -188,9 +188,14 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             .then(response => {
                 const { data, username, id, lastModifiedDate } = response.data;
                 const serverLastModified = new Date(lastModifiedDate);
+                const isFirstLogin = !data;
+                const isFreshData = !modifiedDate;
                 setUser(username, id);
 
-                if (data && (!modifiedDate || modifiedDate < serverLastModified)) {
+                const shouldAcceptServerData = !isFirstLogin && (isFreshData || modifiedDate < serverLastModified);
+                const shouldPushLocalData = !isFreshData && (isFirstLogin || modifiedDate > serverLastModified);
+
+                if (shouldAcceptServerData) {
                     const serverData = convertData(data);
                     const localData = GlobalState.toStore(globalState);
 
@@ -208,7 +213,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
                     setModifiedDate(serverLastModified);
                     localStore.setData({ modifiedDate: serverLastModified });
-                } else if (modifiedDate && modifiedDate > serverLastModified) {
+                } else if (shouldPushLocalData) {
                     setUserDataApi(GlobalState.toStore(globalState))
                         .then(() => enqueueSnackbar('Pushed local data to server.', { variant: 'info' }))
                         .catch((err: AxiosError<IErrorResponse>) => {

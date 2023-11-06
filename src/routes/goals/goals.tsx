@@ -14,6 +14,7 @@ import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { StaticDataService } from '../../services';
 import { defaultCampaignsProgress } from '../../models/constants';
 import { Link } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 
 export const Goals = () => {
     const { goals, characters, campaignsProgress, dailyRaidsPreferences, inventory } = useContext(StoreContext);
@@ -98,7 +99,10 @@ export const Goals = () => {
                 </span>
                 <span style={{ fontSize: 20 }}>
                     Total Estimated Days: {estimatedDaysTotal.raids.length}{' '}
-                    <IconButton color={'primary'} component={Link} to={'dailyRaids'}>
+                    <IconButton
+                        color={'primary'}
+                        component={Link}
+                        to={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
                         <Tooltip title={'Go To Daily Raids'}>
                             <Info />
                         </Tooltip>
