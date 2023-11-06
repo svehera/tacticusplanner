@@ -6,6 +6,9 @@ export type InventoryAction =
           upgrade: string;
           value: number;
       }
+    | {
+          type: 'ResetUpgrades';
+      }
     | SetStateAction<IInventory>;
 
 export const inventoryReducer = (state: IInventory, action: InventoryAction) => {
@@ -15,6 +18,9 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction) => 
         }
         case 'UpdateUpgradeQuantity': {
             return { ...state, upgrades: { ...state.upgrades, [action.upgrade]: action.value } };
+        }
+        case 'ResetUpgrades': {
+            return { ...state, upgrades: {} };
         }
         default: {
             throw new Error();

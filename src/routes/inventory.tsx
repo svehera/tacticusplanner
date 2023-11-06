@@ -3,14 +3,14 @@
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ICellRendererParams } from 'ag-grid-community';
 
-import { FormControl, MenuItem, Select, TextField } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
+import { TextField } from '@mui/material';
 import { StaticDataService } from '../services';
 import { Rarity } from '../models/enums';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 import { orderBy } from 'lodash';
 import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
 import { UpgradeImage } from '../shared-components/upgrade-image';
+import Button from '@mui/material/Button';
 
 interface ITableRow {
     material: string;
@@ -50,19 +50,6 @@ export const Inventory = () => {
                 width: 80,
             },
             {
-                field: 'material',
-                headerName: 'Upgrade',
-                minWidth: 200,
-            },
-            {
-                field: 'rarity',
-                headerName: 'Rarity',
-                maxWidth: 150,
-                width: 150,
-                minWidth: 150,
-                valueFormatter: params => Rarity[params.data?.rarity ?? 1],
-            },
-            {
                 field: 'quantity',
                 headerName: 'Quantity',
                 editable: true,
@@ -77,6 +64,19 @@ export const Inventory = () => {
                 maxWidth: 150,
                 width: 150,
                 minWidth: 150,
+            },
+            {
+                field: 'material',
+                headerName: 'Upgrade',
+                minWidth: 200,
+            },
+            {
+                field: 'rarity',
+                headerName: 'Rarity',
+                maxWidth: 150,
+                width: 150,
+                minWidth: 150,
+                valueFormatter: params => Rarity[params.data?.rarity ?? 1],
             },
         ];
     }, []);
@@ -115,6 +115,15 @@ export const Inventory = () => {
         }
     };
 
+    const resetUpgrades = (): void => {
+        dispatch.inventory({
+            type: 'ResetUpgrades',
+        });
+        rows.forEach(row => {
+            row.quantity = 0;
+        });
+    };
+
     return (
         <div>
             <div
@@ -129,6 +138,7 @@ export const Inventory = () => {
                     variant="outlined"
                     onChange={change => setNameFilter(change.target.value)}
                 />
+                <Button onClick={() => resetUpgrades()}>Reset</Button>
             </div>
 
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 220px)', width: '100%' }}>
