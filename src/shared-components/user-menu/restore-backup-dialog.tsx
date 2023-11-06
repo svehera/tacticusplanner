@@ -25,7 +25,7 @@ export const RestoreBackupDialog = ({ isOpen, onClose }: { isOpen: boolean; onCl
 
     const restoreData = () => {
         if (data) {
-            setStore(new GlobalState(data), true);
+            setStore(new GlobalState(data), true, false);
             enqueueSnackbar('Data restored', { variant: 'success' });
         }
         onClose();

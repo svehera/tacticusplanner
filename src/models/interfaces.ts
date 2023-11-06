@@ -250,7 +250,7 @@ export interface IDispatchContext {
     goals: React.Dispatch<GoalsAction>;
     inventory: React.Dispatch<InventoryAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
-    setStore: (data: IGlobalState, modified: boolean) => void;
+    setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
 
 export interface IPersonalData2 {

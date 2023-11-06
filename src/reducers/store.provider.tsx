@@ -97,7 +97,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             leProgress: wrapDispatch(dispatchLeProgress),
             campaignsProgress: wrapDispatch(dispatchCampaignsProgress),
             inventory: wrapDispatch(dispatchInventory),
-            setStore: (data: IGlobalState, modified: boolean) => {
+            setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 dispatchCharacters({ type: 'Set', value: data.characters });
                 dispatchGoals({ type: 'Set', value: data.goals });
                 dispatchViewPreferences({ type: 'Set', value: data.viewPreferences });
@@ -114,6 +114,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     setModified(true);
                     setModifiedDate(data.modifiedDate);
                 }
+
+                if (reset) {
+                    setModifiedDate(undefined);
+                }
+
                 setGlobalState(data);
             },
             seenAppVersion: wrapDispatch(setSeenAppVersion),
@@ -206,7 +211,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
                     if (!isDataEqual) {
                         const newState = new GlobalState(serverData);
-                        dispatch.setStore(newState, false);
+                        dispatch.setStore(newState, false, false);
                         localStore.setData(GlobalState.toStore(newState));
                         enqueueSnackbar('Synced with latest server data.', { variant: 'info' });
                     }
