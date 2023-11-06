@@ -394,6 +394,7 @@ export class StaticDataService {
 
         return orderBy(
             result
+                .filter(x => x.material !== 'Gold')
                 .map(x =>
                     this.calculateMaterialData(
                         x,
@@ -520,12 +521,7 @@ export class StaticDataService {
         bestLocations: ICampaignBattleComposed[],
         ownedUpgrades: Record<string, number>
     ): IMaterialEstimated2 | null {
-        if (!bestLocations.length) {
-            if (!material.material.includes('Gold')) {
-                console.error('No Locations for ' + material.material, material.locationsComposed);
-            }
-            return null;
-        }
+        const selectedLocations = bestLocations?.length ? bestLocations : material.locationsComposed ?? [];
 
         const ownedCount = ownedUpgrades[material.material] ?? 0;
         const leftCount = ownedCount > material.count ? 0 : material.count - ownedCount;
@@ -537,7 +533,7 @@ export class StaticDataService {
 
         while (farmedItems < leftCount) {
             let leftToFarm = leftCount - farmedItems;
-            for (const loc of bestLocations) {
+            for (const loc of selectedLocations) {
                 const dailyEnergy = loc.dailyBattleCount * loc.energyCost;
                 const dailyFarmedItems = dailyEnergy / loc.energyPerItem;
                 if (leftToFarm >= dailyFarmedItems) {
@@ -557,13 +553,18 @@ export class StaticDataService {
             daysOfBattles++;
         }
 
-        // const expectedEnergy = parseFloat((leftCount * bestLocations[0].energyPerItem).toFixed(2));
-        // const numberOfBattles = Math.ceil(expectedEnergy / bestLocations[0].energyCost);
-        // const realEnergy = numberOfBattles * bestLocations[0].energyCost;
         const dailyEnergy = sum(bestLocations.map(x => x.dailyBattleCount * x.energyCost));
         const dailyBattles = sum(bestLocations.map(x => x.dailyBattleCount));
         const locations = bestLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
-        // const daysOfBattles = Math.ceil(expectedEnergy / dailyEnergy);
+        const missingLocationsString = !locations
+            ? material.locationsComposed
+                  ?.filter(x => {
+                      return !bestLocations.some(y => x.campaign === y.campaign && x.nodeNumber === y.nodeNumber);
+                  })
+                  .map(x => x.campaign + ' ' + x.nodeNumber)
+                  .join(', ') ?? ''
+            : '';
+
         return {
             expectedEnergy,
             numberOfBattles,
@@ -572,8 +573,9 @@ export class StaticDataService {
             daysOfBattles,
             dailyBattles,
             material: material.material,
-            locations: bestLocations,
+            locations: selectedLocations,
             locationsString: locations,
+            missingLocationsString,
             count: material.count,
             rarity: material.rarity,
             quantity: ownedCount,

@@ -578,6 +578,7 @@ export interface IMaterialEstimated2 {
     dailyEnergy: number;
     locations: ICampaignBattleComposed[];
     locationsString: string;
+    missingLocationsString: string;
     daysOfBattles: number;
     dailyBattles: number;
     count: number;

@@ -46,8 +46,8 @@ export const DailyRaids = () => {
         }
     };
 
-    const columnDefs = useMemo<Array<ColDef<IMaterialEstimated2>>>(
-        () => [
+    const columnDefs = useMemo<Array<ColDef<IMaterialEstimated2>>>(() => {
+        return [
             {
                 headerName: '#',
                 colId: 'rowNumber',
@@ -129,9 +129,17 @@ export const DailyRaids = () => {
                 minWidth: 300,
                 flex: 1,
             },
-        ],
-        [dailyRaidsPreferences.useInventory]
-    );
+            {
+                headerName: 'Locked Locations',
+                field: 'missingLocationsString',
+                minWidth: 300,
+                flex: 1,
+                cellStyle: () => ({
+                    color: 'red',
+                }),
+            },
+        ];
+    }, [dailyRaidsPreferences.useInventory]);
 
     const charactersList = useMemo<ICharacterRankRange[]>(() => {
         return goals
@@ -199,17 +207,19 @@ export const DailyRaids = () => {
                 </span>
                 <CharactersList />
 
-                <div
-                    className="ag-theme-material"
-                    style={{ height: 50 + estimatedRanks.materials.length * 30, maxHeight: '40vh', width: '100%' }}>
-                    <AgGridReact
-                        onCellEditingStopped={saveChanges}
-                        singleClickEdit={true}
-                        defaultColDef={{ suppressMovable: true, sortable: true, autoHeight: true, wrapText: true }}
-                        columnDefs={columnDefs}
-                        rowData={estimatedRanks.materials}
-                    />
-                </div>
+                {estimatedRanks.materials.length ? (
+                    <div
+                        className="ag-theme-material"
+                        style={{ height: 50 + estimatedRanks.materials.length * 30, maxHeight: '40vh', width: '100%' }}>
+                        <AgGridReact
+                            onCellEditingStopped={saveChanges}
+                            singleClickEdit={true}
+                            defaultColDef={{ suppressMovable: true, sortable: true, autoHeight: true, wrapText: true }}
+                            columnDefs={columnDefs}
+                            rowData={estimatedRanks.materials}
+                        />
+                    </div>
+                ) : undefined}
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {estimatedRanks.raids.map((day, index) => (
