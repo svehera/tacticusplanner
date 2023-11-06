@@ -98,7 +98,7 @@ export const Goals = () => {
                 </span>
                 <span style={{ fontSize: 20 }}>
                     Total Estimated Days: {estimatedDaysTotal.raids.length}{' '}
-                    <IconButton color={'primary'} component={Link} to={'/dailyRaids'}>
+                    <IconButton color={'primary'} component={Link} to={'dailyRaids'}>
                         <Tooltip title={'Go To Daily Raids'}>
                             <Info />
                         </Tooltip>

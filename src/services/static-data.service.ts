@@ -57,12 +57,12 @@ export class StaticDataService {
 
     static readonly legendaryEvents = [
         {
-            id: shadowsun.id,
-            name: shadowsun.name,
-            stage: shadowsun.eventStage,
-            nextEventDate: shadowsun.nextEventDate,
-            mobileRoute: '/mobile/le/shadowsun',
-            icon: 'ShadowSun.png',
+            id: ragnar.id,
+            name: ragnar.name,
+            stage: ragnar.eventStage,
+            nextEventDate: ragnar.nextEventDate,
+            mobileRoute: '/mobile/le/ragnar',
+            icon: 'Ragnar.png',
         },
         {
             id: aunshi.id,
@@ -73,12 +73,12 @@ export class StaticDataService {
             icon: 'Aun-shi.png',
         },
         {
-            id: ragnar.id,
-            name: ragnar.name,
-            stage: ragnar.eventStage,
-            nextEventDate: ragnar.nextEventDate,
-            mobileRoute: '/mobile/le/ragnar',
-            icon: 'unset.png',
+            id: shadowsun.id,
+            name: shadowsun.name,
+            stage: shadowsun.eventStage,
+            nextEventDate: shadowsun.nextEventDate,
+            mobileRoute: '/mobile/le/shadowsun',
+            icon: 'ShadowSun.png',
         },
     ];
 
@@ -540,13 +540,13 @@ export class StaticDataService {
             for (const loc of bestLocations) {
                 const dailyEnergy = loc.dailyBattleCount * loc.energyCost;
                 const dailyFarmedItems = dailyEnergy / loc.energyPerItem;
-                if (leftToFarm > dailyFarmedItems) {
+                if (leftToFarm >= dailyFarmedItems) {
                     leftToFarm -= dailyFarmedItems;
                     expectedEnergy += dailyEnergy;
                     farmedItems += dailyFarmedItems;
                     numberOfBattles += loc.dailyBattleCount;
                 } else {
-                    const energyLeftToFarm = leftToFarm / loc.energyPerItem;
+                    const energyLeftToFarm = leftToFarm * loc.energyPerItem;
                     const battlesLeftToFarm = Math.ceil(energyLeftToFarm / loc.energyCost);
                     farmedItems += leftToFarm;
                     expectedEnergy += battlesLeftToFarm * loc.energyCost;
