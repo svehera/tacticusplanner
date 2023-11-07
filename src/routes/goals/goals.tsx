@@ -98,7 +98,7 @@ export const Goals = () => {
                     {goals.length}/{20}
                 </span>
                 <span style={{ fontSize: 20 }}>
-                    Total Estimated Days: {estimatedDaysTotal.raids.length}{' '}
+                    Total Days: {estimatedDaysTotal.raids.length}{' '}
                     <IconButton
                         color={'primary'}
                         component={Link}
@@ -220,7 +220,7 @@ export default function GoalCard({
                                 <RankImage rank={character.rank} /> <ArrowForward />{' '}
                                 <RankImage rank={goal.targetRank ?? 0} />
                             </div>
-                            <div>Estimated Days Left: {estimatedDays}</div>
+                            <div>Days Left: {estimatedDays}</div>
                         </div>
                     ) : undefined}
 

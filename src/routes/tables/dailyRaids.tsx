@@ -2,7 +2,17 @@
 
 import { ICharacterRankRange, IEstimatedRanks, IMaterialEstimated2 } from '../../models/interfaces';
 import { StaticDataService } from '../../services';
-import { Card, CardContent, CardHeader, Checkbox, FormControlLabel, Popover, Tooltip } from '@mui/material';
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Card,
+    CardContent,
+    CardHeader,
+    Checkbox,
+    FormControlLabel,
+    Popover,
+} from '@mui/material';
 import { PersonalGoalType, Rarity } from '../../models/enums';
 import { RankImage } from '../../shared-components/rank-image';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
@@ -15,11 +25,10 @@ import DailyRaidsSettings from '../../shared-components/daily-raids-settings';
 import { defaultCampaignsProgress } from '../../models/constants';
 import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
 import { UpgradeImage } from '../../shared-components/upgrade-image';
-import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
-import { Info } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -201,68 +210,101 @@ export const DailyRaids = () => {
                     </div>
                 </Popover>
 
-                <div style={{ display: 'flex', gap: 40 }}>
-                    <h3>Total</h3>
-                    <h4>Days - {estimatedRanks.raids.length}</h4>
-                    <h4>Energy - {estimatedRanks.totalEnergy}</h4>
-                </div>
-                <span style={{ fontSize: 20 }}>
-                    Total Characters: {charactersList.length}{' '}
-                    <IconButton color={'primary'} component={Link} to={isMobile ? '/mobile/goals' : '/goals'}>
-                        <Tooltip title={'Go To Goals'}>
-                            <Info />
-                        </Tooltip>
-                    </IconButton>{' '}
-                </span>
-                <CharactersList />
+                <Accordion>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <span style={{ fontSize: 20 }}>
+                            Selected Characters ({charactersList.length} of{' '}
+                            {goals.filter(x => x.type === PersonalGoalType.UpgradeRank).length})
+                        </span>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Button variant={'contained'} component={Link} to={isMobile ? '/mobile/goals' : '/goals'}>
+                            Go to Goals
+                        </Button>
+                        <CharactersList />
+                    </AccordionDetails>
+                </Accordion>
 
-                {hasChanges ? (
-                    <Button disabled={!hasChanges} onClick={() => refresh()}>
-                        <RefreshIcon /> Refresh Estimate
-                    </Button>
-                ) : undefined}
-                {estimatedRanks.materials.length ? (
-                    <div
-                        className="ag-theme-material"
-                        style={{ height: 50 + estimatedRanks.materials.length * 30, maxHeight: '40vh', width: '100%' }}>
-                        <AgGridReact
-                            onCellEditingStopped={saveChanges}
-                            suppressChangeDetection={true}
-                            singleClickEdit={true}
-                            defaultColDef={{ suppressMovable: true, sortable: true, autoHeight: true, wrapText: true }}
-                            columnDefs={columnDefs}
-                            rowData={estimatedRanks.materials}
-                        />
-                    </div>
-                ) : undefined}
-            </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                {estimatedRanks.raids.map((day, index) => (
-                    <Card
-                        key={index}
-                        sx={{
-                            width: 350,
-                            minHeight: 200,
-                        }}>
-                        <CardHeader title={'Day ' + (index + 1)} subheader={'Energy left ' + day.energyLeft} />
-                        <CardContent>
-                            <ul>
-                                {day.raids.map(raid => (
-                                    <li key={raid.material}>
-                                        {raid.material}{' '}
+                <Accordion>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <span style={{ fontSize: 20 }}>Materials ({estimatedRanks.totalEnergy} Energy Needed)</span>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Button
+                            variant={'contained'}
+                            component={Link}
+                            to={isMobile ? '/mobile/inventory' : '/inventory'}>
+                            Go to Inventory
+                        </Button>
+                        {hasChanges ? (
+                            <Button disabled={!hasChanges} onClick={() => refresh()}>
+                                <RefreshIcon /> Refresh Estimate
+                            </Button>
+                        ) : undefined}
+                        {estimatedRanks.materials.length ? (
+                            <div
+                                className="ag-theme-material"
+                                style={{
+                                    height: 50 + estimatedRanks.materials.length * 30,
+                                    maxHeight: '40vh',
+                                    width: '100%',
+                                }}>
+                                <AgGridReact
+                                    onCellEditingStopped={saveChanges}
+                                    suppressChangeDetection={true}
+                                    singleClickEdit={true}
+                                    defaultColDef={{
+                                        suppressMovable: true,
+                                        sortable: true,
+                                        autoHeight: true,
+                                        wrapText: true,
+                                    }}
+                                    columnDefs={columnDefs}
+                                    rowData={estimatedRanks.materials}
+                                />
+                            </div>
+                        ) : undefined}
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion defaultExpanded={true}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <span style={{ fontSize: 20 }}>Raids ({estimatedRanks.raids.length} Days)</span>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+                            {estimatedRanks.raids.map((day, index) => (
+                                <Card
+                                    key={index}
+                                    sx={{
+                                        width: 300,
+                                        minHeight: 200,
+                                    }}>
+                                    <CardHeader
+                                        title={'Day ' + (index + 1)}
+                                        subheader={'Energy left ' + day.energyLeft}
+                                    />
+                                    <CardContent>
                                         <ul>
-                                            {raid.locations.map(x => (
-                                                <li key={x.location}>
-                                                    {x.location} - {x.raidsCount}x
+                                            {day.raids.map(raid => (
+                                                <li key={raid.material}>
+                                                    {raid.material}{' '}
+                                                    <ul>
+                                                        {raid.locations.map(x => (
+                                                            <li key={x.location}>
+                                                                {x.location} - {x.raidsCount}x
+                                                            </li>
+                                                        ))}
+                                                    </ul>
                                                 </li>
                                             ))}
                                         </ul>
-                                    </li>
-                                ))}
-                            </ul>
-                        </CardContent>
-                    </Card>
-                ))}
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
             </div>
         </div>
     );
@@ -311,7 +353,7 @@ const CharactersList = () => {
     return (
         <div>
             <FormControlLabel
-                label=""
+                label="Select all"
                 control={
                     <Checkbox
                         checked={checked.every(x => x)}
