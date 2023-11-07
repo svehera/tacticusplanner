@@ -19,12 +19,15 @@ import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
 import { Info } from '@mui/icons-material';
 import Box from '@mui/material/Box';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
     const { characters, goals, campaignsProgress, dailyRaidsPreferences, inventory } = useContext(StoreContext);
 
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
+    const [hasChanges, setHasChanges] = React.useState<boolean>(false);
+    const [upgrades, setUpgrades] = React.useState<Record<string, number>>(inventory.upgrades);
 
     const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl2(event.currentTarget);
@@ -43,7 +46,13 @@ export const DailyRaids = () => {
                 upgrade: event.data.material,
                 value: event.data.quantity,
             });
+            setHasChanges(true);
         }
+    };
+
+    const refresh = () => {
+        setUpgrades(inventory.upgrades);
+        setHasChanges(false);
     };
 
     const columnDefs = useMemo<Array<ColDef<IMaterialEstimated2>>>(() => {
@@ -167,11 +176,11 @@ export const DailyRaids = () => {
                     ? campaignsProgress
                     : defaultCampaignsProgress,
                 preferences: dailyRaidsPreferences,
-                upgrades: dailyRaidsPreferences.useInventory ? inventory.upgrades : {},
+                upgrades: dailyRaidsPreferences.useInventory ? upgrades : {},
             },
             ...charactersList
         );
-    }, [charactersList, dailyRaidsPreferences, inventory.upgrades]);
+    }, [charactersList, dailyRaidsPreferences, upgrades]);
 
     return (
         <div>
@@ -207,12 +216,18 @@ export const DailyRaids = () => {
                 </span>
                 <CharactersList />
 
+                {hasChanges ? (
+                    <Button disabled={!hasChanges} onClick={() => refresh()}>
+                        <RefreshIcon /> Refresh Estimate
+                    </Button>
+                ) : undefined}
                 {estimatedRanks.materials.length ? (
                     <div
                         className="ag-theme-material"
                         style={{ height: 50 + estimatedRanks.materials.length * 30, maxHeight: '40vh', width: '100%' }}>
                         <AgGridReact
                             onCellEditingStopped={saveChanges}
+                            suppressChangeDetection={true}
                             singleClickEdit={true}
                             defaultColDef={{ suppressMovable: true, sortable: true, autoHeight: true, wrapText: true }}
                             columnDefs={columnDefs}
