@@ -88,10 +88,6 @@ export const DailyRaids = () => {
                 maxWidth: isMobile ? 125 : 300,
             },
             {
-                field: 'count',
-                maxWidth: 75,
-            },
-            {
                 hide: !dailyRaidsPreferences.useInventory,
                 field: 'quantity',
                 headerName: 'Inventory',
@@ -119,6 +115,10 @@ export const DailyRaids = () => {
                         };
                     }
                 },
+            },
+            {
+                field: 'count',
+                maxWidth: 75,
             },
             {
                 field: 'rarity',
