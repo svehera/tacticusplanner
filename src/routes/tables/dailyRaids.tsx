@@ -308,7 +308,11 @@ export const DailyRaids = () => {
                                                     <ul>
                                                         {raid.locations.map(x => (
                                                             <li key={x.location}>
-                                                                {x.location} - {x.raidsCount}x
+                                                                <span style={{ fontWeight: 'bold' }}>{x.location}</span>{' '}
+                                                                -{' '}
+                                                                <span style={{ fontStyle: 'italic' }}>
+                                                                    {x.raidsCount}x
+                                                                </span>
                                                             </li>
                                                         ))}
                                                     </ul>
