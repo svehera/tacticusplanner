@@ -12,6 +12,7 @@ import {
     Checkbox,
     FormControlLabel,
     Popover,
+    Tooltip,
 } from '@mui/material';
 import { PersonalGoalType, Rarity } from '../../models/enums';
 import { RankImage } from '../../shared-components/rank-image';
@@ -285,10 +286,25 @@ export const DailyRaids = () => {
                                         subheader={'Energy left ' + day.energyLeft}
                                     />
                                     <CardContent>
-                                        <ul>
+                                        <ul style={{ listStyleType: 'none' }}>
                                             {day.raids.map(raid => (
                                                 <li key={raid.material}>
-                                                    {raid.material}{' '}
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                                        <UpgradeImage
+                                                            material={raid.material}
+                                                            iconPath={raid.materialIconPath}
+                                                        />
+                                                        <Tooltip title={raid.characters.join(', ')}>
+                                                            <span>
+                                                                (
+                                                                {raid.characters.length <= 3
+                                                                    ? raid.characters.join(', ')
+                                                                    : raid.characters.slice(0, 3).join(', ') +
+                                                                      `and ${raid.characters.slice(3).length} more...`}
+                                                                )
+                                                            </span>
+                                                        </Tooltip>
+                                                    </div>
                                                     <ul>
                                                         {raid.locations.map(x => (
                                                             <li key={x.location}>

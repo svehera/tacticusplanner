@@ -8,7 +8,7 @@ export const UpgradeImage = ({ material, iconPath }: { material: string; iconPat
 
         return (
             <Tooltip content={material} relationship="label" hideDelay={1000}>
-                <span style={{ height: 50 }}>
+                <span style={{ display: 'inline-block', height: 50 }}>
                     <img style={{ pointerEvents: 'none' }} src={image} height={50} alt={material} />
                 </span>
             </Tooltip>

@@ -155,6 +155,7 @@ export class StaticDataService {
                     craftable: upgrade?.craftable,
                     locationsComposed: locations.map(x => this.campaignsComposed[x]),
                     iconPath: upgrade?.icon ?? '',
+                    characters: [],
                 };
                 allMaterials.push(item);
                 return item;
@@ -169,6 +170,7 @@ export class StaticDataService {
                     rarity: rarityStringToNumber[upgrade.rarity as RarityString],
                     recipe: upgrade.recipe.map(item => getRecipe(item.material, count * item.count, allMaterials)),
                     iconPath: upgrade.icon ?? '',
+                    characters: [],
                 };
             }
         };
@@ -208,6 +210,7 @@ export class StaticDataService {
                     locations: items[0].locations,
                     locationsComposed: items[0].locationsComposed,
                     iconPath: items[0].iconPath ?? '',
+                    characters: [],
                 }));
             }
         }
@@ -342,17 +345,14 @@ export class StaticDataService {
                 continue;
             }
 
-            const upgrades = rankUpgrades.map(upgrade => {
+            const upgrades: IMaterialFull[] = rankUpgrades.map(upgrade => {
                 const recipe = StaticDataService.recipeDataFull[upgrade];
                 if (!recipe) {
                     console.error('Recipe for ' + upgrade + ' is not found');
                 }
                 return {
                     ...recipe,
-                    allMaterials: recipe.allMaterials?.map(material => ({
-                        ...material,
-                        // material: `${material.material} (${character.id})`,
-                    })),
+                    character: character.id,
                 };
             });
 
@@ -367,7 +367,15 @@ export class StaticDataService {
         upgrades: IMaterialFull[]
     ): IMaterialEstimated2[] {
         const groupedData = groupBy(
-            upgrades.flatMap(x => x.allMaterials ?? []),
+            upgrades.flatMap(x => {
+                const result = x.allMaterials ?? [];
+                if (x.character) {
+                    result.forEach(material => {
+                        material.characters = [x.character!];
+                    });
+                }
+                return result;
+            }),
             'material'
         );
 
@@ -380,6 +388,7 @@ export class StaticDataService {
                 stat: items[0].stat,
                 craftable: items[0].craftable,
                 locations: items[0].locations,
+                characters: uniq(items.flatMap(item => item.characters)),
                 locationsComposed: items[0].locations?.map(location => StaticDataService.campaignsComposed[location]),
             };
         });
@@ -440,7 +449,9 @@ export class StaticDataService {
 
                 const materialRaids: IMaterialRaid = {
                     material: material.material,
+                    materialIconPath: material.iconPath,
                     locations: [],
+                    characters: material.characters,
                 };
 
                 for (const location of material.locations) {
@@ -581,6 +592,7 @@ export class StaticDataService {
             quantity: ownedCount,
             countLeft: leftCount,
             iconPath: material.iconPath,
+            characters: material.characters,
         };
     }
 

@@ -515,6 +515,7 @@ export interface IMaterialFull {
     recipe?: Array<IMaterialRecipeIngredientFull>; // if material is not craftable recipe can be omitted ("undefined")
     allMaterials?: IMaterialRecipeIngredientFull[];
     iconPath: string;
+    character?: string;
 }
 
 export interface IMaterialRecipeIngredientFull {
@@ -527,6 +528,7 @@ export interface IMaterialRecipeIngredientFull {
     locations?: Array<string>;
     locationsComposed?: Array<ICampaignBattleComposed>;
     iconPath: string;
+    characters: string[];
 }
 
 export interface IRankUpData {
@@ -587,6 +589,7 @@ export interface IMaterialEstimated2 {
     quantity: number;
     countLeft: number;
     iconPath: string;
+    characters: string[];
 }
 
 export interface IDailyRaid {
@@ -596,6 +599,8 @@ export interface IDailyRaid {
 
 export interface IMaterialRaid {
     material: string;
+    materialIconPath: string;
+    characters: string[];
     locations: Array<{
         location: string;
         raidsCount: number;
