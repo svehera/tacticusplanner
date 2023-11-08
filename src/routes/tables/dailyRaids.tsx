@@ -286,7 +286,7 @@ export const DailyRaids = () => {
                                         subheader={'Energy left ' + day.energyLeft}
                                     />
                                     <CardContent>
-                                        <ul style={{ listStyleType: 'none' }}>
+                                        <ul style={{ listStyleType: 'none', padding: 0 }}>
                                             {day.raids.map(raid => (
                                                 <li key={raid.material}>
                                                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -300,7 +300,7 @@ export const DailyRaids = () => {
                                                                 {raid.characters.length <= 3
                                                                     ? raid.characters.join(', ')
                                                                     : raid.characters.slice(0, 3).join(', ') +
-                                                                      `and ${raid.characters.slice(3).length} more...`}
+                                                                      ` and ${raid.characters.slice(3).length} more...`}
                                                                 )
                                                             </span>
                                                         </Tooltip>
