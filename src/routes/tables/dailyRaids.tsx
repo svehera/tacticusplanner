@@ -246,6 +246,20 @@ export const DailyRaids = () => {
         return result;
     }, [charactersList, dailyRaidsPreferences, upgrades]);
 
+    useEffect(() => {
+        if (dailyRaids.lastRefreshDateUTC) {
+            const currentDate = new Date();
+
+            const lastRefreshDate = new Date(currentDate);
+
+            const isYesterdayOrBefore = lastRefreshDate <= currentDate;
+
+            if (isYesterdayOrBefore) {
+                dispatch.dailyRaids({ type: 'ResetCompletedBattles' });
+            }
+        }
+    }, []);
+
     return (
         <div>
             <div>

@@ -104,6 +104,17 @@ export const CharacterDetails = ({
                             />
                         ))}
                     </div>
+                    <hr />
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                // checked={formData.upgrades.includes(x.material)}
+                                // onChange={event => handleUpgradeChange(event, x.material)}
+                                inputProps={{ 'aria-label': 'controlled' }}
+                            />
+                        }
+                        label={'Update inventory'}
+                    />
                 </div>
             ) : undefined}
         </FormGroup>

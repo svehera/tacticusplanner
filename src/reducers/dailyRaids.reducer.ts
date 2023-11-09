@@ -16,10 +16,13 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction) 
             return action.value;
         }
         case 'AddCompletedBattle': {
-            return { ...state, completedBattles: [...state.completedBattles, action.battle] };
+            return {
+                ...state,
+                completedBattles: [...state.completedBattles, action.battle],
+            };
         }
         case 'ResetCompletedBattles': {
-            return { ...state, completedBattles: [] };
+            return { ...state, completedBattles: [], lastRefreshDate: new Date().toUTCString() };
         }
         default: {
             throw new Error();

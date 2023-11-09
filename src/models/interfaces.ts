@@ -276,6 +276,7 @@ export interface IPersonalData2 {
 
 export interface IDailyRaids {
     completedBattles: string[];
+    lastRefreshDateUTC: string;
 }
 
 export interface ILegendaryEventsData {
