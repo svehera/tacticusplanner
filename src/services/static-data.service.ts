@@ -464,7 +464,8 @@ export class StaticDataService {
                             material.totalEnergy -= locationDailyEnergy;
 
                             materialRaids.locations.push({
-                                location: location.campaign + ' ' + location.nodeNumber,
+                                campaign: location.campaign,
+                                battleNumber: location.nodeNumber,
                                 raidsCount: location.dailyBattleCount,
                             });
                         } else if (energyLeft > location.energyCost) {
@@ -485,7 +486,8 @@ export class StaticDataService {
                             material.totalEnergy -= energySpent;
 
                             materialRaids.locations.push({
-                                location: location.campaign + ' ' + location.nodeNumber,
+                                campaign: location.campaign,
+                                battleNumber: location.nodeNumber,
                                 raidsCount: maxNumberOfBattles,
                             });
                         }
@@ -507,7 +509,8 @@ export class StaticDataService {
                             material.totalEnergy -= energySpent;
 
                             materialRaids.locations.push({
-                                location: location.campaign + ' ' + location.nodeNumber,
+                                campaign: location.campaign,
+                                battleNumber: location.nodeNumber,
                                 raidsCount: maxNumberOfBattles,
                             });
                         }

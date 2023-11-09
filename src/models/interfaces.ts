@@ -602,7 +602,8 @@ export interface IMaterialRaid {
     materialIconPath: string;
     characters: string[];
     locations: Array<{
-        location: string;
+        campaign: string;
+        battleNumber: number;
         raidsCount: number;
     }>;
 }

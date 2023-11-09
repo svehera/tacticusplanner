@@ -30,6 +30,7 @@ import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { CampaignImage } from '../../shared-components/campaign-image';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -272,14 +273,13 @@ export const DailyRaids = () => {
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <span style={{ fontSize: 20 }}>Raids ({estimatedRanks.raids.length} Days)</span>
                     </AccordionSummary>
-                    <AccordionDetails>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+                    <AccordionDetails style={{ maxHeight: '60vh', overflow: 'auto' }}>
+                        <div style={{ display: 'flex', gap: 10 }}>
                             {estimatedRanks.raids.map((day, index) => (
                                 <Card
                                     key={index}
                                     sx={{
-                                        width: 300,
-                                        minHeight: 200,
+                                        minWidth: 300,
                                     }}>
                                     <CardHeader
                                         title={'Day ' + (index + 1)}
@@ -307,9 +307,22 @@ export const DailyRaids = () => {
                                                     </div>
                                                     <ul>
                                                         {raid.locations.map(x => (
-                                                            <li key={x.location}>
-                                                                <span style={{ fontWeight: 'bold' }}>{x.location}</span>{' '}
-                                                                -{' '}
+                                                            <li
+                                                                key={x.campaign + x.battleNumber}
+                                                                style={{
+                                                                    display: 'flex',
+                                                                    gap: 5,
+                                                                    alignItems: 'center',
+                                                                }}>
+                                                                <CampaignImage campaign={x.campaign} size={30} />
+                                                                <div
+                                                                    style={{
+                                                                        display: 'flex',
+                                                                        flexDirection: 'column',
+                                                                    }}>
+                                                                    <span>Battle {x.battleNumber}</span>
+                                                                    <span style={{ fontSize: 12 }}>{x.campaign}</span>
+                                                                </div>
                                                                 <span style={{ fontStyle: 'italic' }}>
                                                                     {x.raidsCount}x
                                                                 </span>
