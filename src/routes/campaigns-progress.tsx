@@ -2,12 +2,13 @@
 import { Box, Grid, Input, Slider } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
-import { ICampaignsProgress } from '../models/interfaces';
+import { CampaignImage } from '../shared-components/campaign-image';
+import { campaignsNames } from '../models/constants';
 
 export const CampaignsProgress = () => {
     const { campaignsProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
-    const allCampaigns = Object.keys(campaignsProgress) as Array<keyof ICampaignsProgress>;
+    const allCampaigns = campaignsNames;
     const campaigns = ['Indomitus', 'Fall of Cadia', 'Octarius', 'Saim-Hann'];
     const getCampaignsProgress = (group: string) => {
         return (
@@ -70,7 +71,7 @@ export const CampaignProgress = ({
     return (
         <Box sx={{ width: 250 }}>
             <Typography id="input-slider" gutterBottom>
-                {campaign}
+                <CampaignImage campaign={campaign} /> {campaign}
             </Typography>
             <Grid container spacing={2} alignItems="center">
                 <Grid item xs>

@@ -642,7 +642,6 @@ export type ICampaignsProgress = {
     Octarius: number;
     'Octarius Mirror': number;
     'Octarius Elite': number;
-    'Octarius Mirror Elite': number;
 
     'Saim-Hann': number;
 };

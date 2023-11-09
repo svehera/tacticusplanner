@@ -90,10 +90,13 @@ export const defaultCampaignsProgress: ICampaignsProgress = {
     Octarius: 75,
     'Octarius Mirror': 75,
     'Octarius Elite': 40,
-    'Octarius Mirror Elite': 40,
 
     'Saim-Hann': 75,
 };
+
+export const campaignsNames: Array<keyof ICampaignsProgress> = Object.keys(defaultCampaignsProgress) as Array<
+    keyof ICampaignsProgress
+>;
 
 export const defaultData: IPersonalData2 = {
     schemaVersion: 2,
