@@ -1,5 +1,5 @@
 ﻿import React, { useCallback, useContext } from 'react';
-import { Switch, FormControlLabel, FormGroup, Box, Slider } from '@mui/material';
+import { Switch, FormControlLabel, FormGroup, Box, Slider, Input } from '@mui/material';
 import { IDailyRaidsPreferences } from '../models/interfaces';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 import Typography from '@mui/material/Typography';
@@ -8,6 +8,7 @@ const DailyRaidsSettings = () => {
     const dispatch = useContext(DispatchContext);
     const { dailyRaidsPreferences } = useContext(StoreContext);
     const [dailyEnergy, setDailyEnergy] = React.useState(dailyRaidsPreferences.dailyEnergy);
+    const [shardsEnergy, setShardsEnergy] = React.useState<number | string>(dailyRaidsPreferences.shardsEnergy);
     const [updateTimeout, setUpdateTimeout] = React.useState<NodeJS.Timeout | undefined>();
 
     const updatePreferences = useCallback((setting: keyof IDailyRaidsPreferences, value: boolean) => {
@@ -34,6 +35,23 @@ const DailyRaidsSettings = () => {
 
             setUpdateTimeout(timeoutId);
         }
+    };
+
+    const handleShardsEnergyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const rawValue = event.target.value;
+        const value = event.target.value === '' ? 0 : Number(event.target.value);
+        setShardsEnergy(rawValue);
+        if (updateTimeout) {
+            clearTimeout(updateTimeout);
+        }
+        const timeoutId = setTimeout(() => {
+            dispatch.dailyRaidsPreferences({
+                type: 'UpdateShardsEnergy',
+                value,
+            });
+        }, 500);
+
+        setUpdateTimeout(timeoutId);
     };
 
     const energyMarks = [
@@ -86,6 +104,22 @@ const DailyRaidsSettings = () => {
                 />
             </Box>
 
+            <FormControlLabel
+                control={
+                    <Input
+                        value={shardsEnergy}
+                        size="small"
+                        onChange={handleShardsEnergyChange}
+                        inputProps={{
+                            step: 1,
+                            min: 0,
+                            max: 200,
+                            type: 'number',
+                        }}
+                    />
+                }
+                label="Characters shards energy"
+            />
             <FormControlLabel
                 control={
                     <Switch

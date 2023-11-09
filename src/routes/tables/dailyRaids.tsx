@@ -191,7 +191,7 @@ export const DailyRaids = () => {
     const estimatedRanks: IEstimatedRanks = useMemo(() => {
         return StaticDataService.getRankUpgradeEstimatedDays(
             {
-                dailyEnergy: dailyRaidsPreferences.dailyEnergy,
+                dailyEnergy: dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy,
                 campaignsProgress: dailyRaidsPreferences.useCampaignsProgress
                     ? campaignsProgress
                     : defaultCampaignsProgress,
@@ -205,9 +205,12 @@ export const DailyRaids = () => {
     return (
         <div>
             <div>
-                <Button variant="outlined" onClick={handleClick2}>
-                    Daily Raids <SettingsIcon />
-                </Button>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
+                    <Button variant="outlined" onClick={handleClick2}>
+                        Daily Raids <SettingsIcon />
+                    </Button>
+                    <span>Daily energy: {dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy}</span>
+                </div>
                 <Popover
                     open={open2}
                     anchorEl={anchorEl2}

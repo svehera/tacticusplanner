@@ -321,6 +321,7 @@ export interface IAutoTeamsPreferences {
 
 export interface IDailyRaidsPreferences {
     dailyEnergy: number;
+    shardsEnergy: number;
     useCampaignsProgress: boolean;
     useMostEfficientNodes: boolean;
     useMoreEfficientNodes: boolean;

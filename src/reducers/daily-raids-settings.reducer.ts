@@ -10,6 +10,10 @@ export type DailyRaidsPreferencesAction =
           type: 'UpdateEnergy';
           value: number;
       }
+    | {
+          type: 'UpdateShardsEnergy';
+          value: number;
+      }
     | SetStateAction<IDailyRaidsPreferences>;
 
 export const dailyRaidsPreferencesReducer = (state: IDailyRaidsPreferences, action: DailyRaidsPreferencesAction) => {
@@ -22,6 +26,9 @@ export const dailyRaidsPreferencesReducer = (state: IDailyRaidsPreferences, acti
         }
         case 'UpdateEnergy': {
             return { ...state, dailyEnergy: action.value };
+        }
+        case 'UpdateShardsEnergy': {
+            return { ...state, shardsEnergy: action.value >= 0 ? action.value : 0 };
         }
         default: {
             throw new Error();

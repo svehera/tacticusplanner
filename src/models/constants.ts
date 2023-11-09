@@ -120,6 +120,7 @@ export const defaultData: IPersonalData2 = {
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,
+        shardsEnergy: 0,
         useCampaignsProgress: true,
         useMostEfficientNodes: true,
         useMoreEfficientNodes: false,

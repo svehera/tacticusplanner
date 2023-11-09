@@ -42,7 +42,7 @@ export const Goals = () => {
 
         const estimate = StaticDataService.getRankUpgradeEstimatedDays(
             {
-                dailyEnergy: dailyRaidsPreferences.dailyEnergy,
+                dailyEnergy: dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy,
                 campaignsProgress: dailyRaidsPreferences.useCampaignsProgress
                     ? campaignsProgress
                     : defaultCampaignsProgress,
@@ -163,7 +163,7 @@ export default function GoalCard({
 
         const estimate = StaticDataService.getRankUpgradeEstimatedDays(
             {
-                dailyEnergy: dailyRaidsPreferences.dailyEnergy,
+                dailyEnergy: dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy,
                 campaignsProgress: dailyRaidsPreferences.useCampaignsProgress
                     ? campaignsProgress
                     : defaultCampaignsProgress,
