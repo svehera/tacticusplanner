@@ -1,6 +1,7 @@
 ﻿import {
     IAutoTeamsPreferences,
     ICampaignsProgress,
+    IDailyRaids,
     IDailyRaidsPreferences,
     IInventory,
     ILegendaryEventProgressState,
@@ -66,6 +67,10 @@ export class PersonalDataLocalStorage {
                 inventory: {
                     ...defaultData.inventory,
                     ...(this.getItem<IInventory>('inventory') ?? {}),
+                },
+                dailyRaids: {
+                    ...defaultData.dailyRaids,
+                    ...(this.getItem<IDailyRaids>('dailyRaids') ?? {}),
                 },
             };
         } else {
@@ -176,6 +181,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             campaignsProgress: defaultData.campaignsProgress,
             dailyRaidsPreferences: defaultData.dailyRaidsPreferences,
             inventory: defaultData.inventory,
+            dailyRaids: defaultData.dailyRaids,
         };
     }
 

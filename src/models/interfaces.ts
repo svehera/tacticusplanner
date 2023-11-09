@@ -27,6 +27,7 @@ import { GoalsAction } from '../reducers/goals.reducer';
 import { CampaignsProgressAction } from '../reducers/campaigns-progress.reducer';
 import { DailyRaidsPreferencesAction } from '../reducers/daily-raids-settings.reducer';
 import { InventoryAction } from '../reducers/inventory.reducer';
+import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -235,6 +236,7 @@ export interface IGlobalState {
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
+    dailyRaids: IDailyRaids;
 }
 
 export interface IDispatchContext {
@@ -249,6 +251,7 @@ export interface IDispatchContext {
     campaignsProgress: React.Dispatch<CampaignsProgressAction>;
     goals: React.Dispatch<GoalsAction>;
     inventory: React.Dispatch<InventoryAction>;
+    dailyRaids: React.Dispatch<DailyRaidsAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
@@ -268,6 +271,11 @@ export interface IPersonalData2 {
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
+    dailyRaids: IDailyRaids;
+}
+
+export interface IDailyRaids {
+    completedBattles: string[];
 }
 
 export interface ILegendaryEventsData {

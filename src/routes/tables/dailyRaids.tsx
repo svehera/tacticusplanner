@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
+﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 import {
     ICharacter2,
@@ -44,10 +44,12 @@ import IconButton from '@mui/material/IconButton';
 import { Edit } from '@mui/icons-material';
 import { EditGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 import { enqueueSnackbar } from 'notistack';
+import ClearIcon from '@mui/icons-material/Clear';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
-    const { characters, goals, campaignsProgress, dailyRaidsPreferences, inventory } = useContext(StoreContext);
+    const { dailyRaids, characters, goals, campaignsProgress, dailyRaidsPreferences, inventory } =
+        useContext(StoreContext);
 
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
     const [hasChanges, setHasChanges] = React.useState<boolean>(false);
@@ -193,7 +195,7 @@ export const DailyRaids = () => {
     }, [goals]);
 
     const estimatedRanks: IEstimatedRanks = useMemo(() => {
-        return StaticDataService.getRankUpgradeEstimatedDays(
+        const result = StaticDataService.getRankUpgradeEstimatedDays(
             {
                 dailyEnergy: dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy,
                 campaignsProgress: dailyRaidsPreferences.useCampaignsProgress
@@ -204,6 +206,44 @@ export const DailyRaids = () => {
             },
             ...charactersList
         );
+
+        const currentDay = result.raids[0];
+
+        if (currentDay) {
+            const completedRaids: IMaterialRaid[] = [];
+            const notCompletedRaids: IMaterialRaid[] = [];
+            for (const raid of currentDay.raids) {
+                const isAllRaidsCompleted = raid.locations.every(location =>
+                    dailyRaids.completedBattles.includes(location.campaign + location.battleNumber)
+                );
+
+                if (isAllRaidsCompleted) {
+                    completedRaids.push(raid);
+                } else {
+                    const completedLocations: IRaidLocation[] = [];
+                    const notCompletedLocations: IRaidLocation[] = [];
+
+                    for (const location of raid.locations) {
+                        const isLocaitonCompleted = dailyRaids.completedBattles.includes(
+                            location.campaign + location.battleNumber
+                        );
+
+                        if (isLocaitonCompleted) {
+                            completedLocations.push(location);
+                        } else {
+                            notCompletedLocations.push(location);
+                        }
+                    }
+                    raid.locations = [...notCompletedLocations, ...completedLocations];
+
+                    notCompletedRaids.push(raid);
+                }
+            }
+
+            currentDay.raids = [...notCompletedRaids, ...completedRaids];
+        }
+
+        return result;
     }, [charactersList, dailyRaidsPreferences, upgrades]);
 
     return (
@@ -295,6 +335,13 @@ export const DailyRaids = () => {
                                 <RefreshIcon /> Refresh Estimate
                             </Button>
                         ) : undefined}
+                        {dailyRaids.completedBattles.length ? (
+                            <Tooltip title={dailyRaids.completedBattles.join(', ')}>
+                                <Button onClick={() => dispatch.dailyRaids({ type: 'ResetCompletedBattles' })}>
+                                    <ClearIcon /> Clear Completed Raids
+                                </Button>
+                            </Tooltip>
+                        ) : undefined}
                         <div style={{ display: 'flex', gap: 10 }}>
                             {estimatedRanks.raids.map((day, index) => (
                                 <Card
@@ -303,7 +350,7 @@ export const DailyRaids = () => {
                                         minWidth: 300,
                                     }}>
                                     <CardHeader
-                                        title={'Day ' + (index + 1)}
+                                        title={index === 0 ? 'Today' : 'Day ' + (index + 1)}
                                         subheader={'Energy left ' + day.energyLeft}
                                     />
                                     <CardContent>
@@ -312,6 +359,7 @@ export const DailyRaids = () => {
                                                 <MaterialItem
                                                     raid={raid}
                                                     key={raid.material}
+                                                    isFirstDay={index === 0}
                                                     changed={() => setHasChanges(true)}
                                                 />
                                             ))}
@@ -413,9 +461,27 @@ const CharactersList = () => {
     );
 };
 
-const MaterialItem = ({ raid, changed }: { raid: IMaterialRaid; changed: () => void }) => {
+const MaterialItem = ({
+    raid,
+    changed,
+    isFirstDay,
+}: {
+    isFirstDay: boolean;
+    raid: IMaterialRaid;
+    changed: () => void;
+}) => {
+    const { dailyRaids } = useContext(StoreContext);
+    const isAllRaidsCompleted = useMemo(
+        () =>
+            isFirstDay &&
+            raid.locations.every(location =>
+                dailyRaids.completedBattles.includes(location.campaign + location.battleNumber)
+            ),
+        [dailyRaids.completedBattles.length]
+    );
+
     return (
-        <li>
+        <li style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <UpgradeImage material={raid.material} iconPath={raid.materialIconPath} />
                 <Tooltip title={raid.characters.join(', ')}>
@@ -436,6 +502,7 @@ const MaterialItem = ({ raid, changed }: { raid: IMaterialRaid; changed: () => v
                         key={x.campaign + x.battleNumber}
                         material={raid.material}
                         changed={changed}
+                        isFirstDay={isFirstDay}
                     />
                 ))}
             </ul>
@@ -447,13 +514,21 @@ const RaidItem = ({
     material,
     location,
     changed,
+    isFirstDay,
 }: {
+    isFirstDay: boolean;
     material: string;
     location: IRaidLocation;
     changed: () => void;
 }) => {
+    const { dailyRaids } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const [itemsObtained, setItemsObtained] = useState<string | number>(Math.round(location.farmedItems));
+
+    const isLocationCompleted = useMemo(
+        () => isFirstDay && dailyRaids.completedBattles.includes(location.campaign + location.battleNumber),
+        [dailyRaids.completedBattles.length]
+    );
     const handleItemsObtainedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setItemsObtained(event.target.value);
     };
@@ -465,6 +540,10 @@ const RaidItem = ({
                 type: 'IncrementUpgradeQuantity',
                 upgrade: material,
                 value,
+            });
+            dispatch.dailyRaids({
+                type: 'AddCompletedBattle',
+                battle: location.campaign + location.battleNumber,
             });
             enqueueSnackbar(`Added ${value} items for ${material}`, { variant: 'success' });
             changed();
@@ -478,6 +557,7 @@ const RaidItem = ({
                 gap: 5,
                 alignItems: 'center',
                 justifyContent: 'space-between',
+                opacity: isLocationCompleted ? 0.5 : 1,
             }}>
             <div
                 style={{
@@ -501,13 +581,14 @@ const RaidItem = ({
                 style={{
                     minWidth: 60,
                     maxWidth: 70,
-                    display: 'flex',
+                    display: isFirstDay ? 'flex' : 'none',
                     flexDirection: 'column',
                     alignItems: 'center',
                 }}>
                 <FormControlLabel
                     control={
                         <Input
+                            disabled={isLocationCompleted}
                             value={itemsObtained}
                             size="small"
                             onChange={handleItemsObtainedChange}
@@ -522,9 +603,11 @@ const RaidItem = ({
                     labelPlacement={'top'}
                     label={<span style={{ fontSize: 10 }}>Items Obtained</span>}
                 />
-                <Button size={'small'} onClick={handleAdd}>
-                    Add
-                </Button>
+                <Tooltip title={'Add to inventory'}>
+                    <Button size={'small'} onClick={handleAdd} disabled={isLocationCompleted}>
+                        Add
+                    </Button>
+                </Tooltip>
             </div>
         </li>
     );

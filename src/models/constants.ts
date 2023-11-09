@@ -102,6 +102,9 @@ export const defaultData: IPersonalData2 = {
     schemaVersion: 2,
     modifiedDate: undefined,
     seenAppVersion: undefined,
+    dailyRaids: {
+        completedBattles: [],
+    },
     autoTeamsPreferences: {
         preferCampaign: false,
         ignoreRank: false,

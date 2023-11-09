@@ -20,6 +20,7 @@ import { GlobalState } from '../models/global-state';
 import { campaignsProgressReducer } from './campaigns-progress.reducer';
 import { dailyRaidsPreferencesReducer } from './daily-raids-settings.reducer';
 import { inventoryReducer } from './inventory.reducer';
+import { dailyRaidsReducer } from './dailyRaids.reducer';
 
 export const StoreContext = createContext<IGlobalState>({} as any);
 export const DispatchContext = createContext<IDispatchContext>({} as any);
@@ -73,6 +74,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     );
 
     const [inventory, dispatchInventory] = React.useReducer(inventoryReducer, globalState.inventory);
+    const [dailyRaids, dispatchDailyRaids] = React.useReducer(dailyRaidsReducer, globalState.dailyRaids);
 
     function wrapDispatch<T>(dispatch: React.Dispatch<T>): React.Dispatch<T> {
         return (action: T) => {
@@ -97,6 +99,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             leProgress: wrapDispatch(dispatchLeProgress),
             campaignsProgress: wrapDispatch(dispatchCampaignsProgress),
             inventory: wrapDispatch(dispatchInventory),
+            dailyRaids: wrapDispatch(dispatchDailyRaids),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 dispatchCharacters({ type: 'Set', value: data.characters });
                 dispatchGoals({ type: 'Set', value: data.goals });
@@ -109,6 +112,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 dispatchLeProgress({ type: 'Set', value: data.leProgress });
                 dispatchCampaignsProgress({ type: 'Set', value: data.campaignsProgress });
                 dispatchInventory({ type: 'Set', value: data.inventory });
+                dispatchDailyRaids({ type: 'Set', value: data.dailyRaids });
 
                 if (modified) {
                     setModified(true);
@@ -157,6 +161,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             campaignsProgress,
             dailyRaidsPreferences,
             inventory,
+            dailyRaids,
         };
         const storeValue = GlobalState.toStore(newValue);
 
