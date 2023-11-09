@@ -1,6 +1,12 @@
-﻿import React, { useContext, useMemo } from 'react';
+﻿import React, { useContext, useMemo, useState } from 'react';
 
-import { ICharacterRankRange, IEstimatedRanks, IMaterialEstimated2 } from '../../models/interfaces';
+import {
+    ICharacter2,
+    ICharacterRankRange,
+    IEstimatedRanks,
+    IMaterialEstimated2,
+    IPersonalGoal,
+} from '../../models/interfaces';
 import { StaticDataService } from '../../services';
 import {
     Accordion,
@@ -31,6 +37,9 @@ import Box from '@mui/material/Box';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { CampaignImage } from '../../shared-components/campaign-image';
+import IconButton from '@mui/material/IconButton';
+import { Edit } from '@mui/icons-material';
+import { EditGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -345,10 +354,13 @@ export const DailyRaids = () => {
 
 const CharactersList = () => {
     const dispatch = useContext(DispatchContext);
-    const { goals } = useContext(StoreContext);
+    const { goals, characters } = useContext(StoreContext);
 
     const upgradeRankGoals = useMemo(() => goals.filter(g => g.type === PersonalGoalType.UpgradeRank), []);
     const [checked, setChecked] = React.useState<boolean[]>(() => upgradeRankGoals.map(x => x.dailyRaids ?? false));
+
+    const [editGoal, setEditGoal] = useState<IPersonalGoal | null>(null);
+    const [editCharacter, setEditCharacter] = useState<ICharacter2>(characters[0]);
 
     const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked(upgradeRankGoals.map(() => event.target.checked));
@@ -366,16 +378,32 @@ const CharactersList = () => {
         dispatch.goals({ type: 'UpdateDailyRaids', goalId, value: event.target.checked });
     };
 
+    const handleEdit = (goal: IPersonalGoal) => {
+        const relatedCharacter = characters.find(x => x.name === goal.character);
+        if (relatedCharacter) {
+            setEditCharacter(relatedCharacter);
+            setEditGoal({
+                ...goal,
+                currentRank: relatedCharacter.rank,
+                currentRarity: relatedCharacter.rarity,
+                upgrades: relatedCharacter.upgrades,
+            });
+        }
+    };
+
     const children = (
         <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
             {upgradeRankGoals.map((goal, index) => (
                 <FormControlLabel
                     key={goal.id}
                     label={
-                        <span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                            <IconButton onClick={() => handleEdit(goal)}>
+                                <Edit fontSize="small" />
+                            </IconButton>
                             {goal.character} <RankImage rank={goal.currentRank ?? 1} /> -{' '}
                             <RankImage rank={goal.targetRank ?? 1} />{' '}
-                        </span>
+                        </div>
                     }
                     control={<Checkbox checked={checked[index]} onChange={handleChildChange(index, goal.id)} />}
                 />
@@ -396,6 +424,16 @@ const CharactersList = () => {
                 }
             />
             {children}
+            {editGoal ? (
+                <EditGoalDialog
+                    isOpen={true}
+                    goal={editGoal}
+                    character={editCharacter}
+                    onClose={() => {
+                        setEditGoal(null);
+                    }}
+                />
+            ) : undefined}
         </div>
     );
 };
