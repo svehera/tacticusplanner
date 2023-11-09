@@ -602,11 +602,14 @@ export interface IMaterialRaid {
     material: string;
     materialIconPath: string;
     characters: string[];
-    locations: Array<{
-        campaign: string;
-        battleNumber: number;
-        raidsCount: number;
-    }>;
+    locations: Array<IRaidLocation>;
+}
+
+export interface IRaidLocation {
+    campaign: string;
+    battleNumber: number;
+    raidsCount: number;
+    farmedItems: number;
 }
 
 export interface ICharacterRankRange {

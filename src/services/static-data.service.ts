@@ -467,6 +467,7 @@ export class StaticDataService {
                                 campaign: location.campaign,
                                 battleNumber: location.nodeNumber,
                                 raidsCount: location.dailyBattleCount,
+                                farmedItems: locationDailyEnergy / location.energyPerItem,
                             });
                         } else if (energyLeft > location.energyCost) {
                             const numberOfBattles = Math.floor(energyLeft / location.energyCost);
@@ -489,6 +490,7 @@ export class StaticDataService {
                                 campaign: location.campaign,
                                 battleNumber: location.nodeNumber,
                                 raidsCount: maxNumberOfBattles,
+                                farmedItems: energySpent / location.energyPerItem,
                             });
                         }
                     } else {
@@ -512,6 +514,7 @@ export class StaticDataService {
                                 campaign: location.campaign,
                                 battleNumber: location.nodeNumber,
                                 raidsCount: maxNumberOfBattles,
+                                farmedItems: energySpent / location.energyPerItem,
                             });
                         }
                     }

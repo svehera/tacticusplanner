@@ -7,6 +7,11 @@ export type InventoryAction =
           value: number;
       }
     | {
+          type: 'IncrementUpgradeQuantity';
+          upgrade: string;
+          value: number;
+      }
+    | {
           type: 'ResetUpgrades';
       }
     | SetStateAction<IInventory>;
@@ -18,6 +23,10 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction) => 
         }
         case 'UpdateUpgradeQuantity': {
             return { ...state, upgrades: { ...state.upgrades, [action.upgrade]: action.value } };
+        }
+        case 'IncrementUpgradeQuantity': {
+            const currentValue = state.upgrades[action.upgrade] ?? 0;
+            return { ...state, upgrades: { ...state.upgrades, [action.upgrade]: currentValue + action.value } };
         }
         case 'ResetUpgrades': {
             return { ...state, upgrades: {} };

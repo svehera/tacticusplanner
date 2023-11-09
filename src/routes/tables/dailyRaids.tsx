@@ -5,7 +5,9 @@ import {
     ICharacterRankRange,
     IEstimatedRanks,
     IMaterialEstimated2,
+    IMaterialRaid,
     IPersonalGoal,
+    IRaidLocation,
 } from '../../models/interfaces';
 import { StaticDataService } from '../../services';
 import {
@@ -17,6 +19,7 @@ import {
     CardHeader,
     Checkbox,
     FormControlLabel,
+    Input,
     Popover,
     Tooltip,
 } from '@mui/material';
@@ -40,6 +43,7 @@ import { CampaignImage } from '../../shared-components/campaign-image';
 import IconButton from '@mui/material/IconButton';
 import { Edit } from '@mui/icons-material';
 import { EditGoalDialog } from '../../shared-components/goals/set-goal-dialog';
+import { enqueueSnackbar } from 'notistack';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -285,7 +289,12 @@ export const DailyRaids = () => {
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <span style={{ fontSize: 20 }}>Raids ({estimatedRanks.raids.length} Days)</span>
                     </AccordionSummary>
-                    <AccordionDetails style={{ maxHeight: '60vh', overflow: 'auto' }}>
+                    <AccordionDetails style={{ maxHeight: '63vh', overflow: 'auto' }}>
+                        {hasChanges ? (
+                            <Button disabled={!hasChanges} onClick={() => refresh()}>
+                                <RefreshIcon /> Refresh Estimate
+                            </Button>
+                        ) : undefined}
                         <div style={{ display: 'flex', gap: 10 }}>
                             {estimatedRanks.raids.map((day, index) => (
                                 <Card
@@ -300,48 +309,11 @@ export const DailyRaids = () => {
                                     <CardContent>
                                         <ul style={{ listStyleType: 'none', padding: 0 }}>
                                             {day.raids.map(raid => (
-                                                <li key={raid.material}>
-                                                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                                        <UpgradeImage
-                                                            material={raid.material}
-                                                            iconPath={raid.materialIconPath}
-                                                        />
-                                                        <Tooltip title={raid.characters.join(', ')}>
-                                                            <span>
-                                                                (
-                                                                {raid.characters.length <= 3
-                                                                    ? raid.characters.join(', ')
-                                                                    : raid.characters.slice(0, 3).join(', ') +
-                                                                      ` and ${raid.characters.slice(3).length} more...`}
-                                                                )
-                                                            </span>
-                                                        </Tooltip>
-                                                    </div>
-                                                    <ul>
-                                                        {raid.locations.map(x => (
-                                                            <li
-                                                                key={x.campaign + x.battleNumber}
-                                                                style={{
-                                                                    display: 'flex',
-                                                                    gap: 5,
-                                                                    alignItems: 'center',
-                                                                }}>
-                                                                <CampaignImage campaign={x.campaign} size={30} />
-                                                                <div
-                                                                    style={{
-                                                                        display: 'flex',
-                                                                        flexDirection: 'column',
-                                                                    }}>
-                                                                    <span>Battle {x.battleNumber}</span>
-                                                                    <span style={{ fontSize: 12 }}>{x.campaign}</span>
-                                                                </div>
-                                                                <span style={{ fontStyle: 'italic' }}>
-                                                                    {x.raidsCount}x
-                                                                </span>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </li>
+                                                <MaterialItem
+                                                    raid={raid}
+                                                    key={raid.material}
+                                                    changed={() => setHasChanges(true)}
+                                                />
                                             ))}
                                         </ul>
                                     </CardContent>
@@ -438,5 +410,122 @@ const CharactersList = () => {
                 />
             ) : undefined}
         </div>
+    );
+};
+
+const MaterialItem = ({ raid, changed }: { raid: IMaterialRaid; changed: () => void }) => {
+    return (
+        <li>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <UpgradeImage material={raid.material} iconPath={raid.materialIconPath} />
+                <Tooltip title={raid.characters.join(', ')}>
+                    <span>
+                        (
+                        {raid.characters.length <= 3
+                            ? raid.characters.join(', ')
+                            : raid.characters.slice(0, 3).join(', ') +
+                              ` and ${raid.characters.slice(3).length} more...`}
+                        )
+                    </span>
+                </Tooltip>
+            </div>
+            <ul style={{ paddingInlineStart: 15 }}>
+                {raid.locations.map(x => (
+                    <RaidItem
+                        location={x}
+                        key={x.campaign + x.battleNumber}
+                        material={raid.material}
+                        changed={changed}
+                    />
+                ))}
+            </ul>
+        </li>
+    );
+};
+
+const RaidItem = ({
+    material,
+    location,
+    changed,
+}: {
+    material: string;
+    location: IRaidLocation;
+    changed: () => void;
+}) => {
+    const dispatch = useContext(DispatchContext);
+    const [itemsObtained, setItemsObtained] = useState<string | number>(Math.round(location.farmedItems));
+    const handleItemsObtainedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setItemsObtained(event.target.value);
+    };
+
+    const handleAdd = () => {
+        const value = itemsObtained === '' ? 0 : Number(itemsObtained);
+        if (value > 0) {
+            dispatch.inventory({
+                type: 'IncrementUpgradeQuantity',
+                upgrade: material,
+                value,
+            });
+            enqueueSnackbar(`Added ${value} items for ${material}`, { variant: 'success' });
+            changed();
+        }
+    };
+
+    return (
+        <li
+            style={{
+                display: 'flex',
+                gap: 5,
+                alignItems: 'center',
+                justifyContent: 'space-between',
+            }}>
+            <div
+                style={{
+                    display: 'flex',
+                    gap: 5,
+                    alignItems: 'center',
+                }}>
+                <CampaignImage campaign={location.campaign} size={30} />
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}>
+                    <span>
+                        Battle {location.battleNumber} ({location.raidsCount}x)
+                    </span>
+                    <span style={{ fontSize: 12 }}>{location.campaign}</span>
+                </div>
+            </div>
+            <div
+                style={{
+                    minWidth: 60,
+                    maxWidth: 70,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}>
+                <FormControlLabel
+                    control={
+                        <Input
+                            value={itemsObtained}
+                            size="small"
+                            onChange={handleItemsObtainedChange}
+                            inputProps={{
+                                step: 1,
+                                min: 0,
+                                type: 'number',
+                            }}
+                        />
+                    }
+                    sx={{ margin: 0 }}
+                    labelPlacement={'top'}
+                    label={<span style={{ fontSize: 10 }}>Items Obtained</span>}
+                />
+                <Button size={'small'} onClick={handleAdd}>
+                    Add
+                </Button>
+            </div>
+        </li>
     );
 };
