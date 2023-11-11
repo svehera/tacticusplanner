@@ -366,6 +366,24 @@ export class StaticDataService {
         settings: IEstimatedRanksSettings,
         upgrades: IMaterialFull[]
     ): IMaterialEstimated2[] {
+        const result = this.groupBaseMaterials(upgrades);
+
+        return orderBy(
+            result
+                .map(x =>
+                    this.calculateMaterialData(
+                        x,
+                        this.selectBestLocations(settings, x.locationsComposed ?? []),
+                        settings.upgrades
+                    )
+                )
+                .filter(x => !!x) as IMaterialEstimated2[],
+            ['daysOfBattles', 'totalEnergy', 'rarity', 'count'],
+            ['desc', 'desc', 'desc', 'desc']
+        );
+    }
+
+    public static groupBaseMaterials(upgrades: IMaterialFull[]) {
         const groupedData = groupBy(
             upgrades.flatMap(x => {
                 const result = x.allMaterials ?? [];
@@ -392,29 +410,7 @@ export class StaticDataService {
                 locationsComposed: items[0].locations?.map(location => StaticDataService.campaignsComposed[location]),
             };
         });
-
-        // if (removeGold) {
-        //     const goldIndex = result.findIndex(x => x.material === 'Gold');
-        //
-        //     if (goldIndex > -1) {
-        //         result.splice(goldIndex, 1);
-        //     }
-        // }
-
-        return orderBy(
-            result
-                .filter(x => x.material !== 'Gold')
-                .map(x =>
-                    this.calculateMaterialData(
-                        x,
-                        this.selectBestLocations(settings, x.locationsComposed ?? []),
-                        settings.upgrades
-                    )
-                )
-                .filter(x => !!x) as IMaterialEstimated2[],
-            ['daysOfBattles', 'totalEnergy', 'rarity', 'count'],
-            ['desc', 'desc', 'desc', 'desc']
-        );
+        return result.filter(x => x.material !== 'Gold');
     }
 
     private static generateDailyRaidsList(

@@ -14,7 +14,7 @@ import {
 import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
-import { ICharacter2, IPersonalGoal } from '../../models/interfaces';
+import { ICharacter2, IMaterialRecipeIngredientFull, IPersonalGoal } from '../../models/interfaces';
 import { v4 } from 'uuid';
 import { PersonalGoalType, Rank, Rarity } from '../../models/enums';
 import InputLabel from '@mui/material/InputLabel';
@@ -30,6 +30,7 @@ import { RaritySelect } from '../rarity-select';
 import { CharacterTitle } from '../character-title';
 import { StaticDataService } from '../../services';
 import { isEqual } from 'lodash';
+import { CharacterUpgrades } from '../character-upgrades';
 
 const getDefaultForm = (priority: number): IPersonalGoal => ({
     id: v4(),
@@ -259,6 +260,7 @@ export const EditGoalDialog = ({
     const [openDialog, setOpenDialog] = React.useState(isOpen);
 
     const [form, setForm] = useState<IPersonalGoal>(goal);
+    const [inventoryUpdate, setInventoryUpdate] = useState<IMaterialRecipeIngredientFull[]>([]);
     const handleClose = (updatedGoal?: IPersonalGoal | undefined): void => {
         if (updatedGoal) {
             dispatch.goals({ type: 'Update', goal: updatedGoal });
@@ -285,27 +287,19 @@ export const EditGoalDialog = ({
                 });
             }
 
+            if (inventoryUpdate.length) {
+                dispatch.inventory({
+                    type: 'DecrementUpgradeQuantity',
+                    upgrades: inventoryUpdate.map(x => ({ id: x.material, count: x.count })),
+                });
+            }
+
             enqueueSnackbar(`Goal for ${updatedGoal.character} is updated`, { variant: 'success' });
         }
         setOpenDialog(false);
         if (onClose) {
             onClose(updatedGoal);
         }
-    };
-
-    const handleUpgradeChange = (event: React.ChangeEvent<HTMLInputElement>, value: string) => {
-        let result: string[];
-
-        if (event.target.checked) {
-            result = [...form.upgrades, value];
-        } else {
-            result = form.upgrades.filter(x => x !== value);
-        }
-
-        setForm({
-            ...form,
-            upgrades: result,
-        });
     };
 
     const targetRarityValues = useMemo(() => {
@@ -323,15 +317,6 @@ export const EditGoalDialog = ({
     const currentRankValues = useMemo(() => {
         return getEnumValues(Rank).filter(x => x > 0 && x <= form.targetRank!);
     }, [form.targetRank]);
-
-    const upgrades = useMemo(() => {
-        return StaticDataService.getUpgrades({
-            id: character.name,
-            rankStart: form.currentRank!,
-            rankEnd: form.currentRank! + 1,
-            appliedUpgrades: [],
-        });
-    }, [form.currentRank]);
 
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
@@ -374,26 +359,16 @@ export const EditGoalDialog = ({
                                 value={form.targetRank ?? Rank.Stone1}
                                 valueChanges={value => setForm(curr => ({ ...curr, targetRank: value }))}
                             />
-                            {upgrades?.length ? (
-                                <div>
-                                    <h4>Applied upgrades</h4>
-                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                        {upgrades.map(x => (
-                                            <FormControlLabel
-                                                key={x.material}
-                                                control={
-                                                    <Checkbox
-                                                        checked={form.upgrades.includes(x.material)}
-                                                        onChange={event => handleUpgradeChange(event, x.material)}
-                                                        inputProps={{ 'aria-label': 'controlled' }}
-                                                    />
-                                                }
-                                                label={`(${x.stat}) ${x.material}`}
-                                            />
-                                        ))}
-                                    </div>
-                                </div>
-                            ) : undefined}
+                            <CharacterUpgrades
+                                character={character}
+                                upgradesChanges={(upgrades, updateInventory) => {
+                                    setForm({
+                                        ...form,
+                                        upgrades,
+                                    });
+                                    setInventoryUpdate(updateInventory);
+                                }}
+                            />
                         </div>
                     ) : undefined}
                     {form.type === PersonalGoalType.Ascend ? (

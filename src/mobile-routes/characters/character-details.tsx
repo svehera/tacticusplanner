@@ -1,58 +1,31 @@
 ﻿import React, { useMemo, useState } from 'react';
-import { ICharacter, ICharacter2 } from '../../models/interfaces';
+import { ICharacter, ICharacter2, IMaterialRecipeIngredientFull } from '../../models/interfaces';
 import { Checkbox, FormControl, FormControlLabel, FormGroup, MenuItem, Select } from '@mui/material';
 import { CharacterBias, Rank, Rarity } from '../../models/enums';
 import InputLabel from '@mui/material/InputLabel';
 import { getEnumValues, rankToString } from '../../shared-logic/functions';
 import { RankImage } from '../../shared-components/rank-image';
-import { StaticDataService } from '../../services';
+import { CharacterUpgrades } from '../../shared-components/character-upgrades';
 
 export const CharacterDetails = ({
     character,
     characterChanges,
 }: {
     character: ICharacter2;
-    characterChanges: (character: ICharacter2) => void;
+    characterChanges: (character: ICharacter2, updateInventory: IMaterialRecipeIngredientFull[]) => void;
 }) => {
     const [formData, setFormData] = useState({
         rank: character.rank,
         rarity: character.rarity,
         bias: character.bias,
-        upgrades: character.upgrades,
     });
-
-    const upgrades = useMemo(() => {
-        return StaticDataService.getUpgrades({
-            id: character.name,
-            rankStart: formData.rank,
-            rankEnd: formData.rank + 1,
-            appliedUpgrades: [],
-        });
-    }, [formData.rank]);
 
     const handleInputChange = (name: keyof ICharacter, value: boolean | number) => {
         setFormData({
             ...formData,
             [name]: value,
-            upgrades: name === 'rank' ? [] : formData.upgrades,
         });
-        characterChanges({ ...character, [name]: value, upgrades: name === 'rank' ? [] : character.upgrades });
-    };
-
-    const handleUpgradeChange = (event: React.ChangeEvent<HTMLInputElement>, value: string) => {
-        let result: string[];
-
-        if (event.target.checked) {
-            result = [...formData.upgrades, value];
-        } else {
-            result = formData.upgrades.filter(x => x !== value);
-        }
-
-        setFormData({
-            ...formData,
-            upgrades: result,
-        });
-        characterChanges({ ...character, upgrades: result });
+        characterChanges({ ...character, [name]: value }, []);
     };
 
     const rankEntries: number[] = getEnumValues(Rank);
@@ -87,35 +60,12 @@ export const CharacterDetails = ({
             {getNativeSelectControl(formData.rarity, 'rarity', rarityEntries, value => Rarity[value])}
             {getNativeSelectControl(formData.bias, 'bias', biasEntries, value => CharacterBias[value])}
             {formData.rank > Rank.Locked ? (
-                <div>
-                    <h4>Applied upgrades</h4>
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        {upgrades.map(x => (
-                            <FormControlLabel
-                                key={x.material}
-                                control={
-                                    <Checkbox
-                                        checked={formData.upgrades.includes(x.material)}
-                                        onChange={event => handleUpgradeChange(event, x.material)}
-                                        inputProps={{ 'aria-label': 'controlled' }}
-                                    />
-                                }
-                                label={`(${x.stat}) ${x.material}`}
-                            />
-                        ))}
-                    </div>
-                    <hr />
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                                // checked={formData.upgrades.includes(x.material)}
-                                // onChange={event => handleUpgradeChange(event, x.material)}
-                                inputProps={{ 'aria-label': 'controlled' }}
-                            />
-                        }
-                        label={'Update inventory'}
-                    />
-                </div>
+                <CharacterUpgrades
+                    character={character}
+                    upgradesChanges={(upgrades, updateInventory) => {
+                        characterChanges({ ...character, upgrades: upgrades }, updateInventory);
+                    }}
+                />
             ) : undefined}
         </FormGroup>
     );
