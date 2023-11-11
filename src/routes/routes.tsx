@@ -20,6 +20,73 @@ import { DailyRaids } from './tables/dailyRaids';
 import { CampaignsProgress } from './campaigns-progress';
 import { Inventory } from './inventory';
 
+const inputRoutes: RouteObject[] = [
+    {
+        path: 'input/wyo',
+        element: <WhoYouOwn />,
+    },
+    {
+        path: 'input/campaignsProgress',
+        element: <CampaignsProgress />,
+    },
+    {
+        path: 'input/inventory',
+        element: <Inventory />,
+    },
+];
+
+const planRoutes: RouteObject[] = [
+    {
+        path: 'plan/goals',
+        element: <Goals />,
+    },
+    {
+        path: 'plan/dailyRaids',
+        element: <DailyRaids />,
+    },
+    {
+        path: 'plan/le',
+        element: <LegendaryEventPage />,
+        children: [
+            {
+                path: 'shadowsun',
+                element: <LegendaryEvent id={LegendaryEventEnum.Shadowsun} />,
+            },
+            {
+                path: 'aunshi',
+                element: <LegendaryEvent id={LegendaryEventEnum.AunShi} />,
+            },
+            {
+                path: 'Ragnar',
+                element: <LegendaryEvent id={LegendaryEventEnum.Ragnar} />,
+            },
+        ],
+    },
+];
+
+const learnRoutes: RouteObject[] = [
+    {
+        path: 'learn/characters',
+        element: <Characters />,
+    },
+    {
+        path: 'learn/upgrades',
+        element: <Upgrades />,
+    },
+    {
+        path: 'learn/rankLookup',
+        element: <RankLookup />,
+    },
+    {
+        path: 'learn/campaigns',
+        element: <Campaigns />,
+    },
+    {
+        path: 'learn/dirtyDozen',
+        element: <DirtyDozen />,
+    },
+];
+
 export const appRoutes: () => RouteObject[] = () => [
     {
         path: '',
@@ -29,64 +96,9 @@ export const appRoutes: () => RouteObject[] = () => [
                 path: '/',
                 element: <About />,
             },
-            {
-                path: 'wyo',
-                element: <WhoYouOwn />,
-            },
-            {
-                path: 'campaignsProgress',
-                element: <CampaignsProgress />,
-            },
-            {
-                path: 'characters',
-                element: <Characters />,
-            },
-            {
-                path: 'upgrades',
-                element: <Upgrades />,
-            },
-            {
-                path: 'inventory',
-                element: <Inventory />,
-            },
-            {
-                path: 'rankLookup',
-                element: <RankLookup />,
-            },
-            {
-                path: 'plan/dailyRaids',
-                element: <DailyRaids />,
-            },
-            {
-                path: 'campaigns',
-                element: <Campaigns />,
-            },
-            {
-                path: 'dirtyDozen',
-                element: <DirtyDozen />,
-            },
-            {
-                path: 'le',
-                element: <LegendaryEventPage />,
-                children: [
-                    {
-                        path: 'shadowsun',
-                        element: <LegendaryEvent id={LegendaryEventEnum.Shadowsun} />,
-                    },
-                    {
-                        path: 'aunshi',
-                        element: <LegendaryEvent id={LegendaryEventEnum.AunShi} />,
-                    },
-                    {
-                        path: 'Ragnar',
-                        element: <LegendaryEvent id={LegendaryEventEnum.Ragnar} />,
-                    },
-                ],
-            },
-            {
-                path: 'goals',
-                element: <Goals />,
-            },
+            ...inputRoutes,
+            ...planRoutes,
+            ...learnRoutes,
             {
                 path: 'contacts',
                 element: <Contacts />,

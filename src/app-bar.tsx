@@ -14,22 +14,12 @@ import { UserMenu } from './shared-components/user-menu/user-menu';
 import ViewSwitch from './shared-components/view-switch';
 import { AppBarSubMenu } from './app-bar-sub-menu';
 
-import aunshi from './assets/legendary-events/Aunshi.json';
-import ragnar from './assets/legendary-events/Ragnar.json';
-import shadowsun from './assets/legendary-events/Shadowsun.json';
 import { StoreContext } from './reducers/store.provider';
 import { WhatsNewDialog } from './shared-components/whats-new.dialog';
 import { DiscordIcon } from './shared-components/icons/discord.icon';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import ListItemText from '@mui/material/ListItemText';
-import { CharacterImage } from './shared-components/character-image';
-import { Home } from '@mui/icons-material';
-import TargetIcon from '@mui/icons-material/TrackChanges';
-import ListIcon from '@mui/icons-material/List';
-import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
-import Diversity3Icon from '@mui/icons-material/Diversity3';
-import DirtyLensIcon from '@mui/icons-material/DirtyLens';
-import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+import { inputSubMenu, learnSubMenu, menuItemById, MenuItemTP, miscMenuItems, planSubMenu } from './models/menu-items';
 
 const TopAppBar = () => {
     const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
@@ -46,116 +36,32 @@ const TopAppBar = () => {
     }, [seenAppVersion]);
 
     const title = useMemo(() => {
-        switch (location.pathname) {
-            case '/wyo':
-                return 'Who You Own';
-            case '/inventory':
-                return 'Inventory';
-            case '/campaignsProgress':
-                return 'Campaigns Progress';
-            case '/le/shadowsun':
-                return `Shadowsun ${shadowsun.eventStage}/3 (${shadowsun.nextEventDate})`;
-            case '/le/aunshi':
-                return `Aun Shi  ${aunshi.eventStage}/3 (${aunshi.nextEventDate})`;
-            case '/le/ragnar':
-                return `Ragnar  ${ragnar.eventStage}/3 (${ragnar.nextEventDate}) - *Some data can change`;
-            case '/goals':
-                return 'My Goals';
-            case '/characters':
-                return 'Characters';
-            case '/upgrades':
-                return 'Upgrades';
-            case '/rankLookup':
-                return 'Rank Lookup';
-            case '/plan/dailyRaids':
-                return 'Daily Raids';
-            case '/campaigns':
-                return 'Campaigns';
-            case '/dirtyDozen':
-                return 'Dirty Dozen';
-            case '/contacts':
-                return 'Contacts';
-            case '/ty':
-                return 'Thank You Page';
-            default: {
-                return 'Tacticus Planner';
-            }
+        const routeSections = location.pathname.split('/');
+        const menuItemId = routeSections[routeSections.length - 1];
+        if (Object.hasOwn(menuItemById, menuItemId)) {
+            return menuItemById[menuItemId as keyof typeof menuItemById].title;
+        } else {
+            return 'Tacticus Planner';
         }
     }, [location.pathname]);
 
     const nav = isTabletOrMobile ? undefined : (
         <div style={{ display: 'flex', alignItems: 'center', marginInlineEnd: 20 }}>
-            <AppBarSubMenu
-                rootLabel={'Input'}
-                options={[
-                    {
-                        label: 'Who You Own',
-                        route: './wyo',
-                    },
-                    {
-                        label: 'Campaigns Progress',
-                        route: './campaignsProgress',
-                    },
-                    {
-                        label: 'Inventory',
-                        route: './inventory',
-                    },
-                ]}
-            />
+            <AppBarSubMenu rootLabel={'Input'} options={inputSubMenu} />
 
-            <AppBarSubMenu
-                rootLabel={'Plan'}
-                options={[
-                    {
-                        label: 'Goals',
-                        route: './goals',
-                    },
-                    {
-                        label: 'Daily Raids',
-                        route: '/plan/dailyRaids',
-                    },
-                    {
-                        label: 'Shadowsun LE',
-                        route: './le/shadowsun',
-                    },
-                    {
-                        label: 'Aun Shi LE',
-                        route: './le/aunshi',
-                    },
-                    {
-                        label: 'Ragnar LE',
-                        route: './le/ragnar',
-                    },
-                ]}
-            />
+            <AppBarSubMenu rootLabel={'Plan'} options={planSubMenu} />
 
-            <AppBarSubMenu
-                rootLabel={'Learn'}
-                options={[
-                    {
-                        label: 'Characters',
-                        route: './characters',
-                    },
-                    {
-                        label: 'Upgrades',
-                        route: './upgrades',
-                    },
-                    {
-                        label: 'Rank Lookup',
-                        route: './rankLookup',
-                    },
-                    {
-                        label: 'Campaigns',
-                        route: './campaigns',
-                    },
-                    {
-                        label: 'Dirty Dozen',
-                        route: './dirtyDozen',
-                    },
-                ]}
-            />
+            <AppBarSubMenu rootLabel={'Learn'} options={learnSubMenu} />
         </div>
     );
+
+    const generateMenuItems = (items: MenuItemTP[]) =>
+        items.map(item => (
+            <MenuItem key={item.label} component={Link} to={item.routeWeb} color="inherit">
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText>{item.label}</ListItemText>
+            </MenuItem>
+        ));
 
     const navigationMenu = (
         <Menu
@@ -185,115 +91,19 @@ const TopAppBar = () => {
 
             <Divider />
 
-            <MenuItem component={Link} to={'./wyo'} color="inherit">
-                <ListItemIcon>
-                    <ListIcon />
-                </ListItemIcon>
-                <ListItemText>Who You Own</ListItemText>
-            </MenuItem>
-
-            <MenuItem component={Link} to={'./campaignsProgress'} color="inherit">
-                <ListItemIcon>
-                    <ListIcon />
-                </ListItemIcon>
-                <ListItemText>Campaigns Progress</ListItemText>
-            </MenuItem>
-
-            <MenuItem component={Link} to={'./inventory'} color="inherit">
-                <ListItemIcon>
-                    <ListIcon />
-                </ListItemIcon>
-                <ListItemText>Inventory</ListItemText>
-            </MenuItem>
+            {generateMenuItems(inputSubMenu)}
 
             <Divider />
 
-            <MenuItem component={Link} to={'./goals'} color="inherit">
-                <ListItemIcon>
-                    <TargetIcon />
-                </ListItemIcon>
-                <ListItemText>Goals</ListItemText>
-            </MenuItem>
-
-            <MenuItem component={Link} to={'/plan/dailyRaids'} color="inherit">
-                <ListItemIcon>
-                    <TargetIcon />
-                </ListItemIcon>
-                <ListItemText>Daily Raids</ListItemText>
-            </MenuItem>
+            {generateMenuItems(planSubMenu)}
 
             <Divider />
 
-            <MenuItem component={Link} to={'./le/shadowsun'} color="inherit">
-                <ListItemIcon>
-                    <CharacterImage icon={'ShadowSun.png'} imageSize={30} />
-                </ListItemIcon>
-                <ListItemText>Shadowsun LE</ListItemText>
-            </MenuItem>
-
-            <MenuItem component={Link} to={'./le/aunshi'} color="inherit">
-                <ListItemIcon>
-                    <CharacterImage icon={'Aun-shi.png'} imageSize={30} />
-                </ListItemIcon>
-                <ListItemText>Aun Shi LE</ListItemText>
-            </MenuItem>
-
-            <MenuItem component={Link} to={'./le/ragnar'} color="inherit">
-                <ListItemIcon>
-                    <CharacterImage icon={'Ragnar.png'} imageSize={30} />
-                </ListItemIcon>
-                <ListItemText> Ragnar LE</ListItemText>
-            </MenuItem>
+            {generateMenuItems(learnSubMenu)}
 
             <Divider />
 
-            <MenuItem component={Link} to={'./characters'} color="inherit">
-                <ListItemIcon>
-                    <Diversity3Icon />
-                </ListItemIcon>
-                <ListItemText>Characters</ListItemText>
-            </MenuItem>
-            <MenuItem component={Link} to={'./upgrades'} color="inherit">
-                <ListItemIcon></ListItemIcon>
-                <ListItemText>Upgrades</ListItemText>
-            </MenuItem>
-
-            <MenuItem component={Link} to={'./rankLookup'} color="inherit">
-                <ListItemIcon></ListItemIcon>
-                <ListItemText>RankLookup</ListItemText>
-            </MenuItem>
-            <MenuItem component={Link} to={'./campaigns'} color="inherit">
-                <ListItemIcon></ListItemIcon>
-                <ListItemText>Campaigns</ListItemText>
-            </MenuItem>
-            <MenuItem component={Link} to={'./dirtyDozen'} color="inherit">
-                <ListItemIcon>
-                    <DirtyLensIcon />
-                </ListItemIcon>
-                <ListItemText>Dirty Dozen</ListItemText>
-            </MenuItem>
-
-            <Divider />
-
-            <MenuItem component={Link} to={'./'} color="inherit">
-                <ListItemIcon>
-                    <Home />
-                </ListItemIcon>
-                <ListItemText> Home/F.A.Q.</ListItemText>
-            </MenuItem>
-            <MenuItem component={Link} to={'./contacts'} color="inherit">
-                <ListItemIcon>
-                    <ContactEmergencyIcon />
-                </ListItemIcon>
-                <ListItemText>Contacts</ListItemText>
-            </MenuItem>
-
-            <MenuItem component={Link} to={'./ty'} color="inherit">
-                <ListItemIcon>
-                    <HealthAndSafetyIcon />
-                </ListItemIcon>
-                <ListItemText>Thank You</ListItemText>
-            </MenuItem>
+            {generateMenuItems(miscMenuItems)}
         </Menu>
     );
 

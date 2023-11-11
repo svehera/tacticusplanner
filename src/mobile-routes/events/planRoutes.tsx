@@ -4,14 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { StaticDataService } from '../../services';
 import { CharacterImage } from '../../shared-components/character-image';
 import TargetIcon from '@mui/icons-material/TrackChanges';
+import { menuItemById } from '../../models/menu-items';
 
 export const PlanRoutes = () => {
     const navigate = useNavigate();
-
+    const goalsMenuItem = menuItemById['goals'];
+    const dailyRaidsMenuItem = menuItemById['dailyRaids'];
     return (
         <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
             <Card
-                onClick={() => navigate('/mobile/goals')}
+                onClick={() => navigate(goalsMenuItem.routeMobile)}
                 sx={{
                     width: 350,
                     minHeight: 200,
@@ -19,14 +21,14 @@ export const PlanRoutes = () => {
                 <CardHeader
                     title={
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                            <TargetIcon /> Goals
+                            {goalsMenuItem.icon} {goalsMenuItem.label}
                         </div>
                     }
                 />
             </Card>
 
             <Card
-                onClick={() => navigate('dailyRaids')}
+                onClick={() => navigate(dailyRaidsMenuItem.routeMobile)}
                 sx={{
                     width: 350,
                     minHeight: 200,
@@ -34,11 +36,12 @@ export const PlanRoutes = () => {
                 <CardHeader
                     title={
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                            <TargetIcon /> Daily Raids
+                            {dailyRaidsMenuItem.icon} {dailyRaidsMenuItem.label}
                         </div>
                     }
                 />
             </Card>
+
             {StaticDataService.legendaryEvents.map(le => (
                 <Card
                     key={le.name}

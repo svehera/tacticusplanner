@@ -26,7 +26,7 @@ const inputRoutes: RouteObject[] = [
         element: <InputRoutes />,
     },
     {
-        path: 'wyo',
+        path: 'input/wyo',
         element: <WhoYouOwn />,
     },
     {
@@ -45,7 +45,7 @@ const planRoutes: RouteObject[] = [
         element: <PlanRoutes />,
     },
     {
-        path: 'goals',
+        path: 'plan/goals',
         element: <Goals />,
     },
     {
@@ -53,15 +53,15 @@ const planRoutes: RouteObject[] = [
         element: <DailyRaids />,
     },
     {
-        path: 'le/shadowsun',
+        path: 'plan/le/shadowsun',
         element: <LegendaryEvents id={LegendaryEventEnum.Shadowsun} />,
     },
     {
-        path: 'le/aunshi',
+        path: 'plan/le/aunshi',
         element: <LegendaryEvents id={LegendaryEventEnum.AunShi} />,
     },
     {
-        path: 'le/ragnar',
+        path: 'plan/le/ragnar',
         element: <LegendaryEvents id={LegendaryEventEnum.Ragnar} />,
     },
 ];

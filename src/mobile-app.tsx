@@ -11,26 +11,14 @@ const MobileApp = () => {
     const [value, setValue] = React.useState(1);
 
     useEffect(() => {
-        switch (location.pathname) {
-            case '/mobile/wyo': {
-                setValue(1);
-                break;
-            }
-            case '/mobile/goals': {
-                setValue(2);
-                break;
-            }
-            case '/mobile/le/shadowsun':
-            case '/mobile/le/aunshi':
-            case '/mobile/le/ragnar':
-            case '/mobile/events': {
-                setValue(3);
-                break;
-            }
-            default: {
-                setValue(0);
-                break;
-            }
+        if (location.pathname.includes('input')) {
+            setValue(1);
+        } else if (location.pathname.includes('plan')) {
+            setValue(2);
+        } else if (location.pathname.includes('learn')) {
+            setValue(3);
+        } else {
+            setValue(0);
         }
     }, [location.pathname]);
 

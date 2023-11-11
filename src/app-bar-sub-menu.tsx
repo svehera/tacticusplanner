@@ -3,14 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { Collapse, List, ListItemButton } from '@mui/material';
 import ListItemText from '@mui/material/ListItemText';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { MenuItemTP } from './models/menu-items';
 
-export const AppBarSubMenu = ({
-    rootLabel,
-    options,
-}: {
-    rootLabel: string;
-    options: Array<{ label: string; route: string }>;
-}) => {
+export const AppBarSubMenu = ({ rootLabel, options }: { rootLabel: string; options: Array<MenuItemTP> }) => {
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
 
@@ -38,7 +33,7 @@ export const AppBarSubMenu = ({
                             key={option.label}
                             onClick={() => {
                                 setOpen(false);
-                                navigate(option.route);
+                                navigate(option.routeWeb);
                             }}>
                             <ListItemText primary={option.label} />
                         </ListItemButton>

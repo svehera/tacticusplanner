@@ -61,7 +61,7 @@ export class StaticDataService {
             name: ragnar.name,
             stage: ragnar.eventStage,
             nextEventDate: ragnar.nextEventDate,
-            mobileRoute: '/mobile/le/ragnar',
+            mobileRoute: '/mobile/plan/le/ragnar',
             icon: 'Ragnar.png',
         },
         {
@@ -69,7 +69,7 @@ export class StaticDataService {
             name: aunshi.name,
             stage: aunshi.eventStage,
             nextEventDate: aunshi.nextEventDate,
-            mobileRoute: '/mobile/le/aunshi',
+            mobileRoute: '/mobile/plan/le/aunshi',
             icon: 'Aun-shi.png',
         },
         {
@@ -77,7 +77,7 @@ export class StaticDataService {
             name: shadowsun.name,
             stage: shadowsun.eventStage,
             nextEventDate: shadowsun.nextEventDate,
-            mobileRoute: '/mobile/le/shadowsun',
+            mobileRoute: '/mobile/plan/le/shadowsun',
             icon: 'ShadowSun.png',
         },
     ];
