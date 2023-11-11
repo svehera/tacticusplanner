@@ -1,4 +1,4 @@
-﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
+﻿import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import {
     ICharacter2,
@@ -51,9 +51,36 @@ export const DailyRaids = () => {
     const { dailyRaids, characters, goals, campaignsProgress, dailyRaidsPreferences, inventory } =
         useContext(StoreContext);
 
+    const getSelectedCharacters = () => {
+        return goals
+            .filter(x => x.dailyRaids && x.type === PersonalGoalType.UpgradeRank)
+            .map(g => {
+                const char = characters.find(c => c.name === g.character);
+                if (char) {
+                    return {
+                        id: g.character,
+                        rankStart: char.rank,
+                        rankEnd: g.targetRank!,
+                        appliedUpgrades: char.upgrades,
+                    } as ICharacterRankRange;
+                }
+                return null;
+            })
+            .filter(x => !!x) as ICharacterRankRange[];
+    };
+
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
     const [hasChanges, setHasChanges] = React.useState<boolean>(false);
     const [upgrades, setUpgrades] = React.useState<Record<string, number>>(inventory.upgrades);
+    const [selectedCharacters, setSelectedCharacters] = React.useState<ICharacterRankRange[]>(() =>
+        getSelectedCharacters()
+    );
+    const [pagination, setPagination] = React.useState<{
+        start: number;
+        end: number;
+        completed: boolean;
+    }>({ start: 0, end: 3, completed: true });
+    const [gridLoaded, setGridLoaded] = React.useState<boolean>(false);
 
     const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl2(event.currentTarget);
@@ -97,6 +124,7 @@ export const DailyRaids = () => {
                         return <UpgradeImage material={data.material} iconPath={data.iconPath} />;
                     }
                 },
+                equals: () => true,
                 sortable: false,
                 width: 80,
             },
@@ -176,24 +204,6 @@ export const DailyRaids = () => {
         ];
     }, [dailyRaidsPreferences.useInventory]);
 
-    const charactersList = useMemo<ICharacterRankRange[]>(() => {
-        return goals
-            .filter(x => x.dailyRaids && x.type === PersonalGoalType.UpgradeRank)
-            .map(g => {
-                const char = characters.find(c => c.name === g.character);
-                if (char) {
-                    return {
-                        id: g.character,
-                        rankStart: char.rank,
-                        rankEnd: g.targetRank!,
-                        appliedUpgrades: char.upgrades,
-                    } as ICharacterRankRange;
-                }
-                return null;
-            })
-            .filter(x => !!x) as ICharacterRankRange[];
-    }, [goals]);
-
     const estimatedRanks: IEstimatedRanks = useMemo(() => {
         const result = StaticDataService.getRankUpgradeEstimatedDays(
             {
@@ -204,7 +214,7 @@ export const DailyRaids = () => {
                 preferences: dailyRaidsPreferences,
                 upgrades: dailyRaidsPreferences.useInventory ? upgrades : {},
             },
-            ...charactersList
+            ...selectedCharacters
         );
 
         const currentDay = result.raids[0];
@@ -224,11 +234,11 @@ export const DailyRaids = () => {
                     const notCompletedLocations: IRaidLocation[] = [];
 
                     for (const location of raid.locations) {
-                        const isLocaitonCompleted = dailyRaids.completedBattles.includes(
+                        const isLocationCompleted = dailyRaids.completedBattles.includes(
                             location.campaign + location.battleNumber
                         );
 
-                        if (isLocaitonCompleted) {
+                        if (isLocationCompleted) {
                             completedLocations.push(location);
                         } else {
                             notCompletedLocations.push(location);
@@ -242,9 +252,21 @@ export const DailyRaids = () => {
 
             currentDay.raids = [...notCompletedRaids, ...completedRaids];
         }
-
+        if (result.raids.length > 3) {
+            setPagination(() => ({
+                start: 0,
+                end: 3,
+                completed: false,
+            }));
+        } else {
+            setPagination(() => ({
+                start: 0,
+                end: result.raids.length,
+                completed: true,
+            }));
+        }
         return result;
-    }, [charactersList, dailyRaidsPreferences, upgrades]);
+    }, [selectedCharacters, dailyRaidsPreferences, upgrades]);
 
     return (
         <div>
@@ -264,26 +286,13 @@ export const DailyRaids = () => {
                         horizontal: 'left',
                     }}>
                     <div style={{ margin: 20, width: 300 }}>
-                        <DailyRaidsSettings />
+                        <DailyRaidsSettings close={handleClose2} />
                     </div>
                 </Popover>
 
-                <Accordion>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <span style={{ fontSize: 20 }}>
-                            Selected Characters ({charactersList.length} of{' '}
-                            {goals.filter(x => x.type === PersonalGoalType.UpgradeRank).length})
-                        </span>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Button variant={'contained'} component={Link} to={isMobile ? '/mobile/goals' : '/goals'}>
-                            Go to Goals
-                        </Button>
-                        <CharactersList />
-                    </AccordionDetails>
-                </Accordion>
+                <CharactersList refresh={selected => setSelectedCharacters(selected)} />
 
-                <Accordion>
+                <Accordion TransitionProps={{ unmountOnExit: !gridLoaded }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <span style={{ fontSize: 20 }}>Materials ({estimatedRanks.totalEnergy} Energy Needed)</span>
                     </AccordionSummary>
@@ -314,18 +323,21 @@ export const DailyRaids = () => {
                                     defaultColDef={{
                                         suppressMovable: true,
                                         sortable: true,
-                                        autoHeight: true,
+                                        // autoHeight: true,
                                         wrapText: true,
                                     }}
+                                    rowHeight={60}
+                                    rowBuffer={3}
                                     columnDefs={columnDefs}
                                     rowData={estimatedRanks.materials}
+                                    onGridReady={() => setGridLoaded(true)}
                                 />
                             </div>
                         ) : undefined}
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion defaultExpanded={true}>
+                <Accordion defaultExpanded={true} TransitionProps={{ unmountOnExit: !pagination.completed }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <span style={{ fontSize: 20 }}>Raids ({estimatedRanks.raids.length} Days)</span>
                     </AccordionSummary>
@@ -343,7 +355,7 @@ export const DailyRaids = () => {
                             </Tooltip>
                         ) : undefined}
                         <div style={{ display: 'flex', gap: 10 }}>
-                            {estimatedRanks.raids.map((day, index) => (
+                            {estimatedRanks.raids.slice(pagination.start, pagination.end).map((day, index) => (
                                 <Card
                                     key={index}
                                     sx={{
@@ -367,6 +379,19 @@ export const DailyRaids = () => {
                                     </CardContent>
                                 </Card>
                             ))}
+                            {pagination.completed ? undefined : (
+                                <Button
+                                    style={{ width: 300 }}
+                                    onClick={() =>
+                                        setPagination({
+                                            start: 0,
+                                            end: estimatedRanks.raids.length,
+                                            completed: true,
+                                        })
+                                    }>
+                                    Show All
+                                </Button>
+                            )}
                         </div>
                     </AccordionDetails>
                 </Accordion>
@@ -375,7 +400,7 @@ export const DailyRaids = () => {
     );
 };
 
-const CharactersList = () => {
+const CharactersList = ({ refresh }: { refresh: (chars: ICharacterRankRange[]) => void }) => {
     const dispatch = useContext(DispatchContext);
     const { goals, characters } = useContext(StoreContext);
 
@@ -384,12 +409,14 @@ const CharactersList = () => {
 
     const [editGoal, setEditGoal] = useState<IPersonalGoal | null>(null);
     const [editCharacter, setEditCharacter] = useState<ICharacter2>(characters[0]);
+    const [hasChanges, setHasChanges] = React.useState<boolean>(false);
 
     const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked(upgradeRankGoals.map(() => event.target.checked));
         upgradeRankGoals.forEach(goal => {
             dispatch.goals({ type: 'UpdateDailyRaids', goalId: goal.id, value: event.target.checked });
         });
+        setHasChanges(true);
     };
 
     const handleChildChange = (index: number, goalId: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -399,6 +426,7 @@ const CharactersList = () => {
             return [...result];
         });
         dispatch.goals({ type: 'UpdateDailyRaids', goalId, value: event.target.checked });
+        setHasChanges(true);
     };
 
     const handleEdit = (goal: IPersonalGoal) => {
@@ -412,6 +440,24 @@ const CharactersList = () => {
                 upgrades: relatedCharacter.upgrades,
             });
         }
+    };
+
+    const getSelectedCharacters = () => {
+        return goals
+            .filter(x => x.dailyRaids && x.type === PersonalGoalType.UpgradeRank)
+            .map(g => {
+                const char = characters.find(c => c.name === g.character);
+                if (char) {
+                    return {
+                        id: g.character,
+                        rankStart: char.rank,
+                        rankEnd: g.targetRank!,
+                        appliedUpgrades: char.upgrades,
+                    } as ICharacterRankRange;
+                }
+                return null;
+            })
+            .filter(x => !!x) as ICharacterRankRange[];
     };
 
     const children = (
@@ -435,29 +481,51 @@ const CharactersList = () => {
     );
 
     return (
-        <div>
-            <FormControlLabel
-                label="Select all"
-                control={
-                    <Checkbox
-                        checked={checked.every(x => x)}
-                        indeterminate={checked.some(x => x) && !checked.every(x => x)}
-                        onChange={handleSelectAll}
+        <Accordion TransitionProps={{ unmountOnExit: true }}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <span style={{ fontSize: 20 }}>
+                    Selected Characters ({checked.filter(x => x).length} of {upgradeRankGoals.length})
+                </span>
+            </AccordionSummary>
+            <AccordionDetails>
+                <Button variant={'contained'} component={Link} to={isMobile ? '/mobile/goals' : '/goals'}>
+                    Go to Goals
+                </Button>
+                {hasChanges ? (
+                    <Button
+                        disabled={!hasChanges}
+                        onClick={() => {
+                            refresh(getSelectedCharacters());
+                            setHasChanges(false);
+                        }}>
+                        <RefreshIcon /> Refresh Estimate
+                    </Button>
+                ) : undefined}
+                <div>
+                    <FormControlLabel
+                        label="Select all"
+                        control={
+                            <Checkbox
+                                checked={checked.every(x => x)}
+                                indeterminate={checked.some(x => x) && !checked.every(x => x)}
+                                onChange={handleSelectAll}
+                            />
+                        }
                     />
-                }
-            />
-            {children}
-            {editGoal ? (
-                <EditGoalDialog
-                    isOpen={true}
-                    goal={editGoal}
-                    character={editCharacter}
-                    onClose={() => {
-                        setEditGoal(null);
-                    }}
-                />
-            ) : undefined}
-        </div>
+                    {children}
+                    {editGoal ? (
+                        <EditGoalDialog
+                            isOpen={true}
+                            goal={editGoal}
+                            character={editCharacter}
+                            onClose={() => {
+                                setEditGoal(null);
+                            }}
+                        />
+                    ) : undefined}
+                </div>
+            </AccordionDetails>
+        </Accordion>
     );
 };
 
@@ -501,6 +569,7 @@ const MaterialItem = ({
                         location={x}
                         key={x.campaign + x.battleNumber}
                         material={raid.material}
+                        materialTotalCount={raid.totalCount}
                         changed={changed}
                         isFirstDay={isFirstDay}
                     />
@@ -515,13 +584,15 @@ const RaidItem = ({
     location,
     changed,
     isFirstDay,
+    materialTotalCount,
 }: {
     isFirstDay: boolean;
     material: string;
+    materialTotalCount: number;
     location: IRaidLocation;
     changed: () => void;
 }) => {
-    const { dailyRaids } = useContext(StoreContext);
+    const { dailyRaids, inventory } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const [itemsObtained, setItemsObtained] = useState<string | number>(Math.round(location.farmedItems));
 
@@ -532,6 +603,8 @@ const RaidItem = ({
     const handleItemsObtainedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setItemsObtained(event.target.value);
     };
+
+    const collectedItems = useMemo(() => inventory.upgrades[material] ?? 0, [inventory.upgrades]);
 
     const handleAdd = () => {
         const value = itemsObtained === '' ? 0 : Number(itemsObtained);
@@ -601,12 +674,20 @@ const RaidItem = ({
                     }
                     sx={{ margin: 0 }}
                     labelPlacement={'top'}
-                    label={<span style={{ fontSize: 10 }}>Items Obtained</span>}
+                    label={
+                        <Tooltip title={`${collectedItems}/${materialTotalCount} Items`}>
+                            <span style={{ fontSize: 12, fontStyle: 'italic' }}>
+                                {collectedItems}/{materialTotalCount} Items
+                            </span>
+                        </Tooltip>
+                    }
                 />
-                <Tooltip title={'Add to inventory'}>
-                    <Button size={'small'} onClick={handleAdd} disabled={isLocationCompleted}>
-                        Add
-                    </Button>
+                <Tooltip title={'Add to inventory'} hidden={isLocationCompleted}>
+                    <span>
+                        <Button size={'small'} onClick={handleAdd} disabled={isLocationCompleted}>
+                            Add
+                        </Button>
+                    </span>
                 </Tooltip>
             </div>
         </li>

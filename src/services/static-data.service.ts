@@ -450,6 +450,7 @@ export class StaticDataService {
                 const materialRaids: IMaterialRaid = {
                     material: material.material,
                     materialIconPath: material.iconPath,
+                    totalCount: material.count,
                     locations: [],
                     characters: material.characters,
                 };

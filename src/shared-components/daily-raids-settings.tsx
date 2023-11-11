@@ -1,39 +1,25 @@
-﻿import React, { useCallback, useContext } from 'react';
-import { Switch, FormControlLabel, FormGroup, Box, Slider, Input } from '@mui/material';
+﻿import React, { useCallback, useContext, useMemo } from 'react';
+import { Checkbox, FormControlLabel, FormGroup, Box, Slider, Input } from '@mui/material';
 import { IDailyRaidsPreferences } from '../models/interfaces';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
-const DailyRaidsSettings = () => {
+const DailyRaidsSettings = ({ close }: { close: () => void }) => {
     const dispatch = useContext(DispatchContext);
     const { dailyRaidsPreferences } = useContext(StoreContext);
+    const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
     const [dailyEnergy, setDailyEnergy] = React.useState(dailyRaidsPreferences.dailyEnergy);
     const [shardsEnergy, setShardsEnergy] = React.useState<number | string>(dailyRaidsPreferences.shardsEnergy);
-    const [updateTimeout, setUpdateTimeout] = React.useState<NodeJS.Timeout | undefined>();
 
     const updatePreferences = useCallback((setting: keyof IDailyRaidsPreferences, value: boolean) => {
-        dispatch.dailyRaidsPreferences({
-            type: 'Update',
-            setting,
-            value,
-        });
+        setDailyRaidsPreferencesForm(curr => ({ ...curr, [setting]: value }));
     }, []);
 
     const handleEnergyChange = (value: number | number[]) => {
         if (typeof value === 'number') {
             setDailyEnergy(value);
-
-            if (updateTimeout) {
-                clearTimeout(updateTimeout);
-            }
-            const timeoutId = setTimeout(() => {
-                dispatch.dailyRaidsPreferences({
-                    type: 'UpdateEnergy',
-                    value,
-                });
-            }, 500);
-
-            setUpdateTimeout(timeoutId);
+            setDailyRaidsPreferencesForm(curr => ({ ...curr, dailyEnergy: value }));
         }
     };
 
@@ -41,45 +27,43 @@ const DailyRaidsSettings = () => {
         const rawValue = event.target.value;
         const value = event.target.value === '' ? 0 : Number(event.target.value);
         setShardsEnergy(rawValue);
-        if (updateTimeout) {
-            clearTimeout(updateTimeout);
-        }
-        const timeoutId = setTimeout(() => {
-            dispatch.dailyRaidsPreferences({
-                type: 'UpdateShardsEnergy',
-                value,
-            });
-        }, 500);
-
-        setUpdateTimeout(timeoutId);
+        setDailyRaidsPreferencesForm(curr => ({ ...curr, shardsEnergy: value }));
     };
 
-    const energyMarks = [
-        {
-            value: 288,
-            label: '',
-        },
-        {
-            value: 288 + 50,
-            label: '25 BS',
-        },
-        {
-            value: 288 + 50 + 100,
-            label: '50 BS',
-        },
-        {
-            value: 288 + 50 + 100 + 100,
-            label: '110 BS',
-        },
-        {
-            value: 288 + 50 + 100 + 100 + 100,
-            label: '250 BS',
-        },
-        {
-            value: 288 + 50 + 100 + 100 + 100 + 100,
-            label: '500 BS',
-        },
-    ];
+    const saveChanges = () => {
+        dispatch.dailyRaidsPreferences({ type: 'Set', value: dailyRaidsPreferencesForm });
+        close();
+    };
+
+    const energyMarks = useMemo(
+        () => [
+            {
+                value: 288,
+                label: '',
+            },
+            {
+                value: 288 + 50,
+                label: '25 BS',
+            },
+            {
+                value: 288 + 50 + 100,
+                label: '50 BS',
+            },
+            {
+                value: 288 + 50 + 100 + 100,
+                label: '110 BS',
+            },
+            {
+                value: 288 + 50 + 100 + 100 + 100,
+                label: '250 BS',
+            },
+            {
+                value: 288 + 50 + 100 + 100 + 100 + 100,
+                label: '500 BS',
+            },
+        ],
+        []
+    );
 
     function valueLabelFormat(value: number) {
         return energyMarks.find(mark => mark.value === value)?.value;
@@ -122,7 +106,7 @@ const DailyRaidsSettings = () => {
             />
             <FormControlLabel
                 control={
-                    <Switch
+                    <Checkbox
                         checked={dailyRaidsPreferences.useCampaignsProgress}
                         onChange={event => updatePreferences('useCampaignsProgress', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
@@ -133,7 +117,7 @@ const DailyRaidsSettings = () => {
 
             <FormControlLabel
                 control={
-                    <Switch
+                    <Checkbox
                         checked={dailyRaidsPreferences.useMostEfficientNodes}
                         onChange={event => updatePreferences('useMostEfficientNodes', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
@@ -144,7 +128,7 @@ const DailyRaidsSettings = () => {
 
             <FormControlLabel
                 control={
-                    <Switch
+                    <Checkbox
                         checked={dailyRaidsPreferences.useMoreEfficientNodes}
                         onChange={event => updatePreferences('useMoreEfficientNodes', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
@@ -155,7 +139,7 @@ const DailyRaidsSettings = () => {
 
             <FormControlLabel
                 control={
-                    <Switch
+                    <Checkbox
                         checked={dailyRaidsPreferences.useLeastEfficientNodes}
                         onChange={event => updatePreferences('useLeastEfficientNodes', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
@@ -166,7 +150,7 @@ const DailyRaidsSettings = () => {
 
             <FormControlLabel
                 control={
-                    <Switch
+                    <Checkbox
                         checked={dailyRaidsPreferences.useInventory}
                         onChange={event => updatePreferences('useInventory', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
@@ -174,6 +158,10 @@ const DailyRaidsSettings = () => {
                 }
                 label="Use inventory"
             />
+
+            <Button type={'button'} onClick={saveChanges} variant={'outlined'}>
+                Save
+            </Button>
         </FormGroup>
     );
 };

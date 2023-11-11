@@ -609,6 +609,7 @@ export interface IDailyRaid {
 
 export interface IMaterialRaid {
     material: string;
+    totalCount: number;
     materialIconPath: string;
     characters: string[];
     locations: Array<IRaidLocation>;
