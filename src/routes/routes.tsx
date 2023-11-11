@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { RouteObject } from 'react-router-dom';
+import { redirect, RouteObject } from 'react-router-dom';
 
 import DesktopApp from '../desktop-app';
 import { About } from './root/about';
@@ -19,6 +19,7 @@ import { RankLookup } from './tables/rankLookup';
 import { DailyRaids } from './tables/dailyRaids';
 import { CampaignsProgress } from './campaigns-progress';
 import { Inventory } from './inventory';
+import { Home } from '../features/misc/home/home';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -94,7 +95,11 @@ export const appRoutes: () => RouteObject[] = () => [
         children: [
             {
                 path: '/',
-                element: <About />,
+                loader: () => redirect('home'),
+            },
+            {
+                path: 'home',
+                element: <Home />,
             },
             ...inputRoutes,
             ...planRoutes,

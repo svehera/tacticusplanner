@@ -65,7 +65,7 @@ export const menuItemById = {
     campaigns: new MenuItemTP('Campaigns', <FormatListNumberedIcon />, '/learn/campaigns'),
     dirtyDozen: new MenuItemTP('Dirty Dozen', <DirtyLensIcon />, '/learn/dirtyDozen'),
 
-    home: new MenuItemTP('Home', <HomeIcon />, '/home'),
+    home: new MenuItemTP('Home', <HomeIcon />, '/home', 'Tacticus Planner'),
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
     ty: new MenuItemTP('Thank You', <HealthAndSafetyIcon />, '/ty', 'Thank You Page'),
 };

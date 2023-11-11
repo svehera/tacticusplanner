@@ -124,15 +124,17 @@ export const Goals = () => {
     );
 };
 
-export default function GoalCard({
+export const GoalCard = ({
     goal,
     menuItemSelect,
     higherPriorityGoals,
+    onClick,
 }: {
     goal: IPersonalGoal;
     higherPriorityGoals: IPersonalGoal[];
-    menuItemSelect: (item: 'edit' | 'delete') => void;
-}) {
+    menuItemSelect?: (item: 'edit' | 'delete') => void;
+    onClick?: () => void;
+}) => {
     const { characters, campaignsProgress, dailyRaidsPreferences, inventory } = useContext(StoreContext);
     const character = characters.find(x => x.name === goal.character) as ICharacter2;
     const isGoalCompleted = useMemo(() => {
@@ -185,15 +187,17 @@ export default function GoalCard({
     }, [character.name, character.rank, goal.targetRank, higherPriorityGoals]);
 
     return (
-        <React.Fragment>
-            <Card
-                sx={{
-                    width: 350,
-                    minHeight: 200,
-                    backgroundColor: isGoalCompleted ? 'lightgreen' : 'white',
-                }}>
-                <CardHeader
-                    action={
+        <Card
+            onClick={onClick}
+            sx={{
+                width: 350,
+                minHeight: 200,
+                backgroundColor: isGoalCompleted ? 'lightgreen' : 'white',
+                cursor: onClick ? 'pointer' : undefined,
+            }}>
+            <CardHeader
+                action={
+                    menuItemSelect ? (
                         <React.Fragment>
                             {!isGoalCompleted ? (
                                 <IconButton onClick={() => menuItemSelect('edit')}>
@@ -204,35 +208,35 @@ export default function GoalCard({
                                 <DeleteForever fontSize="small" />
                             </IconButton>
                         </React.Fragment>
-                    }
-                    title={
-                        <div style={{ display: 'flex', gap: 5 }}>
-                            <span>#{goal.priority}</span>{' '}
-                            <CharacterTitle character={character} short={true} imageSize={30} />
-                        </div>
-                    }
-                    subheader={PersonalGoalType[goal.type]}
-                />
-                <CardContent>
-                    {goal.type === PersonalGoalType.UpgradeRank ? (
-                        <div>
-                            <div style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                                <RankImage rank={character.rank} /> <ArrowForward />{' '}
-                                <RankImage rank={goal.targetRank ?? 0} />
-                            </div>
-                            <div>Days Left: {estimatedDays}</div>
-                        </div>
-                    ) : undefined}
-
-                    {goal.type === PersonalGoalType.Ascend ? (
+                    ) : undefined
+                }
+                title={
+                    <div style={{ display: 'flex', gap: 5 }}>
+                        <span>#{goal.priority}</span>{' '}
+                        <CharacterTitle character={character} short={true} imageSize={30} />
+                    </div>
+                }
+                subheader={PersonalGoalType[goal.type]}
+            />
+            <CardContent>
+                {goal.type === PersonalGoalType.UpgradeRank ? (
+                    <div>
                         <div style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                            <RarityImage rarity={character.rarity} />
-                            <ArrowForward /> <RarityImage rarity={goal.targetRarity ?? 0} />
+                            <RankImage rank={character.rank} /> <ArrowForward />{' '}
+                            <RankImage rank={goal.targetRank ?? 0} />
                         </div>
-                    ) : undefined}
-                    <span>{goal.notes}</span>
-                </CardContent>
-            </Card>
-        </React.Fragment>
+                        <div>Days Left: {estimatedDays}</div>
+                    </div>
+                ) : undefined}
+
+                {goal.type === PersonalGoalType.Ascend ? (
+                    <div style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+                        <RarityImage rarity={character.rarity} />
+                        <ArrowForward /> <RarityImage rarity={goal.targetRarity ?? 0} />
+                    </div>
+                ) : undefined}
+                <span>{goal.notes}</span>
+            </CardContent>
+        </Card>
     );
-}
+};

@@ -4,7 +4,7 @@ import { RouteObject } from 'react-router-dom';
 
 import MobileApp from '../mobile-app';
 import { LegendaryEvents } from './legendary-events/legendary-events';
-import { Home } from './home/home';
+import { MobileHome } from './home/mobileHome';
 import { Goals } from '../routes/goals/goals';
 import { WhoYouOwn } from '../routes/who-you-own/who-you-own';
 import { PlanRoutes } from './events/planRoutes';
@@ -100,7 +100,7 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
         children: [
             {
                 path: '/mobile',
-                element: <Home />,
+                element: <MobileHome />,
             },
             ...inputRoutes,
             ...planRoutes,
