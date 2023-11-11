@@ -615,13 +615,14 @@ const RaidItem = ({
                 upgrade: material,
                 value,
             });
-            dispatch.dailyRaids({
-                type: 'AddCompletedBattle',
-                battle: location.campaign + location.battleNumber,
-            });
             enqueueSnackbar(`Added ${value} items for ${material}`, { variant: 'success' });
             changed();
         }
+
+        dispatch.dailyRaids({
+            type: 'AddCompletedBattle',
+            battle: location.campaign + location.battleNumber,
+        });
     };
 
     return (
