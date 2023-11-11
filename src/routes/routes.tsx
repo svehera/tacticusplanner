@@ -94,10 +94,6 @@ export const appRoutes: () => RouteObject[] = () => [
         element: <DesktopApp />,
         children: [
             {
-                path: '/',
-                loader: () => redirect('home'),
-            },
-            {
                 path: 'home',
                 element: <Home />,
             },

@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { RouteObject } from 'react-router-dom';
+import { redirect, RouteObject } from 'react-router-dom';
 
 import MobileApp from '../mobile-app';
 import { LegendaryEvents } from './legendary-events/legendary-events';
@@ -100,6 +100,10 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
         children: [
             {
                 path: '/mobile',
+                loader: () => redirect('/mobile/home'),
+            },
+            {
+                path: 'home',
                 element: <MobileHome />,
             },
             ...inputRoutes,
