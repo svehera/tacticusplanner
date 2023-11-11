@@ -354,7 +354,7 @@ export const DailyRaids = () => {
                                 </Button>
                             </Tooltip>
                         ) : undefined}
-                        <div style={{ display: 'flex', gap: 10 }}>
+                        <div style={{ display: 'flex', gap: 10, overflow: 'auto' }}>
                             {estimatedRanks.raids.slice(pagination.start, pagination.end).map((day, index) => (
                                 <Card
                                     key={index}
@@ -381,7 +381,8 @@ export const DailyRaids = () => {
                             ))}
                             {pagination.completed ? undefined : (
                                 <Button
-                                    style={{ width: 300 }}
+                                    variant={'outlined'}
+                                    style={{ minWidth: 300 }}
                                     onClick={() =>
                                         setPagination({
                                             start: 0,

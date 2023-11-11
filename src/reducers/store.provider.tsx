@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { isEqual } from 'lodash';
 import { enqueueSnackbar } from 'notistack';
 
-import { IDispatchContext, IGlobalState } from '../models/interfaces';
+import { IDailyRaids, IDispatchContext, IGlobalState } from '../models/interfaces';
 import { charactersReducer } from './characters.reducer';
 import { viewPreferencesReducer } from './view-settings.reducer';
 import { autoTeamsPreferencesReducer } from './auto-teams-settings.reducer';
@@ -190,8 +190,22 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         }
     }, [modified]);
 
+    function doDailyRefresh(lastRefreshDateUTC: string): void {
+        const currentDate = new Date();
+
+        const lastRefreshDate = new Date(lastRefreshDateUTC);
+
+        const isYesterdayOrBefore = lastRefreshDate.getDate() < currentDate.getDate();
+
+        if (isYesterdayOrBefore) {
+            dispatch.dailyRaids({ type: 'ResetCompletedBattlesDaily' });
+            enqueueSnackbar('Daily Reset Completed', { variant: 'info' });
+        }
+    }
+
     useEffect(() => {
         if (!isAuthenticated) {
+            doDailyRefresh(dailyRaids.lastRefreshDateUTC);
             return;
         }
         getUserDataApi()
@@ -219,11 +233,13 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                         dispatch.setStore(newState, false, false);
                         localStore.setData(GlobalState.toStore(newState));
                         enqueueSnackbar('Synced with latest server data.', { variant: 'info' });
+                        doDailyRefresh(newState.dailyRaids.lastRefreshDateUTC);
                     }
 
                     setModifiedDate(serverLastModified);
                     localStore.setData({ modifiedDate: serverLastModified });
                 } else if (shouldPushLocalData) {
+                    doDailyRefresh(dailyRaids.lastRefreshDateUTC);
                     setUserDataApi(GlobalState.toStore(globalState))
                         .then(() => enqueueSnackbar('Pushed local data to server.', { variant: 'info' }))
                         .catch((err: AxiosError<IErrorResponse>) => {
@@ -268,24 +284,6 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         }, sixtySeconds);
 
         return () => clearInterval(timerId);
-    }, []);
-
-    useEffect(() => {
-        if (dailyRaids.lastRefreshDateUTC) {
-            const currentDate = new Date();
-
-            const lastRefreshDate = new Date(currentDate);
-
-            const isYesterdayOrBefore = lastRefreshDate.getDate() < currentDate.getDate();
-
-            if (isYesterdayOrBefore) {
-                dispatch.dailyRaids({ type: 'ResetCompletedBattlesDaily' });
-                enqueueSnackbar('Daily Reset Completed', { variant: 'info' });
-            }
-        } else {
-            dispatch.dailyRaids({ type: 'ResetCompletedBattlesDaily' });
-            enqueueSnackbar('Daily Reset Completed', { variant: 'info' });
-        }
     }, []);
 
     return (

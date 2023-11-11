@@ -104,7 +104,7 @@ export const defaultData: IPersonalData2 = {
     seenAppVersion: undefined,
     dailyRaids: {
         completedBattles: [],
-        lastRefreshDateUTC: '',
+        lastRefreshDateUTC: new Date().toUTCString(),
     },
     autoTeamsPreferences: {
         preferCampaign: false,

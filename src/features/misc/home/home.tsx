@@ -27,7 +27,7 @@ export const Home = () => {
     return (
         <div>
             <Thanks />
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
                 <div>
                     <h3 style={{ textAlign: 'center' }}>Next Legendary Event</h3>
                     <Card
