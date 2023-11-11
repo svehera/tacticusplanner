@@ -270,6 +270,24 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         return () => clearInterval(timerId);
     }, []);
 
+    useEffect(() => {
+        if (dailyRaids.lastRefreshDateUTC) {
+            const currentDate = new Date();
+
+            const lastRefreshDate = new Date(currentDate);
+
+            const isYesterdayOrBefore = lastRefreshDate.getDate() < currentDate.getDate();
+
+            if (isYesterdayOrBefore) {
+                dispatch.dailyRaids({ type: 'ResetCompletedBattlesDaily' });
+                enqueueSnackbar('Daily Reset Completed', { variant: 'info' });
+            }
+        } else {
+            dispatch.dailyRaids({ type: 'ResetCompletedBattlesDaily' });
+            enqueueSnackbar('Daily Reset Completed', { variant: 'info' });
+        }
+    }, []);
+
     return (
         <DispatchContext.Provider value={dispatch}>
             <StoreContext.Provider value={globalState}> {children} </StoreContext.Provider>

@@ -8,9 +8,12 @@ export type DailyRaidsAction =
     | {
           type: 'ResetCompletedBattles';
       }
+    | {
+          type: 'ResetCompletedBattlesDaily';
+      }
     | SetStateAction<IDailyRaids>;
 
-export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction) => {
+export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction): IDailyRaids => {
     switch (action.type) {
         case 'Set': {
             return action.value;
@@ -22,7 +25,10 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction) 
             };
         }
         case 'ResetCompletedBattles': {
-            return { ...state, completedBattles: [], lastRefreshDate: new Date().toUTCString() };
+            return { ...state, completedBattles: [] };
+        }
+        case 'ResetCompletedBattlesDaily': {
+            return { ...state, completedBattles: [], lastRefreshDateUTC: new Date().toUTCString() };
         }
         default: {
             throw new Error();
