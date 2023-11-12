@@ -192,10 +192,14 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
     function doDailyRefresh(lastRefreshDateUTC: string): void {
         const currentDate = new Date();
-
         const lastRefreshDate = new Date(lastRefreshDateUTC);
 
-        const isYesterdayOrBefore = lastRefreshDate.getDate() < currentDate.getDate();
+        // Set the hours, minutes, seconds, and milliseconds to 0 for accurate comparison
+        currentDate.setUTCHours(0, 0, 0, 0);
+        lastRefreshDate.setUTCHours(0, 0, 0, 0);
+
+        // Compare timestamps to check if last refresh date is yesterday or before
+        const isYesterdayOrBefore = lastRefreshDate.getTime() < currentDate.getTime();
 
         if (isYesterdayOrBefore) {
             dispatch.dailyRaids({ type: 'ResetCompletedBattlesDaily' });
