@@ -372,6 +372,7 @@ export class StaticDataService {
             result
                 .map(x =>
                     this.calculateMaterialData(
+                        settings.campaignsProgress,
                         x,
                         this.selectBestLocations(settings, x.locationsComposed ?? []),
                         settings.upgrades
@@ -531,10 +532,15 @@ export class StaticDataService {
     }
 
     private static calculateMaterialData(
+        campaignsProgress: ICampaignsProgress,
         material: IMaterialRecipeIngredientFull,
         bestLocations: ICampaignBattleComposed[],
         ownedUpgrades: Record<string, number>
     ): IMaterialEstimated2 | null {
+        const lockedLocations = (material.locationsComposed ?? []).filter(location => {
+            const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
+            return location.nodeNumber > campaignProgress;
+        });
         const selectedLocations = bestLocations?.length ? bestLocations : material.locationsComposed ?? [];
 
         const ownedCount = ownedUpgrades[material.material] ?? 0;
@@ -577,7 +583,7 @@ export class StaticDataService {
                   })
                   .map(x => x.campaign + ' ' + x.nodeNumber)
                   .join(', ') ?? ''
-            : '';
+            : lockedLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
 
         return {
             expectedEnergy,
