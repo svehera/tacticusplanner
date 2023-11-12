@@ -48,6 +48,7 @@ export const Inventory = () => {
                 },
                 sortable: false,
                 width: 80,
+                equals: () => true,
             },
             {
                 field: 'quantity',
@@ -144,7 +145,9 @@ export const Inventory = () => {
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 220px)', width: '100%' }}>
                 <AgGridReact
                     singleClickEdit={true}
-                    defaultColDef={{ sortable: true, autoHeight: true, wrapText: true }}
+                    defaultColDef={{ sortable: true, wrapText: true, suppressMovable: true }}
+                    rowHeight={60}
+                    rowBuffer={3}
                     columnDefs={columnDefs}
                     onCellEditingStopped={saveChanges}
                     rowData={rows}></AgGridReact>

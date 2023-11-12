@@ -323,7 +323,6 @@ export const DailyRaids = () => {
                                     defaultColDef={{
                                         suppressMovable: true,
                                         sortable: true,
-                                        // autoHeight: true,
                                         wrapText: true,
                                     }}
                                     rowHeight={60}
