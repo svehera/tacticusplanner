@@ -36,7 +36,7 @@ export const Home = () => {
                     justifyContent: 'center',
                 }}>
                 <div>
-                    <h3 style={{ textAlign: 'center' }}>Next Legendary Event</h3>
+                    <h3 style={{ textAlign: 'center' }}>Upcoming Legendary Event</h3>
                     <Card
                         onClick={() => navigate(isMobile ? nextLeMenuItem.routeMobile : nextLeMenuItem.routeWeb)}
                         sx={{

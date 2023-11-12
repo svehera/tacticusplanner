@@ -58,6 +58,10 @@ export const CharacterUpgrades = ({
             newUpgrades = formData.newUpgrades.filter(x => x !== value);
         }
 
+        if (!newUpgrades.length) {
+            setUpdateInventory(false);
+        }
+
         setFormData({
             ...formData,
             currentUpgrades,
