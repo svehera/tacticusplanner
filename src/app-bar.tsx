@@ -115,7 +115,7 @@ const TopAppBar = () => {
                         style={{ cursor: 'pointer' }}
                         variant={isTabletOrMobile ? 'h5' : 'h4'}
                         component="div"
-                        onClick={() => navigate('./')}>
+                        onClick={() => navigate('./home')}>
                         {title}
                     </Typography>
                     <div style={{ display: 'flex', alignItems: 'center' }}>

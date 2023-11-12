@@ -27,7 +27,14 @@ export const Home = () => {
     return (
         <div>
             <Thanks />
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}>
+            <div
+                style={{
+                    display: 'flex',
+                    gap: 10,
+                    flexWrap: 'wrap',
+                    alignItems: 'flex-start',
+                    justifyContent: 'center',
+                }}>
                 <div>
                     <h3 style={{ textAlign: 'center' }}>Next Legendary Event</h3>
                     <Card
@@ -81,6 +88,13 @@ export const Home = () => {
                                 </div>
                             }
                         />
+                        <CardContent>
+                            <ul>
+                                {dailyRaids.completedBattles.map(x => (
+                                    <li key={x}>{x}</li>
+                                ))}
+                            </ul>
+                        </CardContent>
                     </Card>
                 </div>
             </div>
