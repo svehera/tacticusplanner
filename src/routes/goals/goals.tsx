@@ -143,7 +143,7 @@ export const GoalCard = ({
             (goal.type === PersonalGoalType.Ascend && character.rarity >= goal.targetRarity!) ||
             (goal.type === PersonalGoalType.Unlock && character.rank > Rank.Locked)
         );
-    }, []);
+    }, [goal, character]);
 
     const estimatedDays = useMemo(() => {
         if (goal.type !== PersonalGoalType.UpgradeRank) {
@@ -225,7 +225,7 @@ export const GoalCard = ({
                             <RankImage rank={character.rank} /> <ArrowForward />{' '}
                             <RankImage rank={goal.targetRank ?? 0} />
                         </div>
-                        <div>Days Left: {estimatedDays}</div>
+                        {isGoalCompleted ? undefined : <div>Days Left: {estimatedDays}</div>}
                     </div>
                 ) : undefined}
 
