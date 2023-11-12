@@ -107,7 +107,7 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
             <FormControlLabel
                 control={
                     <Checkbox
-                        checked={dailyRaidsPreferences.useCampaignsProgress}
+                        checked={dailyRaidsPreferencesForm.useCampaignsProgress}
                         onChange={event => updatePreferences('useCampaignsProgress', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
@@ -118,7 +118,7 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
             <FormControlLabel
                 control={
                     <Checkbox
-                        checked={dailyRaidsPreferences.useMostEfficientNodes}
+                        checked={dailyRaidsPreferencesForm.useMostEfficientNodes}
                         onChange={event => updatePreferences('useMostEfficientNodes', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
@@ -129,7 +129,7 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
             <FormControlLabel
                 control={
                     <Checkbox
-                        checked={dailyRaidsPreferences.useMoreEfficientNodes}
+                        checked={dailyRaidsPreferencesForm.useMoreEfficientNodes}
                         onChange={event => updatePreferences('useMoreEfficientNodes', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
@@ -140,7 +140,7 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
             <FormControlLabel
                 control={
                     <Checkbox
-                        checked={dailyRaidsPreferences.useLeastEfficientNodes}
+                        checked={dailyRaidsPreferencesForm.useLeastEfficientNodes}
                         onChange={event => updatePreferences('useLeastEfficientNodes', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
@@ -151,7 +151,7 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
             <FormControlLabel
                 control={
                     <Checkbox
-                        checked={dailyRaidsPreferences.useInventory}
+                        checked={dailyRaidsPreferencesForm.useInventory}
                         onChange={event => updatePreferences('useInventory', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
