@@ -32,6 +32,7 @@ export const DirtyDozen = () => {
                 return <Score value={value ?? 0} bgcolorClass={bgcolorClass} />;
             },
             headerClass: 'score',
+            sortingOrder: ['desc', null],
         } as ColDef<IDirtyDozenChar>;
     };
 
