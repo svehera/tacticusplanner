@@ -65,6 +65,10 @@
       "minor": [
         {
           "text": "Updated characters order on Who You Own to be the same as in the game"
+        },
+        {
+          "text": "Updated Nandi's Dirty Dozen to October 2023 data",
+          "route": "learn/dirtyDozen"
         }
       ],
       "bugFixes": [

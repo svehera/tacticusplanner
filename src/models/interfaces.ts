@@ -103,6 +103,7 @@ export interface IDirtyDozenChar {
     GRNecron: number;
     GROrk: number;
     GRMortarion: number;
+    GRScreamer: number;
 }
 
 export type ICharacter = IUnitData & IPersonalCharacter;
