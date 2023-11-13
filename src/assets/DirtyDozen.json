@@ -2,181 +2,301 @@
   {
     "Name": "Eldryon",
     "Rank": 1,
-    "Pvp": 4,
+    "Pvp": 3.5,
     "GRTyranid": 5,
     "GRNecron": 5,
     "GROrk": 5,
-    "GRMortarion": 5
+    "GRMortarion": 4.5,
+    "GRScreamer": 5
   },
   {
     "Name": "Maugan Ra",
     "Rank": 2,
     "Pvp": 3.5,
-    "GRTyranid": 5,
+    "GRTyranid": 4,
     "GRNecron": 5,
     "GROrk": 5,
-    "GRMortarion": 4
-  },
-  {
-    "Name": "Thaddeus noble",
-    "Rank": 3,
-    "Pvp": 4.5,
-    "GRTyranid": 4,
-    "GRNecron": 4,
-    "GROrk": 4,
-    "GRMortarion": 4.5
+    "GRMortarion": 3.5,
+    "GRScreamer": 5
   },
   {
     "Name": "Marneus Calgar",
+    "Rank": 3,
+    "Pvp": 5,
+    "GRTyranid": 4.5,
+    "GRNecron": 4.5,
+    "GROrk": 4.5,
+    "GRMortarion": 2.5,
+    "GRScreamer": 4.5
+  },
+  {
+    "Name": "Thaddeus Noble",
     "Rank": 4,
-    "Pvp": 4.5,
-    "GRTyranid": 4,
-    "GRNecron": 4.5,
-    "GROrk": 4.5,
-    "GRMortarion": 3
-  },
-  {
-    "Name": "Bellator",
-    "Rank": 5,
-    "Pvp": 3.5,
-    "GRTyranid": 5,
-    "GRNecron": 4.5,
-    "GROrk": 4.5,
-    "GRMortarion": 1
-  },
-  {
-    "Name": "Aethana",
-    "Rank": 6,
-    "Pvp": 3.5,
-    "GRTyranid": 3.5,
-    "GRNecron": 4,
-    "GROrk": 4.5,
-    "GRMortarion": 3
-  },
-  {
-    "Name": "Commissar Yarrick",
-    "Rank": 7,
     "Pvp": 4,
-    "GRTyranid": 3.5,
-    "GRNecron": 3.5,
-    "GROrk": 3.5,
-    "GRMortarion": 4
-  },
-  {
-    "Name": "Re'Vas",
-    "Rank": 8,
-    "Pvp": 4.5,
     "GRTyranid": 3,
     "GRNecron": 4,
     "GROrk": 4,
-    "GRMortarion": 3
+    "GRMortarion": 4.5,
+    "GRScreamer": 5
   },
   {
-    "Name": "Aun'shi",
+    "Name": "Re'Vas",
+    "Rank": 5,
+    "Pvp": 5,
+    "GRTyranid": 3,
+    "GRNecron": 4.5,
+    "GROrk": 4,
+    "GRMortarion": 2.5,
+    "GRScreamer": 3.5
+  },
+  {
+    "Name": "Bellator",
+    "Rank": 6,
+    "Pvp": 3.5,
+    "GRTyranid": 5,
+    "GRNecron": 3.5,
+    "GROrk": 4.5,
+    "GRMortarion": 1,
+    "GRScreamer": 4.5
+  },
+  {
+    "Name": "Aethana",
+    "Rank": 7,
+    "Pvp": 3,
+    "GRTyranid": 3,
+    "GRNecron": 4,
+    "GROrk": 4.5,
+    "GRMortarion": 2.5,
+    "GRScreamer": 4
+  },
+  {
+    "Name": "Aun'Shi",
+    "Rank": 8,
+    "Pvp": 3.5,
+    "GRTyranid": 5,
+    "GRNecron": 2.5,
+    "GROrk": 3,
+    "GRMortarion": 2.5,
+    "GRScreamer": 2.5
+  },
+  {
+    "Name": "Sho'Syl",
     "Rank": 9,
     "Pvp": 4,
-    "GRTyranid": 4.5,
-    "GRNecron": 3,
-    "GROrk": 3,
-    "GRMortarion": 3.5
+    "GRTyranid": 2,
+    "GRNecron": 3.5,
+    "GROrk": 2,
+    "GRMortarion": 3.5,
+    "GRScreamer": 3.5
   },
   {
-    "Name": "Castellan creed",
+    "Name": "Commissar Yarrick",
     "Rank": 10,
-    "Pvp": 4,
+    "Pvp": 3.5,
     "GRTyranid": 3.5,
+    "GRNecron": 3,
+    "GROrk": 2.5,
+    "GRMortarion": 3.5,
+    "GRScreamer": 2
+  },
+  {
+    "Name": "Darkstrider",
+    "Rank": 11,
+    "Pvp": 2.5,
+    "GRTyranid": 2,
     "GRNecron": 4,
     "GROrk": 2.5,
-    "GRMortarion": 3
-  },
-  {
-    "Name": "Roswitha",
-    "Rank": 11,
-    "Pvp": 3,
-    "GRTyranid": 4.5,
-    "GRNecron": 2,
-    "GROrk": 2.5,
-    "GRMortarion": 5
+    "GRMortarion": 2,
+    "GRScreamer": 4.5
   },
   {
     "Name": "Volk",
     "Rank": 12,
-    "Pvp": 2.5,
-    "GRTyranid": 3.5,
-    "GRNecron": 4,
+    "Pvp": 3,
+    "GRTyranid": 2.5,
+    "GRNecron": 3.5,
     "GROrk": 3.5,
-    "GRMortarion": 3.5
+    "GRMortarion": 2,
+    "GRScreamer": 3
   },
   {
-    "Name": "Sho'Syl",
+    "Name": "Ahriman",
     "Rank": 13,
-    "Pvp": 4.5,
+    "Pvp": 4,
+    "GRTyranid": 2,
+    "GRNecron": 1.5,
+    "GROrk": 3,
+    "GRMortarion": 4,
+    "GRScreamer": 2.5
+  },
+  {
+    "Name": "Roswitha",
+    "Rank": 14,
+    "Pvp": 3,
+    "GRTyranid": 4,
+    "GRNecron": 1.5,
+    "GROrk": 1.5,
+    "GRMortarion": 5,
+    "GRScreamer": 2
+  },
+  {
+    "Name": "Castellan Creed",
+    "Rank": 15,
+    "Pvp": 4,
     "GRTyranid": 3,
-    "GRNecron": 3.5,
+    "GRNecron": 3,
     "GROrk": 2,
-    "GRMortarion": 4
+    "GRMortarion": 2.5,
+    "GRScreamer": 2.5
   },
   {
     "Name": "Celestine",
-    "Rank": 14,
-    "Pvp": 5,
-    "GRTyranid": 3,
-    "GRNecron": 3,
-    "GROrk": 3,
-    "GRMortarion": 2
-  },
-  {
-    "Name": "High Marshal Helbrecht",
-    "Rank": 15,
-    "Pvp": 2.5,
-    "GRTyranid": 5,
-    "GRNecron": 2.5,
-    "GROrk": 4,
-    "GRMortarion": 3
-  },
-  {
-    "Name": "Calandis",
     "Rank": 16,
     "Pvp": 5,
-    "GRTyranid": 2,
-    "GRNecron": 3,
-    "GROrk": 2.5,
-    "GRMortarion": 3
-  },
-  {
-    "Name": "Morvenn Vahl",
-    "Rank": 17,
-    "Pvp": 4,
-    "GRTyranid": 3,
-    "GRNecron": 3,
-    "GROrk": 3,
-    "GRMortarion": 2.5
-  },
-  {
-    "Name": "Archimatos",
-    "Rank": 18,
-    "Pvp": 4,
-    "GRTyranid": 4.5,
-    "GRNecron": 2.5,
+    "GRTyranid": 2.5,
+    "GRNecron": 2,
     "GROrk": 2,
-    "GRMortarion": 2
-  },
-  {
-    "Name": "Aleph-null",
-    "Rank": 19,
-    "Pvp": 4,
-    "GRTyranid": 4,
-    "GRNecron": 0,
-    "GROrk": 2,
-    "GRMortarion": 4.5
+    "GRMortarion": 2,
+    "GRScreamer": 3.5
   },
   {
     "Name": "Tjark",
+    "Rank": 17,
+    "Pvp": 3.5,
+    "GRTyranid": 4,
+    "GRNecron": 2,
+    "GROrk": 2,
+    "GRMortarion": 3,
+    "GRScreamer": 2.5
+  },
+  {
+    "Name": "Ulf",
+    "Rank": 18,
+    "Pvp": 3.5,
+    "GRTyranid": 2,
+    "GRNecron": 2,
+    "GROrk": 3,
+    "GRMortarion": 2,
+    "GRScreamer": 3.5
+  },
+  {
+    "Name": "High Marshal Helbrecht",
+    "Rank": 19,
+    "Pvp": 3,
+    "GRTyranid": 5,
+    "GRNecron": 1.5,
+    "GROrk": 2,
+    "GRMortarion": 3,
+    "GRScreamer": 1.5
+  },
+  {
+    "Name": "Aleph-Null",
     "Rank": 20,
     "Pvp": 4,
     "GRTyranid": 3,
+    "GRNecron": 0,
+    "GROrk": 2,
+    "GRMortarion": 4,
+    "GRScreamer": 3
+  },
+  {
+    "Name": "Abraxas",
+    "Rank": 21,
+    "Pvp": 4,
+    "GRTyranid": 2.5,
     "GRNecron": 2,
+    "GROrk": 2,
+    "GRMortarion": 4,
+    "GRScreamer": 1.5
+  },
+  {
+    "Name": "Archimatos",
+    "Rank": 22,
+    "Pvp": 3.5,
+    "GRTyranid": 3.5,
+    "GRNecron": 2,
+    "GROrk": 1.5,
+    "GRMortarion": 2.5,
+    "GRScreamer": 1.5
+  },
+  {
+    "Name": "Jain Zar",
+    "Rank": 23,
+    "Pvp": 3.5,
+    "GRTyranid": 2,
+    "GRNecron": 2,
+    "GROrk": 2,
+    "GRMortarion": 2,
+    "GRScreamer": 3
+  },
+  {
+    "Name": "Calandis",
+    "Rank": 24,
+    "Pvp": 4.5,
+    "GRTyranid": 2,
+    "GRNecron": 2,
+    "GROrk": 2,
+    "GRMortarion": 2,
+    "GRScreamer": 2
+  },
+  {
+    "Name": "Morvenn Vahl",
+    "Rank": 25,
+    "Pvp": 3.5,
+    "GRTyranid": 2,
+    "GRNecron": 2,
+    "GROrk": 2,
+    "GRMortarion": 2,
+    "GRScreamer": 2
+  },
+  {
+    "Name": "Yazaghor",
+    "Rank": 26,
+    "Pvp": 3,
+    "GRTyranid": 2,
+    "GRNecron": 1.5,
+    "GROrk": 1.5,
+    "GRMortarion": 3,
+    "GRScreamer": 1.5
+  },
+  {
+    "Name": "Neurothrope",
+    "Rank": 27,
+    "Pvp": 2.5,
+    "GRTyranid": 0,
+    "GRNecron": 2.5,
     "GROrk": 3,
-    "GRMortarion": 2
+    "GRMortarion": 4.5,
+    "GRScreamer": 0
+  },
+  {
+    "Name": "Brother Burchard",
+    "Rank": 28,
+    "Pvp": 3,
+    "GRTyranid": 2,
+    "GRNecron": 2,
+    "GROrk": 2,
+    "GRMortarion": 1.5,
+    "GRScreamer": 1.5
+  },
+  {
+    "Name": "Kut Skoden",
+    "Rank": 29,
+    "Pvp": 2.5,
+    "GRTyranid": 1.5,
+    "GRNecron": 1.5,
+    "GROrk": 1.5,
+    "GRMortarion": 1.5,
+    "GRScreamer": 3.5
+  },
+  {
+    "Name": "Shadowsun",
+    "Rank": 30,
+    "Pvp": 3,
+    "GRTyranid": 1.5,
+    "GRNecron": 2,
+    "GROrk": 2,
+    "GRMortarion": 1.5,
+    "GRScreamer": 2
   }
 ]

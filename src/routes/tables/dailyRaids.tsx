@@ -300,7 +300,7 @@ export const DailyRaids = () => {
                         <Button
                             variant={'contained'}
                             component={Link}
-                            to={isMobile ? '/mobile/inventory' : '/inventory'}>
+                            to={isMobile ? '/mobile/input/inventory' : '/input/inventory'}>
                             Go to Inventory
                         </Button>
                         {hasChanges ? (
@@ -488,7 +488,7 @@ const CharactersList = ({ refresh }: { refresh: (chars: ICharacterRankRange[]) =
                 </span>
             </AccordionSummary>
             <AccordionDetails>
-                <Button variant={'contained'} component={Link} to={isMobile ? '/mobile/goals' : '/goals'}>
+                <Button variant={'contained'} component={Link} to={isMobile ? '/mobile/plan/goals' : '/plan/goals'}>
                     Go to Goals
                 </Button>
                 {hasChanges ? (
