@@ -1,5 +1,5 @@
-﻿import { LegendaryEventEnum, PersonalGoalType, Rank, Rarity, RarityStars, RarityString } from './enums';
-import { ICharacter2, ICharProgression, IPersonalData2 } from './interfaces';
+﻿import { DailyEnergy, LegendaryEventEnum, PersonalGoalType, Rank, Rarity, RarityStars, RarityString } from './enums';
+import { ICampaignsProgress, ICharacter2, ICharProgression, IPersonalData2 } from './interfaces';
 import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from './legendary-events';
 import { RagnarLegendaryEvent } from './legendary-events/ragnar.le';
 
@@ -69,10 +69,43 @@ export const starEmoji = String.fromCodePoint(parseInt('1F31F', 16));
 
 export const discordInvitationLink = 'https://discord.gg/gyajsMcH7j';
 
+export const dailyEnergyOptions: Record<DailyEnergy, number> = {
+    [DailyEnergy.Base]: 288,
+    [DailyEnergy.Adv]: 288 + 50,
+    [DailyEnergy.BS50]: 288 + 50 + 100,
+    [DailyEnergy.BS110]: 288,
+};
+
+export const defaultCampaignsProgress: ICampaignsProgress = {
+    Indomitus: 75,
+    'Indomitus Mirror': 75,
+    'Indomitus Elite': 40,
+    'Indomitus Mirror Elite': 40,
+
+    'Fall of Cadia': 75,
+    'Fall of Cadia Mirror': 75,
+    'Fall of Cadia Elite': 40,
+    'Fall of Cadia Mirror Elite': 40,
+
+    Octarius: 75,
+    'Octarius Mirror': 75,
+    'Octarius Elite': 40,
+
+    'Saim-Hann': 75,
+};
+
+export const campaignsNames: Array<keyof ICampaignsProgress> = Object.keys(defaultCampaignsProgress) as Array<
+    keyof ICampaignsProgress
+>;
+
 export const defaultData: IPersonalData2 = {
     schemaVersion: 2,
     modifiedDate: undefined,
     seenAppVersion: undefined,
+    dailyRaids: {
+        completedBattles: [],
+        lastRefreshDateUTC: new Date().toUTCString(),
+    },
     autoTeamsPreferences: {
         preferCampaign: false,
         ignoreRank: false,
@@ -88,6 +121,15 @@ export const defaultData: IPersonalData2 = {
         hideSelectedTeams: false,
         autoTeams: true,
         onlyUnlocked: false,
+    },
+    dailyRaidsPreferences: {
+        dailyEnergy: 288,
+        shardsEnergy: 0,
+        useCampaignsProgress: true,
+        useMostEfficientNodes: true,
+        useMoreEfficientNodes: false,
+        useLeastEfficientNodes: false,
+        useInventory: true,
     },
     characters: [
         {
@@ -118,6 +160,8 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.Ascend,
             targetRarity: Rarity.Rare,
             priority: 1,
+            upgrades: [],
+            dailyRaids: true,
         },
         {
             id: 'dc050dcb-bb66-4bbe-9476-c1f5bd291e74',
@@ -125,6 +169,8 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.Ascend,
             targetRarity: Rarity.Rare,
             priority: 2,
+            upgrades: [],
+            dailyRaids: true,
         },
         {
             id: '552c3f54-fae9-47a6-8c99-e10e6c1c3d32',
@@ -132,6 +178,8 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.Ascend,
             targetRarity: Rarity.Rare,
             priority: 3,
+            upgrades: [],
+            dailyRaids: true,
         },
         {
             id: 'aaaac20d-22eb-48e8-9fe5-f06c01dadf0f',
@@ -139,6 +187,8 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.UpgradeRank,
             targetRank: Rank.Silver1,
             priority: 4,
+            upgrades: [],
+            dailyRaids: true,
         },
         {
             id: '22dff600-4820-42a7-8050-973842242f76',
@@ -146,6 +196,8 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.UpgradeRank,
             targetRank: Rank.Silver1,
             priority: 5,
+            upgrades: [],
+            dailyRaids: true,
         },
         {
             id: '2221c67e-b1f7-4436-9981-d8f084922aa0',
@@ -153,6 +205,8 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.UpgradeRank,
             targetRank: Rank.Silver1,
             priority: 6,
+            upgrades: [],
+            dailyRaids: true,
         },
     ],
     selectedTeamOrder: {
@@ -162,4 +216,8 @@ export const defaultData: IPersonalData2 = {
     leTeams: {},
     leProgress: {},
     leSelectedRequirements: {},
+    campaignsProgress: defaultCampaignsProgress,
+    inventory: {
+        upgrades: {},
+    },
 };

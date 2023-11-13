@@ -17,5 +17,5 @@ export interface IUserDataResponse {
     id: number;
     username: string;
     lastModifiedDate: string;
-    data: IPersonalData | IPersonalData2;
+    data: IPersonalData | IPersonalData2 | null;
 }

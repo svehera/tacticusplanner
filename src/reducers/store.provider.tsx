@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { isEqual } from 'lodash';
 import { enqueueSnackbar } from 'notistack';
 
-import { IDispatchContext, IGlobalState } from '../models/interfaces';
+import { IDailyRaids, IDispatchContext, IGlobalState } from '../models/interfaces';
 import { charactersReducer } from './characters.reducer';
 import { viewPreferencesReducer } from './view-settings.reducer';
 import { autoTeamsPreferencesReducer } from './auto-teams-settings.reducer';
@@ -17,6 +17,10 @@ import { useAuth } from '../contexts/auth';
 import { IErrorResponse } from '../api/api-interfaces';
 import { getUserDataApi, setUserDataApi } from '../api/api-functions';
 import { GlobalState } from '../models/global-state';
+import { campaignsProgressReducer } from './campaigns-progress.reducer';
+import { dailyRaidsPreferencesReducer } from './daily-raids-settings.reducer';
+import { inventoryReducer } from './inventory.reducer';
+import { dailyRaidsReducer } from './dailyRaids.reducer';
 
 export const StoreContext = createContext<IGlobalState>({} as any);
 export const DispatchContext = createContext<IDispatchContext>({} as any);
@@ -42,6 +46,10 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         viewPreferencesReducer,
         globalState.viewPreferences
     );
+    const [dailyRaidsPreferences, dispatchDailyRaidsPreferences] = React.useReducer(
+        dailyRaidsPreferencesReducer,
+        globalState.dailyRaidsPreferences
+    );
     const [autoTeamsPreferences, dispatchAutoTeamsPreferences] = React.useReducer(
         autoTeamsPreferencesReducer,
         globalState.autoTeamsPreferences
@@ -60,11 +68,19 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     );
     const [leProgress, dispatchLeProgress] = React.useReducer(leProgressReducer, globalState.leProgress);
 
+    const [campaignsProgress, dispatchCampaignsProgress] = React.useReducer(
+        campaignsProgressReducer,
+        globalState.campaignsProgress
+    );
+
+    const [inventory, dispatchInventory] = React.useReducer(inventoryReducer, globalState.inventory);
+    const [dailyRaids, dispatchDailyRaids] = React.useReducer(dailyRaidsReducer, globalState.dailyRaids);
+
     function wrapDispatch<T>(dispatch: React.Dispatch<T>): React.Dispatch<T> {
         return (action: T) => {
             requestAnimationFrame(() => {
-                setModified(true);
                 dispatch(action);
+                setModified(true);
                 setModifiedDate(new Date());
             });
         };
@@ -76,23 +92,37 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             goals: wrapDispatch(dispatchGoals),
             viewPreferences: wrapDispatch(dispatchViewPreferences),
             autoTeamsPreferences: wrapDispatch(dispatchAutoTeamsPreferences),
+            dailyRaidsPreferences: wrapDispatch(dispatchDailyRaidsPreferences),
             selectedTeamOrder: wrapDispatch(dispatchSelectedTeamsOrder),
             leSelectedRequirements: wrapDispatch(dispatchLeSelectedRequirements),
             leSelectedTeams: wrapDispatch(dispatchLeSelectedTeams),
             leProgress: wrapDispatch(dispatchLeProgress),
-            setStore: (data: IGlobalState, modified: boolean) => {
+            campaignsProgress: wrapDispatch(dispatchCampaignsProgress),
+            inventory: wrapDispatch(dispatchInventory),
+            dailyRaids: wrapDispatch(dispatchDailyRaids),
+            setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 dispatchCharacters({ type: 'Set', value: data.characters });
                 dispatchGoals({ type: 'Set', value: data.goals });
                 dispatchViewPreferences({ type: 'Set', value: data.viewPreferences });
+                dispatchDailyRaidsPreferences({ type: 'Set', value: data.dailyRaidsPreferences });
                 dispatchAutoTeamsPreferences({ type: 'Set', value: data.autoTeamsPreferences });
                 dispatchSelectedTeamsOrder({ type: 'Set', value: data.selectedTeamOrder });
                 dispatchLeSelectedRequirements({ type: 'Set', value: data.leSelectedRequirements });
                 dispatchLeSelectedTeams({ type: 'Set', value: data.leSelectedTeams });
                 dispatchLeProgress({ type: 'Set', value: data.leProgress });
+                dispatchCampaignsProgress({ type: 'Set', value: data.campaignsProgress });
+                dispatchInventory({ type: 'Set', value: data.inventory });
+                dispatchDailyRaids({ type: 'Set', value: data.dailyRaids });
+
                 if (modified) {
                     setModified(true);
                     setModifiedDate(data.modifiedDate);
                 }
+
+                if (reset) {
+                    setModifiedDate(undefined);
+                }
+
                 setGlobalState(data);
             },
             seenAppVersion: wrapDispatch(setSeenAppVersion),
@@ -106,6 +136,8 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchLeSelectedTeams,
             dispatchGoals,
             dispatchLeProgress,
+            dispatchCampaignsProgress,
+            dispatchDailyRaidsPreferences,
             setGlobalState,
         ]
     );
@@ -126,6 +158,10 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             goals,
             modifiedDate,
             seenAppVersion,
+            campaignsProgress,
+            dailyRaidsPreferences,
+            inventory,
+            dailyRaids,
         };
         const storeValue = GlobalState.toStore(newValue);
 
@@ -154,17 +190,40 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         }
     }, [modified]);
 
+    function doDailyRefresh(lastRefreshDateUTC: string): void {
+        const currentDate = new Date();
+        const lastRefreshDate = new Date(lastRefreshDateUTC);
+
+        // Set the hours, minutes, seconds, and milliseconds to 0 for accurate comparison
+        currentDate.setUTCHours(0, 0, 0, 0);
+        lastRefreshDate.setUTCHours(0, 0, 0, 0);
+
+        // Compare timestamps to check if last refresh date is yesterday or before
+        const isYesterdayOrBefore = lastRefreshDate.getTime() < currentDate.getTime();
+
+        if (isYesterdayOrBefore) {
+            dispatch.dailyRaids({ type: 'ResetCompletedBattlesDaily' });
+            enqueueSnackbar('Daily Reset Completed', { variant: 'info' });
+        }
+    }
+
     useEffect(() => {
         if (!isAuthenticated) {
+            doDailyRefresh(dailyRaids.lastRefreshDateUTC);
             return;
         }
         getUserDataApi()
             .then(response => {
                 const { data, username, id, lastModifiedDate } = response.data;
                 const serverLastModified = new Date(lastModifiedDate);
+                const isFirstLogin = !data;
+                const isFreshData = !modifiedDate;
                 setUser(username, id);
 
-                if (data && (!modifiedDate || modifiedDate < serverLastModified)) {
+                const shouldAcceptServerData = !isFirstLogin && (isFreshData || modifiedDate < serverLastModified);
+                const shouldPushLocalData = !isFreshData && (isFirstLogin || modifiedDate > serverLastModified);
+
+                if (shouldAcceptServerData) {
                     const serverData = convertData(data);
                     const localData = GlobalState.toStore(globalState);
 
@@ -175,14 +234,16 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
                     if (!isDataEqual) {
                         const newState = new GlobalState(serverData);
-                        dispatch.setStore(newState, false);
+                        dispatch.setStore(newState, false, false);
                         localStore.setData(GlobalState.toStore(newState));
                         enqueueSnackbar('Synced with latest server data.', { variant: 'info' });
+                        doDailyRefresh(newState.dailyRaids.lastRefreshDateUTC);
                     }
 
                     setModifiedDate(serverLastModified);
                     localStore.setData({ modifiedDate: serverLastModified });
-                } else if (modifiedDate && modifiedDate > serverLastModified) {
+                } else if (shouldPushLocalData) {
+                    doDailyRefresh(dailyRaids.lastRefreshDateUTC);
                     setUserDataApi(GlobalState.toStore(globalState))
                         .then(() => enqueueSnackbar('Pushed local data to server.', { variant: 'info' }))
                         .catch((err: AxiosError<IErrorResponse>) => {

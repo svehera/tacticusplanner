@@ -9,7 +9,15 @@ export const CharacterImage = ({ icon, name, imageSize }: { icon: string; name?:
 
         // If the image doesn't exist. return null
         if (!image) return null;
-        return <img style={{ pointerEvents: 'none' }} src={image} height={imageSize ?? 50} alt={name ?? icon} />;
+        return (
+            <img
+                loading={'lazy'}
+                style={{ pointerEvents: 'none', contentVisibility: 'auto' }}
+                src={image}
+                height={imageSize ?? 50}
+                alt={name ?? icon}
+            />
+        );
     } catch (error) {
         console.log(`Image with name "${icon}" does not exist`);
         return null;

@@ -11,11 +11,19 @@ const DesktopApp = () => {
 
     useEffect(() => {
         if (isMobile && (!preferredView || preferredView === 'mobile')) {
-            navigate('/mobile');
+            navigate('/mobile/home');
         }
         const redirect = searchParams.get('redirect');
         if (redirect) {
-            navigate(redirect);
+            searchParams.delete('redirect');
+
+            navigate({
+                pathname: redirect,
+                search: '?' + searchParams.toString(),
+            });
+        }
+        if (location.pathname === '/') {
+            navigate('/home');
         }
     }, []);
 

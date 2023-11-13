@@ -14,6 +14,11 @@ export type GoalsAction =
           type: 'Delete';
           goalId: string;
       }
+    | {
+          type: 'UpdateDailyRaids';
+          goalId: string;
+          value: boolean;
+      }
     | SetStateAction<IPersonalGoal[]>;
 
 const deleteRedundantData = (goal: IPersonalGoal) => {
@@ -35,6 +40,14 @@ const deleteRedundantData = (goal: IPersonalGoal) => {
     if (!goal.notes) {
         delete goal.notes;
     }
+
+    if (!goal.currentRank) {
+        delete goal.currentRank;
+    }
+
+    if (!goal.currentRarity) {
+        delete goal.currentRarity;
+    }
 };
 
 export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
@@ -55,14 +68,33 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
         }
         case 'Update': {
             const updatedGoal = action.goal;
+            deleteRedundantData(updatedGoal);
 
             const updatedGoalIndex = state.findIndex(x => x.id === updatedGoal.id);
             if (updatedGoalIndex < 0) {
                 return state;
             }
-            deleteRedundantData(updatedGoal);
-            state.splice(updatedGoalIndex, 1);
-            state.splice(updatedGoal.priority - 1, 0, updatedGoal);
+            const currentGoal = state[updatedGoalIndex];
+            if (currentGoal.priority === updatedGoal.priority) {
+                currentGoal.notes = updatedGoal.notes;
+                currentGoal.targetRank = updatedGoal.targetRank;
+                currentGoal.targetRarity = updatedGoal.targetRarity;
+            } else {
+                state.splice(updatedGoalIndex, 1);
+                state.splice(updatedGoal.priority - 1, 0, updatedGoal);
+            }
+
+            return state.map((x, index) => ({ ...x, priority: index + 1 }));
+        }
+        case 'UpdateDailyRaids': {
+            const { goalId, value } = action;
+
+            const updatedGoalIndex = state.findIndex(x => x.id === goalId);
+            if (updatedGoalIndex < 0) {
+                return state;
+            }
+            const currentGoal = state[updatedGoalIndex];
+            currentGoal.dailyRaids = value;
 
             return [...state];
         }

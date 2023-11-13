@@ -3,14 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { Collapse, List, ListItemButton } from '@mui/material';
 import ListItemText from '@mui/material/ListItemText';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { MenuItemTP } from './models/menu-items';
 
-export const AppBarSubMenu = ({
-    rootLabel,
-    options,
-}: {
-    rootLabel: string;
-    options: Array<{ label: string; route: string }>;
-}) => {
+export const AppBarSubMenu = ({ rootLabel, options }: { rootLabel: string; options: Array<MenuItemTP> }) => {
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
 
@@ -19,7 +14,7 @@ export const AppBarSubMenu = ({
     };
     return (
         <List
-            sx={{ width: 130, maxWidth: 360 }}
+            sx={{ width: 150, maxWidth: 360 }}
             component="nav"
             onMouseEnter={() => setOpen(true)}
             onMouseLeave={() => setOpen(false)}>
@@ -31,14 +26,14 @@ export const AppBarSubMenu = ({
                 in={open}
                 timeout="auto"
                 unmountOnExit
-                sx={{ width: 130, position: 'absolute', zIndex: 1000, backgroundColor: '#1976d2' }}>
+                sx={{ width: 150, position: 'absolute', zIndex: 1000, backgroundColor: '#1976d2' }}>
                 <List component="div" disablePadding>
                     {options.map(option => (
                         <ListItemButton
                             key={option.label}
                             onClick={() => {
                                 setOpen(false);
-                                navigate(option.route);
+                                navigate(option.routeWeb);
                             }}>
                             <ListItemText primary={option.label} />
                         </ListItemButton>

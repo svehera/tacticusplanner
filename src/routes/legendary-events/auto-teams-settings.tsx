@@ -1,5 +1,5 @@
 ﻿import React, { useCallback, useContext, useState } from 'react';
-import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import { Switch, FormControlLabel, FormGroup } from '@mui/material';
 import { IAutoTeamsPreferences } from '../../models/interfaces';
 import { isMobile } from 'react-device-detect';
 import { pooEmoji, starEmoji } from '../../models/constants';
@@ -21,7 +21,7 @@ const AutoTeamsSettings = () => {
         <FormGroup style={{ display: 'flex', flexDirection: 'column' }}>
             <FormControlLabel
                 control={
-                    <Checkbox
+                    <Switch
                         checked={autoTeamsPreferences.preferCampaign}
                         onChange={event => updatePreferences('preferCampaign', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
@@ -32,7 +32,7 @@ const AutoTeamsSettings = () => {
 
             <FormControlLabel
                 control={
-                    <Checkbox
+                    <Switch
                         checked={autoTeamsPreferences.ignoreRank}
                         onChange={event => updatePreferences('ignoreRank', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
@@ -43,7 +43,7 @@ const AutoTeamsSettings = () => {
 
             <FormControlLabel
                 control={
-                    <Checkbox
+                    <Switch
                         checked={autoTeamsPreferences.ignoreRarity}
                         onChange={event => updatePreferences('ignoreRarity', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
@@ -54,7 +54,7 @@ const AutoTeamsSettings = () => {
 
             <FormControlLabel
                 control={
-                    <Checkbox
+                    <Switch
                         checked={autoTeamsPreferences.ignoreRecommendedFirst}
                         onChange={event => updatePreferences('ignoreRecommendedFirst', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
@@ -65,7 +65,7 @@ const AutoTeamsSettings = () => {
 
             <FormControlLabel
                 control={
-                    <Checkbox
+                    <Switch
                         checked={autoTeamsPreferences.ignoreRecommendedLast}
                         onChange={event => updatePreferences('ignoreRecommendedLast', event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}

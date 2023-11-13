@@ -1,17 +1,18 @@
-﻿import React, { useState } from 'react';
-import { ICharacter, ICharacter2 } from '../../models/interfaces';
-import { FormControl, FormGroup, MenuItem, Select } from '@mui/material';
+﻿import React, { useMemo, useState } from 'react';
+import { ICharacter, ICharacter2, IMaterialRecipeIngredientFull } from '../../models/interfaces';
+import { Checkbox, FormControl, FormControlLabel, FormGroup, MenuItem, Select } from '@mui/material';
 import { CharacterBias, Rank, Rarity } from '../../models/enums';
 import InputLabel from '@mui/material/InputLabel';
 import { getEnumValues, rankToString } from '../../shared-logic/functions';
 import { RankImage } from '../../shared-components/rank-image';
+import { CharacterUpgrades } from '../../shared-components/character-upgrades';
 
 export const CharacterDetails = ({
     character,
     characterChanges,
 }: {
     character: ICharacter2;
-    characterChanges: (character: ICharacter2) => void;
+    characterChanges: (character: ICharacter2, updateInventory: IMaterialRecipeIngredientFull[]) => void;
 }) => {
     const [formData, setFormData] = useState({
         rank: character.rank,
@@ -24,7 +25,7 @@ export const CharacterDetails = ({
             ...formData,
             [name]: value,
         });
-        characterChanges({ ...character, [name]: value });
+        characterChanges({ ...character, [name]: value }, []);
     };
 
     const rankEntries: number[] = getEnumValues(Rank);
@@ -58,6 +59,14 @@ export const CharacterDetails = ({
             {getNativeSelectControl(formData.rank, 'rank', rankEntries, rankToString, true)}
             {getNativeSelectControl(formData.rarity, 'rarity', rarityEntries, value => Rarity[value])}
             {getNativeSelectControl(formData.bias, 'bias', biasEntries, value => CharacterBias[value])}
+            {formData.rank > Rank.Locked ? (
+                <CharacterUpgrades
+                    character={character}
+                    upgradesChanges={(upgrades, updateInventory) => {
+                        characterChanges({ ...character, upgrades: upgrades }, updateInventory);
+                    }}
+                />
+            ) : undefined}
         </FormGroup>
     );
 };

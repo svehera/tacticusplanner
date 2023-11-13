@@ -1,0 +1,391 @@
+﻿{
+  "Vindicta": {
+    "material": "Vindicta",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Adepta Sororitas",
+    "rarity": "Shard",
+    "locations": [
+      "I29",
+      "IM15",
+      "IME8"
+    ]
+  },
+  "Celestine": {
+    "material": "Celestine",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Adepta Sororitas",
+    "rarity": "Shard",
+    "locations": [
+      "FoC60",
+      "FoC32"
+    ]
+  },
+  "Sibyll Devine": {
+    "material": "Sibyll Devine",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Astra Militarum",
+    "rarity": "Shard",
+    "locations": [
+      "FoC30",
+      "FoC16"
+    ]
+  },
+  "Kut Skoden": {
+    "material": "Kut Skoden",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Astra Militarum",
+    "rarity": "Shard",
+    "locations": [
+      "FoC15",
+      "FoC8"
+    ]
+  },
+  "Thaddeus Noble": {
+    "material": "Thaddeus Noble",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Astra Militarum",
+    "rarity": "Shard",
+    "locations": [
+      "FoC45",
+      "FoC24"
+    ]
+  },
+  "Castellan Creed": {
+    "material": "Castellan Creed",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Astra Militarum",
+    "rarity": "Shard",
+    "locations": [
+      "FoC75",
+      "FoC40"
+    ]
+  },
+  "Sword Brother Godswyl": {
+    "material": "Sword Brother Godswyl",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Templars",
+    "rarity": "Shard",
+    "locations": [
+      "O30",
+      "OE16"
+    ]
+  },
+  "Brother Burchard": {
+    "material": "Brother Burchard",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Templars",
+    "rarity": "Shard",
+    "locations": [
+      "O15",
+      "OE8"
+    ]
+  },
+  "Ancient Thoread": {
+    "material": "Ancient Thoread",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Templars",
+    "rarity": "Shard",
+    "locations": [
+      "O45",
+      "OE24"
+    ]
+  },
+  "Brother Jaeger": {
+    "material": "Brother Jaeger",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Templars",
+    "rarity": "Shard",
+    "locations": [
+      "O60",
+      "OE32"
+    ]
+  },
+  "High Marshal Helbrecht": {
+    "material": "High Marshal Helbrecht",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Templars",
+    "rarity": "Shard",
+    "locations": [
+      "O75",
+      "OE40"
+    ]
+  },
+  "Varro Tigurius": {
+    "material": "Varro Tigurius",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Ultramarines",
+    "rarity": "Shard",
+    "locations": [
+      "I18",
+      "IM60",
+      "IME32"
+    ]
+  },
+  "Certus": {
+    "material": "Certus",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Ultramarines",
+    "rarity": "Shard",
+    "locations": [
+      "I21",
+      "IM45",
+      "IME24"
+    ]
+  },
+  "Bellator": {
+    "material": "Bellator",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Ultramarines",
+    "rarity": "Shard",
+    "locations": [
+      "I24",
+      "IM30",
+      "IME16"
+    ]
+  },
+  "Incisus": {
+    "material": "Incisus",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Ultramarines",
+    "rarity": "Shard",
+    "locations": [
+      "I27"
+    ]
+  },
+  "Marneus Calgar": {
+    "material": "Marneus Calgar",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Ultramarines",
+    "rarity": "Shard",
+    "locations": [
+      "IM75",
+      "IME4"
+    ]
+  },
+  "Makhotep": {
+    "material": "Makhotep",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Necrons",
+    "rarity": "Shard",
+    "locations": [
+      "I15",
+      "IE8"
+    ]
+  },
+  "Imospekh": {
+    "material": "Imospekh",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Necrons",
+    "rarity": "Shard",
+    "locations": [
+      "I30",
+      "IE16"
+    ]
+  },
+  "Aleph-Null": {
+    "material": "Aleph-Null",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Necrons",
+    "rarity": "Shard",
+    "locations": [
+      "I45",
+      "IE24"
+    ]
+  },
+  "Thutmose": {
+    "material": "Thutmose",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Necrons",
+    "rarity": "Shard",
+    "locations": [
+      "I60",
+      "IE32"
+    ]
+  },
+  "Anuphet": {
+    "material": "Anuphet",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Necrons",
+    "rarity": "Shard",
+    "locations": [
+      "I75",
+      "IE40"
+    ]
+  },
+  "Snotflogga": {
+    "material": "Snotflogga",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Orks",
+    "rarity": "Shard",
+    "locations": [
+      "OM45"
+    ]
+  },
+  "Gibbascrapz": {
+    "material": "Gibbascrapz",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Orks",
+    "rarity": "Shard",
+    "locations": [
+      "OM30"
+    ]
+  },
+  "Snappawrecka": {
+    "material": "Snappawrecka",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Orks",
+    "rarity": "Shard",
+    "locations": [
+      "OM15"
+    ]
+  },
+  "Tanksmasha": {
+    "material": "Tanksmasha",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Orks",
+    "rarity": "Shard",
+    "locations": [
+      "OM60"
+    ]
+  },
+  "Boss Gulgortz": {
+    "material": "Boss Gulgortz",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Orks",
+    "rarity": "Shard",
+    "locations": [
+      "OM75"
+    ]
+  },
+  "Angrax": {
+    "material": "Angrax",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Legion",
+    "rarity": "Shard",
+    "locations": [
+      "FoCM15",
+      "FoCME8"
+    ]
+  },
+  "Volk": {
+    "material": "Volk",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Legion",
+    "rarity": "Shard",
+    "locations": [
+      "FoCM45",
+      "FoCME24"
+    ]
+  },
+  "Archimatos": {
+    "material": "Archimatos",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Legion",
+    "rarity": "Shard",
+    "locations": [
+      "FoCM30",
+      "FoCME16"
+    ]
+  },
+  "Haarken Worldclaimer": {
+    "material": "Haarken Worldclaimer",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Legion",
+    "rarity": "Shard",
+    "locations": [
+      "FoCM60",
+      "FoCME32"
+    ]
+  },
+  "Abaddon The Despoiler": {
+    "material": "Abaddon The Despoiler",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Legion",
+    "rarity": "Shard",
+    "locations": [
+      "FoCM75",
+      "FoCME40"
+    ]
+  },
+  "Yazaghor": {
+    "material": "Yazaghor",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Thousand Sons",
+    "rarity": "Shard",
+    "locations": [
+      "SH45"
+    ]
+  },
+  "Toth": {
+    "material": "Toth",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Thousand Sons",
+    "rarity": "Shard",
+    "locations": [
+      "SH15"
+    ]
+  },
+  "Abraxas": {
+    "material": "Abraxas",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Thousand Sons",
+    "rarity": "Shard",
+    "locations": [
+      "SH30"
+    ]
+  },
+  "Thaumachus": {
+    "material": "Thaumachus",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Thousand Sons",
+    "rarity": "Shard",
+    "locations": [
+      "SH60"
+    ]
+  },
+  "Ahriman": {
+    "material": "Ahriman",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Thousand Sons",
+    "rarity": "Shard",
+    "locations": [
+      "SH75"
+    ]
+  }
+}

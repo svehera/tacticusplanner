@@ -1,0 +1,5993 @@
+{
+  "Adamantium Filaments": {
+    "material": "Adamantium Filaments",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Common",
+    "icon": "adamantium filaments.png"
+  },
+  "Adamantium Ore": {
+    "material": "Adamantium Ore",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Common",
+    "icon": "adamantium ore.png"
+  },
+  "Adrenal Glands": {
+    "material": "Adrenal Glands",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Tyranids",
+    "rarity": "Rare",
+    "icon": "adrenal glands.jpg"
+  },
+  "Advanced Filaments": {
+    "material": "Advanced Filaments",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Uncommon",
+    "icon": "advanced filaments.png"
+  },
+  "Advanced Rebreather": {
+    "material": "Advanced Rebreather",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Uncommon",
+    "icon": "advanced rebreather.png"
+  },
+  "Air Purificator": {
+    "material": "Air Purificator",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Uncommon",
+    "icon": "air purificator.png"
+  },
+  "Ancient Runes": {
+    "material": "Ancient Runes",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Rare",
+    "icon": "ancient runes.png"
+  },
+  "Archeotech Bionics": {
+    "material": "Archeotech Bionics",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Legendary",
+    "icon": "archeotech bionics.png"
+  },
+  "Archeo-Tech Remnant": {
+    "material": "Archeo-Tech Remnant",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Legendary",
+    "icon": "archeo-tech remnant.jpg"
+  },
+  "Ard Plate": {
+    "material": "Ard Plate",
+    "craftable": false,
+    "stat": "Armour",
+    "faction": "Orks",
+    "rarity": "Rare",
+    "icon": "ard plate.jpg"
+  },
+  "Armor Trim": {
+    "material": "Armor Trim",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Common",
+    "icon": "armor trim.png"
+  },
+  "Artificer Tasset Plate": {
+    "material": "Artificer Tasset Plate",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Rare",
+    "icon": "artificer tasset plate.png"
+  },
+  "Artificial Vertebrae": {
+    "material": "Artificial Vertebrae",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Uncommon",
+    "icon": "artificial vertebrae.png"
+  },
+  "Attack Vector Data-Slate": {
+    "material": "Attack Vector Data-Slate",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Uncommon",
+    "icon": "attack vector data-slate.png"
+  },
+  "Auspex": {
+    "material": "Auspex",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "auspex.png"
+  },
+  "Bad Moon Teef": {
+    "material": "Bad Moon Teef",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Orks",
+    "rarity": "Rare",
+    "icon": "bad moon teef.png"
+  },
+  "Ballistics Data": {
+    "material": "Ballistics Data",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "ballistics data.png"
+  },
+  "Barrel of Promethium": {
+    "material": "Barrel of Promethium",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Uncommon",
+    "icon": "barrel of promethium.png"
+  },
+  "Basic Auxiliary Core": {
+    "material": "Basic Auxiliary Core",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "basic auxiliary core.png"
+  },
+  "Battle Scar": {
+    "material": "Battle Scar",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Rare",
+    "icon": "battle scar.png"
+  },
+  "Beast Hide": {
+    "material": "Beast Hide",
+    "craftable": false,
+    "stat": "Armour",
+    "faction": "Space Wolves",
+    "rarity": "Rare",
+    "icon": "beast hide.jpg"
+  },
+  "Bionic Eye": {
+    "material": "Bionic Eye",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Rare",
+    "icon": "bionic eye.png"
+  },
+  "Bionic Neural Pathways": {
+    "material": "Bionic Neural Pathways",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Epic",
+    "icon": "bionic neural pathways.png"
+  },
+  "Bladesman's Honour": {
+    "material": "Bladesman's Honour",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Rare",
+    "icon": "bladesman_s honour.png"
+  },
+  "Blasphemous Armor Trim": {
+    "material": "Blasphemous Armor Trim",
+    "craftable": false,
+    "stat": "Armour",
+    "faction": "Black Legion",
+    "rarity": "Rare",
+    "icon": "blasphemous armor trim.png"
+  },
+  "Blessed Corset Armor": {
+    "material": "Blessed Corset Armor",
+    "craftable": false,
+    "stat": "Armour",
+    "faction": "Adepta Sororitas",
+    "rarity": "Rare",
+    "icon": "blessed corset armor.png"
+  },
+  "Blessed Promethium Canister": {
+    "material": "Blessed Promethium Canister",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Epic",
+    "icon": "blessed promethium canister.png"
+  },
+  "Blessed Tabbard": {
+    "material": "Blessed Tabbard",
+    "craftable": false,
+    "stat": "Armour",
+    "faction": "Black Templars",
+    "rarity": "Rare",
+    "icon": "blessed tabbard.jpg"
+  },
+  "Blessed Tasset Plate": {
+    "material": "Blessed Tasset Plate",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Uncommon",
+    "icon": "blessed tasset plate.png"
+  },
+  "Blessing of Nurgle": {
+    "material": "Blessing of Nurgle",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Death Guard",
+    "rarity": "Legendary",
+    "icon": "blessing of nurgle.jpg"
+  },
+  "Blessing of the Dark Gods": {
+    "material": "Blessing of the Dark Gods",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Black Legion",
+    "rarity": "Legendary",
+    "icon": "blessing of the dark gods.jpg"
+  },
+  "Blessing of Tzeentch": {
+    "material": "Blessing of Tzeentch",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Thousand Sons",
+    "rarity": "Legendary",
+    "icon": "blessing of tzeentch.jpg"
+  },
+  "Bones of the Paragons": {
+    "material": "Bones of the Paragons",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Black Templars",
+    "rarity": "Legendary",
+    "icon": "bones of the paragons.jpg"
+  },
+  "Box of Salvage": {
+    "material": "Box of Salvage",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Uncommon",
+    "icon": "box of salvage.png"
+  },
+  "Can of Promethium": {
+    "material": "Can of Promethium",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "can of promethium.png"
+  },
+  "Canister of Chemicals": {
+    "material": "Canister of Chemicals",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "canister of chemicals.png"
+  },
+  "Ceramite Lump": {
+    "material": "Ceramite Lump",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Uncommon",
+    "icon": "ceramite lump.png"
+  },
+  "Chain of Zeal": {
+    "material": "Chain of Zeal",
+    "craftable": false,
+    "stat": "Damage",
+    "faction": "Black Templars",
+    "rarity": "Rare",
+    "icon": "chain of zeal.jpg"
+  },
+  "Chapter Pendant": {
+    "material": "Chapter Pendant",
+    "craftable": false,
+    "stat": "Damage",
+    "faction": "Dark Angels",
+    "rarity": "Rare",
+    "icon": "chapter pendant.jpg"
+  },
+  "Chip Damage": {
+    "material": "Chip Damage",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Common",
+    "icon": "chip damage.png"
+  },
+  "Classified Data-Slate": {
+    "material": "Classified Data-Slate",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Rare",
+    "icon": "classified data-slate.png"
+  },
+  "Cloak": {
+    "material": "Cloak",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Uncommon",
+    "icon": "cloak.png"
+  },
+  "Codex Astartes Page": {
+    "material": "Codex Astartes Page",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Ultramarines",
+    "rarity": "Legendary",
+    "icon": "codex astartes page.jpg"
+  },
+  "Combat Stimms": {
+    "material": "Combat Stimms",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Uncommon",
+    "icon": "combat stimms.png"
+  },
+  "Crate of Salvage": {
+    "material": "Crate of Salvage",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Rare",
+    "icon": "crate of salvage.png"
+  },
+  "Dark Hood": {
+    "material": "Dark Hood",
+    "craftable": false,
+    "stat": "Armour",
+    "faction": "Dark Angels",
+    "rarity": "Rare",
+    "icon": "dark hood.jpg"
+  },
+  "Divinator Class Auspex": {
+    "material": "Divinator Class Auspex",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Uncommon",
+    "icon": "divinator class auspex.png"
+  },
+  "Drone Controller": {
+    "material": "Drone Controller",
+    "craftable": false,
+    "stat": "Armour",
+    "faction": "Tau Empire",
+    "rarity": "Rare",
+    "icon": "drone controller.jpg"
+  },
+  "Duplicate Organ": {
+    "material": "Duplicate Organ",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Epic",
+    "icon": "duplicate organ.jpg"
+  },
+  "Engram Neurochip": {
+    "material": "Engram Neurochip",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Tau Empire",
+    "rarity": "Legendary",
+    "icon": "engram neurochip.jpg"
+  },
+  "Engrammatic Entangler": {
+    "material": "Engrammatic Entangler",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Necrons",
+    "rarity": "Legendary",
+    "icon": "engrammatic entangler.jpg"
+  },
+  "Enriched Rations": {
+    "material": "Enriched Rations",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Uncommon",
+    "icon": "enriched rations.png"
+  },
+  "Entrenching Tool": {
+    "material": "Entrenching Tool",
+    "craftable": false,
+    "stat": "Damage",
+    "faction": "Astra Militarum",
+    "rarity": "Rare",
+    "icon": "entrenching tool.png"
+  },
+  "Eye of Horus": {
+    "material": "Eye of Horus",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Black Legion",
+    "rarity": "Rare",
+    "icon": "eye of horus.png"
+  },
+  "Field Ration": {
+    "material": "Field Ration",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Common",
+    "icon": "field ration.png"
+  },
+  "Fine Micro-Generator": {
+    "material": "Fine Micro-Generator",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Uncommon",
+    "icon": "fine micro-generator.png"
+  },
+  "Fine Purity Seal": {
+    "material": "Fine Purity Seal",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Common",
+    "icon": "fine purity seal.png"
+  },
+  "Flak Plates": {
+    "material": "Flak Plates",
+    "craftable": false,
+    "stat": "Armour",
+    "faction": "Astra Militarum",
+    "rarity": "Rare",
+    "icon": "flak plates.png"
+  },
+  "Frag Grenade": {
+    "material": "Frag Grenade",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "frag grenade.png"
+  },
+  "Golden Ornamental Skull": {
+    "material": "Golden Ornamental Skull",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Epic",
+    "icon": "golden ornamental skull.png"
+  },
+  "Greater Reliquary of Vengeance": {
+    "material": "Greater Reliquary of Vengeance",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Epic",
+    "icon": "greater reliquary of vengeance.png"
+  },
+  "Healing Ointment": {
+    "material": "Healing Ointment",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Common",
+    "icon": "healing ointment.png"
+  },
+  "Helmet Trophy": {
+    "material": "Helmet Trophy",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Uncommon",
+    "icon": "helmet trophy.png"
+  },
+  "Holy Chaplet": {
+    "material": "Holy Chaplet",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Adepta Sororitas",
+    "rarity": "Legendary",
+    "icon": "holy chaplet.jpg"
+  },
+  "Honourifica Imperialis": {
+    "material": "Honourifica Imperialis",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Astra Militarum",
+    "rarity": "Legendary",
+    "icon": "honourifica imperialis.jpg"
+  },
+  "Hymn of Martyrs": {
+    "material": "Hymn of Martyrs",
+    "craftable": false,
+    "stat": "Damage",
+    "faction": "Adepta Sororitas",
+    "rarity": "Rare",
+    "icon": "hymn of martyrs.png"
+  },
+  "Hypermaterial Shifter": {
+    "material": "Hypermaterial Shifter",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Epic",
+    "icon": "hypermaterial shifter.png"
+  },
+  "Icon of Vengeance": {
+    "material": "Icon of Vengeance",
+    "craftable": false,
+    "stat": "Damage",
+    "faction": "Black Legion",
+    "rarity": "Rare",
+    "icon": "icon of vengeance.png"
+  },
+  "Inferno Bolts": {
+    "material": "Inferno Bolts",
+    "craftable": false,
+    "stat": "Damage",
+    "faction": "Thousand Sons",
+    "rarity": "Rare",
+    "icon": "inferno bolts.jpg"
+  },
+  "Iron Jaw": {
+    "material": "Iron Jaw",
+    "craftable": false,
+    "stat": "Damage",
+    "faction": "Orks",
+    "rarity": "Rare",
+    "icon": "iron jaw.png"
+  },
+  "Key of Ignorance": {
+    "material": "Key of Ignorance",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Dark Angels",
+    "rarity": "Rare",
+    "icon": "key of ignorance.jpg"
+  },
+  "Kill Count": {
+    "material": "Kill Count",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Rare",
+    "icon": "kill count.png"
+  },
+  "Krak Grenade": {
+    "material": "Krak Grenade",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Rare",
+    "icon": "krak grenade.png"
+  },
+  "Kustom Gubbinz": {
+    "material": "Kustom Gubbinz",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Orks",
+    "rarity": "Legendary",
+    "icon": "kustom gubbinz.jpg"
+  },
+  "Lesser Reliquary of Protection": {
+    "material": "Lesser Reliquary of Protection",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Common",
+    "icon": "lesser reliquary of protection.png"
+  },
+  "Lesser Reliquary of Vengeance": {
+    "material": "Lesser Reliquary of Vengeance",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "lesser reliquary of vengeance.jpg"
+  },
+  "Locator Beacon": {
+    "material": "Locator Beacon",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Uncommon",
+    "icon": "locator beacon.png"
+  },
+  "Marksman's Honour": {
+    "material": "Marksman's Honour",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Uncommon",
+    "icon": "marksman_s honour.png"
+  },
+  "Master-Crafted Ammo": {
+    "material": "Master-Crafted Ammo",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Legendary",
+    "icon": "master-crafted ammo.png"
+  },
+  "Mesh Weave": {
+    "material": "Mesh Weave",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Uncommon",
+    "icon": "mesh weave.png"
+  },
+  "Metal Decorative Skull": {
+    "material": "Metal Decorative Skull",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Rare",
+    "icon": "metal decorative skull.png"
+  },
+  "Metal Joints": {
+    "material": "Metal Joints",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Common",
+    "icon": "metal joints.png"
+  },
+  "Minor Bionic Enhancement": {
+    "material": "Minor Bionic Enhancement",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Common",
+    "icon": "minor bionic enhancement.png"
+  },
+  "Mission Assignment": {
+    "material": "Mission Assignment",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Common",
+    "icon": "mission assignment.png"
+  },
+  "Mission Objective": {
+    "material": "Mission Objective",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Uncommon",
+    "icon": "mission objective.png"
+  },
+  "Mjod": {
+    "material": "Mjod",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Space Wolves",
+    "rarity": "Legendary",
+    "icon": "mjod.jpg"
+  },
+  "Mutation: Scaly Skin": {
+    "material": "Mutation: Scaly Skin",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Uncommon",
+    "icon": "mutation_ scaly skin.png"
+  },
+  "Mutation: Tough Skin": {
+    "material": "Mutation: Tough Skin",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Common",
+    "icon": "mutation_ tough skin.png"
+  },
+  "Mutation: Warped Heart": {
+    "material": "Mutation: Warped Heart",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Rare",
+    "icon": "mutation_ warped heart.png"
+  },
+  "Mutation: Warped Lungs": {
+    "material": "Mutation: Warped Lungs",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Uncommon",
+    "icon": "mutation_ warped lungs.png"
+  },
+  "Mutation: Warped Muscles": {
+    "material": "Mutation: Warped Muscles",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Common",
+    "icon": "mutation_ warped muscles.png"
+  },
+  "Nano Swarm": {
+    "material": "Nano Swarm",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Necrons",
+    "rarity": "Common",
+    "icon": "nano swarm.png"
+  },
+  "Nasty Spikes": {
+    "material": "Nasty Spikes",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "nasty spikes.jpg"
+  },
+  "Oath Seal": {
+    "material": "Oath Seal",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Uncommon",
+    "icon": "oath seal.png"
+  },
+  "Otherworldly Energy": {
+    "material": "Otherworldly Energy",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "otherworldly energy.png"
+  },
+  "Pile of Salvage": {
+    "material": "Pile of Salvage",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Common",
+    "icon": "pile of salvage.png"
+  },
+  "Plague Bell": {
+    "material": "Plague Bell",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Death Guard",
+    "rarity": "Rare",
+    "icon": "plague bell.png"
+  },
+  "Plasma Cell": {
+    "material": "Plasma Cell",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Uncommon",
+    "icon": "plasma cell.png"
+  },
+  "Psychic Force Conduit": {
+    "material": "Psychic Force Conduit",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Legendary",
+    "icon": "psychic force conduit.jpg"
+  },
+  "Psyk-Conductive Material": {
+    "material": "Psyk-Conductive Material",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Legendary",
+    "icon": "psyk-conductive material.jpg"
+  },
+  "Psytronome": {
+    "material": "Psytronome",
+    "craftable": false,
+    "stat": "Damage",
+    "faction": "Aeldari",
+    "rarity": "Rare",
+    "icon": "psytronome.png"
+  },
+  "Purity Seal": {
+    "material": "Purity Seal",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Common",
+    "icon": "purity seal.png"
+  },
+  "Purity Seal of the Primarch": {
+    "material": "Purity Seal of the Primarch",
+    "craftable": false,
+    "stat": "Armour",
+    "faction": "Ultramarines",
+    "rarity": "Legendary",
+    "icon": "purity seal of the primarch.png"
+  },
+  "Rebreather": {
+    "material": "Rebreather",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Common",
+    "icon": "rebreather.png"
+  },
+  "Reconstitution Protocols": {
+    "material": "Reconstitution Protocols",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Necrons",
+    "rarity": "Rare",
+    "icon": "reconstitution protocols.png"
+  },
+  "Reinforced Cables": {
+    "material": "Reinforced Cables",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Uncommon",
+    "icon": "reinforced cables.png"
+  },
+  "Reinforced Chitin": {
+    "material": "Reinforced Chitin",
+    "craftable": false,
+    "stat": "Armour",
+    "faction": "Tyranids",
+    "rarity": "Rare",
+    "icon": "reinforced chitin.jpg"
+  },
+  "Reinforced Scale-Plates": {
+    "material": "Reinforced Scale-Plates",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Uncommon",
+    "icon": "reinforced scale-plates.png"
+  },
+  "Relic Hilt": {
+    "material": "Relic Hilt",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Epic",
+    "icon": "relic hilt.jpg"
+  },
+  "Reliquary of Protection": {
+    "material": "Reliquary of Protection",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Uncommon",
+    "icon": "reliquary of protection.png"
+  },
+  "Reliquary of Vengeance": {
+    "material": "Reliquary of Vengeance",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Uncommon",
+    "icon": "reliquary of vengeance.png"
+  },
+  "Repair-Kit": {
+    "material": "Repair-Kit",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Rare",
+    "icon": "repair-kit.png"
+  },
+  "Revered Talisman": {
+    "material": "Revered Talisman",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Epic",
+    "icon": "revered talisman.png"
+  },
+  "Righteous Candle": {
+    "material": "Righteous Candle",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Black Templars",
+    "rarity": "Rare",
+    "icon": "righteous candle.jpg"
+  },
+  "Ritual Implements": {
+    "material": "Ritual Implements",
+    "craftable": false,
+    "stat": "Armour",
+    "faction": "Thousand Sons",
+    "rarity": "Rare",
+    "icon": "ritual implements.png"
+  },
+  "Ropes and Chains": {
+    "material": "Ropes and Chains",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Common",
+    "icon": "ropes and chains.png"
+  },
+  "Rose of Martyrs": {
+    "material": "Rose of Martyrs",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Adepta Sororitas",
+    "rarity": "Rare",
+    "icon": "rose of martyrs.png"
+  },
+  "Round of Ammo": {
+    "material": "Round of Ammo",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "round of ammo.png"
+  },
+  "Runes of Fate": {
+    "material": "Runes of Fate",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Aeldari",
+    "rarity": "Legendary",
+    "icon": "runes of fate.jpg"
+  },
+  "Satchel": {
+    "material": "Satchel",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Uncommon",
+    "icon": "satchel.png"
+  },
+  "Scrolls": {
+    "material": "Scrolls",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Common",
+    "icon": "scrolls.png"
+  },
+  "Secret Agenda": {
+    "material": "Secret Agenda",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Epic",
+    "icon": "secret agenda.jpg"
+  },
+  "Sensor Suite": {
+    "material": "Sensor Suite",
+    "craftable": false,
+    "stat": "Damage",
+    "faction": "Tau Empire",
+    "rarity": "Rare",
+    "icon": "sensor suite.jpg"
+  },
+  "Sigil of Decay": {
+    "material": "Sigil of Decay",
+    "craftable": false,
+    "stat": "Damage",
+    "faction": "Death Guard",
+    "rarity": "Rare",
+    "icon": "sigil of decay.png"
+  },
+  "Single Power Pack": {
+    "material": "Single Power Pack",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "single power pack.png"
+  },
+  "Slicing Claws": {
+    "material": "Slicing Claws",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Uncommon",
+    "icon": "slicing claws.jpg"
+  },
+  "Sophisticated Material": {
+    "material": "Sophisticated Material",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Common",
+    "icon": "sophisticated material.png"
+  },
+  "Special Issue Ammo": {
+    "material": "Special Issue Ammo",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Epic",
+    "icon": "special issue ammo.png"
+  },
+  "Standard-Issue Tourniquet": {
+    "material": "Standard-Issue Tourniquet",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Common",
+    "icon": "standard-issue tourniquet.png"
+  },
+  "Stimm Injector": {
+    "material": "Stimm Injector",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Tau Empire",
+    "rarity": "Rare",
+    "icon": "stimm injector.jpg"
+  },
+  "Stone Guardian Fragment": {
+    "material": "Stone Guardian Fragment",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Dark Angels",
+    "rarity": "Legendary",
+    "icon": "stone guardian fragment.jpg"
+  },
+  "Subdermal Plating": {
+    "material": "Subdermal Plating",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Rare",
+    "icon": "subdermal plating.jpg"
+  },
+  "Synaptic Augmentation": {
+    "material": "Synaptic Augmentation",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Tyranids",
+    "rarity": "Legendary",
+    "icon": "synaptic augmentation.jpg"
+  },
+  "Tainted Text": {
+    "material": "Tainted Text",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Thousand Sons",
+    "rarity": "Rare",
+    "icon": "tainted text.jpg"
+  },
+  "Tank of Promethium": {
+    "material": "Tank of Promethium",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Rare",
+    "icon": "tank of promethium.png"
+  },
+  "Targeting Link": {
+    "material": "Targeting Link",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "targeting link.png"
+  },
+  "Terminator Honours": {
+    "material": "Terminator Honours",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Epic",
+    "icon": "terminator honours.png"
+  },
+  "The Gold Phoenix": {
+    "material": "The Gold Phoenix",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Uncommon",
+    "icon": "the gold phoenix.png"
+  },
+  "The Iron Phoenix": {
+    "material": "The Iron Phoenix",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Common",
+    "icon": "the iron phoenix.png"
+  },
+  "The Phoenix Ascendant": {
+    "material": "The Phoenix Ascendant",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Rare",
+    "icon": "the phoenix ascendant.png"
+  },
+  "The Silver Aquila": {
+    "material": "The Silver Aquila",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Common",
+    "icon": "the silver aquila.png"
+  },
+  "The Silver Eagle with Swords": {
+    "material": "The Silver Eagle with Swords",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Uncommon",
+    "icon": "the silver eagle with swords.png"
+  },
+  "The Silver Scope": {
+    "material": "The Silver Scope",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Uncommon",
+    "icon": "the silver scope.png"
+  },
+  "Thick Skin": {
+    "material": "Thick Skin",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Common",
+    "icon": "thick skin.jpg"
+  },
+  "Toxin Sacs": {
+    "material": "Toxin Sacs",
+    "craftable": false,
+    "stat": "Damage",
+    "faction": "Tyranids",
+    "rarity": "Rare",
+    "icon": "toxin sacs.jpg"
+  },
+  "Unnatural Vapour Dispenser": {
+    "material": "Unnatural Vapour Dispenser",
+    "craftable": false,
+    "stat": "Armour",
+    "faction": "Death Guard",
+    "rarity": "Rare",
+    "icon": "unnatural vapour dispenser.png"
+  },
+  "Viridian Energy Tesseract": {
+    "material": "Viridian Energy Tesseract",
+    "craftable": false,
+    "stat": "Damage",
+    "faction": "Necrons",
+    "rarity": "Rare",
+    "icon": "viridian energy tesseract.png"
+  },
+  "Vox-Caster": {
+    "material": "Vox-Caster",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "vox-caster.png"
+  },
+  "Warp Locus": {
+    "material": "Warp Locus",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Epic",
+    "icon": "warp locus.jpg"
+  },
+  "Waystone": {
+    "material": "Waystone",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Aeldari",
+    "rarity": "Rare",
+    "icon": "waystone.png"
+  },
+  "Weapon Anointment Oils": {
+    "material": "Weapon Anointment Oils",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "weapon anointment oils.jpg"
+  },
+  "Weapon Parts": {
+    "material": "Weapon Parts",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Common",
+    "icon": "weapon parts.png"
+  },
+  "Weathering": {
+    "material": "Weathering",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Epic",
+    "icon": "weathering.jpg"
+  },
+  "Wires": {
+    "material": "Wires",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Common",
+    "icon": "wires.png"
+  },
+  "Wolf Tail Talisman": {
+    "material": "Wolf Tail Talisman",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Space Wolves",
+    "rarity": "Rare",
+    "icon": "wolf tail talisman.jpg"
+  },
+  "Wolf Tooth Necklace": {
+    "material": "Wolf Tooth Necklace",
+    "craftable": false,
+    "stat": "Damage",
+    "faction": "Space Wolves",
+    "rarity": "Rare",
+    "icon": "wolf tooth necklace.jpg"
+  },
+  "Wraithbone Plate": {
+    "material": "Wraithbone Plate",
+    "craftable": false,
+    "stat": "Armour",
+    "faction": "Aeldari",
+    "rarity": "Rare",
+    "icon": "wraithbone plate.jpg"
+  },
+  "Writings": {
+    "material": "Writings",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Uncommon",
+    "icon": "writings.png"
+  },
+  "Zeidos Ribbon": {
+    "material": "Zeidos Ribbon",
+    "craftable": false,
+    "stat": "Health",
+    "faction": "Astra Militarum",
+    "rarity": "Rare",
+    "icon": "zeidos ribbon.png"
+  },
+  "Adamantine Mantle": {
+    "material": "Adamantine Mantle",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Ultramarines",
+    "recipe": [
+      {
+        "material": "Codex Astartes Page",
+        "count": 10
+      },
+      {
+        "material": "Adamantium Sheet",
+        "count": 1
+      },
+      {
+        "material": "Fine Cloak",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Adamantium Bar": {
+    "material": "Adamantium Bar",
+    "rarity": "Rare",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Adamantium Ore",
+        "count": 8
+      },
+      {
+        "material": "Pile of Salvage",
+        "count": 4
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Adamantium Blades": {
+    "material": "Adamantium Blades",
+    "rarity": "Uncommon",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Weapon Parts",
+        "count": 2
+      },
+      {
+        "material": "Adamantium Ore",
+        "count": 2
+      },
+      {
+        "material": "Ropes and Chains",
+        "count": 2
+      },
+      {
+        "material": "Gold",
+        "count": 25
+      }
+    ],
+    "craftable": true
+  },
+  "Adamantium Lump": {
+    "material": "Adamantium Lump",
+    "rarity": "Uncommon",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Adamantium Ore",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 25
+      }
+    ],
+    "craftable": true
+  },
+  "Adamantium Plates": {
+    "material": "Adamantium Plates",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Adamantium Sheet",
+        "count": 1
+      },
+      {
+        "material": "Crate of Salvage",
+        "count": 8
+      },
+      {
+        "material": "Adamantium Lump",
+        "count": 2
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Adamantium Sheet": {
+    "material": "Adamantium Sheet",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Adamantium Bar",
+        "count": 1
+      },
+      {
+        "material": "Box of Salvage",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Adaptive Adrenal Glands": {
+    "material": "Adaptive Adrenal Glands",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Tyranids",
+    "recipe": [
+      {
+        "material": "Adrenal Glands",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Adaptive Chitin Carapace": {
+    "material": "Adaptive Chitin Carapace",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "faction": "Tyranids",
+    "recipe": [
+      {
+        "material": "Reinforced Chitin",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Adaptive Toxin Sacs": {
+    "material": "Adaptive Toxin Sacs",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "faction": "Tyranids",
+    "recipe": [
+      {
+        "material": "Toxin Sacs",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Advanced Bionics": {
+    "material": "Advanced Bionics",
+    "rarity": "Rare",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Bionic Enhancement",
+        "count": 2
+      },
+      {
+        "material": "Standard-Issue Tourniquet",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Advanced Combat Stimms": {
+    "material": "Advanced Combat Stimms",
+    "rarity": "Rare",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Medical Supply Crate",
+        "count": 1
+      },
+      {
+        "material": "Combat Stimms",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Advanced Drone Controller": {
+    "material": "Advanced Drone Controller",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "faction": "Tau Empire",
+    "recipe": [
+      {
+        "material": "Drone Controller",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Advanced Exospine": {
+    "material": "Advanced Exospine",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Electromantic Cable Bundle",
+        "count": 1
+      },
+      {
+        "material": "Repair-Kit",
+        "count": 8
+      },
+      {
+        "material": "Exospine",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Advanced Mesh Weave Garment": {
+    "material": "Advanced Mesh Weave Garment",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Mesh Weave Garment",
+        "count": 1
+      },
+      {
+        "material": "Mesh Weave",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Advanced Sensor Suite": {
+    "material": "Advanced Sensor Suite",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "faction": "Tau Empire",
+    "recipe": [
+      {
+        "material": "Sensor Suite",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Advanced Stimm Injector": {
+    "material": "Advanced Stimm Injector",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Tau Empire",
+    "recipe": [
+      {
+        "material": "Stimm Injector",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Ancient Tasset Plate": {
+    "material": "Ancient Tasset Plate",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Impressive Armor Trim",
+        "count": 1
+      },
+      {
+        "material": "Blessed Tasset Plate",
+        "count": 6
+      },
+      {
+        "material": "Golden Ornamental Skull",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Anointed Auxiliary Core": {
+    "material": "Anointed Auxiliary Core",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Powerful Auxiliary Core",
+        "count": 1
+      },
+      {
+        "material": "Classified Data-Slate",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Anointed Micro-Generator": {
+    "material": "Anointed Micro-Generator",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Powerful Micro-Generator",
+        "count": 1
+      },
+      {
+        "material": "Classified Data-Slate",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Arbiter's Gaze": {
+    "material": "Arbiter's Gaze",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Dark Angels",
+    "recipe": [
+      {
+        "material": "Stone Guardian Fragment",
+        "count": 9
+      },
+      {
+        "material": "Bionic Eye",
+        "count": 8
+      },
+      {
+        "material": "Bionic Neural Pathways",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Artificer Flak Plates": {
+    "material": "Artificer Flak Plates",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Astra Militarum",
+    "recipe": [
+      {
+        "material": "High-Grade Flak Plates",
+        "count": 2
+      },
+      {
+        "material": "Grand Purity Seal",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Athenaean Scroll": {
+    "material": "Athenaean Scroll",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Thousand Sons",
+    "recipe": [
+      {
+        "material": "Malefic Scroll",
+        "count": 2
+      },
+      {
+        "material": "Mutation: Regenerative Blood",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Autoloader": {
+    "material": "Autoloader",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Box of Ammo",
+        "count": 1
+      },
+      {
+        "material": "Belt of Krak Grenades",
+        "count": 1
+      },
+      {
+        "material": "Special Issue Ammo",
+        "count": 3
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Auto-Reactive Stimm Injector": {
+    "material": "Auto-Reactive Stimm Injector",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Tau Empire",
+    "recipe": [
+      {
+        "material": "Advanced Stimm Injector",
+        "count": 2
+      },
+      {
+        "material": "Ominous Xenos Glyphs",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Bastion Honour": {
+    "material": "Bastion Honour",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Astra Militarum",
+    "recipe": [
+      {
+        "material": "Honourifica Imperialis",
+        "count": 9
+      },
+      {
+        "material": "High-Grade Flak Plates",
+        "count": 1
+      },
+      {
+        "material": "Golden Ornamental Skull",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Battle Plan": {
+    "material": "Battle Plan",
+    "rarity": "Rare",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Kill Count",
+        "count": 3
+      },
+      {
+        "material": "Mission Objective",
+        "count": 4
+      },
+      {
+        "material": "Mission Assignment",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Bell of Despair": {
+    "material": "Bell of Despair",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Death Guard",
+    "recipe": [
+      {
+        "material": "Death Bell",
+        "count": 2
+      },
+      {
+        "material": "Mutation: Regenerative Blood",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Belt of Frag Grenades": {
+    "material": "Belt of Frag Grenades",
+    "rarity": "Uncommon",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Frag Grenade",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 25
+      }
+    ],
+    "craftable": true
+  },
+  "Belt of Krak Grenades": {
+    "material": "Belt of Krak Grenades",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Krak Grenade",
+        "count": 10
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Bionic Enhancement": {
+    "material": "Bionic Enhancement",
+    "rarity": "Uncommon",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Minor Bionic Enhancement",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 25
+      }
+    ],
+    "craftable": true
+  },
+  "Black Rune": {
+    "material": "Black Rune",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Black Legion",
+    "recipe": [
+      {
+        "material": "Blessing of the Dark Gods",
+        "count": 9
+      },
+      {
+        "material": "Icon of Daemonic Vengeance",
+        "count": 1
+      },
+      {
+        "material": "Ancient Runes",
+        "count": 7
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Blessed Bolts": {
+    "material": "Blessed Bolts",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Adepta Sororitas",
+    "recipe": [
+      {
+        "material": "Holy Chaplet",
+        "count": 9
+      },
+      {
+        "material": "Supernatural Sight",
+        "count": 1
+      },
+      {
+        "material": "Special Issue Ammo",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Blessed Promethium Tank": {
+    "material": "Blessed Promethium Tank",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Tank of Promethium",
+        "count": 10
+      },
+      {
+        "material": "Blessed Promethium Canister",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Blessed Purity Seal": {
+    "material": "Blessed Purity Seal",
+    "rarity": "Rare",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Oath Seal",
+        "count": 6
+      },
+      {
+        "material": "Purity Seal",
+        "count": 4
+      },
+      {
+        "material": "Fine Purity Seal",
+        "count": 4
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Blessed Weapon Oils": {
+    "material": "Blessed Weapon Oils",
+    "rarity": "Uncommon",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Weapon Anointment Oils",
+        "count": 6
+      },
+      {
+        "material": "Canister of Chemicals",
+        "count": 3
+      },
+      {
+        "material": "Gold",
+        "count": 25
+      }
+    ],
+    "craftable": true
+  },
+  "Bolts of Furious Vengeance": {
+    "material": "Bolts of Furious Vengeance",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Dark Angels",
+    "recipe": [
+      {
+        "material": "Bolts of Judgement",
+        "count": 2
+      },
+      {
+        "material": "Sanctified Weapon Oils",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Bolts of Judgement": {
+    "material": "Bolts of Judgement",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "faction": "Dark Angels",
+    "recipe": [
+      {
+        "material": "Chapter Pendant",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Boonstone": {
+    "material": "Boonstone",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Thousand Sons",
+    "recipe": [
+      {
+        "material": "Blessing of Tzeentch",
+        "count": 9
+      },
+      {
+        "material": "Sophisticated Material Ingot",
+        "count": 3
+      },
+      {
+        "material": "Warp Locus",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Bosspole": {
+    "material": "Bosspole",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Orks",
+    "recipe": [
+      {
+        "material": "Kustom Gubbinz",
+        "count": 9
+      },
+      {
+        "material": "Iron Jaw",
+        "count": 8
+      },
+      {
+        "material": "Grand Skull Trophy",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Box of Ammo": {
+    "material": "Box of Ammo",
+    "rarity": "Rare",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Magazine",
+        "count": 2
+      },
+      {
+        "material": "Belt of Frag Grenades",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Box of Rations": {
+    "material": "Box of Rations",
+    "rarity": "Rare",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Enriched Rations",
+        "count": 8
+      },
+      {
+        "material": "Field Ration",
+        "count": 7
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Brutal Iron Jaw": {
+    "material": "Brutal Iron Jaw",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "faction": "Orks",
+    "recipe": [
+      {
+        "material": "Iron Jaw",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Cabalistic Implements": {
+    "material": "Cabalistic Implements",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "faction": "Thousand Sons",
+    "recipe": [
+      {
+        "material": "Ritual Implements",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Calibanite Hood": {
+    "material": "Calibanite Hood",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "faction": "Dark Angels",
+    "recipe": [
+      {
+        "material": "Dark Hood",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Candelabrum of Burning Wrath": {
+    "material": "Candelabrum of Burning Wrath",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Black Templars",
+    "recipe": [
+      {
+        "material": "Lights of Purgation",
+        "count": 2
+      },
+      {
+        "material": "Greater Reliquary of Vengeance",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Ceramite Bar": {
+    "material": "Ceramite Bar",
+    "rarity": "Rare",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Ceramite Lump",
+        "count": 5
+      },
+      {
+        "material": "Pile of Salvage",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Ceramite Plates": {
+    "material": "Ceramite Plates",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Ceramite Sheet",
+        "count": 1
+      },
+      {
+        "material": "Crate of Salvage",
+        "count": 8
+      },
+      {
+        "material": "Ceramite Lump",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Ceramite Sheet": {
+    "material": "Ceramite Sheet",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Ceramite Bar",
+        "count": 1
+      },
+      {
+        "material": "Box of Salvage",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Chain of Righteous Zeal": {
+    "material": "Chain of Righteous Zeal",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "faction": "Black Templars",
+    "recipe": [
+      {
+        "material": "Chain of Zeal",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Chain of Zealous Wrath": {
+    "material": "Chain of Zealous Wrath",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Black Templars",
+    "recipe": [
+      {
+        "material": "Chain of Righteous Zeal",
+        "count": 2
+      },
+      {
+        "material": "Sanctified Weapon Oils",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Cloud of Flies": {
+    "material": "Cloud of Flies",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Death Guard",
+    "recipe": [
+      {
+        "material": "Blessing of Nurgle",
+        "count": 9
+      },
+      {
+        "material": "Death Shroud",
+        "count": 1
+      },
+      {
+        "material": "Warp Locus",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Codex Astartes": {
+    "material": "Codex Astartes",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Ultramarines",
+    "recipe": [
+      {
+        "material": "Codex Astartes Page",
+        "count": 9
+      },
+      {
+        "material": "Battle Plan",
+        "count": 1
+      },
+      {
+        "material": "Terminator Honours",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Crusader's Tabbard": {
+    "material": "Crusader's Tabbard",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "faction": "Black Templars",
+    "recipe": [
+      {
+        "material": "Blessed Tabbard",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Cybork Body Parts": {
+    "material": "Cybork Body Parts",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Orks",
+    "recipe": [
+      {
+        "material": "Kustom Gubbinz",
+        "count": 9
+      },
+      {
+        "material": "Advanced Bionics",
+        "count": 1
+      },
+      {
+        "material": "Bionic Neural Pathways",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Daemon Shells": {
+    "material": "Daemon Shells",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Black Legion",
+    "recipe": [
+      {
+        "material": "Blessing of the Dark Gods",
+        "count": 9
+      },
+      {
+        "material": "Supernatural Sight",
+        "count": 1
+      },
+      {
+        "material": "Special Issue Ammo",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Daemonic Armor Trim": {
+    "material": "Daemonic Armor Trim",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "faction": "Black Legion",
+    "recipe": [
+      {
+        "material": "Blasphemous Armor Trim",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Death Bell": {
+    "material": "Death Bell",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Death Guard",
+    "recipe": [
+      {
+        "material": "Plague Bell",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Death Shroud": {
+    "material": "Death Shroud",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "faction": "Death Guard",
+    "recipe": [
+      {
+        "material": "Unnatural Vapour Dispenser",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Decorated Cloak": {
+    "material": "Decorated Cloak",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Fine Cloak",
+        "count": 1
+      },
+      {
+        "material": "Metal Decorative Skull",
+        "count": 3
+      },
+      {
+        "material": "Writings",
+        "count": 3
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Ded 'Ard Plate": {
+    "material": "Ded 'Ard Plate",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "faction": "Orks",
+    "recipe": [
+      {
+        "material": "Ard Plate",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Ded Brutal Iron Jaw": {
+    "material": "Ded Brutal Iron Jaw",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Orks",
+    "recipe": [
+      {
+        "material": "Brutal Iron Jaw",
+        "count": 2
+      },
+      {
+        "material": "Murderous Spikes",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Ded Shiny 'Ard Plate": {
+    "material": "Ded Shiny 'Ard Plate",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Orks",
+    "recipe": [
+      {
+        "material": "Ded 'Ard Plate",
+        "count": 2
+      },
+      {
+        "material": "Scale-Plate Mantle",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Digital Weapons": {
+    "material": "Digital Weapons",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Sanctified Weapon Oils",
+        "count": 2
+      },
+      {
+        "material": "Special Issue Ammo",
+        "count": 2
+      },
+      {
+        "material": "Weapon Parts",
+        "count": 2
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Divine Cloak": {
+    "material": "Divine Cloak",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Decorated Cloak",
+        "count": 1
+      },
+      {
+        "material": "Golden Ornamental Skull",
+        "count": 6
+      },
+      {
+        "material": "Satchel",
+        "count": 8
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Electromantic Cable Bundle": {
+    "material": "Electromantic Cable Bundle",
+    "rarity": "Rare",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Wires",
+        "count": 8
+      },
+      {
+        "material": "Reinforced Cables",
+        "count": 4
+      },
+      {
+        "material": "Weapon Parts",
+        "count": 4
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Ensorcelled Infusion": {
+    "material": "Ensorcelled Infusion",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "faction": "Thousand Sons",
+    "recipe": [
+      {
+        "material": "Inferno Bolts",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Epaulettes": {
+    "material": "Epaulettes",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Astra Militarum",
+    "recipe": [
+      {
+        "material": "Zeidos Ribbon",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Epaulettes of Renown": {
+    "material": "Epaulettes of Renown",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Astra Militarum",
+    "recipe": [
+      {
+        "material": "Epaulettes",
+        "count": 2
+      },
+      {
+        "material": "Greater Reliquary of Protection",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Exospine": {
+    "material": "Exospine",
+    "rarity": "Epic",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Electromantic Cable Bundle",
+        "count": 1
+      },
+      {
+        "material": "Artificial Vertebrae",
+        "count": 7
+      },
+      {
+        "material": "Single Power Pack",
+        "count": 7
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Exquisite Medical Supplies": {
+    "material": "Exquisite Medical Supplies",
+    "rarity": "Epic",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Medical Supply Crate",
+        "count": 1
+      },
+      {
+        "material": "Box of Rations",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Filligrane Psytronome": {
+    "material": "Filligrane Psytronome",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "faction": "Aeldari",
+    "recipe": [
+      {
+        "material": "Psytronome",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Filligrane Wraithbone Plate": {
+    "material": "Filligrane Wraithbone Plate",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "faction": "Aeldari",
+    "recipe": [
+      {
+        "material": "Wraithbone Plate",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Fine Auxiliary Core": {
+    "material": "Fine Auxiliary Core",
+    "rarity": "Uncommon",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Basic Auxiliary Core",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 25
+      }
+    ],
+    "craftable": true
+  },
+  "Fine Cloak": {
+    "material": "Fine Cloak",
+    "rarity": "Rare",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Cloak",
+        "count": 4
+      },
+      {
+        "material": "Ropes and Chains",
+        "count": 4
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "First Aid Kit": {
+    "material": "First Aid Kit",
+    "rarity": "Uncommon",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Standard-Issue Tourniquet",
+        "count": 3
+      },
+      {
+        "material": "Healing Ointment",
+        "count": 3
+      },
+      {
+        "material": "Gold",
+        "count": 25
+      }
+    ],
+    "craftable": true
+  },
+  "Frostblade": {
+    "material": "Frostblade",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Space Wolves",
+    "recipe": [
+      {
+        "material": "Mjod",
+        "count": 9
+      },
+      {
+        "material": "Adamantium Blades",
+        "count": 3
+      },
+      {
+        "material": "Relic Hilt",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Grand Helmet Trophy": {
+    "material": "Grand Helmet Trophy",
+    "rarity": "Epic",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Grand Skull Trophy",
+        "count": 1
+      },
+      {
+        "material": "Kill Count",
+        "count": 7
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Grand Purity Seal": {
+    "material": "Grand Purity Seal",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Blessed Purity Seal",
+        "count": 1
+      },
+      {
+        "material": "The Gold Phoenix",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Grand Skull Trophy": {
+    "material": "Grand Skull Trophy",
+    "rarity": "Rare",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Battle Scar",
+        "count": 3
+      },
+      {
+        "material": "Helmet Trophy",
+        "count": 4
+      },
+      {
+        "material": "Chip Damage",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Grand Strategy": {
+    "material": "Grand Strategy",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Attack Vector Data-Slate",
+        "count": 9
+      },
+      {
+        "material": "Battle Plan",
+        "count": 2
+      },
+      {
+        "material": "Secret Agenda",
+        "count": 7
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Grandiose Skull Ornament": {
+    "material": "Grandiose Skull Ornament",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Golden Ornamental Skull",
+        "count": 5
+      },
+      {
+        "material": "Metal Decorative Skull",
+        "count": 9
+      },
+      {
+        "material": "Grand Helmet Trophy",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Great Cult Implements": {
+    "material": "Great Cult Implements",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Thousand Sons",
+    "recipe": [
+      {
+        "material": "Cabalistic Implements",
+        "count": 2
+      },
+      {
+        "material": "Mutation: Metallic Skin",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Greater Reliquary of Protection": {
+    "material": "Greater Reliquary of Protection",
+    "rarity": "Epic",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "The Phoenix Ascendant",
+        "count": 4
+      },
+      {
+        "material": "Reliquary of Protection",
+        "count": 6
+      },
+      {
+        "material": "Lesser Reliquary of Protection",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Heirloom Entrenching Tool": {
+    "material": "Heirloom Entrenching Tool",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Astra Militarum",
+    "recipe": [
+      {
+        "material": "Veteran's Entrenching Tool",
+        "count": 2
+      },
+      {
+        "material": "Sanctified Weapon Oils",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Hellfury Bolts": {
+    "material": "Hellfury Bolts",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Ultramarines",
+    "recipe": [
+      {
+        "material": "Codex Astartes Page",
+        "count": 9
+      },
+      {
+        "material": "Prey-Sight",
+        "count": 1
+      },
+      {
+        "material": "Special Issue Ammo",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "High-Capacity Power Pack": {
+    "material": "High-Capacity Power Pack",
+    "rarity": "Rare",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Power Pack Bundle",
+        "count": 2
+      },
+      {
+        "material": "Plasma Cell",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "High-Grade Flak Plates": {
+    "material": "High-Grade Flak Plates",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "faction": "Astra Militarum",
+    "recipe": [
+      {
+        "material": "Flak Plates",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Holy Corset Armor": {
+    "material": "Holy Corset Armor",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Adepta Sororitas",
+    "recipe": [
+      {
+        "material": "Sanctified Corset Armor",
+        "count": 2
+      },
+      {
+        "material": "Grand Purity Seal",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Hymn of Sacrifice": {
+    "material": "Hymn of Sacrifice",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "faction": "Adepta Sororitas",
+    "recipe": [
+      {
+        "material": "Hymn of Martyrs",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Hymn of the Divine": {
+    "material": "Hymn of the Divine",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Adepta Sororitas",
+    "recipe": [
+      {
+        "material": "Hymn of Sacrifice",
+        "count": 2
+      },
+      {
+        "material": "Sanctified Weapon Oils",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Hyper-Adaptive Adrenal Glands": {
+    "material": "Hyper-Adaptive Adrenal Glands",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Tyranids",
+    "recipe": [
+      {
+        "material": "Adaptive Adrenal Glands",
+        "count": 2
+      },
+      {
+        "material": "Mutation: Regenerative Blood",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Hyper-Adaptive Chitin Carapace": {
+    "material": "Hyper-Adaptive Chitin Carapace",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Tyranids",
+    "recipe": [
+      {
+        "material": "Adaptive Chitin Carapace",
+        "count": 2
+      },
+      {
+        "material": "Mutation: Metallic Skin",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Hyper-Adaptive Toxin Sacs": {
+    "material": "Hyper-Adaptive Toxin Sacs",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Tyranids",
+    "recipe": [
+      {
+        "material": "Adaptive Toxin Sacs",
+        "count": 2
+      },
+      {
+        "material": "Murderous Spikes",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Hypermetabolic Acceleration": {
+    "material": "Hypermetabolic Acceleration",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Tyranids",
+    "recipe": [
+      {
+        "material": "Synaptic Augmentation",
+        "count": 9
+      },
+      {
+        "material": "Medical Supply Crate",
+        "count": 1
+      },
+      {
+        "material": "Blessed Promethium Canister",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Hyperstim": {
+    "material": "Hyperstim",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Combat Stimms",
+        "count": 6
+      },
+      {
+        "material": "Box of Rations",
+        "count": 2
+      },
+      {
+        "material": "Blessed Promethium Canister",
+        "count": 3
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Ice Troll Hide": {
+    "material": "Ice Troll Hide",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "faction": "Space Wolves",
+    "recipe": [
+      {
+        "material": "Beast Hide",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Ice Wyrm Hide": {
+    "material": "Ice Wyrm Hide",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Space Wolves",
+    "recipe": [
+      {
+        "material": "Ice Troll Hide",
+        "count": 2
+      },
+      {
+        "material": "Grand Purity Seal",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Icon of Daemonic Vengeance": {
+    "material": "Icon of Daemonic Vengeance",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "faction": "Black Legion",
+    "recipe": [
+      {
+        "material": "Icon of Vengeance",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Icon of Infernal Vengeance": {
+    "material": "Icon of Infernal Vengeance",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Black Legion",
+    "recipe": [
+      {
+        "material": "Icon of Daemonic Vengeance",
+        "count": 2
+      },
+      {
+        "material": "Murderous Spikes",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Immaterial Shroud": {
+    "material": "Immaterial Shroud",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Death Guard",
+    "recipe": [
+      {
+        "material": "Death Shroud",
+        "count": 2
+      },
+      {
+        "material": "Mutation: Metallic Skin",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Implant Attack": {
+    "material": "Implant Attack",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Tyranids",
+    "recipe": [
+      {
+        "material": "Synaptic Augmentation",
+        "count": 9
+      },
+      {
+        "material": "Supernatural Sight",
+        "count": 1
+      },
+      {
+        "material": "Relic Hilt",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Imposing Horns": {
+    "material": "Imposing Horns",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Murderous Spikes",
+        "count": 2
+      },
+      {
+        "material": "Golden Ornamental Skull",
+        "count": 2
+      },
+      {
+        "material": "Mutation: Tough Skin",
+        "count": 2
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Impressive Armor Trim": {
+    "material": "Impressive Armor Trim",
+    "rarity": "Rare",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Armor Trim",
+        "count": 5
+      },
+      {
+        "material": "Metal Decorative Skull",
+        "count": 2
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Infernal Armor Trim": {
+    "material": "Infernal Armor Trim",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Black Legion",
+    "recipe": [
+      {
+        "material": "Daemonic Armor Trim",
+        "count": 2
+      },
+      {
+        "material": "Mutation: Metallic Skin",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Infernal Eye of Horus": {
+    "material": "Infernal Eye of Horus",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Black Legion",
+    "recipe": [
+      {
+        "material": "Warp Touched Eye of Horus",
+        "count": 2
+      },
+      {
+        "material": "Mutation: Regenerative Blood",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Inner Circle Hood": {
+    "material": "Inner Circle Hood",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Dark Angels",
+    "recipe": [
+      {
+        "material": "Calibanite Hood",
+        "count": 2
+      },
+      {
+        "material": "Grand Purity Seal",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Iridium Plating": {
+    "material": "Iridium Plating",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Tau Empire",
+    "recipe": [
+      {
+        "material": "Engram Neurochip",
+        "count": 9
+      },
+      {
+        "material": "Advanced Stimm Injector",
+        "count": 1
+      },
+      {
+        "material": "Sophisticated Material Bar",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Key of Achrabael": {
+    "material": "Key of Achrabael",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Dark Angels",
+    "recipe": [
+      {
+        "material": "Key of Knowledge",
+        "count": 2
+      },
+      {
+        "material": "Greater Reliquary of Protection",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Key of Knowledge": {
+    "material": "Key of Knowledge",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Dark Angels",
+    "recipe": [
+      {
+        "material": "Key of Ignorance",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Kraken Tooth Necklace": {
+    "material": "Kraken Tooth Necklace",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Space Wolves",
+    "recipe": [
+      {
+        "material": "Thunderwolf Tooth Necklace",
+        "count": 2
+      },
+      {
+        "material": "Sanctified Weapon Oils",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Legendary Reliquary of Protection": {
+    "material": "Legendary Reliquary of Protection",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Greater Reliquary of Protection",
+        "count": 1
+      },
+      {
+        "material": "Zeidos Ribbon",
+        "count": 5
+      },
+      {
+        "material": "The Silver Aquila",
+        "count": 10
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Legendary Reliquary of Vengeance": {
+    "material": "Legendary Reliquary of Vengeance",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Greater Reliquary of Vengeance",
+        "count": 9
+      },
+      {
+        "material": "Reliquary of Vengeance",
+        "count": 9
+      },
+      {
+        "material": "Sanctified Weapon Oils",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Lights of Purgation": {
+    "material": "Lights of Purgation",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Black Templars",
+    "recipe": [
+      {
+        "material": "Righteous Candle",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Macharian Cross": {
+    "material": "Macharian Cross",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Astra Militarum",
+    "recipe": [
+      {
+        "material": "Zeidos Ribbon",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Magazine": {
+    "material": "Magazine",
+    "rarity": "Uncommon",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Round of Ammo",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 25
+      }
+    ],
+    "craftable": true
+  },
+  "Malefic Scroll": {
+    "material": "Malefic Scroll",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Thousand Sons",
+    "recipe": [
+      {
+        "material": "Tainted Text",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Mark of Chaos Undivided": {
+    "material": "Mark of Chaos Undivided",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Black Legion",
+    "recipe": [
+      {
+        "material": "Blessing of the Dark Gods",
+        "count": 9
+      },
+      {
+        "material": "Grand Skull Trophy",
+        "count": 1
+      },
+      {
+        "material": "Warp Locus",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Mark of Nurgle": {
+    "material": "Mark of Nurgle",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Death Guard",
+    "recipe": [
+      {
+        "material": "Blessing of Nurgle",
+        "count": 9
+      },
+      {
+        "material": "Grand Skull Trophy",
+        "count": 1
+      },
+      {
+        "material": "Warp Locus",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Mark of Tzeentch": {
+    "material": "Mark of Tzeentch",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Thousand Sons",
+    "recipe": [
+      {
+        "material": "Blessing of Tzeentch",
+        "count": 9
+      },
+      {
+        "material": "Battle Plan",
+        "count": 1
+      },
+      {
+        "material": "Warp Locus",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Mars-Pattern Bionics": {
+    "material": "Mars-Pattern Bionics",
+    "rarity": "Epic",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Advanced Bionics",
+        "count": 1
+      },
+      {
+        "material": "Bionic Eye",
+        "count": 7
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Medallion Resolute": {
+    "material": "Medallion Resolute",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Astra Militarum",
+    "recipe": [
+      {
+        "material": "Honourifica Imperialis",
+        "count": 9
+      },
+      {
+        "material": "Battle Plan",
+        "count": 1
+      },
+      {
+        "material": "Relic Hilt",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Medical Supply Crate": {
+    "material": "Medical Supply Crate",
+    "rarity": "Rare",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "First Aid Kit",
+        "count": 2
+      },
+      {
+        "material": "Field Ration",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Mesh Weave Garment": {
+    "material": "Mesh Weave Garment",
+    "rarity": "Rare",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Mesh Weave",
+        "count": 6
+      },
+      {
+        "material": "Rebreather",
+        "count": 4
+      },
+      {
+        "material": "Adamantium Filaments",
+        "count": 4
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Molecular Vaporiser": {
+    "material": "Molecular Vaporiser",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Necrons",
+    "recipe": [
+      {
+        "material": "Engrammatic Entangler",
+        "count": 9
+      },
+      {
+        "material": "Otherworldly Nano Swarm",
+        "count": 1
+      },
+      {
+        "material": "Hypermaterial Shifter",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Multi-Spectrum Sensor Suite": {
+    "material": "Multi-Spectrum Sensor Suite",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Tau Empire",
+    "recipe": [
+      {
+        "material": "Advanced Sensor Suite",
+        "count": 2
+      },
+      {
+        "material": "Ratiocination Targeting",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Murderous Spikes": {
+    "material": "Murderous Spikes",
+    "rarity": "Rare",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Razorsharp Spikes",
+        "count": 2
+      },
+      {
+        "material": "Slicing Claws",
+        "count": 2
+      },
+      {
+        "material": "Weapon Parts",
+        "count": 2
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Mutation: Impenetrable Skin": {
+    "material": "Mutation: Impenetrable Skin",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Mutation: Metallic Skin",
+        "count": 1
+      },
+      {
+        "material": "Warp Locus",
+        "count": 7
+      },
+      {
+        "material": "Thick Skin",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Mutation: Metallic Skin": {
+    "material": "Mutation: Metallic Skin",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Mutation: Warped Skin",
+        "count": 1
+      },
+      {
+        "material": "Mutation: Scaly Skin",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Mutation: Otherworldly Power": {
+    "material": "Mutation: Otherworldly Power",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Mutation: Regenerative Blood",
+        "count": 1
+      },
+      {
+        "material": "Mutation: Warped Heart",
+        "count": 5
+      },
+      {
+        "material": "Mutation: Warped Muscles",
+        "count": 10
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Mutation: Regenerative Blood": {
+    "material": "Mutation: Regenerative Blood",
+    "rarity": "Epic",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Mutation: Warped Heart",
+        "count": 4
+      },
+      {
+        "material": "Mutation: Warped Lungs",
+        "count": 6
+      },
+      {
+        "material": "Mutation: Warped Muscles",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Mutation: Warped Skin": {
+    "material": "Mutation: Warped Skin",
+    "rarity": "Rare",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Mutation: Scaly Skin",
+        "count": 6
+      },
+      {
+        "material": "Mutation: Tough Skin",
+        "count": 4
+      },
+      {
+        "material": "Mutation: Warped Muscles",
+        "count": 4
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Mysterious Device": {
+    "material": "Mysterious Device",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Sophisticated Material Sheet",
+        "count": 1
+      },
+      {
+        "material": "Hypermaterial Shifter",
+        "count": 7
+      },
+      {
+        "material": "Plasma Cell",
+        "count": 10
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Necrodermis Nano Scarab Swarm": {
+    "material": "Necrodermis Nano Scarab Swarm",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Necrons",
+    "recipe": [
+      {
+        "material": "Otherworldly Nano Swarm",
+        "count": 1
+      },
+      {
+        "material": "Sophisticated Material Ingot",
+        "count": 3
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Nob Teef": {
+    "material": "Nob Teef",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Orks",
+    "recipe": [
+      {
+        "material": "Bad Moon Teef",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Octarian Crusade Seal": {
+    "material": "Octarian Crusade Seal",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Black Templars",
+    "recipe": [
+      {
+        "material": "Bones of the Paragons",
+        "count": 9
+      },
+      {
+        "material": "Crusader's Tabbard",
+        "count": 1
+      },
+      {
+        "material": "Bladesman's Honour",
+        "count": 7
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Ominous Xenos Glyphs": {
+    "material": "Ominous Xenos Glyphs",
+    "rarity": "Epic",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Ancient Runes",
+        "count": 4
+      },
+      {
+        "material": "Writings",
+        "count": 6
+      },
+      {
+        "material": "Scrolls",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Otherworldly Energy Reservoir": {
+    "material": "Otherworldly Energy Reservoir",
+    "rarity": "Uncommon",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Otherworldly Energy",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 25
+      }
+    ],
+    "craftable": true
+  },
+  "Otherworldly Nano Swarm": {
+    "material": "Otherworldly Nano Swarm",
+    "rarity": "Rare",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Advanced Filaments",
+        "count": 8
+      },
+      {
+        "material": "Nano Swarm",
+        "count": 7
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Overcapacitator": {
+    "material": "Overcapacitator",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Ratiocination Targeting",
+        "count": 2
+      },
+      {
+        "material": "Bionic Neural Pathways",
+        "count": 2
+      },
+      {
+        "material": "Wires",
+        "count": 2
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Perfidious Relic of the Unforgiven": {
+    "material": "Perfidious Relic of the Unforgiven",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Dark Angels",
+    "recipe": [
+      {
+        "material": "Stone Guardian Fragment",
+        "count": 9
+      },
+      {
+        "material": "Impressive Armor Trim",
+        "count": 2
+      },
+      {
+        "material": "Terminator Honours",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Personal Saga": {
+    "material": "Personal Saga",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Space Wolves",
+    "recipe": [
+      {
+        "material": "Mjod",
+        "count": 9
+      },
+      {
+        "material": "Grand Skull Trophy",
+        "count": 1
+      },
+      {
+        "material": "Terminator Honours",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Phylacterine Hive": {
+    "material": "Phylacterine Hive",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Necrons",
+    "recipe": [
+      {
+        "material": "Engrammatic Entangler",
+        "count": 9
+      },
+      {
+        "material": "Otherworldly Nano Swarm",
+        "count": 1
+      },
+      {
+        "material": "Hypermaterial Shifter",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Plasma Cell Bundle": {
+    "material": "Plasma Cell Bundle",
+    "rarity": "Rare",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Plasma Cell",
+        "count": 6
+      },
+      {
+        "material": "Barrel of Promethium",
+        "count": 3
+      },
+      {
+        "material": "Can of Promethium",
+        "count": 7
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Plasma Cell Crate": {
+    "material": "Plasma Cell Crate",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Plasma Cell Bundle",
+        "count": 1
+      },
+      {
+        "material": "Crate of Salvage",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Portentious Xenos Glyphs": {
+    "material": "Portentious Xenos Glyphs",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Ominous Xenos Glyphs",
+        "count": 1
+      },
+      {
+        "material": "Ancient Runes",
+        "count": 5
+      },
+      {
+        "material": "Adamantium Filaments",
+        "count": 10
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Power Pack Bundle": {
+    "material": "Power Pack Bundle",
+    "rarity": "Uncommon",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Single Power Pack",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 25
+      }
+    ],
+    "craftable": true
+  },
+  "Powered Blade": {
+    "material": "Powered Blade",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Adamantium Blades",
+        "count": 1
+      },
+      {
+        "material": "Relic Hilt",
+        "count": 4
+      },
+      {
+        "material": "Anointed Micro-Generator",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Powerful Auxiliary Core": {
+    "material": "Powerful Auxiliary Core",
+    "rarity": "Rare",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Fine Micro-Generator",
+        "count": 5
+      },
+      {
+        "material": "Fine Auxiliary Core",
+        "count": 2
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Powerful Micro-Generator": {
+    "material": "Powerful Micro-Generator",
+    "rarity": "Rare",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Fine Micro-Generator",
+        "count": 9
+      },
+      {
+        "material": "Single Power Pack",
+        "count": 7
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Prey-Sight": {
+    "material": "Prey-Sight",
+    "rarity": "Rare",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Vox-Caster",
+        "count": 6
+      },
+      {
+        "material": "Locator Beacon",
+        "count": 5
+      },
+      {
+        "material": "Auspex",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Protocol of the Eternal Guardian": {
+    "material": "Protocol of the Eternal Guardian",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Necrons",
+    "recipe": [
+      {
+        "material": "Resurrection Protocols",
+        "count": 2
+      },
+      {
+        "material": "Ominous Xenos Glyphs",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Psychic Focus": {
+    "material": "Psychic Focus",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Supernatural Sight",
+        "count": 1
+      },
+      {
+        "material": "Sophisticated Material Sheet",
+        "count": 1
+      },
+      {
+        "material": "Warp Locus",
+        "count": 4
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Ratiocination Targeting": {
+    "material": "Ratiocination Targeting",
+    "rarity": "Rare",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Targeting Matrix",
+        "count": 2
+      },
+      {
+        "material": "Attack Vector Data-Slate",
+        "count": 2
+      },
+      {
+        "material": "Mission Assignment",
+        "count": 2
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Razorsharp Spikes": {
+    "material": "Razorsharp Spikes",
+    "rarity": "Uncommon",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Nasty Spikes",
+        "count": 6
+      },
+      {
+        "material": "Chip Damage",
+        "count": 3
+      },
+      {
+        "material": "Gold",
+        "count": 25
+      }
+    ],
+    "craftable": true
+  },
+  "Refined Combat Stimms": {
+    "material": "Refined Combat Stimms",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Combat Stimms",
+        "count": 8
+      },
+      {
+        "material": "Barrel of Promethium",
+        "count": 3
+      },
+      {
+        "material": "Medical Supply Crate",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Regenerating Nano Swarm": {
+    "material": "Regenerating Nano Swarm",
+    "rarity": "Uncommon",
+    "stat": "Health",
+    "faction": "Necrons",
+    "recipe": [
+      {
+        "material": "Adamantium Filaments",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 25
+      }
+    ],
+    "craftable": true
+  },
+  "Relic Auxiliary Core": {
+    "material": "Relic Auxiliary Core",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Powerful Auxiliary Core",
+        "count": 1
+      },
+      {
+        "material": "Anointed Micro-Generator",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Relic Bionic Enhancement": {
+    "material": "Relic Bionic Enhancement",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Advanced Bionics",
+        "count": 1
+      },
+      {
+        "material": "Bionic Neural Pathways",
+        "count": 6
+      },
+      {
+        "material": "Anointed Micro-Generator",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Relic Micro-Generator": {
+    "material": "Relic Micro-Generator",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Powerful Micro-Generator",
+        "count": 1
+      },
+      {
+        "material": "Plasma Cell Crate",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Relic Tasset Plate": {
+    "material": "Relic Tasset Plate",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Ancient Tasset Plate",
+        "count": 1
+      },
+      {
+        "material": "Artificer Tasset Plate",
+        "count": 8
+      },
+      {
+        "material": "Writings",
+        "count": 8
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Resplendent Spirit Stone": {
+    "material": "Resplendent Spirit Stone",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Aeldari",
+    "recipe": [
+      {
+        "material": "Spirit Stone",
+        "count": 2
+      },
+      {
+        "material": "Ominous Xenos Glyphs",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Resurrection Protocols": {
+    "material": "Resurrection Protocols",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Necrons",
+    "recipe": [
+      {
+        "material": "Reconstitution Protocols",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Roses of Sacrifice": {
+    "material": "Roses of Sacrifice",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Adepta Sororitas",
+    "recipe": [
+      {
+        "material": "Rose of Martyrs",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Roses of the Divine": {
+    "material": "Roses of the Divine",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Adepta Sororitas",
+    "recipe": [
+      {
+        "material": "Roses of Sacrifice",
+        "count": 2
+      },
+      {
+        "material": "Greater Reliquary of Protection",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Runic Talisman": {
+    "material": "Runic Talisman",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Space Wolves",
+    "recipe": [
+      {
+        "material": "Wolf Tail Talisman",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Runic Tasset Plate": {
+    "material": "Runic Tasset Plate",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Space Wolves",
+    "recipe": [
+      {
+        "material": "Mjod",
+        "count": 9
+      },
+      {
+        "material": "Ancient Tasset Plate",
+        "count": 1
+      },
+      {
+        "material": "Terminator Honours",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Sabbat-Pattern Visor": {
+    "material": "Sabbat-Pattern Visor",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Adepta Sororitas",
+    "recipe": [
+      {
+        "material": "Holy Chaplet",
+        "count": 9
+      },
+      {
+        "material": "Hymn of Martyrs",
+        "count": 8
+      },
+      {
+        "material": "Prey-Sight",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Sanctified Corset Armor": {
+    "material": "Sanctified Corset Armor",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "faction": "Adepta Sororitas",
+    "recipe": [
+      {
+        "material": "Blessed Corset Armor",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Sanctified Reliquary of Protection": {
+    "material": "Sanctified Reliquary of Protection",
+    "rarity": "Rare",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Reliquary of Protection",
+        "count": 8
+      },
+      {
+        "material": "Lesser Reliquary of Protection",
+        "count": 7
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Sanctified Weapon Oils": {
+    "material": "Sanctified Weapon Oils",
+    "rarity": "Rare",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Blessed Weapon Oils",
+        "count": 2
+      },
+      {
+        "material": "Barrel of Promethium",
+        "count": 2
+      },
+      {
+        "material": "Can of Promethium",
+        "count": 2
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Sash of Honors": {
+    "material": "Sash of Honors",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Astra Militarum",
+    "recipe": [
+      {
+        "material": "Honourifica Imperialis",
+        "count": 9
+      },
+      {
+        "material": "Decorated Cloak",
+        "count": 1
+      },
+      {
+        "material": "Golden Ornamental Skull",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Scale-Plate Mantle": {
+    "material": "Scale-Plate Mantle",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Scale-Plate Strand",
+        "count": 1
+      },
+      {
+        "material": "Reinforced Scale-Plates",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Scale-Plate Strand": {
+    "material": "Scale-Plate Strand",
+    "rarity": "Rare",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Reinforced Scale-Plates",
+        "count": 6
+      },
+      {
+        "material": "Metal Joints",
+        "count": 4
+      },
+      {
+        "material": "Weapon Parts",
+        "count": 4
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Scriptures of Battle": {
+    "material": "Scriptures of Battle",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Aeldari",
+    "recipe": [
+      {
+        "material": "Runes of Fate",
+        "count": 9
+      },
+      {
+        "material": "Battle Plan",
+        "count": 1
+      },
+      {
+        "material": "Warp Locus",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Scriptures of Fate": {
+    "material": "Scriptures of Fate",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Aeldari",
+    "recipe": [
+      {
+        "material": "Runes of Fate",
+        "count": 9
+      },
+      {
+        "material": "Supernatural Sight",
+        "count": 1
+      },
+      {
+        "material": "Warp Locus",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Scriptures of Fortune": {
+    "material": "Scriptures of Fortune",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Aeldari",
+    "recipe": [
+      {
+        "material": "Runes of Fate",
+        "count": 9
+      },
+      {
+        "material": "Filligrane Wraithbone Plate",
+        "count": 1
+      },
+      {
+        "material": "Warp Locus",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Seal of the Emperor's Protection": {
+    "material": "Seal of the Emperor's Protection",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Grand Purity Seal",
+        "count": 1
+      },
+      {
+        "material": "Terminator Honours",
+        "count": 7
+      },
+      {
+        "material": "The Iron Phoenix",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Sentry AI Drone Controller": {
+    "material": "Sentry AI Drone Controller",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Tau Empire",
+    "recipe": [
+      {
+        "material": "Advanced Drone Controller",
+        "count": 2
+      },
+      {
+        "material": "Advanced Mesh Weave Garment",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Shiny Boss Teef": {
+    "material": "Shiny Boss Teef",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Orks",
+    "recipe": [
+      {
+        "material": "Nob Teef",
+        "count": 2
+      },
+      {
+        "material": "Ominous Xenos Glyphs",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Shroud of Heroes": {
+    "material": "Shroud of Heroes",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Dark Angels",
+    "recipe": [
+      {
+        "material": "Stone Guardian Fragment",
+        "count": 9
+      },
+      {
+        "material": "Decorated Cloak",
+        "count": 1
+      },
+      {
+        "material": "Terminator Honours",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Sigil of Eternal Decay": {
+    "material": "Sigil of Eternal Decay",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Death Guard",
+    "recipe": [
+      {
+        "material": "Sigil of Inevitable Decay",
+        "count": 2
+      },
+      {
+        "material": "Murderous Spikes",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Sigil of Inevitable Decay": {
+    "material": "Sigil of Inevitable Decay",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "faction": "Death Guard",
+    "recipe": [
+      {
+        "material": "Sigil of Decay",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Simulacrum Sanctorum": {
+    "material": "Simulacrum Sanctorum",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Adepta Sororitas",
+    "recipe": [
+      {
+        "material": "Holy Chaplet",
+        "count": 9
+      },
+      {
+        "material": "Grand Skull Trophy",
+        "count": 1
+      },
+      {
+        "material": "Blessed Promethium Canister",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Snazzy Dakka": {
+    "material": "Snazzy Dakka",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Orks",
+    "recipe": [
+      {
+        "material": "Kustom Gubbinz",
+        "count": 9
+      },
+      {
+        "material": "Box of Ammo",
+        "count": 1
+      },
+      {
+        "material": "Bionic Neural Pathways",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Sophisticated Material Bar": {
+    "material": "Sophisticated Material Bar",
+    "rarity": "Rare",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Sophisticated Material",
+        "count": 8
+      },
+      {
+        "material": "Pile of Salvage",
+        "count": 4
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Sophisticated Material Ingot": {
+    "material": "Sophisticated Material Ingot",
+    "rarity": "Uncommon",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Sophisticated Material",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 25
+      }
+    ],
+    "craftable": true
+  },
+  "Sophisticated Material Plates": {
+    "material": "Sophisticated Material Plates",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Sophisticated Material Sheet",
+        "count": 1
+      },
+      {
+        "material": "Crate of Salvage",
+        "count": 8
+      },
+      {
+        "material": "Sophisticated Material Ingot",
+        "count": 2
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Sophisticated Material Sheet": {
+    "material": "Sophisticated Material Sheet",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "recipe": [
+      {
+        "material": "Sophisticated Material Bar",
+        "count": 1
+      },
+      {
+        "material": "Box of Salvage",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Soul-Bonded Psytronome": {
+    "material": "Soul-Bonded Psytronome",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Aeldari",
+    "recipe": [
+      {
+        "material": "Filligrane Psytronome",
+        "count": 2
+      },
+      {
+        "material": "Ratiocination Targeting",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Soul-Bonded Wraithbone Plate": {
+    "material": "Soul-Bonded Wraithbone Plate",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Aeldari",
+    "recipe": [
+      {
+        "material": "Filligrane Wraithbone Plate",
+        "count": 2
+      },
+      {
+        "material": "Advanced Mesh Weave Garment",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Spirit Stone": {
+    "material": "Spirit Stone",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Aeldari",
+    "recipe": [
+      {
+        "material": "Waystone",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Supernatural Sight": {
+    "material": "Supernatural Sight",
+    "rarity": "Rare",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Ballistics Data",
+        "count": 6
+      },
+      {
+        "material": "Writings",
+        "count": 5
+      },
+      {
+        "material": "Scrolls",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
+  "Symbiotic Carapace": {
+    "material": "Symbiotic Carapace",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Tyranids",
+    "recipe": [
+      {
+        "material": "Synaptic Augmentation",
+        "count": 9
+      },
+      {
+        "material": "Mutation: Regenerative Blood",
+        "count": 1
+      },
+      {
+        "material": "Hypermaterial Shifter",
+        "count": 4
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Tabbard of Righteous Wrath": {
+    "material": "Tabbard of Righteous Wrath",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Black Templars",
+    "recipe": [
+      {
+        "material": "Crusader's Tabbard",
+        "count": 2
+      },
+      {
+        "material": "Grand Purity Seal",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Talisman of Storms": {
+    "material": "Talisman of Storms",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Space Wolves",
+    "recipe": [
+      {
+        "material": "Runic Talisman",
+        "count": 2
+      },
+      {
+        "material": "Greater Reliquary of Protection",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Ta'Lissera Bond": {
+    "material": "Ta'Lissera Bond",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Tau Empire",
+    "recipe": [
+      {
+        "material": "Engram Neurochip",
+        "count": 9
+      },
+      {
+        "material": "Medical Supply Crate",
+        "count": 1
+      },
+      {
+        "material": "Relic Hilt",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Tannhauser's Bones": {
+    "material": "Tannhauser's Bones",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Black Templars",
+    "recipe": [
+      {
+        "material": "Bones of the Paragons",
+        "count": 9
+      },
+      {
+        "material": "Grand Skull Trophy",
+        "count": 1
+      },
+      {
+        "material": "Terminator Honours",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Target Lock": {
+    "material": "Target Lock",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Tau Empire",
+    "recipe": [
+      {
+        "material": "Engram Neurochip",
+        "count": 9
+      },
+      {
+        "material": "Prey-Sight",
+        "count": 1
+      },
+      {
+        "material": "Bionic Neural Pathways",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Targeting Matrix": {
+    "material": "Targeting Matrix",
+    "rarity": "Uncommon",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Targeting Link",
+        "count": 6
+      },
+      {
+        "material": "Ballistics Data",
+        "count": 3
+      },
+      {
+        "material": "Gold",
+        "count": 25
+      }
+    ],
+    "craftable": true
+  },
+  "Thunderwolf Tooth Necklace": {
+    "material": "Thunderwolf Tooth Necklace",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "faction": "Space Wolves",
+    "recipe": [
+      {
+        "material": "Wolf Tooth Necklace",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Tome of Arcane Knowledge": {
+    "material": "Tome of Arcane Knowledge",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Ominous Xenos Glyphs",
+        "count": 1
+      },
+      {
+        "material": "Mutation: Regenerative Blood",
+        "count": 1
+      },
+      {
+        "material": "Greater Reliquary of Protection",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Transdimensional Sanctum": {
+    "material": "Transdimensional Sanctum",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Necrons",
+    "recipe": [
+      {
+        "material": "Engrammatic Entangler",
+        "count": 9
+      },
+      {
+        "material": "Viridian Energy Tesseract",
+        "count": 9
+      },
+      {
+        "material": "Hypermaterial Shifter",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Veteran's Entrenching Tool": {
+    "material": "Veteran's Entrenching Tool",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "faction": "Astra Militarum",
+    "recipe": [
+      {
+        "material": "Entrenching Tool",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Virulent Rounds": {
+    "material": "Virulent Rounds",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Death Guard",
+    "recipe": [
+      {
+        "material": "Blessing of Nurgle",
+        "count": 9
+      },
+      {
+        "material": "Supernatural Sight",
+        "count": 1
+      },
+      {
+        "material": "Special Issue Ammo",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Warp Touched Eye of Horus": {
+    "material": "Warp Touched Eye of Horus",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Black Legion",
+    "recipe": [
+      {
+        "material": "Eye of Horus",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Warpflame Infusion": {
+    "material": "Warpflame Infusion",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Thousand Sons",
+    "recipe": [
+      {
+        "material": "Ensorcelled Infusion",
+        "count": 2
+      },
+      {
+        "material": "Murderous Spikes",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Warpweave Robe": {
+    "material": "Warpweave Robe",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Thousand Sons",
+    "recipe": [
+      {
+        "material": "Blessing of Tzeentch",
+        "count": 9
+      },
+      {
+        "material": "Decorated Cloak",
+        "count": 1
+      },
+      {
+        "material": "Warp Locus",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Witchseeker Bolts": {
+    "material": "Witchseeker Bolts",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Black Templars",
+    "recipe": [
+      {
+        "material": "Bones of the Paragons",
+        "count": 9
+      },
+      {
+        "material": "Prey-Sight",
+        "count": 1
+      },
+      {
+        "material": "Special Issue Ammo",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Vindicta": {
+    "material": "Vindicta",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Adepta Sororitas",
+    "rarity": "Shard",
+    "locations": [
+      "I29",
+      "IM15",
+      "IME8"
+    ]
+  },
+  "Celestine": {
+    "material": "Celestine",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Adepta Sororitas",
+    "rarity": "Shard",
+    "locations": [
+      "FoC60",
+      "FoC32"
+    ]
+  },
+  "Sibyll Devine": {
+    "material": "Sibyll Devine",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Astra Militarum",
+    "rarity": "Shard",
+    "locations": [
+      "FoC30",
+      "FoC16"
+    ]
+  },
+  "Kut Skoden": {
+    "material": "Kut Skoden",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Astra Militarum",
+    "rarity": "Shard",
+    "locations": [
+      "FoC15",
+      "FoC8"
+    ]
+  },
+  "Thaddeus Noble": {
+    "material": "Thaddeus Noble",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Astra Militarum",
+    "rarity": "Shard",
+    "locations": [
+      "FoC45",
+      "FoC24"
+    ]
+  },
+  "Castellan Creed": {
+    "material": "Castellan Creed",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Astra Militarum",
+    "rarity": "Shard",
+    "locations": [
+      "FoC75",
+      "FoC40"
+    ]
+  },
+  "Sword Brother Godswyl": {
+    "material": "Sword Brother Godswyl",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Templars",
+    "rarity": "Shard",
+    "locations": [
+      "O30",
+      "OE16"
+    ]
+  },
+  "Brother Burchard": {
+    "material": "Brother Burchard",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Templars",
+    "rarity": "Shard",
+    "locations": [
+      "O15",
+      "OE8"
+    ]
+  },
+  "Ancient Thoread": {
+    "material": "Ancient Thoread",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Templars",
+    "rarity": "Shard",
+    "locations": [
+      "O45",
+      "OE24"
+    ]
+  },
+  "Brother Jaeger": {
+    "material": "Brother Jaeger",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Templars",
+    "rarity": "Shard",
+    "locations": [
+      "O60",
+      "OE32"
+    ]
+  },
+  "High Marshal Helbrecht": {
+    "material": "High Marshal Helbrecht",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Templars",
+    "rarity": "Shard",
+    "locations": [
+      "O75",
+      "OE40"
+    ]
+  },
+  "Varro Tigurius": {
+    "material": "Varro Tigurius",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Ultramarines",
+    "rarity": "Shard",
+    "locations": [
+      "I18",
+      "IM60",
+      "IME32"
+    ]
+  },
+  "Certus": {
+    "material": "Certus",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Ultramarines",
+    "rarity": "Shard",
+    "locations": [
+      "I21",
+      "IM45",
+      "IME24"
+    ]
+  },
+  "Bellator": {
+    "material": "Bellator",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Ultramarines",
+    "rarity": "Shard",
+    "locations": [
+      "I24",
+      "IM30",
+      "IME16"
+    ]
+  },
+  "Incisus": {
+    "material": "Incisus",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Ultramarines",
+    "rarity": "Shard",
+    "locations": [
+      "I27"
+    ]
+  },
+  "Marneus Calgar": {
+    "material": "Marneus Calgar",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Ultramarines",
+    "rarity": "Shard",
+    "locations": [
+      "IM75",
+      "IME40"
+    ]
+  },
+  "Makhotep": {
+    "material": "Makhotep",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Necrons",
+    "rarity": "Shard",
+    "locations": [
+      "I15",
+      "IE8"
+    ]
+  },
+  "Imospekh": {
+    "material": "Imospekh",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Necrons",
+    "rarity": "Shard",
+    "locations": [
+      "I30",
+      "IE16"
+    ]
+  },
+  "Aleph-Null": {
+    "material": "Aleph-Null",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Necrons",
+    "rarity": "Shard",
+    "locations": [
+      "I45",
+      "IE24"
+    ]
+  },
+  "Thutmose": {
+    "material": "Thutmose",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Necrons",
+    "rarity": "Shard",
+    "locations": [
+      "I60",
+      "IE32"
+    ]
+  },
+  "Anuphet": {
+    "material": "Anuphet",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Necrons",
+    "rarity": "Shard",
+    "locations": [
+      "I75",
+      "IE40"
+    ]
+  },
+  "Snotflogga": {
+    "material": "Snotflogga",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Orks",
+    "rarity": "Shard",
+    "locations": [
+      "OM45"
+    ]
+  },
+  "Gibbascrapz": {
+    "material": "Gibbascrapz",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Orks",
+    "rarity": "Shard",
+    "locations": [
+      "OM30"
+    ]
+  },
+  "Snappawrecka": {
+    "material": "Snappawrecka",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Orks",
+    "rarity": "Shard",
+    "locations": [
+      "OM15"
+    ]
+  },
+  "Tanksmasha": {
+    "material": "Tanksmasha",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Orks",
+    "rarity": "Shard",
+    "locations": [
+      "OM60"
+    ]
+  },
+  "Boss Gulgortz": {
+    "material": "Boss Gulgortz",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Orks",
+    "rarity": "Shard",
+    "locations": [
+      "OM75"
+    ]
+  },
+  "Angrax": {
+    "material": "Angrax",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Legion",
+    "rarity": "Shard",
+    "locations": [
+      "FoCM15",
+      "FoCME8"
+    ]
+  },
+  "Volk": {
+    "material": "Volk",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Legion",
+    "rarity": "Shard",
+    "locations": [
+      "FoCM45",
+      "FoCME24"
+    ]
+  },
+  "Archimatos": {
+    "material": "Archimatos",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Legion",
+    "rarity": "Shard",
+    "locations": [
+      "FoCM30",
+      "FoCME16"
+    ]
+  },
+  "Haarken Worldclaimer": {
+    "material": "Haarken Worldclaimer",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Legion",
+    "rarity": "Shard",
+    "locations": [
+      "FoCM60",
+      "FoCME32"
+    ]
+  },
+  "Abaddon The Despoiler": {
+    "material": "Abaddon The Despoiler",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Black Legion",
+    "rarity": "Shard",
+    "locations": [
+      "FoCM75",
+      "FoCME40"
+    ]
+  },
+  "Yazaghor": {
+    "material": "Yazaghor",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Thousand Sons",
+    "rarity": "Shard",
+    "locations": [
+      "SH45"
+    ]
+  },
+  "Toth": {
+    "material": "Toth",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Thousand Sons",
+    "rarity": "Shard",
+    "locations": [
+      "SH15"
+    ]
+  },
+  "Abraxas": {
+    "material": "Abraxas",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Thousand Sons",
+    "rarity": "Shard",
+    "locations": [
+      "SH30"
+    ]
+  },
+  "Thaumachus": {
+    "material": "Thaumachus",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Thousand Sons",
+    "rarity": "Shard",
+    "locations": [
+      "SH60"
+    ]
+  },
+  "Ahriman": {
+    "material": "Ahriman",
+    "craftable": false,
+    "stat": "Shard",
+    "faction": "Thousand Sons",
+    "rarity": "Shard",
+    "locations": [
+      "SH75"
+    ]
+  }
+}

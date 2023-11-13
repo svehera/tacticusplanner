@@ -2,26 +2,49 @@
 
 import { TextField } from '@mui/material';
 
-import { ICharacter2 } from '../../models/interfaces';
-
-import { groupBy } from 'lodash';
+import { groupBy, orderBy } from 'lodash';
 import Box from '@mui/material/Box';
 import { CharacterItem } from '../../shared-components/character-item';
 import { StoreContext } from '../../reducers/store.provider';
+import { Rank } from '../../models/enums';
 
 export const WhoYouOwn = () => {
     const { characters } = useContext(StoreContext);
     const [filter, setFilter] = useState('');
 
-    const charactersByAlliance = useMemo(() => {
+    const factionsOrder = useMemo(() => {
+        const charactersByFaction = groupBy(characters, 'faction');
+        const factions = Object.keys(charactersByFaction);
+        return orderBy(
+            factions.map(x => ({
+                faction: x,
+                unlockedCount: charactersByFaction[x].filter(x => x.rank > Rank.Locked).length,
+            })),
+            ['unlockedCount'],
+            ['desc']
+        ).map(x => x.faction);
+    }, []);
+
+    const charactersByFaction = useMemo(() => {
         const filteredCharacters = filter
             ? characters.filter(x => x.name.toLowerCase().includes(filter.toLowerCase()))
             : characters;
 
-        const charactersByAlliance = groupBy(filteredCharacters, 'alliance');
+        const charactersByFaction = groupBy(filteredCharacters, 'faction');
+        const factionsOrdered = factionsOrder.map(x => ({
+            faction: x,
+            chars: charactersByFaction[x],
+            unlockedCount: charactersByFaction[x].filter(x => x.rank > Rank.Locked).length,
+        }));
 
-        return Object.entries(charactersByAlliance).map(([alliance, characters]) => (
-            <Alliance key={alliance} alliance={alliance} characters={characters} />
+        return factionsOrdered.map(x => (
+            <div key={x.faction} style={{ width: 300 }}>
+                <h4 style={{ background: x.chars[0].factionColor }}>{x.faction}</h4>
+
+                {x.chars.map(item => {
+                    return <CharacterItem key={item.name} character={item} />;
+                })}
+            </div>
         ));
     }, [filter, characters]);
 
@@ -33,31 +56,7 @@ export const WhoYouOwn = () => {
                 variant="outlined"
                 onChange={event => setFilter(event.target.value)}
             />
-            {charactersByAlliance}
+            <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 50 }}>{charactersByFaction}</div>
         </Box>
-    );
-};
-
-const Alliance = ({ alliance, characters }: { alliance: string; characters: ICharacter2[] }) => {
-    const charactersByFaction = groupBy(characters, 'faction');
-    const itemList = [];
-
-    for (const faction in charactersByFaction) {
-        const chars = charactersByFaction[faction];
-        itemList.push(
-            <div key={faction}>
-                <h4 style={{ background: chars[0].factionColor }}>{faction}</h4>
-
-                {chars.map(item => {
-                    return <CharacterItem key={item.name} character={item} />;
-                })}
-            </div>
-        );
-    }
-    return (
-        <div>
-            <h3>{alliance}</h3>
-            <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 50 }}>{itemList}</div>
-        </div>
     );
 };

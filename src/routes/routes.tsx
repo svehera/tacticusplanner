@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { RouteObject } from 'react-router-dom';
+import { redirect, RouteObject } from 'react-router-dom';
 
 import DesktopApp from '../desktop-app';
 import { About } from './root/about';
@@ -13,6 +13,80 @@ import { Goals } from './goals/goals';
 import { Thanks } from '../shared-components/thanks';
 import LegendaryEvent from './legendary-events/legendary-event';
 import { LegendaryEventEnum } from '../models/enums';
+import { Campaigns } from './tables/campaigns';
+import { Upgrades } from './tables/upgrades';
+import { RankLookup } from './tables/rankLookup';
+import { DailyRaids } from './tables/dailyRaids';
+import { CampaignsProgress } from './campaigns-progress';
+import { Inventory } from './inventory';
+import { Home } from '../features/misc/home/home';
+
+const inputRoutes: RouteObject[] = [
+    {
+        path: 'input/wyo',
+        element: <WhoYouOwn />,
+    },
+    {
+        path: 'input/campaignsProgress',
+        element: <CampaignsProgress />,
+    },
+    {
+        path: 'input/inventory',
+        element: <Inventory />,
+    },
+];
+
+const planRoutes: RouteObject[] = [
+    {
+        path: 'plan/goals',
+        element: <Goals />,
+    },
+    {
+        path: 'plan/dailyRaids',
+        element: <DailyRaids />,
+    },
+    {
+        path: 'plan/le',
+        element: <LegendaryEventPage />,
+        children: [
+            {
+                path: 'shadowsun',
+                element: <LegendaryEvent id={LegendaryEventEnum.Shadowsun} />,
+            },
+            {
+                path: 'aunshi',
+                element: <LegendaryEvent id={LegendaryEventEnum.AunShi} />,
+            },
+            {
+                path: 'Ragnar',
+                element: <LegendaryEvent id={LegendaryEventEnum.Ragnar} />,
+            },
+        ],
+    },
+];
+
+const learnRoutes: RouteObject[] = [
+    {
+        path: 'learn/characters',
+        element: <Characters />,
+    },
+    {
+        path: 'learn/upgrades',
+        element: <Upgrades />,
+    },
+    {
+        path: 'learn/rankLookup',
+        element: <RankLookup />,
+    },
+    {
+        path: 'learn/campaigns',
+        element: <Campaigns />,
+    },
+    {
+        path: 'learn/dirtyDozen',
+        element: <DirtyDozen />,
+    },
+];
 
 export const appRoutes: () => RouteObject[] = () => [
     {
@@ -20,43 +94,12 @@ export const appRoutes: () => RouteObject[] = () => [
         element: <DesktopApp />,
         children: [
             {
-                path: '/',
-                element: <About />,
+                path: 'home',
+                element: <Home />,
             },
-            {
-                path: 'wyo',
-                element: <WhoYouOwn />,
-            },
-            {
-                path: 'characters',
-                element: <Characters />,
-            },
-            {
-                path: 'dirtyDozen',
-                element: <DirtyDozen />,
-            },
-            {
-                path: 'le',
-                element: <LegendaryEventPage />,
-                children: [
-                    {
-                        path: 'shadowsun',
-                        element: <LegendaryEvent id={LegendaryEventEnum.Shadowsun} />,
-                    },
-                    {
-                        path: 'aunshi',
-                        element: <LegendaryEvent id={LegendaryEventEnum.AunShi} />,
-                    },
-                    {
-                        path: 'Ragnar',
-                        element: <LegendaryEvent id={LegendaryEventEnum.Ragnar} />,
-                    },
-                ],
-            },
-            {
-                path: 'goals',
-                element: <Goals />,
-            },
+            ...inputRoutes,
+            ...planRoutes,
+            ...learnRoutes,
             {
                 path: 'contacts',
                 element: <Contacts />,

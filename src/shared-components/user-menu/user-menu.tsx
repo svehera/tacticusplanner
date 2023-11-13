@@ -18,6 +18,7 @@ import { IPersonalData2 } from '../../models/interfaces';
 import { GlobalState } from '../../models/global-state';
 import { RestoreBackupDialog } from './restore-backup-dialog';
 import ListItemText from '@mui/material/ListItemText';
+import { OverrideDataDialog } from './override-data-dialog';
 
 export const UserMenu = () => {
     const store = useContext(StoreContext);
@@ -26,6 +27,7 @@ export const UserMenu = () => {
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
     const [showRestoreBackup, setShowRestoreBackup] = useState(false);
+    const [showOverrideDataWarning, setShowOverrideDataWarning] = useState(false);
     const userMenuControls = usePopUpControls();
 
     const { isAuthenticated, logout, username } = useAuth();
@@ -41,7 +43,7 @@ export const UserMenu = () => {
                     const content = e.target?.result as string;
                     const personalData: IPersonalData2 = convertData(JSON.parse(content));
 
-                    setStore(new GlobalState(personalData), true);
+                    setStore(new GlobalState(personalData), true, false);
                     enqueueSnackbar('Import successful', { variant: 'success' });
                 } catch (error) {
                     enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
@@ -76,6 +78,15 @@ export const UserMenu = () => {
             enqueueSnackbar('No Backup Found', { variant: 'error' });
         } else {
             setShowRestoreBackup(true);
+        }
+    };
+
+    const openLoginForm = () => {
+        const hasAnyChanges = !!store.modifiedDate;
+        if (hasAnyChanges) {
+            setShowOverrideDataWarning(true);
+        } else {
+            setShowLoginUser(true);
         }
     };
 
@@ -140,7 +151,7 @@ export const UserMenu = () => {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
                 {!isAuthenticated ? (
                     <div>
-                        <MenuItem onClick={() => setShowLoginUser(true)}>
+                        <MenuItem onClick={() => openLoginForm()}>
                             <ListItemIcon>
                                 <LoginIcon />
                             </ListItemIcon>
@@ -192,6 +203,15 @@ export const UserMenu = () => {
             />
             <LoginUserDialog isOpen={showLoginUser} onClose={() => setShowLoginUser(false)} />
             <RestoreBackupDialog isOpen={showRestoreBackup} onClose={() => setShowRestoreBackup(false)} />
+            <OverrideDataDialog
+                isOpen={showOverrideDataWarning}
+                onClose={(proceed: boolean) => {
+                    setShowOverrideDataWarning(false);
+                    if (proceed) {
+                        setShowLoginUser(true);
+                    }
+                }}
+            />
         </Box>
     );
 };

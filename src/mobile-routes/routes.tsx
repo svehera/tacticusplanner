@@ -1,14 +1,97 @@
 ﻿import React from 'react';
 
-import { RouteObject } from 'react-router-dom';
+import { redirect, RouteObject } from 'react-router-dom';
 
 import MobileApp from '../mobile-app';
 import { LegendaryEvents } from './legendary-events/legendary-events';
-import { Home } from './home/home';
+import { MobileHome } from './home/mobileHome';
 import { Goals } from '../routes/goals/goals';
 import { WhoYouOwn } from '../routes/who-you-own/who-you-own';
-import { Events } from './events/events';
+import { PlanRoutes } from './events/planRoutes';
 import { LegendaryEventEnum } from '../models/enums';
+import { InputRoutes } from './events/inputRoutes';
+import { LearnRoutes } from './events/learnRoutes';
+import { CampaignsProgress } from '../routes/campaigns-progress';
+import { Inventory } from '../routes/inventory';
+import { DailyRaids } from '../routes/tables/dailyRaids';
+import { Characters } from '../routes/characters/characters';
+import { Upgrades } from '../routes/tables/upgrades';
+import { RankLookup } from '../routes/tables/rankLookup';
+import { Campaigns } from '../routes/tables/campaigns';
+import { DirtyDozen } from '../routes/dirty-dozen/dirty-dozen';
+
+const inputRoutes: RouteObject[] = [
+    {
+        path: 'input',
+        element: <InputRoutes />,
+    },
+    {
+        path: 'input/wyo',
+        element: <WhoYouOwn />,
+    },
+    {
+        path: 'input/campaignsProgress',
+        element: <CampaignsProgress />,
+    },
+    {
+        path: 'input/inventory',
+        element: <Inventory />,
+    },
+];
+
+const planRoutes: RouteObject[] = [
+    {
+        path: 'plan',
+        element: <PlanRoutes />,
+    },
+    {
+        path: 'plan/goals',
+        element: <Goals />,
+    },
+    {
+        path: 'plan/dailyRaids',
+        element: <DailyRaids />,
+    },
+    {
+        path: 'plan/le/shadowsun',
+        element: <LegendaryEvents id={LegendaryEventEnum.Shadowsun} />,
+    },
+    {
+        path: 'plan/le/aunshi',
+        element: <LegendaryEvents id={LegendaryEventEnum.AunShi} />,
+    },
+    {
+        path: 'plan/le/ragnar',
+        element: <LegendaryEvents id={LegendaryEventEnum.Ragnar} />,
+    },
+];
+
+const learnRoutes: RouteObject[] = [
+    {
+        path: 'learn',
+        element: <LearnRoutes />,
+    },
+    {
+        path: 'learn/characters',
+        element: <Characters />,
+    },
+    {
+        path: 'learn/upgrades',
+        element: <Upgrades />,
+    },
+    {
+        path: 'learn/rankLookup',
+        element: <RankLookup />,
+    },
+    {
+        path: 'learn/campaigns',
+        element: <Campaigns />,
+    },
+    {
+        path: 'learn/dirtyDozen',
+        element: <DirtyDozen />,
+    },
+];
 
 export const mobileAppRoutes: () => RouteObject[] = () => [
     {
@@ -17,32 +100,15 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
         children: [
             {
                 path: '/mobile',
-                element: <Home />,
+                loader: () => redirect('/mobile/home'),
             },
             {
-                path: 'wyo',
-                element: <WhoYouOwn />,
+                path: 'home',
+                element: <MobileHome />,
             },
-            {
-                path: 'events',
-                element: <Events />,
-            },
-            {
-                path: 'le/shadowsun',
-                element: <LegendaryEvents id={LegendaryEventEnum.Shadowsun} />,
-            },
-            {
-                path: 'le/aunshi',
-                element: <LegendaryEvents id={LegendaryEventEnum.AunShi} />,
-            },
-            {
-                path: 'le/ragnar',
-                element: <LegendaryEvents id={LegendaryEventEnum.Ragnar} />,
-            },
-            {
-                path: 'goals',
-                element: <Goals />,
-            },
+            ...inputRoutes,
+            ...planRoutes,
+            ...learnRoutes,
         ],
     },
 ];

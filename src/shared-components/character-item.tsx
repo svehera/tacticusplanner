@@ -1,4 +1,4 @@
-﻿import { ICharacter2 } from '../models/interfaces';
+﻿import { ICharacter2, IMaterialRecipeIngredientFull } from '../models/interfaces';
 import React, { useContext, useState } from 'react';
 import { CharacterTitle } from './character-title';
 import Dialog from '@mui/material/Dialog';
@@ -10,10 +10,17 @@ import { DispatchContext } from '../reducers/store.provider';
 export const CharacterItem = (props: { character: ICharacter2 }) => {
     const [open, setOpen] = useState(false);
     const [character, setCharacter] = useState(() => ({ ...props.character }));
+    const [inventoryUpdate, setInventoryUpdate] = useState<IMaterialRecipeIngredientFull[]>([]);
 
     const dispatch = useContext(DispatchContext);
     const saveChanges = () => {
         dispatch.characters({ type: 'Update', character });
+        if (inventoryUpdate.length) {
+            dispatch.inventory({
+                type: 'DecrementUpgradeQuantity',
+                upgrades: inventoryUpdate.map(x => ({ id: x.material, count: x.count })),
+            });
+        }
     };
 
     const handleClickOpen = () => {
@@ -36,7 +43,13 @@ export const CharacterItem = (props: { character: ICharacter2 }) => {
                     <CharacterTitle character={character} />
                 </DialogTitle>
                 <DialogContent style={{ paddingTop: 20 }}>
-                    <CharacterDetails character={character} characterChanges={setCharacter} />
+                    <CharacterDetails
+                        character={character}
+                        characterChanges={(character, updateInventory) => {
+                            setCharacter(character);
+                            setInventoryUpdate(updateInventory);
+                        }}
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>

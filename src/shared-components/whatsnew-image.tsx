@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import { ICharacter2 } from '../models/interfaces';
 
 export const WhatsNewImage = ({ path, imageSize }: { path: string; imageSize?: number }) => {
     try {

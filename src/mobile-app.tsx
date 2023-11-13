@@ -1,8 +1,5 @@
 ﻿import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
-import ListIcon from '@mui/icons-material/List';
-import { Home } from '@mui/icons-material';
-import TargetIcon from '@mui/icons-material/TrackChanges';
-import LegendIcon from '@mui/icons-material/LegendToggle';
+import { Home, Input, School as Learn, TrackChanges as Plan } from '@mui/icons-material';
 
 import React, { useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
@@ -14,26 +11,14 @@ const MobileApp = () => {
     const [value, setValue] = React.useState(1);
 
     useEffect(() => {
-        switch (location.pathname) {
-            case '/mobile/wyo': {
-                setValue(1);
-                break;
-            }
-            case '/mobile/goals': {
-                setValue(2);
-                break;
-            }
-            case '/mobile/le/shadowsun':
-            case '/mobile/le/aunshi':
-            case '/mobile/le/ragnar':
-            case '/mobile/events': {
-                setValue(3);
-                break;
-            }
-            default: {
-                setValue(0);
-                break;
-            }
+        if (location.pathname.includes('input')) {
+            setValue(1);
+        } else if (location.pathname.includes('plan')) {
+            setValue(2);
+        } else if (location.pathname.includes('learn')) {
+            setValue(3);
+        } else {
+            setValue(0);
         }
     }, [location.pathname]);
 
@@ -42,28 +27,10 @@ const MobileApp = () => {
             <Outlet />
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, margin: 'auto' }} elevation={3}>
                 <BottomNavigation showLabels value={value}>
-                    <BottomNavigationAction
-                        value={1}
-                        component={Link}
-                        to={'./wyo'}
-                        label="Characters"
-                        icon={<ListIcon />}
-                    />
                     <BottomNavigationAction value={0} component={Link} to={'./'} label="Home" icon={<Home />} />
-                    <BottomNavigationAction
-                        value={2}
-                        component={Link}
-                        to={'./goals'}
-                        label="Goals"
-                        icon={<TargetIcon />}
-                    />
-                    <BottomNavigationAction
-                        value={3}
-                        component={Link}
-                        to={'./events'}
-                        label="Events"
-                        icon={<LegendIcon />}
-                    />
+                    <BottomNavigationAction value={1} component={Link} to={'./input'} label="Input" icon={<Input />} />
+                    <BottomNavigationAction value={2} component={Link} to={'./plan'} label="Plan" icon={<Plan />} />
+                    <BottomNavigationAction value={3} component={Link} to={'./learn'} label="Learn" icon={<Learn />} />
                 </BottomNavigation>
             </Paper>
         </Box>

@@ -29,7 +29,6 @@ root.render(
                 />
                 <RouterProvider router={routes} />
             </FluentProvider>
-            ,
         </AuthProvider>
     </React.StrictMode>
 );

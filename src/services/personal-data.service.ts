@@ -1,5 +1,9 @@
 ﻿import {
     IAutoTeamsPreferences,
+    ICampaignsProgress,
+    IDailyRaids,
+    IDailyRaidsPreferences,
+    IInventory,
     ILegendaryEventProgressState,
     ILegendaryEventSelectedRequirements,
     ILegendaryEventSelectedTeams,
@@ -36,6 +40,10 @@ export class PersonalDataLocalStorage {
                     ...defaultData.autoTeamsPreferences,
                     ...(this.getItem<IAutoTeamsPreferences>('autoTeamsPreferences') ?? {}),
                 },
+                dailyRaidsPreferences: {
+                    ...defaultData.dailyRaidsPreferences,
+                    ...(this.getItem<IDailyRaidsPreferences>('dailyRaidsPreferences') ?? {}),
+                },
                 viewPreferences: {
                     ...defaultData.viewPreferences,
                     ...(this.getItem<IViewPreferences>('viewPreferences') ?? {}),
@@ -52,6 +60,18 @@ export class PersonalDataLocalStorage {
                 leSelectedRequirements:
                     this.getItem<LegendaryEventData<ILegendaryEventSelectedRequirements>>('leSelectedRequirements') ??
                     defaultData.leSelectedRequirements,
+                campaignsProgress: {
+                    ...defaultData.campaignsProgress,
+                    ...(this.getItem<ICampaignsProgress>('campaignsProgress') ?? {}),
+                },
+                inventory: {
+                    ...defaultData.inventory,
+                    ...(this.getItem<IInventory>('inventory') ?? {}),
+                },
+                dailyRaids: {
+                    ...defaultData.dailyRaids,
+                    ...(this.getItem<IDailyRaids>('dailyRaids') ?? {}),
+                },
             };
         } else {
             // no version (convert v1 to v2)
@@ -158,6 +178,10 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             leTeams: v1Data.legendaryEvents3 ?? defaultData.leTeams,
             leProgress: v1Data.legendaryEventsProgress ?? defaultData.leProgress,
             leSelectedRequirements: v1Data.legendaryEventSelectedRequirements ?? defaultData.leSelectedRequirements,
+            campaignsProgress: defaultData.campaignsProgress,
+            dailyRaidsPreferences: defaultData.dailyRaidsPreferences,
+            inventory: defaultData.inventory,
+            dailyRaids: defaultData.dailyRaids,
         };
     }
 

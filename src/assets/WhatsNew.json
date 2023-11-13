@@ -1,6 +1,78 @@
 ﻿{
-  "currentVersion": "1.0.2",
+  "currentVersion": "1.1.0",
   "releaseNotes": [
+    {
+      "version": "1.1.0",
+      "date": "November 13",
+      "type": "Update",
+      "new": [
+        {
+          "text": "Daily Raids Planner",
+          "subPoints": [
+            "Plan daily raids for the characters you've set goals for",
+            "Set yours campaigns progress to get better estimate",
+            "Populate your inventory to have even more precise estimate",
+            "Mark applied gear on characters to improve estimate further"
+          ],
+          "images": [
+            {
+              "path": "dailyRaids.png"
+            },
+            {
+              "path": "dailyRaids2.png"
+            },
+            {
+              "path": "dailyRaids3.png"
+            },
+            {
+              "path": "dailyRaids4.png"
+            },
+            {
+              "path": "dailyRaids5.png"
+            }
+          ]
+        },
+        {
+          "text": "Home page update",
+          "subPoints": [
+            "Added upcoming legendary event. Shortcut to the Ragnar LE",
+            "Added top priority goal. Shortcut to the Goals",
+            "Added completed raids locations. Shortcut to the Daily Raids"
+          ],
+          "images": [
+            {
+              "path": "home.png"
+            }
+          ]
+        },
+        {
+          "text": "Navigation update",
+          "subPoints": [
+            "Input features: Who You Own, Campaigns Progress(new*), Inventory(new*)",
+            "Plan features: Goals, Daily Raids(new*), Ragnar LE, Aun Shi LE, Shadowsun LE",
+            "Learn features: Characters, Upgrades(new*), Rank Lookup(new*), Campaigns(new*), Dirty Dozen"
+          ],
+          "images": [
+            {
+              "path": "navigation-web.png"
+            },
+            {
+              "path": "navigation-mobile.png"
+            }
+          ]
+        }
+      ],
+      "minor": [
+        {
+          "text": "Updated characters order on Who You Own to be the same as in the game"
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed: issue with Unlock goal not appear as completed after character unlock"
+        }
+      ]
+    },
     {
       "version": "1.0.2",
       "date": "October 23",
@@ -12,7 +84,7 @@
         },
         {
           "text": "Updated new characters(Winged Tyrant Prime, Deathleaper, Njal Stormcaller, Ragnar Blackmane) stats and added icons",
-          "route": "/characters"
+          "route": "learn/characters"
         }
       ],
       "bugFixes": [
@@ -52,7 +124,7 @@
         },
         {
           "text": "Added LRE for Ragnar Blackmane. *Some data can change",
-          "route": "le/ragnar"
+          "route": "plan/le/ragnar"
         },
         {
           "text": "Technical improvements for better stability"

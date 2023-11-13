@@ -1,0 +1,4979 @@
+{
+  "I15": {
+    "campaign": "Indomitus",
+    "campaignType": "Early",
+    "nodeNumber": 15,
+    "reward": "Makhotep",
+    "expectedGold": 12.5
+  },
+  "I16": {
+    "campaign": "Indomitus",
+    "campaignType": "Early",
+    "nodeNumber": 16,
+    "reward": "The Iron Phoenix",
+    "expectedGold": 12.5
+  },
+  "I17": {
+    "campaign": "Indomitus",
+    "campaignType": "Early",
+    "nodeNumber": 17,
+    "reward": "Frag Grenade",
+    "expectedGold": 12.5
+  },
+  "I18": {
+    "campaign": "Indomitus",
+    "campaignType": "EarlyChars",
+    "nodeNumber": 18,
+    "reward": "Varro Tigurius",
+    "expectedGold": 12.5
+  },
+  "I19": {
+    "campaign": "Indomitus",
+    "campaignType": "Early",
+    "nodeNumber": 19,
+    "reward": "Purity Seal",
+    "expectedGold": 12.5
+  },
+  "I20": {
+    "campaign": "Indomitus",
+    "campaignType": "Early",
+    "nodeNumber": 20,
+    "reward": "Enriched Rations",
+    "expectedGold": 12.5
+  },
+  "I21": {
+    "campaign": "Indomitus",
+    "campaignType": "EarlyChars",
+    "nodeNumber": 21,
+    "reward": "Certus",
+    "expectedGold": 12.5
+  },
+  "I22": {
+    "campaign": "Indomitus",
+    "campaignType": "Early",
+    "nodeNumber": 22,
+    "reward": "Basic Auxiliary Core",
+    "expectedGold": 12.5
+  },
+  "I23": {
+    "campaign": "Indomitus",
+    "campaignType": "Early",
+    "nodeNumber": 23,
+    "reward": "The Gold Phoenix",
+    "expectedGold": 12.5
+  },
+  "I24": {
+    "campaign": "Indomitus",
+    "campaignType": "EarlyChars",
+    "nodeNumber": 24,
+    "reward": "Bellator",
+    "expectedGold": 12.5
+  },
+  "I25": {
+    "campaign": "Indomitus",
+    "campaignType": "Early",
+    "nodeNumber": 25,
+    "reward": "Attack Vector Data-Slate",
+    "expectedGold": 12.5
+  },
+  "I26": {
+    "campaign": "Indomitus",
+    "campaignType": "Early",
+    "nodeNumber": 26,
+    "reward": "Ceramite Lump",
+    "expectedGold": 12.5
+  },
+  "I27": {
+    "campaign": "Indomitus",
+    "campaignType": "Early",
+    "nodeNumber": 27,
+    "reward": "Incisus",
+    "expectedGold": 12.5
+  },
+  "I28": {
+    "campaign": "Indomitus",
+    "campaignType": "Early",
+    "nodeNumber": 28,
+    "reward": "Pile of Salvage",
+    "expectedGold": 12.5
+  },
+  "I29": {
+    "campaign": "Indomitus",
+    "campaignType": "EarlyChars",
+    "nodeNumber": 29,
+    "reward": "Vindicta",
+    "expectedGold": 12.5
+  },
+  "I30": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 30,
+    "reward": "Imospekh",
+    "expectedGold": 15
+  },
+  "I31": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 31,
+    "reward": "Box of Salvage",
+    "expectedGold": 15
+  },
+  "I32": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 32,
+    "reward": "Fine Purity Seal",
+    "expectedGold": 15
+  },
+  "I33": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 33,
+    "reward": "Lesser Reliquary of Protection",
+    "expectedGold": 15
+  },
+  "I34": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 34,
+    "reward": "The Silver Scope",
+    "expectedGold": 15
+  },
+  "I35": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 35,
+    "reward": "Marksman's Honour",
+    "expectedGold": 15
+  },
+  "I36": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 36,
+    "reward": "Locator Beacon",
+    "expectedGold": 15
+  },
+  "I37": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 37,
+    "reward": "Field Ration",
+    "expectedGold": 15
+  },
+  "I38": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 38,
+    "reward": "Round of Ammo",
+    "expectedGold": 15
+  },
+  "I39": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 39,
+    "reward": "Standard-Issue Tourniquet",
+    "expectedGold": 15
+  },
+  "I40": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 40,
+    "reward": "Oath Seal",
+    "expectedGold": 15
+  },
+  "I41": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 41,
+    "reward": "Reliquary of Vengeance",
+    "expectedGold": 15
+  },
+  "I42": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 42,
+    "reward": "Plasma Cell",
+    "expectedGold": 15
+  },
+  "I43": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 43,
+    "reward": "Fine Micro-Generator",
+    "expectedGold": 15
+  },
+  "I44": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 44,
+    "reward": "Wires",
+    "expectedGold": 15
+  },
+  "I45": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 45,
+    "reward": "Aleph-Null",
+    "expectedGold": 17.5
+  },
+  "I46": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 46,
+    "reward": "Canister of Chemicals",
+    "expectedGold": 17.5
+  },
+  "I47": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 47,
+    "reward": "Ballistics Data",
+    "expectedGold": 17.5
+  },
+  "I48": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 48,
+    "reward": "Adamantium Ore",
+    "expectedGold": 17.5
+  },
+  "I49": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 49,
+    "reward": "Minor Bionic Enhancement",
+    "expectedGold": 17.5
+  },
+  "I50": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 50,
+    "reward": "Can of Promethium",
+    "expectedGold": 17.5
+  },
+  "I51": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 51,
+    "reward": "Lesser Reliquary of Vengeance",
+    "expectedGold": 17.5
+  },
+  "I52": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 52,
+    "reward": "Weapon Anointment Oils",
+    "expectedGold": 17.5
+  },
+  "I53": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 53,
+    "reward": "Healing Ointment",
+    "expectedGold": 17.5
+  },
+  "I54": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 54,
+    "reward": "Barrel of Promethium",
+    "expectedGold": 17.5
+  },
+  "I55": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 55,
+    "reward": "Single Power Pack",
+    "expectedGold": 17.5
+  },
+  "I56": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 56,
+    "reward": "Otherworldly Energy",
+    "expectedGold": 17.5
+  },
+  "I57": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 57,
+    "reward": "Sophisticated Material",
+    "expectedGold": 17.5
+  },
+  "I58": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 58,
+    "reward": "Reliquary of Protection",
+    "expectedGold": 17.5
+  },
+  "I59": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 59,
+    "reward": "Adamantium Filaments",
+    "expectedGold": 17.5
+  },
+  "I60": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 60,
+    "reward": "Thutmose",
+    "expectedGold": 20
+  },
+  "I61": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 61,
+    "reward": "Advanced Filaments",
+    "expectedGold": 20
+  },
+  "I62": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 62,
+    "reward": "Tank of Promethium",
+    "expectedGold": 20
+  },
+  "I63": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 63,
+    "reward": "Reconstitution Protocols",
+    "expectedGold": 20
+  },
+  "I64": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 64,
+    "reward": "Mutation: Tough Skin",
+    "expectedGold": 20
+  },
+  "I65": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 65,
+    "reward": "Mutation: Warped Lungs",
+    "expectedGold": 20
+  },
+  "I66": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 66,
+    "reward": "Mutation: Scaly Skin",
+    "expectedGold": 20
+  },
+  "I67": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 67,
+    "reward": "Nano Swarm",
+    "expectedGold": 20
+  },
+  "I68": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 68,
+    "reward": "Advanced Rebreather",
+    "expectedGold": 20
+  },
+  "I69": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 69,
+    "reward": "The Silver Eagle with Swords",
+    "expectedGold": 20
+  },
+  "I70": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 70,
+    "reward": "Krak Grenade",
+    "expectedGold": 20
+  },
+  "I71": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 71,
+    "reward": "Metal Decorative Skull",
+    "expectedGold": 20
+  },
+  "I72": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 72,
+    "reward": "Targeting Link",
+    "expectedGold": 20
+  },
+  "I73": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 73,
+    "reward": "Duplicate Organ",
+    "expectedGold": 20
+  },
+  "I74": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 74,
+    "reward": "Engrammatic Entangler",
+    "expectedGold": 20
+  },
+  "I75": {
+    "campaign": "Indomitus",
+    "campaignType": "Normal",
+    "nodeNumber": 75,
+    "reward": "Anuphet",
+    "expectedGold": 50
+  },
+  "FoC1": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 1,
+    "reward": "Mutation: Warped Muscles",
+    "expectedGold": 53
+  },
+  "FoC10": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 10,
+    "reward": "Minor Bionic Enhancement",
+    "expectedGold": 53
+  },
+  "FoC11": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 11,
+    "reward": "Crate of Salvage",
+    "expectedGold": 53
+  },
+  "FoC12": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 12,
+    "reward": "Standard-Issue Tourniquet",
+    "expectedGold": 53
+  },
+  "FoC13": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 13,
+    "reward": "Weapon Parts",
+    "expectedGold": 53
+  },
+  "FoC14": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 14,
+    "reward": "Adamantium Ore",
+    "expectedGold": 53
+  },
+  "FoC15": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 15,
+    "reward": "Kut Skoden",
+    "expectedGold": 59
+  },
+  "FoC16": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 16,
+    "reward": "Pile of Salvage",
+    "expectedGold": 59
+  },
+  "FoC17": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 17,
+    "reward": "Kill Count",
+    "expectedGold": 59
+  },
+  "FoC18": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 18,
+    "reward": "Healing Ointment",
+    "expectedGold": 59
+  },
+  "FoC19": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 19,
+    "reward": "Auspex",
+    "expectedGold": 59
+  },
+  "FoC2": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 2,
+    "reward": "Nasty Spikes",
+    "expectedGold": 53
+  },
+  "FoC20": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 20,
+    "reward": "Round of Ammo",
+    "expectedGold": 59
+  },
+  "FoC21": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 21,
+    "reward": "Targeting Link",
+    "expectedGold": 59
+  },
+  "FoC22": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 22,
+    "reward": "Battle Scar",
+    "expectedGold": 59
+  },
+  "FoC23": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 23,
+    "reward": "Blessed Tasset Plate",
+    "expectedGold": 59
+  },
+  "FoC24": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 24,
+    "reward": "Canister of Chemicals",
+    "expectedGold": 59
+  },
+  "FoC25": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 25,
+    "reward": "Scrolls",
+    "expectedGold": 59
+  },
+  "FoC26": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 26,
+    "reward": "Metal Joints",
+    "expectedGold": 59
+  },
+  "FoC27": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 27,
+    "reward": "Lesser Reliquary of Protection",
+    "expectedGold": 59
+  },
+  "FoC28": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 28,
+    "reward": "Box of Salvage",
+    "expectedGold": 59
+  },
+  "FoC29": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 29,
+    "reward": "Frag Grenade",
+    "expectedGold": 59
+  },
+  "FoC3": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 3,
+    "reward": "Wires",
+    "expectedGold": 53
+  },
+  "FoC30": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 30,
+    "reward": "Sibyll Devine",
+    "expectedGold": 65
+  },
+  "FoC31": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 31,
+    "reward": "Fine Micro-Generator",
+    "expectedGold": 65
+  },
+  "FoC32": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 32,
+    "reward": "Basic Auxiliary Core",
+    "expectedGold": 65
+  },
+  "FoC33": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 33,
+    "reward": "Barrel of Promethium",
+    "expectedGold": 65
+  },
+  "FoC34": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 34,
+    "reward": "Plasma Cell",
+    "expectedGold": 65
+  },
+  "FoC35": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 35,
+    "reward": "Attack Vector Data-Slate",
+    "expectedGold": 65
+  },
+  "FoC36": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 36,
+    "reward": "Mutation: Warped Lungs",
+    "expectedGold": 65
+  },
+  "FoC37": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 37,
+    "reward": "Cloak",
+    "expectedGold": 65
+  },
+  "FoC38": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 38,
+    "reward": "Artificial Vertebrae",
+    "expectedGold": 65
+  },
+  "FoC39": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 39,
+    "reward": "Mutation: Scaly Skin",
+    "expectedGold": 65
+  },
+  "FoC4": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 4,
+    "reward": "Satchel",
+    "expectedGold": 53
+  },
+  "FoC40": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 40,
+    "reward": "Reinforced Cables",
+    "expectedGold": 65
+  },
+  "FoC41": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 41,
+    "reward": "Helmet Trophy",
+    "expectedGold": 65
+  },
+  "FoC42": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 42,
+    "reward": "Writings",
+    "expectedGold": 65
+  },
+  "FoC43": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 43,
+    "reward": "Mission Objective",
+    "expectedGold": 65
+  },
+  "FoC44": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 44,
+    "reward": "Weapon Anointment Oils",
+    "expectedGold": 65
+  },
+  "FoC45": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 45,
+    "reward": "Thaddeus Noble",
+    "expectedGold": 71
+  },
+  "FoC46": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 46,
+    "reward": "Purity Seal",
+    "expectedGold": 71
+  },
+  "FoC47": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 47,
+    "reward": "Can of Promethium",
+    "expectedGold": 71
+  },
+  "FoC48": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 48,
+    "reward": "Thick Skin",
+    "expectedGold": 71
+  },
+  "FoC49": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 49,
+    "reward": "The Silver Aquila",
+    "expectedGold": 71
+  },
+  "FoC5": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 5,
+    "reward": "Ropes and Chains",
+    "expectedGold": 53
+  },
+  "FoC50": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 50,
+    "reward": "Field Ration",
+    "expectedGold": 71
+  },
+  "FoC51": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 51,
+    "reward": "Beast Hide",
+    "expectedGold": 71
+  },
+  "FoC52": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 52,
+    "reward": "Mission Assignment",
+    "expectedGold": 71
+  },
+  "FoC53": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 53,
+    "reward": "Entrenching Tool",
+    "expectedGold": 71
+  },
+  "FoC54": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 54,
+    "reward": "Icon of Vengeance",
+    "expectedGold": 71
+  },
+  "FoC55": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 55,
+    "reward": "Ballistics Data",
+    "expectedGold": 71
+  },
+  "FoC56": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 56,
+    "reward": "Eye of Horus",
+    "expectedGold": 71
+  },
+  "FoC57": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 57,
+    "reward": "Hymn of Martyrs",
+    "expectedGold": 71
+  },
+  "FoC58": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 58,
+    "reward": "Combat Stimms",
+    "expectedGold": 71
+  },
+  "FoC59": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 59,
+    "reward": "Unnatural Vapour Dispenser",
+    "expectedGold": 71
+  },
+  "FoC6": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 6,
+    "reward": "Chip Damage",
+    "expectedGold": 53
+  },
+  "FoC60": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 60,
+    "reward": "Celestine",
+    "expectedGold": 77
+  },
+  "FoC61": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 61,
+    "reward": "Secret Agenda",
+    "expectedGold": 77
+  },
+  "FoC62": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 62,
+    "reward": "Classified Data-Slate",
+    "expectedGold": 77
+  },
+  "FoC63": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 63,
+    "reward": "Air Purificator",
+    "expectedGold": 77
+  },
+  "FoC64": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 64,
+    "reward": "The Phoenix Ascendant",
+    "expectedGold": 77
+  },
+  "FoC65": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 65,
+    "reward": "Blasphemous Armor Trim",
+    "expectedGold": 77
+  },
+  "FoC66": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 66,
+    "reward": "Repair-Kit",
+    "expectedGold": 77
+  },
+  "FoC67": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 67,
+    "reward": "Zeidos Ribbon",
+    "expectedGold": 77
+  },
+  "FoC68": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 68,
+    "reward": "Plague Bell",
+    "expectedGold": 77
+  },
+  "FoC69": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 69,
+    "reward": "Bionic Eye",
+    "expectedGold": 77
+  },
+  "FoC7": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 7,
+    "reward": "Armor Trim",
+    "expectedGold": 53
+  },
+  "FoC70": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 70,
+    "reward": "Flak Plates",
+    "expectedGold": 77
+  },
+  "FoC71": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 71,
+    "reward": "Wraithbone Plate",
+    "expectedGold": 77
+  },
+  "FoC72": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 72,
+    "reward": "Golden Ornamental Skull",
+    "expectedGold": 77
+  },
+  "FoC73": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 73,
+    "reward": "Blessed Promethium Canister",
+    "expectedGold": 77
+  },
+  "FoC74": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 74,
+    "reward": "Revered Talisman",
+    "expectedGold": 77
+  },
+  "FoC75": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 75,
+    "reward": "Castellan Creed",
+    "expectedGold": 83
+  },
+  "FoC8": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 8,
+    "reward": "Vox-Caster",
+    "expectedGold": 53
+  },
+  "FoC9": {
+    "campaign": "Fall of Cadia",
+    "campaignType": "Normal",
+    "nodeNumber": 9,
+    "reward": "Mutation: Tough Skin",
+    "expectedGold": 53
+  },
+  "O1": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 1,
+    "reward": "Ropes and Chains",
+    "expectedGold": 53
+  },
+  "O10": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 10,
+    "reward": "Cloak",
+    "expectedGold": 53
+  },
+  "O11": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 11,
+    "reward": "Armor Trim",
+    "expectedGold": 53
+  },
+  "O12": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 12,
+    "reward": "Reinforced Scale-Plates",
+    "expectedGold": 53
+  },
+  "O13": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 13,
+    "reward": "Mission Assignment",
+    "expectedGold": 53
+  },
+  "O14": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 14,
+    "reward": "Vox-Caster",
+    "expectedGold": 53
+  },
+  "O15": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 15,
+    "reward": "Brother Burchard",
+    "expectedGold": 59
+  },
+  "O16": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 16,
+    "reward": "Scrolls",
+    "expectedGold": 59
+  },
+  "O17": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 17,
+    "reward": "Rebreather",
+    "expectedGold": 59
+  },
+  "O18": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 18,
+    "reward": "Satchel",
+    "expectedGold": 59
+  },
+  "O19": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 19,
+    "reward": "Slicing Claws",
+    "expectedGold": 59
+  },
+  "O2": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 2,
+    "reward": "Wires",
+    "expectedGold": 53
+  },
+  "O20": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 20,
+    "reward": "Ceramite Lump",
+    "expectedGold": 59
+  },
+  "O21": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 21,
+    "reward": "Reliquary of Protection",
+    "expectedGold": 59
+  },
+  "O22": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 22,
+    "reward": "Bladesman's Honour",
+    "expectedGold": 59
+  },
+  "O23": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 23,
+    "reward": "Mesh Weave",
+    "expectedGold": 59
+  },
+  "O24": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 24,
+    "reward": "Writings",
+    "expectedGold": 59
+  },
+  "O25": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 25,
+    "reward": "Mission Objective",
+    "expectedGold": 59
+  },
+  "O26": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 26,
+    "reward": "Oath Seal",
+    "expectedGold": 59
+  },
+  "O27": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 27,
+    "reward": "Reinforced Cables",
+    "expectedGold": 59
+  },
+  "O28": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 28,
+    "reward": "The Gold Phoenix",
+    "expectedGold": 59
+  },
+  "O29": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 29,
+    "reward": "Subdermal Plating",
+    "expectedGold": 59
+  },
+  "O3": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 3,
+    "reward": "Chip Damage",
+    "expectedGold": 53
+  },
+  "O30": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 30,
+    "reward": "Sword Brother Godswyl",
+    "expectedGold": 65
+  },
+  "O31": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 31,
+    "reward": "Helmet Trophy",
+    "expectedGold": 65
+  },
+  "O32": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 32,
+    "reward": "Ancient Runes",
+    "expectedGold": 65
+  },
+  "O33": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 33,
+    "reward": "Advanced Rebreather",
+    "expectedGold": 65
+  },
+  "O34": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 34,
+    "reward": "Kill Count",
+    "expectedGold": 65
+  },
+  "O35": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 35,
+    "reward": "Iron Jaw",
+    "expectedGold": 65
+  },
+  "O36": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 36,
+    "reward": "Metal Decorative Skull",
+    "expectedGold": 65
+  },
+  "O37": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 37,
+    "reward": "Artificer Tasset Plate",
+    "expectedGold": 65
+  },
+  "O38": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 38,
+    "reward": "Sigil of Decay",
+    "expectedGold": 65
+  },
+  "O39": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 39,
+    "reward": "Krak Grenade",
+    "expectedGold": 65
+  },
+  "O4": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 4,
+    "reward": "Nasty Spikes",
+    "expectedGold": 53
+  },
+  "O40": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 40,
+    "reward": "Special Issue Ammo",
+    "expectedGold": 65
+  },
+  "O41": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 41,
+    "reward": "Chain of Zeal",
+    "expectedGold": 65
+  },
+  "O42": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 42,
+    "reward": "Terminator Honours",
+    "expectedGold": 65
+  },
+  "O43": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 43,
+    "reward": "Bionic Neural Pathways",
+    "expectedGold": 65
+  },
+  "O44": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 44,
+    "reward": "Adrenal Glands",
+    "expectedGold": 65
+  },
+  "O45": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 45,
+    "reward": "Ancient Thoread",
+    "expectedGold": 71
+  },
+  "O46": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 46,
+    "reward": "Bad Moon Teef",
+    "expectedGold": 71
+  },
+  "O47": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 47,
+    "reward": "Righteous Candle",
+    "expectedGold": 71
+  },
+  "O48": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 48,
+    "reward": "Rose of Martyrs",
+    "expectedGold": 71
+  },
+  "O49": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 49,
+    "reward": "Mutation: Warped Heart",
+    "expectedGold": 71
+  },
+  "O5": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 5,
+    "reward": "Thick Skin",
+    "expectedGold": 53
+  },
+  "O50": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 50,
+    "reward": "Blessed Corset Armor",
+    "expectedGold": 71
+  },
+  "O51": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 51,
+    "reward": "Ard Plate",
+    "expectedGold": 71
+  },
+  "O52": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 52,
+    "reward": "Toxin Sacs",
+    "expectedGold": 71
+  },
+  "O53": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 53,
+    "reward": "Basic Auxiliary Core",
+    "expectedGold": 71
+  },
+  "O54": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 54,
+    "reward": "Blessed Tabbard",
+    "expectedGold": 71
+  },
+  "O55": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 55,
+    "reward": "Plasma Cell",
+    "expectedGold": 71
+  },
+  "O56": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 56,
+    "reward": "Barrel of Promethium",
+    "expectedGold": 71
+  },
+  "O57": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 57,
+    "reward": "Pile of Salvage",
+    "expectedGold": 71
+  },
+  "O58": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 58,
+    "reward": "Box of Salvage",
+    "expectedGold": 71
+  },
+  "O59": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 59,
+    "reward": "Standard-Issue Tourniquet",
+    "expectedGold": 71
+  },
+  "O6": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 6,
+    "reward": "Metal Joints",
+    "expectedGold": 53
+  },
+  "O60": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 60,
+    "reward": "Brother Jaeger",
+    "expectedGold": 77
+  },
+  "O61": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 61,
+    "reward": "Canister of Chemicals",
+    "expectedGold": 77
+  },
+  "O62": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 62,
+    "reward": "Minor Bionic Enhancement",
+    "expectedGold": 77
+  },
+  "O63": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 63,
+    "reward": "The Silver Aquila",
+    "expectedGold": 77
+  },
+  "O64": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 64,
+    "reward": "Auspex",
+    "expectedGold": 77
+  },
+  "O65": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 65,
+    "reward": "Weapon Anointment Oils",
+    "expectedGold": 77
+  },
+  "O66": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 66,
+    "reward": "Purity Seal",
+    "expectedGold": 77
+  },
+  "O67": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 67,
+    "reward": "Lesser Reliquary of Protection",
+    "expectedGold": 77
+  },
+  "O68": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 68,
+    "reward": "Single Power Pack",
+    "expectedGold": 77
+  },
+  "O69": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 69,
+    "reward": "Fine Micro-Generator",
+    "expectedGold": 77
+  },
+  "O7": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 7,
+    "reward": "Adamantium Filaments",
+    "expectedGold": 53
+  },
+  "O70": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 70,
+    "reward": "Attack Vector Data-Slate",
+    "expectedGold": 77
+  },
+  "O71": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 71,
+    "reward": "Adamantium Ore",
+    "expectedGold": 77
+  },
+  "O72": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 72,
+    "reward": "Locator Beacon",
+    "expectedGold": 77
+  },
+  "O73": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 73,
+    "reward": "Divinator Class Auspex",
+    "expectedGold": 77
+  },
+  "O74": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 74,
+    "reward": "Battle Scar",
+    "expectedGold": 77
+  },
+  "O75": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 75,
+    "reward": "High Marshal Helbrecht",
+    "expectedGold": 83
+  },
+  "O8": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 8,
+    "reward": "Weapon Parts",
+    "expectedGold": 53
+  },
+  "O9": {
+    "campaign": "Octarius",
+    "campaignType": "Normal",
+    "nodeNumber": 9,
+    "reward": "Combat Stimms",
+    "expectedGold": 53
+  },
+  "SH1": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 1,
+    "reward": "Adamantium Filaments",
+    "expectedGold": 53
+  },
+  "SH10": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 10,
+    "reward": "Can of Promethium",
+    "expectedGold": 53
+  },
+  "SH11": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 11,
+    "reward": "Mutation: Tough Skin",
+    "expectedGold": 53
+  },
+  "SH12": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 12,
+    "reward": "Adamantium Ore",
+    "expectedGold": 53
+  },
+  "SH13": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 13,
+    "reward": "Mission Assignment",
+    "expectedGold": 53
+  },
+  "SH14": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 14,
+    "reward": "Mission Objective",
+    "expectedGold": 53
+  },
+  "SH15": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 15,
+    "reward": "Toth",
+    "expectedGold": 59
+  },
+  "SH16": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 16,
+    "reward": "Locator Beacon",
+    "expectedGold": 59
+  },
+  "SH17": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 17,
+    "reward": "Box of Salvage",
+    "expectedGold": 59
+  },
+  "SH18": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 18,
+    "reward": "Advanced Filaments",
+    "expectedGold": 59
+  },
+  "SH19": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 19,
+    "reward": "Lesser Reliquary of Protection",
+    "expectedGold": 59
+  },
+  "SH2": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 2,
+    "reward": "Scrolls",
+    "expectedGold": 53
+  },
+  "SH20": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 20,
+    "reward": "Mesh Weave",
+    "expectedGold": 59
+  },
+  "SH21": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 21,
+    "reward": "Weapon Anointment Oils",
+    "expectedGold": 59
+  },
+  "SH22": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 22,
+    "reward": "Cloak",
+    "expectedGold": 59
+  },
+  "SH23": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 23,
+    "reward": "Fine Micro-Generator",
+    "expectedGold": 59
+  },
+  "SH24": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 24,
+    "reward": "Writings",
+    "expectedGold": 59
+  },
+  "SH25": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 25,
+    "reward": "Fine Purity Seal",
+    "expectedGold": 59
+  },
+  "SH26": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 26,
+    "reward": "Mutation: Warped Lungs",
+    "expectedGold": 59
+  },
+  "SH27": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 27,
+    "reward": "Satchel",
+    "expectedGold": 59
+  },
+  "SH28": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 28,
+    "reward": "Plasma Cell",
+    "expectedGold": 59
+  },
+  "SH29": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 29,
+    "reward": "Kill Count",
+    "expectedGold": 59
+  },
+  "SH3": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 3,
+    "reward": "Targeting Link",
+    "expectedGold": 53
+  },
+  "SH30": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 30,
+    "reward": "Abraxas",
+    "expectedGold": 65
+  },
+  "SH31": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 31,
+    "reward": "Ritual Implements",
+    "expectedGold": 65
+  },
+  "SH32": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 32,
+    "reward": "Waystone",
+    "expectedGold": 65
+  },
+  "SH33": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 33,
+    "reward": "Crate of Salvage",
+    "expectedGold": 65
+  },
+  "SH34": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 34,
+    "reward": "Reliquary of Protection",
+    "expectedGold": 65
+  },
+  "SH35": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 35,
+    "reward": "Blessed Tasset Plate",
+    "expectedGold": 65
+  },
+  "SH36": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 36,
+    "reward": "Artificial Vertebrae",
+    "expectedGold": 65
+  },
+  "SH37": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 37,
+    "reward": "Key of Ignorance",
+    "expectedGold": 65
+  },
+  "SH38": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 38,
+    "reward": "Wolf Tail Talisman",
+    "expectedGold": 65
+  },
+  "SH39": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 39,
+    "reward": "Ancient Runes",
+    "expectedGold": 65
+  },
+  "SH4": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 4,
+    "reward": "Vox-Caster",
+    "expectedGold": 53
+  },
+  "SH40": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 40,
+    "reward": "Repair-Kit",
+    "expectedGold": 65
+  },
+  "SH41": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 41,
+    "reward": "Inferno Bolts",
+    "expectedGold": 65
+  },
+  "SH42": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 42,
+    "reward": "Classified Data-Slate",
+    "expectedGold": 65
+  },
+  "SH43": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 43,
+    "reward": "Reliquary of Vengeance",
+    "expectedGold": 65
+  },
+  "SH44": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 44,
+    "reward": "Psytronome",
+    "expectedGold": 65
+  },
+  "SH45": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 45,
+    "reward": "Yazaghor",
+    "expectedGold": 71
+  },
+  "SH46": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 46,
+    "reward": "Chapter Pendant",
+    "expectedGold": 71
+  },
+  "SH47": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 47,
+    "reward": "Field Ration",
+    "expectedGold": 71
+  },
+  "SH48": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 48,
+    "reward": "Bionic Eye",
+    "expectedGold": 71
+  },
+  "SH49": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 49,
+    "reward": "Healing Ointment",
+    "expectedGold": 71
+  },
+  "SH5": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 5,
+    "reward": "Armor Trim",
+    "expectedGold": 53
+  },
+  "SH50": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 50,
+    "reward": "Wolf Tooth Necklace",
+    "expectedGold": 71
+  },
+  "SH51": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 51,
+    "reward": "Otherworldly Energy",
+    "expectedGold": 71
+  },
+  "SH52": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 52,
+    "reward": "Bladesman's Honour",
+    "expectedGold": 71
+  },
+  "SH53": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 53,
+    "reward": "Slicing Claws",
+    "expectedGold": 71
+  },
+  "SH54": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 54,
+    "reward": "Artificer Tasset Plate",
+    "expectedGold": 71
+  },
+  "SH55": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 55,
+    "reward": "Enriched Rations",
+    "expectedGold": 71
+  },
+  "SH56": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 56,
+    "reward": "Dark Hood",
+    "expectedGold": 71
+  },
+  "SH57": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 57,
+    "reward": "Tainted Text",
+    "expectedGold": 71
+  },
+  "SH58": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 58,
+    "reward": "Wraithbone Plate",
+    "expectedGold": 71
+  },
+  "SH59": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 59,
+    "reward": "Hypermaterial Shifter",
+    "expectedGold": 71
+  },
+  "SH6": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 6,
+    "reward": "Sophisticated Material",
+    "expectedGold": 53
+  },
+  "SH60": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 60,
+    "reward": "Thaumachus",
+    "expectedGold": 77
+  },
+  "SH61": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 61,
+    "reward": "Nano Swarm",
+    "expectedGold": 77
+  },
+  "SH62": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 62,
+    "reward": "Beast Hide",
+    "expectedGold": 77
+  },
+  "SH63": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 63,
+    "reward": "Artificial Vertebrae",
+    "expectedGold": 77
+  },
+  "SH64": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 64,
+    "reward": "Mutation: Warped Lungs",
+    "expectedGold": 77
+  },
+  "SH65": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 65,
+    "reward": "Air Purificator",
+    "expectedGold": 77
+  },
+  "SH66": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 66,
+    "reward": "Rebreather",
+    "expectedGold": 77
+  },
+  "SH67": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 67,
+    "reward": "Warp Locus",
+    "expectedGold": 77
+  },
+  "SH68": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 68,
+    "reward": "Enriched Rations",
+    "expectedGold": 77
+  },
+  "SH69": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 69,
+    "reward": "Purity Seal",
+    "expectedGold": 77
+  },
+  "SH7": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 7,
+    "reward": "Mutation: Warped Muscles",
+    "expectedGold": 53
+  },
+  "SH70": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 70,
+    "reward": "Blessed Tasset Plate",
+    "expectedGold": 77
+  },
+  "SH71": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 71,
+    "reward": "Mutation: Warped Heart",
+    "expectedGold": 77
+  },
+  "SH72": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 72,
+    "reward": "Mutation: Scaly Skin",
+    "expectedGold": 77
+  },
+  "SH73": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 73,
+    "reward": "Golden Ornamental Skull",
+    "expectedGold": 77
+  },
+  "SH74": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 74,
+    "reward": "Advanced Rebreather",
+    "expectedGold": 77
+  },
+  "SH75": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 75,
+    "reward": "Ahriman",
+    "expectedGold": 83
+  },
+  "SH8": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 8,
+    "reward": "Ropes and Chains",
+    "expectedGold": 53
+  },
+  "SH9": {
+    "campaign": "Saim-Hann",
+    "campaignType": "Normal",
+    "nodeNumber": 9,
+    "reward": "Nasty Spikes",
+    "expectedGold": 53
+  },
+  "IM1": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 1,
+    "reward": "Rebreather",
+    "expectedGold": 53
+  },
+  "IM10": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 10,
+    "reward": "Blessed Tasset Plate",
+    "expectedGold": 53
+  },
+  "IM11": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 11,
+    "reward": "Artificial Vertebrae",
+    "expectedGold": 53
+  },
+  "IM12": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 12,
+    "reward": "Crate of Salvage",
+    "expectedGold": 53
+  },
+  "IM13": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 13,
+    "reward": "Classified Data-Slate",
+    "expectedGold": 53
+  },
+  "IM14": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 14,
+    "reward": "Kill Count",
+    "expectedGold": 53
+  },
+  "IM15": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "EarlyMirrorChars",
+    "nodeNumber": 15,
+    "reward": "Vindicta",
+    "expectedGold": 59
+  },
+  "IM16": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 16,
+    "reward": "Zeidos Ribbon",
+    "expectedGold": 59
+  },
+  "IM17": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 17,
+    "reward": "Mutation: Warped Heart",
+    "expectedGold": 59
+  },
+  "IM18": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 18,
+    "reward": "Artificer Tasset Plate",
+    "expectedGold": 59
+  },
+  "IM19": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 19,
+    "reward": "Bionic Eye",
+    "expectedGold": 59
+  },
+  "IM2": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 2,
+    "reward": "Weapon Parts",
+    "expectedGold": 53
+  },
+  "IM20": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 20,
+    "reward": "The Phoenix Ascendant",
+    "expectedGold": 59
+  },
+  "IM21": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 21,
+    "reward": "Nano Swarm",
+    "expectedGold": 59
+  },
+  "IM22": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 22,
+    "reward": "Viridian Energy Tesseract",
+    "expectedGold": 59
+  },
+  "IM23": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 23,
+    "reward": "Ancient Runes",
+    "expectedGold": 59
+  },
+  "IM24": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 24,
+    "reward": "Chip Damage",
+    "expectedGold": 59
+  },
+  "IM25": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 25,
+    "reward": "Greater Reliquary of Vengeance",
+    "expectedGold": 59
+  },
+  "IM26": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 26,
+    "reward": "Blessed Promethium Canister",
+    "expectedGold": 59
+  },
+  "IM27": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 27,
+    "reward": "Golden Ornamental Skull",
+    "expectedGold": 59
+  },
+  "IM28": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 28,
+    "reward": "Special Issue Ammo",
+    "expectedGold": 59
+  },
+  "IM29": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 29,
+    "reward": "Ropes and Chains",
+    "expectedGold": 59
+  },
+  "IM3": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 3,
+    "reward": "Mutation: Warped Muscles",
+    "expectedGold": 53
+  },
+  "IM30": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "EarlyMirrorChars",
+    "nodeNumber": 30,
+    "reward": "Bellator",
+    "expectedGold": 65
+  },
+  "IM31": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 31,
+    "reward": "Terminator Honours",
+    "expectedGold": 65
+  },
+  "IM32": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 32,
+    "reward": "Psytronome",
+    "expectedGold": 65
+  },
+  "IM33": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 33,
+    "reward": "Hymn of Martyrs",
+    "expectedGold": 65
+  },
+  "IM34": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 34,
+    "reward": "Repair-Kit",
+    "expectedGold": 65
+  },
+  "IM35": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 35,
+    "reward": "Metal Decorative Skull",
+    "expectedGold": 65
+  },
+  "IM36": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 36,
+    "reward": "Krak Grenade",
+    "expectedGold": 65
+  },
+  "IM37": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 37,
+    "reward": "Slicing Claws",
+    "expectedGold": 65
+  },
+  "IM38": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 38,
+    "reward": "Stimm Injector",
+    "expectedGold": 65
+  },
+  "IM39": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 39,
+    "reward": "Sensor Suite",
+    "expectedGold": 65
+  },
+  "IM4": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 4,
+    "reward": "Wires",
+    "expectedGold": 53
+  },
+  "IM40": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 40,
+    "reward": "Mutation: Scaly Skin",
+    "expectedGold": 65
+  },
+  "IM41": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 41,
+    "reward": "Mutation: Warped Lungs",
+    "expectedGold": 65
+  },
+  "IM42": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 42,
+    "reward": "Mutation: Tough Skin",
+    "expectedGold": 65
+  },
+  "IM43": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 43,
+    "reward": "Reconstitution Protocols",
+    "expectedGold": 65
+  },
+  "IM44": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 44,
+    "reward": "Tank of Promethium",
+    "expectedGold": 65
+  },
+  "IM45": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "EarlyMirrorChars",
+    "nodeNumber": 45,
+    "reward": "Certus",
+    "expectedGold": 71
+  },
+  "IM46": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 46,
+    "reward": "Advanced Filaments",
+    "expectedGold": 71
+  },
+  "IM47": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 47,
+    "reward": "Adamantium Filaments",
+    "expectedGold": 71
+  },
+  "IM48": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 48,
+    "reward": "Reliquary of Protection",
+    "expectedGold": 71
+  },
+  "IM49": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 49,
+    "reward": "Sophisticated Material",
+    "expectedGold": 71
+  },
+  "IM5": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 5,
+    "reward": "Helmet Trophy",
+    "expectedGold": 53
+  },
+  "IM50": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 50,
+    "reward": "Otherworldly Energy",
+    "expectedGold": 71
+  },
+  "IM51": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 51,
+    "reward": "Single Power Pack",
+    "expectedGold": 71
+  },
+  "IM52": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 52,
+    "reward": "Barrel of Promethium",
+    "expectedGold": 71
+  },
+  "IM53": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 53,
+    "reward": "Healing Ointment",
+    "expectedGold": 71
+  },
+  "IM54": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 54,
+    "reward": "Weapon Anointment Oils",
+    "expectedGold": 71
+  },
+  "IM55": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 55,
+    "reward": "Lesser Reliquary of Vengeance",
+    "expectedGold": 71
+  },
+  "IM56": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 56,
+    "reward": "Can of Promethium",
+    "expectedGold": 71
+  },
+  "IM57": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 57,
+    "reward": "Minor Bionic Enhancement",
+    "expectedGold": 71
+  },
+  "IM58": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 58,
+    "reward": "Adamantium Ore",
+    "expectedGold": 71
+  },
+  "IM59": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 59,
+    "reward": "Auspex",
+    "expectedGold": 71
+  },
+  "IM6": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 6,
+    "reward": "Combat Stimms",
+    "expectedGold": 53
+  },
+  "IM60": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "EarlyMirrorChars",
+    "nodeNumber": 60,
+    "reward": "Varro Tigurius",
+    "expectedGold": 77
+  },
+  "IM61": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 61,
+    "reward": "Ballistics Data",
+    "expectedGold": 77
+  },
+  "IM62": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 62,
+    "reward": "Canister of Chemicals",
+    "expectedGold": 77
+  },
+  "IM63": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 63,
+    "reward": "Divinator Class Auspex",
+    "expectedGold": 77
+  },
+  "IM64": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 64,
+    "reward": "Fine Micro-Generator",
+    "expectedGold": 77
+  },
+  "IM65": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 65,
+    "reward": "Plasma Cell",
+    "expectedGold": 77
+  },
+  "IM66": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 66,
+    "reward": "The Silver Aquila",
+    "expectedGold": 77
+  },
+  "IM67": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 67,
+    "reward": "Reliquary of Vengeance",
+    "expectedGold": 77
+  },
+  "IM68": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 68,
+    "reward": "Oath Seal",
+    "expectedGold": 77
+  },
+  "IM69": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 69,
+    "reward": "Standard-Issue Tourniquet",
+    "expectedGold": 77
+  },
+  "IM7": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 7,
+    "reward": "Reinforced Cables",
+    "expectedGold": 53
+  },
+  "IM70": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 70,
+    "reward": "Codex Astartes Page",
+    "expectedGold": 77
+  },
+  "IM71": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 71,
+    "reward": "Engrammatic Entangler",
+    "expectedGold": 77
+  },
+  "IM72": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 72,
+    "reward": "Holy Chaplet",
+    "expectedGold": 77
+  },
+  "IM73": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 73,
+    "reward": "Rose of Martyrs",
+    "expectedGold": 77
+  },
+  "IM74": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 74,
+    "reward": "Hypermaterial Shifter",
+    "expectedGold": 77
+  },
+  "IM75": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 75,
+    "reward": "Marneus Calgar",
+    "expectedGold": 83
+  },
+  "IM8": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 8,
+    "reward": "Reinforced Scale-Plates",
+    "expectedGold": 53
+  },
+  "IM9": {
+    "campaign": "Indomitus Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 9,
+    "reward": "Air Purificator",
+    "expectedGold": 53
+  },
+  "FoCM1": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 1,
+    "reward": "Round of Ammo",
+    "expectedGold": 53
+  },
+  "FoCM10": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 10,
+    "reward": "Ceramite Lump",
+    "expectedGold": 53
+  },
+  "FoCM11": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 11,
+    "reward": "Attack Vector Data-Slate",
+    "expectedGold": 53
+  },
+  "FoCM12": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 12,
+    "reward": "The Gold Phoenix",
+    "expectedGold": 53
+  },
+  "FoCM13": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 13,
+    "reward": "Scrolls",
+    "expectedGold": 53
+  },
+  "FoCM14": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 14,
+    "reward": "Enriched Rations",
+    "expectedGold": 53
+  },
+  "FoCM15": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 15,
+    "reward": "Angrax",
+    "expectedGold": 59
+  },
+  "FoCM16": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 16,
+    "reward": "Purity Seal",
+    "expectedGold": 59
+  },
+  "FoCM17": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 17,
+    "reward": "Frag Grenade",
+    "expectedGold": 59
+  },
+  "FoCM18": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 18,
+    "reward": "The Iron Phoenix",
+    "expectedGold": 59
+  },
+  "FoCM19": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 19,
+    "reward": "Basic Auxiliary Core",
+    "expectedGold": 59
+  },
+  "FoCM2": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 2,
+    "reward": "Field Ration",
+    "expectedGold": 53
+  },
+  "FoCM20": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 20,
+    "reward": "Targeting Link",
+    "expectedGold": 59
+  },
+  "FoCM21": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 21,
+    "reward": "Nasty Spikes",
+    "expectedGold": 59
+  },
+  "FoCM22": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 22,
+    "reward": "Rebreather",
+    "expectedGold": 59
+  },
+  "FoCM23": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 23,
+    "reward": "Weapon Parts",
+    "expectedGold": 59
+  },
+  "FoCM24": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 24,
+    "reward": "Mutation: Warped Muscles",
+    "expectedGold": 59
+  },
+  "FoCM25": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 25,
+    "reward": "Warp Locus",
+    "expectedGold": 59
+  },
+  "FoCM26": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 26,
+    "reward": "Blessed Promethium Canister",
+    "expectedGold": 59
+  },
+  "FoCM27": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 27,
+    "reward": "Golden Ornamental Skull",
+    "expectedGold": 59
+  },
+  "FoCM28": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 28,
+    "reward": "Relic Hilt",
+    "expectedGold": 59
+  },
+  "FoCM29": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 29,
+    "reward": "Bionic Neural Pathways",
+    "expectedGold": 59
+  },
+  "FoCM3": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 3,
+    "reward": "Locator Beacon",
+    "expectedGold": 53
+  },
+  "FoCM30": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 30,
+    "reward": "Archimatos",
+    "expectedGold": 65
+  },
+  "FoCM31": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 31,
+    "reward": "Terminator Honours",
+    "expectedGold": 65
+  },
+  "FoCM32": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 32,
+    "reward": "Bionic Eye",
+    "expectedGold": 65
+  },
+  "FoCM33": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 33,
+    "reward": "Waystone",
+    "expectedGold": 65
+  },
+  "FoCM34": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 34,
+    "reward": "Mission Objective",
+    "expectedGold": 65
+  },
+  "FoCM35": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 35,
+    "reward": "Mesh Weave",
+    "expectedGold": 65
+  },
+  "FoCM36": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 36,
+    "reward": "Special Issue Ammo",
+    "expectedGold": 65
+  },
+  "FoCM37": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 37,
+    "reward": "Repair-Kit",
+    "expectedGold": 65
+  },
+  "FoCM38": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 38,
+    "reward": "Mutation: Scaly Skin",
+    "expectedGold": 65
+  },
+  "FoCM39": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 39,
+    "reward": "Satchel",
+    "expectedGold": 65
+  },
+  "FoCM4": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 4,
+    "reward": "Slicing Claws",
+    "expectedGold": 53
+  },
+  "FoCM40": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 40,
+    "reward": "Crate of Salvage",
+    "expectedGold": 65
+  },
+  "FoCM41": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 41,
+    "reward": "Classified Data-Slate",
+    "expectedGold": 65
+  },
+  "FoCM42": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 42,
+    "reward": "Battle Scar",
+    "expectedGold": 65
+  },
+  "FoCM43": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 43,
+    "reward": "Zeidos Ribbon",
+    "expectedGold": 65
+  },
+  "FoCM44": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 44,
+    "reward": "Icon of Vengeance",
+    "expectedGold": 65
+  },
+  "FoCM45": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 45,
+    "reward": "Volk",
+    "expectedGold": 71
+  },
+  "FoCM46": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 46,
+    "reward": "Mutation: Warped Heart",
+    "expectedGold": 71
+  },
+  "FoCM47": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 47,
+    "reward": "Artificer Tasset Plate",
+    "expectedGold": 71
+  },
+  "FoCM48": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 48,
+    "reward": "Wraithbone Plate",
+    "expectedGold": 71
+  },
+  "FoCM49": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 49,
+    "reward": "The Phoenix Ascendant",
+    "expectedGold": 71
+  },
+  "FoCM5": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 5,
+    "reward": "The Silver Scope",
+    "expectedGold": 53
+  },
+  "FoCM50": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 50,
+    "reward": "Drone Controller",
+    "expectedGold": 71
+  },
+  "FoCM51": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 51,
+    "reward": "Viridian Energy Tesseract",
+    "expectedGold": 71
+  },
+  "FoCM52": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 52,
+    "reward": "Ancient Runes",
+    "expectedGold": 71
+  },
+  "FoCM53": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 53,
+    "reward": "Unnatural Vapour Dispenser",
+    "expectedGold": 71
+  },
+  "FoCM54": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 54,
+    "reward": "Helmet Trophy",
+    "expectedGold": 71
+  },
+  "FoCM55": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 55,
+    "reward": "Eye of Horus",
+    "expectedGold": 71
+  },
+  "FoCM56": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 56,
+    "reward": "Combat Stimms",
+    "expectedGold": 71
+  },
+  "FoCM57": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 57,
+    "reward": "Reinforced Cables",
+    "expectedGold": 71
+  },
+  "FoCM58": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 58,
+    "reward": "Reinforced Scale-Plates",
+    "expectedGold": 71
+  },
+  "FoCM59": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 59,
+    "reward": "Entrenching Tool",
+    "expectedGold": 71
+  },
+  "FoCM6": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 6,
+    "reward": "Lesser Reliquary of Protection",
+    "expectedGold": 53
+  },
+  "FoCM60": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 60,
+    "reward": "Haarken Worldclaimer",
+    "expectedGold": 77
+  },
+  "FoCM61": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 61,
+    "reward": "Air Purificator",
+    "expectedGold": 77
+  },
+  "FoCM62": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 62,
+    "reward": "Engram Neurochip",
+    "expectedGold": 77
+  },
+  "FoCM63": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 63,
+    "reward": "Artificial Vertebrae",
+    "expectedGold": 77
+  },
+  "FoCM64": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 64,
+    "reward": "Sigil of Decay",
+    "expectedGold": 77
+  },
+  "FoCM65": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 65,
+    "reward": "Blasphemous Armor Trim",
+    "expectedGold": 77
+  },
+  "FoCM66": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 66,
+    "reward": "Honourifica Imperialis",
+    "expectedGold": 77
+  },
+  "FoCM67": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 67,
+    "reward": "Blessed Corset Armor",
+    "expectedGold": 77
+  },
+  "FoCM68": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 68,
+    "reward": "Mutation: Warped Lungs",
+    "expectedGold": 77
+  },
+  "FoCM69": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 69,
+    "reward": "Nasty Spikes",
+    "expectedGold": 77
+  },
+  "FoCM7": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 7,
+    "reward": "Fine Purity Seal",
+    "expectedGold": 53
+  },
+  "FoCM70": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 70,
+    "reward": "Flak Plates",
+    "expectedGold": 77
+  },
+  "FoCM71": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 71,
+    "reward": "Blessing of the Dark Gods",
+    "expectedGold": 77
+  },
+  "FoCM72": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 72,
+    "reward": "Blessing of Nurgle",
+    "expectedGold": 77
+  },
+  "FoCM73": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 73,
+    "reward": "Weathering",
+    "expectedGold": 77
+  },
+  "FoCM74": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 74,
+    "reward": "Greater Reliquary of Vengeance",
+    "expectedGold": 77
+  },
+  "FoCM75": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 75,
+    "reward": "Abaddon The Despoiler",
+    "expectedGold": 83
+  },
+  "FoCM8": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 8,
+    "reward": "Box of Salvage",
+    "expectedGold": 53
+  },
+  "FoCM9": {
+    "campaign": "Fall of Cadia Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 9,
+    "reward": "Pile of Salvage",
+    "expectedGold": 53
+  },
+  "OM1": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 1,
+    "reward": "Purity Seal",
+    "expectedGold": 53
+  },
+  "OM10": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 10,
+    "reward": "Weapon Anointment Oils",
+    "expectedGold": 53
+  },
+  "OM11": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 11,
+    "reward": "Minor Bionic Enhancement",
+    "expectedGold": 53
+  },
+  "OM12": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 12,
+    "reward": "Mission Assignment",
+    "expectedGold": 53
+  },
+  "OM13": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 13,
+    "reward": "Ropes and Chains",
+    "expectedGold": 53
+  },
+  "OM14": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 14,
+    "reward": "Basic Auxiliary Core",
+    "expectedGold": 53
+  },
+  "OM15": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 15,
+    "reward": "Snappawrecka",
+    "expectedGold": 59
+  },
+  "OM16": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 16,
+    "reward": "Chip Damage",
+    "expectedGold": 59
+  },
+  "OM17": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 17,
+    "reward": "Field Ration",
+    "expectedGold": 59
+  },
+  "OM18": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 18,
+    "reward": "Pile of Salvage",
+    "expectedGold": 59
+  },
+  "OM19": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 19,
+    "reward": "Auspex",
+    "expectedGold": 59
+  },
+  "OM2": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 2,
+    "reward": "Canister of Chemicals",
+    "expectedGold": 53
+  },
+  "OM20": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 20,
+    "reward": "Lesser Reliquary of Protection",
+    "expectedGold": 59
+  },
+  "OM21": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 21,
+    "reward": "Vox-Caster",
+    "expectedGold": 59
+  },
+  "OM22": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 22,
+    "reward": "Armor Trim",
+    "expectedGold": 59
+  },
+  "OM23": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 23,
+    "reward": "Mesh Weave",
+    "expectedGold": 59
+  },
+  "OM24": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 24,
+    "reward": "Blessed Tasset Plate",
+    "expectedGold": 59
+  },
+  "OM25": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 25,
+    "reward": "Reinforced Scale-Plates",
+    "expectedGold": 59
+  },
+  "OM26": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 26,
+    "reward": "Round of Ammo",
+    "expectedGold": 59
+  },
+  "OM27": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 27,
+    "reward": "Adamantium Ore",
+    "expectedGold": 59
+  },
+  "OM28": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 28,
+    "reward": "Barrel of Promethium",
+    "expectedGold": 59
+  },
+  "OM29": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 29,
+    "reward": "Fine Micro-Generator",
+    "expectedGold": 59
+  },
+  "OM3": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 3,
+    "reward": "Weapon Parts",
+    "expectedGold": 53
+  },
+  "OM30": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 30,
+    "reward": "Gibbascrapz",
+    "expectedGold": 65
+  },
+  "OM31": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 31,
+    "reward": "Fine Purity Seal",
+    "expectedGold": 65
+  },
+  "OM32": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 32,
+    "reward": "Can of Promethium",
+    "expectedGold": 65
+  },
+  "OM33": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 33,
+    "reward": "Writings",
+    "expectedGold": 65
+  },
+  "OM34": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 34,
+    "reward": "Cloak",
+    "expectedGold": 65
+  },
+  "OM35": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 35,
+    "reward": "Metal Joints",
+    "expectedGold": 65
+  },
+  "OM36": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 36,
+    "reward": "Plasma Cell",
+    "expectedGold": 65
+  },
+  "OM37": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 37,
+    "reward": "The Phoenix Ascendant",
+    "expectedGold": 65
+  },
+  "OM38": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 38,
+    "reward": "Kill Count",
+    "expectedGold": 65
+  },
+  "OM39": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 39,
+    "reward": "Ceramite Lump",
+    "expectedGold": 65
+  },
+  "OM4": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 4,
+    "reward": "Frag Grenade",
+    "expectedGold": 53
+  },
+  "OM40": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 40,
+    "reward": "Oath Seal",
+    "expectedGold": 65
+  },
+  "OM41": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 41,
+    "reward": "Bladesman's Honour",
+    "expectedGold": 65
+  },
+  "OM42": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 42,
+    "reward": "Satchel",
+    "expectedGold": 65
+  },
+  "OM43": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 43,
+    "reward": "Locator Beacon",
+    "expectedGold": 65
+  },
+  "OM44": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 44,
+    "reward": "Reliquary of Protection",
+    "expectedGold": 65
+  },
+  "OM45": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 45,
+    "reward": "Snotflogga",
+    "expectedGold": 71
+  },
+  "OM46": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 46,
+    "reward": "Ballistics Data",
+    "expectedGold": 71
+  },
+  "OM47": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 47,
+    "reward": "Mission Objective",
+    "expectedGold": 71
+  },
+  "OM48": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 48,
+    "reward": "Tank of Promethium",
+    "expectedGold": 71
+  },
+  "OM49": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 49,
+    "reward": "Artificer Tasset Plate",
+    "expectedGold": 71
+  },
+  "OM5": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 5,
+    "reward": "Standard-Issue Tourniquet",
+    "expectedGold": 53
+  },
+  "OM50": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 50,
+    "reward": "Classified Data-Slate",
+    "expectedGold": 71
+  },
+  "OM51": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 51,
+    "reward": "The Gold Phoenix",
+    "expectedGold": 71
+  },
+  "OM52": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 52,
+    "reward": "Metal Decorative Skull",
+    "expectedGold": 71
+  },
+  "OM53": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 53,
+    "reward": "Iron Jaw",
+    "expectedGold": 71
+  },
+  "OM54": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 54,
+    "reward": "Wolf Tail Talisman",
+    "expectedGold": 71
+  },
+  "OM55": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 55,
+    "reward": "Krak Grenade",
+    "expectedGold": 71
+  },
+  "OM56": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 56,
+    "reward": "Reinforced Chitin",
+    "expectedGold": 71
+  },
+  "OM57": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 57,
+    "reward": "Battle Scar",
+    "expectedGold": 71
+  },
+  "OM58": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 58,
+    "reward": "Advanced Filaments",
+    "expectedGold": 71
+  },
+  "OM59": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 59,
+    "reward": "Chain of Zeal",
+    "expectedGold": 71
+  },
+  "OM6": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 6,
+    "reward": "Healing Ointment",
+    "expectedGold": 53
+  },
+  "OM60": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 60,
+    "reward": "Tanksmasha",
+    "expectedGold": 77
+  },
+  "OM61": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 61,
+    "reward": "Bad Moon Teef",
+    "expectedGold": 77
+  },
+  "OM62": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 62,
+    "reward": "Enriched Rations",
+    "expectedGold": 77
+  },
+  "OM63": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 63,
+    "reward": "Righteous Candle",
+    "expectedGold": 77
+  },
+  "OM64": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 64,
+    "reward": "Wolf Tooth Necklace",
+    "expectedGold": 77
+  },
+  "OM65": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 65,
+    "reward": "Targeting Link",
+    "expectedGold": 77
+  },
+  "OM66": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 66,
+    "reward": "Blessed Tabbard",
+    "expectedGold": 77
+  },
+  "OM67": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 67,
+    "reward": "Plague Bell",
+    "expectedGold": 77
+  },
+  "OM68": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 68,
+    "reward": "Synaptic Augmentation",
+    "expectedGold": 77
+  },
+  "OM69": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 69,
+    "reward": "Ard Plate",
+    "expectedGold": 77
+  },
+  "OM7": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 7,
+    "reward": "Rebreather",
+    "expectedGold": 53
+  },
+  "OM70": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 70,
+    "reward": "Bones of the Paragons",
+    "expectedGold": 77
+  },
+  "OM71": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 71,
+    "reward": "Mjod",
+    "expectedGold": 77
+  },
+  "OM72": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 72,
+    "reward": "Kustom Gubbinz",
+    "expectedGold": 77
+  },
+  "OM73": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 73,
+    "reward": "Duplicate Organ",
+    "expectedGold": 77
+  },
+  "OM74": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 74,
+    "reward": "Runes of Fate",
+    "expectedGold": 77
+  },
+  "OM75": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 75,
+    "reward": "Boss Gulgortz",
+    "expectedGold": 83
+  },
+  "OM8": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 8,
+    "reward": "Wires",
+    "expectedGold": 53
+  },
+  "OM9": {
+    "campaign": "Octarius Mirror",
+    "campaignType": "Mirror",
+    "nodeNumber": 9,
+    "reward": "Single Power Pack",
+    "expectedGold": 53
+  },
+  "IE1": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 1,
+    "reward": "Adamantium Ore",
+    "expectedGold": 83
+  },
+  "IE10": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 10,
+    "reward": "Fine Purity Seal",
+    "expectedGold": 91.5
+  },
+  "IE11": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 11,
+    "reward": "Round of Ammo",
+    "expectedGold": 91.5
+  },
+  "IE12": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 12,
+    "reward": "Writings",
+    "expectedGold": 91.5
+  },
+  "IE13": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 13,
+    "reward": "Oath Seal",
+    "expectedGold": 91.5
+  },
+  "IE14": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 14,
+    "reward": "Reliquary of Vengeance",
+    "expectedGold": 91.5
+  },
+  "IE15": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 15,
+    "reward": "Repair-Kit",
+    "expectedGold": 91.5
+  },
+  "IE16": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 16,
+    "reward": "Imospekh",
+    "expectedGold": 91.5
+  },
+  "IE17": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 17,
+    "reward": "Hymn of Martyrs",
+    "expectedGold": 101
+  },
+  "IE18": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 18,
+    "reward": "Sensor Suite",
+    "expectedGold": 101
+  },
+  "IE19": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 19,
+    "reward": "Rose of Martyrs",
+    "expectedGold": 101
+  },
+  "IE2": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 2,
+    "reward": "Minor Bionic Enhancement",
+    "expectedGold": 83
+  },
+  "IE20": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 20,
+    "reward": "Stimm Injector",
+    "expectedGold": 101
+  },
+  "IE21": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 21,
+    "reward": "Blessed Corset Armor",
+    "expectedGold": 101
+  },
+  "IE22": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 22,
+    "reward": "Drone Controller",
+    "expectedGold": 101
+  },
+  "IE23": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 23,
+    "reward": "Codex Astartes Page",
+    "expectedGold": 101
+  },
+  "IE24": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 24,
+    "reward": "Aleph-Null",
+    "expectedGold": 101
+  },
+  "IE25": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 25,
+    "reward": "Classified Data-Slate",
+    "expectedGold": 108
+  },
+  "IE26": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 26,
+    "reward": "Viridian Energy Tesseract",
+    "expectedGold": 108
+  },
+  "IE27": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 27,
+    "reward": "Greater Reliquary of Vengeance",
+    "expectedGold": 108
+  },
+  "IE28": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 28,
+    "reward": "Engrammatic Entangler",
+    "expectedGold": 108
+  },
+  "IE29": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 29,
+    "reward": "Holy Chaplet",
+    "expectedGold": 108
+  },
+  "IE3": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 3,
+    "reward": "Purity Seal",
+    "expectedGold": 83
+  },
+  "IE30": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 30,
+    "reward": "Engram Neurochip",
+    "expectedGold": 108
+  },
+  "IE31": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 31,
+    "reward": "Terminator Honours",
+    "expectedGold": 108
+  },
+  "IE32": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 32,
+    "reward": "Thutmose",
+    "expectedGold": 108
+  },
+  "IE33": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 33,
+    "reward": "Sophisticated Material",
+    "expectedGold": 108
+  },
+  "IE34": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 34,
+    "reward": "Blessed Tasset Plate",
+    "expectedGold": 108
+  },
+  "IE35": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 35,
+    "reward": "Ceramite Lump",
+    "expectedGold": 108
+  },
+  "IE36": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 36,
+    "reward": "Krak Grenade",
+    "expectedGold": 108
+  },
+  "IE37": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 37,
+    "reward": "Special Issue Ammo",
+    "expectedGold": 108
+  },
+  "IE38": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 38,
+    "reward": "Codex Astartes Page",
+    "expectedGold": 108
+  },
+  "IE39": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 39,
+    "reward": "Holy Chaplet",
+    "expectedGold": 108
+  },
+  "IE4": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 4,
+    "reward": "Enriched Rations",
+    "expectedGold": 83
+  },
+  "IE40": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 40,
+    "reward": "Anuphet",
+    "expectedGold": 108
+  },
+  "IE5": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 5,
+    "reward": "Basic Auxiliary Core",
+    "expectedGold": 83
+  },
+  "IE6": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 6,
+    "reward": "The Gold Phoenix",
+    "expectedGold": 83
+  },
+  "IE7": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 7,
+    "reward": "The Phoenix Ascendant",
+    "expectedGold": 83
+  },
+  "IE8": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 8,
+    "reward": "Makhotep",
+    "expectedGold": 83
+  },
+  "IE9": {
+    "campaign": "Indomitus Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 9,
+    "reward": "Weapon Anointment Oils",
+    "expectedGold": 91.5
+  },
+  "FoCE1": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 1,
+    "reward": "Armor Trim",
+    "expectedGold": 83
+  },
+  "FoCE10": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 10,
+    "reward": "Mutation: Warped Muscles",
+    "expectedGold": 91.5
+  },
+  "FoCE11": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 11,
+    "reward": "Canister of Chemicals",
+    "expectedGold": 91.5
+  },
+  "FoCE12": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 12,
+    "reward": "Helmet Trophy",
+    "expectedGold": 91.5
+  },
+  "FoCE13": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 13,
+    "reward": "Mutation: Scaly Skin",
+    "expectedGold": 91.5
+  },
+  "FoCE14": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 14,
+    "reward": "Fine Micro-Generator",
+    "expectedGold": 91.5
+  },
+  "FoCE15": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 15,
+    "reward": "Kill Count",
+    "expectedGold": 91.5
+  },
+  "FoCE16": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 16,
+    "reward": "Sibyll Devine",
+    "expectedGold": 91.5
+  },
+  "FoCE17": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 17,
+    "reward": "Icon of Vengeance",
+    "expectedGold": 101
+  },
+  "FoCE18": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 18,
+    "reward": "Sigil of Decay",
+    "expectedGold": 101
+  },
+  "FoCE19": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 19,
+    "reward": "Eye of Horus",
+    "expectedGold": 101
+  },
+  "FoCE2": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 2,
+    "reward": "Scrolls",
+    "expectedGold": 83
+  },
+  "FoCE20": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 20,
+    "reward": "Plague Bell",
+    "expectedGold": 101
+  },
+  "FoCE21": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 21,
+    "reward": "Blasphemous Armor Trim",
+    "expectedGold": 101
+  },
+  "FoCE22": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 22,
+    "reward": "Unnatural Vapour Dispenser",
+    "expectedGold": 101
+  },
+  "FoCE23": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 23,
+    "reward": "Blessing of the Dark Gods",
+    "expectedGold": 101
+  },
+  "FoCE24": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 24,
+    "reward": "Thaddeus Noble",
+    "expectedGold": 101
+  },
+  "FoCE25": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 25,
+    "reward": "Entrenching Tool",
+    "expectedGold": 108
+  },
+  "FoCE26": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 26,
+    "reward": "Zeidos Ribbon",
+    "expectedGold": 108
+  },
+  "FoCE27": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 27,
+    "reward": "Flak Plates",
+    "expectedGold": 108
+  },
+  "FoCE28": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 28,
+    "reward": "Honourifica Imperialis",
+    "expectedGold": 108
+  },
+  "FoCE29": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 29,
+    "reward": "Blessing of Nurgle",
+    "expectedGold": 108
+  },
+  "FoCE3": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 3,
+    "reward": "Mutation: Tough Skin",
+    "expectedGold": 83
+  },
+  "FoCE30": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 30,
+    "reward": "Metal Decorative Skull",
+    "expectedGold": 108
+  },
+  "FoCE31": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 31,
+    "reward": "Warp Locus",
+    "expectedGold": 108
+  },
+  "FoCE32": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 32,
+    "reward": "Celestine",
+    "expectedGold": 108
+  },
+  "FoCE33": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 33,
+    "reward": "Mission Assignment",
+    "expectedGold": 108
+  },
+  "FoCE34": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 34,
+    "reward": "Locator Beacon",
+    "expectedGold": 108
+  },
+  "FoCE35": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 35,
+    "reward": "Artificial Vertebrae",
+    "expectedGold": 108
+  },
+  "FoCE36": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 36,
+    "reward": "Artificer Tasset Plate",
+    "expectedGold": 108
+  },
+  "FoCE37": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 37,
+    "reward": "Golden Ornamental Skull",
+    "expectedGold": 108
+  },
+  "FoCE38": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 38,
+    "reward": "Blessing of the Dark Gods",
+    "expectedGold": 108
+  },
+  "FoCE39": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 39,
+    "reward": "Blessing of Nurgle",
+    "expectedGold": 108
+  },
+  "FoCE4": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 4,
+    "reward": "Cloak",
+    "expectedGold": 83
+  },
+  "FoCE40": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 40,
+    "reward": "Castellan Creed",
+    "expectedGold": 108
+  },
+  "FoCE5": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 5,
+    "reward": "Single Power Pack",
+    "expectedGold": 83
+  },
+  "FoCE6": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 6,
+    "reward": "Mutation: Warped Lungs",
+    "expectedGold": 83
+  },
+  "FoCE7": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 7,
+    "reward": "Mutation: Warped Heart",
+    "expectedGold": 83
+  },
+  "FoCE8": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 8,
+    "reward": "Kut Skoden",
+    "expectedGold": 83
+  },
+  "FoCE9": {
+    "campaign": "Fall of Cadia Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 9,
+    "reward": "Nasty Spikes",
+    "expectedGold": 91.5
+  },
+  "OE1": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 1,
+    "reward": "Pile of Salvage",
+    "expectedGold": 83
+  },
+  "OE10": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 10,
+    "reward": "Standard-Issue Tourniquet",
+    "expectedGold": 91.5
+  },
+  "OE11": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 11,
+    "reward": "Adamantium Filaments",
+    "expectedGold": 91.5
+  },
+  "OE12": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 12,
+    "reward": "Reinforced Cables",
+    "expectedGold": 91.5
+  },
+  "OE13": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 13,
+    "reward": "Reinforced Scale-Plates",
+    "expectedGold": 91.5
+  },
+  "OE14": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 14,
+    "reward": "Plasma Cell",
+    "expectedGold": 91.5
+  },
+  "OE15": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 15,
+    "reward": "Crate of Salvage",
+    "expectedGold": 91.5
+  },
+  "OE16": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 16,
+    "reward": "Sword Brother Godswyl",
+    "expectedGold": 91.5
+  },
+  "OE17": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 17,
+    "reward": "Iron Jaw",
+    "expectedGold": 101
+  },
+  "OE18": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 18,
+    "reward": "Wolf Tooth Necklace",
+    "expectedGold": 101
+  },
+  "OE19": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 19,
+    "reward": "Bad Moon Teef",
+    "expectedGold": 101
+  },
+  "OE2": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 2,
+    "reward": "Chip Damage",
+    "expectedGold": 83
+  },
+  "OE20": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 20,
+    "reward": "Wolf Tail Talisman",
+    "expectedGold": 101
+  },
+  "OE21": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 21,
+    "reward": "Ard Plate",
+    "expectedGold": 101
+  },
+  "OE22": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 22,
+    "reward": "Beast Hide",
+    "expectedGold": 101
+  },
+  "OE23": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 23,
+    "reward": "Kustom Gubbinz",
+    "expectedGold": 101
+  },
+  "OE24": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 24,
+    "reward": "Ancient Thoread",
+    "expectedGold": 101
+  },
+  "OE25": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 25,
+    "reward": "Chain of Zeal",
+    "expectedGold": 108
+  },
+  "OE26": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 26,
+    "reward": "Righteous Candle",
+    "expectedGold": 108
+  },
+  "OE27": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 27,
+    "reward": "Blessed Tabbard",
+    "expectedGold": 108
+  },
+  "OE28": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 28,
+    "reward": "Bones of the Paragons",
+    "expectedGold": 108
+  },
+  "OE29": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 29,
+    "reward": "Runes of Fate",
+    "expectedGold": 108
+  },
+  "OE3": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 3,
+    "reward": "Ballistics Data",
+    "expectedGold": 83
+  },
+  "OE30": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 30,
+    "reward": "Battle Scar",
+    "expectedGold": 108
+  },
+  "OE31": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 31,
+    "reward": "Relic Hilt",
+    "expectedGold": 108
+  },
+  "OE32": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 32,
+    "reward": "Brother Jaeger",
+    "expectedGold": 108
+  },
+  "OE33": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 33,
+    "reward": "Weapon Parts",
+    "expectedGold": 108
+  },
+  "OE34": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 34,
+    "reward": "Enriched Rations",
+    "expectedGold": 108
+  },
+  "OE35": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 35,
+    "reward": "Satchel",
+    "expectedGold": 108
+  },
+  "OE36": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 36,
+    "reward": "Bionic Eye",
+    "expectedGold": 108
+  },
+  "OE37": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 37,
+    "reward": "Bionic Neural Pathways",
+    "expectedGold": 108
+  },
+  "OE38": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 38,
+    "reward": "Kustom Gubbinz",
+    "expectedGold": 108
+  },
+  "OE39": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 39,
+    "reward": "Mjod",
+    "expectedGold": 108
+  },
+  "OE4": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 4,
+    "reward": "Box of Salvage",
+    "expectedGold": 83
+  },
+  "OE40": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 40,
+    "reward": "High Marshal Helbrecht",
+    "expectedGold": 108
+  },
+  "OE5": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 5,
+    "reward": "Thick Skin",
+    "expectedGold": 83
+  },
+  "OE6": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 6,
+    "reward": "Advanced Filaments",
+    "expectedGold": 83
+  },
+  "OE7": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 7,
+    "reward": "Ancient Runes",
+    "expectedGold": 83
+  },
+  "OE8": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 8,
+    "reward": "Brother Burchard",
+    "expectedGold": 83
+  },
+  "OE9": {
+    "campaign": "Octarius Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 9,
+    "reward": "Targeting Link",
+    "expectedGold": 91.5
+  },
+  "IME1": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 1,
+    "reward": "Sophisticated Material",
+    "expectedGold": 83
+  },
+  "IME10": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 10,
+    "reward": "Tainted Text",
+    "expectedGold": 91.5
+  },
+  "IME11": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 11,
+    "reward": "Inferno Bolts",
+    "expectedGold": 91.5
+  },
+  "IME12": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 12,
+    "reward": "Ritual Implements",
+    "expectedGold": 91.5
+  },
+  "IME13": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 13,
+    "reward": "Secret Agenda",
+    "expectedGold": 91.5
+  },
+  "IME14": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 14,
+    "reward": "Blessing of Tzeentch",
+    "expectedGold": 91.5
+  },
+  "IME15": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 15,
+    "reward": "Master-Crafted Ammo",
+    "expectedGold": 91.5
+  },
+  "IME16": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 16,
+    "reward": "Bellator",
+    "expectedGold": 91.5
+  },
+  "IME17": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 17,
+    "reward": "Minor Bionic Enhancement",
+    "expectedGold": 101
+  },
+  "IME18": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 18,
+    "reward": "Waystone",
+    "expectedGold": 101
+  },
+  "IME19": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 19,
+    "reward": "Psytronome",
+    "expectedGold": 101
+  },
+  "IME2": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 2,
+    "reward": "Reconstitution Protocols",
+    "expectedGold": 83
+  },
+  "IME20": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 20,
+    "reward": "Wraithbone Plate",
+    "expectedGold": 101
+  },
+  "IME21": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 21,
+    "reward": "Warp Locus",
+    "expectedGold": 101
+  },
+  "IME22": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 22,
+    "reward": "Runes of Fate",
+    "expectedGold": 101
+  },
+  "IME23": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 23,
+    "reward": "Codex Astartes Page",
+    "expectedGold": 101
+  },
+  "IME24": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 24,
+    "reward": "Certus",
+    "expectedGold": 101
+  },
+  "IME25": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 25,
+    "reward": "Reinforced Scale-Plates",
+    "expectedGold": 108
+  },
+  "IME26": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 26,
+    "reward": "Basic Auxiliary Core",
+    "expectedGold": 108
+  },
+  "IME27": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 27,
+    "reward": "Nasty Spikes",
+    "expectedGold": 108
+  },
+  "IME28": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 28,
+    "reward": "Targeting Link",
+    "expectedGold": 108
+  },
+  "IME29": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 29,
+    "reward": "Key of Ignorance",
+    "expectedGold": 108
+  },
+  "IME3": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 3,
+    "reward": "Viridian Energy Tesseract",
+    "expectedGold": 83
+  },
+  "IME30": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 30,
+    "reward": "Stone Guardian Fragment",
+    "expectedGold": 108
+  },
+  "IME31": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 31,
+    "reward": "Engram Neurochip",
+    "expectedGold": 108
+  },
+  "IME32": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 32,
+    "reward": "Varro Tigurius",
+    "expectedGold": 108
+  },
+  "IME33": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 33,
+    "reward": "Chapter Pendant",
+    "expectedGold": 108
+  },
+  "IME34": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 34,
+    "reward": "Dark Hood",
+    "expectedGold": 108
+  },
+  "IME35": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 35,
+    "reward": "Stimm Injector",
+    "expectedGold": 108
+  },
+  "IME36": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 36,
+    "reward": "Sensor Suite",
+    "expectedGold": 108
+  },
+  "IME37": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 37,
+    "reward": "Drone Controller",
+    "expectedGold": 108
+  },
+  "IME38": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 38,
+    "reward": "Archeo-Tech Remnant",
+    "expectedGold": 108
+  },
+  "IME39": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 39,
+    "reward": "Master-Crafted Ammo",
+    "expectedGold": 108
+  },
+  "IME4": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 4,
+    "reward": "Nano Swarm",
+    "expectedGold": 83
+  },
+  "IME40": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 40,
+    "reward": "Marneus Calgar",
+    "expectedGold": 108
+  },
+  "IME5": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 5,
+    "reward": "Hypermaterial Shifter",
+    "expectedGold": 83
+  },
+  "IME6": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 6,
+    "reward": "Engrammatic Entangler",
+    "expectedGold": 83
+  },
+  "IME7": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 7,
+    "reward": "Psychic Force Conduit",
+    "expectedGold": 83
+  },
+  "IME8": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 8,
+    "reward": "Vindicta",
+    "expectedGold": 83
+  },
+  "IME9": {
+    "campaign": "Indomitus Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 9,
+    "reward": "Weapon Anointment Oils",
+    "expectedGold": 91.5
+  },
+  "FoCME1": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 1,
+    "reward": "Pile of Salvage",
+    "expectedGold": 83
+  },
+  "FoCME10": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 10,
+    "reward": "Rose of Martyrs",
+    "expectedGold": 91.5
+  },
+  "FoCME11": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 11,
+    "reward": "Key of Ignorance",
+    "expectedGold": 91.5
+  },
+  "FoCME12": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 12,
+    "reward": "Standard-Issue Tourniquet",
+    "expectedGold": 91.5
+  },
+  "FoCME13": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 13,
+    "reward": "Plague Bell",
+    "expectedGold": 91.5
+  },
+  "FoCME14": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 14,
+    "reward": "Golden Ornamental Skull",
+    "expectedGold": 91.5
+  },
+  "FoCME15": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 15,
+    "reward": "Relic Hilt",
+    "expectedGold": 91.5
+  },
+  "FoCME16": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 16,
+    "reward": "Archimatos",
+    "expectedGold": 91.5
+  },
+  "FoCME17": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 17,
+    "reward": "Hymn of Martyrs",
+    "expectedGold": 101
+  },
+  "FoCME18": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 18,
+    "reward": "Chapter Pendant",
+    "expectedGold": 101
+  },
+  "FoCME19": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 19,
+    "reward": "Ballistics Data",
+    "expectedGold": 101
+  },
+  "FoCME2": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 2,
+    "reward": "Zeidos Ribbon",
+    "expectedGold": 83
+  },
+  "FoCME20": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 20,
+    "reward": "Sigil of Decay",
+    "expectedGold": 101
+  },
+  "FoCME21": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 21,
+    "reward": "The Iron Phoenix",
+    "expectedGold": 101
+  },
+  "FoCME22": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 22,
+    "reward": "Blessed Corset Armor",
+    "expectedGold": 101
+  },
+  "FoCME23": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 23,
+    "reward": "Dark Hood",
+    "expectedGold": 101
+  },
+  "FoCME24": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 24,
+    "reward": "Volk",
+    "expectedGold": 101
+  },
+  "FoCME25": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 25,
+    "reward": "Satchel",
+    "expectedGold": 108
+  },
+  "FoCME26": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 26,
+    "reward": "Unnatural Vapour Dispenser",
+    "expectedGold": 108
+  },
+  "FoCME27": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 27,
+    "reward": "Single Power Pack",
+    "expectedGold": 108
+  },
+  "FoCME28": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 28,
+    "reward": "Holy Chaplet",
+    "expectedGold": 108
+  },
+  "FoCME29": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 29,
+    "reward": "Stone Guardian Fragment",
+    "expectedGold": 108
+  },
+  "FoCME3": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 3,
+    "reward": "Entrenching Tool",
+    "expectedGold": 83
+  },
+  "FoCME30": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 30,
+    "reward": "The Silver Scope",
+    "expectedGold": 108
+  },
+  "FoCME31": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 31,
+    "reward": "Blessing of Nurgle",
+    "expectedGold": 108
+  },
+  "FoCME32": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 32,
+    "reward": "Haarken Worldclaimer",
+    "expectedGold": 108
+  },
+  "FoCME33": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 33,
+    "reward": "Minor Bionic Enhancement",
+    "expectedGold": 108
+  },
+  "FoCME34": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 34,
+    "reward": "Eye of Horus",
+    "expectedGold": 108
+  },
+  "FoCME35": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 35,
+    "reward": "Icon of Vengeance",
+    "expectedGold": 108
+  },
+  "FoCME36": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 36,
+    "reward": "Blasphemous Armor Trim",
+    "expectedGold": 108
+  },
+  "FoCME37": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 37,
+    "reward": "Blessing of the Dark Gods",
+    "expectedGold": 108
+  },
+  "FoCME38": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 38,
+    "reward": "Psyk-Conductive Material",
+    "expectedGold": 108
+  },
+  "FoCME39": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 39,
+    "reward": "Relic Hilt",
+    "expectedGold": 108
+  },
+  "FoCME4": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 4,
+    "reward": "Flak Plates",
+    "expectedGold": 83
+  },
+  "FoCME40": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 40,
+    "reward": "Abaddon The Despoiler",
+    "expectedGold": 108
+  },
+  "FoCME5": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 5,
+    "reward": "Blessed Promethium Canister",
+    "expectedGold": 83
+  },
+  "FoCME6": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 6,
+    "reward": "Honourifica Imperialis",
+    "expectedGold": 83
+  },
+  "FoCME7": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 7,
+    "reward": "Psyk-Conductive Material",
+    "expectedGold": 83
+  },
+  "FoCME8": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 8,
+    "reward": "Angrax",
+    "expectedGold": 83
+  },
+  "FoCME9": {
+    "campaign": "Fall of Cadia Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 9,
+    "reward": "Weapon Parts",
+    "expectedGold": 91.5
+  }
+}
