@@ -33,7 +33,7 @@ const deleteRedundantData = (goal: IPersonalGoal) => {
             break;
         }
         case PersonalGoalType.Ascend: {
-            delete goal.targetRarity;
+            delete goal.targetRank;
             break;
         }
     }

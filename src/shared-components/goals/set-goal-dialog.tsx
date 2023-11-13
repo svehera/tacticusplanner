@@ -36,7 +36,7 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
     id: v4(),
     character: '',
     type: PersonalGoalType.UpgradeRank,
-    targetRarity: Rarity.Uncommon,
+    targetRarity: Rarity.Common,
     targetRank: Rank.Stone1,
     priority,
     upgrades: [],
@@ -69,8 +69,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     };
 
     const rarityValues = useMemo(() => {
-        const result = getEnumValues(Rarity).filter(x => x > 0 && (!character || x >= character.rarity));
-        setForm(curr => ({ ...curr, targetRarity: character?.rarity ?? result[0] }));
+        const result = getEnumValues(Rarity).filter(x => !character || x >= character.rarity);
+        setForm(curr => ({ ...curr, targetRarity: result[0] }));
         return result;
     }, [character]);
 
