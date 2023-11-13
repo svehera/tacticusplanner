@@ -18,6 +18,7 @@
 } from './interfaces';
 import { StaticDataService } from '../services';
 import { CharacterBias, LegendaryEventEnum, Rank } from './enums';
+import { defaultData } from './constants';
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
@@ -37,9 +38,9 @@ export class GlobalState implements IGlobalState {
     readonly dailyRaids: IDailyRaids;
 
     constructor(personalData: IPersonalData2) {
-        this.viewPreferences = personalData.viewPreferences;
-        this.autoTeamsPreferences = personalData.autoTeamsPreferences;
-        this.dailyRaidsPreferences = personalData.dailyRaidsPreferences;
+        this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
+        this.autoTeamsPreferences = personalData.autoTeamsPreferences ?? defaultData.autoTeamsPreferences;
+        this.dailyRaidsPreferences = personalData.dailyRaidsPreferences ?? defaultData.dailyRaidsPreferences;
 
         this.selectedTeamOrder = personalData.selectedTeamOrder;
         this.leSelectedRequirements = personalData.leSelectedRequirements;
@@ -75,9 +76,9 @@ export class GlobalState implements IGlobalState {
 
         this.modifiedDate = personalData.modifiedDate;
         this.seenAppVersion = personalData.seenAppVersion;
-        this.campaignsProgress = personalData.campaignsProgress;
-        this.inventory = personalData.inventory;
-        this.dailyRaids = personalData.dailyRaids;
+        this.campaignsProgress = personalData.campaignsProgress ?? defaultData.campaignsProgress;
+        this.inventory = personalData.inventory ?? defaultData.inventory;
+        this.dailyRaids = personalData.dailyRaids ?? defaultData.dailyRaids;
     }
 
     static fixNames<T>(obj: T): T {
