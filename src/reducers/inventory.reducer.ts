@@ -1,4 +1,5 @@
 ﻿import { IInventory, SetStateAction } from '../models/interfaces';
+import { defaultData } from '../models/constants';
 
 export type InventoryAction =
     | {
@@ -20,10 +21,10 @@ export type InventoryAction =
       }
     | SetStateAction<IInventory>;
 
-export const inventoryReducer = (state: IInventory, action: InventoryAction) => {
+export const inventoryReducer = (state: IInventory, action: InventoryAction): IInventory => {
     switch (action.type) {
         case 'Set': {
-            return action.value;
+            return action.value ?? defaultData.inventory;
         }
         case 'UpdateUpgradeQuantity': {
             return { ...state, upgrades: { ...state.upgrades, [action.upgrade]: action.value } };

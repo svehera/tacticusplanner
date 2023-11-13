@@ -1,4 +1,5 @@
 ﻿import { IDailyRaidsPreferences, SetStateAction } from '../models/interfaces';
+import { defaultData } from '../models/constants';
 
 export type DailyRaidsPreferencesAction =
     | {
@@ -16,10 +17,13 @@ export type DailyRaidsPreferencesAction =
       }
     | SetStateAction<IDailyRaidsPreferences>;
 
-export const dailyRaidsPreferencesReducer = (state: IDailyRaidsPreferences, action: DailyRaidsPreferencesAction) => {
+export const dailyRaidsPreferencesReducer = (
+    state: IDailyRaidsPreferences,
+    action: DailyRaidsPreferencesAction
+): IDailyRaidsPreferences => {
     switch (action.type) {
         case 'Set': {
-            return action.value;
+            return action.value ?? defaultData.dailyRaidsPreferences;
         }
         case 'Update': {
             return { ...state, [action.setting]: action.value };
