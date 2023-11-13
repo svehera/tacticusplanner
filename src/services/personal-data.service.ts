@@ -96,7 +96,9 @@ export class PersonalDataLocalStorage {
             const storeKey = this.storeKeys.find(x => x === dataKey);
             if (storeKey) {
                 const value = data[storeKey];
-                this.setItem(storeKey, value);
+                if (value) {
+                    this.setItem(storeKey, value);
+                }
             }
         }
 

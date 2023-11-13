@@ -1,4 +1,5 @@
 ﻿import { IDailyRaids, SetStateAction } from '../models/interfaces';
+import { defaultData } from '../models/constants';
 
 export type DailyRaidsAction =
     | {
@@ -16,7 +17,7 @@ export type DailyRaidsAction =
 export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction): IDailyRaids => {
     switch (action.type) {
         case 'Set': {
-            return action.value;
+            return action.value ?? defaultData.dailyRaids;
         }
         case 'AddCompletedBattle': {
             return {

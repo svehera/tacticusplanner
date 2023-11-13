@@ -1,4 +1,5 @@
 ﻿import { ICampaignsProgress, SetStateAction } from '../models/interfaces';
+import { defaultData } from '../models/constants';
 
 export type CampaignsProgressAction =
     | {
@@ -14,7 +15,7 @@ export const campaignsProgressReducer = (
 ): ICampaignsProgress => {
     switch (action.type) {
         case 'Set': {
-            return action.value;
+            return action.value ?? defaultData.campaignsProgress;
         }
         case 'Update': {
             return { ...state, [action.campaign]: action.progress };
