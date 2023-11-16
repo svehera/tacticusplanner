@@ -15,13 +15,19 @@ export const Home = () => {
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
     const topPriorityGoal = goals[0];
 
-    function daysLeftToFutureDate(futureDate: string): number {
+    function timeLeftToFutureDate(futureDate: string): string {
         const currentDate = new Date();
         const targetDate = new Date(futureDate);
         const timeDifference = targetDate.getTime() - currentDate.getTime();
-        const daysLeft = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
 
-        return daysLeft >= 0 ? daysLeft : 0;
+        // Calculate days, hours, and minutes
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+        // Format the result
+        const result = days === 1 ? `${days} Day ${hours} h` : `${days} Days ${hours} h`;
+
+        return timeDifference >= 0 ? result : 'Started';
     }
 
     return (
@@ -53,7 +59,7 @@ export const Home = () => {
                             subheader={'November 19'}
                         />
                         <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
-                            {daysLeftToFutureDate('2023-11-19')} Days Left
+                            {timeLeftToFutureDate('2023-11-19')}
                         </CardContent>
                     </Card>
                 </div>
