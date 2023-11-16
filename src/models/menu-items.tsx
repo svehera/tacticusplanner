@@ -56,7 +56,7 @@ export const menuItemById = {
         'Ragnar LE',
         <CharacterImage icon={'Ragnar.png'} imageSize={24} />,
         '/plan/le/ragnar',
-        `Ragnar ${ragnar.eventStage}/3 (${ragnar.nextEventDate}) - *Some data can change`
+        `Ragnar ${ragnar.eventStage}/3 (${ragnar.nextEventDate})`
     ),
 
     characters: new MenuItemTP('Characters', <Diversity3Icon />, '/learn/characters'),
