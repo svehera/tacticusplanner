@@ -26,7 +26,7 @@ export const Home = () => {
 
     return (
         <div>
-            <Thanks />
+            <Thanks sliderMode={true} />
             <div
                 style={{
                     display: 'flex',

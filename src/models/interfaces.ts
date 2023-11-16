@@ -665,3 +665,20 @@ export type ICampaignsProgress = {
 export interface IInventory {
     upgrades: Record<string, number>;
 }
+
+export interface IContributor {
+    name: string;
+    thankYou: string;
+    resourceDescription: string;
+    resourceLink: string;
+    avatarIcon: string;
+}
+
+export interface IContentCreator {
+    name: string;
+    youtubeLink: string;
+    thankYou: string;
+    avatarIcon: string;
+    resourceIcon: string;
+    resourceLink: string;
+}

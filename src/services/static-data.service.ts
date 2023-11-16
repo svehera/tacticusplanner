@@ -4,6 +4,8 @@ import unitsData from '../assets/UnitData.json';
 import dirtyDozen from '../assets/DirtyDozen.json';
 
 import whatsNew from '../assets/WhatsNew.json';
+import contributors from '../assets/contributors/thankYou.json';
+import contentCreators from '../assets/contributors/contentCreators.json';
 
 import campaignConfigs from '../assets/campaignConfigs.json';
 import battleData from '../assets/battleData.json';
@@ -22,6 +24,8 @@ import {
     ICampaignsProgress,
     ICharacterRankRange,
     ICharLegendaryEvents,
+    IContentCreator,
+    IContributor,
     IDailyRaid,
     IDirtyDozenChar,
     IDropRate,
@@ -49,6 +53,8 @@ export class StaticDataService {
     static readonly battleData: ICampaignsData = battleData;
     static readonly recipeData: IRecipeData = recipeData;
     static readonly rankUpData: IRankUpData = rankUpData;
+    static readonly contributors: IContributor[] = contributors;
+    static readonly contentCreators: IContentCreator[] = contentCreators;
     static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = this.getCampaignComposed();
 
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);

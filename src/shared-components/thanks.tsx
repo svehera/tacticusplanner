@@ -1,40 +1,153 @@
-﻿import React from 'react';
+﻿import React, { useEffect, useMemo, useState } from 'react';
+import { Card, CardContent, CardHeader } from '@mui/material';
+import { isMobile } from 'react-device-detect';
+import { StaticDataService } from '../services';
+import { ContributorImage } from './contributor-image';
+import { Link, useNavigate } from 'react-router-dom';
+import { IContentCreator, IContributor } from '../models/interfaces';
 
-export const Thanks = () => {
+export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
+    const [activeContributorIndex, setActiveContributorIndex] = useState<number>(0);
+    const [hide, setHide] = useState<boolean>(false);
+    const shuffleArray = (array: any[]): void => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    };
+
+    const contributorsList: Array<IContributor | IContentCreator> = useMemo(() => {
+        const lastContributor = StaticDataService.contentCreators[0];
+        const allContributors: Array<IContributor | IContentCreator> = [
+            ...StaticDataService.contentCreators.slice(1),
+            ...StaticDataService.contributors,
+        ];
+        shuffleArray(allContributors);
+        allContributors.unshift(lastContributor);
+
+        return allContributors;
+    }, []);
+
+    useEffect(() => {
+        if (!sliderMode) {
+            return;
+        }
+        setTimeout(() => {
+            setHide(true);
+        }, 3000);
+
+        const intervalId = setInterval(() => {
+            console.log('I ma gere');
+            setHide(false);
+            setTimeout(() => {
+                setHide(true);
+            }, 3000);
+
+            setActiveContributorIndex(curr => {
+                const nextContributorId = curr + 1;
+
+                return nextContributorId > contributorsList.length - 1 ? 0 : nextContributorId;
+            });
+        }, 4000);
+
+        return () => clearInterval(intervalId);
+    }, []);
+
+    const displayedContributor = useMemo<IContributor | IContentCreator>(
+        () => contributorsList[activeContributorIndex],
+        [activeContributorIndex]
+    );
 
     return (
         <div>
             <h3 style={{ textAlign: 'center' }}>Thank you!!!</h3>
 
-            <div>
-                <p style={{ textAlign: 'center' }}>
-                    <b>sonsonVallano</b> - thank you for providing decent feedback and being Alpha,Beta,Gamma QA :) 
-                </p>
-                
-                <p style={{ textAlign: 'center' }}>
-                    <b><a href="https://www.youtube.com/@noxtempest" target={'_blank'} rel="noreferrer">NoxTempest</a></b> - thank you for promoting the app
-                </p>
-                
-                <p style={{ textAlign: 'center' }}>
-                    <b><a href="https://docs.google.com/spreadsheets/u/0/d/1al2IWwvTP3QOhHtfr6P8stdlA48ED4JFrtK8wDKznrk/htmlview" target={'_blank'} rel="noreferrer">(Towen) EN Labs T.A.C.T.I.C.U.S</a></b> -   thank you for sharing Characters images
-                </p>
-
-                <p style={{ textAlign: 'center' }}>
-                    <b>Lucky☆SirEldricIV</b> - thank you for sharing Ranks images
-                </p>
-
-                <p style={{ textAlign: 'center' }}>
-                    Shout out to <b><a href="https://www.youtube.com/@DBPreacherTacticus" target={'_blank'}
-                        rel="noreferrer">DB Preacher: Tacticus</a></b> for his content
-                    and <a href="https://youtu.be/aD2ky2BxX_g?si=43Hk2O84QL23EzMY" target={'_blank'}
-                        rel="noreferrer">work</a> that inspired me for creating this web app
-                </p>
-                <p style={{ textAlign: 'center' }}>
-                    Shout out to <a href="https://tacticus.fandom.com/wiki/Tacticus_Wiki" target={'_blank'}
-                        rel="noreferrer">Tacticus Wiki</a>
-                </p>
-            </div>
-            
+            {sliderMode ? (
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <ThankYouCard contributor={displayedContributor} hide={hide} />
+                </div>
+            ) : (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>
+                    {contributorsList.map(x => (
+                        <ThankYouCard key={x.name} contributor={x} />
+                    ))}
+                </div>
+            )}
         </div>
     );
+};
+
+export const ThankYouCard = ({
+    contributor,
+    hide,
+}: {
+    contributor: IContributor | IContentCreator;
+    hide?: boolean;
+}) => {
+    const navigate = useNavigate();
+    return (
+        <Card
+            onClick={() => navigate(isMobile ? '/mobile/ty' : '/ty')}
+            sx={{
+                opacity: hide ? 0 : 1,
+                width: 350,
+                height: 400,
+                cursor: 'pointer',
+                transition: 'opacity 1s ease-in-out',
+            }}>
+            <CardHeader
+                title={
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
+                        {isContentMaker(contributor) ? (
+                            <Link
+                                to={contributor.youtubeLink}
+                                target={'_blank'}
+                                style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                <ContributorImage
+                                    iconPath={contributor.avatarIcon}
+                                    height={50}
+                                    width={50}
+                                    borderRadius={true}
+                                />
+                                {contributor.name}
+                            </Link>
+                        ) : (
+                            <React.Fragment>
+                                <ContributorImage
+                                    iconPath={contributor.avatarIcon}
+                                    height={50}
+                                    width={50}
+                                    borderRadius={true}
+                                />
+                                {contributor.name}
+                            </React.Fragment>
+                        )}
+                    </div>
+                }
+                subheader={isContentMaker(contributor) ? 'Content creator' : 'Contributor'}
+            />
+            <CardContent style={{ paddingTop: 0 }}>
+                {isContentMaker(contributor) ? (
+                    <React.Fragment>
+                        <p>{contributor.thankYou}</p>
+                        <Link to={contributor.resourceLink} target={'_blank'}>
+                            <ContributorImage iconPath={contributor.resourceIcon} height={200} width={320} />
+                        </Link>
+                    </React.Fragment>
+                ) : (
+                    <React.Fragment>
+                        <p>{contributor.thankYou}</p>
+                        Check out{' '}
+                        <Link to={contributor.resourceLink} target={'_blank'}>
+                            {contributor.resourceDescription}
+                        </Link>
+                    </React.Fragment>
+                )}
+            </CardContent>
+        </Card>
+    );
+};
+
+const isContentMaker = (contributor: IContentCreator | IContributor): contributor is IContentCreator => {
+    return Object.hasOwn(contributor, 'youtubeLink');
 };
