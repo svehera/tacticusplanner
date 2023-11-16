@@ -114,7 +114,7 @@ export class RagnarLegendaryEvent extends LegendaryEventBase {
                 },
                 {
                     name: 'Power',
-                    points: 100,
+                    points: 105,
                     units: filter(noImperials).byDamageType(DamageType.Power),
                 },
                 {
