@@ -10,12 +10,15 @@
           "text": "Updated Thank You section"
         },
         {
-          "text": "Added \"Rank End\" selector on Rank lookup page"
+          "text": "Added \"Rank End\" selector on Rank lookup page (ZHovtiyLitsar)"
         }
       ],
       "minor": [
         {
           "text": "Updated Black Templar hits and traits data"
+        },
+        {
+          "text": "Change Auto-Teams to prioritize Rank over Rarity by default"
         }
       ],
       "bugFixes": [
