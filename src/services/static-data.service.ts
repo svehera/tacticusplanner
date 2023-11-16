@@ -396,7 +396,7 @@ export class StaticDataService {
                 const result = x.allMaterials ?? [];
                 if (x.character) {
                     result.forEach(material => {
-                        material.characters = [x.character!];
+                        material.characters = [...material.characters, x.character!];
                     });
                 }
                 return result;
