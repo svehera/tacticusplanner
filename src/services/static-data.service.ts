@@ -4,6 +4,8 @@ import unitsData from '../assets/UnitData.json';
 import dirtyDozen from '../assets/DirtyDozen.json';
 
 import whatsNew from '../assets/WhatsNew.json';
+import contributors from '../assets/contributors/thankYou.json';
+import contentCreators from '../assets/contributors/contentCreators.json';
 
 import campaignConfigs from '../assets/campaignConfigs.json';
 import battleData from '../assets/battleData.json';
@@ -22,6 +24,8 @@ import {
     ICampaignsProgress,
     ICharacterRankRange,
     ICharLegendaryEvents,
+    IContentCreator,
+    IContributor,
     IDailyRaid,
     IDirtyDozenChar,
     IDropRate,
@@ -49,6 +53,8 @@ export class StaticDataService {
     static readonly battleData: ICampaignsData = battleData;
     static readonly recipeData: IRecipeData = recipeData;
     static readonly rankUpData: IRankUpData = rankUpData;
+    static readonly contributors: IContributor[] = contributors;
+    static readonly contentCreators: IContentCreator[] = contentCreators;
     static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = this.getCampaignComposed();
 
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
@@ -362,10 +368,7 @@ export class StaticDataService {
         return result;
     }
 
-    private static getAllMaterials(
-        settings: IEstimatedRanksSettings,
-        upgrades: IMaterialFull[]
-    ): IMaterialEstimated2[] {
+    public static getAllMaterials(settings: IEstimatedRanksSettings, upgrades: IMaterialFull[]): IMaterialEstimated2[] {
         const result = this.groupBaseMaterials(upgrades);
 
         return orderBy(
@@ -384,13 +387,13 @@ export class StaticDataService {
         );
     }
 
-    public static groupBaseMaterials(upgrades: IMaterialFull[]) {
+    public static groupBaseMaterials(upgrades: IMaterialFull[], keepGold = false) {
         const groupedData = groupBy(
             upgrades.flatMap(x => {
                 const result = x.allMaterials ?? [];
                 if (x.character) {
                     result.forEach(material => {
-                        material.characters = [x.character!];
+                        material.characters = [...material.characters, x.character!];
                     });
                 }
                 return result;
@@ -411,7 +414,7 @@ export class StaticDataService {
                 locationsComposed: items[0].locations?.map(location => StaticDataService.campaignsComposed[location]),
             };
         });
-        return result.filter(x => x.material !== 'Gold');
+        return keepGold ? result : result.filter(x => x.material !== 'Gold');
     }
 
     private static generateDailyRaidsList(
@@ -419,12 +422,6 @@ export class StaticDataService {
         allMaterials: IMaterialEstimated2[]
     ): IDailyRaid[] {
         const resultDays: IDailyRaid[] = [];
-
-        // const test = orderBy(
-        //     allMaterials.map(x => this.calculateMaterialData(x)).filter(x => !!x) as IMaterialEstimated2[],
-        //     ['daysOfBattles', 'rarity', 'count'],
-        //     ['desc', 'asc', 'desc']
-        // );
 
         const totalEnergy = sum(allMaterials.map(x => x.totalEnergy));
         let currEnergy = 0;

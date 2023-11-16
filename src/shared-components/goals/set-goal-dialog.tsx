@@ -347,18 +347,24 @@ export const EditGoalDialog = ({
 
                     {form.type === PersonalGoalType.UpgradeRank ? (
                         <div>
-                            <RankSelect
-                                label={'Current Rank'}
-                                rankValues={currentRankValues}
-                                value={form.currentRank ?? Rank.Stone1}
-                                valueChanges={value => setForm(curr => ({ ...curr, currentRank: value, upgrades: [] }))}
-                            />
-                            <RankSelect
-                                label={'Target Rank'}
-                                rankValues={targetRankValues}
-                                value={form.targetRank ?? Rank.Stone1}
-                                valueChanges={value => setForm(curr => ({ ...curr, targetRank: value }))}
-                            />
+                            <div style={{ marginTop: 20 }}>
+                                <RankSelect
+                                    label={'Current Rank'}
+                                    rankValues={currentRankValues}
+                                    value={form.currentRank ?? Rank.Stone1}
+                                    valueChanges={value =>
+                                        setForm(curr => ({ ...curr, currentRank: value, upgrades: [] }))
+                                    }
+                                />
+                            </div>
+                            <div style={{ marginTop: 20 }}>
+                                <RankSelect
+                                    label={'Target Rank'}
+                                    rankValues={targetRankValues}
+                                    value={form.targetRank ?? Rank.Stone1}
+                                    valueChanges={value => setForm(curr => ({ ...curr, targetRank: value }))}
+                                />
+                            </div>
                             <CharacterUpgrades
                                 character={character}
                                 upgradesChanges={(upgrades, updateInventory) => {

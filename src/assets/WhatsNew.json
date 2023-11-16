@@ -1,6 +1,35 @@
 ﻿{
-  "currentVersion": "1.1.0",
+  "currentVersion": "1.1.1",
   "releaseNotes": [
+    {
+      "version": "1.1.1",
+      "date": "November 16",
+      "type": "Update",
+      "new": [
+        {
+          "text": "Updated Thank You section"
+        },
+        {
+          "text": "Added \"Rank End\" selector on Rank lookup page (ZHovtiyLitsar)"
+        }
+      ],
+      "minor": [
+        {
+          "text": "Updated Black Templar hits and traits data"
+        },
+        {
+          "text": "Change Auto-Teams to prioritize Rank over Rarity by default"
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed issue with daily raids items missing selected characters (Vexen)"
+        },
+        {
+          "text": "Fixed Sho'Syl Silver 2 upgrades mismatch (Szarekh)"
+        }
+      ]
+    },
     {
       "version": "1.1.0",
       "date": "November 13",

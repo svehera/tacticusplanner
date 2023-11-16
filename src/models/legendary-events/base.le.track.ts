@@ -136,13 +136,13 @@ export class LETrack implements ILegendaryEventTrack {
                 orders.push('desc');
             }
 
-            if (!settings.ignoreRarity) {
-                iterates.push('rarity');
+            if (!settings.ignoreRank) {
+                iterates.push('rank');
                 orders.push('desc');
             }
 
-            if (!settings.ignoreRank) {
-                iterates.push('rank');
+            if (!settings.ignoreRarity) {
+                iterates.push('rarity');
                 orders.push('desc');
             }
 

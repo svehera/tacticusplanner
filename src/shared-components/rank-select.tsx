@@ -17,7 +17,7 @@ export const RankSelect = ({
     valueChanges: (value: number) => void;
 }) => {
     return (
-        <FormControl style={{ marginTop: 20 }} fullWidth>
+        <FormControl fullWidth>
             <InputLabel>{label}</InputLabel>
             <Select<Rank> label={label} value={value} onChange={event => valueChanges(+event.target.value)}>
                 {rankValues.map(rank => (

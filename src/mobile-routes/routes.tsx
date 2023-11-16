@@ -19,6 +19,8 @@ import { Upgrades } from '../routes/tables/upgrades';
 import { RankLookup } from '../routes/tables/rankLookup';
 import { Campaigns } from '../routes/tables/campaigns';
 import { DirtyDozen } from '../routes/dirty-dozen/dirty-dozen';
+import { Contacts } from '../routes/contacts/contacts';
+import { Thanks } from '../shared-components/thanks';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -109,6 +111,14 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
             ...inputRoutes,
             ...planRoutes,
             ...learnRoutes,
+            {
+                path: 'contacts',
+                element: <Contacts />,
+            },
+            {
+                path: 'ty',
+                element: <Thanks />,
+            },
         ],
     },
 ];

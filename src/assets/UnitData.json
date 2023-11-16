@@ -782,6 +782,7 @@
     "Equipment2": "Defense",
     "Equipment3": "Crit Booster",
     "Traits": [
+      "Rapid Assault",
       "Parry"
     ],
     "Active Ability": "Power",
@@ -799,9 +800,9 @@
     "Armour": 24,
     "Initial rarity": "Uncommon",
     "Melee Damage": "Power",
-    "Melee Hits": 4,
+    "Melee Hits": 3,
     "Ranged Damage": "Bolter",
-    "Ranged Hits": 6,
+    "Ranged Hits": 3,
     "Distance": 2,
     "Movement": 2,
     "Equipment1": "Crit",
@@ -850,12 +851,13 @@
     "Armour": 25,
     "Initial rarity": "Epic",
     "Melee Damage": "Power",
-    "Melee Hits": 2,
+    "Melee Hits": 3,
     "Movement": 3,
     "Equipment1": "Crit",
     "Equipment2": "Block",
     "Equipment3": "Block Booster",
     "Traits": [
+      "Rapid Assault",
       "Final Vengeance",
       "Parry"
     ],
@@ -883,6 +885,7 @@
     "Equipment2": "Block",
     "Equipment3": "Block Booster",
     "Traits": [
+      "Final Vengeance",
       "Parry"
     ],
     "Number": 40,

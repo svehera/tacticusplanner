@@ -1,24 +1,24 @@
-﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
+﻿import React, { useContext, useMemo, useState } from 'react';
 
 import {
-    ICampaignBattleComposed,
     ICharacter2,
+    IMaterialEstimated2,
     IMaterialFull,
     IMaterialRecipeIngredientFull,
 } from '../../models/interfaces';
 import { StaticDataService } from '../../services';
-import { getEnumValues, rankToString } from '../../shared-logic/functions';
-import { FormControl, MenuItem, Select } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
+import { getEnumValues } from '../../shared-logic/functions';
 import { Rank, Rarity } from '../../models/enums';
-import { RankImage } from '../../shared-components/rank-image';
 import { CharactersAutocomplete } from '../../shared-components/characters-autocomplete';
 import { StoreContext } from '../../reducers/store.provider';
-import { groupBy, map, orderBy, sortBy, sum, sumBy } from 'lodash';
+import { orderBy, sortBy, sum } from 'lodash';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ValueFormatterParams } from 'ag-grid-community';
+import { ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
 import { isMobile } from 'react-device-detect';
 import { useSearchParams } from 'react-router-dom';
+import { defaultCampaignsProgress } from '../../models/constants';
+import { UpgradeImage } from '../../shared-components/upgrade-image';
+import { RankSelect } from '../../shared-components/rank-select';
 
 export const RankLookup = () => {
     const { characters } = useContext(StoreContext);
@@ -32,18 +32,24 @@ export const RankLookup = () => {
         return characters.find(x => x.name === queryParamsCharacter) ?? charactersOptions[0];
     });
 
-    const [rank, setRank] = useState<Rank>(() => {
-        const queryParamsRank = searchParams.get('rank');
+    const [rankStart, setRankStart] = useState<Rank>(() => {
+        const queryParamsRank = searchParams.get('rankStart');
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         return queryParamsRank ? Rank[queryParamsRank] ?? Rank.Stone1 : Rank.Stone1;
     });
+    const [rankEnd, setRankEnd] = useState<Rank>(() => {
+        const queryParamsRank = searchParams.get('rankEnd');
+
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        return queryParamsRank ? Rank[queryParamsRank] ?? Rank.Stone2 : Rank.Stone2;
+    });
+
     const [message, setMessage] = useState<string>('Upgrades:');
     const [totalGold, setTotalGold] = useState<number>(0);
 
-    // setSearchParams();
-    // location.
     // for debug
     // charactersOptions.forEach(x => {
     //     const characterUpgrades = StaticDataService.rankUpData[x.name];
@@ -58,48 +64,17 @@ export const RankLookup = () => {
             return [];
         }
 
-        const characterUpgrades = StaticDataService.rankUpData[character?.name ?? ''];
-        if (!characterUpgrades) {
-            setMessage('Upgrades not founds');
-            return [];
-        }
-
-        const rankUpgrades = characterUpgrades[rankToString(rank)];
-
-        if (!rankUpgrades) {
-            setMessage('Upgrades not founds');
-            return [];
-        }
-
-        const recipes = rankUpgrades.map(upgrade => {
-            const recipe = StaticDataService.recipeDataFull[upgrade];
-            if (!recipe) {
-                console.error('Recipe for ' + upgrade + ' is not found');
-            }
-            return recipe;
-        });
-
         setMessage('Upgrades:');
-        return recipes.filter(x => !!x);
-    }, [character?.name, rank]);
+        return StaticDataService.getUpgrades({
+            id: character.name,
+            rankStart,
+            rankEnd,
+            appliedUpgrades: [],
+        });
+    }, [character?.name, rankStart, rankEnd]);
 
     const allMaterials = useMemo<IMaterialRecipeIngredientFull[]>(() => {
-        const groupedData = groupBy(
-            upgrades.flatMap(x => x.allMaterials ?? []),
-            'material'
-        );
-
-        const result: IMaterialRecipeIngredientFull[] = map(groupedData, (items, material) => ({
-            material,
-            count: sumBy(items, 'count'),
-            rarity: items[0].rarity,
-            stat: items[0].stat,
-            craftable: items[0].craftable,
-            locations: items[0].locations,
-            locationsComposed: items[0].locations?.map(location => StaticDataService.campaignsComposed[location]),
-            iconPath: items[0].iconPath,
-            characters: [],
-        }));
+        const result: IMaterialRecipeIngredientFull[] = StaticDataService.groupBaseMaterials(upgrades, true);
         const goldIndex = result.findIndex(x => x.material === 'Gold');
 
         if (goldIndex > -1) {
@@ -111,46 +86,36 @@ export const RankLookup = () => {
         return orderBy(result, ['rarity', 'count'], ['desc', 'desc']);
     }, [upgrades]);
 
-    const totalMaterials = useMemo<IMaterialEstimated[]>(() => {
+    const totalMaterials = useMemo<IMaterialEstimated2[]>(() => {
         return orderBy(
-            allMaterials.map(x => {
-                const itemResult: IMaterialEstimated = {
-                    material: x.material,
-                    count: x.count,
-                    rarity: x.rarity,
-                    locations: x.locations ?? [],
-                    expectedEnergy: 0,
-                    numberOfBattles: 0,
-                };
-
-                if (x.locationsComposed?.length) {
-                    const minEnergy = Math.min(...x.locationsComposed.map(x => x.energyPerItem));
-
-                    const locations = x.locationsComposed.filter(location => location.energyPerItem === minEnergy);
-
-                    itemResult.locations = locations.map(x => x.campaign + ' ' + x.nodeNumber);
-
-                    itemResult.expectedEnergy = parseFloat((x.count * minEnergy).toFixed(2));
-                    itemResult.numberOfBattles = Math.ceil(itemResult.expectedEnergy / locations[0].energyCost);
-                }
-
-                return itemResult;
-            }),
+            StaticDataService.getAllMaterials(
+                {
+                    campaignsProgress: defaultCampaignsProgress,
+                    dailyEnergy: 0,
+                    upgrades: {},
+                },
+                upgrades
+            ),
             ['rarity', 'count', 'expectedEnergy'],
             ['desc', 'desc', 'desc']
         );
-    }, [allMaterials]);
+    }, [upgrades]);
 
     const totalEnergy = useMemo<number>(() => {
         return Math.ceil(sum(totalMaterials.map(x => x.expectedEnergy)));
     }, [totalMaterials]);
 
+    console.log();
+
     const renderUpgradesMaterials = (materials: Array<IMaterialRecipeIngredientFull>) => (
         <ul>
             {materials.map(item => (
                 <li key={item.material}>
-                    <span className={Rarity[item.rarity]?.toLowerCase()}>{Rarity[item.rarity]}</span> -{' '}
-                    <span>{item.material}</span> - <span style={{ fontWeight: 'bold' }}>{item.count}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                        <span className={Rarity[item.rarity]?.toLowerCase()}>{Rarity[item.rarity]}</span> -{' '}
+                        <UpgradeImage material={item.material} iconPath={item.iconPath} size={30} /> -{' '}
+                        <span style={{ fontWeight: 'bold' }}>{item.count}</span>
+                    </div>
                     {item.recipe?.length ? renderUpgradesMaterials(item.recipe) : undefined}
                 </li>
             ))}
@@ -163,12 +128,22 @@ export const RankLookup = () => {
             colId: 'rowNumber',
             valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
             maxWidth: 50,
-            pinned: true,
+        },
+        {
+            headerName: 'Icon',
+            cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
+                const { data } = params;
+                if (data) {
+                    return <UpgradeImage material={data.material} iconPath={data.iconPath} />;
+                }
+            },
+            equals: () => true,
+            sortable: false,
+            width: 80,
         },
         {
             field: 'material',
             maxWidth: isMobile ? 125 : 300,
-            pinned: true,
         },
         {
             field: 'count',
@@ -177,7 +152,7 @@ export const RankLookup = () => {
         {
             field: 'rarity',
             maxWidth: 120,
-            valueFormatter: (params: ValueFormatterParams<IMaterialEstimated>) => Rarity[params.data?.rarity ?? 0],
+            valueFormatter: (params: ValueFormatterParams<IMaterialEstimated2>) => Rarity[params.data?.rarity ?? 0],
             cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
         },
         {
@@ -190,11 +165,35 @@ export const RankLookup = () => {
             maxWidth: 100,
         },
         {
-            field: 'locations',
+            headerName: 'Days Of Battles',
+            field: 'daysOfBattles',
+            maxWidth: 100,
+        },
+        {
+            field: 'locationsString',
+            headerName: 'Locations',
             minWidth: 300,
             flex: 1,
         },
     ]);
+
+    const updateRankStart = (value: number) => {
+        setRankStart(value);
+
+        setSearchParams(curr => {
+            curr.set('rankStart', Rank[value]);
+            return curr;
+        });
+    };
+
+    const updateRankEnd = (value: number) => {
+        setRankEnd(value);
+
+        setSearchParams(curr => {
+            curr.set('rankEnd', Rank[value]);
+            return curr;
+        });
+    };
 
     return (
         <div>
@@ -224,29 +223,32 @@ export const RankLookup = () => {
                     }}
                     shortChar={true}
                 />
-                <FormControl style={{ width: 200 }}>
-                    <InputLabel>Rank</InputLabel>
-                    <Select
-                        label={'Rank'}
-                        value={rank}
-                        onChange={event => {
-                            setRank(+event.target.value);
-
-                            setSearchParams(curr => {
-                                curr.set('rank', Rank[+event.target.value]);
-                                return curr;
-                            });
-                        }}>
-                        {rankEntries.map(value => (
-                            <MenuItem key={value} value={value}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    <span>{rankToString(value)}</span>
-                                    <RankImage rank={value} />
-                                </div>
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+                <div style={{ width: 200 }}>
+                    <RankSelect
+                        label={'Rank Start'}
+                        rankValues={rankEntries.slice(0, rankEntries.length - 1)}
+                        value={rankStart}
+                        valueChanges={value => {
+                            updateRankStart(value);
+                            if (rankEnd <= value) {
+                                updateRankEnd(value + 1);
+                            }
+                        }}
+                    />
+                </div>
+                <div style={{ width: 200 }}>
+                    <RankSelect
+                        label={'Rank End'}
+                        rankValues={rankEntries.slice(1)}
+                        value={rankEnd}
+                        valueChanges={value => {
+                            updateRankEnd(value);
+                            if (rankStart >= value) {
+                                updateRankStart(value - 1);
+                            }
+                        }}
+                    />
+                </div>
             </div>
 
             <div>
@@ -266,7 +268,9 @@ export const RankLookup = () => {
                     style={{ height: 50 + totalMaterials.length * 30, maxHeight: '40vh', width: '100%' }}>
                     <AgGridReact
                         suppressCellFocus={true}
-                        defaultColDef={{ suppressMovable: true, sortable: true, autoHeight: true, wrapText: true }}
+                        defaultColDef={{ suppressMovable: true, sortable: true, wrapText: true }}
+                        rowHeight={60}
+                        rowBuffer={3}
                         columnDefs={columnDefs}
                         rowData={totalMaterials}
                     />
@@ -274,11 +278,13 @@ export const RankLookup = () => {
                 <div>
                     <h3>{message}</h3>
                     <ul>
-                        {upgrades.map(item => (
-                            <li key={item.material}>
-                                <span>{item.stat}</span> -{' '}
-                                <span className={Rarity[item.rarity]?.toLowerCase()}>{Rarity[item.rarity]}</span> -{' '}
-                                <span>{item.material}</span>
+                        {upgrades.map((item, index) => (
+                            <li key={item.material + index}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                                    <span>{item.stat}</span> -{' '}
+                                    <span className={Rarity[item.rarity]?.toLowerCase()}>{Rarity[item.rarity]}</span> -{' '}
+                                    <UpgradeImage material={item.material} iconPath={item.iconPath} size={30} />
+                                </div>
                                 {item.recipe?.length ? renderUpgradesMaterials(item.recipe) : undefined}
                             </li>
                         ))}
@@ -288,12 +294,3 @@ export const RankLookup = () => {
         </div>
     );
 };
-
-interface IMaterialEstimated {
-    material: string;
-    count: number;
-    rarity: Rarity;
-    locations: string[];
-    expectedEnergy: number;
-    numberOfBattles: number;
-}

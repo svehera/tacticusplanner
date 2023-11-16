@@ -52,11 +52,11 @@ export const LegendaryEventPage = () => {
         if (autoTeamsPreferences.preferCampaign) {
             result.push('Is campaign char');
         }
-        if (!autoTeamsPreferences.ignoreRarity) {
-            result.push('Rarity');
-        }
         if (!autoTeamsPreferences.ignoreRank) {
             result.push('Rank');
+        }
+        if (!autoTeamsPreferences.ignoreRarity) {
+            result.push('Rarity');
         }
         result.push('Event points');
 
