@@ -8,6 +8,9 @@
       "new": [
         {
           "text": "Updated Thank You section"
+        },
+        {
+          "text": "Added \"Rank End\" selector on Rank lookup page"
         }
       ],
       "minor": [
