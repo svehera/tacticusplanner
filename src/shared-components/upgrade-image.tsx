@@ -20,7 +20,7 @@ export const UpgradeImage = ({ material, iconPath, size }: { material: string; i
             </Tooltip>
         );
     } catch (error) {
-        console.log(`Image with name "${iconPath}" does not exist`);
+        console.log(`Image for "${material}" with path "${iconPath}" does not exist`);
         return <span>{material}</span>;
     }
 };

@@ -354,7 +354,18 @@ export class StaticDataService {
             const upgrades: IMaterialFull[] = rankUpgrades.map(upgrade => {
                 const recipe = StaticDataService.recipeDataFull[upgrade];
                 if (!recipe) {
-                    console.error('Recipe for ' + upgrade + ' is not found');
+                    // console.error('Recipe for ' + upgrade + ' is not found');
+
+                    return {
+                        rarity: 0,
+                        craftable: false,
+                        iconPath: upgrade,
+                        stat: 'Unknown',
+                        material: upgrade,
+                        character: character.id,
+                        recipe: [],
+                        allMaterials: [],
+                    };
                 }
                 return {
                     ...recipe,
