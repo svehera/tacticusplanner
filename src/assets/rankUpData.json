@@ -2599,6 +2599,136 @@
       "Ceramite Plates"
     ]
   },
+  "Njal Stormcaller": {
+    "Stone I": [
+      "Healing Ointment",
+      "The Iron Phoenix",
+      "Auspex",
+      "Weapon Anointment Oils",
+      "Armor Trim",
+      "Fine Purity Seal"
+    ],
+    "Stone II": [
+      "Field Ration",
+      "Ropes and Chains",
+      "Fine Micro-Generator",
+      "Blessed Weapon Oils",
+      "Rebreather",
+      "Purity Seal"
+    ],
+    "Stone III": [
+      "Enriched Rations",
+      "Holster and Pockets",
+      "Otherworldly Energy",
+      "Basic Auxiliary Core",
+      "Blessed Tasset Plate",
+      "Oath Seal"
+    ],
+    "Iron I": [
+      "First Aid Kit",
+      "Writings",
+      "Fine Micro-Generator",
+      "Locator Beacon",
+      "Cloak",
+      "Adamantium Lump"
+    ],
+    "Iron II": [
+      "Enriched Rations",
+      "Grandiloquent Litanical",
+      "Otherworldly Energy Reservoir",
+      "Divinator Class Auspex",
+      "Artificer Tasset Plate",
+      "Oath Seal"
+    ],
+    "Iron III": [
+      "Box of Rations",
+      "The Gold Phoenix",
+      "Wolf Tooth Necklace",
+      "Powerful Auxiliary Core",
+      "Adamantium Lump",
+      "Subdermal Plating"
+    ],
+    "Bronze I": [
+      "Wolf Tail Talisman",
+      "The Phoenix Ascendant",
+      "Supernatural Sight",
+      "Classified Data-Slate",
+      "Fine Cloak",
+      "Ceramite Bar"
+    ],
+    "Bronze II": [
+      "Runic Talisman",
+      "Utilitarian Belt",
+      "Bionic Eye",
+      "Anointed Auxiliary Core",
+      "Beast Hide",
+      "Blessed Purity Seal"
+    ],
+    "Bronze III": [
+      "Ancient Runes",
+      "Grand Helmet Trophy",
+      "Thunderwolf Tooth Necklace",
+      "Sanctified Weapon Oils",
+      "Ice Troll Hide",
+      "Revered Talisman"
+    ],
+    "Silver I": [
+      "Runic Talisman",
+      "Terminator Honours",
+      "Thunderwolf Tooth Necklace",
+      "Warp Locus",
+      "Ice Troll Hide",
+      "Ceramite Sheet"
+    ],
+    "Silver II": [
+      "Mjod",
+      "Greater Reliquary of Protection",
+      "Kraken Tooth Necklace",
+      "Anointed Auxiliary Core",
+      "Ice Troll Hide",
+      "Grand Purity Seal"
+    ],
+    "Silver III": [
+      "Runic Talisman",
+      "Tome of Arcane Knowledge",
+      "Thunderwolf Tooth Necklace",
+      "Digital Weapons",
+      "Psyk-Conductive Material",
+      "Ceramite Plates"
+    ],
+    "Gold I": [
+      "Talisman of Storms",
+      "Grandiose Skull Ornament",
+      "Psychic Force Conduit",
+      "Relic Auxiliary Core",
+      "Ice Wyrm Hide",
+      "Seal of the Emperor's Protection"
+    ],
+    "Gold II": [
+      "Personal Saga",
+      "Legendary Reliquary of Protection",
+      "Kraken Tooth Necklace",
+      "Digital Weapons",
+      "Ice Wyrm Hide",
+      "Divine Cloak"
+    ],
+    "Gold III": [
+      "Talisman of Storms",
+      "Tome of Arcane Knowledge",
+      "Frostblade",
+      "Psychic Focus",
+      "Runic Tasset Plate",
+      "Seal of the Emperor's Protection"
+    ],
+    "Diamond I": [
+      "Personal Saga",
+      "Grand Strategy",
+      "Frostblade",
+      "Relic Micro-Generator",
+      "Runic Tasset Plate",
+      "Ceramite Plates"
+    ]
+  },
   "Varro Tigurius": {
     "Stone I": [
       "Lesser Reliquary of Protection",
@@ -3213,7 +3343,7 @@
       "Legendary Reliquary of Protection",
       "Legendary Reliquary of Vengeance",
       "Digital Weapons",
-      "Ceramite Plates",
+      "Purity Seal of the Primarch",
       "Relic Tasset Plate"
     ],
     "Gold I": [
@@ -6016,7 +6146,7 @@
       "Enriched Rations",
       "Battle Plan",
       "Otherworldly Energy Reservoir",
-      "Locator Beacon",
+      "Slicing Claws",
       "Subdermal Plating",
       "Mutation: Scaly Skin"
     ],
@@ -6097,6 +6227,266 @@
       "Advanced Exospine",
       "Implant Attack",
       "Hyperstim",
+      "Symbiotic Carapace",
+      "Mutation: Impenetrable Skin"
+    ],
+    "Diamond I": [
+      "Hypermetabolic Acceleration",
+      "Grand Strategy",
+      "Implant Attack",
+      "Hyperstim",
+      "Symbiotic Carapace",
+      "Sophisticated Material Plates"
+    ]
+  },
+  "Winged Tyrant Prime": {
+    "Stone I": [
+      "Nano Swarm",
+      "Mutation: Warped Muscles",
+      "Canister of Chemicals",
+      "Nasty Spikes",
+      "Sophisticated Material",
+      "Sophisticated Material"
+    ],
+    "Stone II": [
+      "Field Ration",
+      "Nano Swarm",
+      "Combat Stimms",
+      "Razorsharp Spikes",
+      "Mutation: Tough Skin",
+      "Mutation: Tough Skin"
+    ],
+    "Stone III": [
+      "Enriched Rations",
+      "Regenerating Nano Swarm",
+      "Otherworldly Energy",
+      "Canister of Chemicals",
+      "Air Purificator",
+      "Mutation: Scaly Skin"
+    ],
+    "Iron I": [
+      "Regenerating Nano Swarm",
+      "Mission Objective",
+      "Combat Stimms",
+      "Combat Stimms",
+      "Mutation: Scaly Skin",
+      "Sophisticated Material Ingot"
+    ],
+    "Iron II": [
+      "Enriched Rations",
+      "Battle Plan",
+      "Otherworldly Energy Reservoir",
+      "Slicing Claws",
+      "Subdermal Plating",
+      "Mutation: Scaly Skin"
+    ],
+    "Iron III": [
+      "Box of Rations",
+      "Mutation: Warped Lungs",
+      "Toxin Sacs",
+      "Advanced Combat Stimms",
+      "Sophisticated Material Ingot",
+      "Subdermal Plating"
+    ],
+    "Bronze I": [
+      "Adrenal Glands",
+      "Mutation: Warped Heart",
+      "Supernatural Sight",
+      "Classified Data-Slate",
+      "Mutation: Warped Skin",
+      "Sophisticated Material Bar"
+    ],
+    "Bronze II": [
+      "Adaptive Adrenal Glands",
+      "Otherworldly Nano Swarm",
+      "Classified Data-Slate",
+      "Refined Combat Stimms",
+      "Reinforced Chitin",
+      "Mutation: Warped Skin"
+    ],
+    "Bronze III": [
+      "Battle Scar",
+      "Exospine",
+      "Adaptive Toxin Sacs",
+      "Murderous Spikes",
+      "Adaptive Chitin Carapace",
+      "Duplicate Organ"
+    ],
+    "Silver I": [
+      "Adaptive Adrenal Glands",
+      "Weathering",
+      "Adaptive Toxin Sacs",
+      "Warp Locus",
+      "Adaptive Chitin Carapace",
+      "Sophisticated Material Sheet"
+    ],
+    "Silver II": [
+      "Synaptic Augmentation",
+      "Mutation: Regenerative Blood",
+      "Hyper-Adaptive Toxin Sacs",
+      "Refined Combat Stimms",
+      "Adaptive Chitin Carapace",
+      "Mutation: Metallic Skin"
+    ],
+    "Silver III": [
+      "Adaptive Adrenal Glands",
+      "Grand Strategy",
+      "Adaptive Toxin Sacs",
+      "Imposing Horns",
+      "Psyk-Conductive Material",
+      "Sophisticated Material Plates"
+    ],
+    "Gold I": [
+      "Hyper-Adaptive Adrenal Glands",
+      "Advanced Exospine",
+      "Psychic Force Conduit",
+      "Hyperstim",
+      "Hyper-Adaptive Chitin Carapace",
+      "Mutation: Impenetrable Skin"
+    ],
+    "Gold II": [
+      "Hypermetabolic Acceleration",
+      "Mutation: Otherworldly Power",
+      "Hyper-Adaptive Toxin Sacs",
+      "Imposing Horns",
+      "Hyper-Adaptive Chitin Carapace",
+      "Mutation: Impenetrable Skin"
+    ],
+    "Gold III": [
+      "Hyper-Adaptive Adrenal Glands",
+      "Advanced Exospine",
+      "Implant Attack",
+      "Psychic Focus",
+      "Symbiotic Carapace",
+      "Mutation: Impenetrable Skin"
+    ],
+    "Diamond I": [
+      "Hypermetabolic Acceleration",
+      "Grand Strategy",
+      "Implant Attack",
+      "Hyperstim",
+      "Symbiotic Carapace",
+      "Sophisticated Material Plates"
+    ]
+  },
+  "Deathleaper": {
+    "Stone I": [
+      "Nano Swarm",
+      "Mutation: Warped Muscles",
+      "Canister of Chemicals",
+      "Nasty Spikes",
+      "Sophisticated Material",
+      "Sophisticated Material"
+    ],
+    "Stone II": [
+      "Chip Damage",
+      "Nano Swarm",
+      "Combat Stimms",
+      "Razorsharp Spikes",
+      "Mutation: Tough Skin",
+      "Mutation: Tough Skin"
+    ],
+    "Stone III": [
+      "Helmet Trophy",
+      "Regenerating Nano Swarm",
+      "Otherworldly Energy",
+      "Canister of Chemicals",
+      "Air Purificator",
+      "Mutation: Scaly Skin"
+    ],
+    "Iron I": [
+      "Regenerating Nano Swarm",
+      "Mission Objective",
+      "Combat Stimms",
+      "Combat Stimms",
+      "Mutation: Scaly Skin",
+      "Sophisticated Material Ingot"
+    ],
+    "Iron II": [
+      "Helmet Trophy",
+      "Battle Plan",
+      "Otherworldly Energy Reservoir",
+      "Locator Beacon",
+      "Subdermal Plating",
+      "Mutation: Scaly Skin"
+    ],
+    "Iron III": [
+      "Grand Skull Trophy",
+      "Mutation: Warped Lungs",
+      "Toxin Sacs",
+      "Advanced Combat Stimms",
+      "Sophisticated Material Ingot",
+      "Subdermal Plating"
+    ],
+    "Bronze I": [
+      "Adrenal Glands",
+      "Mutation: Warped Heart",
+      "Supernatural Sight",
+      "Classified Data-Slate",
+      "Mutation: Warped Skin",
+      "Sophisticated Material Bar"
+    ],
+    "Bronze II": [
+      "Adaptive Adrenal Glands",
+      "Otherworldly Nano Swarm",
+      "Classified Data-Slate",
+      "Refined Combat Stimms",
+      "Reinforced Chitin",
+      "Mutation: Warped Skin"
+    ],
+    "Bronze III": [
+      "Battle Scar",
+      "Exospine",
+      "Adaptive Toxin Sacs",
+      "Murderous Spikes",
+      "Adaptive Chitin Carapace",
+      "Duplicate Organ"
+    ],
+    "Silver I": [
+      "Adaptive Adrenal Glands",
+      "Secret Agenda",
+      "Adaptive Toxin Sacs",
+      "Warp Locus",
+      "Adaptive Chitin Carapace",
+      "Sophisticated Material Sheet"
+    ],
+    "Silver II": [
+      "Synaptic Augmentation",
+      "Mutation: Regenerative Blood",
+      "Hyper-Adaptive Toxin Sacs",
+      "Refined Combat Stimms",
+      "Adaptive Chitin Carapace",
+      "Mutation: Metallic Skin"
+    ],
+    "Silver III": [
+      "Adaptive Adrenal Glands",
+      "Grand Strategy",
+      "Adaptive Toxin Sacs",
+      "Imposing Horns",
+      "Psyk-Conductive Material",
+      "Sophisticated Material Plates"
+    ],
+    "Gold I": [
+      "Hyper-Adaptive Adrenal Glands",
+      "Advanced Exospine",
+      "Psychic Force Conduit",
+      "Hyperstim",
+      "Hyper-Adaptive Chitin Carapace",
+      "Mutation: Impenetrable Skin"
+    ],
+    "Gold II": [
+      "Hypermetabolic Acceleration",
+      "Mutation: Otherworldly Power",
+      "Hyper-Adaptive Toxin Sacs",
+      "Imposing Horns",
+      "Hyper-Adaptive Chitin Carapace",
+      "Mutation: Impenetrable Skin"
+    ],
+    "Gold III": [
+      "Hyper-Adaptive Adrenal Glands",
+      "Advanced Exospine",
+      "Implant Attack",
+      "Psychic Focus",
       "Symbiotic Carapace",
       "Mutation: Impenetrable Skin"
     ],
@@ -7936,7 +8326,7 @@
       "Can of Promethium",
       "Nasty Spikes",
       "Armor Trim",
-      "Fine Purity Seal"
+      "Rebreather"
     ],
     "Stone II": [
       "Scrolls",
@@ -8057,6 +8447,136 @@
       "Blessed Promethium Tank",
       "Warpweave Robe",
       "Ceramite Plates"
+    ]
+  },
+  "Ragnar Blackmane": {
+    "Stone I": [
+      "Purity Seal",
+      "Rebreather",
+      "Basic Auxiliary Core",
+      "Weapon Anointment Oils",
+      "Field Ration",
+      "Ropes and Chains"
+    ],
+    "Stone II": [
+      "Pile of Salvage",
+      "Ceramite Lump",
+      "Vox-Caster",
+      "Fine Micro-Generator",
+      "Lesser Reliquary of Protection",
+      "Chip Damage"
+    ],
+    "Stone III": [
+      "Pile of Salvage",
+      "Ceramite Lump",
+      "Fine Auxiliary Core",
+      "Combat Stimms",
+      "Wires",
+      "Helmet Trophy"
+    ],
+    "Iron I": [
+      "Oath Seal",
+      "Adamantium Lump",
+      "Locator Beacon",
+      "Blessed Weapon Oils",
+      "Enriched Rations",
+      "Reinforced Cables"
+    ],
+    "Iron II": [
+      "Ceramite Bar",
+      "Blessed Tasset Plate",
+      "Prey-Sight",
+      "Adamantium Blades",
+      "Reliquary of Protection",
+      "Reinforced Cables"
+    ],
+    "Iron III": [
+      "Ceramite Bar",
+      "Artificer Tasset Plate",
+      "Wolf Tooth Necklace",
+      "Blessed Weapon Oils",
+      "Box of Rations",
+      "Kill Count"
+    ],
+    "Bronze I": [
+      "Blessed Purity Seal",
+      "Adamantium Bar",
+      "Bladesman's Honour",
+      "Advanced Combat Stimms",
+      "Grand Skull Trophy",
+      "Wolf Tail Talisman"
+    ],
+    "Bronze II": [
+      "Ceramite Bar",
+      "Beast Hide",
+      "Anointed Auxiliary Core",
+      "Powerful Micro-Generator",
+      "Runic Talisman",
+      "Sanctified Reliquary of Protection"
+    ],
+    "Bronze III": [
+      "Grand Purity Seal",
+      "Ice Troll Hide",
+      "Thunderwolf Tooth Necklace",
+      "Sanctified Weapon Oils",
+      "Mars-Pattern Bionics",
+      "Battle Scar"
+    ],
+    "Silver I": [
+      "Ceramite Sheet",
+      "Ice Troll Hide",
+      "Refined Combat Stimms",
+      "Thunderwolf Tooth Necklace",
+      "Golden Ornamental Skull",
+      "Runic Talisman"
+    ],
+    "Silver II": [
+      "Grand Purity Seal",
+      "Ice Wyrm Hide",
+      "Special Issue Ammo",
+      "Kraken Tooth Necklace",
+      "Grand Helmet Trophy",
+      "Runic Talisman"
+    ],
+    "Silver III": [
+      "Ice Troll Hide",
+      "Ceramite Plates",
+      "Thunderwolf Tooth Necklace",
+      "Digital Weapons",
+      "Legendary Reliquary of Protection",
+      "Talisman of Storms"
+    ],
+    "Gold I": [
+      "Seal of the Emperor's Protection",
+      "Ice Wyrm Hide",
+      "Relic Micro-Generator",
+      "Kraken Tooth Necklace",
+      "Relic Bionic Enhancement",
+      "Personal Saga"
+    ],
+    "Gold II": [
+      "Ceramite Plates",
+      "Runic Tasset Plate",
+      "Powered Blade",
+      "Frostblade",
+      "Grandiose Skull Ornament",
+      "Talisman of Storms"
+    ],
+    "Gold III": [
+      "Seal of the Emperor's Protection",
+      "Runic Tasset Plate",
+      "Digital Weapons",
+      "Frostblade",
+      "Legendary Reliquary of Protection",
+      "Personal Saga"
+    ],
+    "Diamond I": [
+      "Ceramite Plates",
+      "Runic Tasset Plate",
+      "Hyperstim",
+      "Frostblade",
+      "Grand Strategy",
+      "Personal Saga"
     ]
   }
 }

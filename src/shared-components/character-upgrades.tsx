@@ -81,8 +81,6 @@ export const CharacterUpgrades = ({
                 appliedUpgrades: formData.originalUpgrades,
             });
 
-            console.log(neededUpgrades.map(x => x.material).join(', '));
-
             return StaticDataService.groupBaseMaterials(neededUpgrades);
         }
 
@@ -109,9 +107,9 @@ export const CharacterUpgrades = ({
         <div>
             <h4>Applied upgrades</h4>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                {possibleUpgrades.map(x => (
+                {possibleUpgrades.map((x, index) => (
                     <FormControlLabel
-                        key={x.material}
+                        key={x.material + index}
                         control={
                             <Checkbox
                                 checked={formData.currentUpgrades.includes(x.material)}
@@ -149,9 +147,9 @@ export const CharacterUpgrades = ({
                 <div style={{ padding: 15 }}>
                     <p>Inventory after update:</p>
                     <ul style={{ padding: 0 }}>
-                        {baseMaterials.map(x => (
+                        {baseMaterials.map((x, index) => (
                             <li
-                                key={x.material}
+                                key={x.material + index}
                                 style={{
                                     listStyleType: 'none',
                                     display: 'flex',
