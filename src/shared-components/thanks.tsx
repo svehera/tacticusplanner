@@ -37,7 +37,6 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
         }, 3000);
 
         const intervalId = setInterval(() => {
-            console.log('I ma gere');
             setHide(false);
             setTimeout(() => {
                 setHide(true);

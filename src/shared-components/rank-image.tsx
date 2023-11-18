@@ -26,7 +26,7 @@ export const RankImage = ({ rank }: { rank: Rank }) => {
             </Tooltip>
         );
     } catch (error) {
-        console.log(`Image with name "${Rank[rank]}" does not exist`);
+       // console.log(`Image with name "${Rank[rank]}" does not exist`);
         return <span>{Rank[rank]}</span>;
     }
 };

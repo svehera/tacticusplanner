@@ -106,7 +106,6 @@ export const RankLookup = () => {
         return Math.ceil(sum(totalMaterials.map(x => x.expectedEnergy)));
     }, [totalMaterials]);
 
-    console.log();
 
     const renderUpgradesMaterials = (materials: Array<IMaterialRecipeIngredientFull>) => (
         <ul>

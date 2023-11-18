@@ -14,7 +14,7 @@ export const CampaignImage = ({ campaign, size }: { campaign: string; size?: num
             </Tooltip>
         );
     } catch (error) {
-        console.log(`Image with name "${campaign}" does not exist`);
+        // console.log(`Image with name "${campaign}" does not exist`);
         return <span>{campaign}</span>;
     }
 };

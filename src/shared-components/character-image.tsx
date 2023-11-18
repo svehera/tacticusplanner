@@ -19,7 +19,7 @@ export const CharacterImage = ({ icon, name, imageSize }: { icon: string; name?:
             />
         );
     } catch (error) {
-        console.log(`Image with name "${icon}" does not exist`);
+       // console.log(`Image with name "${icon}" does not exist`);
         return null;
     }
 };
