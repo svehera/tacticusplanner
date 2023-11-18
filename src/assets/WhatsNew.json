@@ -18,7 +18,14 @@
           "route": "learn/dirtyDozen"
         }
       ],
-      "bugFixes": []
+      "bugFixes": [
+        {
+          "text": "Fixed issues with completed raid still appears in today's list and is not proposed in Day 2 for the final material (Somberlord)"
+        },
+        {
+          "text": "Fixed issues with app hang when lookup rank for Calgar Silver 3 or more (WolfLord 5's, Corusame)"
+        }
+      ]
     },
     {
       "version": "1.1.1",

@@ -437,6 +437,7 @@ export class StaticDataService {
         const totalEnergy = sum(allMaterials.map(x => x.totalEnergy));
         let currEnergy = 0;
         const completedLocations = settings.completedLocations.flatMap(x => x.locations);
+        let iteration = 0;
 
         while (currEnergy < totalEnergy) {
             const dayNumber = resultDays.length + 1;
@@ -555,6 +556,12 @@ export class StaticDataService {
             if (day.raids.length) {
                 resultDays.push(day);
             }
+
+            iteration++;
+            if (iteration > 1000) {
+                console.error('Infinite loop', resultDays);
+                break;
+            }
         }
 
         return resultDays;
@@ -600,12 +607,16 @@ export class StaticDataService {
                 }
             }
             daysOfBattles++;
+            if (daysOfBattles > 1000) {
+                console.error('Infinite loop', material, bestLocations);
+                break;
+            }
         }
 
-        const dailyEnergy = sum(bestLocations.map(x => x.dailyBattleCount * x.energyCost));
-        const dailyBattles = sum(bestLocations.map(x => x.dailyBattleCount));
-        const locations = bestLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
-        const missingLocationsString = !locations
+        const dailyEnergy = sum(selectedLocations.map(x => x.dailyBattleCount * x.energyCost));
+        const dailyBattles = sum(selectedLocations.map(x => x.dailyBattleCount));
+        const locations = selectedLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
+        const missingLocationsString = !bestLocations.length
             ? material.locationsComposed
                   ?.filter(x => {
                       return !bestLocations.some(y => x.campaign === y.campaign && x.nodeNumber === y.nodeNumber);
