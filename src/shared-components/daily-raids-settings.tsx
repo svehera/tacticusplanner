@@ -123,7 +123,7 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
                 }
-                label="Use Most efficient nodes"
+                label="Use Most efficient nodes (Elite)"
             />
 
             <FormControlLabel
@@ -134,7 +134,7 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
                 }
-                label="Use More efficient nodes"
+                label="Use More efficient nodes (Mirror)"
             />
 
             <FormControlLabel
@@ -145,7 +145,7 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
                 }
-                label="Use Least efficient nodes"
+                label="Use Least efficient nodes (Normal)"
             />
 
             <FormControlLabel
