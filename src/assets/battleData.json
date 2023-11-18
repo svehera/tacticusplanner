@@ -1,4 +1,18 @@
 {
+  "Unknown1": {
+    "campaign": "Unknown",
+    "campaignType": "Normal",
+    "nodeNumber": 1,
+    "reward": "Purity Seal of the Primarch",
+    "expectedGold": 0
+  },
+  "Unknown2": {
+    "campaign": "Unknown",
+    "campaignType": "Normal",
+    "nodeNumber": 2,
+    "reward": "Archeotech Bionics",
+    "expectedGold": 0
+  },
   "I15": {
     "campaign": "Indomitus",
     "campaignType": "Early",

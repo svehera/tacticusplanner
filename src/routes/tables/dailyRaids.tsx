@@ -172,6 +172,11 @@ export const DailyRaids = () => {
                 cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
             },
             {
+                field: 'characters',
+                tooltipField: 'characters',
+                maxWidth: 120,
+            },
+            {
                 field: 'expectedEnergy',
                 headerName: 'Energy',
                 maxWidth: 90,
@@ -213,6 +218,7 @@ export const DailyRaids = () => {
                     : defaultCampaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: dailyRaidsPreferences.useInventory ? upgrades : {},
+                completedLocations: dailyRaids.completedLocations,
             },
             ...selectedCharacters
         );
@@ -224,7 +230,9 @@ export const DailyRaids = () => {
             const notCompletedRaids: IMaterialRaid[] = [];
             for (const raid of currentDay.raids) {
                 const isAllRaidsCompleted = raid.locations.every(location =>
-                    dailyRaids.completedBattles.includes(location.campaign + location.battleNumber)
+                    dailyRaids.completedLocations
+                        .flatMap(x => x.locations)
+                        .some(completedLocation => completedLocation.id === location.id)
                 );
 
                 if (isAllRaidsCompleted) {
@@ -234,9 +242,9 @@ export const DailyRaids = () => {
                     const notCompletedLocations: IRaidLocation[] = [];
 
                     for (const location of raid.locations) {
-                        const isLocationCompleted = dailyRaids.completedBattles.includes(
-                            location.campaign + location.battleNumber
-                        );
+                        const isLocationCompleted = dailyRaids.completedLocations
+                            .flatMap(x => x.locations)
+                            .some(completedLocation => completedLocation.id === location.id);
 
                         if (isLocationCompleted) {
                             completedLocations.push(location);
@@ -346,9 +354,17 @@ export const DailyRaids = () => {
                                 <RefreshIcon /> Refresh Estimate
                             </Button>
                         ) : undefined}
-                        {dailyRaids.completedBattles.length ? (
-                            <Tooltip title={dailyRaids.completedBattles.join(', ')}>
-                                <Button onClick={() => dispatch.dailyRaids({ type: 'ResetCompletedBattles' })}>
+                        {dailyRaids.completedLocations.length ? (
+                            <Tooltip
+                                title={dailyRaids.completedLocations
+                                    .flatMap(x => x.locations)
+                                    .map(x => x.campaign + ' ' + x.battleNumber)
+                                    .join(', ')}>
+                                <Button
+                                    onClick={() => {
+                                        dispatch.dailyRaids({ type: 'ResetCompletedBattles' });
+                                        refresh();
+                                    }}>
                                     <ClearIcon /> Clear Completed Raids
                                 </Button>
                             </Tooltip>
@@ -381,7 +397,7 @@ export const DailyRaids = () => {
                             {pagination.completed ? undefined : (
                                 <Button
                                     variant={'outlined'}
-                                    style={{ minWidth: 300 }}
+                                    style={{ minWidth: 300, alignItems: 'flex-start', paddingTop: 20 }}
                                     onClick={() =>
                                         setPagination({
                                             start: 0,
@@ -539,13 +555,17 @@ const MaterialItem = ({
     changed: () => void;
 }) => {
     const { dailyRaids } = useContext(StoreContext);
+    const completedLocations = dailyRaids.completedLocations.flatMap(x => x.locations);
+
     const isAllRaidsCompleted = useMemo(
         () =>
             isFirstDay &&
             raid.locations.every(location =>
-                dailyRaids.completedBattles.includes(location.campaign + location.battleNumber)
+                dailyRaids.completedLocations
+                    .flatMap(x => x.locations)
+                    .some(completedLocation => completedLocation.id === location.id)
             ),
-        [dailyRaids.completedBattles.length]
+        [completedLocations]
     );
 
     return (
@@ -568,7 +588,7 @@ const MaterialItem = ({
                     <RaidItem
                         location={x}
                         key={x.campaign + x.battleNumber}
-                        material={raid.material}
+                        material={raid}
                         materialTotalCount={raid.totalCount}
                         changed={changed}
                         isFirstDay={isFirstDay}
@@ -587,7 +607,7 @@ const RaidItem = ({
     materialTotalCount,
 }: {
     isFirstDay: boolean;
-    material: string;
+    material: IMaterialRaid;
     materialTotalCount: number;
     location: IRaidLocation;
     changed: () => void;
@@ -596,31 +616,37 @@ const RaidItem = ({
     const dispatch = useContext(DispatchContext);
     const [itemsObtained, setItemsObtained] = useState<string | number>(Math.round(location.farmedItems));
 
+    const completedLocations = dailyRaids.completedLocations.flatMap(x => x.locations);
+
     const isLocationCompleted = useMemo(
-        () => isFirstDay && dailyRaids.completedBattles.includes(location.campaign + location.battleNumber),
-        [dailyRaids.completedBattles.length]
+        () => isFirstDay && completedLocations.some(completedLocation => completedLocation.id === location.id),
+        [completedLocations]
     );
     const handleItemsObtainedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setItemsObtained(event.target.value);
     };
 
-    const collectedItems = useMemo(() => inventory.upgrades[material] ?? 0, [inventory.upgrades]);
+    const collectedItems = useMemo(() => inventory.upgrades[material.material] ?? 0, [inventory.upgrades]);
 
     const handleAdd = () => {
         const value = itemsObtained === '' ? 0 : Number(itemsObtained);
         if (value > 0) {
             dispatch.inventory({
                 type: 'IncrementUpgradeQuantity',
-                upgrade: material,
+                upgrade: material.material,
                 value,
             });
-            enqueueSnackbar(`Added ${value} items for ${material}`, { variant: 'success' });
+            enqueueSnackbar(`Added ${value} items for ${material.material}`, { variant: 'success' });
             changed();
         }
 
         dispatch.dailyRaids({
             type: 'AddCompletedBattle',
-            battle: location.campaign + location.battleNumber,
+            location,
+            material: {
+                ...material,
+                locations: [],
+            },
         });
     };
 
@@ -646,7 +672,8 @@ const RaidItem = ({
                         flexDirection: 'column',
                     }}>
                     <span>
-                        Battle {location.battleNumber} ({location.raidsCount}x)
+                        <span style={{ fontStyle: 'italic' }}>({location.raidsCount}x)</span> Battle{' '}
+                        <span style={{ fontWeight: 'bold' }}>{location.battleNumber}</span>
                     </span>
                     <span style={{ fontSize: 12 }}>{location.campaign}</span>
                 </div>
@@ -683,7 +710,7 @@ const RaidItem = ({
                         </Tooltip>
                     }
                 />
-                <Tooltip title={'Add to inventory'} hidden={isLocationCompleted}>
+                <Tooltip title={isLocationCompleted ? '' : 'Add to inventory'}>
                     <span>
                         <Button size={'small'} onClick={handleAdd} disabled={isLocationCompleted}>
                             Add

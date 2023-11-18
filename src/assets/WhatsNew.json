@@ -1,6 +1,44 @@
 ﻿{
-  "currentVersion": "1.1.1",
+  "currentVersion": "1.1.2",
   "releaseNotes": [
+    {
+      "version": "1.1.2",
+      "date": "November 18",
+      "type": "Update",
+      "new": [
+        {
+          "text": "Added option to the Daily Raids settings to \"Farm by priority order\". Daily raids will be suggested in order of characters on goals page. (Somberlord)",
+          "images": [
+            {
+              "path": "farm.png"
+            }
+          ]
+        }
+      ],
+      "minor": [
+        {
+          "text": "Added upgrades data for Njal, Ragnar, Deathleaper, Winged Tyrant Prime"
+        },
+        {
+          "text": "Small UI updates for daily raids feature"
+        },
+        {
+          "text": "Small UI updates for Dirty Dozen table (Razielesaint)",
+          "route": "learn/dirtyDozen"
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed issues with completed raid still appears in today's list and is not proposed in Day 2 for the final material (Somberlord)"
+        },
+        {
+          "text": "Fixed issues with app hang when lookup rank for Calgar Silver 3 or more (WolfLord 5's, Corusame)"
+        },
+        {
+          "text": "Fixed issues with goals priority when setting goals from LE screen (Juanjo)"
+        }
+      ]
+    },
     {
       "version": "1.1.1",
       "date": "November 16",

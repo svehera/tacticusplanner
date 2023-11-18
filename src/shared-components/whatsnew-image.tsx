@@ -10,7 +10,7 @@ export const WhatsNewImage = ({ path, imageSize }: { path: string; imageSize?: n
         if (!image) return null;
         return <img src={image} height={imageSize} width={'100%'} alt={path} />;
     } catch (error) {
-        console.log(`Image with name "${path}" does not exist`);
+        // console.log(`Image with name "${path}" does not exist`);
         return null;
     }
 };

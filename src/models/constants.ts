@@ -103,7 +103,7 @@ export const defaultData: IPersonalData2 = {
     modifiedDate: undefined,
     seenAppVersion: undefined,
     dailyRaids: {
-        completedBattles: [],
+        completedLocations: [],
         lastRefreshDateUTC: new Date().toUTCString(),
     },
     autoTeamsPreferences: {
@@ -130,6 +130,7 @@ export const defaultData: IPersonalData2 = {
         useMoreEfficientNodes: false,
         useLeastEfficientNodes: false,
         useInventory: true,
+        farmByPriorityOrder: false,
     },
     characters: [
         {

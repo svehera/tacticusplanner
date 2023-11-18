@@ -1,4 +1,4 @@
-﻿import { groupBy, map, orderBy, sortBy, sum, sumBy, uniq } from 'lodash';
+﻿import { cloneDeep, groupBy, map, orderBy, sortBy, sum, sumBy, uniq } from 'lodash';
 
 import unitsData from '../assets/UnitData.json';
 import dirtyDozen from '../assets/DirtyDozen.json';
@@ -162,6 +162,7 @@ export class StaticDataService {
                     locationsComposed: locations.map(x => this.campaignsComposed[x]),
                     iconPath: upgrade?.icon ?? '',
                     characters: [],
+                    priority: 0,
                 };
                 allMaterials.push(item);
                 return item;
@@ -177,6 +178,7 @@ export class StaticDataService {
                     recipe: upgrade.recipe.map(item => getRecipe(item.material, count * item.count, allMaterials)),
                     iconPath: upgrade.icon ?? '',
                     characters: [],
+                    priority: 0,
                 };
             }
         };
@@ -217,6 +219,7 @@ export class StaticDataService {
                     locationsComposed: items[0].locationsComposed,
                     iconPath: items[0].iconPath ?? '',
                     characters: [],
+                    priority: 0,
                 }));
             }
         }
@@ -332,8 +335,9 @@ export class StaticDataService {
     public static getUpgrades(...characters: Array<ICharacterRankRange>): IMaterialFull[] {
         const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
         const result: IMaterialFull[] = [];
-
+        let priority = 0;
         for (const character of characters) {
+            priority++;
             const characterUpgrades = StaticDataService.rankUpData[character.id];
             if (!characterUpgrades) {
                 continue;
@@ -363,12 +367,14 @@ export class StaticDataService {
                         stat: 'Unknown',
                         material: upgrade,
                         character: character.id,
+                        priority,
                         recipe: [],
                         allMaterials: [],
                     };
                 }
                 return {
-                    ...recipe,
+                    ...cloneDeep(recipe),
+                    priority,
                     character: character.id,
                 };
             });
@@ -380,10 +386,14 @@ export class StaticDataService {
     }
 
     public static getAllMaterials(settings: IEstimatedRanksSettings, upgrades: IMaterialFull[]): IMaterialEstimated2[] {
-        const result = this.groupBaseMaterials(upgrades);
-
-        return orderBy(
-            result
+        if (settings.preferences?.farmByPriorityOrder) {
+            const materials: IMaterialRecipeIngredientFull[] = [];
+            const upgradesByCharacter = groupBy(upgrades, 'character');
+            for (const character in upgradesByCharacter) {
+                const characterMaterials = this.groupBaseMaterials(upgradesByCharacter[character]);
+                materials.push(...characterMaterials);
+            }
+            const result = materials
                 .map(x =>
                     this.calculateMaterialData(
                         settings.campaignsProgress,
@@ -392,10 +402,31 @@ export class StaticDataService {
                         settings.upgrades
                     )
                 )
-                .filter(x => !!x) as IMaterialEstimated2[],
-            ['daysOfBattles', 'totalEnergy', 'rarity', 'count'],
-            ['desc', 'desc', 'desc', 'desc']
-        );
+                .filter(x => !!x) as IMaterialEstimated2[];
+
+            return orderBy(
+                result,
+                ['priority', 'daysOfBattles', 'totalEnergy', 'rarity', 'count'],
+                ['asc', 'desc', 'desc', 'desc', 'desc']
+            );
+        } else {
+            const result = this.groupBaseMaterials(upgrades)
+                .map(x =>
+                    this.calculateMaterialData(
+                        settings.campaignsProgress,
+                        x,
+                        this.selectBestLocations(settings, x.locationsComposed ?? []),
+                        settings.upgrades
+                    )
+                )
+                .filter(x => !!x) as IMaterialEstimated2[];
+
+            return orderBy(
+                result,
+                ['daysOfBattles', 'totalEnergy', 'rarity', 'count'],
+                ['desc', 'desc', 'desc', 'desc']
+            );
+        }
     }
 
     public static groupBaseMaterials(upgrades: IMaterialFull[], keepGold = false) {
@@ -404,6 +435,7 @@ export class StaticDataService {
                 const result = x.allMaterials ?? [];
                 if (x.character) {
                     result.forEach(material => {
+                        material.priority = x.priority ?? 0;
                         material.characters = [...material.characters, x.character!];
                     });
                 }
@@ -421,11 +453,12 @@ export class StaticDataService {
                 stat: items[0].stat,
                 craftable: items[0].craftable,
                 locations: items[0].locations,
+                priority: items[0].priority,
                 characters: uniq(items.flatMap(item => item.characters)),
                 locationsComposed: items[0].locations?.map(location => StaticDataService.campaignsComposed[location]),
             };
         });
-        return keepGold ? result : result.filter(x => x.material !== 'Gold');
+        return keepGold ? result : result.filter(x => !x.material.includes('Gold'));
     }
 
     private static generateDailyRaidsList(
@@ -436,13 +469,19 @@ export class StaticDataService {
 
         const totalEnergy = sum(allMaterials.map(x => x.totalEnergy));
         let currEnergy = 0;
+        const completedLocations = settings.completedLocations.flatMap(x => x.locations);
+        let iteration = 0;
 
         while (currEnergy < totalEnergy) {
+            const dayNumber = resultDays.length + 1;
+            const isToday = dayNumber === 1;
             const day: IDailyRaid = {
                 energyLeft: settings.dailyEnergy,
                 raids: [],
             };
-            let energyLeft = settings.dailyEnergy;
+            let energyLeft = isToday
+                ? settings.dailyEnergy - sum(completedLocations.map(x => x.energySpent))
+                : settings.dailyEnergy;
 
             for (const material of allMaterials) {
                 const locationsMinEnergyConst = Math.min(...material.locations.map(x => x.energyCost));
@@ -462,6 +501,15 @@ export class StaticDataService {
 
                 for (const location of material.locations) {
                     const locationDailyEnergy = location.energyCost * location.dailyBattleCount;
+                    const completedLocation =
+                        isToday &&
+                        completedLocations.find(
+                            completedLocation => completedLocation.id === location.campaign + location.nodeNumber
+                        );
+                    if (completedLocation) {
+                        materialRaids.locations.push(completedLocation);
+                        continue;
+                    }
 
                     if (material.totalEnergy > locationDailyEnergy) {
                         if (energyLeft > locationDailyEnergy) {
@@ -470,59 +518,59 @@ export class StaticDataService {
                             material.totalEnergy -= locationDailyEnergy;
 
                             materialRaids.locations.push({
+                                id: location.campaign + location.nodeNumber,
                                 campaign: location.campaign,
                                 battleNumber: location.nodeNumber,
                                 raidsCount: location.dailyBattleCount,
                                 farmedItems: locationDailyEnergy / location.energyPerItem,
-                            });
-                        } else if (energyLeft > location.energyCost) {
-                            const numberOfBattles = Math.floor(energyLeft / location.energyCost);
-                            const maxNumberOfBattles =
-                                numberOfBattles > location.dailyBattleCount
-                                    ? location.dailyBattleCount
-                                    : numberOfBattles;
-
-                            if (numberOfBattles <= 0) {
-                                continue;
-                            }
-
-                            const energySpent = maxNumberOfBattles * location.energyCost;
-
-                            energyLeft -= energySpent;
-                            currEnergy += energySpent;
-                            material.totalEnergy -= energySpent;
-
-                            materialRaids.locations.push({
-                                campaign: location.campaign,
-                                battleNumber: location.nodeNumber,
-                                raidsCount: maxNumberOfBattles,
-                                farmedItems: energySpent / location.energyPerItem,
+                                energySpent: locationDailyEnergy,
                             });
                         }
-                    } else {
-                        if (energyLeft > material.totalEnergy) {
-                            const numberOfBattles = Math.floor(material.totalEnergy / location.energyCost);
-                            const maxNumberOfBattles =
-                                numberOfBattles > location.dailyBattleCount
-                                    ? location.dailyBattleCount
-                                    : numberOfBattles;
+                    } else if (energyLeft > material.totalEnergy) {
+                        const numberOfBattles = Math.floor(material.totalEnergy / location.energyCost);
+                        const maxNumberOfBattles =
+                            numberOfBattles > location.dailyBattleCount ? location.dailyBattleCount : numberOfBattles;
 
-                            if (numberOfBattles <= 0) {
-                                continue;
-                            }
-                            const energySpent = maxNumberOfBattles * location.energyCost;
-
-                            energyLeft -= energySpent;
-                            currEnergy += energySpent;
-                            material.totalEnergy -= energySpent;
-
-                            materialRaids.locations.push({
-                                campaign: location.campaign,
-                                battleNumber: location.nodeNumber,
-                                raidsCount: maxNumberOfBattles,
-                                farmedItems: energySpent / location.energyPerItem,
-                            });
+                        if (numberOfBattles <= 0) {
+                            continue;
                         }
+                        const energySpent = maxNumberOfBattles * location.energyCost;
+
+                        energyLeft -= energySpent;
+                        currEnergy += energySpent;
+                        material.totalEnergy -= energySpent;
+
+                        materialRaids.locations.push({
+                            id: location.campaign + location.nodeNumber,
+                            campaign: location.campaign,
+                            battleNumber: location.nodeNumber,
+                            raidsCount: maxNumberOfBattles,
+                            farmedItems: energySpent / location.energyPerItem,
+                            energySpent: energySpent,
+                        });
+                    } else if (energyLeft > location.energyCost) {
+                        const numberOfBattles = Math.floor(energyLeft / location.energyCost);
+                        const maxNumberOfBattles =
+                            numberOfBattles > location.dailyBattleCount ? location.dailyBattleCount : numberOfBattles;
+
+                        if (numberOfBattles <= 0) {
+                            continue;
+                        }
+
+                        const energySpent = maxNumberOfBattles * location.energyCost;
+
+                        energyLeft -= energySpent;
+                        currEnergy += energySpent;
+                        material.totalEnergy -= energySpent;
+
+                        materialRaids.locations.push({
+                            id: location.campaign + location.nodeNumber,
+                            campaign: location.campaign,
+                            battleNumber: location.nodeNumber,
+                            raidsCount: maxNumberOfBattles,
+                            farmedItems: energySpent / location.energyPerItem,
+                            energySpent: energySpent,
+                        });
                     }
                 }
 
@@ -530,9 +578,22 @@ export class StaticDataService {
                     day.raids.push(materialRaids);
                 }
             }
+            if (isToday) {
+                const completedMaterials = settings.completedLocations.filter(
+                    x => !day.raids.some(material => material.material === x.material)
+                );
+                day.raids.push(...completedMaterials);
+            }
+
             day.energyLeft = energyLeft;
             if (day.raids.length) {
                 resultDays.push(day);
+            }
+
+            iteration++;
+            if (iteration > 1000) {
+                console.error('Infinite loop', resultDays);
+                break;
             }
         }
 
@@ -579,12 +640,16 @@ export class StaticDataService {
                 }
             }
             daysOfBattles++;
+            if (daysOfBattles > 1000) {
+                console.error('Infinite loop', material, bestLocations);
+                break;
+            }
         }
 
-        const dailyEnergy = sum(bestLocations.map(x => x.dailyBattleCount * x.energyCost));
-        const dailyBattles = sum(bestLocations.map(x => x.dailyBattleCount));
-        const locations = bestLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
-        const missingLocationsString = !locations
+        const dailyEnergy = sum(selectedLocations.map(x => x.dailyBattleCount * x.energyCost));
+        const dailyBattles = sum(selectedLocations.map(x => x.dailyBattleCount));
+        const locations = selectedLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
+        const missingLocationsString = !bestLocations.length
             ? material.locationsComposed
                   ?.filter(x => {
                       return !bestLocations.some(y => x.campaign === y.campaign && x.nodeNumber === y.nodeNumber);
@@ -610,6 +675,7 @@ export class StaticDataService {
             countLeft: leftCount,
             iconPath: material.iconPath,
             characters: material.characters,
+            priority: material.priority,
         };
     }
 

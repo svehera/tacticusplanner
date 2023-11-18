@@ -32,7 +32,7 @@ export const ContributorImage = ({
             />
         );
     } catch (error) {
-        console.log(`Image with name "${iconPath}" does not exist`);
+       //  console.log(`Image with name "${iconPath}" does not exist`);
         return null;
     }
 };

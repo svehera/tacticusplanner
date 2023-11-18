@@ -1,7 +1,7 @@
 [
   {
     "Name": "Eldryon",
-    "Rank": 1,
+    "Position": 1,
     "Pvp": 3.5,
     "GRTyranid": 5,
     "GRNecron": 5,
@@ -11,7 +11,7 @@
   },
   {
     "Name": "Maugan Ra",
-    "Rank": 2,
+    "Position": 2,
     "Pvp": 3.5,
     "GRTyranid": 4,
     "GRNecron": 5,
@@ -21,7 +21,7 @@
   },
   {
     "Name": "Marneus Calgar",
-    "Rank": 3,
+    "Position": 3,
     "Pvp": 5,
     "GRTyranid": 4.5,
     "GRNecron": 4.5,
@@ -31,7 +31,7 @@
   },
   {
     "Name": "Thaddeus Noble",
-    "Rank": 4,
+    "Position": 4,
     "Pvp": 4,
     "GRTyranid": 3,
     "GRNecron": 4,
@@ -41,7 +41,7 @@
   },
   {
     "Name": "Re'Vas",
-    "Rank": 5,
+    "Position": 5,
     "Pvp": 5,
     "GRTyranid": 3,
     "GRNecron": 4.5,
@@ -51,7 +51,7 @@
   },
   {
     "Name": "Bellator",
-    "Rank": 6,
+    "Position": 6,
     "Pvp": 3.5,
     "GRTyranid": 5,
     "GRNecron": 3.5,
@@ -61,7 +61,7 @@
   },
   {
     "Name": "Aethana",
-    "Rank": 7,
+    "Position": 7,
     "Pvp": 3,
     "GRTyranid": 3,
     "GRNecron": 4,
@@ -71,7 +71,7 @@
   },
   {
     "Name": "Aun'Shi",
-    "Rank": 8,
+    "Position": 8,
     "Pvp": 3.5,
     "GRTyranid": 5,
     "GRNecron": 2.5,
@@ -81,7 +81,7 @@
   },
   {
     "Name": "Sho'Syl",
-    "Rank": 9,
+    "Position": 9,
     "Pvp": 4,
     "GRTyranid": 2,
     "GRNecron": 3.5,
@@ -91,7 +91,7 @@
   },
   {
     "Name": "Commissar Yarrick",
-    "Rank": 10,
+    "Position": 10,
     "Pvp": 3.5,
     "GRTyranid": 3.5,
     "GRNecron": 3,
@@ -101,7 +101,7 @@
   },
   {
     "Name": "Darkstrider",
-    "Rank": 11,
+    "Position": 11,
     "Pvp": 2.5,
     "GRTyranid": 2,
     "GRNecron": 4,
@@ -111,7 +111,7 @@
   },
   {
     "Name": "Volk",
-    "Rank": 12,
+    "Position": 12,
     "Pvp": 3,
     "GRTyranid": 2.5,
     "GRNecron": 3.5,
@@ -121,7 +121,7 @@
   },
   {
     "Name": "Ahriman",
-    "Rank": 13,
+    "Position": 13,
     "Pvp": 4,
     "GRTyranid": 2,
     "GRNecron": 1.5,
@@ -131,7 +131,7 @@
   },
   {
     "Name": "Roswitha",
-    "Rank": 14,
+    "Position": 14,
     "Pvp": 3,
     "GRTyranid": 4,
     "GRNecron": 1.5,
@@ -141,7 +141,7 @@
   },
   {
     "Name": "Castellan Creed",
-    "Rank": 15,
+    "Position": 15,
     "Pvp": 4,
     "GRTyranid": 3,
     "GRNecron": 3,
@@ -151,7 +151,7 @@
   },
   {
     "Name": "Celestine",
-    "Rank": 16,
+    "Position": 16,
     "Pvp": 5,
     "GRTyranid": 2.5,
     "GRNecron": 2,
@@ -161,7 +161,7 @@
   },
   {
     "Name": "Tjark",
-    "Rank": 17,
+    "Position": 17,
     "Pvp": 3.5,
     "GRTyranid": 4,
     "GRNecron": 2,
@@ -171,7 +171,7 @@
   },
   {
     "Name": "Ulf",
-    "Rank": 18,
+    "Position": 18,
     "Pvp": 3.5,
     "GRTyranid": 2,
     "GRNecron": 2,
@@ -181,7 +181,7 @@
   },
   {
     "Name": "High Marshal Helbrecht",
-    "Rank": 19,
+    "Position": 19,
     "Pvp": 3,
     "GRTyranid": 5,
     "GRNecron": 1.5,
@@ -191,7 +191,7 @@
   },
   {
     "Name": "Aleph-Null",
-    "Rank": 20,
+    "Position": 20,
     "Pvp": 4,
     "GRTyranid": 3,
     "GRNecron": 0,
@@ -201,7 +201,7 @@
   },
   {
     "Name": "Abraxas",
-    "Rank": 21,
+    "Position": 21,
     "Pvp": 4,
     "GRTyranid": 2.5,
     "GRNecron": 2,
@@ -211,7 +211,7 @@
   },
   {
     "Name": "Archimatos",
-    "Rank": 22,
+    "Position": 22,
     "Pvp": 3.5,
     "GRTyranid": 3.5,
     "GRNecron": 2,
@@ -221,7 +221,7 @@
   },
   {
     "Name": "Jain Zar",
-    "Rank": 23,
+    "Position": 23,
     "Pvp": 3.5,
     "GRTyranid": 2,
     "GRNecron": 2,
@@ -231,7 +231,7 @@
   },
   {
     "Name": "Calandis",
-    "Rank": 24,
+    "Position": 24,
     "Pvp": 4.5,
     "GRTyranid": 2,
     "GRNecron": 2,
@@ -241,7 +241,7 @@
   },
   {
     "Name": "Morvenn Vahl",
-    "Rank": 25,
+    "Position": 25,
     "Pvp": 3.5,
     "GRTyranid": 2,
     "GRNecron": 2,
@@ -251,7 +251,7 @@
   },
   {
     "Name": "Yazaghor",
-    "Rank": 26,
+    "Position": 26,
     "Pvp": 3,
     "GRTyranid": 2,
     "GRNecron": 1.5,
@@ -261,7 +261,7 @@
   },
   {
     "Name": "Neurothrope",
-    "Rank": 27,
+    "Position": 27,
     "Pvp": 2.5,
     "GRTyranid": 0,
     "GRNecron": 2.5,
@@ -271,7 +271,7 @@
   },
   {
     "Name": "Brother Burchard",
-    "Rank": 28,
+    "Position": 28,
     "Pvp": 3,
     "GRTyranid": 2,
     "GRNecron": 2,
@@ -281,7 +281,7 @@
   },
   {
     "Name": "Kut Skoden",
-    "Rank": 29,
+    "Position": 29,
     "Pvp": 2.5,
     "GRTyranid": 1.5,
     "GRNecron": 1.5,
@@ -291,7 +291,7 @@
   },
   {
     "Name": "Shadowsun",
-    "Rank": 30,
+    "Position": 30,
     "Pvp": 3,
     "GRTyranid": 1.5,
     "GRNecron": 2,

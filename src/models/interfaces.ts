@@ -97,7 +97,7 @@ export interface IDamageTypes {
 
 export interface IDirtyDozenChar {
     Name: string;
-    Rank: number;
+    Position: number;
     Pvp: number;
     GRTyranid: number;
     GRNecron: number;
@@ -276,7 +276,7 @@ export interface IPersonalData2 {
 }
 
 export interface IDailyRaids {
-    completedBattles: string[];
+    completedLocations: IMaterialRaid[];
     lastRefreshDateUTC: string;
 }
 
@@ -337,6 +337,7 @@ export interface IDailyRaidsPreferences {
     useMoreEfficientNodes: boolean;
     useLeastEfficientNodes: boolean;
     useInventory: boolean;
+    farmByPriorityOrder: boolean;
 }
 
 export interface ISelectedTeamsOrdering {
@@ -527,6 +528,7 @@ export interface IMaterialFull {
     allMaterials?: IMaterialRecipeIngredientFull[];
     iconPath: string;
     character?: string;
+    priority?: number;
 }
 
 export interface IMaterialRecipeIngredientFull {
@@ -540,6 +542,7 @@ export interface IMaterialRecipeIngredientFull {
     locationsComposed?: Array<ICampaignBattleComposed>;
     iconPath: string;
     characters: string[];
+    priority: number;
 }
 
 export interface IRankUpData {
@@ -601,6 +604,7 @@ export interface IMaterialEstimated2 {
     countLeft: number;
     iconPath: string;
     characters: string[];
+    priority: number;
 }
 
 export interface IDailyRaid {
@@ -617,10 +621,12 @@ export interface IMaterialRaid {
 }
 
 export interface IRaidLocation {
+    id: string;
     campaign: string;
     battleNumber: number;
     raidsCount: number;
     farmedItems: number;
+    energySpent: number;
 }
 
 export interface ICharacterRankRange {
@@ -638,6 +644,7 @@ export interface IEstimatedRanks {
 }
 
 export interface IEstimatedRanksSettings {
+    completedLocations: IMaterialRaid[];
     campaignsProgress: ICampaignsProgress;
     dailyEnergy: number;
     preferences?: IDailyRaidsPreferences;

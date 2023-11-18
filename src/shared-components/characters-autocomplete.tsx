@@ -41,7 +41,7 @@ export const CharactersAutocomplete = ({
     };
 
     return (
-        <div onClick={() => handleAutocompleteChange(!openAutocomplete)} style={style}>
+        <div style={style}>
             <Autocomplete
                 id="combo-box-demo"
                 style={{ minWidth: 300 }}
@@ -66,6 +66,7 @@ export const CharactersAutocomplete = ({
                     <TextField
                         {...params}
                         fullWidth
+                        onClick={() => handleAutocompleteChange(!openAutocomplete)}
                         onChange={() => handleAutocompleteChange(true)}
                         label="Character"
                         onKeyDown={handleKeyDown}

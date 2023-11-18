@@ -17,7 +17,8 @@ import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
 export const Goals = () => {
-    const { goals, characters, campaignsProgress, dailyRaidsPreferences, inventory } = useContext(StoreContext);
+    const { goals, characters, campaignsProgress, dailyRaidsPreferences, inventory, dailyRaids } =
+        useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const [editGoal, setEditGoal] = useState<IPersonalGoal | null>(null);
@@ -48,6 +49,7 @@ export const Goals = () => {
                     : defaultCampaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: dailyRaidsPreferences.useInventory ? inventory.upgrades : {},
+                completedLocations: dailyRaids.completedLocations,
             },
             ...chars
         );
@@ -135,7 +137,7 @@ export const GoalCard = ({
     menuItemSelect?: (item: 'edit' | 'delete') => void;
     onClick?: () => void;
 }) => {
-    const { characters, campaignsProgress, dailyRaidsPreferences, inventory } = useContext(StoreContext);
+    const { characters, campaignsProgress, dailyRaidsPreferences, inventory, dailyRaids } = useContext(StoreContext);
     const character = characters.find(x => x.name === goal.character) as ICharacter2;
     const isGoalCompleted = useMemo(() => {
         return (
@@ -171,6 +173,7 @@ export const GoalCard = ({
                     : defaultCampaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: dailyRaidsPreferences.useInventory ? inventory.upgrades : {},
+                completedLocations: dailyRaids.completedLocations,
             },
             ...[
                 ...charactersRankRange,

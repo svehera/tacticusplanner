@@ -1,10 +1,11 @@
-﻿import { IDailyRaids, SetStateAction } from '../models/interfaces';
+﻿import { IDailyRaids, IMaterialRaid, IRaidLocation, SetStateAction } from '../models/interfaces';
 import { defaultData } from '../models/constants';
 
 export type DailyRaidsAction =
     | {
           type: 'AddCompletedBattle';
-          battle: string;
+          location: IRaidLocation;
+          material: IMaterialRaid;
       }
     | {
           type: 'ResetCompletedBattles';
@@ -20,16 +21,39 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
             return action.value ?? defaultData.dailyRaids;
         }
         case 'AddCompletedBattle': {
+            const existingMaterialIndex = state.completedLocations.findIndex(
+                x => x.material === action.material.material
+            );
+            if (existingMaterialIndex >= 0) {
+                const existingMaterial = state.completedLocations[existingMaterialIndex];
+                if (existingMaterial.locations.some(x => x.id === action.location.id)) {
+                    return state;
+                }
+
+                state.completedLocations[existingMaterialIndex] = {
+                    ...existingMaterial,
+                    locations: [...existingMaterial.locations, action.location],
+                };
+                return {
+                    ...state,
+                    completedLocations: [...state.completedLocations],
+                };
+            }
+            action.material.locations = [action.location];
             return {
                 ...state,
-                completedBattles: [...state.completedBattles, action.battle],
+                completedLocations: [...state.completedLocations, action.material],
             };
         }
         case 'ResetCompletedBattles': {
-            return { ...state, completedBattles: [] };
+            return { ...state, completedLocations: [] };
         }
         case 'ResetCompletedBattlesDaily': {
-            return { ...state, completedBattles: [], lastRefreshDateUTC: new Date().toUTCString() };
+            return {
+                ...state,
+                completedLocations: [],
+                lastRefreshDateUTC: new Date().toUTCString(),
+            };
         }
         default: {
             throw new Error();

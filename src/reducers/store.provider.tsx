@@ -237,13 +237,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                         dispatch.setStore(newState, false, false);
                         localStore.setData(GlobalState.toStore(newState));
                         enqueueSnackbar('Synced with latest server data.', { variant: 'info' });
-                        doDailyRefresh(newState.dailyRaids.lastRefreshDateUTC);
                     }
 
                     setModifiedDate(serverLastModified);
                     localStore.setData({ modifiedDate: serverLastModified });
                 } else if (shouldPushLocalData) {
-                    doDailyRefresh(dailyRaids.lastRefreshDateUTC);
                     setUserDataApi(GlobalState.toStore(globalState))
                         .then(() => enqueueSnackbar('Pushed local data to server.', { variant: 'info' }))
                         .catch((err: AxiosError<IErrorResponse>) => {

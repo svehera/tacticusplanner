@@ -90,6 +90,7 @@ export const RankLookup = () => {
         return orderBy(
             StaticDataService.getAllMaterials(
                 {
+                    completedLocations: [],
                     campaignsProgress: defaultCampaignsProgress,
                     dailyEnergy: 0,
                     upgrades: {},
@@ -105,7 +106,6 @@ export const RankLookup = () => {
         return Math.ceil(sum(totalMaterials.map(x => x.expectedEnergy)));
     }, [totalMaterials]);
 
-    console.log();
 
     const renderUpgradesMaterials = (materials: Array<IMaterialRecipeIngredientFull>) => (
         <ul>
