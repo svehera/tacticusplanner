@@ -12,14 +12,14 @@ export const CharacterImage = ({ icon, name, imageSize }: { icon: string; name?:
         return (
             <img
                 loading={'lazy'}
-                style={{ pointerEvents: 'none', contentVisibility: 'auto' }}
+                style={{ pointerEvents: 'none', contentVisibility: 'auto', borderRadius: '50%' }}
                 src={image}
                 height={imageSize ?? 50}
                 alt={name ?? icon}
             />
         );
     } catch (error) {
-       // console.log(`Image with name "${icon}" does not exist`);
+        // console.log(`Image with name "${icon}" does not exist`);
         return null;
     }
 };
