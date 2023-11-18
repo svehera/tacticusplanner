@@ -1,9 +1,10 @@
 ﻿import React, { useCallback, useContext, useMemo } from 'react';
-import { Checkbox, FormControlLabel, FormGroup, Box, Slider, Input } from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup, Box, Slider, Input, Tooltip } from '@mui/material';
 import { IDailyRaidsPreferences } from '../models/interfaces';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import WarningIcon from '@mui/icons-material/Warning';
 
 const DailyRaidsSettings = ({ close }: { close: () => void }) => {
     const dispatch = useContext(DispatchContext);
@@ -167,7 +168,15 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
                 }
-                label="Farm by priority order"
+                label={
+                    <span style={{ display: 'flex', alignItems: 'center' }}>
+                        Farm by priority order{' '}
+                        <Tooltip
+                            title={'The estimate might be incorrect because inventory shared with multiple characters'}>
+                            <WarningIcon color={'warning'} />
+                        </Tooltip>
+                    </span>
+                }
             />
 
             <Button type={'button'} onClick={saveChanges} variant={'outlined'}>
