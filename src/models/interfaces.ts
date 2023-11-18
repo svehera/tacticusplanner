@@ -276,7 +276,7 @@ export interface IPersonalData2 {
 }
 
 export interface IDailyRaids {
-    completedBattles: string[];
+    completedLocations: IMaterialRaid[];
     lastRefreshDateUTC: string;
 }
 
@@ -617,10 +617,12 @@ export interface IMaterialRaid {
 }
 
 export interface IRaidLocation {
+    id: string;
     campaign: string;
     battleNumber: number;
     raidsCount: number;
     farmedItems: number;
+    energySpent: number;
 }
 
 export interface ICharacterRankRange {
@@ -638,6 +640,7 @@ export interface IEstimatedRanks {
 }
 
 export interface IEstimatedRanksSettings {
+    completedLocations: IMaterialRaid[];
     campaignsProgress: ICampaignsProgress;
     dailyEnergy: number;
     preferences?: IDailyRaidsPreferences;

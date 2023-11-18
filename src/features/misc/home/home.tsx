@@ -6,6 +6,7 @@ import { menuItemById } from '../../../models/menu-items';
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { GoalCard } from '../../../routes/goals/goals';
+import { sum } from 'lodash';
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -25,10 +26,14 @@ export const Home = () => {
         const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
         // Format the result
-        const result = days === 1 ? `${days} Day ${hours} h` : `${days} Days ${hours} h`;
+        const result = days === 1 ? `${days} Day ${hours} h left` : `${days} Days ${hours} h left`;
 
-        return timeDifference >= 0 ? result : 'Started';
+        return timeDifference >= 0 ? result : 'Finished';
     }
+
+    const timeToStart = timeLeftToFutureDate('2023-11-19');
+    const timeToEnd = timeLeftToFutureDate('2023-11-26');
+    const isEventStarted = timeToStart === 'Finished';
 
     return (
         <div>
@@ -42,7 +47,7 @@ export const Home = () => {
                     justifyContent: 'center',
                 }}>
                 <div>
-                    <h3 style={{ textAlign: 'center' }}>Upcoming Legendary Event</h3>
+                    <h3 style={{ textAlign: 'center' }}>{isEventStarted ? 'Ongoing ' : 'Upcoming '}Legendary Event</h3>
                     <Card
                         onClick={() => navigate(isMobile ? nextLeMenuItem.routeMobile : nextLeMenuItem.routeWeb)}
                         sx={{
@@ -56,10 +61,10 @@ export const Home = () => {
                                     {nextLeMenuItem.icon} {nextLeMenuItem.label}
                                 </div>
                             }
-                            subheader={'November 19'}
+                            subheader={isEventStarted ? 'November 26' : 'November 19'}
                         />
                         <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
-                            {timeLeftToFutureDate('2023-11-19')}
+                            {isEventStarted ? timeToEnd : timeToStart}
                         </CardContent>
                     </Card>
                 </div>
@@ -90,15 +95,24 @@ export const Home = () => {
                             title={
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                                     {dailyRaidsMenuItem.icon}{' '}
-                                    {dailyRaids.completedBattles.length + ' locations completed today'}
+                                    {dailyRaids.completedLocations.flatMap(x => x.locations).length +
+                                        ' campaigns raided today'}
                                 </div>
+                            }
+                            subheader={
+                                sum(dailyRaids.completedLocations.flatMap(x => x.locations).map(x => x.energySpent)) +
+                                ' energy spent'
                             }
                         />
                         <CardContent>
-                            <ul>
-                                {dailyRaids.completedBattles.map(x => (
-                                    <li key={x}>{x}</li>
-                                ))}
+                            <ul style={{ margin: 0 }}>
+                                {dailyRaids.completedLocations
+                                    .flatMap(x => x.locations)
+                                    .map(x => (
+                                        <li key={x.id}>
+                                            {x.raidsCount}x {x.campaign} {x.battleNumber}
+                                        </li>
+                                    ))}
                             </ul>
                         </CardContent>
                     </Card>

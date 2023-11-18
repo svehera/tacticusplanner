@@ -90,6 +90,7 @@ export const RankLookup = () => {
         return orderBy(
             StaticDataService.getAllMaterials(
                 {
+                    completedLocations: [],
                     campaignsProgress: defaultCampaignsProgress,
                     dailyEnergy: 0,
                     upgrades: {},

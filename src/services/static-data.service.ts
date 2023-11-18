@@ -436,13 +436,18 @@ export class StaticDataService {
 
         const totalEnergy = sum(allMaterials.map(x => x.totalEnergy));
         let currEnergy = 0;
+        const completedLocations = settings.completedLocations.flatMap(x => x.locations);
 
         while (currEnergy < totalEnergy) {
+            const dayNumber = resultDays.length + 1;
+            const isToday = dayNumber === 1;
             const day: IDailyRaid = {
                 energyLeft: settings.dailyEnergy,
                 raids: [],
             };
-            let energyLeft = settings.dailyEnergy;
+            let energyLeft = isToday
+                ? settings.dailyEnergy - sum(completedLocations.map(x => x.energySpent))
+                : settings.dailyEnergy;
 
             for (const material of allMaterials) {
                 const locationsMinEnergyConst = Math.min(...material.locations.map(x => x.energyCost));
@@ -462,6 +467,15 @@ export class StaticDataService {
 
                 for (const location of material.locations) {
                     const locationDailyEnergy = location.energyCost * location.dailyBattleCount;
+                    const completedLocation =
+                        isToday &&
+                        completedLocations.find(
+                            completedLocation => completedLocation.id === location.campaign + location.nodeNumber
+                        );
+                    if (completedLocation) {
+                        materialRaids.locations.push(completedLocation);
+                        continue;
+                    }
 
                     if (material.totalEnergy > locationDailyEnergy) {
                         if (energyLeft > locationDailyEnergy) {
@@ -470,59 +484,59 @@ export class StaticDataService {
                             material.totalEnergy -= locationDailyEnergy;
 
                             materialRaids.locations.push({
+                                id: location.campaign + location.nodeNumber,
                                 campaign: location.campaign,
                                 battleNumber: location.nodeNumber,
                                 raidsCount: location.dailyBattleCount,
                                 farmedItems: locationDailyEnergy / location.energyPerItem,
-                            });
-                        } else if (energyLeft > location.energyCost) {
-                            const numberOfBattles = Math.floor(energyLeft / location.energyCost);
-                            const maxNumberOfBattles =
-                                numberOfBattles > location.dailyBattleCount
-                                    ? location.dailyBattleCount
-                                    : numberOfBattles;
-
-                            if (numberOfBattles <= 0) {
-                                continue;
-                            }
-
-                            const energySpent = maxNumberOfBattles * location.energyCost;
-
-                            energyLeft -= energySpent;
-                            currEnergy += energySpent;
-                            material.totalEnergy -= energySpent;
-
-                            materialRaids.locations.push({
-                                campaign: location.campaign,
-                                battleNumber: location.nodeNumber,
-                                raidsCount: maxNumberOfBattles,
-                                farmedItems: energySpent / location.energyPerItem,
+                                energySpent: locationDailyEnergy,
                             });
                         }
-                    } else {
-                        if (energyLeft > material.totalEnergy) {
-                            const numberOfBattles = Math.floor(material.totalEnergy / location.energyCost);
-                            const maxNumberOfBattles =
-                                numberOfBattles > location.dailyBattleCount
-                                    ? location.dailyBattleCount
-                                    : numberOfBattles;
+                    } else if (energyLeft > material.totalEnergy) {
+                        const numberOfBattles = Math.floor(material.totalEnergy / location.energyCost);
+                        const maxNumberOfBattles =
+                            numberOfBattles > location.dailyBattleCount ? location.dailyBattleCount : numberOfBattles;
 
-                            if (numberOfBattles <= 0) {
-                                continue;
-                            }
-                            const energySpent = maxNumberOfBattles * location.energyCost;
-
-                            energyLeft -= energySpent;
-                            currEnergy += energySpent;
-                            material.totalEnergy -= energySpent;
-
-                            materialRaids.locations.push({
-                                campaign: location.campaign,
-                                battleNumber: location.nodeNumber,
-                                raidsCount: maxNumberOfBattles,
-                                farmedItems: energySpent / location.energyPerItem,
-                            });
+                        if (numberOfBattles <= 0) {
+                            continue;
                         }
+                        const energySpent = maxNumberOfBattles * location.energyCost;
+
+                        energyLeft -= energySpent;
+                        currEnergy += energySpent;
+                        material.totalEnergy -= energySpent;
+
+                        materialRaids.locations.push({
+                            id: location.campaign + location.nodeNumber,
+                            campaign: location.campaign,
+                            battleNumber: location.nodeNumber,
+                            raidsCount: maxNumberOfBattles,
+                            farmedItems: energySpent / location.energyPerItem,
+                            energySpent: energySpent,
+                        });
+                    } else if (energyLeft > location.energyCost) {
+                        const numberOfBattles = Math.floor(energyLeft / location.energyCost);
+                        const maxNumberOfBattles =
+                            numberOfBattles > location.dailyBattleCount ? location.dailyBattleCount : numberOfBattles;
+
+                        if (numberOfBattles <= 0) {
+                            continue;
+                        }
+
+                        const energySpent = maxNumberOfBattles * location.energyCost;
+
+                        energyLeft -= energySpent;
+                        currEnergy += energySpent;
+                        material.totalEnergy -= energySpent;
+
+                        materialRaids.locations.push({
+                            id: location.campaign + location.nodeNumber,
+                            campaign: location.campaign,
+                            battleNumber: location.nodeNumber,
+                            raidsCount: maxNumberOfBattles,
+                            farmedItems: energySpent / location.energyPerItem,
+                            energySpent: energySpent,
+                        });
                     }
                 }
 
@@ -530,6 +544,13 @@ export class StaticDataService {
                     day.raids.push(materialRaids);
                 }
             }
+            if (isToday) {
+                const completedMaterials = settings.completedLocations.filter(
+                    x => !day.raids.some(material => material.material === x.material)
+                );
+                day.raids.push(...completedMaterials);
+            }
+
             day.energyLeft = energyLeft;
             if (day.raids.length) {
                 resultDays.push(day);
