@@ -172,6 +172,11 @@ export const DailyRaids = () => {
                 cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
             },
             {
+                field: 'characters',
+                tooltipField: 'characters',
+                maxWidth: 120,
+            },
+            {
                 field: 'expectedEnergy',
                 headerName: 'Energy',
                 maxWidth: 90,

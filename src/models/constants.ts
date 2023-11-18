@@ -130,6 +130,7 @@ export const defaultData: IPersonalData2 = {
         useMoreEfficientNodes: false,
         useLeastEfficientNodes: false,
         useInventory: true,
+        farmByPriorityOrder: false,
     },
     characters: [
         {

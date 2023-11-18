@@ -337,6 +337,7 @@ export interface IDailyRaidsPreferences {
     useMoreEfficientNodes: boolean;
     useLeastEfficientNodes: boolean;
     useInventory: boolean;
+    farmByPriorityOrder: boolean;
 }
 
 export interface ISelectedTeamsOrdering {
@@ -527,6 +528,7 @@ export interface IMaterialFull {
     allMaterials?: IMaterialRecipeIngredientFull[];
     iconPath: string;
     character?: string;
+    priority?: number;
 }
 
 export interface IMaterialRecipeIngredientFull {
@@ -540,6 +542,7 @@ export interface IMaterialRecipeIngredientFull {
     locationsComposed?: Array<ICampaignBattleComposed>;
     iconPath: string;
     characters: string[];
+    priority: number;
 }
 
 export interface IRankUpData {
@@ -601,6 +604,7 @@ export interface IMaterialEstimated2 {
     countLeft: number;
     iconPath: string;
     characters: string[];
+    priority: number;
 }
 
 export interface IDailyRaid {

@@ -159,6 +159,17 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
                 label="Use inventory"
             />
 
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={dailyRaidsPreferencesForm.farmByPriorityOrder}
+                        onChange={event => updatePreferences('farmByPriorityOrder', event.target.checked)}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+                label="Farm by priority order"
+            />
+
             <Button type={'button'} onClick={saveChanges} variant={'outlined'}>
                 Save
             </Button>
