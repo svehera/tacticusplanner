@@ -381,7 +381,7 @@ export const DailyRaids = () => {
                             {pagination.completed ? undefined : (
                                 <Button
                                     variant={'outlined'}
-                                    style={{ minWidth: 300 }}
+                                    style={{ minWidth: 300, alignItems: 'flex-start', paddingTop: 20 }}
                                     onClick={() =>
                                         setPagination({
                                             start: 0,
