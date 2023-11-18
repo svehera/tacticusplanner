@@ -97,7 +97,7 @@ export interface IDamageTypes {
 
 export interface IDirtyDozenChar {
     Name: string;
-    Rank: number;
+    Position: number;
     Pvp: number;
     GRTyranid: number;
     GRNecron: number;

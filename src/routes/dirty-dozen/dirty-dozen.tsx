@@ -9,6 +9,9 @@ import { CharacterTitle } from '../../shared-components/character-title';
 import { StoreContext } from '../../reducers/store.provider';
 
 import './dirty-dozen.css';
+import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
+import { RankImage } from '../../shared-components/rank-image';
+import { Info } from '@mui/icons-material';
 
 export const DirtyDozen = () => {
     const { characters } = useContext(StoreContext);
@@ -38,22 +41,38 @@ export const DirtyDozen = () => {
 
     const [columnDefs] = useState<Array<ColDef | ColGroupDef>>([
         {
-            field: 'Rank',
-            headerName: 'Rank',
-            maxWidth: 70,
+            field: 'Position',
+            maxWidth: 90,
         },
         {
             field: 'Name',
             headerName: 'Name',
-            width: 270,
+            width: 200,
             cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {
                 const characterId = props.data?.Name;
                 const character = characters.find(x => x.name === characterId);
                 if (character) {
-                    return <CharacterTitle character={character} imageSize={30} />;
+                    return <CharacterTitle character={character} imageSize={30} short />;
                 } else {
                     return characterId;
                 }
+            },
+        },
+        {
+            headerName: 'Rank',
+            width: 80,
+            valueGetter: (props: ValueGetterParams<IDirtyDozenChar>) => {
+                const characterId = props.data?.Name;
+                const character = characters.find(x => x.name === characterId);
+                if (character) {
+                    return character.rank;
+                } else {
+                    return characterId;
+                }
+            },
+            cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {
+                const rank = props.value ?? 0;
+                return <RankImage rank={rank} />;
             },
         },
         createScoreColumn('Pvp', 'PvP', 'pvp'),
@@ -73,6 +92,9 @@ export const DirtyDozen = () => {
                 </Link>{' '}
                 (October 2023)
             </Typography>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Info /> Hold Shift to sort by multiple columns
+            </div>
 
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 130px)', width: '100%' }}>
                 <AgGridReact
