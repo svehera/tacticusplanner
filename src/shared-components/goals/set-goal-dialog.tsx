@@ -62,7 +62,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         }
         setOpenDialog(false);
         setCharacter(null);
-        setForm(getDefaultForm(1 + 1));
+        setForm(getDefaultForm(goal ? goal.priority + 1 : goals.length + 1));
         if (onClose) {
             onClose(goal);
         }
