@@ -646,7 +646,8 @@ const RaidItem = ({
                         flexDirection: 'column',
                     }}>
                     <span>
-                        Battle {location.battleNumber} ({location.raidsCount}x)
+                        <span style={{ fontStyle: 'italic' }}>({location.raidsCount}x)</span> Battle{' '}
+                        <span style={{ fontWeight: 'bold' }}>{location.battleNumber}</span>
                     </span>
                     <span style={{ fontSize: 12 }}>{location.campaign}</span>
                 </div>
