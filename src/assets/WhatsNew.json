@@ -12,6 +12,10 @@
         },
         {
           "text": "Small UI updates for daily raids feature"
+        },
+        {
+          "text": "Small UI updates for Dirty Dozen table",
+          "route": "learn/dirtyDozen"
         }
       ],
       "bugFixes": []
