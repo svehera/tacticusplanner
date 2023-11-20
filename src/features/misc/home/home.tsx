@@ -47,6 +47,44 @@ export const Home = () => {
                     justifyContent: 'center',
                 }}>
                 <div>
+                    <h3 style={{ textAlign: 'center' }}>Daily Raids</h3>
+                    <Card
+                        onClick={() =>
+                            navigate(isMobile ? dailyRaidsMenuItem.routeMobile : dailyRaidsMenuItem.routeWeb)
+                        }
+                        sx={{
+                            width: 350,
+                            minHeight: 200,
+                            cursor: 'pointer',
+                        }}>
+                        <CardHeader
+                            title={
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                    {dailyRaidsMenuItem.icon}{' '}
+                                    {dailyRaids.completedLocations?.flatMap(x => x.locations).length +
+                                        ' campaigns raided today'}
+                                </div>
+                            }
+                            subheader={
+                                sum(dailyRaids.completedLocations?.flatMap(x => x.locations).map(x => x.energySpent)) +
+                                ' energy spent'
+                            }
+                        />
+                        <CardContent>
+                            <ul style={{ margin: 0 }}>
+                                {dailyRaids.completedLocations
+                                    ?.flatMap(x => x.locations)
+                                    .map(x => (
+                                        <li key={x.id}>
+                                            {x.raidsCount}x {x.campaign} {x.battleNumber}
+                                        </li>
+                                    ))}
+                            </ul>
+                        </CardContent>
+                    </Card>
+                </div>
+
+                <div>
                     <h3 style={{ textAlign: 'center' }}>{isEventStarted ? 'Ongoing ' : 'Upcoming '}Legendary Event</h3>
                     <Card
                         onClick={() => navigate(isMobile ? nextLeMenuItem.routeMobile : nextLeMenuItem.routeWeb)}
@@ -79,44 +117,6 @@ export const Home = () => {
                         />
                     </div>
                 ) : undefined}
-
-                <div>
-                    <h3 style={{ textAlign: 'center' }}>Daily Raids</h3>
-                    <Card
-                        onClick={() =>
-                            navigate(isMobile ? dailyRaidsMenuItem.routeMobile : dailyRaidsMenuItem.routeWeb)
-                        }
-                        sx={{
-                            width: 350,
-                            minHeight: 200,
-                            cursor: 'pointer',
-                        }}>
-                        <CardHeader
-                            title={
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    {dailyRaidsMenuItem.icon}{' '}
-                                    {dailyRaids.completedLocations.flatMap(x => x.locations).length +
-                                        ' campaigns raided today'}
-                                </div>
-                            }
-                            subheader={
-                                sum(dailyRaids.completedLocations.flatMap(x => x.locations).map(x => x.energySpent)) +
-                                ' energy spent'
-                            }
-                        />
-                        <CardContent>
-                            <ul style={{ margin: 0 }}>
-                                {dailyRaids.completedLocations
-                                    .flatMap(x => x.locations)
-                                    .map(x => (
-                                        <li key={x.id}>
-                                            {x.raidsCount}x {x.campaign} {x.battleNumber}
-                                        </li>
-                                    ))}
-                            </ul>
-                        </CardContent>
-                    </Card>
-                </div>
             </div>
         </div>
     );
