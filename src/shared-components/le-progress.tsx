@@ -264,6 +264,10 @@ export const LeProgress = ({
         return 0;
     }, [currencyForUnlock, regularMissionsCurrency, premiumMissionsCurrency, bundleCurrency]);
 
+    const averageBattles = useMemo(() => {
+        return (pointsForUnlock / 3 / 500).toFixed(2);
+    }, [pointsForUnlock]);
+
     return (
         <div>
             <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto">
@@ -280,7 +284,9 @@ export const LeProgress = ({
                             {' '}
                             {currentPoints} / {pointsForUnlock}
                         </span>
-                        <Tooltip content={totalPoints + ' in total'} relationship={'description'}>
+                        <Tooltip
+                            content={totalPoints + ' in total. Battles per track: ' + averageBattles}
+                            relationship={'description'}>
                             <InfoIcon />
                         </Tooltip>
                     </div>
