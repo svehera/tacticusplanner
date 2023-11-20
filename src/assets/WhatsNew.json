@@ -18,6 +18,9 @@
       ],
       "minor": [
         {
+          "text": "Changed home page items order to be \"Daily Raids\", \"Legendary Event\", \"Goals\""
+        },
+        {
           "text": "Updated top section in \"My progress\" to display data required for unlock. Total is moved to hovertip"
         },
         {
