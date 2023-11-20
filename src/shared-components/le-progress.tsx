@@ -39,6 +39,7 @@ export const LeProgress = ({
             },
             regularMissions: 0,
             premiumMissions: 0,
+            bundle: 0,
             notes: '',
         }
     );
@@ -115,6 +116,14 @@ export const LeProgress = ({
         });
     };
 
+    const handleBundleChange = (value: number): void => {
+        setPersonalProgress(current => {
+            current.bundle = value;
+            dispatch.leProgress({ type: 'Update', value: current, eventId: current.id });
+            return current;
+        });
+    };
+
     const labelByIndex: Record<number, string> = {
         0: 'Overview',
         1: 'Alpha',
@@ -164,13 +173,32 @@ export const LeProgress = ({
         const gammaTotalPoints = getCurrentPoints(gammaProgress);
 
         return alphaTotalPoints + betaTotalPoints + gammaTotalPoints;
-    }, [value]);
+    }, [value, personalProgress.premiumMissions]);
 
     const totalCurrency = useMemo(() => {
         return legendaryEvent.pointsMilestones
             .map(x => x.engramPayout)
             .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     }, []);
+
+    const currencyPerMission = useMemo(() => {
+        const hasPremiumQuests = personalProgress.premiumMissions > 0;
+
+        return hasPremiumQuests ? 25 + 15 : 25;
+    }, [personalProgress.premiumMissions]);
+
+    const regularMissionsCurrency = useMemo(() => {
+        return personalProgress.regularMissions * currencyPerMission;
+    }, [personalProgress.regularMissions, currencyPerMission]);
+
+    const premiumMissionsCurrency = useMemo(() => {
+        return personalProgress.premiumMissions * currencyPerMission;
+    }, [personalProgress.premiumMissions, currencyPerMission]);
+
+    const bundleCurrency = useMemo(() => {
+        const additionalPayout = personalProgress.premiumMissions > 0 ? 15 : 0;
+        return personalProgress.bundle ? personalProgress.bundle * 300 + additionalPayout : 0;
+    }, [personalProgress.bundle, personalProgress.premiumMissions]);
 
     const currentCurrency = useMemo(() => {
         const currentMilestone = legendaryEvent.pointsMilestones.find(x => x.cumulativePoints >= currentPoints);
@@ -183,19 +211,16 @@ export const LeProgress = ({
                 ? currentMilestone.milestone - 1
                 : currentMilestone.milestone;
 
-        if (!milestoneNumber) {
-            return 0;
-        }
-
         return (
             legendaryEvent.pointsMilestones
                 .filter(x => x.milestone <= milestoneNumber)
                 .map(x => x.engramPayout)
                 .reduce((accumulator, currentValue) => accumulator + currentValue, 0) +
-            personalProgress.regularMissions * 25 +
-            personalProgress.premiumMissions * 40
+            regularMissionsCurrency +
+            premiumMissionsCurrency +
+            bundleCurrency
         );
-    }, [currentPoints, personalProgress.regularMissions, personalProgress.premiumMissions]);
+    }, [currentPoints, regularMissionsCurrency, premiumMissionsCurrency, bundleCurrency]);
 
     const totalChests = useMemo(() => {
         return legendaryEvent.chestsMilestones.length;
@@ -215,26 +240,33 @@ export const LeProgress = ({
         return legendaryEvent.chestsMilestones.length;
     }, [currentCurrency]);
 
+    const chestsForUnlock = legendaryEvent.shardsToUnlock / legendaryEvent.shardsPerChest;
+
     const currencyForUnlock = useMemo(() => {
         return legendaryEvent.chestsMilestones
-            .filter(x => x.chestLevel <= 15)
+            .filter(x => x.chestLevel <= chestsForUnlock)
             .map(x => x.engramCost)
             .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
     }, []);
 
     const pointsForUnlock = useMemo(() => {
-        let currencyLeft = currencyForUnlock - 250;
+        const additionalPayout = personalProgress.premiumMissions > 0 ? 15 : 0;
+        let currencyLeft = currencyForUnlock - regularMissionsCurrency - premiumMissionsCurrency - bundleCurrency;
 
         for (const chestMilestone of legendaryEvent.pointsMilestones) {
             if (currencyLeft > 0) {
-                currencyLeft -= chestMilestone.engramPayout;
+                currencyLeft -= chestMilestone.engramPayout + additionalPayout;
             } else {
                 return chestMilestone.cumulativePoints;
             }
         }
 
         return 0;
-    }, [currencyForUnlock]);
+    }, [currencyForUnlock, regularMissionsCurrency, premiumMissionsCurrency, bundleCurrency]);
+
+    const averageBattles = useMemo(() => {
+        return (pointsForUnlock / 3 / 500).toFixed(2);
+    }, [pointsForUnlock]);
 
     return (
         <div>
@@ -247,41 +279,36 @@ export const LeProgress = ({
             <TabPanel value={value} index={0}>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 15, margin: 10 }}>
                     <div style={{ display: 'flex', gap: 5 }}>
-                        Total Points:
+                        Deed Points for unlock:
                         <span style={{ fontWeight: 700 }}>
                             {' '}
-                            {currentPoints} / {totalPoints}
+                            {currentPoints} / {pointsForUnlock}
                         </span>
                         <Tooltip
-                            content={
-                                pointsForUnlock +
-                                ' required to unlock character (regular missions completed, no donate)'
-                            }
+                            content={totalPoints + ' in total. Battles per track: ' + averageBattles}
                             relationship={'description'}>
                             <InfoIcon />
                         </Tooltip>
                     </div>
 
                     <div style={{ display: 'flex', gap: 5 }}>
-                        Total Currency:
+                        Currency for unlock:
                         <span style={{ fontWeight: 700 }}>
                             {' '}
-                            {currentCurrency} / {totalCurrency}
+                            {currentCurrency} / {currencyForUnlock}
                         </span>
-                        <Tooltip
-                            content={currencyForUnlock + ' required to unlock character'}
-                            relationship={'description'}>
+                        <Tooltip content={totalCurrency + ' in total'} relationship={'description'}>
                             <InfoIcon />
                         </Tooltip>
                     </div>
 
                     <div style={{ display: 'flex', gap: 5 }}>
-                        Total Chests:
+                        Chests for unlock:
                         <span style={{ fontWeight: 700 }}>
                             {' '}
-                            {currentChests} / {totalChests}
+                            {currentChests} / {chestsForUnlock}
                         </span>
-                        <Tooltip content={'15 required to unlock character'} relationship={'description'}>
+                        <Tooltip content={totalChests + ' in total'} relationship={'description'}>
                             <InfoIcon />
                         </Tooltip>
                     </div>
@@ -290,6 +317,7 @@ export const LeProgress = ({
                     legendaryEvent={legendaryEvent}
                     missionProgressChange={handleMissionsProgressChange}
                     notesChange={handleNotesChange}
+                    bundleChange={handleBundleChange}
                     progress={{
                         alpha: alphaProgress,
                         beta: betaProgress,
@@ -297,6 +325,7 @@ export const LeProgress = ({
                         regularMissions: personalProgress.regularMissions,
                         premiumMissions: personalProgress.premiumMissions,
                         notes: personalProgress.notes,
+                        bundle: personalProgress.bundle ?? 0,
                     }}
                 />
             </TabPanel>

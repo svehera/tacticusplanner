@@ -370,5 +370,7 @@
       "chestLevel": 36,
       "engramCost": 350
     }
-  ]
+  ],
+  "shardsPerChest": 10,
+  "shardsToUnlock": 150
 }

@@ -218,7 +218,7 @@ export const DailyRaids = () => {
                     : defaultCampaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: dailyRaidsPreferences.useInventory ? upgrades : {},
-                completedLocations: dailyRaids.completedLocations,
+                completedLocations: dailyRaids.completedLocations ?? [],
             },
             ...selectedCharacters
         );
@@ -229,10 +229,11 @@ export const DailyRaids = () => {
             const completedRaids: IMaterialRaid[] = [];
             const notCompletedRaids: IMaterialRaid[] = [];
             for (const raid of currentDay.raids) {
-                const isAllRaidsCompleted = raid.locations.every(location =>
-                    dailyRaids.completedLocations
-                        .flatMap(x => x.locations)
-                        .some(completedLocation => completedLocation.id === location.id)
+                const isAllRaidsCompleted = raid.locations.every(
+                    location =>
+                        dailyRaids.completedLocations
+                            ?.flatMap(x => x.locations)
+                            .some(completedLocation => completedLocation.id === location.id)
                 );
 
                 if (isAllRaidsCompleted) {
@@ -243,7 +244,7 @@ export const DailyRaids = () => {
 
                     for (const location of raid.locations) {
                         const isLocationCompleted = dailyRaids.completedLocations
-                            .flatMap(x => x.locations)
+                            ?.flatMap(x => x.locations)
                             .some(completedLocation => completedLocation.id === location.id);
 
                         if (isLocationCompleted) {
@@ -354,7 +355,7 @@ export const DailyRaids = () => {
                                 <RefreshIcon /> Refresh Estimate
                             </Button>
                         ) : undefined}
-                        {dailyRaids.completedLocations.length ? (
+                        {dailyRaids.completedLocations?.length ? (
                             <Tooltip
                                 title={dailyRaids.completedLocations
                                     .flatMap(x => x.locations)
@@ -555,15 +556,16 @@ const MaterialItem = ({
     changed: () => void;
 }) => {
     const { dailyRaids } = useContext(StoreContext);
-    const completedLocations = dailyRaids.completedLocations.flatMap(x => x.locations);
+    const completedLocations = dailyRaids.completedLocations?.flatMap(x => x.locations) ?? [];
 
     const isAllRaidsCompleted = useMemo(
         () =>
             isFirstDay &&
-            raid.locations.every(location =>
-                dailyRaids.completedLocations
-                    .flatMap(x => x.locations)
-                    .some(completedLocation => completedLocation.id === location.id)
+            raid.locations.every(
+                location =>
+                    dailyRaids.completedLocations
+                        ?.flatMap(x => x.locations)
+                        .some(completedLocation => completedLocation.id === location.id)
             ),
         [completedLocations]
     );
@@ -616,7 +618,7 @@ const RaidItem = ({
     const dispatch = useContext(DispatchContext);
     const [itemsObtained, setItemsObtained] = useState<string | number>(Math.round(location.farmedItems));
 
-    const completedLocations = dailyRaids.completedLocations.flatMap(x => x.locations);
+    const completedLocations = dailyRaids.completedLocations?.flatMap(x => x.locations) ?? [];
 
     const isLocationCompleted = useMemo(
         () => isFirstDay && completedLocations.some(completedLocation => completedLocation.id === location.id),

@@ -31,17 +31,56 @@
   "alpha": {
     "name": "Alpha (No Xenos)",
     "killPoints": 24,
-    "battlesPoints": []
+    "battlesPoints": [
+      40,
+      38,
+      50,
+      48,
+      50,
+      48,
+      60,
+      55,
+      47,
+      52,
+      59,
+      59
+    ]
   },
   "beta": {
     "name": "Beta (No Chaos)",
     "killPoints": 30,
-    "battlesPoints": []
+    "battlesPoints": [
+      33,
+      36,
+      45,
+      47,
+      50,
+      49,
+      50,
+      50,
+      50,
+      57,
+      43,
+      56
+    ]
   },
   "gamma": {
     "name": "Gamma (No Imperials)",
     "killPoints": 34,
-    "battlesPoints": []
+    "battlesPoints": [
+      28,
+      35,
+      39,
+      43,
+      40,
+      57,
+      43,
+      50,
+      58,
+      48,
+      50,
+      55
+    ]
   },
   "pointsMilestones": [
     {
@@ -162,22 +201,22 @@
     {
       "milestone": 24,
       "cumulativePoints": 11000,
-      "engramPayout": 260
+      "engramPayout": 240
     },
     {
       "milestone": 25,
       "cumulativePoints": 11500,
-      "engramPayout": 280
+      "engramPayout": 260
     },
     {
       "milestone": 26,
       "cumulativePoints": 12000,
-      "engramPayout": 300
+      "engramPayout": 280
     },
     {
       "milestone": 27,
       "cumulativePoints": 12500,
-      "engramPayout": 325
+      "engramPayout": 300
     },
     {
       "milestone": 28,
@@ -302,83 +341,85 @@
     },
     {
       "chestLevel": 17,
-      "engramCost": 350
+      "engramCost": 360
     },
     {
       "chestLevel": 18,
-      "engramCost": 350
+      "engramCost": 370
     },
     {
       "chestLevel": 19,
-      "engramCost": 350
+      "engramCost": 380
     },
     {
       "chestLevel": 20,
-      "engramCost": 350
+      "engramCost": 390
     },
     {
       "chestLevel": 21,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 22,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 23,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 24,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 25,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 26,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 27,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 28,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 29,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 30,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 31,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 32,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 33,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 34,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 35,
-      "engramCost": 350
+      "engramCost": 400
     },
     {
       "chestLevel": 36,
-      "engramCost": 350
+      "engramCost": 400
     }
-  ]
+  ],
+  "shardsPerChest": 25,
+  "shardsToUnlock": 400
 }

@@ -35,7 +35,6 @@
             
 Minor improvements:
     - update F.A.Q. and instructions page
-    - update Dirty Dozen data
     - (xenoblight+) Add "Equipment" table
     - (SergeDavid) In the My Progress section can you add something for those who bought the bonus crates
     - (Fonzoland) If you want to score bonus points with the ordering, you could try to replicate the faction order in game. 

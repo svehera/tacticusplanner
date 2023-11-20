@@ -49,7 +49,7 @@ export const Goals = () => {
                     : defaultCampaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: dailyRaidsPreferences.useInventory ? inventory.upgrades : {},
-                completedLocations: dailyRaids.completedLocations,
+                completedLocations: dailyRaids.completedLocations ?? [],
             },
             ...chars
         );
@@ -173,7 +173,7 @@ export const GoalCard = ({
                     : defaultCampaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: dailyRaidsPreferences.useInventory ? inventory.upgrades : {},
-                completedLocations: dailyRaids.completedLocations,
+                completedLocations: dailyRaids.completedLocations ?? [],
             },
             ...[
                 ...charactersRankRange,

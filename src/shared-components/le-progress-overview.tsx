@@ -1,5 +1,13 @@
 ﻿import React, { useMemo } from 'react';
-import { Accordion, AccordionDetails, AccordionSummary, Checkbox, FormControlLabel, TextField } from '@mui/material';
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Checkbox,
+    Divider,
+    FormControlLabel,
+    TextField,
+} from '@mui/material';
 import {
     ILegendaryEvent,
     ILegendaryEventBattle,
@@ -15,16 +23,19 @@ export const LeProgressOverview = ({
     legendaryEvent,
     missionProgressChange,
     notesChange,
+    bundleChange,
 }: {
     progress: ILegendaryEventProgress;
     legendaryEvent: ILegendaryEvent;
     missionProgressChange: (section: 'regularMissions' | 'premiumMissions', value: number) => void;
     notesChange: (value: string) => void;
+    bundleChange: (value: number) => void;
 }) => {
     const [accordionExpanded, setAccordionExpanded] = React.useState<string | false>(false);
 
     const [regularMissionsProgress, setRegularMissionsProgress] = React.useState<number>(progress.regularMissions);
     const [premiumMissionsProgress, setPremiumMissionsProgress] = React.useState<number>(progress.premiumMissions);
+    const [bundle, setBundle] = React.useState<number>(progress.bundle);
 
     const handleAccordionChange = (section: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
         setAccordionExpanded(isExpanded ? section : false);
@@ -99,7 +110,7 @@ export const LeProgressOverview = ({
                     onChange={handleAccordionChange('premiumMissions')}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                            <span>Premium Missions</span>
+                            <span>Premium Missions & 300 Bundle</span>
                             <span style={{ fontWeight: 700 }}>
                                 {premiumMissionsProgress}/{10}
                             </span>
@@ -107,6 +118,20 @@ export const LeProgressOverview = ({
                     </AccordionSummary>
                     <AccordionDetails>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={bundle > 0}
+                                        onChange={(_, checked) => {
+                                            setBundle(checked ? 1 : 0);
+                                            bundleChange(checked ? 1 : 0);
+                                        }}
+                                        inputProps={{ 'aria-label': 'controlled' }}
+                                    />
+                                }
+                                label={'300 Bundle'}
+                            />
+                            <Divider />
                             {legendaryEvent.premiumMissions.map((mission, index) => (
                                 <FormControlLabel
                                     key={mission}

@@ -150,6 +150,9 @@ export interface ILegendaryEventStatic {
 
     pointsMilestones: IPointsMilestone[];
     chestsMilestones: IChestMilestone[];
+
+    shardsPerChest: number;
+    shardsToUnlock: number;
 }
 
 export interface IPointsMilestone {
@@ -398,6 +401,7 @@ export interface ILegendaryEventProgressState {
     gamma: ILegendaryEventProgressTrackState;
     regularMissions: number;
     premiumMissions: number;
+    bundle?: number;
     notes: string;
 }
 
@@ -411,6 +415,7 @@ export interface ILegendaryEventProgress {
     gamma: ILegendaryEventProgressTrack;
     regularMissions: number;
     premiumMissions: number;
+    bundle: number;
     notes: string;
 }
 
