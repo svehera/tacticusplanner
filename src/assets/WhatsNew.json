@@ -4,10 +4,13 @@
     {
       "version": "1.1.4",
       "date": "November 21",
-      "type": "Patch",
+      "type": "Update",
       "new": [
       ],
       "minor": [
+        {
+          "text": "Updated \"My progress\" to checking a prerequisite that cannot be completed without completing other ones would automatically check those ones as well (Vexen)"
+        }
       ],
       "bugFixes": [
         {
