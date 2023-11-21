@@ -3,6 +3,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Checkbox, FormControlLab
 import { ILegendaryEventBattle, ILegendaryEventProgressTrack } from '../models/interfaces';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getCompletionRateColor } from '../shared-logic/functions';
+import { defeatAllEnemiesIndex, killPointsIndex } from '../models/constants';
 
 export const LeTrackProgress = ({
     trackProgress,
@@ -39,6 +40,18 @@ export const LeTrackProgress = ({
             if (!battle) {
                 return currentBattles;
             }
+            const isAllEnemiesDefeated = index === defeatAllEnemiesIndex;
+            const allEnemiesShouldBeDefeated = index !== defeatAllEnemiesIndex && index !== killPointsIndex;
+
+            if (isAllEnemiesDefeated && event.target.checked) {
+                battle.state[killPointsIndex] = true;
+            }
+
+            if (allEnemiesShouldBeDefeated && event.target.checked) {
+                battle.state[killPointsIndex] = true;
+                battle.state[defeatAllEnemiesIndex] = true;
+            }
+
             battle.state[index] = event.target.checked;
             battle.state = [...battle.state];
             onStateUpdate([...currentBattles]);

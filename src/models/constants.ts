@@ -222,3 +222,6 @@ export const defaultData: IPersonalData2 = {
         upgrades: {},
     },
 };
+
+export const killPointsIndex = 0;
+export const defeatAllEnemiesIndex = 1;
