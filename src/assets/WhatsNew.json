@@ -11,7 +11,10 @@
       ],
       "bugFixes": [
         {
-          "text": "Fixed the issue with points calculations to unlock character on \"My Progress\""
+          "text": "Fixed the issue with points calculations to unlock character on \"My Progress\" (ZHovtiyLitsar)"
+        },
+        {
+          "text": "Fixed issue with goals order is not being updated after delete a goal (ZHovtiyLitsar)"
         }
       ]
     },
