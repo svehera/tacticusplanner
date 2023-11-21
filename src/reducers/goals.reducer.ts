@@ -64,7 +64,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             return [...state];
         }
         case 'Delete': {
-            return state.filter(x => x.id !== action.goalId);
+            return state.filter(x => x.id !== action.goalId).map((x, index) => ({ ...x, priority: index + 1 }));
         }
         case 'Update': {
             const updatedGoal = action.goal;
