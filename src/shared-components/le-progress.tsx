@@ -254,9 +254,8 @@ export const LeProgress = ({
         let currencyLeft = currencyForUnlock - regularMissionsCurrency - premiumMissionsCurrency - bundleCurrency;
 
         for (const chestMilestone of legendaryEvent.pointsMilestones) {
-            if (currencyLeft > 0) {
-                currencyLeft -= chestMilestone.engramPayout + additionalPayout;
-            } else {
+            currencyLeft -= chestMilestone.engramPayout + additionalPayout;
+            if (currencyLeft <= 0) {
                 return chestMilestone.cumulativePoints;
             }
         }
