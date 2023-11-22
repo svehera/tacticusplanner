@@ -90,6 +90,7 @@ export const defaultCampaignsProgress: ICampaignsProgress = {
     Octarius: 75,
     'Octarius Mirror': 75,
     'Octarius Elite': 40,
+    'Octarius Mirror Elite': 40,
 
     'Saim-Hann': 75,
 };

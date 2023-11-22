@@ -1,4 +1,39 @@
 {
+  "Valuable Fabric": {
+    "material": "Valuable Fabric",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Rare",
+    "icon": "Valuable Fabric.png"
+  },  
+  "Unyielding Rivets": {
+    "material": "Unyielding Rivets",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Epic",
+    "icon": "Unyielding Rivets.png"
+  },
+  "Motive Force Capacitator": {
+    "material": "Motive Force Capacitator",
+    "craftable": false,
+    "stat": "Damage",
+    "rarity": "Rare",
+    "icon": ""
+  },
+  "Cogwheel Crest": {
+    "material": "Cogwheel Crest",
+    "craftable": false,
+    "stat": "Armour",
+    "rarity": "Rare",
+    "icon": ""
+  },
+  "Blessed Cogitator": {
+    "material": "Blessed Cogitator",
+    "craftable": false,
+    "stat": "Health",
+    "rarity": "Legendary",
+    "icon": ""
+  },
   "Adamantium Filaments": {
     "material": "Adamantium Filaments",
     "craftable": false,
@@ -1372,7 +1407,7 @@
     "stat": "Damage",
     "recipe": [
       {
-        "material": "Medical Supply Crate",
+        "material": "First Aid Kit",
         "count": 1
       },
       {
@@ -1413,7 +1448,7 @@
         "count": 1
       },
       {
-        "material": "Repair-Kit",
+        "material": "Subdermal Plating",
         "count": 8
       },
       {

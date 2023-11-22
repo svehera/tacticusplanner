@@ -1,18 +1,4 @@
 {
-  "Unknown1": {
-    "campaign": "Unknown",
-    "campaignType": "Normal",
-    "nodeNumber": 1,
-    "reward": "Purity Seal of the Primarch",
-    "expectedGold": 0
-  },
-  "Unknown2": {
-    "campaign": "Unknown",
-    "campaignType": "Normal",
-    "nodeNumber": 2,
-    "reward": "Archeotech Bionics",
-    "expectedGold": 0
-  },
   "I15": {
     "campaign": "Indomitus",
     "campaignType": "Early",
@@ -1459,7 +1445,7 @@
     "campaign": "Octarius",
     "campaignType": "Normal",
     "nodeNumber": 73,
-    "reward": "Divinator Class Auspex",
+    "reward": "Unyielding Rivets",
     "expectedGold": 77
   },
   "O74": {
@@ -2152,7 +2138,7 @@
     "campaign": "Indomitus Mirror",
     "campaignType": "Mirror",
     "nodeNumber": 27,
-    "reward": "Golden Ornamental Skull",
+    "reward": "Standard-Issue Tourniquet",
     "expectedGold": 59
   },
   "IM28": {
@@ -2208,7 +2194,7 @@
     "campaign": "Indomitus Mirror",
     "campaignType": "Mirror",
     "nodeNumber": 34,
-    "reward": "Repair-Kit",
+    "reward": "Motive Force Capacitator",
     "expectedGold": 65
   },
   "IM35": {
@@ -2474,7 +2460,7 @@
     "campaign": "Indomitus Mirror",
     "campaignType": "Mirror",
     "nodeNumber": 69,
-    "reward": "Standard-Issue Tourniquet",
+    "reward": "Blessed Cogitator",
     "expectedGold": 77
   },
   "IM7": {
@@ -2754,14 +2740,14 @@
     "campaign": "Fall of Cadia Mirror",
     "campaignType": "Mirror",
     "nodeNumber": 37,
-    "reward": "Repair-Kit",
+    "reward": "Cogwheel Crest",
     "expectedGold": 65
   },
   "FoCM38": {
     "campaign": "Fall of Cadia Mirror",
     "campaignType": "Mirror",
     "nodeNumber": 38,
-    "reward": "Mutation: Scaly Skin",
+    "reward": "Valuable Fabric",
     "expectedGold": 65
   },
   "FoCM39": {
@@ -2852,7 +2838,7 @@
     "campaign": "Fall of Cadia Mirror",
     "campaignType": "Mirror",
     "nodeNumber": 5,
-    "reward": "The Silver Scope",
+    "reward": "Mutation: Scaly Skin",
     "expectedGold": 53
   },
   "FoCM50": {
@@ -3576,6 +3562,118 @@
     "reward": "Boss Gulgortz",
     "expectedGold": 83
   },
+  "OME1": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 1,
+    "reward": "Fine Purity Seal",
+    "expectedGold": 83
+  },
+  "OME2": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 2,
+    "reward": "Righteous Candle",
+    "expectedGold": 83
+  },
+  "OME3": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 3,
+    "reward": "Chain of Zeal",
+    "expectedGold": 83
+  },
+  "OME4": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 4,
+    "reward": "Blessed Tabbard",
+    "expectedGold": 83
+  },
+  "OME5": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 5,
+    "reward": "Special Issue Ammo",
+    "expectedGold": 83
+  },
+  "OME6": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 6,
+    "reward": "Bones of the Paragons",
+    "expectedGold": 83
+  },
+  "OME7": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 7,
+    "reward": "Purity Seal of the Primarch",
+    "expectedGold": 83
+  },
+  "OME8": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 8,
+    "reward": "Snappawrecka",
+    "expectedGold": 83
+  },
+  "OME9": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 9,
+    "reward": "Weapon Anointment Oils",
+    "expectedGold": 83
+  },
+  "OME10": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 10,
+    "reward": "Adrenal Glands",
+    "expectedGold": 83
+  },
+  "OME11": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 11,
+    "reward": "Wolf Tail Talisman",
+    "expectedGold": 83
+  },
+  "OME12": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 12,
+    "reward": "Key of Ignorance",
+    "expectedGold": 83
+  },
+  "OME13": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 13,
+    "reward": "The Silver Eagle with Swords",
+    "expectedGold": 83
+  },
+  "OME14": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 14,
+    "reward": "Terminator Honours",
+    "expectedGold": 83
+  },
+  "OME15": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 15,
+    "reward": "Archeotech Bionics",
+    "expectedGold": 83
+  },
+  "OME16": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 16,
+    "reward": "Gibbascrapz",
+    "expectedGold": 83
+  },
   "OM8": {
     "campaign": "Octarius Mirror",
     "campaignType": "Mirror",
@@ -3818,7 +3916,7 @@
     "campaign": "Indomitus Elite",
     "campaignType": "Elite",
     "nodeNumber": 39,
-    "reward": "Holy Chaplet",
+    "reward": "Blessed Cogitator",
     "expectedGold": 108
   },
   "IE4": {
@@ -4350,7 +4448,7 @@
     "campaign": "Octarius Elite",
     "campaignType": "Elite",
     "nodeNumber": 35,
-    "reward": "Satchel",
+    "reward": "Unyielding Rivets",
     "expectedGold": 108
   },
   "OE36": {

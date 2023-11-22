@@ -1,6 +1,50 @@
 ﻿{
-  "currentVersion": "1.1.4",
+  "currentVersion": "1.1.5",
   "releaseNotes": [
+    {
+      "version": "1.1.5",
+      "date": "November 22",
+      "type": "Update",
+      "new": [
+        {
+          "text": "Added Octarius Mirror Elite battles 1-16"
+        },
+        {
+          "text": "Added new Upgrades for the Adeptus Mechanicus and updated locations according to 1.3 patch notes",
+          "subPoints": [
+            "Octarius Battle 73: Divinator Class Auspex → Unyielding Rivets",
+            "Fall of Cadia Mirror Battle 38: Mutation: Scaly Skin --> Valuable Fabric",
+            "Indomitus Mirror Battle 34: Repair Kit → Motive Force Condenser",
+            "Fall of Cadia Mirror Battle 37: Repair Kit → Cogwheel Crest",
+            "Indomitus Mirror Battle 69: Standard-Issue Tourniquet → Blessed Cogitator",
+            "Indomitus Elite Battle 39: Sororitas legendary → Blessed Cogitator",
+            "Octarius Elite Battle 35: Satchel → Unyielding Rivets",
+            "Fall of Cadia Mirror Battle 5: Silver Scope --> Mutation: Scaly Skin",
+            "Indomitus Mirror Battle 27:  Golden Ornamental Skull  --> Standard-Issue Tourniquet"
+          ]
+        },
+        {
+          "text": "Updated rank up data according to 1.3 patch notes",
+          "subPoints": [
+            "Thaddeus Rank 6 and 9: Repair Kit → Metal Decorative Skull",
+            "Pestillian Rank 9: Repair Kit → Battle Scar",
+            "Isabella Rank 6: Repair Kit → Metal Decorative Skull",
+            "All T’au (apart from Aun’shi) Rank 9: Repair Kit → Kill Count"
+          ]
+        },
+        {
+          "text": "Updated recipe data",
+          "subPoints": [
+            "Advanced Exospine is now using “Subdermal Plating” instead of the “Repair Kit” for crafting",
+            "Advanced Combat Stims now use “First Aid Kits” instead of “Medical Supply Crate” for crafting "
+          ]
+        }
+      ],
+      "minor": [
+      ],
+      "bugFixes": [
+      ]
+    },
     {
       "version": "1.1.4",
       "date": "November 21",
