@@ -19,6 +19,7 @@ export enum Faction {
     Dark_Angels = 'Dark Angels',
     Thousand_Sons = 'Thousand Sons',
     Tyranids = 'Tyranids',
+    AdeptusMechanicus = 'Adeptus Mechanicus',
 }
 
 export enum RarityString {
