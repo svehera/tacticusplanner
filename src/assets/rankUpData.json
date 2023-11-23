@@ -8451,132 +8451,132 @@
   },
   "Ragnar Blackmane": {
     "Stone I": [
-      "Purity Seal",
-      "Rebreather",
-      "Basic Auxiliary Core",
+      "Ropes and Chains",
+      "The Iron Phoenix",
+      "Canister of Chemicals",
       "Weapon Anointment Oils",
-      "Field Ration",
-      "Ropes and Chains"
+      "Armor Trim",
+      "Fine Purity Seal"
     ],
     "Stone II": [
-      "Pile of Salvage",
-      "Ceramite Lump",
-      "Vox-Caster",
-      "Fine Micro-Generator",
-      "Lesser Reliquary of Protection",
-      "Chip Damage"
+      "Field Ration",
+      "Minor Bionic Enhancement",
+      "Combat Stimms",
+      "Blessed Weapon Oils",
+      "Rebreather",
+      "Purity Seal"
     ],
     "Stone III": [
-      "Pile of Salvage",
-      "Ceramite Lump",
-      "Fine Auxiliary Core",
-      "Combat Stimms",
-      "Wires",
-      "Helmet Trophy"
+      "Enriched Rations",
+      "Bionic Enhancement",
+      "Vox-Caster",
+      "Auspex",
+      "Blessed Tasset Plate",
+      "Oath Seal"
     ],
     "Iron I": [
-      "Oath Seal",
-      "Adamantium Lump",
-      "Locator Beacon",
-      "Blessed Weapon Oils",
-      "Enriched Rations",
-      "Reinforced Cables"
+      "Holster and Pockets",
+      "Helmet Trophy",
+      "Combat Stimms",
+      "Fine Micro-Generator",
+      "Cloak",
+      "Adamantium Lump"
     ],
     "Iron II": [
-      "Ceramite Bar",
-      "Blessed Tasset Plate",
-      "Prey-Sight",
+      "Enriched Rations",
+      "Grand Skull Trophy",
       "Adamantium Blades",
-      "Reliquary of Protection",
-      "Reinforced Cables"
+      "Divinator Class Auspex",
+      "Artificer Tasset Plate",
+      "Oath Seal"
     ],
     "Iron III": [
-      "Ceramite Bar",
-      "Artificer Tasset Plate",
-      "Wolf Tooth Necklace",
-      "Blessed Weapon Oils",
       "Box of Rations",
-      "Kill Count"
+      "The Gold Phoenix",
+      "Wolf Tooth Necklace",
+      "Powerful Micro-Generator",
+      "Sophisticated Material Ingot",
+      "Subdermal Plating"
     ],
     "Bronze I": [
-      "Blessed Purity Seal",
-      "Adamantium Bar",
-      "Bladesman's Honour",
-      "Advanced Combat Stimms",
-      "Grand Skull Trophy",
-      "Wolf Tail Talisman"
+      "Wolf Tail Talisman",
+      "The Phoenix Ascendant",
+      "Prey-Sight",
+      "Classified Data-Slate",
+      "Fine Cloak",
+      "Ceramite Bar"
     ],
     "Bronze II": [
-      "Ceramite Bar",
-      "Beast Hide",
-      "Anointed Auxiliary Core",
-      "Powerful Micro-Generator",
       "Runic Talisman",
-      "Sanctified Reliquary of Protection"
+      "Advanced Bionics",
+      "Krak Grenade",
+      "Anointed Micro-Generator",
+      "Beast Hide",
+      "Blessed Purity Seal"
     ],
     "Bronze III": [
-      "Grand Purity Seal",
-      "Ice Troll Hide",
+      "Kill Count",
+      "Mars-Pattern Bionics",
       "Thunderwolf Tooth Necklace",
       "Sanctified Weapon Oils",
-      "Mars-Pattern Bionics",
-      "Battle Scar"
+      "Ice Troll Hide",
+      "Duplicate Organ"
     ],
     "Silver I": [
-      "Ceramite Sheet",
-      "Ice Troll Hide",
-      "Refined Combat Stimms",
-      "Thunderwolf Tooth Necklace",
+      "Runic Talisman",
       "Terminator Honours",
-      "Runic Talisman"
+      "Thunderwolf Tooth Necklace",
+      "Relic Hilt",
+      "Ice Troll Hide",
+      "Ceramite Sheet"
     ],
     "Silver II": [
-      "Grand Purity Seal",
-      "Ice Wyrm Hide",
-      "Special Issue Ammo",
+      "Mjod",
+      "Greater Reliquary of Protection",
       "Kraken Tooth Necklace",
-      "Grand Helmet Trophy",
-      "Runic Talisman"
+      "Anointed Micro-Generator",
+      "Ice Troll Hide",
+      "Grand Purity Seal"
     ],
     "Silver III": [
-      "Ice Troll Hide",
-      "Ceramite Plates",
+      "Runic Talisman",
+      "Grandiose Skull Ornament",
       "Thunderwolf Tooth Necklace",
       "Digital Weapons",
-      "Legendary Reliquary of Protection",
-      "Talisman of Storms"
+      "Archeo-Tech Remnant",
+      "Ceramite Plates"
     ],
     "Gold I": [
-      "Seal of the Emperor's Protection",
-      "Ice Wyrm Hide",
-      "Relic Micro-Generator",
-      "Kraken Tooth Necklace",
+      "Talisman of Storms",
       "Relic Bionic Enhancement",
-      "Personal Saga"
+      "Archeotech Bionics",
+      "Relic Micro-Generator",
+      "Ice Wyrm Hide",
+      "Seal of the Emperor's Protection"
     ],
     "Gold II": [
-      "Ceramite Plates",
-      "Runic Tasset Plate",
-      "Powered Blade",
-      "Frostblade",
-      "Grandiose Skull Ornament",
-      "Talisman of Storms"
+      "Personal Saga",
+      "Legendary Reliquary of Protection",
+      "Kraken Tooth Necklace",
+      "Digital Weapons",
+      "Ice Wyrm Hide",
+      "Divine Cloak"
     ],
     "Gold III": [
-      "Seal of the Emperor's Protection",
-      "Runic Tasset Plate",
-      "Digital Weapons",
+      "Talisman of Storms",
+      "Grandiose Skull Ornament",
       "Frostblade",
-      "Legendary Reliquary of Protection",
-      "Personal Saga"
+      "Powered Blade",
+      "Runic Tasset Plate",
+      "Seal of the Emperor's Protection"
     ],
     "Diamond I": [
-      "Ceramite Plates",
-      "Runic Tasset Plate",
-      "Hyperstim",
-      "Frostblade",
+      "Personal Saga",
       "Grand Strategy",
-      "Personal Saga"
+      "Frostblade",
+      "Hyperstim",
+      "Runic Tasset Plate",
+      "Ceramite Plates"
     ]
   }
 }
