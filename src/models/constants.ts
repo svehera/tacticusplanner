@@ -122,6 +122,7 @@ export const defaultData: IPersonalData2 = {
         hideSelectedTeams: false,
         autoTeams: true,
         onlyUnlocked: false,
+        hideCompleted: false,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,

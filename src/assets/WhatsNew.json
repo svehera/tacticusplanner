@@ -1,6 +1,51 @@
 ﻿{
-  "currentVersion": "1.1.5",
+  "currentVersion": "1.1.6",
   "releaseNotes": [
+    {
+      "version": "1.1.6",
+      "date": "November 23",
+      "type": "Update",
+      "new": [
+        {
+          "text": "Added possibility to hide completed tracks for legendary planner (sasquach)",
+          "images": [
+            {
+              "path": "hideCompleted.png"
+            }
+          ]
+        }
+      ],
+      "minor": [
+        {
+          "text": "Add icons for the new non-craftable Adeptus Mechanicus upgrades",
+          "subPoints": [
+            "Blessed Cogitator",
+            "Motive Force Capacitator",
+            "Cogwheel Crest"
+          ]
+        },
+        {
+          "text": "Added recipes for new crafted materials (sonsonVallano)"
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed issue with \"X Energy Needed\" is not being updated after completing raids"
+        },
+        {
+          "text": "Fixed issue with incorrect estimate of daily raids when using \"Farm by priority order\" (xNobleDoc)"
+        },
+        {
+          "text": "Fixed upgrades for Ragnar rank Silver I and other (Drewsophila, sonsonVallano)"
+        },
+        {
+          "text": "Fixed issue with inventory not being updated correctly after rank change"
+        },
+        {
+          "text": "Fixed issue in character selection of Daily Raids when character's current rank shown as Stone I though it is not (Somberlord)"
+        }
+      ]
+    },
     {
       "version": "1.1.5",
       "date": "November 22",

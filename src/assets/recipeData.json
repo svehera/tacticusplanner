@@ -18,21 +18,21 @@
     "craftable": false,
     "stat": "Damage",
     "rarity": "Rare",
-    "icon": ""
+    "icon": "Motive Force Capacitator.png"
   },
   "Cogwheel Crest": {
     "material": "Cogwheel Crest",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Rare",
-    "icon": ""
+    "icon": "Cogwheel Crest.png"
   },
   "Blessed Cogitator": {
     "material": "Blessed Cogitator",
     "craftable": false,
     "stat": "Health",
     "rarity": "Legendary",
-    "icon": ""
+    "icon": "Blessed Cogitator.png"
   },
   "Adamantium Filaments": {
     "material": "Adamantium Filaments",
@@ -1605,6 +1605,27 @@
     ],
     "craftable": true
   },
+  "Artificer Cogwheel Crest": {
+    "material": "Artificer Cogwheel Crest",
+    "rarity": "Legendary",
+    "stat": "Armour",
+    "faction": "Adeptus Mechanicus",
+    "recipe": [
+      {
+        "material": "Enhanced Cogwheel Crest",
+        "count": 2
+      },
+      {
+        "material": "Grand Purity Seal",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
   "Artificer Flak Plates": {
     "material": "Artificer Flak Plates",
     "rarity": "Legendary",
@@ -2549,6 +2570,40 @@
     ],
     "craftable": true
   },
+  "Enhanced Cogwheel Crest": {
+    "material": "Enhanced Cogwheel Crest",
+    "rarity": "Epic",
+    "stat": "Armour",
+    "faction": "Adeptus Mechanicus",
+    "recipe": [
+      {
+        "material": "Cogwheel Crest",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Enhanced Motive Force Capacitator": {
+    "material": "Enhanced Motive Force Capacitator",
+    "rarity": "Epic",
+    "stat": "Damage",
+    "faction": "Adeptus Mechanicus",
+    "recipe": [
+      {
+        "material": "Motive Force Capacitator",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
+      }
+    ],
+    "craftable": true
+  },
   "Ensorcelled Infusion": {
     "material": "Ensorcelled Infusion",
     "rarity": "Epic",
@@ -2851,6 +2906,26 @@
     ],
     "craftable": true
   },
+  "Grandiloquent Litanical": {
+    "material": "Grandiloquent Litanical",
+    "rarity": "Rare",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Writings",
+        "count": 8
+      },
+      {
+        "material": "Ropes and Chains",
+        "count": 7
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
   "Grandiose Skull Ornament": {
     "material": "Grandiose Skull Ornament",
     "rarity": "Legendary",
@@ -2999,6 +3074,26 @@
       {
         "material": "Gold",
         "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Holster and Pockets": {
+    "material": "Holster and Pockets",
+    "rarity": "Uncommon",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Ropes and Chains",
+        "count": 3
+      },
+      {
+        "material": "Weapon Parts",
+        "count": 3
+      },
+      {
+        "material": "Gold",
+        "count": 25
       }
     ],
     "craftable": true
@@ -3428,6 +3523,31 @@
     ],
     "craftable": true
   },
+  "Kataphron Armour": {
+    "material": "Kataphron Armour",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Adeptus Mechanicus",
+    "recipe": [
+      {
+        "material": "Blessed Cogitator",
+        "count": 9
+      },
+      {
+        "material": "Exospine",
+        "count": 1
+      },
+      {
+        "material": "Unyielding Rivets",
+        "count": 4
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
   "Key of Achrabael": {
     "material": "Key of Achrabael",
     "rarity": "Legendary",
@@ -3543,23 +3663,6 @@
     "recipe": [
       {
         "material": "Righteous Candle",
-        "count": 9
-      },
-      {
-        "material": "Gold",
-        "count": 215
-      }
-    ],
-    "craftable": true
-  },
-  "Macharian Cross": {
-    "material": "Macharian Cross",
-    "rarity": "Epic",
-    "stat": "Health",
-    "faction": "Astra Militarum",
-    "recipe": [
-      {
-        "material": "Zeidos Ribbon",
         "count": 9
       },
       {
@@ -3693,6 +3796,27 @@
       {
         "material": "Gold",
         "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Mechadendrite Hive": {
+    "material": "Mechadendrite Hive",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Adeptus Mechanicus",
+    "recipe": [
+      {
+        "material": "Servo-Arc Claw",
+        "count": 2
+      },
+      {
+        "material": "Greater Reliquary of Protection",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
       }
     ],
     "craftable": true
@@ -4346,6 +4470,31 @@
     ],
     "craftable": true
   },
+  "Prehensile Dataspike": {
+    "material": "Prehensile Dataspike",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Adeptus Mechanicus",
+    "recipe": [
+      {
+        "material": "Blessed Cogitator",
+        "count": 9
+      },
+      {
+        "material": "Electromantic Cable Bundle",
+        "count": 1
+      },
+      {
+        "material": "Bionic Neural Pathways",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
   "Prey-Sight": {
     "material": "Prey-Sight",
     "rarity": "Rare",
@@ -4555,6 +4704,27 @@
       },
       {
         "material": "Plasma Cell Crate",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Relic Motive Force Capacitator": {
+    "material": "Relic Motive Force Capacitator",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "faction": "Adeptus Mechanicus",
+    "recipe": [
+      {
+        "material": "Enhanced Motive Force Capacitator",
+        "count": 2
+      },
+      {
+        "material": "Sanctified Weapon Oils",
         "count": 1
       },
       {
@@ -4792,6 +4962,31 @@
     ],
     "craftable": true
   },
+  "Sanctus Canister": {
+    "material": "Sanctus Canister",
+    "rarity": "Legendary",
+    "stat": "Health",
+    "faction": "Adeptus Mechanicus",
+    "recipe": [
+      {
+        "material": "Blessed Cogitator",
+        "count": 9
+      },
+      {
+        "material": "Advanced Combat Stimms",
+        "count": 1
+      },
+      {
+        "material": "Blessed Promethium Canister",
+        "count": 6
+      },
+      {
+        "material": "Gold",
+        "count": 650
+      }
+    ],
+    "craftable": true
+  },
   "Sash of Honors": {
     "material": "Sash of Honors",
     "rarity": "Legendary",
@@ -4977,6 +5172,23 @@
       {
         "material": "Gold",
         "count": 650
+      }
+    ],
+    "craftable": true
+  },
+  "Servo-Arc Claw": {
+    "material": "Servo-Arc Claw",
+    "rarity": "Epic",
+    "stat": "Health",
+    "faction": "Adeptus Mechanicus",
+    "recipe": [
+      {
+        "material": "Repair-Kit",
+        "count": 9
+      },
+      {
+        "material": "Gold",
+        "count": 215
       }
     ],
     "craftable": true
@@ -5506,6 +5718,26 @@
     ],
     "craftable": true
   },
+  "Utilitarian Belt": {
+    "material": "Utilitarian Belt",
+    "rarity": "Rare",
+    "stat": "Health",
+    "recipe": [
+      {
+        "material": "Holster and Pockets",
+        "count": 2
+      },
+      {
+        "material": "Standard-Issue Tourniquet",
+        "count": 5
+      },
+      {
+        "material": "Gold",
+        "count": 75
+      }
+    ],
+    "craftable": true
+  },
   "Veteran's Entrenching Tool": {
     "material": "Veteran's Entrenching Tool",
     "rarity": "Epic",
@@ -5641,388 +5873,251 @@
     "craftable": false,
     "stat": "Shard",
     "faction": "Adepta Sororitas",
-    "rarity": "Shard",
-    "locations": [
-      "I29",
-      "IM15",
-      "IME8"
-    ]
+    "rarity": "Shard"
   },
   "Celestine": {
     "material": "Celestine",
     "craftable": false,
     "stat": "Shard",
     "faction": "Adepta Sororitas",
-    "rarity": "Shard",
-    "locations": [
-      "FoC60",
-      "FoC32"
-    ]
+    "rarity": "Shard"
   },
   "Sibyll Devine": {
     "material": "Sibyll Devine",
     "craftable": false,
     "stat": "Shard",
     "faction": "Astra Militarum",
-    "rarity": "Shard",
-    "locations": [
-      "FoC30",
-      "FoC16"
-    ]
+    "rarity": "Shard"
   },
   "Kut Skoden": {
     "material": "Kut Skoden",
     "craftable": false,
     "stat": "Shard",
     "faction": "Astra Militarum",
-    "rarity": "Shard",
-    "locations": [
-      "FoC15",
-      "FoC8"
-    ]
+    "rarity": "Shard"
   },
   "Thaddeus Noble": {
     "material": "Thaddeus Noble",
     "craftable": false,
     "stat": "Shard",
     "faction": "Astra Militarum",
-    "rarity": "Shard",
-    "locations": [
-      "FoC45",
-      "FoC24"
-    ]
+    "rarity": "Shard"
   },
   "Castellan Creed": {
     "material": "Castellan Creed",
     "craftable": false,
     "stat": "Shard",
     "faction": "Astra Militarum",
-    "rarity": "Shard",
-    "locations": [
-      "FoC75",
-      "FoC40"
-    ]
+    "rarity": "Shard"
   },
   "Sword Brother Godswyl": {
     "material": "Sword Brother Godswyl",
     "craftable": false,
     "stat": "Shard",
     "faction": "Black Templars",
-    "rarity": "Shard",
-    "locations": [
-      "O30",
-      "OE16"
-    ]
+    "rarity": "Shard"
   },
   "Brother Burchard": {
     "material": "Brother Burchard",
     "craftable": false,
     "stat": "Shard",
     "faction": "Black Templars",
-    "rarity": "Shard",
-    "locations": [
-      "O15",
-      "OE8"
-    ]
+    "rarity": "Shard"
   },
   "Ancient Thoread": {
     "material": "Ancient Thoread",
     "craftable": false,
     "stat": "Shard",
     "faction": "Black Templars",
-    "rarity": "Shard",
-    "locations": [
-      "O45",
-      "OE24"
-    ]
+    "rarity": "Shard"
   },
   "Brother Jaeger": {
     "material": "Brother Jaeger",
     "craftable": false,
     "stat": "Shard",
     "faction": "Black Templars",
-    "rarity": "Shard",
-    "locations": [
-      "O60",
-      "OE32"
-    ]
+    "rarity": "Shard"
   },
   "High Marshal Helbrecht": {
     "material": "High Marshal Helbrecht",
     "craftable": false,
     "stat": "Shard",
     "faction": "Black Templars",
-    "rarity": "Shard",
-    "locations": [
-      "O75",
-      "OE40"
-    ]
+    "rarity": "Shard"
   },
   "Varro Tigurius": {
     "material": "Varro Tigurius",
     "craftable": false,
     "stat": "Shard",
     "faction": "Ultramarines",
-    "rarity": "Shard",
-    "locations": [
-      "I18",
-      "IM60",
-      "IME32"
-    ]
+    "rarity": "Shard"
   },
   "Certus": {
     "material": "Certus",
     "craftable": false,
     "stat": "Shard",
     "faction": "Ultramarines",
-    "rarity": "Shard",
-    "locations": [
-      "I21",
-      "IM45",
-      "IME24"
-    ]
+    "rarity": "Shard"
   },
   "Bellator": {
     "material": "Bellator",
     "craftable": false,
     "stat": "Shard",
     "faction": "Ultramarines",
-    "rarity": "Shard",
-    "locations": [
-      "I24",
-      "IM30",
-      "IME16"
-    ]
+    "rarity": "Shard"
   },
   "Incisus": {
     "material": "Incisus",
     "craftable": false,
     "stat": "Shard",
     "faction": "Ultramarines",
-    "rarity": "Shard",
-    "locations": [
-      "I27"
-    ]
+    "rarity": "Shard"
   },
   "Marneus Calgar": {
     "material": "Marneus Calgar",
     "craftable": false,
     "stat": "Shard",
     "faction": "Ultramarines",
-    "rarity": "Shard",
-    "locations": [
-      "IM75",
-      "IME40"
-    ]
+    "rarity": "Shard"
   },
   "Makhotep": {
     "material": "Makhotep",
     "craftable": false,
     "stat": "Shard",
     "faction": "Necrons",
-    "rarity": "Shard",
-    "locations": [
-      "I15",
-      "IE8"
-    ]
+    "rarity": "Shard"
   },
   "Imospekh": {
     "material": "Imospekh",
     "craftable": false,
     "stat": "Shard",
     "faction": "Necrons",
-    "rarity": "Shard",
-    "locations": [
-      "I30",
-      "IE16"
-    ]
+    "rarity": "Shard"
   },
   "Aleph-Null": {
     "material": "Aleph-Null",
     "craftable": false,
     "stat": "Shard",
     "faction": "Necrons",
-    "rarity": "Shard",
-    "locations": [
-      "I45",
-      "IE24"
-    ]
+    "rarity": "Shard"
   },
   "Thutmose": {
     "material": "Thutmose",
     "craftable": false,
     "stat": "Shard",
     "faction": "Necrons",
-    "rarity": "Shard",
-    "locations": [
-      "I60",
-      "IE32"
-    ]
+    "rarity": "Shard"
   },
   "Anuphet": {
     "material": "Anuphet",
     "craftable": false,
     "stat": "Shard",
     "faction": "Necrons",
-    "rarity": "Shard",
-    "locations": [
-      "I75",
-      "IE40"
-    ]
+    "rarity": "Shard"
   },
   "Snotflogga": {
     "material": "Snotflogga",
     "craftable": false,
     "stat": "Shard",
     "faction": "Orks",
-    "rarity": "Shard",
-    "locations": [
-      "OM45"
-    ]
+    "rarity": "Shard"
   },
   "Gibbascrapz": {
     "material": "Gibbascrapz",
     "craftable": false,
     "stat": "Shard",
     "faction": "Orks",
-    "rarity": "Shard",
-    "locations": [
-      "OM30"
-    ]
+    "rarity": "Shard"
   },
   "Snappawrecka": {
     "material": "Snappawrecka",
     "craftable": false,
     "stat": "Shard",
     "faction": "Orks",
-    "rarity": "Shard",
-    "locations": [
-      "OM15"
-    ]
+    "rarity": "Shard"
   },
   "Tanksmasha": {
     "material": "Tanksmasha",
     "craftable": false,
     "stat": "Shard",
     "faction": "Orks",
-    "rarity": "Shard",
-    "locations": [
-      "OM60"
-    ]
+    "rarity": "Shard"
   },
   "Boss Gulgortz": {
     "material": "Boss Gulgortz",
     "craftable": false,
     "stat": "Shard",
     "faction": "Orks",
-    "rarity": "Shard",
-    "locations": [
-      "OM75"
-    ]
+    "rarity": "Shard"
   },
   "Angrax": {
     "material": "Angrax",
     "craftable": false,
     "stat": "Shard",
     "faction": "Black Legion",
-    "rarity": "Shard",
-    "locations": [
-      "FoCM15",
-      "FoCME8"
-    ]
+    "rarity": "Shard"
   },
   "Volk": {
     "material": "Volk",
     "craftable": false,
     "stat": "Shard",
     "faction": "Black Legion",
-    "rarity": "Shard",
-    "locations": [
-      "FoCM45",
-      "FoCME24"
-    ]
+    "rarity": "Shard"
   },
   "Archimatos": {
     "material": "Archimatos",
     "craftable": false,
     "stat": "Shard",
     "faction": "Black Legion",
-    "rarity": "Shard",
-    "locations": [
-      "FoCM30",
-      "FoCME16"
-    ]
+    "rarity": "Shard"
   },
   "Haarken Worldclaimer": {
     "material": "Haarken Worldclaimer",
     "craftable": false,
     "stat": "Shard",
     "faction": "Black Legion",
-    "rarity": "Shard",
-    "locations": [
-      "FoCM60",
-      "FoCME32"
-    ]
+    "rarity": "Shard"
   },
   "Abaddon The Despoiler": {
     "material": "Abaddon The Despoiler",
     "craftable": false,
     "stat": "Shard",
     "faction": "Black Legion",
-    "rarity": "Shard",
-    "locations": [
-      "FoCM75",
-      "FoCME40"
-    ]
+    "rarity": "Shard"
   },
   "Yazaghor": {
     "material": "Yazaghor",
     "craftable": false,
     "stat": "Shard",
     "faction": "Thousand Sons",
-    "rarity": "Shard",
-    "locations": [
-      "SH45"
-    ]
+    "rarity": "Shard"
   },
   "Toth": {
     "material": "Toth",
     "craftable": false,
     "stat": "Shard",
     "faction": "Thousand Sons",
-    "rarity": "Shard",
-    "locations": [
-      "SH15"
-    ]
+    "rarity": "Shard"
   },
   "Abraxas": {
     "material": "Abraxas",
     "craftable": false,
     "stat": "Shard",
     "faction": "Thousand Sons",
-    "rarity": "Shard",
-    "locations": [
-      "SH30"
-    ]
+    "rarity": "Shard"
   },
   "Thaumachus": {
     "material": "Thaumachus",
     "craftable": false,
     "stat": "Shard",
     "faction": "Thousand Sons",
-    "rarity": "Shard",
-    "locations": [
-      "SH60"
-    ]
+    "rarity": "Shard"
   },
   "Ahriman": {
     "material": "Ahriman",
     "craftable": false,
     "stat": "Shard",
     "faction": "Thousand Sons",
-    "rarity": "Shard",
-    "locations": [
-      "SH75"
-    ]
+    "rarity": "Shard"
   }
 }

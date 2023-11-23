@@ -168,15 +168,7 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
                 }
-                label={
-                    <span style={{ display: 'flex', alignItems: 'center' }}>
-                        Farm by priority order{' '}
-                        <Tooltip
-                            title={'The estimate might be incorrect because inventory shared with multiple characters'}>
-                            <WarningIcon color={'warning'} />
-                        </Tooltip>
-                    </span>
-                }
+                label="Farm by priority order"
             />
 
             <Button type={'button'} onClick={saveChanges} variant={'outlined'}>

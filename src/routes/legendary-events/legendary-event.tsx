@@ -16,7 +16,7 @@ import { LegendaryEventEnum } from '../../models/enums';
 import { getLegendaryEvent } from '../../models/constants';
 
 const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
-    const { characters, viewPreferences, selectedTeamOrder, leSelectedTeams } = useContext(StoreContext);
+    const { characters, viewPreferences, selectedTeamOrder, leSelectedTeams, leProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const legendaryEvent = useMemo(() => getLegendaryEvent(id, characters), [id]);
 
@@ -55,6 +55,36 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
         const selectedTeams = leSelectedTeams[legendaryEvent.id]?.gamma ?? {};
         return getSelectedChars(selectedTeams);
     }, [leSelectedTeams[legendaryEvent.id]?.gamma, selectedTeamOrder]);
+
+    const getCompletedRequirements = (section: LegendaryEventSection): string[] => {
+        const eventProgress = leProgress[legendaryEvent.id];
+        const sectionProgress = eventProgress && eventProgress[section];
+        const track = legendaryEvent[section];
+
+        if (sectionProgress) {
+            const completedRequirements = Array.from({ length: sectionProgress.battles[0].length }, (_, i) =>
+                sectionProgress.battles.map(arr => arr[i])
+            )
+                .slice(2)
+                .map(x => x.every(battle => battle));
+
+            return track.unitsRestrictions
+                .map((x, index) => (completedRequirements[index] ? x.name : ''))
+                .filter(x => !!x);
+        }
+
+        return [];
+    };
+
+    const alphaCompletedRequirements = useMemo(
+        () => getCompletedRequirements('alpha'),
+        [leProgress, legendaryEvent.id]
+    );
+    const betaCompletedRequirements = useMemo(() => getCompletedRequirements('beta'), [leProgress, legendaryEvent.id]);
+    const gammaCompletedRequirements = useMemo(
+        () => getCompletedRequirements('gamma'),
+        [leProgress, legendaryEvent.id]
+    );
 
     return (
         <div>
@@ -117,16 +147,19 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
                     show={viewPreferences.showAlpha}
                     track={legendaryEvent.alpha}
                     selectChars={selectChars('alpha')}
+                    completedRequirements={viewPreferences.hideCompleted ? alphaCompletedRequirements : []}
                 />
                 <LegendaryEventTrack
                     show={viewPreferences.showBeta}
                     track={legendaryEvent.beta}
                     selectChars={selectChars('beta')}
+                    completedRequirements={viewPreferences.hideCompleted ? betaCompletedRequirements : []}
                 />
                 <LegendaryEventTrack
                     show={viewPreferences.showGamma}
                     track={legendaryEvent.gamma}
                     selectChars={selectChars('gamma')}
+                    completedRequirements={viewPreferences.hideCompleted ? gammaCompletedRequirements : []}
                 />
             </div>
             <div style={{ display: viewPreferences.hideSelectedTeams ? 'none' : 'block' }}>
@@ -142,18 +175,21 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
                         track={legendaryEvent.alpha}
                         teams={alphaSelectedChars}
                         deselectChars={deselectChars('alpha')}
+                        completedRequirements={viewPreferences.hideCompleted ? alphaCompletedRequirements : []}
                     />
                     <SelectedTeamsTable
                         show={viewPreferences.showBeta}
                         track={legendaryEvent.beta}
                         teams={betaSelectedChars}
                         deselectChars={deselectChars('beta')}
+                        completedRequirements={viewPreferences.hideCompleted ? betaCompletedRequirements : []}
                     />
                     <SelectedTeamsTable
                         show={viewPreferences.showGamma}
                         track={legendaryEvent.gamma}
                         teams={gammaSelectedChars}
                         deselectChars={deselectChars('gamma')}
+                        completedRequirements={viewPreferences.hideCompleted ? gammaCompletedRequirements : []}
                     />
                 </div>
             </div>
