@@ -15,6 +15,9 @@
         },
         {
           "text": "Fixed issue with incorrect estimate of daily raids when using \"Farm by priority order\" (xNobleDoc)"
+        },
+        {
+          "text": "Fixed upgrades for Ragnar rank Silver I (Drewsophila)"
         }
       ]
     },
