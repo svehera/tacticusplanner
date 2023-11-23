@@ -5,7 +5,6 @@ import {
     CellClassParams,
     CellClickedEvent,
     ColDef,
-    ColGroupDef,
     ICellRendererParams,
     ITooltipParams,
     RowStyle,
@@ -32,10 +31,12 @@ export const LegendaryEventTrack = ({
     track,
     selectChars,
     show,
+    completedRequirements,
 }: {
     show: boolean;
     track: ILegendaryEventTrack;
     selectChars: (team: string, ...chars: string[]) => void;
+    completedRequirements: string[];
 }) => {
     const gridRef = useRef<AgGridReact>(null);
 
@@ -56,13 +57,13 @@ export const LegendaryEventTrack = ({
 
         track.unitsRestrictions.forEach(x => {
             const selected = section[x.name] !== undefined ? section[x.name] : x.selected;
-            if (selected) {
+            if (selected && !completedRequirements.includes(x.name)) {
                 result.push(x.name);
             }
         });
 
         return result;
-    }, [leSelectedRequirements]);
+    }, [leSelectedRequirements, completedRequirements]);
 
     const components = useMemo(() => {
         return {
@@ -71,8 +72,16 @@ export const LegendaryEventTrack = ({
     }, [restrictions]);
 
     const columnsDefs = useMemo<Array<ColDef>>(
-        () => [...getSectionColumns(track.unitsRestrictions, track.section, viewPreferences.lightWeight, restrictions)],
-        [track.eventId, viewPreferences.lightWeight, restrictions]
+        () => [
+            ...getSectionColumns(
+                track.unitsRestrictions,
+                track.section,
+                viewPreferences.lightWeight,
+                restrictions,
+                completedRequirements
+            ),
+        ],
+        [track.eventId, viewPreferences.lightWeight, restrictions, completedRequirements]
     );
 
     const teams = useMemo(
@@ -89,7 +98,13 @@ export const LegendaryEventTrack = ({
 
     useEffect(() => {
         gridRef.current?.api?.sizeColumnsToFit();
-    }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, track.eventId]);
+    }, [
+        viewPreferences.showAlpha,
+        viewPreferences.showBeta,
+        viewPreferences.showGamma,
+        track.eventId,
+        viewPreferences.hideCompleted,
+    ]);
 
     const handleChange = (selected: boolean, restrictionName: string) => {
         dispatch.leSelectedRequirements({
@@ -125,7 +140,8 @@ export const LegendaryEventTrack = ({
         unitsRestrictions: ILegendaryEventTrackRequirement[],
         suffix: LegendaryEventSection,
         lightweight: boolean,
-        selectedRequirements: string[]
+        selectedRequirements: string[],
+        completedRestrictions: string[]
     ): Array<ColDef> {
         return unitsRestrictions.map(u => ({
             field: u.name,
@@ -159,6 +175,7 @@ export const LegendaryEventTrack = ({
             suppressMovable: true,
             wrapHeaderText: true,
             autoHeaderHeight: true,
+            hide: completedRestrictions.includes(u.name),
             headerComponentParams: {
                 onCheckboxChange: (selected: boolean) => handleChange(selected, u.name),
                 checked: selectedRequirements.includes(u.name),
