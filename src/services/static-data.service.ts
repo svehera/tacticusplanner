@@ -324,7 +324,8 @@ export class StaticDataService {
             materials.filter(x => x.material !== 'Gold')
         );
 
-        const totalEnergy = sum(raids.map(day => settings.dailyEnergy - day.energyLeft));
+        const energySpent = sum(settings.completedLocations.flatMap(x => x.locations).map(x => x.energySpent));
+        const totalEnergy = sum(raids.map(day => settings.dailyEnergy - day.energyLeft)) - energySpent;
 
         return {
             raids,

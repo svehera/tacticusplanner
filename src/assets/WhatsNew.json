@@ -1,6 +1,20 @@
 ﻿{
-  "currentVersion": "1.1.5",
+  "currentVersion": "1.1.6",
   "releaseNotes": [
+    {
+      "version": "1.1.6",
+      "date": "November 23",
+      "type": "Update",
+      "new": [
+      ],
+      "minor": [
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed issue with \"X Energy Needed\" is not being updated after completing raids"
+        }
+      ]
+    },
     {
       "version": "1.1.5",
       "date": "November 22",
