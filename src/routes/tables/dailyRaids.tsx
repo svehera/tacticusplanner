@@ -421,7 +421,17 @@ const CharactersList = ({ refresh }: { refresh: (chars: ICharacterRankRange[]) =
     const dispatch = useContext(DispatchContext);
     const { goals, characters } = useContext(StoreContext);
 
-    const upgradeRankGoals = useMemo(() => goals.filter(g => g.type === PersonalGoalType.UpgradeRank), []);
+    const upgradeRankGoals = useMemo(
+        () =>
+            goals
+                .filter(g => g.type === PersonalGoalType.UpgradeRank)
+                .map(g => {
+                    const relatedCharacter = characters.find(x => x.name === g.character);
+
+                    return { ...g, currentRank: relatedCharacter?.rank };
+                }),
+        []
+    );
     const [checked, setChecked] = React.useState<boolean[]>(() => upgradeRankGoals.map(x => x.dailyRaids ?? false));
 
     const [editGoal, setEditGoal] = useState<IPersonalGoal | null>(null);

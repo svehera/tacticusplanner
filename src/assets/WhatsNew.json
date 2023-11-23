@@ -21,6 +21,9 @@
         },
         {
           "text": "Fixed issue with inventory not being updated correctly after rank change"
+        },
+        {
+          "text": "Fixed issue in character selection of Daily Raids when character's current rank shown as Stone I though it is not (Somberlord)"
         }
       ]
     },
