@@ -322,6 +322,7 @@ export interface IViewPreferences {
     hideSelectedTeams: boolean;
     autoTeams: boolean;
     onlyUnlocked: boolean;
+    hideCompleted: boolean;
 }
 
 export interface IAutoTeamsPreferences {

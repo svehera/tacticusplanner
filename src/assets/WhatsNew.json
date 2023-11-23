@@ -6,6 +6,14 @@
       "date": "November 23",
       "type": "Update",
       "new": [
+        {
+          "text": "Added possibility to hide completed tracks for legendary planner (sasquach)",
+          "images": [
+            {
+              "path": "hideCompleted.png"
+            }
+          ]
+        }
       ],
       "minor": [
         {

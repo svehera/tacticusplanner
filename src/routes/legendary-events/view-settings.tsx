@@ -1,5 +1,5 @@
 ﻿import React, { useContext } from 'react';
-import { Divider, FormControlLabel, FormGroup, Switch } from '@mui/material';
+import { Divider, FormControlLabel, FormGroup, Switch, Tooltip } from '@mui/material';
 import { IViewPreferences } from '../../models/interfaces';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 
@@ -109,6 +109,19 @@ const ViewSettings = ({ onlyUnlocked }: { onlyUnlocked?: boolean }) => {
                 }
                 label="Only unlocked"
             />
+
+            <Tooltip title={'Hide tracks where you have completed battle 12'}>
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={viewPreferences.hideCompleted}
+                            onChange={event => updatePreferences('hideCompleted', event.target.checked)}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                        />
+                    }
+                    label="Hide completed"
+                />
+            </Tooltip>
         </FormGroup>
     );
 };

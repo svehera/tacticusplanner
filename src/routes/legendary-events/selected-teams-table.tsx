@@ -23,6 +23,7 @@ export const SelectedTeamsTable = (props: {
     track: ILegendaryEventTrack;
     teams: Record<string, Array<ICharacter2 | string>>;
     deselectChars: (teamName: string, ...chars: string[]) => void;
+    completedRequirements: string[];
 }) => {
     const { viewPreferences } = useContext(StoreContext);
     const { track, teams, deselectChars } = props;
@@ -49,7 +50,7 @@ export const SelectedTeamsTable = (props: {
                 openByDefault: true,
             },
         ],
-        [track.eventId, viewPreferences.lightWeight]
+        [track.eventId, viewPreferences.lightWeight, props.completedRequirements]
     );
 
     const handleCellCLick = (cellClicked: CellClickedEvent<ITableRow[], ICharacter2>) => {
@@ -75,6 +76,7 @@ export const SelectedTeamsTable = (props: {
         viewPreferences.showAlpha,
         viewPreferences.showBeta,
         viewPreferences.showGamma,
+        viewPreferences.hideCompleted,
     ]);
 
     function getSectionColumns(
@@ -86,6 +88,7 @@ export const SelectedTeamsTable = (props: {
             headerName: u.name,
             headerTooltip: u.name,
             resizable: true,
+            hide: props.completedRequirements.includes(u.name),
             valueFormatter: !lightweight
                 ? undefined
                 : (params: ValueFormatterParams) =>
