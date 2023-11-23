@@ -18,6 +18,9 @@
         },
         {
           "text": "Fixed upgrades for Ragnar rank Silver I (Drewsophila)"
+        },
+        {
+          "text": "Fixed issue with inventory not being updated correctly after rank change"
         }
       ]
     },

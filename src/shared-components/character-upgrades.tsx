@@ -1,6 +1,6 @@
 ﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Checkbox, FormControlLabel, Popover } from '@mui/material';
-import { ICharacter2, IMaterialRecipeIngredientFull } from '../models/interfaces';
+import { ICharacter2, IMaterialFull, IMaterialRecipeIngredientFull } from '../models/interfaces';
 import { StaticDataService } from '../services';
 import Button from '@mui/material/Button';
 import { Info } from '@mui/icons-material';
@@ -70,21 +70,22 @@ export const CharacterUpgrades = ({
     };
 
     const baseMaterials = useMemo<IMaterialRecipeIngredientFull[]>(() => {
+        const newUpgrades = possibleUpgrades.filter(x => formData.newUpgrades.includes(x.material));
+        let upgradesToConsider: IMaterialFull[];
+
         if (character.rank <= formData.originalRank) {
-            const newUpgrades = possibleUpgrades.filter(x => formData.newUpgrades.includes(x.material));
-            return StaticDataService.groupBaseMaterials(newUpgrades);
-        } else if (character.rank > formData.originalRank) {
-            const neededUpgrades = StaticDataService.getUpgrades({
+            upgradesToConsider = newUpgrades;
+        } else {
+            const previousRankUpgrades = StaticDataService.getUpgrades({
                 id: character.name,
                 rankStart: formData.originalRank,
                 rankEnd: character.rank,
                 appliedUpgrades: formData.originalUpgrades,
             });
-
-            return StaticDataService.groupBaseMaterials(neededUpgrades);
+            upgradesToConsider = [...previousRankUpgrades, ...newUpgrades];
         }
 
-        return [];
+        return StaticDataService.groupBaseMaterials(upgradesToConsider);
     }, [formData.newUpgrades, character.rank]);
 
     useEffect(() => {
