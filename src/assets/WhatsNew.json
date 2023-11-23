@@ -17,12 +17,15 @@
       ],
       "minor": [
         {
-          "text": "Add icons for the new Adeptus Mechanicus upgrades",
+          "text": "Add icons for the new non-craftable Adeptus Mechanicus upgrades",
           "subPoints": [
             "Blessed Cogitator",
             "Motive Force Capacitator",
             "Cogwheel Crest"
           ]
+        },
+        {
+          "text": "Added recipes for new crafted materials (sonsonVallano)"
         }
       ],
       "bugFixes": [
@@ -33,7 +36,7 @@
           "text": "Fixed issue with incorrect estimate of daily raids when using \"Farm by priority order\" (xNobleDoc)"
         },
         {
-          "text": "Fixed upgrades for Ragnar rank Silver I (Drewsophila)"
+          "text": "Fixed upgrades for Ragnar rank Silver I and other (Drewsophila, sonsonVallano)"
         },
         {
           "text": "Fixed issue with inventory not being updated correctly after rank change"
