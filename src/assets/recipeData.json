@@ -18,21 +18,21 @@
     "craftable": false,
     "stat": "Damage",
     "rarity": "Rare",
-    "icon": ""
+    "icon": "Motive Force Capacitator.png"
   },
   "Cogwheel Crest": {
     "material": "Cogwheel Crest",
     "craftable": false,
     "stat": "Armour",
     "rarity": "Rare",
-    "icon": ""
+    "icon": "Cogwheel Crest.png"
   },
   "Blessed Cogitator": {
     "material": "Blessed Cogitator",
     "craftable": false,
     "stat": "Health",
     "rarity": "Legendary",
-    "icon": ""
+    "icon": "Blessed Cogitator.png"
   },
   "Adamantium Filaments": {
     "material": "Adamantium Filaments",

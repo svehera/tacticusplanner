@@ -8,6 +8,14 @@
       "new": [
       ],
       "minor": [
+        {
+          "text": "Add icons for the new Adeptus Mechanicus upgrades",
+          "subPoints": [
+            "Blessed Cogitator",
+            "Motive Force Capacitator",
+            "Cogwheel Crest"
+          ]
+        }
       ],
       "bugFixes": [
         {
