@@ -396,13 +396,15 @@ export class StaticDataService {
                 const characterMaterials = this.groupBaseMaterials(upgradesByCharacter[character]);
                 materials.push(...characterMaterials);
             }
+            const copiedUpgrades = { ...settings.upgrades };
             const result = materials
                 .map(x =>
                     this.calculateMaterialData(
                         settings.campaignsProgress,
                         x,
                         this.selectBestLocations(settings, x.locationsComposed ?? []),
-                        settings.upgrades
+                        copiedUpgrades,
+                        true
                     )
                 )
                 .filter(x => !!x) as IMaterialEstimated2[];
@@ -607,7 +609,8 @@ export class StaticDataService {
         campaignsProgress: ICampaignsProgress,
         material: IMaterialRecipeIngredientFull,
         bestLocations: ICampaignBattleComposed[],
-        ownedUpgrades: Record<string, number>
+        ownedUpgrades: Record<string, number>,
+        updateInventory = false
     ): IMaterialEstimated2 | null {
         const lockedLocations = (material.locationsComposed ?? []).filter(location => {
             const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
@@ -617,6 +620,10 @@ export class StaticDataService {
 
         const ownedCount = ownedUpgrades[material.material] ?? 0;
         const leftCount = ownedCount > material.count ? 0 : material.count - ownedCount;
+        if (updateInventory) {
+            const updatedCount = ownedCount - material.count;
+            ownedUpgrades[material.material] = updatedCount > 0 ? updatedCount : 0;
+        }
 
         let expectedEnergy = 0;
         let numberOfBattles = 0;

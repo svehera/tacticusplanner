@@ -12,6 +12,9 @@
       "bugFixes": [
         {
           "text": "Fixed issue with \"X Energy Needed\" is not being updated after completing raids"
+        },
+        {
+          "text": "Fixed issue with incorrect estimate of daily raids when using \"Farm by priority order\" (xNobleDoc)"
         }
       ]
     },
