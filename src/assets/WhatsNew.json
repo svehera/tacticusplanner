@@ -1,6 +1,20 @@
 ﻿{
-  "currentVersion": "1.1.6",
+  "currentVersion": "1.1.7",
   "releaseNotes": [
+    {
+      "version": "1.1.7",
+      "date": "November X",
+      "type": "Update",
+      "new": [
+      ],
+      "minor": [
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed days left calculations on the goals screen (Krogarth)"
+        }
+      ]
+    },
     {
       "version": "1.1.6",
       "date": "November 23",
