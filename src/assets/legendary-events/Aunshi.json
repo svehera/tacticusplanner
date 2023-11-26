@@ -372,5 +372,10 @@
     }
   ],
   "shardsPerChest": 10,
-  "shardsToUnlock": 150
+  "progression": {
+    "unlock": 150,
+    "fourStars": 60,
+    "fiveStars": 70,
+    "blueStar": 80
+  }
 }

@@ -24,6 +24,7 @@ export const LeProgress = ({
     const { leProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const [value, setValue] = React.useState(0);
+    const [goal, setGoal] = React.useState<string>('unlock');
     const [personalProgress, setPersonalProgress] = useState<ILegendaryEventProgressState>(
         leProgress[legendaryEvent.id] ?? {
             id: legendaryEvent.id,
@@ -240,14 +241,45 @@ export const LeProgress = ({
         return legendaryEvent.chestsMilestones.length;
     }, [currentCurrency]);
 
-    const chestsForUnlock = legendaryEvent.shardsToUnlock / legendaryEvent.shardsPerChest;
+    const chestsForNextGoal = useMemo(() => {
+        const chestsForUnlock = legendaryEvent.progression.unlock / legendaryEvent.shardsPerChest;
+        const chestsFor4Stars =
+            (legendaryEvent.progression.unlock + legendaryEvent.progression.fourStars) / legendaryEvent.shardsPerChest;
+        const chestsFor5Stars =
+            (legendaryEvent.progression.unlock +
+                legendaryEvent.progression.fourStars +
+                legendaryEvent.progression.fiveStars) /
+            legendaryEvent.shardsPerChest;
+        const chestsForBlueStar =
+            (legendaryEvent.progression.unlock +
+                legendaryEvent.progression.fourStars +
+                legendaryEvent.progression.fiveStars +
+                legendaryEvent.progression.blueStar) /
+            legendaryEvent.shardsPerChest;
+
+        if (currentChests < chestsForUnlock) {
+            setGoal('unlock');
+            return chestsForUnlock;
+        } else if (currentChests < chestsFor4Stars) {
+            setGoal('4 stars');
+            return chestsFor4Stars;
+        } else if (currentChests < chestsFor5Stars) {
+            setGoal('5 stars');
+            return chestsFor5Stars;
+        } else if (currentChests < chestsForBlueStar) {
+            setGoal('blue star');
+            return chestsForBlueStar;
+        }
+
+        return 0;
+    }, [currentChests]);
 
     const currencyForUnlock = useMemo(() => {
         return legendaryEvent.chestsMilestones
-            .filter(x => x.chestLevel <= chestsForUnlock)
+            .filter(x => x.chestLevel <= chestsForNextGoal)
             .map(x => x.engramCost)
             .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    }, []);
+    }, [chestsForNextGoal]);
 
     const pointsForUnlock = useMemo(() => {
         const additionalPayout = personalProgress.premiumMissions > 0 ? 15 : 0;
@@ -278,7 +310,7 @@ export const LeProgress = ({
             <TabPanel value={value} index={0}>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 15, margin: 10 }}>
                     <div style={{ display: 'flex', gap: 5 }}>
-                        Deed Points for unlock:
+                        Deed Points for {goal}:
                         <span style={{ fontWeight: 700 }}>
                             {' '}
                             {currentPoints} / {pointsForUnlock}
@@ -291,7 +323,7 @@ export const LeProgress = ({
                     </div>
 
                     <div style={{ display: 'flex', gap: 5 }}>
-                        Currency for unlock:
+                        Currency for {goal}:
                         <span style={{ fontWeight: 700 }}>
                             {' '}
                             {currentCurrency} / {currencyForUnlock}
@@ -302,10 +334,10 @@ export const LeProgress = ({
                     </div>
 
                     <div style={{ display: 'flex', gap: 5 }}>
-                        Chests for unlock:
+                        Chests for {goal}:
                         <span style={{ fontWeight: 700 }}>
                             {' '}
-                            {currentChests} / {chestsForUnlock}
+                            {currentChests} / {chestsForNextGoal}
                         </span>
                         <Tooltip content={totalChests + ' in total'} relationship={'description'}>
                             <InfoIcon />

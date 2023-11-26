@@ -1,7 +1,7 @@
 ﻿{
   "id": 5,
   "name": "Ragnar",
-  "wikiLink": "https://tacticus.fandom.com/wiki/Legendary_Character_Events",
+  "wikiLink": "https://tacticus.fandom.com/wiki/LE-Ragnar",
   "eventStage": 1,
   "nextEventDate": "November 19",
   "regularMissions": [
@@ -421,5 +421,10 @@
     }
   ],
   "shardsPerChest": 25,
-  "shardsToUnlock": 400
+  "progression": {
+    "unlock": 400,
+    "fourStars": 120,
+    "fiveStars": 180,
+    "blueStar": 200
+  }
 }
