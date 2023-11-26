@@ -6,7 +6,9 @@
       "date": "November 27",
       "type": "Update",
       "new": [
-       
+        {
+          "text": "Added datamined Vitrivius LE. Beware that data may change"
+        }
       ],
       "minor": [
         {

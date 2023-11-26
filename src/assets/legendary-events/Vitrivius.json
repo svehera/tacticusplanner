@@ -1,9 +1,9 @@
 ﻿{
-  "id": 5,
-  "name": "Ragnar",
+  "id": 6,
+  "name": "Vitrivius",
   "wikiLink": "https://tacticus.fandom.com/wiki/LE-Ragnar",
-  "eventStage": 2,
-  "nextEventDate": "TBA",
+  "eventStage": 1,
+  "nextEventDate": "December 24",
   "regularMissions": [
     "Play one Legendary Event Battle, Deal 1000 damage",
     "Defeat 30 Orks",
@@ -29,8 +29,8 @@
     "Defeat 75 enemies with Piercing Damage"
   ],
   "alpha": {
-    "name": "Alpha (No Xenos)",
-    "killPoints": 24,
+    "name": "Alpha (No Necrons)",
+    "killPoints": 21,
     "battlesPoints": [
       40,
       38,
@@ -48,7 +48,7 @@
   },
   "beta": {
     "name": "Beta (No Chaos)",
-    "killPoints": 30,
+    "killPoints": 21,
     "battlesPoints": [
       33,
       36,
@@ -66,7 +66,7 @@
   },
   "gamma": {
     "name": "Gamma (No Imperials)",
-    "killPoints": 34,
+    "killPoints": 35,
     "battlesPoints": [
       28,
       35,
