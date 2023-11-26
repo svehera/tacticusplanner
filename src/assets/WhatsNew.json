@@ -1,6 +1,26 @@
 ﻿{
-  "currentVersion": "1.1.6",
+  "currentVersion": "1.1.7",
   "releaseNotes": [
+    {
+      "version": "1.1.7",
+      "date": "November 27",
+      "type": "Update",
+      "new": [
+        {
+          "text": "Added datamined Vitrivius LE. Beware that data may change"
+        }
+      ],
+      "minor": [
+        {
+          "text": "Updated LE progress overview calculate points for 4, 5 and blue star (Krogarth)"
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed days left calculations on the goals screen (Krogarth)"
+        }
+      ]
+    },
     {
       "version": "1.1.6",
       "date": "November 23",

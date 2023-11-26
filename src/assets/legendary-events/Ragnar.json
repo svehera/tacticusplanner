@@ -1,9 +1,9 @@
 ﻿{
   "id": 5,
   "name": "Ragnar",
-  "wikiLink": "https://tacticus.fandom.com/wiki/Legendary_Character_Events",
-  "eventStage": 1,
-  "nextEventDate": "November 19",
+  "wikiLink": "https://tacticus.fandom.com/wiki/LE-Ragnar",
+  "eventStage": 2,
+  "nextEventDate": "TBA",
   "regularMissions": [
     "Play one Legendary Event Battle, Deal 1000 damage",
     "Defeat 30 Orks",
@@ -421,5 +421,10 @@
     }
   ],
   "shardsPerChest": 25,
-  "shardsToUnlock": 400
+  "progression": {
+    "unlock": 400,
+    "fourStars": 120,
+    "fiveStars": 180,
+    "blueStar": 200
+  }
 }

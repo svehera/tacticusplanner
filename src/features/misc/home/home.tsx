@@ -11,7 +11,7 @@ import { sum } from 'lodash';
 export const Home = () => {
     const navigate = useNavigate();
     const { goals, dailyRaids } = useContext(StoreContext);
-    const nextLeMenuItem = menuItemById['ragnar'];
+    const nextLeMenuItem = menuItemById['vitrivius'];
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
     const topPriorityGoal = goals[0];
@@ -31,8 +31,8 @@ export const Home = () => {
         return timeDifference >= 0 ? result : 'Finished';
     }
 
-    const timeToStart = timeLeftToFutureDate('2023-11-19');
-    const timeToEnd = timeLeftToFutureDate('2023-11-26');
+    const timeToStart = timeLeftToFutureDate('2023-12-24');
+    const timeToEnd = timeLeftToFutureDate('2023-11-31');
     const isEventStarted = timeToStart === 'Finished';
 
     return (
@@ -99,7 +99,7 @@ export const Home = () => {
                                     {nextLeMenuItem.icon} {nextLeMenuItem.label}
                                 </div>
                             }
-                            subheader={isEventStarted ? 'November 26' : 'November 19'}
+                            subheader={isEventStarted ? 'December 24' : 'December 31'}
                         />
                         <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
                             {isEventStarted ? timeToEnd : timeToStart}

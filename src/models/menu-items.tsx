@@ -3,6 +3,7 @@
 import aunshi from '../assets/legendary-events/Aunshi.json';
 import ragnar from '../assets/legendary-events/Ragnar.json';
 import shadowsun from '../assets/legendary-events/Shadowsun.json';
+import vitrivius from '../assets/legendary-events/Vitrivius.json';
 
 import ListIcon from '@mui/icons-material/List';
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -58,6 +59,12 @@ export const menuItemById = {
         '/plan/le/ragnar',
         `Ragnar ${ragnar.eventStage}/3 (${ragnar.nextEventDate})`
     ),
+    vitrivius: new MenuItemTP(
+        'Vitrivius LE',
+        <CharacterImage icon={'vitruvius.png'} imageSize={24} />,
+        '/plan/le/vitrivius',
+        `Vitrivius ${vitrivius.eventStage}/3 (${vitrivius.nextEventDate}) *Datamined`
+    ),
 
     characters: new MenuItemTP('Characters', <Diversity3Icon />, '/learn/characters'),
     upgrades: new MenuItemTP('Upgrades', <ListIcon />, '/learn/upgrades'),
@@ -82,6 +89,7 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['shadowsun'],
     menuItemById['aunshi'],
     menuItemById['ragnar'],
+    menuItemById['vitrivius'],
 ];
 
 export const learnSubMenu: MenuItemTP[] = [

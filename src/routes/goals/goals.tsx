@@ -149,7 +149,10 @@ export const GoalCard = ({
 
     const estimatedDays = useMemo(() => {
         if (goal.type !== PersonalGoalType.UpgradeRank) {
-            return 0;
+            return {
+                total: 0,
+                byOrder: 0,
+            };
         }
         const charactersRankRange = higherPriorityGoals
             .map(g => {
@@ -171,7 +174,7 @@ export const GoalCard = ({
                 campaignsProgress: dailyRaidsPreferences.useCampaignsProgress
                     ? campaignsProgress
                     : defaultCampaignsProgress,
-                preferences: dailyRaidsPreferences,
+                preferences: dailyRaidsPreferences, // { ...dailyRaidsPreferences, farmByPriorityOrder: true },
                 upgrades: dailyRaidsPreferences.useInventory ? inventory.upgrades : {},
                 completedLocations: dailyRaids.completedLocations ?? [],
             },
@@ -186,7 +189,16 @@ export const GoalCard = ({
             ]
         );
 
-        return estimate.raids.length;
+        const firstFarmDay = estimate.raids.findIndex(x =>
+            x.raids.flatMap(raid => raid.characters).includes(character.name)
+        );
+
+        return {
+            total: estimate.raids.length,
+            byOrder:
+                firstFarmDay +
+                estimate.raids.filter(x => x.raids.flatMap(raid => raid.characters).includes(character.name)).length,
+        };
     }, [character.name, character.rank, goal.targetRank, higherPriorityGoals]);
 
     return (
@@ -228,7 +240,14 @@ export const GoalCard = ({
                             <RankImage rank={character.rank} /> <ArrowForward />{' '}
                             <RankImage rank={goal.targetRank ?? 0} />
                         </div>
-                        {isGoalCompleted ? undefined : <div>Days Left: {estimatedDays}</div>}
+                        {isGoalCompleted ? undefined : (
+                            <Tooltip
+                                title={'Day/s left takes into consideration the highest planned item across all goals'}>
+                                <span>
+                                    Days Left: {estimatedDays.total} ({estimatedDays.byOrder})
+                                </span>
+                            </Tooltip>
+                        )}
                     </div>
                 ) : undefined}
 

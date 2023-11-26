@@ -4,6 +4,7 @@
     ILegendaryEvent,
     ILegendaryEventStatic,
     ILegendaryEventTrack,
+    ILEProgression,
     IPointsMilestone,
     ITableRow,
 } from '../interfaces';
@@ -30,7 +31,7 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     readonly chestsMilestones: IChestMilestone[];
 
     readonly shardsPerChest: number;
-    readonly shardsToUnlock: number;
+    readonly progression: ILEProgression;
 
     protected abstract getAlphaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack;
 
@@ -52,7 +53,7 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
         this.chestsMilestones = staticData.chestsMilestones;
 
         this.shardsPerChest = staticData.shardsPerChest;
-        this.shardsToUnlock = staticData.shardsToUnlock;
+        this.progression = staticData.progression;
 
         this.alpha = this.getAlphaTrack(unitsData);
         this.beta = this.getBetaTrack(unitsData);

@@ -152,7 +152,14 @@ export interface ILegendaryEventStatic {
     chestsMilestones: IChestMilestone[];
 
     shardsPerChest: number;
-    shardsToUnlock: number;
+    progression: ILEProgression;
+}
+
+export interface ILEProgression {
+    unlock: number;
+    fourStars: number;
+    fiveStars: number;
+    blueStar: number;
 }
 
 export interface IPointsMilestone {
