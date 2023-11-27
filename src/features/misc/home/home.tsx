@@ -11,7 +11,7 @@ import { sum } from 'lodash';
 export const Home = () => {
     const navigate = useNavigate();
     const { goals, dailyRaids } = useContext(StoreContext);
-    const nextLeMenuItem = menuItemById['vitrivius'];
+    const nextLeMenuItem = menuItemById['vitruvius'];
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
     const topPriorityGoal = goals[0];
@@ -99,7 +99,7 @@ export const Home = () => {
                                     {nextLeMenuItem.icon} {nextLeMenuItem.label}
                                 </div>
                             }
-                            subheader={isEventStarted ? 'December 24' : 'December 31'}
+                            subheader={isEventStarted ? 'December 31' : 'December 24'}
                         />
                         <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
                             {isEventStarted ? timeToEnd : timeToStart}

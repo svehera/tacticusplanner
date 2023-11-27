@@ -67,8 +67,8 @@ const planRoutes: RouteObject[] = [
         element: <LegendaryEvents id={LegendaryEventEnum.Ragnar} />,
     },
     {
-        path: 'plan/le/vitrivius',
-        element: <LegendaryEvents id={LegendaryEventEnum.Vitrivius} />,
+        path: 'plan/le/vitruvius',
+        element: <LegendaryEvents id={LegendaryEventEnum.Vitruvius} />,
     },
 ];
 

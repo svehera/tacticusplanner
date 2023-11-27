@@ -153,7 +153,7 @@ export enum LegendaryEventEnum {
     AunShi = 2,
     Shadowsun = 4,
     Ragnar = 5,
-    Vitrivius = 6,
+    Vitruvius = 6,
 }
 
 export enum PersonalGoalType {

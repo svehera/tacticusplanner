@@ -15,6 +15,7 @@ import rankUpData from '../assets/rankUpData.json';
 import shadowsun from '../assets/legendary-events/Shadowsun.json';
 import aunshi from '../assets/legendary-events/Aunshi.json';
 import ragnar from '../assets/legendary-events/Ragnar.json';
+import vitruvius from '../assets/legendary-events/Vitruvius.json';
 
 import {
     ICampaignBattle,
@@ -62,6 +63,14 @@ export class StaticDataService {
     static readonly recipeDataFull: IRecipeDataFull = this.convertRecipeData();
 
     static readonly legendaryEvents = [
+        {
+            id: vitruvius.id,
+            name: vitruvius.name,
+            stage: vitruvius.eventStage,
+            nextEventDate: vitruvius.nextEventDate,
+            mobileRoute: '/mobile/plan/le/vitruvius',
+            icon: 'vitruvius.png',
+        },
         {
             id: ragnar.id,
             name: ragnar.name,
