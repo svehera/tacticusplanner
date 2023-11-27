@@ -2,7 +2,7 @@
 import { ICampaignsProgress, ICharacter2, ICharProgression, IPersonalData2 } from './interfaces';
 import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from './legendary-events';
 import { RagnarLegendaryEvent } from './legendary-events/ragnar.le';
-import { VitriviusLegendaryEvent } from './legendary-events/vitrivius.le';
+import { VitruviusLegendaryEvent } from './legendary-events/vitruvius.le';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,
@@ -59,8 +59,8 @@ export const getLegendaryEvent = (id: LegendaryEventEnum, characters: ICharacter
             return new AunShiLegendaryEvent(characters);
         case LegendaryEventEnum.Ragnar:
             return new RagnarLegendaryEvent(characters);
-        case LegendaryEventEnum.Vitrivius:
-            return new VitriviusLegendaryEvent(characters);
+        case LegendaryEventEnum.Vitruvius:
+            return new VitruviusLegendaryEvent(characters);
         default:
             return new ShadowSunLegendaryEvent(characters);
     }

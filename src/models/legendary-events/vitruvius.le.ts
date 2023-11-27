@@ -4,9 +4,9 @@ import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
 import { LETrack } from './base.le.track';
 
-import staticData from '../../assets/legendary-events/Vitrivius.json';
+import staticData from '../../assets/legendary-events/Vitruvius.json';
 
-export class VitriviusLegendaryEvent extends LegendaryEventBase {
+export class VitruviusLegendaryEvent extends LegendaryEventBase {
     constructor(unitsData: Array<ICharacter2>) {
         super(unitsData, staticData);
     }
