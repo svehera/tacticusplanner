@@ -12,6 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
 import './whats-new-dialog.css';
+import { isMobile } from 'react-device-detect';
 
 export const WhatsNewDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const { seenAppVersion } = useContext(StoreContext);
@@ -98,9 +99,14 @@ const ReleaseNotes = ({
                 {releaseNotes.map((releaseNote, index) => (
                     <li key={index}>
                         {releaseNote.text}{' '}
-                        {releaseNote.route ? (
+                        {releaseNote.route && !isMobile ? (
                             <span>
                                 (<Link to={releaseNote.route}>link</Link>)
+                            </span>
+                        ) : undefined}
+                        {releaseNote.mobileRoute && isMobile ? (
+                            <span>
+                                (<Link to={releaseNote.mobileRoute}>link</Link>)
                             </span>
                         ) : undefined}
                         {!releaseNote.subPoints?.length ? undefined : (

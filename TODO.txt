@@ -12,8 +12,6 @@
 
             
 Minor improvements:
-    - (Corusame) Would it be possible to add a tool which let's you bring up a list of every character that uses a specific upgrade that you enter? 
-        going further but might be difficult would it be possible for it to show what gear ranks that upgrade is applied to https://discord.com/channels/1146809197023997972/1146809197023997975/1178590954089881620
     - update F.A.Q. and instructions page
     - (xenoblight+) Add "Equipment" table
     - (Fonzoland) If you want to score bonus points with the ordering, you could try to replicate the faction order in game. 

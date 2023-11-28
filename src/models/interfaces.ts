@@ -455,6 +455,7 @@ export interface IVersionReleaseNotes {
 export interface IReleaseNote {
     text: string;
     route?: string;
+    mobileRoute?: string;
     imagePath?: string;
     subPoints?: string[];
     images?: Array<{ path: string; size?: number }>;

@@ -3,9 +3,22 @@
   "releaseNotes": [
     {
       "version": "1.1.8",
-      "date": "November X",
+      "date": "November 28",
       "type": "Update",
       "new": [
+        {
+          "text": "Updated the Upgrades table from the Learn section to display characters and their rank that use specific upgrade (Corusame)",
+          "images": [
+            {
+              "path": "noncraftable.png"
+            },
+            {
+              "path": "craftable.png"
+            }
+          ],
+          "route": "/learn/upgrades",
+          "mobileRoute": "/mobile/learn/upgrades"
+        }
       ],
       "minor": [
         {
@@ -13,6 +26,9 @@
         }
       ],
       "bugFixes": [
+        {
+          "text": "Fixed issue with materials that contains \"Gold\" in name are not showing up in daily raids (NobleDoc OG Roster Gremlin, Argent Dawn)"
+        }
       ]
     },
     {
