@@ -1,6 +1,20 @@
 ﻿{
-  "currentVersion": "1.1.7",
+  "currentVersion": "1.1.8",
   "releaseNotes": [
+    {
+      "version": "1.1.8",
+      "date": "November X",
+      "type": "Update",
+      "new": [
+      ],
+      "minor": [
+        {
+          "text": "Increased inventory item count limit to 1000 from 100 (YourAdHere)"
+        }
+      ],
+      "bugFixes": [
+      ]
+    },
     {
       "version": "1.1.7",
       "date": "November 27",

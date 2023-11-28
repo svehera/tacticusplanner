@@ -142,7 +142,7 @@ export const DailyRaids = () => {
                 cellEditor: 'agNumberCellEditor',
                 cellEditorParams: {
                     min: 0,
-                    max: 100,
+                    max: 1000,
                     precision: 0,
                 },
                 maxWidth: 90,
