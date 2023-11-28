@@ -1,0 +1,43 @@
+- improvements for goals (Next Release)
+    - add possibility to track campaigns progress
+    - remove possibility to edit character and goal type on edit goal dialog
+    - add estimated time to complete for goals
+        - Unlock goal
+            - only locked chars can be selected
+            - add input for current number of shards
+            - add input for campaigns user want ot farm
+            - display estimated time based on settings
+        - Ascend goal
+            - only unlocked chars can be selected
+
+            
+Minor improvements:
+    - (Corusame) Would it be possible to add a tool which let's you bring up a list of every character that uses a specific upgrade that you enter? 
+        going further but might be difficult would it be possible for it to show what gear ranks that upgrade is applied to https://discord.com/channels/1146809197023997972/1146809197023997975/1178590954089881620
+    - update F.A.Q. and instructions page
+    - (xenoblight+) Add "Equipment" table
+    - (Fonzoland) If you want to score bonus points with the ordering, you could try to replicate the faction order in game. 
+        It sorts by char count first, then by release order. It is fairly easy to determine, not sure how easy to display/change dynamically as units are added or removed.
+    - (Argon) Multiple teams in LE planner  https://discord.com/channels/1146809197023997972/1146809197023997975/1178673694869049445
+Bugs:
+ - (sonsonVallano) Abbadon is spelled wrong( Despoiler vs Despolier)
+ - (sonsonVallano) Repair-Kit became Repair Tool.
+ 
+Ideas: 
+ 
+ - improvements for legendary event progress (TBD)
+   - store Kill points, High Score and Defeat all enemies as separate properties with `number` values   
+   - store other restrictions as boolean array
+   - add Slider with input for Kill Points and High Score
+   - create a new model to store LE progress data or even all LE data
+   
+   
+   - Add server side backup
+       - 2 new columns in the Table: LastBackupDate, BackupData
+       - new POST,GET UserBackupData to save/retrieve backup data (LastBackupDate) is updated when new data is saved
+       - include LastBackupDate in GET UserData
+       - add 2 new option to user's menu (Restore Backup/ Create Backup)
+           - Restore Backup - GET UserBackupData and update UI with backup data
+           - Create Backup - POST UserBackupData get current state and store as user backup in server
+       - add reminder to back up data every 7 days
+           - save "nextReminderDate" in local storage and compare with LastBackupDate from server response
