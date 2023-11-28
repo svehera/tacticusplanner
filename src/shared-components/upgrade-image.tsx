@@ -1,4 +1,4 @@
-﻿import { Tooltip } from '@fluentui/react-components';
+﻿import { Tooltip } from '@mui/material';
 import React from 'react';
 
 export const UpgradeImage = ({ material, iconPath, size }: { material: string; iconPath: string; size?: number }) => {
@@ -7,20 +7,18 @@ export const UpgradeImage = ({ material, iconPath, size }: { material: string; i
         const image = require(`../assets/images/upgrades/${iconPath}`);
 
         return (
-            <Tooltip content={material} relationship="label" hideDelay={1000}>
-                <span style={{ display: 'inline-block', height: size ?? 50 }}>
-                    <img
-                        loading={'lazy'}
-                        style={{ pointerEvents: 'none', contentVisibility: 'auto' }}
-                        src={image}
-                        height={size ?? 50}
-                        alt={material}
-                    />
-                </span>
+            <Tooltip title={material} enterTouchDelay={0} placement={'right'}>
+                <div style={{ width: size ?? 50, height: size ?? 50 }}>
+                    <img loading={'lazy'} style={{}} src={image} height={size ?? 50} alt={material} />
+                </div>
             </Tooltip>
         );
     } catch (error) {
         // console.log(`Image for "${material}" with path "${iconPath}" does not exist`);
-        return <span>{material}</span>;
+        return (
+            <Tooltip title={material} enterTouchDelay={0} placement={'right'}>
+                <div>{material}</div>
+            </Tooltip>
+        );
     }
 };

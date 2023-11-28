@@ -150,7 +150,7 @@ export class StaticDataService {
     static convertRecipeData(): IRecipeDataFull {
         const result: IRecipeDataFull = {};
         const upgrades = Object.keys(this.recipeData);
-        const upgradeLcoaitons = this.getUpgradesLocations();
+        const upgradeLocations = this.getUpgradesLocations();
 
         const getRecipe = (
             material: string,
@@ -158,7 +158,7 @@ export class StaticDataService {
             allMaterials: IMaterialRecipeIngredientFull[]
         ): IMaterialRecipeIngredientFull => {
             const upgrade = this.recipeData[material];
-            const locations = upgradeLcoaitons[material] ?? [];
+            const locations = upgradeLocations[material] ?? [];
 
             if (!upgrade || !upgrade.recipe?.length) {
                 const item: IMaterialRecipeIngredientFull = {
@@ -472,7 +472,7 @@ export class StaticDataService {
                 locationsComposed: items[0].locations?.map(location => StaticDataService.campaignsComposed[location]),
             };
         });
-        return keepGold ? result : result.filter(x => !x.material.includes('Gold'));
+        return keepGold ? result : result.filter(x => x.material !== 'Gold');
     }
 
     private static generateDailyRaidsList(

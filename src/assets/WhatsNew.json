@@ -1,6 +1,36 @@
 ﻿{
-  "currentVersion": "1.1.7",
+  "currentVersion": "1.1.8",
   "releaseNotes": [
+    {
+      "version": "1.1.8",
+      "date": "November 28",
+      "type": "Update",
+      "new": [
+        {
+          "text": "Updated the Upgrades table from the Learn section to display characters and their rank that use specific upgrade (Corusame)",
+          "images": [
+            {
+              "path": "noncraftable.png"
+            },
+            {
+              "path": "craftable.png"
+            }
+          ],
+          "route": "/learn/upgrades",
+          "mobileRoute": "/mobile/learn/upgrades"
+        }
+      ],
+      "minor": [
+        {
+          "text": "Increased inventory item count limit to 1000 from 100 (YourAdHere)"
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed issue with materials that contains \"Gold\" in name are not showing up in daily raids (NobleDoc OG Roster Gremlin, Argent Dawn)"
+        }
+      ]
+    },
     {
       "version": "1.1.7",
       "date": "November 27",
