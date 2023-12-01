@@ -389,7 +389,7 @@
   "Duplicate Organ": {
     "material": "Duplicate Organ",
     "craftable": false,
-    "stat": "Damage",
+    "stat": "Armour",
     "rarity": "Epic",
     "icon": "duplicate organ.jpg"
   },
