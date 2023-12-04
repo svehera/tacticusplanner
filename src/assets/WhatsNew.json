@@ -19,6 +19,9 @@
         },
         {
           "text": "Fixed recipe for \"Advanced Combat Stimms\" type from Damage to Armour (xenomorphslayer)"
+        },
+        {
+          "text": "Fixed error on Who You Own when trying to filter characters (Somberlord)"
         }
       ]
     },

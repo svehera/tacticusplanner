@@ -31,11 +31,13 @@ export const WhoYouOwn = () => {
             : characters;
 
         const charactersByFaction = groupBy(filteredCharacters, 'faction');
-        const factionsOrdered = factionsOrder.map(x => ({
-            faction: x,
-            chars: charactersByFaction[x],
-            unlockedCount: charactersByFaction[x].filter(x => x.rank > Rank.Locked).length,
-        }));
+        const factionsOrdered = factionsOrder
+            .filter(x => charactersByFaction[x])
+            .map(x => ({
+                faction: x,
+                chars: charactersByFaction[x],
+                unlockedCount: charactersByFaction[x].filter(x => x.rank > Rank.Locked).length,
+            }));
 
         return factionsOrdered.map(x => (
             <div key={x.faction} style={{ width: 300 }}>
