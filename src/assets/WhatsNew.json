@@ -22,6 +22,9 @@
         },
         {
           "text": "Fixed error on Who You Own when trying to filter characters (Somberlord)"
+        },
+        {
+          "text": "Fixed Traits filter on the Characters screen to include Necrons when Mechanical is selected (sasquach)"
         }
       ]
     },

@@ -208,7 +208,16 @@ export const Characters = () => {
                 if (!traitsFilter.length) {
                     return true;
                 }
-                return traitsFilter.every(type => node.data?.traits.includes(type));
+                return traitsFilter.every(type => {
+                    if (type !== Trait.Mechanical) {
+                        return node.data?.traits.includes(type);
+                    } else {
+                        return (
+                            node.data?.traits.includes(Trait.Mechanical) ||
+                            node.data?.traits.includes(Trait.LivingMetal)
+                        );
+                    }
+                });
             };
 
             if (node.data) {
