@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import { ICharacter2 } from '../models/interfaces';
 
 export const CharacterImage = ({ icon, name, imageSize }: { icon: string; name?: string; imageSize?: number }) => {
     try {
@@ -8,7 +7,7 @@ export const CharacterImage = ({ icon, name, imageSize }: { icon: string; name?:
         const image = require(`../assets/images/characters/${icon}`);
 
         // If the image doesn't exist. return null
-        if (!image) return null;
+        if (!image) return <span>{name}</span>;
         return (
             <img
                 loading={'lazy'}
@@ -20,6 +19,6 @@ export const CharacterImage = ({ icon, name, imageSize }: { icon: string; name?:
         );
     } catch (error) {
         // console.log(`Image with name "${icon}" does not exist`);
-        return null;
+        return <span>{name}</span>;
     }
 };

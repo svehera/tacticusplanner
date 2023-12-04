@@ -1,6 +1,33 @@
 ﻿{
-  "currentVersion": "1.1.8",
+  "currentVersion": "1.1.9",
   "releaseNotes": [
+    {
+      "version": "1.1.9",
+      "date": "December 5",
+      "type": "Update",
+      "new": [
+      ],
+      "minor": [
+      
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed missing/incorrect trait name for Snotglogga (MocarnyJoe)"
+        },
+        {
+          "text": "Fixed \"Duplicated Organ\" type from Damage to Armour (Trueborn JCT)"
+        },
+        {
+          "text": "Fixed recipe for \"Advanced Combat Stimms\" type from Damage to Armour (xenomorphslayer)"
+        },
+        {
+          "text": "Fixed error on Who You Own when trying to filter characters (Somberlord)"
+        },
+        {
+          "text": "Fixed Traits filter on the Characters screen to include Necrons when Mechanical is selected (sasquach)"
+        }
+      ]
+    },
     {
       "version": "1.1.8",
       "date": "November 28",
