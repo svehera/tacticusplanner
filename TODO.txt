@@ -22,6 +22,12 @@ Bugs:
  - (sonsonVallano) Repair-Kit became Repair Tool.
  
 Ideas: 
+
+- (Somberlord) Evolution idea : being able to share your roster with people. Unique, or generated link that bring to a static page similar to "Who you Own"
+
+- (Catch) it would be useful to build multiple teams per track. 
+    In the Vitruvius LE for example I'm planning to use a team for the first few levels and then change to different teams for the higher levels. 
+    It would be great if I could pick out and save these ahead of time so that I could easily see how I'm going to progress.
  
  - improvements for legendary event progress (TBD)
    - store Kill points, High Score and Defeat all enemies as separate properties with `number` values   
