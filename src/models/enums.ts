@@ -73,7 +73,7 @@ export enum Trait {
     DeepStrike = 'Deep Strike',
     TerminatorArmour = 'Terminator Armour',
     Resilient = 'Resilient',
-    BeastSnagga = 'Beast Snagga',
+    BeastSlayer = 'Beast Slayer',
     Mechanic = 'Mechanic',
     Mechanical = 'Mechanical',
     Explodes = 'Explodes',

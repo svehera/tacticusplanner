@@ -1,6 +1,21 @@
 ﻿{
-  "currentVersion": "1.1.8",
+  "currentVersion": "1.1.9",
   "releaseNotes": [
+    {
+      "version": "1.1.9",
+      "date": "December 5",
+      "type": "Update",
+      "new": [
+      ],
+      "minor": [
+      
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed missing/incorrect trait name for Snotglogga (MocarnyJoe)"
+        }
+      ]
+    },
     {
       "version": "1.1.8",
       "date": "November 28",
