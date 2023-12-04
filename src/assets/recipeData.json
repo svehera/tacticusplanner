@@ -389,7 +389,7 @@
   "Duplicate Organ": {
     "material": "Duplicate Organ",
     "craftable": false,
-    "stat": "Damage",
+    "stat": "Armour",
     "rarity": "Epic",
     "icon": "duplicate organ.jpg"
   },
@@ -1408,11 +1408,11 @@
     "recipe": [
       {
         "material": "First Aid Kit",
-        "count": 1
+        "count": 2
       },
       {
         "material": "Combat Stimms",
-        "count": 1
+        "count": 5
       },
       {
         "material": "Gold",

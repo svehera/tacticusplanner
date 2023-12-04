@@ -13,6 +13,12 @@
       "bugFixes": [
         {
           "text": "Fixed missing/incorrect trait name for Snotglogga (MocarnyJoe)"
+        },
+        {
+          "text": "Fixed \"Duplicated Organ\" type from Damage to Armour (Trueborn JCT)"
+        },
+        {
+          "text": "Fixed recipe for \"Advanced Combat Stimms\" type from Damage to Armour (xenomorphslayer)"
         }
       ]
     },
