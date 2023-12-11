@@ -153,16 +153,16 @@ export class StaticDataService {
         const upgradeLocations = this.getUpgradesLocations();
 
         const getRecipe = (
-            material: string,
+            materialId: string,
             count: number,
             allMaterials: IMaterialRecipeIngredientFull[]
         ): IMaterialRecipeIngredientFull => {
-            const upgrade = this.recipeData[material];
-            const locations = upgradeLocations[material] ?? [];
+            const upgrade = this.recipeData[materialId];
+            const locations = upgradeLocations[materialId] ?? [];
 
             if (!upgrade || !upgrade.recipe?.length) {
                 const item: IMaterialRecipeIngredientFull = {
-                    id: material,
+                    id: materialId,
                     label: upgrade?.label ?? upgrade?.material,
                     count,
                     rarity: rarityStringToNumber[upgrade?.rarity as RarityString],
@@ -178,7 +178,7 @@ export class StaticDataService {
                 return item;
             } else {
                 return {
-                    id: material,
+                    id: materialId,
                     label: upgrade.label ?? upgrade.material,
                     count,
                     stat: upgrade.stat,
@@ -218,7 +218,7 @@ export class StaticDataService {
                     iconPath: upgrade.icon ?? '',
                 };
 
-                const groupedData = groupBy(allMaterials, 'material');
+                const groupedData = groupBy(allMaterials, 'id');
 
                 result[upgradeName].allMaterials = map(groupedData, (items, material) => ({
                     id: material,
@@ -461,7 +461,7 @@ export class StaticDataService {
                 }
                 return result;
             }),
-            'material'
+            'id'
         );
 
         const result: IMaterialRecipeIngredientFull[] = map(groupedData, (items, material) => {
