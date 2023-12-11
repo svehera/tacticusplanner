@@ -11,6 +11,7 @@ import { orderBy } from 'lodash';
 import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
 import { UpgradeImage } from '../shared-components/upgrade-image';
 import Button from '@mui/material/Button';
+import ViewSettings from './legendary-events/view-settings';
 
 interface ITableRow {
     material: string;
@@ -23,7 +24,7 @@ interface ITableRow {
 
 export const Inventory = () => {
     const dispatch = useContext(DispatchContext);
-    const { inventory } = useContext(StoreContext);
+    const { inventory, viewPreferences } = useContext(StoreContext);
 
     const [nameFilter, setNameFilter] = useState<string>('');
 
@@ -79,8 +80,13 @@ export const Inventory = () => {
                 minWidth: 150,
                 valueFormatter: params => Rarity[params.data?.rarity ?? 1],
             },
+            {
+                field: 'craftable',
+                hide: !viewPreferences.craftableItemsInInventory,
+                maxWidth: 100,
+            },
         ];
-    }, []);
+    }, [viewPreferences.craftableItemsInInventory]);
 
     const allRows = useMemo<ITableRow[]>(() => {
         return orderBy(
@@ -101,10 +107,10 @@ export const Inventory = () => {
         return allRows.filter(
             upgrade =>
                 upgrade.material.toLowerCase().includes(nameFilter.toLowerCase()) &&
-                !upgrade.craftable &&
-                upgrade.stat !== 'Shard'
+                upgrade.stat !== 'Shard' &&
+                (viewPreferences.craftableItemsInInventory || !upgrade.craftable)
         );
-    }, [nameFilter]);
+    }, [nameFilter, viewPreferences.craftableItemsInInventory]);
 
     const saveChanges = (event: CellEditingStoppedEvent<ITableRow>): void => {
         if (event.data && event.newValue !== event.oldValue) {
@@ -117,12 +123,15 @@ export const Inventory = () => {
     };
 
     const resetUpgrades = (): void => {
-        dispatch.inventory({
-            type: 'ResetUpgrades',
-        });
-        rows.forEach(row => {
-            row.quantity = 0;
-        });
+        const result = confirm('All item quantity will be set to zero (0)');
+        if (result) {
+            dispatch.inventory({
+                type: 'ResetUpgrades',
+            });
+            rows.forEach(row => {
+                row.quantity = 0;
+            });
+        }
     };
 
     return (
@@ -141,6 +150,7 @@ export const Inventory = () => {
                 />
                 <Button onClick={() => resetUpgrades()}>Reset</Button>
             </div>
+            <ViewSettings options={['craftableItemsInInventory']} />
 
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 220px)', width: '100%' }}>
                 <AgGridReact

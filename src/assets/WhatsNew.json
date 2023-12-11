@@ -6,6 +6,23 @@
       "date": "December 11",
       "type": "Update",
       "new": [
+        {
+          "text": "Added possibility to track crafted upgrades quantity. It will have effect on daily raids estimate (YourAdHere, Drewsophila)",
+          "subPoints": [
+            "In daily raids algorithm craftable item will be break down into base upgrades so total for base upgrades will be less",
+            "Added \"Crafted count\" column to the Materials table to display count break from craftable upgrades",
+            "Added \"\nShow craftable items\" toggle on the inventory view",
+            "WARNING: \"Update inventory\" will not work with cfratable items when check on character details dialog"
+          ],
+          "images": [
+            {
+              "path": "inventory.png"
+            },
+            {
+              "path": "daily.png"
+            }
+          ]
+        }
       ],
       "minor": [
       ],

@@ -167,6 +167,11 @@ export const DailyRaids = () => {
                 maxWidth: 75,
             },
             {
+                field: 'craftedCount',
+                headerName: 'Crafted',
+                maxWidth: 75,
+            },
+            {
                 field: 'rarity',
                 maxWidth: 120,
                 valueFormatter: (params: ValueFormatterParams<IMaterialEstimated2>) => Rarity[params.data?.rarity ?? 0],

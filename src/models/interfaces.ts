@@ -329,6 +329,7 @@ export interface IViewPreferences {
     hideSelectedTeams: boolean;
     autoTeams: boolean;
     onlyUnlocked: boolean;
+    craftableItemsInInventory: boolean;
     hideCompleted: boolean;
 }
 
@@ -616,6 +617,7 @@ export interface IMaterialEstimated2 {
     daysOfBattles: number;
     dailyBattles: number;
     count: number;
+    craftedCount: number;
     rarity: Rarity;
     // energyPerBattle: number;
     quantity: number;
