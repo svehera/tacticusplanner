@@ -849,6 +849,7 @@
   },
   "Repair-Kit": {
     "material": "Repair-Kit",
+    "label": "Repair Tool",
     "craftable": false,
     "stat": "Health",
     "rarity": "Rare",

@@ -514,6 +514,7 @@ export interface IRecipeData {
 
 export interface IMaterial {
     material: MaterialName;
+    label?: string;
     rarity: string;
     craftable: boolean;
     stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
@@ -533,7 +534,8 @@ export interface IRecipeDataFull {
 }
 
 export interface IMaterialFull {
-    material: MaterialName;
+    id: string;
+    label: string;
     rarity: Rarity;
     craftable: boolean;
     stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
@@ -546,7 +548,8 @@ export interface IMaterialFull {
 }
 
 export interface IMaterialRecipeIngredientFull {
-    material: MaterialName | 'Gold'; // material name;
+    id: string;
+    label: MaterialName | 'Gold';
     count: number;
     rarity: Rarity;
     stat: string;
@@ -601,7 +604,8 @@ export enum EquipmentType {
 }
 
 export interface IMaterialEstimated2 {
-    material: string;
+    id: string;
+    label: string;
     expectedEnergy: number;
     numberOfBattles: number;
     totalEnergy: number;
@@ -627,7 +631,8 @@ export interface IDailyRaid {
 }
 
 export interface IMaterialRaid {
-    material: string;
+    materialId: string;
+    materialLabel: string;
     totalCount: number;
     materialIconPath: string;
     characters: string[];

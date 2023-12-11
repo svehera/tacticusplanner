@@ -162,7 +162,8 @@ export class StaticDataService {
 
             if (!upgrade || !upgrade.recipe?.length) {
                 const item: IMaterialRecipeIngredientFull = {
-                    material,
+                    id: material,
+                    label: upgrade?.label ?? upgrade?.material,
                     count,
                     rarity: rarityStringToNumber[upgrade?.rarity as RarityString],
                     stat: upgrade?.stat ?? '',
@@ -177,7 +178,8 @@ export class StaticDataService {
                 return item;
             } else {
                 return {
-                    material,
+                    id: material,
+                    label: upgrade.label ?? upgrade.material,
                     count,
                     stat: upgrade.stat,
                     craftable: upgrade.craftable,
@@ -196,7 +198,8 @@ export class StaticDataService {
             const upgrade = this.recipeData[upgradeName];
             if (!upgrade.craftable) {
                 result[upgradeName] = {
-                    material: upgrade.material,
+                    id: upgrade.material,
+                    label: upgrade.label ?? upgrade.material,
                     stat: upgrade.stat,
                     rarity: rarityStringToNumber[upgrade.rarity as RarityString],
                     craftable: upgrade.craftable,
@@ -206,7 +209,8 @@ export class StaticDataService {
             } else {
                 const allMaterials: IMaterialRecipeIngredientFull[] = [];
                 result[upgradeName] = {
-                    material: upgrade.material,
+                    id: upgrade.material,
+                    label: upgrade.label ?? upgrade.material,
                     stat: upgrade.stat,
                     rarity: rarityStringToNumber[upgrade.rarity as RarityString],
                     craftable: upgrade.craftable,
@@ -217,10 +221,11 @@ export class StaticDataService {
                 const groupedData = groupBy(allMaterials, 'material');
 
                 result[upgradeName].allMaterials = map(groupedData, (items, material) => ({
-                    material,
+                    id: material,
                     count: sumBy(items, 'count'),
                     quantity: 0,
                     countLeft: 0,
+                    label: items[0].label,
                     craftable: items[0].craftable,
                     rarity: items[0].rarity,
                     stat: items[0].stat,
@@ -330,7 +335,7 @@ export class StaticDataService {
 
         const raids = this.generateDailyRaidsList(
             settings,
-            materials.filter(x => x.material !== 'Gold')
+            materials.filter(x => x.id !== 'Gold')
         );
 
         const energySpent = sum(settings.completedLocations.flatMap(x => x.locations).map(x => x.energySpent));
@@ -377,7 +382,8 @@ export class StaticDataService {
                         craftable: false,
                         iconPath: upgrade,
                         stat: 'Unknown',
-                        material: upgrade,
+                        id: upgrade,
+                        label: upgrade,
                         character: character.id,
                         priority,
                         recipe: [],
@@ -460,8 +466,9 @@ export class StaticDataService {
 
         const result: IMaterialRecipeIngredientFull[] = map(groupedData, (items, material) => {
             return {
-                material,
+                id: material,
                 count: sumBy(items, 'count'),
+                label: items[0].label,
                 rarity: items[0].rarity,
                 iconPath: items[0].iconPath,
                 stat: items[0].stat,
@@ -472,7 +479,7 @@ export class StaticDataService {
                 locationsComposed: items[0].locations?.map(location => StaticDataService.campaignsComposed[location]),
             };
         });
-        return keepGold ? result : result.filter(x => x.material !== 'Gold');
+        return keepGold ? result : result.filter(x => x.id !== 'Gold');
     }
 
     private static generateDailyRaidsList(
@@ -506,7 +513,8 @@ export class StaticDataService {
                 }
 
                 const materialRaids: IMaterialRaid = {
-                    material: material.material,
+                    materialId: material.id,
+                    materialLabel: material.label,
                     materialIconPath: material.iconPath,
                     totalCount: material.count,
                     locations: [],
@@ -594,7 +602,7 @@ export class StaticDataService {
             }
             if (isToday) {
                 const completedMaterials = settings.completedLocations.filter(
-                    x => !day.raids.some(material => material.material === x.material)
+                    x => !day.raids.some(material => material.materialId === x.materialId)
                 );
                 day.raids.push(...completedMaterials);
             }
@@ -627,11 +635,11 @@ export class StaticDataService {
         });
         const selectedLocations = bestLocations?.length ? bestLocations : material.locationsComposed ?? [];
 
-        const ownedCount = ownedUpgrades[material.material] ?? 0;
+        const ownedCount = ownedUpgrades[material.id] ?? 0;
         const leftCount = ownedCount > material.count ? 0 : material.count - ownedCount;
         if (updateInventory) {
             const updatedCount = ownedCount - material.count;
-            ownedUpgrades[material.material] = updatedCount > 0 ? updatedCount : 0;
+            ownedUpgrades[material.id] = updatedCount > 0 ? updatedCount : 0;
         }
 
         let expectedEnergy = 0;
@@ -684,7 +692,8 @@ export class StaticDataService {
             dailyEnergy,
             daysOfBattles,
             dailyBattles,
-            material: material.material,
+            id: material.id,
+            label: material.label,
             locations: selectedLocations,
             locationsString: locations,
             missingLocationsString,

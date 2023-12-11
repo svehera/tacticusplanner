@@ -1,7 +1,6 @@
 ﻿{
   "currentVersion": "1.2.0",
   "releaseNotes": [
-   
     {
       "version": "1.2.0",
       "date": "December 11",
@@ -9,7 +8,6 @@
       "new": [
       ],
       "minor": [
-
       ],
       "bugFixes": [
         {
@@ -20,6 +18,9 @@
         },
         {
           "text": "Abbadon is spelled wrong( Despoiler vs Despolier) (sonsonVallano)"
+        },
+        {
+          "text": "Repair-Kit became Repair Tool (sonsonVallano)"
         }
       ]
     },
@@ -30,7 +31,6 @@
       "new": [
       ],
       "minor": [
-      
       ],
       "bugFixes": [
         {

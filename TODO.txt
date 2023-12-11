@@ -14,12 +14,7 @@
 Minor improvements:
     - update F.A.Q. and instructions page
     - (xenoblight+) Add "Equipment" table
-    - (Fonzoland) If you want to score bonus points with the ordering, you could try to replicate the faction order in game. 
-        It sorts by char count first, then by release order. It is fairly easy to determine, not sure how easy to display/change dynamically as units are added or removed.
     - (Argon) Multiple teams in LE planner  https://discord.com/channels/1146809197023997972/1146809197023997975/1178673694869049445
-Bugs:
- - (sonsonVallano) Abbadon is spelled wrong( Despoiler vs Despolier)
- - (sonsonVallano) Repair-Kit became Repair Tool.
  
 Ideas: 
 
