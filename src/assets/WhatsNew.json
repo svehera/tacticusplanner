@@ -1,6 +1,22 @@
 ﻿{
-  "currentVersion": "1.1.9",
+  "currentVersion": "1.2.0",
   "releaseNotes": [
+   
+    {
+      "version": "1.2.0",
+      "date": "December 11",
+      "type": "Update",
+      "new": [
+      ],
+      "minor": [
+
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed Roswitha Iron I rank upgrades (xenomorphslayer)"
+        }
+      ]
+    },
     {
       "version": "1.1.9",
       "date": "December 5",
