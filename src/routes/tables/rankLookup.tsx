@@ -75,7 +75,7 @@ export const RankLookup = () => {
 
     const allMaterials = useMemo<IMaterialRecipeIngredientFull[]>(() => {
         const result: IMaterialRecipeIngredientFull[] = StaticDataService.groupBaseMaterials(upgrades, true);
-        const goldIndex = result.findIndex(x => x.material === 'Gold');
+        const goldIndex = result.findIndex(x => x.id === 'Gold');
 
         if (goldIndex > -1) {
             const [gold] = result.splice(goldIndex, 1);
@@ -106,14 +106,13 @@ export const RankLookup = () => {
         return Math.ceil(sum(totalMaterials.map(x => x.expectedEnergy)));
     }, [totalMaterials]);
 
-
     const renderUpgradesMaterials = (materials: Array<IMaterialRecipeIngredientFull>) => (
         <ul>
             {materials.map(item => (
-                <li key={item.material}>
+                <li key={item.id}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                         <span className={Rarity[item.rarity]?.toLowerCase()}>{Rarity[item.rarity]}</span> -{' '}
-                        <UpgradeImage material={item.material} iconPath={item.iconPath} size={30} /> -{' '}
+                        <UpgradeImage material={item.label} iconPath={item.iconPath} size={30} /> -{' '}
                         <span style={{ fontWeight: 'bold' }}>{item.count}</span>
                     </div>
                     {item.recipe?.length ? renderUpgradesMaterials(item.recipe) : undefined}
@@ -134,7 +133,7 @@ export const RankLookup = () => {
             cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
                 const { data } = params;
                 if (data) {
-                    return <UpgradeImage material={data.material} iconPath={data.iconPath} />;
+                    return <UpgradeImage material={data.label} iconPath={data.iconPath} />;
                 }
             },
             equals: () => true,
@@ -279,11 +278,11 @@ export const RankLookup = () => {
                     <h3>{message}</h3>
                     <ul>
                         {upgrades.map((item, index) => (
-                            <li key={item.material + index}>
+                            <li key={item.id + index}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                                     <span>{item.stat}</span> -{' '}
                                     <span className={Rarity[item.rarity]?.toLowerCase()}>{Rarity[item.rarity]}</span> -{' '}
-                                    <UpgradeImage material={item.material} iconPath={item.iconPath} size={30} />
+                                    <UpgradeImage material={item.label} iconPath={item.iconPath} size={30} />
                                 </div>
                                 {item.recipe?.length ? renderUpgradesMaterials(item.recipe) : undefined}
                             </li>

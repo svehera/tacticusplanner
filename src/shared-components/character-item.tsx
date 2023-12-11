@@ -18,7 +18,7 @@ export const CharacterItem = (props: { character: ICharacter2 }) => {
         if (inventoryUpdate.length) {
             dispatch.inventory({
                 type: 'DecrementUpgradeQuantity',
-                upgrades: inventoryUpdate.map(x => ({ id: x.material, count: x.count })),
+                upgrades: inventoryUpdate.map(x => ({ id: x.id, count: x.count })),
             });
         }
     };

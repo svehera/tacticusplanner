@@ -70,7 +70,7 @@ export const CharacterUpgrades = ({
     };
 
     const baseMaterials = useMemo<IMaterialRecipeIngredientFull[]>(() => {
-        const newUpgrades = possibleUpgrades.filter(x => formData.newUpgrades.includes(x.material));
+        const newUpgrades = possibleUpgrades.filter(x => formData.newUpgrades.includes(x.id));
         let upgradesToConsider: IMaterialFull[];
 
         if (character.rank <= formData.originalRank) {
@@ -110,15 +110,15 @@ export const CharacterUpgrades = ({
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {possibleUpgrades.map((x, index) => (
                     <FormControlLabel
-                        key={x.material + index}
+                        key={x.id + index}
                         control={
                             <Checkbox
-                                checked={formData.currentUpgrades.includes(x.material)}
-                                onChange={event => handleUpgradeChange(event, x.material)}
+                                checked={formData.currentUpgrades.includes(x.id)}
+                                onChange={event => handleUpgradeChange(event, x.id)}
                                 inputProps={{ 'aria-label': 'controlled' }}
                             />
                         }
-                        label={`(${x.stat}) ${x.material}`}
+                        label={`(${x.stat}) ${x.label}`}
                     />
                 ))}
             </div>
@@ -150,7 +150,7 @@ export const CharacterUpgrades = ({
                     <ul style={{ padding: 0 }}>
                         {baseMaterials.map((x, index) => (
                             <li
-                                key={x.material + index}
+                                key={x.id + index}
                                 style={{
                                     listStyleType: 'none',
                                     display: 'flex',
@@ -158,11 +158,11 @@ export const CharacterUpgrades = ({
                                     gap: 10,
                                     paddingBottom: 10,
                                 }}>
-                                <UpgradeImage material={x.material} iconPath={x.iconPath} />{' '}
-                                {inventory.upgrades[x.material] ?? 0} - {x.count} ={' '}
-                                {(inventory.upgrades[x.material] ?? 0) - x.count < 0
+                                <UpgradeImage material={x.label} iconPath={x.iconPath} />{' '}
+                                {inventory.upgrades[x.id] ?? 0} - {x.count} ={' '}
+                                {(inventory.upgrades[x.id] ?? 0) - x.count < 0
                                     ? 0
-                                    : (inventory.upgrades[x.material] ?? 0) - x.count}
+                                    : (inventory.upgrades[x.id] ?? 0) - x.count}
                             </li>
                         ))}
                     </ul>

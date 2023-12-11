@@ -18,6 +18,7 @@ type Selection = 'Craftable' | 'Non Craftable' | 'Shards';
 
 interface IUpgradesTableRow {
     upgradeLabel: string;
+    upgradeId: string;
     upgradeIcon: string;
     faction: string;
     rarity: Rarity;
@@ -179,7 +180,8 @@ export const Upgrades = () => {
                 .map(x => x?.campaign + ' ' + x?.nodeNumber)
                 .join(', ');
             return {
-                upgradeLabel: x.material,
+                upgradeLabel: x.label ?? x.material,
+                upgradeId: x.material,
                 upgradeIcon: x.icon ?? '',
                 faction: x.faction ?? '',
                 rarity: rarityStringToNumber[x.rarity as unknown as RarityString],
@@ -196,7 +198,11 @@ export const Upgrades = () => {
 
     const rows = useMemo(() => {
         return rowsData
-            .filter(upgrade => upgrade.upgradeLabel.toLowerCase().includes(nameFilter.toLowerCase()))
+            .filter(
+                upgrade =>
+                    upgrade.upgradeLabel.toLowerCase().includes(nameFilter.toLowerCase()) ||
+                    upgrade.upgradeId.toLowerCase().includes(nameFilter.toLowerCase())
+            )
             .filter(upgrade => {
                 switch (selection) {
                     case 'Craftable': {

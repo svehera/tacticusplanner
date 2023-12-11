@@ -40,7 +40,7 @@ export const LegendaryEvents = ({ id }: { id: LegendaryEventEnum }) => {
                 {legendaryEventStatic?.name} {legendaryEventStatic?.stage}/3 ({legendaryEventStatic?.nextEventDate})
             </Typography>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, margin: '10px 0' }}>
-                <ViewSettings onlyUnlocked />
+                <ViewSettings options={['onlyUnlocked']} />
                 <Button variant="outlined" onClick={handleClick}>
                     Auto-Teams <SettingsIcon />
                 </Button>

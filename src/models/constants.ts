@@ -126,6 +126,7 @@ export const defaultData: IPersonalData2 = {
         autoTeams: true,
         onlyUnlocked: false,
         hideCompleted: false,
+        craftableItemsInInventory: false,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,

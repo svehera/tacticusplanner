@@ -153,16 +153,17 @@ export class StaticDataService {
         const upgradeLocations = this.getUpgradesLocations();
 
         const getRecipe = (
-            material: string,
+            materialId: string,
             count: number,
             allMaterials: IMaterialRecipeIngredientFull[]
         ): IMaterialRecipeIngredientFull => {
-            const upgrade = this.recipeData[material];
-            const locations = upgradeLocations[material] ?? [];
+            const upgrade = this.recipeData[materialId];
+            const locations = upgradeLocations[materialId] ?? [];
 
             if (!upgrade || !upgrade.recipe?.length) {
                 const item: IMaterialRecipeIngredientFull = {
-                    material,
+                    id: materialId,
+                    label: upgrade?.label ?? upgrade?.material,
                     count,
                     rarity: rarityStringToNumber[upgrade?.rarity as RarityString],
                     stat: upgrade?.stat ?? '',
@@ -177,7 +178,8 @@ export class StaticDataService {
                 return item;
             } else {
                 return {
-                    material,
+                    id: materialId,
+                    label: upgrade.label ?? upgrade.material,
                     count,
                     stat: upgrade.stat,
                     craftable: upgrade.craftable,
@@ -196,7 +198,8 @@ export class StaticDataService {
             const upgrade = this.recipeData[upgradeName];
             if (!upgrade.craftable) {
                 result[upgradeName] = {
-                    material: upgrade.material,
+                    id: upgrade.material,
+                    label: upgrade.label ?? upgrade.material,
                     stat: upgrade.stat,
                     rarity: rarityStringToNumber[upgrade.rarity as RarityString],
                     craftable: upgrade.craftable,
@@ -206,7 +209,8 @@ export class StaticDataService {
             } else {
                 const allMaterials: IMaterialRecipeIngredientFull[] = [];
                 result[upgradeName] = {
-                    material: upgrade.material,
+                    id: upgrade.material,
+                    label: upgrade.label ?? upgrade.material,
                     stat: upgrade.stat,
                     rarity: rarityStringToNumber[upgrade.rarity as RarityString],
                     craftable: upgrade.craftable,
@@ -214,13 +218,14 @@ export class StaticDataService {
                     iconPath: upgrade.icon ?? '',
                 };
 
-                const groupedData = groupBy(allMaterials, 'material');
+                const groupedData = groupBy(allMaterials, 'id');
 
                 result[upgradeName].allMaterials = map(groupedData, (items, material) => ({
-                    material,
+                    id: material,
                     count: sumBy(items, 'count'),
                     quantity: 0,
                     countLeft: 0,
+                    label: items[0].label,
                     craftable: items[0].craftable,
                     rarity: items[0].rarity,
                     stat: items[0].stat,
@@ -330,7 +335,7 @@ export class StaticDataService {
 
         const raids = this.generateDailyRaidsList(
             settings,
-            materials.filter(x => x.material !== 'Gold')
+            materials.filter(x => x.id !== 'Gold')
         );
 
         const energySpent = sum(settings.completedLocations.flatMap(x => x.locations).map(x => x.energySpent));
@@ -377,7 +382,8 @@ export class StaticDataService {
                         craftable: false,
                         iconPath: upgrade,
                         stat: 'Unknown',
-                        material: upgrade,
+                        id: upgrade,
+                        label: upgrade,
                         character: character.id,
                         priority,
                         recipe: [],
@@ -398,6 +404,8 @@ export class StaticDataService {
     }
 
     public static getAllMaterials(settings: IEstimatedRanksSettings, upgrades: IMaterialFull[]): IMaterialEstimated2[] {
+        const craftedBaseMaterials = this.inventoryToBaseUpgrades(settings.upgrades, upgrades);
+
         if (settings.preferences?.farmByPriorityOrder) {
             const materials: IMaterialRecipeIngredientFull[] = [];
             const upgradesByCharacter = groupBy(upgrades, 'character');
@@ -406,6 +414,7 @@ export class StaticDataService {
                 materials.push(...characterMaterials);
             }
             const copiedUpgrades = { ...settings.upgrades };
+            const copiedBaseUpgrades = { ...craftedBaseMaterials };
             const result = materials
                 .map(x =>
                     this.calculateMaterialData(
@@ -413,6 +422,7 @@ export class StaticDataService {
                         x,
                         this.selectBestLocations(settings, x.locationsComposed ?? []),
                         copiedUpgrades,
+                        copiedBaseUpgrades,
                         true
                     )
                 )
@@ -430,7 +440,8 @@ export class StaticDataService {
                         settings.campaignsProgress,
                         x,
                         this.selectBestLocations(settings, x.locationsComposed ?? []),
-                        settings.upgrades
+                        settings.upgrades,
+                        craftedBaseMaterials
                     )
                 )
                 .filter(x => !!x) as IMaterialEstimated2[];
@@ -441,6 +452,44 @@ export class StaticDataService {
                 ['desc', 'desc', 'desc', 'desc']
             );
         }
+    }
+
+    private static inventoryToBaseUpgrades(
+        inventory: Record<string, number>,
+        upgrades: IMaterialFull[]
+    ): Record<string, number> {
+        const result: Record<string, number> = {};
+
+        const itemIds: string[] = [];
+
+        function processMaterial(material: IMaterialFull) {
+            if (material.recipe?.length) {
+                material.recipe.forEach(ingredient => {
+                    itemIds.push(ingredient.id);
+                    processMaterial(ingredient);
+                });
+            }
+        }
+
+        upgrades.forEach(material => {
+            processMaterial(material);
+        });
+
+        const processItem = (itemId: string, quantity: number) => {
+            const upgrade = StaticDataService.recipeDataFull[itemId];
+
+            if (upgrade.craftable && upgrade?.allMaterials?.length && itemIds.includes(itemId)) {
+                upgrade?.allMaterials.forEach(item => {
+                    result[item.id] = (result[item.id] ?? 0) + item.count * quantity;
+                });
+            }
+        };
+
+        for (const itemId in inventory) {
+            processItem(itemId, inventory[itemId]);
+        }
+
+        return result;
     }
 
     public static groupBaseMaterials(upgrades: IMaterialFull[], keepGold = false) {
@@ -455,13 +504,14 @@ export class StaticDataService {
                 }
                 return result;
             }),
-            'material'
+            'id'
         );
 
         const result: IMaterialRecipeIngredientFull[] = map(groupedData, (items, material) => {
             return {
-                material,
+                id: material,
                 count: sumBy(items, 'count'),
+                label: items[0].label,
                 rarity: items[0].rarity,
                 iconPath: items[0].iconPath,
                 stat: items[0].stat,
@@ -472,7 +522,7 @@ export class StaticDataService {
                 locationsComposed: items[0].locations?.map(location => StaticDataService.campaignsComposed[location]),
             };
         });
-        return keepGold ? result : result.filter(x => x.material !== 'Gold');
+        return keepGold ? result : result.filter(x => x.id !== 'Gold');
     }
 
     private static generateDailyRaidsList(
@@ -506,7 +556,8 @@ export class StaticDataService {
                 }
 
                 const materialRaids: IMaterialRaid = {
-                    material: material.material,
+                    materialId: material.id,
+                    materialLabel: material.label,
                     materialIconPath: material.iconPath,
                     totalCount: material.count,
                     locations: [],
@@ -594,7 +645,7 @@ export class StaticDataService {
             }
             if (isToday) {
                 const completedMaterials = settings.completedLocations.filter(
-                    x => !day.raids.some(material => material.material === x.material)
+                    x => !day.raids.some(material => material.materialId === x.materialId)
                 );
                 day.raids.push(...completedMaterials);
             }
@@ -619,6 +670,7 @@ export class StaticDataService {
         material: IMaterialRecipeIngredientFull,
         bestLocations: ICampaignBattleComposed[],
         ownedUpgrades: Record<string, number>,
+        craftedBasedUpgrades: Record<string, number>,
         updateInventory = false
     ): IMaterialEstimated2 | null {
         const lockedLocations = (material.locationsComposed ?? []).filter(location => {
@@ -627,11 +679,16 @@ export class StaticDataService {
         });
         const selectedLocations = bestLocations?.length ? bestLocations : material.locationsComposed ?? [];
 
-        const ownedCount = ownedUpgrades[material.material] ?? 0;
-        const leftCount = ownedCount > material.count ? 0 : material.count - ownedCount;
+        const ownedCount = ownedUpgrades[material.id] ?? 0;
+        const craftedCount = craftedBasedUpgrades[material.id] ?? 0;
+        const neededCount = material.count - craftedCount;
+        material.count = neededCount > 0 ? neededCount : 0;
+        const leftCount = ownedCount >= material.count ? 0 : material.count - ownedCount;
         if (updateInventory) {
             const updatedCount = ownedCount - material.count;
-            ownedUpgrades[material.material] = updatedCount > 0 ? updatedCount : 0;
+            ownedUpgrades[material.id] = updatedCount > 0 ? updatedCount : 0;
+            const updatedCrafted = neededCount > 0 ? 0 : Math.abs(neededCount);
+            craftedBasedUpgrades[material.id] = updatedCrafted;
         }
 
         let expectedEnergy = 0;
@@ -684,11 +741,13 @@ export class StaticDataService {
             dailyEnergy,
             daysOfBattles,
             dailyBattles,
-            material: material.material,
+            id: material.id,
+            label: material.label,
             locations: selectedLocations,
             locationsString: locations,
             missingLocationsString,
             count: material.count,
+            craftedCount: craftedCount,
             rarity: material.rarity,
             quantity: ownedCount,
             countLeft: leftCount,

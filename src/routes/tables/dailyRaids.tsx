@@ -96,7 +96,7 @@ export const DailyRaids = () => {
         if (event.data && event.newValue !== event.oldValue) {
             dispatch.inventory({
                 type: 'UpdateUpgradeQuantity',
-                upgrade: event.data.material,
+                upgrade: event.data.id,
                 value: event.data.quantity,
             });
             setHasChanges(true);
@@ -121,7 +121,7 @@ export const DailyRaids = () => {
                 cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
                     const { data } = params;
                     if (data) {
-                        return <UpgradeImage material={data.material} iconPath={data.iconPath} />;
+                        return <UpgradeImage material={data.label} iconPath={data.iconPath} />;
                     }
                 },
                 equals: () => true,
@@ -129,7 +129,8 @@ export const DailyRaids = () => {
                 width: 80,
             },
             {
-                field: 'material',
+                field: 'label',
+                headerName: 'Upgrade',
                 maxWidth: isMobile ? 125 : 300,
             },
             {
@@ -163,6 +164,11 @@ export const DailyRaids = () => {
             },
             {
                 field: 'count',
+                maxWidth: 75,
+            },
+            {
+                field: 'craftedCount',
+                headerName: 'Crafted',
                 maxWidth: 75,
             },
             {
@@ -386,7 +392,7 @@ export const DailyRaids = () => {
                                             {day.raids.map(raid => (
                                                 <MaterialItem
                                                     raid={raid}
-                                                    key={raid.material}
+                                                    key={raid.materialId}
                                                     isFirstDay={index === 0}
                                                     changed={() => setHasChanges(true)}
                                                 />
@@ -583,7 +589,7 @@ const MaterialItem = ({
     return (
         <li style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <UpgradeImage material={raid.material} iconPath={raid.materialIconPath} />
+                <UpgradeImage material={raid.materialLabel} iconPath={raid.materialIconPath} />
                 <Tooltip title={raid.characters.join(', ')}>
                     <span>
                         (
@@ -638,17 +644,17 @@ const RaidItem = ({
         setItemsObtained(event.target.value);
     };
 
-    const collectedItems = useMemo(() => inventory.upgrades[material.material] ?? 0, [inventory.upgrades]);
+    const collectedItems = useMemo(() => inventory.upgrades[material.materialId] ?? 0, [inventory.upgrades]);
 
     const handleAdd = () => {
         const value = itemsObtained === '' ? 0 : Number(itemsObtained);
         if (value > 0) {
             dispatch.inventory({
                 type: 'IncrementUpgradeQuantity',
-                upgrade: material.material,
+                upgrade: material.materialId,
                 value,
             });
-            enqueueSnackbar(`Added ${value} items for ${material.material}`, { variant: 'success' });
+            enqueueSnackbar(`Added ${value} items for ${material.materialLabel}`, { variant: 'success' });
             changed();
         }
 

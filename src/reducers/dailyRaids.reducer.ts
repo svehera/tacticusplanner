@@ -22,7 +22,7 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
         }
         case 'AddCompletedBattle': {
             const existingMaterialIndex = state.completedLocations.findIndex(
-                x => x.material === action.material.material
+                x => x.materialId === action.material.materialId
             );
             if (existingMaterialIndex >= 0) {
                 const existingMaterial = state.completedLocations[existingMaterialIndex];
