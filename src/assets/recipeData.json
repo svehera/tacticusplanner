@@ -87,14 +87,14 @@
   "Archeotech Bionics": {
     "material": "Archeotech Bionics",
     "craftable": false,
-    "stat": "Health",
+    "stat": "Damage",
     "rarity": "Legendary",
     "icon": "archeotech bionics.png"
   },
   "Archeo-Tech Remnant": {
     "material": "Archeo-Tech Remnant",
     "craftable": false,
-    "stat": "Damage",
+    "stat": "Armour",
     "rarity": "Legendary",
     "icon": "archeo-tech remnant.jpg"
   },
@@ -3527,7 +3527,7 @@
   "Kataphron Armour": {
     "material": "Kataphron Armour",
     "rarity": "Legendary",
-    "stat": "Health",
+    "stat": "Armour",
     "faction": "Adeptus Mechanicus",
     "recipe": [
       {
@@ -4363,6 +4363,30 @@
       {
         "material": "Gold",
         "count": 215
+      }
+    ],
+    "craftable": true
+  },
+  "Plasma Coil": {
+    "material": "Plasma Coil",
+    "rarity": "Legendary",
+    "stat": "Damage",
+    "recipe": [
+      {
+        "material": "Blessed Promethium Canister",
+        "count": 3
+      },
+      {
+        "material": "Plasma Cell Crate",
+        "count": 1
+      },
+      {
+        "material": "High-Capacity Power Pack",
+        "count": 1
+      },
+      {
+        "material": "Gold",
+        "count": 650
       }
     ],
     "craftable": true
