@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { Info } from '@mui/icons-material';
 import { UpgradeImage } from './upgrade-image';
 import { StoreContext } from '../reducers/store.provider';
+import { MiscIcon } from './misc-icon';
 
 export const CharacterUpgrades = ({
     upgradesChanges,
@@ -118,7 +119,12 @@ export const CharacterUpgrades = ({
                                 inputProps={{ 'aria-label': 'controlled' }}
                             />
                         }
-                        label={`(${x.stat}) ${x.label}`}
+                        label={
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                <MiscIcon icon={x.stat.toLowerCase() as any} />
+                                <span>{x.label}</span>
+                            </div>
+                        }
                     />
                 ))}
             </div>

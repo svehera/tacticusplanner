@@ -1,6 +1,26 @@
 ﻿{
-  "currentVersion": "1.2.0",
+  "currentVersion": "1.2.1",
   "releaseNotes": [
+    {
+      "version": "1.2.1",
+      "date": "December 12",
+      "type": "Update",
+      "new": [
+        {
+          "text": "Added icons for health, armour and damage on character's details dialog"
+        }
+      ],
+      "minor": [
+        {
+          "text": "Added upgrades for Actus (Sv. Jebem)"
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed Roswitha Iron II rank upgrades (xenomorphslayer)"
+        }
+      ]
+    },
     {
       "version": "1.2.0",
       "date": "December 11",

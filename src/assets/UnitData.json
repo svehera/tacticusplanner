@@ -1710,7 +1710,7 @@
     "Icon": "Ragnar.png"
   },
   {
-    "Name": "Vitruvius Thannek",
+    "Name": "Vitruvius",
     "Faction": "Adeptus Mechanicus",
     "Alliance": "Imperial",
     "Health": 0,
@@ -1737,7 +1737,7 @@
     "Icon": "vitruvius.png"
   },
   {
-    "Name": "Actus Folgorosus",
+    "Name": "Actus",
     "Faction": "Adeptus Mechanicus",
     "Alliance": "Imperial",
     "Health": 0,

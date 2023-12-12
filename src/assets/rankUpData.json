@@ -424,7 +424,7 @@
     ],
     "Iron II": [
       "The Silver Eagle with Swords",
-      "Mission Objective",
+      "Reliquary of Protection",
       "Fine Auxiliary Core",
       "Prey-Sight",
       "Ceramite Lump",
@@ -8577,6 +8577,136 @@
       "Hyperstim",
       "Runic Tasset Plate",
       "Ceramite Plates"
+    ]
+  },
+  "Actus": {
+    "Stone I": [
+      "Adamantium Ore",
+      "Sophisticated Material",
+      "Weapon Anointment Oils",
+      "Weapon parts",
+      "The Iron Phoenix",
+      "Ropes and Chains"
+    ],
+    "Stone II": [
+      "Purity Seal",
+      "Rebreather",
+      "Plasma Cell",
+      "Blessed Weapon Oils",
+      "Minor Bionic Enhancement",
+      "Scrolls"
+    ],
+    "Stone III": [
+      "Air Purificator",
+      "Cloak",
+      "Single Power Pack",
+      "Basic Auxiliary Core",
+      "Bionic Enhancement",
+      "Writings"
+    ],
+    "Iron I": [
+      "Oath Seal",
+      "Adamantium Lump",
+      "Plasma Cell",
+      "Locator Beacon",
+      "Reinforced Cables",
+      "Holster and Pockets"
+    ],
+    "Iron II": [
+      "Subdermal Plating",
+      "Cloak",
+      "Power Pack Bundle",
+      "Divinator Class Auspex",
+      "Electromantic Cable Bundle",
+      "Writings"
+    ],
+    "Iron III": [
+      "Valuable Fabric",
+      "Sophisticated Material Ingot",
+      "Powerful Auxiliary Core",
+      "Motive Force Capacitator",
+      "Grandiloquent Litanical",
+      "The Gold Phoenix"
+    ],
+    "Bronze I": [
+      "Blessed Purity Seal",
+      "Adamantium Bar",
+      "Classified Data-slate",
+      "High-capacity Power Pack",
+      "Repair Tool",
+      "The Phoenix Ascendant"
+    ],
+    "Bronze II": [
+      "Fine Cloak",
+      "Cogwheel Crest",
+      "Anointed Auxiliary Core",
+      "Bionic Eye",
+      "Servo-Arc Claw",
+      "Advanced Bionics"
+    ],
+    "Bronze III": [
+      "Unyielding Rivets",
+      "Enhanced Cogwheel Crest",
+      "Enhanced Motive Force Capacitator",
+      "Sanctified Weapon Oils",
+      "Mars-Pattern Bionics",
+      "Metal Decorative Skull"
+    ],
+    "Silver I": [
+      "Adamantium Sheet",
+      "Enhanced Cogwheel Crest",
+      "Bionic Neural Pathways",
+      "Enhanced Motive Force Capacitator",
+      "Golden Ornamental Skull",
+      "Servo-Arc Claw"
+    ],
+    "Silver II": [
+      "Decorated Cloak",
+      "Enhanced Cogwheel Crest",
+      "Anointed Auxiliary Core",
+      "Relic Motive Force Capacitator",
+      "Greater Reliquary of Protection",
+      "Blessed Cogitator"
+    ],
+    "Silver III": [
+      "Adamantium Plates",
+      "Archeo-Tech Remnant",
+      "Enhanced Motive Force Capacitator",
+      "Digital Weapons",
+      "Servo-Arc Claw",
+      "Advanced Exospine"
+    ],
+    "Gold I": [
+      "Divine Cloak",
+      "Artificer Cogwheel Crest",
+      "Archeotech Bionics",
+      "Relic Auxiliary Core",
+      "Relic Bionic Enhancement",
+      "Mechadendrite Hive"
+    ],
+    "Gold II": [
+      "Seal of the Emperor's Protection",
+      "Artificer Cogwheel Crest",
+      "Digital Weapons",
+      "Relic Motive Force Capacitator",
+      "Legendary Reliquary of Protection",
+      "Sanctus Canister"
+    ],
+    "Gold III": [
+      "Divine Cloak",
+      "Kataphron Armour",
+      "Plasma Coil",
+      "Prehensile Dataspike",
+      "Grandiose Skull Ornament",
+      "Mechadendrite Hive"
+    ],
+    "Diamond I": [
+      "Adamantium Plates",
+      "Kataphron Armour",
+      "Plasma Coil",
+      "Prehensile Dataspike",
+      "Tome of Arcane Knowledge",
+      "Sanctus Canister"
     ]
   }
 }
