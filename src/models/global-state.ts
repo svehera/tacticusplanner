@@ -83,9 +83,8 @@ export class GlobalState implements IGlobalState {
 
     static fixNames<T>(obj: T): T {
         const fixName = {
-            'Aleph-null': 'Aleph-Null',
-            "Aun'shi": "Aun'Shi",
             'Abaddon The Despolier': 'Abaddon The Despoiler',
+            'Actus Folgorosus': 'Actus',
         };
 
         let result = JSON.stringify(obj);
