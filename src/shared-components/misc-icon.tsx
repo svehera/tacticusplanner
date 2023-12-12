@@ -17,7 +17,7 @@ const icons = {
 };
 
 export const MiscIcon = ({ icon }: { icon: keyof typeof icons }) => {
-    const details = icons[icon];
+    const details = icons[icon] ?? { file: '', label: icon };
     try {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const image = require(`../assets/images/icons/${details.file}`);
