@@ -6,6 +6,9 @@
       "date": "December 12",
       "type": "Update",
       "new": [
+        {
+          "text": "Added icons for health, armour and damage on character's details dialog"
+        }
       ],
       "minor": [
         {
