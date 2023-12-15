@@ -1623,7 +1623,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "arbiter_s gaze.jpg"
   },
   "Artificer Cogwheel Crest": {
     "material": "Artificer Cogwheel Crest",
@@ -1644,7 +1645,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "artificer cogwheel crest.png"
   },
   "Artificer Flak Plates": {
     "material": "Artificer Flak Plates",
@@ -1665,7 +1667,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "artificer flak plates.png"
   },
   "Athenaean Scroll": {
     "material": "Athenaean Scroll",
@@ -1686,7 +1689,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "athenaean scroll.jpg"
   },
   "Autoloader": {
     "material": "Autoloader",
@@ -1710,7 +1714,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "autoloader.jpg"
   },
   "Auto-Reactive Stimm Injector": {
     "material": "Auto-Reactive Stimm Injector",
@@ -1731,7 +1736,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "auto-reactive stimm injector.jpg"
   },
   "Bastion Honour": {
     "material": "Bastion Honour",
@@ -1756,7 +1762,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "bastion honour.jpg"
   },
   "Battle Plan": {
     "material": "Battle Plan",
@@ -1780,7 +1787,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "battle plan.png"
   },
   "Bell of Despair": {
     "material": "Bell of Despair",
@@ -1801,7 +1809,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "bell of despair.jpg"
   },
   "Belt of Frag Grenades": {
     "material": "Belt of Frag Grenades",
@@ -1817,7 +1826,8 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "belt of frag grenades.png"
   },
   "Belt of Krak Grenades": {
     "material": "Belt of Krak Grenades",
@@ -1833,7 +1843,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "belt of krak grenades.png"
   },
   "Bionic Enhancement": {
     "material": "Bionic Enhancement",
@@ -1849,7 +1860,8 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "bionic enhancement.png"
   },
   "Black Rune": {
     "material": "Black Rune",
@@ -1874,7 +1886,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "black rune.jpg"
   },
   "Blessed Bolts": {
     "material": "Blessed Bolts",
@@ -1899,7 +1912,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "blessed bolts.jpg"
   },
   "Blessed Promethium Tank": {
     "material": "Blessed Promethium Tank",
@@ -1919,7 +1933,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "blessed promethium tank.png"
   },
   "Blessed Purity Seal": {
     "material": "Blessed Purity Seal",
@@ -1943,7 +1958,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "blessed purity seal.png"
   },
   "Blessed Weapon Oils": {
     "material": "Blessed Weapon Oils",
@@ -1963,7 +1979,8 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "blessed weapon oils.png"
   },
   "Bolts of Furious Vengeance": {
     "material": "Bolts of Furious Vengeance",
@@ -1984,7 +2001,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "bolts of furious vengeance.jpg"
   },
   "Bolts of Judgement": {
     "material": "Bolts of Judgement",
@@ -2001,7 +2019,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "bolts of judgement.jpg"
   },
   "Boonstone": {
     "material": "Boonstone",
@@ -2026,7 +2045,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "boonstone.jpg"
   },
   "Bosspole": {
     "material": "Bosspole",
@@ -2051,7 +2071,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "bosspole.jpg"
   },
   "Box of Ammo": {
     "material": "Box of Ammo",
@@ -2071,7 +2092,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "box of ammo.png"
   },
   "Box of Rations": {
     "material": "Box of Rations",
@@ -2091,7 +2113,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "box of rations.png"
   },
   "Brutal Iron Jaw": {
     "material": "Brutal Iron Jaw",
@@ -2108,7 +2131,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "brutal iron jaw.jpg"
   },
   "Cabalistic Implements": {
     "material": "Cabalistic Implements",
@@ -2125,7 +2149,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "cabalistic implements.jpg"
   },
   "Calibanite Hood": {
     "material": "Calibanite Hood",
@@ -2142,7 +2167,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "calibanite hood.jpg"
   },
   "Candelabrum of Burning Wrath": {
     "material": "Candelabrum of Burning Wrath",
@@ -2163,7 +2189,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "candelabrum of burning wrath.jpg"
   },
   "Ceramite Bar": {
     "material": "Ceramite Bar",
@@ -2183,7 +2210,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "ceramite bar.png"
   },
   "Ceramite Plates": {
     "material": "Ceramite Plates",
@@ -2207,7 +2235,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "ceramite plates.png"
   },
   "Ceramite Sheet": {
     "material": "Ceramite Sheet",
@@ -2227,7 +2256,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "ceramite sheet.png"
   },
   "Chain of Righteous Zeal": {
     "material": "Chain of Righteous Zeal",
@@ -2244,7 +2274,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "chain of righteous zeal.jpg"
   },
   "Chain of Zealous Wrath": {
     "material": "Chain of Zealous Wrath",
@@ -2265,7 +2296,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "chain of zealous wrath.jpg"
   },
   "Cloud of Flies": {
     "material": "Cloud of Flies",
@@ -2290,7 +2322,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "cloud of flies.jpg"
   },
   "Codex Astartes": {
     "material": "Codex Astartes",
@@ -2315,7 +2348,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "codex astartes.jpg"
   },
   "Crusader's Tabbard": {
     "material": "Crusader's Tabbard",
@@ -2332,7 +2366,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "crusader_s tabbard.jpg"
   },
   "Cybork Body Parts": {
     "material": "Cybork Body Parts",
@@ -2357,7 +2392,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "cybork body parts.jpg"
   },
   "Daemon Shells": {
     "material": "Daemon Shells",
@@ -2382,7 +2418,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "daemon shells.jpg"
   },
   "Daemonic Armor Trim": {
     "material": "Daemonic Armor Trim",
@@ -2399,7 +2436,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "daemonic armor trim.png"
   },
   "Death Bell": {
     "material": "Death Bell",
@@ -2416,7 +2454,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "death bell.jpg"
   },
   "Death Shroud": {
     "material": "Death Shroud",
@@ -2433,7 +2472,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "death shroud.jpg"
   },
   "Decorated Cloak": {
     "material": "Decorated Cloak",
@@ -2457,7 +2497,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "decorated cloak.png"
   },
   "Ded 'Ard Plate": {
     "material": "Ded 'Ard Plate",
@@ -2474,7 +2515,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "ded _ard plate.jpg"
   },
   "Ded Brutal Iron Jaw": {
     "material": "Ded Brutal Iron Jaw",
@@ -2495,7 +2537,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "ded brutal iron jaw.jpg"
   },
   "Ded Shiny 'Ard Plate": {
     "material": "Ded Shiny 'Ard Plate",
@@ -2516,7 +2559,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "ded shiny _ard plate.jpg"
   },
   "Digital Weapons": {
     "material": "Digital Weapons",
@@ -2540,7 +2584,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "digital weapons.png"
   },
   "Divine Cloak": {
     "material": "Divine Cloak",
@@ -2564,7 +2609,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "divine cloak.png"
   },
   "Electromantic Cable Bundle": {
     "material": "Electromantic Cable Bundle",
@@ -2588,7 +2634,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "electromantic cable bundle.jpg"
   },
   "Enhanced Cogwheel Crest": {
     "material": "Enhanced Cogwheel Crest",
@@ -2605,7 +2652,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "enhanced cogwheel crest.png"
   },
   "Enhanced Motive Force Capacitator": {
     "material": "Enhanced Motive Force Capacitator",
@@ -2622,7 +2670,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "enhanced motive force capacitator.png"
   },
   "Ensorcelled Infusion": {
     "material": "Ensorcelled Infusion",
@@ -2639,7 +2688,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "ensorcelled infusion.png"
   },
   "Epaulettes": {
     "material": "Epaulettes",
@@ -2656,7 +2706,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "epaulettes.png"
   },
   "Epaulettes of Renown": {
     "material": "Epaulettes of Renown",
@@ -2677,7 +2728,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "epaulettes of renown.png"
   },
   "Exospine": {
     "material": "Exospine",
@@ -2701,7 +2753,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "exospine.jpg"
   },
   "Exquisite Medical Supplies": {
     "material": "Exquisite Medical Supplies",
@@ -2721,7 +2774,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "exquisite medical supplies.jpg"
   },
   "Filligrane Psytronome": {
     "material": "Filligrane Psytronome",
@@ -2738,7 +2792,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "filligrane psytronome.jpg"
   },
   "Filligrane Wraithbone Plate": {
     "material": "Filligrane Wraithbone Plate",
@@ -2755,7 +2810,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "filligrane wraithbone plate.jpg"
   },
   "Fine Auxiliary Core": {
     "material": "Fine Auxiliary Core",
@@ -2771,7 +2827,8 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "fine auxiliary core.png"
   },
   "Fine Cloak": {
     "material": "Fine Cloak",
@@ -2791,7 +2848,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "fine cloak.png"
   },
   "First Aid Kit": {
     "material": "First Aid Kit",
@@ -2811,7 +2869,8 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "first aid kit.png"
   },
   "Frostblade": {
     "material": "Frostblade",
@@ -2836,7 +2895,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "frostblade.jpg"
   },
   "Grand Helmet Trophy": {
     "material": "Grand Helmet Trophy",
@@ -2856,7 +2916,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "grand helmet trophy.png"
   },
   "Grand Purity Seal": {
     "material": "Grand Purity Seal",
@@ -2876,7 +2937,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "grand purity seal.png"
   },
   "Grand Skull Trophy": {
     "material": "Grand Skull Trophy",
@@ -2900,7 +2962,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "grand skull trophy.png"
   },
   "Grand Strategy": {
     "material": "Grand Strategy",
@@ -2944,7 +3007,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "grandiloquent litanical.png"
   },
   "Grandiose Skull Ornament": {
     "material": "Grandiose Skull Ornament",
@@ -2968,7 +3032,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "grandiose skull ornament.jpg"
   },
   "Great Cult Implements": {
     "material": "Great Cult Implements",
@@ -2989,7 +3054,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "great cult implements.jpg"
   },
   "Greater Reliquary of Protection": {
     "material": "Greater Reliquary of Protection",
@@ -3013,7 +3079,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "greater reliquary of protection.png"
   },
   "Heirloom Entrenching Tool": {
     "material": "Heirloom Entrenching Tool",
@@ -3034,7 +3101,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "heirloom entrenching tool.jpg"
   },
   "Hellfury Bolts": {
     "material": "Hellfury Bolts",
@@ -3059,7 +3127,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "hellfury bolts.jpg"
   },
   "High-Capacity Power Pack": {
     "material": "High-Capacity Power Pack",
@@ -3079,7 +3148,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "high-capacity power pack.png"
   },
   "High-Grade Flak Plates": {
     "material": "High-Grade Flak Plates",
@@ -3096,7 +3166,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "high-grade flak plates.png"
   },
   "Holster and Pockets": {
     "material": "Holster and Pockets",
@@ -3116,7 +3187,8 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "holster and pockets.png"
   },
   "Holy Corset Armor": {
     "material": "Holy Corset Armor",
@@ -3137,7 +3209,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "holy corset armor.jpg"
   },
   "Hymn of Sacrifice": {
     "material": "Hymn of Sacrifice",
@@ -3154,7 +3227,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "hymn of sacrifice.png"
   },
   "Hymn of the Divine": {
     "material": "Hymn of the Divine",
@@ -3175,7 +3249,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "hymn of the divine.jpg"
   },
   "Hyper-Adaptive Adrenal Glands": {
     "material": "Hyper-Adaptive Adrenal Glands",
@@ -3196,7 +3271,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "hyper-adaptive adrenal glands.png"
   },
   "Hyper-Adaptive Chitin Carapace": {
     "material": "Hyper-Adaptive Chitin Carapace",
@@ -3217,7 +3293,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "hyper-adaptive chitin carapace.png"
   },
   "Hyper-Adaptive Toxin Sacs": {
     "material": "Hyper-Adaptive Toxin Sacs",
@@ -3238,7 +3315,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "hyper-adaptive  toxin sacs.png"
   },
   "Hypermetabolic Acceleration": {
     "material": "Hypermetabolic Acceleration",
@@ -3263,7 +3341,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "hypermetabolic acceleration.png"
   },
   "Hyperstim": {
     "material": "Hyperstim",
@@ -3287,7 +3366,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "hyperstim.png"
   },
   "Ice Troll Hide": {
     "material": "Ice Troll Hide",
@@ -3304,7 +3384,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "ice troll hide.jpg"
   },
   "Ice Wyrm Hide": {
     "material": "Ice Wyrm Hide",
@@ -3325,7 +3406,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "ice wyrm hide.jpg"
   },
   "Icon of Daemonic Vengeance": {
     "material": "Icon of Daemonic Vengeance",
@@ -3342,7 +3424,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "icon of daemonic vengeance.png"
   },
   "Icon of Infernal Vengeance": {
     "material": "Icon of Infernal Vengeance",
@@ -3363,7 +3446,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "icon of infernal vengeance.png"
   },
   "Immaterial Shroud": {
     "material": "Immaterial Shroud",
@@ -3384,7 +3468,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "immaterial shroud.jpg"
   },
   "Implant Attack": {
     "material": "Implant Attack",
@@ -3409,7 +3494,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "implant attack.png"
   },
   "Imposing Horns": {
     "material": "Imposing Horns",
@@ -3433,7 +3519,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "imposing horns.png"
   },
   "Impressive Armor Trim": {
     "material": "Impressive Armor Trim",
@@ -3453,7 +3540,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "impressive armor trim.png"
   },
   "Infernal Armor Trim": {
     "material": "Infernal Armor Trim",
@@ -3474,7 +3562,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "infernal armor trim.png"
   },
   "Infernal Eye of Horus": {
     "material": "Infernal Eye of Horus",
@@ -3495,7 +3584,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "infernal eye of horus.png"
   },
   "Inner Circle Hood": {
     "material": "Inner Circle Hood",
@@ -3516,7 +3606,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "inner circle hood.jpg"
   },
   "Iridium Plating": {
     "material": "Iridium Plating",
@@ -3541,7 +3632,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "iridium plating.jpg"
   },
   "Kataphron Armour": {
     "material": "Kataphron Armour",
@@ -3566,7 +3658,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "kataphron armour.png"
   },
   "Key of Achrabael": {
     "material": "Key of Achrabael",
@@ -3587,7 +3680,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "key of achrabael.jpg"
   },
   "Key of Knowledge": {
     "material": "Key of Knowledge",
@@ -3604,7 +3698,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "key of knowledge.jpg"
   },
   "Kraken Tooth Necklace": {
     "material": "Kraken Tooth Necklace",
@@ -3625,7 +3720,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "kraken tooth necklace.jpg"
   },
   "Legendary Reliquary of Protection": {
     "material": "Legendary Reliquary of Protection",
@@ -3649,7 +3745,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "legendary reliquary of protection.png"
   },
   "Legendary Reliquary of Vengeance": {
     "material": "Legendary Reliquary of Vengeance",
@@ -3673,7 +3770,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "legendary reliquary of vengeance.jpg"
   },
   "Lights of Purgation": {
     "material": "Lights of Purgation",
@@ -3690,7 +3788,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "lights of purgation.jpg"
   },
   "Magazine": {
     "material": "Magazine",
@@ -3706,7 +3805,8 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "magazine.png"
   },
   "Malefic Scroll": {
     "material": "Malefic Scroll",
@@ -3723,7 +3823,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "malefic scroll.jpg"
   },
   "Mark of Chaos Undivided": {
     "material": "Mark of Chaos Undivided",
@@ -3748,7 +3849,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "mark of chaos undivided.jpg"
   },
   "Mark of Nurgle": {
     "material": "Mark of Nurgle",
@@ -3773,7 +3875,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "mark of nurgle.jpg"
   },
   "Mark of Tzeentch": {
     "material": "Mark of Tzeentch",
@@ -3798,7 +3901,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "mark of tzeentch.jpg"
   },
   "Mars-Pattern Bionics": {
     "material": "Mars-Pattern Bionics",
@@ -3818,7 +3922,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "mars-pattern bionics.jpg"
   },
   "Mechadendrite Hive": {
     "material": "Mechadendrite Hive",
@@ -3839,7 +3944,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "mechadendrite hive.png"
   },
   "Medallion Resolute": {
     "material": "Medallion Resolute",
@@ -3864,7 +3970,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "medallion resolute.jpg"
   },
   "Medical Supply Crate": {
     "material": "Medical Supply Crate",
@@ -3884,7 +3991,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "medical supply crate.jpg"
   },
   "Mesh Weave Garment": {
     "material": "Mesh Weave Garment",
@@ -3908,7 +4016,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "mesh weave garment.jpg"
   },
   "Molecular Vaporiser": {
     "material": "Molecular Vaporiser",
@@ -3933,7 +4042,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "molecular vaporiser.jpg"
   },
   "Multi-Spectrum Sensor Suite": {
     "material": "Multi-Spectrum Sensor Suite",
@@ -3954,7 +4064,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "multi-spectrum sensor suite.jpg"
   },
   "Murderous Spikes": {
     "material": "Murderous Spikes",
@@ -3978,7 +4089,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "murderous spikes.jpg"
   },
   "Mutation: Impenetrable Skin": {
     "material": "Mutation: Impenetrable Skin",
@@ -4002,7 +4114,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "mutation_ impenetrable skin.png"
   },
   "Mutation: Metallic Skin": {
     "material": "Mutation: Metallic Skin",
@@ -4022,7 +4135,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "mutation_ metallic skin.png"
   },
   "Mutation: Otherworldly Power": {
     "material": "Mutation: Otherworldly Power",
@@ -4046,7 +4160,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "mutation_ otherworldly power.png"
   },
   "Mutation: Regenerative Blood": {
     "material": "Mutation: Regenerative Blood",
@@ -4070,7 +4185,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "mutation_ regenerative blood.png"
   },
   "Mutation: Warped Skin": {
     "material": "Mutation: Warped Skin",
@@ -4094,7 +4210,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "mutation_ warped skin.jpg"
   },
   "Mysterious Device": {
     "material": "Mysterious Device",
@@ -4118,7 +4235,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "mysterious device.jpg"
   },
   "Necrodermis Nano Scarab Swarm": {
     "material": "Necrodermis Nano Scarab Swarm",
@@ -4139,7 +4257,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "necrodermis nano scarab swarm.png"
   },
   "Nob Teef": {
     "material": "Nob Teef",
@@ -4156,7 +4275,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "nob teef.jpg"
   },
   "Octarian Crusade Seal": {
     "material": "Octarian Crusade Seal",
@@ -4181,7 +4301,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "octarian crusade seal.jpg"
   },
   "Ominous Xenos Glyphs": {
     "material": "Ominous Xenos Glyphs",
@@ -4205,7 +4326,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "ominous xenos glyphs.jpg"
   },
   "Otherworldly Energy Reservoir": {
     "material": "Otherworldly Energy Reservoir",
@@ -4221,7 +4343,8 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "otherworldly energy reservoir.jpg"
   },
   "Otherworldly Nano Swarm": {
     "material": "Otherworldly Nano Swarm",
@@ -4241,7 +4364,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "otherworldly nano swarm.png"
   },
   "Overcapacitator": {
     "material": "Overcapacitator",
@@ -4265,7 +4389,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "overcapacitator.jpg"
   },
   "Perfidious Relic of the Unforgiven": {
     "material": "Perfidious Relic of the Unforgiven",
@@ -4290,7 +4415,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "perfidious relic of the unforgiven.jpg"
   },
   "Personal Saga": {
     "material": "Personal Saga",
@@ -4315,7 +4441,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "personal saga.jpg"
   },
   "Phylacterine Hive": {
     "material": "Phylacterine Hive",
@@ -4340,7 +4467,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "phylacterine hive.jpg"
   },
   "Plasma Cell Bundle": {
     "material": "Plasma Cell Bundle",
@@ -4364,7 +4492,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "plasma cell bundle.png"
   },
   "Plasma Cell Crate": {
     "material": "Plasma Cell Crate",
@@ -4384,7 +4513,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "plasma cell crate.jpg"
   },
   "Plasma Coil": {
     "material": "Plasma Coil",
@@ -4408,7 +4538,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "plasma coil.png"
   },
   "Portentious Xenos Glyphs": {
     "material": "Portentious Xenos Glyphs",
@@ -4432,7 +4563,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "portentious xenos glyphs.jpg"
   },
   "Power Pack Bundle": {
     "material": "Power Pack Bundle",
@@ -4448,7 +4580,8 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "power pack bundle.png"
   },
   "Powered Blade": {
     "material": "Powered Blade",
@@ -4472,7 +4605,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "powered blade.jpg"
   },
   "Powerful Auxiliary Core": {
     "material": "Powerful Auxiliary Core",
@@ -4492,7 +4626,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "powerful auxiliary core.png"
   },
   "Powerful Micro-Generator": {
     "material": "Powerful Micro-Generator",
@@ -4512,7 +4647,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "powerful micro-generator.png"
   },
   "Prehensile Dataspike": {
     "material": "Prehensile Dataspike",
@@ -4537,7 +4673,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "prehensile dataspike.png"
   },
   "Prey-Sight": {
     "material": "Prey-Sight",
@@ -4561,7 +4698,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "prey-sight.png"
   },
   "Protocol of the Eternal Guardian": {
     "material": "Protocol of the Eternal Guardian",
@@ -4582,7 +4720,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "protocol of the eternal guardian.jpg"
   },
   "Psychic Focus": {
     "material": "Psychic Focus",
@@ -4606,7 +4745,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "psychic focus.png"
   },
   "Ratiocination Targeting": {
     "material": "Ratiocination Targeting",
@@ -4630,7 +4770,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "ratiocination targeting.jpg"
   },
   "Razorsharp Spikes": {
     "material": "Razorsharp Spikes",
@@ -4650,7 +4791,8 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "razorsharp spikes.png"
   },
   "Refined Combat Stimms": {
     "material": "Refined Combat Stimms",
@@ -4674,7 +4816,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "refined combat stimms.jpg"
   },
   "Regenerating Nano Swarm": {
     "material": "Regenerating Nano Swarm",
@@ -4691,7 +4834,8 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "regenerating nano swarm.png"
   },
   "Relic Auxiliary Core": {
     "material": "Relic Auxiliary Core",
@@ -4711,7 +4855,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "relic auxiliary core.jpg"
   },
   "Relic Bionic Enhancement": {
     "material": "Relic Bionic Enhancement",
@@ -4735,7 +4880,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "relic bionic enhancement.jpg"
   },
   "Relic Micro-Generator": {
     "material": "Relic Micro-Generator",
@@ -4755,7 +4901,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "relic micro-generator.jpg"
   },
   "Relic Motive Force Capacitator": {
     "material": "Relic Motive Force Capacitator",
@@ -4776,7 +4923,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "relic motive force capacitator.png"
   },
   "Relic Tasset Plate": {
     "material": "Relic Tasset Plate",
@@ -4800,7 +4948,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "relic tasset plate.png"
   },
   "Resplendent Spirit Stone": {
     "material": "Resplendent Spirit Stone",
@@ -4821,7 +4970,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "resplendent spirit stone.jpg"
   },
   "Resurrection Protocols": {
     "material": "Resurrection Protocols",
@@ -4838,7 +4988,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "resurrection protocols.png"
   },
   "Roses of Sacrifice": {
     "material": "Roses of Sacrifice",
@@ -4855,7 +5006,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "roses of sacrifice.png"
   },
   "Roses of the Divine": {
     "material": "Roses of the Divine",
@@ -4876,7 +5028,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "roses of the divine.png"
   },
   "Runic Talisman": {
     "material": "Runic Talisman",
@@ -4893,7 +5046,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "runic talisman.jpg"
   },
   "Runic Tasset Plate": {
     "material": "Runic Tasset Plate",
@@ -4918,7 +5072,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "runic tasset plate.png"
   },
   "Sabbat-Pattern Visor": {
     "material": "Sabbat-Pattern Visor",
@@ -4943,7 +5098,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "sabbat-pattern visor.jpg"
   },
   "Sanctified Corset Armor": {
     "material": "Sanctified Corset Armor",
@@ -4960,7 +5116,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "sanctified corset armor.png"
   },
   "Sanctified Reliquary of Protection": {
     "material": "Sanctified Reliquary of Protection",
@@ -4980,7 +5137,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "sanctified reliquary of protection.png"
   },
   "Sanctified Weapon Oils": {
     "material": "Sanctified Weapon Oils",
@@ -5004,7 +5162,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "sanctified weapon oils.jpg"
   },
   "Sanctus Canister": {
     "material": "Sanctus Canister",
@@ -5029,7 +5188,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "sanctus canister.png"
   },
   "Sash of Honors": {
     "material": "Sash of Honors",
@@ -5054,7 +5214,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "sash of honors.jpg"
   },
   "Scale-Plate Mantle": {
     "material": "Scale-Plate Mantle",
@@ -5074,7 +5235,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "scale-plate mantle.jpg"
   },
   "Scale-Plate Strand": {
     "material": "Scale-Plate Strand",
@@ -5098,7 +5260,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "scale-plate strand.png"
   },
   "Scriptures of Battle": {
     "material": "Scriptures of Battle",
@@ -5123,7 +5286,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "scriptures of battle.jpg"
   },
   "Scriptures of Fate": {
     "material": "Scriptures of Fate",
@@ -5148,7 +5312,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "scriptures of fate.jpg"
   },
   "Scriptures of Fortune": {
     "material": "Scriptures of Fortune",
@@ -5173,7 +5338,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "scriptures of fortune.jpg"
   },
   "Seal of the Emperor's Protection": {
     "material": "Seal of the Emperor's Protection",
@@ -5197,7 +5363,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "seal of the emperor_s protection.jpg"
   },
   "Sentry AI Drone Controller": {
     "material": "Sentry AI Drone Controller",
@@ -5218,7 +5385,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "sentry ai drone controller.jpg"
   },
   "Servo-Arc Claw": {
     "material": "Servo-Arc Claw",
@@ -5235,7 +5403,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "servo-arc claw.png"
   },
   "Shiny Boss Teef": {
     "material": "Shiny Boss Teef",
@@ -5256,7 +5425,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "shiny boss teef.jpg"
   },
   "Shroud of Heroes": {
     "material": "Shroud of Heroes",
@@ -5281,7 +5451,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "shroud of heroes.jpg"
   },
   "Sigil of Eternal Decay": {
     "material": "Sigil of Eternal Decay",
@@ -5302,7 +5473,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "sigil of eternal decay.jpg"
   },
   "Sigil of Inevitable Decay": {
     "material": "Sigil of Inevitable Decay",
@@ -5319,7 +5491,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "sigil of inevitable decay.jpg"
   },
   "Simulacrum Sanctorum": {
     "material": "Simulacrum Sanctorum",
@@ -5344,7 +5517,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "simulacrum sanctorum.jpg"
   },
   "Snazzy Dakka": {
     "material": "Snazzy Dakka",
@@ -5369,7 +5543,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "snazzy dakka.jpg"
   },
   "Sophisticated Material Bar": {
     "material": "Sophisticated Material Bar",
@@ -5389,7 +5564,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "sophisticated material bar.png"
   },
   "Sophisticated Material Ingot": {
     "material": "Sophisticated Material Ingot",
@@ -5405,7 +5581,8 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "sophisticated material ingot.png"
   },
   "Sophisticated Material Plates": {
     "material": "Sophisticated Material Plates",
@@ -5429,7 +5606,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "sophisticated material plates.jpg"
   },
   "Sophisticated Material Sheet": {
     "material": "Sophisticated Material Sheet",
@@ -5449,7 +5627,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "sophisticated material sheet.png"
   },
   "Soul-Bonded Psytronome": {
     "material": "Soul-Bonded Psytronome",
@@ -5470,7 +5649,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "soul-bonded psytronome.jpg"
   },
   "Soul-Bonded Wraithbone Plate": {
     "material": "Soul-Bonded Wraithbone Plate",
@@ -5491,7 +5671,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "soul-bonded wraithbone plate.jpg"
   },
   "Spirit Stone": {
     "material": "Spirit Stone",
@@ -5508,7 +5689,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "spirit stone.jpg"
   },
   "Supernatural Sight": {
     "material": "Supernatural Sight",
@@ -5532,7 +5714,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "supernatural sight.png"
   },
   "Symbiotic Carapace": {
     "material": "Symbiotic Carapace",
@@ -5557,7 +5740,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "symbiotic carapace.png"
   },
   "Tabbard of Righteous Wrath": {
     "material": "Tabbard of Righteous Wrath",
@@ -5578,7 +5762,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "tabbard of righteous wrath.jpg"
   },
   "Talisman of Storms": {
     "material": "Talisman of Storms",
@@ -5599,7 +5784,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "talisman of storms.jpg"
   },
   "Ta'Lissera Bond": {
     "material": "Ta'Lissera Bond",
@@ -5624,7 +5810,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "ta_lissera bond.jpg"
   },
   "Tannhauser's Bones": {
     "material": "Tannhauser's Bones",
@@ -5649,7 +5836,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "tannhauser_s bones.jpg"
   },
   "Target Lock": {
     "material": "Target Lock",
@@ -5674,7 +5862,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "target lock.jpg"
   },
   "Targeting Matrix": {
     "material": "Targeting Matrix",
@@ -5694,7 +5883,8 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "targeting matrix.png"
   },
   "Thunderwolf Tooth Necklace": {
     "material": "Thunderwolf Tooth Necklace",
@@ -5711,7 +5901,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "thunderwolf tooth necklace.jpg"
   },
   "Tome of Arcane Knowledge": {
     "material": "Tome of Arcane Knowledge",
@@ -5735,7 +5926,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "tome of arcane knowledge.jpg"
   },
   "Transdimensional Sanctum": {
     "material": "Transdimensional Sanctum",
@@ -5760,7 +5952,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "transdimensional sanctum.png"
   },
   "Utilitarian Belt": {
     "material": "Utilitarian Belt",
@@ -5780,7 +5973,8 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "utilitarian belt.png"
   },
   "Veteran's Entrenching Tool": {
     "material": "Veteran's Entrenching Tool",
@@ -5797,7 +5991,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "veteran_s entrenching tool.png"
   },
   "Virulent Rounds": {
     "material": "Virulent Rounds",
@@ -5822,7 +6017,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "virulent rounds.jpg"
   },
   "Warp Touched Eye of Horus": {
     "material": "Warp Touched Eye of Horus",
@@ -5839,7 +6035,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "warp touched eye of horus.png"
   },
   "Warpflame Infusion": {
     "material": "Warpflame Infusion",
@@ -5860,7 +6057,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "warpflame infusion.jpg"
   },
   "Warpweave Robe": {
     "material": "Warpweave Robe",
@@ -5885,7 +6083,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "warpweave robe.jpg"
   },
   "Witchseeker Bolts": {
     "material": "Witchseeker Bolts",
@@ -5910,7 +6109,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "witchseeker bolts.jpg"
   },
   "Vindicta": {
     "material": "Vindicta",
