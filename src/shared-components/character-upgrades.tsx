@@ -120,9 +120,15 @@ export const CharacterUpgrades = ({
                             />
                         }
                         label={
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 10,
+                                    opacity: formData.currentUpgrades.includes(x.id) ? 1 : 0.5,
+                                }}>
                                 <MiscIcon icon={x.stat.toLowerCase() as any} />
-                                <span>{x.label}</span>
+                                <UpgradeImage material={x.label} iconPath={x.iconPath} rarity={x.rarity} />
                             </div>
                         }
                     />
@@ -164,7 +170,7 @@ export const CharacterUpgrades = ({
                                     gap: 10,
                                     paddingBottom: 10,
                                 }}>
-                                <UpgradeImage material={x.label} iconPath={x.iconPath} />{' '}
+                                <UpgradeImage material={x.label} rarity={x.rarity} iconPath={x.iconPath} />{' '}
                                 {inventory.upgrades[x.id] ?? 0} - {x.count} ={' '}
                                 {(inventory.upgrades[x.id] ?? 0) - x.count < 0
                                     ? 0

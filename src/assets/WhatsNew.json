@@ -1,6 +1,37 @@
 ﻿{
-  "currentVersion": "1.2.1",
+  "currentVersion": "1.2.2",
   "releaseNotes": [
+    {
+      "version": "1.2.2",
+      "date": "December 15",
+      "type": "Update",
+      "new": [
+        {
+          "text": "Added Octarius Mirror Elite 16-40 nodes. Thanks sonsonVallano for contribution"
+        },
+        {
+          "text": "Added icons for crafted materials for Tyranids and Ad Mech. Thanks YourAdHere for contribution"
+        }
+      ],
+      "minor": [
+        {
+          "text": "Updated characters details to display upgrade icons for crafted materials.",
+          "subPoints": [
+            "Rank lookup and Upgrades page are updated too"
+          ],
+          "images": [
+            {
+              "path": "upgrades.png"
+            }
+          ]
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed Yazaghor Bronze III rank upgrades (CM Fluffy Honey Badger)"
+        }
+      ]
+    },
     {
       "version": "1.2.1",
       "date": "December 12",

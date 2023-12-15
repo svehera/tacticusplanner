@@ -3562,118 +3562,6 @@
     "reward": "Boss Gulgortz",
     "expectedGold": 83
   },
-  "OME1": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 1,
-    "reward": "Fine Purity Seal",
-    "expectedGold": 83
-  },
-  "OME2": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 2,
-    "reward": "Righteous Candle",
-    "expectedGold": 83
-  },
-  "OME3": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 3,
-    "reward": "Chain of Zeal",
-    "expectedGold": 83
-  },
-  "OME4": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 4,
-    "reward": "Blessed Tabbard",
-    "expectedGold": 83
-  },
-  "OME5": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 5,
-    "reward": "Special Issue Ammo",
-    "expectedGold": 83
-  },
-  "OME6": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 6,
-    "reward": "Bones of the Paragons",
-    "expectedGold": 83
-  },
-  "OME7": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 7,
-    "reward": "Purity Seal of the Primarch",
-    "expectedGold": 83
-  },
-  "OME8": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 8,
-    "reward": "Snappawrecka",
-    "expectedGold": 83
-  },
-  "OME9": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 9,
-    "reward": "Weapon Anointment Oils",
-    "expectedGold": 83
-  },
-  "OME10": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 10,
-    "reward": "Adrenal Glands",
-    "expectedGold": 83
-  },
-  "OME11": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 11,
-    "reward": "Wolf Tail Talisman",
-    "expectedGold": 83
-  },
-  "OME12": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 12,
-    "reward": "Key of Ignorance",
-    "expectedGold": 83
-  },
-  "OME13": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 13,
-    "reward": "The Silver Eagle with Swords",
-    "expectedGold": 83
-  },
-  "OME14": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 14,
-    "reward": "Terminator Honours",
-    "expectedGold": 83
-  },
-  "OME15": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 15,
-    "reward": "Archeotech Bionics",
-    "expectedGold": 83
-  },
-  "OME16": {
-    "campaign": "Octarius Mirror Elite",
-    "campaignType": "Elite",
-    "nodeNumber": 16,
-    "reward": "Gibbascrapz",
-    "expectedGold": 83
-  },
   "OM8": {
     "campaign": "Octarius Mirror",
     "campaignType": "Mirror",
@@ -5086,6 +4974,286 @@
     "campaignType": "Elite",
     "nodeNumber": 9,
     "reward": "Weapon Parts",
+    "expectedGold": 91.5
+  },
+  "OME1": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 1,
+    "reward": "Fine Purity Seal",
+    "expectedGold": 83
+  },
+  "OME10": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 10,
+    "reward": "Adrenal Glands",
+    "expectedGold": 91.5
+  },
+  "OME11": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 11,
+    "reward": "Wolf Tail Talisman",
+    "expectedGold": 91.5
+  },
+  "OME12": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 12,
+    "reward": "Key of Ignorance",
+    "expectedGold": 91.5
+  },
+  "OME13": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 13,
+    "reward": "The Iron Phoenix",
+    "expectedGold": 91.5
+  },
+  "OME14": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 14,
+    "reward": "Terminator Honours",
+    "expectedGold": 91.5
+  },
+  "OME15": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 15,
+    "reward": "Archeotech Bionics",
+    "expectedGold": 91.5
+  },
+  "OME16": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 16,
+    "reward": "Gibbascrapz",
+    "expectedGold": 91.5
+  },
+  "OME17": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 17,
+    "reward": "Toxin Sacs",
+    "expectedGold": 101
+  },
+  "OME18": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 18,
+    "reward": "Wolf Tooth Necklace",
+    "expectedGold": 101
+  },
+  "OME19": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 19,
+    "reward": "Chapter Pendant",
+    "expectedGold": 101
+  },
+  "OME2": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 2,
+    "reward": "Righteous Candle",
+    "expectedGold": 83
+  },
+  "OME20": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 20,
+    "reward": "Canister of Chemicals",
+    "expectedGold": 101
+  },
+  "OME21": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 21,
+    "reward": "Lesser Reliquary of Protection",
+    "expectedGold": 101
+  },
+  "OME22": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 22,
+    "reward": "Reinforced Chitin",
+    "expectedGold": 101
+  },
+  "OME23": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 23,
+    "reward": "Beast Hide",
+    "expectedGold": 101
+  },
+  "OME24": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 24,
+    "reward": "Snotflogga",
+    "expectedGold": 101
+  },
+  "OME25": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 25,
+    "reward": "Dark Hood",
+    "expectedGold": 108
+  },
+  "OME26": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 26,
+    "reward": "Nano Swarm",
+    "expectedGold": 108
+  },
+  "OME27": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 27,
+    "reward": "Canister of Chemicals",
+    "expectedGold": 108
+  },
+  "OME28": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 28,
+    "reward": "Synaptic Augmentation",
+    "expectedGold": 108
+  },
+  "OME29": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 29,
+    "reward": "Mjod",
+    "expectedGold": 108
+  },
+  "OME3": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 3,
+    "reward": "Chain of Zeal",
+    "expectedGold": 83
+  },
+  "OME30": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 30,
+    "reward": "Stone Guardian Fragment",
+    "expectedGold": 108
+  },
+  "OME31": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 31,
+    "reward": "Round of Ammo",
+    "expectedGold": 108
+  },
+  "OME32": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 32,
+    "reward": "Tanksmasha",
+    "expectedGold": 108
+  },
+  "OME33": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 33,
+    "reward": "Chip Damage",
+    "expectedGold": 108
+  },
+  "OME34": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 34,
+    "reward": "Bad Moon Teef",
+    "expectedGold": 108
+  },
+  "OME35": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 35,
+    "reward": "Iron Jaw",
+    "expectedGold": 108
+  },
+  "OME36": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 36,
+    "reward": "Ard Plate",
+    "expectedGold": 108
+  },
+  "OME37": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 37,
+    "reward": "Kustom Gubbinz",
+    "expectedGold": 108
+  },
+  "OME38": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 38,
+    "reward": "Purity Seal of the Primarch",
+    "expectedGold": 108
+  },
+  "OME39": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 39,
+    "reward": "Archeotech Bionics",
+    "expectedGold": 108
+  },
+  "OME4": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 4,
+    "reward": "Blessed Tabbard",
+    "expectedGold": 83
+  },
+  "OME40": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 40,
+    "reward": "Boss Gulgortz",
+    "expectedGold": 108
+  },
+  "OME5": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 5,
+    "reward": "Special Issue Ammo",
+    "expectedGold": 83
+  },
+  "OME6": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 6,
+    "reward": "Bones of the Paragons",
+    "expectedGold": 83
+  },
+  "OME7": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 7,
+    "reward": "Purity Seal of the Primarch",
+    "expectedGold": 83
+  },
+  "OME8": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 8,
+    "reward": "Snappawrecka",
+    "expectedGold": 83
+  },
+  "OME9": {
+    "campaign": "Octarius Mirror Elite",
+    "campaignType": "Elite",
+    "nodeNumber": 9,
+    "reward": "Weapon Anointment Oils",
     "expectedGold": 91.5
   }
 }
