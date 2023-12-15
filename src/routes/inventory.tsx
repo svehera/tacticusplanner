@@ -44,7 +44,7 @@ export const Inventory = () => {
                 cellRenderer: (params: ICellRendererParams<ITableRow>) => {
                     const { data } = params;
                     if (data) {
-                        return <UpgradeImage material={data.material} iconPath={data.iconPath} />;
+                        return <UpgradeImage material={data.material} rarity={data.rarity} iconPath={data.iconPath} />;
                     }
                 },
                 sortable: false,

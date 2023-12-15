@@ -559,6 +559,7 @@ export class StaticDataService {
                     materialId: material.id,
                     materialLabel: material.label,
                     materialIconPath: material.iconPath,
+                    materialRarity: material.rarity,
                     totalCount: material.count,
                     locations: [],
                     characters: material.characters,

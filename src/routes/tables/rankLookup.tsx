@@ -19,6 +19,7 @@ import { useSearchParams } from 'react-router-dom';
 import { defaultCampaignsProgress } from '../../models/constants';
 import { UpgradeImage } from '../../shared-components/upgrade-image';
 import { RankSelect } from '../../shared-components/rank-select';
+import { MiscIcon } from '../../shared-components/misc-icon';
 
 export const RankLookup = () => {
     const { characters } = useContext(StoreContext);
@@ -112,7 +113,7 @@ export const RankLookup = () => {
                 <li key={item.id}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                         <span className={Rarity[item.rarity]?.toLowerCase()}>{Rarity[item.rarity]}</span> -{' '}
-                        <UpgradeImage material={item.label} iconPath={item.iconPath} size={30} /> -{' '}
+                        <UpgradeImage material={item.label} rarity={item.rarity} iconPath={item.iconPath} size={30} /> -{' '}
                         <span style={{ fontWeight: 'bold' }}>{item.count}</span>
                     </div>
                     {item.recipe?.length ? renderUpgradesMaterials(item.recipe) : undefined}
@@ -133,7 +134,7 @@ export const RankLookup = () => {
             cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
                 const { data } = params;
                 if (data) {
-                    return <UpgradeImage material={data.label} iconPath={data.iconPath} />;
+                    return <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />;
                 }
             },
             equals: () => true,
@@ -280,11 +281,19 @@ export const RankLookup = () => {
                         {upgrades.map((item, index) => (
                             <li key={item.id + index}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                                    <span>{item.stat}</span> -{' '}
-                                    <span className={Rarity[item.rarity]?.toLowerCase()}>{Rarity[item.rarity]}</span> -{' '}
-                                    <UpgradeImage material={item.label} iconPath={item.iconPath} size={30} />
+                                    <MiscIcon icon={item.stat.toLowerCase() as any} />
+                                    <span className={Rarity[item.rarity]?.toLowerCase()}>
+                                        {Rarity[item.rarity]}
+                                    </span> -{' '}
+                                    <UpgradeImage
+                                        material={item.label}
+                                        rarity={item.rarity}
+                                        iconPath={item.iconPath}
+                                        size={30}
+                                    />
                                 </div>
                                 {item.recipe?.length ? renderUpgradesMaterials(item.recipe) : undefined}
+                                <hr style={{ display: (index + 1) % 6 === 0 ? 'block' : 'none' }} />
                             </li>
                         ))}
                     </ul>

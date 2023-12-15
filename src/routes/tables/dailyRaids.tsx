@@ -121,7 +121,7 @@ export const DailyRaids = () => {
                 cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
                     const { data } = params;
                     if (data) {
-                        return <UpgradeImage material={data.label} iconPath={data.iconPath} />;
+                        return <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />;
                     }
                 },
                 equals: () => true,
@@ -589,7 +589,11 @@ const MaterialItem = ({
     return (
         <li style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <UpgradeImage material={raid.materialLabel} iconPath={raid.materialIconPath} />
+                <UpgradeImage
+                    material={raid.materialLabel}
+                    rarity={raid.materialRarity}
+                    iconPath={raid.materialIconPath}
+                />
                 <Tooltip title={raid.characters.join(', ')}>
                     <span>
                         (

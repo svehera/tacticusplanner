@@ -635,6 +635,7 @@ export interface IDailyRaid {
 export interface IMaterialRaid {
     materialId: string;
     materialLabel: string;
+    materialRarity: Rarity;
     totalCount: number;
     materialIconPath: string;
     characters: string[];
