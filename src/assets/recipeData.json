@@ -1225,7 +1225,7 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "adamantine mantle.jpg"
   },
   "Adamantium Bar": {
@@ -1246,7 +1246,7 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "adamantium bar.png"
   },
   "Adamantium Blades": {
@@ -1271,7 +1271,7 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "adamantium blades.jpg"
   },
   "Adamantium Lump": {
@@ -1288,7 +1288,7 @@
         "count": 25
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "adamantium lump.png"
   },
   "Adamantium Plates": {
@@ -1313,7 +1313,7 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "adamantium plates.png"
   },
   "Adamantium Sheet": {
@@ -1334,7 +1334,7 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "adamantium sheet.png"
   },
   "Adaptive Adrenal Glands": {
@@ -1352,7 +1352,7 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "adaptive adrenal glands.png"
   },
   "Adaptive Chitin Carapace": {
@@ -1370,7 +1370,7 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "adaptive chitin carapace.png"
   },
   "Adaptive Toxin Sacs": {
@@ -1388,7 +1388,7 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "adaptive toxin sacs.png"
   },
   "Advanced Bionics": {
@@ -1409,7 +1409,7 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "advanced bionics.png"
   },
   "Advanced Combat Stimms": {
@@ -1430,7 +1430,7 @@
         "count": 75
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "advanced combat stimms.jpg"
   },
   "Advanced Drone Controller": {
@@ -1448,7 +1448,7 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "advanced drone controller.jpg"
   },
   "Advanced Exospine": {
@@ -1473,7 +1473,7 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "advanced exospine.jpg"
   },
   "Advanced Mesh Weave Garment": {
@@ -1494,7 +1494,7 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "advanced mesh weave garment.jpg"
   },
   "Advanced Sensor Suite": {
@@ -1512,7 +1512,7 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "advanced sensor suite.jpg"
   },
   "Advanced Stimm Injector": {
@@ -1530,7 +1530,7 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "advanced stimm injector.jpg"
   },
   "Ancient Tasset Plate": {
@@ -1555,7 +1555,7 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "ancient tasset plate.jpg"
   },
   "Anointed Auxiliary Core": {
@@ -1576,7 +1576,7 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
     "icon": "anointed auxiliary core.png"
   },
   "Anointed Micro-Generator": {
