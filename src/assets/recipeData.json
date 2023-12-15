@@ -1597,7 +1597,8 @@
         "count": 215
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "anointed micro-generator.png"
   },
   "Arbiter's Gaze": {
     "material": "Arbiter's Gaze",
