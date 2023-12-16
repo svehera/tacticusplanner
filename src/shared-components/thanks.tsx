@@ -136,10 +136,14 @@ export const ThankYouCard = ({
                 ) : (
                     <React.Fragment>
                         <p>{contributor.thankYou}</p>
-                        Check out{' '}
-                        <Link to={contributor.resourceLink} target={'_blank'}>
-                            {contributor.resourceDescription}
-                        </Link>
+                        {contributor.resourceLink ? (
+                            <React.Fragment>
+                                Check out{' '}
+                                <Link to={contributor.resourceLink} target={'_blank'}>
+                                    {contributor.resourceDescription}
+                                </Link>
+                            </React.Fragment>
+                        ) : undefined}
                     </React.Fragment>
                 )}
             </CardContent>
