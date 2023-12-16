@@ -22,5 +22,13 @@
     "resourceDescription": "Tacticus Wiki",
     "resourceLink": "https://tacticus.fandom.com/wiki/Tacticus_Wiki",
     "avatarIcon": "lucky.webp"
+  },
+  {
+    "name": "YourAdHere",
+    "type": "Contributor",
+    "thankYou": "Thank you for contributing into open source",
+    "resourceDescription": "",
+    "resourceLink": "",
+    "avatarIcon": "yourAdHere.webp"
   }
 ]
