@@ -21,8 +21,17 @@ export const UpgradeImage = ({
 
         return (
             <Tooltip title={material} enterTouchDelay={0} placement={'right'}>
-                <div style={{ width: size ?? 50, height: size ?? 50 }} className={Rarity[rarity]?.toLowerCase()}>
-                    <img loading={'lazy'} style={{}} src={image} height={size ?? 50} alt={material} />
+                <div
+                    style={{ width: size ?? 50, height: size ?? 50 }}
+                    className={Rarity[rarity]?.toLowerCase() + '-upgrade upgrade'}>
+                    <img
+                        loading={'lazy'}
+                        style={{}}
+                        src={image}
+                        height={size ?? 50}
+                        width={size ?? 50}
+                        alt={material}
+                    />
                 </div>
             </Tooltip>
         );

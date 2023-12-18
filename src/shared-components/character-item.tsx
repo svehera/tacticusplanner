@@ -35,12 +35,12 @@ export const CharacterItem = (props: { character: ICharacter2 }) => {
     return (
         <div>
             <div onClick={handleClickOpen} style={{ cursor: 'pointer' }}>
-                <CharacterTitle character={props.character} showLockedWithOpacity={true} />
+                <CharacterTitle character={props.character} showLockedWithOpacity={true} showAbilities={true} />
             </div>
 
             <Dialog open={open} onClose={handleClose} fullWidth>
                 <DialogTitle>
-                    <CharacterTitle character={character} />
+                    <CharacterTitle character={character} showAbilities={true} />
                 </DialogTitle>
                 <DialogContent style={{ paddingTop: 20 }}>
                     <CharacterDetails

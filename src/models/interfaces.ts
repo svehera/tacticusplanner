@@ -378,6 +378,8 @@ export interface IPersonalCharacterData2 {
     rarity: Rarity;
     bias: CharacterBias;
     upgrades: string[];
+    activeAbilityLevel: number;
+    passiveAbilityLevel: number;
 }
 
 export interface ICharProgression {

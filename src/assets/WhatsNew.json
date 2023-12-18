@@ -1,6 +1,36 @@
 ﻿{
-  "currentVersion": "1.2.2",
+  "currentVersion": "1.2.3",
   "releaseNotes": [
+    {
+      "version": "1.2.3",
+      "date": "December 18",
+      "type": "Update",
+      "new": [
+        {
+          "text": "Added an ability to register the level of the skills for each character (saTchymoto)",
+          "images": [
+            {
+              "path": "abilities.png"
+            }
+          ]
+        },
+        {
+          "text": "Updated character's applied upgrades to be display like in game order",
+          "images": [
+            {
+              "path": "upgrades.png"
+            }
+          ]
+        }
+      ],
+      "minor": [
+        {
+          "text": "Corrected spelling for \"Blessed Tabbard\" and \"Repair Tool\" (KIVIY)"
+        }
+      ],
+      "bugFixes": [
+      ]
+    },
     {
       "version": "1.2.2",
       "date": "December 15",

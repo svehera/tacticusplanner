@@ -1,136 +1,160 @@
 html, body, #root {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 .alpha {
-  background-color: #93C47D;
+    background-color: #93C47D;
 }
 
 .beta {
-  background-color: #C9DAF8;
+    background-color: #C9DAF8;
 }
 
 .gamma {
-  background-color: #FCE5CD;
+    background-color: #FCE5CD;
 }
 
 .stone1 {
-  background-color: #CDB3A0;
+    background-color: #CDB3A0;
 }
 
 .stone2 {
-  background-color: #B09A8A;
+    background-color: #B09A8A;
 }
 
 .stone3 {
-  background-color: #8C827A;
+    background-color: #8C827A;
 }
 
 .iron1 {
-  background-color: #D9EAD3;
+    background-color: #D9EAD3;
 }
 
 .iron2 {
-  background-color: #B6D7A8;
+    background-color: #B6D7A8;
 }
 
 .iron3 {
-  background-color: #93C47D;
+    background-color: #93C47D;
 }
 
 .bronze1 {
-  background-color: #F9CB9C;
+    background-color: #F9CB9C;
 }
 
 .bronze2 {
-  background-color: #F6B26B;
+    background-color: #F6B26B;
 }
 
 .bronze3 {
-  background-color: #E69138;
+    background-color: #E69138;
 }
 
 .silver1 {
-  background-color: #EFEFEF;
+    background-color: #EFEFEF;
 }
 
 .silver2 {
-  background-color: #D9D9D9;
+    background-color: #D9D9D9;
 }
 
 .silver3 {
-  background-color: #CCCCCC;
+    background-color: #CCCCCC;
 }
 
 .gold1 {
-  background-color: #FFE599;
+    background-color: #FFE599;
 }
 
 .gold2 {
-  background-color: #FFD966;
+    background-color: #FFD966;
 }
 
 .gold3 {
-  background-color: #F1C232;
+    background-color: #F1C232;
 }
 
 .diamond1 {
-  background-color: #CFE2F3;
+    background-color: #CFE2F3;
 }
 
 .diamond2 {
-  background-color: #9FC5E8;
+    background-color: #9FC5E8;
 }
 
 .diamond3 {
-  background-color: #6FA8DC;
+    background-color: #6FA8DC;
 }
 
 .ag-theme-material {
-  --ag-grid-size: 5px;
-  --ag-row-hover-color: transparent;
-  --ag-colum-hover-color: transparent;
+    --ag-grid-size: 5px;
+    --ag-row-hover-color: transparent;
+    --ag-colum-hover-color: transparent;
 
-  .ag-cell-wrap-text {
-    word-break: unset;
-    white-space: break-spaces;
-  }
-  
-  &.auto-teams {
-    .ag-header-cell {
-      padding: 0;
+    .ag-cell-wrap-text {
+        word-break: unset;
+        white-space: break-spaces;
     }
-  }
+
+    &.auto-teams {
+        .ag-header-cell {
+            padding: 0;
+        }
+    }
 }
 
 .common {
-  background-color:   #CDB3A0;
+    background-color: #CDB3A0;
 }
 
 .uncommon {
-  background-color: #F9CB9C;
+    background-color: #F9CB9C;
 }
 
 .rare {
-  background-color: #EFEFEF;
+    background-color: #EFEFEF;
 }
 
 .epic {
-  background-color: #FFE599;
+    background-color: #FFE599;
 }
 
 .legendary {
-  background-color:  #CFE2F3;
+    background-color: #CFE2F3;
+}
+
+.upgrade {
+    background-color: #012A41;
+}
+
+.common-upgrade {
+    border: 2px solid #CDB3A0;
+}
+
+.uncommon-upgrade {
+    border: 2px solid #F9CB9C;
+}
+
+.rare-upgrade {
+    border: 2px solid #EFEFEF;
+}
+
+.epic-upgrade {
+    border: 2px solid #FFE599;
+}
+
+.legendary-upgrade {
+    border: 2px solid #CFE2F3;
 }
