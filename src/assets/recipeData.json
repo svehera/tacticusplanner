@@ -231,6 +231,7 @@
   },
   "Blessed Tabbard": {
     "material": "Blessed Tabbard",
+    "label": "Blessed Tabard",
     "craftable": false,
     "stat": "Armour",
     "faction": "Black Templars",

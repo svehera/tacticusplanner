@@ -16,7 +16,7 @@ const icons = {
     },
 };
 
-export const MiscIcon = ({ icon }: { icon: keyof typeof icons }) => {
+export const MiscIcon = ({ icon, width, height }: { icon: keyof typeof icons; width?: number; height?: number }) => {
     const details = icons[icon] ?? { file: '', label: icon };
     try {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -24,8 +24,14 @@ export const MiscIcon = ({ icon }: { icon: keyof typeof icons }) => {
 
         return (
             <Tooltip content={details.label} relationship="label" hideDelay={1000}>
-                <span style={{ display: 'inline-block', width: 30 }}>
-                    <img style={{ pointerEvents: 'none' }} src={image} width={30} alt={details.label} />
+                <span style={{ display: 'inline-block', width: width ?? 30, height }}>
+                    <img
+                        style={{ pointerEvents: 'none' }}
+                        src={image}
+                        width={width ?? 30}
+                        height={height}
+                        alt={details.label}
+                    />
                 </span>
             </Tooltip>
         );

@@ -55,6 +55,8 @@ export class GlobalState implements IGlobalState {
                 rarity: personalCharData?.rarity ?? staticData.initialRarity,
                 bias: personalCharData?.bias ?? CharacterBias.None,
                 upgrades: personalCharData?.upgrades ?? [],
+                activeAbilityLevel: personalCharData?.activeAbilityLevel ?? 0,
+                passiveAbilityLevel: personalCharData?.passiveAbilityLevel ?? 0,
             };
             return {
                 ...staticData,
@@ -104,9 +106,19 @@ export class GlobalState implements IGlobalState {
                     x.bias !== CharacterBias.None ||
                     x.rank !== Rank.Locked ||
                     x.rarity !== x.initialRarity ||
-                    x.upgrades?.length
+                    x.upgrades?.length ||
+                    x.activeAbilityLevel ||
+                    x.passiveAbilityLevel
             )
-            .map(x => ({ name: x.name, rank: x.rank, rarity: x.rarity, bias: x.bias, upgrades: x.upgrades }));
+            .map(x => ({
+                name: x.name,
+                rank: x.rank,
+                rarity: x.rarity,
+                bias: x.bias,
+                upgrades: x.upgrades,
+                activeAbilityLevel: x.activeAbilityLevel,
+                passiveAbilityLevel: x.passiveAbilityLevel,
+            }));
 
         return {
             schemaVersion: 2,

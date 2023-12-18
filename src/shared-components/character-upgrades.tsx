@@ -8,6 +8,8 @@ import { UpgradeImage } from './upgrade-image';
 import { StoreContext } from '../reducers/store.provider';
 import { MiscIcon } from './misc-icon';
 
+import './character-upgrades.css';
+
 export const CharacterUpgrades = ({
     upgradesChanges,
     character,
@@ -46,11 +48,20 @@ export const CharacterUpgrades = ({
         });
     }, [character.rank]);
 
-    const handleUpgradeChange = (event: React.ChangeEvent<HTMLInputElement>, value: string) => {
+    const healthUpgrades = useMemo(() => possibleUpgrades.filter(x => x.stat === 'Health'), [possibleUpgrades]);
+    const damageUpgrades = useMemo(() => possibleUpgrades.filter(x => x.stat === 'Damage'), [possibleUpgrades]);
+    const armourUpgrades = useMemo(() => possibleUpgrades.filter(x => x.stat === 'Armour'), [possibleUpgrades]);
+
+    const unknownUpgrades = useMemo(
+        () => possibleUpgrades.filter(x => x.stat !== 'Health' && x.stat !== 'Damage' && x.stat !== 'Armour'),
+        [possibleUpgrades]
+    );
+
+    const handleUpgradeChange = (checked: boolean, value: string) => {
         let currentUpgrades: string[];
         let newUpgrades: string[];
 
-        if (event.target.checked) {
+        if (checked) {
             currentUpgrades = [...formData.currentUpgrades, value];
             const isNewUpgrade = !formData.originalUpgrades.includes(value);
             newUpgrades = isNewUpgrade ? [...formData.newUpgrades, value] : formData.newUpgrades;
@@ -108,29 +119,48 @@ export const CharacterUpgrades = ({
     return (
         <div>
             <h4>Applied upgrades</h4>
+            <div style={{ display: 'flex' }}>
+                <div className="upgrades-column">
+                    <MiscIcon icon={'health'} height={30} />
+                    {healthUpgrades.map((x, index) => (
+                        <UpgrageControl
+                            key={x.id + index}
+                            material={x}
+                            checked={formData.currentUpgrades.includes(x.id)}
+                            checkedChanges={value => handleUpgradeChange(value, x.id)}
+                        />
+                    ))}
+                </div>
+                <div className="upgrades-column">
+                    <MiscIcon icon={'damage'} />
+                    {damageUpgrades.map((x, index) => (
+                        <UpgrageControl
+                            key={x.id + index}
+                            material={x}
+                            checked={formData.currentUpgrades.includes(x.id)}
+                            checkedChanges={value => handleUpgradeChange(value, x.id)}
+                        />
+                    ))}
+                </div>
+                <div className="upgrades-column">
+                    <MiscIcon icon={'armour'} height={30} />
+                    {armourUpgrades.map((x, index) => (
+                        <UpgrageControl
+                            key={x.id + index}
+                            material={x}
+                            checked={formData.currentUpgrades.includes(x.id)}
+                            checkedChanges={value => handleUpgradeChange(value, x.id)}
+                        />
+                    ))}
+                </div>
+            </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                {possibleUpgrades.map((x, index) => (
-                    <FormControlLabel
+                {unknownUpgrades.map((x, index) => (
+                    <UpgrageControl
                         key={x.id + index}
-                        control={
-                            <Checkbox
-                                checked={formData.currentUpgrades.includes(x.id)}
-                                onChange={event => handleUpgradeChange(event, x.id)}
-                                inputProps={{ 'aria-label': 'controlled' }}
-                            />
-                        }
-                        label={
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 10,
-                                    opacity: formData.currentUpgrades.includes(x.id) ? 1 : 0.5,
-                                }}>
-                                <MiscIcon icon={x.stat.toLowerCase() as any} />
-                                <UpgradeImage material={x.label} iconPath={x.iconPath} rarity={x.rarity} />
-                            </div>
-                        }
+                        material={x}
+                        checked={formData.currentUpgrades.includes(x.id)}
+                        checkedChanges={value => handleUpgradeChange(value, x.id)}
                     />
                 ))}
             </div>
@@ -181,5 +211,38 @@ export const CharacterUpgrades = ({
                 </div>
             </Popover>
         </div>
+    );
+};
+
+const UpgrageControl = ({
+    material,
+    checked,
+    checkedChanges,
+}: {
+    material: IMaterialFull;
+    checked: boolean;
+    checkedChanges: (value: boolean) => void;
+}) => {
+    return (
+        <FormControlLabel
+            control={
+                <Checkbox
+                    checked={checked}
+                    onChange={event => checkedChanges(event.target.checked)}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                />
+            }
+            label={
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 10,
+                        opacity: checked ? 1 : 0.5,
+                    }}>
+                    <UpgradeImage material={material.label} iconPath={material.iconPath} rarity={material.rarity} />
+                </div>
+            }
+        />
     );
 };

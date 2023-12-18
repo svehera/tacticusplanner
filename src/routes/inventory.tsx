@@ -91,7 +91,7 @@ export const Inventory = () => {
     const allRows = useMemo<ITableRow[]>(() => {
         return orderBy(
             Object.values(StaticDataService.recipeData).map(x => ({
-                material: x.material,
+                material: x.label ?? x.material,
                 rarity: Rarity[x.rarity as unknown as number] as unknown as Rarity,
                 craftable: x.craftable,
                 stat: x.stat,

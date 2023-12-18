@@ -10,23 +10,27 @@ import { CharacterImage } from './character-image';
 export const CharacterTitle = ({
     character,
     showLockedWithOpacity,
+    showAbilities,
     onClick,
     short,
     imageSize,
 }: {
     character: ICharacter2;
     showLockedWithOpacity?: boolean;
+    showAbilities?: boolean;
     onClick?: () => void;
     short?: boolean;
     imageSize?: number;
 }) => {
+    const isUnlocked = character.rank > Rank.Locked;
+    const hasAbilities = (isUnlocked && character.activeAbilityLevel) || character.passiveAbilityLevel;
     const emoji =
         character.bias === CharacterBias.AlwaysRecommend
             ? starEmoji
             : character.bias === CharacterBias.NeverRecommend
             ? pooEmoji
             : '';
-    const opacity = showLockedWithOpacity ? (character.rank > Rank.Locked ? 1 : 0.5) : 1;
+    const opacity = showLockedWithOpacity ? (isUnlocked ? 1 : 0.5) : 1;
     const cursor = onClick ? 'pointer' : undefined;
 
     const characterFull = (
@@ -34,7 +38,7 @@ export const CharacterTitle = ({
             <CharacterImage key={character.name} icon={character.icon} name={character.name} imageSize={imageSize} />
             <span>{character.name}</span>
             <RarityImage rarity={character.rarity} />
-            {character.rank > Rank.Locked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
+            {isUnlocked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
             <Tooltip
                 content={
                     character.bias === CharacterBias.AlwaysRecommend
@@ -46,6 +50,13 @@ export const CharacterTitle = ({
                 relationship={'description'}>
                 <span>{emoji}</span>
             </Tooltip>
+            {showAbilities && hasAbilities ? (
+                <Tooltip content={'Abilities level: (Active)(Passive)'} relationship={'description'}>
+                    <span style={{ fontSize: 16 }}>
+                        ({character.activeAbilityLevel})({character.passiveAbilityLevel})
+                    </span>
+                </Tooltip>
+            ) : undefined}
         </div>
     );
 
