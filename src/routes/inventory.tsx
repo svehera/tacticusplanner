@@ -15,6 +15,7 @@ import ViewSettings from './legendary-events/view-settings';
 
 interface ITableRow {
     material: string;
+    label: string;
     rarity: Rarity;
     craftable: boolean;
     stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
@@ -70,6 +71,7 @@ export const Inventory = () => {
             {
                 field: 'material',
                 headerName: 'Upgrade',
+                valueFormatter: params => params.data?.label ?? '',
                 minWidth: 200,
             },
             {
@@ -91,7 +93,8 @@ export const Inventory = () => {
     const allRows = useMemo<ITableRow[]>(() => {
         return orderBy(
             Object.values(StaticDataService.recipeData).map(x => ({
-                material: x.label ?? x.material,
+                material: x.material,
+                label: x.label ?? x.material,
                 rarity: Rarity[x.rarity as unknown as number] as unknown as Rarity,
                 craftable: x.craftable,
                 stat: x.stat,

@@ -79,7 +79,7 @@ export class GlobalState implements IGlobalState {
         this.modifiedDate = personalData.modifiedDate;
         this.seenAppVersion = personalData.seenAppVersion;
         this.campaignsProgress = personalData.campaignsProgress ?? defaultData.campaignsProgress;
-        this.inventory = personalData.inventory ?? defaultData.inventory;
+        this.inventory = GlobalState.fixNames(personalData.inventory ?? defaultData.inventory);
         this.dailyRaids = personalData.dailyRaids ?? defaultData.dailyRaids;
     }
 
@@ -87,6 +87,7 @@ export class GlobalState implements IGlobalState {
         const fixName = {
             'Abaddon The Despolier': 'Abaddon The Despoiler',
             'Actus Folgorosus': 'Actus',
+            'Blessed Tabard': 'Blessed Tabbard',
         };
 
         let result = JSON.stringify(obj);

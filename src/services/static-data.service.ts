@@ -478,10 +478,14 @@ export class StaticDataService {
         const processItem = (itemId: string, quantity: number) => {
             const upgrade = StaticDataService.recipeDataFull[itemId];
 
-            if (upgrade.craftable && upgrade?.allMaterials?.length && itemIds.includes(itemId)) {
+            if (upgrade?.craftable && upgrade?.allMaterials?.length && itemIds.includes(itemId)) {
                 upgrade?.allMaterials.forEach(item => {
                     result[item.id] = (result[item.id] ?? 0) + item.count * quantity;
                 });
+            }
+
+            if (!upgrade) {
+                console.error('Missing data for ' + itemId);
             }
         };
 
