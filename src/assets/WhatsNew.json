@@ -1,6 +1,23 @@
 ﻿{
-  "currentVersion": "1.2.3",
+  "currentVersion": "1.2.4",
   "releaseNotes": [
+    {
+      "version": "1.2.4",
+      "date": "December 19",
+      "type": "Patch",
+      "new": [
+      ],
+      "minor": [
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed issue with error on home page/daily raids (UnderChromey, Ozymandias)"
+        },
+        {
+          "text": "Fixed Thaddeus Noble Silver II rank upgrades (KIVIY)"
+        }
+      ]
+    },
     {
       "version": "1.2.3",
       "date": "December 18",
