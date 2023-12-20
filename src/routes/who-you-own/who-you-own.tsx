@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import { CharacterItem } from '../../shared-components/character-item';
 import { StoreContext } from '../../reducers/store.provider';
 import { Rank } from '../../models/enums';
+import { isMobile } from 'react-device-detect';
 
 export const WhoYouOwn = () => {
     const { characters } = useContext(StoreContext);
@@ -40,18 +41,19 @@ export const WhoYouOwn = () => {
             }));
 
         return factionsOrdered.map(x => (
-            <div key={x.faction} style={{ width: 300 }}>
+            <div key={x.faction} style={{ minWidth: 415 }}>
                 <h4 style={{ background: x.chars[0].factionColor }}>{x.faction}</h4>
-
-                {x.chars.map(item => {
-                    return <CharacterItem key={item.name} character={item} />;
-                })}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                    {x.chars.map(item => {
+                        return <CharacterItem key={item.name} character={item} />;
+                    })}
+                </div>
             </div>
         ));
     }, [filter, characters]);
 
     return (
-        <Box sx={{ padding: 2 }}>
+        <Box sx={{ padding: isMobile ? 0 : 2 }}>
             <TextField
                 sx={{ margin: '10px', width: '300px' }}
                 label="Quick Filter"

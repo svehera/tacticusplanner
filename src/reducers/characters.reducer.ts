@@ -37,6 +37,10 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                 existingChar.rarity = updatedCharacter.rarity;
                 existingChar.bias = updatedCharacter.bias;
                 existingChar.upgrades = updatedCharacter.upgrades;
+                existingChar.stars = updatedCharacter.stars;
+                existingChar.level =
+                    updatedCharacter.level < 0 ? 0 : updatedCharacter.level > 50 ? 50 : updatedCharacter.level;
+                existingChar.xp = updatedCharacter.xp;
                 existingChar.activeAbilityLevel =
                     updatedCharacter.activeAbilityLevel < 0
                         ? 0

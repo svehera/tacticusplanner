@@ -376,6 +376,9 @@ export interface IPersonalCharacterData2 {
     name: string;
     rank: Rank;
     rarity: Rarity;
+    stars: RarityStars;
+    level: number;
+    xp: number;
     bias: CharacterBias;
     upgrades: string[];
     activeAbilityLevel: number;

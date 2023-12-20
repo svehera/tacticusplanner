@@ -39,17 +39,18 @@ export enum Rarity {
 }
 
 export enum RarityStars {
+    None,
     OneStar,
     TwoStars,
-    ThreeStarts,
-    FourStarts,
-    FiveStarts,
+    ThreeStars,
+    FourStars,
+    FiveStars,
     RedOneStar,
-    RedTwoStarts,
-    RedThreeStarts,
-    RedFourStarts,
-    RedFiveStarts,
-    DiamondStar,
+    RedTwoStars,
+    RedThreeStars,
+    RedFourStars,
+    RedFiveStars,
+    BlueStar,
 }
 
 export enum Equipment {

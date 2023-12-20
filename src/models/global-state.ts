@@ -17,8 +17,8 @@
     LegendaryEventData,
 } from './interfaces';
 import { StaticDataService } from '../services';
-import { CharacterBias, LegendaryEventEnum, Rank } from './enums';
-import { defaultData } from './constants';
+import { CharacterBias, LegendaryEventEnum, Rank, RarityStars } from './enums';
+import { defaultData, rarityToStars } from './constants';
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
@@ -49,6 +49,7 @@ export class GlobalState implements IGlobalState {
         const chars = GlobalState.fixNames(personalData.characters);
         this.characters = StaticDataService.unitsData.map(staticData => {
             const personalCharData = chars.find(c => c.name === staticData.name);
+            const rarity = personalCharData?.rarity ?? staticData.initialRarity;
             const combinedData: IPersonalCharacterData2 = {
                 name: staticData.name,
                 rank: personalCharData?.rank ?? Rank.Locked,
@@ -57,6 +58,9 @@ export class GlobalState implements IGlobalState {
                 upgrades: personalCharData?.upgrades ?? [],
                 activeAbilityLevel: personalCharData?.activeAbilityLevel ?? 0,
                 passiveAbilityLevel: personalCharData?.passiveAbilityLevel ?? 0,
+                stars: personalCharData?.stars ?? rarityToStars[rarity],
+                level: personalCharData?.level ?? 1,
+                xp: personalCharData?.xp ?? 0,
             };
             return {
                 ...staticData,
@@ -109,7 +113,10 @@ export class GlobalState implements IGlobalState {
                     x.rarity !== x.initialRarity ||
                     x.upgrades?.length ||
                     x.activeAbilityLevel ||
-                    x.passiveAbilityLevel
+                    x.passiveAbilityLevel ||
+                    x.stars !== RarityStars.None ||
+                    x.level !== 1 ||
+                    x.xp !== 0
             )
             .map(x => ({
                 name: x.name,
@@ -119,6 +126,9 @@ export class GlobalState implements IGlobalState {
                 upgrades: x.upgrades,
                 activeAbilityLevel: x.activeAbilityLevel,
                 passiveAbilityLevel: x.passiveAbilityLevel,
+                stars: x.stars,
+                level: x.level,
+                xp: x.xp,
             }));
 
         return {
