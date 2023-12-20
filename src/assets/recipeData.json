@@ -2988,7 +2988,8 @@
         "count": 650
       }
     ],
-    "craftable": true
+    "craftable": true,
+    "icon": "grand strategy.png"
   },
   "Grandiloquent Litanical": {
     "material": "Grandiloquent Litanical",
