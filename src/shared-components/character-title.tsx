@@ -83,29 +83,31 @@ export const CharacterTitle = ({
         <div style={{ display: 'flex', gap: 5, alignItems: 'center', opacity, cursor }} onClick={onClick}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 75 }}>
                 <StarsImage stars={character.stars} />
-                <div>
-                    <Badge
-                        badgeContent={needToAscend ? '⇧' : character.upgrades.length}
-                        color={needToAscend ? 'warning' : 'success'}>
-                        <CharacterImage
-                            key={character.name}
-                            icon={character.icon}
-                            name={character.name}
-                            imageSize={imageSize}
-                            portrait={true}
-                        />
-                    </Badge>
+                <Tooltip title={character.name} placement={'top'}>
+                    <div>
+                        <Badge
+                            badgeContent={needToAscend ? '⇧' : character.upgrades.length}
+                            color={needToAscend ? 'warning' : 'success'}>
+                            <CharacterImage
+                                key={character.name}
+                                icon={character.icon}
+                                name={character.name}
+                                imageSize={imageSize}
+                                portrait={true}
+                            />
+                        </Badge>
 
-                    <div className="abilities" style={{ visibility: hasAbilities ? 'visible' : 'hidden' }}>
-                        <div className="ability-level">{character.activeAbilityLevel}</div>
-                        <div className="ability-level">{character.passiveAbilityLevel}</div>
+                        <div className="abilities" style={{ visibility: hasAbilities ? 'visible' : 'hidden' }}>
+                            <div className="ability-level">{character.activeAbilityLevel}</div>
+                            <div className="ability-level">{character.passiveAbilityLevel}</div>
+                        </div>
+                        <div
+                            className="character-level"
+                            style={{ visibility: isUnlocked && character.level > 0 ? 'visible' : 'hidden' }}>
+                            {character.level}
+                        </div>
                     </div>
-                    <div
-                        className="character-level"
-                        style={{ visibility: isUnlocked && character.level > 0 ? 'visible' : 'hidden' }}>
-                        {character.level}
-                    </div>
-                </div>
+                </Tooltip>
                 <div
                     style={{
                         display: 'flex',
