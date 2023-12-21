@@ -84,12 +84,17 @@ export const CharacterTitle = ({
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 75 }}>
                 <StarsImage stars={character.stars} />
                 <div>
-                    <CharacterImage
-                        key={character.name}
-                        icon={character.icon}
-                        name={character.name}
-                        imageSize={imageSize}
-                    />
+                    <Badge
+                        badgeContent={needToAscend ? '⇧' : character.upgrades.length}
+                        color={needToAscend ? 'warning' : 'success'}>
+                        <CharacterImage
+                            key={character.name}
+                            icon={character.icon}
+                            name={character.name}
+                            imageSize={imageSize}
+                            portrait={true}
+                        />
+                    </Badge>
 
                     <div className="abilities" style={{ visibility: hasAbilities ? 'visible' : 'hidden' }}>
                         <div className="ability-level">{character.activeAbilityLevel}</div>
@@ -100,33 +105,16 @@ export const CharacterTitle = ({
                         style={{ visibility: isUnlocked && character.level > 0 ? 'visible' : 'hidden' }}>
                         {character.level}
                     </div>
-
-                    <div
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: isUnlocked ? 'space-between' : 'center',
-                        }}>
-                        <Tooltip title={needToAscend ? 'Ascend to upgrade rank' : ''} placement="top">
-                            <Badge
-                                badgeContent={'⇧'}
-                                color="warning"
-                                invisible={!needToAscend}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'left',
-                                }}>
-                                <RarityImage rarity={character.rarity} />
-                            </Badge>
-                        </Tooltip>
-                        {isUnlocked ? (
-                            <Tooltip title={character.upgrades.length ? 'Applied Upgrades' : ''} placement="top">
-                                <Badge badgeContent={character.upgrades.length} color="success">
-                                    <RankImage key={character.rank} rank={character.rank} />
-                                </Badge>
-                            </Tooltip>
-                        ) : undefined}
-                    </div>
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: isUnlocked ? 'space-between' : 'center',
+                        marginTop: -15,
+                    }}>
+                    <RarityImage rarity={character.rarity} />
+                    {isUnlocked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
                 </div>
             </div>
         </div>
