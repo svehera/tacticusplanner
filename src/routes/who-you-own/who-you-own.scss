@@ -17,6 +17,7 @@ $columnCount2: 2;
     column-gap: 25px;
     display: grid;
     grid-auto-flow: column;
+    justify-content: center;
 
     /* 5 columns */
     $roundedRows5: round($factionsCount / $columnCount5);

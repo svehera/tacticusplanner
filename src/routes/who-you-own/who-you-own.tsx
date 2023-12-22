@@ -97,7 +97,7 @@ export const WhoYouOwn = () => {
                 // backgroundImage: `url(${background})`,
                 // color: 'white',
             }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, justifyContent: 'center' }}>
                 <div
                     style={{
                         display: 'flex',
