@@ -51,7 +51,14 @@ export const WhoYouOwn = () => {
 
         return factionsOrdered.map(x => (
             <div key={x.faction} style={{ minWidth: 375, maxWidth: 375 }}>
-                <h4 style={{ background: x.chars[0].factionColor, marginBottom: 0, marginTop: 5 }}>
+                <h4
+                    style={{
+                        background: x.chars[0].factionColor,
+                        marginBottom: 0,
+                        marginTop: 5,
+                        borderTop: '2px solid gold',
+                        fontWeight: 500,
+                    }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <span>{x.faction.toUpperCase()}</span>
                         <div style={{ display: 'flex' }}>
@@ -79,6 +86,7 @@ export const WhoYouOwn = () => {
             sx={{
                 padding: isMobile ? 0 : 2,
                 // backgroundImage: `url(${background})`,
+                // color: 'white',
             }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <TextField
