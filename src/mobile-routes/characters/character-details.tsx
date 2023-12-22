@@ -105,7 +105,7 @@ export const CharacterDetails = ({
                                         )
                                     }
                                     inputProps={{
-                                        step: 100,
+                                        step: 1,
                                         min: 0,
                                         max: 28300,
                                         type: 'number',
@@ -127,7 +127,7 @@ export const CharacterDetails = ({
                                         )
                                     }
                                     inputProps={{
-                                        step: 1,
+                                        step: 100,
                                         min: 0,
                                         max: 50,
                                         type: 'number',
