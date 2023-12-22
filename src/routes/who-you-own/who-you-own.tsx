@@ -14,6 +14,8 @@ import { UtilsService } from '../../services/utils.service';
 import { MiscIcon } from '../../shared-components/misc-icon';
 import { FactionImage } from '../../shared-components/faction-image';
 
+import './who-you-own.scss';
+
 export const WhoYouOwn = () => {
     const { characters } = useContext(StoreContext);
     const [filter, setFilter] = useState('');
@@ -96,7 +98,14 @@ export const WhoYouOwn = () => {
                 // color: 'white',
             }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <div style={{ display: 'flex', fontSize: 20, alignItems: 'center', fontWeight: 'bold' }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        fontSize: 20,
+                        alignItems: 'center',
+                        fontWeight: 'bold',
+                        minWidth: 'fit-content',
+                    }}>
                     <MiscIcon icon={'power'} height={40} width={30} /> {totalPower.toLocaleString().replace(/,/g, ' ')}
                 </div>
                 <TextField
@@ -107,9 +116,7 @@ export const WhoYouOwn = () => {
                 />
             </div>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 25, color: 'white' }}>
-                {charactersByFaction}
-            </div>
+            <div className="box">{charactersByFaction}</div>
         </Box>
     );
 };

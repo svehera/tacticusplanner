@@ -1,0 +1,33 @@
+﻿$factionsCount: 15;
+
+$columnCount5: 5;
+$columnCount4: 4;
+$columnCount3: 3;
+$columnCount2: 2;
+
+@mixin responsiveGrid($columns, $maxWidth) {
+    @media (max-width: #{$maxWidth}px) {
+        grid-template-rows: repeat(calc(#{$factionsCount} / #{$columns}), 1fr);
+    }
+}
+
+.box {
+    color: white;
+    column-gap: 25px;
+    display: grid;
+    grid-auto-flow: column;
+
+    /* 5 columns */
+    grid-template-rows: repeat(calc(#{$factionsCount} / #{$columnCount5}), 1fr);
+
+    /* Media queries for different column configurations */
+    @include responsiveGrid($columnCount4, 2000); /* 4 columns */
+    @include responsiveGrid($columnCount3, 1600); /* 3 columns */
+    @include responsiveGrid($columnCount2, 1200); /* 2 columns */
+
+    /* 1 column */
+    @media (max-width: 800px) {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}

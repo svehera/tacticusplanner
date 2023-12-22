@@ -59,7 +59,9 @@ export class GlobalState implements IGlobalState {
                 activeAbilityLevel: personalCharData?.activeAbilityLevel ?? 0,
                 passiveAbilityLevel: personalCharData?.passiveAbilityLevel ?? 0,
                 stars: personalCharData?.stars ?? rarityToStars[rarity],
-                level: personalCharData?.level ?? 1,
+                level:
+                    personalCharData?.level ??
+                    Math.max(personalCharData?.activeAbilityLevel ?? 0, personalCharData?.passiveAbilityLevel ?? 0, 1),
                 xp: personalCharData?.xp ?? 0,
             };
             return {
