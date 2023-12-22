@@ -65,6 +65,7 @@ export interface IUnitData {
     alliance: Alliance;
     faction: Faction;
     factionColor: string;
+    factionIcon: string;
     name: string;
     numberAdded: number;
     health: number;

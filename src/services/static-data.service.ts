@@ -246,6 +246,7 @@ export class StaticDataService {
             alliance: rawData.Alliance,
             faction: rawData.Faction,
             factionColor: StaticDataService.getFactionColor(rawData.Faction),
+            factionIcon: StaticDataService.getFactionIcon(rawData.Faction),
             name: rawData.Name,
             numberAdded: rawData.Number,
             health: rawData.Health,
@@ -291,37 +292,74 @@ export class StaticDataService {
     static getFactionColor(faction: Faction): string {
         switch (faction) {
             case Faction.Ultramarines:
-                return '#C9DAF8';
+                return '#194486';
             case Faction.Black_Legion:
-                return '#DD7E6B';
+                return '#1C0F10';
             case Faction.Orks:
-                return '#FFE599';
+                return '#DC901E';
             case Faction.ADEPTA_SORORITAS:
-                return '#F4CCCC';
+                return '#962C38';
             case Faction.Necrons:
-                return '#B6D7A8';
+                return '#007E59';
             case Faction.Astra_militarum:
-                return '#D9EAD3';
+                return '#717838';
             case Faction.Death_Guard:
-                return '#93C47D';
+                return '#65540C';
             case Faction.Black_Templars:
-                return '#D9D9D9';
+                return '#929395';
             case Faction.Aeldari:
-                return '#A2C4C9';
+                return '#ac1b1a';
             case Faction.Space_Wolves:
-                return '#A4C2F4';
+                return '#084A92';
             case Faction.T_Au:
-                return '#FCE5CD';
+                return '#CE7140';
             case Faction.Dark_Angels:
-                return '#93C47D';
+                return '#18542B';
             case Faction.Thousand_Sons:
-                return '#A4C2F4';
+                return '#084A92';
             case Faction.Tyranids:
-                return 'violet';
+                return '#7f5283';
             case Faction.AdeptusMechanicus:
-                return '#DD7E6B';
+                return '#781e2e';
             default:
                 return '#ffffff';
+        }
+    }
+
+    static getFactionIcon(faction: Faction): string {
+        switch (faction) {
+            case Faction.Ultramarines:
+                return 'Ultramarines';
+            case Faction.Black_Legion:
+                return 'Black_Legion';
+            case Faction.Orks:
+                return 'Orks';
+            case Faction.ADEPTA_SORORITAS:
+                return 'ADEPTA_SORORITAS';
+            case Faction.Necrons:
+                return 'Necrons';
+            case Faction.Astra_militarum:
+                return 'Astra_militarum';
+            case Faction.Death_Guard:
+                return 'Death_Guard';
+            case Faction.Black_Templars:
+                return 'Black_Templars';
+            case Faction.Aeldari:
+                return 'Aeldari';
+            case Faction.Space_Wolves:
+                return 'Space_Wolves';
+            case Faction.T_Au:
+                return 'T_Au';
+            case Faction.Dark_Angels:
+                return 'Dark_Angels';
+            case Faction.Thousand_Sons:
+                return 'Thousand_Sons';
+            case Faction.Tyranids:
+                return 'Tyranids';
+            case Faction.AdeptusMechanicus:
+                return 'AdeptusMechanicus';
+            default:
+                return 'ffffff';
         }
     }
 

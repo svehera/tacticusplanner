@@ -12,6 +12,7 @@ import { isMobile } from 'react-device-detect';
 import background from '../../assets/images/background.png';
 import { UtilsService } from '../../services/utils.service';
 import { MiscIcon } from '../../shared-components/misc-icon';
+import { FactionImage } from '../../shared-components/faction-image';
 
 export const WhoYouOwn = () => {
     const { characters } = useContext(StoreContext);
@@ -42,6 +43,8 @@ export const WhoYouOwn = () => {
             .map(x => ({
                 faction: x,
                 chars: charactersByFaction[x],
+                factionColor: charactersByFaction[x][0].factionColor,
+                factionIcon: charactersByFaction[x][0].factionIcon,
                 factionPower: sum(charactersByFaction[x].map(UtilsService.getCharacterPower)),
                 factionMaxPower: charactersByFaction[x].length * UtilsService.maxCharacterPower,
                 unlockedCount: charactersByFaction[x].filter(x => x.rank > Rank.Locked).length,
@@ -53,14 +56,17 @@ export const WhoYouOwn = () => {
             <div key={x.faction} style={{ minWidth: 375, maxWidth: 375 }}>
                 <h4
                     style={{
-                        background: x.chars[0].factionColor,
+                        background: x.factionColor,
                         marginBottom: 0,
                         marginTop: 5,
                         borderTop: '2px solid gold',
                         fontWeight: 500,
                     }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <span>{x.faction.toUpperCase()}</span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                            <FactionImage faction={x.factionIcon} size={25} />
+                            <span>{x.faction.toUpperCase()}</span>
+                        </div>
                         <div style={{ display: 'flex' }}>
                             <MiscIcon icon={'power'} height={20} width={15} /> {x.factionPower}
                         </div>
@@ -88,19 +94,21 @@ export const WhoYouOwn = () => {
                 // backgroundImage: `url(${background})`,
                 // color: 'white',
             }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div style={{ display: 'flex', fontSize: 20, alignItems: 'center', fontWeight: 'bold' }}>
+                    <MiscIcon icon={'power'} height={40} width={30} /> {totalPower}
+                </div>
                 <TextField
                     sx={{ margin: '10px', width: '300px' }}
                     label="Quick Filter"
                     variant="outlined"
                     onChange={event => setFilter(event.target.value)}
                 />
-                <div style={{ display: 'flex', fontSize: 20, alignItems: 'center', fontWeight: 'bold' }}>
-                    <MiscIcon icon={'power'} height={40} width={30} /> {totalPower}
-                </div>
             </div>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 25 }}>{charactersByFaction}</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 25, color: 'white' }}>
+                {charactersByFaction}
+            </div>
         </Box>
     );
 };
