@@ -1,5 +1,6 @@
 ﻿import { ICharacter2, SetStateAction } from '../models/interfaces';
 import { Rank, Rarity } from '../models/enums';
+import { rankToLevel, rankToRarity, rarityToStars } from '../models/constants';
 
 export type CharactersAction =
     | {
@@ -34,12 +35,13 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
 
             if (existingChar) {
                 existingChar.rank = updatedCharacter.rank;
-                existingChar.rarity = updatedCharacter.rarity;
+                const rankRarity = rankToRarity[existingChar.rank];
+                existingChar.rarity = updatedCharacter.rarity <= rankRarity ? rankRarity : updatedCharacter.rarity;
                 existingChar.bias = updatedCharacter.bias;
                 existingChar.upgrades = updatedCharacter.upgrades;
-                existingChar.stars = updatedCharacter.stars;
-                existingChar.level =
-                    updatedCharacter.level < 0 ? 0 : updatedCharacter.level > 50 ? 50 : updatedCharacter.level;
+                const rarityStars = rarityToStars[existingChar.rarity];
+                existingChar.stars = updatedCharacter.stars <= rarityStars ? rarityStars : updatedCharacter.stars;
+
                 existingChar.xp = updatedCharacter.xp;
                 existingChar.activeAbilityLevel =
                     updatedCharacter.activeAbilityLevel < 0
@@ -53,6 +55,16 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                         : updatedCharacter.passiveAbilityLevel > 50
                         ? 50
                         : updatedCharacter.passiveAbilityLevel;
+
+                const updatedLevel =
+                    updatedCharacter.level < 0 ? 0 : updatedCharacter.level > 50 ? 50 : updatedCharacter.level;
+                const rankLevel = rankToLevel[existingChar.rank];
+                existingChar.level = Math.max(
+                    updatedLevel,
+                    rankLevel,
+                    existingChar.activeAbilityLevel,
+                    existingChar.passiveAbilityLevel
+                );
             }
             return [...state];
         }

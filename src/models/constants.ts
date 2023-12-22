@@ -20,6 +20,66 @@ export const rarityToStars: Record<Rarity, RarityStars> = {
     [Rarity.Legendary]: RarityStars.RedThreeStars,
 };
 
+export const rarityToMaxStars: Record<Rarity, RarityStars> = {
+    [Rarity.Common]: RarityStars.TwoStars,
+    [Rarity.Uncommon]: RarityStars.FourStars,
+    [Rarity.Rare]: RarityStars.RedOneStar,
+    [Rarity.Epic]: RarityStars.RedThreeStars,
+    [Rarity.Legendary]: RarityStars.BlueStar,
+};
+
+export const rarityToMaxRank: Record<Rarity, Rank> = {
+    [Rarity.Common]: Rank.Iron1,
+    [Rarity.Uncommon]: Rank.Bronze1,
+    [Rarity.Rare]: Rank.Silver1,
+    [Rarity.Epic]: Rank.Gold1,
+    [Rarity.Legendary]: Rank.Diamond3,
+};
+
+export const rankToLevel: Record<Rank, number> = {
+    [Rank.Locked]: 0,
+    [Rank.Stone1]: 3,
+    [Rank.Stone2]: 5,
+    [Rank.Stone3]: 8,
+    [Rank.Iron1]: 8, // 11
+    [Rank.Iron2]: 14,
+    [Rank.Iron3]: 17,
+    [Rank.Bronze1]: 17, // 20
+    [Rank.Bronze2]: 23,
+    [Rank.Bronze3]: 26,
+    [Rank.Silver1]: 26, // 29
+    [Rank.Silver2]: 32,
+    [Rank.Silver3]: 35,
+    [Rank.Gold1]: 35, // 38
+    [Rank.Gold2]: 41,
+    [Rank.Gold3]: 44,
+    [Rank.Diamond1]: 47,
+    [Rank.Diamond2]: 50,
+    [Rank.Diamond3]: 50,
+};
+
+export const rankToRarity: Record<Rank, Rarity> = {
+    [Rank.Locked]: 0,
+    [Rank.Stone1]: Rarity.Common,
+    [Rank.Stone2]: Rarity.Common,
+    [Rank.Stone3]: Rarity.Common,
+    [Rank.Iron1]: Rarity.Common,
+    [Rank.Iron2]: Rarity.Uncommon,
+    [Rank.Iron3]: Rarity.Uncommon,
+    [Rank.Bronze1]: Rarity.Uncommon,
+    [Rank.Bronze2]: Rarity.Rare,
+    [Rank.Bronze3]: Rarity.Rare,
+    [Rank.Silver1]: Rarity.Rare,
+    [Rank.Silver2]: Rarity.Epic,
+    [Rank.Silver3]: Rarity.Epic,
+    [Rank.Gold1]: Rarity.Epic,
+    [Rank.Gold2]: Rarity.Legendary,
+    [Rank.Gold3]: Rarity.Legendary,
+    [Rank.Diamond1]: Rarity.Legendary,
+    [Rank.Diamond2]: Rarity.Legendary,
+    [Rank.Diamond3]: Rarity.Legendary,
+};
+
 export const charsProgression: Record<number, ICharProgression> = {
     [Rarity.Common + RarityStars.OneStar]: { shards: 10 },
     [Rarity.Common + RarityStars.TwoStars]: { shards: 15 },

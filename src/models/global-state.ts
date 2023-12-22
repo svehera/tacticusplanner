@@ -17,8 +17,8 @@
     LegendaryEventData,
 } from './interfaces';
 import { StaticDataService } from '../services';
-import { CharacterBias, LegendaryEventEnum, Rank, RarityStars } from './enums';
-import { defaultData, rarityToStars } from './constants';
+import { CharacterBias, LegendaryEventEnum, Rank, Rarity, RarityStars } from './enums';
+import { defaultData, rankToLevel, rankToRarity, rarityToStars } from './constants';
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
@@ -49,19 +49,25 @@ export class GlobalState implements IGlobalState {
         const chars = GlobalState.fixNames(personalData.characters);
         this.characters = StaticDataService.unitsData.map(staticData => {
             const personalCharData = chars.find(c => c.name === staticData.name);
-            const rarity = personalCharData?.rarity ?? staticData.initialRarity;
+            const rank = personalCharData?.rank ?? Rank.Locked;
+            const rankLevel = rankToLevel[rank];
+            const rankRarity = rankToRarity[rank];
+            const rarity = Math.max(personalCharData?.rarity ?? staticData.initialRarity, rankRarity) as Rarity;
+            const stars = Math.max(personalCharData?.stars ?? 0, rarityToStars[rarity]);
+            const activeLevel = personalCharData?.activeAbilityLevel ?? 0;
+            const passiveLevel = personalCharData?.passiveAbilityLevel ?? 0;
+            const level = Math.max(personalCharData?.level ?? 1, rankLevel, activeLevel, passiveLevel);
+
             const combinedData: IPersonalCharacterData2 = {
                 name: staticData.name,
-                rank: personalCharData?.rank ?? Rank.Locked,
-                rarity: personalCharData?.rarity ?? staticData.initialRarity,
+                rank: rank,
+                rarity: rarity,
                 bias: personalCharData?.bias ?? CharacterBias.None,
                 upgrades: personalCharData?.upgrades ?? [],
-                activeAbilityLevel: personalCharData?.activeAbilityLevel ?? 0,
-                passiveAbilityLevel: personalCharData?.passiveAbilityLevel ?? 0,
-                stars: personalCharData?.stars ?? rarityToStars[rarity],
-                level:
-                    personalCharData?.level ??
-                    Math.max(personalCharData?.activeAbilityLevel ?? 0, personalCharData?.passiveAbilityLevel ?? 0, 1),
+                activeAbilityLevel: activeLevel,
+                passiveAbilityLevel: passiveLevel,
+                stars: stars,
+                level: level,
                 xp: personalCharData?.xp ?? 0,
             };
             return {

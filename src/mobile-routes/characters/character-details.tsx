@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useMemo, useState } from 'react';
 import { ICharacter2, IMaterialRecipeIngredientFull } from '../../models/interfaces';
 import { FormControl, FormGroup, Grid, Input, MenuItem, Select } from '@mui/material';
 import { CharacterBias, Rank, Rarity, RarityStars } from '../../models/enums';
@@ -8,6 +8,7 @@ import { RankImage } from '../../shared-components/rank-image';
 import { CharacterUpgrades } from '../../shared-components/character-upgrades';
 import { RarityImage } from '../../shared-components/rarity-image';
 import { StarsImage } from '../../shared-components/stars-image';
+import { rarityToMaxRank, rarityToMaxStars } from '../../models/constants';
 
 export const CharacterDetails = ({
     character,
@@ -35,10 +36,18 @@ export const CharacterDetails = ({
         characterChanges({ ...character, [name]: saveValue ?? value }, []);
     };
 
-    const rankEntries: number[] = getEnumValues(Rank);
+    const maxRank = useMemo(() => {
+        return rarityToMaxRank[formData.rarity];
+    }, [formData.rarity]);
+
+    const maxStars = useMemo(() => {
+        return rarityToMaxStars[formData.rarity];
+    }, [formData.rarity]);
+
     const rarityEntries: number[] = getEnumValues(Rarity);
+    const rankEntries: number[] = getEnumValues(Rank).filter(x => x === formData.rank || x <= maxRank);
     const biasEntries: number[] = getEnumValues(CharacterBias);
-    const starsEntries: number[] = getEnumValues(RarityStars);
+    const starsEntries: number[] = getEnumValues(RarityStars).filter(x => x === formData.stars || x <= maxStars);
 
     const getNativeSelectControl = (
         value: number,

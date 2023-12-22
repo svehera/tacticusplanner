@@ -65,7 +65,18 @@ export const UserMenu = () => {
         link.href = url;
         const dateTimestamp =
             typeof data.modifiedDate === 'string' ? data.modifiedDate : data.modifiedDate?.toISOString();
-        link.download = `v${data.schemaVersion}-tp-data-${dateTimestamp}.json`;
+        const date = new Date(dateTimestamp ?? '');
+
+        const options: Intl.DateTimeFormatOptions = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+        };
+        const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(date);
+
+        link.download = `${username}-data-${formattedDate}.json`;
         link.click();
 
         URL.revokeObjectURL(url);

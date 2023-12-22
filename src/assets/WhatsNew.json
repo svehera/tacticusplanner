@@ -2,6 +2,32 @@
   "currentVersion": "1.2.4",
   "releaseNotes": [
     {
+      "version": "1.2.5",
+      "date": "December 24",
+      "type": "Update",
+      "new": [
+        {
+          "text": "New UI for the \"Who You Own\" screen that targets to match in-game Characters screen"
+        },
+        {
+          "text": "New character's details to input and track"
+        }
+      ],
+      "minor": [
+        {
+          "text": "Added a limit for ranks in the \"Goals\" and the \"Who You Own\" based on the character's rarity (Arvanes)"
+        },
+        {
+          "text": "Added a username and updated datetime format in the exported file name when using the Export feature"
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed issue with error on home page/daily raids (UnderChromey, Ozymandias)"
+        }
+      ]
+    },
+    {
       "version": "1.2.4",
       "date": "December 19",
       "type": "Patch",
