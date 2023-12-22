@@ -4,7 +4,7 @@ import React from 'react';
 export const CampaignImage = ({ campaign, size }: { campaign: string; size?: number }) => {
     try {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const image = require(`../assets/images/campaings/${campaign}.jpg`);
+        const image = require(`../assets/images/campaings/${campaign}.png`);
 
         return (
             <Tooltip content={campaign} relationship="label" hideDelay={1000}>

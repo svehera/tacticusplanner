@@ -6,15 +6,17 @@ import { groupBy, orderBy, sum } from 'lodash';
 import Box from '@mui/material/Box';
 import { CharacterItem } from '../../shared-components/character-item';
 import { StoreContext } from '../../reducers/store.provider';
-import { Rank, Rarity, RarityStars } from '../../models/enums';
+import { Rank } from '../../models/enums';
 import { isMobile } from 'react-device-detect';
 
 import background from '../../assets/images/background.png';
-import { ICharacter2 } from '../../models/interfaces';
+import { UtilsService } from '../../services/utils.service';
+import { MiscIcon } from '../../shared-components/misc-icon';
 
 export const WhoYouOwn = () => {
     const { characters } = useContext(StoreContext);
     const [filter, setFilter] = useState('');
+    const [totalPower, setTotalPower] = useState(0);
 
     const factionsOrder = useMemo(() => {
         const charactersByFaction = groupBy(characters, 'faction');
@@ -29,21 +31,6 @@ export const WhoYouOwn = () => {
         ).map(x => x.faction);
     }, []);
 
-    const getCharacterPower = (char: ICharacter2): number => {
-        if (char.rank === Rank.Locked) {
-            return 0;
-        }
-
-        const rarityAndStars = char.stars + char.rarity;
-
-        return (
-            rarityAndStars * rarityAndStars +
-            char.activeAbilityLevel * char.activeAbilityLevel +
-            char.passiveAbilityLevel * char.passiveAbilityLevel +
-            char.rank * char.rank * char.rank
-        );
-    };
-
     const charactersByFaction = useMemo(() => {
         const filteredCharacters = filter
             ? characters.filter(x => x.name.toLowerCase().includes(filter.toLowerCase()))
@@ -55,28 +42,22 @@ export const WhoYouOwn = () => {
             .map(x => ({
                 faction: x,
                 chars: charactersByFaction[x],
-                factionPower: sum(charactersByFaction[x].map(getCharacterPower)),
-                factionMaxPower: sum(
-                    charactersByFaction[x]
-                        .map(char => ({
-                            ...char,
-                            stars: RarityStars.BlueStar,
-                            activeAbilityLevel: 50,
-                            passiveAbilityLevel: 50,
-                            rank: Rank.Diamond2,
-                            rarity: Rarity.Legendary,
-                        }))
-                        .map(getCharacterPower)
-                ),
+                factionPower: sum(charactersByFaction[x].map(UtilsService.getCharacterPower)),
+                factionMaxPower: charactersByFaction[x].length * UtilsService.maxCharacterPower,
                 unlockedCount: charactersByFaction[x].filter(x => x.rank > Rank.Locked).length,
             }));
 
+        setTotalPower(sum(factionsOrdered.map(x => x.factionPower)));
+
         return factionsOrdered.map(x => (
-            <div key={x.faction} style={{ minWidth: 375 }}>
+            <div key={x.faction} style={{ minWidth: 375, maxWidth: 375 }}>
                 <h4 style={{ background: x.chars[0].factionColor, marginBottom: 0, marginTop: 5 }}>
-                    {x.faction.toUpperCase()}
-                    {/*- {Math.floor((x.factionPower / x.factionMaxPower) * 100)}%{' '}*/}
-                    {/*{x.factionPower}/{x.factionMaxPower}*/}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <span>{x.faction.toUpperCase()}</span>
+                        <div style={{ display: 'flex' }}>
+                            <MiscIcon icon={'power'} height={20} width={15} /> {x.factionPower}
+                        </div>
+                    </div>
                 </h4>
                 <div
                     style={{
@@ -99,12 +80,18 @@ export const WhoYouOwn = () => {
                 padding: isMobile ? 0 : 2,
                 // backgroundImage: `url(${background})`,
             }}>
-            <TextField
-                sx={{ margin: '10px', width: '300px' }}
-                label="Quick Filter"
-                variant="outlined"
-                onChange={event => setFilter(event.target.value)}
-            />
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <TextField
+                    sx={{ margin: '10px', width: '300px' }}
+                    label="Quick Filter"
+                    variant="outlined"
+                    onChange={event => setFilter(event.target.value)}
+                />
+                <div style={{ display: 'flex', fontSize: 20, alignItems: 'center', fontWeight: 'bold' }}>
+                    <MiscIcon icon={'power'} height={40} width={30} /> {totalPower}
+                </div>
+            </div>
+
             <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 25 }}>{charactersByFaction}</div>
         </Box>
     );

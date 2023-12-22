@@ -1,7 +1,7 @@
 ﻿import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
 
-// const baseUrl = 'https://helloworldseveryn.azurewebsites.net/api/';
-const baseUrl = 'http://localhost:7071/api/';
+const baseUrl = 'https://helloworldseveryn.azurewebsites.net/api/';
+// const baseUrl = 'http://localhost:7071/api/';
 
 export const callApi = <TData = any | null, TError = any | null, TResponse = TData>(
     method: Method,

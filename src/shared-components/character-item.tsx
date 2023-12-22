@@ -6,6 +6,8 @@ import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { CharacterDetails } from '../mobile-routes/characters/character-details';
 import Button from '@mui/material/Button';
 import { DispatchContext } from '../reducers/store.provider';
+import { UtilsService } from '../services/utils.service';
+import { MiscIcon } from './misc-icon';
 
 export const CharacterItem = (props: { character: ICharacter2 }) => {
     const [open, setOpen] = useState(false);
@@ -40,7 +42,13 @@ export const CharacterItem = (props: { character: ICharacter2 }) => {
 
             <Dialog open={open} onClose={handleClose} fullWidth>
                 <DialogTitle>
-                    <CharacterTitle character={character} />
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <CharacterTitle character={character} />
+                        <div style={{ display: 'flex' }}>
+                            <MiscIcon icon={'power'} height={20} width={15} />{' '}
+                            {UtilsService.getCharacterPower(character)}
+                        </div>
+                    </div>
                 </DialogTitle>
                 <DialogContent style={{ paddingTop: 20 }}>
                     <CharacterDetails
