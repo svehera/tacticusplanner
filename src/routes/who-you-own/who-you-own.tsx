@@ -68,7 +68,8 @@ export const WhoYouOwn = () => {
                             <span>{x.faction.toUpperCase()}</span>
                         </div>
                         <div style={{ display: 'flex' }}>
-                            <MiscIcon icon={'power'} height={20} width={15} /> {x.factionPower}
+                            <MiscIcon icon={'power'} height={20} width={15} />{' '}
+                            {x.factionPower.toLocaleString().replace(/,/g, ' ')}
                         </div>
                     </div>
                 </h4>
@@ -96,7 +97,7 @@ export const WhoYouOwn = () => {
             }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <div style={{ display: 'flex', fontSize: 20, alignItems: 'center', fontWeight: 'bold' }}>
-                    <MiscIcon icon={'power'} height={40} width={30} /> {totalPower}
+                    <MiscIcon icon={'power'} height={40} width={30} /> {totalPower.toLocaleString().replace(/,/g, ' ')}
                 </div>
                 <TextField
                     sx={{ margin: '10px', width: '300px' }}

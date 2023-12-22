@@ -46,7 +46,7 @@ export const CharacterItem = (props: { character: ICharacter2 }) => {
                         <CharacterTitle character={character} />
                         <div style={{ display: 'flex' }}>
                             <MiscIcon icon={'power'} height={20} width={15} />{' '}
-                            {UtilsService.getCharacterPower(character)}
+                            {UtilsService.getCharacterPower(character).toLocaleString().replace(/,/g, ' ')}
                         </div>
                     </div>
                 </DialogTitle>
