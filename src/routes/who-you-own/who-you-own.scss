@@ -6,8 +6,9 @@ $columnCount3: 3;
 $columnCount2: 2;
 
 @mixin responsiveGrid($columns, $maxWidth) {
+    $roundedRows: round($factionsCount / $columns);
     @media (max-width: #{$maxWidth}px) {
-        grid-template-rows: repeat(calc(#{$factionsCount} / #{$columns}), 1fr);
+        grid-template-rows: repeat(#{$roundedRows}, 1fr);
     }
 }
 
@@ -18,7 +19,8 @@ $columnCount2: 2;
     grid-auto-flow: column;
 
     /* 5 columns */
-    grid-template-rows: repeat(calc(#{$factionsCount} / #{$columnCount5}), 1fr);
+    $roundedRows5: round($factionsCount / $columnCount5);
+    grid-template-rows: repeat(#{$roundedRows5}, 1fr);
 
     /* Media queries for different column configurations */
     @include responsiveGrid($columnCount4, 2000); /* 4 columns */
