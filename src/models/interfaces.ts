@@ -332,6 +332,7 @@ export interface IViewPreferences {
     onlyUnlocked: boolean;
     craftableItemsInInventory: boolean;
     hideCompleted: boolean;
+    hideNames: boolean;
 }
 
 export interface IAutoTeamsPreferences {

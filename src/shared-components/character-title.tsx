@@ -14,11 +14,13 @@ export const CharacterTitle = ({
     showLockedWithOpacity,
     wyo,
     onClick,
+    hideName,
     short,
     imageSize,
 }: {
     character: ICharacter2;
     showLockedWithOpacity?: boolean;
+    hideName?: boolean;
     wyo?: boolean;
     onClick?: () => void;
     short?: boolean;
@@ -41,12 +43,12 @@ export const CharacterTitle = ({
         const maxRare = character.rarity === Rarity.Rare && character.rank === Rank.Silver1;
         const maxEpic = character.rarity === Rarity.Epic && character.rank === Rank.Gold1;
         return maxCommon || maxUncommon || maxRare || maxEpic;
-    }, []);
+    }, [character.rarity, character.rank]);
 
     const characterFull = (
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>
             <CharacterImage key={character.name} icon={character.icon} name={character.name} imageSize={imageSize} />
-            <span>{character.name}</span>
+            {!hideName && <span>{character.name}</span>}
             <RarityImage rarity={character.rarity} />
             {isUnlocked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
             <Tooltip
@@ -75,55 +77,53 @@ export const CharacterTitle = ({
                     />
                 </span>
             </Tooltip>
-            <span>{character.name}</span>
-        </div>
-    );
-
-    const characterWYO = (
-        <div style={{ display: 'flex', gap: 5, alignItems: 'center', opacity, cursor }} onClick={onClick}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 75 }}>
-                <StarsImage stars={character.stars} />
-                <Tooltip title={character.name} placement={'top'}>
-                    <div>
-                        <Badge
-                            badgeContent={needToAscend ? '⇧' : character.upgrades.length}
-                            color={needToAscend ? 'warning' : 'success'}>
-                            <CharacterImage
-                                key={character.name}
-                                icon={character.icon}
-                                name={character.name}
-                                imageSize={imageSize}
-                                portrait={true}
-                            />
-                        </Badge>
-
-                        <div className="abilities" style={{ visibility: hasAbilities ? 'visible' : 'hidden' }}>
-                            <div className="ability-level">{character.activeAbilityLevel}</div>
-                            <div className="ability-level">{character.passiveAbilityLevel}</div>
-                        </div>
-                        <div
-                            className="character-level"
-                            style={{ visibility: isUnlocked && character.level > 0 ? 'visible' : 'hidden' }}>
-                            {character.level}
-                        </div>
-                    </div>
-                </Tooltip>
-                <div
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: isUnlocked ? 'space-between' : 'center',
-                        marginTop: -15,
-                    }}>
-                    <RarityImage rarity={character.rarity} />
-                    {isUnlocked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
-                </div>
-            </div>
+            {!hideName && <span>{character.name}</span>}
         </div>
     );
 
     if (wyo) {
-        return characterWYO;
+        return (
+            <div style={{ display: 'flex', gap: 5, alignItems: 'center', opacity, cursor }} onClick={onClick}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 75 }}>
+                    <StarsImage stars={character.stars} />
+                    <Tooltip title={character.name} placement={'top'}>
+                        <div>
+                            <Badge
+                                badgeContent={needToAscend ? '⇧' : character.upgrades.length}
+                                color={needToAscend ? 'warning' : 'success'}>
+                                <CharacterImage
+                                    key={character.name}
+                                    icon={character.icon}
+                                    name={character.name}
+                                    imageSize={imageSize}
+                                    portrait={true}
+                                />
+                            </Badge>
+
+                            <div className="abilities" style={{ visibility: hasAbilities ? 'visible' : 'hidden' }}>
+                                <div className="ability-level">{character.activeAbilityLevel}</div>
+                                <div className="ability-level">{character.passiveAbilityLevel}</div>
+                            </div>
+                            <div
+                                className="character-level"
+                                style={{ visibility: isUnlocked && character.level > 0 ? 'visible' : 'hidden' }}>
+                                {character.level}
+                            </div>
+                        </div>
+                    </Tooltip>
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: isUnlocked ? 'space-between' : 'center',
+                            marginTop: -15,
+                        }}>
+                        <RarityImage rarity={character.rarity} />
+                        {isUnlocked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     return short ? characterShort : characterFull;

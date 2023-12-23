@@ -77,11 +77,12 @@ export const LegendaryEventTrack = ({
                 track.unitsRestrictions,
                 track.section,
                 viewPreferences.lightWeight,
+                viewPreferences.hideNames,
                 restrictions,
                 completedRequirements
             ),
         ],
-        [track.eventId, viewPreferences.lightWeight, restrictions, completedRequirements]
+        [track.eventId, viewPreferences.lightWeight, viewPreferences.hideNames, restrictions, completedRequirements]
     );
 
     const teams = useMemo(
@@ -140,6 +141,7 @@ export const LegendaryEventTrack = ({
         unitsRestrictions: ILegendaryEventTrackRequirement[],
         suffix: LegendaryEventSection,
         lightweight: boolean,
+        hideNames: boolean,
         selectedRequirements: string[],
         completedRestrictions: string[]
     ): Array<ColDef> {
@@ -158,7 +160,7 @@ export const LegendaryEventTrack = ({
                 : (props: ICellRendererParams<ICharacter2>) => {
                       const character = props.value;
                       if (character) {
-                          return <CharacterTitle character={character} imageSize={30} />;
+                          return <CharacterTitle character={character} imageSize={30} hideName={hideNames} />;
                       }
                   },
             cellClass: (params: CellClassParams) =>
