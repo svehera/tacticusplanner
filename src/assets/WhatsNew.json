@@ -7,10 +7,44 @@
       "type": "Update",
       "new": [
         {
-          "text": "New UI for the \"Who You Own\" screen that targets to match in-game Characters screen"
+          "text": "Merry Christmas!"
         },
         {
-          "text": "New character's details to input and track"
+          "text": "Added power level benchmark: total, faction, character. Disclaimer: Doesn't represent in-game power",
+          "images": [
+            {
+              "path": "power.png"
+            }
+          ]
+        },
+        {
+          "text": "New UI for the \"Who You Own\" screen that targets to match in-game Characters screen. For each character you can see:",
+          "subPoints": [
+            "Stars level",
+            "Character's in-game portraits",
+            "Badge with amount of upgrades applied or indicator that character needs to be ascended to progress",
+            "Active and passive abilities levels",
+            "Character's level",
+            "Character's rarity(new) and rank icons"
+          ],
+          "images": [
+            {
+              "path": "wyo.png"
+            }
+          ]
+        },
+        {
+          "text": "New character's details to input and track",
+          "subPoints": [
+            "Stars level",
+            "Character's level",
+            "Character's xp"
+          ],
+          "images": [
+            {
+              "path": "details.png"
+            }
+          ]
         }
       ],
       "minor": [
@@ -23,7 +57,7 @@
       ],
       "bugFixes": [
         {
-          "text": "Fixed issue with error on home page/daily raids (UnderChromey, Ozymandias)"
+          "text": "Fixed issue with characters icons not being loaded on upgrades lookup table (Corusame)"
         }
       ]
     },
