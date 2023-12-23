@@ -32,7 +32,7 @@ export const CharacterImage = ({
     ) : (
         <img
             loading={'lazy'}
-            style={{ pointerEvents: 'none', contentVisibility: 'auto', borderRadius: '50%' }}
+            style={{ pointerEvents: 'none', borderRadius: '50%' }}
             src={image}
             height={imageSize ?? 50}
             alt={name ?? icon}
