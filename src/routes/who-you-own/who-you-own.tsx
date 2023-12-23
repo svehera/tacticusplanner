@@ -1,6 +1,6 @@
 ﻿import React, { useContext, useMemo, useState } from 'react';
 
-import { TextField } from '@mui/material';
+import { TextField, Tooltip } from '@mui/material';
 
 import { groupBy, orderBy, sum } from 'lodash';
 import Box from '@mui/material/Box';
@@ -13,6 +13,7 @@ import background from '../../assets/images/background.png';
 import { UtilsService } from '../../services/utils.service';
 import { MiscIcon } from '../../shared-components/misc-icon';
 import { FactionImage } from '../../shared-components/faction-image';
+import WarningIcon from '@mui/icons-material/Warning';
 
 import './who-you-own.scss';
 
@@ -106,7 +107,13 @@ export const WhoYouOwn = () => {
                         fontWeight: 'bold',
                         minWidth: 'fit-content',
                     }}>
-                    <MiscIcon icon={'power'} height={40} width={30} /> {totalPower.toLocaleString().replace(/,/g, ' ')}
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <Tooltip title={"Disclaimer: Doesn't represent in-game power"} placement={'top'}>
+                            <WarningIcon color={'warning'} fontSize={'large'} />
+                        </Tooltip>
+                        <MiscIcon icon={'power'} height={40} width={30} />{' '}
+                        {totalPower.toLocaleString().replace(/,/g, ' ')}
+                    </div>
                 </div>
                 <TextField
                     sx={{ margin: '10px', width: '300px' }}
