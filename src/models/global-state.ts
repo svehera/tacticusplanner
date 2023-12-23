@@ -50,7 +50,7 @@ export class GlobalState implements IGlobalState {
         this.characters = StaticDataService.unitsData.map(staticData => {
             const personalCharData = chars.find(c => c.name === staticData.name);
             const rank = personalCharData?.rank ?? Rank.Locked;
-            const rankLevel = rankToLevel[rank];
+            const rankLevel = rankToLevel[(rank - 1) as Rank];
             const rankRarity = rankToRarity[rank];
             const rarity = Math.max(personalCharData?.rarity ?? staticData.initialRarity, rankRarity) as Rarity;
             const stars = Math.max(personalCharData?.stars ?? 0, rarityToStars[rarity]);

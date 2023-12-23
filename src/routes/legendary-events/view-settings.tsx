@@ -150,6 +150,23 @@ const ViewSettings = ({ options }: { options?: Array<keyof IViewPreferences> }) 
             )}
 
             {checkOptions(
+                'hideNames',
+                <Tooltip title={'Hide characters names'}>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                disabled={viewPreferences.lightWeight}
+                                checked={viewPreferences.hideNames}
+                                onChange={event => updatePreferences('hideNames', event.target.checked)}
+                                inputProps={{ 'aria-label': 'controlled' }}
+                            />
+                        }
+                        label="Hide names"
+                    />
+                </Tooltip>
+            )}
+
+            {checkOptions(
                 'craftableItemsInInventory',
                 <FormControlLabel
                     control={

@@ -37,20 +37,21 @@ export const rarityToMaxRank: Record<Rarity, Rank> = {
 };
 
 export const rankToLevel: Record<Rank, number> = {
+    [Rank.Locked - 1]: 0,
     [Rank.Locked]: 0,
     [Rank.Stone1]: 3,
     [Rank.Stone2]: 5,
     [Rank.Stone3]: 8,
-    [Rank.Iron1]: 8, // 11
+    [Rank.Iron1]: 11,
     [Rank.Iron2]: 14,
     [Rank.Iron3]: 17,
-    [Rank.Bronze1]: 17, // 20
+    [Rank.Bronze1]: 20,
     [Rank.Bronze2]: 23,
     [Rank.Bronze3]: 26,
-    [Rank.Silver1]: 26, // 29
+    [Rank.Silver1]: 29,
     [Rank.Silver2]: 32,
     [Rank.Silver3]: 35,
-    [Rank.Gold1]: 35, // 38
+    [Rank.Gold1]: 38,
     [Rank.Gold2]: 41,
     [Rank.Gold3]: 44,
     [Rank.Diamond1]: 47,
@@ -187,6 +188,7 @@ export const defaultData: IPersonalData2 = {
         onlyUnlocked: false,
         hideCompleted: false,
         craftableItemsInInventory: false,
+        hideNames: false,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,

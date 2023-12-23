@@ -58,7 +58,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
 
                 const updatedLevel =
                     updatedCharacter.level < 0 ? 0 : updatedCharacter.level > 50 ? 50 : updatedCharacter.level;
-                const rankLevel = rankToLevel[existingChar.rank];
+                const rankLevel = rankToLevel[(existingChar.rank - 1) as Rank];
                 existingChar.level = Math.max(
                     updatedLevel,
                     rankLevel,

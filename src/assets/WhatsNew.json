@@ -1,6 +1,31 @@
 ﻿{
-  "currentVersion": "1.2.5",
+  "currentVersion": "1.2.6",
   "releaseNotes": [
+    {
+      "version": "1.2.6",
+      "date": "December 23",
+      "type": "Patch",
+      "new": [
+      ],
+      "minor": [
+        {
+          "text": "Added option to hide characters names on LE planner tables",
+          "images": [
+            {
+              "path": "hidenames.png"
+            }
+          ]
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed issue with character level not being correspond to rank (Lëonaica, Hominus)"
+        },
+        {
+          "text": "Fixed issue with \"need to ascend to upgrade rank\" not updated without refresh when character's rarity changed (Mehal)"
+        }
+      ]
+    },
     {
       "version": "1.2.5",
       "date": "December 23",

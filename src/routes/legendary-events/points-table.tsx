@@ -4,6 +4,7 @@ import {
     CellClassParams,
     ColDef,
     ColGroupDef,
+    ICellRendererParams,
     ITooltipParams,
     RowClassParams,
     RowStyle,
@@ -11,6 +12,7 @@ import {
 } from 'ag-grid-community';
 
 import {
+    ICharacter2,
     ILegendaryEvent,
     ILegendaryEventSelectedTeams,
     ILegendaryEventTrack,
@@ -22,6 +24,7 @@ import { fitGridOnWindowResize, rankToString } from '../../shared-logic/function
 import { sum, uniq } from 'lodash';
 import { CharactersSelection, ITableRow } from './legendary-events.interfaces';
 import { StoreContext } from '../../reducers/store.provider';
+import { CharacterTitle } from '../../shared-components/character-title';
 
 const PointsTable = (props: {
     legendaryEvent: ILegendaryEvent;
@@ -29,7 +32,7 @@ const PointsTable = (props: {
     short: boolean;
 }) => {
     const { legendaryEvent } = props;
-    const { leSelectedTeams } = useContext(StoreContext);
+    const { leSelectedTeams, viewPreferences } = useContext(StoreContext);
     const personalLegendaryEvent = useMemo<ILegendaryEventSelectedTeams>(() => {
         const legendaryEventPersonal = leSelectedTeams[legendaryEvent.id];
         return {
@@ -41,7 +44,7 @@ const PointsTable = (props: {
         };
     }, [legendaryEvent.id]);
 
-    const [selection, setSelection] = useState<CharactersSelection>(CharactersSelection.All);
+    const [selection, setSelection] = useState<CharactersSelection>(CharactersSelection.Selected);
 
     const gridRef = useRef<AgGridReact>(null);
 
@@ -59,8 +62,20 @@ const PointsTable = (props: {
             },
             {
                 field: 'name',
-                width: 150,
+                width: viewPreferences.hideNames ? 100 : 200,
                 sortable: true,
+                cellRenderer: (props: ICellRendererParams<ITableRow>) => {
+                    const row = props.data;
+                    if (row) {
+                        return (
+                            <CharacterTitle
+                                character={row.character}
+                                imageSize={30}
+                                hideName={viewPreferences.hideNames}
+                            />
+                        );
+                    }
+                },
                 cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
                 tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
             },
@@ -97,25 +112,22 @@ const PointsTable = (props: {
                   },
                   {
                       field: 'name',
-                      width: 150,
+                      width: viewPreferences.hideNames ? 100 : 200,
                       sortable: true,
+                      cellRenderer: (props: ICellRendererParams<ITableRow>) => {
+                          const row = props.data;
+                          if (row) {
+                              return (
+                                  <CharacterTitle
+                                      character={row.character}
+                                      imageSize={30}
+                                      hideName={viewPreferences.hideNames}
+                                  />
+                              );
+                          }
+                      },
                       cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
                       tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
-                  },
-                  {
-                      field: 'rank',
-                      width: 100,
-                      sortable: true,
-                      cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
-                      valueFormatter: (params: ValueFormatterParams<ITableRow>) =>
-                          rankToString(params.data?.rank ?? Rank.Locked),
-                  },
-                  {
-                      field: 'rarity',
-                      width: 100,
-                      sortable: true,
-                      cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
-                      valueFormatter: (params: ValueFormatterParams<ITableRow>) => Rarity[params.data?.rarity ?? 0],
                   },
                   {
                       headerName: 'Total',
@@ -225,9 +237,7 @@ const PointsTable = (props: {
                 return bTotal - aTotal;
             })
             .map((x, index) => ({
-                name: x.name,
-                rank: x.rank,
-                rarity: x.rarity,
+                character: x,
                 position: index + 1,
                 className: Rank[x.rank].toLowerCase(),
                 tooltip: x.name + ' - ' + Rank[x.rank ?? 0],
@@ -302,9 +312,7 @@ const PointsTable = (props: {
                     b.legendaryEvents[legendaryEvent.id].totalPoints - a.legendaryEvents[legendaryEvent.id].totalPoints
             )
             .map((x, index) => ({
-                name: x.name,
-                rarity: x.rarity,
-                rank: x.rank,
+                character: x,
                 position: index + 1,
                 className: Rank[x.rank].toLowerCase(),
                 tooltip: x.name + ' - ' + Rank[x.rank ?? 0],
@@ -350,23 +358,23 @@ const PointsTable = (props: {
                     <RadioGroup
                         style={{ display: 'flex', flexDirection: 'row' }}
                         aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue={CharactersSelection.All}
+                        defaultValue={CharactersSelection.Selected}
                         onChange={(_, value) => {
                             setSelection(value as CharactersSelection);
                             props.selectionChange(value as CharactersSelection);
                         }}
                         name="radio-buttons-group">
-                        <FormControlLabel value={CharactersSelection.All} control={<Radio />} label="All" />
-                        <FormControlLabel
-                            value={CharactersSelection.Unlocked}
-                            control={<Radio />}
-                            label="Only unlocked"
-                        />
                         <FormControlLabel
                             value={CharactersSelection.Selected}
                             control={<Radio />}
                             label="Only selected"
                         />
+                        <FormControlLabel
+                            value={CharactersSelection.Unlocked}
+                            control={<Radio />}
+                            label="Only unlocked"
+                        />
+                        <FormControlLabel value={CharactersSelection.All} control={<Radio />} label="All" />
                     </RadioGroup>
                 </FormControl>
             </div>
@@ -376,7 +384,6 @@ const PointsTable = (props: {
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
                     columnDefs={columnsDef}
-                    getRowStyle={getRowStyle}
                     onGridReady={fitGridOnWindowResize(gridRef)}
                     onSortChanged={() => gridRef.current?.api?.refreshCells()}
                     onFilterChanged={() => gridRef.current?.api?.refreshCells()}></AgGridReact>

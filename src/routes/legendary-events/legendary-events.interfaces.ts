@@ -1,4 +1,4 @@
-﻿import { ICharLegendaryEvent } from '../../models/interfaces';
+﻿import { ICharacter2, ICharLegendaryEvent } from '../../models/interfaces';
 import { Rank, Rarity } from '../../models/enums';
 
 export enum CharactersSelection {
@@ -8,9 +8,7 @@ export enum CharactersSelection {
 }
 
 export interface ITableRow extends ICharLegendaryEvent {
-    name: string;
-    rank: Rank;
-    rarity: Rarity;
+    character: ICharacter2;
     tooltip: string;
     className: string;
     position: number;

@@ -46,11 +46,15 @@ export const SelectedTeamsTable = (props: {
             {
                 headerName: track.name,
                 headerClass: track.section,
-                children: getSectionColumns(track.unitsRestrictions, viewPreferences.lightWeight),
+                children: getSectionColumns(
+                    track.unitsRestrictions,
+                    viewPreferences.lightWeight,
+                    viewPreferences.hideNames
+                ),
                 openByDefault: true,
             },
         ],
-        [track.eventId, viewPreferences.lightWeight, props.completedRequirements]
+        [track.eventId, viewPreferences.lightWeight, viewPreferences.hideNames, props.completedRequirements]
     );
 
     const handleCellCLick = (cellClicked: CellClickedEvent<ITableRow[], ICharacter2>) => {
@@ -81,7 +85,8 @@ export const SelectedTeamsTable = (props: {
 
     function getSectionColumns(
         unitsRestrictions: ILegendaryEventTrackRequirement[],
-        lightweight: boolean
+        lightweight: boolean,
+        hideNames: boolean
     ): Array<ColDef> {
         return unitsRestrictions.map(u => ({
             field: u.name,
@@ -98,7 +103,7 @@ export const SelectedTeamsTable = (props: {
                 : (props: ICellRendererParams<ICharacter2>) => {
                       const character = props.value;
                       if (character) {
-                          return <CharacterTitle character={character} imageSize={30} />;
+                          return <CharacterTitle character={character} imageSize={30} hideName={hideNames} />;
                       }
                   },
             cellClass: (params: CellClassParams) =>
