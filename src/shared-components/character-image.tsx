@@ -1,24 +1,41 @@
 ﻿import React from 'react';
 
-export const CharacterImage = ({ icon, name, imageSize }: { icon: string; name?: string; imageSize?: number }) => {
+export const CharacterImage = ({
+    icon,
+    name,
+    imageSize,
+    portrait,
+}: {
+    icon: string;
+    name?: string;
+    imageSize?: number;
+    portrait?: boolean;
+}) => {
+    const iconPath = portrait ? 'portraits' : 'characters';
+    let image: any;
     try {
         // Import image on demand
         // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const image = require(`../assets/images/characters/${icon}`);
-
-        // If the image doesn't exist. return null
-        if (!image) return <span>{name}</span>;
-        return (
-            <img
-                loading={'lazy'}
-                style={{ pointerEvents: 'none', contentVisibility: 'auto', borderRadius: '50%' }}
-                src={image}
-                height={imageSize ?? 50}
-                alt={name ?? icon}
-            />
-        );
+        image = require(`../assets/images/${iconPath}/${icon}`);
     } catch (error) {
-        // console.log(`Image with name "${icon}" does not exist`);
-        return <span>{name}</span>;
+        image = require(`../assets/images/${iconPath}/unset.png`);
     }
+
+    return portrait ? (
+        <img
+            loading={'lazy'}
+            style={{ pointerEvents: 'none', contentVisibility: 'auto' }}
+            src={image}
+            width={60}
+            alt={name ?? icon}
+        />
+    ) : (
+        <img
+            loading={'lazy'}
+            style={{ pointerEvents: 'none', borderRadius: '50%' }}
+            src={image}
+            height={imageSize ?? 50}
+            alt={name ?? icon}
+        />
+    );
 };

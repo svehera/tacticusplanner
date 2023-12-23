@@ -1,0 +1,37 @@
+﻿.abilities {
+    position: relative;
+    top: -7px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 100;
+}
+
+.character-level {
+    position: relative;
+    top: -15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid gold;
+    background-color: #012A41;
+    color: white;
+
+    font-size: 12px;
+}
+
+.ability-level {
+    width: 15px;
+    height: 15px;
+    
+    line-height: 15px;
+    text-align: center;
+    
+    border-radius: 50%;
+    border: 1px solid gold;
+    background-color: #012A41;
+    color: white;
+    
+    font-size: 12px;
+}

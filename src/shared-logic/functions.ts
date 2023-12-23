@@ -1,8 +1,6 @@
 ﻿import React from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ICharacter } from '../models/interfaces';
-import { Rank, Rarity } from '../models/enums';
-import { pooEmoji, starEmoji } from '../models/constants';
+import { Rank, Rarity, RarityStars } from '../models/enums';
 
 export const fitGridOnWindowResize = (gridRef: React.RefObject<AgGridReact>) => {
     function handleResize() {
@@ -18,6 +16,15 @@ export const fitGridOnWindowResize = (gridRef: React.RefObject<AgGridReact>) => 
     });
 
     return handleResize;
+};
+
+export const rarityStarsToString = (rarity: RarityStars): string => {
+    switch (rarity) {
+        case RarityStars.None:
+            return 'None';
+        default:
+            return '';
+    }
 };
 
 export const rankToString = (rank: Rank): string => {

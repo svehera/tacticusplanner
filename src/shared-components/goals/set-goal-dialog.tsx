@@ -28,9 +28,9 @@ import { CharactersAutocomplete } from '../characters-autocomplete';
 import { RankSelect } from '../rank-select';
 import { RaritySelect } from '../rarity-select';
 import { CharacterTitle } from '../character-title';
-import { StaticDataService } from '../../services';
 import { isEqual } from 'lodash';
 import { CharacterUpgrades } from '../character-upgrades';
+import { rarityToMaxRank } from '../../models/constants';
 
 const getDefaultForm = (priority: number): IPersonalGoal => ({
     id: v4(),
@@ -93,8 +93,12 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         </FormControl>
     );
 
+    const maxRank = useMemo(() => {
+        return rarityToMaxRank[character?.rarity ?? 0];
+    }, [character?.rarity]);
+
     const rankValues = useMemo(() => {
-        const result = getEnumValues(Rank).filter(x => x > 0 && (!character || x >= character.rank));
+        const result = getEnumValues(Rank).filter(x => x > 0 && (!character || x >= character.rank) && x <= maxRank);
         setForm(curr => ({ ...curr, targetRank: result[0] }));
         return result;
     }, [character]);
@@ -153,7 +157,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
             <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
                 <DialogTitle style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
-                    <span>Set Goal</span> {character ? <CharacterItem character={character} /> : undefined}
+                    <span>Set Goal</span> {character ? <CharacterTitle character={character} /> : undefined}
                 </DialogTitle>
                 <DialogContent>
                     <Box
@@ -310,8 +314,12 @@ export const EditGoalDialog = ({
         return getEnumValues(Rarity).filter(x => x <= form.targetRarity!);
     }, [form.targetRarity]);
 
+    const maxRank = useMemo(() => {
+        return rarityToMaxRank[character?.rarity ?? 0];
+    }, [character?.rarity]);
+
     const targetRankValues = useMemo(() => {
-        return getEnumValues(Rank).filter(x => x > 0 && x >= form.currentRank!);
+        return getEnumValues(Rank).filter(x => x > 0 && x >= form.currentRank! && x <= maxRank);
     }, [form.currentRank]);
 
     const currentRankValues = useMemo(() => {

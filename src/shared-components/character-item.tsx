@@ -6,6 +6,8 @@ import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { CharacterDetails } from '../mobile-routes/characters/character-details';
 import Button from '@mui/material/Button';
 import { DispatchContext } from '../reducers/store.provider';
+import { UtilsService } from '../services/utils.service';
+import { MiscIcon } from './misc-icon';
 
 export const CharacterItem = (props: { character: ICharacter2 }) => {
     const [open, setOpen] = useState(false);
@@ -35,12 +37,18 @@ export const CharacterItem = (props: { character: ICharacter2 }) => {
     return (
         <div>
             <div onClick={handleClickOpen} style={{ cursor: 'pointer' }}>
-                <CharacterTitle character={props.character} showLockedWithOpacity={true} showAbilities={true} />
+                <CharacterTitle character={props.character} showLockedWithOpacity={true} wyo={true} />
             </div>
 
             <Dialog open={open} onClose={handleClose} fullWidth>
                 <DialogTitle>
-                    <CharacterTitle character={character} showAbilities={true} />
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <CharacterTitle character={character} />
+                        <div style={{ display: 'flex' }}>
+                            <MiscIcon icon={'power'} height={20} width={15} />{' '}
+                            {UtilsService.getCharacterPower(character).toLocaleString().replace(/,/g, ' ')}
+                        </div>
+                    </div>
                 </DialogTitle>
                 <DialogContent style={{ paddingTop: 20 }}>
                     <CharacterDetails

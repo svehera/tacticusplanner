@@ -6,6 +6,23 @@ Minor improvements:
  
 Ideas: 
 
+- (Vexen) Adding to the "limit the rank in goals according to rarity" idea- marking in red (or something of the sort) if a goal you set is either out of the character's rarity or if it requires an upgrade you have no mission to farm it at yet.
+
+- (Tani) for inventory - for larger pulls of resources some QOL would be nice
+         Either a grid of all images to quick reference
+         Or a way to search multiple items at once
+         
+         If you could search multiple, and you pulled a large resource box it would be quite quick to go through and update your inventory
+
+- (Tornagides) Is it possible to have an estimate of the experience that is necessary to gain when you move up in rank?
+     Let me explain: when you upgrade to silver 3, for example, you know that you have to be at least level 32, or 94200xp. if we start from silver 1, we could have to calculate the experience gain to do.
+
+- (BaNe) Also it came to my mind that you could also add feature to track your gol on ascension with shards farmable from the nodes
+
+- (saTchymoto) Calculate how many badges to upgrade skill
+
+- (SergeDavid) I wonder if you can bring up a list for characters with ALL active tracks. So combine all their tracks across all LREs to better plan dynamically. 
+
 - (SergeDavid) How many accounts use the app, what is the average hero level, what's the favorite hero teams per LRE track, etc. With the data a lot of cool data can be shown.
 
 - (Somberlord) Evolution idea : being able to share your roster with people. Unique, or generated link that bring to a static page similar to "Who you Own"

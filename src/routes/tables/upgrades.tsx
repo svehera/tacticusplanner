@@ -38,7 +38,7 @@ export const Upgrades = () => {
     const gridRef = useRef<AgGridReact<IUpgradesTableRow>>(null);
 
     const [nameFilter, setNameFilter] = useState<string>('');
-    const [showCharacters, setShowCharacters] = useState<boolean>(true);
+    const [showCharacters, setShowCharacters] = useState<boolean>(false);
     const [selection, setSelection] = useState<Selection>('Non Craftable');
 
     const columnDefs = useMemo<Array<ColDef<IUpgradesTableRow>>>(() => {

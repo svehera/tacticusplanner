@@ -1,6 +1,66 @@
 ﻿{
-  "currentVersion": "1.2.4",
+  "currentVersion": "1.2.5",
   "releaseNotes": [
+    {
+      "version": "1.2.5",
+      "date": "December 23",
+      "type": "Update",
+      "new": [
+        {
+          "text": "Merry Christmas!"
+        },
+        {
+          "text": "Added power level benchmark: total, faction, character. Disclaimer: Doesn't represent in-game power",
+          "images": [
+            {
+              "path": "power.png"
+            }
+          ]
+        },
+        {
+          "text": "New UI for the \"Who You Own\" screen that targets to match in-game Characters screen. For each character you can see:",
+          "subPoints": [
+            "Stars level",
+            "Character's in-game portraits",
+            "Badge with amount of upgrades applied or indicator that character needs to be ascended to progress",
+            "Active and passive abilities levels",
+            "Character's level",
+            "Character's rarity(new) and rank icons"
+          ],
+          "images": [
+            {
+              "path": "wyo.png"
+            }
+          ]
+        },
+        {
+          "text": "New character's details to input and track",
+          "subPoints": [
+            "Stars level",
+            "Character's level",
+            "Character's xp"
+          ],
+          "images": [
+            {
+              "path": "details.png"
+            }
+          ]
+        }
+      ],
+      "minor": [
+        {
+          "text": "Added a limit for ranks in the \"Goals\" and the \"Who You Own\" based on the character's rarity (Arvanes)"
+        },
+        {
+          "text": "Added a username and updated datetime format in the exported file name when using the Export feature"
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed issue with characters icons not being loaded on upgrades lookup table (Corusame)"
+        }
+      ]
+    },
     {
       "version": "1.2.4",
       "date": "December 19",

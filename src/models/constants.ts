@@ -13,11 +13,71 @@ export const rarityStringToNumber: Record<RarityString, Rarity> = {
 };
 
 export const rarityToStars: Record<Rarity, RarityStars> = {
-    [Rarity.Common]: RarityStars.OneStar,
+    [Rarity.Common]: RarityStars.None,
     [Rarity.Uncommon]: RarityStars.TwoStars,
-    [Rarity.Rare]: RarityStars.FourStarts,
+    [Rarity.Rare]: RarityStars.FourStars,
     [Rarity.Epic]: RarityStars.RedOneStar,
-    [Rarity.Legendary]: RarityStars.RedThreeStarts,
+    [Rarity.Legendary]: RarityStars.RedThreeStars,
+};
+
+export const rarityToMaxStars: Record<Rarity, RarityStars> = {
+    [Rarity.Common]: RarityStars.TwoStars,
+    [Rarity.Uncommon]: RarityStars.FourStars,
+    [Rarity.Rare]: RarityStars.RedOneStar,
+    [Rarity.Epic]: RarityStars.RedThreeStars,
+    [Rarity.Legendary]: RarityStars.BlueStar,
+};
+
+export const rarityToMaxRank: Record<Rarity, Rank> = {
+    [Rarity.Common]: Rank.Iron1,
+    [Rarity.Uncommon]: Rank.Bronze1,
+    [Rarity.Rare]: Rank.Silver1,
+    [Rarity.Epic]: Rank.Gold1,
+    [Rarity.Legendary]: Rank.Diamond3,
+};
+
+export const rankToLevel: Record<Rank, number> = {
+    [Rank.Locked]: 0,
+    [Rank.Stone1]: 3,
+    [Rank.Stone2]: 5,
+    [Rank.Stone3]: 8,
+    [Rank.Iron1]: 8, // 11
+    [Rank.Iron2]: 14,
+    [Rank.Iron3]: 17,
+    [Rank.Bronze1]: 17, // 20
+    [Rank.Bronze2]: 23,
+    [Rank.Bronze3]: 26,
+    [Rank.Silver1]: 26, // 29
+    [Rank.Silver2]: 32,
+    [Rank.Silver3]: 35,
+    [Rank.Gold1]: 35, // 38
+    [Rank.Gold2]: 41,
+    [Rank.Gold3]: 44,
+    [Rank.Diamond1]: 47,
+    [Rank.Diamond2]: 50,
+    [Rank.Diamond3]: 50,
+};
+
+export const rankToRarity: Record<Rank, Rarity> = {
+    [Rank.Locked]: 0,
+    [Rank.Stone1]: Rarity.Common,
+    [Rank.Stone2]: Rarity.Common,
+    [Rank.Stone3]: Rarity.Common,
+    [Rank.Iron1]: Rarity.Common,
+    [Rank.Iron2]: Rarity.Uncommon,
+    [Rank.Iron3]: Rarity.Uncommon,
+    [Rank.Bronze1]: Rarity.Uncommon,
+    [Rank.Bronze2]: Rarity.Rare,
+    [Rank.Bronze3]: Rarity.Rare,
+    [Rank.Silver1]: Rarity.Rare,
+    [Rank.Silver2]: Rarity.Epic,
+    [Rank.Silver3]: Rarity.Epic,
+    [Rank.Gold1]: Rarity.Epic,
+    [Rank.Gold2]: Rarity.Legendary,
+    [Rank.Gold3]: Rarity.Legendary,
+    [Rank.Diamond1]: Rarity.Legendary,
+    [Rank.Diamond2]: Rarity.Legendary,
+    [Rank.Diamond3]: Rarity.Legendary,
 };
 
 export const charsProgression: Record<number, ICharProgression> = {
@@ -25,21 +85,21 @@ export const charsProgression: Record<number, ICharProgression> = {
     [Rarity.Common + RarityStars.TwoStars]: { shards: 15 },
     [Rarity.Uncommon + RarityStars.TwoStars]: { shards: 15, orbs: 10, rarity: Rarity.Uncommon },
 
-    [Rarity.Uncommon + RarityStars.ThreeStarts]: { shards: 15 },
-    [Rarity.Uncommon + RarityStars.FourStarts]: { shards: 15 },
-    [Rarity.Rare + RarityStars.FourStarts]: { shards: 20, orbs: 10, rarity: Rarity.Rare },
+    [Rarity.Uncommon + RarityStars.ThreeStars]: { shards: 15 },
+    [Rarity.Uncommon + RarityStars.FourStars]: { shards: 15 },
+    [Rarity.Rare + RarityStars.FourStars]: { shards: 20, orbs: 10, rarity: Rarity.Rare },
 
-    [Rarity.Rare + RarityStars.FiveStarts]: { shards: 30 },
+    [Rarity.Rare + RarityStars.FiveStars]: { shards: 30 },
     [Rarity.Rare + RarityStars.RedOneStar]: { shards: 40 },
     [Rarity.Epic + RarityStars.RedOneStar]: { shards: 50, orbs: 10, rarity: Rarity.Epic },
 
-    [Rarity.Epic + RarityStars.RedTwoStarts]: { shards: 65 },
-    [Rarity.Epic + RarityStars.RedThreeStarts]: { shards: 85 },
-    [Rarity.Legendary + RarityStars.RedThreeStarts]: { shards: 100, orbs: 10, rarity: Rarity.Legendary },
+    [Rarity.Epic + RarityStars.RedTwoStars]: { shards: 65 },
+    [Rarity.Epic + RarityStars.RedThreeStars]: { shards: 85 },
+    [Rarity.Legendary + RarityStars.RedThreeStars]: { shards: 100, orbs: 10, rarity: Rarity.Legendary },
 
-    [Rarity.Legendary + RarityStars.RedFourStarts]: { shards: 65, orbs: 10, rarity: Rarity.Legendary },
-    [Rarity.Legendary + RarityStars.RedFiveStarts]: { shards: 85, orbs: 15, rarity: Rarity.Legendary },
-    [Rarity.Legendary + RarityStars.DiamondStar]: { shards: 100, orbs: 15, rarity: Rarity.Legendary },
+    [Rarity.Legendary + RarityStars.RedFourStars]: { shards: 65, orbs: 10, rarity: Rarity.Legendary },
+    [Rarity.Legendary + RarityStars.RedFiveStars]: { shards: 85, orbs: 15, rarity: Rarity.Legendary },
+    [Rarity.Legendary + RarityStars.BlueStar]: { shards: 100, orbs: 15, rarity: Rarity.Legendary },
 };
 
 export const charsUnlockShards: Record<Rarity, number> = {
