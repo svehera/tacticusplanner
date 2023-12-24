@@ -1,6 +1,6 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
+﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 
-import { TextField, Tooltip } from '@mui/material';
+import { Badge, TextField, Tooltip } from '@mui/material';
 
 import { groupBy, orderBy, sum } from 'lodash';
 import Box from '@mui/material/Box';
@@ -14,13 +14,46 @@ import { UtilsService } from '../../services/utils.service';
 import { MiscIcon } from '../../shared-components/misc-icon';
 import { FactionImage } from '../../shared-components/faction-image';
 import WarningIcon from '@mui/icons-material/Warning';
+import ShareIcon from '@mui/icons-material/Share';
 
 import './who-you-own.scss';
+import IconButton from '@mui/material/IconButton';
+import { useSearchParams } from 'react-router-dom';
+import { getSharedCharacters } from '../../api/api-functions';
+import { GlobalState } from '../../models/global-state';
+import { ShareDialog } from './share-dialog';
+import { useAuth } from '../../contexts/auth';
 
 export const WhoYouOwn = () => {
-    const { characters } = useContext(StoreContext);
+    const { characters: ownerCharacters } = useContext(StoreContext);
+    const { token: isLoggedIn, shareToken } = useAuth();
     const [filter, setFilter] = useState('');
     const [totalPower, setTotalPower] = useState(0);
+    const [characters, setCharacters] = useState(ownerCharacters);
+    const [shareMode, setShareMode] = useState(false);
+    const [sharedUser, setSharedUser] = useState('');
+    const [error, setError] = useState('');
+
+    const [openShare, setOpenShare] = React.useState(false);
+
+    const [searchParams] = useSearchParams();
+
+    useEffect(() => {
+        const username = searchParams.get('username');
+        const shareToken = searchParams.get('shareToken');
+
+        if (username && shareToken) {
+            setShareMode(true);
+            setSharedUser(username);
+            getSharedCharacters(username, shareToken)
+                .then(response => {
+                    setCharacters(GlobalState.initCharacters(response.data.characters));
+                })
+                .catch(() => {
+                    setError(`Oops! It seems like ${username} doesn't exist or has roster sharing disabled.`);
+                });
+        }
+    }, []);
 
     const factionsOrder = useMemo(() => {
         const charactersByFaction = groupBy(characters, 'faction');
@@ -104,12 +137,12 @@ export const WhoYouOwn = () => {
                         paddingLeft: x.chars.length === 5 ? 0 : 5,
                     }}>
                     {x.chars.map(item => {
-                        return <CharacterItem key={item.name} character={item} />;
+                        return <CharacterItem key={item.name} character={item} readonly={shareMode} />;
                     })}
                 </div>
             </div>
         ));
-    }, [filter, characters]);
+    }, [filter, characters, shareMode]);
 
     return (
         <Box
@@ -118,32 +151,57 @@ export const WhoYouOwn = () => {
                 // backgroundImage: `url(${background})`,
                 // color: 'white',
             }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, justifyContent: 'center' }}>
+            {shareMode ? (
                 <div
                     style={{
-                        display: 'flex',
-                        fontSize: 20,
-                        alignItems: 'center',
-                        fontWeight: 'bold',
-                        minWidth: 'fit-content',
+                        fontSize: 'x-large',
+                        textAlign: 'center',
+                        fontWeight: '600',
                     }}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <Tooltip title={"Disclaimer: Doesn't represent in-game power"} placement={'top'}>
-                            <WarningIcon color={'warning'} fontSize={'large'} />
-                        </Tooltip>
-                        <MiscIcon icon={'power'} height={40} width={30} />{' '}
-                        {totalPower.toLocaleString().replace(/,/g, ' ')}
-                    </div>
+                    {error ? error : `${sharedUser}'s roster`}
                 </div>
-                <TextField
-                    sx={{ margin: '10px', width: '300px' }}
-                    label="Quick Filter"
-                    variant="outlined"
-                    onChange={event => setFilter(event.target.value)}
-                />
-            </div>
+            ) : undefined}
+            {!shareMode || !error ? (
+                <>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10, justifyContent: 'center' }}>
+                        <div
+                            style={{
+                                display: 'flex',
+                                fontSize: 20,
+                                alignItems: 'center',
+                                fontWeight: 'bold',
+                                minWidth: 'fit-content',
+                            }}>
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <Tooltip title={"Disclaimer: Doesn't represent in-game power"} placement={'top'}>
+                                    <WarningIcon color={'warning'} fontSize={'large'} />
+                                </Tooltip>
+                                <MiscIcon icon={'power'} height={40} width={30} />{' '}
+                                {totalPower.toLocaleString().replace(/,/g, ' ')}
+                            </div>
+                        </div>
+                        <TextField
+                            sx={{ margin: '10px', width: '300px' }}
+                            label="Quick Filter"
+                            variant="outlined"
+                            onChange={event => setFilter(event.target.value)}
+                        />
+                        {!shareMode && isLoggedIn ? (
+                            <Tooltip title={'Share your roster'} placement={'top'}>
+                                <Badge badgeContent={'✅︎'} color={'success'} invisible={!shareToken}>
+                                    <IconButton onClick={() => setOpenShare(true)}>
+                                        <ShareIcon fontSize={'large'} />
+                                    </IconButton>
+                                </Badge>
+                            </Tooltip>
+                        ) : undefined}
+                    </div>
 
-            <div className="box">{charactersByFaction}</div>
+                    <div className="box">{charactersByFaction}</div>
+                </>
+            ) : undefined}
+
+            <ShareDialog isOpen={openShare} onClose={() => setOpenShare(false)} />
         </Box>
     );
 };

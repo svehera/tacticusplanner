@@ -214,11 +214,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         }
         getUserDataApi()
             .then(response => {
-                const { data, username, id, lastModifiedDate } = response.data;
+                const { data, username, lastModifiedDate, shareToken } = response.data;
                 const serverLastModified = new Date(lastModifiedDate);
                 const isFirstLogin = !data;
                 const isFreshData = !modifiedDate;
-                setUser(username, id);
+                setUser(username, shareToken);
 
                 const shouldAcceptServerData = !isFirstLogin && (isFreshData || modifiedDate < serverLastModified);
                 const shouldPushLocalData = !isFreshData && (isFirstLogin || modifiedDate > serverLastModified);

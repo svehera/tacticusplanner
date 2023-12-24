@@ -47,7 +47,28 @@ export class GlobalState implements IGlobalState {
         this.leSelectedTeams = GlobalState.fixNames(personalData.leTeams);
         this.leProgress = personalData.leProgress;
         const chars = GlobalState.fixNames(personalData.characters);
-        this.characters = StaticDataService.unitsData.map(staticData => {
+        this.characters = GlobalState.initCharacters(chars);
+
+        for (const leProgressKey in this.leProgress) {
+            const leProgress = this.leProgress[+leProgressKey as LegendaryEventEnum];
+            if (leProgress) {
+                leProgress.notes = '';
+            }
+        }
+        this.goals = GlobalState.fixNames(personalData.goals).map((goal, index) => {
+            const relatedChar = this.characters.find(x => x.name === goal.character);
+            return { ...goal, priority: index + 1, currentRank: relatedChar?.rank, currentRarity: relatedChar?.rarity };
+        });
+
+        this.modifiedDate = personalData.modifiedDate;
+        this.seenAppVersion = personalData.seenAppVersion;
+        this.campaignsProgress = personalData.campaignsProgress ?? defaultData.campaignsProgress;
+        this.inventory = GlobalState.fixNames(personalData.inventory ?? defaultData.inventory);
+        this.dailyRaids = personalData.dailyRaids ?? defaultData.dailyRaids;
+    }
+
+    static initCharacters(chars: Partial<IPersonalCharacterData2>[]): Array<ICharacter2> {
+        return StaticDataService.unitsData.map(staticData => {
             const personalCharData = chars.find(c => c.name === staticData.name);
             const rank = personalCharData?.rank ?? Rank.Locked;
             const rankLevel = rankToLevel[(rank - 1) as Rank];
@@ -76,23 +97,6 @@ export class GlobalState implements IGlobalState {
                 rank: +combinedData.rank,
             };
         });
-
-        for (const leProgressKey in this.leProgress) {
-            const leProgress = this.leProgress[+leProgressKey as LegendaryEventEnum];
-            if (leProgress) {
-                leProgress.notes = '';
-            }
-        }
-        this.goals = GlobalState.fixNames(personalData.goals).map((goal, index) => {
-            const relatedChar = this.characters.find(x => x.name === goal.character);
-            return { ...goal, priority: index + 1, currentRank: relatedChar?.rank, currentRarity: relatedChar?.rarity };
-        });
-
-        this.modifiedDate = personalData.modifiedDate;
-        this.seenAppVersion = personalData.seenAppVersion;
-        this.campaignsProgress = personalData.campaignsProgress ?? defaultData.campaignsProgress;
-        this.inventory = GlobalState.fixNames(personalData.inventory ?? defaultData.inventory);
-        this.dailyRaids = personalData.dailyRaids ?? defaultData.dailyRaids;
     }
 
     static fixNames<T>(obj: T): T {
