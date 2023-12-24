@@ -45,6 +45,7 @@ const PointsTable = (props: {
     }, [legendaryEvent.id]);
 
     const [selection, setSelection] = useState<CharactersSelection>(CharactersSelection.Selected);
+    const [filter, setFilter] = useState('');
 
     const gridRef = useRef<AgGridReact>(null);
 
@@ -236,6 +237,7 @@ const PointsTable = (props: {
 
                 return bTotal - aTotal;
             })
+            .filter(x => (filter ? x.name.toLowerCase().includes(filter.toLowerCase()) : true))
             .map((x, index) => ({
                 character: x,
                 position: index + 1,
@@ -296,7 +298,7 @@ const PointsTable = (props: {
             }
             return result;
         }
-    }, [personalLegendaryEvent.id]);
+    }, [personalLegendaryEvent.id, filter]);
 
     const rows = useMemo<ITableRow[]>(() => {
         const chars =
@@ -311,6 +313,7 @@ const PointsTable = (props: {
                 (a, b) =>
                     b.legendaryEvents[legendaryEvent.id].totalPoints - a.legendaryEvents[legendaryEvent.id].totalPoints
             )
+            .filter(x => (filter ? x.name.toLowerCase().includes(filter.toLowerCase()) : true))
             .map((x, index) => ({
                 character: x,
                 position: index + 1,
@@ -328,19 +331,11 @@ const PointsTable = (props: {
                 totalPoints: x.legendaryEvents[legendaryEvent.id].totalPoints,
                 totalSlots: x.legendaryEvents[legendaryEvent.id].totalSlots,
             }));
-    }, [selection]);
-
-    const getRowStyle = (params: RowClassParams<ITableRow>): RowStyle => {
-        return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'lightsteelblue' : 'white' };
-    };
+    }, [selection, filter]);
 
     useEffect(() => {
         gridRef.current?.api?.sizeColumnsToFit();
     }, [rows]);
-
-    const onFilterTextBoxChanged = useCallback((change: ChangeEvent<HTMLInputElement>) => {
-        gridRef.current?.api.setQuickFilter(change.target.value);
-    }, []);
 
     return (
         <div>
@@ -349,7 +344,7 @@ const PointsTable = (props: {
                     sx={{ margin: '10px', width: '300px' }}
                     label="Quick Filter"
                     variant="outlined"
-                    onChange={onFilterTextBoxChanged}
+                    onChange={event => setFilter(event.target.value)}
                 />
                 <FormControl>
                     <FormLabel id="demo-radio-buttons-group-label" style={{ fontWeight: 700 }}>
