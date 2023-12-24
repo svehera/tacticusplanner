@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import { DispatchContext } from '../reducers/store.provider';
 import { UtilsService } from '../services/utils.service';
 import { MiscIcon } from './misc-icon';
+import { isMobile } from 'react-device-detect';
 
 export const CharacterItem = (props: { character: ICharacter2 }) => {
     const [open, setOpen] = useState(false);
@@ -42,7 +43,13 @@ export const CharacterItem = (props: { character: ICharacter2 }) => {
 
             <Dialog open={open} onClose={handleClose} fullWidth>
                 <DialogTitle>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: isMobile ? 'column' : 'row',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                        }}>
                         <CharacterTitle character={character} />
                         <div style={{ display: 'flex' }}>
                             <MiscIcon icon={'power'} height={20} width={15} />{' '}

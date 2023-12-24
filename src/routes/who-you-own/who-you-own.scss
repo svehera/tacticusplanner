@@ -6,31 +6,36 @@ $columnCount3: 3;
 $columnCount2: 2;
 
 @mixin responsiveGrid($columns, $maxWidth) {
-    $roundedRows: round($factionsCount / $columns);
-    @media (max-width: #{$maxWidth}px) {
-        grid-template-rows: repeat(#{$roundedRows}, 1fr);
-    }
+  $roundedRows: round($factionsCount / $columns);
+  @media (max-width: #{$maxWidth}px) {
+    grid-template-rows: repeat(#{$roundedRows}, 1fr);
+  }
 }
 
 .box {
-    color: white;
-    column-gap: 25px;
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: center;
+  color: white;
+  column-gap: 25px;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
 
-    /* 5 columns */
-    $roundedRows5: round($factionsCount / $columnCount5);
-    grid-template-rows: repeat(#{$roundedRows5}, 1fr);
+  /* 5 columns */
+  $roundedRows5: round($factionsCount / $columnCount5);
+  grid-template-rows: repeat(#{$roundedRows5}, 1fr);
 
-    /* Media queries for different column configurations */
-    @include responsiveGrid($columnCount4, 2000); /* 4 columns */
-    @include responsiveGrid($columnCount3, 1600); /* 3 columns */
-    @include responsiveGrid($columnCount2, 1200); /* 2 columns */
+  /* Media queries for different column configurations */
+  @include responsiveGrid($columnCount4, 2000); /* 4 columns */
+  @include responsiveGrid($columnCount3, 1600); /* 3 columns */
+  @include responsiveGrid($columnCount2, 1200); /* 2 columns */
 
-    /* 1 column */
-    @media (max-width: 800px) {
-        display: flex;
-        flex-wrap: wrap;
-    }
+  /* 1 column */
+  @media (max-width: 800px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.characters-box {
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+  //background-color: rgba(0, 0, 0, 0.5);
 }
