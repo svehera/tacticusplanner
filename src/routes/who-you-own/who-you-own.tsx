@@ -70,13 +70,14 @@ export const WhoYouOwn = () => {
                             <FactionImage faction={x.factionIcon} size={25} />
                             <span>{x.faction.toUpperCase()}</span>
                         </div>
-                        <div style={{ display: 'flex' }}>
+                        <div style={{ display: 'flex', paddingInlineEnd: 5 }}>
                             <MiscIcon icon={'power'} height={20} width={15} />{' '}
                             {x.factionPower.toLocaleString().replace(/,/g, ' ')}
                         </div>
                     </div>
                 </h4>
                 <div
+                    className={'characters-box'}
                     style={{
                         display: 'flex',
                         alignItems: 'center',

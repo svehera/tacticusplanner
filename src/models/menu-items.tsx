@@ -63,7 +63,7 @@ export const menuItemById = {
         'Vitruvius LE',
         <CharacterImage icon={'vitruvius.png'} imageSize={24} />,
         '/plan/le/vitruvius',
-        `Vitruvius ${vitruvius.eventStage}/3 (${vitruvius.nextEventDate}) *Datamined`
+        `Vitruvius ${vitruvius.eventStage}/3 (${vitruvius.nextEventDate})`
     ),
 
     characters: new MenuItemTP('Characters', <Diversity3Icon />, '/learn/characters'),

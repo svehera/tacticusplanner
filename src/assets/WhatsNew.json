@@ -1,6 +1,23 @@
 ﻿{
-  "currentVersion": "1.2.6",
+  "currentVersion": "1.2.7",
   "releaseNotes": [
+    {
+      "version": "1.2.7",
+      "date": "December 24",
+      "type": "Patch",
+      "new": [
+      ],
+      "minor": [
+        {
+          "text": "Small UI adjustments on the Who You Own page (SergeDavid)"
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed Vitruvius missions list (Hominus, SergeDavid)"
+        }
+      ]
+    },
     {
       "version": "1.2.6",
       "date": "December 23",
