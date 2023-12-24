@@ -55,16 +55,35 @@ export const WhoYouOwn = () => {
 
         setTotalPower(sum(factionsOrdered.map(x => x.factionPower)));
 
+        const generateFactionBackgroundStyles = (mainColor: string) => {
+            return {
+                backgroundColor: mainColor,
+                // backgroundImage: `linear-gradient(
+                // ${mainColor}a2,
+                //         ${mainColor},
+                // ${mainColor}a2,
+                //         ${mainColor},
+                // ${mainColor}a2,
+                //         ${mainColor},
+                // ${mainColor}a2,
+                //         ${mainColor},
+                // ${mainColor}a2,
+                //         ${mainColor},
+                // ${mainColor}a2,
+                //         ${mainColor},
+                // ${mainColor}a2,
+                //         ${mainColor},
+                // ${mainColor}a2,
+                //         ${mainColor},
+                // ${mainColor}a2
+                // )`,
+                // maskImage: `radial-gradient(at top, ${mainColor} 45%, transparent)`,
+            };
+        };
+
         return factionsOrdered.map(x => (
-            <div key={x.faction} style={{ minWidth: 375, maxWidth: 375 }}>
-                <h4
-                    style={{
-                        background: x.factionColor,
-                        marginBottom: 0,
-                        marginTop: 5,
-                        borderTop: '2px solid gold',
-                        fontWeight: 500,
-                    }}>
+            <div key={x.faction} className="faction" style={{ minWidth: 375, maxWidth: 375 }}>
+                <h4 className="faction-title" style={generateFactionBackgroundStyles(x.factionColor)}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                             <FactionImage faction={x.factionIcon} size={25} />
