@@ -15,6 +15,9 @@
       "bugFixes": [
         {
           "text": "Fixed Vitruvius missions list (Hominus, SergeDavid)"
+        },
+        {
+          "text": "Fixed issue with Quick filter doesn't work in LE Data Tables (Juan)"
         }
       ]
     },
