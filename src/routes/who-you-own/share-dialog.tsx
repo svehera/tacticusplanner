@@ -9,6 +9,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import CancelIcon from '@mui/icons-material/Cancel';
 import AddIcon from '@mui/icons-material/Add';
+import { Loader } from '../../shared-components/loaders';
 
 export const ShareDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const [loading, setLoading] = React.useState(false);
@@ -97,9 +98,7 @@ export const ShareDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () 
             <DialogActions>
                 <Button onClick={onClose}>Close</Button>
             </DialogActions>
-            <Backdrop sx={{ color: '#fff', zIndex: theme => theme.zIndex.drawer + 1 }} open={loading}>
-                <CircularProgress color="inherit" />
-            </Backdrop>
+            <Loader loading={loading} />
         </Dialog>
     );
 };

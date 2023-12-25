@@ -8,8 +8,6 @@ import { CharacterItem } from '../../shared-components/character-item';
 import { StoreContext } from '../../reducers/store.provider';
 import { Rank } from '../../models/enums';
 import { isMobile } from 'react-device-detect';
-
-import background from '../../assets/images/background.png';
 import { UtilsService } from '../../services/utils.service';
 import { MiscIcon } from '../../shared-components/misc-icon';
 import { FactionImage } from '../../shared-components/faction-image';
@@ -23,35 +21,36 @@ import { getSharedCharacters } from '../../api/api-functions';
 import { GlobalState } from '../../models/global-state';
 import { ShareDialog } from './share-dialog';
 import { useAuth } from '../../contexts/auth';
+import { Loader } from '../../shared-components/loaders';
 
 export const WhoYouOwn = () => {
     const { characters: ownerCharacters } = useContext(StoreContext);
-    const { token: isLoggedIn, shareToken } = useAuth();
+    const { token: isLoggedIn, shareToken: userShareToken } = useAuth();
     const [filter, setFilter] = useState('');
-    const [totalPower, setTotalPower] = useState(0);
     const [characters, setCharacters] = useState(ownerCharacters);
-    const [shareMode, setShareMode] = useState(false);
-    const [sharedUser, setSharedUser] = useState('');
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const [openShare, setOpenShare] = React.useState(false);
 
     const [searchParams] = useSearchParams();
 
-    useEffect(() => {
-        const username = searchParams.get('username');
-        const shareToken = searchParams.get('shareToken');
+    const sharedUser = searchParams.get('username');
+    const shareToken = searchParams.get('shareToken');
 
-        if (username && shareToken) {
-            setShareMode(true);
-            setSharedUser(username);
-            getSharedCharacters(username, shareToken)
+    const isShareMode = !!sharedUser && !!shareToken;
+
+    useEffect(() => {
+        if (isShareMode) {
+            setIsLoading(true);
+            getSharedCharacters(sharedUser, shareToken)
                 .then(response => {
                     setCharacters(GlobalState.initCharacters(response.data.characters));
                 })
                 .catch(() => {
-                    setError(`Oops! It seems like ${username} doesn't exist or has roster sharing disabled.`);
-                });
+                    setError(`Oops! It seems like ${sharedUser} doesn't exist or has roster sharing disabled.`);
+                })
+                .finally(() => setIsLoading(false));
         }
     }, []);
 
@@ -68,81 +67,52 @@ export const WhoYouOwn = () => {
         ).map(x => x.faction);
     }, []);
 
-    const charactersByFaction = useMemo(() => {
+    const factions = useMemo(() => {
         const filteredCharacters = filter
             ? characters.filter(x => x.name.toLowerCase().includes(filter.toLowerCase()))
             : characters;
 
-        const charactersByFaction = groupBy(filteredCharacters, 'faction');
-        const factionsOrdered = factionsOrder
-            .filter(x => charactersByFaction[x])
+        const factionCharacters = groupBy(filteredCharacters, 'faction');
+        return factionsOrder
+            .filter(x => factionCharacters[x])
             .map(x => ({
                 faction: x,
-                chars: charactersByFaction[x],
-                factionColor: charactersByFaction[x][0].factionColor,
-                factionIcon: charactersByFaction[x][0].factionIcon,
-                factionPower: sum(charactersByFaction[x].map(UtilsService.getCharacterPower)),
-                factionMaxPower: charactersByFaction[x].length * UtilsService.maxCharacterPower,
-                unlockedCount: charactersByFaction[x].filter(x => x.rank > Rank.Locked).length,
+                chars: factionCharacters[x],
+                factionColor: factionCharacters[x][0].factionColor,
+                factionIcon: factionCharacters[x][0].factionIcon,
+                factionPower: sum(factionCharacters[x].map(UtilsService.getCharacterPower)),
+                factionMaxPower: factionCharacters[x].length * UtilsService.maxCharacterPower,
+                unlockedCount: factionCharacters[x].filter(x => x.rank > Rank.Locked).length,
             }));
+    }, [filter, characters, isShareMode]);
 
-        setTotalPower(sum(factionsOrdered.map(x => x.factionPower)));
+    const totalPower = sum(factions.map(x => x.factionPower));
 
-        const generateFactionBackgroundStyles = (mainColor: string) => {
-            return {
-                backgroundColor: mainColor,
-                // backgroundImage: `linear-gradient(
-                // ${mainColor}a2,
-                //         ${mainColor},
-                // ${mainColor}a2,
-                //         ${mainColor},
-                // ${mainColor}a2,
-                //         ${mainColor},
-                // ${mainColor}a2,
-                //         ${mainColor},
-                // ${mainColor}a2,
-                //         ${mainColor},
-                // ${mainColor}a2,
-                //         ${mainColor},
-                // ${mainColor}a2,
-                //         ${mainColor},
-                // ${mainColor}a2,
-                //         ${mainColor},
-                // ${mainColor}a2
-                // )`,
-                // maskImage: `radial-gradient(at top, ${mainColor} 45%, transparent)`,
-            };
+    const generateFactionBackgroundStyles = (mainColor: string) => {
+        return {
+            backgroundColor: mainColor,
+            // backgroundImage: `linear-gradient(
+            // ${mainColor}a2,
+            //         ${mainColor},
+            // ${mainColor}a2,
+            //         ${mainColor},
+            // ${mainColor}a2,
+            //         ${mainColor},
+            // ${mainColor}a2,
+            //         ${mainColor},
+            // ${mainColor}a2,
+            //         ${mainColor},
+            // ${mainColor}a2,
+            //         ${mainColor},
+            // ${mainColor}a2,
+            //         ${mainColor},
+            // ${mainColor}a2,
+            //         ${mainColor},
+            // ${mainColor}a2
+            // )`,
+            // maskImage: `radial-gradient(at top, ${mainColor} 45%, transparent)`,
         };
-
-        return factionsOrdered.map(x => (
-            <div key={x.faction} className="faction" style={{ minWidth: 375, maxWidth: 375 }}>
-                <h4 className="faction-title" style={generateFactionBackgroundStyles(x.factionColor)}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                            <FactionImage faction={x.factionIcon} size={25} />
-                            <span>{x.faction.toUpperCase()}</span>
-                        </div>
-                        <div style={{ display: 'flex', paddingInlineEnd: 5 }}>
-                            <MiscIcon icon={'power'} height={20} width={15} />{' '}
-                            {x.factionPower.toLocaleString().replace(/,/g, ' ')}
-                        </div>
-                    </div>
-                </h4>
-                <div
-                    className={'characters-box'}
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: x.chars.length === 5 ? 'space-evenly' : 'flex-start',
-                        paddingLeft: x.chars.length === 5 ? 0 : 5,
-                    }}>
-                    {x.chars.map(item => {
-                        return <CharacterItem key={item.name} character={item} readonly={shareMode} />;
-                    })}
-                </div>
-            </div>
-        ));
-    }, [filter, characters, shareMode]);
+    };
 
     return (
         <Box
@@ -151,7 +121,7 @@ export const WhoYouOwn = () => {
                 // backgroundImage: `url(${background})`,
                 // color: 'white',
             }}>
-            {shareMode ? (
+            {isShareMode && !isLoading ? (
                 <div
                     style={{
                         fontSize: 'x-large',
@@ -161,7 +131,7 @@ export const WhoYouOwn = () => {
                     {error ? error : `${sharedUser}'s roster`}
                 </div>
             ) : undefined}
-            {!shareMode || !error ? (
+            {(!isShareMode || !error) && !isLoading ? (
                 <>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, justifyContent: 'center' }}>
                         <div
@@ -186,9 +156,9 @@ export const WhoYouOwn = () => {
                             variant="outlined"
                             onChange={event => setFilter(event.target.value)}
                         />
-                        {!shareMode && isLoggedIn ? (
+                        {!isShareMode && isLoggedIn ? (
                             <Tooltip title={'Share your roster'} placement={'top'}>
-                                <Badge badgeContent={'✅︎'} color={'success'} invisible={!shareToken}>
+                                <Badge badgeContent={'✅︎'} color={'success'} invisible={!userShareToken}>
                                     <IconButton onClick={() => setOpenShare(true)}>
                                         <ShareIcon fontSize={'large'} />
                                     </IconButton>
@@ -197,11 +167,48 @@ export const WhoYouOwn = () => {
                         ) : undefined}
                     </div>
 
-                    <div className="box">{charactersByFaction}</div>
+                    <div className="box">
+                        {factions.map(x => (
+                            <div key={x.faction} className="faction" style={{ minWidth: 375, maxWidth: 375 }}>
+                                <h4 className="faction-title" style={generateFactionBackgroundStyles(x.factionColor)}>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'space-between',
+                                        }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                                            <FactionImage faction={x.factionIcon} size={25} />
+                                            <span>{x.faction.toUpperCase()}</span>
+                                        </div>
+                                        <div style={{ display: 'flex', paddingInlineEnd: 5 }}>
+                                            <MiscIcon icon={'power'} height={20} width={15} />{' '}
+                                            {x.factionPower.toLocaleString().replace(/,/g, ' ')}
+                                        </div>
+                                    </div>
+                                </h4>
+                                <div
+                                    className={'characters-box'}
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: x.chars.length === 5 ? 'space-evenly' : 'flex-start',
+                                        paddingLeft: x.chars.length === 5 ? 0 : 5,
+                                    }}>
+                                    {x.chars.map(item => {
+                                        return (
+                                            <CharacterItem key={item.name} character={item} readonly={isShareMode} />
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </>
             ) : undefined}
 
             <ShareDialog isOpen={openShare} onClose={() => setOpenShare(false)} />
+            <Loader loading={isLoading} />
         </Box>
     );
 };
