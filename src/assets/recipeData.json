@@ -926,7 +926,7 @@
   "Secret Agenda": {
     "material": "Secret Agenda",
     "craftable": false,
-    "stat": "Damage",
+    "stat": "Health",
     "rarity": "Epic",
     "icon": "secret agenda.jpg"
   },

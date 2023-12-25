@@ -2,6 +2,22 @@
   "currentVersion": "1.2.7",
   "releaseNotes": [
     {
+      "version": "1.2.8",
+      "date": "December 25",
+      "type": "Update",
+      "new": [
+      ],
+      "minor": [
+ 
+      ],
+      "bugFixes": [
+   
+        {
+          "text": "Fixed stat for \"Secret Agenda\" upgrade from Damage to Health (Szarekh)"
+        }
+      ]
+    },
+    {
       "version": "1.2.7",
       "date": "December 24",
       "type": "Patch",
