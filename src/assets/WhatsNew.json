@@ -1,6 +1,43 @@
 ﻿{
-  "currentVersion": "1.2.7",
+  "currentVersion": "1.2.8",
   "releaseNotes": [
+    {
+      "version": "1.2.8",
+      "date": "December 28",
+      "type": "Update",
+      "new": [
+        {
+          "text": "Added option to share Who You Own page in readonly mode",
+          "images": [
+            {
+              "path": "share1.png"
+            },
+            {
+              "path": "share2.png"
+            }
+          ]
+        }
+      ],
+      "minor": [
+        {
+          "text": "Updated Vitruvius kill points"
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed stat for \"Secret Agenda\" upgrade from Damage to Health (Szarekh)"
+        },
+        {
+          "text": "Fixed icon for \"Tome of arcane knowledge\" upgrade (KIVIY)"
+        },
+        {
+          "text": "Fixed issue with abilities icons appear above the menu icons at the bottom of the screen (Juan)"
+        },
+        {
+          "text": "Fixed event points for LRE to add up for 18000 point (CryptecCultist)"
+        }
+      ]
+    },
     {
       "version": "1.2.7",
       "date": "December 24",

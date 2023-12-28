@@ -25,7 +25,7 @@ const MobileApp = () => {
     return (
         <Box sx={{ margin: 'auto', padding: 1, paddingBottom: 7 }}>
             <Outlet />
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, margin: 'auto' }} elevation={3}>
+            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, margin: 'auto', zIndex: 100 }} elevation={3}>
                 <BottomNavigation showLabels value={value}>
                     <BottomNavigationAction value={0} component={Link} to={'./'} label="Home" icon={<Home />} />
                     <BottomNavigationAction value={1} component={Link} to={'./input'} label="Input" icon={<Input />} />

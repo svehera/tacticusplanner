@@ -10,7 +10,7 @@ import { UtilsService } from '../services/utils.service';
 import { MiscIcon } from './misc-icon';
 import { isMobile } from 'react-device-detect';
 
-export const CharacterItem = (props: { character: ICharacter2 }) => {
+export const CharacterItem = (props: { character: ICharacter2; readonly: boolean }) => {
     const [open, setOpen] = useState(false);
     const [character, setCharacter] = useState(() => ({ ...props.character }));
     const [inventoryUpdate, setInventoryUpdate] = useState<IMaterialRecipeIngredientFull[]>([]);
@@ -37,7 +37,9 @@ export const CharacterItem = (props: { character: ICharacter2 }) => {
 
     return (
         <div>
-            <div onClick={handleClickOpen} style={{ cursor: 'pointer' }}>
+            <div
+                onClick={!props.readonly ? handleClickOpen : undefined}
+                style={{ cursor: !props.readonly ? 'pointer' : undefined }}>
                 <CharacterTitle character={props.character} showLockedWithOpacity={true} wyo={true} />
             </div>
 

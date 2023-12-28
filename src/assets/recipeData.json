@@ -926,7 +926,7 @@
   "Secret Agenda": {
     "material": "Secret Agenda",
     "craftable": false,
-    "stat": "Damage",
+    "stat": "Health",
     "rarity": "Epic",
     "icon": "secret agenda.jpg"
   },
@@ -5929,7 +5929,7 @@
       }
     ],
     "craftable": true,
-    "icon": "tome of arcane knowledge.jpg"
+    "icon": "tome of arcane knowledge.png"
   },
   "Transdimensional Sanctum": {
     "material": "Transdimensional Sanctum",
