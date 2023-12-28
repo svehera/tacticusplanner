@@ -32,7 +32,7 @@ export const Home = () => {
     }
 
     const timeToStart = timeLeftToFutureDate('2023-12-24');
-    const timeToEnd = timeLeftToFutureDate('2023-11-31');
+    const timeToEnd = timeLeftToFutureDate('2023-12-31');
     const isEventStarted = timeToStart === 'Finished';
 
     return (

@@ -30,18 +30,18 @@
   ],
   "alpha": {
     "name": "Alpha (No Orks)",
-    "killPoints": 29,
-    "battlesPoints": []
+    "killPoints": 27,
+    "battlesPoints": [38, 40, 58, 58, 40, 41, 62, 43, 47, 49, 64, 48]
   },
   "beta": {
     "name": "Beta (No Imperials)",
     "killPoints": 53,
-    "battlesPoints": []
+    "battlesPoints": [29, 35, 28, 39, 35, 34, 34, 38, 43, 29, 39, 49]
   },
   "gamma": {
     "name": "Gamma (No Chaos)",
     "killPoints": 40,
-    "battlesPoints": []
+    "battlesPoints": [36, 36, 34, 42, 40, 43, 41, 49, 44, 40, 49, 56]
   },
   "pointsMilestones": [
     {

@@ -32,54 +32,54 @@
     "name": "Alpha (No Necrons)",
     "killPoints": 21,
     "battlesPoints": [
+      36,
       40,
-      38,
-      50,
+      51,
+      51,
+      53,
       48,
-      50,
-      48,
+      43,
       60,
-      55,
-      47,
-      52,
-      59,
-      59
+      57,
+      63,
+      57,
+      65
     ]
   },
   "beta": {
     "name": "Beta (No Chaos)",
     "killPoints": 21,
     "battlesPoints": [
-      33,
-      36,
-      45,
-      47,
-      50,
-      49,
-      50,
-      50,
-      50,
-      57,
+      40,
+      41,
       43,
-      56
+      53,
+      48,
+      50,
+      61,
+      58,
+      55,
+      56,
+      62,
+      57
     ]
   },
   "gamma": {
     "name": "Gamma (No Imperials)",
     "killPoints": 35,
     "battlesPoints": [
-      28,
-      35,
+      42,
+      46,
+      41,
       39,
-      43,
-      40,
-      57,
-      43,
       50,
-      58,
+      37,
+      44,
+      45,
       48,
-      50,
-      55
+      46,
+      46,
+      56
     ]
   },
   "pointsMilestones": [
