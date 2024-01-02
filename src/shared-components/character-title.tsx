@@ -45,7 +45,11 @@ export const CharacterTitle = ({
         return maxCommon || maxUncommon || maxRare || maxEpic;
     }, [character.rarity, character.rank]);
 
-    const needToLevel = isUnlocked && !needToAscend && character.level < rankToLevel[character.rank];
+    const needToLevel =
+        isUnlocked &&
+        !needToAscend &&
+        character.level < rankToLevel[character.rank] &&
+        6 - rankToLevel[character.rank] - character.level <= character.upgrades.length;
     // character.level > rankToLevel[character.rank]
     //     ? false
     //     : 6 - rankToLevel[character.rank] - character.level <= character.upgrades.length;
