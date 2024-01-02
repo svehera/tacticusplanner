@@ -1,6 +1,6 @@
 ﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 
-import { Badge, TextField, Tooltip } from '@mui/material';
+import { Badge, Popover, TextField, Tooltip } from '@mui/material';
 
 import { groupBy, orderBy, sum } from 'lodash';
 import Box from '@mui/material/Box';
@@ -12,6 +12,7 @@ import { UtilsService } from '../../services/utils.service';
 import { MiscIcon } from '../../shared-components/misc-icon';
 import { FactionImage } from '../../shared-components/faction-image';
 import WarningIcon from '@mui/icons-material/Warning';
+import InfoIcon from '@mui/icons-material/Info';
 import ShareIcon from '@mui/icons-material/Share';
 
 import './who-you-own.scss';
@@ -22,6 +23,8 @@ import { GlobalState } from '../../models/global-state';
 import { ShareDialog } from './share-dialog';
 import { useAuth } from '../../contexts/auth';
 import { Loader } from '../../shared-components/loaders';
+import { UpgradeImage } from '../../shared-components/upgrade-image';
+import wyoInfo from '../../assets/images/wyo_info.png';
 
 export const WhoYouOwn = () => {
     const { characters: ownerCharacters } = useContext(StoreContext);
@@ -30,8 +33,18 @@ export const WhoYouOwn = () => {
     const [characters, setCharacters] = useState(ownerCharacters);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-
     const [openShare, setOpenShare] = React.useState(false);
+    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+
+    const handleClick = (event: React.UIEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
 
     const [searchParams] = useSearchParams();
 
@@ -143,9 +156,11 @@ export const WhoYouOwn = () => {
                                 minWidth: 'fit-content',
                             }}>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <Tooltip title={"Disclaimer: Doesn't represent in-game power"} placement={'top'}>
-                                    <WarningIcon color={'warning'} fontSize={'large'} />
-                                </Tooltip>
+                                <IconButton onClick={handleClick}>
+                                    <InfoIcon color={'primary'} fontSize={'large'} />
+                                </IconButton>
+                                {/*<Tooltip title={"Disclaimer: Doesn't represent in-game power"} placement={'top'}>*/}
+                                {/*</Tooltip>*/}
                                 <MiscIcon icon={'power'} height={40} width={30} />{' '}
                                 {totalPower.toLocaleString().replace(/,/g, ' ')}
                             </div>
@@ -209,6 +224,23 @@ export const WhoYouOwn = () => {
 
             <ShareDialog isOpen={openShare} onClose={() => setOpenShare(false)} />
             <Loader loading={isLoading} />
+            <Popover
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}>
+                <div style={{ padding: 10 }}>
+                    <p style={{ fontWeight: 500 }}>
+                        <WarningIcon color={'warning'} fontSize={'medium'} /> Disclaimer:{' '}
+                        {/* eslint-disable-next-line react/no-unescaped-entities */}
+                        <MiscIcon icon={'power'} height={20} width={15} /> doesn't represent in-game power
+                    </p>
+                    <img src={wyoInfo} width={500} />
+                </div>
+            </Popover>
         </Box>
     );
 };
