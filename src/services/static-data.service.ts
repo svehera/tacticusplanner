@@ -591,6 +591,16 @@ export class StaticDataService {
 
             for (const material of allMaterials) {
                 const locationsMinEnergyConst = Math.min(...material.locations.map(x => x.energyCost));
+                const isAlreadyPlanned = day.raids.some(
+                    x =>
+                        x.materialId === material.id &&
+                        x.locations.map(l => l.id).join() ===
+                            material.locations.map(location => location.campaign + location.nodeNumber).join()
+                );
+                if (isAlreadyPlanned) {
+                    continue;
+                }
+
                 if (material.totalEnergy < locationsMinEnergyConst) {
                     currEnergy += material.totalEnergy;
                     material.totalEnergy = 0;
