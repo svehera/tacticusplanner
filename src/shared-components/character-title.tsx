@@ -1,7 +1,7 @@
 ﻿import React, { useMemo } from 'react';
 import { ICharacter2 } from '../models/interfaces';
 import { CharacterBias, Rank, Rarity } from '../models/enums';
-import { pooEmoji, starEmoji } from '../models/constants';
+import { pooEmoji, rankToLevel, starEmoji } from '../models/constants';
 import { RarityImage } from './rarity-image';
 import { RankImage } from './rank-image';
 import { CharacterImage } from './character-image';
@@ -44,6 +44,11 @@ export const CharacterTitle = ({
         const maxEpic = character.rarity === Rarity.Epic && character.rank === Rank.Gold1;
         return maxCommon || maxUncommon || maxRare || maxEpic;
     }, [character.rarity, character.rank]);
+
+    const needToLevel = isUnlocked && !needToAscend && character.level < rankToLevel[character.rank];
+    // character.level > rankToLevel[character.rank]
+    //     ? false
+    //     : 6 - rankToLevel[character.rank] - character.level <= character.upgrades.length;
 
     const characterFull = (
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>
@@ -89,8 +94,14 @@ export const CharacterTitle = ({
                     <Tooltip title={character.name} placement={'top'}>
                         <div>
                             <Badge
-                                badgeContent={needToAscend ? '⇧' : character.upgrades.length}
-                                color={needToAscend ? 'warning' : 'success'}>
+                                badgeContent={
+                                    needToAscend
+                                        ? '⇧'
+                                        : needToLevel
+                                        ? character.upgrades.length || '⇧'
+                                        : character.upgrades.length
+                                }
+                                color={needToAscend ? 'warning' : needToLevel ? 'secondary' : 'success'}>
                                 <CharacterImage
                                     key={character.name}
                                     icon={character.icon}
