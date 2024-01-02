@@ -1,6 +1,8 @@
 ﻿import React from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { Rank, Rarity, RarityStars } from '../models/enums';
+import { Rank, Rarity, RarityStars, WyoFilter, WyoOrder } from '../models/enums';
+import { ICharacter2 } from '../models/interfaces';
+import { rankToLevel } from '../models/constants';
 
 export const fitGridOnWindowResize = (gridRef: React.RefObject<AgGridReact>) => {
     function handleResize() {
@@ -68,6 +70,54 @@ export const rankToString = (rank: Rank): string => {
         default:
             return '';
     }
+};
+
+export const wyoOrderToString = (order: WyoOrder): string => {
+    switch (order) {
+        case WyoOrder.FactionPower:
+            return 'By Faction Power';
+        case WyoOrder.CharacterPower:
+            return 'By Character Power';
+        case WyoOrder.AbilitiesLevel:
+            return 'By Abilities Level';
+        case WyoOrder.Rank:
+            return 'By Rank';
+        case WyoOrder.Faction:
+            return 'By Faction';
+        default:
+            return '';
+    }
+};
+
+export const wyoFilterToString = (filter: WyoFilter): string => {
+    switch (filter) {
+        case WyoFilter.NeedToAscend:
+            return 'Need to Ascend';
+        case WyoFilter.NeedToLevel:
+            return 'Need to Level';
+        case WyoFilter.None:
+            return 'None';
+        default:
+            return '';
+    }
+};
+
+export const needToAscendCharacter = (character: ICharacter2) => {
+    const maxCommon = character.rarity === Rarity.Common && character.rank === Rank.Iron1;
+    const maxUncommon = character.rarity === Rarity.Uncommon && character.rank === Rank.Bronze1;
+    const maxRare = character.rarity === Rarity.Rare && character.rank === Rank.Silver1;
+    const maxEpic = character.rarity === Rarity.Epic && character.rank === Rank.Gold1;
+    return maxCommon || maxUncommon || maxRare || maxEpic;
+};
+export const needToLevelCharacter = (character: ICharacter2) => {
+    const isUnlocked = character.rank > Rank.Locked;
+    const needToAscend = needToAscendCharacter(character);
+    return (
+        isUnlocked &&
+        !needToAscend &&
+        character.level < rankToLevel[character.rank] &&
+        6 - (rankToLevel[character.rank] - character.level) <= character.upgrades.length
+    );
 };
 
 export const stringToRank = (rankString: string): Rank => {
