@@ -11,14 +11,16 @@ export const CharacterImage = ({
     imageSize?: number;
     portrait?: boolean;
 }) => {
-    const iconPath = portrait ? 'portraits' : 'characters';
+    const iconPath = portrait ? 'portraits/webp' : 'characters';
+    const replaceExtenstion = portrait ? icon.replace('.png', '.webp') : icon;
+    const unset = portrait ? 'unset.webp' : 'unset.png';
     let image: any;
     try {
         // Import image on demand
         // eslint-disable-next-line @typescript-eslint/no-var-requires
-        image = require(`../assets/images/${iconPath}/${icon}`);
+        image = require(`../assets/images/${iconPath}/${replaceExtenstion}`);
     } catch (error) {
-        image = require(`../assets/images/${iconPath}/unset.png`);
+        image = require(`../assets/images/${iconPath}/${unset}`);
     }
 
     return portrait ? (
