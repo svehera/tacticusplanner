@@ -42,6 +42,7 @@ import InputLabel from '@mui/material/InputLabel';
 import ListItemText from '@mui/material/ListItemText';
 import { CharacterImage } from '../../shared-components/character-image';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import { isMobile } from 'react-device-detect';
 
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>([
@@ -319,10 +320,6 @@ export const MasterTable = () => {
         }) as any;
     }, [selection, filter, activeLegendaryEvents]);
 
-    useEffect(() => {
-        gridRef.current?.api?.sizeColumnsToFit();
-    }, [rows]);
-
     const handleLESelectChange = (event: SelectChangeEvent<typeof activeLegendaryEvents>) => {
         const {
             target: { value },
@@ -334,7 +331,7 @@ export const MasterTable = () => {
 
     return (
         <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 15, flexDirection: isMobile ? 'column' : 'row' }}>
                 <TextField
                     sx={{ margin: '10px', width: '300px' }}
                     label="Quick Filter"
@@ -411,7 +408,6 @@ export const MasterTable = () => {
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
                     columnDefs={columnsDef}
-                    onGridReady={fitGridOnWindowResize(gridRef)}
                     onSortChanged={() => gridRef.current?.api?.refreshCells()}
                     onFilterChanged={() => gridRef.current?.api?.refreshCells()}></AgGridReact>
             </div>

@@ -21,6 +21,7 @@ import { Campaigns } from '../routes/tables/campaigns';
 import { DirtyDozen } from '../routes/dirty-dozen/dirty-dozen';
 import { Contacts } from '../routes/contacts/contacts';
 import { Thanks } from '../shared-components/thanks';
+import { MasterTable } from '../routes/legendary-events/master-table';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -53,6 +54,10 @@ const planRoutes: RouteObject[] = [
     {
         path: 'plan/dailyRaids',
         element: <DailyRaids />,
+    },
+    {
+        path: 'plan/leMasterTable',
+        element: <MasterTable />,
     },
     {
         path: 'plan/le/shadowsun',
