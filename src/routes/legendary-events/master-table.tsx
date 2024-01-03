@@ -19,21 +19,37 @@ import {
     SelectedTeams,
 } from '../../models/interfaces';
 import { LegendaryEventEnum, Rank, Rarity } from '../../models/enums';
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
+import {
+    Checkbox,
+    FormControl,
+    FormControlLabel,
+    FormLabel,
+    ListItemIcon,
+    MenuItem,
+    Radio,
+    RadioGroup,
+    Select,
+    SelectChangeEvent,
+    TextField,
+} from '@mui/material';
 import { fitGridOnWindowResize, rankToString } from '../../shared-logic/functions';
 import { groupBy, map, sum, uniq } from 'lodash';
 import { CharactersSelection, ITableRow } from './legendary-events.interfaces';
 import { StoreContext } from '../../reducers/store.provider';
 import { CharacterTitle } from '../../shared-components/character-title';
 import { getLegendaryEvent } from '../../models/constants';
+import InputLabel from '@mui/material/InputLabel';
+import ListItemText from '@mui/material/ListItemText';
+import { CharacterImage } from '../../shared-components/character-image';
+import OutlinedInput from '@mui/material/OutlinedInput';
 
 export const MasterTable = () => {
-    const activeLegendaryEvents = [
+    const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>([
         LegendaryEventEnum.Ragnar,
         LegendaryEventEnum.Vitruvius,
         LegendaryEventEnum.AunShi,
         LegendaryEventEnum.Shadowsun,
-    ];
+    ]);
 
     const { leSelectedTeams, viewPreferences, characters } = useContext(StoreContext);
     const getPersonalLegendaryEvent = (eventId: LegendaryEventEnum): ILegendaryEventSelectedTeams => {
@@ -109,7 +125,7 @@ export const MasterTable = () => {
                 ],
             })),
         ];
-    }, [selection]);
+    }, [selection, activeLegendaryEvents]);
 
     const getSelectedChars = (eventId: LegendaryEventEnum) => {
         const legendaryEvent = getLegendaryEvent(eventId, characters);
@@ -242,7 +258,7 @@ export const MasterTable = () => {
             }
             return result;
         }
-    }, [filter]);
+    }, [filter, activeLegendaryEvents]);
 
     const rows = useMemo<ITableRow[]>(() => {
         const temp: Array<{
@@ -301,11 +317,20 @@ export const MasterTable = () => {
 
             return charData;
         }) as any;
-    }, [selection, filter]);
+    }, [selection, filter, activeLegendaryEvents]);
 
     useEffect(() => {
         gridRef.current?.api?.sizeColumnsToFit();
     }, [rows]);
+
+    const handleLESelectChange = (event: SelectChangeEvent<typeof activeLegendaryEvents>) => {
+        const {
+            target: { value },
+        } = event;
+        if (Array.isArray(value)) {
+            setActiveLegendaryEvents(value);
+        }
+    };
 
     return (
         <div>
@@ -340,6 +365,44 @@ export const MasterTable = () => {
                         />
                         <FormControlLabel value={CharactersSelection.All} control={<Radio />} label="All" />
                     </RadioGroup>
+                </FormControl>
+                <FormControl style={{ width: 300 }}>
+                    <InputLabel>Legendary Events</InputLabel>
+                    <Select
+                        value={activeLegendaryEvents}
+                        onChange={handleLESelectChange}
+                        multiple
+                        input={<OutlinedInput label="Legendary Events" />}
+                        renderValue={selected => selected.map(x => LegendaryEventEnum[x]).join(', ')}>
+                        <MenuItem value={LegendaryEventEnum.Ragnar}>
+                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Ragnar) > -1} />
+                            <ListItemIcon>
+                                <CharacterImage icon={'Ragnar.png'} imageSize={30} />
+                            </ListItemIcon>
+                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Ragnar]} />
+                        </MenuItem>
+                        <MenuItem value={LegendaryEventEnum.Vitruvius}>
+                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Vitruvius) > -1} />
+                            <ListItemIcon>
+                                <CharacterImage icon={'vitruvius.png'} imageSize={30} />
+                            </ListItemIcon>
+                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Vitruvius]} />
+                        </MenuItem>
+                        <MenuItem value={LegendaryEventEnum.AunShi}>
+                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.AunShi) > -1} />
+                            <ListItemIcon>
+                                <CharacterImage icon={'Aun-shi.png'} imageSize={30} />
+                            </ListItemIcon>
+                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.AunShi]} />
+                        </MenuItem>
+                        <MenuItem value={LegendaryEventEnum.Shadowsun}>
+                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Shadowsun) > -1} />
+                            <ListItemIcon>
+                                <CharacterImage icon={'ShadowSun.png'} imageSize={30} />
+                            </ListItemIcon>
+                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Shadowsun]} />
+                        </MenuItem>
+                    </Select>
                 </FormControl>
             </div>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 150px)', width: '100%' }}>
