@@ -41,6 +41,7 @@ export const menuItemById = {
 
     goals: new MenuItemTP('Goals', <TrackChangesIcon />, '/plan/goals'),
     dailyRaids: new MenuItemTP('Daily Raids', <EventRepeatIcon />, '/plan/dailyRaids'),
+    leMasterTable: new MenuItemTP('LE Master Table', <EventRepeatIcon />, '/plan/leMasterTable'),
     shadowsun: new MenuItemTP(
         'Shadowsun LE',
         <CharacterImage icon={'ShadowSun.png'} imageSize={24} />,
@@ -90,6 +91,7 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['aunshi'],
     menuItemById['ragnar'],
     menuItemById['vitruvius'],
+    menuItemById['leMasterTable'],
 ];
 
 export const learnSubMenu: MenuItemTP[] = [

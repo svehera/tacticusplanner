@@ -20,6 +20,7 @@ import { DailyRaids } from './tables/dailyRaids';
 import { CampaignsProgress } from './campaigns-progress';
 import { Inventory } from './inventory';
 import { Home } from '../features/misc/home/home';
+import { MasterTable } from './legendary-events/master-table';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -66,6 +67,10 @@ const planRoutes: RouteObject[] = [
                 element: <LegendaryEvent id={LegendaryEventEnum.Vitruvius} />,
             },
         ],
+    },
+    {
+        path: 'plan/leMasterTable',
+        element: <MasterTable />,
     },
 ];
 
