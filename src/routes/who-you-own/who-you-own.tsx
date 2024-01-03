@@ -355,6 +355,15 @@ export const WhoYouOwn = () => {
                         <WarningIcon color={'warning'} fontSize={'medium'} /> Disclaimer:{' '}
                         {/* eslint-disable-next-line react/no-unescaped-entities */}
                         <MiscIcon icon={'power'} height={20} width={15} /> doesn't represent in-game power
+                        <br />
+                        <span style={{ fontSize: 10 }}>
+                            Power = (Stars * Coeff) + (Rarity * Coeff) + (Rank * Coeff) + (Active Ability Level * Coeff)
+                            +(Passive Ability Level * Coeff)
+                        </span>
+                        <br />
+                        <span style={{ fontSize: 12, fontStyle: 'italic' }}>
+                            NOTE: Coeff is different for each respective property
+                        </span>
                     </p>
                     <img src={wyoInfo} width={500} />
                 </div>
