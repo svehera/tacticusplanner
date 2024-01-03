@@ -95,6 +95,8 @@ export const wyoFilterToString = (filter: WyoFilter): string => {
             return 'Need to Ascend';
         case WyoFilter.NeedToLevel:
             return 'Need to Level';
+        case WyoFilter.CanUpgrade:
+            return 'Can Upgrade';
         case WyoFilter.None:
             return 'None';
         default:

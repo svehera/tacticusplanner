@@ -190,6 +190,7 @@ export enum WyoFilter {
     None,
     NeedToAscend,
     NeedToLevel,
+    CanUpgrade,
 }
 
 export enum WyoOrder {

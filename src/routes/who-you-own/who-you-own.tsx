@@ -91,6 +91,10 @@ export const WhoYouOwn = () => {
                 return filteredCharactersByName.filter(needToAscendCharacter);
             case WyoFilter.NeedToLevel:
                 return filteredCharactersByName.filter(needToLevelCharacter);
+            case WyoFilter.CanUpgrade:
+                return filteredCharactersByName.filter(
+                    char => char.rank !== Rank.Locked && !needToLevelCharacter(char) && !needToAscendCharacter(char)
+                );
             case WyoFilter.None:
             default:
                 return filteredCharactersByName;
