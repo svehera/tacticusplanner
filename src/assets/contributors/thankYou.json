@@ -26,9 +26,17 @@
   {
     "name": "YourAdHere",
     "type": "Contributor",
-    "thankYou": "Thank you for contributing into open source",
+    "thankYou": "Thank you for contributing into Tacticus Planner",
     "resourceDescription": "",
     "resourceLink": "",
     "avatarIcon": "yourAdHere.webp"
+  },
+  {
+    "name": "Lëonaica",
+    "type": "Contributor",
+    "thankYou": "Thank you for contributing into Tacticus Planner",
+    "resourceDescription": "",
+    "resourceLink": "",
+    "avatarIcon": "leonaica.webp"
   }
 ]

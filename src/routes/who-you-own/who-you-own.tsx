@@ -354,7 +354,7 @@ export const WhoYouOwn = () => {
                     vertical: 'bottom',
                     horizontal: 'left',
                 }}>
-                <div style={{ padding: 10 }}>
+                <div style={{ padding: 10, maxWidth: 500 }}>
                     <p style={{ fontWeight: 500 }}>
                         <WarningIcon color={'warning'} fontSize={'medium'} /> Disclaimer:{' '}
                         {/* eslint-disable-next-line react/no-unescaped-entities */}
@@ -362,7 +362,7 @@ export const WhoYouOwn = () => {
                         <br />
                         <span style={{ fontSize: 10 }}>
                             Power = (Stars * Coeff) + (Rarity * Coeff) + (Rank * Coeff) + (Active Ability Level * Coeff)
-                            +(Passive Ability Level * Coeff)
+                            +(Passive Ability Level * Coeff) +(# of Upgrades applied * Coeff)
                         </span>
                         <br />
                         <span style={{ fontSize: 12, fontStyle: 'italic' }}>

@@ -1,6 +1,42 @@
 ﻿{
-  "currentVersion": "1.2.8",
+  "currentVersion": "1.2.9",
   "releaseNotes": [
+    {
+      "version": "1.2.9",
+      "date": "January 4",
+      "type": "Update",
+      "new": [
+        {
+          "text": "Added new filter and order options on Who You Own page",
+          "images": [
+          ]
+        },
+        {
+          "text": "Added LE Master Table pages which aggregates the \"Data Tables\" from all Legendary events (SergeDavid, NoxTempest)",
+          "images": [
+          ]
+        },
+        {
+          "text": "New thank you card for Lëonaica contribution" 
+        }
+      ],
+      "minor": [
+        {
+          "text": "Updated Tan Gi'Da icons"
+        },
+        {
+          "text": "Added info popup on the Who You Own"
+        },
+        {
+          "text": "Added \"Need to level\" badge in purple color on Who You Own"
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed upgrades order for Actus (CM Fluffy Honey Badger)"
+        }
+      ]
+    },
     {
       "version": "1.2.8",
       "date": "December 28",

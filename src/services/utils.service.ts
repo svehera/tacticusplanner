@@ -10,23 +10,25 @@ export class UtilsService {
         rarity: Rarity.Legendary,
     } as ICharacter2);
 
-    public static getCharacterPower(char: ICharacter2): number {
-        if (char.rank === Rank.Locked) {
+    public static getCharacterPower(character: ICharacter2): number {
+        if (character.rank === Rank.Locked) {
             return 0;
         }
 
-        const starsCoeff = UtilsService.getStarsCoeff(char.stars);
+        const starsCoeff = UtilsService.getStarsCoeff(character.stars);
         const rarityCoeff = 100;
-        const rankCoeff = UtilsService.getRankCoeff(char.rank);
-        const activeAbilityCoeff = UtilsService.getAbilityCoeff(char.activeAbilityLevel);
-        const passiveAbilityCoeff = UtilsService.getAbilityCoeff(char.passiveAbilityLevel);
-
+        const rankCoeff = UtilsService.getRankCoeff(character.rank);
+        const activeAbilityCoeff = UtilsService.getAbilityCoeff(character.activeAbilityLevel);
+        const passiveAbilityCoeff = UtilsService.getAbilityCoeff(character.passiveAbilityLevel);
+        const upgradeCoeff =
+            (UtilsService.getRankCoeff(character.rank + 1) - UtilsService.getRankCoeff(character.rank)) / 9;
         const powerLevel =
-            starsCoeff * char.stars +
-            rarityCoeff * char.rarity +
-            rankCoeff * char.rank +
-            activeAbilityCoeff * char.activeAbilityLevel +
-            passiveAbilityCoeff * char.passiveAbilityLevel;
+            starsCoeff * character.stars +
+            rarityCoeff * character.rarity +
+            rankCoeff * character.rank +
+            activeAbilityCoeff * character.activeAbilityLevel +
+            passiveAbilityCoeff * character.passiveAbilityLevel +
+            upgradeCoeff * (character.upgrades?.length ?? 0);
 
         return Math.round(powerLevel);
     }
