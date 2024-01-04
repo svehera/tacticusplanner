@@ -1,4 +1,13 @@
-﻿import { DailyEnergy, LegendaryEventEnum, PersonalGoalType, Rank, Rarity, RarityStars, RarityString } from './enums';
+﻿import {
+    LegendaryEventEnum,
+    PersonalGoalType,
+    Rank,
+    Rarity,
+    RarityStars,
+    RarityString,
+    WyoFilter,
+    WyoOrder,
+} from './enums';
 import { ICampaignsProgress, ICharacter2, ICharProgression, IPersonalData2 } from './interfaces';
 import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from './legendary-events';
 import { RagnarLegendaryEvent } from './legendary-events/ragnar.le';
@@ -133,13 +142,6 @@ export const starEmoji = String.fromCodePoint(parseInt('1F31F', 16));
 
 export const discordInvitationLink = 'https://discord.gg/gyajsMcH7j';
 
-export const dailyEnergyOptions: Record<DailyEnergy, number> = {
-    [DailyEnergy.Base]: 288,
-    [DailyEnergy.Adv]: 288 + 50,
-    [DailyEnergy.BS50]: 288 + 50 + 100,
-    [DailyEnergy.BS110]: 288,
-};
-
 export const defaultCampaignsProgress: ICampaignsProgress = {
     Indomitus: 75,
     'Indomitus Mirror': 75,
@@ -189,6 +191,8 @@ export const defaultData: IPersonalData2 = {
         hideCompleted: false,
         craftableItemsInInventory: false,
         hideNames: false,
+        wyoFilter: WyoFilter.None,
+        wyoOrder: WyoOrder.Faction,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,

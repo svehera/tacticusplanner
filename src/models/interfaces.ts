@@ -14,6 +14,8 @@
     RarityStars,
     RarityString,
     Trait,
+    WyoFilter,
+    WyoOrder,
 } from './enums';
 import React from 'react';
 import { CharactersAction } from '../reducers/characters.reducer';
@@ -333,6 +335,8 @@ export interface IViewPreferences {
     craftableItemsInInventory: boolean;
     hideCompleted: boolean;
     hideNames: boolean;
+    wyoFilter: WyoFilter;
+    wyoOrder: WyoOrder;
 }
 
 export interface IAutoTeamsPreferences {

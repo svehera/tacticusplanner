@@ -1,13 +1,14 @@
 ﻿import React, { useMemo } from 'react';
 import { ICharacter2 } from '../models/interfaces';
 import { CharacterBias, Rank, Rarity } from '../models/enums';
-import { pooEmoji, starEmoji } from '../models/constants';
+import { pooEmoji, rankToLevel, starEmoji } from '../models/constants';
 import { RarityImage } from './rarity-image';
 import { RankImage } from './rank-image';
 import { CharacterImage } from './character-image';
 import { Badge, Tooltip } from '@mui/material';
 import { StarsImage } from './stars-image';
 import './character-title.css';
+import { needToAscendCharacter, needToLevelCharacter } from '../shared-logic/functions';
 
 export const CharacterTitle = ({
     character,
@@ -37,13 +38,12 @@ export const CharacterTitle = ({
     const opacity = showLockedWithOpacity ? (isUnlocked ? 1 : 0.5) : 1;
     const cursor = onClick ? 'pointer' : undefined;
 
-    const needToAscend = useMemo(() => {
-        const maxCommon = character.rarity === Rarity.Common && character.rank === Rank.Iron1;
-        const maxUncommon = character.rarity === Rarity.Uncommon && character.rank === Rank.Bronze1;
-        const maxRare = character.rarity === Rarity.Rare && character.rank === Rank.Silver1;
-        const maxEpic = character.rarity === Rarity.Epic && character.rank === Rank.Gold1;
-        return maxCommon || maxUncommon || maxRare || maxEpic;
-    }, [character.rarity, character.rank]);
+    const needToAscend = useMemo(() => needToAscendCharacter(character), [character.rarity, character.rank]);
+
+    const needToLevel = useMemo(
+        () => needToLevelCharacter(character),
+        [character.rarity, character.rank, character.level]
+    );
 
     const characterFull = (
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>
@@ -89,8 +89,14 @@ export const CharacterTitle = ({
                     <Tooltip title={character.name} placement={'top'}>
                         <div>
                             <Badge
-                                badgeContent={needToAscend ? '⇧' : character.upgrades.length}
-                                color={needToAscend ? 'warning' : 'success'}>
+                                badgeContent={
+                                    needToAscend
+                                        ? '⇧'
+                                        : needToLevel
+                                        ? character.upgrades.length || '⇧'
+                                        : character.upgrades.length
+                                }
+                                color={needToAscend ? 'warning' : needToLevel ? 'secondary' : 'success'}>
                                 <CharacterImage
                                     key={character.name}
                                     icon={character.icon}

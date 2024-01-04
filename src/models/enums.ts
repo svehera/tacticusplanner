@@ -186,9 +186,17 @@ export enum Campaign {
     SaimHann = 'Saim-Hann',
 }
 
-export enum DailyEnergy {
-    Base,
-    Adv,
-    BS50,
-    BS110,
+export enum WyoFilter {
+    None,
+    NeedToAscend,
+    NeedToLevel,
+    CanUpgrade,
+}
+
+export enum WyoOrder {
+    Faction,
+    FactionPower,
+    CharacterPower,
+    AbilitiesLevel,
+    Rank,
 }

@@ -21,11 +21,7 @@ Ideas:
 
 - (saTchymoto) Calculate how many badges to upgrade skill
 
-- (SergeDavid) I wonder if you can bring up a list for characters with ALL active tracks. So combine all their tracks across all LREs to better plan dynamically. 
-
 - (SergeDavid) How many accounts use the app, what is the average hero level, what's the favorite hero teams per LRE track, etc. With the data a lot of cool data can be shown.
-
-- (Somberlord) Evolution idea : being able to share your roster with people. Unique, or generated link that bring to a static page similar to "Who you Own"
 
 - (Catch) it would be useful to build multiple teams per track. 
     In the Vitruvius LE for example I'm planning to use a team for the first few levels and then change to different teams for the higher levels. 
