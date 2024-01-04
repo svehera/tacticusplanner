@@ -18,6 +18,7 @@ import EventRepeatIcon from '@mui/icons-material/EventRepeat';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import TableChartIcon from '@mui/icons-material/TableChart';
 
 import { CharacterImage } from '../shared-components/character-image';
 
@@ -41,7 +42,7 @@ export const menuItemById = {
 
     goals: new MenuItemTP('Goals', <TrackChangesIcon />, '/plan/goals'),
     dailyRaids: new MenuItemTP('Daily Raids', <EventRepeatIcon />, '/plan/dailyRaids'),
-    leMasterTable: new MenuItemTP('LE Master Table', <EventRepeatIcon />, '/plan/leMasterTable'),
+    leMasterTable: new MenuItemTP('LE Master Table', <TableChartIcon />, '/plan/leMasterTable'),
     shadowsun: new MenuItemTP(
         'Shadowsun LE',
         <CharacterImage icon={'ShadowSun.png'} imageSize={24} />,

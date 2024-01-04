@@ -1,15 +1,6 @@
 ﻿import React, { ChangeEvent, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import {
-    CellClassParams,
-    ColDef,
-    ColGroupDef,
-    ICellRendererParams,
-    ITooltipParams,
-    RowClassParams,
-    RowStyle,
-    ValueFormatterParams,
-} from 'ag-grid-community';
+import { CellClassParams, ColDef, ColGroupDef, ICellRendererParams, ITooltipParams } from 'ag-grid-community';
 
 import {
     ICharacter2,
@@ -32,7 +23,6 @@ import {
     SelectChangeEvent,
     TextField,
 } from '@mui/material';
-import { fitGridOnWindowResize, rankToString } from '../../shared-logic/functions';
 import { groupBy, map, sum, uniq } from 'lodash';
 import { CharactersSelection, ITableRow } from './legendary-events.interfaces';
 import { StoreContext } from '../../reducers/store.provider';
@@ -73,7 +63,7 @@ export const MasterTable = () => {
         return [
             {
                 field: 'name',
-                width: viewPreferences.hideNames ? 100 : 200,
+                width: viewPreferences.hideNames ? 150 : 250,
                 sortable: true,
                 cellRenderer: (props: ICellRendererParams<ITableRow>) => {
                     const row = props.data;
@@ -99,6 +89,7 @@ export const MasterTable = () => {
                         width: 100,
                         sortable: true,
                         sort: 'desc',
+                        cellStyle: { textAlign: 'right' },
                     },
                     {
                         field: 'totalSlots',
@@ -116,6 +107,7 @@ export const MasterTable = () => {
                         headerName: 'Points',
                         width: 100,
                         sortable: true,
+                        cellStyle: { textAlign: 'right' },
                     },
                     {
                         field: eventId + 'slots',
@@ -408,6 +400,9 @@ export const MasterTable = () => {
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
                     columnDefs={columnsDef}
+                    defaultColDef={{
+                        suppressMovable: true,
+                    }}
                     onSortChanged={() => gridRef.current?.api?.refreshCells()}
                     onFilterChanged={() => gridRef.current?.api?.refreshCells()}></AgGridReact>
             </div>

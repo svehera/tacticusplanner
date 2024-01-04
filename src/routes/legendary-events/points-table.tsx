@@ -63,7 +63,7 @@ const PointsTable = (props: {
             },
             {
                 field: 'name',
-                width: viewPreferences.hideNames ? 100 : 200,
+                width: viewPreferences.hideNames ? 150 : 250,
                 sortable: true,
                 cellRenderer: (props: ICellRendererParams<ITableRow>) => {
                     const row = props.data;
