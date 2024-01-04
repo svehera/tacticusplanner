@@ -9,11 +9,17 @@
         {
           "text": "Added new filter and order options on Who You Own page",
           "images": [
+            {
+              "path": "wyoOrder.png"
+            }
           ]
         },
         {
           "text": "Added LE Master Table pages which aggregates the \"Data Tables\" from all Legendary events (SergeDavid, NoxTempest)",
           "images": [
+            {
+              "path": "leMaster.png"
+            }
           ]
         },
         {
@@ -25,10 +31,10 @@
           "text": "Updated Tan Gi'Da icons"
         },
         {
-          "text": "Added info popup on the Who You Own"
+          "text": "Added info popup on the Who You Own (Lëonaica)"
         },
         {
-          "text": "Added \"Need to level\" badge in purple color on Who You Own"
+          "text": "Added \"Need to level\" badge in purple color on Who You Own (Lëonaica)"
         }
       ],
       "bugFixes": [
