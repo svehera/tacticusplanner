@@ -14,85 +14,83 @@ export class UtilsService {
         if (character.rank === Rank.Locked) {
             return 0;
         }
+        
+        const statsBase = 3;
+        const statsWeight = 12;
+        const abilityWeight = 24;
 
-        const starsCoeff = UtilsService.getStarsCoeff(character.stars);
-        const rarityCoeff = 100;
-        const rankCoeff = UtilsService.getRankCoeff(character.rank);
-        const activeAbilityCoeff = UtilsService.getAbilityCoeff(character.activeAbilityLevel);
-        const passiveAbilityCoeff = UtilsService.getAbilityCoeff(character.passiveAbilityLevel);
-        const upgradeCoeff =
-            (UtilsService.getRankCoeff(character.rank + 1) - UtilsService.getRankCoeff(character.rank)) / 9;
+        const upgradeBoost = 0.025;
+
+        const statsScore = statsBase ** (UtilsService.getStarsCoeff(character.stars) *
+        (UtilsService.getRankCoeff(character.rank) + upgradeBoost * (character.upgrades?.length ?? 0)));
+                    
+// Possible coefficient to reflect relative character usefulness by boosting power based on DirtyDozen scores:
+// dirtyDozenCoeff = 1 + (Sum_rankings – num_rankings )/100
+// Example Bellator: 1 + (3.5+5+3.5+4.5+1+4.5 - 6)/100 = 1.16
+// Characters should default rankings of "1" (dirtyDozenCoeff = 1) if not included in the dirtyDozen table.
+        const dirtyDozenCoeff = 1;
+
         const powerLevel =
-            starsCoeff * character.stars +
-            rarityCoeff * character.rarity +
-            rankCoeff * character.rank +
-            activeAbilityCoeff * character.activeAbilityLevel +
-            passiveAbilityCoeff * character.passiveAbilityLevel +
-            upgradeCoeff * (character.upgrades?.length ?? 0);
+            dirtyDozenCoeff * 
+            (statsWeight * statsScore + 
+            abilityWeight * (UtilsService.getAbilityCoeff(character.activeAbilityLevel) + 
+                UtilsService.getAbilityCoeff(character.passiveAbilityLevel)));
 
         return Math.round(powerLevel);
     }
 
     public static getAbilityCoeff(level: number): number {
-        if (level <= 8) {
-            return 20;
-        } else if (level <= 17) {
-            return 40;
-        } else if (level <= 20) {
-            return 60;
-        } else if (level <= 26) {
-            return 80;
-        } else if (level <= 30) {
-            return 150;
-        } else if (level <= 35) {
-            return 300;
+        if (level <= 22) {
+            return level;
+        } else if (level <= 39) {
+            return 3.8 * (level - 22) + 22;
         } else if (level <= 40) {
-            return 500;
-        } else if (level <= 45) {
-            return 600;
+            return 5.3 * (level - 39) + 86.6;
+        } else if (level <= 44) {
+            return 8.4 * (level - 40) + 91.9;
         } else {
-            return 700;
+            return 17.3 * (level - 44) + 125.5;
         }
     }
 
     public static getRankCoeff(rank: Rank): number {
         switch (rank) {
             case Rank.Stone1:
-                return 50;
+                return 1.00;
             case Rank.Stone2:
-                return 75;
+                return 1.25;
             case Rank.Stone3:
-                return 100;
+                return 1.50;
             case Rank.Iron1:
-                return 150;
+                return 1.75;
             case Rank.Iron2:
-                return 175;
+                return 2.00;
             case Rank.Iron3:
-                return 200;
+                return 2.25;
             case Rank.Bronze1:
-                return 225;
+                return 2.50;
             case Rank.Bronze2:
-                return 250;
+                return 2.75;
             case Rank.Bronze3:
-                return 275;
+                return 3.00;
             case Rank.Silver1:
-                return 300;
+                return 3.25;
             case Rank.Silver2:
-                return 400;
+                return 3.50;
             case Rank.Silver3:
-                return 500;
+                return 3.75;
             case Rank.Gold1:
-                return 550;
+                return 4.00;
             case Rank.Gold2:
-                return 650;
+                return 4.25;
             case Rank.Gold3:
-                return 750;
+                return 4.50;
             case Rank.Diamond1:
-                return 800;
+                return 4.75;
             case Rank.Diamond2:
-                return 900;
+                return 5.00;
             case Rank.Diamond3:
-                return 1000;
+                return 5.25;
 
             case Rank.Locked:
             default:
@@ -103,31 +101,31 @@ export class UtilsService {
     public static getStarsCoeff(rank: RarityStars): number {
         switch (rank) {
             case RarityStars.OneStar:
-                return 25;
+                return 1.1;
             case RarityStars.TwoStars:
-                return 50;
+                return 1.2;
             case RarityStars.ThreeStars:
-                return 100;
+                return 1.3;
             case RarityStars.FourStars:
-                return 200;
+                return 1.4;
             case RarityStars.FiveStars:
-                return 300;
+                return 1.5;
             case RarityStars.RedOneStar:
-                return 400;
+                return 1.6;
             case RarityStars.RedTwoStars:
-                return 500;
+                return 1.7;
             case RarityStars.RedThreeStars:
-                return 700;
+                return 1.8;
             case RarityStars.RedFourStars:
-                return 800;
+                return 1.9;
             case RarityStars.RedFiveStars:
-                return 900;
+                return 2.0;
             case RarityStars.BlueStar:
-                return 1000;
+                return 2.1;
 
             case RarityStars.None:
             default:
-                return 0;
+                return 1.0;
         }
     }
 }
