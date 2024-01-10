@@ -1,17 +1,20 @@
 ﻿import React, { useContext, useMemo, useState } from 'react';
 
-import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ICellRendererParams } from 'ag-grid-community';
-
-import { TextField } from '@mui/material';
+import { FormControl, Input, InputAdornment } from '@mui/material';
 import { StaticDataService } from '../services';
 import { Rarity } from '../models/enums';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
-import { orderBy } from 'lodash';
-import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
+import { groupBy, map, orderBy } from 'lodash';
 import { UpgradeImage } from '../shared-components/upgrade-image';
 import Button from '@mui/material/Button';
 import ViewSettings from './legendary-events/view-settings';
+import { RarityImage } from '../shared-components/rarity-image';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import IconButton from '@mui/material/IconButton';
+import ClearIcon from '@mui/icons-material/Clear';
+
+import './inventory.scss';
 
 interface ITableRow {
     material: string;
@@ -21,6 +24,7 @@ interface ITableRow {
     stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
     quantity: number;
     iconPath: string;
+    faction: string;
 }
 
 export const Inventory = () => {
@@ -29,100 +33,52 @@ export const Inventory = () => {
 
     const [nameFilter, setNameFilter] = useState<string>('');
 
-    const columnDefs = useMemo<Array<ColDef<ITableRow>>>(() => {
-        return [
-            {
-                headerName: '#',
-                colId: 'rowNumber',
-                valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
-                maxWidth: 60,
-                width: 60,
-                minWidth: 60,
-                sortable: false,
-            },
-            {
-                headerName: 'Icon',
-                cellRenderer: (params: ICellRendererParams<ITableRow>) => {
-                    const { data } = params;
-                    if (data) {
-                        return <UpgradeImage material={data.material} rarity={data.rarity} iconPath={data.iconPath} />;
-                    }
-                },
-                sortable: false,
-                width: 80,
-                equals: () => true,
-            },
-            {
-                field: 'quantity',
-                headerName: 'Quantity',
-                editable: true,
-                cellEditorPopup: false,
-                cellDataType: 'number',
-                cellEditor: 'agNumberCellEditor',
-                cellEditorParams: {
-                    min: 0,
-                    max: 1000,
-                    precision: 0,
-                },
-                maxWidth: 150,
-                width: 150,
-                minWidth: 150,
-            },
-            {
-                field: 'material',
-                headerName: 'Upgrade',
-                valueFormatter: params => params.data?.label ?? '',
-                minWidth: 200,
-            },
-            {
-                field: 'rarity',
-                headerName: 'Rarity',
-                maxWidth: 150,
-                width: 150,
-                minWidth: 150,
-                valueFormatter: params => Rarity[params.data?.rarity ?? 1],
-            },
-            {
-                field: 'craftable',
-                hide: !viewPreferences.craftableItemsInInventory,
-                maxWidth: 100,
-            },
-        ];
-    }, [viewPreferences.craftableItemsInInventory]);
-
-    const allRows = useMemo<ITableRow[]>(() => {
+    const itemsList = useMemo<ITableRow[]>(() => {
         return orderBy(
-            Object.values(StaticDataService.recipeData).map(x => ({
-                material: x.material,
-                label: x.label ?? x.material,
-                rarity: Rarity[x.rarity as unknown as number] as unknown as Rarity,
-                craftable: x.craftable,
-                stat: x.stat,
-                quantity: inventory.upgrades[x.material] ?? 0,
-                iconPath: x.icon ?? '',
-            })),
-            ['quantity', 'rarity', 'material'],
-            ['desc', 'desc', 'asc']
+            Object.values(StaticDataService.recipeData)
+                .filter(item => item.stat !== 'Shard')
+                .map(x => ({
+                    material: x.material,
+                    label: x.label ?? x.material,
+                    rarity: Rarity[x.rarity as unknown as number] as unknown as Rarity,
+                    craftable: x.craftable,
+                    stat: x.stat,
+                    quantity: inventory.upgrades[x.material] ?? 0,
+                    iconPath: x.icon ?? '',
+                    faction: x.faction ?? '',
+                    visible: true,
+                })),
+            ['rarity', 'faction', 'material'],
+            ['desc', 'asc', 'asc']
         );
     }, []);
 
-    const rows = useMemo(() => {
-        return allRows.filter(
-            upgrade =>
-                upgrade.material.toLowerCase().includes(nameFilter.toLowerCase()) &&
-                upgrade.stat !== 'Shard' &&
-                (viewPreferences.craftableItemsInInventory || !upgrade.craftable)
+    const itemsGrouped = useMemo(() => {
+        return map(
+            groupBy(
+                itemsList.filter(
+                    item =>
+                        item.material.toLowerCase().includes(nameFilter.toLowerCase()) &&
+                        (viewPreferences.craftableItemsInInventory || !item.craftable)
+                ),
+                'rarity'
+            ),
+            (items, rarity) => ({
+                label: Rarity[+rarity],
+                rarity: +rarity,
+                items,
+            })
         );
     }, [nameFilter, viewPreferences.craftableItemsInInventory]);
 
-    const saveChanges = (event: CellEditingStoppedEvent<ITableRow>): void => {
-        if (event.data && event.newValue !== event.oldValue) {
-            dispatch.inventory({
-                type: 'UpdateUpgradeQuantity',
-                upgrade: event.data.material,
-                value: event.data.quantity,
-            });
-        }
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, data: ITableRow) => {
+        const value = event.target.value === '' ? 0 : Number(event.target.value);
+        data.quantity = value > 1000 ? 1000 : value;
+        dispatch.inventory({
+            type: 'UpdateUpgradeQuantity',
+            upgrade: data.material,
+            value: data.quantity,
+        });
     };
 
     const resetUpgrades = (): void => {
@@ -131,40 +87,73 @@ export const Inventory = () => {
             dispatch.inventory({
                 type: 'ResetUpgrades',
             });
-            rows.forEach(row => {
+            itemsList.forEach(row => {
                 row.quantity = 0;
             });
         }
     };
 
     return (
-        <div>
-            <div
-                style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '20px',
-                    margin: '20px',
-                }}>
-                <TextField
-                    label="Quick Filter"
-                    variant="outlined"
-                    onChange={change => setNameFilter(change.target.value)}
-                />
-                <Button onClick={() => resetUpgrades()}>Reset</Button>
+        <>
+            <div className="inventory-controls">
+                <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                    <InputLabel htmlFor="queick-filter-input">Quick Filter</InputLabel>
+                    <OutlinedInput
+                        id="queick-filter-input"
+                        value={nameFilter}
+                        onChange={change => setNameFilter(change.target.value)}
+                        endAdornment={
+                            nameFilter ? (
+                                <InputAdornment position="end">
+                                    <IconButton onClick={() => setNameFilter('')} edge="end">
+                                        <ClearIcon />
+                                    </IconButton>
+                                </InputAdornment>
+                            ) : null
+                        }
+                        label="Quick Filter"
+                    />
+                </FormControl>
+                <Button onClick={() => resetUpgrades()} color="error" variant="contained">
+                    Reset All
+                </Button>
+                <ViewSettings options={['craftableItemsInInventory']} />
             </div>
-            <ViewSettings options={['craftableItemsInInventory']} />
 
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 220px)', width: '100%' }}>
-                <AgGridReact
-                    singleClickEdit={true}
-                    defaultColDef={{ sortable: true, wrapText: true, suppressMovable: true }}
-                    rowHeight={60}
-                    rowBuffer={3}
-                    columnDefs={columnDefs}
-                    onCellEditingStopped={saveChanges}
-                    rowData={rows}></AgGridReact>
-            </div>
-        </div>
+            {itemsGrouped
+                .map(group => (
+                    <section key={group.rarity} className="inventory-items-group">
+                        <h2>
+                            <RarityImage rarity={group.rarity} /> {group.label}
+                        </h2>
+                        <article className="inventory-items">
+                            {group.items.map(data => (
+                                <div key={data.material} className="inventory-item">
+                                    <UpgradeImage
+                                        material={data.material}
+                                        rarity={data.rarity}
+                                        iconPath={data.iconPath}
+                                    />
+                                    <Input
+                                        style={{ justifyContent: 'center' }}
+                                        value={data.quantity}
+                                        size="small"
+                                        onChange={event => handleInputChange(event, data)}
+                                        inputProps={{
+                                            step: 1,
+                                            min: 0,
+                                            max: 1000,
+                                            type: 'number',
+                                            style: { width: data.quantity.toString().length * 10 },
+                                            className: 'item-quantity-input',
+                                        }}
+                                    />
+                                </div>
+                            ))}
+                        </article>
+                    </section>
+                ))
+                .reverse()}
+        </>
     );
 };
