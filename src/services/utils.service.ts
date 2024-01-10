@@ -1,5 +1,6 @@
 ﻿import { ICharacter2 } from '../models/interfaces';
 import { Rank, Rarity, RarityStars } from '../models/enums';
+import { StaticDataService } from './static-data.service';
 
 export class UtilsService {
     public static maxCharacterPower = this.getCharacterPower({
@@ -14,29 +15,51 @@ export class UtilsService {
         if (character.rank === Rank.Locked) {
             return 0;
         }
-        
+
         const statsBase = 3;
         const statsWeight = 12;
         const abilityWeight = 24;
 
         const upgradeBoost = 0.025;
 
-        const statsScore = statsBase ** (UtilsService.getStarsCoeff(character.stars) *
-        (UtilsService.getRankCoeff(character.rank) + upgradeBoost * (character.upgrades?.length ?? 0)));
-                    
-// Possible coefficient to reflect relative character usefulness by boosting power based on DirtyDozen scores:
-// dirtyDozenCoeff = 1 + (Sum_rankings – num_rankings )/100
-// Example Bellator: 1 + (3.5+5+3.5+4.5+1+4.5 - 6)/100 = 1.16
-// Characters should default rankings of "1" (dirtyDozenCoeff = 1) if not included in the dirtyDozen table.
-        const dirtyDozenCoeff = 1;
+        const statsScore =
+            statsBase **
+            (UtilsService.getStarsCoeff(character.stars) *
+                (UtilsService.getRankCoeff(character.rank) + upgradeBoost * (character.upgrades?.length ?? 0)));
+
+        // Possible coefficient to reflect relative character usefulness by boosting power based on DirtyDozen scores:
+        // dirtyDozenCoeff = 1 + (Sum_rankings – num_rankings )/100
+        // Example Bellator: 1 + (3.5+5+3.5+4.5+1+4.5 - 6)/100 = 1.16
+        // Characters should default rankings of "1" (dirtyDozenCoeff = 1) if not included in the dirtyDozen table.
+        const dirtyDozenCoeff = UtilsService.getDirtyDozenCoeff(character.name);
 
         const powerLevel =
-            dirtyDozenCoeff * 
-            (statsWeight * statsScore + 
-            abilityWeight * (UtilsService.getAbilityCoeff(character.activeAbilityLevel) + 
-                UtilsService.getAbilityCoeff(character.passiveAbilityLevel)));
+            dirtyDozenCoeff *
+            (statsWeight * statsScore +
+                abilityWeight *
+                    (UtilsService.getAbilityCoeff(character.activeAbilityLevel) +
+                        UtilsService.getAbilityCoeff(character.passiveAbilityLevel)));
 
         return Math.round(powerLevel);
+    }
+
+    public static getDirtyDozenCoeff(characterId: string): number {
+        const dirtyDozenChar = StaticDataService.dirtyDozenData.find(x => x.Name === characterId);
+        if (!dirtyDozenChar) {
+            return 1;
+        }
+        const numberOfCriteria = 6;
+        return (
+            1 +
+            (dirtyDozenChar.Pvp +
+                dirtyDozenChar.GROrk +
+                dirtyDozenChar.GRMortarion +
+                dirtyDozenChar.GRNecron +
+                dirtyDozenChar.GRTyranid +
+                dirtyDozenChar.GRScreamer +
+                -numberOfCriteria) /
+                100
+        );
     }
 
     public static getAbilityCoeff(level: number): number {
@@ -56,39 +79,39 @@ export class UtilsService {
     public static getRankCoeff(rank: Rank): number {
         switch (rank) {
             case Rank.Stone1:
-                return 1.00;
+                return 1.0;
             case Rank.Stone2:
                 return 1.25;
             case Rank.Stone3:
-                return 1.50;
+                return 1.5;
             case Rank.Iron1:
                 return 1.75;
             case Rank.Iron2:
-                return 2.00;
+                return 2.0;
             case Rank.Iron3:
                 return 2.25;
             case Rank.Bronze1:
-                return 2.50;
+                return 2.5;
             case Rank.Bronze2:
                 return 2.75;
             case Rank.Bronze3:
-                return 3.00;
+                return 3.0;
             case Rank.Silver1:
                 return 3.25;
             case Rank.Silver2:
-                return 3.50;
+                return 3.5;
             case Rank.Silver3:
                 return 3.75;
             case Rank.Gold1:
-                return 4.00;
+                return 4.0;
             case Rank.Gold2:
                 return 4.25;
             case Rank.Gold3:
-                return 4.50;
+                return 4.5;
             case Rank.Diamond1:
                 return 4.75;
             case Rank.Diamond2:
-                return 5.00;
+                return 5.0;
             case Rank.Diamond3:
                 return 5.25;
 
