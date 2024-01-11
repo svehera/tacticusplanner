@@ -149,6 +149,7 @@ export const GoalCard = ({
     }, [goal, character]);
 
     let goalShards = 0;
+    let possibleLocations: string | undefined;
     if (goal.type === PersonalGoalType.Ascend) {
         const currentCharProgression = character.rarity + character.stars;
         const targetProgression = goal.targetRarity! + rarityToStars[goal.targetRarity!];
@@ -165,9 +166,17 @@ export const GoalCard = ({
         goalShards = charsUnlockShards[character.rarity];
     }
 
+    if (goal.type === PersonalGoalType.Unlock || goal.type === PersonalGoalType.Ascend) {
+        const characterShardsData = StaticDataService.recipeDataFull[character.name];
+        if (characterShardsData) {
+            const fullData = characterShardsData.allMaterials && characterShardsData.allMaterials[0];
+            if (fullData)
+                possibleLocations = fullData.locationsComposed?.map(x => x.campaign + ' ' + x.nodeNumber).join(',');
+        }
+    }
+    goal.shardsPerDay ??= 3;
     const shardsLeftToScore = goalShards && goalShards - character.shards;
-    const lowShardsPerDay = shardsLeftToScore && shardsLeftToScore > 0 ? Math.ceil(shardsLeftToScore / 3) : 0;
-    const highShardsPerDay = shardsLeftToScore && shardsLeftToScore > 0 ? Math.ceil(shardsLeftToScore / 6) : 0;
+    const daysLeft = shardsLeftToScore && shardsLeftToScore > 0 ? Math.ceil(shardsLeftToScore / goal.shardsPerDay) : 0;
 
     const estimatedDays = useMemo(() => {
         if (goal.type !== PersonalGoalType.UpgradeRank) {
@@ -288,11 +297,10 @@ export const GoalCard = ({
                             Shards
                         </span>
                         <span>
-                            3 Shards per Day: <span style={{ fontWeight: 'bold' }}>{lowShardsPerDay} days</span> left
+                            <span style={{ fontWeight: 'bold' }}>{daysLeft} days</span> left ({goal.shardsPerDay} Shards
+                            and {goal.energyPerDay ?? 0} Energy per day)
                         </span>
-                        <span>
-                            6 Shards per Day: <span style={{ fontWeight: 'bold' }}>{highShardsPerDay} days</span> left
-                        </span>
+                        {possibleLocations ? <span>Locations: {possibleLocations}</span> : undefined}
                     </div>
                 ) : undefined}
                 <span>{goal.notes}</span>

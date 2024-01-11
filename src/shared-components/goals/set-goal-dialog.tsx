@@ -218,6 +218,49 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
                         {character && form.type === PersonalGoalType.UpgradeRank ? targetRankSelector : undefined}
                         {character && form.type === PersonalGoalType.Ascend ? targetRaritySelector : undefined}
+                        {character &&
+                        (form.type === PersonalGoalType.Unlock || form.type === PersonalGoalType.Ascend) ? (
+                            <>
+                                <FormControl style={{ marginTop: 10 }} variant={'outlined'} fullWidth>
+                                    <InputLabel>Shards per day</InputLabel>
+                                    <Input
+                                        disableUnderline={true}
+                                        value={form.shardsPerDay}
+                                        onChange={event => {
+                                            const value =
+                                                event.target.value === '' ? '' : (Number(event.target.value) as any);
+                                            setForm(curr => ({ ...curr, shardsPerDay: value }));
+                                        }}
+                                        inputProps={{
+                                            step: 1,
+                                            min: 0,
+                                            max: 100,
+                                            type: 'number',
+                                            'aria-labelledby': 'input-slider',
+                                        }}
+                                    />
+                                </FormControl>
+                                <FormControl style={{ marginTop: 10 }} variant={'outlined'} fullWidth>
+                                    <InputLabel>Energy per day</InputLabel>
+                                    <Input
+                                        disableUnderline={true}
+                                        value={form.energyPerDay ?? 0}
+                                        onChange={event => {
+                                            const value =
+                                                event.target.value === '' ? '' : (Number(event.target.value) as any);
+                                            setForm(curr => ({ ...curr, energyPerDay: value }));
+                                        }}
+                                        inputProps={{
+                                            step: 1,
+                                            min: 0,
+                                            max: 100,
+                                            type: 'number',
+                                            'aria-labelledby': 'input-slider',
+                                        }}
+                                    />
+                                </FormControl>
+                            </>
+                        ) : undefined}
 
                         <TextField
                             style={{ marginTop: 20 }}
@@ -396,6 +439,23 @@ export const EditGoalDialog = ({
                     ) : undefined}
                     {form.type === PersonalGoalType.Ascend ? (
                         <div>
+                            <RaritySelect
+                                label={'Current Rarity'}
+                                rarityValues={currentRarityValues}
+                                value={form.currentRarity ?? Rarity.Common}
+                                valueChanges={value => setForm(curr => ({ ...curr, currentRarity: value }))}
+                            />
+                            <RaritySelect
+                                label={'Target Rarity'}
+                                rarityValues={targetRarityValues}
+                                value={form.targetRarity ?? Rarity.Common}
+                                valueChanges={value => setForm(curr => ({ ...curr, targetRarity: value }))}
+                            />
+                        </div>
+                    ) : undefined}
+
+                    {form.type === PersonalGoalType.Unlock || form.type === PersonalGoalType.Ascend ? (
+                        <>
                             <FormControl style={{ marginTop: 10 }} variant={'outlined'} fullWidth>
                                 <InputLabel>Shards</InputLabel>
                                 <Input
@@ -415,40 +475,47 @@ export const EditGoalDialog = ({
                                     }}
                                 />
                             </FormControl>
-                            <RaritySelect
-                                label={'Current Rarity'}
-                                rarityValues={currentRarityValues}
-                                value={form.currentRarity ?? Rarity.Common}
-                                valueChanges={value => setForm(curr => ({ ...curr, currentRarity: value }))}
-                            />
-                            <RaritySelect
-                                label={'Target Rarity'}
-                                rarityValues={targetRarityValues}
-                                value={form.targetRarity ?? Rarity.Common}
-                                valueChanges={value => setForm(curr => ({ ...curr, targetRarity: value }))}
-                            />
-                        </div>
-                    ) : undefined}
 
-                    {form.type === PersonalGoalType.Unlock ? (
-                        <FormControl style={{ marginTop: 10 }} variant={'outlined'} fullWidth>
-                            <InputLabel>Shards</InputLabel>
-                            <Input
-                                disableUnderline={true}
-                                value={form.currentShards ?? 0}
-                                onChange={event => {
-                                    const value = event.target.value === '' ? '' : (Number(event.target.value) as any);
-                                    setForm(curr => ({ ...curr, currentShards: value }));
-                                }}
-                                inputProps={{
-                                    step: 1,
-                                    min: 0,
-                                    max: 10000,
-                                    type: 'number',
-                                    'aria-labelledby': 'input-slider',
-                                }}
-                            />
-                        </FormControl>
+                            <FormControl style={{ marginTop: 10 }} variant={'outlined'} fullWidth>
+                                <InputLabel>Shards per day</InputLabel>
+                                <Input
+                                    disableUnderline={true}
+                                    value={form.shardsPerDay}
+                                    onChange={event => {
+                                        const value =
+                                            event.target.value === '' ? '' : (Number(event.target.value) as any);
+                                        setForm(curr => ({ ...curr, shardsPerDay: value }));
+                                    }}
+                                    inputProps={{
+                                        step: 1,
+                                        min: 0,
+                                        max: 100,
+                                        type: 'number',
+                                        'aria-labelledby': 'input-slider',
+                                    }}
+                                />
+                            </FormControl>
+
+                            <FormControl style={{ marginTop: 10 }} variant={'outlined'} fullWidth>
+                                <InputLabel>Energy per day</InputLabel>
+                                <Input
+                                    disableUnderline={true}
+                                    value={form.energyPerDay ?? 0}
+                                    onChange={event => {
+                                        const value =
+                                            event.target.value === '' ? '' : (Number(event.target.value) as any);
+                                        setForm(curr => ({ ...curr, energyPerDay: value }));
+                                    }}
+                                    inputProps={{
+                                        step: 1,
+                                        min: 0,
+                                        max: 100,
+                                        type: 'number',
+                                        'aria-labelledby': 'input-slider',
+                                    }}
+                                />
+                            </FormControl>
+                        </>
                     ) : undefined}
 
                     <TextField
