@@ -22,6 +22,11 @@ export type CharactersAction =
           character: string;
           value: string[];
       }
+    | {
+          type: 'UpdateShards';
+          character: string;
+          value: number;
+      }
     | SetStateAction<ICharacter2[]>;
 
 export const charactersReducer = (state: ICharacter2[], action: CharactersAction) => {
@@ -43,6 +48,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                 existingChar.stars = updatedCharacter.stars <= rarityStars ? rarityStars : updatedCharacter.stars;
 
                 existingChar.xp = updatedCharacter.xp;
+                existingChar.shards = updatedCharacter.shards;
                 existingChar.activeAbilityLevel =
                     updatedCharacter.activeAbilityLevel < 0
                         ? 0
@@ -81,6 +87,14 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
 
             if (existingChar) {
                 existingChar.rarity = action.value;
+            }
+            return [...state];
+        }
+        case 'UpdateShards': {
+            const existingChar = state.find(char => char.name === action.character);
+
+            if (existingChar) {
+                existingChar.shards = action.value;
             }
             return [...state];
         }

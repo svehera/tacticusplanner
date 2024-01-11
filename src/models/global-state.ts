@@ -90,6 +90,7 @@ export class GlobalState implements IGlobalState {
                 stars: stars,
                 level: level,
                 xp: personalCharData?.xp ?? 0,
+                shards: personalCharData?.shards ?? 0,
             };
             return {
                 ...staticData,
@@ -128,7 +129,8 @@ export class GlobalState implements IGlobalState {
                     x.passiveAbilityLevel ||
                     x.stars !== RarityStars.None ||
                     x.level !== 1 ||
-                    x.xp !== 0
+                    x.xp !== 0 ||
+                    x.shards !== 0
             )
             .map(x => ({
                 name: x.name,
@@ -141,6 +143,7 @@ export class GlobalState implements IGlobalState {
                 stars: x.stars,
                 level: x.level,
                 xp: x.xp,
+                shards: x.shards,
             }));
 
         return {

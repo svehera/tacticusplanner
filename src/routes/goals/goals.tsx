@@ -12,7 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import { ArrowForward, DeleteForever, Edit, Info } from '@mui/icons-material';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { StaticDataService } from '../../services';
-import { defaultCampaignsProgress } from '../../models/constants';
+import { charsProgression, charsUnlockShards, defaultCampaignsProgress, rarityToStars } from '../../models/constants';
 import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
@@ -74,6 +74,7 @@ export const Goals = () => {
                 setEditCharacter(relatedCharacter);
                 setEditGoal({
                     ...goal,
+                    currentShards: relatedCharacter.shards,
                     currentRank: relatedCharacter.rank,
                     currentRarity: relatedCharacter.rarity,
                     upgrades: relatedCharacter.upgrades,
@@ -146,6 +147,27 @@ export const GoalCard = ({
             (goal.type === PersonalGoalType.Unlock && character.rank > Rank.Locked)
         );
     }, [goal, character]);
+
+    let goalShards = 0;
+    if (goal.type === PersonalGoalType.Ascend) {
+        const currentCharProgression = character.rarity + character.stars;
+        const targetProgression = goal.targetRarity! + rarityToStars[goal.targetRarity!];
+
+        goalShards = 0;
+
+        for (let i = currentCharProgression + 1; i <= targetProgression; i++) {
+            const progressionRequirements = charsProgression[i];
+            goalShards += progressionRequirements.shards;
+        }
+    }
+
+    if (goal.type === PersonalGoalType.Unlock) {
+        goalShards = charsUnlockShards[character.rarity];
+    }
+
+    const shardsLeftToScore = goalShards && goalShards - character.shards;
+    const lowShardsPerDay = shardsLeftToScore && shardsLeftToScore > 0 ? Math.ceil(shardsLeftToScore / 3) : 0;
+    const highShardsPerDay = shardsLeftToScore && shardsLeftToScore > 0 ? Math.ceil(shardsLeftToScore / 6) : 0;
 
     const estimatedDays = useMemo(() => {
         if (goal.type !== PersonalGoalType.UpgradeRank) {
@@ -255,6 +277,22 @@ export const GoalCard = ({
                     <div style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
                         <RarityImage rarity={character.rarity} />
                         <ArrowForward /> <RarityImage rarity={goal.targetRarity ?? 0} />
+                    </div>
+                ) : undefined}
+                {goal.type === PersonalGoalType.Unlock || goal.type === PersonalGoalType.Ascend ? (
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <span>
+                            <span style={{ fontWeight: 'bold' }}>
+                                {character.shards} of {goalShards}
+                            </span>{' '}
+                            Shards
+                        </span>
+                        <span>
+                            3 Shards per Day: <span style={{ fontWeight: 'bold' }}>{lowShardsPerDay} days</span> left
+                        </span>
+                        <span>
+                            6 Shards per Day: <span style={{ fontWeight: 'bold' }}>{highShardsPerDay} days</span> left
+                        </span>
                     </div>
                 ) : undefined}
                 <span>{goal.notes}</span>

@@ -7,6 +7,7 @@ import {
     DialogTitle,
     FormControl,
     FormControlLabel,
+    Input,
     MenuItem,
     Select,
     TextField,
@@ -283,6 +284,14 @@ export const EditGoalDialog = ({
                 });
             }
 
+            if (updatedGoal.currentShards && updatedGoal.currentShards !== character.shards) {
+                dispatch.characters({
+                    type: 'UpdateShards',
+                    character: updatedGoal.character,
+                    value: updatedGoal.currentShards,
+                });
+            }
+
             if (!isEqual(updatedGoal.upgrades, character.upgrades)) {
                 dispatch.characters({
                     type: 'UpdateUpgrades',
@@ -387,6 +396,25 @@ export const EditGoalDialog = ({
                     ) : undefined}
                     {form.type === PersonalGoalType.Ascend ? (
                         <div>
+                            <FormControl style={{ marginTop: 10 }} variant={'outlined'} fullWidth>
+                                <InputLabel>Shards</InputLabel>
+                                <Input
+                                    disableUnderline={true}
+                                    value={form.currentShards ?? 0}
+                                    onChange={event => {
+                                        const value =
+                                            event.target.value === '' ? '' : (Number(event.target.value) as any);
+                                        setForm(curr => ({ ...curr, currentShards: value }));
+                                    }}
+                                    inputProps={{
+                                        step: 1,
+                                        min: 0,
+                                        max: 10000,
+                                        type: 'number',
+                                        'aria-labelledby': 'input-slider',
+                                    }}
+                                />
+                            </FormControl>
                             <RaritySelect
                                 label={'Current Rarity'}
                                 rarityValues={currentRarityValues}
@@ -400,6 +428,27 @@ export const EditGoalDialog = ({
                                 valueChanges={value => setForm(curr => ({ ...curr, targetRarity: value }))}
                             />
                         </div>
+                    ) : undefined}
+
+                    {form.type === PersonalGoalType.Unlock ? (
+                        <FormControl style={{ marginTop: 10 }} variant={'outlined'} fullWidth>
+                            <InputLabel>Shards</InputLabel>
+                            <Input
+                                disableUnderline={true}
+                                value={form.currentShards ?? 0}
+                                onChange={event => {
+                                    const value = event.target.value === '' ? '' : (Number(event.target.value) as any);
+                                    setForm(curr => ({ ...curr, currentShards: value }));
+                                }}
+                                inputProps={{
+                                    step: 1,
+                                    min: 0,
+                                    max: 10000,
+                                    type: 'number',
+                                    'aria-labelledby': 'input-slider',
+                                }}
+                            />
+                        </FormControl>
                     ) : undefined}
 
                     <TextField

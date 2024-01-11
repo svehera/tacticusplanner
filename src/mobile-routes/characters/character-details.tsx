@@ -23,6 +23,7 @@ export const CharacterDetails = ({
         stars: character.stars,
         bias: character.bias,
         level: character.level,
+        shards: character.shards,
         xp: character.xp,
         activeAbilityLevel: character.activeAbilityLevel,
         passiveAbilityLevel: character.passiveAbilityLevel,
@@ -92,9 +93,36 @@ export const CharacterDetails = ({
                 </Grid>
             </Grid>
 
-            {getNativeSelectControl(formData.rank, 'rank', rankEntries, rankToString, value => (
-                <RankImage rank={value} />
-            ))}
+            <Grid container spacing={2} alignItems="center">
+                <Grid item xs={6}>
+                    {getNativeSelectControl(formData.rank, 'rank', rankEntries, rankToString, value => (
+                        <RankImage rank={value} />
+                    ))}
+                </Grid>
+                <Grid item xs={6}>
+                    <FormControl variant={'outlined'} fullWidth>
+                        <InputLabel>Shards</InputLabel>
+                        <Input
+                            disableUnderline={true}
+                            value={formData.shards}
+                            onChange={event =>
+                                handleInputChange(
+                                    'shards',
+                                    event.target.value === '' ? '' : (Number(event.target.value) as any),
+                                    Number(event.target.value)
+                                )
+                            }
+                            inputProps={{
+                                step: 1,
+                                min: 0,
+                                max: 10000,
+                                type: 'number',
+                                'aria-labelledby': 'input-slider',
+                            }}
+                        />
+                    </FormControl>
+                </Grid>
+            </Grid>
 
             {getNativeSelectControl(formData.bias, 'bias', biasEntries, value => CharacterBias[value])}
 
@@ -116,7 +144,7 @@ export const CharacterDetails = ({
                                     inputProps={{
                                         step: 1,
                                         min: 0,
-                                        max: 28300,
+                                        max: 50,
                                         type: 'number',
                                         'aria-labelledby': 'input-slider',
                                     }}
@@ -138,7 +166,7 @@ export const CharacterDetails = ({
                                     inputProps={{
                                         step: 100,
                                         min: 0,
-                                        max: 50,
+                                        max: 283000,
                                         type: 'number',
                                         'aria-labelledby': 'input-slider',
                                     }}

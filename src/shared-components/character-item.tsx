@@ -43,7 +43,7 @@ export const CharacterItem = (props: { character: ICharacter2; readonly: boolean
                 <CharacterTitle character={props.character} showLockedWithOpacity={true} wyo={true} />
             </div>
 
-            <Dialog open={open} onClose={handleClose} fullWidth>
+            <Dialog open={open} onClose={handleClose} fullScreen={isMobile}>
                 <DialogTitle>
                     <div
                         style={{
