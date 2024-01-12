@@ -195,11 +195,8 @@ export const GoalCard = ({
         });
     const isLuckyUnlockMode = goal.type === PersonalGoalType.Unlock && !isAnyLocationsUnlocked;
     const shardsLeftToScore = goalShards && goalShards - character.shards;
-    const daysOrTokensLeft = isLuckyUnlockMode
-        ? Infinity
-        : shardsLeftToScore && shardsLeftToScore > 0
-        ? Math.ceil(shardsLeftToScore / goal.shardsPerDayOrToken)
-        : 0;
+    const daysOrTokensLeft =
+        shardsLeftToScore && shardsLeftToScore > 0 ? Math.ceil(shardsLeftToScore / goal.shardsPerDayOrToken) : 0;
 
     const estimatedDays = useMemo(() => {
         if (goal.type !== PersonalGoalType.UpgradeRank) {
@@ -316,21 +313,21 @@ export const GoalCard = ({
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <span>
                             {isOnslaughtMode ? 'Tokens' : 'Days'} Left: <span className="bold">{daysOrTokensLeft}</span>{' '}
-                            {isLuckyUnlockMode ? (
-                                <>({StaticDataService.getFactionPray(character.faction)})</>
-                            ) : (
-                                <>
-                                    ({goal.shardsPerDayOrToken} Shards
-                                    {goal.energyPerDay ? (
-                                        <>
-                                            {' and '}
-                                            <span>{goal.energyPerDay}</span>{' '}
-                                            <MiscIcon icon={'energy'} width={15} height={15} />
-                                        </>
-                                    ) : undefined}{' '}
-                                    per {isOnslaughtMode ? 'token' : 'day'})
-                                </>
-                            )}
+                            <>
+                                ({goal.shardsPerDayOrToken} Shards
+                                {goal.energyPerDay ? (
+                                    <>
+                                        {' and '}
+                                        <span>{goal.energyPerDay}</span>{' '}
+                                        <MiscIcon icon={'energy'} width={15} height={15} />
+                                    </>
+                                ) : undefined}{' '}
+                                per {isOnslaughtMode ? 'token' : 'day'}
+                                {isLuckyUnlockMode ? (
+                                    <>{' or ' + StaticDataService.getFactionPray(character.faction)}</>
+                                ) : undefined}
+                                )
+                            </>
                         </span>
                         {isOnslaughtMode ? (
                             <span>
