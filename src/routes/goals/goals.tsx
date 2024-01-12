@@ -362,7 +362,7 @@ export const GoalCard = ({
                                             campaign: location.campaign,
                                             battleNumber: location.nodeNumber,
                                             raidsCount: location.dailyBattleCount,
-                                            farmedItems: 3,
+                                            farmedItems: Math.round(location.dropRate * location.dailyBattleCount),
                                             energySpent: location.energyCost * location.dailyBattleCount,
                                         }}
                                     />

@@ -7,13 +7,31 @@
       "type": "Update",
       "new": [
         {
-          "text": "New UI for the inventory (Tani)"
+          "text": "New UI for the inventory (Tani)",
+          "images": [
+            {
+              "path": "inventory.png"
+            }
+          ]
         },
         {
-          "text": "Added possibility to track character's shards count on the Who You Own page"
+          "text": "Added possibility to track character's shards count on the Who You Own page",
+          "images": [
+            {
+              "path": "shards1.png"
+            },
+            {
+              "path": "shards2.png"
+            }
+          ]
         },
         {
-          "text": "Updated Unlock and Ascend goals to display estimated days left"
+          "text": "Updated Unlock and Ascend goals to display estimated days left",
+          "images": [
+            {
+              "path": "goals.png"
+            }
+          ]
         }
       ],
       "minor": [
