@@ -1,6 +1,50 @@
 ﻿{
-  "currentVersion": "1.3.0",
+  "currentVersion": "1.3.1",
   "releaseNotes": [
+    {
+      "version": "1.3.1",
+      "date": "January 12",
+      "type": "Update",
+      "new": [
+        {
+          "text": "New UI for the inventory (Tani)",
+          "images": [
+            {
+              "path": "inventory.png"
+            }
+          ]
+        },
+        {
+          "text": "Added possibility to track character's shards count on the Who You Own page",
+          "images": [
+            {
+              "path": "shards1.png"
+            },
+            {
+              "path": "shards2.png"
+            }
+          ]
+        },
+        {
+          "text": "Updated Unlock and Ascend goals to display estimated days left",
+          "images": [
+            {
+              "path": "goals.png"
+            }
+          ]
+        }
+      ],
+      "minor": [
+        {
+          "text": "New power calculation formula. Thanks Lëonaica for contribution."
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed Tan Gi'da upgrades for Bronze 1 rank (Kinks)"
+        }
+      ]
+    },
     {
       "version": "1.3.0",
       "date": "January 10",

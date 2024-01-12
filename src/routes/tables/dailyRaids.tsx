@@ -45,6 +45,8 @@ import { Edit } from '@mui/icons-material';
 import { EditGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 import { enqueueSnackbar } from 'notistack';
 import ClearIcon from '@mui/icons-material/Clear';
+import { sum } from 'lodash';
+import { MiscIcon } from '../../shared-components/misc-icon';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -215,10 +217,28 @@ export const DailyRaids = () => {
         ];
     }, [dailyRaidsPreferences.useInventory]);
 
+    const actualEnergy = useMemo(() => {
+        const goalsEnergy = sum(goals.map(x => x.energyPerDay ?? 0));
+        return dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy - goalsEnergy;
+    }, [dailyRaidsPreferences.dailyEnergy, dailyRaidsPreferences.shardsEnergy]);
+
+    const actualEnergyDescription = useMemo(() => {
+        const goalsEnergy = goals.map(x => x.energyPerDay ?? 0).filter(x => x > 0);
+        if (dailyRaidsPreferences.shardsEnergy > 0) {
+            goalsEnergy.push(dailyRaidsPreferences.shardsEnergy);
+        }
+        if (!goalsEnergy.length) {
+            return '';
+        }
+        goalsEnergy.unshift(dailyRaidsPreferences.dailyEnergy);
+
+        return `(${goalsEnergy.join(' - ')})`;
+    }, [dailyRaidsPreferences.dailyEnergy, dailyRaidsPreferences.shardsEnergy]);
+
     const estimatedRanks: IEstimatedRanks = useMemo(() => {
         const result = StaticDataService.getRankUpgradeEstimatedDays(
             {
-                dailyEnergy: dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy,
+                dailyEnergy: actualEnergy,
                 campaignsProgress: dailyRaidsPreferences.useCampaignsProgress
                     ? campaignsProgress
                     : defaultCampaignsProgress,
@@ -290,7 +310,10 @@ export const DailyRaids = () => {
                     <Button variant="outlined" onClick={handleClick2}>
                         Daily Raids <SettingsIcon />
                     </Button>
-                    <span>Daily energy: {dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy}</span>
+                    <span>
+                        Daily <MiscIcon icon={'energy'} height={15} width={15} /> {actualEnergy}{' '}
+                        {actualEnergyDescription}
+                    </span>
                 </div>
                 <Popover
                     open={open2}

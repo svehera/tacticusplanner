@@ -389,6 +389,7 @@ export interface IPersonalCharacterData2 {
     upgrades: string[];
     activeAbilityLevel: number;
     passiveAbilityLevel: number;
+    shards: number;
 }
 
 export interface ICharProgression {
@@ -404,6 +405,9 @@ export interface IPersonalGoal {
     priority: number;
     currentRarity?: Rarity;
     targetRarity?: Rarity;
+    currentShards?: number;
+    shardsPerDayOrToken?: number;
+    energyPerDay?: number;
     currentRank?: Rank;
     targetRank?: Rank;
     notes?: string;

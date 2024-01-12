@@ -1,7 +1,7 @@
 ﻿import React, { useMemo } from 'react';
 import { ICharacter2 } from '../models/interfaces';
 import { CharacterBias, Rank, Rarity } from '../models/enums';
-import { pooEmoji, rankToLevel, starEmoji } from '../models/constants';
+import { charsUnlockShards, pooEmoji, rankToLevel, starEmoji } from '../models/constants';
 import { RarityImage } from './rarity-image';
 import { RankImage } from './rank-image';
 import { CharacterImage } from './character-image';
@@ -28,6 +28,8 @@ export const CharacterTitle = ({
     imageSize?: number;
 }) => {
     const isUnlocked = character.rank > Rank.Locked;
+    const unlockShards = charsUnlockShards[character.rarity];
+    const unlockProgress = (character.shards / unlockShards) * 100;
     const hasAbilities = (isUnlocked && character.activeAbilityLevel) || character.passiveAbilityLevel;
     const emoji =
         character.bias === CharacterBias.AlwaysRecommend
@@ -112,8 +114,12 @@ export const CharacterTitle = ({
                             </div>
                             <div
                                 className="character-level"
-                                style={{ visibility: isUnlocked && character.level > 0 ? 'visible' : 'hidden' }}>
-                                {character.level}
+                                style={{
+                                    background: isUnlocked
+                                        ? '#012A41'
+                                        : `linear-gradient(to right, green ${unlockProgress}%, #012A41 ${unlockProgress}%)`,
+                                }}>
+                                {isUnlocked ? character.level : `${character.shards}/${unlockShards}`}
                             </div>
                         </div>
                     </Tooltip>

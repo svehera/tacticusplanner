@@ -18,6 +18,10 @@ const icons = {
         file: 'power.png',
         label: 'Power',
     },
+    energy: {
+        file: 'energy.png',
+        label: 'Energy',
+    },
 };
 
 export const MiscIcon = ({ icon, width, height }: { icon: keyof typeof icons; width?: number; height?: number }) => {

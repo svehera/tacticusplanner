@@ -91,6 +91,7 @@ export const rankToRarity: Record<Rank, Rarity> = {
 };
 
 export const charsProgression: Record<number, ICharProgression> = {
+    0: { shards: 0 },
     [Rarity.Common + RarityStars.OneStar]: { shards: 10 },
     [Rarity.Common + RarityStars.TwoStars]: { shards: 15 },
     [Rarity.Uncommon + RarityStars.TwoStars]: { shards: 15, orbs: 10, rarity: Rarity.Uncommon },

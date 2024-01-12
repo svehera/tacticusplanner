@@ -1,0 +1,41 @@
+﻿.inventory-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 20px;
+}
+
+.inventory-items-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 20px;
+  
+  h2 {
+    text-align: center;
+  }
+}
+.inventory-items {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  .inventory-item {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+input.item-quantity-input::-webkit-outer-spin-button,
+input.item-quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input.item-quantity-input[type=number] {
+  -moz-appearance: textfield;
+}

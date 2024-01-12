@@ -4,6 +4,7 @@ import { Rank, Rarity } from '../models/enums';
 import { rankToString } from '../shared-logic/functions';
 import { RankImage } from './rank-image';
 import React from 'react';
+import { RarityImage } from './rarity-image';
 
 export const RaritySelect = ({
     rarityValues,
@@ -22,7 +23,7 @@ export const RaritySelect = ({
             <Select<Rarity> label={label} value={value} onChange={event => valueChanges(+event.target.value)}>
                 {rarityValues.map(rarity => (
                     <MenuItem key={rarity} value={rarity}>
-                        {Rarity[rarity]}
+                        <RarityImage rarity={rarity} /> {Rarity[rarity]}
                     </MenuItem>
                 ))}
             </Select>
