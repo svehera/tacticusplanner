@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { GoalCard } from '../../../routes/goals/goals';
 import { sum } from 'lodash';
+import { MiscIcon } from '../../../shared-components/misc-icon';
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -62,12 +63,17 @@ export const Home = () => {
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                                     {dailyRaidsMenuItem.icon}{' '}
                                     {dailyRaids.completedLocations?.flatMap(x => x.locations).length +
-                                        ' campaigns raided today'}
+                                        ' locations raided today'}
                                 </div>
                             }
                             subheader={
-                                sum(dailyRaids.completedLocations?.flatMap(x => x.locations).map(x => x.energySpent)) +
-                                ' energy spent'
+                                <span>
+                                    {sum(
+                                        dailyRaids.completedLocations?.flatMap(x => x.locations).map(x => x.energySpent)
+                                    )}{' '}
+                                    <MiscIcon icon={'energy'} width={15} height={15} />
+                                    {' spent'}
+                                </span>
                             }
                         />
                         <CardContent>

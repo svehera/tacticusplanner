@@ -46,6 +46,7 @@ import { EditGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 import { enqueueSnackbar } from 'notistack';
 import ClearIcon from '@mui/icons-material/Clear';
 import { sum } from 'lodash';
+import { MiscIcon } from '../../shared-components/misc-icon';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -310,7 +311,8 @@ export const DailyRaids = () => {
                         Daily Raids <SettingsIcon />
                     </Button>
                     <span>
-                        Daily energy: {actualEnergy} {actualEnergyDescription}
+                        Daily <MiscIcon icon={'energy'} height={15} width={15} /> {actualEnergy}{' '}
+                        {actualEnergyDescription}
                     </span>
                 </div>
                 <Popover

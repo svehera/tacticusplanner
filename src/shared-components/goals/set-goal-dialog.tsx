@@ -222,14 +222,14 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                         (form.type === PersonalGoalType.Unlock || form.type === PersonalGoalType.Ascend) ? (
                             <>
                                 <FormControl style={{ marginTop: 10 }} variant={'outlined'} fullWidth>
-                                    <InputLabel>Shards per day</InputLabel>
+                                    <InputLabel>Shards per day/token</InputLabel>
                                     <Input
                                         disableUnderline={true}
-                                        value={form.shardsPerDay}
+                                        value={form.shardsPerDayOrToken ?? 0}
                                         onChange={event => {
                                             const value =
                                                 event.target.value === '' ? '' : (Number(event.target.value) as any);
-                                            setForm(curr => ({ ...curr, shardsPerDay: value }));
+                                            setForm(curr => ({ ...curr, shardsPerDayOrToken: value }));
                                         }}
                                         inputProps={{
                                             step: 1,
@@ -477,14 +477,14 @@ export const EditGoalDialog = ({
                             </FormControl>
 
                             <FormControl style={{ marginTop: 10 }} variant={'outlined'} fullWidth>
-                                <InputLabel>Shards per day</InputLabel>
+                                <InputLabel>Shards per day/token</InputLabel>
                                 <Input
                                     disableUnderline={true}
-                                    value={form.shardsPerDay}
+                                    value={form.shardsPerDayOrToken ?? 0}
                                     onChange={event => {
                                         const value =
                                             event.target.value === '' ? '' : (Number(event.target.value) as any);
-                                        setForm(curr => ({ ...curr, shardsPerDay: value }));
+                                        setForm(curr => ({ ...curr, shardsPerDayOrToken: value }));
                                     }}
                                     inputProps={{
                                         step: 1,

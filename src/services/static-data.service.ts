@@ -363,6 +363,38 @@ export class StaticDataService {
         }
     }
 
+    static getFactionPray(faction: Faction): string {
+        switch (faction) {
+            case Faction.Ultramarines:
+            case Faction.ADEPTA_SORORITAS:
+            case Faction.Astra_militarum:
+            case Faction.Black_Templars:
+            case Faction.Space_Wolves:
+            case Faction.Dark_Angels:
+                return 'Pray for the God-Emperor of Mankind';
+            case Faction.AdeptusMechanicus:
+                return 'Pray for the Machine God';
+            case Faction.Black_Legion:
+                return 'Follow the Chaos Undivided';
+            case Faction.Orks:
+                return 'Believe in the Waaagh!';
+            case Faction.Necrons:
+                return "Serve the C'tan";
+            case Faction.Death_Guard:
+                return 'Pray for the Plague God';
+            case Faction.Aeldari:
+                return 'Follow various Paths';
+            case Faction.T_Au:
+                return 'Pray for Greater Good';
+            case Faction.Thousand_Sons:
+                return 'Follow the Architect of Fate';
+            case Faction.Tyranids:
+                return 'Bring more biomass';
+            default:
+                return '';
+        }
+    }
+
     static getRankUpgradeEstimatedDays(
         settings: IEstimatedRanksSettings,
         ...characters: Array<ICharacterRankRange>

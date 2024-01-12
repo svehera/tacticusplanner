@@ -406,7 +406,7 @@ export interface IPersonalGoal {
     currentRarity?: Rarity;
     targetRarity?: Rarity;
     currentShards?: number;
-    shardsPerDay?: number;
+    shardsPerDayOrToken?: number;
     energyPerDay?: number;
     currentRank?: Rank;
     targetRank?: Rank;
