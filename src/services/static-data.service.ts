@@ -270,6 +270,7 @@ export class StaticDataService {
                 all: [rawData['Melee Damage']],
                 melee: rawData['Melee Damage'],
             },
+            releaseRarity: rawData.ReleaseRarity,
         };
 
         if (rawData['Ranged Damage']) {

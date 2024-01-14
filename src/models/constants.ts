@@ -1,4 +1,5 @@
 ﻿import {
+    CharacterReleaseRarity,
     LegendaryEventEnum,
     PersonalGoalType,
     Rank,
@@ -119,6 +120,15 @@ export const charsUnlockShards: Record<Rarity, number> = {
     [Rarity.Rare]: 130,
     [Rarity.Epic]: 250,
     [Rarity.Legendary]: 500,
+};
+
+export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {
+    [CharacterReleaseRarity.Common]: 70,
+    [CharacterReleaseRarity.Uncommon]: 140,
+    [CharacterReleaseRarity.Rare]: 280,
+    [CharacterReleaseRarity.Epic]: 400,
+    [CharacterReleaseRarity.LegendaryOld]: 150,
+    [CharacterReleaseRarity.Legendary]: 400,
 };
 
 export const defaultLE = LegendaryEventEnum.Shadowsun;

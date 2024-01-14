@@ -3,6 +3,7 @@
     Campaign,
     CampaignType,
     CharacterBias,
+    CharacterReleaseRarity,
     DamageType,
     Equipment,
     Faction,
@@ -61,6 +62,7 @@ export interface UnitDataRaw {
     ForcedSummons: boolean;
     RequiredInCampaign: boolean;
     Icon: string;
+    ReleaseRarity?: CharacterReleaseRarity;
 }
 
 export interface IUnitData {
@@ -88,6 +90,7 @@ export interface IUnitData {
     requiredInCampaign: boolean;
     icon: string;
     legendaryEvents: ICharLegendaryEvents;
+    releaseRarity?: CharacterReleaseRarity;
 }
 
 export interface IDamageTypes {
