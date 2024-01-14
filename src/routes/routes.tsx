@@ -19,7 +19,6 @@ import { RankLookup } from './tables/rankLookup';
 import { DailyRaids } from './tables/dailyRaids';
 import { CampaignsProgress } from './campaigns-progress';
 import { Inventory } from './inventory';
-import { Home } from '../features/misc/home/home';
 import { MasterTable } from './legendary-events/master-table';
 
 const inputRoutes: RouteObject[] = [
@@ -104,7 +103,11 @@ export const appRoutes: () => RouteObject[] = () => [
         children: [
             {
                 path: 'home',
-                element: <Home />,
+                // element: <Home />,
+                async lazy() {
+                    const { Home } = await import('../features/misc/home/home');
+                    return { Component: Home };
+                },
             },
             ...inputRoutes,
             ...planRoutes,

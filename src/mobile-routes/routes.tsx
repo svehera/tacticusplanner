@@ -115,7 +115,10 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
             },
             {
                 path: 'home',
-                element: <MobileHome />,
+                async lazy() {
+                    const { MobileHome } = await import('./home/mobileHome');
+                    return { Component: MobileHome };
+                },
             },
             ...inputRoutes,
             ...planRoutes,
