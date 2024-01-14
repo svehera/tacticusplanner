@@ -361,12 +361,8 @@ export const WhoYouOwn = () => {
                         <MiscIcon icon={'power'} height={20} width={15} /> doesn't represent in-game power
                         <br />
                         <span style={{ fontSize: 10 }}>
-                            Power = (Stars * Coeff) + (Rarity * Coeff) + (Rank * Coeff) + (Active Ability Level * Coeff)
-                            +(Passive Ability Level * Coeff) +(# of Upgrades applied * Coeff)
-                        </span>
-                        <br />
-                        <span style={{ fontSize: 12, fontStyle: 'italic' }}>
-                            NOTE: Coeff is different for each respective property
+                            Power = dirtyDozenCoeff * (statsWeight * statsScore + abilityWeight *
+                            (activeAbilityLevelCoeff + passiveAbilityLevelCoeff)))
                         </span>
                     </p>
                     <img src={wyoInfo} width={500} />
