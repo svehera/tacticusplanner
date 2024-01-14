@@ -43,10 +43,9 @@
     "vite-tsconfig-paths": "^4.2.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "vite",
+    "build": "tsc && vite build", 
+    "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -b gh-pages -d build"
   },
