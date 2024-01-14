@@ -14,6 +14,11 @@ export const Contacts = () => {
                     Discord
                 </a>
             </p>
+            <p>
+                <a href="https://github.com/svehera/tacticusplanner" target={'_blank'} rel="noreferrer">
+                    GitHub repo
+                </a>
+            </p>
         </div>
     );
 };
