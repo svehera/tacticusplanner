@@ -1,7 +1,7 @@
 ﻿import React, { useMemo } from 'react';
 import { ICharacter2 } from '../models/interfaces';
 import { CharacterBias, Rank, Rarity } from '../models/enums';
-import { charsUnlockShards, pooEmoji, rankToLevel, starEmoji } from '../models/constants';
+import { charsReleaseShards, charsUnlockShards, pooEmoji, rankToLevel, starEmoji } from '../models/constants';
 import { RarityImage } from './rarity-image';
 import { RankImage } from './rank-image';
 import { CharacterImage } from './character-image';
@@ -28,7 +28,10 @@ export const CharacterTitle = ({
     imageSize?: number;
 }) => {
     const isUnlocked = character.rank > Rank.Locked;
-    const unlockShards = charsUnlockShards[character.rarity];
+    const isReleased = !character.releaseRarity;
+    const unlockShards = isReleased
+        ? charsUnlockShards[character.rarity]
+        : charsReleaseShards[character.releaseRarity!];
     const unlockProgress = (character.shards / unlockShards) * 100;
     const hasAbilities = (isUnlocked && character.activeAbilityLevel) || character.passiveAbilityLevel;
     const emoji =

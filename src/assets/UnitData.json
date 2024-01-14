@@ -1252,7 +1252,8 @@
     "Number": 51,
     "ForcedSummons": false,
     "RequiredInCampaign": false,
-    "Icon": "Aun-shi.png"
+    "Icon": "Aun-shi.png",
+    "ReleaseRarity": 5
   },
   {
     "Name": "Shadowsun",
@@ -1281,7 +1282,8 @@
     "Number": 52,
     "ForcedSummons": false,
     "RequiredInCampaign": false,
-    "Icon": "ShadowSun.png"
+    "Icon": "ShadowSun.png",
+    "ReleaseRarity": 5
   },
   {
     "Name": "Ulf",
@@ -1707,7 +1709,8 @@
     "Number": 66,
     "ForcedSummons": false,
     "RequiredInCampaign": false,
-    "Icon": "Ragnar.png"
+    "Icon": "Ragnar.png",
+    "ReleaseRarity": 6
   },
   {
     "Name": "Vitruvius",
@@ -1734,7 +1737,8 @@
     "Number": 67,
     "ForcedSummons": false,
     "RequiredInCampaign": false,
-    "Icon": "vitruvius.png"
+    "Icon": "vitruvius.png",
+    "ReleaseRarity": 6
   },
   {
     "Name": "Actus",
@@ -1787,6 +1791,7 @@
     "Number": 69,
     "ForcedSummons": false,
     "RequiredInCampaign": false,
-    "Icon": "tanGida.png"
+    "Icon": "tanGida.png",
+    "ReleaseRarity": 3
   }
 ]

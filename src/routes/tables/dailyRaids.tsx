@@ -218,12 +218,12 @@ export const DailyRaids = () => {
     }, [dailyRaidsPreferences.useInventory]);
 
     const actualEnergy = useMemo(() => {
-        const goalsEnergy = sum(goals.map(x => x.energyPerDay ?? 0));
+        const goalsEnergy = sum(goals.map(x => x.energyPerDay || 0));
         return dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy - goalsEnergy;
     }, [dailyRaidsPreferences.dailyEnergy, dailyRaidsPreferences.shardsEnergy]);
 
     const actualEnergyDescription = useMemo(() => {
-        const goalsEnergy = goals.map(x => x.energyPerDay ?? 0).filter(x => x > 0);
+        const goalsEnergy = goals.map(x => x.energyPerDay || 0).filter(x => x > 0);
         if (dailyRaidsPreferences.shardsEnergy > 0) {
             goalsEnergy.push(dailyRaidsPreferences.shardsEnergy);
         }
