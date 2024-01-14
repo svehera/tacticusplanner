@@ -1,6 +1,27 @@
 ﻿{
-  "currentVersion": "1.3.1",
+  "currentVersion": "1.3.2",
   "releaseNotes": [
+    {
+      "version": "1.3.2",
+      "date": "January 14",
+      "type": "Update",
+      "new": [
+       
+      ],
+      "minor": [
+        {
+          "text": "New power calculation formula. Thanks Lëonaica for contribution."
+        }
+      ],
+      "bugFixes": [
+        {
+          "text": "Fixed special release characters shards count for unlock (xenomorphslayer)"
+        },
+        {
+          "text": "Fixed tooltip placement for upgrades to be displayed at the top (Tani)"
+        }
+      ]
+    },
     {
       "version": "1.3.1",
       "date": "January 12",

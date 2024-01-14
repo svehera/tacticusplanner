@@ -20,7 +20,7 @@ export const UpgradeImage = ({
         const image = require(`../assets/images/upgrades/${imagePath}`);
 
         return (
-            <Tooltip title={material} enterTouchDelay={0} placement={'right'}>
+            <Tooltip title={material} enterTouchDelay={0} placement={'top'}>
                 <div
                     style={{ width: size ?? 50, height: size ?? 50 }}
                     className={Rarity[rarity]?.toLowerCase() + '-upgrade upgrade'}>
@@ -38,7 +38,7 @@ export const UpgradeImage = ({
     } catch (error) {
         // console.log(`Image for "${material}" with path "${iconPath}" does not exist`);
         return (
-            <Tooltip title={material} enterTouchDelay={0} placement={'right'}>
+            <Tooltip title={material} enterTouchDelay={0} placement={'top'}>
                 <div>{material}</div>
             </Tooltip>
         );
