@@ -19,6 +19,9 @@
         },
         {
           "text": "Fixed tooltip placement for upgrades to be displayed at the top (Tani)"
+        },
+        {
+          "text": "Fixed issue with daily raids when there are some Ascend/Unlock goal with blank energy field (Tani)"
         }
       ]
     },
