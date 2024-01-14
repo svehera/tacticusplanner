@@ -1,13 +1,12 @@
 ﻿import { Rank, Rarity } from '../models/enums';
 import { Tooltip } from '@fluentui/react-components';
 import React from 'react';
+import { getImageUrl } from '../shared-logic/functions';
 
 export const RarityImage = ({ rarity }: { rarity: Rarity }) => {
     const rarityString = Rarity[rarity];
     try {
-        // Import image on demand
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const image = require(`../assets/images/rarity/${rarityString.toLowerCase()}.png`);
+        const image = getImageUrl(`../assets/images/rarity/${rarityString.toLowerCase()}.png`);
 
         // If the image doesn't exist. return null
         if (!image)

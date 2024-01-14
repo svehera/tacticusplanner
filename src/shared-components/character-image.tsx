@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import { getImageUrl } from '../shared-logic/functions';
 
 export const CharacterImage = ({
     icon,
@@ -14,20 +15,14 @@ export const CharacterImage = ({
     const iconPath = portrait ? 'portraits/webp' : 'characters';
     const replaceExtenstion = portrait ? icon.replace('.png', '.webp') : icon;
     const unset = portrait ? 'unset.webp' : 'unset.png';
-    let image: any;
-    try {
-        // Import image on demand
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        image = require(`../assets/images/${iconPath}/${replaceExtenstion}`);
-    } catch (error) {
-        image = require(`../assets/images/${iconPath}/${unset}`);
-    }
+
+    const imageUrl = getImageUrl(`../assets/images/${iconPath}/${replaceExtenstion}`);
 
     return portrait ? (
         <img
             loading={'lazy'}
             style={{ pointerEvents: 'none', contentVisibility: 'auto' }}
-            src={image}
+            src={imageUrl}
             width={60}
             alt={name ?? icon}
         />
@@ -35,7 +30,7 @@ export const CharacterImage = ({
         <img
             loading={'lazy'}
             style={{ pointerEvents: 'none', borderRadius: '50%' }}
-            src={image}
+            src={imageUrl}
             height={imageSize ?? 50}
             alt={name ?? icon}
         />
