@@ -2,6 +2,9 @@
     "name": "tacticusplanner",
     "version": "0.1.0",
     "private": true,
+    "engines": {
+        "node": ">=18.10.0"
+    },
     "dependencies": {
         "@mui/icons-material": "^5.14.3",
         "@mui/material": "^5.14.4",
