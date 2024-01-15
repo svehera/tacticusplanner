@@ -4,14 +4,20 @@
         "campaignType": "Early",
         "nodeNumber": 15,
         "reward": "Makhotep",
-        "expectedGold": 12.5
+        "expectedGold": 12.5,
+        "skulls": 3,
+        "deployable": 4,
+        "totalEnemyPower": 12354
     },
     "I16": {
         "campaign": "Indomitus",
         "campaignType": "Early",
         "nodeNumber": 16,
         "reward": "The Iron Phoenix",
-        "expectedGold": 12.5
+        "expectedGold": 12.5,
+        "skulls": 2,
+        "deployable": 5,
+        "totalEnemyPower": 1234
     },
     "I17": {
         "campaign": "Indomitus",
