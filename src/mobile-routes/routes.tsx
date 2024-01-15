@@ -4,60 +4,67 @@ import { redirect, RouteObject } from 'react-router-dom';
 
 import MobileApp from '../mobile-app';
 import { LegendaryEvents } from './legendary-events/legendary-events';
-import { MobileHome } from './home/mobileHome';
-import { Goals } from '../routes/goals/goals';
-import { WhoYouOwn } from '../routes/who-you-own/who-you-own';
-import { PlanRoutes } from './events/planRoutes';
 import { LegendaryEventEnum } from '../models/enums';
-import { InputRoutes } from './events/inputRoutes';
-import { LearnRoutes } from './events/learnRoutes';
-import { CampaignsProgress } from '../routes/campaigns-progress';
-import { Inventory } from '../routes/inventory';
-import { DailyRaids } from '../routes/tables/dailyRaids';
-import { Characters } from '../routes/characters/characters';
-import { Upgrades } from '../routes/tables/upgrades';
-import { RankLookup } from '../routes/tables/rankLookup';
-import { Campaigns } from '../routes/tables/campaigns';
-import { DirtyDozen } from '../routes/dirty-dozen/dirty-dozen';
-import { Contacts } from '../routes/contacts/contacts';
-import { Thanks } from '../shared-components/thanks';
-import { MasterTable } from '../routes/legendary-events/master-table';
 
 const inputRoutes: RouteObject[] = [
     {
         path: 'input',
-        element: <InputRoutes />,
+        async lazy() {
+            const { InputRoutes } = await import('./events/inputRoutes');
+            return { Component: InputRoutes };
+        },
     },
     {
         path: 'input/wyo',
-        element: <WhoYouOwn />,
+        async lazy() {
+            const { WhoYouOwn } = await import('../routes/who-you-own/who-you-own');
+            return { Component: WhoYouOwn };
+        },
     },
     {
         path: 'input/campaignsProgress',
-        element: <CampaignsProgress />,
+        async lazy() {
+            const { CampaignsProgress } = await import('../routes/campaigns-progress');
+            return { Component: CampaignsProgress };
+        },
     },
     {
         path: 'input/inventory',
-        element: <Inventory />,
+        async lazy() {
+            const { Inventory } = await import('../routes/inventory');
+            return { Component: Inventory };
+        },
     },
 ];
 
 const planRoutes: RouteObject[] = [
     {
         path: 'plan',
-        element: <PlanRoutes />,
+        async lazy() {
+            const { PlanRoutes } = await import('./events/planRoutes');
+            return { Component: PlanRoutes };
+        },
     },
     {
         path: 'plan/goals',
-        element: <Goals />,
+        async lazy() {
+            const { Goals } = await import('../routes/goals/goals');
+            return { Component: Goals };
+        },
     },
     {
         path: 'plan/dailyRaids',
-        element: <DailyRaids />,
+        async lazy() {
+            const { DailyRaids } = await import('../routes/tables/dailyRaids');
+            return { Component: DailyRaids };
+        },
     },
     {
         path: 'plan/leMasterTable',
-        element: <MasterTable />,
+        async lazy() {
+            const { MasterTable } = await import('../routes/legendary-events/master-table');
+            return { Component: MasterTable };
+        },
     },
     {
         path: 'plan/le/shadowsun',
@@ -80,27 +87,45 @@ const planRoutes: RouteObject[] = [
 const learnRoutes: RouteObject[] = [
     {
         path: 'learn',
-        element: <LearnRoutes />,
+        async lazy() {
+            const { LearnRoutes } = await import('./events/learnRoutes');
+            return { Component: LearnRoutes };
+        },
     },
     {
         path: 'learn/characters',
-        element: <Characters />,
+        async lazy() {
+            const { Characters } = await import('../routes/characters/characters');
+            return { Component: Characters };
+        },
     },
     {
         path: 'learn/upgrades',
-        element: <Upgrades />,
+        async lazy() {
+            const { Upgrades } = await import('../routes/tables/upgrades');
+            return { Component: Upgrades };
+        },
     },
     {
         path: 'learn/rankLookup',
-        element: <RankLookup />,
+        async lazy() {
+            const { RankLookup } = await import('../routes/tables/rankLookup');
+            return { Component: RankLookup };
+        },
     },
     {
         path: 'learn/campaigns',
-        element: <Campaigns />,
+        async lazy() {
+            const { Campaigns } = await import('../routes/tables/campaigns');
+            return { Component: Campaigns };
+        },
     },
     {
         path: 'learn/dirtyDozen',
-        element: <DirtyDozen />,
+        async lazy() {
+            const { DirtyDozen } = await import('../routes/dirty-dozen/dirty-dozen');
+            return { Component: DirtyDozen };
+        },
     },
 ];
 
@@ -125,11 +150,17 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
             ...learnRoutes,
             {
                 path: 'contacts',
-                element: <Contacts />,
+                async lazy() {
+                    const { Contacts } = await import('../routes/contacts/contacts');
+                    return { Component: Contacts };
+                },
             },
             {
                 path: 'ty',
-                element: <Thanks />,
+                async lazy() {
+                    const { Thanks } = await import('../shared-components/thanks');
+                    return { Component: Thanks };
+                },
             },
         ],
     },

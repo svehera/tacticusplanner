@@ -48,6 +48,7 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
+    "analyze": "vite-bundle-visualizer -c ./vite.config.mts",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -b gh-pages -d build"
