@@ -6,7 +6,6 @@ import 'ag-grid-community/styles/ag-theme-material.css';
 import './index.css';
 
 import reportWebVitals from './reportWebVitals';
-import { FluentProvider, webLightTheme } from '@fluentui/react-components';
 
 import { RouterProvider } from 'react-router-dom';
 import { AuthProvider } from './contexts/auth';
@@ -21,14 +20,12 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
     <React.StrictMode>
         <AuthProvider>
-            <FluentProvider theme={webLightTheme}>
-                <SnackbarProvider
-                    autoHideDuration={5000}
-                    anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
-                    onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
-                />
-                <RouterProvider router={routes} />
-            </FluentProvider>
+            <SnackbarProvider
+                autoHideDuration={5000}
+                anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
+                onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
+            />
+            <RouterProvider router={routes} />
         </AuthProvider>
     </React.StrictMode>
 );

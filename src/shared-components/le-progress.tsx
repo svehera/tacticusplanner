@@ -11,7 +11,7 @@ import {
 import { LeTrackProgress } from './le-track-progress';
 import { LeProgressOverview } from './le-progress-overview';
 import { LegendaryEventEnum } from '../models/enums';
-import { Tooltip } from '@fluentui/react-components';
+import { Tooltip } from '@mui/material';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 
 export const LeProgress = ({
@@ -315,9 +315,7 @@ export const LeProgress = ({
                             {' '}
                             {currentPoints} / {pointsForUnlock}
                         </span>
-                        <Tooltip
-                            content={totalPoints + ' in total. Battles per track: ' + averageBattles}
-                            relationship={'description'}>
+                        <Tooltip title={totalPoints + ' in total. Battles per track: ' + averageBattles}>
                             <InfoIcon />
                         </Tooltip>
                     </div>
@@ -328,7 +326,7 @@ export const LeProgress = ({
                             {' '}
                             {currentCurrency} / {currencyForUnlock}
                         </span>
-                        <Tooltip content={totalCurrency + ' in total'} relationship={'description'}>
+                        <Tooltip title={totalCurrency + ' in total'}>
                             <InfoIcon />
                         </Tooltip>
                     </div>
@@ -339,7 +337,7 @@ export const LeProgress = ({
                             {' '}
                             {currentChests} / {chestsForNextGoal}
                         </span>
-                        <Tooltip content={totalChests + ' in total'} relationship={'description'}>
+                        <Tooltip title={totalChests + ' in total'}>
                             <InfoIcon />
                         </Tooltip>
                     </div>

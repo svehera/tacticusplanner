@@ -21,7 +21,7 @@ import { PersonalGoalType, Rank, Rarity } from '../../models/enums';
 import InputLabel from '@mui/material/InputLabel';
 import { getEnumValues, rankToString } from '../../shared-logic/functions';
 import { RankImage } from '../rank-image';
-import { Tooltip } from '@fluentui/react-components';
+import { Tooltip } from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
 import { CharacterItem } from '../character-item';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
@@ -144,10 +144,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     return (
         <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <Tooltip
-                    content="You can have only 20 goals at the same time"
-                    relationship={'description'}
-                    visible={disableNewGoals}>
+                <Tooltip title={disableNewGoals ? 'You can have only 20 goals at the same time' : ''}>
                     <span>
                         <Button variant={'contained'} disabled={disableNewGoals} onClick={() => setOpenDialog(true)}>
                             Set Goal

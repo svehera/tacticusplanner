@@ -1,4 +1,4 @@
-﻿import { Tooltip } from '@fluentui/react-components';
+﻿import { Tooltip } from '@mui/material';
 import React from 'react';
 import { getImageUrl } from '../shared-logic/functions';
 
@@ -30,7 +30,7 @@ export const MiscIcon = ({ icon, width, height }: { icon: keyof typeof icons; wi
     const image = getImageUrl(`icons/${details.file}`);
 
     return (
-        <Tooltip content={details.label} relationship="label" hideDelay={1000}>
+        <Tooltip title={details.label}>
             <span style={{ display: 'inline-block', width: width ?? 30, height }}>
                 <img
                     style={{ pointerEvents: 'none' }}
