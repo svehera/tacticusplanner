@@ -44,16 +44,18 @@
         "prettier": "^3.0.3",
         "vite": "^4.5.1",
         "vite-bundle-visualizer": "^1.0.0",
-        "vite-plugin-eslint": "^1.8.1",
         "vite-tsconfig-paths": "^4.2.3"
     },
     "scripts": {
         "start": "vite",
         "build": "tsc && vite build",
+        "build-ci": "npm run format-ci && npm run lint-ci && npm run build",
         "analyze": "vite-bundle-visualizer -c ./vite.config.mts",
         "preview": "vite preview",
+        "lint-ci": "eslint --ext .ts,.tsx --ignore-path .gitignore  --quiet src",
         "lint": "eslint --ext .ts,.tsx --ignore-path .gitignore  --quiet --fix src",
-        "format": "prettier .  --write",
+        "format": "prettier src --write",
+        "format-ci": "prettier src --check",
         "predeploy": "npm run build",
         "deploy": "gh-pages -b gh-pages -d build"
     },

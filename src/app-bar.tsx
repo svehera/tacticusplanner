@@ -31,7 +31,7 @@ const TopAppBar = () => {
     const [showWhatsNew, setShowWhatsNew] = useState(false);
 
     const hasNewVersion = useMemo(() => {
-        const currentAppVersion = localStorage.getItem('appVersion');
+        const currentAppVersion = localStorage.getItem("appVersion");
         return currentAppVersion === seenAppVersion;
     }, [seenAppVersion]);
 
