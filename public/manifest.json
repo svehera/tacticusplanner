@@ -1,48 +1,48 @@
 {
-  "id": "tacticusplanner",
-  "short_name": "Tacticus Planner",
-  "description": "Planner app for Tacticus WH40K mobile game",
-  "icons": [
-    {
-      "src": "android-chrome-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "android-chrome-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/screenshots/web-characters.png",
-      "type": "image/png",
-      "sizes": "1070x810",
-      "form_factor": "wide"
-    },
-    {
-      "src": "/screenshots/web-goals.png",
-      "type": "image/png",
-      "sizes": "1070x810",
-      "form_factor": "wide"
-    },
-    {
-      "src": "/screenshots/mobile-characters.png",
-      "type": "image/png",
-      "sizes": "550x990",
-      "form_factor": "narrow"
-    },
-    {
-      "src": "/screenshots/mobile-goals.png",
-      "type": "image/png",
-      "sizes": "550x990",
-      "form_factor": "narrow"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
-  "categories": ["entertainment", "games", "productivity"]
+    "id": "tacticusplanner",
+    "short_name": "Tacticus Planner",
+    "description": "Planner app for Tacticus WH40K mobile game",
+    "icons": [
+        {
+            "src": "android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/screenshots/web-characters.png",
+            "type": "image/png",
+            "sizes": "1070x810",
+            "form_factor": "wide"
+        },
+        {
+            "src": "/screenshots/web-goals.png",
+            "type": "image/png",
+            "sizes": "1070x810",
+            "form_factor": "wide"
+        },
+        {
+            "src": "/screenshots/mobile-characters.png",
+            "type": "image/png",
+            "sizes": "550x990",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "/screenshots/mobile-goals.png",
+            "type": "image/png",
+            "sizes": "550x990",
+            "form_factor": "narrow"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff",
+    "categories": ["entertainment", "games", "productivity"]
 }

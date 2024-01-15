@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { StaticDataService } from '../../services';
 import { CharacterImage } from '../../shared-components/character-image';
-import TargetIcon from '@mui/icons-material/TrackChanges';
 import { menuItemById } from '../../models/menu-items';
 
 export const PlanRoutes = () => {

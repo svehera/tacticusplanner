@@ -1,6 +1,7 @@
 ﻿import { Tooltip } from '@mui/material';
 import React from 'react';
 import { Rarity } from '../models/enums';
+import { getImageUrl } from '../shared-logic/functions';
 
 export const UpgradeImage = ({
     material,
@@ -16,8 +17,7 @@ export const UpgradeImage = ({
     try {
         // const
         const imagePath = iconPath || material.toLowerCase() + '.png';
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const image = require(`../assets/images/upgrades/${imagePath}`);
+        const image = getImageUrl(`upgrades/${imagePath}`);
 
         return (
             <Tooltip title={material} enterTouchDelay={0} placement={'top'}>

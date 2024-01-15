@@ -1,7 +1,6 @@
 ﻿import React from 'react';
 import { Card, CardHeader } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import TargetIcon from '@mui/icons-material/TrackChanges';
 import { inputSubMenu } from '../../models/menu-items';
 
 export const InputRoutes = () => {

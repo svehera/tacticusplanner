@@ -1,4 +1,4 @@
-﻿.ag-header-cell.score .ag-header-cell-label{
+﻿.ag-header-cell.score .ag-header-cell-label {
     justify-content: center;
 }
 
@@ -18,25 +18,25 @@
 }
 
 .dirty-dozen-score.pvp {
-    background-color: #F06E6D;
+    background-color: #f06e6d;
 }
 
 .dirty-dozen-score.tyranids {
-    background-color: #F8A95F;
+    background-color: #f8a95f;
 }
 
 .dirty-dozen-score.necron {
-    background-color: #FAFD5D;
+    background-color: #fafd5d;
 }
 
 .dirty-dozen-score.ork {
-    background-color: #A0CC90;
+    background-color: #a0cc90;
 }
 
 .dirty-dozen-score.mortarion {
-    background-color: #8BABF8;
+    background-color: #8babf8;
 }
 
 .dirty-dozen-score.screamer {
-    background-color: #C86BE6;
+    background-color: #c86be6;
 }

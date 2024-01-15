@@ -1,5 +1,6 @@
-﻿import { Tooltip } from '@fluentui/react-components';
+﻿import { Tooltip } from '@mui/material';
 import React from 'react';
+import { getImageUrl } from '../shared-logic/functions';
 
 const icons = {
     armour: {
@@ -26,25 +27,19 @@ const icons = {
 
 export const MiscIcon = ({ icon, width, height }: { icon: keyof typeof icons; width?: number; height?: number }) => {
     const details = icons[icon] ?? { file: '', label: icon };
-    try {
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const image = require(`../assets/images/icons/${details.file}`);
+    const image = getImageUrl(`icons/${details.file}`);
 
-        return (
-            <Tooltip content={details.label} relationship="label" hideDelay={1000}>
-                <span style={{ display: 'inline-block', width: width ?? 30, height }}>
-                    <img
-                        style={{ pointerEvents: 'none' }}
-                        src={image}
-                        width={width ?? 30}
-                        height={height}
-                        alt={details.label}
-                    />
-                </span>
-            </Tooltip>
-        );
-    } catch (error) {
-        // console.log(`Image with name "${campaign}" does not exist`);
-        return <span>{details.label}</span>;
-    }
+    return (
+        <Tooltip title={details.label}>
+            <span style={{ display: 'inline-block', width: width ?? 30, height }}>
+                <img
+                    style={{ pointerEvents: 'none' }}
+                    src={image}
+                    width={width ?? 30}
+                    height={height}
+                    alt={details.label}
+                />
+            </span>
+        </Tooltip>
+    );
 };

@@ -1,54 +1,56 @@
 ﻿import React from 'react';
 
-import { redirect, RouteObject } from 'react-router-dom';
+import { RouteObject } from 'react-router-dom';
 
 import DesktopApp from '../desktop-app';
-import { About } from './root/about';
-import { WhoYouOwn } from './who-you-own/who-you-own';
-import { Characters } from './characters/characters';
-import { DirtyDozen } from './dirty-dozen/dirty-dozen';
-import { LegendaryEventPage } from './legendary-events/legendary-events-page';
-import { Contacts } from './contacts/contacts';
-import { Goals } from './goals/goals';
-import { Thanks } from '../shared-components/thanks';
 import LegendaryEvent from './legendary-events/legendary-event';
 import { LegendaryEventEnum } from '../models/enums';
-import { Campaigns } from './tables/campaigns';
-import { Upgrades } from './tables/upgrades';
-import { RankLookup } from './tables/rankLookup';
-import { DailyRaids } from './tables/dailyRaids';
-import { CampaignsProgress } from './campaigns-progress';
-import { Inventory } from './inventory';
-import { Home } from '../features/misc/home/home';
-import { MasterTable } from './legendary-events/master-table';
 
 const inputRoutes: RouteObject[] = [
     {
         path: 'input/wyo',
-        element: <WhoYouOwn />,
+        async lazy() {
+            const { WhoYouOwn } = await import('./who-you-own/who-you-own');
+            return { Component: WhoYouOwn };
+        },
     },
     {
         path: 'input/campaignsProgress',
-        element: <CampaignsProgress />,
+        async lazy() {
+            const { CampaignsProgress } = await import('./campaigns-progress');
+            return { Component: CampaignsProgress };
+        },
     },
     {
         path: 'input/inventory',
-        element: <Inventory />,
+        async lazy() {
+            const { Inventory } = await import('./inventory');
+            return { Component: Inventory };
+        },
     },
 ];
 
 const planRoutes: RouteObject[] = [
     {
         path: 'plan/goals',
-        element: <Goals />,
+        async lazy() {
+            const { Goals } = await import('./goals/goals');
+            return { Component: Goals };
+        },
     },
     {
         path: 'plan/dailyRaids',
-        element: <DailyRaids />,
+        async lazy() {
+            const { DailyRaids } = await import('./tables/dailyRaids');
+            return { Component: DailyRaids };
+        },
     },
     {
         path: 'plan/le',
-        element: <LegendaryEventPage />,
+        async lazy() {
+            const { LegendaryEventPage } = await import('./legendary-events/legendary-events-page');
+            return { Component: LegendaryEventPage };
+        },
         children: [
             {
                 path: 'shadowsun',
@@ -70,30 +72,48 @@ const planRoutes: RouteObject[] = [
     },
     {
         path: 'plan/leMasterTable',
-        element: <MasterTable />,
+        async lazy() {
+            const { MasterTable } = await import('./legendary-events/master-table');
+            return { Component: MasterTable };
+        },
     },
 ];
 
 const learnRoutes: RouteObject[] = [
     {
         path: 'learn/characters',
-        element: <Characters />,
+        async lazy() {
+            const { Characters } = await import('./characters/characters');
+            return { Component: Characters };
+        },
     },
     {
         path: 'learn/upgrades',
-        element: <Upgrades />,
+        async lazy() {
+            const { Upgrades } = await import('./tables/upgrades');
+            return { Component: Upgrades };
+        },
     },
     {
         path: 'learn/rankLookup',
-        element: <RankLookup />,
+        async lazy() {
+            const { RankLookup } = await import('./tables/rankLookup');
+            return { Component: RankLookup };
+        },
     },
     {
         path: 'learn/campaigns',
-        element: <Campaigns />,
+        async lazy() {
+            const { Campaigns } = await import('./tables/campaigns');
+            return { Component: Campaigns };
+        },
     },
     {
         path: 'learn/dirtyDozen',
-        element: <DirtyDozen />,
+        async lazy() {
+            const { DirtyDozen } = await import('./dirty-dozen/dirty-dozen');
+            return { Component: DirtyDozen };
+        },
     },
 ];
 
@@ -104,18 +124,27 @@ export const appRoutes: () => RouteObject[] = () => [
         children: [
             {
                 path: 'home',
-                element: <Home />,
+                async lazy() {
+                    const { Home } = await import('../features/misc/home/home');
+                    return { Component: Home };
+                },
             },
             ...inputRoutes,
             ...planRoutes,
             ...learnRoutes,
             {
                 path: 'contacts',
-                element: <Contacts />,
+                async lazy() {
+                    const { Contacts } = await import('./contacts/contacts');
+                    return { Component: Contacts };
+                },
             },
             {
                 path: 'ty',
-                element: <Thanks />,
+                async lazy() {
+                    const { Thanks } = await import('../shared-components/thanks');
+                    return { Component: Thanks };
+                },
             },
         ],
     },

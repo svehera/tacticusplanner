@@ -10,7 +10,7 @@ import { ILegendaryEvent } from '../../models/interfaces';
 import { LeProgress } from '../../shared-components/le-progress';
 import { LegendaryEventEnum } from '../../models/enums';
 
-export function MyProgressDialog({ legendaryEvent }: { legendaryEvent: ILegendaryEvent}) {
+export function MyProgressDialog({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) {
     const [open, setOpen] = React.useState(false);
     const [myProgressSection, setMyProgressSection] = React.useState('Overview');
     const handleClickOpen = () => {
@@ -20,34 +20,31 @@ export function MyProgressDialog({ legendaryEvent }: { legendaryEvent: ILegendar
     const handleClose = () => {
         setOpen(false);
     };
-    
+
     return (
         <div>
             <Button variant="contained" onClick={handleClickOpen}>
                 My Progress
             </Button>
-            <Dialog
-                fullScreen
-                open={open}
-                onClose={handleClose}
-            >
+            <Dialog fullScreen open={open} onClose={handleClose}>
                 <AppBar sx={{ position: 'relative' }}>
                     <Toolbar>
-                        <IconButton
-                            edge="start"
-                            color="inherit"
-                            onClick={handleClose}
-                            aria-label="close"
-                        >
+                        <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
                             <CloseIcon />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                             {LegendaryEventEnum[legendaryEvent.id]} - My Progress - {myProgressSection}
                         </Typography>
-                        <a style={{ textDecoration: 'none', color: 'white', fontWeight: 700 }} href={legendaryEvent.wikiLink} target={'_blank'} rel="noreferrer">WIKI</a>
+                        <a
+                            style={{ textDecoration: 'none', color: 'white', fontWeight: 700 }}
+                            href={legendaryEvent.wikiLink}
+                            target={'_blank'}
+                            rel="noreferrer">
+                            WIKI
+                        </a>
                     </Toolbar>
                 </AppBar>
-                <LeProgress sectionChange={setMyProgressSection} legendaryEvent={legendaryEvent}/>
+                <LeProgress sectionChange={setMyProgressSection} legendaryEvent={legendaryEvent} />
             </Dialog>
         </div>
     );

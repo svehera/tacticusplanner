@@ -16,7 +16,7 @@ import {
 } from '../models/interfaces';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getCompletionRateColor } from '../shared-logic/functions';
-import { Tooltip } from '@fluentui/react-components';
+import { Tooltip } from '@mui/material';
 
 export const LeProgressOverview = ({
     progress,
@@ -221,7 +221,7 @@ const TrackSummary = ({ title, trackProgress }: { title: string; trackProgress: 
     return (
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <span style={{ marginInlineEnd: 10 }}>{title}</span>
-            <Tooltip content={`${currentBattles}/${totalBattles} Requirements`} relationship={'description'}>
+            <Tooltip title={`${currentBattles}/${totalBattles} Requirements`}>
                 <span style={{ marginInlineEnd: 10, fontWeight: 700 }}>
                     {currentPoints}/{totalPoints} Points
                 </span>
@@ -290,7 +290,7 @@ const RequirementDetails = ({
                     backgroundColor: getCompletionRateColor(completedBattles, battles.length),
                     borderRadius: 50,
                 }}></div>
-            <Tooltip content={`${scoredPoints}/${totalPoints} Points`} relationship={'description'}>
+            <Tooltip title={`${scoredPoints}/${totalPoints} Points`}>
                 <span style={{ fontWeight: 700 }}>
                     {completedBattles}/{battles.length}
                 </span>

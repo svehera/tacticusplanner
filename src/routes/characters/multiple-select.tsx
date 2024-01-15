@@ -20,10 +20,10 @@ const MenuProps = {
 };
 
 export default function MultipleSelectCheckmarks(props: {
-    values: string[],
-    selectedValues: string[],
-    placeholder: string,
-    selectionChanges: (value: string[]) => void
+    values: string[];
+    selectedValues: string[];
+    placeholder: string;
+    selectionChanges: (value: string[]) => void;
 }) {
     const [selectedLabels, setSelectedLabels] = React.useState<string[]>(props.selectedValues);
     const handleChange = (event: SelectChangeEvent<string[]>) => {
@@ -45,14 +45,13 @@ export default function MultipleSelectCheckmarks(props: {
                     multiple
                     value={selectedLabels}
                     onChange={handleChange}
-                    input={<OutlinedInput label={props.placeholder}/>}
-                    renderValue={(selected) => selected.join(', ')}
-                    MenuProps={MenuProps}
-                >
-                    {props.values.map((label) => (
+                    input={<OutlinedInput label={props.placeholder} />}
+                    renderValue={selected => selected.join(', ')}
+                    MenuProps={MenuProps}>
+                    {props.values.map(label => (
                         <MenuItem key={label} value={label}>
-                            <Checkbox checked={selectedLabels.indexOf(label) > -1}/>
-                            <ListItemText primary={label}/>
+                            <Checkbox checked={selectedLabels.indexOf(label) > -1} />
+                            <ListItemText primary={label} />
                         </MenuItem>
                     ))}
                 </Select>

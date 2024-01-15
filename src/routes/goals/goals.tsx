@@ -474,7 +474,7 @@ const RaidItem = ({ material, location }: { material: IMaterialRaid; location: I
 
         dispatch.dailyRaids({
             type: 'AddCompletedBattle',
-            location,
+            location: { ...location, energySpent: 0 },
             material: {
                 ...material,
                 locations: [],

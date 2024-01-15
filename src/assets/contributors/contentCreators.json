@@ -1,26 +1,26 @@
 ﻿[
-  {
-    "name": "Nandi",
-    "youtubeLink": "https://www.youtube.com/@Nandi40k",
-    "thankYou": "Thank you for posting decent vids and promoting the app",
-    "avatarIcon": "nandi.jpg",
-    "resourceIcon": "nandi_vid.jpg",
-    "resourceLink": "https://www.youtube.com/watch?v=nPnMxrm0tHs&ab_channel=Nandi"
-  },
-  {
-    "name": "NoxTempest",
-    "youtubeLink": "https://www.youtube.com/@noxtempest",
-    "thankYou": "Thank you for promoting the app",
-    "avatarIcon": "nox.jpg",
-    "resourceIcon": "nox_vid.jpg",
-    "resourceLink": "https://www.youtube.com/watch?v=8VPI8I0A4Xc"
-  },
-  {
-    "name": "DB Preacher: Tacticus",
-    "youtubeLink": "https://www.youtube.com/@DBPreacherTacticus",
-    "thankYou": "Thank you for content that inspired me for creating this web app",
-    "avatarIcon": "db.jpg",
-    "resourceIcon": "db_vid.jpg",
-    "resourceLink": "https://www.youtube.com/watch?v=aD2ky2BxX_g"
-  }
+    {
+        "name": "Nandi",
+        "youtubeLink": "https://www.youtube.com/@Nandi40k",
+        "thankYou": "Thank you for posting decent vids and promoting the app",
+        "avatarIcon": "nandi.jpg",
+        "resourceIcon": "nandi_vid.jpg",
+        "resourceLink": "https://www.youtube.com/watch?v=nPnMxrm0tHs&ab_channel=Nandi"
+    },
+    {
+        "name": "NoxTempest",
+        "youtubeLink": "https://www.youtube.com/@noxtempest",
+        "thankYou": "Thank you for promoting the app",
+        "avatarIcon": "nox.jpg",
+        "resourceIcon": "nox_vid.jpg",
+        "resourceLink": "https://www.youtube.com/watch?v=8VPI8I0A4Xc"
+    },
+    {
+        "name": "DB Preacher: Tacticus",
+        "youtubeLink": "https://www.youtube.com/@DBPreacherTacticus",
+        "thankYou": "Thank you for content that inspired me for creating this web app",
+        "avatarIcon": "db.jpg",
+        "resourceIcon": "db_vid.jpg",
+        "resourceLink": "https://www.youtube.com/watch?v=aD2ky2BxX_g"
+    }
 ]
