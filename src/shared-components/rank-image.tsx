@@ -6,6 +6,10 @@ import { getImageUrl } from '../shared-logic/functions';
 export const RankImage = ({ rank }: { rank: Rank }) => {
     const rankTextValue = Rank[rank];
 
+    if (rank === Rank.Locked) {
+        return <span>{Rank[rank]}</span>;
+    }
+
     const image = getImageUrl(`ranks/${rankTextValue.toLowerCase()}.png`);
     return (
         <Tooltip content={rankTextValue} relationship="label" hideDelay={1000}>
