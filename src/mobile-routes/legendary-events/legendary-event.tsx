@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React from 'react';
 import Box from '@mui/material/Box';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import { ILegendaryEvent } from '../../models/interfaces';

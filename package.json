@@ -52,7 +52,7 @@
         "build": "tsc && vite build",
         "analyze": "vite-bundle-visualizer -c ./vite.config.mts",
         "preview": "vite preview",
-        "lint": "eslint --ext .ts,.tsx --ignore-path .gitignore --fix src",
+        "lint": "eslint --ext .ts,.tsx --ignore-path .gitignore  --quiet --fix src",
         "format": "prettier .  --write",
         "predeploy": "npm run build",
         "deploy": "gh-pages -b gh-pages -d build"

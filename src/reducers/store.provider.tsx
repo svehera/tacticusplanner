@@ -3,7 +3,7 @@ import { AxiosError } from 'axios';
 import { isEqual } from 'lodash';
 import { enqueueSnackbar } from 'notistack';
 
-import { IDailyRaids, IDispatchContext, IGlobalState } from '../models/interfaces';
+import { IDispatchContext, IGlobalState } from '../models/interfaces';
 import { charactersReducer } from './characters.reducer';
 import { viewPreferencesReducer } from './view-settings.reducer';
 import { autoTeamsPreferencesReducer } from './auto-teams-settings.reducer';
