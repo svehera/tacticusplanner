@@ -31,7 +31,7 @@ const TopAppBar = () => {
     const [showWhatsNew, setShowWhatsNew] = useState(false);
 
     const hasNewVersion = useMemo(() => {
-        const currentAppVersion = localStorage.getItem("appVersion");
+        const currentAppVersion = localStorage.getItem('appVersion');
         return currentAppVersion === seenAppVersion;
     }, [seenAppVersion]);
 
@@ -41,7 +41,7 @@ const TopAppBar = () => {
         if (Object.hasOwn(menuItemById, menuItemId)) {
             return menuItemById[menuItemId as keyof typeof menuItemById].title;
         } else {
-            return "Tacticus   Planner";
+            return 'Tacticus    Planner';
         }
     }, [location.pathname]);
 

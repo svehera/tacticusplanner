@@ -62,7 +62,8 @@
     "format-ci": "prettier src --check",
     "predeploy": "npm run build",
     "prepare": "husky install",
-    "deploy": "gh-pages -b gh-pages -d build"
+    "deploy": "gh-pages -b gh-pages -d build",
+    "pre-commit": "lint-staged"
   },
   "eslintConfig": {
     "extends": [
