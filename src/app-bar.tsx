@@ -41,7 +41,7 @@ const TopAppBar = () => {
         if (Object.hasOwn(menuItemById, menuItemId)) {
             return menuItemById[menuItemId as keyof typeof menuItemById].title;
         } else {
-            return "Tacticus       Planner";
+            return 'Tacticus Planner';
         }
     }, [location.pathname]);
 
