@@ -63,7 +63,7 @@
     "predeploy": "npm run build",
     "prepare": "husky install",
     "deploy": "gh-pages -b gh-pages -d build",
-    "pre-commit": "lint-staged"
+    "precommit": "lint-staged"
   },
   "eslintConfig": {
     "extends": [
@@ -72,16 +72,16 @@
     ]
   },
   "lint-staged": {
-    "*.{ts,tsx,css,scss,json}": [
+    "src/**/*.{ts,tsx,css,scss,json}": [
       "prettier --write"
     ],
-    "*.{ts,tsx}": [
+    "src/**/*.{ts,tsx}": [
       "eslint --fix"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm precommit"
     }
   }
 }
