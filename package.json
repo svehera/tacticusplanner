@@ -61,9 +61,7 @@
     "format": "prettier src --write",
     "format-ci": "prettier src --check",
     "predeploy": "npm run build",
-    "prepare": "husky install",
-    "deploy": "gh-pages -b gh-pages -d build",
-    "precommit": "lint-staged"
+    "deploy": "gh-pages -b gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -81,7 +79,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm precommit"
+      "pre-commit": "lint-staged"
     }
   }
 }
