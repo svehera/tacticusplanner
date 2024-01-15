@@ -6,7 +6,7 @@ import { getImageUrl } from '../shared-logic/functions';
 export const RarityImage = ({ rarity }: { rarity: Rarity }) => {
     const rarityString = Rarity[rarity];
     try {
-        const image = getImageUrl(`../assets/images/rarity/${rarityString.toLowerCase()}.png`);
+        const image = getImageUrl(`rarity/${rarityString.toLowerCase()}.png`);
 
         // If the image doesn't exist. return null
         if (!image)

@@ -192,7 +192,6 @@ export const getCompletionRateColor = (curr: number, total: number): string => {
     return 'white';
 };
 
-
 export function getImageUrl(image: string): string {
-    return new URL(image, import.meta.url).href;
+    return new URL(`../assets/images/${image}`, import.meta.url).href;
 }

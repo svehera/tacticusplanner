@@ -10,12 +10,12 @@ export const StarsImage = ({ stars }: { stars: RarityStars }) => {
     try {
         // Import image on demand
         if (stars === RarityStars.None) {
-            const image = getImageUrl(`../assets/images/stars/${blueStar}`);
+            const image = getImageUrl(`stars/${blueStar}`);
             return <img style={{ visibility: 'hidden' }} src={image} height={15} />;
         }
 
         if (stars <= RarityStars.FiveStars) {
-            const image = getImageUrl(`../assets/images/stars/${goldStar}`);
+            const image = getImageUrl(`stars/${goldStar}`);
             const starsImages = [];
             for (let i = 0; i < stars; i++) {
                 starsImages.push(<img key={i} style={{ pointerEvents: 'none' }} src={image} height={15} />);
@@ -24,7 +24,7 @@ export const StarsImage = ({ stars }: { stars: RarityStars }) => {
         }
 
         if (stars <= RarityStars.RedFiveStars) {
-            const image = getImageUrl(`../assets/images/stars/${redStar}`);
+            const image = getImageUrl(`stars/${redStar}`);
             const starsImages = [];
             for (let i = 0; i < stars - 5; i++) {
                 starsImages.push(<img key={i} style={{ pointerEvents: 'none' }} src={image} height={15} />);
@@ -33,7 +33,7 @@ export const StarsImage = ({ stars }: { stars: RarityStars }) => {
         }
 
         if (stars === RarityStars.BlueStar) {
-            const image = getImageUrl(`../assets/images/stars/${blueStar}`);
+            const image = getImageUrl(`stars/${blueStar}`);
             return <img style={{ pointerEvents: 'none' }} src={image} height={15} />;
         }
 

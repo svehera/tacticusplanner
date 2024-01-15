@@ -27,7 +27,7 @@ const icons = {
 
 export const MiscIcon = ({ icon, width, height }: { icon: keyof typeof icons; width?: number; height?: number }) => {
     const details = icons[icon] ?? { file: '', label: icon };
-    const image = getImageUrl(`../assets/images/icons/${details.file}`);
+    const image = getImageUrl(`icons/${details.file}`);
 
     return (
         <Tooltip content={details.label} relationship="label" hideDelay={1000}>

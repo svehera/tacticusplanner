@@ -17,7 +17,7 @@ export const UpgradeImage = ({
     try {
         // const
         const imagePath = iconPath || material.toLowerCase() + '.png';
-        const image = getImageUrl(`../assets/images/upgrades/${imagePath}`);
+        const image = getImageUrl(`upgrades/${imagePath}`);
 
         return (
             <Tooltip title={material} enterTouchDelay={0} placement={'top'}>

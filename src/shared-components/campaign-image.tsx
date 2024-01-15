@@ -4,7 +4,7 @@ import { getImageUrl } from '../shared-logic/functions';
 
 export const CampaignImage = ({ campaign, size }: { campaign: string; size?: number }) => {
     try {
-        const image = getImageUrl(`../assets/images/campaings/${campaign}.png`);
+        const image = getImageUrl(`campaings/${campaign}.png`);
 
         return (
             <Tooltip content={campaign} relationship="label" hideDelay={1000}>

@@ -3,7 +3,7 @@ import React from 'react';
 import { getImageUrl } from '../shared-logic/functions';
 
 export const FactionImage = ({ faction, size }: { faction: string; size?: number }) => {
-    const image = getImageUrl(`../assets/images/factions/${faction}.png`);
+    const image = getImageUrl(`factions/${faction}.png`);
 
     return (
         <Tooltip content={faction} relationship="label" hideDelay={1000}>

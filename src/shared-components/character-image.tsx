@@ -16,7 +16,7 @@ export const CharacterImage = ({
     const replaceExtenstion = portrait ? icon.replace('.png', '.webp') : icon;
     const unset = portrait ? 'unset.webp' : 'unset.png';
 
-    const imageUrl = getImageUrl(`../assets/images/${iconPath}/${replaceExtenstion}`);
+    const imageUrl = getImageUrl(`${iconPath}/${replaceExtenstion}`);
 
     return portrait ? (
         <img

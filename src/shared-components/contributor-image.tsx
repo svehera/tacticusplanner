@@ -12,7 +12,7 @@ export const ContributorImage = ({
     width: number;
     borderRadius?: boolean;
 }) => {
-    const image = getImageUrl(`../assets/images/contributors/${iconPath}`);
+    const image = getImageUrl(`contributors/${iconPath}`);
 
     return (
         <img
