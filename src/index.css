@@ -1,17 +1,17 @@
-html, body, #root {
+html,
+body,
+#root {
     height: 100%;
     width: 100%;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+        'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .bold {
@@ -19,87 +19,87 @@ code {
 }
 
 .alpha {
-    background-color: #93C47D;
+    background-color: #93c47d;
 }
 
 .beta {
-    background-color: #C9DAF8;
+    background-color: #c9daf8;
 }
 
 .gamma {
-    background-color: #FCE5CD;
+    background-color: #fce5cd;
 }
 
 .stone1 {
-    background-color: #CDB3A0;
+    background-color: #cdb3a0;
 }
 
 .stone2 {
-    background-color: #B09A8A;
+    background-color: #b09a8a;
 }
 
 .stone3 {
-    background-color: #8C827A;
+    background-color: #8c827a;
 }
 
 .iron1 {
-    background-color: #D9EAD3;
+    background-color: #d9ead3;
 }
 
 .iron2 {
-    background-color: #B6D7A8;
+    background-color: #b6d7a8;
 }
 
 .iron3 {
-    background-color: #93C47D;
+    background-color: #93c47d;
 }
 
 .bronze1 {
-    background-color: #F9CB9C;
+    background-color: #f9cb9c;
 }
 
 .bronze2 {
-    background-color: #F6B26B;
+    background-color: #f6b26b;
 }
 
 .bronze3 {
-    background-color: #E69138;
+    background-color: #e69138;
 }
 
 .silver1 {
-    background-color: #EFEFEF;
+    background-color: #efefef;
 }
 
 .silver2 {
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
 }
 
 .silver3 {
-    background-color: #CCCCCC;
+    background-color: #cccccc;
 }
 
 .gold1 {
-    background-color: #FFE599;
+    background-color: #ffe599;
 }
 
 .gold2 {
-    background-color: #FFD966;
+    background-color: #ffd966;
 }
 
 .gold3 {
-    background-color: #F1C232;
+    background-color: #f1c232;
 }
 
 .diamond1 {
-    background-color: #CFE2F3;
+    background-color: #cfe2f3;
 }
 
 .diamond2 {
-    background-color: #9FC5E8;
+    background-color: #9fc5e8;
 }
 
 .diamond3 {
-    background-color: #6FA8DC;
+    background-color: #6fa8dc;
 }
 
 .ag-theme-material {
@@ -120,45 +120,45 @@ code {
 }
 
 .common {
-    background-color: #CDB3A0;
+    background-color: #cdb3a0;
 }
 
 .uncommon {
-    background-color: #F9CB9C;
+    background-color: #f9cb9c;
 }
 
 .rare {
-    background-color: #EFEFEF;
+    background-color: #efefef;
 }
 
 .epic {
-    background-color: #FFE599;
+    background-color: #ffe599;
 }
 
 .legendary {
-    background-color: #CFE2F3;
+    background-color: #cfe2f3;
 }
 
 .upgrade {
-    background-color: #012A41;
+    background-color: #012a41;
 }
 
 .common-upgrade {
-    border: 2px solid #CDB3A0;
+    border: 2px solid #cdb3a0;
 }
 
 .uncommon-upgrade {
-    border: 2px solid #F9CB9C;
+    border: 2px solid #f9cb9c;
 }
 
 .rare-upgrade {
-    border: 2px solid #EFEFEF;
+    border: 2px solid #efefef;
 }
 
 .epic-upgrade {
-    border: 2px solid #FFE599;
+    border: 2px solid #ffe599;
 }
 
 .legendary-upgrade {
-    border: 2px solid #CFE2F3;
+    border: 2px solid #cfe2f3;
 }

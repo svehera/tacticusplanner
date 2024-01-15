@@ -1,42 +1,42 @@
 ﻿[
-  {
-    "name": "sonsonVallano",
-    "type": "Contributor",
-    "thankYou": "Thank you for providing decent feedback and being Alpha,Beta,Gamma QA :)",
-    "resourceDescription": "Public Upgrade Calc",
-    "resourceLink": "https://docs.google.com/spreadsheets/d/1wq-CjAXkTkEKAtkI7lnpf3Yliv8qpoANW43YE21hlgg/edit",
-    "avatarIcon": "none.png"
-  },
-  {
-    "name": "Towen",
-    "type": "Contributor",
-    "thankYou": "Thank you for sharing Characters images",
-    "resourceDescription": "EN Labs T.A.C.T.I.C.U.S.",
-    "resourceLink": "https://docs.google.com/spreadsheets/u/0/d/1al2IWwvTP3QOhHtfr6P8stdlA48ED4JFrtK8wDKznrk/htmlview",
-    "avatarIcon": "towen.webp"
-  },
-  {
-    "name": "Un/Lucky☆SirEldricIV",
-    "type": "Contributor",
-    "thankYou": "Thank you for sharing Ranks images",
-    "resourceDescription": "Tacticus Wiki",
-    "resourceLink": "https://tacticus.fandom.com/wiki/Tacticus_Wiki",
-    "avatarIcon": "lucky.webp"
-  },
-  {
-    "name": "YourAdHere",
-    "type": "Contributor",
-    "thankYou": "Thank you for contributing into Tacticus Planner",
-    "resourceDescription": "",
-    "resourceLink": "",
-    "avatarIcon": "yourAdHere.webp"
-  },
-  {
-    "name": "Lëonaica",
-    "type": "Contributor",
-    "thankYou": "Thank you for contributing into Tacticus Planner",
-    "resourceDescription": "",
-    "resourceLink": "",
-    "avatarIcon": "leonaica.webp"
-  }
+    {
+        "name": "sonsonVallano",
+        "type": "Contributor",
+        "thankYou": "Thank you for providing decent feedback and being Alpha,Beta,Gamma QA :)",
+        "resourceDescription": "Public Upgrade Calc",
+        "resourceLink": "https://docs.google.com/spreadsheets/d/1wq-CjAXkTkEKAtkI7lnpf3Yliv8qpoANW43YE21hlgg/edit",
+        "avatarIcon": "none.png"
+    },
+    {
+        "name": "Towen",
+        "type": "Contributor",
+        "thankYou": "Thank you for sharing Characters images",
+        "resourceDescription": "EN Labs T.A.C.T.I.C.U.S.",
+        "resourceLink": "https://docs.google.com/spreadsheets/u/0/d/1al2IWwvTP3QOhHtfr6P8stdlA48ED4JFrtK8wDKznrk/htmlview",
+        "avatarIcon": "towen.webp"
+    },
+    {
+        "name": "Un/Lucky☆SirEldricIV",
+        "type": "Contributor",
+        "thankYou": "Thank you for sharing Ranks images",
+        "resourceDescription": "Tacticus Wiki",
+        "resourceLink": "https://tacticus.fandom.com/wiki/Tacticus_Wiki",
+        "avatarIcon": "lucky.webp"
+    },
+    {
+        "name": "YourAdHere",
+        "type": "Contributor",
+        "thankYou": "Thank you for contributing into Tacticus Planner",
+        "resourceDescription": "",
+        "resourceLink": "",
+        "avatarIcon": "yourAdHere.webp"
+    },
+    {
+        "name": "Lëonaica",
+        "type": "Contributor",
+        "thankYou": "Thank you for contributing into Tacticus Planner",
+        "resourceDescription": "",
+        "resourceLink": "",
+        "avatarIcon": "leonaica.webp"
+    }
 ]

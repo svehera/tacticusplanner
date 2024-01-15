@@ -9,6 +9,6 @@ export const usePopUpControls = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    
+
     return { anchorEl, open, handleClick, handleClose };
 };

@@ -18,11 +18,11 @@ const AuthContext = createContext<IAuthContext>({
     isAuthenticated: !!localStorage.getItem(localStorageKey),
     token: localStorage.getItem(localStorageKey) ?? '',
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    login(token: string): void {},
+    login(): void {},
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     logout(): void {},
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    setUser(username: string, shareToken?: string): void {},
+    setUser(): void {},
 });
 
 export function AuthProvider({ children }: PropsWithChildren) {

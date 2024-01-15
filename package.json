@@ -1,58 +1,66 @@
 {
-  "name": "tacticusplanner",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@mui/icons-material": "^5.14.3",
-    "@mui/material": "^5.14.4",
-    "ag-grid-community": "^30.0.6",
-    "ag-grid-react": "^30.0.6",
-    "axios": "^1.5.0",
-    "lodash": "^4.17.21",
-    "material-ui-popup-state": "^5.0.9",
-    "notistack": "^3.0.1",
-    "react": "^18.2.0",
-    "react-device-detect": "^2.2.3",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.15.0",
-    "sass": "^1.69.5",
-    "typescript": "^4.9.5",
-    "uuid": "^9.0.1",
-    "web-vitals": "^2.1.4"
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@emotion/babel-plugin": "^11.11.0",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/lodash": "^4.14.197",
-    "@types/node": "^16.18.40",
-    "@types/react": "^18.2.20",
-    "@types/react-dom": "^18.2.7",
-    "@types/uuid": "^9.0.4",
-    "@vitejs/plugin-react": "^4.2.1",
-    "browserslist-to-esbuild": "^2.1.1",
-    "eslint": "^8.46.0",
-    "gh-pages": "^5.0.0",
-    "prettier": "^3.0.3",
-    "vite": "^4.5.1",
-    "vite-bundle-visualizer": "^1.0.0",
-    "vite-tsconfig-paths": "^4.2.3"
-  },
-  "scripts": {
-    "start": "vite",
-    "build": "tsc && vite build",
-    "analyze": "vite-bundle-visualizer -c ./vite.config.mts",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -b gh-pages -d build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  }
+    "name": "tacticusplanner",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@mui/icons-material": "^5.14.3",
+        "@mui/material": "^5.14.4",
+        "ag-grid-community": "^30.0.6",
+        "ag-grid-react": "^30.0.6",
+        "axios": "^1.5.0",
+        "lodash": "^4.17.21",
+        "material-ui-popup-state": "^5.0.9",
+        "notistack": "^3.0.1",
+        "react": "^18.2.0",
+        "react-device-detect": "^2.2.3",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.15.0",
+        "sass": "^1.69.5",
+        "typescript": "^4.9.5",
+        "uuid": "^9.0.1",
+        "web-vitals": "^2.1.4"
+    },
+    "devDependencies": {
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+        "@emotion/babel-plugin": "^11.11.0",
+        "@testing-library/jest-dom": "^5.17.0",
+        "@testing-library/react": "^13.4.0",
+        "@testing-library/user-event": "^13.5.0",
+        "@types/jest": "^27.5.2",
+        "@types/lodash": "^4.14.197",
+        "@types/node": "^16.18.40",
+        "@types/react": "^18.2.20",
+        "@types/react-dom": "^18.2.7",
+        "@types/uuid": "^9.0.4",
+        "@typescript-eslint/eslint-plugin": "^6.18.1",
+        "@vitejs/plugin-react": "^4.2.1",
+        "browserslist-to-esbuild": "^2.1.1",
+        "eslint": "^8.46.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-config-react-app": "^7.0.1",
+        "eslint-plugin-prettier": "^5.1.3",
+        "eslint-plugin-react": "^7.33.2",
+        "gh-pages": "^5.0.0",
+        "prettier": "^3.0.3",
+        "vite": "^4.5.1",
+        "vite-bundle-visualizer": "^1.0.0",
+        "vite-plugin-eslint": "^1.8.1",
+        "vite-tsconfig-paths": "^4.2.3"
+    },
+    "scripts": {
+        "start": "vite",
+        "build": "tsc && vite build",
+        "analyze": "vite-bundle-visualizer -c ./vite.config.mts",
+        "preview": "vite preview",
+        "lint": "eslint --ext .ts,.tsx --ignore-path .gitignore --fix src",
+        "format": "prettier .  --write",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -b gh-pages -d build"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    }
 }

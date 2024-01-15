@@ -2,6 +2,7 @@
 import react from '@vitejs/plugin-react';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 import browserslistToEsbuild from 'browserslist-to-esbuild';
+import eslint from 'vite-plugin-eslint';
 
 export default defineConfig({
     // depending on your application, base can also be "/"
@@ -14,6 +15,7 @@ export default defineConfig({
             },
         }),
         viteTsconfigPaths(),
+        eslint(),
     ],
     server: {
         // this ensures that the browser opens upon server start
