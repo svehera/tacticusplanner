@@ -1,29 +1,8 @@
-﻿import React, { createContext, PropsWithChildren, useContext, useState } from 'react';
-
-export interface IAuthContext {
-    username: string;
-    shareToken?: string;
-    isAuthenticated: boolean;
-    token: string;
-    login(token: string): void;
-    logout(): void;
-    setUser(username: string, shareToken?: string): void;
-}
+﻿import React, { PropsWithChildren, useState } from 'react';
+import { AuthContext } from './auth';
 
 const localStorageKey = 'token';
 const localStorageUserKey = 'user';
-
-const AuthContext = createContext<IAuthContext>({
-    username: 'Tactician',
-    isAuthenticated: !!localStorage.getItem(localStorageKey),
-    token: localStorage.getItem(localStorageKey) ?? '',
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    login(): void {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    logout(): void {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    setUser(): void {},
-});
 
 export function AuthProvider({ children }: PropsWithChildren) {
     const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem(localStorageKey));
@@ -56,8 +35,4 @@ export function AuthProvider({ children }: PropsWithChildren) {
             {children}
         </AuthContext.Provider>
     );
-}
-
-export function useAuth() {
-    return useContext(AuthContext);
 }
