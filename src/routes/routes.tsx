@@ -5,6 +5,7 @@ import { RouteObject } from 'react-router-dom';
 import DesktopApp from '../desktop-app';
 import LegendaryEvent from './legendary-events/legendary-event';
 import { LegendaryEventEnum } from '../models/enums';
+import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -146,6 +147,7 @@ export const appRoutes: () => RouteObject[] = () => [
                     return { Component: Thanks };
                 },
             },
+            faqLazyRoute,
         ],
     },
 ];

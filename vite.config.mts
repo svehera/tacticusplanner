@@ -24,4 +24,9 @@ export default defineConfig({
     build: {
         target: browserslistToEsbuild(['>0.2%', 'not dead', 'not op_mini all']),
     },
+    resolve: {
+        alias: {
+            src: "/src",
+        },
+    },
 });

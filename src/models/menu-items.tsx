@@ -21,6 +21,7 @@ import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import TableChartIcon from '@mui/icons-material/TableChart';
 
 import { CharacterImage } from '../shared-components/character-image';
+import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -77,6 +78,7 @@ export const menuItemById = {
     home: new MenuItemTP('Home', <HomeIcon />, '/home', 'Tacticus Planner'),
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
     ty: new MenuItemTP('Thank You', <HealthAndSafetyIcon />, '/ty', 'Thank You Page'),
+    faq: faqMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [

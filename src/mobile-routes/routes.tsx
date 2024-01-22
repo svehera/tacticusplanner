@@ -5,6 +5,7 @@ import { redirect, RouteObject } from 'react-router-dom';
 import MobileApp from '../mobile-app';
 import { LegendaryEvents } from './legendary-events/legendary-events';
 import { LegendaryEventEnum } from '../models/enums';
+import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -162,6 +163,7 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
                     return { Component: Thanks };
                 },
             },
+            faqLazyRoute,
         ],
     },
 ];
