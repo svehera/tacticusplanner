@@ -64,11 +64,7 @@ export const DirtyDozen = () => {
             valueGetter: (props: ValueGetterParams<IDirtyDozenChar>) => {
                 const characterId = props.data?.Name;
                 const character = characters.find(x => x.name === characterId);
-                if (character) {
-                    return character.rank;
-                } else {
-                    return characterId;
-                }
+                return character?.rank;
             },
             cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {
                 const rank = props.value ?? 0;
@@ -81,19 +77,20 @@ export const DirtyDozen = () => {
         createScoreColumn('GROrk', 'Ork', 'ork'),
         createScoreColumn('GRMortarion', 'Mortarion', 'mortarion'),
         createScoreColumn('GRScreamer', 'Screamer', 'screamer'),
+        createScoreColumn('GRRogalDorn', 'Rogal Dorn', 'necron'),
     ]);
 
     return (
         <div style={{ margin: 20 }}>
             <Typography variant="subtitle1" component="div" sx={{ flexGrow: 1 }}>
                 Based on{' '}
-                <Link to={'https://tacticus.fandom.com/wiki/Infographics#Dirty_Dozen_Series'} target={'_blank'}>
+                <Link to={'https://www.youtube.com/watch?v=uRsbtrb0nks'} target={'_blank'}>
                     Nandi&apos;s infographics{' '}
                 </Link>{' '}
-                (October 2023)
+                (January 2024)
             </Typography>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Info /> Hold Shift to sort by multiple columns
+                <Info /> Hold Shift to order by multiple columns
             </div>
 
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 130px)', width: '100%' }}>

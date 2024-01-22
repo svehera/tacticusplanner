@@ -1,6 +1,7 @@
 ﻿import { ICharacter2 } from '../models/interfaces';
 import { Rank, Rarity, RarityStars } from '../models/enums';
 import { StaticDataService } from './static-data.service';
+import { sum } from 'lodash';
 
 export class UtilsService {
     public static maxCharacterPower = this.getCharacterPower({
@@ -48,18 +49,16 @@ export class UtilsService {
         if (!dirtyDozenChar) {
             return 1;
         }
-        const numberOfCriteria = 6;
-        return (
-            1 +
-            (dirtyDozenChar.Pvp +
-                dirtyDozenChar.GROrk +
-                dirtyDozenChar.GRMortarion +
-                dirtyDozenChar.GRNecron +
-                dirtyDozenChar.GRTyranid +
-                dirtyDozenChar.GRScreamer +
-                -numberOfCriteria) /
-                100
-        );
+        const rankings: number[] = [
+            dirtyDozenChar.Pvp,
+            dirtyDozenChar.GROrk,
+            dirtyDozenChar.GRMortarion,
+            dirtyDozenChar.GRNecron,
+            dirtyDozenChar.GRTyranid,
+            dirtyDozenChar.GRScreamer,
+            dirtyDozenChar.GRRogalDorn,
+        ];
+        return 1 + (sum(rankings) - rankings.length) / 100;
     }
 
     public static getAbilityCoeff(level: number): number {
