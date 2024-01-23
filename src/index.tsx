@@ -8,7 +8,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 import { RouterProvider } from 'react-router-dom';
-import { AuthProvider } from './contexts/auth';
+import { AuthProvider } from './contexts/auth.provider';
 import { closeSnackbar, SnackbarOrigin, SnackbarProvider } from 'notistack';
 import { isMobile } from 'react-device-detect';
 import { routes } from './app-routing';

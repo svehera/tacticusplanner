@@ -22,7 +22,7 @@ const DesktopApp = () => {
                 search: '?' + searchParams.toString(),
             });
         }
-        if (location.pathname === '/') {
+        if (!redirect && location.pathname === '/') {
             navigate('/home');
         }
     }, []);

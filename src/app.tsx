@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { StoreProvider } from './reducers/store.provider';
+import { StoreProvider } from './reducers/store.provider2';
 
 import { StaticDataService } from './services';
 

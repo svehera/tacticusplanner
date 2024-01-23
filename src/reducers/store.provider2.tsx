@@ -1,29 +1,26 @@
-﻿import React, { createContext, useEffect, useMemo, useState } from 'react';
-import { AxiosError } from 'axios';
-import { isEqual } from 'lodash';
-import { enqueueSnackbar } from 'notistack';
-
-import { IDispatchContext, IGlobalState } from '../models/interfaces';
-import { charactersReducer } from './characters.reducer';
-import { viewPreferencesReducer } from './view-settings.reducer';
-import { autoTeamsPreferencesReducer } from './auto-teams-settings.reducer';
+﻿import React, { useEffect, useMemo, useState } from 'react';
+import { useAuth } from '../contexts/auth';
 import { convertData, PersonalDataLocalStorage } from '../services';
+import { GlobalState } from '../models/global-state';
+import { charactersReducer } from './characters.reducer';
+import { goalsReducer } from './goals.reducer';
+import { viewPreferencesReducer } from './view-settings.reducer';
+import { dailyRaidsPreferencesReducer } from './daily-raids-settings.reducer';
+import { autoTeamsPreferencesReducer } from './auto-teams-settings.reducer';
 import { selectedTeamsOrderReducer } from './selected-teams-order.reducer';
 import { leSelectedRequirementsReducer } from './le-selected-requirements.reducer';
 import { leSelectedTeamsReducer } from './le-selected-teams.reducer';
 import { leProgressReducer } from './le-progress.reducer';
-import { goalsReducer } from './goals.reducer';
-import { useAuth } from '../contexts/auth';
-import { IErrorResponse } from '../api/api-interfaces';
-import { getUserDataApi, setUserDataApi } from '../api/api-functions';
-import { GlobalState } from '../models/global-state';
 import { campaignsProgressReducer } from './campaigns-progress.reducer';
-import { dailyRaidsPreferencesReducer } from './daily-raids-settings.reducer';
 import { inventoryReducer } from './inventory.reducer';
 import { dailyRaidsReducer } from './dailyRaids.reducer';
-
-export const StoreContext = createContext<IGlobalState>({} as any);
-export const DispatchContext = createContext<IDispatchContext>({} as any);
+import { IDispatchContext, IGlobalState } from '../models/interfaces';
+import { getUserDataApi, setUserDataApi } from '../api/api-functions';
+import { enqueueSnackbar } from 'notistack';
+import { AxiosError } from 'axios';
+import { IErrorResponse } from '../api/api-interfaces';
+import { isEqual } from 'lodash';
+import { DispatchContext, StoreContext } from './store.provider';
 
 export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const { isAuthenticated, setUser, logout } = useAuth();
