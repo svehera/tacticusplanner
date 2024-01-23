@@ -6,6 +6,7 @@ import MobileApp from '../mobile-app';
 import { LegendaryEvents } from './legendary-events/legendary-events';
 import { LegendaryEventEnum } from '../models/enums';
 import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
+import { dirtyDozenLazyRoute } from 'src/v2/pages/dirty-dozen/dirty-dozen.route';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -121,13 +122,7 @@ const learnRoutes: RouteObject[] = [
             return { Component: Campaigns };
         },
     },
-    {
-        path: 'learn/dirtyDozen',
-        async lazy() {
-            const { DirtyDozen } = await import('../routes/dirty-dozen/dirty-dozen');
-            return { Component: DirtyDozen };
-        },
-    },
+    dirtyDozenLazyRoute,
 ];
 
 export const mobileAppRoutes: () => RouteObject[] = () => [

@@ -18,6 +18,11 @@ code {
     font-weight: bold;
 }
 
+.flex-row {
+    display: flex;
+    align-items: center;
+}
+
 .alpha {
     background-color: #93c47d;
 }

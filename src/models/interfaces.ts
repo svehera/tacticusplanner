@@ -101,18 +101,6 @@ export interface IDamageTypes {
     passiveAbility?: DamageType;
 }
 
-export interface IDirtyDozenChar {
-    Name: string;
-    Position: number;
-    Pvp: number;
-    GRTyranid: number;
-    GRNecron: number;
-    GROrk: number;
-    GRMortarion: number;
-    GRScreamer: number;
-    GRRogalDorn: number;
-}
-
 export type ICharacter = IUnitData & IPersonalCharacter;
 
 export type ICharLegendaryEvents = Record<LegendaryEventEnum, ICharLegendaryEvent>;

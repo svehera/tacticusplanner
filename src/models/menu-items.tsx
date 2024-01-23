@@ -10,7 +10,6 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import HomeIcon from '@mui/icons-material/Home';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
-import DirtyLensIcon from '@mui/icons-material/DirtyLens';
 import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
@@ -22,6 +21,7 @@ import TableChartIcon from '@mui/icons-material/TableChart';
 
 import { CharacterImage } from '../shared-components/character-image';
 import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
+import { dirtyDozenMenuItem } from 'src/v2/pages/dirty-dozen/dirty-dozen.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -73,7 +73,7 @@ export const menuItemById = {
     upgrades: new MenuItemTP('Upgrades', <ListIcon />, '/learn/upgrades'),
     rankLookup: new MenuItemTP('Rank Lookup', <MilitaryTechIcon />, '/learn/rankLookup'),
     campaigns: new MenuItemTP('Campaigns', <FormatListNumberedIcon />, '/learn/campaigns'),
-    dirtyDozen: new MenuItemTP('Dirty Dozen', <DirtyLensIcon />, '/learn/dirtyDozen'),
+    dirtyDozen: dirtyDozenMenuItem,
 
     home: new MenuItemTP('Home', <HomeIcon />, '/home', 'Tacticus Planner'),
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
