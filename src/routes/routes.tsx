@@ -7,6 +7,7 @@ import LegendaryEvent from './legendary-events/legendary-event';
 import { LegendaryEventEnum } from '../models/enums';
 import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
 import { dirtyDozenLazyRoute } from 'src/v2/pages/dirty-dozen/dirty-dozen.route';
+import { insightsLazyRoute } from 'src/v2/pages/insights/insights.route';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -111,6 +112,7 @@ const learnRoutes: RouteObject[] = [
         },
     },
     dirtyDozenLazyRoute,
+    insightsLazyRoute,
 ];
 
 export const appRoutes: () => RouteObject[] = () => [

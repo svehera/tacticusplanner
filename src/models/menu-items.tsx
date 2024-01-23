@@ -22,6 +22,7 @@ import TableChartIcon from '@mui/icons-material/TableChart';
 import { CharacterImage } from '../shared-components/character-image';
 import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
 import { dirtyDozenMenuItem } from 'src/v2/pages/dirty-dozen/dirty-dozen.menu-item';
+import { insightsMenuItem } from 'src/v2/pages/insights/insights.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -74,6 +75,7 @@ export const menuItemById = {
     rankLookup: new MenuItemTP('Rank Lookup', <MilitaryTechIcon />, '/learn/rankLookup'),
     campaigns: new MenuItemTP('Campaigns', <FormatListNumberedIcon />, '/learn/campaigns'),
     dirtyDozen: dirtyDozenMenuItem,
+    insights: insightsMenuItem,
 
     home: new MenuItemTP('Home', <HomeIcon />, '/home', 'Tacticus Planner'),
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
@@ -103,6 +105,7 @@ export const learnSubMenu: MenuItemTP[] = [
     menuItemById['rankLookup'],
     menuItemById['campaigns'],
     menuItemById['dirtyDozen'],
+    menuItemById['insights'],
 ];
 
 export const miscMenuItems: MenuItemTP[] = [menuItemById['home'], menuItemById['contacts'], menuItemById['ty']];
