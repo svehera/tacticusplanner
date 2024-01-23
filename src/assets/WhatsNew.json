@@ -1,6 +1,25 @@
 ﻿{
-    "currentVersion": "1.3.2",
+    "currentVersion": "1.3.3",
     "releaseNotes": [
+        {
+            "version": "1.3.3",
+            "date": "January 23",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added F.A.Q (Frequently Asked Questions) page",
+                    "route": "/faq",
+                    "mobileRoute": "/mobile/faq"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated Nandi's Dirty Dozen to January 2024 data",
+                    "route": "learn/dirtyDozen"
+                }
+            ],
+            "bugFixes": []
+        },
         {
             "version": "1.3.2",
             "date": "January 14",

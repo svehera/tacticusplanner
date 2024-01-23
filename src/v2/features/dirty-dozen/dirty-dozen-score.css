@@ -1,0 +1,14 @@
+﻿.dirty-dozen-score-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.dirty-dozen-score {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    font-weight: bolder;
+    border: 1px solid black;
+}

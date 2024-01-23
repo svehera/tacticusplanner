@@ -1564,7 +1564,6 @@
         "Number": 69,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "tanGida.png",
-        "ReleaseRarity": 3
+        "Icon": "tanGida.png"
     }
 ]
