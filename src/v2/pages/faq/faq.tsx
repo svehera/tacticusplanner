@@ -16,13 +16,13 @@ export const Faq = () => {
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center',
+                margin: 'auto',
                 maxWidth: isMobile ? undefined : 800,
             }}>
             <p>
                 Bellow you&apos;ll find answers to the most common questions you may have on the Tacticus Planner app.
                 If you still can&apos;t find the answer you&apos;re looking for, just{' '}
-                <Link to={'../contacts'}>Contact us</Link>
+                <Link to={'../contacts'}>Contact me</Link>
             </p>
             {map(itemsByCategories, (items, category) => (
                 <FaqCategory key={category} categoryName={category} items={items} />
