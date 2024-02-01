@@ -170,6 +170,7 @@ export const defaultCampaignsProgress: ICampaignsProgress = {
     'Octarius Mirror Elite': 40,
 
     'Saim-Hann': 75,
+    'Saim-Hann Mirror': 75,
 };
 
 export const campaignsNames: Array<keyof ICampaignsProgress> = Object.keys(defaultCampaignsProgress) as Array<
