@@ -1,6 +1,5 @@
 ﻿import React from 'react';
 
-import aunshi from '../assets/legendary-events/Aunshi.json';
 import ragnar from '../assets/legendary-events/Ragnar.json';
 import shadowsun from '../assets/legendary-events/Shadowsun.json';
 import vitruvius from '../assets/legendary-events/Vitruvius.json';
@@ -55,7 +54,7 @@ export const menuItemById = {
         'Aun Shi LE',
         <CharacterImage icon={'Aun-shi.png'} imageSize={24} />,
         '/plan/le/aunshi',
-        `Aun Shi ${aunshi.eventStage}/3 (${aunshi.nextEventDate})`
+        'Aun Shi (Finished)'
     ),
     ragnar: new MenuItemTP(
         'Ragnar LE',

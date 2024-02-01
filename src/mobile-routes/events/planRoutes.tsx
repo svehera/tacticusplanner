@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { StaticDataService } from '../../services';
 import { CharacterImage } from '../../shared-components/character-image';
 import { menuItemById } from '../../models/menu-items';
+import { Conditional } from 'src/v2/components/conditional';
 
 export const PlanRoutes = () => {
     const navigate = useNavigate();
@@ -57,28 +58,37 @@ export const PlanRoutes = () => {
                 />
             </Card>
 
-            {StaticDataService.legendaryEvents.map(le => (
-                <Card
-                    key={le.name}
-                    onClick={() => navigate(le.mobileRoute)}
-                    sx={{
-                        width: 350,
-                        minHeight: 200,
-                    }}>
-                    <CardHeader
-                        title={
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                <CharacterImage icon={le.icon} name={le.name} /> {le.name}
-                            </div>
-                        }
-                        subheader={'Legendary Event'}
-                    />
-                    <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
-                        <span>Stage: {le.stage}/3</span>
-                        <span>Next event: {le.nextEventDate}</span>
-                    </CardContent>
-                </Card>
-            ))}
+            {StaticDataService.legendaryEvents.map(le => {
+                const isFinished = le.nextEventDate === 'Finished';
+                return (
+                    <Card
+                        key={le.name}
+                        onClick={() => navigate(le.mobileRoute)}
+                        sx={{
+                            width: 350,
+                            minHeight: 200,
+                            opacity: isFinished ? 0.5 : 1,
+                        }}>
+                        <CardHeader
+                            title={
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                    <CharacterImage icon={le.icon} name={le.name} /> {le.name}
+                                </div>
+                            }
+                            subheader={'Legendary Event'}
+                        />
+                        <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
+                            <Conditional condition={isFinished}>
+                                <span>Finished</span>
+                            </Conditional>
+                            <Conditional condition={!isFinished}>
+                                <span>Stage: {le.stage}/3</span>
+                                <span>Next event: {le.nextEventDate}</span>
+                            </Conditional>
+                        </CardContent>
+                    </Card>
+                );
+            })}
         </div>
     );
 };

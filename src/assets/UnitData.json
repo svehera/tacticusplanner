@@ -1100,8 +1100,7 @@
         "Number": 51,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Aun-shi.png",
-        "ReleaseRarity": 5
+        "Icon": "Aun-shi.png"
     },
     {
         "Name": "Shadowsun",
