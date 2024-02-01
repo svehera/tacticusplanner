@@ -13,7 +13,7 @@ const DesktopApp = () => {
         const redirect = searchParams.get('redirect');
 
         // Redirect to mobile view if on mobile device and preferred view is not set to desktop
-        if (isMobile && !!redirect && (!preferredView || preferredView === 'mobile')) {
+        if (isMobile && !redirect && (!preferredView || preferredView === 'mobile')) {
             navigate('/mobile/home');
             return;
         }
