@@ -6,13 +6,13 @@
     Rarity,
     RarityStars,
     RarityString,
-    WyoFilter,
-    WyoOrder,
 } from './enums';
 import { ICampaignsProgress, ICharacter2, ICharProgression, IPersonalData2 } from './interfaces';
 import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from './legendary-events';
 import { RagnarLegendaryEvent } from './legendary-events/ragnar.le';
 import { VitruviusLegendaryEvent } from './legendary-events/vitruvius.le';
+import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
+import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,
@@ -202,8 +202,8 @@ export const defaultData: IPersonalData2 = {
         hideCompleted: false,
         craftableItemsInInventory: false,
         hideNames: false,
-        wyoFilter: WyoFilter.None,
-        wyoOrder: WyoOrder.Faction,
+        wyoFilter: CharactersFilterBy.None,
+        wyoOrder: CharactersOrderBy.Faction,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,

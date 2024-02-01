@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { Rank, Rarity, RarityStars, WyoFilter, WyoOrder } from '../models/enums';
+import { Rank, Rarity, RarityStars } from '../models/enums';
 import { ICharacter2 } from '../models/interfaces';
 import { rankToLevel } from '../models/constants';
 
@@ -67,38 +67,6 @@ export const rankToString = (rank: Rank): string => {
             return 'Diamond II';
         case Rank.Diamond3:
             return 'Diamond III';
-        default:
-            return '';
-    }
-};
-
-export const wyoOrderToString = (order: WyoOrder): string => {
-    switch (order) {
-        case WyoOrder.FactionPower:
-            return 'By Faction Power';
-        case WyoOrder.CharacterPower:
-            return 'By Character Power';
-        case WyoOrder.AbilitiesLevel:
-            return 'By Abilities Level';
-        case WyoOrder.Rank:
-            return 'By Rank';
-        case WyoOrder.Faction:
-            return 'By Faction';
-        default:
-            return '';
-    }
-};
-
-export const wyoFilterToString = (filter: WyoFilter): string => {
-    switch (filter) {
-        case WyoFilter.NeedToAscend:
-            return 'Need to Ascend';
-        case WyoFilter.NeedToLevel:
-            return 'Need to Level';
-        case WyoFilter.CanUpgrade:
-            return 'Can Upgrade';
-        case WyoFilter.None:
-            return 'None';
         default:
             return '';
     }

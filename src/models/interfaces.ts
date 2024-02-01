@@ -15,8 +15,6 @@
     RarityStars,
     RarityString,
     Trait,
-    WyoFilter,
-    WyoOrder,
 } from './enums';
 import React from 'react';
 import { CharactersAction } from '../reducers/characters.reducer';
@@ -31,6 +29,8 @@ import { CampaignsProgressAction } from '../reducers/campaigns-progress.reducer'
 import { DailyRaidsPreferencesAction } from '../reducers/daily-raids-settings.reducer';
 import { InventoryAction } from '../reducers/inventory.reducer';
 import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
+import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
+import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -327,8 +327,8 @@ export interface IViewPreferences {
     craftableItemsInInventory: boolean;
     hideCompleted: boolean;
     hideNames: boolean;
-    wyoFilter: WyoFilter;
-    wyoOrder: WyoOrder;
+    wyoFilter: CharactersFilterBy;
+    wyoOrder: CharactersOrderBy;
 }
 
 export interface IAutoTeamsPreferences {

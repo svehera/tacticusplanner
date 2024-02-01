@@ -1,18 +1,11 @@
-﻿import { ICharacter2 } from '../models/interfaces';
-import { Rank, Rarity, RarityStars } from '../models/enums';
-import { sum } from 'lodash';
+﻿import { sum } from 'lodash';
+import { ICharacter2 } from 'src/models/interfaces';
+import { Rank, RarityStars } from 'src/models/enums';
+
 import dirtyDozenData from 'src/v2/data/dirtyDozen.json';
 import { IDirtyDozenChar } from 'src/v2/features/dirty-dozen/dirty-dozen.models';
 
-export class UtilsService {
-    public static maxCharacterPower = this.getCharacterPower({
-        stars: RarityStars.BlueStar,
-        activeAbilityLevel: 50,
-        passiveAbilityLevel: 50,
-        rank: Rank.Diamond3,
-        rarity: Rarity.Legendary,
-    } as ICharacter2);
-
+export class CharactersPowerService {
     public static getCharacterPower(character: ICharacter2): number {
         if (character.rank === Rank.Locked) {
             return 0;
@@ -26,21 +19,22 @@ export class UtilsService {
 
         const statsScore =
             statsBase **
-            (UtilsService.getStarsCoeff(character.stars) *
-                (UtilsService.getRankCoeff(character.rank) + upgradeBoost * (character.upgrades?.length ?? 0)));
+            (CharactersPowerService.getStarsCoeff(character.stars) *
+                (CharactersPowerService.getRankCoeff(character.rank) +
+                    upgradeBoost * (character.upgrades?.length ?? 0)));
 
         // Possible coefficient to reflect relative character usefulness by boosting power based on DirtyDozen scores:
         // dirtyDozenCoeff = 1 + (Sum_rankings – num_rankings )/100
         // Example Bellator: 1 + (3.5+5+3.5+4.5+1+4.5 - 6)/100 = 1.16
         // Characters should default rankings of "1" (dirtyDozenCoeff = 1) if not included in the dirtyDozen table.
-        const dirtyDozenCoeff = UtilsService.getDirtyDozenCoeff(character.name);
+        const dirtyDozenCoeff = CharactersPowerService.getDirtyDozenCoeff(character.name);
 
         const powerLevel =
             dirtyDozenCoeff *
             (statsWeight * statsScore +
                 abilityWeight *
-                    (UtilsService.getAbilityCoeff(character.activeAbilityLevel) +
-                        UtilsService.getAbilityCoeff(character.passiveAbilityLevel)));
+                    (CharactersPowerService.getAbilityCoeff(character.activeAbilityLevel) +
+                        CharactersPowerService.getAbilityCoeff(character.passiveAbilityLevel)));
 
         return Math.round(powerLevel);
     }

@@ -15,7 +15,6 @@ import Diversity3Icon from '@mui/icons-material/Diversity3';
 import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import EventRepeatIcon from '@mui/icons-material/EventRepeat';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import TableChartIcon from '@mui/icons-material/TableChart';
 
@@ -23,6 +22,7 @@ import { CharacterImage } from '../shared-components/character-image';
 import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
 import { dirtyDozenMenuItem } from 'src/v2/pages/dirty-dozen/dirty-dozen.menu-item';
 import { insightsMenuItem } from 'src/v2/pages/insights/insights.menu-item';
+import { wyoMenuItem } from 'src/v2/pages/who-you-own/who-you-own.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -38,7 +38,7 @@ export class MenuItemTP {
 }
 
 export const menuItemById = {
-    wyo: new MenuItemTP('Who You Own', <HowToRegIcon />, '/input/wyo'),
+    wyo: wyoMenuItem,
     campaignsProgress: new MenuItemTP('Campaigns Progress', <AppRegistrationIcon />, '/input/campaignsProgress'),
     inventory: new MenuItemTP('Inventory', <InventoryIcon />, '/input/inventory'),
 
