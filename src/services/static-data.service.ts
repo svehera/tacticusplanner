@@ -106,6 +106,9 @@ export class StaticDataService {
 
             const config = this.campaignConfigs[battle.campaignType as CampaignType];
             const recipe = this.recipeData[battle.reward];
+            if (!recipe) {
+                console.error(battle.reward, 'no recipe');
+            }
             const dropRateKey: keyof IDropRate = recipe?.rarity.toLowerCase() as keyof IDropRate;
 
             const dropRate = config.dropRate[dropRateKey];
@@ -118,7 +121,7 @@ export class StaticDataService {
                 dropRate,
                 energyPerItem: parseFloat(energyPerItem.toFixed(2)),
                 nodeNumber: battle.nodeNumber,
-                rarity: recipe.rarity,
+                rarity: recipe?.rarity,
                 reward: battle.reward,
                 expectedGold: battle.expectedGold,
             };
