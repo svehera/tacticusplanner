@@ -1,7 +1,6 @@
 ﻿import { cloneDeep, groupBy, map, orderBy, sortBy, sum, sumBy, uniq } from 'lodash';
 
 import unitsData from '../assets/UnitData.json';
-import dirtyDozen from '../assets/DirtyDozen.json';
 
 import whatsNew from '../assets/WhatsNew.json';
 import contributors from '../assets/contributors/thankYou.json';
@@ -28,7 +27,6 @@ import {
     IContentCreator,
     IContributor,
     IDailyRaid,
-    IDirtyDozenChar,
     IDropRate,
     IEstimatedRanks,
     IEstimatedRanksSettings,
@@ -48,7 +46,6 @@ import { rarityStringToNumber, rarityToStars } from '../models/constants';
 import { getEnumValues, rankToString } from '../shared-logic/functions';
 
 export class StaticDataService {
-    static readonly dirtyDozenData: IDirtyDozenChar[] = dirtyDozen;
     static readonly whatsNew: IWhatsNew = whatsNew;
     static readonly campaignConfigs: ICampaignConfigs = campaignConfigs;
     static readonly battleData: ICampaignsData = battleData;

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 
 import TopAppBar from './app-bar';
-import { isMobile } from 'react-device-detect';
 
 const DesktopApp = () => {
     const navigate = useNavigate();
@@ -10,10 +10,14 @@ const DesktopApp = () => {
     const preferredView = localStorage.getItem('preferredView');
 
     useEffect(() => {
-        if (isMobile && (!preferredView || preferredView === 'mobile')) {
-            navigate('/mobile/home');
-        }
         const redirect = searchParams.get('redirect');
+
+        // Redirect to mobile view if on mobile device and preferred view is not set to desktop
+        if (isMobile && !redirect && (!preferredView || preferredView === 'mobile')) {
+            navigate('/mobile/home');
+            return;
+        }
+
         if (redirect) {
             searchParams.delete('redirect');
 
@@ -21,16 +25,21 @@ const DesktopApp = () => {
                 pathname: redirect,
                 search: '?' + searchParams.toString(),
             });
+            return;
         }
+
         if (!redirect && location.pathname === '/') {
             navigate('/home');
+            return;
         }
     }, []);
 
     return (
         <div style={{ width: '100%', height: '100%' }}>
             <TopAppBar></TopAppBar>
-            <Outlet />
+            <div style={{ margin: 20 }}>
+                <Outlet />
+            </div>
         </div>
     );
 };

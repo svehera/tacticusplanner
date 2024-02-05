@@ -5,6 +5,11 @@ import { redirect, RouteObject } from 'react-router-dom';
 import MobileApp from '../mobile-app';
 import { LegendaryEvents } from './legendary-events/legendary-events';
 import { LegendaryEventEnum } from '../models/enums';
+import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
+import { dirtyDozenLazyRoute } from 'src/v2/pages/dirty-dozen/dirty-dozen.route';
+import { insightsLazyRoute } from 'src/v2/pages/insights/insights.route';
+import { wyoLazyRoute } from 'src/v2/pages/who-you-own/who-you-own.route';
+import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.route';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -14,13 +19,7 @@ const inputRoutes: RouteObject[] = [
             return { Component: InputRoutes };
         },
     },
-    {
-        path: 'input/wyo',
-        async lazy() {
-            const { WhoYouOwn } = await import('../routes/who-you-own/who-you-own');
-            return { Component: WhoYouOwn };
-        },
-    },
+    wyoLazyRoute,
     {
         path: 'input/campaignsProgress',
         async lazy() {
@@ -120,13 +119,8 @@ const learnRoutes: RouteObject[] = [
             return { Component: Campaigns };
         },
     },
-    {
-        path: 'learn/dirtyDozen',
-        async lazy() {
-            const { DirtyDozen } = await import('../routes/dirty-dozen/dirty-dozen');
-            return { Component: DirtyDozen };
-        },
-    },
+    dirtyDozenLazyRoute,
+    insightsLazyRoute,
 ];
 
 export const mobileAppRoutes: () => RouteObject[] = () => [
@@ -162,6 +156,8 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
                     return { Component: Thanks };
                 },
             },
+            faqLazyRoute,
+            sharedRosterRoute,
         ],
     },
 ];

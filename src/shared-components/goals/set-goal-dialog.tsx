@@ -1,12 +1,10 @@
 ﻿import React, { useContext, useMemo, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import {
-    Checkbox,
     DialogActions,
     DialogContent,
     DialogTitle,
     FormControl,
-    FormControlLabel,
     Input,
     MenuItem,
     Select,
@@ -15,23 +13,22 @@ import {
 import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
-import { ICharacter2, IMaterialRecipeIngredientFull, IPersonalGoal } from '../../models/interfaces';
+import { ICharacter2, IMaterialRecipeIngredientFull, IPersonalGoal } from 'src/models/interfaces';
 import { v4 } from 'uuid';
-import { PersonalGoalType, Rank, Rarity } from '../../models/enums';
+import { PersonalGoalType, Rank, Rarity } from 'src/models/enums';
 import InputLabel from '@mui/material/InputLabel';
-import { getEnumValues, rankToString } from '../../shared-logic/functions';
+import { getEnumValues, rankToString } from 'src/shared-logic/functions';
 import { RankImage } from '../rank-image';
 import { Tooltip } from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
-import { CharacterItem } from '../character-item';
-import { DispatchContext, StoreContext } from '../../reducers/store.provider';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { CharactersAutocomplete } from '../characters-autocomplete';
 import { RankSelect } from '../rank-select';
 import { RaritySelect } from '../rarity-select';
 import { CharacterTitle } from '../character-title';
 import { isEqual } from 'lodash';
 import { CharacterUpgrades } from '../character-upgrades';
-import { rarityToMaxRank } from '../../models/constants';
+import { rarityToMaxRank } from 'src/models/constants';
 
 const getDefaultForm = (priority: number): IPersonalGoal => ({
     id: v4(),

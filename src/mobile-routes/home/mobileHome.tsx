@@ -1,5 +1,5 @@
 ﻿import React, { useContext, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Badge, Tooltip } from '@mui/material';
 import ViewSwitch from '../../shared-components/view-switch';
 import { UserMenu } from '../../shared-components/user-menu/user-menu';
@@ -10,9 +10,11 @@ import { WhatsNewDialog } from '../../shared-components/whats-new.dialog';
 import IconButton from '@mui/material/IconButton';
 import { DiscordIcon } from '../../shared-components/icons/discord.icon';
 import { Home } from '../../features/misc/home/home';
+import { menuItemById } from 'src/models/menu-items';
 
 export const MobileHome = () => {
     const { seenAppVersion } = useContext(StoreContext);
+    const navigate = useNavigate();
 
     const [showWhatsNew, setShowWhatsNew] = useState(false);
 
@@ -26,6 +28,9 @@ export const MobileHome = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                     <ViewSwitch />
+                    <IconButton color="inherit" onClick={() => navigate('/mobile/faq')}>
+                        <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
+                    </IconButton>
                     <Tooltip title="What's new">
                         <IconButton onClick={() => setShowWhatsNew(true)}>
                             <Badge color="secondary" variant="dot" invisible={hasNewVersion}>

@@ -1,0 +1,51 @@
+﻿.character-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 75px;
+}
+
+.abilities {
+    position: relative;
+    top: -7px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.character-level {
+    position: relative;
+    top: -15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #012a41;
+    border: 1px solid gold;
+    color: white;
+
+    font-size: 12px;
+}
+
+.ability-level {
+    width: 15px;
+    height: 15px;
+
+    line-height: 15px;
+    text-align: center;
+
+    border-radius: 50%;
+    border: 1px solid gold;
+    background-color: #012a41;
+    color: white;
+
+    font-size: 12px;
+}
+
+.character-rarity-rank {
+    display: flex;
+    align-items: center;
+    margin-top: -15px;
+    justify-content: center;
+}

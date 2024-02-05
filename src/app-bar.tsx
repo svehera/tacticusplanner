@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Badge, Divider, ListItemIcon, Menu, MenuItem, useMediaQuery } from '@mui/material';
+import { Badge, Divider, ListItemIcon, Menu, MenuItem, Tooltip, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { discordInvitationLink, isTabletOrMobileMediaQuery } from './models/constants';
 import { usePopUpControls } from './hooks/pop-up-controls';
@@ -20,6 +20,7 @@ import { DiscordIcon } from './shared-components/icons/discord.icon';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import ListItemText from '@mui/material/ListItemText';
 import { inputSubMenu, learnSubMenu, menuItemById, MenuItemTP, miscMenuItems, planSubMenu } from './models/menu-items';
+import IconButton from '@mui/material/IconButton';
 
 const TopAppBar = () => {
     const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
@@ -89,6 +90,8 @@ const TopAppBar = () => {
                 <ListItemText>Discord</ListItemText>
             </MenuItem>
 
+            {generateMenuItems([menuItemById.faq])}
+
             <Divider />
 
             {generateMenuItems(inputSubMenu)}
@@ -120,6 +123,9 @@ const TopAppBar = () => {
                     </Typography>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         {nav}
+                        <IconButton color="inherit" onClick={() => navigate('./faq')}>
+                            <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
+                        </IconButton>
                         <ViewSwitch />
                         <Button
                             id="basic-button"

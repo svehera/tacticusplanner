@@ -12,8 +12,7 @@ $columnCount2: 2;
     }
 }
 
-.box {
-    color: white;
+.factions-grid {
     column-gap: 25px;
     display: grid;
     grid-auto-flow: column;
@@ -30,23 +29,6 @@ $columnCount2: 2;
 
     /* 1 column */
     @media (max-width: 800px) {
-        display: flex;
-        flex-wrap: wrap;
-    }
-}
-
-.faction-title {
-    margin-bottom: 0;
-    margin-top: 5px;
-    border-top: 2px solid gold;
-    font-weight: 500;
-}
-
-.characters-box {
-    //background-color: rgba(0, 0, 0, 0.5);
-    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
-
-    &.mixed {
         display: flex;
         flex-wrap: wrap;
     }

@@ -52,14 +52,15 @@ export const CharacterDetails = ({
 
     const getNativeSelectControl = (
         value: number,
+        label: string,
         name: keyof ICharacter2,
         entries: Array<number>,
         getName: (value: number) => string,
         icon?: (value: number) => React.JSX.Element
     ) => (
         <FormControl fullWidth>
-            <InputLabel>{name.charAt(0).toUpperCase() + name.slice(1)}</InputLabel>
-            <Select label={name} value={value} onChange={event => handleInputChange(name, +event.target.value)}>
+            <InputLabel>{label}</InputLabel>
+            <Select label={label} value={value} onChange={event => handleInputChange(name, +event.target.value)}>
                 {entries.map(value => (
                     <MenuItem key={value} value={value}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -78,6 +79,7 @@ export const CharacterDetails = ({
                 <Grid item xs={6}>
                     {getNativeSelectControl(
                         formData.rarity,
+                        'Rarity',
                         'rarity',
                         rarityEntries,
                         value => Rarity[value],
@@ -87,15 +89,22 @@ export const CharacterDetails = ({
                     )}
                 </Grid>
                 <Grid item xs={6}>
-                    {getNativeSelectControl(formData.stars, 'stars', starsEntries, rarityStarsToString, value => (
-                        <StarsImage stars={value} />
-                    ))}
+                    {getNativeSelectControl(
+                        formData.stars,
+                        'Stars',
+                        'stars',
+                        starsEntries,
+                        rarityStarsToString,
+                        value => (
+                            <StarsImage stars={value} />
+                        )
+                    )}
                 </Grid>
             </Grid>
 
             <Grid container spacing={2} alignItems="center">
                 <Grid item xs={6}>
-                    {getNativeSelectControl(formData.rank, 'rank', rankEntries, rankToString, value => (
+                    {getNativeSelectControl(formData.rank, 'Rank', 'rank', rankEntries, rankToString, value => (
                         <RankImage rank={value} />
                     ))}
                 </Grid>
@@ -124,7 +133,7 @@ export const CharacterDetails = ({
                 </Grid>
             </Grid>
 
-            {getNativeSelectControl(formData.bias, 'bias', biasEntries, value => CharacterBias[value])}
+            {getNativeSelectControl(formData.bias, 'LRE Bias', 'bias', biasEntries, value => CharacterBias[value])}
 
             {formData.rank > Rank.Locked ? (
                 <React.Fragment>

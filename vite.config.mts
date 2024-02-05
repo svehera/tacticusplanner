@@ -5,7 +5,7 @@ import browserslistToEsbuild from 'browserslist-to-esbuild';
 
 export default defineConfig({
     // depending on your application, base can also be "/"
-    base: '',
+    base: '/',
     plugins: [
         react({
             jsxImportSource: '@emotion/react',
@@ -23,5 +23,10 @@ export default defineConfig({
     },
     build: {
         target: browserslistToEsbuild(['>0.2%', 'not dead', 'not op_mini all']),
+    },
+    resolve: {
+        alias: {
+            src: "/src",
+        },
     },
 });

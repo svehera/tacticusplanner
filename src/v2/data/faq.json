@@ -1,0 +1,39 @@
+﻿{
+    "items": [
+        {
+            "category": "Getting Started",
+            "question": "Where should I start?",
+            "answer": "Manually input your roster data on the 'Who You Own' page. Check the 'Plan' section for Legendary Events and follow the suggested teams."
+        },
+        {
+            "category": "Data Management",
+            "question": "Is there a way to import my roster from the game?",
+            "answer": "Unfortunately, the game doesn't allow direct imports. You'll need to sync your data manually."
+        },
+        {
+            "category": "Data Management",
+            "question": "I've lost all my roster. Can I restore it?",
+            "answer": "Use the 'Restore backup' option in the user menu. You can also manually backup and restore via 'Export data' and 'Import data.'"
+        },
+        {
+            "category": "App Features",
+            "question": "Is there a Dark mode for the site yet?",
+            "answer": "Dark mode is on the to-do list, but for now, consider using browser extensions like Dark Reader."
+        },
+        {
+            "category": "App Features",
+            "question": "What do the numbers mean once I set a goal?",
+            "answer": "The bold number indicates number of days it takes to farm highest planned items across all goals; the one in parentheses is the number of days for specific goal. Sometimes they can match sometimes no. E.g. you have top #1 priority goal that takes 8 days to farm some legendary upgrade but not all 8 day it will take full of your daily energy so the rest of energy can be used to complete other goals and #2 goal can be finish e.g. in 3 days and will have estimate \"8 (3)\"."
+        },
+        {
+            "category": "App Features",
+            "question": "What do the highlighted rows mean in LE master table?",
+            "answer": "The colors represent character rarity."
+        },
+        {
+            "category": "Legendary Events",
+            "question": "Aun Shi, Beta Track, No Summons shows many of the summoners.",
+            "answer": "It's not a 'No Summoner' but a 'No Summon' condition. Certain characters like Aleph, Rev'as, Abraxas, etc., can work Since their summons are purely active abilities you can elect not to use. All those with passive summons (Archimatos on kill, Celeste when hit and a few like that) you can't use."
+        }
+    ]
+}
