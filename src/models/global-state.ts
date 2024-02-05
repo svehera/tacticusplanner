@@ -67,7 +67,10 @@ export class GlobalState implements IGlobalState {
         this.dailyRaids = personalData.dailyRaids ?? defaultData.dailyRaids;
     }
 
-    static initCharacters(chars: Partial<IPersonalCharacterData2>[]): Array<ICharacter2> {
+    static initCharacters(
+        chars: Partial<IPersonalCharacterData2 & { numberOfUnlocked?: number }>[],
+        totalUsers?: number
+    ): Array<ICharacter2> {
         return StaticDataService.unitsData.map(staticData => {
             const personalCharData = chars.find(c => c.name === staticData.name);
             const rank = personalCharData?.rank ?? Rank.Locked;
@@ -96,6 +99,10 @@ export class GlobalState implements IGlobalState {
                 ...staticData,
                 ...combinedData,
                 rank: +combinedData.rank,
+                numberOfUnlocked:
+                    totalUsers && personalCharData?.numberOfUnlocked
+                        ? Math.ceil((personalCharData.numberOfUnlocked / totalUsers) * 100)
+                        : undefined,
             };
         });
     }

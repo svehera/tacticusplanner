@@ -34,8 +34,12 @@ export const ViewControls = ({
                 return 'By Abilities Level';
             case CharactersOrderBy.Rank:
                 return 'By Rank';
+            case CharactersOrderBy.Rarity:
+                return 'By Rarity';
             case CharactersOrderBy.Faction:
                 return 'By Faction';
+            case CharactersOrderBy.UnlockPercentage:
+                return 'By Unlock Percentage';
             default:
                 return '';
         }

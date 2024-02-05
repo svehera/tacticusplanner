@@ -55,6 +55,10 @@ export class CharactersService {
                 );
             case CharactersOrderBy.Rank:
                 return orderBy(characters, ['rank'], ['desc']);
+            case CharactersOrderBy.Rarity:
+                return orderBy(characters, ['rarity'], ['desc']);
+            case CharactersOrderBy.UnlockPercentage:
+                return orderBy(characters, ['numberOfUnlocked'], ['asc']);
             default:
                 return [];
         }
