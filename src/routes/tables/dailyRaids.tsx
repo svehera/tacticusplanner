@@ -106,7 +106,7 @@ export const DailyRaids = () => {
     };
 
     const refresh = () => {
-        setUpgrades(inventory.upgrades);
+        setUpgrades({ ...inventory.upgrades });
         setHasChanges(false);
     };
 
@@ -236,6 +236,7 @@ export const DailyRaids = () => {
     }, [dailyRaidsPreferences.dailyEnergy, dailyRaidsPreferences.shardsEnergy]);
 
     const estimatedRanks: IEstimatedRanks = useMemo(() => {
+        console.log('Updatesd');
         const result = StaticDataService.getRankUpgradeEstimatedDays(
             {
                 dailyEnergy: actualEnergy,
@@ -393,7 +394,10 @@ export const DailyRaids = () => {
                                 <Button
                                     onClick={() => {
                                         dispatch.dailyRaids({ type: 'ResetCompletedBattles' });
-                                        refresh();
+                                        setHasChanges(false);
+                                        setTimeout(() => {
+                                            setUpgrades({ ...inventory.upgrades });
+                                        }, 100);
                                     }}>
                                     <ClearIcon /> Clear Completed Raids
                                 </Button>
