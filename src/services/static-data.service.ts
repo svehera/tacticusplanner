@@ -623,6 +623,10 @@ export class StaticDataService {
                 : settings.dailyEnergy;
 
             for (const material of allMaterials) {
+                if (energyLeft < 5) {
+                    break;
+                }
+
                 const locationsMinEnergyConst = Math.min(...material.locations.map(x => x.energyCost));
                 const isAlreadyPlanned = day.raids.some(
                     x =>
@@ -676,8 +680,11 @@ export class StaticDataService {
                                 farmedItems: locationDailyEnergy / location.energyPerItem,
                                 energySpent: locationDailyEnergy,
                             });
+                            continue;
                         }
-                    } else if (energyLeft > material.totalEnergy) {
+                    }
+
+                    if (energyLeft > material.totalEnergy) {
                         const numberOfBattles = Math.floor(material.totalEnergy / location.energyCost);
                         const maxNumberOfBattles =
                             numberOfBattles > location.dailyBattleCount ? location.dailyBattleCount : numberOfBattles;

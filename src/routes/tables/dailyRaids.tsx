@@ -237,7 +237,6 @@ export const DailyRaids = () => {
     }, [dailyRaidsPreferences.dailyEnergy, dailyRaidsPreferences.shardsEnergy]);
 
     const estimatedRanks: IEstimatedRanks = useMemo(() => {
-        console.log('Updatesd');
         const result = StaticDataService.getRankUpgradeEstimatedDays(
             {
                 dailyEnergy: actualEnergy,
