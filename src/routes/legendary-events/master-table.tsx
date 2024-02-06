@@ -12,6 +12,7 @@ import {
 import { LegendaryEventEnum, Rank, Rarity } from '../../models/enums';
 import {
     Checkbox,
+    Divider,
     FormControl,
     FormControlLabel,
     FormLabel,
@@ -38,7 +39,6 @@ export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>([
         LegendaryEventEnum.Ragnar,
         LegendaryEventEnum.Vitruvius,
-        LegendaryEventEnum.AunShi,
         LegendaryEventEnum.Shadowsun,
     ]);
 
@@ -377,19 +377,20 @@ export const MasterTable = () => {
                             </ListItemIcon>
                             <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Vitruvius]} />
                         </MenuItem>
-                        <MenuItem value={LegendaryEventEnum.AunShi}>
-                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.AunShi) > -1} />
-                            <ListItemIcon>
-                                <CharacterImage icon={'Aun-shi.png'} imageSize={30} />
-                            </ListItemIcon>
-                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.AunShi]} />
-                        </MenuItem>
                         <MenuItem value={LegendaryEventEnum.Shadowsun}>
                             <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Shadowsun) > -1} />
                             <ListItemIcon>
                                 <CharacterImage icon={'ShadowSun.png'} imageSize={30} />
                             </ListItemIcon>
                             <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Shadowsun]} />
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem value={LegendaryEventEnum.AunShi}>
+                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.AunShi) > -1} />
+                            <ListItemIcon>
+                                <CharacterImage icon={'Aun-shi.png'} imageSize={30} />
+                            </ListItemIcon>
+                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.AunShi]} />
                         </MenuItem>
                     </Select>
                 </FormControl>

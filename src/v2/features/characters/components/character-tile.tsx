@@ -12,6 +12,7 @@ import { charsReleaseShards, charsUnlockShards } from 'src/models/constants';
 import { needToAscendCharacter, needToLevelCharacter } from 'src/shared-logic/functions';
 
 import './character-tile.css';
+import { Conditional } from 'src/v2/components/conditional';
 export const CharacterTile = ({
     character,
     onClick,
@@ -73,6 +74,17 @@ export const CharacterTile = ({
                 <RarityImage rarity={character.rarity} />
                 {isUnlocked && <RankImage rank={character.rank} />}
             </div>
+            <Conditional condition={!!character.numberOfUnlocked}>
+                <Tooltip title={`${character.numberOfUnlocked}% of players unlocked this character`} placement={'top'}>
+                    <div
+                        className="character-unlock"
+                        style={{
+                            background: `linear-gradient(to right, green ${character.numberOfUnlocked}%, #012A41 ${character.numberOfUnlocked}%)`,
+                        }}>
+                        {`${character.numberOfUnlocked}%`}
+                    </div>
+                </Tooltip>
+            </Conditional>
         </div>
     );
 };

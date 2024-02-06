@@ -49,3 +49,17 @@
     margin-top: -15px;
     justify-content: center;
 }
+
+.character-unlock {
+    width: 60px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #012a41;
+    border: 1px solid gold;
+    color: white;
+
+    font-size: 12px;
+}

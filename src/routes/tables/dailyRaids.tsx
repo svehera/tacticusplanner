@@ -748,11 +748,9 @@ const RaidItem = ({
                     sx={{ margin: 0 }}
                     labelPlacement={'top'}
                     label={
-                        <Tooltip title={`${collectedItems}/${materialTotalCount} Items`}>
-                            <span style={{ fontSize: 12, fontStyle: 'italic' }}>
-                                {collectedItems}/{materialTotalCount} Items
-                            </span>
-                        </Tooltip>
+                        <span style={{ fontSize: 12, fontStyle: 'italic' }}>
+                            {collectedItems}/{materialTotalCount} Items
+                        </span>
                     }
                 />
                 <Tooltip title={isLocationCompleted ? '' : 'Add to inventory'}>

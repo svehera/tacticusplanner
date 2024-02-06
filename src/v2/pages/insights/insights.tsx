@@ -1,4 +1,4 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { sum } from 'lodash';
 
@@ -18,11 +18,10 @@ import { CharactersGrid } from 'src/v2/features/characters/components/characters
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
 import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
 
-import { StoreContext } from 'src/reducers/store.provider';
 import { Loader } from 'src/v2/components/loader';
+import { GlobalState } from 'src/models/global-state';
 
 export const Insights = () => {
-    const { characters: charactersDefault } = useContext(StoreContext);
     const [viewControls, setViewControls] = useState<IViewControls>({
         filterBy: CharactersFilterBy.None,
         orderBy: CharactersOrderBy.Faction,
@@ -38,7 +37,25 @@ export const Insights = () => {
         return <div>Data failed to load</div>;
     }
 
-    const charactersFiltered = CharactersService.filterCharacters(charactersDefault, viewControls.filterBy, nameFilter);
+    if (!data.averageRosterDataCreationTime) {
+        return (
+            <Box style={{ margin: 'auto' }}>
+                <p>
+                    Registered users: <b>{data.registeredUsers}</b>{' '}
+                </p>
+                <p>
+                    Active users last 30 days: <b>{data.activeLast30Days}</b>{' '}
+                </p>
+                <p>
+                    Active users last 7 days: <b>{data.activeLast7Days}</b>{' '}
+                </p>
+            </Box>
+        );
+    }
+
+    const averageRoster = GlobalState.initCharacters(data.userData, data.activeLast30Days);
+
+    const charactersFiltered = CharactersService.filterCharacters(averageRoster, viewControls.filterBy, nameFilter);
     const totalPower = sum(charactersFiltered.map(character => CharactersPowerService.getCharacterPower(character)));
 
     const factions = CharactersService.orderByFaction(charactersFiltered, viewControls.orderBy);
@@ -47,15 +64,18 @@ export const Insights = () => {
     return (
         <Box style={{ margin: 'auto' }}>
             <p>
-                Registered users: <b>{data.registeredUsers}</b>{' '}
+                Registered users: <b>{data.registeredUsers}</b>
             </p>
             <p>
-                Active users last 30 days: <b>{data.activeLast30Days}</b>{' '}
+                Active users last 30 days: <b>{data.activeLast30Days}</b>
             </p>
             <p>
-                Active users last 7 days: <b>{data.activeLast7Days}</b>{' '}
+                Active users last 7 days: <b>{data.activeLast7Days}</b>
             </p>
-            <p>Data on the average user&apos;s roster is coming soon. Here are some screenshots as of January 12th.</p>
+            <p style={{ textAlign: 'center' }}>
+                Averaged roster data. Last updated on{' '}
+                <b>{new Date(data.averageRosterDataCreationTime).toDateString()}</b>
+            </p>
 
             <RosterHeader totalPower={totalPower} filterChanges={setNameFilter} />
             <ViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
