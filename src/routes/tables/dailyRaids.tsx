@@ -47,6 +47,7 @@ import { enqueueSnackbar } from 'notistack';
 import ClearIcon from '@mui/icons-material/Clear';
 import { sum } from 'lodash';
 import { MiscIcon } from '../../shared-components/misc-icon';
+import { CharacterImage } from 'src/shared-components/character-image';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -616,11 +617,15 @@ const MaterialItem = ({
     return (
         <li style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <UpgradeImage
-                    material={raid.materialLabel}
-                    rarity={raid.materialRarity}
-                    iconPath={raid.materialIconPath}
-                />
+                {raid.characterIconPath ? (
+                    <CharacterImage icon={raid.characterIconPath} />
+                ) : (
+                    <UpgradeImage
+                        material={raid.materialLabel}
+                        rarity={raid.materialRarity}
+                        iconPath={raid.materialIconPath}
+                    />
+                )}
                 <Tooltip title={raid.characters.join(', ')}>
                     <span>
                         (

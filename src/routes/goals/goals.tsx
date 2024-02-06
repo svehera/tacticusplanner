@@ -351,7 +351,8 @@ export const GoalCard = ({
                                             materialRarity: character.rarity,
                                             totalCount: goalShards,
                                             materialIconPath: '',
-                                            characters: [],
+                                            characterIconPath: character.icon,
+                                            characters: [character.name],
                                             locations: [],
                                         }}
                                         location={{
@@ -374,7 +375,8 @@ export const GoalCard = ({
                                         materialRarity: character.rarity,
                                         totalCount: goalShards,
                                         materialIconPath: '',
-                                        characters: [],
+                                        characterIconPath: character.icon,
+                                        characters: [character.name],
                                         locations: [],
                                     }}
                                     location={{
@@ -393,7 +395,8 @@ export const GoalCard = ({
                                         materialRarity: character.rarity,
                                         totalCount: goalShards,
                                         materialIconPath: '',
-                                        characters: [],
+                                        characterIconPath: character.icon,
+                                        characters: [character.name],
                                         locations: [],
                                     }}
                                     location={{
@@ -412,7 +415,8 @@ export const GoalCard = ({
                                         materialRarity: character.rarity,
                                         totalCount: goalShards,
                                         materialIconPath: '',
-                                        characters: [],
+                                        characterIconPath: character.icon,
+                                        characters: [character.name],
                                         locations: [],
                                     }}
                                     location={{

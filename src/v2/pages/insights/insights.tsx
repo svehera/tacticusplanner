@@ -49,6 +49,7 @@ export const Insights = () => {
                 <p>
                     Active users last 7 days: <b>{data.activeLast7Days}</b>{' '}
                 </p>
+                <p style={{ textAlign: 'center' }}>Averaged roster data is missing. Something went wrong</p>
             </Box>
         );
     }

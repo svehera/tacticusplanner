@@ -645,6 +645,7 @@ export interface IMaterialRaid {
     materialRarity: Rarity;
     totalCount: number;
     materialIconPath: string;
+    characterIconPath?: string;
     characters: string[];
     locations: Array<IRaidLocation>;
 }
