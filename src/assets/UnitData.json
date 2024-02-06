@@ -1100,8 +1100,7 @@
         "Number": 51,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Aun-shi.png",
-        "ReleaseRarity": 5
+        "Icon": "Aun-shi.png"
     },
     {
         "Name": "Shadowsun",
@@ -1565,5 +1564,27 @@
         "ForcedSummons": false,
         "RequiredInCampaign": false,
         "Icon": "tanGida.png"
+    },
+    {
+        "Name": "Exitor-Rho",
+        "Faction": "Adeptus Mechanicus",
+        "Alliance": "Imperial",
+        "Health": 0,
+        "Damage": 0,
+        "Armour": 0,
+        "Initial rarity": "Uncommon",
+        "Melee Damage": "Energy",
+        "Melee Hits": 2,
+        "Movement": 4,
+        "Equipment1": "Crit",
+        "Equipment2": "Defense",
+        "Equipment3": "Crit Booster",
+        "Traits": ["Mechanical", "Camouflage", "Unstoppable", "Infiltrate"],
+        "Active Ability": "Direct",
+        "Number": 70,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "exitor-rho.png",
+        "ReleaseRarity": 2
     }
 ]

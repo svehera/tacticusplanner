@@ -1,6 +1,62 @@
 ﻿{
-    "currentVersion": "1.3.3",
+    "currentVersion": "1.3.4",
     "releaseNotes": [
+        {
+            "version": "1.3.4",
+            "date": "February 6",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added Averaged Roster insights",
+                    "route": "/learn/insights",
+                    "mobileRoute": "/mobile/learn/insights",
+                    "subPoints": ["NOTE: This feature is not very stable yet so there might be an issues"]
+                },
+                {
+                    "text": "Added Saim-Hann mirror 1-30 nodes and Campaign progress"
+                },
+                {
+                    "text": "Added Exitor-Rho data"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated LRE dates and Aunshi unlock shards"
+                },
+                {
+                    "text": "Refactored Who You Own pages. Only backstage updates nothing should change from UI/logic perspective"
+                },
+                {
+                    "text": "Handled error of \"Failed to load dynamically imported modules\"",
+                    "subPoints": [
+                        "It happens after app has been updated. The error handling will take affect in further updates. In this version (1.3.4) you will still see and error"
+                    ]
+                },
+                {
+                    "text": "Renamed the \"Bias\" to \"LRE Bias\" for more clarity (SeventhSun)"
+                },
+                {
+                    "text": "Removed hover tip from the daily raids input (SeventhSun)"
+                },
+                {
+                    "text": "Added auto value select when starting editing inputs on the Inventory, Campaigns Progress and Daily raids pages"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed redirects on mobile version"
+                },
+                {
+                    "text": "Fixed issue with inventory update when going from Bronze 1 Aun'shi with full upgrades to Bronze 2 Aun'shi  (SeventhSun)"
+                },
+                {
+                    "text": "Fixed issue when using priority raid planning, the lowest priority items from the next character fill the last few energy uses (SeventhSun)"
+                },
+                {
+                    "text": "Fixed issue with completed daily raids icons after completing raids for Unlock.Ascend raids (Arvanes)"
+                }
+            ]
+        },
         {
             "version": "1.3.3",
             "date": "January 23",

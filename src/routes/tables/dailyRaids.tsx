@@ -47,6 +47,7 @@ import { enqueueSnackbar } from 'notistack';
 import ClearIcon from '@mui/icons-material/Clear';
 import { sum } from 'lodash';
 import { MiscIcon } from '../../shared-components/misc-icon';
+import { CharacterImage } from 'src/shared-components/character-image';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -106,7 +107,7 @@ export const DailyRaids = () => {
     };
 
     const refresh = () => {
-        setUpgrades(inventory.upgrades);
+        setUpgrades({ ...inventory.upgrades });
         setHasChanges(false);
     };
 
@@ -393,7 +394,10 @@ export const DailyRaids = () => {
                                 <Button
                                     onClick={() => {
                                         dispatch.dailyRaids({ type: 'ResetCompletedBattles' });
-                                        refresh();
+                                        setHasChanges(false);
+                                        setTimeout(() => {
+                                            setUpgrades({ ...inventory.upgrades });
+                                        }, 100);
                                     }}>
                                     <ClearIcon /> Clear Completed Raids
                                 </Button>
@@ -612,11 +616,15 @@ const MaterialItem = ({
     return (
         <li style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <UpgradeImage
-                    material={raid.materialLabel}
-                    rarity={raid.materialRarity}
-                    iconPath={raid.materialIconPath}
-                />
+                {raid.characterIconPath ? (
+                    <CharacterImage icon={raid.characterIconPath} />
+                ) : (
+                    <UpgradeImage
+                        material={raid.materialLabel}
+                        rarity={raid.materialRarity}
+                        iconPath={raid.materialIconPath}
+                    />
+                )}
                 <Tooltip title={raid.characters.join(', ')}>
                     <span>
                         (
@@ -737,6 +745,7 @@ const RaidItem = ({
                             disabled={isLocationCompleted}
                             value={itemsObtained}
                             size="small"
+                            onFocus={event => event.target.select()}
                             onChange={handleItemsObtainedChange}
                             inputProps={{
                                 step: 1,
@@ -748,11 +757,9 @@ const RaidItem = ({
                     sx={{ margin: 0 }}
                     labelPlacement={'top'}
                     label={
-                        <Tooltip title={`${collectedItems}/${materialTotalCount} Items`}>
-                            <span style={{ fontSize: 12, fontStyle: 'italic' }}>
-                                {collectedItems}/{materialTotalCount} Items
-                            </span>
-                        </Tooltip>
+                        <span style={{ fontSize: 12, fontStyle: 'italic' }}>
+                            {collectedItems}/{materialTotalCount} Items
+                        </span>
                     }
                 />
                 <Tooltip title={isLocationCompleted ? '' : 'Add to inventory'}>

@@ -1,0 +1,42 @@
+﻿.faction {
+    min-width: 375px;
+    max-width: 375px;
+}
+
+.faction-title {
+    color: white;
+    margin-bottom: 0;
+    margin-top: 5px;
+    border-top: 2px solid gold;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .faction-icon {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .faction-power {
+        display: flex;
+        padding-inline-end: 5px;
+    }
+}
+
+.characters-box {
+    display: flex;
+    align-items: center;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+
+    &.complete-faction {
+        justify-content: space-evenly;
+    }
+
+    &.incomplete-faction {
+        justify-content: flex-start;
+        padding-inline-start: 5px;
+    }
+}

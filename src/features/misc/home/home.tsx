@@ -9,17 +9,23 @@ import { GoalCard } from '../../../routes/goals/goals';
 import { sum } from 'lodash';
 import { MiscIcon } from '../../../shared-components/misc-icon';
 
+import ragnar from 'src/assets/legendary-events/Ragnar.json';
+
 export const Home = () => {
     const navigate = useNavigate();
     const { goals, dailyRaids } = useContext(StoreContext);
-    const nextLeMenuItem = menuItemById['aunshi'];
+    const nextLeMenuItem = menuItemById['ragnar'];
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
     const topPriorityGoal = goals[0];
 
-    function timeLeftToFutureDate(futureDate: string): string {
+    function formatMonthAndDay(date: Date): string {
+        const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
+
+    function timeLeftToFutureDate(targetDate: Date): string {
         const currentDate = new Date();
-        const targetDate = new Date(futureDate);
         const timeDifference = targetDate.getTime() - currentDate.getTime();
 
         // Calculate days, hours, and minutes
@@ -27,13 +33,15 @@ export const Home = () => {
         const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
         // Format the result
-        const result = days === 1 ? `${days} Day ${hours} h left` : `${days} Days ${hours} h left`;
+        const result = days === 0 ? `${hours} h left` : `${days} Days ${hours} h left`;
 
         return timeDifference >= 0 ? result : 'Finished';
     }
 
-    const timeToStart = timeLeftToFutureDate('2024-01-28');
-    const timeToEnd = timeLeftToFutureDate('2023-02-04');
+    const nextLeDateStart = new Date(ragnar.nextEventDateUtc);
+    const nextLeDateEnd = new Date(new Date(ragnar.nextEventDateUtc).setDate(nextLeDateStart.getDate() + 7));
+    const timeToStart = timeLeftToFutureDate(nextLeDateStart);
+    const timeToEnd = timeLeftToFutureDate(nextLeDateEnd);
     const isEventStarted = timeToStart === 'Finished';
 
     return (
@@ -105,7 +113,7 @@ export const Home = () => {
                                     {nextLeMenuItem.icon} {nextLeMenuItem.label}
                                 </div>
                             }
-                            subheader={isEventStarted ? 'February 4' : 'January 28'}
+                            subheader={formatMonthAndDay(isEventStarted ? nextLeDateEnd : nextLeDateStart)}
                         />
                         <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
                             {isEventStarted ? timeToEnd : timeToStart}

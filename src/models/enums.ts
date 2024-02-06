@@ -194,18 +194,3 @@ export enum Campaign {
     Octarius = 'Octarius',
     SaimHann = 'Saim-Hann',
 }
-
-export enum WyoFilter {
-    None,
-    NeedToAscend,
-    NeedToLevel,
-    CanUpgrade,
-}
-
-export enum WyoOrder {
-    Faction,
-    FactionPower,
-    CharacterPower,
-    AbilitiesLevel,
-    Rank,
-}

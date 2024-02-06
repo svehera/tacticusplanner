@@ -15,8 +15,6 @@
     RarityStars,
     RarityString,
     Trait,
-    WyoFilter,
-    WyoOrder,
 } from './enums';
 import React from 'react';
 import { CharactersAction } from '../reducers/characters.reducer';
@@ -31,6 +29,8 @@ import { CampaignsProgressAction } from '../reducers/campaigns-progress.reducer'
 import { DailyRaidsPreferencesAction } from '../reducers/daily-raids-settings.reducer';
 import { InventoryAction } from '../reducers/inventory.reducer';
 import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
+import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
+import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -207,7 +207,7 @@ export interface ILegendaryEventTrackRequirement {
 }
 
 export type ITableRow<T = ICharacter2 | string> = Record<string, T>;
-export type ICharacter2 = IUnitData & IPersonalCharacterData2;
+export type ICharacter2 = IUnitData & IPersonalCharacterData2 & { numberOfUnlocked?: number };
 
 export interface IPersonalData {
     version?: undefined;
@@ -327,8 +327,8 @@ export interface IViewPreferences {
     craftableItemsInInventory: boolean;
     hideCompleted: boolean;
     hideNames: boolean;
-    wyoFilter: WyoFilter;
-    wyoOrder: WyoOrder;
+    wyoFilter: CharactersFilterBy;
+    wyoOrder: CharactersOrderBy;
 }
 
 export interface IAutoTeamsPreferences {
@@ -645,6 +645,7 @@ export interface IMaterialRaid {
     materialRarity: Rarity;
     totalCount: number;
     materialIconPath: string;
+    characterIconPath?: string;
     characters: string[];
     locations: Array<IRaidLocation>;
 }
@@ -697,6 +698,7 @@ export type ICampaignsProgress = {
     'Octarius Mirror Elite': number;
 
     'Saim-Hann': number;
+    'Saim-Hann Mirror': number;
 };
 
 export interface IInventory {

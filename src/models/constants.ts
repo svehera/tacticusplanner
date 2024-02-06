@@ -6,13 +6,13 @@
     Rarity,
     RarityStars,
     RarityString,
-    WyoFilter,
-    WyoOrder,
 } from './enums';
 import { ICampaignsProgress, ICharacter2, ICharProgression, IPersonalData2 } from './interfaces';
 import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from './legendary-events';
 import { RagnarLegendaryEvent } from './legendary-events/ragnar.le';
 import { VitruviusLegendaryEvent } from './legendary-events/vitruvius.le';
+import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
+import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,
@@ -123,8 +123,8 @@ export const charsUnlockShards: Record<Rarity, number> = {
 };
 
 export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {
-    [CharacterReleaseRarity.Common]: 70,
-    [CharacterReleaseRarity.Uncommon]: 140,
+    [CharacterReleaseRarity.Common]: 40,
+    [CharacterReleaseRarity.Uncommon]: 80,
     [CharacterReleaseRarity.Rare]: 280,
     [CharacterReleaseRarity.Epic]: 400,
     [CharacterReleaseRarity.LegendaryOld]: 150,
@@ -170,6 +170,7 @@ export const defaultCampaignsProgress: ICampaignsProgress = {
     'Octarius Mirror Elite': 40,
 
     'Saim-Hann': 75,
+    'Saim-Hann Mirror': 75,
 };
 
 export const campaignsNames: Array<keyof ICampaignsProgress> = Object.keys(defaultCampaignsProgress) as Array<
@@ -202,8 +203,8 @@ export const defaultData: IPersonalData2 = {
         hideCompleted: false,
         craftableItemsInInventory: false,
         hideNames: false,
-        wyoFilter: WyoFilter.None,
-        wyoOrder: WyoOrder.Faction,
+        wyoFilter: CharactersFilterBy.None,
+        wyoOrder: CharactersOrderBy.Faction,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,

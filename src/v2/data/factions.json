@@ -1,0 +1,94 @@
+﻿[
+    {
+        "alliance": "Imperial",
+        "name": "Ultramarines",
+        "icon": "Ultramarines.png",
+        "color": "#194486"
+    },
+    {
+        "alliance": "Xenos",
+        "name": "Necrons",
+        "icon": "Necrons.png",
+        "color": "#007E59"
+    },
+    {
+        "alliance": "Imperial",
+        "name": "Astra Militarum",
+        "icon": "Astra_militarum.png",
+        "color": "#717838"
+    },
+    {
+        "alliance": "Chaos",
+        "name": "Black Legion",
+        "icon": "Black_Legion.png",
+        "color": "#1C0F10"
+    },
+    {
+        "alliance": "Imperial",
+        "name": "Adepta Sororitas",
+        "icon": "ADEPTA_SORORITAS.png",
+        "color": "#962C38"
+    },
+    {
+        "alliance": "Xenos",
+        "name": "Orks",
+        "icon": "Orks.png",
+        "color": "#DC901E"
+    },
+
+    {
+        "alliance": "Imperial",
+        "name": "Black Templars",
+        "icon": "Black_Templars.png",
+        "color": "#929395"
+    },
+
+    {
+        "alliance": "Chaos",
+        "name": "Death guard",
+        "icon": "Death_Guard.png",
+        "color": "#65540C"
+    },
+    {
+        "alliance": "Xenos",
+        "name": "Aeldari",
+        "icon": "Aeldari.png",
+        "color": "#ac1b1a"
+    },
+    {
+        "alliance": "Xenos",
+        "name": "T'au Empire",
+        "icon": "T_Au.png",
+        "color": "#CE7140"
+    },
+    {
+        "alliance": "Imperial",
+        "name": "Space Wolves",
+        "icon": "Space_Wolves.png",
+        "color": "#084A92"
+    },
+    {
+        "alliance": "Chaos",
+        "name": "Thousand Sons",
+        "icon": "Thousand_Sons.png",
+        "color": "#084A92"
+    },
+    {
+        "alliance": "Imperial",
+        "name": "Dark Angels",
+        "icon": "Dark_Angels.png",
+        "color": "#18542B"
+    },
+    {
+        "alliance": "Xenos",
+        "name": "Tyranids",
+        "icon": "Tyranids.png",
+        "color": "#7f5283"
+    },
+    {
+        "alliance": "Imperial",
+        "name": "Adeptus Mechanicus",
+        "icon": "AdeptusMechanicus.png",
+        "color": "#781e2e"
+    }
+]
