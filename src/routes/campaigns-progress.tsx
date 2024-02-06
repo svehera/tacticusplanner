@@ -89,6 +89,7 @@ export const CampaignProgress = ({
                         value={value}
                         size="small"
                         onChange={handleInputChange}
+                        onFocus={event => event.target.select()}
                         onBlur={handleBlur}
                         inputProps={{
                             step: 1,

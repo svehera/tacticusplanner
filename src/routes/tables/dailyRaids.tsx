@@ -741,6 +741,7 @@ const RaidItem = ({
                             disabled={isLocationCompleted}
                             value={itemsObtained}
                             size="small"
+                            onFocus={event => event.target.select()}
                             onChange={handleItemsObtainedChange}
                             inputProps={{
                                 step: 1,
