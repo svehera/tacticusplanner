@@ -697,6 +697,7 @@ export type ICampaignsProgress = {
     'Octarius Mirror Elite': number;
 
     'Saim-Hann': number;
+    'Saim-Hann Mirror': number;
 };
 
 export interface IInventory {

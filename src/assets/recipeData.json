@@ -6365,5 +6365,19 @@
         "stat": "Shard",
         "faction": "Thousand Sons",
         "rarity": "Shard"
+    },
+    "Calandis": {
+        "material": "Calandis",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Aeldari",
+        "rarity": "Shard"
+    },
+    "Aethana": {
+        "material": "Aethana",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Aeldari",
+        "rarity": "Shard"
     }
 }

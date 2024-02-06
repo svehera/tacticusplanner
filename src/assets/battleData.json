@@ -3576,6 +3576,217 @@
         "reward": "Single Power Pack",
         "expectedGold": 53
     },
+    "SHM1": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 1,
+        "reward": "Mutation: Warped Muscles",
+        "expectedGold": 53
+    },
+    "SHM10": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 10,
+        "reward": "Targeting Link",
+        "expectedGold": 53
+    },
+    "SHM11": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 11,
+        "reward": "Single Power Pack",
+        "expectedGold": 53
+    },
+    "SHM12": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 12,
+        "reward": "Adamantium Ore",
+        "expectedGold": 53
+    },
+    "SHM13": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 13,
+        "reward": "Mutation: Warped Lungs",
+        "expectedGold": 53
+    },
+    "SHM14": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 14,
+        "reward": "Mutation: Warped Heart",
+        "expectedGold": 53
+    },
+    "SHM15": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 15,
+        "reward": "Calandis",
+        "expectedGold": 59
+    },
+
+    "SHM16": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 16,
+        "reward": "Pile of Salvage",
+        "expectedGold": 59
+    },
+    "SHM17": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 17,
+        "reward": "Weapon Anointment Oils",
+        "expectedGold": 59
+    },
+    "SHM18": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 18,
+        "reward": "Chip Damage",
+        "expectedGold": 59
+    },
+    "SHM19": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 19,
+        "reward": "The Iron Phoenix",
+        "expectedGold": 59
+    },
+    "SHM2": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 2,
+        "reward": "Nasty Spikes",
+        "expectedGold": 53
+    },
+    "SHM20": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 20,
+        "reward": "Barrel of Promethium",
+        "expectedGold": 59
+    },
+    "SHM21": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 21,
+        "reward": "Metal Joints",
+        "expectedGold": 59
+    },
+    "SHM22": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 22,
+        "reward": "Round of Ammo",
+        "expectedGold": 59
+    },
+    "SHM23": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 23,
+        "reward": "Nano Swarm",
+        "expectedGold": 59
+    },
+    "SHM24": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 24,
+        "reward": "Frag Grenade",
+        "expectedGold": 59
+    },
+    "SHM25": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 25,
+        "reward": "Ceramite Lump",
+        "expectedGold": 59
+    },
+    "SHM26": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 26,
+        "reward": "Reinforced Cables",
+        "expectedGold": 59
+    },
+    "SHM27": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 27,
+        "reward": "Blessed Tasset Plate",
+        "expectedGold": 59
+    },
+    "SHM28": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 28,
+        "reward": "Slicing Claws",
+        "expectedGold": 59
+    },
+    "SHM29": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 29,
+        "reward": "Ancient Runes",
+        "expectedGold": 59
+    },
+    "SHM3": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 3,
+        "reward": "Sophisticated Material",
+        "expectedGold": 53
+    },
+    "SHM30": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 30,
+        "reward": "Aethana",
+        "expectedGold": 65
+    },
+    "SHM4": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 4,
+        "reward": "Can of Promethium",
+        "expectedGold": 53
+    },
+    "SHM5": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 5,
+        "reward": "Armor Trim",
+        "expectedGold": 53
+    },
+    "SHM6": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 6,
+        "reward": "Scrolls",
+        "expectedGold": 53
+    },
+    "SHM7": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 7,
+        "reward": "Mission Assignment",
+        "expectedGold": 53
+    },
+    "SHM8": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 8,
+        "reward": "Adamantium Filaments",
+        "expectedGold": 53
+    },
+    "SHM9": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 9,
+        "reward": "Thick Skin",
+        "expectedGold": 53
+    },
     "IE1": {
         "campaign": "Indomitus Elite",
         "campaignType": "Elite",

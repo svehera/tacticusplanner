@@ -286,5 +286,21 @@
         "faction": "Thousand Sons",
         "rarity": "Shard",
         "locations": ["SH75"]
+    },
+    "Calandis": {
+        "material": "Calandis",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Aeldari",
+        "rarity": "Shard",
+        "locations": ["SHM15"]
+    },
+    "Aethana": {
+        "material": "Aethana",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Aeldari",
+        "rarity": "Shard",
+        "locations": ["SH30"]
     }
 }
