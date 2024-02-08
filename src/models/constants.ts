@@ -124,7 +124,7 @@ export const charsUnlockShards: Record<Rarity, number> = {
 
 export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {
     [CharacterReleaseRarity.Common]: 40,
-    [CharacterReleaseRarity.Uncommon]: 80,
+    [CharacterReleaseRarity.Uncommon]: 100,
     [CharacterReleaseRarity.Rare]: 280,
     [CharacterReleaseRarity.Epic]: 400,
     [CharacterReleaseRarity.LegendaryOld]: 150,
