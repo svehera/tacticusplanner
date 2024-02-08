@@ -3,7 +3,7 @@
     "releaseNotes": [
         {
             "version": "1.3.5",
-            "date": "February X",
+            "date": "February 8",
             "type": "Update",
             "new": [],
             "minor": [
@@ -23,6 +23,9 @@
                 },
                 {
                     "text": "Fixed issue on daily raids when amount of items that will be added to inventory is higher by 1 then needed"
+                },
+                {
+                    "text": "Added missing \"Crushing strike\" trait for Brother Burchard (MocarnyJoe)"
                 }
             ]
         },
