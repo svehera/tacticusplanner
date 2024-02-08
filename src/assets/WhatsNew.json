@@ -17,6 +17,9 @@
             "bugFixes": [
                 {
                     "text": "Fixed daily raids suggestions in case only \"Use More efficient nodes (Mirror)\" is selcted and there are only Mirror and regular campaigns available"
+                },
+                {
+                    "text": "Fixed \"Warpweave Robe\" upgrade icon (Hominus)"
                 }
             ]
         },
