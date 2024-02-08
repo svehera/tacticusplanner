@@ -861,6 +861,9 @@ export class StaticDataService {
 
         const minEnergy = Math.min(...unlockedLocations.map(x => x.energyPerItem));
         const maxEnergy = Math.max(...unlockedLocations.map(x => x.energyPerItem));
+        const hasAnyMedianLocation = unlockedLocations.some(
+            location => location.energyPerItem > minEnergy && location.energyPerItem < maxEnergy
+        );
 
         let filteredLocations: ICampaignBattleComposed[] = unlockedLocations;
 
@@ -875,13 +878,19 @@ export class StaticDataService {
                     return true;
                 }
 
-                if (useLeastEfficientNodes && location.energyPerItem === maxEnergy) {
+                if (
+                    useMoreEfficientNodes &&
+                    ((hasAnyMedianLocation &&
+                        location.energyPerItem > minEnergy &&
+                        location.energyPerItem < maxEnergy) ||
+                        (!hasAnyMedianLocation &&
+                            location.energyPerItem >= minEnergy &&
+                            location.energyPerItem < maxEnergy))
+                ) {
                     return true;
                 }
 
-                return (
-                    useMoreEfficientNodes && location.energyPerItem > minEnergy && location.energyPerItem < maxEnergy
-                );
+                return useLeastEfficientNodes && location.energyPerItem === maxEnergy;
             });
 
             if (!filteredLocations.length && unlockedLocations.length) {
