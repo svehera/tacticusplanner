@@ -667,8 +667,12 @@ const RaidItem = ({
 }) => {
     const { dailyRaids, inventory } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
-    const [itemsObtained, setItemsObtained] = useState<string | number>(Math.round(location.farmedItems));
 
+    const collectedItems = useMemo(() => inventory.upgrades[material.materialId] ?? 0, [inventory.upgrades]);
+    const [itemsObtained, setItemsObtained] = useState<string | number>(() => {
+        const maxObtained = Math.round(location.farmedItems);
+        return maxObtained + collectedItems > materialTotalCount ? materialTotalCount - collectedItems : maxObtained;
+    });
     const completedLocations = dailyRaids.completedLocations?.flatMap(x => x.locations) ?? [];
 
     const isLocationCompleted = useMemo(
@@ -678,8 +682,6 @@ const RaidItem = ({
     const handleItemsObtainedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setItemsObtained(event.target.value);
     };
-
-    const collectedItems = useMemo(() => inventory.upgrades[material.materialId] ?? 0, [inventory.upgrades]);
 
     const handleAdd = () => {
         const value = itemsObtained === '' ? 0 : Number(itemsObtained);

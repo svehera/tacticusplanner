@@ -1,6 +1,34 @@
 ﻿{
-    "currentVersion": "1.3.4",
+    "currentVersion": "1.3.5",
     "releaseNotes": [
+        {
+            "version": "1.3.5",
+            "date": "February 8",
+            "type": "Update",
+            "new": [],
+            "minor": [
+                {
+                    "text": "Updated Tan Gi'Da and Exitor-Rho portraits on the Who You Own page"
+                },
+                {
+                    "text": "Added upgrades for Exitor-Rho"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with daily raids suggestions in case only \"Use More efficient nodes (Mirror)\" is selcted and there are only Mirror and regular campaigns available"
+                },
+                {
+                    "text": "Fixed \"Warpweave Robe\" upgrade icon (Hominus)"
+                },
+                {
+                    "text": "Fixed issue on daily raids when amount of items that will be added to inventory is higher by 1 then needed"
+                },
+                {
+                    "text": "Added missing \"Crushing strike\" trait for Brother Burchard (MocarnyJoe)"
+                }
+            ]
+        },
         {
             "version": "1.3.4",
             "date": "February 6",
