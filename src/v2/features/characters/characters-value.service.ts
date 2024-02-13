@@ -2,31 +2,26 @@ import * as fs from 'fs';
 
 import { ICharacter2 } from 'src/models/interfaces';
 import { Rank, Rarity, RarityStars } from 'src/models/enums';
+import rankUpData from 'src/assets/rankUpData.json';
+import recipeData from 'src/assets/recipeData.json';
+import { getEnumValues } from 'src/shared-logic/functions';
 
-const readDataFromFile = (filename: string): any => {
-    const rawData = fs.readFileSync(filename);
-    return JSON.parse(rawData.toString());
-};
-
-const rankUpData = readDataFromFile('assets/rankUpData.json');
-const recipeData = readDataFromFile('assets/recipeData.json');
-
-export class CharactersPowerService {
-    public static getCharacterPower(character: ICharacter2): number {
+export class CharactersValueService {
+    public static getCharacterValue(character: ICharacter2): number {
         if (character.rank === Rank.Locked) {
             return 0;
         }
 
         const powerLevel =
-            CharactersPowerService.getUnlockValue(character.initialRarity, character.name) +
-            CharactersPowerService.getExperienceValue(character.level) +
-            CharactersPowerService.getAbilityValue(character.activeAbilityLevel) +
-            CharactersPowerService.getAbilityValue(character.passiveAbilityLevel) +
-            CharactersPowerService.getStarsValue(character.stars) -
-            CharactersPowerService.getInitialStarsValue(character.initialRarity) +
-            CharactersPowerService.getRarityValue(character.rarity) -
-            CharactersPowerService.getRarityValue(character.initialRarity) +
-            CharactersPowerService.getRankValue(character.rank, character.name);
+            CharactersValueService.getUnlockValue(character.initialRarity, character.name) +
+            CharactersValueService.getExperienceValue(character.level) +
+            CharactersValueService.getAbilityValue(character.activeAbilityLevel) +
+            CharactersValueService.getAbilityValue(character.passiveAbilityLevel) +
+            CharactersValueService.getStarsValue(character.stars) -
+            CharactersValueService.getInitialStarsValue(character.initialRarity) +
+            CharactersValueService.getRarityValue(character.rarity) -
+            CharactersValueService.getRarityValue(character.initialRarity);
+        //            CharactersValueService.getRankValue(character.rank, character.name);
         return Math.round(powerLevel);
     }
 
@@ -42,8 +37,8 @@ export class CharactersPowerService {
 
         let grandtotal: number = 0;
 
-        // "Rank.indexOf" doesn't work here.
-        for (let thisrank = 0; thisrank < Rank.indexOf(currentRank); thisrank++) {
+        const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
+        for (let thisrank = 0; thisrank < rankEntries.indexOf(currentRank); thisrank++) {
             for (const i of rankUpData[character][Rank[thisrank]]) {
                 let total: number = 0;
                 if (!recipeData[i]['craftable']) {
@@ -99,15 +94,8 @@ export class CharactersPowerService {
     }
 
     public static getUnlockValue(initialRarity: number, name: string): number {
-        // don't count the unlock shard value of the original characters.
-        // Maybe other "scripted character unlocks" should also be excluded?
-        if (
-            name === 'Varro Tigurius' ||
-            name === 'Certus' ||
-            name === 'Bellator' ||
-            name === 'Incisus' ||
-            name === 'Vindicta'
-        ) {
+        const defaultCharacters: string[] = ['Varro Tigurius', 'Certus', 'Bellator', 'Incisus', 'Vindicta'];
+        if (defaultCharacters.includes(name)) {
             return 0;
         }
         const ShardBS = 35;
