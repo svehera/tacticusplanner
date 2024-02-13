@@ -1,6 +1,18 @@
 ﻿{
-    "currentVersion": "1.3.5",
+    "currentVersion": "1.3.6",
     "releaseNotes": [
+        {
+            "version": "1.3.6",
+            "date": "February X",
+            "type": "Update",
+            "new": [],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with invalid upgrades being applied to a character (SeventhSun)"
+                }
+            ]
+        },
         {
             "version": "1.3.5",
             "date": "February 8",

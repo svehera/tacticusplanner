@@ -81,13 +81,16 @@ export class GlobalState implements IGlobalState {
             const activeLevel = personalCharData?.activeAbilityLevel ?? 0;
             const passiveLevel = personalCharData?.passiveAbilityLevel ?? 0;
             const level = Math.max(personalCharData?.level ?? 1, rankLevel, activeLevel, passiveLevel);
+            const upgrades = personalCharData?.upgrades
+                ? personalCharData.upgrades.filter(StaticDataService.isValidaUpgrade)
+                : [];
 
             const combinedData: IPersonalCharacterData2 = {
                 name: staticData.name,
                 rank: rank,
                 rarity: rarity,
                 bias: personalCharData?.bias ?? CharacterBias.None,
-                upgrades: personalCharData?.upgrades ?? [],
+                upgrades: upgrades,
                 activeAbilityLevel: activeLevel,
                 passiveAbilityLevel: passiveLevel,
                 stars: stars,
