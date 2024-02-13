@@ -10,6 +10,9 @@
             "bugFixes": [
                 {
                     "text": "Fixed issue with invalid upgrades being applied to a character (SeventhSun)"
+                },
+                {
+                    "text": "Fixed Sibyll Ascend/Unlock goals (Szarekh)"
                 }
             ]
         },
