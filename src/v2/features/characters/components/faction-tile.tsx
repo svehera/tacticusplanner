@@ -18,6 +18,7 @@ export const FactionsTile = ({
     onCharacterClick?: (character: ICharacter2) => void;
 }) => {
     const factionPower = numberToThousandsString(faction.power);
+    const factionValue = numberToThousandsString(faction.value);
     const isCompleteFaction = faction.characters.length === 5;
     return (
         <div className="faction">
@@ -25,6 +26,11 @@ export const FactionsTile = ({
                 <div className="faction-icon">
                     <FactionImage faction={faction.icon} />
                     <span>{faction.name.toUpperCase()}</span>
+                </div>
+                <div className="faction-value">
+                    <MiscIcon icon={'blackstone'} height={20} width={15} />
+                    {''}
+                    {factionValue}
                 </div>
                 <div className="faction-power">
                     <MiscIcon icon={'power'} height={20} width={15} />

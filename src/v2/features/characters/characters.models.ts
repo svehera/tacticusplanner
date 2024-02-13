@@ -11,6 +11,7 @@ export interface IFactionStatic {
 
 export interface IFaction extends IFactionStatic {
     power: number;
+    value: number;
     unlockedCharacters: number;
     characters: ICharacter2[];
 }

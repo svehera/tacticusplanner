@@ -10,6 +10,7 @@ import { IFaction } from './characters.models';
 
 import factionsData from 'src/v2/data/factions.json';
 import { CharactersPowerService } from './characters-power.service';
+import { CharactersValueService } from './characters-value.service';
 
 export class CharactersService {
     static filterCharacters(
@@ -38,6 +39,12 @@ export class CharactersService {
 
     static orderCharacters(characters: ICharacter2[], charactersOrderBy: CharactersOrderBy): ICharacter2[] {
         switch (charactersOrderBy) {
+            case CharactersOrderBy.CharacterValue:
+                return orderBy(
+                    characters.map(x => ({ ...x, characterValue: CharactersValueService.getCharacterValue(x) })),
+                    ['characterValue'],
+                    ['desc']
+                );
             case CharactersOrderBy.CharacterPower:
                 return orderBy(
                     characters.map(x => ({ ...x, characterPower: CharactersPowerService.getCharacterPower(x) })),
@@ -73,12 +80,17 @@ export class CharactersService {
                 return {
                     ...faction,
                     characters,
+                    value: sum(characters.map(CharactersValueService.getCharacterValue)),
                     power: sum(characters.map(CharactersPowerService.getCharacterPower)),
                     unlockedCharacters: characters.filter(x => x.rank > Rank.Locked).length,
                 };
             });
         let orderByKey: keyof IFaction;
         switch (charactersOrderBy) {
+            case CharactersOrderBy.FactionValue: {
+                orderByKey = 'value';
+                return orderBy(result, [orderByKey], ['desc']);
+            }
             case CharactersOrderBy.FactionPower: {
                 orderByKey = 'power';
                 return orderBy(result, [orderByKey], ['desc']);

@@ -11,6 +11,7 @@ import { CharactersService } from 'src/v2/features/characters/characters.service
 import { ViewControls } from 'src/v2/features/characters/components/view-controls';
 import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
+import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
 import { IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
@@ -54,6 +55,7 @@ export const WhoYouOwn = () => {
 
     const charactersFiltered = CharactersService.filterCharacters(charactersDefault, viewControls.filterBy, nameFilter);
     const totalPower = sum(charactersFiltered.map(character => CharactersPowerService.getCharacterPower(character)));
+    const totalValue = sum(charactersFiltered.map(character => CharactersValueService.getCharacterValue(character)));
 
     const factions = CharactersService.orderByFaction(charactersFiltered, viewControls.orderBy);
     const characters = CharactersService.orderCharacters(charactersFiltered, viewControls.orderBy);
@@ -76,7 +78,7 @@ export const WhoYouOwn = () => {
 
     return (
         <Box style={{ margin: 'auto' }}>
-            <RosterHeader totalPower={totalPower} filterChanges={setNameFilter}>
+            <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
                 {!!isLoggedIn && <ShareRoster isRosterShared={!!isRosterShared} />}
             </RosterHeader>
             <ViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />

@@ -39,7 +39,10 @@ export const InfoBox = () => {
                     <p style={{ fontWeight: 500 }}>
                         <WarningIcon color={'warning'} fontSize={'medium'} /> Disclaimer:{' '}
                         {/* eslint-disable-next-line react/no-unescaped-entities */}
-                        <MiscIcon icon={'power'} height={20} width={15} /> doesn't represent in-game power
+                        <br />
+                        <MiscIcon icon={'blackstone'} height={20} width={15} /> represents blackstone cost
+                        <br />
+                        <MiscIcon icon={'power'} height={20} width={15} /> doesn&#39t represent in-game power
                         <br />
                         <span style={{ fontSize: 10 }}>
                             Power = dirtyDozenCoeff * (statsWeight * statsScore + abilityWeight *
