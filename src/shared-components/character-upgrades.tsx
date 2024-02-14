@@ -63,7 +63,7 @@ export const CharacterUpgrades = ({
 
         if (checked) {
             currentUpgrades = [...formData.currentUpgrades, value];
-            const isNewUpgrade = !formData.originalUpgrades.includes(value);
+            const isNewUpgrade = character.rank !== formData.originalRank || !formData.originalUpgrades.includes(value);
             newUpgrades = isNewUpgrade ? [...formData.newUpgrades, value] : formData.newUpgrades;
         } else {
             currentUpgrades = formData.currentUpgrades.filter(x => x !== value);

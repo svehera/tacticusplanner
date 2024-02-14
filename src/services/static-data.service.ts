@@ -106,6 +106,9 @@ export class StaticDataService {
 
             const config = this.campaignConfigs[battle.campaignType as CampaignType];
             const recipe = this.recipeData[battle.reward];
+            if (!recipe) {
+                console.error(battle.reward, 'no recipe');
+            }
             const dropRateKey: keyof IDropRate = recipe?.rarity.toLowerCase() as keyof IDropRate;
 
             const dropRate = config.dropRate[dropRateKey];
@@ -118,7 +121,7 @@ export class StaticDataService {
                 dropRate,
                 energyPerItem: parseFloat(energyPerItem.toFixed(2)),
                 nodeNumber: battle.nodeNumber,
-                rarity: recipe.rarity,
+                rarity: recipe?.rarity,
                 reward: battle.reward,
                 expectedGold: battle.expectedGold,
                 deployable: battle.deployable,
@@ -623,6 +626,10 @@ export class StaticDataService {
                 : settings.dailyEnergy;
 
             for (const material of allMaterials) {
+                if (energyLeft < 5) {
+                    break;
+                }
+
                 const locationsMinEnergyConst = Math.min(...material.locations.map(x => x.energyCost));
                 const isAlreadyPlanned = day.raids.some(
                     x =>
@@ -676,8 +683,11 @@ export class StaticDataService {
                                 farmedItems: locationDailyEnergy / location.energyPerItem,
                                 energySpent: locationDailyEnergy,
                             });
+                            continue;
                         }
-                    } else if (energyLeft > material.totalEnergy) {
+                    }
+
+                    if (energyLeft > material.totalEnergy) {
                         const numberOfBattles = Math.floor(material.totalEnergy / location.energyCost);
                         const maxNumberOfBattles =
                             numberOfBattles > location.dailyBattleCount ? location.dailyBattleCount : numberOfBattles;
@@ -854,6 +864,9 @@ export class StaticDataService {
 
         const minEnergy = Math.min(...unlockedLocations.map(x => x.energyPerItem));
         const maxEnergy = Math.max(...unlockedLocations.map(x => x.energyPerItem));
+        const hasAnyMedianLocation = unlockedLocations.some(
+            location => location.energyPerItem > minEnergy && location.energyPerItem < maxEnergy
+        );
 
         let filteredLocations: ICampaignBattleComposed[] = unlockedLocations;
 
@@ -868,13 +881,19 @@ export class StaticDataService {
                     return true;
                 }
 
-                if (useLeastEfficientNodes && location.energyPerItem === maxEnergy) {
+                if (
+                    useMoreEfficientNodes &&
+                    ((hasAnyMedianLocation &&
+                        location.energyPerItem > minEnergy &&
+                        location.energyPerItem < maxEnergy) ||
+                        (!hasAnyMedianLocation &&
+                            location.energyPerItem >= minEnergy &&
+                            location.energyPerItem < maxEnergy))
+                ) {
                     return true;
                 }
 
-                return (
-                    useMoreEfficientNodes && location.energyPerItem > minEnergy && location.energyPerItem < maxEnergy
-                );
+                return useLeastEfficientNodes && location.energyPerItem === maxEnergy;
             });
 
             if (!filteredLocations.length && unlockedLocations.length) {

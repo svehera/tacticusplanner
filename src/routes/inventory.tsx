@@ -138,6 +138,7 @@ export const Inventory = () => {
                                         style={{ justifyContent: 'center' }}
                                         value={data.quantity}
                                         size="small"
+                                        onFocus={event => event.target.select()}
                                         onChange={event => handleInputChange(event, data)}
                                         inputProps={{
                                             step: 1,

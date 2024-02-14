@@ -6086,7 +6086,7 @@
             }
         ],
         "craftable": true,
-        "icon": "warpweave robe.jpg"
+        "icon": "warpweave robe.png"
     },
     "Witchseeker Bolts": {
         "material": "Witchseeker Bolts",
@@ -6364,6 +6364,20 @@
         "craftable": false,
         "stat": "Shard",
         "faction": "Thousand Sons",
+        "rarity": "Shard"
+    },
+    "Calandis": {
+        "material": "Calandis",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Aeldari",
+        "rarity": "Shard"
+    },
+    "Aethana": {
+        "material": "Aethana",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Aeldari",
         "rarity": "Shard"
     }
 }

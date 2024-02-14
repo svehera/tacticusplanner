@@ -207,7 +207,7 @@ export interface ILegendaryEventTrackRequirement {
 }
 
 export type ITableRow<T = ICharacter2 | string> = Record<string, T>;
-export type ICharacter2 = IUnitData & IPersonalCharacterData2;
+export type ICharacter2 = IUnitData & IPersonalCharacterData2 & { numberOfUnlocked?: number };
 
 export interface IPersonalData {
     version?: undefined;
@@ -651,6 +651,7 @@ export interface IMaterialRaid {
     materialRarity: Rarity;
     totalCount: number;
     materialIconPath: string;
+    characterIconPath?: string;
     characters: string[];
     locations: Array<IRaidLocation>;
 }
@@ -703,6 +704,7 @@ export type ICampaignsProgress = {
     'Octarius Mirror Elite': number;
 
     'Saim-Hann': number;
+    'Saim-Hann Mirror': number;
 };
 
 export interface IInventory {

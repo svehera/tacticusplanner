@@ -4,4 +4,6 @@
     CharacterPower,
     AbilitiesLevel,
     Rank,
+    Rarity,
+    UnlockPercentage,
 }
