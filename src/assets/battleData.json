@@ -1365,8 +1365,8 @@
         "nodeNumber": 1,
         "reward": "Ropes and Chains",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 100,
         "skulls": 1
     },
     "O10": {
@@ -1375,8 +1375,8 @@
         "nodeNumber": 10,
         "reward": "Cloak",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 171,
         "skulls": 1
     },
     "O11": {
@@ -1385,8 +1385,8 @@
         "nodeNumber": 11,
         "reward": "Armor Trim",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 220,
         "skulls": 1
     },
     "O12": {
@@ -1395,8 +1395,8 @@
         "nodeNumber": 12,
         "reward": "Reinforced Scale-Plates",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 208,
         "skulls": 1
     },
     "O13": {
@@ -1405,8 +1405,8 @@
         "nodeNumber": 13,
         "reward": "Mission Assignment",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 234,
         "skulls": 1
     },
     "O14": {
@@ -1415,8 +1415,8 @@
         "nodeNumber": 14,
         "reward": "Vox-Caster",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 273,
         "skulls": 1
     },
     "O15": {
@@ -1425,8 +1425,8 @@
         "nodeNumber": 15,
         "reward": "Brother Burchard",
         "expectedGold": 59,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 282,
         "skulls": 1
     },
     "O16": {
@@ -1435,8 +1435,8 @@
         "nodeNumber": 16,
         "reward": "Scrolls",
         "expectedGold": 59,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 273,
         "skulls": 1
     },
     "O17": {
@@ -1445,8 +1445,8 @@
         "nodeNumber": 17,
         "reward": "Rebreather",
         "expectedGold": 59,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 234,
         "skulls": 1
     },
     "O18": {
@@ -1455,8 +1455,8 @@
         "nodeNumber": 18,
         "reward": "Satchel",
         "expectedGold": 59,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 312,
         "skulls": 1
     },
     "O19": {
@@ -1466,7 +1466,7 @@
         "reward": "Slicing Claws",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 264,
         "skulls": 1
     },
     "O2": {
@@ -1475,8 +1475,8 @@
         "nodeNumber": 2,
         "reward": "Wires",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 125,
         "skulls": 1
     },
     "O20": {
@@ -1486,7 +1486,7 @@
         "reward": "Ceramite Lump",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 288,
         "skulls": 1
     },
     "O21": {
@@ -1496,7 +1496,7 @@
         "reward": "Reliquary of Protection",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 297,
         "skulls": 1
     },
     "O22": {
@@ -1505,8 +1505,8 @@
         "nodeNumber": 22,
         "reward": "Bladesman's Honour",
         "expectedGold": 59,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 325,
         "skulls": 1
     },
     "O23": {
@@ -1516,7 +1516,7 @@
         "reward": "Mesh Weave",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 425,
         "skulls": 1
     },
     "O24": {
@@ -1525,8 +1525,8 @@
         "nodeNumber": 24,
         "reward": "Writings",
         "expectedGold": 59,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 267,
         "skulls": 1
     },
     "O25": {
@@ -1535,8 +1535,8 @@
         "nodeNumber": 25,
         "reward": "Mission Objective",
         "expectedGold": 59,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 360,
         "skulls": 1
     },
     "O26": {
@@ -1546,7 +1546,7 @@
         "reward": "Oath Seal",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 402,
         "skulls": 1
     },
     "O27": {
@@ -1556,7 +1556,7 @@
         "reward": "Reinforced Cables",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 468,
         "skulls": 1
     },
     "O28": {
@@ -1566,7 +1566,7 @@
         "reward": "The Gold Phoenix",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 468,
         "skulls": 1
     },
     "O29": {
@@ -1576,7 +1576,7 @@
         "reward": "Subdermal Plating",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 523,
         "skulls": 1
     },
     "O3": {
@@ -1585,8 +1585,8 @@
         "nodeNumber": 3,
         "reward": "Chip Damage",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 150,
         "skulls": 1
     },
     "O30": {
@@ -1596,7 +1596,7 @@
         "reward": "Sword Brother Godswyl",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 541,
         "skulls": 1
     },
     "O31": {
@@ -1606,7 +1606,7 @@
         "reward": "Helmet Trophy",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 564,
         "skulls": 1
     },
     "O32": {
@@ -1616,7 +1616,7 @@
         "reward": "Ancient Runes",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 468,
         "skulls": 1
     },
     "O33": {
@@ -1626,7 +1626,7 @@
         "reward": "Advanced Rebreather",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 574,
         "skulls": 1
     },
     "O34": {
@@ -1636,7 +1636,7 @@
         "reward": "Kill Count",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 619,
         "skulls": 1
     },
     "O35": {
@@ -1646,7 +1646,7 @@
         "reward": "Iron Jaw",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 518,
         "skulls": 1
     },
     "O36": {
@@ -1656,7 +1656,7 @@
         "reward": "Metal Decorative Skull",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 450,
         "skulls": 1
     },
     "O37": {
@@ -1665,8 +1665,8 @@
         "nodeNumber": 37,
         "reward": "Artificer Tasset Plate",
         "expectedGold": 65,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 432,
         "skulls": 1
     },
     "O38": {
@@ -1675,8 +1675,8 @@
         "nodeNumber": 38,
         "reward": "Sigil of Decay",
         "expectedGold": 65,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 595,
         "skulls": 1
     },
     "O39": {
@@ -1686,7 +1686,7 @@
         "reward": "Krak Grenade",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 336,
         "skulls": 1
     },
     "O4": {
@@ -1695,8 +1695,8 @@
         "nodeNumber": 4,
         "reward": "Nasty Spikes",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 180,
         "skulls": 1
     },
     "O40": {
@@ -1706,7 +1706,7 @@
         "reward": "Special Issue Ammo",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 560,
         "skulls": 1
     },
     "O41": {
@@ -1716,7 +1716,7 @@
         "reward": "Chain of Zeal",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 816,
         "skulls": 1
     },
     "O42": {
@@ -1726,7 +1726,7 @@
         "reward": "Terminator Honours",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 952,
         "skulls": 1
     },
     "O43": {
@@ -1736,7 +1736,7 @@
         "reward": "Bionic Neural Pathways",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1133,
         "skulls": 1
     },
     "O44": {
@@ -1746,7 +1746,7 @@
         "reward": "Adrenal Glands",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1227,
         "skulls": 1
     },
     "O45": {
@@ -1756,7 +1756,7 @@
         "reward": "Ancient Thoread",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1359,
         "skulls": 1
     },
     "O46": {
@@ -1765,8 +1765,8 @@
         "nodeNumber": 46,
         "reward": "Bad Moon Teef",
         "expectedGold": 71,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 924,
         "skulls": 1
     },
     "O47": {
@@ -1776,7 +1776,7 @@
         "reward": "Righteous Candle",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1557,
         "skulls": 1
     },
     "O48": {
@@ -1786,7 +1786,7 @@
         "reward": "Rose of Martyrs",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 2067,
         "skulls": 1
     },
     "O49": {
@@ -1796,7 +1796,7 @@
         "reward": "Mutation: Warped Heart",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 2624,
         "skulls": 1
     },
     "O5": {
@@ -1805,8 +1805,8 @@
         "nodeNumber": 5,
         "reward": "Thick Skin",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 125,
         "skulls": 1
     },
     "O50": {
@@ -1815,8 +1815,8 @@
         "nodeNumber": 50,
         "reward": "Blessed Corset Armor",
         "expectedGold": 71,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 1121,
         "skulls": 1
     },
     "O51": {
@@ -1826,7 +1826,7 @@
         "reward": "Ard Plate",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1644,
         "skulls": 1
     },
     "O52": {
@@ -1836,7 +1836,7 @@
         "reward": "Toxin Sacs",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1580,
         "skulls": 1
     },
     "O53": {
@@ -1846,7 +1846,7 @@
         "reward": "Basic Auxiliary Core",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 876,
         "skulls": 1
     },
     "O54": {
@@ -1856,7 +1856,7 @@
         "reward": "Blessed Tabbard",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1090,
         "skulls": 1
     },
     "O55": {
@@ -1866,7 +1866,7 @@
         "reward": "Plasma Cell",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1728,
         "skulls": 1
     },
     "O56": {
@@ -1876,7 +1876,7 @@
         "reward": "Barrel of Promethium",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 2682,
         "skulls": 1
     },
     "O57": {
@@ -1886,7 +1886,7 @@
         "reward": "Pile of Salvage",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 2791,
         "skulls": 1
     },
     "O58": {
@@ -1896,7 +1896,7 @@
         "reward": "Box of Salvage",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 3746,
         "skulls": 1
     },
     "O59": {
@@ -1906,7 +1906,7 @@
         "reward": "Standard-Issue Tourniquet",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 4764,
         "skulls": 1
     },
     "O6": {
@@ -1915,8 +1915,8 @@
         "nodeNumber": 6,
         "reward": "Metal Joints",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 150,
         "skulls": 1
     },
     "O60": {
@@ -1926,7 +1926,7 @@
         "reward": "Brother Jaeger",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 4959,
         "skulls": 1
     },
     "O61": {
@@ -1936,7 +1936,7 @@
         "reward": "Canister of Chemicals",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 5400,
         "skulls": 1
     },
     "O62": {
@@ -1945,8 +1945,8 @@
         "nodeNumber": 62,
         "reward": "Minor Bionic Enhancement",
         "expectedGold": 77,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 2202,
         "skulls": 1
     },
     "O63": {
@@ -1956,7 +1956,7 @@
         "reward": "The Silver Aquila",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 6938,
         "skulls": 1
     },
     "O64": {
@@ -1966,7 +1966,7 @@
         "reward": "Auspex",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 6094,
         "skulls": 1
     },
     "O65": {
@@ -1976,7 +1976,7 @@
         "reward": "Weapon Anointment Oils",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 5618,
         "skulls": 1
     },
     "O66": {
@@ -1985,8 +1985,8 @@
         "nodeNumber": 66,
         "reward": "Purity Seal",
         "expectedGold": 77,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 6660,
         "skulls": 1
     },
     "O67": {
@@ -1995,8 +1995,8 @@
         "nodeNumber": 67,
         "reward": "Lesser Reliquary of Protection",
         "expectedGold": 77,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 8691,
         "skulls": 1
     },
     "O68": {
@@ -2006,7 +2006,7 @@
         "reward": "Single Power Pack",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 13447,
         "skulls": 1
     },
     "O69": {
@@ -2016,7 +2016,7 @@
         "reward": "Fine Micro-Generator",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 12502,
         "skulls": 1
     },
     "O7": {
@@ -2025,8 +2025,8 @@
         "nodeNumber": 7,
         "reward": "Adamantium Filaments",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 144,
         "skulls": 1
     },
     "O70": {
@@ -2036,7 +2036,7 @@
         "reward": "Attack Vector Data-Slate",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 11815,
         "skulls": 1
     },
     "O71": {
@@ -2046,7 +2046,7 @@
         "reward": "Adamantium Ore",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 12691,
         "skulls": 1
     },
     "O72": {
@@ -2056,7 +2056,7 @@
         "reward": "Locator Beacon",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 12194,
         "skulls": 1
     },
     "O73": {
@@ -2066,7 +2066,7 @@
         "reward": "Unyielding Rivets",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 13380,
         "skulls": 1
     },
     "O74": {
@@ -2076,7 +2076,7 @@
         "reward": "Battle Scar",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 19504,
         "skulls": 1
     },
     "O75": {
@@ -2086,7 +2086,7 @@
         "reward": "High Marshal Helbrecht",
         "expectedGold": 83,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 17202,
         "skulls": 1
     },
     "O8": {
@@ -2095,8 +2095,8 @@
         "nodeNumber": 8,
         "reward": "Weapon Parts",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 168,
         "skulls": 1
     },
     "O9": {
@@ -2105,8 +2105,8 @@
         "nodeNumber": 9,
         "reward": "Combat Stimms",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 152,
         "skulls": 1
     },
     "SH1": {
