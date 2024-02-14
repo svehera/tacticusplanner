@@ -124,6 +124,9 @@ export class StaticDataService {
                 rarity: recipe?.rarity,
                 reward: battle.reward,
                 expectedGold: battle.expectedGold,
+                deployable: battle.deployable,
+                totalEnemyPower: battle.totalEnemyPower,
+                skulls: battle.skulls,
             };
         }
 
