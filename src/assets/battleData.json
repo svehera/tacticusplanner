@@ -2115,8 +2115,8 @@
         "nodeNumber": 1,
         "reward": "Adamantium Filaments",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 129,
         "skulls": 1
     },
     "SH10": {
@@ -2125,8 +2125,8 @@
         "nodeNumber": 10,
         "reward": "Can of Promethium",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 288,
         "skulls": 1
     },
     "SH11": {
@@ -2135,8 +2135,8 @@
         "nodeNumber": 11,
         "reward": "Mutation: Tough Skin",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 207,
         "skulls": 1
     },
     "SH12": {
@@ -2145,8 +2145,8 @@
         "nodeNumber": 12,
         "reward": "Adamantium Ore",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 264,
         "skulls": 1
     },
     "SH13": {
@@ -2155,8 +2155,8 @@
         "nodeNumber": 13,
         "reward": "Mission Assignment",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 246,
         "skulls": 1
     },
     "SH14": {
@@ -2165,8 +2165,8 @@
         "nodeNumber": 14,
         "reward": "Mission Objective",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 276,
         "skulls": 1
     },
     "SH15": {
@@ -2175,8 +2175,8 @@
         "nodeNumber": 15,
         "reward": "Toth",
         "expectedGold": 59,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 316,
         "skulls": 1
     },
     "SH16": {
@@ -2185,8 +2185,8 @@
         "nodeNumber": 16,
         "reward": "Locator Beacon",
         "expectedGold": 59,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 269,
         "skulls": 1
     },
     "SH17": {
@@ -2195,8 +2195,8 @@
         "nodeNumber": 17,
         "reward": "Box of Salvage",
         "expectedGold": 59,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 144,
         "skulls": 1
     },
     "SH18": {
@@ -2206,7 +2206,7 @@
         "reward": "Advanced Filaments",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 169,
         "skulls": 1
     },
     "SH19": {
@@ -2216,7 +2216,7 @@
         "reward": "Lesser Reliquary of Protection",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 178,
         "skulls": 1
     },
     "SH2": {
@@ -2225,8 +2225,8 @@
         "nodeNumber": 2,
         "reward": "Scrolls",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 172,
         "skulls": 1
     },
     "SH20": {
@@ -2236,7 +2236,7 @@
         "reward": "Mesh Weave",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 205,
         "skulls": 1
     },
     "SH21": {
@@ -2246,7 +2246,7 @@
         "reward": "Weapon Anointment Oils",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 476,
         "skulls": 1
     },
     "SH22": {
@@ -2255,8 +2255,8 @@
         "nodeNumber": 22,
         "reward": "Cloak",
         "expectedGold": 59,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 352,
         "skulls": 1
     },
     "SH23": {
@@ -2265,8 +2265,8 @@
         "nodeNumber": 23,
         "reward": "Fine Micro-Generator",
         "expectedGold": 59,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 157,
         "skulls": 1
     },
     "SH24": {
@@ -2275,8 +2275,8 @@
         "nodeNumber": 24,
         "reward": "Writings",
         "expectedGold": 59,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 216,
         "skulls": 1
     },
     "SH25": {
@@ -2286,7 +2286,7 @@
         "reward": "Fine Purity Seal",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 548,
         "skulls": 1
     },
     "SH26": {
@@ -2296,7 +2296,7 @@
         "reward": "Mutation: Warped Lungs",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 220,
         "skulls": 1
     },
     "SH27": {
@@ -2306,7 +2306,7 @@
         "reward": "Satchel",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 539,
         "skulls": 1
     },
     "SH28": {
@@ -2316,7 +2316,7 @@
         "reward": "Plasma Cell",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 539,
         "skulls": 1
     },
     "SH29": {
@@ -2326,7 +2326,7 @@
         "reward": "Kill Count",
         "expectedGold": 59,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 589,
         "skulls": 1
     },
     "SH3": {
@@ -2335,8 +2335,8 @@
         "nodeNumber": 3,
         "reward": "Targeting Link",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 172,
         "skulls": 1
     },
     "SH30": {
@@ -2346,7 +2346,7 @@
         "reward": "Abraxas",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 619,
         "skulls": 1
     },
     "SH31": {
@@ -2355,8 +2355,8 @@
         "nodeNumber": 31,
         "reward": "Ritual Implements",
         "expectedGold": 65,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 384,
         "skulls": 1
     },
     "SH32": {
@@ -2365,8 +2365,8 @@
         "nodeNumber": 32,
         "reward": "Waystone",
         "expectedGold": 65,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 448,
         "skulls": 1
     },
     "SH33": {
@@ -2375,8 +2375,8 @@
         "nodeNumber": 33,
         "reward": "Crate of Salvage",
         "expectedGold": 65,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 576,
         "skulls": 1
     },
     "SH34": {
@@ -2385,8 +2385,8 @@
         "nodeNumber": 34,
         "reward": "Reliquary of Protection",
         "expectedGold": 65,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 557,
         "skulls": 1
     },
     "SH35": {
@@ -2396,7 +2396,7 @@
         "reward": "Blessed Tasset Plate",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 770,
         "skulls": 1
     },
     "SH36": {
@@ -2406,7 +2406,7 @@
         "reward": "Artificial Vertebrae",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1008,
         "skulls": 1
     },
     "SH37": {
@@ -2416,7 +2416,7 @@
         "reward": "Key of Ignorance",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1176,
         "skulls": 1
     },
     "SH38": {
@@ -2426,7 +2426,7 @@
         "reward": "Wolf Tail Talisman",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1098,
         "skulls": 1
     },
     "SH39": {
@@ -2435,8 +2435,8 @@
         "nodeNumber": 39,
         "reward": "Ancient Runes",
         "expectedGold": 65,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 960,
         "skulls": 1
     },
     "SH4": {
@@ -2445,8 +2445,8 @@
         "nodeNumber": 4,
         "reward": "Vox-Caster",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 215,
         "skulls": 1
     },
     "SH40": {
@@ -2456,7 +2456,7 @@
         "reward": "Repair-Kit",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1112,
         "skulls": 1
     },
     "SH41": {
@@ -2466,7 +2466,7 @@
         "reward": "Inferno Bolts",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1190,
         "skulls": 1
     },
     "SH42": {
@@ -2476,7 +2476,7 @@
         "reward": "Classified Data-Slate",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1273,
         "skulls": 1
     },
     "SH43": {
@@ -2486,7 +2486,7 @@
         "reward": "Reliquary of Vengeance",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1335,
         "skulls": 1
     },
     "SH44": {
@@ -2496,7 +2496,7 @@
         "reward": "Psytronome",
         "expectedGold": 65,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1302,
         "skulls": 1
     },
     "SH45": {
@@ -2506,7 +2506,7 @@
         "reward": "Yazaghor",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 1433,
         "skulls": 1
     },
     "SH46": {
@@ -2515,8 +2515,8 @@
         "nodeNumber": 46,
         "reward": "Chapter Pendant",
         "expectedGold": 71,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 1312,
         "skulls": 1
     },
     "SH47": {
@@ -2525,8 +2525,8 @@
         "nodeNumber": 47,
         "reward": "Field Ration",
         "expectedGold": 71,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 1113,
         "skulls": 1
     },
     "SH48": {
@@ -2535,8 +2535,8 @@
         "nodeNumber": 48,
         "reward": "Bionic Eye",
         "expectedGold": 71,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 1170,
         "skulls": 1
     },
     "SH49": {
@@ -2545,8 +2545,8 @@
         "nodeNumber": 49,
         "reward": "Healing Ointment",
         "expectedGold": 71,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 1365,
         "skulls": 1
     },
     "SH5": {
@@ -2555,8 +2555,8 @@
         "nodeNumber": 5,
         "reward": "Armor Trim",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 218,
         "skulls": 1
     },
     "SH50": {
@@ -2566,7 +2566,7 @@
         "reward": "Wolf Tooth Necklace",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 2260,
         "skulls": 1
     },
     "SH51": {
@@ -2575,8 +2575,8 @@
         "nodeNumber": 51,
         "reward": "Otherworldly Energy",
         "expectedGold": 71,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 2175,
         "skulls": 1
     },
     "SH52": {
@@ -2585,8 +2585,8 @@
         "nodeNumber": 52,
         "reward": "Bladesman's Honour",
         "expectedGold": 71,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 1763,
         "skulls": 1
     },
     "SH53": {
@@ -2595,8 +2595,8 @@
         "nodeNumber": 53,
         "reward": "Slicing Claws",
         "expectedGold": 71,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 2445,
         "skulls": 1
     },
     "SH54": {
@@ -2606,7 +2606,7 @@
         "reward": "Artificer Tasset Plate",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 3324,
         "skulls": 1
     },
     "SH55": {
@@ -2616,7 +2616,7 @@
         "reward": "Enriched Rations",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 3359,
         "skulls": 1
     },
     "SH56": {
@@ -2626,7 +2626,7 @@
         "reward": "Dark Hood",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 3748,
         "skulls": 1
     },
     "SH57": {
@@ -2635,8 +2635,8 @@
         "nodeNumber": 57,
         "reward": "Tainted Text",
         "expectedGold": 71,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 2541,
         "skulls": 1
     },
     "SH58": {
@@ -2645,8 +2645,8 @@
         "nodeNumber": 58,
         "reward": "Wraithbone Plate",
         "expectedGold": 71,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 3616,
         "skulls": 1
     },
     "SH59": {
@@ -2656,7 +2656,7 @@
         "reward": "Hypermaterial Shifter",
         "expectedGold": 71,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 4752,
         "skulls": 1
     },
     "SH6": {
@@ -2665,8 +2665,8 @@
         "nodeNumber": 6,
         "reward": "Sophisticated Material",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 191,
         "skulls": 1
     },
     "SH60": {
@@ -2676,7 +2676,7 @@
         "reward": "Thaumachus",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 5033,
         "skulls": 1
     },
     "SH61": {
@@ -2686,7 +2686,7 @@
         "reward": "Nano Swarm",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 5156,
         "skulls": 1
     },
     "SH62": {
@@ -2696,7 +2696,7 @@
         "reward": "Beast Hide",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 5521,
         "skulls": 1
     },
     "SH63": {
@@ -2706,7 +2706,7 @@
         "reward": "Artificial Vertebrae",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 6220,
         "skulls": 1
     },
     "SH64": {
@@ -2716,7 +2716,7 @@
         "reward": "Mutation: Warped Lungs",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 6508,
         "skulls": 1
     },
     "SH65": {
@@ -2725,8 +2725,8 @@
         "nodeNumber": 65,
         "reward": "Air Purificator",
         "expectedGold": 77,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 5760,
         "skulls": 1
     },
     "SH66": {
@@ -2736,7 +2736,7 @@
         "reward": "Rebreather",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 8334,
         "skulls": 1
     },
     "SH67": {
@@ -2746,7 +2746,7 @@
         "reward": "Warp Locus",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 9892,
         "skulls": 1
     },
     "SH68": {
@@ -2756,7 +2756,7 @@
         "reward": "Enriched Rations",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 8120,
         "skulls": 1
     },
     "SH69": {
@@ -2766,7 +2766,7 @@
         "reward": "Purity Seal",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 12540,
         "skulls": 1
     },
     "SH7": {
@@ -2775,8 +2775,8 @@
         "nodeNumber": 7,
         "reward": "Mutation: Warped Muscles",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 215,
         "skulls": 1
     },
     "SH70": {
@@ -2785,8 +2785,8 @@
         "nodeNumber": 70,
         "reward": "Blessed Tasset Plate",
         "expectedGold": 77,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 11617,
         "skulls": 1
     },
     "SH71": {
@@ -2795,8 +2795,8 @@
         "nodeNumber": 71,
         "reward": "Mutation: Warped Heart",
         "expectedGold": 77,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 4,
+        "totalEnemyPower": 12385,
         "skulls": 1
     },
     "SH72": {
@@ -2806,7 +2806,7 @@
         "reward": "Mutation: Scaly Skin",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 17076,
         "skulls": 1
     },
     "SH73": {
@@ -2816,7 +2816,7 @@
         "reward": "Golden Ornamental Skull",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 18499,
         "skulls": 1
     },
     "SH74": {
@@ -2826,7 +2826,7 @@
         "reward": "Advanced Rebreather",
         "expectedGold": 77,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 19082,
         "skulls": 1
     },
     "SH75": {
@@ -2836,7 +2836,7 @@
         "reward": "Ahriman",
         "expectedGold": 83,
         "deployable": 5,
-        "totalEnemyPower": 0,
+        "totalEnemyPower": 19552,
         "skulls": 1
     },
     "SH8": {
@@ -2845,8 +2845,8 @@
         "nodeNumber": 8,
         "reward": "Ropes and Chains",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 220,
         "skulls": 1
     },
     "SH9": {
@@ -2855,8 +2855,8 @@
         "nodeNumber": 9,
         "reward": "Nasty Spikes",
         "expectedGold": 53,
-        "deployable": 5,
-        "totalEnemyPower": 0,
+        "deployable": 3,
+        "totalEnemyPower": 254,
         "skulls": 1
     },
     "IM1": {
