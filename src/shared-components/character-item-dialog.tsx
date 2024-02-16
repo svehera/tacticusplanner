@@ -7,6 +7,7 @@ import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
+import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
 
 import { ICharacter2, IMaterialRecipeIngredientFull } from '../models/interfaces';
 import { CharacterTitle } from './character-title';
@@ -40,6 +41,10 @@ export const CharacterItemDialog = (props: { character: ICharacter2; isOpen: boo
                         justifyContent: 'space-between',
                     }}>
                     <CharacterTitle character={character} />
+                    <div style={{ display: 'flex' }}>
+                        <MiscIcon icon={'blackstone'} height={20} width={15} />{' '}
+                        {CharactersValueService.getCharacterValue(character).toLocaleString().replace(/,/g, ' ')}
+                    </div>
                     <div style={{ display: 'flex' }}>
                         <MiscIcon icon={'power'} height={20} width={15} />{' '}
                         {CharactersPowerService.getCharacterPower(character).toLocaleString().replace(/,/g, ' ')}

@@ -2,6 +2,7 @@
 
 export const isCharactersView = (orderBy: CharactersOrderBy): boolean => {
     return [
+        CharactersOrderBy.CharacterValue,
         CharactersOrderBy.CharacterPower,
         CharactersOrderBy.Rank,
         CharactersOrderBy.Rarity,

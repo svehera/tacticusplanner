@@ -6,6 +6,7 @@ import damageIcon from 'src/assets/images/icons/dmg.webp';
 import healthIcon from 'src/assets/images/icons/health.webp';
 import powerIcon from 'src/assets/images/icons/power.png';
 import energyIcon from 'src/assets/images/icons/energy.png';
+import blackstoneIcon from 'src/assets/images/icons/blackstone.png';
 
 const icons = {
     armour: {
@@ -27,6 +28,10 @@ const icons = {
     energy: {
         file: energyIcon,
         label: 'Energy',
+    },
+    blackstone: {
+        file: blackstoneIcon,
+        label: 'Blackstone',
     },
 };
 
