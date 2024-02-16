@@ -35,12 +35,14 @@ export class CharactersValueService {
             if (!characterUpgrades) {
                 continue;
             }
-            const ranksRange = rankEntries.filter(r => r >= character.rankStart && r < character.rankEnd);
+            const ranksRange = rankEntries.filter(r => r >= character.rankStart && r <= character.rankEnd);
 
             const rankUpgrades = ranksRange
                 .flatMap((rank, index) => {
                     const result = characterUpgrades[rankToString(rank)] ?? [];
-                    return index === 0 ? result.filter(x => !character.appliedUpgrades.includes(x)) : result;
+                    return index === ranksRange.length - 1
+                        ? result.filter(x => character.appliedUpgrades.includes(x))
+                        : result;
                 })
                 .filter(x => !!x);
 
@@ -80,7 +82,6 @@ export class CharactersValueService {
     }
 
     public static getRankValue(name: string, currentRank: Rank, appliedUpgrades: string[]): number {
-        const CoinBS: number = 780 / 60000;
         const MaterialBS: { [key: string]: number } = {
             0: 5, // Common
             1: 10, // Uncommon
@@ -97,11 +98,6 @@ export class CharactersValueService {
         });
 
         const result: IMaterialRecipeIngredientFull[] = StaticDataService.groupBaseMaterials(upgrades, true);
-        // Debug
-        // console.log('Upgrades for: ', name);
-        // result.forEach(x => {
-        //     console.log('Label:', x.label, 'Count:', x.count, 'Rarity:', x.rarity);
-        // });
         return Math.ceil(
             sum(
                 result
