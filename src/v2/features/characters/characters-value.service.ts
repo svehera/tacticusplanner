@@ -1,11 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import { ICharacter2, IMaterialEstimated2, IMaterialFull, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
-import { orderBy, sortBy, sum } from 'lodash';
+import { cloneDeep, orderBy, sortBy, sum } from 'lodash';
 import { Rank, Rarity, RarityStars } from 'src/models/enums';
-import rankUpData from 'src/assets/rankUpData.json';
-import recipeData from 'src/assets/recipeData.json';
 import { StaticDataService } from 'src/services/static-data.service';
 import { getEnumValues } from 'src/shared-logic/functions';
+import { ICharacter2, ICharacterRankRange, IMaterialFull, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
+import { rankToString } from 'src/shared-logic/functions';
 
 export class CharactersValueService {
     public static getCharacterValue(character: ICharacter2): number {
@@ -14,6 +13,7 @@ export class CharactersValueService {
         }
 
         const valueLevel =
+            // Commented out while testing getRankValue
             // CharactersValueService.getUnlockValue(character.initialRarity, character.name) +
             // CharactersValueService.getExperienceValue(character.level) +
             // CharactersValueService.getAbilityValue(character.activeAbilityLevel) +
@@ -22,9 +22,62 @@ export class CharactersValueService {
             // CharactersValueService.getInitialStarsValue(character.initialRarity) +
             // CharactersValueService.getRarityValue(character.rarity) -
             // CharactersValueService.getRarityValue(character.initialRarity) +
-            // not yet working:
             CharactersValueService.getRankValue(character.name, character.rank, character.upgrades);
         return Math.round(valueLevel);
+    }
+
+    public static getUpgrades(...characters: Array<ICharacterRankRange>): IMaterialFull[] {
+        const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
+        const result: IMaterialFull[] = [];
+        let priority = 0;
+        for (const character of characters) {
+            priority++;
+            const characterUpgrades = StaticDataService.rankUpData[character.id];
+            if (!characterUpgrades) {
+                continue;
+            }
+            const ranksRange = rankEntries.filter(r => r >= character.rankStart && r < character.rankEnd);
+
+            const rankUpgrades = ranksRange
+                .flatMap((rank, index) => {
+                    const result = characterUpgrades[rankToString(rank)] ?? [];
+                    return index === 0 ? result.filter(x => !character.appliedUpgrades.includes(x)) : result;
+                })
+                .filter(x => !!x);
+
+            if (!rankUpgrades.length) {
+                continue;
+            }
+
+            const upgrades: IMaterialFull[] = rankUpgrades.map(upgrade => {
+                const recipe = StaticDataService.recipeDataFull[upgrade];
+                if (!recipe) {
+                    // console.error('Recipe for ' + upgrade + ' is not found');
+
+                    return {
+                        rarity: 0,
+                        craftable: false,
+                        iconPath: upgrade,
+                        stat: 'Unknown',
+                        id: upgrade,
+                        label: upgrade,
+                        character: character.id,
+                        priority,
+                        recipe: [],
+                        allMaterials: [],
+                    };
+                }
+                return {
+                    ...cloneDeep(recipe),
+                    priority,
+                    character: character.id,
+                };
+            });
+
+            result.push(...upgrades);
+        }
+
+        return result;
     }
 
     public static getRankValue(name: string, currentRank: Rank, appliedUpgrades: string[]): number {
@@ -37,86 +90,15 @@ export class CharactersValueService {
             Legendary: 150,
         };
 
-        const upgrades = StaticDataService.getUpgrades({
+        const upgrades = CharactersValueService.getUpgrades({
             id: name,
             rankStart: Rank.Stone1,
             rankEnd: currentRank,
             appliedUpgrades: appliedUpgrades,
         });
 
-        const [totalGold, setTotalGold] = useState<number>(0);
-
-        const allMaterials = useMemo<IMaterialRecipeIngredientFull[]>(() => {
-            const result: IMaterialRecipeIngredientFull[] = StaticDataService.groupBaseMaterials(upgrades, true);
-            const goldIndex = result.findIndex(x => x.id === 'Gold');
-
-            if (goldIndex > -1) {
-                const [gold] = result.splice(goldIndex, 1);
-                setTotalGold(gold.count);
-            } else {
-                setTotalGold(0);
-            }
-            return orderBy(result, ['rarity', 'count'], ['desc', 'desc']);
-        }, [upgrades]);
-
-        return Math.ceil(sum(allMaterials.map(x => x.count * MaterialBS[x.rarity])));
-
-        //let grandtotal: number = 0;
-        //
-        //        const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
-        //for (let thisrank = 0; thisrank < rankEntries.indexOf(currentRank); thisrank++) {
-        //    for (const i of rankUpData[character][Rank[thisrank]]) {
-        //        let total: number = 0;
-        //         if (!recipeData[i]['craftable']) {
-        //             total += MaterialBS[recipeData[i]['rarity']];
-        //         }
-        //         if (recipeData[i]['craftable']) {
-        //             for (const j of recipeData[i]['recipe']) {
-        //                 if (j['material'] === 'Gold') {
-        //                     total += CoinBS * j['count'];
-        //                 }
-        //                 if (j['material'] !== 'Gold') {
-        //                     if (!recipeData[j['material']]['craftable']) {
-        //                         total += j['count'] * MaterialBS[recipeData[j['material']]['rarity']];
-        //                     }
-        //                     if (recipeData[j['material']]['craftable']) {
-        //                         for (const k of recipeData[j['material']]['recipe']) {
-        //                             if (k['material'] === 'Gold') {
-        //                                 total += CoinBS * k['count'];
-        //                             }
-        //                             if (k['material'] !== 'Gold') {
-        //                                 if (!recipeData[k['material']]['craftable']) {
-        //                                     total +=
-        //                                         j['count'] *
-        //                                         k['count'] *
-        //                                         MaterialBS[recipeData[k['material']]['rarity']];
-        //                                 }
-        //                                 if (recipeData[k['material']]['craftable']) {
-        //                                     for (const l of recipeData[k['material']]['recipe']) {
-        //                                         if (l['material'] === 'Gold') {
-        //                                             total += CoinBS * l['count'];
-        //                                         }
-        //                                         if (l['material'] !== 'Gold') {
-        //                                             if (!recipeData[l['material']]['craftable']) {
-        //                                                 total +=
-        //                                                     j['count'] *
-        //                                                     k['count'] *
-        //                                                     l['count'] *
-        //                                                     MaterialBS[recipeData[l['material']]['rarity']];
-        //                                             }
-        //                                         }
-        //                                     }
-        //                                 }
-        //                             }
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //         grandtotal += Math.round(total);
-        //     }
-        // }
-        // return grandtotal;
+        const result: IMaterialRecipeIngredientFull[] = StaticDataService.groupBaseMaterials(upgrades, true);
+        return Math.ceil(sum(result.map(x => x.count)));
     }
 
     public static getUnlockValue(initialRarity: number, name: string): number {

@@ -18,7 +18,7 @@ export const FactionsTile = ({
     onCharacterClick?: (character: ICharacter2) => void;
 }) => {
     const factionPower = numberToThousandsString(faction.power);
-    const factionValue = numberToThousandsString(faction.value);
+    const factionValue = numberToThousandsString(faction.bsValue);
     const isCompleteFaction = faction.characters.length === 5;
     return (
         <div className="faction">

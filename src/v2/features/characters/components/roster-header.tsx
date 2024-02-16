@@ -16,7 +16,7 @@ export const RosterHeader = ({
 }: React.PropsWithChildren<{
     totalValue: number;
     totalPower: number;
-    filterChanges: (value: string) => void;
+    filterChanges: (bsValue: string) => void;
 }>) => {
     return (
         <FlexBox gap={10} justifyContent={'center'}>

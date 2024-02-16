@@ -80,7 +80,7 @@ export class CharactersService {
                 return {
                     ...faction,
                     characters,
-                    value: sum(characters.map(CharactersValueService.getCharacterValue)),
+                    bsValue: sum(characters.map(CharactersValueService.getCharacterValue)),
                     power: sum(characters.map(CharactersPowerService.getCharacterPower)),
                     unlockedCharacters: characters.filter(x => x.rank > Rank.Locked).length,
                 };
@@ -88,7 +88,7 @@ export class CharactersService {
         let orderByKey: keyof IFaction;
         switch (charactersOrderBy) {
             case CharactersOrderBy.FactionValue: {
-                orderByKey = 'value';
+                orderByKey = 'bsValue';
                 return orderBy(result, [orderByKey], ['desc']);
             }
             case CharactersOrderBy.FactionPower: {
