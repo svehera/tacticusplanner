@@ -13,15 +13,14 @@ export class CharactersValueService {
         }
 
         const valueLevel =
-            // Commented out while testing getRankValue
-            // CharactersValueService.getUnlockValue(character.initialRarity, character.name) +
-            // CharactersValueService.getExperienceValue(character.level) +
-            // CharactersValueService.getAbilityValue(character.activeAbilityLevel) +
-            // CharactersValueService.getAbilityValue(character.passiveAbilityLevel) +
-            // CharactersValueService.getStarsValue(character.stars) -
-            // CharactersValueService.getInitialStarsValue(character.initialRarity) +
-            // CharactersValueService.getRarityValue(character.rarity) -
-            // CharactersValueService.getRarityValue(character.initialRarity) +
+            CharactersValueService.getUnlockValue(character.initialRarity, character.name) +
+            CharactersValueService.getExperienceValue(character.level) +
+            CharactersValueService.getAbilityValue(character.activeAbilityLevel) +
+            CharactersValueService.getAbilityValue(character.passiveAbilityLevel) +
+            CharactersValueService.getStarsValue(character.stars) -
+            CharactersValueService.getInitialStarsValue(character.initialRarity) +
+            CharactersValueService.getRarityValue(character.rarity) -
+            CharactersValueService.getRarityValue(character.initialRarity) +
             CharactersValueService.getRankValue(character.name, character.rank, character.upgrades);
         return Math.round(valueLevel);
     }
@@ -83,11 +82,11 @@ export class CharactersValueService {
     public static getRankValue(name: string, currentRank: Rank, appliedUpgrades: string[]): number {
         const CoinBS: number = 780 / 60000;
         const MaterialBS: { [key: string]: number } = {
-            Common: 5,
-            Uncommon: 10,
-            Rare: 25,
-            Epic: 60,
-            Legendary: 150,
+            0: 5, // Common
+            1: 10, // Uncommon
+            2: 25, // Rare
+            3: 60, // Epic
+            4: 150, // Legendary
         };
 
         const upgrades = CharactersValueService.getUpgrades({
@@ -98,7 +97,19 @@ export class CharactersValueService {
         });
 
         const result: IMaterialRecipeIngredientFull[] = StaticDataService.groupBaseMaterials(upgrades, true);
-        return Math.ceil(sum(result.map(x => x.count)));
+        // Debug
+        // console.log('Upgrades for: ', name);
+        // result.forEach(x => {
+        //     console.log('Label:', x.label, 'Count:', x.count, 'Rarity:', x.rarity);
+        // });
+        return Math.ceil(
+            sum(
+                result
+                    // filter out Gold, which has an undefined label
+                    .filter(x => x.label !== undefined)
+                    .map(x => x.count * MaterialBS[x.rarity])
+            )
+        );
     }
 
     public static getUnlockValue(initialRarity: number, name: string): number {
