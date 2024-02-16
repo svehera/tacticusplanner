@@ -153,7 +153,27 @@ export const starEmoji = String.fromCodePoint(parseInt('1F31F', 16));
 
 export const discordInvitationLink = 'https://discord.gg/gyajsMcH7j';
 
-export const defaultCampaignsProgress: ICampaignsProgress = {
+const defaultCampaignsProgress: ICampaignsProgress = {
+    Indomitus: 75,
+    'Indomitus Mirror': 75,
+    'Indomitus Elite': 0,
+    'Indomitus Mirror Elite': 0,
+
+    'Fall of Cadia': 0,
+    'Fall of Cadia Mirror': 0,
+    'Fall of Cadia Elite': 0,
+    'Fall of Cadia Mirror Elite': 0,
+
+    Octarius: 0,
+    'Octarius Mirror': 0,
+    'Octarius Elite': 0,
+    'Octarius Mirror Elite': 0,
+
+    'Saim-Hann': 0,
+    'Saim-Hann Mirror': 0,
+};
+
+export const fullCampaignsProgress: ICampaignsProgress = {
     Indomitus: 75,
     'Indomitus Mirror': 75,
     'Indomitus Elite': 40,

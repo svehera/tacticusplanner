@@ -20,7 +20,7 @@ import IconButton from '@mui/material/IconButton';
 import { ArrowForward, DeleteForever, Edit, Info } from '@mui/icons-material';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { StaticDataService } from '../../services';
-import { charsProgression, charsUnlockShards, defaultCampaignsProgress, rarityToStars } from '../../models/constants';
+import { charsProgression, charsUnlockShards, fullCampaignsProgress, rarityToStars } from '../../models/constants';
 import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { CampaignImage } from '../../shared-components/campaign-image';
@@ -58,7 +58,7 @@ export const Goals = () => {
                 dailyEnergy: dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy,
                 campaignsProgress: dailyRaidsPreferences.useCampaignsProgress
                     ? campaignsProgress
-                    : defaultCampaignsProgress,
+                    : fullCampaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: dailyRaidsPreferences.useInventory ? inventory.upgrades : {},
                 completedLocations: dailyRaids.completedLocations ?? [],
@@ -224,7 +224,7 @@ export const GoalCard = ({
                 dailyEnergy: dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy,
                 campaignsProgress: dailyRaidsPreferences.useCampaignsProgress
                     ? campaignsProgress
-                    : defaultCampaignsProgress,
+                    : fullCampaignsProgress,
                 preferences: dailyRaidsPreferences, // { ...dailyRaidsPreferences, farmByPriorityOrder: true },
                 upgrades: dailyRaidsPreferences.useInventory ? inventory.upgrades : {},
                 completedLocations: dailyRaids.completedLocations ?? [],

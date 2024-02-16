@@ -32,7 +32,7 @@ import { isMobile } from 'react-device-detect';
 import Button from '@mui/material/Button';
 import SettingsIcon from '@mui/icons-material/Settings';
 import DailyRaidsSettings from '../../shared-components/daily-raids-settings';
-import { defaultCampaignsProgress } from '../../models/constants';
+import { fullCampaignsProgress } from '../../models/constants';
 import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
 import { UpgradeImage } from '../../shared-components/upgrade-image';
 import { Link } from 'react-router-dom';
@@ -41,7 +41,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { CampaignImage } from '../../shared-components/campaign-image';
 import IconButton from '@mui/material/IconButton';
-import { Edit } from '@mui/icons-material';
+import { Edit, Warning } from '@mui/icons-material';
 import { EditGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 import { enqueueSnackbar } from 'notistack';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -242,7 +242,7 @@ export const DailyRaids = () => {
                 dailyEnergy: actualEnergy,
                 campaignsProgress: dailyRaidsPreferences.useCampaignsProgress
                     ? campaignsProgress
-                    : defaultCampaignsProgress,
+                    : fullCampaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: dailyRaidsPreferences.useInventory ? upgrades : {},
                 completedLocations: dailyRaids.completedLocations ?? [],
@@ -303,6 +303,10 @@ export const DailyRaids = () => {
         }
         return result;
     }, [selectedCharacters, dailyRaidsPreferences, upgrades]);
+
+    const blockedMaterials: IMaterialEstimated2[] = useMemo(() => {
+        return estimatedRanks.materials.filter(x => x.locationsString === x.missingLocationsString);
+    }, [estimatedRanks.materials]);
 
     return (
         <div>
@@ -374,6 +378,43 @@ export const DailyRaids = () => {
                         ) : undefined}
                     </AccordionDetails>
                 </Accordion>
+
+                {!!blockedMaterials.length && (
+                    <Accordion TransitionProps={{ unmountOnExit: !gridLoaded }}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                            <Tooltip title={`You don't any have location for ${blockedMaterials.length} materials`}>
+                                <span style={{ fontSize: 20 }}>
+                                    <Warning color={'warning'} /> Blocked Materials ({blockedMaterials.length})
+                                </span>
+                            </Tooltip>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <div
+                                className="ag-theme-material"
+                                style={{
+                                    height: 50 + estimatedRanks.materials.length * 30,
+                                    maxHeight: '40vh',
+                                    width: '100%',
+                                }}>
+                                <AgGridReact
+                                    onCellEditingStopped={saveChanges}
+                                    suppressChangeDetection={true}
+                                    singleClickEdit={true}
+                                    defaultColDef={{
+                                        suppressMovable: true,
+                                        sortable: true,
+                                        wrapText: true,
+                                    }}
+                                    rowHeight={60}
+                                    rowBuffer={3}
+                                    columnDefs={columnDefs}
+                                    rowData={blockedMaterials}
+                                    onGridReady={() => setGridLoaded(true)}
+                                />
+                            </div>
+                        </AccordionDetails>
+                    </Accordion>
+                )}
 
                 <Accordion defaultExpanded={true} TransitionProps={{ unmountOnExit: !pagination.completed }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -601,6 +642,9 @@ const MaterialItem = ({
     const { dailyRaids } = useContext(StoreContext);
     const completedLocations = dailyRaids.completedLocations?.flatMap(x => x.locations) ?? [];
 
+    const isAllLocationsBlocked =
+        !!raid.materialRef && raid.materialRef.locationsString === raid.materialRef.missingLocationsString;
+
     const isAllRaidsCompleted = useMemo(
         () =>
             isFirstDay &&
@@ -614,7 +658,7 @@ const MaterialItem = ({
     );
 
     return (
-        <li style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>
+        <li style={{ opacity: isAllRaidsCompleted || isAllLocationsBlocked ? 0.5 : 1 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 {raid.characterIconPath ? (
                     <CharacterImage icon={raid.characterIconPath} />
@@ -625,16 +669,22 @@ const MaterialItem = ({
                         iconPath={raid.materialIconPath}
                     />
                 )}
-                <Tooltip title={raid.characters.join(', ')}>
+                {isAllLocationsBlocked ? (
                     <span>
-                        (
-                        {raid.characters.length <= 3
-                            ? raid.characters.join(', ')
-                            : raid.characters.slice(0, 3).join(', ') +
-                              ` and ${raid.characters.slice(3).length} more...`}
-                        )
+                        <Warning color={'warning'} /> All locations locked
                     </span>
-                </Tooltip>
+                ) : (
+                    <Tooltip title={raid.characters.join(', ')}>
+                        <span>
+                            (
+                            {raid.characters.length <= 3
+                                ? raid.characters.join(', ')
+                                : raid.characters.slice(0, 3).join(', ') +
+                                  ` and ${raid.characters.slice(3).length} more...`}
+                            )
+                        </span>
+                    </Tooltip>
+                )}
             </div>
             <ul style={{ paddingInlineStart: 15 }}>
                 {raid.locations.map(x => (

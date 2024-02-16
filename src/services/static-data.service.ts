@@ -656,6 +656,7 @@ export class StaticDataService {
                     totalCount: material.count,
                     locations: [],
                     characters: material.characters,
+                    materialRef: material,
                 };
 
                 for (const location of material.locations) {
