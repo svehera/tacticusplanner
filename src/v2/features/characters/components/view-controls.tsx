@@ -57,6 +57,12 @@ export const ViewControls = ({
                 return 'Need to Level';
             case CharactersFilterBy.CanUpgrade:
                 return 'Can Upgrade';
+            case CharactersFilterBy.Chaos:
+                return 'Chaos Alliance';
+            case CharactersFilterBy.Imperial:
+                return 'Imperial Alliance';
+            case CharactersFilterBy.Xenos:
+                return 'Xenos Alliance';
             case CharactersFilterBy.None:
                 return 'None';
             default:
