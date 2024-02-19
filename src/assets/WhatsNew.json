@@ -59,6 +59,9 @@
                 },
                 {
                     "text": "Fixed tooltip of \"Blessed Tabard\" (kanslerioikein)"
+                },
+                {
+                    "text": "Added missing user's name on the Shared Roster page"
                 }
             ]
         },
