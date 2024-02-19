@@ -16,7 +16,7 @@ import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
 import { isMobile } from 'react-device-detect';
 import { useSearchParams } from 'react-router-dom';
-import { defaultCampaignsProgress } from '../../models/constants';
+import { fullCampaignsProgress } from '../../models/constants';
 import { UpgradeImage } from '../../shared-components/upgrade-image';
 import { RankSelect } from '../../shared-components/rank-select';
 import { MiscIcon } from '../../shared-components/misc-icon';
@@ -92,7 +92,7 @@ export const RankLookup = () => {
             StaticDataService.getAllMaterials(
                 {
                     completedLocations: [],
-                    campaignsProgress: defaultCampaignsProgress,
+                    campaignsProgress: fullCampaignsProgress,
                     dailyEnergy: 0,
                     upgrades: {},
                 },

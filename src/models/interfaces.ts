@@ -654,6 +654,7 @@ export interface IMaterialRaid {
     characterIconPath?: string;
     characters: string[];
     locations: Array<IRaidLocation>;
+    materialRef?: IMaterialEstimated2;
 }
 
 export interface IRaidLocation {

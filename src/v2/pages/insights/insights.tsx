@@ -12,6 +12,7 @@ import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-o
 import { ViewControls } from 'src/v2/features/characters/components/view-controls';
 import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
+import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
 import { IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
@@ -58,6 +59,7 @@ export const Insights = () => {
 
     const charactersFiltered = CharactersService.filterCharacters(averageRoster, viewControls.filterBy, nameFilter);
     const totalPower = sum(charactersFiltered.map(character => CharactersPowerService.getCharacterPower(character)));
+    const totalValue = sum(charactersFiltered.map(character => CharactersValueService.getCharacterValue(character)));
 
     const factions = CharactersService.orderByFaction(charactersFiltered, viewControls.orderBy);
     const characters = CharactersService.orderCharacters(charactersFiltered, viewControls.orderBy);
@@ -78,7 +80,7 @@ export const Insights = () => {
                 <b>{new Date(data.averageRosterDataCreationTime).toDateString()}</b>
             </p>
 
-            <RosterHeader totalPower={totalPower} filterChanges={setNameFilter} />
+            <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter} />
             <ViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
 
             <Conditional condition={isFactionsView(viewControls.orderBy)}>
