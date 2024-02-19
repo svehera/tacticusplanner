@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import { Help } from '@mui/icons-material';
 import { StoreContext } from '../../reducers/store.provider';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 
 export const LegendaryEventPage = () => {
     const location = useLocation();
@@ -69,9 +70,16 @@ export const LegendaryEventPage = () => {
 
     return (
         <Box sx={{ paddingLeft: 2, paddingRight: 2, paddingBottom: 0 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', margin: '10px 0' }}>
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    margin: '10px 0',
+                    gap: 10,
+                    flexDirection: isMobile ? 'column' : 'row',
+                }}>
                 <ViewSettings />
-                <div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Button disabled={!viewPreferences.autoTeams} variant="outlined" onClick={handleClick2}>
                         Auto-Teams <SettingsIcon />
                     </Button>

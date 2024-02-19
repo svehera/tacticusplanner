@@ -247,6 +247,7 @@
     },
     "Blessing of Nurgle": {
         "material": "Blessing of Nurgle",
+        "label": "Boon of Nurgle",
         "craftable": false,
         "stat": "Health",
         "faction": "Death Guard",

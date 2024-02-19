@@ -19,7 +19,7 @@ export const RosterHeader = ({
     filterChanges: (bsValue: string) => void;
 }>) => {
     return (
-        <FlexBox gap={10} justifyContent={'center'}>
+        <FlexBox gap={10} justifyContent={'center'} wrap>
             <div className="value-score-container">
                 <InfoBox />
                 <MiscIcon icon={'blackstone'} height={40} width={30} />
@@ -30,7 +30,7 @@ export const RosterHeader = ({
                 {numberToThousandsString(totalPower)}
             </div>
             <TextField
-                sx={{ margin: '10px', width: '300px' }}
+                sx={{ margin: '10px', width: '220px' }}
                 label="Quick Filter"
                 variant="outlined"
                 onChange={event => filterChanges(event.target.value)}

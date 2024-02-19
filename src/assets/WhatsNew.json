@@ -3,12 +3,45 @@
     "releaseNotes": [
         {
             "version": "1.3.6",
-            "date": "February X",
+            "date": "February 19",
             "type": "Update",
-            "new": [],
+            "new": [
+                {
+                    "text": "Added characters value (in blackstone) calculations. Thanks Lëonaica for contribution.",
+                    "images": [
+                        {
+                            "path": "bsvalue.png"
+                        }
+                    ]
+                }
+            ],
             "minor": [
                 {
-                    "text": "Added indication of materials that don't have any locations unlocked on the Daily Raids screen (UnknownSolarEvent)"
+                    "text": "Added indication of materials that don't have any locations unlocked on the Daily Raids screen (UnknownSolarEvent)",
+                    "images": [
+                        {
+                            "path": "blocked.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Legendary events tables now available on mobile view by default (SoilBurn)",
+                    "images": [
+                        {
+                            "path": "lemobile.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added alliance filters to Who You Own page. Thanks Lëonaica for contribution.",
+                    "images": [
+                        {
+                            "path": "alliance.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "The \"What's new \" popup will be displayed automatically in 3 seconds after app with new version is opened."
                 }
             ],
             "bugFixes": [
@@ -20,6 +53,12 @@
                 },
                 {
                     "text": "Fixed Sho'Syl Stone I upgrades (ChargingFurret)"
+                },
+                {
+                    "text": "Changed label of \"Blessing of Nurge\" to  \"Boon of Nurge\" (Tani)"
+                },
+                {
+                    "text": "Fixed tooltip of \"Blessed Tabard\" (kanslerioikein)"
                 }
             ]
         },

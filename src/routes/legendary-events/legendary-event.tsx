@@ -14,6 +14,7 @@ import { MyProgressDialog } from './my-progress-dialog';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { LegendaryEventEnum } from '../../models/enums';
 import { getLegendaryEvent } from '../../models/constants';
+import { isMobile } from 'react-device-detect';
 
 const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
     const { characters, viewPreferences, selectedTeamOrder, leSelectedTeams, leProgress } = useContext(StoreContext);
@@ -88,17 +89,32 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
 
     return (
         <div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 15, marginBottom: 10 }}>
+            <div
+                style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: 10,
+                }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        alignItems: 'center',
+                        gap: 15,
+                        marginBottom: 10,
+                        maxWidth: '50%',
+                    }}>
                     <div style={{ display: 'flex' }}>
-                        <span>Recommended teams</span>
+                        <span>Auto-teams</span>
                         <Tooltip title={'Click - adds single char, Shift + Click - adds top 5 chars'}>
                             <Info />
                         </Tooltip>
                     </div>
 
                     <FormControl
-                        sx={{ width: 200 }}
+                        sx={{ width: 150 }}
                         size={'small'}
                         disabled={viewPreferences.hideSelectedTeams && viewPreferences.autoTeams}>
                         <InputLabel id="order-by-label">Order By</InputLabel>
@@ -118,7 +134,7 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
                     </FormControl>
 
                     <FormControl
-                        sx={{ width: 200 }}
+                        sx={{ width: 150 }}
                         size={'small'}
                         disabled={viewPreferences.hideSelectedTeams && viewPreferences.autoTeams}>
                         <InputLabel id="direction-label">Direction</InputLabel>
@@ -136,13 +152,15 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
                         </Select>
                     </FormControl>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 10, maxWidth: '50%' }}>
                     <SetGoalDialog />
                     <MyProgressDialog legendaryEvent={legendaryEvent} />
                     <DataTablesDialog legendaryEvent={legendaryEvent} />
                 </div>
             </div>
-            <div style={{ display: 'flex', gap: 15, marginBottom: 10 }} key={legendaryEvent.id}>
+            <div
+                style={{ display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: 15, marginBottom: 10 }}
+                key={legendaryEvent.id}>
                 <LegendaryEventTrack
                     show={viewPreferences.showAlpha}
                     track={legendaryEvent.alpha}
@@ -169,7 +187,9 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
                         <Info />
                     </Tooltip>
                 </div>
-                <div style={{ display: 'flex', gap: 15 }} key={legendaryEvent.id}>
+                <div
+                    style={{ display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: 15 }}
+                    key={legendaryEvent.id}>
                     <SelectedTeamsTable
                         show={viewPreferences.showAlpha}
                         track={legendaryEvent.alpha}
