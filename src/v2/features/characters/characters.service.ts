@@ -5,6 +5,9 @@ import { Rank } from 'src/models/enums';
 import { CharactersFilterBy } from './enums/characters-filter-by';
 import { needToAscendCharacter } from './functions/need-to-ascend';
 import { needToLevelCharacter } from './functions/need-to-level';
+import { filterChaos } from './functions/filter-by-chaos';
+import { filterImperial } from './functions/filter-by-imperial';
+import { filterXenos } from './functions/filter-by-xenos';
 import { CharactersOrderBy } from './enums/characters-order-by';
 import { IFaction } from './characters.models';
 
@@ -31,6 +34,12 @@ export class CharactersService {
                 return filteredCharactersByName.filter(
                     char => char.rank !== Rank.Locked && !needToLevelCharacter(char) && !needToAscendCharacter(char)
                 );
+            case CharactersFilterBy.Chaos:
+                return filteredCharactersByName.filter(filterChaos);
+            case CharactersFilterBy.Imperial:
+                return filteredCharactersByName.filter(filterImperial);
+            case CharactersFilterBy.Xenos:
+                return filteredCharactersByName.filter(filterXenos);
             case CharactersFilterBy.None:
             default:
                 return filteredCharactersByName;
