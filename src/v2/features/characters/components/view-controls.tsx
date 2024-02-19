@@ -26,8 +26,12 @@ export const ViewControls = ({
 
     const orderToString = (order: CharactersOrderBy): string => {
         switch (order) {
+            case CharactersOrderBy.FactionValue:
+                return 'By Faction Value';
             case CharactersOrderBy.FactionPower:
                 return 'By Faction Power';
+            case CharactersOrderBy.CharacterValue:
+                return 'By Character Value';
             case CharactersOrderBy.CharacterPower:
                 return 'By Character Power';
             case CharactersOrderBy.AbilitiesLevel:
@@ -53,6 +57,12 @@ export const ViewControls = ({
                 return 'Need to Level';
             case CharactersFilterBy.CanUpgrade:
                 return 'Can Upgrade';
+            case CharactersFilterBy.Chaos:
+                return 'Chaos Alliance';
+            case CharactersFilterBy.Imperial:
+                return 'Imperial Alliance';
+            case CharactersFilterBy.Xenos:
+                return 'Xenos Alliance';
             case CharactersFilterBy.None:
                 return 'None';
             default:
@@ -67,7 +77,7 @@ export const ViewControls = ({
         entries: Array<number>,
         getName: (value: number) => string
     ) => (
-        <FormControl style={{ width: '250px' }}>
+        <FormControl style={{ width: '220px' }}>
             <InputLabel>{label}</InputLabel>
             <Select label={name} value={value} onChange={event => updatePreferences(name, +event.target.value)}>
                 {entries.map(value => (
@@ -80,7 +90,7 @@ export const ViewControls = ({
     );
 
     return (
-        <FlexBox gap={10} justifyContent={'center'}>
+        <FlexBox gap={10} justifyContent={'center'} useColumnForMobile>
             {getSelectControl('Order', viewControls.orderBy, 'orderBy', orderEntries, orderToString)}
             {getSelectControl('Filter', viewControls.filterBy, 'filterBy', filterEntries, filterToString)}
         </FlexBox>

@@ -3,4 +3,7 @@
     NeedToAscend,
     NeedToLevel,
     CanUpgrade,
+    Chaos,
+    Imperial,
+    Xenos,
 }

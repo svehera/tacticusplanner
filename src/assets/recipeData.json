@@ -247,6 +247,7 @@
     },
     "Blessing of Nurgle": {
         "material": "Blessing of Nurgle",
+        "label": "Boon of Nurgle",
         "craftable": false,
         "stat": "Health",
         "faction": "Death Guard",
@@ -6128,7 +6129,7 @@
         "faction": "Adepta Sororitas",
         "rarity": "Shard"
     },
-    "Sibyll Devine": {
+    "Sibyll": {
         "material": "Sibyll Devine",
         "craftable": false,
         "stat": "Shard",

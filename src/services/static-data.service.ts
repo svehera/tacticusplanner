@@ -99,6 +99,10 @@ export class StaticDataService {
         return groupBy(allBattles, 'campaign');
     }
 
+    static isValidaUpgrade(upgrade: string): boolean {
+        return Object.hasOwn(recipeData, upgrade);
+    }
+
     static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
         const result: Record<string, ICampaignBattleComposed> = {};
         for (const battleDataKey in this.battleData) {
@@ -652,6 +656,7 @@ export class StaticDataService {
                     totalCount: material.count,
                     locations: [],
                     characters: material.characters,
+                    materialRef: material,
                 };
 
                 for (const location of material.locations) {

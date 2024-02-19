@@ -5,11 +5,15 @@ import { Rank } from 'src/models/enums';
 import { CharactersFilterBy } from './enums/characters-filter-by';
 import { needToAscendCharacter } from './functions/need-to-ascend';
 import { needToLevelCharacter } from './functions/need-to-level';
+import { filterChaos } from './functions/filter-by-chaos';
+import { filterImperial } from './functions/filter-by-imperial';
+import { filterXenos } from './functions/filter-by-xenos';
 import { CharactersOrderBy } from './enums/characters-order-by';
 import { IFaction } from './characters.models';
 
 import factionsData from 'src/v2/data/factions.json';
 import { CharactersPowerService } from './characters-power.service';
+import { CharactersValueService } from './characters-value.service';
 
 export class CharactersService {
     static filterCharacters(
@@ -30,6 +34,12 @@ export class CharactersService {
                 return filteredCharactersByName.filter(
                     char => char.rank !== Rank.Locked && !needToLevelCharacter(char) && !needToAscendCharacter(char)
                 );
+            case CharactersFilterBy.Chaos:
+                return filteredCharactersByName.filter(filterChaos);
+            case CharactersFilterBy.Imperial:
+                return filteredCharactersByName.filter(filterImperial);
+            case CharactersFilterBy.Xenos:
+                return filteredCharactersByName.filter(filterXenos);
             case CharactersFilterBy.None:
             default:
                 return filteredCharactersByName;
@@ -38,6 +48,12 @@ export class CharactersService {
 
     static orderCharacters(characters: ICharacter2[], charactersOrderBy: CharactersOrderBy): ICharacter2[] {
         switch (charactersOrderBy) {
+            case CharactersOrderBy.CharacterValue:
+                return orderBy(
+                    characters.map(x => ({ ...x, characterValue: CharactersValueService.getCharacterValue(x) })),
+                    ['characterValue'],
+                    ['desc']
+                );
             case CharactersOrderBy.CharacterPower:
                 return orderBy(
                     characters.map(x => ({ ...x, characterPower: CharactersPowerService.getCharacterPower(x) })),
@@ -73,12 +89,17 @@ export class CharactersService {
                 return {
                     ...faction,
                     characters,
+                    bsValue: sum(characters.map(CharactersValueService.getCharacterValue)),
                     power: sum(characters.map(CharactersPowerService.getCharacterPower)),
                     unlockedCharacters: characters.filter(x => x.rank > Rank.Locked).length,
                 };
             });
         let orderByKey: keyof IFaction;
         switch (charactersOrderBy) {
+            case CharactersOrderBy.FactionValue: {
+                orderByKey = 'bsValue';
+                return orderBy(result, [orderByKey], ['desc']);
+            }
             case CharactersOrderBy.FactionPower: {
                 orderByKey = 'power';
                 return orderBy(result, [orderByKey], ['desc']);
