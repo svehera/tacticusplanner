@@ -23,17 +23,17 @@ export const MobileHome = () => {
         return currentAppVersion === seenAppVersion;
     }, [seenAppVersion]);
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            if (!seenNewVersion) {
-                setShowWhatsNew(true);
-            }
-        }, 3000);
-
-        return () => {
-            clearTimeout(timeout);
-        };
-    }, []);
+    // useEffect(() => {
+    //     const timeout = setTimeout(() => {
+    //         if (!seenNewVersion) {
+    //             setShowWhatsNew(true);
+    //         }
+    //     }, 3000);
+    //
+    //     return () => {
+    //         clearTimeout(timeout);
+    //     };
+    // }, []);
 
     return (
         <div>
