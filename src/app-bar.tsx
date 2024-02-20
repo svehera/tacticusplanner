@@ -46,17 +46,17 @@ const TopAppBar = () => {
         }
     }, [location.pathname]);
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            if (!seenNewVersion) {
-                setShowWhatsNew(true);
-            }
-        }, 3000);
-
-        return () => {
-            clearTimeout(timeout);
-        };
-    }, []);
+    // useEffect(() => {
+    //     const timeout = setTimeout(() => {
+    //         if (!seenNewVersion) {
+    //             setShowWhatsNew(true);
+    //         }
+    //     }, 3000);
+    //
+    //     return () => {
+    //         clearTimeout(timeout);
+    //     };
+    // }, []);
 
     const nav = isTabletOrMobile ? undefined : (
         <div style={{ display: 'flex', alignItems: 'center', marginInlineEnd: 20 }}>
