@@ -3,6 +3,7 @@ import { AgGridReact } from 'ag-grid-react';
 import { Rank, Rarity, RarityStars } from '../models/enums';
 import { ICharacter2 } from '../models/interfaces';
 import { rankToLevel } from '../models/constants';
+import { isMobile } from 'react-device-detect';
 
 export const fitGridOnWindowResize = (gridRef: React.RefObject<AgGridReact>) => {
     function handleResize() {
@@ -10,6 +11,9 @@ export const fitGridOnWindowResize = (gridRef: React.RefObject<AgGridReact>) => 
     }
 
     React.useEffect(() => {
+        if (isMobile) {
+            return;
+        }
         window.addEventListener('resize', handleResize);
 
         return () => {
