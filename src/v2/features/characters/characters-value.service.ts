@@ -53,8 +53,6 @@ export class CharactersValueService {
             const upgrades: IMaterialFull[] = rankUpgrades.map(upgrade => {
                 const recipe = StaticDataService.recipeDataFull[upgrade];
                 if (!recipe) {
-                    // console.error('Recipe for ' + upgrade + ' is not found');
-
                     return {
                         rarity: 0,
                         craftable: false,
@@ -127,7 +125,9 @@ export class CharactersValueService {
             case Rarity.Legendary:
                 return ShardBS * 500;
         }
-        throw new Error('Initial Rarity unknown');
+
+        console.warn('Initial Rarity unknown');
+        return 0;
     }
 
     public static getExperienceValue(level: number): number {
@@ -234,8 +234,10 @@ export class CharactersValueService {
                 return ExpBS * 2202200;
             case 50:
                 return ExpBS * 2485200;
-            default:
-                throw new Error('Level unknown');
+            default: {
+                console.warn('Level unknown');
+                return 0;
+            }
         }
     }
 
@@ -428,8 +430,10 @@ export class CharactersValueService {
                 return ShardBS * 675 + LegendaryOrbBS * 15;
             case RarityStars.BlueStar:
                 return ShardBS * 1175 + LegendaryOrbBS * 20;
-            default:
-                throw new Error('Stars value unknown');
+            default: {
+                console.warn('Stars value unknown');
+                return 0;
+            }
         }
     }
 
@@ -447,8 +451,10 @@ export class CharactersValueService {
                 return ShardBS * 125;
             case Rarity.Legendary:
                 return ShardBS * 275;
-            default:
-                throw new Error('Rarity value unknown');
+            default: {
+                console.warn('Rarity value unknown');
+                return 0;
+            }
         }
     }
 
@@ -470,8 +476,10 @@ export class CharactersValueService {
                 return ShardBS * 50 + EpicOrbBS * 10;
             case Rarity.Legendary:
                 return ShardBS * 100 + LegendaryOrbBS * 10;
-            default:
-                throw new Error('Rarity value unknown');
+            default: {
+                console.warn('Rarity value unknown');
+                return 0;
+            }
         }
     }
 }

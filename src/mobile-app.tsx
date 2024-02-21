@@ -1,29 +1,48 @@
 ﻿import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import { Home, Input, School as Learn, TrackChanges as Plan } from '@mui/icons-material';
 
-import React, { useEffect } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
+import { menuItemById } from 'src/models/menu-items';
+import Typography from '@mui/material/Typography';
 
 const MobileApp = () => {
     const location = useLocation();
-    const [value, setValue] = React.useState(1);
+    const navigate = useNavigate();
 
-    useEffect(() => {
+    const value = useMemo(() => {
         if (location.pathname.includes('input')) {
-            setValue(1);
+            return 1;
         } else if (location.pathname.includes('plan')) {
-            setValue(2);
+            return 2;
         } else if (location.pathname.includes('learn')) {
-            setValue(3);
+            return 3;
         } else {
-            setValue(0);
+            return 0;
+        }
+    }, [location.pathname]);
+
+    const title = useMemo(() => {
+        const routeSections = location.pathname.split('/');
+        const menuItemId = routeSections[routeSections.length - 1];
+        if (Object.hasOwn(menuItemById, menuItemId) && value !== 0) {
+            return menuItemById[menuItemId as keyof typeof menuItemById].title;
+        } else {
+            return '';
         }
     }, [location.pathname]);
 
     return (
         <Box sx={{ margin: 'auto', padding: 1, paddingBottom: 7 }}>
+            <Typography
+                style={{ cursor: 'pointer' }}
+                variant={'h5'}
+                component="div"
+                onClick={() => navigate('/mobile/home')}>
+                {title}
+            </Typography>
             <Outlet />
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, margin: 'auto', zIndex: 100 }} elevation={3}>
                 <BottomNavigation showLabels value={value}>

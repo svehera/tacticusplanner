@@ -65,6 +65,8 @@ export const SharedRoster = () => {
 
     return (
         <Box style={{ margin: 'auto' }}>
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            <h3 style={{ textAlign: 'center' }}>{sharedUser}'s Roster</h3>
             <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter} />
             <ViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
 

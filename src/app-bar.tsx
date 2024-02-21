@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
+﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
@@ -31,7 +31,7 @@ const TopAppBar = () => {
 
     const [showWhatsNew, setShowWhatsNew] = useState(false);
 
-    const hasNewVersion = useMemo(() => {
+    const seenNewVersion = useMemo(() => {
         const currentAppVersion = localStorage.getItem('appVersion');
         return currentAppVersion === seenAppVersion;
     }, [seenAppVersion]);
@@ -45,6 +45,18 @@ const TopAppBar = () => {
             return 'Tacticus Planner';
         }
     }, [location.pathname]);
+
+    // useEffect(() => {
+    //     const timeout = setTimeout(() => {
+    //         if (!seenNewVersion) {
+    //             setShowWhatsNew(true);
+    //         }
+    //     }, 3000);
+    //
+    //     return () => {
+    //         clearTimeout(timeout);
+    //     };
+    // }, []);
 
     const nav = isTabletOrMobile ? undefined : (
         <div style={{ display: 'flex', alignItems: 'center', marginInlineEnd: 20 }}>
@@ -76,7 +88,7 @@ const TopAppBar = () => {
             }}>
             <MenuItem color="inherit" onClick={() => setShowWhatsNew(true)}>
                 <ListItemIcon>
-                    <Badge color="secondary" variant="dot" invisible={hasNewVersion}>
+                    <Badge color="secondary" variant="dot" invisible={seenNewVersion}>
                         <CampaignIcon />
                     </Badge>
                 </ListItemIcon>
@@ -134,7 +146,7 @@ const TopAppBar = () => {
                             aria-expanded={navigationMenuControls.open ? 'true' : undefined}
                             color="inherit"
                             onClick={navigationMenuControls.handleClick}>
-                            <Badge color="secondary" variant="dot" invisible={hasNewVersion}>
+                            <Badge color="secondary" variant="dot" invisible={seenNewVersion}>
                                 <MenuIcon />
                             </Badge>
                         </Button>

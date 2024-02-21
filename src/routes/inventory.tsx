@@ -129,11 +129,7 @@ export const Inventory = () => {
                         <article className="inventory-items">
                             {group.items.map(data => (
                                 <div key={data.material} className="inventory-item">
-                                    <UpgradeImage
-                                        material={data.material}
-                                        rarity={data.rarity}
-                                        iconPath={data.iconPath}
-                                    />
+                                    <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />
                                     <Input
                                         style={{ justifyContent: 'center' }}
                                         value={data.quantity}

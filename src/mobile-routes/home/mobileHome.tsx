@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
+﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Badge, Tooltip } from '@mui/material';
 import ViewSwitch from '../../shared-components/view-switch';
@@ -18,10 +18,22 @@ export const MobileHome = () => {
 
     const [showWhatsNew, setShowWhatsNew] = useState(false);
 
-    const hasNewVersion = useMemo(() => {
+    const seenNewVersion = useMemo(() => {
         const currentAppVersion = localStorage.getItem('appVersion');
         return currentAppVersion === seenAppVersion;
     }, [seenAppVersion]);
+
+    // useEffect(() => {
+    //     const timeout = setTimeout(() => {
+    //         if (!seenNewVersion) {
+    //             setShowWhatsNew(true);
+    //         }
+    //     }, 3000);
+    //
+    //     return () => {
+    //         clearTimeout(timeout);
+    //     };
+    // }, []);
 
     return (
         <div>
@@ -33,7 +45,7 @@ export const MobileHome = () => {
                     </IconButton>
                     <Tooltip title="What's new">
                         <IconButton onClick={() => setShowWhatsNew(true)}>
-                            <Badge color="secondary" variant="dot" invisible={hasNewVersion}>
+                            <Badge color="secondary" variant="dot" invisible={seenNewVersion}>
                                 <CampaignIcon />
                             </Badge>
                         </IconButton>
