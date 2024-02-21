@@ -26,6 +26,7 @@ import { fitGridOnWindowResize } from '../../shared-logic/functions';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
 import { CharacterTitle } from '../../shared-components/character-title';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
+import { isMobile } from 'react-device-detect';
 
 export const LegendaryEventTrack = ({
     track,
@@ -200,13 +201,14 @@ export const LegendaryEventTrack = ({
     }
 
     return (
-        <div style={{ width: '100%', display: show ? 'block' : 'none' }}>
+        <div style={{ width: '100%', display: show ? 'block' : 'none', overflow: 'auto' }}>
             <span style={{ fontWeight: 700, fontSize: 18 }}>{track.name + ' - ' + track.killPoints}</span>
             <div
                 className="ag-theme-material auto-teams"
                 style={{
-                    height: `calc((100vh - 250px) / ${viewPreferences.hideSelectedTeams ? 1 : 2})`,
+                    height: isMobile ? '350px' : `calc((100vh - 250px) / ${viewPreferences.hideSelectedTeams ? 1 : 2})`,
                     width: '100%',
+                    minWidth: isMobile ? '750px' : '',
                     border: '2px solid black',
                 }}>
                 <AgGridReact

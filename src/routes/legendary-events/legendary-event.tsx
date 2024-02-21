@@ -1,4 +1,5 @@
 ﻿import React, { useContext, useMemo } from 'react';
+import { enqueueSnackbar } from 'notistack';
 
 import { ICharacter2, LegendaryEventSection, SelectedTeams } from '../../models/interfaces';
 import { LegendaryEventTrack } from './legendary-event-track';
@@ -25,12 +26,14 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
         (section: LegendaryEventSection) =>
         (team: string, ...chars: string[]) => {
             dispatch.leSelectedTeams({ type: 'SelectChars', eventId: legendaryEvent.id, section, chars, team });
+            enqueueSnackbar(`${chars.join(',')} added to ${team} of ${section} sector`, { variant: 'success' });
         };
 
     const deselectChars =
         (section: LegendaryEventSection) =>
         (team: string, ...chars: string[]) => {
             dispatch.leSelectedTeams({ type: 'DeselectChars', eventId: legendaryEvent.id, section, chars, team });
+            enqueueSnackbar(`${chars.join(',')} removed from ${team} of ${section} sector`, { variant: 'warning' });
         };
 
     function getSelectedChars(selectedTeams: SelectedTeams) {
@@ -188,7 +191,7 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
                     </Tooltip>
                 </div>
                 <div
-                    style={{ display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: 15 }}
+                    style={{ display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: 15, overflow: 'auto' }}
                     key={legendaryEvent.id}>
                     <SelectedTeamsTable
                         show={viewPreferences.showAlpha}

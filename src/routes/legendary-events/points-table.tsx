@@ -57,7 +57,6 @@ const PointsTable = (props: {
                 maxWidth: 50,
                 width: 50,
                 minWidth: 50,
-                pinned: true,
                 sortable: true,
                 sort: 'asc',
             },
@@ -104,10 +103,9 @@ const PointsTable = (props: {
                   {
                       headerName: 'Position',
                       field: 'position',
-                      maxWidth: 100,
-                      width: 100,
-                      minWidth: 100,
-                      pinned: true,
+                      maxWidth: 50,
+                      width: 50,
+                      minWidth: 50,
                       sortable: true,
                       sort: 'asc',
                   },
@@ -333,10 +331,6 @@ const PointsTable = (props: {
             }));
     }, [selection, filter]);
 
-    useEffect(() => {
-        gridRef.current?.api?.sizeColumnsToFit();
-    }, [rows]);
-
     return (
         <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
@@ -379,7 +373,6 @@ const PointsTable = (props: {
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
                     columnDefs={columnsDef}
-                    onGridReady={fitGridOnWindowResize(gridRef)}
                     onSortChanged={() => gridRef.current?.api?.refreshCells()}
                     onFilterChanged={() => gridRef.current?.api?.refreshCells()}></AgGridReact>
             </div>
