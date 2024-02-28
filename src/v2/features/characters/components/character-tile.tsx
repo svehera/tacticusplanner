@@ -34,12 +34,17 @@ export const CharacterTile = ({
         [character.rarity, character.rank, character.level]
     );
 
-    const badgeContent = needToAscend
-        ? '⇧'
-        : needToLevel
-        ? character.upgrades.length || '⇧'
-        : character.upgrades.length;
-    const badgeColor = needToAscend ? 'warning' : needToLevel ? 'secondary' : 'success';
+    const maxRank = Rank.Diamond2;
+    const badgeContent =
+        character.rank === maxRank
+            ? ''
+            : needToAscend
+            ? '⇧'
+            : needToLevel
+            ? character.upgrades.length || '⇧'
+            : character.upgrades.length;
+    const badgeColor =
+        character.rank === maxRank ? 'warning' : needToAscend ? 'warning' : needToLevel ? 'secondary' : 'success';
 
     return (
         <div
