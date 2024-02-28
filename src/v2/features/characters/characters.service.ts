@@ -32,7 +32,11 @@ export class CharactersService {
                 return filteredCharactersByName.filter(needToLevelCharacter);
             case CharactersFilterBy.CanUpgrade:
                 return filteredCharactersByName.filter(
-                    char => char.rank !== Rank.Locked && !needToLevelCharacter(char) && !needToAscendCharacter(char)
+                    char =>
+                        char.rank !== Rank.Locked &&
+                        char.rank !== Rank.Diamond2 &&
+                        !needToLevelCharacter(char) &&
+                        !needToAscendCharacter(char)
                 );
             case CharactersFilterBy.Chaos:
                 return filteredCharactersByName.filter(filterChaos);

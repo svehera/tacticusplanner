@@ -7,6 +7,8 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { menuItemById } from 'src/models/menu-items';
 import Typography from '@mui/material/Typography';
+import { FlexBox } from 'src/v2/components/flex-box';
+import { Conditional } from 'src/v2/components/conditional';
 
 const MobileApp = () => {
     const location = useLocation();
@@ -36,13 +38,15 @@ const MobileApp = () => {
 
     return (
         <Box sx={{ margin: 'auto', padding: 1, paddingBottom: 7 }}>
-            <Typography
-                style={{ cursor: 'pointer' }}
-                variant={'h5'}
-                component="div"
-                onClick={() => navigate('/mobile/home')}>
-                {title}
-            </Typography>
+            <Conditional condition={!!title}>
+                <FlexBox onClick={() => navigate('/mobile/home')} style={{ cursor: 'pointer' }}>
+                    <img src="/android-chrome-192x192.png" height="50px" width="50px" alt="logo" />
+                    <Typography style={{ cursor: 'pointer' }} variant={'h5'} component="div">
+                        {title}
+                    </Typography>
+                </FlexBox>
+            </Conditional>
+
             <Outlet />
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, margin: 'auto', zIndex: 100 }} elevation={3}>
                 <BottomNavigation showLabels value={value}>

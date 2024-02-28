@@ -1252,7 +1252,7 @@
         "Melee Hits": 4,
         "Ranged Damage": "Flame",
         "Ranged Hits": 5,
-        "Distance": 4,
+        "Distance": 2,
         "Movement": 2,
         "Equipment1": "Crit",
         "Equipment2": "Block",

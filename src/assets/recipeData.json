@@ -256,6 +256,7 @@
     },
     "Blessing of the Dark Gods": {
         "material": "Blessing of the Dark Gods",
+        "label": "Boon of the Dark Gods",
         "craftable": false,
         "stat": "Health",
         "faction": "Black Legion",
@@ -264,6 +265,7 @@
     },
     "Blessing of Tzeentch": {
         "material": "Blessing of Tzeentch",
+        "label": "Boon of Tzeentch",
         "craftable": false,
         "stat": "Health",
         "faction": "Thousand Sons",
@@ -2183,7 +2185,7 @@
                 "count": 2
             },
             {
-                "material": "Greater Reliquary of Vengeance",
+                "material": "Greater Reliquary of Protection",
                 "count": 1
             },
             {
