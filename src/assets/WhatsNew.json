@@ -10,6 +10,9 @@
             "bugFixes": [
                 {
                     "text": "Fixed inventory search and misnamed legendary Chaos Boons (Dark Gods, Nurgle, Tzeentch) materials (kanslerioikein)"
+                },
+                {
+                    "text": "Fixed recipe for \"Candelabrum of Burning Wrath\" the Black Templars upgrade (Agarn)"
                 }
             ]
         },
