@@ -256,6 +256,7 @@
     },
     "Blessing of the Dark Gods": {
         "material": "Blessing of the Dark Gods",
+        "label": "Boon of the Dark Gods",
         "craftable": false,
         "stat": "Health",
         "faction": "Black Legion",
@@ -264,6 +265,7 @@
     },
     "Blessing of Tzeentch": {
         "material": "Blessing of Tzeentch",
+        "label": "Boon of Tzeentch",
         "craftable": false,
         "stat": "Health",
         "faction": "Thousand Sons",

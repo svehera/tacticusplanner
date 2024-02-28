@@ -1,6 +1,18 @@
 ﻿{
-    "currentVersion": "1.3.7",
+    "currentVersion": "1.3.8",
     "releaseNotes": [
+        {
+            "version": "1.3.8",
+            "date": "March X",
+            "type": "Update",
+            "new": [],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed inventory search and misnamed legendary Chaos Boons (Dark Gods, Nurgle, Tzeentch) materials (kanslerioikein)"
+                }
+            ]
+        },
         {
             "version": "1.3.7",
             "date": "February 20",
