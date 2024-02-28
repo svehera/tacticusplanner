@@ -101,7 +101,8 @@ export const ThankYouCard = ({
                             <Link
                                 to={contributor.youtubeLink}
                                 target={'_blank'}
-                                style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
+                                onClick={event => event.stopPropagation()}>
                                 <ContributorImage
                                     iconPath={contributor.avatarIcon}
                                     height={50}
@@ -129,7 +130,10 @@ export const ThankYouCard = ({
                 {isContentMaker(contributor) ? (
                     <React.Fragment>
                         <p>{contributor.thankYou}</p>
-                        <Link to={contributor.resourceLink} target={'_blank'}>
+                        <Link
+                            to={contributor.resourceLink}
+                            target={'_blank'}
+                            onClick={event => event.stopPropagation()}>
                             <ContributorImage iconPath={contributor.resourceIcon} height={200} width={320} />
                         </Link>
                     </React.Fragment>
@@ -139,7 +143,10 @@ export const ThankYouCard = ({
                         {contributor.resourceLink ? (
                             <React.Fragment>
                                 Check out{' '}
-                                <Link to={contributor.resourceLink} target={'_blank'}>
+                                <Link
+                                    to={contributor.resourceLink}
+                                    target={'_blank'}
+                                    onClick={event => event.stopPropagation()}>
                                     {contributor.resourceDescription}
                                 </Link>
                             </React.Fragment>

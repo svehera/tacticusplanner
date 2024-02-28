@@ -1,6 +1,44 @@
 ﻿{
-    "currentVersion": "1.3.7",
+    "currentVersion": "1.3.8",
     "releaseNotes": [
+        {
+            "version": "1.3.8",
+            "date": "February 28",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updated logo and added it to the page title",
+                    "images": [
+                        {
+                            "path": "icon.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added orange badge for maxed-out rank. Thanks Lëonaica for contribution",
+                    "images": [
+                        {
+                            "path": "wyo_info.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed copy of the share link in the mobile (thean)"
+                },
+                {
+                    "text": "Fixed inventory search and misnamed legendary Chaos Boons (Dark Gods, Nurgle, Tzeentch) materials (kanslerioikein)"
+                },
+                {
+                    "text": "Fixed recipe for \"Candelabrum of Burning Wrath\" the Black Templars upgrade (Agarn)"
+                },
+                {
+                    "text": "Fixed the \"Range\" stat for Toth (MocarnyJoe)"
+                }
+            ]
+        },
         {
             "version": "1.3.7",
             "date": "February 20",

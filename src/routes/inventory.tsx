@@ -58,7 +58,8 @@ export const Inventory = () => {
             groupBy(
                 itemsList.filter(
                     item =>
-                        item.material.toLowerCase().includes(nameFilter.toLowerCase()) &&
+                        (item.material.toLowerCase().includes(nameFilter.toLowerCase()) ||
+                            item.label.toLowerCase().includes(nameFilter.toLowerCase())) &&
                         (viewPreferences.craftableItemsInInventory || !item.craftable)
                 ),
                 'rarity'
