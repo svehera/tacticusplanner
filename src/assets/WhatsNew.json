@@ -13,6 +13,14 @@
                             "path": "icon.png"
                         }
                     ]
+                },
+                {
+                    "text": "Added orange badge for maxed-out rank. Thanks Lëonaica for contribution",
+                    "images": [
+                        {
+                            "path": "wyo_info.png"
+                        }
+                    ]
                 }
             ],
             "minor": [],
