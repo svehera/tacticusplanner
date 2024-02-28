@@ -21,7 +21,7 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
 
     const { shareToken, username, setUser } = useAuth();
 
-    const shareRoute = isMobile ? '/mobile' : '' + `/sharedRoster?username=${username}&shareToken=${shareToken}`;
+    const shareRoute = (isMobile ? '/mobile' : '') + `/sharedRoster?username=${username}&shareToken=${shareToken}`;
     const shareLink = shareToken ? location.origin + shareRoute : undefined;
 
     const copyLink = () => {
