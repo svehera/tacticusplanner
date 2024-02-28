@@ -7,7 +7,7 @@
             "type": "Update",
             "new": [
                 {
-                    "text": "Updated main icon",
+                    "text": "Updated logo and added it to the page title",
                     "images": [
                         {
                             "path": "icon.png"

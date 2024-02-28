@@ -21,6 +21,7 @@ import CampaignIcon from '@mui/icons-material/Campaign';
 import ListItemText from '@mui/material/ListItemText';
 import { inputSubMenu, learnSubMenu, menuItemById, MenuItemTP, miscMenuItems, planSubMenu } from './models/menu-items';
 import IconButton from '@mui/material/IconButton';
+import { FlexBox } from 'src/v2/components/flex-box';
 
 const TopAppBar = () => {
     const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
@@ -126,13 +127,12 @@ const TopAppBar = () => {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Typography
-                        style={{ cursor: 'pointer' }}
-                        variant={isTabletOrMobile ? 'h5' : 'h4'}
-                        component="div"
-                        onClick={() => navigate('./home')}>
-                        {title}
-                    </Typography>
+                    <FlexBox onClick={() => navigate('./home')} style={{ cursor: 'pointer' }}>
+                        <img src="/android-chrome-192x192.png" height="50px" width="50px" alt="logo" />
+                        <Typography variant={isTabletOrMobile ? 'h5' : 'h4'} component="div">
+                            {title}
+                        </Typography>
+                    </FlexBox>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         {nav}
                         <IconButton color="inherit" onClick={() => navigate('./faq')}>
