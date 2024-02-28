@@ -48,7 +48,7 @@ export const WhoYouOwn = () => {
 
     if (hasShareParams) {
         useEffect(() => {
-            navigate(isMobile ? '/mobile' : '' + `/sharedRoster?username=${sharedUser}&shareToken=${shareToken}`);
+            navigate((isMobile ? '/mobile' : '') + `/sharedRoster?username=${sharedUser}&shareToken=${shareToken}`);
         }, []);
         return <></>;
     }
