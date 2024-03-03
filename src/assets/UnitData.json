@@ -1115,7 +1115,7 @@
         "Ranged Damage": "Melta",
         "Ranged Hits": 2,
         "Distance": 2,
-        "Movement": 3,
+        "Movement": 4,
         "Equipment1": "Crit",
         "Equipment2": "Block",
         "Equipment3": "Crit Booster",
