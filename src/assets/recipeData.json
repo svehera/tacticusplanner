@@ -6688,5 +6688,26 @@
         "stat": "Shard",
         "faction": "Aeldari",
         "rarity": "Shard"
+    },
+    "Eldryon": {
+        "material": "Eldryon",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Aeldari",
+        "rarity": "Shard"
+    },
+    "Jain Zar": {
+        "material": "Jain Zar",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Aeldari",
+        "rarity": "Shard"
+    },
+    "Maugan Ra": {
+        "material": "Maugan Ra",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Aeldari",
+        "rarity": "Shard"
     }
 }
