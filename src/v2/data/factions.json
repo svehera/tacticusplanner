@@ -90,5 +90,11 @@
         "name": "Adeptus Mechanicus",
         "icon": "AdeptusMechanicus.png",
         "color": "#781e2e"
+    },
+    {
+        "alliance": "Chaos",
+        "name": "World Eaters",
+        "icon": "worldeaters.png",
+        "color": "#511011"
     }
 ]

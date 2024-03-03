@@ -8951,5 +8951,143 @@
             "Adamantium Plates",
             "Kataphron Armour"
         ]
+    },
+    "Wrask": {
+        "Stone I": [
+            "Minor Bionic Enhancement",
+            "Mutation: Warped Muscles",
+            "Basic Auxiliary Core",
+            "Nasty Spikes",
+            "Armor Trim",
+            "Rebreather"
+        ],
+        "Stone II": [
+            "Wires",
+            "Minor Bionic Enhancement",
+            "Locator Beacon",
+            "Razorsharp Spikes",
+            "Mutation: Tough Skin",
+            "Mutation: Tough Skin"
+        ],
+        "Stone III": [
+            "Reinforced Cables",
+            "Bionic Enhancement",
+            "Vox-Caster",
+            "Canister of Chemicals",
+            "Blessed Tasset Plate",
+            "Mutation: Scaly Skin"
+        ],
+        "Iron I": [
+            "Bionic Enhancement",
+            "Helmet Trophy",
+            "Locator Beacon",
+            "Combat Stimms",
+            "Mutation: Scaly Skin",
+            "Adamantium Lump"
+        ],
+        "Iron II": [
+            "Reinforced Cables",
+            "Grand Skull Trophy",
+            "Adamantium Blades",
+            "Slicing Claws",
+            "Artificer Tasset Plate",
+            "Mutation: Scaly Skin"
+        ],
+        "Iron III": [
+            "Electromantic Cable Bundle",
+            "Mutation: Warped Lungs",
+            "Chainaxe Teeth",
+            "Advanced Combat Stimms",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Brazen Jaws",
+            "Mutation: Warped Heart",
+            "Prey-Sight",
+            "Bionic Eye",
+            "Mutation: Warped Skin",
+            "Ceramite Bar"
+        ],
+        "Bronze II": [
+            "Blessed Brazen Jaws",
+            "Advanced Bionics",
+            "Classified Data-Slate",
+            "Refined Combat Stimms",
+            "Cadaere Renissum",
+            "Mutation: Warped Skin"
+        ],
+        "Bronze III": [
+            "Kill Count",
+            "Mars-Pattern Bionics",
+            "Blessed Chainaxe Teeth",
+            "Murderous Spikes",
+            "Blessed Cadaere Renissum",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Blessed Brazen Jaws",
+            "Terminator Honours",
+            "Blessed Chainaxe Teeth",
+            "Bionic Neural Pathways",
+            "Blessed Cadaere Renissum",
+            "Ceramite Sheet"
+        ],
+        "Silver II": [
+            "Boon of Khorne",
+            "Mutation: Regenerative Blood",
+            "Exalted Chainaxe Teeth",
+            "Refined Combat Stimms",
+            "Blessed Cadaere Renissum",
+            "Mutation: Metallic Skin"
+        ],
+        "Silver III": [
+            "Blessed Brazen Jaws",
+            "Grandiose Skull Ornament",
+            "Blessed Chainaxe Teeth",
+            "Imposing Horns",
+            "Archeo-Tech Remnant",
+            "Ceramite Plates"
+        ],
+        "Gold I": [
+            "Exalted Brazen Jaws",
+            "Relic Bionic Enhancement",
+            "Archeotech Bionics",
+            "Hyperstim",
+            "Exalted Cadaere Renissum",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold II": [
+            "Mark of Khorne",
+            "Mutation: Otherworldly Power",
+            "Exalted Chainaxe Teeth",
+            "Imposing Horns",
+            "Exalted Cadaere Renissum",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold III": [
+            "Exalted Brazen Jaws",
+            "Relic Bionic Enhancement",
+            "Butcher's Nails",
+            "Powered Blade",
+            "Collar of Khorne",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Diamond I": [
+            "Mark of Khorne",
+            "Grand Strategy",
+            "Butcher's Nails",
+            "Relic Auxiliary Core",
+            "Collar of Khorne",
+            "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Mark of Khorne",
+            "Superaugmented Constitution",
+            "Butcher's Nails",
+            "Superaugmented Strength",
+            "Collar of Khorne",
+            "Superaugmented Defences"
+        ]
     }
 }

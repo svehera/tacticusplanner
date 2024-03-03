@@ -1,6 +1,18 @@
 ﻿{
-    "currentVersion": "1.3.8",
+    "currentVersion": "1.3.9",
     "releaseNotes": [
+        {
+            "version": "1.3.9",
+            "date": "March x",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added new World Eaters character - Wrask"
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
         {
             "version": "1.3.8",
             "date": "February 28",

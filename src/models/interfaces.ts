@@ -68,7 +68,6 @@ export interface UnitDataRaw {
 export interface IUnitData {
     alliance: Alliance;
     faction: Faction;
-    factionColor: string;
     factionIcon: string;
     name: string;
     numberAdded: number;
