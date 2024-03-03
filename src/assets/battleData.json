@@ -3874,7 +3874,7 @@
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 11,
-        "reward": "Canister of Chemicals",
+        "reward": "Brazen Jaws",
         "expectedGold": 91.5
     },
     "FoCE12": {
@@ -3916,14 +3916,14 @@
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 17,
-        "reward": "Icon of Vengeance",
+        "reward": "Sigil of Decay",
         "expectedGold": 101
     },
     "FoCE18": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 18,
-        "reward": "Sigil of Decay",
+        "reward": "Chainaxe Teeth",
         "expectedGold": 101
     },
     "FoCE19": {
@@ -3965,7 +3965,7 @@
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 23,
-        "reward": "Blessing of the Dark Gods",
+        "reward": "Cadaere Renissum",
         "expectedGold": 101
     },
     "FoCE24": {
@@ -4000,21 +4000,21 @@
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 28,
-        "reward": "Honourifica Imperialis",
+        "reward": "Blessing of Nurgle",
         "expectedGold": 108
     },
     "FoCE29": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 29,
-        "reward": "Blessing of Nurgle",
+        "reward": "Boon of Khorne",
         "expectedGold": 108
     },
     "FoCE3": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 3,
-        "reward": "Mutation: Tough Skin",
+        "reward": "Icon of Vengeance",
         "expectedGold": 83
     },
     "FoCE30": {
@@ -4084,7 +4084,7 @@
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 39,
-        "reward": "Blessing of Nurgle",
+        "reward": "Honourifica Imperialis",
         "expectedGold": 108
     },
     "FoCE4": {
@@ -4105,14 +4105,14 @@
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 5,
-        "reward": "Single Power Pack",
+        "reward": "Advanced Filaments",
         "expectedGold": 83
     },
     "FoCE6": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 6,
-        "reward": "Mutation: Warped Lungs",
+        "reward": "Blessing of the Dark Gods",
         "expectedGold": 83
     },
     "FoCE7": {
