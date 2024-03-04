@@ -17,6 +17,14 @@
                 },
                 {
                     "text": "Added Diamond II Upgrades"
+                },
+                {
+                    "text": "Added feature to keep track of the missions done in each instance of the LRE (Solar7809, Dyl4n)",
+                    "images": [
+                        {
+                            "path": "events.png"
+                        }
+                    ]
                 }
             ],
             "minor": [
