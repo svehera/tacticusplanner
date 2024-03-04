@@ -21,10 +21,14 @@
             ],
             "minor": [
                 {
-                    "text": "Corrected factions order on the Who You Own page"
+                    "text": "Corrected factions order on the Who You Own page (SeventhSun)"
                 }
             ],
-            "bugFixes": []
+            "bugFixes": [
+                {
+                    "text": "Fixed recipe for 'Regenerating Nano Swarm' upgrade (Cody212501)"
+                }
+            ]
         },
         {
             "version": "1.3.8",
