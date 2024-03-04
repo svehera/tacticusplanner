@@ -120,6 +120,14 @@
             "Blessed Promethium Tank",
             "Sabbat-Pattern Visor",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Simulacrum Sanctorum",
+            "Superaugmented Constitution",
+            "Blessed Bolts",
+            "Superaugmented Strength",
+            "Sabbat-Pattern Visor",
+            "Superaugmented Defences"
         ]
     },
     "Isabella": {
@@ -250,6 +258,14 @@
             "Blessed Promethium Tank",
             "Sabbat-Pattern Visor",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Simulacrum Sanctorum",
+            "Superaugmented Constitution",
+            "Blessed Bolts",
+            "Superaugmented Strength",
+            "Sabbat-Pattern Visor",
+            "Superaugmented Defences"
         ]
     },
     "Morvenn Vahl": {
@@ -380,6 +396,14 @@
             "Relic Micro-Generator",
             "Sabbat-Pattern Visor",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Simulacrum Sanctorum",
+            "Technocrafted Constitution",
+            "Blessed Bolts",
+            "Technocrafted Strength",
+            "Sabbat-Pattern Visor",
+            "Technocrafted Defences"
         ]
     },
     "Roswitha": {
@@ -510,6 +534,14 @@
             "Blessed Promethium Tank",
             "Sabbat-Pattern Visor",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Simulacrum Sanctorum",
+            "Superaugmented Constitution",
+            "Blessed Bolts",
+            "Superaugmented Strength",
+            "Sabbat-Pattern Visor",
+            "Superaugmented Defences"
         ]
     },
     "Celestine": {
@@ -640,6 +672,14 @@
             "Blessed Promethium Tank",
             "Sabbat-Pattern Visor",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Simulacrum Sanctorum",
+            "Preternatural Constitution",
+            "Blessed Bolts",
+            "Preternatural Strength",
+            "Sabbat-Pattern Visor",
+            "Preternatural Defences"
         ]
     },
     "Sibyll": {
@@ -770,6 +810,14 @@
             "Relic Micro-Generator",
             "Bastion Honour",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Sash of Honors",
+            "Preternatural Constitution",
+            "Medallion Resolute",
+            "Preternatural Strength",
+            "Bastion Honour",
+            "Preternatural Defences"
         ]
     },
     "Commissar Yarrick": {
@@ -900,6 +948,14 @@
             "Relic Micro-Generator",
             "Bastion Honour",
             "Relic Tasset Plate"
+        ],
+        "Diamond II": [
+            "Sash of Honors",
+            "Superaugmented Constitution",
+            "Medallion Resolute",
+            "Superaugmented Strength",
+            "Bastion Honour",
+            "Superaugmented Defences"
         ]
     },
     "Kut Skoden": {
@@ -1030,6 +1086,14 @@
             "Blessed Promethium Tank",
             "Bastion Honour",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Sash of Honors",
+            "Monstrous Constitution",
+            "Medallion Resolute",
+            "Monstrous Strength",
+            "Bastion Honour",
+            "Monstrous Defences"
         ]
     },
     "Thaddeus Noble": {
@@ -1160,6 +1224,14 @@
             "Relic Micro-Generator",
             "Bastion Honour",
             "Relic Tasset Plate"
+        ],
+        "Diamond II": [
+            "Sash of Honors",
+            "Technocrafted Constitution",
+            "Medallion Resolute",
+            "Technocrafted Strength",
+            "Bastion Honour",
+            "Technocrafted Defences"
         ]
     },
     "Castellan Creed": {
@@ -1290,6 +1362,14 @@
             "Relic Micro-Generator",
             "Bastion Honour",
             "Relic Tasset Plate"
+        ],
+        "Diamond II": [
+            "Sash of Honors",
+            "Technocrafted Constitution",
+            "Medallion Resolute",
+            "Technocrafted Strength",
+            "Bastion Honour",
+            "Technocrafted Defences"
         ]
     },
     "Sword Brother Godswyl": {
@@ -1420,6 +1500,14 @@
             "Relic Auxiliary Core",
             "Octarian Crusade Seal",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Tannhauser's Bones",
+            "Superaugmented Constitution",
+            "Witchseeker Bolts",
+            "Superaugmented Strength",
+            "Octarian Crusade Seal",
+            "Superaugmented Defences"
         ]
     },
     "Brother Burchard": {
@@ -1550,6 +1638,14 @@
             "Blessed Promethium Tank",
             "Octarian Crusade Seal",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Tannhauser's Bones",
+            "Superaugmented Constitution",
+            "Witchseeker Bolts",
+            "Superaugmented Strength",
+            "Octarian Crusade Seal",
+            "Superaugmented Defences"
         ]
     },
     "Ancient Thoread": {
@@ -1680,6 +1776,14 @@
             "Blessed Promethium Tank",
             "Octarian Crusade Seal",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Tannhauser's Bones",
+            "Superaugmented Constitution",
+            "Witchseeker Bolts",
+            "Superaugmented Strength",
+            "Octarian Crusade Seal",
+            "Superaugmented Defences"
         ]
     },
     "Brother Jaeger": {
@@ -1810,6 +1914,14 @@
             "Relic Auxiliary Core",
             "Octarian Crusade Seal",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Tannhauser's Bones",
+            "Superaugmented Constitution",
+            "Witchseeker Bolts",
+            "Superaugmented Strength",
+            "Octarian Crusade Seal",
+            "Superaugmented Defences"
         ]
     },
     "High Marshal Helbrecht": {
@@ -1940,6 +2052,14 @@
             "Relic Auxiliary Core",
             "Octarian Crusade Seal",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Tannhauser's Bones",
+            "Superaugmented Constitution",
+            "Witchseeker Bolts",
+            "Superaugmented Strength",
+            "Octarian Crusade Seal",
+            "Superaugmented Defences"
         ]
     },
     "Azrael": {
@@ -2070,6 +2190,14 @@
             "Relic Micro-Generator",
             "Shroud of Heroes",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Perfidious Relic of the Unforgiven",
+            "Superaugmented Constitution",
+            "Arbiter's Gaze",
+            "Superaugmented Strength",
+            "Shroud of Heroes",
+            "Superaugmented Defences"
         ]
     },
     "Sarquael": {
@@ -2200,6 +2328,14 @@
             "Blessed Promethium Tank",
             "Shroud of Heroes",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Perfidious Relic of the Unforgiven",
+            "Superaugmented Constitution",
+            "Arbiter's Gaze",
+            "Superaugmented Strength",
+            "Shroud of Heroes",
+            "Superaugmented Defences"
         ]
     },
     "Ulf": {
@@ -2330,6 +2466,14 @@
             "Relic Micro-Generator",
             "Runic Tasset Plate",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Personal Saga",
+            "Monstrous Constitution",
+            "Frostblade",
+            "Monstrous Strength",
+            "Runic Tasset Plate",
+            "Monstrous Defences"
         ]
     },
     "Tjark": {
@@ -2460,6 +2604,14 @@
             "Relic Micro-Generator",
             "Runic Tasset Plate",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Personal Saga",
+            "Superaugmented Constitution",
+            "Frostblade",
+            "Superaugmented Strength",
+            "Runic Tasset Plate",
+            "Superaugmented Defences"
         ]
     },
     "Arjac": {
@@ -2590,6 +2742,14 @@
             "Relic Micro-Generator",
             "Runic Tasset Plate",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Personal Saga",
+            "Superaugmented Constitution",
+            "Frostblade",
+            "Superaugmented Strength",
+            "Runic Tasset Plate",
+            "Superaugmented Defences"
         ]
     },
     "Njal Stormcaller": {
@@ -2713,6 +2873,14 @@
             "Relic Micro-Generator",
             "Runic Tasset Plate",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Personal Saga",
+            "Preternatural Constitution",
+            "Frostblade",
+            "Preternatural Strength",
+            "Runic Tasset Plate",
+            "Preternatural Defences"
         ]
     },
     "Varro Tigurius": {
@@ -2843,6 +3011,14 @@
             "Relic Auxiliary Core",
             "Adamantine Mantle",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Codex Astartes",
+            "Preternatural Constitution",
+            "Hellfury Bolts",
+            "Preternatural Strength",
+            "Adamantine Mantle",
+            "Preternatural Defences"
         ]
     },
     "Certus": {
@@ -2973,6 +3149,14 @@
             "Relic Auxiliary Core",
             "Adamantine Mantle",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Codex Astartes",
+            "Superaugmented Constitution",
+            "Hellfury Bolts",
+            "Superaugmented Strength",
+            "Adamantine Mantle",
+            "Superaugmented Defences"
         ]
     },
     "Bellator": {
@@ -3103,6 +3287,14 @@
             "Relic Auxiliary Core",
             "Adamantine Mantle",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Codex Astartes",
+            "Superaugmented Constitution",
+            "Hellfury Bolts",
+            "Superaugmented Strength",
+            "Adamantine Mantle",
+            "Superaugmented Defences"
         ]
     },
     "Incisus": {
@@ -3233,6 +3425,14 @@
             "Blessed Promethium Tank",
             "Adamantine Mantle",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Codex Astartes",
+            "Superaugmented Constitution",
+            "Hellfury Bolts",
+            "Superaugmented Strength",
+            "Adamantine Mantle",
+            "Superaugmented Defences"
         ]
     },
     "Marneus Calgar": {
@@ -3363,6 +3563,14 @@
             "Relic Auxiliary Core",
             "Adamantine Mantle",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Codex Astartes",
+            "Superaugmented Constitution",
+            "Hellfury Bolts",
+            "Superaugmented Strength",
+            "Adamantine Mantle",
+            "Superaugmented Defences"
         ]
     },
     "Calandis": {
@@ -3486,6 +3694,14 @@
             "Relic Micro-Generator",
             "Scriptures of Fortune",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Scriptures of Fate",
+            "Preternatural Constitution",
+            "Scriptures of Battle",
+            "Preternatural Strength",
+            "Scriptures of Fortune",
+            "Preternatural Defences"
         ]
     },
     "Aethana": {
@@ -3609,6 +3825,14 @@
             "Relic Micro-Generator",
             "Scriptures of Fortune",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Scriptures of Fate",
+            "Preternatural Constitution",
+            "Scriptures of Battle",
+            "Preternatural Strength",
+            "Scriptures of Fortune",
+            "Preternatural Defences"
         ]
     },
     "Eldryon": {
@@ -3718,6 +3942,14 @@
             "Relic Auxiliary Core",
             "Scriptures of Fortune",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Scriptures of Fate",
+            "Preternatural Constitution",
+            "Scriptures of Battle",
+            "Preternatural Strength",
+            "Scriptures of Fortune",
+            "Preternatural Defences"
         ]
     },
     "Maugan Ra": {
@@ -3848,6 +4080,14 @@
             "Relic Micro-Generator",
             "Scriptures of Fortune",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Scriptures of Fate",
+            "Preternatural Constitution",
+            "Scriptures of Battle",
+            "Preternatural Strength",
+            "Scriptures of Fortune",
+            "Preternatural Defences"
         ]
     },
     "Jain Zar": {
@@ -3971,6 +4211,14 @@
             "Hyperstim",
             "Scriptures of Fortune",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Scriptures of Fate",
+            "Preternatural Constitution",
+            "Scriptures of Battle",
+            "Preternatural Strength",
+            "Scriptures of Fortune",
+            "Preternatural Defences"
         ]
     },
     "Makhotep": {
@@ -4101,6 +4349,14 @@
             "Relic Micro-Generator",
             "Transdimensional Sanctum",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Phylacterine Hive",
+            "Technocrafted Constitution",
+            "Molecular Vaporiser",
+            "Technocrafted Strength",
+            "Transdimensional Sanctum",
+            "Technocrafted Defences"
         ]
     },
     "Imospekh": {
@@ -4231,6 +4487,14 @@
             "Relic Micro-Generator",
             "Transdimensional Sanctum",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Phylacterine Hive",
+            "Technocrafted Constitution",
+            "Molecular Vaporiser",
+            "Technocrafted Strength",
+            "Transdimensional Sanctum",
+            "Technocrafted Defences"
         ]
     },
     "Aleph-Null": {
@@ -4361,6 +4625,14 @@
             "Relic Micro-Generator",
             "Transdimensional Sanctum",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Phylacterine Hive",
+            "Technocrafted Constitution",
+            "Molecular Vaporiser",
+            "Technocrafted Strength",
+            "Transdimensional Sanctum",
+            "Technocrafted Defences"
         ]
     },
     "Thutmose": {
@@ -4491,6 +4763,14 @@
             "Relic Micro-Generator",
             "Transdimensional Sanctum",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Phylacterine Hive",
+            "Technocrafted Constitution",
+            "Molecular Vaporiser",
+            "Technocrafted Strength",
+            "Transdimensional Sanctum",
+            "Technocrafted Defences"
         ]
     },
     "Anuphet": {
@@ -4621,6 +4901,14 @@
             "Relic Micro-Generator",
             "Transdimensional Sanctum",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Phylacterine Hive",
+            "Technocrafted Constitution",
+            "Molecular Vaporiser",
+            "Technocrafted Strength",
+            "Transdimensional Sanctum",
+            "Technocrafted Defences"
         ]
     },
     "Snotflogga": {
@@ -4744,6 +5032,14 @@
             "Relic Auxiliary Core",
             "Bosspole",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Cybork Body Parts",
+            "Monstrous Constitution",
+            "Snazzy Dakka",
+            "Monstrous Strength",
+            "Bosspole",
+            "Monstrous Defences"
         ]
     },
     "Gibbascrapz": {
@@ -4874,6 +5170,14 @@
             "Relic Micro-Generator",
             "Bosspole",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Cybork Body Parts",
+            "Technocrafted Constitution",
+            "Snazzy Dakka",
+            "Technocrafted Strength",
+            "Bosspole",
+            "Technocrafted Defences"
         ]
     },
     "Snappawrecka": {
@@ -4990,6 +5294,14 @@
             "Relic Micro-Generator",
             "Bosspole",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Cybork Body Parts",
+            "Technocrafted Constitution",
+            "Snazzy Dakka",
+            "Technocrafted Strength",
+            "Bosspole",
+            "Technocrafted Defences"
         ]
     },
     "Tanksmasha": {
@@ -5113,6 +5425,14 @@
             "Relic Auxiliary Core",
             "Bosspole",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Cybork Body Parts",
+            "Monstrous Constitution",
+            "Snazzy Dakka",
+            "Monstrous Strength",
+            "Bosspole",
+            "Monstrous Defences"
         ]
     },
     "Boss Gulgortz": {
@@ -5236,6 +5556,14 @@
             "Relic Auxiliary Core",
             "Bosspole",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Cybork Body Parts",
+            "Monstrous Constitution",
+            "Snazzy Dakka",
+            "Monstrous Strength",
+            "Bosspole",
+            "Monstrous Defences"
         ]
     },
     "Sho'Syl": {
@@ -5359,6 +5687,14 @@
             "Relic Auxiliary Core",
             "Iridium Plating",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Ta'Lissera Bond",
+            "Technocrafted Constitution",
+            "Target Lock",
+            "Technocrafted Strength",
+            "Iridium Plating",
+            "Technocrafted Defences"
         ]
     },
     "Re'Vas": {
@@ -5489,6 +5825,14 @@
             "Blessed Promethium Tank",
             "Iridium Plating",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Ta'Lissera Bond",
+            "Technocrafted Constitution",
+            "Target Lock",
+            "Technocrafted Strength",
+            "Iridium Plating",
+            "Technocrafted Defences"
         ]
     },
     "Darkstrider": {
@@ -5619,6 +5963,14 @@
             "Relic Auxiliary Core",
             "Iridium Plating",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Ta'Lissera Bond",
+            "Superaugmented Constitution",
+            "Target Lock",
+            "Superaugmented Strength",
+            "Iridium Plating",
+            "Superaugmented Defences"
         ]
     },
     "Aun'Shi": {
@@ -5742,6 +6094,14 @@
             "Hyperstim",
             "Iridium Plating",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Ta'Lissera Bond",
+            "Preternatural Constitution",
+            "Target Lock",
+            "Preternatural Strength",
+            "Iridium Plating",
+            "Preternatural Defences"
         ]
     },
     "Shadowsun": {
@@ -5872,6 +6232,14 @@
             "Relic Auxiliary Core",
             "Iridium Plating",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Ta'Lissera Bond",
+            "Technocrafted Constitution",
+            "Target Lock",
+            "Technocrafted Strength",
+            "Iridium Plating",
+            "Technocrafted Defences"
         ]
     },
     "Neurothrope": {
@@ -6002,6 +6370,14 @@
             "Psychic Focus",
             "Symbiotic Carapace",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Hypermetabolic Acceleration",
+            "Preternatural Constitution",
+            "Implant Attack",
+            "Preternatural Strength",
+            "Symbiotic Carapace",
+            "Preternatural Defences"
         ]
     },
     "Tyrant Guard": {
@@ -6132,6 +6508,14 @@
             "Hyperstim",
             "Symbiotic Carapace",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Hypermetabolic Acceleration",
+            "Monstrous Constitution",
+            "Implant Attack",
+            "Monstrous Strength",
+            "Symbiotic Carapace",
+            "Monstrous Defences"
         ]
     },
     "Winged Tyrant Prime": {
@@ -6262,6 +6646,14 @@
             "Hyperstim",
             "Symbiotic Carapace",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Hypermetabolic Acceleration",
+            "Monstrous Constitution",
+            "Implant Attack",
+            "Monstrous Strength",
+            "Symbiotic Carapace",
+            "Monstrous Defences"
         ]
     },
     "Deathleaper": {
@@ -6392,6 +6784,14 @@
             "Hyperstim",
             "Symbiotic Carapace",
             "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Hypermetabolic Acceleration",
+            "Preternatural Constitution",
+            "Implant Attack",
+            "Preternatural Strength",
+            "Symbiotic Carapace",
+            "Preternatural Defences"
         ]
     },
     "Angrax": {
@@ -6522,6 +6922,14 @@
             "Relic Auxiliary Core",
             "Black Rune",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Mark of Chaos Undivided",
+            "Superaugmented Constitution",
+            "Daemon Shells",
+            "Superaugmented Strength",
+            "Black Rune",
+            "Superaugmented Defences"
         ]
     },
     "Volk": {
@@ -6652,6 +7060,14 @@
             "Hyperstim",
             "Black Rune",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Mark of Chaos Undivided",
+            "Monstrous Constitution",
+            "Daemon Shells",
+            "Monstrous Strength",
+            "Black Rune",
+            "Monstrous Defences"
         ]
     },
     "Archimatos": {
@@ -6782,6 +7198,14 @@
             "Blessed Promethium Tank",
             "Black Rune",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Mark of Chaos Undivided",
+            "Preternatural Constitution",
+            "Daemon Shells",
+            "Preternatural Strength",
+            "Black Rune",
+            "Preternatural Defences"
         ]
     },
     "Haarken Worldclaimer": {
@@ -6912,6 +7336,14 @@
             "Hyperstim",
             "Black Rune",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Mark of Chaos Undivided",
+            "Superaugmented Constitution",
+            "Daemon Shells",
+            "Superaugmented Strength",
+            "Black Rune",
+            "Superaugmented Defences"
         ]
     },
     "Abaddon The Despoiler": {
@@ -7042,6 +7474,14 @@
             "Relic Auxiliary Core",
             "Black Rune",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Mark of Chaos Undivided",
+            "Monstrous Constitution",
+            "Daemon Shells",
+            "Monstrous Strength",
+            "Black Rune",
+            "Monstrous Defences"
         ]
     },
     "Typhus": {
@@ -7165,6 +7605,14 @@
             "Relic Auxiliary Core",
             "Cloud of Flies",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Mark of Nurgle",
+            "Preternatural Constitution",
+            "Virulent Rounds",
+            "Preternatural Strength",
+            "Cloud of Flies",
+            "Preternatural Defences"
         ]
     },
     "Maladus": {
@@ -7295,6 +7743,14 @@
             "Relic Auxiliary Core",
             "Cloud of Flies",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Mark of Nurgle",
+            "Monstrous Constitution",
+            "Virulent Rounds",
+            "Monstrous Strength",
+            "Cloud of Flies",
+            "Monstrous Defences"
         ]
     },
     "Nauseous Rotbone": {
@@ -7411,6 +7867,14 @@
             "Relic Micro-Generator",
             "Cloud of Flies",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Mark of Nurgle",
+            "Monstrous Constitution",
+            "Virulent Rounds",
+            "Monstrous Strength",
+            "Cloud of Flies",
+            "Monstrous Defences"
         ]
     },
     "Pestillian": {
@@ -7541,6 +8005,14 @@
             "Blessed Promethium Tank",
             "Cloud of Flies",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Mark of Nurgle",
+            "Monstrous Constitution",
+            "Virulent Rounds",
+            "Monstrous Strength",
+            "Cloud of Flies",
+            "Monstrous Defences"
         ]
     },
     "Corrodius": {
@@ -7664,6 +8136,14 @@
             "Blessed Promethium Tank",
             "Cloud of Flies",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Mark of Nurgle",
+            "Monstrous Constitution",
+            "Virulent Rounds",
+            "Monstrous Strength",
+            "Cloud of Flies",
+            "Monstrous Defences"
         ]
     },
     "Yazaghor": {
@@ -7794,6 +8274,14 @@
             "Blessed Promethium Tank",
             "Warpweave Robe",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Mark of Tzeentch",
+            "Preternatural Constitution",
+            "Boonstone",
+            "Preternatural Strength",
+            "Warpweave Robe",
+            "Preternatural Defences"
         ]
     },
     "Toth": {
@@ -7924,6 +8412,14 @@
             "Blessed Promethium Tank",
             "Warpweave Robe",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Mark of Tzeentch",
+            "Preternatural Constitution",
+            "Boonstone",
+            "Preternatural Strength",
+            "Warpweave Robe",
+            "Preternatural Defences"
         ]
     },
     "Abraxas": {
@@ -8054,6 +8550,14 @@
             "Blessed Promethium Tank",
             "Warpweave Robe",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Mark of Tzeentch",
+            "Preternatural Constitution",
+            "Boonstone",
+            "Preternatural Strength",
+            "Warpweave Robe",
+            "Preternatural Defences"
         ]
     },
     "Thaumachus": {
@@ -8184,6 +8688,14 @@
             "Blessed Promethium Tank",
             "Warpweave Robe",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Mark of Tzeentch",
+            "Preternatural Constitution",
+            "Boonstone",
+            "Preternatural Strength",
+            "Warpweave Robe",
+            "Preternatural Defences"
         ]
     },
     "Ahriman": {
@@ -8307,6 +8819,14 @@
             "Blessed Promethium Tank",
             "Warpweave Robe",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Mark of Tzeentch",
+            "Preternatural Constitution",
+            "Boonstone",
+            "Preternatural Strength",
+            "Warpweave Robe",
+            "Preternatural Defences"
         ]
     },
     "Ragnar Blackmane": {
@@ -8437,6 +8957,14 @@
             "Hyperstim",
             "Runic Tasset Plate",
             "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Personal Saga",
+            "Superaugmented Constitution",
+            "Frostblade",
+            "Superaugmented Strength",
+            "Runic Tasset Plate",
+            "Superaugmented Defences"
         ]
     },
     "Actus": {
@@ -8567,6 +9095,14 @@
             "Plasma Coil",
             "Kataphron Armour",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Sanctus Canister",
+            "Technocrafted Constitution",
+            "Prehensile Dataspike",
+            "Technocrafted Strength",
+            "Kataphron Armour",
+            "Technocrafted Defences"
         ]
     },
     "Vitruvius": {
@@ -8697,6 +9233,14 @@
             "Plasma Coil",
             "Kataphron Armour",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Sanctus Canister",
+            "Technocrafted Constitution",
+            "Prehensile Dataspike",
+            "Technocrafted Strength",
+            "Kataphron Armour",
+            "Technocrafted Defences"
         ]
     },
     "Tan Gi'Da": {
@@ -8827,6 +9371,14 @@
             "Relic Micro-Generator",
             "Kataphron Armour",
             "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Sanctus Canister",
+            "Technocrafted Constitution",
+            "Prehensile Dataspike",
+            "Technocrafted Strength",
+            "Kataphron Armour",
+            "Technocrafted Defences"
         ]
     },
     "Exitor-Rho": {
@@ -8950,6 +9502,14 @@
             "Prehensile Dataspike",
             "Adamantium Plates",
             "Kataphron Armour"
+        ],
+        "Diamond II": [
+            "Sanctus Canister",
+            "Technocrafted Constitution",
+            "Prehensile Dataspike",
+            "Technocrafted Strength",
+            "Kataphron Armour",
+            "Technocrafted Defences"
         ]
     },
     "Wrask": {
