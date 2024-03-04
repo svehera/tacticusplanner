@@ -27,6 +27,9 @@
             "bugFixes": [
                 {
                     "text": "Fixed recipe for 'Regenerating Nano Swarm' upgrade (Cody212501)"
+                },
+                {
+                    "text": "Fixed reward for Fall of Cadia ME 30 to have Slicing Claws (SeventhSun)"
                 }
             ]
         },
