@@ -34,7 +34,7 @@ export const CharacterTile = ({
         [character.rarity, character.rank, character.level]
     );
 
-    const maxRank = Rank.Diamond2;
+    const maxRank = Rank.Diamond3;
     const badgeContent =
         character.rank === maxRank
             ? ''

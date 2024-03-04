@@ -19,7 +19,11 @@
                     "text": "Added Diamond II Upgrades"
                 }
             ],
-            "minor": [],
+            "minor": [
+                {
+                    "text": "Corrected factions order on the Who You Own page"
+                }
+            ],
             "bugFixes": []
         },
         {
