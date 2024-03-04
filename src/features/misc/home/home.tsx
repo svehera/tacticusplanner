@@ -9,7 +9,7 @@ import { GoalCard } from '../../../routes/goals/goals';
 import { sum } from 'lodash';
 import { MiscIcon } from '../../../shared-components/misc-icon';
 
-import ragnar from 'src/assets/legendary-events/Ragnar.json';
+import lre from 'src/assets/legendary-events/Ragnar.json';
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -38,8 +38,8 @@ export const Home = () => {
         return timeDifference >= 0 ? result : 'Finished';
     }
 
-    const nextLeDateStart = new Date(ragnar.nextEventDateUtc);
-    const nextLeDateEnd = new Date(new Date(ragnar.nextEventDateUtc).setDate(nextLeDateStart.getDate() + 7));
+    const nextLeDateStart = new Date(lre.nextEventDateUtc);
+    const nextLeDateEnd = new Date(new Date(lre.nextEventDateUtc).setDate(nextLeDateStart.getDate() + 7));
     const timeToStart = timeLeftToFutureDate(nextLeDateStart);
     const timeToEnd = timeLeftToFutureDate(nextLeDateEnd);
     const isEventStarted = timeToStart === 'Finished';
