@@ -1,6 +1,75 @@
 ﻿{
-    "currentVersion": "1.3.8",
+    "currentVersion": "1.3.9",
     "releaseNotes": [
+        {
+            "version": "1.3.9",
+            "date": "March 5",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added new World Eaters character - Wrask"
+                },
+                {
+                    "text": "Added ‘Mirror Saim-Hann’ Part 3 - 4 nodes"
+                },
+                {
+                    "text": "Added the World Eaters upgrades",
+                    "subPoints": [
+                        "(Rare) Chainaxe Teeth",
+                        "(Rare) Brazen Jaws",
+                        "(Rare) Cadaere Renissum",
+                        "(Epic) Blessed Chainaxe Teeth",
+                        "(Epic) Blessed Brazen Jaws",
+                        "(Epic) Blessed Cadaere Renissum",
+                        "(Legendary) Exalted Chainaxe Teeth",
+                        "(Legendary) Exalted Brazen Jaws",
+                        "(Legendary) Exalted Cadaere Renissum",
+                        "(Legendary) Boon of Khorne",
+                        "(Legendary) Mark of Khorne",
+                        "(Legendary) Butcher's Nails",
+                        "(Legendary) Collar of Khorne"
+                    ]
+                },
+                {
+                    "text": "Added Diamond II Upgrades",
+                    "subPoints": [
+                        "(Legendary) Superaugmented Constitution",
+                        "(Legendary) Superaugmented Strength",
+                        "(Legendary) Superaugmented Defences",
+                        "(Legendary) Monstrous Constitution",
+                        "(Legendary) Monstrous Strength",
+                        "(Legendary) Monstrous Defences",
+                        "(Legendary) Preternatural Constitution",
+                        "(Legendary) Preternatural Strength",
+                        "(Legendary) Preternatural Defences",
+                        "(Legendary) Technocrafted Constitution",
+                        "(Legendary) Technocrafted Strength",
+                        "(Legendary) Technocrafted Defences"
+                    ]
+                },
+                {
+                    "text": "Added feature to keep track of the missions done in each instance of the LRE (Solar7809, Dyl4n)",
+                    "images": [
+                        {
+                            "path": "events.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Corrected factions order on the Who You Own page (SeventhSun)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed recipe for 'Regenerating Nano Swarm' upgrade (Cody212501)"
+                },
+                {
+                    "text": "Fixed reward for Fall of Cadia ME 30 to have Slicing Claws (SeventhSun)"
+                }
+            ]
+        },
         {
             "version": "1.3.8",
             "date": "February 28",

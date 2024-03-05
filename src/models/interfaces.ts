@@ -68,7 +68,6 @@ export interface UnitDataRaw {
 export interface IUnitData {
     alliance: Alliance;
     faction: Faction;
-    factionColor: string;
     factionIcon: string;
     name: string;
     numberAdded: number;
@@ -418,6 +417,11 @@ export interface ILegendaryEventProgressState {
     regularMissions: number;
     premiumMissions: number;
     bundle?: number;
+    overview?: {
+        1: ILegendaryEventOverviewProgress;
+        2: ILegendaryEventOverviewProgress;
+        3: ILegendaryEventOverviewProgress;
+    };
     notes: string;
 }
 
@@ -429,10 +433,18 @@ export interface ILegendaryEventProgress {
     alpha: ILegendaryEventProgressTrack;
     beta: ILegendaryEventProgressTrack;
     gamma: ILegendaryEventProgressTrack;
+    overview: {
+        1: ILegendaryEventOverviewProgress;
+        2: ILegendaryEventOverviewProgress;
+        3: ILegendaryEventOverviewProgress;
+    };
+    notes: string;
+}
+
+export interface ILegendaryEventOverviewProgress {
     regularMissions: number;
     premiumMissions: number;
     bundle: number;
-    notes: string;
 }
 
 export interface ILegendaryEventProgressTrack {

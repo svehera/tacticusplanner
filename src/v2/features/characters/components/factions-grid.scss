@@ -1,4 +1,4 @@
-﻿$factionsCount: 15;
+﻿$factionsCount: 16;
 
 $columnCount5: 5;
 $columnCount4: 4;
@@ -6,7 +6,7 @@ $columnCount3: 3;
 $columnCount2: 2;
 
 @mixin responsiveGrid($columns, $maxWidth) {
-    $roundedRows: round($factionsCount / $columns);
+    $roundedRows: ceil($factionsCount / $columns);
     @media (max-width: #{$maxWidth}px) {
         grid-template-rows: repeat(#{$roundedRows}, 1fr);
     }

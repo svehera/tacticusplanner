@@ -6,6 +6,12 @@
         "color": "#194486"
     },
     {
+        "alliance": "Imperial",
+        "name": "Adepta Sororitas",
+        "icon": "ADEPTA_SORORITAS.png",
+        "color": "#962C38"
+    },
+    {
         "alliance": "Xenos",
         "name": "Necrons",
         "icon": "Necrons.png",
@@ -24,10 +30,10 @@
         "color": "#1C0F10"
     },
     {
-        "alliance": "Imperial",
-        "name": "Adepta Sororitas",
-        "icon": "ADEPTA_SORORITAS.png",
-        "color": "#962C38"
+        "alliance": "Chaos",
+        "name": "Death guard",
+        "icon": "Death_Guard.png",
+        "color": "#65540C"
     },
     {
         "alliance": "Xenos",
@@ -35,19 +41,11 @@
         "icon": "Orks.png",
         "color": "#DC901E"
     },
-
     {
         "alliance": "Imperial",
         "name": "Black Templars",
         "icon": "Black_Templars.png",
         "color": "#929395"
-    },
-
-    {
-        "alliance": "Chaos",
-        "name": "Death guard",
-        "icon": "Death_Guard.png",
-        "color": "#65540C"
     },
     {
         "alliance": "Xenos",
@@ -68,16 +66,16 @@
         "color": "#084A92"
     },
     {
-        "alliance": "Chaos",
-        "name": "Thousand Sons",
-        "icon": "Thousand_Sons.png",
-        "color": "#084A92"
-    },
-    {
         "alliance": "Imperial",
         "name": "Dark Angels",
         "icon": "Dark_Angels.png",
         "color": "#18542B"
+    },
+    {
+        "alliance": "Chaos",
+        "name": "Thousand Sons",
+        "icon": "Thousand_Sons.png",
+        "color": "#084A92"
     },
     {
         "alliance": "Xenos",
@@ -90,5 +88,11 @@
         "name": "Adeptus Mechanicus",
         "icon": "AdeptusMechanicus.png",
         "color": "#781e2e"
+    },
+    {
+        "alliance": "Chaos",
+        "name": "World Eaters",
+        "icon": "worldeaters.png",
+        "color": "#511011"
     }
 ]

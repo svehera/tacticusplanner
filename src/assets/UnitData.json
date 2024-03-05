@@ -1115,7 +1115,7 @@
         "Ranged Damage": "Melta",
         "Ranged Hits": 2,
         "Distance": 2,
-        "Movement": 3,
+        "Movement": 4,
         "Equipment1": "Crit",
         "Equipment2": "Block",
         "Equipment3": "Crit Booster",
@@ -1584,7 +1584,28 @@
         "Number": 70,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "exitor-rho.png",
+        "Icon": "exitor-rho.png"
+    },
+    {
+        "Name": "Wrask",
+        "Faction": "World Eaters",
+        "Alliance": "Chaos",
+        "Health": 80,
+        "Damage": 30,
+        "Armour": 17,
+        "Initial rarity": "Uncommon",
+        "Melee Damage": "Flame",
+        "Melee Hits": 4,
+        "Movement": 2,
+        "Equipment1": "Crit",
+        "Equipment2": "Block",
+        "Equipment3": "Block Booster",
+        "Traits": ["Blessing Of Khorne", "Deep Strike", "Rapid Assault", "Terminator Armour"],
+        "Active Ability": "Chain",
+        "Number": 71,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "wrask.png",
         "ReleaseRarity": 2
     }
 ]

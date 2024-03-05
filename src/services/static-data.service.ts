@@ -249,7 +249,6 @@ export class StaticDataService {
         const unitData: IUnitData = {
             alliance: rawData.Alliance,
             faction: rawData.Faction,
-            factionColor: StaticDataService.getFactionColor(rawData.Faction),
             factionIcon: StaticDataService.getFactionIcon(rawData.Faction),
             name: rawData.Name,
             numberAdded: rawData.Number,
@@ -294,43 +293,6 @@ export class StaticDataService {
         return unitData;
     }
 
-    static getFactionColor(faction: Faction): string {
-        switch (faction) {
-            case Faction.Ultramarines:
-                return '#194486';
-            case Faction.Black_Legion:
-                return '#1C0F10';
-            case Faction.Orks:
-                return '#DC901E';
-            case Faction.ADEPTA_SORORITAS:
-                return '#962C38';
-            case Faction.Necrons:
-                return '#007E59';
-            case Faction.Astra_militarum:
-                return '#717838';
-            case Faction.Death_Guard:
-                return '#65540C';
-            case Faction.Black_Templars:
-                return '#929395';
-            case Faction.Aeldari:
-                return '#ac1b1a';
-            case Faction.Space_Wolves:
-                return '#084A92';
-            case Faction.T_Au:
-                return '#CE7140';
-            case Faction.Dark_Angels:
-                return '#18542B';
-            case Faction.Thousand_Sons:
-                return '#084A92';
-            case Faction.Tyranids:
-                return '#7f5283';
-            case Faction.AdeptusMechanicus:
-                return '#781e2e';
-            default:
-                return '#ffffff';
-        }
-    }
-
     static getFactionIcon(faction: Faction): string {
         switch (faction) {
             case Faction.Ultramarines:
@@ -363,6 +325,8 @@ export class StaticDataService {
                 return 'Tyranids';
             case Faction.AdeptusMechanicus:
                 return 'AdeptusMechanicus';
+            case Faction.WorldEaters:
+                return 'worldeaters';
             default:
                 return 'ffffff';
         }
@@ -395,6 +359,8 @@ export class StaticDataService {
                 return 'Follow the Architect of Fate';
             case Faction.Tyranids:
                 return 'Bring more biomass';
+            case Faction.WorldEaters:
+                return 'More Blood for the Blood God!';
             default:
                 return '';
         }

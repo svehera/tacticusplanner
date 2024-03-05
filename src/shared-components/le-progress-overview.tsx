@@ -11,35 +11,45 @@ import {
 import {
     ILegendaryEvent,
     ILegendaryEventBattle,
+    ILegendaryEventOverviewProgress,
     ILegendaryEventProgress,
     ILegendaryEventProgressTrack,
 } from '../models/interfaces';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getCompletionRateColor } from '../shared-logic/functions';
 import { Tooltip } from '@mui/material';
+import { LeProgressOverviewMissions } from 'src/shared-components/le-progress-overview-missions';
 
 export const LeProgressOverview = ({
     progress,
     legendaryEvent,
-    missionProgressChange,
     notesChange,
-    bundleChange,
+    progressChange,
 }: {
     progress: ILegendaryEventProgress;
     legendaryEvent: ILegendaryEvent;
-    missionProgressChange: (section: 'regularMissions' | 'premiumMissions', value: number) => void;
     notesChange: (value: string) => void;
-    bundleChange: (value: number) => void;
+    progressChange: (value: ILegendaryEventProgress) => void;
 }) => {
     const [accordionExpanded, setAccordionExpanded] = React.useState<string | false>(false);
-
-    const [regularMissionsProgress, setRegularMissionsProgress] = React.useState<number>(progress.regularMissions);
-    const [premiumMissionsProgress, setPremiumMissionsProgress] = React.useState<number>(progress.premiumMissions);
-    const [bundle, setBundle] = React.useState<number>(progress.bundle);
 
     const handleAccordionChange = (section: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
         setAccordionExpanded(isExpanded ? section : false);
     };
+
+    const handleMissionsProgressChange =
+        (current: ILegendaryEventOverviewProgress) =>
+        (section: 'regularMissions' | 'premiumMissions', value: number): void => {
+            current[section] = value;
+            progressChange(progress);
+        };
+
+    const handleBundleChange =
+        (current: ILegendaryEventOverviewProgress) =>
+        (value: number): void => {
+            current.bundle = value;
+            progressChange(progress);
+        };
 
     return (
         <div>
@@ -67,91 +77,74 @@ export const LeProgressOverview = ({
                 </AccordionDetails>
             </Accordion>
 
-            {legendaryEvent.regularMissions.length ? (
-                <Accordion
-                    TransitionProps={{ unmountOnExit: true }}
-                    expanded={accordionExpanded === 'regularMissions'}
-                    onChange={handleAccordionChange('regularMissions')}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                            <span>Regular Missions</span>
+            <Accordion
+                TransitionProps={{ unmountOnExit: true }}
+                expanded={accordionExpanded === 'event1'}
+                onChange={handleAccordionChange('event1')}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <span>
+                            Event 1 Missions & Bundles{' '}
                             <span style={{ fontWeight: 700 }}>
-                                {regularMissionsProgress}/{10}
+                                ({progress.overview['1'].regularMissions}/10 & {progress.overview['1'].premiumMissions}
+                                /10)
                             </span>
-                        </div>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            {legendaryEvent.regularMissions.map((mission, index) => (
-                                <FormControlLabel
-                                    key={mission}
-                                    control={
-                                        <Checkbox
-                                            checked={index < regularMissionsProgress}
-                                            onChange={(_, checked) => {
-                                                setRegularMissionsProgress(checked ? index + 1 : index);
-                                                missionProgressChange('regularMissions', checked ? index + 1 : index);
-                                            }}
-                                            inputProps={{ 'aria-label': 'controlled' }}
-                                        />
-                                    }
-                                    label={index + 1 + '. ' + mission}
-                                />
-                            ))}
-                        </div>
-                    </AccordionDetails>
-                </Accordion>
-            ) : undefined}
+                        </span>
+                    </div>
+                </AccordionSummary>
+                <LeProgressOverviewMissions
+                    progress={progress.overview['1']}
+                    legendaryEvent={legendaryEvent}
+                    missionProgressChange={handleMissionsProgressChange(progress.overview['1'])}
+                    bundleChange={handleBundleChange(progress.overview['1'])}
+                />
+            </Accordion>
 
-            {legendaryEvent.premiumMissions.length ? (
-                <Accordion
-                    TransitionProps={{ unmountOnExit: true }}
-                    expanded={accordionExpanded === 'premiumMissions'}
-                    onChange={handleAccordionChange('premiumMissions')}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                            <span>Premium Missions & 300 Bundle</span>
+            <Accordion
+                TransitionProps={{ unmountOnExit: true }}
+                expanded={accordionExpanded === 'event2'}
+                onChange={handleAccordionChange('event2')}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <span>
+                            Event 2 Missions & Bundles{' '}
                             <span style={{ fontWeight: 700 }}>
-                                {premiumMissionsProgress}/{10}
+                                ({progress.overview['2'].regularMissions}/10 & {progress.overview['2'].premiumMissions}
+                                /10)
                             </span>
-                        </div>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={bundle > 0}
-                                        onChange={(_, checked) => {
-                                            setBundle(checked ? 1 : 0);
-                                            bundleChange(checked ? 1 : 0);
-                                        }}
-                                        inputProps={{ 'aria-label': 'controlled' }}
-                                    />
-                                }
-                                label={'300 Bundle'}
-                            />
-                            <Divider />
-                            {legendaryEvent.premiumMissions.map((mission, index) => (
-                                <FormControlLabel
-                                    key={mission}
-                                    control={
-                                        <Checkbox
-                                            checked={index < premiumMissionsProgress}
-                                            onChange={(_, checked) => {
-                                                setPremiumMissionsProgress(checked ? index + 1 : index);
-                                                missionProgressChange('premiumMissions', checked ? index + 1 : index);
-                                            }}
-                                            inputProps={{ 'aria-label': 'controlled' }}
-                                        />
-                                    }
-                                    label={index + 1 + '. ' + mission}
-                                />
-                            ))}
-                        </div>
-                    </AccordionDetails>
-                </Accordion>
-            ) : undefined}
+                        </span>
+                    </div>
+                </AccordionSummary>
+                <LeProgressOverviewMissions
+                    progress={progress.overview['2']}
+                    legendaryEvent={legendaryEvent}
+                    missionProgressChange={handleMissionsProgressChange(progress.overview['2'])}
+                    bundleChange={handleBundleChange(progress.overview['2'])}
+                />
+            </Accordion>
+
+            <Accordion
+                TransitionProps={{ unmountOnExit: true }}
+                expanded={accordionExpanded === 'event3'}
+                onChange={handleAccordionChange('event3')}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <span>
+                            Event 3 Missions & Bundles{' '}
+                            <span style={{ fontWeight: 700 }}>
+                                ({progress.overview['3'].regularMissions}/10 & {progress.overview['3'].premiumMissions}
+                                /10)
+                            </span>
+                        </span>
+                    </div>
+                </AccordionSummary>
+                <LeProgressOverviewMissions
+                    progress={progress.overview['3']}
+                    legendaryEvent={legendaryEvent}
+                    missionProgressChange={handleMissionsProgressChange(progress.overview['3'])}
+                    bundleChange={handleBundleChange(progress.overview['3'])}
+                />
+            </Accordion>
 
             <Accordion
                 TransitionProps={{ unmountOnExit: true }}

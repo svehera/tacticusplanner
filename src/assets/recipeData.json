@@ -1,4 +1,534 @@
 {
+    "Chainaxe Teeth": {
+        "material": "Chainaxe Teeth",
+        "faction": "World Eaters",
+        "craftable": false,
+        "stat": "Damage",
+        "rarity": "Rare",
+        "icon": "Chainaxe Teeth.png"
+    },
+    "Brazen Jaws": {
+        "material": "Brazen Jaws",
+        "faction": "World Eaters",
+        "craftable": false,
+        "stat": "Health",
+        "rarity": "Rare",
+        "icon": "Brazen Jaws.png"
+    },
+    "Cadaere Renissum": {
+        "material": "Cadaere Renissum",
+        "faction": "World Eaters",
+        "craftable": false,
+        "stat": "Armour",
+        "rarity": "Rare",
+        "icon": "Cadaere Renissum.png"
+    },
+    "Boon of Khorne": {
+        "material": "Boon of Khorne",
+        "faction": "World Eaters",
+        "craftable": false,
+        "stat": "Health",
+        "rarity": "Legendary",
+        "icon": "Boon of Khorne.png"
+    },
+    "Blessed Brazen Jaws": {
+        "material": "Blessed Brazen Jaws",
+        "faction": "World Eaters",
+        "craftable": true,
+        "stat": "Health",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Brazen Jaws",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ],
+        "icon": "Blessed Brazen Jaws.png"
+    },
+    "Blessed Chainaxe Teeth": {
+        "material": "Blessed Chainaxe Teeth",
+        "faction": "World Eaters",
+        "craftable": true,
+        "stat": "Damage",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Chainaxe Teeth",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ],
+        "icon": "Blessed Chainaxe Teeth.png"
+    },
+    "Blessed Cadaere Renissum": {
+        "material": "Blessed Cadaere Renissum",
+        "faction": "World Eaters",
+        "craftable": true,
+        "stat": "Armour",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Cadaere Renissum",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ],
+        "icon": "Blessed Cadaere Renissum.png"
+    },
+    "Exalted Chainaxe Teeth": {
+        "material": "Exalted Chainaxe Teeth",
+        "faction": "World Eaters",
+        "craftable": true,
+        "stat": "Damage",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Blessed Chainaxe Teeth",
+                "count": 2
+            },
+            {
+                "material": "Murderous Spikes",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Exalted Chainaxe Teeth.png"
+    },
+    "Exalted Cadaere Renissum": {
+        "material": "Exalted Cadaere Renissum",
+        "faction": "World Eaters",
+        "craftable": true,
+        "stat": "Armour",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Blessed Cadaere Renissum",
+                "count": 2
+            },
+            {
+                "material": "Mutation: Metallic Skin",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Exalted Cadaere Renissum.png"
+    },
+    "Exalted Brazen Jaws": {
+        "material": "Exalted Brazen Jaws",
+        "faction": "World Eaters",
+        "craftable": true,
+        "stat": "Health",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Blessed Brazen Jaws",
+                "count": 2
+            },
+            {
+                "material": "Mutation: Regenerative Blood",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Exalted Brazen Jaws.png"
+    },
+    "Mark of Khorne": {
+        "material": "Mark of Khorne",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "faction": "World Eaters",
+        "recipe": [
+            {
+                "material": "Boon of Khorne",
+                "count": 9
+            },
+            {
+                "material": "Grand Skull Trophy",
+                "count": 1
+            },
+            {
+                "material": "Golden Ornamental Skull",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Mark of Khorne.png"
+    },
+    "Butcher's Nails": {
+        "material": "Butcher's Nails",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "faction": "World Eaters",
+        "recipe": [
+            {
+                "material": "Boon of Khorne",
+                "count": 9
+            },
+            {
+                "material": "Advanced Combat Stimms",
+                "count": 1
+            },
+            {
+                "material": "Bionic Neural Pathways",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Butcher's Nails.png"
+    },
+    "Collar of Khorne": {
+        "material": "Collar of Khorne",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "faction": "World Eaters",
+        "recipe": [
+            {
+                "material": "Boon of Khorne",
+                "count": 9
+            },
+            {
+                "material": "Utilitarian Belt",
+                "count": 1
+            },
+            {
+                "material": "Unyielding Rivets",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Collar of Khorne.png"
+    },
+    "Superaugmented Constitution": {
+        "material": "Superaugmented Constitution",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "recipe": [
+            {
+                "material": "Master-Crafted Ammo",
+                "count": 9
+            },
+            {
+                "material": "Purity Seal of the Primarch",
+                "count": 9
+            },
+            {
+                "material": "Terminator Honours",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Superaugmented Constitution.png"
+    },
+    "Superaugmented Strength": {
+        "material": "Superaugmented Strength",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "recipe": [
+            {
+                "material": "Master-Crafted Ammo",
+                "count": 9
+            },
+            {
+                "material": "Archeotech Bionics",
+                "count": 9
+            },
+            {
+                "material": "Relic Hilt",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Superaugmented Strength.png"
+    },
+    "Superaugmented Defences": {
+        "material": "Superaugmented Defences",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "recipe": [
+            {
+                "material": "Purity Seal of the Primarch",
+                "count": 9
+            },
+            {
+                "material": "Archeo-Tech Remnant",
+                "count": 9
+            },
+            {
+                "material": "Duplicate Organ",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Superaugmented Defences.png"
+    },
+    "Monstrous Constitution": {
+        "material": "Monstrous Constitution",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "recipe": [
+            {
+                "material": "Psychic Force Conduit",
+                "count": 9
+            },
+            {
+                "material": "Purity Seal of the Primarch",
+                "count": 9
+            },
+            {
+                "material": "Weathering",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Monstrous Constitution.png"
+    },
+    "Monstrous Strength": {
+        "material": "Monstrous Strength",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "recipe": [
+            {
+                "material": "Archeotech Bionics",
+                "count": 9
+            },
+            {
+                "material": "Psyk-Conductive Material",
+                "count": 9
+            },
+            {
+                "material": "Blessed Promethium Canister",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Monstrous Strength.png"
+    },
+    "Monstrous Defences": {
+        "material": "Monstrous Defences",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "recipe": [
+            {
+                "material": "Archeo-Tech Remnant",
+                "count": 9
+            },
+            {
+                "material": "Master-Crafted Ammo",
+                "count": 9
+            },
+            {
+                "material": "Revered Talisman",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Monstrous Defences.png"
+    },
+    "Preternatural Constitution": {
+        "material": "Preternatural Constitution",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "recipe": [
+            {
+                "material": "Psychic Force Conduit",
+                "count": 9
+            },
+            {
+                "material": "Psyk-Conductive Material",
+                "count": 9
+            },
+            {
+                "material": "Grand Strategy",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Preternatural Constitution.png"
+    },
+    "Preternatural Strength": {
+        "material": "Preternatural Strength",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "recipe": [
+            {
+                "material": "Psychic Force Conduit",
+                "count": 9
+            },
+            {
+                "material": "Master-Crafted Ammo",
+                "count": 9
+            },
+            {
+                "material": "Warp Locus",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Preternatural Strength.png"
+    },
+    "Preternatural Defences": {
+        "material": "Preternatural Defences",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "recipe": [
+            {
+                "material": "Psyk-Conductive Material",
+                "count": 9
+            },
+            {
+                "material": "Purity Seal of the Primarch",
+                "count": 9
+            },
+            {
+                "material": "Hypermaterial Shifter",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Preternatural Defences.png"
+    },
+    "Technocrafted Constitution": {
+        "material": "Technocrafted Constitution",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "recipe": [
+            {
+                "material": "Archeotech Bionics",
+                "count": 9
+            },
+            {
+                "material": "Archeo-Tech Remnant",
+                "count": 9
+            },
+            {
+                "material": "Golden Ornamental Skull",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Technocrafted Constitution.png"
+    },
+    "Technocrafted Strength": {
+        "material": "Technocrafted Strength",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "recipe": [
+            {
+                "material": "Archeotech Bionics",
+                "count": 9
+            },
+            {
+                "material": "Psychic Force Conduit",
+                "count": 9
+            },
+            {
+                "material": "Bionic Neural Pathways",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Technocrafted Strength.png"
+    },
+    "Technocrafted Defences": {
+        "material": "Technocrafted Defences",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "recipe": [
+            {
+                "material": "Archeo-Tech Remnant",
+                "count": 9
+            },
+            {
+                "material": "Psyk-Conductive Material",
+                "count": 9
+            },
+            {
+                "material": "Unyielding Rivets",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Technocrafted Defences.png"
+    },
     "Valuable Fabric": {
         "material": "Valuable Fabric",
         "craftable": false,
@@ -4780,6 +5310,7 @@
     },
     "Razorsharp Spikes": {
         "material": "Razorsharp Spikes",
+        "label": "Razor-Sharp Spikes",
         "rarity": "Uncommon",
         "stat": "Damage",
         "recipe": [
@@ -4831,7 +5362,7 @@
         "faction": "Necrons",
         "recipe": [
             {
-                "material": "Adamantium Filaments",
+                "material": "Nano Swarm",
                 "count": 6
             },
             {
@@ -6378,6 +6909,27 @@
     },
     "Aethana": {
         "material": "Aethana",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Aeldari",
+        "rarity": "Shard"
+    },
+    "Eldryon": {
+        "material": "Eldryon",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Aeldari",
+        "rarity": "Shard"
+    },
+    "Jain Zar": {
+        "material": "Jain Zar",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Aeldari",
+        "rarity": "Shard"
+    },
+    "Maugan Ra": {
+        "material": "Maugan Ra",
         "craftable": false,
         "stat": "Shard",
         "faction": "Aeldari",

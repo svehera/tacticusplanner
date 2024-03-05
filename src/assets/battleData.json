@@ -3874,7 +3874,7 @@
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 11,
-        "reward": "Canister of Chemicals",
+        "reward": "Brazen Jaws",
         "expectedGold": 91.5
     },
     "FoCE12": {
@@ -3916,14 +3916,14 @@
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 17,
-        "reward": "Icon of Vengeance",
+        "reward": "Sigil of Decay",
         "expectedGold": 101
     },
     "FoCE18": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 18,
-        "reward": "Sigil of Decay",
+        "reward": "Chainaxe Teeth",
         "expectedGold": 101
     },
     "FoCE19": {
@@ -3965,7 +3965,7 @@
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 23,
-        "reward": "Blessing of the Dark Gods",
+        "reward": "Cadaere Renissum",
         "expectedGold": 101
     },
     "FoCE24": {
@@ -4000,21 +4000,21 @@
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 28,
-        "reward": "Honourifica Imperialis",
+        "reward": "Blessing of Nurgle",
         "expectedGold": 108
     },
     "FoCE29": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 29,
-        "reward": "Blessing of Nurgle",
+        "reward": "Boon of Khorne",
         "expectedGold": 108
     },
     "FoCE3": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 3,
-        "reward": "Mutation: Tough Skin",
+        "reward": "Icon of Vengeance",
         "expectedGold": 83
     },
     "FoCE30": {
@@ -4084,7 +4084,7 @@
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 39,
-        "reward": "Blessing of Nurgle",
+        "reward": "Honourifica Imperialis",
         "expectedGold": 108
     },
     "FoCE4": {
@@ -4105,14 +4105,14 @@
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 5,
-        "reward": "Single Power Pack",
+        "reward": "Advanced Filaments",
         "expectedGold": 83
     },
     "FoCE6": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 6,
-        "reward": "Mutation: Warped Lungs",
+        "reward": "Blessing of the Dark Gods",
         "expectedGold": 83
     },
     "FoCE7": {
@@ -4861,7 +4861,7 @@
         "campaign": "Fall of Cadia Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 30,
-        "reward": "The Silver Scope",
+        "reward": "Slicing Claws",
         "expectedGold": 108
     },
     "FoCME31": {
@@ -5464,6 +5464,216 @@
         "campaignType": "Mirror",
         "nodeNumber": 30,
         "reward": "Aethana",
+        "expectedGold": 53
+    },
+    "SHM31": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 31,
+        "reward": "Wraithbone Plate",
+        "expectedGold": 53
+    },
+    "SHM32": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 32,
+        "reward": "Tainted Text",
+        "expectedGold": 53
+    },
+    "SHM33": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 33,
+        "reward": "Mutation: Tough Skin",
+        "expectedGold": 53
+    },
+    "SHM34": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 34,
+        "reward": "The Silver Aquila",
+        "expectedGold": 53
+    },
+    "SHM35": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 35,
+        "reward": "Lesser Reliquary of Protection",
+        "expectedGold": 53
+    },
+    "SHM36": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 36,
+        "reward": "Ballistics Data",
+        "expectedGold": 53
+    },
+    "SHM37": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 37,
+        "reward": "Canister of Chemicals",
+        "expectedGold": 53
+    },
+    "SHM38": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 38,
+        "reward": "Mission Assignment",
+        "expectedGold": 53
+    },
+    "SHM39": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 39,
+        "reward": "Rebreather",
+        "expectedGold": 53
+    },
+    "SHM40": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 40,
+        "reward": "Brazen Jaws",
+        "expectedGold": 53
+    },
+    "SHM41": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 41,
+        "reward": "Helmet Trophy",
+        "expectedGold": 53
+    },
+    "SHM42": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 42,
+        "reward": "Classified Data-Slate",
+        "expectedGold": 53
+    },
+    "SHM43": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 43,
+        "reward": "Psytronome",
+        "expectedGold": 53
+    },
+    "SHM44": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 44,
+        "reward": "Inferno Bolts",
+        "expectedGold": 53
+    },
+    "SHM45": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 45,
+        "reward": "Eldryon",
+        "expectedGold": 53
+    },
+    "SHM46": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 46,
+        "reward": "Bladesman's Honour",
+        "expectedGold": 53
+    },
+    "SHM47": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 47,
+        "reward": "Box of Salvage",
+        "expectedGold": 53
+    },
+    "SHM48": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 48,
+        "reward": "Standard-Issue Tourniquet",
+        "expectedGold": 53
+    },
+    "SHM49": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 49,
+        "reward": "The Gold Phoenix",
+        "expectedGold": 53
+    },
+    "SHM50": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 50,
+        "reward": "Weapon Anointment Oils",
+        "expectedGold": 53
+    },
+    "SHM51": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 51,
+        "reward": "Combat Stimms",
+        "expectedGold": 53
+    },
+    "SHM52": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 52,
+        "reward": "Chainaxe Teeth",
+        "expectedGold": 53
+    },
+    "SHM53": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 53,
+        "reward": "Oath Seal",
+        "expectedGold": 53
+    },
+    "SHM54": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 54,
+        "reward": "Valuable Fabric",
+        "expectedGold": 53
+    },
+    "SHM55": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 55,
+        "reward": "Locator Beacon",
+        "expectedGold": 53
+    },
+    "SHM56": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 56,
+        "reward": "Purity Seal",
+        "expectedGold": 53
+    },
+    "SHM57": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 57,
+        "reward": "Waystone",
+        "expectedGold": 53
+    },
+    "SHM58": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 58,
+        "reward": "Ritual Implements",
+        "expectedGold": 53
+    },
+    "SHM59": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 59,
+        "reward": "Revered Talisman",
+        "expectedGold": 53
+    },
+    "SHM60": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 60,
+        "reward": "Jain Zar",
         "expectedGold": 53
     }
 }

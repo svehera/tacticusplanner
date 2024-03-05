@@ -34,7 +34,7 @@ export class CharactersService {
                 return filteredCharactersByName.filter(
                     char =>
                         char.rank !== Rank.Locked &&
-                        char.rank !== Rank.Diamond2 &&
+                        char.rank !== Rank.Diamond3 &&
                         !needToLevelCharacter(char) &&
                         !needToAscendCharacter(char)
                 );
