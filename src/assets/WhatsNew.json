@@ -1,6 +1,18 @@
 ﻿{
-    "currentVersion": "1.3.9",
+    "currentVersion": "1.4.0",
     "releaseNotes": [
+        {
+            "version": "1.4.0",
+            "date": "March 6",
+            "type": "Patch",
+            "new": [],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed UI issue with factions layout on the Who You Own page (Maverick007, ijriims)"
+                }
+            ]
+        },
         {
             "version": "1.3.9",
             "date": "March 5",
