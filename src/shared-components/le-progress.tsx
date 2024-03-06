@@ -26,8 +26,27 @@ export const LeProgress = ({
     const dispatch = useContext(DispatchContext);
     const [value, setValue] = React.useState(0);
     const [goal, setGoal] = React.useState<string>('unlock');
-    const [personalProgress, setPersonalProgress] = useState<ILegendaryEventProgressState>({
-        ...(leProgress[legendaryEvent.id] ?? {
+
+    const defaultOverview = leProgress[legendaryEvent.id]?.overview ?? {
+        1: {
+            regularMissions: leProgress[legendaryEvent.id]?.regularMissions ?? 0,
+            premiumMissions: leProgress[legendaryEvent.id]?.premiumMissions ?? 0,
+            bundle: leProgress[legendaryEvent.id]?.bundle ?? 0,
+        },
+        2: {
+            regularMissions: 0,
+            premiumMissions: 0,
+            bundle: 0,
+        },
+        3: {
+            regularMissions: 0,
+            premiumMissions: 0,
+            bundle: 0,
+        },
+    };
+
+    const [personalProgress, setPersonalProgress] = useState<ILegendaryEventProgressState>(
+        leProgress[legendaryEvent.id] ?? {
             id: legendaryEvent.id,
             name: LegendaryEventEnum[legendaryEvent.id],
             alpha: {
@@ -42,43 +61,10 @@ export const LeProgress = ({
             regularMissions: 0,
             premiumMissions: 0,
             bundle: 0,
-            overview: {
-                1: {
-                    regularMissions: 0,
-                    premiumMissions: 0,
-                    bundle: 0,
-                },
-                2: {
-                    regularMissions: 0,
-                    premiumMissions: 0,
-                    bundle: 0,
-                },
-                3: {
-                    regularMissions: 0,
-                    premiumMissions: 0,
-                    bundle: 0,
-                },
-            },
+            overview: defaultOverview,
             notes: '',
-        }),
-        overview: {
-            1: {
-                regularMissions: leProgress[legendaryEvent.id]?.regularMissions ?? 0,
-                premiumMissions: leProgress[legendaryEvent.id]?.premiumMissions ?? 0,
-                bundle: leProgress[legendaryEvent.id]?.bundle ?? 0,
-            },
-            2: {
-                regularMissions: 0,
-                premiumMissions: 0,
-                bundle: 0,
-            },
-            3: {
-                regularMissions: 0,
-                premiumMissions: 0,
-                bundle: 0,
-            },
-        },
-    });
+        }
+    );
 
     const getTrackProgress = useCallback(
         (
@@ -461,7 +447,7 @@ export const LeProgress = ({
                         beta: betaProgress,
                         gamma: gammaProgress,
                         notes: personalProgress.notes,
-                        overview: personalProgress.overview!,
+                        overview: personalProgress.overview ?? defaultOverview,
                     }}
                 />
             </TabPanel>

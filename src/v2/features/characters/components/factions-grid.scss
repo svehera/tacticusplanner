@@ -19,7 +19,7 @@ $columnCount2: 2;
     justify-content: center;
 
     /* 5 columns */
-    $roundedRows5: round($factionsCount / $columnCount5);
+    $roundedRows5: ceil($factionsCount / $columnCount5);
     grid-template-rows: repeat(#{$roundedRows5}, 1fr);
 
     /* Media queries for different column configurations */

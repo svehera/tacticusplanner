@@ -1,13 +1,5 @@
 ﻿import React, { useMemo } from 'react';
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Checkbox,
-    Divider,
-    FormControlLabel,
-    TextField,
-} from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, TextField } from '@mui/material';
 import {
     ILegendaryEvent,
     ILegendaryEventBattle,
