@@ -10,6 +10,9 @@
             "bugFixes": [
                 {
                     "text": "Fixed UI issue with factions layout on the Who You Own page (Maverick007, ijriims)"
+                },
+                {
+                    "text": "Fixed issue with LRE progress reset (Tani, SergeDavid, RotoR)"
                 }
             ]
         },
