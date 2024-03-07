@@ -355,16 +355,16 @@ export const LeProgress = ({
 
         if (currentChests < chestsForUnlock) {
             setGoal('unlock');
-            return chestsForUnlock;
+            return Math.ceil(chestsForUnlock);
         } else if (currentChests < chestsFor4Stars) {
             setGoal('4 stars');
-            return chestsFor4Stars;
+            return Math.ceil(chestsFor4Stars);
         } else if (currentChests < chestsFor5Stars) {
             setGoal('5 stars');
-            return chestsFor5Stars;
+            return Math.ceil(chestsFor5Stars);
         } else if (currentChests < chestsForBlueStar) {
             setGoal('blue star');
-            return chestsForBlueStar;
+            return Math.ceil(chestsForBlueStar);
         }
 
         return 0;
