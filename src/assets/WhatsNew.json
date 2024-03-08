@@ -11,7 +11,11 @@
                     "text": "Add new colors to progress (SergeDavid)"
                 }
             ],
-            "bugFixes": []
+            "bugFixes": [
+                {
+                    "text": "Fixed additional payout for points milestones on LRE progress (Balask83)"
+                }
+            ]
         },
         {
             "version": "1.4.0",

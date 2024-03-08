@@ -308,15 +308,12 @@ export const LeProgress = ({
                 ? currentMilestone.milestone - 1
                 : currentMilestone.milestone;
 
-        return (
-            legendaryEvent.pointsMilestones
-                .filter(x => x.milestone <= milestoneNumber)
-                .map(x => x.engramPayout)
-                .reduce((accumulator, currentValue) => accumulator + currentValue, 0) +
-            regularMissionsCurrency +
-            premiumMissionsCurrency +
-            bundleCurrency
-        );
+        const pointsCurrency = legendaryEvent.pointsMilestones
+            .filter(x => x.milestone <= milestoneNumber)
+            .map(x => x.engramPayout + (premiumMissionsCurrency > 0 ? 15 : 0))
+            .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+        return pointsCurrency + regularMissionsCurrency + premiumMissionsCurrency + bundleCurrency;
     }, [currentPoints, regularMissionsCurrency, premiumMissionsCurrency, bundleCurrency]);
 
     const totalChests = useMemo(() => {
