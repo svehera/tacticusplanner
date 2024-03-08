@@ -1,6 +1,18 @@
 ﻿{
-    "currentVersion": "1.4.0",
+    "currentVersion": "1.4.1",
     "releaseNotes": [
+        {
+            "version": "1.4.1",
+            "date": "March X",
+            "type": "Update",
+            "new": [],
+            "minor": [
+                {
+                    "text": "Add new colors to progress (SergeDavid)"
+                }
+            ],
+            "bugFixes": []
+        },
         {
             "version": "1.4.0",
             "date": "March 6",

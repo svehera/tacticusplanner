@@ -84,10 +84,24 @@ export const LeTrackProgress = ({
         setAccordionExpanded(isExpanded ? battleNumber : false);
     };
 
-    const getBackgroundColor = (state: boolean[]): string => {
-        const numberOfCompleted = state.filter(x => x).length;
+    const getBackgroundColor = (battle: ILegendaryEventBattle): string => {
+        const getCurrentPoints = () => {
+            let total = 0;
 
-        return getCompletionRateColor(numberOfCompleted, state.length);
+            battle.state.forEach((value, index) => {
+                if (value) {
+                    total += battle.requirements[index].points;
+                }
+            });
+
+            return total;
+        };
+
+        const totalPoints = battle.requirements
+            .map(x => x.points)
+            .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+        return getCompletionRateColor(getCurrentPoints(), totalPoints);
     };
 
     return (
@@ -100,7 +114,7 @@ export const LeTrackProgress = ({
                     onChange={handleAccordionChange(battle.battleNumber)}
                     style={{
                         borderInlineStartWidth: 10,
-                        borderInlineStartColor: getBackgroundColor(battle.state),
+                        borderInlineStartColor: getBackgroundColor(battle),
                         borderInlineStartStyle: 'solid',
                     }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>

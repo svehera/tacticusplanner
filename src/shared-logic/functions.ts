@@ -147,21 +147,20 @@ export const getCompletionRateColor = (curr: number, total: number): string => {
     if (!curr) {
         return 'white';
     }
-    if (curr >= total) {
+
+    const completionPercentage = (curr / total) * 100;
+
+    if (completionPercentage === 100) {
+        return 'green';
+    } else if (completionPercentage >= 75) {
         return 'lightgreen';
-    }
-
-    const average = total / 2;
-
-    if (curr <= average) {
+    } else if (completionPercentage >= 50) {
+        return 'yellow';
+    } else if (completionPercentage >= 25) {
+        return 'orange';
+    } else {
         return 'lightcoral';
     }
-
-    if (curr > average) {
-        return 'yellow';
-    }
-
-    return 'white';
 };
 
 export function getImageUrl(image: string): string {
