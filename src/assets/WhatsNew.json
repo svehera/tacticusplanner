@@ -20,6 +20,9 @@
             "bugFixes": [
                 {
                     "text": "Fixed additional payout for points milestones on LRE progress (Balask83)"
+                },
+                {
+                    "text": "Fixed Diamond II->III upgrades for Necrons"
                 }
             ]
         },
