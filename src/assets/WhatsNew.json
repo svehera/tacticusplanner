@@ -9,6 +9,12 @@
             "minor": [
                 {
                     "text": "Add new colors to progress (SergeDavid)"
+                },
+                {
+                    "text": "Remove Snotflogga from \"No Summons\" track after his rewORK (xenomorphslayer, Solar7809)"
+                },
+                {
+                    "text": "Remove tooltip from the rank image (SeventhSun)"
                 }
             ],
             "bugFixes": [

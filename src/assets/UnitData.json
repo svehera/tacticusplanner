@@ -583,7 +583,7 @@
         "Traits": ["Beast Slayer"],
         "Passive Ability": "Physical",
         "Number": 11,
-        "ForcedSummons": false,
+        "ForcedSummons": true,
         "RequiredInCampaign": true,
         "Icon": "snotflogga-removebg-preview.png"
     },
