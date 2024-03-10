@@ -2,9 +2,9 @@
     "id": 5,
     "name": "Ragnar",
     "wikiLink": "https://tacticus.fandom.com/wiki/LE-Ragnar",
-    "eventStage": 2,
-    "nextEventDate": "March 3",
-    "nextEventDateUtc": "Sun, 03 Mar 2024 00:00:00 GMT",
+    "eventStage": 3,
+    "nextEventDate": "TBA",
+    "nextEventDateUtc": "",
     "regularMissions": [
         "Play one Legendary Event Battle, Deal 1000 damage",
         "Defeat 30 Orks",
