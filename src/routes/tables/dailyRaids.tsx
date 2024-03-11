@@ -48,6 +48,8 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { sum } from 'lodash';
 import { MiscIcon } from '../../shared-components/misc-icon';
 import { CharacterImage } from 'src/shared-components/character-image';
+import { FlexBox } from 'src/v2/components/flex-box';
+import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -308,6 +310,13 @@ export const DailyRaids = () => {
         return estimatedRanks.materials.filter(x => x.locationsString === x.missingLocationsString);
     }, [estimatedRanks.materials]);
 
+    const formattedDate: string = useMemo(() => {
+        const nextDate = new Date();
+        nextDate.setDate(nextDate.getDate() + estimatedRanks.raids.length);
+
+        return formatDateWithOrdinal(nextDate);
+    }, [estimatedRanks.raids.length]);
+
     return (
         <div>
             <div>
@@ -418,7 +427,10 @@ export const DailyRaids = () => {
 
                 <Accordion defaultExpanded={true} TransitionProps={{ unmountOnExit: !pagination.completed }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <span style={{ fontSize: 20 }}>Raids ({estimatedRanks.raids.length} Days)</span>
+                        <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                            <span style={{ fontSize: 20 }}>Raids ({estimatedRanks.raids.length} Days)</span>
+                            <span className="italic">{formattedDate}</span>
+                        </FlexBox>
                     </AccordionSummary>
                     <AccordionDetails style={{ maxHeight: '63vh', overflow: 'auto' }}>
                         {hasChanges ? (
@@ -695,6 +707,7 @@ const MaterialItem = ({
                         materialTotalCount={raid.totalCount}
                         changed={changed}
                         isFirstDay={isFirstDay}
+                        isAllLocationsBlocked={isAllLocationsBlocked}
                     />
                 ))}
             </ul>
@@ -708,8 +721,10 @@ const RaidItem = ({
     changed,
     isFirstDay,
     materialTotalCount,
+    isAllLocationsBlocked,
 }: {
     isFirstDay: boolean;
+    isAllLocationsBlocked: boolean;
     material: IMaterialRaid;
     materialTotalCount: number;
     location: IRaidLocation;
@@ -794,7 +809,7 @@ const RaidItem = ({
                 <FormControlLabel
                     control={
                         <Input
-                            disabled={isLocationCompleted}
+                            disabled={isLocationCompleted || isAllLocationsBlocked}
                             value={itemsObtained}
                             size="small"
                             onFocus={event => event.target.select()}
@@ -814,9 +829,12 @@ const RaidItem = ({
                         </span>
                     }
                 />
-                <Tooltip title={isLocationCompleted ? '' : 'Add to inventory'}>
+                <Tooltip title={isLocationCompleted || isAllLocationsBlocked ? '' : 'Add to inventory'}>
                     <span>
-                        <Button size={'small'} onClick={handleAdd} disabled={isLocationCompleted}>
+                        <Button
+                            size={'small'}
+                            onClick={handleAdd}
+                            disabled={isLocationCompleted || isAllLocationsBlocked}>
                             Add
                         </Button>
                     </span>

@@ -308,15 +308,12 @@ export const LeProgress = ({
                 ? currentMilestone.milestone - 1
                 : currentMilestone.milestone;
 
-        return (
-            legendaryEvent.pointsMilestones
-                .filter(x => x.milestone <= milestoneNumber)
-                .map(x => x.engramPayout)
-                .reduce((accumulator, currentValue) => accumulator + currentValue, 0) +
-            regularMissionsCurrency +
-            premiumMissionsCurrency +
-            bundleCurrency
-        );
+        const pointsCurrency = legendaryEvent.pointsMilestones
+            .filter(x => x.milestone <= milestoneNumber)
+            .map(x => x.engramPayout + (premiumMissionsCurrency > 0 ? 15 : 0))
+            .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+        return pointsCurrency + regularMissionsCurrency + premiumMissionsCurrency + bundleCurrency;
     }, [currentPoints, regularMissionsCurrency, premiumMissionsCurrency, bundleCurrency]);
 
     const totalChests = useMemo(() => {
@@ -362,12 +359,10 @@ export const LeProgress = ({
         } else if (currentChests < chestsFor5Stars) {
             setGoal('5 stars');
             return Math.ceil(chestsFor5Stars);
-        } else if (currentChests < chestsForBlueStar) {
-            setGoal('blue star');
-            return Math.ceil(chestsForBlueStar);
         }
 
-        return 0;
+        setGoal('blue star');
+        return Math.ceil(chestsForBlueStar);
     }, [currentChests]);
 
     const currencyForUnlock = useMemo(() => {
@@ -388,7 +383,7 @@ export const LeProgress = ({
             }
         }
 
-        return 0;
+        return legendaryEvent.pointsMilestones[legendaryEvent.pointsMilestones.length - 1].cumulativePoints;
     }, [currencyForUnlock, regularMissionsCurrency, premiumMissionsCurrency, bundleCurrency]);
 
     const averageBattles = useMemo(() => {

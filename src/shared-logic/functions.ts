@@ -147,23 +147,46 @@ export const getCompletionRateColor = (curr: number, total: number): string => {
     if (!curr) {
         return 'white';
     }
-    if (curr >= total) {
+
+    const completionPercentage = (curr / total) * 100;
+
+    if (completionPercentage === 100) {
+        return 'green';
+    } else if (completionPercentage >= 75) {
         return 'lightgreen';
-    }
-
-    const average = total / 2;
-
-    if (curr <= average) {
+    } else if (completionPercentage >= 50) {
+        return 'yellow';
+    } else if (completionPercentage >= 25) {
+        return 'orange';
+    } else {
         return 'lightcoral';
     }
-
-    if (curr > average) {
-        return 'yellow';
-    }
-
-    return 'white';
 };
 
 export function getImageUrl(image: string): string {
     return new URL(`../assets/images/${image}`, import.meta.url).href;
+}
+
+export function formatDateWithOrdinal(date: Date): string {
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    const suffix = getDaySuffix(day);
+
+    return `${day}${suffix} of ${month}`;
+}
+
+function getDaySuffix(day: number) {
+    if (day >= 11 && day <= 13) {
+        return 'th';
+    }
+    switch (day % 10) {
+        case 1:
+            return 'st';
+        case 2:
+            return 'nd';
+        case 3:
+            return 'rd';
+        default:
+            return 'th';
+    }
 }
