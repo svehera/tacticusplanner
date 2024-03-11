@@ -104,17 +104,17 @@ export const Characters = () => {
         },
         {
             field: 'health',
-            headerName: 'Base Health',
+            headerName: 'Health D3',
             minWidth: 100,
         },
         {
             field: 'damage',
-            headerName: 'Base Damage',
+            headerName: 'Damage D3',
             minWidth: 100,
         },
         {
             field: 'armour',
-            headerName: 'Base Armour',
+            headerName: 'Armour D3',
             minWidth: 100,
         },
         {

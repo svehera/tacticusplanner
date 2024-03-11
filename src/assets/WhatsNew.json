@@ -8,6 +8,9 @@
             "new": [],
             "minor": [
                 {
+                    "text": "Added units D3 stats for Health, Damage, Armour. Thanks Ganko for contribution"
+                },
+                {
                     "text": "Changed order options description to be \"BS Value\" (sasquach)"
                 }
             ],
