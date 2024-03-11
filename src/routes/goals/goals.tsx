@@ -27,6 +27,7 @@ import { CampaignImage } from '../../shared-components/campaign-image';
 import { enqueueSnackbar } from 'notistack';
 import Button from '@mui/material/Button';
 import { MiscIcon } from '../../shared-components/misc-icon';
+import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
 export const Goals = () => {
     const { goals, characters, campaignsProgress, dailyRaidsPreferences, inventory, dailyRaids } =
@@ -252,6 +253,11 @@ export const GoalCard = ({
         };
     }, [character.name, character.rank, goal.targetRank, higherPriorityGoals]);
 
+    const nextDate = new Date();
+    nextDate.setDate(nextDate.getDate() + estimatedDays.total + daysOrTokensLeft);
+
+    const formattedDate = formatDateWithOrdinal(nextDate);
+
     return (
         <Card
             onClick={onClick}
@@ -292,13 +298,19 @@ export const GoalCard = ({
                             <RankImage rank={goal.targetRank ?? 0} />
                         </div>
                         {isGoalCompleted ? undefined : (
-                            <Tooltip
-                                title={'Day/s left takes into consideration the highest planned item across all goals'}>
-                                <span>
-                                    Days Left: <span className="bold">{estimatedDays.total}</span> (
-                                    {estimatedDays.byOrder})
-                                </span>
-                            </Tooltip>
+                            <>
+                                <Tooltip
+                                    title={
+                                        'Day/s left takes into consideration the highest planned item across all goals'
+                                    }>
+                                    <span>
+                                        Days Left: <span className="bold">{estimatedDays.total}</span> (
+                                        {estimatedDays.byOrder})
+                                    </span>
+                                </Tooltip>
+                                <br />
+                                <span className="italic">{formattedDate}</span>
+                            </>
                         )}
                     </div>
                 ) : undefined}
@@ -328,10 +340,14 @@ export const GoalCard = ({
                                 ) : undefined}
                                 )
                             </>
+                            <br />
+                            <span className="italic">{formattedDate}</span>
                         </span>
                         {isOnslaughtMode ? (
                             <span>
                                 Days Left: <span className="bold">{Math.ceil(daysOrTokensLeft / 1.5)}</span>
+                                <br />
+                                <span className="italic">{formattedDate}</span>
                             </span>
                         ) : undefined}
                         <span>

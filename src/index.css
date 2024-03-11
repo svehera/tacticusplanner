@@ -18,6 +18,10 @@ code {
     font-weight: bold;
 }
 
+.italic {
+    font-style: italic;
+}
+
 .flex-row {
     display: flex;
     align-items: center;

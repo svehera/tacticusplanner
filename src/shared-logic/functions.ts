@@ -166,3 +166,27 @@ export const getCompletionRateColor = (curr: number, total: number): string => {
 export function getImageUrl(image: string): string {
     return new URL(`../assets/images/${image}`, import.meta.url).href;
 }
+
+export function formatDateWithOrdinal(date: Date): string {
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    const suffix = getDaySuffix(day);
+
+    return `${day}${suffix} of ${month}`;
+}
+
+function getDaySuffix(day: number) {
+    if (day >= 11 && day <= 13) {
+        return 'th';
+    }
+    switch (day % 10) {
+        case 1:
+            return 'st';
+        case 2:
+            return 'nd';
+        case 3:
+            return 'rd';
+        default:
+            return 'th';
+    }
+}

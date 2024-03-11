@@ -5,16 +5,28 @@
             "version": "1.4.1",
             "date": "March 11",
             "type": "Update",
-            "new": [],
+            "new": [
+                {
+                    "text": "Added calendar days for Goals and Daily Raids (Tani)",
+                    "images": [
+                        {
+                            "path": "goals.png"
+                        },
+                        {
+                            "path": "dr.png"
+                        }
+                    ]
+                }
+            ],
             "minor": [
                 {
                     "text": "Add new colors to progress (SergeDavid)"
                 },
                 {
-                    "text": "Remove Snotflogga from \"No Summons\" track after his rewORK (xenomorphslayer, Solar7809)"
+                    "text": "Removed Snotflogga from \"No Summons\" track after his rewORK (xenomorphslayer, Solar7809)"
                 },
                 {
-                    "text": "Remove tooltip from the rank image (SeventhSun)"
+                    "text": "Removed tooltip from the rank image (SeventhSun)"
                 }
             ],
             "bugFixes": [
