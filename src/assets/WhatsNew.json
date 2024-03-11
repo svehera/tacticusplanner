@@ -1,6 +1,18 @@
 ﻿{
-    "currentVersion": "1.4.1",
+    "currentVersion": "1.4.2",
     "releaseNotes": [
+        {
+            "version": "1.4.2",
+            "date": "March 11",
+            "type": "Update",
+            "new": [],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed Fall of Cadia Elite 5 node reward (Farfalafel)"
+                }
+            ]
+        },
         {
             "version": "1.4.1",
             "date": "March 11",
@@ -41,6 +53,9 @@
                 },
                 {
                     "text": "Fixed issue with strange data when mark every space as complete in LRE tracker (Mehal)"
+                },
+                {
+                    "text": "Fixed Fall of Cadia Elite 5 node reward (Farfalafel)"
                 }
             ]
         },
