@@ -23,6 +23,9 @@
                 },
                 {
                     "text": "Fixed Diamond II->III upgrades for Necrons"
+                },
+                {
+                    "text": "Fixed issue when energy is allocated for Blocked materials (RotoR)"
                 }
             ]
         },

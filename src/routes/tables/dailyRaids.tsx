@@ -695,6 +695,7 @@ const MaterialItem = ({
                         materialTotalCount={raid.totalCount}
                         changed={changed}
                         isFirstDay={isFirstDay}
+                        isAllLocationsBlocked={isAllLocationsBlocked}
                     />
                 ))}
             </ul>
@@ -708,8 +709,10 @@ const RaidItem = ({
     changed,
     isFirstDay,
     materialTotalCount,
+    isAllLocationsBlocked,
 }: {
     isFirstDay: boolean;
+    isAllLocationsBlocked: boolean;
     material: IMaterialRaid;
     materialTotalCount: number;
     location: IRaidLocation;
@@ -794,7 +797,7 @@ const RaidItem = ({
                 <FormControlLabel
                     control={
                         <Input
-                            disabled={isLocationCompleted}
+                            disabled={isLocationCompleted || isAllLocationsBlocked}
                             value={itemsObtained}
                             size="small"
                             onFocus={event => event.target.select()}
@@ -814,9 +817,12 @@ const RaidItem = ({
                         </span>
                     }
                 />
-                <Tooltip title={isLocationCompleted ? '' : 'Add to inventory'}>
+                <Tooltip title={isLocationCompleted || isAllLocationsBlocked ? '' : 'Add to inventory'}>
                     <span>
-                        <Button size={'small'} onClick={handleAdd} disabled={isLocationCompleted}>
+                        <Button
+                            size={'small'}
+                            onClick={handleAdd}
+                            disabled={isLocationCompleted || isAllLocationsBlocked}>
                             Add
                         </Button>
                     </span>

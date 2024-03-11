@@ -593,6 +593,7 @@ export class StaticDataService {
                 : settings.dailyEnergy;
 
             for (const material of allMaterials) {
+                const isBlocked = material.locationsString === material.missingLocationsString;
                 if (energyLeft < 5) {
                     break;
                 }
@@ -634,6 +635,20 @@ export class StaticDataService {
                         );
                     if (completedLocation) {
                         materialRaids.locations.push(completedLocation);
+                        continue;
+                    }
+
+                    if (isBlocked) {
+                        if (isToday) {
+                            materialRaids.locations.push({
+                                id: location.campaign + location.nodeNumber,
+                                campaign: location.campaign,
+                                battleNumber: location.nodeNumber,
+                                raidsCount: location.dailyBattleCount,
+                                farmedItems: 0,
+                                energySpent: 0,
+                            });
+                        }
                         continue;
                     }
 
