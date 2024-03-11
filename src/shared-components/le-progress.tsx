@@ -359,12 +359,10 @@ export const LeProgress = ({
         } else if (currentChests < chestsFor5Stars) {
             setGoal('5 stars');
             return Math.ceil(chestsFor5Stars);
-        } else if (currentChests < chestsForBlueStar) {
-            setGoal('blue star');
-            return Math.ceil(chestsForBlueStar);
         }
 
-        return 0;
+        setGoal('blue star');
+        return Math.ceil(chestsForBlueStar);
     }, [currentChests]);
 
     const currencyForUnlock = useMemo(() => {
@@ -385,7 +383,7 @@ export const LeProgress = ({
             }
         }
 
-        return 0;
+        return legendaryEvent.pointsMilestones[legendaryEvent.pointsMilestones.length - 1].cumulativePoints;
     }, [currencyForUnlock, regularMissionsCurrency, premiumMissionsCurrency, bundleCurrency]);
 
     const averageBattles = useMemo(() => {

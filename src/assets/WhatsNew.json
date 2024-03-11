@@ -3,7 +3,7 @@
     "releaseNotes": [
         {
             "version": "1.4.1",
-            "date": "March X",
+            "date": "March 11",
             "type": "Update",
             "new": [],
             "minor": [
@@ -19,13 +19,16 @@
             ],
             "bugFixes": [
                 {
-                    "text": "Fixed additional payout for points milestones on LRE progress (Balask83)"
+                    "text": "Fixed additional payout for points milestones on LRE progress (Balask83, Tani)"
                 },
                 {
                     "text": "Fixed Diamond II->III upgrades for Necrons"
                 },
                 {
                     "text": "Fixed issue when energy is allocated for Blocked materials (RotoR)"
+                },
+                {
+                    "text": "Fixed issue with strange data when mark every space as complete in LRE tracker (Mehal)"
                 }
             ]
         },
