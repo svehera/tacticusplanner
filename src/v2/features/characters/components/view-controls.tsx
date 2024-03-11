@@ -27,11 +27,11 @@ export const ViewControls = ({
     const orderToString = (order: CharactersOrderBy): string => {
         switch (order) {
             case CharactersOrderBy.FactionValue:
-                return 'By Faction Value';
+                return 'By Faction BS Value';
             case CharactersOrderBy.FactionPower:
                 return 'By Faction Power';
             case CharactersOrderBy.CharacterValue:
-                return 'By Character Value';
+                return 'By Character BS Value';
             case CharactersOrderBy.CharacterPower:
                 return 'By Character Power';
             case CharactersOrderBy.AbilitiesLevel:

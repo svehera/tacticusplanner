@@ -6,7 +6,11 @@
             "date": "March 11",
             "type": "Update",
             "new": [],
-            "minor": [],
+            "minor": [
+                {
+                    "text": "Changed order options description to be \"BS Value\" (sasquach)"
+                }
+            ],
             "bugFixes": [
                 {
                     "text": "Fixed Fall of Cadia Elite 5 node reward (Farfalafel)"
