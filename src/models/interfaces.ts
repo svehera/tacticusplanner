@@ -171,6 +171,10 @@ export interface ILegendaryEventTrackStatic {
     name: string;
     killPoints: number;
     battlesPoints: number[];
+    enemies: {
+        label: string;
+        link: string;
+    };
 }
 
 export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {

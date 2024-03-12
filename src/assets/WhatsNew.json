@@ -16,6 +16,17 @@
                             "path": "min.png"
                         }
                     ]
+                },
+                {
+                    "text": "Added enemy factions to LRE tracks (GhostHobbit)",
+                    "subPoints": [
+                        "Click on the 'i' icon navigate user to the Wiki page of respective faction (NPC units block)"
+                    ],
+                    "images": [
+                        {
+                            "path": "lre.png"
+                        }
+                    ]
                 }
             ],
             "minor": [

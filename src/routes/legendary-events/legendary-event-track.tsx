@@ -27,6 +27,8 @@ import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions'
 import { CharacterTitle } from '../../shared-components/character-title';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { isMobile } from 'react-device-detect';
+import InfoIcon from '@mui/icons-material/Info';
+import { FlexBox } from 'src/v2/components/flex-box';
 
 export const LegendaryEventTrack = ({
     track,
@@ -203,6 +205,12 @@ export const LegendaryEventTrack = ({
     return (
         <div style={{ width: '100%', display: show ? 'block' : 'none', overflow: 'auto' }}>
             <span style={{ fontWeight: 700, fontSize: 18 }}>{track.name + ' - ' + track.killPoints}</span>
+            <FlexBox gap={5}>
+                <span style={{ fontStyle: 'italic', fontSize: 18 }}> vs {track.enemies.label}</span>
+                <a href={track.enemies.link} target={'_blank'} rel="noreferrer">
+                    <InfoIcon color={'primary'} />
+                </a>
+            </FlexBox>
             <div
                 className="ag-theme-material auto-teams"
                 style={{

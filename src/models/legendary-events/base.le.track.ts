@@ -14,6 +14,9 @@ export class LETrack implements ILegendaryEventTrack {
     name: string;
     killPoints: number;
     battlesPoints: number[];
+    enemies: {
+        label: string;
+    };
 
     constructor(
         public eventId: LegendaryEventEnum,
@@ -26,6 +29,7 @@ export class LETrack implements ILegendaryEventTrack {
         this.killPoints = staticData.killPoints;
         this.battlesPoints = staticData.battlesPoints;
         this.unitsRestrictions = orderBy(unitsRestrictions, 'points');
+        this.enemies = staticData.enemies;
     }
 
     getCharacterPoints(character: ICharacter2): number {

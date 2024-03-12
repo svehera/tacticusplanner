@@ -31,16 +31,28 @@
     ],
     "alpha": {
         "name": "Alpha (No Necrons)",
+        "enemies": {
+            "label": "Necrons",
+            "link": "https://tacticus.fandom.com/wiki/Necrons#NPC_Units"
+        },
         "killPoints": 35,
         "battlesPoints": [29, 39, 33, 48, 36, 52, 45, 39, 54, 50, 50, 65]
     },
     "beta": {
         "name": "Beta (No Tyranids)",
+        "enemies": {
+            "label": "Tyranids",
+            "link": "https://tacticus.fandom.com/wiki/Tyranids#NPC_Units"
+        },
         "killPoints": 19,
         "battlesPoints": [34, 40, 57, 59, 49, 58, 55, 50, 54, 58, 59, 63]
     },
     "gamma": {
         "name": "Gamma (No Imperials)",
+        "enemies": {
+            "label": "Ultramarines & Astra Militarum",
+            "link": "https://tacticus.fandom.com/wiki/Ultramarines#NPC_Units"
+        },
         "killPoints": 18,
         "battlesPoints": [31, 36, 56, 48, 53, 61, 67, 50, 57, 60, 67, 56]
     },

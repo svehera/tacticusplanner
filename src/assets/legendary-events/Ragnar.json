@@ -31,16 +31,28 @@
     ],
     "alpha": {
         "name": "Alpha (No Xenos)",
+        "enemies": {
+            "label": "Orks",
+            "link": "https://tacticus.fandom.com/wiki/Orks#NPC_Units"
+        },
         "killPoints": 24,
         "battlesPoints": [40, 38, 50, 48, 50, 48, 60, 55, 47, 52, 59, 59]
     },
     "beta": {
         "name": "Beta (No Chaos)",
+        "enemies": {
+            "label": "Thousand Sons",
+            "link": "https://tacticus.fandom.com/wiki/Thousand_Sons#NPC_Units"
+        },
         "killPoints": 30,
         "battlesPoints": [33, 36, 45, 47, 50, 49, 50, 50, 50, 57, 43, 60]
     },
     "gamma": {
         "name": "Gamma (No Imperials)",
+        "enemies": {
+            "label": "Black Templars",
+            "link": "https://tacticus.fandom.com/wiki/Black_Templars#NPC_Units"
+        },
         "killPoints": 34,
         "battlesPoints": [28, 35, 39, 43, 40, 57, 43, 50, 58, 48, 50, 55]
     },
