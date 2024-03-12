@@ -21,6 +21,7 @@ import { useGetSharedRoster } from 'src/v2/features/share/share-roster.endpoints
 
 import { StoreContext } from 'src/reducers/store.provider';
 import { GlobalState } from 'src/models/global-state';
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 
 export const SharedRoster = () => {
     const { viewPreferences } = useContext(StoreContext);
@@ -67,16 +68,26 @@ export const SharedRoster = () => {
         <Box style={{ margin: 'auto' }}>
             {/* eslint-disable-next-line react/no-unescaped-entities */}
             <h3 style={{ textAlign: 'center' }}>{sharedUser}'s Roster</h3>
-            <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter} />
-            <ViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
+            <CharactersViewContext.Provider
+                value={{
+                    showAbilities: viewPreferences.showAbilitiesLevel,
+                    showBadges: viewPreferences.showBadges,
+                    showPower: viewPreferences.showPower,
+                    showBsValue: viewPreferences.showBsValue,
+                    showCharacterLevel: viewPreferences.showCharacterLevel,
+                    showCharacterRarity: viewPreferences.showCharacterRarity,
+                }}>
+                <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter} />
+                <ViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
 
-            <Conditional condition={isFactionsView(viewControls.orderBy)}>
-                <FactionsGrid factions={factions} />
-            </Conditional>
+                <Conditional condition={isFactionsView(viewControls.orderBy)}>
+                    <FactionsGrid factions={factions} />
+                </Conditional>
 
-            <Conditional condition={isCharactersView(viewControls.orderBy)}>
-                <CharactersGrid characters={characters} />
-            </Conditional>
+                <Conditional condition={isCharactersView(viewControls.orderBy)}>
+                    <CharactersGrid characters={characters} />
+                </Conditional>
+            </CharactersViewContext.Provider>
         </Box>
     );
 };

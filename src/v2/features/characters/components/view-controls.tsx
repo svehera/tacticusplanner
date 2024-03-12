@@ -9,6 +9,7 @@ import { getEnumValues } from 'src/shared-logic/functions';
 import { IViewControls } from '../characters.models';
 import { CharactersFilterBy } from '../enums/characters-filter-by';
 import { CharactersOrderBy } from '../enums/characters-order-by';
+import ViewSettings from 'src/routes/legendary-events/view-settings';
 
 export const ViewControls = ({
     viewControls,
@@ -77,7 +78,7 @@ export const ViewControls = ({
         entries: Array<number>,
         getName: (value: number) => string
     ) => (
-        <FormControl style={{ width: '220px' }}>
+        <FormControl style={{ width: '50%', maxWidth: '200px' }}>
             <InputLabel>{label}</InputLabel>
             <Select label={name} value={value} onChange={event => updatePreferences(name, +event.target.value)}>
                 {entries.map(value => (
@@ -93,6 +94,7 @@ export const ViewControls = ({
         <FlexBox gap={10} justifyContent={'center'} useColumnForMobile>
             {getSelectControl('Order', viewControls.orderBy, 'orderBy', orderEntries, orderToString)}
             {getSelectControl('Filter', viewControls.filterBy, 'filterBy', filterEntries, filterToString)}
+            <ViewSettings preset={'wyo'} />
         </FlexBox>
     );
 };

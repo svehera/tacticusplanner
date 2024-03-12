@@ -3,9 +3,21 @@
     "releaseNotes": [
         {
             "version": "1.4.2",
-            "date": "March 11",
+            "date": "March 12",
             "type": "Update",
-            "new": [],
+            "new": [
+                {
+                    "text": "Added possibility to customize Who You Own view (Tani, Lobo)",
+                    "images": [
+                        {
+                            "path": "max.png"
+                        },
+                        {
+                            "path": "min.png"
+                        }
+                    ]
+                }
+            ],
             "minor": [
                 {
                     "text": "Added units D3 stats for Health, Damage, Armour. Thanks Ganko for contribution"

@@ -328,6 +328,12 @@ export interface IViewPreferences {
     hideNames: boolean;
     wyoFilter: CharactersFilterBy;
     wyoOrder: CharactersOrderBy;
+    showBadges: boolean;
+    showAbilitiesLevel: boolean;
+    showBsValue: boolean;
+    showPower: boolean;
+    showCharacterLevel: boolean;
+    showCharacterRarity: boolean;
 }
 
 export interface IAutoTeamsPreferences {

@@ -4,8 +4,19 @@ import { IViewPreferences } from '../../models/interfaces';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import Button from '@mui/material/Button';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { Conditional } from 'src/v2/components/conditional';
 
-const ViewSettings = ({ options }: { options?: Array<keyof IViewPreferences> }) => {
+interface IViewOption {
+    key: keyof IViewPreferences;
+    value: boolean;
+    label: string;
+    disabled: boolean;
+    tooltip?: string;
+}
+
+type OptionsPreset = 'lre' | 'wyo' | 'inventory';
+
+const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
     const dispatch = useContext(DispatchContext);
     const { viewPreferences } = useContext(StoreContext);
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
@@ -24,198 +35,164 @@ const ViewSettings = ({ options }: { options?: Array<keyof IViewPreferences> }) 
         dispatch.viewPreferences({ type: 'Update', setting, value });
     };
 
-    function checkOptions(key: keyof IViewPreferences, node: React.ReactNode): React.ReactNode {
-        if (!options) {
-            if (key === 'craftableItemsInInventory') {
-                return;
-            }
-            return node;
-        } else if (options.includes(key)) {
-            return node;
-        }
-    }
+    const renderOption = (option: IViewOption) => {
+        return (
+            <Tooltip title={option.tooltip}>
+                <FormControlLabel
+                    key={option.key}
+                    label={option.label}
+                    control={
+                        <Switch
+                            checked={option.value}
+                            disabled={option.disabled}
+                            onChange={event => updatePreferences(option.key, event.target.checked)}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                        />
+                    }
+                />
+            </Tooltip>
+        );
+    };
+
+    const renderPopover = (children: React.ReactNode) => (
+        <>
+            <Button variant="outlined" onClick={handleClick2}>
+                View <SettingsIcon />
+            </Button>
+            <Popover
+                open={open2}
+                anchorEl={anchorEl2}
+                onClose={handleClose2}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}>
+                <div style={{ margin: 20, width: 300 }}>{children}</div>
+            </Popover>
+        </>
+    );
+    const lreSectionOptions: IViewOption[] = [
+        {
+            label: 'Alpha',
+            key: 'showAlpha',
+            value: viewPreferences.showAlpha,
+            disabled: viewPreferences.showAlpha && !viewPreferences.showBeta && !viewPreferences.showGamma,
+        },
+        {
+            label: 'Beta',
+            key: 'showBeta',
+            value: viewPreferences.showBeta,
+            disabled: viewPreferences.showBeta && !viewPreferences.showAlpha && !viewPreferences.showGamma,
+        },
+        {
+            label: 'Gamma',
+            key: 'showGamma',
+            value: viewPreferences.showGamma,
+            disabled: viewPreferences.showGamma && !viewPreferences.showAlpha && !viewPreferences.showBeta,
+        },
+    ];
+
+    const lreSections = <></>;
+
+    const lreOptions: IViewOption[] = [
+        {
+            label: 'Hide selected teams',
+            key: 'hideSelectedTeams',
+            value: viewPreferences.hideSelectedTeams,
+            disabled: false,
+        },
+        {
+            label: 'Lightweight view',
+            key: 'lightWeight',
+            value: viewPreferences.lightWeight,
+            disabled: false,
+        },
+        {
+            label: 'Auto-suggested teams',
+            key: 'autoTeams',
+            value: viewPreferences.autoTeams,
+            disabled: false,
+        },
+        {
+            label: 'Only unlocked characters',
+            key: 'onlyUnlocked',
+            value: viewPreferences.onlyUnlocked,
+            disabled: false,
+        },
+        {
+            label: 'Hide completed tracks',
+            tooltip: 'Hide tracks where you have completed battle 12',
+            key: 'hideCompleted',
+            value: viewPreferences.hideCompleted,
+            disabled: false,
+        },
+        {
+            label: 'Hide characters names',
+            key: 'hideNames',
+            value: viewPreferences.hideNames,
+            disabled: viewPreferences.lightWeight,
+        },
+    ];
+
+    const wyoOptions: IViewOption[] = [
+        {
+            label: 'Show badges',
+            key: 'showBadges',
+            value: viewPreferences.showBadges,
+            disabled: false,
+        },
+        {
+            label: 'Show abilities levels',
+            key: 'showAbilitiesLevel',
+            value: viewPreferences.showAbilitiesLevel,
+            disabled: false,
+        },
+        {
+            label: 'Show BS value',
+            key: 'showBsValue',
+            value: viewPreferences.showBsValue,
+            disabled: false,
+        },
+        {
+            label: 'Show power',
+            key: 'showPower',
+            value: viewPreferences.showPower,
+            disabled: false,
+        },
+        {
+            label: 'Show character level/shards',
+            key: 'showCharacterLevel',
+            value: viewPreferences.showCharacterLevel,
+            disabled: false,
+        },
+        {
+            label: 'Show character rarity',
+            key: 'showCharacterRarity',
+            value: viewPreferences.showCharacterRarity,
+            disabled: false,
+        },
+    ];
+
+    const inventoryOptions: IViewOption[] = [
+        {
+            label: 'Show craftable items',
+            key: 'craftableItemsInInventory',
+            value: viewPreferences.craftableItemsInInventory,
+            disabled: false,
+        },
+    ];
 
     return (
-        <FormGroup style={{ display: 'flex', flexDirection: 'row' }}>
-            {checkOptions(
-                'showAlpha',
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={viewPreferences.showAlpha}
-                            disabled={
-                                viewPreferences.showAlpha && !viewPreferences.showBeta && !viewPreferences.showGamma
-                            }
-                            onChange={event => updatePreferences('showAlpha', event.target.checked)}
-                            inputProps={{ 'aria-label': 'controlled' }}
-                        />
-                    }
-                    label="Alpha"
-                />
-            )}
+        <FormGroup style={{ display: 'flex', flexDirection: 'row', height: preset === 'wyo' ? '55px' : 'unset' }}>
+            <Conditional condition={preset === 'lre'}>
+                {lreSectionOptions.map(renderOption)}
+                <Divider style={{ height: 42, margin: '0 10px' }} orientation={'vertical'} />
+                {renderPopover(lreOptions.map(renderOption))}
+            </Conditional>
 
-            {checkOptions(
-                'showBeta',
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={viewPreferences.showBeta}
-                            disabled={
-                                viewPreferences.showBeta && !viewPreferences.showAlpha && !viewPreferences.showGamma
-                            }
-                            onChange={event => updatePreferences('showBeta', event.target.checked)}
-                            inputProps={{ 'aria-label': 'controlled' }}
-                        />
-                    }
-                    label="Beta"
-                />
-            )}
+            <Conditional condition={preset === 'wyo'}>{renderPopover(wyoOptions.map(renderOption))}</Conditional>
 
-            {checkOptions(
-                'showGamma',
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={viewPreferences.showGamma}
-                            disabled={
-                                viewPreferences.showGamma && !viewPreferences.showAlpha && !viewPreferences.showBeta
-                            }
-                            onChange={event => updatePreferences('showGamma', event.target.checked)}
-                            inputProps={{ 'aria-label': 'controlled' }}
-                        />
-                    }
-                    label="Gamma"
-                />
-            )}
-
-            {checkOptions('showAlpha', <Divider style={{ height: 42, margin: '0 10px' }} orientation={'vertical'} />)}
-
-            {checkOptions(
-                'showAlpha',
-                <>
-                    <Button variant="outlined" onClick={handleClick2}>
-                        View <SettingsIcon />
-                    </Button>
-
-                    <Popover
-                        open={open2}
-                        anchorEl={anchorEl2}
-                        onClose={handleClose2}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'left',
-                        }}>
-                        <div style={{ margin: 20, width: 300 }}>
-                            {checkOptions(
-                                'hideSelectedTeams',
-                                <FormControlLabel
-                                    control={
-                                        <Switch
-                                            checked={viewPreferences.hideSelectedTeams}
-                                            onChange={event =>
-                                                updatePreferences('hideSelectedTeams', event.target.checked)
-                                            }
-                                            inputProps={{ 'aria-label': 'controlled' }}
-                                        />
-                                    }
-                                    label="Hide selected teams"
-                                />
-                            )}
-
-                            {checkOptions(
-                                'lightWeight',
-                                <FormControlLabel
-                                    control={
-                                        <Switch
-                                            checked={viewPreferences.lightWeight}
-                                            onChange={event => updatePreferences('lightWeight', event.target.checked)}
-                                            inputProps={{ 'aria-label': 'controlled' }}
-                                        />
-                                    }
-                                    label="Lightweight view"
-                                />
-                            )}
-
-                            {checkOptions(
-                                'autoTeams',
-                                <FormControlLabel
-                                    control={
-                                        <Switch
-                                            checked={viewPreferences.autoTeams}
-                                            onChange={event => updatePreferences('autoTeams', event.target.checked)}
-                                            inputProps={{ 'aria-label': 'controlled' }}
-                                        />
-                                    }
-                                    label="Auto-teams"
-                                />
-                            )}
-
-                            {checkOptions(
-                                'onlyUnlocked',
-                                <FormControlLabel
-                                    control={
-                                        <Switch
-                                            checked={viewPreferences.onlyUnlocked}
-                                            onChange={event => updatePreferences('onlyUnlocked', event.target.checked)}
-                                            inputProps={{ 'aria-label': 'controlled' }}
-                                        />
-                                    }
-                                    label="Only unlocked"
-                                />
-                            )}
-
-                            {checkOptions(
-                                'hideCompleted',
-                                <Tooltip title={'Hide tracks where you have completed battle 12'}>
-                                    <FormControlLabel
-                                        control={
-                                            <Switch
-                                                checked={viewPreferences.hideCompleted}
-                                                onChange={event =>
-                                                    updatePreferences('hideCompleted', event.target.checked)
-                                                }
-                                                inputProps={{ 'aria-label': 'controlled' }}
-                                            />
-                                        }
-                                        label="Hide completed"
-                                    />
-                                </Tooltip>
-                            )}
-
-                            {checkOptions(
-                                'hideNames',
-                                <Tooltip title={'Hide characters names'}>
-                                    <FormControlLabel
-                                        control={
-                                            <Switch
-                                                disabled={viewPreferences.lightWeight}
-                                                checked={viewPreferences.hideNames}
-                                                onChange={event => updatePreferences('hideNames', event.target.checked)}
-                                                inputProps={{ 'aria-label': 'controlled' }}
-                                            />
-                                        }
-                                        label="Hide names"
-                                    />
-                                </Tooltip>
-                            )}
-                        </div>
-                    </Popover>
-                </>
-            )}
-
-            {checkOptions(
-                'craftableItemsInInventory',
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={viewPreferences.craftableItemsInInventory}
-                            onChange={event => updatePreferences('craftableItemsInInventory', event.target.checked)}
-                            inputProps={{ 'aria-label': 'controlled' }}
-                        />
-                    }
-                    label="Show craftable items"
-                />
-            )}
+            <Conditional condition={preset === 'inventory'}>{inventoryOptions.map(renderOption)}</Conditional>
         </FormGroup>
     );
 };

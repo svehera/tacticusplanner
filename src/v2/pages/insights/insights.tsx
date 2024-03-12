@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import { sum } from 'lodash';
 
@@ -21,8 +21,11 @@ import { isCharactersView } from 'src/v2/features/characters/functions/is-charac
 
 import { Loader } from 'src/v2/components/loader';
 import { GlobalState } from 'src/models/global-state';
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { StoreContext } from 'src/reducers/store.provider';
 
 export const Insights = () => {
+    const { viewPreferences } = useContext(StoreContext);
     const [viewControls, setViewControls] = useState<IViewControls>({
         filterBy: CharactersFilterBy.None,
         orderBy: CharactersOrderBy.Faction,
@@ -80,16 +83,26 @@ export const Insights = () => {
                 <b>{new Date(data.averageRosterDataCreationTime).toDateString()}</b>
             </p>
 
-            <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter} />
-            <ViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
+            <CharactersViewContext.Provider
+                value={{
+                    showAbilities: viewPreferences.showAbilitiesLevel,
+                    showBadges: viewPreferences.showBadges,
+                    showPower: viewPreferences.showPower,
+                    showBsValue: viewPreferences.showBsValue,
+                    showCharacterLevel: viewPreferences.showCharacterLevel,
+                    showCharacterRarity: viewPreferences.showCharacterRarity,
+                }}>
+                <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter} />
+                <ViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
 
-            <Conditional condition={isFactionsView(viewControls.orderBy)}>
-                <FactionsGrid factions={factions} />
-            </Conditional>
+                <Conditional condition={isFactionsView(viewControls.orderBy)}>
+                    <FactionsGrid factions={factions} />
+                </Conditional>
 
-            <Conditional condition={isCharactersView(viewControls.orderBy)}>
-                <CharactersGrid characters={characters} />
-            </Conditional>
+                <Conditional condition={isCharactersView(viewControls.orderBy)}>
+                    <CharactersGrid characters={characters} />
+                </Conditional>
+            </CharactersViewContext.Provider>
         </Box>
     );
 };

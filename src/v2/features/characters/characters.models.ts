@@ -20,3 +20,12 @@ export interface IViewControls {
     orderBy: CharactersOrderBy;
     filterBy: CharactersFilterBy;
 }
+
+export interface ICharactersContext {
+    showBadges: boolean;
+    showAbilities: boolean;
+    showBsValue: boolean;
+    showPower: boolean;
+    showCharacterLevel: boolean;
+    showCharacterRarity: boolean;
+}

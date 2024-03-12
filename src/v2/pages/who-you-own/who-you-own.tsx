@@ -23,6 +23,7 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { CharacterItemDialog } from 'src/shared-components/character-item-dialog';
 import { ICharacter2 } from 'src/models/interfaces';
 import { useAuth } from 'src/contexts/auth';
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 
 export const WhoYouOwn = () => {
     const { characters: charactersDefault, viewPreferences } = useContext(StoreContext);
@@ -78,26 +79,36 @@ export const WhoYouOwn = () => {
 
     return (
         <Box style={{ margin: 'auto' }}>
-            <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
-                {!!isLoggedIn && <ShareRoster isRosterShared={!!isRosterShared} />}
-            </RosterHeader>
-            <ViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
+            <CharactersViewContext.Provider
+                value={{
+                    showAbilities: viewPreferences.showAbilitiesLevel,
+                    showBadges: viewPreferences.showBadges,
+                    showPower: viewPreferences.showPower,
+                    showBsValue: viewPreferences.showBsValue,
+                    showCharacterLevel: viewPreferences.showCharacterLevel,
+                    showCharacterRarity: viewPreferences.showCharacterRarity,
+                }}>
+                <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
+                    {!!isLoggedIn && <ShareRoster isRosterShared={!!isRosterShared} />}
+                </RosterHeader>
+                <ViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
 
-            <Conditional condition={isFactionsView(viewControls.orderBy)}>
-                <FactionsGrid factions={factions} onCharacterClick={startEditCharacter} />
-            </Conditional>
+                <Conditional condition={isFactionsView(viewControls.orderBy)}>
+                    <FactionsGrid factions={factions} onCharacterClick={startEditCharacter} />
+                </Conditional>
 
-            <Conditional condition={isCharactersView(viewControls.orderBy)}>
-                <CharactersGrid characters={characters} onCharacterClick={startEditCharacter} />
-            </Conditional>
+                <Conditional condition={isCharactersView(viewControls.orderBy)}>
+                    <CharactersGrid characters={characters} onCharacterClick={startEditCharacter} />
+                </Conditional>
 
-            <Conditional condition={!!editedCharacter}>
-                <CharacterItemDialog
-                    character={editedCharacter!}
-                    isOpen={openCharacterItemDialog}
-                    onClose={endEditCharacter}
-                />
-            </Conditional>
+                <Conditional condition={!!editedCharacter}>
+                    <CharacterItemDialog
+                        character={editedCharacter!}
+                        isOpen={openCharacterItemDialog}
+                        onClose={endEditCharacter}
+                    />
+                </Conditional>
+            </CharactersViewContext.Provider>
         </Box>
     );
 };

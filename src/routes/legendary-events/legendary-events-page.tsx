@@ -78,7 +78,7 @@ export const LegendaryEventPage = () => {
                     gap: 10,
                     flexDirection: isMobile ? 'column' : 'row',
                 }}>
-                <ViewSettings />
+                <ViewSettings preset={'lre'} />
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Button disabled={!viewPreferences.autoTeams} variant="outlined" onClick={handleClick2}>
                         Auto-Teams <SettingsIcon />

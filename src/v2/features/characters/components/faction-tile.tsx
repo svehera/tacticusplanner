@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { useContext } from 'react';
 
 import { ICharacter2 } from 'src/models/interfaces';
 
@@ -10,6 +10,8 @@ import { IFaction } from '../characters.models';
 import { CharacterTile } from './character-tile';
 
 import './faction-tile.scss';
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { Conditional } from 'src/v2/components/conditional';
 export const FactionsTile = ({
     faction,
     onCharacterClick,
@@ -20,6 +22,7 @@ export const FactionsTile = ({
     const factionPower = numberToThousandsString(faction.power);
     const factionValue = numberToThousandsString(faction.bsValue);
     const isCompleteFaction = faction.characters.length === 5;
+    const { showBsValue, showPower } = useContext(CharactersViewContext);
     return (
         <div className="faction">
             <h4 className="faction-title" style={{ backgroundColor: faction.color }}>
@@ -27,16 +30,20 @@ export const FactionsTile = ({
                     <FactionImage faction={faction.icon} />
                     <span>{faction.name.toUpperCase()}</span>
                 </div>
-                <div className="faction-value">
-                    <MiscIcon icon={'blackstone'} height={20} width={15} />
-                    {''}
-                    {factionValue}
-                </div>
-                <div className="faction-power">
-                    <MiscIcon icon={'power'} height={20} width={15} />
-                    {''}
-                    {factionPower}
-                </div>
+                <Conditional condition={showBsValue}>
+                    <div className="faction-value">
+                        <MiscIcon icon={'blackstone'} height={20} width={15} />
+                        {''}
+                        {factionValue}
+                    </div>
+                </Conditional>
+                <Conditional condition={showPower}>
+                    <div className="faction-power">
+                        <MiscIcon icon={'power'} height={20} width={15} />
+                        {''}
+                        {factionPower}
+                    </div>
+                </Conditional>
             </h4>
             <div className={`characters-box ${isCompleteFaction ? 'complete-faction' : 'incomplete-faction'}`}>
                 {faction.characters.map(character => {

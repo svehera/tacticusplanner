@@ -225,6 +225,12 @@ export const defaultData: IPersonalData2 = {
         hideNames: false,
         wyoFilter: CharactersFilterBy.None,
         wyoOrder: CharactersOrderBy.Faction,
+        showBadges: true,
+        showAbilitiesLevel: true,
+        showBsValue: true,
+        showPower: true,
+        showCharacterLevel: true,
+        showCharacterRarity: true,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,
