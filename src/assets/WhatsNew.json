@@ -3,7 +3,7 @@
     "releaseNotes": [
         {
             "version": "1.4.2",
-            "date": "March 12",
+            "date": "March 13",
             "type": "Update",
             "new": [
                 {
@@ -20,10 +20,23 @@
             ],
             "minor": [
                 {
-                    "text": "Added units D3 stats for Health, Damage, Armour. Thanks Ganko for contribution"
+                    "route": "learn/characters",
+                    "text": "Updated the Learn Characters page",
+                    "subPoints": [
+                        "Added units D3 stats for Health, Damage, Armour. Thanks Ganko for contribution",
+                        "Added Rank and Rarity columns of owned characters (Corusame)",
+                        "Added Alliance filter",
+                        "Added columns grouping to make table more compact",
+                        "Better experience on the mobile (but still not the best)"
+                    ],
+                    "images": [
+                        {
+                            "path": "characters.png"
+                        }
+                    ]
                 },
                 {
-                    "text": "Changed order options description to be \"BS Value\" (sasquach)"
+                    "text": "Changed options names in Order dropdown on the Who You Own page to be \"BS Value\" (sasquach)"
                 }
             ],
             "bugFixes": [

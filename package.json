@@ -8,8 +8,8 @@
   "dependencies": {
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.4",
-    "ag-grid-community": "^30.0.6",
-    "ag-grid-react": "^30.0.6",
+    "ag-grid-community": "^31.1.1",
+    "ag-grid-react": "^31.1.1",
     "axios": "^1.5.0",
     "lodash": "^4.17.21",
     "material-ui-popup-state": "^5.0.9",

@@ -1,16 +1,19 @@
 ﻿import React, { ChangeEvent, useCallback, useContext, useMemo, useRef, useState } from 'react';
 
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, RowStyle, RowClassParams, IRowNode, ICellRendererParams } from 'ag-grid-community';
+import { ColDef, RowStyle, RowClassParams, IRowNode, ICellRendererParams, ColGroupDef } from 'ag-grid-community';
 
 import { TextField } from '@mui/material';
 
 import MultipleSelectCheckmarks from './multiple-select';
 import { ICharacter2 } from '../../models/interfaces';
-import { DamageType, Trait } from '../../models/enums';
+import { Alliance, DamageType, Trait } from '../../models/enums';
 import { isMobile } from 'react-device-detect';
 import { CharacterTitle } from '../../shared-components/character-title';
 import { StoreContext } from '../../reducers/store.provider';
+import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
+import { RarityImage } from 'src/shared-components/rarity-image';
+import { RankImage } from 'src/shared-components/rank-image';
 
 export const Characters = () => {
     const gridRef = useRef<AgGridReact<ICharacter2>>(null);
@@ -18,6 +21,7 @@ export const Characters = () => {
     const [nameFilter, setNameFilter] = useState<string>('');
     const [damageTypesFilter, setDamageTypesFilter] = useState<DamageType[]>([]);
     const [traitsFilter, setTraitsFilter] = useState<Trait[]>([]);
+    const [allianceFilter, setAllianceFilter] = useState<Alliance[]>([]);
 
     const defaultColDef: ColDef<ICharacter2> = {
         sortable: true,
@@ -26,123 +30,236 @@ export const Characters = () => {
         wrapText: true,
     };
 
-    const [columnDefs] = useState<Array<ColDef>>([
+    const [columnDefs] = useState<Array<ColDef | ColGroupDef>>([
         {
-            headerName: '#',
-            colId: 'rowNumber',
-            valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
-            maxWidth: 50,
-            width: 50,
-            minWidth: 50,
-            pinned: true,
+            headerName: 'Character',
+            pinned: !isMobile,
+            openByDefault: !isMobile,
+            children: [
+                {
+                    headerName: '#',
+                    colId: 'rowNumber',
+                    valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
+                    maxWidth: 50,
+                    width: 50,
+                    pinned: !isMobile,
+                },
+                {
+                    headerName: 'Name',
+                    width: isMobile ? 75 : 200,
+                    pinned: !isMobile,
+                    cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
+                        const character = props.data;
+                        if (character) {
+                            return (
+                                <CharacterTitle character={character} hideName={isMobile} short={true} imageSize={30} />
+                            );
+                        }
+                    },
+                },
+                {
+                    headerName: 'Rarity',
+                    width: 80,
+                    columnGroupShow: 'open',
+                    pinned: !isMobile,
+                    valueGetter: (props: ValueGetterParams<ICharacter2>) => {
+                        return props.data?.rarity;
+                    },
+                    cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
+                        const rarity = props.value ?? 0;
+                        return <RarityImage rarity={rarity} />;
+                    },
+                },
+                {
+                    headerName: 'Rank',
+                    width: 80,
+                    columnGroupShow: 'open',
+                    pinned: !isMobile,
+                    valueGetter: (props: ValueGetterParams<ICharacter2>) => {
+                        return props.data?.rank;
+                    },
+                    cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
+                        const rank = props.value ?? 0;
+                        return <RankImage rank={rank} />;
+                    },
+                },
+                {
+                    field: 'faction',
+                    headerName: 'Faction',
+                    width: 170,
+                    columnGroupShow: 'open',
+                    pinned: !isMobile,
+                },
+            ],
         },
-        {
-            headerName: 'Name',
-            pinned: true,
-            minWidth: 200,
-            cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                const character = props.data;
-                if (character) {
-                    return <CharacterTitle character={character} short={true} imageSize={30} />;
-                }
-            },
-        },
-        {
-            field: 'alliance',
-            headerName: 'Alliance',
-            minWidth: 100,
-        },
-        {
-            field: 'faction',
-            headerName: 'Faction',
-            minWidth: 170,
-        },
-        {
-            field: 'damageTypes.melee',
-            headerName: 'Melee Damage Type',
-            minWidth: 170,
-        },
-        {
-            field: 'damageTypes.range',
-            headerName: 'Range Damage Type',
-            minWidth: 170,
-        },
-        {
-            field: 'damageTypes.activeAbility',
-            headerName: 'Active Ability Damage Type',
-            minWidth: 170,
-        },
-        {
-            field: 'damageTypes.passiveAbility',
-            headerName: 'Passive Ability Damage Type',
-            minWidth: 170,
-        },
-        {
-            field: 'traits',
-            headerName: 'Traits',
-            minWidth: 200,
-        },
-        {
-            field: 'meleeHits',
-            headerName: 'Melee Hits',
-            minWidth: 100,
-        },
-        {
-            field: 'rangeHits',
-            headerName: 'Range Hits',
-            minWidth: 100,
-        },
-        {
-            field: 'rangeDistance',
-            headerName: 'Range',
-            minWidth: 100,
-        },
-        {
-            field: 'movement',
-            headerName: 'Movement',
-            minWidth: 100,
-        },
+
         {
             field: 'health',
             headerName: 'Health D3',
-            minWidth: 100,
+            width: 100,
         },
         {
             field: 'damage',
             headerName: 'Damage D3',
-            minWidth: 100,
+            width: 100,
         },
         {
             field: 'armour',
             headerName: 'Armour D3',
-            minWidth: 100,
+            width: 100,
         },
         {
-            field: 'equipment1',
-            headerName: 'Equipment Slot 1',
-            minWidth: 100,
+            field: 'damageTypes.all',
+            headerName: 'Damage Types',
+            width: 120,
+            cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
+                const damageTypes: DamageType[] = props.value ?? [];
+                return (
+                    <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                        {damageTypes.map(x => (
+                            <li key={x}>{x}</li>
+                        ))}
+                    </ul>
+                );
+            },
         },
         {
-            field: 'equipment2',
-            headerName: 'Equipment Slot 2',
-            minWidth: 100,
+            field: 'traits',
+            headerName: 'Traits',
+            width: 180,
+            cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
+                const traits: Trait[] = props.value ?? [];
+                return (
+                    <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                        {traits.map(x => (
+                            <li key={x}>{x}</li>
+                        ))}
+                    </ul>
+                );
+            },
         },
         {
-            field: 'equipment3',
-            headerName: 'Equipment Slot 3',
-            minWidth: 100,
+            headerName: 'Stats',
+            headerTooltip: 'Movement-Melee-Range-Distance',
+            children: [
+                {
+                    headerName: 'All',
+                    width: 150,
+                    columnGroupShow: 'closed',
+                    cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
+                        const data = props.data;
+                        return (
+                            data && (
+                                <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                                    <li>Movement - {data.movement}</li>
+                                    <li>Melee - {data.meleeHits}</li>
+                                    {data.rangeHits && <li>Range - {data.rangeHits}</li>}
+                                    {data.rangeDistance && <li>Distance - {data.rangeDistance}</li>}
+                                </ul>
+                            )
+                        );
+                    },
+                },
+                {
+                    field: 'movement',
+                    headerName: 'Movement',
+                    width: 100,
+                    columnGroupShow: 'open',
+                },
+                {
+                    field: 'meleeHits',
+                    headerName: 'Melee',
+                    width: 100,
+                    columnGroupShow: 'open',
+                },
+                {
+                    field: 'rangeHits',
+                    headerName: 'Range',
+                    width: 100,
+                    columnGroupShow: 'open',
+                },
+                {
+                    field: 'rangeDistance',
+                    headerName: 'Distance',
+                    width: 100,
+                    columnGroupShow: 'open',
+                },
+            ],
         },
         {
-            field: 'requiredInCampaign',
-            headerName: 'Campaign',
-            cellRenderer: 'agCheckboxCellRenderer',
-            minWidth: 100,
+            headerName: 'Equipment',
+            children: [
+                {
+                    headerName: 'All',
+                    width: 180,
+                    columnGroupShow: 'closed',
+                    cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
+                        const data = props.data;
+                        return (
+                            data && (
+                                <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                                    <li>Slot 1 - {data.equipment1}</li>
+                                    <li>Slot 2 - {data.equipment2}</li>
+                                    <li>Slot 3 - {data.equipment3}</li>
+                                </ul>
+                            )
+                        );
+                    },
+                },
+                {
+                    field: 'equipment1',
+                    headerName: 'Slot 1',
+                    width: 100,
+                    columnGroupShow: 'open',
+                },
+                {
+                    field: 'equipment2',
+                    headerName: 'Slot 2',
+                    width: 100,
+                    columnGroupShow: 'open',
+                },
+                {
+                    field: 'equipment3',
+                    headerName: 'Slot 3',
+                    width: 100,
+                    columnGroupShow: 'open',
+                },
+            ],
         },
         {
-            field: 'forcedSummons',
-            headerName: 'Forced Summons',
-            cellRenderer: 'agCheckboxCellRenderer',
-            minWidth: 100,
+            headerName: 'Misc',
+            children: [
+                {
+                    headerName: 'All',
+                    width: 180,
+                    columnGroupShow: 'closed',
+                    cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
+                        const data = props.data;
+                        return (
+                            data && (
+                                <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                                    {data.requiredInCampaign && <li>Required for Campaigns</li>}
+                                    {data.forcedSummons && <li>Forced summons</li>}
+                                </ul>
+                            )
+                        );
+                    },
+                },
+                {
+                    field: 'requiredInCampaign',
+                    headerName: 'Campaign',
+                    cellRenderer: 'agCheckboxCellRenderer',
+                    width: 100,
+                    columnGroupShow: 'open',
+                },
+                {
+                    field: 'forcedSummons',
+                    headerName: 'Forced Summons',
+                    cellRenderer: 'agCheckboxCellRenderer',
+                    width: 100,
+                    columnGroupShow: 'open',
+                },
+            ],
         },
     ]);
 
@@ -161,20 +278,6 @@ export const Characters = () => {
         setNameFilter(change.target.value);
     }, []);
 
-    React.useEffect(() => {
-        function handleResize() {
-            if (window.innerWidth >= 768) {
-                gridRef.current?.api.sizeColumnsToFit();
-            }
-        }
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    });
-
     const damageTypeFilterChanged = useCallback((newValue: string[]) => {
         setDamageTypesFilter(newValue as DamageType[]);
         requestAnimationFrame(() => {
@@ -189,11 +292,19 @@ export const Characters = () => {
         });
     }, []);
 
+    const allianceFilterChanged = useCallback((newValue: string[]) => {
+        setAllianceFilter(newValue as Alliance[]);
+        requestAnimationFrame(() => {
+            gridRef.current?.api.onFilterChanged();
+        });
+    }, []);
+
     const isExternalFilterPresent = useCallback(() => {
         const hasDamageTypeFilter = damageTypesFilter.length > 0;
         const hasTraitsFilter = traitsFilter.length > 0;
-        return hasDamageTypeFilter || hasTraitsFilter;
-    }, [damageTypesFilter, traitsFilter]);
+        const hasAllianceFilter = allianceFilter.length > 0;
+        return hasDamageTypeFilter || hasTraitsFilter || hasAllianceFilter;
+    }, [damageTypesFilter, traitsFilter, allianceFilter]);
 
     const doesExternalFilterPass = useCallback(
         (node: IRowNode<ICharacter2>) => {
@@ -220,12 +331,19 @@ export const Characters = () => {
                 });
             };
 
+            const doesAllianceFilterPass = () => {
+                if (!allianceFilter.length) {
+                    return true;
+                }
+                return allianceFilter.some(alliance => node.data?.alliance.includes(alliance));
+            };
+
             if (node.data) {
-                return doesDamageTypeFilterPass() && doesTraitsFilterPass();
+                return doesDamageTypeFilterPass() && doesTraitsFilterPass() && doesAllianceFilterPass();
             }
             return true;
         },
-        [damageTypesFilter, traitsFilter]
+        [damageTypesFilter, traitsFilter, allianceFilter]
     );
 
     const refreshRowNumberColumn = useCallback(() => {
@@ -256,6 +374,12 @@ export const Characters = () => {
                     values={Object.values(Trait)}
                     selectionChanges={traitsFilterChanged}
                 />
+                <MultipleSelectCheckmarks
+                    placeholder="Alliance"
+                    selectedValues={allianceFilter}
+                    values={Object.values(Alliance)}
+                    selectionChanges={allianceFilterChanged}
+                />
             </div>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
                 <AgGridReact
@@ -265,7 +389,6 @@ export const Characters = () => {
                     columnDefs={columnDefs}
                     rowData={rows}
                     getRowStyle={getRowStyle}
-                    onGridReady={() => (!isMobile ? gridRef.current?.api.sizeColumnsToFit() : undefined)}
                     onSortChanged={refreshRowNumberColumn}
                     onFilterChanged={refreshRowNumberColumn}
                     isExternalFilterPresent={isExternalFilterPresent}
