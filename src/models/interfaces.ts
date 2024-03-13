@@ -522,6 +522,7 @@ export interface ICampaignBattle {
     nodeNumber: number;
     reward: string; // material name or hero name in case farming shards
     expectedGold: number;
+    slots?: number;
 }
 
 export interface ICampaignBattleComposed {
@@ -534,6 +535,7 @@ export interface ICampaignBattleComposed {
     rarity: string;
     reward: string; // material name or hero name in case farming shards
     expectedGold: number;
+    slots?: number;
 }
 
 type MaterialName = string;

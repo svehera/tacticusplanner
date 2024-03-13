@@ -128,6 +128,7 @@ export class StaticDataService {
                 rarity: recipe?.rarity,
                 reward: battle.reward,
                 expectedGold: battle.expectedGold,
+                slots: battle.slots,
             };
         }
 

@@ -95,7 +95,8 @@
         "campaignType": "Early",
         "nodeNumber": 28,
         "reward": "Pile of Salvage",
-        "expectedGold": 12.5
+        "expectedGold": 12.5,
+        "slots": 3
     },
     "I29": {
         "campaign": "Indomitus",
@@ -151,7 +152,8 @@
         "campaignType": "Normal",
         "nodeNumber": 36,
         "reward": "Locator Beacon",
-        "expectedGold": 15
+        "expectedGold": 15,
+        "slots": 3
     },
     "I37": {
         "campaign": "Indomitus",
@@ -172,7 +174,8 @@
         "campaignType": "Normal",
         "nodeNumber": 39,
         "reward": "Standard-Issue Tourniquet",
-        "expectedGold": 15
+        "expectedGold": 15,
+        "slots": 3
     },
     "I40": {
         "campaign": "Indomitus",
@@ -193,7 +196,8 @@
         "campaignType": "Normal",
         "nodeNumber": 42,
         "reward": "Plasma Cell",
-        "expectedGold": 15
+        "expectedGold": 15,
+        "slots": 4
     },
     "I43": {
         "campaign": "Indomitus",
@@ -235,7 +239,8 @@
         "campaignType": "Normal",
         "nodeNumber": 48,
         "reward": "Adamantium Ore",
-        "expectedGold": 17.5
+        "expectedGold": 17.5,
+        "slots": 3
     },
     "I49": {
         "campaign": "Indomitus",
@@ -277,14 +282,16 @@
         "campaignType": "Normal",
         "nodeNumber": 54,
         "reward": "Barrel of Promethium",
-        "expectedGold": 17.5
+        "expectedGold": 17.5,
+        "slots": 3
     },
     "I55": {
         "campaign": "Indomitus",
         "campaignType": "Normal",
         "nodeNumber": 55,
         "reward": "Single Power Pack",
-        "expectedGold": 17.5
+        "expectedGold": 17.5,
+        "slots": 3
     },
     "I56": {
         "campaign": "Indomitus",
@@ -305,7 +312,8 @@
         "campaignType": "Normal",
         "nodeNumber": 58,
         "reward": "Reliquary of Protection",
-        "expectedGold": 17.5
+        "expectedGold": 17.5,
+        "slots": 3
     },
     "I59": {
         "campaign": "Indomitus",
@@ -333,7 +341,8 @@
         "campaignType": "Normal",
         "nodeNumber": 62,
         "reward": "Tank of Promethium",
-        "expectedGold": 20
+        "expectedGold": 20,
+        "slots": 3
     },
     "I63": {
         "campaign": "Indomitus",
@@ -361,7 +370,8 @@
         "campaignType": "Normal",
         "nodeNumber": 66,
         "reward": "Mutation: Scaly Skin",
-        "expectedGold": 20
+        "expectedGold": 20,
+        "slots": 3
     },
     "I67": {
         "campaign": "Indomitus",
@@ -382,7 +392,8 @@
         "campaignType": "Normal",
         "nodeNumber": 69,
         "reward": "The Silver Eagle with Swords",
-        "expectedGold": 20
+        "expectedGold": 20,
+        "slots": 3
     },
     "I70": {
         "campaign": "Indomitus",
@@ -403,7 +414,8 @@
         "campaignType": "Normal",
         "nodeNumber": 72,
         "reward": "Targeting Link",
-        "expectedGold": 20
+        "expectedGold": 20,
+        "slots": 3
     },
     "I73": {
         "campaign": "Indomitus",
@@ -431,42 +443,48 @@
         "campaignType": "Normal",
         "nodeNumber": 1,
         "reward": "Mutation: Warped Muscles",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoC10": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
         "nodeNumber": 10,
         "reward": "Minor Bionic Enhancement",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoC11": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
         "nodeNumber": 11,
         "reward": "Crate of Salvage",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoC12": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
         "nodeNumber": 12,
         "reward": "Standard-Issue Tourniquet",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoC13": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
         "nodeNumber": 13,
         "reward": "Weapon Parts",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoC14": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
         "nodeNumber": 14,
         "reward": "Adamantium Ore",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "FoC15": {
         "campaign": "Fall of Cadia",
@@ -480,7 +498,8 @@
         "campaignType": "Normal",
         "nodeNumber": 16,
         "reward": "Pile of Salvage",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "FoC17": {
         "campaign": "Fall of Cadia",
@@ -501,28 +520,32 @@
         "campaignType": "Normal",
         "nodeNumber": 19,
         "reward": "Auspex",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "FoC2": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
         "nodeNumber": 2,
         "reward": "Nasty Spikes",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoC20": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
         "nodeNumber": 20,
         "reward": "Round of Ammo",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "FoC21": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
         "nodeNumber": 21,
         "reward": "Targeting Link",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "FoC22": {
         "campaign": "Fall of Cadia",
@@ -543,7 +566,8 @@
         "campaignType": "Normal",
         "nodeNumber": 24,
         "reward": "Canister of Chemicals",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "FoC25": {
         "campaign": "Fall of Cadia",
@@ -557,21 +581,24 @@
         "campaignType": "Normal",
         "nodeNumber": 26,
         "reward": "Metal Joints",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "FoC27": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
         "nodeNumber": 27,
         "reward": "Lesser Reliquary of Protection",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "FoC28": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
         "nodeNumber": 28,
         "reward": "Box of Salvage",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "FoC29": {
         "campaign": "Fall of Cadia",
@@ -585,7 +612,8 @@
         "campaignType": "Normal",
         "nodeNumber": 3,
         "reward": "Wires",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoC30": {
         "campaign": "Fall of Cadia",
@@ -599,7 +627,8 @@
         "campaignType": "Normal",
         "nodeNumber": 31,
         "reward": "Fine Micro-Generator",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 4
     },
     "FoC32": {
         "campaign": "Fall of Cadia",
@@ -641,14 +670,16 @@
         "campaignType": "Normal",
         "nodeNumber": 37,
         "reward": "Cloak",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 4
     },
     "FoC38": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
         "nodeNumber": 38,
         "reward": "Artificial Vertebrae",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 3
     },
     "FoC39": {
         "campaign": "Fall of Cadia",
@@ -662,7 +693,8 @@
         "campaignType": "Normal",
         "nodeNumber": 4,
         "reward": "Satchel",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoC40": {
         "campaign": "Fall of Cadia",
@@ -683,14 +715,16 @@
         "campaignType": "Normal",
         "nodeNumber": 42,
         "reward": "Writings",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 3
     },
     "FoC43": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
         "nodeNumber": 43,
         "reward": "Mission Objective",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 4
     },
     "FoC44": {
         "campaign": "Fall of Cadia",
@@ -725,7 +759,8 @@
         "campaignType": "Normal",
         "nodeNumber": 48,
         "reward": "Thick Skin",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "FoC49": {
         "campaign": "Fall of Cadia",
@@ -739,7 +774,8 @@
         "campaignType": "Normal",
         "nodeNumber": 5,
         "reward": "Ropes and Chains",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoC50": {
         "campaign": "Fall of Cadia",
@@ -760,7 +796,8 @@
         "campaignType": "Normal",
         "nodeNumber": 52,
         "reward": "Mission Assignment",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "FoC53": {
         "campaign": "Fall of Cadia",
@@ -781,7 +818,8 @@
         "campaignType": "Normal",
         "nodeNumber": 55,
         "reward": "Ballistics Data",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 3
     },
     "FoC56": {
         "campaign": "Fall of Cadia",
@@ -816,7 +854,8 @@
         "campaignType": "Normal",
         "nodeNumber": 6,
         "reward": "Chip Damage",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoC60": {
         "campaign": "Fall of Cadia",
@@ -830,7 +869,8 @@
         "campaignType": "Normal",
         "nodeNumber": 61,
         "reward": "Secret Agenda",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 3
     },
     "FoC62": {
         "campaign": "Fall of Cadia",
@@ -886,7 +926,8 @@
         "campaignType": "Normal",
         "nodeNumber": 69,
         "reward": "Bionic Eye",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 3
     },
     "FoC7": {
         "campaign": "Fall of Cadia",
@@ -956,70 +997,80 @@
         "campaignType": "Normal",
         "nodeNumber": 1,
         "reward": "Ropes and Chains",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "O10": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 10,
         "reward": "Cloak",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "O11": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 11,
         "reward": "Armor Trim",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "O12": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 12,
         "reward": "Reinforced Scale-Plates",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "O13": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 13,
         "reward": "Mission Assignment",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "O14": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 14,
         "reward": "Vox-Caster",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "O15": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 15,
         "reward": "Brother Burchard",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "O16": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 16,
         "reward": "Scrolls",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "O17": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 17,
         "reward": "Rebreather",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "O18": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 18,
         "reward": "Satchel",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "O19": {
         "campaign": "Octarius",
@@ -1033,7 +1084,8 @@
         "campaignType": "Normal",
         "nodeNumber": 2,
         "reward": "Wires",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "O20": {
         "campaign": "Octarius",
@@ -1054,7 +1106,8 @@
         "campaignType": "Normal",
         "nodeNumber": 22,
         "reward": "Bladesman's Honour",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "O23": {
         "campaign": "Octarius",
@@ -1068,14 +1121,16 @@
         "campaignType": "Normal",
         "nodeNumber": 24,
         "reward": "Writings",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "O25": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 25,
         "reward": "Mission Objective",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "O26": {
         "campaign": "Octarius",
@@ -1110,7 +1165,8 @@
         "campaignType": "Normal",
         "nodeNumber": 3,
         "reward": "Chip Damage",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "O30": {
         "campaign": "Octarius",
@@ -1131,7 +1187,8 @@
         "campaignType": "Normal",
         "nodeNumber": 32,
         "reward": "Ancient Runes",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 34
     },
     "O33": {
         "campaign": "Octarius",
@@ -1166,35 +1223,40 @@
         "campaignType": "Normal",
         "nodeNumber": 37,
         "reward": "Artificer Tasset Plate",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 3
     },
     "O38": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 38,
         "reward": "Sigil of Decay",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 4
     },
     "O39": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 39,
         "reward": "Krak Grenade",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 3
     },
     "O4": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 4,
         "reward": "Nasty Spikes",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "O40": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 40,
         "reward": "Special Issue Ammo",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 4
     },
     "O41": {
         "campaign": "Octarius",
@@ -1236,7 +1298,8 @@
         "campaignType": "Normal",
         "nodeNumber": 46,
         "reward": "Bad Moon Teef",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 3
     },
     "O47": {
         "campaign": "Octarius",
@@ -1264,14 +1327,16 @@
         "campaignType": "Normal",
         "nodeNumber": 5,
         "reward": "Thick Skin",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "O50": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 50,
         "reward": "Blessed Corset Armor",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "O51": {
         "campaign": "Octarius",
@@ -1320,7 +1385,8 @@
         "campaignType": "Normal",
         "nodeNumber": 57,
         "reward": "Pile of Salvage",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "O58": {
         "campaign": "Octarius",
@@ -1341,7 +1407,8 @@
         "campaignType": "Normal",
         "nodeNumber": 6,
         "reward": "Metal Joints",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "O60": {
         "campaign": "Octarius",
@@ -1362,7 +1429,8 @@
         "campaignType": "Normal",
         "nodeNumber": 62,
         "reward": "Minor Bionic Enhancement",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 3
     },
     "O63": {
         "campaign": "Octarius",
@@ -1390,14 +1458,16 @@
         "campaignType": "Normal",
         "nodeNumber": 66,
         "reward": "Purity Seal",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 4
     },
     "O67": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 67,
         "reward": "Lesser Reliquary of Protection",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 4
     },
     "O68": {
         "campaign": "Octarius",
@@ -1481,63 +1551,72 @@
         "campaignType": "Normal",
         "nodeNumber": 1,
         "reward": "Adamantium Filaments",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SH10": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 10,
         "reward": "Can of Promethium",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SH11": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 11,
         "reward": "Mutation: Tough Skin",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SH12": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 12,
         "reward": "Adamantium Ore",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SH13": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 13,
         "reward": "Mission Assignment",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SH14": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 14,
         "reward": "Mission Objective",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SH15": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 15,
         "reward": "Toth",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "SH16": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 16,
         "reward": "Locator Beacon",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "SH17": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 17,
         "reward": "Box of Salvage",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "SH18": {
         "campaign": "Saim-Hann",
@@ -1558,7 +1637,8 @@
         "campaignType": "Normal",
         "nodeNumber": 2,
         "reward": "Scrolls",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SH20": {
         "campaign": "Saim-Hann",
@@ -1579,21 +1659,24 @@
         "campaignType": "Normal",
         "nodeNumber": 22,
         "reward": "Cloak",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "SH23": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 23,
         "reward": "Fine Micro-Generator",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "SH24": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 24,
         "reward": "Writings",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "SH25": {
         "campaign": "Saim-Hann",
@@ -1635,7 +1718,8 @@
         "campaignType": "Normal",
         "nodeNumber": 3,
         "reward": "Targeting Link",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SH30": {
         "campaign": "Saim-Hann",
@@ -1649,35 +1733,40 @@
         "campaignType": "Normal",
         "nodeNumber": 31,
         "reward": "Ritual Implements",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 3
     },
     "SH32": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 32,
         "reward": "Waystone",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 3
     },
     "SH33": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 33,
         "reward": "Crate of Salvage",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 3
     },
     "SH34": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 34,
         "reward": "Reliquary of Protection",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 3
     },
     "SH35": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 35,
         "reward": "Blessed Tasset Plate",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 4
     },
     "SH36": {
         "campaign": "Saim-Hann",
@@ -1705,14 +1794,16 @@
         "campaignType": "Normal",
         "nodeNumber": 39,
         "reward": "Ancient Runes",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 4
     },
     "SH4": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 4,
         "reward": "Vox-Caster",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SH40": {
         "campaign": "Saim-Hann",
@@ -1761,35 +1852,40 @@
         "campaignType": "Normal",
         "nodeNumber": 46,
         "reward": "Chapter Pendant",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "SH47": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 47,
         "reward": "Field Ration",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 3
     },
     "SH48": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 48,
         "reward": "Bionic Eye",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 3
     },
     "SH49": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 49,
         "reward": "Healing Ointment",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "SH5": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 5,
         "reward": "Armor Trim",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SH50": {
         "campaign": "Saim-Hann",
@@ -1803,21 +1899,24 @@
         "campaignType": "Normal",
         "nodeNumber": 51,
         "reward": "Otherworldly Energy",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "SH52": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 52,
         "reward": "Bladesman's Honour",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 3
     },
     "SH53": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 53,
         "reward": "Slicing Claws",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "SH54": {
         "campaign": "Saim-Hann",
@@ -1845,14 +1944,16 @@
         "campaignType": "Normal",
         "nodeNumber": 57,
         "reward": "Tainted Text",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "SH58": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 58,
         "reward": "Wraithbone Plate",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "SH59": {
         "campaign": "Saim-Hann",
@@ -1866,7 +1967,8 @@
         "campaignType": "Normal",
         "nodeNumber": 6,
         "reward": "Sophisticated Material",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SH60": {
         "campaign": "Saim-Hann",
@@ -1908,7 +2010,8 @@
         "campaignType": "Normal",
         "nodeNumber": 65,
         "reward": "Air Purificator",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 4
     },
     "SH66": {
         "campaign": "Saim-Hann",
@@ -1943,21 +2046,24 @@
         "campaignType": "Normal",
         "nodeNumber": 7,
         "reward": "Mutation: Warped Muscles",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SH70": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 70,
         "reward": "Blessed Tasset Plate",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 4
     },
     "SH71": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 71,
         "reward": "Mutation: Warped Heart",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 4
     },
     "SH72": {
         "campaign": "Saim-Hann",
@@ -2006,42 +2112,48 @@
         "campaignType": "Mirror",
         "nodeNumber": 1,
         "reward": "Rebreather",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "IM10": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 10,
         "reward": "Blessed Tasset Plate",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "IM11": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 11,
         "reward": "Artificial Vertebrae",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "IM12": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 12,
         "reward": "Crate of Salvage",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "IM13": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 13,
         "reward": "Classified Data-Slate",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "IM14": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 14,
         "reward": "Kill Count",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "IM15": {
         "campaign": "Indomitus Mirror",
@@ -2062,14 +2174,16 @@
         "campaignType": "Mirror",
         "nodeNumber": 17,
         "reward": "Mutation: Warped Heart",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "IM18": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 18,
         "reward": "Artificer Tasset Plate",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "IM19": {
         "campaign": "Indomitus Mirror",
@@ -2083,7 +2197,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 2,
         "reward": "Weapon Parts",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "IM20": {
         "campaign": "Indomitus Mirror",
@@ -2125,7 +2240,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 25,
         "reward": "Greater Reliquary of Vengeance",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "IM26": {
         "campaign": "Indomitus Mirror",
@@ -2160,7 +2276,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 3,
         "reward": "Mutation: Warped Muscles",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "IM30": {
         "campaign": "Indomitus Mirror",
@@ -2181,7 +2298,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 32,
         "reward": "Psytronome",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 4
     },
     "IM33": {
         "campaign": "Indomitus Mirror",
@@ -2202,7 +2320,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 35,
         "reward": "Metal Decorative Skull",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 3
     },
     "IM36": {
         "campaign": "Indomitus Mirror",
@@ -2216,14 +2335,16 @@
         "campaignType": "Mirror",
         "nodeNumber": 37,
         "reward": "Slicing Claws",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 4
     },
     "IM38": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 38,
         "reward": "Stimm Injector",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 4
     },
     "IM39": {
         "campaign": "Indomitus Mirror",
@@ -2237,7 +2358,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 4,
         "reward": "Wires",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "IM40": {
         "campaign": "Indomitus Mirror",
@@ -2258,7 +2380,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 42,
         "reward": "Mutation: Tough Skin",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 3
     },
     "IM43": {
         "campaign": "Indomitus Mirror",
@@ -2272,7 +2395,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 44,
         "reward": "Tank of Promethium",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 3
     },
     "IM45": {
         "campaign": "Indomitus Mirror",
@@ -2314,14 +2438,16 @@
         "campaignType": "Mirror",
         "nodeNumber": 5,
         "reward": "Helmet Trophy",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "IM50": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 50,
         "reward": "Otherworldly Energy",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "IM51": {
         "campaign": "Indomitus Mirror",
@@ -2335,7 +2461,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 52,
         "reward": "Barrel of Promethium",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "IM53": {
         "campaign": "Indomitus Mirror",
@@ -2356,7 +2483,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 55,
         "reward": "Lesser Reliquary of Vengeance",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "IM56": {
         "campaign": "Indomitus Mirror",
@@ -2391,7 +2519,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 6,
         "reward": "Combat Stimms",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "IM60": {
         "campaign": "Indomitus Mirror",
@@ -2412,14 +2541,16 @@
         "campaignType": "Mirror",
         "nodeNumber": 62,
         "reward": "Canister of Chemicals",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 4
     },
     "IM63": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 63,
         "reward": "Divinator Class Auspex",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 4
     },
     "IM64": {
         "campaign": "Indomitus Mirror",
@@ -2468,14 +2599,16 @@
         "campaignType": "Mirror",
         "nodeNumber": 7,
         "reward": "Reinforced Cables",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "IM70": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 70,
         "reward": "Codex Astartes Page",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 4
     },
     "IM71": {
         "campaign": "Indomitus Mirror",
@@ -2489,7 +2622,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 72,
         "reward": "Holy Chaplet",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 4
     },
     "IM73": {
         "campaign": "Indomitus Mirror",
@@ -2517,56 +2651,64 @@
         "campaignType": "Mirror",
         "nodeNumber": 8,
         "reward": "Reinforced Scale-Plates",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "IM9": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 9,
         "reward": "Air Purificator",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoCM1": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 1,
         "reward": "Round of Ammo",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoCM10": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 10,
         "reward": "Ceramite Lump",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoCM11": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 11,
         "reward": "Attack Vector Data-Slate",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoCM12": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 12,
         "reward": "The Gold Phoenix",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "FoCM13": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 13,
         "reward": "Scrolls",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "FoCM14": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 14,
         "reward": "Enriched Rations",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "FoCM15": {
         "campaign": "Fall of Cadia Mirror",
@@ -2580,14 +2722,16 @@
         "campaignType": "Mirror",
         "nodeNumber": 16,
         "reward": "Purity Seal",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "FoCM17": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 17,
         "reward": "Frag Grenade",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "FoCM18": {
         "campaign": "Fall of Cadia Mirror",
@@ -2601,14 +2745,16 @@
         "campaignType": "Mirror",
         "nodeNumber": 19,
         "reward": "Basic Auxiliary Core",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "FoCM2": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 2,
         "reward": "Field Ration",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoCM20": {
         "campaign": "Fall of Cadia Mirror",
@@ -2671,7 +2817,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 28,
         "reward": "Relic Hilt",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "FoCM29": {
         "campaign": "Fall of Cadia Mirror",
@@ -2720,7 +2867,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 34,
         "reward": "Mission Objective",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 3
     },
     "FoCM35": {
         "campaign": "Fall of Cadia Mirror",
@@ -2741,7 +2889,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 37,
         "reward": "Cogwheel Crest",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 3
     },
     "FoCM38": {
         "campaign": "Fall of Cadia Mirror",
@@ -2762,7 +2911,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 4,
         "reward": "Slicing Claws",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoCM40": {
         "campaign": "Fall of Cadia Mirror",
@@ -2811,7 +2961,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 46,
         "reward": "Mutation: Warped Heart",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 3
     },
     "FoCM47": {
         "campaign": "Fall of Cadia Mirror",
@@ -2839,28 +2990,32 @@
         "campaignType": "Mirror",
         "nodeNumber": 5,
         "reward": "Mutation: Scaly Skin",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoCM50": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 50,
         "reward": "Drone Controller",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 3
     },
     "FoCM51": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 51,
         "reward": "Viridian Energy Tesseract",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 3
     },
     "FoCM52": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 52,
         "reward": "Ancient Runes",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "FoCM53": {
         "campaign": "Fall of Cadia Mirror",
@@ -2916,7 +3071,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 6,
         "reward": "Lesser Reliquary of Protection",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoCM60": {
         "campaign": "Fall of Cadia Mirror",
@@ -2937,14 +3093,16 @@
         "campaignType": "Mirror",
         "nodeNumber": 62,
         "reward": "Engram Neurochip",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 4
     },
     "FoCM63": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 63,
         "reward": "Artificial Vertebrae",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 3
     },
     "FoCM64": {
         "campaign": "Fall of Cadia Mirror",
@@ -2965,7 +3123,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 66,
         "reward": "Honourifica Imperialis",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 4
     },
     "FoCM67": {
         "campaign": "Fall of Cadia Mirror",
@@ -2986,14 +3145,16 @@
         "campaignType": "Mirror",
         "nodeNumber": 69,
         "reward": "Nasty Spikes",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 4
     },
     "FoCM7": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 7,
         "reward": "Fine Purity Seal",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoCM70": {
         "campaign": "Fall of Cadia Mirror",
@@ -3021,7 +3182,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 73,
         "reward": "Weathering",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 3
     },
     "FoCM74": {
         "campaign": "Fall of Cadia Mirror",
@@ -3042,112 +3204,128 @@
         "campaignType": "Mirror",
         "nodeNumber": 8,
         "reward": "Box of Salvage",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "FoCM9": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 9,
         "reward": "Pile of Salvage",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "OM1": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 1,
         "reward": "Purity Seal",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "OM10": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 10,
         "reward": "Weapon Anointment Oils",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "OM11": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 11,
         "reward": "Minor Bionic Enhancement",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "OM12": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 12,
         "reward": "Mission Assignment",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "OM13": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 13,
         "reward": "Ropes and Chains",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "OM14": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 14,
         "reward": "Basic Auxiliary Core",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "OM15": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 15,
         "reward": "Snappawrecka",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "OM16": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 16,
         "reward": "Chip Damage",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "OM17": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 17,
         "reward": "Field Ration",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "OM18": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 18,
         "reward": "Pile of Salvage",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "OM19": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 19,
         "reward": "Auspex",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 4
     },
     "OM2": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 2,
         "reward": "Canister of Chemicals",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "OM20": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 20,
         "reward": "Lesser Reliquary of Protection",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "OM21": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 21,
         "reward": "Vox-Caster",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "slots": 3
     },
     "OM22": {
         "campaign": "Octarius Mirror",
@@ -3210,7 +3388,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 3,
         "reward": "Weapon Parts",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "OM30": {
         "campaign": "Octarius Mirror",
@@ -3224,7 +3403,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 31,
         "reward": "Fine Purity Seal",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 4
     },
     "OM32": {
         "campaign": "Octarius Mirror",
@@ -3266,14 +3446,16 @@
         "campaignType": "Mirror",
         "nodeNumber": 37,
         "reward": "The Phoenix Ascendant",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 3
     },
     "OM38": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 38,
         "reward": "Kill Count",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "slots": 4
     },
     "OM39": {
         "campaign": "Octarius Mirror",
@@ -3287,7 +3469,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 4,
         "reward": "Frag Grenade",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "OM40": {
         "campaign": "Octarius Mirror",
@@ -3336,7 +3519,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 46,
         "reward": "Ballistics Data",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "OM47": {
         "campaign": "Octarius Mirror",
@@ -3364,7 +3548,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 5,
         "reward": "Standard-Issue Tourniquet",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "OM50": {
         "campaign": "Octarius Mirror",
@@ -3385,7 +3570,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 52,
         "reward": "Metal Decorative Skull",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "OM53": {
         "campaign": "Octarius Mirror",
@@ -3413,14 +3599,16 @@
         "campaignType": "Mirror",
         "nodeNumber": 56,
         "reward": "Reinforced Chitin",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 3
     },
     "OM57": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 57,
         "reward": "Battle Scar",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "slots": 4
     },
     "OM58": {
         "campaign": "Octarius Mirror",
@@ -3441,7 +3629,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 6,
         "reward": "Healing Ointment",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "OM60": {
         "campaign": "Octarius Mirror",
@@ -3462,14 +3651,16 @@
         "campaignType": "Mirror",
         "nodeNumber": 62,
         "reward": "Enriched Rations",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 4
     },
     "OM63": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 63,
         "reward": "Righteous Candle",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 3
     },
     "OM64": {
         "campaign": "Octarius Mirror",
@@ -3518,7 +3709,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 7,
         "reward": "Rebreather",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "OM70": {
         "campaign": "Octarius Mirror",
@@ -3532,7 +3724,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 71,
         "reward": "Mjod",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "slots": 4
     },
     "OM72": {
         "campaign": "Octarius Mirror",
@@ -3588,7 +3781,8 @@
         "campaignType": "Elite",
         "nodeNumber": 10,
         "reward": "Fine Purity Seal",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 4
     },
     "IE11": {
         "campaign": "Indomitus Elite",
@@ -3609,14 +3803,16 @@
         "campaignType": "Elite",
         "nodeNumber": 13,
         "reward": "Oath Seal",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 4
     },
     "IE14": {
         "campaign": "Indomitus Elite",
         "campaignType": "Elite",
         "nodeNumber": 14,
         "reward": "Reliquary of Vengeance",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 3
     },
     "IE15": {
         "campaign": "Indomitus Elite",
@@ -3651,7 +3847,8 @@
         "campaignType": "Elite",
         "nodeNumber": 19,
         "reward": "Rose of Martyrs",
-        "expectedGold": 101
+        "expectedGold": 101,
+        "slots": 3
     },
     "IE2": {
         "campaign": "Indomitus Elite",
@@ -3672,7 +3869,8 @@
         "campaignType": "Elite",
         "nodeNumber": 21,
         "reward": "Blessed Corset Armor",
-        "expectedGold": 101
+        "expectedGold": 101,
+        "slots": 4
     },
     "IE22": {
         "campaign": "Indomitus Elite",
@@ -3707,21 +3905,24 @@
         "campaignType": "Elite",
         "nodeNumber": 26,
         "reward": "Viridian Energy Tesseract",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "IE27": {
         "campaign": "Indomitus Elite",
         "campaignType": "Elite",
         "nodeNumber": 27,
         "reward": "Greater Reliquary of Vengeance",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 3
     },
     "IE28": {
         "campaign": "Indomitus Elite",
         "campaignType": "Elite",
         "nodeNumber": 28,
         "reward": "Engrammatic Entangler",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "IE29": {
         "campaign": "Indomitus Elite",
@@ -3749,7 +3950,8 @@
         "campaignType": "Elite",
         "nodeNumber": 31,
         "reward": "Terminator Honours",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "IE32": {
         "campaign": "Indomitus Elite",
@@ -3770,28 +3972,32 @@
         "campaignType": "Elite",
         "nodeNumber": 34,
         "reward": "Blessed Tasset Plate",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "IE35": {
         "campaign": "Indomitus Elite",
         "campaignType": "Elite",
         "nodeNumber": 35,
         "reward": "Ceramite Lump",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 3
     },
     "IE36": {
         "campaign": "Indomitus Elite",
         "campaignType": "Elite",
         "nodeNumber": 36,
         "reward": "Krak Grenade",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "IE37": {
         "campaign": "Indomitus Elite",
         "campaignType": "Elite",
         "nodeNumber": 37,
         "reward": "Special Issue Ammo",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "IE38": {
         "campaign": "Indomitus Elite",
@@ -3812,7 +4018,8 @@
         "campaignType": "Elite",
         "nodeNumber": 4,
         "reward": "Enriched Rations",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "slots": 3
     },
     "IE40": {
         "campaign": "Indomitus Elite",
@@ -3854,7 +4061,8 @@
         "campaignType": "Elite",
         "nodeNumber": 9,
         "reward": "Weapon Anointment Oils",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 3
     },
     "FoCE1": {
         "campaign": "Fall of Cadia Elite",
@@ -3868,21 +4076,24 @@
         "campaignType": "Elite",
         "nodeNumber": 10,
         "reward": "Mutation: Warped Muscles",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 4
     },
     "FoCE11": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 11,
         "reward": "Brazen Jaws",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 3
     },
     "FoCE12": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 12,
         "reward": "Helmet Trophy",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 3
     },
     "FoCE13": {
         "campaign": "Fall of Cadia Elite",
@@ -3896,7 +4107,8 @@
         "campaignType": "Elite",
         "nodeNumber": 14,
         "reward": "Fine Micro-Generator",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 4
     },
     "FoCE15": {
         "campaign": "Fall of Cadia Elite",
@@ -3931,14 +4143,16 @@
         "campaignType": "Elite",
         "nodeNumber": 19,
         "reward": "Eye of Horus",
-        "expectedGold": 101
+        "expectedGold": 101,
+        "slots": 4
     },
     "FoCE2": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 2,
         "reward": "Scrolls",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "slots": 4
     },
     "FoCE20": {
         "campaign": "Fall of Cadia Elite",
@@ -3959,14 +4173,16 @@
         "campaignType": "Elite",
         "nodeNumber": 22,
         "reward": "Unnatural Vapour Dispenser",
-        "expectedGold": 101
+        "expectedGold": 101,
+        "slots": 3
     },
     "FoCE23": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 23,
         "reward": "Cadaere Renissum",
-        "expectedGold": 101
+        "expectedGold": 101,
+        "slots": 4
     },
     "FoCE24": {
         "campaign": "Fall of Cadia Elite",
@@ -3987,28 +4203,32 @@
         "campaignType": "Elite",
         "nodeNumber": 26,
         "reward": "Zeidos Ribbon",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 3
     },
     "FoCE27": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 27,
         "reward": "Flak Plates",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "FoCE28": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 28,
         "reward": "Blessing of Nurgle",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "FoCE29": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 29,
         "reward": "Boon of Khorne",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "FoCE3": {
         "campaign": "Fall of Cadia Elite",
@@ -4043,14 +4263,16 @@
         "campaignType": "Elite",
         "nodeNumber": 33,
         "reward": "Mission Assignment",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 3
     },
     "FoCE34": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 34,
         "reward": "Locator Beacon",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "FoCE35": {
         "campaign": "Fall of Cadia Elite",
@@ -4064,7 +4286,8 @@
         "campaignType": "Elite",
         "nodeNumber": 36,
         "reward": "Artificer Tasset Plate",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "FoCE37": {
         "campaign": "Fall of Cadia Elite",
@@ -4106,14 +4329,16 @@
         "campaignType": "Elite",
         "nodeNumber": 5,
         "reward": "Mutation: Warped Lungs",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "slots": 4
     },
     "FoCE6": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 6,
         "reward": "Blessing of the Dark Gods",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "slots": 3
     },
     "FoCE7": {
         "campaign": "Fall of Cadia Elite",
@@ -4141,14 +4366,16 @@
         "campaignType": "Elite",
         "nodeNumber": 1,
         "reward": "Pile of Salvage",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "slots": 4
     },
     "OE10": {
         "campaign": "Octarius Elite",
         "campaignType": "Elite",
         "nodeNumber": 10,
         "reward": "Standard-Issue Tourniquet",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 3
     },
     "OE11": {
         "campaign": "Octarius Elite",
@@ -4169,7 +4396,8 @@
         "campaignType": "Elite",
         "nodeNumber": 13,
         "reward": "Reinforced Scale-Plates",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 4
     },
     "OE14": {
         "campaign": "Octarius Elite",
@@ -4204,7 +4432,8 @@
         "campaignType": "Elite",
         "nodeNumber": 18,
         "reward": "Wolf Tooth Necklace",
-        "expectedGold": 101
+        "expectedGold": 101,
+        "slots": 4
     },
     "OE19": {
         "campaign": "Octarius Elite",
@@ -4232,7 +4461,8 @@
         "campaignType": "Elite",
         "nodeNumber": 21,
         "reward": "Ard Plate",
-        "expectedGold": 101
+        "expectedGold": 101,
+        "slots": 4
     },
     "OE22": {
         "campaign": "Octarius Elite",
@@ -4267,7 +4497,8 @@
         "campaignType": "Elite",
         "nodeNumber": 26,
         "reward": "Righteous Candle",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "OE27": {
         "campaign": "Octarius Elite",
@@ -4295,14 +4526,16 @@
         "campaignType": "Elite",
         "nodeNumber": 3,
         "reward": "Ballistics Data",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "slots": 4
     },
     "OE30": {
         "campaign": "Octarius Elite",
         "campaignType": "Elite",
         "nodeNumber": 30,
         "reward": "Battle Scar",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "OE31": {
         "campaign": "Octarius Elite",
@@ -4330,14 +4563,16 @@
         "campaignType": "Elite",
         "nodeNumber": 34,
         "reward": "Enriched Rations",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "OE35": {
         "campaign": "Octarius Elite",
         "campaignType": "Elite",
         "nodeNumber": 35,
         "reward": "Unyielding Rivets",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "OE36": {
         "campaign": "Octarius Elite",
@@ -4386,7 +4621,8 @@
         "campaignType": "Elite",
         "nodeNumber": 5,
         "reward": "Thick Skin",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "slots": 3
     },
     "OE6": {
         "campaign": "Octarius Elite",
@@ -4414,7 +4650,8 @@
         "campaignType": "Elite",
         "nodeNumber": 9,
         "reward": "Targeting Link",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 4
     },
     "IME1": {
         "campaign": "Indomitus Mirror Elite",
@@ -4701,7 +4938,8 @@
         "campaignType": "Elite",
         "nodeNumber": 1,
         "reward": "Pile of Salvage",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "slots": 4
     },
     "FoCME10": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -4722,21 +4960,24 @@
         "campaignType": "Elite",
         "nodeNumber": 12,
         "reward": "Standard-Issue Tourniquet",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 3
     },
     "FoCME13": {
         "campaign": "Fall of Cadia Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 13,
         "reward": "Plague Bell",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 4
     },
     "FoCME14": {
         "campaign": "Fall of Cadia Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 14,
         "reward": "Golden Ornamental Skull",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 4
     },
     "FoCME15": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -4764,7 +5005,8 @@
         "campaignType": "Elite",
         "nodeNumber": 18,
         "reward": "Chapter Pendant",
-        "expectedGold": 101
+        "expectedGold": 101,
+        "slots": 4
     },
     "FoCME19": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -4778,7 +5020,8 @@
         "campaignType": "Elite",
         "nodeNumber": 2,
         "reward": "Zeidos Ribbon",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "slots": 3
     },
     "FoCME20": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -4792,7 +5035,8 @@
         "campaignType": "Elite",
         "nodeNumber": 21,
         "reward": "The Iron Phoenix",
-        "expectedGold": 101
+        "expectedGold": 101,
+        "slots": 4
     },
     "FoCME22": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -4827,7 +5071,8 @@
         "campaignType": "Elite",
         "nodeNumber": 26,
         "reward": "Unnatural Vapour Dispenser",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "FoCME27": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -4841,21 +5086,24 @@
         "campaignType": "Elite",
         "nodeNumber": 28,
         "reward": "Holy Chaplet",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "FoCME29": {
         "campaign": "Fall of Cadia Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 29,
         "reward": "Stone Guardian Fragment",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 3
     },
     "FoCME3": {
         "campaign": "Fall of Cadia Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 3,
         "reward": "Entrenching Tool",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "slots": 4
     },
     "FoCME30": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -4904,7 +5152,8 @@
         "campaignType": "Elite",
         "nodeNumber": 36,
         "reward": "Blasphemous Armor Trim",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 3
     },
     "FoCME37": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -4918,7 +5167,8 @@
         "campaignType": "Elite",
         "nodeNumber": 38,
         "reward": "Psyk-Conductive Material",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "slots": 4
     },
     "FoCME39": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -4946,7 +5196,8 @@
         "campaignType": "Elite",
         "nodeNumber": 5,
         "reward": "Blessed Promethium Canister",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "slots": 4
     },
     "FoCME6": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -4974,7 +5225,8 @@
         "campaignType": "Elite",
         "nodeNumber": 9,
         "reward": "Weapon Parts",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "slots": 4
     },
     "OME1": {
         "campaign": "Octarius Mirror Elite",
@@ -5261,112 +5513,128 @@
         "campaignType": "Mirror",
         "nodeNumber": 1,
         "reward": "Mutation: Warped Muscles",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM2": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 2,
         "reward": "Nasty Spikes",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM3": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 3,
         "reward": "Sophisticated Material",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM4": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 4,
         "reward": "Can of Promethium",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM5": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 5,
         "reward": "Armor Trim",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM6": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 6,
         "reward": "Scrolls",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM7": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 7,
         "reward": "Mission Assignment",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM8": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 8,
         "reward": "Adamantium Filaments",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM9": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 9,
         "reward": "Thick Skin",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM10": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 10,
         "reward": "Targeting Link",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM11": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 11,
         "reward": "Single Power Pack",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM12": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 12,
         "reward": "Adamantium Ore",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM13": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 13,
         "reward": "Mutation: Warped Lungs",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM14": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 14,
         "reward": "Mutation: Warped Heart",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM15": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 15,
         "reward": "Calandis",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM16": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 16,
         "reward": "Pile of Salvage",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM17": {
         "campaign": "Saim-Hann Mirror",
@@ -5380,56 +5648,64 @@
         "campaignType": "Mirror",
         "nodeNumber": 18,
         "reward": "Chip Damage",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM19": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 19,
         "reward": "The Iron Phoenix",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM20": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 20,
         "reward": "Barrel of Promethium",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM21": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 21,
         "reward": "Metal Joints",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM22": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 22,
         "reward": "Round of Ammo",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM23": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 23,
         "reward": "Nano Swarm",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM24": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 24,
         "reward": "Frag Grenade",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM25": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 25,
         "reward": "Ceramite Lump",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM26": {
         "campaign": "Saim-Hann Mirror",
@@ -5450,7 +5726,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 28,
         "reward": "Slicing Claws",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM29": {
         "campaign": "Saim-Hann Mirror",
@@ -5471,7 +5748,8 @@
         "campaignType": "Mirror",
         "nodeNumber": 31,
         "reward": "Wraithbone Plate",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM32": {
         "campaign": "Saim-Hann Mirror",
@@ -5506,14 +5784,16 @@
         "campaignType": "Mirror",
         "nodeNumber": 36,
         "reward": "Ballistics Data",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM37": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 37,
         "reward": "Canister of Chemicals",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM38": {
         "campaign": "Saim-Hann Mirror",
@@ -5527,14 +5807,16 @@
         "campaignType": "Mirror",
         "nodeNumber": 39,
         "reward": "Rebreather",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM40": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 40,
         "reward": "Brazen Jaws",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM41": {
         "campaign": "Saim-Hann Mirror",
@@ -5583,42 +5865,48 @@
         "campaignType": "Mirror",
         "nodeNumber": 47,
         "reward": "Box of Salvage",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM48": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 48,
         "reward": "Standard-Issue Tourniquet",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM49": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 49,
         "reward": "The Gold Phoenix",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM50": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 50,
         "reward": "Weapon Anointment Oils",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM51": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 51,
         "reward": "Combat Stimms",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM52": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 52,
         "reward": "Chainaxe Teeth",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM53": {
         "campaign": "Saim-Hann Mirror",
@@ -5632,28 +5920,32 @@
         "campaignType": "Mirror",
         "nodeNumber": 54,
         "reward": "Valuable Fabric",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM55": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 55,
         "reward": "Locator Beacon",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 3
     },
     "SHM56": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 56,
         "reward": "Purity Seal",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM57": {
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 57,
         "reward": "Waystone",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "slots": 4
     },
     "SHM58": {
         "campaign": "Saim-Hann Mirror",

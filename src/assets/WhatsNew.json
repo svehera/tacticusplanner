@@ -27,9 +27,20 @@
                             "path": "lre.png"
                         }
                     ]
-                }
-            ],
-            "minor": [
+                },
+                {
+                    "route": "learn/campaigns",
+                    "text": "Added data about # of deployed characters in specific battle (ForgottenSaber, Szarekh)",
+                    "subPoints": [
+                        "Added \"Slots\" column. Which will be empty if there could be deployed 5 characters in a battle otherwise 3 or 4",
+                        "Some Mirror Elite campaigns (like Indomitus Mirror Elite and Ocatarius Mirror Elite) have 5 slots in all battles"
+                    ],
+                    "images": [
+                        {
+                            "path": "slots.png"
+                        }
+                    ]
+                },
                 {
                     "route": "learn/characters",
                     "text": "Updated the Learn Characters page",
@@ -45,7 +56,9 @@
                             "path": "characters.png"
                         }
                     ]
-                },
+                }
+            ],
+            "minor": [
                 {
                     "text": "Changed options names in Order dropdown on the Who You Own page to be \"BS Value\" (sasquach)"
                 }
