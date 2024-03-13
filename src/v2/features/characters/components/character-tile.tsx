@@ -1,4 +1,4 @@
-﻿import React, { useMemo } from 'react';
+﻿import React, { useContext, useMemo } from 'react';
 import { Badge, Tooltip } from '@mui/material';
 
 import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
@@ -13,6 +13,8 @@ import { needToAscendCharacter, needToLevelCharacter } from 'src/shared-logic/fu
 
 import './character-tile.css';
 import { Conditional } from 'src/v2/components/conditional';
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+
 export const CharacterTile = ({
     character,
     onClick,
@@ -28,6 +30,8 @@ export const CharacterTile = ({
     const unlockProgress = (character.shards / unlockShards) * 100;
     const hasAbilities = (isUnlocked && character.activeAbilityLevel) || character.passiveAbilityLevel;
     const needToAscend = useMemo(() => needToAscendCharacter(character), [character.rarity, character.rank]);
+
+    const { showBadges, showAbilities, showCharacterLevel, showCharacterRarity } = useContext(CharactersViewContext);
 
     const needToLevel = useMemo(
         () => needToLevelCharacter(character),
@@ -54,29 +58,31 @@ export const CharacterTile = ({
             <StarsImage stars={character.stars} />
             <div>
                 <Tooltip title={character.name} placement={'top'}>
-                    <Badge badgeContent={badgeContent} color={badgeColor}>
+                    <Badge badgeContent={badgeContent} color={badgeColor} invisible={!showBadges}>
                         <CharacterPortraitImage icon={character.icon} />
                     </Badge>
                 </Tooltip>
 
-                <div className="abilities" style={{ visibility: hasAbilities ? 'visible' : 'hidden' }}>
+                <div className="abilities" style={{ visibility: hasAbilities && showAbilities ? 'visible' : 'hidden' }}>
                     <div className="ability-level">{character.activeAbilityLevel}</div>
                     <div className="ability-level">{character.passiveAbilityLevel}</div>
                 </div>
-                {isUnlocked ? (
-                    <div className="character-level">{character.level}</div>
-                ) : (
-                    <div
-                        className="character-level"
-                        style={{
-                            background: `linear-gradient(to right, green ${unlockProgress}%, #012A41 ${unlockProgress}%)`,
-                        }}>
-                        {`${character.shards}/${unlockShards}`}
-                    </div>
-                )}
+                <Conditional condition={showCharacterLevel}>
+                    {isUnlocked ? (
+                        <div className="character-level">{character.level}</div>
+                    ) : (
+                        <div
+                            className="character-level"
+                            style={{
+                                background: `linear-gradient(to right, green ${unlockProgress}%, #012A41 ${unlockProgress}%)`,
+                            }}>
+                            {`${character.shards}/${unlockShards}`}
+                        </div>
+                    )}
+                </Conditional>
             </div>
             <div className="character-rarity-rank">
-                <RarityImage rarity={character.rarity} />
+                {showCharacterRarity && <RarityImage rarity={character.rarity} />}
                 {isUnlocked && <RankImage rank={character.rank} />}
             </div>
             <Conditional condition={!!character.numberOfUnlocked}>

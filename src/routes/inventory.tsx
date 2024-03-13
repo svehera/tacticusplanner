@@ -118,7 +118,7 @@ export const Inventory = () => {
                 <Button onClick={() => resetUpgrades()} color="error" variant="contained">
                     Reset All
                 </Button>
-                <ViewSettings options={['craftableItemsInInventory']} />
+                <ViewSettings preset={'inventory'} />
             </div>
 
             {itemsGrouped

@@ -1,6 +1,74 @@
 ﻿{
-    "currentVersion": "1.4.1",
+    "currentVersion": "1.4.2",
     "releaseNotes": [
+        {
+            "version": "1.4.2",
+            "date": "March 13",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added possibility to customize Who You Own view (Tani, Lobo)",
+                    "images": [
+                        {
+                            "path": "max.png"
+                        },
+                        {
+                            "path": "min.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added enemy factions to LRE tracks (GhostHobbit)",
+                    "subPoints": [
+                        "Click on the 'i' icon navigate user to the Wiki page of respective faction (NPC units block)"
+                    ],
+                    "images": [
+                        {
+                            "path": "lre.png"
+                        }
+                    ]
+                },
+                {
+                    "route": "learn/campaigns",
+                    "text": "Added data about # of deployed characters in specific battle (ForgottenSaber, Szarekh)",
+                    "subPoints": [
+                        "Added \"Slots\" column. Which will be empty if there could be deployed 5 characters in a battle otherwise 3 or 4",
+                        "Some Mirror Elite campaigns (like Indomitus Mirror Elite and Ocatarius Mirror Elite) have 5 slots in all battles"
+                    ],
+                    "images": [
+                        {
+                            "path": "slots.png"
+                        }
+                    ]
+                },
+                {
+                    "route": "learn/characters",
+                    "text": "Updated the Learn Characters page",
+                    "subPoints": [
+                        "Added units D3 stats for Health, Damage, Armour. Thanks Ganko for contribution",
+                        "Added Rank and Rarity columns of owned characters (Corusame)",
+                        "Added Alliance filter",
+                        "Added columns grouping to make table more compact",
+                        "Better experience on the mobile (but still not the best)"
+                    ],
+                    "images": [
+                        {
+                            "path": "characters.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Changed options names in Order dropdown on the Who You Own page to be \"BS Value\" (sasquach)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed Fall of Cadia Elite 5 node reward (Farfalafel)"
+                }
+            ]
+        },
         {
             "version": "1.4.1",
             "date": "March 11",
@@ -41,6 +109,9 @@
                 },
                 {
                     "text": "Fixed issue with strange data when mark every space as complete in LRE tracker (Mehal)"
+                },
+                {
+                    "text": "Fixed Fall of Cadia Elite 5 node reward (Farfalafel)"
                 }
             ]
         },

@@ -69,6 +69,13 @@ export const Campaigns = () => {
             minWidth: 170,
         },
         {
+            field: 'slots',
+            headerName: 'Slots',
+            maxWidth: 150,
+            width: 150,
+            minWidth: 150,
+        },
+        {
             field: 'expectedGold',
             headerName: 'Expected Gold',
             maxWidth: 150,
