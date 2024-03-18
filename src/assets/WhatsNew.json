@@ -1,6 +1,18 @@
 ﻿{
-    "currentVersion": "1.4.2",
+    "currentVersion": "1.4.3",
     "releaseNotes": [
+        {
+            "version": "1.4.3",
+            "date": "March X",
+            "type": "Update",
+            "new": [],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed Corrodius # of hits to be 1 (熊翊呈)"
+                }
+            ]
+        },
         {
             "version": "1.4.2",
             "date": "March 13",
