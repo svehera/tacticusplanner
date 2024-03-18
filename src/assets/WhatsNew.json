@@ -10,6 +10,9 @@
             "bugFixes": [
                 {
                     "text": "Fixed Corrodius # of hits to be 1 (熊翊呈)"
+                },
+                {
+                    "text": "Fixed issue with \"Update Inventory\" not working correctly if you make any upgrade-unrelated change afterwards before submit (SeventhSun)"
                 }
             ]
         },
