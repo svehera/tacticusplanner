@@ -6,7 +6,11 @@
             "date": "March X",
             "type": "Update",
             "new": [],
-            "minor": [],
+            "minor": [
+                {
+                    "text": "Added text auto select for Quick Filter Search on the Inventory page (Tani)"
+                }
+            ],
             "bugFixes": [
                 {
                     "text": "Fixed Corrodius # of hits to be 1 (熊翊呈)"
