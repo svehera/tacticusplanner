@@ -67,6 +67,7 @@ export const DailyRaids = () => {
                         rankStart: char.rank,
                         rankEnd: g.targetRank!,
                         appliedUpgrades: char.upgrades,
+                        rankPoint5: g.rankPoint5,
                     } as ICharacterRankRange;
                 }
                 return null;

@@ -81,6 +81,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
                 currentGoal.targetRarity = updatedGoal.targetRarity;
                 currentGoal.shardsPerDayOrToken = updatedGoal.shardsPerDayOrToken;
                 currentGoal.energyPerDay = updatedGoal.energyPerDay;
+                currentGoal.rankPoint5 = updatedGoal.rankPoint5;
             } else {
                 state.splice(updatedGoalIndex, 1);
                 state.splice(updatedGoal.priority - 1, 0, updatedGoal);

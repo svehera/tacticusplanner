@@ -48,6 +48,7 @@ export const Goals = () => {
                         rankStart: char.rank,
                         rankEnd: g.targetRank!,
                         appliedUpgrades: char.upgrades,
+                        rankPoint5: !!g.rankPoint5,
                     } as ICharacterRankRange;
                 }
                 return null;
@@ -215,6 +216,7 @@ export const GoalCard = ({
                         rankStart: char.rank,
                         rankEnd: g.targetRank!,
                         appliedUpgrades: char.upgrades,
+                        rankPoint5: !!g.rankPoint5,
                     } as ICharacterRankRange;
                 }
             })
@@ -237,6 +239,7 @@ export const GoalCard = ({
                     rankStart: character.rank,
                     rankEnd: goal.targetRank!,
                     appliedUpgrades: character.upgrades,
+                    rankPoint5: !!goal.rankPoint5,
                 },
             ]
         );
