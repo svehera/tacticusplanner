@@ -11,7 +11,6 @@ import {
     Select,
     Switch,
     TextField,
-    Tooltip,
 } from '@mui/material';
 import Button from '@mui/material/Button';
 
@@ -149,13 +148,13 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     return (
         <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <Tooltip title={disableNewGoals ? 'You can have only 20 goals at the same time' : ''}>
+                <AccessibleTooltip title={disableNewGoals ? 'You can have only 20 goals at the same time' : ''}>
                     <span>
                         <Button variant={'contained'} disabled={disableNewGoals} onClick={() => setOpenDialog(true)}>
                             Set Goal
                         </Button>
                     </span>
-                </Tooltip>
+                </AccessibleTooltip>
             </div>
 
             <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
