@@ -7,13 +7,32 @@
             "type": "Update",
             "new": [
                 {
-                    "text": "Added \"Rank Point Five\" toggle when setting a upgrade rank goal (Edward H)",
+                    "text": "Added \"Rank Point Five\" toggle when setting/editing an upgrade rank goal (Edward H)",
                     "subPoints": [
-                        "When you reach a target upgrade rank, you are immediately able to apply the top row of three upgrades.\nIf you toggle on the \"Rank Point Five\" switch then these upgrades will be included in your daily raids plan."
+                        "When you reach a target upgrade rank, you are immediately able to apply the top row of three upgrades.\nIf you toggle on the \"Rank Point Five\" switch then these upgrades will be included in your daily raids plan"
                     ],
                     "images": [
                         {
                             "path": "rankpoint5.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added \"Ignore Rank/Rarity restrictions\" toggle when setting an upgrade rank goal",
+                    "subPoints": [
+                        "If you toggle on this switch then you will be able to set Upgrade Rank goal for a character you have not unlocked or ascended to required rarity yet"
+                    ],
+                    "images": [
+                        {
+                            "path": "rankignore.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added \"Show alphabet\" toggle on the Inventory page",
+                    "images": [
+                        {
+                            "path": "alpha.png"
                         }
                     ]
                 }

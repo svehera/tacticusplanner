@@ -53,10 +53,12 @@ export const Inventory = () => {
                     visible: true,
                     alphabet: (x.label ?? x.material)[0].toUpperCase(),
                 })),
-            ['rarity', 'material', 'faction'],
+            viewPreferences.inventoryShowAlphabet
+                ? ['rarity', 'material', 'faction']
+                : ['rarity', 'faction', 'material'],
             ['desc', 'asc', 'asc']
         );
-    }, []);
+    }, [viewPreferences.inventoryShowAlphabet]);
 
     const filterItem = useCallback(
         (item: ITableRow) =>

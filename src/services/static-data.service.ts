@@ -742,6 +742,8 @@ export class StaticDataService {
             day.energyLeft = energyLeft;
             if (day.raids.length) {
                 resultDays.push(day);
+            } else {
+                break;
             }
 
             iteration++;
