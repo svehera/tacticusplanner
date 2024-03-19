@@ -20,7 +20,13 @@ import IconButton from '@mui/material/IconButton';
 import { ArrowForward, DeleteForever, Edit, Info } from '@mui/icons-material';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { StaticDataService } from '../../services';
-import { charsProgression, charsUnlockShards, fullCampaignsProgress, rarityToStars } from '../../models/constants';
+import {
+    charsProgression,
+    charsUnlockShards,
+    fullCampaignsProgress,
+    rankToLevel,
+    rarityToStars,
+} from '../../models/constants';
 import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { CampaignImage } from '../../shared-components/campaign-image';
@@ -28,6 +34,9 @@ import { enqueueSnackbar } from 'notistack';
 import Button from '@mui/material/Button';
 import { MiscIcon } from '../../shared-components/misc-icon';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { FlexBox } from 'src/v2/components/flex-box';
 
 export const Goals = () => {
     const { goals, characters, campaignsProgress, dailyRaidsPreferences, inventory, dailyRaids } =
@@ -261,6 +270,25 @@ export const GoalCard = ({
 
     const formattedDate = formatDateWithOrdinal(nextDate);
 
+    let xpElement: React.ReactElement = <></>;
+
+    if (goal.type === PersonalGoalType.UpgradeRank) {
+        const targetLevel = rankToLevel[((goal.targetRank ?? 1) - 1) as Rank];
+        const xpEstimate = CharactersXpService.getLegendaryTomesCount(character, targetLevel);
+
+        if (xpEstimate) {
+            xpElement = (
+                <FlexBox gap={5}>
+                    <span>(XP)Codex of War: {xpEstimate.legendaryBooks}</span>
+                    <AccessibleTooltip
+                        title={`Current level: ${xpEstimate.currentLevel}\r\nTarget level: ${xpEstimate.targetLevel}\r\nGold: ${xpEstimate.gold}\r\nXP left: ${xpEstimate.xpLeft}`}>
+                        <Info color="primary" />
+                    </AccessibleTooltip>
+                </FlexBox>
+            );
+        }
+    }
+
     return (
         <Card
             onClick={onClick}
@@ -313,6 +341,7 @@ export const GoalCard = ({
                                 </Tooltip>
                                 <br />
                                 <span className="italic">{formattedDate}</span>
+                                {xpElement}
                             </>
                         )}
                     </div>

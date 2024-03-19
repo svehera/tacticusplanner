@@ -1,0 +1,259 @@
+﻿{
+    "xpLevelThresholds": [
+        {
+            "level": 0,
+            "xpToNextLevel": 0,
+            "totalXp": 0
+        },
+        {
+            "level": 1,
+            "xpToNextLevel": 25,
+            "totalXp": 25
+        },
+        {
+            "level": 2,
+            "xpToNextLevel": 35,
+            "totalXp": 60
+        },
+        {
+            "level": 3,
+            "xpToNextLevel": 60,
+            "totalXp": 120
+        },
+        {
+            "level": 4,
+            "xpToNextLevel": 80,
+            "totalXp": 200
+        },
+        {
+            "level": 5,
+            "xpToNextLevel": 100,
+            "totalXp": 300
+        },
+        {
+            "level": 6,
+            "xpToNextLevel": 120,
+            "totalXp": 420
+        },
+        {
+            "level": 7,
+            "xpToNextLevel": 140,
+            "totalXp": 560
+        },
+        {
+            "level": 8,
+            "xpToNextLevel": 160,
+            "totalXp": 720
+        },
+        {
+            "level": 9,
+            "xpToNextLevel": 180,
+            "totalXp": 900
+        },
+        {
+            "level": 10,
+            "xpToNextLevel": 200,
+            "totalXp": 1100
+        },
+        {
+            "level": 11,
+            "xpToNextLevel": 250,
+            "totalXp": 1350
+        },
+        {
+            "level": 12,
+            "xpToNextLevel": 300,
+            "totalXp": 1650
+        },
+        {
+            "level": 13,
+            "xpToNextLevel": 350,
+            "totalXp": 2000
+        },
+        {
+            "level": 14,
+            "xpToNextLevel": 400,
+            "totalXp": 2400
+        },
+        {
+            "level": 15,
+            "xpToNextLevel": 450,
+            "totalXp": 2850
+        },
+        {
+            "level": 16,
+            "xpToNextLevel": 500,
+            "totalXp": 3350
+        },
+        {
+            "level": 17,
+            "xpToNextLevel": 600,
+            "totalXp": 3950
+        },
+        {
+            "level": 18,
+            "xpToNextLevel": 750,
+            "totalXp": 4700
+        },
+        {
+            "level": 19,
+            "xpToNextLevel": 900,
+            "totalXp": 5600
+        },
+        {
+            "level": 20,
+            "xpToNextLevel": 1100,
+            "totalXp": 6700
+        },
+        {
+            "level": 21,
+            "xpToNextLevel": 1400,
+            "totalXp": 8100
+        },
+        {
+            "level": 22,
+            "xpToNextLevel": 1800,
+            "totalXp": 9900
+        },
+        {
+            "level": 23,
+            "xpToNextLevel": 2300,
+            "totalXp": 12200
+        },
+        {
+            "level": 24,
+            "xpToNextLevel": 3000,
+            "totalXp": 15200
+        },
+        {
+            "level": 25,
+            "xpToNextLevel": 4000,
+            "totalXp": 19200
+        },
+        {
+            "level": 26,
+            "xpToNextLevel": 5500,
+            "totalXp": 24700
+        },
+        {
+            "level": 27,
+            "xpToNextLevel": 7500,
+            "totalXp": 32200
+        },
+        {
+            "level": 28,
+            "xpToNextLevel": 10000,
+            "totalXp": 42200
+        },
+        {
+            "level": 29,
+            "xpToNextLevel": 13000,
+            "totalXp": 55200
+        },
+        {
+            "level": 30,
+            "xpToNextLevel": 17000,
+            "totalXp": 72200
+        },
+        {
+            "level": 31,
+            "xpToNextLevel": 22000,
+            "totalXp": 94200
+        },
+        {
+            "level": 32,
+            "xpToNextLevel": 28000,
+            "totalXp": 122200
+        },
+        {
+            "level": 33,
+            "xpToNextLevel": 35000,
+            "totalXp": 157200
+        },
+        {
+            "level": 34,
+            "xpToNextLevel": 43000,
+            "totalXp": 200200
+        },
+        {
+            "level": 35,
+            "xpToNextLevel": 52000,
+            "totalXp": 252200
+        },
+        {
+            "level": 36,
+            "xpToNextLevel": 62000,
+            "totalXp": 314200
+        },
+        {
+            "level": 37,
+            "xpToNextLevel": 73000,
+            "totalXp": 387200
+        },
+        {
+            "level": 38,
+            "xpToNextLevel": 85000,
+            "totalXp": 472200
+        },
+        {
+            "level": 39,
+            "xpToNextLevel": 98000,
+            "totalXp": 570200
+        },
+        {
+            "level": 40,
+            "xpToNextLevel": 112000,
+            "totalXp": 682200
+        },
+        {
+            "level": 41,
+            "xpToNextLevel": 127000,
+            "totalXp": 809200
+        },
+        {
+            "level": 42,
+            "xpToNextLevel": 143000,
+            "totalXp": 952200
+        },
+        {
+            "level": 43,
+            "xpToNextLevel": 160000,
+            "totalXp": 1112200
+        },
+        {
+            "level": 44,
+            "xpToNextLevel": 178000,
+            "totalXp": 1290200
+        },
+        {
+            "level": 45,
+            "xpToNextLevel": 197000,
+            "totalXp": 1487200
+        },
+        {
+            "level": 46,
+            "xpToNextLevel": 217000,
+            "totalXp": 1704200
+        },
+        {
+            "level": 47,
+            "xpToNextLevel": 238000,
+            "totalXp": 1942200
+        },
+        {
+            "level": 48,
+            "xpToNextLevel": 260000,
+            "totalXp": 2202200
+        },
+        {
+            "level": 49,
+            "xpToNextLevel": 283000,
+            "totalXp": 2485200
+        },
+        {
+            "level": 50,
+            "xpToNextLevel": 0,
+            "totalXp": 2485200
+        }
+    ]
+}

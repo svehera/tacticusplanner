@@ -35,6 +35,14 @@
                             "path": "alpha.png"
                         }
                     ]
+                },
+                {
+                    "text": "Added XP Books calculations to a goals cards",
+                    "images": [
+                        {
+                            "path": "xp.png"
+                        }
+                    ]
                 }
             ],
             "minor": [
