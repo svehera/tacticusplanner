@@ -78,7 +78,7 @@ export const Inventory = () => {
             })),
             itemsAll: items,
         }));
-    }, [filterItem]);
+    }, [itemsList, filterItem]);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, data: ITableRow) => {
         const value = event.target.value === '' ? 0 : Number(event.target.value);
