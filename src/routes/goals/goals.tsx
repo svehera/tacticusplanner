@@ -165,7 +165,11 @@ export const GoalCard = ({
     const character = characters.find(x => x.name === goal.character) as ICharacter2;
     const isGoalCompleted = useMemo(() => {
         return (
-            (goal.type === PersonalGoalType.UpgradeRank && character.rank >= goal.targetRank!) ||
+            (goal.type === PersonalGoalType.UpgradeRank &&
+                ((!goal.rankPoint5 && character.rank >= goal.targetRank!) ||
+                    (goal.rankPoint5 &&
+                        (character.rank > goal.targetRank! ||
+                            (character.rank === goal.targetRank! && character.upgrades.length >= 3))))) ||
             (goal.type === PersonalGoalType.Ascend && character.rarity >= goal.targetRarity!) ||
             (goal.type === PersonalGoalType.Unlock && character.rank > Rank.Locked)
         );
@@ -281,7 +285,17 @@ export const GoalCard = ({
                 <FlexBox gap={5}>
                     <span>(XP) Codex of War: {xpEstimate.legendaryBooks}</span>
                     <AccessibleTooltip
-                        title={`Current level: ${xpEstimate.currentLevel}\r\nTarget level: ${xpEstimate.targetLevel}\r\nGold: ${xpEstimate.gold}\r\nXP left: ${xpEstimate.xpLeft}`}>
+                        title={
+                            <span>
+                                Current level: {xpEstimate.currentLevel}
+                                <br />
+                                Target level: {xpEstimate.targetLevel}
+                                <br />
+                                Gold: {xpEstimate.gold}
+                                <br />
+                                XP left: {xpEstimate.xpLeft}
+                            </span>
+                        }>
                         <Info color="primary" />
                     </AccessibleTooltip>
                 </FlexBox>
@@ -327,6 +341,7 @@ export const GoalCard = ({
                         <div style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
                             <RankImage rank={character.rank} /> <ArrowForward />{' '}
                             <RankImage rank={goal.targetRank ?? 0} />
+                            {goal.rankPoint5 && '.5'}
                         </div>
                         {isGoalCompleted ? undefined : (
                             <>

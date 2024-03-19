@@ -36,6 +36,10 @@ export class CharactersXpService {
         const xpLeft =
             targetLevelTotalXp.totalXp - currentLevelTotalXp.xpToNextLevel - currentLevelTotalXp.totalXp - character.xp;
 
+        if (xpLeft <= 0) {
+            return null;
+        }
+
         const legendaryBooks = Math.ceil(xpLeft / this.legendaryTomeXp);
 
         return {

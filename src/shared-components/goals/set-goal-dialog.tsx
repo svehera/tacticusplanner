@@ -290,7 +290,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                     <Button
                         disabled={
                             !character ||
-                            (form.type === PersonalGoalType.UpgradeRank && character.rank === form.targetRank) ||
+                            (form.type === PersonalGoalType.UpgradeRank &&
+                                character.rank === form.targetRank &&
+                                !form.rankPoint5) ||
                             (form.type === PersonalGoalType.Ascend && character.rarity === form.targetRarity)
                         }
                         onClick={() => handleClose({ ...form, character: character?.name ?? '' })}>

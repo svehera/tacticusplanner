@@ -3,7 +3,7 @@ import { ClickAwayListener, Tooltip } from '@mui/material';
 import { isMobile } from 'react-device-detect';
 
 interface Props {
-    title: string;
+    title: React.ReactNode;
     children: React.ReactElement<any, any>;
 }
 
