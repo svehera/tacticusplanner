@@ -169,7 +169,7 @@ export const Inventory = () => {
                         <article className="inventory-items">
                             <Conditional condition={viewPreferences.inventoryShowAlphabet}>
                                 {group.items.map(group => (
-                                    <FlexBox key={group.letter} gap={10} alignItems="unset">
+                                    <FlexBox key={group.letter} gap={10} alignItems="start">
                                         <div className="letter">{group.letter}</div>
                                         {group.subItems.map(renderRow)}
                                     </FlexBox>
