@@ -279,7 +279,7 @@ export const GoalCard = ({
         if (xpEstimate) {
             xpElement = (
                 <FlexBox gap={5}>
-                    <span>(XP)Codex of War: {xpEstimate.legendaryBooks}</span>
+                    <span>(XP) Codex of War: {xpEstimate.legendaryBooks}</span>
                     <AccessibleTooltip
                         title={`Current level: ${xpEstimate.currentLevel}\r\nTarget level: ${xpEstimate.targetLevel}\r\nGold: ${xpEstimate.gold}\r\nXP left: ${xpEstimate.xpLeft}`}>
                         <Info color="primary" />
@@ -589,7 +589,7 @@ const RaidItem = ({ material, location }: { material: IMaterialRaid; location: I
                 />
                 <Tooltip title={isDisabled ? '' : "Update character's shards"}>
                     <span>
-                        <Button size={'small'} onClick={handleAdd} disabled={isLocationCompleted}>
+                        <Button size={'small'} onClick={handleAdd} disabled={isDisabled}>
                             {isLocationUnlocked ? 'Add' : 'Unlock'}
                         </Button>
                     </span>

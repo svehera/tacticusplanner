@@ -21,7 +21,7 @@
         "Number": 1,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "VarroTigurius.png"
+        "Icon": "VarroTigurius.webp"
     },
     {
         "Name": "Certus",
@@ -45,7 +45,7 @@
         "Number": 2,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "certus-removebg-preview.png"
+        "Icon": "certus-removebg-preview.webp"
     },
     {
         "Name": "Bellator",
@@ -66,7 +66,7 @@
         "Number": 3,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "bellator.png"
+        "Icon": "bellator.webp"
     },
     {
         "Name": "Incisus",
@@ -86,7 +86,7 @@
         "Number": 4,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "incisus-removebg-preview.png"
+        "Icon": "incisus-removebg-preview.webp"
     },
     {
         "Name": "Marneus Calgar",
@@ -107,7 +107,7 @@
         "Number": 5,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "marneus_calgar-removebg-preview.png"
+        "Icon": "marneus_calgar-removebg-preview.webp"
     },
     {
         "Name": "Makhotep",
@@ -130,7 +130,7 @@
         "Number": 21,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Makhotep-removebg-preview.png"
+        "Icon": "Makhotep-removebg-preview.webp"
     },
     {
         "Name": "Imospekh",
@@ -154,7 +154,7 @@
         "Number": 22,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Imospekh-removebg-preview.png"
+        "Icon": "Imospekh-removebg-preview.webp"
     },
     {
         "Name": "Aleph-Null",
@@ -174,7 +174,7 @@
         "Number": 23,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Aleph-null.png"
+        "Icon": "Aleph-null.webp"
     },
     {
         "Name": "Thutmose",
@@ -199,7 +199,7 @@
         "Number": 24,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Thutmose-removebg-preview.png"
+        "Icon": "Thutmose-removebg-preview.webp"
     },
     {
         "Name": "Anuphet",
@@ -223,7 +223,7 @@
         "Number": 25,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Anuphet.png"
+        "Icon": "Anuphet.webp"
     },
     {
         "Name": "Sibyll",
@@ -246,7 +246,7 @@
         "Number": 26,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Sibyll-removebg-preview.png"
+        "Icon": "Sibyll-removebg-preview.webp"
     },
     {
         "Name": "Commissar Yarrick",
@@ -269,7 +269,7 @@
         "Number": 27,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "CommissarYarrick-removebg-preview.png"
+        "Icon": "CommissarYarrick-removebg-preview.webp"
     },
     {
         "Name": "Kut Skoden",
@@ -290,7 +290,7 @@
         "Number": 28,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Kutskoden-removebg-preview.png"
+        "Icon": "Kutskoden-removebg-preview.webp"
     },
     {
         "Name": "Thaddeus Noble",
@@ -314,7 +314,7 @@
         "Number": 29,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Thaddeusnoble-removebg-preview.png"
+        "Icon": "Thaddeusnoble-removebg-preview.webp"
     },
     {
         "Name": "Castellan Creed",
@@ -334,7 +334,7 @@
         "Number": 30,
         "ForcedSummons": true,
         "RequiredInCampaign": false,
-        "Icon": "Castellancreed-removebg-preview.png"
+        "Icon": "Castellancreed-removebg-preview.webp"
     },
     {
         "Name": "Angrax",
@@ -356,7 +356,7 @@
         "Number": 6,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Angrax.png"
+        "Icon": "Angrax.webp"
     },
     {
         "Name": "Volk",
@@ -381,7 +381,7 @@
         "Number": 7,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "volk-removebg-preview.png"
+        "Icon": "volk-removebg-preview.webp"
     },
     {
         "Name": "Archimatos",
@@ -404,7 +404,7 @@
         "Number": 8,
         "ForcedSummons": true,
         "RequiredInCampaign": true,
-        "Icon": "archimatos.png"
+        "Icon": "archimatos.webp"
     },
     {
         "Name": "Haarken Worldclaimer",
@@ -425,7 +425,7 @@
         "Number": 9,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "HaarkenWorldclaimer-removebg-preview.png"
+        "Icon": "HaarkenWorldclaimer-removebg-preview.webp"
     },
     {
         "Name": "Abaddon The Despoiler",
@@ -449,7 +449,7 @@
         "Number": 10,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Abaddonthedespolier.png"
+        "Icon": "Abaddonthedespolier.webp"
     },
     {
         "Name": "Vindicta",
@@ -474,7 +474,7 @@
         "Number": 16,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Vindicta-removebg-preview.png"
+        "Icon": "Vindicta-removebg-preview.webp"
     },
     {
         "Name": "Isabella",
@@ -494,7 +494,7 @@
         "Number": 17,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Isabella-removebg-preview.png"
+        "Icon": "Isabella-removebg-preview.webp"
     },
     {
         "Name": "Morvenn Vahl",
@@ -519,7 +519,7 @@
         "Number": 18,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "MorvennVahl-removebg-preview.png"
+        "Icon": "MorvennVahl-removebg-preview.webp"
     },
     {
         "Name": "Roswitha",
@@ -543,7 +543,7 @@
         "Number": 19,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Roswitha-removebg-preview.png"
+        "Icon": "Roswitha-removebg-preview.webp"
     },
     {
         "Name": "Celestine",
@@ -564,7 +564,7 @@
         "Number": 20,
         "ForcedSummons": true,
         "RequiredInCampaign": false,
-        "Icon": "Celestine-removebg-preview.png"
+        "Icon": "Celestine-removebg-preview.webp"
     },
     {
         "Name": "Snotflogga",
@@ -585,7 +585,7 @@
         "Number": 11,
         "ForcedSummons": true,
         "RequiredInCampaign": true,
-        "Icon": "snotflogga-removebg-preview.png"
+        "Icon": "snotflogga-removebg-preview.webp"
     },
     {
         "Name": "Gibbascrapz",
@@ -605,7 +605,7 @@
         "Number": 12,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Gibbascrapz-removebg-preview.png"
+        "Icon": "Gibbascrapz-removebg-preview.webp"
     },
     {
         "Name": "Snappawrecka",
@@ -629,7 +629,7 @@
         "Number": 13,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Snappawrecka-removebg-preview.png"
+        "Icon": "Snappawrecka-removebg-preview.webp"
     },
     {
         "Name": "Tanksmasha",
@@ -651,7 +651,7 @@
         "Number": 14,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Tanksmasha-removebg-preview.png"
+        "Icon": "Tanksmasha-removebg-preview.webp"
     },
     {
         "Name": "Boss Gulgortz",
@@ -675,7 +675,7 @@
         "Number": 15,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "BossGulgortz-removebg-preview.png"
+        "Icon": "BossGulgortz-removebg-preview.webp"
     },
     {
         "Name": "Sword Brother Godswyl",
@@ -696,7 +696,7 @@
         "Number": 36,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "sbg-removebg-preview.png"
+        "Icon": "sbg-removebg-preview.webp"
     },
     {
         "Name": "Brother Burchard",
@@ -721,7 +721,7 @@
         "Number": 37,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "brotherBurchard-removebg-preview.png"
+        "Icon": "brotherBurchard-removebg-preview.webp"
     },
     {
         "Name": "Ancient Thoread",
@@ -741,7 +741,7 @@
         "Number": 38,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "AncientThoread.png"
+        "Icon": "AncientThoread.webp"
     },
     {
         "Name": "Brother Jaeger",
@@ -762,7 +762,7 @@
         "Number": 39,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "brotherJaeger-removebg-preview.png"
+        "Icon": "brotherJaeger-removebg-preview.webp"
     },
     {
         "Name": "High Marshal Helbrecht",
@@ -785,7 +785,7 @@
         "Number": 40,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "HighMarshalHelbrecht-removebg-preview.png"
+        "Icon": "HighMarshalHelbrecht-removebg-preview.webp"
     },
     {
         "Name": "Typhus",
@@ -810,7 +810,7 @@
         "Number": 31,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Typhus-removebg-preview.png"
+        "Icon": "Typhus-removebg-preview.webp"
     },
     {
         "Name": "Maladus",
@@ -832,7 +832,7 @@
         "Number": 32,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Maladus-removebg-preview.png"
+        "Icon": "Maladus-removebg-preview.webp"
     },
     {
         "Name": "Nauseous Rotbone",
@@ -852,7 +852,7 @@
         "Number": 33,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Nauseousrotbone-removebg-preview.png"
+        "Icon": "Nauseousrotbone-removebg-preview.webp"
     },
     {
         "Name": "Pestillian",
@@ -874,7 +874,7 @@
         "Number": 34,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Pestillian-removebg-preview.png"
+        "Icon": "Pestillian-removebg-preview.webp"
     },
     {
         "Name": "Corrodius",
@@ -895,7 +895,7 @@
         "Number": 35,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Corrodius-removebg-preview.png"
+        "Icon": "Corrodius-removebg-preview.webp"
     },
     {
         "Name": "Calandis",
@@ -919,7 +919,7 @@
         "Number": 41,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Calandis-removebg-preview.png"
+        "Icon": "Calandis-removebg-preview.webp"
     },
     {
         "Name": "Aethana",
@@ -940,7 +940,7 @@
         "Number": 42,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Aethana.png"
+        "Icon": "Aethana.webp"
     },
     {
         "Name": "Eldryon",
@@ -964,7 +964,7 @@
         "Number": 43,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "eldryon-removebg-preview.png"
+        "Icon": "eldryon-removebg-preview.webp"
     },
     {
         "Name": "Maugan Ra",
@@ -988,7 +988,7 @@
         "Number": 44,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Maugan_Ra-removebg-preview.png"
+        "Icon": "Maugan_Ra-removebg-preview.webp"
     },
     {
         "Name": "Jain Zar",
@@ -1009,7 +1009,7 @@
         "Number": 45,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Jain_Zar-removebg-preview.png"
+        "Icon": "Jain_Zar-removebg-preview.webp"
     },
     {
         "Name": "Sho'Syl",
@@ -1033,7 +1033,7 @@
         "Number": 48,
         "ForcedSummons": true,
         "RequiredInCampaign": false,
-        "Icon": "sho_syl-removebg-preview.png"
+        "Icon": "sho_syl-removebg-preview.webp"
     },
     {
         "Name": "Re'Vas",
@@ -1057,7 +1057,7 @@
         "Number": 49,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "re_vas-removebg-preview.png"
+        "Icon": "re_vas-removebg-preview.webp"
     },
     {
         "Name": "Darkstrider",
@@ -1080,7 +1080,7 @@
         "Number": 50,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "darkstrider-removebg-preview.png"
+        "Icon": "darkstrider-removebg-preview.webp"
     },
     {
         "Name": "Aun'Shi",
@@ -1100,7 +1100,7 @@
         "Number": 51,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Aun-shi.png"
+        "Icon": "Aun-shi.webp"
     },
     {
         "Name": "Shadowsun",
@@ -1124,7 +1124,7 @@
         "Number": 52,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "ShadowSun.png",
+        "Icon": "ShadowSun.webp",
         "ReleaseRarity": 5
     },
     {
@@ -1147,7 +1147,7 @@
         "Number": 46,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Ulf.png"
+        "Icon": "Ulf.webp"
     },
     {
         "Name": "Tjark",
@@ -1168,7 +1168,7 @@
         "Number": 47,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Tjark.png"
+        "Icon": "Tjark.webp"
     },
     {
         "Name": "Azrael",
@@ -1193,7 +1193,7 @@
         "Number": 53,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Azrael-removebg-preview.png"
+        "Icon": "Azrael-removebg-preview.webp"
     },
     {
         "Name": "Arjac",
@@ -1214,7 +1214,7 @@
         "Number": 54,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "arjac.png"
+        "Icon": "arjac.webp"
     },
     {
         "Name": "Yazaghor",
@@ -1238,7 +1238,7 @@
         "Number": 55,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Yazaghor.png"
+        "Icon": "Yazaghor.webp"
     },
     {
         "Name": "Toth",
@@ -1262,7 +1262,7 @@
         "Number": 56,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "toth.png"
+        "Icon": "toth.webp"
     },
     {
         "Name": "Abraxas",
@@ -1287,7 +1287,7 @@
         "Number": 57,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
-        "Icon": "Abraxas.png"
+        "Icon": "Abraxas.webp"
     },
     {
         "Name": "Thaumachus",
@@ -1310,7 +1310,7 @@
         "Number": 58,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Thaumachus-removebg-preview.png"
+        "Icon": "Thaumachus-removebg-preview.webp"
     },
     {
         "Name": "Sarquael",
@@ -1335,7 +1335,7 @@
         "Number": 59,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Sarquael.png"
+        "Icon": "Sarquael.webp"
     },
     {
         "Name": "Neurothrope",
@@ -1360,7 +1360,7 @@
         "Number": 60,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Neurothrope-removebg-preview.png"
+        "Icon": "Neurothrope-removebg-preview.webp"
     },
     {
         "Name": "Ahriman",
@@ -1384,7 +1384,7 @@
         "Number": 61,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Ahriman.png"
+        "Icon": "Ahriman.webp"
     },
     {
         "Name": "Tyrant Guard",
@@ -1405,7 +1405,7 @@
         "Number": 62,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "TyrantGuard.png"
+        "Icon": "TyrantGuard.webp"
     },
     {
         "Name": "Winged Tyrant Prime",
@@ -1425,7 +1425,7 @@
         "Number": 63,
         "ForcedSummons": true,
         "RequiredInCampaign": false,
-        "Icon": "Winged_Prime.png"
+        "Icon": "Winged_Prime.webp"
     },
     {
         "Name": "Deathleaper",
@@ -1446,7 +1446,7 @@
         "Number": 64,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Deathleaper.png"
+        "Icon": "Deathleaper.webp"
     },
     {
         "Name": "Njal Stormcaller",
@@ -1469,7 +1469,7 @@
         "Number": 65,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Njal.png"
+        "Icon": "Njal.webp"
     },
     {
         "Name": "Ragnar Blackmane",
@@ -1490,7 +1490,7 @@
         "Number": 66,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Ragnar.png",
+        "Icon": "Ragnar.webp",
         "ReleaseRarity": 6
     },
     {
@@ -1515,7 +1515,7 @@
         "Number": 67,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "vitruvius.png",
+        "Icon": "vitruvius.webp",
         "ReleaseRarity": 6
     },
     {
@@ -1539,7 +1539,7 @@
         "Number": 68,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "actus.png"
+        "Icon": "actus.webp"
     },
     {
         "Name": "Tan Gi'Da",
@@ -1563,7 +1563,7 @@
         "Number": 69,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "tanGida.png"
+        "Icon": "tanGida.webp"
     },
     {
         "Name": "Exitor-Rho",
@@ -1584,7 +1584,7 @@
         "Number": 70,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "exitor-rho.png"
+        "Icon": "exitor-rho.webp"
     },
     {
         "Name": "Wrask",
@@ -1605,7 +1605,7 @@
         "Number": 71,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "wrask.png",
+        "Icon": "wrask.webp",
         "ReleaseRarity": 2
     }
 ]
