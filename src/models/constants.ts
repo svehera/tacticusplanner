@@ -231,6 +231,7 @@ export const defaultData: IPersonalData2 = {
         showPower: true,
         showCharacterLevel: true,
         showCharacterRarity: true,
+        inventoryShowAlphabet: true,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,

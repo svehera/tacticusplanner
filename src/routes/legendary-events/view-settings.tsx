@@ -177,6 +177,12 @@ const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
             value: viewPreferences.craftableItemsInInventory,
             disabled: false,
         },
+        {
+            label: 'Show alphabet',
+            key: 'inventoryShowAlphabet',
+            value: viewPreferences.inventoryShowAlphabet,
+            disabled: false,
+        },
     ];
 
     return (

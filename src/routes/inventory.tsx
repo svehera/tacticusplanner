@@ -15,6 +15,8 @@ import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 
 import './inventory.scss';
+import { FlexBox } from 'src/v2/components/flex-box';
+import { Conditional } from 'src/v2/components/conditional';
 
 interface ITableRow {
     material: string;
@@ -25,6 +27,7 @@ interface ITableRow {
     quantity: number;
     iconPath: string;
     faction: string;
+    alphabet: string;
 }
 
 export const Inventory = () => {
@@ -48,8 +51,9 @@ export const Inventory = () => {
                     iconPath: x.icon ?? '',
                     faction: x.faction ?? '',
                     visible: true,
+                    alphabet: (x.label ?? x.material)[0].toUpperCase(),
                 })),
-            ['rarity', 'faction', 'material'],
+            ['rarity', 'material', 'faction'],
             ['desc', 'asc', 'asc']
         );
     }, []);
@@ -66,7 +70,11 @@ export const Inventory = () => {
         return map(groupBy(itemsList.filter(filterItem), 'rarity'), (items, rarity) => ({
             label: Rarity[+rarity],
             rarity: +rarity,
-            items,
+            items: map(groupBy(items, 'alphabet'), (subItems, letter) => ({
+                letter,
+                subItems,
+            })),
+            itemsAll: items,
         }));
     }, [filterItem]);
 
@@ -91,6 +99,27 @@ export const Inventory = () => {
             });
         }
     };
+
+    const renderRow = (data: ITableRow) => (
+        <div key={data.material} className="inventory-item">
+            <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />
+            <Input
+                style={{ justifyContent: 'center' }}
+                value={data.quantity}
+                size="small"
+                onFocus={event => event.target.select()}
+                onChange={event => handleInputChange(event, data)}
+                inputProps={{
+                    step: 1,
+                    min: 0,
+                    max: 1000,
+                    type: 'number',
+                    style: { width: data.quantity.toString().length * 10 },
+                    className: 'item-quantity-input',
+                }}
+            />
+        </div>
+    );
 
     return (
         <>
@@ -136,26 +165,18 @@ export const Inventory = () => {
                             <RarityImage rarity={group.rarity} /> {group.label}
                         </h2>
                         <article className="inventory-items">
-                            {group.items.map(data => (
-                                <div key={data.material} className="inventory-item">
-                                    <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />
-                                    <Input
-                                        style={{ justifyContent: 'center' }}
-                                        value={data.quantity}
-                                        size="small"
-                                        onFocus={event => event.target.select()}
-                                        onChange={event => handleInputChange(event, data)}
-                                        inputProps={{
-                                            step: 1,
-                                            min: 0,
-                                            max: 1000,
-                                            type: 'number',
-                                            style: { width: data.quantity.toString().length * 10 },
-                                            className: 'item-quantity-input',
-                                        }}
-                                    />
-                                </div>
-                            ))}
+                            <Conditional condition={viewPreferences.inventoryShowAlphabet}>
+                                {group.items.map(group => (
+                                    <FlexBox key={group.letter} gap={10} alignItems="unset">
+                                        <div className="letter">{group.letter}</div>
+                                        {group.subItems.map(renderRow)}
+                                    </FlexBox>
+                                ))}
+                            </Conditional>
+
+                            <Conditional condition={!viewPreferences.inventoryShowAlphabet}>
+                                {group.itemsAll.map(renderRow)}
+                            </Conditional>
                         </article>
                     </section>
                 ))

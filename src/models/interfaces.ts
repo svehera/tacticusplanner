@@ -338,6 +338,7 @@ export interface IViewPreferences {
     showPower: boolean;
     showCharacterLevel: boolean;
     showCharacterRarity: boolean;
+    inventoryShowAlphabet: boolean;
 }
 
 export interface IAutoTeamsPreferences {
