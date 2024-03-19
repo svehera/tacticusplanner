@@ -3,9 +3,12 @@
     "releaseNotes": [
         {
             "version": "1.4.3",
-            "date": "March X",
+            "date": "March 20",
             "type": "Update",
             "new": [
+                {
+                    "text": "New thank you card for SeventhSun's contribution"
+                },
                 {
                     "text": "Added \"Rank Point Five\" toggle when setting/editing an upgrade rank goal (Edward H)",
                     "subPoints": [
@@ -29,7 +32,7 @@
                     ]
                 },
                 {
-                    "text": "Added \"Show alphabet\" toggle on the Inventory page",
+                    "text": "Added \"Show alphabet\" toggle on the Inventory page (Adj)",
                     "images": [
                         {
                             "path": "alpha.png"
@@ -37,7 +40,7 @@
                     ]
                 },
                 {
-                    "text": "Added XP Books calculations to a goals cards",
+                    "text": "Added XP Books calculations to a goals cards (Tornagides)",
                     "images": [
                         {
                             "path": "xp.png"
