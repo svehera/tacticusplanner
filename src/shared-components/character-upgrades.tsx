@@ -45,6 +45,7 @@ export const CharacterUpgrades = ({
             rankStart: character.rank,
             rankEnd: character.rank + 1,
             appliedUpgrades: [],
+            rankPoint5: false,
         });
     }, [character.rank]);
 
@@ -93,6 +94,7 @@ export const CharacterUpgrades = ({
                 rankStart: formData.originalRank,
                 rankEnd: character.rank,
                 appliedUpgrades: formData.originalUpgrades,
+                rankPoint5: false,
             });
             upgradesToConsider = [...previousRankUpgrades, ...newUpgrades];
         }

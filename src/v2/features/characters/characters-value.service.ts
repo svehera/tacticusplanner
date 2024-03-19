@@ -93,6 +93,7 @@ export class CharactersValueService {
             rankStart: Rank.Stone1,
             rankEnd: currentRank,
             appliedUpgrades: appliedUpgrades,
+            rankPoint5: false,
         });
 
         const result: IMaterialRecipeIngredientFull[] = StaticDataService.groupBaseMaterials(upgrades, true);
