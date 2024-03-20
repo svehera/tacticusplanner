@@ -71,6 +71,7 @@ export const RankLookup = () => {
             rankStart,
             rankEnd,
             appliedUpgrades: [],
+            rankPoint5: false,
         });
     }, [character?.name, rankStart, rankEnd]);
 

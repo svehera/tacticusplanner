@@ -37,9 +37,8 @@ const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
 
     const renderOption = (option: IViewOption) => {
         return (
-            <Tooltip title={option.tooltip}>
+            <Tooltip title={option.tooltip} key={option.key}>
                 <FormControlLabel
-                    key={option.key}
                     label={option.label}
                     control={
                         <Switch
@@ -91,8 +90,6 @@ const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
             disabled: viewPreferences.showGamma && !viewPreferences.showAlpha && !viewPreferences.showBeta,
         },
     ];
-
-    const lreSections = <></>;
 
     const lreOptions: IViewOption[] = [
         {
@@ -178,6 +175,12 @@ const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
             label: 'Show craftable items',
             key: 'craftableItemsInInventory',
             value: viewPreferences.craftableItemsInInventory,
+            disabled: false,
+        },
+        {
+            label: 'Show alphabet',
+            key: 'inventoryShowAlphabet',
+            value: viewPreferences.inventoryShowAlphabet,
             disabled: false,
         },
     ];

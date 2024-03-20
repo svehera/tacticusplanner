@@ -13,9 +13,11 @@ import { rarityToMaxRank, rarityToMaxStars } from '../../models/constants';
 export const CharacterDetails = ({
     character,
     characterChanges,
+    updateInventoryChanges,
 }: {
     character: ICharacter2;
-    characterChanges: (character: ICharacter2, updateInventory: IMaterialRecipeIngredientFull[]) => void;
+    characterChanges: (character: ICharacter2) => void;
+    updateInventoryChanges: (updateInventory: IMaterialRecipeIngredientFull[]) => void;
 }) => {
     const [formData, setFormData] = useState({
         rank: character.rank,
@@ -34,7 +36,7 @@ export const CharacterDetails = ({
             ...formData,
             [name]: value,
         });
-        characterChanges({ ...character, [name]: saveValue ?? value }, []);
+        characterChanges({ ...character, [name]: saveValue ?? value });
     };
 
     const maxRank = useMemo(() => {
@@ -234,7 +236,8 @@ export const CharacterDetails = ({
                     <CharacterUpgrades
                         character={character}
                         upgradesChanges={(upgrades, updateInventory) => {
-                            characterChanges({ ...character, upgrades: upgrades }, updateInventory);
+                            characterChanges({ ...character, upgrades: upgrades });
+                            updateInventoryChanges(updateInventory);
                         }}
                     />
                 </React.Fragment>

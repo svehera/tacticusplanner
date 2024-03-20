@@ -410,6 +410,15 @@ export class StaticDataService {
                 })
                 .filter(x => !!x);
 
+            // eslint-disable-next-line no-constant-condition
+            if (character.rankPoint5) {
+                const lastRankUpgrades = characterUpgrades[rankToString(character.rankEnd)];
+                if (lastRankUpgrades) {
+                    const rankPoint5Upgrades = lastRankUpgrades.filter((_, index) => (index + 1) % 2 !== 0);
+                    rankUpgrades.push(...rankPoint5Upgrades);
+                }
+            }
+
             if (!rankUpgrades.length) {
                 continue;
             }
@@ -733,6 +742,8 @@ export class StaticDataService {
             day.energyLeft = energyLeft;
             if (day.raids.length) {
                 resultDays.push(day);
+            } else {
+                break;
             }
 
             iteration++;

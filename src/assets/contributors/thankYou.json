@@ -38,5 +38,13 @@
         "resourceDescription": "",
         "resourceLink": "",
         "avatarIcon": "leonaica.webp"
+    },
+    {
+        "name": "SeventhSun",
+        "type": "Contributor",
+        "thankYou": "Thank you for finding nasty bugs and suggesting decent features",
+        "resourceDescription": "",
+        "resourceLink": "",
+        "avatarIcon": "seventhSun.webp"
     }
 ]

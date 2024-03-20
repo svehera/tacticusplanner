@@ -60,10 +60,8 @@ export const CharacterItemDialog = (props: { character: ICharacter2; isOpen: boo
             <DialogContent style={{ paddingTop: 20 }}>
                 <CharacterDetails
                     character={character}
-                    characterChanges={(character, updateInventory) => {
-                        setCharacter(character);
-                        setInventoryUpdate(updateInventory);
-                    }}
+                    updateInventoryChanges={setInventoryUpdate}
+                    characterChanges={setCharacter}
                 />
             </DialogContent>
             <DialogActions>

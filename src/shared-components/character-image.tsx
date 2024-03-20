@@ -1,32 +1,10 @@
 ﻿import React from 'react';
 import { getImageUrl } from '../shared-logic/functions';
 
-export const CharacterImage = ({
-    icon,
-    name,
-    imageSize,
-    portrait,
-}: {
-    icon: string;
-    name?: string;
-    imageSize?: number;
-    portrait?: boolean;
-}) => {
-    const iconPath = portrait ? 'portraits/webp' : 'characters';
-    const replaceExtenstion = portrait ? icon.replace('.png', '.webp') : icon;
-    const unset = portrait ? 'unset.webp' : 'unset.png';
+export const CharacterImage = ({ icon, name, imageSize }: { icon: string; name?: string; imageSize?: number }) => {
+    const imageUrl = getImageUrl(`characters/${icon.replace('.webp', '.png')}`);
 
-    const imageUrl = getImageUrl(`${iconPath}/${replaceExtenstion}`);
-
-    return portrait ? (
-        <img
-            loading={'lazy'}
-            style={{ pointerEvents: 'none', contentVisibility: 'auto' }}
-            src={imageUrl}
-            width={60}
-            alt={name ?? icon}
-        />
-    ) : (
+    return (
         <img
             loading={'lazy'}
             style={{ pointerEvents: 'none', borderRadius: '50%' }}

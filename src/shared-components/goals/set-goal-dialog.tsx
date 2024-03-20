@@ -5,9 +5,11 @@ import {
     DialogContent,
     DialogTitle,
     FormControl,
+    FormControlLabel,
     Input,
     MenuItem,
     Select,
+    Switch,
     TextField,
 } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -19,7 +21,6 @@ import { PersonalGoalType, Rank, Rarity } from 'src/models/enums';
 import InputLabel from '@mui/material/InputLabel';
 import { getEnumValues, rankToString } from 'src/shared-logic/functions';
 import { RankImage } from '../rank-image';
-import { Tooltip } from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { CharactersAutocomplete } from '../characters-autocomplete';
@@ -29,6 +30,10 @@ import { CharacterTitle } from '../character-title';
 import { isEqual } from 'lodash';
 import { CharacterUpgrades } from '../character-upgrades';
 import { rarityToMaxRank } from 'src/models/constants';
+import { Conditional } from 'src/v2/components/conditional';
+import { Info } from '@mui/icons-material';
+import { FlexBox } from 'src/v2/components/flex-box';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
 const getDefaultForm = (priority: number): IPersonalGoal => ({
     id: v4(),
@@ -39,6 +44,7 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
     priority,
     upgrades: [],
     dailyRaids: true,
+    rankPoint5: false,
 });
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
@@ -47,6 +53,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     const dispatch = useContext(DispatchContext);
 
     const [openDialog, setOpenDialog] = React.useState(false);
+    const [ignoreRankRarity, setIgnoreRankRarity] = React.useState(false);
     const [character, setCharacter] = React.useState<ICharacter2 | null>(null);
 
     const [form, setForm] = useState<IPersonalGoal>(() => getDefaultForm(goals.length + 1));
@@ -92,14 +99,14 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     );
 
     const maxRank = useMemo(() => {
-        return rarityToMaxRank[character?.rarity ?? 0];
-    }, [character?.rarity]);
+        return ignoreRankRarity ? Rank.Diamond3 : rarityToMaxRank[character?.rarity ?? 0];
+    }, [character?.rarity, ignoreRankRarity]);
 
     const rankValues = useMemo(() => {
         const result = getEnumValues(Rank).filter(x => x > 0 && (!character || x >= character.rank) && x <= maxRank);
         setForm(curr => ({ ...curr, targetRank: result[0] }));
         return result;
-    }, [character]);
+    }, [character, maxRank]);
 
     const targetRankSelector = (
         <FormControl style={{ marginTop: 20 }} fullWidth>
@@ -127,7 +134,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         switch (form.type) {
             case PersonalGoalType.Ascend:
             case PersonalGoalType.UpgradeRank: {
-                return characters.filter(x => x.rank > Rank.Locked);
+                return ignoreRankRarity ? characters : characters.filter(x => x.rank > Rank.Locked);
             }
             case PersonalGoalType.Unlock: {
                 return characters.filter(x => x.rank === Rank.Locked);
@@ -136,18 +143,18 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 return characters;
             }
         }
-    }, [form.type]);
+    }, [form.type, ignoreRankRarity]);
 
     return (
         <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <Tooltip title={disableNewGoals ? 'You can have only 20 goals at the same time' : ''}>
+                <AccessibleTooltip title={disableNewGoals ? 'You can have only 20 goals at the same time' : ''}>
                     <span>
                         <Button variant={'contained'} disabled={disableNewGoals} onClick={() => setOpenDialog(true)}>
                             Set Goal
                         </Button>
                     </span>
-                </Tooltip>
+                </AccessibleTooltip>
             </div>
 
             <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
@@ -160,6 +167,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                         id="set-goal-form"
                         style={{ padding: 20 }}
                         onSubmit={event => event.preventDefault()}>
+                        <Conditional condition={[PersonalGoalType.UpgradeRank].includes(form.type)}>
+                            <IgnoreRankRarity value={ignoreRankRarity} onChange={setIgnoreRankRarity} />
+                        </Conditional>
                         <FormControl style={{ marginTop: 20 }} fullWidth>
                             <InputLabel id="goal-type-label">Goal Type</InputLabel>
                             <Select<PersonalGoalType>
@@ -210,7 +220,14 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             </Select>
                         </FormControl>
 
-                        {character && form.type === PersonalGoalType.UpgradeRank ? targetRankSelector : undefined}
+                        <Conditional condition={!!character && form.type === PersonalGoalType.UpgradeRank}>
+                            {targetRankSelector}
+                            <RankPoint5
+                                value={!!form.rankPoint5}
+                                onChange={rankPoint5 => setForm(curr => ({ ...curr, rankPoint5 }))}
+                            />
+                        </Conditional>
+
                         {character && form.type === PersonalGoalType.Ascend ? targetRaritySelector : undefined}
                         {character &&
                         (form.type === PersonalGoalType.Unlock || form.type === PersonalGoalType.Ascend) ? (
@@ -273,7 +290,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                     <Button
                         disabled={
                             !character ||
-                            (form.type === PersonalGoalType.UpgradeRank && character.rank === form.targetRank) ||
+                            (form.type === PersonalGoalType.UpgradeRank &&
+                                character.rank === form.targetRank &&
+                                !form.rankPoint5) ||
                             (form.type === PersonalGoalType.Ascend && character.rarity === form.targetRarity)
                         }
                         onClick={() => handleClose({ ...form, character: character?.name ?? '' })}>
@@ -361,7 +380,7 @@ export const EditGoalDialog = ({
     }, [form.targetRarity]);
 
     const maxRank = useMemo(() => {
-        return rarityToMaxRank[character?.rarity ?? 0];
+        return Math.max(rarityToMaxRank[character?.rarity ?? 0], form.targetRank ?? 0);
     }, [character?.rarity]);
 
     const targetRankValues = useMemo(() => {
@@ -419,6 +438,10 @@ export const EditGoalDialog = ({
                                     valueChanges={value => setForm(curr => ({ ...curr, targetRank: value }))}
                                 />
                             </div>
+                            <RankPoint5
+                                value={!!form.rankPoint5}
+                                onChange={rankPoint5 => setForm(curr => ({ ...curr, rankPoint5 }))}
+                            />
                             <CharacterUpgrades
                                 character={character}
                                 upgradesChanges={(upgrades, updateInventory) => {
@@ -532,5 +555,57 @@ export const EditGoalDialog = ({
                 </Button>
             </DialogActions>
         </Dialog>
+    );
+};
+
+export const RankPoint5: React.FC<{
+    value: boolean;
+    onChange: (value: boolean) => void;
+}> = ({ value, onChange }) => {
+    return (
+        <FlexBox>
+            <FormControlLabel
+                label="Rank Point Five"
+                control={
+                    <Switch
+                        checked={value}
+                        onChange={event => onChange(event.target.checked)}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+            />
+            <AccessibleTooltip
+                title={
+                    'When you reach a target upgrade rank, you are immediately able to apply the top row of three upgrades.\r\nIf you toggle on this switch then these upgrades will be included in your daily raids plan.'
+                }>
+                <Info color="primary" />
+            </AccessibleTooltip>
+        </FlexBox>
+    );
+};
+
+export const IgnoreRankRarity: React.FC<{
+    value: boolean;
+    onChange: (value: boolean) => void;
+}> = ({ value, onChange }) => {
+    return (
+        <FlexBox>
+            <FormControlLabel
+                label="Ignore Rank/Rarity restrictions"
+                control={
+                    <Switch
+                        checked={value}
+                        onChange={event => onChange(event.target.checked)}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+            />
+            <AccessibleTooltip
+                title={
+                    'If you toggle on this switch then you will be able to set Upgrade Rank goal for a character you have not unlocked or ascended to required rarity yet'
+                }>
+                <Info color="primary" />
+            </AccessibleTooltip>
+        </FlexBox>
     );
 };

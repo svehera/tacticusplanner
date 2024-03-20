@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
+﻿import React, { useCallback, useContext, useMemo, useState } from 'react';
 
 import { FormControl, Input, InputAdornment } from '@mui/material';
 import { StaticDataService } from '../services';
@@ -15,6 +15,8 @@ import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 
 import './inventory.scss';
+import { FlexBox } from 'src/v2/components/flex-box';
+import { Conditional } from 'src/v2/components/conditional';
 
 interface ITableRow {
     material: string;
@@ -25,6 +27,7 @@ interface ITableRow {
     quantity: number;
     iconPath: string;
     faction: string;
+    alphabet: string;
 }
 
 export const Inventory = () => {
@@ -32,6 +35,7 @@ export const Inventory = () => {
     const { inventory, viewPreferences } = useContext(StoreContext);
 
     const [nameFilter, setNameFilter] = useState<string>('');
+    const [nameFilterRaw, setNameFilterRaw] = useState<string>('');
 
     const itemsList = useMemo<ITableRow[]>(() => {
         return orderBy(
@@ -47,30 +51,34 @@ export const Inventory = () => {
                     iconPath: x.icon ?? '',
                     faction: x.faction ?? '',
                     visible: true,
+                    alphabet: (x.label ?? x.material)[0].toUpperCase(),
                 })),
-            ['rarity', 'faction', 'material'],
+            viewPreferences.inventoryShowAlphabet
+                ? ['rarity', 'material', 'faction']
+                : ['rarity', 'faction', 'material'],
             ['desc', 'asc', 'asc']
         );
-    }, []);
+    }, [viewPreferences.inventoryShowAlphabet]);
+
+    const filterItem = useCallback(
+        (item: ITableRow) =>
+            (item.material.toLowerCase().includes(nameFilter.toLowerCase()) ||
+                item.label.toLowerCase().includes(nameFilter.toLowerCase())) &&
+            (viewPreferences.craftableItemsInInventory || !item.craftable),
+        [nameFilter, viewPreferences.craftableItemsInInventory]
+    );
 
     const itemsGrouped = useMemo(() => {
-        return map(
-            groupBy(
-                itemsList.filter(
-                    item =>
-                        (item.material.toLowerCase().includes(nameFilter.toLowerCase()) ||
-                            item.label.toLowerCase().includes(nameFilter.toLowerCase())) &&
-                        (viewPreferences.craftableItemsInInventory || !item.craftable)
-                ),
-                'rarity'
-            ),
-            (items, rarity) => ({
-                label: Rarity[+rarity],
-                rarity: +rarity,
-                items,
-            })
-        );
-    }, [nameFilter, viewPreferences.craftableItemsInInventory]);
+        return map(groupBy(itemsList.filter(filterItem), 'rarity'), (items, rarity) => ({
+            label: Rarity[+rarity],
+            rarity: +rarity,
+            items: map(groupBy(items, 'alphabet'), (subItems, letter) => ({
+                letter,
+                subItems,
+            })),
+            itemsAll: items,
+        }));
+    }, [itemsList, filterItem]);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, data: ITableRow) => {
         const value = event.target.value === '' ? 0 : Number(event.target.value);
@@ -94,6 +102,27 @@ export const Inventory = () => {
         }
     };
 
+    const renderRow = (data: ITableRow) => (
+        <div key={data.material} className="inventory-item">
+            <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />
+            <Input
+                style={{ justifyContent: 'center' }}
+                value={data.quantity}
+                size="small"
+                onFocus={event => event.target.select()}
+                onChange={event => handleInputChange(event, data)}
+                inputProps={{
+                    step: 1,
+                    min: 0,
+                    max: 1000,
+                    type: 'number',
+                    style: { width: data.quantity.toString().length * 10 },
+                    className: 'item-quantity-input',
+                }}
+            />
+        </div>
+    );
+
     return (
         <>
             <div className="inventory-controls">
@@ -101,12 +130,22 @@ export const Inventory = () => {
                     <InputLabel htmlFor="queick-filter-input">Quick Filter</InputLabel>
                     <OutlinedInput
                         id="queick-filter-input"
-                        value={nameFilter}
-                        onChange={change => setNameFilter(change.target.value)}
+                        value={nameFilterRaw}
+                        onFocus={event => event.target.select()}
+                        onChange={change => {
+                            const value = change.target.value;
+                            setNameFilterRaw(value);
+                            setTimeout(() => setNameFilter(value), value ? 50 : 0);
+                        }}
                         endAdornment={
                             nameFilter ? (
                                 <InputAdornment position="end">
-                                    <IconButton onClick={() => setNameFilter('')} edge="end">
+                                    <IconButton
+                                        onClick={() => {
+                                            setNameFilterRaw('');
+                                            setTimeout(() => setNameFilter(''), 0);
+                                        }}
+                                        edge="end">
                                         <ClearIcon />
                                     </IconButton>
                                 </InputAdornment>
@@ -128,26 +167,18 @@ export const Inventory = () => {
                             <RarityImage rarity={group.rarity} /> {group.label}
                         </h2>
                         <article className="inventory-items">
-                            {group.items.map(data => (
-                                <div key={data.material} className="inventory-item">
-                                    <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />
-                                    <Input
-                                        style={{ justifyContent: 'center' }}
-                                        value={data.quantity}
-                                        size="small"
-                                        onFocus={event => event.target.select()}
-                                        onChange={event => handleInputChange(event, data)}
-                                        inputProps={{
-                                            step: 1,
-                                            min: 0,
-                                            max: 1000,
-                                            type: 'number',
-                                            style: { width: data.quantity.toString().length * 10 },
-                                            className: 'item-quantity-input',
-                                        }}
-                                    />
-                                </div>
-                            ))}
+                            <Conditional condition={viewPreferences.inventoryShowAlphabet}>
+                                {group.items.map(group => (
+                                    <FlexBox key={group.letter} gap={10} alignItems="start">
+                                        <div className="letter">{group.letter}</div>
+                                        {group.subItems.map(renderRow)}
+                                    </FlexBox>
+                                ))}
+                            </Conditional>
+
+                            <Conditional condition={!viewPreferences.inventoryShowAlphabet}>
+                                {group.itemsAll.map(renderRow)}
+                            </Conditional>
                         </article>
                     </section>
                 ))

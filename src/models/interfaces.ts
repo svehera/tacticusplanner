@@ -338,6 +338,7 @@ export interface IViewPreferences {
     showPower: boolean;
     showCharacterLevel: boolean;
     showCharacterRarity: boolean;
+    inventoryShowAlphabet: boolean;
 }
 
 export interface IAutoTeamsPreferences {
@@ -412,6 +413,7 @@ export interface IPersonalGoal {
     currentRank?: Rank;
     targetRank?: Rank;
     notes?: string;
+    rankPoint5?: boolean;
     dailyRaids: boolean;
     upgrades: string[];
 }
@@ -689,6 +691,7 @@ export interface ICharacterRankRange {
     rankStart: Rank;
     rankEnd: Rank;
     appliedUpgrades: string[];
+    rankPoint5: boolean;
 }
 
 export interface IEstimatedRanks {

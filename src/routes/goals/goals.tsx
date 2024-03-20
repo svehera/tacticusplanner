@@ -20,7 +20,13 @@ import IconButton from '@mui/material/IconButton';
 import { ArrowForward, DeleteForever, Edit, Info } from '@mui/icons-material';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { StaticDataService } from '../../services';
-import { charsProgression, charsUnlockShards, fullCampaignsProgress, rarityToStars } from '../../models/constants';
+import {
+    charsProgression,
+    charsUnlockShards,
+    fullCampaignsProgress,
+    rankToLevel,
+    rarityToStars,
+} from '../../models/constants';
 import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { CampaignImage } from '../../shared-components/campaign-image';
@@ -28,6 +34,9 @@ import { enqueueSnackbar } from 'notistack';
 import Button from '@mui/material/Button';
 import { MiscIcon } from '../../shared-components/misc-icon';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { FlexBox } from 'src/v2/components/flex-box';
 
 export const Goals = () => {
     const { goals, characters, campaignsProgress, dailyRaidsPreferences, inventory, dailyRaids } =
@@ -48,6 +57,7 @@ export const Goals = () => {
                         rankStart: char.rank,
                         rankEnd: g.targetRank!,
                         appliedUpgrades: char.upgrades,
+                        rankPoint5: !!g.rankPoint5,
                     } as ICharacterRankRange;
                 }
                 return null;
@@ -155,7 +165,11 @@ export const GoalCard = ({
     const character = characters.find(x => x.name === goal.character) as ICharacter2;
     const isGoalCompleted = useMemo(() => {
         return (
-            (goal.type === PersonalGoalType.UpgradeRank && character.rank >= goal.targetRank!) ||
+            (goal.type === PersonalGoalType.UpgradeRank &&
+                ((!goal.rankPoint5 && character.rank >= goal.targetRank!) ||
+                    (goal.rankPoint5 &&
+                        (character.rank > goal.targetRank! ||
+                            (character.rank === goal.targetRank! && character.upgrades.length >= 3))))) ||
             (goal.type === PersonalGoalType.Ascend && character.rarity >= goal.targetRarity!) ||
             (goal.type === PersonalGoalType.Unlock && character.rank > Rank.Locked)
         );
@@ -215,6 +229,7 @@ export const GoalCard = ({
                         rankStart: char.rank,
                         rankEnd: g.targetRank!,
                         appliedUpgrades: char.upgrades,
+                        rankPoint5: !!g.rankPoint5,
                     } as ICharacterRankRange;
                 }
             })
@@ -237,6 +252,7 @@ export const GoalCard = ({
                     rankStart: character.rank,
                     rankEnd: goal.targetRank!,
                     appliedUpgrades: character.upgrades,
+                    rankPoint5: !!goal.rankPoint5,
                 },
             ]
         );
@@ -257,6 +273,35 @@ export const GoalCard = ({
     nextDate.setDate(nextDate.getDate() + estimatedDays.total + daysOrTokensLeft);
 
     const formattedDate = formatDateWithOrdinal(nextDate);
+
+    let xpElement: React.ReactElement = <></>;
+
+    if (goal.type === PersonalGoalType.UpgradeRank) {
+        const targetLevel = rankToLevel[((goal.targetRank ?? 1) - 1) as Rank];
+        const xpEstimate = CharactersXpService.getLegendaryTomesCount(character, targetLevel);
+
+        if (xpEstimate) {
+            xpElement = (
+                <FlexBox gap={5}>
+                    <span>(XP) Codex of War: {xpEstimate.legendaryBooks}</span>
+                    <AccessibleTooltip
+                        title={
+                            <span>
+                                Current level: {xpEstimate.currentLevel}
+                                <br />
+                                Target level: {xpEstimate.targetLevel}
+                                <br />
+                                Gold: {xpEstimate.gold}
+                                <br />
+                                XP left: {xpEstimate.xpLeft}
+                            </span>
+                        }>
+                        <Info color="primary" />
+                    </AccessibleTooltip>
+                </FlexBox>
+            );
+        }
+    }
 
     return (
         <Card
@@ -296,6 +341,7 @@ export const GoalCard = ({
                         <div style={{ display: 'flex', gap: 2, alignItems: 'center' }}>
                             <RankImage rank={character.rank} /> <ArrowForward />{' '}
                             <RankImage rank={goal.targetRank ?? 0} />
+                            {goal.rankPoint5 && '.5'}
                         </div>
                         {isGoalCompleted ? undefined : (
                             <>
@@ -310,6 +356,7 @@ export const GoalCard = ({
                                 </Tooltip>
                                 <br />
                                 <span className="italic">{formattedDate}</span>
+                                {xpElement}
                             </>
                         )}
                     </div>
@@ -557,7 +604,7 @@ const RaidItem = ({ material, location }: { material: IMaterialRaid; location: I
                 />
                 <Tooltip title={isDisabled ? '' : "Update character's shards"}>
                     <span>
-                        <Button size={'small'} onClick={handleAdd} disabled={isLocationCompleted}>
+                        <Button size={'small'} onClick={handleAdd} disabled={isDisabled}>
                             {isLocationUnlocked ? 'Add' : 'Unlock'}
                         </Button>
                     </span>
