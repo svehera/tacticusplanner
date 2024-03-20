@@ -33,8 +33,7 @@ export class CharactersXpService {
             return null;
         }
 
-        const xpLeft =
-            targetLevelTotalXp.totalXp - currentLevelTotalXp.xpToNextLevel - currentLevelTotalXp.totalXp - character.xp;
+        const xpLeft = targetLevelTotalXp.totalXp - currentLevelTotalXp.totalXp - character.xp;
 
         if (xpLeft <= 0) {
             return null;
