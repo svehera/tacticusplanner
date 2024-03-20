@@ -415,7 +415,11 @@ export class StaticDataService {
                 const lastRankUpgrades = characterUpgrades[rankToString(character.rankEnd)];
                 if (lastRankUpgrades) {
                     const rankPoint5Upgrades = lastRankUpgrades.filter((_, index) => (index + 1) % 2 !== 0);
-                    rankUpgrades.push(...rankPoint5Upgrades);
+                    if (character.rankStart === character.rankEnd) {
+                        rankUpgrades.push(...rankPoint5Upgrades.filter(x => !character.appliedUpgrades.includes(x)));
+                    } else {
+                        rankUpgrades.push(...rankPoint5Upgrades);
+                    }
                 }
             }
 
