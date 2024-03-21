@@ -10,6 +10,7 @@ export interface IGWSection {
 }
 
 export interface IGWTeam {
+    id: string;
     sectionId: string;
     lineup: string[];
 }

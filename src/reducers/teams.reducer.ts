@@ -20,7 +20,9 @@ export const teamsReducer = (state: IPersonalTeams, action: TeamsAction): IPerso
         }
         case 'AddOrUpdateGWTeam': {
             const { team } = action;
-            const existingTeamIndex = state.guildWar.teams.findIndex(x => x.sectionId === x.sectionId);
+            const existingTeamIndex = state.guildWar.teams.findIndex(
+                x => x.id === team.id && x.sectionId === team.sectionId
+            );
 
             if (existingTeamIndex >= 0) {
                 state.guildWar.teams[existingTeamIndex].lineup = team.lineup;
