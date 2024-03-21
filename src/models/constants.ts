@@ -334,6 +334,7 @@ export const defaultData: IPersonalData2 = {
     },
     teams: {
         guildWar: {
+            battlefieldLevel: 1,
             teams: [],
         },
     },

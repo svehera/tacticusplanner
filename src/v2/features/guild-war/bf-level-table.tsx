@@ -10,7 +10,6 @@ import { FlexBox } from 'src/v2/components/flex-box';
 import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { sum } from 'lodash';
 export const BfLevelTable = ({ rows }: { rows: IGWSection[] }) => {
-    const bfLevels = Object.keys(rows[0].rarityCaps);
     const [columnDefs] = useState<Array<ColDef>>([
         {
             field: 'name',
@@ -22,20 +21,20 @@ export const BfLevelTable = ({ rows }: { rows: IGWSection[] }) => {
             headerName: 'Score',
             width: 140,
         },
-        ...bfLevels.map(level => ({
-            headerName: level,
+        ...GuildWarService.gwData.bfLevels.map(level => ({
+            headerName: level + '',
             width: 150,
             valueGetter: (params: ValueGetterParams<IGWSection>) => {
                 const data = params.data!;
 
-                const rarityCaps = GuildWarService.getRarityCaps(+level, data.id);
+                const rarityCaps = GuildWarService.getRarityCaps(level, data.id);
 
                 return sum(rarityCaps);
             },
             cellRenderer: (params: ICellRendererParams<IGWSection>) => {
                 const data = params.data!;
 
-                const rarityCaps = GuildWarService.getRarityCaps(+level, data.id);
+                const rarityCaps = GuildWarService.getRarityCaps(level, data.id);
 
                 return (
                     <FlexBox gap={5}>

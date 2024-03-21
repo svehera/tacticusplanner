@@ -1,4 +1,5 @@
 ﻿export interface IGWData {
+    bfLevels: number[];
     sections: IGWSection[];
 }
 export interface IGWSection {
@@ -9,7 +10,6 @@ export interface IGWSection {
 }
 
 export interface IGWTeam {
-    battlefieldLevel: number;
     positionId: string;
     lineup: string[];
 }

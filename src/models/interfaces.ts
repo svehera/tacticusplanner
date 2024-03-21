@@ -288,6 +288,7 @@ export interface IPersonalData2 {
 
 export interface IPersonalTeams {
     guildWar: {
+        battlefieldLevel: number;
         teams: IGWTeam[];
     };
 }
