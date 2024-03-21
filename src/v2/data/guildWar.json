@@ -1,0 +1,100 @@
+﻿{
+    "sections": [
+        {
+            "id": "frontline",
+            "name": "Frontline",
+            "warScore": 10000,
+            "rarityCaps": {
+                "1": ["E", "R", "R", "U", "U"],
+                "2": ["E", "R", "R", "U", "U"],
+                "3": ["E", "R", "R", "U", "U"],
+                "4": ["L", "E", "R", "R", "R"],
+                "5": ["L", "E", "R", "R", "R"]
+            }
+        },
+        {
+            "id": "supplyDepot",
+            "name": "Supply Depot",
+            "warScore": 25000,
+            "rarityCaps": {
+                "1": ["E", "R", "R", "U", "U"],
+                "2": ["E", "R", "R", "U", "U"],
+                "3": ["L", "E", "R", "R", "R"],
+                "4": ["L", "E", "R", "R", "R"],
+                "5": ["L", "L", "E", "E", "E"]
+            }
+        },
+        {
+            "id": "artilleryPosition",
+            "name": "Artillery Position",
+            "warScore": 12000,
+            "rarityCaps": {
+                "1": ["E", "R", "R", "U", "U"],
+                "2": ["E", "R", "R", "U", "U"],
+                "3": ["E", "R", "R", "U", "U"],
+                "4": ["L", "E", "R", "R", "R"],
+                "5": ["L", "E", "R", "R", "R"]
+            }
+        },
+        {
+            "id": "antiAirBattery",
+            "name": "Anti-Air Battery",
+            "warScore": 12000,
+            "rarityCaps": {
+                "1": ["E", "R", "R", "U", "U"],
+                "2": ["E", "R", "R", "U", "U"],
+                "3": ["L", "E", "R", "R", "R"],
+                "4": ["L", "L", "E", "E", "E"],
+                "5": ["L", "L", "E", "E", "E"]
+            }
+        },
+        {
+            "id": "fortifiedPosition",
+            "name": "Fortified Position",
+            "warScore": 16000,
+            "rarityCaps": {
+                "1": ["E", "R", "R", "U", "U"],
+                "2": ["L", "E", "R", "R", "R"],
+                "3": ["L", "L", "E", "E", "E"],
+                "4": ["L", "L", "E", "E", "E"],
+                "5": ["L", "L", "L", "L", "L"]
+            }
+        },
+        {
+            "id": "voxStation",
+            "name": "Vox Station",
+            "warScore": 36000,
+            "rarityCaps": {
+                "1": ["E", "R", "R", "U", "U"],
+                "2": ["L", "E", "R", "R", "R"],
+                "3": ["L", "E", "R", "R", "R"],
+                "4": ["L", "L", "E", "E", "E"],
+                "5": ["L", "L", "E", "E", "E"]
+            }
+        },
+        {
+            "id": "medicaeStation",
+            "name": "Medicae Station",
+            "warScore": 12000,
+            "rarityCaps": {
+                "1": ["E", "R", "R", "U", "U"],
+                "2": ["E", "R", "R", "U", "U"],
+                "3": ["L", "E", "R", "R", "R"],
+                "4": ["L", "E", "R", "R", "R"],
+                "5": ["L", "E", "R", "R", "R"]
+            }
+        },
+        {
+            "id": "headQuarters",
+            "name": "Head Quarters",
+            "warScore": 40000,
+            "rarityCaps": {
+                "1": ["E", "R", "R", "U", "U"],
+                "2": ["L", "E", "R", "R", "R"],
+                "3": ["L", "L", "E", "E", "E"],
+                "4": ["L", "L", "E", "E", "E"],
+                "5": ["L", "L", "L", "L", "L"]
+            }
+        }
+    ]
+}
