@@ -14,7 +14,7 @@ export const InputRoutes = () => {
                     onClick={() => navigate(item.routeMobile)}
                     sx={{
                         width: 350,
-                        minHeight: 200,
+                        minHeight: 140,
                     }}>
                     <CardHeader
                         title={

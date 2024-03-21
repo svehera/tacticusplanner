@@ -19,7 +19,15 @@ import { WhatsNewDialog } from './shared-components/whats-new.dialog';
 import { DiscordIcon } from './shared-components/icons/discord.icon';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import ListItemText from '@mui/material/ListItemText';
-import { inputSubMenu, learnSubMenu, menuItemById, MenuItemTP, miscMenuItems, planSubMenu } from './models/menu-items';
+import {
+    inputSubMenu,
+    learnSubMenu,
+    menuItemById,
+    MenuItemTP,
+    miscMenuItems,
+    planSubMenu,
+    planSubMenuWeb,
+} from './models/menu-items';
 import IconButton from '@mui/material/IconButton';
 import { FlexBox } from 'src/v2/components/flex-box';
 
@@ -63,7 +71,7 @@ const TopAppBar = () => {
         <div style={{ display: 'flex', alignItems: 'center', marginInlineEnd: 20 }}>
             <AppBarSubMenu rootLabel={'Input'} options={inputSubMenu} />
 
-            <AppBarSubMenu rootLabel={'Plan'} options={planSubMenu} />
+            <AppBarSubMenu rootLabel={'Plan'} options={planSubMenuWeb} />
 
             <AppBarSubMenu rootLabel={'Learn'} options={learnSubMenu} />
         </div>

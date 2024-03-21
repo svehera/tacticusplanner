@@ -22,6 +22,7 @@ import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
 import { dirtyDozenMenuItem } from 'src/v2/pages/dirty-dozen/dirty-dozen.menu-item';
 import { insightsMenuItem } from 'src/v2/pages/insights/insights.menu-item';
 import { wyoMenuItem } from 'src/v2/pages/who-you-own/who-you-own.menu-item';
+import { guildWarMenuItem } from 'src/v2/pages/guild-war/guild-war.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -29,7 +30,8 @@ export class MenuItemTP {
         public icon: React.ReactNode,
         public routeWeb: string,
         public title: string = '',
-        public routeMobile: string = ''
+        public routeMobile: string = '',
+        public subMenu: MenuItemTP[] = []
     ) {
         this.routeMobile = '/mobile' + (routeMobile || routeWeb);
         this.title = title || label;
@@ -43,32 +45,31 @@ export const menuItemById = {
 
     goals: new MenuItemTP('Goals', <TrackChangesIcon />, '/plan/goals'),
     dailyRaids: new MenuItemTP('Daily Raids', <EventRepeatIcon />, '/plan/dailyRaids'),
-    leMasterTable: new MenuItemTP('LE Master Table', <TableChartIcon />, '/plan/leMasterTable'),
+    leMasterTable: new MenuItemTP('Master Table', <TableChartIcon />, '/plan/leMasterTable'),
     shadowsun: new MenuItemTP(
-        'Shadowsun LE',
+        'Shadowsun',
         <CharacterImage icon={'ShadowSun.png'} imageSize={24} />,
         '/plan/le/shadowsun',
         `Shadowsun ${shadowsun.eventStage}/3 (${shadowsun.nextEventDate})`
     ),
-    aunshi: new MenuItemTP(
-        'Aun Shi LE',
-        <CharacterImage icon={'Aun-shi.png'} imageSize={24} />,
-        '/plan/le/aunshi',
-        'Aun Shi (Finished)'
-    ),
     ragnar: new MenuItemTP(
-        'Ragnar LE',
+        'Ragnar',
         <CharacterImage icon={'Ragnar.png'} imageSize={24} />,
         '/plan/le/ragnar',
         `Ragnar ${ragnar.eventStage}/3 (${ragnar.nextEventDate})`
     ),
     vitruvius: new MenuItemTP(
-        'Vitruvius LE',
+        'Vitruvius',
         <CharacterImage icon={'vitruvius.png'} imageSize={24} />,
         '/plan/le/vitruvius',
         `Vitruvius ${vitruvius.eventStage}/3 (${vitruvius.nextEventDate})`
     ),
-
+    aunshi: new MenuItemTP(
+        'Aun Shi',
+        <CharacterImage icon={'Aun-shi.png'} imageSize={24} />,
+        '/plan/le/aunshi',
+        'Aun Shi (Finished)'
+    ),
     characters: new MenuItemTP('Characters', <Diversity3Icon />, '/learn/characters'),
     upgrades: new MenuItemTP('Upgrades', <ListIcon />, '/learn/upgrades'),
     rankLookup: new MenuItemTP('Rank Lookup', <MilitaryTechIcon />, '/learn/rankLookup'),
@@ -80,6 +81,7 @@ export const menuItemById = {
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
     ty: new MenuItemTP('Thank You', <HealthAndSafetyIcon />, '/ty', 'Thank You Page'),
     faq: faqMenuItem,
+    guildWar: guildWarMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -88,14 +90,28 @@ export const inputSubMenu: MenuItemTP[] = [
     menuItemById['inventory'],
 ];
 
+export const planSubMenuWeb: MenuItemTP[] = [
+    menuItemById['goals'],
+    menuItemById['dailyRaids'],
+    menuItemById['guildWar'],
+    new MenuItemTP('LRE', <HealthAndSafetyIcon />, '/ty', 'Thank You Page', '', [
+        menuItemById['leMasterTable'],
+        menuItemById['shadowsun'],
+        menuItemById['ragnar'],
+        menuItemById['vitruvius'],
+        menuItemById['aunshi'],
+    ]),
+];
+
 export const planSubMenu: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
+    menuItemById['guildWar'],
+    menuItemById['leMasterTable'],
     menuItemById['shadowsun'],
-    menuItemById['aunshi'],
     menuItemById['ragnar'],
     menuItemById['vitruvius'],
-    menuItemById['leMasterTable'],
+    menuItemById['aunshi'],
 ];
 
 export const learnSubMenu: MenuItemTP[] = [
