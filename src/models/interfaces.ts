@@ -32,6 +32,7 @@ import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
 import { IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
+import { TeamsAction } from 'src/reducers/teams.reducer';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -263,6 +264,7 @@ export interface IDispatchContext {
     goals: React.Dispatch<GoalsAction>;
     inventory: React.Dispatch<InventoryAction>;
     dailyRaids: React.Dispatch<DailyRaidsAction>;
+    teams: React.Dispatch<TeamsAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
