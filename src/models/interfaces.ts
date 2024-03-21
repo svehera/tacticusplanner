@@ -31,6 +31,7 @@ import { InventoryAction } from '../reducers/inventory.reducer';
 import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
+import { IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -246,6 +247,7 @@ export interface IGlobalState {
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
     dailyRaids: IDailyRaids;
+    teams: IPersonalTeams;
 }
 
 export interface IDispatchContext {
@@ -281,6 +283,13 @@ export interface IPersonalData2 {
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
     dailyRaids: IDailyRaids;
+    teams: IPersonalTeams;
+}
+
+export interface IPersonalTeams {
+    guildWar: {
+        teams: IGWTeam[];
+    };
 }
 
 export interface IDailyRaids {

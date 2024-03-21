@@ -21,6 +21,7 @@ import { AxiosError } from 'axios';
 import { IErrorResponse } from '../api/api-interfaces';
 import { isEqual } from 'lodash';
 import { DispatchContext, StoreContext } from './store.provider';
+import { teamsReducer } from 'src/reducers/teams.reducer';
 
 export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const { isAuthenticated, setUser, logout } = useAuth();
@@ -72,6 +73,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
     const [inventory, dispatchInventory] = React.useReducer(inventoryReducer, globalState.inventory);
     const [dailyRaids, dispatchDailyRaids] = React.useReducer(dailyRaidsReducer, globalState.dailyRaids);
+    const [teams, dispatchTeams] = React.useReducer(teamsReducer, globalState.teams);
 
     function wrapDispatch<T>(dispatch: React.Dispatch<T>): React.Dispatch<T> {
         return (action: T) => {
@@ -97,6 +99,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             campaignsProgress: wrapDispatch(dispatchCampaignsProgress),
             inventory: wrapDispatch(dispatchInventory),
             dailyRaids: wrapDispatch(dispatchDailyRaids),
+            teams: wrapDispatch(dispatchTeams),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 dispatchCharacters({ type: 'Set', value: data.characters });
                 dispatchGoals({ type: 'Set', value: data.goals });
@@ -110,6 +113,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 dispatchCampaignsProgress({ type: 'Set', value: data.campaignsProgress });
                 dispatchInventory({ type: 'Set', value: data.inventory });
                 dispatchDailyRaids({ type: 'Set', value: data.dailyRaids });
+                dispatchTeams({ type: 'Set', value: data.teams });
 
                 if (modified) {
                     setModified(true);
@@ -135,6 +139,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchLeProgress,
             dispatchCampaignsProgress,
             dispatchDailyRaidsPreferences,
+            dispatchTeams,
             setGlobalState,
         ]
     );
@@ -159,6 +164,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dailyRaidsPreferences,
             inventory,
             dailyRaids,
+            teams,
         };
         const storeValue = GlobalState.toStore(newValue);
 

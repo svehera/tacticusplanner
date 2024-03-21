@@ -332,6 +332,11 @@ export const defaultData: IPersonalData2 = {
     inventory: {
         upgrades: {},
     },
+    teams: {
+        guildWar: {
+            teams: [],
+        },
+    },
 };
 
 export const killPointsIndex = 0;
