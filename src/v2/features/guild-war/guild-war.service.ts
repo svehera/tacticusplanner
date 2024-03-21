@@ -5,6 +5,8 @@ import { Rarity, RarityString } from 'src/models/enums';
 export class GuildWarService {
     static readonly gwData: IGWData = guildWarData;
 
+    static readonly defaultSection = guildWarData.sections[0].id;
+
     static readonly defaultRarityCaps = [
         Rarity.Legendary,
         Rarity.Legendary,
