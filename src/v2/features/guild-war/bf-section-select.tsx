@@ -6,17 +6,17 @@ import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 type Props = {
     value: string;
     valueChange: (value: string) => void;
-    potential: number;
+    bfLevel: number;
 };
 
-export const BfSectionSelect: React.FC<Props> = ({ value, valueChange, potential }) => {
+export const BfSectionSelect: React.FC<Props> = ({ value, valueChange, bfLevel }) => {
     return (
-        <FormControl style={{ width: 220 }}>
+        <FormControl style={{ width: 240 }}>
             <InputLabel>Section</InputLabel>
             <Select<string> label="Section" value={value} onChange={event => valueChange(event.target.value)}>
                 {GuildWarService.gwData.sections.map(section => (
                     <MenuItem key={section.id} value={section.id}>
-                        {potential} - {section.name}
+                        {section.rarityCaps[bfLevel].complexity} - {section.name}
                     </MenuItem>
                 ))}
             </Select>

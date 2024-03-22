@@ -1,20 +1,23 @@
 ﻿import React, { ReactElement } from 'react';
 import { ICharacter2 } from 'src/models/interfaces';
 import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { unsetCharacter } from 'src/v2/features/characters/characters.contants';
 
 import './team.scss';
+import { Conditional } from 'src/v2/components/conditional';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 
 type Props = {
     characters: ICharacter2[];
     teamName: string;
     size?: 5 | 7;
     teamIcon?: ReactElement;
+    teamBenchmark?: ReactElement;
     teamColor?: string;
 };
 
-export const Team: React.FC<Props> = ({ characters, size = 5, teamColor, teamIcon, teamName }) => {
-    const unsetCharacter = CharactersService.unsetCharacter as ICharacter2;
+export const Team: React.FC<Props> = ({ characters, size = 5, teamColor, teamIcon, teamBenchmark, teamName }) => {
+    const fallbackCharacter = unsetCharacter as ICharacter2;
 
     return (
         <div className="team">
@@ -23,6 +26,9 @@ export const Team: React.FC<Props> = ({ characters, size = 5, teamColor, teamIco
                     {teamIcon}
                     <span>{teamName.toUpperCase()}</span>
                 </div>
+                <Conditional condition={!!teamBenchmark}>
+                    <div className="team-benchmark">{teamBenchmark}</div>
+                </Conditional>
             </h4>
             <div className="team-characters-box">
                 {Array.from({ length: size }, (_, i) => {
@@ -32,7 +38,9 @@ export const Team: React.FC<Props> = ({ characters, size = 5, teamColor, teamIco
                         return <CharacterTile key={char.name} character={char} />;
                     }
 
-                    return <CharacterTile key={unsetCharacter.name + i} character={unsetCharacter} disableClick />;
+                    return (
+                        <CharacterTile key={fallbackCharacter.name + i} character={fallbackCharacter} disableClick />
+                    );
                 })}
             </div>
         </div>

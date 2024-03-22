@@ -13,6 +13,7 @@ import { RagnarLegendaryEvent } from './legendary-events/ragnar.le';
 import { VitruviusLegendaryEvent } from './legendary-events/vitruvius.le';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
+import { v4 } from 'uuid';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,
@@ -335,7 +336,10 @@ export const defaultData: IPersonalData2 = {
     teams: {
         guildWar: {
             battlefieldLevel: 1,
-            teams: [],
+            teams: Array.from({ length: 5 }, (_, i) => ({
+                id: v4(),
+                lineup: [],
+            })),
             sectionId: 'frontline',
         },
     },

@@ -1,7 +1,7 @@
 ﻿import { groupBy, orderBy, sum } from 'lodash';
 
 import { ICharacter2 } from 'src/models/interfaces';
-import { Rank, Rarity, RarityStars } from 'src/models/enums';
+import { Rank, Rarity } from 'src/models/enums';
 import { CharactersFilterBy } from './enums/characters-filter-by';
 import { needToAscendCharacter } from './functions/need-to-ascend';
 import { needToLevelCharacter } from './functions/need-to-level';
@@ -14,18 +14,9 @@ import { IFaction } from './characters.models';
 import factionsData from 'src/v2/data/factions.json';
 import { CharactersPowerService } from './characters-power.service';
 import { CharactersValueService } from './characters-value.service';
+import { rarityCaps } from 'src/v2/features/characters/characters.contants';
 
 export class CharactersService {
-    static readonly unsetCharacter: Partial<ICharacter2> = {
-        name: 'Unset',
-        icon: 'unset.webp',
-        rank: Rank.Stone1,
-        upgrades: [],
-        stars: RarityStars.None,
-        rarity: Rarity.Common,
-        level: 1,
-    };
-
     static filterCharacters(
         characters: ICharacter2[],
         filterBy: CharactersFilterBy,
@@ -125,5 +116,35 @@ export class CharactersService {
             default:
                 return result;
         }
+    }
+
+    static capCharacterAtRarity(character: ICharacter2, rarity: Rarity): ICharacter2 {
+        const capped = rarityCaps[rarity];
+
+        return {
+            ...character,
+            rarity: Math.min(character.rarity, capped.rarity),
+            rank: Math.min(character.rank, capped.rank),
+            stars: Math.min(character.stars, capped.stars),
+            activeAbilityLevel: Math.min(character.activeAbilityLevel, capped.abilitiesLevel),
+            passiveAbilityLevel: Math.min(character.passiveAbilityLevel, capped.abilitiesLevel),
+        };
+    }
+
+    static calculateCharacterPotential(character: ICharacter2, rarityCap: Rarity): number {
+        const capped = rarityCaps[rarityCap];
+
+        // Calculate potential based on properties
+        const rarityPotential = (character.rarity / capped.rarity) * 100;
+        const rankPotential = (character.rank / capped.rank) * 100;
+        const starsPotential = (character.stars / capped.stars) * 100;
+        const activeAbilityPotential = (character.activeAbilityLevel / capped.abilitiesLevel) * 100;
+        const passiveAbilityPotential = (character.passiveAbilityLevel / capped.abilitiesLevel) * 100;
+
+        // Calculate average potential
+        const averagePotential =
+            (rarityPotential + rankPotential + starsPotential + activeAbilityPotential + passiveAbilityPotential) / 5;
+
+        return Math.round(averagePotential); // Round potential to the nearest whole number
     }
 }
