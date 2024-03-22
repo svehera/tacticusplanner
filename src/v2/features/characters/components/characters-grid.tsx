@@ -19,7 +19,7 @@ export const CharactersGrid = ({ characters }: { characters: ICharacter2[] }) =>
         .map(char => <CharacterTile key={char.name} character={char} />);
     return (
         <div>
-            <h4>Unlocked ({unlockedCharacters.length})</h4>
+            <h4>Available ({unlockedCharacters.length})</h4>
             <div className="characters-box mixed">{unlockedCharacters}</div>
 
             <Conditional condition={!!lockedCharacters.length}>

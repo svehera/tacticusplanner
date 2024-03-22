@@ -126,6 +126,7 @@ export class CharactersService {
             rarity: Math.min(character.rarity, capped.rarity),
             rank: Math.min(character.rank, capped.rank),
             stars: Math.min(character.stars, capped.stars),
+            level: Math.min(character.level, capped.abilitiesLevel),
             activeAbilityLevel: Math.min(character.activeAbilityLevel, capped.abilitiesLevel),
             passiveAbilityLevel: Math.min(character.passiveAbilityLevel, capped.abilitiesLevel),
         };
@@ -133,7 +134,6 @@ export class CharactersService {
 
     static calculateCharacterPotential(character: ICharacter2, rarityCap: Rarity): number {
         const capped = rarityCaps[rarityCap];
-
         // Calculate potential based on properties
         const rarityPotential = (character.rarity / capped.rarity) * 100;
         const rankPotential = (character.rank / capped.rank) * 100;

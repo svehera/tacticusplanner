@@ -212,7 +212,12 @@ export interface ILegendaryEventTrackRequirement {
 }
 
 export type ITableRow<T = ICharacter2 | string> = Record<string, T>;
-export type ICharacter2 = IUnitData & IPersonalCharacterData2 & { numberOfUnlocked?: number };
+export type ICharacter2 = IUnitData & IPersonalCharacterData2 & DynamicProps;
+
+type DynamicProps = {
+    numberOfUnlocked?: number;
+    potential?: number;
+};
 
 export interface IPersonalData {
     version?: undefined;

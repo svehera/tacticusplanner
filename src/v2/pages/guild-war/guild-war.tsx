@@ -14,10 +14,11 @@ import { CharacterItemDialog } from 'src/shared-components/character-item-dialog
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { SelectTeamDialog } from 'src/v2/features/characters/components/select-team-dialog';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { sum } from 'lodash';
+import { orderBy, sum } from 'lodash';
 import InfoIcon from '@mui/icons-material/Info';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { PotentialInfo } from 'src/v2/features/characters/components/potential-info';
+import { Rank, Rarity } from 'src/models/enums';
 
 export const GuildWar = () => {
     const { teams, characters, viewPreferences } = useContext(StoreContext);
@@ -25,6 +26,7 @@ export const GuildWar = () => {
 
     const [openSelectTeamDialog, setOpenSelectTeamDialog] = React.useState(false);
     const [editedTeamId, setEditedTeamId] = React.useState<string | null>(null);
+    const [editedTeamRarityCap, setEditedTeamRarityCap] = React.useState<Rarity>(Rarity.Legendary);
     const [editedLineup, setEditedLineup] = React.useState<ICharacter2[] | null>(null);
 
     const [openCharacterItemDialog, setOpenCharacterItemDialog] = React.useState(false);
@@ -48,8 +50,9 @@ export const GuildWar = () => {
         setOpenCharacterItemDialog(false);
     };
 
-    const startEditTeam = (teamId: string, lineup: ICharacter2[]): void => {
+    const startEditTeam = (teamId: string, lineup: ICharacter2[], rarity: Rarity): void => {
         setEditedTeamId(teamId);
+        setEditedTeamRarityCap(rarity);
         setEditedLineup(lineup);
         setOpenSelectTeamDialog(true);
     };
@@ -61,6 +64,7 @@ export const GuildWar = () => {
                 team: { id: editedTeamId, lineup: team.map(x => x.name) },
             });
         }
+        setEditedTeamRarityCap(Rarity.Legendary);
         setEditedTeamId(null);
         setEditedLineup(null);
         setOpenSelectTeamDialog(false);
@@ -86,10 +90,7 @@ export const GuildWar = () => {
         return teamsWithCharacters.map((team, teamIndex) => {
             const lineup = team.lineup.map(x => ({
                 id: x.name,
-                potential: CharactersService.calculateCharacterPotential(
-                    CharactersService.capCharacterAtRarity(x, rarityCaps[teamIndex]),
-                    rarityCaps[teamIndex]
-                ),
+                potential: CharactersService.calculateCharacterPotential(x, rarityCaps[teamIndex]),
             }));
 
             return {
@@ -130,11 +131,29 @@ export const GuildWar = () => {
                             </FlexBox>
                         }
                     />
-                    <EditIcon onClick={() => startEditTeam(currTeam?.id, lineup)} />
+                    <EditIcon onClick={() => startEditTeam(currTeam?.id, lineup, rarityCaps[i])} />
                 </FlexBox>
             );
         });
     }, [rarityCaps, teams.guildWar.teams, teamsPotential]);
+
+    const getCharactersWithPotential = (rarityCap: Rarity, currentTeamId: string) => {
+        const blockedCharacters = teamsWithCharacters
+            .filter(x => x.id !== currentTeamId)
+            .flatMap(x => x.lineup)
+            .map(x => x.name);
+        return orderBy(
+            characters
+                .filter(x => x.rank > Rank.Locked && !blockedCharacters.includes(x.name))
+                .map(x => CharactersService.capCharacterAtRarity(x, rarityCap))
+                .map(x => ({
+                    ...x,
+                    potential: CharactersService.calculateCharacterPotential(x, rarityCap),
+                })),
+            'potential',
+            'desc'
+        );
+    };
 
     return (
         <FlexBox style={{ flexDirection: 'column', gap: 30 }}>
@@ -178,7 +197,7 @@ export const GuildWar = () => {
                         isOpen={openSelectTeamDialog}
                         team={editedLineup!}
                         onClose={endEditTeam}
-                        characters={characters}
+                        characters={getCharactersWithPotential(editedTeamRarityCap, editedTeamId!)}
                     />
                 </Conditional>
             </CharactersViewContext.Provider>
