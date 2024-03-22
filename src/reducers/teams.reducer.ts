@@ -11,6 +11,10 @@ export type TeamsAction =
           type: 'UpdateBfLevel';
           battlefieldLevel: number;
       }
+    | {
+          type: 'UpdateBfSection';
+          sectionId: string;
+      }
     | SetStateAction<IPersonalTeams>;
 
 export const teamsReducer = (state: IPersonalTeams, action: TeamsAction): IPersonalTeams => {
@@ -20,9 +24,7 @@ export const teamsReducer = (state: IPersonalTeams, action: TeamsAction): IPerso
         }
         case 'AddOrUpdateGWTeam': {
             const { team } = action;
-            const existingTeamIndex = state.guildWar.teams.findIndex(
-                x => x.id === team.id && x.sectionId === team.sectionId
-            );
+            const existingTeamIndex = state.guildWar.teams.findIndex(x => x.id === team.id);
 
             if (existingTeamIndex >= 0) {
                 state.guildWar.teams[existingTeamIndex].lineup = team.lineup;
@@ -51,6 +53,17 @@ export const teamsReducer = (state: IPersonalTeams, action: TeamsAction): IPerso
                 guildWar: {
                     ...state.guildWar,
                     battlefieldLevel,
+                },
+            };
+        }
+        case 'UpdateBfSection': {
+            const { sectionId } = action;
+
+            return {
+                ...state,
+                guildWar: {
+                    ...state.guildWar,
+                    sectionId,
                 },
             };
         }

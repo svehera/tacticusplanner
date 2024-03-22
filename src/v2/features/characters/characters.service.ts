@@ -1,7 +1,7 @@
 ﻿import { groupBy, orderBy, sum } from 'lodash';
 
 import { ICharacter2 } from 'src/models/interfaces';
-import { Rank } from 'src/models/enums';
+import { Rank, Rarity, RarityStars } from 'src/models/enums';
 import { CharactersFilterBy } from './enums/characters-filter-by';
 import { needToAscendCharacter } from './functions/need-to-ascend';
 import { needToLevelCharacter } from './functions/need-to-level';
@@ -16,6 +16,16 @@ import { CharactersPowerService } from './characters-power.service';
 import { CharactersValueService } from './characters-value.service';
 
 export class CharactersService {
+    static readonly unsetCharacter: Partial<ICharacter2> = {
+        name: 'Unset',
+        icon: 'unset.webp',
+        rank: Rank.Stone1,
+        upgrades: [],
+        stars: RarityStars.None,
+        rarity: Rarity.Common,
+        level: 1,
+    };
+
     static filterCharacters(
         characters: ICharacter2[],
         filterBy: CharactersFilterBy,

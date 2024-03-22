@@ -15,13 +15,10 @@ import './character-tile.css';
 import { Conditional } from 'src/v2/components/conditional';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 
-export const CharacterTile = ({
-    character,
-    onClick,
-}: {
-    character: ICharacter2;
-    onClick?: (character: ICharacter2) => void;
-}) => {
+export const CharacterTile = ({ character, disableClick }: { character: ICharacter2; disableClick?: boolean }) => {
+    const { showBadges, showAbilities, showCharacterLevel, showCharacterRarity, onCharacterClick } =
+        useContext(CharactersViewContext);
+
     const isUnlocked = character.rank > Rank.Locked;
     const isReleased = !character.releaseRarity;
     const unlockShards = isReleased
@@ -30,8 +27,6 @@ export const CharacterTile = ({
     const unlockProgress = (character.shards / unlockShards) * 100;
     const hasAbilities = (isUnlocked && character.activeAbilityLevel) || character.passiveAbilityLevel;
     const needToAscend = useMemo(() => needToAscendCharacter(character), [character.rarity, character.rank]);
-
-    const { showBadges, showAbilities, showCharacterLevel, showCharacterRarity } = useContext(CharactersViewContext);
 
     const needToLevel = useMemo(
         () => needToLevelCharacter(character),
@@ -53,8 +48,8 @@ export const CharacterTile = ({
     return (
         <div
             className="character-tile"
-            style={{ opacity: isUnlocked ? 1 : 0.5, cursor: onClick ? 'pointer' : undefined }}
-            onClick={onClick ? () => onClick(character) : undefined}>
+            style={{ opacity: isUnlocked ? 1 : 0.5, cursor: onCharacterClick && !disableClick ? 'pointer' : undefined }}
+            onClick={onCharacterClick && !disableClick ? () => onCharacterClick(character) : undefined}>
             <StarsImage stars={character.stars} />
             <div>
                 <Tooltip title={character.name} placement={'top'}>

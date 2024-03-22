@@ -8,20 +8,15 @@ import { Rank } from 'src/models/enums';
 import { CharacterTile } from './character-tile';
 
 import './characters-grid.scss';
-export const CharactersGrid = ({
-    characters,
-    onCharacterClick,
-}: {
-    characters: ICharacter2[];
-    onCharacterClick?: (character: ICharacter2) => void;
-}) => {
+
+export const CharactersGrid = ({ characters }: { characters: ICharacter2[] }) => {
     const unlockedCharacters = characters
         .filter(x => x.rank > Rank.Locked)
-        .map(char => <CharacterTile key={char.name} character={char} onClick={onCharacterClick} />);
+        .map(char => <CharacterTile key={char.name} character={char} />);
 
     const lockedCharacters = characters
         .filter(x => x.rank === Rank.Locked)
-        .map(char => <CharacterTile key={char.name} character={char} onClick={onCharacterClick} />);
+        .map(char => <CharacterTile key={char.name} character={char} />);
     return (
         <div>
             <h4>Unlocked ({unlockedCharacters.length})</h4>

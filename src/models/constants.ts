@@ -336,6 +336,7 @@ export const defaultData: IPersonalData2 = {
         guildWar: {
             battlefieldLevel: 1,
             teams: [],
+            sectionId: 'frontline',
         },
     },
 };

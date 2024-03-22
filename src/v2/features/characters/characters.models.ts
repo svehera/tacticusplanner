@@ -28,4 +28,5 @@ export interface ICharactersContext {
     showPower: boolean;
     showCharacterLevel: boolean;
     showCharacterRarity: boolean;
+    onCharacterClick?: (character: ICharacter2) => void;
 }
