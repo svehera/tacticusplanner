@@ -90,7 +90,10 @@ export const GuildWar = () => {
         return teamsWithCharacters.map((team, teamIndex) => {
             const lineup = team.lineup.map(x => ({
                 id: x.name,
-                potential: CharactersService.calculateCharacterPotential(x, rarityCaps[teamIndex]),
+                potential: CharactersService.calculateCharacterPotential(
+                    CharactersService.capCharacterAtRarity(x, rarityCaps[teamIndex]),
+                    rarityCaps[teamIndex]
+                ),
             }));
 
             return {
