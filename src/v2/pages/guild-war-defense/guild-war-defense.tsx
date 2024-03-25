@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo } from 'react';
+﻿import React, { useContext, useEffect, useMemo } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
@@ -20,6 +20,9 @@ import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { PotentialInfo } from 'src/v2/features/characters/components/potential-info';
 import { Rank, Rarity } from 'src/models/enums';
 import { GuildWarTeamType, IGWTeamWithCharacters } from 'src/v2/features/guild-war/guild-war.models';
+import { Card, CardActions, CardContent, CardHeader } from '@mui/material';
+import { getCompletionRateColor } from 'src/shared-logic/functions';
+import Button from '@mui/material/Button';
 
 export const GuildWarDefense = () => {
     const { guildWar, characters, viewPreferences } = useContext(StoreContext);
@@ -27,22 +30,29 @@ export const GuildWarDefense = () => {
 
     const [openSelectTeamDialog, setOpenSelectTeamDialog] = React.useState(false);
     const [editedTeam, setEditedTeam] = React.useState<IGWTeamWithCharacters | null>(null);
-    const [editedTeamRarityCap, setEditedTeamRarityCap] = React.useState<Rarity>(Rarity.Legendary);
 
     const [openCharacterItemDialog, setOpenCharacterItemDialog] = React.useState(false);
     const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
 
+    useEffect(() => {
+        const rarityCaps = GuildWarService.getRarityCaps(guildWar.battlefieldLevel, guildWar.sectionId);
+        dispatch.guildWar({ type: 'UpdateDefenseRarityCaps', rarityCaps });
+    }, [guildWar.sectionId, guildWar.battlefieldLevel]);
+
     const updateBfLevel = (battlefieldLevel: number) => {
-        dispatch.teams({ type: 'UpdateBfLevel', battlefieldLevel });
+        dispatch.guildWar({ type: 'UpdateBfLevel', battlefieldLevel });
     };
 
     const updateBfSection = (sectionId: string) => {
-        dispatch.teams({ type: 'UpdateBfSection', sectionId });
+        dispatch.guildWar({ type: 'UpdateBfSection', sectionId });
     };
 
     const startEditCharacter = (character: ICharacter2): void => {
-        setEditedCharacter(character);
-        setOpenCharacterItemDialog(true);
+        const originalChar = characters.find(x => x.name === character.name);
+        if (originalChar) {
+            setEditedCharacter(originalChar);
+            setOpenCharacterItemDialog(true);
+        }
     };
 
     const endEditCharacter = (): void => {
@@ -50,29 +60,30 @@ export const GuildWarDefense = () => {
         setOpenCharacterItemDialog(false);
     };
 
-    const startEditTeam = (team: IGWTeamWithCharacters, rarity: Rarity): void => {
+    const startEditTeam = (team: IGWTeamWithCharacters): void => {
         setEditedTeam(team);
-        setEditedTeamRarityCap(rarity);
         setOpenSelectTeamDialog(true);
+    };
+
+    const clearTeam = (teamId: string): void => {
+        dispatch.guildWar({
+            type: 'ClearTeamLineup',
+            teamId,
+        });
     };
 
     const endEditTeam = (team?: ICharacter2[]): void => {
         if (team && editedTeam) {
-            dispatch.teams({
+            dispatch.guildWar({
                 type: 'UpdateTeam',
                 teamId: editedTeam.id,
                 lineup: team.map(x => x.name),
-                rarityCap: Rarity.Legendary,
+                rarityCap: editedTeam.rarityCap,
             });
         }
-        setEditedTeamRarityCap(Rarity.Legendary);
         setEditedTeam(null);
         setOpenSelectTeamDialog(false);
     };
-
-    const rarityCaps = useMemo(() => {
-        return GuildWarService.getRarityCaps(guildWar.battlefieldLevel, guildWar.sectionId);
-    }, [guildWar.sectionId, guildWar.battlefieldLevel]);
 
     const teamsWithCharacters = useMemo<IGWTeamWithCharacters[]>(() => {
         return guildWar.teams
@@ -88,8 +99,8 @@ export const GuildWarDefense = () => {
             const lineup = team.lineup.map(x => ({
                 id: x.name,
                 potential: CharactersService.calculateCharacterPotential(
-                    CharactersService.capCharacterAtRarity(x, rarityCaps[teamIndex]),
-                    rarityCaps[teamIndex]
+                    CharactersService.capCharacterAtRarity(x, team.rarityCap),
+                    team.rarityCap
                 ),
             }));
 
@@ -100,53 +111,33 @@ export const GuildWarDefense = () => {
         });
     }, [guildWar.sectionId, guildWar.battlefieldLevel, guildWar.teams, teamsWithCharacters]);
 
-    const renderTeams = useMemo(() => {
-        return teamsWithCharacters.map((currTeam, i) => {
-            return (
-                <FlexBox key={i} gap={5}>
-                    <Team
-                        teamName={currTeam.name}
-                        characters={currTeam.lineup}
-                        teamIcon={<RarityImage rarity={rarityCaps[i]} />}
-                        teamBenchmark={
-                            <FlexBox gap={5}>
-                                {teamsPotential[i].total}{' '}
-                                <AccessibleTooltip
-                                    title={
-                                        <>
-                                            <p>Team potential breakdown:</p>
-                                            <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                                                {teamsPotential[i].lineup.map(char => (
-                                                    <span key={char.id}>
-                                                        {char.potential} - {char.id}
-                                                    </span>
-                                                ))}
-                                            </FlexBox>
-                                        </>
-                                    }>
-                                    <InfoIcon color="primary" />
-                                </AccessibleTooltip>
-                            </FlexBox>
-                        }
-                    />
-                    <EditIcon
-                        onClick={() => startEditTeam(currTeam, rarityCaps[i])}
-                        color={'primary'}
-                        style={{ cursor: 'pointer' }}
-                    />
-                </FlexBox>
-            );
-        });
-    }, [rarityCaps, teamsWithCharacters, teamsPotential]);
+    const renderTeams = useMemo(
+        () =>
+            teamsWithCharacters.map((currTeam, i) => (
+                <TeamCard
+                    key={currTeam.id}
+                    team={currTeam}
+                    onEdit={() => startEditTeam(currTeam)}
+                    onClear={() => clearTeam(currTeam.id)}
+                    teamPotential={teamsPotential[i].total}
+                    teamPotentialBreakdown={
+                        <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                            {teamsPotential[i].lineup.map(char => (
+                                <span key={char.id}>
+                                    {char.potential} - {char.id}
+                                </span>
+                            ))}
+                        </FlexBox>
+                    }
+                />
+            )),
+        [teamsWithCharacters, teamsPotential]
+    );
 
-    const getCharactersWithPotential = (rarityCap: Rarity, currentTeamId: string) => {
-        const blockedCharacters = teamsWithCharacters
-            .filter(x => x.id !== currentTeamId)
-            .flatMap(x => x.lineup)
-            .map(x => x.name);
+    const getCharactersWithPotential = (rarityCap: Rarity) => {
         return orderBy(
             characters
-                .filter(x => x.rank > Rank.Locked && !blockedCharacters.includes(x.name))
+                .filter(x => x.rank > Rank.Locked)
                 .map(x => CharactersService.capCharacterAtRarity(x, rarityCap))
                 .map(x => ({
                     ...x,
@@ -155,6 +146,13 @@ export const GuildWarDefense = () => {
             'potential',
             'desc'
         );
+    };
+
+    const getBlockedCharacters = (currentTeamId: string) => {
+        return teamsWithCharacters
+            .filter(x => x.id !== currentTeamId)
+            .flatMap(x => x.lineup)
+            .map(x => x.name);
     };
 
     return (
@@ -182,7 +180,7 @@ export const GuildWarDefense = () => {
                     showCharacterRarity: viewPreferences.showCharacterRarity,
                     onCharacterClick: startEditCharacter,
                 }}>
-                <FlexBox wrap={true} gap={30}>
+                <FlexBox wrap={true} gap={30} justifyContent={'center'}>
                     {renderTeams}
                 </FlexBox>
 
@@ -199,12 +197,68 @@ export const GuildWarDefense = () => {
                         isOpen={openSelectTeamDialog}
                         team={editedTeam.lineup}
                         teamName={editedTeam.name}
-                        rarityCap={editedTeamRarityCap}
+                        rarityCap={editedTeam.rarityCap}
                         onClose={endEditTeam}
-                        characters={getCharactersWithPotential(editedTeamRarityCap, editedTeam.id)}
+                        characters={getCharactersWithPotential(editedTeam.rarityCap)}
+                        blockedCharacters={getBlockedCharacters(editedTeam.id)}
                     />
                 )}
             </CharactersViewContext.Provider>
         </FlexBox>
+    );
+};
+
+const TeamCard: React.FC<{
+    team: IGWTeamWithCharacters;
+    onEdit: () => void;
+    onClear: () => void;
+    teamPotential: number;
+    teamPotentialBreakdown: React.ReactElement;
+}> = ({ team, teamPotential, teamPotentialBreakdown, onEdit, onClear }) => {
+    return (
+        <Card sx={{ maxWidth: 400, boxShadow: '1px 2px 3px rgba(0, 0, 0, 0.6)' }}>
+            <CardHeader
+                title={
+                    <FlexBox justifyContent={'space-between'}>
+                        <FlexBox gap={5} style={{ fontSize: 18 }}>
+                            <RarityImage rarity={team.rarityCap} />
+                            <span>{team.name}</span>
+                        </FlexBox>
+                        <FlexBox gap={5} style={{ fontSize: 16 }}>
+                            {teamPotential}
+                            <AccessibleTooltip
+                                title={
+                                    <>
+                                        <p>Team potential breakdown:</p>
+                                        {teamPotentialBreakdown}
+                                    </>
+                                }>
+                                <InfoIcon
+                                    style={{ color: getCompletionRateColor(teamPotential, 100) }}
+                                    fontSize="small"
+                                />
+                            </AccessibleTooltip>
+                        </FlexBox>
+                    </FlexBox>
+                }
+                subheader={Rarity[team.rarityCap]}
+            />
+            <CardContent style={{ paddingTop: 0, paddingBottom: 0 }}>
+                <Team
+                    characters={team.lineup.map(x => CharactersService.capCharacterAtRarity(x, team.rarityCap))}
+                    teamName={''}
+                />
+            </CardContent>
+            <CardActions>
+                <Button size="small" onClick={onEdit}>
+                    Edit
+                </Button>
+                <Conditional condition={!!team.lineup.length}>
+                    <Button size="small" color="error" onClick={onClear}>
+                        Clear
+                    </Button>
+                </Conditional>
+            </CardActions>
+        </Card>
     );
 };

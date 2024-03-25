@@ -1,11 +1,12 @@
 ﻿import React from 'react';
-import InfoIcon from '@mui/icons-material/Info';
+import HelpIcon from '@mui/icons-material/Help';
 import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import { BfLevelTable } from 'src/v2/features/guild-war/bf-level-table';
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 import { isMobile } from 'react-device-detect';
+import IconButton from '@mui/material/IconButton';
 
 export const BattlefieldInfo: React.FC = () => {
     const [open, setOpen] = React.useState(false);
@@ -20,7 +21,9 @@ export const BattlefieldInfo: React.FC = () => {
 
     return (
         <>
-            <InfoIcon style={{ cursor: 'pointer' }} onClick={handleClickOpen} color="primary" />
+            <IconButton onClick={handleClickOpen}>
+                <HelpIcon style={{ cursor: 'pointer' }} color="primary" />
+            </IconButton>
             <Dialog open={open} onClose={handleClose} maxWidth={isMobile ? 'xl' : 'lg'} fullWidth>
                 <DialogTitle>Battlefield levels</DialogTitle>
                 <DialogContent>

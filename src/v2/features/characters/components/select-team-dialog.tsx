@@ -2,7 +2,7 @@
 
 import { isMobile } from 'react-device-detect';
 
-import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 import { ICharacter2 } from 'src/models/interfaces';
@@ -16,16 +16,18 @@ import { Conditional } from 'src/v2/components/conditional';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { CharactersService } from 'src/v2/features/characters/characters.service';
 
 type Props = {
     teamName: string;
     isOpen: boolean;
     characters: ICharacter2[];
+    blockedCharacters: string[];
     team: ICharacter2[];
     rarityCap: Rarity;
-    onClose: (team?: ICharacter2[], rarityCap?: Rarity) => void;
+    onClose: (team?: ICharacter2[], rarityCap?: Rarity, teamName?: string) => void;
     size?: 5 | 7;
-    allowRarityCapEdit?: boolean;
+    allowPropsEdit?: boolean;
 };
 
 export const SelectTeamDialog: React.FC<Props> = ({
@@ -34,28 +36,40 @@ export const SelectTeamDialog: React.FC<Props> = ({
     team,
     characters,
     size = 5,
-    teamName,
+    teamName: defaultTeamName,
     rarityCap: defaultRarityCap,
-    allowRarityCapEdit = false,
+    blockedCharacters,
+    allowPropsEdit = false,
 }) => {
     const fallbackCharacter = unsetCharacter as ICharacter2;
     const charactersViewContext = useContext(CharactersViewContext);
     const [lineup, setLineup] = useState(team);
+
     const [rarityCap, setRarityCap] = useState(defaultRarityCap);
+    const [teamName, setTeamName] = useState(defaultTeamName);
 
     const currentTeam = useMemo(() => {
         return Array.from({ length: size }, (_, i) => {
             const char = lineup[i];
 
             if (char) {
-                return <CharacterTile key={char.name} character={char} />;
+                return (
+                    <CharacterTile
+                        key={char.name}
+                        character={CharactersService.capCharacterAtRarity(char, rarityCap)}
+                    />
+                );
             }
 
             return <CharacterTile key={fallbackCharacter.name + i} character={fallbackCharacter} disableClick />;
         });
-    }, [lineup]);
+    }, [lineup, rarityCap]);
 
     const handleCharacterSelect = (character: ICharacter2) => {
+        if (blockedCharacters.includes(character.name)) {
+            return;
+        }
+
         setLineup(curr => {
             if (curr.some(x => x.name === character.name)) {
                 return curr.filter(x => x.name !== character.name);
@@ -64,7 +78,13 @@ export const SelectTeamDialog: React.FC<Props> = ({
                     return curr;
                 }
 
-                return [...curr, character];
+                const newChar = characters.find(x => x.name === character.name);
+
+                if (newChar) {
+                    return [...curr, newChar];
+                }
+
+                return curr;
             }
         });
     };
@@ -72,35 +92,52 @@ export const SelectTeamDialog: React.FC<Props> = ({
     return (
         <Dialog open={isOpen} onClose={() => onClose()} fullScreen={isMobile} fullWidth>
             <DialogTitle>
-                <CharactersViewContext.Provider
-                    value={{
-                        ...charactersViewContext,
-                        onCharacterClick: handleCharacterSelect,
-                    }}>
-                    Select lineup for <RarityImage rarity={rarityCap} /> {teamName} <FlexBox>{currentTeam}</FlexBox>
-                </CharactersViewContext.Provider>
-                <Conditional condition={allowRarityCapEdit}>
-                    <RaritySelect
-                        label={'Rarity Cap'}
-                        rarityValues={getEnumValues(Rarity)}
-                        value={rarityCap}
-                        valueChanges={setRarityCap}
-                    />
+                Edit team
+                <Conditional condition={allowPropsEdit}>
+                    <FlexBox gap={10} style={{ marginTop: 20 }}>
+                        <TextField
+                            style={{ width: '50%' }}
+                            label="Team name"
+                            variant="outlined"
+                            value={teamName}
+                            onChange={event => setTeamName(event.target.value)}
+                        />
+                        <RaritySelect
+                            label={'Rarity Cap'}
+                            rarityValues={getEnumValues(Rarity)}
+                            value={rarityCap}
+                            valueChanges={setRarityCap}
+                        />
+                    </FlexBox>
                 </Conditional>
-            </DialogTitle>
-            <DialogContent style={{ paddingTop: 20 }}>
                 <CharactersViewContext.Provider
                     value={{
                         ...charactersViewContext,
                         onCharacterClick: handleCharacterSelect,
-                        getOpacity: character => (lineup.some(x => x.name === character.name) ? 0.5 : 1),
                     }}>
-                    <CharactersGrid characters={characters} />
+                    <FlexBox>{currentTeam}</FlexBox>
+                </CharactersViewContext.Provider>
+            </DialogTitle>
+            <DialogContent>
+                <CharactersViewContext.Provider
+                    value={{
+                        ...charactersViewContext,
+                        onCharacterClick: handleCharacterSelect,
+                        getOpacity: character =>
+                            lineup.some(x => x.name === character.name) ||
+                            blockedCharacters.some(x => x === character.name)
+                                ? 0.5
+                                : 1,
+                    }}>
+                    <CharactersGrid
+                        characters={characters.map(x => CharactersService.capCharacterAtRarity(x, rarityCap))}
+                        blockedCharacters={blockedCharacters}
+                    />
                 </CharactersViewContext.Provider>
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => onClose()}>Cancel</Button>
-                <Button onClick={() => onClose(lineup, rarityCap)}>Save</Button>
+                <Button onClick={() => onClose(lineup, rarityCap, teamName)}>Save</Button>
             </DialogActions>
         </Dialog>
     );

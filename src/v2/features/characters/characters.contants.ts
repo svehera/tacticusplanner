@@ -3,7 +3,7 @@ import { Rank, Rarity, RarityStars } from 'src/models/enums';
 import { IRarityCap } from 'src/v2/features/characters/characters.models';
 
 export const unsetCharacter: Partial<ICharacter2> = {
-    name: 'Unset',
+    name: '',
     icon: 'unset.webp',
     rank: Rank.Stone1,
     upgrades: [],

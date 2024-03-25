@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import InfoIcon from '@mui/icons-material/Info';
+import HelpIcon from '@mui/icons-material/Help';
 import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -12,6 +12,7 @@ import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import { rarityCaps } from 'src/v2/features/characters/characters.contants';
 import { IRarityCap } from 'src/v2/features/characters/characters.models';
 import { StarsImage } from 'src/v2/components/images/stars-image';
+import IconButton from '@mui/material/IconButton';
 
 export const PotentialInfo: React.FC = () => {
     const [open, setOpen] = React.useState(false);
@@ -64,7 +65,9 @@ export const PotentialInfo: React.FC = () => {
 
     return (
         <>
-            <InfoIcon style={{ cursor: 'pointer' }} onClick={handleClickOpen} color="primary" />
+            <IconButton onClick={handleClickOpen}>
+                <HelpIcon style={{ cursor: 'pointer' }} color="primary" />
+            </IconButton>
             <Dialog open={open} onClose={handleClose} fullWidth>
                 <DialogTitle>Character potential</DialogTitle>
                 <DialogContent>

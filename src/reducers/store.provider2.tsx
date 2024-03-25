@@ -99,7 +99,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             campaignsProgress: wrapDispatch(dispatchCampaignsProgress),
             inventory: wrapDispatch(dispatchInventory),
             dailyRaids: wrapDispatch(dispatchDailyRaids),
-            teams: wrapDispatch(dispatchTeams),
+            guildWar: wrapDispatch(dispatchTeams),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 dispatchCharacters({ type: 'Set', value: data.characters });
                 dispatchGoals({ type: 'Set', value: data.goals });
