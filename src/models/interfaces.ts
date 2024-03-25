@@ -32,7 +32,7 @@ import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
 import { IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
-import { TeamsAction } from 'src/reducers/teams.reducer';
+import { TeamsAction } from 'src/reducers/guildWarReducer';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -253,7 +253,7 @@ export interface IGlobalState {
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
     dailyRaids: IDailyRaids;
-    teams: IPersonalTeams;
+    guildWar: IGuildWar;
 }
 
 export interface IDispatchContext {
@@ -290,15 +290,13 @@ export interface IPersonalData2 {
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
     dailyRaids: IDailyRaids;
-    teams: IPersonalTeams;
+    guildWar: IGuildWar;
 }
 
-export interface IPersonalTeams {
-    guildWar: {
-        battlefieldLevel: number;
-        sectionId: string;
-        teams: IGWTeam[];
-    };
+export interface IGuildWar {
+    battlefieldLevel: number;
+    sectionId: string;
+    teams: IGWTeam[];
 }
 
 export interface IDailyRaids {

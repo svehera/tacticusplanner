@@ -11,7 +11,7 @@
     IPersonalData,
     IPersonalData2,
     IPersonalGoal,
-    IPersonalTeams,
+    IGuildWar,
     ISelectedTeamsOrdering,
     IViewPreferences,
     LegendaryEventData,
@@ -73,9 +73,9 @@ export class PersonalDataLocalStorage {
                     ...defaultData.dailyRaids,
                     ...(this.getItem<IDailyRaids>('dailyRaids') ?? {}),
                 },
-                teams: {
-                    ...defaultData.teams,
-                    ...(this.getItem<IPersonalTeams>('teams') ?? {}),
+                guildWar: {
+                    ...defaultData.guildWar,
+                    ...(this.getItem<IGuildWar>('guildWar') ?? {}),
                 },
             };
         } else {
@@ -189,7 +189,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             dailyRaidsPreferences: defaultData.dailyRaidsPreferences,
             inventory: defaultData.inventory,
             dailyRaids: defaultData.dailyRaids,
-            teams: defaultData.teams,
+            guildWar: defaultData.guildWar,
         };
     }
 

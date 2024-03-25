@@ -12,6 +12,7 @@
             "id": "frontline",
             "name": "Frontline",
             "warScore": 10000,
+            "count": 3,
             "complexity": {
                 "1": "Trooper",
                 "2": "Trooper",
@@ -24,6 +25,7 @@
             "id": "supplyDepot",
             "name": "Supply Depot",
             "warScore": 25000,
+            "count": 2,
             "complexity": {
                 "1": "Trooper",
                 "2": "Trooper",
@@ -36,6 +38,7 @@
             "id": "artilleryPosition",
             "name": "Artillery Position",
             "warScore": 12000,
+            "count": 3,
             "complexity": {
                 "1": "Trooper",
                 "2": "Trooper",
@@ -48,6 +51,7 @@
             "id": "antiAirBattery",
             "name": "Anti-Air Battery",
             "warScore": 12000,
+            "count": 2,
             "complexity": {
                 "1": "Trooper",
                 "2": "Veteran",
@@ -60,6 +64,7 @@
             "id": "fortifiedPosition",
             "name": "Fortified Position",
             "warScore": 16000,
+            "count": 2,
             "complexity": {
                 "1": "Trooper",
                 "2": "Veteran",
@@ -72,6 +77,7 @@
             "id": "voxStation",
             "name": "Vox Station",
             "warScore": 36000,
+            "count": 1,
             "complexity": {
                 "1": "Trooper",
                 "2": "Veteran",
@@ -84,6 +90,7 @@
             "id": "medicaeStation",
             "name": "Medicae Station",
             "warScore": 12000,
+            "count": 1,
             "complexity": {
                 "1": "Trooper",
                 "2": "Trooper",
@@ -96,6 +103,7 @@
             "id": "headQuarters",
             "name": "Head Quarters",
             "warScore": 40000,
+            "count": 1,
             "complexity": {
                 "1": "Trooper",
                 "2": "Veteran",

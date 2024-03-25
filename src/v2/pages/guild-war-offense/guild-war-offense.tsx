@@ -5,8 +5,6 @@ import { CharactersViewContext } from 'src/v2/features/characters/characters-vie
 import { FlexBox } from 'src/v2/components/flex-box';
 import { BattlefieldInfo } from 'src/v2/features/guild-war/battlefield-info';
 import { BfLevelSelect } from 'src/v2/features/guild-war/bf-level-select';
-import { BfSectionSelect } from 'src/v2/features/guild-war/bf-section-select';
-import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 import { Team } from 'src/v2/features/characters/components/team';
 import { ICharacter2 } from 'src/models/interfaces';
 import { Conditional } from 'src/v2/components/conditional';
@@ -19,25 +17,21 @@ import InfoIcon from '@mui/icons-material/Info';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { PotentialInfo } from 'src/v2/features/characters/components/potential-info';
 import { Rank, Rarity } from 'src/models/enums';
+import { GuildWarTeamType, IGWTeamWithCharacters } from 'src/v2/features/guild-war/guild-war.models';
+import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 
-export const GuildWar = () => {
-    const { teams, characters, viewPreferences } = useContext(StoreContext);
+export const GuildWarOffense = () => {
+    const { guildWar, characters, viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const [openSelectTeamDialog, setOpenSelectTeamDialog] = React.useState(false);
-    const [editedTeamId, setEditedTeamId] = React.useState<string | null>(null);
-    const [editedTeamRarityCap, setEditedTeamRarityCap] = React.useState<Rarity>(Rarity.Legendary);
-    const [editedLineup, setEditedLineup] = React.useState<ICharacter2[] | null>(null);
+    const [editedTeam, setEditedTeam] = React.useState<IGWTeamWithCharacters | null>(null);
 
     const [openCharacterItemDialog, setOpenCharacterItemDialog] = React.useState(false);
     const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
 
     const updateBfLevel = (battlefieldLevel: number) => {
         dispatch.teams({ type: 'UpdateBfLevel', battlefieldLevel });
-    };
-
-    const updateBfSection = (sectionId: string) => {
-        dispatch.teams({ type: 'UpdateBfSection', sectionId });
     };
 
     const startEditCharacter = (character: ICharacter2): void => {
@@ -50,49 +44,40 @@ export const GuildWar = () => {
         setOpenCharacterItemDialog(false);
     };
 
-    const startEditTeam = (teamId: string, lineup: ICharacter2[], rarity: Rarity): void => {
-        setEditedTeamId(teamId);
-        setEditedTeamRarityCap(rarity);
-        setEditedLineup(lineup);
+    const startEditTeam = (team: IGWTeamWithCharacters): void => {
+        setEditedTeam(team);
         setOpenSelectTeamDialog(true);
     };
 
-    const endEditTeam = (team?: ICharacter2[]): void => {
-        if (team && editedTeamId) {
+    const endEditTeam = (team?: ICharacter2[], rarityCap?: Rarity): void => {
+        if (team && rarityCap && editedTeam) {
             dispatch.teams({
-                type: 'AddOrUpdateGWTeam',
-                team: { id: editedTeamId, lineup: team.map(x => x.name) },
+                type: 'UpdateTeam',
+                teamId: editedTeam.id,
+                lineup: team.map(x => x.name),
+                rarityCap: rarityCap,
             });
         }
-        setEditedTeamRarityCap(Rarity.Legendary);
-        setEditedTeamId(null);
-        setEditedLineup(null);
+        setEditedTeam(null);
         setOpenSelectTeamDialog(false);
     };
 
-    const rarityCaps = useMemo(() => {
-        return GuildWarService.getRarityCaps(teams.guildWar.battlefieldLevel, teams.guildWar.sectionId);
-    }, [teams.guildWar.sectionId, teams.guildWar.battlefieldLevel]);
-
-    const teamsWithCharacters = useMemo(() => {
-        return teams.guildWar.teams.map(team => {
-            const teamWithChars = team.lineup.map(name => characters.find(char => char.name === name)!);
-            return { id: team.id, lineup: teamWithChars.filter(x => !!x) };
-        });
-    }, [teams.guildWar.teams, characters]);
-
-    // const teamsWithCharacters = teams.guildWar.teams.map(team => {
-    //     const teamWithChars = team.lineup.map(name => characters.find(char => char.name === name)!);
-    //     return { id: team.id, lineup: teamWithChars.filter(x => !!x) };
-    // });
+    const teamsWithCharacters = useMemo<IGWTeamWithCharacters[]>(() => {
+        return guildWar.teams
+            .filter(x => x.type === GuildWarTeamType.Offense)
+            .map(team => {
+                const teamWithChars = team.lineup.map(name => characters.find(char => char.name === name)!);
+                return { ...team, lineup: teamWithChars.filter(x => !!x) };
+            });
+    }, [guildWar.teams, characters]);
 
     const teamsPotential = useMemo(() => {
         return teamsWithCharacters.map((team, teamIndex) => {
             const lineup = team.lineup.map(x => ({
                 id: x.name,
                 potential: CharactersService.calculateCharacterPotential(
-                    CharactersService.capCharacterAtRarity(x, rarityCaps[teamIndex]),
-                    rarityCaps[teamIndex]
+                    CharactersService.capCharacterAtRarity(x, team.rarityCap),
+                    team.rarityCap
                 ),
             }));
 
@@ -101,18 +86,16 @@ export const GuildWar = () => {
                 total: Math.round(sum(lineup.map(x => x.potential)) / 5),
             };
         });
-    }, [teams.guildWar.sectionId, teams.guildWar.battlefieldLevel, teams.guildWar.teams, teamsWithCharacters]);
+    }, [guildWar.sectionId, guildWar.battlefieldLevel, guildWar.teams, teamsWithCharacters]);
 
     const renderTeams = useMemo(() => {
-        return Array.from({ length: 5 }, (_, i) => {
-            const currTeam = teamsWithCharacters[i];
-            const lineup = currTeam?.lineup ?? [];
+        return teamsWithCharacters.map((currTeam, i) => {
             return (
                 <FlexBox key={i} gap={5}>
                     <Team
                         teamName={`Team ${i + 1}`}
-                        characters={lineup}
-                        teamIcon={<RarityImage rarity={rarityCaps[i]} />}
+                        characters={currTeam.lineup}
+                        teamIcon={<RarityImage rarity={currTeam.rarityCap} />}
                         teamBenchmark={
                             <FlexBox gap={5}>
                                 {teamsPotential[i].total}{' '}
@@ -134,11 +117,11 @@ export const GuildWar = () => {
                             </FlexBox>
                         }
                     />
-                    <EditIcon onClick={() => startEditTeam(currTeam?.id, lineup, rarityCaps[i])} />
+                    <EditIcon onClick={() => startEditTeam(currTeam)} color={'primary'} style={{ cursor: 'pointer' }} />
                 </FlexBox>
             );
         });
-    }, [rarityCaps, teams.guildWar.teams, teamsPotential]);
+    }, [teamsWithCharacters, teamsPotential]);
 
     const getCharactersWithPotential = (rarityCap: Rarity, currentTeamId: string) => {
         const blockedCharacters = teamsWithCharacters
@@ -158,19 +141,29 @@ export const GuildWar = () => {
         );
     };
 
+    const getTotalSlots = useMemo(() => {
+        const slots = GuildWarService.getTotalRarityCaps(guildWar.battlefieldLevel);
+        return [Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon].map(rarity => {
+            const slotsCount = slots[rarity];
+            if (slotsCount) {
+                return (
+                    <FlexBox key={rarity} gap={3}>
+                        <RarityImage rarity={rarity} /> x{slotsCount}
+                    </FlexBox>
+                );
+            }
+        });
+    }, [guildWar.battlefieldLevel]);
+
     return (
         <FlexBox style={{ flexDirection: 'column', gap: 30 }}>
             <FlexBox gap={10}>
                 <BattlefieldInfo />
-                <BfLevelSelect value={teams.guildWar.battlefieldLevel} valueChange={updateBfLevel} />
-                <BfSectionSelect
-                    value={teams.guildWar.sectionId}
-                    valueChange={updateBfSection}
-                    bfLevel={teams.guildWar.battlefieldLevel}
-                />
+                <BfLevelSelect value={guildWar.battlefieldLevel} valueChange={updateBfLevel} />
             </FlexBox>
+            <FlexBox gap={5}>Enemy teams: {getTotalSlots}</FlexBox>
             <FlexBox gap={5}>
-                Overall Potential: {Math.round(sum(teamsPotential.map(x => x.total)) / 5)}/100
+                Overall Potential: {Math.round(sum(teamsPotential.map(x => x.total)) / teamsPotential.length)}/100
                 <PotentialInfo />
             </FlexBox>
             <CharactersViewContext.Provider
@@ -195,14 +188,17 @@ export const GuildWar = () => {
                     />
                 </Conditional>
 
-                <Conditional condition={!!editedLineup}>
+                {editedTeam && (
                     <SelectTeamDialog
+                        allowRarityCapEdit
                         isOpen={openSelectTeamDialog}
-                        team={editedLineup!}
+                        team={editedTeam.lineup}
+                        teamName={editedTeam.name}
+                        rarityCap={editedTeam.rarityCap}
                         onClose={endEditTeam}
-                        characters={getCharactersWithPotential(editedTeamRarityCap, editedTeamId!)}
+                        characters={getCharactersWithPotential(editedTeam.rarityCap, editedTeam.id)}
                     />
-                </Conditional>
+                )}
             </CharactersViewContext.Provider>
         </FlexBox>
     );

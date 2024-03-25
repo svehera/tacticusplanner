@@ -12,7 +12,7 @@
     IPersonalCharacterData2,
     IPersonalData2,
     IPersonalGoal,
-    IPersonalTeams,
+    IGuildWar,
     ISelectedTeamsOrdering,
     IViewPreferences,
     LegendaryEventData,
@@ -37,7 +37,7 @@ export class GlobalState implements IGlobalState {
     readonly campaignsProgress: ICampaignsProgress;
     readonly inventory: IInventory;
     readonly dailyRaids: IDailyRaids;
-    readonly teams: IPersonalTeams;
+    readonly guildWar: IGuildWar;
 
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
@@ -67,7 +67,7 @@ export class GlobalState implements IGlobalState {
         this.campaignsProgress = personalData.campaignsProgress ?? defaultData.campaignsProgress;
         this.inventory = GlobalState.fixNames(personalData.inventory ?? defaultData.inventory);
         this.dailyRaids = personalData.dailyRaids ?? defaultData.dailyRaids;
-        this.teams = personalData.teams ?? defaultData.teams;
+        this.guildWar = personalData.guildWar ?? defaultData.guildWar;
     }
 
     static initCharacters(
@@ -175,7 +175,7 @@ export class GlobalState implements IGlobalState {
             campaignsProgress: value.campaignsProgress,
             inventory: value.inventory,
             dailyRaids: value.dailyRaids,
-            teams: value.teams,
+            guildWar: value.guildWar,
         };
     }
 }

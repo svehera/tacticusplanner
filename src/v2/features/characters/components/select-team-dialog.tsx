@@ -11,19 +11,37 @@ import { unsetCharacter } from 'src/v2/features/characters/characters.contants';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { Rarity } from 'src/models/enums';
+import { Conditional } from 'src/v2/components/conditional';
+import { RaritySelect } from 'src/shared-components/rarity-select';
+import { getEnumValues } from 'src/shared-logic/functions';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
 
 type Props = {
+    teamName: string;
     isOpen: boolean;
     characters: ICharacter2[];
     team: ICharacter2[];
-    onClose: (team?: ICharacter2[]) => void;
+    rarityCap: Rarity;
+    onClose: (team?: ICharacter2[], rarityCap?: Rarity) => void;
     size?: 5 | 7;
+    allowRarityCapEdit?: boolean;
 };
 
-export const SelectTeamDialog: React.FC<Props> = ({ isOpen, onClose, team, characters, size = 5 }) => {
+export const SelectTeamDialog: React.FC<Props> = ({
+    isOpen,
+    onClose,
+    team,
+    characters,
+    size = 5,
+    teamName,
+    rarityCap: defaultRarityCap,
+    allowRarityCapEdit = false,
+}) => {
     const fallbackCharacter = unsetCharacter as ICharacter2;
     const charactersViewContext = useContext(CharactersViewContext);
     const [lineup, setLineup] = useState(team);
+    const [rarityCap, setRarityCap] = useState(defaultRarityCap);
 
     const currentTeam = useMemo(() => {
         return Array.from({ length: size }, (_, i) => {
@@ -59,8 +77,16 @@ export const SelectTeamDialog: React.FC<Props> = ({ isOpen, onClose, team, chara
                         ...charactersViewContext,
                         onCharacterClick: handleCharacterSelect,
                     }}>
-                    Select lineup <FlexBox>{currentTeam}</FlexBox>
+                    Select lineup for <RarityImage rarity={rarityCap} /> {teamName} <FlexBox>{currentTeam}</FlexBox>
                 </CharactersViewContext.Provider>
+                <Conditional condition={allowRarityCapEdit}>
+                    <RaritySelect
+                        label={'Rarity Cap'}
+                        rarityValues={getEnumValues(Rarity)}
+                        value={rarityCap}
+                        valueChanges={setRarityCap}
+                    />
+                </Conditional>
             </DialogTitle>
             <DialogContent style={{ paddingTop: 20 }}>
                 <CharactersViewContext.Provider
@@ -74,7 +100,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ isOpen, onClose, team, chara
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => onClose()}>Cancel</Button>
-                <Button onClick={() => onClose(lineup)}>Save</Button>
+                <Button onClick={() => onClose(lineup, rarityCap)}>Save</Button>
             </DialogActions>
         </Dialog>
     );

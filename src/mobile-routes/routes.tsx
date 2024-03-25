@@ -10,8 +10,8 @@ import { insightsLazyRoute } from 'src/v2/pages/insights/insights.route';
 import { wyoLazyRoute } from 'src/v2/pages/who-you-own/who-you-own.route';
 import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.route';
 import LegendaryEvent from 'src/routes/legendary-events/legendary-event';
-import { guildWarLazyRoute } from 'src/v2/pages/guild-war/guild-war.route';
-import { PlanLeRoutes } from 'src/mobile-routes/events/leRoutes';
+import { guildWarOffenseLazyRoute } from 'src/v2/pages/guild-war-offense/guild-war-offense.route';
+import { guildWarDefenseLazyRoute } from 'src/v2/pages/guild-war-defense/guild-war-defense.route';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -54,6 +54,13 @@ const planRoutes: RouteObject[] = [
         },
     },
     {
+        path: 'plan/guildWar',
+        async lazy() {
+            const { PlanGuildWarRoutes } = await import('./events/guildWarRoutes');
+            return { Component: PlanGuildWarRoutes };
+        },
+    },
+    {
         path: 'plan/goals',
         async lazy() {
             const { Goals } = await import('../routes/goals/goals');
@@ -74,7 +81,8 @@ const planRoutes: RouteObject[] = [
             return { Component: MasterTable };
         },
     },
-    guildWarLazyRoute,
+    guildWarOffenseLazyRoute,
+    guildWarDefenseLazyRoute,
     {
         path: 'plan/le',
         async lazy() {

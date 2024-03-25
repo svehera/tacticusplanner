@@ -9,7 +9,6 @@ export const PlanRoutes = () => {
     const navigate = useNavigate();
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
-    const guildWarMenuItem = menuItemById['guildWar'];
     return (
         <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
             <Card
@@ -43,7 +42,7 @@ export const PlanRoutes = () => {
             </Card>
 
             <Card
-                onClick={() => navigate(guildWarMenuItem.routeMobile)}
+                onClick={() => navigate('guildWar')}
                 sx={{
                     width: 350,
                     minHeight: 140,
@@ -51,10 +50,16 @@ export const PlanRoutes = () => {
                 <CardHeader
                     title={
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                            {guildWarMenuItem.icon} {guildWarMenuItem.label}
+                            <FormatListBulletedIcon /> Guild War
                         </div>
                     }
                 />
+                <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
+                    <ul>
+                        <li>Defense</li>
+                        <li>Offense</li>
+                    </ul>
+                </CardContent>
             </Card>
 
             <Card

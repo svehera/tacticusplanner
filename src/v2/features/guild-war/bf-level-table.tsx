@@ -19,7 +19,12 @@ export const BfLevelTable = ({ rows }: { rows: IGWSection[] }) => {
         {
             field: 'warScore',
             headerName: 'Score',
-            width: 140,
+            width: 80,
+        },
+        {
+            field: 'count',
+            headerName: 'Count',
+            width: 70,
         },
         ...GuildWarService.gwData.bfLevels.map(level => ({
             headerName: level + '',

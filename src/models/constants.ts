@@ -14,6 +14,7 @@ import { VitruviusLegendaryEvent } from './legendary-events/vitruvius.le';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
 import { v4 } from 'uuid';
+import { GuildWarTeamType } from 'src/v2/features/guild-war/guild-war.models';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,
@@ -333,15 +334,25 @@ export const defaultData: IPersonalData2 = {
     inventory: {
         upgrades: {},
     },
-    teams: {
-        guildWar: {
-            battlefieldLevel: 1,
-            teams: Array.from({ length: 5 }, (_, i) => ({
+    guildWar: {
+        battlefieldLevel: 1,
+        teams: [
+            ...Array.from({ length: 5 }, (_, i) => ({
                 id: v4(),
+                name: `Team ${i + 1}`,
+                type: GuildWarTeamType.Defense,
+                rarityCap: Rarity.Legendary,
                 lineup: [],
             })),
-            sectionId: 'frontline',
-        },
+            ...Array.from({ length: 10 }, (_, i) => ({
+                id: v4(),
+                name: `Team ${i + 1}`,
+                type: GuildWarTeamType.Offense,
+                rarityCap: Rarity.Legendary,
+                lineup: [],
+            })),
+        ],
+        sectionId: 'frontline',
     },
 };
 

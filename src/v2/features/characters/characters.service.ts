@@ -132,19 +132,43 @@ export class CharactersService {
         };
     }
 
+    // static calculateCharacterPotential(character: ICharacter2, rarityCap: Rarity): number {
+    //     const capped = rarityCaps[rarityCap];
+    //     // Calculate potential based on properties
+    //     const rarityPotential = (character.rarity / capped.rarity) * 100;
+    //     const rankPotential = (character.rank / capped.rank) * 100;
+    //     const starsPotential = (character.stars / capped.stars) * 100;
+    //     const activeAbilityPotential = (character.activeAbilityLevel / capped.abilitiesLevel) * 100;
+    //     const passiveAbilityPotential = (character.passiveAbilityLevel / capped.abilitiesLevel) * 100;
+    //
+    //     // Calculate average potential
+    //     const averagePotential =
+    //         (rarityPotential + rankPotential + starsPotential + activeAbilityPotential + passiveAbilityPotential) / 5;
+    //
+    //     return Math.round(averagePotential); // Round potential to the nearest whole number
+    // }
+
     static calculateCharacterPotential(character: ICharacter2, rarityCap: Rarity): number {
         const capped = rarityCaps[rarityCap];
-        // Calculate potential based on properties
-        const rarityPotential = (character.rarity / capped.rarity) * 100;
-        const rankPotential = (character.rank / capped.rank) * 100;
-        const starsPotential = (character.stars / capped.stars) * 100;
-        const activeAbilityPotential = (character.activeAbilityLevel / capped.abilitiesLevel) * 100;
-        const passiveAbilityPotential = (character.passiveAbilityLevel / capped.abilitiesLevel) * 100;
 
-        // Calculate average potential
-        const averagePotential =
-            (rarityPotential + rankPotential + starsPotential + activeAbilityPotential + passiveAbilityPotential) / 5;
+        const cappedPower = CharactersPowerService.getCharacterPower({
+            rank: capped.rank,
+            stars: capped.stars,
+            rarity: rarityCap,
+            upgrades: [],
+            activeAbilityLevel: capped.abilitiesLevel,
+            passiveAbilityLevel: capped.abilitiesLevel,
+        } as unknown as ICharacter2);
 
-        return Math.round(averagePotential); // Round potential to the nearest whole number
+        const characterPower = CharactersPowerService.getCharacterPower({
+            rank: character.rank,
+            stars: character.stars,
+            rarity: rarityCap,
+            upgrades: [],
+            activeAbilityLevel: character.activeAbilityLevel,
+            passiveAbilityLevel: character.passiveAbilityLevel,
+        } as unknown as ICharacter2);
+
+        return Math.round((characterPower / cappedPower) * 100); // Round potential to the nearest whole number
     }
 }

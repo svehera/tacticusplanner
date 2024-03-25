@@ -22,7 +22,8 @@ import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
 import { dirtyDozenMenuItem } from 'src/v2/pages/dirty-dozen/dirty-dozen.menu-item';
 import { insightsMenuItem } from 'src/v2/pages/insights/insights.menu-item';
 import { wyoMenuItem } from 'src/v2/pages/who-you-own/who-you-own.menu-item';
-import { guildWarMenuItem } from 'src/v2/pages/guild-war/guild-war.menu-item';
+import { guildWarOffenseMenuItem } from 'src/v2/pages/guild-war-offense/guild-war-offense.menu-item';
+import { guildWarDefenseMenuItem } from 'src/v2/pages/guild-war-defense/guild-war-defense.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -81,7 +82,8 @@ export const menuItemById = {
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
     ty: new MenuItemTP('Thank You', <HealthAndSafetyIcon />, '/ty', 'Thank You Page'),
     faq: faqMenuItem,
-    guildWar: guildWarMenuItem,
+    offense: guildWarOffenseMenuItem,
+    defense: guildWarDefenseMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -93,8 +95,11 @@ export const inputSubMenu: MenuItemTP[] = [
 export const planSubMenuWeb: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
-    menuItemById['guildWar'],
-    new MenuItemTP('LRE', <HealthAndSafetyIcon />, '/ty', 'Thank You Page', '', [
+    new MenuItemTP('Guild War', menuItemById['defense'].icon, '', '', '', [
+        menuItemById['defense'],
+        menuItemById['offense'],
+    ]),
+    new MenuItemTP('LRE', menuItemById['leMasterTable'].icon, '', '', '', [
         menuItemById['leMasterTable'],
         menuItemById['shadowsun'],
         menuItemById['ragnar'],
@@ -106,7 +111,8 @@ export const planSubMenuWeb: MenuItemTP[] = [
 export const planSubMenu: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
-    menuItemById['guildWar'],
+    menuItemById['offense'],
+    menuItemById['defense'],
     menuItemById['leMasterTable'],
     menuItemById['shadowsun'],
     menuItemById['ragnar'],
