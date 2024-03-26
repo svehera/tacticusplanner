@@ -1,6 +1,23 @@
 ﻿{
-    "currentVersion": "1.4.3",
+    "currentVersion": "1.4.4",
     "releaseNotes": [
+        {
+            "version": "1.4.4",
+            "date": "March 26",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added XP Books calculations to a goals cards (Tornagides)",
+                    "images": [
+                        {
+                            "path": "xp.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
         {
             "version": "1.4.3",
             "date": "March 20",

@@ -23,6 +23,8 @@ import { GuildWarTeamType, IGWTeamWithCharacters } from 'src/v2/features/guild-w
 import { Card, CardActions, CardContent, CardHeader } from '@mui/material';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 
 export const GuildWarDefense = () => {
     const { guildWar, characters, viewPreferences } = useContext(StoreContext);
@@ -120,6 +122,7 @@ export const GuildWarDefense = () => {
                     onEdit={() => startEditTeam(currTeam)}
                     onClear={() => clearTeam(currTeam.id)}
                     teamPotential={teamsPotential[i].total}
+                    onCharacterClick={startEditCharacter}
                     teamPotentialBreakdown={
                         <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
                             {teamsPotential[i].lineup.map(char => (
@@ -155,8 +158,22 @@ export const GuildWarDefense = () => {
             .map(x => x.name);
     };
 
+    const getTotalSlots = useMemo(() => {
+        const slots = GuildWarService.getTotalRarityCaps(guildWar.battlefieldLevel);
+        return [Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon].map(rarity => {
+            const slotsCount = slots[rarity];
+            if (slotsCount) {
+                return (
+                    <FlexBox key={rarity} gap={3}>
+                        <RarityImage rarity={rarity} /> x{slotsCount}
+                    </FlexBox>
+                );
+            }
+        });
+    }, [guildWar.battlefieldLevel]);
+
     return (
-        <FlexBox style={{ flexDirection: 'column', gap: 30 }}>
+        <FlexBox style={{ flexDirection: 'column', gap: 10 }}>
             <FlexBox gap={10}>
                 <BattlefieldInfo />
                 <BfLevelSelect value={guildWar.battlefieldLevel} valueChange={updateBfLevel} />
@@ -166,6 +183,15 @@ export const GuildWarDefense = () => {
                     bfLevel={guildWar.battlefieldLevel}
                 />
             </FlexBox>
+            <FlexBox>
+                <Button
+                    variant={'contained'}
+                    component={Link}
+                    to={isMobile ? '/mobile/plan/guildWar/offense' : '/plan/guildWar/offense'}>
+                    Go to: Offense
+                </Button>
+            </FlexBox>
+            <FlexBox gap={5}>Total teams: {getTotalSlots}</FlexBox>
             <FlexBox gap={5}>
                 Overall Potential: {Math.round(sum(teamsPotential.map(x => x.total)) / 5)}/100
                 <PotentialInfo />
@@ -178,7 +204,6 @@ export const GuildWarDefense = () => {
                     showBsValue: viewPreferences.showBsValue,
                     showCharacterLevel: viewPreferences.showCharacterLevel,
                     showCharacterRarity: viewPreferences.showCharacterRarity,
-                    onCharacterClick: startEditCharacter,
                 }}>
                 <FlexBox wrap={true} gap={30} justifyContent={'center'}>
                     {renderTeams}
@@ -214,7 +239,8 @@ const TeamCard: React.FC<{
     onClear: () => void;
     teamPotential: number;
     teamPotentialBreakdown: React.ReactElement;
-}> = ({ team, teamPotential, teamPotentialBreakdown, onEdit, onClear }) => {
+    onCharacterClick: (character: ICharacter2) => void;
+}> = ({ team, teamPotential, teamPotentialBreakdown, onEdit, onClear, onCharacterClick }) => {
     return (
         <Card sx={{ maxWidth: 400, boxShadow: '1px 2px 3px rgba(0, 0, 0, 0.6)' }}>
             <CardHeader
@@ -246,7 +272,8 @@ const TeamCard: React.FC<{
             <CardContent style={{ paddingTop: 0, paddingBottom: 0 }}>
                 <Team
                     characters={team.lineup.map(x => CharactersService.capCharacterAtRarity(x, team.rarityCap))}
-                    teamName={''}
+                    onSetSlotClick={onCharacterClick}
+                    onEmptySlotClick={onEdit}
                 />
             </CardContent>
             <CardActions>

@@ -82,8 +82,8 @@ export const menuItemById = {
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
     ty: new MenuItemTP('Thank You', <HealthAndSafetyIcon />, '/ty', 'Thank You Page'),
     faq: faqMenuItem,
-    offense: guildWarOffenseMenuItem,
     defense: guildWarDefenseMenuItem,
+    offense: guildWarOffenseMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -111,8 +111,8 @@ export const planSubMenuWeb: MenuItemTP[] = [
 export const planSubMenu: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
-    menuItemById['offense'],
     menuItemById['defense'],
+    menuItemById['offense'],
     menuItemById['leMasterTable'],
     menuItemById['shadowsun'],
     menuItemById['ragnar'],

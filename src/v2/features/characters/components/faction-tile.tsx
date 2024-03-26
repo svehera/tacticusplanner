@@ -10,8 +10,15 @@ import { CharacterTile } from './character-tile';
 import './faction-tile.scss';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { Conditional } from 'src/v2/components/conditional';
+import { ICharacter2 } from 'src/models/interfaces';
 
-export const FactionsTile = ({ faction }: { faction: IFaction }) => {
+export const FactionsTile = ({
+    faction,
+    onCharacterClick,
+}: {
+    faction: IFaction;
+    onCharacterClick?: (character: ICharacter2) => void;
+}) => {
     const factionPower = numberToThousandsString(faction.power);
     const factionValue = numberToThousandsString(faction.bsValue);
     const isCompleteFaction = faction.characters.length === 5;
@@ -40,7 +47,9 @@ export const FactionsTile = ({ faction }: { faction: IFaction }) => {
             </h4>
             <div className={`characters-box ${isCompleteFaction ? 'complete-faction' : 'incomplete-faction'}`}>
                 {faction.characters.map(character => {
-                    return <CharacterTile key={character.name} character={character} />;
+                    return (
+                        <CharacterTile key={character.name} character={character} onCharacterClick={onCharacterClick} />
+                    );
                 })}
             </div>
         </div>

@@ -21,6 +21,8 @@ import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 import Button from '@mui/material/Button';
 import { Card, CardActions, CardContent, CardHeader } from '@mui/material';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
+import { Link } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 
 export const GuildWarOffense = () => {
     const { guildWar, characters, viewPreferences } = useContext(StoreContext);
@@ -110,6 +112,7 @@ export const GuildWarOffense = () => {
                     onEdit={() => startEditTeam(currTeam)}
                     onClear={() => clearTeam(currTeam.id)}
                     teamPotential={teamsPotential[i].total}
+                    onCharacterClick={startEditCharacter}
                     teamPotentialBreakdown={
                         <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
                             {teamsPotential[i].lineup.map(char => (
@@ -165,6 +168,14 @@ export const GuildWarOffense = () => {
                 <BattlefieldInfo />
                 <BfLevelSelect value={guildWar.battlefieldLevel} valueChange={updateBfLevel} />
             </FlexBox>
+            <FlexBox>
+                <Button
+                    variant={'contained'}
+                    component={Link}
+                    to={isMobile ? '/mobile/plan/guildWar/defense' : '/plan/guildWar/defense'}>
+                    Go to: Defense
+                </Button>
+            </FlexBox>
             <FlexBox gap={5}>Enemy teams: {getTotalSlots}</FlexBox>
             <FlexBox gap={5}>
                 Overall Potential: {Math.round(sum(teamsPotential.map(x => x.total)) / teamsPotential.length)}/100
@@ -178,7 +189,6 @@ export const GuildWarOffense = () => {
                     showBsValue: viewPreferences.showBsValue,
                     showCharacterLevel: viewPreferences.showCharacterLevel,
                     showCharacterRarity: viewPreferences.showCharacterRarity,
-                    onCharacterClick: startEditCharacter,
                 }}>
                 <FlexBox wrap={true} justifyContent={'center'} gap={30}>
                     {renderTeams}
@@ -213,9 +223,10 @@ const TeamCard: React.FC<{
     team: IGWTeamWithCharacters;
     onEdit: () => void;
     onClear: () => void;
+    onCharacterClick: (character: ICharacter2) => void;
     teamPotential: number;
     teamPotentialBreakdown: React.ReactElement;
-}> = ({ team, teamPotential, teamPotentialBreakdown, onEdit, onClear }) => {
+}> = ({ team, teamPotential, teamPotentialBreakdown, onEdit, onClear, onCharacterClick }) => {
     return (
         <Card sx={{ maxWidth: 400, boxShadow: '1px 2px 3px rgba(0, 0, 0, 0.6)' }}>
             <CardHeader
@@ -247,7 +258,8 @@ const TeamCard: React.FC<{
             <CardContent style={{ paddingTop: 0, paddingBottom: 0 }}>
                 <Team
                     characters={team.lineup.map(x => CharactersService.capCharacterAtRarity(x, team.rarityCap))}
-                    teamName={''}
+                    onSetSlotClick={onCharacterClick}
+                    onEmptySlotClick={onEdit}
                 />
             </CardContent>
             <CardActions>

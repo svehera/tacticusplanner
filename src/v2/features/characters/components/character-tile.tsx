@@ -15,7 +15,15 @@ import './character-tile.css';
 import { Conditional } from 'src/v2/components/conditional';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 
-export const CharacterTile = ({ character, disableClick }: { character: ICharacter2; disableClick?: boolean }) => {
+export const CharacterTile = ({
+    character,
+    disableClick,
+    onCharacterClick,
+}: {
+    character: ICharacter2;
+    onCharacterClick?: (character: ICharacter2) => void;
+    disableClick?: boolean;
+}) => {
     const viewContext = useContext(CharactersViewContext);
 
     const isUnlocked = character.rank > Rank.Locked;
@@ -49,13 +57,9 @@ export const CharacterTile = ({ character, disableClick }: { character: ICharact
             className="character-tile"
             style={{
                 opacity: viewContext.getOpacity ? viewContext.getOpacity(character) : isUnlocked ? 1 : 0.5,
-                cursor: viewContext.onCharacterClick && !disableClick ? 'pointer' : undefined,
+                cursor: onCharacterClick && !disableClick ? 'pointer' : undefined,
             }}
-            onClick={
-                viewContext.onCharacterClick && !disableClick
-                    ? () => viewContext.onCharacterClick!(character)
-                    : undefined
-            }>
+            onClick={onCharacterClick && !disableClick ? () => onCharacterClick!(character) : undefined}>
             <StarsImage stars={character.stars} />
             <div>
                 <Tooltip title={character.name} placement={'top'}>

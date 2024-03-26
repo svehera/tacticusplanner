@@ -87,7 +87,6 @@ export const WhoYouOwn = () => {
                     showBsValue: viewPreferences.showBsValue,
                     showCharacterLevel: viewPreferences.showCharacterLevel,
                     showCharacterRarity: viewPreferences.showCharacterRarity,
-                    onCharacterClick: startEditCharacter,
                 }}>
                 <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
                     {!!isLoggedIn && <ShareRoster isRosterShared={!!isRosterShared} />}
@@ -95,11 +94,15 @@ export const WhoYouOwn = () => {
                 <ViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
 
                 <Conditional condition={isFactionsView(viewControls.orderBy)}>
-                    <FactionsGrid factions={factions} />
+                    <FactionsGrid factions={factions} onCharacterClick={startEditCharacter} />
                 </Conditional>
 
                 <Conditional condition={isCharactersView(viewControls.orderBy)}>
-                    <CharactersGrid characters={characters} />
+                    <CharactersGrid
+                        characters={characters}
+                        onAvailableCharacterClick={startEditCharacter}
+                        onLockedCharacterClick={startEditCharacter}
+                    />
                 </Conditional>
 
                 <Conditional condition={!!editedCharacter}>

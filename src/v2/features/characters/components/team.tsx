@@ -9,14 +9,12 @@ import { MiscIcon } from 'src/v2/components/images/misc-image';
 
 type Props = {
     characters: ICharacter2[];
-    teamName: string;
     size?: 5 | 7;
-    teamIcon?: ReactElement;
-    teamBenchmark?: ReactElement;
-    teamColor?: string;
+    onSetSlotClick: (character: ICharacter2) => void;
+    onEmptySlotClick?: () => void;
 };
 
-export const Team: React.FC<Props> = ({ characters, size = 5, teamColor, teamIcon, teamBenchmark, teamName }) => {
+export const Team: React.FC<Props> = ({ characters, size = 5, onSetSlotClick, onEmptySlotClick }) => {
     const fallbackCharacter = unsetCharacter as ICharacter2;
 
     return (
@@ -25,44 +23,17 @@ export const Team: React.FC<Props> = ({ characters, size = 5, teamColor, teamIco
                 const char = characters[i];
 
                 if (char) {
-                    return <CharacterTile key={char.name} character={char} />;
+                    return <CharacterTile key={char.name} character={char} onCharacterClick={onSetSlotClick} />;
                 }
 
-                return <CharacterTile key={fallbackCharacter.name + i} character={fallbackCharacter} disableClick />;
+                return (
+                    <CharacterTile
+                        key={fallbackCharacter.name + i}
+                        character={fallbackCharacter}
+                        onCharacterClick={onEmptySlotClick}
+                    />
+                );
             })}
         </div>
     );
 };
-
-// <div className="team">
-{
-    /*<h4 className="team-title" style={{ backgroundColor: teamColor }}>*/
-}
-{
-    /*    <div className="team-icon">*/
-}
-{
-    /*        {teamIcon}*/
-}
-{
-    /*        <span>{teamName.toUpperCase()}</span>*/
-}
-{
-    /*    </div>*/
-}
-{
-    /*    <Conditional condition={!!teamBenchmark}>*/
-}
-{
-    /*        <div className="team-benchmark">{teamBenchmark}</div>*/
-}
-{
-    /*    </Conditional>*/
-}
-{
-    /*</h4>*/
-}
-
-{
-    /*</div>*/
-}

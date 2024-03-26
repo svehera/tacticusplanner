@@ -48,23 +48,6 @@ export const SelectTeamDialog: React.FC<Props> = ({
     const [rarityCap, setRarityCap] = useState(defaultRarityCap);
     const [teamName, setTeamName] = useState(defaultTeamName);
 
-    const currentTeam = useMemo(() => {
-        return Array.from({ length: size }, (_, i) => {
-            const char = lineup[i];
-
-            if (char) {
-                return (
-                    <CharacterTile
-                        key={char.name}
-                        character={CharactersService.capCharacterAtRarity(char, rarityCap)}
-                    />
-                );
-            }
-
-            return <CharacterTile key={fallbackCharacter.name + i} character={fallbackCharacter} disableClick />;
-        });
-    }, [lineup, rarityCap]);
-
     const handleCharacterSelect = (character: ICharacter2) => {
         if (blockedCharacters.includes(character.name)) {
             return;
@@ -89,6 +72,24 @@ export const SelectTeamDialog: React.FC<Props> = ({
         });
     };
 
+    const currentTeam = useMemo(() => {
+        return Array.from({ length: size }, (_, i) => {
+            const char = lineup[i];
+
+            if (char) {
+                return (
+                    <CharacterTile
+                        key={char.name}
+                        character={CharactersService.capCharacterAtRarity(char, rarityCap)}
+                        onCharacterClick={handleCharacterSelect}
+                    />
+                );
+            }
+
+            return <CharacterTile key={fallbackCharacter.name + i} character={fallbackCharacter} />;
+        });
+    }, [lineup, rarityCap]);
+
     return (
         <Dialog open={isOpen} onClose={() => onClose()} fullScreen={isMobile} fullWidth>
             <DialogTitle>
@@ -110,19 +111,12 @@ export const SelectTeamDialog: React.FC<Props> = ({
                         />
                     </FlexBox>
                 </Conditional>
-                <CharactersViewContext.Provider
-                    value={{
-                        ...charactersViewContext,
-                        onCharacterClick: handleCharacterSelect,
-                    }}>
-                    <FlexBox>{currentTeam}</FlexBox>
-                </CharactersViewContext.Provider>
+                <FlexBox>{currentTeam}</FlexBox>
             </DialogTitle>
             <DialogContent>
                 <CharactersViewContext.Provider
                     value={{
                         ...charactersViewContext,
-                        onCharacterClick: handleCharacterSelect,
                         getOpacity: character =>
                             lineup.some(x => x.name === character.name) ||
                             blockedCharacters.some(x => x === character.name)
@@ -132,6 +126,7 @@ export const SelectTeamDialog: React.FC<Props> = ({
                     <CharactersGrid
                         characters={characters.map(x => CharactersService.capCharacterAtRarity(x, rarityCap))}
                         blockedCharacters={blockedCharacters}
+                        onAvailableCharacterClick={handleCharacterSelect}
                     />
                 </CharactersViewContext.Provider>
             </DialogContent>

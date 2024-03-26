@@ -13,17 +13,21 @@ import { isMobile } from 'react-device-detect';
 export const CharactersGrid = ({
     characters,
     blockedCharacters = [],
+    onAvailableCharacterClick,
+    onLockedCharacterClick,
 }: {
     characters: ICharacter2[];
     blockedCharacters?: string[];
+    onAvailableCharacterClick?: (character: ICharacter2) => void;
+    onLockedCharacterClick?: (character: ICharacter2) => void;
 }) => {
     const unlockedCharacters = characters
         .filter(x => x.rank > Rank.Locked && !blockedCharacters.includes(x.name))
-        .map(char => <CharacterTile key={char.name} character={char} />);
+        .map(char => <CharacterTile key={char.name} character={char} onCharacterClick={onAvailableCharacterClick} />);
 
     const lockedCharacters = characters
         .filter(x => x.rank === Rank.Locked || blockedCharacters.includes(x.name))
-        .map(char => <CharacterTile key={char.name} character={char} />);
+        .map(char => <CharacterTile key={char.name} character={char} onCharacterClick={onLockedCharacterClick} />);
     return (
         <div>
             <h4>Available ({unlockedCharacters.length})</h4>
