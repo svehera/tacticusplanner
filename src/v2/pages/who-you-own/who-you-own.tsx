@@ -98,7 +98,11 @@ export const WhoYouOwn = () => {
                 </Conditional>
 
                 <Conditional condition={isCharactersView(viewControls.orderBy)}>
-                    <CharactersGrid characters={characters} onCharacterClick={startEditCharacter} />
+                    <CharactersGrid
+                        characters={characters}
+                        onAvailableCharacterClick={startEditCharacter}
+                        onLockedCharacterClick={startEditCharacter}
+                    />
                 </Conditional>
 
                 <Conditional condition={!!editedCharacter}>

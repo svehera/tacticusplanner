@@ -10,6 +10,8 @@ import { dirtyDozenLazyRoute } from 'src/v2/pages/dirty-dozen/dirty-dozen.route'
 import { insightsLazyRoute } from 'src/v2/pages/insights/insights.route';
 import { wyoLazyRoute } from 'src/v2/pages/who-you-own/who-you-own.route';
 import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.route';
+import { guildWarOffenseLazyRoute } from 'src/v2/pages/guild-war-offense/guild-war-offense.route';
+import { guildWarDefenseLazyRoute } from 'src/v2/pages/guild-war-defense/guild-war-defense.route';
 
 const inputRoutes: RouteObject[] = [
     wyoLazyRoute,
@@ -44,6 +46,8 @@ const planRoutes: RouteObject[] = [
             return { Component: DailyRaids };
         },
     },
+    guildWarOffenseLazyRoute,
+    guildWarDefenseLazyRoute,
     {
         path: 'plan/le',
         async lazy() {

@@ -31,6 +31,8 @@ import { InventoryAction } from '../reducers/inventory.reducer';
 import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
+import { IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
+import { GuildWarAction } from 'src/reducers/guildWarReducer';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -210,7 +212,12 @@ export interface ILegendaryEventTrackRequirement {
 }
 
 export type ITableRow<T = ICharacter2 | string> = Record<string, T>;
-export type ICharacter2 = IUnitData & IPersonalCharacterData2 & { numberOfUnlocked?: number };
+export type ICharacter2 = IUnitData & IPersonalCharacterData2 & DynamicProps;
+
+type DynamicProps = {
+    numberOfUnlocked?: number;
+    potential?: number;
+};
 
 export interface IPersonalData {
     version?: undefined;
@@ -246,6 +253,7 @@ export interface IGlobalState {
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
     dailyRaids: IDailyRaids;
+    guildWar: IGuildWar;
 }
 
 export interface IDispatchContext {
@@ -261,6 +269,7 @@ export interface IDispatchContext {
     goals: React.Dispatch<GoalsAction>;
     inventory: React.Dispatch<InventoryAction>;
     dailyRaids: React.Dispatch<DailyRaidsAction>;
+    guildWar: React.Dispatch<GuildWarAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
@@ -281,6 +290,13 @@ export interface IPersonalData2 {
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
     dailyRaids: IDailyRaids;
+    guildWar: IGuildWar;
+}
+
+export interface IGuildWar {
+    battlefieldLevel: number;
+    sectionId: string;
+    teams: IGWTeam[];
 }
 
 export interface IDailyRaids {

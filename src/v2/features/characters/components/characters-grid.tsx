@@ -8,24 +8,32 @@ import { Rank } from 'src/models/enums';
 import { CharacterTile } from './character-tile';
 
 import './characters-grid.scss';
+import { isMobile } from 'react-device-detect';
+
 export const CharactersGrid = ({
     characters,
-    onCharacterClick,
+    blockedCharacters = [],
+    onAvailableCharacterClick,
+    onLockedCharacterClick,
 }: {
     characters: ICharacter2[];
-    onCharacterClick?: (character: ICharacter2) => void;
+    blockedCharacters?: string[];
+    onAvailableCharacterClick?: (character: ICharacter2) => void;
+    onLockedCharacterClick?: (character: ICharacter2) => void;
 }) => {
     const unlockedCharacters = characters
-        .filter(x => x.rank > Rank.Locked)
-        .map(char => <CharacterTile key={char.name} character={char} onClick={onCharacterClick} />);
+        .filter(x => x.rank > Rank.Locked && !blockedCharacters.includes(x.name))
+        .map(char => <CharacterTile key={char.name} character={char} onCharacterClick={onAvailableCharacterClick} />);
 
     const lockedCharacters = characters
-        .filter(x => x.rank === Rank.Locked)
-        .map(char => <CharacterTile key={char.name} character={char} onClick={onCharacterClick} />);
+        .filter(x => x.rank === Rank.Locked || blockedCharacters.includes(x.name))
+        .map(char => <CharacterTile key={char.name} character={char} onCharacterClick={onLockedCharacterClick} />);
     return (
         <div>
-            <h4>Unlocked ({unlockedCharacters.length})</h4>
-            <div className="characters-box mixed">{unlockedCharacters}</div>
+            <h4>Available ({unlockedCharacters.length})</h4>
+            <div className="characters-box mixed" style={{ zoom: isMobile ? 0.8 : 1 }}>
+                {unlockedCharacters}
+            </div>
 
             <Conditional condition={!!lockedCharacters.length}>
                 <h4>Locked ({lockedCharacters.length})</h4>

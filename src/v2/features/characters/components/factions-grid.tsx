@@ -1,12 +1,12 @@
 ﻿import React from 'react';
 
-import { ICharacter2 } from 'src/models/interfaces';
-
 import { IFaction } from '../characters.models';
 
 import { FactionsTile } from './faction-tile';
 
 import './factions-grid.scss';
+import { ICharacter2 } from 'src/models/interfaces';
+
 export const FactionsGrid = ({
     factions,
     onCharacterClick,

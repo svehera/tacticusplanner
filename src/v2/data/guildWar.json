@@ -1,0 +1,116 @@
+﻿{
+    "bfLevels": [1, 2, 3, 4, 5],
+    "sectionComplexity": ["Trooper", "Veteran", "Elite", "Hero"],
+    "rarityCaps": {
+        "Trooper": ["E", "R", "U", "U", "U"],
+        "Veteran": ["L", "E", "R", "R", "R"],
+        "Elite": ["L", "L", "E", "E", "E"],
+        "Hero": ["L", "L", "L", "L", "L"]
+    },
+    "sections": [
+        {
+            "id": "frontline",
+            "name": "Frontline",
+            "warScore": 10000,
+            "count": 3,
+            "complexity": {
+                "1": "Trooper",
+                "2": "Trooper",
+                "3": "Trooper",
+                "4": "Veteran",
+                "5": "Veteran"
+            }
+        },
+        {
+            "id": "supplyDepot",
+            "name": "Supply Depot",
+            "warScore": 25000,
+            "count": 2,
+            "complexity": {
+                "1": "Trooper",
+                "2": "Trooper",
+                "3": "Veteran",
+                "4": "Veteran",
+                "5": "Elite"
+            }
+        },
+        {
+            "id": "artilleryPosition",
+            "name": "Artillery Position",
+            "warScore": 12000,
+            "count": 3,
+            "complexity": {
+                "1": "Trooper",
+                "2": "Trooper",
+                "3": "Trooper",
+                "4": "Veteran",
+                "5": "Veteran"
+            }
+        },
+        {
+            "id": "antiAirBattery",
+            "name": "Anti-Air Battery",
+            "warScore": 12000,
+            "count": 2,
+            "complexity": {
+                "1": "Trooper",
+                "2": "Veteran",
+                "3": "Veteran",
+                "4": "Elite",
+                "5": "Elite"
+            }
+        },
+        {
+            "id": "fortifiedPosition",
+            "name": "Fortified Position",
+            "warScore": 16000,
+            "count": 2,
+            "complexity": {
+                "1": "Trooper",
+                "2": "Veteran",
+                "3": "Elite",
+                "4": "Elite",
+                "5": "Hero"
+            }
+        },
+        {
+            "id": "voxStation",
+            "name": "Vox Station",
+            "warScore": 36000,
+            "count": 1,
+            "complexity": {
+                "1": "Trooper",
+                "2": "Veteran",
+                "3": "Veteran",
+                "4": "Elite",
+                "5": "Elite"
+            }
+        },
+        {
+            "id": "medicaeStation",
+            "name": "Medicae Station",
+            "warScore": 12000,
+            "count": 1,
+            "complexity": {
+                "1": "Trooper",
+                "2": "Trooper",
+                "3": "Veteran",
+                "4": "Veteran",
+                "5": "Elite"
+            }
+        },
+        {
+            "id": "headQuarters",
+            "name": "Head Quarters",
+            "warScore": 40000,
+            "count": 1,
+            "complexity": {
+                "1": "Trooper",
+                "2": "Veteran",
+                "3": "Elite",
+                "4": "Elite",
+                "5": "Hero"
+            }
+        }
+    ]
+}

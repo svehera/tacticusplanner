@@ -1,6 +1,40 @@
 ﻿{
-    "currentVersion": "1.4.3",
+    "currentVersion": "1.4.4",
     "releaseNotes": [
+        {
+            "version": "1.4.4",
+            "date": "March 26",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added Guild War planner for Offense and Defense",
+                    "subPoints": [
+                        "The planner are meant to be used each guild player. The planner for a Guild Leaders to plan battlefield layout and players positions will be added later",
+                        "On the Defense planner player can setup up to 5 teams with rarity caps based on selected battlefield level and section",
+                        "On the Offense planner player can setup up to 10 teams with custom rarity caps"
+                    ],
+                    "images": [
+                        {
+                            "path": "def.png"
+                        },
+                        {
+                            "path": "off.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated nav for mobile",
+                    "images": [
+                        {
+                            "path": "nav.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": []
+        },
         {
             "version": "1.4.3",
             "date": "March 20",

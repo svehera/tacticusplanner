@@ -1,12 +1,20 @@
 ﻿import { ICharacter2 } from 'src/models/interfaces';
 import { CharactersOrderBy } from './enums/characters-order-by';
 import { CharactersFilterBy } from './enums/characters-filter-by';
+import { Rank, Rarity, RarityStars } from 'src/models/enums';
 
 export interface IFactionStatic {
     alliance: string;
     name: string;
     icon: string;
     color: string;
+}
+
+export interface IRarityCap {
+    rarity: Rarity;
+    rank: Rank;
+    abilitiesLevel: number;
+    stars: RarityStars;
 }
 
 export interface IFaction extends IFactionStatic {
@@ -28,4 +36,5 @@ export interface ICharactersContext {
     showPower: boolean;
     showCharacterLevel: boolean;
     showCharacterRarity: boolean;
+    getOpacity?: (character: ICharacter2) => number;
 }

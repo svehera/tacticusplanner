@@ -455,7 +455,7 @@ export const EditGoalDialog = ({
                         </div>
                     ) : undefined}
                     {form.type === PersonalGoalType.Ascend ? (
-                        <div>
+                        <FlexBox gap={10} style={{ marginTop: 20 }}>
                             <RaritySelect
                                 label={'Current Rarity'}
                                 rarityValues={currentRarityValues}
@@ -468,7 +468,7 @@ export const EditGoalDialog = ({
                                 value={form.targetRarity ?? Rarity.Common}
                                 valueChanges={value => setForm(curr => ({ ...curr, targetRarity: value }))}
                             />
-                        </div>
+                        </FlexBox>
                     ) : undefined}
 
                     {form.type === PersonalGoalType.Unlock || form.type === PersonalGoalType.Ascend ? (

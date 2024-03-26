@@ -6,7 +6,6 @@ import { RarityImage } from './rarity-image';
 import { RankImage } from './rank-image';
 import { CharacterImage } from './character-image';
 import { Tooltip } from '@mui/material';
-import './character-title.css';
 
 export const CharacterTitle = ({
     character,

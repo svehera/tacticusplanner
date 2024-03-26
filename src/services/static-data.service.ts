@@ -77,20 +77,20 @@ export class StaticDataService {
             icon: 'Ragnar.png',
         },
         {
-            id: aunshi.id,
-            name: aunshi.name,
-            stage: aunshi.eventStage,
-            nextEventDate: aunshi.nextEventDate,
-            mobileRoute: '/mobile/plan/le/aunshi',
-            icon: 'Aun-shi.png',
-        },
-        {
             id: shadowsun.id,
             name: shadowsun.name,
             stage: shadowsun.eventStage,
             nextEventDate: shadowsun.nextEventDate,
             mobileRoute: '/mobile/plan/le/shadowsun',
             icon: 'ShadowSun.png',
+        },
+        {
+            id: aunshi.id,
+            name: aunshi.name,
+            stage: aunshi.eventStage,
+            nextEventDate: aunshi.nextEventDate,
+            mobileRoute: '/mobile/plan/le/aunshi',
+            icon: 'Aun-shi.png',
         },
     ];
 

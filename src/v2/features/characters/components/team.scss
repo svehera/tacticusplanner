@@ -1,0 +1,38 @@
+﻿.team {
+    //min-width: 375px;
+    max-width: 375px;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.team-title {
+    margin-bottom: 0;
+    margin-top: 5px;
+    margin-inline-start: 5px;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .team-icon {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .team-benchmark {
+        display: flex;
+        padding-inline-end: 5px;
+    }
+}
+
+.team-characters-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    //div {
+    //  transform: scale(0.8);
+    //  zoom: 0.8;
+    //}
+}
