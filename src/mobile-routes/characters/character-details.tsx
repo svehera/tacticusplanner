@@ -1,20 +1,20 @@
 ﻿import React, { useMemo, useState } from 'react';
-import { ICharacter2, IMaterialRecipeIngredientFull } from '../../models/interfaces';
+import { ICharacter2, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
 import { FormControl, FormGroup, Grid, Input, MenuItem, Select } from '@mui/material';
-import { CharacterBias, Rank, Rarity, RarityStars } from '../../models/enums';
+import { CharacterBias, Rank, Rarity, RarityStars } from 'src/models/enums';
 import InputLabel from '@mui/material/InputLabel';
-import { getEnumValues, rankToString, rarityStarsToString } from '../../shared-logic/functions';
-import { RankImage } from '../../shared-components/rank-image';
-import { CharacterUpgrades } from '../../shared-components/character-upgrades';
-import { RarityImage } from '../../shared-components/rarity-image';
-import { StarsImage } from '../../shared-components/stars-image';
-import { rarityToMaxRank, rarityToMaxStars } from '../../models/constants';
+import { getEnumValues, rankToString, rarityStarsToString } from 'src/shared-logic/functions';
+import { RankImage } from 'src/shared-components/rank-image';
+import { CharacterUpgrades } from 'src/shared-components/character-upgrades';
+import { RarityImage } from 'src/shared-components/rarity-image';
+import { StarsImage } from 'src/shared-components/stars-image';
+import { rarityToMaxRank, rarityToMaxStars, rarityToStars } from 'src/models/constants';
 
 export const CharacterDetails = ({
-    character,
-    characterChanges,
-    updateInventoryChanges,
-}: {
+                                     character,
+                                     characterChanges,
+                                     updateInventoryChanges,
+                                 }: {
     character: ICharacter2;
     characterChanges: (character: ICharacter2) => void;
     updateInventoryChanges: (updateInventory: IMaterialRecipeIngredientFull[]) => void;
@@ -43,6 +43,10 @@ export const CharacterDetails = ({
         return rarityToMaxRank[formData.rarity];
     }, [formData.rarity]);
 
+    const minStars = useMemo(() => {
+        return rarityToStars[formData.rarity];
+    }, [formData.rarity]);
+
     const maxStars = useMemo(() => {
         return rarityToMaxStars[formData.rarity];
     }, [formData.rarity]);
@@ -50,7 +54,7 @@ export const CharacterDetails = ({
     const rarityEntries: number[] = getEnumValues(Rarity);
     const rankEntries: number[] = getEnumValues(Rank).filter(x => x === formData.rank || x <= maxRank);
     const biasEntries: number[] = getEnumValues(CharacterBias);
-    const starsEntries: number[] = getEnumValues(RarityStars).filter(x => x === formData.stars || x <= maxStars);
+    const starsEntries: number[] = getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
 
     const getNativeSelectControl = (
         value: number,
@@ -58,11 +62,16 @@ export const CharacterDetails = ({
         name: keyof ICharacter2,
         entries: Array<number>,
         getName: (value: number) => string,
-        icon?: (value: number) => React.JSX.Element
+        icon?: (value: number) => React.JSX.Element,
+        validateData: (name: keyof ICharacter2, value: number) => void = () => undefined,
     ) => (
         <FormControl fullWidth>
             <InputLabel>{label}</InputLabel>
-            <Select label={label} value={value} onChange={event => handleInputChange(name, +event.target.value)}>
+            <Select label={label} value={value} onChange={event => {
+                handleInputChange(name, +event.target.value);
+                validateData(name, +event.target.value);
+            }
+            }>
                 {entries.map(value => (
                     <MenuItem key={value} value={value}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -74,6 +83,12 @@ export const CharacterDetails = ({
             </Select>
         </FormControl>
     );
+
+    function validateRankChange() {
+        if (formData.stars === undefined || formData.stars < minStars || formData.stars > maxStars) {
+            setFormData({ ...formData, stars: starsEntries[0] });
+        }
+    }
 
     return (
         <FormGroup style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
@@ -87,7 +102,8 @@ export const CharacterDetails = ({
                         value => Rarity[value],
                         value => (
                             <RarityImage rarity={value} />
-                        )
+                        ),
+                        validateRankChange,
                     )}
                 </Grid>
                 <Grid item xs={6}>
@@ -99,7 +115,7 @@ export const CharacterDetails = ({
                         rarityStarsToString,
                         value => (
                             <StarsImage stars={value} />
-                        )
+                        ),
                     )}
                 </Grid>
             </Grid>
@@ -120,7 +136,7 @@ export const CharacterDetails = ({
                                 handleInputChange(
                                     'shards',
                                     event.target.value === '' ? '' : (Number(event.target.value) as any),
-                                    Number(event.target.value)
+                                    Number(event.target.value),
                                 )
                             }
                             inputProps={{
@@ -149,7 +165,7 @@ export const CharacterDetails = ({
                                         handleInputChange(
                                             'level',
                                             event.target.value === '' ? '' : (Number(event.target.value) as any),
-                                            Number(event.target.value)
+                                            Number(event.target.value),
                                         )
                                     }
                                     inputProps={{
@@ -171,7 +187,7 @@ export const CharacterDetails = ({
                                         handleInputChange(
                                             'xp',
                                             event.target.value === '' ? '' : (Number(event.target.value) as any),
-                                            Number(event.target.value)
+                                            Number(event.target.value),
                                         )
                                     }
                                     inputProps={{
@@ -196,7 +212,7 @@ export const CharacterDetails = ({
                                         handleInputChange(
                                             'activeAbilityLevel',
                                             event.target.value === '' ? '' : (Number(event.target.value) as any),
-                                            Number(event.target.value)
+                                            Number(event.target.value),
                                         )
                                     }
                                     inputProps={{
@@ -218,7 +234,7 @@ export const CharacterDetails = ({
                                         handleInputChange(
                                             'passiveAbilityLevel',
                                             event.target.value === '' ? '' : (Number(event.target.value) as any),
-                                            Number(event.target.value)
+                                            Number(event.target.value),
                                         )
                                     }
                                     inputProps={{
