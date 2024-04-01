@@ -54,7 +54,16 @@ export const CharacterDetails = ({
     const rarityEntries: number[] = getEnumValues(Rarity);
     const rankEntries: number[] = getEnumValues(Rank).filter(x => x === formData.rank || x <= maxRank);
     const biasEntries: number[] = getEnumValues(CharacterBias);
-    const starsEntries: number[] = getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
+    let starsEntries: number[] = getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
+
+    function validateRarityChange(updatedRarity: number) {
+        console.log('updatedRarity // Current_stars/min/max: ', formData.rarity, formData.stars, minStars, maxStars);
+        let newMinStars = rarityToStars[updatedRarity as Rarity];
+        console.log('New rarity stars: ', newMinStars);
+        if (formData.stars < newMinStars) {
+            setFormData({ ...formData, stars: newMinStars });
+        }
+    }
 
     const getNativeSelectControl = (
         value: number,
@@ -84,12 +93,6 @@ export const CharacterDetails = ({
         </FormControl>
     );
 
-    function validateRankChange() {
-        if (formData.stars === undefined || formData.stars < minStars || formData.stars > maxStars) {
-            setFormData({ ...formData, stars: starsEntries[0] });
-        }
-    }
-
     return (
         <FormGroup style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '1rem' }}>
             <Grid container spacing={2} alignItems="center">
@@ -103,7 +106,7 @@ export const CharacterDetails = ({
                         value => (
                             <RarityImage rarity={value} />
                         ),
-                        validateRankChange,
+                        (name, value) => validateRarityChange(value),
                     )}
                 </Grid>
                 <Grid item xs={6}>
