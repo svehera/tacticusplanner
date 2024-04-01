@@ -56,12 +56,15 @@ export const CharacterDetails = ({
     const biasEntries: number[] = getEnumValues(CharacterBias);
     let starsEntries: number[] = getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
 
-    function validateRarityChange(updatedRarity: number) {
-        console.log('updatedRarity // Current_stars/min/max: ', formData.rarity, formData.stars, minStars, maxStars);
-        let newMinStars = rarityToStars[updatedRarity as Rarity];
-        console.log('New rarity stars: ', newMinStars);
-        if (formData.stars < newMinStars) {
-            setFormData({ ...formData, stars: newMinStars });
+    function adjustStarsOnRarityChange(updatedRarity: Rarity) {
+        const newMinStars = rarityToStars[updatedRarity];
+        const newMaxStars = rarityToMaxStars[updatedRarity];
+        const currentStars = formData.stars;
+        if (currentStars < newMinStars) {
+            setFormData(prevState => ({ ...prevState, stars: newMinStars }));
+        }
+        if (currentStars > newMaxStars) {
+            setFormData(prevState => ({ ...prevState, stars: newMaxStars }));
         }
     }
 
@@ -106,7 +109,7 @@ export const CharacterDetails = ({
                         value => (
                             <RarityImage rarity={value} />
                         ),
-                        (name, value) => validateRarityChange(value),
+                        (name, value) => adjustStarsOnRarityChange(value),
                     )}
                 </Grid>
                 <Grid item xs={6}>
