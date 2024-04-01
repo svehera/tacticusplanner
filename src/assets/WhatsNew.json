@@ -1,6 +1,18 @@
 ﻿{
-    "currentVersion": "1.4.4",
+    "currentVersion": "1.4.5",
     "releaseNotes": [
+        {
+            "version": "1.4.5",
+            "date": "April X",
+            "type": "Update",
+            "new": [],
+            "minor": [
+                {
+                    "text": "Fixed Ad Mechs upgrades order (Cody212501, TuffNuts)"
+                }
+            ],
+            "bugFixes": []
+        },
         {
             "version": "1.4.4",
             "date": "March 26",
