@@ -11,10 +11,10 @@ import { StarsImage } from 'src/shared-components/stars-image';
 import { rarityToMaxRank, rarityToMaxStars, rarityToStars } from 'src/models/constants';
 
 export const CharacterDetails = ({
-                                     character,
-                                     characterChanges,
-                                     updateInventoryChanges,
-                                 }: {
+    character,
+    characterChanges,
+    updateInventoryChanges,
+}: {
     character: ICharacter2;
     characterChanges: (character: ICharacter2) => void;
     updateInventoryChanges: (updateInventory: IMaterialRecipeIngredientFull[]) => void;
@@ -121,7 +121,7 @@ export const CharacterDetails = ({
                         rarityStarsToString,
                         value => (
                             <StarsImage stars={value} />
-                        ),
+                        )
                     )}
                 </Grid>
             </Grid>
@@ -142,7 +142,7 @@ export const CharacterDetails = ({
                                 handleInputChange(
                                     'shards',
                                     event.target.value === '' ? '' : (Number(event.target.value) as any),
-                                    Number(event.target.value),
+                                    Number(event.target.value)
                                 )
                             }
                             inputProps={{
@@ -171,7 +171,7 @@ export const CharacterDetails = ({
                                         handleInputChange(
                                             'level',
                                             event.target.value === '' ? '' : (Number(event.target.value) as any),
-                                            Number(event.target.value),
+                                            Number(event.target.value)
                                         )
                                     }
                                     inputProps={{
@@ -193,7 +193,7 @@ export const CharacterDetails = ({
                                         handleInputChange(
                                             'xp',
                                             event.target.value === '' ? '' : (Number(event.target.value) as any),
-                                            Number(event.target.value),
+                                            Number(event.target.value)
                                         )
                                     }
                                     inputProps={{
@@ -218,7 +218,7 @@ export const CharacterDetails = ({
                                         handleInputChange(
                                             'activeAbilityLevel',
                                             event.target.value === '' ? '' : (Number(event.target.value) as any),
-                                            Number(event.target.value),
+                                            Number(event.target.value)
                                         )
                                     }
                                     inputProps={{
@@ -240,7 +240,7 @@ export const CharacterDetails = ({
                                         handleInputChange(
                                             'passiveAbilityLevel',
                                             event.target.value === '' ? '' : (Number(event.target.value) as any),
-                                            Number(event.target.value),
+                                            Number(event.target.value)
                                         )
                                     }
                                     inputProps={{
