@@ -8979,64 +8979,64 @@
         "Stone II": [
             "Scrolls",
             "Minor Bionic Enhancement",
-            "Blessed Weapon Oils",
             "Plasma Cell",
+            "Blessed Weapon Oils",
             "Purity Seal",
             "Rebreather"
         ],
         "Stone III": [
             "Writings",
             "Bionic Enhancement",
-            "Basic Auxiliary Core",
             "Single Power Pack",
-            "Cloak",
-            "Air Purificator"
+            "Basic Auxiliary Core",
+            "Air Purificator",
+            "Cloak"
         ],
         "Iron I": [
             "Holster and Pockets",
             "Reinforced Cables",
-            "Locator Beacon",
             "Plasma Cell",
+            "Locator Beacon",
             "Oath Seal",
             "Adamantium Lump"
         ],
         "Iron II": [
             "Writings",
             "Electromantic Cable Bundle",
-            "Divinator Class Auspex",
             "Power Pack Bundle",
-            "Cloak",
-            "Subdermal Plating"
+            "Divinator Class Auspex",
+            "Subdermal Plating",
+            "Cloak"
         ],
         "Iron III": [
-            "The Gold Phoenix",
             "Grandiloquent Litanical",
+            "The Gold Phoenix",
             "Motive Force Capacitator",
             "Powerful Auxiliary Core",
             "Sophisticated Material Ingot",
             "Valuable Fabric"
         ],
         "Bronze I": [
-            "The Phoenix Ascendant",
             "Repair-Kit",
+            "The Phoenix Ascendant",
             "High-Capacity Power Pack",
             "Classified Data-Slate",
-            "Adamantium Bar",
-            "Blessed Purity Seal"
+            "Blessed Purity Seal",
+            "Adamantium Bar"
         ],
         "Bronze II": [
             "Servo-Arc Claw",
             "Advanced Bionics",
-            "Anointed Auxiliary Core",
             "Bionic Eye",
+            "Anointed Auxiliary Core",
             "Cogwheel Crest",
             "Fine Cloak"
         ],
         "Bronze III": [
             "Metal Decorative Skull",
             "Mars-Pattern Bionics",
-            "Sanctified Weapon Oils",
             "Enhanced Motive Force Capacitator",
+            "Sanctified Weapon Oils",
             "Enhanced Cogwheel Crest",
             "Unyielding Rivets"
         ],
@@ -9057,18 +9057,18 @@
             "Decorated Cloak"
         ],
         "Silver III": [
-            "Advanced Exospine",
             "Servo-Arc Claw",
-            "Digital Weapons",
+            "Advanced Exospine",
             "Enhanced Motive Force Capacitator",
+            "Digital Weapons",
             "Archeo-Tech Remnant",
             "Adamantium Plates"
         ],
         "Gold I": [
             "Mechadendrite Hive",
             "Relic Bionic Enhancement",
-            "Relic Auxiliary Core",
             "Archeotech Bionics",
+            "Relic Auxiliary Core",
             "Artificer Cogwheel Crest",
             "Divine Cloak"
         ],
@@ -9125,56 +9125,56 @@
         "Stone III": [
             "Writings",
             "Bionic Enhancement",
-            "Basic Auxiliary Core",
             "Single Power Pack",
-            "Cloak",
-            "Air Purificator"
+            "Basic Auxiliary Core",
+            "Air Purificator",
+            "Cloak"
         ],
         "Iron I": [
             "Holster and Pockets",
             "Reinforced Cables",
-            "Locator Beacon",
             "Plasma Cell",
-            "Adamantium Lump",
-            "Oath Seal"
+            "Locator Beacon",
+            "Oath Seal",
+            "Adamantium Lump"
         ],
         "Iron II": [
             "Writings",
             "Electromantic Cable Bundle",
-            "Divinator Class Auspex",
             "Power Pack Bundle",
-            "Cloak",
-            "Subdermal Plating"
+            "Divinator Class Auspex",
+            "Subdermal Plating",
+            "Cloak"
         ],
         "Iron III": [
-            "The Gold Phoenix",
             "Grandiloquent Litanical",
+            "The Gold Phoenix",
             "Motive Force Capacitator",
             "Powerful Auxiliary Core",
             "Sophisticated Material Ingot",
             "Valuable Fabric"
         ],
         "Bronze I": [
-            "The Phoenix Ascendant",
             "Repair-Kit",
+            "The Phoenix Ascendant",
             "High-Capacity Power Pack",
             "Classified Data-Slate",
-            "Adamantium Bar",
-            "Blessed Purity Seal"
+            "Blessed Purity Seal",
+            "Adamantium Bar"
         ],
         "Bronze II": [
             "Servo-Arc Claw",
             "Advanced Bionics",
-            "Anointed Auxiliary Core",
             "Bionic Eye",
+            "Anointed Auxiliary Core",
             "Cogwheel Crest",
             "Fine Cloak"
         ],
         "Bronze III": [
             "Metal Decorative Skull",
             "Mars-Pattern Bionics",
-            "Sanctified Weapon Oils",
             "Enhanced Motive Force Capacitator",
+            "Sanctified Weapon Oils",
             "Enhanced Cogwheel Crest",
             "Unyielding Rivets"
         ],
@@ -9195,18 +9195,18 @@
             "Decorated Cloak"
         ],
         "Silver III": [
-            "Advanced Exospine",
             "Servo-Arc Claw",
-            "Digital Weapons",
+            "Advanced Exospine",
             "Enhanced Motive Force Capacitator",
+            "Digital Weapons",
             "Archeo-Tech Remnant",
             "Adamantium Plates"
         ],
         "Gold I": [
             "Mechadendrite Hive",
             "Relic Bionic Enhancement",
-            "Relic Auxiliary Core",
             "Archeotech Bionics",
+            "Relic Auxiliary Core",
             "Artificer Cogwheel Crest",
             "Divine Cloak"
         ],
@@ -9247,8 +9247,8 @@
         "Stone I": [
             "Ropes and Chains",
             "The Iron Phoenix",
-            "Weapon Anointment Oils",
             "Auspex",
+            "Weapon Anointment Oils",
             "Sophisticated Material",
             "Adamantium Ore"
         ],
@@ -9265,44 +9265,44 @@
             "Bionic Enhancement",
             "Vox-Caster",
             "Basic Auxiliary Core",
-            "Cloak",
-            "Air Purificator"
+            "Air Purificator",
+            "Cloak"
         ],
         "Iron I": [
             "Holster and Pockets",
             "Reinforced Cables",
-            "Locator Beacon",
             "Fine Micro-Generator",
-            "Adamantium Lump",
-            "Oath Seal"
+            "Locator Beacon",
+            "Oath Seal",
+            "Adamantium Lump"
         ],
         "Iron II": [
             "Mission Objective",
             "Electromantic Cable Bundle",
             "Adamantium Blades",
             "Divinator Class Auspex",
-            "Cloak",
-            "Crate of Salvage"
+            "Crate of Salvage",
+            "Cloak"
         ],
         "Iron III": [
-            "The Gold Phoenix",
             "Battle Plan",
+            "The Gold Phoenix",
             "Motive Force Capacitator",
             "Powerful Auxiliary Core",
             "Sophisticated Material Ingot",
             "Valuable Fabric"
         ],
         "Bronze I": [
-            "The Phoenix Ascendant",
             "Repair-Kit",
+            "The Phoenix Ascendant",
             "Prey-Sight",
             "Classified Data-Slate",
-            "Adamantium Bar",
-            "Blessed Purity Seal"
+            "Blessed Purity Seal",
+            "Adamantium Bar"
         ],
         "Bronze II": [
-            "Advanced Bionics",
             "Servo-Arc Claw",
+            "Advanced Bionics",
             "Bionic Eye",
             "Anointed Auxiliary Core",
             "Cogwheel Crest",
@@ -9311,8 +9311,8 @@
         "Bronze III": [
             "Metal Decorative Skull",
             "Mars-Pattern Bionics",
-            "Sanctified Weapon Oils",
             "Enhanced Motive Force Capacitator",
+            "Sanctified Weapon Oils",
             "Enhanced Cogwheel Crest",
             "Unyielding Rivets"
         ],
@@ -9333,18 +9333,18 @@
             "Decorated Cloak"
         ],
         "Silver III": [
-            "Grand Strategy",
             "Servo-Arc Claw",
-            "Digital Weapons",
+            "Grand Strategy",
             "Enhanced Motive Force Capacitator",
+            "Digital Weapons",
             "Archeo-Tech Remnant",
             "Adamantium Plates"
         ],
         "Gold I": [
             "Mechadendrite Hive",
             "Relic Bionic Enhancement",
-            "Relic Auxiliary Core",
             "Archeotech Bionics",
+            "Relic Auxiliary Core",
             "Artificer Cogwheel Crest",
             "Divine Cloak"
         ],
@@ -9383,125 +9383,125 @@
     },
     "Exitor-Rho": {
         "Stone I": [
-            "The Iron Phoenix",
             "Ropes and Chains",
+            "The Iron Phoenix",
             "Canister of Chemicals",
             "Weapon Anointment Oils",
-            "Adamantium Ore",
-            "Sophisticated Material"
+            "Sophisticated Material",
+            "Adamantium Ore"
         ],
         "Stone II": [
-            "Minor Bionic Enhancement",
             "Wires",
+            "Minor Bionic Enhancement",
             "Combat Stimms",
             "Blessed Weapon Oils",
             "Purity Seal",
             "Rebreather"
         ],
-        "Stone III": ["Bionic Enhancement", "Reinforced Cables", "Auspex", "Vox-Caster", "Air Purificator", "Cloak"],
+        "Stone III": ["Reinforced Cables", "Bionic Enhancement", "Vox-Caster", "Auspex", "Air Purificator", "Cloak"],
         "Iron I": [
-            "Reinforced Cables",
             "Holster and Pockets",
-            "Fine Micro-Generator",
+            "Reinforced Cables",
             "Combat Stimms",
+            "Fine Micro-Generator",
             "Oath Seal",
             "Adamantium Lump"
         ],
         "Iron II": [
-            "Electromantic Cable Bundle",
             "Reinforced Cables",
-            "Divinator Class Auspex",
+            "Electromantic Cable Bundle",
             "Adamantium Blades",
+            "Divinator Class Auspex",
             "Crate of Salvage",
             "Cloak"
         ],
         "Iron III": [
             "Electromantic Cable Bundle",
             "The Gold Phoenix",
-            "Powerful Micro-Generator",
             "Motive Force Capacitator",
-            "Valuable Fabric",
-            "Sophisticated Material Ingot"
+            "Powerful Micro-Generator",
+            "Sophisticated Material Ingot",
+            "Valuable Fabric"
         ],
         "Bronze I": [
             "Repair-Kit",
             "The Phoenix Ascendant",
-            "Classified Data-Slate",
             "Prey-Sight",
+            "Classified Data-Slate",
             "Blessed Purity Seal",
             "Adamantium Bar"
         ],
         "Bronze II": [
             "Servo-Arc Claw",
             "Advanced Bionics",
-            "Anointed Auxiliary Core",
             "Bionic Eye",
-            "Fine Cloak",
-            "Cogwheel Crest"
+            "Anointed Micro-Generator",
+            "Cogwheel Crest",
+            "Fine Cloak"
         ],
         "Bronze III": [
-            "Mars-Pattern Bionics",
             "Kill Count",
+            "Mars-Pattern Bionics",
             "Enhanced Motive Force Capacitator",
             "Sanctified Weapon Oils",
-            "Unyielding Rivets",
-            "Enhanced Cogwheel Crest"
+            "Enhanced Cogwheel Crest",
+            "Unyielding Rivets"
         ],
         "Silver I": [
-            "Secret Agenda",
             "Servo-Arc Claw",
-            "Bionic Neural Pathways",
+            "Secret Agenda",
             "Enhanced Motive Force Capacitator",
-            "Adamantium Sheet",
-            "Enhanced Cogwheel Crest"
+            "Bionic Neural Pathways",
+            "Enhanced Cogwheel Crest",
+            "Adamantium Sheet"
         ],
         "Silver II": [
-            "Greater Reliquary of Protection",
             "Blessed Cogitator",
-            "Anointed Micro-Generator",
+            "Greater Reliquary of Protection",
             "Relic Motive Force Capacitator",
-            "Decorated Cloak",
-            "Enhanced Cogwheel Crest"
+            "Anointed Micro-Generator",
+            "Enhanced Cogwheel Crest",
+            "Decorated Cloak"
         ],
         "Silver III": [
             "Servo-Arc Claw",
             "Grand Strategy",
             "Enhanced Motive Force Capacitator",
             "Digital Weapons",
-            "Adamantium Plates",
-            "Archeo-Tech Remnant"
+            "Archeo-Tech Remnant",
+            "Adamantium Plates"
         ],
         "Gold I": [
-            "Relic Bionic Enhancement",
             "Mechadendrite Hive",
+            "Relic Bionic Enhancement",
             "Archeotech Bionics",
             "Relic Micro-Generator",
-            "Divine Cloak",
-            "Artificer Cogwheel Crest"
+            "Artificer Cogwheel Crest",
+            "Divine Cloak"
         ],
         "Gold II": [
-            "Legendary Reliquary of Protection",
             "Sanctus Canister",
-            "Digital Weapons",
+            "Legendary Reliquary of Protection",
             "Relic Motive Force Capacitator",
-            "Seal of the Emperor's Protection",
-            "Artificer Cogwheel Crest"
+            "Digital Weapons",
+            "Artificer Cogwheel Crest",
+            "Seal of the Emperor's Protection"
         ],
         "Gold III": [
-            "Grandiose Skull Ornament",
             "Mechadendrite Hive",
-            "Powered Blade",
+            "Grandiose Skull Ornament",
             "Prehensile Dataspike",
-            "Divine Cloak",
-            "Kataphron Armour"
+            "Powered Blade",
+            "Kataphron Armour",
+            "Divine Cloak"
         ],
         "Diamond I": [
-            "Advanced Exospine",
             "Sanctus Canister",
-            "Hyperstim",
+            "Advanced Exospine",
             "Prehensile Dataspike",
-            "Adamantium Plates",
-            "Kataphron Armour"
+            "Hyperstim",
+            "Kataphron Armour",
+            "Adamantium Plates"
         ],
         "Diamond II": [
             "Sanctus Canister",
