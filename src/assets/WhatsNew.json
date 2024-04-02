@@ -9,6 +9,9 @@
             "minor": [
                 {
                     "text": "Fixed Ad Mechs upgrades order (Cody212501, TuffNuts)"
+                },
+                {
+                    "text": "Updated upgrades icons. Thanks to Illidan, Avalon1204, KIVIY, Adj, Rydai, Balask83, Anigav, Tani for help"
                 }
             ],
             "bugFixes": []
