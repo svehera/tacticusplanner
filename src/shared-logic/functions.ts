@@ -169,7 +169,7 @@ export function getImageUrl(image: string): string {
 
 export function formatDateWithOrdinal(date: Date): string {
     const day = date.getDate();
-    const month = date.toLocaleString('default', { month: 'long' });
+    const month = date.toLocaleString('en', { month: 'long' });
     const suffix = getDaySuffix(day);
 
     return `${day}${suffix} of ${month}`;

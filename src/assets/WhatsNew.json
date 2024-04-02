@@ -17,6 +17,9 @@
             "bugFixes": [
                 {
                     "text": "Fix issue with inventory items being cropped when alphabet letters are displayed in mobile (Tani)"
+                },
+                {
+                    "text": "Fixed Month language on goals/daily raids pages (markRom)"
                 }
             ]
         },
