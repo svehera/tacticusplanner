@@ -28,6 +28,13 @@
         flex-direction: column;
     }
 }
+.inventory-items-alphabet {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
 
 input.item-quantity-input::-webkit-outer-spin-button,
 input.item-quantity-input::-webkit-inner-spin-button {

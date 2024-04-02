@@ -14,7 +14,11 @@
                     "text": "Updated upgrades icons. Thanks to Illidan, Avalon1204, KIVIY, Adj, Rydai, Balask83, Anigav, Tani for help"
                 }
             ],
-            "bugFixes": []
+            "bugFixes": [
+                {
+                    "text": "Fix issue with inventory items being cropped when alphabet letters are displayed in mobile (Tani)"
+                }
+            ]
         },
         {
             "version": "1.4.4",
