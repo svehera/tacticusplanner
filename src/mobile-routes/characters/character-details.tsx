@@ -54,17 +54,18 @@ export const CharacterDetails = ({
     const rarityEntries: number[] = getEnumValues(Rarity);
     const rankEntries: number[] = getEnumValues(Rank).filter(x => x === formData.rank || x <= maxRank);
     const biasEntries: number[] = getEnumValues(CharacterBias);
-    let starsEntries: number[] = getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
+    const starsEntries: number[] = getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
 
     function adjustStarsOnRarityChange(updatedRarity: Rarity) {
         const newMinStars = rarityToStars[updatedRarity];
         const newMaxStars = rarityToMaxStars[updatedRarity];
         const currentStars = formData.stars;
-        if (currentStars < newMinStars) {
-            setFormData(prevState => ({ ...prevState, stars: newMinStars }));
-        }
-        if (currentStars > newMaxStars) {
-            setFormData(prevState => ({ ...prevState, stars: newMaxStars }));
+
+        if (currentStars < newMinStars || currentStars > newMaxStars) {
+            setFormData(prevState => ({
+                ...prevState,
+                stars: Math.max(newMinStars, Math.min(newMaxStars, currentStars)),
+            }));
         }
     }
 
@@ -75,15 +76,17 @@ export const CharacterDetails = ({
         entries: Array<number>,
         getName: (value: number) => string,
         icon?: (value: number) => React.JSX.Element,
-        validateData: (name: keyof ICharacter2, value: number) => void = () => undefined,
+        validateData: (name: keyof ICharacter2, value: number) => void = () => undefined
     ) => (
         <FormControl fullWidth>
             <InputLabel>{label}</InputLabel>
-            <Select label={label} value={value} onChange={event => {
-                handleInputChange(name, +event.target.value);
-                validateData(name, +event.target.value);
-            }
-            }>
+            <Select
+                label={label}
+                value={value}
+                onChange={event => {
+                    handleInputChange(name, +event.target.value);
+                    validateData(name, +event.target.value);
+                }}>
                 {entries.map(value => (
                     <MenuItem key={value} value={value}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -109,7 +112,7 @@ export const CharacterDetails = ({
                         value => (
                             <RarityImage rarity={value} />
                         ),
-                        (name, value) => adjustStarsOnRarityChange(value),
+                        (name, value) => adjustStarsOnRarityChange(value)
                     )}
                 </Grid>
                 <Grid item xs={6}>
