@@ -1,6 +1,6 @@
 ﻿import guildWarData from 'src/v2/data/guildWar.json';
 import { IGWData, IGWDataRaw, IGWSection } from './guild-war.models';
-import { Rarity } from 'src/models/enums';
+import { Difficulty, Rarity } from 'src/models/enums';
 import { groupBy, map, mapValues } from 'lodash';
 
 export class GuildWarService {
@@ -38,6 +38,11 @@ export class GuildWarService {
         return rarityCaps.caps;
     }
 
+    public static getDifficultyRarityCaps(difficulty: Difficulty): Rarity[] {
+        const difficultyLabel = this.gwData.difficulties[difficulty - 1];
+        return this.gwData.rarityCaps[difficultyLabel].map(raw => this.shortRarityStringToEnum[raw]);
+    }
+
     public static getTotalRarityCaps(bfLevel: number): Record<Rarity, number> {
         const totalRarity = this.gwData.sections.flatMap(section =>
             Array<Rarity[]>(section.count)
@@ -48,14 +53,18 @@ export class GuildWarService {
         return mapValues(groupBy(totalRarity), x => x.length * 2) as Record<Rarity, number>;
     }
 
+    public static getDifficultyRarityCapsGrouped(difficulty: Difficulty): Record<Rarity, number> {
+        return mapValues(groupBy(this.getDifficultyRarityCaps(difficulty)), x => x.length) as Record<Rarity, number>;
+    }
+
     private static convertRawDataToGWData(rawData: IGWDataRaw): IGWData {
         const sections: IGWSection[] = rawData.sections.map(rawSection => {
-            const rarityCaps: Record<number, { complexity: string; caps: Rarity[] }> = {};
-            for (const bfLevel in rawSection.complexity) {
-                const complexity = rawSection.complexity[bfLevel];
-                const caps = rawData.rarityCaps[complexity].map(x => this.shortRarityStringToEnum[x]);
+            const rarityCaps: Record<number, { difficulty: string; caps: Rarity[] }> = {};
+            for (const bfLevel in rawSection.difficulty) {
+                const difficulty = rawSection.difficulty[bfLevel];
+                const caps = rawData.rarityCaps[difficulty].map(x => this.shortRarityStringToEnum[x]);
                 rarityCaps[parseInt(bfLevel)] = {
-                    complexity: complexity,
+                    difficulty: difficulty,
                     caps: caps,
                 };
             }
@@ -70,6 +79,8 @@ export class GuildWarService {
 
         return {
             bfLevels: rawData.bfLevels,
+            difficulties: rawData.sectionDifficulty,
+            rarityCaps: rawData.rarityCaps,
             sections: sections,
         };
     }

@@ -1,13 +1,15 @@
-﻿import { Rarity } from 'src/models/enums';
+﻿import { Difficulty, Rarity } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
 
 export interface IGWData {
     bfLevels: number[];
+    difficulties: string[];
+    rarityCaps: Record<string, string[]>;
     sections: IGWSection[];
 }
 
 export interface IGWDataRaw {
-    sectionComplexity: string[];
+    sectionDifficulty: string[];
     rarityCaps: Record<string, string[]>;
     bfLevels: number[];
     sections: IGWSectionRaw[];
@@ -21,7 +23,7 @@ export interface IGWSection {
     rarityCaps: Record<
         number,
         {
-            complexity: string;
+            difficulty: string;
             caps: Rarity[];
         }
     >; // battlefield level to rarityCaps array
@@ -32,7 +34,7 @@ export interface IGWSectionRaw {
     name: string;
     warScore: number;
     count: number;
-    complexity: Record<number, string>; // battlefield level to rarityCaps array
+    difficulty: Record<number, string>; // battlefield level to rarityCaps array
 }
 
 export interface IGWTeam {

@@ -1,5 +1,6 @@
 ﻿import {
     CharacterReleaseRarity,
+    Difficulty,
     LegendaryEventEnum,
     PersonalGoalType,
     Rank,
@@ -336,6 +337,7 @@ export const defaultData: IPersonalData2 = {
     },
     guildWar: {
         battlefieldLevel: 1,
+        selectedDefenseDifficulty: Difficulty.Easy,
         teams: [
             ...Array.from({ length: 5 }, (_, i) => ({
                 id: v4(),

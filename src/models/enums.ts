@@ -63,6 +63,14 @@ export enum RarityStars {
     BlueStar,
 }
 
+export enum Difficulty {
+    None,
+    Easy,
+    Normal,
+    Hard,
+    VeryHard,
+}
+
 export enum Equipment {
     Crit = 'Crit',
     Block = 'Block',
