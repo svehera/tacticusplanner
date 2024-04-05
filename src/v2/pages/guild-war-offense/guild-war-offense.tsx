@@ -3,7 +3,6 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { BattlefieldInfo } from 'src/v2/features/guild-war/battlefield-info';
-import { BfLevelSelect } from 'src/v2/features/guild-war/bf-level-select';
 import { Team } from 'src/v2/features/characters/components/team';
 import { ICharacter2 } from 'src/models/interfaces';
 import { Conditional } from 'src/v2/components/conditional';
@@ -17,7 +16,6 @@ import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { PotentialInfo } from 'src/v2/features/characters/components/potential-info';
 import { Rank, Rarity } from 'src/models/enums';
 import { GuildWarTeamType, IGWTeamWithCharacters } from 'src/v2/features/guild-war/guild-war.models';
-import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 import Button from '@mui/material/Button';
 import { Card, CardActions, CardContent, CardHeader } from '@mui/material';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
@@ -213,6 +211,8 @@ export const GuildWarOffense = () => {
                     </FlexBox>
                 );
             }
+
+            return '0. Add some characters to the teams below';
         });
     }, [guildWar.teams, guildWar.deployedCharacters]);
 
