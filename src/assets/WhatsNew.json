@@ -40,6 +40,9 @@
             ],
             "minor": [
                 {
+                    "text": "Added possibility to add \"Locked\" character to a team on the \"Edit team dialog\". The character will be automatically removed from other teams"
+                },
+                {
                     "text": "Fixed Ad Mechs upgrades order (Cody212501, TuffNuts)"
                 },
                 {
