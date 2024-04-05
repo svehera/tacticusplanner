@@ -22,7 +22,13 @@
                 },
                 {
                     "text": "General updates to align the planner with the 1.17 Tacticus update",
-                    "subPoints": ["Addded new cahracters - Macer and Asmodai", "Update Guild War battlefield zones"]
+                    "subPoints": [
+                        "Addded new cahracters - Macer and Asmodai",
+                        "Update Guild War battlefield zones",
+                        "New Campaign Battles: ‘Mirror Saim-Hann’ Part 5 and ‘Elite Saim-Hann’ Part 1",
+                        "Vitruvius Legendary event starting on May 12",
+                        "Upgrades locations changes"
+                    ]
                 }
             ],
             "minor": [

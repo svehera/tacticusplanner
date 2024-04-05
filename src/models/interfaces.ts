@@ -744,6 +744,7 @@ export type ICampaignsProgress = {
 
     'Saim-Hann': number;
     'Saim-Hann Mirror': number;
+    'Saim-Hann Elite': number;
 };
 
 export interface IInventory {

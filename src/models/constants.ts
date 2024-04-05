@@ -174,6 +174,7 @@ const defaultCampaignsProgress: ICampaignsProgress = {
 
     'Saim-Hann': 0,
     'Saim-Hann Mirror': 0,
+    'Saim-Hann Elite': 0,
 };
 
 export const fullCampaignsProgress: ICampaignsProgress = {
@@ -194,6 +195,7 @@ export const fullCampaignsProgress: ICampaignsProgress = {
 
     'Saim-Hann': 75,
     'Saim-Hann Mirror': 75,
+    'Saim-Hann Elite': 75,
 };
 
 export const campaignsNames: Array<keyof ICampaignsProgress> = Object.keys(defaultCampaignsProgress) as Array<

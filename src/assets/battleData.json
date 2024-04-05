@@ -2475,7 +2475,7 @@
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 54,
-        "reward": "Weapon Anointment Oils",
+        "reward": "Subdermal Plating",
         "expectedGold": 71
     },
     "IM55": {
@@ -3979,7 +3979,7 @@
         "campaign": "Indomitus Elite",
         "campaignType": "Elite",
         "nodeNumber": 35,
-        "reward": "Ceramite Lump",
+        "reward": "Subdermal Plating",
         "expectedGold": 108,
         "slots": 3
     },
@@ -4017,7 +4017,7 @@
         "campaign": "Indomitus Elite",
         "campaignType": "Elite",
         "nodeNumber": 4,
-        "reward": "Enriched Rations",
+        "reward": "Ceramite Lump",
         "expectedGold": 83,
         "slots": 3
     },
@@ -4713,21 +4713,21 @@
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 17,
-        "reward": "Minor Bionic Enhancement",
+        "reward": "Motive Force Capacitator",
         "expectedGold": 101
     },
     "IME18": {
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 18,
-        "reward": "Waystone",
+        "reward": "Bladesman's Honour",
         "expectedGold": 101
     },
     "IME19": {
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 19,
-        "reward": "Psytronome",
+        "reward": "Mutation: Warped Heart",
         "expectedGold": 101
     },
     "IME2": {
@@ -4741,28 +4741,28 @@
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 20,
-        "reward": "Wraithbone Plate",
+        "reward": "Sensor Suite",
         "expectedGold": 101
     },
     "IME21": {
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 21,
-        "reward": "Warp Locus",
+        "reward": "Adamantium Filaments",
         "expectedGold": 101
     },
     "IME22": {
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 22,
-        "reward": "Runes of Fate",
+        "reward": "Cogwheel Crest",
         "expectedGold": 101
     },
     "IME23": {
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 23,
-        "reward": "Codex Astartes Page",
+        "reward": "Purity Seal",
         "expectedGold": 101
     },
     "IME24": {
@@ -4783,21 +4783,21 @@
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 26,
-        "reward": "Basic Auxiliary Core",
+        "reward": "Drone Controller",
         "expectedGold": 108
     },
     "IME27": {
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 27,
-        "reward": "Nasty Spikes",
+        "reward": "Basic Auxiliary Core",
         "expectedGold": 108
     },
     "IME28": {
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 28,
-        "reward": "Targeting Link",
+        "reward": "Blessed Cogitator",
         "expectedGold": 108
     },
     "IME29": {
@@ -4867,7 +4867,7 @@
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 37,
-        "reward": "Drone Controller",
+        "reward": "Codex Astartes Page",
         "expectedGold": 108
     },
     "IME38": {
@@ -5166,7 +5166,7 @@
         "campaign": "Fall of Cadia Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 38,
-        "reward": "Psyk-Conductive Material",
+        "reward": "Warp Locus",
         "expectedGold": 108,
         "slots": 4
     },
@@ -5174,7 +5174,7 @@
         "campaign": "Fall of Cadia Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 39,
-        "reward": "Relic Hilt",
+        "reward": "Psyk-Conductive Material",
         "expectedGold": 108
     },
     "FoCME4": {
@@ -5966,6 +5966,174 @@
         "campaignType": "Mirror",
         "nodeNumber": 60,
         "reward": "Jain Zar",
+        "expectedGold": 53
+    },
+    "SHM61": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 61,
+        "reward": "Satchel",
+        "expectedGold": 53
+    },
+    "SHM62": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 62,
+        "reward": "Mutation: Tough Skin",
+        "expectedGold": 53
+    },
+    "SHM63": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 63,
+        "reward": "Mutation: Tough Skin",
+        "slots": 4,
+        "expectedGold": 53
+    },
+    "SHM64": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 64,
+        "reward": "Boon of Khorne",
+        "slots": 4,
+        "expectedGold": 53
+    },
+    "SHM65": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 65,
+        "reward": "Divinator Class Auspex",
+        "expectedGold": 53
+    },
+    "SHM66": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 66,
+        "reward": "Weapon Anointment Oils",
+        "slots": 4,
+        "expectedGold": 53
+    },
+    "SHM67": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 67,
+        "reward": "Reliquary of Protection",
+        "slots": 3,
+        "expectedGold": 53
+    },
+    "SHM68": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 68,
+        "reward": "The Silver Eagle with Swords",
+        "expectedGold": 53
+    },
+    "SHM69": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 69,
+        "reward": "Blessed Promethium Canister",
+        "expectedGold": 53
+    },
+    "SHM70": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 70,
+        "reward": "The Silver Scope",
+        "expectedGold": 53
+    },
+    "SHM71": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 71,
+        "reward": "Battle Scar",
+        "expectedGold": 53
+    },
+    "SHM72": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 72,
+        "reward": "Runes of Fate",
+        "expectedGold": 53
+    },
+    "SHM73": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 73,
+        "reward": "Secret Agenda",
+        "expectedGold": 53
+    },
+    "SHM74": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 74,
+        "reward": "Blessing of Tzeentch",
+        "expectedGold": 53
+    },
+    "SHM75": {
+        "campaign": "Saim-Hann Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 75,
+        "reward": "Maugan Ra",
+        "expectedGold": 53
+    },
+    "SHE1": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 1,
+        "slots": 4,
+        "reward": "Plasma Cell",
+        "expectedGold": 53
+    },
+    "SHE2": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 2,
+        "reward": "Waystone",
+        "expectedGold": 53
+    },
+    "SHE3": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 3,
+        "reward": "Psytronome",
+        "expectedGold": 53
+    },
+    "SHE4": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 4,
+        "reward": "Wraithbone Plate",
+        "expectedGold": 53
+    },
+    "SHE5": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 5,
+        "slots": 3,
+        "reward": "Adamantium Filaments",
+        "expectedGold": 53
+    },
+    "SHE6": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 6,
+        "reward": "Runes of Fate",
+        "expectedGold": 53
+    },
+    "SHE7": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 7,
+        "slots": 4,
+        "reward": "Ancient Runes",
+        "expectedGold": 53
+    },
+    "SHE8": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 8,
+        "reward": "Toth",
         "expectedGold": 53
     }
 }
