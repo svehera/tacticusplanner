@@ -21,6 +21,13 @@
                     ]
                 },
                 {
+                    "text": "Updated Guid War defense page",
+                    "subPoints": [
+                        "Added \"Zone difficulty\" selector instead of BF level and Section selctors",
+                        "Moved total teams to the battle field levels info table"
+                    ]
+                },
+                {
                     "text": "General updates to align the planner with the 1.17 Tacticus update",
                     "subPoints": [
                         "Addded new cahracters - Macer and Asmodai",

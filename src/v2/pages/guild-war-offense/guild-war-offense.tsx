@@ -36,10 +36,6 @@ export const GuildWarOffense = () => {
     const [openCharacterItemDialog, setOpenCharacterItemDialog] = React.useState(false);
     const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
 
-    const updateBfLevel = (battlefieldLevel: number) => {
-        dispatch.guildWar({ type: 'UpdateBfLevel', battlefieldLevel });
-    };
-
     const startEditCharacter = (character: ICharacter2): void => {
         const originalChar = characters.find(x => x.name === character.name);
         if (originalChar) {
@@ -113,7 +109,7 @@ export const GuildWarOffense = () => {
                 total: Math.round(sum(lineup.map(x => x.potential)) / 5),
             };
         });
-    }, [guildWar.sectionId, guildWar.battlefieldLevel, guildWar.teams, teamsWithCharacters]);
+    }, [teamsWithCharacters]);
 
     const renderTeams = useMemo(
         () =>
@@ -193,25 +189,16 @@ export const GuildWarOffense = () => {
             .map(x => x.name);
     };
 
-    const getTotalSlots = useMemo(() => {
-        const slots = GuildWarService.getTotalRarityCaps(guildWar.battlefieldLevel);
-        return [Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon].map(rarity => {
-            const slotsCount = slots[rarity];
-            if (slotsCount) {
-                return (
-                    <FlexBox key={rarity} gap={3}>
-                        <RarityImage rarity={rarity} /> x{slotsCount}
-                    </FlexBox>
-                );
-            }
-        });
-    }, [guildWar.battlefieldLevel]);
-
     const getTeamsSlots = useMemo(() => {
         const slots = mapValues(
             groupBy(
                 guildWar.teams
-                    .filter(team => team.type === GuildWarTeamType.Offense && team.lineup.length > 0)
+                    .filter(
+                        team =>
+                            team.type === GuildWarTeamType.Offense &&
+                            team.lineup.length > 0 &&
+                            !team.lineup.every(character => guildWar.deployedCharacters.includes(character))
+                    )
                     .map(team => team.rarityCap)
             ),
             x => x.length
@@ -227,7 +214,7 @@ export const GuildWarOffense = () => {
                 );
             }
         });
-    }, [guildWar.battlefieldLevel]);
+    }, [guildWar.teams, guildWar.deployedCharacters]);
 
     const availableCharacters = useMemo(() => {
         return characters.filter(
@@ -269,26 +256,29 @@ export const GuildWarOffense = () => {
                 }}>
                 <FlexBox gap={10}>
                     <BattlefieldInfo />
-                    <BfLevelSelect value={guildWar.battlefieldLevel} valueChange={updateBfLevel} />
-                    <DeploymentStatus charactersLeft={availableCharacters.length} onClearAll={clearDeployedCharacters}>
-                        <CharactersGrid
-                            onlyBlocked
-                            characters={characters}
-                            blockedCharacters={guildWar.deployedCharacters}
-                            onAvailableCharacterClick={character => deployCharacter(character.name)}
-                            onLockedCharacterClick={character => withdrawCharacter(character.name)}
-                        />
-                    </DeploymentStatus>
-                </FlexBox>
-                <FlexBox>
                     <Button
                         variant={'contained'}
                         component={Link}
                         to={isMobile ? '/mobile/plan/guildWar/defense' : '/plan/guildWar/defense'}>
                         Go to: Defense
                     </Button>
+                    <DeploymentStatus charactersLeft={availableCharacters.length} onClearAll={clearDeployedCharacters}>
+                        <CharactersGrid
+                            onlyBlocked
+                            characters={orderBy(
+                                characters,
+                                [
+                                    character =>
+                                        CharactersService.calculateCharacterPotential(character, Rarity.Legendary),
+                                ],
+                                ['desc']
+                            )}
+                            blockedCharacters={guildWar.deployedCharacters}
+                            onAvailableCharacterClick={character => deployCharacter(character.name)}
+                            onLockedCharacterClick={character => withdrawCharacter(character.name)}
+                        />
+                    </DeploymentStatus>
                 </FlexBox>
-                <FlexBox gap={5}>Total enemy teams: {getTotalSlots}</FlexBox>
                 <FlexBox gap={5}>Your teams: {getTeamsSlots}</FlexBox>
                 <FlexBox gap={5}>
                     Overall Potential: {Math.round(sum(teamsPotential.map(x => x.total)) / teamsPotential.length)}/100

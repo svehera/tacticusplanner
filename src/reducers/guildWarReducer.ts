@@ -20,12 +20,8 @@ export type GuildWarAction =
           teamId: string;
       }
     | {
-          type: 'UpdateBfLevel';
-          battlefieldLevel: number;
-      }
-    | {
-          type: 'UpdateBfSection';
-          sectionId: string;
+          type: 'UpdateZoneDifficulty';
+          zoneDifficulty: number;
       }
     | {
           type: 'DeployCharacter';
@@ -87,20 +83,12 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
 
             return state;
         }
-        case 'UpdateBfLevel': {
-            const { battlefieldLevel } = action;
+        case 'UpdateZoneDifficulty': {
+            const { zoneDifficulty } = action;
 
             return {
                 ...state,
-                battlefieldLevel,
-            };
-        }
-        case 'UpdateBfSection': {
-            const { sectionId } = action;
-
-            return {
-                ...state,
-                sectionId,
+                zoneDifficulty,
             };
         }
         case 'DeployCharacter': {

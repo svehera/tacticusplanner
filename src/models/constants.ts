@@ -338,7 +338,7 @@ export const defaultData: IPersonalData2 = {
         upgrades: {},
     },
     guildWar: {
-        battlefieldLevel: 1,
+        zoneDifficulty: Difficulty.Easy,
         deployedCharacters: [],
         teams: [
             ...Array.from({ length: 5 }, (_, i) => ({
@@ -356,7 +356,6 @@ export const defaultData: IPersonalData2 = {
                 lineup: [],
             })),
         ],
-        sectionId: 'frontline',
     },
 };
 

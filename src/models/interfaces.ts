@@ -5,6 +5,7 @@
     CharacterBias,
     CharacterReleaseRarity,
     DamageType,
+    Difficulty,
     Equipment,
     Faction,
     LegendaryEventEnum,
@@ -294,8 +295,7 @@ export interface IPersonalData2 {
 }
 
 export interface IGuildWar {
-    battlefieldLevel: number;
-    sectionId: string;
+    zoneDifficulty: Difficulty;
     deployedCharacters: string[];
     teams: IGWTeam[];
 }
