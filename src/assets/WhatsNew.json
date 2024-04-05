@@ -5,7 +5,22 @@
             "version": "1.4.5",
             "date": "April X",
             "type": "Update",
-            "new": [],
+            "new": [
+                {
+                    "text": "Added deployment status tracking for Guild War offense teams and specific characters",
+                    "images": [
+                        {
+                            "path": "1.png"
+                        },
+                        {
+                            "path": "2.png"
+                        },
+                        {
+                            "path": "3.png"
+                        }
+                    ]
+                }
+            ],
             "minor": [
                 {
                     "text": "Fixed Ad Mechs upgrades order (Cody212501, TuffNuts)"

@@ -296,6 +296,7 @@ export interface IPersonalData2 {
 export interface IGuildWar {
     battlefieldLevel: number;
     sectionId: string;
+    deployedCharacters: string[];
     teams: IGWTeam[];
 }
 

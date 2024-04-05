@@ -27,6 +27,17 @@ export type GuildWarAction =
           type: 'UpdateBfSection';
           sectionId: string;
       }
+    | {
+          type: 'DeployCharacter';
+          character: string;
+      }
+    | {
+          type: 'WithdrawCharacter';
+          character: string;
+      }
+    | {
+          type: 'ClearDeployedCharacters';
+      }
     | SetStateAction<IGuildWar>;
 
 export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuildWar => {
@@ -92,6 +103,37 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
                 sectionId,
             };
         }
+        case 'DeployCharacter': {
+            const { character } = action;
+
+            if (state.deployedCharacters.includes(character)) {
+                return state;
+            }
+
+            return {
+                ...state,
+                deployedCharacters: [...state.deployedCharacters, character],
+            };
+        }
+        case 'WithdrawCharacter': {
+            const { character } = action;
+
+            if (!state.deployedCharacters.includes(character)) {
+                return state;
+            }
+
+            return {
+                ...state,
+                deployedCharacters: state.deployedCharacters.filter(x => x !== character),
+            };
+        }
+        case 'ClearDeployedCharacters': {
+            return {
+                ...state,
+                deployedCharacters: [],
+            };
+        }
+
         default: {
             throw new Error();
         }

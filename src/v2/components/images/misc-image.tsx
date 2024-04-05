@@ -7,6 +7,7 @@ import healthIcon from 'src/assets/images/icons/health.webp';
 import powerIcon from 'src/assets/images/icons/power.png';
 import energyIcon from 'src/assets/images/icons/energy.png';
 import blackstoneIcon from 'src/assets/images/icons/blackstone.png';
+import deploymentIcon from 'src/assets/images/icons/deployment.png';
 
 const icons = {
     armour: {
@@ -32,6 +33,10 @@ const icons = {
     blackstone: {
         file: blackstoneIcon,
         label: 'Blackstone',
+    },
+    deployment: {
+        file: deploymentIcon,
+        label: '',
     },
 };
 

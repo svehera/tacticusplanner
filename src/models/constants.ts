@@ -337,7 +337,7 @@ export const defaultData: IPersonalData2 = {
     },
     guildWar: {
         battlefieldLevel: 1,
-        selectedDefenseDifficulty: Difficulty.Easy,
+        deployedCharacters: [],
         teams: [
             ...Array.from({ length: 5 }, (_, i) => ({
                 id: v4(),

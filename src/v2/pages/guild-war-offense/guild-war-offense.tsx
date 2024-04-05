@@ -11,11 +11,11 @@ import { CharacterItemDialog } from 'src/shared-components/character-item-dialog
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { SelectTeamDialog } from 'src/v2/features/characters/components/select-team-dialog';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { orderBy, sum } from 'lodash';
+import { groupBy, mapValues, orderBy, sum } from 'lodash';
 import InfoIcon from '@mui/icons-material/Info';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { PotentialInfo } from 'src/v2/features/characters/components/potential-info';
-import { PersonalGoalType, Rank, Rarity } from 'src/models/enums';
+import { Rank, Rarity } from 'src/models/enums';
 import { GuildWarTeamType, IGWTeamWithCharacters } from 'src/v2/features/guild-war/guild-war.models';
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 import Button from '@mui/material/Button';
@@ -23,6 +23,8 @@ import { Card, CardActions, CardContent, CardHeader } from '@mui/material';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
+import { DeploymentStatus } from 'src/v2/features/guild-war/deployment-status';
+import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 
 export const GuildWarOffense = () => {
     const { guildWar, characters, viewPreferences } = useContext(StoreContext);
@@ -78,13 +80,23 @@ export const GuildWarOffense = () => {
     };
 
     const teamsWithCharacters = useMemo<IGWTeamWithCharacters[]>(() => {
-        return guildWar.teams
+        const teams = guildWar.teams
             .filter(x => x.type === GuildWarTeamType.Offense)
             .map(team => {
                 const teamWithChars = team.lineup.map(name => characters.find(char => char.name === name)!);
                 return { ...team, lineup: teamWithChars.filter(x => !!x) };
             });
-    }, [guildWar.teams, characters]);
+        return orderBy(
+            teams,
+            [
+                team => {
+                    return team.lineup.filter(character => !guildWar.deployedCharacters.includes(character.name))
+                        .length;
+                },
+            ],
+            ['desc']
+        );
+    }, [guildWar.teams, characters, guildWar.deployedCharacters]);
 
     const teamsPotential = useMemo(() => {
         return teamsWithCharacters.map((team, teamIndex) => {
@@ -109,8 +121,41 @@ export const GuildWarOffense = () => {
                 <TeamCard
                     key={currTeam.id}
                     team={currTeam}
-                    onEdit={() => startEditTeam(currTeam)}
-                    onClear={() => clearTeam(currTeam.id)}
+                    actions={
+                        <>
+                            <Button size="small" onClick={() => startEditTeam(currTeam)}>
+                                Edit
+                            </Button>
+                            <Conditional condition={!!currTeam.lineup.length}>
+                                <Button size="small" color="error" onClick={() => clearTeam(currTeam.id)}>
+                                    Clear
+                                </Button>
+                            </Conditional>
+                            <Conditional
+                                condition={
+                                    !!currTeam.lineup.length &&
+                                    currTeam.lineup.some(
+                                        character => !guildWar.deployedCharacters.includes(character.name)
+                                    )
+                                }>
+                                <Button size="small" onClick={() => deployTeam(currTeam.lineup.map(x => x.name))}>
+                                    Deploy
+                                </Button>
+                            </Conditional>
+                            <Conditional
+                                condition={
+                                    !!currTeam.lineup.length &&
+                                    currTeam.lineup.every(character =>
+                                        guildWar.deployedCharacters.includes(character.name)
+                                    )
+                                }>
+                                <Button size="small" onClick={() => withdrawTeam(currTeam.lineup.map(x => x.name))}>
+                                    Withdraw
+                                </Button>
+                            </Conditional>
+                        </>
+                    }
+                    onEdit={() => () => startEditTeam(currTeam)}
                     teamPotential={teamsPotential[i].total}
                     onCharacterClick={startEditCharacter}
                     teamPotentialBreakdown={
@@ -124,7 +169,7 @@ export const GuildWarOffense = () => {
                     }
                 />
             )),
-        [teamsWithCharacters, teamsPotential]
+        [teamsWithCharacters, teamsPotential, guildWar.deployedCharacters]
     );
 
     const getCharactersWithPotential = (rarityCap: Rarity) => {
@@ -162,25 +207,56 @@ export const GuildWarOffense = () => {
         });
     }, [guildWar.battlefieldLevel]);
 
+    const getTeamsSlots = useMemo(() => {
+        const slots = mapValues(
+            groupBy(
+                guildWar.teams
+                    .filter(team => team.type === GuildWarTeamType.Offense && team.lineup.length > 0)
+                    .map(team => team.rarityCap)
+            ),
+            x => x.length
+        );
+
+        return [Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon].map(rarity => {
+            const slotsCount = slots[rarity];
+            if (slotsCount) {
+                return (
+                    <FlexBox key={rarity} gap={3}>
+                        <RarityImage rarity={rarity} /> x{slotsCount}
+                    </FlexBox>
+                );
+            }
+        });
+    }, [guildWar.battlefieldLevel]);
+
+    const availableCharacters = useMemo(() => {
+        return characters.filter(
+            character => character.rank > Rank.Locked && !guildWar.deployedCharacters.includes(character.name)
+        );
+    }, [characters, guildWar.deployedCharacters]);
+
+    const deployCharacter = (character: string) => {
+        dispatch.guildWar({ type: 'DeployCharacter', character });
+    };
+
+    const deployTeam = (charactersIds: string[]) => {
+        charactersIds.forEach(characterId => deployCharacter(characterId));
+    };
+
+    const withdrawCharacter = (character: string) => {
+        dispatch.guildWar({ type: 'WithdrawCharacter', character });
+    };
+
+    const withdrawTeam = (charactersIds: string[]) => {
+        charactersIds.forEach(characterId => withdrawCharacter(characterId));
+    };
+
+    const clearDeployedCharacters = () => {
+        dispatch.guildWar({ type: 'ClearDeployedCharacters' });
+    };
+
     return (
         <FlexBox style={{ flexDirection: 'column', gap: 10 }}>
-            <FlexBox gap={10}>
-                <BattlefieldInfo />
-                <BfLevelSelect value={guildWar.battlefieldLevel} valueChange={updateBfLevel} />
-            </FlexBox>
-            <FlexBox>
-                <Button
-                    variant={'contained'}
-                    component={Link}
-                    to={isMobile ? '/mobile/plan/guildWar/defense' : '/plan/guildWar/defense'}>
-                    Go to: Defense
-                </Button>
-            </FlexBox>
-            <FlexBox gap={5}>Enemy teams: {getTotalSlots}</FlexBox>
-            <FlexBox gap={5}>
-                Overall Potential: {Math.round(sum(teamsPotential.map(x => x.total)) / teamsPotential.length)}/100
-                <PotentialInfo />
-            </FlexBox>
             <CharactersViewContext.Provider
                 value={{
                     showAbilities: viewPreferences.showAbilitiesLevel,
@@ -189,7 +265,36 @@ export const GuildWarOffense = () => {
                     showBsValue: viewPreferences.showBsValue,
                     showCharacterLevel: viewPreferences.showCharacterLevel,
                     showCharacterRarity: viewPreferences.showCharacterRarity,
+                    getOpacity: character => (guildWar.deployedCharacters.includes(character.name) ? 0.5 : 1),
                 }}>
+                <FlexBox gap={10}>
+                    <BattlefieldInfo />
+                    <BfLevelSelect value={guildWar.battlefieldLevel} valueChange={updateBfLevel} />
+                    <DeploymentStatus charactersLeft={availableCharacters.length} onClearAll={clearDeployedCharacters}>
+                        <CharactersGrid
+                            onlyBlocked
+                            characters={characters}
+                            blockedCharacters={guildWar.deployedCharacters}
+                            onAvailableCharacterClick={character => deployCharacter(character.name)}
+                            onLockedCharacterClick={character => withdrawCharacter(character.name)}
+                        />
+                    </DeploymentStatus>
+                </FlexBox>
+                <FlexBox>
+                    <Button
+                        variant={'contained'}
+                        component={Link}
+                        to={isMobile ? '/mobile/plan/guildWar/defense' : '/plan/guildWar/defense'}>
+                        Go to: Defense
+                    </Button>
+                </FlexBox>
+                <FlexBox gap={5}>Total enemy teams: {getTotalSlots}</FlexBox>
+                <FlexBox gap={5}>Your teams: {getTeamsSlots}</FlexBox>
+                <FlexBox gap={5}>
+                    Overall Potential: {Math.round(sum(teamsPotential.map(x => x.total)) / teamsPotential.length)}/100
+                    <PotentialInfo />
+                </FlexBox>
+
                 <FlexBox wrap={true} justifyContent={'center'} gap={30}>
                     {renderTeams}
                 </FlexBox>
@@ -221,12 +326,12 @@ export const GuildWarOffense = () => {
 
 const TeamCard: React.FC<{
     team: IGWTeamWithCharacters;
+    actions: React.ReactElement;
     onEdit: () => void;
-    onClear: () => void;
     onCharacterClick: (character: ICharacter2) => void;
     teamPotential: number;
     teamPotentialBreakdown: React.ReactElement;
-}> = ({ team, teamPotential, teamPotentialBreakdown, onEdit, onClear, onCharacterClick }) => {
+}> = ({ actions, team, teamPotential, teamPotentialBreakdown, onEdit, onCharacterClick }) => {
     return (
         <Card sx={{ maxWidth: 400, boxShadow: '1px 2px 3px rgba(0, 0, 0, 0.6)' }}>
             <CardHeader
@@ -262,16 +367,7 @@ const TeamCard: React.FC<{
                     onEmptySlotClick={onEdit}
                 />
             </CardContent>
-            <CardActions>
-                <Button size="small" onClick={onEdit}>
-                    Edit
-                </Button>
-                <Conditional condition={!!team.lineup.length}>
-                    <Button size="small" color="error" onClick={onClear}>
-                        Clear
-                    </Button>
-                </Conditional>
-            </CardActions>
+            <CardActions>{actions}</CardActions>
         </Card>
     );
 };

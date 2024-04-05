@@ -15,18 +15,20 @@ export const CharactersGrid = ({
     blockedCharacters = [],
     onAvailableCharacterClick,
     onLockedCharacterClick,
+    onlyBlocked,
 }: {
     characters: ICharacter2[];
     blockedCharacters?: string[];
     onAvailableCharacterClick?: (character: ICharacter2) => void;
     onLockedCharacterClick?: (character: ICharacter2) => void;
+    onlyBlocked?: boolean;
 }) => {
     const unlockedCharacters = characters
         .filter(x => x.rank > Rank.Locked && !blockedCharacters.includes(x.name))
         .map(char => <CharacterTile key={char.name} character={char} onCharacterClick={onAvailableCharacterClick} />);
 
     const lockedCharacters = characters
-        .filter(x => x.rank === Rank.Locked || blockedCharacters.includes(x.name))
+        .filter(x => (!onlyBlocked && x.rank === Rank.Locked) || blockedCharacters.includes(x.name))
         .map(char => <CharacterTile key={char.name} character={char} onCharacterClick={onLockedCharacterClick} />);
     return (
         <div>
@@ -37,7 +39,9 @@ export const CharactersGrid = ({
 
             <Conditional condition={!!lockedCharacters.length}>
                 <h4>Locked ({lockedCharacters.length})</h4>
-                <div className="characters-box mixed">{lockedCharacters}</div>
+                <div className="characters-box mixed" style={{ zoom: isMobile ? 0.8 : 1 }}>
+                    {lockedCharacters}
+                </div>
             </Conditional>
         </div>
     );
