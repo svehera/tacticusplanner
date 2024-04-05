@@ -25,6 +25,7 @@ import { getCompletionRateColor } from 'src/shared-logic/functions';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
+import { BfZoneDifficultySelect } from 'src/v2/features/guild-war/bf-zone-difficulty-select';
 
 export const GuildWarDefense = () => {
     const { guildWar, characters, viewPreferences } = useContext(StoreContext);
@@ -37,16 +38,12 @@ export const GuildWarDefense = () => {
     const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
 
     useEffect(() => {
-        const rarityCaps = GuildWarService.getRarityCaps(guildWar.battlefieldLevel, guildWar.sectionId);
+        const rarityCaps = GuildWarService.getDifficultyRarityCaps(guildWar.zoneDifficulty);
         dispatch.guildWar({ type: 'UpdateDefenseRarityCaps', rarityCaps });
-    }, [guildWar.sectionId, guildWar.battlefieldLevel]);
+    }, [guildWar.zoneDifficulty]);
 
-    const updateBfLevel = (battlefieldLevel: number) => {
-        dispatch.guildWar({ type: 'UpdateBfLevel', battlefieldLevel });
-    };
-
-    const updateBfSection = (sectionId: string) => {
-        dispatch.guildWar({ type: 'UpdateBfSection', sectionId });
+    const updateZoneDifficulty = (zoneDifficulty: number) => {
+        dispatch.guildWar({ type: 'UpdateZoneDifficulty', zoneDifficulty });
     };
 
     const startEditCharacter = (character: ICharacter2): void => {
@@ -111,7 +108,7 @@ export const GuildWarDefense = () => {
                 total: Math.round(sum(lineup.map(x => x.potential)) / 5),
             };
         });
-    }, [guildWar.sectionId, guildWar.battlefieldLevel, guildWar.teams, teamsWithCharacters]);
+    }, [teamsWithCharacters]);
 
     const renderTeams = useMemo(
         () =>
@@ -158,40 +155,18 @@ export const GuildWarDefense = () => {
             .map(x => x.name);
     };
 
-    const getTotalSlots = useMemo(() => {
-        const slots = GuildWarService.getTotalRarityCaps(guildWar.battlefieldLevel);
-        return [Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon].map(rarity => {
-            const slotsCount = slots[rarity];
-            if (slotsCount) {
-                return (
-                    <FlexBox key={rarity} gap={3}>
-                        <RarityImage rarity={rarity} /> x{slotsCount}
-                    </FlexBox>
-                );
-            }
-        });
-    }, [guildWar.battlefieldLevel]);
-
     return (
         <FlexBox style={{ flexDirection: 'column', gap: 10 }}>
             <FlexBox gap={10}>
                 <BattlefieldInfo />
-                <BfLevelSelect value={guildWar.battlefieldLevel} valueChange={updateBfLevel} />
-                <BfSectionSelect
-                    value={guildWar.sectionId}
-                    valueChange={updateBfSection}
-                    bfLevel={guildWar.battlefieldLevel}
-                />
-            </FlexBox>
-            <FlexBox>
                 <Button
                     variant={'contained'}
                     component={Link}
                     to={isMobile ? '/mobile/plan/guildWar/offense' : '/plan/guildWar/offense'}>
                     Go to: Offense
                 </Button>
+                <BfZoneDifficultySelect value={guildWar.zoneDifficulty} valueChange={updateZoneDifficulty} />
             </FlexBox>
-            <FlexBox gap={5}>Total teams: {getTotalSlots}</FlexBox>
             <FlexBox gap={5}>
                 Overall Potential: {Math.round(sum(teamsPotential.map(x => x.total)) / 5)}/100
                 <PotentialInfo />

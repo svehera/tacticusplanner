@@ -1,6 +1,63 @@
 ﻿{
-    "currentVersion": "1.4.4",
+    "currentVersion": "1.4.5",
     "releaseNotes": [
+        {
+            "version": "1.4.5",
+            "date": "April 6",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added deployment status tracking for Guild War offense teams and specific characters",
+                    "images": [
+                        {
+                            "path": "1.png"
+                        },
+                        {
+                            "path": "2.png"
+                        },
+                        {
+                            "path": "3.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Updated Guid War defense page",
+                    "subPoints": [
+                        "Added \"Zone difficulty\" selector instead of BF level and Section selectors",
+                        "Moved total teams to the battle field levels info table"
+                    ]
+                },
+                {
+                    "text": "General updates to align the planner with the 1.17 Tacticus update",
+                    "subPoints": [
+                        "Added new cahracters - Macer and Asmodai",
+                        "Update Guild War battlefield zones",
+                        "New Campaign Battles: ‘Mirror Saim-Hann’ Part 5 and ‘Elite Saim-Hann’ Part 1",
+                        "Vitruvius Legendary event starting on May 12",
+                        "Upgrades locations changes"
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added possibility to add \"Locked\" character to a team on the \"Edit team dialog\". The character will be automatically removed from other teams"
+                },
+                {
+                    "text": "Fixed Ad Mechs upgrades order (Cody212501, TuffNuts)"
+                },
+                {
+                    "text": "Updated upgrades icons. Thanks to Illidan, Avalon1204, KIVIY, Adj, Rydai, Balask83, Anigav, Tani, Cody212501 for help"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fix issue with inventory items being cropped when alphabet letters are displayed in mobile (Tani)"
+                },
+                {
+                    "text": "Fixed Month language on goals/daily raids pages (markRom)"
+                }
+            ]
+        },
         {
             "version": "1.4.4",
             "date": "March 26",

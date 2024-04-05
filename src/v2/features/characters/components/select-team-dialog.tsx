@@ -49,10 +49,6 @@ export const SelectTeamDialog: React.FC<Props> = ({
     const [teamName, setTeamName] = useState(defaultTeamName);
 
     const handleCharacterSelect = (character: ICharacter2) => {
-        if (blockedCharacters.includes(character.name)) {
-            return;
-        }
-
         setLineup(curr => {
             if (curr.some(x => x.name === character.name)) {
                 return curr.filter(x => x.name !== character.name);
@@ -127,6 +123,7 @@ export const SelectTeamDialog: React.FC<Props> = ({
                         characters={characters.map(x => CharactersService.capCharacterAtRarity(x, rarityCap))}
                         blockedCharacters={blockedCharacters}
                         onAvailableCharacterClick={handleCharacterSelect}
+                        onLockedCharacterClick={handleCharacterSelect}
                     />
                 </CharactersViewContext.Provider>
             </DialogContent>

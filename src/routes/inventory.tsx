@@ -15,7 +15,6 @@ import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 
 import './inventory.scss';
-import { FlexBox } from 'src/v2/components/flex-box';
 import { Conditional } from 'src/v2/components/conditional';
 
 interface ITableRow {
@@ -169,10 +168,10 @@ export const Inventory = () => {
                         <article className="inventory-items">
                             <Conditional condition={viewPreferences.inventoryShowAlphabet}>
                                 {group.items.map(group => (
-                                    <FlexBox key={group.letter} gap={10} alignItems="start">
+                                    <div key={group.letter} className="inventory-items-alphabet">
                                         <div className="letter">{group.letter}</div>
                                         {group.subItems.map(renderRow)}
-                                    </FlexBox>
+                                    </div>
                                 ))}
                             </Conditional>
 

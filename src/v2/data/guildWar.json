@@ -1,6 +1,6 @@
 ﻿{
     "bfLevels": [1, 2, 3, 4, 5],
-    "sectionComplexity": ["Trooper", "Veteran", "Elite", "Hero"],
+    "sectionDifficulty": ["Trooper", "Veteran", "Elite", "Hero"],
     "rarityCaps": {
         "Trooper": ["E", "R", "U", "U", "U"],
         "Veteran": ["L", "E", "R", "R", "R"],
@@ -9,11 +9,37 @@
     },
     "sections": [
         {
+            "id": "armoury",
+            "name": "Armoury",
+            "warScore": 15000,
+            "count": 1,
+            "difficulty": {
+                "1": "Trooper",
+                "2": "Veteran",
+                "3": "Veteran",
+                "4": "Elite",
+                "5": "Elite"
+            }
+        },
+        {
+            "id": "troopGarrison",
+            "name": "Troop Garrison",
+            "warScore": 15000,
+            "count": 2,
+            "difficulty": {
+                "1": "Trooper",
+                "2": "Veteran",
+                "3": "Veteran",
+                "4": "Elite",
+                "5": "Elite"
+            }
+        },
+        {
             "id": "frontline",
             "name": "Frontline",
             "warScore": 10000,
             "count": 3,
-            "complexity": {
+            "difficulty": {
                 "1": "Trooper",
                 "2": "Trooper",
                 "3": "Trooper",
@@ -25,8 +51,8 @@
             "id": "supplyDepot",
             "name": "Supply Depot",
             "warScore": 25000,
-            "count": 2,
-            "complexity": {
+            "count": 1,
+            "difficulty": {
                 "1": "Trooper",
                 "2": "Trooper",
                 "3": "Veteran",
@@ -37,9 +63,9 @@
         {
             "id": "artilleryPosition",
             "name": "Artillery Position",
-            "warScore": 12000,
-            "count": 3,
-            "complexity": {
+            "warScore": 15000,
+            "count": 2,
+            "difficulty": {
                 "1": "Trooper",
                 "2": "Trooper",
                 "3": "Trooper",
@@ -50,22 +76,22 @@
         {
             "id": "antiAirBattery",
             "name": "Anti-Air Battery",
-            "warScore": 12000,
-            "count": 2,
-            "complexity": {
+            "warScore": 15000,
+            "count": 1,
+            "difficulty": {
                 "1": "Trooper",
-                "2": "Veteran",
-                "3": "Veteran",
-                "4": "Elite",
-                "5": "Elite"
+                "2": "Trooper",
+                "3": "Trooper",
+                "4": "Veteran",
+                "5": "Veteran"
             }
         },
         {
             "id": "fortifiedPosition",
             "name": "Fortified Position",
-            "warScore": 16000,
+            "warScore": 15000,
             "count": 2,
-            "complexity": {
+            "difficulty": {
                 "1": "Trooper",
                 "2": "Veteran",
                 "3": "Elite",
@@ -76,22 +102,22 @@
         {
             "id": "voxStation",
             "name": "Vox Station",
-            "warScore": 36000,
+            "warScore": 30000,
             "count": 1,
-            "complexity": {
+            "difficulty": {
                 "1": "Trooper",
-                "2": "Veteran",
+                "2": "Trooper",
                 "3": "Veteran",
-                "4": "Elite",
+                "4": "Veteran",
                 "5": "Elite"
             }
         },
         {
             "id": "medicaeStation",
             "name": "Medicae Station",
-            "warScore": 12000,
+            "warScore": 15000,
             "count": 1,
-            "complexity": {
+            "difficulty": {
                 "1": "Trooper",
                 "2": "Trooper",
                 "3": "Veteran",
@@ -104,7 +130,7 @@
             "name": "Head Quarters",
             "warScore": 40000,
             "count": 1,
-            "complexity": {
+            "difficulty": {
                 "1": "Trooper",
                 "2": "Veteran",
                 "3": "Elite",

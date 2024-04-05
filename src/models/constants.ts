@@ -1,5 +1,6 @@
 ﻿import {
     CharacterReleaseRarity,
+    Difficulty,
     LegendaryEventEnum,
     PersonalGoalType,
     Rank,
@@ -173,6 +174,7 @@ const defaultCampaignsProgress: ICampaignsProgress = {
 
     'Saim-Hann': 0,
     'Saim-Hann Mirror': 0,
+    'Saim-Hann Elite': 0,
 };
 
 export const fullCampaignsProgress: ICampaignsProgress = {
@@ -193,6 +195,7 @@ export const fullCampaignsProgress: ICampaignsProgress = {
 
     'Saim-Hann': 75,
     'Saim-Hann Mirror': 75,
+    'Saim-Hann Elite': 75,
 };
 
 export const campaignsNames: Array<keyof ICampaignsProgress> = Object.keys(defaultCampaignsProgress) as Array<
@@ -335,7 +338,8 @@ export const defaultData: IPersonalData2 = {
         upgrades: {},
     },
     guildWar: {
-        battlefieldLevel: 1,
+        zoneDifficulty: Difficulty.Easy,
+        deployedCharacters: [],
         teams: [
             ...Array.from({ length: 5 }, (_, i) => ({
                 id: v4(),
@@ -352,7 +356,6 @@ export const defaultData: IPersonalData2 = {
                 lineup: [],
             })),
         ],
-        sectionId: 'frontline',
     },
 };
 

@@ -20,12 +20,19 @@ export type GuildWarAction =
           teamId: string;
       }
     | {
-          type: 'UpdateBfLevel';
-          battlefieldLevel: number;
+          type: 'UpdateZoneDifficulty';
+          zoneDifficulty: number;
       }
     | {
-          type: 'UpdateBfSection';
-          sectionId: string;
+          type: 'DeployCharacter';
+          character: string;
+      }
+    | {
+          type: 'WithdrawCharacter';
+          character: string;
+      }
+    | {
+          type: 'ClearDeployedCharacters';
       }
     | SetStateAction<IGuildWar>;
 
@@ -43,6 +50,17 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
                 state.teams[existingTeamIndex].rarityCap = rarityCap;
                 if (teamName) {
                     state.teams[existingTeamIndex].name = teamName.slice(0, 25);
+                }
+                const sameCharacterTeams = state.teams.filter(
+                    x =>
+                        x.id !== teamId &&
+                        x.type === state.teams[existingTeamIndex].type &&
+                        x.lineup.some(character => lineup.includes(character))
+                );
+                if (sameCharacterTeams.length) {
+                    for (const team of sameCharacterTeams) {
+                        team.lineup = team.lineup.filter(character => !lineup.includes(character));
+                    }
                 }
                 return {
                     ...state,
@@ -76,22 +94,45 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
 
             return state;
         }
-        case 'UpdateBfLevel': {
-            const { battlefieldLevel } = action;
+        case 'UpdateZoneDifficulty': {
+            const { zoneDifficulty } = action;
 
             return {
                 ...state,
-                battlefieldLevel,
+                zoneDifficulty,
             };
         }
-        case 'UpdateBfSection': {
-            const { sectionId } = action;
+        case 'DeployCharacter': {
+            const { character } = action;
+
+            if (state.deployedCharacters.includes(character)) {
+                return state;
+            }
 
             return {
                 ...state,
-                sectionId,
+                deployedCharacters: [...state.deployedCharacters, character],
             };
         }
+        case 'WithdrawCharacter': {
+            const { character } = action;
+
+            if (!state.deployedCharacters.includes(character)) {
+                return state;
+            }
+
+            return {
+                ...state,
+                deployedCharacters: state.deployedCharacters.filter(x => x !== character),
+            };
+        }
+        case 'ClearDeployedCharacters': {
+            return {
+                ...state,
+                deployedCharacters: [],
+            };
+        }
+
         default: {
             throw new Error();
         }
