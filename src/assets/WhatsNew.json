@@ -3,7 +3,7 @@
     "releaseNotes": [
         {
             "version": "1.4.5",
-            "date": "April X",
+            "date": "April 6",
             "type": "Update",
             "new": [
                 {
@@ -23,14 +23,14 @@
                 {
                     "text": "Updated Guid War defense page",
                     "subPoints": [
-                        "Added \"Zone difficulty\" selector instead of BF level and Section selctors",
+                        "Added \"Zone difficulty\" selector instead of BF level and Section selectors",
                         "Moved total teams to the battle field levels info table"
                     ]
                 },
                 {
                     "text": "General updates to align the planner with the 1.17 Tacticus update",
                     "subPoints": [
-                        "Addded new cahracters - Macer and Asmodai",
+                        "Added new cahracters - Macer and Asmodai",
                         "Update Guild War battlefield zones",
                         "New Campaign Battles: ‘Mirror Saim-Hann’ Part 5 and ‘Elite Saim-Hann’ Part 1",
                         "Vitruvius Legendary event starting on May 12",
@@ -43,7 +43,7 @@
                     "text": "Fixed Ad Mechs upgrades order (Cody212501, TuffNuts)"
                 },
                 {
-                    "text": "Updated upgrades icons. Thanks to Illidan, Avalon1204, KIVIY, Adj, Rydai, Balask83, Anigav, Tani for help"
+                    "text": "Updated upgrades icons. Thanks to Illidan, Avalon1204, KIVIY, Adj, Rydai, Balask83, Anigav, Tani, Cody212501 for help"
                 }
             ],
             "bugFixes": [
