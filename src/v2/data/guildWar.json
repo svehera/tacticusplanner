@@ -9,6 +9,32 @@
     },
     "sections": [
         {
+            "id": "armoury",
+            "name": "Armoury",
+            "warScore": 15000,
+            "count": 1,
+            "difficulty": {
+                "1": "Trooper",
+                "2": "Veteran",
+                "3": "Veteran",
+                "4": "Elite",
+                "5": "Elite"
+            }
+        },
+        {
+            "id": "troopGarrison",
+            "name": "Troop Garrison",
+            "warScore": 15000,
+            "count": 2,
+            "difficulty": {
+                "1": "Trooper",
+                "2": "Veteran",
+                "3": "Veteran",
+                "4": "Elite",
+                "5": "Elite"
+            }
+        },
+        {
             "id": "frontline",
             "name": "Frontline",
             "warScore": 10000,
@@ -25,7 +51,7 @@
             "id": "supplyDepot",
             "name": "Supply Depot",
             "warScore": 25000,
-            "count": 2,
+            "count": 1,
             "difficulty": {
                 "1": "Trooper",
                 "2": "Trooper",
@@ -37,8 +63,8 @@
         {
             "id": "artilleryPosition",
             "name": "Artillery Position",
-            "warScore": 12000,
-            "count": 3,
+            "warScore": 15000,
+            "count": 2,
             "difficulty": {
                 "1": "Trooper",
                 "2": "Trooper",
@@ -50,20 +76,20 @@
         {
             "id": "antiAirBattery",
             "name": "Anti-Air Battery",
-            "warScore": 12000,
-            "count": 2,
+            "warScore": 15000,
+            "count": 1,
             "difficulty": {
                 "1": "Trooper",
-                "2": "Veteran",
-                "3": "Veteran",
-                "4": "Elite",
-                "5": "Elite"
+                "2": "Trooper",
+                "3": "Trooper",
+                "4": "Veteran",
+                "5": "Veteran"
             }
         },
         {
             "id": "fortifiedPosition",
             "name": "Fortified Position",
-            "warScore": 16000,
+            "warScore": 15000,
             "count": 2,
             "difficulty": {
                 "1": "Trooper",
@@ -76,20 +102,20 @@
         {
             "id": "voxStation",
             "name": "Vox Station",
-            "warScore": 36000,
+            "warScore": 30000,
             "count": 1,
             "difficulty": {
                 "1": "Trooper",
-                "2": "Veteran",
+                "2": "Trooper",
                 "3": "Veteran",
-                "4": "Elite",
+                "4": "Veteran",
                 "5": "Elite"
             }
         },
         {
             "id": "medicaeStation",
             "name": "Medicae Station",
-            "warScore": 12000,
+            "warScore": 15000,
             "count": 1,
             "difficulty": {
                 "1": "Trooper",

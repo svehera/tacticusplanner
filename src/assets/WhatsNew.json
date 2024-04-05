@@ -21,7 +21,8 @@
                     ]
                 },
                 {
-                    "text": "Added new characters from 1.17 update - Macer and Asmodai"
+                    "text": "General updates to align the planner with the 1.17 Tacticus update",
+                    "subPoints": ["Addded new cahracters - Macer and Asmodai", "Update Guild War battlefield zones"]
                 }
             ],
             "minor": [
