@@ -2200,6 +2200,144 @@
             "Superaugmented Defences"
         ]
     },
+    "Asmodai": {
+        "Stone I": [
+            "Ropes and Chains",
+            "The Iron Phoenix",
+            "Canister of Chemicals",
+            "Weapon Anointment Oils",
+            "Armor Trim",
+            "Fine Purity Seal"
+        ],
+        "Stone II": [
+            "Chip Damage",
+            "Healing Ointment",
+            "Combat Stimms",
+            "Blessed Weapon Oils",
+            "Rebreather",
+            "Purity Seal"
+        ],
+        "Stone III": [
+            "Helmet Trophy",
+            "First Aid Kit",
+            "Vox-Caster",
+            "Can of Promethium",
+            "Blessed Tasset Plate",
+            "Oath Seal"
+        ],
+        "Iron I": [
+            "Holster and Pockets",
+            "Mission Objective",
+            "Combat Stimms",
+            "Barrel of Promethium",
+            "Cloak",
+            "Blessed Ceramite"
+        ],
+        "Iron II": [
+            "Helmet Trophy",
+            "Battle Plan",
+            "Adamantium Blades",
+            "Divinator Class Auspex",
+            "Artificer Tasset Plate",
+            "Oath Seal"
+        ],
+        "Iron III": [
+            "Grand Skull Trophy",
+            "The Gold Phoenix",
+            "Chapter Pendant",
+            "Advanced Combat Stimms",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Key of Ignorance",
+            "The Phoenix Ascendant",
+            "Prey-Sight",
+            "Classified Data-Slate",
+            "Fine Cloak",
+            "Ceramite Bar"
+        ],
+        "Bronze II": [
+            "Key of Knowledge",
+            "Medical Supply Crate",
+            "Krak Grenade",
+            "Belt of Krak Grenades",
+            "Dark Hood",
+            "Blessed Purity Seal"
+        ],
+        "Bronze III": [
+            "Kill Count",
+            "Exquisite Medical Supplies",
+            "Bolts of Judgement",
+            "Sanctified Weapon Oils",
+            "Calibanite Hood",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Key of Knowledge",
+            "Secret Agenda",
+            "Bolts of Judgement",
+            "Blessed Promethium Canister",
+            "Calibanite Hood",
+            "Ceramite Sheet"
+        ],
+        "Silver II": [
+            "Stone Guardian Fragment",
+            "Greater Reliquary of Protection",
+            "Bolts of Furious Vengeance",
+            "Belt of Krak Grenades",
+            "Calibanite Hood",
+            "Grand Purity Seal"
+        ],
+        "Silver III": [
+            "Key of Knowledge",
+            "Grand Strategy",
+            "Bolts of Judgement",
+            "Digital Weapons",
+            "Purity Seal of the Primarch",
+            "Ceramite Plates"
+        ],
+        "Gold I": [
+            "Key of Achrabael",
+            "Tome of Arcane Knowledge",
+            "Archeotech Bionics",
+            "Blessed Promethium Tank",
+            "Inner Circle Hood",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold II": [
+            "Perfidious Relic of the Unforgiven",
+            "Legendary Reliquary of Protection",
+            "Bolts of Furious Vengeance",
+            "Digital Weapons",
+            "Inner Circle Hood",
+            "Divine Cloak"
+        ],
+        "Gold III": [
+            "Key of Achrabael",
+            "Grandiose Skull Ornament",
+            "Arbiter's Gaze",
+            "Powered Blade",
+            "Shroud of Heroes",
+            "Seal of the Emperor's Protection"
+        ],
+        "Diamond I": [
+            "Perfidious Relic of the Unforgiven",
+            "Grandiose Skull Ornament",
+            "Arbiter's Gaze",
+            "Hyperstim",
+            "Shroud of Heroes",
+            "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Perfidious Relic of the Unforgiven",
+            "Monstrous Constitution",
+            "Arbiter's Gaze",
+            "Monstrous Strength",
+            "Shroud of Heroes",
+            "Monstrous Defences"
+        ]
+    },
     "Sarquael": {
         "Stone I": [
             "Wires",
@@ -9648,6 +9786,144 @@
             "Superaugmented Strength",
             "Collar of Khorne",
             "Superaugmented Defences"
+        ]
+    },
+    "Macer": {
+        "Stone I": [
+            "Ropes and Chains",
+            "Mutation: Warped Muscles",
+            "Canister of Chemicals",
+            "Nasty Spikes",
+            "Pile of Salvage",
+            "Pile of Salvage"
+        ],
+        "Stone II": [
+            "Field Ration",
+            "Minor Bionic Enhancement",
+            "Combat Stimms",
+            "Razorsharp Spikes",
+            "Mutation: Tough Skin",
+            "Mutation: Tough Skin"
+        ],
+        "Stone III": [
+            "Enriched Rations",
+            "Bionic Enhancement",
+            "Vox-Caster",
+            "Canister of Chemicals",
+            "Box of Salvage",
+            "Mutation: Scaly Skin"
+        ],
+        "Iron I": [
+            "Holster and Pockets",
+            "Helmet Trophy",
+            "Combat Stimms",
+            "Combat Stimms",
+            "Mutation: Scaly Skin",
+            "Adamantium Lump"
+        ],
+        "Iron II": [
+            "Enriched Rations",
+            "Grand Skull Trophy",
+            "Adamantium Blades",
+            "Slicing Claws",
+            "Crate of Salvage",
+            "Mutation: Scaly Skin"
+        ],
+        "Iron III": [
+            "Box of Rations",
+            "Mutation: Warped Lungs",
+            "Chainaxe Teeth",
+            "Advanced Combat Stimms",
+            "Adamantium Lump",
+            "Crate of Salvage"
+        ],
+        "Bronze I": [
+            "Brazen Jaws",
+            "Mutation: Warped Heart",
+            "Prey-Sight",
+            "Bionic Eye",
+            "Mutation: Warped Skin",
+            "Adamantium Bar"
+        ],
+        "Bronze II": [
+            "Blessed Brazen Jaws",
+            "Advanced Bionics",
+            "Tank of Promethium",
+            "Refined Combat Stimms",
+            "Cadaere Renissum",
+            "Mutation: Warped Skin"
+        ],
+        "Bronze III": [
+            "Kill Count",
+            "Mars-Pattern Bionics",
+            "Blessed Chainaxe Teeth",
+            "Murderous Spikes",
+            "Blessed Cadaere Renissum",
+            "Revered Talisman"
+        ],
+        "Silver I": [
+            "Blessed Brazen Jaws",
+            "Weathering",
+            "Blessed Chainaxe Teeth",
+            "Bionic Neural Pathways",
+            "Blessed Cadaere Renissum",
+            "Adamantium Sheet"
+        ],
+        "Silver II": [
+            "Boon of Khorne",
+            "Mutation: Regenerative Blood",
+            "Exalted Chainaxe Teeth",
+            "Refined Combat Stimms",
+            "Blessed Cadaere Renissum",
+            "Mutation: Metallic Skin"
+        ],
+        "Silver III": [
+            "Blessed Brazen Jaws",
+            "Grandiose Skull Ornament",
+            "Blessed Chainaxe Teeth",
+            "Imposing Horns",
+            "Archeo-Tech Remnant",
+            "Adamantium Plates"
+        ],
+        "Gold I": [
+            "Exalted Brazen Jaws",
+            "Relic Bionic Enhancement",
+            "Archeotech Bionics",
+            "Hyperstim",
+            "Exalted Cadaere Renissum",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold II": [
+            "Mark of Khorne",
+            "Mutation: Otherworldly Power",
+            "Exalted Chainaxe Teeth",
+            "Imposing Horns",
+            "Exalted Cadaere Renissum",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold III": [
+            "Exalted Brazen Jaws",
+            "Grandiose Skull Ornament",
+            "Butcher's Nails",
+            "Powered Blade",
+            "Collar of Khorne",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Diamond I": [
+            "Mark of Khorne",
+            "Grand Strategy",
+            "Butcher's Nails",
+            "Hyperstim",
+            "Collar of Khorne",
+            "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Mark of Khorne",
+            "Monstrous Constitution",
+            "Butcher's Nails",
+            "Monstrous Strength",
+            "Collar of Khorne",
+            "Monstrous Defences"
         ]
     }
 }

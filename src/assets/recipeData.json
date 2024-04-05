@@ -3725,6 +3725,27 @@
         "craftable": true,
         "icon": "holster and pockets.png"
     },
+    "Blessed Ceramite": {
+        "material": "Blessed Ceramite",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "recipe": [
+            {
+                "material": "Fine Purity Seal",
+                "count": 4
+            },
+            {
+                "material": "Ceramite Lump",
+                "count": 2
+            },
+            {
+                "material": "Gold",
+                "count": 25
+            }
+        ],
+        "craftable": true,
+        "icon": "Blessed Ceramite.png"
+    },
     "Holy Corset Armor": {
         "material": "Holy Corset Armor",
         "rarity": "Legendary",
