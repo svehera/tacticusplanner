@@ -202,6 +202,10 @@ export const GuildWarOffense = () => {
             x => x.length
         );
 
+        if (!Object.values(slots).length) {
+            return '0. Add some characters to the teams below';
+        }
+
         return [Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon].map(rarity => {
             const slotsCount = slots[rarity];
             if (slotsCount) {
@@ -211,8 +215,6 @@ export const GuildWarOffense = () => {
                     </FlexBox>
                 );
             }
-
-            return '0. Add some characters to the teams below';
         });
     }, [guildWar.teams, guildWar.deployedCharacters]);
 
