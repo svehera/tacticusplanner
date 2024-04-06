@@ -19,7 +19,16 @@
                     ]
                 }
             ],
-            "minor": [],
+            "minor": [
+                {
+                    "text": "On the \"Campaigns Progress\" page maxed out campaigns will be greyed out",
+                    "images": [
+                        {
+                            "path": "cp.png"
+                        }
+                    ]
+                }
+            ],
             "bugFixes": [
                 {
                     "text": "Fixed teams reordering on the guild war offense planner (Kinks)"
