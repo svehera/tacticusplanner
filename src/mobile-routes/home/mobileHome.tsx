@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Badge, Tooltip } from '@mui/material';
 import ViewSwitch from '../../shared-components/view-switch';
 import { UserMenu } from '../../shared-components/user-menu/user-menu';
-import { discordInvitationLink } from '../../models/constants';
+import { bmcLink, discordInvitationLink } from '../../models/constants';
 import CampaignIcon from '@mui/icons-material/Campaign';
 import { StoreContext } from '../../reducers/store.provider';
 import { WhatsNewDialog } from '../../shared-components/whats-new.dialog';
@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import { DiscordIcon } from '../../shared-components/icons/discord.icon';
 import { Home } from '../../features/misc/home/home';
 import { menuItemById } from 'src/models/menu-items';
+import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
 
 export const MobileHome = () => {
     const { seenAppVersion } = useContext(StoreContext);
@@ -54,6 +55,12 @@ export const MobileHome = () => {
                     <Tooltip title="Join Tacticus Planner community on Discord">
                         <IconButton component={Link} to={discordInvitationLink} target={'_blank'}>
                             <DiscordIcon />
+                        </IconButton>
+                    </Tooltip>
+
+                    <Tooltip title="Buy me a trooper">
+                        <IconButton color="inherit" component={Link} to={bmcLink} target={'_blank'}>
+                            <BmcIcon />
                         </IconButton>
                     </Tooltip>
                 </div>

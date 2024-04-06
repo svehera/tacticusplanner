@@ -155,6 +155,7 @@ export const pooEmoji = String.fromCodePoint(parseInt('1F4A9', 16));
 export const starEmoji = String.fromCodePoint(parseInt('1F31F', 16));
 
 export const discordInvitationLink = 'https://discord.gg/gyajsMcH7j';
+export const bmcLink = 'https://www.buymeacoffee.com/tacticusplanner';
 
 const defaultCampaignsProgress: ICampaignsProgress = {
     Indomitus: 75,

@@ -59,7 +59,7 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
 
     return (
         <div>
-            <h3 style={{ textAlign: 'center' }}>Thank you!!!</h3>
+            <h3 style={{ textAlign: 'center' }}>Say your thank you to</h3>
 
             {sliderMode ? (
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -132,9 +132,14 @@ export const ThankYouCard = ({
                         <p>{contributor.thankYou}</p>
                         <Link
                             to={contributor.resourceLink}
+                            style={{ display: 'block', width: '100%', textAlign: 'center' }}
                             target={'_blank'}
                             onClick={event => event.stopPropagation()}>
-                            <ContributorImage iconPath={contributor.resourceIcon} height={200} width={320} />
+                            <ContributorImage
+                                iconPath={contributor.resourceIcon}
+                                height={200}
+                                width={contributor.name.includes('Severyn') ? 200 : 320}
+                            />
                         </Link>
                     </React.Fragment>
                 ) : (

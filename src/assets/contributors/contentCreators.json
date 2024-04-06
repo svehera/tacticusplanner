@@ -1,11 +1,19 @@
 ﻿[
     {
+        "name": "The Planner (Severyn)",
+        "youtubeLink": "https://www.buymeacoffee.com/tacticusplanner",
+        "thankYou": "Support the planner with some troopers using  the \"Buy me a coffee\" service",
+        "avatarIcon": "severyn.png",
+        "resourceIcon": "qr.png",
+        "resourceLink": "https://www.buymeacoffee.com/tacticusplanner"
+    },
+    {
         "name": "NoxTempest",
         "youtubeLink": "https://www.youtube.com/@noxtempest",
         "thankYou": "Thank you for promoting the app",
         "avatarIcon": "nox.jpg",
         "resourceIcon": "nox_vid.jpg",
-        "resourceLink": "https://www.youtube.com/watch?v=WY5N1_9G480"
+        "resourceLink": "https://www.youtube.com/watch?v=gQ4vNM7Nx70"
     },
     {
         "name": "Nandi",
