@@ -35,6 +35,9 @@
                 },
                 {
                     "text": "Fixed bug on the daily raids with selected character when rank point 5 was not accounted after refreshing estimate"
+                },
+                {
+                    "text": "Fixed Thad S2-S3 upgrade (BlatantFix)"
                 }
             ]
         },
