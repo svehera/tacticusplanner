@@ -4727,7 +4727,7 @@
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 19,
-        "reward": "Mutation: Warped Heart",
+        "reward": "The Silver Eagle with Swords",
         "expectedGold": 101
     },
     "IME2": {
@@ -4860,7 +4860,7 @@
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 36,
-        "reward": "Sensor Suite",
+        "reward": "Greater Reliquary of Vengeance",
         "expectedGold": 108
     },
     "IME37": {
