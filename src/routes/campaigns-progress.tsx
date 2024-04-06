@@ -69,7 +69,7 @@ export const CampaignProgress = ({
     };
 
     return (
-        <Box sx={{ width: 250 }}>
+        <Box sx={{ width: 250, opacity: value === max ? 0.5 : 1 }}>
             <Typography id="input-slider" gutterBottom>
                 <CampaignImage campaign={campaign} /> {campaign}
             </Typography>

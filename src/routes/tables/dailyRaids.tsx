@@ -567,6 +567,7 @@ const CharactersList = ({ refresh }: { refresh: (chars: ICharacterRankRange[]) =
                         rankStart: char.rank,
                         rankEnd: g.targetRank!,
                         appliedUpgrades: char.upgrades,
+                        rankPoint5: g.rankPoint5,
                     } as ICharacterRankRange;
                 }
                 return null;
@@ -585,7 +586,7 @@ const CharactersList = ({ refresh }: { refresh: (chars: ICharacterRankRange[]) =
                                 <Edit fontSize="small" />
                             </IconButton>
                             {goal.character} <RankImage rank={goal.currentRank ?? 1} /> -{' '}
-                            <RankImage rank={goal.targetRank ?? 1} />{' '}
+                            <RankImage rank={goal.targetRank ?? 1} /> {goal.rankPoint5 && '.5'}
                         </div>
                     }
                     control={<Checkbox checked={checked[index]} onChange={handleChildChange(index, goal.id)} />}

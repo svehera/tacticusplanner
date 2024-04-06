@@ -1,5 +1,8 @@
 ﻿import React from 'react';
-import { discordInvitationLink } from '../../models/constants';
+import { bmcLink, discordInvitationLink } from '../../models/constants';
+import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
+import IconButton from '@mui/material/IconButton';
+import { Link } from 'react-router-dom';
 
 export const Contacts = () => {
     return (
@@ -18,6 +21,12 @@ export const Contacts = () => {
                 <a href="https://github.com/svehera/tacticusplanner" target={'_blank'} rel="noreferrer">
                     GitHub repo
                 </a>
+            </p>
+            <p>
+                Buy me a trooper{' '}
+                <IconButton component={Link} to={bmcLink} target={'_blank'}>
+                    <BmcIcon />
+                </IconButton>
             </p>
         </div>
     );
