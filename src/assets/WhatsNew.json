@@ -32,6 +32,9 @@
             "bugFixes": [
                 {
                     "text": "Fixed teams reordering on the guild war offense planner (Kinks)"
+                },
+                {
+                    "text": "Fixed bug on the daily raids with selected character when rank point 5 was not accounted after refreshing estimate"
                 }
             ]
         },
