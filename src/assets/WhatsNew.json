@@ -1,8 +1,33 @@
 ﻿{
-    "currentVersion": "1.4.5",
+    "currentVersion": "1.4.6",
     "releaseNotes": [
         {
-            "version": "1.4.5",
+            "version": "1.4.6",
+            "date": "April 6",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added option to support the planner with the \"Buy me a coffee\" service",
+                    "route": "https://www.buymeacoffee.com/tacticusplanner",
+                    "subPoints": [
+                        "Consider supporting the Planner with some \"troopers\". It will help make the Planner a better place for everyone"
+                    ],
+                    "images": [
+                        {
+                            "path": "qr.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed teams reordering on the guild war offense planner (Kinks)"
+                }
+            ]
+        },
+        {
+            "version": "1.4.6",
             "date": "April 6",
             "type": "Update",
             "new": [

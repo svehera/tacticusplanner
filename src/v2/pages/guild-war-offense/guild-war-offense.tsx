@@ -84,8 +84,7 @@ export const GuildWarOffense = () => {
             teams,
             [
                 team => {
-                    return team.lineup.filter(character => !guildWar.deployedCharacters.includes(character.name))
-                        .length;
+                    return team.lineup.every(character => !guildWar.deployedCharacters.includes(character.name));
                 },
             ],
             ['desc']
