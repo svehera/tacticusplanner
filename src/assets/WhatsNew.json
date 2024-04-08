@@ -1,6 +1,18 @@
 ﻿{
-    "currentVersion": "1.4.6",
+    "currentVersion": "1.4.7",
     "releaseNotes": [
+        {
+            "version": "1.4.7",
+            "date": "April X",
+            "type": "Update",
+            "new": [],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed Indomitus Mirror Elite 4 reward (SeventhSun)"
+                }
+            ]
+        },
         {
             "version": "1.4.6",
             "date": "April 6",
