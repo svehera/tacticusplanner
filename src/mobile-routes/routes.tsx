@@ -12,6 +12,7 @@ import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.rout
 import LegendaryEvent from 'src/routes/legendary-events/legendary-event';
 import { guildWarOffenseLazyRoute } from 'src/v2/pages/guild-war-offense/guild-war-offense.route';
 import { guildWarDefenseLazyRoute } from 'src/v2/pages/guild-war-defense/guild-war-defense.route';
+import { guildWarZonesLazyRoute } from 'src/v2/pages/guild-war-layout/guild-war-zones.route';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -83,6 +84,7 @@ const planRoutes: RouteObject[] = [
     },
     guildWarOffenseLazyRoute,
     guildWarDefenseLazyRoute,
+    guildWarZonesLazyRoute,
     {
         path: 'plan/le',
         async lazy() {

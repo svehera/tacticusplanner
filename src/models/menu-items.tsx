@@ -24,6 +24,7 @@ import { insightsMenuItem } from 'src/v2/pages/insights/insights.menu-item';
 import { wyoMenuItem } from 'src/v2/pages/who-you-own/who-you-own.menu-item';
 import { guildWarOffenseMenuItem } from 'src/v2/pages/guild-war-offense/guild-war-offense.menu-item';
 import { guildWarDefenseMenuItem } from 'src/v2/pages/guild-war-defense/guild-war-defense.menu-item';
+import { guildWarZonesMenuItem } from 'src/v2/pages/guild-war-layout/guild-war-zones-menu.item';
 
 export class MenuItemTP {
     constructor(
@@ -84,6 +85,7 @@ export const menuItemById = {
     faq: faqMenuItem,
     defense: guildWarDefenseMenuItem,
     offense: guildWarOffenseMenuItem,
+    zones: guildWarZonesMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -98,6 +100,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
     new MenuItemTP('Guild War', menuItemById['defense'].icon, '', '', '', [
         menuItemById['defense'],
         menuItemById['offense'],
+        menuItemById['zones'],
     ]),
     new MenuItemTP('LRE', menuItemById['leMasterTable'].icon, '', '', '', [
         menuItemById['leMasterTable'],

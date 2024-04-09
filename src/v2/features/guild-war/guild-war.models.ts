@@ -1,11 +1,23 @@
-﻿import { Difficulty, Rarity } from 'src/models/enums';
+﻿import { Rarity } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
+
+export type ZoneId =
+    | 'armoury'
+    | 'troopGarrison'
+    | 'frontline'
+    | 'supplyDepot'
+    | 'artilleryPosition'
+    | 'antiAirBattery'
+    | 'fortifiedPosition'
+    | 'voxStation'
+    | 'medicaeStation'
+    | 'headQuarters';
 
 export interface IGWData {
     bfLevels: number[];
     difficulties: string[];
     rarityCaps: Record<string, string[]>;
-    sections: IGWSection[];
+    zones: IGWZone[];
 }
 
 export interface IGWDataRaw {
@@ -15,7 +27,7 @@ export interface IGWDataRaw {
     sections: IGWSectionRaw[];
 }
 
-export interface IGWSection {
+export interface IGWZone {
     id: string;
     name: string;
     warScore: number;
@@ -43,6 +55,18 @@ export interface IGWTeam {
     type: GuildWarTeamType;
     rarityCap: Rarity;
     lineup: string[];
+}
+
+export interface IGWLayout {
+    bfLevel: number;
+    id: string;
+    name: string;
+    zones: IGWLayoutZone[];
+}
+
+export interface IGWLayoutZone {
+    id: ZoneId;
+    players: string[];
 }
 
 export interface IGWTeamWithCharacters extends Omit<IGWTeam, 'lineup'> {

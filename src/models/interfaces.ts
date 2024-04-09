@@ -32,7 +32,7 @@ import { InventoryAction } from '../reducers/inventory.reducer';
 import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
-import { IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
+import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
 import { GuildWarAction } from 'src/reducers/guildWarReducer';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
@@ -298,6 +298,7 @@ export interface IGuildWar {
     zoneDifficulty: Difficulty;
     deployedCharacters: string[];
     teams: IGWTeam[];
+    layouts: IGWLayout[];
 }
 
 export interface IDailyRaids {

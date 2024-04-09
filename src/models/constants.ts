@@ -15,7 +15,7 @@ import { VitruviusLegendaryEvent } from './legendary-events/vitruvius.le';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
 import { v4 } from 'uuid';
-import { GuildWarTeamType } from 'src/v2/features/guild-war/guild-war.models';
+import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,
@@ -203,6 +203,24 @@ export const campaignsNames: Array<keyof ICampaignsProgress> = Object.keys(defau
     keyof ICampaignsProgress
 >;
 
+export const defaultGWLayout: IGWLayoutZone[] = [
+    { id: 'medicaeStation', players: [] },
+    { id: 'headQuarters', players: [] },
+    { id: 'voxStation', players: [] },
+    { id: 'troopGarrison', players: [] },
+    { id: 'armoury', players: [] },
+    { id: 'troopGarrison', players: [] },
+    { id: 'artilleryPosition', players: [] },
+    { id: 'supplyDepot', players: [] },
+    { id: 'artilleryPosition', players: [] },
+    { id: 'fortifiedPosition', players: [] },
+    { id: 'antiAirBattery', players: [] },
+    { id: 'fortifiedPosition', players: [] },
+    { id: 'frontline', players: [] },
+    { id: 'frontline', players: [] },
+    { id: 'frontline', players: [] },
+];
+
 export const defaultData: IPersonalData2 = {
     schemaVersion: 2,
     modifiedDate: undefined,
@@ -341,6 +359,26 @@ export const defaultData: IPersonalData2 = {
     guildWar: {
         zoneDifficulty: Difficulty.Easy,
         deployedCharacters: [],
+        layouts: [
+            {
+                id: v4(),
+                name: 'War zone 1',
+                bfLevel: 1,
+                zones: defaultGWLayout,
+            },
+            {
+                id: v4(),
+                name: 'War zone 2',
+                bfLevel: 3,
+                zones: defaultGWLayout,
+            },
+            {
+                id: v4(),
+                name: 'War zone 3',
+                bfLevel: 5,
+                zones: defaultGWLayout,
+            },
+        ],
         teams: [
             ...Array.from({ length: 5 }, (_, i) => ({
                 id: v4(),

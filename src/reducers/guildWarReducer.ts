@@ -34,6 +34,17 @@ export type GuildWarAction =
     | {
           type: 'ClearDeployedCharacters';
       }
+    | {
+          type: 'UpdateLayoutBfLevel';
+          layoutId: string;
+          bfLevel: number;
+      }
+    | {
+          type: 'SwapLayoutZones';
+          layoutId: string;
+          zone1Index: number;
+          zone2Index: number;
+      }
     | SetStateAction<IGuildWar>;
 
 export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuildWar => {
@@ -101,6 +112,40 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
                 ...state,
                 zoneDifficulty,
             };
+        }
+        case 'UpdateLayoutBfLevel': {
+            const { layoutId, bfLevel } = action;
+            const existingLayoutIndex = state.layouts.findIndex(x => x.id === layoutId);
+
+            if (existingLayoutIndex >= 0) {
+                state.layouts[existingLayoutIndex].bfLevel = bfLevel;
+                return {
+                    ...state,
+                    layouts: [...state.layouts],
+                };
+            }
+
+            return state;
+        }
+        case 'SwapLayoutZones': {
+            const { layoutId, zone1Index, zone2Index } = action;
+            const existingLayoutIndex = state.layouts.findIndex(x => x.id === layoutId);
+
+            if (existingLayoutIndex >= 0) {
+                const layout = state.layouts[existingLayoutIndex];
+                const zone1 = layout.zones[zone1Index];
+                const zone2 = layout.zones[zone2Index];
+
+                layout.zones[zone1Index] = zone2;
+                layout.zones[zone2Index] = zone1;
+
+                return {
+                    ...state,
+                    layouts: [...state.layouts],
+                };
+            }
+
+            return state;
         }
         case 'DeployCharacter': {
             const { character } = action;

@@ -18,16 +18,16 @@ const mobileSnackbarOrigin: SnackbarOrigin = { vertical: 'top', horizontal: 'cen
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-    <React.StrictMode>
-        <AuthProvider>
-            <SnackbarProvider
-                autoHideDuration={5000}
-                anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
-                onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
-            />
-            <RouterProvider router={routes} />
-        </AuthProvider>
-    </React.StrictMode>
+    // <React.StrictMode>
+    <AuthProvider>
+        <SnackbarProvider
+            autoHideDuration={5000}
+            anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
+            onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
+        />
+        <RouterProvider router={routes} />
+    </AuthProvider>
+    // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

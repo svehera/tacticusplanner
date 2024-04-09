@@ -12,6 +12,7 @@ import { wyoLazyRoute } from 'src/v2/pages/who-you-own/who-you-own.route';
 import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.route';
 import { guildWarOffenseLazyRoute } from 'src/v2/pages/guild-war-offense/guild-war-offense.route';
 import { guildWarDefenseLazyRoute } from 'src/v2/pages/guild-war-defense/guild-war-defense.route';
+import { guildWarZonesLazyRoute } from 'src/v2/pages/guild-war-layout/guild-war-zones.route';
 
 const inputRoutes: RouteObject[] = [
     wyoLazyRoute,
@@ -48,6 +49,7 @@ const planRoutes: RouteObject[] = [
     },
     guildWarOffenseLazyRoute,
     guildWarDefenseLazyRoute,
+    guildWarZonesLazyRoute,
     {
         path: 'plan/le',
         async lazy() {
