@@ -130,7 +130,7 @@ export class CharactersPowerService {
             case RarityStars.RedOneStar:
                 return 1.525;
             case RarityStars.RedTwoStars:
-                return 1.5;
+                return 1.55;
             case RarityStars.RedThreeStars:
                 return 1.575;
             case RarityStars.RedFourStars:
