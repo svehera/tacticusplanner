@@ -8,7 +8,8 @@ const api = axios.create({
     baseURL,
     headers: {
         'Content-Type': 'application/json',
-        'x-functions-key': 'HCBedLkPMCgfKqOboAhxkW_Q6SOvw4mQg0Ompp690ca0AzFuUXyDKg==',
+        // 'x-functions-key': 'HCBedLkPMCgfKqOboAhxkW_Q6SOvw4mQg0Ompp690ca0AzFuUXyDKg==',
+        'x-functions-key': 'mU8qN58rHNj5X3C8HnDOvDUS_pCUxppQzTGf5I5Js0waAzFuySrrYg==',
     },
 });
 
