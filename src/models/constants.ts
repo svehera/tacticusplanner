@@ -396,6 +396,9 @@ export const defaultData: IPersonalData2 = {
             })),
         ],
     },
+    guild: {
+        members: [],
+    },
 };
 
 export const killPointsIndex = 0;

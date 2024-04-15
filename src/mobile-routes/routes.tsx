@@ -13,6 +13,8 @@ import LegendaryEvent from 'src/routes/legendary-events/legendary-event';
 import { guildWarOffenseLazyRoute } from 'src/v2/pages/guild-war-offense/guild-war-offense.route';
 import { guildWarDefenseLazyRoute } from 'src/v2/pages/guild-war-defense/guild-war-defense.route';
 import { guildWarZonesLazyRoute } from 'src/v2/pages/guild-war-layout/guild-war-zones.route';
+import { guildLazyRoute } from 'src/v2/pages/guild/guild.route';
+import { guildInsightsLazyRoute } from 'src/v2/pages/guild-insights/guild-insights.route';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -37,6 +39,7 @@ const inputRoutes: RouteObject[] = [
             return { Component: Inventory };
         },
     },
+    guildLazyRoute,
 ];
 
 const planRoutes: RouteObject[] = [
@@ -150,6 +153,7 @@ const learnRoutes: RouteObject[] = [
     },
     dirtyDozenLazyRoute,
     insightsLazyRoute,
+    guildInsightsLazyRoute,
 ];
 
 export const mobileAppRoutes: () => RouteObject[] = () => [

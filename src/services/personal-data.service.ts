@@ -15,6 +15,7 @@
     ISelectedTeamsOrdering,
     IViewPreferences,
     LegendaryEventData,
+    IGuild,
 } from '../models/interfaces';
 import { defaultData } from '../models/constants';
 import { Rank } from '../models/enums';
@@ -76,6 +77,10 @@ export class PersonalDataLocalStorage {
                 guildWar: {
                     ...defaultData.guildWar,
                     ...(this.getItem<IGuildWar>('guildWar') ?? {}),
+                },
+                guild: {
+                    ...defaultData.guild,
+                    ...(this.getItem<IGuild>('guild') ?? {}),
                 },
             };
         } else {
@@ -190,6 +195,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             inventory: defaultData.inventory,
             dailyRaids: defaultData.dailyRaids,
             guildWar: defaultData.guildWar,
+            guild: defaultData.guild,
         };
     }
 

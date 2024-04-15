@@ -25,6 +25,8 @@ import { wyoMenuItem } from 'src/v2/pages/who-you-own/who-you-own.menu-item';
 import { guildWarOffenseMenuItem } from 'src/v2/pages/guild-war-offense/guild-war-offense.menu-item';
 import { guildWarDefenseMenuItem } from 'src/v2/pages/guild-war-defense/guild-war-defense.menu-item';
 import { guildWarZonesMenuItem } from 'src/v2/pages/guild-war-layout/guild-war-zones-menu.item';
+import { guildMenuItem } from 'src/v2/pages/guild/guild.menu-item';
+import { guildInsightsMenuItem } from 'src/v2/pages/guild-insights/guild-insights.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -86,12 +88,15 @@ export const menuItemById = {
     defense: guildWarDefenseMenuItem,
     offense: guildWarOffenseMenuItem,
     zones: guildWarZonesMenuItem,
+    guild: guildMenuItem,
+    guildInsights: guildInsightsMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
     menuItemById['wyo'],
     menuItemById['campaignsProgress'],
     menuItemById['inventory'],
+    menuItemById['guild'],
 ];
 
 export const planSubMenuWeb: MenuItemTP[] = [
@@ -130,6 +135,7 @@ export const learnSubMenu: MenuItemTP[] = [
     menuItemById['campaigns'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
+    menuItemById['guildInsights'],
 ];
 
 export const miscMenuItems: MenuItemTP[] = [menuItemById['home'], menuItemById['contacts'], menuItemById['ty']];
