@@ -1,6 +1,7 @@
 ﻿import axios from 'axios';
 
-const baseURL = 'https://helloworldseveryn.azurewebsites.net/api/';
+const baseURL = 'https://dev-tacticus.azurewebsites.net/api/';
+// const baseURL = 'https://helloworldseveryn.azurewebsites.net/api/';
 // const baseURL = 'http://localhost:7071/api/';
 
 const api = axios.create({
