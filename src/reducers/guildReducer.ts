@@ -1,4 +1,4 @@
-﻿import { IGuild, SetStateAction } from '../models/interfaces';
+﻿import { IGuild, IGuildMember, SetStateAction } from '../models/interfaces';
 import { defaultData } from '../models/constants';
 
 export type GuildAction =
@@ -15,6 +15,10 @@ export type GuildAction =
           type: 'UpdateShareToken';
           index: number;
           value: string;
+      }
+    | {
+          type: 'ImportFromExcel';
+          members: IGuildMember[];
       };
 
 export const guildReducer = (state: IGuild, action: GuildAction): IGuild => {
@@ -61,6 +65,13 @@ export const guildReducer = (state: IGuild, action: GuildAction): IGuild => {
             return {
                 ...state,
                 members: state.members.filter(x => !!x.username || !!x.shareToken),
+            };
+        }
+        case 'ImportFromExcel': {
+            const newMembers = action.members.slice(0, 30).map((x, i) => ({ ...x, index: i }));
+            return {
+                ...state,
+                members: newMembers,
             };
         }
 

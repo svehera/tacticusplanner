@@ -11,6 +11,8 @@ import SavedSearchIcon from '@mui/icons-material/SavedSearch';
 import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { ImportGuildExcel } from 'src/v2/features/guild/read-guild-from-excel';
+import { IGuildMember } from 'src/models/interfaces';
 
 export const Guild: React.FC = () => {
     const guildMembersLimit = 30;
@@ -28,9 +30,14 @@ export const Guild: React.FC = () => {
         dispatch.guild({ type: 'UpdateShareToken', value, index });
     };
 
+    const importExcel = (members: IGuildMember[]) => {
+        dispatch.guild({ type: 'ImportFromExcel', members });
+    };
+
     return (
         <FlexBox style={{ flexDirection: 'column' }} gap={10}>
             <FlexBox justifyContent={'center'} gap={10} style={{ marginTop: 10 }}>
+                <ImportGuildExcel onImport={importExcel} />
                 <Tooltip
                     title={'Populate Usernames and share tokens from the planner app'}
                     open={editMode}

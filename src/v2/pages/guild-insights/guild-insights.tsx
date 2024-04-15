@@ -4,8 +4,6 @@ import { sum } from 'lodash';
 
 import { Conditional } from 'src/v2/components/conditional';
 
-import { useGetInsights } from 'src/v2/features/insights/insights.endpoint';
-
 import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
