@@ -769,6 +769,7 @@ export interface IInventory {
 
 export interface IContributor {
     name: string;
+    type: string;
     thankYou: string;
     resourceDescription: string;
     resourceLink: string;

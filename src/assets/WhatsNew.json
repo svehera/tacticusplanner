@@ -7,6 +7,19 @@
             "type": "Update",
             "new": [
                 {
+                    "text": "Updated Thank You cards with \"Buy me a coffee\" supporters",
+                    "subPoints": [
+                        "You can get one for you but supporting the planner on https://www.buymeacoffee.com/tacticusplanner",
+                        "Added discord server roles for supporters. Contact me if you are missing the role"
+                    ],
+                    "images": [
+                        {
+                            "path": "bmc.png"
+                        }
+                    ],
+                    "route": "ty"
+                },
+                {
                     "text": "Added possibly to access guildmates Tacticus planner data",
                     "subPoints": [
                         "Your guildmates should enable roster sharing and share with you username and sharetoken which you should populate on the Input Guild page",
