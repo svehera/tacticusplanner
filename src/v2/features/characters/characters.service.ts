@@ -201,6 +201,7 @@ export class CharactersService {
         const legendaryCharactersCount = rarityCaps[Rarity.Legendary];
 
         let total = 0;
+        let raritiesCount = 0;
         const usedCharacters: string[] = [];
 
         if (legendaryCharactersCount > 0) {
@@ -210,6 +211,7 @@ export class CharactersService {
                 Rarity.Legendary,
                 legendaryCharactersCount
             );
+            raritiesCount++;
         }
 
         if (epicCharactersCount > 0) {
@@ -219,6 +221,7 @@ export class CharactersService {
                 Rarity.Epic,
                 epicCharactersCount
             );
+            raritiesCount++;
         }
 
         if (rareCharactersCount > 0) {
@@ -228,6 +231,7 @@ export class CharactersService {
                 Rarity.Rare,
                 rareCharactersCount
             );
+            raritiesCount++;
         }
 
         if (uncommonCharactersCount > 0) {
@@ -237,9 +241,10 @@ export class CharactersService {
                 Rarity.Uncommon,
                 uncommonCharactersCount
             );
+            raritiesCount++;
         }
 
-        return Math.round(total / 5);
+        return Math.round(total / raritiesCount);
     }
 
     private static getRosterRarityPotential(
