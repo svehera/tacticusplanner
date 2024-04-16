@@ -31,6 +31,7 @@ import Dialog from '@mui/material/Dialog';
 import { PlayersTable } from 'src/v2/features/guild/players-table';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { WarZoneBuffImage } from 'src/v2/components/images/war-zone-buff-image';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
 export const GuildWarZones = () => {
     const { guildWar, guild } = useContext(StoreContext);
@@ -140,6 +141,18 @@ export const GuildWarZones = () => {
         setEditZonePlayer2(false);
     };
 
+    const clearPlayerSelection = () => {
+        dispatch.guildWar({
+            type: 'UpdateZonePlayers',
+            layoutId: activeLayout.id,
+            zoneIndex: editZonePlayersIndex,
+            players: [],
+        });
+
+        setEditZonePlayer1(false);
+        setEditZonePlayer2(false);
+    };
+
     const editZonePlayersDialogTitle = useMemo(() => {
         if (editZonePlayersIndex < 0) {
             return <></>;
@@ -167,6 +180,11 @@ export const GuildWarZones = () => {
             </div>
         );
     }, [editZonePlayersIndex, activeLayout.bfLevel]);
+
+    const assignedPlayers = useMemo(() => {
+        return activeLayout.zones.flatMap(x => x.players);
+    }, [activeLayout, guildWar.layouts]);
+
     return (
         <>
             {loading && <Loader loading={true} />}
@@ -196,7 +214,35 @@ export const GuildWarZones = () => {
                         {editZonesMode ? 'Stop editing' : 'Edit war zones'}
                     </Button>
                 </Tooltip>
-                {guildWarPlayers.length && <ViewPlayers guildWarPlayers={guildWarPlayers} />}
+                {!!guildWarPlayers.length && (
+                    <>
+                        <ViewPlayers guildWarPlayers={guildWarPlayers} />
+                        <AccessibleTooltip
+                            title={
+                                <div>
+                                    <span>Assigned players:</span>
+                                    <ul style={{ paddingInlineStart: 20 }}>
+                                        {assignedPlayers.map(username => (
+                                            <li key={username}>{username}</li>
+                                        ))}
+                                    </ul>
+
+                                    <span>Vacant players:</span>
+                                    <ul style={{ paddingInlineStart: 20 }}>
+                                        {guildWarPlayers
+                                            .filter(x => !assignedPlayers.includes(x.username))
+                                            .map(player => (
+                                                <li key={player.username}>{player.username}</li>
+                                            ))}
+                                    </ul>
+                                </div>
+                            }>
+                            <b>
+                                {assignedPlayers.length}/{guildWarPlayers.length}
+                            </b>
+                        </AccessibleTooltip>{' '}
+                    </>
+                )}
             </FlexBox>
             <div className="guild-war-layout-grid">
                 {activeLayout.zones.map((zone, index) => (
@@ -213,7 +259,11 @@ export const GuildWarZones = () => {
             {editZonePlayersIndex >= 0 && (
                 <Dialog
                     open={editZonePlayersIndex >= 0}
-                    onClose={() => setEditZonePlayersIndex(-1)}
+                    onClose={() => {
+                        setEditZonePlayersIndex(-1);
+                        setEditZonePlayer1(false);
+                        setEditZonePlayer2(false);
+                    }}
                     maxWidth={isMobile ? 'xl' : 'lg'}
                     fullWidth>
                     <DialogTitle>{editZonePlayersDialogTitle}</DialogTitle>
@@ -224,7 +274,7 @@ export const GuildWarZones = () => {
                             placement={'top'}>
                             <Button
                                 disabled={editZonePlayer2}
-                                onClick={() => setEditZonePlayer1(true)}
+                                onClick={() => setEditZonePlayer1(value => !value)}
                                 color={activeLayout.zones[editZonePlayersIndex].players[0] ? 'primary' : 'error'}>
                                 {activeLayout.zones[editZonePlayersIndex].players[0] ?? 'Slot 1'}
                             </Button>
@@ -236,7 +286,7 @@ export const GuildWarZones = () => {
                             placement={'top'}>
                             <Button
                                 disabled={editZonePlayer1}
-                                onClick={() => setEditZonePlayer2(true)}
+                                onClick={() => setEditZonePlayer2(value => !value)}
                                 color={activeLayout.zones[editZonePlayersIndex].players[1] ? 'primary' : 'error'}>
                                 {activeLayout.zones[editZonePlayersIndex].players[1] ?? 'Slot 2'}
                             </Button>
@@ -245,7 +295,17 @@ export const GuildWarZones = () => {
                         <PlayersTable rows={guildWarPlayers} onRowClick={updatePlayerSelection} />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => setEditZonePlayersIndex(-1)}>Close</Button>
+                        <Button color="error" onClick={clearPlayerSelection}>
+                            Clear players
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                setEditZonePlayersIndex(-1);
+                                setEditZonePlayer1(false);
+                                setEditZonePlayer2(false);
+                            }}>
+                            Close
+                        </Button>
                     </DialogActions>
                 </Dialog>
             )}

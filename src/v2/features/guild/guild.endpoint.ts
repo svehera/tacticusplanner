@@ -8,5 +8,9 @@ import {
 export const useGetGuildInsights = (request: IGuildInsightsRequest) =>
     useApi<IGuildInsightsResponse, IGuildInsightsRequest>('POST', 'GuildInsights', request);
 
-export const useGetGuildRosters = (request: IGuildInsightsRequest) =>
-    useApi<IGuildRostersResponse, IGuildInsightsRequest>('POST', 'GuildRosters', request);
+export const useGetGuildRosters = (request: IGuildInsightsRequest) => {
+    if (!request.members.length) {
+        return { loading: false, data: null, error: null };
+    }
+    return useApi<IGuildRostersResponse, IGuildInsightsRequest>('POST', 'GuildRosters', request);
+};

@@ -121,6 +121,7 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['dailyRaids'],
     menuItemById['defense'],
     menuItemById['offense'],
+    menuItemById['zones'],
     menuItemById['leMasterTable'],
     menuItemById['shadowsun'],
     menuItemById['ragnar'],

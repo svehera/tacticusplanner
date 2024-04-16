@@ -34,7 +34,7 @@
                 "4": "Elite",
                 "5": "Elite"
             },
-            "buff": "Global: Spawns 2 Cadian Guardsmen supporting defenders. They are affected by all other defender buffs"
+            "buff": "Global: Spawns 2 (3 when two Garrisons are still standing) Cadian Guardsmen supporting defenders. They are affected by all other defender buffs"
         },
         {
             "id": "frontline",
@@ -88,7 +88,7 @@
                 "4": "Veteran",
                 "5": "Veteran"
             },
-            "buff": "Regional: At the start of the battle Anti0Air fire hits all attacking flying units, reducing the hit unit's current health by 40%"
+            "buff": "Regional: At the start of the battle Anti-Air fire hits all attacking flying units, reducing the hit unit's current health by 40%"
         },
         {
             "id": "fortifiedPosition",

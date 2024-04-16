@@ -3,9 +3,58 @@
     "releaseNotes": [
         {
             "version": "1.4.7",
-            "date": "April X",
+            "date": "April 17",
             "type": "Update",
-            "new": [],
+            "new": [
+                {
+                    "text": "Added possibly to access guildmates Tacticus planner data",
+                    "subPoints": [
+                        "Your guildmates should enable roster sharing and share with you username and sharetoken which you should populate on the Input Guild page",
+                        "You can populate guildmates data by importing Excel file",
+                        "Your account data is not included automatically so make sure to populate your username and sharetoken as well"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild1.png"
+                        },
+                        {
+                            "path": "guild2.png"
+                        }
+                    ],
+                    "route": "input/guild"
+                },
+                {
+                    "text": "Added Guild Insights page",
+                    "subPoints": ["You can view guild averaged roster data and who own which characters"],
+                    "images": [
+                        {
+                            "path": "guild3.png"
+                        },
+                        {
+                            "path": "guild4.png"
+                        }
+                    ],
+                    "route": "learn/guildInsights"
+                },
+                {
+                    "text": "Added Guild Waz zones page",
+                    "subPoints": [
+                        "War zones layout is updated according to changes announced for the next season of guild wars",
+                        "War zones can be reordered in the same fashion how it is done in the game",
+                        "You can have up to 3 war zones layout",
+                        "You can view guildmates potential for each difficult and assign them to specific zones"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild5.png"
+                        },
+                        {
+                            "path": "guild6.png"
+                        }
+                    ],
+                    "route": "plan/guildWar/zones"
+                }
+            ],
             "minor": [
                 {
                     "text": "On the character's details dialog when rarity is changed the stars will be auto-adjusted accordingly. Thanks to NickReinlein for contribution",
