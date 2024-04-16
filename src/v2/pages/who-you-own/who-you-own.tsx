@@ -16,6 +16,7 @@ import { IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
 import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
+import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
 
 import { ShareRoster } from 'src/v2/features/share/share-roster';
 
@@ -77,6 +78,16 @@ export const WhoYouOwn = () => {
         setOpenCharacterItemDialog(false);
     };
 
+    const teamData = charactersFiltered.map(character => ({
+        x: character.name,
+        y: CharactersPowerService.getCharacterPower(character),
+    }));
+    teamData.sort((a, b) => {
+        const powerA = a.y;
+        const powerB = b.y;
+        return powerB - powerA;
+    });
+
     return (
         <Box style={{ margin: 'auto' }}>
             <CharactersViewContext.Provider
@@ -111,6 +122,11 @@ export const WhoYouOwn = () => {
                         isOpen={openCharacterItemDialog}
                         onClose={endEditCharacter}
                     />
+                </Conditional>
+
+                <Conditional condition={isFactionsView(viewControls.orderBy)}>
+                    <center>Team Power Distribution</center>
+                    <TeamGraph data={[{ id: 'Power', data: teamData }]} />
                 </Conditional>
             </CharactersViewContext.Provider>
         </Box>
