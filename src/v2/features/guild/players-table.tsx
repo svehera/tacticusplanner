@@ -5,68 +5,56 @@ import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import './players-table.css';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { FlexBox } from 'src/v2/components/flex-box';
-import { Difficulty, Rank, Rarity } from 'src/models/enums';
+import { Difficulty, Rarity } from 'src/models/enums';
 import { Badge } from '@mui/material';
-import { IGuildRostersResponse } from 'src/v2/features/guild/guild.models';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
 import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { mapValues, sum } from 'lodash';
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 
-interface IPlayerRow {
-    username: string;
-    unlocked: number;
-    slots: Record<Rarity, number>;
-    trooperPotential: number;
-    veteranPotential: number;
-    elitePotential: number;
-    heroPotential: number;
-}
-
-export const PlayersTable = ({ data }: { data: IGuildRostersResponse }) => {
-    const tets = GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.Easy);
-    console.log(tets);
-    const rows: IPlayerRow[] = data.guildUsers.map(user => ({
-        username: user,
-        unlocked: data.userData[user].filter(x => x.rank > Rank.Locked).length,
-        slots: CharactersService.groupByRarityPools(data.userData[user]),
-        trooperPotential: CharactersService.getRosterPotential(
-            data.userData[user],
-            GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.Easy)
-        ),
-        veteranPotential: CharactersService.getRosterPotential(
-            data.userData[user],
-            GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.Normal)
-        ),
-        elitePotential: CharactersService.getRosterPotential(
-            data.userData[user],
-            GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.Hard)
-        ),
-        heroPotential: CharactersService.getRosterPotential(
-            data.userData[user],
-            GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.VeryHard)
-        ),
-    }));
-
-    const [columnDefs] = useState<Array<ColDef<IPlayerRow>>>([
+export const PlayersTable = ({
+    rows,
+    onRowClick,
+}: {
+    rows: IGuildWarPlayer[];
+    onRowClick?: (player: IGuildWarPlayer) => void;
+}) => {
+    const [columnDefs] = useState<Array<ColDef<IGuildWarPlayer>>>([
+        {
+            headerName: '#',
+            colId: 'rowNumber',
+            valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
+            maxWidth: 50,
+            width: 50,
+        },
         {
             field: 'username',
             width: 140,
         },
         {
-            field: 'unlocked',
+            field: 'enlistedZone',
             width: 140,
+            valueGetter: (params: ValueGetterParams<IGuildWarPlayer>) => {
+                const data = params.data?.enlistedZone ?? '';
+                const zone = GuildWarService.getZone(data);
+
+                return zone?.name ?? '';
+            },
+        },
+        {
+            field: 'unlocked',
+            width: 90,
         },
         {
             field: 'slots',
             headerName: 'Rarity pool',
             width: 150,
-            valueGetter: (params: ValueGetterParams<IPlayerRow>) => {
+            valueGetter: (params: ValueGetterParams<IGuildWarPlayer>) => {
                 const data = params.data!.slots;
 
                 return sum(Object.values(mapValues(data, (x, y) => x * +y)));
             },
-            cellRenderer: (params: ICellRendererParams<IPlayerRow>) => {
+            cellRenderer: (params: ICellRendererParams<IGuildWarPlayer>) => {
                 const slots = params.data!.slots;
 
                 return (
@@ -85,27 +73,25 @@ export const PlayersTable = ({ data }: { data: IGuildRostersResponse }) => {
                 );
             },
         },
-        {
-            field: 'trooperPotential',
-            width: 140,
-        },
-        {
-            field: 'veteranPotential',
-            width: 140,
-        },
-        {
-            field: 'elitePotential',
-            width: 140,
-        },
-        {
-            field: 'heroPotential',
-            width: 140,
-        },
+        ...[Difficulty.Easy, Difficulty.Normal, Difficulty.Hard, Difficulty.VeryHard].map(difficulty => ({
+            headerName: GuildWarService.gwData.difficulties[difficulty - 1],
+            width: 90,
+            valueGetter: (params: ValueGetterParams<IGuildWarPlayer>) => {
+                const { potential } = params.data ?? {};
+
+                return potential && potential[difficulty];
+            },
+        })),
     ]);
 
     return (
         <div className="ag-theme-material bf-table">
-            <AgGridReact suppressCellFocus={true} columnDefs={columnDefs} rowHeight={40} rowData={rows}></AgGridReact>
+            <AgGridReact
+                suppressCellFocus={true}
+                columnDefs={columnDefs}
+                rowHeight={40}
+                rowData={rows}
+                onRowClicked={event => onRowClick && onRowClick(event.data!)}></AgGridReact>
         </div>
     );
 };

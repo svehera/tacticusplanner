@@ -45,6 +45,12 @@ export type GuildWarAction =
           zone1Index: number;
           zone2Index: number;
       }
+    | {
+          type: 'UpdateZonePlayers';
+          layoutId: string;
+          zoneIndex: number;
+          players: string[];
+      }
     | SetStateAction<IGuildWar>;
 
 export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuildWar => {
@@ -143,6 +149,30 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
                     ...state,
                     layouts: [...state.layouts],
                 };
+            }
+
+            return state;
+        }
+        case 'UpdateZonePlayers': {
+            const { layoutId, zoneIndex, players } = action;
+            const existingLayoutIndex = state.layouts.findIndex(x => x.id === layoutId);
+
+            if (existingLayoutIndex >= 0) {
+                const layout = state.layouts[existingLayoutIndex];
+                const zone = layout.zones[zoneIndex];
+
+                if (zone) {
+                    zone.players = players;
+                    layout.zones.forEach((zone, index) => {
+                        if (index !== zoneIndex) {
+                            zone.players = zone.players.filter(player => !players.includes(player));
+                        }
+                    });
+                    return {
+                        ...state,
+                        layouts: [...state.layouts],
+                    };
+                }
             }
 
             return state;

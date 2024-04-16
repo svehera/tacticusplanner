@@ -1,21 +1,35 @@
-﻿import React, { DOMAttributes, useContext } from 'react';
+﻿import React, { useContext, useMemo } from 'react';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { FlexBox } from 'src/v2/components/flex-box';
 
 import { IGWLayoutZone, ZoneId } from 'src/v2/features/guild-war/guild-war.models';
-import { Card, CardContent, CardHeader, Tab, Tabs, Tooltip } from '@mui/material';
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Tab,
+    Tabs,
+    Tooltip,
+} from '@mui/material';
 import Button from '@mui/material/Button';
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 import { BfLevelSelect } from 'src/v2/features/guild-war/bf-level-select';
 import { DifficultyImage } from 'src/v2/components/images/difficulty-image';
 import { isMobile } from 'react-device-detect';
-import IconButton from '@mui/material/IconButton';
-import { Edit } from '@mui/icons-material';
 import './guild-war-zones.scss';
 import { CommonProps } from '@mui/material/OverridableComponent';
 import { useGetGuildInsights, useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
 import { Loader } from 'src/v2/components/loader';
 import { ViewPlayers } from 'src/v2/features/guild/view-players';
+import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
+import { Difficulty, Rank } from 'src/models/enums';
+import { CharactersService } from 'src/v2/features/characters/characters.service';
+import Dialog from '@mui/material/Dialog';
+import { PlayersTable } from 'src/v2/features/guild/players-table';
+import { getCompletionRateColor } from 'src/shared-logic/functions';
 
 export const GuildWarZones = () => {
     const { guildWar, guild } = useContext(StoreContext);
@@ -25,9 +39,12 @@ export const GuildWarZones = () => {
 
     const [activeLayout, setActiveLayout] = React.useState(guildWar.layouts[0]);
 
-    const [editMode, setEditMode] = React.useState(false);
+    const [editZonesMode, setEditZonesMode] = React.useState(false);
+    const [editZonePlayersIndex, setEditZonePlayersIndex] = React.useState<number>(-1);
     const [swapZones, setSwapZones] = React.useState<number[]>([]);
     const [tab, setTab] = React.useState(0);
+    const [editZonePlayer1, setEditZonePlayer1] = React.useState(false);
+    const [editZonePlayer2, setEditZonePlayer2] = React.useState(false);
 
     const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
         setTab(newValue);
@@ -38,8 +55,13 @@ export const GuildWarZones = () => {
         dispatch.guildWar({ type: 'UpdateLayoutBfLevel', bfLevel: value, layoutId: activeLayout.id });
     };
 
-    const handleZoneClick = (zoneId: ZoneId, zoneIndex: number) => {
-        if (!editMode || zoneId === 'frontline') {
+    const handleZoneClick = (zone: IGWLayoutZone, zoneIndex: number) => {
+        if (!editZonesMode) {
+            setEditZonePlayersIndex(zoneIndex);
+            return;
+        }
+
+        if (editZonesMode && zone.id === 'frontline') {
             return;
         }
 
@@ -60,6 +82,63 @@ export const GuildWarZones = () => {
         }
     };
 
+    const guildWarPlayers: IGuildWarPlayer[] = useMemo(() => {
+        if (!data) {
+            return [];
+        }
+
+        return data.guildUsers.map(user => ({
+            username: user,
+            unlocked: data.userData[user].filter(x => x.rank > Rank.Locked).length,
+            slots: CharactersService.groupByRarityPools(data.userData[user]),
+            potential: {
+                [Difficulty.None]: 0,
+                [Difficulty.Easy]: CharactersService.getRosterPotential(
+                    data.userData[user],
+                    GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.Easy)
+                ),
+                [Difficulty.Normal]: CharactersService.getRosterPotential(
+                    data.userData[user],
+                    GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.Normal)
+                ),
+                [Difficulty.Hard]: CharactersService.getRosterPotential(
+                    data.userData[user],
+                    GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.Hard)
+                ),
+                [Difficulty.VeryHard]: CharactersService.getRosterPotential(
+                    data.userData[user],
+                    GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.VeryHard)
+                ),
+            },
+            enlistedZone: activeLayout.zones.find(x => x.players.includes(user))?.id ?? '',
+        }));
+    }, [data, activeLayout, guildWar.layouts]);
+
+    const updatePlayerSelection = (player: IGuildWarPlayer) => {
+        if (!editZonePlayer1 && !editZonePlayer2) {
+            return;
+        }
+
+        const players = activeLayout.zones[editZonePlayersIndex].players;
+        if (editZonePlayer1) {
+            players[0] = player.username;
+        }
+
+        if (editZonePlayer2) {
+            players[1] = player.username;
+        }
+
+        dispatch.guildWar({
+            type: 'UpdateZonePlayers',
+            layoutId: activeLayout.id,
+            zoneIndex: editZonePlayersIndex,
+            players,
+        });
+
+        setEditZonePlayer1(false);
+        setEditZonePlayer2(false);
+    };
+
     return (
         <>
             {loading && <Loader loading={true} />}
@@ -75,16 +154,16 @@ export const GuildWarZones = () => {
             <FlexBox justifyContent={'center'} style={{ marginTop: 10 }}>
                 <Tooltip
                     title={'Select 2 war zones whose positions you want to swap'}
-                    open={editMode}
+                    open={editZonesMode}
                     placement={'top'}>
                     <Button
                         variant={'contained'}
-                        onClick={() => setEditMode(value => !value)}
-                        color={editMode ? 'success' : 'primary'}>
-                        {editMode ? 'Stop editing' : 'Edit war zones'}
+                        onClick={() => setEditZonesMode(value => !value)}
+                        color={editZonesMode ? 'success' : 'primary'}>
+                        {editZonesMode ? 'Stop editing' : 'Edit war zones'}
                     </Button>
                 </Tooltip>
-                {data && <ViewPlayers guildData={data} bfLevel={activeLayout.bfLevel} />}
+                {guildWarPlayers.length && <ViewPlayers guildWarPlayers={guildWarPlayers} />}
             </FlexBox>
             <div className="guild-war-layout-grid">
                 {activeLayout.zones.map((zone, index) => (
@@ -92,11 +171,45 @@ export const GuildWarZones = () => {
                         key={index}
                         bfLevel={activeLayout.bfLevel}
                         zone={zone}
+                        players={guildWarPlayers}
                         style={{ backgroundColor: swapZones.includes(index) ? '#409FFF' : '' }}
-                        onClick={() => handleZoneClick(zone.id, index)}
+                        onClick={() => handleZoneClick(zone, index)}
                     />
                 ))}
             </div>
+            {editZonePlayersIndex >= 0 && (
+                <Dialog
+                    open={editZonePlayersIndex >= 0}
+                    onClose={() => setEditZonePlayersIndex(-1)}
+                    maxWidth={isMobile ? 'xl' : 'lg'}
+                    fullWidth>
+                    <DialogTitle>Edit zone players</DialogTitle>
+                    <DialogContent>
+                        <Tooltip
+                            title={'Select a player from the table for slot 1'}
+                            open={editZonePlayer1}
+                            placement={'top'}>
+                            <Button disabled={editZonePlayer2} onClick={() => setEditZonePlayer1(true)}>
+                                {activeLayout.zones[editZonePlayersIndex].players[0] ?? 'Slot 1'}
+                            </Button>
+                        </Tooltip>
+
+                        <Tooltip
+                            title={'Select a player from the table for slot 2'}
+                            open={editZonePlayer2}
+                            placement={'top'}>
+                            <Button disabled={editZonePlayer1} onClick={() => setEditZonePlayer2(true)}>
+                                {activeLayout.zones[editZonePlayersIndex].players[1] ?? 'Slot 2'}
+                            </Button>
+                        </Tooltip>
+
+                        <PlayersTable rows={guildWarPlayers} onRowClick={updatePlayerSelection} />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => setEditZonePlayersIndex(-1)}>Close</Button>
+                    </DialogActions>
+                </Dialog>
+            )}
         </>
     );
 };
@@ -104,12 +217,23 @@ export const GuildWarZones = () => {
 interface ZoneCardProps extends React.DOMAttributes<HTMLElement>, CommonProps {
     bfLevel: number;
     zone: IGWLayoutZone;
+    players: IGuildWarPlayer[];
 }
 
-const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style }) => {
+const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style, players }) => {
     const zoneStats = GuildWarService.getZone(zone.id);
     const difficulty = zoneStats.rarityCaps[bfLevel].difficulty;
-    const difficultyEnum = GuildWarService.gwData.difficulties.indexOf(difficulty) + 1;
+    const difficultyEnum: Difficulty = GuildWarService.gwData.difficulties.indexOf(difficulty) + 1;
+
+    const player1 = players.find(x => x.username === zone.players[0]);
+    const player2 = players.find(x => x.username === zone.players[1]);
+
+    const player1Potential = player1 ? player1.potential[difficultyEnum] : 0;
+    const player2Potential = player2 ? player2.potential[difficultyEnum] : 0;
+
+    const totalPotential = Math.round((player1Potential + player2Potential) / 2);
+
+    const potentialColor = getCompletionRateColor(totalPotential, 100);
 
     return (
         <Card
@@ -119,6 +243,9 @@ const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style }) =>
                 maxWidth: 400,
                 minHeight: 150,
                 boxShadow: '1px 2px 3px rgba(0, 0, 0, 0.6)',
+                cursor: 'pointer',
+                borderInlineStart: '10px solid',
+                borderInlineColor: potentialColor,
                 zoom: isMobile ? 0.7 : 1,
             }}>
             <CardHeader
@@ -131,16 +258,16 @@ const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style }) =>
                         <span>{difficulty}</span>
                     </FlexBox>
                 }
-                action={
-                    <IconButton>
-                        <Edit fontSize="small" />
-                    </IconButton>
-                }
+                // action={
+                //     <IconButton>
+                //         <Edit fontSize="small" />
+                //     </IconButton>
+                // }
             />
             <CardContent style={{ paddingTop: 0, paddingBottom: 0 }}>
                 <FlexBox style={{ flexDirection: 'column', alignItems: 'start' }}>
-                    <div>1: {zone.players[0] ?? 'Empty'}</div>
-                    <div>2: {zone.players[1] ?? 'Empty'}</div>
+                    <div>1: {player1 ? `${player1.username} - ${player1Potential}` : 'Empty'}</div>
+                    <div>2: {player2 ? `${player2.username} - ${player2Potential}` : 'Empty'}</div>
                 </FlexBox>
             </CardContent>
         </Card>

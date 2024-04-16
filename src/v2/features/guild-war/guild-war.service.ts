@@ -85,7 +85,7 @@ export class GuildWarService {
         };
     }
 
-    public static getZone(zoneId: ZoneId): IGWZone {
+    public static getZone(zoneId: string): IGWZone {
         return this.gwData.zones.find(x => x.id === zoneId)!;
     }
 }
