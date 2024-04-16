@@ -12,6 +12,18 @@
                     "route": "https://github.com/svehera/tacticusplanner/pull/184"
                 },
                 {
+                    "text": "Refined \"power/potential\" calculation formula to scale better for rank upgrades. Thanks to Lëonaica for contribution",
+                    "subPoints": [
+                        "40k is ultimate power now and is a maximum for each character when character has Diamond III rank, Blue star and both abilities at level 50"
+                    ],
+                    "images": [
+                        {
+                            "path": "40k.png"
+                        }
+                    ],
+                    "route": "https://github.com/svehera/tacticusplanner/pull/188"
+                },
+                {
                     "text": "Updated icon for Righteous Candle (SeventhSun)"
                 }
             ],

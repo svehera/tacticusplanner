@@ -43,16 +43,14 @@ const icons = {
 export const MiscIcon = ({ icon, width, height }: { icon: keyof typeof icons; width?: number; height?: number }) => {
     const details = icons[icon] ?? { file: '', label: icon };
     return (
-        <Tooltip title={details.label}>
-            <span style={{ display: 'inline-block', width: width ?? 30, height }}>
-                <img
-                    style={{ pointerEvents: 'none' }}
-                    src={details.file}
-                    width={width ?? 30}
-                    height={height}
-                    alt={details.label}
-                />
-            </span>
-        </Tooltip>
+        <span style={{ display: 'inline-block', width: width ?? 30, height }}>
+            <img
+                style={{ pointerEvents: 'none' }}
+                src={details.file}
+                width={width ?? 30}
+                height={height}
+                alt={details.label}
+            />
+        </span>
     );
 };
