@@ -109,9 +109,9 @@ export const planSubMenuWeb: MenuItemTP[] = [
     ]),
     new MenuItemTP('LRE', menuItemById['leMasterTable'].icon, '', '', '', [
         menuItemById['leMasterTable'],
-        menuItemById['shadowsun'],
-        menuItemById['ragnar'],
         menuItemById['vitruvius'],
+        menuItemById['ragnar'],
+        menuItemById['shadowsun'],
         menuItemById['aunshi'],
     ]),
 ];

@@ -9,12 +9,12 @@ import { GoalCard } from '../../../routes/goals/goals';
 import { sum } from 'lodash';
 import { MiscIcon } from '../../../shared-components/misc-icon';
 
-import lre from 'src/assets/legendary-events/Shadowsun.json';
+import lre from 'src/assets/legendary-events/Vitruvius.json';
 
 export const Home = () => {
     const navigate = useNavigate();
     const { goals, dailyRaids } = useContext(StoreContext);
-    const nextLeMenuItem = menuItemById['shadowsun'];
+    const nextLeMenuItem = menuItemById['vitruvius'];
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
     const topPriorityGoal = goals[0];
