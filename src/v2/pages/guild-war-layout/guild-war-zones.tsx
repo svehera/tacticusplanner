@@ -31,7 +31,6 @@ import Dialog from '@mui/material/Dialog';
 import { PlayersTable } from 'src/v2/features/guild/players-table';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { WarZoneBuffImage } from 'src/v2/components/images/war-zone-buff-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
 export const GuildWarZones = () => {
     const { guildWar, guild } = useContext(StoreContext);
@@ -187,7 +186,12 @@ export const GuildWarZones = () => {
                     placement={'top'}>
                     <Button
                         variant={'contained'}
-                        onClick={() => setEditZonesMode(value => !value)}
+                        onClick={() => {
+                            setEditZonesMode(value => !value);
+                            if (editZonesMode) {
+                                setSwapZones([]);
+                            }
+                        }}
                         color={editZonesMode ? 'success' : 'primary'}>
                         {editZonesMode ? 'Stop editing' : 'Edit war zones'}
                     </Button>
@@ -295,7 +299,7 @@ const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style, play
                 }
                 action={
                     zoneStats.buff ? (
-                        <Tooltip title={zoneStats.buff}>
+                        <Tooltip title={zoneStats.buff} placement="top" arrow>
                             <div>
                                 <WarZoneBuffImage zoneId={zone.id} />
                             </div>
