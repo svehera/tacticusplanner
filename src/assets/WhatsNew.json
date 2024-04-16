@@ -10,11 +10,17 @@
                 {
                     "text": "On the character's details dialog when rarity is changed the stars will be auto-adjusted accordingly. Thanks to NickReinlein for contribution",
                     "route": "https://github.com/svehera/tacticusplanner/pull/184"
+                },
+                {
+                    "text": "Updated icon for Righteous Candle (SeventhSun)"
                 }
             ],
             "bugFixes": [
                 {
                     "text": "Fixed Indomitus Mirror Elite 4 reward (SeventhSun)"
+                },
+                {
+                    "text": "Fixed Saim-Hann Elite 5 reward (SeventhSun)"
                 }
             ]
         },
