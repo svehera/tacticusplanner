@@ -773,7 +773,7 @@ export interface IContributor {
     thankYou: string;
     resourceDescription: string;
     resourceLink: string;
-    avatarIcon: string;
+    avatarIcon?: string;
 }
 
 export interface IContentCreator {
