@@ -74,6 +74,7 @@ export class GuildWarService {
                 warScore: rawSection.warScore,
                 count: rawSection.count,
                 rarityCaps: rarityCaps,
+                buff: rawSection.buff,
             };
         });
 

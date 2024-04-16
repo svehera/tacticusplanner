@@ -19,7 +19,8 @@
                 "3": "Veteran",
                 "4": "Elite",
                 "5": "Elite"
-            }
+            },
+            "buff": "Regional: All defending units have 10% increased Armour"
         },
         {
             "id": "troopGarrison",
@@ -32,7 +33,8 @@
                 "3": "Veteran",
                 "4": "Elite",
                 "5": "Elite"
-            }
+            },
+            "buff": "Global: Spawns 2 Cadian Guardsmen supporting defenders. They are affected by all other defender buffs"
         },
         {
             "id": "frontline",
@@ -71,7 +73,8 @@
                 "3": "Trooper",
                 "4": "Veteran",
                 "5": "Veteran"
-            }
+            },
+            "buff": "Regional: At the start of the battle 3 artillery shells hit random attacking units, each reducing the hit units' current Health by 20%"
         },
         {
             "id": "antiAirBattery",
@@ -84,7 +87,8 @@
                 "3": "Trooper",
                 "4": "Veteran",
                 "5": "Veteran"
-            }
+            },
+            "buff": "Regional: At the start of the battle Anti0Air fire hits all attacking flying units, reducing the hit unit's current health by 40%"
         },
         {
             "id": "fortifiedPosition",
@@ -97,7 +101,8 @@
                 "3": "Elite",
                 "4": "Elite",
                 "5": "Hero"
-            }
+            },
+            "buff": "Local: All defending units have 10% increased Armour and 10% increased Damage"
         },
         {
             "id": "voxStation",
@@ -123,7 +128,8 @@
                 "3": "Veteran",
                 "4": "Veteran",
                 "5": "Elite"
-            }
+            },
+            "buff": "Global: All defending units have 60% increased Health"
         },
         {
             "id": "headQuarters",

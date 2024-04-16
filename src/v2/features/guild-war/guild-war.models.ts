@@ -24,7 +24,7 @@ export interface IGWDataRaw {
     sectionDifficulty: string[];
     rarityCaps: Record<string, string[]>;
     bfLevels: number[];
-    sections: IGWSectionRaw[];
+    sections: IGWZoneRaw[];
 }
 
 export interface IGWZone {
@@ -39,14 +39,16 @@ export interface IGWZone {
             caps: Rarity[];
         }
     >; // battlefield level to rarityCaps array
+    buff?: string;
 }
 
-export interface IGWSectionRaw {
+export interface IGWZoneRaw {
     id: string;
     name: string;
     warScore: number;
     count: number;
     difficulty: Record<number, string>; // battlefield level to rarityCaps array
+    buff?: string;
 }
 
 export interface IGWTeam {
