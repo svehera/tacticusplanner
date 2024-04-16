@@ -1,6 +1,6 @@
 ﻿import { groupBy, orderBy, sum } from 'lodash';
 
-import { ICharacter2 } from 'src/models/interfaces';
+import { ICharacter2, IPersonalCharacterData2 } from 'src/models/interfaces';
 import { Rank, Rarity } from 'src/models/enums';
 import { CharactersFilterBy } from './enums/characters-filter-by';
 import { needToAscendCharacter } from './functions/need-to-ascend';
@@ -148,7 +148,7 @@ export class CharactersService {
     //     return Math.round(averagePotential); // Round potential to the nearest whole number
     // }
 
-    static calculateCharacterPotential(character: ICharacter2, rarityCap: Rarity): number {
+    static calculateCharacterPotential(character: IPersonalCharacterData2, rarityCap: Rarity): number {
         const capped = rarityCaps[rarityCap];
 
         const cappedPower = CharactersPowerService.getCharacterPower({
@@ -169,6 +169,97 @@ export class CharactersService {
             passiveAbilityLevel: character.passiveAbilityLevel,
         } as unknown as ICharacter2);
 
-        return Math.round((characterPower / cappedPower) * 100); // Round potential to the nearest whole number
+        return characterPower > cappedPower ? 100 : Math.round((characterPower / cappedPower) * 100); // Round potential to the nearest whole number
+    }
+
+    public static groupByRarityPools(availableCharacters: IPersonalCharacterData2[]): Record<Rarity, number> {
+        const legendaryPool = availableCharacters.filter(
+            x => x.rarity === Rarity.Legendary && x.rank >= Rank.Gold1
+        ).length;
+        const epicPool = availableCharacters.filter(x => x.rarity >= Rarity.Epic && x.rank >= Rank.Gold1).length;
+        const rarePool = availableCharacters.filter(x => x.rarity >= Rarity.Rare && x.rank >= Rank.Silver1).length;
+        const uncommonPool = availableCharacters.filter(
+            x => x.rarity >= Rarity.Uncommon && x.rank >= Rank.Bronze1
+        ).length;
+
+        return {
+            [Rarity.Legendary]: legendaryPool,
+            [Rarity.Epic]: epicPool,
+            [Rarity.Rare]: rarePool,
+            [Rarity.Uncommon]: uncommonPool,
+            [Rarity.Common]: 0,
+        };
+    }
+
+    public static getRosterPotential(
+        availableCharacters: IPersonalCharacterData2[],
+        rarityCaps: Record<Rarity, number>
+    ): number {
+        const uncommonCharactersCount = rarityCaps[Rarity.Uncommon];
+        const rareCharactersCount = rarityCaps[Rarity.Rare];
+        const epicCharactersCount = rarityCaps[Rarity.Epic];
+        const legendaryCharactersCount = rarityCaps[Rarity.Legendary];
+
+        let total = 0;
+        const usedCharacters: string[] = [];
+
+        if (legendaryCharactersCount > 0) {
+            total += this.getRosterRarityPotential(
+                usedCharacters,
+                availableCharacters,
+                Rarity.Legendary,
+                legendaryCharactersCount
+            );
+        }
+
+        if (epicCharactersCount > 0) {
+            total += this.getRosterRarityPotential(
+                usedCharacters,
+                availableCharacters.filter(x => !usedCharacters.includes(x.name)),
+                Rarity.Epic,
+                epicCharactersCount
+            );
+        }
+
+        if (rareCharactersCount > 0) {
+            total += this.getRosterRarityPotential(
+                usedCharacters,
+                availableCharacters.filter(x => !usedCharacters.includes(x.name)),
+                Rarity.Rare,
+                rareCharactersCount
+            );
+        }
+
+        if (uncommonCharactersCount > 0) {
+            total += this.getRosterRarityPotential(
+                usedCharacters,
+                availableCharacters.filter(x => !usedCharacters.includes(x.name)),
+                Rarity.Uncommon,
+                uncommonCharactersCount
+            );
+        }
+
+        return Math.round(total / 5);
+    }
+
+    private static getRosterRarityPotential(
+        usedCharacters: string[],
+        availableCharacters: IPersonalCharacterData2[],
+        rarityCap: Rarity,
+        charactersCount: number
+    ): number {
+        const charactersByPotential = orderBy(
+            availableCharacters.map(x => ({
+                ...x,
+                potential: this.calculateCharacterPotential(x, rarityCap),
+            })),
+            ['potential'],
+            ['desc']
+        ).slice(0, charactersCount * 5);
+
+        usedCharacters.push(...charactersByPotential.map(x => x.name));
+        const charactersByPotentialValue = charactersByPotential.map(x => x.potential);
+
+        return (sum(charactersByPotentialValue) / (charactersCount * 5 * 100)) * 100;
     }
 }

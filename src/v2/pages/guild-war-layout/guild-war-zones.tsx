@@ -13,10 +13,15 @@ import IconButton from '@mui/material/IconButton';
 import { Edit } from '@mui/icons-material';
 import './guild-war-zones.scss';
 import { CommonProps } from '@mui/material/OverridableComponent';
+import { useGetGuildInsights, useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
+import { Loader } from 'src/v2/components/loader';
+import { ViewPlayers } from 'src/v2/features/guild/view-players';
 
 export const GuildWarZones = () => {
-    const { guildWar } = useContext(StoreContext);
+    const { guildWar, guild } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
+
+    const { data, loading } = useGetGuildRosters({ members: guild.members });
 
     const [activeLayout, setActiveLayout] = React.useState(guildWar.layouts[0]);
 
@@ -57,6 +62,7 @@ export const GuildWarZones = () => {
 
     return (
         <>
+            {loading && <Loader loading={true} />}
             <FlexBox justifyContent={'center'} gap={10}>
                 <BfLevelSelect value={activeLayout.bfLevel} valueChange={handleBfLevelChange} />
 
@@ -78,6 +84,7 @@ export const GuildWarZones = () => {
                         {editMode ? 'Stop editing' : 'Edit war zones'}
                     </Button>
                 </Tooltip>
+                {data && <ViewPlayers guildData={data} bfLevel={activeLayout.bfLevel} />}
             </FlexBox>
             <div className="guild-war-layout-grid">
                 {activeLayout.zones.map((zone, index) => (
