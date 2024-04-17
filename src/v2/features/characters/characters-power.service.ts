@@ -6,35 +6,49 @@ import dirtyDozenData from 'src/v2/data/dirtyDozen.json';
 import { IDirtyDozenChar } from 'src/v2/features/dirty-dozen/dirty-dozen.models';
 
 export class CharactersPowerService {
-    public static getCharacterPower(character: ICharacter2): number {
+    public static getCharacterAbilityPower(character: ICharacter2): number {
         if (character.rank === Rank.Locked) {
             return 0;
         }
+        const abilityWeight = 500000 / 41274;
+        const abilityPower =
+            abilityWeight *
+            CharactersPowerService.getRarityCoeff(character.rarity) *
+            (CharactersPowerService.getAbilityCoeff(character.activeAbilityLevel) +
+                CharactersPowerService.getAbilityCoeff(character.passiveAbilityLevel));
+        return Math.round(abilityPower);
+    }
 
+    public static getCharacterAttributePower(character: ICharacter2): number {
+        if (character.rank === Rank.Locked) {
+            return 0;
+        }
         const upgradeBoost =
             (1 / 9) *
             (CharactersPowerService.getRankCoeff(character.rank + 1) -
                 CharactersPowerService.getRankCoeff(character.rank));
 
+        const attributesWeight = 3000000 / 9326;
+        const attributePower =
+            attributesWeight *
+            CharactersPowerService.getStarsCoeff(character.stars) *
+            (CharactersPowerService.getRankCoeff(character.rank) + upgradeBoost * (character.upgrades?.length ?? 0));
+
+        return Math.round(attributePower);
+    }
+    public static getCharacterPower(character: ICharacter2): number {
+        if (character.rank === Rank.Locked) {
+            return 0;
+        }
         // Leave this off as we're scaling so that 40,000 is the ultimate Power for any character.
         //      const dirtyDozenCoeff = CharactersPowerService.getDirtyDozenCoeff(character.name);
-
-        const attributesWeight = 3000000 / 9326;
-        const abilityWeight = 500000 / 41274;
-
         const powerLevel =
-            //                dirtyDozenCoeff *
-            attributesWeight *
-                CharactersPowerService.getStarsCoeff(character.stars) *
-                (CharactersPowerService.getRankCoeff(character.rank) +
-                    upgradeBoost * (character.upgrades?.length ?? 0)) +
-            abilityWeight *
-                CharactersPowerService.getRarityCoeff(character.rarity) *
-                (CharactersPowerService.getAbilityCoeff(character.activeAbilityLevel) +
-                    CharactersPowerService.getAbilityCoeff(character.passiveAbilityLevel));
+            CharactersPowerService.getCharacterAttributePower(character) +
+            CharactersPowerService.getCharacterAbilityPower(character);
         return Math.round(powerLevel);
     }
 
+    // Currently unused
     public static getDirtyDozenCoeff(characterId: string): number {
         const dirtyDozenChar: IDirtyDozenChar | undefined = dirtyDozenData.find(x => x.Name === characterId);
         if (!dirtyDozenChar) {

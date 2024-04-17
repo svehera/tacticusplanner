@@ -78,14 +78,53 @@ export const WhoYouOwn = () => {
         setOpenCharacterItemDialog(false);
     };
 
-    const teamData = charactersFiltered.map(character => ({
+    /*     const teamData = charactersFiltered.map(character => ({
         x: character.name,
         y: CharactersPowerService.getCharacterPower(character),
     }));
-    teamData.sort((a, b) => {
-        const powerA = a.y;
-        const powerB = b.y;
-        return powerB - powerA;
+    teamData.sort((a, b) => b.y - a.y);
+    const teamAttributeData = charactersFiltered.map(character => ({
+        x: character.name,
+        y: CharactersPowerService.getCharacterAttributePower(character),
+    }));
+    const teamAbilityData = charactersFiltered.map(character => ({
+        x: character.name,
+        y: CharactersPowerService.getCharacterAbilityPower(character),
+    })); */
+
+    // Create arrays to store data
+    const teamPowerData: { x: string; y: number }[] = [];
+    const teamAttributeData: { x: string; y: number }[] = [];
+    const teamAbilityData: { x: string; y: number }[] = [];
+
+    // Populate arrays
+    charactersFiltered.forEach(character => {
+        const power = CharactersPowerService.getCharacterPower(character);
+        const attributePower = CharactersPowerService.getCharacterAttributePower(character);
+        const abilityPower = CharactersPowerService.getCharacterAbilityPower(character);
+
+        teamPowerData.push({ x: character.name, y: power });
+        teamAttributeData.push({ x: character.name, y: attributePower });
+        teamAbilityData.push({ x: character.name, y: abilityPower });
+    });
+
+    // Define sorting function
+    const sortByPower = (a: { x: string; y: number }, b: { x: string; y: number }) => b.y - a.y;
+
+    // Sort teamData based on power
+    teamPowerData.sort(sortByPower);
+
+    // Apply the same sorting order to teamAttributeData and teamAbilityData
+    teamAttributeData.sort((a, b) => {
+        const aIndex = teamPowerData.findIndex(item => item.x === a.x);
+        const bIndex = teamPowerData.findIndex(item => item.x === b.x);
+        return sortByPower(teamPowerData[aIndex], teamPowerData[bIndex]);
+    });
+
+    teamAbilityData.sort((a, b) => {
+        const aIndex = teamPowerData.findIndex(item => item.x === a.x);
+        const bIndex = teamPowerData.findIndex(item => item.x === b.x);
+        return sortByPower(teamPowerData[aIndex], teamPowerData[bIndex]);
     });
 
     return (
@@ -123,11 +162,27 @@ export const WhoYouOwn = () => {
                         onClose={endEditCharacter}
                     />
                 </Conditional>
-
-                <Conditional condition={isFactionsView(viewControls.orderBy)}>
-                    <center>Team Power Distribution</center>
-                    <TeamGraph data={[{ id: 'Power', data: teamData }]} />
-                </Conditional>
+                <h1>Team Insights</h1>
+                <span style={{ fontSize: 10 }}>
+                    {/* eslint-disable-next-line react/no-unescaped-entities */}
+                    <p>
+                        This is a visualization of each character&apos;s power level, with your strongest character on
+                        the left side and weakest (locked) characters on the right side. The height of each bar is the
+                        power of a single character, so the size of the colored area represents your team&apos;s overall
+                        strength.
+                    </p>
+                    {/* eslint-disable-next-line react/no-unescaped-entities */}
+                    <p>
+                        The darker colored section is power contributed by a character&apos;s attributes (armor, damage,
+                        and health), the lighter colored section by abilities (active and passive).
+                    </p>
+                </span>
+                <TeamGraph
+                    data={[
+                        { id: 'Attribute', data: teamAttributeData },
+                        { id: 'Ability', data: teamAbilityData },
+                    ]}
+                />
             </CharactersViewContext.Provider>
         </Box>
     );
