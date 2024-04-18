@@ -78,26 +78,10 @@ export const WhoYouOwn = () => {
         setOpenCharacterItemDialog(false);
     };
 
-    /*     const teamData = charactersFiltered.map(character => ({
-        x: character.name,
-        y: CharactersPowerService.getCharacterPower(character),
-    }));
-    teamData.sort((a, b) => b.y - a.y);
-    const teamAttributeData = charactersFiltered.map(character => ({
-        x: character.name,
-        y: CharactersPowerService.getCharacterAttributePower(character),
-    }));
-    const teamAbilityData = charactersFiltered.map(character => ({
-        x: character.name,
-        y: CharactersPowerService.getCharacterAbilityPower(character),
-    })); */
-
-    // Create arrays to store data
+    // For the power graph
     const teamPowerData: { x: string; y: number }[] = [];
     const teamAttributeData: { x: string; y: number }[] = [];
     const teamAbilityData: { x: string; y: number }[] = [];
-
-    // Populate arrays
     charactersFiltered.forEach(character => {
         const power = CharactersPowerService.getCharacterPower(character);
         const attributePower = CharactersPowerService.getCharacterAttributePower(character);
@@ -108,19 +92,13 @@ export const WhoYouOwn = () => {
         teamAbilityData.push({ x: character.name, y: abilityPower });
     });
 
-    // Define sorting function
     const sortByPower = (a: { x: string; y: number }, b: { x: string; y: number }) => b.y - a.y;
-
-    // Sort teamData based on power
     teamPowerData.sort(sortByPower);
-
-    // Apply the same sorting order to teamAttributeData and teamAbilityData
     teamAttributeData.sort((a, b) => {
         const aIndex = teamPowerData.findIndex(item => item.x === a.x);
         const bIndex = teamPowerData.findIndex(item => item.x === b.x);
         return sortByPower(teamPowerData[aIndex], teamPowerData[bIndex]);
     });
-
     teamAbilityData.sort((a, b) => {
         const aIndex = teamPowerData.findIndex(item => item.x === a.x);
         const bIndex = teamPowerData.findIndex(item => item.x === b.x);
@@ -162,25 +140,26 @@ export const WhoYouOwn = () => {
                         onClose={endEditCharacter}
                     />
                 </Conditional>
-                <h1>Team Insights</h1>
+                <h3>Roster Power</h3>
                 <span style={{ fontSize: 10 }}>
-                    {/* eslint-disable-next-line react/no-unescaped-entities */}
                     <p>
-                        This is a visualization of each character&apos;s power level, with your strongest character on
-                        the left side and weakest (locked) characters on the right side. The height of each bar is the
-                        power of a single character, so the size of the colored area represents your team&apos;s overall
-                        strength.
+                        This is a visualization of your roster power. The darker section is power contributed by
+                        attributes (armor, damage, and health), the lighter section by abilities (active and passive).
+                        The marked power levels are:
                     </p>
-                    {/* eslint-disable-next-line react/no-unescaped-entities */}
-                    <p>
-                        The darker colored section is power contributed by a character&apos;s attributes (armor, damage,
-                        and health), the lighter colored section by abilities (active and passive).
-                    </p>
+                    <ul>
+                        <li> 0 - 851: Common</li>
+                        <li> 851 - 2 212: Uncommon</li>
+                        <li> 2 212 - 5 097: Rare</li>
+                        <li> 5 097 - 11 194: Epic</li>
+                        <li> 11 194 - 21 930: Legendary</li>
+                        <li> 21 930 - 40 000: Legendary Diamond</li>
+                    </ul>
                 </span>
                 <TeamGraph
                     data={[
                         { id: 'Attribute', data: teamAttributeData },
-                        { id: 'Ability', data: teamAbilityData },
+                        { id: 'Power', data: teamPowerData },
                     ]}
                 />
             </CharactersViewContext.Provider>

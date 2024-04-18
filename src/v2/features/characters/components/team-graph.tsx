@@ -8,7 +8,7 @@ export const TeamGraph: React.FC<{ data: { id: string; data: { x: string; y: num
                 data={data}
                 enablePoints={false}
                 enableArea={true}
-                colors="#ff0000"
+                colors={{ scheme: 'spectral' }}
                 lineWidth={1}
                 curve="stepAfter"
                 margin={{
@@ -17,21 +17,21 @@ export const TeamGraph: React.FC<{ data: { id: string; data: { x: string; y: num
                     bottom: 10,
                     left: 100,
                 }}
+                enableGridX={true}
+                axisBottom={null}
+                enableGridY={true}
                 axisLeft={{
-                    legend: 'power',
-                    legendOffset: -60,
-                    legendPosition: 'middle',
+                    tickValues: [851, 2212, 5097, 11194, 21930, 40000],
                 }}
                 yScale={{
                     type: 'linear',
+                    reverse: false,
                     min: 0,
                     max: 40000,
-                    stacked: true,
-                    reverse: false,
                 }}
-                axisBottom={null}
-                enableGridX={false}
+                gridYValues={[851, 2212, 5097, 11194, 21930, 40000]}
                 useMesh={true}
+                animate={false}
             />
         </div>
     );
