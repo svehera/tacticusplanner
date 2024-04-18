@@ -3,7 +3,7 @@
     "releaseNotes": [
         {
             "version": "1.4.7",
-            "date": "April X",
+            "date": "April 18",
             "type": "Update",
             "new": [
                 {
@@ -95,6 +95,9 @@
                 },
                 {
                     "text": "Fixed Saim-Hann Elite 5 reward (SeventhSun)"
+                },
+                {
+                    "text": "Fixed issue with calendar days are wrong by 1 day too many (Tani)"
                 }
             ]
         },

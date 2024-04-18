@@ -270,7 +270,7 @@ export const GoalCard = ({
     }, [character.name, character.rank, goal.targetRank, higherPriorityGoals]);
 
     const nextDate = new Date();
-    nextDate.setDate(nextDate.getDate() + estimatedDays.total + daysOrTokensLeft);
+    nextDate.setDate(nextDate.getDate() + estimatedDays.total + daysOrTokensLeft - 1);
 
     const formattedDate = formatDateWithOrdinal(nextDate);
 
