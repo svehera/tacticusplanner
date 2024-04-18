@@ -15,7 +15,7 @@ import { VitruviusLegendaryEvent } from './legendary-events/vitruvius.le';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
 import { v4 } from 'uuid';
-import { GuildWarTeamType } from 'src/v2/features/guild-war/guild-war.models';
+import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,
@@ -154,7 +154,7 @@ export const isTabletOrMobileMediaQuery = '(max-width: 1000px)';
 export const pooEmoji = String.fromCodePoint(parseInt('1F4A9', 16));
 export const starEmoji = String.fromCodePoint(parseInt('1F31F', 16));
 
-export const discordInvitationLink = 'https://discord.gg/gyajsMcH7j';
+export const discordInvitationLink = 'https://discord.gg/8mcWKVAYZf';
 export const bmcLink = 'https://www.buymeacoffee.com/tacticusplanner';
 
 const defaultCampaignsProgress: ICampaignsProgress = {
@@ -202,6 +202,24 @@ export const fullCampaignsProgress: ICampaignsProgress = {
 export const campaignsNames: Array<keyof ICampaignsProgress> = Object.keys(defaultCampaignsProgress) as Array<
     keyof ICampaignsProgress
 >;
+
+export const defaultGWLayout: IGWLayoutZone[] = [
+    { id: 'medicaeStation', players: [] },
+    { id: 'headQuarters', players: [] },
+    { id: 'voxStation', players: [] },
+    { id: 'troopGarrison', players: [] },
+    { id: 'armoury', players: [] },
+    { id: 'troopGarrison', players: [] },
+    { id: 'artilleryPosition', players: [] },
+    { id: 'supplyDepot', players: [] },
+    { id: 'artilleryPosition', players: [] },
+    { id: 'fortifiedPosition', players: [] },
+    { id: 'antiAirBattery', players: [] },
+    { id: 'fortifiedPosition', players: [] },
+    { id: 'frontline', players: [] },
+    { id: 'frontline', players: [] },
+    { id: 'frontline', players: [] },
+];
 
 export const defaultData: IPersonalData2 = {
     schemaVersion: 2,
@@ -341,6 +359,26 @@ export const defaultData: IPersonalData2 = {
     guildWar: {
         zoneDifficulty: Difficulty.Easy,
         deployedCharacters: [],
+        layouts: [
+            {
+                id: v4(),
+                name: 'War zone 1',
+                bfLevel: 1,
+                zones: defaultGWLayout,
+            },
+            {
+                id: v4(),
+                name: 'War zone 2',
+                bfLevel: 3,
+                zones: defaultGWLayout,
+            },
+            {
+                id: v4(),
+                name: 'War zone 3',
+                bfLevel: 5,
+                zones: defaultGWLayout,
+            },
+        ],
         teams: [
             ...Array.from({ length: 5 }, (_, i) => ({
                 id: v4(),
@@ -357,6 +395,9 @@ export const defaultData: IPersonalData2 = {
                 lineup: [],
             })),
         ],
+    },
+    guild: {
+        members: [],
     },
 };
 

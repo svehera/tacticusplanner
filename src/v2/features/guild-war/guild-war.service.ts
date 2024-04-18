@@ -1,7 +1,7 @@
 ﻿import guildWarData from 'src/v2/data/guildWar.json';
-import { IGWData, IGWDataRaw, IGWSection } from './guild-war.models';
+import { IGWData, IGWDataRaw, IGWLayoutZone, IGWZone, ZoneId } from './guild-war.models';
 import { Difficulty, Rarity } from 'src/models/enums';
-import { groupBy, map, mapValues } from 'lodash';
+import { groupBy, mapValues } from 'lodash';
 
 export class GuildWarService {
     static readonly defaultRarityCaps = [
@@ -24,7 +24,7 @@ export class GuildWarService {
     static readonly gwData: IGWData = this.convertRawDataToGWData(this.gwDataRaw);
 
     public static getRarityCaps(bfLevel: number, sectionId: string): Rarity[] {
-        const section = this.gwData.sections.find(x => x.id === sectionId);
+        const section = this.gwData.zones.find(x => x.id === sectionId);
         if (!section) {
             return this.defaultRarityCaps;
         }
@@ -44,7 +44,7 @@ export class GuildWarService {
     }
 
     public static getTotalRarityCaps(bfLevel: number): Record<Rarity, number> {
-        const totalRarity = this.gwData.sections.flatMap(section =>
+        const totalRarity = this.gwData.zones.flatMap(section =>
             Array<Rarity[]>(section.count)
                 .fill(section.rarityCaps[bfLevel].caps)
                 .flatMap(x => x)
@@ -58,7 +58,7 @@ export class GuildWarService {
     }
 
     private static convertRawDataToGWData(rawData: IGWDataRaw): IGWData {
-        const sections: IGWSection[] = rawData.sections.map(rawSection => {
+        const sections: IGWZone[] = rawData.sections.map(rawSection => {
             const rarityCaps: Record<number, { difficulty: string; caps: Rarity[] }> = {};
             for (const bfLevel in rawSection.difficulty) {
                 const difficulty = rawSection.difficulty[bfLevel];
@@ -74,6 +74,7 @@ export class GuildWarService {
                 warScore: rawSection.warScore,
                 count: rawSection.count,
                 rarityCaps: rarityCaps,
+                buff: rawSection.buff,
             };
         });
 
@@ -81,7 +82,11 @@ export class GuildWarService {
             bfLevels: rawData.bfLevels,
             difficulties: rawData.sectionDifficulty,
             rarityCaps: rawData.rarityCaps,
-            sections: sections,
+            zones: sections,
         };
+    }
+
+    public static getZone(zoneId: string): IGWZone {
+        return this.gwData.zones.find(x => x.id === zoneId)!;
     }
 }

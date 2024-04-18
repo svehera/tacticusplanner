@@ -14,7 +14,7 @@ export const BfSectionSelect: React.FC<Props> = ({ value, valueChange, bfLevel }
         <FormControl style={{ width: 240 }}>
             <InputLabel>Section</InputLabel>
             <Select<string> label="Section" value={value} onChange={event => valueChange(event.target.value)}>
-                {GuildWarService.gwData.sections.map(section => (
+                {GuildWarService.gwData.zones.map(section => (
                     <MenuItem key={section.id} value={section.id}>
                         {section.rarityCaps[bfLevel].difficulty} - {section.name}
                     </MenuItem>

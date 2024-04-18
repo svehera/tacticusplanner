@@ -32,8 +32,9 @@ import { InventoryAction } from '../reducers/inventory.reducer';
 import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
-import { IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
+import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
 import { GuildWarAction } from 'src/reducers/guildWarReducer';
+import { GuildAction } from 'src/reducers/guildReducer';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -217,6 +218,7 @@ export type ICharacter2 = IUnitData & IPersonalCharacterData2 & DynamicProps;
 
 type DynamicProps = {
     numberOfUnlocked?: number;
+    ownedBy?: string[];
     potential?: number;
 };
 
@@ -255,6 +257,7 @@ export interface IGlobalState {
     inventory: IInventory;
     dailyRaids: IDailyRaids;
     guildWar: IGuildWar;
+    guild: IGuild;
 }
 
 export interface IDispatchContext {
@@ -271,6 +274,7 @@ export interface IDispatchContext {
     inventory: React.Dispatch<InventoryAction>;
     dailyRaids: React.Dispatch<DailyRaidsAction>;
     guildWar: React.Dispatch<GuildWarAction>;
+    guild: React.Dispatch<GuildAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
@@ -292,12 +296,24 @@ export interface IPersonalData2 {
     inventory: IInventory;
     dailyRaids: IDailyRaids;
     guildWar: IGuildWar;
+    guild: IGuild;
+}
+
+export interface IGuild {
+    members: IGuildMember[];
+}
+
+export interface IGuildMember {
+    username: string;
+    shareToken: string;
+    index: number;
 }
 
 export interface IGuildWar {
     zoneDifficulty: Difficulty;
     deployedCharacters: string[];
     teams: IGWTeam[];
+    layouts: IGWLayout[];
 }
 
 export interface IDailyRaids {
@@ -753,10 +769,11 @@ export interface IInventory {
 
 export interface IContributor {
     name: string;
+    type: string;
     thankYou: string;
     resourceDescription: string;
     resourceLink: string;
-    avatarIcon: string;
+    avatarIcon?: string;
 }
 
 export interface IContentCreator {

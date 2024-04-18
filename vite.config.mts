@@ -6,6 +6,7 @@ import browserslistToEsbuild from 'browserslist-to-esbuild';
 export default defineConfig({
     // depending on your application, base can also be "/"
     base: '/',
+    envDir: 'environments',
     plugins: [
         react({
             jsxImportSource: '@emotion/react',

@@ -224,22 +224,7 @@ export const GuildWarOffense = () => {
     }, [characters, guildWar.deployedCharacters]);
 
     const groupByRarityPools = () => {
-        const legendaryPool = availableCharacters.filter(
-            x => x.rarity === Rarity.Legendary && x.rank >= Rank.Gold1
-        ).length;
-        const epicPool = availableCharacters.filter(x => x.rarity >= Rarity.Epic && x.rank >= Rank.Gold1).length;
-        const rarePool = availableCharacters.filter(x => x.rarity >= Rarity.Rare && x.rank >= Rank.Silver1).length;
-        const uncommonPool = availableCharacters.filter(
-            x => x.rarity >= Rarity.Uncommon && x.rank >= Rank.Bronze1
-        ).length;
-
-        const slots: Record<Rarity, number> = {
-            [Rarity.Legendary]: legendaryPool,
-            [Rarity.Epic]: epicPool,
-            [Rarity.Rare]: rarePool,
-            [Rarity.Uncommon]: uncommonPool,
-            [Rarity.Common]: 0,
-        };
+        const slots = CharactersService.groupByRarityPools(availableCharacters);
 
         return [Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon].map(rarity => {
             const slotsCount = slots[rarity];

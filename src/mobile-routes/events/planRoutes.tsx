@@ -58,6 +58,7 @@ export const PlanRoutes = () => {
                     <ul>
                         <li>Defense</li>
                         <li>Offense</li>
+                        <li>War zones</li>
                     </ul>
                 </CardContent>
             </Card>

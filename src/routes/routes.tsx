@@ -12,6 +12,9 @@ import { wyoLazyRoute } from 'src/v2/pages/who-you-own/who-you-own.route';
 import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.route';
 import { guildWarOffenseLazyRoute } from 'src/v2/pages/guild-war-offense/guild-war-offense.route';
 import { guildWarDefenseLazyRoute } from 'src/v2/pages/guild-war-defense/guild-war-defense.route';
+import { guildWarZonesLazyRoute } from 'src/v2/pages/guild-war-layout/guild-war-zones.route';
+import { guildLazyRoute } from 'src/v2/pages/guild/guild.route';
+import { guildInsightsLazyRoute } from 'src/v2/pages/guild-insights/guild-insights.route';
 
 const inputRoutes: RouteObject[] = [
     wyoLazyRoute,
@@ -29,6 +32,7 @@ const inputRoutes: RouteObject[] = [
             return { Component: Inventory };
         },
     },
+    guildLazyRoute,
 ];
 
 const planRoutes: RouteObject[] = [
@@ -48,6 +52,7 @@ const planRoutes: RouteObject[] = [
     },
     guildWarOffenseLazyRoute,
     guildWarDefenseLazyRoute,
+    guildWarZonesLazyRoute,
     {
         path: 'plan/le',
         async lazy() {
@@ -113,6 +118,7 @@ const learnRoutes: RouteObject[] = [
     },
     dirtyDozenLazyRoute,
     insightsLazyRoute,
+    guildInsightsLazyRoute,
 ];
 
 export const appRoutes: () => RouteObject[] = () => [

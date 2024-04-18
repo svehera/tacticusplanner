@@ -2,6 +2,7 @@
 import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
+import { isMobile } from 'react-device-detect';
 
 type Props = {
     value: number;
@@ -10,7 +11,7 @@ type Props = {
 
 export const BfLevelSelect: React.FC<Props> = ({ value, valueChange }) => {
     return (
-        <FormControl style={{ width: 100 }}>
+        <FormControl style={{ width: 100 }} size={isMobile ? 'small' : 'medium'}>
             <InputLabel>BF Level</InputLabel>
             <Select<number> label="BF Level" value={value} onChange={event => valueChange(+event.target.value)}>
                 {GuildWarService.gwData.bfLevels.map(level => (

@@ -47,7 +47,9 @@ const MobileApp = () => {
                 </FlexBox>
             </Conditional>
 
-            <Outlet />
+            <div style={{ marginTop: 10 }}>
+                <Outlet />
+            </div>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, margin: 'auto', zIndex: 100 }} elevation={3}>
                 <BottomNavigation showLabels value={value}>
                     <BottomNavigationAction value={0} component={Link} to={'./'} label="Home" icon={<Home />} />

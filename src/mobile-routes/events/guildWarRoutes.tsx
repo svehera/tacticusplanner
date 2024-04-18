@@ -10,6 +10,7 @@ export const PlanGuildWarRoutes = () => {
     const navigate = useNavigate();
     const defenseItem = menuItemById['defense'];
     const offenseItem = menuItemById['offense'];
+    const layoutItem = menuItemById['zones'];
     return (
         <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
             <Card
@@ -37,6 +38,20 @@ export const PlanGuildWarRoutes = () => {
                     title={
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                             {offenseItem.icon} {offenseItem.label}
+                        </div>
+                    }
+                />
+            </Card>
+            <Card
+                onClick={() => navigate(layoutItem.routeMobile)}
+                sx={{
+                    width: 350,
+                    minHeight: 140,
+                }}>
+                <CardHeader
+                    title={
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                            {layoutItem.icon} {layoutItem.label}
                         </div>
                     }
                 />

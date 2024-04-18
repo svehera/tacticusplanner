@@ -27,7 +27,7 @@ export const BattlefieldInfo: React.FC = () => {
             <Dialog open={open} onClose={handleClose} maxWidth={isMobile ? 'xl' : 'lg'} fullWidth>
                 <DialogTitle>Battlefield levels</DialogTitle>
                 <DialogContent>
-                    <BfLevelTable rows={GuildWarService.gwData.sections} />
+                    <BfLevelTable rows={GuildWarService.gwData.zones} />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>OK</Button>

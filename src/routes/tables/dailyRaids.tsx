@@ -313,7 +313,7 @@ export const DailyRaids = () => {
 
     const formattedDate: string = useMemo(() => {
         const nextDate = new Date();
-        nextDate.setDate(nextDate.getDate() + estimatedRanks.raids.length);
+        nextDate.setDate(nextDate.getDate() + estimatedRanks.raids.length - 1);
 
         return formatDateWithOrdinal(nextDate);
     }, [estimatedRanks.raids.length]);

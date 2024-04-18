@@ -4888,7 +4888,7 @@
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 4,
-        "reward": "Nano Swarm",
+        "reward": "Artificial Vertebrae",
         "expectedGold": 83
     },
     "IME40": {
@@ -6111,7 +6111,7 @@
         "campaignType": "Elite",
         "nodeNumber": 5,
         "slots": 3,
-        "reward": "Adamantium Filaments",
+        "reward": "Advanced Filaments",
         "expectedGold": 53
     },
     "SHE6": {

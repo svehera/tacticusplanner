@@ -37,17 +37,14 @@ export const InfoBox = () => {
                 }}>
                 <div style={{ padding: 10, maxWidth: 500 }}>
                     <p style={{ fontWeight: 500 }}>
-                        <WarningIcon color={'warning'} fontSize={'medium'} /> Disclaimer:{' '}
-                        {/* eslint-disable-next-line react/no-unescaped-entities */}
-                        <br />
+                        <WarningIcon color={'warning'} fontSize={'medium'} /> Disclaimer: <br />
                         <MiscIcon icon={'blackstone'} height={20} width={15} /> represents blackstone cost
                         <br />
-                        <MiscIcon icon={'power'} height={20} width={15} /> does not represent in-game power
+                        <MiscIcon icon={'power'} height={20} width={15} /> does not represent in-game power but rather
+                        character&apos;s potential.
                         <br />
-                        <span style={{ fontSize: 10 }}>
-                            Power = dirtyDozenCoeff * (statsWeight * statsScore + abilityWeight *
-                            (activeAbilityLevelCoeff + passiveAbilityLevelCoeff)))
-                        </span>
+                        40k is ultimate power and is a maximum for each character when character has Diamond III rank,
+                        Blue star and both abilities at level 50
                     </p>
                     <img src={wyoInfo} width={500} />
                 </div>

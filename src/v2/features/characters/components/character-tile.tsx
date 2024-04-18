@@ -14,6 +14,7 @@ import { needToAscendCharacter, needToLevelCharacter } from 'src/shared-logic/fu
 import './character-tile.css';
 import { Conditional } from 'src/v2/components/conditional';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
 export const CharacterTile = ({
     character,
@@ -93,7 +94,21 @@ export const CharacterTile = ({
                 {isUnlocked && <RankImage rank={character.rank} />}
             </div>
             <Conditional condition={!!character.numberOfUnlocked}>
-                <Tooltip title={`${character.numberOfUnlocked}% of players unlocked this character`} placement={'top'}>
+                <AccessibleTooltip
+                    title={
+                        !character.ownedBy?.length ? (
+                            `${character.numberOfUnlocked}% of players unlocked this character`
+                        ) : (
+                            <div>
+                                ${character.numberOfUnlocked}% of players unlocked this character:
+                                <ul>
+                                    {character.ownedBy.map(username => (
+                                        <li key={username}>{username}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )
+                    }>
                     <div
                         className="character-unlock"
                         style={{
@@ -101,7 +116,7 @@ export const CharacterTile = ({
                         }}>
                         {`${character.numberOfUnlocked}%`}
                     </div>
-                </Tooltip>
+                </AccessibleTooltip>
             </Conditional>
         </div>
     );
