@@ -1,6 +1,18 @@
 ﻿{
-    "currentVersion": "1.4.7",
+    "currentVersion": "1.4.8",
     "releaseNotes": [
+        {
+            "version": "1.4.8",
+            "date": "April 18",
+            "type": "Update",
+            "new": [],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed guild view/edit on mobile"
+                }
+            ]
+        },
         {
             "version": "1.4.7",
             "date": "April 18",
