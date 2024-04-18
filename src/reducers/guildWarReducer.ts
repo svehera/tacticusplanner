@@ -2,6 +2,7 @@
 import { defaultData } from '../models/constants';
 import { Rarity } from 'src/models/enums';
 import { GuildWarTeamType } from 'src/v2/features/guild-war/guild-war.models';
+import { clamp } from 'lodash';
 
 export type GuildWarAction =
     | {
@@ -32,7 +33,19 @@ export type GuildWarAction =
           character: string;
       }
     | {
+          type: 'DeployTeam';
+          charactersIds: string[];
+      }
+    | {
+          type: 'WithdrawTeam';
+          charactersIds: string[];
+      }
+    | {
           type: 'ClearDeployedCharacters';
+      }
+    | {
+          type: 'EditWarTokens';
+          value: number;
       }
     | {
           type: 'UpdateLayoutBfLevel';
@@ -177,6 +190,7 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
 
             return state;
         }
+
         case 'DeployCharacter': {
             const { character } = action;
 
@@ -205,6 +219,38 @@ export const guildWarReducer = (state: IGuildWar, action: GuildWarAction): IGuil
             return {
                 ...state,
                 deployedCharacters: [],
+                attackTokens: 10,
+            };
+        }
+        case 'DeployTeam': {
+            const { charactersIds } = action;
+
+            return {
+                ...state,
+                deployedCharacters: [
+                    ...state.deployedCharacters,
+                    ...charactersIds.filter(x => !state.deployedCharacters.includes(x)),
+                ],
+                attackTokens: Math.max(0, state.attackTokens - 1),
+            };
+        }
+
+        case 'WithdrawTeam': {
+            const { charactersIds } = action;
+
+            return {
+                ...state,
+                deployedCharacters: state.deployedCharacters.filter(x => !charactersIds.includes(x)),
+                attackTokens: Math.min(10, state.attackTokens + 1),
+            };
+        }
+
+        case 'EditWarTokens': {
+            const { value } = action;
+
+            return {
+                ...state,
+                attackTokens: clamp(value, 0, 10),
             };
         }
 

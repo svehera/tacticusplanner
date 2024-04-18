@@ -1,7 +1,6 @@
 ﻿import React, { useContext, useMemo } from 'react';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { FlexBox } from 'src/v2/components/flex-box';
 import { BattlefieldInfo } from 'src/v2/features/guild-war/battlefield-info';
 import { Team } from 'src/v2/features/characters/components/team';
 import { ICharacter2 } from 'src/models/interfaces';
@@ -17,12 +16,14 @@ import { PotentialInfo } from 'src/v2/features/characters/components/potential-i
 import { Rank, Rarity } from 'src/models/enums';
 import { GuildWarTeamType, IGWTeamWithCharacters } from 'src/v2/features/guild-war/guild-war.models';
 import Button from '@mui/material/Button';
-import { Card, CardActions, CardContent, CardHeader } from '@mui/material';
+import { Card, CardActions, CardContent, CardHeader, Input } from '@mui/material';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { DeploymentStatus } from 'src/v2/features/guild-war/deployment-status';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { FlexBox } from 'src/v2/components/flex-box';
 
 export const GuildWarOffense = () => {
     const { guildWar, characters, viewPreferences } = useContext(StoreContext);
@@ -152,13 +153,13 @@ export const GuildWarOffense = () => {
                     teamPotential={teamsPotential[i].total}
                     onCharacterClick={startEditCharacter}
                     teamPotentialBreakdown={
-                        <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                        <div className="flex-box column start">
                             {teamsPotential[i].lineup.map(char => (
                                 <span key={char.id}>
                                     {char.potential} - {char.id}
                                 </span>
                             ))}
-                        </FlexBox>
+                        </div>
                     }
                 />
             )),
@@ -209,9 +210,9 @@ export const GuildWarOffense = () => {
             const slotsCount = slots[rarity];
             if (slotsCount) {
                 return (
-                    <FlexBox key={rarity} gap={3}>
+                    <div key={rarity} className="flex-box gap3">
                         <RarityImage rarity={rarity} /> x{slotsCount}
-                    </FlexBox>
+                    </div>
                 );
             }
         });
@@ -230,9 +231,9 @@ export const GuildWarOffense = () => {
             const slotsCount = slots[rarity];
             if (slotsCount) {
                 return (
-                    <FlexBox key={rarity} gap={3}>
+                    <div key={rarity} className="flex-box gap3">
                         <RarityImage rarity={rarity} /> x{slotsCount}
-                    </FlexBox>
+                    </div>
                 );
             }
         });
@@ -243,7 +244,7 @@ export const GuildWarOffense = () => {
     };
 
     const deployTeam = (charactersIds: string[]) => {
-        charactersIds.forEach(characterId => deployCharacter(characterId));
+        dispatch.guildWar({ type: 'DeployTeam', charactersIds });
     };
 
     const withdrawCharacter = (character: string) => {
@@ -251,15 +252,19 @@ export const GuildWarOffense = () => {
     };
 
     const withdrawTeam = (charactersIds: string[]) => {
-        charactersIds.forEach(characterId => withdrawCharacter(characterId));
+        dispatch.guildWar({ type: 'WithdrawTeam', charactersIds });
     };
 
     const clearDeployedCharacters = () => {
         dispatch.guildWar({ type: 'ClearDeployedCharacters' });
     };
 
+    const handleWarTokensChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch.guildWar({ type: 'EditWarTokens', value: event.target.value === '' ? 0 : Number(event.target.value) });
+    };
+
     return (
-        <FlexBox style={{ flexDirection: 'column', gap: 10 }}>
+        <div className="flex-box column gap10">
             <CharactersViewContext.Provider
                 value={{
                     showAbilities: viewPreferences.showAbilitiesLevel,
@@ -270,7 +275,7 @@ export const GuildWarOffense = () => {
                     showCharacterRarity: viewPreferences.showCharacterRarity,
                     getOpacity: character => (guildWar.deployedCharacters.includes(character.name) ? 0.5 : 1),
                 }}>
-                <FlexBox gap={10}>
+                <div className="flex-box gap10">
                     <BattlefieldInfo />
                     <Button
                         variant={'contained'}
@@ -279,7 +284,23 @@ export const GuildWarOffense = () => {
                         Go to: Defense
                     </Button>
                     <DeploymentStatus charactersLeft={availableCharacters.length} onClearAll={clearDeployedCharacters}>
-                        <FlexBox gap={5}>Rarity pools: {groupByRarityPools()}</FlexBox>
+                        <div className="flex-box gap3">
+                            <MiscIcon icon={'warToken'} />
+                            <Input
+                                value={guildWar.attackTokens}
+                                size="small"
+                                onChange={handleWarTokensChange}
+                                onFocus={event => event.target.select()}
+                                inputProps={{
+                                    step: 1,
+                                    min: 0,
+                                    max: 10,
+                                    type: 'number',
+                                    'aria-labelledby': 'input-slider',
+                                }}
+                            />
+                        </div>
+                        <div className="flex-box gap5">Rarity pools: {groupByRarityPools()}</div>
                         <CharactersGrid
                             onlyBlocked
                             characters={orderBy(
@@ -295,12 +316,18 @@ export const GuildWarOffense = () => {
                             onLockedCharacterClick={character => withdrawCharacter(character.name)}
                         />
                     </DeploymentStatus>
-                </FlexBox>
-                <FlexBox gap={5}>Your teams: {getTeamsSlots}</FlexBox>
-                <FlexBox gap={5}>
+
+                    <AccessibleTooltip title={'War tokens. Deploy/withdraw team to decrement/increment by 1'}>
+                        <div className="flex-box gap3">
+                            <MiscIcon icon={'warToken'} /> {guildWar.attackTokens}/10
+                        </div>
+                    </AccessibleTooltip>
+                </div>
+                <div className="flex-box gap5">Your teams: {getTeamsSlots}</div>
+                <div className="flex-box gap5">
                     Overall Potential: {Math.round(sum(teamsPotential.map(x => x.total)) / teamsPotential.length)}/100
                     <PotentialInfo />
-                </FlexBox>
+                </div>
 
                 <FlexBox wrap={true} justifyContent={'center'} gap={30}>
                     {renderTeams}
@@ -327,7 +354,7 @@ export const GuildWarOffense = () => {
                     />
                 )}
             </CharactersViewContext.Provider>
-        </FlexBox>
+        </div>
     );
 };
 
@@ -344,11 +371,11 @@ const TeamCard: React.FC<{
             <CardHeader
                 title={
                     <FlexBox justifyContent={'space-between'}>
-                        <FlexBox gap={5} style={{ fontSize: 18 }}>
+                        <div className="flex-box gap5" style={{ fontSize: 18 }}>
                             <RarityImage rarity={team.rarityCap} />
                             <span>{team.name}</span>
-                        </FlexBox>
-                        <FlexBox gap={5} style={{ fontSize: 16 }}>
+                        </div>
+                        <div className="flex-box gap5" style={{ fontSize: 16 }}>
                             {teamPotential}
                             <AccessibleTooltip
                                 title={
@@ -362,7 +389,7 @@ const TeamCard: React.FC<{
                                     fontSize="small"
                                 />
                             </AccessibleTooltip>
-                        </FlexBox>
+                        </div>
                     </FlexBox>
                 }
                 subheader={Rarity[team.rarityCap]}

@@ -91,24 +91,24 @@ export const GuildWarZones = () => {
 
         return data.guildUsers.map(user => ({
             username: user,
-            unlocked: data.userData[user].filter(x => x.rank > Rank.Locked).length,
-            slots: CharactersService.groupByRarityPools(data.userData[user]),
+            unlocked: data.userData[user].characters.filter(x => x.rank > Rank.Locked).length,
+            slots: CharactersService.groupByRarityPools(data.userData[user].characters),
             potential: {
                 [Difficulty.None]: 0,
                 [Difficulty.Easy]: CharactersService.getRosterPotential(
-                    data.userData[user],
+                    data.userData[user].characters,
                     GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.Easy)
                 ),
                 [Difficulty.Normal]: CharactersService.getRosterPotential(
-                    data.userData[user],
+                    data.userData[user].characters,
                     GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.Normal)
                 ),
                 [Difficulty.Hard]: CharactersService.getRosterPotential(
-                    data.userData[user],
+                    data.userData[user].characters,
                     GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.Hard)
                 ),
                 [Difficulty.VeryHard]: CharactersService.getRosterPotential(
-                    data.userData[user],
+                    data.userData[user].characters,
                     GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.VeryHard)
                 ),
             },

@@ -12,7 +12,17 @@ export interface IGuildInsightsResponse {
 
 export interface IGuildRostersResponse {
     guildUsers: string[];
-    userData: Record<string, IPersonalCharacterData2[]>;
+    userData: Record<string, IGuildUserData>;
+}
+
+export interface IGuildUserData {
+    characters: IPersonalCharacterData2[];
+    offense: IGuildUserOffense;
+}
+
+export interface IGuildUserOffense {
+    deployedCharacters: string[];
+    tokensLeft: number;
 }
 
 export interface IGuildWarPlayer {

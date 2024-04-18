@@ -5,8 +5,16 @@
             "version": "1.4.8",
             "date": "April 18",
             "type": "Update",
-            "new": [],
-            "minor": [],
+            "new": [
+                {
+                    "text": "Added guild war attack tokens tracking and guild overall data."
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated upgrades icons. Thanks to KIVIY"
+                }
+            ],
             "bugFixes": [
                 {
                     "text": "Fixed guild view/edit on mobile"
