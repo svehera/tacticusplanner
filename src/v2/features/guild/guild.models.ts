@@ -1,7 +1,7 @@
 ﻿import { IGuildMember, IPersonalCharacterData2 } from 'src/models/interfaces';
 import { Difficulty, Rarity } from 'src/models/enums';
 
-export interface IGuildInsightsRequest {
+export interface IGuildInfoRequest {
     members: IGuildMember[];
 }
 
@@ -13,6 +13,11 @@ export interface IGuildInsightsResponse {
 export interface IGuildRostersResponse {
     guildUsers: string[];
     userData: Record<string, IGuildUserData>;
+}
+
+export interface IGuildMembersValidationResponse {
+    isValid: boolean;
+    invalidUsers: Array<{ username: string; reason: string }>;
 }
 
 export interface IGuildUserData {
@@ -31,4 +36,12 @@ export interface IGuildWarPlayer {
     slots: Record<Rarity, number>;
     potential: Record<Difficulty, number>;
     enlistedZone: string;
+}
+
+export interface IGuildWarOffensePlayer {
+    username: string;
+    tokensLeft: number;
+    charactersLeft: number;
+    charactersUnlocked: number;
+    rarityPool: Record<Rarity, number>;
 }

@@ -1,16 +1,26 @@
 ﻿import useApi from 'src/v2/api/useApi.hook';
 import {
-    IGuildInsightsRequest,
+    IGuildInfoRequest,
     IGuildInsightsResponse,
+    IGuildMembersValidationResponse,
     IGuildRostersResponse,
 } from 'src/v2/features/guild/guild.models';
 
-export const useGetGuildInsights = (request: IGuildInsightsRequest) =>
-    useApi<IGuildInsightsResponse, IGuildInsightsRequest>('POST', 'GuildInsights', request);
+export const useGetGuildInsights = (request: IGuildInfoRequest) =>
+    useApi<IGuildInsightsResponse, IGuildInfoRequest>('POST', 'GuildInsights', request);
 
-export const useGetGuildRosters = (request: IGuildInsightsRequest) => {
+export const useGetGuildRosters = (request: IGuildInfoRequest) => {
     if (!request.members.length) {
         return { loading: false, data: null, error: null };
     }
-    return useApi<IGuildRostersResponse, IGuildInsightsRequest>('POST', 'GuildRosters', request);
+    return useApi<IGuildRostersResponse, IGuildInfoRequest>('POST', 'GuildRosters', request);
+};
+
+export const useValidateGuildMembers = (request: IGuildInfoRequest) => {
+    if (!request.members.length) {
+        return { loading: false, data: { isValid: true, invalidUsers: [] }, error: null };
+    }
+    return useApi<IGuildMembersValidationResponse, IGuildInfoRequest>('POST', 'ValidateGuildMembers', request, [
+        request.members,
+    ]);
 };

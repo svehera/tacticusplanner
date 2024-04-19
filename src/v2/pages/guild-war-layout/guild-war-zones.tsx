@@ -2,7 +2,7 @@
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { FlexBox } from 'src/v2/components/flex-box';
 
-import { IGWLayoutZone, IGWZone, ZoneId } from 'src/v2/features/guild-war/guild-war.models';
+import { IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
 import {
     Card,
     CardContent,
@@ -23,7 +23,6 @@ import './guild-war-zones.scss';
 import { CommonProps } from '@mui/material/OverridableComponent';
 import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
 import { Loader } from 'src/v2/components/loader';
-import { ViewPlayers } from 'src/v2/features/guild/view-players';
 import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
 import { Difficulty, Rank } from 'src/models/enums';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
@@ -32,6 +31,7 @@ import { PlayersTable } from 'src/v2/features/guild/players-table';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { WarZoneBuffImage } from 'src/v2/components/images/war-zone-buff-image';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { ViewGuild } from 'src/v2/features/guild/view-guild';
 
 export const GuildWarZones = () => {
     const { guildWar, guild } = useContext(StoreContext);
@@ -182,8 +182,8 @@ export const GuildWarZones = () => {
     }, [editZonePlayersIndex, activeLayout.bfLevel]);
 
     const assignedPlayers = useMemo(() => {
-        return activeLayout.zones.flatMap(x => x.players);
-    }, [activeLayout, guildWar.layouts]);
+        return activeLayout.zones.flatMap(x => x.players).filter(user => !!data && data.guildUsers.includes(user));
+    }, [activeLayout, guildWar.layouts, data?.guildUsers]);
 
     return (
         <>
@@ -216,7 +216,7 @@ export const GuildWarZones = () => {
                 </Tooltip>
                 {!!guildWarPlayers.length && (
                     <>
-                        <ViewPlayers guildWarPlayers={guildWarPlayers} />
+                        <ViewGuild guildWarPlayers={guildWarPlayers} />
                         <AccessibleTooltip
                             title={
                                 <div>

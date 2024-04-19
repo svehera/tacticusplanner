@@ -24,9 +24,13 @@ import { DeploymentStatus } from 'src/v2/features/guild-war/deployment-status';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { FlexBox } from 'src/v2/components/flex-box';
+import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
+import { Loader } from 'src/v2/components/loader';
+import { IGuildWarOffensePlayer } from 'src/v2/features/guild/guild.models';
+import { ViewGuildOffense } from 'src/v2/features/guild/view-guild-offense';
 
 export const GuildWarOffense = () => {
-    const { guildWar, characters, viewPreferences } = useContext(StoreContext);
+    const { guild, guildWar, characters, viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const [openSelectTeamDialog, setOpenSelectTeamDialog] = React.useState(false);
@@ -34,6 +38,8 @@ export const GuildWarOffense = () => {
 
     const [openCharacterItemDialog, setOpenCharacterItemDialog] = React.useState(false);
     const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
+
+    const { data, loading } = useGetGuildRosters({ members: guild.members });
 
     const startEditCharacter = (character: ICharacter2): void => {
         const originalChar = characters.find(x => x.name === character.name);
@@ -73,6 +79,26 @@ export const GuildWarOffense = () => {
         setEditedTeam(null);
         setOpenSelectTeamDialog(false);
     };
+
+    const guildWarPlayers: IGuildWarOffensePlayer[] = useMemo(() => {
+        if (!data) {
+            return [];
+        }
+
+        return data.guildUsers.map(user => {
+            const userCharacters = data.userData[user].characters;
+            const userDeployedCharacters = data.userData[user].offense.deployedCharacters;
+            const unlockedCharacters = userCharacters.filter(x => x.rank > Rank.Locked);
+            const availableCharacters = unlockedCharacters.filter(x => !userDeployedCharacters.includes(x.name));
+            return {
+                username: user,
+                tokensLeft: data.userData[user].offense.tokensLeft,
+                charactersLeft: availableCharacters.length,
+                charactersUnlocked: unlockedCharacters.length,
+                rarityPool: CharactersService.groupByRarityPools(availableCharacters),
+            };
+        });
+    }, [data]);
 
     const teamsWithCharacters = useMemo<IGWTeamWithCharacters[]>(() => {
         const teams = guildWar.teams
@@ -203,7 +229,7 @@ export const GuildWarOffense = () => {
         );
 
         if (!Object.values(slots).length) {
-            return '0. Add some characters to the teams below';
+            return 'Empty. Add some characters to the teams below';
         }
 
         return [Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon].map(rarity => {
@@ -323,6 +349,7 @@ export const GuildWarOffense = () => {
                         </div>
                     </AccessibleTooltip>
                 </div>
+                {!!guild.members.length && <ViewGuildOffense guildWarPlayers={guildWarPlayers} loading={loading} />}
                 <div className="flex-box gap5">Your teams: {getTeamsSlots}</div>
                 <div className="flex-box gap5">
                     Overall Potential: {Math.round(sum(teamsPotential.map(x => x.total)) / teamsPotential.length)}/100
