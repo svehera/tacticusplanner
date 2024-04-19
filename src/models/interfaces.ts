@@ -311,6 +311,7 @@ export interface IGuildMember {
 
 export interface IGuildWar {
     zoneDifficulty: Difficulty;
+    attackTokens: number;
     deployedCharacters: string[];
     teams: IGWTeam[];
     layouts: IGWLayout[];

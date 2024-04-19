@@ -1,6 +1,68 @@
 ﻿{
-    "currentVersion": "1.4.7",
+    "currentVersion": "1.4.8",
     "releaseNotes": [
+        {
+            "version": "1.4.8",
+            "date": "April 19",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added guild war attack tokens tracking and guild overall data.",
+                    "subPoints": [
+                        "Track how many war tokens you have left to use for attack enemy defences",
+                        "This data is automatically shared with your guildmates",
+                        "You can manually tweak wat tokens count on the \"Deployment status\" dialog or just rely on automatic decrement by 1 after deploying a team"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild3.png"
+                        },
+                        {
+                            "path": "guild2.png"
+                        },
+                        {
+                            "path": "guild4.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added guild members \"Username\" and \"Share Token\" validation",
+                    "subPoints": [
+                        "You will be able to see the reason why user is invalid and ask your guildmates to provide proper data"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild1.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added new \"Import link\" option on the guild page",
+                    "subPoints": [
+                        "The username and share token will be automatically parsed from the share link",
+                        "It should help to deal with human error when manually entering username and share token"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild5.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated upgrades icons. Thanks to KIVIY"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed guild view/edit on mobile"
+                },
+                {
+                    "text": "Fixed issue with \"Starts\" on the character's stats screen (SeventhSun)"
+                }
+            ]
+        },
         {
             "version": "1.4.7",
             "date": "April 18",

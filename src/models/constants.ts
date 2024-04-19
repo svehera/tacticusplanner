@@ -358,6 +358,7 @@ export const defaultData: IPersonalData2 = {
     },
     guildWar: {
         zoneDifficulty: Difficulty.Easy,
+        attackTokens: 10,
         deployedCharacters: [],
         layouts: [
             {

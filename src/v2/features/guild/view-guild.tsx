@@ -10,7 +10,7 @@ interface Props {
     guildWarPlayers: IGuildWarPlayer[];
 }
 
-export const ViewPlayers: React.FC<Props> = ({ guildWarPlayers }) => {
+export const ViewGuild: React.FC<Props> = ({ guildWarPlayers }) => {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -23,7 +23,7 @@ export const ViewPlayers: React.FC<Props> = ({ guildWarPlayers }) => {
 
     return (
         <>
-            <Button onClick={handleClickOpen}>View players</Button>
+            <Button onClick={handleClickOpen}>View guild</Button>
             <Dialog open={open} onClose={handleClose} maxWidth={isMobile ? 'xl' : 'lg'} fullWidth>
                 <DialogTitle>Guild players</DialogTitle>
                 <DialogContent>

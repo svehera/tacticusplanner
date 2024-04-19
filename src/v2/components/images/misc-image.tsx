@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import { Tooltip } from '@mui/material';
 
 import armourIcon from 'src/assets/images/icons/armour.webp';
 import damageIcon from 'src/assets/images/icons/dmg.webp';
@@ -8,6 +7,7 @@ import powerIcon from 'src/assets/images/icons/power.png';
 import energyIcon from 'src/assets/images/icons/energy.png';
 import blackstoneIcon from 'src/assets/images/icons/blackstone.png';
 import deploymentIcon from 'src/assets/images/icons/deployment.png';
+import warTokenIcon from 'src/assets/images/icons/warToken.png';
 
 const icons = {
     armour: {
@@ -37,6 +37,10 @@ const icons = {
     deployment: {
         file: deploymentIcon,
         label: '',
+    },
+    warToken: {
+        file: warTokenIcon,
+        label: 'War Token',
     },
 };
 

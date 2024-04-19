@@ -36,8 +36,8 @@ export const DeploymentStatus: React.FC<
                 </div>
                 <DialogContent style={{ paddingTop: 0 }}>{children}</DialogContent>
                 <DialogActions>
-                    <Button color="error" onClick={onClearAll}>
-                        Clear All
+                    <Button variant="contained" color="error" onClick={onClearAll}>
+                        Reset All
                     </Button>
                     <Button onClick={handleClose}>Close</Button>
                 </DialogActions>

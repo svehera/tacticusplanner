@@ -55,7 +55,7 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "build-dev": "tsc && vite build --mode development",
+    "build-dev": "tsc && vite build --mode staging",
     "build-ci": "npm run format-ci && npm run lint-ci && npm run build",
     "build-dev-ci": "npm run format-ci && npm run lint-ci && npm run build-dev",
     "analyze": "vite-bundle-visualizer -c ./vite.config.mts",
