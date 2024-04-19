@@ -57,6 +57,9 @@
             "bugFixes": [
                 {
                     "text": "Fixed guild view/edit on mobile"
+                },
+                {
+                    "text": "Fixed issue with \"Starts\" on the character's stats screen (SeventhSun)"
                 }
             ]
         },

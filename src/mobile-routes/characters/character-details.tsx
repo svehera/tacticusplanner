@@ -52,9 +52,7 @@ export const CharacterDetails = ({
     }, [formData.rarity]);
 
     const starsEntries = useMemo(() => {
-        const entries = getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
-        handleInputChange('stars', entries[0]);
-        return entries;
+        return getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
     }, [minStars, maxStars]);
 
     const rarityEntries: number[] = getEnumValues(Rarity);
