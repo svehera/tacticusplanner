@@ -1,12 +1,10 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
+﻿import React, { useContext, useMemo } from 'react';
 
 import {
-    ICharacter2,
     ICharacterRankRange,
     IEstimatedRanks,
     IMaterialEstimated2,
     IMaterialRaid,
-    IPersonalGoal,
     IRaidLocation,
 } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
@@ -17,13 +15,10 @@ import {
     Card,
     CardContent,
     CardHeader,
-    Checkbox,
-    FormControlLabel,
     Popover,
     Tooltip,
 } from '@mui/material';
 import { PersonalGoalType, Rarity } from 'src/models/enums';
-import { RankImage } from 'src/shared-components/rank-image';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
@@ -35,12 +30,9 @@ import { fullCampaignsProgress } from 'src/models/constants';
 import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { Link } from 'react-router-dom';
-import Box from '@mui/material/Box';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import IconButton from '@mui/material/IconButton';
-import { Edit, Warning } from '@mui/icons-material';
-import { EditGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
+import { Warning } from '@mui/icons-material';
 import { enqueueSnackbar } from 'notistack';
 import ClearIcon from '@mui/icons-material/Clear';
 import { sum } from 'lodash';
@@ -49,43 +41,92 @@ import { FlexBox } from 'src/v2/components/flex-box';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import { MaterialItemView } from 'src/v2/features/goals/material-item-view';
 import { MaterialItemInput } from 'src/v2/features/goals/material-item-input';
+import { CharactersRaidsSelect } from 'src/v2/features/goals/characters-raids-select';
+import {
+    CharacterRaidGoalSelect,
+    ICharacterAscendGoal,
+    ICharacterRaidGoalSelectBase,
+    ICharacterUpgradeRankGoal,
+} from 'src/v2/features/goals/goals.models';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
     const { dailyRaids, characters, goals, campaignsProgress, dailyRaidsPreferences, inventory } =
         useContext(StoreContext);
 
-    const getSelectedCharacters = () => {
-        return goals
-            .filter(x => x.dailyRaids && x.type === PersonalGoalType.UpgradeRank)
-            .map(g => {
-                const char = characters.find(c => c.name === g.character);
-                if (char) {
-                    return {
-                        id: g.character,
-                        rankStart: char.rank,
-                        rankEnd: g.targetRank!,
-                        appliedUpgrades: char.upgrades,
-                        rankPoint5: g.rankPoint5,
-                    } as ICharacterRankRange;
-                }
-                return null;
-            })
-            .filter(x => !!x) as ICharacterRankRange[];
-    };
-
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
     const [hasChanges, setHasChanges] = React.useState<boolean>(false);
     const [upgrades, setUpgrades] = React.useState<Record<string, number>>(inventory.upgrades);
-    const [selectedCharacters, setSelectedCharacters] = React.useState<ICharacterRankRange[]>(() =>
-        getSelectedCharacters()
-    );
+
     const [pagination, setPagination] = React.useState<{
         start: number;
         end: number;
         completed: boolean;
     }>({ start: 0, end: 3, completed: true });
     const [gridLoaded, setGridLoaded] = React.useState<boolean>(false);
+
+    const allGoals = useMemo<CharacterRaidGoalSelect[]>(() => {
+        return goals
+            .map(g => {
+                const relatedCharacter = characters.find(x => x.name === g.character);
+                if (!relatedCharacter || ![PersonalGoalType.UpgradeRank, PersonalGoalType.Ascend].includes(g.type)) {
+                    return null;
+                }
+                const base: ICharacterRaidGoalSelectBase = {
+                    goalId: g.id,
+                    include: g.dailyRaids,
+                    characterName: relatedCharacter.name,
+                    characterIcon: relatedCharacter.icon,
+                };
+
+                if (g.type === PersonalGoalType.Ascend) {
+                    const result: ICharacterAscendGoal = {
+                        type: PersonalGoalType.Ascend,
+                        rarityStart: relatedCharacter.rarity,
+                        rarityEnd: g.targetRarity!,
+                        ...base,
+                    };
+                    return result;
+                }
+
+                if (g.type === PersonalGoalType.UpgradeRank) {
+                    const result: ICharacterUpgradeRankGoal = {
+                        type: PersonalGoalType.UpgradeRank,
+                        rankStart: relatedCharacter.rank,
+                        rankEnd: g.targetRank!,
+                        rankPoint5: g.rankPoint5!,
+                        appliedUpgrades: relatedCharacter.upgrades,
+                        ...base,
+                    };
+                    return result;
+                }
+
+                return null;
+            })
+            .filter(g => !!g) as CharacterRaidGoalSelect[];
+    }, [goals, characters]);
+    const selectedGoals = useMemo(() => allGoals.filter(x => x.include), [allGoals]);
+
+    const upgradeRankGoals: ICharacterRankRange[] = useMemo(
+        () =>
+            selectedGoals
+                .filter((x): x is ICharacterUpgradeRankGoal => x.type === PersonalGoalType.UpgradeRank)
+                .map(x => ({
+                    id: x.characterName,
+                    rankStart: x.rankStart,
+                    rankEnd: x.rankEnd,
+                    appliedUpgrades: x.appliedUpgrades,
+                    rankPoint5: x.rankPoint5,
+                })),
+        [selectedGoals]
+    );
+
+    const handleGoalsSelectionChange = (selection: CharacterRaidGoalSelect[]) => {
+        dispatch.goals({
+            type: 'UpdateDailyRaids',
+            value: selection.map(x => ({ goalId: x.goalId, include: x.include })),
+        });
+    };
 
     const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl2(event.currentTarget);
@@ -249,7 +290,7 @@ export const DailyRaids = () => {
                 upgrades: dailyRaidsPreferences.useInventory ? upgrades : {},
                 completedLocations: dailyRaids.completedLocations ?? [],
             },
-            ...selectedCharacters
+            ...upgradeRankGoals
         );
 
         const currentDay = result.raids[0];
@@ -304,7 +345,7 @@ export const DailyRaids = () => {
             }));
         }
         return result;
-    }, [selectedCharacters, dailyRaidsPreferences, upgrades]);
+    }, [upgradeRankGoals, dailyRaidsPreferences, upgrades]);
 
     const blockedMaterials: IMaterialEstimated2[] = useMemo(() => {
         return estimatedRanks.materials.filter(x => x.locationsString === x.missingLocationsString);
@@ -342,7 +383,19 @@ export const DailyRaids = () => {
                     </div>
                 </Popover>
 
-                <CharactersList refresh={selected => setSelectedCharacters(selected)} />
+                <Accordion TransitionProps={{ unmountOnExit: true }}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <span style={{ fontSize: 20 }}>
+                            Selected Characters ({selectedGoals.length} of {allGoals.length})
+                        </span>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <CharactersRaidsSelect
+                            goalsSelect={allGoals}
+                            onGoalsSelectChange={handleGoalsSelectionChange}
+                        />
+                    </AccordionDetails>
+                </Accordion>
 
                 <Accordion TransitionProps={{ unmountOnExit: !gridLoaded }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -543,145 +596,5 @@ export const DailyRaids = () => {
                 </Accordion>
             </div>
         </div>
-    );
-};
-
-const CharactersList = ({ refresh }: { refresh: (chars: ICharacterRankRange[]) => void }) => {
-    const dispatch = useContext(DispatchContext);
-    const { goals, characters } = useContext(StoreContext);
-
-    const upgradeRankGoals = useMemo(
-        () =>
-            goals
-                .filter(g => g.type === PersonalGoalType.UpgradeRank)
-                .map(g => {
-                    const relatedCharacter = characters.find(x => x.name === g.character);
-
-                    return { ...g, currentRank: relatedCharacter?.rank };
-                }),
-        []
-    );
-    const [checked, setChecked] = React.useState<boolean[]>(() => upgradeRankGoals.map(x => x.dailyRaids ?? false));
-
-    const [editGoal, setEditGoal] = useState<IPersonalGoal | null>(null);
-    const [editCharacter, setEditCharacter] = useState<ICharacter2>(characters[0]);
-    const [hasChanges, setHasChanges] = React.useState<boolean>(false);
-
-    const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked(upgradeRankGoals.map(() => event.target.checked));
-        upgradeRankGoals.forEach(goal => {
-            dispatch.goals({ type: 'UpdateDailyRaids', goalId: goal.id, value: event.target.checked });
-        });
-        setHasChanges(true);
-    };
-
-    const handleChildChange = (index: number, goalId: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked(result => {
-            result[index] = event.target.checked;
-
-            return [...result];
-        });
-        dispatch.goals({ type: 'UpdateDailyRaids', goalId, value: event.target.checked });
-        setHasChanges(true);
-    };
-
-    const handleEdit = (goal: IPersonalGoal) => {
-        const relatedCharacter = characters.find(x => x.name === goal.character);
-        if (relatedCharacter) {
-            setEditCharacter(relatedCharacter);
-            setEditGoal({
-                ...goal,
-                currentRank: relatedCharacter.rank,
-                currentRarity: relatedCharacter.rarity,
-                upgrades: relatedCharacter.upgrades,
-            });
-        }
-    };
-
-    const getSelectedCharacters = () => {
-        return goals
-            .filter(x => x.dailyRaids && x.type === PersonalGoalType.UpgradeRank)
-            .map(g => {
-                const char = characters.find(c => c.name === g.character);
-                if (char) {
-                    return {
-                        id: g.character,
-                        rankStart: char.rank,
-                        rankEnd: g.targetRank!,
-                        appliedUpgrades: char.upgrades,
-                        rankPoint5: g.rankPoint5,
-                    } as ICharacterRankRange;
-                }
-                return null;
-            })
-            .filter(x => !!x) as ICharacterRankRange[];
-    };
-
-    const children = (
-        <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-            {upgradeRankGoals.map((goal, index) => (
-                <FormControlLabel
-                    key={goal.id}
-                    label={
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                            <IconButton onClick={() => handleEdit(goal)}>
-                                <Edit fontSize="small" />
-                            </IconButton>
-                            {goal.character} <RankImage rank={goal.currentRank ?? 1} /> -{' '}
-                            <RankImage rank={goal.targetRank ?? 1} /> {goal.rankPoint5 && '.5'}
-                        </div>
-                    }
-                    control={<Checkbox checked={checked[index]} onChange={handleChildChange(index, goal.id)} />}
-                />
-            ))}
-        </Box>
-    );
-
-    return (
-        <Accordion TransitionProps={{ unmountOnExit: true }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <span style={{ fontSize: 20 }}>
-                    Selected Characters ({checked.filter(x => x).length} of {upgradeRankGoals.length})
-                </span>
-            </AccordionSummary>
-            <AccordionDetails>
-                <Button variant={'contained'} component={Link} to={isMobile ? '/mobile/plan/goals' : '/plan/goals'}>
-                    Go to Goals
-                </Button>
-                {hasChanges ? (
-                    <Button
-                        disabled={!hasChanges}
-                        onClick={() => {
-                            refresh(getSelectedCharacters());
-                            setHasChanges(false);
-                        }}>
-                        <RefreshIcon /> Refresh Estimate
-                    </Button>
-                ) : undefined}
-                <div>
-                    <FormControlLabel
-                        label="Select all"
-                        control={
-                            <Checkbox
-                                checked={checked.every(x => x)}
-                                indeterminate={checked.some(x => x) && !checked.every(x => x)}
-                                onChange={handleSelectAll}
-                            />
-                        }
-                    />
-                    {children}
-                    {editGoal ? (
-                        <EditGoalDialog
-                            isOpen={true}
-                            goal={editGoal}
-                            character={editCharacter}
-                            onClose={() => {
-                                setEditGoal(null);
-                            }}
-                        />
-                    ) : undefined}
-                </div>
-            </AccordionDetails>
-        </Accordion>
     );
 };
