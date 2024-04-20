@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo } from 'react';
+﻿import React, { useContext, useEffect, useMemo } from 'react';
 
 import {
     ICharacterRankRange,
@@ -8,16 +8,7 @@ import {
     IRaidLocation,
 } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Card,
-    CardContent,
-    CardHeader,
-    Popover,
-    Tooltip,
-} from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Popover, Tooltip } from '@mui/material';
 import { PersonalGoalType } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { isMobile } from 'react-device-detect';
@@ -35,8 +26,6 @@ import { sum } from 'lodash';
 import { MiscIcon } from 'src/shared-components/misc-icon';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import { MaterialItemView } from 'src/v2/features/goals/material-item-view';
-import { MaterialItemInput } from 'src/v2/features/goals/material-item-input';
 import { CharactersRaidsSelect } from 'src/v2/features/goals/characters-raids-select';
 import {
     CharacterRaidGoalSelect,
@@ -46,6 +35,8 @@ import {
 } from 'src/v2/features/goals/goals.models';
 import { MaterialsTable } from 'src/v2/features/goals/materials-table';
 import InfoIcon from '@mui/icons-material/Info';
+import { RaidsDayInput } from 'src/v2/features/goals/raids-day-input';
+import { RaidsDayView } from 'src/v2/features/goals/raids-day-view';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -68,7 +59,7 @@ export const DailyRaids = () => {
         return goals
             .map(g => {
                 const relatedCharacter = characters.find(x => x.name === g.character);
-                if (!relatedCharacter || ![PersonalGoalType.UpgradeRank, PersonalGoalType.Ascend].includes(g.type)) {
+                if (!relatedCharacter || ![PersonalGoalType.UpgradeRank].includes(g.type)) {
                     return null;
                 }
                 const base: ICharacterRaidGoalSelectBase = {
@@ -119,6 +110,31 @@ export const DailyRaids = () => {
                 })),
         [selectedGoals]
     );
+    const completedLocations = dailyRaids.completedLocations?.flatMap(x => x.locations) ?? [];
+
+    const handleAdd = (material: IMaterialRaid, value: number, location: IRaidLocation) => {
+        setHasChanges(true);
+
+        if (value > 0) {
+            dispatch.inventory({
+                type: 'IncrementUpgradeQuantity',
+                upgrade: material.materialId,
+                value,
+            });
+            enqueueSnackbar(`Added ${value} items for ${material.materialLabel}`, {
+                variant: 'success',
+            });
+        }
+
+        dispatch.dailyRaids({
+            type: 'AddCompletedBattle',
+            location,
+            material: {
+                ...material,
+                locations: [],
+            },
+        });
+    };
 
     const handleGoalsSelectionChange = (selection: CharacterRaidGoalSelect[]) => {
         dispatch.goals({
@@ -221,7 +237,12 @@ export const DailyRaids = () => {
 
             currentDay.raids = [...notCompletedRaids, ...completedRaids];
         }
-        if (result.raids.length > 3) {
+
+        return result;
+    }, [upgradeRankGoals, dailyRaidsPreferences, upgrades]);
+
+    useEffect(() => {
+        if (estimatedRanks.raids.length > 3) {
             setPagination(() => ({
                 start: 0,
                 end: 3,
@@ -230,12 +251,11 @@ export const DailyRaids = () => {
         } else {
             setPagination(() => ({
                 start: 0,
-                end: result.raids.length,
+                end: estimatedRanks.raids.length,
                 completed: true,
             }));
         }
-        return result;
-    }, [upgradeRankGoals, dailyRaidsPreferences, upgrades]);
+    }, [estimatedRanks.raids.length]);
 
     const blockedMaterials: IMaterialEstimated2[] = useMemo(() => {
         return estimatedRanks.materials.filter(x => x.locationsString === x.missingLocationsString);
@@ -354,73 +374,22 @@ export const DailyRaids = () => {
                 </AccordionSummary>
                 <AccordionDetails style={{ maxHeight: '63vh', overflow: 'auto' }}>
                     <div style={{ display: 'flex', gap: 10, overflow: 'auto' }}>
-                        {estimatedRanks.raids.slice(pagination.start, pagination.end).map((day, index) => (
-                            <Card
-                                key={index}
-                                sx={{
-                                    minWidth: 300,
-                                }}>
-                                <CardHeader
-                                    title={index === 0 ? 'Today' : 'Day ' + (index + 1)}
-                                    subheader={'Energy left ' + day.energyLeft}
+                        {estimatedRanks.raids.slice(pagination.start, pagination.end).map((day, index) => {
+                            const isFirstDay = index === 0;
+
+                            return isFirstDay ? (
+                                <RaidsDayInput
+                                    key={index}
+                                    day={day}
+                                    completedLocations={completedLocations}
+                                    inventory={inventory.upgrades}
+                                    handleAdd={handleAdd}
                                 />
-                                <CardContent>
-                                    <ul style={{ listStyleType: 'none', padding: 0 }}>
-                                        {day.raids.map(raid => {
-                                            const isFirstDay = index === 0;
-                                            const acquiredCount = inventory.upgrades[raid.materialId] ?? 0;
-                                            const completedLocations =
-                                                dailyRaids.completedLocations?.flatMap(x => x.locations) ?? [];
-
-                                            const handleAdd = (value: number, location: IRaidLocation) => {
-                                                setHasChanges(true);
-
-                                                if (value > 0) {
-                                                    dispatch.inventory({
-                                                        type: 'IncrementUpgradeQuantity',
-                                                        upgrade: raid.materialId,
-                                                        value,
-                                                    });
-                                                    enqueueSnackbar(`Added ${value} items for ${raid.materialLabel}`, {
-                                                        variant: 'success',
-                                                    });
-                                                }
-
-                                                dispatch.dailyRaids({
-                                                    type: 'AddCompletedBattle',
-                                                    location,
-                                                    material: {
-                                                        ...raid,
-                                                        locations: [],
-                                                    },
-                                                });
-                                            };
-
-                                            return (
-                                                <li key={raid.materialId + index}>
-                                                    {!isFirstDay && (
-                                                        <>
-                                                            <MaterialItemView materialRaid={raid} />
-                                                        </>
-                                                    )}
-                                                    {isFirstDay && (
-                                                        <>
-                                                            <MaterialItemInput
-                                                                acquiredCount={acquiredCount}
-                                                                materialRaid={raid}
-                                                                completedLocations={completedLocations}
-                                                                addCount={handleAdd}
-                                                            />
-                                                        </>
-                                                    )}
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-                                </CardContent>
-                            </Card>
-                        ))}
-                        {pagination.completed ? undefined : (
+                            ) : (
+                                <RaidsDayView key={index} day={day} title={'Day ' + (index + 1)} />
+                            );
+                        })}
+                        {!pagination.completed && (
                             <Button
                                 variant={'outlined'}
                                 style={{ minWidth: 300, alignItems: 'flex-start', paddingTop: 20 }}
