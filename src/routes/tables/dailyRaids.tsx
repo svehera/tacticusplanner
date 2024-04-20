@@ -50,6 +50,8 @@ import { MiscIcon } from '../../shared-components/misc-icon';
 import { CharacterImage } from 'src/shared-components/character-image';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+import { RaidLocation } from 'src/v2/features/goals/raid-location';
+import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -653,7 +655,9 @@ const MaterialItem = ({
     raid: IMaterialRaid;
     changed: () => void;
 }) => {
-    const { dailyRaids } = useContext(StoreContext);
+    const { dailyRaids, inventory } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
+
     const completedLocations = dailyRaids.completedLocations?.flatMap(x => x.locations) ?? [];
 
     const isAllLocationsBlocked =
@@ -701,147 +705,69 @@ const MaterialItem = ({
                 )}
             </div>
             <ul style={{ paddingInlineStart: 15 }}>
-                {raid.locations.map(x => (
-                    <RaidItem
-                        location={x}
-                        key={x.campaign + x.battleNumber}
-                        material={raid}
-                        materialTotalCount={raid.totalCount}
-                        changed={changed}
-                        isFirstDay={isFirstDay}
-                        isAllLocationsBlocked={isAllLocationsBlocked}
-                    />
-                ))}
+                {raid.locations.map(location => {
+                    const completedLocations = dailyRaids.completedLocations?.flatMap(x => x.locations) ?? [];
+
+                    const isLocationCompleted = completedLocations.some(
+                        completedLocation => completedLocation.id === location.id
+                    );
+
+                    const acquiredCount = inventory.upgrades[raid.materialId] ?? 0;
+                    const maxObtained = Math.round(location.farmedItems);
+                    const defaultItemsObtained =
+                        maxObtained + acquiredCount > raid.totalCount ? raid.totalCount - acquiredCount : maxObtained;
+
+                    const handleAdd = (value: number) => {
+                        if (value > 0) {
+                            dispatch.inventory({
+                                type: 'IncrementUpgradeQuantity',
+                                upgrade: raid.materialId,
+                                value,
+                            });
+                            enqueueSnackbar(`Added ${value} items for ${raid.materialLabel}`, { variant: 'success' });
+                            changed();
+                        }
+
+                        dispatch.dailyRaids({
+                            type: 'AddCompletedBattle',
+                            location,
+                            material: {
+                                ...raid,
+                                locations: [],
+                            },
+                        });
+                        changed();
+                    };
+
+                    return (
+                        <li
+                            key={location.campaign + location.battleNumber}
+                            className="flex-box gap5"
+                            style={{
+                                justifyContent: 'space-between',
+                                opacity: isFirstDay && isLocationCompleted ? 0.5 : 1,
+                            }}>
+                            {!isFirstDay && (
+                                <>
+                                    <RaidLocation location={location} />
+                                </>
+                            )}
+                            {isFirstDay && (
+                                <>
+                                    <RaidLocation location={location} />
+                                    <RaidItemInput
+                                        defaultItemsObtained={defaultItemsObtained}
+                                        acquiredCount={acquiredCount}
+                                        requiredCount={raid.totalCount}
+                                        isDisabled={isLocationCompleted || isAllLocationsBlocked}
+                                        addCount={handleAdd}
+                                    />
+                                </>
+                            )}
+                        </li>
+                    );
+                })}
             </ul>
-        </li>
-    );
-};
-
-const RaidItem = ({
-    material,
-    location,
-    changed,
-    isFirstDay,
-    materialTotalCount,
-    isAllLocationsBlocked,
-}: {
-    isFirstDay: boolean;
-    isAllLocationsBlocked: boolean;
-    material: IMaterialRaid;
-    materialTotalCount: number;
-    location: IRaidLocation;
-    changed: () => void;
-}) => {
-    const { dailyRaids, inventory } = useContext(StoreContext);
-    const dispatch = useContext(DispatchContext);
-
-    const collectedItems = useMemo(() => inventory.upgrades[material.materialId] ?? 0, [inventory.upgrades]);
-    const [itemsObtained, setItemsObtained] = useState<string | number>(() => {
-        const maxObtained = Math.round(location.farmedItems);
-        return maxObtained + collectedItems > materialTotalCount ? materialTotalCount - collectedItems : maxObtained;
-    });
-    const completedLocations = dailyRaids.completedLocations?.flatMap(x => x.locations) ?? [];
-
-    const isLocationCompleted = useMemo(
-        () => isFirstDay && completedLocations.some(completedLocation => completedLocation.id === location.id),
-        [completedLocations]
-    );
-    const handleItemsObtainedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setItemsObtained(event.target.value);
-    };
-
-    const handleAdd = () => {
-        const value = itemsObtained === '' ? 0 : Number(itemsObtained);
-        if (value > 0) {
-            dispatch.inventory({
-                type: 'IncrementUpgradeQuantity',
-                upgrade: material.materialId,
-                value,
-            });
-            enqueueSnackbar(`Added ${value} items for ${material.materialLabel}`, { variant: 'success' });
-            changed();
-        }
-
-        dispatch.dailyRaids({
-            type: 'AddCompletedBattle',
-            location,
-            material: {
-                ...material,
-                locations: [],
-            },
-        });
-    };
-
-    return (
-        <li
-            style={{
-                display: 'flex',
-                gap: 5,
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                opacity: isLocationCompleted ? 0.5 : 1,
-            }}>
-            <div
-                style={{
-                    display: 'flex',
-                    gap: 5,
-                    alignItems: 'center',
-                }}>
-                <CampaignImage campaign={location.campaign} size={30} />
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                    }}>
-                    <span>
-                        <span style={{ fontStyle: 'italic' }}>({location.raidsCount}x)</span> Battle{' '}
-                        <span style={{ fontWeight: 'bold' }}>{location.battleNumber}</span>
-                    </span>
-                    <span style={{ fontSize: 12 }}>{location.campaign}</span>
-                </div>
-            </div>
-            <div
-                style={{
-                    minWidth: 60,
-                    maxWidth: 70,
-                    display: isFirstDay ? 'flex' : 'none',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                }}>
-                <FormControlLabel
-                    control={
-                        <Input
-                            disabled={isLocationCompleted || isAllLocationsBlocked}
-                            value={itemsObtained}
-                            size="small"
-                            onFocus={event => event.target.select()}
-                            onChange={handleItemsObtainedChange}
-                            inputProps={{
-                                step: 1,
-                                min: 0,
-                                type: 'number',
-                            }}
-                        />
-                    }
-                    sx={{ margin: 0 }}
-                    labelPlacement={'top'}
-                    label={
-                        <span style={{ fontSize: 12, fontStyle: 'italic' }}>
-                            {collectedItems}/{materialTotalCount} Items
-                        </span>
-                    }
-                />
-                <Tooltip title={isLocationCompleted || isAllLocationsBlocked ? '' : 'Add to inventory'}>
-                    <span>
-                        <Button
-                            size={'small'}
-                            onClick={handleAdd}
-                            disabled={isLocationCompleted || isAllLocationsBlocked}>
-                            Add
-                        </Button>
-                    </span>
-                </Tooltip>
-            </div>
         </li>
     );
 };
