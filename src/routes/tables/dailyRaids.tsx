@@ -1,4 +1,4 @@
-﻿import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+﻿import React, { useContext, useMemo, useState } from 'react';
 
 import {
     ICharacter2,
@@ -8,8 +8,8 @@ import {
     IMaterialRaid,
     IPersonalGoal,
     IRaidLocation,
-} from '../../models/interfaces';
-import { StaticDataService } from '../../services';
+} from 'src/models/interfaces';
+import { StaticDataService } from 'src/services';
 import {
     Accordion,
     AccordionDetails,
@@ -19,39 +19,36 @@ import {
     CardHeader,
     Checkbox,
     FormControlLabel,
-    Input,
     Popover,
     Tooltip,
 } from '@mui/material';
-import { PersonalGoalType, Rarity } from '../../models/enums';
-import { RankImage } from '../../shared-components/rank-image';
-import { DispatchContext, StoreContext } from '../../reducers/store.provider';
+import { PersonalGoalType, Rarity } from 'src/models/enums';
+import { RankImage } from 'src/shared-components/rank-image';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
 import { isMobile } from 'react-device-detect';
 import Button from '@mui/material/Button';
 import SettingsIcon from '@mui/icons-material/Settings';
 import DailyRaidsSettings from '../../shared-components/daily-raids-settings';
-import { fullCampaignsProgress } from '../../models/constants';
+import { fullCampaignsProgress } from 'src/models/constants';
 import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
-import { UpgradeImage } from '../../shared-components/upgrade-image';
+import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { CampaignImage } from '../../shared-components/campaign-image';
 import IconButton from '@mui/material/IconButton';
 import { Edit, Warning } from '@mui/icons-material';
-import { EditGoalDialog } from '../../shared-components/goals/set-goal-dialog';
+import { EditGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 import { enqueueSnackbar } from 'notistack';
 import ClearIcon from '@mui/icons-material/Clear';
 import { sum } from 'lodash';
-import { MiscIcon } from '../../shared-components/misc-icon';
-import { CharacterImage } from 'src/shared-components/character-image';
+import { MiscIcon } from 'src/shared-components/misc-icon';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import { RaidLocation } from 'src/v2/features/goals/raid-location';
-import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
+import { MaterialItemView } from 'src/v2/features/goals/material-item-view';
+import { MaterialItemInput } from 'src/v2/features/goals/material-item-input';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -472,14 +469,57 @@ export const DailyRaids = () => {
                                     />
                                     <CardContent>
                                         <ul style={{ listStyleType: 'none', padding: 0 }}>
-                                            {day.raids.map(raid => (
-                                                <MaterialItem
-                                                    raid={raid}
-                                                    key={raid.materialId}
-                                                    isFirstDay={index === 0}
-                                                    changed={() => setHasChanges(true)}
-                                                />
-                                            ))}
+                                            {day.raids.map(raid => {
+                                                const isFirstDay = index === 0;
+                                                const acquiredCount = inventory.upgrades[raid.materialId] ?? 0;
+                                                const completedLocations =
+                                                    dailyRaids.completedLocations?.flatMap(x => x.locations) ?? [];
+
+                                                const handleAdd = (value: number, location: IRaidLocation) => {
+                                                    setHasChanges(true);
+
+                                                    if (value > 0) {
+                                                        dispatch.inventory({
+                                                            type: 'IncrementUpgradeQuantity',
+                                                            upgrade: raid.materialId,
+                                                            value,
+                                                        });
+                                                        enqueueSnackbar(
+                                                            `Added ${value} items for ${raid.materialLabel}`,
+                                                            { variant: 'success' }
+                                                        );
+                                                    }
+
+                                                    dispatch.dailyRaids({
+                                                        type: 'AddCompletedBattle',
+                                                        location,
+                                                        material: {
+                                                            ...raid,
+                                                            locations: [],
+                                                        },
+                                                    });
+                                                };
+
+                                                return (
+                                                    <li key={raid.materialId + index}>
+                                                        {!isFirstDay && (
+                                                            <>
+                                                                <MaterialItemView materialRaid={raid} />
+                                                            </>
+                                                        )}
+                                                        {isFirstDay && (
+                                                            <>
+                                                                <MaterialItemInput
+                                                                    acquiredCount={acquiredCount}
+                                                                    materialRaid={raid}
+                                                                    completedLocations={completedLocations}
+                                                                    addCount={handleAdd}
+                                                                />
+                                                            </>
+                                                        )}
+                                                    </li>
+                                                );
+                                            })}
                                         </ul>
                                     </CardContent>
                                 </Card>
@@ -643,131 +683,5 @@ const CharactersList = ({ refresh }: { refresh: (chars: ICharacterRankRange[]) =
                 </div>
             </AccordionDetails>
         </Accordion>
-    );
-};
-
-const MaterialItem = ({
-    raid,
-    changed,
-    isFirstDay,
-}: {
-    isFirstDay: boolean;
-    raid: IMaterialRaid;
-    changed: () => void;
-}) => {
-    const { dailyRaids, inventory } = useContext(StoreContext);
-    const dispatch = useContext(DispatchContext);
-
-    const completedLocations = dailyRaids.completedLocations?.flatMap(x => x.locations) ?? [];
-
-    const isAllLocationsBlocked =
-        !!raid.materialRef && raid.materialRef.locationsString === raid.materialRef.missingLocationsString;
-
-    const isAllRaidsCompleted = useMemo(
-        () =>
-            isFirstDay &&
-            raid.locations.every(
-                location =>
-                    dailyRaids.completedLocations
-                        ?.flatMap(x => x.locations)
-                        .some(completedLocation => completedLocation.id === location.id)
-            ),
-        [completedLocations]
-    );
-
-    return (
-        <li style={{ opacity: isAllRaidsCompleted || isAllLocationsBlocked ? 0.5 : 1 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                {raid.characterIconPath ? (
-                    <CharacterImage icon={raid.characterIconPath} />
-                ) : (
-                    <UpgradeImage
-                        material={raid.materialLabel}
-                        rarity={raid.materialRarity}
-                        iconPath={raid.materialIconPath}
-                    />
-                )}
-                {isAllLocationsBlocked ? (
-                    <span>
-                        <Warning color={'warning'} /> All locations locked
-                    </span>
-                ) : (
-                    <Tooltip title={raid.characters.join(', ')}>
-                        <span>
-                            (
-                            {raid.characters.length <= 3
-                                ? raid.characters.join(', ')
-                                : raid.characters.slice(0, 3).join(', ') +
-                                  ` and ${raid.characters.slice(3).length} more...`}
-                            )
-                        </span>
-                    </Tooltip>
-                )}
-            </div>
-            <ul style={{ paddingInlineStart: 15 }}>
-                {raid.locations.map(location => {
-                    const completedLocations = dailyRaids.completedLocations?.flatMap(x => x.locations) ?? [];
-
-                    const isLocationCompleted = completedLocations.some(
-                        completedLocation => completedLocation.id === location.id
-                    );
-
-                    const acquiredCount = inventory.upgrades[raid.materialId] ?? 0;
-                    const maxObtained = Math.round(location.farmedItems);
-                    const defaultItemsObtained =
-                        maxObtained + acquiredCount > raid.totalCount ? raid.totalCount - acquiredCount : maxObtained;
-
-                    const handleAdd = (value: number) => {
-                        if (value > 0) {
-                            dispatch.inventory({
-                                type: 'IncrementUpgradeQuantity',
-                                upgrade: raid.materialId,
-                                value,
-                            });
-                            enqueueSnackbar(`Added ${value} items for ${raid.materialLabel}`, { variant: 'success' });
-                            changed();
-                        }
-
-                        dispatch.dailyRaids({
-                            type: 'AddCompletedBattle',
-                            location,
-                            material: {
-                                ...raid,
-                                locations: [],
-                            },
-                        });
-                        changed();
-                    };
-
-                    return (
-                        <li
-                            key={location.campaign + location.battleNumber}
-                            className="flex-box gap5"
-                            style={{
-                                justifyContent: 'space-between',
-                                opacity: isFirstDay && isLocationCompleted ? 0.5 : 1,
-                            }}>
-                            {!isFirstDay && (
-                                <>
-                                    <RaidLocation location={location} />
-                                </>
-                            )}
-                            {isFirstDay && (
-                                <>
-                                    <RaidLocation location={location} />
-                                    <RaidItemInput
-                                        defaultItemsObtained={defaultItemsObtained}
-                                        acquiredCount={acquiredCount}
-                                        requiredCount={raid.totalCount}
-                                        isDisabled={isLocationCompleted || isAllLocationsBlocked}
-                                        addCount={handleAdd}
-                                    />
-                                </>
-                            )}
-                        </li>
-                    );
-                })}
-            </ul>
-        </li>
     );
 };

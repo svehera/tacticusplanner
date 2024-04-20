@@ -6,7 +6,7 @@ interface Props {
     location: IRaidLocation;
 }
 
-export const RaidLocation: React.FC<Props> = ({ location }) => {
+export const RaidItemView: React.FC<Props> = ({ location }) => {
     return (
         <div className="flex-box gap5">
             <CampaignImage campaign={location.campaign} size={30} />
