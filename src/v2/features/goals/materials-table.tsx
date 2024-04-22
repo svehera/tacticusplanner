@@ -6,6 +6,7 @@ import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { isMobile } from 'react-device-detect';
 import { Rarity } from 'src/models/enums';
 import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
+import InfoIcon from '@mui/icons-material/Info';
 
 interface Props {
     rows: IMaterialEstimated2[];
@@ -136,6 +137,10 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                 maxHeight: '40vh',
                 width: '100%',
             }}>
+            <div className="flex-box gap5">
+                <InfoIcon color="primary" />
+                <span>Click on the Inventory column cell to edit its value</span>
+            </div>
             <AgGridReact
                 onCellEditingStopped={saveChanges}
                 suppressChangeDetection={true}

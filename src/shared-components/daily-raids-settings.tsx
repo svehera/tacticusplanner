@@ -17,6 +17,8 @@ import { DispatchContext, StoreContext } from '../reducers/store.provider';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import WarningIcon from '@mui/icons-material/Warning';
+import InfoIcon from '@mui/icons-material/Info';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
 const DailyRaidsSettings = ({ close }: { close: () => void }) => {
     const dispatch = useContext(DispatchContext);
@@ -125,8 +127,50 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
                     name="controlled-radio-buttons-group"
                     value={dailyRaidsPreferencesForm.farmByPriorityOrder + ''}
                     onChange={change => updatePreferences('farmByPriorityOrder', change.target.value === 'true')}>
-                    <FormControlLabel value="false" control={<Radio />} label={<div>By total materials</div>} />
-                    <FormControlLabel value="true" control={<Radio />} label={<div>By goals priority</div>} />
+                    <FormControlLabel
+                        value="false"
+                        control={<Radio />}
+                        label={
+                            <div className="flex-box start gap5">
+                                By total materials{' '}
+                                <AccessibleTooltip
+                                    title={
+                                        <p>
+                                            Materials required to accomplish all selected goals will be combined
+                                            together.
+                                            <br /> Pros: You will farm materials for all characters at once and overall
+                                            it will take less time to accomplish all selected goals
+                                            <br /> Cons: Goals priority is ignored and it will take more time to
+                                            accomplish your high priority goals
+                                        </p>
+                                    }>
+                                    <InfoIcon color="primary" />
+                                </AccessibleTooltip>
+                            </div>
+                        }
+                    />
+                    <FormControlLabel
+                        value="true"
+                        control={<Radio />}
+                        label={
+                            <div className="flex-box start gap5">
+                                By goals priority{' '}
+                                <AccessibleTooltip
+                                    title={
+                                        <p>
+                                            Materials grouped by goals priority.
+                                            <br /> Pros: You will farm materials for each character individually and
+                                            will faster accomplish your high priority goals
+                                            <br /> Cons: Overall it will take more time to accomplish all selected
+                                            goals. It is especially noticeable when you need to farm Legendary upgrades
+                                            for characters of different factions
+                                        </p>
+                                    }>
+                                    <InfoIcon color="primary" />
+                                </AccessibleTooltip>
+                            </div>
+                        }
+                    />
                 </RadioGroup>
             </FormControl>
 

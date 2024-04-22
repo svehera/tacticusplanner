@@ -120,12 +120,12 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>Raids Filters</DialogTitle>
                 <DialogContent>
-                    <h5>Your teams</h5>
+                    <h5>Deployable factions</h5>
                     {renderFilters('allies', currFilter.alliesAlliance, currFilter.alliesFactions)}
 
                     <hr />
 
-                    <h5>Enemies</h5>
+                    <h5>Enemies factions</h5>
                     {renderFilters('enemies', currFilter.enemiesAlliance, currFilter.enemiesFactions)}
 
                     <h5>Campaign Types</h5>

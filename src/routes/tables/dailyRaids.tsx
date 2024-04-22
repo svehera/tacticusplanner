@@ -361,7 +361,7 @@ export const DailyRaids = () => {
             <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <div className="flex-box gap5" style={{ fontSize: 20 }}>
-                        <PendingIcon color={'primary'} /> <b>{availableMaterials.length}</b> In progress materials
+                        <PendingIcon color={'primary'} /> <b>{availableMaterials.length}</b> in progress materials
                     </div>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -372,10 +372,6 @@ export const DailyRaids = () => {
                             to={isMobile ? '/mobile/input/inventory' : '/input/inventory'}>
                             <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Inventory</span>
                         </Button>
-                        <div className="flex-box gap5">
-                            <InfoIcon color="primary" />
-                            <span>Click on the Inventory column cell to edit its value</span>
-                        </div>
                     </div>
                     <MaterialsTable
                         rows={availableMaterials}

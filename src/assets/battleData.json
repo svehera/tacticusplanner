@@ -4638,7 +4638,9 @@
         "campaignType": "Elite",
         "nodeNumber": 19,
         "reward": "Bad Moon Teef",
-        "expectedGold": 101
+        "expectedGold": 101,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Tyranids", "Black Templars"]
     },
     "OE2": {
         "campaign": "Octarius Elite",
@@ -4827,14 +4829,18 @@
         "campaignType": "Elite",
         "nodeNumber": 6,
         "reward": "Advanced Filaments",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"]
     },
     "OE7": {
         "campaign": "Octarius Elite",
         "campaignType": "Elite",
         "nodeNumber": 7,
         "reward": "Ancient Runes",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Orks", "Black Templars"]
     },
     "OE8": {
         "campaign": "Octarius Elite",
@@ -5090,7 +5096,9 @@
         "campaignType": "Elite",
         "nodeNumber": 39,
         "reward": "Master-Crafted Ammo",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IME4": {
         "campaign": "Indomitus Mirror Elite",
@@ -5104,7 +5112,9 @@
         "campaignType": "Elite",
         "nodeNumber": 40,
         "reward": "Marneus Calgar",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IME5": {
         "campaign": "Indomitus Mirror Elite",
