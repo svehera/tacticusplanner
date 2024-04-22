@@ -1,4 +1,4 @@
-﻿import { IDailyRaids, IMaterialRaid, IRaidLocation, SetStateAction } from '../models/interfaces';
+﻿import { IDailyRaids, IDailyRaidsFilters, IMaterialRaid, IRaidLocation, SetStateAction } from '../models/interfaces';
 import { defaultData } from '../models/constants';
 
 export type DailyRaidsAction =
@@ -12,6 +12,10 @@ export type DailyRaidsAction =
       }
     | {
           type: 'ResetCompletedBattlesDaily';
+      }
+    | {
+          type: 'UpdateFilters';
+          value: IDailyRaidsFilters;
       }
     | SetStateAction<IDailyRaids>;
 
@@ -53,6 +57,13 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                 ...state,
                 completedLocations: [],
                 lastRefreshDateUTC: new Date().toUTCString(),
+            };
+        }
+        case 'UpdateFilters': {
+            const { value } = action;
+            return {
+                ...state,
+                filters: value,
             };
         }
         default: {

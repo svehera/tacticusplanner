@@ -24,6 +24,7 @@ export default function MultipleSelectCheckmarks(props: {
     selectedValues: string[];
     placeholder: string;
     selectionChanges: (value: string[]) => void;
+    size?: 'small' | 'medium';
 }) {
     const [selectedLabels, setSelectedLabels] = React.useState<string[]>(props.selectedValues);
     const handleChange = (event: SelectChangeEvent<string[]>) => {
@@ -37,7 +38,7 @@ export default function MultipleSelectCheckmarks(props: {
 
     return (
         <div>
-            <FormControl sx={{ m: 1, width: 300 }}>
+            <FormControl sx={{ m: 1, width: 300 }} size={props.size ?? 'medium'}>
                 <InputLabel id="demo-multiple-checkbox-label">{props.placeholder}</InputLabel>
                 <Select
                     labelId="demo-multiple-checkbox-label"

@@ -16,8 +16,7 @@ export type GoalsAction =
       }
     | {
           type: 'UpdateDailyRaids';
-          goalId: string;
-          value: boolean;
+          value: Array<{ goalId: string; include: boolean }>;
       }
     | SetStateAction<IPersonalGoal[]>;
 
@@ -90,16 +89,16 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             return state.map((x, index) => ({ ...x, priority: index + 1 }));
         }
         case 'UpdateDailyRaids': {
-            const { goalId, value } = action;
+            const { value } = action;
 
-            const updatedGoalIndex = state.findIndex(x => x.id === goalId);
-            if (updatedGoalIndex < 0) {
-                return state;
-            }
-            const currentGoal = state[updatedGoalIndex];
-            currentGoal.dailyRaids = value;
+            return state.map(currGoal => {
+                const newGoal = value.find(x => x.goalId === currGoal.id);
+                if (newGoal) {
+                    return { ...currGoal, dailyRaids: newGoal.include };
+                }
 
-            return [...state];
+                return currGoal;
+            });
         }
         default: {
             throw new Error();

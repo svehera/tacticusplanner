@@ -1,6 +1,52 @@
 ﻿{
-    "currentVersion": "1.4.8",
+    "currentVersion": "1.4.9",
     "releaseNotes": [
+        {
+            "version": "1.4.9",
+            "date": "April 22",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added daily raids filter",
+                    "subPoints": [
+                        "You can use it to tweak recommended locations based on your needs (e.g. you want to show only nodes that have Chaos as deployable factions)",
+                        "You can filter by alliances (Chaos, Xenos, Imperial) and factions(Necrons, etc.) of allies or enemies",
+                        "You can filter by campaign types (Elite, Mirror, etc.)",
+                        "You can filter by upgrades rarity (Legendary, Epic, etc.)"
+                    ],
+                    "images": [
+                        {
+                            "path": "raids1.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "UI adjustments for the Daily Raids page (await for more)",
+                    "subPoints": [
+                        "Added navigation shortcut between goals and daily raids views",
+                        "\"Reset estimate\" button renamed to \"Reset\" and moved to the top of the page",
+                        "\"Clear completed raids\" button renamed to \"Reset day\" and moved to the top of the page",
+                        "\"Selected characters\" section renamed to \"Selected goals\" and added characters' icons",
+                        "\"Materials\" section splited into 3 sections: \"In Progress materials\", \"Finished materials\", \"Blocked materials\"",
+                        "Added total number of raids and raids per day to the raids cards",
+                        "Updated daily raids settings"
+                    ],
+                    "images": [
+                        {
+                            "path": "raids2.png"
+                        },
+                        {
+                            "path": "raids3.png"
+                        },
+                        {
+                            "path": "raids4.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
         {
             "version": "1.4.8",
             "date": "April 19",

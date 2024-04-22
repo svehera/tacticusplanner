@@ -184,9 +184,19 @@ code {
         align-items: flex-start;
     }
 
+    &.wrap {
+        flex-wrap: wrap;
+    }
+
     @for $i from 1 through 10 {
         &.gap#{$i} {
             gap: #{$i}px;
+        }
+    }
+
+    @for $i from 1 through 10 {
+        &.p#{$i} {
+            padding: #{$i}px;
         }
     }
 }

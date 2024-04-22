@@ -226,6 +226,14 @@ export const defaultData: IPersonalData2 = {
     modifiedDate: undefined,
     seenAppVersion: undefined,
     dailyRaids: {
+        filters: {
+            enemiesAlliance: [],
+            enemiesFactions: [],
+            alliesAlliance: [],
+            alliesFactions: [],
+            campaignTypes: [],
+            upgradesRarity: [],
+        },
         completedLocations: [],
         lastRefreshDateUTC: new Date().toUTCString(),
     },
@@ -260,11 +268,6 @@ export const defaultData: IPersonalData2 = {
     dailyRaidsPreferences: {
         dailyEnergy: 288,
         shardsEnergy: 0,
-        useCampaignsProgress: true,
-        useMostEfficientNodes: true,
-        useMoreEfficientNodes: false,
-        useLeastEfficientNodes: false,
-        useInventory: true,
         farmByPriorityOrder: false,
     },
     characters: [
