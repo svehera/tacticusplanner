@@ -14,7 +14,15 @@ export const RaidsDayView: React.FC<Props> = ({ day, title }) => {
             sx={{
                 minWidth: 300,
             }}>
-            <CardHeader title={title} subheader={'Energy left ' + day.energyLeft} />
+            <CardHeader
+                title={title}
+                subheader={
+                    <div className="flex-box column start">
+                        <span>Energy left {day.energyLeft}</span>
+                        <span>Raids count {day.raidsCount}</span>
+                    </div>
+                }
+            />
             <CardContent>
                 <ul style={{ listStyleType: 'none', padding: 0 }}>
                     {day.raids.map((raid, index) => {

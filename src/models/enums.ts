@@ -25,10 +25,10 @@ export enum Faction {
 
 export enum RarityString {
     Common = 'Common',
+    Uncommon = 'Uncommon',
+    Rare = 'Rare',
     Epic = 'Epic',
     Legendary = 'Legendary',
-    Rare = 'Rare',
-    Uncommon = 'Uncommon',
 }
 
 export enum Rarity {
@@ -198,8 +198,20 @@ export enum CampaignType {
 }
 
 export enum Campaign {
-    Indomitus = 'Indomitus',
-    FallOfCadia = 'Fall of Cadia',
-    Octarius = 'Octarius',
-    SaimHann = 'Saim-Hann',
+    I = 'Indomitus',
+    IE = 'Indomitus Elite',
+    IM = 'Indomitus Mirror',
+    IME = 'Indomitus Mirror Elite',
+    FoC = 'Fall of Cadia',
+    FoCE = 'Fall of Cadia Elite',
+    FoCM = 'Fall of Cadia Mirror',
+    FoCME = 'Fall of Cadia Mirror Elite',
+    O = 'Octarius',
+    OE = 'Octarius Elite',
+    OM = 'Octarius Mirror',
+    OME = 'Octarius Mirror Elite',
+    SH = 'Saim-Hann',
+    SHE = 'Saim-Hann Elite',
+    SHM = 'Saim-Hann Mirror',
+    SHME = 'Saim-Hann Mirror Elite',
 }

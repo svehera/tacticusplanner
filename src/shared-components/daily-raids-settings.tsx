@@ -1,5 +1,17 @@
 ﻿import React, { useCallback, useContext, useMemo } from 'react';
-import { Checkbox, FormControlLabel, FormGroup, Box, Slider, Input, Tooltip } from '@mui/material';
+import {
+    Checkbox,
+    FormControlLabel,
+    FormGroup,
+    Box,
+    Slider,
+    Input,
+    Tooltip,
+    FormControl,
+    FormLabel,
+    RadioGroup,
+    Radio,
+} from '@mui/material';
 import { IDailyRaidsPreferences } from '../models/interfaces';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 import Typography from '@mui/material/Typography';
@@ -105,71 +117,18 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
                 }
                 label="Characters shards energy"
             />
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={dailyRaidsPreferencesForm.useCampaignsProgress}
-                        onChange={event => updatePreferences('useCampaignsProgress', event.target.checked)}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                }
-                label="Use campaigns progress"
-            />
 
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={dailyRaidsPreferencesForm.useMostEfficientNodes}
-                        onChange={event => updatePreferences('useMostEfficientNodes', event.target.checked)}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                }
-                label="Use Most efficient nodes (Elite)"
-            />
-
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={dailyRaidsPreferencesForm.useMoreEfficientNodes}
-                        onChange={event => updatePreferences('useMoreEfficientNodes', event.target.checked)}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                }
-                label="Use More efficient nodes (Mirror)"
-            />
-
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={dailyRaidsPreferencesForm.useLeastEfficientNodes}
-                        onChange={event => updatePreferences('useLeastEfficientNodes', event.target.checked)}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                }
-                label="Use Least efficient nodes (Normal)"
-            />
-
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={dailyRaidsPreferencesForm.useInventory}
-                        onChange={event => updatePreferences('useInventory', event.target.checked)}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                }
-                label="Use inventory"
-            />
-
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={dailyRaidsPreferencesForm.farmByPriorityOrder}
-                        onChange={event => updatePreferences('farmByPriorityOrder', event.target.checked)}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                }
-                label="Farm by priority order"
-            />
+            <FormControl style={{ marginTop: 20 }}>
+                <FormLabel id="radio-buttons-group">Raids order/grouping:</FormLabel>
+                <RadioGroup
+                    aria-labelledby="radio-buttons-group"
+                    name="controlled-radio-buttons-group"
+                    value={dailyRaidsPreferencesForm.farmByPriorityOrder + ''}
+                    onChange={change => updatePreferences('farmByPriorityOrder', change.target.value === 'true')}>
+                    <FormControlLabel value="false" control={<Radio />} label={<div>By total materials</div>} />
+                    <FormControlLabel value="true" control={<Radio />} label={<div>By goals priority</div>} />
+                </RadioGroup>
+            </FormControl>
 
             <Button type={'button'} onClick={saveChanges} variant={'outlined'}>
                 Save

@@ -37,6 +37,7 @@ import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { FlexBox } from 'src/v2/components/flex-box';
+import LinkIcon from '@mui/icons-material/Link';
 
 export const Goals = () => {
     const { goals, characters, campaignsProgress, dailyRaidsPreferences, inventory, dailyRaids } =
@@ -67,11 +68,9 @@ export const Goals = () => {
         const estimate = StaticDataService.getRankUpgradeEstimatedDays(
             {
                 dailyEnergy: dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy,
-                campaignsProgress: dailyRaidsPreferences.useCampaignsProgress
-                    ? campaignsProgress
-                    : fullCampaignsProgress,
+                campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
-                upgrades: dailyRaidsPreferences.useInventory ? inventory.upgrades : {},
+                upgrades: inventory.upgrades,
                 completedLocations: dailyRaids.completedLocations ?? [],
             },
             ...chars
@@ -109,6 +108,12 @@ export const Goals = () => {
     return (
         <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: 10 }}>
+                <Button
+                    variant={'contained'}
+                    component={Link}
+                    to={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
+                    <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids</span>
+                </Button>
                 <SetGoalDialog key={goals.length} />
                 {editGoal ? (
                     <EditGoalDialog
@@ -123,17 +128,7 @@ export const Goals = () => {
                 <span style={{ fontSize: 20 }}>
                     {goals.length}/{20}
                 </span>
-                <span style={{ fontSize: 20 }}>
-                    Total Days: {estimatedDaysTotal.raids.length}{' '}
-                    <IconButton
-                        color={'primary'}
-                        component={Link}
-                        to={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
-                        <Tooltip title={'Go To Daily Raids'}>
-                            <Info />
-                        </Tooltip>
-                    </IconButton>{' '}
-                </span>
+                <span style={{ fontSize: 20 }}>Total Days: {estimatedDaysTotal.raids.length}</span>
             </div>
 
             <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }} className={'goals'}>
@@ -238,11 +233,9 @@ export const GoalCard = ({
         const estimate = StaticDataService.getRankUpgradeEstimatedDays(
             {
                 dailyEnergy: dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy,
-                campaignsProgress: dailyRaidsPreferences.useCampaignsProgress
-                    ? campaignsProgress
-                    : fullCampaignsProgress,
-                preferences: dailyRaidsPreferences, // { ...dailyRaidsPreferences, farmByPriorityOrder: true },
-                upgrades: dailyRaidsPreferences.useInventory ? inventory.upgrades : {},
+                campaignsProgress: campaignsProgress,
+                preferences: dailyRaidsPreferences,
+                upgrades: inventory.upgrades,
                 completedLocations: dailyRaids.completedLocations ?? [],
             },
             ...[

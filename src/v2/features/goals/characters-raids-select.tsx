@@ -64,15 +64,9 @@ export const CharactersRaidsSelect: React.FC<Props> = ({ goalsSelect, onGoalsSel
 
     return (
         <div>
-            <div className="flex-box gap10">
-                <Button variant={'contained'} component={Link} to={isMobile ? '/mobile/plan/goals' : '/plan/goals'}>
-                    Go to Goals
-                </Button>
-
-                <Button variant={'contained'} disabled={!hasChanges} color="success" onClick={handleSaveChanges}>
-                    Save changes
-                </Button>
-            </div>
+            <Button variant={'contained'} disabled={!hasChanges} color="success" onClick={handleSaveChanges}>
+                Save changes
+            </Button>
             <div>
                 <FormControlLabel
                     label="Select all"

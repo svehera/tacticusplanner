@@ -2,6 +2,7 @@
 
 import {
     ICharacterRankRange,
+    IDailyRaidsFilters,
     IEstimatedRanks,
     IMaterialEstimated2,
     IMaterialRaid,
@@ -15,7 +16,6 @@ import { isMobile } from 'react-device-detect';
 import Button from '@mui/material/Button';
 import SettingsIcon from '@mui/icons-material/Settings';
 import DailyRaidsSettings from '../../shared-components/daily-raids-settings';
-import { fullCampaignsProgress } from 'src/models/constants';
 import { Link } from 'react-router-dom';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -35,8 +35,13 @@ import {
 } from 'src/v2/features/goals/goals.models';
 import { MaterialsTable } from 'src/v2/features/goals/materials-table';
 import InfoIcon from '@mui/icons-material/Info';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import PendingIcon from '@mui/icons-material/Pending';
+import LinkIcon from '@mui/icons-material/Link';
 import { RaidsDayInput } from 'src/v2/features/goals/raids-day-input';
 import { RaidsDayView } from 'src/v2/features/goals/raids-day-view';
+import { LocationsFilter } from 'src/v2/features/goals/locations-filter';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -54,6 +59,7 @@ export const DailyRaids = () => {
     }>({ start: 0, end: 3, completed: true });
     const [grid1Loaded, setGrid1Loaded] = React.useState<boolean>(false);
     const [grid2Loaded, setGrid2Loaded] = React.useState<boolean>(false);
+    const [grid3Loaded, setGrid3Loaded] = React.useState<boolean>(false);
 
     const allGoals = useMemo<CharacterRaidGoalSelect[]>(() => {
         return goals
@@ -189,12 +195,11 @@ export const DailyRaids = () => {
         const result = StaticDataService.getRankUpgradeEstimatedDays(
             {
                 dailyEnergy: actualEnergy,
-                campaignsProgress: dailyRaidsPreferences.useCampaignsProgress
-                    ? campaignsProgress
-                    : fullCampaignsProgress,
+                campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
-                upgrades: dailyRaidsPreferences.useInventory ? upgrades : {},
+                upgrades: upgrades,
                 completedLocations: dailyRaids.completedLocations ?? [],
+                filters: dailyRaids.filters,
             },
             ...upgradeRankGoals
         );
@@ -239,7 +244,7 @@ export const DailyRaids = () => {
         }
 
         return result;
-    }, [upgradeRankGoals, dailyRaidsPreferences, upgrades]);
+    }, [upgradeRankGoals, dailyRaidsPreferences, dailyRaids.filters, upgrades]);
 
     useEffect(() => {
         if (estimatedRanks.raids.length > 3) {
@@ -257,8 +262,20 @@ export const DailyRaids = () => {
         }
     }, [estimatedRanks.raids.length]);
 
+    const availableMaterials: IMaterialEstimated2[] = useMemo(() => {
+        return estimatedRanks.materials.filter(
+            x => x.locationsString !== x.missingLocationsString && x.quantity < x.count
+        );
+    }, [estimatedRanks.materials]);
+
+    const finishedMaterials: IMaterialEstimated2[] = useMemo(() => {
+        return estimatedRanks.materials.filter(x => x.quantity >= x.count);
+    }, [estimatedRanks.materials]);
+
     const blockedMaterials: IMaterialEstimated2[] = useMemo(() => {
-        return estimatedRanks.materials.filter(x => x.locationsString === x.missingLocationsString);
+        return estimatedRanks.materials.filter(
+            x => x.locationsString === x.missingLocationsString && x.quantity < x.count
+        );
     }, [estimatedRanks.materials]);
 
     const formattedDate: string = useMemo(() => {
@@ -268,9 +285,28 @@ export const DailyRaids = () => {
         return formatDateWithOrdinal(nextDate);
     }, [estimatedRanks.raids.length]);
 
+    const saveFilterChanges = (filters: IDailyRaidsFilters) => {
+        dispatch.dailyRaids({
+            type: 'UpdateFilters',
+            value: filters,
+        });
+    };
+
+    const filtersCount =
+        +!!dailyRaids.filters.enemiesAlliance.length +
+        +!!dailyRaids.filters.alliesAlliance.length +
+        +!!dailyRaids.filters.alliesFactions.length +
+        +!!dailyRaids.filters.campaignTypes.length +
+        +!!dailyRaids.filters.upgradesRarity.length +
+        +!!dailyRaids.filters.enemiesFactions.length;
+
     return (
         <div>
             <div className="flex-box gap10 p10">
+                <Button variant={'contained'} component={Link} to={isMobile ? '/mobile/plan/goals' : '/plan/goals'}>
+                    <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Goals</span>
+                </Button>
+
                 <Button variant="outlined" onClick={handleClick2}>
                     Daily Raids <SettingsIcon />
                 </Button>
@@ -308,12 +344,13 @@ export const DailyRaids = () => {
                     }}>
                     <ClearIcon /> Reset day
                 </Button>
+                <LocationsFilter filter={dailyRaids.filters} filtersChange={saveFilterChanges} />
             </div>
 
             <Accordion TransitionProps={{ unmountOnExit: true }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <span style={{ fontSize: 20 }}>
-                        Selected Characters ({selectedGoals.length} of {allGoals.length})
+                        Selected Goals ({selectedGoals.length} of {allGoals.length})
                     </span>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -323,7 +360,9 @@ export const DailyRaids = () => {
 
             <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <span style={{ fontSize: 20 }}>Materials ({estimatedRanks.totalEnergy} Energy Needed)</span>
+                    <div className="flex-box gap5" style={{ fontSize: 20 }}>
+                        <PendingIcon color={'primary'} /> <b>{availableMaterials.length}</b> In progress materials
+                    </div>
                 </AccordionSummary>
                 <AccordionDetails>
                     <div className="flex-box gap10 wrap">
@@ -331,7 +370,7 @@ export const DailyRaids = () => {
                             variant={'contained'}
                             component={Link}
                             to={isMobile ? '/mobile/input/inventory' : '/input/inventory'}>
-                            Go to Inventory
+                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Inventory</span>
                         </Button>
                         <div className="flex-box gap5">
                             <InfoIcon color="primary" />
@@ -339,23 +378,52 @@ export const DailyRaids = () => {
                         </div>
                     </div>
                     <MaterialsTable
-                        rows={estimatedRanks.materials}
+                        rows={availableMaterials}
                         updateMaterialQuantity={saveInventoryUpdateChanges}
                         onGridReady={() => setGrid1Loaded(true)}
                     />
                 </AccordionDetails>
             </Accordion>
 
+            {!!finishedMaterials.length && (
+                <Accordion TransitionProps={{ unmountOnExit: !grid3Loaded }}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <div className="flex-box gap5" style={{ fontSize: 20 }}>
+                            <CheckCircleIcon color={'success'} /> <b>{finishedMaterials.length}</b> finished materials
+                        </div>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <MaterialsTable
+                            rows={finishedMaterials}
+                            updateMaterialQuantity={saveInventoryUpdateChanges}
+                            onGridReady={() => setGrid3Loaded(true)}
+                        />
+                    </AccordionDetails>
+                </Accordion>
+            )}
+
             {!!blockedMaterials.length && (
                 <Accordion TransitionProps={{ unmountOnExit: !grid2Loaded }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <Tooltip title={`You don't any have location for ${blockedMaterials.length} materials`}>
-                            <span style={{ fontSize: 20 }}>
-                                <Warning color={'warning'} /> Blocked Materials ({blockedMaterials.length})
-                            </span>
-                        </Tooltip>
+                        <AccessibleTooltip
+                            title={`You don't any have location for ${blockedMaterials.length} materials`}>
+                            <div className="flex-box gap5" style={{ fontSize: 20 }}>
+                                <Warning color={'warning'} /> <b>{blockedMaterials.length}</b> blocked materials
+                            </div>
+                        </AccessibleTooltip>
                     </AccordionSummary>
                     <AccordionDetails>
+                        <div className="flex-box">
+                            <InfoIcon color="primary" /> You don&apos;t have available campaigns nodes for the items
+                            listed in the table below
+                        </div>
+                        {filtersCount > 0 && (
+                            <div className="flex-box">
+                                <Warning color={'warning'} /> You have applied some filters. Reset filters to make more
+                                campaigns node available
+                            </div>
+                        )}
+
                         <MaterialsTable
                             rows={blockedMaterials}
                             updateMaterialQuantity={saveInventoryUpdateChanges}
@@ -368,7 +436,10 @@ export const DailyRaids = () => {
             <Accordion defaultExpanded={true} TransitionProps={{ unmountOnExit: !pagination.completed }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                        <span style={{ fontSize: 20 }}>Raids ({estimatedRanks.raids.length} Days)</span>
+                        <span style={{ fontSize: 20 }}>
+                            Raids ({estimatedRanks.raids.length} Days & {estimatedRanks.totalEnergy} Energy &{' '}
+                            {estimatedRanks.totalRaids} Raids)
+                        </span>
                         <span className="italic">{formattedDate}</span>
                     </FlexBox>
                 </AccordionSummary>

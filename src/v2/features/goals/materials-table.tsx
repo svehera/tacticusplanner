@@ -30,6 +30,9 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                         return <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />;
                     }
                 },
+                valueFormatter: () => {
+                    return '';
+                },
                 equals: () => true,
                 sortable: false,
                 width: 80,
@@ -129,6 +132,7 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
             className="ag-theme-material"
             style={{
                 height: 50 + rows.length * 30,
+                minHeight: 150,
                 maxHeight: '40vh',
                 width: '100%',
             }}>

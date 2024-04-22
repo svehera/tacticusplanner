@@ -318,8 +318,18 @@ export interface IGuildWar {
 }
 
 export interface IDailyRaids {
+    filters: IDailyRaidsFilters;
     completedLocations: IMaterialRaid[];
     lastRefreshDateUTC: string;
+}
+
+export interface IDailyRaidsFilters {
+    enemiesAlliance: Alliance[];
+    enemiesFactions: Faction[];
+    alliesAlliance: Alliance[];
+    alliesFactions: Faction[];
+    campaignTypes: CampaignType[];
+    upgradesRarity: Rarity[];
 }
 
 export interface ILegendaryEventsData {
@@ -386,11 +396,6 @@ export interface IAutoTeamsPreferences {
 export interface IDailyRaidsPreferences {
     dailyEnergy: number;
     shardsEnergy: number;
-    useCampaignsProgress: boolean;
-    useMostEfficientNodes: boolean;
-    useMoreEfficientNodes: boolean;
-    useLeastEfficientNodes: boolean;
-    useInventory: boolean;
     farmByPriorityOrder: boolean;
 }
 
@@ -559,10 +564,13 @@ export interface ICampaignBattle {
     reward: string; // material name or hero name in case farming shards
     expectedGold: number;
     slots?: number;
+    enemiesAlliances?: string[];
+    enemiesFactions?: string[];
 }
 
 export interface ICampaignBattleComposed {
-    campaign: string;
+    campaign: Campaign;
+    campaignType: CampaignType;
     energyCost: number;
     dailyBattleCount: number;
     dropRate: number;
@@ -572,6 +580,10 @@ export interface ICampaignBattleComposed {
     reward: string; // material name or hero name in case farming shards
     expectedGold: number;
     slots?: number;
+    enemiesFactions: Faction[];
+    enemiesAlliances: Alliance[];
+    alliesFactions: Faction[];
+    alliesAlliance: Alliance;
 }
 
 type MaterialName = string;
@@ -692,11 +704,13 @@ export interface IMaterialEstimated2 {
     iconPath: string;
     characters: string[];
     priority: number;
+    isBlocked: boolean;
 }
 
 export interface IDailyRaid {
     raids: IMaterialRaid[];
     energyLeft: number;
+    raidsCount: number;
 }
 
 export interface IMaterialRaid {
@@ -733,6 +747,7 @@ export interface IEstimatedRanks {
     upgrades: IMaterialFull[];
     materials: IMaterialEstimated2[];
     totalEnergy: number;
+    totalRaids: number;
 }
 
 export interface IEstimatedRanksSettings {
@@ -740,6 +755,7 @@ export interface IEstimatedRanksSettings {
     campaignsProgress: ICampaignsProgress;
     dailyEnergy: number;
     preferences?: IDailyRaidsPreferences;
+    filters?: IDailyRaidsFilters;
     upgrades: Record<string, number>;
 }
 

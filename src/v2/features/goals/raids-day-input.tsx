@@ -16,7 +16,15 @@ export const RaidsDayInput: React.FC<Props> = ({ day, handleAdd, inventory, comp
             sx={{
                 minWidth: 300,
             }}>
-            <CardHeader title={'Today'} subheader={'Energy left ' + day.energyLeft} />
+            <CardHeader
+                title={'Today'}
+                subheader={
+                    <div className="flex-box column start">
+                        <span>Energy left {day.energyLeft}</span>
+                        <span>Raids left {day.raidsCount}</span>
+                    </div>
+                }
+            />
             <CardContent>
                 <ul style={{ listStyleType: 'none', padding: 0 }}>
                     {day.raids.map(raid => {
