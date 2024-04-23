@@ -1,6 +1,40 @@
 ﻿{
-    "currentVersion": "1.4.9",
+    "currentVersion": "1.5.0",
     "releaseNotes": [
+        {
+            "version": "1.5.0",
+            "date": "April 23",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added \"Slots\" filter to the Daily Raids filter",
+                    "subPoints": ["You can use it to filter locations by amount (3,4,5) of deployable characters"],
+                    "images": [
+                        {
+                            "path": "filter.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added link to guilmates' roster page",
+                    "images": [
+                        {
+                            "path": "guild.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated more upgrades icons. Thanks to KIVIY"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with 'i' not showing tooltip on daily raids settings on mobile (RotoR)"
+                }
+            ]
+        },
         {
             "version": "1.4.9",
             "date": "April 22",
@@ -24,7 +58,7 @@
                     "text": "UI adjustments for the Daily Raids page (await for more)",
                     "subPoints": [
                         "Added navigation shortcut between goals and daily raids views",
-                        "\"Reset estimate\" button renamed to \"Reset\" and moved to the top of the page",
+                        "\"Refresh estimate\" button renamed to \"Refresh\" and moved to the top of the page",
                         "\"Clear completed raids\" button renamed to \"Reset day\" and moved to the top of the page",
                         "\"Selected characters\" section renamed to \"Selected goals\" and added characters' icons",
                         "\"Materials\" section splited into 3 sections: \"In Progress materials\", \"Finished materials\", \"Blocked materials\"",
