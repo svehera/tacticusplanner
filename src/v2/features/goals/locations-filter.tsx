@@ -28,6 +28,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
         +!!filter.alliesFactions.length +
         +!!filter.enemiesFactions.length +
         +!!filter.upgradesRarity.length +
+        +!!filter.slotsCount?.length +
         +!!filter.campaignTypes.length;
 
     const handleClick = () => {
@@ -52,6 +53,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             enemiesAlliance: [],
             campaignTypes: [],
             upgradesRarity: [],
+            slotsCount: [],
         });
         setCurrFilter({
             alliesFactions: [],
@@ -60,6 +62,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             enemiesAlliance: [],
             campaignTypes: [],
             upgradesRarity: [],
+            slotsCount: [],
         });
         setOpen(false);
     };
@@ -128,10 +131,10 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     <h5>Enemies factions</h5>
                     {renderFilters('enemies', currFilter.enemiesAlliance, currFilter.enemiesFactions)}
 
-                    <h5>Campaign Types</h5>
+                    <h5>Locations</h5>
                     <MultipleSelectCheckmarks
                         size="small"
-                        placeholder="Campaign Types"
+                        placeholder="Types"
                         selectedValues={currFilter.campaignTypes}
                         values={[CampaignType.Elite, CampaignType.Mirror, CampaignType.Normal, CampaignType.Early]}
                         selectionChanges={values => {
@@ -139,10 +142,20 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                         }}
                     />
 
-                    <h5>Upgrades rarity</h5>
                     <MultipleSelectCheckmarks
                         size="small"
-                        placeholder="Upgrades rarity"
+                        placeholder="Slots"
+                        selectedValues={currFilter.slotsCount?.map(x => x.toString()) ?? []}
+                        values={['3', '4', '5']}
+                        selectionChanges={values => {
+                            setCurrFilter({ ...currFilter, slotsCount: values.map(x => +x) });
+                        }}
+                    />
+
+                    <h5>Upgrades</h5>
+                    <MultipleSelectCheckmarks
+                        size="small"
+                        placeholder="Rarity"
                         selectedValues={currFilter.upgradesRarity.map(x => Rarity[x])}
                         values={Object.values(RarityString)}
                         selectionChanges={values => {

@@ -298,6 +298,7 @@ export const DailyRaids = () => {
         +!!dailyRaids.filters.alliesFactions.length +
         +!!dailyRaids.filters.campaignTypes.length +
         +!!dailyRaids.filters.upgradesRarity.length +
+        +!!dailyRaids.filters.slotsCount?.length +
         +!!dailyRaids.filters.enemiesFactions.length;
 
     return (

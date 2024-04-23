@@ -330,6 +330,7 @@ export interface IDailyRaidsFilters {
     alliesFactions: Faction[];
     campaignTypes: CampaignType[];
     upgradesRarity: Rarity[];
+    slotsCount?: number[];
 }
 
 export interface ILegendaryEventsData {

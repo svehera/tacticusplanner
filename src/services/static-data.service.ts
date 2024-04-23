@@ -899,7 +899,14 @@ export class StaticDataService {
                     enemiesFactions,
                     campaignTypes,
                     upgradesRarity,
+                    slotsCount,
                 } = settings.filters;
+
+                if (slotsCount && slotsCount.length) {
+                    if (!slotsCount.includes(location.slots ?? 5)) {
+                        return false;
+                    }
+                }
 
                 if (upgradesRarity.length) {
                     if (!upgradesRarity.includes(materialRarity)) {

@@ -19,10 +19,10 @@ export const AccessibleTooltip: React.FC<Props> = ({ children, title }) => {
     };
     if (isMobile) {
         return (
-            <ClickAwayListener onClickAway={handleTooltipClose}>
+            <ClickAwayListener onClickAway={handleTooltipClose} mouseEvent={'onMouseUp'}>
                 <Tooltip
                     PopperProps={{
-                        disablePortal: true,
+                        disablePortal: false,
                     }}
                     placement="top"
                     arrow
