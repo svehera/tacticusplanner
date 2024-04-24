@@ -748,6 +748,7 @@ export interface IEstimatedRanks {
     upgrades: IMaterialFull[];
     materials: IMaterialEstimated2[];
     totalEnergy: number;
+    totalUnusedEnergy: number;
     totalRaids: number;
 }
 

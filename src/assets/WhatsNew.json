@@ -5,11 +5,27 @@
             "version": "1.5.1",
             "date": "April 24",
             "type": "Update",
-            "new": [],
-            "minor": [],
+            "new": [
+                {
+                    "text": "Added amount of unused energy to the Raids section of the Daily raids page",
+                    "images": [
+                        {
+                            "path": "en.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added back possibility to edit goals on daily raids page (Kortesch)"
+                }
+            ],
             "bugFixes": [
                 {
                     "text": "Fixed issue when both Elite and Mirror location doesn't show up in raids list for single when both selected in the filter (James V)"
+                },
+                {
+                    "text": "Fixed incorrect drop for Saim-Hann Mirror 63 (Sort of Purple)"
                 }
             ]
         },

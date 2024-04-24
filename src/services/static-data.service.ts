@@ -407,6 +407,7 @@ export class StaticDataService {
 
         const energySpent = sum(settings.completedLocations.flatMap(x => x.locations).map(x => x.energySpent));
         const totalEnergy = sum(raids.map(day => settings.dailyEnergy - day.energyLeft)) - energySpent;
+        const totalUnusedEnergy = sum(raids.map(day => day.energyLeft));
         const totalRaids = sum(raids.map(day => day.raidsCount));
 
         return {
@@ -415,6 +416,7 @@ export class StaticDataService {
             materials,
             totalEnergy,
             totalRaids,
+            totalUnusedEnergy,
         };
     }
 
