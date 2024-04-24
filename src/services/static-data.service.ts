@@ -883,79 +883,70 @@ export class StaticDataService {
         locationsComposed: ICampaignBattleComposed[],
         materialRarity: Rarity
     ): ICampaignBattleComposed[] {
-        const unlockedLocations = locationsComposed
-            .filter(location => {
-                const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
-                return location.nodeNumber <= campaignProgress;
-            })
-            .filter(location => {
-                if (!settings.filters) {
-                    return true;
-                }
-                const {
-                    alliesFactions,
-                    alliesAlliance,
-                    enemiesAlliance,
-                    enemiesFactions,
-                    campaignTypes,
-                    upgradesRarity,
-                    slotsCount,
-                } = settings.filters;
-
-                if (slotsCount && slotsCount.length) {
-                    if (!slotsCount.includes(location.slots ?? 5)) {
-                        return false;
-                    }
-                }
-
-                if (upgradesRarity.length) {
-                    if (!upgradesRarity.includes(materialRarity)) {
-                        return false;
-                    }
-                }
-
-                if (campaignTypes.length) {
-                    if (!campaignTypes.includes(location.campaignType)) {
-                        return false;
-                    }
-                }
-
-                if (alliesAlliance.length) {
-                    if (!alliesAlliance.includes(location.alliesAlliance)) {
-                        return false;
-                    }
-                }
-
-                if (alliesFactions.length) {
-                    if (!location.alliesFactions.some(faction => alliesFactions.includes(faction))) {
-                        return false;
-                    }
-                }
-
-                if (enemiesAlliance.length) {
-                    if (!location.enemiesAlliances.some(alliance => enemiesAlliance.includes(alliance))) {
-                        return false;
-                    }
-                }
-
-                if (enemiesFactions.length) {
-                    if (!location.enemiesFactions.some(faction => enemiesFactions.includes(faction))) {
-                        return false;
-                    }
-                }
-
-                return true;
-            });
-
+        const unlockedLocations = locationsComposed.filter(location => {
+            const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
+            return location.nodeNumber <= campaignProgress;
+        });
         const minEnergy = Math.min(...unlockedLocations.map(x => x.energyPerItem));
 
-        let filteredLocations: ICampaignBattleComposed[] = unlockedLocations.filter(
-            location => location.energyPerItem === minEnergy
-        );
+        const filteredLocations = unlockedLocations.filter(location => {
+            if (!settings.filters) {
+                return location.energyPerItem === minEnergy;
+            }
+            const {
+                alliesFactions,
+                alliesAlliance,
+                enemiesAlliance,
+                enemiesFactions,
+                campaignTypes,
+                upgradesRarity,
+                slotsCount,
+            } = settings.filters;
 
-        if (!filteredLocations.length && unlockedLocations.length) {
-            filteredLocations = [unlockedLocations[0]];
-        }
+            if (slotsCount && slotsCount.length) {
+                if (!slotsCount.includes(location.slots ?? 5)) {
+                    return false;
+                }
+            }
+
+            if (upgradesRarity.length) {
+                if (!upgradesRarity.includes(materialRarity)) {
+                    return false;
+                }
+            }
+
+            if (campaignTypes.length) {
+                if (!campaignTypes.includes(location.campaignType)) {
+                    return false;
+                }
+            }
+
+            if (alliesAlliance.length) {
+                if (!alliesAlliance.includes(location.alliesAlliance)) {
+                    return false;
+                }
+            }
+
+            if (alliesFactions.length) {
+                if (!location.alliesFactions.some(faction => alliesFactions.includes(faction))) {
+                    return false;
+                }
+            }
+
+            if (enemiesAlliance.length) {
+                if (!location.enemiesAlliances.some(alliance => enemiesAlliance.includes(alliance))) {
+                    return false;
+                }
+            }
+
+            if (enemiesFactions.length) {
+                if (!location.enemiesFactions.some(faction => enemiesFactions.includes(faction))) {
+                    return false;
+                }
+            }
+
+            return !campaignTypes.length ? location.energyPerItem === minEnergy : true;
+        });
 
         return orderBy(filteredLocations, ['energyPerItem', 'expectedGold'], ['asc', 'desc']);
     }

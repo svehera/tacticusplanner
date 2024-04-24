@@ -1,6 +1,18 @@
 ﻿{
-    "currentVersion": "1.5.0",
+    "currentVersion": "1.5.1",
     "releaseNotes": [
+        {
+            "version": "1.5.1",
+            "date": "April 24",
+            "type": "Update",
+            "new": [],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue when both Elite and Mirror location doesn't show up in raids list for single when both selected in the filter (James V)"
+                }
+            ]
+        },
         {
             "version": "1.5.0",
             "date": "April 23",
