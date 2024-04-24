@@ -407,6 +407,7 @@ export class StaticDataService {
 
         const energySpent = sum(settings.completedLocations.flatMap(x => x.locations).map(x => x.energySpent));
         const totalEnergy = sum(raids.map(day => settings.dailyEnergy - day.energyLeft)) - energySpent;
+        const totalUnusedEnergy = sum(raids.map(day => day.energyLeft));
         const totalRaids = sum(raids.map(day => day.raidsCount));
 
         return {
@@ -415,6 +416,7 @@ export class StaticDataService {
             materials,
             totalEnergy,
             totalRaids,
+            totalUnusedEnergy,
         };
     }
 
@@ -948,13 +950,37 @@ export class StaticDataService {
             });
 
         const minEnergy = Math.min(...unlockedLocations.map(x => x.energyPerItem));
-
-        let filteredLocations: ICampaignBattleComposed[] = unlockedLocations.filter(
-            location => location.energyPerItem === minEnergy
+        const maxEnergy = Math.max(...unlockedLocations.map(x => x.energyPerItem));
+        const hasAnyMedianLocation = unlockedLocations.some(
+            location => location.energyPerItem > minEnergy && location.energyPerItem < maxEnergy
         );
 
-        if (!filteredLocations.length && unlockedLocations.length) {
-            filteredLocations = [unlockedLocations[0]];
+        let filteredLocations: ICampaignBattleComposed[] = unlockedLocations;
+        if (settings.preferences) {
+            const { useLeastEfficientNodes, useMoreEfficientNodes, useMostEfficientNodes } = settings.preferences;
+            filteredLocations = unlockedLocations.filter(location => {
+                if (!useMostEfficientNodes && !useMoreEfficientNodes && !useLeastEfficientNodes) {
+                    return true;
+                }
+
+                if (useMostEfficientNodes && location.energyPerItem === minEnergy) {
+                    return true;
+                }
+
+                if (
+                    useMoreEfficientNodes &&
+                    ((hasAnyMedianLocation &&
+                        location.energyPerItem > minEnergy &&
+                        location.energyPerItem < maxEnergy) ||
+                        (!hasAnyMedianLocation &&
+                            location.energyPerItem >= minEnergy &&
+                            location.energyPerItem < maxEnergy))
+                ) {
+                    return true;
+                }
+
+                return useLeastEfficientNodes && location.energyPerItem === maxEnergy;
+            });
         }
 
         return orderBy(filteredLocations, ['energyPerItem', 'expectedGold'], ['asc', 'desc']);

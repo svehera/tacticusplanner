@@ -1,22 +1,26 @@
-﻿import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { isMobile } from 'react-device-detect';
+﻿import React, { useEffect, useMemo } from 'react';
 import Button from '@mui/material/Button';
-import { Checkbox, FormControlLabel } from '@mui/material';
+import { Checkbox, FormControlLabel, IconButton } from '@mui/material';
 import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { PersonalGoalType } from 'src/models/enums';
 import { CharacterImage } from 'src/shared-components/character-image';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { Edit } from '@mui/icons-material';
 
 interface Props {
     goalsSelect: CharacterRaidGoalSelect[];
     onGoalsSelectChange: (chars: CharacterRaidGoalSelect[]) => void;
+    onGoalEdit: (goalId: string) => void;
 }
 
-export const CharactersRaidsSelect: React.FC<Props> = ({ goalsSelect, onGoalsSelectChange }) => {
-    const [currentGoalsSelect, setCurrentGoalsSelect] = React.useState<CharacterRaidGoalSelect[]>(goalsSelect);
+export const CharactersRaidsSelect: React.FC<Props> = ({ goalsSelect, onGoalsSelectChange, onGoalEdit }) => {
+    const [currentGoalsSelect, setCurrentGoalsSelect] = React.useState<CharacterRaidGoalSelect[]>([]);
+
+    useEffect(() => {
+        setCurrentGoalsSelect(goalsSelect);
+    }, [goalsSelect]);
 
     const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentGoalsSelect(value => value.map(x => ({ ...x, include: event.target.checked })));
@@ -62,6 +66,10 @@ export const CharactersRaidsSelect: React.FC<Props> = ({ goalsSelect, onGoalsSel
         }
     };
 
+    const handleEdit = (goal: CharacterRaidGoalSelect) => {
+        onGoalEdit(goal.goalId);
+    };
+
     return (
         <div>
             <Button variant={'contained'} disabled={!hasChanges} color="success" onClick={handleSaveChanges}>
@@ -86,6 +94,9 @@ export const CharactersRaidsSelect: React.FC<Props> = ({ goalsSelect, onGoalsSel
                             key={goal.goalId}
                             label={
                                 <div className="flex-box gap10">
+                                    <IconButton onClick={() => handleEdit(goal)}>
+                                        <Edit fontSize="small" />
+                                    </IconButton>
                                     <AccessibleTooltip title={goal.characterName}>
                                         <div>
                                             <CharacterImage icon={goal.characterIcon} name={goal.characterName} />

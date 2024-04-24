@@ -120,7 +120,41 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
                 label="Characters shards energy"
             />
 
-            <FormControl style={{ marginTop: 20 }}>
+            <FormControlLabel
+                style={{ marginTop: 20 }}
+                control={
+                    <Checkbox
+                        checked={dailyRaidsPreferencesForm.useMostEfficientNodes}
+                        onChange={event => updatePreferences('useMostEfficientNodes', event.target.checked)}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+                label="Use Most efficient nodes (Elite)"
+            />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={dailyRaidsPreferencesForm.useMoreEfficientNodes}
+                        onChange={event => updatePreferences('useMoreEfficientNodes', event.target.checked)}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+                label="Use More efficient nodes (Mirror)"
+            />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={dailyRaidsPreferencesForm.useLeastEfficientNodes}
+                        onChange={event => updatePreferences('useLeastEfficientNodes', event.target.checked)}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                    />
+                }
+                label="Use Least efficient nodes (Normal)"
+            />
+
+            <FormControl>
                 <FormLabel id="radio-buttons-group">Raids order/grouping:</FormLabel>
                 <RadioGroup
                     aria-labelledby="radio-buttons-group"

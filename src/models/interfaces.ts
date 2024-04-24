@@ -398,6 +398,9 @@ export interface IDailyRaidsPreferences {
     dailyEnergy: number;
     shardsEnergy: number;
     farmByPriorityOrder: boolean;
+    useMostEfficientNodes: boolean;
+    useMoreEfficientNodes: boolean;
+    useLeastEfficientNodes: boolean;
 }
 
 export interface ISelectedTeamsOrdering {
@@ -748,6 +751,7 @@ export interface IEstimatedRanks {
     upgrades: IMaterialFull[];
     materials: IMaterialEstimated2[];
     totalEnergy: number;
+    totalUnusedEnergy: number;
     totalRaids: number;
 }
 

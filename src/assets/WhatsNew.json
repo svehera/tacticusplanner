@@ -1,6 +1,34 @@
 ﻿{
-    "currentVersion": "1.5.0",
+    "currentVersion": "1.5.1",
     "releaseNotes": [
+        {
+            "version": "1.5.1",
+            "date": "April 24",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added amount of unused energy to the Raids section of the Daily raids page",
+                    "images": [
+                        {
+                            "path": "en.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added back possibility to edit goals on daily raids page (Kortesch)"
+                },
+                {
+                    "text": "Added back daily raids setting that are used to combined different campaigns types (RotoR, James V)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed incorrect drop for Saim-Hann Mirror 63 (Sort of Purple)"
+                }
+            ]
+        },
         {
             "version": "1.5.0",
             "date": "April 23",

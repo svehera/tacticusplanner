@@ -1,11 +1,13 @@
-﻿import React, { useContext, useEffect, useMemo } from 'react';
+﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 import {
+    ICharacter2,
     ICharacterRankRange,
     IDailyRaidsFilters,
     IEstimatedRanks,
     IMaterialEstimated2,
     IMaterialRaid,
+    IPersonalGoal,
     IRaidLocation,
 } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
@@ -42,6 +44,7 @@ import { RaidsDayInput } from 'src/v2/features/goals/raids-day-input';
 import { RaidsDayView } from 'src/v2/features/goals/raids-day-view';
 import { LocationsFilter } from 'src/v2/features/goals/locations-filter';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { EditGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -60,6 +63,9 @@ export const DailyRaids = () => {
     const [grid1Loaded, setGrid1Loaded] = React.useState<boolean>(false);
     const [grid2Loaded, setGrid2Loaded] = React.useState<boolean>(false);
     const [grid3Loaded, setGrid3Loaded] = React.useState<boolean>(false);
+
+    const [editGoal, setEditGoal] = useState<IPersonalGoal | null>(null);
+    const [editCharacter, setEditCharacter] = useState<ICharacter2>(characters[0]);
 
     const allGoals = useMemo<CharacterRaidGoalSelect[]>(() => {
         return goals
@@ -101,6 +107,7 @@ export const DailyRaids = () => {
             })
             .filter(g => !!g) as CharacterRaidGoalSelect[];
     }, [goals, characters]);
+
     const selectedGoals = useMemo(() => allGoals.filter(x => x.include), [allGoals]);
 
     const upgradeRankGoals: ICharacterRankRange[] = useMemo(
@@ -292,6 +299,16 @@ export const DailyRaids = () => {
         });
     };
 
+    const handleGoalEdit = (goalId: string) => {
+        const goalToEdit = goals.find(x => x.id === goalId);
+        const characterToEdit = characters.find(x => x.name === goalToEdit?.character);
+
+        if (goalToEdit && characterToEdit) {
+            setEditGoal(goalToEdit);
+            setEditCharacter(characterToEdit);
+        }
+    };
+
     const filtersCount =
         +!!dailyRaids.filters.enemiesAlliance.length +
         +!!dailyRaids.filters.alliesAlliance.length +
@@ -355,7 +372,21 @@ export const DailyRaids = () => {
                     </span>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <CharactersRaidsSelect goalsSelect={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
+                    <CharactersRaidsSelect
+                        goalsSelect={allGoals}
+                        onGoalsSelectChange={handleGoalsSelectionChange}
+                        onGoalEdit={handleGoalEdit}
+                    />
+                    {editGoal && (
+                        <EditGoalDialog
+                            isOpen={true}
+                            goal={editGoal}
+                            character={editCharacter}
+                            onClose={() => {
+                                setEditGoal(null);
+                            }}
+                        />
+                    )}
                 </AccordionDetails>
             </Accordion>
 
@@ -433,10 +464,22 @@ export const DailyRaids = () => {
             <Accordion defaultExpanded={true} TransitionProps={{ unmountOnExit: !pagination.completed }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                        <span style={{ fontSize: 20 }}>
-                            Raids ({estimatedRanks.raids.length} Days & {estimatedRanks.totalEnergy} Energy &{' '}
-                            {estimatedRanks.totalRaids} Raids)
-                        </span>
+                        <div className="flex-box gap5" style={{ fontSize: 20 }}>
+                            <span>
+                                Raids (<b>{estimatedRanks.raids.length}</b> Days |
+                            </span>
+                            <span>
+                                <b>{estimatedRanks.totalEnergy}</b> <MiscIcon icon={'energy'} height={15} width={15} />{' '}
+                                |
+                            </span>
+                            <span>
+                                <b>{estimatedRanks.totalUnusedEnergy}</b> Unused{' '}
+                                <MiscIcon icon={'energy'} height={15} width={15} /> |
+                            </span>
+                            <span>
+                                <b>{estimatedRanks.totalRaids}</b> Raids)
+                            </span>
+                        </div>
                         <span className="italic">{formattedDate}</span>
                     </FlexBox>
                 </AccordionSummary>
