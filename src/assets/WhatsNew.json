@@ -1,6 +1,31 @@
 ﻿{
-    "currentVersion": "1.5.1",
+    "currentVersion": "1.5.2",
     "releaseNotes": [
+        {
+            "version": "1.5.2",
+            "date": "April x",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Placeholder",
+                    "images": [
+                        {
+                            "path": "en.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added warning message that duplicated upgrades will be applied both at once"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed incorrect drop for Saim-Hann Mirror 63 (Sort of Purple)"
+                }
+            ]
+        },
         {
             "version": "1.5.1",
             "date": "April 24",

@@ -464,7 +464,7 @@ export const DailyRaids = () => {
             <Accordion defaultExpanded={true} TransitionProps={{ unmountOnExit: !pagination.completed }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                        <div className="flex-box gap5" style={{ fontSize: 20 }}>
+                        <div className="flex-box gap5 wrap" style={{ fontSize: 20 }}>
                             <span>
                                 Raids (<b>{estimatedRanks.raids.length}</b> Days |
                             </span>
