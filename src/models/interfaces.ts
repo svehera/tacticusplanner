@@ -398,6 +398,9 @@ export interface IDailyRaidsPreferences {
     dailyEnergy: number;
     shardsEnergy: number;
     farmByPriorityOrder: boolean;
+    useMostEfficientNodes: boolean;
+    useMoreEfficientNodes: boolean;
+    useLeastEfficientNodes: boolean;
 }
 
 export interface ISelectedTeamsOrdering {

@@ -18,12 +18,12 @@
             "minor": [
                 {
                     "text": "Added back possibility to edit goals on daily raids page (Kortesch)"
+                },
+                {
+                    "text": "Added back daily raids setting that are used to combined different campaigns types (RotoR, James V)"
                 }
             ],
             "bugFixes": [
-                {
-                    "text": "Fixed issue when both Elite and Mirror location doesn't show up in raids list for single when both selected in the filter (James V)"
-                },
                 {
                     "text": "Fixed incorrect drop for Saim-Hann Mirror 63 (Sort of Purple)"
                 }
