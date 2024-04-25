@@ -1,6 +1,22 @@
 ﻿{
-    "currentVersion": "1.5.1",
+    "currentVersion": "1.5.2",
     "releaseNotes": [
+        {
+            "version": "1.5.2",
+            "date": "April 25",
+            "type": "Update",
+            "new": [],
+            "minor": [
+                {
+                    "text": "Added warning message that duplicated upgrades will be applied both at once"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed mobile layout issue, for daily raid UI (Tani)"
+                }
+            ]
+        },
         {
             "version": "1.5.1",
             "date": "April 24",

@@ -121,7 +121,6 @@ export const CharacterDetails = ({
                     <FormControl variant={'outlined'} fullWidth>
                         <InputLabel>Shards</InputLabel>
                         <Input
-                            disableUnderline={true}
                             value={formData.shards}
                             onChange={event =>
                                 handleInputChange(

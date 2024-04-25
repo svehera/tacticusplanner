@@ -3,12 +3,13 @@ import { Checkbox, FormControlLabel, Popover } from '@mui/material';
 import { ICharacter2, IMaterialFull, IMaterialRecipeIngredientFull } from '../models/interfaces';
 import { StaticDataService } from '../services';
 import Button from '@mui/material/Button';
-import { Info } from '@mui/icons-material';
+import { Info, Warning } from '@mui/icons-material';
 import { UpgradeImage } from './upgrade-image';
 import { StoreContext } from '../reducers/store.provider';
 import { MiscIcon } from './misc-icon';
 
 import './character-upgrades.css';
+import { groupBy } from 'lodash';
 
 export const CharacterUpgrades = ({
     upgradesChanges,
@@ -48,6 +49,11 @@ export const CharacterUpgrades = ({
             rankPoint5: false,
         });
     }, [character.rank]);
+
+    const hasDuplicateUpgrades = useMemo(() => {
+        const upgrades = groupBy(possibleUpgrades.map(x => x.id));
+        return Object.values(upgrades).some(x => x.length === 2);
+    }, [possibleUpgrades]);
 
     const healthUpgrades = useMemo(() => possibleUpgrades.filter(x => x.stat === 'Health'), [possibleUpgrades]);
     const damageUpgrades = useMemo(() => possibleUpgrades.filter(x => x.stat === 'Damage'), [possibleUpgrades]);
@@ -121,6 +127,11 @@ export const CharacterUpgrades = ({
     return (
         <div>
             <h4>Applied upgrades</h4>
+            {hasDuplicateUpgrades && (
+                <div className="flex-box gap3">
+                    <Warning color="warning" /> Duplicated upgrades will be applied both at once
+                </div>
+            )}
             <div style={{ display: 'flex' }}>
                 <div className="upgrades-column">
                     <MiscIcon icon={'health'} height={30} />
