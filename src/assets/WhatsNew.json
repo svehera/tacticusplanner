@@ -3,18 +3,9 @@
     "releaseNotes": [
         {
             "version": "1.5.2",
-            "date": "April x",
+            "date": "April 25",
             "type": "Update",
-            "new": [
-                {
-                    "text": "Placeholder",
-                    "images": [
-                        {
-                            "path": "en.png"
-                        }
-                    ]
-                }
-            ],
+            "new": [],
             "minor": [
                 {
                     "text": "Added warning message that duplicated upgrades will be applied both at once"
@@ -22,7 +13,7 @@
             ],
             "bugFixes": [
                 {
-                    "text": "Fixed incorrect drop for Saim-Hann Mirror 63 (Sort of Purple)"
+                    "text": "Fixed mobile layout issue, for daily raid UI (Tani)"
                 }
             ]
         },
