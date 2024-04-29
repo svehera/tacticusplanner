@@ -67,7 +67,7 @@ export const RankLookup = () => {
 
         setMessage('Upgrades:');
         return StaticDataService.getUpgrades({
-            id: character.name,
+            characterName: character.name,
             rankStart,
             rankEnd,
             appliedUpgrades: [],

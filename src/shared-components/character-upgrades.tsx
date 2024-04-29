@@ -42,7 +42,7 @@ export const CharacterUpgrades = ({
 
     const possibleUpgrades = useMemo(() => {
         return StaticDataService.getUpgrades({
-            id: character.name,
+            characterName: character.name,
             rankStart: character.rank,
             rankEnd: character.rank + 1,
             appliedUpgrades: [],
@@ -96,7 +96,7 @@ export const CharacterUpgrades = ({
             upgradesToConsider = newUpgrades;
         } else {
             const previousRankUpgrades = StaticDataService.getUpgrades({
-                id: character.name,
+                characterName: character.name,
                 rankStart: formData.originalRank,
                 rankEnd: character.rank,
                 appliedUpgrades: formData.originalUpgrades,

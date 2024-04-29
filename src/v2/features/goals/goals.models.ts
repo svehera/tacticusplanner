@@ -12,14 +12,18 @@ export interface ICharacterRaidGoalSelectBase {
     notes: string;
 }
 
-export interface ICharacterUpgradeRankGoal extends ICharacterRaidGoalSelectBase {
+export interface ICharacterUpgradeRankGoal extends ICharacterRaidGoalSelectBase, IRankLookup {
     type: PersonalGoalType.UpgradeRank;
 
+    rarity: Rarity;
     level: number;
     xp: number;
+}
+
+export interface IRankLookup {
+    characterName: string;
     rankStart: Rank;
     rankEnd: Rank;
-    rarity: Rarity;
     appliedUpgrades: string[];
     rankPoint5: boolean;
 }

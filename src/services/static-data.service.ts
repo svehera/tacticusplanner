@@ -44,7 +44,7 @@ import { Alliance, Campaign, Faction, Rank, Rarity, RarityString } from '../mode
 import { rarityStringToNumber, rarityToStars } from '../models/constants';
 import { getEnumValues, rankToString } from '../shared-logic/functions';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
-import { ICharacterUpgradeRankGoal } from 'src/v2/features/goals/goals.models';
+import { ICharacterUpgradeRankGoal, IRankLookup } from 'src/v2/features/goals/goals.models';
 
 export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;
@@ -395,7 +395,7 @@ export class StaticDataService {
         };
     }
 
-    public static getUpgrades(...characters: Array<ICharacterUpgradeRankGoal>): IMaterialFull[] {
+    public static getUpgrades(...characters: Array<IRankLookup>): IMaterialFull[] {
         const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
         const result: IMaterialFull[] = [];
         let priority = 0;
