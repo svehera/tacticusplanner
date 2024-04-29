@@ -207,7 +207,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
                             <div style={{ width: '50%' }}>
                                 <PrioritySelect
-                                    defaultValue={goals.length + 1}
+                                    value={form.priority}
                                     maxValue={goals.length + 1}
                                     valueChange={value => setForm(curr => ({ ...curr, priority: value }))}
                                 />

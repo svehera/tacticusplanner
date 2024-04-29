@@ -134,7 +134,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
             <DialogContent>
                 <Box id="edit-goal-form" className="flex-box column gap20 full-width start">
                     <PrioritySelect
-                        defaultValue={form.priority}
+                        value={form.priority}
                         maxValue={goals.length}
                         valueChange={value => setForm(curr => ({ ...curr, priority: value }))}
                     />
@@ -147,7 +147,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                                     rankValues={currentRankValues}
                                     value={form.rankStart}
                                     valueChanges={value =>
-                                        setForm(curr => ({ ...curr, currentRank: value, upgrades: [] }))
+                                        setForm(curr => ({ ...curr, rankStart: value, upgrades: [] }))
                                     }
                                 />
                                 <RankGoalSelect
@@ -155,7 +155,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                                     rank={form.rankEnd}
                                     point5={form.rankPoint5}
                                     onChange={(targetRank, rankPoint5) =>
-                                        setForm(curr => ({ ...curr, targetRank, rankPoint5 }))
+                                        setForm(curr => ({ ...curr, rankEnd: targetRank, rankPoint5 }))
                                     }
                                 />
                             </div>
@@ -172,7 +172,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                             />
 
                             <CharacterUpgrades
-                                character={character}
+                                characterName={character.name}
+                                upgrades={form.appliedUpgrades}
+                                rank={form.rankStart}
                                 upgradesChanges={(upgrades, updateInventory) => {
                                     setForm({
                                         ...form,

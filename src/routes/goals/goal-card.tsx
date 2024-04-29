@@ -27,7 +27,7 @@ interface Props {
 }
 
 export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, daysEstimate }) => {
-    const isGoalCompleted = GoalsService.isGoalCompleted(goal);
+    const isGoalCompleted = GoalsService.isGoalCompleted(goal) || daysEstimate.daysLeft <= 0;
 
     const calendarDate: string = useMemo(() => {
         const nextDate = new Date();

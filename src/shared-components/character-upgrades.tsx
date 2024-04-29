@@ -1,6 +1,6 @@
 ﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Checkbox, FormControlLabel, Popover } from '@mui/material';
-import { ICharacter2, IMaterialFull, IMaterialRecipeIngredientFull } from '../models/interfaces';
+import { IMaterialFull, IMaterialRecipeIngredientFull } from '../models/interfaces';
 import { StaticDataService } from '../services';
 import Button from '@mui/material/Button';
 import { Info, Warning } from '@mui/icons-material';
@@ -10,21 +10,23 @@ import { MiscIcon } from './misc-icon';
 
 import './character-upgrades.css';
 import { groupBy } from 'lodash';
+import { Rank } from 'src/models/enums';
 
-export const CharacterUpgrades = ({
-    upgradesChanges,
-    character,
-}: {
-    character: ICharacter2;
+interface Props {
+    characterName: string;
+    rank: Rank;
+    upgrades: string[];
     upgradesChanges: (upgrades: string[], updateInventory: IMaterialRecipeIngredientFull[]) => void;
-}) => {
+}
+
+export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, rank, characterName }) => {
     const { inventory } = useContext(StoreContext);
 
     const [formData, setFormData] = useState({
-        currentUpgrades: character.upgrades,
+        currentUpgrades: upgrades,
         newUpgrades: [] as string[],
-        originalUpgrades: character.upgrades,
-        originalRank: character.rank,
+        originalUpgrades: upgrades,
+        originalRank: rank,
     });
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
@@ -42,14 +44,14 @@ export const CharacterUpgrades = ({
 
     const possibleUpgrades = useMemo(() => {
         return StaticDataService.getUpgrades({
-            characterName: character.name,
-            rankStart: character.rank,
-            rankEnd: character.rank + 1,
+            characterName: characterName,
+            rankStart: rank,
+            rankEnd: rank + 1,
             appliedUpgrades: [],
             rankPoint5: false,
             upgradesRarity: [],
         });
-    }, [character.rank]);
+    }, [rank]);
 
     const hasDuplicateUpgrades = useMemo(() => {
         const upgrades = groupBy(possibleUpgrades.map(x => x.id));
@@ -71,7 +73,7 @@ export const CharacterUpgrades = ({
 
         if (checked) {
             currentUpgrades = [...formData.currentUpgrades, value];
-            const isNewUpgrade = character.rank !== formData.originalRank || !formData.originalUpgrades.includes(value);
+            const isNewUpgrade = rank !== formData.originalRank || !formData.originalUpgrades.includes(value);
             newUpgrades = isNewUpgrade ? [...formData.newUpgrades, value] : formData.newUpgrades;
         } else {
             currentUpgrades = formData.currentUpgrades.filter(x => x !== value);
@@ -93,13 +95,13 @@ export const CharacterUpgrades = ({
         const newUpgrades = possibleUpgrades.filter(x => formData.newUpgrades.includes(x.id));
         let upgradesToConsider: IMaterialFull[];
 
-        if (character.rank <= formData.originalRank) {
+        if (rank <= formData.originalRank) {
             upgradesToConsider = newUpgrades;
         } else {
             const previousRankUpgrades = StaticDataService.getUpgrades({
-                characterName: character.name,
+                characterName,
                 rankStart: formData.originalRank,
-                rankEnd: character.rank,
+                rankEnd: rank,
                 appliedUpgrades: formData.originalUpgrades,
                 rankPoint5: false,
                 upgradesRarity: [],
@@ -108,7 +110,7 @@ export const CharacterUpgrades = ({
         }
 
         return StaticDataService.groupBaseMaterials(upgradesToConsider);
-    }, [formData.newUpgrades, character.rank]);
+    }, [formData.newUpgrades, rank]);
 
     useEffect(() => {
         if (updateInventory) {
@@ -119,12 +121,12 @@ export const CharacterUpgrades = ({
     }, [formData.currentUpgrades, baseMaterials, updateInventory]);
 
     useEffect(() => {
-        if (character.rank === formData.originalRank) {
+        if (rank === formData.originalRank) {
             setFormData({ ...formData, currentUpgrades: formData.originalUpgrades, newUpgrades: [] });
         } else {
             setFormData({ ...formData, currentUpgrades: [], newUpgrades: [] });
         }
-    }, [character.rank]);
+    }, [rank]);
 
     return (
         <div>
