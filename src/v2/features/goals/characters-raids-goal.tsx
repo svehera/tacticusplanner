@@ -47,9 +47,16 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
             case PersonalGoalType.UpgradeRank: {
                 return (
                     <AccessibleTooltip title={"Upgrade character's rank"}>
-                        <div>
+                        <div className="flex-box gap3">
                             <RankImage rank={goal.rankStart} /> <ArrowForward />
                             <RankImage rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
+                            {!!goal.upgradesRarity.length && (
+                                <div className="flex-box gap3">
+                                    {goal.upgradesRarity.map(x => (
+                                        <RarityImage key={x} rarity={x} />
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </AccessibleTooltip>
                 );

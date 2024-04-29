@@ -47,6 +47,7 @@ export const CharacterUpgrades = ({
             rankEnd: character.rank + 1,
             appliedUpgrades: [],
             rankPoint5: false,
+            upgradesRarity: [],
         });
     }, [character.rank]);
 
@@ -101,6 +102,7 @@ export const CharacterUpgrades = ({
                 rankEnd: character.rank,
                 appliedUpgrades: formData.originalUpgrades,
                 rankPoint5: false,
+                upgradesRarity: [],
             });
             upgradesToConsider = [...previousRankUpgrades, ...newUpgrades];
         }

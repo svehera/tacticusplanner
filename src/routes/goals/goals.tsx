@@ -132,11 +132,12 @@ export const Goals = () => {
             );
 
             return {
-                daysLeft:
-                    firstFarmDay +
-                    estimateOverall.raids.filter(x =>
-                        x.raids.flatMap(raid => raid.characters).includes(goal.characterName)
-                    ).length,
+                // daysLeft:
+                //     firstFarmDay +
+                //     estimateOverall.raids.filter(x =>
+                //         x.raids.flatMap(raid => raid.characters).includes(goal.characterName)
+                //     ).length,
+                daysLeft: estimateSpecific.raids.length,
                 tokens: 0,
                 energy: estimateSpecific.totalEnergy,
             };

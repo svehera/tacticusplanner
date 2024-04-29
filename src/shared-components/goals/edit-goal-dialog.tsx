@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
 import { ICampaignsProgress, ICharacter2, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
+import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityString } from 'src/models/enums';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { enqueueSnackbar } from 'notistack';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
@@ -21,6 +21,7 @@ import { CampaignLocation } from 'src/shared-components/goals/campaign-location'
 import { CampaignsUsageSelect } from 'src/shared-components/goals/campaings-usage-select';
 import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
 import { CharacterImage } from 'src/shared-components/character-image';
+import MultipleSelectCheckmarks from 'src/routes/characters/multiple-select';
 
 interface Props {
     isOpen: boolean;
@@ -158,6 +159,17 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                                     }
                                 />
                             </div>
+                            <MultipleSelectCheckmarks
+                                placeholder="Upgrades rarity"
+                                selectedValues={form.upgradesRarity!.map(x => Rarity[x])}
+                                values={Object.values(RarityString)}
+                                selectionChanges={values => {
+                                    setForm(curr => ({
+                                        ...curr,
+                                        upgradesRarity: values.map(x => +Rarity[x as unknown as number]),
+                                    }));
+                                }}
+                            />
 
                             <CharacterUpgrades
                                 character={character}

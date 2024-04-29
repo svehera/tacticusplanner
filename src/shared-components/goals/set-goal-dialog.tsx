@@ -15,7 +15,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { ICampaignsProgress, ICharacter2, IPersonalGoal } from 'src/models/interfaces';
 import { v4 } from 'uuid';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityStars } from 'src/models/enums';
+import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityStars, RarityString } from 'src/models/enums';
 import InputLabel from '@mui/material/InputLabel';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { enqueueSnackbar } from 'notistack';
@@ -32,6 +32,7 @@ import { CampaignsUsageSelect } from 'src/shared-components/goals/campaings-usag
 import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { SetAscendGoal } from 'src/shared-components/goals/set-ascend-goal';
+import MultipleSelectCheckmarks from 'src/routes/characters/multiple-select';
 
 const getDefaultForm = (priority: number): IPersonalGoal => ({
     id: v4(),
@@ -45,6 +46,7 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
     priority,
     dailyRaids: true,
     rankPoint5: false,
+    upgradesRarity: [],
 });
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
@@ -140,6 +142,25 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         }
     };
 
+    const isDisabled = () => {
+        if (!character) {
+            return true;
+        }
+
+        if (form.type === PersonalGoalType.UpgradeRank) {
+            return character.rank === form.targetRank && !form.rankPoint5;
+        }
+
+        if (form.type === PersonalGoalType.Ascend) {
+            return (
+                (character.rarity === form.targetRarity && character.stars === form.targetStars) ||
+                (!unlockedLocations.length && form.shardsPerToken! <= 0)
+            );
+        }
+
+        return false;
+    };
+
     return (
         <>
             <AccessibleTooltip title={disableNewGoals ? 'You can have only 20 goals at the same time' : ''}>
@@ -202,6 +223,17 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                     setForm(curr => ({ ...curr, targetRank, rankPoint5 }))
                                 }
                             />
+                            <MultipleSelectCheckmarks
+                                placeholder="Upgrades rarity"
+                                selectedValues={form.upgradesRarity!.map(x => Rarity[x])}
+                                values={Object.values(RarityString)}
+                                selectionChanges={values => {
+                                    setForm(curr => ({
+                                        ...curr,
+                                        upgradesRarity: values.map(x => +Rarity[x as unknown as number]),
+                                    }));
+                                }}
+                            />
                         </Conditional>
 
                         {form.type === PersonalGoalType.Ascend && !!character && (
@@ -255,16 +287,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 <DialogActions>
                     <Button onClick={() => handleClose()}>Cancel</Button>
                     <Button
-                        disabled={
-                            !character ||
-                            (form.type === PersonalGoalType.UpgradeRank &&
-                                character.rank === form.targetRank &&
-                                !form.rankPoint5) ||
-                            (form.type === PersonalGoalType.Ascend &&
-                                character.rarity === form.targetRarity &&
-                                character.stars === form.targetStars) ||
-                            (!unlockedLocations.length && form.shardsPerToken! <= 0)
-                        }
+                        disabled={isDisabled()}
                         onClick={() => handleClose({ ...form, character: character?.name ?? '' })}>
                         Set
                     </Button>

@@ -43,6 +43,7 @@ describe('Goal service', () => {
                 xp: characterMock.xp,
                 rarity: characterMock.rarity,
                 type: PersonalGoalType.UpgradeRank,
+                upgradesRarity: [],
             });
         });
 

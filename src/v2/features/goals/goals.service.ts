@@ -7,7 +7,7 @@
 } from 'src/v2/features/goals/goals.models';
 import { ICharacter2, IPersonalGoal } from 'src/models/interfaces';
 import { rarityToStars } from 'src/models/constants';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
+import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity } from 'src/models/enums';
 
 export class GoalsService {
     static convertToTypedGoal(g: IPersonalGoal, relatedCharacter?: ICharacter2): CharacterRaidGoalSelect | null {
@@ -57,6 +57,7 @@ export class GoalsService {
                 rankStart: relatedCharacter.rank,
                 rankEnd: g.targetRank!,
                 rankPoint5: g.rankPoint5!,
+                upgradesRarity: g.upgradesRarity ?? [],
                 appliedUpgrades: relatedCharacter.upgrades,
                 level: relatedCharacter.level,
                 xp: relatedCharacter.xp,
@@ -89,6 +90,7 @@ export class GoalsService {
                     ...base,
                     targetRank: goal.rankEnd,
                     rankPoint5: goal.rankPoint5,
+                    upgradesRarity: goal.upgradesRarity,
                 };
             }
             case PersonalGoalType.Ascend: {

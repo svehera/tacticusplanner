@@ -455,6 +455,7 @@ export interface IPersonalGoal {
     // upgrade rank
     targetRank?: Rank;
     rankPoint5?: boolean;
+    upgradesRarity?: Rarity[];
     // ascend
     targetRarity?: Rarity;
     targetStars?: RarityStars;

@@ -100,6 +100,13 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, daysEstimate }
                             <div className="flex-box gap3">
                                 <RankImage rank={goal.rankStart} /> <ArrowForward />
                                 <RankImage rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
+                                {!!goal.upgradesRarity.length && (
+                                    <div className="flex-box gap3">
+                                        {goal.upgradesRarity.map(x => (
+                                            <RarityImage key={x} rarity={x} />
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <div className="flex-box gap10 wrap">

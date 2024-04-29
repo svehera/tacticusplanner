@@ -26,6 +26,7 @@ export interface IRankLookup {
     rankEnd: Rank;
     appliedUpgrades: string[];
     rankPoint5: boolean;
+    upgradesRarity: Rarity[];
 }
 
 export interface ICharacterUnlockGoal extends ICharacterRaidGoalSelectBase {

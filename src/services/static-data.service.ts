@@ -451,6 +451,9 @@ export class StaticDataService {
                 }
                 return {
                     ...cloneDeep(recipe),
+                    allMaterials: character.upgradesRarity.length
+                        ? recipe.allMaterials?.filter(material => character.upgradesRarity.includes(material.rarity))
+                        : recipe.allMaterials,
                     priority,
                     character: character.characterName,
                 };
