@@ -126,7 +126,6 @@ export const CharacterUpgrades = ({
 
     return (
         <div>
-            <h4>Applied upgrades</h4>
             {hasDuplicateUpgrades && (
                 <div className="flex-box gap3">
                     <Warning color="warning" /> Duplicated upgrades will be applied both at once

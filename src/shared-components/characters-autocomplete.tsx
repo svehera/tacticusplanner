@@ -44,7 +44,7 @@ export const CharactersAutocomplete = ({
         <div style={style}>
             <Autocomplete
                 id="combo-box-demo"
-                style={{ minWidth: 300 }}
+                style={{ minWidth: 200 }}
                 options={characters}
                 value={character}
                 open={openAutocomplete}

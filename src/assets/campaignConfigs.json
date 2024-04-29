@@ -76,5 +76,18 @@
             "legendary": 0.4,
             "shard": 1.04
         }
+    },
+    "Onslaught": {
+        "type": "Onslaught",
+        "energyCost": 0,
+        "dailyBattleCount": 3,
+        "dropRate": {
+            "common": 0,
+            "uncommon": 0,
+            "rare": 0,
+            "epic": 0,
+            "legendary": 0,
+            "shard": 0
+        }
     }
 }

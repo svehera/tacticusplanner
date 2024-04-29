@@ -56,7 +56,7 @@ export const RaidItemInput: React.FC<Props> = ({
                 labelPlacement={'top'}
                 label={
                     <span style={{ fontSize: 12, fontStyle: 'italic' }}>
-                        {acquiredCount}/{requiredCount} Items
+                        {acquiredCount}/{requiredCount}
                     </span>
                 }
             />

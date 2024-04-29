@@ -19,7 +19,7 @@ export const RaritySelect = ({
     valueChanges: (value: number) => void;
 }) => {
     return (
-        <FormControl style={{ width: '50%' }}>
+        <FormControl fullWidth>
             <InputLabel>{label}</InputLabel>
             <Select<Rarity> label={label} value={value} onChange={event => valueChanges(+event.target.value)}>
                 {rarityValues.map(rarity => (

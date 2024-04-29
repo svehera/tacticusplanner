@@ -236,6 +236,7 @@ export const defaultData: IPersonalData2 = {
             slotsCount: [],
         },
         completedLocations: [],
+        completedShardsLocations: [],
         lastRefreshDateUTC: new Date().toUTCString(),
     },
     autoTeamsPreferences: {
@@ -303,7 +304,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.Ascend,
             targetRarity: Rarity.Rare,
             priority: 1,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -312,7 +312,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.Ascend,
             targetRarity: Rarity.Rare,
             priority: 2,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -321,7 +320,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.Ascend,
             targetRarity: Rarity.Rare,
             priority: 3,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -330,7 +328,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.UpgradeRank,
             targetRank: Rank.Silver1,
             priority: 4,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -339,7 +336,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.UpgradeRank,
             targetRank: Rank.Silver1,
             priority: 5,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -348,7 +344,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.UpgradeRank,
             targetRank: Rank.Silver1,
             priority: 6,
-            upgrades: [],
             dailyRaids: true,
         },
     ],
