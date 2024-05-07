@@ -31,7 +31,7 @@ export class GoalsService {
                 shards: relatedCharacter.shards,
                 starsStart: relatedCharacter.stars,
                 starsEnd: g.targetStars ?? rarityToStars[g.targetRarity!],
-                onslaughtShards: g.shardsPerToken ?? 0,
+                onslaughtShards: g.shardsPerToken ?? 1,
                 campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                 ...base,
             };

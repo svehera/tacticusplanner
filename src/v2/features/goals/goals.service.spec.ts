@@ -115,7 +115,7 @@ describe('Goal service', () => {
                 shards: characterMock.shards,
                 starsStart: characterMock.stars,
                 starsEnd: RarityStars.RedThreeStars,
-                onslaughtShards: 0,
+                onslaughtShards: 1,
                 campaignsUsage: CampaignsLocationsUsage.LeastEnergy,
                 type: PersonalGoalType.Ascend,
             });
