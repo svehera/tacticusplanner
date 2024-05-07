@@ -50,7 +50,7 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
 });
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
-    const goalsLimit = 20;
+    const goalsLimit = 30;
     const { characters, goals, campaignsProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 

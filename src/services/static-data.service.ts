@@ -473,6 +473,9 @@ export class StaticDataService {
             const upgradesByCharacter = groupBy(upgrades, 'character');
             for (const character in upgradesByCharacter) {
                 const characterMaterials = this.groupBaseMaterials(upgradesByCharacter[character]);
+                characterMaterials.forEach(m => {
+                    m.characters = [character];
+                });
                 materials.push(...characterMaterials);
             }
             const copiedUpgrades = { ...settings.upgrades };
@@ -790,6 +793,10 @@ export class StaticDataService {
             const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
             return location.nodeNumber > campaignProgress;
         });
+        const unlockedLocations = (material.locationsComposed ?? []).filter(location => {
+            const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
+            return location.nodeNumber <= campaignProgress;
+        });
         const selectedLocations = bestLocations?.length ? bestLocations : material.locationsComposed ?? [];
 
         const ownedCount = ownedUpgrades[material.id] ?? 0;
@@ -857,6 +864,8 @@ export class StaticDataService {
             id: material.id,
             label: material.label,
             locations: selectedLocations,
+            unlockedLocations: unlockedLocations.map(x => x.id),
+            possibleLocations: material.locationsComposed ?? [],
             locationsString: locations,
             missingLocationsString,
             isBlocked: locations === missingLocationsString,

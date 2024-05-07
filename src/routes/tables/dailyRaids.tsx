@@ -187,9 +187,46 @@ export const DailyRaids = () => {
         setHasChanges(false);
     };
 
+    const saveFilterChanges = (filters: IDailyRaidsFilters) => {
+        dispatch.dailyRaids({
+            type: 'UpdateFilters',
+            value: filters,
+        });
+    };
+
+    const handleGoalEdit = (goalId: string) => {
+        const goalToEdit = allGoals.find(x => x.goalId === goalId);
+        const characterToEdit = characters.find(x => x.name === goalToEdit?.characterName);
+
+        if (goalToEdit && characterToEdit) {
+            setEditGoal(goalToEdit);
+            setEditCharacter(characterToEdit);
+        }
+    };
+
+    const filtersCount =
+        +!!dailyRaids.filters.enemiesAlliance.length +
+        +!!dailyRaids.filters.alliesAlliance.length +
+        +!!dailyRaids.filters.alliesFactions.length +
+        +!!dailyRaids.filters.campaignTypes.length +
+        +!!dailyRaids.filters.upgradesRarity.length +
+        +!!dailyRaids.filters.slotsCount?.length +
+        +!!dailyRaids.filters.enemiesFactions.length;
+
+    const estimatedShards: IEstimatedShards = useMemo(() => {
+        return ShardsService.getShardsEstimatedDays(
+            {
+                campaignsProgress: campaignsProgress,
+                preferences: dailyRaidsPreferences,
+                completedLocations: dailyRaids.completedShardsLocations,
+            },
+            ...shardsGoals
+        );
+    }, [shardsGoals, dailyRaidsPreferences]);
+
     const actualEnergy = useMemo(() => {
-        return dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy;
-    }, [dailyRaidsPreferences.dailyEnergy, dailyRaidsPreferences.shardsEnergy]);
+        return dailyRaidsPreferences.dailyEnergy - estimatedShards.energyPerDay;
+    }, [dailyRaidsPreferences.dailyEnergy, estimatedShards.energyPerDay]);
 
     const estimatedRanks: IEstimatedRanks = useMemo(() => {
         return StaticDataService.getRankUpgradeEstimatedDays(
@@ -244,44 +281,6 @@ export const DailyRaids = () => {
         return formatDateWithOrdinal(nextDate);
     }, [estimatedRanks.raids.length]);
 
-    const saveFilterChanges = (filters: IDailyRaidsFilters) => {
-        dispatch.dailyRaids({
-            type: 'UpdateFilters',
-            value: filters,
-        });
-    };
-
-    const handleGoalEdit = (goalId: string) => {
-        const goalToEdit = allGoals.find(x => x.goalId === goalId);
-        const characterToEdit = characters.find(x => x.name === goalToEdit?.characterName);
-
-        if (goalToEdit && characterToEdit) {
-            setEditGoal(goalToEdit);
-            setEditCharacter(characterToEdit);
-        }
-    };
-
-    const filtersCount =
-        +!!dailyRaids.filters.enemiesAlliance.length +
-        +!!dailyRaids.filters.alliesAlliance.length +
-        +!!dailyRaids.filters.alliesFactions.length +
-        +!!dailyRaids.filters.campaignTypes.length +
-        +!!dailyRaids.filters.upgradesRarity.length +
-        +!!dailyRaids.filters.slotsCount?.length +
-        +!!dailyRaids.filters.enemiesFactions.length;
-
-    const estimatedShards: IEstimatedShards = useMemo(() => {
-        return ShardsService.getShardsEstimatedDays(
-            {
-                dailyEnergy: actualEnergy,
-                campaignsProgress: campaignsProgress,
-                preferences: dailyRaidsPreferences,
-                completedLocations: dailyRaids.completedShardsLocations,
-            },
-            ...shardsGoals
-        );
-    }, [shardsGoals, dailyRaidsPreferences]);
-
     return (
         <div>
             <div className="flex-box gap10 p10">
@@ -293,7 +292,8 @@ export const DailyRaids = () => {
                     Daily Raids <SettingsIcon />
                 </Button>
                 <span>
-                    Daily <MiscIcon icon={'energy'} height={15} width={15} /> {actualEnergy}
+                    Daily <MiscIcon icon={'energy'} height={15} width={15} /> {actualEnergy} (
+                    {dailyRaidsPreferences.dailyEnergy} - {estimatedShards.energyPerDay})
                 </span>
             </div>
             <Popover
@@ -452,7 +452,7 @@ export const DailyRaids = () => {
                         <div className="flex-box gap10 wrap start">
                             {estimatedShards.shardsRaids.map(shardsRaid => (
                                 <ShardsRaidsDayInput
-                                    key={shardsRaid.id}
+                                    key={shardsRaid.characterId}
                                     shardRaids={shardsRaid}
                                     handleAdd={handleShardsAdd}
                                 />

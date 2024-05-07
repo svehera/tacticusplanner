@@ -266,10 +266,10 @@ export const defaultData: IPersonalData2 = {
         showCharacterLevel: true,
         showCharacterRarity: true,
         inventoryShowAlphabet: true,
+        goalsTableView: false,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,
-        shardsEnergy: 0,
         farmByPriorityOrder: false,
         useLeastEfficientNodes: false,
         useMoreEfficientNodes: false,

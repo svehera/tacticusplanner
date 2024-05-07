@@ -9,7 +9,7 @@ import { charsUnlockShards, rankToLevel, rarityToStars } from '../../models/cons
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
+import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
 import { GoalsService } from 'src/v2/features/goals/goals.service';
 import { CharacterImage } from 'src/shared-components/character-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
@@ -19,22 +19,26 @@ import { ShardsService } from 'src/v2/features/goals/shards.service';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { isMobile } from 'react-device-detect';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import LinkIcon from '@mui/icons-material/Link';
 
 interface Props {
     goal: CharacterRaidGoalSelect;
-    daysEstimate: { daysLeft: number; tokens: number; energy: number };
+    goalEstimate: IGoalEstimate;
     menuItemSelect?: (item: 'edit' | 'delete') => void;
 }
 
-export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, daysEstimate }) => {
-    const isGoalCompleted = GoalsService.isGoalCompleted(goal) || daysEstimate.daysLeft <= 0;
+export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate }) => {
+    const isGoalCompleted = GoalsService.isGoalCompleted(goal) || goalEstimate.daysLeft <= 0;
 
     const calendarDate: string = useMemo(() => {
         const nextDate = new Date();
-        nextDate.setDate(nextDate.getDate() + daysEstimate.daysLeft - 1);
+        nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
 
         return formatDateWithOrdinal(nextDate);
-    }, [daysEstimate.daysLeft]);
+    }, [goalEstimate.daysLeft]);
 
     const getGoalInfo = (goal: CharacterRaidGoalSelect) => {
         switch (goal.type) {
@@ -71,20 +75,20 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, daysEstimate }
                             Shards
                         </div>
                         <div className="flex-box gap10 wrap">
-                            <AccessibleTooltip title={`${daysEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
+                            <AccessibleTooltip title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
                                 <div className="flex-box gap3">
-                                    <CalendarMonthIcon /> {daysEstimate.daysLeft}
+                                    <CalendarMonthIcon /> {goalEstimate.daysLeft}
                                 </div>
                             </AccessibleTooltip>
-                            <AccessibleTooltip title={`${daysEstimate.energy} energy`}>
+                            <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
                                 <div className="flex-box gap3">
-                                    <MiscIcon icon={'energy'} height={18} width={15} /> {daysEstimate.energy}
+                                    <MiscIcon icon={'energy'} height={18} width={15} /> {goalEstimate.energyTotal}
                                 </div>
                             </AccessibleTooltip>
 
-                            <AccessibleTooltip title={`${daysEstimate.tokens} Onslaught tokens`}>
+                            <AccessibleTooltip title={`${goalEstimate.oTokensTotal} Onslaught tokens`}>
                                 <div className="flex-box gap3">
-                                    <CampaignImage campaign={'Onslaught'} size={18} /> {daysEstimate.tokens}
+                                    <CampaignImage campaign={'Onslaught'} size={18} /> {goalEstimate.oTokensTotal}
                                 </div>
                             </AccessibleTooltip>
                         </div>
@@ -94,6 +98,11 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, daysEstimate }
             case PersonalGoalType.UpgradeRank: {
                 const targetLevel = rankToLevel[((goal.rankEnd ?? 1) - 1) as Rank];
                 const xpEstimate = CharactersXpService.getLegendaryTomesCount(goal.level, goal.xp, targetLevel);
+                const linkBase = isMobile ? '/mobile/learn/rankLookup' : '/learn/rankLookup';
+                const params = `?character=${goal.characterName}&rankStart=${Rank[goal.rankStart]}&rankEnd=${
+                    Rank[goal.rankEnd]
+                }&rankPoint5=${goal.rankPoint5}`;
+
                 return (
                     <div>
                         <div className="flex-box between">
@@ -110,14 +119,14 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, daysEstimate }
                             </div>
                         </div>
                         <div className="flex-box gap10 wrap">
-                            <AccessibleTooltip title={`${daysEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
+                            <AccessibleTooltip title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
                                 <div className="flex-box gap3">
-                                    <CalendarMonthIcon /> {daysEstimate.daysLeft}
+                                    <CalendarMonthIcon /> {goalEstimate.daysLeft}
                                 </div>
                             </AccessibleTooltip>
-                            <AccessibleTooltip title={`${daysEstimate.energy} energy`}>
+                            <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
                                 <div className="flex-box gap3">
-                                    <MiscIcon icon={'energy'} height={18} width={15} /> {daysEstimate.energy}
+                                    <MiscIcon icon={'energy'} height={18} width={15} /> {goalEstimate.energyTotal}
                                 </div>
                             </AccessibleTooltip>
                         </div>
@@ -140,6 +149,14 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, daysEstimate }
                                 </AccessibleTooltip>
                             </div>
                         )}
+                        <Button
+                            size="small"
+                            variant={'outlined'}
+                            component={Link}
+                            to={linkBase + params}
+                            target="_blank">
+                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Upgrades</span>
+                        </Button>
                     </div>
                 );
             }
@@ -157,14 +174,14 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, daysEstimate }
                             </div>
                         </div>
                         <div className="flex-box gap10 wrap">
-                            <AccessibleTooltip title={`${daysEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
+                            <AccessibleTooltip title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
                                 <div className="flex-box gap3">
-                                    <CalendarMonthIcon /> {daysEstimate.daysLeft}
+                                    <CalendarMonthIcon /> {goalEstimate.daysLeft}
                                 </div>
                             </AccessibleTooltip>
-                            <AccessibleTooltip title={`${daysEstimate.energy} energy`}>
+                            <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
                                 <div className="flex-box gap3">
-                                    <MiscIcon icon={'energy'} height={18} width={15} /> {daysEstimate.energy}
+                                    <MiscIcon icon={'energy'} height={18} width={15} /> {goalEstimate.energyTotal}
                                 </div>
                             </AccessibleTooltip>
                         </div>
@@ -184,7 +201,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, daysEstimate }
             <CardHeader
                 action={
                     menuItemSelect ? (
-                        <React.Fragment>
+                        <>
                             {!isGoalCompleted ? (
                                 <IconButton onClick={() => menuItemSelect('edit')}>
                                     <Edit fontSize="small" />
@@ -193,7 +210,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, daysEstimate }
                             <IconButton onClick={() => menuItemSelect('delete')}>
                                 <DeleteForever fontSize="small" />
                             </IconButton>
-                        </React.Fragment>
+                        </>
                     ) : undefined
                 }
                 title={
@@ -203,7 +220,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, daysEstimate }
                         <span style={{ fontSize: '1.2rem' }}>{goal.characterName}</span>
                     </div>
                 }
-                subheader={PersonalGoalType[goal.type]}
+                subheader={calendarDate}
             />
             <CardContent>
                 {getGoalInfo(goal)}

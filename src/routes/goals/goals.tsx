@@ -17,11 +17,17 @@ import {
     ICharacterAscendGoal,
     ICharacterUnlockGoal,
     ICharacterUpgradeRankGoal,
+    IGoalEstimate,
 } from 'src/v2/features/goals/goals.models';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
+import { FormControlLabel, Switch } from '@mui/material';
+import GridViewIcon from '@mui/icons-material/GridView';
+import TableRowsIcon from '@mui/icons-material/TableRows';
+import { GoalsTable } from 'src/routes/goals/goals-table';
+import { MiscIcon } from 'src/shared-components/misc-icon';
 
 export const Goals = () => {
-    const { goals, characters, campaignsProgress, dailyRaidsPreferences, inventory, dailyRaids } =
+    const { goals, characters, campaignsProgress, dailyRaidsPreferences, inventory, dailyRaids, viewPreferences } =
         useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
@@ -30,13 +36,12 @@ export const Goals = () => {
 
     const typedGoals = useMemo<CharacterRaidGoalSelect[]>(() => {
         return goals
+            .filter(g =>
+                [PersonalGoalType.UpgradeRank, PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(g.type)
+            )
             .map(g => {
                 const relatedCharacter = characters.find(x => x.name === g.character);
-                if (
-                    ![PersonalGoalType.UpgradeRank, PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(g.type)
-                ) {
-                    return null;
-                }
+
                 return GoalsService.convertToTypedGoal(g, relatedCharacter);
             })
             .filter(g => !!g) as CharacterRaidGoalSelect[];
@@ -46,27 +51,15 @@ export const Goals = () => {
         g => g.type === PersonalGoalType.UpgradeRank
     ) as ICharacterUpgradeRankGoal[];
 
-    const shardsGoals = typedGoals.filter(g =>
-        [PersonalGoalType.Unlock, PersonalGoalType.Ascend].includes(g.type)
-    ) as Array<ICharacterAscendGoal | ICharacterUnlockGoal>;
+    const ascendGoals = typedGoals.filter(g => g.type === PersonalGoalType.Ascend) as ICharacterAscendGoal[];
 
-    const estimatedUpgradesTotal = useMemo(() => {
-        return StaticDataService.getRankUpgradeEstimatedDays(
-            {
-                dailyEnergy: dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy,
-                campaignsProgress: campaignsProgress,
-                preferences: dailyRaidsPreferences,
-                upgrades: inventory.upgrades,
-                completedLocations: dailyRaids.completedLocations ?? [],
-            },
-            ...upgradesGoals
-        );
-    }, [typedGoals]);
+    const unlockGoals = typedGoals.filter(g => g.type === PersonalGoalType.Unlock) as ICharacterUnlockGoal[];
+
+    const shardsGoals = [...ascendGoals, ...unlockGoals] as Array<ICharacterAscendGoal | ICharacterUnlockGoal>;
 
     const estimatedShardsTotal = useMemo(() => {
         return ShardsService.getShardsEstimatedDays(
             {
-                dailyEnergy: dailyRaidsPreferences.dailyEnergy,
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
                 completedLocations: dailyRaids.completedShardsLocations ?? [],
@@ -75,84 +68,121 @@ export const Goals = () => {
         );
     }, [typedGoals]);
 
+    const estimatedUpgradesTotal = useMemo(() => {
+        return StaticDataService.getRankUpgradeEstimatedDays(
+            {
+                dailyEnergy: dailyRaidsPreferences.dailyEnergy - estimatedShardsTotal.energyPerDay,
+                campaignsProgress: campaignsProgress,
+                preferences: { ...dailyRaidsPreferences, farmByPriorityOrder: true },
+                upgrades: inventory.upgrades,
+                completedLocations: dailyRaids.completedLocations ?? [],
+            },
+            ...upgradesGoals
+        );
+    }, [typedGoals, estimatedShardsTotal.energyPerDay]);
+
     const removeGoal = (goalId: string): void => {
         dispatch.goals({ type: 'Delete', goalId });
     };
 
-    const handleMenuItemSelect = (goal: CharacterRaidGoalSelect, item: 'edit' | 'delete') => {
+    const updateView = (tableView: boolean): void => {
+        dispatch.viewPreferences({ type: 'Update', setting: 'goalsTableView', value: tableView });
+    };
+
+    const handleMenuItemSelect = (goalId: string, item: 'edit' | 'delete') => {
         if (item === 'delete') {
             if (confirm('Are you sure? The goal will be permanently deleted!')) {
-                removeGoal(goal.goalId);
+                removeGoal(goalId);
             }
         }
 
         if (item === 'edit') {
-            const relatedCharacter = characters.find(x => x.name === goal.characterName);
-            if (relatedCharacter) {
+            const goal = typedGoals.find(x => x.goalId === goalId);
+            const relatedCharacter = characters.find(x => x.name === goal?.characterName);
+            if (relatedCharacter && goal) {
                 setEditCharacter(relatedCharacter);
                 setEditGoal(goal);
             }
         }
     };
 
-    const getDaysEstimate = (goal: CharacterRaidGoalSelect): { daysLeft: number; tokens: number; energy: number } => {
-        if ([PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(goal.type)) {
-            const estimate = estimatedShardsTotal.materials.find(x => x.id === goal.characterName);
-            return {
-                daysLeft: estimate?.daysTotal ?? 0,
-                tokens: estimate?.onslaughtTokensTotal ?? 0,
-                energy: estimate?.energyTotal ?? 0,
-            };
-        }
+    const goalsEstimate = useMemo<IGoalEstimate[]>(() => {
+        const result: IGoalEstimate[] = [];
 
-        if (goal.type === PersonalGoalType.UpgradeRank) {
-            const estimateOverall = StaticDataService.getRankUpgradeEstimatedDays(
+        if (shardsGoals.length) {
+            const shardsEstimate = ShardsService.getShardsEstimatedDays(
                 {
-                    dailyEnergy: dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy,
                     campaignsProgress: campaignsProgress,
                     preferences: dailyRaidsPreferences,
+                    completedLocations: dailyRaids.completedShardsLocations ?? [],
+                },
+                ...shardsGoals
+            );
+
+            const goalsEstimate = shardsEstimate.materials.map(
+                x =>
+                    ({
+                        goalId: x.goalId,
+                        energyTotal: x.energyTotal,
+                        daysTotal: x.daysTotal,
+                        oTokensTotal: x.onslaughtTokensTotal,
+                        daysLeft: x.daysTotal,
+                    }) as IGoalEstimate
+            );
+
+            result.push(...goalsEstimate);
+        }
+
+        if (upgradesGoals.length) {
+            const overallEstimateByPriority = StaticDataService.getRankUpgradeEstimatedDays(
+                {
+                    dailyEnergy: dailyRaidsPreferences.dailyEnergy - estimatedShardsTotal.energyPerDay,
+                    campaignsProgress: campaignsProgress,
+                    preferences: { ...dailyRaidsPreferences, farmByPriorityOrder: true },
                     upgrades: inventory.upgrades,
                     completedLocations: dailyRaids.completedLocations ?? [],
                 },
-                ...upgradesGoals.filter(x => x.priority <= goal.priority)
-            );
-            const estimateSpecific = StaticDataService.getRankUpgradeEstimatedDays(
-                {
-                    dailyEnergy: dailyRaidsPreferences.dailyEnergy - dailyRaidsPreferences.shardsEnergy,
-                    campaignsProgress: campaignsProgress,
-                    preferences: dailyRaidsPreferences,
-                    upgrades: inventory.upgrades,
-                    completedLocations: dailyRaids.completedLocations ?? [],
-                },
-                goal
+                ...upgradesGoals
             );
 
-            const firstFarmDay = estimateOverall.raids.findIndex(x =>
-                x.raids.flatMap(raid => raid.characters).includes(goal.characterName)
-            );
+            const goalsEstimate = upgradesGoals.map(goal => {
+                const upgradesEstimate = StaticDataService.getRankUpgradeEstimatedDays(
+                    {
+                        dailyEnergy: dailyRaidsPreferences.dailyEnergy - estimatedShardsTotal.energyPerDay,
+                        campaignsProgress: campaignsProgress,
+                        preferences: dailyRaidsPreferences,
+                        upgrades: inventory.upgrades,
+                        completedLocations: dailyRaids.completedLocations ?? [],
+                    },
+                    goal
+                );
 
-            return {
-                // daysLeft:
-                //     firstFarmDay +
-                //     estimateOverall.raids.filter(x =>
-                //         x.raids.flatMap(raid => raid.characters).includes(goal.characterName)
-                //     ).length,
-                daysLeft: estimateSpecific.raids.length,
-                tokens: 0,
-                energy: estimateSpecific.totalEnergy,
-            };
+                const firstFarmDay = overallEstimateByPriority.raids.findIndex(x =>
+                    x.raids.flatMap(raid => raid.characters).includes(goal.characterName)
+                );
+
+                const daysTotal = overallEstimateByPriority.raids.filter(x =>
+                    x.raids.flatMap(raid => raid.characters).includes(goal.characterName)
+                ).length;
+
+                return {
+                    goalId: goal.goalId,
+                    energyTotal: upgradesEstimate.totalEnergy,
+                    daysTotal: daysTotal,
+                    daysLeft: firstFarmDay + daysTotal,
+                    oTokensTotal: 0,
+                } as IGoalEstimate;
+            });
+
+            result.push(...goalsEstimate);
         }
 
-        return {
-            daysLeft: 0,
-            tokens: 0,
-            energy: 0,
-        };
-    };
+        return result;
+    }, [shardsGoals, upgradesGoals]);
 
     return (
         <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: 10 }}>
+            <div className="flex-box gap10 wrap">
                 <Button
                     variant={'contained'}
                     component={Link}
@@ -160,32 +190,127 @@ export const Goals = () => {
                     <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Raids</span>
                 </Button>
                 <SetGoalDialog key={goals.length} />
-                {editGoal ? (
-                    <EditGoalDialog
-                        isOpen={true}
-                        goal={editGoal}
-                        character={editCharacter}
-                        onClose={() => {
-                            setEditGoal(null);
-                        }}
-                    />
-                ) : undefined}
                 <span style={{ fontSize: 20 }}>
-                    {goals.length}/{20}
+                    {goals.length}/{30}
                 </span>
-                <span style={{ fontSize: 20 }}>Total Days: {estimatedUpgradesTotal.raids.length}</span>
+                <FormControlLabel
+                    control={
+                        <Switch
+                            value={viewPreferences.goalsTableView}
+                            onChange={event => updateView(event.target.checked)}
+                        />
+                    }
+                    label={
+                        <div className="flex-box gap5">
+                            {viewPreferences.goalsTableView ? (
+                                <TableRowsIcon color="primary" />
+                            ) : (
+                                <GridViewIcon color="primary" />
+                            )}{' '}
+                            view
+                        </div>
+                    }
+                />
             </div>
 
-            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }} className={'goals'}>
-                {typedGoals.map(goal => (
-                    <GoalCard
-                        key={goal.goalId}
-                        goal={goal}
-                        daysEstimate={getDaysEstimate(goal)}
-                        menuItemSelect={item => handleMenuItemSelect(goal, item)}
-                    />
-                ))}
-            </div>
+            {!!upgradesGoals.length && (
+                <div>
+                    <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
+                        <span>
+                            Upgrade rank (<b>{estimatedUpgradesTotal.raids.length}</b> Days |
+                        </span>
+                        <span>
+                            <b>{estimatedUpgradesTotal.totalEnergy}</b>{' '}
+                            <MiscIcon icon={'energy'} height={15} width={15} /> |
+                        </span>
+                        <span>
+                            <b>{estimatedUpgradesTotal.totalUnusedEnergy}</b> Unused{' '}
+                            <MiscIcon icon={'energy'} height={15} width={15} /> |
+                        </span>
+                        <span>
+                            <b>{estimatedUpgradesTotal.totalRaids}</b> Raids)
+                        </span>
+                    </div>
+                    {!viewPreferences.goalsTableView && (
+                        <div className="flex-box gap10 wrap goals" style={{ alignItems: 'unset' }}>
+                            {upgradesGoals.map(goal => (
+                                <GoalCard
+                                    key={goal.goalId}
+                                    goal={goal}
+                                    goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)!}
+                                    menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                />
+                            ))}
+                        </div>
+                    )}
+
+                    {viewPreferences.goalsTableView && (
+                        <GoalsTable
+                            rows={upgradesGoals}
+                            estimate={goalsEstimate}
+                            menuItemSelect={handleMenuItemSelect}
+                        />
+                    )}
+
+                    {!!editGoal && !!editCharacter && (
+                        <EditGoalDialog
+                            isOpen={true}
+                            goal={editGoal}
+                            character={editCharacter}
+                            onClose={() => {
+                                setEditGoal(null);
+                            }}
+                        />
+                    )}
+                </div>
+            )}
+
+            {!!shardsGoals.length && (
+                <div>
+                    <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
+                        <span>
+                            Shards Raids (<b>{estimatedShardsTotal.daysTotal}</b> Days |
+                        </span>
+                        <span>
+                            <b>{estimatedShardsTotal.energyTotal}</b>{' '}
+                            <MiscIcon icon={'energy'} height={15} width={15} /> |
+                        </span>
+                        <span>
+                            <b>{estimatedShardsTotal.raidsTotal}</b> Raids |
+                        </span>
+                        <span>
+                            <b>{estimatedShardsTotal.onslaughtTokens}</b> Tokens)
+                        </span>
+                    </div>
+                    {!viewPreferences.goalsTableView && (
+                        <div className="flex-box gap10 wrap goals" style={{ alignItems: 'unset' }}>
+                            {shardsGoals.map(goal => (
+                                <GoalCard
+                                    key={goal.goalId}
+                                    goal={goal}
+                                    goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)!}
+                                    menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                />
+                            ))}
+                        </div>
+                    )}
+
+                    {viewPreferences.goalsTableView && (
+                        <GoalsTable rows={shardsGoals} estimate={goalsEstimate} menuItemSelect={handleMenuItemSelect} />
+                    )}
+
+                    {!!editGoal && !!editCharacter && (
+                        <EditGoalDialog
+                            isOpen={true}
+                            goal={editGoal}
+                            character={editCharacter}
+                            onClose={() => {
+                                setEditGoal(null);
+                            }}
+                        />
+                    )}
+                </div>
+            )}
         </div>
     );
 };

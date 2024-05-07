@@ -192,6 +192,10 @@ code {
         justify-content: space-between;
     }
 
+    &.center {
+        justify-content: center;
+    }
+
     &.full-width {
         width: 100%;
     }

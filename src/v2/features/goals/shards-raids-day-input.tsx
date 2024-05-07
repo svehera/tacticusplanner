@@ -22,7 +22,7 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids, handleAdd }) 
     }, [shardRaids.daysTotal]);
 
     const handleAddCount = (value: number, location: ILocationRaid) => {
-        handleAdd(shardRaids.id, value, location.id);
+        handleAdd(shardRaids.characterId, value, location.id);
         shardRaids.ownedCount += value;
         location.isCompleted = true;
     };

@@ -386,6 +386,7 @@ export interface IViewPreferences {
     showCharacterLevel: boolean;
     showCharacterRarity: boolean;
     inventoryShowAlphabet: boolean;
+    goalsTableView: boolean;
 }
 
 export interface IAutoTeamsPreferences {
@@ -398,7 +399,6 @@ export interface IAutoTeamsPreferences {
 
 export interface IDailyRaidsPreferences {
     dailyEnergy: number;
-    shardsEnergy: number;
     farmByPriorityOrder: boolean;
     useMostEfficientNodes: boolean;
     useMoreEfficientNodes: boolean;
@@ -703,6 +703,8 @@ export interface IMaterialEstimated2 {
     totalEnergy: number;
     dailyEnergy: number;
     locations: ICampaignBattleComposed[];
+    possibleLocations: ICampaignBattleComposed[];
+    unlockedLocations: string[];
     locationsString: string;
     missingLocationsString: string;
     daysOfBattles: number;

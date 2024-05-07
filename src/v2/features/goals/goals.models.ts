@@ -29,6 +29,15 @@ export interface IRankLookup {
     upgradesRarity: Rarity[];
 }
 
+export interface IGoalEstimate {
+    goalId: string;
+    daysTotal: number;
+    daysLeft: number;
+    energyTotal: number;
+    oTokensTotal: number;
+    xpBooksTotal: number;
+}
+
 export interface ICharacterUnlockGoal extends ICharacterRaidGoalSelectBase {
     type: PersonalGoalType.Unlock;
 
@@ -53,7 +62,6 @@ export interface ICharacterAscendGoal extends ICharacterRaidGoalSelectBase {
 export interface IEstimatedAscensionSettings {
     completedLocations: string[];
     campaignsProgress: ICampaignsProgress;
-    dailyEnergy: number;
     preferences?: IDailyRaidsPreferences;
 }
 
@@ -64,10 +72,12 @@ export interface IEstimatedShards {
     raidsTotal: number;
     onslaughtTokens: number;
     daysTotal: number;
+    energyPerDay: number;
 }
 
 export interface IMaterial {
-    id: string;
+    goalId: string;
+    characterId: string;
     label: string;
     ownedCount: number;
     requiredCount: number;
@@ -91,6 +101,7 @@ export interface IMaterialEstimate extends IMaterial {
     daysTotal: number;
     onslaughtTokensTotal: number;
     isBlocked: boolean;
+    energyPerDay: number;
 }
 
 export interface ILocationRaid {

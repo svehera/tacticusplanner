@@ -25,6 +25,7 @@ export class ShardsService {
         const shardsRaids = this.getTodayRaids(materials, settings.completedLocations);
 
         const energyTotal = sum(materials.map(material => material.energyTotal));
+        const energyPerDay = sum(materials.map(material => material.energyPerDay));
         const onslaughtTokens = sum(materials.map(material => material.onslaughtTokensTotal));
         const raidsTotal = sum(materials.map(material => material.raidsTotal));
         const daysTotal = Math.max(...materials.map(material => material.daysTotal), Math.ceil(onslaughtTokens / 1.5));
@@ -36,6 +37,7 @@ export class ShardsService {
             energyTotal,
             raidsTotal,
             onslaughtTokens,
+            energyPerDay,
         };
     }
 
@@ -48,7 +50,9 @@ export class ShardsService {
             .filter(x => x.ownedCount < x.requiredCount);
         const result: IMaterialEstimate[] = [];
 
-        for (const material of materials) {
+        for (let i = 0; i < materials.length; i++) {
+            const material = materials[i];
+            const previousShardsTokens = result[i - 1]?.onslaughtTokensTotal ?? 0;
             const unlockedLocations = material.possibleLocations.filter(location => {
                 const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
                 return location.nodeNumber <= campaignProgress;
@@ -60,6 +64,8 @@ export class ShardsService {
                     : material.campaignsUsage === CampaignsLocationsUsage.BestTime
                     ? unlockedLocations
                     : [];
+
+            const energyPerDay = sum(raidsLocations.map(x => x.energyPerDay));
 
             if (material.onslaughtShards > 0) {
                 raidsLocations.push(
@@ -80,6 +86,10 @@ export class ShardsService {
                 let leftToCollect = shardsLeft - shardsCollected;
                 for (const location of raidsLocations) {
                     if (location.campaignType === 'Onslaught') {
+                        if (daysTotal <= previousShardsTokens / 1.5) {
+                            continue;
+                        }
+
                         onslaughtTokens += location.dailyBattleCount;
                         leftToCollect -= location.itemsPerDay;
                         shardsCollected += location.itemsPerDay;
@@ -98,7 +108,6 @@ export class ShardsService {
                         shardsCollected += leftToCollect;
                         energyTotal += battlesLeftToFarm * location.energyCost;
                         raidsTotal += battlesLeftToFarm;
-                        break;
                     }
                 }
                 daysTotal++;
@@ -121,6 +130,7 @@ export class ShardsService {
                 raidsTotal: Math.ceil(raidsTotal),
                 onslaughtTokensTotal: Math.ceil(onslaughtTokens),
                 isBlocked,
+                energyPerDay,
             });
         }
         return result;
@@ -138,7 +148,7 @@ export class ShardsService {
             dailyBattleCount: onslaughtTokensPerDay / onslaughtMaxTokens,
             rarity: 'Shard',
             rarityEnum: Rarity.Legendary,
-            reward: material.id,
+            reward: material.characterId,
             nodeNumber,
             campaign: Campaign.Onslaught,
             campaignType: CampaignType.Onslaught,
@@ -160,7 +170,8 @@ export class ShardsService {
         const possibleLocations = StaticDataService.getItemLocations(goal.characterName);
 
         return {
-            id: goal.characterName,
+            goalId: goal.goalId,
+            characterId: goal.characterName,
             label: goal.characterName,
             ownedCount: goal.shards,
             requiredCount: targetShards,
