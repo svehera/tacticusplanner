@@ -269,7 +269,7 @@ export const Goals = () => {
                 <div>
                     <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
                         <span>
-                            Shards Raids (<b>{estimatedShardsTotal.daysTotal}</b> Days |
+                            Ascend/Promote/Unlock (<b>{estimatedShardsTotal.daysTotal}</b> Days |
                         </span>
                         <span>
                             <b>{estimatedShardsTotal.energyTotal}</b>{' '}
