@@ -1,20 +1,5 @@
-﻿import { ICharacter2 } from 'src/models/interfaces';
-
-import xpData from 'src/v2/data/xp.json';
-
-type IXpLevel = {
-    level: number;
-    xpToNextLevel: number;
-    totalXp: number;
-};
-
-interface IXpEstimate {
-    legendaryBooks: number;
-    gold: number;
-    currentLevel: number;
-    targetLevel: number;
-    xpLeft: number;
-}
+﻿import xpData from 'src/v2/data/xp.json';
+import { IXpEstimate, IXpLevel } from 'src/v2/features/characters/characters.models';
 
 export class CharactersXpService {
     static readonly legendaryTomeXp = 12500 as const;

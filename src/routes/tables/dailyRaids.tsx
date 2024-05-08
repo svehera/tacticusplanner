@@ -292,8 +292,10 @@ export const DailyRaids = () => {
                     Daily Raids <SettingsIcon />
                 </Button>
                 <span>
-                    Daily <MiscIcon icon={'energy'} height={15} width={15} /> {actualEnergy} (
-                    {dailyRaidsPreferences.dailyEnergy} - {estimatedShards.energyPerDay})
+                    Daily <MiscIcon icon={'energy'} height={15} width={15} /> {actualEnergy}
+                    {' = '}
+                    {estimatedShards.energyPerDay > 0 &&
+                        `${dailyRaidsPreferences.dailyEnergy} - ${estimatedShards.energyPerDay}`}
                 </span>
             </div>
             <Popover
@@ -495,7 +497,6 @@ export const DailyRaids = () => {
                                         key={index}
                                         day={day}
                                         completedLocations={completedLocations}
-                                        inventory={inventory.upgrades}
                                         handleAdd={handleAdd}
                                     />
                                 ) : (

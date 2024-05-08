@@ -1,4 +1,4 @@
-﻿import React, { useContext } from 'react';
+﻿import React, { useContext, useEffect } from 'react';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { GuildMemberInput } from 'src/v2/features/guild/guild-member-input';
@@ -29,6 +29,10 @@ export const Guild: React.FC = () => {
     const [editMode, setEditMode] = React.useState(false);
     const [editedMembers, setEditedMembers] = React.useState(guild.members);
 
+    useEffect(() => {
+        setEditedMembers(guild.members);
+    }, [guild.members]);
+
     const updateUsername = (value: string, index: number) => {
         const user = editedMembers.find(x => x.index === index);
         if (user) {
@@ -54,17 +58,19 @@ export const Guild: React.FC = () => {
     };
 
     const importViaLink = (member: IGuildMember) => {
-        if (editedMembers.length >= 30) {
+        const updatedMembers = editedMembers.filter(x => !!x.username.length);
+        if (updatedMembers.length >= 30) {
             return;
         }
-        const user = editedMembers.find(x => x.username === member.username);
+
+        const user = updatedMembers.find(x => x.username === member.username);
         if (user) {
             user.shareToken = member.shareToken;
-            setEditedMembers([...editedMembers]);
-            saveGuildMembers([...editedMembers]);
+            setEditedMembers([...updatedMembers]);
+            saveGuildMembers([...updatedMembers]);
         } else {
-            setEditedMembers([...editedMembers, { ...member, index: editedMembers.length }]);
-            saveGuildMembers([...editedMembers, { ...member, index: editedMembers.length }]);
+            setEditedMembers([...updatedMembers, { ...member, index: updatedMembers.length }]);
+            saveGuildMembers([...updatedMembers, { ...member, index: updatedMembers.length }]);
         }
     };
 

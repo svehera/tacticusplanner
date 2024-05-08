@@ -80,24 +80,27 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate }
                                     <CalendarMonthIcon /> {goalEstimate.daysLeft}
                                 </div>
                             </AccessibleTooltip>
-                            <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
-                                <div className="flex-box gap3">
-                                    <MiscIcon icon={'energy'} height={18} width={15} /> {goalEstimate.energyTotal}
-                                </div>
-                            </AccessibleTooltip>
+                            {!!goalEstimate.energyTotal && (
+                                <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
+                                    <div className="flex-box gap3">
+                                        <MiscIcon icon={'energy'} height={18} width={15} /> {goalEstimate.energyTotal}
+                                    </div>
+                                </AccessibleTooltip>
+                            )}
 
-                            <AccessibleTooltip title={`${goalEstimate.oTokensTotal} Onslaught tokens`}>
-                                <div className="flex-box gap3">
-                                    <CampaignImage campaign={'Onslaught'} size={18} /> {goalEstimate.oTokensTotal}
-                                </div>
-                            </AccessibleTooltip>
+                            {!!goalEstimate.oTokensTotal && (
+                                <AccessibleTooltip title={`${goalEstimate.oTokensTotal} Onslaught tokens`}>
+                                    <div className="flex-box gap3">
+                                        <CampaignImage campaign={'Onslaught'} size={18} /> {goalEstimate.oTokensTotal}
+                                    </div>
+                                </AccessibleTooltip>
+                            )}
                         </div>
                     </div>
                 );
             }
             case PersonalGoalType.UpgradeRank: {
-                const targetLevel = rankToLevel[((goal.rankEnd ?? 1) - 1) as Rank];
-                const xpEstimate = CharactersXpService.getLegendaryTomesCount(goal.level, goal.xp, targetLevel);
+                const { xpEstimate } = goalEstimate;
                 const linkBase = isMobile ? '/mobile/learn/rankLookup' : '/learn/rankLookup';
                 const params = `?character=${goal.characterName}&rankStart=${Rank[goal.rankStart]}&rankEnd=${
                     Rank[goal.rankEnd]

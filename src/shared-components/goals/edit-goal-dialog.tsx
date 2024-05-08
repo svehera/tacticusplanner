@@ -129,9 +129,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
             <DialogTitle style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
-                <span>Edit Goal</span> <CharacterImage icon={goal.characterIcon} />
+                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <CharacterImage icon={goal.characterIcon} />
             </DialogTitle>
-            <DialogContent>
+            <DialogContent style={{ paddingTop: 20 }}>
                 <Box id="edit-goal-form" className="flex-box column gap20 full-width start">
                     <PrioritySelect
                         value={form.priority}

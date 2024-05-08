@@ -1,6 +1,80 @@
 ﻿{
-    "currentVersion": "1.5.2",
+    "currentVersion": "1.5.3",
     "releaseNotes": [
+        {
+            "version": "1.5.3",
+            "date": "May 8",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updated goals grid view and added list view",
+                    "images": [
+                        {
+                            "path": "grid.png"
+                        },
+                        {
+                            "path": "list.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added more flexibility when setting \"Ascend\" or \"Unlock\" goals",
+                    "subPoints": [
+                        "You can set goal to promote to specific stars e.g. to Blue star",
+                        "You can specify whether you want to use only campaigns, only onslaught or both for farming shards"
+                    ],
+                    "images": [
+                        {
+                            "path": "ascend.png"
+                        },
+                        {
+                            "path": "unlock.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added Shards raids section to the daily raids and updated \"Active goals section\" to include ascend/unlock goals",
+                    "images": [
+                        {
+                            "path": "active.png"
+                        },
+                        {
+                            "path": "shards.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Goals limit increased to 30"
+                },
+                {
+                    "text": "Added possibility to limit upgrades rarity for \"Upgrade rank\" goal (diagonalplane)",
+                    "images": [
+                        {
+                            "path": "rank.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue when adding guild members and deleting them makes the 'Import Link' feature leave blank slots (Vexen)"
+                },
+                {
+                    "text": "Fixed wrong upgrades count in the daily raids (ZHovtiyLitsar)"
+                },
+                {
+                    "text": "Fixed when applying upgrades after upgrading multiple ranks doesn't work on edit goal dialog (BlatantFix)"
+                },
+                {
+                    "text": "Fixed vindicta's upgrade item is incorrect for Iron III rank (Hadoopalot)"
+                },
+                {
+                    "text": "Fixed save Changes button is inactive if # of goals doesn't change on daily raids (SeventhSun)"
+                }
+            ]
+        },
         {
             "version": "1.5.2",
             "date": "April 25",

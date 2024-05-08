@@ -26,7 +26,7 @@ interface Props {
 }
 
 export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) => {
-    const getGoalInfo = (goal: CharacterRaidGoalSelect) => {
+    const getGoalInfo = (goal: CharacterRaidGoalSelect, goalEstimate: IGoalEstimate) => {
         switch (goal.type) {
             case PersonalGoalType.Ascend: {
                 const isSameRarity = goal.rarityStart === goal.rarityEnd;
@@ -64,8 +64,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 );
             }
             case PersonalGoalType.UpgradeRank: {
-                const targetLevel = rankToLevel[((goal.rankEnd ?? 1) - 1) as Rank];
-                const xpEstimate = CharactersXpService.getLegendaryTomesCount(goal.level, goal.xp, targetLevel);
+                const { xpEstimate } = goalEstimate;
                 return (
                     <div>
                         <div className="flex-box between">
@@ -163,8 +162,9 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 headerName: 'Details',
                 cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
                     const { data } = params;
-                    if (data) {
-                        return getGoalInfo(data);
+                    const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
+                    if (data && goalEstimate) {
+                        return getGoalInfo(data, goalEstimate);
                     }
                 },
             },
@@ -187,7 +187,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                     const { data } = params;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
                     if (goalEstimate) {
-                        return goalEstimate.daysTotal;
+                        return goalEstimate.daysLeft;
                     }
                 },
                 maxWidth: 110,

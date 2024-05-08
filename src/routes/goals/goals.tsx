@@ -2,7 +2,7 @@
 import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 import { EditGoalDialog } from '../../shared-components/goals/edit-goal-dialog';
 import { ICharacter2 } from '../../models/interfaces';
-import { PersonalGoalType } from '../../models/enums';
+import { PersonalGoalType, Rank } from '../../models/enums';
 
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { StaticDataService } from '../../services';
@@ -25,6 +25,9 @@ import GridViewIcon from '@mui/icons-material/GridView';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { GoalsTable } from 'src/routes/goals/goals-table';
 import { MiscIcon } from 'src/shared-components/misc-icon';
+import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
+import { rankToLevel } from 'src/models/constants';
+import { sum } from 'lodash';
 
 export const Goals = () => {
     const { goals, characters, campaignsProgress, dailyRaidsPreferences, inventory, dailyRaids, viewPreferences } =
@@ -62,7 +65,7 @@ export const Goals = () => {
             {
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
-                completedLocations: dailyRaids.completedShardsLocations ?? [],
+                completedLocations: [],
             },
             ...shardsGoals
         );
@@ -75,7 +78,7 @@ export const Goals = () => {
                 campaignsProgress: campaignsProgress,
                 preferences: { ...dailyRaidsPreferences, farmByPriorityOrder: true },
                 upgrades: inventory.upgrades,
-                completedLocations: dailyRaids.completedLocations ?? [],
+                completedLocations: [],
             },
             ...upgradesGoals
         );
@@ -134,17 +137,6 @@ export const Goals = () => {
         }
 
         if (upgradesGoals.length) {
-            const overallEstimateByPriority = StaticDataService.getRankUpgradeEstimatedDays(
-                {
-                    dailyEnergy: dailyRaidsPreferences.dailyEnergy - estimatedShardsTotal.energyPerDay,
-                    campaignsProgress: campaignsProgress,
-                    preferences: { ...dailyRaidsPreferences, farmByPriorityOrder: true },
-                    upgrades: inventory.upgrades,
-                    completedLocations: dailyRaids.completedLocations ?? [],
-                },
-                ...upgradesGoals
-            );
-
             const goalsEstimate = upgradesGoals.map(goal => {
                 const upgradesEstimate = StaticDataService.getRankUpgradeEstimatedDays(
                     {
@@ -152,18 +144,21 @@ export const Goals = () => {
                         campaignsProgress: campaignsProgress,
                         preferences: dailyRaidsPreferences,
                         upgrades: inventory.upgrades,
-                        completedLocations: dailyRaids.completedLocations ?? [],
+                        completedLocations: [],
                     },
                     goal
                 );
 
-                const firstFarmDay = overallEstimateByPriority.raids.findIndex(x =>
+                const firstFarmDay = estimatedUpgradesTotal.raids.findIndex(x =>
                     x.raids.flatMap(raid => raid.characters).includes(goal.characterName)
                 );
 
-                const daysTotal = overallEstimateByPriority.raids.filter(x =>
+                const daysTotal = estimatedUpgradesTotal.raids.filter(x =>
                     x.raids.flatMap(raid => raid.characters).includes(goal.characterName)
                 ).length;
+
+                const targetLevel = rankToLevel[((goal.rankEnd ?? 1) - 1) as Rank];
+                const xpEstimate = CharactersXpService.getLegendaryTomesCount(goal.level, goal.xp, targetLevel);
 
                 return {
                     goalId: goal.goalId,
@@ -171,6 +166,7 @@ export const Goals = () => {
                     daysTotal: daysTotal,
                     daysLeft: firstFarmDay + daysTotal,
                     oTokensTotal: 0,
+                    xpEstimate,
                 } as IGoalEstimate;
             });
 
@@ -179,6 +175,8 @@ export const Goals = () => {
 
         return result;
     }, [shardsGoals, upgradesGoals]);
+
+    const totalXp = sum(goalsEstimate.filter(x => !!x.xpEstimate).map(x => x.xpEstimate!.legendaryBooks));
 
     return (
         <div>
@@ -224,11 +222,7 @@ export const Goals = () => {
                             <MiscIcon icon={'energy'} height={15} width={15} /> |
                         </span>
                         <span>
-                            <b>{estimatedUpgradesTotal.totalUnusedEnergy}</b> Unused{' '}
-                            <MiscIcon icon={'energy'} height={15} width={15} /> |
-                        </span>
-                        <span>
-                            <b>{estimatedUpgradesTotal.totalRaids}</b> Raids)
+                            <b>{totalXp}</b> XP Books)
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (
@@ -274,9 +268,6 @@ export const Goals = () => {
                         <span>
                             <b>{estimatedShardsTotal.energyTotal}</b>{' '}
                             <MiscIcon icon={'energy'} height={15} width={15} /> |
-                        </span>
-                        <span>
-                            <b>{estimatedShardsTotal.raidsTotal}</b> Raids |
                         </span>
                         <span>
                             <b>{estimatedShardsTotal.onslaughtTokens}</b> Tokens)

@@ -38,3 +38,17 @@ export interface ICharactersContext {
     showCharacterRarity: boolean;
     getOpacity?: (character: ICharacter2) => number;
 }
+
+export type IXpLevel = {
+    level: number;
+    xpToNextLevel: number;
+    totalXp: number;
+};
+
+export interface IXpEstimate {
+    legendaryBooks: number;
+    gold: number;
+    currentLevel: number;
+    targetLevel: number;
+    xpLeft: number;
+}

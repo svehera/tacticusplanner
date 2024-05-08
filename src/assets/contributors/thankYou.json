@@ -158,5 +158,34 @@
         "thankYou": "Great tool, allows to make the most out of the game.",
         "resourceDescription": "",
         "resourceLink": ""
+    },
+    {
+        "name": "Eager",
+        "type": "Supporter",
+        "thankYou": "something nice",
+        "resourceDescription": "",
+        "resourceLink": ""
+    },
+    {
+        "name": "MarkJ",
+        "type": "Hero",
+        "thankYou": "Excellent tool, extremely useful for managing roster and events.",
+        "resourceDescription": "",
+        "resourceLink": ""
+    },
+    {
+        "name": "Sort of Purple",
+        "type": "Supporter",
+        "thankYou": "Thanks for making the grind easier and more efficient",
+        "resourceDescription": "",
+        "resourceLink": ""
+    },
+    {
+        "name": "April 2024 Referrals",
+        "type": "TIE-62-TAT",
+        "thankYou": "Borellun",
+        "avatarIcon": "ref.webp",
+        "resourceDescription": "",
+        "resourceLink": ""
     }
 ]

@@ -15,10 +15,13 @@ export const guildReducer = (state: IGuild, action: GuildAction): IGuild => {
         }
 
         case 'SaveGuildMembers': {
-            const newMembers = action.members.slice(0, 30).map((x, i) => ({ ...x, index: i }));
+            const newMembers = action.members
+                .filter(x => !!x.username.length)
+                .slice(0, 30)
+                .map((x, i) => ({ ...x, index: i }));
             return {
                 ...state,
-                members: newMembers.filter(x => !!x.username || !!x.shareToken),
+                members: newMembers,
             };
         }
 

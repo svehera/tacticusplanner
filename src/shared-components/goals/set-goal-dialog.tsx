@@ -158,6 +158,10 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             );
         }
 
+        if (form.type === PersonalGoalType.Unlock) {
+            return !unlockedLocations.length;
+        }
+
         return false;
     };
 
