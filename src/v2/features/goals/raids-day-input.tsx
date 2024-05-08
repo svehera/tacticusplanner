@@ -6,11 +6,10 @@ import { MaterialItemInput } from 'src/v2/features/goals/material-item-input';
 interface Props {
     day: IDailyRaid;
     completedLocations: IRaidLocation[];
-    inventory: Record<string, number>;
     handleAdd: (materialId: IMaterialRaid, value: number, location: IRaidLocation) => void;
 }
 
-export const RaidsDayInput: React.FC<Props> = ({ day, handleAdd, inventory, completedLocations }) => {
+export const RaidsDayInput: React.FC<Props> = ({ day, handleAdd, completedLocations }) => {
     return (
         <Card
             sx={{
@@ -27,13 +26,11 @@ export const RaidsDayInput: React.FC<Props> = ({ day, handleAdd, inventory, comp
             />
             <CardContent>
                 <ul style={{ listStyleType: 'none', padding: 0 }}>
-                    {day.raids.map(raid => {
-                        const acquiredCount = inventory[raid.materialId] ?? 0;
-
+                    {day.raids.map((raid, index) => {
                         return (
-                            <li key={raid.materialId}>
+                            <li key={raid.materialId + index}>
                                 <MaterialItemInput
-                                    acquiredCount={acquiredCount}
+                                    acquiredCount={raid.materialRef?.quantity ?? 0}
                                     materialRaid={raid}
                                     completedLocations={completedLocations}
                                     addCount={(value, location) => handleAdd(raid, value, location)}

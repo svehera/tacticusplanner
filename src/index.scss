@@ -188,7 +188,19 @@ code {
         flex-wrap: wrap;
     }
 
-    @for $i from 1 through 10 {
+    &.between {
+        justify-content: space-between;
+    }
+
+    &.center {
+        justify-content: center;
+    }
+
+    &.full-width {
+        width: 100%;
+    }
+
+    @for $i from 1 through 20 {
         &.gap#{$i} {
             gap: #{$i}px;
         }

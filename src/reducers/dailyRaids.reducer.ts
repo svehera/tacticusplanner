@@ -8,6 +8,10 @@ export type DailyRaidsAction =
           material: IMaterialRaid;
       }
     | {
+          type: 'AddCompletedShardsBattle';
+          locationId: string;
+      }
+    | {
           type: 'ResetCompletedBattles';
       }
     | {
@@ -50,13 +54,22 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
             };
         }
         case 'ResetCompletedBattles': {
-            return { ...state, completedLocations: [] };
+            return { ...state, completedLocations: [], completedShardsLocations: [] };
         }
         case 'ResetCompletedBattlesDaily': {
             return {
                 ...state,
                 completedLocations: [],
+                completedShardsLocations: [],
                 lastRefreshDateUTC: new Date().toUTCString(),
+            };
+        }
+        case 'AddCompletedShardsBattle': {
+            const { locationId } = action;
+            return {
+                ...state,
+                completedLocations: [],
+                completedShardsLocations: [...state.completedShardsLocations, locationId],
             };
         }
         case 'UpdateFilters': {

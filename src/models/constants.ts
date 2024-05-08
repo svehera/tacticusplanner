@@ -112,9 +112,9 @@ export const charsProgression: Record<number, ICharProgression> = {
     [Rarity.Epic + RarityStars.RedThreeStars]: { shards: 85 },
     [Rarity.Legendary + RarityStars.RedThreeStars]: { shards: 100, orbs: 10, rarity: Rarity.Legendary },
 
-    [Rarity.Legendary + RarityStars.RedFourStars]: { shards: 65, orbs: 10, rarity: Rarity.Legendary },
-    [Rarity.Legendary + RarityStars.RedFiveStars]: { shards: 85, orbs: 15, rarity: Rarity.Legendary },
-    [Rarity.Legendary + RarityStars.BlueStar]: { shards: 100, orbs: 15, rarity: Rarity.Legendary },
+    [Rarity.Legendary + RarityStars.RedFourStars]: { shards: 150, orbs: 10, rarity: Rarity.Legendary },
+    [Rarity.Legendary + RarityStars.RedFiveStars]: { shards: 250, orbs: 15, rarity: Rarity.Legendary },
+    [Rarity.Legendary + RarityStars.BlueStar]: { shards: 500, orbs: 20, rarity: Rarity.Legendary },
 };
 
 export const charsUnlockShards: Record<Rarity, number> = {
@@ -236,6 +236,7 @@ export const defaultData: IPersonalData2 = {
             slotsCount: [],
         },
         completedLocations: [],
+        completedShardsLocations: [],
         lastRefreshDateUTC: new Date().toUTCString(),
     },
     autoTeamsPreferences: {
@@ -265,10 +266,10 @@ export const defaultData: IPersonalData2 = {
         showCharacterLevel: true,
         showCharacterRarity: true,
         inventoryShowAlphabet: true,
+        goalsTableView: false,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,
-        shardsEnergy: 0,
         farmByPriorityOrder: false,
         useLeastEfficientNodes: false,
         useMoreEfficientNodes: false,
@@ -303,7 +304,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.Ascend,
             targetRarity: Rarity.Rare,
             priority: 1,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -312,7 +312,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.Ascend,
             targetRarity: Rarity.Rare,
             priority: 2,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -321,7 +320,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.Ascend,
             targetRarity: Rarity.Rare,
             priority: 3,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -330,7 +328,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.UpgradeRank,
             targetRank: Rank.Silver1,
             priority: 4,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -339,7 +336,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.UpgradeRank,
             targetRank: Rank.Silver1,
             priority: 5,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -348,7 +344,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.UpgradeRank,
             targetRank: Rank.Silver1,
             priority: 6,
-            upgrades: [],
             dailyRaids: true,
         },
     ],

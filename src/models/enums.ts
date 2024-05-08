@@ -182,6 +182,12 @@ export enum PersonalGoalType {
     Unlock = 3,
 }
 
+export enum CampaignsLocationsUsage {
+    None = 0,
+    BestTime = 1,
+    LeastEnergy = 2,
+}
+
 export enum CharacterBias {
     NeverRecommend = -1,
     None = 0,
@@ -195,6 +201,7 @@ export enum CampaignType {
     Normal = 'Normal',
     Mirror = 'Mirror',
     Elite = 'Elite',
+    Onslaught = 'Onslaught',
 }
 
 export enum Campaign {
@@ -214,4 +221,5 @@ export enum Campaign {
     SHE = 'Saim-Hann Elite',
     SHM = 'Saim-Hann Mirror',
     SHME = 'Saim-Hann Mirror Elite',
+    Onslaught = 'Onslaught',
 }

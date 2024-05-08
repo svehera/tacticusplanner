@@ -93,7 +93,7 @@ export const SelectTeamDialog: React.FC<Props> = ({
                 <Conditional condition={allowPropsEdit}>
                     <FlexBox gap={10} style={{ marginTop: 20 }}>
                         <TextField
-                            style={{ width: '50%' }}
+                            style={{ minWidth: '50%' }}
                             label="Team name"
                             variant="outlined"
                             value={teamName}

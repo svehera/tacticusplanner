@@ -20,9 +20,17 @@ import { fullCampaignsProgress } from '../../models/constants';
 import { UpgradeImage } from '../../shared-components/upgrade-image';
 import { RankSelect } from '../../shared-components/rank-select';
 import { MiscIcon } from '../../shared-components/misc-icon';
+import { FormControlLabel, Popover, Switch } from '@mui/material';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { ArrowForward, Info } from '@mui/icons-material';
+import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { RankImage } from 'src/v2/components/images/rank-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import DailyRaidsSettings from 'src/shared-components/daily-raids-settings';
+import InfoIcon from '@mui/icons-material/Info';
 
 export const RankLookup = () => {
-    const { characters } = useContext(StoreContext);
+    const { characters, campaignsProgress } = useContext(StoreContext);
     const [searchParams, setSearchParams] = useSearchParams();
 
     const charactersOptions = sortBy(characters, 'name');
@@ -47,6 +55,11 @@ export const RankLookup = () => {
         // @ts-ignore
         return queryParamsRank ? Rank[queryParamsRank] ?? Rank.Stone2 : Rank.Stone2;
     });
+    const [rankPoint5, setRankPoint5] = useState<boolean>(() => {
+        const queryParamsRankPoint5 = searchParams.get('rankPoint5');
+
+        return !!queryParamsRankPoint5 && queryParamsRankPoint5 === 'true';
+    });
 
     const [message, setMessage] = useState<string>('Upgrades:');
     const [totalGold, setTotalGold] = useState<number>(0);
@@ -59,6 +72,9 @@ export const RankLookup = () => {
     //     }
     // });
 
+    const [anchorEl2, setAnchorEl2] = React.useState<HTMLElement | null>(null);
+    const [materialRecipe, setMaterialRecipe] = React.useState<IMaterialFull | null>(null);
+
     const upgrades = useMemo<IMaterialFull[]>(() => {
         if (!character) {
             setMessage('Select character');
@@ -67,13 +83,41 @@ export const RankLookup = () => {
 
         setMessage('Upgrades:');
         return StaticDataService.getUpgrades({
-            id: character.name,
+            characterName: character.name,
             rankStart,
             rankEnd,
             appliedUpgrades: [],
-            rankPoint5: false,
+            rankPoint5,
+            upgradesRarity: [],
         });
-    }, [character?.name, rankStart, rankEnd]);
+    }, [character?.name, rankStart, rankEnd, rankPoint5]);
+
+    const groupByRanks = useMemo(() => {
+        const result: Array<{
+            rank1: Rank;
+            rank2: Rank;
+            materials: IMaterialFull[];
+        }> = [];
+
+        let currRank = rankStart;
+        const upgradesCopy = upgrades.slice();
+
+        while (currRank !== rankEnd) {
+            const rankUpgrades = upgradesCopy.splice(0, 6);
+            result.push({ rank1: currRank, rank2: currRank + 1, materials: rankUpgrades });
+            currRank++;
+        }
+
+        if (rankPoint5 && upgradesCopy.length) {
+            result.push({
+                rank1: rankEnd,
+                rank2: rankEnd,
+                materials: upgradesCopy,
+            });
+        }
+
+        return result;
+    }, [upgrades, rankStart]);
 
     const allMaterials = useMemo<IMaterialRecipeIngredientFull[]>(() => {
         const result: IMaterialRecipeIngredientFull[] = StaticDataService.groupBaseMaterials(upgrades, true);
@@ -93,7 +137,7 @@ export const RankLookup = () => {
             StaticDataService.getAllMaterials(
                 {
                     completedLocations: [],
-                    campaignsProgress: fullCampaignsProgress,
+                    campaignsProgress: campaignsProgress,
                     dailyEnergy: 0,
                     upgrades: {},
                 },
@@ -131,7 +175,7 @@ export const RankLookup = () => {
             maxWidth: 50,
         },
         {
-            headerName: 'Icon',
+            headerName: 'Material',
             cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
                 const { data } = params;
                 if (data) {
@@ -141,10 +185,6 @@ export const RankLookup = () => {
             equals: () => true,
             sortable: false,
             width: 80,
-        },
-        {
-            field: 'material',
-            maxWidth: isMobile ? 125 : 300,
         },
         {
             field: 'count',
@@ -171,10 +211,25 @@ export const RankLookup = () => {
             maxWidth: 100,
         },
         {
-            field: 'locationsString',
             headerName: 'Locations',
             minWidth: 300,
             flex: 1,
+            cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
+                const { data } = params;
+                if (data) {
+                    return (
+                        <div className="flex-box gap5 wrap">
+                            {data.possibleLocations.map(location => (
+                                <CampaignLocation
+                                    key={location.id}
+                                    location={location}
+                                    unlocked={data.unlockedLocations.includes(location.id)}
+                                />
+                            ))}
+                        </div>
+                    );
+                }
+            },
         },
     ]);
 
@@ -196,6 +251,57 @@ export const RankLookup = () => {
         });
     };
 
+    const updateRankPoint5 = (value: boolean) => {
+        setRankPoint5(value);
+
+        setSearchParams(curr => {
+            curr.set('rankPoint5', value + '');
+            return curr;
+        });
+    };
+
+    const renderMaterials = (materials: IMaterialFull[]) => {
+        const healthUpgrades: IMaterialFull[] = materials.filter(x => x.stat === 'Health');
+        const damageUpgrades: IMaterialFull[] = materials.filter(x => x.stat === 'Damage');
+        const armourUpgrades: IMaterialFull[] = materials.filter(x => x.stat === 'Armour');
+
+        const handleRecipeClick = (target: HTMLElement, material: IMaterialFull) => {
+            setAnchorEl2(target);
+            setMaterialRecipe(material);
+        };
+
+        return (
+            <div style={{ display: 'flex' }}>
+                <div className="flex-box column gap5">
+                    <MiscIcon icon={'health'} height={30} />
+                    {healthUpgrades.map((x, index) => {
+                        return (
+                            <div key={x.id + index} onClick={event => handleRecipeClick(event.currentTarget, x)}>
+                                <UpgradeImage material={x.label} iconPath={x.iconPath} rarity={x.rarity} />
+                            </div>
+                        );
+                    })}
+                </div>
+                <div className="flex-box column gap5">
+                    <MiscIcon icon={'damage'} />
+                    {damageUpgrades.map((x, index) => (
+                        <div key={x.id + index} onClick={event => handleRecipeClick(event.currentTarget, x)}>
+                            <UpgradeImage material={x.label} iconPath={x.iconPath} rarity={x.rarity} />
+                        </div>
+                    ))}
+                </div>
+                <div className="flex-box column gap5">
+                    <MiscIcon icon={'armour'} height={30} />
+                    {armourUpgrades.map((x, index) => (
+                        <div key={x.id + index} onClick={event => handleRecipeClick(event.currentTarget, x)}>
+                            <UpgradeImage material={x.label} iconPath={x.iconPath} rarity={x.rarity} />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    };
+
     return (
         <div>
             <div
@@ -204,7 +310,6 @@ export const RankLookup = () => {
                     flexWrap: 'wrap',
                     alignItems: 'center',
                     gap: '20px',
-                    margin: '20px',
                 }}>
                 <CharactersAutocomplete
                     character={character}
@@ -237,18 +342,38 @@ export const RankLookup = () => {
                         }}
                     />
                 </div>
-                <div style={{ width: 200 }}>
-                    <RankSelect
-                        label={'Rank End'}
-                        rankValues={rankEntries.slice(1)}
-                        value={rankEnd}
-                        valueChanges={value => {
-                            updateRankEnd(value);
-                            if (rankStart >= value) {
-                                updateRankStart(value - 1);
+                <div className="flex-box gap10 wrap">
+                    <div style={{ width: 200 }}>
+                        <RankSelect
+                            label={'Rank End'}
+                            rankValues={rankEntries.slice(1)}
+                            value={rankEnd}
+                            valueChanges={value => {
+                                updateRankEnd(value);
+                                if (rankStart >= value) {
+                                    updateRankStart(value - 1);
+                                }
+                            }}
+                        />
+                    </div>
+                    <div className="flex-box">
+                        <FormControlLabel
+                            label="Point Five"
+                            control={
+                                <Switch
+                                    checked={rankPoint5}
+                                    onChange={value => updateRankPoint5(value.target.checked)}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                />
                             }
-                        }}
-                    />
+                        />
+                        <AccessibleTooltip
+                            title={
+                                'When you reach a target upgrade rank, you are immediately able to apply the top row of three upgrades.\r\nIf you toggle on this switch then these upgrades will be included in your daily raids plan.'
+                            }>
+                            <Info color="primary" />
+                        </AccessibleTooltip>
+                    </div>
                 </div>
             </div>
 
@@ -269,35 +394,69 @@ export const RankLookup = () => {
                     style={{ height: 50 + totalMaterials.length * 30, maxHeight: '40vh', width: '100%' }}>
                     <AgGridReact
                         suppressCellFocus={true}
-                        defaultColDef={{ suppressMovable: true, sortable: true, wrapText: true }}
+                        defaultColDef={{ suppressMovable: true, sortable: true, wrapText: true, autoHeight: true }}
                         rowHeight={60}
                         rowBuffer={3}
                         columnDefs={columnDefs}
                         rowData={totalMaterials}
                     />
                 </div>
-                <div>
-                    <h3>{message}</h3>
-                    <ul>
-                        {upgrades.map((item, index) => (
-                            <li key={item.id + index}>
+
+                <h3>{message}</h3>
+                <div className="flex-box gap5">
+                    <InfoIcon color="primary" />
+                    <span>Click on the upgrade to view recipe</span>
+                </div>
+                <div className="flex-box gap20 wrap start">
+                    {groupByRanks.map((x, index) => (
+                        <div key={index}>
+                            <div className="flex-box gap3 center">
+                                <RankImage rank={x.rank1} /> <ArrowForward />
+                                <RankImage
+                                    rank={x.rank2}
+                                    rankPoint5={x.rank1 === rankEnd && x.rank2 === rankEnd && rankPoint5}
+                                />
+                            </div>
+                            {renderMaterials(x.materials)}
+                        </div>
+                    ))}
+                    {/*<ul>*/}
+                    {/*    {upgrades.map((item, index) => (*/}
+                    {/*        <li key={item.id + index}>*/}
+
+                    {/*            <hr style={{ display: (index + 1) % 6 === 0 ? 'block' : 'none' }} />*/}
+                    {/*        </li>*/}
+                    {/*    ))}*/}
+                    {/*</ul>*/}
+                    <Popover
+                        open={!!materialRecipe}
+                        anchorEl={anchorEl2}
+                        onClose={() => setMaterialRecipe(null)}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}>
+                        {materialRecipe && (
+                            <div style={{ margin: 20, width: 300 }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                                    <MiscIcon icon={item.stat.toLowerCase() as any} />
-                                    <span className={Rarity[item.rarity]?.toLowerCase()}>
-                                        {Rarity[item.rarity]}
-                                    </span> -{' '}
+                                    <MiscIcon icon={materialRecipe.stat.toLowerCase() as any} />
+                                    <span className={Rarity[materialRecipe.rarity]?.toLowerCase()}>
+                                        {Rarity[materialRecipe.rarity]}
+                                    </span>{' '}
+                                    -{' '}
                                     <UpgradeImage
-                                        material={item.label}
-                                        rarity={item.rarity}
-                                        iconPath={item.iconPath}
+                                        material={materialRecipe.label}
+                                        rarity={materialRecipe.rarity}
+                                        iconPath={materialRecipe.iconPath}
                                         size={30}
                                     />
                                 </div>
-                                {item.recipe?.length ? renderUpgradesMaterials(item.recipe) : undefined}
-                                <hr style={{ display: (index + 1) % 6 === 0 ? 'block' : 'none' }} />
-                            </li>
-                        ))}
-                    </ul>
+                                {materialRecipe.recipe?.length
+                                    ? renderUpgradesMaterials(materialRecipe.recipe)
+                                    : undefined}
+                            </div>
+                        )}
+                    </Popover>
                 </div>
             </div>
         </div>

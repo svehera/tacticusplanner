@@ -1,0 +1,299 @@
+﻿import {
+    ICampaignBattleComposed,
+    ICampaignConfigs,
+    ICampaignsData,
+    IDailyRaidsFilters,
+    IDailyRaidsPreferences,
+    IDropRate,
+    IRecipeData,
+} from 'src/models/interfaces';
+
+import campaignConfigs from 'src/assets/campaignConfigs.json';
+import battleData from 'src/assets/battleData.json';
+import recipeData from 'src/assets/recipeData.json';
+
+import { Alliance, Campaign, CampaignType, Faction, Rarity } from 'src/models/enums';
+import { orderBy } from 'lodash';
+
+export class CampaignsService {
+    private static readonly campaignConfigs: ICampaignConfigs = campaignConfigs;
+    private static readonly battleData: ICampaignsData = battleData;
+    private static readonly recipeData: IRecipeData = recipeData;
+
+    private static readonly ImperialFactions: Faction[] = [
+        Faction.Ultramarines,
+        Faction.Astra_militarum,
+        Faction.Black_Templars,
+        Faction.ADEPTA_SORORITAS,
+        Faction.AdeptusMechanicus,
+        Faction.Space_Wolves,
+        Faction.Dark_Angels,
+    ];
+
+    private static readonly ChaosFactions: Faction[] = [
+        Faction.Black_Legion,
+        Faction.Death_Guard,
+        Faction.Thousand_Sons,
+        Faction.WorldEaters,
+    ];
+
+    public static selectBestLocations(
+        availableLocations: ICampaignBattleComposed[],
+        preferences?: IDailyRaidsPreferences
+    ): ICampaignBattleComposed[] {
+        const minEnergy = Math.min(...availableLocations.map(x => x.energyPerItem));
+        const maxEnergy = Math.max(...availableLocations.map(x => x.energyPerItem));
+        const hasAnyMedianLocation = availableLocations.some(
+            location => location.energyPerItem > minEnergy && location.energyPerItem < maxEnergy
+        );
+
+        let filteredLocations: ICampaignBattleComposed[] = availableLocations;
+        if (preferences) {
+            const { useLeastEfficientNodes, useMoreEfficientNodes, useMostEfficientNodes } = preferences;
+            filteredLocations = availableLocations.filter(location => {
+                if (!useMostEfficientNodes && !useMoreEfficientNodes && !useLeastEfficientNodes) {
+                    return true;
+                }
+
+                if (useMostEfficientNodes && location.energyPerItem === minEnergy) {
+                    return true;
+                }
+
+                if (
+                    useMoreEfficientNodes &&
+                    ((hasAnyMedianLocation &&
+                        location.energyPerItem > minEnergy &&
+                        location.energyPerItem < maxEnergy) ||
+                        (!hasAnyMedianLocation &&
+                            location.energyPerItem >= minEnergy &&
+                            location.energyPerItem < maxEnergy))
+                ) {
+                    return true;
+                }
+
+                return useLeastEfficientNodes && location.energyPerItem === maxEnergy;
+            });
+        }
+
+        return orderBy(filteredLocations, ['energyPerItem', 'expectedGold'], ['asc', 'desc']);
+    }
+
+    static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
+        const result: Record<string, ICampaignBattleComposed> = {};
+        for (const battleDataKey in this.battleData) {
+            const battle = this.battleData[battleDataKey];
+
+            const config = this.campaignConfigs[battle.campaignType as CampaignType];
+            const recipe = this.recipeData[battle.reward];
+            if (!recipe) {
+                console.error(battle.reward, 'no recipe');
+            }
+            const dropRateKey: keyof IDropRate = recipe?.rarity.toLowerCase() as keyof IDropRate;
+
+            const dropRate = config.dropRate[dropRateKey];
+            const energyPerItem = parseFloat((1 / (dropRate / config.energyCost)).toFixed(2));
+
+            const { enemies, allies } = this.getEnemiesAndAllies(battle.campaign as Campaign);
+            const energyPerDay = config.dailyBattleCount * config.energyCost;
+            const itemsPerDay = energyPerDay / energyPerItem;
+
+            result[battleDataKey] = {
+                id: battle.campaign + battle.nodeNumber,
+                campaign: battle.campaign as Campaign,
+                campaignType: battle.campaignType as CampaignType,
+                energyCost: config.energyCost,
+                dailyBattleCount: config.dailyBattleCount,
+                dropRate,
+                energyPerItem,
+                itemsPerDay,
+                energyPerDay,
+                nodeNumber: battle.nodeNumber,
+                rarity: recipe?.rarity,
+                rarityEnum: Rarity[recipe?.rarity as unknown as number] as unknown as Rarity,
+                reward: battle.reward,
+                expectedGold: battle.expectedGold,
+                slots: battle.slots,
+                enemiesAlliances: (battle.enemiesAlliances ?? [enemies.alliance]) as Alliance[],
+                enemiesFactions: (battle.enemiesFactions ?? enemies.factions) as Faction[],
+                alliesAlliance: allies.alliance,
+                alliesFactions: allies.factions,
+            };
+        }
+
+        return result;
+    }
+
+    private static getEnemiesAndAllies(campaign: Campaign): {
+        enemies: { alliance: Alliance; factions: Faction[] };
+        allies: { alliance: Alliance; factions: Faction[] };
+    } {
+        switch (campaign) {
+            case Campaign.I:
+            case Campaign.IE: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Necrons],
+                    },
+                    allies: {
+                        alliance: Alliance.Imperial,
+                        factions: this.ImperialFactions,
+                    },
+                };
+            }
+            case Campaign.IM:
+            case Campaign.IME: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Imperial,
+                        factions: [Faction.Astra_militarum, Faction.Ultramarines],
+                    },
+                    allies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Necrons],
+                    },
+                };
+            }
+            case Campaign.FoC:
+            case Campaign.FoCE: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Imperial,
+                        factions: [Faction.Astra_militarum],
+                    },
+                    allies: {
+                        alliance: Alliance.Chaos,
+                        factions: this.ChaosFactions,
+                    },
+                };
+            }
+            case Campaign.FoCM:
+            case Campaign.FoCME: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Chaos,
+                        factions: [Faction.Black_Legion],
+                    },
+                    allies: {
+                        alliance: Alliance.Imperial,
+                        factions: this.ImperialFactions,
+                    },
+                };
+            }
+            case Campaign.O:
+            case Campaign.OE: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Imperial,
+                        factions: [Faction.Black_Templars],
+                    },
+                    allies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Orks],
+                    },
+                };
+            }
+            case Campaign.OM:
+            case Campaign.OME: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Orks],
+                    },
+                    allies: {
+                        alliance: Alliance.Imperial,
+                        factions: this.ImperialFactions,
+                    },
+                };
+            }
+            case Campaign.SH:
+            case Campaign.SHE: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Chaos,
+                        factions: [Faction.Thousand_Sons],
+                    },
+                    allies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Aeldari],
+                    },
+                };
+            }
+            case Campaign.SHM:
+            case Campaign.SHME: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Aeldari],
+                    },
+                    allies: {
+                        alliance: Alliance.Chaos,
+                        factions: this.ChaosFactions,
+                    },
+                };
+            }
+            default: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Necrons],
+                    },
+                    allies: {
+                        alliance: Alliance.Imperial,
+                        factions: [],
+                    },
+                };
+            }
+        }
+    }
+
+    static filterLocation(filters: IDailyRaidsFilters, location: ICampaignBattleComposed): boolean {
+        const {
+            alliesFactions,
+            alliesAlliance,
+            enemiesAlliance,
+            enemiesFactions,
+            campaignTypes,
+            upgradesRarity,
+            slotsCount,
+        } = filters;
+
+        if (slotsCount && slotsCount.length) {
+            if (!slotsCount.includes(location.slots ?? 5)) {
+                return false;
+            }
+        }
+
+        if (campaignTypes.length) {
+            if (!campaignTypes.includes(location.campaignType)) {
+                return false;
+            }
+        }
+
+        if (alliesAlliance.length) {
+            if (!alliesAlliance.includes(location.alliesAlliance)) {
+                return false;
+            }
+        }
+
+        if (alliesFactions.length) {
+            if (!location.alliesFactions.some(faction => alliesFactions.includes(faction))) {
+                return false;
+            }
+        }
+
+        if (enemiesAlliance.length) {
+            if (!location.enemiesAlliances.some(alliance => enemiesAlliance.includes(alliance))) {
+                return false;
+            }
+        }
+
+        if (enemiesFactions.length) {
+            if (!location.enemiesFactions.some(faction => enemiesFactions.includes(faction))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
