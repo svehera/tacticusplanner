@@ -2,6 +2,21 @@
     "currentVersion": "1.5.3",
     "releaseNotes": [
         {
+            "version": "1.5.X",
+            "date": "May X",
+            "type": "Update",
+            "new": [],
+            "minor": [
+                {
+                    "text": "New Campaign Battles: ‘Elite Saim-Hann’ Part 2 and ‘Elite Saim-Hann’ Part 3"
+                },
+                {
+                    "text": "Update Tanksmasha according with rewORK"
+                }
+            ],
+            "bugFixes": []
+        },
+        {
             "version": "1.5.3",
             "date": "May 8",
             "type": "Update",
