@@ -66,6 +66,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         if (goal) {
             dispatch.goals({ type: 'Add', goal });
             enqueueSnackbar(`Goal for ${goal.character} is added`, { variant: 'success' });
+            if ([PersonalGoalType.Unlock, PersonalGoalType.Ascend].includes(goal.type)) {
+                goal.dailyRaids = false;
+            }
         }
         setOpenDialog(false);
         setCharacter(null);
