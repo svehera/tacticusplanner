@@ -1624,8 +1624,7 @@
         "Number": 72,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "macer.webp",
-        "ReleaseRarity": 2
+        "Icon": "macer.webp"
     },
     {
         "Name": "Asmodai",
@@ -1646,5 +1645,49 @@
         "ForcedSummons": false,
         "RequiredInCampaign": false,
         "Icon": "asmodai.webp"
+    },
+    {
+        "Name": "Azkor",
+        "Faction": "World Eaters",
+        "Alliance": "Chaos",
+        "Health": 9582,
+        "Damage": 2301,
+        "Armour": 1917,
+        "Initial rarity": "Rare",
+        "Melee Damage": "Eviscerate",
+        "Melee Hits": 2,
+        "Movement": 3,
+        "Equipment1": "Crit",
+        "Equipment2": "Defense",
+        "Equipment3": "Crit Booster",
+        "Traits": ["Blessing Of Khorne", "Daemon", "Resilient", "Terrifying", "Unstoppable"],
+        "Active Ability": "Eviscerate",
+        "Number": 74,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "azkor.webp"
+    },
+    {
+        "Name": "Kharn",
+        "Faction": "World Eaters",
+        "Alliance": "Chaos",
+        "Health": 8624,
+        "Damage": 2398,
+        "Armour": 1917,
+        "Initial rarity": "Legendary",
+        "Melee Damage": "Eviscerate",
+        "Melee Hits": 4,
+        "Movement": 3,
+        "Equipment1": "Crit",
+        "Equipment2": "Block",
+        "Equipment3": "Crit Booster",
+        "Traits": ["Blessing Of Khorne", "Rapid Assault", "Final Vengeance"],
+        "Active Ability": "Piercing",
+        "Passive Ability": "Plasma",
+        "Number": 75,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "kharn.webp",
+        "ReleaseRarity": 6
     }
 ]
