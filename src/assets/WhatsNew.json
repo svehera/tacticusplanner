@@ -55,6 +55,14 @@
                             "path": "rank.png"
                         }
                     ]
+                },
+                {
+                    "text": "Updated rank lookup page",
+                    "images": [
+                        {
+                            "path": "lookup.png"
+                        }
+                    ]
                 }
             ],
             "bugFixes": [
