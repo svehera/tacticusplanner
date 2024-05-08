@@ -5590,21 +5590,27 @@
         "campaignType": "Elite",
         "nodeNumber": 27,
         "reward": "Canister of Chemicals",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OME28": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 28,
         "reward": "Synaptic Augmentation",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OME29": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 29,
         "reward": "Mjod",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OME3": {
         "campaign": "Octarius Mirror Elite",
@@ -5618,14 +5624,18 @@
         "campaignType": "Elite",
         "nodeNumber": 30,
         "reward": "Stone Guardian Fragment",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OME31": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 31,
         "reward": "Round of Ammo",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OME32": {
         "campaign": "Octarius Mirror Elite",
@@ -5639,49 +5649,63 @@
         "campaignType": "Elite",
         "nodeNumber": 33,
         "reward": "Chip Damage",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks", "Tyranids"]
     },
     "OME34": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 34,
         "reward": "Bad Moon Teef",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks", "Tyranids"]
     },
     "OME35": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 35,
         "reward": "Iron Jaw",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks", "Tyranids"]
     },
     "OME36": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 36,
         "reward": "Ard Plate",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks", "Tyranids"]
     },
     "OME37": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 37,
         "reward": "Kustom Gubbinz",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks", "Tyranids"]
     },
     "OME38": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 38,
         "reward": "Purity Seal of the Primarch",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks", "Tyranids"]
     },
     "OME39": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 39,
         "reward": "Archeotech Bionics",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks", "Tyranids"]
     },
     "OME4": {
         "campaign": "Octarius Mirror Elite",
