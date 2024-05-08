@@ -165,7 +165,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             variant={'outlined'}
                             component={Link}
                             to={linkBase + params}
-                            target="_blank">
+                            target={isMobile ? '_self' : '_blank'}>
                             <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Upgrades</span>
                         </Button>
                     </div>
