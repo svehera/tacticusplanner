@@ -15,6 +15,7 @@ import shadowsun from '../assets/legendary-events/Shadowsun.json';
 import aunshi from '../assets/legendary-events/Aunshi.json';
 import ragnar from '../assets/legendary-events/Ragnar.json';
 import vitruvius from '../assets/legendary-events/Vitruvius.json';
+import kharn from '../assets/legendary-events/Kharn.json';
 
 import {
     ICampaignBattle,
@@ -92,6 +93,14 @@ export class StaticDataService {
     };
 
     static readonly legendaryEvents = [
+        {
+            id: kharn.id,
+            name: kharn.name,
+            stage: kharn.eventStage,
+            nextEventDate: kharn.nextEventDate,
+            mobileRoute: '/mobile/plan/le/kharn',
+            icon: 'kharn.png',
+        },
         {
             id: vitruvius.id,
             name: vitruvius.name,

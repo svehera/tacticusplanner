@@ -31,6 +31,8 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
     readonly chestsMilestones: IChestMilestone[];
 
     readonly shardsPerChest: number;
+    readonly battlesCount: number;
+    readonly constraintsCount: number;
     readonly progression: ILEProgression;
 
     protected abstract getAlphaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack;
@@ -53,6 +55,8 @@ export abstract class LegendaryEventBase implements ILegendaryEvent {
         this.chestsMilestones = staticData.chestsMilestones;
 
         this.shardsPerChest = staticData.shardsPerChest;
+        this.constraintsCount = staticData.constraintsCount;
+        this.battlesCount = staticData.battlesCount;
         this.progression = staticData.progression;
 
         this.alpha = this.getAlphaTrack(unitsData);

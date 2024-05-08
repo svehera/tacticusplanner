@@ -1,19 +1,6 @@
 ﻿import React, { useMemo } from 'react';
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Checkbox,
-    Divider,
-    FormControlLabel,
-    TextField,
-} from '@mui/material';
-import {
-    ILegendaryEvent,
-    ILegendaryEventBattle,
-    ILegendaryEventOverviewProgress,
-    ILegendaryEventProgressTrack,
-} from '../models/interfaces';
+import { Accordion, AccordionDetails, AccordionSummary, Checkbox, Divider, FormControlLabel } from '@mui/material';
+import { ILegendaryEvent, ILegendaryEventBattle, ILegendaryEventOverviewProgress } from '../models/interfaces';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getCompletionRateColor } from '../shared-logic/functions';
 import { Tooltip } from '@mui/material';
@@ -127,56 +114,6 @@ export const LeProgressOverviewMissions = ({
                 </Accordion>
             ) : undefined}
         </>
-    );
-};
-
-const TrackSummary = ({ title, trackProgress }: { title: string; trackProgress: ILegendaryEventProgressTrack }) => {
-    const totalBattles = useMemo(() => trackProgress.battles.flatMap(b => b.requirements).length, []);
-    const currentBattles = useMemo(() => trackProgress.battles.flatMap(x => x.state).filter(x => x).length, []);
-
-    const totalPoints = useMemo(
-        () =>
-            trackProgress.battles
-                .flatMap(b => b.requirements)
-                .map(x => x.points)
-                .reduce((accumulator, currentValue) => accumulator + currentValue, 0),
-        []
-    );
-    const currentPoints = useMemo(() => {
-        let total = 0;
-
-        trackProgress.battles.forEach(battle => {
-            battle.state.forEach((value, index) => {
-                if (value) {
-                    total += battle.requirements[index].points;
-                }
-            });
-        });
-
-        return total;
-    }, []);
-
-    return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ marginInlineEnd: 10 }}>{title}</span>
-            <Tooltip title={`${currentBattles}/${totalBattles} Requirements`}>
-                <span style={{ marginInlineEnd: 10, fontWeight: 700 }}>
-                    {currentPoints}/{totalPoints} Points
-                </span>
-            </Tooltip>
-        </div>
-    );
-};
-
-const TrackDetails = ({ trackProgress }: { trackProgress: ILegendaryEventProgressTrack }) => {
-    const requirements = trackProgress.battles[0].requirements.map(x => x.name);
-
-    return (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {requirements.map((reqName, index) => (
-                <RequirementDetails key={reqName} reqName={reqName} battles={trackProgress.battles} reqIndex={index} />
-            ))}
-        </div>
     );
 };
 
