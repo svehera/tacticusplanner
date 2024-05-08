@@ -194,7 +194,7 @@ export const Goals = () => {
                 <FormControlLabel
                     control={
                         <Switch
-                            value={viewPreferences.goalsTableView}
+                            checked={viewPreferences.goalsTableView}
                             onChange={event => updateView(event.target.checked)}
                         />
                     }
