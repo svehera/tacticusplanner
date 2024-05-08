@@ -618,6 +618,11 @@ export class StaticDataService {
                 ? settings.dailyEnergy - sum(completedLocations.map(x => x.energySpent))
                 : settings.dailyEnergy;
 
+            if (energyLeft <= 0) {
+                resultDays.push(day);
+                continue;
+            }
+
             for (const material of allMaterials) {
                 if (isFirstDay) {
                     const completedMaterial = settings.completedLocations.find(x => x.materialId === material.id);

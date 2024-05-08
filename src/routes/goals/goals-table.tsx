@@ -231,7 +231,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                                 variant={'outlined'}
                                 component={Link}
                                 to={linkBase + params}
-                                target="_blank">
+                                target={isMobile ? '_self' : '_blank'}>
                                 <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Upgrades</span>
                             </Button>
                         );
@@ -244,7 +244,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 // width: 120,
             },
         ];
-    }, []);
+    }, [rows]);
 
     return (
         <div
@@ -252,7 +252,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
             style={{
                 height: 50 + rows.length * 60,
                 minHeight: 150,
-                // maxHeight: '40vh',
+                maxHeight: 500,
                 width: '100%',
             }}>
             <AgGridReact
@@ -260,8 +260,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                     suppressMovable: true,
                     sortable: true,
                     wrapText: true,
-                    autoHeight: true,
                 }}
+                rowHeight={60}
                 columnDefs={columnDefs}
                 rowData={rows}
             />

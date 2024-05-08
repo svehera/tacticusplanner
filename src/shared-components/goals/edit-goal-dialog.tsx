@@ -141,7 +141,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
 
                     {form.type === PersonalGoalType.UpgradeRank && (
                         <>
-                            <div className="flex-box gap10 between full-width">
+                            <div className="flex-box gap10 between full-width wrap">
                                 <RankSelect
                                     label={'Current Rank'}
                                     rankValues={currentRankValues}
@@ -191,7 +191,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                             <NumbersInput
                                 title="Owned shards"
                                 value={form.shards}
-                                valueChange={value => setForm(curr => ({ ...curr, currentShards: value }))}
+                                valueChange={value => setForm(curr => ({ ...curr, shards: value }))}
                             />
                             <div className="flex-box gap5 wrap">
                                 {possibleLocations.map(location => (
@@ -216,7 +216,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                             <NumbersInput
                                 title="Owned shards"
                                 value={form.shards}
-                                valueChange={value => setForm(curr => ({ ...curr, currentShards: value }))}
+                                valueChange={value => setForm(curr => ({ ...curr, shards: value }))}
                             />
                             <EditAscendGoal
                                 goal={form}

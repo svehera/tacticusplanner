@@ -33,6 +33,7 @@ import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { SetAscendGoal } from 'src/shared-components/goals/set-ascend-goal';
 import MultipleSelectCheckmarks from 'src/routes/characters/multiple-select';
+import { isMobile } from 'react-device-detect';
 
 const getDefaultForm = (priority: number): IPersonalGoal => ({
     id: v4(),
@@ -66,6 +67,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         if (goal) {
             dispatch.goals({ type: 'Add', goal });
             enqueueSnackbar(`Goal for ${goal.character} is added`, { variant: 'success' });
+            if ([PersonalGoalType.Unlock, PersonalGoalType.Ascend].includes(goal.type)) {
+                goal.dailyRaids = false;
+            }
         }
         setOpenDialog(false);
         setCharacter(null);
@@ -186,37 +190,33 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             <IgnoreRankRarity value={ignoreRankRarity} onChange={setIgnoreRankRarity} />
                         </Conditional>
 
-                        <FormControl fullWidth>
-                            <InputLabel id="goal-type-label">Goal Type</InputLabel>
-                            <Select<PersonalGoalType>
-                                id="goal-type"
-                                labelId="goal-type-label"
-                                label="Goal Type"
-                                defaultValue={PersonalGoalType.UpgradeRank}
-                                onChange={handleGoalTypeChange}>
-                                <MenuItem value={PersonalGoalType.UpgradeRank}>Upgrade Rank</MenuItem>
-                                <MenuItem value={PersonalGoalType.Ascend}>Ascend</MenuItem>
-                                <MenuItem value={PersonalGoalType.Unlock}>Unlock</MenuItem>
-                            </Select>
-                        </FormControl>
-
                         <div className="flex-box gap10 full-width">
-                            <div style={{ width: '50%' }}>
-                                <CharactersAutocomplete
-                                    character={character}
-                                    characters={allowedCharacters}
-                                    onCharacterChange={handleCharacterChange}
-                                />
-                            </div>
-
-                            <div style={{ width: '50%' }}>
-                                <PrioritySelect
-                                    value={form.priority}
-                                    maxValue={goals.length + 1}
-                                    valueChange={value => setForm(curr => ({ ...curr, priority: value }))}
-                                />
-                            </div>
+                            <FormControl fullWidth>
+                                <InputLabel id="goal-type-label">Goal Type</InputLabel>
+                                <Select<PersonalGoalType>
+                                    id="goal-type"
+                                    labelId="goal-type-label"
+                                    label="Goal Type"
+                                    defaultValue={PersonalGoalType.UpgradeRank}
+                                    onChange={handleGoalTypeChange}>
+                                    <MenuItem value={PersonalGoalType.UpgradeRank}>Upgrade Rank</MenuItem>
+                                    <MenuItem value={PersonalGoalType.Ascend}>Ascend</MenuItem>
+                                    <MenuItem value={PersonalGoalType.Unlock}>Unlock</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <PrioritySelect
+                                value={form.priority}
+                                maxValue={goals.length + 1}
+                                valueChange={value => setForm(curr => ({ ...curr, priority: value }))}
+                            />
                         </div>
+
+                        <CharactersAutocomplete
+                            style={{ width: '100%' }}
+                            character={character}
+                            characters={allowedCharacters}
+                            onCharacterChange={handleCharacterChange}
+                        />
 
                         <Conditional condition={!!character && form.type === PersonalGoalType.UpgradeRank}>
                             <RankGoalSelect
