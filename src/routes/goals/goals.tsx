@@ -231,7 +231,7 @@ export const Goals = () => {
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
-                                    goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)!}
+                                    goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                 />
                             ))}
@@ -279,7 +279,7 @@ export const Goals = () => {
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
-                                    goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)!}
+                                    goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                 />
                             ))}

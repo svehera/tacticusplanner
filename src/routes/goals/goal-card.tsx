@@ -26,11 +26,19 @@ import LinkIcon from '@mui/icons-material/Link';
 
 interface Props {
     goal: CharacterRaidGoalSelect;
-    goalEstimate: IGoalEstimate;
+    goalEstimate?: IGoalEstimate;
     menuItemSelect?: (item: 'edit' | 'delete') => void;
 }
 
-export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate }) => {
+export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: passed }) => {
+    const goalEstimate = passed ?? {
+        daysLeft: 0,
+        daysTotal: 0,
+        oTokensTotal: 0,
+        energyTotal: 0,
+        goalId: '',
+        xpEstimate: null,
+    };
     const isGoalCompleted = GoalsService.isGoalCompleted(goal) || goalEstimate.daysLeft <= 0;
 
     const calendarDate: string = useMemo(() => {

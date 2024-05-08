@@ -12,7 +12,7 @@ interface Props {
 export const NumbersInput: React.FC<Props> = ({ value, valueChange, title, helperText }) => {
     function handleChange(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
         const value = event.target.value === '' ? '' : (Number(event.target.value) as any);
-        valueChange(Math.min(value, 100));
+        valueChange(Math.min(value, 10000));
     }
 
     return (
@@ -24,7 +24,7 @@ export const NumbersInput: React.FC<Props> = ({ value, valueChange, title, helpe
                 inputProps={{
                     step: 1,
                     min: 0,
-                    max: 100,
+                    max: 10000,
                     type: 'number',
                     'aria-labelledby': 'input-slider',
                 }}
