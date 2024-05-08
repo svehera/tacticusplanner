@@ -33,6 +33,7 @@ import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { SetAscendGoal } from 'src/shared-components/goals/set-ascend-goal';
 import MultipleSelectCheckmarks from 'src/routes/characters/multiple-select';
+import { isMobile } from 'react-device-detect';
 
 const getDefaultForm = (priority: number): IPersonalGoal => ({
     id: v4(),
@@ -189,22 +190,21 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             <IgnoreRankRarity value={ignoreRankRarity} onChange={setIgnoreRankRarity} />
                         </Conditional>
 
-                        <FormControl fullWidth>
-                            <InputLabel id="goal-type-label">Goal Type</InputLabel>
-                            <Select<PersonalGoalType>
-                                id="goal-type"
-                                labelId="goal-type-label"
-                                label="Goal Type"
-                                defaultValue={PersonalGoalType.UpgradeRank}
-                                onChange={handleGoalTypeChange}>
-                                <MenuItem value={PersonalGoalType.UpgradeRank}>Upgrade Rank</MenuItem>
-                                <MenuItem value={PersonalGoalType.Ascend}>Ascend</MenuItem>
-                                <MenuItem value={PersonalGoalType.Unlock}>Unlock</MenuItem>
-                            </Select>
-                        </FormControl>
-
-                        <div className="flex-box gap10 full-width">
-                            <div style={{ width: '50%' }}>
+                        <div className="flex-box gap10 full-width wrap">
+                            <FormControl fullWidth={isMobile}>
+                                <InputLabel id="goal-type-label">Goal Type</InputLabel>
+                                <Select<PersonalGoalType>
+                                    id="goal-type"
+                                    labelId="goal-type-label"
+                                    label="Goal Type"
+                                    defaultValue={PersonalGoalType.UpgradeRank}
+                                    onChange={handleGoalTypeChange}>
+                                    <MenuItem value={PersonalGoalType.UpgradeRank}>Upgrade Rank</MenuItem>
+                                    <MenuItem value={PersonalGoalType.Ascend}>Ascend</MenuItem>
+                                    <MenuItem value={PersonalGoalType.Unlock}>Unlock</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <div>
                                 <CharactersAutocomplete
                                     character={character}
                                     characters={allowedCharacters}
@@ -212,7 +212,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                 />
                             </div>
 
-                            <div style={{ width: '50%' }}>
+                            <div style={{ minWidth: 90 }}>
                                 <PrioritySelect
                                     value={form.priority}
                                     maxValue={goals.length + 1}

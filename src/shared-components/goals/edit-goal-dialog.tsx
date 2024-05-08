@@ -141,7 +141,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
 
                     {form.type === PersonalGoalType.UpgradeRank && (
                         <>
-                            <div className="flex-box gap10 between full-width">
+                            <div className="flex-box gap10 between full-width wrap">
                                 <RankSelect
                                     label={'Current Rank'}
                                     rankValues={currentRankValues}
