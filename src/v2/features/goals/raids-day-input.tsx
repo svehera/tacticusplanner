@@ -33,7 +33,12 @@ export const RaidsDayInput: React.FC<Props> = ({ day, handleAdd, completedLocati
                                     acquiredCount={raid.materialRef?.quantity ?? 0}
                                     materialRaid={raid}
                                     completedLocations={completedLocations}
-                                    addCount={(value, location) => handleAdd(raid, value, location)}
+                                    addCount={(value, location) => {
+                                        if (raid.materialRef) {
+                                            raid.materialRef.quantity += value;
+                                        }
+                                        handleAdd(raid, value, location);
+                                    }}
                                 />
                             </li>
                         );

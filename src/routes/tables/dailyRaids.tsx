@@ -274,12 +274,19 @@ export const DailyRaids = () => {
         );
     }, [estimatedRanks.materials]);
 
-    const formattedDate: string = useMemo(() => {
+    const upgradesCalendarDate: string = useMemo(() => {
         const nextDate = new Date();
         nextDate.setDate(nextDate.getDate() + estimatedRanks.raids.length - 1);
 
         return formatDateWithOrdinal(nextDate);
     }, [estimatedRanks.raids.length]);
+
+    const shardsCalendarDate: string = useMemo(() => {
+        const nextDate = new Date();
+        nextDate.setDate(nextDate.getDate() + estimatedShards.daysTotal);
+
+        return formatDateWithOrdinal(nextDate);
+    }, [estimatedShards.daysTotal]);
 
     return (
         <div>
@@ -293,9 +300,8 @@ export const DailyRaids = () => {
                 </Button>
                 <span>
                     Daily <MiscIcon icon={'energy'} height={15} width={15} /> {actualEnergy}
-                    {' = '}
                     {estimatedShards.energyPerDay > 0 &&
-                        `${dailyRaidsPreferences.dailyEnergy} - ${estimatedShards.energyPerDay}`}
+                        ` = ${dailyRaidsPreferences.dailyEnergy} - ${estimatedShards.energyPerDay}`}
                 </span>
             </div>
             <Popover
@@ -429,7 +435,7 @@ export const DailyRaids = () => {
                 </Accordion>
             )}
             {!!estimatedShards.shardsRaids.length && (
-                <Accordion defaultExpanded={false} TransitionProps={{ unmountOnExit: !upgradesPaging.completed }}>
+                <Accordion defaultExpanded={false}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
                             <div className="flex-box gap5 wrap" style={{ fontSize: 20 }}>
@@ -447,7 +453,7 @@ export const DailyRaids = () => {
                                     <b>{estimatedShards.onslaughtTokens}</b> Tokens)
                                 </span>
                             </div>
-                            <span className="italic">{formattedDate}</span>
+                            <span className="italic">{shardsCalendarDate}</span>
                         </FlexBox>
                     </AccordionSummary>
                     <AccordionDetails style={{ maxHeight: '63vh', overflow: 'auto' }}>
@@ -484,7 +490,7 @@ export const DailyRaids = () => {
                                     <b>{estimatedRanks.totalRaids}</b> Raids)
                                 </span>
                             </div>
-                            <span className="italic">{formattedDate}</span>
+                            <span className="italic">{upgradesCalendarDate}</span>
                         </FlexBox>
                     </AccordionSummary>
                     <AccordionDetails style={{ maxHeight: '63vh', overflow: 'auto' }}>

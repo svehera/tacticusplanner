@@ -449,11 +449,17 @@ export class StaticDataService {
                         allMaterials: [],
                     };
                 }
+                const allMaterials = character.upgradesRarity.length
+                    ? recipe.allMaterials?.filter(material => character.upgradesRarity.includes(material.rarity))
+                    : recipe.allMaterials;
+
+                for (const allMaterial of allMaterials ?? []) {
+                    allMaterial.characters = [];
+                }
+
                 return {
                     ...cloneDeep(recipe),
-                    allMaterials: character.upgradesRarity.length
-                        ? recipe.allMaterials?.filter(material => character.upgradesRarity.includes(material.rarity))
-                        : recipe.allMaterials,
+                    allMaterials,
                     priority,
                     character: character.characterName,
                 };
