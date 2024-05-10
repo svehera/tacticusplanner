@@ -6686,7 +6686,7 @@
         "rarity": "Shard"
     },
     "Sibyll": {
-        "material": "Sibyll Devine",
+        "material": "Sibyll",
         "craftable": false,
         "stat": "Shard",
         "faction": "Astra Militarum",
