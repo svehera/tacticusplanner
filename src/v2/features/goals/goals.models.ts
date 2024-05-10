@@ -64,7 +64,7 @@ export interface ICharacterAscendGoal extends ICharacterRaidGoalSelectBase {
 export interface IEstimatedAscensionSettings {
     completedLocations: string[];
     campaignsProgress: ICampaignsProgress;
-    preferences?: IDailyRaidsPreferences;
+    preferences: IDailyRaidsPreferences;
 }
 
 export interface IEstimatedShards {
