@@ -628,16 +628,20 @@ export class StaticDataService {
                 resultDays.push(day);
                 continue;
             }
+            if (isFirstDay) {
+                const completedMaterials = allMaterials
+                    .filter(material => {
+                        const completedMaterial = settings.completedLocations.find(x => x.materialId === material.id);
+                        return completedMaterial; // && completedMaterial.locations.length === material.locations.length;
+                    })
+                    .map(x => x.id);
+
+                completedMaterialsStack.push(
+                    ...settings.completedLocations.filter(x => completedMaterials.includes(x.materialId))
+                );
+            }
 
             for (const material of allMaterials) {
-                if (isFirstDay) {
-                    const completedMaterial = settings.completedLocations.find(x => x.materialId === material.id);
-                    if (completedMaterial && completedMaterial.locations.length === material.locations.length) {
-                        completedMaterialsStack.push(completedMaterial);
-                        continue;
-                    }
-                }
-
                 if (energyLeft < 5) {
                     break;
                 }
