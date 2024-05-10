@@ -604,6 +604,10 @@ export class StaticDataService {
         settings: IEstimatedRanksSettings,
         allMaterials: IMaterialEstimated2[]
     ): IDailyRaid[] {
+        if (settings.dailyEnergy <= 0) {
+            return [];
+        }
+
         const resultDays: IDailyRaid[] = [];
 
         const totalEnergy = sum(allMaterials.map(x => x.totalEnergy));
