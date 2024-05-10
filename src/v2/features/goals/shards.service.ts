@@ -60,7 +60,12 @@ export class ShardsService {
 
             const raidsLocations =
                 material.campaignsUsage === CampaignsLocationsUsage.LeastEnergy
-                    ? CampaignsService.selectBestLocations(unlockedLocations, settings.preferences)
+                    ? CampaignsService.selectBestLocations(unlockedLocations, {
+                          ...settings.preferences,
+                          useMostEfficientNodes: true,
+                          useMoreEfficientNodes: false,
+                          useLeastEfficientNodes: false,
+                      })
                     : material.campaignsUsage === CampaignsLocationsUsage.BestTime
                     ? unlockedLocations
                     : [];

@@ -435,7 +435,7 @@ export const DailyRaids = () => {
                 </Accordion>
             )}
             {!!estimatedShards.shardsRaids.length && (
-                <Accordion defaultExpanded={false}>
+                <Accordion defaultExpanded={!dailyRaids.completedShardsLocations?.length}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
                             <div className="flex-box gap5 wrap" style={{ fontSize: 20 }}>
