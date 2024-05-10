@@ -69,7 +69,7 @@ export interface IEstimatedAscensionSettings {
 
 export interface IEstimatedShards {
     shardsRaids: IShardsRaid[];
-    materials: IMaterialEstimate[];
+    materials: ICharacterShardsEstimate[];
     energyTotal: number;
     raidsTotal: number;
     onslaughtTokens: number;
@@ -77,7 +77,7 @@ export interface IEstimatedShards {
     energyPerDay: number;
 }
 
-export interface IMaterial {
+export interface IShardMaterial {
     goalId: string;
     characterId: string;
     label: string;
@@ -90,12 +90,12 @@ export interface IMaterial {
     campaignsUsage: CampaignsLocationsUsage;
 }
 
-export interface IShardsRaid extends IMaterialEstimate {
+export interface IShardsRaid extends ICharacterShardsEstimate {
     isCompleted: boolean;
     locations: Array<ILocationRaid>;
 }
 
-export interface IMaterialEstimate extends IMaterial {
+export interface ICharacterShardsEstimate extends IShardMaterial {
     availableLocations: ICampaignBattleComposed[];
     raidsLocations: ICampaignBattleComposed[];
     energyTotal: number;
@@ -115,3 +115,64 @@ export interface ILocationRaid {
     energySpent: number;
     isCompleted: boolean;
 }
+
+export interface IEstimatedUpgrades {
+    // shardsRaids: IShardsRaid[];
+    materials: ICharacterUpgradeEstimate[];
+    energyTotal: number;
+    raidsTotal: number;
+    daysTotal: number;
+}
+
+export interface ICharacterUpgrade {
+    goalId: string;
+    characterId: string;
+    label: string;
+    upgradeRanks: ICharacterUpgradeRank[];
+}
+
+export interface ICharacterUpgradeRank {
+    rankStart: Rank;
+    rankEnd: Rank;
+    rankPoint5: boolean;
+    upgrades: IBaseUpgrade[];
+}
+export interface ICharacterUpgradeEstimate extends ICharacterUpgradeRank {}
+
+export interface IUpgradeInfo extends IUpgradeBase {
+    baseUpgrades: IUpgradeBase[];
+    craftedUpgrades: IUpgradeBase[];
+}
+
+export interface IUpgradeBase {
+    id: string;
+    label: string;
+    rarity: Rarity;
+    count: number;
+}
+
+export interface IBaseUpgrade {
+    id: string;
+    label: string;
+    rarity: Rarity;
+    iconPath: string;
+    locations: ICampaignBattleComposed[];
+}
+
+export interface ICraftedUpgrade {
+    id: string;
+    label: string;
+    rarity: Rarity;
+    iconPath: string;
+    baseUpgrades: IUpgradeRecipe[];
+    craftedUpgrades: IUpgradeRecipe[];
+}
+
+export interface IUpgradeRecipe {
+    id: string;
+    count: number;
+}
+
+export type IBaseUpgradeData = Record<string, IBaseUpgrade>;
+export type ICraftedUpgradeData = Record<string, ICraftedUpgrade>;
+export type IUpgradeData = Record<string, IUpgradeInfo>;

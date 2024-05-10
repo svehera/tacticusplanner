@@ -72,7 +72,7 @@ export class StaticDataService {
         Faction.WorldEaters,
     ];
 
-    static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = CampaignsService.getCampaignComposed();
+    static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = CampaignsService.campaignsComposed;
 
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
     static readonly campaignsGrouped: Record<string, ICampaignBattleComposed[]> = this.getCampaignGrouped();

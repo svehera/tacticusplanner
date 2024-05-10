@@ -605,7 +605,7 @@ export interface IRecipeData {
 }
 
 export interface IMaterial {
-    material: MaterialName;
+    material: string;
     label?: string;
     rarity: string;
     craftable: boolean;

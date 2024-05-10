@@ -33,6 +33,7 @@ import {
     ICharacterUnlockGoal,
     ICharacterUpgradeRankGoal,
     IEstimatedShards,
+    IEstimatedUpgrades,
 } from 'src/v2/features/goals/goals.models';
 import { MaterialsTable } from 'src/v2/features/goals/materials-table';
 import InfoIcon from '@mui/icons-material/Info';
@@ -48,6 +49,7 @@ import { ShardsService } from 'src/v2/features/goals/shards.service';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import { ShardsRaidsDayInput } from 'src/v2/features/goals/shards-raids-day-input';
 import { GoalsService } from 'src/v2/features/goals/goals.service';
+import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -241,6 +243,22 @@ export const DailyRaids = () => {
             ...upgradeRankGoals
         );
     }, [upgradeRankGoals, dailyRaidsPreferences, dailyRaids.filters, upgrades]);
+
+    const estimatedRanks2: IEstimatedUpgrades = useMemo(() => {
+        return UpgradesService.getUpgradesEstimatedDays(
+            {
+                dailyEnergy: actualEnergy,
+                campaignsProgress: campaignsProgress,
+                preferences: dailyRaidsPreferences,
+                upgrades: upgrades,
+                completedLocations: dailyRaids.completedLocations ?? [],
+                filters: dailyRaids.filters,
+            },
+            ...upgradeRankGoals
+        );
+    }, [upgradeRankGoals, dailyRaidsPreferences, dailyRaids.filters, upgrades]);
+
+    console.log(estimatedRanks2);
 
     useEffect(() => {
         if (estimatedRanks.raids.length > 3) {
