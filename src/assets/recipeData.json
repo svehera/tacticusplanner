@@ -3313,6 +3313,7 @@
     },
     "Filligrane Psytronome": {
         "material": "Filligrane Psytronome",
+        "label": "Filigrane Psytronome",
         "rarity": "Epic",
         "stat": "Damage",
         "faction": "Aeldari",
@@ -3331,6 +3332,7 @@
     },
     "Filligrane Wraithbone Plate": {
         "material": "Filligrane Wraithbone Plate",
+        "label": "Filigrane Wraithbone Plate",
         "rarity": "Epic",
         "stat": "Armour",
         "faction": "Aeldari",
@@ -6684,7 +6686,7 @@
         "rarity": "Shard"
     },
     "Sibyll": {
-        "material": "Sibyll Devine",
+        "material": "Sibyll",
         "craftable": false,
         "stat": "Shard",
         "faction": "Astra Militarum",

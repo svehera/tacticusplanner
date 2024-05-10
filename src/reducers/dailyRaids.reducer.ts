@@ -68,7 +68,6 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
             const { locationId } = action;
             return {
                 ...state,
-                completedLocations: [],
                 completedShardsLocations: [...state.completedShardsLocations, locationId],
             };
         }
