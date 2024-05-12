@@ -596,6 +596,10 @@ export interface ICampaignBattleComposed {
     enemiesAlliances: Alliance[];
     alliesFactions: Faction[];
     alliesAlliance: Alliance;
+    // new props for upgrades service
+    isSelected?: boolean;
+    isUnlocked?: boolean;
+    isPassFilter?: boolean;
 }
 
 type MaterialName = string;
@@ -769,7 +773,7 @@ export interface IEstimatedRanksSettings {
     completedLocations: IMaterialRaid[];
     campaignsProgress: ICampaignsProgress;
     dailyEnergy: number;
-    preferences?: IDailyRaidsPreferences;
+    preferences: IDailyRaidsPreferences;
     filters?: IDailyRaidsFilters;
     upgrades: Record<string, number>;
 }

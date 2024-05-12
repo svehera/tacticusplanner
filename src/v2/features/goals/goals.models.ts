@@ -119,6 +119,8 @@ export interface ILocationRaid {
 export interface IEstimatedUpgrades {
     // shardsRaids: IShardsRaid[];
     materials: ICharacterUpgradeEstimate[];
+    characters: ICharacterUpgrade[];
+    byCharactersPriority: ICharacterUpgradeRankEstimate[];
     energyTotal: number;
     raidsTotal: number;
     daysTotal: number;
@@ -129,26 +131,18 @@ export interface ICharacterUpgrade {
     characterId: string;
     label: string;
     upgradeRanks: ICharacterUpgradeRank[];
+    baseUpgradesTotal: Record<string, number>;
 }
 
 export interface ICharacterUpgradeRank {
     rankStart: Rank;
     rankEnd: Rank;
     rankPoint5: boolean;
-    upgrades: IBaseUpgrade[];
-}
-export interface ICharacterUpgradeEstimate extends ICharacterUpgradeRank {}
-
-export interface IUpgradeInfo extends IUpgradeBase {
-    baseUpgrades: IUpgradeBase[];
-    craftedUpgrades: IUpgradeBase[];
+    upgrades: string[];
 }
 
-export interface IUpgradeBase {
-    id: string;
-    label: string;
-    rarity: Rarity;
-    count: number;
+export interface ICharacterUpgradeRankEstimate extends ICharacterUpgradeRankGoal {
+    upgrades: ICharacterUpgradeEstimate[];
 }
 
 export interface IBaseUpgrade {
@@ -157,6 +151,25 @@ export interface IBaseUpgrade {
     rarity: Rarity;
     iconPath: string;
     locations: ICampaignBattleComposed[];
+}
+
+export interface ICombinedUpgrade extends IBaseUpgrade {
+    countByGoalId: Record<string, number>;
+    requiredCount: number;
+    relatedCharacters: string[];
+}
+
+export interface ICharacterUpgradeEstimate extends IBaseUpgrade {
+    energyTotal: number;
+    daysTotal: number;
+    raidsTotal: number;
+
+    acquiredCount: number;
+    requiredCount: number;
+    relatedCharacters: string[];
+
+    isBlocked: boolean;
+    isFinished: boolean;
 }
 
 export interface ICraftedUpgrade {
@@ -175,4 +188,3 @@ export interface IUpgradeRecipe {
 
 export type IBaseUpgradeData = Record<string, IBaseUpgrade>;
 export type ICraftedUpgradeData = Record<string, ICraftedUpgrade>;
-export type IUpgradeData = Record<string, IUpgradeInfo>;
