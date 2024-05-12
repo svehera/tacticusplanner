@@ -187,5 +187,12 @@
         "avatarIcon": "ref.webp",
         "resourceDescription": "",
         "resourceLink": ""
+    },
+    {
+        "name": "Niko Lowsky",
+        "type": "Supporter",
+        "thankYou": "Great App. Spending almost as much time here as in Tacticus \uD83D\uDE05",
+        "resourceDescription": "",
+        "resourceLink": ""
     }
 ]

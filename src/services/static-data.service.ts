@@ -635,8 +635,7 @@ export class StaticDataService {
             if (isFirstDay) {
                 const completedMaterials = allMaterials
                     .filter(material => {
-                        const completedMaterial = settings.completedLocations.find(x => x.materialId === material.id);
-                        return completedMaterial; // && completedMaterial.locations.length === material.locations.length;
+                        return settings.completedLocations.find(x => x.materialId === material.id); // && completedMaterial.locations.length === material.locations.length;
                     })
                     .map(x => x.id);
 
@@ -646,6 +645,13 @@ export class StaticDataService {
             }
 
             for (const material of allMaterials) {
+                const isCompleted = settings.completedLocations.some(
+                    x => x.materialId === material.id && x.locations.length === material.locations.length
+                );
+
+                if (isFirstDay && isCompleted) {
+                    continue;
+                }
                 if (energyLeft < 5) {
                     break;
                 }
