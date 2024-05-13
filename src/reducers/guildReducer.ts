@@ -4,20 +4,7 @@ import { defaultData } from '../models/constants';
 export type GuildAction =
     | SetStateAction<IGuild>
     | {
-          type: 'UpdateUsername';
-          index: number;
-          value: string;
-      }
-    | {
-          type: 'StopEditingGuildMembers';
-      }
-    | {
-          type: 'UpdateShareToken';
-          index: number;
-          value: string;
-      }
-    | {
-          type: 'ImportFromExcel';
+          type: 'SaveGuildMembers';
           members: IGuildMember[];
       };
 
@@ -27,48 +14,11 @@ export const guildReducer = (state: IGuild, action: GuildAction): IGuild => {
             return action.value ?? defaultData.guild;
         }
 
-        case 'UpdateUsername': {
-            const user = state.members.find(x => x.index === action.index);
-
-            if (user) {
-                user.username = action.value;
-                return {
-                    ...state,
-                    members: [...state.members],
-                };
-            }
-
-            return {
-                ...state,
-                members: [...state.members, { username: action.value, shareToken: '', index: action.index }],
-            };
-        }
-
-        case 'UpdateShareToken': {
-            const user = state.members.find(x => x.index === action.index);
-
-            if (user) {
-                user.shareToken = action.value;
-                return {
-                    ...state,
-                    members: [...state.members],
-                };
-            }
-
-            return {
-                ...state,
-                members: [...state.members, { shareToken: action.value, username: '', index: action.index }],
-            };
-        }
-
-        case 'StopEditingGuildMembers': {
-            return {
-                ...state,
-                members: state.members.filter(x => !!x.username || !!x.shareToken),
-            };
-        }
-        case 'ImportFromExcel': {
-            const newMembers = action.members.slice(0, 30).map((x, i) => ({ ...x, index: i }));
+        case 'SaveGuildMembers': {
+            const newMembers = action.members
+                .filter(x => !!x.username.length)
+                .slice(0, 30)
+                .map((x, i) => ({ ...x, index: i }));
             return {
                 ...state,
                 members: newMembers,

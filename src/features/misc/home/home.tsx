@@ -5,19 +5,23 @@ import { Card, CardContent, CardHeader } from '@mui/material';
 import { menuItemById } from '../../../models/menu-items';
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
-import { GoalCard } from '../../../routes/goals/goals';
 import { sum } from 'lodash';
 import { MiscIcon } from '../../../shared-components/misc-icon';
 
-import lre from 'src/assets/legendary-events/Shadowsun.json';
+import lre from 'src/assets/legendary-events/Vitruvius.json';
+import { PersonalGoalType } from 'src/models/enums';
 
 export const Home = () => {
     const navigate = useNavigate();
     const { goals, dailyRaids } = useContext(StoreContext);
-    const nextLeMenuItem = menuItemById['shadowsun'];
+    const nextLeMenuItem = menuItemById['vitruvius'];
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
+
     const topPriorityGoal = goals[0];
+    const unlockGoals = goals.filter(x => x.type === PersonalGoalType.Unlock).length;
+    const ascendGoals = goals.filter(x => x.type === PersonalGoalType.Ascend).length;
+    const upgradeRankGoals = goals.filter(x => x.type === PersonalGoalType.UpgradeRank).length;
 
     function formatMonthAndDay(date: Date): string {
         const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric' };
@@ -121,16 +125,48 @@ export const Home = () => {
                     </Card>
                 </div>
 
-                {topPriorityGoal ? (
+                {!!goals.length && (
                     <div>
-                        <h3 style={{ textAlign: 'center' }}>Top Priority Goal</h3>
-                        <GoalCard
-                            goal={topPriorityGoal}
-                            higherPriorityGoals={[]}
+                        <h3 style={{ textAlign: 'center' }}>Your Goals</h3>
+                        <Card
                             onClick={() => navigate(isMobile ? goalsMenuItem.routeMobile : goalsMenuItem.routeWeb)}
-                        />
+                            sx={{
+                                width: 350,
+                                minHeight: 200,
+                                cursor: 'pointer',
+                            }}>
+                            <CardHeader
+                                title={
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                        {goalsMenuItem.icon} {goalsMenuItem.label}
+                                    </div>
+                                }
+                            />
+                            <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
+                                {!!unlockGoals && (
+                                    <span>
+                                        <b>Unlock</b> {unlockGoals} characters
+                                    </span>
+                                )}
+                                {!!ascendGoals && (
+                                    <span>
+                                        <b>Ascend</b> {ascendGoals} characters
+                                    </span>
+                                )}
+                                {!!upgradeRankGoals && (
+                                    <span>
+                                        <b>Upgrade rank</b> for {upgradeRankGoals} characters
+                                    </span>
+                                )}
+                                {!!topPriorityGoal?.notes && (
+                                    <span>
+                                        <b>Top priority goal notes:</b> {topPriorityGoal.notes}
+                                    </span>
+                                )}
+                            </CardContent>
+                        </Card>
                     </div>
-                ) : undefined}
+                )}
             </div>
         </div>
     );

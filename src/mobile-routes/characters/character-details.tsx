@@ -52,9 +52,7 @@ export const CharacterDetails = ({
     }, [formData.rarity]);
 
     const starsEntries = useMemo(() => {
-        const entries = getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
-        handleInputChange('stars', entries[0]);
-        return entries;
+        return getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
     }, [minStars, maxStars]);
 
     const rarityEntries: number[] = getEnumValues(Rarity);
@@ -123,7 +121,6 @@ export const CharacterDetails = ({
                     <FormControl variant={'outlined'} fullWidth>
                         <InputLabel>Shards</InputLabel>
                         <Input
-                            disableUnderline={true}
                             value={formData.shards}
                             onChange={event =>
                                 handleInputChange(
@@ -243,7 +240,9 @@ export const CharacterDetails = ({
                     </Grid>
 
                     <CharacterUpgrades
-                        character={character}
+                        characterName={character.name}
+                        upgrades={character.upgrades}
+                        rank={character.rank}
                         upgradesChanges={(upgrades, updateInventory) => {
                             characterChanges({ ...character, upgrades: upgrades });
                             updateInventoryChanges(updateInventory);

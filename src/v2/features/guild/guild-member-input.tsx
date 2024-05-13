@@ -2,6 +2,7 @@
 import { IGuildMember } from 'src/models/interfaces';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { TextField } from '@mui/material';
+import { isMobile } from 'react-device-detect';
 
 interface Props {
     index: number;
@@ -12,7 +13,7 @@ interface Props {
 
 export const GuildMemberInput: React.FC<Props> = ({ index, member, onShareTokenChange, onUsernameChange }) => {
     return (
-        <FlexBox gap={5} style={{ minWidth: 450 }}>
+        <FlexBox gap={5} style={{ minWidth: !isMobile ? 450 : 'unset' }}>
             <span style={{ minWidth: 25 }}>{index + 1}.</span>
             <TextField
                 size={'small'}

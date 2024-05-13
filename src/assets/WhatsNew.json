@@ -1,20 +1,371 @@
 ﻿{
-    "currentVersion": "1.4.7",
+    "currentVersion": "1.5.3",
     "releaseNotes": [
         {
-            "version": "1.4.7",
-            "date": "April X",
+            "version": "1.5.3",
+            "date": "May 8",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updated goals grid view and added list view",
+                    "images": [
+                        {
+                            "path": "grid.png"
+                        },
+                        {
+                            "path": "list.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added more flexibility when setting \"Ascend\" or \"Unlock\" goals",
+                    "subPoints": [
+                        "You can set goal to promote to specific stars e.g. to Blue star",
+                        "You can specify whether you want to use only campaigns, only onslaught or both for farming shards"
+                    ],
+                    "images": [
+                        {
+                            "path": "ascend.png"
+                        },
+                        {
+                            "path": "unlock.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added Shards raids section to the daily raids and updated \"Active goals section\" to include ascend/unlock goals",
+                    "images": [
+                        {
+                            "path": "active.png"
+                        },
+                        {
+                            "path": "shards.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Goals limit increased to 30"
+                },
+                {
+                    "text": "Added possibility to limit upgrades rarity for \"Upgrade rank\" goal (diagonalplane)",
+                    "images": [
+                        {
+                            "path": "rank.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Updated rank lookup page",
+                    "images": [
+                        {
+                            "path": "lookup.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue when adding guild members and deleting them makes the 'Import Link' feature leave blank slots (Vexen)"
+                },
+                {
+                    "text": "Fixed wrong upgrades count in the daily raids (ZHovtiyLitsar)"
+                },
+                {
+                    "text": "Fixed when applying upgrades after upgrading multiple ranks doesn't work on edit goal dialog (BlatantFix)"
+                },
+                {
+                    "text": "Fixed vindicta's upgrade item is incorrect for Iron III rank (Hadoopalot)"
+                },
+                {
+                    "text": "Fixed save Changes button is inactive if # of goals doesn't change on daily raids (SeventhSun)"
+                }
+            ]
+        },
+        {
+            "version": "1.5.2",
+            "date": "April 25",
             "type": "Update",
             "new": [],
             "minor": [
                 {
+                    "text": "Added warning message that duplicated upgrades will be applied both at once"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed mobile layout issue, for daily raid UI (Tani)"
+                }
+            ]
+        },
+        {
+            "version": "1.5.1",
+            "date": "April 24",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added amount of unused energy to the Raids section of the Daily raids page",
+                    "images": [
+                        {
+                            "path": "en.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added back possibility to edit goals on daily raids page (Kortesch)"
+                },
+                {
+                    "text": "Added back daily raids setting that are used to combined different campaigns types (RotoR, James V)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed incorrect drop for Saim-Hann Mirror 63 (Sort of Purple)"
+                }
+            ]
+        },
+        {
+            "version": "1.5.0",
+            "date": "April 23",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added \"Slots\" filter to the Daily Raids filter",
+                    "subPoints": ["You can use it to filter locations by amount (3,4,5) of deployable characters"],
+                    "images": [
+                        {
+                            "path": "filter.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added link to guilmates' roster page",
+                    "images": [
+                        {
+                            "path": "guild.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated more upgrades icons. Thanks to KIVIY"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with 'i' not showing tooltip on daily raids settings on mobile (RotoR)"
+                }
+            ]
+        },
+        {
+            "version": "1.4.9",
+            "date": "April 22",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added daily raids filter",
+                    "subPoints": [
+                        "You can use it to tweak recommended locations based on your needs (e.g. you want to show only nodes that have Chaos as deployable factions)",
+                        "You can filter by alliances (Chaos, Xenos, Imperial) and factions(Necrons, etc.) of allies or enemies",
+                        "You can filter by campaign types (Elite, Mirror, etc.)",
+                        "You can filter by upgrades rarity (Legendary, Epic, etc.)"
+                    ],
+                    "images": [
+                        {
+                            "path": "raids1.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "UI adjustments for the Daily Raids page (await for more)",
+                    "subPoints": [
+                        "Added navigation shortcut between goals and daily raids views",
+                        "\"Refresh estimate\" button renamed to \"Refresh\" and moved to the top of the page",
+                        "\"Clear completed raids\" button renamed to \"Reset day\" and moved to the top of the page",
+                        "\"Selected characters\" section renamed to \"Selected goals\" and added characters' icons",
+                        "\"Materials\" section splited into 3 sections: \"In Progress materials\", \"Finished materials\", \"Blocked materials\"",
+                        "Added total number of raids and raids per day to the raids cards",
+                        "Updated daily raids settings"
+                    ],
+                    "images": [
+                        {
+                            "path": "raids2.png"
+                        },
+                        {
+                            "path": "raids3.png"
+                        },
+                        {
+                            "path": "raids4.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
+        {
+            "version": "1.4.8",
+            "date": "April 19",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added guild war attack tokens tracking and guild overall data.",
+                    "subPoints": [
+                        "Track how many war tokens you have left to use for attack enemy defences",
+                        "This data is automatically shared with your guildmates",
+                        "You can manually tweak wat tokens count on the \"Deployment status\" dialog or just rely on automatic decrement by 1 after deploying a team"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild3.png"
+                        },
+                        {
+                            "path": "guild2.png"
+                        },
+                        {
+                            "path": "guild4.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added guild members \"Username\" and \"Share Token\" validation",
+                    "subPoints": [
+                        "You will be able to see the reason why user is invalid and ask your guildmates to provide proper data"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild1.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added new \"Import link\" option on the guild page",
+                    "subPoints": [
+                        "The username and share token will be automatically parsed from the share link",
+                        "It should help to deal with human error when manually entering username and share token"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild5.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated upgrades icons. Thanks to KIVIY"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed guild view/edit on mobile"
+                },
+                {
+                    "text": "Fixed issue with \"Starts\" on the character's stats screen (SeventhSun)"
+                }
+            ]
+        },
+        {
+            "version": "1.4.7",
+            "date": "April 18",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updated Thank You cards with \"Buy me a coffee\" supporters",
+                    "subPoints": [
+                        "You can get one for you but supporting the planner on https://www.buymeacoffee.com/tacticusplanner",
+                        "Added discord server roles for supporters. Contact me if you are missing the role"
+                    ],
+                    "images": [
+                        {
+                            "path": "bmc.png"
+                        }
+                    ],
+                    "route": "ty"
+                },
+                {
+                    "text": "Added possibly to access guildmates Tacticus planner data",
+                    "subPoints": [
+                        "Your guildmates should enable roster sharing and share with you username and sharetoken which you should populate on the Input Guild page",
+                        "You can populate guildmates data by importing Excel file",
+                        "Your account data is not included automatically so make sure to populate your username and sharetoken as well"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild1.png"
+                        },
+                        {
+                            "path": "guild2.png"
+                        }
+                    ],
+                    "route": "input/guild"
+                },
+                {
+                    "text": "Added Guild Insights page",
+                    "subPoints": ["You can view guild averaged roster data and who own which characters"],
+                    "images": [
+                        {
+                            "path": "guild3.png"
+                        },
+                        {
+                            "path": "guild4.png"
+                        }
+                    ],
+                    "route": "learn/guildInsights"
+                },
+                {
+                    "text": "Added Guild Waz zones page",
+                    "subPoints": [
+                        "War zones layout is updated according to changes announced for the next season of guild wars",
+                        "War zones can be reordered in the same fashion how it is done in the game",
+                        "You can have up to 3 war zones layout",
+                        "You can view guildmates potential for each difficult and assign them to specific zones"
+                    ],
+                    "images": [
+                        {
+                            "path": "guild5.png"
+                        },
+                        {
+                            "path": "guild6.png"
+                        }
+                    ],
+                    "route": "plan/guildWar/zones"
+                }
+            ],
+            "minor": [
+                {
                     "text": "On the character's details dialog when rarity is changed the stars will be auto-adjusted accordingly. Thanks to NickReinlein for contribution",
                     "route": "https://github.com/svehera/tacticusplanner/pull/184"
+                },
+                {
+                    "text": "Refined \"power/potential\" calculation formula to scale better for rank upgrades. Thanks to Lëonaica for contribution",
+                    "subPoints": [
+                        "40k is ultimate power now and is a maximum for each character when character has Diamond III rank, Blue star and both abilities at level 50"
+                    ],
+                    "images": [
+                        {
+                            "path": "40k.png"
+                        }
+                    ],
+                    "route": "https://github.com/svehera/tacticusplanner/pull/188"
+                },
+                {
+                    "text": "Updated icon for Righteous Candle (SeventhSun)"
                 }
             ],
             "bugFixes": [
                 {
                     "text": "Fixed Indomitus Mirror Elite 4 reward (SeventhSun)"
+                },
+                {
+                    "text": "Fixed Saim-Hann Elite 5 reward (SeventhSun)"
+                },
+                {
+                    "text": "Fixed issue with calendar days are wrong by 1 day too many (Tani)"
                 }
             ]
         },

@@ -25,10 +25,10 @@ export enum Faction {
 
 export enum RarityString {
     Common = 'Common',
+    Uncommon = 'Uncommon',
+    Rare = 'Rare',
     Epic = 'Epic',
     Legendary = 'Legendary',
-    Rare = 'Rare',
-    Uncommon = 'Uncommon',
 }
 
 export enum Rarity {
@@ -182,6 +182,12 @@ export enum PersonalGoalType {
     Unlock = 3,
 }
 
+export enum CampaignsLocationsUsage {
+    None = 0,
+    BestTime = 1,
+    LeastEnergy = 2,
+}
+
 export enum CharacterBias {
     NeverRecommend = -1,
     None = 0,
@@ -195,11 +201,25 @@ export enum CampaignType {
     Normal = 'Normal',
     Mirror = 'Mirror',
     Elite = 'Elite',
+    Onslaught = 'Onslaught',
 }
 
 export enum Campaign {
-    Indomitus = 'Indomitus',
-    FallOfCadia = 'Fall of Cadia',
-    Octarius = 'Octarius',
-    SaimHann = 'Saim-Hann',
+    I = 'Indomitus',
+    IE = 'Indomitus Elite',
+    IM = 'Indomitus Mirror',
+    IME = 'Indomitus Mirror Elite',
+    FoC = 'Fall of Cadia',
+    FoCE = 'Fall of Cadia Elite',
+    FoCM = 'Fall of Cadia Mirror',
+    FoCME = 'Fall of Cadia Mirror Elite',
+    O = 'Octarius',
+    OE = 'Octarius Elite',
+    OM = 'Octarius Mirror',
+    OME = 'Octarius Mirror Elite',
+    SH = 'Saim-Hann',
+    SHE = 'Saim-Hann Elite',
+    SHM = 'Saim-Hann Mirror',
+    SHME = 'Saim-Hann Mirror Elite',
+    Onslaught = 'Onslaught',
 }

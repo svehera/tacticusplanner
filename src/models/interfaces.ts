@@ -1,6 +1,7 @@
 ﻿import {
     Alliance,
     Campaign,
+    CampaignsLocationsUsage,
     CampaignType,
     CharacterBias,
     CharacterReleaseRarity,
@@ -311,14 +312,27 @@ export interface IGuildMember {
 
 export interface IGuildWar {
     zoneDifficulty: Difficulty;
+    attackTokens: number;
     deployedCharacters: string[];
     teams: IGWTeam[];
     layouts: IGWLayout[];
 }
 
 export interface IDailyRaids {
+    filters: IDailyRaidsFilters;
     completedLocations: IMaterialRaid[];
+    completedShardsLocations: string[];
     lastRefreshDateUTC: string;
+}
+
+export interface IDailyRaidsFilters {
+    enemiesAlliance: Alliance[];
+    enemiesFactions: Faction[];
+    alliesAlliance: Alliance[];
+    alliesFactions: Faction[];
+    campaignTypes: CampaignType[];
+    upgradesRarity: Rarity[];
+    slotsCount?: number[];
 }
 
 export interface ILegendaryEventsData {
@@ -372,6 +386,7 @@ export interface IViewPreferences {
     showCharacterLevel: boolean;
     showCharacterRarity: boolean;
     inventoryShowAlphabet: boolean;
+    goalsTableView: boolean;
 }
 
 export interface IAutoTeamsPreferences {
@@ -384,13 +399,10 @@ export interface IAutoTeamsPreferences {
 
 export interface IDailyRaidsPreferences {
     dailyEnergy: number;
-    shardsEnergy: number;
-    useCampaignsProgress: boolean;
+    farmByPriorityOrder: boolean;
     useMostEfficientNodes: boolean;
     useMoreEfficientNodes: boolean;
     useLeastEfficientNodes: boolean;
-    useInventory: boolean;
-    farmByPriorityOrder: boolean;
 }
 
 export interface ISelectedTeamsOrdering {
@@ -438,17 +450,19 @@ export interface IPersonalGoal {
     character: string;
     type: PersonalGoalType;
     priority: number;
-    currentRarity?: Rarity;
-    targetRarity?: Rarity;
-    currentShards?: number;
-    shardsPerDayOrToken?: number;
-    energyPerDay?: number;
-    currentRank?: Rank;
-    targetRank?: Rank;
-    notes?: string;
-    rankPoint5?: boolean;
     dailyRaids: boolean;
-    upgrades: string[];
+    notes?: string;
+    // upgrade rank
+    targetRank?: Rank;
+    rankPoint5?: boolean;
+    upgradesRarity?: Rarity[];
+    // ascend
+    targetRarity?: Rarity;
+    targetStars?: RarityStars;
+    shardsPerToken?: number;
+
+    // unlock
+    campaignsUsage?: CampaignsLocationsUsage;
 }
 
 export type ILegendaryEventsProgressState = Record<LegendaryEventEnum, ILegendaryEventProgressState>;
@@ -558,19 +572,30 @@ export interface ICampaignBattle {
     reward: string; // material name or hero name in case farming shards
     expectedGold: number;
     slots?: number;
+    enemiesAlliances?: string[];
+    enemiesFactions?: string[];
 }
 
 export interface ICampaignBattleComposed {
-    campaign: string;
+    id: string;
+    campaign: Campaign;
+    campaignType: CampaignType;
     energyCost: number;
     dailyBattleCount: number;
     dropRate: number;
     energyPerItem: number;
+    itemsPerDay: number;
+    energyPerDay: number;
     nodeNumber: number;
     rarity: string;
+    rarityEnum: Rarity;
     reward: string; // material name or hero name in case farming shards
     expectedGold: number;
     slots?: number;
+    enemiesFactions: Faction[];
+    enemiesAlliances: Alliance[];
+    alliesFactions: Faction[];
+    alliesAlliance: Alliance;
 }
 
 type MaterialName = string;
@@ -678,6 +703,8 @@ export interface IMaterialEstimated2 {
     totalEnergy: number;
     dailyEnergy: number;
     locations: ICampaignBattleComposed[];
+    possibleLocations: ICampaignBattleComposed[];
+    unlockedLocations: string[];
     locationsString: string;
     missingLocationsString: string;
     daysOfBattles: number;
@@ -691,11 +718,13 @@ export interface IMaterialEstimated2 {
     iconPath: string;
     characters: string[];
     priority: number;
+    isBlocked: boolean;
 }
 
 export interface IDailyRaid {
     raids: IMaterialRaid[];
     energyLeft: number;
+    raidsCount: number;
 }
 
 export interface IMaterialRaid {
@@ -732,6 +761,8 @@ export interface IEstimatedRanks {
     upgrades: IMaterialFull[];
     materials: IMaterialEstimated2[];
     totalEnergy: number;
+    totalUnusedEnergy: number;
+    totalRaids: number;
 }
 
 export interface IEstimatedRanksSettings {
@@ -739,6 +770,7 @@ export interface IEstimatedRanksSettings {
     campaignsProgress: ICampaignsProgress;
     dailyEnergy: number;
     preferences?: IDailyRaidsPreferences;
+    filters?: IDailyRaidsFilters;
     upgrades: Record<string, number>;
 }
 
@@ -769,10 +801,11 @@ export interface IInventory {
 
 export interface IContributor {
     name: string;
+    type: string;
     thankYou: string;
     resourceDescription: string;
     resourceLink: string;
-    avatarIcon: string;
+    avatarIcon?: string;
 }
 
 export interface IContentCreator {

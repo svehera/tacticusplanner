@@ -1124,8 +1124,7 @@
         "Number": 52,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "ShadowSun.webp",
-        "ReleaseRarity": 5
+        "Icon": "ShadowSun.webp"
     },
     {
         "Name": "Ulf",

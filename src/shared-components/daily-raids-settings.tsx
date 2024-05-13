@@ -1,17 +1,27 @@
 ﻿import React, { useCallback, useContext, useMemo } from 'react';
-import { Checkbox, FormControlLabel, FormGroup, Box, Slider, Input, Tooltip } from '@mui/material';
+import {
+    Checkbox,
+    FormControlLabel,
+    FormGroup,
+    Box,
+    Slider,
+    FormControl,
+    FormLabel,
+    RadioGroup,
+    Radio,
+} from '@mui/material';
 import { IDailyRaidsPreferences } from '../models/interfaces';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import WarningIcon from '@mui/icons-material/Warning';
+import InfoIcon from '@mui/icons-material/Info';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
 const DailyRaidsSettings = ({ close }: { close: () => void }) => {
     const dispatch = useContext(DispatchContext);
     const { dailyRaidsPreferences } = useContext(StoreContext);
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
     const [dailyEnergy, setDailyEnergy] = React.useState(dailyRaidsPreferences.dailyEnergy);
-    const [shardsEnergy, setShardsEnergy] = React.useState<number | string>(dailyRaidsPreferences.shardsEnergy);
 
     const updatePreferences = useCallback((setting: keyof IDailyRaidsPreferences, value: boolean) => {
         setDailyRaidsPreferencesForm(curr => ({ ...curr, [setting]: value }));
@@ -22,13 +32,6 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
             setDailyEnergy(value);
             setDailyRaidsPreferencesForm(curr => ({ ...curr, dailyEnergy: value }));
         }
-    };
-
-    const handleShardsEnergyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const rawValue = event.target.value;
-        const value = event.target.value === '' ? 0 : Number(event.target.value);
-        setShardsEnergy(rawValue);
-        setDailyRaidsPreferencesForm(curr => ({ ...curr, shardsEnergy: value }));
     };
 
     const saveChanges = () => {
@@ -90,33 +93,7 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
             </Box>
 
             <FormControlLabel
-                control={
-                    <Input
-                        value={shardsEnergy}
-                        size="small"
-                        onChange={handleShardsEnergyChange}
-                        inputProps={{
-                            step: 1,
-                            min: 0,
-                            max: 200,
-                            type: 'number',
-                        }}
-                    />
-                }
-                label="Characters shards energy"
-            />
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={dailyRaidsPreferencesForm.useCampaignsProgress}
-                        onChange={event => updatePreferences('useCampaignsProgress', event.target.checked)}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                }
-                label="Use campaigns progress"
-            />
-
-            <FormControlLabel
+                style={{ marginTop: 20 }}
                 control={
                     <Checkbox
                         checked={dailyRaidsPreferencesForm.useMostEfficientNodes}
@@ -149,27 +126,59 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
                 label="Use Least efficient nodes (Normal)"
             />
 
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={dailyRaidsPreferencesForm.useInventory}
-                        onChange={event => updatePreferences('useInventory', event.target.checked)}
-                        inputProps={{ 'aria-label': 'controlled' }}
+            <FormControl>
+                <FormLabel id="radio-buttons-group">Raids order/grouping:</FormLabel>
+                <RadioGroup
+                    aria-labelledby="radio-buttons-group"
+                    name="controlled-radio-buttons-group"
+                    value={dailyRaidsPreferencesForm.farmByPriorityOrder + ''}
+                    onChange={change => updatePreferences('farmByPriorityOrder', change.target.value === 'true')}>
+                    <FormControlLabel
+                        value="false"
+                        control={<Radio />}
+                        label={
+                            <div className="flex-box start gap5">
+                                By total materials{' '}
+                                <AccessibleTooltip
+                                    title={
+                                        <p>
+                                            Materials required to accomplish all selected goals will be combined
+                                            together.
+                                            <br /> Pros: You will farm materials for all characters at once and overall
+                                            it will take less time to accomplish all selected goals
+                                            <br /> Cons: Goals priority is ignored and it will take more time to
+                                            accomplish your high priority goals
+                                        </p>
+                                    }>
+                                    <InfoIcon color="primary" />
+                                </AccessibleTooltip>
+                            </div>
+                        }
                     />
-                }
-                label="Use inventory"
-            />
-
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={dailyRaidsPreferencesForm.farmByPriorityOrder}
-                        onChange={event => updatePreferences('farmByPriorityOrder', event.target.checked)}
-                        inputProps={{ 'aria-label': 'controlled' }}
+                    <FormControlLabel
+                        value="true"
+                        control={<Radio />}
+                        label={
+                            <div className="flex-box start gap5">
+                                By goals priority{' '}
+                                <AccessibleTooltip
+                                    title={
+                                        <p>
+                                            Materials grouped by goals priority.
+                                            <br /> Pros: You will farm materials for each character individually and
+                                            will faster accomplish your high priority goals
+                                            <br /> Cons: Overall it will take more time to accomplish all selected
+                                            goals. It is especially noticeable when you need to farm Legendary upgrades
+                                            for characters of different factions
+                                        </p>
+                                    }>
+                                    <InfoIcon color="primary" />
+                                </AccessibleTooltip>
+                            </div>
+                        }
                     />
-                }
-                label="Farm by priority order"
-            />
+                </RadioGroup>
+            </FormControl>
 
             <Button type={'button'} onClick={saveChanges} variant={'outlined'}>
                 Save

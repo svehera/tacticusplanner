@@ -619,7 +619,7 @@
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
         "nodeNumber": 30,
-        "reward": "Sibyll Devine",
+        "reward": "Sibyll",
         "expectedGold": 65
     },
     "FoC31": {
@@ -1006,7 +1006,9 @@
         "nodeNumber": 10,
         "reward": "Cloak",
         "expectedGold": 53,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"]
     },
     "O11": {
         "campaign": "Octarius",
@@ -1014,7 +1016,9 @@
         "nodeNumber": 11,
         "reward": "Armor Trim",
         "expectedGold": 53,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"]
     },
     "O12": {
         "campaign": "Octarius",
@@ -1022,7 +1026,9 @@
         "nodeNumber": 12,
         "reward": "Reinforced Scale-Plates",
         "expectedGold": 53,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"]
     },
     "O13": {
         "campaign": "Octarius",
@@ -1209,14 +1215,18 @@
         "campaignType": "Normal",
         "nodeNumber": 35,
         "reward": "Iron Jaw",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Tyranids", "Black Templars"]
     },
     "O36": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 36,
         "reward": "Metal Decorative Skull",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "O37": {
         "campaign": "Octarius",
@@ -1224,7 +1234,9 @@
         "nodeNumber": 37,
         "reward": "Artificer Tasset Plate",
         "expectedGold": 65,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "O38": {
         "campaign": "Octarius",
@@ -1232,7 +1244,9 @@
         "nodeNumber": 38,
         "reward": "Sigil of Decay",
         "expectedGold": 65,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "O39": {
         "campaign": "Octarius",
@@ -1240,7 +1254,9 @@
         "nodeNumber": 39,
         "reward": "Krak Grenade",
         "expectedGold": 65,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "O4": {
         "campaign": "Octarius",
@@ -1256,42 +1272,54 @@
         "nodeNumber": 40,
         "reward": "Special Issue Ammo",
         "expectedGold": 65,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "O41": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 41,
         "reward": "Chain of Zeal",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "O42": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 42,
         "reward": "Terminator Honours",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "O43": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 43,
         "reward": "Bionic Neural Pathways",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Tyranids", "Black Templars"]
     },
     "O44": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 44,
         "reward": "Adrenal Glands",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Tyranids", "Black Templars"]
     },
     "O45": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 45,
         "reward": "Ancient Thoread",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Tyranids", "Black Templars"]
     },
     "O46": {
         "campaign": "Octarius",
@@ -1306,14 +1334,18 @@
         "campaignType": "Normal",
         "nodeNumber": 47,
         "reward": "Righteous Candle",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Tyranids", "Black Templars"]
     },
     "O48": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 48,
         "reward": "Rose of Martyrs",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Tyranids", "Black Templars"]
     },
     "O49": {
         "campaign": "Octarius",
@@ -1328,7 +1360,9 @@
         "nodeNumber": 5,
         "reward": "Thick Skin",
         "expectedGold": 53,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"]
     },
     "O50": {
         "campaign": "Octarius",
@@ -1336,49 +1370,63 @@
         "nodeNumber": 50,
         "reward": "Blessed Corset Armor",
         "expectedGold": 71,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "O51": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 51,
         "reward": "Ard Plate",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Tyranids", "Astra Militarum"]
     },
     "O52": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 52,
         "reward": "Toxin Sacs",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Tyranids", "Astra Militarum"]
     },
     "O53": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 53,
         "reward": "Basic Auxiliary Core",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum"]
     },
     "O54": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 54,
         "reward": "Blessed Tabbard",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum"]
     },
     "O55": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 55,
         "reward": "Plasma Cell",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum", "Black Templars"]
     },
     "O56": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 56,
         "reward": "Barrel of Promethium",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum", "Black Templars"]
     },
     "O57": {
         "campaign": "Octarius",
@@ -1386,21 +1434,27 @@
         "nodeNumber": 57,
         "reward": "Pile of Salvage",
         "expectedGold": 71,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum", "Black Templars"]
     },
     "O58": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 58,
         "reward": "Box of Salvage",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum", "Black Templars"]
     },
     "O59": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 59,
         "reward": "Standard-Issue Tourniquet",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum", "Black Templars"]
     },
     "O6": {
         "campaign": "Octarius",
@@ -1408,7 +1462,9 @@
         "nodeNumber": 6,
         "reward": "Metal Joints",
         "expectedGold": 53,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"]
     },
     "O60": {
         "campaign": "Octarius",
@@ -1430,21 +1486,27 @@
         "nodeNumber": 62,
         "reward": "Minor Bionic Enhancement",
         "expectedGold": 77,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum"]
     },
     "O63": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 63,
         "reward": "The Silver Aquila",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Imperial", "Xenos"],
+        "enemiesFactions": ["Astra Militarum", "Black Templars", "Tyranids"]
     },
     "O64": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 64,
         "reward": "Auspex",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "O65": {
         "campaign": "Octarius",
@@ -1467,35 +1529,45 @@
         "nodeNumber": 67,
         "reward": "Lesser Reliquary of Protection",
         "expectedGold": 77,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Tyranids", "Black Templars"]
     },
     "O68": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 68,
         "reward": "Single Power Pack",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Imperial", "Xenos"],
+        "enemiesFactions": ["Astra Militarum", "Black Templars", "Tyranids"]
     },
     "O69": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 69,
         "reward": "Fine Micro-Generator",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Imperial", "Xenos"],
+        "enemiesFactions": ["Astra Militarum", "Black Templars", "Tyranids"]
     },
     "O7": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 7,
         "reward": "Adamantium Filaments",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"]
     },
     "O70": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 70,
         "reward": "Attack Vector Data-Slate",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Tyranids", "Black Templars"]
     },
     "O71": {
         "campaign": "Octarius",
@@ -1509,42 +1581,54 @@
         "campaignType": "Normal",
         "nodeNumber": 72,
         "reward": "Locator Beacon",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum", "Black Templars"]
     },
     "O73": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 73,
         "reward": "Unyielding Rivets",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum", "Black Templars"]
     },
     "O74": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 74,
         "reward": "Battle Scar",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Imperial", "Xenos"],
+        "enemiesFactions": ["Astra Militarum", "Black Templars", "Tyranids"]
     },
     "O75": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 75,
         "reward": "High Marshal Helbrecht",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum", "Black Templars"]
     },
     "O8": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 8,
         "reward": "Weapon Parts",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"]
     },
     "O9": {
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 9,
         "reward": "Combat Stimms",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"]
     },
     "SH1": {
         "campaign": "Saim-Hann",
@@ -1560,7 +1644,9 @@
         "nodeNumber": 10,
         "reward": "Can of Promethium",
         "expectedGold": 53,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "SH11": {
         "campaign": "Saim-Hann",
@@ -1568,7 +1654,9 @@
         "nodeNumber": 11,
         "reward": "Mutation: Tough Skin",
         "expectedGold": 53,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "SH12": {
         "campaign": "Saim-Hann",
@@ -1584,7 +1672,9 @@
         "nodeNumber": 13,
         "reward": "Mission Assignment",
         "expectedGold": 53,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "SH14": {
         "campaign": "Saim-Hann",
@@ -1592,7 +1682,9 @@
         "nodeNumber": 14,
         "reward": "Mission Objective",
         "expectedGold": 53,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "SH15": {
         "campaign": "Saim-Hann",
@@ -1608,7 +1700,9 @@
         "nodeNumber": 16,
         "reward": "Locator Beacon",
         "expectedGold": 59,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "SH17": {
         "campaign": "Saim-Hann",
@@ -1616,21 +1710,27 @@
         "nodeNumber": 17,
         "reward": "Box of Salvage",
         "expectedGold": 59,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum"]
     },
     "SH18": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 18,
         "reward": "Advanced Filaments",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum"]
     },
     "SH19": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 19,
         "reward": "Lesser Reliquary of Protection",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum"]
     },
     "SH2": {
         "campaign": "Saim-Hann",
@@ -1645,14 +1745,18 @@
         "campaignType": "Normal",
         "nodeNumber": 20,
         "reward": "Mesh Weave",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum"]
     },
     "SH21": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 21,
         "reward": "Weapon Anointment Oils",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "SH22": {
         "campaign": "Saim-Hann",
@@ -1668,7 +1772,9 @@
         "nodeNumber": 23,
         "reward": "Fine Micro-Generator",
         "expectedGold": 59,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum"]
     },
     "SH24": {
         "campaign": "Saim-Hann",
@@ -1676,42 +1782,54 @@
         "nodeNumber": 24,
         "reward": "Writings",
         "expectedGold": 59,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum"]
     },
     "SH25": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 25,
         "reward": "Fine Purity Seal",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "SH26": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 26,
         "reward": "Mutation: Warped Lungs",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum"]
     },
     "SH27": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 27,
         "reward": "Satchel",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "SH28": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 28,
         "reward": "Plasma Cell",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "SH29": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 29,
         "reward": "Kill Count",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "SH3": {
         "campaign": "Saim-Hann",
@@ -1726,7 +1844,9 @@
         "campaignType": "Normal",
         "nodeNumber": 30,
         "reward": "Abraxas",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "SH31": {
         "campaign": "Saim-Hann",
@@ -1960,7 +2080,9 @@
         "campaignType": "Normal",
         "nodeNumber": 59,
         "reward": "Hypermaterial Shifter",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Aeldari"]
     },
     "SH6": {
         "campaign": "Saim-Hann",
@@ -1968,7 +2090,9 @@
         "nodeNumber": 6,
         "reward": "Sophisticated Material",
         "expectedGold": 53,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "SH60": {
         "campaign": "Saim-Hann",
@@ -2047,7 +2171,9 @@
         "nodeNumber": 7,
         "reward": "Mutation: Warped Muscles",
         "expectedGold": 53,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "SH70": {
         "campaign": "Saim-Hann",
@@ -2098,14 +2224,18 @@
         "campaignType": "Normal",
         "nodeNumber": 8,
         "reward": "Ropes and Chains",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "SH9": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 9,
         "reward": "Nasty Spikes",
-        "expectedGold": 53
+        "expectedGold": 53,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"]
     },
     "IM1": {
         "campaign": "Indomitus Mirror",
@@ -2113,7 +2243,9 @@
         "nodeNumber": 1,
         "reward": "Rebreather",
         "expectedGold": 53,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IM10": {
         "campaign": "Indomitus Mirror",
@@ -2129,7 +2261,9 @@
         "nodeNumber": 11,
         "reward": "Artificial Vertebrae",
         "expectedGold": 53,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IM12": {
         "campaign": "Indomitus Mirror",
@@ -2198,7 +2332,9 @@
         "nodeNumber": 2,
         "reward": "Weapon Parts",
         "expectedGold": 53,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IM20": {
         "campaign": "Indomitus Mirror",
@@ -2212,7 +2348,9 @@
         "campaignType": "Mirror",
         "nodeNumber": 21,
         "reward": "Nano Swarm",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IM22": {
         "campaign": "Indomitus Mirror",
@@ -2255,7 +2393,9 @@
         "campaignType": "Mirror",
         "nodeNumber": 27,
         "reward": "Standard-Issue Tourniquet",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IM28": {
         "campaign": "Indomitus Mirror",
@@ -2269,7 +2409,9 @@
         "campaignType": "Mirror",
         "nodeNumber": 29,
         "reward": "Ropes and Chains",
-        "expectedGold": 59
+        "expectedGold": 59,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IM3": {
         "campaign": "Indomitus Mirror",
@@ -2313,7 +2455,9 @@
         "campaignType": "Mirror",
         "nodeNumber": 34,
         "reward": "Motive Force Capacitator",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IM35": {
         "campaign": "Indomitus Mirror",
@@ -2359,7 +2503,9 @@
         "nodeNumber": 4,
         "reward": "Wires",
         "expectedGold": 53,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IM40": {
         "campaign": "Indomitus Mirror",
@@ -2439,7 +2585,9 @@
         "nodeNumber": 5,
         "reward": "Helmet Trophy",
         "expectedGold": 53,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IM50": {
         "campaign": "Indomitus Mirror",
@@ -2484,7 +2632,9 @@
         "nodeNumber": 55,
         "reward": "Lesser Reliquary of Vengeance",
         "expectedGold": 71,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IM56": {
         "campaign": "Indomitus Mirror",
@@ -2578,7 +2728,9 @@
         "campaignType": "Mirror",
         "nodeNumber": 67,
         "reward": "Reliquary of Vengeance",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IM68": {
         "campaign": "Indomitus Mirror",
@@ -2637,7 +2789,9 @@
         "campaignType": "Mirror",
         "nodeNumber": 74,
         "reward": "Hypermaterial Shifter",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IM75": {
         "campaign": "Indomitus Mirror",
@@ -3425,21 +3579,27 @@
         "campaignType": "Mirror",
         "nodeNumber": 34,
         "reward": "Cloak",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids", "Orks"]
     },
     "OM35": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 35,
         "reward": "Metal Joints",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM36": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 36,
         "reward": "Plasma Cell",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM37": {
         "campaign": "Octarius Mirror",
@@ -3447,7 +3607,9 @@
         "nodeNumber": 37,
         "reward": "The Phoenix Ascendant",
         "expectedGold": 65,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM38": {
         "campaign": "Octarius Mirror",
@@ -3455,14 +3617,18 @@
         "nodeNumber": 38,
         "reward": "Kill Count",
         "expectedGold": 65,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM39": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 39,
         "reward": "Ceramite Lump",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM4": {
         "campaign": "Octarius Mirror",
@@ -3477,21 +3643,27 @@
         "campaignType": "Mirror",
         "nodeNumber": 40,
         "reward": "Oath Seal",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM41": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 41,
         "reward": "Bladesman's Honour",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM42": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 42,
         "reward": "Satchel",
-        "expectedGold": 65
+        "expectedGold": 65,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM43": {
         "campaign": "Octarius Mirror",
@@ -3527,21 +3699,27 @@
         "campaignType": "Mirror",
         "nodeNumber": 47,
         "reward": "Mission Objective",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM48": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 48,
         "reward": "Tank of Promethium",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM49": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 49,
         "reward": "Artificer Tasset Plate",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM5": {
         "campaign": "Octarius Mirror",
@@ -3556,7 +3734,9 @@
         "campaignType": "Mirror",
         "nodeNumber": 50,
         "reward": "Classified Data-Slate",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM51": {
         "campaign": "Octarius Mirror",
@@ -3578,7 +3758,9 @@
         "campaignType": "Mirror",
         "nodeNumber": 53,
         "reward": "Iron Jaw",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids", "Orks"]
     },
     "OM54": {
         "campaign": "Octarius Mirror",
@@ -3592,7 +3774,9 @@
         "campaignType": "Mirror",
         "nodeNumber": 55,
         "reward": "Krak Grenade",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM56": {
         "campaign": "Octarius Mirror",
@@ -3608,14 +3792,18 @@
         "nodeNumber": 57,
         "reward": "Battle Scar",
         "expectedGold": 71,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids", "Orks"]
     },
     "OM58": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 58,
         "reward": "Advanced Filaments",
-        "expectedGold": 71
+        "expectedGold": 71,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids", "Orks"]
     },
     "OM59": {
         "campaign": "Octarius Mirror",
@@ -3674,7 +3862,9 @@
         "campaignType": "Mirror",
         "nodeNumber": 65,
         "reward": "Targeting Link",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids", "Orks"]
     },
     "OM66": {
         "campaign": "Octarius Mirror",
@@ -3688,7 +3878,9 @@
         "campaignType": "Mirror",
         "nodeNumber": 67,
         "reward": "Plague Bell",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM68": {
         "campaign": "Octarius Mirror",
@@ -3702,7 +3894,9 @@
         "campaignType": "Mirror",
         "nodeNumber": 69,
         "reward": "Ard Plate",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids", "Orks"]
     },
     "OM7": {
         "campaign": "Octarius Mirror",
@@ -3717,7 +3911,9 @@
         "campaignType": "Mirror",
         "nodeNumber": 70,
         "reward": "Bones of the Paragons",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM71": {
         "campaign": "Octarius Mirror",
@@ -3739,7 +3935,9 @@
         "campaignType": "Mirror",
         "nodeNumber": 73,
         "reward": "Duplicate Organ",
-        "expectedGold": 77
+        "expectedGold": 77,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OM74": {
         "campaign": "Octarius Mirror",
@@ -4121,7 +4319,7 @@
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
         "nodeNumber": 16,
-        "reward": "Sibyll Devine",
+        "reward": "Sibyll",
         "expectedGold": 91.5
     },
     "FoCE17": {
@@ -4440,7 +4638,9 @@
         "campaignType": "Elite",
         "nodeNumber": 19,
         "reward": "Bad Moon Teef",
-        "expectedGold": 101
+        "expectedGold": 101,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Tyranids", "Black Templars"]
     },
     "OE2": {
         "campaign": "Octarius Elite",
@@ -4629,14 +4829,18 @@
         "campaignType": "Elite",
         "nodeNumber": 6,
         "reward": "Advanced Filaments",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"]
     },
     "OE7": {
         "campaign": "Octarius Elite",
         "campaignType": "Elite",
         "nodeNumber": 7,
         "reward": "Ancient Runes",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Orks", "Black Templars"]
     },
     "OE8": {
         "campaign": "Octarius Elite",
@@ -4700,7 +4904,9 @@
         "campaignType": "Elite",
         "nodeNumber": 15,
         "reward": "Master-Crafted Ammo",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IME16": {
         "campaign": "Indomitus Mirror Elite",
@@ -4721,7 +4927,9 @@
         "campaignType": "Elite",
         "nodeNumber": 18,
         "reward": "Bladesman's Honour",
-        "expectedGold": 101
+        "expectedGold": 101,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IME19": {
         "campaign": "Indomitus Mirror Elite",
@@ -4791,14 +4999,18 @@
         "campaignType": "Elite",
         "nodeNumber": 27,
         "reward": "Basic Auxiliary Core",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IME28": {
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 28,
         "reward": "Blessed Cogitator",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IME29": {
         "campaign": "Indomitus Mirror Elite",
@@ -4868,7 +5080,9 @@
         "campaignType": "Elite",
         "nodeNumber": 37,
         "reward": "Codex Astartes Page",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IME38": {
         "campaign": "Indomitus Mirror Elite",
@@ -4882,7 +5096,9 @@
         "campaignType": "Elite",
         "nodeNumber": 39,
         "reward": "Master-Crafted Ammo",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IME4": {
         "campaign": "Indomitus Mirror Elite",
@@ -4896,21 +5112,27 @@
         "campaignType": "Elite",
         "nodeNumber": 40,
         "reward": "Marneus Calgar",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IME5": {
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 5,
         "reward": "Hypermaterial Shifter",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IME6": {
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 6,
         "reward": "Engrammatic Entangler",
-        "expectedGold": 83
+        "expectedGold": 83,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "IME7": {
         "campaign": "Indomitus Mirror Elite",
@@ -4931,7 +5153,9 @@
         "campaignType": "Elite",
         "nodeNumber": 9,
         "reward": "Weapon Anointment Oils",
-        "expectedGold": 91.5
+        "expectedGold": 91.5,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"]
     },
     "FoCME1": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -5366,21 +5590,27 @@
         "campaignType": "Elite",
         "nodeNumber": 27,
         "reward": "Canister of Chemicals",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OME28": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 28,
         "reward": "Synaptic Augmentation",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OME29": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 29,
         "reward": "Mjod",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OME3": {
         "campaign": "Octarius Mirror Elite",
@@ -5394,14 +5624,18 @@
         "campaignType": "Elite",
         "nodeNumber": 30,
         "reward": "Stone Guardian Fragment",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OME31": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 31,
         "reward": "Round of Ammo",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Tyranids"]
     },
     "OME32": {
         "campaign": "Octarius Mirror Elite",
@@ -5415,49 +5649,63 @@
         "campaignType": "Elite",
         "nodeNumber": 33,
         "reward": "Chip Damage",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks", "Tyranids"]
     },
     "OME34": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 34,
         "reward": "Bad Moon Teef",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks", "Tyranids"]
     },
     "OME35": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 35,
         "reward": "Iron Jaw",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks", "Tyranids"]
     },
     "OME36": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 36,
         "reward": "Ard Plate",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks", "Tyranids"]
     },
     "OME37": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 37,
         "reward": "Kustom Gubbinz",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks", "Tyranids"]
     },
     "OME38": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 38,
         "reward": "Purity Seal of the Primarch",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks", "Tyranids"]
     },
     "OME39": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 39,
         "reward": "Archeotech Bionics",
-        "expectedGold": 108
+        "expectedGold": 108,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks", "Tyranids"]
     },
     "OME4": {
         "campaign": "Octarius Mirror Elite",
@@ -5866,7 +6114,9 @@
         "nodeNumber": 47,
         "reward": "Box of Salvage",
         "expectedGold": 53,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Imperial", "Xenos"],
+        "enemiesFactions": ["Astra Militarum", "Aeldari"]
     },
     "SHM48": {
         "campaign": "Saim-Hann Mirror",
@@ -5874,7 +6124,9 @@
         "nodeNumber": 48,
         "reward": "Standard-Issue Tourniquet",
         "expectedGold": 53,
-        "slots": 4
+        "slots": 4,
+        "enemiesAlliances": ["Imperial", "Xenos"],
+        "enemiesFactions": ["Astra Militarum", "Aeldari"]
     },
     "SHM49": {
         "campaign": "Saim-Hann Mirror",
@@ -5882,7 +6134,9 @@
         "nodeNumber": 49,
         "reward": "The Gold Phoenix",
         "expectedGold": 53,
-        "slots": 3
+        "slots": 3,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum"]
     },
     "SHM50": {
         "campaign": "Saim-Hann Mirror",
@@ -5986,7 +6240,7 @@
         "campaign": "Saim-Hann Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 63,
-        "reward": "Mutation: Tough Skin",
+        "reward": "Cadaere Renissum",
         "slots": 4,
         "expectedGold": 53
     },
@@ -6111,7 +6365,7 @@
         "campaignType": "Elite",
         "nodeNumber": 5,
         "slots": 3,
-        "reward": "Adamantium Filaments",
+        "reward": "Advanced Filaments",
         "expectedGold": 53
     },
     "SHE6": {

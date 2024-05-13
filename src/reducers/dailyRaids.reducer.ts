@@ -1,4 +1,4 @@
-﻿import { IDailyRaids, IMaterialRaid, IRaidLocation, SetStateAction } from '../models/interfaces';
+﻿import { IDailyRaids, IDailyRaidsFilters, IMaterialRaid, IRaidLocation, SetStateAction } from '../models/interfaces';
 import { defaultData } from '../models/constants';
 
 export type DailyRaidsAction =
@@ -8,10 +8,18 @@ export type DailyRaidsAction =
           material: IMaterialRaid;
       }
     | {
+          type: 'AddCompletedShardsBattle';
+          locationId: string;
+      }
+    | {
           type: 'ResetCompletedBattles';
       }
     | {
           type: 'ResetCompletedBattlesDaily';
+      }
+    | {
+          type: 'UpdateFilters';
+          value: IDailyRaidsFilters;
       }
     | SetStateAction<IDailyRaids>;
 
@@ -46,13 +54,28 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
             };
         }
         case 'ResetCompletedBattles': {
-            return { ...state, completedLocations: [] };
+            return { ...state, completedLocations: [], completedShardsLocations: [] };
         }
         case 'ResetCompletedBattlesDaily': {
             return {
                 ...state,
                 completedLocations: [],
+                completedShardsLocations: [],
                 lastRefreshDateUTC: new Date().toUTCString(),
+            };
+        }
+        case 'AddCompletedShardsBattle': {
+            const { locationId } = action;
+            return {
+                ...state,
+                completedShardsLocations: [...state.completedShardsLocations, locationId],
+            };
+        }
+        case 'UpdateFilters': {
+            const { value } = action;
+            return {
+                ...state,
+                filters: value,
             };
         }
         default: {

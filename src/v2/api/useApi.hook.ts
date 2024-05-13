@@ -6,7 +6,8 @@ import { IErrorResponse } from './api.models';
 const useApi = <TResponse, TRequestBody = any>(
     method: Method,
     url: string,
-    body?: TRequestBody
+    body?: TRequestBody,
+    deps?: Array<any>
 ): { loading: boolean; error: string | null; data: TResponse | null } => {
     const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<TResponse | null>(null);
@@ -45,7 +46,7 @@ const useApi = <TResponse, TRequestBody = any>(
 
     useEffect(() => {
         fetchData().then(r => r);
-    }, []);
+    }, deps ?? []);
 
     return { loading, error, data };
 };

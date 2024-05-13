@@ -24,6 +24,7 @@ export default function MultipleSelectCheckmarks(props: {
     selectedValues: string[];
     placeholder: string;
     selectionChanges: (value: string[]) => void;
+    size?: 'small' | 'medium';
 }) {
     const [selectedLabels, setSelectedLabels] = React.useState<string[]>(props.selectedValues);
     const handleChange = (event: SelectChangeEvent<string[]>) => {
@@ -36,26 +37,24 @@ export default function MultipleSelectCheckmarks(props: {
     };
 
     return (
-        <div>
-            <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="demo-multiple-checkbox-label">{props.placeholder}</InputLabel>
-                <Select
-                    labelId="demo-multiple-checkbox-label"
-                    id="demo-multiple-checkbox"
-                    multiple
-                    value={selectedLabels}
-                    onChange={handleChange}
-                    input={<OutlinedInput label={props.placeholder} />}
-                    renderValue={selected => selected.join(', ')}
-                    MenuProps={MenuProps}>
-                    {props.values.map(label => (
-                        <MenuItem key={label} value={label}>
-                            <Checkbox checked={selectedLabels.indexOf(label) > -1} />
-                            <ListItemText primary={label} />
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-        </div>
+        <FormControl sx={{ minWidth: 300 }} size={props.size ?? 'medium'}>
+            <InputLabel id="demo-multiple-checkbox-label">{props.placeholder}</InputLabel>
+            <Select
+                labelId="demo-multiple-checkbox-label"
+                id="demo-multiple-checkbox"
+                multiple
+                value={selectedLabels}
+                onChange={handleChange}
+                input={<OutlinedInput label={props.placeholder} />}
+                renderValue={selected => selected.join(', ')}
+                MenuProps={MenuProps}>
+                {props.values.map(label => (
+                    <MenuItem key={label} value={label}>
+                        <Checkbox checked={selectedLabels.indexOf(label) > -1} />
+                        <ListItemText primary={label} />
+                    </MenuItem>
+                ))}
+            </Select>
+        </FormControl>
     );
 }

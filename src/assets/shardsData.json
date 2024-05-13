@@ -15,8 +15,8 @@
         "rarity": "Shard",
         "locations": ["FoC60", "FoC32"]
     },
-    "Sibyll Devine": {
-        "material": "Sibyll Devine",
+    "Sibyll": {
+        "material": "Sibyll",
         "craftable": false,
         "stat": "Shard",
         "faction": "Astra Militarum",

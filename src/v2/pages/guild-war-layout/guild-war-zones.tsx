@@ -2,7 +2,7 @@
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { FlexBox } from 'src/v2/components/flex-box';
 
-import { IGWLayoutZone, IGWZone, ZoneId } from 'src/v2/features/guild-war/guild-war.models';
+import { IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
 import {
     Card,
     CardContent,
@@ -23,7 +23,6 @@ import './guild-war-zones.scss';
 import { CommonProps } from '@mui/material/OverridableComponent';
 import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
 import { Loader } from 'src/v2/components/loader';
-import { ViewPlayers } from 'src/v2/features/guild/view-players';
 import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
 import { Difficulty, Rank } from 'src/models/enums';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
@@ -31,6 +30,8 @@ import Dialog from '@mui/material/Dialog';
 import { PlayersTable } from 'src/v2/features/guild/players-table';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { WarZoneBuffImage } from 'src/v2/components/images/war-zone-buff-image';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { ViewGuild } from 'src/v2/features/guild/view-guild';
 
 export const GuildWarZones = () => {
     const { guildWar, guild } = useContext(StoreContext);
@@ -90,24 +91,24 @@ export const GuildWarZones = () => {
 
         return data.guildUsers.map(user => ({
             username: user,
-            unlocked: data.userData[user].filter(x => x.rank > Rank.Locked).length,
-            slots: CharactersService.groupByRarityPools(data.userData[user]),
+            unlocked: data.userData[user].characters.filter(x => x.rank > Rank.Locked).length,
+            slots: CharactersService.groupByRarityPools(data.userData[user].characters),
             potential: {
                 [Difficulty.None]: 0,
                 [Difficulty.Easy]: CharactersService.getRosterPotential(
-                    data.userData[user],
+                    data.userData[user].characters,
                     GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.Easy)
                 ),
                 [Difficulty.Normal]: CharactersService.getRosterPotential(
-                    data.userData[user],
+                    data.userData[user].characters,
                     GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.Normal)
                 ),
                 [Difficulty.Hard]: CharactersService.getRosterPotential(
-                    data.userData[user],
+                    data.userData[user].characters,
                     GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.Hard)
                 ),
                 [Difficulty.VeryHard]: CharactersService.getRosterPotential(
-                    data.userData[user],
+                    data.userData[user].characters,
                     GuildWarService.getDifficultyRarityCapsGrouped(Difficulty.VeryHard)
                 ),
             },
@@ -134,6 +135,18 @@ export const GuildWarZones = () => {
             layoutId: activeLayout.id,
             zoneIndex: editZonePlayersIndex,
             players,
+        });
+
+        setEditZonePlayer1(false);
+        setEditZonePlayer2(false);
+    };
+
+    const clearPlayerSelection = () => {
+        dispatch.guildWar({
+            type: 'UpdateZonePlayers',
+            layoutId: activeLayout.id,
+            zoneIndex: editZonePlayersIndex,
+            players: [],
         });
 
         setEditZonePlayer1(false);
@@ -167,6 +180,11 @@ export const GuildWarZones = () => {
             </div>
         );
     }, [editZonePlayersIndex, activeLayout.bfLevel]);
+
+    const assignedPlayers = useMemo(() => {
+        return activeLayout.zones.flatMap(x => x.players).filter(user => !!data && data.guildUsers.includes(user));
+    }, [activeLayout, guildWar.layouts, data?.guildUsers]);
+
     return (
         <>
             {loading && <Loader loading={true} />}
@@ -196,7 +214,35 @@ export const GuildWarZones = () => {
                         {editZonesMode ? 'Stop editing' : 'Edit war zones'}
                     </Button>
                 </Tooltip>
-                {guildWarPlayers.length && <ViewPlayers guildWarPlayers={guildWarPlayers} />}
+                {!!guildWarPlayers.length && (
+                    <>
+                        <ViewGuild guildWarPlayers={guildWarPlayers} />
+                        <AccessibleTooltip
+                            title={
+                                <div>
+                                    <span>Assigned players:</span>
+                                    <ul style={{ paddingInlineStart: 20 }}>
+                                        {assignedPlayers.map(username => (
+                                            <li key={username}>{username}</li>
+                                        ))}
+                                    </ul>
+
+                                    <span>Vacant players:</span>
+                                    <ul style={{ paddingInlineStart: 20 }}>
+                                        {guildWarPlayers
+                                            .filter(x => !assignedPlayers.includes(x.username))
+                                            .map(player => (
+                                                <li key={player.username}>{player.username}</li>
+                                            ))}
+                                    </ul>
+                                </div>
+                            }>
+                            <b>
+                                {assignedPlayers.length}/{guildWarPlayers.length}
+                            </b>
+                        </AccessibleTooltip>{' '}
+                    </>
+                )}
             </FlexBox>
             <div className="guild-war-layout-grid">
                 {activeLayout.zones.map((zone, index) => (
@@ -213,7 +259,11 @@ export const GuildWarZones = () => {
             {editZonePlayersIndex >= 0 && (
                 <Dialog
                     open={editZonePlayersIndex >= 0}
-                    onClose={() => setEditZonePlayersIndex(-1)}
+                    onClose={() => {
+                        setEditZonePlayersIndex(-1);
+                        setEditZonePlayer1(false);
+                        setEditZonePlayer2(false);
+                    }}
                     maxWidth={isMobile ? 'xl' : 'lg'}
                     fullWidth>
                     <DialogTitle>{editZonePlayersDialogTitle}</DialogTitle>
@@ -224,7 +274,7 @@ export const GuildWarZones = () => {
                             placement={'top'}>
                             <Button
                                 disabled={editZonePlayer2}
-                                onClick={() => setEditZonePlayer1(true)}
+                                onClick={() => setEditZonePlayer1(value => !value)}
                                 color={activeLayout.zones[editZonePlayersIndex].players[0] ? 'primary' : 'error'}>
                                 {activeLayout.zones[editZonePlayersIndex].players[0] ?? 'Slot 1'}
                             </Button>
@@ -236,7 +286,7 @@ export const GuildWarZones = () => {
                             placement={'top'}>
                             <Button
                                 disabled={editZonePlayer1}
-                                onClick={() => setEditZonePlayer2(true)}
+                                onClick={() => setEditZonePlayer2(value => !value)}
                                 color={activeLayout.zones[editZonePlayersIndex].players[1] ? 'primary' : 'error'}>
                                 {activeLayout.zones[editZonePlayersIndex].players[1] ?? 'Slot 2'}
                             </Button>
@@ -245,7 +295,17 @@ export const GuildWarZones = () => {
                         <PlayersTable rows={guildWarPlayers} onRowClick={updatePlayerSelection} />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => setEditZonePlayersIndex(-1)}>Close</Button>
+                        <Button color="error" onClick={clearPlayerSelection}>
+                            Clear players
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                setEditZonePlayersIndex(-1);
+                                setEditZonePlayer1(false);
+                                setEditZonePlayer2(false);
+                            }}>
+                            Close
+                        </Button>
                     </DialogActions>
                 </Dialog>
             )}

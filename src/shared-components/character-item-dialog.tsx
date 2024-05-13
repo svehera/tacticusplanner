@@ -15,6 +15,8 @@ import { CharacterDetails } from '../mobile-routes/characters/character-details'
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 import { MiscIcon } from './misc-icon';
 import { Conditional } from 'src/v2/components/conditional';
+import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
 export const CharacterItemDialog = (props: { character: ICharacter2; isOpen: boolean; onClose: () => void }) => {
     const { viewPreferences } = useContext(StoreContext);
@@ -32,6 +34,9 @@ export const CharacterItemDialog = (props: { character: ICharacter2; isOpen: boo
         }
     };
 
+    const power = CharactersPowerService.getCharacterPower(character);
+    const bsValue = CharactersValueService.getCharacterValue(character);
+
     return (
         <Dialog open={props.isOpen} onClose={props.onClose} fullScreen={isMobile}>
             <DialogTitle>
@@ -44,16 +49,19 @@ export const CharacterItemDialog = (props: { character: ICharacter2; isOpen: boo
                     }}>
                     <CharacterTitle character={character} />
                     <Conditional condition={viewPreferences.showBsValue}>
-                        <div style={{ display: 'flex' }}>
-                            <MiscIcon icon={'blackstone'} height={20} width={15} />{' '}
-                            {CharactersValueService.getCharacterValue(character).toLocaleString().replace(/,/g, ' ')}
-                        </div>
+                        <AccessibleTooltip title={numberToThousandsStringOld(bsValue)}>
+                            <div style={{ display: 'flex' }}>
+                                <MiscIcon icon={'blackstone'} height={20} width={15} />{' '}
+                                {numberToThousandsString(bsValue)}
+                            </div>
+                        </AccessibleTooltip>
                     </Conditional>
                     <Conditional condition={viewPreferences.showPower}>
-                        <div style={{ display: 'flex' }}>
-                            <MiscIcon icon={'power'} height={20} width={15} />{' '}
-                            {CharactersPowerService.getCharacterPower(character).toLocaleString().replace(/,/g, ' ')}
-                        </div>
+                        <AccessibleTooltip title={numberToThousandsStringOld(power)}>
+                            <div style={{ display: 'flex' }}>
+                                <MiscIcon icon={'power'} height={20} width={15} /> {numberToThousandsString(power)}
+                            </div>
+                        </AccessibleTooltip>
                     </Conditional>
                 </div>
             </DialogTitle>

@@ -28,6 +28,11 @@ export type CharactersAction =
           value: number;
       }
     | {
+          type: 'UpdateStars';
+          character: string;
+          value: number;
+      }
+    | {
           type: 'IncrementShards';
           character: string;
           value: number;
@@ -100,6 +105,14 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
 
             if (existingChar) {
                 existingChar.shards = action.value;
+            }
+            return [...state];
+        }
+        case 'UpdateStars': {
+            const existingChar = state.find(char => char.name === action.character);
+
+            if (existingChar) {
+                existingChar.stars = action.value;
             }
             return [...state];
         }

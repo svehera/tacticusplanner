@@ -22,18 +22,17 @@ import {
     ICampaignConfigs,
     ICampaignsData,
     ICampaignsProgress,
-    ICharacterRankRange,
     ICharLegendaryEvents,
     IContentCreator,
     IContributor,
     IDailyRaid,
-    IDropRate,
     IEstimatedRanks,
     IEstimatedRanksSettings,
     IMaterialEstimated2,
     IMaterialFull,
     IMaterialRaid,
     IMaterialRecipeIngredientFull,
+    IRaidLocation,
     IRankUpData,
     IRecipeData,
     IRecipeDataFull,
@@ -41,9 +40,11 @@ import {
     IWhatsNew,
     UnitDataRaw,
 } from '../models/interfaces';
-import { CampaignType, Faction, Rank, RarityString } from '../models/enums';
+import { Alliance, Campaign, Faction, Rank, Rarity, RarityString } from '../models/enums';
 import { rarityStringToNumber, rarityToStars } from '../models/constants';
 import { getEnumValues, rankToString } from '../shared-logic/functions';
+import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
+import { ICharacterUpgradeRankGoal, IRankLookup } from 'src/v2/features/goals/goals.models';
 
 export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;
@@ -53,11 +54,42 @@ export class StaticDataService {
     static readonly rankUpData: IRankUpData = rankUpData;
     static readonly contributors: IContributor[] = contributors;
     static readonly contentCreators: IContentCreator[] = contentCreators;
-    static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = this.getCampaignComposed();
+
+    private static readonly ImperialFactions: Faction[] = [
+        Faction.Ultramarines,
+        Faction.Astra_militarum,
+        Faction.Black_Templars,
+        Faction.ADEPTA_SORORITAS,
+        Faction.AdeptusMechanicus,
+        Faction.Space_Wolves,
+        Faction.Dark_Angels,
+    ];
+
+    private static readonly ChaosFactions: Faction[] = [
+        Faction.Black_Legion,
+        Faction.Death_Guard,
+        Faction.Thousand_Sons,
+        Faction.WorldEaters,
+    ];
+
+    static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = CampaignsService.getCampaignComposed();
 
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
     static readonly campaignsGrouped: Record<string, ICampaignBattleComposed[]> = this.getCampaignGrouped();
     static readonly recipeDataFull: IRecipeDataFull = this.convertRecipeData();
+
+    static getItemLocations = (itemId: string): ICampaignBattleComposed[] => {
+        const possibleLocations: ICampaignBattleComposed[] = [];
+        const characterShardsData = StaticDataService.recipeDataFull[itemId];
+        if (characterShardsData) {
+            const fullData = characterShardsData.allMaterials && characterShardsData.allMaterials[0];
+            if (fullData) {
+                possibleLocations.push(...(fullData.locationsComposed ?? []));
+            }
+        }
+
+        return possibleLocations;
+    };
 
     static readonly legendaryEvents = [
         {
@@ -101,38 +133,6 @@ export class StaticDataService {
 
     static isValidaUpgrade(upgrade: string): boolean {
         return Object.hasOwn(recipeData, upgrade);
-    }
-
-    static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
-        const result: Record<string, ICampaignBattleComposed> = {};
-        for (const battleDataKey in this.battleData) {
-            const battle = this.battleData[battleDataKey];
-
-            const config = this.campaignConfigs[battle.campaignType as CampaignType];
-            const recipe = this.recipeData[battle.reward];
-            if (!recipe) {
-                console.error(battle.reward, 'no recipe');
-            }
-            const dropRateKey: keyof IDropRate = recipe?.rarity.toLowerCase() as keyof IDropRate;
-
-            const dropRate = config.dropRate[dropRateKey];
-            const energyPerItem = 1 / (dropRate / config.energyCost);
-
-            result[battleDataKey] = {
-                campaign: battle.campaign,
-                energyCost: config.energyCost,
-                dailyBattleCount: config.dailyBattleCount,
-                dropRate,
-                energyPerItem: parseFloat(energyPerItem.toFixed(2)),
-                nodeNumber: battle.nodeNumber,
-                rarity: recipe?.rarity,
-                reward: battle.reward,
-                expectedGold: battle.expectedGold,
-                slots: battle.slots,
-            };
-        }
-
-        return result;
     }
 
     static getUpgradesLocations(): Record<string, string[]> {
@@ -369,7 +369,7 @@ export class StaticDataService {
 
     static getRankUpgradeEstimatedDays(
         settings: IEstimatedRanksSettings,
-        ...characters: Array<ICharacterRankRange>
+        ...characters: Array<ICharacterUpgradeRankGoal>
     ): IEstimatedRanks {
         const upgrades = this.getUpgrades(...characters);
 
@@ -382,22 +382,26 @@ export class StaticDataService {
 
         const energySpent = sum(settings.completedLocations.flatMap(x => x.locations).map(x => x.energySpent));
         const totalEnergy = sum(raids.map(day => settings.dailyEnergy - day.energyLeft)) - energySpent;
+        const totalUnusedEnergy = sum(raids.map(day => day.energyLeft));
+        const totalRaids = sum(raids.map(day => day.raidsCount));
 
         return {
             raids,
             upgrades,
             materials,
             totalEnergy,
+            totalRaids,
+            totalUnusedEnergy,
         };
     }
 
-    public static getUpgrades(...characters: Array<ICharacterRankRange>): IMaterialFull[] {
+    public static getUpgrades(...characters: Array<IRankLookup>): IMaterialFull[] {
         const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
         const result: IMaterialFull[] = [];
         let priority = 0;
         for (const character of characters) {
             priority++;
-            const characterUpgrades = StaticDataService.rankUpData[character.id];
+            const characterUpgrades = StaticDataService.rankUpData[character.characterName];
             if (!characterUpgrades) {
                 continue;
             }
@@ -439,16 +443,25 @@ export class StaticDataService {
                         stat: 'Unknown',
                         id: upgrade,
                         label: upgrade,
-                        character: character.id,
+                        character: character.characterName,
                         priority,
                         recipe: [],
                         allMaterials: [],
                     };
                 }
+                const allMaterials = character.upgradesRarity.length
+                    ? recipe.allMaterials?.filter(material => character.upgradesRarity.includes(material.rarity))
+                    : recipe.allMaterials;
+
+                for (const allMaterial of allMaterials ?? []) {
+                    allMaterial.characters = [];
+                }
+
                 return {
                     ...cloneDeep(recipe),
+                    allMaterials,
                     priority,
-                    character: character.id,
+                    character: character.characterName,
                 };
             });
 
@@ -466,6 +479,9 @@ export class StaticDataService {
             const upgradesByCharacter = groupBy(upgrades, 'character');
             for (const character in upgradesByCharacter) {
                 const characterMaterials = this.groupBaseMaterials(upgradesByCharacter[character]);
+                characterMaterials.forEach(m => {
+                    m.characters = [character];
+                });
                 materials.push(...characterMaterials);
             }
             const copiedUpgrades = { ...settings.upgrades };
@@ -475,7 +491,7 @@ export class StaticDataService {
                     this.calculateMaterialData(
                         settings.campaignsProgress,
                         x,
-                        this.selectBestLocations(settings, x.locationsComposed ?? []),
+                        this.selectBestLocations(settings, x.locationsComposed ?? [], x.rarity),
                         copiedUpgrades,
                         copiedBaseUpgrades,
                         true
@@ -494,7 +510,7 @@ export class StaticDataService {
                     this.calculateMaterialData(
                         settings.campaignsProgress,
                         x,
-                        this.selectBestLocations(settings, x.locationsComposed ?? []),
+                        this.selectBestLocations(settings, x.locationsComposed ?? [], x.rarity),
                         settings.upgrades,
                         craftedBaseMaterials
                     )
@@ -588,26 +604,54 @@ export class StaticDataService {
         settings: IEstimatedRanksSettings,
         allMaterials: IMaterialEstimated2[]
     ): IDailyRaid[] {
+        if (settings.dailyEnergy <= 0) {
+            return [];
+        }
+
         const resultDays: IDailyRaid[] = [];
 
         const totalEnergy = sum(allMaterials.map(x => x.totalEnergy));
         let currEnergy = 0;
         const completedLocations = settings.completedLocations.flatMap(x => x.locations);
+        const completedMaterialsStack: IMaterialRaid[] = [];
         let iteration = 0;
 
         while (currEnergy < totalEnergy) {
             const dayNumber = resultDays.length + 1;
-            const isToday = dayNumber === 1;
+            const isFirstDay = dayNumber === 1;
             const day: IDailyRaid = {
                 energyLeft: settings.dailyEnergy,
                 raids: [],
+                raidsCount: 0,
             };
-            let energyLeft = isToday
+            let energyLeft = isFirstDay
                 ? settings.dailyEnergy - sum(completedLocations.map(x => x.energySpent))
                 : settings.dailyEnergy;
 
+            if (energyLeft <= 0) {
+                resultDays.push(day);
+                continue;
+            }
+            if (isFirstDay) {
+                const completedMaterials = allMaterials
+                    .filter(material => {
+                        return settings.completedLocations.find(x => x.materialId === material.id); // && completedMaterial.locations.length === material.locations.length;
+                    })
+                    .map(x => x.id);
+
+                completedMaterialsStack.push(
+                    ...settings.completedLocations.filter(x => completedMaterials.includes(x.materialId))
+                );
+            }
+
             for (const material of allMaterials) {
-                const isBlocked = material.locationsString === material.missingLocationsString;
+                const isCompleted = settings.completedLocations.some(
+                    x => x.materialId === material.id && x.locations.length === material.locations.length
+                );
+
+                if (isFirstDay && isCompleted) {
+                    continue;
+                }
                 if (energyLeft < 5) {
                     break;
                 }
@@ -640,29 +684,22 @@ export class StaticDataService {
                     materialRef: material,
                 };
 
+                const completedLocationsStack: IRaidLocation[] = [];
+
                 for (const location of material.locations) {
                     const locationDailyEnergy = location.energyCost * location.dailyBattleCount;
                     const completedLocation =
-                        isToday &&
+                        isFirstDay &&
                         completedLocations.find(
                             completedLocation => completedLocation.id === location.campaign + location.nodeNumber
                         );
+
                     if (completedLocation) {
-                        materialRaids.locations.push(completedLocation);
+                        completedLocationsStack.push(completedLocation);
                         continue;
                     }
 
-                    if (isBlocked) {
-                        if (isToday) {
-                            materialRaids.locations.push({
-                                id: location.campaign + location.nodeNumber,
-                                campaign: location.campaign,
-                                battleNumber: location.nodeNumber,
-                                raidsCount: location.dailyBattleCount,
-                                farmedItems: 0,
-                                energySpent: 0,
-                            });
-                        }
+                    if (material.isBlocked) {
                         continue;
                     }
 
@@ -732,15 +769,24 @@ export class StaticDataService {
                     }
                 }
 
+                if (completedLocationsStack) {
+                    materialRaids.locations.push(...completedLocationsStack);
+                }
+
                 if (materialRaids.locations.length) {
                     day.raids.push(materialRaids);
                 }
             }
-            if (isToday) {
-                const completedMaterials = settings.completedLocations.filter(
-                    x => !day.raids.some(material => material.materialId === x.materialId)
+            day.raidsCount = sum(day.raids.flatMap(x => x.locations.map(x => x.raidsCount)));
+            if (isFirstDay) {
+                day.raids.push(...completedMaterialsStack);
+                day.raidsCount = sum(
+                    day.raids.flatMap(x =>
+                        x.locations
+                            .filter(x => !completedLocations.some(location => location.id === x.id))
+                            .map(x => x.raidsCount)
+                    )
                 );
-                day.raids.push(...completedMaterials);
             }
 
             day.energyLeft = energyLeft;
@@ -771,6 +817,10 @@ export class StaticDataService {
         const lockedLocations = (material.locationsComposed ?? []).filter(location => {
             const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
             return location.nodeNumber > campaignProgress;
+        });
+        const unlockedLocations = (material.locationsComposed ?? []).filter(location => {
+            const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
+            return location.nodeNumber <= campaignProgress;
         });
         const selectedLocations = bestLocations?.length ? bestLocations : material.locationsComposed ?? [];
 
@@ -839,8 +889,11 @@ export class StaticDataService {
             id: material.id,
             label: material.label,
             locations: selectedLocations,
+            unlockedLocations: unlockedLocations.map(x => x.id),
+            possibleLocations: material.locationsComposed ?? [],
             locationsString: locations,
             missingLocationsString,
+            isBlocked: locations === missingLocationsString,
             count: material.count,
             craftedCount: craftedCount,
             rarity: material.rarity,
@@ -854,12 +907,72 @@ export class StaticDataService {
 
     private static selectBestLocations(
         settings: IEstimatedRanksSettings,
-        locationsComposed: ICampaignBattleComposed[]
+        locationsComposed: ICampaignBattleComposed[],
+        materialRarity: Rarity
     ): ICampaignBattleComposed[] {
-        const unlockedLocations = locationsComposed.filter(location => {
-            const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
-            return location.nodeNumber <= campaignProgress;
-        });
+        const unlockedLocations = locationsComposed
+            .filter(location => {
+                const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
+                return location.nodeNumber <= campaignProgress;
+            })
+            .filter(location => {
+                if (!settings.filters) {
+                    return true;
+                }
+                const {
+                    alliesFactions,
+                    alliesAlliance,
+                    enemiesAlliance,
+                    enemiesFactions,
+                    campaignTypes,
+                    upgradesRarity,
+                    slotsCount,
+                } = settings.filters;
+
+                if (slotsCount && slotsCount.length) {
+                    if (!slotsCount.includes(location.slots ?? 5)) {
+                        return false;
+                    }
+                }
+
+                if (upgradesRarity.length) {
+                    if (!upgradesRarity.includes(materialRarity)) {
+                        return false;
+                    }
+                }
+
+                if (campaignTypes.length) {
+                    if (!campaignTypes.includes(location.campaignType)) {
+                        return false;
+                    }
+                }
+
+                if (alliesAlliance.length) {
+                    if (!alliesAlliance.includes(location.alliesAlliance)) {
+                        return false;
+                    }
+                }
+
+                if (alliesFactions.length) {
+                    if (!location.alliesFactions.some(faction => alliesFactions.includes(faction))) {
+                        return false;
+                    }
+                }
+
+                if (enemiesAlliance.length) {
+                    if (!location.enemiesAlliances.some(alliance => enemiesAlliance.includes(alliance))) {
+                        return false;
+                    }
+                }
+
+                if (enemiesFactions.length) {
+                    if (!location.enemiesFactions.some(faction => enemiesFactions.includes(faction))) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
 
         const minEnergy = Math.min(...unlockedLocations.map(x => x.energyPerItem));
         const maxEnergy = Math.max(...unlockedLocations.map(x => x.energyPerItem));
@@ -868,7 +981,6 @@ export class StaticDataService {
         );
 
         let filteredLocations: ICampaignBattleComposed[] = unlockedLocations;
-
         if (settings.preferences) {
             const { useLeastEfficientNodes, useMoreEfficientNodes, useMostEfficientNodes } = settings.preferences;
             filteredLocations = unlockedLocations.filter(location => {
@@ -894,12 +1006,132 @@ export class StaticDataService {
 
                 return useLeastEfficientNodes && location.energyPerItem === maxEnergy;
             });
-
-            if (!filteredLocations.length && unlockedLocations.length) {
-                filteredLocations = [unlockedLocations[0]];
-            }
         }
 
         return orderBy(filteredLocations, ['energyPerItem', 'expectedGold'], ['asc', 'desc']);
+    }
+
+    private static getEnemiesAndAllies(campaign: Campaign): {
+        enemies: { alliance: Alliance; factions: Faction[] };
+        allies: { alliance: Alliance; factions: Faction[] };
+    } {
+        switch (campaign) {
+            case Campaign.I:
+            case Campaign.IE: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Necrons],
+                    },
+                    allies: {
+                        alliance: Alliance.Imperial,
+                        factions: this.ImperialFactions,
+                    },
+                };
+            }
+            case Campaign.IM:
+            case Campaign.IME: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Imperial,
+                        factions: [Faction.Astra_militarum, Faction.Ultramarines],
+                    },
+                    allies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Necrons],
+                    },
+                };
+            }
+            case Campaign.FoC:
+            case Campaign.FoCE: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Imperial,
+                        factions: [Faction.Astra_militarum],
+                    },
+                    allies: {
+                        alliance: Alliance.Chaos,
+                        factions: this.ChaosFactions,
+                    },
+                };
+            }
+            case Campaign.FoCM:
+            case Campaign.FoCME: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Chaos,
+                        factions: [Faction.Black_Legion],
+                    },
+                    allies: {
+                        alliance: Alliance.Imperial,
+                        factions: this.ImperialFactions,
+                    },
+                };
+            }
+            case Campaign.O:
+            case Campaign.OE: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Imperial,
+                        factions: [Faction.Black_Templars],
+                    },
+                    allies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Orks],
+                    },
+                };
+            }
+            case Campaign.OM:
+            case Campaign.OME: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Orks],
+                    },
+                    allies: {
+                        alliance: Alliance.Imperial,
+                        factions: this.ImperialFactions,
+                    },
+                };
+            }
+            case Campaign.SH:
+            case Campaign.SHE: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Chaos,
+                        factions: [Faction.Thousand_Sons],
+                    },
+                    allies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Aeldari],
+                    },
+                };
+            }
+            case Campaign.SHM:
+            case Campaign.SHME: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Aeldari],
+                    },
+                    allies: {
+                        alliance: Alliance.Chaos,
+                        factions: this.ChaosFactions,
+                    },
+                };
+            }
+            default: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Necrons],
+                    },
+                    allies: {
+                        alliance: Alliance.Imperial,
+                        factions: [],
+                    },
+                };
+            }
+        }
     }
 }

@@ -112,9 +112,9 @@ export const charsProgression: Record<number, ICharProgression> = {
     [Rarity.Epic + RarityStars.RedThreeStars]: { shards: 85 },
     [Rarity.Legendary + RarityStars.RedThreeStars]: { shards: 100, orbs: 10, rarity: Rarity.Legendary },
 
-    [Rarity.Legendary + RarityStars.RedFourStars]: { shards: 65, orbs: 10, rarity: Rarity.Legendary },
-    [Rarity.Legendary + RarityStars.RedFiveStars]: { shards: 85, orbs: 15, rarity: Rarity.Legendary },
-    [Rarity.Legendary + RarityStars.BlueStar]: { shards: 100, orbs: 15, rarity: Rarity.Legendary },
+    [Rarity.Legendary + RarityStars.RedFourStars]: { shards: 150, orbs: 10, rarity: Rarity.Legendary },
+    [Rarity.Legendary + RarityStars.RedFiveStars]: { shards: 250, orbs: 15, rarity: Rarity.Legendary },
+    [Rarity.Legendary + RarityStars.BlueStar]: { shards: 500, orbs: 20, rarity: Rarity.Legendary },
 };
 
 export const charsUnlockShards: Record<Rarity, number> = {
@@ -154,7 +154,7 @@ export const isTabletOrMobileMediaQuery = '(max-width: 1000px)';
 export const pooEmoji = String.fromCodePoint(parseInt('1F4A9', 16));
 export const starEmoji = String.fromCodePoint(parseInt('1F31F', 16));
 
-export const discordInvitationLink = 'https://discord.gg/gyajsMcH7j';
+export const discordInvitationLink = 'https://discord.gg/8mcWKVAYZf';
 export const bmcLink = 'https://www.buymeacoffee.com/tacticusplanner';
 
 const defaultCampaignsProgress: ICampaignsProgress = {
@@ -226,7 +226,17 @@ export const defaultData: IPersonalData2 = {
     modifiedDate: undefined,
     seenAppVersion: undefined,
     dailyRaids: {
+        filters: {
+            enemiesAlliance: [],
+            enemiesFactions: [],
+            alliesAlliance: [],
+            alliesFactions: [],
+            campaignTypes: [],
+            upgradesRarity: [],
+            slotsCount: [],
+        },
         completedLocations: [],
+        completedShardsLocations: [],
         lastRefreshDateUTC: new Date().toUTCString(),
     },
     autoTeamsPreferences: {
@@ -256,16 +266,14 @@ export const defaultData: IPersonalData2 = {
         showCharacterLevel: true,
         showCharacterRarity: true,
         inventoryShowAlphabet: true,
+        goalsTableView: false,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,
-        shardsEnergy: 0,
-        useCampaignsProgress: true,
-        useMostEfficientNodes: true,
-        useMoreEfficientNodes: false,
-        useLeastEfficientNodes: false,
-        useInventory: true,
         farmByPriorityOrder: false,
+        useLeastEfficientNodes: false,
+        useMoreEfficientNodes: false,
+        useMostEfficientNodes: true,
     },
     characters: [
         {
@@ -296,7 +304,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.Ascend,
             targetRarity: Rarity.Rare,
             priority: 1,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -305,7 +312,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.Ascend,
             targetRarity: Rarity.Rare,
             priority: 2,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -314,7 +320,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.Ascend,
             targetRarity: Rarity.Rare,
             priority: 3,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -323,7 +328,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.UpgradeRank,
             targetRank: Rank.Silver1,
             priority: 4,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -332,7 +336,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.UpgradeRank,
             targetRank: Rank.Silver1,
             priority: 5,
-            upgrades: [],
             dailyRaids: true,
         },
         {
@@ -341,7 +344,6 @@ export const defaultData: IPersonalData2 = {
             type: PersonalGoalType.UpgradeRank,
             targetRank: Rank.Silver1,
             priority: 6,
-            upgrades: [],
             dailyRaids: true,
         },
     ],
@@ -358,6 +360,7 @@ export const defaultData: IPersonalData2 = {
     },
     guildWar: {
         zoneDifficulty: Difficulty.Easy,
+        attackTokens: 10,
         deployedCharacters: [],
         layouts: [
             {

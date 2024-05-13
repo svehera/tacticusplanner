@@ -5,6 +5,9 @@ import { StaticDataService } from '../services';
 import { ContributorImage } from './contributor-image';
 import { Link, useNavigate } from 'react-router-dom';
 import { IContentCreator, IContributor } from '../models/interfaces';
+import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
+import Button from '@mui/material/Button';
+import { FlexBox } from 'src/v2/components/flex-box';
 
 export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
     const [activeContributorIndex, setActiveContributorIndex] = useState<number>(0);
@@ -43,27 +46,33 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
             }, 3000);
 
             setActiveContributorIndex(curr => {
-                const nextContributorId = curr + 1;
+                const increment = isMobile ? 1 : 3;
+                const maxStep = isMobile ? 0 : 2;
+                const nextContributorId = curr + increment;
 
-                return nextContributorId > contributorsList.length - 1 ? 0 : nextContributorId;
+                return nextContributorId + maxStep > contributorsList.length - 1 ? 0 : nextContributorId;
             });
         }, 4000);
 
         return () => clearInterval(intervalId);
     }, []);
 
-    const displayedContributor = useMemo<IContributor | IContentCreator>(
-        () => contributorsList[activeContributorIndex],
-        [activeContributorIndex]
-    );
-
     return (
-        <div>
-            <h3 style={{ textAlign: 'center' }}>Say your thank you to</h3>
+        <FlexBox style={{ flexDirection: 'column' }}>
+            <Button style={{ textAlign: 'center' }} component={Link} to={isMobile ? '/mobile/ty' : '/ty'}>
+                Thank you cards
+            </Button>
 
             {sliderMode ? (
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <ThankYouCard contributor={displayedContributor} hide={hide} />
+                <div style={{ display: 'flex', justifyContent: 'center', minHeight: 400, gap: 10 }}>
+                    {isMobile && <ThankYouCard contributor={contributorsList[activeContributorIndex]} hide={hide} />}
+                    {!isMobile && (
+                        <>
+                            <ThankYouCard contributor={contributorsList[activeContributorIndex]} hide={hide} />
+                            <ThankYouCard contributor={contributorsList[activeContributorIndex + 1]} hide={hide} />
+                            <ThankYouCard contributor={contributorsList[activeContributorIndex + 2]} hide={hide} />
+                        </>
+                    )}
                 </div>
             ) : (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>
@@ -72,7 +81,7 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
                     ))}
                 </div>
             )}
-        </div>
+        </FlexBox>
     );
 };
 
@@ -90,7 +99,8 @@ export const ThankYouCard = ({
             sx={{
                 opacity: hide ? 0 : 1,
                 width: 350,
-                height: 400,
+                height: 'fit-content',
+                maxHeight: 400,
                 cursor: 'pointer',
                 transition: 'opacity 1s ease-in-out',
             }}>
@@ -113,18 +123,21 @@ export const ThankYouCard = ({
                             </Link>
                         ) : (
                             <React.Fragment>
-                                <ContributorImage
-                                    iconPath={contributor.avatarIcon}
-                                    height={50}
-                                    width={50}
-                                    borderRadius={true}
-                                />
+                                {!!contributor.avatarIcon && (
+                                    <ContributorImage
+                                        iconPath={contributor.avatarIcon}
+                                        height={50}
+                                        width={50}
+                                        borderRadius={true}
+                                    />
+                                )}
+                                {!contributor.avatarIcon && <BmcIcon />}
                                 {contributor.name}
                             </React.Fragment>
                         )}
                     </div>
                 }
-                subheader={isContentMaker(contributor) ? 'Content creator' : 'Contributor'}
+                subheader={isContentMaker(contributor) ? 'Content creator' : contributor.type}
             />
             <CardContent style={{ paddingTop: 0 }}>
                 {isContentMaker(contributor) ? (
