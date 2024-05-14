@@ -19,6 +19,7 @@ export class CampaignsService {
     private static readonly campaignConfigs: ICampaignConfigs = campaignConfigs;
     private static readonly battleData: ICampaignsData = battleData;
     private static readonly recipeData: IRecipeData = recipeData;
+    public static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = this.getCampaignComposed();
 
     private static readonly ImperialFactions: Faction[] = [
         Faction.Ultramarines,

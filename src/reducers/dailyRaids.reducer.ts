@@ -1,15 +1,11 @@
 ﻿import { IDailyRaids, IDailyRaidsFilters, IMaterialRaid, IRaidLocation, SetStateAction } from '../models/interfaces';
 import { defaultData } from '../models/constants';
+import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 
 export type DailyRaidsAction =
     | {
           type: 'AddCompletedBattle';
-          location: IRaidLocation;
-          material: IMaterialRaid;
-      }
-    | {
-          type: 'AddCompletedShardsBattle';
-          locationId: string;
+          location: IItemRaidLocation;
       }
     | {
           type: 'ResetCompletedBattles';
@@ -29,46 +25,19 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
             return action.value ?? defaultData.dailyRaids;
         }
         case 'AddCompletedBattle': {
-            const existingMaterialIndex = state.completedLocations.findIndex(
-                x => x.materialId === action.material.materialId
-            );
-            if (existingMaterialIndex >= 0) {
-                const existingMaterial = state.completedLocations[existingMaterialIndex];
-                if (existingMaterial.locations.some(x => x.id === action.location.id)) {
-                    return state;
-                }
-
-                state.completedLocations[existingMaterialIndex] = {
-                    ...existingMaterial,
-                    locations: [...existingMaterial.locations, action.location],
-                };
-                return {
-                    ...state,
-                    completedLocations: [...state.completedLocations],
-                };
-            }
-            action.material.locations = [action.location];
             return {
                 ...state,
-                completedLocations: [...state.completedLocations, action.material],
+                raidedLocations: [...state.raidedLocations, action.location],
             };
         }
         case 'ResetCompletedBattles': {
-            return { ...state, completedLocations: [], completedShardsLocations: [] };
+            return { ...state, raidedLocations: [] };
         }
         case 'ResetCompletedBattlesDaily': {
             return {
                 ...state,
-                completedLocations: [],
-                completedShardsLocations: [],
+                raidedLocations: [],
                 lastRefreshDateUTC: new Date().toUTCString(),
-            };
-        }
-        case 'AddCompletedShardsBattle': {
-            const { locationId } = action;
-            return {
-                ...state,
-                completedShardsLocations: [...state.completedShardsLocations, locationId],
             };
         }
         case 'UpdateFilters': {

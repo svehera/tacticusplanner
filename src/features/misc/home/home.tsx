@@ -74,15 +74,12 @@ export const Home = () => {
                             title={
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                                     {dailyRaidsMenuItem.icon}{' '}
-                                    {dailyRaids.completedLocations?.flatMap(x => x.locations).length +
-                                        ' locations raided today'}
+                                    {dailyRaids.raidedLocations?.length + ' locations raided today'}
                                 </div>
                             }
                             subheader={
                                 <span>
-                                    {sum(
-                                        dailyRaids.completedLocations?.flatMap(x => x.locations).map(x => x.energySpent)
-                                    )}{' '}
+                                    {sum(dailyRaids.raidedLocations?.map(x => x.energySpent))}{' '}
                                     <MiscIcon icon={'energy'} width={15} height={15} />
                                     {' spent'}
                                 </span>
@@ -90,13 +87,11 @@ export const Home = () => {
                         />
                         <CardContent>
                             <ul style={{ margin: 0 }}>
-                                {dailyRaids.completedLocations
-                                    ?.flatMap(x => x.locations)
-                                    .map(x => (
-                                        <li key={x.id}>
-                                            {x.raidsCount}x {x.campaign} {x.battleNumber}
-                                        </li>
-                                    ))}
+                                {dailyRaids.raidedLocations.map(x => (
+                                    <li key={x.id}>
+                                        {x.raidsCount}x {x.campaign} {x.nodeNumber}
+                                    </li>
+                                ))}
                             </ul>
                         </CardContent>
                     </Card>

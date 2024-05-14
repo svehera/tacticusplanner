@@ -14,9 +14,7 @@ import { StoreContext } from '../../reducers/store.provider';
 import { orderBy, sortBy, sum } from 'lodash';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
-import { isMobile } from 'react-device-detect';
 import { useSearchParams } from 'react-router-dom';
-import { fullCampaignsProgress } from '../../models/constants';
 import { UpgradeImage } from '../../shared-components/upgrade-image';
 import { RankSelect } from '../../shared-components/rank-select';
 import { MiscIcon } from '../../shared-components/misc-icon';
@@ -25,8 +23,6 @@ import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { ArrowForward, Info } from '@mui/icons-material';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { RankImage } from 'src/v2/components/images/rank-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import DailyRaidsSettings from 'src/shared-components/daily-raids-settings';
 import InfoIcon from '@mui/icons-material/Info';
 
 export const RankLookup = () => {
@@ -140,6 +136,13 @@ export const RankLookup = () => {
                     campaignsProgress: campaignsProgress,
                     dailyEnergy: 0,
                     upgrades: {},
+                    preferences: {
+                        useLeastEfficientNodes: true,
+                        useMoreEfficientNodes: true,
+                        useMostEfficientNodes: true,
+                        farmByPriorityOrder: false,
+                        dailyEnergy: 0,
+                    },
                 },
                 upgrades
             ),

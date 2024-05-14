@@ -1,14 +1,6 @@
 ﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 
-import {
-    ICharacter2,
-    IDailyRaidsFilters,
-    IEstimatedRanks,
-    IMaterialEstimated2,
-    IMaterialRaid,
-    IRaidLocation,
-} from 'src/models/interfaces';
-import { StaticDataService } from 'src/services';
+import { ICharacter2, IDailyRaidsFilters } from 'src/models/interfaces';
 import { Accordion, AccordionDetails, AccordionSummary, Popover } from '@mui/material';
 import { PersonalGoalType } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
@@ -22,7 +14,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Warning } from '@mui/icons-material';
 import { enqueueSnackbar } from 'notistack';
 import ClearIcon from '@mui/icons-material/Clear';
-import { sum } from 'lodash';
 import { MiscIcon } from 'src/shared-components/misc-icon';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
@@ -33,6 +24,9 @@ import {
     ICharacterUnlockGoal,
     ICharacterUpgradeRankGoal,
     IEstimatedShards,
+    IEstimatedUpgrades,
+    IUpgradeRaid,
+    IItemRaidLocation,
 } from 'src/v2/features/goals/goals.models';
 import { MaterialsTable } from 'src/v2/features/goals/materials-table';
 import InfoIcon from '@mui/icons-material/Info';
@@ -48,6 +42,7 @@ import { ShardsService } from 'src/v2/features/goals/shards.service';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import { ShardsRaidsDayInput } from 'src/v2/features/goals/shards-raids-day-input';
 import { GoalsService } from 'src/v2/features/goals/goals.service';
+import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -94,7 +89,6 @@ export const DailyRaids = () => {
 
     const selectedGoals = useMemo(() => allGoals.filter(x => x.include), [allGoals]);
 
-    const completedLocations = dailyRaids.completedLocations?.flatMap(x => x.locations) ?? [];
     const shardsGoals = useMemo(
         () =>
             selectedGoals.filter(x => [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(x.type)) as Array<
@@ -111,16 +105,16 @@ export const DailyRaids = () => {
         [selectedGoals]
     );
 
-    const handleAdd = (material: IMaterialRaid, value: number, location: IRaidLocation) => {
+    const handleAdd = (upgradeRaid: IUpgradeRaid, value: number, location: IItemRaidLocation) => {
         setHasChanges(true);
 
         if (value > 0) {
             dispatch.inventory({
                 type: 'IncrementUpgradeQuantity',
-                upgrade: material.materialId,
+                upgrade: upgradeRaid.id,
                 value,
             });
-            enqueueSnackbar(`Added ${value} items for ${material.materialLabel}`, {
+            enqueueSnackbar(`Added ${value} items for ${upgradeRaid.label}`, {
                 variant: 'success',
             });
         }
@@ -128,14 +122,10 @@ export const DailyRaids = () => {
         dispatch.dailyRaids({
             type: 'AddCompletedBattle',
             location,
-            material: {
-                ...material,
-                locations: [],
-            },
         });
     };
 
-    const handleShardsAdd = (characterId: string, value: number, locationId: string) => {
+    const handleShardsAdd = (characterId: string, value: number, location: IItemRaidLocation) => {
         setHasChanges(true);
 
         if (value > 0) {
@@ -150,8 +140,8 @@ export const DailyRaids = () => {
         }
 
         dispatch.dailyRaids({
-            type: 'AddCompletedShardsBattle',
-            locationId,
+            type: 'AddCompletedBattle',
+            location,
         });
     };
 
@@ -218,7 +208,7 @@ export const DailyRaids = () => {
             {
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
-                completedLocations: dailyRaids.completedShardsLocations,
+                raidedLocations: dailyRaids.raidedLocations,
             },
             ...shardsGoals
         );
@@ -228,14 +218,14 @@ export const DailyRaids = () => {
         return dailyRaidsPreferences.dailyEnergy - estimatedShards.energyPerDay;
     }, [dailyRaidsPreferences.dailyEnergy, estimatedShards.energyPerDay]);
 
-    const estimatedRanks: IEstimatedRanks = useMemo(() => {
-        return StaticDataService.getRankUpgradeEstimatedDays(
+    const estimatedRanks: IEstimatedUpgrades = useMemo(() => {
+        return UpgradesService.getUpgradesEstimatedDays(
             {
                 dailyEnergy: actualEnergy,
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: upgrades,
-                completedLocations: dailyRaids.completedLocations ?? [],
+                completedLocations: dailyRaids.raidedLocations ?? [],
                 filters: dailyRaids.filters,
             },
             ...upgradeRankGoals
@@ -243,7 +233,7 @@ export const DailyRaids = () => {
     }, [upgradeRankGoals, dailyRaidsPreferences, dailyRaids.filters, upgrades]);
 
     useEffect(() => {
-        if (estimatedRanks.raids.length > 3) {
+        if (estimatedRanks.upgradesRaids.length > 3) {
             setUpgradesPaging(() => ({
                 start: 0,
                 end: 3,
@@ -252,34 +242,18 @@ export const DailyRaids = () => {
         } else {
             setUpgradesPaging(() => ({
                 start: 0,
-                end: estimatedRanks.raids.length,
+                end: estimatedRanks.upgradesRaids.length,
                 completed: true,
             }));
         }
-    }, [estimatedRanks.raids.length]);
-
-    const availableMaterials: IMaterialEstimated2[] = useMemo(() => {
-        return estimatedRanks.materials.filter(
-            x => x.locationsString !== x.missingLocationsString && x.quantity < x.count
-        );
-    }, [estimatedRanks.materials]);
-
-    const finishedMaterials: IMaterialEstimated2[] = useMemo(() => {
-        return estimatedRanks.materials.filter(x => x.quantity >= x.count);
-    }, [estimatedRanks.materials]);
-
-    const blockedMaterials: IMaterialEstimated2[] = useMemo(() => {
-        return estimatedRanks.materials.filter(
-            x => x.locationsString === x.missingLocationsString && x.quantity < x.count
-        );
-    }, [estimatedRanks.materials]);
+    }, [estimatedRanks.upgradesRaids.length]);
 
     const upgradesCalendarDate: string = useMemo(() => {
         const nextDate = new Date();
-        nextDate.setDate(nextDate.getDate() + estimatedRanks.raids.length - 1);
+        nextDate.setDate(nextDate.getDate() + estimatedRanks.upgradesRaids.length - 1);
 
         return formatDateWithOrdinal(nextDate);
-    }, [estimatedRanks.raids.length]);
+    }, [estimatedRanks.upgradesRaids.length]);
 
     const shardsCalendarDate: string = useMemo(() => {
         const nextDate = new Date();
@@ -323,7 +297,7 @@ export const DailyRaids = () => {
                 <Button
                     variant={'contained'}
                     color={'error'}
-                    disabled={!dailyRaids.completedLocations?.length && !dailyRaids.completedShardsLocations?.length}
+                    disabled={!dailyRaids.raidedLocations?.length}
                     onClick={() => {
                         dispatch.dailyRaids({ type: 'ResetCompletedBattles' });
                         setHasChanges(false);
@@ -364,11 +338,12 @@ export const DailyRaids = () => {
                 </AccordionDetails>
             </Accordion>
 
-            {!!availableMaterials.length && (
+            {!!estimatedRanks.inProgressMaterials.length && (
                 <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <div className="flex-box gap5" style={{ fontSize: 20 }}>
-                            <PendingIcon color={'primary'} /> <b>{availableMaterials.length}</b> in progress materials
+                            <PendingIcon color={'primary'} /> <b>{estimatedRanks.inProgressMaterials.length}</b> in
+                            progress materials
                         </div>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -381,36 +356,40 @@ export const DailyRaids = () => {
                             </Button>
                         </div>
                         <MaterialsTable
-                            rows={availableMaterials}
+                            rows={estimatedRanks.inProgressMaterials}
                             updateMaterialQuantity={saveInventoryUpdateChanges}
                             onGridReady={() => setGrid1Loaded(true)}
+                            inventory={inventory.upgrades}
                         />
                     </AccordionDetails>
                 </Accordion>
             )}
-            {!!finishedMaterials.length && (
+            {!!estimatedRanks.finishedMaterials.length && (
                 <Accordion TransitionProps={{ unmountOnExit: !grid3Loaded }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <div className="flex-box gap5" style={{ fontSize: 20 }}>
-                            <CheckCircleIcon color={'success'} /> <b>{finishedMaterials.length}</b> finished materials
+                            <CheckCircleIcon color={'success'} /> <b>{estimatedRanks.finishedMaterials.length}</b>{' '}
+                            finished materials
                         </div>
                     </AccordionSummary>
                     <AccordionDetails>
                         <MaterialsTable
-                            rows={finishedMaterials}
+                            rows={estimatedRanks.finishedMaterials}
                             updateMaterialQuantity={saveInventoryUpdateChanges}
                             onGridReady={() => setGrid3Loaded(true)}
+                            inventory={inventory.upgrades}
                         />
                     </AccordionDetails>
                 </Accordion>
             )}
-            {!!blockedMaterials.length && (
+            {!!estimatedRanks.blockedMaterials.length && (
                 <Accordion TransitionProps={{ unmountOnExit: !grid2Loaded }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <AccessibleTooltip
-                            title={`You don't any have location for ${blockedMaterials.length} materials`}>
+                            title={`You don't any have location for ${estimatedRanks.blockedMaterials.length} materials`}>
                             <div className="flex-box gap5" style={{ fontSize: 20 }}>
-                                <Warning color={'warning'} /> <b>{blockedMaterials.length}</b> blocked materials
+                                <Warning color={'warning'} /> <b>{estimatedRanks.blockedMaterials.length}</b> blocked
+                                materials
                             </div>
                         </AccessibleTooltip>
                     </AccordionSummary>
@@ -427,15 +406,16 @@ export const DailyRaids = () => {
                         )}
 
                         <MaterialsTable
-                            rows={blockedMaterials}
+                            rows={estimatedRanks.blockedMaterials}
                             updateMaterialQuantity={saveInventoryUpdateChanges}
                             onGridReady={() => setGrid2Loaded(true)}
+                            inventory={inventory.upgrades}
                         />
                     </AccordionDetails>
                 </Accordion>
             )}
             {!!estimatedShards.shardsRaids.length && (
-                <Accordion defaultExpanded={!dailyRaids.completedShardsLocations?.length}>
+                <Accordion defaultExpanded={!dailyRaids.raidedLocations.filter(x => x.isShardsLocation)?.length}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
                             <div className="flex-box gap5 wrap" style={{ fontSize: 20 }}>
@@ -470,24 +450,20 @@ export const DailyRaids = () => {
                 </Accordion>
             )}
 
-            {!!estimatedRanks.raids.length && (
+            {!!estimatedRanks.upgradesRaids.length && (
                 <Accordion defaultExpanded={true} TransitionProps={{ unmountOnExit: !upgradesPaging.completed }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
                             <div className="flex-box gap5 wrap" style={{ fontSize: 20 }}>
                                 <span>
-                                    Upgrades raids (<b>{estimatedRanks.raids.length}</b> Days |
+                                    Upgrades raids (<b>{estimatedRanks.upgradesRaids.length}</b> Days |
                                 </span>
                                 <span>
-                                    <b>{estimatedRanks.totalEnergy}</b>{' '}
+                                    <b>{estimatedRanks.energyTotal}</b>{' '}
                                     <MiscIcon icon={'energy'} height={15} width={15} /> |
                                 </span>
                                 <span>
-                                    <b>{estimatedRanks.totalUnusedEnergy}</b> Unused{' '}
-                                    <MiscIcon icon={'energy'} height={15} width={15} /> |
-                                </span>
-                                <span>
-                                    <b>{estimatedRanks.totalRaids}</b> Raids)
+                                    <b>{estimatedRanks.raidsTotal}</b> Raids)
                                 </span>
                             </div>
                             <span className="italic">{upgradesCalendarDate}</span>
@@ -495,20 +471,17 @@ export const DailyRaids = () => {
                     </AccordionSummary>
                     <AccordionDetails style={{ maxHeight: '63vh', overflow: 'auto' }}>
                         <div style={{ display: 'flex', gap: 10, overflow: 'auto' }}>
-                            {estimatedRanks.raids.slice(upgradesPaging.start, upgradesPaging.end).map((day, index) => {
-                                const isFirstDay = index === 0;
+                            {estimatedRanks.upgradesRaids
+                                .slice(upgradesPaging.start, upgradesPaging.end)
+                                .map((day, index) => {
+                                    const isFirstDay = index === 0;
 
-                                return isFirstDay ? (
-                                    <RaidsDayInput
-                                        key={index}
-                                        day={day}
-                                        completedLocations={completedLocations}
-                                        handleAdd={handleAdd}
-                                    />
-                                ) : (
-                                    <RaidsDayView key={index} day={day} title={'Day ' + (index + 1)} />
-                                );
-                            })}
+                                    return isFirstDay ? (
+                                        <RaidsDayInput key={index} day={day} handleAdd={handleAdd} />
+                                    ) : (
+                                        <RaidsDayView key={index} day={day} title={'Day ' + (index + 1)} />
+                                    );
+                                })}
                             {!upgradesPaging.completed && (
                                 <Button
                                     variant={'outlined'}
@@ -516,7 +489,7 @@ export const DailyRaids = () => {
                                     onClick={() =>
                                         setUpgradesPaging({
                                             start: 0,
-                                            end: estimatedRanks.raids.length,
+                                            end: estimatedRanks.upgradesRaids.length,
                                             completed: true,
                                         })
                                     }>
