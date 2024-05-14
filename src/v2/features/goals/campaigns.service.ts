@@ -21,23 +21,6 @@ export class CampaignsService {
     private static readonly recipeData: IRecipeData = recipeData;
     public static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = this.getCampaignComposed();
 
-    private static readonly ImperialFactions: Faction[] = [
-        Faction.Ultramarines,
-        Faction.Astra_militarum,
-        Faction.Black_Templars,
-        Faction.ADEPTA_SORORITAS,
-        Faction.AdeptusMechanicus,
-        Faction.Space_Wolves,
-        Faction.Dark_Angels,
-    ];
-
-    private static readonly ChaosFactions: Faction[] = [
-        Faction.Black_Legion,
-        Faction.Death_Guard,
-        Faction.Thousand_Sons,
-        Faction.WorldEaters,
-    ];
-
     public static selectBestLocations(
         availableLocations: ICampaignBattleComposed[],
         preferences?: IDailyRaidsPreferences
@@ -128,6 +111,23 @@ export class CampaignsService {
         enemies: { alliance: Alliance; factions: Faction[] };
         allies: { alliance: Alliance; factions: Faction[] };
     } {
+        const ImperialFactions: Faction[] = [
+            Faction.Ultramarines,
+            Faction.Astra_militarum,
+            Faction.Black_Templars,
+            Faction.ADEPTA_SORORITAS,
+            Faction.AdeptusMechanicus,
+            Faction.Space_Wolves,
+            Faction.Dark_Angels,
+        ];
+
+        const ChaosFactions: Faction[] = [
+            Faction.Black_Legion,
+            Faction.Death_Guard,
+            Faction.Thousand_Sons,
+            Faction.WorldEaters,
+        ];
+
         switch (campaign) {
             case Campaign.I:
             case Campaign.IE: {
@@ -138,7 +138,7 @@ export class CampaignsService {
                     },
                     allies: {
                         alliance: Alliance.Imperial,
-                        factions: this.ImperialFactions,
+                        factions: ImperialFactions,
                     },
                 };
             }
@@ -164,7 +164,7 @@ export class CampaignsService {
                     },
                     allies: {
                         alliance: Alliance.Chaos,
-                        factions: this.ChaosFactions,
+                        factions: ChaosFactions,
                     },
                 };
             }
@@ -177,7 +177,7 @@ export class CampaignsService {
                     },
                     allies: {
                         alliance: Alliance.Imperial,
-                        factions: this.ImperialFactions,
+                        factions: ImperialFactions,
                     },
                 };
             }
@@ -203,7 +203,7 @@ export class CampaignsService {
                     },
                     allies: {
                         alliance: Alliance.Imperial,
-                        factions: this.ImperialFactions,
+                        factions: ImperialFactions,
                     },
                 };
             }
@@ -229,7 +229,7 @@ export class CampaignsService {
                     },
                     allies: {
                         alliance: Alliance.Chaos,
-                        factions: this.ChaosFactions,
+                        factions: ChaosFactions,
                     },
                 };
             }
@@ -246,55 +246,5 @@ export class CampaignsService {
                 };
             }
         }
-    }
-
-    static filterLocation(filters: IDailyRaidsFilters, location: ICampaignBattleComposed): boolean {
-        const {
-            alliesFactions,
-            alliesAlliance,
-            enemiesAlliance,
-            enemiesFactions,
-            campaignTypes,
-            upgradesRarity,
-            slotsCount,
-        } = filters;
-
-        if (slotsCount && slotsCount.length) {
-            if (!slotsCount.includes(location.slots ?? 5)) {
-                return false;
-            }
-        }
-
-        if (campaignTypes.length) {
-            if (!campaignTypes.includes(location.campaignType)) {
-                return false;
-            }
-        }
-
-        if (alliesAlliance.length) {
-            if (!alliesAlliance.includes(location.alliesAlliance)) {
-                return false;
-            }
-        }
-
-        if (alliesFactions.length) {
-            if (!location.alliesFactions.some(faction => alliesFactions.includes(faction))) {
-                return false;
-            }
-        }
-
-        if (enemiesAlliance.length) {
-            if (!location.enemiesAlliances.some(alliance => enemiesAlliance.includes(alliance))) {
-                return false;
-            }
-        }
-
-        if (enemiesFactions.length) {
-            if (!location.enemiesFactions.some(faction => enemiesFactions.includes(faction))) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }

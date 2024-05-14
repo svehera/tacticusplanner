@@ -85,8 +85,6 @@ export const Goals = () => {
         );
     }, [typedGoals, estimatedShardsTotal.energyPerDay]);
 
-    console.log(estimatedUpgradesTotal);
-
     const removeGoal = (goalId: string): void => {
         dispatch.goals({ type: 'Delete', goalId });
     };

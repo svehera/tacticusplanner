@@ -75,13 +75,14 @@ export const DirtyDozenTable = ({ characters, rows }: { characters: ICharacter2[
                 return <RankImage rank={rank} />;
             },
         },
-        createScoreColumn('Pvp', 'PvP'),
+
         createScoreColumn('GRTyranid', 'Tyranids'),
         createScoreColumn('GRNecron', 'Necron'),
         createScoreColumn('GROrk', 'Ork'),
         createScoreColumn('GRMortarion', 'Mortarion'),
         createScoreColumn('GRScreamer', 'Screamer'),
         createScoreColumn('GRRogalDorn', 'Rogal Dorn'),
+        createScoreColumn('GRAvatar', 'Avatar'),
 
         {
             headerName: 'Guild Raids',
@@ -97,10 +98,13 @@ export const DirtyDozenTable = ({ characters, rows }: { characters: ICharacter2[
                     character.GROrk +
                     character.GRMortarion +
                     character.GRScreamer +
-                    character.GRRogalDorn
+                    character.GRRogalDorn +
+                    character.GRAvatar
                 );
             },
         },
+
+        createScoreColumn('GuildWar', 'Guild War'),
     ]);
 
     return (
