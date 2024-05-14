@@ -111,6 +111,8 @@ export const planSubMenuWeb: MenuItemTP[] = [
         menuItemById['leMasterTable'],
         menuItemById['vitruvius'],
         menuItemById['ragnar'],
+    ]),
+    new MenuItemTP('LRE Archive', menuItemById['leMasterTable'].icon, '', '', '', [
         menuItemById['shadowsun'],
         menuItemById['aunshi'],
     ]),
@@ -123,10 +125,8 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['offense'],
     menuItemById['zones'],
     menuItemById['leMasterTable'],
-    menuItemById['shadowsun'],
     menuItemById['ragnar'],
     menuItemById['vitruvius'],
-    menuItemById['aunshi'],
 ];
 
 export const learnSubMenu: MenuItemTP[] = [

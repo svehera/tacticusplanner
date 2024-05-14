@@ -1,15 +1,14 @@
-﻿import React, { ChangeEvent, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+﻿import React, { useContext, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { CellClassParams, ColDef, ColGroupDef, ICellRendererParams, ITooltipParams } from 'ag-grid-community';
 
 import {
     ICharacter2,
-    ILegendaryEvent,
     ILegendaryEventSelectedTeams,
     ILegendaryEventTrack,
     SelectedTeams,
 } from '../../models/interfaces';
-import { LegendaryEventEnum, Rank, Rarity } from '../../models/enums';
+import { LegendaryEventEnum, Rank } from '../../models/enums';
 import {
     Checkbox,
     Divider,
@@ -39,7 +38,6 @@ export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>([
         LegendaryEventEnum.Ragnar,
         LegendaryEventEnum.Vitruvius,
-        LegendaryEventEnum.Shadowsun,
     ]);
 
     const { leSelectedTeams, viewPreferences, characters } = useContext(StoreContext);
@@ -377,6 +375,7 @@ export const MasterTable = () => {
                             </ListItemIcon>
                             <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Vitruvius]} />
                         </MenuItem>
+                        <Divider />
                         <MenuItem value={LegendaryEventEnum.Shadowsun}>
                             <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Shadowsun) > -1} />
                             <ListItemIcon>
@@ -384,7 +383,6 @@ export const MasterTable = () => {
                             </ListItemIcon>
                             <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Shadowsun]} />
                         </MenuItem>
-                        <Divider />
                         <MenuItem value={LegendaryEventEnum.AunShi}>
                             <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.AunShi) > -1} />
                             <ListItemIcon>
