@@ -39,7 +39,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
         goalId: '',
         xpEstimate: null,
     };
-    const isGoalCompleted = GoalsService.isGoalCompleted(goal) || goalEstimate.daysLeft <= 0;
+    const isGoalCompleted = GoalsService.isGoalCompleted(goal);
 
     const calendarDate: string = useMemo(() => {
         const nextDate = new Date();

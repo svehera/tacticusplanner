@@ -1,50 +1,88 @@
 ﻿import React, { useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { IMaterialEstimated2 } from 'src/models/interfaces';
-import { ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
+import { ColDef, ColGroupDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { isMobile } from 'react-device-detect';
-import { Rarity } from 'src/models/enums';
+import { DamageType, Rarity } from 'src/models/enums';
 import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
 import InfoIcon from '@mui/icons-material/Info';
+import { ICharacterUpgradeEstimate } from 'src/v2/features/goals/goals.models';
+import { ICampaignBattleComposed, ICharacter2, IMaterialEstimated2 } from 'src/models/interfaces';
+import { CharacterTitle } from 'src/shared-components/character-title';
+import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
+import { RarityImage } from 'src/shared-components/rarity-image';
+import { RankImage } from 'src/shared-components/rank-image';
+import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 
 interface Props {
-    rows: IMaterialEstimated2[];
+    rows: ICharacterUpgradeEstimate[];
     updateMaterialQuantity: (materialId: string, quantity: number) => void;
     onGridReady: () => void;
+    inventory: Record<string, number>;
 }
 
-export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, onGridReady }) => {
-    const columnDefs = useMemo<Array<ColDef<IMaterialEstimated2>>>(() => {
+export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, onGridReady, inventory }) => {
+    const columnDefs = useMemo<
+        Array<ColDef<ICharacterUpgradeEstimate> | ColGroupDef<ICharacterUpgradeEstimate>>
+    >(() => {
         return [
             {
-                headerName: '#',
-                colId: 'rowNumber',
-                valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
-                maxWidth: 50,
-            },
-            {
-                headerName: 'Icon',
-                cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
-                    const { data } = params;
-                    if (data) {
-                        return <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />;
-                    }
-                },
-                valueFormatter: () => {
-                    return '';
-                },
-                equals: () => true,
-                sortable: false,
-                width: 80,
-            },
-            {
-                field: 'label',
                 headerName: 'Upgrade',
-                maxWidth: isMobile ? 125 : 300,
+                children: [
+                    {
+                        headerName: '#',
+                        colId: 'rowNumber',
+                        valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
+                        maxWidth: 50,
+                    },
+                    {
+                        headerName: 'Icon',
+                        cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                            const { data } = params;
+                            if (data) {
+                                return (
+                                    <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />
+                                );
+                            }
+                        },
+                        valueFormatter: () => {
+                            return '';
+                        },
+                        equals: () => true,
+                        sortable: false,
+                        width: 80,
+                    },
+                    {
+                        field: 'label',
+                        columnGroupShow: 'open',
+                        maxWidth: isMobile ? 125 : 300,
+                    },
+                    {
+                        field: 'rarity',
+                        maxWidth: 120,
+                        columnGroupShow: 'open',
+                        valueFormatter: (params: ValueFormatterParams<ICharacterUpgradeEstimate>) =>
+                            Rarity[params.data?.rarity ?? 0],
+                        cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
+                    },
+                    {
+                        columnGroupShow: 'open',
+                        field: 'relatedCharacters',
+                        tooltipField: 'relatedCharacters',
+                        headerName: 'Characters',
+                        maxWidth: 120,
+                    },
+                ],
             },
+
             {
-                field: 'quantity',
+                valueGetter: params => {
+                    return inventory[params.data!.id] ?? 0;
+                },
+                valueSetter: event => {
+                    inventory[event.data.id] = event.newValue;
+                    return true;
+                },
                 headerName: 'Inventory',
                 editable: true,
                 cellEditorPopup: false,
@@ -57,75 +95,152 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                 },
                 maxWidth: 90,
             },
+
             {
-                field: 'countLeft',
-                headerName: 'Left',
-                maxWidth: 90,
-                cellStyle: cellClassParams => {
-                    const { data } = cellClassParams;
-                    if (data) {
-                        return {
-                            backgroundColor: data.quantity >= data.count ? 'lightgreen' : 'white',
-                        };
+                field: 'requiredCount',
+                headerName: 'Goal',
+                maxWidth: 75,
+                cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                    const { data, value } = params;
+                    if (data && value) {
+                        return `${value} (${data.acquiredCount - value})`;
                     }
                 },
             },
             {
-                field: 'count',
-                maxWidth: 75,
-            },
-            {
-                field: 'craftedCount',
-                headerName: 'Crafted',
-                maxWidth: 75,
-            },
-            {
-                field: 'rarity',
-                maxWidth: 120,
-                valueFormatter: (params: ValueFormatterParams<IMaterialEstimated2>) => Rarity[params.data?.rarity ?? 0],
-                cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
-            },
-            {
-                field: 'characters',
-                tooltipField: 'characters',
-                maxWidth: 120,
-            },
-            {
-                field: 'expectedEnergy',
-                headerName: 'Energy',
-                maxWidth: 90,
-            },
-            {
-                headerName: 'Battles',
-                field: 'numberOfBattles',
-                maxWidth: 90,
-            },
-            {
-                headerName: 'Days',
-                field: 'daysOfBattles',
-                maxWidth: 90,
+                headerName: 'Estimate',
+                children: [
+                    {
+                        field: 'daysTotal',
+                        columnGroupShow: 'closed',
+                        maxWidth: isMobile ? 125 : 300,
+                        cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                            const { daysTotal, energyTotal, raidsTotal } = props.data!;
+                            return (
+                                <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                                    <li>{daysTotal} - days</li>
+                                    <li>{energyTotal} - energy</li>
+                                    <li>{raidsTotal} - raids</li>
+                                </ul>
+                            );
+                        },
+                    },
+                    {
+                        headerName: 'Days',
+                        field: 'daysTotal',
+                        columnGroupShow: 'open',
+                        maxWidth: 90,
+                    },
+                    {
+                        field: 'energyTotal',
+                        headerName: 'Energy',
+                        columnGroupShow: 'open',
+                        maxWidth: 90,
+                    },
+                    {
+                        headerName: 'Raids',
+                        field: 'raidsTotal',
+                        columnGroupShow: 'open',
+                        maxWidth: 90,
+                    },
+                ],
             },
             {
                 headerName: 'Locations',
-                field: 'locationsString',
-                minWidth: 300,
-                flex: 1,
-            },
-            {
-                headerName: 'Locked Locations',
-                field: 'missingLocationsString',
-                minWidth: 300,
-                flex: 1,
-                cellStyle: () => ({
-                    color: 'red',
-                }),
+                children: [
+                    {
+                        columnGroupShow: 'closed',
+                        valueGetter: params => {
+                            return params.data?.locations.map(x => x.id) ?? [];
+                        },
+                        cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                            const locations: ICampaignBattleComposed[] = props.data?.locations ?? [];
+                            const usedLocations = locations.filter(x => x.isSelected).length;
+                            const lockedLocations = locations.filter(x => !x.isUnlocked).length;
+                            return (
+                                <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                                    <li>
+                                        {usedLocations}/{locations.length} - used
+                                    </li>
+                                    {lockedLocations > 0 && (
+                                        <li style={{ color: 'red' }}>{lockedLocations} - locked</li>
+                                    )}
+                                </ul>
+                            );
+                        },
+                    },
+                    {
+                        columnGroupShow: 'open',
+                        headerName: 'Used',
+                        cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                            const { data } = params;
+                            if (data) {
+                                return (
+                                    <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                                        {data.locations
+                                            .filter(x => x.isSelected)
+                                            .map(location => (
+                                                <li key={location.id}>
+                                                    <span>{location.campaign}</span>{' '}
+                                                    <span className="bold">{location.nodeNumber}</span>
+                                                </li>
+                                            ))}
+                                    </ul>
+                                );
+                            }
+                        },
+                    },
+                    {
+                        headerName: 'Locked',
+                        columnGroupShow: 'open',
+                        cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                            const { data } = params;
+                            if (data) {
+                                return (
+                                    <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                                        {data.locations
+                                            .filter(x => !x.isUnlocked)
+                                            .map(location => (
+                                                <li key={location.id} style={{ color: 'red' }}>
+                                                    <span>{location.campaign}</span>{' '}
+                                                    <span className="bold">{location.nodeNumber}</span>
+                                                </li>
+                                            ))}
+                                    </ul>
+                                );
+                            }
+                        },
+                    },
+                    {
+                        headerName: 'Available',
+                        columnGroupShow: 'open',
+                        flex: 1,
+                        cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
+                            const { data } = params;
+                            if (data) {
+                                return (
+                                    <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                                        {data.locations
+                                            .filter(x => !x.isSelected && x.isUnlocked)
+                                            .map(location => (
+                                                <li key={location.id}>
+                                                    <span>{location.campaign}</span>{' '}
+                                                    <span className="bold">{location.nodeNumber}</span>
+                                                </li>
+                                            ))}
+                                    </ul>
+                                );
+                            }
+                        },
+                    },
+                ],
             },
         ];
     }, []);
 
-    const saveChanges = (event: CellEditingStoppedEvent<IMaterialEstimated2>): void => {
+    const saveChanges = (event: CellEditingStoppedEvent<ICharacterUpgradeEstimate>): void => {
         if (event.data && event.newValue !== event.oldValue) {
-            updateMaterialQuantity(event.data.id, event.data.quantity);
+            updateMaterialQuantity(event.data.id, event.newValue);
         }
     };
     return (
@@ -149,9 +264,8 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                     suppressMovable: true,
                     sortable: true,
                     wrapText: true,
+                    autoHeight: true,
                 }}
-                rowHeight={60}
-                rowBuffer={3}
                 columnDefs={columnDefs}
                 rowData={rows}
                 onGridReady={onGridReady}

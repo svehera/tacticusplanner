@@ -235,8 +235,7 @@ export const defaultData: IPersonalData2 = {
             upgradesRarity: [],
             slotsCount: [],
         },
-        completedLocations: [],
-        completedShardsLocations: [],
+        raidedLocations: [],
         lastRefreshDateUTC: new Date().toUTCString(),
     },
     autoTeamsPreferences: {

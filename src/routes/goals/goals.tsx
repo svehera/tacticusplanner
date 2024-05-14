@@ -28,6 +28,7 @@ import { MiscIcon } from 'src/shared-components/misc-icon';
 import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
 import { rankToLevel } from 'src/models/constants';
 import { sum } from 'lodash';
+import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
 export const Goals = () => {
     const { goals, characters, campaignsProgress, dailyRaidsPreferences, inventory, dailyRaids, viewPreferences } =
@@ -65,16 +66,16 @@ export const Goals = () => {
             {
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
-                completedLocations: [],
+                raidedLocations: [],
             },
             ...shardsGoals
         );
     }, [typedGoals]);
 
     const estimatedUpgradesTotal = useMemo(() => {
-        return StaticDataService.getRankUpgradeEstimatedDays(
+        return UpgradesService.getUpgradesEstimatedDays(
             {
-                dailyEnergy: dailyRaidsPreferences.dailyEnergy - estimatedShardsTotal.energyPerDay,
+                dailyEnergy: dailyRaidsPreferences.dailyEnergy - Math.min(estimatedShardsTotal.energyPerDay, 90),
                 campaignsProgress: campaignsProgress,
                 preferences: { ...dailyRaidsPreferences, farmByPriorityOrder: true },
                 upgrades: inventory.upgrades,
@@ -83,6 +84,8 @@ export const Goals = () => {
             ...upgradesGoals
         );
     }, [typedGoals, estimatedShardsTotal.energyPerDay]);
+
+    console.log(estimatedUpgradesTotal);
 
     const removeGoal = (goalId: string): void => {
         dispatch.goals({ type: 'Delete', goalId });
@@ -117,7 +120,7 @@ export const Goals = () => {
                 {
                     campaignsProgress: campaignsProgress,
                     preferences: dailyRaidsPreferences,
-                    completedLocations: dailyRaids.completedShardsLocations ?? [],
+                    raidedLocations: dailyRaids.raidedLocations ?? [],
                 },
                 ...shardsGoals
             );
@@ -138,23 +141,13 @@ export const Goals = () => {
 
         if (upgradesGoals.length) {
             const goalsEstimate = upgradesGoals.map(goal => {
-                const upgradesEstimate = StaticDataService.getRankUpgradeEstimatedDays(
-                    {
-                        dailyEnergy: dailyRaidsPreferences.dailyEnergy - estimatedShardsTotal.energyPerDay,
-                        campaignsProgress: campaignsProgress,
-                        preferences: dailyRaidsPreferences,
-                        upgrades: inventory.upgrades,
-                        completedLocations: [],
-                    },
-                    goal
+                const goalEstimate = estimatedUpgradesTotal.byCharactersPriority.find(x => x.goalId === goal.goalId);
+                const firstFarmDay = estimatedUpgradesTotal.upgradesRaids.findIndex(x =>
+                    x.raids.flatMap(raid => raid.relatedCharacters).includes(goal.characterName)
                 );
 
-                const firstFarmDay = estimatedUpgradesTotal.raids.findIndex(x =>
-                    x.raids.flatMap(raid => raid.characters).includes(goal.characterName)
-                );
-
-                const daysTotal = estimatedUpgradesTotal.raids.filter(x =>
-                    x.raids.flatMap(raid => raid.characters).includes(goal.characterName)
+                const daysTotal = estimatedUpgradesTotal.upgradesRaids.filter(x =>
+                    x.raids.flatMap(raid => raid.relatedCharacters).includes(goal.characterName)
                 ).length;
 
                 const targetLevel = rankToLevel[((goal.rankEnd ?? 1) - 1) as Rank];
@@ -162,7 +155,7 @@ export const Goals = () => {
 
                 return {
                     goalId: goal.goalId,
-                    energyTotal: upgradesEstimate.totalEnergy,
+                    energyTotal: sum(goalEstimate?.upgrades.map(x => x.energyTotal) ?? []),
                     daysTotal: daysTotal,
                     daysLeft: firstFarmDay + daysTotal,
                     oTokensTotal: 0,
@@ -215,10 +208,10 @@ export const Goals = () => {
                 <div>
                     <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
                         <span>
-                            Upgrade rank (<b>{estimatedUpgradesTotal.raids.length}</b> Days |
+                            Upgrade rank (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
                         </span>
                         <span>
-                            <b>{estimatedUpgradesTotal.totalEnergy}</b>{' '}
+                            <b>{estimatedUpgradesTotal.energyTotal}</b>{' '}
                             <MiscIcon icon={'energy'} height={15} width={15} /> |
                         </span>
                         <span>

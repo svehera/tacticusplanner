@@ -36,6 +36,7 @@ import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-o
 import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
 import { GuildWarAction } from 'src/reducers/guildWarReducer';
 import { GuildAction } from 'src/reducers/guildReducer';
+import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -320,8 +321,7 @@ export interface IGuildWar {
 
 export interface IDailyRaids {
     filters: IDailyRaidsFilters;
-    completedLocations: IMaterialRaid[];
-    completedShardsLocations: string[];
+    raidedLocations: IItemRaidLocation[];
     lastRefreshDateUTC: string;
 }
 
@@ -600,6 +600,7 @@ export interface ICampaignBattleComposed {
     isSelected?: boolean;
     isUnlocked?: boolean;
     isPassFilter?: boolean;
+    isCompleted?: boolean;
 }
 
 type MaterialName = string;
@@ -770,7 +771,7 @@ export interface IEstimatedRanks {
 }
 
 export interface IEstimatedRanksSettings {
-    completedLocations: IMaterialRaid[];
+    completedLocations: IItemRaidLocation[];
     campaignsProgress: ICampaignsProgress;
     dailyEnergy: number;
     preferences: IDailyRaidsPreferences;

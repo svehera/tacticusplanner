@@ -62,7 +62,7 @@ export interface ICharacterAscendGoal extends ICharacterRaidGoalSelectBase {
 }
 
 export interface IEstimatedAscensionSettings {
-    completedLocations: string[];
+    raidedLocations: IItemRaidLocation[];
     campaignsProgress: ICampaignsProgress;
     preferences: IDailyRaidsPreferences;
 }
@@ -92,7 +92,7 @@ export interface IShardMaterial {
 
 export interface IShardsRaid extends ICharacterShardsEstimate {
     isCompleted: boolean;
-    locations: Array<ILocationRaid>;
+    locations: Array<IItemRaidLocation>;
 }
 
 export interface ICharacterShardsEstimate extends IShardMaterial {
@@ -106,24 +106,34 @@ export interface ICharacterShardsEstimate extends IShardMaterial {
     energyPerDay: number;
 }
 
-export interface ILocationRaid {
-    id: string;
-    campaign: string;
-    battleNumber: number;
-    raidsCount: number;
-    farmedItems: number;
-    energySpent: number;
-    isCompleted: boolean;
-}
-
 export interface IEstimatedUpgrades {
-    // shardsRaids: IShardsRaid[];
-    materials: ICharacterUpgradeEstimate[];
+    upgradesRaids: IUpgradesRaidsDay[];
+    inProgressMaterials: ICharacterUpgradeEstimate[];
+    blockedMaterials: ICharacterUpgradeEstimate[];
+    finishedMaterials: ICharacterUpgradeEstimate[];
     characters: ICharacterUpgrade[];
     byCharactersPriority: ICharacterUpgradeRankEstimate[];
+    craftedUpgrades: ICraftedUpgrade[];
     energyTotal: number;
     raidsTotal: number;
     daysTotal: number;
+}
+
+export interface IUpgradesRaidsDay {
+    raids: IUpgradeRaid[];
+    energyTotal: number;
+    raidsTotal: number;
+}
+
+export interface IUpgradeRaid extends ICharacterUpgradeEstimate {
+    raidLocations: IItemRaidLocation[];
+}
+
+export interface IItemRaidLocation extends ICampaignBattleComposed {
+    raidsCount: number;
+    farmedItems: number;
+    energySpent: number;
+    isShardsLocation: boolean;
 }
 
 export interface ICharacterUpgrade {
@@ -132,6 +142,7 @@ export interface ICharacterUpgrade {
     label: string;
     upgradeRanks: ICharacterUpgradeRank[];
     baseUpgradesTotal: Record<string, number>;
+    usedCraftedUpgrades: string[];
 }
 
 export interface ICharacterUpgradeRank {
@@ -161,6 +172,7 @@ export interface ICombinedUpgrade extends IBaseUpgrade {
 
 export interface ICharacterUpgradeEstimate extends IBaseUpgrade {
     energyTotal: number;
+    energyLeft: number;
     daysTotal: number;
     raidsTotal: number;
 
