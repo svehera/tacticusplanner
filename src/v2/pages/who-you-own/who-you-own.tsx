@@ -140,22 +140,6 @@ export const WhoYouOwn = () => {
                         onClose={endEditCharacter}
                     />
                 </Conditional>
-                <h3>Roster Power</h3>
-                <span style={{ fontSize: 10 }}>
-                    <p>
-                        This is a visualization of your roster power. The darker section is power contributed by
-                        attributes (armor, damage, and health), the lighter section by abilities (active and passive).
-                        The marked power levels are:
-                    </p>
-                    <ul>
-                        <li> 0 - 851: Common</li>
-                        <li> 851 - 2 212: Uncommon</li>
-                        <li> 2 212 - 5 097: Rare</li>
-                        <li> 5 097 - 11 194: Epic</li>
-                        <li> 11 194 - 21 930: Legendary</li>
-                        <li> 21 930 - 40 000: Legendary Diamond</li>
-                    </ul>
-                </span>
                 <TeamGraph
                     data={[
                         { id: 'Attribute', data: teamAttributeData },
