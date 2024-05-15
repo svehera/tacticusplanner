@@ -1,6 +1,32 @@
 ﻿{
-    "currentVersion": "1.5.3",
+    "currentVersion": "1.5.4",
     "releaseNotes": [
+        {
+            "version": "1.5.4",
+            "date": "May 15",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added Kharn LRE planner"
+                },
+                {
+                    "text": "Updated Nandi's Dirty Dozen to May 2024 data",
+                    "route": "learn/dirtyDozen"
+                },
+                {
+                    "text": "New Campaign Battles: ‘Elite Saim-Hann’ Part 2 and ‘Elite Saim-Hann’ Part 3"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Refactored daily raids and character upgrades for a better support of crafted upgrades"
+                },
+                {
+                    "text": "Update Tanksmasha according with rewORK"
+                }
+            ],
+            "bugFixes": []
+        },
         {
             "version": "1.5.3",
             "date": "May 8",

@@ -9,7 +9,7 @@ import { StoreContext } from '../reducers/store.provider';
 import { MiscIcon } from './misc-icon';
 
 import './character-upgrades.css';
-import { groupBy } from 'lodash';
+import { cloneDeep, groupBy, map } from 'lodash';
 import { Rank } from 'src/models/enums';
 
 interface Props {
@@ -91,7 +91,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
         });
     };
 
-    const baseMaterials = useMemo<IMaterialRecipeIngredientFull[]>(() => {
+    const topLevelUpgrades = useMemo<IMaterialFull[]>(() => {
         const newUpgrades = possibleUpgrades.filter(x => formData.newUpgrades.includes(x.id));
         let upgradesToConsider: IMaterialFull[];
 
@@ -109,16 +109,60 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             upgradesToConsider = [...previousRankUpgrades, ...newUpgrades];
         }
 
-        return StaticDataService.groupBaseMaterials(upgradesToConsider);
+        return upgradesToConsider;
     }, [formData.newUpgrades, rank]);
+
+    const craftedUpgrades: IMaterialRecipeIngredientFull[] = useMemo(() => {
+        const inventoryCopy = cloneDeep(inventory.upgrades);
+        const crafted = topLevelUpgrades.filter(x => x.craftable);
+
+        const filtered = crafted
+            .filter(x => {
+                const inventoryCount = inventoryCopy[x.id];
+
+                if (inventoryCount >= 1) {
+                    inventoryCopy[x.id]--;
+                    return true;
+                }
+
+                return false;
+            })
+            .map(x => ({
+                ...x,
+                count: 1,
+                priority: 1,
+                characters: [],
+            }));
+
+        const grouped: IMaterialRecipeIngredientFull[] = map(groupBy(filtered, 'id'), (items, id) => ({
+            ...items[0],
+            count: items.length,
+        }));
+
+        return grouped;
+    }, [topLevelUpgrades]);
+
+    const updatedUpgrades = useMemo<IMaterialRecipeIngredientFull[]>(() => {
+        const result = [...topLevelUpgrades];
+        if (craftedUpgrades.length) {
+            for (const craftedUpgrade of craftedUpgrades) {
+                for (let i = 0; i < craftedUpgrade.count; i++) {
+                    const upgradeEntryIndex = result.findIndex(x => x.id === craftedUpgrade.id);
+                    result.splice(upgradeEntryIndex, 1);
+                }
+            }
+        }
+
+        return [...craftedUpgrades, ...StaticDataService.groupBaseMaterials(result)];
+    }, [topLevelUpgrades]);
 
     useEffect(() => {
         if (updateInventory) {
-            upgradesChanges(formData.currentUpgrades, baseMaterials);
+            upgradesChanges(formData.currentUpgrades, updatedUpgrades);
         } else {
             upgradesChanges(formData.currentUpgrades, []);
         }
-    }, [formData.currentUpgrades, baseMaterials, updateInventory]);
+    }, [formData.currentUpgrades, updatedUpgrades, updateInventory]);
 
     useEffect(() => {
         if (rank === formData.originalRank) {
@@ -184,7 +228,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             <FormControlLabel
                 control={
                     <Checkbox
-                        disabled={!baseMaterials.length}
+                        disabled={!updatedUpgrades.length}
                         checked={updateInventory}
                         onChange={event => setUpdateInventory(event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
@@ -206,7 +250,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                 <div style={{ padding: 15 }}>
                     <p>Inventory after update:</p>
                     <ul style={{ padding: 0 }}>
-                        {baseMaterials.map((x, index) => (
+                        {updatedUpgrades.map((x, index) => (
                             <li
                                 key={x.id + index}
                                 style={{

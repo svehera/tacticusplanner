@@ -1,25 +1,21 @@
-﻿import { IMaterialRaid } from 'src/models/interfaces';
-import React from 'react';
+﻿import React from 'react';
 import { RaidItemView } from 'src/v2/features/goals/raid-item-view';
 import { MaterialItemTitle } from 'src/v2/features/goals/material-item-title';
+import { IUpgradeRaid } from 'src/v2/features/goals/goals.models';
 
 interface Props {
-    materialRaid: IMaterialRaid;
+    upgradeRaid: IUpgradeRaid;
 }
 
-export const MaterialItemView: React.FC<Props> = ({ materialRaid }) => {
-    const isAllLocationsBlocked =
-        !!materialRaid.materialRef &&
-        materialRaid.materialRef.locationsString === materialRaid.materialRef.missingLocationsString;
-
+export const MaterialItemView: React.FC<Props> = ({ upgradeRaid }) => {
     return (
-        <div style={{ opacity: isAllLocationsBlocked ? 0.5 : 1 }}>
-            <MaterialItemTitle materialRaid={materialRaid} />
+        <div style={{ opacity: upgradeRaid.isBlocked ? 0.5 : 1 }}>
+            <MaterialItemTitle upgradeRaid={upgradeRaid} />
             <ul style={{ paddingInlineStart: 15 }}>
-                {materialRaid.locations.map(location => {
+                {upgradeRaid.raidLocations.map(location => {
                     return (
                         <li
-                            key={location.campaign + location.battleNumber}
+                            key={location.id}
                             className="flex-box gap5"
                             style={{
                                 justifyContent: 'space-between',

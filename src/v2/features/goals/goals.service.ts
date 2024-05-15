@@ -45,6 +45,7 @@ export class GoalsService {
                 shards: relatedCharacter.shards,
                 rarity: relatedCharacter.rarity,
                 rank: relatedCharacter.rank,
+                faction: relatedCharacter.faction,
                 campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                 ...base,
             };

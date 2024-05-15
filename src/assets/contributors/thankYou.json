@@ -194,5 +194,33 @@
         "thankYou": "Great App. Spending almost as much time here as in Tacticus \uD83D\uDE05",
         "resourceDescription": "",
         "resourceLink": ""
+    },
+    {
+        "name": "Someone",
+        "type": "Supporter",
+        "thankYou": "You are awesome.",
+        "resourceDescription": "",
+        "resourceLink": ""
+    },
+    {
+        "name": "@JRC",
+        "type": "Supporter",
+        "thankYou": "Hi Severyn, this is such a useful app! Thank you for your commitment to the Tacticus Community.",
+        "resourceDescription": "",
+        "resourceLink": ""
+    },
+    {
+        "name": "SaberKhan",
+        "type": "Trooper",
+        "thankYou": "Роби вже обнову з Аватором і Екзітором))",
+        "resourceDescription": "",
+        "resourceLink": ""
+    },
+    {
+        "name": "Someone",
+        "type": "Trooper",
+        "thankYou": "Excellent app - thanks for all you do for the community by maintaining this. Slava Ukraini",
+        "resourceDescription": "",
+        "resourceLink": ""
     }
 ]

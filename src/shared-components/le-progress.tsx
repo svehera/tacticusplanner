@@ -50,13 +50,19 @@ export const LeProgress = ({
             id: legendaryEvent.id,
             name: LegendaryEventEnum[legendaryEvent.id],
             alpha: {
-                battles: Array.from({ length: 12 }, () => Array.from({ length: 7 }, () => false)),
+                battles: Array.from({ length: legendaryEvent.battlesCount }, () =>
+                    Array.from({ length: legendaryEvent.constraintsCount }, () => false)
+                ),
             },
             beta: {
-                battles: Array.from({ length: 12 }, () => Array.from({ length: 7 }, () => false)),
+                battles: Array.from({ length: legendaryEvent.battlesCount }, () =>
+                    Array.from({ length: legendaryEvent.constraintsCount }, () => false)
+                ),
             },
             gamma: {
-                battles: Array.from({ length: 12 }, () => Array.from({ length: 7 }, () => false)),
+                battles: Array.from({ length: legendaryEvent.battlesCount }, () =>
+                    Array.from({ length: legendaryEvent.constraintsCount }, () => false)
+                ),
             },
             regularMissions: 0,
             premiumMissions: 0,
@@ -78,7 +84,7 @@ export const LeProgress = ({
                 name,
                 battles: personalBattles.map((state, index) => ({
                     battleNumber: index + 1,
-                    state: Array.from({ length: 7 }).map((_, index) => state[index]),
+                    state: Array.from({ length: legendaryEvent.constraintsCount }).map((_, index) => state[index]),
                     requirements: [
                         {
                             name: 'Kill Points',

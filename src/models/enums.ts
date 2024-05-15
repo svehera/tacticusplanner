@@ -115,6 +115,7 @@ export enum Trait {
     SuppressiveFire = 'Suppressive Fire',
     CrushingStrike = 'Crushing Strike',
     RapidAssault = 'Rapid Assault',
+    GetStuckIn = 'Get Stuck In',
 }
 
 export enum DamageType {
@@ -136,6 +137,7 @@ export enum DamageType {
     Direct = 'Direct',
     Pulse = 'Pulse',
     Melta = 'Melta',
+    Eviscerate = 'Eviscerate',
 }
 
 export enum Rank {
@@ -173,6 +175,7 @@ export enum LegendaryEventEnum {
     Shadowsun = 4,
     Ragnar = 5,
     Vitruvius = 6,
+    Kharn = 7,
 }
 
 export enum PersonalGoalType {

@@ -1,4 +1,4 @@
-﻿import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityStars } from 'src/models/enums';
+﻿import { CampaignsLocationsUsage, Faction, PersonalGoalType, Rank, Rarity, RarityStars } from 'src/models/enums';
 import { ICampaignBattleComposed, ICampaignsProgress, IDailyRaidsPreferences } from 'src/models/interfaces';
 import { IXpEstimate } from 'src/v2/features/characters/characters.models';
 
@@ -46,6 +46,7 @@ export interface ICharacterUnlockGoal extends ICharacterRaidGoalSelectBase {
     shards: number;
     rank: Rank;
     rarity: Rarity;
+    faction: Faction;
     campaignsUsage: CampaignsLocationsUsage;
 }
 
@@ -62,14 +63,14 @@ export interface ICharacterAscendGoal extends ICharacterRaidGoalSelectBase {
 }
 
 export interface IEstimatedAscensionSettings {
-    completedLocations: string[];
+    raidedLocations: IItemRaidLocation[];
     campaignsProgress: ICampaignsProgress;
     preferences: IDailyRaidsPreferences;
 }
 
 export interface IEstimatedShards {
     shardsRaids: IShardsRaid[];
-    materials: IMaterialEstimate[];
+    materials: ICharacterShardsEstimate[];
     energyTotal: number;
     raidsTotal: number;
     onslaughtTokens: number;
@@ -77,7 +78,7 @@ export interface IEstimatedShards {
     energyPerDay: number;
 }
 
-export interface IMaterial {
+export interface IShardMaterial {
     goalId: string;
     characterId: string;
     label: string;
@@ -90,12 +91,12 @@ export interface IMaterial {
     campaignsUsage: CampaignsLocationsUsage;
 }
 
-export interface IShardsRaid extends IMaterialEstimate {
+export interface IShardsRaid extends ICharacterShardsEstimate {
     isCompleted: boolean;
-    locations: Array<ILocationRaid>;
+    locations: Array<IItemRaidLocation>;
 }
 
-export interface IMaterialEstimate extends IMaterial {
+export interface ICharacterShardsEstimate extends IShardMaterial {
     availableLocations: ICampaignBattleComposed[];
     raidsLocations: ICampaignBattleComposed[];
     energyTotal: number;
@@ -106,12 +107,97 @@ export interface IMaterialEstimate extends IMaterial {
     energyPerDay: number;
 }
 
-export interface ILocationRaid {
-    id: string;
-    campaign: string;
-    battleNumber: number;
+export interface IEstimatedUpgrades {
+    upgradesRaids: IUpgradesRaidsDay[];
+    inProgressMaterials: ICharacterUpgradeEstimate[];
+    blockedMaterials: ICharacterUpgradeEstimate[];
+    finishedMaterials: ICharacterUpgradeEstimate[];
+    characters: ICharacterUpgrade[];
+    byCharactersPriority: ICharacterUpgradeRankEstimate[];
+    craftedUpgrades: ICraftedUpgrade[];
+    energyTotal: number;
+    raidsTotal: number;
+    daysTotal: number;
+}
+
+export interface IUpgradesRaidsDay {
+    raids: IUpgradeRaid[];
+    energyTotal: number;
+    raidsTotal: number;
+}
+
+export interface IUpgradeRaid extends ICharacterUpgradeEstimate {
+    raidLocations: IItemRaidLocation[];
+}
+
+export interface IItemRaidLocation extends ICampaignBattleComposed {
     raidsCount: number;
     farmedItems: number;
     energySpent: number;
-    isCompleted: boolean;
+    isShardsLocation: boolean;
 }
+
+export interface ICharacterUpgrade {
+    goalId: string;
+    characterId: string;
+    label: string;
+    upgradeRanks: ICharacterUpgradeRank[];
+    baseUpgradesTotal: Record<string, number>;
+    usedCraftedUpgrades: string[];
+}
+
+export interface ICharacterUpgradeRank {
+    rankStart: Rank;
+    rankEnd: Rank;
+    rankPoint5: boolean;
+    upgrades: string[];
+}
+
+export interface ICharacterUpgradeRankEstimate extends ICharacterUpgradeRankGoal {
+    upgrades: ICharacterUpgradeEstimate[];
+}
+
+export interface IBaseUpgrade {
+    id: string;
+    label: string;
+    rarity: Rarity;
+    iconPath: string;
+    locations: ICampaignBattleComposed[];
+}
+
+export interface ICombinedUpgrade extends IBaseUpgrade {
+    countByGoalId: Record<string, number>;
+    requiredCount: number;
+    relatedCharacters: string[];
+}
+
+export interface ICharacterUpgradeEstimate extends IBaseUpgrade {
+    energyTotal: number;
+    energyLeft: number;
+    daysTotal: number;
+    raidsTotal: number;
+
+    acquiredCount: number;
+    requiredCount: number;
+    relatedCharacters: string[];
+
+    isBlocked: boolean;
+    isFinished: boolean;
+}
+
+export interface ICraftedUpgrade {
+    id: string;
+    label: string;
+    rarity: Rarity;
+    iconPath: string;
+    baseUpgrades: IUpgradeRecipe[];
+    craftedUpgrades: IUpgradeRecipe[];
+}
+
+export interface IUpgradeRecipe {
+    id: string;
+    count: number;
+}
+
+export type IBaseUpgradeData = Record<string, IBaseUpgrade>;
+export type ICraftedUpgradeData = Record<string, ICraftedUpgrade>;

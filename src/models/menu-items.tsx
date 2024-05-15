@@ -1,8 +1,8 @@
 ﻿import React from 'react';
 
 import ragnar from '../assets/legendary-events/Ragnar.json';
-import shadowsun from '../assets/legendary-events/Shadowsun.json';
 import vitruvius from '../assets/legendary-events/Vitruvius.json';
+import kharn from '../assets/legendary-events/Kharn.json';
 
 import ListIcon from '@mui/icons-material/List';
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -54,7 +54,7 @@ export const menuItemById = {
         'Shadowsun',
         <CharacterImage icon={'ShadowSun.png'} imageSize={24} />,
         '/plan/le/shadowsun',
-        `Shadowsun ${shadowsun.eventStage}/3 (${shadowsun.nextEventDate})`
+        'Shadowsun (Finished)'
     ),
     ragnar: new MenuItemTP(
         'Ragnar',
@@ -73,6 +73,12 @@ export const menuItemById = {
         <CharacterImage icon={'Aun-shi.png'} imageSize={24} />,
         '/plan/le/aunshi',
         'Aun Shi (Finished)'
+    ),
+    kharn: new MenuItemTP(
+        'Kharn',
+        <CharacterImage icon={'unset.png'} imageSize={24} />,
+        '/plan/le/kharn',
+        `Kharn ${kharn.eventStage}/3 (${kharn.nextEventDate})`
     ),
     characters: new MenuItemTP('Characters', <Diversity3Icon />, '/learn/characters'),
     upgrades: new MenuItemTP('Upgrades', <ListIcon />, '/learn/upgrades'),
@@ -109,8 +115,11 @@ export const planSubMenuWeb: MenuItemTP[] = [
     ]),
     new MenuItemTP('LRE', menuItemById['leMasterTable'].icon, '', '', '', [
         menuItemById['leMasterTable'],
+        menuItemById['kharn'],
         menuItemById['vitruvius'],
         menuItemById['ragnar'],
+    ]),
+    new MenuItemTP('LRE Archive', menuItemById['leMasterTable'].icon, '', '', '', [
         menuItemById['shadowsun'],
         menuItemById['aunshi'],
     ]),
@@ -123,10 +132,9 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['offense'],
     menuItemById['zones'],
     menuItemById['leMasterTable'],
-    menuItemById['shadowsun'],
+    menuItemById['kharn'],
     menuItemById['ragnar'],
     menuItemById['vitruvius'],
-    menuItemById['aunshi'],
 ];
 
 export const learnSubMenu: MenuItemTP[] = [
