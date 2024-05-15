@@ -132,6 +132,7 @@ export interface ILegendaryEvent extends ILegendaryEventStatic {
 
     suggestedTeams: ITableRow[];
     allowedUnits: Array<ICharacter2>;
+    battlesCount: number;
 }
 
 export interface ILegendaryEventStatic {
@@ -152,6 +153,8 @@ export interface ILegendaryEventStatic {
     chestsMilestones: IChestMilestone[];
 
     shardsPerChest: number;
+    battlesCount: number;
+    constraintsCount: number;
     progression: ILEProgression;
 }
 

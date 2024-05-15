@@ -4,6 +4,8 @@
     "wikiLink": "https://tacticus.fandom.com/wiki/LE-Aun%27Shi",
     "eventStage": 3,
     "nextEventDate": "Finished",
+    "battlesCount": 12,
+    "constraintsCount": 7,
     "regularMissions": [
         "Play one Philosophy of War Battle, Deal 1000 damage",
         "Defeat 30 Orks",
