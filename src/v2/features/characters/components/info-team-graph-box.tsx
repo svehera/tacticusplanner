@@ -2,11 +2,6 @@
 import { Popover, IconButton } from '@mui/material';
 
 import InfoIcon from '@mui/icons-material/Info';
-import WarningIcon from '@mui/icons-material/Warning';
-
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-
-import wyoInfo from 'src/assets/images/wyo_info.png';
 
 export const InfoTeamGraphBox = () => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
@@ -37,10 +32,10 @@ export const InfoTeamGraphBox = () => {
                 }}>
                 <div style={{ padding: 10, maxWidth: 500 }}>
                     <p style={{ fontWeight: 500 }}>
-                        This graph visualizes team power. The darker section is power contributed by attributes (armor,
-                        damage, and health), the lighter section by active and passive abilities. The marked power
-                        levels are rough cutoffs between Common, Uncommon, Rare, Epic, Legendary and Diamond power
-                        levels.
+                        This graph visualizes team power. Each vertical bar represent the power of a character with the
+                        darker section contributed by attributes (armor, damage, and health) and the lighter section by
+                        active and passive abilities. The horizontal lines are rough cutoffs between Common, Uncommon,
+                        Rare, Epic, Legendary and Diamond power levels.
                     </p>
                 </div>
             </Popover>
