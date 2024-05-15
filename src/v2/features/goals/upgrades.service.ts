@@ -117,23 +117,6 @@ export class UpgradesService {
             //     ? settings.dailyEnergy - sum(settings.completedLocations.map(x => x.energySpent))
             //     : settings.dailyEnergy;
 
-            // if (energyLeft <= 0) {
-            //     resultDays.push(day);
-            //     continue;
-            // }
-            // if (isFirstDay) {
-            //     const completedMaterials = allMaterials
-            //         .filter(material => {
-            //             const completedMaterial = settings.completedLocations.find(x => x.materialId === material.id);
-            //             return completedMaterial; // && completedMaterial.locations.length === material.locations.length;
-            //         })
-            //         .map(x => x.id);
-            //
-            //     completedMaterialsStack.push(
-            //         ...settings.completedLocations.filter(x => completedMaterials.includes(x.materialId))
-            //     );
-            // }
-
             for (const material of upgradesToFarm) {
                 if (energyLeft < 5) {
                     break;
@@ -240,8 +223,12 @@ export class UpgradesService {
             //
             // day.energyLeft = energyLeft;
             if (raids.length) {
-                const raidsTotal = sum(raids.flatMap(x => x.raidLocations.map(x => x.raidsCount)));
-                const energyTotal = sum(raids.flatMap(x => x.raidLocations.map(x => x.energySpent)));
+                const raidsTotal = isFirstDay
+                    ? sum(settings.completedLocations.map(x => x.raidsCount))
+                    : sum(raids.flatMap(x => x.raidLocations.map(x => x.raidsCount)));
+                const energyTotal = isFirstDay
+                    ? sum(settings.completedLocations.map(x => x.energySpent))
+                    : sum(raids.flatMap(x => x.raidLocations.map(x => x.energySpent)));
                 resultDays.push({
                     raids: isFirstDay
                         ? orderBy(raids, raid => raid.raidLocations.every(location => location.isCompleted))

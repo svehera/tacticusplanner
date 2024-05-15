@@ -226,7 +226,7 @@ export const DailyRaids = () => {
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: upgrades,
-                completedLocations: dailyRaids.raidedLocations ?? [],
+                completedLocations: dailyRaids.raidedLocations?.filter(x => !x.isShardsLocation) ?? [],
                 filters: dailyRaids.filters,
             },
             ...upgradeRankGoals
