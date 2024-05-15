@@ -43,6 +43,7 @@ import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import { ShardsRaidsDayInput } from 'src/v2/features/goals/shards-raids-day-input';
 import { GoalsService } from 'src/v2/features/goals/goals.service';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+import { UpgradeImage } from 'src/shared-components/upgrade-image';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -262,6 +263,9 @@ export const DailyRaids = () => {
         return formatDateWithOrdinal(nextDate);
     }, [estimatedShards.daysTotal]);
 
+    const hasInProgressUpgrades =
+        !!estimatedRanks.inProgressMaterials.length || !!estimatedRanks.craftedUpgrades.length;
+
     return (
         <div>
             <div className="flex-box gap10 p10">
@@ -338,7 +342,7 @@ export const DailyRaids = () => {
                 </AccordionDetails>
             </Accordion>
 
-            {!!estimatedRanks.inProgressMaterials.length && (
+            {hasInProgressUpgrades && (
                 <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <div className="flex-box gap5" style={{ fontSize: 20 }}>
@@ -355,6 +359,21 @@ export const DailyRaids = () => {
                                 <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Inventory</span>
                             </Button>
                         </div>
+                        {!!estimatedRanks.craftedUpgrades.length && (
+                            <>
+                                <h4>Contributed crafted upgrades</h4>
+                                <div className="flex-box gap10 wrap">
+                                    {estimatedRanks.craftedUpgrades.map(x => (
+                                        <UpgradeImage
+                                            key={x.id}
+                                            material={x.label}
+                                            rarity={x.rarity}
+                                            iconPath={x.iconPath}
+                                        />
+                                    ))}
+                                </div>
+                            </>
+                        )}
                         <MaterialsTable
                             rows={estimatedRanks.inProgressMaterials}
                             updateMaterialQuantity={saveInventoryUpdateChanges}
