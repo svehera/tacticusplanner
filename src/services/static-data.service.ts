@@ -444,99 +444,19 @@ export class StaticDataService {
     }
 
     public static getAllMaterials(settings: IEstimatedRanksSettings, upgrades: IMaterialFull[]): IMaterialEstimated2[] {
-        const craftedBaseMaterials = this.inventoryToBaseUpgrades(settings.upgrades, upgrades);
-
-        if (settings.preferences?.farmByPriorityOrder) {
-            const materials: IMaterialRecipeIngredientFull[] = [];
-            const upgradesByCharacter = groupBy(upgrades, 'character');
-            for (const character in upgradesByCharacter) {
-                const characterMaterials = this.groupBaseMaterials(upgradesByCharacter[character]);
-                characterMaterials.forEach(m => {
-                    m.characters = [character];
-                });
-                materials.push(...characterMaterials);
-            }
-            const copiedUpgrades = { ...settings.upgrades };
-            const copiedBaseUpgrades = { ...craftedBaseMaterials };
-            const result = materials
-                .map(x =>
-                    this.calculateMaterialData(
-                        settings.campaignsProgress,
-                        x,
-                        this.selectBestLocations(settings, x.locationsComposed ?? [], x.rarity),
-                        copiedUpgrades,
-                        copiedBaseUpgrades,
-                        true
-                    )
+        const result = this.groupBaseMaterials(upgrades)
+            .map(x =>
+                this.calculateMaterialData(
+                    settings.campaignsProgress,
+                    x,
+                    this.selectBestLocations(settings, x.locationsComposed ?? [], x.rarity),
+                    settings.upgrades,
+                    {}
                 )
-                .filter(x => !!x) as IMaterialEstimated2[];
+            )
+            .filter(x => !!x) as IMaterialEstimated2[];
 
-            return orderBy(
-                result,
-                ['priority', 'daysOfBattles', 'totalEnergy', 'rarity', 'count'],
-                ['asc', 'desc', 'desc', 'desc', 'desc']
-            );
-        } else {
-            const result = this.groupBaseMaterials(upgrades)
-                .map(x =>
-                    this.calculateMaterialData(
-                        settings.campaignsProgress,
-                        x,
-                        this.selectBestLocations(settings, x.locationsComposed ?? [], x.rarity),
-                        settings.upgrades,
-                        craftedBaseMaterials
-                    )
-                )
-                .filter(x => !!x) as IMaterialEstimated2[];
-
-            return orderBy(
-                result,
-                ['daysOfBattles', 'totalEnergy', 'rarity', 'count'],
-                ['desc', 'desc', 'desc', 'desc']
-            );
-        }
-    }
-
-    private static inventoryToBaseUpgrades(
-        inventory: Record<string, number>,
-        upgrades: IMaterialFull[]
-    ): Record<string, number> {
-        const result: Record<string, number> = {};
-
-        const itemIds: string[] = [];
-
-        function processMaterial(material: IMaterialFull) {
-            if (material.recipe?.length) {
-                material.recipe.forEach(ingredient => {
-                    itemIds.push(ingredient.id);
-                    processMaterial(ingredient);
-                });
-            }
-        }
-
-        upgrades.forEach(material => {
-            processMaterial(material);
-        });
-
-        const processItem = (itemId: string, quantity: number) => {
-            const upgrade = StaticDataService.recipeDataFull[itemId];
-
-            if (upgrade?.craftable && upgrade?.allMaterials?.length && itemIds.includes(itemId)) {
-                upgrade?.allMaterials.forEach(item => {
-                    result[item.id] = (result[item.id] ?? 0) + item.count * quantity;
-                });
-            }
-
-            if (!upgrade) {
-                console.error('Missing data for ' + itemId);
-            }
-        };
-
-        for (const itemId in inventory) {
-            processItem(itemId, inventory[itemId]);
-        }
-
-        return result;
+        return orderBy(result, ['daysOfBattles', 'totalEnergy', 'rarity', 'count'], ['desc', 'desc', 'desc', 'desc']);
     }
 
     public static groupBaseMaterials(upgrades: IMaterialFull[], keepGold = false) {
@@ -775,129 +695,5 @@ export class StaticDataService {
         }
 
         return orderBy(filteredLocations, ['energyPerItem', 'expectedGold'], ['asc', 'desc']);
-    }
-
-    private static getEnemiesAndAllies(campaign: Campaign): {
-        enemies: { alliance: Alliance; factions: Faction[] };
-        allies: { alliance: Alliance; factions: Faction[] };
-    } {
-        switch (campaign) {
-            case Campaign.I:
-            case Campaign.IE: {
-                return {
-                    enemies: {
-                        alliance: Alliance.Xenos,
-                        factions: [Faction.Necrons],
-                    },
-                    allies: {
-                        alliance: Alliance.Imperial,
-                        factions: this.ImperialFactions,
-                    },
-                };
-            }
-            case Campaign.IM:
-            case Campaign.IME: {
-                return {
-                    enemies: {
-                        alliance: Alliance.Imperial,
-                        factions: [Faction.Astra_militarum, Faction.Ultramarines],
-                    },
-                    allies: {
-                        alliance: Alliance.Xenos,
-                        factions: [Faction.Necrons],
-                    },
-                };
-            }
-            case Campaign.FoC:
-            case Campaign.FoCE: {
-                return {
-                    enemies: {
-                        alliance: Alliance.Imperial,
-                        factions: [Faction.Astra_militarum],
-                    },
-                    allies: {
-                        alliance: Alliance.Chaos,
-                        factions: this.ChaosFactions,
-                    },
-                };
-            }
-            case Campaign.FoCM:
-            case Campaign.FoCME: {
-                return {
-                    enemies: {
-                        alliance: Alliance.Chaos,
-                        factions: [Faction.Black_Legion],
-                    },
-                    allies: {
-                        alliance: Alliance.Imperial,
-                        factions: this.ImperialFactions,
-                    },
-                };
-            }
-            case Campaign.O:
-            case Campaign.OE: {
-                return {
-                    enemies: {
-                        alliance: Alliance.Imperial,
-                        factions: [Faction.Black_Templars],
-                    },
-                    allies: {
-                        alliance: Alliance.Xenos,
-                        factions: [Faction.Orks],
-                    },
-                };
-            }
-            case Campaign.OM:
-            case Campaign.OME: {
-                return {
-                    enemies: {
-                        alliance: Alliance.Xenos,
-                        factions: [Faction.Orks],
-                    },
-                    allies: {
-                        alliance: Alliance.Imperial,
-                        factions: this.ImperialFactions,
-                    },
-                };
-            }
-            case Campaign.SH:
-            case Campaign.SHE: {
-                return {
-                    enemies: {
-                        alliance: Alliance.Chaos,
-                        factions: [Faction.Thousand_Sons],
-                    },
-                    allies: {
-                        alliance: Alliance.Xenos,
-                        factions: [Faction.Aeldari],
-                    },
-                };
-            }
-            case Campaign.SHM:
-            case Campaign.SHME: {
-                return {
-                    enemies: {
-                        alliance: Alliance.Xenos,
-                        factions: [Faction.Aeldari],
-                    },
-                    allies: {
-                        alliance: Alliance.Chaos,
-                        factions: this.ChaosFactions,
-                    },
-                };
-            }
-            default: {
-                return {
-                    enemies: {
-                        alliance: Alliance.Xenos,
-                        factions: [Faction.Necrons],
-                    },
-                    allies: {
-                        alliance: Alliance.Imperial,
-                        factions: [],
-                    },
-                };
-            }
-        }
     }
 }

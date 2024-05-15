@@ -1,4 +1,4 @@
-﻿import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityStars } from 'src/models/enums';
+﻿import { CampaignsLocationsUsage, Faction, PersonalGoalType, Rank, Rarity, RarityStars } from 'src/models/enums';
 import { ICampaignBattleComposed, ICampaignsProgress, IDailyRaidsPreferences } from 'src/models/interfaces';
 import { IXpEstimate } from 'src/v2/features/characters/characters.models';
 
@@ -46,6 +46,7 @@ export interface ICharacterUnlockGoal extends ICharacterRaidGoalSelectBase {
     shards: number;
     rank: Rank;
     rarity: Rarity;
+    faction: Faction;
     campaignsUsage: CampaignsLocationsUsage;
 }
 
