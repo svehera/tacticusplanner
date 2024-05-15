@@ -3,16 +3,11 @@ import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ColGroupDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { isMobile } from 'react-device-detect';
-import { DamageType, Rarity } from 'src/models/enums';
+import { Rarity } from 'src/models/enums';
 import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
 import InfoIcon from '@mui/icons-material/Info';
 import { ICharacterUpgradeEstimate } from 'src/v2/features/goals/goals.models';
-import { ICampaignBattleComposed, ICharacter2, IMaterialEstimated2 } from 'src/models/interfaces';
-import { CharacterTitle } from 'src/shared-components/character-title';
-import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
-import { RarityImage } from 'src/shared-components/rarity-image';
-import { RankImage } from 'src/shared-components/rank-image';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { ICampaignBattleComposed } from 'src/models/interfaces';
 
 interface Props {
     rows: ICharacterUpgradeEstimate[];

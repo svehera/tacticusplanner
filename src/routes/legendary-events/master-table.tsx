@@ -36,6 +36,7 @@ import { isMobile } from 'react-device-detect';
 
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>([
+        LegendaryEventEnum.Kharn,
         LegendaryEventEnum.Ragnar,
         LegendaryEventEnum.Vitruvius,
     ]);

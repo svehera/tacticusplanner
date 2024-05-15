@@ -45,7 +45,7 @@
             "link": "https://tacticus.fandom.com/wiki/Tyranids#NPC_Units"
         },
         "killPoints": 35,
-        "battlesPoints": [34, 36, 41, 46, 43, 41, 48, 41, 58, 44, 42, 44, 54, 59]
+        "battlesPoints": [34, 36, 41, 46, 43, 41, 48, 41, 58, 44, 42, 44, 54, 58]
     },
     "gamma": {
         "name": "Gamma (No Thousand Sons)",
