@@ -12,8 +12,7 @@ export const RaidItemView: React.FC<Props> = ({ location }) => {
             <CampaignImage campaign={location.campaign} size={30} />
             <div className="flex-box column start">
                 <span>
-                    <span className="italic">({location.raidsCount}x)</span> Battle{' '}
-                    <span className="bold">{location.nodeNumber}</span>
+                    Battle <span className="bold">{location.nodeNumber}</span>
                 </span>
                 <span style={{ fontSize: 12 }}>{location.campaign}</span>
             </div>
