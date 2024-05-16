@@ -362,6 +362,13 @@ export const MasterTable = () => {
                         multiple
                         input={<OutlinedInput label="Legendary Events" />}
                         renderValue={selected => selected.map(x => LegendaryEventEnum[x]).join(', ')}>
+                        <MenuItem value={LegendaryEventEnum.Kharn}>
+                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Kharn) > -1} />
+                            <ListItemIcon>
+                                <CharacterImage icon={'unset.png'} imageSize={30} />
+                            </ListItemIcon>
+                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Kharn]} />
+                        </MenuItem>
                         <MenuItem value={LegendaryEventEnum.Ragnar}>
                             <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Ragnar) > -1} />
                             <ListItemIcon>

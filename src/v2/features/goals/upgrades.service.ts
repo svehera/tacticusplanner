@@ -77,9 +77,6 @@ export class UpgradesService {
 
         const energyTotal = sum(inProgressMaterials.map(material => material.energyTotal));
         const raidsTotal = sum(upgradesRaids.map(day => day.raidsTotal));
-        // const onslaughtTokens = sum(materials.map(material => material.onslaughtTokensTotal));
-        // const raidsTotal = sum(materials.map(material => material.raidsTotal));
-        // const daysTotal = Math.max(...materials.map(material => material.daysTotal), Math.ceil(onslaughtTokens / 1.5));
 
         return {
             upgradesRaids,
@@ -112,27 +109,6 @@ export class UpgradesService {
             const isFirstDay = dayNumber === 1;
             const raids: IUpgradeRaid[] = [];
             let energyLeft = settings.dailyEnergy;
-
-            // let energyLeft = isFirstDay
-            //     ? settings.dailyEnergy - sum(settings.completedLocations.map(x => x.energySpent))
-            //     : settings.dailyEnergy;
-
-            // if (energyLeft <= 0) {
-            //     resultDays.push(day);
-            //     continue;
-            // }
-            // if (isFirstDay) {
-            //     const completedMaterials = allMaterials
-            //         .filter(material => {
-            //             const completedMaterial = settings.completedLocations.find(x => x.materialId === material.id);
-            //             return completedMaterial; // && completedMaterial.locations.length === material.locations.length;
-            //         })
-            //         .map(x => x.id);
-            //
-            //     completedMaterialsStack.push(
-            //         ...settings.completedLocations.filter(x => completedMaterials.includes(x.materialId))
-            //     );
-            // }
 
             for (const material of upgradesToFarm) {
                 if (energyLeft < 5) {
@@ -226,22 +202,14 @@ export class UpgradesService {
                     });
                 }
             }
-            // day.raidsCount = sum(day.raids.flatMap(x => x.locations.map(x => x.raidsCount)));
-            // if (isFirstDay) {
-            //     day.raids.push(...completedMaterialsStack);
-            //     day.raidsCount = sum(
-            //         day.raids.flatMap(x =>
-            //             x.locations
-            //                 .filter(x => !completedLocations.some(location => location.id === x.id))
-            //                 .map(x => x.raidsCount)
-            //         )
-            //     );
-            // }
-            //
-            // day.energyLeft = energyLeft;
+
             if (raids.length) {
-                const raidsTotal = sum(raids.flatMap(x => x.raidLocations.map(x => x.raidsCount)));
-                const energyTotal = sum(raids.flatMap(x => x.raidLocations.map(x => x.energySpent)));
+                const raidsTotal = isFirstDay
+                    ? sum(settings.completedLocations.map(x => x.raidsCount))
+                    : sum(raids.flatMap(x => x.raidLocations.map(x => x.raidsCount)));
+                const energyTotal = isFirstDay
+                    ? sum(settings.completedLocations.map(x => x.energySpent))
+                    : sum(raids.flatMap(x => x.raidLocations.map(x => x.energySpent)));
                 resultDays.push({
                     raids: isFirstDay
                         ? orderBy(raids, raid => raid.raidLocations.every(location => location.isCompleted))
@@ -252,7 +220,9 @@ export class UpgradesService {
             }
 
             iteration++;
-            upgradesToFarm = upgrades.filter(x => !x.isBlocked && x.energyLeft > 0);
+            upgradesToFarm = upgrades.filter(
+                x => x.energyLeft > Math.min(...x.locations.filter(c => c.isSelected).map(l => l.energyCost))
+            );
             if (iteration > 1000) {
                 console.error('Infinite loop', resultDays);
                 break;
@@ -618,7 +588,7 @@ export class UpgradesService {
             });
         }
 
-        if (rankLookup.appliedUpgrades.length) {
+        if (rankLookup.appliedUpgrades.length && upgradeRanks.length) {
             const currentRank = upgradeRanks[0];
             currentRank.upgrades = currentRank.upgrades.filter(
                 upgrade => upgrade && !rankLookup.appliedUpgrades.includes(upgrade)
