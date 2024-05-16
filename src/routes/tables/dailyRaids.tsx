@@ -268,19 +268,52 @@ export const DailyRaids = () => {
 
     return (
         <div>
-            <div className="flex-box gap10 p10">
-                <Button variant={'contained'} component={Link} to={isMobile ? '/mobile/plan/goals' : '/plan/goals'}>
-                    <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Goals</span>
-                </Button>
+            <div className="flex-box between wrap">
+                <div className="flex-box gap10" style={{ paddingBottom: 10 }}>
+                    <Button
+                        variant={'contained'}
+                        size="small"
+                        component={Link}
+                        to={isMobile ? '/mobile/plan/goals' : '/plan/goals'}>
+                        <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Goals</span>
+                    </Button>
 
-                <Button variant="outlined" onClick={handleClick2}>
-                    Daily Raids <SettingsIcon />
-                </Button>
-                <span>
-                    Daily <MiscIcon icon={'energy'} height={15} width={15} /> {actualEnergy}
-                    {estimatedShards.energyPerDay > 0 &&
-                        ` = ${dailyRaidsPreferences.dailyEnergy} - ${estimatedShards.energyPerDay}`}
-                </span>
+                    <Button variant="outlined" size="small" onClick={handleClick2}>
+                        <SettingsIcon />
+                    </Button>
+                    <span>
+                        <MiscIcon icon={'energy'} height={15} width={15} /> {actualEnergy}
+                        {estimatedShards.energyPerDay > 0 &&
+                            ` = ${dailyRaidsPreferences.dailyEnergy} - ${estimatedShards.energyPerDay}`}
+                    </span>
+                </div>
+
+                <div className="flex-box gap10" style={{ paddingBottom: 10 }}>
+                    <Button
+                        size="small"
+                        variant={'contained'}
+                        color={'success'}
+                        disabled={!hasChanges}
+                        onClick={() => refresh()}>
+                        <RefreshIcon /> Refresh
+                    </Button>
+                    <Button
+                        size="small"
+                        variant={'contained'}
+                        color={'error'}
+                        disabled={!dailyRaids.raidedLocations?.length}
+                        onClick={() => {
+                            dispatch.dailyRaids({ type: 'ResetCompletedBattles' });
+                            setHasChanges(false);
+                            setTimeout(() => {
+                                setUpgrades({ ...inventory.upgrades });
+                                setCharacters(storeCharacters);
+                            }, 100);
+                        }}>
+                        <ClearIcon /> Reset day
+                    </Button>
+                    <LocationsFilter filter={dailyRaids.filters} filtersChange={saveFilterChanges} />
+                </div>
             </div>
             <Popover
                 open={open2}
@@ -294,26 +327,6 @@ export const DailyRaids = () => {
                     <DailyRaidsSettings close={handleClose2} />
                 </div>
             </Popover>
-            <div className="flex-box gap10 p10">
-                <Button variant={'contained'} color={'success'} disabled={!hasChanges} onClick={() => refresh()}>
-                    <RefreshIcon /> Refresh
-                </Button>
-                <Button
-                    variant={'contained'}
-                    color={'error'}
-                    disabled={!dailyRaids.raidedLocations?.length}
-                    onClick={() => {
-                        dispatch.dailyRaids({ type: 'ResetCompletedBattles' });
-                        setHasChanges(false);
-                        setTimeout(() => {
-                            setUpgrades({ ...inventory.upgrades });
-                            setCharacters(storeCharacters);
-                        }, 100);
-                    }}>
-                    <ClearIcon /> Reset day
-                </Button>
-                <LocationsFilter filter={dailyRaids.filters} filtersChange={saveFilterChanges} />
-            </div>
             <Accordion TransitionProps={{ unmountOnExit: true }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <div className="flex-box gap5" style={{ fontSize: 20 }}>
