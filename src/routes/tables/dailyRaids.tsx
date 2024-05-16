@@ -213,7 +213,7 @@ export const DailyRaids = () => {
             },
             ...shardsGoals
         );
-    }, [shardsGoals, dailyRaidsPreferences]);
+    }, [shardsGoals, dailyRaidsPreferences, dailyRaids.raidedLocations]);
 
     const actualEnergy = useMemo(() => {
         return dailyRaidsPreferences.dailyEnergy - estimatedShards.energyPerDay;
@@ -231,7 +231,7 @@ export const DailyRaids = () => {
             },
             ...upgradeRankGoals
         );
-    }, [upgradeRankGoals, dailyRaidsPreferences, dailyRaids.filters, upgrades]);
+    }, [actualEnergy, upgradeRankGoals, dailyRaidsPreferences, dailyRaids.filters, upgrades]);
 
     useEffect(() => {
         if (estimatedRanks.upgradesRaids.length > 3) {
@@ -307,6 +307,7 @@ export const DailyRaids = () => {
                         setHasChanges(false);
                         setTimeout(() => {
                             setUpgrades({ ...inventory.upgrades });
+                            setCharacters(storeCharacters);
                         }, 100);
                     }}>
                     <ClearIcon /> Reset day
