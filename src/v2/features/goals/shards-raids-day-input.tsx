@@ -23,7 +23,7 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids, handleAdd }) 
 
     const handleAddCount = (value: number, location: IItemRaidLocation) => {
         handleAdd(shardRaids.characterId, value, location);
-        shardRaids.ownedCount += value;
+        shardRaids.acquiredCount += value;
         location.isCompleted = true;
     };
     return (
@@ -63,8 +63,8 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids, handleAdd }) 
                     {shardRaids.locations.map(location => {
                         const maxObtained = Math.round(location.farmedItems);
                         const defaultItemsObtained =
-                            maxObtained + shardRaids.ownedCount > shardRaids.requiredCount
-                                ? shardRaids.requiredCount - shardRaids.ownedCount
+                            maxObtained + shardRaids.acquiredCount > shardRaids.requiredCount
+                                ? shardRaids.requiredCount - shardRaids.acquiredCount
                                 : maxObtained;
 
                         return (
@@ -78,8 +78,6 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids, handleAdd }) 
                                 <RaidItemView location={location} />
                                 <RaidItemInput
                                     defaultItemsObtained={defaultItemsObtained}
-                                    acquiredCount={shardRaids.ownedCount}
-                                    requiredCount={shardRaids.requiredCount}
                                     isDisabled={!!location.isCompleted}
                                     addCount={value => handleAddCount(value, location)}
                                 />

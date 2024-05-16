@@ -82,7 +82,7 @@ export interface IShardMaterial {
     goalId: string;
     characterId: string;
     label: string;
-    ownedCount: number;
+    acquiredCount: number;
     requiredCount: number;
     iconPath: string;
     relatedCharacters: string[];

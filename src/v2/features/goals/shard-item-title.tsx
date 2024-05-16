@@ -9,7 +9,12 @@ interface Props {
 export const ShardItemTitle: React.FC<Props> = ({ shardRaid }) => {
     return (
         <div className="flex-box gap10">
-            <CharacterImage icon={shardRaid.iconPath} />
+            <div className="flex-box column" style={{ fontSize: 16 }}>
+                <CharacterImage icon={shardRaid.iconPath} />
+                <span>
+                    {shardRaid.acquiredCount}/{shardRaid.requiredCount}
+                </span>
+            </div>
             <span>{shardRaid.label}</span>
         </div>
     );

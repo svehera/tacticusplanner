@@ -3,6 +3,7 @@ import { RaidItemView } from 'src/v2/features/goals/raid-item-view';
 import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
 import { MaterialItemTitle } from 'src/v2/features/goals/material-item-title';
 import { IUpgradeRaid, IItemRaidLocation } from 'src/v2/features/goals/goals.models';
+import { UpgradeImage } from 'src/shared-components/upgrade-image';
 
 interface Props {
     acquiredCount: number;
@@ -14,9 +15,18 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
     const isAllRaidsCompleted = upgradeRaid.raidLocations.every(location => location.isCompleted);
 
     return (
-        <div style={{ opacity: isAllRaidsCompleted || upgradeRaid.isBlocked ? 0.5 : 1 }}>
-            <MaterialItemTitle upgradeRaid={upgradeRaid} />
-            <ul style={{ paddingInlineStart: 15 }}>
+        <div className="flex-box between" style={{ opacity: isAllRaidsCompleted || upgradeRaid.isBlocked ? 0.5 : 1 }}>
+            <div className="flex-box column">
+                <UpgradeImage
+                    material={upgradeRaid.label}
+                    rarity={upgradeRaid.rarity}
+                    iconPath={upgradeRaid.iconPath}
+                />
+                <span>
+                    {upgradeRaid.acquiredCount}/{upgradeRaid.requiredCount}
+                </span>
+            </div>
+            <ul style={{ width: '100%', paddingInlineStart: 15 }}>
                 {upgradeRaid.raidLocations.map(location => {
                     const maxObtained = Math.round(location.farmedItems);
                     const defaultItemsObtained =
@@ -27,16 +37,13 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
                     return (
                         <li
                             key={location.id}
-                            className="flex-box gap5"
+                            className="flex-box between"
                             style={{
-                                justifyContent: 'space-between',
                                 opacity: location.isCompleted ? 0.5 : 1,
                             }}>
                             <RaidItemView location={location} />
                             <RaidItemInput
                                 defaultItemsObtained={defaultItemsObtained}
-                                acquiredCount={acquiredCount}
-                                requiredCount={upgradeRaid.requiredCount}
                                 isDisabled={location.isCompleted || upgradeRaid.isBlocked}
                                 addCount={value => {
                                     location.isCompleted = true;

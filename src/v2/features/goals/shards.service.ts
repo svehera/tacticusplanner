@@ -47,7 +47,7 @@ export class ShardsService {
     ): ICharacterShardsEstimate[] {
         const materials = goals
             .map(goal => this.convertGoalToMaterial(goal))
-            .filter(x => x.ownedCount < x.requiredCount);
+            .filter(x => x.acquiredCount < x.requiredCount);
         const result: ICharacterShardsEstimate[] = [];
 
         for (let i = 0; i < materials.length; i++) {
@@ -81,7 +81,7 @@ export class ShardsService {
             }
 
             const isBlocked = !raidsLocations.length;
-            const shardsLeft = material.requiredCount - material.ownedCount;
+            const shardsLeft = material.requiredCount - material.acquiredCount;
             let energyTotal = 0;
             let raidsTotal = 0;
             let shardsCollected = 0;
@@ -178,7 +178,7 @@ export class ShardsService {
             goalId: goal.goalId,
             characterId: goal.characterName,
             label: goal.characterName,
-            ownedCount: goal.shards,
+            acquiredCount: goal.shards,
             requiredCount: targetShards,
             iconPath: goal.characterIcon,
             relatedCharacters: [goal.characterName],
