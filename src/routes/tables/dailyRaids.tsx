@@ -568,6 +568,7 @@ export const DailyRaids = () => {
                             </div>
                         </AccordionDetails>
                     </Accordion>
+                    <h2>Today raids</h2>
                     <div className="flex-box gap10 wrap start" style={{ marginTop: 10 }}>
                         {estimatedShards.shardsRaids
                             .filter(x => x.locations.length && x.locations.every(location => !location.isCompleted))
