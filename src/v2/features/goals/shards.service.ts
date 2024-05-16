@@ -52,7 +52,8 @@ export class ShardsService {
 
         for (let i = 0; i < materials.length; i++) {
             const material = materials[i];
-            const previousShardsTokens = result[i - 1]?.onslaughtTokensTotal ?? 0;
+            const previousShardsTokens = sum(result.filter((_, index) => index < i).map(x => x.onslaughtTokensTotal));
+            console.log(previousShardsTokens);
             const unlockedLocations = material.possibleLocations.filter(location => {
                 const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
                 return location.nodeNumber <= campaignProgress;
@@ -90,6 +91,10 @@ export class ShardsService {
             while (!isBlocked && shardsCollected < shardsLeft) {
                 let leftToCollect = shardsLeft - shardsCollected;
                 for (const location of raidsLocations) {
+                    if (leftToCollect <= 0) {
+                        break;
+                    }
+
                     if (location.campaignType === 'Onslaught') {
                         if (daysTotal <= previousShardsTokens / 1.5) {
                             continue;
