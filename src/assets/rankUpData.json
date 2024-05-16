@@ -9925,5 +9925,281 @@
             "Collar of Khorne",
             "Monstrous Defences"
         ]
+    },
+    "Azkor": {
+        "Stone I": [
+            "Ropes and Chains",
+            "Mutation: Warped Muscles",
+            "Canister of Chemicals",
+            "Nasty Spikes",
+            "Armor Trim",
+            "Rebreather"
+        ],
+        "Stone II": [
+            "Chip Damage",
+            "Minor Bionic Enhancement",
+            "Combat Stimms",
+            "Razorsharp Spikes",
+            "Mutation: Tough Skin",
+            "Mutation: Tough Skin"
+        ],
+        "Stone III": [
+            "Helmet Trophy",
+            "Bionic Enhancement",
+            "Otherworldly Energy",
+            "Canister of Chemicals",
+            "Blessed Tasset Plate",
+            "Mutation: Scaly Skin"
+        ],
+        "Iron I": [
+            "Holster and Pockets",
+            "Helmet Trophy",
+            "Combat Stimms",
+            "Combat Stimms",
+            "Mutation: Scaly Skin",
+            "Adamantium Lump"
+        ],
+        "Iron II": [
+            "Helmet Trophy",
+            "Grand Skull Trophy",
+            "Otherworldly Energy Reservoir",
+            "Slicing Claws",
+            "Crate of Salvage",
+            "Mutation: Scaly Skin"
+        ],
+        "Iron III": [
+            "Grand Skull Trophy",
+            "Mutation: Warped Lungs",
+            "Chainaxe Teeth",
+            "Advanced Combat Stimms",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Brazen Jaws",
+            "Mutation: Warped Heart",
+            "Supernatural Sight",
+            "Bionic Eye",
+            "Mutation: Warped Skin",
+            "Ceramite Bar"
+        ],
+        "Bronze II": [
+            "Blessed Brazen Jaws",
+            "Advanced Bionics",
+            "Classified Data-Slate",
+            "Refined Combat Stimms",
+            "Cadaere Renissum",
+            "Mutation: Warped Skin"
+        ],
+        "Bronze III": [
+            "Kill Count",
+            "Mars-Pattern Bionics",
+            "Blessed Chainaxe Teeth",
+            "Murderous Spikes",
+            "Blessed Cadaere Renissum",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Blessed Brazen Jaws",
+            "Weathering",
+            "Blessed Chainaxe Teeth",
+            "Bionic Neural Pathways",
+            "Blessed Cadaere Renissum",
+            "Ceramite Sheet"
+        ],
+        "Silver II": [
+            "Boon of Khorne",
+            "Mutation: Regenerative Blood",
+            "Exalted Chainaxe Teeth",
+            "Refined Combat Stimms",
+            "Blessed Cadaere Renissum",
+            "Mutation: Metallic Skin"
+        ],
+        "Silver III": [
+            "Blessed Brazen Jaws",
+            "Grandiose Skull Ornament",
+            "Blessed Chainaxe Teeth",
+            "Imposing Horns",
+            "Archeo-Tech Remnant",
+            "Ceramite Plates"
+        ],
+        "Gold I": [
+            "Exalted Brazen Jaws",
+            "Relic Bionic Enhancement",
+            "Archeotech Bionics",
+            "Hyperstim",
+            "Exalted Cadaere Renissum",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold II": [
+            "Mark of Khorne",
+            "Mutation: Otherworldly Power",
+            "Exalted Chainaxe Teeth",
+            "Imposing Horns",
+            "Exalted Cadaere Renissum",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold III": [
+            "Exalted Brazen Jaws",
+            "Grandiose Skull Ornament",
+            "Butcher's Nails",
+            "Psychic Focus",
+            "Collar of Khorne",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Diamond I": [
+            "Mark of Khorne",
+            "Grandiose Skull Ornament",
+            "Butcher's Nails",
+            "Hyperstim",
+            "Collar of Khorne",
+            "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Mark of Khorne",
+            "Preternatural Constitution",
+            "Butcher's Nails",
+            "Preternatural Strength",
+            "Collar of Khorne",
+            "Preternatural Defences"
+        ]
+    },
+    "Kharn": {
+        "Stone I": [
+            "Ropes and Chains",
+            "Mutation: Warped Muscles",
+            "Weapon Parts",
+            "Nasty Spikes",
+            "Armor Trim",
+            "Rebreather"
+        ],
+        "Stone II": [
+            "Chip Damage",
+            "Minor Bionic Enhancement",
+            "Plasma Cell",
+            "Razorsharp Spikes",
+            "Mutation: Tough Skin",
+            "Mutation: Tough Skin"
+        ],
+        "Stone III": [
+            "Helmet Trophy",
+            "Bionic Enhancement",
+            "Vox-Caster",
+            "Canister of Chemicals",
+            "Blessed Tasset Plate",
+            "Mutation: Scaly Skin"
+        ],
+        "Iron I": [
+            "Holster and Pockets",
+            "Helmet Trophy",
+            "Plasma Cell",
+            "Combat Stimms",
+            "Mutation: Scaly Skin",
+            "Adamantium Lump"
+        ],
+        "Iron II": [
+            "Helmet Trophy",
+            "Grand Skull Trophy",
+            "Adamantium Blades",
+            "Slicing Claws",
+            "Artificer Tasset Plate",
+            "Mutation: Scaly Skin"
+        ],
+        "Iron III": [
+            "Grand Skull Trophy",
+            "Mutation: Warped Lungs",
+            "Chainaxe Teeth",
+            "Advanced Combat Stimms",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Brazen Jaws",
+            "Mutation: Warped Heart",
+            "Prey-Sight",
+            "Bionic Eye",
+            "Mutation: Warped Skin",
+            "Ceramite Bar"
+        ],
+        "Bronze II": [
+            "Blessed Brazen Jaws",
+            "Advanced Bionics",
+            "Krak Grenade",
+            "Refined Combat Stimms",
+            "Cadaere Renissum",
+            "Mutation: Warped Skin"
+        ],
+        "Bronze III": [
+            "Kill Count",
+            "Mars-Pattern Bionics",
+            "Blessed Chainaxe Teeth",
+            "Murderous Spikes",
+            "Blessed Cadaere Renissum",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Blessed Brazen Jaws",
+            "Golden Ornamental Skull",
+            "Blessed Chainaxe Teeth",
+            "Bionic Neural Pathways",
+            "Blessed Cadaere Renissum",
+            "Ceramite Sheet"
+        ],
+        "Silver II": [
+            "Boon of Khorne",
+            "Mutation: Regenerative Blood",
+            "Exalted Chainaxe Teeth",
+            "Refined Combat Stimms",
+            "Blessed Cadaere Renissum",
+            "Mutation: Metallic Skin"
+        ],
+        "Silver III": [
+            "Blessed Brazen Jaws",
+            "Grandiose Skull Ornament",
+            "Blessed Chainaxe Teeth",
+            "Imposing Horns",
+            "Archeo-Tech Remnant",
+            "Ceramite Plates"
+        ],
+        "Gold I": [
+            "Exalted Brazen Jaws",
+            "Relic Bionic Enhancement",
+            "Archeotech Bionics",
+            "Hyperstim",
+            "Exalted Cadaere Renissum",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold II": [
+            "Mark of Khorne",
+            "Mutation: Otherworldly Power",
+            "Exalted Chainaxe Teeth",
+            "Imposing Horns",
+            "Exalted Cadaere Renissum",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold III": [
+            "Exalted Brazen Jaws",
+            "Grandiose Skull Ornament",
+            "Butcher's Nails",
+            "Powered Blade",
+            "Collar of Khorne",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Diamond I": [
+            "Mark of Khorne",
+            "Grandiose Skull Ornament",
+            "Butcher's Nails",
+            "Hyperstim",
+            "Collar of Khorne",
+            "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Mark of Khorne",
+            "Monstrous Constitution",
+            "Butcher's Nails",
+            "Monstrous Strength",
+            "Collar of Khorne",
+            "Monstrous Defences"
+        ]
     }
 }

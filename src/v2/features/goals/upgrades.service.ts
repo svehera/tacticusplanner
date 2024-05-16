@@ -560,7 +560,7 @@ export class UpgradesService {
     }
 
     private static getUpgradeRank(rankLookup: IRankLookup): ICharacterUpgradeRank[] {
-        const characterRankUpData = this.rankUpData[rankLookup.characterName];
+        const characterRankUpData = this.rankUpData[rankLookup.characterName] ?? {};
 
         const ranksRange = this.rankEntries.filter(r => r >= rankLookup.rankStart && r < rankLookup.rankEnd);
         const upgradeRanks: ICharacterUpgradeRank[] = [];
