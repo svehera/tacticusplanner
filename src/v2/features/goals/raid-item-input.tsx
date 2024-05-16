@@ -31,8 +31,8 @@ export const RaidItemInput: React.FC<Props> = ({ defaultItemsObtained, isDisable
     };
 
     return (
-        <div className="flex-box gap10">
-            <div className="flex-box gap5 start" style={{ maxWidth: 70 }}>
+        <div className="flex-box">
+            <div className="flex-box start" style={{ maxWidth: 90 }}>
                 <Button size="small" className="raid-item-button" onClick={decrement} disabled={isDisabled}>
                     -
                 </Button>

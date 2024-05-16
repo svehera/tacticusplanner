@@ -53,7 +53,6 @@ export class ShardsService {
         for (let i = 0; i < materials.length; i++) {
             const material = materials[i];
             const previousShardsTokens = sum(result.filter((_, index) => index < i).map(x => x.onslaughtTokensTotal));
-            console.log(previousShardsTokens);
             const unlockedLocations = material.possibleLocations.filter(location => {
                 const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
                 return location.nodeNumber <= campaignProgress;

@@ -25,7 +25,6 @@ import {
     ICharacterUpgradeRankGoal,
     IEstimatedShards,
     IEstimatedUpgrades,
-    IUpgradeRaid,
     IItemRaidLocation,
 } from 'src/v2/features/goals/goals.models';
 import { MaterialsTable } from 'src/v2/features/goals/materials-table';
@@ -33,7 +32,6 @@ import InfoIcon from '@mui/icons-material/Info';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PendingIcon from '@mui/icons-material/Pending';
 import LinkIcon from '@mui/icons-material/Link';
-import { RaidsDayInput } from 'src/v2/features/goals/raids-day-input';
 import { RaidsDayView } from 'src/v2/features/goals/raids-day-view';
 import { LocationsFilter } from 'src/v2/features/goals/locations-filter';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
@@ -45,10 +43,9 @@ import { GoalsService } from 'src/v2/features/goals/goals.service';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import Dialog from '@mui/material/Dialog';
-import { MaterialItemInput } from 'src/v2/features/goals/material-item-input';
 
 import './dailyRaids.scss';
-import { ShardsItemInput } from 'src/v2/features/goals/shards-item-input';
+import { TodayRaids } from 'src/routes/tables/todayRaids';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -112,16 +109,16 @@ export const DailyRaids = () => {
         [selectedGoals]
     );
 
-    const handleAdd = (upgradeRaid: IUpgradeRaid, value: number, location: IItemRaidLocation) => {
+    const handleUpgradesAdd = (upgradeId: string, value: number, location: IItemRaidLocation) => {
         setHasChanges(true);
 
         if (value > 0) {
             dispatch.inventory({
                 type: 'IncrementUpgradeQuantity',
-                upgrade: upgradeRaid.id,
+                upgrade: upgradeId,
                 value,
             });
-            enqueueSnackbar(`Added ${value} items for ${upgradeRaid.label}`, {
+            enqueueSnackbar(`Added ${value} items for ${upgradeId}`, {
                 variant: 'success',
             });
         }
@@ -180,7 +177,7 @@ export const DailyRaids = () => {
 
     const refresh = () => {
         setUpgrades({ ...inventory.upgrades });
-        setCharacters(storeCharacters);
+        setCharacters([...storeCharacters]);
         setHasChanges(false);
     };
 
@@ -219,7 +216,7 @@ export const DailyRaids = () => {
             },
             ...shardsGoals
         );
-    }, [shardsGoals, dailyRaidsPreferences, dailyRaids.raidedLocations]);
+    }, [shardsGoals, dailyRaidsPreferences]);
 
     const actualEnergy = useMemo(() => {
         return dailyRaidsPreferences.dailyEnergy - estimatedShards.energyPerDay;
@@ -272,6 +269,16 @@ export const DailyRaids = () => {
     const hasInProgressUpgrades =
         !!estimatedRanks.inProgressMaterials.length || !!estimatedRanks.craftedUpgrades.length;
 
+    const daysTotal = Math.max(estimatedRanks.daysTotal, estimatedShards.daysTotal);
+    const energyTotal = estimatedRanks.energyTotal + estimatedShards.energyTotal;
+
+    const calendarDateTotal: string = useMemo(() => {
+        const nextDate = new Date();
+        nextDate.setDate(nextDate.getDate() + daysTotal - 1);
+
+        return formatDateWithOrdinal(nextDate);
+    }, [daysTotal]);
+
     return (
         <div>
             <div className="flex-box between wrap">
@@ -313,7 +320,7 @@ export const DailyRaids = () => {
                             setHasChanges(false);
                             setTimeout(() => {
                                 setUpgrades({ ...inventory.upgrades });
-                                setCharacters(storeCharacters);
+                                setCharacters([...storeCharacters]);
                             }, 100);
                         }}>
                         <ClearIcon /> Reset day
@@ -367,231 +374,211 @@ export const DailyRaids = () => {
                     )}
                 </DialogContent>
             </Dialog>
-            {/*<Accordion TransitionProps={{ unmountOnExit: true }}>*/}
-            {/*    <AccordionSummary expandIcon={<ExpandMoreIcon />}>*/}
-            {/*        <div className="flex-box gap5" style={{ fontSize: 20 }}>*/}
-            {/*            <TrackChangesIcon />*/}
-            {/*            <span>*/}
-            {/*                <b>{selectedGoals.length}</b> of {allGoals.length} active goals*/}
-            {/*            </span>*/}
-            {/*        </div>*/}
-            {/*        <span style={{ fontSize: 20 }}></span>*/}
-            {/*    </AccordionSummary>*/}
-            {/*    <AccordionDetails>*/}
-            {/*        <CharactersRaidsSelect*/}
-            {/*            goalsSelect={allGoals}*/}
-            {/*            onGoalsSelectChange={handleGoalsSelectionChange}*/}
-            {/*            onGoalEdit={handleGoalEdit}*/}
-            {/*        />*/}
-            {/*        {editGoal && (*/}
-            {/*            <EditGoalDialog*/}
-            {/*                isOpen={true}*/}
-            {/*                goal={editGoal}*/}
-            {/*                character={editCharacter}*/}
-            {/*                onClose={() => {*/}
-            {/*                    setEditGoal(null);*/}
-            {/*                }}*/}
-            {/*            />*/}
-            {/*        )}*/}
-            {/*    </AccordionDetails>*/}
-            {/*</Accordion>*/}
 
-            {!!estimatedShards.shardsRaids.length && (
-                <Accordion>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                            <div className="flex-box gap5 wrap" style={{ fontSize: 20 }}>
+            <Accordion TransitionProps={{ unmountOnExit: true }}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                        <div className="flex-box gap5 wrap" style={{ fontSize: 20 }}>
+                            <span>
+                                Raids plan (<b>{daysTotal}</b> Days |
+                            </span>
+                            <span>
+                                <b>{energyTotal}</b> <MiscIcon icon={'energy'} height={15} width={15} />
+                            </span>
+                            {!!estimatedShards.onslaughtTokens && (
                                 <span>
-                                    Shards Raids (<b>{estimatedShards.daysTotal}</b> Days |
+                                    | <b>{estimatedShards.onslaughtTokens}</b> Tokens)
                                 </span>
-                                <span>
-                                    <b>{estimatedShards.energyTotal}</b>{' '}
-                                    <MiscIcon icon={'energy'} height={15} width={15} /> |
-                                </span>
-                                <span>
-                                    <b>{estimatedShards.raidsTotal}</b> Raids |
-                                </span>
-                                <span>
-                                    <b>{estimatedShards.onslaughtTokens}</b> Tokens)
-                                </span>
-                            </div>
-                            <span className="italic">{shardsCalendarDate}</span>
-                        </FlexBox>
-                    </AccordionSummary>
-                    <AccordionDetails style={{ maxHeight: '63vh', overflow: 'auto' }}>
-                        <div className="flex-box gap10 wrap start">
-                            {estimatedShards.shardsRaids.map(shardsRaid => (
-                                <ShardsRaidsDayInput
-                                    key={shardsRaid.characterId}
-                                    shardRaids={shardsRaid}
-                                    handleAdd={handleShardsAdd}
-                                />
-                            ))}
+                            )}
+
+                            {!estimatedShards.onslaughtTokens && <>)</>}
                         </div>
-                    </AccordionDetails>
-                </Accordion>
-            )}
-
-            {!!estimatedRanks.upgradesRaids.length && (
-                <>
-                    <Accordion TransitionProps={{ unmountOnExit: !upgradesPaging.completed }}>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                                <div className="flex-box gap5 wrap" style={{ fontSize: 20 }}>
-                                    <span>
-                                        Upgrades raids (<b>{estimatedRanks.upgradesRaids.length}</b> Days |
-                                    </span>
-                                    <span>
-                                        <b>{estimatedRanks.energyTotal}</b>{' '}
-                                        <MiscIcon icon={'energy'} height={15} width={15} /> |
-                                    </span>
-                                    <span>
-                                        <b>{estimatedRanks.raidsTotal}</b> Raids)
-                                    </span>
+                        <span className="italic">{calendarDateTotal}</span>
+                    </FlexBox>
+                </AccordionSummary>
+                <AccordionDetails>
+                    {hasInProgressUpgrades && (
+                        <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
+                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                <div className="flex-box gap5" style={{ fontSize: 20 }}>
+                                    <PendingIcon color={'primary'} />
+                                    <b>{estimatedRanks.inProgressMaterials.length}</b> in progress materials
                                 </div>
-                                <span className="italic">{upgradesCalendarDate}</span>
-                            </FlexBox>
-                        </AccordionSummary>
-                        <AccordionDetails style={{ maxHeight: '63vh', overflow: 'auto' }}>
-                            {hasInProgressUpgrades && (
-                                <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
-                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                        <div className="flex-box gap5" style={{ fontSize: 20 }}>
-                                            <PendingIcon color={'primary'} />{' '}
-                                            <b>{estimatedRanks.inProgressMaterials.length}</b> in progress materials
-                                        </div>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <div className="flex-box gap10 wrap">
-                                            <Button
-                                                variant={'contained'}
-                                                component={Link}
-                                                to={isMobile ? '/mobile/input/inventory' : '/input/inventory'}>
-                                                <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Inventory</span>
-                                            </Button>
-                                        </div>
-                                        {!!estimatedRanks.craftedUpgrades.length && (
-                                            <>
-                                                <h4>Contributed crafted upgrades</h4>
-                                                <div className="flex-box gap10 wrap">
-                                                    {estimatedRanks.craftedUpgrades.map(x => (
-                                                        <UpgradeImage
-                                                            key={x.id}
-                                                            material={x.label}
-                                                            rarity={x.rarity}
-                                                            iconPath={x.iconPath}
-                                                        />
-                                                    ))}
-                                                </div>
-                                            </>
-                                        )}
-                                        <MaterialsTable
-                                            rows={estimatedRanks.inProgressMaterials}
-                                            updateMaterialQuantity={saveInventoryUpdateChanges}
-                                            onGridReady={() => setGrid1Loaded(true)}
-                                            inventory={inventory.upgrades}
-                                        />
-                                    </AccordionDetails>
-                                </Accordion>
-                            )}
-                            {!!estimatedRanks.finishedMaterials.length && (
-                                <Accordion TransitionProps={{ unmountOnExit: !grid3Loaded }}>
-                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                        <div className="flex-box gap5" style={{ fontSize: 20 }}>
-                                            <CheckCircleIcon color={'success'} />{' '}
-                                            <b>{estimatedRanks.finishedMaterials.length}</b> finished materials
-                                        </div>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <MaterialsTable
-                                            rows={estimatedRanks.finishedMaterials}
-                                            updateMaterialQuantity={saveInventoryUpdateChanges}
-                                            onGridReady={() => setGrid3Loaded(true)}
-                                            inventory={inventory.upgrades}
-                                        />
-                                    </AccordionDetails>
-                                </Accordion>
-                            )}
-                            {!!estimatedRanks.blockedMaterials.length && (
-                                <Accordion TransitionProps={{ unmountOnExit: !grid2Loaded }}>
-                                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                        <AccessibleTooltip
-                                            title={`You don't any have location for ${estimatedRanks.blockedMaterials.length} materials`}>
-                                            <div className="flex-box gap5" style={{ fontSize: 20 }}>
-                                                <Warning color={'warning'} />{' '}
-                                                <b>{estimatedRanks.blockedMaterials.length}</b> blocked materials
-                                            </div>
-                                        </AccessibleTooltip>
-                                    </AccordionSummary>
-                                    <AccordionDetails>
-                                        <div className="flex-box">
-                                            <InfoIcon color="primary" /> You don&apos;t have available campaigns nodes
-                                            for the items listed in the table below
-                                        </div>
-                                        {filtersCount > 0 && (
-                                            <div className="flex-box">
-                                                <Warning color={'warning'} /> You have applied some filters. Reset
-                                                filters to make more campaigns node available
-                                            </div>
-                                        )}
-
-                                        <MaterialsTable
-                                            rows={estimatedRanks.blockedMaterials}
-                                            updateMaterialQuantity={saveInventoryUpdateChanges}
-                                            onGridReady={() => setGrid2Loaded(true)}
-                                            inventory={inventory.upgrades}
-                                        />
-                                    </AccordionDetails>
-                                </Accordion>
-                            )}
-
-                            <div style={{ display: 'flex', gap: 10, overflow: 'auto' }}>
-                                {estimatedRanks.upgradesRaids
-                                    .slice(upgradesPaging.start, upgradesPaging.end)
-                                    .map((day, index) => {
-                                        return <RaidsDayView key={index} day={day} title={'Day ' + (index + 1)} />;
-                                    })}
-                                {!upgradesPaging.completed && (
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <div className="flex-box gap10 wrap">
                                     <Button
-                                        variant={'outlined'}
-                                        style={{ minWidth: 300, alignItems: 'flex-start', paddingTop: 20 }}
-                                        onClick={() =>
-                                            setUpgradesPaging({
-                                                start: 0,
-                                                end: estimatedRanks.upgradesRaids.length,
-                                                completed: true,
-                                            })
-                                        }>
-                                        Show All
+                                        variant={'contained'}
+                                        component={Link}
+                                        to={isMobile ? '/mobile/input/inventory' : '/input/inventory'}>
+                                        <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Inventory</span>
                                     </Button>
-                                )}
-                            </div>
-                        </AccordionDetails>
-                    </Accordion>
-                    <h2>Today raids</h2>
-                    <div className="flex-box gap10 wrap start" style={{ marginTop: 10 }}>
-                        {estimatedShards.shardsRaids
-                            .filter(x => x.locations.length && x.locations.every(location => !location.isCompleted))
-                            .map(shardsRaid => (
-                                <div className="item-raids" key={shardsRaid.characterId}>
-                                    <ShardsItemInput shardsRaid={shardsRaid} handleAdd={handleShardsAdd} />
                                 </div>
-                            ))}
-                        {estimatedRanks.upgradesRaids[0].raids.map(raid => (
-                            <div className="item-raids" key={raid.id}>
-                                <MaterialItemInput
-                                    acquiredCount={raid.acquiredCount ?? 0}
-                                    upgradeRaid={raid}
-                                    addCount={(value, location) => {
-                                        raid.acquiredCount += value;
-                                        handleAdd(raid, value, location);
-                                    }}
+                                {!!estimatedRanks.craftedUpgrades.length && (
+                                    <>
+                                        <h4>Contributed crafted upgrades</h4>
+                                        <div className="flex-box gap10 wrap">
+                                            {estimatedRanks.craftedUpgrades.map(x => (
+                                                <UpgradeImage
+                                                    key={x.id}
+                                                    material={x.label}
+                                                    rarity={x.rarity}
+                                                    iconPath={x.iconPath}
+                                                />
+                                            ))}
+                                        </div>
+                                    </>
+                                )}
+                                <MaterialsTable
+                                    rows={estimatedRanks.inProgressMaterials}
+                                    updateMaterialQuantity={saveInventoryUpdateChanges}
+                                    onGridReady={() => setGrid1Loaded(true)}
+                                    inventory={inventory.upgrades}
                                 />
-                            </div>
-                        ))}
-                    </div>
-                </>
-            )}
+                            </AccordionDetails>
+                        </Accordion>
+                    )}
+                    {!!estimatedRanks.finishedMaterials.length && (
+                        <Accordion TransitionProps={{ unmountOnExit: !grid3Loaded }}>
+                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                <div className="flex-box gap5" style={{ fontSize: 20 }}>
+                                    <CheckCircleIcon color={'success'} />{' '}
+                                    <b>{estimatedRanks.finishedMaterials.length}</b> finished materials
+                                </div>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <MaterialsTable
+                                    rows={estimatedRanks.finishedMaterials}
+                                    updateMaterialQuantity={saveInventoryUpdateChanges}
+                                    onGridReady={() => setGrid3Loaded(true)}
+                                    inventory={inventory.upgrades}
+                                />
+                            </AccordionDetails>
+                        </Accordion>
+                    )}
+                    {!!estimatedRanks.blockedMaterials.length && (
+                        <Accordion TransitionProps={{ unmountOnExit: !grid2Loaded }}>
+                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                <AccessibleTooltip
+                                    title={`You don't any have location for ${estimatedRanks.blockedMaterials.length} materials`}>
+                                    <div className="flex-box gap5" style={{ fontSize: 20 }}>
+                                        <Warning color={'warning'} />
+                                        <b>{estimatedRanks.blockedMaterials.length}</b> blocked materials
+                                    </div>
+                                </AccessibleTooltip>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <div className="flex-box">
+                                    <InfoIcon color="primary" /> You don&apos;t have available campaigns nodes for the
+                                    items listed in the table below
+                                </div>
+                                {filtersCount > 0 && (
+                                    <div className="flex-box">
+                                        <Warning color={'warning'} /> You have applied some filters. Reset filters to
+                                        make more campaigns node available
+                                    </div>
+                                )}
+
+                                <MaterialsTable
+                                    rows={estimatedRanks.blockedMaterials}
+                                    updateMaterialQuantity={saveInventoryUpdateChanges}
+                                    onGridReady={() => setGrid2Loaded(true)}
+                                    inventory={inventory.upgrades}
+                                />
+                            </AccordionDetails>
+                        </Accordion>
+                    )}
+
+                    {!!estimatedShards.shardsRaids.length && (
+                        <Accordion>
+                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                                    <div className="flex-box gap5 wrap" style={{ fontSize: 20 }}>
+                                        <span>
+                                            Shards Raids (<b>{estimatedShards.daysTotal}</b> Days |
+                                        </span>
+                                        <span>
+                                            <b>{estimatedShards.energyTotal}</b>{' '}
+                                            <MiscIcon icon={'energy'} height={15} width={15} /> |
+                                        </span>
+                                        <span>
+                                            <b>{estimatedShards.raidsTotal}</b> Raids |
+                                        </span>
+                                        <span>
+                                            <b>{estimatedShards.onslaughtTokens}</b> Tokens)
+                                        </span>
+                                    </div>
+                                    <span className="italic">{shardsCalendarDate}</span>
+                                </FlexBox>
+                            </AccordionSummary>
+                            <AccordionDetails style={{ maxHeight: '63vh', overflow: 'auto' }}>
+                                <div className="flex-box gap10 wrap start">
+                                    {estimatedShards.shardsRaids.map(shardsRaid => (
+                                        <ShardsRaidsDayInput
+                                            key={shardsRaid.characterId}
+                                            shardRaids={shardsRaid}
+                                            handleAdd={handleShardsAdd}
+                                        />
+                                    ))}
+                                </div>
+                            </AccordionDetails>
+                        </Accordion>
+                    )}
+
+                    {!!estimatedRanks.upgradesRaids.length && (
+                        <Accordion TransitionProps={{ unmountOnExit: !upgradesPaging.completed }}>
+                            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                                <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                                    <div className="flex-box gap5 wrap" style={{ fontSize: 20 }}>
+                                        <span>
+                                            Upgrades raids (<b>{estimatedRanks.upgradesRaids.length}</b> Days |
+                                        </span>
+                                        <span>
+                                            <b>{estimatedRanks.energyTotal}</b>{' '}
+                                            <MiscIcon icon={'energy'} height={15} width={15} /> |
+                                        </span>
+                                        <span>
+                                            <b>{estimatedRanks.raidsTotal}</b> Raids)
+                                        </span>
+                                    </div>
+                                    <span className="italic">{upgradesCalendarDate}</span>
+                                </FlexBox>
+                            </AccordionSummary>
+                            <AccordionDetails style={{ maxHeight: '63vh', overflow: 'auto' }}>
+                                <div style={{ display: 'flex', gap: 10, overflow: 'auto' }}>
+                                    {estimatedRanks.upgradesRaids
+                                        .slice(upgradesPaging.start, upgradesPaging.end)
+                                        .map((day, index) => {
+                                            return <RaidsDayView key={index} day={day} title={'Day ' + (index + 1)} />;
+                                        })}
+                                    {!upgradesPaging.completed && (
+                                        <Button
+                                            variant={'outlined'}
+                                            style={{ minWidth: 300, alignItems: 'flex-start', paddingTop: 20 }}
+                                            onClick={() =>
+                                                setUpgradesPaging({
+                                                    start: 0,
+                                                    end: estimatedRanks.upgradesRaids.length,
+                                                    completed: true,
+                                                })
+                                            }>
+                                            Show All
+                                        </Button>
+                                    )}
+                                </div>
+                            </AccordionDetails>
+                        </Accordion>
+                    )}
+                </AccordionDetails>
+            </Accordion>
+
+            <TodayRaids
+                completedLocations={dailyRaids.raidedLocations}
+                shardsRaids={estimatedShards.shardsRaids}
+                upgradesRaids={estimatedRanks.upgradesRaids[0]?.raids ?? []}
+                addShards={handleShardsAdd}
+                addUpgrades={handleUpgradesAdd}
+            />
         </div>
     );
 };

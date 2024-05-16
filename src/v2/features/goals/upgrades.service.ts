@@ -103,12 +103,27 @@ export class UpgradesService {
 
         let iteration = 0;
         let upgradesToFarm = upgrades.filter(x => x.energyLeft > 0);
+        const raidedLocations = settings.completedLocations.filter(x => !x.isShardsLocation).map(x => x.id);
+        const raidedUpgrades = upgrades.filter(x =>
+            x.locations.filter(location => location.isSelected).every(location => raidedLocations.includes(location.id))
+        );
 
         while (upgradesToFarm.length > 0) {
-            const dayNumber = resultDays.length + 1;
-            const isFirstDay = dayNumber === 1;
+            const isFirstDay = iteration === 0;
             const raids: IUpgradeRaid[] = [];
             let energyLeft = settings.dailyEnergy;
+            if (isFirstDay && raidedUpgrades.length) {
+                for (const raidedUpgrade of raidedUpgrades) {
+                    const raidLocations = settings.completedLocations.filter(x =>
+                        raidedUpgrade.locations.some(location => location.id === x.id)
+                    );
+                    raids.push({
+                        ...raidedUpgrade,
+                        raidLocations,
+                    });
+                    energyLeft -= sum(raidLocations.map(x => x.energySpent));
+                }
+            }
 
             for (const material of upgradesToFarm) {
                 if (energyLeft < 5) {
@@ -131,6 +146,7 @@ export class UpgradesService {
                         const completedLocation = settings.completedLocations.find(x => x.id === location.id);
                         if (completedLocation) {
                             raidLocations.push(completedLocation);
+                            energyLeft -= completedLocation.energySpent;
                         }
                         continue;
                     }
@@ -204,12 +220,8 @@ export class UpgradesService {
             }
 
             if (raids.length) {
-                const raidsTotal = isFirstDay
-                    ? sum(settings.completedLocations.map(x => x.raidsCount))
-                    : sum(raids.flatMap(x => x.raidLocations.map(x => x.raidsCount)));
-                const energyTotal = isFirstDay
-                    ? sum(settings.completedLocations.map(x => x.energySpent))
-                    : sum(raids.flatMap(x => x.raidLocations.map(x => x.energySpent)));
+                const raidsTotal = sum(raids.flatMap(x => x.raidLocations.map(x => x.raidsCount)));
+                const energyTotal = sum(raids.flatMap(x => x.raidLocations.map(x => x.energySpent)));
                 resultDays.push({
                     raids: isFirstDay
                         ? orderBy(raids, raid => raid.raidLocations.every(location => location.isCompleted))

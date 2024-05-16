@@ -15,7 +15,7 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
     const isAllRaidsCompleted = upgradeRaid.raidLocations.every(location => location.isCompleted);
 
     return (
-        <div className="flex-box between" style={{ opacity: isAllRaidsCompleted || upgradeRaid.isBlocked ? 0.5 : 1 }}>
+        <div className="flex-box between" style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>
             <div className="flex-box column">
                 <UpgradeImage
                     material={upgradeRaid.label}
