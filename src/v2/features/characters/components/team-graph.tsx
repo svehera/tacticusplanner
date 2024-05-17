@@ -83,13 +83,13 @@ export const TeamGraph: React.FC<Props> = ({ characters }) => {
                                 bottom: 10,
                                 left: 40,
                             }}
-                            enableGridX={true}
+                            enableGridX={false}
                             axisBottom={null}
                             enableGridY={true}
                             yScale={{
                                 type: 'linear',
                                 reverse: false,
-                                min: 0,
+                                min: -2500,
                                 max: 40000,
                             }}
                             gridYValues={[851, 2212, 5097, 11194, 23758, 40000]}
