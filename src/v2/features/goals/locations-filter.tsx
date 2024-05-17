@@ -120,7 +120,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     <FilterAltIcon />
                 </Badge>
             </IconButton>
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open} onClose={handleClose} fullWidth>
                 <DialogTitle>Raids Filters</DialogTitle>
                 <DialogContent>
                     <h5>Deployable factions</h5>

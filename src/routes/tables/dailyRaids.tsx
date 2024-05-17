@@ -1,7 +1,7 @@
-﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
+﻿import React, { useContext, useEffect, useMemo } from 'react';
 
 import { ICharacter2, IDailyRaidsFilters } from 'src/models/interfaces';
-import { Accordion, AccordionDetails, AccordionSummary, DialogContent, DialogTitle, Popover } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Popover } from '@mui/material';
 import { PersonalGoalType } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { isMobile } from 'react-device-detect';
@@ -17,7 +17,6 @@ import ClearIcon from '@mui/icons-material/Clear';
 import { MiscIcon } from 'src/shared-components/misc-icon';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import { CharactersRaidsSelect } from 'src/v2/features/goals/characters-raids-select';
 import {
     CharacterRaidGoalSelect,
     ICharacterAscendGoal,
@@ -35,17 +34,15 @@ import LinkIcon from '@mui/icons-material/Link';
 import { RaidsDayView } from 'src/v2/features/goals/raids-day-view';
 import { LocationsFilter } from 'src/v2/features/goals/locations-filter';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
-import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import { ShardsRaidsDayInput } from 'src/v2/features/goals/shards-raids-day-input';
 import { GoalsService } from 'src/v2/features/goals/goals.service';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
-import Dialog from '@mui/material/Dialog';
 
 import './dailyRaids.scss';
 import { TodayRaids } from 'src/routes/tables/todayRaids';
+import { ActiveGoalsDialog } from 'src/v2/features/goals/active-goals-dialog';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
@@ -60,7 +57,6 @@ export const DailyRaids = () => {
 
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
     const [hasChanges, setHasChanges] = React.useState<boolean>(false);
-    const [openGoals, setOpenGoals] = React.useState<boolean>(false);
     const [upgrades, setUpgrades] = React.useState<Record<string, number>>(inventory.upgrades);
     const [characters, setCharacters] = React.useState<ICharacter2[]>(storeCharacters);
 
@@ -73,9 +69,6 @@ export const DailyRaids = () => {
     const [grid1Loaded, setGrid1Loaded] = React.useState<boolean>(false);
     const [grid2Loaded, setGrid2Loaded] = React.useState<boolean>(false);
     const [grid3Loaded, setGrid3Loaded] = React.useState<boolean>(false);
-
-    const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
-    const [editCharacter, setEditCharacter] = useState<ICharacter2>(characters[0]);
 
     const allGoals = useMemo<CharacterRaidGoalSelect[]>(() => {
         return goals
@@ -186,16 +179,6 @@ export const DailyRaids = () => {
             type: 'UpdateFilters',
             value: filters,
         });
-    };
-
-    const handleGoalEdit = (goalId: string) => {
-        const goalToEdit = allGoals.find(x => x.goalId === goalId);
-        const characterToEdit = characters.find(x => x.name === goalToEdit?.characterName);
-
-        if (goalToEdit && characterToEdit) {
-            setEditGoal(goalToEdit);
-            setEditCharacter(characterToEdit);
-        }
     };
 
     const filtersCount =
@@ -325,13 +308,11 @@ export const DailyRaids = () => {
                         }}>
                         <ClearIcon /> Reset day
                     </Button>
-                    <Button
-                        size="small"
-                        variant={'outlined'}
-                        disabled={!allGoals?.length}
-                        onClick={() => setOpenGoals(true)}>
-                        <TrackChangesIcon /> {selectedGoals.length} of {allGoals.length}
-                    </Button>
+                    <ActiveGoalsDialog
+                        characters={characters}
+                        goals={allGoals}
+                        onGoalsSelectChange={handleGoalsSelectionChange}
+                    />
                     <LocationsFilter filter={dailyRaids.filters} filtersChange={saveFilterChanges} />
                 </div>
             </div>
@@ -347,33 +328,6 @@ export const DailyRaids = () => {
                     <DailyRaidsSettings close={handleClose2} />
                 </div>
             </Popover>
-            <Dialog open={openGoals} onClose={() => setOpenGoals(false)}>
-                <DialogTitle>
-                    <div className="flex-box gap5" style={{ fontSize: 20 }}>
-                        <TrackChangesIcon />
-                        <span>
-                            <b>{selectedGoals.length}</b> of {allGoals.length} active goals
-                        </span>
-                    </div>
-                </DialogTitle>
-                <DialogContent>
-                    <CharactersRaidsSelect
-                        goalsSelect={allGoals}
-                        onGoalsSelectChange={handleGoalsSelectionChange}
-                        onGoalEdit={handleGoalEdit}
-                    />
-                    {editGoal && (
-                        <EditGoalDialog
-                            isOpen={true}
-                            goal={editGoal}
-                            character={editCharacter}
-                            onClose={() => {
-                                setEditGoal(null);
-                            }}
-                        />
-                    )}
-                </DialogContent>
-            </Dialog>
 
             <Accordion TransitionProps={{ unmountOnExit: true }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
