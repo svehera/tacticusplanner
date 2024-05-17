@@ -16,6 +16,10 @@ import { Conditional } from 'src/v2/components/conditional';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
+import { numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
+import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
+import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
+
 export const CharacterTile = ({
     character,
     disableClick,
@@ -63,7 +67,18 @@ export const CharacterTile = ({
             onClick={onCharacterClick && !disableClick ? () => onCharacterClick!(character) : undefined}>
             <StarsImage stars={character.stars} />
             <div>
-                <Tooltip title={character.name} placement={'top'}>
+                <Tooltip
+                    placement={'top'}
+                    title={
+                        <span>
+                            {character.name}
+                            <br />
+                            Power: {numberToThousandsStringOld(CharactersPowerService.getCharacterPower(character))}
+                            <br />
+                            Blackstone:{' '}
+                            {numberToThousandsStringOld(CharactersValueService.getCharacterValue(character))}
+                        </span>
+                    }>
                     <Badge badgeContent={badgeContent} color={badgeColor} invisible={!viewContext.showBadges}>
                         <CharacterPortraitImage icon={character.icon} />
                     </Badge>

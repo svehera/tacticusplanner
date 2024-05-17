@@ -16,6 +16,7 @@ import { IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
 import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
+import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
 
 import { ShareRoster } from 'src/v2/features/share/share-roster';
 
@@ -77,6 +78,33 @@ export const WhoYouOwn = () => {
         setOpenCharacterItemDialog(false);
     };
 
+    // For the power graph
+    const teamPowerData: { x: string; y: number }[] = [];
+    const teamAttributeData: { x: string; y: number }[] = [];
+    const teamAbilityData: { x: string; y: number }[] = [];
+    charactersFiltered.forEach(character => {
+        const power = CharactersPowerService.getCharacterPower(character);
+        const attributePower = CharactersPowerService.getCharacterAttributePower(character);
+        const abilityPower = CharactersPowerService.getCharacterAbilityPower(character);
+
+        teamPowerData.push({ x: character.name, y: power });
+        teamAttributeData.push({ x: character.name, y: attributePower });
+        teamAbilityData.push({ x: character.name, y: abilityPower });
+    });
+
+    const sortByPower = (a: { x: string; y: number }, b: { x: string; y: number }) => b.y - a.y;
+    teamPowerData.sort(sortByPower);
+    teamAttributeData.sort((a, b) => {
+        const aIndex = teamPowerData.findIndex(item => item.x === a.x);
+        const bIndex = teamPowerData.findIndex(item => item.x === b.x);
+        return sortByPower(teamPowerData[aIndex], teamPowerData[bIndex]);
+    });
+    teamAbilityData.sort((a, b) => {
+        const aIndex = teamPowerData.findIndex(item => item.x === a.x);
+        const bIndex = teamPowerData.findIndex(item => item.x === b.x);
+        return sortByPower(teamPowerData[aIndex], teamPowerData[bIndex]);
+    });
+
     return (
         <Box style={{ margin: 'auto' }}>
             <CharactersViewContext.Provider
@@ -112,6 +140,12 @@ export const WhoYouOwn = () => {
                         onClose={endEditCharacter}
                     />
                 </Conditional>
+                <TeamGraph
+                    data={[
+                        { id: 'Attribute', data: teamAttributeData },
+                        { id: 'Power', data: teamPowerData },
+                    ]}
+                />
             </CharactersViewContext.Provider>
         </Box>
     );
