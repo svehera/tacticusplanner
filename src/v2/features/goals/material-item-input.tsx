@@ -21,6 +21,16 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
                     material={upgradeRaid.label}
                     rarity={upgradeRaid.rarity}
                     iconPath={upgradeRaid.iconPath}
+                    tooltip={
+                        <div>
+                            {upgradeRaid.label}
+                            <ul style={{ paddingInlineStart: 15 }}>
+                                {upgradeRaid.relatedCharacters.map(x => (
+                                    <li key={x}>{x}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    }
                 />
                 <span>
                     {upgradeRaid.acquiredCount}/{upgradeRaid.requiredCount}

@@ -73,7 +73,7 @@ export class UpgradesService {
         const finishedMaterials = allMaterials.filter(x => x.isFinished);
         const inProgressMaterials = allMaterials.filter(x => !x.isBlocked && !x.isFinished);
 
-        const upgradesRaids = this.generateDailyRaidsList(settings, inProgressMaterials);
+        const upgradesRaids = this.generateDailyRaidsList(settings, inProgressMaterials, allMaterials);
 
         const energyTotal = sum(inProgressMaterials.map(material => material.energyTotal));
         const raidsTotal = sum(upgradesRaids.map(day => day.raidsTotal));
@@ -94,7 +94,8 @@ export class UpgradesService {
 
     private static generateDailyRaidsList(
         settings: IEstimatedRanksSettings,
-        upgrades: ICharacterUpgradeEstimate[]
+        inProgressUpgrades: ICharacterUpgradeEstimate[],
+        allUpgrades: ICharacterUpgradeEstimate[]
     ): IUpgradesRaidsDay[] {
         if (settings.dailyEnergy <= 10) {
             return [];
@@ -102,10 +103,10 @@ export class UpgradesService {
         const resultDays: IUpgradesRaidsDay[] = [];
 
         let iteration = 0;
-        let upgradesToFarm = upgrades.filter(x => x.energyLeft > 0);
+        let upgradesToFarm = inProgressUpgrades.filter(x => x.energyLeft > 0);
         const raidedLocations = settings.completedLocations.filter(x => !x.isShardsLocation).map(x => x.id);
-        const raidedUpgrades = upgrades.filter(x =>
-            x.locations.filter(location => location.isSelected).every(location => raidedLocations.includes(location.id))
+        const raidedUpgrades = allUpgrades.filter(x =>
+            x.locations.filter(location => location.isSelected).some(location => raidedLocations.includes(location.id))
         );
 
         while (upgradesToFarm.length > 0) {
@@ -121,8 +122,8 @@ export class UpgradesService {
                         ...raidedUpgrade,
                         raidLocations,
                     });
-                    energyLeft -= sum(raidLocations.map(x => x.energySpent));
                 }
+                energyLeft -= sum(settings.completedLocations.map(x => x.energySpent));
             }
 
             for (const material of upgradesToFarm) {
@@ -232,7 +233,7 @@ export class UpgradesService {
             }
 
             iteration++;
-            upgradesToFarm = upgrades.filter(
+            upgradesToFarm = inProgressUpgrades.filter(
                 x => x.energyLeft > Math.min(...x.locations.filter(c => c.isSelected).map(l => l.energyCost))
             );
             if (iteration > 1000) {

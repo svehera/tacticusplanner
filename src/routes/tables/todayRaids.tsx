@@ -3,6 +3,7 @@ import { ShardsItemInput } from 'src/v2/features/goals/shards-item-input';
 import { MaterialItemInput } from 'src/v2/features/goals/material-item-input';
 import { IItemRaidLocation, IShardsRaid, IUpgradeRaid } from 'src/v2/features/goals/goals.models';
 import { sum } from 'lodash';
+import { isMobile } from 'react-device-detect';
 
 interface Props {
     completedLocations: IItemRaidLocation[];
@@ -32,7 +33,7 @@ export const TodayRaids: React.FC<Props> = ({
 
     return (
         <>
-            <h2>
+            <h2 style={{ fontSize: isMobile ? '1rem' : '1.2rem' }}>
                 Today raids ({energySpent} energy spent | {raidsCount} raids done)
             </h2>
             <div className="flex-box gap2 wrap start" style={{ marginTop: 10 }}>
