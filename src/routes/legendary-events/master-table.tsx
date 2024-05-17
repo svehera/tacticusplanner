@@ -1,15 +1,14 @@
-﻿import React, { ChangeEvent, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+﻿import React, { useContext, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { CellClassParams, ColDef, ColGroupDef, ICellRendererParams, ITooltipParams } from 'ag-grid-community';
 
 import {
     ICharacter2,
-    ILegendaryEvent,
     ILegendaryEventSelectedTeams,
     ILegendaryEventTrack,
     SelectedTeams,
 } from '../../models/interfaces';
-import { LegendaryEventEnum, Rank, Rarity } from '../../models/enums';
+import { LegendaryEventEnum, Rank } from '../../models/enums';
 import {
     Checkbox,
     Divider,
@@ -37,9 +36,9 @@ import { isMobile } from 'react-device-detect';
 
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>([
+        LegendaryEventEnum.Kharn,
         LegendaryEventEnum.Ragnar,
         LegendaryEventEnum.Vitruvius,
-        LegendaryEventEnum.Shadowsun,
     ]);
 
     const { leSelectedTeams, viewPreferences, characters } = useContext(StoreContext);
@@ -363,6 +362,13 @@ export const MasterTable = () => {
                         multiple
                         input={<OutlinedInput label="Legendary Events" />}
                         renderValue={selected => selected.map(x => LegendaryEventEnum[x]).join(', ')}>
+                        <MenuItem value={LegendaryEventEnum.Kharn}>
+                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Kharn) > -1} />
+                            <ListItemIcon>
+                                <CharacterImage icon={'unset.png'} imageSize={30} />
+                            </ListItemIcon>
+                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Kharn]} />
+                        </MenuItem>
                         <MenuItem value={LegendaryEventEnum.Ragnar}>
                             <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Ragnar) > -1} />
                             <ListItemIcon>
@@ -377,6 +383,7 @@ export const MasterTable = () => {
                             </ListItemIcon>
                             <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Vitruvius]} />
                         </MenuItem>
+                        <Divider />
                         <MenuItem value={LegendaryEventEnum.Shadowsun}>
                             <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Shadowsun) > -1} />
                             <ListItemIcon>
@@ -384,7 +391,6 @@ export const MasterTable = () => {
                             </ListItemIcon>
                             <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Shadowsun]} />
                         </MenuItem>
-                        <Divider />
                         <MenuItem value={LegendaryEventEnum.AunShi}>
                             <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.AunShi) > -1} />
                             <ListItemIcon>

@@ -2,10 +2,10 @@
 import { ICharacter2 } from '../models/interfaces';
 import { CharacterBias, Rank } from '../models/enums';
 import { pooEmoji, starEmoji } from '../models/constants';
-import { RarityImage } from './rarity-image';
-import { RankImage } from './rank-image';
 import { CharacterImage } from './character-image';
 import { Tooltip } from '@mui/material';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
 
 export const CharacterTitle = ({
     character,

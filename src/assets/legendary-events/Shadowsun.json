@@ -384,6 +384,8 @@
         }
     ],
     "shardsPerChest": 10,
+    "battlesCount": 12,
+    "constraintsCount": 7,
     "progression": {
         "unlock": 150,
         "fourStars": 60,

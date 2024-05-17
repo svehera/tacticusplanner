@@ -6389,5 +6389,129 @@
         "nodeNumber": 8,
         "reward": "Toth",
         "expectedGold": 53
+    },
+    "SHE9": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 9,
+        "slots": 4,
+        "reward": "Mesh Weave",
+        "expectedGold": 53
+    },
+    "SHE10": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 10,
+        "slots": 3,
+        "reward": "The Iron Phoenix",
+        "expectedGold": 53
+    },
+    "SHE11": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 11,
+        "reward": "Lesser Reliquary of Protection",
+        "expectedGold": 53
+    },
+    "SHE12": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 12,
+        "reward": "Wolf Tail Talisman",
+        "expectedGold": 53
+    },
+    "SHE13": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 13,
+        "reward": "Key of Ignorance",
+        "expectedGold": 53
+    },
+    "SHE14": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 14,
+        "reward": "Attack Vector Data-Slate",
+        "expectedGold": 53
+    },
+    "SHE15": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 15,
+        "reward": "Classified Data-Slate",
+        "expectedGold": 53
+    },
+    "SHE16": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 16,
+        "reward": "Abraxas",
+        "expectedGold": 53
+    },
+    "SHE17": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 17,
+        "slots": 4,
+        "reward": "Canister of Chemicals",
+        "expectedGold": 53,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum"]
+    },
+    "SHE18": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 18,
+        "slots": 3,
+        "reward": "The Silver Eagle with Swords",
+        "expectedGold": 53,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Astra Militarum"]
+    },
+    "SHE19": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 19,
+        "reward": "Wolf Tooth Necklace",
+        "expectedGold": 53
+    },
+    "SHE20": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 20,
+        "slots": 4,
+        "reward": "Chapter Pendant",
+        "expectedGold": 53
+    },
+    "SHE21": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 21,
+        "reward": "Writings",
+        "expectedGold": 53
+    },
+    "SHE22": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 22,
+        "slots": 4,
+        "reward": "Nano Swarm",
+        "expectedGold": 53
+    },
+    "SHE23": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 23,
+        "slots": 4,
+        "reward": "The Silver Scope",
+        "expectedGold": 53
+    },
+    "SHE24": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 24,
+        "slots": 4,
+        "reward": "Yazaghor",
+        "expectedGold": 53
     }
 }

@@ -1,9 +1,5 @@
-﻿import { sum } from 'lodash';
 import { ICharacter2 } from 'src/models/interfaces';
 import { Rank, Rarity, RarityStars } from 'src/models/enums';
-
-import dirtyDozenData from 'src/v2/data/dirtyDozen.json';
-import { IDirtyDozenChar } from 'src/v2/features/dirty-dozen/dirty-dozen.models';
 
 export class CharactersPowerService {
     public static getCharacterAbilityPower(character: ICharacter2): number {
@@ -46,24 +42,6 @@ export class CharactersPowerService {
             CharactersPowerService.getCharacterAttributePower(character) +
             CharactersPowerService.getCharacterAbilityPower(character);
         return Math.round(powerLevel);
-    }
-
-    // Currently unused
-    public static getDirtyDozenCoeff(characterId: string): number {
-        const dirtyDozenChar: IDirtyDozenChar | undefined = dirtyDozenData.find(x => x.Name === characterId);
-        if (!dirtyDozenChar) {
-            return 1;
-        }
-        const rankings: number[] = [
-            dirtyDozenChar.Pvp,
-            dirtyDozenChar.GROrk,
-            dirtyDozenChar.GRMortarion,
-            dirtyDozenChar.GRNecron,
-            dirtyDozenChar.GRTyranid,
-            dirtyDozenChar.GRScreamer,
-            dirtyDozenChar.GRRogalDorn,
-        ];
-        return 1 + (sum(rankings) - rankings.length) / 100;
     }
 
     public static getAbilityCoeff(level: number): number {

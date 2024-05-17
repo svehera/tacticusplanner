@@ -1,6 +1,6 @@
 ﻿import React, { useMemo } from 'react';
 import { Card, CardContent, CardHeader } from '@mui/material';
-import { ILocationRaid, IShardsRaid } from 'src/v2/features/goals/goals.models';
+import { IItemRaidLocation, IShardsRaid } from 'src/v2/features/goals/goals.models';
 import { ShardItemTitle } from 'src/v2/features/goals/shard-item-title';
 import { RaidItemView } from 'src/v2/features/goals/raid-item-view';
 import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
@@ -10,7 +10,7 @@ import { CampaignImage } from 'src/v2/components/images/campaign-image';
 
 interface Props {
     shardRaids: IShardsRaid;
-    handleAdd: (shardId: string, value: number, locationId: string) => void;
+    handleAdd: (shardId: string, value: number, location: IItemRaidLocation) => void;
 }
 
 export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids, handleAdd }) => {
@@ -21,9 +21,9 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids, handleAdd }) 
         return formatDateWithOrdinal(nextDate);
     }, [shardRaids.daysTotal]);
 
-    const handleAddCount = (value: number, location: ILocationRaid) => {
-        handleAdd(shardRaids.characterId, value, location.id);
-        shardRaids.ownedCount += value;
+    const handleAddCount = (value: number, location: IItemRaidLocation) => {
+        handleAdd(shardRaids.characterId, value, location);
+        shardRaids.acquiredCount += value;
         location.isCompleted = true;
     };
     return (
@@ -63,13 +63,13 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids, handleAdd }) 
                     {shardRaids.locations.map(location => {
                         const maxObtained = Math.round(location.farmedItems);
                         const defaultItemsObtained =
-                            maxObtained + shardRaids.ownedCount > shardRaids.requiredCount
-                                ? shardRaids.requiredCount - shardRaids.ownedCount
+                            maxObtained + shardRaids.acquiredCount > shardRaids.requiredCount
+                                ? shardRaids.requiredCount - shardRaids.acquiredCount
                                 : maxObtained;
 
                         return (
                             <li
-                                key={location.campaign + location.battleNumber}
+                                key={location.campaign + location.nodeNumber}
                                 className="flex-box gap5"
                                 style={{
                                     justifyContent: 'space-between',
@@ -78,9 +78,7 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids, handleAdd }) 
                                 <RaidItemView location={location} />
                                 <RaidItemInput
                                     defaultItemsObtained={defaultItemsObtained}
-                                    acquiredCount={shardRaids.ownedCount}
-                                    requiredCount={shardRaids.requiredCount}
-                                    isDisabled={location.isCompleted}
+                                    isDisabled={!!location.isCompleted}
                                     addCount={value => handleAddCount(value, location)}
                                 />
                             </li>

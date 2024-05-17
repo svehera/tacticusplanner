@@ -1,15 +1,14 @@
 ﻿import React from 'react';
 import { Card, CardContent, CardHeader } from '@mui/material';
-import { IDailyRaid, IMaterialRaid, IRaidLocation } from 'src/models/interfaces';
 import { MaterialItemInput } from 'src/v2/features/goals/material-item-input';
+import { IUpgradeRaid, IItemRaidLocation, IUpgradesRaidsDay } from 'src/v2/features/goals/goals.models';
 
 interface Props {
-    day: IDailyRaid;
-    completedLocations: IRaidLocation[];
-    handleAdd: (materialId: IMaterialRaid, value: number, location: IRaidLocation) => void;
+    day: IUpgradesRaidsDay;
+    handleAdd: (materialId: IUpgradeRaid, value: number, location: IItemRaidLocation) => void;
 }
 
-export const RaidsDayInput: React.FC<Props> = ({ day, handleAdd, completedLocations }) => {
+export const RaidsDayInput: React.FC<Props> = ({ day, handleAdd }) => {
     return (
         <Card
             sx={{
@@ -19,8 +18,8 @@ export const RaidsDayInput: React.FC<Props> = ({ day, handleAdd, completedLocati
                 title={'Today'}
                 subheader={
                     <div className="flex-box column start">
-                        <span>Energy left {day.energyLeft}</span>
-                        <span>Raids left {day.raidsCount}</span>
+                        <span>Energy used {day.energyTotal}</span>
+                        <span>Raids total {day.raidsTotal}</span>
                     </div>
                 }
             />
@@ -28,15 +27,12 @@ export const RaidsDayInput: React.FC<Props> = ({ day, handleAdd, completedLocati
                 <ul style={{ listStyleType: 'none', padding: 0 }}>
                     {day.raids.map((raid, index) => {
                         return (
-                            <li key={raid.materialId + index}>
+                            <li key={raid.id + index}>
                                 <MaterialItemInput
-                                    acquiredCount={raid.materialRef?.quantity ?? 0}
-                                    materialRaid={raid}
-                                    completedLocations={completedLocations}
+                                    acquiredCount={raid.acquiredCount ?? 0}
+                                    upgradeRaid={raid}
                                     addCount={(value, location) => {
-                                        if (raid.materialRef) {
-                                            raid.materialRef.quantity += value;
-                                        }
+                                        raid.acquiredCount += value;
                                         handleAdd(raid, value, location);
                                     }}
                                 />

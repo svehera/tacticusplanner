@@ -16,6 +16,7 @@ import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
 import { v4 } from 'uuid';
 import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
+import { KharnLegendaryEvent } from 'src/models/legendary-events/kharn.le';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,
@@ -134,7 +135,6 @@ export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {
     [CharacterReleaseRarity.Legendary]: 400,
 };
 
-export const defaultLE = LegendaryEventEnum.Shadowsun;
 export const getLegendaryEvent = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
     switch (id) {
         case LegendaryEventEnum.Shadowsun:
@@ -145,6 +145,8 @@ export const getLegendaryEvent = (id: LegendaryEventEnum, characters: ICharacter
             return new RagnarLegendaryEvent(characters);
         case LegendaryEventEnum.Vitruvius:
             return new VitruviusLegendaryEvent(characters);
+        case LegendaryEventEnum.Kharn:
+            return new KharnLegendaryEvent(characters);
         default:
             return new ShadowSunLegendaryEvent(characters);
     }
@@ -235,8 +237,7 @@ export const defaultData: IPersonalData2 = {
             upgradesRarity: [],
             slotsCount: [],
         },
-        completedLocations: [],
-        completedShardsLocations: [],
+        raidedLocations: [],
         lastRefreshDateUTC: new Date().toUTCString(),
     },
     autoTeamsPreferences: {

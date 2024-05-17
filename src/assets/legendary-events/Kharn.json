@@ -1,60 +1,60 @@
 ﻿{
-    "id": 5,
-    "name": "Ragnar",
-    "wikiLink": "https://tacticus.fandom.com/wiki/LE-Ragnar",
-    "eventStage": 3,
-    "nextEventDate": "TBA",
-    "nextEventDateUtc": "",
+    "id": 7,
+    "name": "Kharn",
+    "wikiLink": "https://tacticus.fandom.com/wiki/LE-Kharn",
+    "eventStage": 1,
+    "nextEventDate": "June 16",
+    "nextEventDateUtc": "Sun, 16 June 2024 00:00:00 GMT",
     "regularMissions": [
         "Play one Legendary Event Battle, Deal 1000 damage",
-        "Defeat 30 Orks",
-        "Defeat 75 Thousand Sons",
-        "Defeat 100 Black Templars",
-        "Use abilities 15 times with Chaos units, Deal 10k damage with Abilities",
+        "Defeat 30 Ultramarines",
+        "Defeat 75 Tyranids",
+        "Defeat 100 Thousand Sons",
+        "Use abilities 15 times with Chaos  units, Deal 10k damage with Abilities",
         "Use abilities 20 times with Imperial units, Deal 15k damage with Abilities",
         "Use abilities 25 times with Xenos units, Deal 20k damage with Abilities",
-        "Play 3 Legendary Event Battles, Deal 25k Bolter damage",
-        "Play 3 Legendary Event Battles, Deal 25k Physical damage",
-        "Play 3 Legendary Event Battles, Deal 25k Piercing damage"
+        "Play 3 Legendary Event Battles, Deal 25k Piercing damage",
+        "Play 3 Legendary Event Battles, Deal 25k Flame damage",
+        "Play 3 Legendary Event Battles, Deal 25k Physical damage"
     ],
     "premiumMissions": [
         "Win 1 battle without Summoning any units",
-        "Defeat 30 enemies with Chaos units",
-        "Defeat 75 enemies with Imperial units",
-        "Defeat 100 enemies with Xenos units",
-        "Win 5 battles without deploying any Psyker characters",
+        "Defeat 30 enemies with Xenos units",
+        "Defeat 75 enemies with Chaos units",
+        "Defeat 100 enemies with Imperial units",
+        "Win 5 battles without deploying any Psyker Resilient characters",
+        "Win 5 battles without deploying any Terminator Armour characters",
         "Win 5 battles without deploying any Mechanical characters",
-        "Win 5 battles without deploying any Flying characters",
-        "Defeat 75 enemies with Bolter Damage",
-        "Defeat 75 enemies with Physical Damage",
-        "Defeat 75 enemies with Piercing Damage"
+        "Defeat 75 enemies with Piercing Damage",
+        "Defeat 75 enemies with Flame Damage",
+        "Defeat 75 enemies with Physical Damage"
     ],
     "alpha": {
-        "name": "Alpha (No Xenos)",
+        "name": "Alpha (No Imperials)",
         "enemies": {
-            "label": "Orks",
-            "link": "https://tacticus.fandom.com/wiki/Orks#NPC_Units"
+            "label": "Ultramarines & Astra Militarum",
+            "link": "https://tacticus.fandom.com/wiki/Ultramarines#NPC_Units"
         },
-        "killPoints": 24,
-        "battlesPoints": [40, 38, 50, 48, 50, 48, 60, 55, 47, 52, 59, 59]
+        "killPoints": 27,
+        "battlesPoints": [38, 40, 44, 51, 55, 51, 45, 48, 53, 47, 46, 54, 54, 60]
     },
     "beta": {
-        "name": "Beta (No Chaos)",
+        "name": "Beta (No Tyranids)",
+        "enemies": {
+            "label": "Tyranids",
+            "link": "https://tacticus.fandom.com/wiki/Tyranids#NPC_Units"
+        },
+        "killPoints": 35,
+        "battlesPoints": [34, 36, 41, 46, 43, 41, 48, 41, 58, 44, 42, 44, 54, 58]
+    },
+    "gamma": {
+        "name": "Gamma (No Thousand Sons)",
         "enemies": {
             "label": "Thousand Sons",
             "link": "https://tacticus.fandom.com/wiki/Thousand_Sons#NPC_Units"
         },
-        "killPoints": 30,
-        "battlesPoints": [33, 36, 45, 47, 50, 49, 50, 50, 50, 57, 43, 60]
-    },
-    "gamma": {
-        "name": "Gamma (No Imperials)",
-        "enemies": {
-            "label": "Black Templars",
-            "link": "https://tacticus.fandom.com/wiki/Black_Templars#NPC_Units"
-        },
-        "killPoints": 34,
-        "battlesPoints": [28, 35, 39, 43, 40, 57, 43, 50, 58, 48, 50, 55]
+        "killPoints": 39,
+        "battlesPoints": [26, 38, 43, 40, 52, 35, 47, 57, 36, 41, 40, 43, 51, 53]
     },
     "pointsMilestones": [
         {
@@ -195,57 +195,157 @@
         {
             "milestone": 28,
             "cumulativePoints": 13000,
-            "engramPayout": 350
+            "engramPayout": 310
         },
         {
             "milestone": 29,
             "cumulativePoints": 13500,
-            "engramPayout": 400
+            "engramPayout": 320
         },
         {
             "milestone": 30,
             "cumulativePoints": 14000,
-            "engramPayout": 450
+            "engramPayout": 330
         },
         {
             "milestone": 31,
-            "cumulativePoints": 14500,
-            "engramPayout": 500
+            "cumulativePoints": 14250,
+            "engramPayout": 340
         },
         {
             "milestone": 32,
-            "cumulativePoints": 15000,
-            "engramPayout": 550
+            "cumulativePoints": 14500,
+            "engramPayout": 350
         },
         {
             "milestone": 33,
-            "cumulativePoints": 15500,
-            "engramPayout": 600
+            "cumulativePoints": 14750,
+            "engramPayout": 355
         },
         {
             "milestone": 34,
-            "cumulativePoints": 16000,
-            "engramPayout": 650
+            "cumulativePoints": 15000,
+            "engramPayout": 360
         },
         {
             "milestone": 35,
-            "cumulativePoints": 16500,
-            "engramPayout": 700
+            "cumulativePoints": 15250,
+            "engramPayout": 365
         },
         {
             "milestone": 36,
-            "cumulativePoints": 17000,
-            "engramPayout": 800
+            "cumulativePoints": 15500,
+            "engramPayout": 370
         },
         {
             "milestone": 37,
-            "cumulativePoints": 17500,
-            "engramPayout": 1000
+            "cumulativePoints": 15750,
+            "engramPayout": 380
         },
         {
             "milestone": 38,
+            "cumulativePoints": 16000,
+            "engramPayout": 390
+        },
+        {
+            "milestone": 39,
+            "cumulativePoints": 16250,
+            "engramPayout": 400
+        },
+        {
+            "milestone": 40,
+            "cumulativePoints": 16500,
+            "engramPayout": 410
+        },
+        {
+            "milestone": 41,
+            "cumulativePoints": 16750,
+            "engramPayout": 420
+        },
+        {
+            "milestone": 42,
+            "cumulativePoints": 17000,
+            "engramPayout": 430
+        },
+        {
+            "milestone": 43,
+            "cumulativePoints": 17250,
+            "engramPayout": 440
+        },
+        {
+            "milestone": 44,
+            "cumulativePoints": 17500,
+            "engramPayout": 450
+        },
+        {
+            "milestone": 45,
+            "cumulativePoints": 17750,
+            "engramPayout": 460
+        },
+        {
+            "milestone": 46,
             "cumulativePoints": 18000,
-            "engramPayout": 1300
+            "engramPayout": 470
+        },
+        {
+            "milestone": 47,
+            "cumulativePoints": 18250,
+            "engramPayout": 480
+        },
+        {
+            "milestone": 48,
+            "cumulativePoints": 18500,
+            "engramPayout": 490
+        },
+        {
+            "milestone": 49,
+            "cumulativePoints": 18750,
+            "engramPayout": 500
+        },
+        {
+            "milestone": 50,
+            "cumulativePoints": 19000,
+            "engramPayout": 510
+        },
+        {
+            "milestone": 51,
+            "cumulativePoints": 19250,
+            "engramPayout": 520
+        },
+        {
+            "milestone": 52,
+            "cumulativePoints": 19500,
+            "engramPayout": 530
+        },
+        {
+            "milestone": 53,
+            "cumulativePoints": 19750,
+            "engramPayout": 540
+        },
+        {
+            "milestone": 54,
+            "cumulativePoints": 20000,
+            "engramPayout": 550
+        },
+        {
+            "milestone": 55,
+            "cumulativePoints": 20250,
+            "engramPayout": 560
+        },
+        {
+            "milestone": 56,
+            "cumulativePoints": 20500,
+            "engramPayout": 570
+        },
+        {
+            "milestone": 57,
+            "cumulativePoints": 20750,
+            "engramPayout": 580
+        },
+        {
+            "milestone": 58,
+            "cumulativePoints": 21000,
+            "engramPayout": 590
         }
     ],
     "chestsMilestones": [
@@ -392,10 +492,42 @@
         {
             "chestLevel": 36,
             "engramCost": 400
+        },
+        {
+            "chestLevel": 37,
+            "engramCost": 800
+        },
+        {
+            "chestLevel": 38,
+            "engramCost": 900
+        },
+        {
+            "chestLevel": 39,
+            "engramCost": 1000
+        },
+        {
+            "chestLevel": 40,
+            "engramCost": 1100
+        },
+        {
+            "chestLevel": 41,
+            "engramCost": 1200
+        },
+        {
+            "chestLevel": 42,
+            "engramCost": 1300
+        },
+        {
+            "chestLevel": 43,
+            "engramCost": 1400
+        },
+        {
+            "chestLevel": 44,
+            "engramCost": 1500
         }
     ],
     "shardsPerChest": 25,
-    "battlesCount": 12,
+    "battlesCount": 14,
     "constraintsCount": 7,
     "progression": {
         "unlock": 400,

@@ -3,10 +3,10 @@
     ICharacterUnlockGoal,
     IEstimatedAscensionSettings,
     IEstimatedShards,
-    ILocationRaid,
-    IMaterial,
-    IMaterialEstimate,
+    IShardMaterial,
+    ICharacterShardsEstimate,
     IShardsRaid,
+    IItemRaidLocation,
 } from 'src/v2/features/goals/goals.models';
 import { ICampaignBattleComposed, ICampaignsProgress } from 'src/models/interfaces';
 import { charsProgression, charsUnlockShards, rarityToStars } from 'src/models/constants';
@@ -22,7 +22,7 @@ export class ShardsService {
     ): IEstimatedShards {
         const materials = this.convertGoalsToMaterials(settings, goals);
 
-        const shardsRaids = this.getTodayRaids(materials, settings.completedLocations);
+        const shardsRaids = this.getTodayRaids(materials, settings.raidedLocations);
 
         const energyTotal = sum(materials.map(material => material.energyTotal));
         const energyPerDay = sum(materials.map(material => material.energyPerDay));
@@ -44,15 +44,15 @@ export class ShardsService {
     public static convertGoalsToMaterials(
         settings: IEstimatedAscensionSettings,
         goals: Array<ICharacterAscendGoal | ICharacterUnlockGoal>
-    ): IMaterialEstimate[] {
+    ): ICharacterShardsEstimate[] {
         const materials = goals
             .map(goal => this.convertGoalToMaterial(goal))
-            .filter(x => x.ownedCount < x.requiredCount);
-        const result: IMaterialEstimate[] = [];
+            .filter(x => x.acquiredCount < x.requiredCount);
+        const result: ICharacterShardsEstimate[] = [];
 
         for (let i = 0; i < materials.length; i++) {
             const material = materials[i];
-            const previousShardsTokens = result[i - 1]?.onslaughtTokensTotal ?? 0;
+            const previousShardsTokens = sum(result.filter((_, index) => index < i).map(x => x.onslaughtTokensTotal));
             const unlockedLocations = material.possibleLocations.filter(location => {
                 const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
                 return location.nodeNumber <= campaignProgress;
@@ -81,7 +81,7 @@ export class ShardsService {
             }
 
             const isBlocked = !raidsLocations.length;
-            const shardsLeft = material.requiredCount - material.ownedCount;
+            const shardsLeft = material.requiredCount - material.acquiredCount;
             let energyTotal = 0;
             let raidsTotal = 0;
             let shardsCollected = 0;
@@ -90,6 +90,10 @@ export class ShardsService {
             while (!isBlocked && shardsCollected < shardsLeft) {
                 let leftToCollect = shardsLeft - shardsCollected;
                 for (const location of raidsLocations) {
+                    if (leftToCollect <= 0) {
+                        break;
+                    }
+
                     if (location.campaignType === 'Onslaught') {
                         if (daysTotal <= previousShardsTokens / 1.5) {
                             continue;
@@ -141,7 +145,7 @@ export class ShardsService {
         return result;
     }
 
-    private static getOnslaughtLocation(material: IMaterial, nodeNumber: 1 | 2 | 3) {
+    private static getOnslaughtLocation(material: IShardMaterial, nodeNumber: 1 | 2 | 3) {
         const onslaughtMaxTokens = 3;
         const onslaughtTokenRefreshHours = 16;
         const onslaughtTokensPerDay = 24 / onslaughtTokenRefreshHours;
@@ -169,7 +173,7 @@ export class ShardsService {
         return onslaughtLocation;
     }
 
-    private static convertGoalToMaterial(goal: ICharacterAscendGoal | ICharacterUnlockGoal): IMaterial {
+    private static convertGoalToMaterial(goal: ICharacterAscendGoal | ICharacterUnlockGoal): IShardMaterial {
         const targetShards =
             goal.type === PersonalGoalType.Ascend ? this.getTargetShards(goal) : charsUnlockShards[goal.rarity];
         const possibleLocations = StaticDataService.getItemLocations(goal.characterName);
@@ -178,7 +182,7 @@ export class ShardsService {
             goalId: goal.goalId,
             characterId: goal.characterName,
             label: goal.characterName,
-            ownedCount: goal.shards,
+            acquiredCount: goal.shards,
             requiredCount: targetShards,
             iconPath: goal.characterIcon,
             relatedCharacters: [goal.characterName],
@@ -188,18 +192,20 @@ export class ShardsService {
         };
     }
 
-    private static getTodayRaids(materials: IMaterialEstimate[], completedLocations: string[]): IShardsRaid[] {
+    private static getTodayRaids(
+        materials: ICharacterShardsEstimate[],
+        completedLocations: IItemRaidLocation[]
+    ): IShardsRaid[] {
         const result: IShardsRaid[] = [];
 
         for (const material of materials) {
-            const locations: ILocationRaid[] = material.raidsLocations.map(location => ({
-                id: location.id,
-                campaign: location.campaign,
-                battleNumber: location.nodeNumber,
+            const locations: IItemRaidLocation[] = material.raidsLocations.map(location => ({
+                ...location,
                 raidsCount: Math.ceil(location.dailyBattleCount),
                 farmedItems: location.itemsPerDay,
                 energySpent: location.energyPerDay,
-                isCompleted: completedLocations.some(locationId => locationId === location.id),
+                isCompleted: completedLocations.some(clocation => clocation.id === location.id),
+                isShardsLocation: true,
             }));
 
             const materialRaid: IShardsRaid = {

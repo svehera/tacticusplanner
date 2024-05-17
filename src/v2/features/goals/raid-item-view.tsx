@@ -1,9 +1,9 @@
-﻿import { IRaidLocation } from 'src/models/interfaces';
-import React from 'react';
+﻿import React from 'react';
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
+import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 
 interface Props {
-    location: IRaidLocation;
+    location: IItemRaidLocation;
 }
 
 export const RaidItemView: React.FC<Props> = ({ location }) => {
@@ -12,8 +12,7 @@ export const RaidItemView: React.FC<Props> = ({ location }) => {
             <CampaignImage campaign={location.campaign} size={30} />
             <div className="flex-box column start">
                 <span>
-                    <span className="italic">({location.raidsCount}x)</span> Battle{' '}
-                    <span className="bold">{location.battleNumber}</span>
+                    Battle <span className="bold">{location.nodeNumber}</span>
                 </span>
                 <span style={{ fontSize: 12 }}>{location.campaign}</span>
             </div>
