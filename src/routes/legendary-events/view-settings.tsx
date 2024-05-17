@@ -183,6 +183,12 @@ const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
             value: viewPreferences.inventoryShowAlphabet,
             disabled: false,
         },
+        {
+            label: 'Show "-/+"',
+            key: 'inventoryShowPlusMinus',
+            value: viewPreferences.inventoryShowPlusMinus,
+            disabled: false,
+        },
     ];
 
     return (

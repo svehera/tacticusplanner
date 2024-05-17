@@ -15,7 +15,8 @@ import { ShardsRaidsDayInput } from 'src/v2/features/goals/shards-raids-day-inpu
 import { RaidsDayView } from 'src/v2/features/goals/raids-day-view';
 import { IEstimatedShards, IEstimatedUpgrades } from 'src/v2/features/goals/goals.models';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import { InventoryItem } from 'src/v2/features/inventory/inventory-item';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import { Inventory } from 'src/routes/inventory';
 
 interface Props {
     estimatedShards: IEstimatedShards;
@@ -98,12 +99,25 @@ export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, up
                 </FlexBox>
             </AccordionSummary>
             <AccordionDetails>
+                {!!estimatedRanks.relatedUpgrades.length && (
+                    <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                            <div className="flex-box gap5" style={{ fontSize: isMobile ? 16 : 20 }}>
+                                <InventoryIcon />
+                                <b>{estimatedRanks.relatedUpgrades.length}</b> related upgrades (Inventory)
+                            </div>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Inventory itemsFilter={estimatedRanks.relatedUpgrades} />
+                        </AccordionDetails>
+                    </Accordion>
+                )}
                 {!!estimatedRanks.inProgressMaterials.length && (
                     <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <div className="flex-box gap5" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <PendingIcon color={'primary'} />
-                                <b>{estimatedRanks.inProgressMaterials.length}</b> in progress materials
+                                <b>{estimatedRanks.inProgressMaterials.length}</b> in progress upgrades
                             </div>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -116,36 +130,12 @@ export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, up
                         </AccordionDetails>
                     </Accordion>
                 )}
-                {!!estimatedRanks.craftedUpgrades.length && (
-                    <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <div className="flex-box gap5" style={{ fontSize: isMobile ? 16 : 20 }}>
-                                <CheckCircleIcon color={'success'} />
-                                <b>{estimatedRanks.craftedUpgrades.length}</b> contributed crafted upgrades
-                            </div>
-                        </AccordionSummary>
-                        <AccordionDetails>
-                            <div className="flex-box gap20 center wrap">
-                                {estimatedRanks.craftedUpgrades.map(x => (
-                                    <InventoryItem
-                                        key={x.id}
-                                        label={x.label}
-                                        rarity={x.rarity}
-                                        iconPath={x.iconPath}
-                                        quantity={upgrades[x.id] ?? 0}
-                                        quantityChange={value => updateInventory(x.id, value)}
-                                    />
-                                ))}
-                            </div>
-                        </AccordionDetails>
-                    </Accordion>
-                )}
                 {!!estimatedRanks.finishedMaterials.length && (
                     <Accordion TransitionProps={{ unmountOnExit: !grid3Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <div className="flex-box gap5" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <CheckCircleIcon color={'success'} /> <b>{estimatedRanks.finishedMaterials.length}</b>{' '}
-                                finished materials
+                                finished upgrades
                             </div>
                         </AccordionSummary>
                         <AccordionDetails>
@@ -162,10 +152,10 @@ export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, up
                     <Accordion TransitionProps={{ unmountOnExit: !grid2Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <AccessibleTooltip
-                                title={`You don't any have location for ${estimatedRanks.blockedMaterials.length} materials`}>
+                                title={`You don't any have location for ${estimatedRanks.blockedMaterials.length} upgrades`}>
                                 <div className="flex-box gap5" style={{ fontSize: isMobile ? 16 : 20 }}>
                                     <Warning color={'warning'} />
-                                    <b>{estimatedRanks.blockedMaterials.length}</b> blocked materials
+                                    <b>{estimatedRanks.blockedMaterials.length}</b> blocked upgrades
                                 </div>
                             </AccessibleTooltip>
                         </AccordionSummary>

@@ -267,6 +267,7 @@ export const defaultData: IPersonalData2 = {
         showCharacterLevel: true,
         showCharacterRarity: true,
         inventoryShowAlphabet: true,
+        inventoryShowPlusMinus: true,
         goalsTableView: false,
     },
     dailyRaidsPreferences: {

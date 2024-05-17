@@ -29,7 +29,7 @@ interface ITableRow {
     alphabet: string;
 }
 
-export const Inventory = () => {
+export const Inventory = ({ itemsFilter = [] }: { itemsFilter?: string[] }) => {
     const dispatch = useContext(DispatchContext);
     const { inventory, viewPreferences } = useContext(StoreContext);
 
@@ -39,7 +39,7 @@ export const Inventory = () => {
     const itemsList = useMemo<ITableRow[]>(() => {
         return orderBy(
             Object.values(StaticDataService.recipeData)
-                .filter(item => item.stat !== 'Shard')
+                .filter(item => item.stat !== 'Shard' && (!itemsFilter.length || itemsFilter.includes(item.material)))
                 .map(x => ({
                     material: x.material,
                     label: x.label ?? x.material,
@@ -89,8 +89,26 @@ export const Inventory = () => {
         });
     };
 
+    const increment = (data: ITableRow) => {
+        data.quantity = Math.min(data.quantity + 1, 1000);
+        dispatch.inventory({
+            type: 'UpdateUpgradeQuantity',
+            upgrade: data.material,
+            value: data.quantity,
+        });
+    };
+
+    const decrement = (data: ITableRow) => {
+        data.quantity = Math.max(data.quantity - 1, 0);
+        dispatch.inventory({
+            type: 'UpdateUpgradeQuantity',
+            upgrade: data.material,
+            value: data.quantity,
+        });
+    };
+
     const resetUpgrades = (): void => {
-        const result = confirm('All item quantity will be set to zero (0)');
+        const result = confirm('All items quantity will be set to zero (0)');
         if (result) {
             dispatch.inventory({
                 type: 'ResetUpgrades',
@@ -119,6 +137,16 @@ export const Inventory = () => {
                     className: 'item-quantity-input',
                 }}
             />
+            {viewPreferences.inventoryShowPlusMinus && (
+                <div>
+                    <Button size="small" className="item-quantity-button" onClick={() => decrement(data)}>
+                        -
+                    </Button>
+                    <Button size="small" className="item-quantity-button" onClick={() => increment(data)}>
+                        +
+                    </Button>
+                </div>
+            )}
         </div>
     );
 

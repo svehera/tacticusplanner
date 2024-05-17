@@ -389,6 +389,7 @@ export interface IViewPreferences {
     showCharacterLevel: boolean;
     showCharacterRarity: boolean;
     inventoryShowAlphabet: boolean;
+    inventoryShowPlusMinus: boolean;
     goalsTableView: boolean;
 }
 

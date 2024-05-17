@@ -114,7 +114,7 @@ export interface IEstimatedUpgrades {
     finishedMaterials: ICharacterUpgradeEstimate[];
     characters: ICharacterUpgrade[];
     byCharactersPriority: ICharacterUpgradeRankEstimate[];
-    craftedUpgrades: ICraftedUpgrade[];
+    relatedUpgrades: string[];
     energyTotal: number;
     raidsTotal: number;
     daysTotal: number;
@@ -143,7 +143,7 @@ export interface ICharacterUpgrade {
     label: string;
     upgradeRanks: ICharacterUpgradeRank[];
     baseUpgradesTotal: Record<string, number>;
-    usedCraftedUpgrades: string[];
+    relatedUpgrades: string[];
 }
 
 export interface ICharacterUpgradeRank {

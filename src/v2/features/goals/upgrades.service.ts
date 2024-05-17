@@ -55,10 +55,7 @@ export class UpgradesService {
         const combinedBaseMaterials = this.combineBaseMaterials(characters);
         this.populateLocationsData(combinedBaseMaterials, settings);
 
-        const craftedUpgrades = uniq(characters.flatMap(ranksUpgrade => ranksUpgrade.usedCraftedUpgrades)).map(
-            upgradeId => this.craftedUpgradesData[upgradeId]
-        );
-
+        const relatedUpgrades = uniq(characters.flatMap(ranksUpgrade => ranksUpgrade.relatedUpgrades));
         let allMaterials: ICharacterUpgradeEstimate[];
         let byCharactersPriority: ICharacterUpgradeRankEstimate[] = [];
 
@@ -84,7 +81,7 @@ export class UpgradesService {
             inProgressMaterials,
             blockedMaterials,
             finishedMaterials,
-            craftedUpgrades,
+            relatedUpgrades,
             byCharactersPriority,
             daysTotal: upgradesRaids.length,
             energyTotal,
@@ -251,9 +248,9 @@ export class UpgradesService {
         goals: Array<ICharacterUpgradeRankGoal>
     ): ICharacterUpgrade[] {
         return goals.map(goal => {
-            const usedCraftedUpgrades: string[] = [];
             const upgradeRanks = this.getUpgradeRank(goal);
-            const baseUpgradesTotal = this.getBaseUpgradesTotal(upgradeRanks, inventoryUpgrades, usedCraftedUpgrades);
+            const baseUpgradesTotal = this.getBaseUpgradesTotal(upgradeRanks, inventoryUpgrades);
+
             if (goal.upgradesRarity.length) {
                 // remove upgrades that do not match to selected rarities
                 for (const upgradeId in baseUpgradesTotal) {
@@ -264,13 +261,16 @@ export class UpgradesService {
                 }
             }
 
+            const relatedUpgrades: string[] = upgradeRanks.flatMap(x => x.upgrades);
+            relatedUpgrades.push(...Object.keys(baseUpgradesTotal));
+
             return {
                 goalId: goal.goalId,
                 characterId: goal.characterName,
                 label: goal.characterName,
                 upgradeRanks,
                 baseUpgradesTotal,
-                usedCraftedUpgrades,
+                relatedUpgrades,
             };
         });
     }
@@ -522,8 +522,7 @@ export class UpgradesService {
 
     private static getBaseUpgradesTotal(
         upgradeRanks: ICharacterUpgradeRank[],
-        inventoryUpgrades: Record<string, number>,
-        usedCraftedUpgrades: string[]
+        inventoryUpgrades: Record<string, number>
     ): Record<string, number> {
         const baseUpgradesTotal: Record<string, number> = {};
         const craftedUpgradesRankLevel: Record<string, number> = {};
@@ -549,7 +548,6 @@ export class UpgradesService {
             const requiredCount = craftedUpgradesRankLevel[craftedUpgrade];
             if (acquiredCount >= requiredCount) {
                 inventoryUpgrades[craftedUpgrade] = acquiredCount - requiredCount;
-                usedCraftedUpgrades.push(craftedUpgrade);
                 delete craftedUpgradesRankLevel[craftedUpgrade];
                 continue;
             }
@@ -557,7 +555,6 @@ export class UpgradesService {
             if (acquiredCount > 0 && acquiredCount < requiredCount) {
                 inventoryUpgrades[craftedUpgrade] = 0;
                 craftedUpgradesRankLevel[craftedUpgrade] = requiredCount - acquiredCount;
-                usedCraftedUpgrades.push(craftedUpgrade);
             }
 
             const craftedUpgradeData = this.craftedUpgradesData[craftedUpgrade];
