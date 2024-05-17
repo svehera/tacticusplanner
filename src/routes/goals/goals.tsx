@@ -1,24 +1,17 @@
 ﻿import React, { useContext, useMemo, useState } from 'react';
-import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
-import { EditGoalDialog } from '../../shared-components/goals/edit-goal-dialog';
-import { ICharacter2 } from '../../models/interfaces';
-import { PersonalGoalType, Rank } from '../../models/enums';
+import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
+import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
+import { ICharacter2 } from 'src/models/interfaces';
+import { Rank } from 'src/models/enums';
 
-import { DispatchContext, StoreContext } from '../../reducers/store.provider';
-import { StaticDataService } from '../../services';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import Button from '@mui/material/Button';
 import LinkIcon from '@mui/icons-material/Link';
 import { GoalCard } from 'src/routes/goals/goal-card';
 import { GoalsService } from 'src/v2/features/goals/goals.service';
-import {
-    CharacterRaidGoalSelect,
-    ICharacterAscendGoal,
-    ICharacterUnlockGoal,
-    ICharacterUpgradeRankGoal,
-    IGoalEstimate,
-} from 'src/v2/features/goals/goals.models';
+import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
 import { FormControlLabel, Switch } from '@mui/material';
 import GridViewIcon from '@mui/icons-material/GridView';
@@ -38,28 +31,9 @@ export const Goals = () => {
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
     const [editCharacter, setEditCharacter] = useState<ICharacter2>(characters[0]);
 
-    const typedGoals = useMemo<CharacterRaidGoalSelect[]>(() => {
-        return goals
-            .filter(g =>
-                [PersonalGoalType.UpgradeRank, PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(g.type)
-            )
-            .map(g => {
-                const relatedCharacter = characters.find(x => x.name === g.character);
-
-                return GoalsService.convertToTypedGoal(g, relatedCharacter);
-            })
-            .filter(g => !!g) as CharacterRaidGoalSelect[];
+    const { allGoals, shardsGoals, upgradeRankGoals } = useMemo(() => {
+        return GoalsService.prepareGoals(goals, characters);
     }, [goals, characters]);
-
-    const upgradesGoals = typedGoals.filter(
-        g => g.type === PersonalGoalType.UpgradeRank
-    ) as ICharacterUpgradeRankGoal[];
-
-    const ascendGoals = typedGoals.filter(g => g.type === PersonalGoalType.Ascend) as ICharacterAscendGoal[];
-
-    const unlockGoals = typedGoals.filter(g => g.type === PersonalGoalType.Unlock) as ICharacterUnlockGoal[];
-
-    const shardsGoals = [...ascendGoals, ...unlockGoals] as Array<ICharacterAscendGoal | ICharacterUnlockGoal>;
 
     const estimatedShardsTotal = useMemo(() => {
         return ShardsService.getShardsEstimatedDays(
@@ -70,20 +44,25 @@ export const Goals = () => {
             },
             ...shardsGoals
         );
-    }, [typedGoals]);
+    }, [shardsGoals]);
 
     const estimatedUpgradesTotal = useMemo(() => {
         return UpgradesService.getUpgradesEstimatedDays(
             {
-                dailyEnergy: dailyRaidsPreferences.dailyEnergy - Math.min(estimatedShardsTotal.energyPerDay, 90),
+                dailyEnergy:
+                    dailyRaidsPreferences.dailyEnergy -
+                    Math.min(
+                        estimatedShardsTotal.energyPerDay + dailyRaidsPreferences.shardsEnergy,
+                        dailyRaidsPreferences.dailyEnergy - 100
+                    ),
                 campaignsProgress: campaignsProgress,
                 preferences: { ...dailyRaidsPreferences, farmByPriorityOrder: true },
                 upgrades: inventory.upgrades,
                 completedLocations: [],
             },
-            ...upgradesGoals
+            ...upgradeRankGoals
         );
-    }, [typedGoals, estimatedShardsTotal.energyPerDay]);
+    }, [upgradeRankGoals, estimatedShardsTotal.energyPerDay]);
 
     const removeGoal = (goalId: string): void => {
         dispatch.goals({ type: 'Delete', goalId });
@@ -101,7 +80,7 @@ export const Goals = () => {
         }
 
         if (item === 'edit') {
-            const goal = typedGoals.find(x => x.goalId === goalId);
+            const goal = allGoals.find(x => x.goalId === goalId);
             const relatedCharacter = characters.find(x => x.name === goal?.characterName);
             if (relatedCharacter && goal) {
                 setEditCharacter(relatedCharacter);
@@ -137,8 +116,8 @@ export const Goals = () => {
             result.push(...goalsEstimate);
         }
 
-        if (upgradesGoals.length) {
-            const goalsEstimate = upgradesGoals.map(goal => {
+        if (upgradeRankGoals.length) {
+            const goalsEstimate = upgradeRankGoals.map(goal => {
                 const goalEstimate = estimatedUpgradesTotal.byCharactersPriority.find(x => x.goalId === goal.goalId);
                 const firstFarmDay = estimatedUpgradesTotal.upgradesRaids.findIndex(x =>
                     x.raids.flatMap(raid => raid.relatedCharacters).includes(goal.characterName)
@@ -165,7 +144,7 @@ export const Goals = () => {
         }
 
         return result;
-    }, [shardsGoals, upgradesGoals]);
+    }, [shardsGoals, upgradeRankGoals]);
 
     const totalXp = sum(goalsEstimate.filter(x => !!x.xpEstimate).map(x => x.xpEstimate!.legendaryBooks));
 
@@ -202,7 +181,7 @@ export const Goals = () => {
                 />
             </div>
 
-            {!!upgradesGoals.length && (
+            {!!upgradeRankGoals.length && (
                 <div>
                     <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
                         <span>
@@ -218,7 +197,7 @@ export const Goals = () => {
                     </div>
                     {!viewPreferences.goalsTableView && (
                         <div className="flex-box gap10 wrap goals" style={{ alignItems: 'unset' }}>
-                            {upgradesGoals.map(goal => (
+                            {upgradeRankGoals.map(goal => (
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
@@ -231,7 +210,7 @@ export const Goals = () => {
 
                     {viewPreferences.goalsTableView && (
                         <GoalsTable
-                            rows={upgradesGoals}
+                            rows={upgradeRankGoals}
                             estimate={goalsEstimate}
                             menuItemSelect={handleMenuItemSelect}
                         />

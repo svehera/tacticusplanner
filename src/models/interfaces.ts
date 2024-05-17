@@ -402,6 +402,7 @@ export interface IAutoTeamsPreferences {
 
 export interface IDailyRaidsPreferences {
     dailyEnergy: number;
+    shardsEnergy: number;
     farmByPriorityOrder: boolean;
     useMostEfficientNodes: boolean;
     useMoreEfficientNodes: boolean;

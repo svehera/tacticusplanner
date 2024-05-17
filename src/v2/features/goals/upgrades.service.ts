@@ -29,7 +29,7 @@ import {
 import { rarityStringToNumber } from 'src/models/constants';
 import { Rank, Rarity, RarityString } from 'src/models/enums';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
-import { cloneDeep, groupBy, orderBy, sum, uniq } from 'lodash';
+import { cloneDeep, groupBy, orderBy, sum, uniq, uniqBy } from 'lodash';
 
 import rankUpData from 'src/assets/rankUpData.json';
 import recipeData from 'src/v2/data/recipeData.json';
@@ -113,8 +113,9 @@ export class UpgradesService {
             const isFirstDay = iteration === 0;
             const raids: IUpgradeRaid[] = [];
             let energyLeft = settings.dailyEnergy;
+
             if (isFirstDay && raidedUpgrades.length) {
-                for (const raidedUpgrade of raidedUpgrades) {
+                for (const raidedUpgrade of uniqBy(raidedUpgrades, 'id')) {
                     const raidLocations = settings.completedLocations.filter(x =>
                         raidedUpgrade.locations.some(location => location.id === x.id)
                     );

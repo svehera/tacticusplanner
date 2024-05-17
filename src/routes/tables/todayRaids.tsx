@@ -34,7 +34,7 @@ export const TodayRaids: React.FC<Props> = ({
 
     return (
         <>
-            <p style={{ fontSize: isMobile ? '1rem' : '1.2rem' }}>
+            <p style={{ fontSize: isMobile ? 16 : 20 }}>
                 Today (<b>{energySpent}</b> <MiscIcon icon={'energy'} height={15} width={15} /> spent |{' '}
                 <b>{raidsCount}</b> raids done)
             </p>
@@ -44,8 +44,8 @@ export const TodayRaids: React.FC<Props> = ({
                         <ShardsItemInput shardsRaid={shardsRaid} handleAdd={addShards} />
                     </div>
                 ))}
-                {upgradesRaids.map(raid => (
-                    <div className="item-raids" key={raid.id}>
+                {upgradesRaids.map((raid, index) => (
+                    <div className="item-raids" key={raid.id + index}>
                         <MaterialItemInput
                             acquiredCount={raid.acquiredCount ?? 0}
                             upgradeRaid={raid}

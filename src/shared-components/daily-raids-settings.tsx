@@ -9,6 +9,7 @@ import {
     FormLabel,
     RadioGroup,
     Radio,
+    Input,
 } from '@mui/material';
 import { IDailyRaidsPreferences } from '../models/interfaces';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
@@ -22,6 +23,7 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
     const { dailyRaidsPreferences } = useContext(StoreContext);
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
     const [dailyEnergy, setDailyEnergy] = React.useState(dailyRaidsPreferences.dailyEnergy);
+    const [shardsEnergy, setShardsEnergy] = React.useState<number | string>(dailyRaidsPreferences.shardsEnergy);
 
     const updatePreferences = useCallback((setting: keyof IDailyRaidsPreferences, value: boolean) => {
         setDailyRaidsPreferencesForm(curr => ({ ...curr, [setting]: value }));
@@ -32,6 +34,13 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
             setDailyEnergy(value);
             setDailyRaidsPreferencesForm(curr => ({ ...curr, dailyEnergy: value }));
         }
+    };
+
+    const handleShardsEnergyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const rawValue = event.target.value;
+        const value = event.target.value === '' ? 0 : Number(event.target.value);
+        setShardsEnergy(rawValue);
+        setDailyRaidsPreferencesForm(curr => ({ ...curr, shardsEnergy: value }));
     };
 
     const saveChanges = () => {
@@ -91,6 +100,23 @@ const DailyRaidsSettings = ({ close }: { close: () => void }) => {
                     marks={energyMarks}
                 />
             </Box>
+
+            <FormControlLabel
+                control={
+                    <Input
+                        value={shardsEnergy}
+                        size="small"
+                        onChange={handleShardsEnergyChange}
+                        inputProps={{
+                            step: 1,
+                            min: 0,
+                            max: 200,
+                            type: 'number',
+                        }}
+                    />
+                }
+                label="Characters shards energy"
+            />
 
             <FormControlLabel
                 style={{ marginTop: 20 }}
