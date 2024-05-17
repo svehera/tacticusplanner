@@ -22,6 +22,7 @@ import { useGetSharedRoster } from 'src/v2/features/share/share-roster.endpoints
 import { StoreContext } from 'src/reducers/store.provider';
 import { GlobalState } from 'src/models/global-state';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
 
 export const SharedRoster = () => {
     const { viewPreferences } = useContext(StoreContext);
@@ -77,7 +78,9 @@ export const SharedRoster = () => {
                     showCharacterLevel: viewPreferences.showCharacterLevel,
                     showCharacterRarity: viewPreferences.showCharacterRarity,
                 }}>
-                <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter} />
+                <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
+                    <TeamGraph characters={charactersFiltered} />
+                </RosterHeader>
                 <ViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
 
                 <Conditional condition={isFactionsView(viewControls.orderBy)}>

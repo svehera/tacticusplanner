@@ -9,8 +9,14 @@ import IconButton from '@mui/material/IconButton';
 
 import { ResponsiveLine } from '@nivo/line';
 import { InfoTeamGraphBox } from './info-team-graph-box';
+import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
+import { ICharacter2 } from 'src/models/interfaces';
 
-export const TeamGraph: React.FC<{ data: { id: string; data: { x: string; y: number }[] }[] }> = ({ data }) => {
+interface Props {
+    characters: ICharacter2[];
+}
+
+export const TeamGraph: React.FC<Props> = ({ characters }) => {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -20,6 +26,39 @@ export const TeamGraph: React.FC<{ data: { id: string; data: { x: string; y: num
     const handleClose = () => {
         setOpen(false);
     };
+
+    // For the power graph
+    const teamPowerData: { x: string; y: number }[] = [];
+    const teamAttributeData: { x: string; y: number }[] = [];
+    const teamAbilityData: { x: string; y: number }[] = [];
+    characters.forEach(character => {
+        const power = CharactersPowerService.getCharacterPower(character);
+        const attributePower = CharactersPowerService.getCharacterAttributePower(character);
+        const abilityPower = CharactersPowerService.getCharacterAbilityPower(character);
+
+        teamPowerData.push({ x: character.name, y: power });
+        teamAttributeData.push({ x: character.name, y: attributePower });
+        teamAbilityData.push({ x: character.name, y: abilityPower });
+    });
+
+    const sortByPower = (a: { x: string; y: number }, b: { x: string; y: number }) => b.y - a.y;
+    teamPowerData.sort(sortByPower);
+    teamAttributeData.sort((a, b) => {
+        const aIndex = teamPowerData.findIndex(item => item.x === a.x);
+        const bIndex = teamPowerData.findIndex(item => item.x === b.x);
+        return sortByPower(teamPowerData[aIndex], teamPowerData[bIndex]);
+    });
+    teamAbilityData.sort((a, b) => {
+        const aIndex = teamPowerData.findIndex(item => item.x === a.x);
+        const bIndex = teamPowerData.findIndex(item => item.x === b.x);
+        return sortByPower(teamPowerData[aIndex], teamPowerData[bIndex]);
+    });
+
+    const data = [
+        { id: 'Attribute', data: teamAttributeData },
+        { id: 'Power', data: teamPowerData },
+    ];
+
     return (
         <>
             <IconButton onClick={handleClickOpen}>
