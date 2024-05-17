@@ -8,6 +8,7 @@
   "dependencies": {
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.4",
+    "@nivo/line": "^0.87.0",
     "ag-grid-community": "^31.1.1",
     "ag-grid-react": "^31.1.1",
     "axios": "^1.5.0",

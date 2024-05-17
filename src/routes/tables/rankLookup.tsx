@@ -142,6 +142,7 @@ export const RankLookup = () => {
                         useMostEfficientNodes: true,
                         farmByPriorityOrder: false,
                         dailyEnergy: 0,
+                        shardsEnergy: 0,
                     },
                 },
                 upgrades
