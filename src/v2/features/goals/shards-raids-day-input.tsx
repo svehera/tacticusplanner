@@ -10,10 +10,10 @@ import { CampaignImage } from 'src/v2/components/images/campaign-image';
 
 interface Props {
     shardRaids: IShardsRaid;
-    handleAdd: (shardId: string, value: number, location: IItemRaidLocation) => void;
+    // handleAdd: (shardId: string, value: number, location: IItemRaidLocation) => void;
 }
 
-export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids, handleAdd }) => {
+export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids }) => {
     const calendarDate: string = useMemo(() => {
         const nextDate = new Date();
         nextDate.setDate(nextDate.getDate() + shardRaids.daysTotal);
@@ -22,7 +22,7 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids, handleAdd }) 
     }, [shardRaids.daysTotal]);
 
     const handleAddCount = (value: number, location: IItemRaidLocation) => {
-        handleAdd(shardRaids.characterId, value, location);
+        // handleAdd(shardRaids.characterId, value, location);
         shardRaids.acquiredCount += value;
         location.isCompleted = true;
     };
