@@ -61,12 +61,6 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids }) => {
             <CardContent>
                 <ul style={{ paddingInlineStart: 15 }}>
                     {shardRaids.locations.map(location => {
-                        const maxObtained = Math.round(location.farmedItems);
-                        const defaultItemsObtained =
-                            maxObtained + shardRaids.acquiredCount > shardRaids.requiredCount
-                                ? shardRaids.requiredCount - shardRaids.acquiredCount
-                                : maxObtained;
-
                         return (
                             <li
                                 key={location.campaign + location.nodeNumber}
@@ -76,11 +70,6 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids }) => {
                                     opacity: location.isCompleted ? 0.5 : 1,
                                 }}>
                                 <RaidItemView location={location} />
-                                <RaidItemInput
-                                    defaultItemsObtained={defaultItemsObtained}
-                                    isDisabled={!!location.isCompleted}
-                                    addCount={value => handleAddCount(value, location)}
-                                />
                             </li>
                         );
                     })}

@@ -18,6 +18,7 @@ import { ShardsRaidsDayInput } from 'src/v2/features/goals/shards-raids-day-inpu
 import { RaidsDayView } from 'src/v2/features/goals/raids-day-view';
 import { IEstimatedShards, IEstimatedUpgrades } from 'src/v2/features/goals/goals.models';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+import { InventoryItem } from 'src/v2/features/inventory/inventory-item';
 
 interface Props {
     estimatedShards: IEstimatedShards;
@@ -67,9 +68,6 @@ export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, up
         return formatDateWithOrdinal(nextDate);
     }, [estimatedShards.daysTotal]);
 
-    const hasInProgressUpgrades =
-        !!estimatedRanks.inProgressMaterials.length || !!estimatedRanks.craftedUpgrades.length;
-
     const daysTotal = Math.max(estimatedRanks.daysTotal, estimatedShards.daysTotal);
     const energyTotal = estimatedRanks.energyTotal + estimatedShards.energyTotal;
 
@@ -81,10 +79,10 @@ export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, up
     }, [daysTotal]);
 
     return (
-        <Accordion TransitionProps={{ unmountOnExit: true }}>
+        <Accordion>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                    <div className="flex-box gap5 wrap" style={{ fontSize: 20 }}>
+                    <div className="flex-box gap5 wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                         <span>
                             Raids plan (<b>{daysTotal}</b> Days |
                         </span>
@@ -103,38 +101,15 @@ export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, up
                 </FlexBox>
             </AccordionSummary>
             <AccordionDetails>
-                {hasInProgressUpgrades && (
+                {!!estimatedRanks.inProgressMaterials.length && (
                     <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <div className="flex-box gap5" style={{ fontSize: 20 }}>
+                            <div className="flex-box gap5" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <PendingIcon color={'primary'} />
                                 <b>{estimatedRanks.inProgressMaterials.length}</b> in progress materials
                             </div>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <div className="flex-box gap10 wrap">
-                                <Button
-                                    variant={'contained'}
-                                    component={Link}
-                                    to={isMobile ? '/mobile/input/inventory' : '/input/inventory'}>
-                                    <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Inventory</span>
-                                </Button>
-                            </div>
-                            {!!estimatedRanks.craftedUpgrades.length && (
-                                <>
-                                    <h4>Contributed crafted upgrades</h4>
-                                    <div className="flex-box gap10 wrap">
-                                        {estimatedRanks.craftedUpgrades.map(x => (
-                                            <UpgradeImage
-                                                key={x.id}
-                                                material={x.label}
-                                                rarity={x.rarity}
-                                                iconPath={x.iconPath}
-                                            />
-                                        ))}
-                                    </div>
-                                </>
-                            )}
                             <MaterialsTable
                                 rows={estimatedRanks.inProgressMaterials}
                                 updateMaterialQuantity={updateInventory}
@@ -144,10 +119,34 @@ export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, up
                         </AccordionDetails>
                     </Accordion>
                 )}
+                {!!estimatedRanks.craftedUpgrades.length && (
+                    <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                            <div className="flex-box gap5" style={{ fontSize: isMobile ? 16 : 20 }}>
+                                <CheckCircleIcon color={'success'} />
+                                <b>{estimatedRanks.craftedUpgrades.length}</b> contributed crafted upgrades
+                            </div>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <div className="flex-box gap20 center wrap">
+                                {estimatedRanks.craftedUpgrades.map(x => (
+                                    <InventoryItem
+                                        key={x.id}
+                                        label={x.label}
+                                        rarity={x.rarity}
+                                        iconPath={x.iconPath}
+                                        quantity={upgrades[x.id] ?? 0}
+                                        quantityChange={value => updateInventory(x.id, value)}
+                                    />
+                                ))}
+                            </div>
+                        </AccordionDetails>
+                    </Accordion>
+                )}
                 {!!estimatedRanks.finishedMaterials.length && (
                     <Accordion TransitionProps={{ unmountOnExit: !grid3Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <div className="flex-box gap5" style={{ fontSize: 20 }}>
+                            <div className="flex-box gap5" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <CheckCircleIcon color={'success'} /> <b>{estimatedRanks.finishedMaterials.length}</b>{' '}
                                 finished materials
                             </div>
@@ -167,7 +166,7 @@ export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, up
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <AccessibleTooltip
                                 title={`You don't any have location for ${estimatedRanks.blockedMaterials.length} materials`}>
-                                <div className="flex-box gap5" style={{ fontSize: 20 }}>
+                                <div className="flex-box gap5" style={{ fontSize: isMobile ? 16 : 20 }}>
                                     <Warning color={'warning'} />
                                     <b>{estimatedRanks.blockedMaterials.length}</b> blocked materials
                                 </div>
@@ -193,7 +192,7 @@ export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, up
                     <Accordion>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                                <div className="flex-box gap5 wrap" style={{ fontSize: 20 }}>
+                                <div className="flex-box gap5 wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                                     <span>
                                         Shards Raids (<b>{estimatedShards.daysTotal}</b> Days |
                                     </span>
@@ -211,7 +210,7 @@ export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, up
                                 <span className="italic">{shardsCalendarDate}</span>
                             </FlexBox>
                         </AccordionSummary>
-                        <AccordionDetails style={{ maxHeight: '63vh', overflow: 'auto' }}>
+                        <AccordionDetails>
                             <div className="flex-box gap10 wrap start">
                                 {estimatedShards.shardsRaids.map(shardsRaid => (
                                     <ShardsRaidsDayInput key={shardsRaid.characterId} shardRaids={shardsRaid} />
@@ -225,7 +224,7 @@ export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, up
                     <Accordion TransitionProps={{ unmountOnExit: !upgradesPaging.completed }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                                <div className="flex-box gap5 wrap" style={{ fontSize: 20 }}>
+                                <div className="flex-box gap5 wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                                     <span>
                                         Upgrades raids (<b>{estimatedRanks.upgradesRaids.length}</b> Days |
                                     </span>
@@ -240,7 +239,7 @@ export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, up
                                 <span className="italic">{upgradesCalendarDate}</span>
                             </FlexBox>
                         </AccordionSummary>
-                        <AccordionDetails style={{ maxHeight: '63vh', overflow: 'auto' }}>
+                        <AccordionDetails>
                             <div style={{ display: 'flex', gap: 10, overflow: 'auto' }}>
                                 {estimatedRanks.upgradesRaids
                                     .slice(upgradesPaging.start, upgradesPaging.end)

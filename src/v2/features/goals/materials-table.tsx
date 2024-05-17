@@ -90,20 +90,25 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                 },
                 maxWidth: 90,
             },
-
             {
-                field: 'requiredCount',
-                headerName: 'Goal',
+                headerName: 'Left',
                 maxWidth: 75,
-                cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
-                    const { data, value } = params;
-                    if (data && value) {
-                        return `${value} (${data.acquiredCount - value})`;
+                valueGetter: params => {
+                    const { data } = params;
+                    if (data) {
+                        const actualAcquired = inventory[params.data!.id] ?? 0;
+                        return Math.max(0, data.requiredCount - actualAcquired);
                     }
                 },
             },
             {
+                field: 'requiredCount',
+                headerName: 'Goal',
+                maxWidth: 75,
+            },
+            {
                 headerName: 'Estimate',
+                openByDefault: true,
                 children: [
                     {
                         field: 'daysTotal',
@@ -207,9 +212,8 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                         },
                     },
                     {
-                        headerName: 'Available',
+                        headerName: 'Other',
                         columnGroupShow: 'open',
-                        flex: 1,
                         cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
                             const { data } = params;
                             if (data) {
