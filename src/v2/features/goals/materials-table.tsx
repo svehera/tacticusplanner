@@ -156,11 +156,12 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                         cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
                             const locations: ICampaignBattleComposed[] = props.data?.locations ?? [];
                             const usedLocations = locations.filter(x => x.isSelected).length;
+                            const canBeUsedLocations = locations.filter(x => x.isUnlocked && x.isPassFilter).length;
                             const lockedLocations = locations.filter(x => !x.isUnlocked).length;
                             return (
                                 <ul style={{ margin: 0, paddingInlineStart: 20 }}>
                                     <li>
-                                        {usedLocations}/{locations.length} - used
+                                        {usedLocations}/{canBeUsedLocations} - used
                                     </li>
                                     {lockedLocations > 0 && (
                                         <li style={{ color: 'red' }}>{lockedLocations} - locked</li>

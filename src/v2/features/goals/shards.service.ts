@@ -1,16 +1,24 @@
 ﻿import {
     ICharacterAscendGoal,
+    ICharacterShardsEstimate,
     ICharacterUnlockGoal,
     IEstimatedAscensionSettings,
     IEstimatedShards,
-    IShardMaterial,
-    ICharacterShardsEstimate,
-    IShardsRaid,
     IItemRaidLocation,
+    IShardMaterial,
+    IShardsRaid,
 } from 'src/v2/features/goals/goals.models';
 import { ICampaignBattleComposed, ICampaignsProgress } from 'src/models/interfaces';
 import { charsProgression, charsUnlockShards, rarityToStars } from 'src/models/constants';
-import { Alliance, Campaign, CampaignsLocationsUsage, CampaignType, PersonalGoalType, Rarity } from 'src/models/enums';
+import {
+    Alliance,
+    Campaign,
+    CampaignsLocationsUsage,
+    CampaignType,
+    DailyRaidsStrategy,
+    PersonalGoalType,
+    Rarity,
+} from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import { orderBy, sum } from 'lodash';
@@ -60,12 +68,7 @@ export class ShardsService {
 
             const raidsLocations =
                 material.campaignsUsage === CampaignsLocationsUsage.LeastEnergy
-                    ? CampaignsService.selectBestLocations(unlockedLocations, {
-                          ...settings.preferences,
-                          useMostEfficientNodes: true,
-                          useMoreEfficientNodes: false,
-                          useLeastEfficientNodes: false,
-                      })
+                    ? CampaignsService.selectBestLocations(unlockedLocations)
                     : material.campaignsUsage === CampaignsLocationsUsage.BestTime
                     ? unlockedLocations
                     : [];

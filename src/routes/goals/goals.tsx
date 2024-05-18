@@ -32,7 +32,7 @@ export const Goals = () => {
     const [editCharacter, setEditCharacter] = useState<ICharacter2>(characters[0]);
 
     const { allGoals, shardsGoals, upgradeRankGoals } = useMemo(() => {
-        return GoalsService.prepareGoals(goals, characters);
+        return GoalsService.prepareGoals(goals, characters, false);
     }, [goals, characters]);
 
     const estimatedShardsTotal = useMemo(() => {
@@ -152,6 +152,7 @@ export const Goals = () => {
         <div>
             <div className="flex-box gap10 wrap">
                 <Button
+                    size="small"
                     variant={'contained'}
                     component={Link}
                     to={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>

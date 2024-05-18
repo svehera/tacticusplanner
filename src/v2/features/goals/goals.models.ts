@@ -118,6 +118,7 @@ export interface IEstimatedUpgrades {
     energyTotal: number;
     raidsTotal: number;
     daysTotal: number;
+    freeEnergyDays: number;
 }
 
 export interface IUpgradesRaidsDay {

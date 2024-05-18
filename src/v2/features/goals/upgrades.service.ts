@@ -8,9 +8,9 @@
     ICombinedUpgrade,
     ICraftedUpgradeData,
     IEstimatedUpgrades,
+    IItemRaidLocation,
     IRankLookup,
     IUpgradeRaid,
-    IItemRaidLocation,
     IUpgradeRecipe,
     IUpgradesRaidsDay,
 } from 'src/v2/features/goals/goals.models';
@@ -20,16 +20,15 @@ import {
     ICampaignsData,
     ICampaignsProgress,
     IDailyRaidsFilters,
-    IDailyRaidsPreferences,
     IEstimatedRanksSettings,
     IMaterialRecipeIngredient,
     IRankUpData,
     IRecipeData,
 } from 'src/models/interfaces';
 import { rarityStringToNumber } from 'src/models/constants';
-import { Rank, Rarity, RarityString } from 'src/models/enums';
+import { CampaignType, DailyRaidsStrategy, Rank, Rarity, RarityString } from 'src/models/enums';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
-import { cloneDeep, groupBy, orderBy, sum, uniq, uniqBy } from 'lodash';
+import { cloneDeep, groupBy, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
 
 import rankUpData from 'src/assets/rankUpData.json';
 import recipeData from 'src/v2/data/recipeData.json';
@@ -55,7 +54,6 @@ export class UpgradesService {
         const combinedBaseMaterials = this.combineBaseMaterials(characters);
         this.populateLocationsData(combinedBaseMaterials, settings);
 
-        const relatedUpgrades = uniq(characters.flatMap(ranksUpgrade => ranksUpgrade.relatedUpgrades));
         let allMaterials: ICharacterUpgradeEstimate[];
         let byCharactersPriority: ICharacterUpgradeRankEstimate[] = [];
 
@@ -64,16 +62,23 @@ export class UpgradesService {
             allMaterials = byCharactersPriority.flatMap(x => x.upgrades);
         } else {
             allMaterials = this.getTotalEstimates(combinedBaseMaterials, inventoryUpgrades);
+
+            if (settings.preferences.farmStrategy === DailyRaidsStrategy.leastTime) {
+                allMaterials = this.improveEstimates(allMaterials, combinedBaseMaterials, inventoryUpgrades);
+            }
         }
+
+        const upgradesRaids = this.generateDailyRaidsList(settings, allMaterials);
 
         const blockedMaterials = allMaterials.filter(x => x.isBlocked);
         const finishedMaterials = allMaterials.filter(x => x.isFinished);
         const inProgressMaterials = allMaterials.filter(x => !x.isBlocked && !x.isFinished);
 
-        const upgradesRaids = this.generateDailyRaidsList(settings, inProgressMaterials, allMaterials);
-
         const energyTotal = sum(inProgressMaterials.map(material => material.energyTotal));
         const raidsTotal = sum(upgradesRaids.map(day => day.raidsTotal));
+        const freeEnergyDays = upgradesRaids.filter(x => settings.dailyEnergy - x.energyTotal > 60).length;
+
+        const relatedUpgrades = uniq(characters.flatMap(ranksUpgrade => ranksUpgrade.relatedUpgrades));
 
         return {
             upgradesRaids,
@@ -86,12 +91,12 @@ export class UpgradesService {
             daysTotal: upgradesRaids.length,
             energyTotal,
             raidsTotal,
+            freeEnergyDays,
         };
     }
 
     private static generateDailyRaidsList(
         settings: IEstimatedRanksSettings,
-        inProgressUpgrades: ICharacterUpgradeEstimate[],
         allUpgrades: ICharacterUpgradeEstimate[]
     ): IUpgradesRaidsDay[] {
         if (settings.dailyEnergy <= 10) {
@@ -100,7 +105,7 @@ export class UpgradesService {
         const resultDays: IUpgradesRaidsDay[] = [];
 
         let iteration = 0;
-        let upgradesToFarm = inProgressUpgrades.filter(x => x.energyLeft > 0);
+        let upgradesToFarm = allUpgrades.filter(x => !x.isBlocked && !x.isFinished && x.energyLeft > 0);
         const raidedLocations = settings.completedLocations.filter(x => !x.isShardsLocation).map(x => x.id);
         const raidedUpgrades = allUpgrades.filter(x =>
             x.locations.filter(location => location.isSelected).some(location => raidedLocations.includes(location.id))
@@ -231,7 +236,7 @@ export class UpgradesService {
             }
 
             iteration++;
-            upgradesToFarm = inProgressUpgrades.filter(
+            upgradesToFarm = upgradesToFarm.filter(
                 x => x.energyLeft > Math.min(...x.locations.filter(c => c.isSelected).map(l => l.energyCost))
             );
             if (iteration > 1000) {
@@ -290,6 +295,40 @@ export class UpgradesService {
 
             result.push(estimate);
         }
+
+        return orderBy(result, ['daysTotal', 'energyTotal'], ['desc', 'desc']);
+    }
+
+    private static improveEstimates(
+        estimates: ICharacterUpgradeEstimate[],
+        upgrades: Record<string, ICombinedUpgrade>,
+        inventoryUpgrades: Record<string, number>
+    ): ICharacterUpgradeEstimate[] {
+        const average = Math.ceil(mean(estimates.map(x => x.daysTotal)));
+        const correctUpgradesLocations = estimates
+            .filter(
+                x =>
+                    x.daysTotal - average > average &&
+                    x.locations.some(location => location.isUnlocked && location.isPassFilter && !location.isSelected)
+            )
+            .map(x => x.id);
+
+        if (!correctUpgradesLocations.length) {
+            return estimates;
+        }
+
+        for (const upgradeId of correctUpgradesLocations) {
+            const upgrade = upgrades[upgradeId];
+            const newLocation = upgrade.locations.find(
+                location => location.isUnlocked && location.isPassFilter && !location.isSelected
+            );
+            if (newLocation) {
+                newLocation.isSelected = true;
+            }
+        }
+
+        const newEstimates = this.getTotalEstimates(upgrades, inventoryUpgrades);
+        const result = this.improveEstimates(newEstimates, upgrades, inventoryUpgrades);
 
         return orderBy(result, ['daysTotal', 'energyTotal'], ['desc', 'desc']);
     }
@@ -398,6 +437,7 @@ export class UpgradesService {
         const completedLocations = settings.completedLocations.map(location => location.id);
         for (const upgradeId in upgrades) {
             const combinedUpgrade = upgrades[upgradeId];
+            const minEnergy = Math.min(...combinedUpgrade.locations.map(x => x.energyPerItem));
 
             for (const location of combinedUpgrade.locations) {
                 const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
@@ -405,24 +445,40 @@ export class UpgradesService {
                 location.isPassFilter =
                     !settings.filters || this.passLocationFilter(location, settings.filters, combinedUpgrade.rarity);
                 location.isCompleted = completedLocations.some(locationId => location.id === locationId);
+                location.isSelected = location.isUnlocked && location.isPassFilter;
+
+                if (
+                    [DailyRaidsStrategy.leastEnergy, DailyRaidsStrategy.leastTime].includes(
+                        settings.preferences.farmStrategy
+                    )
+                ) {
+                    location.isSelected = location.isSelected && location.energyPerItem === minEnergy;
+                }
             }
 
-            const unlockedLocations = combinedUpgrade.locations.filter(x => x.isUnlocked);
-            const minEnergy = Math.min(...unlockedLocations.map(x => x.energyPerItem));
-            const maxEnergy = Math.max(...unlockedLocations.map(x => x.energyPerItem));
-            const hasAnyMedianLocation = unlockedLocations.some(
-                location => location.energyPerItem > minEnergy && location.energyPerItem < maxEnergy
-            );
+            if (
+                settings.preferences.farmStrategy === DailyRaidsStrategy.custom &&
+                settings.preferences.customSettings
+            ) {
+                const locationTypes = [...settings.preferences.customSettings[combinedUpgrade.rarity]];
+                const selectedLocations = combinedUpgrade.locations.filter(x => x.isSelected);
+                let ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
+                if (ignoredLocations.length !== selectedLocations.length) {
+                    for (const ignoredLocation of ignoredLocations) {
+                        ignoredLocation.isSelected = false;
+                    }
+                } else {
+                    if (locationTypes.includes(CampaignType.Elite) && !locationTypes.includes(CampaignType.Mirror)) {
+                        locationTypes.push(CampaignType.Mirror);
+                        ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
 
-            for (const location of combinedUpgrade.locations) {
-                location.isSelected =
-                    location.isUnlocked &&
-                    location.isPassFilter &&
-                    this.passSelectionFilter(location, settings.preferences, {
-                        minEnergy,
-                        maxEnergy,
-                        hasAnyMedianLocation,
-                    });
+                        if (ignoredLocations.length !== selectedLocations.length) {
+                            for (const ignoredLocation of ignoredLocations) {
+                                ignoredLocation.isSelected = false;
+                            }
+                        }
+                    }
+                }
             }
 
             combinedUpgrade.locations = orderBy(
@@ -491,33 +547,6 @@ export class UpgradesService {
         }
 
         return true;
-    }
-
-    private static passSelectionFilter(
-        location: ICampaignBattleComposed,
-        preferences: IDailyRaidsPreferences,
-        inputs: { minEnergy: number; maxEnergy: number; hasAnyMedianLocation: boolean }
-    ): boolean {
-        const { minEnergy, maxEnergy, hasAnyMedianLocation } = inputs;
-        const { useLeastEfficientNodes, useMoreEfficientNodes, useMostEfficientNodes } = preferences;
-
-        if (!useMostEfficientNodes && !useMoreEfficientNodes && !useLeastEfficientNodes) {
-            return true;
-        }
-
-        if (useMostEfficientNodes && location.energyPerItem === minEnergy) {
-            return true;
-        }
-
-        if (
-            useMoreEfficientNodes &&
-            ((hasAnyMedianLocation && location.energyPerItem > minEnergy && location.energyPerItem < maxEnergy) ||
-                (!hasAnyMedianLocation && location.energyPerItem >= minEnergy && location.energyPerItem < maxEnergy))
-        ) {
-            return true;
-        }
-
-        return useLeastEfficientNodes && location.energyPerItem === maxEnergy;
     }
 
     private static getBaseUpgradesTotal(

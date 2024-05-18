@@ -8,7 +8,7 @@ import {
 } from '../../models/interfaces';
 import { StaticDataService } from '../../services';
 import { getEnumValues } from '../../shared-logic/functions';
-import { Rank, Rarity } from '../../models/enums';
+import { DailyRaidsStrategy, Rank, Rarity } from '../../models/enums';
 import { CharactersAutocomplete } from '../../shared-components/characters-autocomplete';
 import { StoreContext } from '../../reducers/store.provider';
 import { orderBy, sortBy, sum } from 'lodash';
@@ -137,9 +137,7 @@ export const RankLookup = () => {
                     dailyEnergy: 0,
                     upgrades: {},
                     preferences: {
-                        useLeastEfficientNodes: true,
-                        useMoreEfficientNodes: true,
-                        useMostEfficientNodes: true,
+                        farmStrategy: DailyRaidsStrategy.allLocations,
                         farmByPriorityOrder: false,
                         dailyEnergy: 0,
                         shardsEnergy: 0,

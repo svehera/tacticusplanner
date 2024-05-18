@@ -39,7 +39,7 @@ export const AccessibleTooltip: React.FC<Props> = ({ children, title }) => {
         );
     }
     return (
-        <Tooltip placement="top" title={title} arrow>
+        <Tooltip placement="top" title={title} arrow enterDelay={700}>
             {children}
         </Tooltip>
     );

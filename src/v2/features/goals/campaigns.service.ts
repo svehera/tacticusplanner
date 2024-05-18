@@ -21,45 +21,13 @@ export class CampaignsService {
     private static readonly recipeData: IRecipeData = recipeData;
     public static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = this.getCampaignComposed();
 
-    public static selectBestLocations(
-        availableLocations: ICampaignBattleComposed[],
-        preferences?: IDailyRaidsPreferences
-    ): ICampaignBattleComposed[] {
+    public static selectBestLocations(availableLocations: ICampaignBattleComposed[]): ICampaignBattleComposed[] {
         const minEnergy = Math.min(...availableLocations.map(x => x.energyPerItem));
-        const maxEnergy = Math.max(...availableLocations.map(x => x.energyPerItem));
-        const hasAnyMedianLocation = availableLocations.some(
-            location => location.energyPerItem > minEnergy && location.energyPerItem < maxEnergy
+        return orderBy(
+            availableLocations.filter(location => location.energyPerItem === minEnergy),
+            ['energyPerItem', 'expectedGold'],
+            ['asc', 'desc']
         );
-
-        let filteredLocations: ICampaignBattleComposed[] = availableLocations;
-        if (preferences) {
-            const { useLeastEfficientNodes, useMoreEfficientNodes, useMostEfficientNodes } = preferences;
-            filteredLocations = availableLocations.filter(location => {
-                if (!useMostEfficientNodes && !useMoreEfficientNodes && !useLeastEfficientNodes) {
-                    return true;
-                }
-
-                if (useMostEfficientNodes && location.energyPerItem === minEnergy) {
-                    return true;
-                }
-
-                if (
-                    useMoreEfficientNodes &&
-                    ((hasAnyMedianLocation &&
-                        location.energyPerItem > minEnergy &&
-                        location.energyPerItem < maxEnergy) ||
-                        (!hasAnyMedianLocation &&
-                            location.energyPerItem >= minEnergy &&
-                            location.energyPerItem < maxEnergy))
-                ) {
-                    return true;
-                }
-
-                return useLeastEfficientNodes && location.energyPerItem === maxEnergy;
-            });
-        }
-
-        return orderBy(filteredLocations, ['energyPerItem', 'expectedGold'], ['asc', 'desc']);
     }
 
     static getCampaignComposed(): Record<string, ICampaignBattleComposed> {

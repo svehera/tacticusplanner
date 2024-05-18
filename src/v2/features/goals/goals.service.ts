@@ -13,7 +13,8 @@ import { useMemo } from 'react';
 export class GoalsService {
     static prepareGoals(
         goals: IPersonalGoal[],
-        characters: ICharacter2[]
+        characters: ICharacter2[],
+        onlySelected: boolean
     ): {
         allGoals: CharacterRaidGoalSelect[];
         shardsGoals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>;
@@ -31,7 +32,7 @@ export class GoalsService {
             })
             .filter(g => !!g) as CharacterRaidGoalSelect[];
 
-        const selectedGoals = allGoals.filter(x => x.include);
+        const selectedGoals = onlySelected ? allGoals.filter(x => x.include) : allGoals;
 
         const shardsGoals = selectedGoals.filter(x =>
             [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(x.type)

@@ -2,8 +2,8 @@
 import { Box, Grid, Input, Slider } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
-import { CampaignImage } from '../shared-components/campaign-image';
 import { campaignsNames } from '../models/constants';
+import { CampaignImage } from 'src/v2/components/images/campaign-image';
 
 export const CampaignsProgress = () => {
     const { campaignsProgress } = useContext(StoreContext);

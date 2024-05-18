@@ -37,7 +37,7 @@ export const DailyRaids = () => {
     const [characters, setCharacters] = React.useState<ICharacter2[]>(storeCharacters);
 
     const { allGoals, shardsGoals, upgradeRankGoals } = useMemo(() => {
-        return GoalsService.prepareGoals(goals, characters);
+        return GoalsService.prepareGoals(goals, characters, true);
     }, [goals, characters]);
 
     const handleUpgradesAdd = (upgradeId: string, value: number, location: IItemRaidLocation) => {
