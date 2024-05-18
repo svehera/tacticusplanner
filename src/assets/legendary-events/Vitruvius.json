@@ -2,9 +2,9 @@
     "id": 6,
     "name": "Vitruvius",
     "wikiLink": "https://tacticus.fandom.com/wiki/LE-Vitruvius",
-    "eventStage": 2,
-    "nextEventDate": "May 12",
-    "nextEventDateUtc": "Sun, 12 May 2024 00:00:00 GMT",
+    "eventStage": 3,
+    "nextEventDate": "TBA",
+    "nextEventDateUtc": "",
     "regularMissions": [
         "Play one Legendary Event Battle, Deal 1000 damage",
         "Defeat 30 Necron",
