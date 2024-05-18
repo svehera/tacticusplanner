@@ -2,7 +2,7 @@
     {
         "name": "sonsonVallano",
         "type": "Contributor",
-        "thankYou": "Thank you for providing decent feedback and being Alpha,Beta,Gamma QA :)",
+        "thankYou": "Thank you for providing decent feedback and being Alpha,Beta,Gamma QA :) ©Severyn",
         "resourceDescription": "Public Upgrade Calc",
         "resourceLink": "https://docs.google.com/spreadsheets/d/1wq-CjAXkTkEKAtkI7lnpf3Yliv8qpoANW43YE21hlgg/edit",
         "avatarIcon": "none.png"
@@ -10,7 +10,7 @@
     {
         "name": "Towen",
         "type": "Contributor",
-        "thankYou": "Thank you for sharing Characters images",
+        "thankYou": "Thank you for sharing Characters images ©Severyn",
         "resourceDescription": "EN Labs T.A.C.T.I.C.U.S.",
         "resourceLink": "https://docs.google.com/spreadsheets/u/0/d/1al2IWwvTP3QOhHtfr6P8stdlA48ED4JFrtK8wDKznrk/htmlview",
         "avatarIcon": "towen.webp"
@@ -18,7 +18,7 @@
     {
         "name": "Un/Lucky☆SirEldricIV",
         "type": "Contributor",
-        "thankYou": "Thank you for sharing Ranks images",
+        "thankYou": "Thank you for sharing Ranks images ©Severyn",
         "resourceDescription": "Tacticus Wiki",
         "resourceLink": "https://tacticus.fandom.com/wiki/Tacticus_Wiki",
         "avatarIcon": "lucky.webp"
@@ -26,7 +26,7 @@
     {
         "name": "YourAdHere",
         "type": "Contributor",
-        "thankYou": "Thank you for contributing into Tacticus Planner",
+        "thankYou": "Thank you for contributing into Tacticus Planner ©Severyn",
         "resourceDescription": "",
         "resourceLink": "",
         "avatarIcon": "yourAdHere.webp"
@@ -34,7 +34,7 @@
     {
         "name": "Lëonaica",
         "type": "Contributor",
-        "thankYou": "Thank you for contributing into Tacticus Planner",
+        "thankYou": "Thank you for contributing into Tacticus Planner ©Severyn",
         "resourceDescription": "",
         "resourceLink": "",
         "avatarIcon": "leonaica.webp"
@@ -42,10 +42,26 @@
     {
         "name": "SeventhSun",
         "type": "Contributor",
-        "thankYou": "Thank you for finding nasty bugs and suggesting decent features",
+        "thankYou": "Thank you for finding nasty bugs and suggesting decent features ©Severyn",
         "resourceDescription": "",
         "resourceLink": "",
         "avatarIcon": "seventhSun.webp"
+    },
+    {
+        "name": "Tani",
+        "type": "Contributor",
+        "thankYou": "Thank you for supporting the app with your time and ideas ©Severyn",
+        "resourceDescription": "",
+        "resourceLink": "",
+        "avatarIcon": "tani.webp"
+    },
+    {
+        "name": "KIVIY",
+        "type": "Contributor",
+        "thankYou": "Thank you for finding upgrades images and promoting exitor for me\uD83D\uDE05 ©Severyn",
+        "resourceDescription": "",
+        "resourceLink": "",
+        "avatarIcon": "kiviy.webp"
     },
     {
         "name": "Tani",
@@ -218,8 +234,29 @@
     },
     {
         "name": "Someone",
-        "type": "Trooper",
+        "type": "Supporter",
         "thankYou": "Excellent app - thanks for all you do for the community by maintaining this. Slava Ukraini",
+        "resourceDescription": "",
+        "resourceLink": ""
+    },
+    {
+        "name": "Espada",
+        "type": "Supporter",
+        "thankYou": "Awesome app, thank for putting it together",
+        "resourceDescription": "",
+        "resourceLink": ""
+    },
+    {
+        "name": "@DocSyn",
+        "type": "Hero",
+        "thankYou": "Слава Україні!",
+        "resourceDescription": "",
+        "resourceLink": ""
+    },
+    {
+        "name": "Tim",
+        "type": "Trooper",
+        "thankYou": "Already donated but this if for the new update. Keep it up.",
         "resourceDescription": "",
         "resourceLink": ""
     }
