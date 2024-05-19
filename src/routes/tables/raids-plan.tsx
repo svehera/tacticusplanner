@@ -216,6 +216,10 @@ export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, up
                                         Upgrades raids (<b>{estimatedRanks.upgradesRaids.length}</b> Days |
                                     </span>
                                     <span>
+                                        <b>{estimatedRanks.freeEnergyDays}</b> Unused{' '}
+                                        <MiscIcon icon={'energy'} height={15} width={15} /> Days |
+                                    </span>
+                                    <span>
                                         <b>{estimatedRanks.energyTotal}</b>{' '}
                                         <MiscIcon icon={'energy'} height={15} width={15} /> |
                                     </span>
