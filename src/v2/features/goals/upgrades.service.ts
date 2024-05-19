@@ -437,7 +437,6 @@ export class UpgradesService {
         const completedLocations = settings.completedLocations.map(location => location.id);
         for (const upgradeId in upgrades) {
             const combinedUpgrade = upgrades[upgradeId];
-            const minEnergy = Math.min(...combinedUpgrade.locations.map(x => x.energyPerItem));
 
             for (const location of combinedUpgrade.locations) {
                 const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
@@ -446,12 +445,17 @@ export class UpgradesService {
                     !settings.filters || this.passLocationFilter(location, settings.filters, combinedUpgrade.rarity);
                 location.isCompleted = completedLocations.some(locationId => location.id === locationId);
                 location.isSelected = location.isUnlocked && location.isPassFilter;
+            }
+            const minEnergy = Math.min(
+                ...combinedUpgrade.locations.filter(x => x.isSelected).map(x => x.energyPerItem)
+            );
 
-                if (
-                    [DailyRaidsStrategy.leastEnergy, DailyRaidsStrategy.leastTime].includes(
-                        settings.preferences.farmStrategy
-                    )
-                ) {
+            if (
+                [DailyRaidsStrategy.leastEnergy, DailyRaidsStrategy.leastTime].includes(
+                    settings.preferences.farmStrategy
+                )
+            ) {
+                for (const location of combinedUpgrade.locations) {
                     location.isSelected = location.isSelected && location.energyPerItem === minEnergy;
                 }
             }
