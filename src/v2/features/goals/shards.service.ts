@@ -1,16 +1,24 @@
 ﻿import {
     ICharacterAscendGoal,
+    ICharacterShardsEstimate,
     ICharacterUnlockGoal,
     IEstimatedAscensionSettings,
     IEstimatedShards,
-    IShardMaterial,
-    ICharacterShardsEstimate,
-    IShardsRaid,
     IItemRaidLocation,
+    IShardMaterial,
+    IShardsRaid,
 } from 'src/v2/features/goals/goals.models';
 import { ICampaignBattleComposed, ICampaignsProgress } from 'src/models/interfaces';
 import { charsProgression, charsUnlockShards, rarityToStars } from 'src/models/constants';
-import { Alliance, Campaign, CampaignsLocationsUsage, CampaignType, PersonalGoalType, Rarity } from 'src/models/enums';
+import {
+    Alliance,
+    Campaign,
+    CampaignsLocationsUsage,
+    CampaignType,
+    DailyRaidsStrategy,
+    PersonalGoalType,
+    Rarity,
+} from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import { orderBy, sum } from 'lodash';
@@ -47,12 +55,12 @@ export class ShardsService {
     ): ICharacterShardsEstimate[] {
         const materials = goals
             .map(goal => this.convertGoalToMaterial(goal))
-            .filter(x => x.ownedCount < x.requiredCount);
+            .filter(x => x.acquiredCount < x.requiredCount);
         const result: ICharacterShardsEstimate[] = [];
 
         for (let i = 0; i < materials.length; i++) {
             const material = materials[i];
-            const previousShardsTokens = result[i - 1]?.onslaughtTokensTotal ?? 0;
+            const previousShardsTokens = sum(result.filter((_, index) => index < i).map(x => x.onslaughtTokensTotal));
             const unlockedLocations = material.possibleLocations.filter(location => {
                 const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
                 return location.nodeNumber <= campaignProgress;
@@ -60,12 +68,7 @@ export class ShardsService {
 
             const raidsLocations =
                 material.campaignsUsage === CampaignsLocationsUsage.LeastEnergy
-                    ? CampaignsService.selectBestLocations(unlockedLocations, {
-                          ...settings.preferences,
-                          useMostEfficientNodes: true,
-                          useMoreEfficientNodes: false,
-                          useLeastEfficientNodes: false,
-                      })
+                    ? CampaignsService.selectBestLocations(unlockedLocations)
                     : material.campaignsUsage === CampaignsLocationsUsage.BestTime
                     ? unlockedLocations
                     : [];
@@ -81,7 +84,7 @@ export class ShardsService {
             }
 
             const isBlocked = !raidsLocations.length;
-            const shardsLeft = material.requiredCount - material.ownedCount;
+            const shardsLeft = material.requiredCount - material.acquiredCount;
             let energyTotal = 0;
             let raidsTotal = 0;
             let shardsCollected = 0;
@@ -90,6 +93,10 @@ export class ShardsService {
             while (!isBlocked && shardsCollected < shardsLeft) {
                 let leftToCollect = shardsLeft - shardsCollected;
                 for (const location of raidsLocations) {
+                    if (leftToCollect <= 0) {
+                        break;
+                    }
+
                     if (location.campaignType === 'Onslaught') {
                         if (daysTotal <= previousShardsTokens / 1.5) {
                             continue;
@@ -178,7 +185,7 @@ export class ShardsService {
             goalId: goal.goalId,
             characterId: goal.characterName,
             label: goal.characterName,
-            ownedCount: goal.shards,
+            acquiredCount: goal.shards,
             requiredCount: targetShards,
             iconPath: goal.characterIcon,
             relatedCharacters: [goal.characterName],

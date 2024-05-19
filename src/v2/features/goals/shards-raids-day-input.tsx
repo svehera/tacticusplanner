@@ -10,10 +10,10 @@ import { CampaignImage } from 'src/v2/components/images/campaign-image';
 
 interface Props {
     shardRaids: IShardsRaid;
-    handleAdd: (shardId: string, value: number, location: IItemRaidLocation) => void;
+    // handleAdd: (shardId: string, value: number, location: IItemRaidLocation) => void;
 }
 
-export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids, handleAdd }) => {
+export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids }) => {
     const calendarDate: string = useMemo(() => {
         const nextDate = new Date();
         nextDate.setDate(nextDate.getDate() + shardRaids.daysTotal);
@@ -22,8 +22,8 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids, handleAdd }) 
     }, [shardRaids.daysTotal]);
 
     const handleAddCount = (value: number, location: IItemRaidLocation) => {
-        handleAdd(shardRaids.characterId, value, location);
-        shardRaids.ownedCount += value;
+        // handleAdd(shardRaids.characterId, value, location);
+        shardRaids.acquiredCount += value;
         location.isCompleted = true;
     };
     return (
@@ -61,12 +61,6 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids, handleAdd }) 
             <CardContent>
                 <ul style={{ paddingInlineStart: 15 }}>
                     {shardRaids.locations.map(location => {
-                        const maxObtained = Math.round(location.farmedItems);
-                        const defaultItemsObtained =
-                            maxObtained + shardRaids.ownedCount > shardRaids.requiredCount
-                                ? shardRaids.requiredCount - shardRaids.ownedCount
-                                : maxObtained;
-
                         return (
                             <li
                                 key={location.campaign + location.nodeNumber}
@@ -76,13 +70,6 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids, handleAdd }) 
                                     opacity: location.isCompleted ? 0.5 : 1,
                                 }}>
                                 <RaidItemView location={location} />
-                                <RaidItemInput
-                                    defaultItemsObtained={defaultItemsObtained}
-                                    acquiredCount={shardRaids.ownedCount}
-                                    requiredCount={shardRaids.requiredCount}
-                                    isDisabled={!!location.isCompleted}
-                                    addCount={value => handleAddCount(value, location)}
-                                />
                             </li>
                         );
                     })}

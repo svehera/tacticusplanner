@@ -26,14 +26,10 @@ import {
     ICharLegendaryEvents,
     IContentCreator,
     IContributor,
-    IDailyRaid,
-    IEstimatedRanks,
     IEstimatedRanksSettings,
     IMaterialEstimated2,
     IMaterialFull,
-    IMaterialRaid,
     IMaterialRecipeIngredientFull,
-    IRaidLocation,
     IRankUpData,
     IRecipeData,
     IRecipeDataFull,
@@ -41,11 +37,11 @@ import {
     IWhatsNew,
     UnitDataRaw,
 } from '../models/interfaces';
-import { Alliance, Campaign, Faction, Rank, Rarity, RarityString } from '../models/enums';
+import { Faction, Rank, Rarity, RarityString } from '../models/enums';
 import { rarityStringToNumber, rarityToStars } from '../models/constants';
 import { getEnumValues, rankToString } from '../shared-logic/functions';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
-import { ICharacterUpgradeRankGoal, IRankLookup } from 'src/v2/features/goals/goals.models';
+import { IRankLookup } from 'src/v2/features/goals/goals.models';
 
 export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;
@@ -669,40 +665,6 @@ export class StaticDataService {
                 return true;
             });
 
-        const minEnergy = Math.min(...unlockedLocations.map(x => x.energyPerItem));
-        const maxEnergy = Math.max(...unlockedLocations.map(x => x.energyPerItem));
-        const hasAnyMedianLocation = unlockedLocations.some(
-            location => location.energyPerItem > minEnergy && location.energyPerItem < maxEnergy
-        );
-
-        let filteredLocations: ICampaignBattleComposed[] = unlockedLocations;
-        if (settings.preferences) {
-            const { useLeastEfficientNodes, useMoreEfficientNodes, useMostEfficientNodes } = settings.preferences;
-            filteredLocations = unlockedLocations.filter(location => {
-                if (!useMostEfficientNodes && !useMoreEfficientNodes && !useLeastEfficientNodes) {
-                    return true;
-                }
-
-                if (useMostEfficientNodes && location.energyPerItem === minEnergy) {
-                    return true;
-                }
-
-                if (
-                    useMoreEfficientNodes &&
-                    ((hasAnyMedianLocation &&
-                        location.energyPerItem > minEnergy &&
-                        location.energyPerItem < maxEnergy) ||
-                        (!hasAnyMedianLocation &&
-                            location.energyPerItem >= minEnergy &&
-                            location.energyPerItem < maxEnergy))
-                ) {
-                    return true;
-                }
-
-                return useLeastEfficientNodes && location.energyPerItem === maxEnergy;
-            });
-        }
-
-        return orderBy(filteredLocations, ['energyPerItem', 'expectedGold'], ['asc', 'desc']);
+        return orderBy(unlockedLocations, ['energyPerItem', 'expectedGold'], ['asc', 'desc']);
     }
 }

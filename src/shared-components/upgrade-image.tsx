@@ -8,11 +8,13 @@ export const UpgradeImage = ({
     iconPath,
     rarity,
     size,
+    tooltip,
 }: {
     material: string;
     iconPath: string;
     rarity: Rarity;
     size?: number;
+    tooltip?: React.ReactNode;
 }) => {
     try {
         // const
@@ -20,7 +22,7 @@ export const UpgradeImage = ({
         const image = getImageUrl(`upgrades/${imagePath}`);
 
         return (
-            <AccessibleTooltip title={material}>
+            <AccessibleTooltip title={tooltip ?? material}>
                 <div
                     style={{ width: size ?? 50, height: size ?? 50 }}
                     className={Rarity[rarity]?.toLowerCase() + '-upgrade upgrade'}>

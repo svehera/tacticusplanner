@@ -16,6 +16,7 @@ import { IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
 import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
+import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
 
 import { ShareRoster } from 'src/v2/features/share/share-roster';
 
@@ -90,6 +91,7 @@ export const WhoYouOwn = () => {
                 }}>
                 <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
                     {!!isLoggedIn && <ShareRoster isRosterShared={!!isRosterShared} />}
+                    <TeamGraph characters={charactersFiltered} />
                 </RosterHeader>
                 <ViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
 

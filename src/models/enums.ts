@@ -226,3 +226,10 @@ export enum Campaign {
     SHME = 'Saim-Hann Mirror Elite',
     Onslaught = 'Onslaught',
 }
+
+export enum DailyRaidsStrategy {
+    leastEnergy,
+    leastTime,
+    allLocations,
+    custom,
+}

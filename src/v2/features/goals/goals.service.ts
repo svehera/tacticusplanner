@@ -8,8 +8,46 @@
 import { ICharacter2, IPersonalGoal } from 'src/models/interfaces';
 import { rarityToStars } from 'src/models/constants';
 import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity } from 'src/models/enums';
+import { useMemo } from 'react';
 
 export class GoalsService {
+    static prepareGoals(
+        goals: IPersonalGoal[],
+        characters: ICharacter2[],
+        onlySelected: boolean
+    ): {
+        allGoals: CharacterRaidGoalSelect[];
+        shardsGoals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>;
+        upgradeRankGoals: Array<ICharacterUpgradeRankGoal>;
+    } {
+        const allGoals = goals
+            .map(g => {
+                const relatedCharacter = characters.find(x => x.name === g.character);
+                if (
+                    ![PersonalGoalType.UpgradeRank, PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(g.type)
+                ) {
+                    return null;
+                }
+                return this.convertToTypedGoal(g, relatedCharacter);
+            })
+            .filter(g => !!g) as CharacterRaidGoalSelect[];
+
+        const selectedGoals = onlySelected ? allGoals.filter(x => x.include) : allGoals;
+
+        const shardsGoals = selectedGoals.filter(x =>
+            [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(x.type)
+        ) as Array<ICharacterUnlockGoal | ICharacterAscendGoal>;
+
+        const upgradeRankGoals = selectedGoals.filter(x =>
+            [PersonalGoalType.UpgradeRank].includes(x.type)
+        ) as Array<ICharacterUpgradeRankGoal>;
+
+        return {
+            allGoals,
+            shardsGoals,
+            upgradeRankGoals,
+        };
+    }
     static convertToTypedGoal(g: IPersonalGoal, relatedCharacter?: ICharacter2): CharacterRaidGoalSelect | null {
         if (!relatedCharacter) {
             return null;

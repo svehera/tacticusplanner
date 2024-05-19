@@ -1,4 +1,4 @@
-﻿import { IDailyRaids, IDailyRaidsFilters, IMaterialRaid, IRaidLocation, SetStateAction } from '../models/interfaces';
+﻿import { IDailyRaids, IDailyRaidsFilters, SetStateAction } from '../models/interfaces';
 import { defaultData } from '../models/constants';
 import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 

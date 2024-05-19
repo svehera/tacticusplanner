@@ -1,5 +1,6 @@
 ﻿import {
     CharacterReleaseRarity,
+    DailyRaidsStrategy,
     Difficulty,
     LegendaryEventEnum,
     PersonalGoalType,
@@ -267,14 +268,14 @@ export const defaultData: IPersonalData2 = {
         showCharacterLevel: true,
         showCharacterRarity: true,
         inventoryShowAlphabet: true,
+        inventoryShowPlusMinus: true,
         goalsTableView: false,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,
+        shardsEnergy: 0,
         farmByPriorityOrder: false,
-        useLeastEfficientNodes: false,
-        useMoreEfficientNodes: false,
-        useMostEfficientNodes: true,
+        farmStrategy: DailyRaidsStrategy.leastEnergy,
     },
     characters: [
         {

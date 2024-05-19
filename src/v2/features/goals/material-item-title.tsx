@@ -13,7 +13,16 @@ interface Props {
 export const MaterialItemTitle: React.FC<Props> = ({ upgradeRaid }) => {
     return (
         <div className="flex-box gap10">
-            <UpgradeImage material={upgradeRaid.label} rarity={upgradeRaid.rarity} iconPath={upgradeRaid.iconPath} />
+            <div className="flex-box column">
+                <UpgradeImage
+                    material={upgradeRaid.label}
+                    rarity={upgradeRaid.rarity}
+                    iconPath={upgradeRaid.iconPath}
+                />
+                <span>
+                    {upgradeRaid.acquiredCount}/{upgradeRaid.requiredCount}
+                </span>
+            </div>
             {upgradeRaid.isBlocked ? (
                 <span>
                     <Warning color={'warning'} /> All locations locked

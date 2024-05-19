@@ -169,7 +169,11 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         <>
             <AccessibleTooltip title={disableNewGoals ? 'You can have only 20 goals at the same time' : ''}>
                 <span>
-                    <Button variant={'contained'} disabled={disableNewGoals} onClick={() => setOpenDialog(true)}>
+                    <Button
+                        size="small"
+                        variant={'contained'}
+                        disabled={disableNewGoals}
+                        onClick={() => setOpenDialog(true)}>
                         Set Goal
                     </Button>
                 </span>

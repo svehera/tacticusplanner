@@ -5,6 +5,7 @@
     CampaignType,
     CharacterBias,
     CharacterReleaseRarity,
+    DailyRaidsStrategy,
     DamageType,
     Difficulty,
     Equipment,
@@ -389,6 +390,7 @@ export interface IViewPreferences {
     showCharacterLevel: boolean;
     showCharacterRarity: boolean;
     inventoryShowAlphabet: boolean;
+    inventoryShowPlusMinus: boolean;
     goalsTableView: boolean;
 }
 
@@ -402,11 +404,13 @@ export interface IAutoTeamsPreferences {
 
 export interface IDailyRaidsPreferences {
     dailyEnergy: number;
+    shardsEnergy: number;
     farmByPriorityOrder: boolean;
-    useMostEfficientNodes: boolean;
-    useMoreEfficientNodes: boolean;
-    useLeastEfficientNodes: boolean;
+    farmStrategy: DailyRaidsStrategy;
+    customSettings?: ICustomDailyRaidsSettings;
 }
+
+export type ICustomDailyRaidsSettings = Record<Rarity, CampaignType[]>;
 
 export interface ISelectedTeamsOrdering {
     orderBy: 'name' | 'rank' | 'rarity';

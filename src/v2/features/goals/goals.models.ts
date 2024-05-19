@@ -82,7 +82,7 @@ export interface IShardMaterial {
     goalId: string;
     characterId: string;
     label: string;
-    ownedCount: number;
+    acquiredCount: number;
     requiredCount: number;
     iconPath: string;
     relatedCharacters: string[];
@@ -114,10 +114,11 @@ export interface IEstimatedUpgrades {
     finishedMaterials: ICharacterUpgradeEstimate[];
     characters: ICharacterUpgrade[];
     byCharactersPriority: ICharacterUpgradeRankEstimate[];
-    craftedUpgrades: ICraftedUpgrade[];
+    relatedUpgrades: string[];
     energyTotal: number;
     raidsTotal: number;
     daysTotal: number;
+    freeEnergyDays: number;
 }
 
 export interface IUpgradesRaidsDay {
@@ -143,7 +144,7 @@ export interface ICharacterUpgrade {
     label: string;
     upgradeRanks: ICharacterUpgradeRank[];
     baseUpgradesTotal: Record<string, number>;
-    usedCraftedUpgrades: string[];
+    relatedUpgrades: string[];
 }
 
 export interface ICharacterUpgradeRank {

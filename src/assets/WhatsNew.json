@@ -1,6 +1,103 @@
 ﻿{
-    "currentVersion": "1.5.4",
+    "currentVersion": "1.5.5",
     "releaseNotes": [
+        {
+            "version": "1.5.5",
+            "date": "May 19",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Update the Daily Raids UI. Thanks to Tani and SeventhSun for ideas and feedback",
+                    "subPoints": [
+                        "New view is more compact and provides better experience on mobile",
+                        "Active goals moved to a dialog which is open by clicking button next to the filters icon",
+                        "All details about raids are hidden in the 'Raids plan' expandable section",
+                        "Added inventory section which will show only upgrades related to your active goals"
+                    ],
+                    "images": [
+                        {
+                            "path": "dr1.png"
+                        },
+                        {
+                            "path": "dr3.png"
+                        },
+                        {
+                            "path": "dr4.png"
+                        },
+                        {
+                            "path": "dr5.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Update the Daily Raids settings",
+                    "subPoints": [
+                        "Added back the 'Characters shards energy' setting (ZHovtiyLitsar)",
+                        "Added 'Locations selection' option",
+                        "The 'Least energy' option will prioritize Elite campaigns locations",
+                        "The 'Least time' option will prioritize Elite campaigns locations but will also try to add 'lower' locations if it improves overall time. This feature is not stable yet so please report any issue you'll notice while using it.",
+                        "The 'All locations' option just recommend all locations you have unlocked",
+                        "The 'Custom' option allows you to define locations priority based on upgrades rarity"
+                    ],
+                    "images": [
+                        {
+                            "path": "dr2.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Tani and KIVIY \"promoted\" to Contributors",
+                    "subPoints": [
+                        "Tani thank you for supporting the app with your time and ideas",
+                        "KIVIY thank you for finding upgrades images and promoting exitor for me\uD83D\uDE05"
+                    ],
+                    "route": "ty"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added team power visualization. Thanks to Lëonaica for contribution.",
+                    "subPoints": [
+                        "You can open this dialog by clicking on the new button that beside 'Share' on Who You Own page and other similar pages"
+                    ],
+                    "images": [
+                        {
+                            "path": "tpower.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Updated upgrades tables in the Daily Raids plan (SeventhSun)",
+                    "subPoints": [
+                        "Added back 'Left' column",
+                        "Removed 'Go to inventory' button",
+                        "Estimates are expanded by default"
+                    ],
+                    "images": [
+                        {
+                            "path": "dr6.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added increment(+) and decrement(-) options to the inventory page (Tani)",
+                    "subPoints": ["Enabled by default. Can be turned off by \"Show -/+\" toggle"],
+                    "images": [
+                        {
+                            "path": "in.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with daily Raids continually adding more energy (BlatantFix, RotoR, Tani, diagonalplane)"
+                },
+                {
+                    "text": "Fixed Jain Zar G1 rank upgrades (Serious_w_Bear)"
+                }
+            ]
+        },
         {
             "version": "1.5.4",
             "date": "May 15",
