@@ -27,6 +27,7 @@ import { guildWarDefenseMenuItem } from 'src/v2/pages/guild-war-defense/guild-wa
 import { guildWarZonesMenuItem } from 'src/v2/pages/guild-war-layout/guild-war-zones-menu.item';
 import { guildMenuItem } from 'src/v2/pages/guild/guild.menu-item';
 import { guildInsightsMenuItem } from 'src/v2/pages/guild-insights/guild-insights.menu-item';
+import { teamsMenuItem } from 'src/v2/pages/teams/teams.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -96,6 +97,7 @@ export const menuItemById = {
     zones: guildWarZonesMenuItem,
     guild: guildMenuItem,
     guildInsights: guildInsightsMenuItem,
+    teams: teamsMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -108,6 +110,7 @@ export const inputSubMenu: MenuItemTP[] = [
 export const planSubMenuWeb: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
+    // menuItemById['teams'],
     new MenuItemTP('Guild War', menuItemById['defense'].icon, '', '', '', [
         menuItemById['defense'],
         menuItemById['offense'],
@@ -128,6 +131,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
 export const planSubMenu: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
+    // menuItemById['teams'],
     menuItemById['defense'],
     menuItemById['offense'],
     menuItemById['zones'],

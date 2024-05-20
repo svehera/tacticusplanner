@@ -15,6 +15,7 @@ import { guildWarDefenseLazyRoute } from 'src/v2/pages/guild-war-defense/guild-w
 import { guildWarZonesLazyRoute } from 'src/v2/pages/guild-war-layout/guild-war-zones.route';
 import { guildLazyRoute } from 'src/v2/pages/guild/guild.route';
 import { guildInsightsLazyRoute } from 'src/v2/pages/guild-insights/guild-insights.route';
+import { teamsDesktopLazyRoute } from 'src/v2/pages/teams/teams.route';
 
 const inputRoutes: RouteObject[] = [
     wyoLazyRoute,
@@ -53,6 +54,7 @@ const planRoutes: RouteObject[] = [
     guildWarOffenseLazyRoute,
     guildWarDefenseLazyRoute,
     guildWarZonesLazyRoute,
+    teamsDesktopLazyRoute,
     {
         path: 'plan/le',
         async lazy() {

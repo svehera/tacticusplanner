@@ -9,37 +9,26 @@ export const PlanRoutes = () => {
     const navigate = useNavigate();
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
+    const teamsMenuItem = menuItemById['teams'];
     return (
         <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
-            <Card
-                onClick={() => navigate(goalsMenuItem.routeMobile)}
-                sx={{
-                    width: 350,
-                    minHeight: 140,
-                }}>
-                <CardHeader
-                    title={
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                            {goalsMenuItem.icon} {goalsMenuItem.label}
-                        </div>
-                    }
-                />
-            </Card>
-
-            <Card
-                onClick={() => navigate(dailyRaidsMenuItem.routeMobile)}
-                sx={{
-                    width: 350,
-                    minHeight: 140,
-                }}>
-                <CardHeader
-                    title={
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                            {dailyRaidsMenuItem.icon} {dailyRaidsMenuItem.label}
-                        </div>
-                    }
-                />
-            </Card>
+            {[goalsMenuItem, dailyRaidsMenuItem].map(menuItem => (
+                <Card
+                    key={menuItem.label}
+                    onClick={() => navigate(menuItem.routeMobile)}
+                    sx={{
+                        width: 350,
+                        minHeight: 140,
+                    }}>
+                    <CardHeader
+                        title={
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                {menuItem.icon} {menuItem.label}
+                            </div>
+                        }
+                    />
+                </Card>
+            ))}
 
             <Card
                 onClick={() => navigate('guildWar')}
