@@ -1146,7 +1146,7 @@
         "Icon": "Jain_Zar-removebg-preview.webp"
     },
     {
-        "Name": "Sho'syl",
+        "Name": "Sho'Syl",
         "Title": "Shas'ui",
         "Full Name": "Vior'la Sho'syl",
         "Short Name": "Sho",
@@ -1173,7 +1173,7 @@
         "Icon": "sho_syl-removebg-preview.webp"
     },
     {
-        "Name": "Re'vas",
+        "Name": "Re'Vas",
         "Title": "Shas'vre",
         "Full Name": "Vior'la Re'vas",
         "Short Name": "Re'vas",
@@ -1890,7 +1890,7 @@
         "Icon": "unset.webp"
     },
     {
-        "Name": "Khârn",
+        "Name": "Kharn",
         "Title": "Champion of Khorne",
         "Full Name": "Khârn the Betrayer",
         "Short Name": "Khârn",
