@@ -1,0 +1,32 @@
+﻿[
+    {
+        "id": "_malleusRL",
+        "name": "Malleus RL",
+        "title": "Field Ordnance Battery",
+        "shortName": "Malleus RL",
+        "fullName": "Malleus Rocket Launcher",
+        "alliance": "Imperial",
+        "faction": "Astra Militarum",
+        "initialRarity": "Common"
+    },
+    {
+        "id": "_forgefiend",
+        "name": "Forgefiend",
+        "title": "Daemon Engine",
+        "shortName": "Forgefiend",
+        "fullName": "Forgefiend",
+        "alliance": "Chaos",
+        "faction": "Black Legion",
+        "initialRarity": "Common"
+    },
+    {
+        "id": "_biovore",
+        "name": "Biovore",
+        "title": "Artillery Organism",
+        "shortName": "Biovore",
+        "fullName": "Biovore",
+        "alliance": "Xenos",
+        "faction": "Tyranids",
+        "initialRarity": "Common"
+    }
+]

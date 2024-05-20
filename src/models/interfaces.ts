@@ -38,6 +38,8 @@ import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
 import { GuildWarAction } from 'src/reducers/guildWarReducer';
 import { GuildAction } from 'src/reducers/guildReducer';
 import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
+import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
+import { MowsAction } from 'src/reducers/mows.reducer';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -106,8 +108,6 @@ export interface IDamageTypes {
     activeAbility?: DamageType;
     passiveAbility?: DamageType;
 }
-
-export type ICharacter = IUnitData & IPersonalCharacter;
 
 export type ICharLegendaryEvents = Record<LegendaryEventEnum, ICharLegendaryEvent>;
 
@@ -254,6 +254,7 @@ export interface IGlobalState {
     viewPreferences: IViewPreferences;
     dailyRaidsPreferences: IDailyRaidsPreferences;
     characters: Array<ICharacter2>;
+    mows: Array<IMow>;
     goals: IPersonalGoal[];
     selectedTeamOrder: ISelectedTeamsOrdering;
     leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
@@ -268,6 +269,7 @@ export interface IGlobalState {
 
 export interface IDispatchContext {
     characters: React.Dispatch<CharactersAction>;
+    mows: React.Dispatch<MowsAction>;
     viewPreferences: React.Dispatch<ViewPreferencesAction>;
     dailyRaidsPreferences: React.Dispatch<DailyRaidsPreferencesAction>;
     autoTeamsPreferences: React.Dispatch<AutoTeamsPreferencesAction>;
@@ -294,6 +296,7 @@ export interface IPersonalData2 {
     dailyRaidsPreferences: IDailyRaidsPreferences;
     selectedTeamOrder: ISelectedTeamsOrdering;
     characters: Partial<IPersonalCharacterData2>[];
+    mows: IMowDb[];
     goals: IPersonalGoal[];
     leTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILegendaryEventProgressState>;

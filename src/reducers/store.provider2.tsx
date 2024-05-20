@@ -23,6 +23,7 @@ import { isEqual } from 'lodash';
 import { DispatchContext, StoreContext } from './store.provider';
 import { guildWarReducer } from 'src/reducers/guildWarReducer';
 import { guildReducer } from 'src/reducers/guildReducer';
+import { mowsReducer } from 'src/reducers/mows.reducer';
 
 export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const { isAuthenticated, setUser, logout } = useAuth();
@@ -40,6 +41,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [seenAppVersion, setSeenAppVersion] = useState<string | undefined | null>(globalState.seenAppVersion);
 
     const [characters, dispatchCharacters] = React.useReducer(charactersReducer, globalState.characters);
+    const [mows, dispatchMows] = React.useReducer(mowsReducer, globalState.mows);
     const [goals, dispatchGoals] = React.useReducer(goalsReducer, globalState.goals);
     const [viewPreferences, dispatchViewPreferences] = React.useReducer(
         viewPreferencesReducer,
@@ -90,6 +92,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const dispatch = useMemo<IDispatchContext>(
         () => ({
             characters: wrapDispatch(dispatchCharacters),
+            mows: wrapDispatch(dispatchMows),
             goals: wrapDispatch(dispatchGoals),
             viewPreferences: wrapDispatch(dispatchViewPreferences),
             autoTeamsPreferences: wrapDispatch(dispatchAutoTeamsPreferences),
@@ -156,6 +159,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
         const newValue: IGlobalState = {
             characters,
+            mows,
             viewPreferences,
             autoTeamsPreferences,
             selectedTeamOrder,

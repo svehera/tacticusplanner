@@ -132,22 +132,6 @@ export class CharactersService {
         };
     }
 
-    // static calculateCharacterPotential(character: ICharacter2, rarityCap: Rarity): number {
-    //     const capped = rarityCaps[rarityCap];
-    //     // Calculate potential based on properties
-    //     const rarityPotential = (character.rarity / capped.rarity) * 100;
-    //     const rankPotential = (character.rank / capped.rank) * 100;
-    //     const starsPotential = (character.stars / capped.stars) * 100;
-    //     const activeAbilityPotential = (character.activeAbilityLevel / capped.abilitiesLevel) * 100;
-    //     const passiveAbilityPotential = (character.passiveAbilityLevel / capped.abilitiesLevel) * 100;
-    //
-    //     // Calculate average potential
-    //     const averagePotential =
-    //         (rarityPotential + rankPotential + starsPotential + activeAbilityPotential + passiveAbilityPotential) / 5;
-    //
-    //     return Math.round(averagePotential); // Round potential to the nearest whole number
-    // }
-
     static calculateCharacterPotential(character: IPersonalCharacterData2, rarityCap: Rarity): number {
         const capped = rarityCaps[rarityCap];
 

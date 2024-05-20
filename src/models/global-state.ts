@@ -20,7 +20,9 @@
 } from './interfaces';
 import { StaticDataService } from '../services';
 import { CharacterBias, LegendaryEventEnum, Rank, Rarity, RarityStars } from './enums';
-import { defaultData, rankToLevel, rankToRarity, rarityToStars } from './constants';
+import { defaultData, rankToLevel, rankToRarity, rarityStringToNumber, rarityToStars } from './constants';
+import { IMow, IMowDb, IMowStatic } from 'src/v2/features/characters/characters.models';
+import mowsData from 'src/v2/data/mows.json';
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
@@ -40,6 +42,7 @@ export class GlobalState implements IGlobalState {
     readonly dailyRaids: IDailyRaids;
     readonly guildWar: IGuildWar;
     readonly guild: IGuild;
+    readonly mows: IMow[];
 
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
@@ -52,6 +55,7 @@ export class GlobalState implements IGlobalState {
         this.leProgress = personalData.leProgress;
         const chars = GlobalState.fixNames(personalData.characters);
         this.characters = GlobalState.initCharacters(chars);
+        this.mows = GlobalState.initMows(personalData.mows);
 
         for (const leProgressKey in this.leProgress) {
             const leProgress = this.leProgress[+leProgressKey as LegendaryEventEnum];
@@ -117,6 +121,25 @@ export class GlobalState implements IGlobalState {
         });
     }
 
+    static initMows(dbMows: IMowDb[]): Array<IMow> {
+        const mowsStatic = mowsData as IMowStatic[];
+        return mowsStatic.map(staticData => {
+            const dbMow = dbMows.find(c => c.id === staticData.id);
+            const initialRarity = rarityStringToNumber[staticData.initialRarity];
+            const initialRarityStars = rarityToStars[rarityStringToNumber[staticData.initialRarity]];
+
+            return {
+                ...staticData,
+                rarity: dbMow?.rarity ?? initialRarity,
+                stars: dbMow?.stars ?? initialRarityStars,
+                activeAbilityLevel: dbMow?.activeAbilityLevel ?? 0,
+                passiveAbilityLevel: dbMow?.passiveAbilityLevel ?? 0,
+                unlocked: dbMow?.unlocked ?? false,
+                shards: dbMow?.shards ?? 0,
+            };
+        });
+    }
+
     static fixNames<T>(obj: T): T {
         const fixName = {
             'Abaddon The Despolier': 'Abaddon The Despoiler',
@@ -163,6 +186,16 @@ export class GlobalState implements IGlobalState {
                 shards: x.shards,
             }));
 
+        const mowsToDb: IMowDb[] = value.mows.map(x => ({
+            id: x.id,
+            rarity: x.rarity,
+            activeAbilityLevel: x.activeAbilityLevel,
+            passiveAbilityLevel: x.passiveAbilityLevel,
+            stars: x.stars,
+            shards: x.shards,
+            unlocked: x.unlocked,
+        }));
+
         return {
             schemaVersion: 2,
             modifiedDate: value.modifiedDate,
@@ -173,6 +206,7 @@ export class GlobalState implements IGlobalState {
             leProgress: value.leProgress,
             leSelectedRequirements: value.leSelectedRequirements,
             characters: charactersToStore,
+            mows: mowsToDb,
             autoTeamsPreferences: value.autoTeamsPreferences,
             viewPreferences: value.viewPreferences,
             dailyRaidsPreferences: value.dailyRaidsPreferences,

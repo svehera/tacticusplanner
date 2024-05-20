@@ -1,7 +1,7 @@
 ﻿import { ICharacter2 } from 'src/models/interfaces';
 import { CharactersOrderBy } from './enums/characters-order-by';
 import { CharactersFilterBy } from './enums/characters-filter-by';
-import { Rank, Rarity, RarityStars } from 'src/models/enums';
+import { Alliance, Faction, Rank, Rarity, RarityStars, RarityString } from 'src/models/enums';
 
 export interface IFactionStatic {
     alliance: string;
@@ -9,6 +9,29 @@ export interface IFactionStatic {
     icon: string;
     color: string;
 }
+
+export interface IMowStatic {
+    id: string;
+    name: string;
+    title: string;
+    shortName: string;
+    fullName: string;
+    alliance: Alliance;
+    faction: Faction;
+    initialRarity: RarityString;
+}
+
+export interface IMowDb {
+    id: string;
+    unlocked: boolean;
+    rarity: Rarity;
+    stars: RarityStars;
+    activeAbilityLevel: number;
+    passiveAbilityLevel: number;
+    shards: number;
+}
+
+export interface IMow extends IMowStatic, IMowDb {}
 
 export interface IRarityCap {
     rarity: Rarity;
