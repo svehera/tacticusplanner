@@ -10,13 +10,13 @@ import IconButton from '@mui/material/IconButton';
 import { ResponsiveLine } from '@nivo/line';
 import { InfoTeamGraphBox } from './info-team-graph-box';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
-import { ICharacter2 } from 'src/models/interfaces';
+import { IUnit } from 'src/v2/features/characters/characters.models';
 
 interface Props {
-    characters: ICharacter2[];
+    units: IUnit[];
 }
 
-export const TeamGraph: React.FC<Props> = ({ characters }) => {
+export const TeamGraph: React.FC<Props> = ({ units }) => {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -31,7 +31,7 @@ export const TeamGraph: React.FC<Props> = ({ characters }) => {
     const teamPowerData: { x: string; y: number }[] = [];
     const teamAttributeData: { x: string; y: number }[] = [];
     const teamAbilityData: { x: string; y: number }[] = [];
-    characters.forEach(character => {
+    units.forEach(character => {
         const power = CharactersPowerService.getCharacterPower(character);
         const attributePower = CharactersPowerService.getCharacterAttributePower(character);
         const abilityPower = CharactersPowerService.getCharacterAbilityPower(character);

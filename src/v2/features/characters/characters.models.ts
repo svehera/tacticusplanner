@@ -1,7 +1,10 @@
-﻿import { ICharacter2 } from 'src/models/interfaces';
+﻿import { DynamicProps, ICharacter2 } from 'src/models/interfaces';
 import { CharactersOrderBy } from './enums/characters-order-by';
 import { CharactersFilterBy } from './enums/characters-filter-by';
 import { Alliance, Faction, Rank, Rarity, RarityStars, RarityString } from 'src/models/enums';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+
+export type IUnit = ICharacter2 | IMow;
 
 export interface IFactionStatic {
     alliance: string;
@@ -31,7 +34,10 @@ export interface IMowDb {
     shards: number;
 }
 
-export interface IMow extends IMowStatic, IMowDb {}
+export interface IMow extends IMowStatic, IMowDb, DynamicProps {
+    portraitIcon: string;
+    unitType: UnitType.mow;
+}
 
 export interface IRarityCap {
     rarity: Rarity;
@@ -44,7 +50,7 @@ export interface IFaction extends IFactionStatic {
     power: number;
     bsValue: number;
     unlockedCharacters: number;
-    characters: ICharacter2[];
+    units: IUnit[];
 }
 
 export interface IViewControls {
@@ -59,7 +65,7 @@ export interface ICharactersContext {
     showPower: boolean;
     showCharacterLevel: boolean;
     showCharacterRarity: boolean;
-    getOpacity?: (character: ICharacter2) => number;
+    getOpacity?: (character: IUnit) => number;
 }
 
 export type IXpLevel = {

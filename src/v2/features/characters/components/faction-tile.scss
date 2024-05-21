@@ -1,6 +1,6 @@
 ﻿.faction {
     min-width: 375px;
-    max-width: 375px;
+    max-width: 470px;
 }
 
 .faction-title {
@@ -37,11 +37,24 @@
     box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
 
     &.complete-faction {
-        justify-content: space-evenly;
+        justify-content: flex-start;
     }
 
     &.incomplete-faction {
         justify-content: flex-start;
         padding-inline-start: 5px;
+    }
+
+    &.mow-faction {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 500px) {
+    .faction {
+        max-width: 375px;
+    }
+    .characters-box {
+        flex-wrap: wrap;
     }
 }

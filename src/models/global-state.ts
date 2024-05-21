@@ -5,6 +5,8 @@
     IDailyRaids,
     IDailyRaidsPreferences,
     IGlobalState,
+    IGuild,
+    IGuildWar,
     IInventory,
     ILegendaryEventProgressState,
     ILegendaryEventSelectedRequirements,
@@ -12,17 +14,16 @@
     IPersonalCharacterData2,
     IPersonalData2,
     IPersonalGoal,
-    IGuildWar,
     ISelectedTeamsOrdering,
     IViewPreferences,
     LegendaryEventData,
-    IGuild,
 } from './interfaces';
 import { StaticDataService } from '../services';
 import { CharacterBias, LegendaryEventEnum, Rank, Rarity, RarityStars } from './enums';
 import { defaultData, rankToLevel, rankToRarity, rarityStringToNumber, rarityToStars } from './constants';
 import { IMow, IMowDb, IMowStatic } from 'src/v2/features/characters/characters.models';
 import mowsData from 'src/v2/data/mows.json';
+import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
@@ -130,6 +131,9 @@ export class GlobalState implements IGlobalState {
 
             return {
                 ...staticData,
+                unitType: UnitType.mow,
+                // portraitIcon: `${staticData.id}.webp`,
+                portraitIcon: 'unset.webp',
                 rarity: dbMow?.rarity ?? initialRarity,
                 stars: dbMow?.stars ?? initialRarityStars,
                 activeAbilityLevel: dbMow?.activeAbilityLevel ?? 0,

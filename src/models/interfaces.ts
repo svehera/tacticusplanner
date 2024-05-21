@@ -40,6 +40,7 @@ import { GuildAction } from 'src/reducers/guildReducer';
 import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
 import { MowsAction } from 'src/reducers/mows.reducer';
+import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -75,6 +76,8 @@ export interface UnitDataRaw {
 }
 
 export interface IUnitData {
+    unitType: UnitType.character;
+    id: string;
     alliance: Alliance;
     faction: Faction;
     factionIcon: string;
@@ -222,7 +225,7 @@ export interface ILegendaryEventTrackRequirement {
 export type ITableRow<T = ICharacter2 | string> = Record<string, T>;
 export type ICharacter2 = IUnitData & IPersonalCharacterData2 & DynamicProps;
 
-type DynamicProps = {
+export type DynamicProps = {
     numberOfUnlocked?: number;
     ownedBy?: string[];
     potential?: number;

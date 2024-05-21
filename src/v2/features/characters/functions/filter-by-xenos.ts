@@ -1,6 +1,6 @@
-import { ICharacter2 } from 'src/models/interfaces';
+import { IUnit } from 'src/v2/features/characters/characters.models';
 
-export const filterXenos = (character: ICharacter2) => {
+export const filterXenos = (character: IUnit) => {
     const Alliance = character.alliance === 'Xenos';
     return Alliance;
 };

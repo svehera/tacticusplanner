@@ -8,6 +8,7 @@ import energyIcon from 'src/assets/images/icons/energy.png';
 import blackstoneIcon from 'src/assets/images/icons/blackstone.png';
 import deploymentIcon from 'src/assets/images/icons/deployment.png';
 import warTokenIcon from 'src/assets/images/icons/warToken.png';
+import mowIcon from 'src/assets/images/icons/mow.png';
 
 const icons = {
     armour: {
@@ -41,6 +42,10 @@ const icons = {
     warToken: {
         file: warTokenIcon,
         label: 'War Token',
+    },
+    mow: {
+        file: mowIcon,
+        label: 'Machine of War',
     },
 };
 

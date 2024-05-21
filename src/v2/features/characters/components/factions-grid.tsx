@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { IFaction } from '../characters.models';
+import { IFaction, IUnit } from '../characters.models';
 
 import { FactionsTile } from './faction-tile';
 
@@ -12,7 +12,7 @@ export const FactionsGrid = ({
     onCharacterClick,
 }: {
     factions: IFaction[];
-    onCharacterClick?: (character: ICharacter2) => void;
+    onCharacterClick?: (character: IUnit) => void;
 }) => {
     return (
         <div className="factions-grid">

@@ -42,6 +42,7 @@ import { rarityStringToNumber, rarityToStars } from '../models/constants';
 import { getEnumValues, rankToString } from '../shared-logic/functions';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import { IRankLookup } from 'src/v2/features/goals/goals.models';
+import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;
@@ -253,6 +254,8 @@ export class StaticDataService {
 
     static convertUnitData(rawData: UnitDataRaw): IUnitData {
         const unitData: IUnitData = {
+            id: rawData.Name,
+            unitType: UnitType.character,
             alliance: rawData.Alliance,
             faction: rawData.Faction,
             factionIcon: StaticDataService.getFactionIcon(rawData.Faction),

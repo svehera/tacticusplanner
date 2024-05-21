@@ -11,7 +11,7 @@ export const ShareRoster = ({ isRosterShared }: { isRosterShared: boolean }) => 
             <Tooltip title={'Share your roster'} placement={'top'}>
                 <Badge badgeContent={'✅︎'} color={'success'} invisible={!isRosterShared}>
                     <IconButton onClick={() => setOpenShare(true)}>
-                        <ShareIcon fontSize={'large'} />
+                        <ShareIcon />
                     </IconButton>
                 </Badge>
             </Tooltip>

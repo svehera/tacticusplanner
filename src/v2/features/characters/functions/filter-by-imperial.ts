@@ -1,6 +1,6 @@
-import { ICharacter2 } from 'src/models/interfaces';
+import { IUnit } from 'src/v2/features/characters/characters.models';
 
-export const filterImperial = (character: ICharacter2) => {
+export const filterImperial = (character: IUnit) => {
     const Alliance = character.alliance === 'Imperial';
     return Alliance;
 };
