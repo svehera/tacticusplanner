@@ -59,7 +59,7 @@ export class MowLookupService {
         }
         const rawUpgrades = upgrades[key] ?? upgrades.primary;
 
-        return rawUpgrades.map(upgrade => UpgradesService.getUpgrade(upgrade));
+        return rawUpgrades.map(upgrade => UpgradesService.getUpgrade(upgrade)).filter(x => !!x);
     }
 
     private static getRarityFromLevel(level: number): Rarity {
