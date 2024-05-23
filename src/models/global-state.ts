@@ -134,6 +134,7 @@ export class GlobalState implements IGlobalState {
                 unitType: UnitType.mow,
                 // portraitIcon: `${staticData.id}.webp`,
                 portraitIcon: 'unset.webp',
+                badgeIcon: `${staticData.id}.png`,
                 rarity: dbMow?.rarity ?? initialRarity,
                 stars: dbMow?.stars ?? initialRarityStars,
                 activeAbilityLevel: dbMow?.activeAbilityLevel ?? 0,

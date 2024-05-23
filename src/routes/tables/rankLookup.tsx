@@ -313,24 +313,6 @@ export const RankLookup = () => {
                     alignItems: 'center',
                     gap: '20px',
                 }}>
-                <CharactersAutocomplete
-                    character={character}
-                    characters={charactersOptions}
-                    onCharacterChange={value => {
-                        setCharacter(value);
-
-                        setSearchParams(curr => {
-                            if (value) {
-                                curr.set('character', value.name);
-                            } else {
-                                curr.delete('character');
-                            }
-
-                            return curr;
-                        });
-                    }}
-                    shortChar={true}
-                />
                 <div style={{ width: 200 }}>
                     <RankSelect
                         label={'Rank Start'}

@@ -1,0 +1,207 @@
+﻿{
+    "_malleusRL": [
+        {
+            "lvl": 1,
+            "primary": ["Ropes and Chains", "Frag Grenade", "Purity Seal"]
+        },
+        {
+            "lvl": 2,
+            "primary": ["Field Ration", "Can of Promethium", "Pile of Salvage"]
+        },
+        {
+            "lvl": 3,
+            "primary": ["The Iron Phoenix", "Ropes and Chains", "Field Ration"]
+        },
+        {
+            "lvl": 4,
+            "primary": ["Weapon Anointment Oils", "Frag Grenade", "Can of Promethium"]
+        },
+        {
+            "lvl": 5,
+            "primary": ["Adamantium Ore", "Purity Seal", "Pile of Salvage"]
+        },
+        {
+            "lvl": 6,
+            "primary": ["Ropes and Chains", "Field Ration", "The Iron Phoenix"]
+        },
+        {
+            "lvl": 7,
+            "primary": ["Frag Grenade", "Can of Promethium", "Weapon Anointment Oils"]
+        },
+        {
+            "lvl": 8,
+            "primary": ["Purity Seal", "Pile of Salvage", "Adamantium Ore"]
+        },
+        {
+            "lvl": 9,
+            "primary": ["Field Ration", "The Iron Phoenix", "The Gold Phoenix"]
+        },
+        {
+            "lvl": 10,
+            "primary": ["Can of Promethium", "Weapon Anointment Oils", "Divinator Class Auspex"]
+        },
+        {
+            "lvl": 11,
+            "primary": ["Pile of Salvage", "Adamantium Ore", "Oath Seal"]
+        },
+        {
+            "lvl": 12,
+            "primary": ["The Iron Phoenix", "Enriched Rations", "Holster and Pockets"]
+        },
+        {
+            "lvl": 13,
+            "primary": ["Weapon Anointment Oils", "Barrel of Promethium", "Belt of Frag Grenades"]
+        },
+        {
+            "lvl": 14,
+            "primary": ["Adamantium Ore", "Oath Seal", "Adamantium Lump"]
+        },
+        {
+            "lvl": 15,
+            "primary": ["Enriched Rations", "The Gold Phoenix", "Holster and Pockets"]
+        },
+        {
+            "lvl": 16,
+            "primary": ["Barrel of Promethium", "Divinator Class Auspex", "Blessed Weapon Oils"]
+        },
+        {
+            "lvl": 17,
+            "primary": ["Box of Salvage", "Advanced Rebreather", "Adamantium Lump"]
+        },
+        {
+            "lvl": 18,
+            "primary": ["The Gold Phoenix", "Enriched Rations", "Zeidos Ribbon"]
+        },
+        {
+            "lvl": 19,
+            "primary": ["Divinator Class Auspex", "Barrel of Promethium", "Entrenching Tool"]
+        },
+        {
+            "lvl": 20,
+            "primary": ["Advanced Rebreather", "Oath Seal", "Flak Plates"]
+        },
+        {
+            "lvl": 21,
+            "primary": ["Enriched Rations", "Zeidos Ribbon", "Utilitarian Belt"]
+        },
+        {
+            "lvl": 22,
+            "primary": ["Barrel of Promethium", "Entrenching Tool", "Box of Ammo"]
+        },
+        {
+            "lvl": 23,
+            "primary": ["Box of Salvage", "Flak Plates", "Adamantium Bar"]
+        },
+        {
+            "lvl": 24,
+            "primary": ["Zeidos Ribbon", "The Phoenix Ascendant", "Box of Rations"]
+        },
+        {
+            "lvl": 25,
+            "primary": ["Entrenching Tool", "Krak Grenade", "Advanced Combat Stimms"]
+        },
+        {
+            "lvl": 26,
+            "primary": ["Flak Plates", "Crate of Salvage", "Blessed Purity Seal"]
+        },
+        {
+            "lvl": 27,
+            "primary": ["The Phoenix Ascendant", "Battle Scar", "Weathering"]
+        },
+        {
+            "lvl": 28,
+            "primary": ["Krak Grenade", "Krak Grenade", "Special Issue Ammo"]
+        },
+        {
+            "lvl": 29,
+            "primary": ["Crate of Salvage", "Crate of Salvage", "Revered Talisman"]
+        },
+        {
+            "lvl": 30,
+            "primary": ["Battle Scar", "Weathering", "Epaulettes"]
+        },
+        {
+            "lvl": 31,
+            "primary": ["Krak Grenade", "Special Issue Ammo", "Veteran's Entrenching Tool"]
+        },
+        {
+            "lvl": 32,
+            "primary": ["Crate of Salvage", "Revered Talisman", "High-Grade Flak Plates"]
+        },
+        {
+            "lvl": 33,
+            "primary": ["Weathering", "Secret Agenda", "Greater Reliquary of Protection"],
+            "secondary": ["Weathering", "Secret Agenda", "Grand Helmet Trophy"]
+        },
+        {
+            "lvl": 34,
+            "primary": ["Special Issue Ammo", "Blessed Promethium Canister", "Belt of Krak Grenades"]
+        },
+        {
+            "lvl": 35,
+            "primary": ["Revered Talisman", "Unyielding Rivets", "Adamantium Sheet"],
+            "secondary": ["Revered Talisman", "Unyielding Rivets", "Grand Purity Seal"]
+        },
+        {
+            "lvl": 36,
+            "primary": ["Weathering", "Secret Agenda", "Honourifica Imperialis"]
+        },
+        {
+            "lvl": 37,
+            "primary": ["Special Issue Ammo", "Blessed Promethium Canister", "Master-Crafted Ammo"]
+        },
+        {
+            "lvl": 38,
+            "primary": ["Revered Talisman", "Unyielding Rivets", "Purity Seal of the Primarch"]
+        },
+        {
+            "lvl": 39,
+            "primary": ["Secret Agenda", "Honourifica Imperialis", "Epaulettes of Renown"]
+        },
+        {
+            "lvl": 40,
+            "primary": ["Blessed Promethium Canister", "Honourifica Imperialis", "Heirloom Entrenching Tool"]
+        },
+        {
+            "lvl": 41,
+            "primary": ["Unyielding Rivets", "Honourifica Imperialis", "Artificer Flak Plates"]
+        },
+        {
+            "lvl": 42,
+            "primary": ["Secret Agenda", "Honourifica Imperialis", "Grandiose Skull Ornament"],
+            "secondary": ["Secret Agenda", "Honourifica Imperialis", "Legendary Reliquary of Protection"]
+        },
+        {
+            "lvl": 43,
+            "primary": ["Blessed Promethium Canister", "Honourifica Imperialis", "Blessed Promethium Canister"],
+            "secondary": ["Blessed Promethium Canister", "Honourifica Imperialis", "Digital Weapons"]
+        },
+        {
+            "lvl": 44,
+            "primary": ["Unyielding Rivets", "Honourifica Imperialis", "Seal of the Emperor's Protection"],
+            "secondary": ["Unyielding Rivets", "Honourifica Imperialis", "Adamantium Plates"]
+        },
+        {
+            "lvl": 45,
+            "primary": ["Honourifica Imperialis", "Master-Crafted Ammo", "Sash of Honors"]
+        },
+        {
+            "lvl": 46,
+            "primary": ["Master-Crafted Ammo", "Purity Seal of the Primarch", "Medallion Resolute"]
+        },
+        {
+            "lvl": 47,
+            "primary": ["Purity Seal of the Primarch", "Master-Crafted Ammo", "Bastion Honour"]
+        },
+        {
+            "lvl": 48,
+            "primary": ["Honourifica Imperialis", "Purity Seal of the Primarch", "Grand Strategy"],
+            "secondary": ["Honourifica Imperialis", "Purity Seal of the Primarch", "Technocrafted Constitution"]
+        },
+        {
+            "lvl": 49,
+            "primary": ["Master-Crafted Ammo", "Honourifica Imperialis", "Blessed Promethium Tank"],
+            "secondary": ["Master-Crafted Ammo", "Honourifica Imperialis", "Technocrafted Strength"]
+        }
+    ]
+}

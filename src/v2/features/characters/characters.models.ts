@@ -36,6 +36,7 @@ export interface IMowDb {
 
 export interface IMow extends IMowStatic, IMowDb, DynamicProps {
     portraitIcon: string;
+    badgeIcon: string;
     unitType: UnitType.mow;
 }
 

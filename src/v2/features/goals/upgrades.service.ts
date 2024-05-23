@@ -1,4 +1,5 @@
 ﻿import {
+    IBaseUpgrade,
     IBaseUpgradeData,
     ICharacterUpgrade,
     ICharacterUpgradeEstimate,
@@ -6,6 +7,7 @@
     ICharacterUpgradeRankEstimate,
     ICharacterUpgradeRankGoal,
     ICombinedUpgrade,
+    ICraftedUpgrade,
     ICraftedUpgradeData,
     IEstimatedUpgrades,
     IItemRaidLocation,
@@ -551,6 +553,10 @@ export class UpgradesService {
         }
 
         return true;
+    }
+
+    public static getUpgrade(upgradeId: string): IBaseUpgrade | ICraftedUpgrade {
+        return this.baseUpgradesData[upgradeId] ?? this.craftedUpgradesData[upgradeId];
     }
 
     private static getBaseUpgradesTotal(

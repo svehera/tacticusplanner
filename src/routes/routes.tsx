@@ -16,6 +16,7 @@ import { guildWarZonesLazyRoute } from 'src/v2/pages/guild-war-layout/guild-war-
 import { guildLazyRoute } from 'src/v2/pages/guild/guild.route';
 import { guildInsightsLazyRoute } from 'src/v2/pages/guild-insights/guild-insights.route';
 import { teamsDesktopLazyRoute } from 'src/v2/pages/teams/teams.route';
+import { mowLookupDesktopLazyRoute } from 'src/v2/pages/mow-lookup/mow-lookup.route';
 
 const inputRoutes: RouteObject[] = [
     wyoLazyRoute,
@@ -125,6 +126,7 @@ const learnRoutes: RouteObject[] = [
     dirtyDozenLazyRoute,
     insightsLazyRoute,
     guildInsightsLazyRoute,
+    mowLookupDesktopLazyRoute,
 ];
 
 export const appRoutes: () => RouteObject[] = () => [
