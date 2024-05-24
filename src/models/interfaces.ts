@@ -447,8 +447,8 @@ export interface IPersonalCharacterData2 {
     xp: number;
     bias: CharacterBias;
     upgrades: string[];
-    activeAbilityLevel: number;
-    passiveAbilityLevel: number;
+    primaryAbilityLevel: number;
+    secondaryAbilityLevel: number;
     shards: number;
 }
 
@@ -476,6 +476,11 @@ export interface IPersonalGoal {
 
     // unlock
     campaignsUsage?: CampaignsLocationsUsage;
+
+    // upgrade mow
+    unitId?: string;
+    primaryAbilityLevel?: number;
+    secondaryAbilityLevel?: number;
 }
 
 export type ILegendaryEventsProgressState = Record<LegendaryEventEnum, ILegendaryEventProgressState>;

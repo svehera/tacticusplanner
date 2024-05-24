@@ -152,7 +152,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
                     const { data } = params;
                     if (data) {
-                        return <CharacterImage icon={data.characterIcon} imageSize={30} tooltip={data.characterName} />;
+                        return <CharacterImage icon={data.unitIcon} imageSize={30} tooltip={data.unitName} />;
                     }
                 },
                 sortable: false,
@@ -222,7 +222,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                     const { data } = params;
                     if (data) {
                         const linkBase = isMobile ? '/mobile/learn/rankLookup' : '/learn/rankLookup';
-                        const params = `?character=${data.characterName}&rankStart=${Rank[data.rankStart]}&rankEnd=${
+                        const params = `?character=${data.unitName}&rankStart=${Rank[data.rankStart]}&rankEnd=${
                             Rank[data.rankEnd]
                         }&rankPoint5=${data.rankPoint5}`;
                         return (

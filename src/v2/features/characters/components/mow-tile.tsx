@@ -28,7 +28,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
 
     const unlockShards = charsUnlockShards[mow.rarity];
     const unlockProgress = (mow.shards / unlockShards) * 100;
-    const hasAbilities = (mow.unlocked && mow.activeAbilityLevel) || mow.passiveAbilityLevel;
+    const hasAbilities = (mow.unlocked && mow.primaryAbilityLevel) || mow.secondaryAbilityLevel;
 
     return (
         <div
@@ -55,8 +55,8 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                 <div
                     className="abilities"
                     style={{ visibility: hasAbilities && viewContext.showAbilities ? 'visible' : 'hidden' }}>
-                    <div className="ability-level">{mow.activeAbilityLevel}</div>
-                    <div className="ability-level">{mow.passiveAbilityLevel}</div>
+                    <div className="ability-level">{mow.primaryAbilityLevel}</div>
+                    <div className="ability-level">{mow.secondaryAbilityLevel}</div>
                 </div>
                 <Conditional condition={viewContext.showCharacterLevel}>
                     {mow.unlocked ? (

@@ -46,19 +46,19 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                 case PersonalGoalType.Ascend: {
                     dispatch.characters({
                         type: 'UpdateRarity',
-                        character: updatedGoal.characterName,
+                        character: updatedGoal.unitName,
                         value: updatedGoal.rarityStart,
                     });
 
                     dispatch.characters({
                         type: 'UpdateShards',
-                        character: updatedGoal.characterName,
+                        character: updatedGoal.unitName,
                         value: updatedGoal.shards,
                     });
 
                     dispatch.characters({
                         type: 'UpdateStars',
-                        character: updatedGoal.characterName,
+                        character: updatedGoal.unitName,
                         value: updatedGoal.starsStart,
                     });
                     break;
@@ -66,7 +66,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                 case PersonalGoalType.Unlock: {
                     dispatch.characters({
                         type: 'UpdateShards',
-                        character: updatedGoal.characterName,
+                        character: updatedGoal.unitName,
                         value: updatedGoal.shards,
                     });
                     break;
@@ -74,12 +74,12 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                 case PersonalGoalType.UpgradeRank: {
                     dispatch.characters({
                         type: 'UpdateRank',
-                        character: updatedGoal.characterName,
+                        character: updatedGoal.unitName,
                         value: updatedGoal.rankStart,
                     });
                     dispatch.characters({
                         type: 'UpdateUpgrades',
-                        character: updatedGoal.characterName,
+                        character: updatedGoal.unitName,
                         value: updatedGoal.appliedUpgrades,
                     });
                     break;
@@ -93,7 +93,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                 });
             }
 
-            enqueueSnackbar(`Goal for ${updatedGoal.characterName} is updated`, { variant: 'success' });
+            enqueueSnackbar(`Goal for ${updatedGoal.unitName} is updated`, { variant: 'success' });
         }
         setOpenDialog(false);
         if (onClose) {
@@ -129,7 +129,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
             <DialogTitle style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
-                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <CharacterImage icon={goal.characterIcon} />
+                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <CharacterImage icon={goal.unitIcon} />
             </DialogTitle>
             <DialogContent style={{ paddingTop: 20 }}>
                 <Box id="edit-goal-form" className="flex-box column gap20 full-width start">

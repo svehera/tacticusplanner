@@ -75,9 +75,9 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                     <IconButton onClick={onGoalEdit}>
                         <Edit fontSize="small" />
                     </IconButton>
-                    <AccessibleTooltip title={goal.characterName}>
+                    <AccessibleTooltip title={goal.unitName}>
                         <div>
-                            <CharacterImage icon={goal.characterIcon} name={goal.characterName} />
+                            <CharacterImage icon={goal.unitIcon} name={goal.unitName} />
                         </div>
                     </AccessibleTooltip>
                     {getGoalInfo(goal)}

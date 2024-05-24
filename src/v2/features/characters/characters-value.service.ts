@@ -16,8 +16,8 @@ export class CharactersValueService {
         const valueLevel =
             CharactersValueService.getUnlockValue(unit.initialRarity, unit.name) +
             CharactersValueService.getExperienceValue(unit.level) +
-            CharactersValueService.getAbilityValue(unit.activeAbilityLevel) +
-            CharactersValueService.getAbilityValue(unit.passiveAbilityLevel) +
+            CharactersValueService.getAbilityValue(unit.primaryAbilityLevel) +
+            CharactersValueService.getAbilityValue(unit.secondaryAbilityLevel) +
             CharactersValueService.getStarsValue(unit.stars) -
             CharactersValueService.getInitialStarsValue(unit.initialRarity) +
             CharactersValueService.getRarityValue(unit.rarity) -

@@ -67,7 +67,7 @@ export class CharactersService {
                 return orderBy(
                     units.map(x => ({
                         ...x,
-                        abilitiesLevel: x.activeAbilityLevel + x.passiveAbilityLevel,
+                        abilitiesLevel: x.primaryAbilityLevel + x.secondaryAbilityLevel,
                     })),
                     ['abilitiesLevel'],
                     ['desc']
@@ -125,8 +125,8 @@ export class CharactersService {
             rank: Math.min(character.rank, capped.rank),
             stars: Math.min(character.stars, capped.stars),
             level: Math.min(character.level, capped.abilitiesLevel),
-            activeAbilityLevel: Math.min(character.activeAbilityLevel, capped.abilitiesLevel),
-            passiveAbilityLevel: Math.min(character.passiveAbilityLevel, capped.abilitiesLevel),
+            primaryAbilityLevel: Math.min(character.primaryAbilityLevel, capped.abilitiesLevel),
+            secondaryAbilityLevel: Math.min(character.secondaryAbilityLevel, capped.abilitiesLevel),
         };
     }
 
@@ -147,8 +147,8 @@ export class CharactersService {
             stars: character.stars,
             rarity: rarityCap,
             upgrades: [],
-            activeAbilityLevel: character.activeAbilityLevel,
-            passiveAbilityLevel: character.passiveAbilityLevel,
+            activeAbilityLevel: character.primaryAbilityLevel,
+            passiveAbilityLevel: character.secondaryAbilityLevel,
         } as unknown as ICharacter2);
 
         return characterPower > cappedPower ? 100 : Math.round((characterPower / cappedPower) * 100); // Round potential to the nearest whole number

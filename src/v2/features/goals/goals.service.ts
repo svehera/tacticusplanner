@@ -7,8 +7,7 @@
 } from 'src/v2/features/goals/goals.models';
 import { ICharacter2, IPersonalGoal } from 'src/models/interfaces';
 import { rarityToStars } from 'src/models/constants';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity } from 'src/models/enums';
-import { useMemo } from 'react';
+import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
 
 export class GoalsService {
     static prepareGoals(
@@ -56,8 +55,8 @@ export class GoalsService {
             priority: g.priority,
             goalId: g.id,
             include: g.dailyRaids,
-            characterName: relatedCharacter.name,
-            characterIcon: relatedCharacter.icon,
+            unitName: relatedCharacter.name,
+            unitIcon: relatedCharacter.icon,
             notes: g.notes ?? '',
         };
 
@@ -114,7 +113,7 @@ export class GoalsService {
             type: goal.type,
             priority: goal.priority,
             dailyRaids: goal.include,
-            character: goal.characterName,
+            character: goal.unitName,
             notes: goal.notes,
         };
         switch (goal.type) {

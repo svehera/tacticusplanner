@@ -81,7 +81,7 @@ export const Goals = () => {
 
         if (item === 'edit') {
             const goal = allGoals.find(x => x.goalId === goalId);
-            const relatedCharacter = characters.find(x => x.name === goal?.characterName);
+            const relatedCharacter = characters.find(x => x.name === goal?.unitName);
             if (relatedCharacter && goal) {
                 setEditCharacter(relatedCharacter);
                 setEditGoal(goal);
@@ -120,11 +120,11 @@ export const Goals = () => {
             const goalsEstimate = upgradeRankGoals.map(goal => {
                 const goalEstimate = estimatedUpgradesTotal.byCharactersPriority.find(x => x.goalId === goal.goalId);
                 const firstFarmDay = estimatedUpgradesTotal.upgradesRaids.findIndex(x =>
-                    x.raids.flatMap(raid => raid.relatedCharacters).includes(goal.characterName)
+                    x.raids.flatMap(raid => raid.relatedCharacters).includes(goal.unitName)
                 );
 
                 const daysTotal = estimatedUpgradesTotal.upgradesRaids.filter(x =>
-                    x.raids.flatMap(raid => raid.relatedCharacters).includes(goal.characterName)
+                    x.raids.flatMap(raid => raid.relatedCharacters).includes(goal.unitName)
                 ).length;
 
                 const targetLevel = rankToLevel[((goal.rankEnd ?? 1) - 1) as Rank];

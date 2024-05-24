@@ -37,7 +37,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, characters, onGoalsS
 
     const handleGoalEdit = (goalId: string) => {
         const goalToEdit = goals.find(x => x.goalId === goalId);
-        const characterToEdit = characters.find(x => x.name === goalToEdit?.characterName);
+        const characterToEdit = characters.find(x => x.name === goalToEdit?.unitName);
 
         if (goalToEdit && characterToEdit) {
             setEditGoal(goalToEdit);

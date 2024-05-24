@@ -29,8 +29,8 @@ export interface IMowDb {
     unlocked: boolean;
     rarity: Rarity;
     stars: RarityStars;
-    activeAbilityLevel: number;
-    passiveAbilityLevel: number;
+    primaryAbilityLevel: number;
+    secondaryAbilityLevel: number;
     shards: number;
 }
 

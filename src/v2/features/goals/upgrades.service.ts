@@ -273,8 +273,8 @@ export class UpgradesService {
 
             return {
                 goalId: goal.goalId,
-                characterId: goal.characterName,
-                label: goal.characterName,
+                characterId: goal.unitName,
+                label: goal.unitName,
                 upgradeRanks,
                 baseUpgradesTotal,
                 relatedUpgrades,
@@ -784,7 +784,7 @@ export class UpgradesService {
                 inventoryUpgrades[upgradeId] = Math.max(acquiredCount - requiredCount, 0);
                 const estimate = this.getUpgradeEstimate(upgrade, requiredCount, acquiredCount);
 
-                estimate.relatedCharacters = [goal.characterName];
+                estimate.relatedCharacters = [goal.unitName];
                 goalUpgrades.push(estimate);
             }
 

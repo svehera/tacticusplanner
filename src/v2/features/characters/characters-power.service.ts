@@ -12,8 +12,8 @@ export class CharactersPowerService {
         const abilityPower =
             abilityWeight *
             CharactersPowerService.getRarityCoeff(unit.rarity) *
-            (CharactersPowerService.getAbilityCoeff(unit.activeAbilityLevel) +
-                CharactersPowerService.getAbilityCoeff(unit.passiveAbilityLevel));
+            (CharactersPowerService.getAbilityCoeff(unit.primaryAbilityLevel) +
+                CharactersPowerService.getAbilityCoeff(unit.secondaryAbilityLevel));
         return Math.round(abilityPower);
     }
 

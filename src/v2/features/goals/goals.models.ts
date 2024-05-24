@@ -8,8 +8,9 @@ export interface ICharacterRaidGoalSelectBase {
     priority: number;
     include: boolean;
     goalId: string;
-    characterName: string;
-    characterIcon: string;
+    unitId: string;
+    unitName: string;
+    unitIcon: string;
     notes: string;
 }
 

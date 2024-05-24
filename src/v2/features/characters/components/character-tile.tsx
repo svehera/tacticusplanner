@@ -37,7 +37,7 @@ export const CharacterTile = ({
         ? charsUnlockShards[character.rarity]
         : charsReleaseShards[character.releaseRarity!];
     const unlockProgress = (character.shards / unlockShards) * 100;
-    const hasAbilities = (isUnlocked && character.activeAbilityLevel) || character.passiveAbilityLevel;
+    const hasAbilities = (isUnlocked && character.primaryAbilityLevel) || character.secondaryAbilityLevel;
     const needToAscend = useMemo(() => needToAscendCharacter(character), [character.rarity, character.rank]);
 
     const needToLevel = useMemo(
@@ -87,8 +87,8 @@ export const CharacterTile = ({
                 <div
                     className="abilities"
                     style={{ visibility: hasAbilities && viewContext.showAbilities ? 'visible' : 'hidden' }}>
-                    <div className="ability-level">{character.activeAbilityLevel}</div>
-                    <div className="ability-level">{character.passiveAbilityLevel}</div>
+                    <div className="ability-level">{character.primaryAbilityLevel}</div>
+                    <div className="ability-level">{character.secondaryAbilityLevel}</div>
                 </div>
                 <Conditional condition={viewContext.showCharacterLevel}>
                     {isUnlocked ? (

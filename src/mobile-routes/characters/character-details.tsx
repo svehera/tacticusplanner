@@ -27,8 +27,8 @@ export const CharacterDetails = ({
         level: character.level,
         shards: character.shards,
         xp: character.xp,
-        activeAbilityLevel: character.activeAbilityLevel,
-        passiveAbilityLevel: character.passiveAbilityLevel,
+        activeAbilityLevel: character.primaryAbilityLevel,
+        passiveAbilityLevel: character.secondaryAbilityLevel,
     });
 
     const handleInputChange = (name: keyof ICharacter2, value: boolean | number, saveValue?: boolean | number) => {
@@ -200,7 +200,7 @@ export const CharacterDetails = ({
                                     value={formData.activeAbilityLevel}
                                     onChange={event =>
                                         handleInputChange(
-                                            'activeAbilityLevel',
+                                            'primaryAbilityLevel',
                                             event.target.value === '' ? '' : (Number(event.target.value) as any),
                                             Number(event.target.value)
                                         )
@@ -222,7 +222,7 @@ export const CharacterDetails = ({
                                     value={formData.passiveAbilityLevel}
                                     onChange={event =>
                                         handleInputChange(
-                                            'passiveAbilityLevel',
+                                            'secondaryAbilityLevel',
                                             event.target.value === '' ? '' : (Number(event.target.value) as any),
                                             Number(event.target.value)
                                         )
