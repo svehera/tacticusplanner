@@ -40,4 +40,15 @@ export interface IMowLevelUpgrades {
     secondary?: string[];
 }
 
+export interface IMowMaterialsTotal {
+    components: number;
+    gold: number;
+    badges: Record<Rarity, number>;
+    forgeBadges: Record<Rarity, number>;
+}
+
+export interface IMowUpgrade extends IBaseUpgrade {
+    requiredTotal: number;
+}
+
 export type IMowLevelUpgradesDic = Record<string, Array<IMowLevelUpgrades>>;

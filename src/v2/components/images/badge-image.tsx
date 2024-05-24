@@ -9,5 +9,5 @@ export const BadgeImage = ({ alliance, rarity }: { alliance: Alliance; rarity: R
     }
     const image = getImageUrl(`badges/${alliance.toLowerCase()}-${rarityString.toLowerCase()}.png`);
 
-    return <img loading={'lazy'} style={{ pointerEvents: 'none' }} src={image} height={25} alt={alliance} />;
+    return <img loading={'lazy'} style={{ pointerEvents: 'none' }} src={image} height={35} alt={alliance} />;
 };

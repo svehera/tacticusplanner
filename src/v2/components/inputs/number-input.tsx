@@ -6,25 +6,39 @@ interface Props {
     label: string;
     value: number;
     valueChange: (v: number) => void;
+    fullWidth?: boolean;
+    max?: number;
+    min?: number;
+    step?: number;
+    style?: React.CSSProperties;
 }
 
-export const AbilityLevelInput: React.FC<Props> = ({ label, value, valueChange }) => {
+export const NumberInput: React.FC<Props> = ({
+    label,
+    value,
+    valueChange,
+    fullWidth = false,
+    max = 50,
+    min = 1,
+    step = 1,
+    style = {},
+}) => {
     const [inputValue, setInputValue] = useState(value.toString());
 
     return (
-        <FormControl>
+        <FormControl fullWidth={fullWidth} style={style}>
             <InputLabel>{label}</InputLabel>
             <Input
                 value={inputValue}
                 onChange={event => {
                     setInputValue(event.target.value);
                     const newValue = Number(event.target.value);
-                    valueChange(Math.min(Math.max(newValue, 1), 50));
+                    valueChange(Math.min(Math.max(newValue, min), max));
                 }}
                 inputProps={{
-                    step: 1,
-                    min: 1,
-                    max: 50,
+                    step,
+                    min,
+                    max,
                     type: 'number',
                 }}
             />

@@ -12,7 +12,7 @@ import { ViewControls } from 'src/v2/features/characters/components/view-control
 import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
-import { IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
+import { IMow, IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
 import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
@@ -26,6 +26,7 @@ import { ICharacter2 } from 'src/models/interfaces';
 import { useAuth } from 'src/contexts/auth';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { UnitType } from 'src/v2/features/characters/units.enums';
+import { EditMowDialog } from 'src/v2/features/characters/dialogs/edit-mow-dialog';
 
 export const WhoYouOwn = () => {
     const { characters: charactersDefault, mows, viewPreferences } = useContext(StoreContext);
@@ -41,6 +42,8 @@ export const WhoYouOwn = () => {
     const [nameFilter, setNameFilter] = useState<string | null>(null);
     const [openCharacterItemDialog, setOpenCharacterItemDialog] = React.useState(false);
     const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
+    const [openEditMowDialog, setOpenEditMowDialog] = React.useState(false);
+    const [editedMow, setEditedMow] = React.useState<IMow | null>(null);
 
     const [searchParams] = useSearchParams();
 
@@ -73,16 +76,29 @@ export const WhoYouOwn = () => {
         dispatch.viewPreferences({ type: 'Update', setting: 'wyoFilter', value: value.filterBy });
     };
 
+    const updateMow = (mow: IMow) => {
+        endEditCharacter();
+        dispatch.mows({ type: 'Update', mow });
+    };
+
     const startEditCharacter = (unit: IUnit): void => {
         if (unit.unitType === UnitType.character) {
             setEditedCharacter(unit);
             setOpenCharacterItemDialog(true);
+        }
+
+        if (unit.unitType === UnitType.mow) {
+            setEditedMow(unit);
+            setOpenEditMowDialog(true);
         }
     };
 
     const endEditCharacter = (): void => {
         setEditedCharacter(null);
         setOpenCharacterItemDialog(false);
+
+        setEditedMow(null);
+        setOpenEditMowDialog(false);
     };
 
     return (
@@ -121,6 +137,15 @@ export const WhoYouOwn = () => {
                         onClose={endEditCharacter}
                     />
                 </Conditional>
+
+                {editedMow && (
+                    <EditMowDialog
+                        mow={editedMow}
+                        saveChanges={updateMow}
+                        isOpen={openEditMowDialog}
+                        onClose={endEditCharacter}
+                    />
+                )}
             </CharactersViewContext.Provider>
         </Box>
     );

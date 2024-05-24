@@ -32,7 +32,7 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
                         );
                     }
                 },
-                width: 80,
+                width: 75,
             },
             {
                 field: 'components',
@@ -64,29 +64,33 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
                         );
                     }
                 },
-                width: 110,
+                width: 105,
             },
             {
                 field: 'primaryUpgrades',
+                valueFormatter: params => {
+                    const { data } = params;
+                    return data?.primaryUpgrades.map(x => x.id).join(', ') ?? '';
+                },
                 cellRenderer: (params: ICellRendererParams<IMowLevelMaterials>) => {
                     const { data } = params;
                     if (data) {
                         return (
                             <div className="flex-box gap3">
-                                {data.primaryUpgrades.map(x => (
+                                {data.primaryUpgrades.map((x, index) => (
                                     <UpgradeImage
-                                        key={x.id}
+                                        key={x.id + index}
                                         material={x.label}
                                         iconPath={x.iconPath}
                                         rarity={x.rarity}
-                                        size={30}
+                                        size={40}
                                     />
                                 ))}
                             </div>
                         );
                     }
                 },
-                width: 120,
+                width: 150,
             },
             {
                 field: 'gold',
@@ -98,25 +102,29 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
             },
             {
                 field: 'secondaryUpgrades',
+                valueFormatter: params => {
+                    const { data } = params;
+                    return data?.secondaryUpgrades.map(x => x.id).join(', ') ?? '';
+                },
                 cellRenderer: (params: ICellRendererParams<IMowLevelMaterials>) => {
                     const { data } = params;
                     if (data) {
                         return (
                             <div className="flex-box gap3">
-                                {data.secondaryUpgrades.map(x => (
+                                {data.secondaryUpgrades.map((x, index) => (
                                     <UpgradeImage
-                                        key={x.id}
+                                        key={x.id + index}
                                         material={x.label}
                                         iconPath={x.iconPath}
                                         rarity={x.rarity}
-                                        size={30}
+                                        size={40}
                                     />
                                 ))}
                             </div>
                         );
                     }
                 },
-                width: 120,
+                width: 150,
             },
         ];
     }, []);
@@ -125,19 +133,17 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
         <div
             className="ag-theme-material"
             style={{
-                height: 50 + rows.length * 35,
+                height: 50 + rows.length * 45,
                 minHeight: 150,
-                maxHeight: '40vh',
+                maxHeight: '50vh',
                 width: '100%',
             }}>
             <AgGridReact
                 defaultColDef={{
                     suppressMovable: true,
                     sortable: true,
-                    // wrapText: true,
-                    // autoHeight: true,
                 }}
-                rowHeight={35}
+                rowHeight={45}
                 columnDefs={columnDefs}
                 rowData={rows}
             />

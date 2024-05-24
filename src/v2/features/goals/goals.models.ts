@@ -186,6 +186,14 @@ export interface ICharacterUpgradeEstimate extends IBaseUpgrade {
     isFinished: boolean;
 }
 
+export interface IUpgradeEstimate extends IBaseUpgrade {
+    daysTotal: number;
+    energyTotal: number;
+    raidsTotal: number;
+
+    requiredCount: number;
+}
+
 export interface ICraftedUpgrade {
     id: string;
     label: string;

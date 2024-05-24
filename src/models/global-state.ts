@@ -125,15 +125,14 @@ export class GlobalState implements IGlobalState {
     static initMows(dbMows: IMowDb[]): Array<IMow> {
         const mowsStatic = mowsData as IMowStatic[];
         return mowsStatic.map(staticData => {
-            const dbMow = dbMows.find(c => c.id === staticData.id);
+            const dbMow = dbMows?.find(c => c.id === staticData.id);
             const initialRarity = rarityStringToNumber[staticData.initialRarity];
             const initialRarityStars = rarityToStars[rarityStringToNumber[staticData.initialRarity]];
 
             return {
                 ...staticData,
                 unitType: UnitType.mow,
-                // portraitIcon: `${staticData.id}.webp`,
-                portraitIcon: 'unset.webp',
+                portraitIcon: `${staticData.id}.webp`,
                 badgeIcon: `${staticData.id}.png`,
                 rarity: dbMow?.rarity ?? initialRarity,
                 stars: dbMow?.stars ?? initialRarityStars,

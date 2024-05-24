@@ -225,6 +225,7 @@ export const RankLookup = () => {
                                 <CampaignLocation
                                     key={location.id}
                                     location={location}
+                                    short={true}
                                     unlocked={data.unlockedLocations.includes(location.id)}
                                 />
                             ))}

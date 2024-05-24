@@ -1665,7 +1665,7 @@
         "Number": 74,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "unset.webp"
+        "Icon": "azkor.webp"
     },
     {
         "Name": "Kharn",
@@ -1687,7 +1687,7 @@
         "Number": 75,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "unset.webp",
+        "Icon": "kharn.webp",
         "ReleaseRarity": 6
     }
 ]
