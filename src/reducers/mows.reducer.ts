@@ -6,6 +6,11 @@ export type MowsAction =
           type: 'Update';
           mow: IMowDb;
       }
+    | {
+          type: 'UpdateAbilities';
+          mowId: string;
+          abilities: [primary: number, secondary: number];
+      }
     | SetStateAction<IMow[]>;
 
 export const mowsReducer = (state: IMow[], action: MowsAction) => {
@@ -25,6 +30,23 @@ export const mowsReducer = (state: IMow[], action: MowsAction) => {
             state[existingMowIndex] = {
                 ...existingMow,
                 ...mow,
+            };
+
+            return [...state];
+        }
+        case 'UpdateAbilities': {
+            const { mowId, abilities } = action;
+            const existingMowIndex = state.findIndex(x => x.id === mowId);
+            const existingMow = state[existingMowIndex];
+
+            if (!existingMow) {
+                return state;
+            }
+
+            state[existingMowIndex] = {
+                ...existingMow,
+                primaryAbilityLevel: abilities[0],
+                secondaryAbilityLevel: abilities[1],
             };
 
             return [...state];

@@ -54,24 +54,10 @@ export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange })
         });
     }, [mow, primaryAbilityStart, primaryAbilityEnd, secondaryAbilityStart, secondaryAbilityEnd]);
 
-    const renderAutocompleteOption = (props: React.HTMLAttributes<any>, mow: IMow) => {
-        return (
-            <div {...props} className="flex-box gap5 p5">
-                <CharacterImage icon={mow.badgeIcon} imageSize={35} />
-                <span>{mow.name}</span>
-            </div>
-        );
-    };
-
     return (
         <div className="flex-box gap20 wrap">
             {mow && <CharacterImage icon={mow.badgeIcon} />}
-            <UnitsAutocomplete
-                unit={mow}
-                options={mows}
-                onUnitChange={setMow}
-                renderOption={renderAutocompleteOption}
-            />
+            <UnitsAutocomplete style={{ maxWidth: 250 }} unit={mow} options={mows} onUnitChange={setMow} />
             <div className="flex-box gap15 p10">
                 <span>Primary:</span>
 

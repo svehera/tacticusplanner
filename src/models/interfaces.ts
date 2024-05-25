@@ -51,6 +51,7 @@ export interface UnitDataRaw {
     Health: number;
     Damage: number;
     Armour: number;
+    'Short Name': string;
     'Initial rarity': RarityString;
     'Melee Damage': DamageType;
     'Melee Hits': number;
@@ -82,6 +83,7 @@ export interface IUnitData {
     faction: Faction;
     factionIcon: string;
     name: string;
+    shortName: string;
     numberAdded: number;
     health: number;
     damage: number;

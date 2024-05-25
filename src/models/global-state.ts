@@ -136,8 +136,8 @@ export class GlobalState implements IGlobalState {
                 badgeIcon: `${staticData.id}.png`,
                 rarity: dbMow?.rarity ?? initialRarity,
                 stars: dbMow?.stars ?? initialRarityStars,
-                primaryAbilityLevel: dbMow?.primaryAbilityLevel ?? 0,
-                secondaryAbilityLevel: dbMow?.secondaryAbilityLevel ?? 0,
+                primaryAbilityLevel: dbMow?.primaryAbilityLevel ?? 1,
+                secondaryAbilityLevel: dbMow?.secondaryAbilityLevel ?? 1,
                 unlocked: dbMow?.unlocked ?? false,
                 shards: dbMow?.shards ?? 0,
             };

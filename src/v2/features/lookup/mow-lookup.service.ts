@@ -11,7 +11,7 @@ import {
 
 import mowCommonMaterial from 'src/v2/data/mow-lvl-up-common.json';
 import mowUpgradesRaw from 'src/v2/data/mows-upgrades.json';
-import { Rarity } from 'src/models/enums';
+import { Alliance, Rarity } from 'src/models/enums';
 import { IBaseUpgrade, ICraftedUpgrade, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
@@ -19,9 +19,9 @@ export class MowLookupService {
     private static mowLevelUpCommon: IMowLevelUpgrade[] = mowCommonMaterial;
     private static mowUpgrades: IMowLevelUpgradesDic = mowUpgradesRaw;
 
-    public static getMaterialsList(mow: IMow): IMowLevelMaterials[] {
+    public static getMaterialsList(mowId: string, mowLabel: string, mowAlliance: Alliance): IMowLevelMaterials[] {
         const result: IMowLevelMaterials[] = [];
-        const mowUpgrades = this.mowUpgrades[mow.id] ?? [];
+        const mowUpgrades = this.mowUpgrades[mowId] ?? [];
 
         for (const lvlUpgrade of this.mowLevelUpCommon) {
             const index = lvlUpgrade.lvl - 1;
@@ -32,9 +32,9 @@ export class MowLookupService {
             result.push({
                 ...lvlUpgrade,
                 level: actualLevel,
-                mowId: mow.id,
-                mowLabel: mow.name,
-                mowAlliance: mow.alliance,
+                mowId,
+                mowLabel,
+                mowAlliance,
                 salvage: lvlUpgrade.salvage ?? 0,
                 forgeBadges: lvlUpgrade.forgeBadges ?? 0,
                 primaryUpgrades,
@@ -91,6 +91,17 @@ export class MowLookupService {
         });
 
         return orderBy(result, ['rarity', 'requiredTotal'], ['desc', 'desc']);
+    }
+
+    public static getUpgradesRaw(
+        mowId: string,
+        levelStart: number,
+        levelEnd: number,
+        key: 'primary' | 'secondary'
+    ): Array<string> {
+        const mowUpgrades = (this.mowUpgrades[mowId] ?? []).slice(levelStart - 1, levelEnd - 1);
+
+        return mowUpgrades.flatMap(upgrades => upgrades[key] ?? upgrades.primary);
     }
 
     private static getUpgrades(

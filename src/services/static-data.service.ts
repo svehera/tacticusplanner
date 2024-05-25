@@ -255,6 +255,7 @@ export class StaticDataService {
     static convertUnitData(rawData: UnitDataRaw): IUnitData {
         const unitData: IUnitData = {
             id: rawData.Name,
+            shortName: rawData['Short Name'],
             unitType: UnitType.character,
             alliance: rawData.Alliance,
             faction: rawData.Faction,
@@ -381,7 +382,7 @@ export class StaticDataService {
         let priority = 0;
         for (const character of characters) {
             priority++;
-            const characterUpgrades = StaticDataService.rankUpData[character.characterName];
+            const characterUpgrades = StaticDataService.rankUpData[character.unitName];
             if (!characterUpgrades) {
                 continue;
             }
@@ -423,7 +424,7 @@ export class StaticDataService {
                         stat: 'Unknown',
                         id: upgrade,
                         label: upgrade,
-                        character: character.characterName,
+                        character: character.unitName,
                         priority,
                         recipe: [],
                         allMaterials: [],
@@ -441,7 +442,7 @@ export class StaticDataService {
                     ...cloneDeep(recipe),
                     allMaterials,
                     priority,
-                    character: character.characterName,
+                    character: character.unitName,
                 };
             });
 

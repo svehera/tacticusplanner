@@ -6,7 +6,6 @@ import { StarsImage } from 'src/v2/components/images/stars-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { RankImage } from 'src/v2/components/images/rank-image';
 
-import { ICharacter2 } from 'src/models/interfaces';
 import { Rank } from 'src/models/enums';
 import { charsReleaseShards, charsUnlockShards } from 'src/models/constants';
 import { needToAscendCharacter, needToLevelCharacter } from 'src/shared-logic/functions';
@@ -25,8 +24,8 @@ export const CharacterTile = ({
     disableClick,
     onCharacterClick,
 }: {
-    character: ICharacter2;
-    onCharacterClick?: (character: ICharacter2) => void;
+    character: IUnit;
+    onCharacterClick?: (character: IUnit) => void;
     disableClick?: boolean;
 }) => {
     const viewContext = useContext(CharactersViewContext);

@@ -1,15 +1,16 @@
 ﻿import React, { ReactNode } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
 import { IUnit } from 'src/v2/features/characters/characters.models';
+import { CharacterTitle } from 'src/shared-components/character-title';
 
 interface Props<T extends IUnit> {
     unit: T | null;
     options: T[];
     onUnitChange: (value: T | null) => void;
-    renderOption: (props: React.HTMLAttributes<any>, unit: T) => ReactNode;
+    style?: React.CSSProperties;
 }
 
-export const UnitsAutocomplete = <T extends IUnit>({ onUnitChange, options, unit, renderOption }: Props<T>) => {
+export const UnitsAutocomplete = <T extends IUnit>({ onUnitChange, options, unit, style = {} }: Props<T>) => {
     const [openAutocomplete, setOpenAutocomplete] = React.useState(false);
 
     const updateValue = (value: T | null): void => {
@@ -36,7 +37,8 @@ export const UnitsAutocomplete = <T extends IUnit>({ onUnitChange, options, unit
 
     return (
         <Autocomplete
-            style={{ minWidth: 200 }}
+            fullWidth
+            style={{ minWidth: 200, ...style }}
             options={options}
             value={unit}
             open={openAutocomplete}
@@ -44,7 +46,15 @@ export const UnitsAutocomplete = <T extends IUnit>({ onUnitChange, options, unit
             onBlur={() => handleAutocompleteChange(false)}
             getOptionLabel={option => option.name}
             isOptionEqualToValue={(option, value) => option.id === value.id}
-            renderOption={renderOption}
+            renderOption={(props, option) => (
+                <CharacterTitle
+                    {...props}
+                    key={option.name}
+                    character={option}
+                    short={true}
+                    onClick={() => updateValue(option)}
+                />
+            )}
             onChange={(_, value) => updateValue(value)}
             renderInput={params => (
                 <TextField

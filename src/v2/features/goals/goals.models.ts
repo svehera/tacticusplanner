@@ -1,8 +1,21 @@
-﻿import { CampaignsLocationsUsage, Faction, PersonalGoalType, Rank, Rarity, RarityStars } from 'src/models/enums';
+﻿import {
+    Alliance,
+    CampaignsLocationsUsage,
+    Faction,
+    PersonalGoalType,
+    Rank,
+    Rarity,
+    RarityStars,
+} from 'src/models/enums';
 import { ICampaignBattleComposed, ICampaignsProgress, IDailyRaidsPreferences } from 'src/models/interfaces';
 import { IXpEstimate } from 'src/v2/features/characters/characters.models';
+import { IMowMaterialsTotal } from 'src/v2/features/lookup/lookup.models';
 
-export type CharacterRaidGoalSelect = ICharacterUpgradeRankGoal | ICharacterAscendGoal | ICharacterUnlockGoal;
+export type CharacterRaidGoalSelect =
+    | ICharacterUpgradeRankGoal
+    | ICharacterAscendGoal
+    | ICharacterUnlockGoal
+    | ICharacterUpgradeMow;
 
 export interface ICharacterRaidGoalSelectBase {
     priority: number;
@@ -11,6 +24,7 @@ export interface ICharacterRaidGoalSelectBase {
     unitId: string;
     unitName: string;
     unitIcon: string;
+    unitAlliance: Alliance;
     notes: string;
 }
 
@@ -22,8 +36,19 @@ export interface ICharacterUpgradeRankGoal extends ICharacterRaidGoalSelectBase,
     xp: number;
 }
 
+export interface ICharacterUpgradeMow extends ICharacterRaidGoalSelectBase {
+    type: PersonalGoalType.UpgradeMow;
+
+    primaryStart: number;
+    primaryEnd: number;
+
+    secondaryStart: number;
+    secondaryEnd: number;
+    upgradesRarity: Rarity[];
+}
+
 export interface IRankLookup {
-    characterName: string;
+    unitName: string;
     rankStart: Rank;
     rankEnd: Rank;
     appliedUpgrades: string[];
@@ -39,6 +64,7 @@ export interface IGoalEstimate {
     oTokensTotal: number;
     xpBooksTotal: number;
     xpEstimate?: IXpEstimate;
+    mowEstimate?: IMowMaterialsTotal;
 }
 
 export interface ICharacterUnlockGoal extends ICharacterRaidGoalSelectBase {
@@ -113,7 +139,7 @@ export interface IEstimatedUpgrades {
     inProgressMaterials: ICharacterUpgradeEstimate[];
     blockedMaterials: ICharacterUpgradeEstimate[];
     finishedMaterials: ICharacterUpgradeEstimate[];
-    characters: ICharacterUpgrade[];
+    characters: IUnitUpgrade[];
     byCharactersPriority: ICharacterUpgradeRankEstimate[];
     relatedUpgrades: string[];
     energyTotal: number;
@@ -139,23 +165,24 @@ export interface IItemRaidLocation extends ICampaignBattleComposed {
     isShardsLocation: boolean;
 }
 
-export interface ICharacterUpgrade {
+export interface IUnitUpgrade {
     goalId: string;
-    characterId: string;
+    unitId: string;
     label: string;
-    upgradeRanks: ICharacterUpgradeRank[];
+    upgradeRanks: IUnitUpgradeRank[];
     baseUpgradesTotal: Record<string, number>;
     relatedUpgrades: string[];
 }
 
-export interface ICharacterUpgradeRank {
+export interface IUnitUpgradeRank {
     rankStart: Rank;
     rankEnd: Rank;
     rankPoint5: boolean;
     upgrades: string[];
 }
 
-export interface ICharacterUpgradeRankEstimate extends ICharacterUpgradeRankGoal {
+export interface ICharacterUpgradeRankEstimate {
+    goalId: string;
     upgrades: ICharacterUpgradeEstimate[];
 }
 

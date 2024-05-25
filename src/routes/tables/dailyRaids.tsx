@@ -1,7 +1,7 @@
 ﻿import React, { useContext, useMemo } from 'react';
 import { enqueueSnackbar } from 'notistack';
 
-import { ICharacter2, IDailyRaidsFilters } from 'src/models/interfaces';
+import { IDailyRaidsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import {
     CharacterRaidGoalSelect,
@@ -20,12 +20,14 @@ import { RaidsPlan } from 'src/routes/tables/raids-plan';
 import { RaidsHeader } from 'src/routes/tables/raids-header';
 
 import './dailyRaids.scss';
+import { IUnit } from 'src/v2/features/characters/characters.models';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
     const {
         dailyRaids,
         characters: storeCharacters,
+        mows: storeMows,
         goals,
         campaignsProgress,
         dailyRaidsPreferences,
@@ -34,11 +36,11 @@ export const DailyRaids = () => {
 
     const [hasChanges, setHasChanges] = React.useState<boolean>(false);
     const [upgrades, setUpgrades] = React.useState<Record<string, number>>(inventory.upgrades);
-    const [characters, setCharacters] = React.useState<ICharacter2[]>(storeCharacters);
+    const [units, setUnits] = React.useState<IUnit[]>([...storeCharacters, ...storeMows]);
 
-    const { allGoals, shardsGoals, upgradeRankGoals } = useMemo(() => {
-        return GoalsService.prepareGoals(goals, characters, true);
-    }, [goals, characters]);
+    const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
+        return GoalsService.prepareGoals(goals, units, true);
+    }, [goals, units]);
 
     const handleUpgradesAdd = (upgradeId: string, value: number, location: IItemRaidLocation) => {
         setHasChanges(true);
@@ -98,7 +100,7 @@ export const DailyRaids = () => {
 
     const refresh = () => {
         setUpgrades({ ...inventory.upgrades });
-        setCharacters([...storeCharacters]);
+        setUnits([...storeCharacters]);
         setHasChanges(false);
     };
 
@@ -107,7 +109,7 @@ export const DailyRaids = () => {
         setHasChanges(false);
         setTimeout(() => {
             setUpgrades({ ...inventory.upgrades });
-            setCharacters([...storeCharacters]);
+            setUnits([...storeCharacters]);
         }, 100);
     };
 
@@ -143,9 +145,9 @@ export const DailyRaids = () => {
                 completedLocations: dailyRaids.raidedLocations?.filter(x => !x.isShardsLocation) ?? [],
                 filters: dailyRaids.filters,
             },
-            ...upgradeRankGoals
+            ...upgradeRankOrMowGoals
         );
-    }, [actualEnergy, upgradeRankGoals, dailyRaidsPreferences, dailyRaids.filters, upgrades]);
+    }, [actualEnergy, upgradeRankOrMowGoals, dailyRaidsPreferences, dailyRaids.filters, upgrades]);
 
     const hasShardsEnergy = dailyRaidsPreferences.shardsEnergy > 0 || estimatedShards.energyPerDay > 0;
     const energyDescription = hasShardsEnergy
@@ -162,11 +164,7 @@ export const DailyRaids = () => {
                 refreshHandle={refresh}
                 resetDisabled={!dailyRaids.raidedLocations?.length}
                 resetHandler={resetDay}>
-                <ActiveGoalsDialog
-                    characters={characters}
-                    goals={allGoals}
-                    onGoalsSelectChange={handleGoalsSelectionChange}
-                />
+                <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
                 <LocationsFilter filter={dailyRaids.filters} filtersChange={saveFilterChanges} />
             </RaidsHeader>
 

@@ -3,27 +3,36 @@
     ICharacterAscendGoal,
     ICharacterRaidGoalSelectBase,
     ICharacterUnlockGoal,
+    ICharacterUpgradeMow,
     ICharacterUpgradeRankGoal,
 } from 'src/v2/features/goals/goals.models';
-import { ICharacter2, IPersonalGoal } from 'src/models/interfaces';
+import { IPersonalGoal } from 'src/models/interfaces';
 import { rarityToStars } from 'src/models/constants';
 import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 
 export class GoalsService {
     static prepareGoals(
         goals: IPersonalGoal[],
-        characters: ICharacter2[],
+        characters: IUnit[],
         onlySelected: boolean
     ): {
         allGoals: CharacterRaidGoalSelect[];
         shardsGoals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>;
-        upgradeRankGoals: Array<ICharacterUpgradeRankGoal>;
+        upgradeRankOrMowGoals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>;
     } {
         const allGoals = goals
             .map(g => {
-                const relatedCharacter = characters.find(x => x.name === g.character);
+                const relatedCharacter = characters.find(x => x.id === g.character);
                 if (
-                    ![PersonalGoalType.UpgradeRank, PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(g.type)
+                    ![
+                        PersonalGoalType.UpgradeRank,
+                        PersonalGoalType.Ascend,
+                        PersonalGoalType.Unlock,
+                        PersonalGoalType.UpgradeMow,
+                    ].includes(g.type) ||
+                    !relatedCharacter
                 ) {
                     return null;
                 }
@@ -37,73 +46,105 @@ export class GoalsService {
             [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(x.type)
         ) as Array<ICharacterUnlockGoal | ICharacterAscendGoal>;
 
-        const upgradeRankGoals = selectedGoals.filter(x =>
-            [PersonalGoalType.UpgradeRank].includes(x.type)
+        const upgradeRankOrMowGoals = selectedGoals.filter(x =>
+            [PersonalGoalType.UpgradeRank, PersonalGoalType.UpgradeMow].includes(x.type)
         ) as Array<ICharacterUpgradeRankGoal>;
 
         return {
             allGoals,
             shardsGoals,
-            upgradeRankGoals,
+            upgradeRankOrMowGoals,
         };
     }
-    static convertToTypedGoal(g: IPersonalGoal, relatedCharacter?: ICharacter2): CharacterRaidGoalSelect | null {
-        if (!relatedCharacter) {
+    static convertToTypedGoal(g: IPersonalGoal, unit?: IUnit): CharacterRaidGoalSelect | null {
+        if (!unit) {
             return null;
         }
-        const base: ICharacterRaidGoalSelectBase = {
-            priority: g.priority,
-            goalId: g.id,
-            include: g.dailyRaids,
-            unitName: relatedCharacter.name,
-            unitIcon: relatedCharacter.icon,
-            notes: g.notes ?? '',
-        };
 
-        if (g.type === PersonalGoalType.Ascend) {
-            const result: ICharacterAscendGoal = {
-                type: PersonalGoalType.Ascend,
-                rarityStart: relatedCharacter.rarity,
-                rarityEnd: g.targetRarity!,
-                shards: relatedCharacter.shards,
-                starsStart: relatedCharacter.stars,
-                starsEnd: g.targetStars ?? rarityToStars[g.targetRarity!],
-                onslaughtShards: g.shardsPerToken ?? 1,
-                campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
-                ...base,
+        if (isMow(unit)) {
+            const base: ICharacterRaidGoalSelectBase = {
+                priority: g.priority,
+                goalId: g.id,
+                include: g.dailyRaids,
+                unitId: unit.id,
+                unitName: unit.name,
+                unitIcon: unit.badgeIcon,
+                notes: g.notes ?? '',
+                unitAlliance: unit.alliance,
             };
-            return result;
+
+            if (g.type === PersonalGoalType.UpgradeMow) {
+                const result: ICharacterUpgradeMow = {
+                    type: PersonalGoalType.UpgradeMow,
+                    primaryStart: unit.primaryAbilityLevel,
+                    primaryEnd: g.primaryAbilityLevel ?? unit.primaryAbilityLevel,
+                    secondaryStart: unit.secondaryAbilityLevel,
+                    secondaryEnd: g.secondaryAbilityLevel ?? unit.secondaryAbilityLevel,
+                    upgradesRarity: g.upgradesRarity ?? [],
+                    ...base,
+                };
+                return result;
+            }
         }
 
-        if (g.type === PersonalGoalType.Unlock) {
-            const result: ICharacterUnlockGoal = {
-                type: PersonalGoalType.Unlock,
-
-                shards: relatedCharacter.shards,
-                rarity: relatedCharacter.rarity,
-                rank: relatedCharacter.rank,
-                faction: relatedCharacter.faction,
-                campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
-                ...base,
+        if (isCharacter(unit)) {
+            const base: ICharacterRaidGoalSelectBase = {
+                priority: g.priority,
+                goalId: g.id,
+                include: g.dailyRaids,
+                unitId: unit.id,
+                unitName: unit.name,
+                unitIcon: unit.icon,
+                unitAlliance: unit.alliance,
+                notes: g.notes ?? '',
             };
-            return result;
+
+            if (g.type === PersonalGoalType.Ascend) {
+                const result: ICharacterAscendGoal = {
+                    type: PersonalGoalType.Ascend,
+                    rarityStart: unit.rarity,
+                    rarityEnd: g.targetRarity!,
+                    shards: unit.shards,
+                    starsStart: unit.stars,
+                    starsEnd: g.targetStars ?? rarityToStars[g.targetRarity!],
+                    onslaughtShards: g.shardsPerToken ?? 1,
+                    campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
+                    ...base,
+                };
+                return result;
+            }
+
+            if (g.type === PersonalGoalType.Unlock) {
+                const result: ICharacterUnlockGoal = {
+                    type: PersonalGoalType.Unlock,
+
+                    shards: unit.shards,
+                    rarity: unit.rarity,
+                    rank: unit.rank,
+                    faction: unit.faction,
+                    campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
+                    ...base,
+                };
+                return result;
+            }
+
+            if (g.type === PersonalGoalType.UpgradeRank) {
+                const result: ICharacterUpgradeRankGoal = {
+                    type: PersonalGoalType.UpgradeRank,
+                    rankStart: unit.rank,
+                    rankEnd: g.targetRank!,
+                    rankPoint5: g.rankPoint5!,
+                    upgradesRarity: g.upgradesRarity ?? [],
+                    appliedUpgrades: unit.upgrades,
+                    level: unit.level,
+                    xp: unit.xp,
+                    rarity: unit.rarity,
+                    ...base,
+                };
+                return result;
+            }
         }
 
-        if (g.type === PersonalGoalType.UpgradeRank) {
-            const result: ICharacterUpgradeRankGoal = {
-                type: PersonalGoalType.UpgradeRank,
-                rankStart: relatedCharacter.rank,
-                rankEnd: g.targetRank!,
-                rankPoint5: g.rankPoint5!,
-                upgradesRarity: g.upgradesRarity ?? [],
-                appliedUpgrades: relatedCharacter.upgrades,
-                level: relatedCharacter.level,
-                xp: relatedCharacter.xp,
-                rarity: relatedCharacter.rarity,
-                ...base,
-            };
-            return result;
-        }
         return null;
     }
 
@@ -113,7 +154,7 @@ export class GoalsService {
             type: goal.type,
             priority: goal.priority,
             dailyRaids: goal.include,
-            character: goal.unitName,
+            character: goal.unitId,
             notes: goal.notes,
         };
         switch (goal.type) {
@@ -140,6 +181,14 @@ export class GoalsService {
                     shardsPerToken: goal.onslaughtShards,
                 };
             }
+            case PersonalGoalType.UpgradeMow: {
+                return {
+                    ...base,
+                    primaryAbilityLevel: goal.primaryEnd,
+                    secondaryAbilityLevel: goal.secondaryEnd,
+                    upgradesRarity: goal.upgradesRarity,
+                };
+            }
             default: {
                 return null;
             }
@@ -157,6 +206,10 @@ export class GoalsService {
 
         if (goal.type == PersonalGoalType.Ascend) {
             return goal.rarityStart >= goal.rarityEnd && goal.starsStart >= goal.starsEnd;
+        }
+
+        if (goal.type == PersonalGoalType.UpgradeMow) {
+            return goal.primaryStart >= goal.primaryEnd && goal.secondaryStart >= goal.secondaryEnd;
         }
 
         if (goal.type == PersonalGoalType.Unlock) {

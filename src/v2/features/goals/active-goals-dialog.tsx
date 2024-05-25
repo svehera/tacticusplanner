@@ -5,20 +5,20 @@ import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
-import { ICharacter2 } from 'src/models/interfaces';
 import { PersonalGoalType } from 'src/models/enums';
 import { CharactersRaidsGoal } from 'src/v2/features/goals/characters-raids-goal';
+import { IUnit } from 'src/v2/features/characters/characters.models';
 
 interface Props {
     goals: CharacterRaidGoalSelect[];
-    characters: ICharacter2[];
+    units: IUnit[];
     onGoalsSelectChange: (chars: CharacterRaidGoalSelect[]) => void;
 }
 
-export const ActiveGoalsDialog: React.FC<Props> = ({ goals, characters, onGoalsSelectChange }) => {
+export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelectChange }) => {
     const [openGoals, setOpenGoals] = React.useState<boolean>(false);
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
-    const [editCharacter, setEditCharacter] = useState<ICharacter2 | null>(null);
+    const [editUnit, setEditUnit] = useState<IUnit | null>(null);
 
     const [currentGoalsSelect, setCurrentGoalsSelect] = React.useState<CharacterRaidGoalSelect[]>(goals);
 
@@ -37,11 +37,11 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, characters, onGoalsS
 
     const handleGoalEdit = (goalId: string) => {
         const goalToEdit = goals.find(x => x.goalId === goalId);
-        const characterToEdit = characters.find(x => x.name === goalToEdit?.unitName);
+        const characterToEdit = units.find(x => x.name === goalToEdit?.unitName);
 
         if (goalToEdit && characterToEdit) {
             setEditGoal(goalToEdit);
-            setEditCharacter(characterToEdit);
+            setEditUnit(characterToEdit);
         }
     };
 
@@ -58,6 +58,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, characters, onGoalsS
     }, [currentGoalsSelect, goals]);
 
     const upgradeRankGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.UpgradeRank);
+    const upgradeMowGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.UpgradeMow);
     const ascendGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.Ascend);
     const unlockGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.Unlock);
 
@@ -126,6 +127,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, characters, onGoalsS
                 <DialogContent>
                     <div className="flex-box start wrap">
                         {!!upgradeRankGoals.length && renderGoalsGroup('Upgrade rank', upgradeRankGoals)}
+                        {!!upgradeMowGoals.length && renderGoalsGroup('Upgrade MoW', upgradeMowGoals)}
                         {!!ascendGoals.length && renderGoalsGroup('Ascend/Promote', ascendGoals)}
                         {!!unlockGoals.length && renderGoalsGroup('Unlock', unlockGoals)}
                     </div>
@@ -141,11 +143,11 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, characters, onGoalsS
                 </DialogActions>
             </Dialog>
 
-            {editGoal && editCharacter && (
+            {editGoal && editUnit && (
                 <EditGoalDialog
                     isOpen={true}
                     goal={editGoal}
-                    character={editCharacter}
+                    unit={editUnit}
                     onClose={() => {
                         setEditGoal(null);
                     }}

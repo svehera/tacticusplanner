@@ -44,7 +44,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
 
     const possibleUpgrades = useMemo(() => {
         return StaticDataService.getUpgrades({
-            characterName: characterName,
+            unitName: characterName,
             rankStart: rank,
             rankEnd: rank + 1,
             appliedUpgrades: [],
@@ -99,7 +99,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             upgradesToConsider = newUpgrades;
         } else {
             const previousRankUpgrades = StaticDataService.getUpgrades({
-                characterName,
+                unitName: characterName,
                 rankStart: formData.originalRank,
                 rankEnd: rank,
                 appliedUpgrades: formData.originalUpgrades,

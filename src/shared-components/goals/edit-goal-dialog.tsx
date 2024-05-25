@@ -4,7 +4,7 @@ import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/mater
 import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
-import { ICampaignsProgress, ICharacter2, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
+import { ICampaignsProgress, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
 import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityString } from 'src/models/enums';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { enqueueSnackbar } from 'notistack';
@@ -22,15 +22,18 @@ import { CampaignsUsageSelect } from 'src/shared-components/goals/campaings-usag
 import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
 import { CharacterImage } from 'src/shared-components/character-image';
 import MultipleSelectCheckmarks from 'src/routes/characters/multiple-select';
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { isMow } from 'src/v2/features/characters/units.functions';
+import { NumberInput } from 'src/v2/components/inputs/number-input';
 
 interface Props {
     isOpen: boolean;
     goal: CharacterRaidGoalSelect;
-    character: ICharacter2;
+    unit: IUnit;
     onClose?: (goal?: CharacterRaidGoalSelect) => void;
 }
 
-export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, character }) => {
+export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit }) => {
     const { goals, campaignsProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
@@ -46,19 +49,19 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                 case PersonalGoalType.Ascend: {
                     dispatch.characters({
                         type: 'UpdateRarity',
-                        character: updatedGoal.unitName,
+                        character: updatedGoal.unitId,
                         value: updatedGoal.rarityStart,
                     });
 
                     dispatch.characters({
                         type: 'UpdateShards',
-                        character: updatedGoal.unitName,
+                        character: updatedGoal.unitId,
                         value: updatedGoal.shards,
                     });
 
                     dispatch.characters({
                         type: 'UpdateStars',
-                        character: updatedGoal.unitName,
+                        character: updatedGoal.unitId,
                         value: updatedGoal.starsStart,
                     });
                     break;
@@ -66,7 +69,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                 case PersonalGoalType.Unlock: {
                     dispatch.characters({
                         type: 'UpdateShards',
-                        character: updatedGoal.unitName,
+                        character: updatedGoal.unitId,
                         value: updatedGoal.shards,
                     });
                     break;
@@ -74,13 +77,21 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                 case PersonalGoalType.UpgradeRank: {
                     dispatch.characters({
                         type: 'UpdateRank',
-                        character: updatedGoal.unitName,
+                        character: updatedGoal.unitId,
                         value: updatedGoal.rankStart,
                     });
                     dispatch.characters({
                         type: 'UpdateUpgrades',
-                        character: updatedGoal.unitName,
+                        character: updatedGoal.unitId,
                         value: updatedGoal.appliedUpgrades,
+                    });
+                    break;
+                }
+                case PersonalGoalType.UpgradeMow: {
+                    dispatch.mows({
+                        type: 'UpdateAbilities',
+                        mowId: updatedGoal.unitId,
+                        abilities: [updatedGoal.primaryStart, updatedGoal.secondaryStart],
                     });
                     break;
                 }
@@ -115,8 +126,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
     }
 
     const possibleLocations =
-        [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!character
-            ? StaticDataService.getItemLocations(character.name)
+        [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
+            ? StaticDataService.getItemLocations(unit.id)
             : [];
 
     const unlockedLocations = possibleLocations
@@ -172,7 +183,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                             />
 
                             <CharacterUpgrades
-                                characterName={character.name}
+                                characterName={unit.id}
                                 upgrades={form.appliedUpgrades}
                                 rank={form.rankStart}
                                 upgradesChanges={(upgrades, updateInventory) => {
@@ -181,6 +192,75 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                                         appliedUpgrades: upgrades,
                                     });
                                     setInventoryUpdate(updateInventory);
+                                }}
+                            />
+                        </>
+                    )}
+
+                    {form.type === PersonalGoalType.UpgradeMow && isMow(unit) && (
+                        <>
+                            <div className="flex-box gap5 full-width between">
+                                <NumberInput
+                                    fullWidth
+                                    label="Primary current level"
+                                    min={form.primaryStart}
+                                    value={form.primaryStart}
+                                    valueChange={primaryStart => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            primaryStart,
+                                        }));
+                                    }}
+                                />
+                                <NumberInput
+                                    fullWidth
+                                    label="Primary target level"
+                                    min={form.primaryEnd}
+                                    value={form.primaryEnd}
+                                    valueChange={primaryEnd => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            primaryEnd,
+                                        }));
+                                    }}
+                                />
+                            </div>
+                            <div className="flex-box gap5 full-width between">
+                                <NumberInput
+                                    fullWidth
+                                    label="Secondary current level"
+                                    min={form.secondaryStart}
+                                    value={form.secondaryStart}
+                                    valueChange={secondaryStart => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            secondaryStart,
+                                        }));
+                                    }}
+                                />
+                                <NumberInput
+                                    fullWidth
+                                    label="Secondary target level"
+                                    min={form.secondaryEnd}
+                                    value={form.secondaryEnd}
+                                    valueChange={secondaryEnd => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            secondaryEnd,
+                                        }));
+                                    }}
+                                />
+                            </div>
+
+                            <MultipleSelectCheckmarks
+                                placeholder="Upgrades rarity"
+                                selectedValues={form.upgradesRarity!.map(x => Rarity[x])}
+                                values={Object.values(RarityString)}
+                                selectionChanges={values => {
+                                    setForm(curr => ({
+                                        ...curr,
+                                        upgradesRarity: values.map(x => +Rarity[x as unknown as number]),
+                                    }));
                                 }}
                             />
                         </>

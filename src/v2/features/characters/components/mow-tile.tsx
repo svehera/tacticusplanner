@@ -28,7 +28,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
 
     const unlockShards = charsUnlockShards[mow.rarity];
     const unlockProgress = (mow.shards / unlockShards) * 100;
-    const hasAbilities = (mow.unlocked && mow.primaryAbilityLevel) || mow.secondaryAbilityLevel;
+    const hasAbilities = mow.unlocked && (mow.primaryAbilityLevel || mow.secondaryAbilityLevel);
 
     return (
         <div

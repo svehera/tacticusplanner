@@ -26,7 +26,8 @@ export const MowLookup = () => {
     });
 
     const mowMaterials = useMemo(
-        () => (inputs.mow ? MowLookupService.getMaterialsList(inputs.mow) : []),
+        () =>
+            inputs.mow ? MowLookupService.getMaterialsList(inputs.mow.id, inputs.mow.name, inputs.mow.alliance) : [],
         [inputs.mow?.id]
     );
 

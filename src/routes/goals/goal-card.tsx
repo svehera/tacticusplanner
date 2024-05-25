@@ -24,6 +24,7 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import LinkIcon from '@mui/icons-material/Link';
 import { StaticDataService } from 'src/services';
+import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
 
 interface Props {
     goal: CharacterRaidGoalSelect;
@@ -39,6 +40,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
         energyTotal: 0,
         goalId: '',
         xpEstimate: null,
+        mowEstimate: null,
     };
     const isGoalCompleted = GoalsService.isGoalCompleted(goal);
 
@@ -166,8 +168,71 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             variant={'outlined'}
                             component={Link}
                             to={linkBase + params}
-                            target={isMobile ? '_self' : '_blank'}>
+                            target={'_self'}>
                             <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Upgrades</span>
+                        </Button>
+                    </div>
+                );
+            }
+            case PersonalGoalType.UpgradeMow: {
+                const linkBase = isMobile ? '/mobile/learn/mowLookup' : '/learn/mowLookup';
+                const params = `?mow=${goal.unitId}&pStart=${goal.primaryStart}&pEnd=${goal.primaryEnd}&sStart=${goal.secondaryStart}&sEnd=${goal.secondaryEnd}`;
+                const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
+                const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
+                return (
+                    <div>
+                        <div className="flex-box gap10">
+                            <div className="flex-box column start">
+                                {hasPrimaryGoal && (
+                                    <div className="flex-box gap3">
+                                        <span>Primary:</span> <b>{goal.primaryStart}</b> <ArrowForward />
+                                        <b>{goal.primaryEnd}</b>
+                                    </div>
+                                )}
+
+                                {hasSecondaryGoal && (
+                                    <div className="flex-box gap3">
+                                        <span>Secondary:</span> <b>{goal.secondaryStart}</b> <ArrowForward />
+                                        <b>{goal.secondaryEnd}</b>
+                                    </div>
+                                )}
+                            </div>
+                            {!!goal.upgradesRarity.length && (
+                                <div className="flex-box gap3">
+                                    {goal.upgradesRarity.map(x => (
+                                        <RarityImage key={x} rarity={x} />
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                        {goalEstimate.mowEstimate && (
+                            <div style={{ padding: '10px 0' }}>
+                                <MowMaterialsTotal
+                                    size="small"
+                                    mowAlliance={goal.unitAlliance}
+                                    total={goalEstimate.mowEstimate}
+                                />
+                            </div>
+                        )}
+                        <div className="flex-box gap10 wrap">
+                            <AccessibleTooltip title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
+                                <div className="flex-box gap3">
+                                    <CalendarMonthIcon /> {goalEstimate.daysLeft}
+                                </div>
+                            </AccessibleTooltip>
+                            <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
+                                <div className="flex-box gap3">
+                                    <MiscIcon icon={'energy'} height={18} width={15} /> {goalEstimate.energyTotal}
+                                </div>
+                            </AccessibleTooltip>
+                        </div>
+                        <Button
+                            size="small"
+                            variant={'outlined'}
+                            component={Link}
+                            to={linkBase + params}
+                            target={'_self'}>
+                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Lookup</span>
                         </Button>
                     </div>
                 );

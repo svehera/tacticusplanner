@@ -10,13 +10,14 @@ import { ForgeBadgeImage } from 'src/v2/components/images/forge-badge-image';
 interface Props {
     total: IMowMaterialsTotal;
     mowAlliance: Alliance;
-    label: string;
+    label?: string;
+    size?: 'small' | 'medium';
 }
 
-export const MowMaterialsTotal: React.FC<Props> = ({ total, mowAlliance, label }) => {
+export const MowMaterialsTotal: React.FC<Props> = ({ total, mowAlliance, label, size = 'medium' }) => {
     return (
         <div className="flex-box gap5 wrap">
-            <b>{label}</b>
+            {label && <b>{label}</b>}
             <div className="flex-box gap20 wrap">
                 <div className="flex-box gap5">
                     {[Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon, Rarity.Common].map(rarity => {
@@ -24,7 +25,7 @@ export const MowMaterialsTotal: React.FC<Props> = ({ total, mowAlliance, label }
                         return (
                             badgesCount > 0 && (
                                 <Badge key={rarity} badgeContent={<b>{badgesCount}</b>}>
-                                    <BadgeImage alliance={mowAlliance} rarity={rarity} />
+                                    <BadgeImage alliance={mowAlliance} rarity={rarity} size={size} />
                                 </Badge>
                             )
                         );
@@ -32,7 +33,7 @@ export const MowMaterialsTotal: React.FC<Props> = ({ total, mowAlliance, label }
                 </div>
                 <div className="flex-box gap5">
                     <b>{total.components}</b>
-                    <ComponentImage alliance={mowAlliance} />
+                    <ComponentImage alliance={mowAlliance} size={size} />
                 </div>
                 <div className="flex-box gap5">
                     {[Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon].map(rarity => {
@@ -40,7 +41,7 @@ export const MowMaterialsTotal: React.FC<Props> = ({ total, mowAlliance, label }
                         return (
                             forgeBadgesCount > 0 && (
                                 <Badge key={rarity} badgeContent={<b>{forgeBadgesCount}</b>}>
-                                    <ForgeBadgeImage rarity={rarity} />
+                                    <ForgeBadgeImage rarity={rarity} size={size} />
                                 </Badge>
                             )
                         );
