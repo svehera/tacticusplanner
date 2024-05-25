@@ -13,7 +13,7 @@ export const StarsImage = ({ stars }: { stars: RarityStars }) => {
         const starsImages = Array.from({ length: stars }, (_, index) => (
             <img
                 key={index}
-                style={{ pointerEvents: 'none' }}
+                style={{ pointerEvents: 'none', marginLeft: index > 0 ? -2 : 0 }}
                 src={goldStar}
                 height={stars === 5 && index === 2 ? 18 : 12}
                 alt="Gold star"
@@ -27,7 +27,7 @@ export const StarsImage = ({ stars }: { stars: RarityStars }) => {
         const starsImages = Array.from({ length: stars - 5 }, (_, index) => (
             <img
                 key={index}
-                style={{ pointerEvents: 'none' }}
+                style={{ pointerEvents: 'none', marginLeft: index > 0 ? -2 : 0 }}
                 src={redStar}
                 height={stars === 10 && index === 2 ? 18 : 12}
                 alt="Red star"
