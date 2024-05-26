@@ -3,6 +3,7 @@
     ICharacterAscendGoal,
     ICharacterRaidGoalSelectBase,
     ICharacterUnlockGoal,
+    ICharacterUpgradeAbilities,
     ICharacterUpgradeMow,
     ICharacterUpgradeRankGoal,
 } from 'src/v2/features/goals/goals.models';
@@ -21,6 +22,7 @@ export class GoalsService {
         allGoals: CharacterRaidGoalSelect[];
         shardsGoals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>;
         upgradeRankOrMowGoals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>;
+        upgradeAbilities: Array<ICharacterUpgradeAbilities>;
     } {
         const allGoals = goals
             .map(g => {
@@ -31,6 +33,7 @@ export class GoalsService {
                         PersonalGoalType.Ascend,
                         PersonalGoalType.Unlock,
                         PersonalGoalType.UpgradeMow,
+                        PersonalGoalType.UpgradeAbilities,
                     ].includes(g.type) ||
                     !relatedCharacter
                 ) {
@@ -50,10 +53,15 @@ export class GoalsService {
             [PersonalGoalType.UpgradeRank, PersonalGoalType.UpgradeMow].includes(x.type)
         ) as Array<ICharacterUpgradeRankGoal>;
 
+        const upgradeAbilities = selectedGoals.filter(x =>
+            [PersonalGoalType.UpgradeAbilities].includes(x.type)
+        ) as Array<ICharacterUpgradeAbilities>;
+
         return {
             allGoals,
             shardsGoals,
             upgradeRankOrMowGoals,
+            upgradeAbilities,
         };
     }
     static convertToTypedGoal(g: IPersonalGoal, unit?: IUnit): CharacterRaidGoalSelect | null {
@@ -77,9 +85,9 @@ export class GoalsService {
                 const result: ICharacterUpgradeMow = {
                     type: PersonalGoalType.UpgradeMow,
                     primaryStart: unit.primaryAbilityLevel,
-                    primaryEnd: g.primaryAbilityLevel ?? unit.primaryAbilityLevel,
+                    primaryEnd: g.firstAbilityLevel ?? unit.primaryAbilityLevel,
                     secondaryStart: unit.secondaryAbilityLevel,
-                    secondaryEnd: g.secondaryAbilityLevel ?? unit.secondaryAbilityLevel,
+                    secondaryEnd: g.secondAbilityLevel ?? unit.secondaryAbilityLevel,
                     upgradesRarity: g.upgradesRarity ?? [],
                     ...base,
                 };
@@ -109,6 +117,18 @@ export class GoalsService {
                     starsEnd: g.targetStars ?? rarityToStars[g.targetRarity!],
                     onslaughtShards: g.shardsPerToken ?? 1,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
+                    ...base,
+                };
+                return result;
+            }
+
+            if (g.type === PersonalGoalType.UpgradeAbilities) {
+                const result: ICharacterUpgradeAbilities = {
+                    type: PersonalGoalType.UpgradeAbilities,
+                    activeStart: unit.activeAbilityLevel,
+                    activeEnd: g.firstAbilityLevel ?? unit.activeAbilityLevel,
+                    passiveStart: unit.passiveAbilityLevel,
+                    passiveEnd: g.secondAbilityLevel ?? unit.passiveAbilityLevel,
                     ...base,
                 };
                 return result;
@@ -184,8 +204,8 @@ export class GoalsService {
             case PersonalGoalType.UpgradeMow: {
                 return {
                     ...base,
-                    primaryAbilityLevel: goal.primaryEnd,
-                    secondaryAbilityLevel: goal.secondaryEnd,
+                    firstAbilityLevel: goal.primaryEnd,
+                    secondAbilityLevel: goal.secondaryEnd,
                     upgradesRarity: goal.upgradesRarity,
                 };
             }

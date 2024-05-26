@@ -15,7 +15,8 @@ export type CharacterRaidGoalSelect =
     | ICharacterUpgradeRankGoal
     | ICharacterAscendGoal
     | ICharacterUnlockGoal
-    | ICharacterUpgradeMow;
+    | ICharacterUpgradeMow
+    | ICharacterUpgradeAbilities;
 
 export interface ICharacterRaidGoalSelectBase {
     priority: number;
@@ -45,6 +46,16 @@ export interface ICharacterUpgradeMow extends ICharacterRaidGoalSelectBase {
     secondaryStart: number;
     secondaryEnd: number;
     upgradesRarity: Rarity[];
+}
+
+export interface ICharacterUpgradeAbilities extends ICharacterRaidGoalSelectBase {
+    type: PersonalGoalType.UpgradeAbilities;
+
+    activeStart: number;
+    activeEnd: number;
+
+    passiveStart: number;
+    passiveEnd: number;
 }
 
 export interface IRankLookup {

@@ -67,7 +67,7 @@ export class CharactersService {
                 return orderBy(
                     units.map(x => ({
                         ...x,
-                        abilitiesLevel: x.primaryAbilityLevel + x.secondaryAbilityLevel,
+                        abilitiesLevel: this.getAbilitiesLevel(x),
                     })),
                     ['abilitiesLevel'],
                     ['desc']
@@ -80,6 +80,14 @@ export class CharactersService {
                 return orderBy(units, ['numberOfUnlocked'], ['asc']);
             default:
                 return [];
+        }
+    }
+
+    private static getAbilitiesLevel(unit: IUnit): number {
+        if (isCharacter(unit)) {
+            return unit.activeAbilityLevel + unit.passiveAbilityLevel;
+        } else {
+            return unit.primaryAbilityLevel + unit.secondaryAbilityLevel;
         }
     }
 
@@ -125,8 +133,8 @@ export class CharactersService {
             rank: Math.min(character.rank, capped.rank),
             stars: Math.min(character.stars, capped.stars),
             level: Math.min(character.level, capped.abilitiesLevel),
-            primaryAbilityLevel: Math.min(character.primaryAbilityLevel, capped.abilitiesLevel),
-            secondaryAbilityLevel: Math.min(character.secondaryAbilityLevel, capped.abilitiesLevel),
+            activeAbilityLevel: Math.min(character.activeAbilityLevel, capped.abilitiesLevel),
+            passiveAbilityLevel: Math.min(character.passiveAbilityLevel, capped.abilitiesLevel),
         };
     }
 
@@ -147,8 +155,8 @@ export class CharactersService {
             stars: character.stars,
             rarity: rarityCap,
             upgrades: [],
-            activeAbilityLevel: character.primaryAbilityLevel,
-            passiveAbilityLevel: character.secondaryAbilityLevel,
+            activeAbilityLevel: character.activeAbilityLevel,
+            passiveAbilityLevel: character.passiveAbilityLevel,
         } as unknown as ICharacter2);
 
         return characterPower > cappedPower ? 100 : Math.round((characterPower / cappedPower) * 100); // Round potential to the nearest whole number

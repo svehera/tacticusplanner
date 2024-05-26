@@ -157,8 +157,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         if (isMow(value)) {
             setForm(curr => ({
                 ...curr,
-                primaryAbilityLevel: value.primaryAbilityLevel,
-                secondaryAbilityLevel: value.secondaryAbilityLevel,
+                firstAbilityLevel: value.primaryAbilityLevel,
+                secondAbilityLevel: value.secondaryAbilityLevel,
             }));
         }
     };
@@ -181,8 +181,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
         if (form.type === PersonalGoalType.UpgradeMow && isMow(unit)) {
             return (
-                (form.primaryAbilityLevel ?? 0) <= unit.primaryAbilityLevel &&
-                (form.secondaryAbilityLevel ?? 0) <= unit.secondaryAbilityLevel
+                (form.firstAbilityLevel ?? 0) <= unit.primaryAbilityLevel &&
+                (form.secondAbilityLevel ?? 0) <= unit.secondaryAbilityLevel
             );
         }
 
@@ -269,11 +269,11 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         fullWidth
                                         label="Primary target level"
                                         min={unit.primaryAbilityLevel}
-                                        value={form.primaryAbilityLevel!}
+                                        value={form.firstAbilityLevel!}
                                         valueChange={primaryAbilityLevel => {
                                             setForm(curr => ({
                                                 ...curr,
-                                                primaryAbilityLevel,
+                                                firstAbilityLevel: primaryAbilityLevel,
                                             }));
                                         }}
                                     />
@@ -282,11 +282,11 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         fullWidth
                                         label="Secondary target level"
                                         min={unit.secondaryAbilityLevel}
-                                        value={form.secondaryAbilityLevel!}
+                                        value={form.secondAbilityLevel!}
                                         valueChange={secondaryAbilityLevel => {
                                             setForm(curr => ({
                                                 ...curr,
-                                                secondaryAbilityLevel,
+                                                secondAbilityLevel: secondaryAbilityLevel,
                                             }));
                                         }}
                                     />

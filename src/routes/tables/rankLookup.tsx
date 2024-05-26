@@ -79,14 +79,14 @@ export const RankLookup = () => {
 
         setMessage('Upgrades:');
         return StaticDataService.getUpgrades({
-            characterName: character.name,
+            unitName: character.id,
             rankStart,
             rankEnd,
             appliedUpgrades: [],
             rankPoint5,
             upgradesRarity: [],
         });
-    }, [character?.name, rankStart, rankEnd, rankPoint5]);
+    }, [character?.id, rankStart, rankEnd, rankPoint5]);
 
     const groupByRanks = useMemo(() => {
         const result: Array<{

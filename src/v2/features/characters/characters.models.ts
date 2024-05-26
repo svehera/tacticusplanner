@@ -82,3 +82,21 @@ export interface IXpEstimate {
     targetLevel: number;
     xpLeft: number;
 }
+
+export interface ICharacterAbilityLevelRaw {
+    lvl: number;
+    gold: number;
+    badges: number;
+}
+
+export interface ICharacterAbilityLevel {
+    lvl: number;
+    gold: number;
+    badges: number;
+    rarity: Rarity;
+}
+
+export interface ICharacterAbilitiesMaterialsTotal {
+    gold: number;
+    badges: Record<Rarity, number>;
+}

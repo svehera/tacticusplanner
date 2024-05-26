@@ -184,6 +184,7 @@ export enum PersonalGoalType {
     Ascend = 2,
     Unlock = 3,
     UpgradeMow = 4,
+    UpgradeAbilities = 5,
 }
 
 export enum CampaignsLocationsUsage {

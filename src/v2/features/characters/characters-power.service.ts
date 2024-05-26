@@ -1,6 +1,5 @@
 import { Rank, Rarity, RarityStars } from 'src/models/enums';
 import { IUnit } from 'src/v2/features/characters/characters.models';
-import { UnitType } from 'src/v2/features/characters/units.enums';
 import { isCharacter, isUnlocked } from 'src/v2/features/characters/units.functions';
 
 export class CharactersPowerService {
@@ -9,12 +8,21 @@ export class CharactersPowerService {
             return 0;
         }
         const abilityWeight = 500000 / 41274;
-        const abilityPower =
-            abilityWeight *
-            CharactersPowerService.getRarityCoeff(unit.rarity) *
-            (CharactersPowerService.getAbilityCoeff(unit.primaryAbilityLevel) +
-                CharactersPowerService.getAbilityCoeff(unit.secondaryAbilityLevel));
-        return Math.round(abilityPower);
+        if (isCharacter(unit)) {
+            const abilityPower =
+                abilityWeight *
+                CharactersPowerService.getRarityCoeff(unit.rarity) *
+                (CharactersPowerService.getAbilityCoeff(unit.activeAbilityLevel) +
+                    CharactersPowerService.getAbilityCoeff(unit.passiveAbilityLevel));
+            return Math.round(abilityPower);
+        } else {
+            const abilityPower =
+                abilityWeight *
+                CharactersPowerService.getRarityCoeff(unit.rarity) *
+                (CharactersPowerService.getAbilityCoeff(unit.primaryAbilityLevel) +
+                    CharactersPowerService.getAbilityCoeff(unit.secondaryAbilityLevel));
+            return Math.round(abilityPower);
+        }
     }
 
     public static getCharacterAttributePower(unit: IUnit): number {

@@ -18,14 +18,15 @@ import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
+import { ICharacter2 } from 'src/models/interfaces';
 
 export const CharacterTile = ({
     character,
     disableClick,
     onCharacterClick,
 }: {
-    character: IUnit;
-    onCharacterClick?: (character: IUnit) => void;
+    character: ICharacter2;
+    onCharacterClick?: (character: ICharacter2) => void;
     disableClick?: boolean;
 }) => {
     const viewContext = useContext(CharactersViewContext);
@@ -36,7 +37,7 @@ export const CharacterTile = ({
         ? charsUnlockShards[character.rarity]
         : charsReleaseShards[character.releaseRarity!];
     const unlockProgress = (character.shards / unlockShards) * 100;
-    const hasAbilities = (isUnlocked && character.primaryAbilityLevel) || character.secondaryAbilityLevel;
+    const hasAbilities = (isUnlocked && character.activeAbilityLevel) || character.passiveAbilityLevel;
     const needToAscend = useMemo(() => needToAscendCharacter(character), [character.rarity, character.rank]);
 
     const needToLevel = useMemo(
@@ -86,8 +87,8 @@ export const CharacterTile = ({
                 <div
                     className="abilities"
                     style={{ visibility: hasAbilities && viewContext.showAbilities ? 'visible' : 'hidden' }}>
-                    <div className="ability-level">{character.primaryAbilityLevel}</div>
-                    <div className="ability-level">{character.secondaryAbilityLevel}</div>
+                    <div className="ability-level">{character.activeAbilityLevel}</div>
+                    <div className="ability-level">{character.passiveAbilityLevel}</div>
                 </div>
                 <Conditional condition={viewContext.showCharacterLevel}>
                     {isUnlocked ? (

@@ -59,18 +59,18 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
 
                 existingChar.xp = updatedCharacter.xp;
                 existingChar.shards = updatedCharacter.shards;
-                existingChar.primaryAbilityLevel =
-                    updatedCharacter.primaryAbilityLevel < 0
+                existingChar.activeAbilityLevel =
+                    updatedCharacter.activeAbilityLevel < 0
                         ? 0
-                        : updatedCharacter.primaryAbilityLevel > 50
+                        : updatedCharacter.activeAbilityLevel > 50
                         ? 50
-                        : updatedCharacter.primaryAbilityLevel;
-                existingChar.secondaryAbilityLevel =
-                    updatedCharacter.secondaryAbilityLevel < 0
+                        : updatedCharacter.activeAbilityLevel;
+                existingChar.passiveAbilityLevel =
+                    updatedCharacter.passiveAbilityLevel < 0
                         ? 0
-                        : updatedCharacter.secondaryAbilityLevel > 50
+                        : updatedCharacter.passiveAbilityLevel > 50
                         ? 50
-                        : updatedCharacter.secondaryAbilityLevel;
+                        : updatedCharacter.passiveAbilityLevel;
 
                 const updatedLevel =
                     updatedCharacter.level < 0 ? 0 : updatedCharacter.level > 50 ? 50 : updatedCharacter.level;
@@ -78,8 +78,8 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                 existingChar.level = Math.max(
                     updatedLevel,
                     rankLevel,
-                    existingChar.primaryAbilityLevel,
-                    existingChar.secondaryAbilityLevel
+                    existingChar.activeAbilityLevel,
+                    existingChar.passiveAbilityLevel
                 );
             }
             return [...state];
