@@ -2,15 +2,19 @@
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import { PersonalGoalType, Rank } from 'src/models/enums';
-import { CharacterRaidGoalSelect, ICharacterUpgradeRankGoal, IGoalEstimate } from 'src/v2/features/goals/goals.models';
+import {
+    CharacterRaidGoalSelect,
+    ICharacterUpgradeMow,
+    ICharacterUpgradeRankGoal,
+    IGoalEstimate,
+} from 'src/v2/features/goals/goals.models';
 import { CharacterImage } from 'src/shared-components/character-image';
-import { charsUnlockShards, rankToLevel, rarityToStars } from 'src/models/constants';
+import { charsUnlockShards, rarityToStars } from 'src/models/constants';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { ArrowForward, DeleteForever, Edit, Info } from '@mui/icons-material';
 import { StarsImage } from 'src/v2/components/images/stars-image';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
@@ -18,6 +22,7 @@ import { isMobile } from 'react-device-detect';
 import LinkIcon from '@mui/icons-material/Link';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import IconButton from '@mui/material/IconButton';
+import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
 
 interface Props {
     rows: CharacterRaidGoalSelect[];
@@ -102,6 +107,47 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                     </div>
                 );
             }
+            case PersonalGoalType.UpgradeMow: {
+                const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
+                const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
+                return (
+                    <div>
+                        <div className="flex-box gap10">
+                            <div className="flex-box column start">
+                                {hasPrimaryGoal && (
+                                    <div className="flex-box gap3">
+                                        <span>Primary:</span> <b>{goal.primaryStart}</b> <ArrowForward />
+                                        <b>{goal.primaryEnd}</b>
+                                    </div>
+                                )}
+
+                                {hasSecondaryGoal && (
+                                    <div className="flex-box gap3">
+                                        <span>Secondary:</span> <b>{goal.secondaryStart}</b> <ArrowForward />
+                                        <b>{goal.secondaryEnd}</b>
+                                    </div>
+                                )}
+                            </div>
+                            {!!goal.upgradesRarity.length && (
+                                <div className="flex-box gap3">
+                                    {goal.upgradesRarity.map(x => (
+                                        <RarityImage key={x} rarity={x} />
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                        {goalEstimate.mowEstimate && (
+                            <div style={{ padding: '10px 0' }}>
+                                <MowMaterialsTotal
+                                    size="small"
+                                    mowAlliance={goal.unitAlliance}
+                                    total={goalEstimate.mowEstimate}
+                                />
+                            </div>
+                        )}
+                    </div>
+                );
+            }
             case PersonalGoalType.Unlock: {
                 const targetShards = charsUnlockShards[goal.rarity];
 
@@ -147,7 +193,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 maxWidth: 110,
             },
             {
-                field: 'characterIcon',
+                field: 'unitIcon',
                 headerName: 'Character',
                 cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
                     const { data } = params;
@@ -160,6 +206,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
             },
             {
                 headerName: 'Details',
+                autoHeight: true,
+                width: 300,
                 cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
                     const { data } = params;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
@@ -217,22 +265,32 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
             },
             {
                 headerName: 'Upgrades',
-                hide: !rows.some(row => row.type === PersonalGoalType.UpgradeRank),
-                cellRenderer: (params: ICellRendererParams<ICharacterUpgradeRankGoal>) => {
+                hide: !rows.some(row => [PersonalGoalType.UpgradeRank, PersonalGoalType.UpgradeMow].includes(row.type)),
+                cellRenderer: (params: ICellRendererParams<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>) => {
                     const { data } = params;
                     if (data) {
-                        const linkBase = isMobile ? '/mobile/learn/rankLookup' : '/learn/rankLookup';
-                        const params = `?character=${data.unitName}&rankStart=${Rank[data.rankStart]}&rankEnd=${
-                            Rank[data.rankEnd]
-                        }&rankPoint5=${data.rankPoint5}`;
+                        let linkBase: string = '';
+                        let params: string = '';
+
+                        if (data.type === PersonalGoalType.UpgradeRank) {
+                            linkBase = isMobile ? '/mobile/learn/rankLookup' : '/learn/rankLookup';
+                            params = `?character=${data.unitName}&rankStart=${Rank[data.rankStart]}&rankEnd=${
+                                Rank[data.rankEnd]
+                            }&rankPoint5=${data.rankPoint5}`;
+                        }
+
+                        if (data.type === PersonalGoalType.UpgradeMow) {
+                            linkBase = isMobile ? '/mobile/learn/mowLookup' : '/learn/mowLookup';
+                            params = `?mow=${data.unitId}&pStart=${data.primaryStart}&pEnd=${data.primaryEnd}&sStart=${data.secondaryStart}&sEnd=${data.secondaryEnd}`;
+                        }
                         return (
                             <Button
                                 size="small"
                                 variant={'outlined'}
                                 component={Link}
                                 to={linkBase + params}
-                                target={isMobile ? '_self' : '_blank'}>
-                                <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Upgrades</span>
+                                target={'_self'}>
+                                <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Lookup</span>
                             </Button>
                         );
                     }

@@ -217,7 +217,7 @@ export const Goals = () => {
                 <div>
                     <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
                         <span>
-                            Upgrade rank (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
+                            Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
                         </span>
                         <span>
                             <b>{estimatedUpgradesTotal.energyTotal}</b>{' '}

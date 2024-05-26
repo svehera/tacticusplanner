@@ -169,7 +169,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             component={Link}
                             to={linkBase + params}
                             target={'_self'}>
-                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Upgrades</span>
+                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Lookup</span>
                         </Button>
                     </div>
                 );
