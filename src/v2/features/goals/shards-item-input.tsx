@@ -1,9 +1,9 @@
 ﻿import React from 'react';
 import { RaidItemView } from 'src/v2/features/goals/raid-item-view';
 import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
-import { IUpgradeRaid, IItemRaidLocation, IShardsRaid } from 'src/v2/features/goals/goals.models';
-import { ShardItemTitle } from 'src/v2/features/goals/shard-item-title';
+import { IItemRaidLocation, IShardsRaid } from 'src/v2/features/goals/goals.models';
 import { CharacterImage } from 'src/shared-components/character-image';
+import { CampaignType } from 'src/models/enums';
 
 interface Props {
     shardsRaid: IShardsRaid;
@@ -29,7 +29,10 @@ export const ShardsItemInput: React.FC<Props> = ({ shardsRaid, handleAdd }) => {
             </div>
             <ul style={{ width: '100%', paddingInlineStart: 15 }}>
                 {shardsRaid.locations.map(location => {
-                    const maxObtained = Math.round(location.farmedItems);
+                    const maxObtained =
+                        location.campaignType === CampaignType.Onslaught
+                            ? shardsRaid.onslaughtShards
+                            : Math.round(location.farmedItems);
                     const defaultItemsObtained =
                         maxObtained + shardsRaid.acquiredCount > shardsRaid.requiredCount
                             ? shardsRaid.requiredCount - shardsRaid.acquiredCount
