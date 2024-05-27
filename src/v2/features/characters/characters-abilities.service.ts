@@ -6,7 +6,7 @@ import {
     IXpLevel,
 } from 'src/v2/features/characters/characters.models';
 import abilitiesLvlUpJson from 'src/v2/data/characters-lvl-up-abilities.json';
-import { Rarity } from 'src/models/enums';
+import { Alliance, Rarity } from 'src/models/enums';
 import { groupBy, mapValues, sum } from 'lodash';
 
 export class CharactersAbilitiesService {
@@ -23,7 +23,10 @@ export class CharactersAbilitiesService {
         return this.abilitiesLvlUp.slice(levelStart - 1, levelEnd - 1);
     }
 
-    public static getTotals(materials: ICharacterAbilityLevel[]): ICharacterAbilitiesMaterialsTotal {
+    public static getTotals(
+        materials: ICharacterAbilityLevel[],
+        alliance: Alliance
+    ): ICharacterAbilitiesMaterialsTotal {
         const gold = sum(materials.map(x => x.gold));
 
         const badges = mapValues(groupBy(materials, 'rarity'), x => sum(x.map(y => y.badges))) as Record<
@@ -32,6 +35,7 @@ export class CharactersAbilitiesService {
         >;
 
         return {
+            alliance,
             gold,
             badges,
         };

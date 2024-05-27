@@ -23,7 +23,7 @@ import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/g
 import { CharacterImage } from 'src/shared-components/character-image';
 import MultipleSelectCheckmarks from 'src/routes/characters/multiple-select';
 import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isMow } from 'src/v2/features/characters/units.functions';
+import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
 
 interface Props {
@@ -92,6 +92,15 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                         type: 'UpdateAbilities',
                         mowId: updatedGoal.unitId,
                         abilities: [updatedGoal.primaryStart, updatedGoal.secondaryStart],
+                    });
+                    break;
+                }
+
+                case PersonalGoalType.UpgradeAbilities: {
+                    dispatch.characters({
+                        type: 'UpdateAbilities',
+                        characterId: updatedGoal.unitId,
+                        abilities: [updatedGoal.activeStart, updatedGoal.passiveStart],
                     });
                     break;
                 }
@@ -203,7 +212,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 <NumberInput
                                     fullWidth
                                     label="Primary current level"
-                                    min={form.primaryStart}
+                                    min={unit.primaryAbilityLevel}
                                     value={form.primaryStart}
                                     valueChange={primaryStart => {
                                         setForm(curr => ({
@@ -215,7 +224,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 <NumberInput
                                     fullWidth
                                     label="Primary target level"
-                                    min={form.primaryEnd}
+                                    min={unit.primaryAbilityLevel}
                                     value={form.primaryEnd}
                                     valueChange={primaryEnd => {
                                         setForm(curr => ({
@@ -229,7 +238,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 <NumberInput
                                     fullWidth
                                     label="Secondary current level"
-                                    min={form.secondaryStart}
+                                    min={unit.secondaryAbilityLevel}
                                     value={form.secondaryStart}
                                     valueChange={secondaryStart => {
                                         setForm(curr => ({
@@ -241,7 +250,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 <NumberInput
                                     fullWidth
                                     label="Secondary target level"
-                                    min={form.secondaryEnd}
+                                    min={unit.secondaryAbilityLevel}
                                     value={form.secondaryEnd}
                                     valueChange={secondaryEnd => {
                                         setForm(curr => ({
@@ -263,6 +272,63 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     }));
                                 }}
                             />
+                        </>
+                    )}
+
+                    {form.type === PersonalGoalType.UpgradeAbilities && isCharacter(unit) && (
+                        <>
+                            <div className="flex-box gap5 full-width between">
+                                <NumberInput
+                                    fullWidth
+                                    label="Active current level"
+                                    min={unit.activeAbilityLevel}
+                                    value={form.activeStart}
+                                    valueChange={activeStart => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            activeStart,
+                                        }));
+                                    }}
+                                />
+                                <NumberInput
+                                    fullWidth
+                                    label="Active target level"
+                                    min={unit.activeAbilityLevel}
+                                    value={form.activeEnd}
+                                    valueChange={activeEnd => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            activeEnd,
+                                        }));
+                                    }}
+                                />
+                            </div>
+                            <div className="flex-box gap5 full-width between">
+                                <NumberInput
+                                    fullWidth
+                                    label="Passive current level"
+                                    min={unit.passiveAbilityLevel}
+                                    value={form.passiveStart}
+                                    valueChange={passiveStart => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            passiveStart,
+                                        }));
+                                    }}
+                                />
+                                <NumberInput
+                                    fullWidth
+                                    label="Passive target level"
+                                    min={unit.passiveAbilityLevel}
+                                    value={form.passiveEnd}
+                                    valueChange={passiveEnd => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            passiveEnd,
+                                        }));
+                                    }}
+                                />
+                            </div>
                         </>
                     )}
 

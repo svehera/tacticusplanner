@@ -103,7 +103,7 @@ export const EditMowDialog: React.FC<Props> = ({ mow, saveChanges, onClose, isOp
                             <Grid item xs={6}>
                                 <NumberInput
                                     fullWidth
-                                    label="Passive Ability"
+                                    label="Secondary Ability"
                                     value={editedMow.secondaryAbilityLevel}
                                     valueChange={value => handleInputChange('secondaryAbilityLevel', value)}
                                 />

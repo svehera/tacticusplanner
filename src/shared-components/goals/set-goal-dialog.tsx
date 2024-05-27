@@ -100,6 +100,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     const allowedCharacters: IUnit[] = useMemo(() => {
         switch (form.type) {
             case PersonalGoalType.Ascend:
+            case PersonalGoalType.UpgradeAbilities:
             case PersonalGoalType.UpgradeRank: {
                 return ignoreRankRarity ? characters : characters.filter(x => x.rank > Rank.Locked);
             }
@@ -151,6 +152,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 targetRank: value.rank,
                 targetStars: value.stars,
                 targetRarity: value.rarity,
+                firstAbilityLevel: value.activeAbilityLevel,
+                secondAbilityLevel: value.passiveAbilityLevel,
             }));
         }
 
@@ -186,6 +189,13 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             );
         }
 
+        if (form.type === PersonalGoalType.UpgradeAbilities && isCharacter(unit)) {
+            return (
+                (form.firstAbilityLevel ?? 0) <= unit.activeAbilityLevel &&
+                (form.secondAbilityLevel ?? 0) <= unit.passiveAbilityLevel
+            );
+        }
+
         return false;
     };
 
@@ -211,7 +221,11 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 <DialogContent style={{ paddingTop: 10 }}>
                     <Box id="set-goal-form" className="flex-box column gap20 full-width start">
                         <Conditional
-                            condition={[PersonalGoalType.UpgradeRank, PersonalGoalType.UpgradeMow].includes(form.type)}>
+                            condition={[
+                                PersonalGoalType.UpgradeRank,
+                                PersonalGoalType.UpgradeMow,
+                                PersonalGoalType.UpgradeAbilities,
+                            ].includes(form.type)}>
                             <IgnoreRankRarity value={ignoreRankRarity} onChange={setIgnoreRankRarity} />
                         </Conditional>
 
@@ -228,6 +242,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                     <MenuItem value={PersonalGoalType.Ascend}>Ascend</MenuItem>
                                     <MenuItem value={PersonalGoalType.Unlock}>Unlock</MenuItem>
                                     <MenuItem value={PersonalGoalType.UpgradeMow}>Upgrade MoW</MenuItem>
+                                    <MenuItem value={PersonalGoalType.UpgradeAbilities}>Upgrade Abilities</MenuItem>
                                 </Select>
                             </FormControl>
                             <PrioritySelect
@@ -302,6 +317,39 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         }));
                                     }}
                                 />
+                            </>
+                        )}
+
+                        {form.type === PersonalGoalType.UpgradeAbilities && isCharacter(unit) && (
+                            <>
+                                <div className="flex-box gap5 full-width between">
+                                    <NumberInput
+                                        key={unit.id + 'primary'}
+                                        fullWidth
+                                        label="Active target level"
+                                        min={unit.activeAbilityLevel}
+                                        value={form.firstAbilityLevel!}
+                                        valueChange={primaryAbilityLevel => {
+                                            setForm(curr => ({
+                                                ...curr,
+                                                firstAbilityLevel: primaryAbilityLevel,
+                                            }));
+                                        }}
+                                    />
+                                    <NumberInput
+                                        key={unit.id + 'secondary'}
+                                        fullWidth
+                                        label="Passive target level"
+                                        min={unit.passiveAbilityLevel}
+                                        value={form.secondAbilityLevel!}
+                                        valueChange={secondaryAbilityLevel => {
+                                            setForm(curr => ({
+                                                ...curr,
+                                                secondAbilityLevel: secondaryAbilityLevel,
+                                            }));
+                                        }}
+                                    />
+                                </div>
                             </>
                         )}
 

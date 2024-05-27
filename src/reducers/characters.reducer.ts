@@ -23,6 +23,11 @@ export type CharactersAction =
           value: string[];
       }
     | {
+          type: 'UpdateAbilities';
+          characterId: string;
+          abilities: [primary: number, secondary: number];
+      }
+    | {
           type: 'UpdateShards';
           character: string;
           value: number;
@@ -82,6 +87,23 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                     existingChar.passiveAbilityLevel
                 );
             }
+            return [...state];
+        }
+        case 'UpdateAbilities': {
+            const { characterId, abilities } = action;
+            const existingCharIndex = state.findIndex(x => x.name === characterId);
+            const existingChar = state[existingCharIndex];
+
+            if (!existingChar) {
+                return state;
+            }
+
+            state[existingCharIndex] = {
+                ...existingChar,
+                activeAbilityLevel: abilities[0],
+                passiveAbilityLevel: abilities[1],
+            };
+
             return [...state];
         }
         case 'UpdateRank': {

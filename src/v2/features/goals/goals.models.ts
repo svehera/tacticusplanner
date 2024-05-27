@@ -8,7 +8,7 @@
     RarityStars,
 } from 'src/models/enums';
 import { ICampaignBattleComposed, ICampaignsProgress, IDailyRaidsPreferences } from 'src/models/interfaces';
-import { IXpEstimate } from 'src/v2/features/characters/characters.models';
+import { ICharacterAbilitiesMaterialsTotal, IXpEstimate } from 'src/v2/features/characters/characters.models';
 import { IMowMaterialsTotal } from 'src/v2/features/lookup/lookup.models';
 
 export type CharacterRaidGoalSelect =
@@ -51,6 +51,9 @@ export interface ICharacterUpgradeMow extends ICharacterRaidGoalSelectBase {
 export interface ICharacterUpgradeAbilities extends ICharacterRaidGoalSelectBase {
     type: PersonalGoalType.UpgradeAbilities;
 
+    level: number;
+    xp: number;
+
     activeStart: number;
     activeEnd: number;
 
@@ -75,7 +78,9 @@ export interface IGoalEstimate {
     oTokensTotal: number;
     xpBooksTotal: number;
     xpEstimate?: IXpEstimate;
+    xpEstimateAbilities?: IXpEstimate;
     mowEstimate?: IMowMaterialsTotal;
+    abilitiesEstimate?: ICharacterAbilitiesMaterialsTotal;
 }
 
 export interface ICharacterUnlockGoal extends ICharacterRaidGoalSelectBase {

@@ -98,5 +98,6 @@ export interface ICharacterAbilityLevel {
 
 export interface ICharacterAbilitiesMaterialsTotal {
     gold: number;
+    alliance: Alliance;
     badges: Record<Rarity, number>;
 }

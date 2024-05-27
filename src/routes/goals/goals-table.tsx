@@ -23,6 +23,8 @@ import LinkIcon from '@mui/icons-material/Link';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import IconButton from '@mui/material/IconButton';
 import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
+import { XpTotal } from 'src/v2/features/goals/xp-total';
+import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 
 interface Props {
     rows: CharacterRaidGoalSelect[];
@@ -85,25 +87,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                                 )}
                             </div>
                         </div>
-                        {xpEstimate && (
-                            <div className="flex-box gap5">
-                                <span>(XP) Codex of War: {xpEstimate.legendaryBooks}</span>
-                                <AccessibleTooltip
-                                    title={
-                                        <span>
-                                            Current level: {xpEstimate.currentLevel}
-                                            <br />
-                                            Target level: {xpEstimate.targetLevel}
-                                            <br />
-                                            Gold: {xpEstimate.gold}
-                                            <br />
-                                            XP left: {xpEstimate.xpLeft}
-                                        </span>
-                                    }>
-                                    <Info color="primary" />
-                                </AccessibleTooltip>
-                            </div>
-                        )}
+                        {xpEstimate && <XpTotal {...xpEstimate} />}
                     </div>
                 );
             }
@@ -143,6 +127,37 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                                     mowAlliance={goal.unitAlliance}
                                     total={goalEstimate.mowEstimate}
                                 />
+                            </div>
+                        )}
+                    </div>
+                );
+            }
+            case PersonalGoalType.UpgradeAbilities: {
+                const hasActiveGoal = goal.activeEnd > goal.activeStart;
+                const hasPassiveGoal = goal.passiveEnd > goal.passiveStart;
+                return (
+                    <div>
+                        <div className="flex-box gap10">
+                            <div className="flex-box column start">
+                                {hasActiveGoal && (
+                                    <div className="flex-box gap3">
+                                        <span>Active:</span> <b>{goal.activeStart}</b> <ArrowForward />
+                                        <b>{goal.activeEnd}</b>
+                                    </div>
+                                )}
+
+                                {hasPassiveGoal && (
+                                    <div className="flex-box gap3">
+                                        <span>Passive:</span> <b>{goal.passiveStart}</b> <ArrowForward />
+                                        <b>{goal.passiveEnd}</b>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                        {goalEstimate.xpEstimateAbilities && <XpTotal {...goalEstimate.xpEstimateAbilities} />}
+                        {goalEstimate.abilitiesEstimate && (
+                            <div style={{ padding: '10px 0' }}>
+                                <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
                         )}
                     </div>
@@ -222,6 +237,10 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                     const { data } = params;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
                     if (goalEstimate) {
+                        if (!goalEstimate.daysLeft) {
+                            return '';
+                        }
+
                         const nextDate = new Date();
                         nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
 

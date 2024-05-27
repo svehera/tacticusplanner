@@ -125,6 +125,8 @@ export class GoalsService {
             if (g.type === PersonalGoalType.UpgradeAbilities) {
                 const result: ICharacterUpgradeAbilities = {
                     type: PersonalGoalType.UpgradeAbilities,
+                    level: unit.level,
+                    xp: unit.xp,
                     activeStart: unit.activeAbilityLevel,
                     activeEnd: g.firstAbilityLevel ?? unit.activeAbilityLevel,
                     passiveStart: unit.passiveAbilityLevel,
@@ -209,6 +211,13 @@ export class GoalsService {
                     upgradesRarity: goal.upgradesRarity,
                 };
             }
+            case PersonalGoalType.UpgradeAbilities: {
+                return {
+                    ...base,
+                    firstAbilityLevel: goal.activeEnd,
+                    secondAbilityLevel: goal.passiveEnd,
+                };
+            }
             default: {
                 return null;
             }
@@ -230,6 +239,10 @@ export class GoalsService {
 
         if (goal.type == PersonalGoalType.UpgradeMow) {
             return goal.primaryStart >= goal.primaryEnd && goal.secondaryStart >= goal.secondaryEnd;
+        }
+
+        if (goal.type == PersonalGoalType.UpgradeAbilities) {
+            return goal.activeStart >= goal.activeEnd && goal.passiveStart >= goal.passiveEnd;
         }
 
         if (goal.type == PersonalGoalType.Unlock) {

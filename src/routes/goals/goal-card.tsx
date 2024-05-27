@@ -25,6 +25,9 @@ import { Link } from 'react-router-dom';
 import LinkIcon from '@mui/icons-material/Link';
 import { StaticDataService } from 'src/services';
 import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
+import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
+import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
+import { XpTotal } from 'src/v2/features/goals/xp-total';
 
 interface Props {
     goal: CharacterRaidGoalSelect;
@@ -33,18 +36,20 @@ interface Props {
 }
 
 export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: passed }) => {
-    const goalEstimate = passed ?? {
+    const goalEstimate: IGoalEstimate = passed ?? {
         daysLeft: 0,
         daysTotal: 0,
         oTokensTotal: 0,
         energyTotal: 0,
+        xpBooksTotal: 0,
         goalId: '',
-        xpEstimate: null,
-        mowEstimate: null,
     };
     const isGoalCompleted = GoalsService.isGoalCompleted(goal);
 
     const calendarDate: string = useMemo(() => {
+        if (!goalEstimate.daysLeft) {
+            return '';
+        }
         const nextDate = new Date();
         nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
 
@@ -144,25 +149,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                                 </div>
                             </AccessibleTooltip>
                         </div>
-                        {xpEstimate && (
-                            <div className="flex-box gap5">
-                                <span>(XP) Codex of War: {xpEstimate.legendaryBooks}</span>
-                                <AccessibleTooltip
-                                    title={
-                                        <span>
-                                            Current level: {xpEstimate.currentLevel}
-                                            <br />
-                                            Target level: {xpEstimate.targetLevel}
-                                            <br />
-                                            Gold: {xpEstimate.gold}
-                                            <br />
-                                            XP left: {xpEstimate.xpLeft}
-                                        </span>
-                                    }>
-                                    <Info color="primary" />
-                                </AccessibleTooltip>
-                            </div>
-                        )}
+                        {xpEstimate && <XpTotal {...xpEstimate} />}
                         <Button
                             size="small"
                             variant={'outlined'}
@@ -234,6 +221,37 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             target={'_self'}>
                             <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Lookup</span>
                         </Button>
+                    </div>
+                );
+            }
+            case PersonalGoalType.UpgradeAbilities: {
+                const hasActiveGoal = goal.activeEnd > goal.activeStart;
+                const hasPassiveGoal = goal.passiveEnd > goal.passiveStart;
+                return (
+                    <div>
+                        <div className="flex-box gap10">
+                            <div className="flex-box column start">
+                                {hasActiveGoal && (
+                                    <div className="flex-box gap3">
+                                        <span>Active:</span> <b>{goal.activeStart}</b> <ArrowForward />
+                                        <b>{goal.activeEnd}</b>
+                                    </div>
+                                )}
+
+                                {hasPassiveGoal && (
+                                    <div className="flex-box gap3">
+                                        <span>Passive:</span> <b>{goal.passiveStart}</b> <ArrowForward />
+                                        <b>{goal.passiveEnd}</b>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                        {goalEstimate.xpEstimateAbilities && <XpTotal {...goalEstimate.xpEstimateAbilities} />}
+                        {goalEstimate.abilitiesEstimate && (
+                            <div style={{ padding: '10px 0' }}>
+                                <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
+                            </div>
+                        )}
                     </div>
                 );
             }

@@ -23,6 +23,8 @@ import { sum } from 'lodash';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
+import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';
+import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
 
 export const Goals = () => {
     const {
@@ -40,7 +42,7 @@ export const Goals = () => {
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
     const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
 
-    const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
+    const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities } = useMemo(() => {
         return GoalsService.prepareGoals(goals, [...characters, ...mows], false);
     }, [goals, characters, mows]);
 
@@ -174,10 +176,39 @@ export const Goals = () => {
             result.push(...goalsEstimate);
         }
 
+        if (upgradeAbilities.length) {
+            for (const goal of upgradeAbilities) {
+                const targetLevel = Math.max(goal.activeEnd, goal.passiveEnd);
+                const xpEstimate = CharactersXpService.getLegendaryTomesCount(goal.level, goal.xp, targetLevel);
+                const activeAbility = CharactersAbilitiesService.getMaterials(goal.activeStart, goal.activeEnd);
+                const passiveAbility = CharactersAbilitiesService.getMaterials(goal.passiveStart, goal.passiveEnd);
+
+                const abilitiesEstimate = CharactersAbilitiesService.getTotals(
+                    [...activeAbility, ...passiveAbility],
+                    goal.unitAlliance
+                );
+
+                result.push({
+                    goalId: goal.goalId,
+                    abilitiesEstimate,
+                    xpEstimateAbilities: xpEstimate!,
+                } as IGoalEstimate);
+            }
+        }
+
         return result;
     }, [shardsGoals, upgradeRankOrMowGoals]);
 
-    const totalXp = sum(goalsEstimate.filter(x => !!x.xpEstimate).map(x => x.xpEstimate!.legendaryBooks));
+    const totalXpUpgrades = sum(goalsEstimate.filter(x => !!x.xpEstimate).map(x => x.xpEstimate!.legendaryBooks));
+    const totalXpAbilities = sum(
+        goalsEstimate.filter(x => !!x.xpEstimateAbilities).map(x => x.xpEstimateAbilities!.legendaryBooks)
+    );
+
+    const totalGoldAbilities = sum(
+        goalsEstimate
+            .filter(x => !!x.abilitiesEstimate && !!x.xpEstimateAbilities)
+            .map(x => x.abilitiesEstimate!.gold + x.xpEstimateAbilities!.gold)
+    );
 
     return (
         <div>
@@ -224,7 +255,7 @@ export const Goals = () => {
                             <MiscIcon icon={'energy'} height={15} width={15} /> |
                         </span>
                         <span>
-                            <b>{totalXp}</b> XP Books)
+                            <b>{totalXpUpgrades}</b> XP Books)
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (
@@ -245,17 +276,6 @@ export const Goals = () => {
                             rows={upgradeRankOrMowGoals}
                             estimate={goalsEstimate}
                             menuItemSelect={handleMenuItemSelect}
-                        />
-                    )}
-
-                    {!!editGoal && !!editUnit && (
-                        <EditGoalDialog
-                            isOpen={true}
-                            goal={editGoal}
-                            unit={editUnit}
-                            onClose={() => {
-                                setEditGoal(null);
-                            }}
                         />
                     )}
                 </div>
@@ -291,18 +311,51 @@ export const Goals = () => {
                     {viewPreferences.goalsTableView && (
                         <GoalsTable rows={shardsGoals} estimate={goalsEstimate} menuItemSelect={handleMenuItemSelect} />
                     )}
+                </div>
+            )}
 
-                    {!!editGoal && !!editUnit && (
-                        <EditGoalDialog
-                            isOpen={true}
-                            goal={editGoal}
-                            unit={editUnit}
-                            onClose={() => {
-                                setEditGoal(null);
-                            }}
+            {!!upgradeAbilities.length && (
+                <div>
+                    <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
+                        <span>
+                            Upgrade Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold |
+                        </span>
+                        <span>
+                            <b>{totalXpAbilities}</b> XP Books)
+                        </span>
+                    </div>
+                    {!viewPreferences.goalsTableView && (
+                        <div className="flex-box gap10 wrap goals" style={{ alignItems: 'unset' }}>
+                            {upgradeAbilities.map(goal => (
+                                <GoalCard
+                                    key={goal.goalId}
+                                    goal={goal}
+                                    goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
+                                    menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                />
+                            ))}
+                        </div>
+                    )}
+
+                    {viewPreferences.goalsTableView && (
+                        <GoalsTable
+                            rows={upgradeAbilities}
+                            estimate={goalsEstimate}
+                            menuItemSelect={handleMenuItemSelect}
                         />
                     )}
                 </div>
+            )}
+
+            {!!editGoal && !!editUnit && (
+                <EditGoalDialog
+                    isOpen={true}
+                    goal={editGoal}
+                    unit={editUnit}
+                    onClose={() => {
+                        setEditGoal(null);
+                    }}
+                />
             )}
         </div>
     );
