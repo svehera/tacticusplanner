@@ -1,12 +1,29 @@
 ﻿import { GoalsService } from 'src/v2/features/goals/goals.service';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityStars } from 'src/models/enums';
+import {
+    Alliance,
+    CampaignsLocationsUsage,
+    Faction,
+    PersonalGoalType,
+    Rank,
+    Rarity,
+    RarityStars,
+} from 'src/models/enums';
 import { ICharacter2, IPersonalGoal } from 'src/models/interfaces';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+import {
+    ICharacterAscendGoal,
+    ICharacterUnlockGoal,
+    ICharacterUpgradeRankGoal,
+} from 'src/v2/features/goals/goals.models';
 
 describe('Goal service', () => {
     describe('convertToTypedGoal', () => {
         it('should convert to Upgrade rank object', () => {
             const characterMock: ICharacter2 = {
-                name: 'Character',
+                unitType: UnitType.character,
+                id: 'Character',
+                name: 'Character name',
+                alliance: Alliance.Imperial,
                 icon: 'path',
                 rank: Rank.Bronze1,
                 upgrades: ['item1', 'item2'],
@@ -26,30 +43,38 @@ describe('Goal service', () => {
                 rankPoint5: true,
             };
 
-            const result = GoalsService.convertToTypedGoal(goalMock, characterMock);
-
-            expect(result).toEqual({
+            const expectedResult: ICharacterUpgradeRankGoal = {
                 priority: goalMock.priority,
                 goalId: goalMock.id,
                 include: goalMock.dailyRaids,
-                characterName: characterMock.name,
-                characterIcon: characterMock.icon,
-                notes: goalMock.notes,
+                unitId: characterMock.id,
+                unitAlliance: characterMock.alliance,
+                unitName: characterMock.name,
+                unitIcon: characterMock.icon,
+                notes: goalMock.notes!,
                 rankStart: characterMock.rank,
-                rankEnd: goalMock.targetRank,
-                rankPoint5: goalMock.rankPoint5,
+                rankEnd: goalMock.targetRank!,
+                rankPoint5: goalMock.rankPoint5!,
                 appliedUpgrades: characterMock.upgrades,
                 level: characterMock.level,
                 xp: characterMock.xp,
                 rarity: characterMock.rarity,
                 type: PersonalGoalType.UpgradeRank,
                 upgradesRarity: [],
-            });
+            };
+
+            const result = GoalsService.convertToTypedGoal(goalMock, characterMock);
+
+            expect(result).toEqual(expectedResult);
         });
 
         it('should convert to Unlock object', () => {
             const characterMock: ICharacter2 = {
-                name: 'Character',
+                unitType: UnitType.character,
+                id: 'Character',
+                name: 'Character name',
+                alliance: Alliance.Chaos,
+                faction: Faction.Thousand_Sons,
                 icon: 'path',
                 shards: 10,
                 rarity: Rarity.Legendary,
@@ -65,26 +90,32 @@ describe('Goal service', () => {
                 notes: '1fasfqwf',
             };
 
-            const result = GoalsService.convertToTypedGoal(goalMock, characterMock);
-
-            expect(result).toEqual({
+            const expectedResult: ICharacterUnlockGoal = {
                 priority: goalMock.priority,
                 goalId: goalMock.id,
                 include: goalMock.dailyRaids,
-                characterName: characterMock.name,
-                characterIcon: characterMock.icon,
-                notes: goalMock.notes,
+                unitId: characterMock.id,
+                unitAlliance: characterMock.alliance,
+                unitName: characterMock.name,
+                unitIcon: characterMock.icon,
+                faction: characterMock.faction,
+                notes: goalMock.notes!,
                 shards: characterMock.shards,
                 rarity: characterMock.rarity,
                 rank: characterMock.rank,
                 campaignsUsage: CampaignsLocationsUsage.LeastEnergy,
                 type: PersonalGoalType.Unlock,
-            });
+            };
+
+            const result = GoalsService.convertToTypedGoal(goalMock, characterMock);
+
+            expect(result).toEqual(expectedResult);
         });
 
         it('should convert to Ascend object', () => {
             const characterMock: ICharacter2 = {
-                name: 'Character',
+                unitType: UnitType.character,
+                id: 'Character',
                 icon: 'path',
                 shards: 10,
                 rarity: Rarity.Epic,
@@ -101,24 +132,28 @@ describe('Goal service', () => {
                 targetRarity: Rarity.Legendary,
             };
 
-            const result = GoalsService.convertToTypedGoal(goalMock, characterMock);
-
-            expect(result).toEqual({
+            const expectedResult: ICharacterAscendGoal = {
                 priority: goalMock.priority,
                 goalId: goalMock.id,
                 include: goalMock.dailyRaids,
-                characterName: characterMock.name,
-                characterIcon: characterMock.icon,
-                notes: goalMock.notes,
+                unitId: characterMock.id,
+                unitAlliance: characterMock.alliance,
+                unitName: characterMock.name,
+                unitIcon: characterMock.icon,
+                notes: goalMock.notes!,
                 rarityStart: characterMock.rarity,
-                rarityEnd: goalMock.targetRarity,
+                rarityEnd: goalMock.targetRarity!,
                 shards: characterMock.shards,
                 starsStart: characterMock.stars,
                 starsEnd: RarityStars.RedThreeStars,
                 onslaughtShards: 1,
                 campaignsUsage: CampaignsLocationsUsage.LeastEnergy,
                 type: PersonalGoalType.Ascend,
-            });
+            };
+
+            const result = GoalsService.convertToTypedGoal(goalMock, characterMock);
+
+            expect(result).toEqual(expectedResult);
         });
     });
 });
