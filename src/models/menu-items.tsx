@@ -78,7 +78,7 @@ export const menuItemById = {
     ),
     kharn: new MenuItemTP(
         'Kharn',
-        <CharacterImage icon={'kharn.png'} imageSize={24} />,
+        <CharacterImage icon={'unset.png'} imageSize={24} />,
         '/plan/le/kharn',
         `Kharn ${kharn.eventStage}/3 (${kharn.nextEventDate})`
     ),

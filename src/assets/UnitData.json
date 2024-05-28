@@ -1912,7 +1912,7 @@
         "Number": 75,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "kharn.webp",
+        "Icon": "unset.webp",
         "ReleaseRarity": 6
     }
 ]
