@@ -37,7 +37,7 @@ export const CharacterTile = ({
         ? charsUnlockShards[character.rarity]
         : charsReleaseShards[character.releaseRarity!];
     const unlockProgress = (character.shards / unlockShards) * 100;
-    const hasAbilities = (isUnlocked && character.activeAbilityLevel) || character.passiveAbilityLevel;
+    const hasAbilities = isUnlocked && (character.activeAbilityLevel || character.passiveAbilityLevel);
     const needToAscend = useMemo(() => needToAscendCharacter(character), [character.rarity, character.rank]);
 
     const needToLevel = useMemo(

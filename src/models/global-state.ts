@@ -89,8 +89,8 @@ export class GlobalState implements IGlobalState {
             const rankRarity = rankToRarity[rank];
             const rarity = Math.max(personalCharData?.rarity ?? staticData.initialRarity, rankRarity) as Rarity;
             const stars = Math.max(personalCharData?.stars ?? 0, rarityToStars[rarity]);
-            const activeLevel = personalCharData?.activeAbilityLevel ?? 0;
-            const passiveLevel = personalCharData?.passiveAbilityLevel ?? 0;
+            const activeLevel = Math.max(personalCharData?.activeAbilityLevel ?? 1, 1);
+            const passiveLevel = Math.max(personalCharData?.passiveAbilityLevel ?? 1, 1);
             const level = Math.max(personalCharData?.level ?? 1, rankLevel, activeLevel, passiveLevel);
             const upgrades = personalCharData?.upgrades
                 ? personalCharData.upgrades.filter(StaticDataService.isValidaUpgrade)
