@@ -18,7 +18,7 @@ import TableRowsIcon from '@mui/icons-material/TableRows';
 import { GoalsTable } from 'src/routes/goals/goals-table';
 import { MiscIcon } from 'src/shared-components/misc-icon';
 import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
-import { rankToLevel } from 'src/models/constants';
+import { goalsLimit, rankToLevel } from 'src/models/constants';
 import { sum } from 'lodash';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { IUnit } from 'src/v2/features/characters/characters.models';
@@ -222,7 +222,7 @@ export const Goals = () => {
                 </Button>
                 <SetGoalDialog key={goals.length} />
                 <span style={{ fontSize: 20 }}>
-                    {goals.length}/{30}
+                    {goals.length}/{goalsLimit}
                 </span>
                 <FormControlLabel
                     control={

@@ -21,7 +21,7 @@ import { getEnumValues } from 'src/shared-logic/functions';
 import { enqueueSnackbar } from 'notistack';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { CharacterTitle } from '../character-title';
-import { rarityToMaxRank } from 'src/models/constants';
+import { goalsLimit, rarityToMaxRank } from 'src/models/constants';
 import { Conditional } from 'src/v2/components/conditional';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { IgnoreRankRarity } from './ignore-rank-rarity';
@@ -53,7 +53,6 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
 });
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
-    const goalsLimit = 30;
     const { characters, mows, goals, campaignsProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
