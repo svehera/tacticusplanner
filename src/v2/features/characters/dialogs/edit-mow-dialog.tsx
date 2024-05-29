@@ -2,7 +2,7 @@
 
 import { isMobile } from 'react-device-detect';
 
-import { DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, Switch } from '@mui/material';
+import { DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, IconButton, Switch } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 
@@ -16,15 +16,25 @@ import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { StarsSelect } from 'src/shared-components/stars-select';
+import { ArrowBack, ArrowForward } from '@mui/icons-material';
 
 interface Props {
     mow: IMow;
     saveChanges: (mow: IMow) => void;
     isOpen: boolean;
     onClose: () => void;
+    showNextUnit?: () => void;
+    showPreviousUnit?: () => void;
 }
 
-export const EditMowDialog: React.FC<Props> = ({ mow, saveChanges, onClose, isOpen }) => {
+export const EditMowDialog: React.FC<Props> = ({
+    mow,
+    saveChanges,
+    onClose,
+    isOpen,
+    showPreviousUnit,
+    showNextUnit,
+}) => {
     const [editedMow, setEditedMow] = useState(() => ({ ...mow }));
 
     const starsEntries = useMemo(() => {
@@ -45,11 +55,23 @@ export const EditMowDialog: React.FC<Props> = ({ mow, saveChanges, onClose, isOp
 
     return (
         <Dialog open={isOpen} onClose={onClose} fullWidth fullScreen={isMobile}>
-            <DialogTitle className="flex-box gap10">
-                <CharacterImage icon={mow.badgeIcon} />
-                <span>{mow.name}</span>
-                <RarityImage rarity={mow.rarity} />
-                <MiscIcon icon={'mow'} width={22} height={25} />
+            <DialogTitle className="flex-box between">
+                {showPreviousUnit && (
+                    <IconButton onClick={showPreviousUnit}>
+                        <ArrowBack />
+                    </IconButton>
+                )}
+                <div className="flex-box gap10">
+                    <CharacterImage icon={mow.badgeIcon} />
+                    <span>{mow.name}</span>
+                    <RarityImage rarity={mow.rarity} />
+                    <MiscIcon icon={'mow'} width={22} height={25} />
+                </div>
+                {showNextUnit && (
+                    <IconButton onClick={showNextUnit}>
+                        <ArrowForward />
+                    </IconButton>
+                )}
             </DialogTitle>
             <DialogContent style={{ paddingTop: 20, minHeight: 200 }}>
                 <Grid container spacing={2} alignItems="center">

@@ -28,6 +28,9 @@
                 },
                 {
                     "text": "Added possibility to search for upgrade component of craftable upgrade in the Upgrade page (ijriims)"
+                },
+                {
+                    "text": "Added option to navigate Who You Own screen using back and forward arrows on the edit unit dialog (Hadoopalot)"
                 }
             ],
             "bugFixes": [

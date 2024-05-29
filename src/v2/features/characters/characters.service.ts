@@ -79,7 +79,7 @@ export class CharactersService {
             case CharactersOrderBy.UnlockPercentage:
                 return orderBy(units, ['numberOfUnlocked'], ['asc']);
             default:
-                return [];
+                return units;
         }
     }
 

@@ -64,11 +64,15 @@ export const WhoYouOwn = () => {
         viewControls.filterBy,
         nameFilter
     );
+
     const totalPower = sum(charactersFiltered.map(character => CharactersPowerService.getCharacterPower(character)));
     const totalValue = sum(charactersFiltered.map(character => CharactersValueService.getCharacterValue(character)));
 
     const factions = CharactersService.orderByFaction(charactersFiltered, viewControls.orderBy);
-    const characters = CharactersService.orderUnits(charactersFiltered, viewControls.orderBy);
+    const units = CharactersService.orderUnits(
+        factions.flatMap(f => f.units),
+        viewControls.orderBy
+    );
 
     const updatePreferences = (value: IViewControls) => {
         setViewControls(value);
@@ -77,23 +81,37 @@ export const WhoYouOwn = () => {
     };
 
     const updateMow = (mow: IMow) => {
-        endEditCharacter();
+        endEditUnit();
         dispatch.mows({ type: 'Update', mow });
     };
 
-    const startEditCharacter = (unit: IUnit): void => {
+    const startEditUnit = (unit: IUnit): void => {
         if (unit.unitType === UnitType.character) {
             setEditedCharacter(unit);
             setOpenCharacterItemDialog(true);
+            setOpenEditMowDialog(false);
         }
 
         if (unit.unitType === UnitType.mow) {
             setEditedMow(unit);
             setOpenEditMowDialog(true);
+            setOpenCharacterItemDialog(false);
         }
     };
 
-    const endEditCharacter = (): void => {
+    const startEditNextUnit = (currentUnit: IUnit): void => {
+        const indexOfNextUnit = units.findIndex(x => x.id === currentUnit.id) + 1;
+        const nextUnit = units[indexOfNextUnit >= units.length ? 0 : indexOfNextUnit];
+        startEditUnit(nextUnit);
+    };
+
+    const startEditPreviousUnit = (currentUnit: IUnit): void => {
+        const indexOfPreviousUnit = units.findIndex(x => x.id === currentUnit.id) - 1;
+        const previousUnit = units[indexOfPreviousUnit < 0 ? units.length - 1 : indexOfPreviousUnit];
+        startEditUnit(previousUnit);
+    };
+
+    const endEditUnit = (): void => {
         setEditedCharacter(null);
         setOpenCharacterItemDialog(false);
 
@@ -119,31 +137,37 @@ export const WhoYouOwn = () => {
                 <ViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
 
                 <Conditional condition={isFactionsView(viewControls.orderBy)}>
-                    <FactionsGrid factions={factions} onCharacterClick={startEditCharacter} />
+                    <FactionsGrid factions={factions} onCharacterClick={startEditUnit} />
                 </Conditional>
 
                 <Conditional condition={isCharactersView(viewControls.orderBy)}>
                     <CharactersGrid
-                        characters={characters}
-                        onAvailableCharacterClick={startEditCharacter}
-                        onLockedCharacterClick={startEditCharacter}
+                        characters={units}
+                        onAvailableCharacterClick={startEditUnit}
+                        onLockedCharacterClick={startEditUnit}
                     />
                 </Conditional>
 
-                <Conditional condition={!!editedCharacter}>
+                {editedCharacter && (
                     <CharacterItemDialog
-                        character={editedCharacter!}
+                        key={editedCharacter.id}
+                        character={editedCharacter}
                         isOpen={openCharacterItemDialog}
-                        onClose={endEditCharacter}
+                        showNextUnit={() => startEditNextUnit(editedCharacter)}
+                        showPreviousUnit={() => startEditPreviousUnit(editedCharacter)}
+                        onClose={endEditUnit}
                     />
-                </Conditional>
+                )}
 
                 {editedMow && (
                     <EditMowDialog
+                        key={editedMow.id}
                         mow={editedMow}
                         saveChanges={updateMow}
                         isOpen={openEditMowDialog}
-                        onClose={endEditCharacter}
+                        onClose={endEditUnit}
+                        showNextUnit={() => startEditNextUnit(editedMow)}
+                        showPreviousUnit={() => startEditPreviousUnit(editedMow)}
                     />
                 )}
             </CharactersViewContext.Provider>
