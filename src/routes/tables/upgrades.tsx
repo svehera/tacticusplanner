@@ -30,6 +30,7 @@ interface IUpgradesTableRow {
     type: string;
     locations: ICampaignBattleComposed[];
     recipe: string;
+    partOf: string;
     characters: Array<{
         id: string;
         icon: string;
@@ -130,6 +131,11 @@ export const Upgrades = () => {
                 },
                 maxWidth: 80,
             },
+            {
+                field: 'partOf',
+                headerName: 'Component for',
+                maxWidth: 250,
+            },
         ];
 
         switch (selection) {
@@ -177,8 +183,9 @@ export const Upgrades = () => {
 
     const rowsData = useMemo(() => {
         const upgradesLocations = StaticDataService.getUpgradesLocations();
+        const upgrades = Object.values(StaticDataService.recipeData);
 
-        const result: IUpgradesTableRow[] = Object.values(StaticDataService.recipeData).map(x => {
+        const result: IUpgradesTableRow[] = upgrades.map(x => {
             const characters: Array<{
                 id: string;
                 icon: string;
@@ -207,6 +214,10 @@ export const Upgrades = () => {
             }
 
             const locations = upgradesLocations[x.material]?.map(x => StaticDataService.campaignsComposed[x]);
+            const partOf = upgrades
+                .filter(m => m.recipe?.some(u => u.material === x.material) ?? false)
+                .map(u => u.label ?? u.material)
+                .join('\r\n');
             return {
                 upgradeLabel: x.label ?? x.material,
                 upgradeId: x.material,
@@ -215,6 +226,7 @@ export const Upgrades = () => {
                 rarity: rarityStringToNumber[x.rarity as unknown as RarityString],
                 type: x.stat,
                 locations,
+                partOf,
                 recipe: x.recipe?.map(x => x.material + ' - ' + x.count).join('\r\n') ?? '',
                 characters: characters,
                 craftable: x.craftable,
@@ -230,6 +242,7 @@ export const Upgrades = () => {
                 upgrade =>
                     upgrade.upgradeLabel.toLowerCase().includes(nameFilter.toLowerCase()) ||
                     upgrade.recipe.toLowerCase().includes(nameFilter.toLowerCase()) ||
+                    upgrade.partOf.toLowerCase().includes(nameFilter.toLowerCase()) ||
                     upgrade.upgradeId.toLowerCase().includes(nameFilter.toLowerCase())
             )
             .filter(upgrade => {

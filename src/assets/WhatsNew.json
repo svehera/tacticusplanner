@@ -31,6 +31,9 @@
                 },
                 {
                     "text": "Added option to navigate Who You Own screen using back and forward arrows on the edit unit dialog (Hadoopalot)"
+                },
+                {
+                    "text": "Added \"Component for\" column to the upgrades table (KTA)"
                 }
             ],
             "bugFixes": [
