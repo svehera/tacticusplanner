@@ -345,7 +345,7 @@ export class UpgradesService {
         requiredCount: number,
         acquiredCount: number
     ): ICharacterUpgradeEstimate {
-        const { id, label, rarity, iconPath, locations, relatedCharacters } = upgrade;
+        const { id, label, rarity, iconPath, locations, relatedCharacters, relatedGoals } = upgrade;
 
         const selectedLocations = locations.filter(x => x.isSelected);
 
@@ -360,6 +360,7 @@ export class UpgradesService {
             acquiredCount,
             requiredCount,
             relatedCharacters,
+            relatedGoals,
             daysTotal: 0,
             raidsTotal: 0,
             energyTotal: 0,
@@ -422,12 +423,17 @@ export class UpgradesService {
                     requiredCount: 0,
                     countByGoalId: {},
                     relatedCharacters: [],
+                    relatedGoals: [],
                 };
 
                 combinedUpgrade.requiredCount += upgradeCount;
                 combinedUpgrade.countByGoalId[character.goalId] = upgradeCount;
                 if (!combinedUpgrade.relatedCharacters.includes(character.unitId)) {
                     combinedUpgrade.relatedCharacters.push(character.unitId);
+                }
+
+                if (!combinedUpgrade.relatedGoals.includes(character.goalId)) {
+                    combinedUpgrade.relatedGoals.push(character.goalId);
                 }
 
                 result[upgradeId] = combinedUpgrade;

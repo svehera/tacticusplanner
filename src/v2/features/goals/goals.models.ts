@@ -214,6 +214,7 @@ export interface ICombinedUpgrade extends IBaseUpgrade {
     countByGoalId: Record<string, number>;
     requiredCount: number;
     relatedCharacters: string[];
+    relatedGoals: string[];
 }
 
 export interface ICharacterUpgradeEstimate extends IBaseUpgrade {
@@ -225,6 +226,7 @@ export interface ICharacterUpgradeEstimate extends IBaseUpgrade {
     acquiredCount: number;
     requiredCount: number;
     relatedCharacters: string[];
+    relatedGoals: string[];
 
     isBlocked: boolean;
     isFinished: boolean;

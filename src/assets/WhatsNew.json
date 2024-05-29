@@ -1,6 +1,44 @@
 ﻿{
-    "currentVersion": "1.5.5",
+    "currentVersion": "1.5.6",
     "releaseNotes": [
+        {
+            "version": "1.5.6",
+            "date": "June X",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added MoWs to Who You Own Page"
+                },
+                {
+                    "text": "Added new goal types:\"Upgrade MoW\" and \"Upgrade abilities\""
+                },
+                {
+                    "text": "Added MoW Lookup"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated images for some crafted upgrades. Thanks to KIVIY for contribution."
+                },
+                {
+                    "text": "Updated stars visual to not extend beyond the character portrait and make the 5th one bigger in the middle like in the game. Thanks to Lëonaica for contribution."
+                },
+                {
+                    "text": "Updated columns order in the material table on the Daily Raids (SeventhSun)"
+                },
+                {
+                    "text": "Added possibility to search for upgrade component of craftable upgrade in the Upgrade page (ijriims)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with \"Shards per Onslaught\" translates to default shard count on raid card at only half value (SeventhSun, Tani)"
+                },
+                {
+                    "text": "Fixed issue with staged upgrades as goals (Xenoblight)"
+                }
+            ]
+        },
         {
             "version": "1.5.5",
             "date": "May 19",
