@@ -4,6 +4,7 @@ import { FlexBox } from 'src/v2/components/flex-box';
 
 import { IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
 import {
+    Badge,
     Card,
     CardContent,
     CardHeader,
@@ -32,6 +33,7 @@ import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { WarZoneBuffImage } from 'src/v2/components/images/war-zone-buff-image';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { ViewGuild } from 'src/v2/features/guild/view-guild';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
 
 export const GuildWarZones = () => {
     const { guildWar, guild } = useContext(StoreContext);
@@ -160,13 +162,18 @@ export const GuildWarZones = () => {
 
         const zone = activeLayout.zones[editZonePlayersIndex];
         const zoneStats = GuildWarService.getZone(zone.id);
-        const difficulty = zoneStats.rarityCaps[activeLayout.bfLevel].difficulty;
+        const { difficulty, caps } = zoneStats.rarityCaps[activeLayout.bfLevel];
         const difficultyEnum: Difficulty = GuildWarService.gwData.difficulties.indexOf(difficulty) + 1;
 
         return (
             <div>
                 {zoneStats.name}
                 <FlexBox gap={5} style={{ fontSize: '1.1rem' }}>
+                    <div className="flex-box gap3">
+                        {caps.map((rarity, index) => (
+                            <RarityImage key={index} rarity={rarity} />
+                        ))}
+                    </div>
                     <span>{zoneStats.warScore.toString().slice(0, 2)}K</span>
                     <DifficultyImage difficulty={difficultyEnum} />
                     <span>{difficulty}</span>
@@ -321,7 +328,9 @@ interface ZoneCardProps extends React.DOMAttributes<HTMLElement>, CommonProps {
 
 const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style, players }) => {
     const zoneStats = GuildWarService.getZone(zone.id);
-    const difficulty = zoneStats.rarityCaps[bfLevel].difficulty;
+    const { difficulty, caps } = zoneStats.rarityCaps[bfLevel];
+    const maxRarity = Math.max(...caps);
+    const maxRarityCount = caps.filter(x => x === maxRarity).length;
     const difficultyEnum: Difficulty = GuildWarService.gwData.difficulties.indexOf(difficulty) + 1;
 
     const player1 = players.find(x => x.username === zone.players[0]);
@@ -352,8 +361,11 @@ const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style, play
                 title={zoneStats.name}
                 subheader={
                     <FlexBox gap={5}>
+                        <DifficultyImage difficulty={difficultyEnum} withColor />
+                        <Badge badgeContent={maxRarityCount}>
+                            <RarityImage rarity={maxRarity} />
+                        </Badge>
                         <span>{zoneStats.warScore.toString().slice(0, 2)}K</span>
-                        <DifficultyImage difficulty={difficultyEnum} />
                         <span>{difficulty}</span>
                     </FlexBox>
                 }

@@ -7,6 +7,7 @@ export class CharactersPowerService {
         if (!isUnlocked(unit)) {
             return 0;
         }
+
         const abilityWeight = 500000 / 41274;
         if (isCharacter(unit)) {
             const abilityPower =
@@ -29,6 +30,7 @@ export class CharactersPowerService {
         if (!isUnlocked(unit) || !isCharacter(unit)) {
             return 0;
         }
+
         const upgradeBoost =
             (1 / 9) *
             (CharactersPowerService.getRankCoeff(unit.rank + 1) - CharactersPowerService.getRankCoeff(unit.rank));

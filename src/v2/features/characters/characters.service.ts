@@ -16,6 +16,7 @@ import { CharactersPowerService } from './characters-power.service';
 import { CharactersValueService } from './characters-value.service';
 import { rarityCaps } from 'src/v2/features/characters/characters.contants';
 import { isCharacter, isUnlocked } from 'src/v2/features/characters/units.functions';
+import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export class CharactersService {
     static filterCharacters(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {
@@ -142,6 +143,7 @@ export class CharactersService {
         const capped = rarityCaps[rarityCap];
 
         const cappedPower = CharactersPowerService.getCharacterPower({
+            unitType: UnitType.character,
             rank: capped.rank,
             stars: capped.stars,
             rarity: rarityCap,
@@ -151,6 +153,7 @@ export class CharactersService {
         } as unknown as ICharacter2);
 
         const characterPower = CharactersPowerService.getCharacterPower({
+            unitType: UnitType.character,
             rank: character.rank,
             stars: character.stars,
             rarity: rarityCap,
@@ -158,7 +161,6 @@ export class CharactersService {
             activeAbilityLevel: character.activeAbilityLevel,
             passiveAbilityLevel: character.passiveAbilityLevel,
         } as unknown as ICharacter2);
-
         return characterPower > cappedPower ? 100 : Math.round((characterPower / cappedPower) * 100); // Round potential to the nearest whole number
     }
 
