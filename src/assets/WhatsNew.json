@@ -37,6 +37,9 @@
                 },
                 {
                     "text": "Added an indicator to display what the highest rarity cap is on the war zones (murky)"
+                },
+                {
+                    "text": "Added events calendar to home page (Mattias)"
                 }
             ],
             "bugFixes": [

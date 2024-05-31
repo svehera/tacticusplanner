@@ -1,5 +1,6 @@
-﻿import { Thanks } from '../../../shared-components/thanks';
-import React, { useContext } from 'react';
+﻿import React, { useContext } from 'react';
+import Zoom from 'react-medium-image-zoom';
+import { Thanks } from '../../../shared-components/thanks';
 import { StoreContext } from '../../../reducers/store.provider';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import { menuItemById } from '../../../models/menu-items';
@@ -17,6 +18,7 @@ export const Home = () => {
     const nextLeMenuItem = menuItemById['kharn'];
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
+    const eventsCalendarUrl = 'https://tacticucplannerstorage.blob.core.windows.net/files/events-calendar.png';
 
     const topPriorityGoal = goals[0];
     const unlockGoals = goals.filter(x => x.type === PersonalGoalType.Unlock).length;
@@ -162,6 +164,13 @@ export const Home = () => {
                         </Card>
                     </div>
                 )}
+
+                <div>
+                    <h3 style={{ textAlign: 'center' }}>Events calendar</h3>
+                    <Zoom>
+                        <img src={eventsCalendarUrl} alt="Events Calendar" width={350} />
+                    </Zoom>
+                </div>
             </div>
         </div>
     );
