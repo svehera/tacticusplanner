@@ -1,5 +1,6 @@
 ﻿import { SetStateAction } from '../models/interfaces';
 import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
+import { rarityToStars } from 'src/models/constants';
 
 export type MowsAction =
     | {
@@ -26,10 +27,12 @@ export const mowsReducer = (state: IMow[], action: MowsAction) => {
             if (!existingMow) {
                 return state;
             }
+            const rarityStars = rarityToStars[mow.rarity];
 
             state[existingMowIndex] = {
                 ...existingMow,
                 ...mow,
+                stars: mow.stars <= rarityStars ? rarityStars : mow.stars,
             };
 
             return [...state];

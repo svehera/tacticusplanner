@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
 import { ICampaignsProgress, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityString } from 'src/models/enums';
+import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { enqueueSnackbar } from 'notistack';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
@@ -21,10 +21,10 @@ import { CampaignLocation } from 'src/shared-components/goals/campaign-location'
 import { CampaignsUsageSelect } from 'src/shared-components/goals/campaings-usage-select';
 import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
 import { CharacterImage } from 'src/shared-components/character-image';
-import MultipleSelectCheckmarks from 'src/routes/characters/multiple-select';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
+import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 
 interface Props {
     isOpen: boolean;
@@ -87,7 +87,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                     });
                     break;
                 }
-                case PersonalGoalType.UpgradeMow: {
+                case PersonalGoalType.MowAbilities: {
                     dispatch.mows({
                         type: 'UpdateAbilities',
                         mowId: updatedGoal.unitId,
@@ -96,7 +96,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                     break;
                 }
 
-                case PersonalGoalType.UpgradeAbilities: {
+                case PersonalGoalType.CharacterAbilities: {
                     dispatch.characters({
                         type: 'UpdateAbilities',
                         characterId: updatedGoal.unitId,
@@ -179,14 +179,12 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     }
                                 />
                             </div>
-                            <MultipleSelectCheckmarks
-                                placeholder="Upgrades rarity"
-                                selectedValues={form.upgradesRarity!.map(x => Rarity[x])}
-                                values={Object.values(RarityString)}
-                                selectionChanges={values => {
+                            <UpgradesRaritySelect
+                                upgradesRarity={form.upgradesRarity ?? []}
+                                upgradesRarityChange={values => {
                                     setForm(curr => ({
                                         ...curr,
-                                        upgradesRarity: values.map(x => +Rarity[x as unknown as number]),
+                                        upgradesRarity: values,
                                     }));
                                 }}
                             />
@@ -206,7 +204,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                         </>
                     )}
 
-                    {form.type === PersonalGoalType.UpgradeMow && isMow(unit) && (
+                    {form.type === PersonalGoalType.MowAbilities && isMow(unit) && (
                         <>
                             <div className="flex-box gap5 full-width between">
                                 <NumberInput
@@ -261,21 +259,19 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 />
                             </div>
 
-                            <MultipleSelectCheckmarks
-                                placeholder="Upgrades rarity"
-                                selectedValues={form.upgradesRarity!.map(x => Rarity[x])}
-                                values={Object.values(RarityString)}
-                                selectionChanges={values => {
+                            <UpgradesRaritySelect
+                                upgradesRarity={form.upgradesRarity ?? []}
+                                upgradesRarityChange={values => {
                                     setForm(curr => ({
                                         ...curr,
-                                        upgradesRarity: values.map(x => +Rarity[x as unknown as number]),
+                                        upgradesRarity: values,
                                     }));
                                 }}
                             />
                         </>
                     )}
 
-                    {form.type === PersonalGoalType.UpgradeAbilities && isCharacter(unit) && (
+                    {form.type === PersonalGoalType.CharacterAbilities && isCharacter(unit) && (
                         <>
                             <div className="flex-box gap5 full-width between">
                                 <NumberInput

@@ -100,7 +100,7 @@ export const DailyRaids = () => {
 
     const refresh = () => {
         setUpgrades({ ...inventory.upgrades });
-        setUnits([...storeCharacters]);
+        setUnits([...storeCharacters, ...storeMows]);
         setHasChanges(false);
     };
 
@@ -109,7 +109,7 @@ export const DailyRaids = () => {
         setHasChanges(false);
         setTimeout(() => {
             setUpgrades({ ...inventory.upgrades });
-            setUnits([...storeCharacters]);
+            setUnits([...storeCharacters, ...storeMows]);
         }, 100);
     };
 

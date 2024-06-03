@@ -161,7 +161,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                     </div>
                 );
             }
-            case PersonalGoalType.UpgradeMow: {
+            case PersonalGoalType.MowAbilities: {
                 const linkBase = isMobile ? '/mobile/learn/mowLookup' : '/learn/mowLookup';
                 const params = `?mow=${goal.unitId}&pStart=${goal.primaryStart}&pEnd=${goal.primaryEnd}&sStart=${goal.secondaryStart}&sEnd=${goal.secondaryEnd}`;
                 const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
@@ -224,7 +224,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                     </div>
                 );
             }
-            case PersonalGoalType.UpgradeAbilities: {
+            case PersonalGoalType.CharacterAbilities: {
                 const hasActiveGoal = goal.activeEnd > goal.activeStart;
                 const hasPassiveGoal = goal.passiveEnd > goal.passiveStart;
                 return (

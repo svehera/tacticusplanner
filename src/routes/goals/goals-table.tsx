@@ -91,7 +91,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                     </div>
                 );
             }
-            case PersonalGoalType.UpgradeMow: {
+            case PersonalGoalType.MowAbilities: {
                 const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
                 const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
                 return (
@@ -132,7 +132,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                     </div>
                 );
             }
-            case PersonalGoalType.UpgradeAbilities: {
+            case PersonalGoalType.CharacterAbilities: {
                 const hasActiveGoal = goal.activeEnd > goal.activeStart;
                 const hasPassiveGoal = goal.passiveEnd > goal.passiveStart;
                 return (
@@ -284,7 +284,9 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
             },
             {
                 headerName: 'Upgrades',
-                hide: !rows.some(row => [PersonalGoalType.UpgradeRank, PersonalGoalType.UpgradeMow].includes(row.type)),
+                hide: !rows.some(row =>
+                    [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(row.type)
+                ),
                 cellRenderer: (params: ICellRendererParams<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>) => {
                     const { data } = params;
                     if (data) {
@@ -298,7 +300,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                             }&rankPoint5=${data.rankPoint5}`;
                         }
 
-                        if (data.type === PersonalGoalType.UpgradeMow) {
+                        if (data.type === PersonalGoalType.MowAbilities) {
                             linkBase = isMobile ? '/mobile/learn/mowLookup' : '/learn/mowLookup';
                             params = `?mow=${data.unitId}&pStart=${data.primaryStart}&pEnd=${data.primaryEnd}&sStart=${data.secondaryStart}&sEnd=${data.secondaryEnd}`;
                         }

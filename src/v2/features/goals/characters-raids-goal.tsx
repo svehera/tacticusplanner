@@ -61,7 +61,7 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                     </AccessibleTooltip>
                 );
             }
-            case PersonalGoalType.UpgradeMow: {
+            case PersonalGoalType.MowAbilities: {
                 const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
                 const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
                 return (

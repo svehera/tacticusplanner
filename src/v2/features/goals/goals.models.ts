@@ -38,7 +38,7 @@ export interface ICharacterUpgradeRankGoal extends ICharacterRaidGoalSelectBase,
 }
 
 export interface ICharacterUpgradeMow extends ICharacterRaidGoalSelectBase {
-    type: PersonalGoalType.UpgradeMow;
+    type: PersonalGoalType.MowAbilities;
 
     primaryStart: number;
     primaryEnd: number;
@@ -49,7 +49,7 @@ export interface ICharacterUpgradeMow extends ICharacterRaidGoalSelectBase {
 }
 
 export interface ICharacterUpgradeAbilities extends ICharacterRaidGoalSelectBase {
-    type: PersonalGoalType.UpgradeAbilities;
+    type: PersonalGoalType.CharacterAbilities;
 
     level: number;
     xp: number;

@@ -58,7 +58,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
     }, [currentGoalsSelect, goals]);
 
     const upgradeRankGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.UpgradeRank);
-    const upgradeMowGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.UpgradeMow);
+    const upgradeMowGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.MowAbilities);
     const ascendGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.Ascend);
     const unlockGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.Unlock);
 

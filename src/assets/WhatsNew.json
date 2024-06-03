@@ -7,10 +7,10 @@
             "type": "Update",
             "new": [
                 {
-                    "text": "Added MoWs to Who You Own Page"
+                    "text": "Added MoWs to Who You Own page"
                 },
                 {
-                    "text": "Added new goal types:\"Upgrade MoW\" and \"Upgrade abilities\""
+                    "text": "Added new goal types:\"MoW abilities\" and \"Character abilities\""
                 },
                 {
                     "text": "Added MoW Lookup"

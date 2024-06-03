@@ -318,7 +318,7 @@ export const Goals = () => {
                 <div>
                     <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
                         <span>
-                            Upgrade Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold |
+                            Character Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold |
                         </span>
                         <span>
                             <b>{totalXpAbilities}</b> XP Books)

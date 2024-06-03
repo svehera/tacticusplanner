@@ -41,7 +41,7 @@ export const EditMowDialog: React.FC<Props> = ({
         const minStars = rarityToStars[editedMow.rarity];
         const maxStars = rarityToMaxStars[editedMow.rarity];
 
-        return getEnumValues(RarityStars).filter(x => (x >= minStars && x <= maxStars) || x === editedMow.stars);
+        return getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
     }, [editedMow.rarity]);
 
     const rarityEntries: number[] = getEnumValues(Rarity);

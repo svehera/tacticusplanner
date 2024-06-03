@@ -36,6 +36,8 @@ import { IUnit } from 'src/v2/features/characters/characters.models';
 import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
+import { Info } from '@mui/icons-material';
+import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 
 const getDefaultForm = (priority: number): IPersonalGoal => ({
     id: v4(),
@@ -66,7 +68,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
     const handleClose = (goal?: IPersonalGoal | undefined): void => {
         if (goal) {
-            goal.dailyRaids = false;
+            goal.dailyRaids = [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(goal.type);
             dispatch.goals({ type: 'Add', goal });
             enqueueSnackbar(`Goal for ${goal.character} is added`, { variant: 'success' });
         }
@@ -99,14 +101,14 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     const allowedCharacters: IUnit[] = useMemo(() => {
         switch (form.type) {
             case PersonalGoalType.Ascend:
-            case PersonalGoalType.UpgradeAbilities:
+            case PersonalGoalType.CharacterAbilities:
             case PersonalGoalType.UpgradeRank: {
                 return ignoreRankRarity ? characters : characters.filter(x => x.rank > Rank.Locked);
             }
             case PersonalGoalType.Unlock: {
                 return characters.filter(x => x.rank === Rank.Locked);
             }
-            case PersonalGoalType.UpgradeMow: {
+            case PersonalGoalType.MowAbilities: {
                 return ignoreRankRarity ? mows : mows.filter(x => x.unlocked);
             }
             default: {
@@ -133,8 +135,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         if (
             (newGoalType === PersonalGoalType.Unlock && form.type !== PersonalGoalType.Unlock) ||
             (newGoalType !== PersonalGoalType.Unlock && form.type === PersonalGoalType.Unlock) ||
-            (newGoalType === PersonalGoalType.UpgradeMow && form.type !== PersonalGoalType.UpgradeMow) ||
-            (newGoalType !== PersonalGoalType.UpgradeMow && form.type === PersonalGoalType.UpgradeMow)
+            (newGoalType === PersonalGoalType.MowAbilities && form.type !== PersonalGoalType.MowAbilities) ||
+            (newGoalType !== PersonalGoalType.MowAbilities && form.type === PersonalGoalType.MowAbilities)
         ) {
             setUnit(null);
         }
@@ -181,14 +183,14 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             );
         }
 
-        if (form.type === PersonalGoalType.UpgradeMow && isMow(unit)) {
+        if (form.type === PersonalGoalType.MowAbilities && isMow(unit)) {
             return (
                 (form.firstAbilityLevel ?? 0) <= unit.primaryAbilityLevel &&
                 (form.secondAbilityLevel ?? 0) <= unit.secondaryAbilityLevel
             );
         }
 
-        if (form.type === PersonalGoalType.UpgradeAbilities && isCharacter(unit)) {
+        if (form.type === PersonalGoalType.CharacterAbilities && isCharacter(unit)) {
             return (
                 (form.firstAbilityLevel ?? 0) <= unit.activeAbilityLevel &&
                 (form.secondAbilityLevel ?? 0) <= unit.passiveAbilityLevel
@@ -222,8 +224,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                         <Conditional
                             condition={[
                                 PersonalGoalType.UpgradeRank,
-                                PersonalGoalType.UpgradeMow,
-                                PersonalGoalType.UpgradeAbilities,
+                                PersonalGoalType.MowAbilities,
+                                PersonalGoalType.CharacterAbilities,
                             ].includes(form.type)}>
                             <IgnoreRankRarity value={ignoreRankRarity} onChange={setIgnoreRankRarity} />
                         </Conditional>
@@ -240,8 +242,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                     <MenuItem value={PersonalGoalType.UpgradeRank}>Upgrade Rank</MenuItem>
                                     <MenuItem value={PersonalGoalType.Ascend}>Ascend</MenuItem>
                                     <MenuItem value={PersonalGoalType.Unlock}>Unlock</MenuItem>
-                                    <MenuItem value={PersonalGoalType.UpgradeMow}>Upgrade MoW</MenuItem>
-                                    <MenuItem value={PersonalGoalType.UpgradeAbilities}>Upgrade Abilities</MenuItem>
+                                    <MenuItem value={PersonalGoalType.MowAbilities}>MoW Abilities</MenuItem>
+                                    <MenuItem value={PersonalGoalType.CharacterAbilities}>Character Abilities</MenuItem>
                                 </Select>
                             </FormControl>
                             <PrioritySelect
@@ -262,20 +264,18 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                     setForm(curr => ({ ...curr, targetRank, rankPoint5 }))
                                 }
                             />
-                            <MultipleSelectCheckmarks
-                                placeholder="Upgrades rarity"
-                                selectedValues={form.upgradesRarity!.map(x => Rarity[x])}
-                                values={Object.values(RarityString)}
-                                selectionChanges={values => {
+                            <UpgradesRaritySelect
+                                upgradesRarity={form.upgradesRarity ?? []}
+                                upgradesRarityChange={values => {
                                     setForm(curr => ({
                                         ...curr,
-                                        upgradesRarity: values.map(x => +Rarity[x as unknown as number]),
+                                        upgradesRarity: values,
                                     }));
                                 }}
                             />
                         </Conditional>
 
-                        {form.type === PersonalGoalType.UpgradeMow && isMow(unit) && (
+                        {form.type === PersonalGoalType.MowAbilities && isMow(unit) && (
                             <>
                                 <div className="flex-box gap5 full-width between">
                                     <NumberInput
@@ -305,21 +305,19 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                         }}
                                     />
                                 </div>
-                                <MultipleSelectCheckmarks
-                                    placeholder="Upgrades rarity"
-                                    selectedValues={form.upgradesRarity!.map(x => Rarity[x])}
-                                    values={Object.values(RarityString)}
-                                    selectionChanges={values => {
+                                <UpgradesRaritySelect
+                                    upgradesRarity={form.upgradesRarity ?? []}
+                                    upgradesRarityChange={values => {
                                         setForm(curr => ({
                                             ...curr,
-                                            upgradesRarity: values.map(x => +Rarity[x as unknown as number]),
+                                            upgradesRarity: values,
                                         }));
                                     }}
                                 />
                             </>
                         )}
 
-                        {form.type === PersonalGoalType.UpgradeAbilities && isCharacter(unit) && (
+                        {form.type === PersonalGoalType.CharacterAbilities && isCharacter(unit) && (
                             <>
                                 <div className="flex-box gap5 full-width between">
                                     <NumberInput

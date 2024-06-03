@@ -32,8 +32,8 @@ export class GoalsService {
                         PersonalGoalType.UpgradeRank,
                         PersonalGoalType.Ascend,
                         PersonalGoalType.Unlock,
-                        PersonalGoalType.UpgradeMow,
-                        PersonalGoalType.UpgradeAbilities,
+                        PersonalGoalType.MowAbilities,
+                        PersonalGoalType.CharacterAbilities,
                     ].includes(g.type) ||
                     !relatedCharacter
                 ) {
@@ -50,11 +50,11 @@ export class GoalsService {
         ) as Array<ICharacterUnlockGoal | ICharacterAscendGoal>;
 
         const upgradeRankOrMowGoals = selectedGoals.filter(x =>
-            [PersonalGoalType.UpgradeRank, PersonalGoalType.UpgradeMow].includes(x.type)
+            [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(x.type)
         ) as Array<ICharacterUpgradeRankGoal>;
 
         const upgradeAbilities = selectedGoals.filter(x =>
-            [PersonalGoalType.UpgradeAbilities].includes(x.type)
+            [PersonalGoalType.CharacterAbilities].includes(x.type)
         ) as Array<ICharacterUpgradeAbilities>;
 
         return {
@@ -81,9 +81,9 @@ export class GoalsService {
                 unitAlliance: unit.alliance,
             };
 
-            if (g.type === PersonalGoalType.UpgradeMow) {
+            if (g.type === PersonalGoalType.MowAbilities) {
                 const result: ICharacterUpgradeMow = {
-                    type: PersonalGoalType.UpgradeMow,
+                    type: PersonalGoalType.MowAbilities,
                     primaryStart: unit.primaryAbilityLevel,
                     primaryEnd: g.firstAbilityLevel ?? unit.primaryAbilityLevel,
                     secondaryStart: unit.secondaryAbilityLevel,
@@ -122,9 +122,9 @@ export class GoalsService {
                 return result;
             }
 
-            if (g.type === PersonalGoalType.UpgradeAbilities) {
+            if (g.type === PersonalGoalType.CharacterAbilities) {
                 const result: ICharacterUpgradeAbilities = {
-                    type: PersonalGoalType.UpgradeAbilities,
+                    type: PersonalGoalType.CharacterAbilities,
                     level: unit.level,
                     xp: unit.xp,
                     activeStart: unit.activeAbilityLevel,
@@ -203,7 +203,7 @@ export class GoalsService {
                     shardsPerToken: goal.onslaughtShards,
                 };
             }
-            case PersonalGoalType.UpgradeMow: {
+            case PersonalGoalType.MowAbilities: {
                 return {
                     ...base,
                     firstAbilityLevel: goal.primaryEnd,
@@ -211,7 +211,7 @@ export class GoalsService {
                     upgradesRarity: goal.upgradesRarity,
                 };
             }
-            case PersonalGoalType.UpgradeAbilities: {
+            case PersonalGoalType.CharacterAbilities: {
                 return {
                     ...base,
                     firstAbilityLevel: goal.activeEnd,
@@ -237,11 +237,11 @@ export class GoalsService {
             return goal.rarityStart >= goal.rarityEnd && goal.starsStart >= goal.starsEnd;
         }
 
-        if (goal.type == PersonalGoalType.UpgradeMow) {
+        if (goal.type == PersonalGoalType.MowAbilities) {
             return goal.primaryStart >= goal.primaryEnd && goal.secondaryStart >= goal.secondaryEnd;
         }
 
-        if (goal.type == PersonalGoalType.UpgradeAbilities) {
+        if (goal.type == PersonalGoalType.CharacterAbilities) {
             return goal.activeStart >= goal.activeEnd && goal.passiveStart >= goal.passiveEnd;
         }
 
