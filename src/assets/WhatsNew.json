@@ -3,17 +3,35 @@
     "releaseNotes": [
         {
             "version": "1.5.6",
-            "date": "June X",
+            "date": "June 4",
             "type": "Update",
             "new": [
                 {
-                    "text": "Added MoWs to Who You Own page"
+                    "text": "Added MoWs to Who You Own page",
+                    "route": "input/wyo",
+                    "images": [
+                        {
+                            "path": "wyo.png"
+                        }
+                    ]
                 },
                 {
-                    "text": "Added new goal types:\"MoW abilities\" and \"Character abilities\""
+                    "text": "Added new goal types:\"MoW abilities\" and \"Character abilities\"",
+                    "route": "plan/goals",
+                    "images": [
+                        {
+                            "path": "goals.png"
+                        }
+                    ]
                 },
                 {
-                    "text": "Added MoW Lookup"
+                    "text": "Added MoW Lookup",
+                    "route": "learn/mowLookup",
+                    "images": [
+                        {
+                            "path": "lookup.png"
+                        }
+                    ]
                 }
             ],
             "minor": [
@@ -21,25 +39,46 @@
                     "text": "Updated images for some crafted upgrades. Thanks to KIVIY for contribution."
                 },
                 {
-                    "text": "Updated stars visual to not extend beyond the character portrait and make the 5th one bigger in the middle like in the game. Thanks to Lëonaica for contribution."
+                    "text": "Updated stars visual to not extend beyond the character portrait and make the 5th one bigger in the middle like in the game. Thanks to Lëonaica for contribution. (LordLancelot)"
                 },
                 {
-                    "text": "Updated columns order in the material table on the Daily Raids (SeventhSun)"
+                    "text": "Updated columns order in the material table on the Daily Raids to be: Goal/Inventory/Remaining (SeventhSun)"
                 },
                 {
-                    "text": "Added possibility to search for upgrade component of craftable upgrade in the Upgrade page (ijriims)"
+                    "text": "Added possibility to search for upgrade component of craftable upgrade in the Upgrade page (ijriims)",
+                    "route": "learn/upgrades",
+                    "images": [
+                        {
+                            "path": "upgrades.png"
+                        }
+                    ]
                 },
                 {
-                    "text": "Added option to navigate Who You Own screen using back and forward arrows on the edit unit dialog (Hadoopalot)"
+                    "text": "Added option to navigate Who You Own screen using back and forward arrows on the edit unit dialog (Hadoopalot)",
+                    "images": [
+                        {
+                            "path": "wyo2.png"
+                        }
+                    ]
                 },
                 {
                     "text": "Added \"Component for\" column to the upgrades table (KTA)"
                 },
                 {
-                    "text": "Added an indicator to display what the highest rarity cap is on the war zones (murky)"
+                    "text": "Added an indicator to display what the highest rarity cap is on the war zones (murky)",
+                    "images": [
+                        {
+                            "path": "zones.png"
+                        }
+                    ]
                 },
                 {
-                    "text": "Added events calendar to home page (Mattias)"
+                    "text": "Added events calendar to home page (Mattias)",
+                    "images": [
+                        {
+                            "path": "home.png"
+                        }
+                    ]
                 }
             ],
             "bugFixes": [
