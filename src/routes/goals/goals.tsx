@@ -62,10 +62,7 @@ export const Goals = () => {
             {
                 dailyEnergy:
                     dailyRaidsPreferences.dailyEnergy -
-                    Math.min(
-                        estimatedShardsTotal.energyPerDay + dailyRaidsPreferences.shardsEnergy,
-                        dailyRaidsPreferences.dailyEnergy - 100
-                    ),
+                    Math.min(estimatedShardsTotal.energyPerDay + dailyRaidsPreferences.shardsEnergy, 90),
                 campaignsProgress: campaignsProgress,
                 preferences: { ...dailyRaidsPreferences, farmByPriorityOrder: true },
                 upgrades: inventory.upgrades,
@@ -130,13 +127,17 @@ export const Goals = () => {
         if (upgradeRankOrMowGoals.length) {
             const goalsEstimate = upgradeRankOrMowGoals.map(goal => {
                 const goalEstimate = estimatedUpgradesTotal.byCharactersPriority.find(x => x.goalId === goal.goalId);
-                const firstFarmDay = estimatedUpgradesTotal.upgradesRaids.findIndex(x =>
-                    x.raids.flatMap(raid => raid.relatedGoals).includes(goal.goalId)
-                );
+                const firstFarmDay = estimatedUpgradesTotal.upgradesRaids.findIndex(x => {
+                    const relatedGoals = x.raids.flatMap(raid => raid.relatedGoals);
+                    const relatedCharacters = x.raids.flatMap(raid => raid.relatedCharacters);
+                    return relatedGoals.includes(goal.goalId) && relatedCharacters.includes(goal.unitId);
+                });
 
-                const daysTotal = estimatedUpgradesTotal.upgradesRaids.filter(x =>
-                    x.raids.flatMap(raid => raid.relatedGoals).includes(goal.goalId)
-                ).length;
+                const daysTotal = estimatedUpgradesTotal.upgradesRaids.filter(x => {
+                    const relatedGoals = x.raids.flatMap(raid => raid.relatedGoals);
+                    const relatedCharacters = x.raids.flatMap(raid => raid.relatedCharacters);
+                    return relatedGoals.includes(goal.goalId) && relatedCharacters.includes(goal.unitId);
+                }).length;
 
                 if (goal.type === PersonalGoalType.UpgradeRank) {
                     const targetLevel = rankToLevel[((goal.rankEnd ?? 1) - 1) as Rank];

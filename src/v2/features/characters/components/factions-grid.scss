@@ -5,6 +5,8 @@ $columnCount4: 4;
 $columnCount3: 3;
 $columnCount2: 2;
 
+$maxWidth: 470;
+
 @mixin responsiveGrid($columns, $maxWidth) {
     $roundedRows: ceil($factionsCount / $columns);
     @media (max-width: #{$maxWidth}px) {
@@ -23,12 +25,12 @@ $columnCount2: 2;
     grid-template-rows: repeat(#{$roundedRows5}, 1fr);
 
     /* Media queries for different column configurations */
-    @include responsiveGrid($columnCount4, 2000); /* 4 columns */
-    @include responsiveGrid($columnCount3, 1600); /* 3 columns */
-    @include responsiveGrid($columnCount2, 1200); /* 2 columns */
+    @include responsiveGrid($columnCount4, $maxWidth * 5); /* 4 columns */
+    @include responsiveGrid($columnCount3, $maxWidth * 4); /* 3 columns */
+    @include responsiveGrid($columnCount2, $maxWidth * 3); /* 2 columns */
 
     /* 1 column */
-    @media (max-width: 800px) {
+    @media (max-width: 950px) {
         display: flex;
         flex-wrap: wrap;
     }
