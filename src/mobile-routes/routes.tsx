@@ -15,6 +15,8 @@ import { guildWarDefenseLazyRoute } from 'src/v2/pages/guild-war-defense/guild-w
 import { guildWarZonesLazyRoute } from 'src/v2/pages/guild-war-layout/guild-war-zones.route';
 import { guildLazyRoute } from 'src/v2/pages/guild/guild.route';
 import { guildInsightsLazyRoute } from 'src/v2/pages/guild-insights/guild-insights.route';
+import { teamsMobileLazyRoute } from 'src/v2/pages/teams/teams.route';
+import { mowLookupMobileLazyRoute } from 'src/v2/pages/mow-lookup/mow-lookup.route';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -88,6 +90,7 @@ const planRoutes: RouteObject[] = [
     guildWarOffenseLazyRoute,
     guildWarDefenseLazyRoute,
     guildWarZonesLazyRoute,
+    teamsMobileLazyRoute,
     {
         path: 'plan/le',
         async lazy() {
@@ -158,6 +161,7 @@ const learnRoutes: RouteObject[] = [
     dirtyDozenLazyRoute,
     insightsLazyRoute,
     guildInsightsLazyRoute,
+    mowLookupMobileLazyRoute,
 ];
 
 export const mobileAppRoutes: () => RouteObject[] = () => [

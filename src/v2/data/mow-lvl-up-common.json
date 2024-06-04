@@ -1,0 +1,346 @@
+﻿[
+    {
+        "lvl": 1,
+        "components": 1,
+        "gold": 15,
+        "badges": 1,
+        "salvage": 5
+    },
+    {
+        "lvl": 2,
+        "components": 1,
+        "gold": 30,
+        "badges": 1,
+        "salvage": 5
+    },
+    {
+        "lvl": 3,
+        "components": 1,
+        "gold": 60,
+        "badges": 1,
+        "salvage": 5
+    },
+    {
+        "lvl": 4,
+        "components": 1,
+        "gold": 90,
+        "badges": 1,
+        "salvage": 5
+    },
+    {
+        "lvl": 5,
+        "components": 2,
+        "gold": 120,
+        "badges": 1,
+        "salvage": 5
+    },
+    {
+        "lvl": 6,
+        "components": 2,
+        "gold": 180,
+        "badges": 1,
+        "salvage": 5
+    },
+    {
+        "lvl": 7,
+        "components": 3,
+        "gold": 240,
+        "badges": 1,
+        "salvage": 5
+    },
+    {
+        "lvl": 8,
+        "components": 3,
+        "gold": 300,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 9,
+        "components": 3,
+        "gold": 360,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 10,
+        "components": 3,
+        "gold": 420,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 11,
+        "components": 4,
+        "gold": 480,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 12,
+        "components": 4,
+        "gold": 540,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 13,
+        "components": 5,
+        "gold": 600,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 14,
+        "components": 5,
+        "gold": 750,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 15,
+        "components": 5,
+        "gold": 900,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 16,
+        "components": 5,
+        "gold": 1050,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 17,
+        "components": 6,
+        "gold": 1200,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 18,
+        "components": 6,
+        "gold": 1500,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 19,
+        "components": 6,
+        "gold": 1800,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 20,
+        "components": 7,
+        "gold": 2100,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 21,
+        "components": 7,
+        "gold": 2400,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 22,
+        "components": 8,
+        "gold": 2700,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 23,
+        "components": 8,
+        "gold": 3000,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 24,
+        "components": 9,
+        "gold": 3300,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 25,
+        "components": 10,
+        "gold": 3600,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 26,
+        "components": 11,
+        "gold": 3900,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 27,
+        "components": 12,
+        "gold": 4200,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 28,
+        "components": 13,
+        "gold": 4500,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 29,
+        "components": 14,
+        "gold": 4800,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 30,
+        "components": 15,
+        "gold": 5100,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 31,
+        "components": 16,
+        "gold": 5400,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 32,
+        "components": 17,
+        "gold": 5700,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 33,
+        "components": 18,
+        "gold": 6000,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 34,
+        "components": 19,
+        "gold": 6600,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 35,
+        "components": 20,
+        "gold": 7200,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 36,
+        "components": 21,
+        "gold": 7800,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 37,
+        "components": 22,
+        "gold": 8400,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 38,
+        "components": 23,
+        "gold": 9000,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 39,
+        "components": 24,
+        "gold": 9600,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 40,
+        "components": 26,
+        "gold": 10000,
+        "badges": 1,
+        "forgeBadges": 1
+    },
+    {
+        "lvl": 41,
+        "components": 28,
+        "gold": 12000,
+
+        "badges": 2,
+        "forgeBadges": 2
+    },
+    {
+        "lvl": 42,
+        "components": 30,
+        "gold": 13000,
+        "badges": 3,
+        "forgeBadges": 3
+    },
+    {
+        "lvl": 43,
+        "components": 32,
+        "gold": 15000,
+        "badges": 4,
+        "forgeBadges": 4
+    },
+    {
+        "lvl": 44,
+        "components": 34,
+        "gold": 18000,
+        "badges": 5,
+        "forgeBadges": 5
+    },
+    {
+        "lvl": 45,
+        "components": 36,
+        "gold": 24000,
+        "badges": 6,
+        "forgeBadges": 6
+    },
+    {
+        "lvl": 46,
+        "components": 39,
+        "gold": 30000,
+        "badges": 7,
+        "forgeBadges": 7
+    },
+    {
+        "lvl": 47,
+        "components": 42,
+        "gold": 45000,
+        "badges": 8,
+        "forgeBadges": 8
+    },
+    {
+        "lvl": 48,
+        "components": 46,
+        "gold": 60000,
+        "badges": 9,
+        "forgeBadges": 9
+    },
+    {
+        "lvl": 49,
+        "components": 50,
+        "gold": 150000,
+        "badges": 10,
+        "forgeBadges": 10
+    }
+]

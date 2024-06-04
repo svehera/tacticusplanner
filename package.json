@@ -18,10 +18,12 @@
     "react": "^18.2.0",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
+    "react-medium-image-zoom": "^5.2.4",
     "react-router-dom": "^6.15.0",
     "read-excel-file": "^5.7.1",
     "sass": "^1.69.5",
     "typescript": "^4.9.5",
+    "usehooks-ts": "^3.1.0",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },

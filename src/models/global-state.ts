@@ -5,6 +5,8 @@
     IDailyRaids,
     IDailyRaidsPreferences,
     IGlobalState,
+    IGuild,
+    IGuildWar,
     IInventory,
     ILegendaryEventProgressState,
     ILegendaryEventSelectedRequirements,
@@ -12,15 +14,16 @@
     IPersonalCharacterData2,
     IPersonalData2,
     IPersonalGoal,
-    IGuildWar,
     ISelectedTeamsOrdering,
     IViewPreferences,
     LegendaryEventData,
-    IGuild,
 } from './interfaces';
 import { StaticDataService } from '../services';
 import { CharacterBias, LegendaryEventEnum, Rank, Rarity, RarityStars } from './enums';
-import { defaultData, rankToLevel, rankToRarity, rarityToStars } from './constants';
+import { defaultData, rankToLevel, rankToRarity, rarityStringToNumber, rarityToStars } from './constants';
+import { IMow, IMowDb, IMowStatic } from 'src/v2/features/characters/characters.models';
+import mowsData from 'src/v2/data/mows.json';
+import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
@@ -40,6 +43,7 @@ export class GlobalState implements IGlobalState {
     readonly dailyRaids: IDailyRaids;
     readonly guildWar: IGuildWar;
     readonly guild: IGuild;
+    readonly mows: IMow[];
 
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
@@ -52,6 +56,7 @@ export class GlobalState implements IGlobalState {
         this.leProgress = personalData.leProgress;
         const chars = GlobalState.fixNames(personalData.characters);
         this.characters = GlobalState.initCharacters(chars);
+        this.mows = GlobalState.initMows(personalData.mows);
 
         for (const leProgressKey in this.leProgress) {
             const leProgress = this.leProgress[+leProgressKey as LegendaryEventEnum];
@@ -84,8 +89,8 @@ export class GlobalState implements IGlobalState {
             const rankRarity = rankToRarity[rank];
             const rarity = Math.max(personalCharData?.rarity ?? staticData.initialRarity, rankRarity) as Rarity;
             const stars = Math.max(personalCharData?.stars ?? 0, rarityToStars[rarity]);
-            const activeLevel = personalCharData?.activeAbilityLevel ?? 0;
-            const passiveLevel = personalCharData?.passiveAbilityLevel ?? 0;
+            const activeLevel = Math.max(personalCharData?.activeAbilityLevel ?? 1, 1);
+            const passiveLevel = Math.max(personalCharData?.passiveAbilityLevel ?? 1, 1);
             const level = Math.max(personalCharData?.level ?? 1, rankLevel, activeLevel, passiveLevel);
             const upgrades = personalCharData?.upgrades
                 ? personalCharData.upgrades.filter(StaticDataService.isValidaUpgrade)
@@ -113,6 +118,28 @@ export class GlobalState implements IGlobalState {
                         ? Math.ceil((personalCharData.numberOfUnlocked / totalUsers) * 100)
                         : undefined,
                 ownedBy: personalCharData?.ownedBy ?? [],
+            };
+        });
+    }
+
+    static initMows(dbMows: IMowDb[]): Array<IMow> {
+        const mowsStatic = mowsData as IMowStatic[];
+        return mowsStatic.map(staticData => {
+            const dbMow = dbMows?.find(c => c.id === staticData.id);
+            const initialRarity = rarityStringToNumber[staticData.initialRarity];
+            const initialRarityStars = rarityToStars[rarityStringToNumber[staticData.initialRarity]];
+
+            return {
+                ...staticData,
+                unitType: UnitType.mow,
+                portraitIcon: `${staticData.id}.webp`,
+                badgeIcon: `${staticData.id}.png`,
+                rarity: dbMow?.rarity ?? initialRarity,
+                stars: dbMow?.stars ?? initialRarityStars,
+                primaryAbilityLevel: dbMow?.primaryAbilityLevel ?? 1,
+                secondaryAbilityLevel: dbMow?.secondaryAbilityLevel ?? 1,
+                unlocked: dbMow?.unlocked ?? false,
+                shards: dbMow?.shards ?? 0,
             };
         });
     }
@@ -163,6 +190,16 @@ export class GlobalState implements IGlobalState {
                 shards: x.shards,
             }));
 
+        const mowsToDb: IMowDb[] = value.mows.map(x => ({
+            id: x.id,
+            rarity: x.rarity,
+            primaryAbilityLevel: x.primaryAbilityLevel,
+            secondaryAbilityLevel: x.secondaryAbilityLevel,
+            stars: x.stars,
+            shards: x.shards,
+            unlocked: x.unlocked,
+        }));
+
         return {
             schemaVersion: 2,
             modifiedDate: value.modifiedDate,
@@ -173,6 +210,7 @@ export class GlobalState implements IGlobalState {
             leProgress: value.leProgress,
             leSelectedRequirements: value.leSelectedRequirements,
             characters: charactersToStore,
+            mows: mowsToDb,
             autoTeamsPreferences: value.autoTeamsPreferences,
             viewPreferences: value.viewPreferences,
             dailyRaidsPreferences: value.dailyRaidsPreferences,

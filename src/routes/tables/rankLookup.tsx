@@ -79,14 +79,14 @@ export const RankLookup = () => {
 
         setMessage('Upgrades:');
         return StaticDataService.getUpgrades({
-            characterName: character.name,
+            unitName: character.id,
             rankStart,
             rankEnd,
             appliedUpgrades: [],
             rankPoint5,
             upgradesRarity: [],
         });
-    }, [character?.name, rankStart, rankEnd, rankPoint5]);
+    }, [character?.id, rankStart, rankEnd, rankPoint5]);
 
     const groupByRanks = useMemo(() => {
         const result: Array<{
@@ -225,6 +225,7 @@ export const RankLookup = () => {
                                 <CampaignLocation
                                     key={location.id}
                                     location={location}
+                                    short={true}
                                     unlocked={data.unlockedLocations.includes(location.id)}
                                 />
                             ))}
@@ -313,24 +314,6 @@ export const RankLookup = () => {
                     alignItems: 'center',
                     gap: '20px',
                 }}>
-                <CharactersAutocomplete
-                    character={character}
-                    characters={charactersOptions}
-                    onCharacterChange={value => {
-                        setCharacter(value);
-
-                        setSearchParams(curr => {
-                            if (value) {
-                                curr.set('character', value.name);
-                            } else {
-                                curr.delete('character');
-                            }
-
-                            return curr;
-                        });
-                    }}
-                    shortChar={true}
-                />
                 <div style={{ width: 200 }}>
                     <RankSelect
                         label={'Rank Start'}

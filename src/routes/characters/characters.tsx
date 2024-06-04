@@ -361,7 +361,12 @@ export const Characters = () => {
                     margin: '0 20px',
                     flexDirection: isMobile ? 'column' : 'row',
                 }}>
-                <TextField label="Quick Filter" variant="outlined" onChange={onFilterTextBoxChanged} />
+                <TextField
+                    style={{ minWidth: 200 }}
+                    label="Quick Filter"
+                    variant="outlined"
+                    onChange={onFilterTextBoxChanged}
+                />
                 <MultipleSelectCheckmarks
                     placeholder="Damage Types"
                     selectedValues={damageTypesFilter}

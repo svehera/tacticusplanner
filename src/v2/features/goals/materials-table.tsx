@@ -69,7 +69,11 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                     },
                 ],
             },
-
+            {
+                field: 'requiredCount',
+                headerName: 'Goal',
+                maxWidth: 75,
+            },
             {
                 valueGetter: params => {
                     return inventory[params.data!.id] ?? 0;
@@ -91,8 +95,8 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                 maxWidth: 90,
             },
             {
-                headerName: 'Left',
-                maxWidth: 75,
+                headerName: 'Remaining',
+                maxWidth: 90,
                 valueGetter: params => {
                     const { data } = params;
                     if (data) {
@@ -100,11 +104,6 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                         return Math.max(0, data.requiredCount - actualAcquired);
                     }
                 },
-            },
-            {
-                field: 'requiredCount',
-                headerName: 'Goal',
-                maxWidth: 75,
             },
             {
                 headerName: 'Estimate',
@@ -173,6 +172,9 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                     {
                         columnGroupShow: 'open',
                         headerName: 'Used',
+                        valueGetter: params => {
+                            return params.data?.locations.filter(x => x.isSelected).map(x => x.id) ?? [];
+                        },
                         cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
                             const { data } = params;
                             if (data) {
@@ -194,6 +196,9 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                     {
                         headerName: 'Locked',
                         columnGroupShow: 'open',
+                        valueGetter: params => {
+                            return params.data?.locations.filter(x => !x.isUnlocked).map(x => x.id) ?? [];
+                        },
                         cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
                             const { data } = params;
                             if (data) {
@@ -215,6 +220,11 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                     {
                         headerName: 'Other',
                         columnGroupShow: 'open',
+                        valueGetter: params => {
+                            return (
+                                params.data?.locations.filter(x => !x.isSelected && x.isUnlocked).map(x => x.id) ?? []
+                            );
+                        },
                         cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
                             const { data } = params;
                             if (data) {
@@ -254,7 +264,9 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
             }}>
             <div className="flex-box gap5">
                 <InfoIcon color="primary" />
-                <span>Click on the Inventory column cell to edit its value</span>
+                <span>
+                    Click on the <b>Inventory</b> column cell to edit its value
+                </span>
             </div>
             <AgGridReact
                 onCellEditingStopped={saveChanges}

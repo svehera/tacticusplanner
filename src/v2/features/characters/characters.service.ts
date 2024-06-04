@@ -9,19 +9,17 @@ import { filterChaos } from './functions/filter-by-chaos';
 import { filterImperial } from './functions/filter-by-imperial';
 import { filterXenos } from './functions/filter-by-xenos';
 import { CharactersOrderBy } from './enums/characters-order-by';
-import { IFaction } from './characters.models';
+import { IFaction, IUnit } from './characters.models';
 
 import factionsData from 'src/v2/data/factions.json';
 import { CharactersPowerService } from './characters-power.service';
 import { CharactersValueService } from './characters-value.service';
 import { rarityCaps } from 'src/v2/features/characters/characters.contants';
+import { isCharacter, isUnlocked } from 'src/v2/features/characters/units.functions';
+import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export class CharactersService {
-    static filterCharacters(
-        characters: ICharacter2[],
-        filterBy: CharactersFilterBy,
-        nameFilter: string | null
-    ): ICharacter2[] {
+    static filterCharacters(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {
         const filteredCharactersByName = nameFilter
             ? characters.filter(x => x.name.toLowerCase().includes(nameFilter.toLowerCase()))
             : characters;
@@ -34,6 +32,7 @@ export class CharactersService {
             case CharactersFilterBy.CanUpgrade:
                 return filteredCharactersByName.filter(
                     char =>
+                        isCharacter(char) &&
                         char.rank !== Rank.Locked &&
                         char.rank !== Rank.Diamond3 &&
                         !needToLevelCharacter(char) &&
@@ -51,52 +50,60 @@ export class CharactersService {
         }
     }
 
-    static orderCharacters(characters: ICharacter2[], charactersOrderBy: CharactersOrderBy): ICharacter2[] {
+    static orderUnits(units: IUnit[], charactersOrderBy: CharactersOrderBy): IUnit[] {
         switch (charactersOrderBy) {
             case CharactersOrderBy.CharacterValue:
                 return orderBy(
-                    characters.map(x => ({ ...x, characterValue: CharactersValueService.getCharacterValue(x) })),
+                    units.map(x => ({ ...x, characterValue: CharactersValueService.getCharacterValue(x) })),
                     ['characterValue'],
                     ['desc']
                 );
             case CharactersOrderBy.CharacterPower:
                 return orderBy(
-                    characters.map(x => ({ ...x, characterPower: CharactersPowerService.getCharacterPower(x) })),
+                    units.map(x => ({ ...x, characterPower: CharactersPowerService.getCharacterPower(x) })),
                     ['characterPower'],
                     ['desc']
                 );
             case CharactersOrderBy.AbilitiesLevel:
                 return orderBy(
-                    characters.map(x => ({
+                    units.map(x => ({
                         ...x,
-                        abilitiesLevel: x.activeAbilityLevel + x.passiveAbilityLevel,
+                        abilitiesLevel: this.getAbilitiesLevel(x),
                     })),
                     ['abilitiesLevel'],
                     ['desc']
                 );
             case CharactersOrderBy.Rank:
-                return orderBy(characters, ['rank'], ['desc']);
+                return orderBy(units, ['rank'], ['desc']);
             case CharactersOrderBy.Rarity:
-                return orderBy(characters, ['rarity'], ['desc']);
+                return orderBy(units, ['rarity'], ['desc']);
             case CharactersOrderBy.UnlockPercentage:
-                return orderBy(characters, ['numberOfUnlocked'], ['asc']);
+                return orderBy(units, ['numberOfUnlocked'], ['asc']);
             default:
-                return [];
+                return units;
         }
     }
 
-    static orderByFaction(characters: ICharacter2[], charactersOrderBy: CharactersOrderBy): IFaction[] {
-        const factionCharacters = groupBy(characters, 'faction');
+    private static getAbilitiesLevel(unit: IUnit): number {
+        if (isCharacter(unit)) {
+            return unit.activeAbilityLevel + unit.passiveAbilityLevel;
+        } else {
+            return unit.primaryAbilityLevel + unit.secondaryAbilityLevel;
+        }
+    }
+
+    static orderByFaction(units: IUnit[], charactersOrderBy: CharactersOrderBy): IFaction[] {
+        const factionCharacters = groupBy(units, 'faction');
         const result: IFaction[] = factionsData
             .filter(faction => factionCharacters[faction.name])
             .map(faction => {
                 const characters = factionCharacters[faction.name];
                 return {
                     ...faction,
-                    characters,
+                    units: characters,
                     bsValue: sum(characters.map(CharactersValueService.getCharacterValue)),
                     power: sum(characters.map(CharactersPowerService.getCharacterPower)),
-                    unlockedCharacters: characters.filter(x => x.rank > Rank.Locked).length,
+                    unlockedCharacters: characters.filter(x => isUnlocked(x)).length,
                 };
             });
         let orderByKey: keyof IFaction;
@@ -132,26 +139,11 @@ export class CharactersService {
         };
     }
 
-    // static calculateCharacterPotential(character: ICharacter2, rarityCap: Rarity): number {
-    //     const capped = rarityCaps[rarityCap];
-    //     // Calculate potential based on properties
-    //     const rarityPotential = (character.rarity / capped.rarity) * 100;
-    //     const rankPotential = (character.rank / capped.rank) * 100;
-    //     const starsPotential = (character.stars / capped.stars) * 100;
-    //     const activeAbilityPotential = (character.activeAbilityLevel / capped.abilitiesLevel) * 100;
-    //     const passiveAbilityPotential = (character.passiveAbilityLevel / capped.abilitiesLevel) * 100;
-    //
-    //     // Calculate average potential
-    //     const averagePotential =
-    //         (rarityPotential + rankPotential + starsPotential + activeAbilityPotential + passiveAbilityPotential) / 5;
-    //
-    //     return Math.round(averagePotential); // Round potential to the nearest whole number
-    // }
-
     static calculateCharacterPotential(character: IPersonalCharacterData2, rarityCap: Rarity): number {
         const capped = rarityCaps[rarityCap];
 
         const cappedPower = CharactersPowerService.getCharacterPower({
+            unitType: UnitType.character,
             rank: capped.rank,
             stars: capped.stars,
             rarity: rarityCap,
@@ -161,6 +153,7 @@ export class CharactersService {
         } as unknown as ICharacter2);
 
         const characterPower = CharactersPowerService.getCharacterPower({
+            unitType: UnitType.character,
             rank: character.rank,
             stars: character.stars,
             rarity: rarityCap,
@@ -168,7 +161,6 @@ export class CharactersService {
             activeAbilityLevel: character.activeAbilityLevel,
             passiveAbilityLevel: character.passiveAbilityLevel,
         } as unknown as ICharacter2);
-
         return characterPower > cappedPower ? 100 : Math.round((characterPower / cappedPower) * 100); // Round potential to the nearest whole number
     }
 

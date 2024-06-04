@@ -6,7 +6,6 @@ import { StarsImage } from 'src/v2/components/images/stars-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { RankImage } from 'src/v2/components/images/rank-image';
 
-import { ICharacter2 } from 'src/models/interfaces';
 import { Rank } from 'src/models/enums';
 import { charsReleaseShards, charsUnlockShards } from 'src/models/constants';
 import { needToAscendCharacter, needToLevelCharacter } from 'src/shared-logic/functions';
@@ -19,6 +18,7 @@ import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
+import { ICharacter2 } from 'src/models/interfaces';
 
 export const CharacterTile = ({
     character,
@@ -37,7 +37,7 @@ export const CharacterTile = ({
         ? charsUnlockShards[character.rarity]
         : charsReleaseShards[character.releaseRarity!];
     const unlockProgress = (character.shards / unlockShards) * 100;
-    const hasAbilities = (isUnlocked && character.activeAbilityLevel) || character.passiveAbilityLevel;
+    const hasAbilities = isUnlocked && (character.activeAbilityLevel || character.passiveAbilityLevel);
     const needToAscend = useMemo(() => needToAscendCharacter(character), [character.rarity, character.rank]);
 
     const needToLevel = useMemo(

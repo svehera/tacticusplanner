@@ -1,8 +1,10 @@
 ﻿import { ICharacter2 } from 'src/models/interfaces';
 import { Rank, Rarity, RarityStars } from 'src/models/enums';
 import { IRarityCap } from 'src/v2/features/characters/characters.models';
+import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export const unsetCharacter: Partial<ICharacter2> = {
+    unitType: UnitType.character,
     name: '',
     icon: 'unset.webp',
     rank: Rank.Stone1,

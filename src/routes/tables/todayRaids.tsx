@@ -38,7 +38,7 @@ export const TodayRaids: React.FC<Props> = ({
                 Today (<b>{energySpent}</b> <MiscIcon icon={'energy'} height={15} width={15} /> spent |{' '}
                 <b>{raidsCount}</b> raids done)
             </p>
-            <div className="flex-box gap2 wrap start" style={{ marginTop: 10 }}>
+            <div className="flex-box gap2 wrap start" style={{ marginTop: 10, justifyContent: 'center' }}>
                 {unStartedShardsRaids.map(shardsRaid => (
                     <div className="item-raids" key={shardsRaid.characterId}>
                         <ShardsItemInput shardsRaid={shardsRaid} handleAdd={addShards} />

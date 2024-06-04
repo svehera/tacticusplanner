@@ -38,6 +38,9 @@ import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
 import { GuildWarAction } from 'src/reducers/guildWarReducer';
 import { GuildAction } from 'src/reducers/guildReducer';
 import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
+import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
+import { MowsAction } from 'src/reducers/mows.reducer';
+import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -48,6 +51,7 @@ export interface UnitDataRaw {
     Health: number;
     Damage: number;
     Armour: number;
+    'Short Name': string;
     'Initial rarity': RarityString;
     'Melee Damage': DamageType;
     'Melee Hits': number;
@@ -73,10 +77,13 @@ export interface UnitDataRaw {
 }
 
 export interface IUnitData {
+    unitType: UnitType.character;
+    id: string;
     alliance: Alliance;
     faction: Faction;
     factionIcon: string;
     name: string;
+    shortName: string;
     numberAdded: number;
     health: number;
     damage: number;
@@ -106,8 +113,6 @@ export interface IDamageTypes {
     activeAbility?: DamageType;
     passiveAbility?: DamageType;
 }
-
-export type ICharacter = IUnitData & IPersonalCharacter;
 
 export type ICharLegendaryEvents = Record<LegendaryEventEnum, ICharLegendaryEvent>;
 
@@ -222,7 +227,7 @@ export interface ILegendaryEventTrackRequirement {
 export type ITableRow<T = ICharacter2 | string> = Record<string, T>;
 export type ICharacter2 = IUnitData & IPersonalCharacterData2 & DynamicProps;
 
-type DynamicProps = {
+export type DynamicProps = {
     numberOfUnlocked?: number;
     ownedBy?: string[];
     potential?: number;
@@ -254,6 +259,7 @@ export interface IGlobalState {
     viewPreferences: IViewPreferences;
     dailyRaidsPreferences: IDailyRaidsPreferences;
     characters: Array<ICharacter2>;
+    mows: Array<IMow>;
     goals: IPersonalGoal[];
     selectedTeamOrder: ISelectedTeamsOrdering;
     leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
@@ -268,6 +274,7 @@ export interface IGlobalState {
 
 export interface IDispatchContext {
     characters: React.Dispatch<CharactersAction>;
+    mows: React.Dispatch<MowsAction>;
     viewPreferences: React.Dispatch<ViewPreferencesAction>;
     dailyRaidsPreferences: React.Dispatch<DailyRaidsPreferencesAction>;
     autoTeamsPreferences: React.Dispatch<AutoTeamsPreferencesAction>;
@@ -294,6 +301,7 @@ export interface IPersonalData2 {
     dailyRaidsPreferences: IDailyRaidsPreferences;
     selectedTeamOrder: ISelectedTeamsOrdering;
     characters: Partial<IPersonalCharacterData2>[];
+    mows: IMowDb[];
     goals: IPersonalGoal[];
     leTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILegendaryEventProgressState>;
@@ -470,6 +478,11 @@ export interface IPersonalGoal {
 
     // unlock
     campaignsUsage?: CampaignsLocationsUsage;
+
+    // upgrade mow
+    unitId?: string;
+    firstAbilityLevel?: number;
+    secondAbilityLevel?: number;
 }
 
 export type ILegendaryEventsProgressState = Record<LegendaryEventEnum, ILegendaryEventProgressState>;

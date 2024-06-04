@@ -1,6 +1,9 @@
 [
     {
         "Name": "Varro Tigurius",
+        "Title": "Chief Librarian",
+        "Full Name": " Varro Tigurius",
+        "Short Name": "Varro",
         "Faction": "Ultramarines",
         "Alliance": "Imperial",
         "Health": 6233,
@@ -25,6 +28,9 @@
     },
     {
         "Name": "Certus",
+        "Title": "Sergeant",
+        "Full Name": "Certus",
+        "Short Name": "Certus",
         "Faction": "Ultramarines",
         "Alliance": "Imperial",
         "Health": 5754,
@@ -49,6 +55,9 @@
     },
     {
         "Name": "Bellator",
+        "Title": "Sergeant",
+        "Full Name": "Bellator",
+        "Short Name": "Bellator",
         "Faction": "Ultramarines",
         "Alliance": "Imperial",
         "Health": 8151,
@@ -70,6 +79,9 @@
     },
     {
         "Name": "Incisus",
+        "Title": "Apothecary",
+        "Full Name": "Incisus",
+        "Short Name": "Incisus",
         "Faction": "Ultramarines",
         "Alliance": "Imperial",
         "Health": 9350,
@@ -90,6 +102,9 @@
     },
     {
         "Name": "Marneus Calgar",
+        "Title": "Chapter Master",
+        "Full Name": "Marneus Calgar",
+        "Short Name": "Calgar",
         "Faction": "Ultramarines",
         "Alliance": "Imperial",
         "Health": 9110,
@@ -111,6 +126,9 @@
     },
     {
         "Name": "Makhotep",
+        "Title": "Royal Warden",
+        "Full Name": "Makhotep",
+        "Short Name": "Makhotep",
         "Faction": "Necrons",
         "Alliance": "Xenos",
         "Health": 7671,
@@ -134,6 +152,9 @@
     },
     {
         "Name": "Imospekh",
+        "Title": "Hexmark Destroyer",
+        "Full Name": "Imospekh",
+        "Short Name": "Imospekh",
         "Faction": "Necrons",
         "Alliance": "Xenos",
         "Health": 6904,
@@ -158,6 +179,9 @@
     },
     {
         "Name": "Aleph-Null",
+        "Title": "Canoptek Spyder",
+        "Full Name": "Aleph-Null",
+        "Short Name": "Aleph",
         "Faction": "Necrons",
         "Alliance": "Xenos",
         "Health": 7192,
@@ -178,6 +202,9 @@
     },
     {
         "Name": "Thutmose",
+        "Title": "Plasmancer",
+        "Full Name": "Thutmose",
+        "Short Name": "Thutmose",
         "Faction": "Necrons",
         "Alliance": "Xenos",
         "Health": 7192,
@@ -203,6 +230,9 @@
     },
     {
         "Name": "Anuphet",
+        "Title": "Overlord",
+        "Full Name": "Anuphet",
+        "Short Name": "Anuphet",
         "Faction": "Necrons",
         "Alliance": "Xenos",
         "Health": 8151,
@@ -227,6 +257,9 @@
     },
     {
         "Name": "Sibyll",
+        "Title": "Primaris Psyker",
+        "Full Name": "Sibyll Devine",
+        "Short Name": "Sibyll",
         "Faction": "Astra Militarum",
         "Alliance": "Imperial",
         "Health": 5274,
@@ -250,6 +283,9 @@
     },
     {
         "Name": "Commissar Yarrick",
+        "Title": "Lord Commissar",
+        "Full Name": "Sebastian Yarrick",
+        "Short Name": "Yarrick",
         "Faction": "Astra Militarum",
         "Alliance": "Imperial",
         "Health": 7192,
@@ -273,6 +309,9 @@
     },
     {
         "Name": "Kut Skoden",
+        "Title": "Bone'ead",
+        "Full Name": "Kut Skoden",
+        "Short Name": "Kut",
         "Faction": "Astra Militarum",
         "Alliance": "Imperial",
         "Health": 9110,
@@ -294,6 +333,9 @@
     },
     {
         "Name": "Thaddeus Noble",
+        "Title": "Master of Ordnance",
+        "Full Name": "Thaddeus Noble",
+        "Short Name": "Noble",
         "Faction": "Astra Militarum",
         "Alliance": "Imperial",
         "Health": 4795,
@@ -318,6 +360,9 @@
     },
     {
         "Name": "Castellan Creed",
+        "Title": "Lord General",
+        "Full Name": "Castellan Creed",
+        "Short Name": "Creed",
         "Faction": "Astra Militarum",
         "Alliance": "Imperial",
         "Health": 8630,
@@ -338,6 +383,9 @@
     },
     {
         "Name": "Angrax",
+        "Title": "Terminator Champion",
+        "Full Name": "Drakfus Angrax",
+        "Short Name": "Angrax",
         "Faction": "Black Legion",
         "Alliance": "Chaos",
         "Health": 10548,
@@ -360,6 +408,9 @@
     },
     {
         "Name": "Volk",
+        "Title": "Obliterator",
+        "Full Name": "Volk, Reforged by the Warp",
+        "Short Name": "Volk",
         "Faction": "Black Legion",
         "Alliance": "Chaos",
         "Health": 6233,
@@ -385,6 +436,9 @@
     },
     {
         "Name": "Archimatos",
+        "Title": "Master",
+        "Full Name": "Archimatos",
+        "Short Name": "Archimatos",
         "Faction": "Black Legion",
         "Alliance": "Chaos",
         "Health": 6713,
@@ -408,6 +462,9 @@
     },
     {
         "Name": "Haarken Worldclaimer",
+        "Title": "Chaos Lord",
+        "Full Name": "Haarken Worldclaimer",
+        "Short Name": "Haarken",
         "Faction": "Black Legion",
         "Alliance": "Chaos",
         "Health": 8439,
@@ -429,6 +486,9 @@
     },
     {
         "Name": "Abaddon The Despoiler",
+        "Title": "Warmaster of the Imperium Nihilus",
+        "Full Name": "Ezekyle Abbadon",
+        "Short Name": "Abbadon",
         "Faction": "Black Legion",
         "Alliance": "Chaos",
         "Health": 8439,
@@ -453,6 +513,9 @@
     },
     {
         "Name": "Vindicta",
+        "Title": "Celestian",
+        "Full Name": "Vindicta",
+        "Short Name": "Vindicta",
         "Faction": "Adepta Sororitas",
         "Alliance": "Imperial",
         "Health": 6713,
@@ -478,6 +541,9 @@
     },
     {
         "Name": "Isabella",
+        "Title": "Sister Hospitaller",
+        "Full Name": "Isabella Markien",
+        "Short Name": "Isabella",
         "Faction": "Adepta Sororitas",
         "Alliance": "Imperial",
         "Health": 8151,
@@ -498,6 +564,9 @@
     },
     {
         "Name": "Morvenn Vahl",
+        "Title": "Abbess Sanctorum",
+        "Full Name": "Morvenn Vahl",
+        "Short Name": "Morvenn",
         "Faction": "Adepta Sororitas",
         "Alliance": "Imperial",
         "Health": 8151,
@@ -523,6 +592,9 @@
     },
     {
         "Name": "Roswitha",
+        "Title": "Canoness",
+        "Full Name": "Roswitha Esther",
+        "Short Name": "Roswitha",
         "Faction": "Adepta Sororitas",
         "Alliance": "Imperial",
         "Health": 8151,
@@ -547,6 +619,9 @@
     },
     {
         "Name": "Celestine",
+        "Title": "Saint",
+        "Full Name": "Celestine",
+        "Short Name": "Celestine",
         "Faction": "Adepta Sororitas",
         "Alliance": "Imperial",
         "Health": 5754,
@@ -568,6 +643,9 @@
     },
     {
         "Name": "Snotflogga",
+        "Title": "Runtherd",
+        "Full Name": "Grumbal Snotflogga",
+        "Short Name": "Snot",
         "Faction": "Orks",
         "Alliance": "Xenos",
         "Health": 11501,
@@ -589,6 +667,9 @@
     },
     {
         "Name": "Gibbascrapz",
+        "Title": "Big Mek",
+        "Full Name": "Gibbascrapz, da Spezulist",
+        "Short Name": "Gibba",
         "Faction": "Orks",
         "Alliance": "Xenos",
         "Health": 7188,
@@ -609,6 +690,9 @@
     },
     {
         "Name": "Snappawrecka",
+        "Title": "Killa Kan",
+        "Full Name": "Snappawrecka",
+        "Short Name": "Snappa",
         "Faction": "Orks",
         "Alliance": "Xenos",
         "Health": 7671,
@@ -633,6 +717,9 @@
     },
     {
         "Name": "Tanksmasha",
+        "Title": "Nob",
+        "Full Name": "Olog Tanksmasha",
+        "Short Name": "Smasha",
         "Faction": "Orks",
         "Alliance": "Xenos",
         "Health": 9584,
@@ -654,6 +741,9 @@
     },
     {
         "Name": "Boss Gulgortz",
+        "Title": "Warboss",
+        "Full Name": "Gulgortz Bulldoza",
+        "Short Name": "Boss G",
         "Faction": "Orks",
         "Alliance": "Xenos",
         "Health": 9589,
@@ -678,6 +768,9 @@
     },
     {
         "Name": "Sword Brother Godswyl",
+        "Title": "Sword Brother",
+        "Full Name": "Fedreus Godswyl",
+        "Short Name": "Godswyl",
         "Faction": "Black Templars",
         "Alliance": "Imperial",
         "Health": 9110,
@@ -699,6 +792,9 @@
     },
     {
         "Name": "Brother Burchard",
+        "Title": "Brother",
+        "Full Name": "Raimund Burchard",
+        "Short Name": "Burchard",
         "Faction": "Black Templars",
         "Alliance": "Imperial",
         "Health": 11507,
@@ -724,6 +820,9 @@
     },
     {
         "Name": "Ancient Thoread",
+        "Title": "Ancioent",
+        "Full Name": "Cantus Thoread",
+        "Short Name": "Thoread",
         "Faction": "Black Templars",
         "Alliance": "Imperial",
         "Health": 9589,
@@ -744,6 +843,9 @@
     },
     {
         "Name": "Brother Jaeger",
+        "Title": "Brother",
+        "Full Name": "Kenric Jaeger",
+        "Short Name": "Jaeger",
         "Faction": "Black Templars",
         "Alliance": "Imperial",
         "Health": 10548,
@@ -765,6 +867,9 @@
     },
     {
         "Name": "High Marshal Helbrecht",
+        "Title": "High Marshal",
+        "Full Name": "Helbrecht",
+        "Short Name": "Helbrecht",
         "Faction": "Black Templars",
         "Alliance": "Imperial",
         "Health": 9110,
@@ -788,6 +893,9 @@
     },
     {
         "Name": "Typhus",
+        "Title": "Chaos Lord",
+        "Full Name": "Calas Typhon",
+        "Short Name": "Typhus",
         "Faction": "Death guard",
         "Alliance": "Chaos",
         "Health": 11507,
@@ -813,6 +921,9 @@
     },
     {
         "Name": "Maladus",
+        "Title": "Blightlord Terminator",
+        "Full Name": "Maladus Phlegmore",
+        "Short Name": "Maladus",
         "Faction": "Death guard",
         "Alliance": "Chaos",
         "Health": 11507,
@@ -835,6 +946,9 @@
     },
     {
         "Name": "Nauseous Rotbone",
+        "Title": "Plague Surgeon",
+        "Full Name": "Nauseous Rotbone",
+        "Short Name": "Rotbone",
         "Faction": "Death guard",
         "Alliance": "Chaos",
         "Health": 11507,
@@ -855,6 +969,9 @@
     },
     {
         "Name": "Pestillian",
+        "Title": "Biologus Putrifier",
+        "Full Name": "Pestillian Witherpus",
+        "Short Name": "Pestillian",
         "Faction": "Death guard",
         "Alliance": "Chaos",
         "Health": 10529,
@@ -877,6 +994,9 @@
     },
     {
         "Name": "Corrodius",
+        "Title": "Noxious Blightbringer",
+        "Full Name": "Corrodius Achebile",
+        "Short Name": "Corrodius",
         "Faction": "Death guard",
         "Alliance": "Chaos",
         "Health": 11980,
@@ -898,6 +1018,9 @@
     },
     {
         "Name": "Calandis",
+        "Title": "Ranger",
+        "Full Name": "Calandis Tawaren",
+        "Short Name": "Calandis",
         "Faction": "Aeldari",
         "Alliance": "Xenos",
         "Health": 6713,
@@ -922,6 +1045,9 @@
     },
     {
         "Name": "Aethana",
+        "Title": "Autarch",
+        "Full Name": "Aethana Barantharal",
+        "Short Name": "Aethana",
         "Faction": "Aeldari",
         "Alliance": "Xenos",
         "Health": 7671,
@@ -943,6 +1069,9 @@
     },
     {
         "Name": "Eldryon",
+        "Title": "Farseer",
+        "Full Name": "Eldryon Ynaduin",
+        "Short Name": "Eldryon",
         "Faction": "Aeldari",
         "Alliance": "Xenos",
         "Health": 7192,
@@ -967,6 +1096,9 @@
     },
     {
         "Name": "Maugan Ra",
+        "Title": "Phoenix Lord",
+        "Full Name": "Maugan Ra",
+        "Short Name": "Maugan",
         "Faction": "Aeldari",
         "Alliance": "Xenos",
         "Health": 5274,
@@ -991,6 +1123,9 @@
     },
     {
         "Name": "Jain Zar",
+        "Title": "Phoenix Lord",
+        "Full Name": "Jain Zar",
+        "Short Name": "Jain",
         "Faction": "Aeldari",
         "Alliance": "Xenos",
         "Health": 7192,
@@ -1012,6 +1147,9 @@
     },
     {
         "Name": "Sho'Syl",
+        "Title": "Shas'ui",
+        "Full Name": "Vior'la Sho'syl",
+        "Short Name": "Sho",
         "Faction": "T'au Empire",
         "Alliance": "Xenos",
         "Health": 6233,
@@ -1036,6 +1174,9 @@
     },
     {
         "Name": "Re'Vas",
+        "Title": "Shas'vre",
+        "Full Name": "Vior'la Re'vas",
+        "Short Name": "Re'vas",
         "Faction": "T'au Empire",
         "Alliance": "Xenos",
         "Health": 10069,
@@ -1060,6 +1201,9 @@
     },
     {
         "Name": "Darkstrider",
+        "Title": "Shas'el",
+        "Full Name": "T'au Myamoto",
+        "Short Name": "Darkstrider",
         "Faction": "T'au Empire",
         "Alliance": "Xenos",
         "Health": 7188,
@@ -1083,6 +1227,9 @@
     },
     {
         "Name": "Aun'Shi",
+        "Title": "Ethereal",
+        "Full Name": "Vior'la Aun'shi",
+        "Short Name": "Aun'shi",
         "Faction": "T'au Empire",
         "Alliance": "Xenos",
         "Health": 8148,
@@ -1103,6 +1250,9 @@
     },
     {
         "Name": "Shadowsun",
+        "Title": "Shas'o",
+        "Full Name": "T'au Shaserra",
+        "Short Name": "Shadowsun",
         "Faction": "T'au Empire",
         "Alliance": "Xenos",
         "Health": 7667,
@@ -1127,6 +1277,9 @@
     },
     {
         "Name": "Ulf",
+        "Title": "Wulfen Pack Leader",
+        "Full Name": "Ulf Frosthowl",
+        "Short Name": "Ulf",
         "Faction": "Space Wolves",
         "Alliance": "Imperial",
         "Health": 8630,
@@ -1149,6 +1302,9 @@
     },
     {
         "Name": "Tjark",
+        "Title": "Hound of Morkai Pack Leader",
+        "Full Name": "Tjark Wyrdslayer",
+        "Short Name": "Tjark",
         "Faction": "Space Wolves",
         "Alliance": "Imperial",
         "Health": 8151,
@@ -1170,6 +1326,9 @@
     },
     {
         "Name": "Azrael",
+        "Title": "Supreme Grand Master",
+        "Full Name": "Azrael",
+        "Short Name": "Azrael",
         "Faction": "Dark Angels",
         "Alliance": "Imperial",
         "Health": 8151,
@@ -1195,6 +1354,9 @@
     },
     {
         "Name": "Arjac",
+        "Title": "Champion of the Great Wolf",
+        "Full Name": "Arjac Rockfist",
+        "Short Name": "Atjac",
         "Faction": "Space Wolves",
         "Alliance": "Imperial",
         "Health": 10548,
@@ -1216,6 +1378,9 @@
     },
     {
         "Name": "Yazaghor",
+        "Title": "Enlightened",
+        "Full Name": "Yazaghor Ficklefate",
+        "Short Name": "Yaz",
         "Faction": "Thousand Sons",
         "Alliance": "Chaos",
         "Health": 6233,
@@ -1240,6 +1405,9 @@
     },
     {
         "Name": "Toth",
+        "Title": "Scarab Occult Terminator",
+        "Full Name": "Sokar Toth",
+        "Short Name": "Toth",
         "Faction": "Thousand Sons",
         "Alliance": "Chaos",
         "Health": 8630,
@@ -1264,6 +1432,9 @@
     },
     {
         "Name": "Abraxas",
+        "Title": "Infernal Master",
+        "Full Name": "Arkarzar Abraxas",
+        "Short Name": "Abraxas",
         "Faction": "Thousand Sons",
         "Alliance": "Chaos",
         "Health": 6713,
@@ -1289,6 +1460,9 @@
     },
     {
         "Name": "Thaumachus",
+        "Title": "Exalted Sorcerer",
+        "Full Name": "Kairatar Thaumachus",
+        "Short Name": "Thaumachus",
         "Faction": "Thousand Sons",
         "Alliance": "Chaos",
         "Health": 7192,
@@ -1312,6 +1486,9 @@
     },
     {
         "Name": "Sarquael",
+        "Title": "Hellblaster Sergeant",
+        "Full Name": "Sarquael",
+        "Short Name": "Sarquael",
         "Faction": "Dark Angels",
         "Alliance": "Imperial",
         "Health": 6713,
@@ -1337,6 +1514,9 @@
     },
     {
         "Name": "Neurothrope",
+        "Title": "",
+        "Full Name": "Neurothrope",
+        "Short Name": "Neurothrope",
         "Faction": "Tyranids",
         "Alliance": "Xenos",
         "Health": 8151,
@@ -1362,6 +1542,9 @@
     },
     {
         "Name": "Ahriman",
+        "Title": "Chaos Sorcerer",
+        "Full Name": "Ahzek Ahriman",
+        "Short Name": "Ahriman",
         "Faction": "Thousand Sons",
         "Alliance": "Chaos",
         "Health": 7671,
@@ -1386,6 +1569,9 @@
     },
     {
         "Name": "Tyrant Guard",
+        "Title": "",
+        "Full Name": "Tyrant Guard",
+        "Short Name": "Tyrant Guard",
         "Faction": "Tyranids",
         "Alliance": "Xenos",
         "Health": 11987,
@@ -1407,6 +1593,9 @@
     },
     {
         "Name": "Winged Tyrant Prime",
+        "Title": "",
+        "Full Name": "Winged Tyrant Prime",
+        "Short Name": "Winged Tyrant Prime",
         "Faction": "Tyranids",
         "Alliance": "Xenos",
         "Health": 9589,
@@ -1427,6 +1616,9 @@
     },
     {
         "Name": "Deathleaper",
+        "Title": "",
+        "Full Name": "Deathleaper",
+        "Short Name": "Deathleaper",
         "Faction": "Tyranids",
         "Alliance": "Xenos",
         "Health": 7671,
@@ -1448,6 +1640,9 @@
     },
     {
         "Name": "Njal Stormcaller",
+        "Title": "High Rune Priest",
+        "Full Name": "Njal Stormcaller",
+        "Short Name": "Njal",
         "Faction": "Space Wolves",
         "Alliance": "Imperial",
         "Health": 7671,
@@ -1471,6 +1666,9 @@
     },
     {
         "Name": "Ragnar Blackmane",
+        "Title": "Wolf Lord",
+        "Full Name": "Ragnar Blackmane",
+        "Short Name": "Ragnar",
         "Faction": "Space Wolves",
         "Alliance": "Imperial",
         "Health": 10548,
@@ -1493,6 +1691,9 @@
     },
     {
         "Name": "Vitruvius",
+        "Title": "Magos Dominus",
+        "Full Name": "Vitruvius Thannek",
+        "Short Name": "Vitruvius",
         "Faction": "Adeptus Mechanicus",
         "Alliance": "Imperial",
         "Health": 8630,
@@ -1518,6 +1719,9 @@
     },
     {
         "Name": "Actus",
+        "Title": "Manipulus",
+        "Full Name": "Actus Fulgorosus",
+        "Short Name": "Actus",
         "Faction": "Adeptus Mechanicus",
         "Alliance": "Imperial",
         "Health": 9110,
@@ -1541,6 +1745,9 @@
     },
     {
         "Name": "Tan Gi'Da",
+        "Title": "Marshal",
+        "Full Name": "Tan Gi'da",
+        "Short Name": "Tan",
         "Faction": "Adeptus Mechanicus",
         "Alliance": "Imperial",
         "Health": 8151,
@@ -1565,6 +1772,9 @@
     },
     {
         "Name": "Exitor-Rho",
+        "Title": "Ruststalker",
+        "Full Name": "Exitor-Rho-1.15/X",
+        "Short Name": "Rho",
         "Faction": "Adeptus Mechanicus",
         "Alliance": "Imperial",
         "Health": 7671,
@@ -1586,6 +1796,9 @@
     },
     {
         "Name": "Wrask",
+        "Title": "Chaos Terminator",
+        "Full Name": "Wrask",
+        "Short Name": "Wrask",
         "Faction": "World Eaters",
         "Alliance": "Chaos",
         "Health": 9103,
@@ -1607,6 +1820,9 @@
     },
     {
         "Name": "Macer",
+        "Title": "Jakhal Dishonoured",
+        "Full Name": "Macer Bloodgrin",
+        "Short Name": "Macer",
         "Faction": "World Eaters",
         "Alliance": "Chaos",
         "Health": 8624,
@@ -1628,6 +1844,9 @@
     },
     {
         "Name": "Asmodai",
+        "Title": "Interrogator-Chaplain",
+        "Full Name": "Asmodai",
+        "Short Name": "Asmodai",
         "Faction": "Dark Angels",
         "Alliance": "Imperial",
         "Health": 8624,
@@ -1648,6 +1867,9 @@
     },
     {
         "Name": "Azkor",
+        "Title": "",
+        "Full Name": "",
+        "Short Name": "",
         "Faction": "World Eaters",
         "Alliance": "Chaos",
         "Health": 9582,
@@ -1665,10 +1887,13 @@
         "Number": 74,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "unset.webp"
+        "Icon": "azkor.webp"
     },
     {
         "Name": "Kharn",
+        "Title": "Champion of Khorne",
+        "Full Name": "Khârn the Betrayer",
+        "Short Name": "Khârn",
         "Faction": "World Eaters",
         "Alliance": "Chaos",
         "Health": 8624,

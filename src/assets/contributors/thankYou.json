@@ -259,5 +259,20 @@
         "thankYou": "Already donated but this if for the new update. Keep it up.",
         "resourceDescription": "",
         "resourceLink": ""
+    },
+    {
+        "name": "Mrmoustachio",
+        "type": "Trooper",
+        "thankYou": "This is a great app, and extremely helpful! Thanks for making it",
+        "resourceDescription": "",
+        "resourceLink": ""
+    },
+    {
+        "name": "May 2024 Referrals",
+        "type": "TIE-62-TAT",
+        "thankYou": "Malithos",
+        "avatarIcon": "ref.webp",
+        "resourceDescription": "",
+        "resourceLink": ""
     }
 ]

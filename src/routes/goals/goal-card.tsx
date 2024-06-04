@@ -24,6 +24,10 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import LinkIcon from '@mui/icons-material/Link';
 import { StaticDataService } from 'src/services';
+import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
+import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
+import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
+import { XpTotal } from 'src/v2/features/goals/xp-total';
 
 interface Props {
     goal: CharacterRaidGoalSelect;
@@ -32,17 +36,20 @@ interface Props {
 }
 
 export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: passed }) => {
-    const goalEstimate = passed ?? {
+    const goalEstimate: IGoalEstimate = passed ?? {
         daysLeft: 0,
         daysTotal: 0,
         oTokensTotal: 0,
         energyTotal: 0,
+        xpBooksTotal: 0,
         goalId: '',
-        xpEstimate: null,
     };
     const isGoalCompleted = GoalsService.isGoalCompleted(goal);
 
     const calendarDate: string = useMemo(() => {
+        if (!goalEstimate.daysLeft) {
+            return '';
+        }
         const nextDate = new Date();
         nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
 
@@ -111,7 +118,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
             case PersonalGoalType.UpgradeRank: {
                 const { xpEstimate } = goalEstimate;
                 const linkBase = isMobile ? '/mobile/learn/rankLookup' : '/learn/rankLookup';
-                const params = `?character=${goal.characterName}&rankStart=${Rank[goal.rankStart]}&rankEnd=${
+                const params = `?character=${goal.unitName}&rankStart=${Rank[goal.rankStart]}&rankEnd=${
                     Rank[goal.rankEnd]
                 }&rankPoint5=${goal.rankPoint5}`;
 
@@ -142,33 +149,109 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                                 </div>
                             </AccessibleTooltip>
                         </div>
-                        {xpEstimate && (
-                            <div className="flex-box gap5">
-                                <span>(XP) Codex of War: {xpEstimate.legendaryBooks}</span>
-                                <AccessibleTooltip
-                                    title={
-                                        <span>
-                                            Current level: {xpEstimate.currentLevel}
-                                            <br />
-                                            Target level: {xpEstimate.targetLevel}
-                                            <br />
-                                            Gold: {xpEstimate.gold}
-                                            <br />
-                                            XP left: {xpEstimate.xpLeft}
-                                        </span>
-                                    }>
-                                    <Info color="primary" />
-                                </AccessibleTooltip>
-                            </div>
-                        )}
+                        {xpEstimate && <XpTotal {...xpEstimate} />}
                         <Button
                             size="small"
                             variant={'outlined'}
                             component={Link}
                             to={linkBase + params}
-                            target={isMobile ? '_self' : '_blank'}>
-                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Upgrades</span>
+                            target={'_self'}>
+                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Lookup</span>
                         </Button>
+                    </div>
+                );
+            }
+            case PersonalGoalType.MowAbilities: {
+                const linkBase = isMobile ? '/mobile/learn/mowLookup' : '/learn/mowLookup';
+                const params = `?mow=${goal.unitId}&pStart=${goal.primaryStart}&pEnd=${goal.primaryEnd}&sStart=${goal.secondaryStart}&sEnd=${goal.secondaryEnd}`;
+                const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
+                const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
+                return (
+                    <div>
+                        <div className="flex-box gap10">
+                            <div className="flex-box column start">
+                                {hasPrimaryGoal && (
+                                    <div className="flex-box gap3">
+                                        <span>Primary:</span> <b>{goal.primaryStart}</b> <ArrowForward />
+                                        <b>{goal.primaryEnd}</b>
+                                    </div>
+                                )}
+
+                                {hasSecondaryGoal && (
+                                    <div className="flex-box gap3">
+                                        <span>Secondary:</span> <b>{goal.secondaryStart}</b> <ArrowForward />
+                                        <b>{goal.secondaryEnd}</b>
+                                    </div>
+                                )}
+                            </div>
+                            {!!goal.upgradesRarity.length && (
+                                <div className="flex-box gap3">
+                                    {goal.upgradesRarity.map(x => (
+                                        <RarityImage key={x} rarity={x} />
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                        {goalEstimate.mowEstimate && (
+                            <div style={{ padding: '10px 0' }}>
+                                <MowMaterialsTotal
+                                    size="small"
+                                    mowAlliance={goal.unitAlliance}
+                                    total={goalEstimate.mowEstimate}
+                                />
+                            </div>
+                        )}
+                        <div className="flex-box gap10 wrap">
+                            <AccessibleTooltip title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
+                                <div className="flex-box gap3">
+                                    <CalendarMonthIcon /> {goalEstimate.daysLeft}
+                                </div>
+                            </AccessibleTooltip>
+                            <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
+                                <div className="flex-box gap3">
+                                    <MiscIcon icon={'energy'} height={18} width={15} /> {goalEstimate.energyTotal}
+                                </div>
+                            </AccessibleTooltip>
+                        </div>
+                        <Button
+                            size="small"
+                            variant={'outlined'}
+                            component={Link}
+                            to={linkBase + params}
+                            target={'_self'}>
+                            <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Lookup</span>
+                        </Button>
+                    </div>
+                );
+            }
+            case PersonalGoalType.CharacterAbilities: {
+                const hasActiveGoal = goal.activeEnd > goal.activeStart;
+                const hasPassiveGoal = goal.passiveEnd > goal.passiveStart;
+                return (
+                    <div>
+                        <div className="flex-box gap10">
+                            <div className="flex-box column start">
+                                {hasActiveGoal && (
+                                    <div className="flex-box gap3">
+                                        <span>Active:</span> <b>{goal.activeStart}</b> <ArrowForward />
+                                        <b>{goal.activeEnd}</b>
+                                    </div>
+                                )}
+
+                                {hasPassiveGoal && (
+                                    <div className="flex-box gap3">
+                                        <span>Passive:</span> <b>{goal.passiveStart}</b> <ArrowForward />
+                                        <b>{goal.passiveEnd}</b>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                        {goalEstimate.xpEstimateAbilities && <XpTotal {...goalEstimate.xpEstimateAbilities} />}
+                        {goalEstimate.abilitiesEstimate && (
+                            <div style={{ padding: '10px 0' }}>
+                                <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
+                            </div>
+                        )}
                     </div>
                 );
             }
@@ -238,8 +321,8 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                 title={
                     <div className="flex-box gap5">
                         <span>#{goal.priority}</span>
-                        <CharacterImage icon={goal.characterIcon} imageSize={30} />
-                        <span style={{ fontSize: '1.2rem' }}>{goal.characterName}</span>
+                        <CharacterImage icon={goal.unitIcon} imageSize={30} />
+                        <span style={{ fontSize: '1.2rem' }}>{goal.unitName}</span>
                     </div>
                 }
                 subheader={calendarDate}

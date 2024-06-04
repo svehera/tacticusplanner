@@ -53,7 +53,7 @@ export const GuildInsights = () => {
     const totalValue = sum(charactersFiltered.map(character => CharactersValueService.getCharacterValue(character)));
 
     const factions = CharactersService.orderByFaction(charactersFiltered, viewControls.orderBy);
-    const characters = CharactersService.orderCharacters(charactersFiltered, viewControls.orderBy);
+    const characters = CharactersService.orderUnits(charactersFiltered, viewControls.orderBy);
 
     return (
         <Box style={{ margin: 'auto' }}>

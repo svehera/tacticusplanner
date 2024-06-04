@@ -1,13 +1,43 @@
-﻿import { ICharacter2 } from 'src/models/interfaces';
+﻿import { DynamicProps, ICharacter2 } from 'src/models/interfaces';
 import { CharactersOrderBy } from './enums/characters-order-by';
 import { CharactersFilterBy } from './enums/characters-filter-by';
-import { Rank, Rarity, RarityStars } from 'src/models/enums';
+import { Alliance, Faction, Rank, Rarity, RarityStars, RarityString } from 'src/models/enums';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+
+export type IUnit = ICharacter2 | IMow;
 
 export interface IFactionStatic {
     alliance: string;
     name: string;
     icon: string;
     color: string;
+}
+
+export interface IMowStatic {
+    id: string;
+    name: string;
+    title: string;
+    shortName: string;
+    fullName: string;
+    alliance: Alliance;
+    faction: Faction;
+    initialRarity: RarityString;
+}
+
+export interface IMowDb {
+    id: string;
+    unlocked: boolean;
+    rarity: Rarity;
+    stars: RarityStars;
+    primaryAbilityLevel: number;
+    secondaryAbilityLevel: number;
+    shards: number;
+}
+
+export interface IMow extends IMowStatic, IMowDb, DynamicProps {
+    portraitIcon: string;
+    badgeIcon: string;
+    unitType: UnitType.mow;
 }
 
 export interface IRarityCap {
@@ -21,7 +51,7 @@ export interface IFaction extends IFactionStatic {
     power: number;
     bsValue: number;
     unlockedCharacters: number;
-    characters: ICharacter2[];
+    units: IUnit[];
 }
 
 export interface IViewControls {
@@ -36,7 +66,7 @@ export interface ICharactersContext {
     showPower: boolean;
     showCharacterLevel: boolean;
     showCharacterRarity: boolean;
-    getOpacity?: (character: ICharacter2) => number;
+    getOpacity?: (character: IUnit) => number;
 }
 
 export type IXpLevel = {
@@ -51,4 +81,23 @@ export interface IXpEstimate {
     currentLevel: number;
     targetLevel: number;
     xpLeft: number;
+}
+
+export interface ICharacterAbilityLevelRaw {
+    lvl: number;
+    gold: number;
+    badges: number;
+}
+
+export interface ICharacterAbilityLevel {
+    lvl: number;
+    gold: number;
+    badges: number;
+    rarity: Rarity;
+}
+
+export interface ICharacterAbilitiesMaterialsTotal {
+    gold: number;
+    alliance: Alliance;
+    badges: Record<Rarity, number>;
 }

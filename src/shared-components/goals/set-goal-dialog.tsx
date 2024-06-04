@@ -13,16 +13,15 @@ import {
 import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
-import { ICampaignsProgress, ICharacter2, IPersonalGoal } from 'src/models/interfaces';
+import { ICampaignsProgress, IPersonalGoal } from 'src/models/interfaces';
 import { v4 } from 'uuid';
 import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityStars, RarityString } from 'src/models/enums';
 import InputLabel from '@mui/material/InputLabel';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { enqueueSnackbar } from 'notistack';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { CharactersAutocomplete } from '../characters-autocomplete';
 import { CharacterTitle } from '../character-title';
-import { rarityToMaxRank } from 'src/models/constants';
+import { goalsLimit, rarityToMaxRank } from 'src/models/constants';
 import { Conditional } from 'src/v2/components/conditional';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { IgnoreRankRarity } from './ignore-rank-rarity';
@@ -33,7 +32,12 @@ import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { SetAscendGoal } from 'src/shared-components/goals/set-ascend-goal';
 import MultipleSelectCheckmarks from 'src/routes/characters/multiple-select';
-import { isMobile } from 'react-device-detect';
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
+import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
+import { NumberInput } from 'src/v2/components/inputs/number-input';
+import { Info } from '@mui/icons-material';
+import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 
 const getDefaultForm = (priority: number): IPersonalGoal => ({
     id: v4(),
@@ -51,13 +55,12 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
 });
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
-    const goalsLimit = 30;
-    const { characters, goals, campaignsProgress } = useContext(StoreContext);
+    const { characters, mows, goals, campaignsProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const [openDialog, setOpenDialog] = React.useState(false);
     const [ignoreRankRarity, setIgnoreRankRarity] = React.useState(false);
-    const [character, setCharacter] = React.useState<ICharacter2 | null>(null);
+    const [unit, setUnit] = React.useState<IUnit | null>(null);
 
     const [form, setForm] = useState<IPersonalGoal>(() => getDefaultForm(goals.length + 1));
 
@@ -65,14 +68,12 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
     const handleClose = (goal?: IPersonalGoal | undefined): void => {
         if (goal) {
+            goal.dailyRaids = [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(goal.type);
             dispatch.goals({ type: 'Add', goal });
             enqueueSnackbar(`Goal for ${goal.character} is added`, { variant: 'success' });
-            if ([PersonalGoalType.Unlock, PersonalGoalType.Ascend].includes(goal.type)) {
-                goal.dailyRaids = false;
-            }
         }
         setOpenDialog(false);
-        setCharacter(null);
+        setUnit(null);
         setForm(getDefaultForm(goal ? goal.priority + 1 : goals.length + 1));
         if (onClose) {
             onClose(goal);
@@ -84,23 +85,31 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     };
 
     const maxRank = useMemo(() => {
-        return ignoreRankRarity ? Rank.Diamond3 : rarityToMaxRank[character?.rarity ?? 0];
-    }, [character?.rarity, ignoreRankRarity]);
+        return ignoreRankRarity ? Rank.Diamond3 : rarityToMaxRank[unit?.rarity ?? 0];
+    }, [unit?.rarity, ignoreRankRarity]);
 
     const rankValues = useMemo(() => {
-        const result = getEnumValues(Rank).filter(x => x > 0 && (!character || x >= character.rank) && x <= maxRank);
+        if (isMow(unit)) {
+            return [];
+        }
+
+        const result = getEnumValues(Rank).filter(x => x > 0 && (!unit || x >= unit.rank) && x <= maxRank);
         setForm(curr => ({ ...curr, targetRank: result[0] }));
         return result;
-    }, [character, maxRank]);
+    }, [unit, maxRank]);
 
-    const allowedCharacters = useMemo(() => {
+    const allowedCharacters: IUnit[] = useMemo(() => {
         switch (form.type) {
             case PersonalGoalType.Ascend:
+            case PersonalGoalType.CharacterAbilities:
             case PersonalGoalType.UpgradeRank: {
                 return ignoreRankRarity ? characters : characters.filter(x => x.rank > Rank.Locked);
             }
             case PersonalGoalType.Unlock: {
                 return characters.filter(x => x.rank === Rank.Locked);
+            }
+            case PersonalGoalType.MowAbilities: {
+                return ignoreRankRarity ? mows : mows.filter(x => x.unlocked);
             }
             default: {
                 return characters;
@@ -109,8 +118,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     }, [form.type, ignoreRankRarity]);
 
     const possibleLocations =
-        [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!character
-            ? StaticDataService.getItemLocations(character.name)
+        [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
+            ? StaticDataService.getItemLocations(unit.name)
             : [];
 
     const unlockedLocations = possibleLocations
@@ -125,40 +134,66 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
         if (
             (newGoalType === PersonalGoalType.Unlock && form.type !== PersonalGoalType.Unlock) ||
-            (newGoalType !== PersonalGoalType.Unlock && form.type === PersonalGoalType.Unlock)
+            (newGoalType !== PersonalGoalType.Unlock && form.type === PersonalGoalType.Unlock) ||
+            (newGoalType === PersonalGoalType.MowAbilities && form.type !== PersonalGoalType.MowAbilities) ||
+            (newGoalType !== PersonalGoalType.MowAbilities && form.type === PersonalGoalType.MowAbilities)
         ) {
-            setCharacter(null);
+            setUnit(null);
         }
 
         setForm(curr => ({ ...curr, type: newGoalType }));
     };
 
-    const handleCharacterChange = (value: ICharacter2 | null) => {
-        setCharacter(value);
+    const handleUnitChange = (value: IUnit | null) => {
+        setUnit(value);
 
-        if (value) {
+        if (isCharacter(value)) {
             setForm(curr => ({
                 ...curr,
                 targetRank: value.rank,
                 targetStars: value.stars,
                 targetRarity: value.rarity,
+                firstAbilityLevel: value.activeAbilityLevel,
+                secondAbilityLevel: value.passiveAbilityLevel,
+            }));
+        }
+
+        if (isMow(value)) {
+            setForm(curr => ({
+                ...curr,
+                firstAbilityLevel: value.primaryAbilityLevel,
+                secondAbilityLevel: value.secondaryAbilityLevel,
             }));
         }
     };
 
     const isDisabled = () => {
-        if (!character) {
+        if (!unit) {
             return true;
         }
 
-        if (form.type === PersonalGoalType.UpgradeRank) {
-            return character.rank === form.targetRank && !form.rankPoint5;
+        if (form.type === PersonalGoalType.UpgradeRank && isCharacter(unit)) {
+            return unit.rank === form.targetRank && !form.rankPoint5;
         }
 
         if (form.type === PersonalGoalType.Ascend) {
             return (
-                (character.rarity === form.targetRarity && character.stars === form.targetStars) ||
+                (unit.rarity === form.targetRarity && unit.stars === form.targetStars) ||
                 (!unlockedLocations.length && form.shardsPerToken! <= 0)
+            );
+        }
+
+        if (form.type === PersonalGoalType.MowAbilities && isMow(unit)) {
+            return (
+                (form.firstAbilityLevel ?? 0) <= unit.primaryAbilityLevel &&
+                (form.secondAbilityLevel ?? 0) <= unit.secondaryAbilityLevel
+            );
+        }
+
+        if (form.type === PersonalGoalType.CharacterAbilities && isCharacter(unit)) {
+            return (
+                (form.firstAbilityLevel ?? 0) <= unit.activeAbilityLevel &&
+                (form.secondAbilityLevel ?? 0) <= unit.passiveAbilityLevel
             );
         }
 
@@ -181,12 +216,17 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
             <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
                 <DialogTitle className="flex-box gap15">
-                    <span>Set Goal</span> {!!character && <CharacterTitle character={character} />}
+                    <span>Set Goal</span> {!!unit && <CharacterTitle character={unit} />}
                 </DialogTitle>
 
                 <DialogContent style={{ paddingTop: 10 }}>
                     <Box id="set-goal-form" className="flex-box column gap20 full-width start">
-                        <Conditional condition={[PersonalGoalType.UpgradeRank].includes(form.type)}>
+                        <Conditional
+                            condition={[
+                                PersonalGoalType.UpgradeRank,
+                                PersonalGoalType.MowAbilities,
+                                PersonalGoalType.CharacterAbilities,
+                            ].includes(form.type)}>
                             <IgnoreRankRarity value={ignoreRankRarity} onChange={setIgnoreRankRarity} />
                         </Conditional>
 
@@ -202,6 +242,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                     <MenuItem value={PersonalGoalType.UpgradeRank}>Upgrade Rank</MenuItem>
                                     <MenuItem value={PersonalGoalType.Ascend}>Ascend</MenuItem>
                                     <MenuItem value={PersonalGoalType.Unlock}>Unlock</MenuItem>
+                                    <MenuItem value={PersonalGoalType.MowAbilities}>MoW Abilities</MenuItem>
+                                    <MenuItem value={PersonalGoalType.CharacterAbilities}>Character Abilities</MenuItem>
                                 </Select>
                             </FormControl>
                             <PrioritySelect
@@ -211,14 +253,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             />
                         </div>
 
-                        <CharactersAutocomplete
-                            style={{ width: '100%' }}
-                            character={character}
-                            characters={allowedCharacters}
-                            onCharacterChange={handleCharacterChange}
-                        />
+                        <UnitsAutocomplete unit={unit} options={allowedCharacters} onUnitChange={handleUnitChange} />
 
-                        <Conditional condition={!!character && form.type === PersonalGoalType.UpgradeRank}>
+                        <Conditional condition={!!unit && form.type === PersonalGoalType.UpgradeRank}>
                             <RankGoalSelect
                                 allowedValues={rankValues}
                                 rank={form.targetRank}
@@ -227,24 +264,97 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                     setForm(curr => ({ ...curr, targetRank, rankPoint5 }))
                                 }
                             />
-                            <MultipleSelectCheckmarks
-                                placeholder="Upgrades rarity"
-                                selectedValues={form.upgradesRarity!.map(x => Rarity[x])}
-                                values={Object.values(RarityString)}
-                                selectionChanges={values => {
+                            <UpgradesRaritySelect
+                                upgradesRarity={form.upgradesRarity ?? []}
+                                upgradesRarityChange={values => {
                                     setForm(curr => ({
                                         ...curr,
-                                        upgradesRarity: values.map(x => +Rarity[x as unknown as number]),
+                                        upgradesRarity: values,
                                     }));
                                 }}
                             />
                         </Conditional>
 
-                        {form.type === PersonalGoalType.Ascend && !!character && (
+                        {form.type === PersonalGoalType.MowAbilities && isMow(unit) && (
+                            <>
+                                <div className="flex-box gap5 full-width between">
+                                    <NumberInput
+                                        key={unit.id + 'primary'}
+                                        fullWidth
+                                        label="Primary target level"
+                                        min={unit.primaryAbilityLevel}
+                                        value={form.firstAbilityLevel!}
+                                        valueChange={primaryAbilityLevel => {
+                                            setForm(curr => ({
+                                                ...curr,
+                                                firstAbilityLevel: primaryAbilityLevel,
+                                            }));
+                                        }}
+                                    />
+                                    <NumberInput
+                                        key={unit.id + 'secondary'}
+                                        fullWidth
+                                        label="Secondary target level"
+                                        min={unit.secondaryAbilityLevel}
+                                        value={form.secondAbilityLevel!}
+                                        valueChange={secondaryAbilityLevel => {
+                                            setForm(curr => ({
+                                                ...curr,
+                                                secondAbilityLevel: secondaryAbilityLevel,
+                                            }));
+                                        }}
+                                    />
+                                </div>
+                                <UpgradesRaritySelect
+                                    upgradesRarity={form.upgradesRarity ?? []}
+                                    upgradesRarityChange={values => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            upgradesRarity: values,
+                                        }));
+                                    }}
+                                />
+                            </>
+                        )}
+
+                        {form.type === PersonalGoalType.CharacterAbilities && isCharacter(unit) && (
+                            <>
+                                <div className="flex-box gap5 full-width between">
+                                    <NumberInput
+                                        key={unit.id + 'primary'}
+                                        fullWidth
+                                        label="Active target level"
+                                        min={unit.activeAbilityLevel}
+                                        value={form.firstAbilityLevel!}
+                                        valueChange={primaryAbilityLevel => {
+                                            setForm(curr => ({
+                                                ...curr,
+                                                firstAbilityLevel: primaryAbilityLevel,
+                                            }));
+                                        }}
+                                    />
+                                    <NumberInput
+                                        key={unit.id + 'secondary'}
+                                        fullWidth
+                                        label="Passive target level"
+                                        min={unit.passiveAbilityLevel}
+                                        value={form.secondAbilityLevel!}
+                                        valueChange={secondaryAbilityLevel => {
+                                            setForm(curr => ({
+                                                ...curr,
+                                                secondAbilityLevel: secondaryAbilityLevel,
+                                            }));
+                                        }}
+                                    />
+                                </div>
+                            </>
+                        )}
+
+                        {form.type === PersonalGoalType.Ascend && !!unit && (
                             <SetAscendGoal
-                                currentRarity={character.rarity}
+                                currentRarity={unit.rarity}
                                 targetRarity={form.targetRarity!}
-                                currentStars={character.stars}
+                                currentStars={unit.stars}
                                 targetStars={form.targetStars!}
                                 possibleLocations={possibleLocations}
                                 unlockedLocations={unlockedLocations}
@@ -254,7 +364,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             />
                         )}
 
-                        <Conditional condition={!!character && form.type === PersonalGoalType.Unlock}>
+                        <Conditional condition={!!unit && form.type === PersonalGoalType.Unlock}>
                             <div className="flex-box gap5 wrap">
                                 {possibleLocations.map(location => (
                                     <CampaignLocation
@@ -290,9 +400,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => handleClose()}>Cancel</Button>
-                    <Button
-                        disabled={isDisabled()}
-                        onClick={() => handleClose({ ...form, character: character?.name ?? '' })}>
+                    <Button disabled={isDisabled()} onClick={() => handleClose({ ...form, character: unit?.id ?? '' })}>
                         Set
                     </Button>
                 </DialogActions>

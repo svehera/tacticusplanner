@@ -1,0 +1,247 @@
+﻿[
+    {
+        "lvl": 1,
+        "gold": 25,
+        "badges": 1
+    },
+    {
+        "lvl": 2,
+        "gold": 50,
+        "badges": 1
+    },
+    {
+        "lvl": 3,
+        "gold": 100,
+        "badges": 1
+    },
+    {
+        "lvl": 4,
+        "gold": 150,
+        "badges": 2
+    },
+    {
+        "lvl": 5,
+        "gold": 200,
+        "badges": 2
+    },
+    {
+        "lvl": 6,
+        "gold": 300,
+        "badges": 2
+    },
+    {
+        "lvl": 7,
+        "gold": 400,
+        "badges": 3
+    },
+    {
+        "lvl": 8,
+        "gold": 500,
+        "badges": 1
+    },
+    {
+        "lvl": 9,
+        "gold": 600,
+        "badges": 1
+    },
+    {
+        "lvl": 10,
+        "gold": 700,
+        "badges": 1
+    },
+    {
+        "lvl": 11,
+        "gold": 800,
+        "badges": 2
+    },
+    {
+        "lvl": 12,
+        "gold": 900,
+        "badges": 2
+    },
+    {
+        "lvl": 13,
+        "gold": 1000,
+        "badges": 2
+    },
+    {
+        "lvl": 14,
+        "gold": 1250,
+        "badges": 3
+    },
+    {
+        "lvl": 15,
+        "gold": 1500,
+        "badges": 4
+    },
+    {
+        "lvl": 16,
+        "gold": 1750,
+        "badges": 5
+    },
+    {
+        "lvl": 17,
+        "gold": 2000,
+        "badges": 1
+    },
+    {
+        "lvl": 18,
+        "gold": 2500,
+        "badges": 1
+    },
+    {
+        "lvl": 19,
+        "gold": 3000,
+        "badges": 1
+    },
+    {
+        "lvl": 20,
+        "gold": 3500,
+        "badges": 2
+    },
+    {
+        "lvl": 21,
+        "gold": 4000,
+        "badges": 2
+    },
+    {
+        "lvl": 22,
+        "gold": 4500,
+        "badges": 2
+    },
+    {
+        "lvl": 23,
+        "gold": 5000,
+        "badges": 3
+    },
+    {
+        "lvl": 24,
+        "gold": 5500,
+        "badges": 4
+    },
+    {
+        "lvl": 25,
+        "gold": 6000,
+        "badges": 5
+    },
+    {
+        "lvl": 26,
+        "gold": 6500,
+        "badges": 1
+    },
+    {
+        "lvl": 27,
+        "gold": 7000,
+        "badges": 1
+    },
+    {
+        "lvl": 28,
+        "gold": 7500,
+        "badges": 1
+    },
+    {
+        "lvl": 29,
+        "gold": 8000,
+        "badges": 2
+    },
+    {
+        "lvl": 30,
+        "gold": 8500,
+        "badges": 2
+    },
+    {
+        "lvl": 31,
+        "gold": 9000,
+        "badges": 2
+    },
+    {
+        "lvl": 32,
+        "gold": 9500,
+        "badges": 3
+    },
+    {
+        "lvl": 33,
+        "gold": 10000,
+        "badges": 4
+    },
+    {
+        "lvl": 34,
+        "gold": 11000,
+        "badges": 5
+    },
+    {
+        "lvl": 35,
+        "gold": 12000,
+        "badges": 1
+    },
+    {
+        "lvl": 36,
+        "gold": 13000,
+        "badges": 1
+    },
+    {
+        "lvl": 37,
+        "gold": 14000,
+        "badges": 1
+    },
+    {
+        "lvl": 38,
+        "gold": 15000,
+        "badges": 2
+    },
+    {
+        "lvl": 39,
+        "gold": 16000,
+        "badges": 2
+    },
+    {
+        "lvl": 40,
+        "gold": 18000,
+        "badges": 2
+    },
+    {
+        "lvl": 41,
+        "gold": 20000,
+        "badges": 3
+    },
+    {
+        "lvl": 42,
+        "gold": 22500,
+        "badges": 3
+    },
+    {
+        "lvl": 43,
+        "gold": 25000,
+        "badges": 4
+    },
+    {
+        "lvl": 44,
+        "gold": 30000,
+        "badges": 5
+    },
+    {
+        "lvl": 45,
+        "gold": 40000,
+        "badges": 6
+    },
+    {
+        "lvl": 46,
+        "gold": 50000,
+        "badges": 7
+    },
+    {
+        "lvl": 47,
+        "gold": 75000,
+        "badges": 8
+    },
+    {
+        "lvl": 48,
+        "gold": 100000,
+        "badges": 9
+    },
+    {
+        "lvl": 49,
+        "gold": 250000,
+        "badges": 10
+    }
+]

@@ -1,10 +1,15 @@
-﻿import { ICharacter2 } from 'src/models/interfaces';
-import { Rank, Rarity } from 'src/models/enums';
+﻿import { Rank, Rarity } from 'src/models/enums';
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { UnitType } from 'src/v2/features/characters/units.enums';
 
-export const needToAscendCharacter = (character: ICharacter2) => {
-    const maxCommon = character.rarity === Rarity.Common && character.rank === Rank.Iron1;
-    const maxUncommon = character.rarity === Rarity.Uncommon && character.rank === Rank.Bronze1;
-    const maxRare = character.rarity === Rarity.Rare && character.rank === Rank.Silver1;
-    const maxEpic = character.rarity === Rarity.Epic && character.rank === Rank.Gold1;
+export const needToAscendCharacter = (unit: IUnit) => {
+    if (unit.unitType === UnitType.mow) {
+        return false;
+    }
+
+    const maxCommon = unit.rarity === Rarity.Common && unit.rank === Rank.Iron1;
+    const maxUncommon = unit.rarity === Rarity.Uncommon && unit.rank === Rank.Bronze1;
+    const maxRare = unit.rarity === Rarity.Rare && unit.rank === Rank.Silver1;
+    const maxEpic = unit.rarity === Rarity.Epic && unit.rank === Rank.Gold1;
     return maxCommon || maxUncommon || maxRare || maxEpic;
 };

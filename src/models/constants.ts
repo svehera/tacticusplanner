@@ -277,6 +277,7 @@ export const defaultData: IPersonalData2 = {
         farmByPriorityOrder: false,
         farmStrategy: DailyRaidsStrategy.leastEnergy,
     },
+    mows: [],
     characters: [
         {
             name: 'Varro Tigurius',
@@ -408,3 +409,4 @@ export const defaultData: IPersonalData2 = {
 
 export const killPointsIndex = 0;
 export const defeatAllEnemiesIndex = 1;
+export const goalsLimit = 50;

@@ -2,13 +2,14 @@
 
 import { Conditional } from 'src/v2/components/conditional';
 
-import { ICharacter2 } from 'src/models/interfaces';
-import { Rank } from 'src/models/enums';
-
 import { CharacterTile } from './character-tile';
 
 import './characters-grid.scss';
 import { isMobile } from 'react-device-detect';
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { isUnlocked } from 'src/v2/features/characters/units.functions';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+import { MowTile } from 'src/v2/features/characters/components/mow-tile';
 
 export const CharactersGrid = ({
     characters,
@@ -17,19 +18,33 @@ export const CharactersGrid = ({
     onLockedCharacterClick,
     onlyBlocked,
 }: {
-    characters: ICharacter2[];
+    characters: IUnit[];
     blockedCharacters?: string[];
-    onAvailableCharacterClick?: (character: ICharacter2) => void;
-    onLockedCharacterClick?: (character: ICharacter2) => void;
+    onAvailableCharacterClick?: (character: IUnit) => void;
+    onLockedCharacterClick?: (character: IUnit) => void;
     onlyBlocked?: boolean;
 }) => {
     const unlockedCharacters = characters
-        .filter(x => x.rank > Rank.Locked && !blockedCharacters.includes(x.name))
-        .map(char => <CharacterTile key={char.name} character={char} onCharacterClick={onAvailableCharacterClick} />);
+        .filter(unit => isUnlocked(unit) && !blockedCharacters.includes(unit.id))
+        .map(unit => {
+            if (unit.unitType === UnitType.character) {
+                return <CharacterTile key={unit.id} character={unit} onCharacterClick={onAvailableCharacterClick} />;
+            }
+            if (unit.unitType === UnitType.mow) {
+                return <MowTile key={unit.name} mow={unit} onClick={onAvailableCharacterClick} />;
+            }
+        });
 
     const lockedCharacters = characters
-        .filter(x => (!onlyBlocked && x.rank === Rank.Locked) || blockedCharacters.includes(x.name))
-        .map(char => <CharacterTile key={char.name} character={char} onCharacterClick={onLockedCharacterClick} />);
+        .filter(x => (!onlyBlocked && !isUnlocked(x)) || blockedCharacters.includes(x.name))
+        .map(unit => {
+            if (unit.unitType === UnitType.character) {
+                return <CharacterTile key={unit.name} character={unit} onCharacterClick={onLockedCharacterClick} />;
+            }
+            if (unit.unitType === UnitType.mow) {
+                return <MowTile key={unit.name} mow={unit} onClick={onLockedCharacterClick} />;
+            }
+        });
     return (
         <div>
             <h4>Available ({unlockedCharacters.length})</h4>

@@ -17,6 +17,7 @@ import { RaritySelect } from 'src/shared-components/rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { IUnit } from 'src/v2/features/characters/characters.models';
 
 type Props = {
     teamName: string;
@@ -48,7 +49,7 @@ export const SelectTeamDialog: React.FC<Props> = ({
     const [rarityCap, setRarityCap] = useState(defaultRarityCap);
     const [teamName, setTeamName] = useState(defaultTeamName);
 
-    const handleCharacterSelect = (character: ICharacter2) => {
+    const handleCharacterSelect = (character: IUnit) => {
         setLineup(curr => {
             if (curr.some(x => x.name === character.name)) {
                 return curr.filter(x => x.name !== character.name);
@@ -57,7 +58,7 @@ export const SelectTeamDialog: React.FC<Props> = ({
                     return curr;
                 }
 
-                const newChar = characters.find(x => x.name === character.name);
+                const newChar = characters.find(x => x.name === character.id);
 
                 if (newChar) {
                     return [...curr, newChar];

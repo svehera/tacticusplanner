@@ -27,6 +27,8 @@ import { guildWarDefenseMenuItem } from 'src/v2/pages/guild-war-defense/guild-wa
 import { guildWarZonesMenuItem } from 'src/v2/pages/guild-war-layout/guild-war-zones-menu.item';
 import { guildMenuItem } from 'src/v2/pages/guild/guild.menu-item';
 import { guildInsightsMenuItem } from 'src/v2/pages/guild-insights/guild-insights.menu-item';
+import { teamsMenuItem } from 'src/v2/pages/teams/teams.menu-item';
+import { mowLookupMenuItem } from 'src/v2/pages/mow-lookup/mow-lookup.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -83,6 +85,7 @@ export const menuItemById = {
     characters: new MenuItemTP('Characters', <Diversity3Icon />, '/learn/characters'),
     upgrades: new MenuItemTP('Upgrades', <ListIcon />, '/learn/upgrades'),
     rankLookup: new MenuItemTP('Rank Lookup', <MilitaryTechIcon />, '/learn/rankLookup'),
+    mowLookup: mowLookupMenuItem,
     campaigns: new MenuItemTP('Campaigns', <FormatListNumberedIcon />, '/learn/campaigns'),
     dirtyDozen: dirtyDozenMenuItem,
     insights: insightsMenuItem,
@@ -96,6 +99,7 @@ export const menuItemById = {
     zones: guildWarZonesMenuItem,
     guild: guildMenuItem,
     guildInsights: guildInsightsMenuItem,
+    teams: teamsMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -128,6 +132,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
 export const planSubMenu: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
+    // menuItemById['teams'],
     menuItemById['defense'],
     menuItemById['offense'],
     menuItemById['zones'],
@@ -141,6 +146,7 @@ export const learnSubMenu: MenuItemTP[] = [
     menuItemById['characters'],
     menuItemById['upgrades'],
     menuItemById['rankLookup'],
+    menuItemById['mowLookup'],
     menuItemById['campaigns'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],

@@ -12,7 +12,7 @@ import { ViewControls } from 'src/v2/features/characters/components/view-control
 import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
-import { IViewControls } from 'src/v2/features/characters/characters.models';
+import { IMow, IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
 import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
@@ -25,9 +25,11 @@ import { CharacterItemDialog } from 'src/shared-components/character-item-dialog
 import { ICharacter2 } from 'src/models/interfaces';
 import { useAuth } from 'src/contexts/auth';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+import { EditMowDialog } from 'src/v2/features/characters/dialogs/edit-mow-dialog';
 
 export const WhoYouOwn = () => {
-    const { characters: charactersDefault, viewPreferences } = useContext(StoreContext);
+    const { characters: charactersDefault, mows, viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const navigate = useNavigate();
 
@@ -40,6 +42,8 @@ export const WhoYouOwn = () => {
     const [nameFilter, setNameFilter] = useState<string | null>(null);
     const [openCharacterItemDialog, setOpenCharacterItemDialog] = React.useState(false);
     const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
+    const [openEditMowDialog, setOpenEditMowDialog] = React.useState(false);
+    const [editedMow, setEditedMow] = React.useState<IMow | null>(null);
 
     const [searchParams] = useSearchParams();
 
@@ -55,12 +59,20 @@ export const WhoYouOwn = () => {
         return <></>;
     }
 
-    const charactersFiltered = CharactersService.filterCharacters(charactersDefault, viewControls.filterBy, nameFilter);
+    const charactersFiltered = CharactersService.filterCharacters(
+        [...charactersDefault, ...mows],
+        viewControls.filterBy,
+        nameFilter
+    );
+
     const totalPower = sum(charactersFiltered.map(character => CharactersPowerService.getCharacterPower(character)));
     const totalValue = sum(charactersFiltered.map(character => CharactersValueService.getCharacterValue(character)));
 
     const factions = CharactersService.orderByFaction(charactersFiltered, viewControls.orderBy);
-    const characters = CharactersService.orderCharacters(charactersFiltered, viewControls.orderBy);
+    const units = CharactersService.orderUnits(
+        factions.flatMap(f => f.units),
+        viewControls.orderBy
+    );
 
     const updatePreferences = (value: IViewControls) => {
         setViewControls(value);
@@ -68,14 +80,43 @@ export const WhoYouOwn = () => {
         dispatch.viewPreferences({ type: 'Update', setting: 'wyoFilter', value: value.filterBy });
     };
 
-    const startEditCharacter = (character: ICharacter2): void => {
-        setEditedCharacter(character);
-        setOpenCharacterItemDialog(true);
+    const updateMow = (mow: IMow) => {
+        endEditUnit();
+        dispatch.mows({ type: 'Update', mow });
     };
 
-    const endEditCharacter = (): void => {
+    const startEditUnit = (unit: IUnit): void => {
+        if (unit.unitType === UnitType.character) {
+            setEditedCharacter(unit);
+            setOpenCharacterItemDialog(true);
+            setOpenEditMowDialog(false);
+        }
+
+        if (unit.unitType === UnitType.mow) {
+            setEditedMow(unit);
+            setOpenEditMowDialog(true);
+            setOpenCharacterItemDialog(false);
+        }
+    };
+
+    const startEditNextUnit = (currentUnit: IUnit): void => {
+        const indexOfNextUnit = units.findIndex(x => x.id === currentUnit.id) + 1;
+        const nextUnit = units[indexOfNextUnit >= units.length ? 0 : indexOfNextUnit];
+        startEditUnit(nextUnit);
+    };
+
+    const startEditPreviousUnit = (currentUnit: IUnit): void => {
+        const indexOfPreviousUnit = units.findIndex(x => x.id === currentUnit.id) - 1;
+        const previousUnit = units[indexOfPreviousUnit < 0 ? units.length - 1 : indexOfPreviousUnit];
+        startEditUnit(previousUnit);
+    };
+
+    const endEditUnit = (): void => {
         setEditedCharacter(null);
         setOpenCharacterItemDialog(false);
+
+        setEditedMow(null);
+        setOpenEditMowDialog(false);
     };
 
     return (
@@ -91,29 +132,44 @@ export const WhoYouOwn = () => {
                 }}>
                 <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
                     {!!isLoggedIn && <ShareRoster isRosterShared={!!isRosterShared} />}
-                    <TeamGraph characters={charactersFiltered} />
+                    <TeamGraph units={charactersFiltered} />
                 </RosterHeader>
                 <ViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
 
                 <Conditional condition={isFactionsView(viewControls.orderBy)}>
-                    <FactionsGrid factions={factions} onCharacterClick={startEditCharacter} />
+                    <FactionsGrid factions={factions} onCharacterClick={startEditUnit} />
                 </Conditional>
 
                 <Conditional condition={isCharactersView(viewControls.orderBy)}>
                     <CharactersGrid
-                        characters={characters}
-                        onAvailableCharacterClick={startEditCharacter}
-                        onLockedCharacterClick={startEditCharacter}
+                        characters={units}
+                        onAvailableCharacterClick={startEditUnit}
+                        onLockedCharacterClick={startEditUnit}
                     />
                 </Conditional>
 
-                <Conditional condition={!!editedCharacter}>
+                {editedCharacter && (
                     <CharacterItemDialog
-                        character={editedCharacter!}
+                        key={editedCharacter.id}
+                        character={editedCharacter}
                         isOpen={openCharacterItemDialog}
-                        onClose={endEditCharacter}
+                        showNextUnit={() => startEditNextUnit(editedCharacter)}
+                        showPreviousUnit={() => startEditPreviousUnit(editedCharacter)}
+                        onClose={endEditUnit}
                     />
-                </Conditional>
+                )}
+
+                {editedMow && (
+                    <EditMowDialog
+                        key={editedMow.id}
+                        mow={editedMow}
+                        saveChanges={updateMow}
+                        isOpen={openEditMowDialog}
+                        onClose={endEditUnit}
+                        showNextUnit={() => startEditNextUnit(editedMow)}
+                        showPreviousUnit={() => startEditPreviousUnit(editedMow)}
+                    />
+                )}
             </CharactersViewContext.Provider>
         </Box>
     );

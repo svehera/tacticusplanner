@@ -179,16 +179,16 @@ export class ShardsService {
     private static convertGoalToMaterial(goal: ICharacterAscendGoal | ICharacterUnlockGoal): IShardMaterial {
         const targetShards =
             goal.type === PersonalGoalType.Ascend ? this.getTargetShards(goal) : charsUnlockShards[goal.rarity];
-        const possibleLocations = StaticDataService.getItemLocations(goal.characterName);
+        const possibleLocations = StaticDataService.getItemLocations(goal.unitName);
 
         return {
             goalId: goal.goalId,
-            characterId: goal.characterName,
-            label: goal.characterName,
+            characterId: goal.unitName,
+            label: goal.unitName,
             acquiredCount: goal.shards,
             requiredCount: targetShards,
-            iconPath: goal.characterIcon,
-            relatedCharacters: [goal.characterName],
+            iconPath: goal.unitIcon,
+            relatedCharacters: [goal.unitName],
             possibleLocations,
             onslaughtShards: goal.type === PersonalGoalType.Ascend ? goal.onslaughtShards : 0,
             campaignsUsage: goal.campaignsUsage,

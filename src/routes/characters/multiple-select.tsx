@@ -37,7 +37,7 @@ export default function MultipleSelectCheckmarks(props: {
     };
 
     return (
-        <FormControl sx={{ minWidth: 300 }} size={props.size ?? 'medium'}>
+        <FormControl sx={{ minWidth: 300 }} size={props.size ?? 'medium'} fullWidth>
             <InputLabel id="demo-multiple-checkbox-label">{props.placeholder}</InputLabel>
             <Select
                 labelId="demo-multiple-checkbox-label"

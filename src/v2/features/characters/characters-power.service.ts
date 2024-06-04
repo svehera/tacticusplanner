@@ -1,46 +1,57 @@
-import { ICharacter2 } from 'src/models/interfaces';
 import { Rank, Rarity, RarityStars } from 'src/models/enums';
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { isCharacter, isUnlocked } from 'src/v2/features/characters/units.functions';
 
 export class CharactersPowerService {
-    public static getCharacterAbilityPower(character: ICharacter2): number {
-        if (character.rank === Rank.Locked) {
+    public static getCharacterAbilityPower(unit: IUnit): number {
+        if (!isUnlocked(unit)) {
             return 0;
         }
+
         const abilityWeight = 500000 / 41274;
-        const abilityPower =
-            abilityWeight *
-            CharactersPowerService.getRarityCoeff(character.rarity) *
-            (CharactersPowerService.getAbilityCoeff(character.activeAbilityLevel) +
-                CharactersPowerService.getAbilityCoeff(character.passiveAbilityLevel));
-        return Math.round(abilityPower);
+        if (isCharacter(unit)) {
+            const abilityPower =
+                abilityWeight *
+                CharactersPowerService.getRarityCoeff(unit.rarity) *
+                (CharactersPowerService.getAbilityCoeff(unit.activeAbilityLevel) +
+                    CharactersPowerService.getAbilityCoeff(unit.passiveAbilityLevel));
+            return Math.round(abilityPower);
+        } else {
+            const abilityPower =
+                abilityWeight *
+                CharactersPowerService.getRarityCoeff(unit.rarity) *
+                (CharactersPowerService.getAbilityCoeff(unit.primaryAbilityLevel) +
+                    CharactersPowerService.getAbilityCoeff(unit.secondaryAbilityLevel));
+            return Math.round(abilityPower);
+        }
     }
 
-    public static getCharacterAttributePower(character: ICharacter2): number {
-        if (character.rank === Rank.Locked) {
+    public static getCharacterAttributePower(unit: IUnit): number {
+        if (!isUnlocked(unit) || !isCharacter(unit)) {
             return 0;
         }
+
         const upgradeBoost =
             (1 / 9) *
-            (CharactersPowerService.getRankCoeff(character.rank + 1) -
-                CharactersPowerService.getRankCoeff(character.rank));
+            (CharactersPowerService.getRankCoeff(unit.rank + 1) - CharactersPowerService.getRankCoeff(unit.rank));
 
         const attributesWeight = 3000000 / 9326;
         const attributePower =
             attributesWeight *
-            CharactersPowerService.getStarsCoeff(character.stars) *
-            (CharactersPowerService.getRankCoeff(character.rank) + upgradeBoost * (character.upgrades?.length ?? 0));
+            CharactersPowerService.getStarsCoeff(unit.stars) *
+            (CharactersPowerService.getRankCoeff(unit.rank) + upgradeBoost * (unit.upgrades?.length ?? 0));
 
         return Math.round(attributePower);
     }
-    public static getCharacterPower(character: ICharacter2): number {
-        if (character.rank === Rank.Locked) {
+    public static getCharacterPower(unit: IUnit): number {
+        if (!isUnlocked(unit)) {
             return 0;
         }
         // Leave this off as we're scaling so that 40,000 is the ultimate Power for any character.
         //      const dirtyDozenCoeff = CharactersPowerService.getDirtyDozenCoeff(character.name);
         const powerLevel =
-            CharactersPowerService.getCharacterAttributePower(character) +
-            CharactersPowerService.getCharacterAbilityPower(character);
+            CharactersPowerService.getCharacterAttributePower(unit) +
+            CharactersPowerService.getCharacterAbilityPower(unit);
         return Math.round(powerLevel);
     }
 

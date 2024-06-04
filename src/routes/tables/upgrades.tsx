@@ -3,18 +3,23 @@
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ValueFormatterParams, ICellRendererParams } from 'ag-grid-community';
 
-import { StaticDataService } from '../../services';
-import { fitGridOnWindowResize, stringToRank } from '../../shared-logic/functions';
+import { StaticDataService } from 'src/services';
+import { fitGridOnWindowResize, stringToRank } from 'src/shared-logic/functions';
 import { FormControl, FormControlLabel, MenuItem, Select, Switch, TextField, Tooltip } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import { Rank, Rarity, RarityString } from '../../models/enums';
-import { rarityStringToNumber } from '../../models/constants';
-import { CharacterImage } from '../../shared-components/character-image';
-import { RankImage } from '../../shared-components/rank-image';
-import { UpgradeImage } from '../../shared-components/upgrade-image';
+import { Rank, Rarity, RarityString } from 'src/models/enums';
+import { rarityStringToNumber } from 'src/models/constants';
+import { CharacterImage } from 'src/shared-components/character-image';
+import { RankImage } from 'src/shared-components/rank-image';
+import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { isMobile } from 'react-device-detect';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { ICampaignBattleComposed } from 'src/models/interfaces';
+import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';
+import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 
-type Selection = 'Craftable' | 'Non Craftable' | 'Shards';
+type Selection = 'Craftable' | 'Base Upgrades';
 
 interface IUpgradesTableRow {
     upgradeLabel: string;
@@ -23,8 +28,9 @@ interface IUpgradesTableRow {
     faction: string;
     rarity: Rarity;
     type: string;
-    locations: string;
+    locations: ICampaignBattleComposed[];
     recipe: string;
+    partOf: string;
     characters: Array<{
         id: string;
         icon: string;
@@ -34,12 +40,12 @@ interface IUpgradesTableRow {
 }
 
 export const Upgrades = () => {
-    const selectionOptions: Selection[] = ['Craftable', 'Non Craftable', 'Shards'];
+    const selectionOptions: Selection[] = ['Base Upgrades', 'Craftable'];
     const gridRef = useRef<AgGridReact<IUpgradesTableRow>>(null);
 
     const [nameFilter, setNameFilter] = useState<string>('');
     const [showCharacters, setShowCharacters] = useState<boolean>(false);
-    const [selection, setSelection] = useState<Selection>('Non Craftable');
+    const [selection, setSelection] = useState<Selection>('Base Upgrades');
 
     const columnDefs = useMemo<Array<ColDef<IUpgradesTableRow>>>(() => {
         const charactersColumn: ColDef<IUpgradesTableRow> = {
@@ -95,45 +101,70 @@ export const Upgrades = () => {
                 },
                 equals: () => true,
                 sortable: false,
-                width: 80,
-                minWidth: 80,
+                maxWidth: 80,
             },
             {
                 field: 'faction',
                 headerName: 'Faction',
                 maxWidth: 150,
-                width: 150,
-                minWidth: 150,
             },
             {
                 field: 'rarity',
                 headerName: 'Rarity',
-                maxWidth: 100,
-                width: 100,
-                minWidth: 100,
-                valueFormatter: (params: ValueFormatterParams<IUpgradesTableRow>) => Rarity[params.value],
+                maxWidth: 70,
+                cellRenderer: (params: ICellRendererParams<IUpgradesTableRow>) => {
+                    const { data } = params;
+                    if (data) {
+                        return <RarityImage rarity={data.rarity} />;
+                    }
+                },
+                cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
             },
             {
                 field: 'type',
-                headerName: 'Type',
+                headerName: 'Stat',
+                cellRenderer: (params: ICellRendererParams<IUpgradesTableRow>) => {
+                    const { data } = params;
+                    if (data) {
+                        return <MiscIcon icon={data.type.toLowerCase() as 'damage' | 'armour' | 'health'} />;
+                    }
+                },
                 maxWidth: 80,
-                width: 80,
-                minWidth: 80,
+            },
+            {
+                field: 'partOf',
+                headerName: 'Component for',
+                maxWidth: 250,
             },
         ];
 
         switch (selection) {
-            case 'Shards':
-            case 'Non Craftable': {
+            case 'Base Upgrades': {
                 return [
                     ...base,
-
+                    charactersColumn,
                     {
                         field: 'locations',
                         headerName: 'Locations',
+                        cellRenderer: (params: ICellRendererParams<IMowUpgrade>) => {
+                            const { data } = params;
+                            if (data) {
+                                return (
+                                    <div className="flex-box gap5 wrap">
+                                        {data.locations.map(location => (
+                                            <CampaignLocation
+                                                key={location.id}
+                                                location={location}
+                                                short={true}
+                                                unlocked={true}
+                                            />
+                                        ))}
+                                    </div>
+                                );
+                            }
+                        },
                         minWidth: 150,
                     },
-                    charactersColumn,
                 ];
             }
             case 'Craftable': {
@@ -152,8 +183,9 @@ export const Upgrades = () => {
 
     const rowsData = useMemo(() => {
         const upgradesLocations = StaticDataService.getUpgradesLocations();
+        const upgrades = Object.values(StaticDataService.recipeData);
 
-        const result: IUpgradesTableRow[] = Object.values(StaticDataService.recipeData).map(x => {
+        const result: IUpgradesTableRow[] = upgrades.map(x => {
             const characters: Array<{
                 id: string;
                 icon: string;
@@ -181,10 +213,11 @@ export const Upgrades = () => {
                 }
             }
 
-            const locations = upgradesLocations[x.material]
-                ?.map(x => StaticDataService.campaignsComposed[x])
-                .map(x => x?.campaign + ' ' + x?.nodeNumber)
-                .join(', ');
+            const locations = upgradesLocations[x.material]?.map(x => StaticDataService.campaignsComposed[x]);
+            const partOf = upgrades
+                .filter(m => m.recipe?.some(u => u.material === x.material) ?? false)
+                .map(u => u.label ?? u.material)
+                .join('\r\n');
             return {
                 upgradeLabel: x.label ?? x.material,
                 upgradeId: x.material,
@@ -193,6 +226,7 @@ export const Upgrades = () => {
                 rarity: rarityStringToNumber[x.rarity as unknown as RarityString],
                 type: x.stat,
                 locations,
+                partOf,
                 recipe: x.recipe?.map(x => x.material + ' - ' + x.count).join('\r\n') ?? '',
                 characters: characters,
                 craftable: x.craftable,
@@ -207,6 +241,8 @@ export const Upgrades = () => {
             .filter(
                 upgrade =>
                     upgrade.upgradeLabel.toLowerCase().includes(nameFilter.toLowerCase()) ||
+                    upgrade.recipe.toLowerCase().includes(nameFilter.toLowerCase()) ||
+                    upgrade.partOf.toLowerCase().includes(nameFilter.toLowerCase()) ||
                     upgrade.upgradeId.toLowerCase().includes(nameFilter.toLowerCase())
             )
             .filter(upgrade => {
@@ -214,11 +250,8 @@ export const Upgrades = () => {
                     case 'Craftable': {
                         return upgrade.craftable && upgrade.type !== 'Shard';
                     }
-                    case 'Non Craftable': {
+                    case 'Base Upgrades': {
                         return !upgrade.craftable && upgrade.type !== 'Shard';
-                    }
-                    case 'Shards': {
-                        return upgrade.type === 'Shard';
                     }
                 }
             });
@@ -274,7 +307,6 @@ export const Upgrades = () => {
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true, wrapText: true }}
                     columnDefs={columnDefs}
                     rowData={rows}
-                    // getRowStyle={getRowStyle}
                     onGridReady={fitGridOnWindowResize(gridRef)}></AgGridReact>
             </div>
         </div>

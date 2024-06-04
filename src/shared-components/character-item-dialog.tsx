@@ -2,7 +2,7 @@
 
 import { isMobile } from 'react-device-detect';
 
-import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { DialogActions, DialogContent, DialogTitle, IconButton } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 
@@ -17,8 +17,17 @@ import { MiscIcon } from './misc-icon';
 import { Conditional } from 'src/v2/components/conditional';
 import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { ArrowBack, ArrowForward } from '@mui/icons-material';
 
-export const CharacterItemDialog = (props: { character: ICharacter2; isOpen: boolean; onClose: () => void }) => {
+interface Props {
+    character: ICharacter2;
+    isOpen: boolean;
+    onClose: () => void;
+    showNextUnit?: () => void;
+    showPreviousUnit?: () => void;
+}
+
+export const CharacterItemDialog: React.FC<Props> = props => {
     const { viewPreferences } = useContext(StoreContext);
     const [character, setCharacter] = useState(() => ({ ...props.character }));
     const [inventoryUpdate, setInventoryUpdate] = useState<IMaterialRecipeIngredientFull[]>([]);
@@ -39,13 +48,17 @@ export const CharacterItemDialog = (props: { character: ICharacter2; isOpen: boo
 
     return (
         <Dialog open={props.isOpen} onClose={props.onClose} fullScreen={isMobile}>
-            <DialogTitle>
+            <DialogTitle className="flex-box between">
+                {props.showPreviousUnit && (
+                    <IconButton onClick={props.showPreviousUnit}>
+                        <ArrowBack />
+                    </IconButton>
+                )}
+
                 <div
+                    className="flex-box gap10"
                     style={{
-                        display: 'flex',
                         flexDirection: isMobile ? 'column' : 'row',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
                     }}>
                     <CharacterTitle character={character} />
                     <Conditional condition={viewPreferences.showBsValue}>
@@ -64,6 +77,11 @@ export const CharacterItemDialog = (props: { character: ICharacter2; isOpen: boo
                         </AccessibleTooltip>
                     </Conditional>
                 </div>
+                {props.showNextUnit && (
+                    <IconButton onClick={props.showNextUnit}>
+                        <ArrowForward />
+                    </IconButton>
+                )}
             </DialogTitle>
             <DialogContent style={{ paddingTop: 20 }}>
                 <CharacterDetails

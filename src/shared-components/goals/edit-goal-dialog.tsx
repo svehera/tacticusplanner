@@ -4,8 +4,8 @@ import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/mater
 import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
-import { ICampaignsProgress, ICharacter2, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityString } from 'src/models/enums';
+import { ICampaignsProgress, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
+import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { enqueueSnackbar } from 'notistack';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
@@ -21,16 +21,19 @@ import { CampaignLocation } from 'src/shared-components/goals/campaign-location'
 import { CampaignsUsageSelect } from 'src/shared-components/goals/campaings-usage-select';
 import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
 import { CharacterImage } from 'src/shared-components/character-image';
-import MultipleSelectCheckmarks from 'src/routes/characters/multiple-select';
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
+import { NumberInput } from 'src/v2/components/inputs/number-input';
+import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 
 interface Props {
     isOpen: boolean;
     goal: CharacterRaidGoalSelect;
-    character: ICharacter2;
+    unit: IUnit;
     onClose?: (goal?: CharacterRaidGoalSelect) => void;
 }
 
-export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, character }) => {
+export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit }) => {
     const { goals, campaignsProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
@@ -46,19 +49,19 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                 case PersonalGoalType.Ascend: {
                     dispatch.characters({
                         type: 'UpdateRarity',
-                        character: updatedGoal.characterName,
+                        character: updatedGoal.unitId,
                         value: updatedGoal.rarityStart,
                     });
 
                     dispatch.characters({
                         type: 'UpdateShards',
-                        character: updatedGoal.characterName,
+                        character: updatedGoal.unitId,
                         value: updatedGoal.shards,
                     });
 
                     dispatch.characters({
                         type: 'UpdateStars',
-                        character: updatedGoal.characterName,
+                        character: updatedGoal.unitId,
                         value: updatedGoal.starsStart,
                     });
                     break;
@@ -66,7 +69,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                 case PersonalGoalType.Unlock: {
                     dispatch.characters({
                         type: 'UpdateShards',
-                        character: updatedGoal.characterName,
+                        character: updatedGoal.unitId,
                         value: updatedGoal.shards,
                     });
                     break;
@@ -74,13 +77,30 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                 case PersonalGoalType.UpgradeRank: {
                     dispatch.characters({
                         type: 'UpdateRank',
-                        character: updatedGoal.characterName,
+                        character: updatedGoal.unitId,
                         value: updatedGoal.rankStart,
                     });
                     dispatch.characters({
                         type: 'UpdateUpgrades',
-                        character: updatedGoal.characterName,
+                        character: updatedGoal.unitId,
                         value: updatedGoal.appliedUpgrades,
+                    });
+                    break;
+                }
+                case PersonalGoalType.MowAbilities: {
+                    dispatch.mows({
+                        type: 'UpdateAbilities',
+                        mowId: updatedGoal.unitId,
+                        abilities: [updatedGoal.primaryStart, updatedGoal.secondaryStart],
+                    });
+                    break;
+                }
+
+                case PersonalGoalType.CharacterAbilities: {
+                    dispatch.characters({
+                        type: 'UpdateAbilities',
+                        characterId: updatedGoal.unitId,
+                        abilities: [updatedGoal.activeStart, updatedGoal.passiveStart],
                     });
                     break;
                 }
@@ -93,7 +113,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                 });
             }
 
-            enqueueSnackbar(`Goal for ${updatedGoal.characterName} is updated`, { variant: 'success' });
+            enqueueSnackbar(`Goal for ${updatedGoal.unitName} is updated`, { variant: 'success' });
         }
         setOpenDialog(false);
         if (onClose) {
@@ -115,8 +135,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
     }
 
     const possibleLocations =
-        [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!character
-            ? StaticDataService.getItemLocations(character.name)
+        [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
+            ? StaticDataService.getItemLocations(unit.id)
             : [];
 
     const unlockedLocations = possibleLocations
@@ -129,7 +149,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
             <DialogTitle style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
-                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <CharacterImage icon={goal.characterIcon} />
+                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <CharacterImage icon={goal.unitIcon} />
             </DialogTitle>
             <DialogContent style={{ paddingTop: 20 }}>
                 <Box id="edit-goal-form" className="flex-box column gap20 full-width start">
@@ -159,20 +179,18 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                                     }
                                 />
                             </div>
-                            <MultipleSelectCheckmarks
-                                placeholder="Upgrades rarity"
-                                selectedValues={form.upgradesRarity!.map(x => Rarity[x])}
-                                values={Object.values(RarityString)}
-                                selectionChanges={values => {
+                            <UpgradesRaritySelect
+                                upgradesRarity={form.upgradesRarity ?? []}
+                                upgradesRarityChange={values => {
                                     setForm(curr => ({
                                         ...curr,
-                                        upgradesRarity: values.map(x => +Rarity[x as unknown as number]),
+                                        upgradesRarity: values,
                                     }));
                                 }}
                             />
 
                             <CharacterUpgrades
-                                characterName={character.name}
+                                characterName={unit.id}
                                 upgrades={form.appliedUpgrades}
                                 rank={form.rankStart}
                                 upgradesChanges={(upgrades, updateInventory) => {
@@ -183,6 +201,130 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, charact
                                     setInventoryUpdate(updateInventory);
                                 }}
                             />
+                        </>
+                    )}
+
+                    {form.type === PersonalGoalType.MowAbilities && isMow(unit) && (
+                        <>
+                            <div className="flex-box gap5 full-width between">
+                                <NumberInput
+                                    fullWidth
+                                    label="Primary current level"
+                                    min={unit.primaryAbilityLevel}
+                                    value={form.primaryStart}
+                                    valueChange={primaryStart => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            primaryStart,
+                                        }));
+                                    }}
+                                />
+                                <NumberInput
+                                    fullWidth
+                                    label="Primary target level"
+                                    min={unit.primaryAbilityLevel}
+                                    value={form.primaryEnd}
+                                    valueChange={primaryEnd => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            primaryEnd,
+                                        }));
+                                    }}
+                                />
+                            </div>
+                            <div className="flex-box gap5 full-width between">
+                                <NumberInput
+                                    fullWidth
+                                    label="Secondary current level"
+                                    min={unit.secondaryAbilityLevel}
+                                    value={form.secondaryStart}
+                                    valueChange={secondaryStart => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            secondaryStart,
+                                        }));
+                                    }}
+                                />
+                                <NumberInput
+                                    fullWidth
+                                    label="Secondary target level"
+                                    min={unit.secondaryAbilityLevel}
+                                    value={form.secondaryEnd}
+                                    valueChange={secondaryEnd => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            secondaryEnd,
+                                        }));
+                                    }}
+                                />
+                            </div>
+
+                            <UpgradesRaritySelect
+                                upgradesRarity={form.upgradesRarity ?? []}
+                                upgradesRarityChange={values => {
+                                    setForm(curr => ({
+                                        ...curr,
+                                        upgradesRarity: values,
+                                    }));
+                                }}
+                            />
+                        </>
+                    )}
+
+                    {form.type === PersonalGoalType.CharacterAbilities && isCharacter(unit) && (
+                        <>
+                            <div className="flex-box gap5 full-width between">
+                                <NumberInput
+                                    fullWidth
+                                    label="Active current level"
+                                    min={unit.activeAbilityLevel}
+                                    value={form.activeStart}
+                                    valueChange={activeStart => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            activeStart,
+                                        }));
+                                    }}
+                                />
+                                <NumberInput
+                                    fullWidth
+                                    label="Active target level"
+                                    min={unit.activeAbilityLevel}
+                                    value={form.activeEnd}
+                                    valueChange={activeEnd => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            activeEnd,
+                                        }));
+                                    }}
+                                />
+                            </div>
+                            <div className="flex-box gap5 full-width between">
+                                <NumberInput
+                                    fullWidth
+                                    label="Passive current level"
+                                    min={unit.passiveAbilityLevel}
+                                    value={form.passiveStart}
+                                    valueChange={passiveStart => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            passiveStart,
+                                        }));
+                                    }}
+                                />
+                                <NumberInput
+                                    fullWidth
+                                    label="Passive target level"
+                                    min={unit.passiveAbilityLevel}
+                                    value={form.passiveEnd}
+                                    valueChange={passiveEnd => {
+                                        setForm(curr => ({
+                                            ...curr,
+                                            passiveEnd,
+                                        }));
+                                    }}
+                                />
+                            </div>
                         </>
                     )}
 

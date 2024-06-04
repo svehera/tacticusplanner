@@ -1,15 +1,18 @@
 ﻿import {
+    IBaseUpgrade,
     IBaseUpgradeData,
-    ICharacterUpgrade,
     ICharacterUpgradeEstimate,
-    ICharacterUpgradeRank,
+    ICharacterUpgradeMow,
     ICharacterUpgradeRankEstimate,
     ICharacterUpgradeRankGoal,
     ICombinedUpgrade,
+    ICraftedUpgrade,
     ICraftedUpgradeData,
     IEstimatedUpgrades,
     IItemRaidLocation,
     IRankLookup,
+    IUnitUpgrade,
+    IUnitUpgradeRank,
     IUpgradeRaid,
     IUpgradeRecipe,
     IUpgradesRaidsDay,
@@ -26,7 +29,7 @@ import {
     IRecipeData,
 } from 'src/models/interfaces';
 import { rarityStringToNumber } from 'src/models/constants';
-import { CampaignType, DailyRaidsStrategy, Rank, Rarity, RarityString } from 'src/models/enums';
+import { CampaignType, DailyRaidsStrategy, PersonalGoalType, Rank, Rarity, RarityString } from 'src/models/enums';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import { cloneDeep, groupBy, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
 
@@ -34,6 +37,7 @@ import rankUpData from 'src/assets/rankUpData.json';
 import recipeData from 'src/v2/data/recipeData.json';
 import battleData from 'src/assets/battleData.json';
 import { getEnumValues, rankToString } from 'src/shared-logic/functions';
+import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 
 export class UpgradesService {
     static readonly recipeData: IRecipeData = recipeData;
@@ -45,7 +49,7 @@ export class UpgradesService {
     static readonly rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
     static getUpgradesEstimatedDays(
         settings: IEstimatedRanksSettings,
-        ...goals: Array<ICharacterUpgradeRankGoal>
+        ...goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>
     ): IEstimatedUpgrades {
         const inventoryUpgrades = cloneDeep(settings.upgrades);
 
@@ -250,10 +254,13 @@ export class UpgradesService {
 
     public static getUpgrades(
         inventoryUpgrades: Record<string, number>,
-        goals: Array<ICharacterUpgradeRankGoal>
-    ): ICharacterUpgrade[] {
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>
+    ): IUnitUpgrade[] {
         return goals.map(goal => {
-            const upgradeRanks = this.getUpgradeRank(goal);
+            const upgradeRanks =
+                goal.type === PersonalGoalType.UpgradeRank
+                    ? this.getCharacterUpgradeRank(goal)
+                    : this.getMowUpgradeRank(goal);
             const baseUpgradesTotal = this.getBaseUpgradesTotal(upgradeRanks, inventoryUpgrades);
 
             if (goal.upgradesRarity.length) {
@@ -271,8 +278,8 @@ export class UpgradesService {
 
             return {
                 goalId: goal.goalId,
-                characterId: goal.characterName,
-                label: goal.characterName,
+                unitId: goal.unitName,
+                label: goal.unitName,
                 upgradeRanks,
                 baseUpgradesTotal,
                 relatedUpgrades,
@@ -338,7 +345,7 @@ export class UpgradesService {
         requiredCount: number,
         acquiredCount: number
     ): ICharacterUpgradeEstimate {
-        const { id, label, rarity, iconPath, locations, relatedCharacters } = upgrade;
+        const { id, label, rarity, iconPath, locations, relatedCharacters, relatedGoals } = upgrade;
 
         const selectedLocations = locations.filter(x => x.isSelected);
 
@@ -353,6 +360,7 @@ export class UpgradesService {
             acquiredCount,
             requiredCount,
             relatedCharacters,
+            relatedGoals,
             daysTotal: 0,
             raidsTotal: 0,
             energyTotal: 0,
@@ -404,7 +412,7 @@ export class UpgradesService {
         return estimate;
     }
 
-    private static combineBaseMaterials(charactersUpgrades: ICharacterUpgrade[]): Record<string, ICombinedUpgrade> {
+    private static combineBaseMaterials(charactersUpgrades: IUnitUpgrade[]): Record<string, ICombinedUpgrade> {
         const result: Record<string, ICombinedUpgrade> = {};
         for (const character of charactersUpgrades) {
             for (const upgradeId in character.baseUpgradesTotal) {
@@ -415,12 +423,17 @@ export class UpgradesService {
                     requiredCount: 0,
                     countByGoalId: {},
                     relatedCharacters: [],
+                    relatedGoals: [],
                 };
 
                 combinedUpgrade.requiredCount += upgradeCount;
                 combinedUpgrade.countByGoalId[character.goalId] = upgradeCount;
-                if (!combinedUpgrade.relatedCharacters.includes(character.characterId)) {
-                    combinedUpgrade.relatedCharacters.push(character.characterId);
+                if (!combinedUpgrade.relatedCharacters.includes(character.unitId)) {
+                    combinedUpgrade.relatedCharacters.push(character.unitId);
+                }
+
+                if (!combinedUpgrade.relatedGoals.includes(character.goalId)) {
+                    combinedUpgrade.relatedGoals.push(character.goalId);
                 }
 
                 result[upgradeId] = combinedUpgrade;
@@ -553,8 +566,12 @@ export class UpgradesService {
         return true;
     }
 
+    public static getUpgrade(upgradeId: string): IBaseUpgrade | ICraftedUpgrade {
+        return this.baseUpgradesData[upgradeId] ?? this.craftedUpgradesData[upgradeId];
+    }
+
     private static getBaseUpgradesTotal(
-        upgradeRanks: ICharacterUpgradeRank[],
+        upgradeRanks: IUnitUpgradeRank[],
         inventoryUpgrades: Record<string, number>
     ): Record<string, number> {
         const baseUpgradesTotal: Record<string, number> = {};
@@ -603,11 +620,11 @@ export class UpgradesService {
         return baseUpgradesTotal;
     }
 
-    private static getUpgradeRank(rankLookup: IRankLookup): ICharacterUpgradeRank[] {
-        const characterRankUpData = this.rankUpData[rankLookup.characterName] ?? {};
+    private static getCharacterUpgradeRank(rankLookup: IRankLookup): IUnitUpgradeRank[] {
+        const characterRankUpData = this.rankUpData[rankLookup.unitName] ?? {};
 
         const ranksRange = this.rankEntries.filter(r => r >= rankLookup.rankStart && r < rankLookup.rankEnd);
-        const upgradeRanks: ICharacterUpgradeRank[] = [];
+        const upgradeRanks: IUnitUpgradeRank[] = [];
 
         for (const rank of ranksRange) {
             const upgrades = characterRankUpData[rankToString(rank)] ?? [];
@@ -639,6 +656,30 @@ export class UpgradesService {
             );
         }
         return upgradeRanks;
+    }
+
+    private static getMowUpgradeRank(rankLookup: ICharacterUpgradeMow): IUnitUpgradeRank[] {
+        const primaryUpgrades = MowLookupService.getUpgradesRaw(
+            rankLookup.unitId,
+            rankLookup.primaryStart,
+            rankLookup.primaryEnd,
+            'primary'
+        );
+        const secondaryUpgrades = MowLookupService.getUpgradesRaw(
+            rankLookup.unitId,
+            rankLookup.secondaryStart,
+            rankLookup.secondaryEnd,
+            'secondary'
+        );
+
+        return [
+            {
+                rankStart: Rank.Diamond3,
+                rankEnd: Rank.Diamond3,
+                upgrades: [...primaryUpgrades, ...secondaryUpgrades],
+                rankPoint5: false,
+            },
+        ];
     }
 
     private static composeBaseUpgrades(): IBaseUpgradeData {
@@ -761,7 +802,7 @@ export class UpgradesService {
     }
 
     private static getEstimatesByPriority(
-        goals: ICharacterUpgradeRankGoal[],
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>,
         upgrades: Record<string, ICombinedUpgrade>,
         inventoryUpgrades: Record<string, number>
     ): ICharacterUpgradeRankEstimate[] {
@@ -778,12 +819,12 @@ export class UpgradesService {
                 inventoryUpgrades[upgradeId] = Math.max(acquiredCount - requiredCount, 0);
                 const estimate = this.getUpgradeEstimate(upgrade, requiredCount, acquiredCount);
 
-                estimate.relatedCharacters = [goal.characterName];
+                estimate.relatedCharacters = [goal.unitName];
                 goalUpgrades.push(estimate);
             }
 
             result.push({
-                ...goal,
+                goalId: goal.goalId,
                 upgrades: orderBy(goalUpgrades, ['daysTotal', 'energyTotal'], ['desc', 'desc']),
             });
         }

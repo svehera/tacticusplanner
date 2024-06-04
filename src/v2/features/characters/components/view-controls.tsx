@@ -91,7 +91,7 @@ export const ViewControls = ({
     );
 
     return (
-        <FlexBox gap={10} justifyContent={'center'} useColumnForMobile>
+        <FlexBox gap={10} justifyContent={'center'}>
             {getSelectControl('Order', viewControls.orderBy, 'orderBy', orderEntries, orderToString)}
             {getSelectControl('Filter', viewControls.filterBy, 'filterBy', filterEntries, filterToString)}
             <ViewSettings preset={'wyo'} />

@@ -1,27 +1,28 @@
-import React, { useState, useMemo } from 'react';
-import { cloneDeep, orderBy, sortBy, sum } from 'lodash';
+import { cloneDeep, sum } from 'lodash';
 import { Rank, Rarity, RarityStars } from 'src/models/enums';
 import { StaticDataService } from 'src/services/static-data.service';
 import { getEnumValues } from 'src/shared-logic/functions';
-import { ICharacter2, ICharacterRankRange, IMaterialFull, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
+import { ICharacterRankRange, IMaterialFull, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
 import { rankToString } from 'src/shared-logic/functions';
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { isCharacter, isUnlocked } from 'src/v2/features/characters/units.functions';
 
 export class CharactersValueService {
-    public static getCharacterValue(character: ICharacter2): number {
-        if (character.rank === Rank.Locked) {
+    public static getCharacterValue(unit: IUnit): number {
+        if (!isUnlocked(unit) || !isCharacter(unit)) {
             return 0;
         }
 
         const valueLevel =
-            CharactersValueService.getUnlockValue(character.initialRarity, character.name) +
-            CharactersValueService.getExperienceValue(character.level) +
-            CharactersValueService.getAbilityValue(character.activeAbilityLevel) +
-            CharactersValueService.getAbilityValue(character.passiveAbilityLevel) +
-            CharactersValueService.getStarsValue(character.stars) -
-            CharactersValueService.getInitialStarsValue(character.initialRarity) +
-            CharactersValueService.getRarityValue(character.rarity) -
-            CharactersValueService.getRarityValue(character.initialRarity) +
-            CharactersValueService.getRankValue(character.name, character.rank, character.upgrades);
+            CharactersValueService.getUnlockValue(unit.initialRarity, unit.name) +
+            CharactersValueService.getExperienceValue(unit.level) +
+            CharactersValueService.getAbilityValue(unit.activeAbilityLevel) +
+            CharactersValueService.getAbilityValue(unit.passiveAbilityLevel) +
+            CharactersValueService.getStarsValue(unit.stars) -
+            CharactersValueService.getInitialStarsValue(unit.initialRarity) +
+            CharactersValueService.getRarityValue(unit.rarity) -
+            CharactersValueService.getRarityValue(unit.initialRarity) +
+            CharactersValueService.getRankValue(unit.name, unit.rank, unit.upgrades);
         return Math.round(valueLevel);
     }
 

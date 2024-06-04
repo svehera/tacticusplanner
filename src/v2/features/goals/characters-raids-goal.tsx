@@ -61,6 +61,37 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                     </AccessibleTooltip>
                 );
             }
+            case PersonalGoalType.MowAbilities: {
+                const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
+                const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
+                return (
+                    <div className="flex-box gap5">
+                        <div className="flex-box start column">
+                            {hasPrimaryGoal && (
+                                <div className="flex-box gap3">
+                                    <span>P:</span> <b>{goal.primaryStart}</b> <ArrowForward />
+                                    <b>{goal.primaryEnd}</b>
+                                </div>
+                            )}
+
+                            {hasSecondaryGoal && (
+                                <div className="flex-box gap3">
+                                    <span>S:</span> <b>{goal.secondaryStart}</b> <ArrowForward />
+                                    <b>{goal.secondaryEnd}</b>
+                                </div>
+                            )}
+                        </div>
+
+                        {!!goal.upgradesRarity.length && (
+                            <div className="flex-box gap3">
+                                {goal.upgradesRarity.map(x => (
+                                    <RarityImage key={x} rarity={x} />
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                );
+            }
             case PersonalGoalType.Unlock: {
                 return <span>Unlock</span>;
             }
@@ -75,9 +106,9 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                     <IconButton onClick={onGoalEdit}>
                         <Edit fontSize="small" />
                     </IconButton>
-                    <AccessibleTooltip title={goal.characterName}>
+                    <AccessibleTooltip title={goal.unitName}>
                         <div>
-                            <CharacterImage icon={goal.characterIcon} name={goal.characterName} />
+                            <CharacterImage icon={goal.unitIcon} name={goal.unitName} />
                         </div>
                     </AccessibleTooltip>
                     {getGoalInfo(goal)}

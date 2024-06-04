@@ -1,8 +1,7 @@
 ﻿import React, { useContext, useMemo, useState } from 'react';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
-import { ICharacter2 } from 'src/models/interfaces';
-import { Rank } from 'src/models/enums';
+import { PersonalGoalType, Rank } from 'src/models/enums';
 
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { Link } from 'react-router-dom';
@@ -19,21 +18,33 @@ import TableRowsIcon from '@mui/icons-material/TableRows';
 import { GoalsTable } from 'src/routes/goals/goals-table';
 import { MiscIcon } from 'src/shared-components/misc-icon';
 import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
-import { rankToLevel } from 'src/models/constants';
+import { goalsLimit, rankToLevel } from 'src/models/constants';
 import { sum } from 'lodash';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
+import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';
+import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
 
 export const Goals = () => {
-    const { goals, characters, campaignsProgress, dailyRaidsPreferences, inventory, dailyRaids, viewPreferences } =
-        useContext(StoreContext);
+    const {
+        goals,
+        characters,
+        mows,
+        campaignsProgress,
+        dailyRaidsPreferences,
+        inventory,
+        dailyRaids,
+        viewPreferences,
+    } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
-    const [editCharacter, setEditCharacter] = useState<ICharacter2>(characters[0]);
+    const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
 
-    const { allGoals, shardsGoals, upgradeRankGoals } = useMemo(() => {
-        return GoalsService.prepareGoals(goals, characters, false);
-    }, [goals, characters]);
+    const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities } = useMemo(() => {
+        return GoalsService.prepareGoals(goals, [...characters, ...mows], false);
+    }, [goals, characters, mows]);
 
     const estimatedShardsTotal = useMemo(() => {
         return ShardsService.getShardsEstimatedDays(
@@ -60,9 +71,9 @@ export const Goals = () => {
                 upgrades: inventory.upgrades,
                 completedLocations: [],
             },
-            ...upgradeRankGoals
+            ...upgradeRankOrMowGoals
         );
-    }, [upgradeRankGoals, estimatedShardsTotal.energyPerDay]);
+    }, [upgradeRankOrMowGoals, estimatedShardsTotal.energyPerDay]);
 
     const removeGoal = (goalId: string): void => {
         dispatch.goals({ type: 'Delete', goalId });
@@ -81,9 +92,9 @@ export const Goals = () => {
 
         if (item === 'edit') {
             const goal = allGoals.find(x => x.goalId === goalId);
-            const relatedCharacter = characters.find(x => x.name === goal?.characterName);
-            if (relatedCharacter && goal) {
-                setEditCharacter(relatedCharacter);
+            const relatedUnit = [...characters, ...mows].find(x => x.id === goal?.unitId);
+            if (relatedUnit && goal) {
+                setEditUnit(relatedUnit);
                 setEditGoal(goal);
             }
         }
@@ -116,37 +127,88 @@ export const Goals = () => {
             result.push(...goalsEstimate);
         }
 
-        if (upgradeRankGoals.length) {
-            const goalsEstimate = upgradeRankGoals.map(goal => {
+        if (upgradeRankOrMowGoals.length) {
+            const goalsEstimate = upgradeRankOrMowGoals.map(goal => {
                 const goalEstimate = estimatedUpgradesTotal.byCharactersPriority.find(x => x.goalId === goal.goalId);
                 const firstFarmDay = estimatedUpgradesTotal.upgradesRaids.findIndex(x =>
-                    x.raids.flatMap(raid => raid.relatedCharacters).includes(goal.characterName)
+                    x.raids.flatMap(raid => raid.relatedGoals).includes(goal.goalId)
                 );
 
                 const daysTotal = estimatedUpgradesTotal.upgradesRaids.filter(x =>
-                    x.raids.flatMap(raid => raid.relatedCharacters).includes(goal.characterName)
+                    x.raids.flatMap(raid => raid.relatedGoals).includes(goal.goalId)
                 ).length;
 
-                const targetLevel = rankToLevel[((goal.rankEnd ?? 1) - 1) as Rank];
-                const xpEstimate = CharactersXpService.getLegendaryTomesCount(goal.level, goal.xp, targetLevel);
+                if (goal.type === PersonalGoalType.UpgradeRank) {
+                    const targetLevel = rankToLevel[((goal.rankEnd ?? 1) - 1) as Rank];
+                    const xpEstimate = CharactersXpService.getLegendaryTomesCount(goal.level, goal.xp, targetLevel);
 
-                return {
-                    goalId: goal.goalId,
-                    energyTotal: sum(goalEstimate?.upgrades.map(x => x.energyTotal) ?? []),
-                    daysTotal: daysTotal,
-                    daysLeft: firstFarmDay + daysTotal,
-                    oTokensTotal: 0,
-                    xpEstimate,
-                } as IGoalEstimate;
+                    return {
+                        goalId: goal.goalId,
+                        energyTotal: sum(goalEstimate?.upgrades.map(x => x.energyTotal) ?? []),
+                        daysTotal: daysTotal,
+                        daysLeft: firstFarmDay + daysTotal,
+                        oTokensTotal: 0,
+                        xpEstimate,
+                    } as IGoalEstimate;
+                } else {
+                    const mowMaterials = MowLookupService.getMaterialsList(
+                        goal.unitId,
+                        goal.unitName,
+                        goal.unitAlliance
+                    );
+
+                    const primaryAbility = mowMaterials.slice(goal.primaryStart - 1, goal.primaryEnd - 1);
+                    const secondaryAbility = mowMaterials.slice(goal.secondaryStart - 1, goal.secondaryEnd - 1);
+
+                    const mowEstimate = MowLookupService.getTotals([...primaryAbility, ...secondaryAbility]);
+
+                    return {
+                        goalId: goal.goalId,
+                        energyTotal: sum(goalEstimate?.upgrades.map(x => x.energyTotal) ?? []),
+                        daysTotal: daysTotal,
+                        daysLeft: firstFarmDay + daysTotal,
+                        oTokensTotal: 0,
+                        mowEstimate,
+                    } as IGoalEstimate;
+                }
             });
 
             result.push(...goalsEstimate);
         }
 
-        return result;
-    }, [shardsGoals, upgradeRankGoals]);
+        if (upgradeAbilities.length) {
+            for (const goal of upgradeAbilities) {
+                const targetLevel = Math.max(goal.activeEnd, goal.passiveEnd);
+                const xpEstimate = CharactersXpService.getLegendaryTomesCount(goal.level, goal.xp, targetLevel);
+                const activeAbility = CharactersAbilitiesService.getMaterials(goal.activeStart, goal.activeEnd);
+                const passiveAbility = CharactersAbilitiesService.getMaterials(goal.passiveStart, goal.passiveEnd);
 
-    const totalXp = sum(goalsEstimate.filter(x => !!x.xpEstimate).map(x => x.xpEstimate!.legendaryBooks));
+                const abilitiesEstimate = CharactersAbilitiesService.getTotals(
+                    [...activeAbility, ...passiveAbility],
+                    goal.unitAlliance
+                );
+
+                result.push({
+                    goalId: goal.goalId,
+                    abilitiesEstimate,
+                    xpEstimateAbilities: xpEstimate!,
+                } as IGoalEstimate);
+            }
+        }
+
+        return result;
+    }, [shardsGoals, upgradeRankOrMowGoals]);
+
+    const totalXpUpgrades = sum(goalsEstimate.filter(x => !!x.xpEstimate).map(x => x.xpEstimate!.legendaryBooks));
+    const totalXpAbilities = sum(
+        goalsEstimate.filter(x => !!x.xpEstimateAbilities).map(x => x.xpEstimateAbilities!.legendaryBooks)
+    );
+
+    const totalGoldAbilities = sum(
+        goalsEstimate
+            .filter(x => !!x.abilitiesEstimate && !!x.xpEstimateAbilities)
+            .map(x => x.abilitiesEstimate!.gold + x.xpEstimateAbilities!.gold)
+    );
 
     return (
         <div>
@@ -160,7 +222,7 @@ export const Goals = () => {
                 </Button>
                 <SetGoalDialog key={goals.length} />
                 <span style={{ fontSize: 20 }}>
-                    {goals.length}/{30}
+                    {goals.length}/{goalsLimit}
                 </span>
                 <FormControlLabel
                     control={
@@ -182,23 +244,23 @@ export const Goals = () => {
                 />
             </div>
 
-            {!!upgradeRankGoals.length && (
+            {!!upgradeRankOrMowGoals.length && (
                 <div>
                     <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
                         <span>
-                            Upgrade rank (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
+                            Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
                         </span>
                         <span>
                             <b>{estimatedUpgradesTotal.energyTotal}</b>{' '}
                             <MiscIcon icon={'energy'} height={15} width={15} /> |
                         </span>
                         <span>
-                            <b>{totalXp}</b> XP Books)
+                            <b>{totalXpUpgrades}</b> XP Books)
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (
                         <div className="flex-box gap10 wrap goals" style={{ alignItems: 'unset' }}>
-                            {upgradeRankGoals.map(goal => (
+                            {upgradeRankOrMowGoals.map(goal => (
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
@@ -211,20 +273,9 @@ export const Goals = () => {
 
                     {viewPreferences.goalsTableView && (
                         <GoalsTable
-                            rows={upgradeRankGoals}
+                            rows={upgradeRankOrMowGoals}
                             estimate={goalsEstimate}
                             menuItemSelect={handleMenuItemSelect}
-                        />
-                    )}
-
-                    {!!editGoal && !!editCharacter && (
-                        <EditGoalDialog
-                            isOpen={true}
-                            goal={editGoal}
-                            character={editCharacter}
-                            onClose={() => {
-                                setEditGoal(null);
-                            }}
                         />
                     )}
                 </div>
@@ -260,18 +311,51 @@ export const Goals = () => {
                     {viewPreferences.goalsTableView && (
                         <GoalsTable rows={shardsGoals} estimate={goalsEstimate} menuItemSelect={handleMenuItemSelect} />
                     )}
+                </div>
+            )}
 
-                    {!!editGoal && !!editCharacter && (
-                        <EditGoalDialog
-                            isOpen={true}
-                            goal={editGoal}
-                            character={editCharacter}
-                            onClose={() => {
-                                setEditGoal(null);
-                            }}
+            {!!upgradeAbilities.length && (
+                <div>
+                    <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
+                        <span>
+                            Character Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold |
+                        </span>
+                        <span>
+                            <b>{totalXpAbilities}</b> XP Books)
+                        </span>
+                    </div>
+                    {!viewPreferences.goalsTableView && (
+                        <div className="flex-box gap10 wrap goals" style={{ alignItems: 'unset' }}>
+                            {upgradeAbilities.map(goal => (
+                                <GoalCard
+                                    key={goal.goalId}
+                                    goal={goal}
+                                    goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
+                                    menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                />
+                            ))}
+                        </div>
+                    )}
+
+                    {viewPreferences.goalsTableView && (
+                        <GoalsTable
+                            rows={upgradeAbilities}
+                            estimate={goalsEstimate}
+                            menuItemSelect={handleMenuItemSelect}
                         />
                     )}
                 </div>
+            )}
+
+            {!!editGoal && !!editUnit && (
+                <EditGoalDialog
+                    isOpen={true}
+                    goal={editGoal}
+                    unit={editUnit}
+                    onClose={() => {
+                        setEditGoal(null);
+                    }}
+                />
             )}
         </div>
     );

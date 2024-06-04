@@ -42,6 +42,7 @@ import { rarityStringToNumber, rarityToStars } from '../models/constants';
 import { getEnumValues, rankToString } from '../shared-logic/functions';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import { IRankLookup } from 'src/v2/features/goals/goals.models';
+import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;
@@ -253,6 +254,9 @@ export class StaticDataService {
 
     static convertUnitData(rawData: UnitDataRaw): IUnitData {
         const unitData: IUnitData = {
+            id: rawData.Name,
+            shortName: rawData['Short Name'],
+            unitType: UnitType.character,
             alliance: rawData.Alliance,
             faction: rawData.Faction,
             factionIcon: StaticDataService.getFactionIcon(rawData.Faction),
@@ -378,7 +382,7 @@ export class StaticDataService {
         let priority = 0;
         for (const character of characters) {
             priority++;
-            const characterUpgrades = StaticDataService.rankUpData[character.characterName];
+            const characterUpgrades = StaticDataService.rankUpData[character.unitName];
             if (!characterUpgrades) {
                 continue;
             }
@@ -420,7 +424,7 @@ export class StaticDataService {
                         stat: 'Unknown',
                         id: upgrade,
                         label: upgrade,
-                        character: character.characterName,
+                        character: character.unitName,
                         priority,
                         recipe: [],
                         allMaterials: [],
@@ -438,7 +442,7 @@ export class StaticDataService {
                     ...cloneDeep(recipe),
                     allMaterials,
                     priority,
-                    character: character.characterName,
+                    character: character.unitName,
                 };
             });
 
