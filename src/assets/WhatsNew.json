@@ -1,6 +1,22 @@
 ﻿{
-    "currentVersion": "1.5.6",
+    "currentVersion": "1.5.7",
     "releaseNotes": [
+        {
+            "version": "1.5.7",
+            "date": "June X",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added dark mode"
+                }
+            ],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with Goals Detail list doesn't use all of your resolution space (Ginrikuzuma)"
+                }
+            ]
+        },
         {
             "version": "1.5.6",
             "date": "June 4",
