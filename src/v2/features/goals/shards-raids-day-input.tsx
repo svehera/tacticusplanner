@@ -28,6 +28,7 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids }) => {
     };
     return (
         <Card
+            variant="outlined"
             sx={{
                 minWidth: 300,
             }}>

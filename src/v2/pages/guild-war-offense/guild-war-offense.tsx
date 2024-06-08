@@ -394,7 +394,7 @@ const TeamCard: React.FC<{
     teamPotentialBreakdown: React.ReactElement;
 }> = ({ actions, team, teamPotential, teamPotentialBreakdown, onEdit, onCharacterClick }) => {
     return (
-        <Card sx={{ maxWidth: 400, boxShadow: '1px 2px 3px rgba(0, 0, 0, 0.6)' }}>
+        <Card variant="outlined" sx={{ maxWidth: 400, boxShadow: '1px 2px 3px rgba(0, 0, 0, 0.6)' }}>
             <CardHeader
                 title={
                     <FlexBox justifyContent={'space-between'}>

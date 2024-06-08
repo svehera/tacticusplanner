@@ -14,6 +14,7 @@ export const PlanGuildWarRoutes = () => {
     return (
         <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
             <Card
+                variant="outlined"
                 onClick={() => navigate(defenseItem.routeMobile)}
                 sx={{
                     width: 350,
@@ -29,6 +30,7 @@ export const PlanGuildWarRoutes = () => {
             </Card>
 
             <Card
+                variant="outlined"
                 onClick={() => navigate(offenseItem.routeMobile)}
                 sx={{
                     width: 350,
@@ -43,6 +45,7 @@ export const PlanGuildWarRoutes = () => {
                 />
             </Card>
             <Card
+                variant="outlined"
                 onClick={() => navigate(layoutItem.routeMobile)}
                 sx={{
                     width: 350,

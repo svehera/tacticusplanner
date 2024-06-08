@@ -298,6 +298,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
 
     return (
         <Card
+            variant="outlined"
             sx={{
                 width: 350,
                 minHeight: 200,

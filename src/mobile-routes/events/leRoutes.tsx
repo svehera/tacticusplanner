@@ -12,6 +12,7 @@ export const PlanLeRoutes = () => {
     return (
         <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
             <Card
+                variant="outlined"
                 onClick={() => navigate(leMasterTableMenuItem.routeMobile)}
                 sx={{
                     width: 350,
@@ -30,6 +31,7 @@ export const PlanLeRoutes = () => {
                 const isFinished = le.nextEventDate === 'Finished';
                 return (
                     <Card
+                        variant="outlined"
                         key={le.name}
                         onClick={() => navigate(le.mobileRoute)}
                         sx={{
