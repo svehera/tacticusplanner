@@ -25,7 +25,7 @@ const ThemeSwitch = () => {
                     <LightModeIcon onClick={() => switchToLightTheme()} />
                 </Tooltip>
             ) : (
-                <Tooltip title="Switch to dark mode">
+                <Tooltip title="Switch to dark mode. Warning: It is not perfect">
                     <DarkModeIcon onClick={() => switchToDarkTheme()} />
                 </Tooltip>
             )}
