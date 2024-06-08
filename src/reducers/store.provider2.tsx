@@ -24,6 +24,7 @@ import { DispatchContext, StoreContext } from './store.provider';
 import { guildWarReducer } from 'src/reducers/guildWarReducer';
 import { guildReducer } from 'src/reducers/guildReducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
+import { enable as enableDarkMode, disable as disableDarkMode } from 'darkreader';
 
 export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const { isAuthenticated, setUser, logout } = useAuth();
@@ -300,6 +301,25 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
         return () => clearInterval(timerId);
     }, []);
+
+    useEffect(() => {
+        const themeSettings = {
+            brightness: 90,
+            contrast: 90,
+            sepia: 20,
+        };
+        switch (viewPreferences.theme) {
+            case 'dark': {
+                enableDarkMode(themeSettings);
+                break;
+            }
+            default:
+            case 'light': {
+                disableDarkMode();
+                break;
+            }
+        }
+    }, [viewPreferences.theme]);
 
     return (
         <DispatchContext.Provider value={dispatch}>

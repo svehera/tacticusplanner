@@ -19,6 +19,8 @@ import { GlobalState } from '../../models/global-state';
 import { RestoreBackupDialog } from './restore-backup-dialog';
 import ListItemText from '@mui/material/ListItemText';
 import { OverrideDataDialog } from './override-data-dialog';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Computer as ComputerIcon, Smartphone as PhoneIcon } from '@mui/icons-material';
 
 export const UserMenu = () => {
     const store = useContext(StoreContext);
@@ -29,6 +31,19 @@ export const UserMenu = () => {
     const [showRestoreBackup, setShowRestoreBackup] = useState(false);
     const [showOverrideDataWarning, setShowOverrideDataWarning] = useState(false);
     const userMenuControls = usePopUpControls();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const isDesktopView = !location.pathname.includes('mobile');
+
+    const navigateToDesktopView = () => {
+        localStorage.setItem('preferredView', 'desktop');
+        navigate('/home');
+    };
+
+    const navigateToMobileView = () => {
+        localStorage.setItem('preferredView', 'mobile');
+        navigate('/mobile/home');
+    };
 
     const { isAuthenticated, logout, username } = useAuth();
 
@@ -204,6 +219,23 @@ export const UserMenu = () => {
                     </ListItemIcon>
                     <ListItemText>Restore Backup</ListItemText>
                 </MenuItem>
+
+                <Divider />
+                {isDesktopView ? (
+                    <MenuItem onClick={() => navigateToMobileView()}>
+                        <ListItemIcon>
+                            <PhoneIcon />
+                        </ListItemIcon>
+                        <ListItemText>Use mobile view</ListItemText>
+                    </MenuItem>
+                ) : (
+                    <MenuItem onClick={() => navigateToDesktopView()}>
+                        <ListItemIcon>
+                            <ComputerIcon />
+                        </ListItemIcon>
+                        <ListItemText>Use desktop view</ListItemText>
+                    </MenuItem>
+                )}
             </Menu>
             <RegisterUserDialog
                 isOpen={showRegisterUser}

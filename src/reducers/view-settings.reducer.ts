@@ -4,7 +4,7 @@ export type ViewPreferencesAction =
     | {
           type: 'Update';
           setting: keyof IViewPreferences;
-          value: boolean | number;
+          value: boolean | number | string;
       }
     | SetStateAction<IViewPreferences>;
 
