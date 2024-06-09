@@ -100,6 +100,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
 
             state[existingCharIndex] = {
                 ...existingChar,
+                level: Math.max(existingChar.level, abilities[0], abilities[1]),
                 activeAbilityLevel: abilities[0],
                 passiveAbilityLevel: abilities[1],
             };
@@ -110,7 +111,9 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
             const existingChar = state.find(char => char.name === action.character);
 
             if (existingChar) {
+                const rankLevel = rankToLevel[(action.value - 1) as Rank];
                 existingChar.rank = action.value;
+                existingChar.level = Math.max(existingChar.level, rankLevel);
             }
             return [...state];
         }

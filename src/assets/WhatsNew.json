@@ -17,6 +17,9 @@
                 },
                 {
                     "text": "Fixed issue with Arrow Navigation Buttons do not save changes (Morpholine)"
+                },
+                {
+                    "text": "Fixed issue with Character's level is not auto-updated when editing rank or abilities via goal edit"
                 }
             ]
         },
