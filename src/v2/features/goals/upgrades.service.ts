@@ -701,8 +701,6 @@ export class UpgradesService {
                 ['desc', 'desc']
             );
 
-            console.log(locationsComposed);
-
             result[upgradeName] = {
                 id: upgrade.material,
                 label: upgrade.label ?? upgrade.material,
