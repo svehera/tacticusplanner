@@ -20,6 +20,9 @@
                 },
                 {
                     "text": "Fixed issue with Character's level is not auto-updated when editing rank or abilities via goal edit"
+                },
+                {
+                    "text": "Fixed issue with MoW doesn't show time taken for upgrades properly on the goals page (SeventhSun)"
                 }
             ]
         },

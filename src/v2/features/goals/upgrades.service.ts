@@ -278,7 +278,7 @@ export class UpgradesService {
 
             return {
                 goalId: goal.goalId,
-                unitId: goal.unitName,
+                unitId: goal.unitId,
                 label: goal.unitName,
                 upgradeRanks,
                 baseUpgradesTotal,
@@ -820,6 +820,7 @@ export class UpgradesService {
                 const estimate = this.getUpgradeEstimate(upgrade, requiredCount, acquiredCount);
 
                 estimate.relatedCharacters = [goal.unitName];
+                estimate.relatedGoals = [goal.goalId];
                 goalUpgrades.push(estimate);
             }
 
