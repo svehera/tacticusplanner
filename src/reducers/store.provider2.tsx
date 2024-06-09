@@ -303,14 +303,13 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     }, []);
 
     useEffect(() => {
-        const themeSettings = {
-            brightness: 90,
-            contrast: 90,
-            sepia: 20,
-        };
         switch (viewPreferences.theme) {
             case 'dark': {
-                enableDarkMode(themeSettings);
+                enableDarkMode({
+                    brightness: 90,
+                    contrast: 90,
+                    sepia: 20,
+                });
                 break;
             }
             default:

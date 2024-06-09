@@ -23,8 +23,8 @@ interface Props {
     saveChanges: (mow: IMow) => void;
     isOpen: boolean;
     onClose: () => void;
-    showNextUnit?: () => void;
-    showPreviousUnit?: () => void;
+    showNextUnit?: (mow: IMow) => void;
+    showPreviousUnit?: (mow: IMow) => void;
 }
 
 export const EditMowDialog: React.FC<Props> = ({
@@ -57,7 +57,7 @@ export const EditMowDialog: React.FC<Props> = ({
         <Dialog open={isOpen} onClose={onClose} fullWidth fullScreen={isMobile}>
             <DialogTitle className="flex-box between">
                 {showPreviousUnit && (
-                    <IconButton onClick={showPreviousUnit}>
+                    <IconButton onClick={() => showPreviousUnit(editedMow)}>
                         <ArrowBack />
                     </IconButton>
                 )}
@@ -68,7 +68,7 @@ export const EditMowDialog: React.FC<Props> = ({
                     <MiscIcon icon={'mow'} width={22} height={25} />
                 </div>
                 {showNextUnit && (
-                    <IconButton onClick={showNextUnit}>
+                    <IconButton onClick={() => showNextUnit(editedMow)}>
                         <ArrowForward />
                     </IconButton>
                 )}

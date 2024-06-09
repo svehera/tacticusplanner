@@ -14,6 +14,9 @@
             "bugFixes": [
                 {
                     "text": "Fixed issue with Goals Detail list doesn't use all of your resolution space (Ginrikuzuma)"
+                },
+                {
+                    "text": "Fixed issue with Arrow Navigation Buttons do not save changes (Morpholine)"
                 }
             ]
         },

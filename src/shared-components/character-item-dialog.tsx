@@ -50,7 +50,11 @@ export const CharacterItemDialog: React.FC<Props> = props => {
         <Dialog open={props.isOpen} onClose={props.onClose} fullScreen={isMobile}>
             <DialogTitle className="flex-box between">
                 {props.showPreviousUnit && (
-                    <IconButton onClick={props.showPreviousUnit}>
+                    <IconButton
+                        onClick={() => {
+                            saveChanges();
+                            props.showPreviousUnit!();
+                        }}>
                         <ArrowBack />
                     </IconButton>
                 )}
@@ -78,7 +82,11 @@ export const CharacterItemDialog: React.FC<Props> = props => {
                     </Conditional>
                 </div>
                 {props.showNextUnit && (
-                    <IconButton onClick={props.showNextUnit}>
+                    <IconButton
+                        onClick={() => {
+                            saveChanges();
+                            props.showNextUnit!();
+                        }}>
                         <ArrowForward />
                     </IconButton>
                 )}
