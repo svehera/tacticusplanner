@@ -2,6 +2,7 @@
     ICharacterAscendGoal,
     ICharacterShardsEstimate,
     ICharacterUnlockGoal,
+    ICharacterUpgradeMow,
     IEstimatedAscensionSettings,
     IEstimatedShards,
     IItemRaidLocation,
@@ -22,6 +23,7 @@ import {
 import { StaticDataService } from 'src/services';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import { orderBy, sum } from 'lodash';
+import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 
 export class ShardsService {
     static getShardsEstimatedDays(
@@ -226,6 +228,21 @@ export class ShardsService {
     public static getTargetShards(goal: ICharacterAscendGoal): number {
         const currentCharProgression = goal.rarityStart + goal.starsStart;
         const targetProgression = goal.rarityEnd + (goal.starsEnd || rarityToStars[goal.rarityEnd]);
+
+        let targetShards = 0;
+
+        for (let i = currentCharProgression + 1; i <= targetProgression; i++) {
+            const progressionRequirements = charsProgression[i];
+            targetShards += progressionRequirements.shards;
+        }
+
+        return targetShards;
+    }
+
+    public static getTargetShardsForMow(goal: ICharacterUpgradeMow): number {
+        const currentCharProgression = goal.rarity + goal.stars;
+        const targetRarity = MowLookupService.getRarityFromLevel(Math.max(goal.primaryEnd, goal.secondaryEnd));
+        const targetProgression = targetRarity + rarityToStars[targetRarity];
 
         let targetShards = 0;
 

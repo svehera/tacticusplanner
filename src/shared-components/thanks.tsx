@@ -95,6 +95,7 @@ export const ThankYouCard = ({
     const navigate = useNavigate();
     return (
         <Card
+            variant="outlined"
             onClick={() => navigate(isMobile ? '/mobile/ty' : '/ty')}
             sx={{
                 opacity: hide ? 0 : 1,

@@ -89,6 +89,24 @@ export class GoalsService {
                     secondaryStart: unit.secondaryAbilityLevel,
                     secondaryEnd: g.secondAbilityLevel ?? unit.secondaryAbilityLevel,
                     upgradesRarity: g.upgradesRarity ?? [],
+                    rarity: unit.rarity,
+                    stars: unit.stars,
+                    shards: unit.shards,
+                    ...base,
+                };
+                return result;
+            }
+
+            if (g.type === PersonalGoalType.Ascend) {
+                const result: ICharacterAscendGoal = {
+                    type: PersonalGoalType.Ascend,
+                    rarityStart: unit.rarity,
+                    rarityEnd: g.targetRarity!,
+                    shards: unit.shards,
+                    starsStart: unit.stars,
+                    starsEnd: g.targetStars ?? rarityToStars[g.targetRarity!],
+                    onslaughtShards: g.shardsPerToken ?? 1,
+                    campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     ...base,
                 };
                 return result;

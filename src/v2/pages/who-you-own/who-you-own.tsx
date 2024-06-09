@@ -166,8 +166,14 @@ export const WhoYouOwn = () => {
                         saveChanges={updateMow}
                         isOpen={openEditMowDialog}
                         onClose={endEditUnit}
-                        showNextUnit={() => startEditNextUnit(editedMow)}
-                        showPreviousUnit={() => startEditPreviousUnit(editedMow)}
+                        showNextUnit={updatedMow => {
+                            updateMow(updatedMow);
+                            startEditNextUnit(editedMow);
+                        }}
+                        showPreviousUnit={updatedMow => {
+                            updateMow(updatedMow);
+                            startEditPreviousUnit(editedMow);
+                        }}
                     />
                 )}
             </CharactersViewContext.Provider>

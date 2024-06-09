@@ -345,6 +345,7 @@ const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style, play
 
     return (
         <Card
+            variant="outlined"
             style={style}
             onClick={onClick}
             sx={{

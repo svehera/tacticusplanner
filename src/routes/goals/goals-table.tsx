@@ -329,9 +329,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
         <div
             className="ag-theme-material"
             style={{
-                height: 50 + rows.length * 60,
+                height: 60 + rows.length * 60,
                 minHeight: 150,
-                maxHeight: 500,
                 width: '100%',
             }}>
             <AgGridReact

@@ -64,6 +64,7 @@ export const Home = () => {
                 <div>
                     <h3 style={{ textAlign: 'center' }}>Daily Raids</h3>
                     <Card
+                        variant="outlined"
                         onClick={() =>
                             navigate(isMobile ? dailyRaidsMenuItem.routeMobile : dailyRaidsMenuItem.routeWeb)
                         }
@@ -102,6 +103,7 @@ export const Home = () => {
                 <div>
                     <h3 style={{ textAlign: 'center' }}>{isEventStarted ? 'Ongoing ' : 'Upcoming '}Legendary Event</h3>
                     <Card
+                        variant="outlined"
                         onClick={() => navigate(isMobile ? nextLeMenuItem.routeMobile : nextLeMenuItem.routeWeb)}
                         sx={{
                             width: 350,
@@ -126,6 +128,7 @@ export const Home = () => {
                     <div>
                         <h3 style={{ textAlign: 'center' }}>Your Goals</h3>
                         <Card
+                            variant="outlined"
                             onClick={() => navigate(isMobile ? goalsMenuItem.routeMobile : goalsMenuItem.routeWeb)}
                             sx={{
                                 width: 350,

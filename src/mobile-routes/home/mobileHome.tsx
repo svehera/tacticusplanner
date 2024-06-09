@@ -1,7 +1,7 @@
 ﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Badge, Tooltip } from '@mui/material';
-import ViewSwitch from '../../shared-components/view-switch';
+import ThemeSwitch from '../../shared-components/theme-switch';
 import { UserMenu } from '../../shared-components/user-menu/user-menu';
 import { bmcLink, discordInvitationLink } from '../../models/constants';
 import CampaignIcon from '@mui/icons-material/Campaign';
@@ -40,7 +40,7 @@ export const MobileHome = () => {
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-                    <ViewSwitch />
+                    <ThemeSwitch />
                     <IconButton color="inherit" onClick={() => navigate('/mobile/faq')}>
                         <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
                     </IconButton>

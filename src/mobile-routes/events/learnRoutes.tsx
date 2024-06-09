@@ -10,6 +10,7 @@ export const LearnRoutes = () => {
         <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
             {learnSubMenu.map(item => (
                 <Card
+                    variant="outlined"
                     key={item.label}
                     onClick={() => navigate(item.routeMobile)}
                     sx={{

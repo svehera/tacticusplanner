@@ -14,6 +14,7 @@ export const PlanRoutes = () => {
         <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
             {[goalsMenuItem, dailyRaidsMenuItem].map(menuItem => (
                 <Card
+                    variant="outlined"
                     key={menuItem.label}
                     onClick={() => navigate(menuItem.routeMobile)}
                     sx={{
@@ -31,6 +32,7 @@ export const PlanRoutes = () => {
             ))}
 
             <Card
+                variant="outlined"
                 onClick={() => navigate('guildWar')}
                 sx={{
                     width: 350,
@@ -53,6 +55,7 @@ export const PlanRoutes = () => {
             </Card>
 
             <Card
+                variant="outlined"
                 onClick={() => navigate('lre')}
                 sx={{
                     width: 350,

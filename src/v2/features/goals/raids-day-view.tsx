@@ -12,6 +12,7 @@ interface Props {
 export const RaidsDayView: React.FC<Props> = ({ day, title }) => {
     return (
         <Card
+            variant="outlined"
             sx={{
                 minWidth: 300,
             }}>

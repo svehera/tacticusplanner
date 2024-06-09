@@ -278,7 +278,7 @@ export class UpgradesService {
 
             return {
                 goalId: goal.goalId,
-                unitId: goal.unitName,
+                unitId: goal.unitId,
                 label: goal.unitName,
                 upgradeRanks,
                 baseUpgradesTotal,
@@ -500,7 +500,7 @@ export class UpgradesService {
 
             combinedUpgrade.locations = orderBy(
                 combinedUpgrade.locations,
-                ['isSelected', 'energyPerItem', 'expectedGold'],
+                ['isSelected', 'energyPerItem', 'nodeNumber'],
                 ['desc', 'asc', 'desc']
             );
         }
@@ -695,7 +695,11 @@ export class UpgradesService {
             }
 
             const locations = upgradeLocationsShort[upgrade.material] ?? [];
-            const locationsComposed = locations.map(location => CampaignsService.campaignsComposed[location]);
+            const locationsComposed = orderBy(
+                locations.map(location => CampaignsService.campaignsComposed[location]),
+                ['dropRate', 'nodeNumber'],
+                ['desc', 'desc']
+            );
 
             result[upgradeName] = {
                 id: upgrade.material,
@@ -820,6 +824,7 @@ export class UpgradesService {
                 const estimate = this.getUpgradeEstimate(upgrade, requiredCount, acquiredCount);
 
                 estimate.relatedCharacters = [goal.unitName];
+                estimate.relatedGoals = [goal.goalId];
                 goalUpgrades.push(estimate);
             }
 

@@ -11,7 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { bmcLink, discordInvitationLink, isTabletOrMobileMediaQuery } from './models/constants';
 import { usePopUpControls } from './hooks/pop-up-controls';
 import { UserMenu } from './shared-components/user-menu/user-menu';
-import ViewSwitch from './shared-components/view-switch';
+import ThemeSwitch from './shared-components/theme-switch';
 import { AppBarSubMenu } from './app-bar-sub-menu';
 
 import { StoreContext } from './reducers/store.provider';
@@ -164,7 +164,7 @@ const TopAppBar = () => {
                         <IconButton color="inherit" onClick={() => navigate('./faq')}>
                             <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
                         </IconButton>
-                        <ViewSwitch />
+                        <ThemeSwitch />
                         <Button
                             id="basic-button"
                             aria-controls={navigationMenuControls.open ? 'basic-menu' : undefined}

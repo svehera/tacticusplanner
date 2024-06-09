@@ -379,6 +379,7 @@ export interface ILegendaryEventData {
 }
 
 export interface IViewPreferences {
+    theme: 'light' | 'dark';
     showAlpha: boolean;
     showBeta: boolean;
     showGamma: boolean;

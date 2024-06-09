@@ -129,14 +129,12 @@ export const Goals = () => {
                 const goalEstimate = estimatedUpgradesTotal.byCharactersPriority.find(x => x.goalId === goal.goalId);
                 const firstFarmDay = estimatedUpgradesTotal.upgradesRaids.findIndex(x => {
                     const relatedGoals = x.raids.flatMap(raid => raid.relatedGoals);
-                    const relatedCharacters = x.raids.flatMap(raid => raid.relatedCharacters);
-                    return relatedGoals.includes(goal.goalId) && relatedCharacters.includes(goal.unitId);
+                    return relatedGoals.includes(goal.goalId);
                 });
 
                 const daysTotal = estimatedUpgradesTotal.upgradesRaids.filter(x => {
                     const relatedGoals = x.raids.flatMap(raid => raid.relatedGoals);
-                    const relatedCharacters = x.raids.flatMap(raid => raid.relatedCharacters);
-                    return relatedGoals.includes(goal.goalId) && relatedCharacters.includes(goal.unitId);
+                    return relatedGoals.includes(goal.goalId);
                 }).length;
 
                 if (goal.type === PersonalGoalType.UpgradeRank) {

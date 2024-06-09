@@ -8,6 +8,7 @@ import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
 import InfoIcon from '@mui/icons-material/Info';
 import { ICharacterUpgradeEstimate } from 'src/v2/features/goals/goals.models';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
+import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 
 interface Props {
     rows: ICharacterUpgradeEstimate[];
@@ -179,16 +180,18 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                             const { data } = params;
                             if (data) {
                                 return (
-                                    <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                                    <div className="flex-box gap5 wrap">
                                         {data.locations
                                             .filter(x => x.isSelected)
                                             .map(location => (
-                                                <li key={location.id}>
-                                                    <span>{location.campaign}</span>{' '}
-                                                    <span className="bold">{location.nodeNumber}</span>
-                                                </li>
+                                                <CampaignLocation
+                                                    key={location.id}
+                                                    location={location}
+                                                    short={true}
+                                                    unlocked={true}
+                                                />
                                             ))}
-                                    </ul>
+                                    </div>
                                 );
                             }
                         },
@@ -203,16 +206,18 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                             const { data } = params;
                             if (data) {
                                 return (
-                                    <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                                    <div className="flex-box gap5 wrap">
                                         {data.locations
                                             .filter(x => !x.isUnlocked)
                                             .map(location => (
-                                                <li key={location.id} style={{ color: 'red' }}>
-                                                    <span>{location.campaign}</span>{' '}
-                                                    <span className="bold">{location.nodeNumber}</span>
-                                                </li>
+                                                <CampaignLocation
+                                                    key={location.id}
+                                                    location={location}
+                                                    short={true}
+                                                    unlocked={false}
+                                                />
                                             ))}
-                                    </ul>
+                                    </div>
                                 );
                             }
                         },
@@ -229,16 +234,18 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                             const { data } = params;
                             if (data) {
                                 return (
-                                    <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+                                    <div className="flex-box gap5 wrap">
                                         {data.locations
                                             .filter(x => !x.isSelected && x.isUnlocked)
                                             .map(location => (
-                                                <li key={location.id}>
-                                                    <span>{location.campaign}</span>{' '}
-                                                    <span className="bold">{location.nodeNumber}</span>
-                                                </li>
+                                                <CampaignLocation
+                                                    key={location.id}
+                                                    location={location}
+                                                    short={true}
+                                                    unlocked={true}
+                                                />
                                             ))}
-                                    </ul>
+                                    </div>
                                 );
                             }
                         },

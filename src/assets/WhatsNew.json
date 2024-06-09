@@ -1,6 +1,57 @@
 ﻿{
-    "currentVersion": "1.5.6",
+    "currentVersion": "1.5.7",
     "releaseNotes": [
+        {
+            "version": "1.5.7",
+            "date": "June 9",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added dark mode",
+                    "images": [
+                        {
+                            "path": "t.png"
+                        },
+                        {
+                            "path": "d.png"
+                        },
+                        {
+                            "path": "m.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Sort by rarity now takes into account stars (Ginrikuzuma)"
+                },
+                {
+                    "text": "Added amount of shards required for MoW",
+                    "images": [
+                        {
+                            "path": "sh.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with Goals Detail list doesn't use all of your resolution space (Ginrikuzuma)"
+                },
+                {
+                    "text": "Fixed issue with Arrow Navigation Buttons do not save changes (Morpholine)"
+                },
+                {
+                    "text": "Fixed issue with Character's level is not auto-updated when editing rank or abilities via goal edit"
+                },
+                {
+                    "text": "Fixed issue with MoW doesn't show time taken for upgrades properly on the goals page (SeventhSun)"
+                },
+                {
+                    "text": "Fixed issue with recommended locations are not prioritizing higher nodes (Kinks)"
+                }
+            ]
+        },
         {
             "version": "1.5.6",
             "date": "June 4",
