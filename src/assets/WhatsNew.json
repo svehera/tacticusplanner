@@ -3,14 +3,29 @@
     "releaseNotes": [
         {
             "version": "1.5.7",
-            "date": "June X",
+            "date": "June 9",
             "type": "Update",
             "new": [
                 {
-                    "text": "Added dark mode"
+                    "text": "Added dark mode",
+                    "images": [
+                        {
+                            "path": "t.png"
+                        },
+                        {
+                            "path": "d.png"
+                        },
+                        {
+                            "path": "m.png"
+                        }
+                    ]
                 }
             ],
-            "minor": [],
+            "minor": [
+                {
+                    "text": "Sort by rarity now takes into account stars (Ginrikuzuma)"
+                }
+            ],
             "bugFixes": [
                 {
                     "text": "Fixed issue with Goals Detail list doesn't use all of your resolution space (Ginrikuzuma)"

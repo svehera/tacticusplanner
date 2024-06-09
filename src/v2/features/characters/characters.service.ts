@@ -76,7 +76,7 @@ export class CharactersService {
             case CharactersOrderBy.Rank:
                 return orderBy(units, ['rank'], ['desc']);
             case CharactersOrderBy.Rarity:
-                return orderBy(units, ['rarity'], ['desc']);
+                return orderBy(units, ['rarity', 'stars'], ['desc', 'desc']);
             case CharactersOrderBy.UnlockPercentage:
                 return orderBy(units, ['numberOfUnlocked'], ['asc']);
             default:
