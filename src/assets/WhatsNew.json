@@ -24,6 +24,14 @@
             "minor": [
                 {
                     "text": "Sort by rarity now takes into account stars (Ginrikuzuma)"
+                },
+                {
+                    "text": "Added amount of shards required for MoW",
+                    "images": [
+                        {
+                            "path": "sh.png"
+                        }
+                    ]
                 }
             ],
             "bugFixes": [
@@ -38,6 +46,9 @@
                 },
                 {
                     "text": "Fixed issue with MoW doesn't show time taken for upgrades properly on the goals page (SeventhSun)"
+                },
+                {
+                    "text": "Fixed issue with recommended locations are not prioritizing higher nodes (Kinks)"
                 }
             ]
         },

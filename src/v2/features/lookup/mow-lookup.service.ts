@@ -116,7 +116,7 @@ export class MowLookupService {
         return rawUpgrades.map(upgrade => UpgradesService.getUpgrade(upgrade)).filter(x => !!x);
     }
 
-    private static getRarityFromLevel(level: number): Rarity {
+    public static getRarityFromLevel(level: number): Rarity {
         if (level <= 8) {
             return Rarity.Common;
         }

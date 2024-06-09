@@ -270,8 +270,15 @@
     {
         "name": "May 2024 Referrals",
         "type": "TIE-62-TAT",
-        "thankYou": "Malithos",
+        "thankYou": "Malithos and Cordddyyy",
         "avatarIcon": "ref.webp",
+        "resourceDescription": "",
+        "resourceLink": ""
+    },
+    {
+        "name": "Harlequin",
+        "type": "Supporter",
+        "thankYou": "",
         "resourceDescription": "",
         "resourceLink": ""
     }

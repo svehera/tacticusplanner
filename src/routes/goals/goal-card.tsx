@@ -166,6 +166,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                 const params = `?mow=${goal.unitId}&pStart=${goal.primaryStart}&pEnd=${goal.primaryEnd}&sStart=${goal.secondaryStart}&sEnd=${goal.secondaryEnd}`;
                 const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
                 const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
+                const targetShards = ShardsService.getTargetShardsForMow(goal);
                 return (
                     <div>
                         <div className="flex-box gap10">
@@ -191,6 +192,12 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                                     ))}
                                 </div>
                             )}
+                        </div>
+                        <div>
+                            <b>
+                                {goal.shards} of {targetShards}
+                            </b>{' '}
+                            Shards
                         </div>
                         {goalEstimate.mowEstimate && (
                             <div style={{ padding: '10px 0' }}>

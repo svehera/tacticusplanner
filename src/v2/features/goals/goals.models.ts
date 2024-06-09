@@ -46,6 +46,10 @@ export interface ICharacterUpgradeMow extends ICharacterRaidGoalSelectBase {
     secondaryStart: number;
     secondaryEnd: number;
     upgradesRarity: Rarity[];
+
+    shards: number;
+    stars: RarityStars;
+    rarity: Rarity;
 }
 
 export interface ICharacterUpgradeAbilities extends ICharacterRaidGoalSelectBase {
