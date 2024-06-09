@@ -500,7 +500,7 @@ export class UpgradesService {
 
             combinedUpgrade.locations = orderBy(
                 combinedUpgrade.locations,
-                ['isSelected', 'energyPerItem', 'expectedGold'],
+                ['isSelected', 'energyPerItem', 'nodeNumber'],
                 ['desc', 'asc', 'desc']
             );
         }
@@ -695,7 +695,13 @@ export class UpgradesService {
             }
 
             const locations = upgradeLocationsShort[upgrade.material] ?? [];
-            const locationsComposed = locations.map(location => CampaignsService.campaignsComposed[location]);
+            const locationsComposed = orderBy(
+                locations.map(location => CampaignsService.campaignsComposed[location]),
+                ['dropRate', 'nodeNumber'],
+                ['desc', 'desc']
+            );
+
+            console.log(locationsComposed);
 
             result[upgradeName] = {
                 id: upgrade.material,
