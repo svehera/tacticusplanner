@@ -31,7 +31,7 @@ import {
 import { rarityStringToNumber } from 'src/models/constants';
 import { CampaignType, DailyRaidsStrategy, PersonalGoalType, Rank, Rarity, RarityString } from 'src/models/enums';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
-import { cloneDeep, groupBy, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
+import { cloneDeep, groupBy, mapValues, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
 
 import rankUpData from 'src/assets/rankUpData.json';
 import recipeData from 'src/v2/data/recipeData.json';
@@ -367,6 +367,7 @@ export class UpgradesService {
             energyLeft: 0,
             isBlocked: !selectedLocations.length && leftCount > 0,
             isFinished: leftCount === 0,
+            crafted: false,
         };
 
         if (estimate.isFinished || estimate.isBlocked) {
@@ -566,6 +567,52 @@ export class UpgradesService {
         return true;
     }
 
+    public static updateInventory(
+        inventory: Record<string, number>,
+        upgrades: Array<IBaseUpgrade | ICraftedUpgrade>
+    ): {
+        inventoryUpdate: Record<string, number>;
+        inventoryUpgrades: Array<IBaseUpgrade | ICraftedUpgrade>;
+    } {
+        const craftedGrouped = groupBy(upgrades.filter(x => x.crafted) as ICraftedUpgrade[], 'id');
+
+        const inventoryUpdate = mapValues(
+            groupBy(upgrades.filter(x => !x.crafted) as IBaseUpgrade[], 'id'),
+            x => x.length
+        );
+
+        for (const upgradeId in craftedGrouped) {
+            const inventoryValue = inventory[upgradeId] ?? 0;
+            const craftedUpgrades = craftedGrouped[upgradeId];
+            if (!inventoryValue) {
+                craftedUpgrades
+                    .flatMap(x => x.baseUpgrades)
+                    .forEach(x => {
+                        inventoryUpdate[x.id] = (inventoryUpdate[x.id] ?? 0) + x.count;
+                    });
+                continue;
+            }
+
+            if (inventoryValue >= craftedUpgrades.length) {
+                inventoryUpdate[upgradeId] = craftedUpgrades.length;
+            } else {
+                craftedUpgrades.splice(0, inventoryValue);
+                inventoryUpdate[upgradeId] = inventoryValue;
+
+                craftedUpgrades
+                    .flatMap(x => x.baseUpgrades)
+                    .forEach(x => {
+                        inventoryUpdate[x.id] = (inventoryUpdate[x.id] ?? 0) + x.count;
+                    });
+            }
+        }
+
+        return {
+            inventoryUpdate,
+            inventoryUpgrades: Object.keys(inventoryUpdate).map(upgradeId => this.getUpgrade(upgradeId)),
+        };
+    }
+
     public static getUpgrade(upgradeId: string): IBaseUpgrade | ICraftedUpgrade {
         return this.baseUpgradesData[upgradeId] ?? this.craftedUpgradesData[upgradeId];
     }
@@ -707,6 +754,7 @@ export class UpgradesService {
                 rarity: rarityStringToNumber[upgrade.rarity as RarityString],
                 locations: locationsComposed,
                 iconPath: upgrade.icon!,
+                crafted: false,
             };
         }
 
@@ -735,6 +783,7 @@ export class UpgradesService {
                 iconPath: upgrade.icon!,
                 baseUpgrades: recipeDetails.flatMap(x => x.baseUpgrades),
                 craftedUpgrades: recipeDetails.flatMap(x => x.craftedUpgrades),
+                crafted: true,
             };
         }
 

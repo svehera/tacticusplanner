@@ -19,13 +19,22 @@ export class MowLookupService {
     private static mowLevelUpCommon: IMowLevelUpgrade[] = mowCommonMaterial;
     private static mowUpgrades: IMowLevelUpgradesDic = mowUpgradesRaw;
 
-    public static getMaterialsList(mowId: string, mowLabel: string, mowAlliance: Alliance): IMowLevelMaterials[] {
+    public static getMaterialsList(
+        mowId: string,
+        mowLabel: string,
+        mowAlliance: Alliance,
+        levels: number[] = []
+    ): IMowLevelMaterials[] {
         const result: IMowLevelMaterials[] = [];
         const mowUpgrades = this.mowUpgrades[mowId] ?? [];
 
         for (const lvlUpgrade of this.mowLevelUpCommon) {
             const index = lvlUpgrade.lvl - 1;
             const actualLevel = lvlUpgrade.lvl + 1;
+            if (levels.length && !levels.includes(actualLevel)) {
+                continue;
+            }
+
             const primaryUpgrades = this.getUpgrades(mowUpgrades[index], 'primary');
             const secondaryUpgrades = this.getUpgrades(mowUpgrades[index], 'secondary');
 

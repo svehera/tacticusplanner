@@ -212,6 +212,7 @@ export interface IBaseUpgrade {
     rarity: Rarity;
     iconPath: string;
     locations: ICampaignBattleComposed[];
+    crafted: false;
 }
 
 export interface ICombinedUpgrade extends IBaseUpgrade {
@@ -236,14 +237,6 @@ export interface ICharacterUpgradeEstimate extends IBaseUpgrade {
     isFinished: boolean;
 }
 
-export interface IUpgradeEstimate extends IBaseUpgrade {
-    daysTotal: number;
-    energyTotal: number;
-    raidsTotal: number;
-
-    requiredCount: number;
-}
-
 export interface ICraftedUpgrade {
     id: string;
     label: string;
@@ -251,6 +244,7 @@ export interface ICraftedUpgrade {
     iconPath: string;
     baseUpgrades: IUpgradeRecipe[];
     craftedUpgrades: IUpgradeRecipe[];
+    crafted: true;
 }
 
 export interface IUpgradeRecipe {

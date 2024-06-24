@@ -23,9 +23,7 @@ export const UpgradeImage = ({
 
         return (
             <AccessibleTooltip title={tooltip ?? material}>
-                <div
-                    style={{ width: size ?? 50, height: size ?? 50 }}
-                    className={Rarity[rarity]?.toLowerCase() + '-upgrade upgrade'}>
+                <div style={{ width: size ?? 50, height: size ?? 50 }} className={'upgrade'}>
                     <img
                         loading={'lazy'}
                         style={{}}

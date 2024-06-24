@@ -25,6 +25,8 @@ import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
+import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
+import { MowUpgradesUpdate } from 'src/v2/features/characters/components/mow-upgrades-update';
 
 interface Props {
     isOpen: boolean;
@@ -34,7 +36,7 @@ interface Props {
 }
 
 export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit }) => {
-    const { goals, campaignsProgress } = useContext(StoreContext);
+    const { goals, campaignsProgress, inventory } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const [openDialog, setOpenDialog] = React.useState(isOpen);
@@ -267,6 +269,22 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                         upgradesRarity: values,
                                     }));
                                 }}
+                            />
+
+                            <MowUpgrades
+                                mowId={unit.id}
+                                alliance={unit.alliance}
+                                primaryLevel={form.primaryStart}
+                                secondaryLevel={form.secondaryStart}
+                            />
+                            <MowUpgradesUpdate
+                                mowId={unit.id}
+                                inventory={inventory.upgrades}
+                                currPrimaryLevel={form.primaryStart}
+                                currSecondaryLevel={form.secondaryStart}
+                                originalPrimaryLevel={unit.primaryAbilityLevel}
+                                originalSecondaryLevel={unit.secondaryAbilityLevel}
+                                // inventoryDecrement={inventoryUpdate}
                             />
                         </>
                     )}
