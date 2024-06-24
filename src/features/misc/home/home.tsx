@@ -9,13 +9,13 @@ import { isMobile } from 'react-device-detect';
 import { sum } from 'lodash';
 import { MiscIcon } from '../../../shared-components/misc-icon';
 
-import lre from 'src/assets/legendary-events/Kharn.json';
+import lre from 'src/assets/legendary-events/Ragnar.json';
 import { PersonalGoalType } from 'src/models/enums';
 
 export const Home = () => {
     const navigate = useNavigate();
     const { goals, dailyRaids } = useContext(StoreContext);
-    const nextLeMenuItem = menuItemById['kharn'];
+    const nextLeMenuItem = menuItemById['ragnar'];
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
     const eventsCalendarUrl = 'https://tacticucplannerstorage.blob.core.windows.net/files/events-calendar.png';

@@ -2,9 +2,9 @@
     "id": 7,
     "name": "Kharn",
     "wikiLink": "https://tacticus.fandom.com/wiki/LE-Kharn",
-    "eventStage": 1,
-    "nextEventDate": "June 16",
-    "nextEventDateUtc": "Sun, 16 June 2024 00:00:00 GMT",
+    "eventStage": 2,
+    "nextEventDate": "TBA",
+    "nextEventDateUtc": "",
     "regularMissions": [
         "Play one Legendary Event Battle, Deal 1000 damage",
         "Defeat 30 Ultramarines",
