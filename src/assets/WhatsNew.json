@@ -3,7 +3,7 @@
     "releaseNotes": [
         {
             "version": "1.5.8",
-            "date": "June 25",
+            "date": "June 26",
             "type": "Update",
             "new": [
                 {
@@ -32,6 +32,9 @@
             "bugFixes": [
                 {
                     "text": "Fixed Corrodius \"No psychic\" issue in Kharn LRE"
+                },
+                {
+                    "text": "Fixed issue when typing in the Notes panel in LRE -> My Progress crashes the app (SeventhSun)"
                 }
             ]
         },
