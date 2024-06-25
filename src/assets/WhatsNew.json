@@ -22,6 +22,10 @@
                 },
                 {
                     "text": "Adjusted rarity caps for the Guild War"
+                },
+                {
+                    "text": "Added datamined LRE for Blood Angels???. *Some data can change",
+                    "route": "plan/le/mephiston"
                 }
             ],
             "minor": [],

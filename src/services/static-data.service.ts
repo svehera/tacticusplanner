@@ -16,6 +16,7 @@ import aunshi from '../assets/legendary-events/Aunshi.json';
 import ragnar from '../assets/legendary-events/Ragnar.json';
 import vitruvius from '../assets/legendary-events/Vitruvius.json';
 import kharn from '../assets/legendary-events/Kharn.json';
+import mephiston from '../assets/legendary-events/Mephiston.json';
 
 import {
     ICampaignBattle,
@@ -90,6 +91,14 @@ export class StaticDataService {
     };
 
     static readonly legendaryEvents = [
+        {
+            id: mephiston.id,
+            name: mephiston.name,
+            stage: mephiston.eventStage,
+            nextEventDate: mephiston.nextEventDate,
+            mobileRoute: '/mobile/plan/le/mephiston',
+            icon: 'unset.png',
+        },
         {
             id: kharn.id,
             name: kharn.name,

@@ -3,6 +3,7 @@
 import ragnar from '../assets/legendary-events/Ragnar.json';
 import vitruvius from '../assets/legendary-events/Vitruvius.json';
 import kharn from '../assets/legendary-events/Kharn.json';
+import mephiston from '../assets/legendary-events/Mephiston.json';
 
 import ListIcon from '@mui/icons-material/List';
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -82,6 +83,12 @@ export const menuItemById = {
         '/plan/le/kharn',
         `Kharn ${kharn.eventStage}/3 (${kharn.nextEventDate})`
     ),
+    mephiston: new MenuItemTP(
+        'Blood Angel???',
+        <CharacterImage icon={'unset.png'} imageSize={24} />,
+        '/plan/le/mephiston',
+        `Blood Angel??? ${mephiston.eventStage}/3 (${mephiston.nextEventDate})`
+    ),
     characters: new MenuItemTP('Characters', <Diversity3Icon />, '/learn/characters'),
     upgrades: new MenuItemTP('Upgrades', <ListIcon />, '/learn/upgrades'),
     rankLookup: new MenuItemTP('Rank Lookup', <MilitaryTechIcon />, '/learn/rankLookup'),
@@ -119,6 +126,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
     ]),
     new MenuItemTP('LRE', menuItemById['leMasterTable'].icon, '', '', '', [
         menuItemById['leMasterTable'],
+        menuItemById['mephiston'],
         menuItemById['kharn'],
         menuItemById['vitruvius'],
         menuItemById['ragnar'],
@@ -137,6 +145,7 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['offense'],
     menuItemById['zones'],
     menuItemById['leMasterTable'],
+    menuItemById['mephiston'],
     menuItemById['kharn'],
     menuItemById['ragnar'],
     menuItemById['vitruvius'],

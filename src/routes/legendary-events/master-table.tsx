@@ -36,6 +36,7 @@ import { isMobile } from 'react-device-detect';
 
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>([
+        LegendaryEventEnum.Mephiston,
         LegendaryEventEnum.Kharn,
         LegendaryEventEnum.Ragnar,
         LegendaryEventEnum.Vitruvius,
@@ -362,10 +363,17 @@ export const MasterTable = () => {
                         multiple
                         input={<OutlinedInput label="Legendary Events" />}
                         renderValue={selected => selected.map(x => LegendaryEventEnum[x]).join(', ')}>
+                        <MenuItem value={LegendaryEventEnum.Mephiston}>
+                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Mephiston) > -1} />
+                            <ListItemIcon>
+                                <CharacterImage icon={'unset.png'} imageSize={30} />
+                            </ListItemIcon>
+                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Mephiston]} />
+                        </MenuItem>
                         <MenuItem value={LegendaryEventEnum.Kharn}>
                             <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Kharn) > -1} />
                             <ListItemIcon>
-                                <CharacterImage icon={'unset.png'} imageSize={30} />
+                                <CharacterImage icon={'kharn.png'} imageSize={30} />
                             </ListItemIcon>
                             <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Kharn]} />
                         </MenuItem>
