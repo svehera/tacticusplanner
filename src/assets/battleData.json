@@ -6513,5 +6513,123 @@
         "slots": 4,
         "reward": "Yazaghor",
         "expectedGold": 53
+    },
+    "SHE25": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 25,
+        "slots": 4,
+        "reward": "Beast Hide",
+        "expectedGold": 53
+    },
+    "SHE26": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 26,
+        "slots": 3,
+        "reward": "Dark Hood",
+        "expectedGold": 53
+    },
+    "SHE27": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 27,
+        "slots": 4,
+        "reward": "Hypermaterial Shifter",
+        "expectedGold": 53
+    },
+    "SHE28": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 28,
+        "reward": "Round of Ammo",
+        "expectedGold": 53
+    },
+    "SHE29": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 29,
+        "slots": 3,
+        "reward": "Frag Grenade",
+        "expectedGold": 53
+    },
+    "SHE30": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 30,
+        "reward": "Mjod",
+        "expectedGold": 53
+    },
+    "SHE31": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 31,
+        "reward": "Stone Guardian Fragment",
+        "expectedGold": 53
+    },
+    "SHE32": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 32,
+        "reward": "Thaumachus",
+        "expectedGold": 53
+    },
+    "SHE33": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 33,
+        "reward": "Cloak",
+        "expectedGold": 53
+    },
+    "SHE34": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 34,
+        "reward": "Air Purificator",
+        "expectedGold": 53
+    },
+    "SHE35": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 35,
+        "slots": 4,
+        "reward": "Valuable Fabric",
+        "expectedGold": 53
+    },
+    "SHE36": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 36,
+        "slots": 3,
+        "reward": "Tainted Text",
+        "expectedGold": 53
+    },
+    "SHE37": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 37,
+        "reward": "Inferno Bolts",
+        "expectedGold": 53
+    },
+    "SHE38": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 38,
+        "reward": "Ritual Implements",
+        "expectedGold": 53
+    },
+    "SHE39": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 39,
+        "reward": "Blessing of Tzeentch",
+        "expectedGold": 53
+    },
+    "SHE40": {
+        "campaign": "Saim-Hann Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 40,
+        "reward": "Ahriman",
+        "expectedGold": 53
     }
 }

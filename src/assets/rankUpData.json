@@ -2338,6 +2338,144 @@
             "Monstrous Defences"
         ]
     },
+    "Baraqiel": {
+        "Stone I": [
+            "Minor Bionic Enhancement",
+            "The Iron Phoenix",
+            "Basic Auxiliary Core",
+            "Weapon Anointment Oils",
+            "Adamantium Ore",
+            "Fine Purity Seal"
+        ],
+        "Stone II": [
+            "Wires",
+            "Minor Bionic Enhancement",
+            "Locator Beacon",
+            "Blessed Weapon Oils",
+            "Purity Seal",
+            "Purity Seal"
+        ],
+        "Stone III": [
+            "Reinforced Cables",
+            "Bionic Enhancement",
+            "Vox-Caster",
+            "Weapon Parts",
+            "Rebreather",
+            "Oath Seal"
+        ],
+        "Iron I": [
+            "Bionic Enhancement",
+            "Mission Objective",
+            "Locator Beacon",
+            "Plasma Cell",
+            "Oath Seal",
+            "Blessed Ceramite"
+        ],
+        "Iron II": [
+            "Reinforced Cables",
+            "Battle Plan",
+            "Adamantium Blades",
+            "Divinator Class Auspex",
+            "Artificer Tasset Plate",
+            "Oath Seal"
+        ],
+        "Iron III": [
+            "Electromantic Cable Bundle",
+            "The Gold Phoenix",
+            "Chapter Pendant",
+            "Plasma Cell Bundle",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Key of Ignorance",
+            "The Phoenix Ascendant",
+            "Prey-Sight",
+            "Classified Data-Slate",
+            "Blessed Purity Seal",
+            "Ceramite Bar"
+        ],
+        "Bronze II": [
+            "Key of Knowledge",
+            "Advanced Bionics",
+            "Bionic Eye",
+            "Plasma Cell Crate",
+            "Dark Hood",
+            "Blessed Purity Seal"
+        ],
+        "Bronze III": [
+            "Battle Scar",
+            "Mars-Pattern Bionics",
+            "Bolts of Judgement",
+            "Sanctified Weapon Oils",
+            "Calibanite Hood",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Key of Knowledge",
+            "Terminator Honours",
+            "Bolts of Judgement",
+            "Bionic Neural Pathways",
+            "Calibanite Hood",
+            "Ceramite Sheet"
+        ],
+        "Silver II": [
+            "Stone Guardian Fragment",
+            "Greater Reliquary of Protection",
+            "Bolts of Furious Vengeance",
+            "Plasma Cell Crate",
+            "Calibanite Hood",
+            "Grand Purity Seal"
+        ],
+        "Silver III": [
+            "Key of Knowledge",
+            "Grand Strategy",
+            "Bolts of Judgement",
+            "Digital Weapons",
+            "Purity Seal of the Primarch",
+            "Ceramite Plates"
+        ],
+        "Gold I": [
+            "Key of Achrabael",
+            "Relic Bionic Enhancement",
+            "Archeotech Bionics",
+            "Plasma Coil",
+            "Inner Circle Hood",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold II": [
+            "Perfidious Relic of the Unforgiven",
+            "Legendary Reliquary of Protection",
+            "Bolts of Furious Vengeance",
+            "Digital Weapons",
+            "Inner Circle Hood",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold III": [
+            "Key of Achrabael",
+            "Relic Bionic Enhancement",
+            "Arbiter's Gaze",
+            "Powered Blade",
+            "Shroud of Heroes",
+            "Seal of the Emperor's Protection"
+        ],
+        "Diamond I": [
+            "Perfidious Relic of the Unforgiven",
+            "Grand Strategy",
+            "Arbiter's Gaze",
+            "Relic Auxiliary Core",
+            "Shroud of Heroes",
+            "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Perfidious Relic of the Unforgiven",
+            "Superaugmented Constitution",
+            "Arbiter's Gaze",
+            "Superaugmented Strength",
+            "Shroud of Heroes",
+            "Superaugmented Defences"
+        ]
+    },
     "Sarquael": {
         "Stone I": [
             "Wires",

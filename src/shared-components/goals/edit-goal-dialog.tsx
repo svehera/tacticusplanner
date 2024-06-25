@@ -4,7 +4,7 @@ import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/mater
 import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
-import { ICampaignsProgress, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
+import { ICampaignsProgress } from 'src/models/interfaces';
 import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { enqueueSnackbar } from 'notistack';
@@ -42,7 +42,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     const [openDialog, setOpenDialog] = React.useState(isOpen);
 
     const [form, setForm] = useState<CharacterRaidGoalSelect>(goal);
-    const [inventoryUpdate, setInventoryUpdate] = useState<IMaterialRecipeIngredientFull[]>([]);
+    const [inventoryUpdate, setInventoryUpdate] = useState<Array<{ id: string; count: number }>>([]);
     const handleClose = (updatedGoal?: CharacterRaidGoalSelect | undefined): void => {
         if (updatedGoal) {
             dispatch.goals({ type: 'Update', goal: updatedGoal });
@@ -284,7 +284,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 currSecondaryLevel={form.secondaryStart}
                                 originalPrimaryLevel={unit.primaryAbilityLevel}
                                 originalSecondaryLevel={unit.secondaryAbilityLevel}
-                                // inventoryDecrement={inventoryUpdate}
+                                inventoryDecrement={value => {
+                                    setInventoryUpdate(Object.entries(value).map(([id, count]) => ({ id, count })));
+                                }}
                             />
                         </>
                     )}
