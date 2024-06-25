@@ -4,7 +4,7 @@ import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/mater
 import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
-import { ICampaignsProgress, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
+import { ICampaignsProgress } from 'src/models/interfaces';
 import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { enqueueSnackbar } from 'notistack';
@@ -25,6 +25,8 @@ import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
+import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
+import { MowUpgradesUpdate } from 'src/v2/features/characters/components/mow-upgrades-update';
 
 interface Props {
     isOpen: boolean;
@@ -34,13 +36,13 @@ interface Props {
 }
 
 export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit }) => {
-    const { goals, campaignsProgress } = useContext(StoreContext);
+    const { goals, campaignsProgress, inventory } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const [openDialog, setOpenDialog] = React.useState(isOpen);
 
     const [form, setForm] = useState<CharacterRaidGoalSelect>(goal);
-    const [inventoryUpdate, setInventoryUpdate] = useState<IMaterialRecipeIngredientFull[]>([]);
+    const [inventoryUpdate, setInventoryUpdate] = useState<Array<{ id: string; count: number }>>([]);
     const handleClose = (updatedGoal?: CharacterRaidGoalSelect | undefined): void => {
         if (updatedGoal) {
             dispatch.goals({ type: 'Update', goal: updatedGoal });
@@ -266,6 +268,24 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                         ...curr,
                                         upgradesRarity: values,
                                     }));
+                                }}
+                            />
+
+                            <MowUpgrades
+                                mowId={unit.id}
+                                alliance={unit.alliance}
+                                primaryLevel={form.primaryStart}
+                                secondaryLevel={form.secondaryStart}
+                            />
+                            <MowUpgradesUpdate
+                                mowId={unit.id}
+                                inventory={inventory.upgrades}
+                                currPrimaryLevel={form.primaryStart}
+                                currSecondaryLevel={form.secondaryStart}
+                                originalPrimaryLevel={unit.primaryAbilityLevel}
+                                originalSecondaryLevel={unit.secondaryAbilityLevel}
+                                inventoryDecrement={value => {
+                                    setInventoryUpdate(Object.entries(value).map(([id, count]) => ({ id, count })));
                                 }}
                             />
                         </>

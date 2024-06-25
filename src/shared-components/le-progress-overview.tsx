@@ -11,6 +11,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getCompletionRateColor } from '../shared-logic/functions';
 import { Tooltip } from '@mui/material';
 import { LeProgressOverviewMissions } from 'src/shared-components/le-progress-overview-missions';
+import { useDebounceCallback } from 'usehooks-ts';
 
 export const LeProgressOverview = ({
     progress,
@@ -23,6 +24,7 @@ export const LeProgressOverview = ({
     notesChange: (value: string) => void;
     progressChange: (value: ILegendaryEventProgress) => void;
 }) => {
+    const debounced = useDebounceCallback(notesChange, 500);
     const [accordionExpanded, setAccordionExpanded] = React.useState<string | false>(false);
 
     const handleAccordionChange = (section: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -63,8 +65,8 @@ export const LeProgressOverview = ({
                         placeholder="Notes"
                         multiline
                         helperText={progress.notes.length + '/1000'}
-                        value={progress.notes}
-                        onChange={event => notesChange(event.target.value.slice(0, 1000))}
+                        defaultValue={progress.notes}
+                        onChange={event => debounced(event.target.value.slice(0, 1000))}
                     />
                 </AccordionDetails>
             </Accordion>

@@ -1,8 +1,8 @@
 ﻿{
-    "id": 7,
-    "name": "Kharn",
-    "wikiLink": "https://tacticus.fandom.com/wiki/LE-Kharn",
-    "eventStage": 2,
+    "id": 8,
+    "name": "Blood Angel ???",
+    "wikiLink": "https://tacticus.fandom.com/wiki/LE-Mephiston",
+    "eventStage": 1,
     "nextEventDate": "TBA",
     "nextEventDateUtc": "",
     "regularMissions": [
@@ -32,29 +32,29 @@
     "alpha": {
         "name": "Alpha (No Imperials)",
         "enemies": {
-            "label": "Ultramarines & Astra Militarum",
-            "link": "https://tacticus.fandom.com/wiki/Ultramarines#NPC_Units"
-        },
-        "killPoints": 27,
-        "battlesPoints": [38, 40, 44, 51, 55, 51, 45, 48, 53, 47, 46, 54, 54, 60]
-    },
-    "beta": {
-        "name": "Beta (No Tyranids)",
-        "enemies": {
-            "label": "Tyranids",
-            "link": "https://tacticus.fandom.com/wiki/Tyranids#NPC_Units"
+            "label": "Astra Militarum",
+            "link": "https://tacticus.fandom.com/wiki/Astra_Militarum#NPC_Units"
         },
         "killPoints": 35,
-        "battlesPoints": [34, 36, 41, 46, 43, 41, 48, 41, 58, 44, 42, 44, 54, 58]
+        "battlesPoints": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    "beta": {
+        "name": "Beta (No Chaos)",
+        "enemies": {
+            "label": "Death Guard",
+            "link": "https://tacticus.fandom.com/wiki/Death_Guard#NPC_Units"
+        },
+        "killPoints": 37,
+        "battlesPoints": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     },
     "gamma": {
-        "name": "Gamma (No Thousand Sons)",
+        "name": "Gamma (Imperial Only)",
         "enemies": {
-            "label": "Thousand Sons",
-            "link": "https://tacticus.fandom.com/wiki/Thousand_Sons#NPC_Units"
+            "label": "Aeldari",
+            "link": "https://tacticus.fandom.com/wiki/Aeldari#NPC_Units"
         },
-        "killPoints": 39,
-        "battlesPoints": [26, 38, 43, 40, 52, 35, 47, 57, 36, 41, 40, 43, 51, 53]
+        "killPoints": 34,
+        "battlesPoints": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     },
     "pointsMilestones": [
         {

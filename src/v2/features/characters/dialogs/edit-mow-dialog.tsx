@@ -17,6 +17,8 @@ import { NumberInput } from 'src/v2/components/inputs/number-input';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { StarsSelect } from 'src/shared-components/stars-select';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
+import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
+import { MowUpgradesUpdate } from 'src/v2/features/characters/components/mow-upgrades-update';
 
 interface Props {
     mow: IMow;
@@ -25,6 +27,8 @@ interface Props {
     onClose: () => void;
     showNextUnit?: (mow: IMow) => void;
     showPreviousUnit?: (mow: IMow) => void;
+    inventory: Record<string, number>;
+    inventoryUpdate: (value: Record<string, number>) => void;
 }
 
 export const EditMowDialog: React.FC<Props> = ({
@@ -34,6 +38,8 @@ export const EditMowDialog: React.FC<Props> = ({
     isOpen,
     showPreviousUnit,
     showNextUnit,
+    inventory,
+    inventoryUpdate,
 }) => {
     const [editedMow, setEditedMow] = useState(() => ({ ...mow }));
 
@@ -128,6 +134,23 @@ export const EditMowDialog: React.FC<Props> = ({
                                     label="Secondary Ability"
                                     value={editedMow.secondaryAbilityLevel}
                                     valueChange={value => handleInputChange('secondaryAbilityLevel', value)}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <MowUpgrades
+                                    mowId={editedMow.id}
+                                    alliance={editedMow.alliance}
+                                    primaryLevel={editedMow.primaryAbilityLevel}
+                                    secondaryLevel={editedMow.secondaryAbilityLevel}
+                                />
+                                <MowUpgradesUpdate
+                                    mowId={editedMow.id}
+                                    inventory={inventory}
+                                    currPrimaryLevel={editedMow.primaryAbilityLevel}
+                                    currSecondaryLevel={editedMow.secondaryAbilityLevel}
+                                    originalPrimaryLevel={mow.primaryAbilityLevel}
+                                    originalSecondaryLevel={mow.secondaryAbilityLevel}
+                                    inventoryDecrement={inventoryUpdate}
                                 />
                             </Grid>
                         </>

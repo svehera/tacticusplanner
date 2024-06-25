@@ -1010,7 +1010,6 @@
         "Equipment2": "Defense",
         "Equipment3": "Crit Booster",
         "Traits": ["Contagions of Nurgle", "Resilient"],
-        "Passive Ability": "Psychic",
         "Number": 35,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
@@ -1914,5 +1913,29 @@
         "RequiredInCampaign": false,
         "Icon": "kharn.webp",
         "ReleaseRarity": 6
+    },
+    {
+        "Name": "Baraqiel",
+        "Title": "Deathwing Terminator",
+        "Full Name": "Baraqiel",
+        "Short Name": "Baraqiel",
+        "Faction": "Dark Angels",
+        "Alliance": "Imperial",
+        "Health": 8421,
+        "Damage": 1686,
+        "Armour": 2221,
+        "Initial rarity": "Uncommon",
+        "Melee Damage": "Power",
+        "Active Ability": "Plasma",
+        "Melee Hits": 3,
+        "Movement": 2,
+        "Equipment1": "Crit",
+        "Equipment2": "Block",
+        "Equipment3": "Block Booster",
+        "Traits": ["Terminator Armour", "Deep Strike", "Heavy Weapon", "Crushing Strike"],
+        "Number": 74,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "unset.webp"
     }
 ]

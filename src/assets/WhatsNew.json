@@ -1,6 +1,43 @@
 ﻿{
-    "currentVersion": "1.5.7",
+    "currentVersion": "1.5.8",
     "releaseNotes": [
+        {
+            "version": "1.5.8",
+            "date": "June 26",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added possibility to update inventory after changing MoW abilities levels",
+                    "images": [
+                        {
+                            "path": "mow.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added new Dark Angels character - Baraqiel, Deathwing Terminator, unlockable in the ‘Inner Circle’ event, starting on June 30"
+                },
+                {
+                    "text": "Added new Campaign Battles: ‘Elite Saim-Hann’ Part 4 and ‘Elite Saim-Hann’ Part 5"
+                },
+                {
+                    "text": "Adjusted rarity caps for the Guild War"
+                },
+                {
+                    "text": "Added datamined LRE for Blood Angels???. *Some data can change",
+                    "route": "plan/le/mephiston"
+                }
+            ],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed Corrodius \"No psychic\" issue in Kharn LRE"
+                },
+                {
+                    "text": "Fixed issue when typing in the Notes panel in LRE -> My Progress crashes the app (SeventhSun)"
+                }
+            ]
+        },
         {
             "version": "1.5.7",
             "date": "June 9",

@@ -29,7 +29,7 @@ import { UnitType } from 'src/v2/features/characters/units.enums';
 import { EditMowDialog } from 'src/v2/features/characters/dialogs/edit-mow-dialog';
 
 export const WhoYouOwn = () => {
-    const { characters: charactersDefault, mows, viewPreferences } = useContext(StoreContext);
+    const { characters: charactersDefault, mows, viewPreferences, inventory } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const navigate = useNavigate();
 
@@ -42,6 +42,7 @@ export const WhoYouOwn = () => {
     const [nameFilter, setNameFilter] = useState<string | null>(null);
     const [openCharacterItemDialog, setOpenCharacterItemDialog] = React.useState(false);
     const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
+    const [editedInventory, setEditedInventory] = React.useState<Record<string, number>>({});
     const [openEditMowDialog, setOpenEditMowDialog] = React.useState(false);
     const [editedMow, setEditedMow] = React.useState<IMow | null>(null);
 
@@ -82,6 +83,10 @@ export const WhoYouOwn = () => {
 
     const updateMow = (mow: IMow) => {
         endEditUnit();
+        dispatch.inventory({
+            type: 'DecrementUpgradeQuantity',
+            upgrades: Object.entries(editedInventory).map(([id, count]) => ({ id, count })),
+        });
         dispatch.mows({ type: 'Update', mow });
     };
 
@@ -166,6 +171,7 @@ export const WhoYouOwn = () => {
                         saveChanges={updateMow}
                         isOpen={openEditMowDialog}
                         onClose={endEditUnit}
+                        inventory={inventory.upgrades}
                         showNextUnit={updatedMow => {
                             updateMow(updatedMow);
                             startEditNextUnit(editedMow);
@@ -174,6 +180,7 @@ export const WhoYouOwn = () => {
                             updateMow(updatedMow);
                             startEditPreviousUnit(editedMow);
                         }}
+                        inventoryUpdate={setEditedInventory}
                     />
                 )}
             </CharactersViewContext.Provider>

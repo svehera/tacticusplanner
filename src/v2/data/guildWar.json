@@ -2,8 +2,8 @@
     "bfLevels": [1, 2, 3, 4, 5],
     "sectionDifficulty": ["Trooper", "Veteran", "Elite", "Hero"],
     "rarityCaps": {
-        "Trooper": ["E", "R", "U", "U", "U"],
-        "Veteran": ["L", "E", "R", "R", "R"],
+        "Trooper": ["R", "R", "U", "U", "U"],
+        "Veteran": ["E", "E", "R", "R", "R"],
         "Elite": ["L", "L", "E", "E", "E"],
         "Hero": ["L", "L", "L", "L", "L"]
     },

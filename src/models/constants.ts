@@ -18,6 +18,7 @@ import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-o
 import { v4 } from 'uuid';
 import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
 import { KharnLegendaryEvent } from 'src/models/legendary-events/kharn.le';
+import { MephistonLegendaryEvent } from 'src/models/legendary-events/mephiston.le';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,
@@ -148,6 +149,8 @@ export const getLegendaryEvent = (id: LegendaryEventEnum, characters: ICharacter
             return new VitruviusLegendaryEvent(characters);
         case LegendaryEventEnum.Kharn:
             return new KharnLegendaryEvent(characters);
+        case LegendaryEventEnum.Mephiston:
+            return new MephistonLegendaryEvent(characters);
         default:
             return new ShadowSunLegendaryEvent(characters);
     }
