@@ -305,11 +305,88 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     useEffect(() => {
         switch (viewPreferences.theme) {
             case 'dark': {
-                enableDarkMode({
-                    brightness: 90,
-                    contrast: 90,
-                    sepia: 20,
-                });
+                enableDarkMode(
+                    {
+                        brightness: 90,
+                        contrast: 90,
+                        sepia: 20,
+                    },
+                    {
+                        css: `
+                            .stone1 {
+                                background-color: #cdb3a0;
+                            }
+                            
+                            .stone2 {
+                                background-color: #b09a8a;
+                            }
+                            
+                            .stone3 {
+                                background-color: #8c827a;
+                            }
+                            
+                            .iron1 {
+                                background-color: #d9ead3;
+                            }
+                            
+                            .iron2 {
+                                background-color: #b6d7a8;
+                            }
+                            
+                            .iron3 {
+                                background-color: #93c47d;
+                            }
+                            
+                            .bronze1 {
+                                background-color: #f9cb9c;
+                            }
+                            
+                            .bronze2 {
+                                background-color: #f6b26b;
+                            }
+                            
+                            .bronze3 {
+                                background-color: #e69138;
+                            }
+                            
+                            .silver1 {
+                                background-color: #efefef;
+                            }
+                            
+                            .silver2 {
+                                background-color: #d9d9d9;
+                            }
+                            
+                            .silver3 {
+                                background-color: #cccccc;
+                            }
+                            
+                            .gold1 {
+                                background-color: #ffe599;
+                            }
+                            
+                            .gold2 {
+                                background-color: #ffd966;
+                            }
+                            
+                            .gold3 {
+                                background-color: #f1c232;
+                            }
+                            
+                            .diamond1 {
+                                background-color: #cfe2f3;
+                            }
+                            
+                            .diamond2 {
+                                background-color: #9fc5e8;
+                            }
+                            
+                            .diamond3 {
+                                background-color: #6fa8dc;
+                            }
+                        `,
+                    } as any
+                );
                 break;
             }
             default:
