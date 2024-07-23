@@ -182,27 +182,7 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     'Saim-Hann': 0,
     'Saim-Hann Mirror': 0,
     'Saim-Hann Elite': 0,
-};
-
-export const fullCampaignsProgress: ICampaignsProgress = {
-    Indomitus: 75,
-    'Indomitus Mirror': 75,
-    'Indomitus Elite': 40,
-    'Indomitus Mirror Elite': 40,
-
-    'Fall of Cadia': 75,
-    'Fall of Cadia Mirror': 75,
-    'Fall of Cadia Elite': 40,
-    'Fall of Cadia Mirror Elite': 40,
-
-    Octarius: 75,
-    'Octarius Mirror': 75,
-    'Octarius Elite': 40,
-    'Octarius Mirror Elite': 40,
-
-    'Saim-Hann': 75,
-    'Saim-Hann Mirror': 75,
-    'Saim-Hann Elite': 75,
+    'Saim-Hann Mirror Elite': 0,
 };
 
 export const campaignsNames: Array<keyof ICampaignsProgress> = Object.keys(defaultCampaignsProgress) as Array<
