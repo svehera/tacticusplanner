@@ -1,10 +1,10 @@
 ﻿{
     "id": 8,
-    "name": "Blood Angel ???",
+    "name": "Mephiston",
     "wikiLink": "https://tacticus.fandom.com/wiki/LE-Mephiston",
     "eventStage": 1,
-    "nextEventDate": "TBA",
-    "nextEventDateUtc": "",
+    "nextEventDate": "August 25",
+    "nextEventDateUtc": "Sun, 25 August 2024 00:00:00 GMT",
     "regularMissions": [
         "Play one Legendary Event Battle, Deal 1000 damage",
         "Defeat 30 Ultramarines",

@@ -94,5 +94,11 @@
         "name": "World Eaters",
         "icon": "worldeaters.png",
         "color": "#511011"
+    },
+    {
+        "alliance": "Imperial",
+        "name": "Blood Angels",
+        "icon": "blood_angels.png",
+        "color": "#ac1b1a"
     }
 ]

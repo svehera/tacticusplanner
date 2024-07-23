@@ -286,7 +286,7 @@ export const RankLookup = () => {
                     })}
                 </div>
                 <div className="flex-box column gap5">
-                    <MiscIcon icon={'damage'} />
+                    <MiscIcon icon={'damage'} height={30} />
                     {damageUpgrades.map((x, index) => (
                         <div key={x.id + index} onClick={event => handleRecipeClick(event.currentTarget, x)}>
                             <UpgradeImage material={x.label} iconPath={x.iconPath} rarity={x.rarity} />

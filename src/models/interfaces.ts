@@ -74,6 +74,7 @@ export interface UnitDataRaw {
     RequiredInCampaign: boolean;
     Icon: string;
     ReleaseRarity?: CharacterReleaseRarity;
+    releaseDate?: string;
 }
 
 export interface IUnitData {
@@ -104,6 +105,7 @@ export interface IUnitData {
     icon: string;
     legendaryEvents: ICharLegendaryEvents;
     releaseRarity?: CharacterReleaseRarity;
+    releaseDate?: string;
 }
 
 export interface IDamageTypes {

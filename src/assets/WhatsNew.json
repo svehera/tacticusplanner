@@ -1,6 +1,40 @@
 ﻿{
-    "currentVersion": "1.5.8",
+    "currentVersion": "1.5.9",
     "releaseNotes": [
+        {
+            "version": "1.5.9",
+            "date": "July X",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added new Blood Angels faction",
+                    "subPoints": [
+                        "Mataneo, the Jump Pack Intercessor Sergeant, unlockable in the ‘Insanguination’ event, starting August 4",
+                        "Mephiston, Lord of Death, unlockable in the first ‘Angels of Death‘ event, starting August 25"
+                    ]
+                },
+                {
+                    "text": "Added Ultramarine's MoW: Galatian"
+                },
+                {
+                    "text": "Added new Campaign Battles: ‘Mirror Elite Saim-Hann’ parts 1-2"
+                },
+                {
+                    "text": "Updated data for Mephiston LRE",
+                    "route": "plan/le/mephiston"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added new upgrades for Blood Angels faction"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed portrait icons for some characters"
+                }
+            ]
+        },
         {
             "version": "1.5.8",
             "date": "June 26",

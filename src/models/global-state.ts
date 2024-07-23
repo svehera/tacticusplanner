@@ -95,6 +95,9 @@ export class GlobalState implements IGlobalState {
             const upgrades = personalCharData?.upgrades
                 ? personalCharData.upgrades.filter(StaticDataService.isValidaUpgrade)
                 : [];
+            const isReleased = staticData.releaseDate
+                ? this.isAtLeast2DaysBefore(new Date(staticData.releaseDate))
+                : true;
 
             const combinedData: IPersonalCharacterData2 = {
                 name: staticData.name,
@@ -112,6 +115,7 @@ export class GlobalState implements IGlobalState {
             return {
                 ...staticData,
                 ...combinedData,
+                icon: isReleased ? staticData.icon : 'unset.webp',
                 rank: +combinedData.rank,
                 numberOfUnlocked:
                     totalUsers && personalCharData?.numberOfUnlocked
@@ -128,12 +132,15 @@ export class GlobalState implements IGlobalState {
             const dbMow = dbMows?.find(c => c.id === staticData.id);
             const initialRarity = rarityStringToNumber[staticData.initialRarity];
             const initialRarityStars = rarityToStars[rarityStringToNumber[staticData.initialRarity]];
+            const isReleased = staticData.releaseDate
+                ? this.isAtLeast2DaysBefore(new Date(staticData.releaseDate))
+                : true;
 
             return {
                 ...staticData,
                 unitType: UnitType.mow,
-                portraitIcon: `${staticData.id}.webp`,
-                badgeIcon: `${staticData.id}.png`,
+                portraitIcon: isReleased ? `${staticData.id}.webp` : 'unset.webp',
+                badgeIcon: isReleased ? `${staticData.id}.png` : 'unset.webp',
                 rarity: dbMow?.rarity ?? initialRarity,
                 stars: dbMow?.stars ?? initialRarityStars,
                 primaryAbilityLevel: dbMow?.primaryAbilityLevel ?? 1,
@@ -142,6 +149,19 @@ export class GlobalState implements IGlobalState {
                 shards: dbMow?.shards ?? 0,
             };
         });
+    }
+
+    static isAtLeast2DaysBefore(releaseDate: Date): boolean {
+        const today = new Date();
+
+        // Calculate the difference in time
+        const timeDifference = releaseDate.getTime() - today.getTime();
+
+        // Convert time difference from milliseconds to days
+        const dayDifference = timeDifference / (1000 * 3600 * 24);
+
+        // Check if the day difference is less than or equal to 2
+        return dayDifference <= 2;
     }
 
     static fixNames<T>(obj: T): T {

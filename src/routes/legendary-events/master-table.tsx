@@ -100,7 +100,7 @@ export const MasterTable = () => {
                 ],
             },
             ...activeLegendaryEvents.map(eventId => ({
-                headerName: eventId === LegendaryEventEnum.Mephiston ? 'Blood Angel???' : LegendaryEventEnum[eventId],
+                headerName: LegendaryEventEnum[eventId],
                 children: [
                     {
                         field: eventId + 'points',
@@ -365,9 +365,7 @@ export const MasterTable = () => {
                         renderValue={selected =>
                             selected
                                 .map(x => {
-                                    return x === LegendaryEventEnum.Mephiston
-                                        ? 'Blood Angel???'
-                                        : LegendaryEventEnum[x];
+                                    return LegendaryEventEnum[x];
                                 })
                                 .join(', ')
                         }>
@@ -376,8 +374,7 @@ export const MasterTable = () => {
                             <ListItemIcon>
                                 <CharacterImage icon={'unset.png'} imageSize={30} />
                             </ListItemIcon>
-                            {/*<ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Mephiston]} />*/}
-                            <ListItemText primary={'Blood Angel???'} />
+                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Mephiston]} />
                         </MenuItem>
                         <MenuItem value={LegendaryEventEnum.Kharn}>
                             <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Kharn) > -1} />

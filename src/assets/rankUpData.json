@@ -10339,5 +10339,274 @@
             "Collar of Khorne",
             "Monstrous Defences"
         ]
+    },
+    "Mataneo": {
+        "Stone I": [
+            "Ropes and Chains",
+            "The Iron Phoenix",
+            "Auspex",
+            "Weapon Anointment Oils",
+            "Armor Trim",
+            "Fine Purity Seal"
+        ],
+        "Stone II": [
+            "Field Ration",
+            "Minor Bionic Enhancement",
+            "Fine Micro-Generator",
+            "Blessed Weapon Oils",
+            "Purity Seal",
+            "Purity Seal"
+        ],
+        "Stone III": [
+            "Enriched Rations",
+            "Bionic Enhancement",
+            "Vox-Caster",
+            "Weapon Parts",
+            "Blessed Tasset Plate",
+            "Oath Seal"
+        ],
+        "Iron I": [
+            "Holster and Pockets",
+            "Mission Objective",
+            "Fine Micro-Generator",
+            "Plasma Cell",
+            "Oath Seal",
+            "Blessed Ceramite"
+        ],
+        "Iron II": [
+            "Enriched Rations",
+            "Battle Plan",
+            "Adamantium Blades",
+            "Divinator Class Auspex",
+            "Artificer Tasset Plate",
+            "Oath Seal"
+        ],
+        "Iron III": [
+            "Box of Rations",
+            "The Gold Phoenix",
+            "Blood Shard Bolt",
+            "Plasma Cell Bundle",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Bloodstone Tear",
+            "The Phoenix Ascendant",
+            "Prey-Sight",
+            "Krak Grenade",
+            "Blessed Purity Seal",
+            "Ceramite Bar"
+        ],
+        "Bronze II": [
+            "Bloodstone Pendant",
+            "Advanced Bionics",
+            "Bionic Eye",
+            "Plasma Cell Crate",
+            "Artisan Plating",
+            "Blessed Purity Seal"
+        ],
+        "Bronze III": [
+            "Kill Count",
+            "Mars-Pattern Bionics",
+            "Quake Bolts",
+            "Sanctified Weapon Oils",
+            "Artisan of War Plating",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Bloodstone Pendant",
+            "Golden Ornamental Skull",
+            "Quake Bolts",
+            "Relic Hilt",
+            "Artisan of War Plating",
+            "Ceramite Sheet"
+        ],
+        "Silver II": [
+            "Blood Vial",
+            "Greater Reliquary of Protection",
+            "Decimator Bolts",
+            "Plasma Cell Crate",
+            "Artisan of War Plating",
+            "Grand Purity Seal"
+        ],
+        "Silver III": [
+            "Bloodstone Pendant",
+            "Grand Strategy",
+            "Quake Bolts",
+            "Digital Weapons",
+            "Purity Seal of the Primarch",
+            "Ceramite Plates"
+        ],
+        "Gold I": [
+            "Bloodstone Icon",
+            "Relic Bionic Enhancement",
+            "Archeotech Bionics",
+            "Plasma Coil",
+            "Angelic Plating",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold II": [
+            "Icon of the Angel",
+            "Legendary Reliquary of Protection",
+            "Decimator Bolts",
+            "Digital Weapons",
+            "Angelic Plating",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold III": [
+            "Bloodstone Icon",
+            "Grandiose Skull Ornament",
+            "Archangel's Shard",
+            "Powered Blade",
+            "Visage of Death",
+            "Seal of the Emperor's Protection"
+        ],
+        "Diamond I": [
+            "Icon of the Angel",
+            "Grand Strategy",
+            "Archangel's Shard",
+            "Relic Micro-Generator",
+            "Visage of Death",
+            "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Icon of the Angel",
+            "Superaugmented Constitution",
+            "Archangel's Shard",
+            "Superaugmented Strength",
+            "Visage of Death",
+            "Superaugmented Defences"
+        ]
+    },
+    "Mephiston": {
+        "Stone I": [
+            "Healing Ointment",
+            "The Iron Phoenix",
+            "Auspex",
+            "Weapon Anointment Oils",
+            "Fine Purity Seal",
+            "Armor Trim"
+        ],
+        "Stone II": [
+            "Field Ration",
+            "Minor Bionic Enhancement",
+            "Fine Micro-Generator",
+            "Blessed Weapon Oils",
+            "Purity Seal",
+            "Rebreather"
+        ],
+        "Stone III": [
+            "Enriched Rations",
+            "Bionic Enhancement",
+            "Otherworldly Energy",
+            "Weapon Parts",
+            "Ceramite Lump",
+            "Cloak"
+        ],
+        "Iron I": ["First Aid Kit", "Writings", "Fine Micro-Generator", "Plasma Cell", "Oath Seal", "Adamantium Lump"],
+        "Iron II": [
+            "Enriched Rations",
+            "Grandiloquent Litanical",
+            "Otherworldly Energy Reservoir",
+            "Divinator Class Auspex",
+            "Valuable Fabric",
+            "Cloak"
+        ],
+        "Iron III": [
+            "Box of Rations",
+            "The Gold Phoenix",
+            "Blood Shard Bolt",
+            "Plasma Cell Bundle",
+            "Blessed Ceramite",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Bloodstone Tear",
+            "The Phoenix Ascendant",
+            "Supernatural Sight",
+            "Classified Data-Slate",
+            "Blessed Purity Seal",
+            "Impressive Armor Trim"
+        ],
+        "Bronze II": [
+            "Bloodstone Pendant",
+            "Advanced Bionics",
+            "Tank of Promethium",
+            "Plasma Cell Crate",
+            "Artisan Plating",
+            "Fine Cloak"
+        ],
+        "Bronze III": [
+            "Metal Decorative Skull",
+            "Mars-Pattern Bionics",
+            "Quake Bolts",
+            "Sanctified Weapon Oils",
+            "Artisan of War Plating",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Bloodstone Pendant",
+            "Terminator Honours",
+            "Quake Bolts",
+            "Warp Locus",
+            "Artisan of War Plating",
+            "Ancient Tasset Plate"
+        ],
+        "Silver II": [
+            "Blood Vial",
+            "Greater Reliquary of Protection",
+            "Decimator Bolts",
+            "Plasma Cell Crate",
+            "Artisan of War Plating",
+            "Decorated Cloak"
+        ],
+        "Silver III": [
+            "Bloodstone Pendant",
+            "Tome of Arcane Knowledge",
+            "Quake Bolts",
+            "Digital Weapons",
+            "Psyk-Conductive Material",
+            "Relic Tasset Plate"
+        ],
+        "Gold I": [
+            "Bloodstone Icon",
+            "Relic Bionic Enhancement",
+            "Psychic Force Conduit",
+            "Plasma Coil",
+            "Angelic Plating",
+            "Divine Cloak"
+        ],
+        "Gold II": [
+            "Icon of the Angel",
+            "Legendary Reliquary of Protection",
+            "Decimator Bolts",
+            "Digital Weapons",
+            "Angelic Plating",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold III": [
+            "Bloodstone Icon",
+            "Tome of Arcane Knowledge",
+            "Archangel's Shard",
+            "Psychic Focus",
+            "Visage of Death",
+            "Divine Cloak"
+        ],
+        "Diamond I": [
+            "Icon of the Angel",
+            "Grand Strategy",
+            "Archangel's Shard",
+            "Relic Micro-Generator",
+            "Visage of Death",
+            "Relic Tasset Plate"
+        ],
+        "Diamond II": [
+            "Icon of the Angel",
+            "Preternatural Constitution",
+            "Archangel's Shard",
+            "Preternatural Strength",
+            "Visage of Death",
+            "Preternatural Defences"
+        ]
     }
 }

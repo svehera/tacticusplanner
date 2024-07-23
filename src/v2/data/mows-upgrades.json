@@ -613,5 +613,220 @@
             "primary": ["Psychic Force Conduit", "Synaptic Augmentation", "Hyperstim"],
             "secondary": ["Psychic Force Conduit", "Synaptic Augmentation", "Monstrous Strength"]
         }
+    ],
+    "_galatian": [
+        {
+            "lvl": 1,
+            "primary": ["Minor Bionic Enhancement", "Round of Ammo", "Purity Seal"],
+            "secondary": ["Minor Bionic Enhancement", "Vox-Caster", "Purity Seal"]
+        },
+        {
+            "lvl": 2,
+            "primary": ["Wires", "Weapon Parts", "Armor Trim"]
+        },
+        {
+            "lvl": 3,
+            "primary": ["The Iron Phoenix", "Minor Bionic Enhancement", "Wires"]
+        },
+        {
+            "lvl": 4,
+            "primary": ["Weapon Anointment Oils", "Round of Ammo", "Weapon Parts"],
+            "secondary": ["Weapon Anointment Oils", "Vox-Caster", "Weapon Parts"]
+        },
+        {
+            "lvl": 5,
+            "primary": ["Fine Purity Seal", "Purity Seal", "Armor Trim"]
+        },
+        {
+            "lvl": 6,
+            "primary": ["Minor Bionic Enhancement", "Wires", "The Iron Phoenix"]
+        },
+        {
+            "lvl": 7,
+            "primary": ["Round of Ammo", "Weapon Parts", "Weapon Anointment Oils"],
+            "secondary": ["Vox-Caster", "Weapon Parts", "Weapon Anointment Oils"]
+        },
+        {
+            "lvl": 8,
+            "primary": ["Purity Seal", "Armor Trim", "Fine Purity Seal"]
+        },
+        {
+            "lvl": 9,
+            "primary": ["Wires", "The Iron Phoenix", "The Gold Phoenix"]
+        },
+        {
+            "lvl": 10,
+            "primary": ["Weapon Parts", "Weapon Anointment Oils", "Divinator Class Auspex"]
+        },
+        {
+            "lvl": 11,
+            "primary": ["Armor Trim", "Fine Purity Seal", "Oath Seal"]
+        },
+        {
+            "lvl": 12,
+            "primary": ["The Iron Phoenix", "Reinforced Cables", "Bionic Enhancement"]
+        },
+        {
+            "lvl": 13,
+            "primary": ["Weapon Anointment Oils", "Plasma Cell", "Magazine"],
+            "secondary": ["Weapon Anointment Oils", "Plasma Cell", "Adamantium Blades"]
+        },
+        {
+            "lvl": 14,
+            "primary": ["Fine Purity Seal", "Oath Seal", "Blessed Ceramite"]
+        },
+        {
+            "lvl": 15,
+            "primary": ["Reinforced Cables", "The Gold Phoenix", "Bionic Enhancement"]
+        },
+        {
+            "lvl": 16,
+            "primary": ["Plasma Cell", "Divinator Class Auspex", "Blessed Weapon Oils"]
+        },
+        {
+            "lvl": 17,
+            "primary": ["Blessed Tasset Plate", "Ceramite Lump", "Blessed Ceramite"]
+        },
+        {
+            "lvl": 18,
+            "primary": ["The Gold Phoenix", "Reinforced Cables", "Battle Scar"]
+        },
+        {
+            "lvl": 19,
+            "primary": ["Divinator Class Auspex", "Plasma Cell", "Reliquary of Vengeance"]
+        },
+        {
+            "lvl": 20,
+            "primary": ["Ceramite Lump", "Oath Seal", "Subdermal Plating"]
+        },
+        {
+            "lvl": 21,
+            "primary": ["Reinforced Cables", "Battle Scar", "Advanced Bionics"]
+        },
+        {
+            "lvl": 22,
+            "primary": ["Plasma Cell", "Reliquary of Vengeance", "Box of Ammo"],
+            "secondary": ["Plasma Cell", "Reliquary of Vengeance", "Prey-Sight"]
+        },
+        {
+            "lvl": 23,
+            "primary": ["Blessed Tasset Plate", "Subdermal Plating", "Ceramite Bar"]
+        },
+        {
+            "lvl": 24,
+            "primary": ["Battle Scar", "The Phoenix Ascendant", "Electromantic Cable Bundle"]
+        },
+        {
+            "lvl": 25,
+            "primary": ["Reliquary of Vengeance", "Bionic Eye", "Plasma Cell Bundle"]
+        },
+        {
+            "lvl": 26,
+            "primary": ["Subdermal Plating", "Artificer Tasset Plate", "Blessed Purity Seal"]
+        },
+        {
+            "lvl": 27,
+            "primary": ["The Phoenix Ascendant", "Kill Count", "Terminator Honours"]
+        },
+        {
+            "lvl": 28,
+            "primary": ["Bionic Eye", "Bionic Eye", "Special Issue Ammo"]
+        },
+        {
+            "lvl": 29,
+            "primary": ["Artificer Tasset Plate", "Artificer Tasset Plate", "Unyielding Rivets"]
+        },
+        {
+            "lvl": 30,
+            "primary": ["Kill Count", "Terminator Honours", "Grandiloquent Litanical"]
+        },
+        {
+            "lvl": 31,
+            "primary": ["Bionic Eye", "Special Issue Ammo", "Plasma Cell Crate"]
+        },
+        {
+            "lvl": 32,
+            "primary": ["Artificer Tasset Plate", "Unyielding Rivets", "Duplicate Organ"]
+        },
+        {
+            "lvl": 33,
+            "primary": ["Terminator Honours", "Golden Ornamental Skull", "Greater Reliquary of Protection"],
+            "secondary": ["Terminator Honours", "Golden Ornamental Skull", "Mars-Pattern Bionics"]
+        },
+        {
+            "lvl": 34,
+            "primary": ["Special Issue Ammo", "Bionic Neural Pathways", "Plasma Cell Crate"]
+        },
+        {
+            "lvl": 35,
+            "primary": ["Unyielding Rivets", "Duplicate Organ", "Ceramite Sheet"],
+            "secondary": ["Unyielding Rivets", "Duplicate Organ", "Grand Purity Seal"]
+        },
+        {
+            "lvl": 36,
+            "primary": ["Terminator Honours", "Golden Ornamental Skull", "Codex Astartes Page"]
+        },
+        {
+            "lvl": 37,
+            "primary": ["Special Issue Ammo", "Bionic Neural Pathways", "Master-Crafted Ammo"]
+        },
+        {
+            "lvl": 38,
+            "primary": ["Unyielding Rivets", "Duplicate Organ", "Purity Seal of the Primarch"]
+        },
+        {
+            "lvl": 39,
+            "primary": ["Golden Ornamental Skull", "Codex Astartes Page", "Grandiose Skull Ornament"],
+            "secondary": ["Golden Ornamental Skull", "Codex Astartes Page", "Codex Astartes"]
+        },
+        {
+            "lvl": 40,
+            "primary": ["Bionic Neural Pathways", "Codex Astartes Page", "Relic Auxiliary Core"],
+            "secondary": ["Bionic Neural Pathways", "Codex Astartes Page", "Legendary Reliquary of Vengeance"]
+        },
+        {
+            "lvl": 41,
+            "primary": ["Duplicate Organ", "Codex Astartes Page", "Ceramite Plates"],
+            "secondary": ["Duplicate Organ", "Codex Astartes Page", "Relic Tasset Plate"]
+        },
+        {
+            "lvl": 42,
+            "primary": ["Golden Ornamental Skull", "Codex Astartes Page", "Relic Bionic Enhancement"],
+            "secondary": ["Golden Ornamental Skull", "Codex Astartes Page", "Legendary Reliquary of Protection"]
+        },
+        {
+            "lvl": 43,
+            "primary": ["Bionic Neural Pathways", "Codex Astartes Page", "Autoloader"],
+            "secondary": ["Bionic Neural Pathways", "Codex Astartes Page", "Digital Weapons"]
+        },
+        {
+            "lvl": 44,
+            "primary": ["Duplicate Organ", "Codex Astartes Page", "Seal of the Emperor's Protection"],
+            "secondary": ["Duplicate Organ", "Codex Astartes Page", "Ceramite Plates"]
+        },
+        {
+            "lvl": 45,
+            "primary": ["Codex Astartes Page", "Master-Crafted Ammo", "Codex Astartes"]
+        },
+        {
+            "lvl": 46,
+            "primary": ["Master-Crafted Ammo", "Purity Seal of the Primarch", "Legendary Reliquary of Vengeance"],
+            "secondary": ["Master-Crafted Ammo", "Purity Seal of the Primarch", "Hellfury Bolts"]
+        },
+        {
+            "lvl": 47,
+            "primary": ["Purity Seal of the Primarch", "Master-Crafted Ammo", "Relic Tasset Plate"],
+            "secondary": ["Purity Seal of the Primarch", "Master-Crafted Ammo", "Adamantine Mantle"]
+        },
+        {
+            "lvl": 48,
+            "primary": ["Codex Astartes Page", "Purity Seal of the Primarch", "Grand Strategy"],
+            "secondary": ["Codex Astartes Page", "Purity Seal of the Primarch", "Technocrafted Constitution"]
+        },
+        {
+            "lvl": 49,
+            "primary": ["Master-Crafted Ammo", "Codex Astartes Page", "Plasma Coil"],
+            "secondary": ["Master-Crafted Ammo", "Codex Astartes Page", "Technocrafted Strength"]
+        }
     ]
 }

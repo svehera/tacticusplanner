@@ -28,5 +28,16 @@
         "alliance": "Xenos",
         "faction": "Tyranids",
         "initialRarity": "Common"
+    },
+    {
+        "id": "_galatian",
+        "name": "Galatian",
+        "title": " Redemptor Dreadnought",
+        "shortName": "Galatian",
+        "fullName": "Galatian",
+        "alliance": "Imperial",
+        "faction": "Ultramarines",
+        "initialRarity": "Common",
+        "releaseDate": "2024-08-16T00:00:00Z"
     }
 ]
