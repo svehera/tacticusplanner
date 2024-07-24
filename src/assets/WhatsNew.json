@@ -3,7 +3,7 @@
     "releaseNotes": [
         {
             "version": "1.5.9",
-            "date": "July X",
+            "date": "July 24",
             "type": "Update",
             "new": [
                 {
@@ -27,11 +27,32 @@
             "minor": [
                 {
                     "text": "Added new upgrades for Blood Angels faction"
+                },
+                {
+                    "text": "Added \"MoW only\" filter"
                 }
             ],
             "bugFixes": [
                 {
                     "text": "Fixed portrait icons for some characters"
+                },
+                {
+                    "text": "Fixed shard cap at 50 shards for MOW (LordLancelot)"
+                },
+                {
+                    "text": "Fixed \"Tabard\" spelling (Heruwulfar)"
+                },
+                {
+                    "text": "Fixed issue with X.5 Goals showing as complete (Kinks)"
+                },
+                {
+                    "text": "Fixed Upgrades reference page: Characters column doesn't appear under condition (SeventhSun)"
+                },
+                {
+                    "text": "Fixed Baraqiel Upgrade Material (falxnox)"
+                },
+                {
+                    "text:": "Fixed Who You Own page - Dark Angels Faction Order (falxnox)"
                 }
             ]
         },

@@ -7,27 +7,27 @@
     "nextEventDateUtc": "Sun, 25 August 2024 00:00:00 GMT",
     "regularMissions": [
         "Play one Legendary Event Battle, Deal 1000 damage",
-        "Defeat 30 Ultramarines",
-        "Defeat 75 Tyranids",
-        "Defeat 100 Thousand Sons",
+        "Defeat 30 Astra Militarum",
+        "Defeat 75 Death Guard",
+        "Defeat 100 Aeldari",
         "Use abilities 15 times with Chaos  units, Deal 10k damage with Abilities",
-        "Use abilities 20 times with Imperial units, Deal 15k damage with Abilities",
-        "Use abilities 25 times with Xenos units, Deal 20k damage with Abilities",
+        "Use abilities 20 times with Xenos units, Deal 15k damage with Abilities",
+        "Use abilities 25 times with Imperial units, Deal 20k damage with Abilities",
+        "Play 3 Legendary Event Battles, Deal 25k Psychic damage",
         "Play 3 Legendary Event Battles, Deal 25k Piercing damage",
-        "Play 3 Legendary Event Battles, Deal 25k Flame damage",
-        "Play 3 Legendary Event Battles, Deal 25k Physical damage"
+        "Play 3 Legendary Event Battles, Deal 25k Power damage"
     ],
     "premiumMissions": [
         "Win 1 battle without Summoning any units",
-        "Defeat 30 enemies with Xenos units",
-        "Defeat 75 enemies with Chaos units",
+        "Defeat 30 enemies with Chaos units",
+        "Defeat 75 enemies with Xenos units",
         "Defeat 100 enemies with Imperial units",
-        "Win 5 battles without deploying any Psyker Resilient characters",
-        "Win 5 battles without deploying any Terminator Armour characters",
+        "Win 5 battles without deploying any Resilient characters",
+        "Win 5 battles without deploying any Big Target characters",
         "Win 5 battles without deploying any Mechanical characters",
+        "Defeat 75 enemies with Psychic Damage",
         "Defeat 75 enemies with Piercing Damage",
-        "Defeat 75 enemies with Flame Damage",
-        "Defeat 75 enemies with Physical Damage"
+        "Defeat 75 enemies with Power Damage"
     ],
     "alpha": {
         "name": "Alpha (No Imperials)",

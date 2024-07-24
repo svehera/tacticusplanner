@@ -23,9 +23,16 @@ interface Props {
     estimatedRanks: IEstimatedUpgrades;
     upgrades: Record<string, number>;
     updateInventory: (materialId: string, value: number) => void;
+    updateInventoryAny: () => void;
 }
 
-export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, upgrades, updateInventory }) => {
+export const RaidsPlan: React.FC<Props> = ({
+    estimatedShards,
+    estimatedRanks,
+    updateInventoryAny,
+    upgrades,
+    updateInventory,
+}) => {
     const [upgradesPaging, setUpgradesPaging] = React.useState<{
         start: number;
         end: number;
@@ -108,7 +115,7 @@ export const RaidsPlan: React.FC<Props> = ({ estimatedShards, estimatedRanks, up
                             </div>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <Inventory itemsFilter={estimatedRanks.relatedUpgrades} />
+                            <Inventory itemsFilter={estimatedRanks.relatedUpgrades} onUpdate={updateInventoryAny} />
                         </AccordionDetails>
                     </Accordion>
                 )}

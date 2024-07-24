@@ -3118,6 +3118,7 @@
     },
     "Crusader's Tabbard": {
         "material": "Crusader's Tabbard",
+        "label": "Crusader's Tabard",
         "rarity": "Epic",
         "stat": "Armour",
         "faction": "Black Templars",
@@ -6535,6 +6536,7 @@
     },
     "Tabbard of Righteous Wrath": {
         "material": "Tabbard of Righteous Wrath",
+        "label": "Tabard of Righteous Wrath",
         "rarity": "Legendary",
         "stat": "Armour",
         "faction": "Black Templars",

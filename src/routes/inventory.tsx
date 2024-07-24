@@ -16,20 +16,15 @@ import ClearIcon from '@mui/icons-material/Clear';
 
 import './inventory.scss';
 import { Conditional } from 'src/v2/components/conditional';
+import { ITableRow } from './inventory-models';
+import { InventoryItem } from 'src/routes/inventory-item';
 
-interface ITableRow {
-    material: string;
-    label: string;
-    rarity: Rarity;
-    craftable: boolean;
-    stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
-    quantity: number;
-    iconPath: string;
-    faction: string;
-    alphabet: string;
+interface Props {
+    itemsFilter?: string[];
+    onUpdate?: () => void;
 }
 
-export const Inventory = ({ itemsFilter = [] }: { itemsFilter?: string[] }) => {
+export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
     const dispatch = useContext(DispatchContext);
     const { inventory, viewPreferences } = useContext(StoreContext);
 
@@ -79,32 +74,15 @@ export const Inventory = ({ itemsFilter = [] }: { itemsFilter?: string[] }) => {
         }));
     }, [itemsList, filterItem]);
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, data: ITableRow) => {
-        const value = event.target.value === '' ? 0 : Number(event.target.value);
-        data.quantity = value > 1000 ? 1000 : value;
+    const update = (upgradeId: string, value: number) => {
         dispatch.inventory({
             type: 'UpdateUpgradeQuantity',
-            upgrade: data.material,
-            value: data.quantity,
+            upgrade: upgradeId,
+            value: value,
         });
-    };
-
-    const increment = (data: ITableRow) => {
-        data.quantity = Math.min(data.quantity + 1, 1000);
-        dispatch.inventory({
-            type: 'UpdateUpgradeQuantity',
-            upgrade: data.material,
-            value: data.quantity,
-        });
-    };
-
-    const decrement = (data: ITableRow) => {
-        data.quantity = Math.max(data.quantity - 1, 0);
-        dispatch.inventory({
-            type: 'UpdateUpgradeQuantity',
-            upgrade: data.material,
-            value: data.quantity,
-        });
+        if (onUpdate) {
+            onUpdate();
+        }
     };
 
     const resetUpgrades = (): void => {
@@ -118,37 +96,6 @@ export const Inventory = ({ itemsFilter = [] }: { itemsFilter?: string[] }) => {
             });
         }
     };
-
-    const renderRow = (data: ITableRow) => (
-        <div key={data.material} className="inventory-item">
-            <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />
-            <Input
-                style={{ justifyContent: 'center' }}
-                value={data.quantity}
-                size="small"
-                onFocus={event => event.target.select()}
-                onChange={event => handleInputChange(event, data)}
-                inputProps={{
-                    step: 1,
-                    min: 0,
-                    max: 1000,
-                    type: 'number',
-                    style: { width: data.quantity.toString().length * 10 },
-                    className: 'item-quantity-input',
-                }}
-            />
-            {viewPreferences.inventoryShowPlusMinus && (
-                <div>
-                    <Button size="small" className="item-quantity-button" onClick={() => decrement(data)}>
-                        -
-                    </Button>
-                    <Button size="small" className="item-quantity-button" onClick={() => increment(data)}>
-                        +
-                    </Button>
-                </div>
-            )}
-        </div>
-    );
 
     return (
         <>
@@ -194,18 +141,30 @@ export const Inventory = ({ itemsFilter = [] }: { itemsFilter?: string[] }) => {
                             <RarityImage rarity={group.rarity} /> {group.label}
                         </h2>
                         <article className="inventory-items">
-                            <Conditional condition={viewPreferences.inventoryShowAlphabet}>
-                                {group.items.map(group => (
+                            {viewPreferences.inventoryShowAlphabet &&
+                                group.items.map(group => (
                                     <div key={group.letter} className="inventory-items-alphabet">
                                         <div className="letter">{group.letter}</div>
-                                        {group.subItems.map(renderRow)}
+                                        {group.subItems.map(item => (
+                                            <InventoryItem
+                                                key={item.material}
+                                                data={item}
+                                                showIncDec={viewPreferences.inventoryShowPlusMinus}
+                                                dataUpdate={update}
+                                            />
+                                        ))}
                                     </div>
                                 ))}
-                            </Conditional>
 
-                            <Conditional condition={!viewPreferences.inventoryShowAlphabet}>
-                                {group.itemsAll.map(renderRow)}
-                            </Conditional>
+                            {!viewPreferences.inventoryShowAlphabet &&
+                                group.itemsAll.map(item => (
+                                    <InventoryItem
+                                        key={item.material}
+                                        data={item}
+                                        showIncDec={viewPreferences.inventoryShowPlusMinus}
+                                        dataUpdate={update}
+                                    />
+                                ))}
                         </article>
                     </section>
                 ))

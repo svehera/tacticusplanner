@@ -64,6 +64,8 @@ export const ViewControls = ({
                 return 'Imperial Alliance';
             case CharactersFilterBy.Xenos:
                 return 'Xenos Alliance';
+            case CharactersFilterBy.MoW:
+                return 'MoW only';
             case CharactersFilterBy.None:
                 return 'None';
             default:

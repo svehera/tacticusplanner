@@ -113,6 +113,7 @@ export const EditMowDialog: React.FC<Props> = ({
                         <NumberInput
                             fullWidth
                             label="Shards"
+                            max={1000}
                             value={editedMow.shards}
                             valueChange={value => handleInputChange('shards', value)}
                         />
