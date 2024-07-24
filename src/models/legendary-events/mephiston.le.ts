@@ -78,7 +78,7 @@ export class MephistonLegendaryEvent extends LegendaryEventBase {
                 },
                 {
                     name: 'Min 3 hits',
-                    points: 25,
+                    points: 60,
                     units: filter(noChaos).byMinHits(3),
                     selected: true,
                 },

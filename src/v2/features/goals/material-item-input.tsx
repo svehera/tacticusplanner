@@ -1,17 +1,19 @@
 ﻿import React from 'react';
 import { RaidItemView } from 'src/v2/features/goals/raid-item-view';
 import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
-import { MaterialItemTitle } from 'src/v2/features/goals/material-item-title';
 import { IUpgradeRaid, IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
+import Button from '@mui/material/Button';
 
 interface Props {
     acquiredCount: number;
     upgradeRaid: IUpgradeRaid;
     addCount: (count: number, location: IItemRaidLocation) => void;
+    increment: () => void;
+    decrement: () => void;
 }
 
-export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount, addCount }) => {
+export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount, addCount, increment, decrement }) => {
     const isAllRaidsCompleted = upgradeRaid.raidLocations.every(location => location.isCompleted);
 
     return (
@@ -35,6 +37,14 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
                 <span>
                     {upgradeRaid.acquiredCount}/{upgradeRaid.requiredCount}
                 </span>
+                <div className="flex-box">
+                    <Button size="small" className="item-quantity-button" onClick={decrement}>
+                        -
+                    </Button>
+                    <Button size="small" className="item-quantity-button" onClick={increment}>
+                        +
+                    </Button>
+                </div>
             </div>
             <ul style={{ width: '100%', paddingInlineStart: 15 }}>
                 {upgradeRaid.raidLocations.map(location => {

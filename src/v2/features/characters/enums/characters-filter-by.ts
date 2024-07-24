@@ -6,4 +6,5 @@
     Chaos,
     Imperial,
     Xenos,
+    MoW,
 }

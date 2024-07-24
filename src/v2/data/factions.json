@@ -66,16 +66,16 @@
         "color": "#084A92"
     },
     {
-        "alliance": "Imperial",
-        "name": "Dark Angels",
-        "icon": "Dark_Angels.png",
-        "color": "#18542B"
-    },
-    {
         "alliance": "Chaos",
         "name": "Thousand Sons",
         "icon": "Thousand_Sons.png",
         "color": "#084A92"
+    },
+    {
+        "alliance": "Imperial",
+        "name": "Dark Angels",
+        "icon": "Dark_Angels.png",
+        "color": "#18542B"
     },
     {
         "alliance": "Xenos",
@@ -94,5 +94,11 @@
         "name": "World Eaters",
         "icon": "worldeaters.png",
         "color": "#511011"
+    },
+    {
+        "alliance": "Imperial",
+        "name": "Blood Angels",
+        "icon": "blood_angels.png",
+        "color": "#ac1b1a"
     }
 ]

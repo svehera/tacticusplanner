@@ -1,4 +1,235 @@
 {
+    "Blood Shard Bolt": {
+        "material": "Blood Shard Bolt",
+        "faction": "Blood Angels",
+        "craftable": false,
+        "stat": "Damage",
+        "rarity": "Rare",
+        "icon": "Blood Shard Bolt.png"
+    },
+    "Bloodstone Tear": {
+        "material": "Bloodstone Tear",
+        "faction": "Blood Angels",
+        "craftable": false,
+        "stat": "Health",
+        "rarity": "Rare",
+        "icon": "Bloodstone Tear.png"
+    },
+    "Artisan Plating": {
+        "material": "Artisan Plating",
+        "faction": "Blood Angels",
+        "craftable": false,
+        "stat": "Armour",
+        "rarity": "Rare",
+        "icon": "Artisan Plating.png"
+    },
+    "Blood Vial": {
+        "material": "Blood Vial",
+        "faction": "Blood Angels",
+        "craftable": false,
+        "stat": "Health",
+        "rarity": "Legendary",
+        "icon": "Blood Vial.png"
+    },
+    "Bloodstone Pendant": {
+        "material": "Bloodstone Pendant",
+        "faction": "Blood Angels",
+        "craftable": true,
+        "stat": "Health",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Bloodstone Tear",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ],
+        "icon": "Bloodstone Pendant.png"
+    },
+    "Quake Bolts": {
+        "material": "Quake Bolts",
+        "faction": "Blood Angels",
+        "craftable": true,
+        "stat": "Damage",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Blood Shard Bolt",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ],
+        "icon": "Quake Bolts.png"
+    },
+    "Artisan of War Plating": {
+        "material": "Artisan of War Plating",
+        "faction": "Blood Angels",
+        "craftable": true,
+        "stat": "Armour",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Artisan Plating",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ],
+        "icon": "Artisan of War Plating.png"
+    },
+    "Decimator Bolts": {
+        "material": "Decimator Bolts",
+        "faction": "Blood Angels",
+        "craftable": true,
+        "stat": "Damage",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Quake Bolts",
+                "count": 2
+            },
+            {
+                "material": "Sanctified Weapon Oils",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Decimator Bolts.png"
+    },
+    "Angelic Plating": {
+        "material": "Angelic Plating",
+        "faction": "Blood Angels",
+        "craftable": true,
+        "stat": "Armour",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Artisan of War Plating",
+                "count": 2
+            },
+            {
+                "material": "Grand Purity Seal",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Angelic Plating.png"
+    },
+    "Bloodstone Icon": {
+        "material": "Bloodstone Icon",
+        "faction": "Blood Angels",
+        "craftable": true,
+        "stat": "Health",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Bloodstone Pendant",
+                "count": 2
+            },
+            {
+                "material": "Greater Reliquary of Protection",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Bloodstone Icon.png"
+    },
+    "Icon of the Angel": {
+        "material": "Icon of the Angel",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "faction": "Blood Angels",
+        "recipe": [
+            {
+                "material": "Blood Vial",
+                "count": 9
+            },
+            {
+                "material": "Sanctified Reliquary of Protection",
+                "count": 1
+            },
+            {
+                "material": "Golden Ornamental Skull",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Icon of the Angel.png"
+    },
+    "Archangel's Shard": {
+        "material": "Archangel's Shard",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "faction": "Blood Angels",
+        "recipe": [
+            {
+                "material": "Blood Vial",
+                "count": 9
+            },
+            {
+                "material": "Grandiloquent Litanical",
+                "count": 1
+            },
+            {
+                "material": "Relic Hilt",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Archangel's Shard.png"
+    },
+    "Visage of Death": {
+        "material": "Visage of Death",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "faction": "Blood Angels",
+        "recipe": [
+            {
+                "material": "Blood Vial",
+                "count": 9
+            },
+            {
+                "material": "Impressive Armor Trim",
+                "count": 1
+            },
+            {
+                "material": "Revered Talisman",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Visage of Death.png"
+    },
+
     "Chainaxe Teeth": {
         "material": "Chainaxe Teeth",
         "faction": "World Eaters",
@@ -2887,6 +3118,7 @@
     },
     "Crusader's Tabbard": {
         "material": "Crusader's Tabbard",
+        "label": "Crusader's Tabard",
         "rarity": "Epic",
         "stat": "Armour",
         "faction": "Black Templars",
@@ -6304,6 +6536,7 @@
     },
     "Tabbard of Righteous Wrath": {
         "material": "Tabbard of Righteous Wrath",
+        "label": "Tabard of Righteous Wrath",
         "rarity": "Legendary",
         "stat": "Armour",
         "faction": "Black Templars",

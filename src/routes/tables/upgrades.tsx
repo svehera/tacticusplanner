@@ -170,12 +170,12 @@ export const Upgrades = () => {
             case 'Craftable': {
                 return [
                     ...base,
+                    charactersColumn,
                     {
                         field: 'recipe',
                         headerName: 'Recipe',
                         minWidth: 150,
                     },
-                    charactersColumn,
                 ];
             }
         }

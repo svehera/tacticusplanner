@@ -19,6 +19,7 @@ export interface IMowStatic {
     title: string;
     shortName: string;
     fullName: string;
+    releaseDate?: string;
     alliance: Alliance;
     faction: Faction;
     initialRarity: RarityString;

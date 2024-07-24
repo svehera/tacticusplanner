@@ -15,7 +15,7 @@ import factionsData from 'src/v2/data/factions.json';
 import { CharactersPowerService } from './characters-power.service';
 import { CharactersValueService } from './characters-value.service';
 import { rarityCaps } from 'src/v2/features/characters/characters.contants';
-import { isCharacter, isUnlocked } from 'src/v2/features/characters/units.functions';
+import { isCharacter, isMow, isUnlocked } from 'src/v2/features/characters/units.functions';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export class CharactersService {
@@ -44,6 +44,8 @@ export class CharactersService {
                 return filteredCharactersByName.filter(filterImperial);
             case CharactersFilterBy.Xenos:
                 return filteredCharactersByName.filter(filterXenos);
+            case CharactersFilterBy.MoW:
+                return filteredCharactersByName.filter(isMow);
             case CharactersFilterBy.None:
             default:
                 return filteredCharactersByName;

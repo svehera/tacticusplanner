@@ -84,10 +84,10 @@ export const menuItemById = {
         `Kharn ${kharn.eventStage}/3 (${kharn.nextEventDate})`
     ),
     mephiston: new MenuItemTP(
-        'Blood Angel???',
+        'Mephiston',
         <CharacterImage icon={'unset.png'} imageSize={24} />,
         '/plan/le/mephiston',
-        `Blood Angel??? ${mephiston.eventStage}/3 (${mephiston.nextEventDate})`
+        `Mephiston ${mephiston.eventStage}/3 (${mephiston.nextEventDate})`
     ),
     characters: new MenuItemTP('Characters', <Diversity3Icon />, '/learn/characters'),
     upgrades: new MenuItemTP('Upgrades', <ListIcon />, '/learn/upgrades'),

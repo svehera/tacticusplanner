@@ -6,6 +6,7 @@
     ICharacterUpgradeAbilities,
     ICharacterUpgradeMow,
     ICharacterUpgradeRankGoal,
+    IGoalEstimate,
 } from 'src/v2/features/goals/goals.models';
 import { IPersonalGoal } from 'src/models/interfaces';
 import { rarityToStars } from 'src/models/constants';
@@ -241,13 +242,15 @@ export class GoalsService {
             }
         }
     }
-    static isGoalCompleted(goal: CharacterRaidGoalSelect): boolean {
+    static isGoalCompleted(goal: CharacterRaidGoalSelect, goalEstimate: IGoalEstimate): boolean {
         if (goal.type == PersonalGoalType.UpgradeRank) {
             return (
                 (!goal.rankPoint5 && goal.rankStart >= goal.rankEnd) ||
                 (goal.rankPoint5 &&
                     (goal.rankStart > goal.rankEnd ||
-                        (goal.rankStart === goal.rankEnd && goal.appliedUpgrades.length >= 3)))
+                        (goal.rankStart === goal.rankEnd &&
+                            goal.appliedUpgrades.length >= 3 &&
+                            goalEstimate.energyTotal <= 0)))
             );
         }
 

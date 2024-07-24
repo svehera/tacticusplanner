@@ -1,33 +1,33 @@
 ﻿{
     "id": 8,
-    "name": "Blood Angel ???",
+    "name": "Mephiston",
     "wikiLink": "https://tacticus.fandom.com/wiki/LE-Mephiston",
     "eventStage": 1,
-    "nextEventDate": "TBA",
-    "nextEventDateUtc": "",
+    "nextEventDate": "August 25",
+    "nextEventDateUtc": "Sun, 25 August 2024 00:00:00 GMT",
     "regularMissions": [
         "Play one Legendary Event Battle, Deal 1000 damage",
-        "Defeat 30 Ultramarines",
-        "Defeat 75 Tyranids",
-        "Defeat 100 Thousand Sons",
+        "Defeat 30 Astra Militarum",
+        "Defeat 75 Death Guard",
+        "Defeat 100 Aeldari",
         "Use abilities 15 times with Chaos  units, Deal 10k damage with Abilities",
-        "Use abilities 20 times with Imperial units, Deal 15k damage with Abilities",
-        "Use abilities 25 times with Xenos units, Deal 20k damage with Abilities",
+        "Use abilities 20 times with Xenos units, Deal 15k damage with Abilities",
+        "Use abilities 25 times with Imperial units, Deal 20k damage with Abilities",
+        "Play 3 Legendary Event Battles, Deal 25k Psychic damage",
         "Play 3 Legendary Event Battles, Deal 25k Piercing damage",
-        "Play 3 Legendary Event Battles, Deal 25k Flame damage",
-        "Play 3 Legendary Event Battles, Deal 25k Physical damage"
+        "Play 3 Legendary Event Battles, Deal 25k Power damage"
     ],
     "premiumMissions": [
         "Win 1 battle without Summoning any units",
-        "Defeat 30 enemies with Xenos units",
-        "Defeat 75 enemies with Chaos units",
+        "Defeat 30 enemies with Chaos units",
+        "Defeat 75 enemies with Xenos units",
         "Defeat 100 enemies with Imperial units",
-        "Win 5 battles without deploying any Psyker Resilient characters",
-        "Win 5 battles without deploying any Terminator Armour characters",
+        "Win 5 battles without deploying any Resilient characters",
+        "Win 5 battles without deploying any Big Target characters",
         "Win 5 battles without deploying any Mechanical characters",
+        "Defeat 75 enemies with Psychic Damage",
         "Defeat 75 enemies with Piercing Damage",
-        "Defeat 75 enemies with Flame Damage",
-        "Defeat 75 enemies with Physical Damage"
+        "Defeat 75 enemies with Power Damage"
     ],
     "alpha": {
         "name": "Alpha (No Imperials)",
@@ -35,17 +35,17 @@
             "label": "Astra Militarum",
             "link": "https://tacticus.fandom.com/wiki/Astra_Militarum#NPC_Units"
         },
-        "killPoints": 35,
-        "battlesPoints": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        "killPoints": 31,
+        "battlesPoints": [34, 37, 48, 45, 45, 46, 40, 47, 48, 55, 51, 51, 53, 58]
     },
     "beta": {
         "name": "Beta (No Chaos)",
         "enemies": {
-            "label": "Death Guard",
+            "label": "Black Legion & Death Guard",
             "link": "https://tacticus.fandom.com/wiki/Death_Guard#NPC_Units"
         },
         "killPoints": 37,
-        "battlesPoints": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        "battlesPoints": [31, 37, 45, 49, 49, 51, 38, 46, 51, 35, 42, 45, 49, 48]
     },
     "gamma": {
         "name": "Gamma (Imperial Only)",
@@ -54,7 +54,7 @@
             "link": "https://tacticus.fandom.com/wiki/Aeldari#NPC_Units"
         },
         "killPoints": 34,
-        "battlesPoints": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        "battlesPoints": [31, 31, 45, 42, 56, 47, 47, 48, 48, 49, 42, 51, 45, 55]
     },
     "pointsMilestones": [
         {

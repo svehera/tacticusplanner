@@ -42,24 +42,32 @@ export const DailyRaids = () => {
         return GoalsService.prepareGoals(goals, units, true);
     }, [goals, units]);
 
-    const handleUpgradesAdd = (upgradeId: string, value: number, location: IItemRaidLocation) => {
+    const handleUpgradesAdd = (upgradeId: string, value: number, location: IItemRaidLocation | null) => {
         setHasChanges(true);
 
-        if (value > 0) {
+        if (location) {
+            if (value > 0) {
+                dispatch.inventory({
+                    type: 'IncrementUpgradeQuantity',
+                    upgrade: upgradeId,
+                    value,
+                });
+                enqueueSnackbar(`Added ${value} items for ${upgradeId}`, {
+                    variant: 'success',
+                });
+            }
+
+            dispatch.dailyRaids({
+                type: 'AddCompletedBattle',
+                location,
+            });
+        } else {
             dispatch.inventory({
                 type: 'IncrementUpgradeQuantity',
                 upgrade: upgradeId,
                 value,
             });
-            enqueueSnackbar(`Added ${value} items for ${upgradeId}`, {
-                variant: 'success',
-            });
         }
-
-        dispatch.dailyRaids({
-            type: 'AddCompletedBattle',
-            location,
-        });
     };
 
     const handleShardsAdd = (characterId: string, value: number, location: IItemRaidLocation) => {
@@ -173,6 +181,7 @@ export const DailyRaids = () => {
                 estimatedRanks={estimatedRanks}
                 upgrades={inventory.upgrades}
                 updateInventory={saveInventoryUpdateChanges}
+                updateInventoryAny={() => setHasChanges(true)}
             />
 
             <TodayRaids

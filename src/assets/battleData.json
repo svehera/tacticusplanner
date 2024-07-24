@@ -2471,7 +2471,7 @@
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 36,
-        "reward": "Krak Grenade",
+        "reward": "Bloodstone Tear",
         "expectedGold": 65
     },
     "IM37": {
@@ -2518,7 +2518,7 @@
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 41,
-        "reward": "Mutation: Warped Lungs",
+        "reward": "Reliquary of Protection",
         "expectedGold": 65
     },
     "IM42": {
@@ -2569,7 +2569,7 @@
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 48,
-        "reward": "Reliquary of Protection",
+        "reward": "Blood Shard Bolt",
         "expectedGold": 71
     },
     "IM49": {
@@ -2683,14 +2683,14 @@
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 61,
-        "reward": "Ballistics Data",
+        "reward": "Artisan Plating",
         "expectedGold": 77
     },
     "IM62": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 62,
-        "reward": "Canister of Chemicals",
+        "reward": "Oath Seal",
         "expectedGold": 77,
         "slots": 4
     },
@@ -2736,7 +2736,7 @@
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 68,
-        "reward": "Oath Seal",
+        "reward": "Blood Vial",
         "expectedGold": 77
     },
     "IM69": {
@@ -5016,7 +5016,7 @@
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 29,
-        "reward": "Key of Ignorance",
+        "reward": "Bloodstone Tear",
         "expectedGold": 108
     },
     "IME3": {
@@ -5030,7 +5030,7 @@
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 30,
-        "reward": "Stone Guardian Fragment",
+        "reward": "Blood Vial",
         "expectedGold": 108
     },
     "IME31": {
@@ -5051,14 +5051,14 @@
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 33,
-        "reward": "Chapter Pendant",
+        "reward": "Blood Shard Bolt",
         "expectedGold": 108
     },
     "IME34": {
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 34,
-        "reward": "Dark Hood",
+        "reward": "Artisan Plating",
         "expectedGold": 108
     },
     "IME35": {
@@ -6630,6 +6630,125 @@
         "campaignType": "Elite",
         "nodeNumber": 40,
         "reward": "Ahriman",
+        "expectedGold": 53
+    },
+    "SHME1": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 1,
+        "slots": 3,
+        "reward": "Adamantium Ore",
+        "expectedGold": 53
+    },
+    "SHME2": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 2,
+        "slots": 3,
+        "reward": "Tainted Text",
+        "expectedGold": 53
+    },
+    "SHME3": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 3,
+        "slots": 4,
+        "reward": "Inferno Bolts",
+        "expectedGold": 53
+    },
+    "SHME4": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 4,
+        "reward": "Ritual Implements",
+        "expectedGold": 53
+    },
+    "SHME5": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 5,
+        "slots": 4,
+        "reward": "Warp Locus",
+        "expectedGold": 53
+    },
+    "SHME6": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 6,
+        "slots": 4,
+        "reward": "Blessing of Tzeentch",
+        "expectedGold": 53
+    },
+    "SHME7": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 7,
+        "reward": "Psychic Force Conduit",
+        "expectedGold": 53
+    },
+    "SHME8": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 8,
+        "reward": "Calandis",
+        "expectedGold": 53
+    },
+    "SHME9": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 9,
+        "slots": 4,
+        "reward": "Nasty Spikes",
+        "expectedGold": 53
+    },
+    "SHME10": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 10,
+        "reward": "The Silver Aquila",
+        "expectedGold": 53
+    },
+    "SHME11": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 11,
+        "slots": 3,
+        "reward": "Ballistics Data",
+        "expectedGold": 53
+    },
+    "SHME12": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 12,
+        "reward": "Mission Assignment",
+        "expectedGold": 53
+    },
+    "SHME13": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 13,
+        "reward": "Brazen Jaws",
+        "expectedGold": 53
+    },
+    "SHME14": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 14,
+        "reward": "Weathering",
+        "expectedGold": 53
+    },
+    "SHME15": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 15,
+        "reward": "Relic Hilt",
+        "expectedGold": 53
+    },
+    "SHME16": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 16,
+        "reward": "Aethana",
         "expectedGold": 53
     }
 }

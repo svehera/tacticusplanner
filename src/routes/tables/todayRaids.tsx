@@ -11,7 +11,7 @@ interface Props {
     shardsRaids: IShardsRaid[];
     upgradesRaids: IUpgradeRaid[];
     addShards: (characterId: string, value: number, location: IItemRaidLocation) => void;
-    addUpgrades: (upgradeId: string, value: number, location: IItemRaidLocation) => void;
+    addUpgrades: (upgradeId: string, value: number, location: IItemRaidLocation | null) => void;
 }
 
 export const TodayRaids: React.FC<Props> = ({
@@ -52,6 +52,14 @@ export const TodayRaids: React.FC<Props> = ({
                             addCount={(value, location) => {
                                 raid.acquiredCount += value;
                                 addUpgrades(raid.id, value, location);
+                            }}
+                            increment={() => {
+                                raid.acquiredCount++;
+                                addUpgrades(raid.id, 1, null);
+                            }}
+                            decrement={() => {
+                                raid.acquiredCount--;
+                                addUpgrades(raid.id, -1, null);
                             }}
                         />
                     </div>
