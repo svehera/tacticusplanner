@@ -15,6 +15,7 @@ import { ICharacter2 } from 'src/models/interfaces';
 import { IMow } from 'src/v2/features/characters/characters.models';
 import { TeamView } from 'src/v2/features/teams/components/team-view';
 import { SelectTeamDialog } from 'src/v2/features/teams/components/select-team-dialog';
+import { isMobile } from 'react-device-detect';
 
 interface Props {
     onClose: () => void;
@@ -73,7 +74,7 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
     };
 
     return (
-        <Dialog open={true} onClose={onClose} fullWidth>
+        <Dialog open={true} onClose={onClose} fullWidth fullScreen={isMobile}>
             <DialogTitle>Add team</DialogTitle>
             <DialogContent style={{ paddingTop: 10 }}>
                 <Stepper activeStep={activeStep} orientation="horizontal" style={{ paddingBottom: 25 }}>

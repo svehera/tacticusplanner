@@ -5,6 +5,7 @@ import { MowTile } from 'src/v2/features/characters/components/mow-tile';
 import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
 import { Divider } from '@mui/material';
 import { EmptyTile } from 'src/v2/features/characters/components/empty-tile';
+import { isMobile } from 'react-device-detect';
 
 interface Props {
     characters: ICharacter2[];
@@ -40,7 +41,7 @@ export const TeamView: React.FC<Props> = ({ characters, mow, withMow = false, on
     };
 
     return (
-        <div className="flex-box">
+        <div className="flex-box" style={{ zoom: isMobile ? '80%' : '100%' }}>
             <div className="flex-box gap5">
                 {Array.from({ length: 5 }).map((_, index) => {
                     const character = characters[index];

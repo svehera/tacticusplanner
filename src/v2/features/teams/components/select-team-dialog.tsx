@@ -10,6 +10,7 @@ import { CharactersService } from 'src/v2/features/characters/characters.service
 import { IMow, IUnit } from 'src/v2/features/characters/characters.models';
 import { TeamView } from 'src/v2/features/teams/components/team-view';
 import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
+import { isMobile } from 'react-device-detect';
 
 type Props = {
     units: IUnit[];
@@ -59,7 +60,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
     };
 
     return (
-        <Dialog open={true} onClose={cancel} fullWidth>
+        <Dialog open={true} onClose={cancel} fullWidth fullScreen={isMobile}>
             <DialogTitle>
                 Select team
                 <TeamView characters={lineup} mow={mow} onClick={handleCharacterSelect} withMow />
