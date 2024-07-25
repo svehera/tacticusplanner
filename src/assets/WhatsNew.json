@@ -1,6 +1,22 @@
 ﻿{
-    "currentVersion": "1.5.9",
+    "currentVersion": "1.6.0",
     "releaseNotes": [
+        {
+            "version": "1.6.0",
+            "date": "July 26",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added plan Teams Beta. Not polished feature"
+                }
+            ],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with Who You Own layout"
+                }
+            ]
+        },
         {
             "version": "1.5.9",
             "date": "July 24",
