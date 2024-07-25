@@ -15,7 +15,6 @@ import { Rarity } from 'src/models/enums';
 import { Conditional } from 'src/v2/components/conditional';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 

@@ -119,6 +119,7 @@ export const inputSubMenu: MenuItemTP[] = [
 export const planSubMenuWeb: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
+    menuItemById['teams'],
     new MenuItemTP('Guild War', menuItemById['defense'].icon, '', '', '', [
         menuItemById['defense'],
         menuItemById['offense'],
@@ -140,7 +141,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
 export const planSubMenu: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
-    // menuItemById['teams'],
+    menuItemById['teams'],
     menuItemById['defense'],
     menuItemById['offense'],
     menuItemById['zones'],

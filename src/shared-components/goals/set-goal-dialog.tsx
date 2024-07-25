@@ -15,7 +15,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { ICampaignsProgress, IPersonalGoal } from 'src/models/interfaces';
 import { v4 } from 'uuid';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityStars, RarityString } from 'src/models/enums';
+import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityStars } from 'src/models/enums';
 import InputLabel from '@mui/material/InputLabel';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { enqueueSnackbar } from 'notistack';
@@ -31,12 +31,10 @@ import { CampaignsUsageSelect } from 'src/shared-components/goals/campaings-usag
 import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { SetAscendGoal } from 'src/shared-components/goals/set-ascend-goal';
-import MultipleSelectCheckmarks from 'src/routes/characters/multiple-select';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
-import { Info } from '@mui/icons-material';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 
 const getDefaultForm = (priority: number): IPersonalGoal => ({

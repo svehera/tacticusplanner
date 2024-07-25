@@ -71,7 +71,7 @@ export const SharedRoster = () => {
             <h3 style={{ textAlign: 'center' }}>{sharedUser}'s Roster</h3>
             <CharactersViewContext.Provider
                 value={{
-                    showAbilities: viewPreferences.showAbilitiesLevel,
+                    showAbilitiesLevel: viewPreferences.showAbilitiesLevel,
                     showBadges: viewPreferences.showBadges,
                     showPower: viewPreferences.showPower,
                     showBsValue: viewPreferences.showBsValue,

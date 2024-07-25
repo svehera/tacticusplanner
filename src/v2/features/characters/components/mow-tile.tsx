@@ -49,12 +49,14 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                             Power: {numberToThousandsStringOld(CharactersPowerService.getCharacterAbilityPower(mow))}
                         </span>
                     }>
-                    <CharacterPortraitImage icon={mow.portraitIcon} />
+                    <div>
+                        <CharacterPortraitImage icon={mow.portraitIcon} />
+                    </div>
                 </Tooltip>
 
                 <div
                     className="abilities"
-                    style={{ visibility: hasAbilities && viewContext.showAbilities ? 'visible' : 'hidden' }}>
+                    style={{ visibility: hasAbilities && viewContext.showAbilitiesLevel ? 'visible' : 'hidden' }}>
                     <div className="ability-level">{mow.primaryAbilityLevel}</div>
                     <div className="ability-level">{mow.secondaryAbilityLevel}</div>
                 </div>

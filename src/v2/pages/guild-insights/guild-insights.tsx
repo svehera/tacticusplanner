@@ -74,7 +74,7 @@ export const GuildInsights = () => {
 
             <CharactersViewContext.Provider
                 value={{
-                    showAbilities: viewPreferences.showAbilitiesLevel,
+                    showAbilitiesLevel: viewPreferences.showAbilitiesLevel,
                     showBadges: viewPreferences.showBadges,
                     showPower: viewPreferences.showPower,
                     showBsValue: viewPreferences.showBsValue,

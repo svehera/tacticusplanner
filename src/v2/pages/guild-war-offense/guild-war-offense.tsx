@@ -293,7 +293,7 @@ export const GuildWarOffense = () => {
         <div className="flex-box column gap10">
             <CharactersViewContext.Provider
                 value={{
-                    showAbilities: viewPreferences.showAbilitiesLevel,
+                    showAbilitiesLevel: viewPreferences.showAbilitiesLevel,
                     showBadges: viewPreferences.showBadges,
                     showPower: viewPreferences.showPower,
                     showBsValue: viewPreferences.showBsValue,

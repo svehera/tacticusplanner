@@ -24,6 +24,7 @@ import { defaultData, rankToLevel, rankToRarity, rarityStringToNumber, rarityToS
 import { IMow, IMowDb, IMowStatic } from 'src/v2/features/characters/characters.models';
 import mowsData from 'src/v2/data/mows.json';
 import { UnitType } from 'src/v2/features/characters/units.enums';
+import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
@@ -36,6 +37,7 @@ export class GlobalState implements IGlobalState {
     readonly selectedTeamOrder: ISelectedTeamsOrdering;
     readonly leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     readonly goals: IPersonalGoal[];
+    readonly teams: IPersonalTeam[];
     readonly leProgress: LegendaryEventData<ILegendaryEventProgressState>;
     readonly leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     readonly campaignsProgress: ICampaignsProgress;
@@ -76,6 +78,7 @@ export class GlobalState implements IGlobalState {
         this.dailyRaids = personalData.dailyRaids ?? defaultData.dailyRaids;
         this.guildWar = personalData.guildWar ?? defaultData.guildWar;
         this.guild = personalData.guild ?? defaultData.guild;
+        this.teams = personalData.teams ?? defaultData.teams;
     }
 
     static initCharacters(
@@ -115,7 +118,7 @@ export class GlobalState implements IGlobalState {
             return {
                 ...staticData,
                 ...combinedData,
-                icon: isReleased ? staticData.icon : 'unset.webp',
+                icon: isReleased ? staticData.icon : 'comingSoon.webp',
                 rank: +combinedData.rank,
                 numberOfUnlocked:
                     totalUsers && personalCharData?.numberOfUnlocked
@@ -139,8 +142,8 @@ export class GlobalState implements IGlobalState {
             return {
                 ...staticData,
                 unitType: UnitType.mow,
-                portraitIcon: isReleased ? `${staticData.id}.webp` : 'unset.webp',
-                badgeIcon: isReleased ? `${staticData.id}.png` : 'unset.webp',
+                portraitIcon: isReleased ? `${staticData.id}.webp` : 'comingSoon.webp',
+                badgeIcon: isReleased ? `${staticData.id}.png` : 'unset.png',
                 rarity: dbMow?.rarity ?? initialRarity,
                 stars: dbMow?.stars ?? initialRarityStars,
                 primaryAbilityLevel: dbMow?.primaryAbilityLevel ?? 1,
@@ -239,6 +242,7 @@ export class GlobalState implements IGlobalState {
             dailyRaids: value.dailyRaids,
             guildWar: value.guildWar,
             guild: value.guild,
+            teams: value.teams,
         };
     }
 }

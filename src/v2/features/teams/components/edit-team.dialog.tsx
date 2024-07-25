@@ -1,0 +1,147 @@
+﻿import React, { useState } from 'react';
+import Dialog from '@mui/material/Dialog';
+import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import Button from '@mui/material/Button';
+import { IPersonalTeam, PersonalTeam } from 'src/v2/features/teams/teams.models';
+import { GameMode } from 'src/v2/features/teams/teams.enums';
+import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
+import { guildRaidSubModes, gwSubModes, taSubModes } from 'src/v2/features/teams/teams.constants';
+import { getEnumValues } from 'src/shared-logic/functions';
+import { Rarity } from 'src/models/enums';
+import { RaritySelect } from 'src/shared-components/rarity-select';
+import { ICharacter2 } from 'src/models/interfaces';
+import { IMow } from 'src/v2/features/characters/characters.models';
+import { TeamView } from 'src/v2/features/teams/components/team-view';
+import { SelectTeamDialog } from 'src/v2/features/teams/components/select-team-dialog';
+
+interface Props {
+    onClose: () => void;
+    saveTeam: (team: IPersonalTeam) => void;
+    team: IPersonalTeam;
+    characters: ICharacter2[];
+    mows: IMow[];
+}
+
+export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, team, saveTeam }) => {
+    const [selectedSubModes, setSelectedSubModes] = useState<string[]>(team.subModes);
+    const [notes, setNotes] = useState<string>(team.notes);
+    const [teamName, setTeamName] = useState<string>(team.name);
+    const [rarityCap, setRarityCap] = useState(team.rarityCap);
+    const [lineup, setLineup] = useState<ICharacter2[]>(team.lineup.map(id => characters.find(x => x.id === id)!));
+    const [mow, setMow] = useState<IMow | null>(team.mowId ? mows.find(x => x.id === team.mowId)! : null);
+
+    const [isOpenSelectDialog, setIsOpenSelectDialog] = useState<boolean>(false);
+
+    const openSelectDialog = () => setIsOpenSelectDialog(true);
+    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow | null) => {
+        setLineup(selectedTeam);
+        setMow(mow);
+        setIsOpenSelectDialog(false);
+    };
+
+    const handleSave = () => {
+        const updatedTeam = new PersonalTeam(
+            team.primaryGameMode,
+            selectedSubModes,
+            teamName,
+            notes,
+            rarityCap,
+            lineup.map(x => x.id),
+            mow?.id
+        );
+        updatedTeam.id = team.id;
+        saveTeam(updatedTeam);
+        onClose();
+    };
+
+    return (
+        <Dialog open={true} onClose={onClose} fullWidth>
+            <DialogTitle>Edit team</DialogTitle>
+            <DialogContent style={{ paddingTop: 10 }}>
+                <>
+                    {team.primaryGameMode === GameMode.guildRaids && (
+                        <MultipleSelect
+                            label="Guild Raid Bosses"
+                            options={guildRaidSubModes}
+                            optionsChange={setSelectedSubModes}
+                        />
+                    )}
+
+                    {team.primaryGameMode === GameMode.tournamentArena && (
+                        <MultipleSelect label="TA mode" options={taSubModes} optionsChange={setSelectedSubModes} />
+                    )}
+
+                    {team.primaryGameMode === GameMode.guildWar && (
+                        <MultipleSelect label="GW mode" options={gwSubModes} optionsChange={setSelectedSubModes} />
+                    )}
+                </>
+
+                <br />
+                <br />
+
+                <TextField
+                    fullWidth
+                    label="Team name"
+                    variant="outlined"
+                    helperText="Max length 50 characters."
+                    value={teamName}
+                    onChange={event => setTeamName(event.target.value.slice(0, 50))}
+                />
+
+                <br />
+                <br />
+
+                <TextField
+                    fullWidth
+                    id="outlined-textarea"
+                    label="Notes"
+                    placeholder="Notes"
+                    multiline
+                    maxRows={5}
+                    value={notes}
+                    helperText="Optional. Max length 300 characters."
+                    onChange={event => setNotes(event.target.value.slice(0, 300))}
+                />
+
+                <br />
+                <br />
+
+                {team.primaryGameMode === GameMode.tournamentArena && (
+                    <>
+                        <RaritySelect
+                            label={'Rarity Cap'}
+                            rarityValues={getEnumValues(Rarity)}
+                            value={rarityCap}
+                            valueChanges={setRarityCap}
+                        />
+
+                        <br />
+                        <br />
+                    </>
+                )}
+
+                <TeamView
+                    characters={lineup}
+                    mow={mow}
+                    withMow
+                    onClick={() => openSelectDialog()}
+                    onEmptyClick={() => openSelectDialog()}
+                />
+
+                {isOpenSelectDialog && (
+                    <SelectTeamDialog
+                        units={[...characters, ...mows]}
+                        team={lineup}
+                        activeMow={mow}
+                        rarityCap={rarityCap}
+                        onClose={closeSelectDialog}
+                    />
+                )}
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={onClose}>Cancel</Button>
+                <Button onClick={handleSave}>Save</Button>
+            </DialogActions>
+        </Dialog>
+    );
+};

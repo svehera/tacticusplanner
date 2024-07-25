@@ -25,6 +25,7 @@ import { guildWarReducer } from 'src/reducers/guildWarReducer';
 import { guildReducer } from 'src/reducers/guildReducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
 import { enable as enableDarkMode, disable as disableDarkMode } from 'darkreader';
+import { teamsReducer } from 'src/reducers/teams.reducer';
 
 export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const { isAuthenticated, setUser, logout } = useAuth();
@@ -44,6 +45,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [characters, dispatchCharacters] = React.useReducer(charactersReducer, globalState.characters);
     const [mows, dispatchMows] = React.useReducer(mowsReducer, globalState.mows);
     const [goals, dispatchGoals] = React.useReducer(goalsReducer, globalState.goals);
+    const [teams, dispatchTeams] = React.useReducer(teamsReducer, globalState.teams);
     const [viewPreferences, dispatchViewPreferences] = React.useReducer(
         viewPreferencesReducer,
         globalState.viewPreferences
@@ -94,6 +96,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         () => ({
             characters: wrapDispatch(dispatchCharacters),
             mows: wrapDispatch(dispatchMows),
+            teams: wrapDispatch(dispatchTeams),
             goals: wrapDispatch(dispatchGoals),
             viewPreferences: wrapDispatch(dispatchViewPreferences),
             autoTeamsPreferences: wrapDispatch(dispatchAutoTeamsPreferences),
@@ -110,6 +113,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 dispatchCharacters({ type: 'Set', value: data.characters });
                 dispatchGoals({ type: 'Set', value: data.goals });
+                dispatchTeams({ type: 'Set', value: data.teams });
                 dispatchViewPreferences({ type: 'Set', value: data.viewPreferences });
                 dispatchDailyRaidsPreferences({ type: 'Set', value: data.dailyRaidsPreferences });
                 dispatchAutoTeamsPreferences({ type: 'Set', value: data.autoTeamsPreferences });
@@ -149,6 +153,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchDailyRaidsPreferences,
             dispatchGuildWar,
             dispatchGuild,
+            dispatchTeams,
             setGlobalState,
         ]
     );
@@ -161,6 +166,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         const newValue: IGlobalState = {
             characters,
             mows,
+            teams,
             viewPreferences,
             autoTeamsPreferences,
             selectedTeamOrder,

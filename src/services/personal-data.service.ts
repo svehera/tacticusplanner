@@ -20,6 +20,7 @@
 import { defaultData } from '../models/constants';
 import { Rank } from '../models/enums';
 import { IMowDb } from 'src/v2/features/characters/characters.models';
+import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
 export class PersonalDataLocalStorage {
     private readonly storePrefix = 'tp-';
@@ -53,6 +54,7 @@ export class PersonalDataLocalStorage {
                 },
                 characters: this.getItem<IPersonalCharacterData2[]>('characters') ?? defaultData.characters,
                 mows: this.getItem<IMowDb[]>('mows') ?? defaultData.mows,
+                teams: this.getItem<IPersonalTeam[]>('teams') ?? defaultData.teams,
                 goals: this.getItem<IPersonalGoal[]>('goals') ?? defaultData.goals,
                 selectedTeamOrder:
                     this.getItem<ISelectedTeamsOrdering>('selectedTeamOrder') ?? defaultData.selectedTeamOrder,
@@ -199,6 +201,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             guildWar: defaultData.guildWar,
             guild: defaultData.guild,
             mows: defaultData.mows,
+            teams: defaultData.teams,
         };
     }
 

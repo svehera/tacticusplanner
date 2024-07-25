@@ -62,7 +62,7 @@ export interface IViewControls {
 
 export interface ICharactersContext {
     showBadges: boolean;
-    showAbilities: boolean;
+    showAbilitiesLevel: boolean;
     showBsValue: boolean;
     showPower: boolean;
     showCharacterLevel: boolean;
