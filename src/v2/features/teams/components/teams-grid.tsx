@@ -143,13 +143,13 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
             {!!guildRaidTeams.length && (
                 <div>
                     <h2>Guild Raids</h2>
-                    {guildRaidTeams.map(renderTeam)}
+                    <div className="flex-box gap10 wrap">{guildRaidTeams.map(renderTeam)}</div>
                 </div>
             )}
             {!!taTeams.length && (
                 <div>
                     <h2>Tournament Arena</h2>
-                    {taTeams.map(renderCappedTeam)}
+                    <div className="flex-box gap10 wrap">{taTeams.map(renderCappedTeam)}</div>
                 </div>
             )}
         </div>
