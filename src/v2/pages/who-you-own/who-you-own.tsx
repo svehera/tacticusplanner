@@ -128,7 +128,7 @@ export const WhoYouOwn = () => {
         <Box style={{ margin: 'auto' }}>
             <CharactersViewContext.Provider
                 value={{
-                    showAbilities: viewPreferences.showAbilitiesLevel,
+                    showAbilitiesLevel: viewPreferences.showAbilitiesLevel,
                     showBadges: viewPreferences.showBadges,
                     showPower: viewPreferences.showPower,
                     showBsValue: viewPreferences.showBsValue,

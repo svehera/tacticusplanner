@@ -12,7 +12,7 @@ export const PlanRoutes = () => {
     const teamsMenuItem = menuItemById['teams'];
     return (
         <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
-            {[goalsMenuItem, dailyRaidsMenuItem].map(menuItem => (
+            {[goalsMenuItem, dailyRaidsMenuItem, teamsMenuItem].map(menuItem => (
                 <Card
                     variant="outlined"
                     key={menuItem.label}

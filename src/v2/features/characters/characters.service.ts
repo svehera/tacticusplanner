@@ -9,7 +9,7 @@ import { filterChaos } from './functions/filter-by-chaos';
 import { filterImperial } from './functions/filter-by-imperial';
 import { filterXenos } from './functions/filter-by-xenos';
 import { CharactersOrderBy } from './enums/characters-order-by';
-import { IFaction, IUnit } from './characters.models';
+import { IFaction, IMow, IUnit } from './characters.models';
 
 import factionsData from 'src/v2/data/factions.json';
 import { CharactersPowerService } from './characters-power.service';
@@ -138,6 +138,18 @@ export class CharactersService {
             level: Math.min(character.level, capped.abilitiesLevel),
             activeAbilityLevel: Math.min(character.activeAbilityLevel, capped.abilitiesLevel),
             passiveAbilityLevel: Math.min(character.passiveAbilityLevel, capped.abilitiesLevel),
+        };
+    }
+
+    static capMowAtRarity(mow: IMow, rarity: Rarity): IMow {
+        const capped = rarityCaps[rarity];
+
+        return {
+            ...mow,
+            rarity: Math.min(mow.rarity, capped.rarity),
+            stars: Math.min(mow.stars, capped.stars),
+            primaryAbilityLevel: Math.min(mow.primaryAbilityLevel, capped.abilitiesLevel),
+            secondaryAbilityLevel: Math.min(mow.secondaryAbilityLevel, capped.abilitiesLevel),
         };
     }
 

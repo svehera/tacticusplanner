@@ -41,6 +41,8 @@ import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
 import { MowsAction } from 'src/reducers/mows.reducer';
 import { UnitType } from 'src/v2/features/characters/units.enums';
+import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+import { TeamsAction } from 'src/reducers/teams.reducer';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -263,6 +265,7 @@ export interface IGlobalState {
     characters: Array<ICharacter2>;
     mows: Array<IMow>;
     goals: IPersonalGoal[];
+    teams: IPersonalTeam[];
     selectedTeamOrder: ISelectedTeamsOrdering;
     leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILegendaryEventProgressState>;
@@ -277,6 +280,7 @@ export interface IGlobalState {
 export interface IDispatchContext {
     characters: React.Dispatch<CharactersAction>;
     mows: React.Dispatch<MowsAction>;
+    teams: React.Dispatch<TeamsAction>;
     viewPreferences: React.Dispatch<ViewPreferencesAction>;
     dailyRaidsPreferences: React.Dispatch<DailyRaidsPreferencesAction>;
     autoTeamsPreferences: React.Dispatch<AutoTeamsPreferencesAction>;
@@ -305,6 +309,7 @@ export interface IPersonalData2 {
     characters: Partial<IPersonalCharacterData2>[];
     mows: IMowDb[];
     goals: IPersonalGoal[];
+    teams: IPersonalTeam[];
     leTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     leProgress: LegendaryEventData<ILegendaryEventProgressState>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;

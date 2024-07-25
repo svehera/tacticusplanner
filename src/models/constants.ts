@@ -262,6 +262,7 @@ export const defaultData: IPersonalData2 = {
         farmStrategy: DailyRaidsStrategy.leastEnergy,
     },
     mows: [],
+    teams: [],
     characters: [
         {
             name: 'Varro Tigurius',

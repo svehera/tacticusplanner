@@ -86,7 +86,7 @@ export const CharacterTile = ({
 
                 <div
                     className="abilities"
-                    style={{ visibility: hasAbilities && viewContext.showAbilities ? 'visible' : 'hidden' }}>
+                    style={{ visibility: hasAbilities && viewContext.showAbilitiesLevel ? 'visible' : 'hidden' }}>
                     <div className="ability-level">{character.activeAbilityLevel}</div>
                     <div className="ability-level">{character.passiveAbilityLevel}</div>
                 </div>
