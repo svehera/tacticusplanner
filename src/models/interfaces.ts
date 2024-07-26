@@ -235,6 +235,7 @@ export type DynamicProps = {
     numberOfUnlocked?: number;
     ownedBy?: string[];
     potential?: number;
+    power?: number;
 };
 
 export interface IPersonalData {

@@ -25,6 +25,7 @@ import { IMow, IMowDb, IMowStatic } from 'src/v2/features/characters/characters.
 import mowsData from 'src/v2/data/mows.json';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
@@ -115,7 +116,8 @@ export class GlobalState implements IGlobalState {
                 xp: personalCharData?.xp ?? 0,
                 shards: personalCharData?.shards ?? 0,
             };
-            return {
+
+            const result: ICharacter2 = {
                 ...staticData,
                 ...combinedData,
                 icon: isReleased ? staticData.icon : 'comingSoon.webp',
@@ -126,6 +128,10 @@ export class GlobalState implements IGlobalState {
                         : undefined,
                 ownedBy: personalCharData?.ownedBy ?? [],
             };
+
+            result.power = CharactersPowerService.getCharacterPower(result);
+
+            return result;
         });
     }
 
@@ -139,7 +145,7 @@ export class GlobalState implements IGlobalState {
                 ? this.isAtLeast2DaysBefore(new Date(staticData.releaseDate))
                 : true;
 
-            return {
+            const result: IMow = {
                 ...staticData,
                 unitType: UnitType.mow,
                 portraitIcon: isReleased ? `${staticData.id}.webp` : 'comingSoon.webp',
@@ -151,6 +157,10 @@ export class GlobalState implements IGlobalState {
                 unlocked: dbMow?.unlocked ?? false,
                 shards: dbMow?.shards ?? 0,
             };
+
+            result.power = CharactersPowerService.getCharacterAbilityPower(result);
+
+            return result;
         });
     }
 
