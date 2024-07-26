@@ -8,7 +8,7 @@ import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 import { TeamsGrid } from 'src/v2/features/teams/components/teams-grid';
 import { EditTeamDialog } from 'src/v2/features/teams/components/edit-team.dialog';
 import { useDebounceValue } from 'usehooks-ts';
-import { guildRaidSubModes, taSubModes } from 'src/v2/features/teams/teams.constants';
+import { allModes } from 'src/v2/features/teams/teams.constants';
 
 export const Teams = () => {
     const dispatch = useContext(DispatchContext);
@@ -34,7 +34,6 @@ export const Teams = () => {
 
     const filteredTeams = useMemo(() => {
         const searchTerm = quickFilter.toLowerCase();
-        const modes = [...taSubModes, ...guildRaidSubModes];
 
         if (!searchTerm) {
             return teams;
@@ -44,7 +43,7 @@ export const Teams = () => {
             const nameMatched = () => team.name.toLowerCase().includes(searchTerm);
             const modeMatched = () => {
                 const modsNames = team.subModes.map(mod =>
-                    (modes.find(x => x.value === mod)?.label ?? '').toLowerCase()
+                    (allModes.find(x => x.value === mod)?.label ?? '').toLowerCase()
                 );
                 return modsNames.some(mod => mod.includes(searchTerm));
             };

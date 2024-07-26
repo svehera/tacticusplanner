@@ -13,7 +13,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { sum } from 'lodash';
-import { guildRaidSubModes, taSubModes } from 'src/v2/features/teams/teams.constants';
+import { allModes } from 'src/v2/features/teams/teams.constants';
 import { isMobile } from 'react-device-detect';
 
 interface Props {
@@ -32,9 +32,7 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
         const teamCharacters = team.lineup.map(id => characters.find(character => id === character.id)!);
         const teamMow = mows.find(x => x.id === team.mowId);
         const withMow = !!teamMow;
-        const subModes = team.subModes
-            .map(value => guildRaidSubModes.find(x => x.value === value)?.label ?? '')
-            .join(', ');
+        const subModes = team.subModes.map(value => allModes.find(x => x.value === value)?.label ?? '').join(', ');
 
         return (
             <Card
@@ -72,7 +70,7 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
         const cappedCharacters = teamCharacters.map(x => CharactersService.capCharacterAtRarity(x, team.rarityCap));
         const teamMow = mows.find(x => x.id === team.mowId);
         const withMow = !!teamMow;
-        const subModes = team.subModes.map(value => taSubModes.find(x => x.value === value)?.label ?? '').join(', ');
+        const subModes = team.subModes.map(value => allModes.find(x => x.value === value)?.label ?? '').join(', ');
 
         const teamPotential = cappedCharacters.map(x =>
             CharactersService.calculateCharacterPotential(x, team.rarityCap)
