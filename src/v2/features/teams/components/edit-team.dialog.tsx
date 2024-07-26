@@ -71,6 +71,14 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
         onClose();
     };
 
+    for (const guildRaidPrime of guildRaidPrimes) {
+        guildRaidPrime.selected = selectedSubModes.includes(guildRaidPrime.value);
+    }
+
+    for (const guildRaidBoss of guildRaidBosses) {
+        guildRaidBoss.selected = selectedSubModes.includes(guildRaidBoss.value);
+    }
+
     return (
         <Dialog open={true} onClose={onClose} fullWidth fullScreen={isMobile}>
             <DialogTitle>Edit team</DialogTitle>
