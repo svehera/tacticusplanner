@@ -27,6 +27,7 @@ interface Props {
     optionsChange: (value: Array<string>) => void;
     size?: 'small' | 'medium';
     multiple?: boolean;
+    minWidth?: number;
 }
 
 export const MultipleSelect: React.FC<Props> = ({
@@ -35,6 +36,7 @@ export const MultipleSelect: React.FC<Props> = ({
     options,
     size = 'medium',
     multiple = true,
+    minWidth = 300,
 }) => {
     const [selectedValues, setSelectedValues] = useState(options.filter(x => x.selected).map(x => x.value));
     const handleChange = (event: SelectChangeEvent<string[]>) => {
@@ -50,7 +52,7 @@ export const MultipleSelect: React.FC<Props> = ({
     };
 
     return (
-        <FormControl sx={{ minWidth: 300 }} size={size} fullWidth>
+        <FormControl sx={{ minWidth }} size={size} fullWidth>
             <InputLabel id="multiple-checkbox-label">{label}</InputLabel>
             <Select
                 labelId="multiple-checkbox-label"
