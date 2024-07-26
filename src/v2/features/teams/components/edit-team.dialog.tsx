@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { IPersonalTeam, PersonalTeam } from 'src/v2/features/teams/teams.models';
 import { GameMode } from 'src/v2/features/teams/teams.enums';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
-import { guildRaidSubModes, gwSubModes, taSubModes } from 'src/v2/features/teams/teams.constants';
+import { guildRaidBosses, guildRaidPrimes, gwSubModes, taSubModes } from 'src/v2/features/teams/teams.constants';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { Rarity } from 'src/models/enums';
 import { RaritySelect } from 'src/shared-components/rarity-select';
@@ -40,6 +40,22 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
         setIsOpenSelectDialog(false);
     };
 
+    const updateSelectedGuildBosses = (values: string[]) => {
+        const nonGuildBossValues = selectedSubModes.filter(
+            mod => !guildRaidBosses.some(option => option.value === mod)
+        );
+
+        setSelectedSubModes([...nonGuildBossValues, ...values]);
+    };
+
+    const updateSelectedGuildPrimes = (values: string[]) => {
+        const nonGuildPrimeValues = selectedSubModes.filter(
+            mod => !guildRaidPrimes.some(option => option.value === mod)
+        );
+
+        setSelectedSubModes([...nonGuildPrimeValues, ...values]);
+    };
+
     const handleSave = () => {
         const updatedTeam = new PersonalTeam(
             team.primaryGameMode,
@@ -61,11 +77,22 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
             <DialogContent style={{ paddingTop: 10 }}>
                 <>
                     {team.primaryGameMode === GameMode.guildRaids && (
-                        <MultipleSelect
-                            label="Guild Raid Bosses"
-                            options={guildRaidSubModes}
-                            optionsChange={setSelectedSubModes}
-                        />
+                        <>
+                            <MultipleSelect
+                                label="Guild Raid Bosses"
+                                options={guildRaidBosses}
+                                optionsChange={updateSelectedGuildBosses}
+                            />
+
+                            <br />
+                            <br />
+
+                            <MultipleSelect
+                                label="Guild Raid Primes"
+                                options={guildRaidPrimes}
+                                optionsChange={updateSelectedGuildPrimes}
+                            />
+                        </>
                     )}
 
                     {team.primaryGameMode === GameMode.tournamentArena && (

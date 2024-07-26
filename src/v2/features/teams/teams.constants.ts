@@ -22,20 +22,10 @@ export const gameModes: IMenuOption[] = [
 const leftSidePrimeSuffix = '_prime_L';
 const rightSidePrimeSuffix = '_prime_R';
 
-export const guildRaidSubModes: IMenuOption[] = [
+export const guildRaidBosses: IMenuOption[] = [
     {
         value: GuildRaidBoss.avatar,
         label: 'Avatar',
-        selected: false,
-    },
-    {
-        value: GuildRaidBoss.avatar + leftSidePrimeSuffix,
-        label: 'Avatar - Aethana',
-        selected: false,
-    },
-    {
-        value: GuildRaidBoss.avatar + rightSidePrimeSuffix,
-        label: 'Avatar - Eldryon',
         selected: false,
     },
     {
@@ -44,28 +34,8 @@ export const guildRaidSubModes: IMenuOption[] = [
         selected: false,
     },
     {
-        value: GuildRaidBoss.ghazghkull + leftSidePrimeSuffix,
-        label: 'Ghazghkull - Gibbascrapz',
-        selected: false,
-    },
-    {
-        value: GuildRaidBoss.ghazghkull + rightSidePrimeSuffix,
-        label: 'Ghazghkull - Tanksmasha',
-        selected: false,
-    },
-    {
         value: GuildRaidBoss.hiveTyrant,
         label: 'Hive Tyrant',
-        selected: false,
-    },
-    {
-        value: GuildRaidBoss.hiveTyrant + leftSidePrimeSuffix,
-        label: 'Hive Tyrant - Alpha Prime',
-        selected: false,
-    },
-    {
-        value: GuildRaidBoss.hiveTyrant + rightSidePrimeSuffix,
-        label: 'Hive Tyrant - Omega Prime',
         selected: false,
     },
     {
@@ -74,28 +44,8 @@ export const guildRaidSubModes: IMenuOption[] = [
         selected: false,
     },
     {
-        value: GuildRaidBoss.mortarion + leftSidePrimeSuffix,
-        label: 'Mortarion - Nauseous Rotbone',
-        selected: false,
-    },
-    {
-        value: GuildRaidBoss.mortarion + rightSidePrimeSuffix,
-        label: 'Mortarion - Corrodius',
-        selected: false,
-    },
-    {
         value: GuildRaidBoss.rogalDorn,
         label: 'Rogal Dorn',
-        selected: false,
-    },
-    {
-        value: GuildRaidBoss.rogalDorn + leftSidePrimeSuffix,
-        label: 'Rogal Dorn - Sibyll Devine',
-        selected: false,
-    },
-    {
-        value: GuildRaidBoss.rogalDorn + rightSidePrimeSuffix,
-        label: 'Rogal Dorn - Thaddeus Noble',
         selected: false,
     },
     {
@@ -104,28 +54,8 @@ export const guildRaidSubModes: IMenuOption[] = [
         selected: false,
     },
     {
-        value: GuildRaidBoss.screamerKiller + leftSidePrimeSuffix,
-        label: 'Screamer-Killer - Neurothrope',
-        selected: false,
-    },
-    {
-        value: GuildRaidBoss.screamerKiller + rightSidePrimeSuffix,
-        label: 'Screamer-Killer - Winged Prime',
-        selected: false,
-    },
-    {
         value: GuildRaidBoss.szarekh,
         label: 'Szarekh',
-        selected: false,
-    },
-    {
-        value: GuildRaidBoss.szarekh + leftSidePrimeSuffix,
-        label: 'Szarekh - Hapthatra',
-        selected: false,
-    },
-    {
-        value: GuildRaidBoss.szarekh + rightSidePrimeSuffix,
-        label: 'Szarekh - Mesophet',
         selected: false,
     },
     {
@@ -133,14 +63,72 @@ export const guildRaidSubModes: IMenuOption[] = [
         label: 'Tervigon',
         selected: false,
     },
+];
+
+export const guildRaidPrimes: IMenuOption[] = [
     {
-        value: GuildRaidBoss.tervigon + leftSidePrimeSuffix,
-        label: 'Tervigon - Alpha Prime',
+        value: GuildRaidBoss.avatar + leftSidePrimeSuffix,
+        label: 'Aethana (Avatar)',
         selected: false,
     },
     {
-        value: GuildRaidBoss.tervigon + rightSidePrimeSuffix,
-        label: 'Tervigon - Omega Prime',
+        value: GuildRaidBoss.avatar + rightSidePrimeSuffix,
+        label: 'Eldryon (Avatar)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.ghazghkull + leftSidePrimeSuffix,
+        label: 'Gibbascrapz (Ghazghkull)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.ghazghkull + rightSidePrimeSuffix,
+        label: 'Tanksmasha (Ghazghkull)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.hiveTyrant + leftSidePrimeSuffix,
+        label: 'Alpha/Omega Prime (Tyrant)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.mortarion + leftSidePrimeSuffix,
+        label: 'Nauseous Rotbone (Mortarion)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.mortarion + rightSidePrimeSuffix,
+        label: 'Corrodius (Mortarion)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.rogalDorn + leftSidePrimeSuffix,
+        label: 'Sibyll Devine (Rogal Dorn)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.rogalDorn + rightSidePrimeSuffix,
+        label: 'Thaddeus Noble (Rogal Dorn)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.screamerKiller + leftSidePrimeSuffix,
+        label: 'Neurothrope (Screamer)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.screamerKiller + rightSidePrimeSuffix,
+        label: 'Winged Prime (Screamer)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.szarekh + leftSidePrimeSuffix,
+        label: 'Hapthatra (Szarekh)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.szarekh + rightSidePrimeSuffix,
+        label: 'Mesophet (Szarekh)',
         selected: false,
     },
 ];
@@ -180,3 +168,5 @@ export const gwSubModes: IMenuOption[] = [
         selected: false,
     },
 ];
+
+export const allModes = [...guildRaidBosses, ...guildRaidPrimes, ...taSubModes, ...gwSubModes];
