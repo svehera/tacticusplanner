@@ -1,6 +1,5 @@
 ﻿import React from 'react';
 
-import ragnar from '../assets/legendary-events/Ragnar.json';
 import vitruvius from '../assets/legendary-events/Vitruvius.json';
 import kharn from '../assets/legendary-events/Kharn.json';
 import mephiston from '../assets/legendary-events/Mephiston.json';
@@ -63,7 +62,7 @@ export const menuItemById = {
         'Ragnar',
         <CharacterImage icon={'Ragnar.png'} imageSize={24} />,
         '/plan/le/ragnar',
-        `Ragnar ${ragnar.eventStage}/3 (${ragnar.nextEventDate})`
+        'Ragnar (Finished)'
     ),
     vitruvius: new MenuItemTP(
         'Vitruvius',
@@ -130,9 +129,9 @@ export const planSubMenuWeb: MenuItemTP[] = [
         menuItemById['mephiston'],
         menuItemById['kharn'],
         menuItemById['vitruvius'],
-        menuItemById['ragnar'],
     ]),
     new MenuItemTP('LRE Archive', menuItemById['leMasterTable'].icon, '', '', '', [
+        menuItemById['ragnar'],
         menuItemById['shadowsun'],
         menuItemById['aunshi'],
     ]),
