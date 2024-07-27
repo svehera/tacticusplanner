@@ -23,6 +23,7 @@
             "buff": "Regional: All defending units have 10% increased Armour"
         },
         {
+            "inactive": true,
             "id": "troopGarrison",
             "name": "Troop Garrison",
             "warScore": 15000,
@@ -35,6 +36,20 @@
                 "5": "Elite"
             },
             "buff": "Global: Spawns 2 (3 when two Garrisons are still standing) Cadian Guardsmen supporting defenders. They are affected by all other defender buffs"
+        },
+        {
+            "id": "troopGarrison",
+            "name": "Landing Pad",
+            "warScore": 15000,
+            "count": 2,
+            "difficulty": {
+                "1": "Trooper",
+                "2": "Veteran",
+                "3": "Veteran",
+                "4": "Elite",
+                "5": "Elite"
+            },
+            "buff": "Regional: Angels of Death. At the beginning of the defender's third turn, 2 Jump Pack Intercessors are summoned supporting the defenders. They are affected by all other defender buffs and their stats depend on the rarity cap of the defenders."
         },
         {
             "id": "frontline",
@@ -115,7 +130,8 @@
                 "3": "Veteran",
                 "4": "Veteran",
                 "5": "Elite"
-            }
+            },
+            "buff": "Global: Valkyrie Strike. At the end of the first, third and fifth defender turn, marks a hex anywhere on the battlefield. At the beginning of the defender's next turn, units on the target hex and all surrounding hexes are hit with Hellstrike Missiles and lose an amount of Health depending on the rarity cap of the defenders."
         },
         {
             "id": "medicaeStation",

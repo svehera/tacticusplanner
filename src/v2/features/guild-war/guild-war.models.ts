@@ -49,6 +49,7 @@ export interface IGWZoneRaw {
     count: number;
     difficulty: Record<number, string>; // battlefield level to rarityCaps array
     buff?: string;
+    inactive?: boolean;
 }
 
 export interface IGWTeam {

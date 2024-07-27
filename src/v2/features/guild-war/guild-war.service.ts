@@ -1,5 +1,5 @@
 ﻿import guildWarData from 'src/v2/data/guildWar.json';
-import { IGWData, IGWDataRaw, IGWLayoutZone, IGWZone, ZoneId } from './guild-war.models';
+import { IGWData, IGWDataRaw, IGWZone } from './guild-war.models';
 import { Difficulty, Rarity } from 'src/models/enums';
 import { groupBy, mapValues } from 'lodash';
 
@@ -58,25 +58,27 @@ export class GuildWarService {
     }
 
     private static convertRawDataToGWData(rawData: IGWDataRaw): IGWData {
-        const sections: IGWZone[] = rawData.sections.map(rawSection => {
-            const rarityCaps: Record<number, { difficulty: string; caps: Rarity[] }> = {};
-            for (const bfLevel in rawSection.difficulty) {
-                const difficulty = rawSection.difficulty[bfLevel];
-                const caps = rawData.rarityCaps[difficulty].map(x => this.shortRarityStringToEnum[x]);
-                rarityCaps[parseInt(bfLevel)] = {
-                    difficulty: difficulty,
-                    caps: caps,
+        const sections: IGWZone[] = rawData.sections
+            .filter(x => !x.inactive)
+            .map(rawSection => {
+                const rarityCaps: Record<number, { difficulty: string; caps: Rarity[] }> = {};
+                for (const bfLevel in rawSection.difficulty) {
+                    const difficulty = rawSection.difficulty[bfLevel];
+                    const caps = rawData.rarityCaps[difficulty].map(x => this.shortRarityStringToEnum[x]);
+                    rarityCaps[parseInt(bfLevel)] = {
+                        difficulty: difficulty,
+                        caps: caps,
+                    };
+                }
+                return {
+                    id: rawSection.id,
+                    name: rawSection.name,
+                    warScore: rawSection.warScore,
+                    count: rawSection.count,
+                    rarityCaps: rarityCaps,
+                    buff: rawSection.buff,
                 };
-            }
-            return {
-                id: rawSection.id,
-                name: rawSection.name,
-                warScore: rawSection.warScore,
-                count: rawSection.count,
-                rarityCaps: rarityCaps,
-                buff: rawSection.buff,
-            };
-        });
+            });
 
         return {
             bfLevels: rawData.bfLevels,
