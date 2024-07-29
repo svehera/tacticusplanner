@@ -38,7 +38,6 @@ export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>([
         LegendaryEventEnum.Mephiston,
         LegendaryEventEnum.Kharn,
-        LegendaryEventEnum.Ragnar,
         LegendaryEventEnum.Vitruvius,
     ]);
 
@@ -383,13 +382,7 @@ export const MasterTable = () => {
                             </ListItemIcon>
                             <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Kharn]} />
                         </MenuItem>
-                        <MenuItem value={LegendaryEventEnum.Ragnar}>
-                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Ragnar) > -1} />
-                            <ListItemIcon>
-                                <CharacterImage icon={'Ragnar.png'} imageSize={30} />
-                            </ListItemIcon>
-                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Ragnar]} />
-                        </MenuItem>
+
                         <MenuItem value={LegendaryEventEnum.Vitruvius}>
                             <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Vitruvius) > -1} />
                             <ListItemIcon>
@@ -397,7 +390,16 @@ export const MasterTable = () => {
                             </ListItemIcon>
                             <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Vitruvius]} />
                         </MenuItem>
+
                         <Divider />
+
+                        <MenuItem value={LegendaryEventEnum.Ragnar}>
+                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Ragnar) > -1} />
+                            <ListItemIcon>
+                                <CharacterImage icon={'Ragnar.png'} imageSize={30} />
+                            </ListItemIcon>
+                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Ragnar]} />
+                        </MenuItem>
                         <MenuItem value={LegendaryEventEnum.Shadowsun}>
                             <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Shadowsun) > -1} />
                             <ListItemIcon>
