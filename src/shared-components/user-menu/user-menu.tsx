@@ -1,6 +1,6 @@
 ﻿import React, { ChangeEvent, useContext, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
-import { Avatar, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
+import { Avatar, Badge, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import RegisterIcon from '@mui/icons-material/PersonAdd';
@@ -21,6 +21,10 @@ import ListItemText from '@mui/material/ListItemText';
 import { OverrideDataDialog } from './override-data-dialog';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Computer as ComputerIcon, Smartphone as PhoneIcon } from '@mui/icons-material';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import GroupWorkIcon from '@mui/icons-material/GroupWork';
+import { UserRole } from 'src/models/enums';
+import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-dialog';
 
 export const UserMenu = () => {
     const store = useContext(StoreContext);
@@ -28,6 +32,7 @@ export const UserMenu = () => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
+    const [showAdminTools, setShowAdminTools] = useState(false);
     const [showRestoreBackup, setShowRestoreBackup] = useState(false);
     const [showOverrideDataWarning, setShowOverrideDataWarning] = useState(false);
     const userMenuControls = usePopUpControls();
@@ -45,7 +50,7 @@ export const UserMenu = () => {
         navigate('/mobile/home');
     };
 
-    const { isAuthenticated, logout, username } = useAuth();
+    const { isAuthenticated, logout, username, userInfo } = useAuth();
 
     const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -153,19 +158,22 @@ export const UserMenu = () => {
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <span style={{ fontSize: 16, fontWeight: 700 }}>Hi, {username}</span>
 
-                <IconButton
-                    onClick={userMenuControls.handleClick}
-                    size="small"
-                    sx={{ ml: 2 }}
-                    aria-controls={userMenuControls.open ? 'account-menu' : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={userMenuControls.open ? 'true' : undefined}>
-                    {isAuthenticated ? (
-                        <Avatar {...stringAvatar(username)}></Avatar>
-                    ) : (
-                        <Avatar sx={{ width: 32, height: 32 }}>TP</Avatar>
-                    )}
-                </IconButton>
+                {/*<Badge variant="dot" color="warning" invisible={!userInfo.pendingTeamsCount}>*/}
+                <Badge color="warning" badgeContent={userInfo.pendingTeamsCount}>
+                    <IconButton
+                        onClick={userMenuControls.handleClick}
+                        size="small"
+                        sx={{ ml: 2 }}
+                        aria-controls={userMenuControls.open ? 'account-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={userMenuControls.open ? 'true' : undefined}>
+                        {isAuthenticated ? (
+                            <Avatar {...stringAvatar(username)}></Avatar>
+                        ) : (
+                            <Avatar sx={{ width: 32, height: 32 }}>TP</Avatar>
+                        )}
+                    </IconButton>
+                </Badge>
             </div>
             <Menu
                 anchorEl={userMenuControls.anchorEl}
@@ -236,6 +244,32 @@ export const UserMenu = () => {
                         <ListItemText>Use desktop view</ListItemText>
                     </MenuItem>
                 )}
+
+                {[UserRole.moderator, UserRole.admin].includes(userInfo.role) && (
+                    <div>
+                        <Divider />
+
+                        {userInfo.role === UserRole.admin && (
+                            <MenuItem onClick={() => setShowAdminTools(true)}>
+                                <ListItemIcon>
+                                    <SupervisorAccountIcon />
+                                </ListItemIcon>
+                                <ListItemText>Admin tools</ListItemText>
+                            </MenuItem>
+                        )}
+
+                        {[UserRole.moderator, UserRole.admin].includes(userInfo.role) && (
+                            <MenuItem onClick={() => navigateToMobileView()}>
+                                <ListItemIcon>
+                                    <GroupWorkIcon />
+                                </ListItemIcon>
+                                <Badge badgeContent={userInfo.pendingTeamsCount} color="warning">
+                                    <ListItemText>Review teams</ListItemText>
+                                </Badge>
+                            </MenuItem>
+                        )}
+                    </div>
+                )}
             </Menu>
             <RegisterUserDialog
                 isOpen={showRegisterUser}
@@ -253,6 +287,12 @@ export const UserMenu = () => {
                     if (proceed) {
                         setShowLoginUser(true);
                     }
+                }}
+            />
+            <AdminToolsDialog
+                isOpen={showAdminTools}
+                onClose={() => {
+                    setShowAdminTools(false);
                 }}
             />
         </Box>

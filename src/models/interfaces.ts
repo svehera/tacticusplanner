@@ -18,6 +18,7 @@
     RarityStars,
     RarityString,
     Trait,
+    UserRole,
 } from './enums';
 import React from 'react';
 import { CharactersAction } from '../reducers/characters.reducer';
@@ -276,6 +277,13 @@ export interface IGlobalState {
     dailyRaids: IDailyRaids;
     guildWar: IGuildWar;
     guild: IGuild;
+}
+
+export interface IUserInfo {
+    username: string;
+    userId: number;
+    role: UserRole;
+    pendingTeamsCount: number;
 }
 
 export interface IDispatchContext {

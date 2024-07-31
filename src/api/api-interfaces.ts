@@ -1,4 +1,5 @@
 ﻿import { IPersonalCharacter, IPersonalData, IPersonalData2 } from '../models/interfaces';
+import { UserRole } from 'src/models/enums';
 
 export interface ILoginResponse {
     accessToken: string;
@@ -18,6 +19,8 @@ export interface IUserDataResponse {
     username: string;
     lastModifiedDate: string;
     shareToken?: string;
+    role: UserRole;
+    pendingTeamsCount: number;
     data: IPersonalData | IPersonalData2 | null;
 }
 

@@ -28,7 +28,7 @@ import { enable as enableDarkMode, disable as disableDarkMode } from 'darkreader
 import { teamsReducer } from 'src/reducers/teams.reducer';
 
 export const StoreProvider = ({ children }: React.PropsWithChildren) => {
-    const { isAuthenticated, setUser, logout } = useAuth();
+    const { isAuthenticated, setUser, setUserInfo, logout } = useAuth();
     const localStore = useMemo(() => new PersonalDataLocalStorage(), []);
 
     const [globalState, setGlobalState] = useState(() => {
@@ -234,11 +234,17 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         }
         getUserDataApi()
             .then(response => {
-                const { data, username, lastModifiedDate, shareToken } = response.data;
+                const { data, username, lastModifiedDate, shareToken, role, id, pendingTeamsCount } = response.data;
                 const serverLastModified = new Date(lastModifiedDate);
                 const isFirstLogin = !data;
                 const isFreshData = !modifiedDate;
                 setUser(username, shareToken);
+                setUserInfo({
+                    role,
+                    username,
+                    userId: id,
+                    pendingTeamsCount,
+                });
 
                 const shouldAcceptServerData = !isFirstLogin && (isFreshData || modifiedDate < serverLastModified);
                 const shouldPushLocalData = !isFreshData && (isFirstLogin || modifiedDate > serverLastModified);
