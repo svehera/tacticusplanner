@@ -1,0 +1,17 @@
+﻿{
+    "common": {
+        "continue": "Continue",
+        "register": "Register",
+        "login": "Login"
+    },
+
+    "auth": {
+        "notLoggedIn": {
+            "title": "You are not logged in",
+            "subtitle": "Would you like to continue using the app without logging in, or would you prefer to register/login?",
+            "continueExplanation": "if you want to use app without account (some functionality might be limited)",
+            "registerExplanation": "in case you want to create a new account",
+            "loginExplanation": "in case you have existing account"
+        }
+    }
+}
