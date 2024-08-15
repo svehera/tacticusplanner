@@ -20,6 +20,7 @@
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-medium-image-zoom": "^5.2.4",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.15.0",
     "read-excel-file": "^5.7.1",
     "sass": "^1.69.5",

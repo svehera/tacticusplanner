@@ -193,12 +193,19 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             clearTimeout(saveTimeoutId);
             const timeoutId = setTimeout(() => {
                 setUserDataApi(storeValue)
-                    .then(() => {
+                    .then(({ data }) => {
+                        const { modifiedDateTicks } = data;
+                        localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
                         enqueueSnackbar('Pushed local data to server.', { variant: 'success' });
                     })
                     .catch((err: AxiosError<IErrorResponse>) => {
                         if (err.response?.status === 401) {
                             enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
+                        } else if (err.response?.status === 409) {
+                            enqueueSnackbar(
+                                'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
+                                { variant: 'error' }
+                            );
                         } else {
                             enqueueSnackbar('Failed to push data to server. Please do manual back-up.', {
                                 variant: 'error',
@@ -234,7 +241,16 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         }
         getUserDataApi()
             .then(response => {
-                const { data, username, lastModifiedDate, shareToken, role, id, pendingTeamsCount } = response.data;
+                const {
+                    data,
+                    username,
+                    lastModifiedDate,
+                    shareToken,
+                    role,
+                    id,
+                    modifiedDateTicks: serverModifiedDateTicks,
+                    pendingTeamsCount,
+                } = response.data;
                 const serverLastModified = new Date(lastModifiedDate);
                 const isFirstLogin = !data;
                 const isFreshData = !modifiedDate;
@@ -245,9 +261,16 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     userId: id,
                     pendingTeamsCount,
                 });
+                const localModifiedDateTicks = localStorage.getItem('TP-ModifiedDateTicks');
 
-                const shouldAcceptServerData = !isFirstLogin && (isFreshData || modifiedDate < serverLastModified);
-                const shouldPushLocalData = !isFreshData && (isFirstLogin || modifiedDate > serverLastModified);
+                const hasDataConflict = localModifiedDateTicks !== serverModifiedDateTicks;
+
+                const shouldAcceptServerData =
+                    !isFirstLogin && (isFreshData || modifiedDate < serverLastModified || hasDataConflict);
+                const shouldPushLocalData =
+                    !isFreshData && !hasDataConflict && (isFirstLogin || modifiedDate > serverLastModified);
+
+                localStorage.setItem('TP-ModifiedDateTicks', serverModifiedDateTicks);
 
                 if (shouldAcceptServerData) {
                     const serverData = convertData(data);
@@ -262,6 +285,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                         const newState = new GlobalState(serverData);
                         dispatch.setStore(newState, false, false);
                         localStore.setData(GlobalState.toStore(newState));
+                        if (hasDataConflict) {
+                            enqueueSnackbar('There has been conflict. Your local changes are overridden with server', {
+                                variant: 'warning',
+                            });
+                        }
                         enqueueSnackbar('Synced with latest server data.', { variant: 'info' });
                     }
 
@@ -269,11 +297,20 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     localStore.setData({ modifiedDate: serverLastModified });
                 } else if (shouldPushLocalData) {
                     setUserDataApi(GlobalState.toStore(globalState))
-                        .then(() => enqueueSnackbar('Pushed local data to server.', { variant: 'info' }))
+                        .then(({ data }) => {
+                            const { modifiedDateTicks } = data;
+                            localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
+                            return enqueueSnackbar('Pushed local data to server.', { variant: 'info' });
+                        })
                         .catch((err: AxiosError<IErrorResponse>) => {
                             if (err.response?.status === 401) {
                                 logout();
                                 enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
+                            } else if (err.response?.status === 409) {
+                                enqueueSnackbar(
+                                    'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
+                                    { variant: 'error' }
+                                );
                             } else {
                                 enqueueSnackbar('Failed to push data to server. Please do manual back-up.', {
                                     variant: 'error',

@@ -21,6 +21,7 @@ export interface IUserDataResponse {
     shareToken?: string;
     role: UserRole;
     pendingTeamsCount: number;
+    modifiedDateTicks: string;
     data: IPersonalData | IPersonalData2 | null;
 }
 

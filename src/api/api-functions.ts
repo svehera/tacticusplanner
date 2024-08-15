@@ -25,7 +25,9 @@ export const removeShareToken = () => callApi<IShareTokenResponse, IErrorRespons
 export const getUserDataApi = () => callApi<IUserDataResponse, IErrorResponse>('GET', 'users/me');
 
 export const setUserDataApi = (userData: IPersonalData2) =>
-    callApi<IPersonalData2, IErrorResponse>('POST', 'UserData', userData);
+    callApi<IPersonalData2, IErrorResponse, IUserDataResponse>('PUT', 'users/me', userData, {
+        'TP-ModifiedDateTicks': localStorage.getItem('TP-ModifiedDateTicks') ?? '',
+    });
 
 export const resetUserPasswordApi = (username: string, password: string) =>
     callApi<IPersonalData2, IErrorResponse>('PUT', `users/${username}/resetPassword`, { username, password } as any);

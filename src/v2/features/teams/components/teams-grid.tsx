@@ -27,6 +27,7 @@ interface Props {
 export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam, editTeam }) => {
     const guildRaidTeams = teams.filter(x => x.primaryGameMode === GameMode.guildRaids);
     const taTeams = teams.filter(x => x.primaryGameMode === GameMode.tournamentArena);
+    const gwTeams = teams.filter(x => x.primaryGameMode === GameMode.guildWar);
 
     const renderTeam = (team: IPersonalTeam) => {
         const teamCharacters = team.lineup.map(id => characters.find(character => id === character.id)!);
@@ -148,6 +149,13 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
                 <div>
                     <h2>Tournament Arena</h2>
                     <div className="flex-box gap10 wrap">{taTeams.map(renderCappedTeam)}</div>
+                </div>
+            )}
+
+            {!!gwTeams.length && (
+                <div>
+                    <h2>Guild War</h2>
+                    <div className="flex-box gap10 wrap">{gwTeams.map(renderCappedTeam)}</div>
                 </div>
             )}
         </div>

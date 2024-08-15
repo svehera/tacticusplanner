@@ -12,11 +12,11 @@ export const gameModes: IMenuOption[] = [
         label: 'Tournament Arena',
         selected: false,
     },
-    // {
-    //     value: GameMode.guildWar,
-    //     label: 'Guild War',
-    //     selected: false,
-    // },
+    {
+        value: GameMode.guildWar,
+        label: 'Guild War',
+        selected: false,
+    },
 ];
 
 const leftSidePrimeSuffix = '_prime_L';

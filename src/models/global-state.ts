@@ -100,7 +100,7 @@ export class GlobalState implements IGlobalState {
                 ? personalCharData.upgrades.filter(StaticDataService.isValidaUpgrade)
                 : [];
             const isReleased = staticData.releaseDate
-                ? this.isAtLeast2DaysBefore(new Date(staticData.releaseDate))
+                ? this.isAtLeast3DaysBefore(new Date(staticData.releaseDate))
                 : true;
 
             const combinedData: IPersonalCharacterData2 = {
@@ -142,7 +142,7 @@ export class GlobalState implements IGlobalState {
             const initialRarity = rarityStringToNumber[staticData.initialRarity];
             const initialRarityStars = rarityToStars[rarityStringToNumber[staticData.initialRarity]];
             const isReleased = staticData.releaseDate
-                ? this.isAtLeast2DaysBefore(new Date(staticData.releaseDate))
+                ? this.isAtLeast3DaysBefore(new Date(staticData.releaseDate))
                 : true;
 
             const result: IMow = {
@@ -164,7 +164,7 @@ export class GlobalState implements IGlobalState {
         });
     }
 
-    static isAtLeast2DaysBefore(releaseDate: Date): boolean {
+    static isAtLeast3DaysBefore(releaseDate: Date): boolean {
         const today = new Date();
 
         // Calculate the difference in time
@@ -174,7 +174,7 @@ export class GlobalState implements IGlobalState {
         const dayDifference = timeDifference / (1000 * 3600 * 24);
 
         // Check if the day difference is less than or equal to 2
-        return dayDifference <= 2;
+        return dayDifference <= 3;
     }
 
     static fixNames<T>(obj: T): T {

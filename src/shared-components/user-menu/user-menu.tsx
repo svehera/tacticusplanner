@@ -50,6 +50,10 @@ export const UserMenu = () => {
         navigate('/mobile/home');
     };
 
+    const navigateToReviewTeams = () => {
+        navigate('/learn/teams?activeTab=3');
+    };
+
     const { isAuthenticated, logout, username, userInfo } = useAuth();
 
     const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
@@ -259,7 +263,7 @@ export const UserMenu = () => {
                         )}
 
                         {[UserRole.moderator, UserRole.admin].includes(userInfo.role) && (
-                            <MenuItem onClick={() => navigateToMobileView()}>
+                            <MenuItem onClick={() => navigateToReviewTeams()}>
                                 <ListItemIcon>
                                     <GroupWorkIcon />
                                 </ListItemIcon>
