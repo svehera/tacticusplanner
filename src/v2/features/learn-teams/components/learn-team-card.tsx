@@ -2,6 +2,7 @@
 import { ILearnTeam } from 'src/v2/features/learn-teams/learn-teams.models';
 import { Card, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
@@ -12,15 +13,25 @@ import { TeamStatus } from 'src/v2/features/learn-teams/learn-teams.enums';
 import { isMobile } from 'react-device-detect';
 import { RichTextViewer } from 'src/v2/components/inputs/rich-text-viewer';
 import { allModes, gameModes } from 'src/v2/features/teams/teams.constants';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
 interface Props {
     team: ILearnTeam;
     units: IUnit[];
     fullView?: boolean;
     onView?: () => void;
+    onHonor: (honored: boolean) => void;
+    onShare: () => void;
 }
 
-export const LearnTeamCard: React.FC<Props> = ({ team, units, fullView = false, onView = () => {} }) => {
+export const LearnTeamCard: React.FC<Props> = ({
+    team,
+    units,
+    fullView = false,
+    onView = () => {},
+    onHonor,
+    onShare,
+}) => {
     const renderLikeAndShare = () => {
         if (team.status !== TeamStatus.approved) {
             return <></>;
@@ -28,11 +39,24 @@ export const LearnTeamCard: React.FC<Props> = ({ team, units, fullView = false, 
 
         return (
             <>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
-                <IconButton aria-label="share">
-                    <ShareIcon />
+                {team.isHonored ? (
+                    <IconButton aria-label="add to favorites" onClick={() => onHonor(false)}>
+                        <AccessibleTooltip title="Remove Honour">
+                            <FavoriteIcon />
+                        </AccessibleTooltip>
+                    </IconButton>
+                ) : (
+                    <IconButton aria-label="add to favorites" onClick={() => onHonor(true)}>
+                        <AccessibleTooltip title="Give Honour">
+                            <FavoriteBorderIcon />
+                        </AccessibleTooltip>
+                    </IconButton>
+                )}
+
+                <IconButton aria-label="share" onClick={onShare}>
+                    <AccessibleTooltip title="Share">
+                        <ShareIcon />
+                    </AccessibleTooltip>
                 </IconButton>
             </>
         );
@@ -55,17 +79,24 @@ export const LearnTeamCard: React.FC<Props> = ({ team, units, fullView = false, 
                 avatar={<TokenImage gameMode={team.primaryMode} />}
                 action={
                     <>
-                        {renderLikeAndShare()}
-
-                        <IconButton aria-label="settings" onClick={onView}>
-                            <MoreVertIcon />
-                        </IconButton>
+                        {fullView && team.status === TeamStatus.approved ? (
+                            <CardActions disableSpacing>{renderLikeAndShare()}</CardActions>
+                        ) : (
+                            <IconButton aria-label="settings" onClick={onView}>
+                                <MoreVertIcon />
+                            </IconButton>
+                        )}
                     </>
                 }
                 title={team.name}
                 subheader={`By ${team.createdBy}`}
             />
             <CardContent onClick={onView}>
+                {team.status === TeamStatus.rejected && (
+                    <Typography variant="body2" color="error">
+                        {team.rejectReason} (Rejected by {team.moderatedBy})
+                    </Typography>
+                )}
                 <Typography variant="body2" color="text.primary">
                     {gameMode} - {subMode}
                 </Typography>

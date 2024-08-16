@@ -5,13 +5,14 @@ import 'react-quill/dist/quill.snow.css';
 
 interface Props {
     htmlValue: string;
+    placeholder?: string;
     onChange: (value: string) => void;
 }
 
-export const RichTextEditor: React.FC<Props> = ({ htmlValue, onChange }) => {
+export const RichTextEditor: React.FC<Props> = ({ htmlValue, onChange, placeholder }) => {
     const modules = {
         toolbar: [
-            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+            ['link'],
             ['bold', 'italic', 'underline', 'strike', 'blockquote'],
             [{ size: [] }],
             [{ align: ['right', 'center', 'justify'] }],
@@ -51,6 +52,7 @@ export const RichTextEditor: React.FC<Props> = ({ htmlValue, onChange }) => {
                 modules={modules}
                 formats={formats}
                 value={editorValue}
+                placeholder={placeholder}
                 onChange={handleProcedureContentChange}
             />
         </>

@@ -8,3 +8,19 @@ export const getTeamsApi = (queryParams: string) => {
 export const createTeamApi = (team: ICreateLearnTeam) => {
     return makeApiCall<IGetTeamsResponse>('POST', 'teams', team);
 };
+
+export const approveTeamApi = (teamId: number) => {
+    return makeApiCall('PUT', `teams/${teamId}/approve`);
+};
+
+export const rejectTeamApi = (teamId: number, rejectReason: string) => {
+    return makeApiCall('PUT', `teams/${teamId}/reject`, { rejectReason });
+};
+
+export const giveHonorTeamApi = (teamId: number) => {
+    return makeApiCall('POST', `teams/${teamId}/honor`);
+};
+
+export const removeHonorTeamApi = (teamId: number) => {
+    return makeApiCall('DELETE', `teams/${teamId}/honor`);
+};

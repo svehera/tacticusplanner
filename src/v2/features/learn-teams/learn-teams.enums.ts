@@ -14,5 +14,6 @@ export enum TeamsGroup {
     approved = 0,
     favorite = 1,
     myTeams = 2,
-    moderation = 3,
+    pending = 3,
+    rejected = 4,
 }

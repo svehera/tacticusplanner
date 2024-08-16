@@ -13,5 +13,8 @@
             "registerExplanation": "in case you want to create a new account",
             "loginExplanation": "in case you have existing account"
         }
+    },
+    "teams": {
+        "guidePlaceholder": "Explain the team strategy and role of each unit in the team. Add links to video guides if such exist"
     }
 }

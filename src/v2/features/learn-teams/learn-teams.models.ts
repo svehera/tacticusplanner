@@ -10,6 +10,7 @@ export interface IGetTeamsQueryParams {
     orderBy?: 'createdAt_asc' | 'createdAt_desc' | 'likes_asc' | 'likes_desc';
     page?: number;
     pageSize?: number;
+    teamId?: number;
 }
 
 export interface IGetTeamsResponse {
@@ -24,11 +25,13 @@ export interface ILearnTeam {
     createdAt: string;
     guide: string;
     intro: string;
+    rejectReason: string;
     status: TeamStatus;
     originalTeamId: number | null;
     likes: number;
     isHonored: boolean;
     createdBy: string;
+    moderatedBy: string;
     subModes: string[];
     teamSlots: ITeamSlot[];
 }

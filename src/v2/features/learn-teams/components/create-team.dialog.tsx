@@ -21,6 +21,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import { SelectTeamDialog } from 'src/v2/features/learn-teams/components/select-team-dialog';
 import { RichTextEditor } from 'src/v2/components/inputs/rich-text-editor';
 import Typography from '@mui/material/Typography';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     onClose: () => void;
@@ -29,6 +30,7 @@ interface Props {
 }
 
 export const CreateTeamDialog: React.FC<Props> = ({ onClose, units, addTeam }) => {
+    const { t } = useTranslation();
     const [gameMode, setGameMode] = useState<GameMode>(GameMode.guildRaids);
     const [selectedSubModes, setSelectedSubModes] = useState<string[]>([]);
     const [guide, setGuide] = useState<string>('');
@@ -229,7 +231,11 @@ export const CreateTeamDialog: React.FC<Props> = ({ onClose, units, addTeam }) =
                         <Typography variant="subtitle1" style={{ marginLeft: 10 }}>
                             Guide (supports rich text)
                         </Typography>
-                        <RichTextEditor htmlValue={guide} onChange={setGuide} />
+                        <RichTextEditor
+                            htmlValue={guide}
+                            onChange={setGuide}
+                            placeholder={t('teams.guidePlaceholder')}
+                        />
 
                         <br />
                         <br />
