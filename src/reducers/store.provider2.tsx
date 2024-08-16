@@ -112,6 +112,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             guild: wrapDispatch(dispatchGuild),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 dispatchCharacters({ type: 'Set', value: data.characters });
+                dispatchMows({ type: 'Set', value: data.mows });
                 dispatchGoals({ type: 'Set', value: data.goals });
                 dispatchTeams({ type: 'Set', value: data.teams });
                 dispatchViewPreferences({ type: 'Set', value: data.viewPreferences });
