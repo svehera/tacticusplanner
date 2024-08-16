@@ -20,7 +20,7 @@ export const LoginStatusDialog: React.FC<Props> = ({ onContinue, onClose, onRegi
             <DialogContent>
                 <h3></h3>
                 <p>
-                    <span style={{ fontWeight: 'bold' }}>{t('common.continue')}</span>{' '}
+                    <span style={{ fontWeight: 'bold' }}>{t('auth.notLoggedIn.useWithoutAccount')}</span>{' '}
                     {t('auth.notLoggedIn.continueExplanation')}
                 </p>
                 <p>
@@ -33,7 +33,7 @@ export const LoginStatusDialog: React.FC<Props> = ({ onContinue, onClose, onRegi
                 </p>
             </DialogContent>
             <DialogActions>
-                <Button onClick={onContinue}>{t('common.continue')}</Button>
+                <Button onClick={onContinue}>{t('auth.notLoggedIn.useWithoutAccount')}</Button>
                 <Button onClick={onRegister}>{t('common.register')}</Button>
                 <Button onClick={onLogin}>{t('common.login')}</Button>
             </DialogActions>

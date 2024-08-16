@@ -7,6 +7,7 @@
     IGlobalState,
     IGuild,
     IGuildWar,
+    IInsightsData,
     IInventory,
     ILegendaryEventProgressState,
     ILegendaryEventSelectedRequirements,
@@ -83,7 +84,7 @@ export class GlobalState implements IGlobalState {
     }
 
     static initCharacters(
-        chars: Partial<IPersonalCharacterData2 & { numberOfUnlocked?: number; ownedBy?: string[] }>[],
+        chars: Partial<IPersonalCharacterData2 & IInsightsData>[],
         totalUsers?: number
     ): Array<ICharacter2> {
         return StaticDataService.unitsData.map(staticData => {
@@ -135,7 +136,7 @@ export class GlobalState implements IGlobalState {
         });
     }
 
-    static initMows(dbMows: IMowDb[]): Array<IMow> {
+    static initMows(dbMows: Partial<IMowDb & IInsightsData>[], totalUsers?: number): Array<IMow> {
         const mowsStatic = mowsData as IMowStatic[];
         return mowsStatic.map(staticData => {
             const dbMow = dbMows?.find(c => c.id === staticData.id);
@@ -156,6 +157,11 @@ export class GlobalState implements IGlobalState {
                 secondaryAbilityLevel: dbMow?.secondaryAbilityLevel ?? 1,
                 unlocked: dbMow?.unlocked ?? false,
                 shards: dbMow?.shards ?? 0,
+                numberOfUnlocked:
+                    totalUsers && dbMow?.numberOfUnlocked
+                        ? Math.ceil((dbMow.numberOfUnlocked / totalUsers) * 100)
+                        : undefined,
+                ownedBy: dbMow?.ownedBy ?? [],
             };
 
             result.power = CharactersPowerService.getCharacterAbilityPower(result);

@@ -60,7 +60,7 @@ export const WhoYouOwn = () => {
         return <></>;
     }
 
-    const charactersFiltered = CharactersService.filterCharacters(
+    const charactersFiltered = CharactersService.filterUnits(
         [...charactersDefault, ...mows],
         viewControls.filterBy,
         nameFilter

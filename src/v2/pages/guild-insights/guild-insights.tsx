@@ -46,14 +46,19 @@ export const GuildInsights = () => {
         return <div>Data failed to load</div>;
     }
 
-    const averageRoster = GlobalState.initCharacters(data.userData, data.guildUsers.length);
+    const averageCharacters = GlobalState.initCharacters(data.userData, data.guildUsers.length);
+    const averageMows = GlobalState.initMows(data.mows, data.guildUsers.length);
 
-    const charactersFiltered = CharactersService.filterCharacters(averageRoster, viewControls.filterBy, nameFilter);
+    const charactersFiltered = CharactersService.filterUnits(
+        [...averageCharacters, ...averageMows],
+        viewControls.filterBy,
+        nameFilter
+    );
     const totalPower = sum(charactersFiltered.map(character => CharactersPowerService.getCharacterPower(character)));
     const totalValue = sum(charactersFiltered.map(character => CharactersValueService.getCharacterValue(character)));
 
     const factions = CharactersService.orderByFaction(charactersFiltered, viewControls.orderBy);
-    const characters = CharactersService.orderUnits(charactersFiltered, viewControls.orderBy);
+    const units = CharactersService.orderUnits(charactersFiltered, viewControls.orderBy);
 
     return (
         <Box style={{ margin: 'auto' }}>
@@ -89,7 +94,7 @@ export const GuildInsights = () => {
                 </Conditional>
 
                 <Conditional condition={isCharactersView(viewControls.orderBy)}>
-                    <CharactersGrid characters={characters} />
+                    <CharactersGrid characters={units} />
                 </Conditional>
             </CharactersViewContext.Provider>
         </Box>

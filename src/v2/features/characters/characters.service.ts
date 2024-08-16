@@ -19,7 +19,7 @@ import { isCharacter, isMow, isUnlocked } from 'src/v2/features/characters/units
 import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export class CharactersService {
-    static filterCharacters(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {
+    static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {
         const filteredCharactersByName = nameFilter
             ? characters.filter(x => x.name.toLowerCase().includes(nameFilter.toLowerCase()))
             : characters;

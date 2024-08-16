@@ -471,6 +471,10 @@ export interface IPersonalCharacterData2 {
     shards: number;
 }
 
+export interface IInsightsData {
+    numberOfUnlocked?: number;
+    ownedBy?: string[];
+}
 export interface ICharProgression {
     shards: number;
     orbs?: number;

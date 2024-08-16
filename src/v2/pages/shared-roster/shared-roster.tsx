@@ -58,7 +58,7 @@ export const SharedRoster = () => {
 
     const sharedRoster = GlobalState.initCharacters(data.characters);
 
-    const charactersFiltered = CharactersService.filterCharacters(sharedRoster, viewControls.filterBy, nameFilter);
+    const charactersFiltered = CharactersService.filterUnits(sharedRoster, viewControls.filterBy, nameFilter);
     const totalPower = sum(charactersFiltered.map(character => CharactersPowerService.getCharacterPower(character)));
     const totalValue = sum(charactersFiltered.map(character => CharactersValueService.getCharacterValue(character)));
 
