@@ -116,6 +116,7 @@ export enum Trait {
     CrushingStrike = 'Crushing Strike',
     RapidAssault = 'Rapid Assault',
     GetStuckIn = 'Get Stuck In',
+    daemon = 'Daemon',
 }
 
 export enum DamageType {

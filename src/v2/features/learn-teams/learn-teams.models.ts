@@ -34,6 +34,12 @@ export interface ILearnTeam {
     moderatedBy: string;
     subModes: string[];
     teamSlots: ITeamSlot[];
+    permissions: {
+        canHonor: boolean;
+        canEdit: boolean;
+        canModerate: boolean;
+        canDelete: boolean;
+    };
 }
 
 export interface ICreateLearnTeam {

@@ -39,18 +39,22 @@ export const LearnTeamCard: React.FC<Props> = ({
 
         return (
             <>
-                {team.isHonored ? (
-                    <IconButton aria-label="add to favorites" onClick={() => onHonor(false)}>
-                        <AccessibleTooltip title="Remove Honour">
-                            <FavoriteIcon />
-                        </AccessibleTooltip>
-                    </IconButton>
-                ) : (
-                    <IconButton aria-label="add to favorites" onClick={() => onHonor(true)}>
-                        <AccessibleTooltip title="Give Honour">
-                            <FavoriteBorderIcon />
-                        </AccessibleTooltip>
-                    </IconButton>
+                {team.permissions.canHonor && (
+                    <>
+                        {team.isHonored ? (
+                            <IconButton aria-label="add to favorites" onClick={() => onHonor(false)}>
+                                <AccessibleTooltip title="Remove Honour">
+                                    <FavoriteIcon />
+                                </AccessibleTooltip>
+                            </IconButton>
+                        ) : (
+                            <IconButton aria-label="add to favorites" onClick={() => onHonor(true)}>
+                                <AccessibleTooltip title="Give Honour">
+                                    <FavoriteBorderIcon />
+                                </AccessibleTooltip>
+                            </IconButton>
+                        )}
+                    </>
                 )}
 
                 <IconButton aria-label="share" onClick={onShare}>

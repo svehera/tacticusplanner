@@ -13,20 +13,17 @@ interface Props {
     moderate: (result: TeamStatus) => void;
     team: ILearnTeam;
     units: IUnit[];
-    isModerator: boolean;
     onHonor: (honored: boolean) => void;
     onShare: () => void;
 }
 
-export const LearnTeamView: React.FC<Props> = ({ team, units, onClose, isModerator, moderate, onShare, onHonor }) => {
-    const isPending = team.status === TeamStatus.pending;
-
+export const LearnTeamView: React.FC<Props> = ({ team, units, onClose, moderate, onShare, onHonor }) => {
     return (
         <Dialog open={true} onClose={onClose} fullWidth fullScreen={isMobile}>
             <LearnTeamCard units={units} team={team} fullView onHonor={onHonor} onShare={onShare} />
             <DialogActions>
                 <Button onClick={onClose}>Close</Button>
-                {isPending && isModerator && (
+                {team.permissions.canModerate && (
                     <>
                         <Button
                             variant="contained"

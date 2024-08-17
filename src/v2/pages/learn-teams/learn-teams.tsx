@@ -23,7 +23,6 @@ import { TeamsGroup, TeamStatus } from 'src/v2/features/learn-teams/learn-teams.
 import { RejectReasonDialog } from 'src/v2/features/learn-teams/components/reject-reason.dialog';
 import { enqueueSnackbar } from 'notistack';
 import { isMobile } from 'react-device-detect';
-import { set } from 'lodash';
 
 export const LearnTeams: React.FC = () => {
     const { characters, mows } = useContext(StoreContext);
@@ -307,7 +306,6 @@ export const LearnTeams: React.FC = () => {
             {!!viewTeam && (
                 <LearnTeamView
                     team={viewTeam}
-                    isModerator={isModerator}
                     units={[...characters, ...mows]}
                     moderate={status => handleTeamModeration(viewTeam!.teamId, status)}
                     onClose={() => setViewTeam(null)}
