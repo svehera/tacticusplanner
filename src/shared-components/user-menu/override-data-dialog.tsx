@@ -25,12 +25,12 @@ export const OverrideDataDialog = ({ isOpen, onClose }: { isOpen: boolean; onClo
                 <Box>
                     <h3>Decide how to handle local changes</h3>
                     <p>
-                        <span style={{ fontWeight: 'bold' }}>Discard</span> if you sure there is nothing important in
-                        you local changes
+                        <span style={{ fontWeight: 'bold' }}>Use Remote data</span> if you sure there is nothing
+                        important in you local changes
                     </p>
                     <p>
-                        <span style={{ fontWeight: 'bold' }}>Accept</span> if you sure there are changes that you want
-                        to preserve
+                        <span style={{ fontWeight: 'bold' }}>Use Local data</span> if you sure there are changes that
+                        you want to preserve
                     </p>
                     <p>
                         <span style={{ fontWeight: 'bold' }}>Backup</span> your data with{' '}
@@ -41,8 +41,8 @@ export const OverrideDataDialog = ({ isOpen, onClose }: { isOpen: boolean; onClo
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => onClose(false)}>Cancel</Button>
-                <Button onClick={resetData}>Discard</Button>
-                <Button onClick={() => onClose(true)}>Accept</Button>
+                <Button onClick={resetData}>Use Remote</Button>
+                <Button onClick={() => onClose(true)}>Use Local</Button>
             </DialogActions>
         </Dialog>
     );
