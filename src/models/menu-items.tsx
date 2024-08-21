@@ -29,7 +29,7 @@ import { guildMenuItem } from 'src/v2/pages/guild/guild.menu-item';
 import { guildInsightsMenuItem } from 'src/v2/pages/guild-insights/guild-insights.menu-item';
 import { teamsMenuItem } from 'src/v2/pages/teams/teams.menu-item';
 import { mowLookupMenuItem } from 'src/v2/pages/mow-lookup/mow-lookup.menu-item';
-import { learnTeamsMenuItem } from 'src/v2/pages/learn-teams/learn-teams.menu-item';
+import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';
 
 export class MenuItemTP {
     constructor(
@@ -107,7 +107,7 @@ export const menuItemById = {
     guild: guildMenuItem,
     guildInsights: guildInsightsMenuItem,
     teams: teamsMenuItem,
-    learnTeams: learnTeamsMenuItem,
+    guides: guidesMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -154,7 +154,7 @@ export const planSubMenu: MenuItemTP[] = [
 ];
 
 export const learnSubMenu: MenuItemTP[] = [
-    menuItemById['learnTeams'],
+    menuItemById['guides'],
     menuItemById['characters'],
     menuItemById['upgrades'],
     menuItemById['rankLookup'],

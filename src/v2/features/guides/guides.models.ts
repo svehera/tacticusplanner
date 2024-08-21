@@ -1,9 +1,9 @@
 ﻿import { GameMode } from 'src/v2/features/teams/teams.enums';
-import { SlotType, TeamsGroup, TeamStatus } from 'src/v2/features/learn-teams/learn-teams.enums';
+import { SlotType, GuidesGroup, GuidesStatus } from './guides.enums';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 
-export interface IGetTeamsQueryParams {
-    group?: TeamsGroup;
+export interface IGetGuidesQueryParams {
+    group?: GuidesGroup;
     primaryModes?: string[];
     subModes?: string[];
     unitIds?: string[];
@@ -13,12 +13,12 @@ export interface IGetTeamsQueryParams {
     teamId?: number;
 }
 
-export interface IGetTeamsResponse {
-    teams: ILearnTeam[];
+export interface IGetGuidesResponse {
+    teams: IGuide[];
     next: string | null;
 }
 
-export interface ILearnTeam {
+export interface IGuide {
     teamId: number;
     name: string;
     primaryMode: GameMode;
@@ -26,7 +26,7 @@ export interface ILearnTeam {
     guide: string;
     intro: string;
     rejectReason: string;
-    status: TeamStatus;
+    status: GuidesStatus;
     originalTeamId: number | null;
     likes: number;
     isHonored: boolean;
@@ -42,7 +42,7 @@ export interface ILearnTeam {
     };
 }
 
-export interface ICreateLearnTeam {
+export interface ICreateGuide {
     primaryMode: GameMode;
     subModes: string[];
     name: string;

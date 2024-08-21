@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import { IUnit } from 'src/v2/features/characters/characters.models';
-import { ITeamSlot } from 'src/v2/features/learn-teams/learn-teams.models';
-import { TeamSlotView } from 'src/v2/features/learn-teams/components/team-slot-view';
+import { ITeamSlot } from 'src/v2/features/guides/guides.models';
+import { TeamSlotView } from 'src/v2/features/guides/components/team-slot-view';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { Divider } from '@mui/material';
 

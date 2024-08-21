@@ -1,7 +1,7 @@
 ﻿import React from 'react';
-import { ITeamSlot } from 'src/v2/features/learn-teams/learn-teams.models';
+import { ITeamSlot } from 'src/v2/features/guides/guides.models';
 import { IUnit } from 'src/v2/features/characters/characters.models';
-import { SlotType } from 'src/v2/features/learn-teams/learn-teams.enums';
+import { SlotType } from 'src/v2/features/guides/guides.enums';
 import { Badge, Tooltip } from '@mui/material';
 import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
 import { isCharacter } from 'src/v2/features/characters/units.functions';

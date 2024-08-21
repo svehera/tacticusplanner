@@ -13,23 +13,23 @@ import {
 } from 'src/v2/features/teams/teams.constants';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
 import { isMobile } from 'react-device-detect';
-import { ICreateLearnTeam, ITeamSlot } from 'src/v2/features/learn-teams/learn-teams.models';
+import { ICreateGuide, ITeamSlot } from 'src/v2/features/guides/guides.models';
 import { UnitType } from 'src/v2/features/characters/units.enums';
-import { SlotType } from 'src/v2/features/learn-teams/learn-teams.enums';
-import { TeamSlotEdit } from 'src/v2/features/learn-teams/components/team-slot-edit';
+import { SlotType } from 'src/v2/features/guides/guides.enums';
+import { TeamSlotEdit } from 'src/v2/features/guides/components/team-slot-edit';
 import InfoIcon from '@mui/icons-material/Info';
-import { SelectTeamDialog } from 'src/v2/features/learn-teams/components/select-team-dialog';
+import { SelectTeamDialog } from 'src/v2/features/guides/components/select-team-dialog';
 import { RichTextEditor } from 'src/v2/components/inputs/rich-text-editor';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
     onClose: () => void;
-    addTeam: (team: ICreateLearnTeam) => void;
+    addTeam: (team: ICreateGuide) => void;
     units: IUnit[];
 }
 
-export const CreateTeamDialog: React.FC<Props> = ({ onClose, units, addTeam }) => {
+export const EditGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) => {
     const { t } = useTranslation();
     const [gameMode, setGameMode] = useState<GameMode>(GameMode.guildRaids);
     const [selectedSubModes, setSelectedSubModes] = useState<string[]>([]);

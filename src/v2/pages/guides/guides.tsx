@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useQueryState } from 'src/v2/hooks/query-state';
 import { useAuth } from 'src/contexts/auth';
 import { UserRole } from 'src/models/enums';
-import { ICreateLearnTeam, IGetTeamsQueryParams, ILearnTeam } from 'src/v2/features/learn-teams/learn-teams.models';
+import { ICreateGuide, IGetGuidesQueryParams, IGuide } from 'src/v2/features/guides/guides.models';
 import {
     approveTeamApi,
     createTeamApi,
@@ -11,20 +11,20 @@ import {
     giveHonorTeamApi,
     rejectTeamApi,
     removeHonorTeamApi,
-} from 'src/v2/features/learn-teams/learn-teams.endpoint';
+} from 'src/v2/features/guides/guides.endpoint';
 import { Loader } from 'src/v2/components/loader';
 import AddIcon from '@mui/icons-material/Add';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import { CreateTeamDialog } from 'src/v2/features/learn-teams/components/create-team.dialog';
+import { CreateGuideDialog } from 'src/v2/features/guides/components/create-guide.dialog';
 import { StoreContext } from 'src/reducers/store.provider';
-import { LearnTeamCard } from 'src/v2/features/learn-teams/components/learn-team-card';
-import { LearnTeamView } from 'src/v2/features/learn-teams/components/learn-team-view';
-import { TeamsGroup, TeamStatus } from 'src/v2/features/learn-teams/learn-teams.enums';
-import { RejectReasonDialog } from 'src/v2/features/learn-teams/components/reject-reason.dialog';
+import { GuideCard } from 'src/v2/features/guides/components/guide-card';
+import { GuideView } from 'src/v2/features/guides/components/guide-view';
+import { GuidesGroup, GuidesStatus } from 'src/v2/features/guides/guides.enums';
+import { RejectReasonDialog } from 'src/v2/features/guides/components/reject-reason.dialog';
 import { enqueueSnackbar } from 'notistack';
 import { isMobile } from 'react-device-detect';
 
-export const LearnTeams: React.FC = () => {
+export const Guides: React.FC = () => {
     const { characters, mows } = useContext(StoreContext);
     const { userInfo, isAuthenticated } = useAuth();
     const isModerator = [UserRole.admin, UserRole.moderator].includes(userInfo.role);
@@ -42,14 +42,14 @@ export const LearnTeams: React.FC = () => {
         teamId => (teamId ? teamId.toString() : '')
     );
 
-    const [teams, setTeams] = useState<ILearnTeam[]>([]);
+    const [teams, setTeams] = useState<IGuide[]>([]);
     const [nextQueryParams, setNextQueryParams] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const [viewTeam, setViewTeam] = useState<ILearnTeam | null>(null);
-    const [moderateTeam, setModerateTeam] = useState<TeamStatus>(TeamStatus.approved);
+    const [viewTeam, setViewTeam] = useState<IGuide | null>(null);
+    const [moderateTeam, setModerateTeam] = useState<GuidesStatus>(GuidesStatus.approved);
 
-    const loadTeams = async (queryParams: IGetTeamsQueryParams) => {
+    const loadTeams = async (queryParams: IGetGuidesQueryParams) => {
         setLoading(true);
         try {
             const params = new URLSearchParams(queryParams as Record<string, string>).toString();
@@ -65,7 +65,7 @@ export const LearnTeams: React.FC = () => {
         }
     };
 
-    const createTeam = async (team: ICreateLearnTeam) => {
+    const createTeam = async (team: ICreateGuide) => {
         setLoading(true);
         try {
             const { error } = await createTeamApi(team);
@@ -135,10 +135,10 @@ export const LearnTeams: React.FC = () => {
         }
     };
 
-    const renderMyTeams = (teamList: ILearnTeam[]) => {
-        const rejectedTeams = teamList.filter(x => x.status === TeamStatus.rejected);
-        const pendingTeams = teamList.filter(x => x.status === TeamStatus.pending);
-        const approvedTeams = teamList.filter(x => x.status === TeamStatus.approved);
+    const renderMyTeams = (teamList: IGuide[]) => {
+        const rejectedTeams = teamList.filter(x => x.status === GuidesStatus.rejected);
+        const pendingTeams = teamList.filter(x => x.status === GuidesStatus.pending);
+        const approvedTeams = teamList.filter(x => x.status === GuidesStatus.approved);
 
         return (
             <div>
@@ -171,18 +171,18 @@ export const LearnTeams: React.FC = () => {
         setActiveTab(newValue);
     };
 
-    const handleTeamModeration = (teamId: number, status: TeamStatus) => {
+    const handleTeamModeration = (teamId: number, status: GuidesStatus) => {
         setModerateTeam(status);
-        if (status === TeamStatus.approved) {
+        if (status === GuidesStatus.approved) {
             approveTeam(teamId);
             setViewTeam(null);
             setTeams(currentTeams => {
-                if (activeTab === TeamsGroup.pending) {
+                if (activeTab === GuidesGroup.pending) {
                     return currentTeams.filter(x => x.teamId !== teamId);
                 }
                 const approvedTeam = currentTeams.find(x => x.teamId === teamId);
                 if (approvedTeam) {
-                    approvedTeam.status == TeamStatus.approved;
+                    approvedTeam.status == GuidesStatus.approved;
                 }
 
                 return currentTeams;
@@ -191,16 +191,16 @@ export const LearnTeams: React.FC = () => {
     };
 
     const handleTeamReject = (teamId: number, reason: string) => {
-        setModerateTeam(TeamStatus.approved);
+        setModerateTeam(GuidesStatus.approved);
         rejectTeam(teamId, reason);
         setViewTeam(null);
         setTeams(currentTeams => {
-            if (activeTab === TeamsGroup.pending) {
+            if (activeTab === GuidesGroup.pending) {
                 return currentTeams.filter(x => x.teamId !== teamId);
             }
             const approvedTeam = currentTeams.find(x => x.teamId === teamId);
             if (approvedTeam) {
-                approvedTeam.status == TeamStatus.rejected;
+                approvedTeam.status == GuidesStatus.rejected;
             }
 
             return currentTeams;
@@ -230,7 +230,7 @@ export const LearnTeams: React.FC = () => {
     };
 
     useEffect(() => {
-        const initialQueryParams: IGetTeamsQueryParams = {
+        const initialQueryParams: IGetGuidesQueryParams = {
             page: 1,
             pageSize: 10,
             group: activeTab,
@@ -241,11 +241,11 @@ export const LearnTeams: React.FC = () => {
         });
     }, [activeTab]);
 
-    const renderTeams = (teamList: ILearnTeam[]) => {
+    const renderTeams = (teamList: IGuide[]) => {
         return (
             <div className="flex-box gap20 start wrap">
                 {teamList.map(team => (
-                    <LearnTeamCard
+                    <GuideCard
                         key={team.teamId}
                         team={team}
                         units={[...characters, ...mows]}
@@ -290,21 +290,21 @@ export const LearnTeams: React.FC = () => {
             </Tabs>
             {loading && <Loader loading={true} />}
             {openCreateTeamDialog && (
-                <CreateTeamDialog
+                <CreateGuideDialog
                     units={[...characters, ...mows]}
                     onClose={() => setOpenCreateTeamDialog(false)}
                     addTeam={createTeam}
                 />
             )}
 
-            {activeTab === TeamsGroup.myTeams ? (
+            {activeTab === GuidesGroup.myTeams ? (
                 renderMyTeams(teams)
             ) : (
                 <div className="flex-box gap20 start wrap">{renderTeams(teams)}</div>
             )}
 
             {!!viewTeam && (
-                <LearnTeamView
+                <GuideView
                     team={viewTeam}
                     units={[...characters, ...mows]}
                     moderate={status => handleTeamModeration(viewTeam!.teamId, status)}
@@ -314,7 +314,7 @@ export const LearnTeams: React.FC = () => {
                 />
             )}
 
-            {moderateTeam === TeamStatus.rejected && (
+            {moderateTeam === GuidesStatus.rejected && (
                 <RejectReasonDialog onClose={reason => handleTeamReject(viewTeam?.teamId ?? 0, reason)} />
             )}
         </div>

@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { ILearnTeam } from 'src/v2/features/learn-teams/learn-teams.models';
+import { IGuide } from 'src/v2/features/guides/guides.models';
 import { Card, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -8,15 +8,15 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { TokenImage } from 'src/v2/components/images/token-image';
-import { TeamView } from 'src/v2/features/learn-teams/components/team-view';
-import { TeamStatus } from 'src/v2/features/learn-teams/learn-teams.enums';
+import { TeamView } from 'src/v2/features/guides/components/team-view';
+import { GuidesStatus } from 'src/v2/features/guides/guides.enums';
 import { isMobile } from 'react-device-detect';
 import { RichTextViewer } from 'src/v2/components/inputs/rich-text-viewer';
 import { allModes, gameModes } from 'src/v2/features/teams/teams.constants';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
 interface Props {
-    team: ILearnTeam;
+    team: IGuide;
     units: IUnit[];
     fullView?: boolean;
     onView?: () => void;
@@ -24,16 +24,9 @@ interface Props {
     onShare: () => void;
 }
 
-export const LearnTeamCard: React.FC<Props> = ({
-    team,
-    units,
-    fullView = false,
-    onView = () => {},
-    onHonor,
-    onShare,
-}) => {
+export const GuideCard: React.FC<Props> = ({ team, units, fullView = false, onView = () => {}, onHonor, onShare }) => {
     const renderLikeAndShare = () => {
-        if (team.status !== TeamStatus.approved) {
+        if (team.status !== GuidesStatus.approved) {
             return <></>;
         }
 
@@ -83,7 +76,7 @@ export const LearnTeamCard: React.FC<Props> = ({
                 avatar={<TokenImage gameMode={team.primaryMode} />}
                 action={
                     <>
-                        {fullView && team.status === TeamStatus.approved ? (
+                        {fullView && team.status === GuidesStatus.approved ? (
                             <CardActions disableSpacing>{renderLikeAndShare()}</CardActions>
                         ) : (
                             <IconButton aria-label="settings" onClick={onView}>
@@ -96,7 +89,7 @@ export const LearnTeamCard: React.FC<Props> = ({
                 subheader={`By ${team.createdBy}`}
             />
             <CardContent onClick={onView}>
-                {team.status === TeamStatus.rejected && (
+                {team.status === GuidesStatus.rejected && (
                     <Typography variant="body2" color="error">
                         {team.rejectReason} (Rejected by {team.moderatedBy})
                     </Typography>
@@ -112,7 +105,7 @@ export const LearnTeamCard: React.FC<Props> = ({
                 </Typography>
             </CardContent>
 
-            {!fullView && team.status === TeamStatus.approved && (
+            {!fullView && team.status === GuidesStatus.approved && (
                 <CardActions disableSpacing>{renderLikeAndShare()}</CardActions>
             )}
             {fullView && (

@@ -1,4 +1,4 @@
-﻿export enum TeamStatus {
+﻿export enum GuidesStatus {
     pending = 0,
     approved = 1,
     rejected = 2,
@@ -10,7 +10,7 @@ export enum SlotType {
     none = 2,
 }
 
-export enum TeamsGroup {
+export enum GuidesGroup {
     approved = 0,
     favorite = 1,
     myTeams = 2,
