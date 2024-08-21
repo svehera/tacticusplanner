@@ -51,7 +51,7 @@ export const UserMenu = () => {
     };
 
     const navigateToReviewTeams = () => {
-        navigate('/learn/teams?activeTab=3');
+        navigate('/learn/guides?activeTab=3');
     };
 
     const { isAuthenticated, logout, username, userInfo } = useAuth();
@@ -268,7 +268,7 @@ export const UserMenu = () => {
                                     <GroupWorkIcon />
                                 </ListItemIcon>
                                 <Badge badgeContent={userInfo.pendingTeamsCount} color="warning">
-                                    <ListItemText>Review teams</ListItemText>
+                                    <ListItemText>Review guides</ListItemText>
                                 </Badge>
                             </MenuItem>
                         )}
