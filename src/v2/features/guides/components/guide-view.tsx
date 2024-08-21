@@ -14,13 +14,32 @@ interface Props {
     team: IGuide;
     units: IUnit[];
     onHonor: (honored: boolean) => void;
+    onViewOriginal: () => void;
     onShare: () => void;
+    onEdit: () => void;
 }
 
-export const GuideView: React.FC<Props> = ({ team, units, onClose, moderate, onShare, onHonor }) => {
+export const GuideView: React.FC<Props> = ({
+    team,
+    units,
+    onClose,
+    moderate,
+    onShare,
+    onHonor,
+    onEdit,
+    onViewOriginal,
+}) => {
     return (
         <Dialog open={true} onClose={onClose} fullWidth fullScreen={isMobile}>
-            <GuideCard units={units} team={team} fullView onHonor={onHonor} onShare={onShare} />
+            <GuideCard
+                units={units}
+                team={team}
+                fullView
+                onHonor={onHonor}
+                onShare={onShare}
+                onEdit={onEdit}
+                onViewOriginal={onViewOriginal}
+            />
             <DialogActions>
                 <Button onClick={onClose}>Close</Button>
                 {team.permissions.canModerate && (

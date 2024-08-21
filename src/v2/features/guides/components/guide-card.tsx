@@ -5,6 +5,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { TokenImage } from 'src/v2/components/images/token-image';
@@ -14,20 +15,42 @@ import { isMobile } from 'react-device-detect';
 import { RichTextViewer } from 'src/v2/components/inputs/rich-text-viewer';
 import { allModes, gameModes } from 'src/v2/features/teams/teams.constants';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import Button from '@mui/material/Button';
 
 interface Props {
     team: IGuide;
     units: IUnit[];
     fullView?: boolean;
     onView?: () => void;
+    onViewOriginal: () => void;
     onHonor: (honored: boolean) => void;
     onShare: () => void;
+    onEdit: () => void;
 }
 
-export const GuideCard: React.FC<Props> = ({ team, units, fullView = false, onView = () => {}, onHonor, onShare }) => {
-    const renderLikeAndShare = () => {
+export const GuideCard: React.FC<Props> = ({
+    team,
+    units,
+    fullView = false,
+    onView = () => {},
+    onHonor,
+    onShare,
+    onEdit,
+    onViewOriginal,
+}) => {
+    const renderActions = () => {
         if (team.status !== GuidesStatus.approved) {
-            return <></>;
+            return (
+                <>
+                    {team.permissions.canEdit && (
+                        <IconButton aria-label="add to favorites" onClick={onEdit}>
+                            <AccessibleTooltip title="Edit">
+                                <EditIcon />
+                            </AccessibleTooltip>
+                        </IconButton>
+                    )}
+                </>
+            );
         }
 
         return (
@@ -55,6 +78,14 @@ export const GuideCard: React.FC<Props> = ({ team, units, fullView = false, onVi
                         <ShareIcon />
                     </AccessibleTooltip>
                 </IconButton>
+
+                {team.permissions.canEdit && (
+                    <IconButton aria-label="add to favorites" onClick={onEdit}>
+                        <AccessibleTooltip title="Edit">
+                            <EditIcon />
+                        </AccessibleTooltip>
+                    </IconButton>
+                )}
             </>
         );
     };
@@ -76,8 +107,8 @@ export const GuideCard: React.FC<Props> = ({ team, units, fullView = false, onVi
                 avatar={<TokenImage gameMode={team.primaryMode} />}
                 action={
                     <>
-                        {fullView && team.status === GuidesStatus.approved ? (
-                            <CardActions disableSpacing>{renderLikeAndShare()}</CardActions>
+                        {fullView ? (
+                            <CardActions disableSpacing>{renderActions()}</CardActions>
                         ) : (
                             <IconButton aria-label="settings" onClick={onView}>
                                 <MoreVertIcon />
@@ -89,6 +120,8 @@ export const GuideCard: React.FC<Props> = ({ team, units, fullView = false, onVi
                 subheader={`By ${team.createdBy}`}
             />
             <CardContent onClick={onView}>
+                {(team.status === GuidesStatus.rejected || team.status === GuidesStatus.pending) &&
+                    !!team.originalTeamId && <Button onClick={onViewOriginal}>View original team</Button>}
                 {team.status === GuidesStatus.rejected && (
                     <Typography variant="body2" color="error">
                         {team.rejectReason} (Rejected by {team.moderatedBy})
@@ -105,9 +138,7 @@ export const GuideCard: React.FC<Props> = ({ team, units, fullView = false, onVi
                 </Typography>
             </CardContent>
 
-            {!fullView && team.status === GuidesStatus.approved && (
-                <CardActions disableSpacing>{renderLikeAndShare()}</CardActions>
-            )}
+            {!fullView && <CardActions disableSpacing>{renderActions()}</CardActions>}
             {fullView && (
                 <CardContent>
                     <RichTextViewer htmlValue={team.guide} />

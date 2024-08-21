@@ -1,5 +1,5 @@
 ﻿import { makeApiCall } from 'src/v2/api/makeApiCall';
-import { ICreateGuide, IGetGuidesResponse } from './guides.models';
+import { ICreateGuide, IGetGuidesResponse, IGuide } from './guides.models';
 
 export const getTeamsApi = (queryParams: string) => {
     return makeApiCall<IGetGuidesResponse>('get', `guides?${queryParams}`);
@@ -7,6 +7,10 @@ export const getTeamsApi = (queryParams: string) => {
 
 export const createTeamApi = (team: ICreateGuide) => {
     return makeApiCall<IGetGuidesResponse>('POST', 'guides', team);
+};
+
+export const updateTeamApi = (guideId: number, guide: ICreateGuide) => {
+    return makeApiCall<IGetGuidesResponse>('PUT', `guides/${guideId}`, guide);
 };
 
 export const approveTeamApi = (teamId: number) => {

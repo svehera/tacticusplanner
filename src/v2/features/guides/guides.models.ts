@@ -10,7 +10,7 @@ export interface IGetGuidesQueryParams {
     orderBy?: 'createdAt_asc' | 'createdAt_desc' | 'likes_asc' | 'likes_desc';
     page?: number;
     pageSize?: number;
-    teamId?: number;
+    guideId?: number;
 }
 
 export interface IGetGuidesResponse {

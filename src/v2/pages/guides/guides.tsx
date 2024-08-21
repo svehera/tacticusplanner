@@ -11,6 +11,7 @@ import {
     giveHonorTeamApi,
     rejectTeamApi,
     removeHonorTeamApi,
+    updateTeamApi,
 } from 'src/v2/features/guides/guides.endpoint';
 import { Loader } from 'src/v2/components/loader';
 import AddIcon from '@mui/icons-material/Add';
@@ -23,6 +24,7 @@ import { GuidesGroup, GuidesStatus } from 'src/v2/features/guides/guides.enums';
 import { RejectReasonDialog } from 'src/v2/features/guides/components/reject-reason.dialog';
 import { enqueueSnackbar } from 'notistack';
 import { isMobile } from 'react-device-detect';
+import { EditGuideDialog } from 'src/v2/features/guides/components/edit-guide.dialog';
 
 export const Guides: React.FC = () => {
     const { characters, mows } = useContext(StoreContext);
@@ -37,7 +39,7 @@ export const Guides: React.FC = () => {
     );
 
     const [viewTeamId, setViewTeamId] = useQueryState<number | null>(
-        'teamId',
+        'guideId',
         teamIdParam => (teamIdParam ? +teamIdParam : null),
         teamId => (teamId ? teamId.toString() : '')
     );
@@ -46,7 +48,8 @@ export const Guides: React.FC = () => {
     const [nextQueryParams, setNextQueryParams] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const [viewTeam, setViewTeam] = useState<IGuide | null>(null);
+    const [viewGuide, setViewGuide] = useState<IGuide | null>(null);
+    const [editGuide, setEditGuide] = useState<IGuide | null>(null);
     const [moderateTeam, setModerateTeam] = useState<GuidesStatus>(GuidesStatus.approved);
 
     const loadTeams = async (queryParams: IGetGuidesQueryParams) => {
@@ -56,6 +59,24 @@ export const Guides: React.FC = () => {
             const { data: response } = await getTeamsApi(params);
             if (response) {
                 setTeams(prevTeams => [...prevTeams, ...response.teams]);
+                setNextQueryParams(response.next);
+            }
+        } catch (error) {
+            console.error('Error loading teams:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const loadNextTeams = async () => {
+        if (!nextQueryParams || loading) {
+            return;
+        }
+        setLoading(true);
+        try {
+            const { data: response } = await getTeamsApi(nextQueryParams);
+            if (response) {
+                setTeams(prev => [...prev, ...response.teams]);
                 setNextQueryParams(response.next);
             }
         } catch (error) {
@@ -76,6 +97,22 @@ export const Guides: React.FC = () => {
             console.error('Error while creating team', error);
         } finally {
             setLoading(false);
+            setActiveTab(GuidesGroup.pending);
+        }
+    };
+
+    const updateGuide = async (guideId: number, guide: ICreateGuide) => {
+        setLoading(true);
+        try {
+            const { error } = await updateTeamApi(guideId, guide);
+            if (error) {
+                console.error('Error while updating guide', error);
+            }
+        } catch (error) {
+            console.error('Error while updating guide', error);
+        } finally {
+            setLoading(false);
+            setActiveTab(GuidesGroup.pending);
         }
     };
 
@@ -175,7 +212,7 @@ export const Guides: React.FC = () => {
         setModerateTeam(status);
         if (status === GuidesStatus.approved) {
             approveTeam(teamId);
-            setViewTeam(null);
+            setViewGuide(null);
             setTeams(currentTeams => {
                 if (activeTab === GuidesGroup.pending) {
                     return currentTeams.filter(x => x.teamId !== teamId);
@@ -193,7 +230,7 @@ export const Guides: React.FC = () => {
     const handleTeamReject = (teamId: number, reason: string) => {
         setModerateTeam(GuidesStatus.approved);
         rejectTeam(teamId, reason);
-        setViewTeam(null);
+        setViewGuide(null);
         setTeams(currentTeams => {
             if (activeTab === GuidesGroup.pending) {
                 return currentTeams.filter(x => x.teamId !== teamId);
@@ -224,9 +261,20 @@ export const Guides: React.FC = () => {
     };
 
     const handleShare = (teamId: number) => {
-        const shareRoute = (isMobile ? '/mobile' : '') + `/learn/teams?teamId=${teamId}`;
+        const shareRoute = (isMobile ? '/mobile' : '') + `/learn/guides?guideId=${teamId}`;
         const shareLink = location.origin + shareRoute;
         navigator.clipboard.writeText(shareLink).then(r => enqueueSnackbar('Link Copied', { variant: 'success' }));
+    };
+
+    const handleViewOriginal = (teamId: number | null) => {
+        const route = (isMobile ? '/mobile' : '') + `/learn/guides?guideId=${teamId}`;
+        const link = location.origin + route;
+
+        window.open(link, isMobile ? '_self' : '_blank');
+    };
+
+    const handleEdit = (guide: IGuide) => {
+        setEditGuide(guide);
     };
 
     useEffect(() => {
@@ -234,12 +282,26 @@ export const Guides: React.FC = () => {
             page: 1,
             pageSize: 10,
             group: activeTab,
-            teamId: viewTeamId || undefined,
+            guideId: viewTeamId || undefined,
         };
         loadTeams(initialQueryParams).then(() => {
             setViewTeamId(null);
         });
     }, [activeTab]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+            if (scrollTop + clientHeight >= scrollHeight - 400) {
+                loadNextTeams();
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [loadNextTeams]);
 
     const renderTeams = (teamList: IGuide[]) => {
         return (
@@ -249,8 +311,10 @@ export const Guides: React.FC = () => {
                         key={team.teamId}
                         team={team}
                         units={[...characters, ...mows]}
-                        onView={() => setViewTeam(team)}
+                        onView={() => setViewGuide(team)}
                         onShare={() => handleShare(team.teamId)}
+                        onViewOriginal={() => handleViewOriginal(team.originalTeamId)}
+                        onEdit={() => handleEdit(team)}
                         onHonor={honored => handleTeamHonor(team.teamId, honored)}
                     />
                 ))}
@@ -303,19 +367,30 @@ export const Guides: React.FC = () => {
                 <div className="flex-box gap20 start wrap">{renderTeams(teams)}</div>
             )}
 
-            {!!viewTeam && (
+            {!!viewGuide && (
                 <GuideView
-                    team={viewTeam}
+                    team={viewGuide}
                     units={[...characters, ...mows]}
-                    moderate={status => handleTeamModeration(viewTeam!.teamId, status)}
-                    onClose={() => setViewTeam(null)}
-                    onShare={() => handleShare(viewTeam.teamId)}
-                    onHonor={honored => handleTeamHonor(viewTeam.teamId, honored)}
+                    moderate={status => handleTeamModeration(viewGuide!.teamId, status)}
+                    onClose={() => setViewGuide(null)}
+                    onShare={() => handleShare(viewGuide.teamId)}
+                    onViewOriginal={() => handleViewOriginal(viewGuide.originalTeamId)}
+                    onEdit={() => handleEdit(viewGuide)}
+                    onHonor={honored => handleTeamHonor(viewGuide.teamId, honored)}
+                />
+            )}
+
+            {!!editGuide && (
+                <EditGuideDialog
+                    guide={editGuide}
+                    units={[...characters, ...mows]}
+                    saveGuide={updated => updateGuide(editGuide?.teamId, updated)}
+                    onClose={() => setEditGuide(null)}
                 />
             )}
 
             {moderateTeam === GuidesStatus.rejected && (
-                <RejectReasonDialog onClose={reason => handleTeamReject(viewTeam?.teamId ?? 0, reason)} />
+                <RejectReasonDialog onClose={reason => handleTeamReject(viewGuide?.teamId ?? 0, reason)} />
             )}
         </div>
     );
