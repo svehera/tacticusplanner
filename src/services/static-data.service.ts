@@ -73,7 +73,9 @@ export class StaticDataService {
 
     static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = CampaignsService.campaignsComposed;
 
-    static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
+    static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[])
+        .map(this.convertUnitData)
+        .filter(x => !['Lucien', 'Titus'].includes(x.name));
     static readonly campaignsGrouped: Record<string, ICampaignBattleComposed[]> = this.getCampaignGrouped();
     static readonly recipeDataFull: IRecipeDataFull = this.convertRecipeData();
 
