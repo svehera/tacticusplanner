@@ -43,13 +43,13 @@ export const LearnTeamCard: React.FC<Props> = ({
                     <>
                         {team.isHonored ? (
                             <IconButton aria-label="add to favorites" onClick={() => onHonor(false)}>
-                                <AccessibleTooltip title="Remove Honour">
+                                <AccessibleTooltip title="Remove Honor">
                                     <FavoriteIcon />
                                 </AccessibleTooltip>
                             </IconButton>
                         ) : (
                             <IconButton aria-label="add to favorites" onClick={() => onHonor(true)}>
-                                <AccessibleTooltip title="Give Honour">
+                                <AccessibleTooltip title="Do Honor">
                                     <FavoriteBorderIcon />
                                 </AccessibleTooltip>
                             </IconButton>

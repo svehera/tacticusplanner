@@ -5,7 +5,7 @@ $columnCount4: 4;
 $columnCount3: 3;
 $columnCount2: 2;
 
-$maxWidth: 470;
+$maxWidth: 525;
 
 @mixin responsiveGrid($columns, $maxWidth) {
     $roundedRows: ceil($factionsCount / $columns);

@@ -1,6 +1,32 @@
 ﻿{
-    "currentVersion": "1.6.0",
+    "currentVersion": "1.6.1",
     "releaseNotes": [
+        {
+            "version": "1.6.1",
+            "date": "August X",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added learn Guides feature"
+                },
+                {
+                    "text": "Added new collectable characters",
+                    "subPoints": [
+                        "Titus, Primaris Lieutenant, unlockable in the first ‘Survival‘ event, starting September 1",
+                        "Lucien, Death Company Intercessor, unlockable in the ‘Insanguination’ event, starting September 8"
+                    ]
+                },
+                {
+                    "text": "Added new Campaign Battles: ‘Mirror Elite Saim-Hann’ part 3"
+                }
+            ],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with Who You Own layout"
+                }
+            ]
+        },
         {
             "version": "1.6.0",
             "date": "July 26",

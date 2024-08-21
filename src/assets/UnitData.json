@@ -1685,8 +1685,7 @@
         "Number": 66,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "Ragnar.webp",
-        "ReleaseRarity": 6
+        "Icon": "Ragnar.webp"
     },
     {
         "Name": "Vitruvius",
@@ -1965,6 +1964,34 @@
         "releaseDate": "2024-08-04T00:00:00Z"
     },
     {
+        "Name": "Lucien",
+        "Title": "Death Company Intercessor",
+        "Full Name": "Lucien",
+        "Short Name": "Lucien",
+        "Faction": "Blood Angels",
+        "Alliance": "Imperial",
+        "Health": 8624,
+        "Damage": 2874,
+        "Armour": 2011,
+        "Initial rarity": "Uncommon",
+        "Melee Damage": "Physical",
+        "Ranged Damage": "Blast",
+        "Melee Hits": 4,
+        "Ranged Hits": 3,
+        "Distance": 2,
+        "Movement": 3,
+        "Passive Ability": "Bolter",
+        "Equipment1": "Crit",
+        "Equipment2": "Defense",
+        "Equipment3": "Crit Booster",
+        "Traits": ["Rapid Assault", "Resilient", "Unstoppable"],
+        "Number": 78,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "lucien.webp",
+        "releaseDate": "2024-09-08T00:00:00Z"
+    },
+    {
         "Name": "Mephiston",
         "Title": "Lord of Death",
         "Full Name": "Mephiston",
@@ -1990,5 +2017,30 @@
         "Icon": "mephiston.webp",
         "ReleaseRarity": 6,
         "releaseDate": "2024-08-25T00:00:00Z"
+    },
+    {
+        "Name": "Titus",
+        "Title": "Primaris Lieutenant",
+        "Full Name": "Demetrian Titus",
+        "Short Name": "Titus",
+        "Faction": "Ultramarines",
+        "Alliance": "Imperial",
+        "Health": 9103,
+        "Damage": 2398,
+        "Armour": 2207,
+        "Initial rarity": "Epic",
+        "Melee Damage": "Chain",
+        "Melee Hits": 4,
+        "Movement": 3,
+        "Equipment1": "Crit",
+        "Equipment2": "Defense",
+        "Equipment3": "Crit Booster",
+        "Traits": ["Final Vengeance"],
+        "Active Ability": "Bolter",
+        "Number": 79,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "titus.webp",
+        "releaseDate": "2024-09-01T00:00:00Z"
     }
 ]
