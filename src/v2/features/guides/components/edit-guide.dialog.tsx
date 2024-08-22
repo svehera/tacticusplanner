@@ -10,6 +10,7 @@ import { SelectTeamDialog } from 'src/v2/features/guides/components/select-team-
 import { RichTextEditor } from 'src/v2/components/inputs/rich-text-editor';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'react-i18next';
+import { SlotType } from 'src/v2/features/guides/guides.enums';
 
 interface Props {
     units: IUnit[];
@@ -43,6 +44,18 @@ export const EditGuideDialog: React.FC<Props> = ({ onClose, units, saveGuide, gu
         });
         onClose();
     };
+
+    const disableContinue = (function () {
+        if (!teamName.length) {
+            return true;
+        }
+
+        if (teamSlots.some(x => x.slotType !== SlotType.none && !x.unitIds.length)) {
+            return true;
+        }
+
+        return false;
+    })();
 
     return (
         <Dialog open={true} onClose={onClose} fullWidth fullScreen={isMobile}>
@@ -100,7 +113,7 @@ export const EditGuideDialog: React.FC<Props> = ({ onClose, units, saveGuide, gu
             </DialogContent>
             <DialogActions className="flex-box between">
                 <Button onClick={onClose}>Cancel</Button>
-                <Button variant="contained" onClick={saveChanges}>
+                <Button variant="contained" onClick={saveChanges} disabled={disableContinue}>
                     Save
                 </Button>
             </DialogActions>

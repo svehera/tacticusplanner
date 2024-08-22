@@ -29,7 +29,7 @@ interface Props {
 }
 
 export const GuideCard: React.FC<Props> = ({
-    team,
+    team: guide,
     units,
     fullView = false,
     onView = () => {},
@@ -38,11 +38,21 @@ export const GuideCard: React.FC<Props> = ({
     onEdit,
     onViewOriginal,
 }) => {
+    const honorGuide = () => {
+        onHonor(true);
+        guide.likes++;
+    };
+
+    const dishonorGuide = () => {
+        onHonor(false);
+        guide.likes--;
+    };
+
     const renderActions = () => {
-        if (team.status !== GuidesStatus.approved) {
+        if (guide.status !== GuidesStatus.approved) {
             return (
                 <>
-                    {team.permissions.canEdit && (
+                    {guide.permissions.canEdit && (
                         <IconButton aria-label="add to favorites" onClick={onEdit}>
                             <AccessibleTooltip title="Edit">
                                 <EditIcon />
@@ -56,11 +66,11 @@ export const GuideCard: React.FC<Props> = ({
         return (
             <>
                 <div className="flex-box">
-                    {team.isHonored ? (
+                    {guide.isHonored ? (
                         <IconButton
                             aria-label="add to favorites"
-                            disabled={!team.permissions.canHonor}
-                            onClick={() => onHonor(false)}>
+                            disabled={!guide.permissions.canHonor}
+                            onClick={dishonorGuide}>
                             <AccessibleTooltip title="Remove Honor">
                                 <FavoriteIcon />
                             </AccessibleTooltip>
@@ -68,14 +78,14 @@ export const GuideCard: React.FC<Props> = ({
                     ) : (
                         <IconButton
                             aria-label="add to favorites"
-                            disabled={!team.permissions.canHonor}
-                            onClick={() => onHonor(true)}>
+                            disabled={!guide.permissions.canHonor}
+                            onClick={honorGuide}>
                             <AccessibleTooltip title="Do Honor">
                                 <FavoriteBorderIcon />
                             </AccessibleTooltip>
                         </IconButton>
                     )}
-                    <span className="bold">{team.likes}</span>
+                    <span className="bold">{guide.likes}</span>
                 </div>
 
                 <IconButton aria-label="share" onClick={onShare}>
@@ -84,7 +94,7 @@ export const GuideCard: React.FC<Props> = ({
                     </AccessibleTooltip>
                 </IconButton>
 
-                {team.permissions.canEdit && (
+                {guide.permissions.canEdit && (
                     <IconButton aria-label="add to favorites" onClick={onEdit}>
                         <AccessibleTooltip title="Edit">
                             <EditIcon />
@@ -95,8 +105,8 @@ export const GuideCard: React.FC<Props> = ({
         );
     };
 
-    const gameMode = gameModes.find(x => x.value === team.primaryMode)?.label ?? 'NA';
-    const subMode = allModes.find(x => x.value === team.subModes[0])?.label ?? 'NA';
+    const gameMode = gameModes.find(x => x.value === guide.primaryMode)?.label ?? 'NA';
+    const subMode = allModes.find(x => x.value === guide.subModes[0])?.label ?? 'NA';
 
     return (
         <Card
@@ -109,7 +119,7 @@ export const GuideCard: React.FC<Props> = ({
             variant="outlined">
             <CardHeader
                 style={{ paddingBottom: 0 }}
-                avatar={<TokenImage gameMode={team.primaryMode} />}
+                avatar={<TokenImage gameMode={guide.primaryMode} />}
                 action={
                     <>
                         {fullView ? (
@@ -121,32 +131,32 @@ export const GuideCard: React.FC<Props> = ({
                         )}
                     </>
                 }
-                title={team.name}
-                subheader={`By ${team.createdBy}`}
+                title={guide.name}
+                subheader={`By ${guide.createdBy}`}
             />
             <CardContent onClick={onView}>
-                {(team.status === GuidesStatus.rejected || team.status === GuidesStatus.pending) &&
-                    !!team.originalTeamId && <Button onClick={onViewOriginal}>View original team</Button>}
-                {team.status === GuidesStatus.rejected && (
+                {(guide.status === GuidesStatus.rejected || guide.status === GuidesStatus.pending) &&
+                    !!guide.originalTeamId && <Button onClick={onViewOriginal}>View original team</Button>}
+                {guide.status === GuidesStatus.rejected && (
                     <Typography variant="body2" color="error">
-                        {team.rejectReason} (Rejected by {team.moderatedBy})
+                        {guide.rejectReason} (Rejected by {guide.moderatedBy})
                     </Typography>
                 )}
                 <Typography variant="body2" color="text.primary">
                     {gameMode} - {subMode}
                 </Typography>
 
-                <TeamView slots={team.teamSlots} units={units} expanded={fullView} />
+                <TeamView slots={guide.teamSlots} units={units} expanded={fullView} />
 
                 <Typography variant="body2" color="text.secondary">
-                    {team.intro}
+                    {guide.intro}
                 </Typography>
             </CardContent>
 
             {!fullView && <CardActions disableSpacing>{renderActions()}</CardActions>}
             {fullView && (
                 <CardContent>
-                    <RichTextViewer htmlValue={team.guide} />
+                    <RichTextViewer htmlValue={guide.guide} />
                 </CardContent>
             )}
         </Card>

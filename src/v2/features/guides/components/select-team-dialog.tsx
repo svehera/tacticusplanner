@@ -47,7 +47,16 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
             }
 
             editedSlot.slotType = slotType;
-            editedSlot.unitIds = editedSlot.unitIds[0] ? [editedSlot.unitIds[0]] : [];
+            switch (slotType) {
+                case SlotType.none: {
+                    editedSlot.unitIds = [];
+                    break;
+                }
+                default: {
+                    editedSlot.unitIds = editedSlot.unitIds[0] ? [editedSlot.unitIds[0]] : [];
+                    break;
+                }
+            }
 
             return [...curr];
         });

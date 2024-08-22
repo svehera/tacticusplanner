@@ -158,7 +158,13 @@ export const Guides: React.FC = () => {
             console.error('Error while creating team', error);
         } finally {
             setLoading(false);
+            setTeams([]);
             setActiveTab(GuidesGroup.pending);
+            loadTeams({
+                page: 1,
+                pageSize: 10,
+                group: GuidesGroup.pending,
+            });
         }
     };
 
@@ -174,6 +180,12 @@ export const Guides: React.FC = () => {
         } finally {
             setLoading(false);
             setActiveTab(GuidesGroup.pending);
+            setTeams([]);
+            loadTeams({
+                page: 1,
+                pageSize: 10,
+                group: GuidesGroup.pending,
+            });
         }
     };
 
