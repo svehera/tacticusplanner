@@ -19,13 +19,15 @@ export const useQueryState = <T>(
         const newQueryParam = valueToString(newValue);
 
         setSearchParams(curr => {
+            const updatedParams = new URLSearchParams(curr);
+
             if (newQueryParam) {
-                curr.set(queryParam, newQueryParam);
+                updatedParams.set(queryParam, newQueryParam);
             } else {
-                curr.delete(queryParam);
+                updatedParams.delete(queryParam);
             }
 
-            return curr;
+            return updatedParams;
         });
     };
 

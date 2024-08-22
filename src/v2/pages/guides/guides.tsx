@@ -1,9 +1,9 @@
-﻿import { Fab, Tab, Tabs } from '@mui/material';
-import React, { useContext, useEffect, useState } from 'react';
+﻿import { Badge, Fab, Tab, Tabs } from '@mui/material';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useQueryState } from 'src/v2/hooks/query-state';
 import { useAuth } from 'src/contexts/auth';
 import { UserRole } from 'src/models/enums';
-import { ICreateGuide, IGetGuidesQueryParams, IGuide } from 'src/v2/features/guides/guides.models';
+import { ICreateGuide, IGetGuidesQueryParams, IGuide, IGuideFilter } from 'src/v2/features/guides/guides.models';
 import {
     approveTeamApi,
     createTeamApi,
@@ -16,6 +16,7 @@ import {
 import { Loader } from 'src/v2/components/loader';
 import AddIcon from '@mui/icons-material/Add';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { CreateGuideDialog } from 'src/v2/features/guides/components/create-guide.dialog';
 import { StoreContext } from 'src/reducers/store.provider';
 import { GuideCard } from 'src/v2/features/guides/components/guide-card';
@@ -25,12 +26,19 @@ import { RejectReasonDialog } from 'src/v2/features/guides/components/reject-rea
 import { enqueueSnackbar } from 'notistack';
 import { isMobile } from 'react-device-detect';
 import { EditGuideDialog } from 'src/v2/features/guides/components/edit-guide.dialog';
+import { GuidesFilter } from 'src/v2/features/guides/components/guides-filter';
+import { useSearchParams } from 'react-router-dom';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 
 export const Guides: React.FC = () => {
     const { characters, mows } = useContext(StoreContext);
     const { userInfo, isAuthenticated } = useAuth();
+    const [_, setSearchParams] = useSearchParams();
+
     const isModerator = [UserRole.admin, UserRole.moderator].includes(userInfo.role);
     const [openCreateTeamDialog, setOpenCreateTeamDialog] = React.useState(false);
+    const [showFilters, setShowFilters] = React.useState(false);
 
     const [activeTab, setActiveTab] = useQueryState<number>(
         'activeTab',
@@ -44,6 +52,30 @@ export const Guides: React.FC = () => {
         teamId => (teamId ? teamId.toString() : '')
     );
 
+    const [primaryModFilter] = useQueryState<string | undefined>(
+        'primaryModes',
+        filterParam => filterParam ?? undefined,
+        queryParam => queryParam
+    );
+
+    const [createdByFilter] = useQueryState<string | undefined>(
+        'createdBy',
+        filterParam => filterParam ?? undefined,
+        queryParam => queryParam
+    );
+
+    const [subModFilter] = useQueryState<string[] | undefined>(
+        'subModes',
+        filterParam => filterParam?.split(',') ?? undefined,
+        queryParam => queryParam?.join(',')
+    );
+
+    const [unitIdsFilter] = useQueryState<string[] | undefined>(
+        'unitIds',
+        filterParam => filterParam?.split(',') ?? undefined,
+        queryParam => queryParam?.join(',')
+    );
+
     const [teams, setTeams] = useState<IGuide[]>([]);
     const [nextQueryParams, setNextQueryParams] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -51,10 +83,39 @@ export const Guides: React.FC = () => {
     const [viewGuide, setViewGuide] = useState<IGuide | null>(null);
     const [editGuide, setEditGuide] = useState<IGuide | null>(null);
     const [moderateTeam, setModerateTeam] = useState<GuidesStatus>(GuidesStatus.approved);
+    const [guidesFilter, setGuidesFilter] = useState<IGuideFilter>({
+        primaryMod: primaryModFilter as any,
+        subMods: subModFilter,
+        createdBy: createdByFilter,
+        unitIds: unitIdsFilter,
+    });
+
+    const filtersCount = useMemo(() => {
+        let result = 0;
+        if (guidesFilter.primaryMod) {
+            result++;
+        }
+
+        if (guidesFilter.createdBy) {
+            result++;
+        }
+
+        result += guidesFilter.subMods?.length ?? 0;
+        result += guidesFilter.unitIds?.length ?? 0;
+
+        return result;
+    }, [guidesFilter]);
 
     const loadTeams = async (queryParams: IGetGuidesQueryParams) => {
         setLoading(true);
         try {
+            for (const queryParamsKey in queryParams) {
+                const value = queryParams[queryParamsKey as keyof IGetGuidesQueryParams];
+                if (!value) {
+                    delete queryParams[queryParamsKey as keyof IGetGuidesQueryParams];
+                }
+            }
+
             const params = new URLSearchParams(queryParams as Record<string, string>).toString();
             const { data: response } = await getTeamsApi(params);
             if (response) {
@@ -277,12 +338,72 @@ export const Guides: React.FC = () => {
         setEditGuide(guide);
     };
 
+    const handleClearFilters = () => {
+        setShowFilters(false);
+        handleApplyFilters({
+            createdBy: undefined,
+            primaryMod: undefined,
+            subMods: undefined,
+            unitIds: undefined,
+        });
+    };
+
+    const handleApplyFilters = (filter: IGuideFilter) => {
+        setTeams([]);
+        setNextQueryParams('');
+        setGuidesFilter(filter);
+
+        setSearchParams(curr => {
+            const updatedParams = new URLSearchParams(curr);
+
+            if (filter.subMods) {
+                updatedParams.set('subModes', filter.subMods.join(','));
+            } else {
+                updatedParams.delete('subModes');
+            }
+
+            if (filter.primaryMod) {
+                updatedParams.set('primaryModes', filter.primaryMod);
+            } else {
+                updatedParams.delete('primaryModes');
+            }
+
+            if (filter.unitIds) {
+                updatedParams.set('unitIds', filter.unitIds.join(','));
+            } else {
+                updatedParams.delete('unitIds');
+            }
+
+            if (filter.createdBy) {
+                updatedParams.set('createdBy', filter.createdBy);
+            } else {
+                updatedParams.delete('createdBy');
+            }
+
+            return updatedParams;
+        });
+
+        loadTeams({
+            page: 1,
+            pageSize: 10,
+            group: activeTab,
+            primaryModes: filter.primaryMod,
+            subModes: filter.subMods,
+            unitIds: filter.unitIds,
+            createdBy: filter.createdBy,
+        });
+    };
+
     useEffect(() => {
         const initialQueryParams: IGetGuidesQueryParams = {
             page: 1,
             pageSize: 10,
             group: activeTab,
             guideId: viewTeamId || undefined,
+            primaryModes: primaryModFilter,
+            subModes: subModFilter,
+            unitIds: unitIdsFilter,
+            createdBy: createdByFilter,
         };
         loadTeams(initialQueryParams).then(() => {
             setViewTeamId(null);
@@ -335,11 +456,34 @@ export const Guides: React.FC = () => {
                     <AddIcon />
                     Create Guide
                 </Fab>
-                <Fab variant="extended" size="small" color="primary" aria-label="filter">
-                    <FilterAltIcon />
-                    Filter
-                </Fab>
+                {filtersCount > 0 ? (
+                    <>
+                        <Badge badgeContent={filtersCount} color="warning">
+                            <IconButton onClick={() => setShowFilters(value => !value)}>
+                                <FilterAltIcon />
+                            </IconButton>
+                        </Badge>
+                        <Button color="error" onClick={handleClearFilters}>
+                            Clear Filters
+                        </Button>
+                    </>
+                ) : (
+                    <IconButton onClick={() => setShowFilters(value => !value)}>
+                        <FilterAltOutlinedIcon />
+                    </IconButton>
+                )}
             </div>
+            {showFilters && (
+                <>
+                    <br />
+                    <GuidesFilter
+                        units={[...characters, ...mows]}
+                        filter={guidesFilter}
+                        applyFilters={handleApplyFilters}
+                    />
+                    <br />
+                </>
+            )}
             <Tabs
                 value={activeTab}
                 onChange={handleChange}

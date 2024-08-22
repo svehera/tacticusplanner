@@ -4,13 +4,14 @@ import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export interface IGetGuidesQueryParams {
     group?: GuidesGroup;
-    primaryModes?: string[];
+    primaryModes?: string;
     subModes?: string[];
     unitIds?: string[];
     orderBy?: 'createdAt_asc' | 'createdAt_desc' | 'likes_asc' | 'likes_desc';
     page?: number;
     pageSize?: number;
     guideId?: number;
+    createdBy?: string;
 }
 
 export interface IGetGuidesResponse {
@@ -56,4 +57,11 @@ export interface ITeamSlot {
     slotType: SlotType;
     unitType: UnitType;
     unitIds: string[];
+}
+
+export interface IGuideFilter {
+    createdBy: string | undefined;
+    primaryMod: GameMode | undefined;
+    subMods: string[] | undefined;
+    unitIds: string[] | undefined;
 }
