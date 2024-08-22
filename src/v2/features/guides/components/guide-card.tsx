@@ -55,23 +55,28 @@ export const GuideCard: React.FC<Props> = ({
 
         return (
             <>
-                {team.permissions.canHonor && (
-                    <>
-                        {team.isHonored ? (
-                            <IconButton aria-label="add to favorites" onClick={() => onHonor(false)}>
-                                <AccessibleTooltip title="Remove Honor">
-                                    <FavoriteIcon />
-                                </AccessibleTooltip>
-                            </IconButton>
-                        ) : (
-                            <IconButton aria-label="add to favorites" onClick={() => onHonor(true)}>
-                                <AccessibleTooltip title="Do Honor">
-                                    <FavoriteBorderIcon />
-                                </AccessibleTooltip>
-                            </IconButton>
-                        )}
-                    </>
-                )}
+                <div className="flex-box">
+                    {team.isHonored ? (
+                        <IconButton
+                            aria-label="add to favorites"
+                            disabled={!team.permissions.canHonor}
+                            onClick={() => onHonor(false)}>
+                            <AccessibleTooltip title="Remove Honor">
+                                <FavoriteIcon />
+                            </AccessibleTooltip>
+                        </IconButton>
+                    ) : (
+                        <IconButton
+                            aria-label="add to favorites"
+                            disabled={!team.permissions.canHonor}
+                            onClick={() => onHonor(true)}>
+                            <AccessibleTooltip title="Do Honor">
+                                <FavoriteBorderIcon />
+                            </AccessibleTooltip>
+                        </IconButton>
+                    )}
+                    <span className="bold">{team.likes}</span>
+                </div>
 
                 <IconButton aria-label="share" onClick={onShare}>
                     <AccessibleTooltip title="Share">
@@ -96,8 +101,8 @@ export const GuideCard: React.FC<Props> = ({
     return (
         <Card
             sx={{
-                maxWidth: !fullView ? 420 : 'unset',
-                minWidth: isMobile ? 'unset' : 420,
+                maxWidth: !fullView ? 425 : 'unset',
+                minWidth: isMobile ? 'unset' : 425,
                 overflow: 'auto',
                 zoom: isMobile ? '90%' : '100%',
             }}
