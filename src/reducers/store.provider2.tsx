@@ -286,7 +286,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                         const newState = new GlobalState(serverData);
                         dispatch.setStore(newState, false, false);
                         localStore.setData(GlobalState.toStore(newState));
-                        if (hasDataConflict && !!modifiedDate) {
+                        if (hasDataConflict && modifiedDate && modifiedDate > serverLastModified) {
                             enqueueSnackbar('There has been conflict. Your local changes are overridden with server', {
                                 variant: 'warning',
                             });
