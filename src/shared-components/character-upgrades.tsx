@@ -1,7 +1,5 @@
 ﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Checkbox, FormControlLabel, Popover } from '@mui/material';
-import { IMaterialFull, IMaterialRecipeIngredientFull } from '../models/interfaces';
-import { StaticDataService } from '../services';
 import Button from '@mui/material/Button';
 import { Info, Warning } from '@mui/icons-material';
 import { UpgradeImage } from './upgrade-image';
@@ -11,12 +9,15 @@ import { MiscIcon } from './misc-icon';
 import './character-upgrades.css';
 import { cloneDeep, groupBy, map } from 'lodash';
 import { Rank } from 'src/models/enums';
+import { IBaseUpgrade, ICraftedUpgrade, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
+import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+import { UpgradeControl } from 'src/shared-components/upgrade-control';
 
 interface Props {
     characterName: string;
     rank: Rank;
     upgrades: string[];
-    upgradesChanges: (upgrades: string[], updateInventory: IMaterialRecipeIngredientFull[]) => void;
+    upgradesChanges: (upgrades: string[], updateInventory: IUpgradeRecipe[]) => void;
 }
 
 export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, rank, characterName }) => {
@@ -42,8 +43,8 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
 
     const open = Boolean(anchorEl);
 
-    const possibleUpgrades = useMemo(() => {
-        return StaticDataService.getUpgrades({
+    const possibleUpgrades: Array<IBaseUpgrade | ICraftedUpgrade> = useMemo(() => {
+        const [rankUpgrades] = UpgradesService.getCharacterUpgradeRank({
             unitName: characterName,
             rankStart: rank,
             rankEnd: rank + 1,
@@ -51,6 +52,8 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             rankPoint5: false,
             upgradesRarity: [],
         });
+
+        return rankUpgrades.upgrades.map(x => UpgradesService.getUpgrade(x));
     }, [rank]);
 
     const hasDuplicateUpgrades = useMemo(() => {
@@ -91,14 +94,14 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
         });
     };
 
-    const topLevelUpgrades = useMemo<IMaterialFull[]>(() => {
+    const topLevelUpgrades = useMemo<Array<IBaseUpgrade | ICraftedUpgrade>>(() => {
         const newUpgrades = possibleUpgrades.filter(x => formData.newUpgrades.includes(x.id));
-        let upgradesToConsider: IMaterialFull[];
+        let upgradesToConsider: Array<IBaseUpgrade | ICraftedUpgrade>;
 
         if (rank <= formData.originalRank) {
             upgradesToConsider = newUpgrades;
         } else {
-            const previousRankUpgrades = StaticDataService.getUpgrades({
+            const previousRankUpgradesList = UpgradesService.getCharacterUpgradeRank({
                 unitName: characterName,
                 rankStart: formData.originalRank,
                 rankEnd: rank,
@@ -106,63 +109,30 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                 rankPoint5: false,
                 upgradesRarity: [],
             });
+
+            const previousRankUpgrades = previousRankUpgradesList
+                .flatMap(x => x.upgrades)
+                .map(x => UpgradesService.getUpgrade(x));
             upgradesToConsider = [...previousRankUpgrades, ...newUpgrades];
         }
 
         return upgradesToConsider;
     }, [formData.newUpgrades, rank]);
 
-    const craftedUpgrades: IMaterialRecipeIngredientFull[] = useMemo(() => {
-        const inventoryCopy = cloneDeep(inventory.upgrades);
-        const crafted = topLevelUpgrades.filter(x => x.craftable);
-
-        const filtered = crafted
-            .filter(x => {
-                const inventoryCount = inventoryCopy[x.id];
-
-                if (inventoryCount >= 1) {
-                    inventoryCopy[x.id]--;
-                    return true;
-                }
-
-                return false;
-            })
-            .map(x => ({
-                ...x,
-                count: 1,
-                priority: 1,
-                characters: [],
-            }));
-
-        const grouped: IMaterialRecipeIngredientFull[] = map(groupBy(filtered, 'id'), (items, id) => ({
-            ...items[0],
-            count: items.length,
-        }));
-
-        return grouped;
-    }, [topLevelUpgrades]);
-
-    const updatedUpgrades = useMemo<IMaterialRecipeIngredientFull[]>(() => {
-        const result = [...topLevelUpgrades];
-        if (craftedUpgrades.length) {
-            for (const craftedUpgrade of craftedUpgrades) {
-                for (let i = 0; i < craftedUpgrade.count; i++) {
-                    const upgradeEntryIndex = result.findIndex(x => x.id === craftedUpgrade.id);
-                    result.splice(upgradeEntryIndex, 1);
-                }
-            }
-        }
-
-        return [...craftedUpgrades, ...StaticDataService.groupBaseMaterials(result)];
+    const { inventoryUpgrades, inventoryUpdate } = useMemo(() => {
+        return UpgradesService.updateInventory(cloneDeep(inventory.upgrades), topLevelUpgrades);
     }, [topLevelUpgrades]);
 
     useEffect(() => {
         if (updateInventory) {
-            upgradesChanges(formData.currentUpgrades, updatedUpgrades);
+            upgradesChanges(
+                formData.currentUpgrades,
+                Object.entries(inventoryUpdate).map(([id, count]) => ({ id, count }))
+            );
         } else {
             upgradesChanges(formData.currentUpgrades, []);
         }
-    }, [formData.currentUpgrades, updatedUpgrades, updateInventory]);
+    }, [formData.currentUpgrades, updateInventory, inventoryUpdate]);
 
     useEffect(() => {
         if (rank === formData.originalRank) {
@@ -183,9 +153,9 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                 <div className="upgrades-column">
                     <MiscIcon icon={'health'} height={30} />
                     {healthUpgrades.map((x, index) => (
-                        <UpgrageControl
+                        <UpgradeControl
                             key={x.id + index}
-                            material={x}
+                            upgrade={x}
                             checked={formData.currentUpgrades.includes(x.id)}
                             checkedChanges={value => handleUpgradeChange(value, x.id)}
                         />
@@ -194,9 +164,9 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                 <div className="upgrades-column">
                     <MiscIcon icon={'damage'} />
                     {damageUpgrades.map((x, index) => (
-                        <UpgrageControl
+                        <UpgradeControl
                             key={x.id + index}
-                            material={x}
+                            upgrade={x}
                             checked={formData.currentUpgrades.includes(x.id)}
                             checkedChanges={value => handleUpgradeChange(value, x.id)}
                         />
@@ -205,9 +175,9 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                 <div className="upgrades-column">
                     <MiscIcon icon={'armour'} height={30} />
                     {armourUpgrades.map((x, index) => (
-                        <UpgrageControl
+                        <UpgradeControl
                             key={x.id + index}
-                            material={x}
+                            upgrade={x}
                             checked={formData.currentUpgrades.includes(x.id)}
                             checkedChanges={value => handleUpgradeChange(value, x.id)}
                         />
@@ -216,9 +186,9 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {unknownUpgrades.map((x, index) => (
-                    <UpgrageControl
+                    <UpgradeControl
                         key={x.id + index}
-                        material={x}
+                        upgrade={x}
                         checked={formData.currentUpgrades.includes(x.id)}
                         checkedChanges={value => handleUpgradeChange(value, x.id)}
                     />
@@ -228,7 +198,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             <FormControlLabel
                 control={
                     <Checkbox
-                        disabled={!updatedUpgrades.length}
+                        disabled={!inventoryUpgrades.length}
                         checked={updateInventory}
                         onChange={event => setUpdateInventory(event.target.checked)}
                         inputProps={{ 'aria-label': 'controlled' }}
@@ -250,7 +220,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                 <div style={{ padding: 15 }}>
                     <p>Inventory after update:</p>
                     <ul style={{ padding: 0 }}>
-                        {updatedUpgrades.map((x, index) => (
+                        {inventoryUpgrades.map((x, index) => (
                             <li
                                 key={x.id + index}
                                 style={{
@@ -261,48 +231,15 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                                     paddingBottom: 10,
                                 }}>
                                 <UpgradeImage material={x.label} rarity={x.rarity} iconPath={x.iconPath} />{' '}
-                                {inventory.upgrades[x.id] ?? 0} - {x.count} ={' '}
-                                {(inventory.upgrades[x.id] ?? 0) - x.count < 0
+                                {inventory.upgrades[x.id] ?? 0} - {inventoryUpdate[x.id]} ={' '}
+                                {(inventory.upgrades[x.id] ?? 0) - inventoryUpdate[x.id] < 0
                                     ? 0
-                                    : (inventory.upgrades[x.id] ?? 0) - x.count}
+                                    : (inventory.upgrades[x.id] ?? 0) - inventoryUpdate[x.id]}
                             </li>
                         ))}
                     </ul>
                 </div>
             </Popover>
         </div>
-    );
-};
-
-const UpgrageControl = ({
-    material,
-    checked,
-    checkedChanges,
-}: {
-    material: IMaterialFull;
-    checked: boolean;
-    checkedChanges: (value: boolean) => void;
-}) => {
-    return (
-        <FormControlLabel
-            control={
-                <Checkbox
-                    checked={checked}
-                    onChange={event => checkedChanges(event.target.checked)}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                />
-            }
-            label={
-                <div
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 10,
-                        opacity: checked ? 1 : 0.5,
-                    }}>
-                    <UpgradeImage material={material.label} iconPath={material.iconPath} rarity={material.rarity} />
-                </div>
-            }
-        />
     );
 };

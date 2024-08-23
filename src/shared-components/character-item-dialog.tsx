@@ -18,6 +18,7 @@ import { Conditional } from 'src/v2/components/conditional';
 import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
+import { IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
 
 interface Props {
     character: ICharacter2;
@@ -30,7 +31,7 @@ interface Props {
 export const CharacterItemDialog: React.FC<Props> = props => {
     const { viewPreferences } = useContext(StoreContext);
     const [character, setCharacter] = useState(() => ({ ...props.character }));
-    const [inventoryUpdate, setInventoryUpdate] = useState<IMaterialRecipeIngredientFull[]>([]);
+    const [inventoryUpdate, setInventoryUpdate] = useState<IUpgradeRecipe[]>([]);
 
     const dispatch = useContext(DispatchContext);
     const saveChanges = () => {

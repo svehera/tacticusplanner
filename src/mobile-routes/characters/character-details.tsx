@@ -9,6 +9,7 @@ import { CharacterUpgrades } from 'src/shared-components/character-upgrades';
 import { RarityImage } from 'src/shared-components/rarity-image';
 import { StarsImage } from 'src/shared-components/stars-image';
 import { rarityToMaxRank, rarityToMaxStars, rarityToStars } from 'src/models/constants';
+import { IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
 
 export const CharacterDetails = ({
     character,
@@ -17,7 +18,7 @@ export const CharacterDetails = ({
 }: {
     character: ICharacter2;
     characterChanges: (character: ICharacter2) => void;
-    updateInventoryChanges: (updateInventory: IMaterialRecipeIngredientFull[]) => void;
+    updateInventoryChanges: (updateInventory: IUpgradeRecipe[]) => void;
 }) => {
     const [formData, setFormData] = useState({
         rank: character.rank,
