@@ -1,6 +1,80 @@
 ﻿{
-    "currentVersion": "1.6.0",
+    "currentVersion": "1.6.1",
     "releaseNotes": [
+        {
+            "version": "1.6.1",
+            "date": "August 23",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added learn Guides feature. This is the first iteration for the feature so please share your feedback",
+                    "subPoints": [
+                        "Find or create guides for specific game modes (Guid Raids, Tournament Arena, Guild Wars)",
+                        "Anyone can view/share guides but only logged in users can create a guide",
+                        "Guide will be moderated before being publicly available",
+                        "Team in the guide can consist of 5 characters and 1 mow. Each slot can be turned into \"flex\" and fit up to 3 characters. MoW slot is optional"
+                    ],
+                    "images": [
+                        {
+                            "path": "guides.png"
+                        },
+                        {
+                            "path": "guides2.png"
+                        },
+                        {
+                            "path": "guides3.png"
+                        },
+                        {
+                            "path": "guides4.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added new collectable characters",
+                    "subPoints": [
+                        "Titus, Primaris Lieutenant, unlockable in the first ‘Survival‘ event, starting September 1",
+                        "Lucien, Death Company Intercessor, unlockable in the ‘Insanguination’ event, starting September 8"
+                    ]
+                },
+                {
+                    "text": "Added new Campaign Battles: ‘Mirror Elite Saim-Hann’ part 3"
+                },
+                {
+                    "text": "Added new logic to the server side that sure track conflict updates. It should resolve issue when you use planner on multiple devices and should prevent accidental data override"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added popup that shows up when user is not logged in. You can still use app without account"
+                },
+                {
+                    "text": "Included MoWs data into Insights and Guid Insights",
+                    "route": "learn/insights",
+                    "images": [
+                        {
+                            "path": "insights.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Updated icon for Multi-Spectrum Sensor Suite (falxnox)"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue when Daily Raids not accounting for Nested Crafted Components (ChargingFurret, Ardonomus)"
+                },
+                {
+                    "text": "Fixed issue when MoW in the \"Who you own\" keep resetting (RotoR, falxnox)"
+                },
+                {
+                    "text": "Fixed issue when Deamon trait not selectable (MocarnyJoe)"
+                },
+                {
+                    "text": "Fixed issue when Deed points are not updated correctly on the LRE progress (NoxTempest)"
+                }
+            ]
+        },
         {
             "version": "1.6.0",
             "date": "July 26",

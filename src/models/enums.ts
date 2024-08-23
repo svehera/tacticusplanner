@@ -116,6 +116,7 @@ export enum Trait {
     CrushingStrike = 'Crushing Strike',
     RapidAssault = 'Rapid Assault',
     GetStuckIn = 'Get Stuck In',
+    daemon = 'Daemon',
 }
 
 export enum DamageType {
@@ -235,4 +236,10 @@ export enum DailyRaidsStrategy {
     leastTime,
     allLocations,
     custom,
+}
+
+export enum UserRole {
+    user = 0,
+    moderator = 1,
+    admin = 2,
 }

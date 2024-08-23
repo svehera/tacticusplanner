@@ -9,6 +9,10 @@ import { TeamsGrid } from 'src/v2/features/teams/components/teams-grid';
 import { EditTeamDialog } from 'src/v2/features/teams/components/edit-team.dialog';
 import { useDebounceValue } from 'usehooks-ts';
 import { allModes } from 'src/v2/features/teams/teams.constants';
+import { Link } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
+import LinkIcon from '@mui/icons-material/Link';
+import Button from '@mui/material/Button';
 
 export const Teams = () => {
     const dispatch = useContext(DispatchContext);
@@ -55,6 +59,14 @@ export const Teams = () => {
     return (
         <>
             <div className="flex-box gap10">
+                <Button
+                    size="small"
+                    variant={'contained'}
+                    component={Link}
+                    to={isMobile ? '/mobile/learn/guides' : '/learn/guides'}>
+                    <LinkIcon /> <span style={{ paddingLeft: 5 }}>Go to Guides</span>
+                </Button>
+
                 <Fab
                     variant="extended"
                     size="small"

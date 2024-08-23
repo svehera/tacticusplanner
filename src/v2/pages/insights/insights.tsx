@@ -13,7 +13,7 @@ import { ViewControls } from 'src/v2/features/characters/components/view-control
 import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
-import { IViewControls } from 'src/v2/features/characters/characters.models';
+import { IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
@@ -59,14 +59,19 @@ export const Insights = () => {
         );
     }
 
-    const averageRoster = GlobalState.initCharacters(data.userData, data.activeLast30Days);
+    const averageCharacters = GlobalState.initCharacters(data.userData, data.activeLast30Days);
+    const averageMows = GlobalState.initMows(data.mows, data.activeLast30Days);
 
-    const charactersFiltered = CharactersService.filterCharacters(averageRoster, viewControls.filterBy, nameFilter);
-    const totalPower = sum(charactersFiltered.map(character => CharactersPowerService.getCharacterPower(character)));
-    const totalValue = sum(charactersFiltered.map(character => CharactersValueService.getCharacterValue(character)));
+    const unitsFiltered = CharactersService.filterUnits(
+        [...averageCharacters, ...averageMows],
+        viewControls.filterBy,
+        nameFilter
+    );
+    const totalPower = sum(unitsFiltered.map(character => CharactersPowerService.getCharacterPower(character)));
+    const totalValue = sum(unitsFiltered.map(character => CharactersValueService.getCharacterValue(character)));
 
-    const factions = CharactersService.orderByFaction(charactersFiltered, viewControls.orderBy);
-    const characters = CharactersService.orderUnits(charactersFiltered, viewControls.orderBy);
+    const factions = CharactersService.orderByFaction(unitsFiltered, viewControls.orderBy);
+    const units = CharactersService.orderUnits(unitsFiltered, viewControls.orderBy);
 
     return (
         <Box style={{ margin: 'auto' }}>
@@ -94,7 +99,7 @@ export const Insights = () => {
                     showCharacterRarity: viewPreferences.showCharacterRarity,
                 }}>
                 <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
-                    <TeamGraph units={charactersFiltered} />
+                    <TeamGraph units={unitsFiltered} />
                 </RosterHeader>
                 <ViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
 
@@ -103,7 +108,7 @@ export const Insights = () => {
                 </Conditional>
 
                 <Conditional condition={isCharactersView(viewControls.orderBy)}>
-                    <CharactersGrid characters={characters} />
+                    <CharactersGrid characters={units} />
                 </Conditional>
             </CharactersViewContext.Provider>
         </Box>

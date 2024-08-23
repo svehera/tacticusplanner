@@ -6750,5 +6750,64 @@
         "nodeNumber": 16,
         "reward": "Aethana",
         "expectedGold": 53
+    },
+    "SHME17": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 17,
+        "reward": "Bladesman's Honour",
+        "expectedGold": 53,
+        "slots": 3
+    },
+    "SHME18": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 18,
+        "reward": "Standard-Issue Tourniquet",
+        "expectedGold": 53,
+        "slots": 4
+    },
+    "SHME19": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 19,
+        "reward": "Weapon Anointment Oils",
+        "expectedGold": 53,
+        "slots": 4
+    },
+    "SHME20": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 20,
+        "reward": "Chainaxe Teeth",
+        "expectedGold": 53
+    },
+    "SHME21": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 21,
+        "reward": "Mutation: Warped Muscles",
+        "expectedGold": 53
+    },
+    "SHME22": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 22,
+        "reward": "Purity Seal",
+        "expectedGold": 53
+    },
+    "SHME23": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 23,
+        "reward": "Satchel",
+        "expectedGold": 53
+    },
+    "SHME24": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 24,
+        "reward": "Eldryon",
+        "expectedGold": 53
     }
 }

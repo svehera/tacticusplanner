@@ -5,18 +5,18 @@ export const gameModes: IMenuOption[] = [
     {
         value: GameMode.guildRaids,
         label: 'Guild Raids',
-        selected: true,
+        selected: false,
     },
     {
         value: GameMode.tournamentArena,
         label: 'Tournament Arena',
         selected: false,
     },
-    // {
-    //     value: GameMode.guildWar,
-    //     label: 'Guild War',
-    //     selected: false,
-    // },
+    {
+        value: GameMode.guildWar,
+        label: 'Guild War',
+        selected: false,
+    },
 ];
 
 const leftSidePrimeSuffix = '_prime_L';

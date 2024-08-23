@@ -1,5 +1,7 @@
 ﻿import React, { PropsWithChildren, useState } from 'react';
 import { AuthContext } from './auth';
+import { UserRole } from 'src/models/enums';
+import { IUserInfo } from 'src/models/interfaces';
 
 const localStorageKey = 'token';
 const localStorageUserKey = 'user';
@@ -9,6 +11,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     const [token, setToken] = useState(localStorage.getItem(localStorageKey) ?? '');
     const [username, setUsername] = useState(localStorage.getItem(localStorageUserKey) ?? 'Tactician');
     const [shareToken, setShareToken] = useState<string | undefined>('');
+    const [userInfo, setUserInfo] = useState<IUserInfo>({} as any);
 
     const login = (accessToken: string) => {
         setIsAuthenticated(true);
@@ -31,7 +34,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, token, username, shareToken, setUser, login, logout }}>
+        <AuthContext.Provider
+            value={{ isAuthenticated, token, userInfo, username, shareToken, setUser, setUserInfo, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

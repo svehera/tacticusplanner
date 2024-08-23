@@ -4,19 +4,40 @@ import { IUnit } from 'src/v2/features/characters/characters.models';
 import { CharacterTitle } from 'src/shared-components/character-title';
 
 interface Props<T extends IUnit> {
-    unit: T | null;
+    unit: T | T[] | null;
     options: T[];
-    onUnitChange: (value: T | null) => void;
+    onUnitChange?: (value: T | null) => void;
+    onUnitsChange?: (value: T[]) => void;
     style?: React.CSSProperties;
+    multiple?: boolean;
+    label?: string;
 }
 
-export const UnitsAutocomplete = <T extends IUnit>({ onUnitChange, options, unit, style = {} }: Props<T>) => {
+export const UnitsAutocomplete = <T extends IUnit>({
+    options,
+    unit,
+    style = {},
+    multiple = false,
+    onUnitChange = () => {},
+    onUnitsChange = () => {},
+    label = 'Unit',
+}: Props<T>) => {
     const [openAutocomplete, setOpenAutocomplete] = React.useState(false);
 
-    const updateValue = (value: T | null): void => {
-        if (unit?.id !== value?.id) {
-            setOpenAutocomplete(false);
-            onUnitChange(value);
+    const updateValue = (value: T | T[] | null): void => {
+        if (Array.isArray(value)) {
+            onUnitsChange(value);
+        } else {
+            if (multiple && Array.isArray(unit) && value) {
+                if (!unit.some(x => x.id === value.id)) {
+                    onUnitsChange([...unit, value]);
+                }
+            } else {
+                if (!Array.isArray(unit) && unit?.id !== value?.id) {
+                    setOpenAutocomplete(false);
+                    onUnitChange(value);
+                }
+            }
         }
     };
 
@@ -38,6 +59,7 @@ export const UnitsAutocomplete = <T extends IUnit>({ onUnitChange, options, unit
     return (
         <Autocomplete
             fullWidth
+            multiple={multiple}
             style={{ minWidth: 200, ...style }}
             options={options}
             value={unit}
@@ -62,7 +84,7 @@ export const UnitsAutocomplete = <T extends IUnit>({ onUnitChange, options, unit
                     fullWidth
                     onClick={() => handleAutocompleteChange(!openAutocomplete)}
                     onChange={() => handleAutocompleteChange(true)}
-                    label="Character"
+                    label={label}
                     onKeyDown={handleKeyDown}
                 />
             )}

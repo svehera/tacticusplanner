@@ -263,7 +263,7 @@ export const LeProgress = ({
                 personalProgress.overview['3'].premiumMissions
             )
         );
-    }, [regularMissions]);
+    }, [regularMissions, premiumMissions]);
 
     const premiumMissionsCurrency = useMemo(() => {
         if (!personalProgress.overview) {

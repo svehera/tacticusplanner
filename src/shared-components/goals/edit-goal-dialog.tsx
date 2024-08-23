@@ -19,7 +19,7 @@ import { EditAscendGoal } from 'src/shared-components/goals/edit-ascend-goal';
 import { NumbersInput } from 'src/shared-components/goals/numbers-input';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { CampaignsUsageSelect } from 'src/shared-components/goals/campaings-usage-select';
-import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
+import { CharacterRaidGoalSelect, ICharacterAscendGoal, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
 import { CharacterImage } from 'src/shared-components/character-image';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
@@ -42,7 +42,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     const [openDialog, setOpenDialog] = React.useState(isOpen);
 
     const [form, setForm] = useState<CharacterRaidGoalSelect>(goal);
-    const [inventoryUpdate, setInventoryUpdate] = useState<Array<{ id: string; count: number }>>([]);
+    const [inventoryUpdate, setInventoryUpdate] = useState<Array<IUpgradeRecipe>>([]);
     const handleClose = (updatedGoal?: CharacterRaidGoalSelect | undefined): void => {
         if (updatedGoal) {
             dispatch.goals({ type: 'Update', goal: updatedGoal });

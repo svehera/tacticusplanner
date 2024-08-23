@@ -213,6 +213,7 @@ export interface IBaseUpgrade {
     iconPath: string;
     locations: ICampaignBattleComposed[];
     crafted: false;
+    stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
 }
 
 export interface ICombinedUpgrade extends IBaseUpgrade {
@@ -244,7 +245,9 @@ export interface ICraftedUpgrade {
     iconPath: string;
     baseUpgrades: IUpgradeRecipe[];
     craftedUpgrades: IUpgradeRecipe[];
+    recipe: IUpgradeRecipe[];
     crafted: true;
+    stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
 }
 
 export interface IUpgradeRecipe {

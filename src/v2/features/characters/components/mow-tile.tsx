@@ -82,10 +82,10 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                 <AccessibleTooltip
                     title={
                         !mow.ownedBy?.length ? (
-                            `${mow.numberOfUnlocked}% of players unlocked this character`
+                            `${mow.numberOfUnlocked}% of players unlocked this MoW`
                         ) : (
                             <div>
-                                ${mow.numberOfUnlocked}% of players unlocked this character:
+                                ${mow.numberOfUnlocked}% of players unlocked this MoW:
                                 <ul>
                                     {mow.ownedBy.map(username => (
                                         <li key={username}>{username}</li>

@@ -17,6 +17,7 @@ import { guildLazyRoute } from 'src/v2/pages/guild/guild.route';
 import { guildInsightsLazyRoute } from 'src/v2/pages/guild-insights/guild-insights.route';
 import { teamsMobileLazyRoute } from 'src/v2/pages/teams/teams.route';
 import { mowLookupMobileLazyRoute } from 'src/v2/pages/mow-lookup/mow-lookup.route';
+import { guidesLazyRoute } from 'src/v2/pages/guides/guides.route';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -166,6 +167,7 @@ const learnRoutes: RouteObject[] = [
     insightsLazyRoute,
     guildInsightsLazyRoute,
     mowLookupMobileLazyRoute,
+    guidesLazyRoute,
 ];
 
 export const mobileAppRoutes: () => RouteObject[] = () => [

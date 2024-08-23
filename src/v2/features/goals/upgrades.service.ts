@@ -53,9 +53,9 @@ export class UpgradesService {
     ): IEstimatedUpgrades {
         const inventoryUpgrades = cloneDeep(settings.upgrades);
 
-        const characters = this.getUpgrades(inventoryUpgrades, goals);
+        const unitsUpgrades = this.getUpgrades(inventoryUpgrades, goals);
 
-        const combinedBaseMaterials = this.combineBaseMaterials(characters);
+        const combinedBaseMaterials = this.combineBaseMaterials(unitsUpgrades);
         this.populateLocationsData(combinedBaseMaterials, settings);
 
         let allMaterials: ICharacterUpgradeEstimate[];
@@ -82,11 +82,11 @@ export class UpgradesService {
         const raidsTotal = sum(upgradesRaids.map(day => day.raidsTotal));
         const freeEnergyDays = upgradesRaids.filter(x => settings.dailyEnergy - x.energyTotal > 60).length;
 
-        const relatedUpgrades = uniq(characters.flatMap(ranksUpgrade => ranksUpgrade.relatedUpgrades));
+        const relatedUpgrades = uniq(unitsUpgrades.flatMap(ranksUpgrade => ranksUpgrade.relatedUpgrades));
 
         return {
             upgradesRaids,
-            characters,
+            characters: unitsUpgrades,
             inProgressMaterials,
             blockedMaterials,
             finishedMaterials,
@@ -273,8 +273,20 @@ export class UpgradesService {
                 }
             }
 
-            const relatedUpgrades: string[] = upgradeRanks.flatMap(x => x.upgrades);
-            relatedUpgrades.push(...Object.keys(baseUpgradesTotal));
+            const relatedUpgrades: string[] = upgradeRanks.flatMap(x => {
+                const result: string[] = [...x.upgrades];
+                const upgrades: Array<IBaseUpgrade | ICraftedUpgrade> = x.upgrades.map(upgrade =>
+                    this.getUpgrade(upgrade)
+                );
+                for (const upgrade of upgrades) {
+                    if (upgrade.crafted) {
+                        result.push(...upgrade.baseUpgrades.map(x => x.id));
+                        result.push(...upgrade.craftedUpgrades.map(x => x.id));
+                    }
+                }
+
+                return result;
+            });
 
             return {
                 goalId: goal.goalId,
@@ -368,6 +380,7 @@ export class UpgradesService {
             isBlocked: !selectedLocations.length && leftCount > 0,
             isFinished: leftCount === 0,
             crafted: false,
+            stat: upgrade.stat,
         };
 
         if (estimate.isFinished || estimate.isBlocked) {
@@ -567,6 +580,52 @@ export class UpgradesService {
         return true;
     }
 
+    // public static updateInventory(
+    //     inventory: Record<string, number>,
+    //     upgrades: Array<IBaseUpgrade | ICraftedUpgrade>
+    // ): {
+    //     inventoryUpdate: Record<string, number>;
+    //     inventoryUpgrades: Array<IBaseUpgrade | ICraftedUpgrade>;
+    // } {
+    //     const craftedGrouped = groupBy(upgrades.filter(x => x.crafted) as ICraftedUpgrade[], 'id');
+    //
+    //     const inventoryUpdate = mapValues(
+    //         groupBy(upgrades.filter(x => !x.crafted) as IBaseUpgrade[], 'id'),
+    //         x => x.length
+    //     );
+    //
+    //     for (const upgradeId in craftedGrouped) {
+    //         const inventoryValue = inventory[upgradeId] ?? 0;
+    //         const craftedUpgrades = craftedGrouped[upgradeId];
+    //         if (!inventoryValue) {
+    //             craftedUpgrades
+    //                 .flatMap(x => x.baseUpgrades)
+    //                 .forEach(x => {
+    //                     inventoryUpdate[x.id] = (inventoryUpdate[x.id] ?? 0) + x.count;
+    //                 });
+    //             continue;
+    //         }
+    //
+    //         if (inventoryValue >= craftedUpgrades.length) {
+    //             inventoryUpdate[upgradeId] = craftedUpgrades.length;
+    //         } else {
+    //             craftedUpgrades.splice(0, inventoryValue);
+    //             inventoryUpdate[upgradeId] = inventoryValue;
+    //
+    //             craftedUpgrades
+    //                 .flatMap(x => x.baseUpgrades)
+    //                 .forEach(x => {
+    //                     inventoryUpdate[x.id] = (inventoryUpdate[x.id] ?? 0) + x.count;
+    //                 });
+    //         }
+    //     }
+    //
+    //     return {
+    //         inventoryUpdate,
+    //         inventoryUpgrades: Object.keys(inventoryUpdate).map(upgradeId => this.getUpgrade(upgradeId)),
+    //     };
+    // }
+
     public static updateInventory(
         inventory: Record<string, number>,
         upgrades: Array<IBaseUpgrade | ICraftedUpgrade>
@@ -574,42 +633,51 @@ export class UpgradesService {
         inventoryUpdate: Record<string, number>;
         inventoryUpgrades: Array<IBaseUpgrade | ICraftedUpgrade>;
     } {
-        const craftedGrouped = groupBy(upgrades.filter(x => x.crafted) as ICraftedUpgrade[], 'id');
+        const inventoryUpdate: Record<string, number> = {};
 
-        const inventoryUpdate = mapValues(
-            groupBy(upgrades.filter(x => !x.crafted) as IBaseUpgrade[], 'id'),
-            x => x.length
+        const processUpgrade = (upgrade: IBaseUpgrade | ICraftedUpgrade, count: number): void => {
+            if (!upgrade.crafted) {
+                // Base upgrade, simply decrement
+                inventoryUpdate[upgrade.id] = (inventoryUpdate[upgrade.id] ?? 0) + count;
+            } else {
+                // Crafted upgrade
+                const availableCount = inventory[upgrade.id] ?? 0;
+
+                if (availableCount >= count) {
+                    // Enough crafted upgrades available in inventory
+                    inventoryUpdate[upgrade.id] = (inventoryUpdate[upgrade.id] ?? 0) + count;
+                    inventory[upgrade.id] -= count; // Decrement inventory
+                } else {
+                    // Not enough crafted upgrades, need to process recipe
+                    inventoryUpdate[upgrade.id] = (inventoryUpdate[upgrade.id] ?? 0) + availableCount;
+                    inventory[upgrade.id] = 0; // Deplete inventory
+
+                    const remainingCount = count - availableCount;
+                    for (const recipeItem of (upgrade as ICraftedUpgrade).recipe) {
+                        const upgradeData = this.getUpgrade(recipeItem.id);
+
+                        if (!upgradeData) {
+                            return;
+                        }
+
+                        processUpgrade(upgradeData, recipeItem.count * remainingCount);
+                    }
+                }
+            }
+        };
+
+        upgrades.forEach(upgrade => {
+            processUpgrade(upgrade, 1);
+        });
+
+        // Filter out items with 0 count in the inventoryUpdate
+        const filteredInventoryUpdate: Record<string, number> = Object.fromEntries(
+            Object.entries(inventoryUpdate).filter(([_, count]) => count > 0)
         );
 
-        for (const upgradeId in craftedGrouped) {
-            const inventoryValue = inventory[upgradeId] ?? 0;
-            const craftedUpgrades = craftedGrouped[upgradeId];
-            if (!inventoryValue) {
-                craftedUpgrades
-                    .flatMap(x => x.baseUpgrades)
-                    .forEach(x => {
-                        inventoryUpdate[x.id] = (inventoryUpdate[x.id] ?? 0) + x.count;
-                    });
-                continue;
-            }
-
-            if (inventoryValue >= craftedUpgrades.length) {
-                inventoryUpdate[upgradeId] = craftedUpgrades.length;
-            } else {
-                craftedUpgrades.splice(0, inventoryValue);
-                inventoryUpdate[upgradeId] = inventoryValue;
-
-                craftedUpgrades
-                    .flatMap(x => x.baseUpgrades)
-                    .forEach(x => {
-                        inventoryUpdate[x.id] = (inventoryUpdate[x.id] ?? 0) + x.count;
-                    });
-            }
-        }
-
         return {
-            inventoryUpdate,
-            inventoryUpgrades: Object.keys(inventoryUpdate).map(upgradeId => this.getUpgrade(upgradeId)),
+            inventoryUpdate: filteredInventoryUpdate,
+            inventoryUpgrades: Object.keys(filteredInventoryUpdate).map(upgradeId => this.getUpgrade(upgradeId)),
         };
     }
 
@@ -622,52 +690,78 @@ export class UpgradesService {
         inventoryUpgrades: Record<string, number>
     ): Record<string, number> {
         const baseUpgradesTotal: Record<string, number> = {};
-        const craftedUpgradesRankLevel: Record<string, number> = {};
 
-        for (const upgradeRank of upgradeRanks) {
-            for (const upgrade of upgradeRank.upgrades) {
-                const baseUpgradeData = this.baseUpgradesData[upgrade];
-                if (baseUpgradeData) {
-                    baseUpgradesTotal[upgrade] = (baseUpgradesTotal[upgrade] ?? 0) + 1;
+        const processCraftedUpgrade = (craftedUpgrades: Record<string, number>, depth = 0): void => {
+            const nextLevelCraftedUpgrades: Record<string, number> = {};
+
+            for (const craftedUpgrade in craftedUpgrades) {
+                const acquiredCount = inventoryUpgrades[craftedUpgrade];
+                const requiredCount = craftedUpgrades[craftedUpgrade];
+
+                if (acquiredCount >= requiredCount) {
+                    inventoryUpgrades[craftedUpgrade] = acquiredCount - requiredCount;
                     continue;
                 }
 
-                const craftedUpgradeData = this.craftedUpgradesData[upgrade];
+                if (acquiredCount > 0 && acquiredCount < requiredCount) {
+                    inventoryUpgrades[craftedUpgrade] = 0;
+                    craftedUpgrades[craftedUpgrade] = requiredCount - acquiredCount;
+                }
+
+                const craftedUpgradeData = this.craftedUpgradesData[craftedUpgrade];
+                const craftedUpgradeCount = craftedUpgrades[craftedUpgrade];
 
                 if (craftedUpgradeData) {
-                    craftedUpgradesRankLevel[upgrade] = (craftedUpgradesRankLevel[upgrade] ?? 0) + 1;
+                    if (!craftedUpgradeData.craftedUpgrades.length) {
+                        for (const baseUpgrade of craftedUpgradeData.baseUpgrades) {
+                            baseUpgradesTotal[baseUpgrade.id] =
+                                (baseUpgradesTotal[baseUpgrade.id] ?? 0) + baseUpgrade.count * craftedUpgradeCount;
+                        }
+                    } else {
+                        for (const recipeUpgrade of craftedUpgradeData.recipe) {
+                            const subCraftedUpgrade = craftedUpgradeData.craftedUpgrades.find(
+                                x => x.id === recipeUpgrade.id
+                            );
+                            const baseUpgrade = craftedUpgradeData.baseUpgrades.find(x => x.id === recipeUpgrade.id);
+                            if (subCraftedUpgrade) {
+                                nextLevelCraftedUpgrades[recipeUpgrade.id] =
+                                    (nextLevelCraftedUpgrades[recipeUpgrade.id] ?? 0) +
+                                    recipeUpgrade.count * craftedUpgradeCount;
+                            } else if (baseUpgrade) {
+                                baseUpgradesTotal[recipeUpgrade.id] =
+                                    (baseUpgradesTotal[recipeUpgrade.id] ?? 0) +
+                                    recipeUpgrade.count * craftedUpgradeCount;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (Object.keys(nextLevelCraftedUpgrades).length > 0) {
+                processCraftedUpgrade(nextLevelCraftedUpgrades, depth + 1);
+            }
+        };
+
+        const topLevelCraftedUpgrades: Record<string, number> = {};
+
+        for (const upgradeRank of upgradeRanks) {
+            for (const upgrade of upgradeRank.upgrades) {
+                const upgradeData = this.getUpgrade(upgrade);
+
+                if (upgradeData.crafted) {
+                    topLevelCraftedUpgrades[upgrade] = (topLevelCraftedUpgrades[upgrade] ?? 0) + 1;
+                } else {
+                    baseUpgradesTotal[upgrade] = (baseUpgradesTotal[upgrade] ?? 0) + 1;
                 }
             }
         }
 
-        for (const craftedUpgrade in craftedUpgradesRankLevel) {
-            const acquiredCount = inventoryUpgrades[craftedUpgrade];
-            const requiredCount = craftedUpgradesRankLevel[craftedUpgrade];
-            if (acquiredCount >= requiredCount) {
-                inventoryUpgrades[craftedUpgrade] = acquiredCount - requiredCount;
-                delete craftedUpgradesRankLevel[craftedUpgrade];
-                continue;
-            }
+        processCraftedUpgrade(topLevelCraftedUpgrades);
 
-            if (acquiredCount > 0 && acquiredCount < requiredCount) {
-                inventoryUpgrades[craftedUpgrade] = 0;
-                craftedUpgradesRankLevel[craftedUpgrade] = requiredCount - acquiredCount;
-            }
-
-            const craftedUpgradeData = this.craftedUpgradesData[craftedUpgrade];
-            const craftedUpgradeCount = craftedUpgradesRankLevel[craftedUpgrade];
-
-            if (craftedUpgradeData) {
-                for (const baseUpgrade of craftedUpgradeData.baseUpgrades) {
-                    baseUpgradesTotal[baseUpgrade.id] =
-                        (baseUpgradesTotal[baseUpgrade.id] ?? 0) + baseUpgrade.count * craftedUpgradeCount;
-                }
-            }
-        }
         return baseUpgradesTotal;
     }
 
-    private static getCharacterUpgradeRank(rankLookup: IRankLookup): IUnitUpgradeRank[] {
+    public static getCharacterUpgradeRank(rankLookup: IRankLookup): IUnitUpgradeRank[] {
         const characterRankUpData = this.rankUpData[rankLookup.unitName] ?? {};
 
         const ranksRange = this.rankEntries.filter(r => r >= rankLookup.rankStart && r < rankLookup.rankEnd);
@@ -755,6 +849,7 @@ export class UpgradesService {
                 locations: locationsComposed,
                 iconPath: upgrade.icon!,
                 crafted: false,
+                stat: upgrade.stat,
             };
         }
 
@@ -783,7 +878,13 @@ export class UpgradesService {
                 iconPath: upgrade.icon!,
                 baseUpgrades: recipeDetails.flatMap(x => x.baseUpgrades),
                 craftedUpgrades: recipeDetails.flatMap(x => x.craftedUpgrades),
+                recipe:
+                    upgrade.recipe?.map(x => ({
+                        id: x.material,
+                        count: x.count,
+                    })) ?? [],
                 crafted: true,
+                stat: upgrade.stat,
             };
         }
 

@@ -142,7 +142,7 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
                 <br />
                 <br />
 
-                {team.primaryGameMode === GameMode.tournamentArena && (
+                {(team.primaryGameMode === GameMode.tournamentArena || team.primaryGameMode === GameMode.guildWar) && (
                     <>
                         <RaritySelect
                             label={'Rarity Cap'}

@@ -28,6 +28,8 @@ interface Props {
     size?: 'small' | 'medium';
     multiple?: boolean;
     minWidth?: number;
+    maxWidth?: number;
+    selected?: string[];
 }
 
 export const MultipleSelect: React.FC<Props> = ({
@@ -37,8 +39,10 @@ export const MultipleSelect: React.FC<Props> = ({
     size = 'medium',
     multiple = true,
     minWidth = 300,
+    maxWidth = 1000,
+    selected,
 }) => {
-    const [selectedValues, setSelectedValues] = useState(options.filter(x => x.selected).map(x => x.value));
+    const [selectedValues, setSelectedValues] = useState(selected ?? options.filter(x => x.selected).map(x => x.value));
     const handleChange = (event: SelectChangeEvent<string[]>) => {
         const {
             target: { value },
@@ -52,13 +56,13 @@ export const MultipleSelect: React.FC<Props> = ({
     };
 
     return (
-        <FormControl sx={{ minWidth }} size={size} fullWidth>
+        <FormControl sx={{ minWidth, maxWidth }} size={size} fullWidth>
             <InputLabel id="multiple-checkbox-label">{label}</InputLabel>
             <Select
                 labelId="multiple-checkbox-label"
                 id="multiple-checkbox"
                 multiple={multiple}
-                value={selectedValues}
+                value={selected ?? selectedValues}
                 onChange={handleChange}
                 input={<OutlinedInput label={label} />}
                 renderValue={selected =>
@@ -70,7 +74,7 @@ export const MultipleSelect: React.FC<Props> = ({
                 MenuProps={MenuProps}>
                 {options.map(option => (
                     <MenuItem key={option.value} value={option.value}>
-                        {multiple && <Checkbox checked={option.selected} />}
+                        {multiple && <Checkbox checked={selectedValues.includes(option.value)} />}
                         <ListItemText primary={option.label} />
                     </MenuItem>
                 ))}

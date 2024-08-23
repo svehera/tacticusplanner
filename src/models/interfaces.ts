@@ -18,6 +18,7 @@
     RarityStars,
     RarityString,
     Trait,
+    UserRole,
 } from './enums';
 import React from 'react';
 import { CharactersAction } from '../reducers/characters.reducer';
@@ -278,6 +279,13 @@ export interface IGlobalState {
     guild: IGuild;
 }
 
+export interface IUserInfo {
+    username: string;
+    userId: number;
+    role: UserRole;
+    pendingTeamsCount: number;
+}
+
 export interface IDispatchContext {
     characters: React.Dispatch<CharactersAction>;
     mows: React.Dispatch<MowsAction>;
@@ -463,6 +471,10 @@ export interface IPersonalCharacterData2 {
     shards: number;
 }
 
+export interface IInsightsData {
+    numberOfUnlocked?: number;
+    ownedBy?: string[];
+}
 export interface ICharProgression {
     shards: number;
     orbs?: number;
