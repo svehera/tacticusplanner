@@ -159,11 +159,11 @@ export const Guides: React.FC = () => {
         } finally {
             setLoading(false);
             setTeams([]);
-            setActiveTab(GuidesGroup.pending);
+            setActiveTab(GuidesGroup.myTeams);
             loadTeams({
                 page: 1,
                 pageSize: 10,
-                group: GuidesGroup.pending,
+                group: GuidesGroup.myTeams,
             });
         }
     };
@@ -179,12 +179,12 @@ export const Guides: React.FC = () => {
             console.error('Error while updating guide', error);
         } finally {
             setLoading(false);
-            setActiveTab(GuidesGroup.pending);
+            setActiveTab(GuidesGroup.myTeams);
             setTeams([]);
             loadTeams({
                 page: 1,
                 pageSize: 10,
-                group: GuidesGroup.pending,
+                group: GuidesGroup.myTeams,
             });
         }
     };
