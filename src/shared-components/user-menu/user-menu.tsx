@@ -66,6 +66,7 @@ export const UserMenu = () => {
                 try {
                     const content = e.target?.result as string;
                     const personalData: IPersonalData2 = convertData(JSON.parse(content));
+                    personalData.modifiedDate = new Date();
 
                     setStore(new GlobalState(personalData), true, false);
                     enqueueSnackbar('Import successful', { variant: 'success' });
