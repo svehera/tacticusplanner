@@ -23,6 +23,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         setIsAuthenticated(false);
         setToken('');
         setUsername('Tactician');
+        localStorage.setItem(localStorageUserKey + 'Old', localStorage.getItem(localStorageUserKey) ?? '');
         localStorage.removeItem(localStorageKey);
         localStorage.removeItem(localStorageUserKey);
     };
