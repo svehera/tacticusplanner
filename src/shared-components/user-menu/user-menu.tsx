@@ -100,8 +100,9 @@ export const UserMenu = () => {
             minute: 'numeric',
         };
         const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(date);
+        const realUsername = isAuthenticated ? username : localStorage.getItem('userOld') ?? username;
 
-        link.download = `${username}-data-${formattedDate}.json`;
+        link.download = `${realUsername}-data-${formattedDate}.json`;
         link.click();
 
         URL.revokeObjectURL(url);
