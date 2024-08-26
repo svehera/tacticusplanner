@@ -2,6 +2,8 @@
 import { GameMode, GuildRaidBoss, GwMode, TaMode } from 'src/v2/features/teams/teams.enums';
 import { Faction } from 'src/models/enums';
 
+export const anyOption: IMenuOption = { label: 'Any', selected: false, value: 'any' };
+
 export const gameModes: IMenuOption[] = [
     {
         value: GameMode.guildRaids,
@@ -195,6 +197,24 @@ export const gwSubModes: IMenuOption[] = [
     {
         value: GwMode.defense,
         label: 'Defense',
+        selected: false,
+    },
+];
+
+export const lreSections: IMenuOption[] = [
+    {
+        value: '_alpha',
+        label: 'Alpha',
+        selected: false,
+    },
+    {
+        value: '_beta',
+        label: 'Beta',
+        selected: false,
+    },
+    {
+        value: '_gamma',
+        label: 'Gamma',
         selected: false,
     },
 ];

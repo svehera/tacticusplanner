@@ -1,19 +1,15 @@
 ﻿import React, { ChangeEvent, useCallback, useState } from 'react';
 import { GameMode } from 'src/v2/features/teams/teams.enums';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
-import {
-    gameModesForGuides,
-    guildRaidBosses,
-    guildRaidPrimes,
-    gwSubModes,
-    taSubModes,
-} from 'src/v2/features/teams/teams.constants';
+import { anyOption, gameModesForGuides, gwSubModes, taSubModes } from 'src/v2/features/teams/teams.constants';
 import { TextField } from '@mui/material';
 import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { IGuideFilter } from 'src/v2/features/guides/guides.models';
 import Button from '@mui/material/Button';
-import { LreModes } from 'src/v2/features/guides/components/lre-modes';
+import { GuildRaidsModesFilter } from 'src/v2/features/guides/components/gr-modes-filter';
+import { IncursionModesFilter } from 'src/v2/features/guides/components/incursion-modes-filter';
+import { LreModesFilter } from 'src/v2/features/guides/components/lre-modes-filter';
 
 interface Props {
     units: IUnit[];
@@ -59,22 +55,6 @@ export const GuidesFilter: React.FC<Props> = ({ units, applyFilters, filter }) =
         setFiltersChanged(true);
     };
 
-    const updateSelectedGuildBosses = (values: string[]) => {
-        updateSelectedSubMods(values);
-        const relatedOption = guildRaidBosses.find(x => x.value === values[0]);
-        if (relatedOption) {
-            relatedOption.selected = false;
-        }
-    };
-
-    const updateSelectedGuildPrimes = (values: string[]) => {
-        updateSelectedSubMods(values);
-        const relatedOption = guildRaidPrimes.find(x => x.value === values[0]);
-        if (relatedOption) {
-            relatedOption.selected = false;
-        }
-    };
-
     const onFilterTextBoxChanged = useCallback((change: ChangeEvent<HTMLInputElement>) => {
         setNameFilter(change.target.value);
         setFiltersChanged(true);
@@ -100,30 +80,14 @@ export const GuidesFilter: React.FC<Props> = ({ units, applyFilters, filter }) =
             <MultipleSelect
                 label="Game mode"
                 selected={[gameMode]}
-                options={[{ label: 'Any', selected: true, value: 'any' }, ...gameModesForGuides]}
+                options={[anyOption, ...gameModesForGuides]}
                 multiple={false}
                 optionsChange={updateSelectedMod}
                 minWidth={200}
                 maxWidth={200}
             />
             {gameMode === GameMode.guildRaids && (
-                <>
-                    <MultipleSelect
-                        label="Guild Raid Boss"
-                        selected={selectedSubModes}
-                        options={guildRaidBosses}
-                        optionsChange={updateSelectedGuildBosses}
-                        minWidth={200}
-                        maxWidth={200}
-                    />
-                    <MultipleSelect
-                        label="Guild Raid Prime"
-                        selected={selectedSubModes}
-                        options={guildRaidPrimes}
-                        optionsChange={updateSelectedGuildPrimes}
-                        maxWidth={300}
-                    />
-                </>
+                <GuildRaidsModesFilter selectedModes={selectedSubModes} updateSelection={updateSelectedSubMods} />
             )}
 
             {gameMode === GameMode.tournamentArena && (
@@ -149,12 +113,11 @@ export const GuidesFilter: React.FC<Props> = ({ units, applyFilters, filter }) =
             )}
 
             {gameMode === GameMode.legendaryRelease && (
-                <LreModes
-                    selectedModes={selectedSubModes}
-                    updateSelection={updateSelectedSubMods}
-                    units={[]}
-                    filterUnits={() => {}}
-                />
+                <LreModesFilter selectedModes={selectedSubModes} updateSelection={updateSelectedSubMods} />
+            )}
+
+            {gameMode === GameMode.incursion && (
+                <IncursionModesFilter selectedModes={selectedSubModes} updateSelection={updateSelectedSubMods} />
             )}
 
             <Button onClick={apply} disabled={!filtersChanged}>

@@ -5,6 +5,7 @@ import { LreCharacter } from 'src/v2/features/guides/guides.enums';
 import { IMenuOption } from 'src/v2/models/menu-option';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter } from 'src/v2/features/characters/units.functions';
+import { lreSections } from 'src/v2/features/teams/teams.constants';
 
 interface Props {
     units: IUnit[];
@@ -21,30 +22,12 @@ export const LreModes: React.FC<Props> = ({ selectedModes, updateSelection, unit
         return selectedModes[1]?.replace(character, '') ?? '_alpha';
     });
     const [tracks, setTracks] = useState<string[]>(selectedModes.filter(x => x.includes(character + '_')));
-    const lre = getLre(character);
     const { allowedUnits } = useMemo(
         () => getLreGuideData([character, character + section, ...tracks], units.filter(isCharacter)),
         [character, section, tracks]
     );
 
-    const lreSections = [
-        {
-            value: '_alpha',
-            label: 'Alpha',
-            selected: false,
-        },
-        {
-            value: '_beta',
-            label: 'Beta',
-            selected: false,
-        },
-        {
-            value: '_gamma',
-            label: 'Gamma',
-            selected: false,
-        },
-    ];
-
+    const lre = getLre(character);
     const lreTracks = useMemo<IMenuOption[]>(() => {
         switch (section) {
             case '_alpha':
