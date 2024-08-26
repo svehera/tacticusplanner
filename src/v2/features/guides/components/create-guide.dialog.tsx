@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useEffect, useMemo, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import { DialogActions, DialogContent, DialogTitle, Step, StepLabel, Stepper, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -6,7 +6,7 @@ import { GameMode } from 'src/v2/features/teams/teams.enums';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import {
     allModes,
-    gameModes,
+    gameModesForGuides,
     guildRaidBosses,
     guildRaidPrimes,
     gwSubModes,
@@ -22,8 +22,11 @@ import { SelectTeamDialog } from 'src/v2/features/guides/components/select-team-
 import { RichTextEditor } from 'src/v2/components/inputs/rich-text-editor';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'react-i18next';
-import { TeamView } from 'src/v2/features/guides/components/team-view';
-import { RichTextViewer } from 'src/v2/components/inputs/rich-text-viewer';
+import { LreModes } from 'src/v2/features/guides/components/lre-modes';
+import { GuidePreview } from 'src/v2/features/guides/components/guide-preview';
+import { isMow } from 'src/v2/features/characters/units.functions';
+import { IncursionModes } from 'src/v2/features/guides/components/incursion-modes';
+import { GuildRaidsModes } from 'src/v2/features/guides/components/gr-modes';
 
 interface Props {
     onClose: () => void;
@@ -70,15 +73,10 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
             slotType: SlotType.core,
             unitIds: [],
         },
-        {
-            slotNumber: 6,
-            unitType: UnitType.mow,
-            slotType: SlotType.core,
-            unitIds: [],
-        },
     ]);
 
     const [isOpenSelectDialog, setIsOpenSelectDialog] = useState<boolean>(false);
+    const [unitsFiltered, setUnitsFiltered] = useState<IUnit[]>(units);
 
     const closeSelectDialog = (slots: ITeamSlot[]) => {
         setTeamSlots(slots);
@@ -89,22 +87,7 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
         if (values[0] !== gameMode) {
             setGameMode(values[0] as GameMode);
             setSelectedSubModes([]);
-        }
-    };
-
-    const updateSelectedGuildBosses = (values: string[]) => {
-        setSelectedSubModes(values);
-        const relatedOption = guildRaidBosses.find(x => x.value === values[0]);
-        if (relatedOption) {
-            relatedOption.selected = false;
-        }
-    };
-
-    const updateSelectedGuildPrimes = (values: string[]) => {
-        setSelectedSubModes(values);
-        const relatedOption = guildRaidPrimes.find(x => x.value === values[0]);
-        if (relatedOption) {
-            relatedOption.selected = false;
+            setUnitsFiltered(units);
         }
     };
 
@@ -131,7 +114,7 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
 
     const disableContinue = (function () {
         if (activeStep === 1) {
-            return !selectedSubModes.length;
+            return !selectedSubModes.length || unitsFiltered.length < 5;
         }
 
         if (activeStep === 2) {
@@ -147,8 +130,22 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
         return false;
     })();
 
-    const gameModeDisplay = gameModes.find(x => x.value === gameMode)?.label ?? 'NA';
-    const subModeDisplay = allModes.find(x => x.value === selectedSubModes[0])?.label ?? 'NA';
+    useEffect(() => {
+        const includeMowSlot = [GameMode.guildRaids, GameMode.guildWar, GameMode.tournamentArena].includes(gameMode);
+        if (includeMowSlot && !teamSlots.some(slot => slot.unitType === UnitType.mow)) {
+            setTeamSlots(prev => [
+                ...prev,
+                {
+                    slotNumber: 6,
+                    unitType: UnitType.mow,
+                    slotType: SlotType.core,
+                    unitIds: [],
+                },
+            ]);
+        } else {
+            setTeamSlots(prev => prev.filter(x => x.unitType !== UnitType.mow));
+        }
+    }, [gameMode]);
 
     return (
         <Dialog open={true} onClose={onClose} fullWidth fullScreen={isMobile}>
@@ -173,7 +170,7 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                         <MultipleSelect
                             label=""
                             selected={[gameMode]}
-                            options={gameModes}
+                            options={gameModesForGuides}
                             multiple={false}
                             optionsChange={updateSelectedMod}
                         />
@@ -182,27 +179,12 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                 {activeStep === 1 && (
                     <>
                         {gameMode === GameMode.guildRaids && (
-                            <>
-                                <div className="flex-box gap5">
-                                    <MultipleSelect
-                                        multiple={false}
-                                        label="Guild Raid Boss"
-                                        selected={selectedSubModes}
-                                        options={guildRaidBosses}
-                                        optionsChange={updateSelectedGuildBosses}
-                                        minWidth={150}
-                                    />
-                                    <span>OR</span>
-                                    <MultipleSelect
-                                        multiple={false}
-                                        selected={selectedSubModes}
-                                        label="Guild Raid Prime"
-                                        options={guildRaidPrimes}
-                                        optionsChange={updateSelectedGuildPrimes}
-                                        minWidth={150}
-                                    />
-                                </div>
-                            </>
+                            <GuildRaidsModes
+                                selectedModes={selectedSubModes}
+                                updateSelection={setSelectedSubModes}
+                                units={units}
+                                filterUnits={setUnitsFiltered}
+                            />
                         )}
 
                         {gameMode === GameMode.tournamentArena && (
@@ -220,6 +202,24 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                                 label="GW mode"
                                 options={gwSubModes}
                                 optionsChange={setSelectedSubModes}
+                            />
+                        )}
+
+                        {gameMode === GameMode.legendaryRelease && (
+                            <LreModes
+                                selectedModes={selectedSubModes}
+                                updateSelection={setSelectedSubModes}
+                                units={units}
+                                filterUnits={setUnitsFiltered}
+                            />
+                        )}
+
+                        {gameMode === GameMode.incursion && (
+                            <IncursionModes
+                                selectedModes={selectedSubModes}
+                                updateSelection={setSelectedSubModes}
+                                units={units}
+                                filterUnits={setUnitsFiltered}
                             />
                         )}
                     </>
@@ -270,34 +270,30 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                             className="flex-box gap5 start"
                             onClick={() => setIsOpenSelectDialog(true)}>
                             {teamSlots.map(slot => (
-                                <TeamSlotEdit key={slot.slotNumber} units={units} slot={slot} editable={false} />
+                                <TeamSlotEdit
+                                    key={slot.slotNumber}
+                                    units={unitsFiltered}
+                                    slot={slot}
+                                    editable={false}
+                                />
                             ))}
                         </div>
 
                         {isOpenSelectDialog && (
-                            <SelectTeamDialog units={units} slots={teamSlots} onClose={closeSelectDialog} />
+                            <SelectTeamDialog units={unitsFiltered} slots={teamSlots} onClose={closeSelectDialog} />
                         )}
                     </>
                 )}
                 {activeStep === lastStep && (
-                    <>
-                        <Typography variant="h5" color="text.primary">
-                            {teamName}
-                        </Typography>
-
-                        <Typography variant="body2" color="text.primary">
-                            {gameModeDisplay} - {subModeDisplay}
-                        </Typography>
-
-                        <TeamView slots={teamSlots} units={units} expanded />
-
-                        <Typography variant="body2" color="text.secondary">
-                            {intro}
-                        </Typography>
-
-                        <br />
-                        <RichTextViewer htmlValue={guide} />
-                    </>
+                    <GuidePreview
+                        gameMode={gameMode}
+                        guide={guide}
+                        intro={intro}
+                        teamName={teamName}
+                        subModes={selectedSubModes}
+                        teamSlots={teamSlots}
+                        units={unitsFiltered}
+                    />
                 )}
 
                 {activeStep === lastStep + 1 && (

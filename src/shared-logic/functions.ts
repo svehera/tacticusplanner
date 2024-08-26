@@ -167,12 +167,13 @@ export function getImageUrl(image: string): string {
     return new URL(`../assets/images/${image}`, import.meta.url).href;
 }
 
-export function formatDateWithOrdinal(date: Date): string {
+export function formatDateWithOrdinal(date: Date, withYear: boolean = false): string {
     const day = date.getDate();
     const month = date.toLocaleString('en', { month: 'long' });
     const suffix = getDaySuffix(day);
+    const year = date.getFullYear();
 
-    return `${day}${suffix} of ${month}`;
+    return withYear ? `${day}${suffix} of ${month} ${year}` : `${day}${suffix} of ${month}`;
 }
 
 function getDaySuffix(day: number) {

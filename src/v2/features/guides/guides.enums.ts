@@ -17,3 +17,9 @@ export enum GuidesGroup {
     pending = 3,
     rejected = 4,
 }
+
+export enum LreCharacter {
+    kharn = '_kharn',
+    vitruvius = '_vitruvius',
+    mephiston = '_mephiston',
+}

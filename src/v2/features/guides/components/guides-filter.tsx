@@ -2,7 +2,7 @@
 import { GameMode } from 'src/v2/features/teams/teams.enums';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
 import {
-    gameModes,
+    gameModesForGuides,
     guildRaidBosses,
     guildRaidPrimes,
     gwSubModes,
@@ -13,6 +13,7 @@ import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { IGuideFilter } from 'src/v2/features/guides/guides.models';
 import Button from '@mui/material/Button';
+import { LreModes } from 'src/v2/features/guides/components/lre-modes';
 
 interface Props {
     units: IUnit[];
@@ -99,7 +100,7 @@ export const GuidesFilter: React.FC<Props> = ({ units, applyFilters, filter }) =
             <MultipleSelect
                 label="Game mode"
                 selected={[gameMode]}
-                options={[{ label: 'Any', selected: true, value: 'any' }, ...gameModes]}
+                options={[{ label: 'Any', selected: true, value: 'any' }, ...gameModesForGuides]}
                 multiple={false}
                 optionsChange={updateSelectedMod}
                 minWidth={200}
@@ -144,6 +145,15 @@ export const GuidesFilter: React.FC<Props> = ({ units, applyFilters, filter }) =
                     optionsChange={updateSelectedSubMods}
                     minWidth={200}
                     maxWidth={200}
+                />
+            )}
+
+            {gameMode === GameMode.legendaryRelease && (
+                <LreModes
+                    selectedModes={selectedSubModes}
+                    updateSelection={updateSelectedSubMods}
+                    units={[]}
+                    filterUnits={() => {}}
                 />
             )}
 
