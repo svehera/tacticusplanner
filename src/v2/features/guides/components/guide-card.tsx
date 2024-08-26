@@ -13,9 +13,9 @@ import { TeamView } from 'src/v2/features/guides/components/team-view';
 import { GuidesStatus } from 'src/v2/features/guides/guides.enums';
 import { isMobile } from 'react-device-detect';
 import { RichTextViewer } from 'src/v2/components/inputs/rich-text-viewer';
-import { allModes, gameModes } from 'src/v2/features/teams/teams.constants';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import Button from '@mui/material/Button';
+import { getDisplayName } from 'src/v2/features/guides/guides.contstants';
 
 interface Props {
     team: IGuide;
@@ -105,8 +105,7 @@ export const GuideCard: React.FC<Props> = ({
         );
     };
 
-    const gameMode = gameModes.find(x => x.value === guide.primaryMode)?.label ?? 'NA';
-    const subMode = allModes.find(x => x.value === guide.subModes[0])?.label ?? 'NA';
+    const displayName = getDisplayName(guide.primaryMode, guide.subModes);
 
     return (
         <Card
@@ -143,7 +142,7 @@ export const GuideCard: React.FC<Props> = ({
                     </Typography>
                 )}
                 <Typography variant="body2" color="text.primary">
-                    {gameMode} - {subMode}
+                    {displayName}
                 </Typography>
 
                 <TeamView slots={guide.teamSlots} units={units} expanded={fullView} />

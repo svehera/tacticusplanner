@@ -2,6 +2,7 @@
 import {
     ICharactersResponse,
     IErrorResponse,
+    IGetUser,
     ILoginResponse,
     IRegistrationResponse,
     IShareTokenResponse,
@@ -23,6 +24,9 @@ export const refreshShareToken = () => callApi<IShareTokenResponse, IErrorRespon
 export const removeShareToken = () => callApi<IShareTokenResponse, IErrorResponse>('DELETE', 'ShareToken');
 
 export const getUserDataApi = () => callApi<IUserDataResponse, IErrorResponse>('GET', 'users/me');
+
+export const getUsersApi = (username: string) =>
+    callApi<IGetUser[], IErrorResponse>('GET', `users?username=${username}`);
 
 export const setUserDataApi = (userData: IPersonalData2) =>
     callApi<IPersonalData2, IErrorResponse, IUserDataResponse>('PUT', 'users/me', userData, {

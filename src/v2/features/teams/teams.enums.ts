@@ -2,12 +2,15 @@
     tournamentArena = '_ta',
     guildRaids = '_gr',
     guildWar = '_gw',
+    legendaryRelease = '_lre',
+    incursion = '_inc',
 }
 
 export enum GuildRaidBoss {
     avatar = '_avatar',
     ghazghkull = '_ghaz',
     hiveTyrant = '_tyrant',
+    magnus = '_magnus',
     mortarion = '_mortarion',
     rogalDorn = '_tank',
     screamerKiller = '_screamer',

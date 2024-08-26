@@ -7,7 +7,8 @@
         "fullName": "Malleus Rocket Launcher",
         "alliance": "Imperial",
         "faction": "Astra Militarum",
-        "initialRarity": "Common"
+        "initialRarity": "Common",
+        "deployableAlliance": "Xenos"
     },
     {
         "id": "_forgefiend",
@@ -17,7 +18,8 @@
         "fullName": "Forgefiend",
         "alliance": "Chaos",
         "faction": "Black Legion",
-        "initialRarity": "Common"
+        "initialRarity": "Common",
+        "deployableAlliance": "Imperial"
     },
     {
         "id": "_biovore",
@@ -27,7 +29,8 @@
         "fullName": "Biovore",
         "alliance": "Xenos",
         "faction": "Tyranids",
-        "initialRarity": "Common"
+        "initialRarity": "Common",
+        "deployableAlliance": "Chaos"
     },
     {
         "id": "_galatian",
@@ -38,6 +41,7 @@
         "alliance": "Imperial",
         "faction": "Ultramarines",
         "initialRarity": "Common",
+        "deployableAlliance": "Chaos",
         "releaseDate": "2024-08-16T00:00:00Z"
     }
 ]

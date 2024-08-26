@@ -1,17 +1,18 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import React, { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import { DialogActions, DialogContent, DialogTitle, FormControl, Input } from '@mui/material';
 import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
 
-import { DispatchContext } from '../../reducers/store.provider';
 import { enqueueSnackbar } from 'notistack';
-import { GlobalState } from '../../models/global-state';
-import { defaultData } from '../../models/constants';
 import InputLabel from '@mui/material/InputLabel';
-import { UserRole } from 'src/models/enums';
-import { changeUserRoleApi, resetUserPasswordApi } from 'src/api/api-functions';
+import { changeUserRoleApi, getUsersApi, resetUserPasswordApi } from 'src/api/api-functions';
+import { IGetUser } from 'src/api/api-interfaces';
+import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import DownloadIcon from '@mui/icons-material/Download';
+import IconButton from '@mui/material/IconButton';
 
 export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const [resetPasswordForm, setResetPasswordForm] = useState({
@@ -23,6 +24,8 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
         username: '',
         role: '',
     });
+
+    const [usersList, setUsersList] = useState<IGetUser[]>([]);
 
     const resetUserPassword = () => {
         resetUserPasswordApi(resetPasswordForm.username, resetPasswordForm.password)
@@ -38,6 +41,69 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
                 enqueueSnackbar('Role is updated', { variant: 'success' });
             })
             .catch(() => enqueueSnackbar('Failed to update role', { variant: 'error' }));
+    };
+
+    const searchUsers = () => {
+        getUsersApi(resetPasswordForm.username)
+            .then(result => {
+                setUsersList(result.data);
+                if (!result.data.length) {
+                    enqueueSnackbar('No users', { variant: 'warning' });
+                }
+            })
+            .catch(() => enqueueSnackbar('Failed to find users', { variant: 'error' }));
+    };
+
+    const downloadJson = (username: string, jsonData: string) => {
+        const blob = new Blob([jsonData], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+
+        const options: Intl.DateTimeFormatOptions = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+        };
+        const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(new Date());
+
+        link.download = `${username}-data-${formattedDate}.json`;
+        link.click();
+
+        URL.revokeObjectURL(url);
+    };
+
+    const copyLink = (shareLink: string) => {
+        if (shareLink) {
+            navigator.clipboard.writeText(shareLink).then(() => enqueueSnackbar('Copied', { variant: 'success' }));
+        }
+    };
+
+    const renderUser = (user: IGetUser) => {
+        const createdAt = formatDateWithOrdinal(new Date(user.createdDate), true);
+        const shareLink = user.shareToken
+            ? location.origin + `/sharedRoster?username=${user.username}&shareToken=${user.shareToken}`
+            : '';
+        return (
+            <div className="flex-box gap5" key={user.username}>
+                <span>
+                    {user.username} ({createdAt})
+                </span>
+                {shareLink && (
+                    <IconButton onClick={() => copyLink(shareLink)} color={'inherit'}>
+                        <ContentCopyIcon />
+                    </IconButton>
+                )}
+                {!shareLink && !!user.data && (
+                    <IconButton onClick={() => downloadJson(user.username, user.data!)} color={'inherit'}>
+                        <DownloadIcon />
+                    </IconButton>
+                )}
+            </div>
+        );
     };
 
     return (
@@ -64,6 +130,7 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
                             }
                         />
                     </FormControl>
+                    <Button onClick={searchUsers}>Search users</Button>
                     <Button onClick={resetUserPassword}>Reset Password</Button>
                 </Box>
                 <Box>
@@ -84,6 +151,7 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
                     </FormControl>
                     <Button onClick={changeUserRole}>Update role</Button>
                 </Box>
+                {!!usersList.length && <Box>{usersList.map(renderUser)}</Box>}
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => onClose()}>Close</Button>

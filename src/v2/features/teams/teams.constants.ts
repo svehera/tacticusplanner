@@ -1,5 +1,8 @@
 ﻿import { IMenuOption } from 'src/v2/models/menu-option';
 import { GameMode, GuildRaidBoss, GwMode, TaMode } from 'src/v2/features/teams/teams.enums';
+import { Faction } from 'src/models/enums';
+
+export const anyOption: IMenuOption = { label: 'Any', selected: false, value: 'any' };
 
 export const gameModes: IMenuOption[] = [
     {
@@ -15,6 +18,20 @@ export const gameModes: IMenuOption[] = [
     {
         value: GameMode.guildWar,
         label: 'Guild War',
+        selected: false,
+    },
+];
+
+export const gameModesForGuides: IMenuOption[] = [
+    ...gameModes,
+    {
+        value: GameMode.legendaryRelease,
+        label: 'Legendary Event',
+        selected: false,
+    },
+    {
+        value: GameMode.incursion,
+        label: 'Incursion',
         selected: false,
     },
 ];
@@ -36,6 +53,11 @@ export const guildRaidBosses: IMenuOption[] = [
     {
         value: GuildRaidBoss.hiveTyrant,
         label: 'Hive Tyrant',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.magnus,
+        label: 'Magnus',
         selected: false,
     },
     {
@@ -89,6 +111,16 @@ export const guildRaidPrimes: IMenuOption[] = [
     {
         value: GuildRaidBoss.hiveTyrant + leftSidePrimeSuffix,
         label: 'Alpha/Omega Prime (Tyrant)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.magnus + leftSidePrimeSuffix,
+        label: 'Thaumachus (Magnus)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.magnus + rightSidePrimeSuffix,
+        label: 'Abraxas (Magnus)',
         selected: false,
     },
     {
@@ -169,4 +201,52 @@ export const gwSubModes: IMenuOption[] = [
     },
 ];
 
+export const lreSections: IMenuOption[] = [
+    {
+        value: '_alpha',
+        label: 'Alpha',
+        selected: false,
+    },
+    {
+        value: '_beta',
+        label: 'Beta',
+        selected: false,
+    },
+    {
+        value: '_gamma',
+        label: 'Gamma',
+        selected: false,
+    },
+];
+
 export const allModes = [...guildRaidBosses, ...guildRaidPrimes, ...taSubModes, ...gwSubModes];
+
+export const grEncounterToFaction: Record<string, Faction> = {
+    [GuildRaidBoss.avatar]: Faction.Aeldari,
+    [GuildRaidBoss.avatar + leftSidePrimeSuffix]: Faction.Aeldari,
+    [GuildRaidBoss.avatar + rightSidePrimeSuffix]: Faction.Aeldari,
+    [GuildRaidBoss.ghazghkull]: Faction.Orks,
+    [GuildRaidBoss.ghazghkull + leftSidePrimeSuffix]: Faction.Orks,
+    [GuildRaidBoss.ghazghkull + rightSidePrimeSuffix]: Faction.Orks,
+    [GuildRaidBoss.hiveTyrant]: Faction.Tyranids,
+    [GuildRaidBoss.hiveTyrant + leftSidePrimeSuffix]: Faction.Tyranids,
+    [GuildRaidBoss.hiveTyrant + rightSidePrimeSuffix]: Faction.Tyranids,
+    [GuildRaidBoss.magnus]: Faction.Thousand_Sons,
+    [GuildRaidBoss.magnus + leftSidePrimeSuffix]: Faction.Thousand_Sons,
+    [GuildRaidBoss.magnus + rightSidePrimeSuffix]: Faction.Thousand_Sons,
+    [GuildRaidBoss.mortarion]: Faction.Death_Guard,
+    [GuildRaidBoss.mortarion + leftSidePrimeSuffix]: Faction.Death_Guard,
+    [GuildRaidBoss.mortarion + rightSidePrimeSuffix]: Faction.Death_Guard,
+    [GuildRaidBoss.rogalDorn]: Faction.Astra_militarum,
+    [GuildRaidBoss.rogalDorn + leftSidePrimeSuffix]: Faction.Astra_militarum,
+    [GuildRaidBoss.rogalDorn + rightSidePrimeSuffix]: Faction.Astra_militarum,
+    [GuildRaidBoss.screamerKiller]: Faction.Tyranids,
+    [GuildRaidBoss.screamerKiller + leftSidePrimeSuffix]: Faction.Tyranids,
+    [GuildRaidBoss.screamerKiller + rightSidePrimeSuffix]: Faction.Tyranids,
+    [GuildRaidBoss.szarekh]: Faction.Necrons,
+    [GuildRaidBoss.szarekh + leftSidePrimeSuffix]: Faction.Necrons,
+    [GuildRaidBoss.szarekh + rightSidePrimeSuffix]: Faction.Necrons,
+    [GuildRaidBoss.tervigon]: Faction.Tyranids,
+    [GuildRaidBoss.tervigon + leftSidePrimeSuffix]: Faction.Tyranids,
+    [GuildRaidBoss.tervigon + rightSidePrimeSuffix]: Faction.Tyranids,
+};

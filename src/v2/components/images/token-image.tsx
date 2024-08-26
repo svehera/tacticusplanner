@@ -18,6 +18,12 @@ export const TokenImage = ({ gameMode }: { gameMode: GameMode }) => {
         case GameMode.guildWar:
             tooltipText = 'Guild War';
             break;
+        case GameMode.legendaryRelease:
+            tooltipText = 'Legendary Event';
+            break;
+        case GameMode.incursion:
+            tooltipText = 'Incursion';
+            break;
     }
 
     return (

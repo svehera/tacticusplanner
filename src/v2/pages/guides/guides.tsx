@@ -78,6 +78,7 @@ export const Guides: React.FC = () => {
 
     const [teams, setTeams] = useState<IGuide[]>([]);
     const [nextQueryParams, setNextQueryParams] = useState<string | null>(null);
+    const [total, setTotal] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
 
     const [viewGuide, setViewGuide] = useState<IGuide | null>(null);
@@ -121,6 +122,7 @@ export const Guides: React.FC = () => {
             if (response) {
                 setTeams(prevTeams => [...prevTeams, ...response.teams]);
                 setNextQueryParams(response.next);
+                setTotal(response.total);
             }
         } catch (error) {
             console.error('Error loading teams:', error);
@@ -468,22 +470,27 @@ export const Guides: React.FC = () => {
                     <AddIcon />
                     Create Guide
                 </Fab>
-                {filtersCount > 0 ? (
-                    <>
-                        <Badge badgeContent={filtersCount} color="warning">
-                            <IconButton onClick={() => setShowFilters(value => !value)}>
-                                <FilterAltIcon />
-                            </IconButton>
-                        </Badge>
-                        <Button color="error" onClick={handleClearFilters}>
-                            Clear Filters
-                        </Button>
-                    </>
-                ) : (
-                    <IconButton onClick={() => setShowFilters(value => !value)}>
-                        <FilterAltOutlinedIcon />
-                    </IconButton>
-                )}
+                <div className="flex-box">
+                    {filtersCount > 0 ? (
+                        <>
+                            <Badge badgeContent={filtersCount} color="warning">
+                                <IconButton onClick={() => setShowFilters(value => !value)}>
+                                    <FilterAltIcon />
+                                </IconButton>
+                            </Badge>
+                            <Button color="error" onClick={handleClearFilters}>
+                                Clear Filters
+                            </Button>
+                        </>
+                    ) : (
+                        <IconButton onClick={() => setShowFilters(value => !value)}>
+                            <FilterAltOutlinedIcon />
+                        </IconButton>
+                    )}
+                    <span>
+                        ({teams.length} of {total})
+                    </span>
+                </div>
             </div>
             {showFilters && (
                 <>

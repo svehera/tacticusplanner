@@ -17,6 +17,7 @@ export interface IGetGuidesQueryParams {
 export interface IGetGuidesResponse {
     teams: IGuide[];
     next: string | null;
+    total: number;
 }
 
 export interface IGuide {
