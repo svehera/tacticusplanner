@@ -487,7 +487,9 @@ export const Guides: React.FC = () => {
                             <FilterAltOutlinedIcon />
                         </IconButton>
                     )}
-                    <span>({total})</span>
+                    <span>
+                        ({teams.length} of {total})
+                    </span>
                 </div>
             </div>
             {showFilters && (
