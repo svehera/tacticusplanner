@@ -1,6 +1,34 @@
 ﻿{
-    "currentVersion": "1.6.1",
+    "currentVersion": "1.6.2",
     "releaseNotes": [
+        {
+            "version": "1.6.2",
+            "date": "August 26",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updates for learn Guides feature",
+                    "subPoints": [
+                        "Added new game modes: Legendary Event and Incursion",
+                        "Prohibited Factions are filtered out automatically in the Guild Raids mode",
+                        "Added total guides counter near the filter button"
+                    ],
+                    "images": [
+                        {
+                            "path": "guides.png"
+                        },
+                        {
+                            "path": "guides2.png"
+                        },
+                        {
+                            "path": "guides3.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
         {
             "version": "1.6.1",
             "date": "August 23",

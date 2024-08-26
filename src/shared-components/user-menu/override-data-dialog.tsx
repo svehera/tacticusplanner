@@ -25,8 +25,8 @@ export const OverrideDataDialog = ({ isOpen, onClose }: { isOpen: boolean; onClo
                 <Box>
                     <h3>Decide how to handle local changes</h3>
                     <p>
-                        <span style={{ fontWeight: 'bold' }}>Use Remote data</span> if you sure there is nothing
-                        important in you local changes
+                        <span style={{ fontWeight: 'bold' }}>Use Remote data</span> if you sure that remote data is more
+                        up to date than yuor local data
                     </p>
                     <p>
                         <span style={{ fontWeight: 'bold' }}>Use Local data</span> if you sure there are changes that
