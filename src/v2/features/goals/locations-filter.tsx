@@ -5,7 +5,7 @@ import { IDailyRaidsFilters } from 'src/models/interfaces';
 import Button from '@mui/material/Button';
 import { Alliance, CampaignType, Faction, Rarity, RarityString } from 'src/models/enums';
 import factionsData from 'src/v2/data/factions.json';
-import MultipleSelectCheckmarks from 'src/routes/characters/multiple-select';
+import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
 import Dialog from '@mui/material/Dialog';
 
 interface Props {
