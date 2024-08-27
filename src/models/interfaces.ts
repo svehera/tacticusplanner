@@ -863,3 +863,9 @@ export interface IContentCreator {
     resourceIcon: string;
     resourceLink: string;
 }
+
+export interface IYoutubeCreator {
+    name: string;
+    youtubeVideoId: string;
+    avatarLink: string;
+}

@@ -6,29 +6,5 @@
         "avatarIcon": "severyn.png",
         "resourceIcon": "qr.png",
         "resourceLink": "https://www.buymeacoffee.com/tacticusplanner"
-    },
-    {
-        "name": "NoxTempest",
-        "youtubeLink": "https://www.youtube.com/@noxtempest",
-        "thankYou": "Thank you for promoting the app ©Severyn",
-        "avatarIcon": "nox.jpg",
-        "resourceIcon": "nox_vid.jpg",
-        "resourceLink": "https://www.youtube.com/watch?v=TxrqPB8w9as"
-    },
-    {
-        "name": "Nandi",
-        "youtubeLink": "https://www.youtube.com/@Nandi40k",
-        "thankYou": "Thank you for posting decent vids and promoting the app ©Severyn",
-        "avatarIcon": "nandi.jpg",
-        "resourceIcon": "nandi_vid.jpg",
-        "resourceLink": "https://www.youtube.com/watch?v=YJUUHDeQ7cI&ab_channel=Nandi"
-    },
-    {
-        "name": "DB Preacher: Tacticus",
-        "youtubeLink": "https://www.youtube.com/@DBPreacherTacticus",
-        "thankYou": "Thank you for content that inspired me for creating this web app ©Severyn",
-        "avatarIcon": "db.jpg",
-        "resourceIcon": "db_vid.jpg",
-        "resourceLink": "https://www.youtube.com/watch?v=aD2ky2BxX_g"
     }
 ]
