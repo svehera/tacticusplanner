@@ -31,7 +31,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
     });
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
-    const [updateInventory, setUpdateInventory] = React.useState<boolean>(false);
+    const [updateInventory, setUpdateInventory] = React.useState<boolean>(true);
 
     const handleClick = (event: React.UIEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
