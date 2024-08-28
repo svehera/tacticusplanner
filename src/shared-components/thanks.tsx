@@ -78,35 +78,33 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
         return () => clearInterval(intervalId);
     }, [contributorsList.length]);
 
-    return (
-        !!contributorsList.length && (
-            <FlexBox style={{ flexDirection: 'column' }}>
-                <Button style={{ textAlign: 'center' }} component={Link} to={isMobile ? '/mobile/ty' : '/ty'}>
-                    Thank you cards
-                </Button>
+    return contributorsList.length ? (
+        <FlexBox style={{ flexDirection: 'column' }}>
+            <Button style={{ textAlign: 'center' }} component={Link} to={isMobile ? '/mobile/ty' : '/ty'}>
+                Thank you cards
+            </Button>
 
-                {sliderMode ? (
-                    <div style={{ display: 'flex', justifyContent: 'center', minHeight: 400, gap: 10 }}>
-                        {isMobile && (
+            {sliderMode ? (
+                <div style={{ display: 'flex', justifyContent: 'center', minHeight: 400, gap: 10 }}>
+                    {isMobile && <ThankYouCard contributor={contributorsList[activeContributorIndex]} hide={hide} />}
+                    {!isMobile && (
+                        <>
                             <ThankYouCard contributor={contributorsList[activeContributorIndex]} hide={hide} />
-                        )}
-                        {!isMobile && (
-                            <>
-                                <ThankYouCard contributor={contributorsList[activeContributorIndex]} hide={hide} />
-                                <ThankYouCard contributor={contributorsList[activeContributorIndex + 1]} hide={hide} />
-                                <ThankYouCard contributor={contributorsList[activeContributorIndex + 2]} hide={hide} />
-                            </>
-                        )}
-                    </div>
-                ) : (
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>
-                        {contributorsList.map(x => (
-                            <ThankYouCard key={x.name} contributor={x} />
-                        ))}
-                    </div>
-                )}
-            </FlexBox>
-        )
+                            <ThankYouCard contributor={contributorsList[activeContributorIndex + 1]} hide={hide} />
+                            <ThankYouCard contributor={contributorsList[activeContributorIndex + 2]} hide={hide} />
+                        </>
+                    )}
+                </div>
+            ) : (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>
+                    {contributorsList.map(x => (
+                        <ThankYouCard key={x.name} contributor={x} />
+                    ))}
+                </div>
+            )}
+        </FlexBox>
+    ) : (
+        <></>
     );
 };
 

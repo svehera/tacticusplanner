@@ -11,6 +11,7 @@ import { MiscIcon } from '../../../shared-components/misc-icon';
 
 import lre from 'src/assets/legendary-events/Mephiston.json';
 import { PersonalGoalType } from 'src/models/enums';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -52,7 +53,13 @@ export const Home = () => {
 
     return (
         <div>
+            <AccessibleTooltip title="Celebrate Tacticus Planner 1 Year Anniversarry with the PLANLEARN promo code">
+                <h2 style={{ textAlign: 'center' }}>Promo - PLANLEARN, Raffle - BATTLEFAMILY</h2>
+            </AccessibleTooltip>
             <Thanks sliderMode={true} />
+            <AccessibleTooltip title="Celebrate Tacticus Planner 1 Year Anniversarry with the PLANLEARN promo code">
+                <h2 style={{ textAlign: 'center' }}>Promo - PLANLEARN, Raffle - BATTLEFAMILY</h2>
+            </AccessibleTooltip>
             <div
                 style={{
                     display: 'flex',
