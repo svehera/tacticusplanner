@@ -54,11 +54,15 @@ export const Home = () => {
     return (
         <div>
             <AccessibleTooltip title="Celebrate Tacticus Planner 1 Year Anniversarry with the PLANLEARN promo code">
-                <h2 style={{ textAlign: 'center' }}>Promo - PLANLEARN, Raffle - BATTLEFAMILY</h2>
+                <h2 style={{ textAlign: 'center', textDecorationLine: 'underline' }}>
+                    Promo - PLANLEARN, Raffle - BATTLEFAMILY
+                </h2>
             </AccessibleTooltip>
             <Thanks sliderMode={true} />
             <AccessibleTooltip title="Celebrate Tacticus Planner 1 Year Anniversarry with the PLANLEARN promo code">
-                <h2 style={{ textAlign: 'center' }}>Promo - PLANLEARN, Raffle - BATTLEFAMILY</h2>
+                <h2 style={{ textAlign: 'center', textDecorationLine: 'underline' }}>
+                    Promo - PLANLEARN, Raffle - BATTLEFAMILY
+                </h2>
             </AccessibleTooltip>
             <div
                 style={{
