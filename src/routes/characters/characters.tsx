@@ -3,11 +3,11 @@
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, RowStyle, RowClassParams, IRowNode, ICellRendererParams, ColGroupDef } from 'ag-grid-community';
 
-import { TextField } from '@mui/material';
+import { FormControlLabel, Switch, TextField } from '@mui/material';
 
-import MultipleSelectCheckmarks from './multiple-select';
+import { MultipleSelectCheckmarks } from './multiple-select';
 import { ICharacter2 } from '../../models/interfaces';
-import { Alliance, DamageType, Trait } from '../../models/enums';
+import { Alliance, DamageType, Rank, Trait } from '../../models/enums';
 import { isMobile } from 'react-device-detect';
 import { CharacterTitle } from '../../shared-components/character-title';
 import { StoreContext } from '../../reducers/store.provider';
@@ -19,6 +19,7 @@ export const Characters = () => {
     const gridRef = useRef<AgGridReact<ICharacter2>>(null);
 
     const [nameFilter, setNameFilter] = useState<string>('');
+    const [onlyUnlocked, setOnlyUnlocked] = useState<boolean>(false);
     const [damageTypesFilter, setDamageTypesFilter] = useState<DamageType[]>([]);
     const [traitsFilter, setTraitsFilter] = useState<Trait[]>([]);
     const [allianceFilter, setAllianceFilter] = useState<Alliance[]>([]);
@@ -266,8 +267,11 @@ export const Characters = () => {
     const { characters } = useContext(StoreContext);
 
     const rows = useMemo(
-        () => characters.filter(c => c.name.toLowerCase().includes(nameFilter.toLowerCase())),
-        [nameFilter]
+        () =>
+            characters.filter(
+                c => c.name.toLowerCase().includes(nameFilter.toLowerCase()) && (!onlyUnlocked || c.rank > Rank.Locked)
+            ),
+        [nameFilter, onlyUnlocked]
     );
 
     const getRowStyle = (params: RowClassParams<ICharacter2>): RowStyle => {
@@ -361,6 +365,16 @@ export const Characters = () => {
                     margin: '0 20px',
                     flexDirection: isMobile ? 'column' : 'row',
                 }}>
+                <FormControlLabel
+                    label="Only unlocked"
+                    control={
+                        <Switch
+                            checked={onlyUnlocked}
+                            onChange={event => setOnlyUnlocked(event.target.checked)}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                        />
+                    }
+                />
                 <TextField
                     style={{ minWidth: 200 }}
                     label="Quick Filter"
@@ -368,12 +382,14 @@ export const Characters = () => {
                     onChange={onFilterTextBoxChanged}
                 />
                 <MultipleSelectCheckmarks
+                    groupByFirstLetter
                     placeholder="Damage Types"
                     selectedValues={damageTypesFilter}
                     values={Object.values(DamageType)}
                     selectionChanges={damageTypeFilterChanged}
                 />
                 <MultipleSelectCheckmarks
+                    groupByFirstLetter
                     placeholder="Traits"
                     selectedValues={traitsFilter}
                     values={Object.values(Trait)}

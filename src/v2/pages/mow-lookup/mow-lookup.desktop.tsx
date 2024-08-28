@@ -61,7 +61,7 @@ export const MowLookup = () => {
                     <Accordion defaultExpanded={true}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <MowMaterialsTotal
-                                label="Custom total:"
+                                label="Upgrades Needed for Selected Levels:"
                                 mowAlliance={inputs.mow.alliance}
                                 total={customTotal}
                             />
@@ -74,7 +74,7 @@ export const MowLookup = () => {
                     <Accordion defaultExpanded={false}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <MowMaterialsTotal
-                                label="Maxed out total:"
+                                label="Complete Upgrade Table:"
                                 mowAlliance={inputs.mow.alliance}
                                 total={maxedTotal}
                             />

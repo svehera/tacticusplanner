@@ -4,14 +4,19 @@ import { isMobile } from 'react-device-detect';
 import { StaticDataService } from '../services';
 import { ContributorImage } from './contributor-image';
 import { Link, useNavigate } from 'react-router-dom';
-import { IContentCreator, IContributor } from '../models/interfaces';
+import { IContentCreator, IContributor, IYoutubeCreator } from '../models/interfaces';
 import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
 import Button from '@mui/material/Button';
 import { FlexBox } from 'src/v2/components/flex-box';
+import API from 'src/v2/api/api';
 
 export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
     const [activeContributorIndex, setActiveContributorIndex] = useState<number>(0);
     const [hide, setHide] = useState<boolean>(false);
+    const [contributorsList, setContributorsList] = useState<Array<IContributor | IContentCreator | IYoutubeCreator>>(
+        []
+    );
+
     const shuffleArray = (array: any[]): void => {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -19,20 +24,36 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
         }
     };
 
-    const contributorsList: Array<IContributor | IContentCreator> = useMemo(() => {
-        const lastContributor = StaticDataService.contentCreators[0];
-        const allContributors: Array<IContributor | IContentCreator> = [
-            ...StaticDataService.contentCreators.slice(1),
-            ...StaticDataService.contributors,
-        ];
-        shuffleArray(allContributors);
-        allContributors.unshift(lastContributor);
-
-        return allContributors;
+    useEffect(() => {
+        const eventsCalendarUrl = 'https://tacticucplannerstorage.blob.core.windows.net/files/youtubeCreators.json';
+        API({
+            url: eventsCalendarUrl,
+            method: 'GET',
+        })
+            .then(data => {
+                const lastContributor = StaticDataService.contentCreators[0];
+                const allContributors: Array<IContributor | IContentCreator | IYoutubeCreator> = [
+                    ...data.data,
+                    ...StaticDataService.contributors,
+                ];
+                shuffleArray(allContributors);
+                allContributors.unshift(lastContributor);
+                setContributorsList(allContributors);
+            })
+            .catch(() => {
+                const lastContributor = StaticDataService.contentCreators[0];
+                const allContributors: Array<IContributor | IContentCreator | IYoutubeCreator> = [
+                    ...StaticDataService.contentCreators.slice(1),
+                    ...StaticDataService.contributors,
+                ];
+                shuffleArray(allContributors);
+                allContributors.unshift(lastContributor);
+                setContributorsList(allContributors);
+            });
     }, []);
 
     useEffect(() => {
-        if (!sliderMode) {
+        if (!sliderMode || !contributorsList.length) {
             return;
         }
         setTimeout(() => {
@@ -55,9 +76,9 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
         }, 4000);
 
         return () => clearInterval(intervalId);
-    }, []);
+    }, [contributorsList.length]);
 
-    return (
+    return contributorsList.length ? (
         <FlexBox style={{ flexDirection: 'column' }}>
             <Button style={{ textAlign: 'center' }} component={Link} to={isMobile ? '/mobile/ty' : '/ty'}>
                 Thank you cards
@@ -82,6 +103,8 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
                 </div>
             )}
         </FlexBox>
+    ) : (
+        <></>
     );
 };
 
@@ -89,7 +112,7 @@ export const ThankYouCard = ({
     contributor,
     hide,
 }: {
-    contributor: IContributor | IContentCreator;
+    contributor: IContributor | IContentCreator | IYoutubeCreator;
     hide?: boolean;
 }) => {
     const navigate = useNavigate();
@@ -122,8 +145,8 @@ export const ThankYouCard = ({
                                 />
                                 {contributor.name}
                             </Link>
-                        ) : (
-                            <React.Fragment>
+                        ) : !isYoutubeCreator(contributor) ? (
+                            <>
                                 {!!contributor.avatarIcon && (
                                     <ContributorImage
                                         iconPath={contributor.avatarIcon}
@@ -134,15 +157,36 @@ export const ThankYouCard = ({
                                 )}
                                 {!contributor.avatarIcon && <BmcIcon />}
                                 {contributor.name}
-                            </React.Fragment>
+                            </>
+                        ) : (
+                            <>
+                                <img
+                                    loading={'lazy'}
+                                    style={{
+                                        contentVisibility: 'auto',
+                                        borderRadius: '50%',
+                                    }}
+                                    src={contributor.avatarLink}
+                                    height={50}
+                                    width={50}
+                                    alt={contributor.name}
+                                />
+                                {contributor.name}
+                            </>
                         )}
                     </div>
                 }
-                subheader={isContentMaker(contributor) ? 'Content creator' : contributor.type}
+                subheader={
+                    isContentMaker(contributor)
+                        ? 'Content creator'
+                        : !isYoutubeCreator(contributor)
+                        ? contributor.type
+                        : ''
+                }
             />
             <CardContent style={{ paddingTop: 0 }}>
                 {isContentMaker(contributor) ? (
-                    <React.Fragment>
+                    <>
                         <p>{contributor.thankYou}</p>
                         <Link
                             to={contributor.resourceLink}
@@ -155,9 +199,9 @@ export const ThankYouCard = ({
                                 width={contributor.name.includes('Severyn') ? 200 : 320}
                             />
                         </Link>
-                    </React.Fragment>
-                ) : (
-                    <React.Fragment>
+                    </>
+                ) : !isYoutubeCreator(contributor) ? (
+                    <>
                         <p>{contributor.thankYou}</p>
                         {contributor.resourceLink ? (
                             <React.Fragment>
@@ -170,13 +214,40 @@ export const ThankYouCard = ({
                                 </Link>
                             </React.Fragment>
                         ) : undefined}
-                    </React.Fragment>
+                    </>
+                ) : (
+                    <>
+                        <Link
+                            to={`https://www.youtube.com/watch?v=${contributor.youtubeVideoId}`}
+                            style={{ display: 'block', width: '100%', textAlign: 'center' }}
+                            target={'_blank'}
+                            onClick={event => event.stopPropagation()}>
+                            <img
+                                loading={'lazy'}
+                                style={{
+                                    contentVisibility: 'auto',
+                                }}
+                                src={`https://i3.ytimg.com/vi/${contributor.youtubeVideoId}/mqdefault.jpg`}
+                                height={200}
+                                width={320}
+                                alt={contributor.name}
+                            />
+                        </Link>
+                    </>
                 )}
             </CardContent>
         </Card>
     );
 };
 
-const isContentMaker = (contributor: IContentCreator | IContributor): contributor is IContentCreator => {
+const isContentMaker = (
+    contributor: IContentCreator | IContributor | IYoutubeCreator
+): contributor is IContentCreator => {
     return Object.hasOwn(contributor, 'youtubeLink');
+};
+
+const isYoutubeCreator = (
+    contributor: IContentCreator | IContributor | IYoutubeCreator
+): contributor is IYoutubeCreator => {
+    return Object.hasOwn(contributor, 'youtubeVideoId');
 };
