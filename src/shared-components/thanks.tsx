@@ -8,7 +8,7 @@ import { IContentCreator, IContributor, IYoutubeCreator } from '../models/interf
 import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
 import Button from '@mui/material/Button';
 import { FlexBox } from 'src/v2/components/flex-box';
-import API from 'src/v2/api/api';
+import axios from 'axios';
 
 export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
     const [activeContributorIndex, setActiveContributorIndex] = useState<number>(0);
@@ -25,9 +25,14 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
     };
 
     useEffect(() => {
-        const eventsCalendarUrl = 'https://tacticucplannerstorage.blob.core.windows.net/files/youtubeCreators.json';
-        API({
-            url: eventsCalendarUrl,
+        const api = axios.create({
+            baseURL: 'https://tacticucplannerstorage.blob.core.windows.net',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        api({
+            url: '/files/youtubeCreators.json',
             method: 'GET',
         })
             .then(data => {
