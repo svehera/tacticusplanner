@@ -6,22 +6,13 @@ import whatsNew from '../assets/WhatsNew.json';
 import contributors from '../assets/contributors/thankYou.json';
 import contentCreators from '../assets/contributors/contentCreators.json';
 
-import campaignConfigs from '../assets/campaignConfigs.json';
 import battleData from '../assets/battleData.json';
 import recipeData from '../assets/recipeData.json';
 import rankUpData from '../assets/rankUpData.json';
 
-import shadowsun from '../assets/legendary-events/Shadowsun.json';
-import aunshi from '../assets/legendary-events/Aunshi.json';
-import ragnar from '../assets/legendary-events/Ragnar.json';
-import vitruvius from '../assets/legendary-events/Vitruvius.json';
-import kharn from '../assets/legendary-events/Kharn.json';
-import mephiston from '../assets/legendary-events/Mephiston.json';
-
 import {
     ICampaignBattle,
     ICampaignBattleComposed,
-    ICampaignConfigs,
     ICampaignsData,
     ICampaignsProgress,
     ICharLegendaryEvents,
@@ -47,33 +38,40 @@ import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;
-    static readonly campaignConfigs: ICampaignConfigs = campaignConfigs;
     static readonly battleData: ICampaignsData = battleData;
     static readonly recipeData: IRecipeData = recipeData;
     static readonly rankUpData: IRankUpData = rankUpData;
     static readonly contributors: IContributor[] = contributors;
     static readonly contentCreators: IContentCreator[] = contentCreators;
 
-    private static readonly ImperialFactions: Faction[] = [
-        Faction.Ultramarines,
-        Faction.Astra_militarum,
-        Faction.Black_Templars,
-        Faction.ADEPTA_SORORITAS,
-        Faction.AdeptusMechanicus,
-        Faction.Space_Wolves,
-        Faction.Dark_Angels,
-    ];
-
-    private static readonly ChaosFactions: Faction[] = [
-        Faction.Black_Legion,
-        Faction.Death_Guard,
-        Faction.Thousand_Sons,
-        Faction.WorldEaters,
-    ];
-
     static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = CampaignsService.campaignsComposed;
 
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
+    static readonly lreCharacters: IUnitData[] = orderBy(
+        this.unitsData.filter(unit => !!unit.lre),
+        ['lre.finished', x => new Date(x.lre?.nextEventDateUtc ?? '').getTime()],
+        ['asc', 'asc']
+    );
+
+    static readonly activeLres = this.lreCharacters.filter(x => !x.lre?.finished);
+    static readonly inactiveLres = this.lreCharacters.filter(x => !!x.lre?.finished);
+
+    static readonly activeLre = (() => {
+        const now = new Date();
+        const eightDays = 8;
+        const currentLreDate = new Date(this.lreCharacters[0]!.lre!.nextEventDateUtc!);
+        currentLreDate.setDate(currentLreDate.getDate() + eightDays);
+
+        if (now < currentLreDate) {
+            return this.lreCharacters[0];
+        } else {
+            return this.lreCharacters.find(x => {
+                const eventDate = new Date(x.lre?.nextEventDateUtc ?? '');
+                return eventDate > now;
+            })!;
+        }
+    })();
+
     static readonly campaignsGrouped: Record<string, ICampaignBattleComposed[]> = this.getCampaignGrouped();
     static readonly recipeDataFull: IRecipeDataFull = this.convertRecipeData();
 
@@ -89,57 +87,6 @@ export class StaticDataService {
 
         return possibleLocations;
     };
-
-    static readonly legendaryEvents = [
-        {
-            id: mephiston.id,
-            name: mephiston.name,
-            stage: mephiston.eventStage,
-            nextEventDate: mephiston.nextEventDate,
-            mobileRoute: '/mobile/plan/le/mephiston',
-            icon: 'unset.png',
-        },
-        {
-            id: kharn.id,
-            name: kharn.name,
-            stage: kharn.eventStage,
-            nextEventDate: kharn.nextEventDate,
-            mobileRoute: '/mobile/plan/le/kharn',
-            icon: 'kharn.png',
-        },
-        {
-            id: vitruvius.id,
-            name: vitruvius.name,
-            stage: vitruvius.eventStage,
-            nextEventDate: vitruvius.nextEventDate,
-            mobileRoute: '/mobile/plan/le/vitruvius',
-            icon: 'vitruvius.png',
-        },
-        {
-            id: ragnar.id,
-            name: ragnar.name,
-            stage: ragnar.eventStage,
-            nextEventDate: ragnar.nextEventDate,
-            mobileRoute: '/mobile/plan/le/ragnar',
-            icon: 'Ragnar.png',
-        },
-        {
-            id: shadowsun.id,
-            name: shadowsun.name,
-            stage: shadowsun.eventStage,
-            nextEventDate: shadowsun.nextEventDate,
-            mobileRoute: '/mobile/plan/le/shadowsun',
-            icon: 'ShadowSun.png',
-        },
-        {
-            id: aunshi.id,
-            name: aunshi.name,
-            stage: aunshi.eventStage,
-            nextEventDate: aunshi.nextEventDate,
-            mobileRoute: '/mobile/plan/le/aunshi',
-            icon: 'Aun-shi.png',
-        },
-    ];
 
     static getCampaignGrouped(): Record<string, ICampaignBattleComposed[]> {
         const allBattles = sortBy(Object.values(this.campaignsComposed), 'nodeNumber');
@@ -160,8 +107,7 @@ export class StaticDataService {
         const groupedData = groupBy(battles, 'reward');
 
         for (const key in groupedData) {
-            const value = groupedData[key].map(x => x.shortName ?? '');
-            result[key] = value;
+            result[key] = groupedData[key].map(x => x.shortName ?? '');
         }
 
         return result;
@@ -294,6 +240,7 @@ export class StaticDataService {
             },
             releaseRarity: rawData.ReleaseRarity,
             releaseDate: rawData.releaseDate,
+            lre: rawData.lre,
         };
 
         if (rawData['Ranged Damage']) {
@@ -310,7 +257,26 @@ export class StaticDataService {
         }
         unitData.damageTypes.all = uniq(unitData.damageTypes.all);
 
+        const isReleased = unitData.releaseDate
+            ? StaticDataService.isAtLeast3DaysBefore(new Date(unitData.releaseDate))
+            : true;
+
+        unitData.icon = isReleased ? unitData.icon : 'comingSoon.webp';
+
         return unitData;
+    }
+
+    static isAtLeast3DaysBefore(releaseDate: Date): boolean {
+        const today = new Date();
+
+        // Calculate the difference in time
+        const timeDifference = releaseDate.getTime() - today.getTime();
+
+        // Convert time difference from milliseconds to days
+        const dayDifference = timeDifference / (1000 * 3600 * 24);
+
+        // Check if the day difference is less than or equal to 2
+        return dayDifference <= 3;
     }
 
     static getFactionIcon(faction: Faction): string {
@@ -537,8 +503,7 @@ export class StaticDataService {
         if (updateInventory) {
             const updatedCount = ownedCount - material.count;
             ownedUpgrades[material.id] = updatedCount > 0 ? updatedCount : 0;
-            const updatedCrafted = neededCount > 0 ? 0 : Math.abs(neededCount);
-            craftedBasedUpgrades[material.id] = updatedCrafted;
+            craftedBasedUpgrades[material.id] = neededCount > 0 ? 0 : Math.abs(neededCount);
         }
 
         let expectedEnergy = 0;

@@ -1,4 +1,4 @@
-﻿import React, { useContext, useEffect, useMemo } from 'react';
+﻿import React, { useContext, useMemo } from 'react';
 import { Popover } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 
@@ -7,43 +7,18 @@ import AutoTeamsSettings from './auto-teams-settings';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Help } from '@mui/icons-material';
-import { StoreContext } from '../../reducers/store.provider';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { StoreContext } from 'src/reducers/store.provider';
+import { Outlet } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
+import { useAnchor } from 'src/v2/hooks/useAnchor';
+import { LegendaryEventEnum } from 'src/models/enums';
+import { LegendaryEvent } from 'src/routes/legendary-events/legendary-event';
 
-export const LegendaryEventPage = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
+export const LegendaryEventPage: React.FC<{ legendaryEvent: LegendaryEventEnum }> = ({ legendaryEvent }) => {
     const { autoTeamsPreferences, viewPreferences } = useContext(StoreContext);
 
-    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
-    const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
-
-    useEffect(() => {
-        if (location.pathname.endsWith('le') || location.pathname.endsWith('le/')) {
-            navigate('/le/ragnar');
-        }
-    }, [location.pathname]);
-
-    const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl2(event.currentTarget);
-    };
-
-    const handleClose2 = () => {
-        setAnchorEl2(null);
-    };
-
-    const open2 = Boolean(anchorEl2);
-
-    const handleClick = (event: React.UIEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const open = Boolean(anchorEl);
+    const { anchorEl: anchorEl, handleClick: handleClick, handleClose: handleClose, open: open } = useAnchor();
+    const { anchorEl: anchorEl2, handleClick: handleClick2, handleClose: handleClose2, open: open2 } = useAnchor();
 
     const autoTeamsPriority = useMemo(() => {
         const result: string[] = [];
@@ -119,7 +94,7 @@ export const LegendaryEventPage = () => {
                 </div>
             </div>
 
-            <Outlet />
+            <LegendaryEvent id={legendaryEvent} />
         </Box>
     );
 };

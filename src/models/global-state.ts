@@ -100,9 +100,6 @@ export class GlobalState implements IGlobalState {
             const upgrades = personalCharData?.upgrades
                 ? personalCharData.upgrades.filter(StaticDataService.isValidaUpgrade)
                 : [];
-            const isReleased = staticData.releaseDate
-                ? this.isAtLeast3DaysBefore(new Date(staticData.releaseDate))
-                : true;
 
             const combinedData: IPersonalCharacterData2 = {
                 name: staticData.name,
@@ -121,7 +118,6 @@ export class GlobalState implements IGlobalState {
             const result: ICharacter2 = {
                 ...staticData,
                 ...combinedData,
-                icon: isReleased ? staticData.icon : 'comingSoon.webp',
                 rank: +combinedData.rank,
                 numberOfUnlocked:
                     totalUsers && personalCharData?.numberOfUnlocked

@@ -31,11 +31,13 @@ import {
 import IconButton from '@mui/material/IconButton';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
+import { useTitle } from 'src/contexts/title.context';
 
 const TopAppBar = () => {
     const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
     const location = useLocation();
     const navigate = useNavigate();
+    const { headerTitle } = useTitle();
     const navigationMenuControls = usePopUpControls();
     const { seenAppVersion } = useContext(StoreContext);
 
@@ -51,10 +53,12 @@ const TopAppBar = () => {
         const menuItemId = routeSections[routeSections.length - 1];
         if (Object.hasOwn(menuItemById, menuItemId)) {
             return menuItemById[menuItemId as keyof typeof menuItemById].title;
+        } else if (menuItemId === 'lre') {
+            return headerTitle;
         } else {
             return 'Tacticus Planner';
         }
-    }, [location.pathname]);
+    }, [location.pathname, headerTitle]);
 
     // useEffect(() => {
     //     const timeout = setTimeout(() => {

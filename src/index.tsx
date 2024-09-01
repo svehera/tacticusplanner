@@ -13,6 +13,7 @@ import { AuthProvider } from './contexts/auth.provider';
 import { closeSnackbar, SnackbarOrigin, SnackbarProvider } from 'notistack';
 import { isMobile } from 'react-device-detect';
 import { routes } from './app-routing';
+import { TitleProvider } from 'src/contexts/title.provider';
 
 const webSnackbarOrigin: SnackbarOrigin = { vertical: 'bottom', horizontal: 'right' };
 const mobileSnackbarOrigin: SnackbarOrigin = { vertical: 'top', horizontal: 'center' };
@@ -21,12 +22,14 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
     // <React.StrictMode>
     <AuthProvider>
-        <SnackbarProvider
-            autoHideDuration={5000}
-            anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
-            onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
-        />
-        <RouterProvider router={routes} />
+        <TitleProvider>
+            <SnackbarProvider
+                autoHideDuration={5000}
+                anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
+                onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
+            />
+            <RouterProvider router={routes} />
+        </TitleProvider>
     </AuthProvider>
     // </React.StrictMode>
 );

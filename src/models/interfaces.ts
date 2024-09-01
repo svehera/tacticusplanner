@@ -78,6 +78,7 @@ export interface UnitDataRaw {
     Icon: string;
     ReleaseRarity?: CharacterReleaseRarity;
     releaseDate?: string;
+    lre?: ILreCharacterStaticData;
 }
 
 export interface IUnitData {
@@ -107,8 +108,17 @@ export interface IUnitData {
     requiredInCampaign: boolean;
     icon: string;
     legendaryEvents: ICharLegendaryEvents;
+    lre?: ILreCharacterStaticData;
     releaseRarity?: CharacterReleaseRarity;
     releaseDate?: string;
+}
+
+export interface ILreCharacterStaticData {
+    id: LegendaryEventEnum;
+    finished: boolean;
+    eventStage: number;
+    nextEventDate: string;
+    nextEventDateUtc?: string;
 }
 
 export interface IDamageTypes {
@@ -152,6 +162,7 @@ export interface ILegendaryEventStatic {
     wikiLink: string;
     eventStage: number;
     nextEventDate: string;
+    nextEventDateUtc?: string;
 
     regularMissions: string[];
     premiumMissions: string[];

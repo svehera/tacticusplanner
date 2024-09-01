@@ -1,5 +1,5 @@
 ﻿import { useSearchParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type NullableString = string | null | undefined;
 
@@ -30,6 +30,11 @@ export const useQueryState = <T>(
             return updatedParams;
         });
     };
+
+    useEffect(() => {
+        const queryParamValueNew = searchParams.get(queryParam);
+        setValue(getInitialState(queryParamValueNew));
+    }, [searchParams]);
 
     return [value, handleValueChange];
 };

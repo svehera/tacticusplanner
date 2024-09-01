@@ -17,7 +17,7 @@ import { LegendaryEventEnum } from '../../models/enums';
 import { getLegendaryEvent } from '../../models/constants';
 import { isMobile } from 'react-device-detect';
 
-const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
+export const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
     const { characters, viewPreferences, selectedTeamOrder, leSelectedTeams, leProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const legendaryEvent = useMemo(() => getLegendaryEvent(id, characters), [id]);
@@ -219,5 +219,3 @@ const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
         </div>
     );
 };
-
-export default LegendaryEvent;

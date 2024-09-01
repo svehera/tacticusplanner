@@ -18,6 +18,7 @@ import { guildInsightsLazyRoute } from 'src/v2/pages/guild-insights/guild-insigh
 import { teamsMobileLazyRoute } from 'src/v2/pages/teams/teams.route';
 import { mowLookupMobileLazyRoute } from 'src/v2/pages/mow-lookup/mow-lookup.route';
 import { guidesLazyRoute } from 'src/v2/pages/guides/guides.route';
+import { lreLazyRoute } from 'src/v2/pages/lre/lre-route';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -54,20 +55,6 @@ const planRoutes: RouteObject[] = [
         },
     },
     {
-        path: 'plan/lre',
-        async lazy() {
-            const { PlanLeRoutes } = await import('./events/leRoutes');
-            return { Component: PlanLeRoutes };
-        },
-    },
-    {
-        path: 'plan/guildWar',
-        async lazy() {
-            const { PlanGuildWarRoutes } = await import('./events/guildWarRoutes');
-            return { Component: PlanGuildWarRoutes };
-        },
-    },
-    {
         path: 'plan/goals',
         async lazy() {
             const { Goals } = await import('../routes/goals/goals');
@@ -92,39 +79,7 @@ const planRoutes: RouteObject[] = [
     guildWarDefenseLazyRoute,
     guildWarZonesLazyRoute,
     teamsMobileLazyRoute,
-    {
-        path: 'plan/le',
-        async lazy() {
-            const { LegendaryEventPage } = await import('../routes/legendary-events/legendary-events-page');
-            return { Component: LegendaryEventPage };
-        },
-        children: [
-            {
-                path: 'shadowsun',
-                element: <LegendaryEvent id={LegendaryEventEnum.Shadowsun} />,
-            },
-            {
-                path: 'aunshi',
-                element: <LegendaryEvent id={LegendaryEventEnum.AunShi} />,
-            },
-            {
-                path: 'ragnar',
-                element: <LegendaryEvent id={LegendaryEventEnum.Ragnar} />,
-            },
-            {
-                path: 'vitruvius',
-                element: <LegendaryEvent id={LegendaryEventEnum.Vitruvius} />,
-            },
-            {
-                path: 'kharn',
-                element: <LegendaryEvent id={LegendaryEventEnum.Kharn} />,
-            },
-            {
-                path: 'mephiston',
-                element: <LegendaryEvent id={LegendaryEventEnum.Mephiston} />,
-            },
-        ],
-    },
+    lreLazyRoute,
 ];
 
 const learnRoutes: RouteObject[] = [
