@@ -58,7 +58,7 @@ export default function DataTablesDialog({
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <PointsTable legendaryEvent={legendaryEvent} selectionChange={setSelection} short={short ?? false} />
+                <PointsTable legendaryEvent={legendaryEvent} selectionChange={setSelection} />
             </Dialog>
         </div>
     );

@@ -29,6 +29,9 @@ import { CharacterImage } from 'src/shared-components/character-image';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { isMobile } from 'react-device-detect';
 import { StaticDataService } from 'src/services';
+import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
+import { RarityImage } from 'src/shared-components/rarity-image';
+import { RankImage } from 'src/shared-components/rank-image';
 
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>(
@@ -40,78 +43,14 @@ export const MasterTable = () => {
         const legendaryEventPersonal = leSelectedTeams[eventId];
         return {
             id: eventId,
+            teams: [],
             name: LegendaryEventEnum[eventId],
             alpha: legendaryEventPersonal?.alpha ?? {},
             beta: legendaryEventPersonal?.beta ?? {},
             gamma: legendaryEventPersonal?.gamma ?? {},
         };
     };
-
-    const [selection, setSelection] = useState<CharactersSelection>(CharactersSelection.Selected);
     const [filter, setFilter] = useState('');
-
-    const gridRef = useRef<AgGridReact>(null);
-
-    const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() => {
-        return [
-            {
-                field: 'name',
-                width: viewPreferences.hideNames ? 150 : 250,
-                sortable: true,
-                cellRenderer: (props: ICellRendererParams<ITableRow>) => {
-                    const row = props.data;
-                    if (row) {
-                        return (
-                            <CharacterTitle
-                                character={row.character}
-                                imageSize={30}
-                                hideName={viewPreferences.hideNames}
-                            />
-                        );
-                    }
-                },
-                cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
-                tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
-            },
-            {
-                headerName: 'Total',
-                children: [
-                    {
-                        field: 'totalPoints',
-                        headerName: 'Points',
-                        width: 100,
-                        sortable: true,
-                        sort: 'desc',
-                        cellStyle: { textAlign: 'right' },
-                    },
-                    {
-                        field: 'totalSlots',
-                        headerName: selection === 'selected' ? 'Times selected' : 'Slots',
-                        width: 100,
-                        sortable: true,
-                    },
-                ],
-            },
-            ...activeLegendaryEvents.map(eventId => ({
-                headerName: LegendaryEventEnum[eventId],
-                children: [
-                    {
-                        field: eventId + 'points',
-                        headerName: 'Points',
-                        width: 100,
-                        sortable: true,
-                        cellStyle: { textAlign: 'right' },
-                    },
-                    {
-                        field: eventId + 'slots',
-                        headerName: selection === 'selected' ? 'Times selected' : 'Slots',
-                        width: 100,
-                        sortable: true,
-                    },
-                ],
-            })),
-        ];
-    }, [selection, activeLegendaryEvents]);
 
     const getSelectedChars = (eventId: LegendaryEventEnum) => {
         const legendaryEvent = getLegendaryEvent(eventId, characters);
@@ -246,6 +185,117 @@ export const MasterTable = () => {
         }
     }, [filter, activeLegendaryEvents]);
 
+    const [selection, setSelection] = useState<CharactersSelection>(
+        selectedCharsRows.length ? CharactersSelection.Selected : CharactersSelection.All
+    );
+
+    const gridRef = useRef<AgGridReact>(null);
+
+    const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() => {
+        return [
+            {
+                headerName: 'Character',
+                pinned: !isMobile,
+                openByDefault: !isMobile,
+                cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
+                tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
+                children: [
+                    {
+                        headerName: '#',
+                        colId: 'rowNumber',
+                        valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
+                        maxWidth: 50,
+                        width: 50,
+                        pinned: !isMobile,
+                    },
+                    {
+                        headerName: 'Name',
+                        width: isMobile ? 75 : 180,
+                        pinned: !isMobile,
+                        cellRenderer: (props: ICellRendererParams<ITableRow>) => {
+                            const character = props.data?.character;
+                            if (character) {
+                                return (
+                                    <CharacterTitle
+                                        character={character}
+                                        hideName={isMobile}
+                                        short={true}
+                                        imageSize={30}
+                                    />
+                                );
+                            }
+                        },
+                        cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
+                        tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
+                    },
+                    {
+                        headerName: 'Rarity',
+                        width: 80,
+                        columnGroupShow: 'open',
+                        pinned: !isMobile,
+                        valueGetter: (props: ValueGetterParams<ITableRow>) => {
+                            return props.data?.character.rarity;
+                        },
+                        cellRenderer: (props: ICellRendererParams<ITableRow>) => {
+                            const rarity = props.value ?? 0;
+                            return <RarityImage rarity={rarity} />;
+                        },
+                    },
+                    {
+                        headerName: 'Rank',
+                        width: 80,
+                        columnGroupShow: 'open',
+                        pinned: !isMobile,
+                        valueGetter: (props: ValueGetterParams<ITableRow>) => {
+                            return props.data?.character.rank;
+                        },
+                        cellRenderer: (props: ICellRendererParams<ITableRow>) => {
+                            const rank = props.value ?? 0;
+                            return <RankImage rank={rank} />;
+                        },
+                    },
+                ],
+            },
+            {
+                headerName: 'Total',
+                children: [
+                    {
+                        field: 'totalPoints',
+                        headerName: 'Points',
+                        width: 100,
+                        sortable: true,
+                        sort: 'desc',
+                        cellStyle: { textAlign: 'right' },
+                    },
+                    {
+                        field: 'totalSlots',
+                        headerName: selection === 'selected' ? 'Times selected' : 'Slots',
+                        width: 100,
+                        sortable: true,
+                    },
+                ],
+            },
+            ...activeLegendaryEvents.map(eventId => ({
+                headerName: LegendaryEventEnum[eventId],
+                children: [
+                    {
+                        field: eventId + 'points',
+                        headerName: 'Points',
+                        width: 100,
+                        sortable: true,
+                        cellStyle: { textAlign: 'right' },
+                    },
+                    {
+                        field: eventId + 'slots',
+                        headerName: selection === 'selected' ? 'Times selected' : 'Slots',
+                        width: 100,
+                        sortable: true,
+                    },
+                ],
+            })),
+        ];
+    }, [selection, activeLegendaryEvents]);
+
     const rows = useMemo<ITableRow[]>(() => {
         const temp: Array<{
             character: ICharacter2;
@@ -274,6 +324,7 @@ export const MasterTable = () => {
                     character: x,
                     characterId: x.name,
                     eventId,
+                    positions: index + 1,
                     // className: Rank[x.rank].toLowerCase(),
                     // tooltip: x.name + ' - ' + Rank[x.rank ?? 0],
                     points: x.legendaryEvents[legendaryEvent.id].totalPoints,
@@ -330,7 +381,7 @@ export const MasterTable = () => {
                     <RadioGroup
                         style={{ display: 'flex', flexDirection: 'row' }}
                         aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue={CharactersSelection.Selected}
+                        value={selection}
                         onChange={(_, value) => {
                             setSelection(value as CharactersSelection);
                         }}

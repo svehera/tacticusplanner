@@ -47,29 +47,17 @@ export const LeProgressOverview = ({
 
     return (
         <div>
-            <Accordion
-                TransitionProps={{ unmountOnExit: true }}
-                expanded={accordionExpanded === 'notes'}
-                onChange={handleAccordionChange('notes')}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                        <span>Notes</span>
-                    </div>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <TextField
-                        style={{ marginTop: 20 }}
-                        fullWidth
-                        id="outlined-textarea"
-                        label="Notes"
-                        placeholder="Notes"
-                        multiline
-                        helperText={progress.notes.length + '/1000'}
-                        defaultValue={progress.notes}
-                        onChange={event => debounced(event.target.value.slice(0, 1000))}
-                    />
-                </AccordionDetails>
-            </Accordion>
+            <TextField
+                style={{ marginTop: 20 }}
+                fullWidth
+                id="outlined-textarea"
+                label="Notes"
+                placeholder="Notes"
+                multiline
+                helperText={progress.notes.length + '/1000'}
+                defaultValue={progress.notes}
+                onChange={event => debounced(event.target.value.slice(0, 1000))}
+            />
 
             <Accordion
                 TransitionProps={{ unmountOnExit: true }}
@@ -78,60 +66,32 @@ export const LeProgressOverview = ({
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                         <span>
-                            Event 1 Missions & Bundles{' '}
-                            <span style={{ fontWeight: 700 }}>
-                                ({progress.overview['1'].regularMissions}/10 & {progress.overview['1'].premiumMissions}
-                                /10)
-                            </span>
+                            Missions & Bundles
+                            {/*{' '}*/}
+                            {/*<span style={{ fontWeight: 700 }}>*/}
+                            {/*    ({progress.overview['1'].regularMissions}/10 & {progress.overview['1'].premiumMissions}*/}
+                            {/*    /10)*/}
+                            {/*</span>*/}
                         </span>
                     </div>
                 </AccordionSummary>
+                <h3>Event 1</h3>
                 <LeProgressOverviewMissions
                     progress={progress.overview['1']}
                     legendaryEvent={legendaryEvent}
                     missionProgressChange={handleMissionsProgressChange(progress.overview['1'])}
                     bundleChange={handleBundleChange(progress.overview['1'])}
                 />
-            </Accordion>
 
-            <Accordion
-                TransitionProps={{ unmountOnExit: true }}
-                expanded={accordionExpanded === 'event2'}
-                onChange={handleAccordionChange('event2')}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                        <span>
-                            Event 2 Missions & Bundles{' '}
-                            <span style={{ fontWeight: 700 }}>
-                                ({progress.overview['2'].regularMissions}/10 & {progress.overview['2'].premiumMissions}
-                                /10)
-                            </span>
-                        </span>
-                    </div>
-                </AccordionSummary>
+                <h3>Event 2</h3>
                 <LeProgressOverviewMissions
                     progress={progress.overview['2']}
                     legendaryEvent={legendaryEvent}
                     missionProgressChange={handleMissionsProgressChange(progress.overview['2'])}
                     bundleChange={handleBundleChange(progress.overview['2'])}
                 />
-            </Accordion>
 
-            <Accordion
-                TransitionProps={{ unmountOnExit: true }}
-                expanded={accordionExpanded === 'event3'}
-                onChange={handleAccordionChange('event3')}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                        <span>
-                            Event 3 Missions & Bundles{' '}
-                            <span style={{ fontWeight: 700 }}>
-                                ({progress.overview['3'].regularMissions}/10 & {progress.overview['3'].premiumMissions}
-                                /10)
-                            </span>
-                        </span>
-                    </div>
-                </AccordionSummary>
+                <h3>Event 3</h3>
                 <LeProgressOverviewMissions
                     progress={progress.overview['3']}
                     legendaryEvent={legendaryEvent}

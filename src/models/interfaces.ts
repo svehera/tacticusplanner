@@ -44,6 +44,7 @@ import { MowsAction } from 'src/reducers/mows.reducer';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 import { TeamsAction } from 'src/reducers/teams.reducer';
+import { LreSection } from 'src/v2/features/lre/lre.models';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -234,6 +235,7 @@ export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
 }
 
 export interface ILegendaryEventTrackRequirement {
+    id?: string;
     name: string;
     points: number;
     units: ICharacter2[];
@@ -388,9 +390,18 @@ export type SelectedRequirements = Record<string, boolean>;
 export interface ILegendaryEventSelectedTeams {
     id: LegendaryEventEnum;
     name: string;
+    teams: ILreTeam[];
     alpha: SelectedTeams;
     beta: SelectedTeams;
     gamma: SelectedTeams;
+}
+
+export interface ILreTeam {
+    id: string;
+    name: string;
+    section: LegendaryEventSection;
+    restrictionsIds: string[];
+    charactersIds: string[];
 }
 
 export interface ILegendaryEventSelectedRequirements {
@@ -405,29 +416,44 @@ export interface ILegendaryEventData {
     selectedTeams: ITableRow<string>[];
 }
 
-export interface IViewPreferences {
+export interface IViewOption<T = IViewPreferences> {
+    key: keyof T;
+    value: boolean;
+    label: string;
+    disabled: boolean;
+    tooltip?: string;
+}
+
+export interface IViewPreferences extends ILreViewSettings, IWyoViewSettings {
     theme: 'light' | 'dark';
-    showAlpha: boolean;
-    showBeta: boolean;
-    showGamma: boolean;
-    lightWeight: boolean;
-    hideSelectedTeams: boolean;
-    autoTeams: boolean;
-    onlyUnlocked: boolean;
+    // autoTeams: boolean;
+    // wyoFilter: CharactersFilterBy;
+    // wyoOrder: CharactersOrderBy;
     craftableItemsInInventory: boolean;
-    hideCompleted: boolean;
-    hideNames: boolean;
-    wyoFilter: CharactersFilterBy;
-    wyoOrder: CharactersOrderBy;
+    inventoryShowAlphabet: boolean;
+    inventoryShowPlusMinus: boolean;
+    goalsTableView: boolean;
+}
+
+export interface IWyoViewSettings {
     showBadges: boolean;
     showAbilitiesLevel: boolean;
     showBsValue: boolean;
     showPower: boolean;
     showCharacterLevel: boolean;
     showCharacterRarity: boolean;
-    inventoryShowAlphabet: boolean;
-    inventoryShowPlusMinus: boolean;
-    goalsTableView: boolean;
+}
+
+export interface ILreViewSettings {
+    useV1Lre: boolean;
+    showAlpha: boolean;
+    showBeta: boolean;
+    showGamma: boolean;
+    lightWeight: boolean;
+    // hideSelectedTeams: boolean;
+    onlyUnlocked: boolean;
+    hideCompleted: boolean;
+    hideNames: boolean;
 }
 
 export interface IAutoTeamsPreferences {

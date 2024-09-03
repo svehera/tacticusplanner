@@ -28,7 +28,6 @@ import { CharacterTitle } from '../../shared-components/character-title';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import { isMobile } from 'react-device-detect';
 import InfoIcon from '@mui/icons-material/Info';
-import { FlexBox } from 'src/v2/components/flex-box';
 
 export const LegendaryEventTrack = ({
     track,
@@ -89,13 +88,8 @@ export const LegendaryEventTrack = ({
     );
 
     const teams = useMemo(
-        () =>
-            track.suggestTeams(
-                viewPreferences.autoTeams ? autoTeamsPreferences : selectedTeamOrder,
-                viewPreferences.onlyUnlocked,
-                restrictions
-            ),
-        [autoTeamsPreferences, restrictions, viewPreferences.autoTeams, viewPreferences.onlyUnlocked, selectedTeamOrder]
+        () => track.suggestTeams(autoTeamsPreferences, viewPreferences.onlyUnlocked, restrictions),
+        [autoTeamsPreferences, restrictions, viewPreferences.onlyUnlocked, selectedTeamOrder]
     );
 
     const rows: Array<ITableRow> = useMemo(() => getRows(teams), [teams]);
@@ -128,7 +122,7 @@ export const LegendaryEventTrack = ({
         const teamName = cellClicked.column.getColId();
         const value = cellClicked.value;
         const shiftKey = (cellClicked.event as MouseEvent).shiftKey;
-        if (shiftKey && viewPreferences.autoTeams) {
+        if (shiftKey) {
             const team = teams[teamName].slice(0, 5).map(x => x?.name ?? '');
             selectChars(teamName, ...team);
             return;
@@ -152,12 +146,11 @@ export const LegendaryEventTrack = ({
             field: u.name,
             headerName: `(${u.points}) ${u.name}`,
             headerTooltip: `(${u.points}) ${u.name}`,
-            headerClass: suffix,
             resizable: true,
             valueFormatter: !lightweight
                 ? undefined
                 : (params: ValueFormatterParams) =>
-                      typeof params.value === 'string' ? params.value : params.value?.name,
+                      typeof params.value === 'string' ? params.value : params.value?.shortName,
             cellRenderer: lightweight
                 ? undefined
                 : (props: ICellRendererParams<ICharacter2>) => {
@@ -184,6 +177,7 @@ export const LegendaryEventTrack = ({
             headerComponentParams: {
                 onCheckboxChange: (selected: boolean) => handleChange(selected, u.name),
                 checked: selectedRequirements.includes(u.name),
+                restriction: u,
             },
         }));
     }
@@ -203,18 +197,20 @@ export const LegendaryEventTrack = ({
     }
 
     return (
-        <div style={{ width: '100%', display: show ? 'block' : 'none', overflow: 'auto' }}>
-            <span style={{ fontWeight: 700, fontSize: 18 }}>{track.name + ' - ' + track.killPoints}</span>
-            <FlexBox gap={5}>
-                <span style={{ fontStyle: 'italic', fontSize: 18 }}> vs {track.enemies.label}</span>
-                <a href={track.enemies.link} target={'_blank'} rel="noreferrer">
-                    <InfoIcon color={'primary'} />
-                </a>
-            </FlexBox>
+        <div style={{ width: '100%', height: '100%', display: show ? 'block' : 'none', overflow: 'auto' }}>
+            <div className="flex-box gap10">
+                <span style={{ fontWeight: 700, fontSize: '1rem' }}>{track.name + ' - ' + track.killPoints}</span>
+                <div className="flex-box gap5">
+                    <span style={{ fontStyle: 'italic', fontSize: '1rem' }}> vs {track.enemies.label}</span>
+                    <a href={track.enemies.link} target={'_blank'} rel="noreferrer">
+                        <InfoIcon color={'primary'} />
+                    </a>
+                </div>
+            </div>
             <div
                 className="ag-theme-material auto-teams"
                 style={{
-                    height: isMobile ? '350px' : `calc((100vh - 250px) / ${viewPreferences.hideSelectedTeams ? 1 : 2})`,
+                    height: isMobile ? '350px' : 'calc((100vh - 100px) / 2)',
                     width: '100%',
                     minWidth: isMobile ? '750px' : '',
                     border: '2px solid black',
@@ -224,9 +220,9 @@ export const LegendaryEventTrack = ({
                     tooltipShowDelay={100}
                     components={components}
                     rowData={rows}
-                    headerHeight={80}
+                    headerHeight={60}
                     rowHeight={35}
-                    getRowStyle={viewPreferences.autoTeams ? getRowStyle : undefined}
+                    getRowStyle={getRowStyle}
                     columnDefs={columnsDefs}
                     onGridReady={fitGridOnWindowResize(gridRef)}
                     onCellClicked={handleCellCLick}></AgGridReact>

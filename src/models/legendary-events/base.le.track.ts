@@ -29,7 +29,13 @@ export class LETrack implements ILegendaryEventTrack {
         this.name = staticData.name;
         this.killPoints = staticData.killPoints;
         this.battlesPoints = staticData.battlesPoints;
-        this.unitsRestrictions = orderBy(unitsRestrictions, 'points');
+        this.unitsRestrictions = orderBy(
+            unitsRestrictions.map((r, index) => ({
+                ...r,
+                id: `${LegendaryEventEnum[eventId].toLowerCase()}_${section}_${index}`,
+            })),
+            'points'
+        );
         this.enemies = staticData.enemies;
     }
 

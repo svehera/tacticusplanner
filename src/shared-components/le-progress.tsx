@@ -398,69 +398,70 @@ export const LeProgress = ({
 
     return (
         <div>
-            <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto">
-                <Tab value={0} label="Overview" />
-                <Tab value={1} label="Alpha" />
-                <Tab value={2} label="Beta" />
-                <Tab value={3} label="Gamma" />
-            </Tabs>
-            <TabPanel value={value} index={0}>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 15, margin: 10 }}>
-                    <div style={{ display: 'flex', gap: 5 }}>
-                        Deed Points for {goal}:
-                        <span style={{ fontWeight: 700 }}>
-                            {' '}
-                            {currentPoints} / {pointsForUnlock}
-                        </span>
-                        <Tooltip title={totalPoints + ' in total. Battles per track: ' + averageBattles}>
-                            <InfoIcon />
-                        </Tooltip>
-                    </div>
-
-                    <div style={{ display: 'flex', gap: 5 }}>
-                        Currency for {goal}:
-                        <span style={{ fontWeight: 700 }}>
-                            {' '}
-                            {currentCurrency} / {currencyForUnlock}
-                        </span>
-                        <Tooltip title={totalCurrency + ' in total'}>
-                            <InfoIcon />
-                        </Tooltip>
-                    </div>
-
-                    <div style={{ display: 'flex', gap: 5 }}>
-                        Chests for {goal}:
-                        <span style={{ fontWeight: 700 }}>
-                            {' '}
-                            {currentChests} / {chestsForNextGoal}
-                        </span>
-                        <Tooltip title={totalChests + ' in total'}>
-                            <InfoIcon />
-                        </Tooltip>
-                    </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 15, margin: 10 }}>
+                <div style={{ display: 'flex', gap: 5 }}>
+                    Deed Points to {goal}:
+                    <span style={{ fontWeight: 700 }}>
+                        {' '}
+                        {currentPoints} / {pointsForUnlock}
+                    </span>
+                    <Tooltip title={totalPoints + ' in total. Battles per track: ' + averageBattles}>
+                        <InfoIcon />
+                    </Tooltip>
                 </div>
-                <LeProgressOverview
-                    legendaryEvent={legendaryEvent}
-                    progressChange={handleProgressChange}
-                    notesChange={handleNotesChange}
-                    progress={{
-                        alpha: alphaProgress,
-                        beta: betaProgress,
-                        gamma: gammaProgress,
-                        notes: personalProgress.notes,
-                        overview: personalProgress.overview ?? defaultOverview,
-                    }}
-                />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <LeTrackProgress trackProgress={alphaProgress} onStateUpdate={handleBattlesChange('alpha')} />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                <LeTrackProgress trackProgress={betaProgress} onStateUpdate={handleBattlesChange('beta')} />
-            </TabPanel>
-            <TabPanel value={value} index={3}>
-                <LeTrackProgress trackProgress={gammaProgress} onStateUpdate={handleBattlesChange('gamma')} />
-            </TabPanel>
+
+                <div style={{ display: 'flex', gap: 5 }}>
+                    Currency to {goal}:
+                    <span style={{ fontWeight: 700 }}>
+                        {' '}
+                        {currentCurrency} / {currencyForUnlock}
+                    </span>
+                    <Tooltip title={totalCurrency + ' in total'}>
+                        <InfoIcon />
+                    </Tooltip>
+                </div>
+
+                <div style={{ display: 'flex', gap: 5 }}>
+                    Chests to {goal}:
+                    <span style={{ fontWeight: 700 }}>
+                        {' '}
+                        {currentChests} / {chestsForNextGoal}
+                    </span>
+                    <Tooltip title={totalChests + ' in total'}>
+                        <InfoIcon />
+                    </Tooltip>
+                </div>
+            </div>
+            <LeProgressOverview
+                legendaryEvent={legendaryEvent}
+                progressChange={handleProgressChange}
+                notesChange={handleNotesChange}
+                progress={{
+                    alpha: alphaProgress,
+                    beta: betaProgress,
+                    gamma: gammaProgress,
+                    notes: personalProgress.notes,
+                    overview: personalProgress.overview ?? defaultOverview,
+                }}
+            />
+            {/*<Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto">*/}
+            {/*    <Tab value={0} label="Overview" />*/}
+            {/*    <Tab value={1} label="Alpha" />*/}
+            {/*    <Tab value={2} label="Beta" />*/}
+            {/*    <Tab value={3} label="Gamma" />*/}
+            {/*</Tabs>*/}
+            {/*<TabPanel value={value} index={0}>*/}
+
+            {/*</TabPanel>*/}
+            {/*<TabPanel value={value} index={1}>*/}
+            {/*    <LeTrackProgress trackProgress={alphaProgress} onStateUpdate={handleBattlesChange('alpha')}/>*/}
+            {/*</TabPanel>*/}
+            {/*<TabPanel value={value} index={2}>*/}
+            {/*    <LeTrackProgress trackProgress={betaProgress} onStateUpdate={handleBattlesChange('beta')}/>*/}
+            {/*</TabPanel>*/}
+            {/*<TabPanel value={value} index={3}>*/}
+            {/*    <LeTrackProgress trackProgress={gammaProgress} onStateUpdate={handleBattlesChange('gamma')}/>*/}
+            {/*</TabPanel>*/}
         </div>
     );
 };

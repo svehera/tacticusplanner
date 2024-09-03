@@ -1,7 +1,7 @@
 ﻿import React, { useContext, useMemo } from 'react';
 import { enqueueSnackbar } from 'notistack';
 
-import { ICharacter2, LegendaryEventSection, SelectedTeams } from '../../models/interfaces';
+import { ICharacter2, ILegendaryEvent, LegendaryEventSection, SelectedTeams } from '../../models/interfaces';
 import { LegendaryEventTrack } from './legendary-event-track';
 import { SelectedTeamsTable } from './selected-teams-table';
 
@@ -13,14 +13,11 @@ import { orderBy } from 'lodash';
 import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
 import { MyProgressDialog } from './my-progress-dialog';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
-import { LegendaryEventEnum } from '../../models/enums';
-import { getLegendaryEvent } from '../../models/constants';
 import { isMobile } from 'react-device-detect';
 
-export const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
+export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
     const { characters, viewPreferences, selectedTeamOrder, leSelectedTeams, leProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
-    const legendaryEvent = useMemo(() => getLegendaryEvent(id, characters), [id]);
 
     const selectChars =
         (section: LegendaryEventSection) =>
@@ -93,75 +90,6 @@ export const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
     return (
         <div>
             <div
-                style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    marginBottom: 10,
-                }}>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        alignItems: 'center',
-                        gap: 15,
-                        marginBottom: 10,
-                        maxWidth: '50%',
-                    }}>
-                    <div style={{ display: 'flex' }}>
-                        <span>Auto-teams</span>
-                        <Tooltip title={'Click - adds single char, Shift + Click - adds top 5 chars'}>
-                            <Info />
-                        </Tooltip>
-                    </div>
-
-                    <FormControl
-                        sx={{ width: 150 }}
-                        size={'small'}
-                        disabled={viewPreferences.hideSelectedTeams && viewPreferences.autoTeams}>
-                        <InputLabel id="order-by-label">Order By</InputLabel>
-                        <Select
-                            labelId="order-by-label"
-                            id="order-by"
-                            value={selectedTeamOrder.orderBy}
-                            label="Order By"
-                            onChange={event => {
-                                const value = event.target.value as any;
-                                dispatch.selectedTeamOrder({ type: 'UpdateOrder', value });
-                            }}>
-                            <MenuItem value={'name'}>Name</MenuItem>
-                            <MenuItem value={'rarity'}>Rarity</MenuItem>
-                            <MenuItem value={'rank'}>Rank</MenuItem>
-                        </Select>
-                    </FormControl>
-
-                    <FormControl
-                        sx={{ width: 150 }}
-                        size={'small'}
-                        disabled={viewPreferences.hideSelectedTeams && viewPreferences.autoTeams}>
-                        <InputLabel id="direction-label">Direction</InputLabel>
-                        <Select
-                            labelId="direction-label"
-                            id="direction"
-                            value={selectedTeamOrder.direction}
-                            label="Direction"
-                            onChange={event => {
-                                const value = event.target.value as any;
-                                dispatch.selectedTeamOrder({ type: 'UpdateDirection', value });
-                            }}>
-                            <MenuItem value={'asc'}>Ascending</MenuItem>
-                            <MenuItem value={'desc'}>Descending</MenuItem>
-                        </Select>
-                    </FormControl>
-                </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 10, maxWidth: '50%' }}>
-                    <SetGoalDialog />
-                    <MyProgressDialog legendaryEvent={legendaryEvent} />
-                    <DataTablesDialog legendaryEvent={legendaryEvent} />
-                </div>
-            </div>
-            <div
                 style={{ display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: 15, marginBottom: 10 }}
                 key={legendaryEvent.id}>
                 <LegendaryEventTrack
@@ -183,7 +111,7 @@ export const LegendaryEvent = ({ id }: { id: LegendaryEventEnum }) => {
                     completedRequirements={viewPreferences.hideCompleted ? gammaCompletedRequirements : []}
                 />
             </div>
-            <div style={{ display: viewPreferences.hideSelectedTeams ? 'none' : 'block' }}>
+            <div>
                 <div style={{ display: 'flex' }}>
                     <span>Selected teams</span>
                     <Tooltip title={'Click - removes single char, Shift + Click - remove whole team'}>

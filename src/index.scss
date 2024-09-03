@@ -222,3 +222,10 @@ input.item-quantity-input::-webkit-inner-spin-button {
 input.item-quantity-input[type='number'] {
     -moz-appearance: textfield;
 }
+
+/* styles.css */
+.center-header-text .ag-header-cell-label {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}

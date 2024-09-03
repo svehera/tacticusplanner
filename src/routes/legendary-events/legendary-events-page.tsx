@@ -8,13 +8,12 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Help } from '@mui/icons-material';
 import { StoreContext } from 'src/reducers/store.provider';
-import { Outlet } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { useAnchor } from 'src/v2/hooks/useAnchor';
-import { LegendaryEventEnum } from 'src/models/enums';
 import { LegendaryEvent } from 'src/routes/legendary-events/legendary-event';
+import { ILegendaryEvent } from 'src/models/interfaces';
 
-export const LegendaryEventPage: React.FC<{ legendaryEvent: LegendaryEventEnum }> = ({ legendaryEvent }) => {
+export const LegendaryEventPage: React.FC<{ legendaryEvent: ILegendaryEvent }> = ({ legendaryEvent }) => {
     const { autoTeamsPreferences, viewPreferences } = useContext(StoreContext);
 
     const { anchorEl: anchorEl, handleClick: handleClick, handleClose: handleClose, open: open } = useAnchor();
@@ -53,7 +52,7 @@ export const LegendaryEventPage: React.FC<{ legendaryEvent: LegendaryEventEnum }
                     gap: 10,
                     flexDirection: isMobile ? 'column' : 'row',
                 }}>
-                <ViewSettings preset={'lre'} />
+                {/*<ViewSettings preset={'lre'} />*/}
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Button disabled={!viewPreferences.autoTeams} variant="outlined" onClick={handleClick2}>
                         Auto-Teams <SettingsIcon />
@@ -94,7 +93,7 @@ export const LegendaryEventPage: React.FC<{ legendaryEvent: LegendaryEventEnum }
                 </div>
             </div>
 
-            <LegendaryEvent id={legendaryEvent} />
+            <LegendaryEvent legendaryEvent={legendaryEvent} />
         </Box>
     );
 };

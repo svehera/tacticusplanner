@@ -1,20 +1,12 @@
 ﻿import React, { useContext } from 'react';
 import { Divider, FormControlLabel, FormGroup, Popover, Switch, Tooltip } from '@mui/material';
-import { IViewPreferences } from '../../models/interfaces';
+import { IViewPreferences, IViewOption } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import Button from '@mui/material/Button';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { Conditional } from 'src/v2/components/conditional';
 
-interface IViewOption {
-    key: keyof IViewPreferences;
-    value: boolean;
-    label: string;
-    disabled: boolean;
-    tooltip?: string;
-}
-
-type OptionsPreset = 'lre' | 'wyo' | 'inventory';
+type OptionsPreset = 'wyo' | 'inventory';
 
 const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
     const dispatch = useContext(DispatchContext);
@@ -91,46 +83,6 @@ const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
         },
     ];
 
-    const lreOptions: IViewOption[] = [
-        {
-            label: 'Hide selected teams',
-            key: 'hideSelectedTeams',
-            value: viewPreferences.hideSelectedTeams,
-            disabled: false,
-        },
-        {
-            label: 'Lightweight view',
-            key: 'lightWeight',
-            value: viewPreferences.lightWeight,
-            disabled: false,
-        },
-        {
-            label: 'Auto-suggested teams',
-            key: 'autoTeams',
-            value: viewPreferences.autoTeams,
-            disabled: false,
-        },
-        {
-            label: 'Only unlocked characters',
-            key: 'onlyUnlocked',
-            value: viewPreferences.onlyUnlocked,
-            disabled: false,
-        },
-        {
-            label: 'Hide completed tracks',
-            tooltip: 'Hide tracks where you have completed battle 12',
-            key: 'hideCompleted',
-            value: viewPreferences.hideCompleted,
-            disabled: false,
-        },
-        {
-            label: 'Hide characters names',
-            key: 'hideNames',
-            value: viewPreferences.hideNames,
-            disabled: viewPreferences.lightWeight,
-        },
-    ];
-
     const wyoOptions: IViewOption[] = [
         {
             label: 'Show badges',
@@ -193,12 +145,6 @@ const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
 
     return (
         <FormGroup style={{ display: 'flex', flexDirection: 'row', height: preset === 'wyo' ? '55px' : 'unset' }}>
-            <Conditional condition={preset === 'lre'}>
-                {lreSectionOptions.map(renderOption)}
-                <Divider style={{ height: 42, margin: '0 10px' }} orientation={'vertical'} />
-                {renderPopover(lreOptions.map(renderOption))}
-            </Conditional>
-
             <Conditional condition={preset === 'wyo'}>{renderPopover(wyoOptions.map(renderOption))}</Conditional>
 
             <Conditional condition={preset === 'inventory'}>{inventoryOptions.map(renderOption)}</Conditional>

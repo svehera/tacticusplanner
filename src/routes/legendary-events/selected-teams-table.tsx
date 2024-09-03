@@ -41,19 +41,8 @@ export const SelectedTeamsTable = (props: {
         return result;
     }, [teams]);
 
-    const columnsDefs = useMemo<Array<ColGroupDef>>(
-        () => [
-            {
-                headerName: track.name,
-                headerClass: track.section,
-                children: getSectionColumns(
-                    track.unitsRestrictions,
-                    viewPreferences.lightWeight,
-                    viewPreferences.hideNames
-                ),
-                openByDefault: true,
-            },
-        ],
+    const columnsDefs = useMemo<Array<ColDef>>(
+        () => getSectionColumns(track.unitsRestrictions, viewPreferences.lightWeight, viewPreferences.hideNames),
         [track.eventId, viewPreferences.lightWeight, viewPreferences.hideNames, props.completedRequirements]
     );
 
@@ -75,13 +64,7 @@ export const SelectedTeamsTable = (props: {
 
     useEffect(() => {
         gridRef.current?.api?.sizeColumnsToFit();
-    }, [
-        viewPreferences.hideSelectedTeams,
-        viewPreferences.showAlpha,
-        viewPreferences.showBeta,
-        viewPreferences.showGamma,
-        viewPreferences.hideCompleted,
-    ]);
+    }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, viewPreferences.hideCompleted]);
 
     function getSectionColumns(
         unitsRestrictions: ILegendaryEventTrackRequirement[],
@@ -92,12 +75,13 @@ export const SelectedTeamsTable = (props: {
             field: u.name,
             headerName: u.name,
             headerTooltip: u.name,
+            headerClass: 'center-header-text',
             resizable: true,
             hide: props.completedRequirements.includes(u.name),
             valueFormatter: !lightweight
                 ? undefined
                 : (params: ValueFormatterParams) =>
-                      typeof params.value === 'string' ? params.value : params.value?.name,
+                      typeof params.value === 'string' ? params.value : params.value?.shortName,
             cellRenderer: lightweight
                 ? undefined
                 : (props: ICellRendererParams<ICharacter2>) => {
@@ -126,7 +110,7 @@ export const SelectedTeamsTable = (props: {
             className="ag-theme-material auto-teams"
             style={{
                 display: props.show ? 'block' : 'none',
-                height: '250px',
+                height: '240px',
                 width: '100%',
                 border: '2px solid black',
             }}>

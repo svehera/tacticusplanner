@@ -238,6 +238,7 @@ export const defaultData: IPersonalData2 = {
         showGamma: true,
         lightWeight: false,
         hideSelectedTeams: false,
+        useV1Lre: false,
         autoTeams: true,
         onlyUnlocked: false,
         hideCompleted: false,

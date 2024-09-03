@@ -72,7 +72,7 @@ export const CharacterTitle = ({
                         />
                     </span>
                 </Tooltip>
-                {!hideName && <span>{character.name}</span>}
+                {!hideName && <span>{character.shortName}</span>}
             </div>
         );
 
