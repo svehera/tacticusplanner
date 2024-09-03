@@ -27,6 +27,7 @@ export interface IGuide {
     createdAt: string;
     guide: string;
     intro: string;
+    youtubeLink: string;
     rejectReason: string;
     status: GuidesStatus;
     originalTeamId: number | null;
@@ -50,6 +51,7 @@ export interface ICreateGuide {
     name: string;
     guide: string;
     intro: string;
+    youtubeLink?: string;
     teamSlots: ITeamSlot[];
 }
 

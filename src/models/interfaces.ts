@@ -295,6 +295,7 @@ export interface IUserInfo {
     userId: number;
     role: UserRole;
     pendingTeamsCount: number;
+    rejectedTeamsCount: number;
 }
 
 export interface IDispatchContext {
