@@ -25,7 +25,6 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import { UserRole } from 'src/models/enums';
 import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-dialog';
-import { tab } from '@testing-library/user-event/dist/tab';
 import { isMobile } from 'react-device-detect';
 
 export const UserMenu = () => {
