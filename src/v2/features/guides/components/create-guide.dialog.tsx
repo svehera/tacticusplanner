@@ -1,17 +1,10 @@
-﻿import React, { useEffect, useMemo, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import { DialogActions, DialogContent, DialogTitle, Step, StepLabel, Stepper, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 import { GameMode } from 'src/v2/features/teams/teams.enums';
 import { IUnit } from 'src/v2/features/characters/characters.models';
-import {
-    allModes,
-    gameModesForGuides,
-    guildRaidBosses,
-    guildRaidPrimes,
-    gwSubModes,
-    taSubModes,
-} from 'src/v2/features/teams/teams.constants';
+import { gameModesForGuides, gwSubModes, taSubModes } from 'src/v2/features/teams/teams.constants';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
 import { isMobile } from 'react-device-detect';
 import { ICreateGuide, ITeamSlot } from 'src/v2/features/guides/guides.models';
@@ -24,7 +17,6 @@ import Typography from '@mui/material/Typography';
 import { useTranslation } from 'react-i18next';
 import { LreModes } from 'src/v2/features/guides/components/lre-modes';
 import { GuidePreview } from 'src/v2/features/guides/components/guide-preview';
-import { isMow } from 'src/v2/features/characters/units.functions';
 import { IncursionModes } from 'src/v2/features/guides/components/incursion-modes';
 import { GuildRaidsModes } from 'src/v2/features/guides/components/gr-modes';
 
@@ -41,7 +33,8 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
     const [selectedSubModes, setSelectedSubModes] = useState<string[]>([]);
     const [guide, setGuide] = useState<string>('');
     const [intro, setIntro] = useState<string>('');
-    const [teamName, setTeamName] = useState<string>('Team');
+    const [youtubeLink, setYoutubeLink] = useState<string>('');
+    const [teamName, setTeamName] = useState<string>('');
     const [teamSlots, setTeamSlots] = useState<ITeamSlot[]>([
         {
             slotNumber: 1,
@@ -101,6 +94,7 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                 guide: guide,
                 intro: intro,
                 subModes: selectedSubModes,
+                youtubeLink: youtubeLink,
                 teamSlots: teamSlots,
             });
             // onClose();
@@ -118,7 +112,7 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
         }
 
         if (activeStep === 2) {
-            if (!teamName.length) {
+            if (!teamName.length || !intro.length || !guide.length) {
                 return true;
             }
 
@@ -228,6 +222,7 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
                     <>
                         <TextField
                             fullWidth
+                            required
                             label="Team name"
                             variant="outlined"
                             helperText="Max length 50 characters."
@@ -240,21 +235,36 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
 
                         <TextField
                             fullWidth
+                            required
                             id="outlined-textarea"
                             label="Intro"
                             placeholder="Into"
                             multiline
                             maxRows={5}
                             value={intro}
-                            helperText="Displayed on the guid preview. Up to 200 characters"
+                            helperText="Displayed on the guide preview. Up to 200 characters"
                             onChange={event => setIntro(event.target.value.slice(0, 200))}
                         />
 
                         <br />
                         <br />
 
+                        <TextField
+                            fullWidth
+                            id="outlined-textarea"
+                            label="Youtube Link"
+                            placeholder="Youtube Link"
+                            maxRows={5}
+                            value={youtubeLink}
+                            helperText="Link to the Youtube video featuring team from the guide"
+                            onChange={event => setYoutubeLink(event.target.value.slice(0, 100))}
+                        />
+
+                        <br />
+                        <br />
+
                         <Typography variant="subtitle1" style={{ marginLeft: 10 }}>
-                            Guide (supports rich text)
+                            Guide* (supports rich text)
                         </Typography>
                         <RichTextEditor
                             htmlValue={guide}

@@ -470,7 +470,7 @@ export const Guides: React.FC = () => {
                     <AddIcon />
                     Create Guide
                 </Fab>
-                <div className="flex-box">
+                <div className="flex-box gap10">
                     {filtersCount > 0 ? (
                         <>
                             <Badge badgeContent={filtersCount} color="warning">
@@ -483,9 +483,9 @@ export const Guides: React.FC = () => {
                             </Button>
                         </>
                     ) : (
-                        <IconButton onClick={() => setShowFilters(value => !value)}>
-                            <FilterAltOutlinedIcon />
-                        </IconButton>
+                        <Button variant="outlined" onClick={() => setShowFilters(value => !value)}>
+                            Filter <FilterAltOutlinedIcon />
+                        </Button>
                     )}
                     <span>
                         ({teams.length} of {total})
