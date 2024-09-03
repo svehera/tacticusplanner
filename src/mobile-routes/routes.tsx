@@ -3,13 +3,11 @@
 import { redirect, RouteObject } from 'react-router-dom';
 
 import MobileApp from '../mobile-app';
-import { LegendaryEventEnum } from '../models/enums';
 import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
 import { dirtyDozenLazyRoute } from 'src/v2/pages/dirty-dozen/dirty-dozen.route';
 import { insightsLazyRoute } from 'src/v2/pages/insights/insights.route';
 import { wyoLazyRoute } from 'src/v2/pages/who-you-own/who-you-own.route';
 import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.route';
-import LegendaryEvent from 'src/routes/legendary-events/legendary-event';
 import { guildWarOffenseLazyRoute } from 'src/v2/pages/guild-war-offense/guild-war-offense.route';
 import { guildWarDefenseLazyRoute } from 'src/v2/pages/guild-war-defense/guild-war-defense.route';
 import { guildWarZonesLazyRoute } from 'src/v2/pages/guild-war-layout/guild-war-zones.route';
@@ -18,6 +16,7 @@ import { guildInsightsLazyRoute } from 'src/v2/pages/guild-insights/guild-insigh
 import { teamsMobileLazyRoute } from 'src/v2/pages/teams/teams.route';
 import { mowLookupMobileLazyRoute } from 'src/v2/pages/mow-lookup/mow-lookup.route';
 import { guidesLazyRoute } from 'src/v2/pages/guides/guides.route';
+import { lreLazyRoute } from 'src/v2/pages/lre/lre-route';
 
 const inputRoutes: RouteObject[] = [
     {
@@ -54,20 +53,6 @@ const planRoutes: RouteObject[] = [
         },
     },
     {
-        path: 'plan/lre',
-        async lazy() {
-            const { PlanLeRoutes } = await import('./events/leRoutes');
-            return { Component: PlanLeRoutes };
-        },
-    },
-    {
-        path: 'plan/guildWar',
-        async lazy() {
-            const { PlanGuildWarRoutes } = await import('./events/guildWarRoutes');
-            return { Component: PlanGuildWarRoutes };
-        },
-    },
-    {
         path: 'plan/goals',
         async lazy() {
             const { Goals } = await import('../routes/goals/goals');
@@ -92,39 +77,7 @@ const planRoutes: RouteObject[] = [
     guildWarDefenseLazyRoute,
     guildWarZonesLazyRoute,
     teamsMobileLazyRoute,
-    {
-        path: 'plan/le',
-        async lazy() {
-            const { LegendaryEventPage } = await import('../routes/legendary-events/legendary-events-page');
-            return { Component: LegendaryEventPage };
-        },
-        children: [
-            {
-                path: 'shadowsun',
-                element: <LegendaryEvent id={LegendaryEventEnum.Shadowsun} />,
-            },
-            {
-                path: 'aunshi',
-                element: <LegendaryEvent id={LegendaryEventEnum.AunShi} />,
-            },
-            {
-                path: 'ragnar',
-                element: <LegendaryEvent id={LegendaryEventEnum.Ragnar} />,
-            },
-            {
-                path: 'vitruvius',
-                element: <LegendaryEvent id={LegendaryEventEnum.Vitruvius} />,
-            },
-            {
-                path: 'kharn',
-                element: <LegendaryEvent id={LegendaryEventEnum.Kharn} />,
-            },
-            {
-                path: 'mephiston',
-                element: <LegendaryEvent id={LegendaryEventEnum.Mephiston} />,
-            },
-        ],
-    },
+    lreLazyRoute,
 ];
 
 const learnRoutes: RouteObject[] = [

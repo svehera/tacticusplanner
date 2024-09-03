@@ -2,13 +2,8 @@
 import { AgGridReact } from 'ag-grid-react';
 import { CellClassParams, ColDef, ColGroupDef, ICellRendererParams, ITooltipParams } from 'ag-grid-community';
 
-import {
-    ICharacter2,
-    ILegendaryEventSelectedTeams,
-    ILegendaryEventTrack,
-    SelectedTeams,
-} from '../../models/interfaces';
-import { LegendaryEventEnum, Rank } from '../../models/enums';
+import { ICharacter2, ILegendaryEventSelectedTeams, ILegendaryEventTrack, SelectedTeams } from 'src/models/interfaces';
+import { LegendaryEventEnum, Rank } from 'src/models/enums';
 import {
     Checkbox,
     Divider,
@@ -25,21 +20,20 @@ import {
 } from '@mui/material';
 import { groupBy, map, sum, uniq } from 'lodash';
 import { CharactersSelection, ITableRow } from './legendary-events.interfaces';
-import { StoreContext } from '../../reducers/store.provider';
-import { CharacterTitle } from '../../shared-components/character-title';
-import { getLegendaryEvent } from '../../models/constants';
+import { StoreContext } from 'src/reducers/store.provider';
+import { CharacterTitle } from 'src/shared-components/character-title';
+import { getLegendaryEvent } from 'src/models/constants';
 import InputLabel from '@mui/material/InputLabel';
 import ListItemText from '@mui/material/ListItemText';
-import { CharacterImage } from '../../shared-components/character-image';
+import { CharacterImage } from 'src/shared-components/character-image';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { isMobile } from 'react-device-detect';
+import { StaticDataService } from 'src/services';
 
 export const MasterTable = () => {
-    const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>([
-        LegendaryEventEnum.Mephiston,
-        LegendaryEventEnum.Kharn,
-        LegendaryEventEnum.Vitruvius,
-    ]);
+    const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>(
+        StaticDataService.activeLres.map(x => x.lre!.id)
+    );
 
     const { leSelectedTeams, viewPreferences, characters } = useContext(StoreContext);
     const getPersonalLegendaryEvent = (eventId: LegendaryEventEnum): ILegendaryEventSelectedTeams => {
@@ -368,52 +362,27 @@ export const MasterTable = () => {
                                 })
                                 .join(', ')
                         }>
-                        <MenuItem value={LegendaryEventEnum.Mephiston}>
-                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Mephiston) > -1} />
-                            <ListItemIcon>
-                                <CharacterImage icon={'unset.png'} imageSize={30} />
-                            </ListItemIcon>
-                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Mephiston]} />
-                        </MenuItem>
-                        <MenuItem value={LegendaryEventEnum.Kharn}>
-                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Kharn) > -1} />
-                            <ListItemIcon>
-                                <CharacterImage icon={'kharn.png'} imageSize={30} />
-                            </ListItemIcon>
-                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Kharn]} />
-                        </MenuItem>
-
-                        <MenuItem value={LegendaryEventEnum.Vitruvius}>
-                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Vitruvius) > -1} />
-                            <ListItemIcon>
-                                <CharacterImage icon={'vitruvius.png'} imageSize={30} />
-                            </ListItemIcon>
-                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Vitruvius]} />
-                        </MenuItem>
+                        {StaticDataService.activeLres.map(x => (
+                            <MenuItem key={x.lre!.id} value={x.lre!.id}>
+                                <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
+                                <ListItemIcon>
+                                    <CharacterImage icon={x.icon} imageSize={30} />
+                                </ListItemIcon>
+                                <ListItemText primary={x.name} />
+                            </MenuItem>
+                        ))}
 
                         <Divider />
 
-                        <MenuItem value={LegendaryEventEnum.Ragnar}>
-                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Ragnar) > -1} />
-                            <ListItemIcon>
-                                <CharacterImage icon={'Ragnar.png'} imageSize={30} />
-                            </ListItemIcon>
-                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Ragnar]} />
-                        </MenuItem>
-                        <MenuItem value={LegendaryEventEnum.Shadowsun}>
-                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.Shadowsun) > -1} />
-                            <ListItemIcon>
-                                <CharacterImage icon={'ShadowSun.png'} imageSize={30} />
-                            </ListItemIcon>
-                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.Shadowsun]} />
-                        </MenuItem>
-                        <MenuItem value={LegendaryEventEnum.AunShi}>
-                            <Checkbox checked={activeLegendaryEvents.indexOf(LegendaryEventEnum.AunShi) > -1} />
-                            <ListItemIcon>
-                                <CharacterImage icon={'Aun-shi.png'} imageSize={30} />
-                            </ListItemIcon>
-                            <ListItemText primary={LegendaryEventEnum[LegendaryEventEnum.AunShi]} />
-                        </MenuItem>
+                        {StaticDataService.inactiveLres.map(x => (
+                            <MenuItem key={x.lre!.id} value={x.lre!.id}>
+                                <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
+                                <ListItemIcon>
+                                    <CharacterImage icon={x.icon} imageSize={30} />
+                                </ListItemIcon>
+                                <ListItemText primary={x.name} />
+                            </MenuItem>
+                        ))}
                     </Select>
                 </FormControl>
             </div>

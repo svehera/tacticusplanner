@@ -9,10 +9,12 @@ import { menuItemById } from 'src/models/menu-items';
 import Typography from '@mui/material/Typography';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { Conditional } from 'src/v2/components/conditional';
+import { useTitle } from 'src/contexts/title.context';
 
 const MobileApp = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const { headerTitle } = useTitle();
 
     const value = useMemo(() => {
         if (location.pathname.includes('input')) {
@@ -31,6 +33,8 @@ const MobileApp = () => {
         const menuItemId = routeSections[routeSections.length - 1];
         if (Object.hasOwn(menuItemById, menuItemId) && value !== 0) {
             return menuItemById[menuItemId as keyof typeof menuItemById].title;
+        } else if (menuItemId === 'lre') {
+            return headerTitle;
         } else {
             return '';
         }

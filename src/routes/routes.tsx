@@ -3,8 +3,6 @@
 import { RouteObject } from 'react-router-dom';
 
 import DesktopApp from '../desktop-app';
-import LegendaryEvent from './legendary-events/legendary-event';
-import { LegendaryEventEnum } from '../models/enums';
 import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
 import { dirtyDozenLazyRoute } from 'src/v2/pages/dirty-dozen/dirty-dozen.route';
 import { insightsLazyRoute } from 'src/v2/pages/insights/insights.route';
@@ -18,6 +16,7 @@ import { guildInsightsLazyRoute } from 'src/v2/pages/guild-insights/guild-insigh
 import { teamsDesktopLazyRoute } from 'src/v2/pages/teams/teams.route';
 import { mowLookupDesktopLazyRoute } from 'src/v2/pages/mow-lookup/mow-lookup.route';
 import { guidesLazyRoute } from 'src/v2/pages/guides/guides.route';
+import { lreLazyRoute } from 'src/v2/pages/lre/lre-route';
 
 const inputRoutes: RouteObject[] = [
     wyoLazyRoute,
@@ -57,39 +56,7 @@ const planRoutes: RouteObject[] = [
     guildWarDefenseLazyRoute,
     guildWarZonesLazyRoute,
     teamsDesktopLazyRoute,
-    {
-        path: 'plan/le',
-        async lazy() {
-            const { LegendaryEventPage } = await import('./legendary-events/legendary-events-page');
-            return { Component: LegendaryEventPage };
-        },
-        children: [
-            {
-                path: 'shadowsun',
-                element: <LegendaryEvent id={LegendaryEventEnum.Shadowsun} />,
-            },
-            {
-                path: 'aunshi',
-                element: <LegendaryEvent id={LegendaryEventEnum.AunShi} />,
-            },
-            {
-                path: 'ragnar',
-                element: <LegendaryEvent id={LegendaryEventEnum.Ragnar} />,
-            },
-            {
-                path: 'vitruvius',
-                element: <LegendaryEvent id={LegendaryEventEnum.Vitruvius} />,
-            },
-            {
-                path: 'kharn',
-                element: <LegendaryEvent id={LegendaryEventEnum.Kharn} />,
-            },
-            {
-                path: 'mephiston',
-                element: <LegendaryEvent id={LegendaryEventEnum.Mephiston} />,
-            },
-        ],
-    },
+    lreLazyRoute,
     {
         path: 'plan/leMasterTable',
         async lazy() {

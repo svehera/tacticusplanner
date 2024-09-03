@@ -1,22 +1,23 @@
 ﻿import React, { useContext } from 'react';
 import Zoom from 'react-medium-image-zoom';
-import { Thanks } from '../../../shared-components/thanks';
-import { StoreContext } from '../../../reducers/store.provider';
+import { Thanks } from 'src/shared-components/thanks';
+import { StoreContext } from 'src/reducers/store.provider';
 import { Card, CardContent, CardHeader } from '@mui/material';
-import { menuItemById } from '../../../models/menu-items';
+import { menuItemById } from 'src/models/menu-items';
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { sum } from 'lodash';
-import { MiscIcon } from '../../../shared-components/misc-icon';
+import { MiscIcon } from 'src/shared-components/misc-icon';
 
-import lre from 'src/assets/legendary-events/Mephiston.json';
-import { PersonalGoalType } from 'src/models/enums';
+import { LegendaryEventEnum, PersonalGoalType } from 'src/models/enums';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { StaticDataService } from 'src/services';
+import { CharacterImage } from 'src/shared-components/character-image';
 
 export const Home = () => {
     const navigate = useNavigate();
     const { goals, dailyRaids } = useContext(StoreContext);
-    const nextLeMenuItem = menuItemById['mephiston'];
+    const nextLeMenuItem = StaticDataService.activeLre;
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
     const eventsCalendarUrl = 'https://tacticucplannerstorage.blob.core.windows.net/files/events-calendar.png';
@@ -25,6 +26,11 @@ export const Home = () => {
     const unlockGoals = goals.filter(x => x.type === PersonalGoalType.Unlock).length;
     const ascendGoals = goals.filter(x => x.type === PersonalGoalType.Ascend).length;
     const upgradeRankGoals = goals.filter(x => x.type === PersonalGoalType.UpgradeRank).length;
+
+    const navigateToNextLre = () => {
+        const route = `/plan/lre?character=${LegendaryEventEnum[nextLeMenuItem.lre!.id]}`;
+        navigate(isMobile ? '/mobile' + route : route);
+    };
 
     function formatMonthAndDay(date: Date): string {
         const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric' };
@@ -45,8 +51,10 @@ export const Home = () => {
         return timeDifference >= 0 ? result : 'Finished';
     }
 
-    const nextLeDateStart = new Date(lre.nextEventDateUtc);
-    const nextLeDateEnd = new Date(new Date(lre.nextEventDateUtc).setDate(nextLeDateStart.getDate() + 7));
+    const nextLeDateStart = new Date(nextLeMenuItem.lre!.nextEventDateUtc!);
+    const nextLeDateEnd = new Date(
+        new Date(nextLeMenuItem.lre!.nextEventDateUtc!).setDate(nextLeDateStart.getDate() + 7)
+    );
     const timeToStart = timeLeftToFutureDate(nextLeDateStart);
     const timeToEnd = timeLeftToFutureDate(nextLeDateEnd);
     const isEventStarted = timeToStart === 'Finished';
@@ -115,7 +123,7 @@ export const Home = () => {
                     <h3 style={{ textAlign: 'center' }}>{isEventStarted ? 'Ongoing ' : 'Upcoming '}Legendary Event</h3>
                     <Card
                         variant="outlined"
-                        onClick={() => navigate(isMobile ? nextLeMenuItem.routeMobile : nextLeMenuItem.routeWeb)}
+                        onClick={navigateToNextLre}
                         sx={{
                             width: 350,
                             minHeight: 200,
@@ -124,7 +132,7 @@ export const Home = () => {
                         <CardHeader
                             title={
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    {nextLeMenuItem.icon} {nextLeMenuItem.label}
+                                    <CharacterImage icon={nextLeMenuItem.icon} /> {nextLeMenuItem.name}
                                 </div>
                             }
                             subheader={formatMonthAndDay(isEventStarted ? nextLeDateEnd : nextLeDateStart)}

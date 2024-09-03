@@ -1,9 +1,5 @@
 ﻿import React from 'react';
 
-import vitruvius from '../assets/legendary-events/Vitruvius.json';
-import kharn from '../assets/legendary-events/Kharn.json';
-import mephiston from '../assets/legendary-events/Mephiston.json';
-
 import ListIcon from '@mui/icons-material/List';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import HomeIcon from '@mui/icons-material/Home';
@@ -17,7 +13,6 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import TableChartIcon from '@mui/icons-material/TableChart';
 
-import { CharacterImage } from '../shared-components/character-image';
 import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
 import { dirtyDozenMenuItem } from 'src/v2/pages/dirty-dozen/dirty-dozen.menu-item';
 import { insightsMenuItem } from 'src/v2/pages/insights/insights.menu-item';
@@ -30,6 +25,7 @@ import { guildInsightsMenuItem } from 'src/v2/pages/guild-insights/guild-insight
 import { teamsMenuItem } from 'src/v2/pages/teams/teams.menu-item';
 import { mowLookupMenuItem } from 'src/v2/pages/mow-lookup/mow-lookup.menu-item';
 import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';
+import { activeLreMenuItems, inactiveLreMenuItems } from 'src/v2/pages/lre/lre.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -53,42 +49,6 @@ export const menuItemById = {
     goals: new MenuItemTP('Goals', <TrackChangesIcon />, '/plan/goals'),
     dailyRaids: new MenuItemTP('Daily Raids', <EventRepeatIcon />, '/plan/dailyRaids'),
     leMasterTable: new MenuItemTP('Master Table', <TableChartIcon />, '/plan/leMasterTable'),
-    shadowsun: new MenuItemTP(
-        'Shadowsun',
-        <CharacterImage icon={'ShadowSun.png'} imageSize={24} />,
-        '/plan/le/shadowsun',
-        'Shadowsun (Finished)'
-    ),
-    ragnar: new MenuItemTP(
-        'Ragnar',
-        <CharacterImage icon={'Ragnar.png'} imageSize={24} />,
-        '/plan/le/ragnar',
-        'Ragnar (Finished)'
-    ),
-    vitruvius: new MenuItemTP(
-        'Vitruvius',
-        <CharacterImage icon={'vitruvius.png'} imageSize={24} />,
-        '/plan/le/vitruvius',
-        `Vitruvius ${vitruvius.eventStage}/3 (${vitruvius.nextEventDate})`
-    ),
-    aunshi: new MenuItemTP(
-        'Aun Shi',
-        <CharacterImage icon={'Aun-shi.png'} imageSize={24} />,
-        '/plan/le/aunshi',
-        'Aun Shi (Finished)'
-    ),
-    kharn: new MenuItemTP(
-        'Kharn',
-        <CharacterImage icon={'kharn.png'} imageSize={24} />,
-        '/plan/le/kharn',
-        `Kharn ${kharn.eventStage}/3 (${kharn.nextEventDate})`
-    ),
-    mephiston: new MenuItemTP(
-        'Mephiston',
-        <CharacterImage icon={'unset.png'} imageSize={24} />,
-        '/plan/le/mephiston',
-        `Mephiston ${mephiston.eventStage}/3 (${mephiston.nextEventDate})`
-    ),
     characters: new MenuItemTP('Characters', <Diversity3Icon />, '/learn/characters'),
     upgrades: new MenuItemTP('Upgrades', <ListIcon />, '/learn/upgrades'),
     rankLookup: new MenuItemTP('Rank Lookup', <MilitaryTechIcon />, '/learn/rankLookup'),
@@ -126,17 +86,8 @@ export const planSubMenuWeb: MenuItemTP[] = [
         menuItemById['offense'],
         menuItemById['zones'],
     ]),
-    new MenuItemTP('LRE', menuItemById['leMasterTable'].icon, '', '', '', [
-        menuItemById['leMasterTable'],
-        menuItemById['mephiston'],
-        menuItemById['kharn'],
-        menuItemById['vitruvius'],
-    ]),
-    new MenuItemTP('LRE Archive', menuItemById['leMasterTable'].icon, '', '', '', [
-        menuItemById['ragnar'],
-        menuItemById['shadowsun'],
-        menuItemById['aunshi'],
-    ]),
+    new MenuItemTP('LRE', <TableChartIcon />, '', '', '', [menuItemById['leMasterTable'], ...activeLreMenuItems]),
+    new MenuItemTP('LRE Archive', <TableChartIcon />, '', '', '', inactiveLreMenuItems),
 ];
 
 export const planSubMenu: MenuItemTP[] = [
@@ -147,10 +98,6 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['offense'],
     menuItemById['zones'],
     menuItemById['leMasterTable'],
-    menuItemById['mephiston'],
-    menuItemById['kharn'],
-    menuItemById['ragnar'],
-    menuItemById['vitruvius'],
 ];
 
 export const learnSubMenu: MenuItemTP[] = [
