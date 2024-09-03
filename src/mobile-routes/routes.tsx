@@ -3,13 +3,11 @@
 import { redirect, RouteObject } from 'react-router-dom';
 
 import MobileApp from '../mobile-app';
-import { LegendaryEventEnum } from '../models/enums';
 import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
 import { dirtyDozenLazyRoute } from 'src/v2/pages/dirty-dozen/dirty-dozen.route';
 import { insightsLazyRoute } from 'src/v2/pages/insights/insights.route';
 import { wyoLazyRoute } from 'src/v2/pages/who-you-own/who-you-own.route';
 import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.route';
-import LegendaryEvent from 'src/routes/legendary-events/legendary-event';
 import { guildWarOffenseLazyRoute } from 'src/v2/pages/guild-war-offense/guild-war-offense.route';
 import { guildWarDefenseLazyRoute } from 'src/v2/pages/guild-war-defense/guild-war-defense.route';
 import { guildWarZonesLazyRoute } from 'src/v2/pages/guild-war-layout/guild-war-zones.route';
