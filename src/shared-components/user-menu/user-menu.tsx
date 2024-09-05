@@ -25,10 +25,12 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import { UserRole } from 'src/models/enums';
 import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-dialog';
+import { isMobile } from 'react-device-detect';
 
 export const UserMenu = () => {
     const store = useContext(StoreContext);
     const { setStore } = useContext(DispatchContext);
+    const { isAuthenticated, logout, username, userInfo } = useAuth();
     const inputRef = useRef<HTMLInputElement>(null);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
@@ -39,6 +41,7 @@ export const UserMenu = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const isDesktopView = !location.pathname.includes('mobile');
+    const hasRejectedGuides = userInfo.rejectedTeamsCount > 0;
 
     const navigateToDesktopView = () => {
         localStorage.setItem('preferredView', 'desktop');
@@ -51,10 +54,24 @@ export const UserMenu = () => {
     };
 
     const navigateToReviewTeams = () => {
-        navigate('/learn/guides?activeTab=3');
-    };
+        let tabId = 2;
 
-    const { isAuthenticated, logout, username, userInfo } = useAuth();
+        if (userInfo.pendingTeamsCount > 0) {
+            tabId = 3;
+        }
+
+        if (hasRejectedGuides) {
+            tabId = 2;
+        }
+
+        let url = `/learn/guides?activeTab=${tabId}`;
+
+        if (isMobile) {
+            url = '/mobile' + url;
+        }
+
+        navigate(url);
+    };
 
     const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -165,7 +182,9 @@ export const UserMenu = () => {
                 <span style={{ fontSize: 16, fontWeight: 700 }}>Hi, {username}</span>
 
                 {/*<Badge variant="dot" color="warning" invisible={!userInfo.pendingTeamsCount}>*/}
-                <Badge color="warning" badgeContent={userInfo.pendingTeamsCount}>
+                <Badge
+                    color={hasRejectedGuides ? 'error' : 'warning'}
+                    badgeContent={hasRejectedGuides ? userInfo.rejectedTeamsCount : userInfo.pendingTeamsCount}>
                     <IconButton
                         onClick={userMenuControls.handleClick}
                         size="small"
@@ -251,31 +270,31 @@ export const UserMenu = () => {
                     </MenuItem>
                 )}
 
-                {[UserRole.moderator, UserRole.admin].includes(userInfo.role) && (
-                    <div>
-                        <Divider />
+                <Divider />
 
-                        {userInfo.role === UserRole.admin && (
-                            <MenuItem onClick={() => setShowAdminTools(true)}>
-                                <ListItemIcon>
-                                    <SupervisorAccountIcon />
-                                </ListItemIcon>
-                                <ListItemText>Admin tools</ListItemText>
-                            </MenuItem>
-                        )}
-
-                        {[UserRole.moderator, UserRole.admin].includes(userInfo.role) && (
-                            <MenuItem onClick={() => navigateToReviewTeams()}>
-                                <ListItemIcon>
-                                    <GroupWorkIcon />
-                                </ListItemIcon>
-                                <Badge badgeContent={userInfo.pendingTeamsCount} color="warning">
-                                    <ListItemText>Review guides</ListItemText>
-                                </Badge>
-                            </MenuItem>
-                        )}
-                    </div>
+                {userInfo.role === UserRole.admin && (
+                    <MenuItem onClick={() => setShowAdminTools(true)}>
+                        <ListItemIcon>
+                            <SupervisorAccountIcon />
+                        </ListItemIcon>
+                        <ListItemText>Admin tools</ListItemText>
+                    </MenuItem>
                 )}
+
+                <MenuItem onClick={() => navigateToReviewTeams()}>
+                    <ListItemIcon>
+                        <GroupWorkIcon />
+                    </ListItemIcon>
+                    {userInfo.rejectedTeamsCount > 0 ? (
+                        <Badge badgeContent={userInfo.rejectedTeamsCount} color="error">
+                            <ListItemText>Review guides</ListItemText>
+                        </Badge>
+                    ) : (
+                        <Badge badgeContent={userInfo.pendingTeamsCount} color="warning">
+                            <ListItemText>Review guides</ListItemText>
+                        </Badge>
+                    )}
+                </MenuItem>
             </Menu>
             <RegisterUserDialog
                 isOpen={showRegisterUser}

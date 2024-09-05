@@ -7,6 +7,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { TokenImage } from 'src/v2/components/images/token-image';
 import { TeamView } from 'src/v2/features/guides/components/team-view';
@@ -52,6 +53,14 @@ export const GuideCard: React.FC<Props> = ({
         if (guide.status !== GuidesStatus.approved) {
             return (
                 <>
+                    {guide.youtubeLink && (
+                        <IconButton href={guide.youtubeLink} target="_blank">
+                            <AccessibleTooltip title="Youtube">
+                                <YouTubeIcon color="error" />
+                            </AccessibleTooltip>
+                        </IconButton>
+                    )}
+
                     {guide.permissions.canEdit && (
                         <IconButton aria-label="add to favorites" onClick={onEdit}>
                             <AccessibleTooltip title="Edit">
@@ -93,6 +102,14 @@ export const GuideCard: React.FC<Props> = ({
                         <ShareIcon />
                     </AccessibleTooltip>
                 </IconButton>
+
+                {guide.youtubeLink && (
+                    <IconButton href={guide.youtubeLink} target="_blank">
+                        <AccessibleTooltip title="Youtube">
+                            <YouTubeIcon color="error" />
+                        </AccessibleTooltip>
+                    </IconButton>
+                )}
 
                 {guide.permissions.canEdit && (
                     <IconButton aria-label="add to favorites" onClick={onEdit}>

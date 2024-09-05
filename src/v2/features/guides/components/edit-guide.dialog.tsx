@@ -23,6 +23,7 @@ export const EditGuideDialog: React.FC<Props> = ({ onClose, units, saveGuide, gu
     const { t } = useTranslation();
     const [guideText, setGuideText] = useState<string>(guide.guide);
     const [intro, setIntro] = useState<string>(guide.intro);
+    const [youtubeLink, setYoutubeLink] = useState<string | undefined>(guide.youtubeLink);
     const [teamName, setTeamName] = useState<string>(guide.name);
     const [teamSlots, setTeamSlots] = useState<ITeamSlot[]>(guide.teamSlots);
 
@@ -40,21 +41,18 @@ export const EditGuideDialog: React.FC<Props> = ({ onClose, units, saveGuide, gu
             guide: guideText,
             intro: intro,
             subModes: guide.subModes,
+            youtubeLink: youtubeLink,
             teamSlots: teamSlots,
         });
         onClose();
     };
 
     const disableContinue = (function () {
-        if (!teamName.length) {
+        if (!teamName.length || !intro.length || !guideText.length) {
             return true;
         }
 
-        if (teamSlots.some(x => x.slotType !== SlotType.none && !x.unitIds.length)) {
-            return true;
-        }
-
-        return false;
+        return teamSlots.some(x => x.slotType !== SlotType.none && !x.unitIds.length);
     })();
 
     return (
@@ -63,6 +61,7 @@ export const EditGuideDialog: React.FC<Props> = ({ onClose, units, saveGuide, gu
             <DialogContent style={{ paddingTop: 10 }}>
                 <TextField
                     fullWidth
+                    required
                     label="Team name"
                     variant="outlined"
                     helperText="Max length 50 characters."
@@ -75,6 +74,7 @@ export const EditGuideDialog: React.FC<Props> = ({ onClose, units, saveGuide, gu
 
                 <TextField
                     fullWidth
+                    required
                     id="outlined-textarea"
                     label="Intro"
                     placeholder="Into"
@@ -88,8 +88,22 @@ export const EditGuideDialog: React.FC<Props> = ({ onClose, units, saveGuide, gu
                 <br />
                 <br />
 
+                <TextField
+                    fullWidth
+                    id="outlined-textarea"
+                    label="Youtube Link"
+                    placeholder="Youtube Link"
+                    maxRows={5}
+                    value={youtubeLink}
+                    helperText="Link to the Youtube video featuring team from the guide"
+                    onChange={event => setYoutubeLink(event.target.value.slice(0, 100))}
+                />
+
+                <br />
+                <br />
+
                 <Typography variant="subtitle1" style={{ marginLeft: 10 }}>
-                    Guide (supports rich text)
+                    Guide* (supports rich text)
                 </Typography>
                 <RichTextEditor
                     htmlValue={guideText}
