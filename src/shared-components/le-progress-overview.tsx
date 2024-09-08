@@ -66,7 +66,11 @@ export const LeProgressOverview = ({
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                         <span>
-                            Missions & Bundles
+                            Missions & Bundles{' '}
+                            <span className="bold">
+                                ({progress.overview['1'].regularMissions}-{progress.overview['2'].regularMissions}-
+                                {progress.overview['3'].regularMissions})
+                            </span>
                             {/*{' '}*/}
                             {/*<span style={{ fontWeight: 700 }}>*/}
                             {/*    ({progress.overview['1'].regularMissions}/10 & {progress.overview['1'].premiumMissions}*/}
@@ -75,66 +79,81 @@ export const LeProgressOverview = ({
                         </span>
                     </div>
                 </AccordionSummary>
-                <h3>Event 1</h3>
-                <LeProgressOverviewMissions
-                    progress={progress.overview['1']}
-                    legendaryEvent={legendaryEvent}
-                    missionProgressChange={handleMissionsProgressChange(progress.overview['1'])}
-                    bundleChange={handleBundleChange(progress.overview['1'])}
-                />
 
-                <h3>Event 2</h3>
-                <LeProgressOverviewMissions
-                    progress={progress.overview['2']}
-                    legendaryEvent={legendaryEvent}
-                    missionProgressChange={handleMissionsProgressChange(progress.overview['2'])}
-                    bundleChange={handleBundleChange(progress.overview['2'])}
-                />
-
-                <h3>Event 3</h3>
-                <LeProgressOverviewMissions
-                    progress={progress.overview['3']}
-                    legendaryEvent={legendaryEvent}
-                    missionProgressChange={handleMissionsProgressChange(progress.overview['3'])}
-                    bundleChange={handleBundleChange(progress.overview['3'])}
-                />
+                <AccordionDetails className="flex-box wrap gap20">
+                    {([1, 2, 3] as Array<1 | 2 | 3>).map(eventNumber => (
+                        <div key={eventNumber} style={{ overflow: 'auto' }}>
+                            <h3>
+                                Event {eventNumber}{' '}
+                                <span className="bold">
+                                    ({progress.overview[eventNumber].regularMissions}-
+                                    {progress.overview[eventNumber].premiumMissions}-
+                                    {progress.overview[eventNumber].bundle})
+                                </span>
+                            </h3>
+                            <LeProgressOverviewMissions
+                                progress={progress.overview[eventNumber]}
+                                legendaryEvent={legendaryEvent}
+                                missionProgressChange={handleMissionsProgressChange(progress.overview[eventNumber])}
+                                bundleChange={handleBundleChange(progress.overview[eventNumber])}
+                            />
+                        </div>
+                    ))}
+                </AccordionDetails>
             </Accordion>
 
-            <Accordion
-                TransitionProps={{ unmountOnExit: true }}
-                defaultExpanded={true}
-                onChange={handleAccordionChange('alpha')}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <div className="flex-box wrap between">
+                <div>
                     <TrackSummary title={'Alpha'} trackProgress={progress.alpha} />
-                </AccordionSummary>
-                <AccordionDetails>
                     <TrackDetails trackProgress={progress.alpha} />
-                </AccordionDetails>
-            </Accordion>
+                </div>
 
-            <Accordion
-                TransitionProps={{ unmountOnExit: true }}
-                defaultExpanded={true}
-                onChange={handleAccordionChange('beta')}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <div>
                     <TrackSummary title={'Beta'} trackProgress={progress.beta} />
-                </AccordionSummary>
-                <AccordionDetails>
                     <TrackDetails trackProgress={progress.beta} />
-                </AccordionDetails>
-            </Accordion>
+                </div>
 
-            <Accordion
-                TransitionProps={{ unmountOnExit: true }}
-                defaultExpanded={true}
-                onChange={handleAccordionChange('gamma')}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <div>
                     <TrackSummary title={'Gamma'} trackProgress={progress.gamma} />
-                </AccordionSummary>
-                <AccordionDetails>
                     <TrackDetails trackProgress={progress.gamma} />
-                </AccordionDetails>
-            </Accordion>
+                </div>
+
+                {/*<Accordion*/}
+                {/*    TransitionProps={{ unmountOnExit: true }}*/}
+                {/*    defaultExpanded={true}*/}
+                {/*    onChange={handleAccordionChange('alpha')}>*/}
+                {/*    <AccordionSummary expandIcon={<ExpandMoreIcon />}>*/}
+                {/*        <TrackSummary title={'Alpha'} trackProgress={progress.alpha} />*/}
+                {/*    </AccordionSummary>*/}
+                {/*    <AccordionDetails>*/}
+                {/*        <TrackDetails trackProgress={progress.alpha} />*/}
+                {/*    </AccordionDetails>*/}
+                {/*</Accordion>*/}
+
+                {/*<Accordion*/}
+                {/*    TransitionProps={{ unmountOnExit: true }}*/}
+                {/*    defaultExpanded={true}*/}
+                {/*    onChange={handleAccordionChange('beta')}>*/}
+                {/*    <AccordionSummary expandIcon={<ExpandMoreIcon />}>*/}
+                {/*        <TrackSummary title={'Beta'} trackProgress={progress.beta} />*/}
+                {/*    </AccordionSummary>*/}
+                {/*    <AccordionDetails>*/}
+                {/*        <TrackDetails trackProgress={progress.beta} />*/}
+                {/*    </AccordionDetails>*/}
+                {/*</Accordion>*/}
+
+                {/*<Accordion*/}
+                {/*    TransitionProps={{ unmountOnExit: true }}*/}
+                {/*    defaultExpanded={true}*/}
+                {/*    onChange={handleAccordionChange('gamma')}>*/}
+                {/*    <AccordionSummary expandIcon={<ExpandMoreIcon />}>*/}
+                {/*        <TrackSummary title={'Gamma'} trackProgress={progress.gamma} />*/}
+                {/*    </AccordionSummary>*/}
+                {/*    <AccordionDetails>*/}
+                {/*        <TrackDetails trackProgress={progress.gamma} />*/}
+                {/*    </AccordionDetails>*/}
+                {/*</Accordion>*/}
+            </div>
         </div>
     );
 };

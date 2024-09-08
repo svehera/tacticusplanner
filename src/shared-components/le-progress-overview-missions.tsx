@@ -22,7 +22,8 @@ export const LeProgressOverviewMissions = ({
 
     return (
         <>
-            <div className="flex-box gap5 wrap">
+            <div className="flex-box wrap">
+                <span style={{ minWidth: 130 }}>Free Missions</span>
                 {legendaryEvent.regularMissions.map((mission, index) => (
                     <FormControlLabel
                         key={mission}
@@ -36,13 +37,15 @@ export const LeProgressOverviewMissions = ({
                                 inputProps={{ 'aria-label': 'controlled' }}
                             />
                         }
+                        style={{ margin: 0 }}
                         label={index + 1}
                         labelPlacement="top"
                         // label={index + 1 + '. ' + mission}
                     />
                 ))}
             </div>
-            <div className="flex-box gap5 wrap">
+            <div className="flex-box wrap">
+                <span style={{ minWidth: 130 }}>Premium Missions</span>
                 {legendaryEvent.premiumMissions.map((mission, index) => (
                     <FormControlLabel
                         key={mission}
@@ -56,25 +59,30 @@ export const LeProgressOverviewMissions = ({
                                 inputProps={{ 'aria-label': 'controlled' }}
                             />
                         }
+                        style={{ margin: 0 }}
                         label={''}
                         labelPlacement="top"
                     />
                 ))}
             </div>
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={bundle > 0}
-                        onChange={(_, checked) => {
-                            setBundle(checked ? 1 : 0);
-                            bundleChange(checked ? 1 : 0);
-                        }}
-                        inputProps={{ 'aria-label': 'controlled' }}
-                    />
-                }
-                label={''}
-                labelPlacement="top"
-            />
+            <div className="flex-box wrap">
+                <span style={{ minWidth: 130 }}>300 Bundle</span>
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={bundle > 0}
+                            onChange={(_, checked) => {
+                                setBundle(checked ? 1 : 0);
+                                bundleChange(checked ? 1 : 0);
+                            }}
+                            inputProps={{ 'aria-label': 'controlled' }}
+                        />
+                    }
+                    style={{ margin: 0 }}
+                    label={''}
+                    labelPlacement="top"
+                />
+            </div>
         </>
     );
 };
