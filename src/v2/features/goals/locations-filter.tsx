@@ -103,6 +103,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                 />
 
                 <MultipleSelectCheckmarks
+                    sortByAlphabet
                     size="small"
                     placeholder="Factions"
                     selectedValues={factions}
