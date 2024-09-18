@@ -21,6 +21,8 @@ export enum Faction {
     Tyranids = 'Tyranids',
     AdeptusMechanicus = 'Adeptus Mechanicus',
     WorldEaters = 'World Eaters',
+    BloodAngels = 'Blood Angels',
+    GenestealerCults = 'Genestealer Cults',
 }
 
 export enum RarityString {
@@ -117,6 +119,7 @@ export enum Trait {
     RapidAssault = 'Rapid Assault',
     GetStuckIn = 'Get Stuck In',
     daemon = 'Daemon',
+    ambush = 'Ambush',
 }
 
 export enum DamageType {

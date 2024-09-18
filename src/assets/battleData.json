@@ -1223,7 +1223,7 @@
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 36,
-        "reward": "Metal Decorative Skull",
+        "reward": "Wyrm-Form Sigil",
         "expectedGold": 65,
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"]
@@ -1396,7 +1396,7 @@
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 53,
-        "reward": "Basic Auxiliary Core",
+        "reward": "Proclamation Receiver",
         "expectedGold": 71,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum"]
@@ -1477,7 +1477,7 @@
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 61,
-        "reward": "Canister of Chemicals",
+        "reward": "Industrial Padding",
         "expectedGold": 77
     },
     "O62": {
@@ -3291,7 +3291,7 @@
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 68,
-        "reward": "Mutation: Warped Lungs",
+        "reward": "Gifts of the Star Children",
         "expectedGold": 77
     },
     "FoCM69": {
@@ -5183,7 +5183,7 @@
         "campaign": "Fall of Cadia Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 12,
-        "reward": "Standard-Issue Tourniquet",
+        "reward": "Wyrm-Form Sigil",
         "expectedGold": 91.5,
         "slots": 3
     },
@@ -5236,7 +5236,7 @@
         "campaign": "Fall of Cadia Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 19,
-        "reward": "Ballistics Data",
+        "reward": "Proclamation Receiver",
         "expectedGold": 101
     },
     "FoCME2": {
@@ -5287,7 +5287,7 @@
         "campaign": "Fall of Cadia Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 25,
-        "reward": "Satchel",
+        "reward": "Industrial Padding",
         "expectedGold": 108
     },
     "FoCME26": {
@@ -5333,7 +5333,7 @@
         "campaign": "Fall of Cadia Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 30,
-        "reward": "Slicing Claws",
+        "reward": "Gifts of the Star Children",
         "expectedGold": 108
     },
     "FoCME31": {

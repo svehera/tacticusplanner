@@ -1,6 +1,25 @@
 ﻿{
-    "currentVersion": "1.6.2",
+    "currentVersion": "1.6.3",
     "releaseNotes": [
+        {
+            "version": "1.6.3",
+            "date": "September X",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added new collectable characters",
+                    "subPoints": [
+                        "Xybia, Magus, unlockable in the first ‘Survival‘ event, starting October 14",
+                        "Patermine, Genestealer Patriarch, unlockable in the ‘Insanguination’ event, starting November 3"
+                    ]
+                },
+                {
+                    "text": "Added new Campaign Battles: ‘Mirror Elite Saim-Hann’ part 4"
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
         {
             "version": "1.6.2",
             "date": "August 26",

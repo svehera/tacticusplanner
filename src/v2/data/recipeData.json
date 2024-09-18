@@ -1,4 +1,234 @@
 {
+    "Proclamation Receiver": {
+        "material": "Proclamation Receiver",
+        "faction": "Genestealer Cults",
+        "craftable": false,
+        "stat": "Damage",
+        "rarity": "Rare",
+        "icon": "Proclamation Receiver.png"
+    },
+    "Wyrm-Form Sigil": {
+        "material": "Wyrm-Form Sigil",
+        "faction": "Genestealer Cults",
+        "craftable": false,
+        "stat": "Health",
+        "rarity": "Rare",
+        "icon": "Wyrm-Form Sigil.png"
+    },
+    "Industrial Padding": {
+        "material": "Industrial Padding",
+        "faction": "Genestealer Cults",
+        "craftable": false,
+        "stat": "Armour",
+        "rarity": "Rare",
+        "icon": "Industrial Padding.png"
+    },
+    "Gifts of the Star Children": {
+        "material": "Gifts of the Star Children",
+        "faction": "Genestealer Cults",
+        "craftable": false,
+        "stat": "Health",
+        "rarity": "Legendary",
+        "icon": "Gifts of the Star Children.png"
+    },
+    "Wyrm-Form Icon": {
+        "material": "Wyrm-Form Icon",
+        "faction": "Genestealer Cults",
+        "craftable": true,
+        "stat": "Health",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Wyrm-Form Sigil",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ],
+        "icon": "Wyrm-Form Icon.png"
+    },
+    "Proclamation Caster": {
+        "material": "Proclamation Caster",
+        "faction": "Genestealer Cults",
+        "craftable": true,
+        "stat": "Damage",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Proclamation Receiver",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ],
+        "icon": "Proclamation Caster.png"
+    },
+    "Industrial Protection Suit": {
+        "material": "Industrial Protection Suit",
+        "faction": "Genestealer Cults",
+        "craftable": true,
+        "stat": "Armour",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Industrial Padding",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ],
+        "icon": "Industrial Protection Suit.png"
+    },
+    "Proclamation Hailer": {
+        "material": "Proclamation Hailer",
+        "faction": "Genestealer Cults",
+        "craftable": true,
+        "stat": "Damage",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Proclamation Caster",
+                "count": 2
+            },
+            {
+                "material": "Ratiocination Targeting",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Proclamation Hailer.png"
+    },
+    "Industrial Carapace": {
+        "material": "Industrial Carapace",
+        "faction": "Genestealer Cults",
+        "craftable": true,
+        "stat": "Armour",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Industrial Protection Suit",
+                "count": 2
+            },
+            {
+                "material": "Adamantium Sheet",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Industrial Carapace.png"
+    },
+    "Wyrm-Form Banner": {
+        "material": "Wyrm-Form Banner",
+        "faction": "Genestealer Cults",
+        "craftable": true,
+        "stat": "Health",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Wyrm-Form Icon",
+                "count": 2
+            },
+            {
+                "material": "Ominous Xenos Glyphs",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Wyrm-Form Banner.png"
+    },
+    "Biomorph Adaption": {
+        "material": "Biomorph Adaption",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "faction": "Genestealer Cults",
+        "recipe": [
+            {
+                "material": "Gifts of the Star Children",
+                "count": 9
+            },
+            {
+                "material": "Medical Supply Crate",
+                "count": 1
+            },
+            {
+                "material": "Duplicate Organ",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Biomorph Adaption.png"
+    },
+    "Gene-Twisted Muscle": {
+        "material": "Gene-Twisted Muscle",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "faction": "Genestealer Cults",
+        "recipe": [
+            {
+                "material": "Gifts of the Star Children",
+                "count": 9
+            },
+            {
+                "material": "Advanced Combat Stimms",
+                "count": 1
+            },
+            {
+                "material": "Duplicate Organ",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Gene-Twisted Muscle.png"
+    },
+    "Gene-Sire's Reliquant": {
+        "material": "Gene-Sire's Reliquant",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "faction": "Genestealer Cults",
+        "recipe": [
+            {
+                "material": "Gifts of the Star Children",
+                "count": 9
+            },
+            {
+                "material": "Grand Skull Trophy",
+                "count": 1
+            },
+            {
+                "material": "Revered Talisman",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "craftable": true,
+        "icon": "Gene-Sire's Reliquant.png"
+    },
     "Blood Shard Bolt": {
         "material": "Blood Shard Bolt",
         "faction": "Blood Angels",
