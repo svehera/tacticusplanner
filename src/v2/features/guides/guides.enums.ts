@@ -22,4 +22,5 @@ export enum LreCharacter {
     kharn = '_kharn',
     vitruvius = '_vitruvius',
     mephiston = '_mephiston',
+    patermine = '_patermine',
 }

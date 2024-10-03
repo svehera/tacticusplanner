@@ -10327,7 +10327,7 @@
             "Mark of Khorne",
             "Grandiose Skull Ornament",
             "Butcher's Nails",
-            "Hyperstim",
+            "Plasma Coil",
             "Collar of Khorne",
             "Ceramite Plates"
         ],
@@ -10883,6 +10883,282 @@
             "Superaugmented Strength",
             "Adamantine Mantle",
             "Superaugmented Defences"
+        ]
+    },
+    "Xybia": {
+        "Stone I": [
+            "Nano Swarm",
+            "The Iron Phoenix",
+            "Canister of Chemicals",
+            "Nasty Spikes",
+            "Pile of Salvage",
+            "Sophisticated Material"
+        ],
+        "Stone II": [
+            "Mission Assignment",
+            "Healing Ointment",
+            "Combat Stimms",
+            "Razorsharp Spikes",
+            "Mutation: Tough Skin",
+            "Rebreather"
+        ],
+        "Stone III": [
+            "Mission Objective",
+            "First Aid Kit",
+            "Otherworldly Energy",
+            "Can of Promethium",
+            "Box of Salvage",
+            "Cloak"
+        ],
+        "Iron I": [
+            "Regenerating Nano Swarm",
+            "Writings",
+            "Combat Stimms",
+            "Barrel of Promethium",
+            "Mutation: Scaly Skin",
+            "Sophisticated Material Ingot"
+        ],
+        "Iron II": [
+            "Mission Objective",
+            "Grandiloquent Litanical",
+            "Otherworldly Energy Reservoir",
+            "Slicing Claws",
+            "Crate of Salvage",
+            "Cloak"
+        ],
+        "Iron III": [
+            "Battle Plan",
+            "The Gold Phoenix",
+            "Proclamation Receiver",
+            "Advanced Combat Stimms",
+            "Adamantium Lump",
+            "Valuable Fabric"
+        ],
+        "Bronze I": [
+            "Wyrm-Form Sigil",
+            "The Phoenix Ascendant",
+            "Supernatural Sight",
+            "Classified Data-Slate",
+            "Mutation: Warped Skin",
+            "Sophisticated Material Bar"
+        ],
+        "Bronze II": [
+            "Wyrm-Form Icon",
+            "Medical Supply Crate",
+            "Classified Data-Slate",
+            "Belt of Krak Grenades",
+            "Industrial Padding",
+            "Fine Cloak"
+        ],
+        "Bronze III": [
+            "The Phoenix Ascendant",
+            "Exquisite Medical Supplies",
+            "Proclamation Caster",
+            "Murderous Spikes",
+            "Industrial Protection Suit",
+            "Revered Talisman"
+        ],
+        "Silver I": [
+            "Wyrm-Form Icon",
+            "Secret Agenda",
+            "Proclamation Caster",
+            "Warp Locus",
+            "Industrial Protection Suit",
+            "Sophisticated Material Sheet"
+        ],
+        "Silver II": [
+            "Gifts of the Star Children",
+            "Greater Reliquary of Protection",
+            "Proclamation Hailer",
+            "Belt of Krak Grenades",
+            "Industrial Protection Suit",
+            "Decorated Cloak"
+        ],
+        "Silver III": [
+            "Wyrm-Form Icon",
+            "Tome of Arcane Knowledge",
+            "Proclamation Caster",
+            "Imposing Horns",
+            "Psyk-Conductive Material",
+            "Sophisticated Material Plates"
+        ],
+        "Gold I": [
+            "Wyrm-Form Banner",
+            "Tome of Arcane Knowledge",
+            "Psychic Force Conduit",
+            "Blessed Promethium Tank",
+            "Industrial Carapace",
+            "Divine Cloak"
+        ],
+        "Gold II": [
+            "Biomorph Adaption",
+            "Legendary Reliquary of Protection",
+            "Proclamation Hailer",
+            "Imposing Horns",
+            "Industrial Carapace",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold III": [
+            "Wyrm-Form Banner",
+            "Advanced Exospine",
+            "Gene-Twisted Muscle",
+            "Psychic Focus",
+            "Gene-Sire's Reliquant",
+            "Divine Cloak"
+        ],
+        "Diamond I": [
+            "Biomorph Adaption",
+            "Grand Strategy",
+            "Gene-Twisted Muscle",
+            "Hyperstim",
+            "Gene-Sire's Reliquant",
+            "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Biomorph Adaption",
+            "Preternatural Constitution",
+            "Gene-Twisted Muscle",
+            "Preternatural Strength",
+            "Gene-Sire's Reliquant",
+            "Preternatural Defences"
+        ]
+    },
+    "Patermine": {
+        "Stone I": [
+            "Nano Swarm",
+            "The Iron Phoenix",
+            "Canister of Chemicals",
+            "Nasty Spikes",
+            "Pile of Salvage",
+            "Sophisticated Material"
+        ],
+        "Stone II": [
+            "Field Ration",
+            "Nano Swarm",
+            "Combat Stimms",
+            "Razorsharp Spikes",
+            "Mutation: Tough Skin",
+            "Mutation: Tough Skin"
+        ],
+        "Stone III": [
+            "Enriched Rations",
+            "Regenerating Nano Swarm",
+            "Otherworldly Energy",
+            "Canister of Chemicals",
+            "Box of Salvage",
+            "Mutation: Scaly Skin"
+        ],
+        "Iron I": [
+            "Regenerating Nano Swarm",
+            "Helmet Trophy",
+            "Combat Stimms",
+            "Combat Stimms",
+            "Mutation: Scaly Skin",
+            "Sophisticated Material Ingot"
+        ],
+        "Iron II": [
+            "Enriched Rations",
+            "Grand Skull Trophy",
+            "Otherworldly Energy Reservoir",
+            "Slicing Claws",
+            "Subdermal Plating",
+            "Mutation: Scaly Skin"
+        ],
+        "Iron III": [
+            "Box of Rations",
+            "The Gold Phoenix",
+            "Proclamation Receiver",
+            "Advanced Combat Stimms",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Wyrm-Form Sigil",
+            "The Phoenix Ascendant",
+            "Supernatural Sight",
+            "Classified Data-Slate",
+            "Mutation: Warped Skin",
+            "Sophisticated Material Bar"
+        ],
+        "Bronze II": [
+            "Wyrm-Form Icon",
+            "Otherworldly Nano Swarm",
+            "Classified Data-Slate",
+            "Refined Combat Stimms",
+            "Industrial Padding",
+            "Mutation: Warped Skin"
+        ],
+        "Bronze III": [
+            "Mutation: Warped Heart",
+            "Exospine",
+            "Proclamation Caster",
+            "Murderous Spikes",
+            "Industrial Protection Suit",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Wyrm-Form Icon",
+            "Secret Agenda",
+            "Proclamation Caster",
+            "Warp Locus",
+            "Industrial Protection Suit",
+            "Sophisticated Material Sheet"
+        ],
+        "Silver II": [
+            "Gifts of the Star Children",
+            "Greater Reliquary of Protection",
+            "Proclamation Hailer",
+            "Refined Combat Stimms",
+            "Industrial Protection Suit",
+            "Mutation: Metallic Skin"
+        ],
+        "Silver III": [
+            "Wyrm-Form Icon",
+            "Grandiose Skull Ornament",
+            "Proclamation Caster",
+            "Imposing Horns",
+            "Psyk-Conductive Material",
+            "Sophisticated Material Plates"
+        ],
+        "Gold I": [
+            "Wyrm-Form Banner",
+            "Advanced Exospine",
+            "Psychic Force Conduit",
+            "Hyperstim",
+            "Industrial Carapace",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold II": [
+            "Biomorph Adaption",
+            "Legendary Reliquary of Protection",
+            "Proclamation Hailer",
+            "Imposing Horns",
+            "Industrial Carapace",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold III": [
+            "Wyrm-Form Banner",
+            "Advanced Exospine",
+            "Gene-Twisted Muscle",
+            "Psychic Focus",
+            "Gene-Sire's Reliquant",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Diamond I": [
+            "Biomorph Adaption",
+            "Grand Strategy",
+            "Gene-Twisted Muscle",
+            "Hyperstim",
+            "Gene-Sire's Reliquant",
+            "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Biomorph Adaption",
+            "Monstrous Constitution",
+            "Gene-Twisted Muscle",
+            "Monstrous Strength",
+            "Gene-Sire's Reliquant",
+            "Monstrous Defences"
         ]
     }
 }

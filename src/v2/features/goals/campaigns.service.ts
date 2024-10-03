@@ -87,6 +87,7 @@ export class CampaignsService {
             Faction.AdeptusMechanicus,
             Faction.Space_Wolves,
             Faction.Dark_Angels,
+            Faction.BloodAngels,
         ];
 
         const ChaosFactions: Faction[] = [

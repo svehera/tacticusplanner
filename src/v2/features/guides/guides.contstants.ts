@@ -10,6 +10,7 @@ import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter } from 'src/v2/features/characters/units.functions';
 import { capitalize, intersection } from 'lodash';
 import mowsData from 'src/v2/data/mows.json';
+import { PatermineLegendaryEvent } from 'src/models/legendary-events/patermine.le';
 
 export const lreCharacters: IMenuOption[] = [
     {
@@ -27,6 +28,11 @@ export const lreCharacters: IMenuOption[] = [
         label: 'Mephiston (2/3)',
         selected: false,
     },
+    {
+        value: LreCharacter.patermine,
+        label: 'Patermine (1/3)',
+        selected: false,
+    },
 ];
 
 export const getLre = (character: LreCharacter, characters: ICharacter2[] = []): ILegendaryEvent => {
@@ -37,6 +43,8 @@ export const getLre = (character: LreCharacter, characters: ICharacter2[] = []):
             return new MephistonLegendaryEvent(characters);
         case LreCharacter.vitruvius:
             return new VitruviusLegendaryEvent(characters);
+        case LreCharacter.patermine:
+            return new PatermineLegendaryEvent(characters);
     }
 };
 
