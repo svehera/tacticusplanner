@@ -214,7 +214,6 @@ export class StaticDataService {
             unitType: UnitType.character,
             alliance: rawData.Alliance,
             faction: rawData.Faction,
-            factionIcon: StaticDataService.getFactionIcon(rawData.Faction),
             name: rawData.Name,
             numberAdded: rawData.Number,
             health: rawData.Health,
@@ -277,45 +276,6 @@ export class StaticDataService {
 
         // Check if the day difference is less than or equal to 2
         return dayDifference <= 3;
-    }
-
-    static getFactionIcon(faction: Faction): string {
-        switch (faction) {
-            case Faction.Ultramarines:
-                return 'Ultramarines';
-            case Faction.Black_Legion:
-                return 'Black_Legion';
-            case Faction.Orks:
-                return 'Orks';
-            case Faction.ADEPTA_SORORITAS:
-                return 'ADEPTA_SORORITAS';
-            case Faction.Necrons:
-                return 'Necrons';
-            case Faction.Astra_militarum:
-                return 'Astra_militarum';
-            case Faction.Death_Guard:
-                return 'Death_Guard';
-            case Faction.Black_Templars:
-                return 'Black_Templars';
-            case Faction.Aeldari:
-                return 'Aeldari';
-            case Faction.Space_Wolves:
-                return 'Space_Wolves';
-            case Faction.T_Au:
-                return 'T_Au';
-            case Faction.Dark_Angels:
-                return 'Dark_Angels';
-            case Faction.Thousand_Sons:
-                return 'Thousand_Sons';
-            case Faction.Tyranids:
-                return 'Tyranids';
-            case Faction.AdeptusMechanicus:
-                return 'AdeptusMechanicus';
-            case Faction.WorldEaters:
-                return 'worldeaters';
-            default:
-                return 'ffffff';
-        }
     }
 
     static getFactionPray(faction: Faction): string {

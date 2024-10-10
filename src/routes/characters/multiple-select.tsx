@@ -8,6 +8,7 @@ interface Props {
     selectionChanges: (value: string[]) => void;
     size?: 'small' | 'medium';
     groupByFirstLetter?: boolean;
+    sortByAlphabet?: boolean;
 }
 
 export const MultipleSelectCheckmarks: React.FC<Props> = ({
@@ -17,6 +18,7 @@ export const MultipleSelectCheckmarks: React.FC<Props> = ({
     size = 'medium',
     placeholder,
     groupByFirstLetter = false,
+    sortByAlphabet = false,
 }) => {
     const [selectedLabels, setSelectedLabels] = React.useState<string[]>(selectedValues);
     const handleChange = (newValue: string[]) => {
@@ -31,7 +33,7 @@ export const MultipleSelectCheckmarks: React.FC<Props> = ({
             disableCloseOnSelect
             size={size}
             value={selectedLabels}
-            options={values.sort((a, b) => -b[0].localeCompare(a[0]))}
+            options={groupByFirstLetter || sortByAlphabet ? values.sort((a, b) => -b[0].localeCompare(a[0])) : values}
             groupBy={groupByFirstLetter ? option => option[0] : undefined}
             // getOptionLabel={option => option}
             onChange={(_, value) => handleChange(value)}

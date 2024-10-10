@@ -164,7 +164,7 @@ export const Guides: React.FC = () => {
             setActiveTab(GuidesGroup.myTeams);
             loadTeams({
                 page: 1,
-                pageSize: 10,
+                pageSize: 20,
                 group: GuidesGroup.myTeams,
             });
         }
@@ -185,7 +185,7 @@ export const Guides: React.FC = () => {
             setTeams([]);
             loadTeams({
                 page: 1,
-                pageSize: 10,
+                pageSize: 20,
                 group: GuidesGroup.myTeams,
             });
         }
@@ -399,7 +399,7 @@ export const Guides: React.FC = () => {
 
         loadTeams({
             page: 1,
-            pageSize: 10,
+            pageSize: 20,
             group: activeTab,
             primaryModes: filter.primaryMod,
             subModes: filter.subMods,
@@ -411,7 +411,7 @@ export const Guides: React.FC = () => {
     useEffect(() => {
         const initialQueryParams: IGetGuidesQueryParams = {
             page: 1,
-            pageSize: 10,
+            pageSize: 20,
             group: activeTab,
             guideId: viewTeamId || undefined,
             primaryModes: primaryModFilter,

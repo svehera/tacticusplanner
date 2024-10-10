@@ -1,6 +1,46 @@
 ﻿{
-    "currentVersion": "1.6.2",
+    "currentVersion": "1.6.3",
     "releaseNotes": [
+        {
+            "version": "1.6.3",
+            "date": "October 4",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added new collectable characters",
+                    "subPoints": [
+                        "Xybia, Magus, unlockable in the ’Path of Ascension' event, starting October 13",
+                        "Patermine, Genestealer Patriarch, unlockable in the first ‘Alien Majesty‘ event, starting November 3"
+                    ]
+                },
+                {
+                    "text": "Added new Campaign Battles: ‘Mirror Elite Saim-Hann’ part 4"
+                },
+                {
+                    "text": "Adjusted drop rate for Campaign random rewards to take into account the Mercy system"
+                },
+                {
+                    "text": "Added Genestealer Upgrades",
+                    "route": "learn/upgrades"
+                },
+                {
+                    "text": "Updated Snappa and Boss G stats after the rewORK"
+                },
+                {
+                    "text": "Added The Patermine LRE",
+                    "route": "plan/lre?character=Patermine"
+                }
+            ],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "Fixed Incorrect damage upgrade listed for Kharn (ZHovtiyLitsar)"
+                },
+                {
+                    "text": "Fixed Incorrect Visage of Death recipe (SeventhSun)"
+                }
+            ]
+        },
         {
             "version": "1.6.2",
             "date": "August 26",

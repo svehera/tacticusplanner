@@ -100,5 +100,11 @@
         "name": "Blood Angels",
         "icon": "blood_angels.png",
         "color": "#ac1b1a"
+    },
+    {
+        "alliance": "Xenos",
+        "name": "Genestealer Cults",
+        "icon": "Genestealer Cults.png",
+        "color": "#CE7140"
     }
 ]

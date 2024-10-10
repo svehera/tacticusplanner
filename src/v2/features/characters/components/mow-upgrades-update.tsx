@@ -1,4 +1,4 @@
-﻿import React, { useMemo } from 'react';
+﻿import React, { useEffect, useMemo } from 'react';
 
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 import { Alliance } from 'src/models/enums';
@@ -65,7 +65,13 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
 
     const open = Boolean(anchorEl);
 
-    console.log(inventory);
+    useEffect(() => {
+        if (updateInventory) {
+            inventoryDecrement(inventoryUpdate);
+        } else {
+            inventoryDecrement({});
+        }
+    }, [updateInventory, inventoryUpdate]);
 
     return (
         <>
@@ -76,11 +82,6 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
                         checked={updateInventory}
                         onChange={event => {
                             setUpdateInventory(event.target.checked);
-                            if (event.target.checked) {
-                                inventoryDecrement(inventoryUpdate);
-                            } else {
-                                inventoryDecrement({});
-                            }
                         }}
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
