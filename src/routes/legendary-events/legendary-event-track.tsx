@@ -145,7 +145,6 @@ export const LegendaryEventTrack = ({
         return unitsRestrictions.map(u => ({
             field: u.name,
             headerName: `(${u.points}) ${u.name}`,
-            headerTooltip: `(${u.points}) ${u.name}`,
             resizable: true,
             valueFormatter: !lightweight
                 ? undefined

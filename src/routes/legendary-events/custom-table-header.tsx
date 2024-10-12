@@ -2,6 +2,7 @@
 import React from 'react';
 import { Check } from '@mui/icons-material';
 import { ILegendaryEventTrackRequirement } from 'src/models/interfaces';
+import { Badge } from '@mui/material';
 
 const CustomTableHeader = (
     props: IHeaderParams & {
@@ -15,8 +16,9 @@ const CustomTableHeader = (
             style={{ cursor: 'pointer' }}
             className="flex-box column"
             onClick={() => props.onCheckboxChange(!props.checked)}>
-            {props.checked && <Check fontSize="small" />}
-            <span>{props.restriction.points}</span>
+            <Badge color={props.checked ? 'success' : 'default'} badgeContent={<Check fontSize="small" />}>
+                <span style={{ width: 40 }}>{props.restriction.points}</span>
+            </Badge>
             <span>{props.restriction.name}</span>
         </div>
     );

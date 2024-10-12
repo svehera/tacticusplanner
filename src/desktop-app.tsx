@@ -37,7 +37,7 @@ const DesktopApp = () => {
     return (
         <div style={{ width: '100%', height: '100%' }}>
             <TopAppBar></TopAppBar>
-            <div style={{ margin: 20 }}>
+            <div style={{ margin: '10px 20px' }}>
                 <Outlet />
             </div>
         </div>

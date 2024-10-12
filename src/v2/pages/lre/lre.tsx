@@ -30,10 +30,6 @@ export const Lre: React.FC = () => {
 
     const { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab } = useLre();
 
-    // if (viewPreferences.useV1Lre) {
-    //     return <LegendaryEventPage legendaryEvent={legendaryEvent} />;
-    // }
-
     const renderTabContent = () => {
         switch (section) {
             case LreSection.teams:

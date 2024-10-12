@@ -16,9 +16,13 @@
     IViewPreferences,
     LegendaryEventData,
     IGuild,
+    LegendaryEventSection,
+    ILreTeam,
+    SelectedTeams,
 } from '../models/interfaces';
+import { v4 } from 'uuid';
 import { defaultData } from '../models/constants';
-import { Rank } from '../models/enums';
+import { LegendaryEventEnum, Rank } from '../models/enums';
 import { IMowDb } from 'src/v2/features/characters/characters.models';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
@@ -58,8 +62,9 @@ export class PersonalDataLocalStorage {
                 goals: this.getItem<IPersonalGoal[]>('goals') ?? defaultData.goals,
                 selectedTeamOrder:
                     this.getItem<ISelectedTeamsOrdering>('selectedTeamOrder') ?? defaultData.selectedTeamOrder,
-                leTeams:
-                    this.getItem<LegendaryEventData<ILegendaryEventSelectedTeams>>('leTeams') ?? defaultData.leTeams,
+                leTeams: migrateLreTeams(
+                    this.getItem<LegendaryEventData<ILegendaryEventSelectedTeams>>('leTeams') ?? defaultData.leTeams
+                ),
                 leProgress:
                     this.getItem<LegendaryEventData<ILegendaryEventProgressState>>('leProgress') ??
                     defaultData.leProgress,
@@ -207,6 +212,60 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
 
     return v1Data;
 };
+
+function migrateLreTeams(
+    teamsByEvent: LegendaryEventData<ILegendaryEventSelectedTeams>
+): LegendaryEventData<ILegendaryEventSelectedTeams> {
+    for (const teamsByEventKey in teamsByEvent) {
+        const eventTeams = teamsByEvent[teamsByEventKey as unknown as LegendaryEventEnum];
+        if (eventTeams && !eventTeams.teams?.length) {
+            populateTeams(eventTeams);
+            console.log(eventTeams);
+        }
+    }
+
+    return teamsByEvent;
+}
+
+function populateTeams(data: ILegendaryEventSelectedTeams) {
+    const sections: LegendaryEventSection[] = ['alpha', 'beta', 'gamma'];
+    const teams: ILreTeam[] = [];
+
+    // Helper function to compare two arrays for equality
+    function areArraysEqual(arr1: string[], arr2: string[]): boolean {
+        return arr1.length === arr2.length && arr1.every(char => arr2.includes(char));
+    }
+
+    sections.forEach(section => {
+        const selectedTeams: SelectedTeams = data[section];
+
+        Object.entries(selectedTeams).forEach(([restriction, characters]) => {
+            // Check if there's already a team with the same set of characters
+            const existingTeam = teams.find(
+                team => areArraysEqual(team.charactersIds, characters) && team.section === section
+            );
+
+            if (existingTeam) {
+                // If found, combine the restriction with the existing team's restrictions
+                if (!existingTeam.restrictionsIds.includes(restriction)) {
+                    existingTeam.restrictionsIds.push(restriction);
+                }
+            } else if (characters?.length) {
+                // If not found, create a new team
+                const team: ILreTeam = {
+                    id: v4(), // Replace with your UUID generation logic
+                    name: `Team ${teams.length + 1} - ${section}`, // Assigning Team 1, 2, 3, etc.
+                    section: section as LegendaryEventSection,
+                    restrictionsIds: [restriction], // Initial restriction
+                    charactersIds: characters, // Characters associated with this team
+                };
+                teams.push(team);
+            }
+        });
+    });
+
+    data.teams = teams; // Populate the teams field
+}
 
 export const isV1Data = (data: IPersonalData | IPersonalData2): data is IPersonalData => {
     const versionKey: keyof IPersonalData2 = 'schemaVersion';

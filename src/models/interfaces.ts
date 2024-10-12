@@ -450,10 +450,11 @@ export interface ILreViewSettings {
     showBeta: boolean;
     showGamma: boolean;
     lightWeight: boolean;
-    // hideSelectedTeams: boolean;
+    hideSelectedTeams: boolean;
     onlyUnlocked: boolean;
     hideCompleted: boolean;
     hideNames: boolean;
+    lreGridView: boolean;
 }
 
 export interface IAutoTeamsPreferences {

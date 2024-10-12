@@ -11,22 +11,55 @@ import {
     ValueFormatterParams,
 } from 'ag-grid-community';
 
-import { ICharacter2, ILegendaryEventTrack, ILegendaryEventTrackRequirement, ITableRow } from '../../models/interfaces';
+import {
+    ICharacter2,
+    ILegendaryEventTrack,
+    ILegendaryEventTrackRequirement,
+    ILreTeam,
+    ITableRow,
+} from '../../models/interfaces';
 import { Rank, Rarity } from '../../models/enums';
 
 import { fitGridOnWindowResize } from '../../shared-logic/functions';
 import { CharacterTitle } from '../../shared-components/character-title';
 import { StoreContext } from '../../reducers/store.provider';
 
-export const SelectedTeamsTable = (props: {
+interface Props {
     show: boolean;
     track: ILegendaryEventTrack;
-    teams: Record<string, Array<ICharacter2 | string>>;
+    characters: ICharacter2[];
+    // teams: Record<string, Array<ICharacter2 | string>>;
+    teams: ILreTeam[];
     deselectChars: (teamName: string, ...chars: string[]) => void;
     completedRequirements: string[];
+}
+
+function convertTeamsToRecord(
+    teams: ILreTeam[],
+    characters: ICharacter2[]
+): Record<string, Array<ICharacter2 | string>> {
+    const teamRecord: Record<string, Array<ICharacter2 | string>> = {};
+
+    teams.forEach(team => {
+        // For each team, map charactersIds to either ICharacter2 or keep as string if not found
+        teamRecord[team.id] = team.charactersIds.map(characterId => {
+            const characterObj = characters.find(character => character.id === characterId);
+            return characterObj ? characterObj : ''; // If found, return ICharacter2, else return the string
+        });
+    });
+
+    return teamRecord;
+}
+
+export const SelectedTeamsTable: React.FC<Props> = ({
+    show,
+    completedRequirements,
+    teams,
+    deselectChars,
+    track,
+    characters,
 }) => {
     const { viewPreferences } = useContext(StoreContext);
-    const { track, teams, deselectChars } = props;
     const gridRef = useRef<AgGridReact>(null);
 
     const rows = useMemo(() => {
@@ -43,24 +76,24 @@ export const SelectedTeamsTable = (props: {
 
     const columnsDefs = useMemo<Array<ColDef>>(
         () => getSectionColumns(track.unitsRestrictions, viewPreferences.lightWeight, viewPreferences.hideNames),
-        [track.eventId, viewPreferences.lightWeight, viewPreferences.hideNames, props.completedRequirements]
+        [track.eventId, viewPreferences.lightWeight, viewPreferences.hideNames, completedRequirements]
     );
 
-    const handleCellCLick = (cellClicked: CellClickedEvent<ITableRow[], ICharacter2>) => {
-        const teamName = cellClicked.column.getColId();
-        const value = cellClicked.value;
-        const shiftKey = (cellClicked.event as MouseEvent).shiftKey;
-        if (shiftKey) {
-            const team = teams[teamName].map(x => (typeof x === 'string' ? x : x.name));
-            deselectChars(teamName, ...team);
-            return;
-        }
-
-        if (value && typeof value === 'object') {
-            deselectChars(teamName, value.name);
-            return;
-        }
-    };
+    // const handleCellCLick = (cellClicked: CellClickedEvent<ITableRow[], ICharacter2>) => {
+    //     const teamName = cellClicked.column.getColId();
+    //     const value = cellClicked.value;
+    //     const shiftKey = (cellClicked.event as MouseEvent).shiftKey;
+    //     if (shiftKey) {
+    //         const team = teams[teamName].map(x => (typeof x === 'string' ? x : x.name));
+    //         deselectChars(teamName, ...team);
+    //         return;
+    //     }
+    //
+    //     if (value && typeof value === 'object') {
+    //         deselectChars(teamName, value.name);
+    //         return;
+    //     }
+    // };
 
     useEffect(() => {
         gridRef.current?.api?.sizeColumnsToFit();
@@ -77,7 +110,8 @@ export const SelectedTeamsTable = (props: {
             headerTooltip: u.name,
             headerClass: 'center-header-text',
             resizable: true,
-            hide: props.completedRequirements.includes(u.name),
+            sortable: false,
+            hide: completedRequirements.includes(u.name),
             valueFormatter: !lightweight
                 ? undefined
                 : (params: ValueFormatterParams) =>
@@ -109,7 +143,7 @@ export const SelectedTeamsTable = (props: {
         <div
             className="ag-theme-material auto-teams"
             style={{
-                display: props.show ? 'block' : 'none',
+                display: show ? 'block' : 'none',
                 height: '240px',
                 width: '100%',
                 border: '2px solid black',
