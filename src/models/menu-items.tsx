@@ -98,6 +98,7 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['offense'],
     menuItemById['zones'],
     menuItemById['leMasterTable'],
+    ...activeLreMenuItems,
 ];
 
 export const learnSubMenu: MenuItemTP[] = [

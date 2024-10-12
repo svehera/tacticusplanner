@@ -181,6 +181,7 @@ export enum LegendaryEventEnum {
     Vitruvius = 6,
     Kharn = 7,
     Mephiston = 8,
+    Patermine = 9,
 }
 
 export enum PersonalGoalType {

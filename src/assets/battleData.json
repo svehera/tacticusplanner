@@ -1519,7 +1519,7 @@
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 66,
-        "reward": "Purity Seal",
+        "reward": "Basic Auxiliary Core",
         "expectedGold": 77,
         "slots": 4
     },
@@ -1580,7 +1580,7 @@
         "campaign": "Octarius",
         "campaignType": "Normal",
         "nodeNumber": 72,
-        "reward": "Locator Beacon",
+        "reward": "Metal Decorative Skull",
         "expectedGold": 77,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum", "Black Templars"]
