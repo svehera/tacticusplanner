@@ -26,7 +26,7 @@ import { RankImage } from 'src/v2/components/images/rank-image';
 import InfoIcon from '@mui/icons-material/Info';
 
 export const RankLookup = () => {
-    const { characters, campaignsProgress } = useContext(StoreContext);
+    const { characters, campaignsProgress, inventory} = useContext(StoreContext);
     const [searchParams, setSearchParams] = useSearchParams();
 
     const charactersOptions = sortBy(characters, 'name');
@@ -191,6 +191,13 @@ export const RankLookup = () => {
         {
             field: 'count',
             maxWidth: 75,
+        },
+        {
+                valueGetter: params => {
+                    return inventory.upgrades[params.data!.id] ?? 0;
+                },
+                headerName: 'Inventory',
+                maxWidth: 90,
         },
         {
             field: 'rarity',
