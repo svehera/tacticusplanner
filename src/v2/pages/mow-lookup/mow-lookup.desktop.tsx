@@ -67,10 +67,7 @@ export const MowLookup = () => {
                             />
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MowUpgradesTable
-                                rows={customUpgrades}
-                                upgrades = {inventory.upgrades}
-                            />
+                            <MowUpgradesTable rows={customUpgrades} upgrades={inventory.upgrades} />
                         </AccordionDetails>
                     </Accordion>
 
@@ -84,10 +81,7 @@ export const MowLookup = () => {
                         </AccordionSummary>
                         <AccordionDetails className="flex-box gap20">
                             <MowMaterialsTable rows={mowMaterials} />
-                            <MowUpgradesTable
-                                rows={upgradesTotal}
-                                upgrades = {inventory.upgrades}
-                             />
+                            <MowUpgradesTable rows={upgradesTotal} upgrades={inventory.upgrades} />
                         </AccordionDetails>
                     </Accordion>
                 </>

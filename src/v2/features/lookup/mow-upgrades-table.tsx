@@ -9,6 +9,7 @@ import { RarityImage } from 'src/v2/components/images/rarity-image';
 
 interface Props {
     rows: IMowUpgrade[];
+    upgrades: Record<string, number>;
 }
 
 export const MowUpgradesTable: React.FC<Props> = ({ rows, upgrades }) => {
@@ -39,11 +40,11 @@ export const MowUpgradesTable: React.FC<Props> = ({ rows, upgrades }) => {
             maxWidth: 75,
         },
         {
-                valueGetter: params => {
-                    return upgrades[params.data!.id] ?? 0;
-                },
-                headerName: 'Inventory',
-                maxWidth: 90,
+            valueGetter: params => {
+                return upgrades[params.data!.id] ?? 0;
+            },
+            headerName: 'Inventory',
+            maxWidth: 90,
         },
         {
             field: 'rarity',
