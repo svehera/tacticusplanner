@@ -124,6 +124,7 @@ export class GlobalState implements IGlobalState {
                         ? Math.ceil((personalCharData.numberOfUnlocked / totalUsers) * 100)
                         : undefined,
                 ownedBy: personalCharData?.ownedBy ?? [],
+                statsByOwner: personalCharData?.statsByOwner ?? [],
             };
 
             result.power = CharactersPowerService.getCharacterPower(result);
@@ -158,6 +159,7 @@ export class GlobalState implements IGlobalState {
                         ? Math.ceil((dbMow.numberOfUnlocked / totalUsers) * 100)
                         : undefined,
                 ownedBy: dbMow?.ownedBy ?? [],
+                statsByOwner: dbMow?.statsByOwner ?? [],
             };
 
             result.power = CharactersPowerService.getCharacterAbilityPower(result);
