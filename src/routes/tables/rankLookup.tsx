@@ -60,14 +60,6 @@ export const RankLookup = () => {
     const [message, setMessage] = useState<string>('Upgrades:');
     const [totalGold, setTotalGold] = useState<number>(0);
 
-    // for debug
-    // charactersOptions.forEach(x => {
-    //     const characterUpgrades = StaticDataService.rankUpData[x.name];
-    //     if (!characterUpgrades) {
-    //         console.log(x.name);
-    //     }
-    // });
-
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLElement | null>(null);
     const [materialRecipe, setMaterialRecipe] = React.useState<IMaterialFull | null>(null);
 
@@ -135,7 +127,7 @@ export const RankLookup = () => {
                     completedLocations: [],
                     campaignsProgress: campaignsProgress,
                     dailyEnergy: 0,
-                    upgrades: {},
+                    upgrades: inventory.upgrades,
                     preferences: {
                         farmStrategy: DailyRaidsStrategy.allLocations,
                         farmByPriorityOrder: false,
@@ -197,6 +189,13 @@ export const RankLookup = () => {
                 return inventory.upgrades[params.data!.id] ?? 0;
             },
             headerName: 'Inventory',
+            maxWidth: 90,
+        },
+        {
+            valueGetter: params => {
+                return Math.max(params.data.count - inventory.upgrades[params.data!.id] ?? 0, 0);
+            },
+            headerName: 'Remaining',
             maxWidth: 90,
         },
         {
