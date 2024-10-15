@@ -498,6 +498,8 @@ export interface IInsightsData {
         rank: Rank;
         activeAbilityLevel: number;
         passiveAbilityLevel: number;
+        primaryAbilityLevel: number;
+        secondaryAbilityLevel: number;
     }>;
 }
 export interface ICharProgression {
