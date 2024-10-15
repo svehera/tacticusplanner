@@ -233,6 +233,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
             },
             {
                 headerName: 'Estimated date',
+                hide: rows.every(row => row.type === PersonalGoalType.CharacterAbilities),
                 valueGetter: params => {
                     const { data } = params;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
@@ -249,7 +250,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 },
             },
             {
-                headerName: 'Days',
+                headerName: 'Days left',
+                hide: rows.every(row => row.type === PersonalGoalType.CharacterAbilities),
                 valueGetter: params => {
                     const { data } = params;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
@@ -260,7 +262,20 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 maxWidth: 110,
             },
             {
+                headerName: 'Days total',
+                hide: rows.every(row => row.type === PersonalGoalType.CharacterAbilities),
+                valueGetter: params => {
+                    const { data } = params;
+                    const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
+                    if (goalEstimate) {
+                        return goalEstimate.daysTotal;
+                    }
+                },
+                maxWidth: 110,
+            },
+            {
                 headerName: 'Energy',
+                hide: rows.every(row => row.type === PersonalGoalType.CharacterAbilities),
                 valueGetter: params => {
                     const { data } = params;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
