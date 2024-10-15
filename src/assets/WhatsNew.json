@@ -43,6 +43,9 @@
                             "path": "days.png"
                         }
                     ]
+                },
+                {
+                    "text": "Included MoWs and characters shards on the shared roster page"
                 }
             ],
             "bugFixes": [
