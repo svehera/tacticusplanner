@@ -1,6 +1,5 @@
-﻿import React, { useCallback, useContext, useMemo } from 'react';
+﻿import React, { useCallback, useContext } from 'react';
 import {
-    Box,
     DialogActions,
     DialogContent,
     DialogTitle,
@@ -34,6 +33,37 @@ const defaultCustomSettings: ICustomDailyRaidsSettings = {
     [Rarity.Common]: [CampaignType.Elite, CampaignType.Early, CampaignType.Mirror],
 };
 
+const energyMarks = [
+    {
+        value: 288,
+        label: '',
+    },
+    {
+        value: 288 + 50,
+        label: '25 BS',
+    },
+    {
+        value: 288 + 50 + 100,
+        label: '50 BS',
+    },
+    {
+        value: 288 + 50 + 100 + 100,
+        label: '110 BS',
+    },
+    {
+        value: 288 + 50 + 100 + 100 + 100,
+        label: '250 BS',
+    },
+    {
+        value: 288 + 50 + 100 + 100 + 100 + 100,
+        label: '500 BS',
+    },
+    {
+        value: 888888,
+        label: '∞',
+    },
+];
+
 interface Props {
     close: () => void;
     open: boolean;
@@ -43,7 +73,9 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     const dispatch = useContext(DispatchContext);
     const { dailyRaidsPreferences } = useContext(StoreContext);
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
-    const [dailyEnergy, setDailyEnergy] = React.useState(dailyRaidsPreferences.dailyEnergy);
+    const [dailyEnergy, setDailyEnergy] = React.useState(() =>
+        energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy)
+    );
     const [shardsEnergy, setShardsEnergy] = React.useState<number | string>(dailyRaidsPreferences.shardsEnergy);
     const [customLocationsSettings, setCustomLocationsSettings] = React.useState<ICustomDailyRaidsSettings>(
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
@@ -53,10 +85,11 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         setDailyRaidsPreferencesForm(curr => ({ ...curr, [setting]: value }));
     }, []);
 
-    const handleEnergyChange = (value: number | number[]) => {
+    const handleEnergyChange = (_: any, value: number | number[]) => {
         if (typeof value === 'number') {
+            const scaledValue = energyMarks[value]?.value || 288; // Adjust the index and default
             setDailyEnergy(value);
-            setDailyRaidsPreferencesForm(curr => ({ ...curr, dailyEnergy: value }));
+            setDailyRaidsPreferencesForm(curr => ({ ...curr, dailyEnergy: scaledValue }));
         }
     };
 
@@ -72,38 +105,9 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         close();
     };
 
-    const energyMarks = useMemo(
-        () => [
-            {
-                value: 288,
-                label: '',
-            },
-            {
-                value: 288 + 50,
-                label: '25 BS',
-            },
-            {
-                value: 288 + 50 + 100,
-                label: '50 BS',
-            },
-            {
-                value: 288 + 50 + 100 + 100,
-                label: '110 BS',
-            },
-            {
-                value: 288 + 50 + 100 + 100 + 100,
-                label: '250 BS',
-            },
-            {
-                value: 288 + 50 + 100 + 100 + 100 + 100,
-                label: '500 BS',
-            },
-        ],
-        []
-    );
-
     function valueLabelFormat(value: number) {
-        return energyMarks.find(mark => mark.value === value)?.value;
+        const mark = energyMarks.find(mark => mark.value === value);
+        return mark ? mark.label : value;
     }
 
     return (
@@ -113,18 +117,20 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                 <FormGroup style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: '0 20px' }}>
                     <div>
                         <Typography className="flex-box gap5">
-                            <b>{dailyEnergy}</b> <MiscIcon icon={'energy'} width={15} /> per day
+                            <b>{energyMarks[dailyEnergy].value}</b> <MiscIcon icon={'energy'} width={15} /> per day
                         </Typography>
                         <Slider
                             aria-label="Restricted values"
-                            min={288}
-                            max={738}
+                            min={0}
+                            max={energyMarks.length - 1} // Align with the number of marks
+                            step={1}
                             valueLabelFormat={valueLabelFormat}
-                            step={null}
                             value={dailyEnergy}
-                            onChange={(_, value) => handleEnergyChange(value)}
-                            // valueLabelDisplay="on"
-                            marks={energyMarks}
+                            onChange={handleEnergyChange}
+                            marks={energyMarks.map((mark, index) => ({
+                                ...mark,
+                                value: index, // Distribute marks evenly
+                            }))}
                         />
                     </div>
 

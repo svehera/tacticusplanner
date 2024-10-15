@@ -279,23 +279,22 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             {!goalEstimate.daysLeft && !goalEstimate.energyTotal && (
                                 <div>{StaticDataService.getFactionPray(goal.faction)}</div>
                             )}
-                            {!!goalEstimate.daysLeft ||
-                                (!!goalEstimate.energyTotal && (
-                                    <>
-                                        <AccessibleTooltip
-                                            title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
-                                            <div className="flex-box gap3">
-                                                <CalendarMonthIcon /> {goalEstimate.daysLeft}
-                                            </div>
-                                        </AccessibleTooltip>
-                                        <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
-                                            <div className="flex-box gap3">
-                                                <MiscIcon icon={'energy'} height={18} width={15} />{' '}
-                                                {goalEstimate.energyTotal}
-                                            </div>
-                                        </AccessibleTooltip>
-                                    </>
-                                ))}
+                            {(!!goalEstimate.daysLeft || !!goalEstimate.energyTotal) && (
+                                <>
+                                    <AccessibleTooltip
+                                        title={`${goalEstimate.daysLeft} days. Estimated date ${calendarDate}`}>
+                                        <div className="flex-box gap3">
+                                            <CalendarMonthIcon /> {goalEstimate.daysLeft}
+                                        </div>
+                                    </AccessibleTooltip>
+                                    <AccessibleTooltip title={`${goalEstimate.energyTotal} energy`}>
+                                        <div className="flex-box gap3">
+                                            <MiscIcon icon={'energy'} height={18} width={15} />{' '}
+                                            {goalEstimate.energyTotal}
+                                        </div>
+                                    </AccessibleTooltip>
+                                </>
+                            )}
                         </div>
                     </div>
                 );

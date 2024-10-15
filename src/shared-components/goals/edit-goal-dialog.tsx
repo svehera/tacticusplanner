@@ -191,18 +191,20 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 }}
                             />
 
-                            <CharacterUpgrades
-                                characterName={unit.id}
-                                upgrades={form.appliedUpgrades}
-                                rank={form.rankStart}
-                                upgradesChanges={(upgrades, updateInventory) => {
-                                    setForm({
-                                        ...form,
-                                        appliedUpgrades: upgrades,
-                                    });
-                                    setInventoryUpdate(updateInventory);
-                                }}
-                            />
+                            {form.rankStart > Rank.Locked && (
+                                <CharacterUpgrades
+                                    characterName={unit.id}
+                                    upgrades={form.appliedUpgrades}
+                                    rank={form.rankStart}
+                                    upgradesChanges={(upgrades, updateInventory) => {
+                                        setForm({
+                                            ...form,
+                                            appliedUpgrades: upgrades,
+                                        });
+                                        setInventoryUpdate(updateInventory);
+                                    }}
+                                />
+                            )}
                         </>
                     )}
 

@@ -9,9 +9,10 @@ import { RarityImage } from 'src/v2/components/images/rarity-image';
 
 interface Props {
     rows: IMowUpgrade[];
+    upgrades: Record<string, number>;
 }
 
-export const MowUpgradesTable: React.FC<Props> = ({ rows }) => {
+export const MowUpgradesTable: React.FC<Props> = ({ rows, upgrades }) => {
     const [columnDefs] = useState<Array<ColDef<IMowUpgrade>>>([
         {
             headerName: '#',
@@ -37,6 +38,20 @@ export const MowUpgradesTable: React.FC<Props> = ({ rows }) => {
             field: 'requiredTotal',
             headerName: 'Count',
             maxWidth: 75,
+        },
+        {
+            valueGetter: params => {
+                return upgrades[params.data!.id] ?? 0;
+            },
+            headerName: 'Inventory',
+            maxWidth: 90,
+        },
+        {
+            valueGetter: params => {
+                return Math.max((params.data?.requiredTotal ?? 0) - upgrades[params.data!.id] ?? 0, 0);
+            },
+            headerName: 'Remaining',
+            maxWidth: 90,
         },
         {
             field: 'rarity',

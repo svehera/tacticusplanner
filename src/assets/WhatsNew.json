@@ -1,6 +1,71 @@
 ﻿{
-    "currentVersion": "1.6.3",
+    "currentVersion": "1.6.4",
     "releaseNotes": [
+        {
+            "version": "1.6.4",
+            "date": "October 15",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added \"Infinity\" energy option to daily raids settings",
+                    "images": [
+                        {
+                            "path": "energy.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added more filters to Characters page and filter state is preserved in query params (Amenis, FMG, mason240)",
+                    "subPoints": ["Added Min Hits, Max Hits, Attack Type, Movement, Distance filters"],
+                    "images": [
+                        {
+                            "path": "filter.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added stats of each owner to Guild Insights tooltips",
+                    "images": [
+                        {
+                            "path": "stats.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added Inventory and Remaining columns to Rank Lookup and MoW Lookup pages. Thanks to ijriims for contribution"
+                },
+                {
+                    "text": "Added another column to the Plan/Goals overview in the table view that show the number of days it takes for a character alone (trick010)",
+                    "images": [
+                        {
+                            "path": "days.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Included MoWs and characters shards on the shared roster page"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with energy needed to unlock a char is not shown on goal card (Babidy04)"
+                },
+                {
+                    "text": "Fixed issue when on the Goals page, the character abilities list does not grow (Cyrus)"
+                },
+                {
+                    "text": "Fixed issue with blank screen while editing Goals for locked chars (HZM, Kinks)"
+                },
+                {
+                    "text": "Fixed issue when goals page calculates 3 days remaining for 1 onslaught token (SeventhSun)"
+                },
+                {
+                    "text": "Fixed issue on Who You Own: when sorting By Rank, MoWs come first (SeventhSun)"
+                }
+            ]
+        },
         {
             "version": "1.6.3",
             "date": "October 4",

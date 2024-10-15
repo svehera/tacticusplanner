@@ -19,6 +19,7 @@ import { numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
 import { ICharacter2 } from 'src/models/interfaces';
+import { orderBy } from 'lodash';
 
 export const CharacterTile = ({
     character,
@@ -108,17 +109,23 @@ export const CharacterTile = ({
                 {viewContext.showCharacterRarity && <RarityImage rarity={character.rarity} />}
                 {isUnlocked && <RankImage rank={character.rank} />}
             </div>
-            <Conditional condition={!!character.numberOfUnlocked}>
+            {!!character.numberOfUnlocked && (
                 <AccessibleTooltip
                     title={
-                        !character.ownedBy?.length ? (
+                        !character.statsByOwner?.length ? (
                             `${character.numberOfUnlocked}% of players unlocked this character`
                         ) : (
                             <div>
                                 ${character.numberOfUnlocked}% of players unlocked this character:
                                 <ul>
-                                    {character.ownedBy.map(username => (
-                                        <li key={username}>{username}</li>
+                                    {orderBy(
+                                        character.statsByOwner,
+                                        x => x.rank + x.activeAbilityLevel + x.passiveAbilityLevel
+                                    ).map(x => (
+                                        <li key={x.owner} className="flex-box gap5">
+                                            {x.owner} <RankImage rank={x.rank} size={20} /> A{x.activeAbilityLevel} P
+                                            {x.passiveAbilityLevel}
+                                        </li>
                                     ))}
                                 </ul>
                             </div>
@@ -132,7 +139,7 @@ export const CharacterTile = ({
                         {`${character.numberOfUnlocked}%`}
                     </div>
                 </AccessibleTooltip>
-            </Conditional>
+            )}
         </div>
     );
 };
