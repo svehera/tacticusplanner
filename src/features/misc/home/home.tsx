@@ -59,9 +59,21 @@ export const Home = () => {
     const timeToEnd = timeLeftToFutureDate(nextLeDateEnd);
     const isEventStarted = timeToStart === 'Finished';
 
+    const announcments = () => {
+        return (
+            <h2 style={{ textAlign: 'center' }}>
+                <a href="https://forms.gle/AhiqYtSAgQBmY9VW8" target="_blank" rel="noreferrer">
+                    Beginners Guide Contest (Until October 31st)
+                </a>
+            </h2>
+        );
+    };
+
     return (
         <div>
+            {announcments()}
             <Thanks sliderMode={true} />
+            {announcments()}
             <div
                 style={{
                     display: 'flex',
