@@ -325,11 +325,13 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
         ];
     }, [rows]);
 
+    const baseRowHeight = !rows.some(row => [PersonalGoalType.CharacterAbilities].includes(row.type)) ? 60 : 90;
+
     return (
         <div
             className="ag-theme-material"
             style={{
-                height: 60 + rows.length * 60,
+                height: baseRowHeight + rows.length * baseRowHeight,
                 minHeight: 150,
                 width: '100%',
             }}>

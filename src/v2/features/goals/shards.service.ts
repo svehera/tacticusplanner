@@ -100,7 +100,7 @@ export class ShardsService {
                     }
 
                     if (location.campaignType === 'Onslaught') {
-                        if (daysTotal <= previousShardsTokens / 1.5) {
+                        if (daysTotal > 0 && daysTotal <= previousShardsTokens / 1.5) {
                             continue;
                         }
 
@@ -131,7 +131,7 @@ export class ShardsService {
                 }
             }
 
-            if (raidsTotal % 1 !== 0) {
+            if (raidsTotal > 1 && raidsTotal % 1 !== 0) {
                 daysTotal++;
             }
 

@@ -8,6 +8,7 @@ import { useAuth } from 'src/contexts/auth';
 import { LoginStatusDialog } from 'src/shared-components/user-menu/login-status-dialog';
 import { RegisterUserDialog } from 'src/shared-components/user-menu/register-user-dialog';
 import { LoginUserDialog } from 'src/shared-components/user-menu/login-user-dialog';
+import { SearchParamsStateProvider } from 'src/contexts/search-params.provider';
 
 export const App = () => {
     localStorage.setItem('appVersion', StaticDataService.whatsNew.currentVersion);
@@ -63,7 +64,9 @@ export const App = () => {
             />
             <LoginUserDialog isOpen={showLoginUser} onClose={() => setShowLoginUser(false)} />
             <StoreProvider>
-                <Outlet />
+                <SearchParamsStateProvider>
+                    <Outlet />
+                </SearchParamsStateProvider>
             </StoreProvider>
         </React.Fragment>
     );

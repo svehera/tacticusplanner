@@ -1,39 +1,43 @@
-﻿import { useSearchParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+﻿import { useCallback, useContext, useEffect, useState } from 'react';
+import { SearchParamsStateContext } from 'src/contexts/search-params.context';
 
 type NullableString = string | null | undefined;
 
 export const useQueryState = <T>(
     queryParam: string,
-    getInitialState: (v: string | null) => T,
+    stringToValue: (v: string | null) => T,
     valueToString: (v: T) => NullableString
 ): [T, (value: T) => void] => {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useContext(SearchParamsStateContext);
     const queryParamValue = searchParams.get(queryParam);
-    const initialState = getInitialState(queryParamValue);
+    const initialState = stringToValue(queryParamValue);
 
     const [value, setValue] = useState<T>(initialState);
 
-    const handleValueChange = (newValue: T) => {
-        setValue(newValue);
-        const newQueryParam = valueToString(newValue);
+    const handleValueChange = useCallback(
+        (newValue: T) => {
+            setValue(newValue);
+            const newQueryParam = valueToString(newValue);
 
-        setSearchParams(curr => {
-            const updatedParams = new URLSearchParams(curr);
+            setSearchParams(
+                curr => {
+                    if (newQueryParam) {
+                        curr.set(queryParam, newQueryParam);
+                    } else {
+                        curr.delete(queryParam);
+                    }
 
-            if (newQueryParam) {
-                updatedParams.set(queryParam, newQueryParam);
-            } else {
-                updatedParams.delete(queryParam);
-            }
-
-            return updatedParams;
-        });
-    };
+                    return curr;
+                },
+                { replace: true }
+            );
+        },
+        [searchParams, setSearchParams]
+    );
 
     useEffect(() => {
         const queryParamValueNew = searchParams.get(queryParam);
-        setValue(getInitialState(queryParamValueNew));
+        setValue(stringToValue(queryParamValueNew));
     }, [searchParams]);
 
     return [value, handleValueChange];
