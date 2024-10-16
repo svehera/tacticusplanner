@@ -6809,5 +6809,63 @@
         "nodeNumber": 24,
         "reward": "Eldryon",
         "expectedGold": 53
+    },
+    "SHME25": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 25,
+        "reward": "Mutation: Tough Skin",
+        "expectedGold": 53,
+        "slots": 4
+    },
+    "SHME26": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 26,
+        "reward": "Cadaere Renissum",
+        "expectedGold": 53
+    },
+    "SHME27": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 27,
+        "reward": "Otherworldly Energy",
+        "expectedGold": 53
+    },
+    "SHME28": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 28,
+        "reward": "The Silver Scope",
+        "expectedGold": 53,
+        "slots": 3
+    },
+    "SHME29": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 29,
+        "reward": "The Silver Eagle with Swords",
+        "expectedGold": 53
+    },
+    "SHME30": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 30,
+        "reward": "Weapon Anointment Oils",
+        "expectedGold": 53
+    },
+    "SHME31": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 31,
+        "reward": "Boon of Khorne",
+        "expectedGold": 53
+    },
+    "SHME32": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 32,
+        "reward": "Jain Zar",
+        "expectedGold": 53
     }
 }
