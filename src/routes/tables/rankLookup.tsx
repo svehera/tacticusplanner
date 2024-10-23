@@ -26,7 +26,7 @@ import { RankImage } from 'src/v2/components/images/rank-image';
 import InfoIcon from '@mui/icons-material/Info';
 
 export const RankLookup = () => {
-    const { characters, campaignsProgress } = useContext(StoreContext);
+    const { characters, campaignsProgress, inventory } = useContext(StoreContext);
     const [searchParams, setSearchParams] = useSearchParams();
 
     const charactersOptions = sortBy(characters, 'name');
@@ -59,14 +59,6 @@ export const RankLookup = () => {
 
     const [message, setMessage] = useState<string>('Upgrades:');
     const [totalGold, setTotalGold] = useState<number>(0);
-
-    // for debug
-    // charactersOptions.forEach(x => {
-    //     const characterUpgrades = StaticDataService.rankUpData[x.name];
-    //     if (!characterUpgrades) {
-    //         console.log(x.name);
-    //     }
-    // });
 
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLElement | null>(null);
     const [materialRecipe, setMaterialRecipe] = React.useState<IMaterialFull | null>(null);
@@ -135,7 +127,7 @@ export const RankLookup = () => {
                     completedLocations: [],
                     campaignsProgress: campaignsProgress,
                     dailyEnergy: 0,
-                    upgrades: {},
+                    upgrades: inventory.upgrades,
                     preferences: {
                         farmStrategy: DailyRaidsStrategy.allLocations,
                         farmByPriorityOrder: false,
@@ -191,6 +183,20 @@ export const RankLookup = () => {
         {
             field: 'count',
             maxWidth: 75,
+        },
+        {
+            valueGetter: params => {
+                return inventory.upgrades[params.data!.id] ?? 0;
+            },
+            headerName: 'Inventory',
+            maxWidth: 90,
+        },
+        {
+            valueGetter: params => {
+                return Math.max(params.data.count - inventory.upgrades[params.data!.id] ?? 0, 0);
+            },
+            headerName: 'Remaining',
+            maxWidth: 90,
         },
         {
             field: 'rarity',

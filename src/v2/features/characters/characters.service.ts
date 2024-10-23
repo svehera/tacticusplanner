@@ -17,6 +17,7 @@ import { CharactersValueService } from './characters-value.service';
 import { rarityCaps } from 'src/v2/features/characters/characters.contants';
 import { isCharacter, isMow, isUnlocked } from 'src/v2/features/characters/units.functions';
 import { UnitType } from 'src/v2/features/characters/units.enums';
+import { charsUnlockShards } from 'src/models/constants';
 
 export class CharactersService {
     static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {
@@ -76,11 +77,23 @@ export class CharactersService {
                     ['desc']
                 );
             case CharactersOrderBy.Rank:
-                return orderBy(units, ['rank'], ['desc']);
+                return orderBy(units, unit => (isMow(unit) ? Rank.Locked : unit.rank), ['desc']);
             case CharactersOrderBy.Rarity:
                 return orderBy(units, ['rarity', 'stars'], ['desc', 'desc']);
             case CharactersOrderBy.UnlockPercentage:
-                return orderBy(units, ['numberOfUnlocked'], ['asc']);
+                return orderBy(
+                    units,
+                    unit => {
+                        if (unit.numberOfUnlocked) {
+                            return unit.numberOfUnlocked;
+                        } else {
+                            return !isUnlocked(unit)
+                                ? Math.ceil((unit.shards / charsUnlockShards[unit.rarity]) * 100)
+                                : units.filter(x => x.faction === unit.faction && isUnlocked(x)).length;
+                        }
+                    },
+                    ['asc']
+                );
             default:
                 return units;
         }

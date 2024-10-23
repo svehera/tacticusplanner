@@ -16,6 +16,7 @@ import { CharactersPowerService } from 'src/v2/features/characters/characters-po
 import { IMow } from 'src/v2/features/characters/characters.models';
 import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { orderBy } from 'lodash';
 
 interface Props {
     mow: IMow;
@@ -78,17 +79,22 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                 {viewContext.showCharacterRarity && <RarityImage rarity={mow.rarity} />}
                 <MiscIcon icon={'mow'} width={22} height={25} />
             </div>
-            <Conditional condition={!!mow.numberOfUnlocked}>
+            {!!mow.numberOfUnlocked && (
                 <AccessibleTooltip
                     title={
-                        !mow.ownedBy?.length ? (
+                        !mow.statsByOwner?.length ? (
                             `${mow.numberOfUnlocked}% of players unlocked this MoW`
                         ) : (
                             <div>
                                 ${mow.numberOfUnlocked}% of players unlocked this MoW:
                                 <ul>
-                                    {mow.ownedBy.map(username => (
-                                        <li key={username}>{username}</li>
+                                    {orderBy(
+                                        mow.statsByOwner,
+                                        x => x.primaryAbilityLevel + x.secondaryAbilityLevel
+                                    ).map(x => (
+                                        <li key={x.owner}>
+                                            {x.owner} P{x.primaryAbilityLevel} S{x.secondaryAbilityLevel}
+                                        </li>
                                     ))}
                                 </ul>
                             </div>
@@ -102,7 +108,7 @@ export const MowTile: React.FC<Props> = ({ mow, disableClick, onClick }) => {
                         {`${mow.numberOfUnlocked}%`}
                     </div>
                 </AccessibleTooltip>
-            </Conditional>
+            )}
         </div>
     );
 };

@@ -249,6 +249,14 @@ export type DynamicProps = {
     ownedBy?: string[];
     potential?: number;
     power?: number;
+    statsByOwner?: Array<{
+        owner: string;
+        rank: Rank;
+        activeAbilityLevel: number;
+        passiveAbilityLevel: number;
+        primaryAbilityLevel: number;
+        secondaryAbilityLevel: number;
+    }>;
 };
 
 export interface IPersonalData {
@@ -512,6 +520,14 @@ export interface IPersonalCharacterData2 {
 export interface IInsightsData {
     numberOfUnlocked?: number;
     ownedBy?: string[];
+    statsByOwner?: Array<{
+        owner: string;
+        rank: Rank;
+        activeAbilityLevel: number;
+        passiveAbilityLevel: number;
+        primaryAbilityLevel: number;
+        secondaryAbilityLevel: number;
+    }>;
 }
 export interface ICharProgression {
     shards: number;

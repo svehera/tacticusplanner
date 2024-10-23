@@ -14,7 +14,7 @@ import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
 import { MowUpgradesTable } from 'src/v2/features/lookup/mow-upgrades-table';
 
 export const MowLookup = () => {
-    const { mows } = useContext(StoreContext);
+    const { mows, inventory } = useContext(StoreContext);
     const autocompleteOptions = sortBy(mows, 'name');
 
     const [inputs, setInputs] = useState<IMowLookupInputs>({
@@ -67,7 +67,7 @@ export const MowLookup = () => {
                             />
                         </AccordionSummary>
                         <AccordionDetails>
-                            <MowUpgradesTable rows={customUpgrades} />
+                            <MowUpgradesTable rows={customUpgrades} upgrades={inventory.upgrades} />
                         </AccordionDetails>
                     </Accordion>
 
@@ -81,7 +81,7 @@ export const MowLookup = () => {
                         </AccordionSummary>
                         <AccordionDetails className="flex-box gap20">
                             <MowMaterialsTable rows={mowMaterials} />
-                            <MowUpgradesTable rows={upgradesTotal} />
+                            <MowUpgradesTable rows={upgradesTotal} upgrades={inventory.upgrades} />
                         </AccordionDetails>
                     </Accordion>
                 </>

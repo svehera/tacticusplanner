@@ -734,7 +734,7 @@
         "Equipment2": "Defense",
         "Equipment3": "Crit Booster",
         "Traits": ["Mechanical", "Big Target", "Explodes", "Get Stuck In"],
-        "Active Ability": "Physical",
+        "Active Ability": "Projectile",
         "Number": 13,
         "ForcedSummons": false,
         "RequiredInCampaign": true,
@@ -1809,10 +1809,10 @@
         "ReleaseRarity": 6,
         "lre": {
             "id": 6,
-            "finished": false,
+            "finished": true,
             "eventStage": 3,
-            "nextEventDate": "September 29",
-            "nextEventDateUtc": "Sun, 29 September 2024 00:00:00 GMT"
+            "nextEventDate": "",
+            "nextEventDateUtc": ""
         }
     },
     {

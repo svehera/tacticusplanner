@@ -12,7 +12,7 @@ import { ViewControls } from 'src/v2/features/characters/components/view-control
 import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
-import { IViewControls } from 'src/v2/features/characters/characters.models';
+import { IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
 import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
@@ -56,7 +56,7 @@ export const SharedRoster = () => {
         return <div>Failed to fetch shared roster. Try again later.</div>;
     }
 
-    const sharedRoster = GlobalState.initCharacters(data.characters);
+    const sharedRoster: IUnit[] = [...GlobalState.initCharacters(data.characters), ...GlobalState.initMows(data.mows)];
 
     const charactersFiltered = CharactersService.filterUnits(sharedRoster, viewControls.filterBy, nameFilter);
     const totalPower = sum(charactersFiltered.map(character => CharactersPowerService.getCharacterPower(character)));

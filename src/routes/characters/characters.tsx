@@ -3,26 +3,82 @@
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, RowStyle, RowClassParams, IRowNode, ICellRendererParams, ColGroupDef } from 'ag-grid-community';
 
-import { FormControlLabel, Switch, TextField } from '@mui/material';
+import {
+    Badge,
+    FormControl,
+    FormControlLabel,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
+    Switch,
+    TextField,
+} from '@mui/material';
 
 import { MultipleSelectCheckmarks } from './multiple-select';
-import { ICharacter2 } from '../../models/interfaces';
-import { Alliance, DamageType, Rank, Trait } from '../../models/enums';
+import { ICharacter2 } from 'src/models/interfaces';
+import { Alliance, DamageType, Rank, Trait } from 'src/models/enums';
 import { isMobile } from 'react-device-detect';
-import { CharacterTitle } from '../../shared-components/character-title';
-import { StoreContext } from '../../reducers/store.provider';
+import { CharacterTitle } from 'src/shared-components/character-title';
+import { StoreContext } from 'src/reducers/store.provider';
 import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { RarityImage } from 'src/shared-components/rarity-image';
 import { RankImage } from 'src/shared-components/rank-image';
+import { useQueryState } from 'src/v2/hooks/query-state';
+import { uniq } from 'lodash';
+import InputLabel from '@mui/material/InputLabel';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 
 export const Characters = () => {
     const gridRef = useRef<AgGridReact<ICharacter2>>(null);
 
     const [nameFilter, setNameFilter] = useState<string>('');
     const [onlyUnlocked, setOnlyUnlocked] = useState<boolean>(false);
-    const [damageTypesFilter, setDamageTypesFilter] = useState<DamageType[]>([]);
-    const [traitsFilter, setTraitsFilter] = useState<Trait[]>([]);
-    const [allianceFilter, setAllianceFilter] = useState<Alliance[]>([]);
+    const [rowCount, setRowCount] = useState(0);
+    const [showFilters, setShowFilters] = React.useState(false);
+
+    const [damageTypesFilter, setDamageTypesFilter] = useQueryState<DamageType[]>(
+        'damage',
+        filterParam => (filterParam?.split(',') as DamageType[]) ?? [],
+        queryParam => queryParam?.join(',')
+    );
+    const [traitsFilter, setTraitsFilter] = useQueryState<Trait[]>(
+        'trait',
+        filterParam => (filterParam?.split(',') as Trait[]) ?? [],
+        queryParam => queryParam?.join(',')
+    );
+    const [allianceFilter, setAllianceFilter] = useQueryState<Alliance[]>(
+        'alliance',
+        filterParam => (filterParam?.split(',') as Alliance[]) ?? [],
+        queryParam => queryParam?.join(',')
+    );
+    const [minHitsFilter, setMinHitsFilter] = useQueryState<number | ''>(
+        'minHits',
+        filterParam => (filterParam ? Number.parseInt(filterParam) : ''),
+        queryParam => (queryParam > 0 ? queryParam?.toString() : '')
+    );
+    const [maxHitsFilter, setMaxHitsFilter] = useQueryState<number | ''>(
+        'maxHits',
+        filterParam => (filterParam ? Number.parseInt(filterParam) : ''),
+        queryParam => (queryParam > 0 ? queryParam?.toString() : '')
+    );
+    const [movementFilter, setMovementFilter] = useQueryState<number | ''>(
+        'movement',
+        filterParam => (filterParam ? Number.parseInt(filterParam) : ''),
+        queryParam => (queryParam > 0 ? queryParam?.toString() : '')
+    );
+    const [distanceFilter, setDistanceFilter] = useQueryState<number | ''>(
+        'distance',
+        filterParam => (filterParam ? Number.parseInt(filterParam) : ''),
+        queryParam => (queryParam > 0 ? queryParam?.toString() : '')
+    );
+    const [attackTypeFilter, setAttackTypeFilter] = useQueryState<string | ''>(
+        'attackType',
+        filterParam => filterParam ?? '',
+        queryParam => queryParam
+    );
 
     const defaultColDef: ColDef<ICharacter2> = {
         sortable: true,
@@ -266,6 +322,18 @@ export const Characters = () => {
 
     const { characters } = useContext(StoreContext);
 
+    const hitsOptions = uniq(characters.flatMap(x => [x.meleeHits, x.rangeHits ?? 1]))
+        .sort((a, b) => a - b)
+        .map(x => x.toString());
+
+    const movementOptions = uniq(characters.map(x => x.movement))
+        .sort((a, b) => a - b)
+        .map(x => x.toString());
+
+    const distanceOptions = uniq(characters.filter(x => !!x.rangeDistance).map(x => x.rangeDistance ?? 1))
+        .sort((a, b) => a - b)
+        .map(x => x.toString());
+
     const rows = useMemo(
         () =>
             characters.filter(
@@ -303,12 +371,82 @@ export const Characters = () => {
         });
     }, []);
 
+    const minHitsFilterChange = useCallback((event: SelectChangeEvent<number>) => {
+        setMinHitsFilter(+event.target.value);
+        requestAnimationFrame(() => {
+            gridRef.current?.api.onFilterChanged();
+        });
+    }, []);
+
+    const maxHitsFilterChange = useCallback((event: SelectChangeEvent<number>) => {
+        setMaxHitsFilter(+event.target.value);
+        requestAnimationFrame(() => {
+            gridRef.current?.api.onFilterChanged();
+        });
+    }, []);
+
+    const movementFilterChange = useCallback((event: SelectChangeEvent<number>) => {
+        setMovementFilter(+event.target.value);
+        requestAnimationFrame(() => {
+            gridRef.current?.api.onFilterChanged();
+        });
+    }, []);
+
+    const distanceFilterChange = useCallback((event: SelectChangeEvent<number>) => {
+        setDistanceFilter(+event.target.value);
+        requestAnimationFrame(() => {
+            gridRef.current?.api.onFilterChanged();
+        });
+    }, []);
+
+    const attackTypeFilterChange = useCallback((event: SelectChangeEvent) => {
+        setAttackTypeFilter(event.target.value);
+        requestAnimationFrame(() => {
+            gridRef.current?.api.onFilterChanged();
+        });
+    }, []);
+
     const isExternalFilterPresent = useCallback(() => {
         const hasDamageTypeFilter = damageTypesFilter.length > 0;
         const hasTraitsFilter = traitsFilter.length > 0;
         const hasAllianceFilter = allianceFilter.length > 0;
-        return hasDamageTypeFilter || hasTraitsFilter || hasAllianceFilter;
-    }, [damageTypesFilter, traitsFilter, allianceFilter]);
+        const hasMinHitsFilter = minHitsFilter > 0;
+        const hasMaxHitsFilter = maxHitsFilter > 0;
+        const hasMovementFilter = movementFilter > 0;
+        const hasDistanceFilter = distanceFilter > 0;
+        const hasAttackTypeFilter = !!attackTypeFilter;
+        return (
+            hasMovementFilter ||
+            hasDistanceFilter ||
+            hasDamageTypeFilter ||
+            hasTraitsFilter ||
+            hasAllianceFilter ||
+            hasMinHitsFilter ||
+            hasMaxHitsFilter ||
+            hasAttackTypeFilter
+        );
+    }, [damageTypesFilter, traitsFilter, allianceFilter, minHitsFilter, maxHitsFilter]);
+
+    const filtersCount = useMemo(() => {
+        const hasDamageTypeFilter = damageTypesFilter.length > 0;
+        const hasTraitsFilter = traitsFilter.length > 0;
+        const hasAllianceFilter = allianceFilter.length > 0;
+        const hasMinHitsFilter = minHitsFilter > 0;
+        const hasMaxHitsFilter = maxHitsFilter > 0;
+        const hasMovementFilter = movementFilter > 0;
+        const hasDistanceFilter = distanceFilter > 0;
+        const hasAttackTypeFilter = !!attackTypeFilter;
+        return (
+            +hasMovementFilter +
+            +hasDistanceFilter +
+            +hasDamageTypeFilter +
+            +hasTraitsFilter +
+            +hasAllianceFilter +
+            +hasMinHitsFilter +
+            +hasMaxHitsFilter +
+            +hasAttackTypeFilter
+        );
+    }, [damageTypesFilter, traitsFilter, allianceFilter, minHitsFilter, maxHitsFilter]);
 
     const doesExternalFilterPass = useCallback(
         (node: IRowNode<ICharacter2>) => {
@@ -342,29 +480,103 @@ export const Characters = () => {
                 return allianceFilter.some(alliance => node.data?.alliance.includes(alliance));
             };
 
+            const doesMinHitsFilterPass = () => {
+                if (!minHitsFilter) {
+                    return true;
+                }
+                const hits = node.data?.rangeHits ?? node.data?.meleeHits ?? 0;
+
+                return hits >= minHitsFilter;
+            };
+
+            const doesMaxHitsFilterPass = () => {
+                if (!maxHitsFilter) {
+                    return true;
+                }
+                const hits = node.data?.rangeHits ?? node.data?.meleeHits ?? 0;
+
+                return hits <= maxHitsFilter;
+            };
+            const doesMovementFilterPass = () => {
+                if (!movementFilter) {
+                    return true;
+                }
+                return node.data?.movement === movementFilter;
+            };
+
+            const doesDistanceFilterPass = () => {
+                if (!distanceFilter) {
+                    return true;
+                }
+                return node.data?.rangeDistance === distanceFilter;
+            };
+
+            const doesAttackTypeFilterPass = () => {
+                switch (attackTypeFilter) {
+                    case 'melee': {
+                        return !node.data?.rangeHits;
+                    }
+                    case 'range': {
+                        return !!node.data?.rangeHits;
+                    }
+                    default: {
+                        return true;
+                    }
+                }
+            };
+
             if (node.data) {
-                return doesDamageTypeFilterPass() && doesTraitsFilterPass() && doesAllianceFilterPass();
+                return (
+                    doesDamageTypeFilterPass() &&
+                    doesTraitsFilterPass() &&
+                    doesAllianceFilterPass() &&
+                    doesMinHitsFilterPass() &&
+                    doesMaxHitsFilterPass() &&
+                    doesAttackTypeFilterPass() &&
+                    doesMovementFilterPass() &&
+                    doesDistanceFilterPass()
+                );
             }
             return true;
         },
-        [damageTypesFilter, traitsFilter, allianceFilter]
+        [
+            damageTypesFilter,
+            traitsFilter,
+            allianceFilter,
+            minHitsFilter,
+            maxHitsFilter,
+            attackTypeFilter,
+            movementFilter,
+            distanceFilter,
+        ]
     );
 
     const refreshRowNumberColumn = useCallback(() => {
-        const columns = [gridRef.current?.columnApi.getColumn('rowNumber') ?? ''];
+        const columns = [gridRef.current?.api.getColumn('rowNumber') ?? ''];
         gridRef.current?.api.refreshCells({ columns });
+
+        const displayedRowCount = gridRef.current?.api.getDisplayedRowCount();
+        setRowCount(displayedRowCount ?? 0);
     }, []);
+
+    const resetFilters = () => {
+        setNameFilter('');
+        allianceFilterChanged([]);
+        damageTypeFilterChanged([]);
+        traitsFilterChanged([]);
+        minHitsFilterChange({ target: { value: '' } } as any);
+        maxHitsFilterChange({ target: { value: '' } } as any);
+        movementFilterChange({ target: { value: '' } } as any);
+        distanceFilterChange({ target: { value: '' } } as any);
+        attackTypeFilterChange({ target: { value: '' } } as any);
+        requestAnimationFrame(() => {
+            gridRef.current?.api.onFilterChanged();
+        });
+    };
 
     return (
         <div>
-            <div
-                style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '20px',
-                    margin: '0 20px',
-                    flexDirection: isMobile ? 'column' : 'row',
-                }}>
+            <div className="flex-box gap20 wrap">
                 <FormControlLabel
                     label="Only unlocked"
                     control={
@@ -376,32 +588,139 @@ export const Characters = () => {
                     }
                 />
                 <TextField
-                    style={{ minWidth: 200 }}
+                    style={{ minWidth: 140 }}
                     label="Quick Filter"
                     variant="outlined"
                     onChange={onFilterTextBoxChanged}
                 />
-                <MultipleSelectCheckmarks
-                    groupByFirstLetter
-                    placeholder="Damage Types"
-                    selectedValues={damageTypesFilter}
-                    values={Object.values(DamageType)}
-                    selectionChanges={damageTypeFilterChanged}
-                />
-                <MultipleSelectCheckmarks
-                    groupByFirstLetter
-                    placeholder="Traits"
-                    selectedValues={traitsFilter}
-                    values={Object.values(Trait)}
-                    selectionChanges={traitsFilterChanged}
-                />
-                <MultipleSelectCheckmarks
-                    placeholder="Alliance"
-                    selectedValues={allianceFilter}
-                    values={Object.values(Alliance)}
-                    selectionChanges={allianceFilterChanged}
-                />
+                <div className="flex-box gap10">
+                    {filtersCount > 0 ? (
+                        <>
+                            <Badge badgeContent={filtersCount} color="warning">
+                                <IconButton onClick={() => setShowFilters(value => !value)}>
+                                    <FilterAltIcon />
+                                </IconButton>
+                            </Badge>
+                            <Button color="error" onClick={resetFilters}>
+                                Clear Filters
+                            </Button>
+                        </>
+                    ) : (
+                        <Button variant="outlined" onClick={() => setShowFilters(value => !value)}>
+                            Filter <FilterAltOutlinedIcon />
+                        </Button>
+                    )}
+                    <span>
+                        ({rowCount} of {rows.length})
+                    </span>
+                </div>
             </div>
+            <br />
+            {showFilters && (
+                <>
+                    <div className="flex-box gap10 wrap">
+                        <FormControl style={{ minWidth: '110px' }}>
+                            <InputLabel>Min Hits</InputLabel>
+                            <Select<number> label="Min Hits" value={minHitsFilter} onChange={minHitsFilterChange}>
+                                <MenuItem value="">
+                                    <span>Any</span>
+                                </MenuItem>
+                                {hitsOptions.map(hit => (
+                                    <MenuItem key={hit} value={hit}>
+                                        <span>{hit}</span>
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+
+                        <FormControl style={{ minWidth: '110px' }}>
+                            <InputLabel>Max Hits</InputLabel>
+                            <Select<number> label="Max Hits" value={maxHitsFilter} onChange={maxHitsFilterChange}>
+                                <MenuItem value="">
+                                    <span>Any</span>
+                                </MenuItem>
+                                {hitsOptions.map(hit => (
+                                    <MenuItem key={hit} value={hit}>
+                                        <span>{hit}</span>
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+
+                        <FormControl style={{ minWidth: '130px' }}>
+                            <InputLabel>Attack Type</InputLabel>
+                            <Select<string>
+                                label="Attack Type"
+                                value={attackTypeFilter}
+                                onChange={attackTypeFilterChange}>
+                                <MenuItem value="">
+                                    <span>Any</span>
+                                </MenuItem>
+                                <MenuItem value="melee">
+                                    <span>Melee Only</span>
+                                </MenuItem>
+                                <MenuItem value="range">
+                                    <span>Range Only</span>
+                                </MenuItem>
+                            </Select>
+                        </FormControl>
+
+                        <FormControl style={{ minWidth: '120px' }}>
+                            <InputLabel>Movement</InputLabel>
+                            <Select<number> label="Movement" value={movementFilter} onChange={movementFilterChange}>
+                                <MenuItem value="">
+                                    <span>Any</span>
+                                </MenuItem>
+                                {movementOptions.map(hit => (
+                                    <MenuItem key={hit} value={hit}>
+                                        <span>{hit}</span>
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+
+                        <FormControl style={{ minWidth: '110px' }}>
+                            <InputLabel>Distance</InputLabel>
+                            <Select<number> label="Distance" value={distanceFilter} onChange={distanceFilterChange}>
+                                <MenuItem value="">
+                                    <span>Any</span>
+                                </MenuItem>
+                                {distanceOptions.map(hit => (
+                                    <MenuItem key={hit} value={hit}>
+                                        <span>{hit}</span>
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+
+                        <MultipleSelectCheckmarks
+                            maxWidth={250}
+                            groupByFirstLetter
+                            placeholder="Damage Types"
+                            selectedValues={damageTypesFilter}
+                            values={Object.values(DamageType)}
+                            selectionChanges={damageTypeFilterChanged}
+                        />
+                        <MultipleSelectCheckmarks
+                            maxWidth={250}
+                            groupByFirstLetter
+                            placeholder="Traits"
+                            selectedValues={traitsFilter}
+                            values={Object.values(Trait)}
+                            selectionChanges={traitsFilterChanged}
+                        />
+                        <MultipleSelectCheckmarks
+                            maxWidth={250}
+                            placeholder="Alliance"
+                            selectedValues={allianceFilter}
+                            values={Object.values(Alliance)}
+                            selectionChanges={allianceFilterChanged}
+                        />
+                    </div>
+                    <br />
+                </>
+            )}
+
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}
