@@ -246,6 +246,8 @@ export const defaultData: IPersonalData2 = {
         hideCompleted: false,
         craftableItemsInInventory: false,
         hideNames: false,
+        wyoFilter: CharactersFilterBy.None,
+        wyoOrder: CharactersOrderBy.Faction,
         showBadges: true,
         showAbilitiesLevel: true,
         showBsValue: true,

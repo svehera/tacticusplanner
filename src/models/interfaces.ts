@@ -44,7 +44,6 @@ import { MowsAction } from 'src/reducers/mows.reducer';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 import { TeamsAction } from 'src/reducers/teams.reducer';
-import { LreSection } from 'src/v2/features/lre/lre.models';
 
 export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
 
@@ -260,7 +259,7 @@ export type DynamicProps = {
 };
 
 export interface IPersonalData {
-    version?: undefined;
+    version?: string;
     autoTeamsPreferences: IAutoTeamsPreferences;
     viewPreferences: IViewPreferences;
     selectedTeamOrder: ISelectedTeamsOrdering;
@@ -280,7 +279,7 @@ export type SetStateAction<T> = { type: 'Set'; value: T };
 
 export interface IGlobalState {
     modifiedDate?: Date;
-    seenAppVersion?: string | null | undefined;
+    seenAppVersion?: string | null;
     autoTeamsPreferences: IAutoTeamsPreferences;
     viewPreferences: IViewPreferences;
     dailyRaidsPreferences: IDailyRaidsPreferences;
@@ -435,8 +434,8 @@ export interface IViewOption<T = IViewPreferences> {
 export interface IViewPreferences extends ILreViewSettings, IWyoViewSettings {
     theme: 'light' | 'dark';
     // autoTeams: boolean;
-    // wyoFilter: CharactersFilterBy;
-    // wyoOrder: CharactersOrderBy;
+    wyoFilter: CharactersFilterBy;
+    wyoOrder: CharactersOrderBy;
     craftableItemsInInventory: boolean;
     inventoryShowAlphabet: boolean;
     inventoryShowPlusMinus: boolean;
@@ -698,10 +697,8 @@ export interface ICampaignBattleComposed {
     isCompleted?: boolean;
 }
 
-type MaterialName = string;
-
 export interface IRecipeData {
-    [material: MaterialName]: IMaterial;
+    [material: string]: IMaterial;
 }
 
 export interface IMaterial {
@@ -717,12 +714,12 @@ export interface IMaterial {
 }
 
 export interface IMaterialRecipeIngredient {
-    material: MaterialName | 'Gold'; // material name;
+    material: string | 'Gold'; // material name;
     count: number;
 }
 
 export interface IRecipeDataFull {
-    [material: MaterialName]: IMaterialFull;
+    [material: string]: IMaterialFull;
 }
 
 export interface IMaterialFull {
@@ -741,7 +738,7 @@ export interface IMaterialFull {
 
 export interface IMaterialRecipeIngredientFull {
     id: string;
-    label: MaterialName | 'Gold';
+    label: string | 'Gold';
     count: number;
     rarity: Rarity;
     stat: string;
