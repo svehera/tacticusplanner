@@ -1,47 +1,39 @@
-﻿import React, { useContext, useMemo } from 'react';
-import { enqueueSnackbar } from 'notistack';
+﻿import React, { useContext, useMemo, useState } from 'react';
 
-import { ICharacter2, ILegendaryEvent, ILreTeam, LegendaryEventSection, SelectedTeams } from '../../models/interfaces';
+import { ICharacter2, ILegendaryEvent, ILreTeam, LreTrackId } from 'src/models/interfaces';
 import { LegendaryEventTrack } from './legendary-event-track';
-import { SelectedTeamsTable } from './selected-teams-table';
 
-import DataTablesDialog from './data-tables-dialog';
-import { Info } from '@mui/icons-material';
-import { FormControl, FormControlLabel, MenuItem, Select, Switch, Tooltip } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-import { orderBy } from 'lodash';
-import { SetGoalDialog } from '../../shared-components/goals/set-goal-dialog';
-import { MyProgressDialog } from './my-progress-dialog';
-import { DispatchContext, StoreContext } from '../../reducers/store.provider';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { isMobile } from 'react-device-detect';
-import TableRowsIcon from '@mui/icons-material/TableRows';
-import GridViewIcon from '@mui/icons-material/GridView';
+import { LreAddTeam } from 'src/v2/features/lre/lre-add-team';
+import { LreEditTeam } from 'src/v2/features/lre/lre-edit-team';
 
 export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
     const { characters, viewPreferences, leSelectedTeams, leProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
+    const [showAddTeam, setShowAddTeam] = useState(false);
+    const [editTeam, setEditTeam] = useState<ILreTeam | null>(null);
+    const [preselectedTrackId, setPreselectedTrackId] = useState<LreTrackId>('alpha');
+    const [preselectedRequirements, setPreselectedRequirements] = useState<string[]>([]);
+
     const selectedTeams: ILreTeam[] = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
 
-    const updateView = (gridView: boolean): void => {
-        dispatch.viewPreferences({ type: 'Update', setting: 'lreGridView', value: gridView });
+    selectedTeams.forEach(team => {
+        team.characters = team.charactersIds.map(id => {
+            const character = characters.find(x => x.id === id);
+
+            return { ...character, teamId: team.id };
+        }) as ICharacter2[];
+    });
+
+    const startAddTeam = (section: LreTrackId, restrictions: string[]) => {
+        setShowAddTeam(true);
+        setPreselectedTrackId(section);
+        setPreselectedRequirements(restrictions);
     };
 
-    const selectChars =
-        (section: LegendaryEventSection) =>
-        (team: string, ...chars: string[]) => {
-            // dispatch.leSelectedTeams({ type: 'SelectChars', eventId: legendaryEvent.id, section, chars, team });
-            // enqueueSnackbar(`${chars.join(',')} added to ${team} of ${section} sector`, { variant: 'success' });
-        };
-
-    const deselectChars =
-        (section: LegendaryEventSection) =>
-        (team: string, ...chars: string[]) => {
-            // dispatch.leSelectedTeams({ type: 'DeselectChars', eventId: legendaryEvent.id, section, chars, team });
-            // enqueueSnackbar(`${chars.join(',')} removed from ${team} of ${section} sector`, { variant: 'warning' });
-        };
-
-    const getCompletedRequirements = (section: LegendaryEventSection): string[] => {
+    const getCompletedRequirements = (section: LreTrackId): string[] => {
         const eventProgress = leProgress[legendaryEvent.id];
         const sectionProgress = eventProgress && eventProgress[section];
         const track = legendaryEvent[section];
@@ -71,65 +63,84 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
         [leProgress, legendaryEvent.id]
     );
 
+    const addLreTeam = (team: ILreTeam) => {
+        dispatch.leSelectedTeams({ type: 'AddTeam', eventId: legendaryEvent.id, team });
+        setShowAddTeam(false);
+    };
+
+    const saveLreTeam = (team: ILreTeam) => {
+        dispatch.leSelectedTeams({
+            type: 'UpdateTeam',
+            eventId: legendaryEvent.id,
+            teamId: team.id,
+            name: team.name,
+            charactersIds: team.charactersIds,
+        });
+        setEditTeam(null);
+    };
+
+    const deleteTeam = (teamId: string) => {
+        if (confirm('Are you sure you want to delete?')) {
+            dispatch.leSelectedTeams({
+                type: 'DeleteTeam',
+                eventId: legendaryEvent.id,
+                teamId,
+            });
+            setEditTeam(null);
+        }
+    };
+
     return (
         <div>
             <div
                 style={{ display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: 15, marginBottom: 10 }}
                 key={legendaryEvent.id}>
-                <LegendaryEventTrack
-                    show={viewPreferences.showAlpha}
-                    track={legendaryEvent.alpha}
-                    selectChars={selectChars('alpha')}
-                    completedRequirements={viewPreferences.hideCompleted ? alphaCompletedRequirements : []}
-                />
-                <LegendaryEventTrack
-                    show={viewPreferences.showBeta}
-                    track={legendaryEvent.beta}
-                    selectChars={selectChars('beta')}
-                    completedRequirements={viewPreferences.hideCompleted ? betaCompletedRequirements : []}
-                />
-                <LegendaryEventTrack
-                    show={viewPreferences.showGamma}
-                    track={legendaryEvent.gamma}
-                    selectChars={selectChars('gamma')}
-                    completedRequirements={viewPreferences.hideCompleted ? gammaCompletedRequirements : []}
-                />
-            </div>
-            <div>
-                <div className="flex-box">
-                    <span>Selected teams</span>
-                    <Switch
-                        checked={viewPreferences.lreGridView}
-                        onChange={event => updateView(event.target.checked)}
-                    />
-                    {viewPreferences.lreGridView ? <GridViewIcon color="primary" /> : <TableRowsIcon color="primary" />}
-                </div>
-                <div
-                    style={{ display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: 15, overflow: 'auto' }}
-                    key={legendaryEvent.id}>
-                    <SelectedTeamsTable
-                        show={viewPreferences.showAlpha}
+                {viewPreferences.showAlpha && (
+                    <LegendaryEventTrack
                         track={legendaryEvent.alpha}
+                        startAddTeam={startAddTeam}
+                        editTeam={setEditTeam}
                         teams={selectedTeams.filter(x => x.section === 'alpha')}
-                        deselectChars={deselectChars('alpha')}
                         completedRequirements={viewPreferences.hideCompleted ? alphaCompletedRequirements : []}
                     />
-                    <SelectedTeamsTable
-                        show={viewPreferences.showBeta}
+                )}
+                {viewPreferences.showBeta && (
+                    <LegendaryEventTrack
                         track={legendaryEvent.beta}
+                        startAddTeam={startAddTeam}
+                        editTeam={setEditTeam}
                         teams={selectedTeams.filter(x => x.section === 'beta')}
-                        deselectChars={deselectChars('beta')}
                         completedRequirements={viewPreferences.hideCompleted ? betaCompletedRequirements : []}
                     />
-                    <SelectedTeamsTable
-                        show={viewPreferences.showGamma}
+                )}
+                {viewPreferences.showGamma && (
+                    <LegendaryEventTrack
                         track={legendaryEvent.gamma}
+                        startAddTeam={startAddTeam}
+                        editTeam={setEditTeam}
                         teams={selectedTeams.filter(x => x.section === 'gamma')}
-                        deselectChars={deselectChars('gamma')}
                         completedRequirements={viewPreferences.hideCompleted ? gammaCompletedRequirements : []}
                     />
-                </div>
+                )}
             </div>
+            {showAddTeam && (
+                <LreAddTeam
+                    lre={legendaryEvent}
+                    preselectedTrackId={preselectedTrackId}
+                    preselectedRequirements={preselectedRequirements}
+                    onClose={() => setShowAddTeam(false)}
+                    addTeam={addLreTeam}
+                />
+            )}
+            {editTeam && (
+                <LreEditTeam
+                    lre={legendaryEvent}
+                    team={editTeam}
+                    onClose={() => setEditTeam(null)}
+                    saveTeam={saveLreTeam}
+                    deleteTeam={deleteTeam}
+                />
+            )}
         </div>
     );
 };

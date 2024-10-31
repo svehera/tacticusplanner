@@ -124,6 +124,10 @@ code {
         .ag-header-cell {
             padding: 0;
         }
+
+        .ag-cell {
+            padding: 0;
+        }
     }
 }
 
@@ -187,6 +191,12 @@ code {
         flex-wrap: wrap;
     }
 
+    &.mobile-wrap {
+        @media (max-width: 700px) {
+            flex-wrap: wrap;
+        }
+    }
+
     &.between {
         justify-content: space-between;
     }
@@ -210,6 +220,10 @@ code {
             padding: #{$i}px;
         }
     }
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 input.item-quantity-input::-webkit-outer-spin-button,

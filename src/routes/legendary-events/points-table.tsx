@@ -1,26 +1,16 @@
-﻿import React, { ChangeEvent, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+﻿import React, { useContext, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import {
-    CellClassParams,
-    ColDef,
-    ColGroupDef,
-    ICellRendererParams,
-    ITooltipParams,
-    RowClassParams,
-    RowStyle,
-    ValueFormatterParams,
-} from 'ag-grid-community';
+import { CellClassParams, ColDef, ColGroupDef, ICellRendererParams, ITooltipParams } from 'ag-grid-community';
 
 import {
-    ICharacter2,
     ILegendaryEvent,
     ILegendaryEventSelectedTeams,
     ILegendaryEventTrack,
+    ILreTeam,
     SelectedTeams,
 } from '../../models/interfaces';
 import { LegendaryEventEnum, Rank, Rarity } from '../../models/enums';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
-import { fitGridOnWindowResize, rankToString } from '../../shared-logic/functions';
 import { sum, uniq } from 'lodash';
 import { CharactersSelection, ITableRow } from './legendary-events.interfaces';
 import { StoreContext } from '../../reducers/store.provider';
@@ -35,39 +25,13 @@ const PointsTable = (props: {
     selectionChange: (selection: CharactersSelection) => void;
 }) => {
     const { legendaryEvent } = props;
-    const { leSelectedTeams, viewPreferences } = useContext(StoreContext);
-    const personalLegendaryEvent = useMemo<ILegendaryEventSelectedTeams>(() => {
-        const legendaryEventPersonal = leSelectedTeams[legendaryEvent.id];
-        return {
-            id: legendaryEvent.id,
-            name: LegendaryEventEnum[legendaryEvent.id],
-            teams: [],
-            alpha: legendaryEventPersonal?.alpha ?? {},
-            beta: legendaryEventPersonal?.beta ?? {},
-            gamma: legendaryEventPersonal?.gamma ?? {},
-        };
-    }, [legendaryEvent.id]);
+    const { leSelectedTeams } = useContext(StoreContext);
+
+    const { teams } = leSelectedTeams[legendaryEvent.id] ?? { teams: [] };
 
     const selectedChars = useMemo(() => {
-        const alphaSection = legendaryEvent.alpha.unitsRestrictions.map(x => x.name);
-        const betaSection = legendaryEvent.beta.unitsRestrictions.map(x => x.name);
-        const gammaSection = legendaryEvent.gamma.unitsRestrictions.map(x => x.name);
-
-        const alphaChars = Object.entries(personalLegendaryEvent.alpha)
-            .filter(([key]) => alphaSection.includes(key))
-            .map(([_, value]) => value)
-            .flat();
-        const betaChars = Object.entries(personalLegendaryEvent.beta)
-            .filter(([key]) => betaSection.includes(key))
-            .map(([_, value]) => value)
-            .flat();
-        const gammaChars = Object.entries(personalLegendaryEvent.gamma)
-            .filter(([key]) => gammaSection.includes(key))
-            .map(([_, value]) => value)
-            .flat();
-
-        return uniq([...alphaChars, ...betaChars, ...gammaChars]);
-    }, [personalLegendaryEvent.id]);
+        return uniq(teams.flatMap(t => t.charactersIds));
+    }, [legendaryEvent.id]);
 
     const [selection, setSelection] = useState<CharactersSelection>(
         selectedChars.length ? CharactersSelection.Selected : CharactersSelection.All
@@ -215,9 +179,18 @@ const PointsTable = (props: {
     }, [selection]);
 
     const selectedCharsRows: ITableRow[] = useMemo(() => {
-        const alpha = getPointsAndSlots(legendaryEvent.alpha, getRestrictionsByChar(personalLegendaryEvent.alpha));
-        const beta = getPointsAndSlots(legendaryEvent.beta, getRestrictionsByChar(personalLegendaryEvent.beta));
-        const gamma = getPointsAndSlots(legendaryEvent.gamma, getRestrictionsByChar(personalLegendaryEvent.gamma));
+        const alpha = getPointsAndSlots(
+            legendaryEvent.alpha,
+            getRestrictionsByChar(teams.filter(t => t.section === 'alpha'))
+        );
+        const beta = getPointsAndSlots(
+            legendaryEvent.beta,
+            getRestrictionsByChar(teams.filter(t => t.section === 'beta'))
+        );
+        const gamma = getPointsAndSlots(
+            legendaryEvent.gamma,
+            getRestrictionsByChar(teams.filter(t => t.section === 'gamma'))
+        );
 
         return legendaryEvent.allowedUnits
             .filter(x => selectedChars.includes(x.name))
@@ -245,16 +218,15 @@ const PointsTable = (props: {
                 totalSlots: (alpha[x.name]?.slots ?? 0) + (beta[x.name]?.slots ?? 0) + (gamma[x.name]?.slots ?? 0),
             }));
 
-        function getRestrictionsByChar(selectedTeams: SelectedTeams): Record<string, string[]> {
+        function getRestrictionsByChar(selectedTeams: ILreTeam[]): Record<string, string[]> {
             const result: Record<string, string[]> = {};
 
-            for (const key in selectedTeams) {
-                const values = selectedTeams[key];
-                values.forEach(value => {
-                    if (!result[value]) {
-                        result[value] = [];
+            for (const team of selectedTeams) {
+                team.charactersIds.forEach(character => {
+                    if (!result[character]) {
+                        result[character] = [];
                     }
-                    result[value].push(key);
+                    result[character] = uniq([...result[character], ...team.restrictionsIds]);
                 });
             }
             return result;
@@ -290,7 +262,7 @@ const PointsTable = (props: {
             }
             return result;
         }
-    }, [personalLegendaryEvent.id, filter]);
+    }, [legendaryEvent.id, filter]);
 
     const rows = useMemo<ITableRow[]>(() => {
         const chars =
@@ -361,6 +333,12 @@ const PointsTable = (props: {
                         <FormControlLabel value={CharactersSelection.All} control={<Radio />} label="All" />
                     </RadioGroup>
                 </FormControl>
+                {selection !== CharactersSelection.Selected && (
+                    <span>
+                        Take this list with the grain of salt, not everyone who scores the most points is the best LRE
+                        character
+                    </span>
+                )}
             </div>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 250px)', width: '100%' }}>
                 <AgGridReact

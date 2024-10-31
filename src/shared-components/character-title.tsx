@@ -27,9 +27,9 @@ export const CharacterTitle = ({
         const isUnlocked = character.rank > Rank.Locked;
 
         const emoji =
-            character.bias === CharacterBias.AlwaysRecommend
+            character.bias === CharacterBias.recommendFirst
                 ? starEmoji
-                : character.bias === CharacterBias.NeverRecommend
+                : character.bias === CharacterBias.recommendLast
                 ? pooEmoji
                 : '';
         const opacity = showLockedWithOpacity ? (isUnlocked ? 1 : 0.5) : 1;
@@ -43,15 +43,15 @@ export const CharacterTitle = ({
                     name={character.name}
                     imageSize={imageSize}
                 />
-                {!hideName && <span>{character.name}</span>}
+                {!hideName && <span>{character.shortName}</span>}
                 <RarityImage rarity={character.rarity} />
                 {isUnlocked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
                 <Tooltip
                     placement="top"
                     title={
-                        character.bias === CharacterBias.AlwaysRecommend
+                        character.bias === CharacterBias.recommendFirst
                             ? 'Always recommend first'
-                            : character.bias === CharacterBias.NeverRecommend
+                            : character.bias === CharacterBias.recommendLast
                             ? 'Always recommend last'
                             : ''
                     }>

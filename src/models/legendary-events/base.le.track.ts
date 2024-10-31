@@ -5,7 +5,7 @@
     ILegendaryEventTrackRequirement,
     ILegendaryEventTrackStatic,
     ISelectedTeamsOrdering,
-    LegendaryEventSection,
+    LreTrackId,
 } from '../interfaces';
 import { intersectionBy, orderBy, sum, uniqBy } from 'lodash';
 import { CharacterBias, LegendaryEventEnum, Rank } from '../enums';
@@ -21,7 +21,7 @@ export class LETrack implements ILegendaryEventTrack {
 
     constructor(
         public eventId: LegendaryEventEnum,
-        public section: LegendaryEventSection,
+        public section: LreTrackId,
         public allowedUnits: ICharacter2[],
         public unitsRestrictions: Array<ILegendaryEventTrackRequirement>,
         staticData: ILegendaryEventTrackStatic
@@ -124,8 +124,8 @@ export class LETrack implements ILegendaryEventTrack {
                 rarity: +unit.rarity,
                 requiredInCampaign: unit.requiredInCampaign,
                 points: unit.legendaryEvents[this.eventId].totalPoints,
-                alwaysRecommend: unit.bias === CharacterBias.AlwaysRecommend,
-                neverRecommend: unit.bias === CharacterBias.NeverRecommend,
+                alwaysRecommend: unit.bias === CharacterBias.recommendFirst,
+                neverRecommend: unit.bias === CharacterBias.recommendLast,
             }));
 
         if (this.isAutoTeams(settings)) {

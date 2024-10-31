@@ -2,7 +2,13 @@
 import { AgGridReact } from 'ag-grid-react';
 import { CellClassParams, ColDef, ColGroupDef, ICellRendererParams, ITooltipParams } from 'ag-grid-community';
 
-import { ICharacter2, ILegendaryEventSelectedTeams, ILegendaryEventTrack, SelectedTeams } from 'src/models/interfaces';
+import {
+    ICharacter2,
+    ILegendaryEventSelectedTeams,
+    ILegendaryEventTrack,
+    ILreTeam,
+    SelectedTeams,
+} from 'src/models/interfaces';
 import { LegendaryEventEnum, Rank } from 'src/models/enums';
 import {
     Checkbox,
@@ -38,41 +44,16 @@ export const MasterTable = () => {
         StaticDataService.activeLres.map(x => x.lre!.id)
     );
 
-    const { leSelectedTeams, viewPreferences, characters } = useContext(StoreContext);
-    const getPersonalLegendaryEvent = (eventId: LegendaryEventEnum): ILegendaryEventSelectedTeams => {
-        const legendaryEventPersonal = leSelectedTeams[eventId];
-        return {
-            id: eventId,
-            teams: [],
-            name: LegendaryEventEnum[eventId],
-            alpha: legendaryEventPersonal?.alpha ?? {},
-            beta: legendaryEventPersonal?.beta ?? {},
-            gamma: legendaryEventPersonal?.gamma ?? {},
-        };
+    const { leSelectedTeams, characters } = useContext(StoreContext);
+    const getSelectedTeams = (eventId: LegendaryEventEnum): ILreTeam[] => {
+        const { teams } = leSelectedTeams[eventId] ?? { teams: [] };
+        return teams;
     };
     const [filter, setFilter] = useState('');
 
     const getSelectedChars = (eventId: LegendaryEventEnum) => {
-        const legendaryEvent = getLegendaryEvent(eventId, characters);
-        const personalLegendaryEvent = getPersonalLegendaryEvent(eventId);
-        const alphaSection = legendaryEvent.alpha.unitsRestrictions.map(x => x.name);
-        const betaSection = legendaryEvent.beta.unitsRestrictions.map(x => x.name);
-        const gammaSection = legendaryEvent.gamma.unitsRestrictions.map(x => x.name);
-
-        const alphaChars = Object.entries(personalLegendaryEvent.alpha)
-            .filter(([key]) => alphaSection.includes(key))
-            .map(([_, value]) => value)
-            .flat();
-        const betaChars = Object.entries(personalLegendaryEvent.beta)
-            .filter(([key]) => betaSection.includes(key))
-            .map(([_, value]) => value)
-            .flat();
-        const gammaChars = Object.entries(personalLegendaryEvent.gamma)
-            .filter(([key]) => gammaSection.includes(key))
-            .map(([_, value]) => value)
-            .flat();
-
-        return uniq([...alphaChars, ...betaChars, ...gammaChars]);
+        const teams = getSelectedTeams(eventId);
+        return uniq(teams.flatMap(t => t.charactersIds));
     };
 
     const selectedCharsRows: ITableRow[] = useMemo(() => {
@@ -85,12 +66,21 @@ export const MasterTable = () => {
         }> = [];
         activeLegendaryEvents.forEach(eventId => {
             const legendaryEvent = getLegendaryEvent(eventId, characters);
-            const personalLegendaryEvent = getPersonalLegendaryEvent(eventId);
+            const teams = getSelectedTeams(eventId);
             const selectedChars = getSelectedChars(eventId);
 
-            const alpha = getPointsAndSlots(legendaryEvent.alpha, getRestrictionsByChar(personalLegendaryEvent.alpha));
-            const beta = getPointsAndSlots(legendaryEvent.beta, getRestrictionsByChar(personalLegendaryEvent.beta));
-            const gamma = getPointsAndSlots(legendaryEvent.gamma, getRestrictionsByChar(personalLegendaryEvent.gamma));
+            const alpha = getPointsAndSlots(
+                legendaryEvent.alpha,
+                getRestrictionsByChar(teams.filter(t => t.section === 'alpha'))
+            );
+            const beta = getPointsAndSlots(
+                legendaryEvent.beta,
+                getRestrictionsByChar(teams.filter(t => t.section === 'beta'))
+            );
+            const gamma = getPointsAndSlots(
+                legendaryEvent.gamma,
+                getRestrictionsByChar(teams.filter(t => t.section === 'gamma'))
+            );
 
             const eventCharacters = legendaryEvent.allowedUnits
                 .filter(x => selectedChars.includes(x.name))
@@ -138,16 +128,15 @@ export const MasterTable = () => {
             return charData;
         }) as any;
 
-        function getRestrictionsByChar(selectedTeams: SelectedTeams): Record<string, string[]> {
+        function getRestrictionsByChar(selectedTeams: ILreTeam[]): Record<string, string[]> {
             const result: Record<string, string[]> = {};
 
-            for (const key in selectedTeams) {
-                const values = selectedTeams[key];
-                values.forEach(value => {
-                    if (!result[value]) {
-                        result[value] = [];
+            for (const team of selectedTeams) {
+                team.charactersIds.forEach(character => {
+                    if (!result[character]) {
+                        result[character] = [];
                     }
-                    result[value].push(key);
+                    result[character] = uniq([...result[character], ...team.restrictionsIds]);
                 });
             }
             return result;
@@ -436,6 +425,12 @@ export const MasterTable = () => {
                         ))}
                     </Select>
                 </FormControl>
+                {selection !== CharactersSelection.Selected && (
+                    <span>
+                        Take this list with the grain of salt, not everyone who scores the most points is the best LRE
+                        character
+                    </span>
+                )}
             </div>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 150px)', width: '100%' }}>
                 <AgGridReact

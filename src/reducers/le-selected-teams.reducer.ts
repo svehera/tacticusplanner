@@ -1,25 +1,30 @@
 ﻿import {
     ILegendaryEventSelectedTeams,
+    ILreTeam,
     LegendaryEventData,
-    LegendaryEventSection,
+    LreTrackId,
     SetStateAction,
 } from '../models/interfaces';
+import { v4 } from 'uuid';
 import { LegendaryEventEnum } from '../models/enums';
 
 export type LeSelectedTeamsAction =
     | {
-          type: 'SelectChars';
+          type: 'AddTeam';
           eventId: LegendaryEventEnum;
-          section: LegendaryEventSection;
-          team: string;
-          chars: string[];
+          team: ILreTeam;
       }
     | {
-          type: 'DeselectChars';
+          type: 'DeleteTeam';
           eventId: LegendaryEventEnum;
-          section: LegendaryEventSection;
-          team: string;
-          chars: string[];
+          teamId: string;
+      }
+    | {
+          type: 'UpdateTeam';
+          eventId: LegendaryEventEnum;
+          teamId: string;
+          name: string;
+          charactersIds: string[];
       }
     | SetStateAction<LegendaryEventData<ILegendaryEventSelectedTeams>>;
 
@@ -31,47 +36,53 @@ export const leSelectedTeamsReducer = (
         case 'Set': {
             return action.value;
         }
-        case 'SelectChars': {
-            const { eventId, team, chars, section } = action;
+        case 'AddTeam': {
+            const { eventId, team } = action;
             const legendaryEvent: ILegendaryEventSelectedTeams = state[eventId] ?? {
                 id: eventId,
                 name: LegendaryEventEnum[eventId],
                 alpha: {},
                 beta: {},
                 gamma: {},
+                teams: [],
             };
-            const currentTeam = legendaryEvent[section][team] ?? [];
 
-            if (currentTeam.length === 5) {
-                return state;
-            }
+            const newTeam: ILreTeam = { ...team, id: v4() };
+            delete newTeam.characters;
 
-            const newChars = chars.filter(x => !currentTeam.includes(x));
-
-            if (!newChars.length) {
-                return state;
-            }
-            legendaryEvent[section] = {
-                ...legendaryEvent[section],
-                [team]: [...currentTeam, ...newChars].slice(0, 5).filter(x => !!x),
-            };
+            legendaryEvent.teams.push(newTeam);
 
             return { ...state, [eventId]: { ...legendaryEvent } };
         }
-        case 'DeselectChars': {
-            const { eventId, team, chars, section } = action;
+        case 'DeleteTeam': {
+            const { eventId, teamId } = action;
             const legendaryEvent = state[eventId];
 
             if (!legendaryEvent) {
                 return state;
             }
 
-            const currentTeam = legendaryEvent[section][team];
+            legendaryEvent.teams = legendaryEvent.teams.filter(x => x.id !== teamId);
 
-            legendaryEvent[section] = {
-                ...legendaryEvent[section],
-                [team]: currentTeam.filter(x => !chars.includes(x)),
-            };
+            return { ...state, [eventId]: { ...legendaryEvent } };
+        }
+        case 'UpdateTeam': {
+            const { eventId, teamId, name, charactersIds } = action;
+            const legendaryEvent = state[eventId];
+
+            if (!legendaryEvent) {
+                return state;
+            }
+
+            const currentTeam = legendaryEvent.teams.find(x => x.id === teamId);
+
+            if (!currentTeam) {
+                return state;
+            }
+
+            currentTeam.name = name;
+            currentTeam.charactersIds = charactersIds;
+
             return { ...state, [eventId]: { ...legendaryEvent } };
         }
         default: {

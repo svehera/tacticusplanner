@@ -45,7 +45,7 @@ import { UnitType } from 'src/v2/features/characters/units.enums';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 import { TeamsAction } from 'src/reducers/teams.reducer';
 
-export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
+export type LreTrackId = 'alpha' | 'beta' | 'gamma';
 
 export interface UnitDataRaw {
     Name: string;
@@ -209,7 +209,7 @@ export interface ILegendaryEventTrackStatic {
 
 export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
     eventId: LegendaryEventEnum;
-    section: LegendaryEventSection;
+    section: LreTrackId;
     allowedUnits: ICharacter2[];
     unitsRestrictions: Array<ILegendaryEventTrackRequirement>;
 
@@ -248,6 +248,7 @@ export type DynamicProps = {
     ownedBy?: string[];
     potential?: number;
     power?: number;
+    teamId?: string; // LRE team id
     statsByOwner?: Array<{
         owner: string;
         rank: Rank;
@@ -406,9 +407,13 @@ export interface ILegendaryEventSelectedTeams {
 export interface ILreTeam {
     id: string;
     name: string;
-    section: LegendaryEventSection;
+    section: LreTrackId;
     restrictionsIds: string[];
     charactersIds: string[];
+    /**
+     * Client Side only
+     */
+    characters?: ICharacter2[];
 }
 
 export interface ILegendaryEventSelectedRequirements {
@@ -431,7 +436,7 @@ export interface IViewOption<T = IViewPreferences> {
     tooltip?: string;
 }
 
-export interface IViewPreferences extends ILreViewSettings, IWyoViewSettings {
+export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IWyoViewSettings {
     theme: 'light' | 'dark';
     // autoTeams: boolean;
     wyoFilter: CharactersFilterBy;
@@ -452,16 +457,24 @@ export interface IWyoViewSettings {
 }
 
 export interface ILreViewSettings {
-    useV1Lre: boolean;
+    lreGridView: boolean;
+    lreShowProgress: boolean;
     showAlpha: boolean;
     showBeta: boolean;
     showGamma: boolean;
-    lightWeight: boolean;
-    hideSelectedTeams: boolean;
     onlyUnlocked: boolean;
     hideCompleted: boolean;
-    hideNames: boolean;
-    lreGridView: boolean;
+}
+
+export interface ILreTileSettings {
+    lreTileShowUnitIcon: boolean;
+    lreTileShowUnitRarity: boolean;
+    lreTileShowUnitRank: boolean;
+    lreTileShowUnitRankBackground: boolean;
+    lreTileShowUnitName: boolean;
+    lreTileShowUnitBias: boolean;
+    lreTileShowUnitActiveAbility: boolean;
+    lreTileShowUnitPassiveAbility: boolean;
 }
 
 export interface IAutoTeamsPreferences {

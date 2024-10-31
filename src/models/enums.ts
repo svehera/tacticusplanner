@@ -200,9 +200,9 @@ export enum CampaignsLocationsUsage {
 }
 
 export enum CharacterBias {
-    NeverRecommend = -1,
+    recommendLast = -1,
     None = 0,
-    AlwaysRecommend = 1,
+    recommendFirst = 1,
 }
 
 export enum CampaignType {

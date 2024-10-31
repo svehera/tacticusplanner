@@ -16,7 +16,7 @@
     IViewPreferences,
     LegendaryEventData,
     IGuild,
-    LegendaryEventSection,
+    LreTrackId,
     ILreTeam,
     SelectedTeams,
 } from '../models/interfaces';
@@ -220,7 +220,6 @@ function migrateLreTeams(
         const eventTeams = teamsByEvent[teamsByEventKey as unknown as LegendaryEventEnum];
         if (eventTeams && !eventTeams.teams?.length) {
             populateTeams(eventTeams);
-            console.log(eventTeams);
         }
     }
 
@@ -228,7 +227,7 @@ function migrateLreTeams(
 }
 
 function populateTeams(data: ILegendaryEventSelectedTeams) {
-    const sections: LegendaryEventSection[] = ['alpha', 'beta', 'gamma'];
+    const sections: LreTrackId[] = ['alpha', 'beta', 'gamma'];
     const teams: ILreTeam[] = [];
 
     // Helper function to compare two arrays for equality
@@ -255,8 +254,8 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
                 const team: ILreTeam = {
                     id: v4(), // Replace with your UUID generation logic
                     name: `Team ${teams.length + 1} - ${section}`, // Assigning Team 1, 2, 3, etc.
-                    section: section as LegendaryEventSection,
-                    restrictionsIds: [restriction], // Initial restriction
+                    section: section as LreTrackId,
+                    restrictionsIds: [restriction], // Initial restriction,
                     charactersIds: characters, // Characters associated with this team
                 };
                 teams.push(team);
