@@ -77,6 +77,7 @@ export class GuildWarService {
                     count: rawSection.count,
                     rarityCaps: rarityCaps,
                     buff: rawSection.buff,
+                    iconId: rawSection.iconId,
                 };
             });
 

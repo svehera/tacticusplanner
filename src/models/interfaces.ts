@@ -12,7 +12,9 @@
     Faction,
     LegendaryEventEnum,
     LegendaryEvents,
+    LrePointsCategoryId,
     PersonalGoalType,
+    ProgressState,
     Rank,
     Rarity,
     RarityStars,
@@ -44,6 +46,7 @@ import { MowsAction } from 'src/reducers/mows.reducer';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 import { TeamsAction } from 'src/reducers/teams.reducer';
+import { ILreProgressDto } from 'src/models/dto.interfaces';
 
 export type LreTrackId = 'alpha' | 'beta' | 'gamma';
 
@@ -234,6 +237,9 @@ export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
 
 export interface ILegendaryEventTrackRequirement {
     id?: string;
+    hide?: boolean;
+    iconId?: string;
+    index?: number;
     name: string;
     points: number;
     units: ICharacter2[];
@@ -269,7 +275,7 @@ export interface IPersonalData {
     goals: IPersonalGoal[];
     legendaryEvents: ILegendaryEventsData | undefined;
     legendaryEvents3: ILegendaryEventsData3 | undefined;
-    legendaryEventsProgress: ILegendaryEventsProgressState;
+    legendaryEventsProgress: LegendaryEventData<ILreProgressDto>;
     legendaryEventSelectedRequirements: Record<LegendaryEventEnum, ILegendaryEventSelectedRequirements>;
     modifiedDate?: Date | string;
 }
@@ -290,7 +296,7 @@ export interface IGlobalState {
     teams: IPersonalTeam[];
     selectedTeamOrder: ISelectedTeamsOrdering;
     leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
-    leProgress: LegendaryEventData<ILegendaryEventProgressState>;
+    leProgress: LegendaryEventData<ILreProgressDto>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
@@ -341,7 +347,7 @@ export interface IPersonalData2 {
     goals: IPersonalGoal[];
     teams: IPersonalTeam[];
     leTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
-    leProgress: LegendaryEventData<ILegendaryEventProgressState>;
+    leProgress: LegendaryEventData<ILreProgressDto>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
@@ -458,7 +464,6 @@ export interface IWyoViewSettings {
 
 export interface ILreViewSettings {
     lreGridView: boolean;
-    lreShowProgress: boolean;
     showAlpha: boolean;
     showBeta: boolean;
     showGamma: boolean;
@@ -481,8 +486,7 @@ export interface IAutoTeamsPreferences {
     preferCampaign: boolean;
     ignoreRarity: boolean;
     ignoreRank: boolean;
-    ignoreRecommendedFirst: boolean;
-    ignoreRecommendedLast: boolean;
+    ignoreRecommendedFirst: boolean; // ignore Bias
 }
 
 export interface IDailyRaidsPreferences {
@@ -570,58 +574,6 @@ export interface IPersonalGoal {
     unitId?: string;
     firstAbilityLevel?: number;
     secondAbilityLevel?: number;
-}
-
-export type ILegendaryEventsProgressState = Record<LegendaryEventEnum, ILegendaryEventProgressState>;
-
-export interface ILegendaryEventProgressState {
-    id: LegendaryEventEnum;
-    name: string;
-    alpha: ILegendaryEventProgressTrackState;
-    beta: ILegendaryEventProgressTrackState;
-    gamma: ILegendaryEventProgressTrackState;
-    regularMissions: number;
-    premiumMissions: number;
-    bundle?: number;
-    overview?: {
-        1: ILegendaryEventOverviewProgress;
-        2: ILegendaryEventOverviewProgress;
-        3: ILegendaryEventOverviewProgress;
-    };
-    notes: string;
-}
-
-export interface ILegendaryEventProgressTrackState {
-    battles: Array<boolean[]>;
-}
-
-export interface ILegendaryEventProgress {
-    alpha: ILegendaryEventProgressTrack;
-    beta: ILegendaryEventProgressTrack;
-    gamma: ILegendaryEventProgressTrack;
-    overview: {
-        1: ILegendaryEventOverviewProgress;
-        2: ILegendaryEventOverviewProgress;
-        3: ILegendaryEventOverviewProgress;
-    };
-    notes: string;
-}
-
-export interface ILegendaryEventOverviewProgress {
-    regularMissions: number;
-    premiumMissions: number;
-    bundle: number;
-}
-
-export interface ILegendaryEventProgressTrack {
-    name: 'alpha' | 'beta' | 'gamma';
-    battles: ILegendaryEventBattle[];
-}
-
-export interface ILegendaryEventBattle {
-    battleNumber: number;
-    state: boolean[];
-    requirements: ILegendaryEventTrackRequirement[];
 }
 
 export interface IWhatsNew {

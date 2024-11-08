@@ -4,7 +4,6 @@
     IDailyRaids,
     IDailyRaidsPreferences,
     IInventory,
-    ILegendaryEventProgressState,
     ILegendaryEventSelectedRequirements,
     ILegendaryEventSelectedTeams,
     IPersonalCharacterData2,
@@ -21,10 +20,11 @@
     SelectedTeams,
 } from '../models/interfaces';
 import { v4 } from 'uuid';
-import { defaultData } from '../models/constants';
-import { LegendaryEventEnum, Rank } from '../models/enums';
+import { defaultData, getLegendaryEvent } from '../models/constants';
+import { LegendaryEventEnum, LrePointsCategoryId, Rank } from '../models/enums';
 import { IMowDb } from 'src/v2/features/characters/characters.models';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+import { ILreBattleProgressDto, ILreProgressDto, ILreRequirementsProgressDto } from 'src/models/dto.interfaces';
 
 export class PersonalDataLocalStorage {
     private readonly storePrefix = 'tp-';
@@ -65,9 +65,9 @@ export class PersonalDataLocalStorage {
                 leTeams: migrateLreTeams(
                     this.getItem<LegendaryEventData<ILegendaryEventSelectedTeams>>('leTeams') ?? defaultData.leTeams
                 ),
-                leProgress:
-                    this.getItem<LegendaryEventData<ILegendaryEventProgressState>>('leProgress') ??
-                    defaultData.leProgress,
+                leProgress: migrateLreProgress(
+                    this.getItem<LegendaryEventData<ILreProgressDto>>('leProgress') ?? defaultData.leProgress
+                ),
                 leSelectedRequirements:
                     this.getItem<LegendaryEventData<ILegendaryEventSelectedRequirements>>('leSelectedRequirements') ??
                     defaultData.leSelectedRequirements,
@@ -106,7 +106,6 @@ export class PersonalDataLocalStorage {
                 }
             }
         }
-
         return result;
     }
 
@@ -264,6 +263,59 @@ function populateTeams(data: ILegendaryEventSelectedTeams) {
     });
 
     data.teams = teams; // Populate the teams field
+}
+
+function migrateLreProgress(progressByEvent: LegendaryEventData<ILreProgressDto>): LegendaryEventData<ILreProgressDto> {
+    for (const progressByEventKey in progressByEvent) {
+        const eventProgress = progressByEvent[progressByEventKey as unknown as LegendaryEventEnum];
+        if (eventProgress && !eventProgress.battlesProgress?.length) {
+            populateProgress(eventProgress);
+        }
+    }
+    return progressByEvent;
+}
+
+function populateProgress(data: ILreProgressDto) {
+    const sections: LreTrackId[] = ['alpha', 'beta', 'gamma'];
+    const battlesProgress: ILreBattleProgressDto[] = [];
+    const lre = getLegendaryEvent(data.id, []);
+    const killPointsIndex = 0;
+    const highScoreAndDefeatAllIndex = 1;
+
+    sections.forEach(section => {
+        const { battles } = data[section] ?? { battles: [] };
+        battles.forEach((battle, index) => {
+            const requirements: ILreRequirementsProgressDto[] = lre[section].unitsRestrictions.map(
+                (restriction, restrictionIndex) => ({
+                    id: restriction.name,
+                    state: +battle[restrictionIndex + 2],
+                })
+            );
+
+            requirements.push(
+                {
+                    id: LrePointsCategoryId.killScore,
+                    state: +battle[killPointsIndex],
+                },
+                {
+                    id: LrePointsCategoryId.defeatAll,
+                    state: +battle[highScoreAndDefeatAllIndex],
+                },
+                {
+                    id: LrePointsCategoryId.highScore,
+                    state: +battle[highScoreAndDefeatAllIndex],
+                }
+            );
+
+            battlesProgress.push({
+                trackId: section,
+                battleIndex: index,
+                requirements: requirements,
+            });
+        });
+    });
+
+    data.battlesProgress = battlesProgress; // Populate the teams field
 }
 
 export const isV1Data = (data: IPersonalData | IPersonalData2): data is IPersonalData => {

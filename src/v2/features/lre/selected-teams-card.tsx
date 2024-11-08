@@ -5,20 +5,20 @@ import IconButton from '@mui/material/IconButton';
 import { DeleteForever, Edit } from '@mui/icons-material';
 import { LreTile } from 'src/v2/features/lre/lre-tile';
 import { StoreContext } from 'src/reducers/store.provider';
+import { IMenuOption } from 'src/v2/models/menu-option';
 
 interface Props {
     team: ILreTeam;
+    menuItemSelect: (action: 'edit' | 'delete') => void;
 }
 
-export const SelectedTeamCard: React.FC<Props> = ({ team }) => {
+export const SelectedTeamCard: React.FC<Props> = ({ team, menuItemSelect }) => {
     const { viewPreferences } = useContext(StoreContext);
-    const menuItemSelect = (action: string) => {};
-
     return (
         <Card
             variant="outlined"
             sx={{
-                width: 400,
+                minWidth: 350,
                 minHeight: 200,
             }}>
             <CardHeader
@@ -35,7 +35,7 @@ export const SelectedTeamCard: React.FC<Props> = ({ team }) => {
                 title={team.name}
                 subheader={team.restrictionsIds.join(', ')}
             />
-            <CardContent className="flex-box column start" style={{ minHeight: 150 }}>
+            <CardContent className="flex-box column gap1 start" style={{ minHeight: 150 }}>
                 {team.characters?.map(x => <LreTile key={x.id} character={x} settings={viewPreferences} />)}
             </CardContent>
         </Card>

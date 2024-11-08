@@ -40,6 +40,7 @@ export interface IGWZone {
         }
     >; // battlefield level to rarityCaps array
     buff?: string;
+    iconId?: string;
 }
 
 export interface IGWZoneRaw {
@@ -49,6 +50,7 @@ export interface IGWZoneRaw {
     count: number;
     difficulty: Record<number, string>; // battlefield level to rarityCaps array
     buff?: string;
+    iconId?: string;
     inactive?: boolean;
 }
 

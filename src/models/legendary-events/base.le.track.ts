@@ -137,7 +137,7 @@ export class LETrack implements ILegendaryEventTrack {
                 orders.push('desc');
             }
 
-            if (!settings.ignoreRecommendedLast) {
+            if (!settings.ignoreRecommendedFirst) {
                 iterates.push('neverRecommend');
                 orders.push('asc');
             }

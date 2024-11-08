@@ -101,10 +101,11 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
     };
 
     const isValid = () => {
+        const availableCharacters = gridTeam.map(x => x.id);
         return (
             selectedTeam.length !== 0 &&
             !!teamName.length &&
-            selectedTeam.every(character => gridTeam.includes(character))
+            selectedTeam.every(character => availableCharacters.includes(character.id))
         );
     };
 
@@ -162,7 +163,9 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
                                         onClick={() => removeCharacter(character)}
                                         className="flex-box gap5"
                                         style={{ width: 350 }}>
-                                        {!gridTeam.includes(character) && <WarningIcon color="error" />}
+                                        {!gridTeam.some(c => selectedTeam.some(x => x.id === c.id)) && (
+                                            <WarningIcon color="error" />
+                                        )}
                                         <CloseIcon />
                                         <LreTile character={character} settings={viewPreferences} />
                                     </div>
@@ -184,7 +187,10 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
                                 <div
                                     key={character.id}
                                     onClick={() => addCharacter(character)}
-                                    style={{ opacity: selectedTeam.includes(character) ? 0.3 : 1, width: 350 }}
+                                    style={{
+                                        opacity: selectedTeam.some(x => x.id === character.id) ? 0.3 : 1,
+                                        width: 350,
+                                    }}
                                     className="flex-box gap5 pointer">
                                     <AddIcon />
                                     <LreTile character={character} settings={viewPreferences} />

@@ -12,9 +12,7 @@ import {
     ITableRow,
     LreTrackId,
 } from 'src/models/interfaces';
-import { LegendaryEventEnum } from 'src/models/enums';
 
-import CustomTableHeader from './custom-table-header';
 import { fitGridOnWindowResize } from 'src/shared-logic/functions';
 import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
@@ -23,48 +21,31 @@ import InfoIcon from '@mui/icons-material/Info';
 import { LreTile } from 'src/v2/features/lre/lre-tile';
 import { SelectedTeamsTable } from 'src/v2/features/lre/selected-teams-table';
 import Button from '@mui/material/Button';
+import { TrackRequirementCheck } from 'src/v2/features/lre/track-requirement-check';
 
 interface Props {
     track: ILegendaryEventTrack;
     teams: ILreTeam[];
     startAddTeam: (section: LreTrackId, requirements: string[]) => void;
-    completedRequirements: string[];
+    autoAddTeam: (section: LreTrackId, requirements: string[], characters: ICharacter2[]) => void;
+    progress: Record<string, number>;
     editTeam: (team: ILreTeam) => void;
+    restrictions: string[];
 }
 
 export const LreTeamsTable: React.FC<Props> = ({
     track,
     startAddTeam,
-    completedRequirements,
+    progress,
     teams: selectedTeams,
+    autoAddTeam,
     editTeam,
+    restrictions,
 }) => {
     const gridRef = useRef<AgGridReact>(null);
 
-    const { viewPreferences, autoTeamsPreferences, leSelectedRequirements, selectedTeamOrder } =
-        useContext(StoreContext);
+    const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
-
-    const restrictions = useMemo(() => {
-        const event: ILegendaryEventSelectedRequirements = leSelectedRequirements[track.eventId] ?? {
-            id: track.eventId,
-            name: LegendaryEventEnum[track.eventId],
-            alpha: {},
-            beta: {},
-            gamma: {},
-        };
-        const section = event[track.section];
-        const result: string[] = [];
-
-        track.unitsRestrictions.forEach(x => {
-            const selected = section[x.name] !== undefined ? section[x.name] : x.selected;
-            if (selected && !completedRequirements.includes(x.name)) {
-                result.push(x.name);
-            }
-        });
-
-        return result;
-    }, [leSelectedRequirements, completedRequirements]);
 
     const defaultColumnDef: ColDef & { section: LreTrackId } = {
         resizable: true,
@@ -82,18 +63,23 @@ export const LreTeamsTable: React.FC<Props> = ({
 
     const components = useMemo(() => {
         return {
-            agColumnHeader: CustomTableHeader,
+            agColumnHeader: TrackRequirementCheck,
         };
     }, []);
 
     const columnsDefs = useMemo<Array<ColDef>>(
-        () => [...getSectionColumns(track.unitsRestrictions, restrictions, completedRequirements)],
-        [track.eventId, restrictions, completedRequirements]
+        () => [
+            ...getSectionColumns(
+                track.unitsRestrictions.filter(x => !x.hide),
+                restrictions
+            ),
+        ],
+        [track.eventId, restrictions]
     );
 
     const suggestedTeams = useMemo(
         () => track.suggestTeams(autoTeamsPreferences, viewPreferences.onlyUnlocked, restrictions),
-        [autoTeamsPreferences, restrictions, viewPreferences.onlyUnlocked, selectedTeamOrder]
+        [autoTeamsPreferences, restrictions, viewPreferences.onlyUnlocked]
     );
 
     const rows: Array<ITableRow> = useMemo(() => getRows(suggestedTeams), [suggestedTeams]);
@@ -140,10 +126,16 @@ export const LreTeamsTable: React.FC<Props> = ({
     };
 
     const addNewTeam = (cellClicked: CellClickedEvent<ITableRow[], ICharacter2>) => {
-        startAddTeam(
-            track.section,
-            restrictions.includes(cellClicked.colDef.field!) ? restrictions : [cellClicked.colDef.field!]
-        );
+        const cellRelatedRestriction = cellClicked.colDef.field! as string;
+        const restrictionsList = restrictions.includes(cellRelatedRestriction)
+            ? restrictions
+            : [cellRelatedRestriction];
+        if ((cellClicked.event as MouseEvent).shiftKey) {
+            const characters = suggestedTeams[cellRelatedRestriction].slice(0, 5).filter(x => !!x) as ICharacter2[];
+            autoAddTeam(track.section, restrictionsList, characters);
+        } else {
+            startAddTeam(track.section, restrictionsList);
+        }
     };
 
     const editExistingTeam = (teamId: string) => {
@@ -155,20 +147,20 @@ export const LreTeamsTable: React.FC<Props> = ({
 
     function getSectionColumns(
         unitsRestrictions: ILegendaryEventTrackRequirement[],
-        selectedRequirements: string[],
-        completedRestrictions: string[]
+        selectedRequirements: string[]
     ): Array<ColDef> {
-        const columns = unitsRestrictions.map((u, index) => ({
+        const columns: Array<ColDef> = unitsRestrictions.map((u, index) => ({
             field: u.name,
             colSpan: () => {
                 return index === 0 ? selectedRequirements.length : 1;
             },
             headerName: `(${u.points}) ${u.name}`,
-            hide: completedRestrictions.includes(u.name),
+            // hide: completedRestrictions.includes(u.name),
             headerComponentParams: {
                 onCheckboxChange: (selected: boolean) => handleChange(selected, u.name),
                 checked: selectedRequirements.includes(u.name),
                 restriction: u,
+                progress: `${progress[u.name]}/14`,
             },
         }));
 
@@ -183,8 +175,8 @@ export const LreTeamsTable: React.FC<Props> = ({
 
         // Sort `columns` by using the order from `columnIds`, keeping unspecified columns in original order
         return columns.sort((a, b) => {
-            const orderA = columnOrder[a.field] !== undefined ? columnOrder[a.field] : Infinity;
-            const orderB = columnOrder[b.field] !== undefined ? columnOrder[b.field] : Infinity;
+            const orderA = columnOrder[a.field!] !== undefined ? columnOrder[a.field!] : Infinity;
+            const orderB = columnOrder[b.field!] !== undefined ? columnOrder[b.field!] : Infinity;
             return orderA - orderB;
         });
     }
@@ -211,11 +203,15 @@ export const LreTeamsTable: React.FC<Props> = ({
         });
     };
 
+    const deleteTeam = (teamId: string) => {
+        dispatch.leSelectedTeams({ type: 'DeleteTeam', eventId: track.eventId, teamId });
+    };
+
     return (
         <div style={{ width: '100%', height: '100%', overflow: 'auto' }}>
             <div className="flex-box between">
                 <div className="flex-box gap10">
-                    <span style={{ fontWeight: 700, fontSize: '1rem' }}>{track.name + ' - ' + track.killPoints}</span>
+                    <span style={{ fontWeight: 700, fontSize: '1rem' }}>{track.name}</span>
                     <div className="flex-box gap5">
                         <span style={{ fontStyle: 'italic', fontSize: '1rem' }}> vs {track.enemies.label}</span>
                         <a href={track.enemies.link} target={'_blank'} rel="noreferrer">
@@ -243,7 +239,7 @@ export const LreTeamsTable: React.FC<Props> = ({
                     columnDefs={columnsDefs}
                     components={components}
                     rowData={rows}
-                    headerHeight={60}
+                    headerHeight={75}
                     rowHeight={35}
                     getRowStyle={getRowStyle}
                     onGridReady={fitGridOnWindowResize(gridRef)}
@@ -256,6 +252,7 @@ export const LreTeamsTable: React.FC<Props> = ({
                         track={track}
                         rows={selectedTeamsRows}
                         editTeam={editExistingTeam}
+                        deleteTeam={deleteTeam}
                         completedRequirements={[]}
                     />
                 </>

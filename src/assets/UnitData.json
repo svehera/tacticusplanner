@@ -1781,6 +1781,30 @@
         "Icon": "Deathleaper.webp"
     },
     {
+        "Name": "PoM",
+        "Title": "Invader Organism",
+        "Full Name": "Parasite of Mortrex",
+        "Short Name": "PoM",
+        "Faction": "Tyranids",
+        "Alliance": "Xenos",
+        "Health": 8624,
+        "Damage": 4313,
+        "Armour": 1629,
+        "Initial rarity": "Epic",
+        "Melee Damage": "Toxic",
+        "Melee Hits": 1,
+        "Movement": 4,
+        "Equipment1": "Crit",
+        "Equipment2": "Defense",
+        "Equipment3": "Crit Booster",
+        "Traits": ["Flying"],
+        "Number": 82,
+        "ForcedSummons": true,
+        "RequiredInCampaign": false,
+        "Icon": "pom.webp",
+        "releaseDate": "2024-12-15T00:00:00Z"
+    },
+    {
         "Name": "Vitruvius",
         "Title": "Magos Dominus",
         "Full Name": "Vitruvius Thannek",
@@ -1993,8 +2017,8 @@
             "id": 7,
             "finished": false,
             "eventStage": 2,
-            "nextEventDate": "TBA",
-            "nextEventDateUtc": ""
+            "nextEventDate": "December 8",
+            "nextEventDateUtc": "Sun, 8 December 2024 00:00:00 GMT"
         }
     },
     {
@@ -2084,6 +2108,30 @@
             "nextEventDate": "TBA",
             "nextEventDateUtc": ""
         }
+    },
+    {
+        "Name": "Hollan",
+        "Title": "Biophagus",
+        "Full Name": "Hollan Baumgart",
+        "Short Name": "Hollan",
+        "Faction": "Genestealer Cults",
+        "Alliance": "Xenos",
+        "Health": 5271,
+        "Damage": 3450,
+        "Armour": 1180,
+        "Initial rarity": "Uncommon",
+        "Melee Damage": "Toxic",
+        "Melee Hits": 1,
+        "Movement": 3,
+        "Equipment1": "Crit",
+        "Equipment2": "Defense",
+        "Equipment3": "Crit Booster",
+        "Traits": ["Ambush", "Healer"],
+        "Number": 81,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "hollan.webp",
+        "releaseDate": "2024-11-17T00:00:00Z"
     },
     {
         "Name": "Xybia",

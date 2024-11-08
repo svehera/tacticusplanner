@@ -14,10 +14,11 @@ interface Props {
     track: ILegendaryEventTrack;
     rows: ITableRow[];
     editTeam: (teamId: string) => void;
+    deleteTeam: (teamId: string) => void;
     completedRequirements: string[];
 }
 
-export const SelectedTeamsTable: React.FC<Props> = ({ completedRequirements, rows, editTeam, track }) => {
+export const SelectedTeamsTable: React.FC<Props> = ({ completedRequirements, rows, editTeam, deleteTeam, track }) => {
     const { viewPreferences } = useContext(StoreContext);
     const gridRef = useRef<AgGridReact>(null);
 
@@ -76,7 +77,11 @@ export const SelectedTeamsTable: React.FC<Props> = ({ completedRequirements, row
         const value = cellClicked.value?.teamId;
 
         if (value) {
-            editTeam(value);
+            if ((cellClicked.event as MouseEvent).shiftKey) {
+                deleteTeam(value);
+            } else {
+                editTeam(value);
+            }
         }
     };
 
@@ -85,7 +90,7 @@ export const SelectedTeamsTable: React.FC<Props> = ({ completedRequirements, row
     }, [viewPreferences.showAlpha, viewPreferences.showBeta, viewPreferences.showGamma, viewPreferences.hideCompleted]);
 
     const getRowStyle = (params: RowClassParams): RowStyle => {
-        return params.node.rowIndex === 5 ? { borderTop: '5px dashed' } : {};
+        return params.node.rowIndex && params.node.rowIndex % 5 === 0 ? { borderTop: '5px dashed' } : {};
     };
 
     return (

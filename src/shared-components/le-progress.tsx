@@ -1,19 +1,12 @@
-﻿import React, { useCallback, useContext, useMemo, useState } from 'react';
+﻿import React, { useContext } from 'react';
 import { Tab, Tabs } from '@mui/material';
 import { Info as InfoIcon } from '@mui/icons-material';
-import {
-    ILegendaryEvent,
-    ILegendaryEventBattle,
-    ILegendaryEventProgress,
-    ILegendaryEventProgressState,
-    ILegendaryEventProgressTrack,
-    ILegendaryEventTrackRequirement,
-} from '../models/interfaces';
-import { LeTrackProgress } from './le-track-progress';
+import { ILegendaryEvent } from '../models/interfaces';
 import { LeProgressOverview } from './le-progress-overview';
 import { LegendaryEventEnum } from '../models/enums';
 import { Tooltip } from '@mui/material';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
+import { useLreProgress } from 'src/shared-components/le-progress.hooks';
 
 export const LeProgress = ({
     legendaryEvent,
@@ -27,422 +20,365 @@ export const LeProgress = ({
     const [value, setValue] = React.useState(0);
     const [goal, setGoal] = React.useState<string>('unlock');
 
-    const defaultOverview = leProgress[legendaryEvent.id]?.overview ?? {
-        1: {
-            regularMissions: leProgress[legendaryEvent.id]?.regularMissions ?? 0,
-            premiumMissions: leProgress[legendaryEvent.id]?.premiumMissions ?? 0,
-            bundle: leProgress[legendaryEvent.id]?.bundle ?? 0,
-        },
-        2: {
-            regularMissions: 0,
-            premiumMissions: 0,
-            bundle: 0,
-        },
-        3: {
-            regularMissions: 0,
-            premiumMissions: 0,
-            bundle: 0,
-        },
-    };
+    const { model, updateNotes, updateOccurenceProgress, toggleBattleState } = useLreProgress(legendaryEvent);
 
-    const [personalProgress, setPersonalProgress] = useState<ILegendaryEventProgressState>(
-        leProgress[legendaryEvent.id] ?? {
-            id: legendaryEvent.id,
-            name: LegendaryEventEnum[legendaryEvent.id],
-            alpha: {
-                battles: Array.from({ length: legendaryEvent.battlesCount }, () =>
-                    Array.from({ length: legendaryEvent.constraintsCount }, () => false)
-                ),
-            },
-            beta: {
-                battles: Array.from({ length: legendaryEvent.battlesCount }, () =>
-                    Array.from({ length: legendaryEvent.constraintsCount }, () => false)
-                ),
-            },
-            gamma: {
-                battles: Array.from({ length: legendaryEvent.battlesCount }, () =>
-                    Array.from({ length: legendaryEvent.constraintsCount }, () => false)
-                ),
-            },
-            regularMissions: 0,
-            premiumMissions: 0,
-            bundle: 0,
-            overview: defaultOverview,
-            notes: '',
-        }
-    );
+    // const getTrackProgress = useCallback(
+    //     (
+    //         trackId: 'alpha' | 'beta' | 'gamma',
+    //         killPoints: number,
+    //         requirements: ILegendaryEventTrackRequirement[]
+    //     ): ILegendaryEventProgressTrack => {
+    //         const personalBattles = personalProgress.battlesProgress.filter(x => x.trackId === trackId);
+    //         const killPoints = legendaryEvent[trackId].battlesPoints;
+    //         return {
+    //             name: trackId,
+    //             battles: personalBattles.map((state, index) => ({
+    //                 battleNumber: index + 1,
+    //                 state: Array.from({ length: legendaryEvent.constraintsCount }).map((_, index) => state[index]),
+    //                 requirements: [
+    //                     {
+    //                         name: 'Kill Points',
+    //                         points: killPoints[index] ?? 0,
+    //                         units: [],
+    //                     },
+    //                     {
+    //                         name: 'Defeat All Enemies + High Score',
+    //                         points: (killPoints[index] ?? 0) + killPoints,
+    //                         units: [],
+    //                     },
+    //                     ...requirements,
+    //                 ],
+    //             })),
+    //         };
+    //     },
+    //     []
+    // );
 
-    const getTrackProgress = useCallback(
-        (
-            name: 'alpha' | 'beta' | 'gamma',
-            killPoints: number,
-            requirements: ILegendaryEventTrackRequirement[]
-        ): ILegendaryEventProgressTrack => {
-            const personalBattles = personalProgress[name].battles;
-            const battlesPoints = legendaryEvent[name].battlesPoints;
-            return {
-                name,
-                battles: personalBattles.map((state, index) => ({
-                    battleNumber: index + 1,
-                    state: Array.from({ length: legendaryEvent.constraintsCount }).map((_, index) => state[index]),
-                    requirements: [
-                        {
-                            name: 'Kill Points',
-                            points: battlesPoints[index] ?? 0,
-                            units: [],
-                        },
-                        {
-                            name: 'Defeat All Enemies + High Score',
-                            points: (battlesPoints[index] ?? 0) + killPoints,
-                            units: [],
-                        },
-                        ...requirements,
-                    ],
-                })),
-            };
-        },
-        []
-    );
-
-    const alphaProgress = useMemo(
-        () => getTrackProgress('alpha', legendaryEvent.alpha.killPoints, legendaryEvent.alpha.unitsRestrictions),
-        [legendaryEvent.id]
-    );
-    const betaProgress = useMemo(
-        () => getTrackProgress('beta', legendaryEvent.beta.killPoints, legendaryEvent.beta.unitsRestrictions),
-        [legendaryEvent.id]
-    );
-    const gammaProgress = useMemo(
-        () => getTrackProgress('gamma', legendaryEvent.gamma.killPoints, legendaryEvent.gamma.unitsRestrictions),
-        [legendaryEvent.id]
-    );
-
-    const handleBattlesChange =
-        (section: 'alpha' | 'beta' | 'gamma') =>
-        (battles: ILegendaryEventBattle[]): void => {
-            setPersonalProgress(current => {
-                const eventSection = current[section];
-                eventSection.battles = battles.map(x => x.state);
-                dispatch.leProgress({ type: 'Update', value: current, eventId: current.id });
-                return current;
-            });
-        };
-
-    const handleProgressChange = (value: ILegendaryEventProgress): void => {
-        setPersonalProgress(current => {
-            current.overview = value.overview;
-            dispatch.leProgress({ type: 'Update', value: current, eventId: current.id });
-            return current;
-        });
-    };
-
-    const handleNotesChange = (value: string): void => {
-        setPersonalProgress(current => {
-            current.notes = value;
-            dispatch.leProgress({ type: 'Update', value: current, eventId: current.id });
-            return current;
-        });
-    };
-
-    const labelByIndex: Record<number, string> = {
-        0: 'Overview',
-        1: 'Alpha',
-        2: 'Beta',
-        3: 'Gamma',
-    };
-
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
-        sectionChange(labelByIndex[newValue]);
-    };
-
-    const totalPoints = useMemo(() => {
-        const alphaTotalPoints = alphaProgress.battles
-            .flatMap(b => b.requirements)
-            .map(x => x.points)
-            .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-        const betaTotalPoints = betaProgress.battles
-            .flatMap(b => b.requirements)
-            .map(x => x.points)
-            .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-        const gammaTotalPoints = gammaProgress.battles
-            .flatMap(b => b.requirements)
-            .map(x => x.points)
-            .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-
-        return alphaTotalPoints + betaTotalPoints + gammaTotalPoints;
-    }, []);
-
-    const getCurrentPoints = (trackProgress: ILegendaryEventProgressTrack) => {
-        let total = 0;
-
-        trackProgress.battles.forEach(battle => {
-            battle.state.forEach((value, index) => {
-                if (value) {
-                    total += battle.requirements[index].points;
-                }
-            });
-        });
-
-        return total;
-    };
-
-    const premiumMissions = (function () {
-        if (!personalProgress.overview) {
-            return 0;
-        }
-        return (
-            personalProgress.overview['1'].premiumMissions +
-            personalProgress.overview['2'].premiumMissions +
-            personalProgress.overview['3'].premiumMissions
-        );
-    })();
-
-    const regularMissions = (function () {
-        if (!personalProgress.overview) {
-            return 0;
-        }
-        return (
-            personalProgress.overview['1'].regularMissions +
-            personalProgress.overview['2'].regularMissions +
-            personalProgress.overview['3'].regularMissions
-        );
-    })();
-
-    const bundle = (function () {
-        if (!personalProgress.overview) {
-            return 0;
-        }
-        return (
-            personalProgress.overview['1'].bundle +
-            personalProgress.overview['2'].bundle +
-            personalProgress.overview['3'].bundle
-        );
-    })();
-
-    const currentPoints = useMemo(() => {
-        const alphaTotalPoints = getCurrentPoints(alphaProgress);
-        const betaTotalPoints = getCurrentPoints(betaProgress);
-        const gammaTotalPoints = getCurrentPoints(gammaProgress);
-
-        return alphaTotalPoints + betaTotalPoints + gammaTotalPoints;
-    }, [value, premiumMissions]);
-
-    const totalCurrency = useMemo(() => {
-        return legendaryEvent.pointsMilestones
-            .map(x => x.engramPayout)
-            .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    }, []);
-
-    const getCurrencyPerMission = (premiumMissionsCount: number) => {
-        const hasPremiumQuests = premiumMissionsCount > 0;
-
-        return hasPremiumQuests ? 25 + 15 : 25;
-    };
-
-    const getMissionsCurrency = (missions: number, premiumMissionsCount: number) => {
-        return missions * getCurrencyPerMission(premiumMissionsCount);
-    };
-
-    const regularMissionsCurrency = useMemo(() => {
-        if (!personalProgress.overview) {
-            return 0;
-        }
-
-        return (
-            getMissionsCurrency(
-                personalProgress.overview['1'].regularMissions,
-                personalProgress.overview['1'].premiumMissions
-            ) +
-            getMissionsCurrency(
-                personalProgress.overview['2'].regularMissions,
-                personalProgress.overview['2'].premiumMissions
-            ) +
-            getMissionsCurrency(
-                personalProgress.overview['3'].regularMissions,
-                personalProgress.overview['3'].premiumMissions
-            )
-        );
-    }, [regularMissions, premiumMissions]);
-
-    const premiumMissionsCurrency = useMemo(() => {
-        if (!personalProgress.overview) {
-            return 0;
-        }
-
-        return (
-            getMissionsCurrency(
-                personalProgress.overview['1'].premiumMissions,
-                personalProgress.overview['1'].premiumMissions
-            ) +
-            getMissionsCurrency(
-                personalProgress.overview['2'].premiumMissions,
-                personalProgress.overview['2'].premiumMissions
-            ) +
-            getMissionsCurrency(
-                personalProgress.overview['3'].premiumMissions,
-                personalProgress.overview['3'].premiumMissions
-            )
-        );
-    }, [premiumMissions]);
-
-    const getBundleCurrency = (bundle: number, premiumMissionsCount: number) => {
-        const additionalPayout = premiumMissionsCount > 0 ? 15 : 0;
-        return bundle ? bundle * 300 + additionalPayout : 0;
-    };
-
-    const bundleCurrency = useMemo(() => {
-        if (!personalProgress.overview) {
-            return 0;
-        }
-
-        return (
-            getBundleCurrency(personalProgress.overview['1'].bundle, personalProgress.overview['1'].premiumMissions) +
-            getBundleCurrency(personalProgress.overview['2'].bundle, personalProgress.overview['2'].premiumMissions) +
-            getBundleCurrency(personalProgress.overview['3'].bundle, personalProgress.overview['3'].premiumMissions)
-        );
-    }, [bundle, premiumMissions]);
-
-    const currentCurrency = useMemo(() => {
-        const currentMilestone = legendaryEvent.pointsMilestones.find(x => x.cumulativePoints >= currentPoints);
-        if (!currentMilestone) {
-            return 0;
-        }
-
-        const milestoneNumber =
-            currentMilestone.cumulativePoints > currentPoints
-                ? currentMilestone.milestone - 1
-                : currentMilestone.milestone;
-
-        const pointsCurrency = legendaryEvent.pointsMilestones
-            .filter(x => x.milestone <= milestoneNumber)
-            .map(x => x.engramPayout + (premiumMissionsCurrency > 0 ? 15 : 0))
-            .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-
-        return pointsCurrency + regularMissionsCurrency + premiumMissionsCurrency + bundleCurrency;
-    }, [currentPoints, regularMissionsCurrency, premiumMissionsCurrency, bundleCurrency]);
-
-    const totalChests = useMemo(() => {
-        return legendaryEvent.chestsMilestones.length;
-    }, []);
-
-    const currentChests = useMemo(() => {
-        let currencyLeft = currentCurrency;
-
-        for (const chestMilestone of legendaryEvent.chestsMilestones) {
-            if (currencyLeft >= chestMilestone.engramCost) {
-                currencyLeft -= chestMilestone.engramCost;
-            } else {
-                return chestMilestone.chestLevel - 1;
-            }
-        }
-
-        return legendaryEvent.chestsMilestones.length;
-    }, [currentCurrency]);
-
-    const chestsForNextGoal = useMemo(() => {
-        const chestsForUnlock = legendaryEvent.progression.unlock / legendaryEvent.shardsPerChest;
-        const chestsFor4Stars =
-            (legendaryEvent.progression.unlock + legendaryEvent.progression.fourStars) / legendaryEvent.shardsPerChest;
-        const chestsFor5Stars =
-            (legendaryEvent.progression.unlock +
-                legendaryEvent.progression.fourStars +
-                legendaryEvent.progression.fiveStars) /
-            legendaryEvent.shardsPerChest;
-        const chestsForBlueStar =
-            (legendaryEvent.progression.unlock +
-                legendaryEvent.progression.fourStars +
-                legendaryEvent.progression.fiveStars +
-                legendaryEvent.progression.blueStar) /
-            legendaryEvent.shardsPerChest;
-
-        if (currentChests < chestsForUnlock) {
-            setGoal('unlock');
-            return Math.ceil(chestsForUnlock);
-        } else if (currentChests < chestsFor4Stars) {
-            setGoal('4 stars');
-            return Math.ceil(chestsFor4Stars);
-        } else if (currentChests < chestsFor5Stars) {
-            setGoal('5 stars');
-            return Math.ceil(chestsFor5Stars);
-        }
-
-        setGoal('blue star');
-        return Math.ceil(chestsForBlueStar);
-    }, [currentChests]);
-
-    const currencyForUnlock = useMemo(() => {
-        return legendaryEvent.chestsMilestones
-            .filter(x => x.chestLevel <= chestsForNextGoal)
-            .map(x => x.engramCost)
-            .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    }, [chestsForNextGoal]);
-
-    const pointsForUnlock = useMemo(() => {
-        const additionalPayout = premiumMissions > 0 ? 15 : 0;
-        let currencyLeft = currencyForUnlock - regularMissionsCurrency - premiumMissionsCurrency - bundleCurrency;
-
-        for (const chestMilestone of legendaryEvent.pointsMilestones) {
-            currencyLeft -= chestMilestone.engramPayout + additionalPayout;
-            if (currencyLeft <= 0) {
-                return chestMilestone.cumulativePoints;
-            }
-        }
-
-        return legendaryEvent.pointsMilestones[legendaryEvent.pointsMilestones.length - 1].cumulativePoints;
-    }, [currencyForUnlock, regularMissionsCurrency, premiumMissionsCurrency, bundleCurrency]);
-
-    const averageBattles = useMemo(() => {
-        return (pointsForUnlock / 3 / 500).toFixed(2);
-    }, [pointsForUnlock]);
+    // const alphaProgress = useMemo(
+    //     () => getTrackProgress('alpha', legendaryEvent.alpha.killPoints, legendaryEvent.alpha.unitsRestrictions),
+    //     [legendaryEvent.id]
+    // );
+    // const betaProgress = useMemo(
+    //     () => getTrackProgress('beta', legendaryEvent.beta.killPoints, legendaryEvent.beta.unitsRestrictions),
+    //     [legendaryEvent.id]
+    // );
+    // const gammaProgress = useMemo(
+    //     () => getTrackProgress('gamma', legendaryEvent.gamma.killPoints, legendaryEvent.gamma.unitsRestrictions),
+    //     [legendaryEvent.id]
+    // );
+    //
+    // const handleBattlesChange =
+    //     (section: 'alpha' | 'beta' | 'gamma') =>
+    //     (battles: ILegendaryEventBattle[]): void => {
+    //         setPersonalProgress(current => {
+    //             const eventSection = current[section];
+    //             eventSection.battles = battles.map(x => x.state);
+    //             dispatch.leProgress({ type: 'Update', value: current, eventId: current.id });
+    //             return current;
+    //         });
+    //     };
+    //
+    // const handleProgressChange = (value: ILegendaryEventProgress): void => {
+    //     setPersonalProgress(current => {
+    //         current.overview = value.overview;
+    //         dispatch.leProgress({ type: 'Update', value: current, eventId: current.id });
+    //         return current;
+    //     });
+    // };
+    //
+    // const labelByIndex: Record<number, string> = {
+    //     0: 'Overview',
+    //     1: 'Alpha',
+    //     2: 'Beta',
+    //     3: 'Gamma',
+    // };
+    //
+    // const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    //     setValue(newValue);
+    //     sectionChange(labelByIndex[newValue]);
+    // };
+    //
+    // const totalPoints = useMemo(() => {
+    //     const alphaTotalPoints = alphaProgress.battles
+    //         .flatMap(b => b.requirements)
+    //         .map(x => x.points)
+    //         .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    //     const betaTotalPoints = betaProgress.battles
+    //         .flatMap(b => b.requirements)
+    //         .map(x => x.points)
+    //         .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    //     const gammaTotalPoints = gammaProgress.battles
+    //         .flatMap(b => b.requirements)
+    //         .map(x => x.points)
+    //         .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    //
+    //     return alphaTotalPoints + betaTotalPoints + gammaTotalPoints;
+    // }, []);
+    //
+    // const getCurrentPoints = (trackProgress: ILegendaryEventProgressTrack) => {
+    //     let total = 0;
+    //
+    //     trackProgress.battles.forEach(battle => {
+    //         battle.state.forEach((value, index) => {
+    //             if (value) {
+    //                 total += battle.requirements[index].points;
+    //             }
+    //         });
+    //     });
+    //
+    //     return total;
+    // };
+    //
+    // const premiumMissions = (function () {
+    //     if (!personalProgress.overview) {
+    //         return 0;
+    //     }
+    //     return (
+    //         personalProgress.overview['1'].premiumMissions +
+    //         personalProgress.overview['2'].premiumMissions +
+    //         personalProgress.overview['3'].premiumMissions
+    //     );
+    // })();
+    //
+    // const regularMissions = (function () {
+    //     if (!personalProgress.overview) {
+    //         return 0;
+    //     }
+    //     return (
+    //         personalProgress.overview['1'].regularMissions +
+    //         personalProgress.overview['2'].regularMissions +
+    //         personalProgress.overview['3'].regularMissions
+    //     );
+    // })();
+    //
+    // const bundle = (function () {
+    //     if (!personalProgress.overview) {
+    //         return 0;
+    //     }
+    //     return (
+    //         personalProgress.overview['1'].bundle +
+    //         personalProgress.overview['2'].bundle +
+    //         personalProgress.overview['3'].bundle
+    //     );
+    // })();
+    //
+    // const currentPoints = useMemo(() => {
+    //     const alphaTotalPoints = getCurrentPoints(alphaProgress);
+    //     const betaTotalPoints = getCurrentPoints(betaProgress);
+    //     const gammaTotalPoints = getCurrentPoints(gammaProgress);
+    //
+    //     return alphaTotalPoints + betaTotalPoints + gammaTotalPoints;
+    // }, [value, premiumMissions]);
+    //
+    // const totalCurrency = useMemo(() => {
+    //     return legendaryEvent.pointsMilestones
+    //         .map(x => x.engramPayout)
+    //         .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    // }, []);
+    //
+    // const getCurrencyPerMission = (premiumMissionsCount: number) => {
+    //     const hasPremiumQuests = premiumMissionsCount > 0;
+    //
+    //     return hasPremiumQuests ? 25 + 15 : 25;
+    // };
+    //
+    // const getMissionsCurrency = (missions: number, premiumMissionsCount: number) => {
+    //     return missions * getCurrencyPerMission(premiumMissionsCount);
+    // };
+    //
+    // const regularMissionsCurrency = useMemo(() => {
+    //     if (!personalProgress.overview) {
+    //         return 0;
+    //     }
+    //
+    //     return (
+    //         getMissionsCurrency(
+    //             personalProgress.overview['1'].regularMissions,
+    //             personalProgress.overview['1'].premiumMissions
+    //         ) +
+    //         getMissionsCurrency(
+    //             personalProgress.overview['2'].regularMissions,
+    //             personalProgress.overview['2'].premiumMissions
+    //         ) +
+    //         getMissionsCurrency(
+    //             personalProgress.overview['3'].regularMissions,
+    //             personalProgress.overview['3'].premiumMissions
+    //         )
+    //     );
+    // }, [regularMissions, premiumMissions]);
+    //
+    // const premiumMissionsCurrency = useMemo(() => {
+    //     if (!personalProgress.overview) {
+    //         return 0;
+    //     }
+    //
+    //     return (
+    //         getMissionsCurrency(
+    //             personalProgress.overview['1'].premiumMissions,
+    //             personalProgress.overview['1'].premiumMissions
+    //         ) +
+    //         getMissionsCurrency(
+    //             personalProgress.overview['2'].premiumMissions,
+    //             personalProgress.overview['2'].premiumMissions
+    //         ) +
+    //         getMissionsCurrency(
+    //             personalProgress.overview['3'].premiumMissions,
+    //             personalProgress.overview['3'].premiumMissions
+    //         )
+    //     );
+    // }, [premiumMissions]);
+    //
+    // const getBundleCurrency = (bundle: number, premiumMissionsCount: number) => {
+    //     const additionalPayout = premiumMissionsCount > 0 ? 15 : 0;
+    //     return bundle ? bundle * 300 + additionalPayout : 0;
+    // };
+    //
+    // const bundleCurrency = useMemo(() => {
+    //     if (!personalProgress.overview) {
+    //         return 0;
+    //     }
+    //
+    //     return (
+    //         getBundleCurrency(personalProgress.overview['1'].bundle, personalProgress.overview['1'].premiumMissions) +
+    //         getBundleCurrency(personalProgress.overview['2'].bundle, personalProgress.overview['2'].premiumMissions) +
+    //         getBundleCurrency(personalProgress.overview['3'].bundle, personalProgress.overview['3'].premiumMissions)
+    //     );
+    // }, [bundle, premiumMissions]);
+    //
+    // const currentCurrency = useMemo(() => {
+    //     const currentMilestone = legendaryEvent.pointsMilestones.find(x => x.cumulativePoints >= currentPoints);
+    //     if (!currentMilestone) {
+    //         return 0;
+    //     }
+    //
+    //     const milestoneNumber =
+    //         currentMilestone.cumulativePoints > currentPoints
+    //             ? currentMilestone.milestone - 1
+    //             : currentMilestone.milestone;
+    //
+    //     const pointsCurrency = legendaryEvent.pointsMilestones
+    //         .filter(x => x.milestone <= milestoneNumber)
+    //         .map(x => x.engramPayout + (premiumMissionsCurrency > 0 ? 15 : 0))
+    //         .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    //
+    //     return pointsCurrency + regularMissionsCurrency + premiumMissionsCurrency + bundleCurrency;
+    // }, [currentPoints, regularMissionsCurrency, premiumMissionsCurrency, bundleCurrency]);
+    //
+    // const totalChests = useMemo(() => {
+    //     return legendaryEvent.chestsMilestones.length;
+    // }, []);
+    //
+    // const currentChests = useMemo(() => {
+    //     let currencyLeft = currentCurrency;
+    //
+    //     for (const chestMilestone of legendaryEvent.chestsMilestones) {
+    //         if (currencyLeft >= chestMilestone.engramCost) {
+    //             currencyLeft -= chestMilestone.engramCost;
+    //         } else {
+    //             return chestMilestone.chestLevel - 1;
+    //         }
+    //     }
+    //
+    //     return legendaryEvent.chestsMilestones.length;
+    // }, [currentCurrency]);
+    //
+    // const chestsForNextGoal = useMemo(() => {
+    //     const chestsForUnlock = legendaryEvent.progression.unlock / legendaryEvent.shardsPerChest;
+    //     const chestsFor4Stars =
+    //         (legendaryEvent.progression.unlock + legendaryEvent.progression.fourStars) / legendaryEvent.shardsPerChest;
+    //     const chestsFor5Stars =
+    //         (legendaryEvent.progression.unlock +
+    //             legendaryEvent.progression.fourStars +
+    //             legendaryEvent.progression.fiveStars) /
+    //         legendaryEvent.shardsPerChest;
+    //     const chestsForBlueStar =
+    //         (legendaryEvent.progression.unlock +
+    //             legendaryEvent.progression.fourStars +
+    //             legendaryEvent.progression.fiveStars +
+    //             legendaryEvent.progression.blueStar) /
+    //         legendaryEvent.shardsPerChest;
+    //
+    //     if (currentChests < chestsForUnlock) {
+    //         setGoal('unlock');
+    //         return Math.ceil(chestsForUnlock);
+    //     } else if (currentChests < chestsFor4Stars) {
+    //         setGoal('4 stars');
+    //         return Math.ceil(chestsFor4Stars);
+    //     } else if (currentChests < chestsFor5Stars) {
+    //         setGoal('5 stars');
+    //         return Math.ceil(chestsFor5Stars);
+    //     }
+    //
+    //     setGoal('blue star');
+    //     return Math.ceil(chestsForBlueStar);
+    // }, [currentChests]);
+    //
+    // const currencyForUnlock = useMemo(() => {
+    //     return legendaryEvent.chestsMilestones
+    //         .filter(x => x.chestLevel <= chestsForNextGoal)
+    //         .map(x => x.engramCost)
+    //         .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    // }, [chestsForNextGoal]);
+    //
+    // const pointsForUnlock = useMemo(() => {
+    //     const additionalPayout = premiumMissions > 0 ? 15 : 0;
+    //     let currencyLeft = currencyForUnlock - regularMissionsCurrency - premiumMissionsCurrency - bundleCurrency;
+    //
+    //     for (const chestMilestone of legendaryEvent.pointsMilestones) {
+    //         currencyLeft -= chestMilestone.engramPayout + additionalPayout;
+    //         if (currencyLeft <= 0) {
+    //             return chestMilestone.cumulativePoints;
+    //         }
+    //     }
+    //
+    //     return legendaryEvent.pointsMilestones[legendaryEvent.pointsMilestones.length - 1].cumulativePoints;
+    // }, [currencyForUnlock, regularMissionsCurrency, premiumMissionsCurrency, bundleCurrency]);
+    //
+    // const averageBattles = useMemo(() => {
+    //     return (pointsForUnlock / 3 / 500).toFixed(2);
+    // }, [pointsForUnlock]);
 
     return (
         <div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 15, margin: 10 }}>
-                <div style={{ display: 'flex', gap: 5 }}>
-                    Deed Points to {goal}:
-                    <span style={{ fontWeight: 700 }}>
-                        {' '}
-                        {currentPoints} / {pointsForUnlock}
-                    </span>
-                    <Tooltip title={totalPoints + ' in total. Battles per track: ' + averageBattles}>
-                        <InfoIcon />
-                    </Tooltip>
-                </div>
+            {/*<div style={{ display: 'flex', flexWrap: 'wrap', gap: 15, margin: 10 }}>*/}
+            {/*    <div style={{ display: 'flex', gap: 5 }}>*/}
+            {/*        Deed Points to {goal}:*/}
+            {/*        <span style={{ fontWeight: 700 }}>*/}
+            {/*            {' '}*/}
+            {/*            {currentPoints} / {pointsForUnlock}*/}
+            {/*        </span>*/}
+            {/*        <Tooltip title={totalPoints + ' in total. Battles per track: ' + averageBattles}>*/}
+            {/*            <InfoIcon />*/}
+            {/*        </Tooltip>*/}
+            {/*    </div>*/}
 
-                <div style={{ display: 'flex', gap: 5 }}>
-                    Currency to {goal}:
-                    <span style={{ fontWeight: 700 }}>
-                        {' '}
-                        {currentCurrency} / {currencyForUnlock}
-                    </span>
-                    <Tooltip title={totalCurrency + ' in total'}>
-                        <InfoIcon />
-                    </Tooltip>
-                </div>
+            {/*    <div style={{ display: 'flex', gap: 5 }}>*/}
+            {/*        Currency to {goal}:*/}
+            {/*        <span style={{ fontWeight: 700 }}>*/}
+            {/*            {' '}*/}
+            {/*            {currentCurrency} / {currencyForUnlock}*/}
+            {/*        </span>*/}
+            {/*        <Tooltip title={totalCurrency + ' in total'}>*/}
+            {/*            <InfoIcon />*/}
+            {/*        </Tooltip>*/}
+            {/*    </div>*/}
 
-                <div style={{ display: 'flex', gap: 5 }}>
-                    Chests to {goal}:
-                    <span style={{ fontWeight: 700 }}>
-                        {' '}
-                        {currentChests} / {chestsForNextGoal}
-                    </span>
-                    <Tooltip title={totalChests + ' in total'}>
-                        <InfoIcon />
-                    </Tooltip>
-                </div>
-            </div>
+            {/*    <div style={{ display: 'flex', gap: 5 }}>*/}
+            {/*        Chests to {goal}:*/}
+            {/*        <span style={{ fontWeight: 700 }}>*/}
+            {/*            {' '}*/}
+            {/*            {currentChests} / {chestsForNextGoal}*/}
+            {/*        </span>*/}
+            {/*        <Tooltip title={totalChests + ' in total'}>*/}
+            {/*            <InfoIcon />*/}
+            {/*        </Tooltip>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <LeProgressOverview
-                legendaryEvent={legendaryEvent}
-                progressChange={handleProgressChange}
-                notesChange={handleNotesChange}
-                progress={{
-                    alpha: alphaProgress,
-                    beta: betaProgress,
-                    gamma: gammaProgress,
-                    notes: personalProgress.notes,
-                    overview: personalProgress.overview ?? defaultOverview,
-                }}
+                model={model}
+                toggleBattleState={toggleBattleState}
+                occurenceProgressChange={updateOccurenceProgress}
+                notesChange={updateNotes}
             />
             {/*<Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto">*/}
             {/*    <Tab value={0} label="Overview" />*/}
@@ -450,17 +386,27 @@ export const LeProgress = ({
             {/*    <Tab value={2} label="Beta" />*/}
             {/*    <Tab value={3} label="Gamma" />*/}
             {/*</Tabs>*/}
-            {/*<TabPanel value={value} index={0}>*/}
-
-            {/*</TabPanel>*/}
+            {/*<TabPanel value={value} index={0}></TabPanel>*/}
             {/*<TabPanel value={value} index={1}>*/}
-            {/*    <LeTrackProgress trackProgress={alphaProgress} onStateUpdate={handleBattlesChange('alpha')}/>*/}
+            {/*    <LeTrackProgress*/}
+            {/*        battlesCount={legendaryEvent.battlesCount}*/}
+            {/*        trackProgress={alphaProgress}*/}
+            {/*        onStateUpdate={handleBattlesChange('alpha')}*/}
+            {/*    />*/}
             {/*</TabPanel>*/}
             {/*<TabPanel value={value} index={2}>*/}
-            {/*    <LeTrackProgress trackProgress={betaProgress} onStateUpdate={handleBattlesChange('beta')}/>*/}
+            {/*    <LeTrackProgress*/}
+            {/*        battlesCount={legendaryEvent.battlesCount}*/}
+            {/*        trackProgress={betaProgress}*/}
+            {/*        onStateUpdate={handleBattlesChange('beta')}*/}
+            {/*    />*/}
             {/*</TabPanel>*/}
             {/*<TabPanel value={value} index={3}>*/}
-            {/*    <LeTrackProgress trackProgress={gammaProgress} onStateUpdate={handleBattlesChange('gamma')}/>*/}
+            {/*    <LeTrackProgress*/}
+            {/*        battlesCount={legendaryEvent.battlesCount}*/}
+            {/*        trackProgress={gammaProgress}*/}
+            {/*        onStateUpdate={handleBattlesChange('gamma')}*/}
+            {/*    />*/}
             {/*</TabPanel>*/}
         </div>
     );

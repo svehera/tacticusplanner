@@ -62,8 +62,8 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
             disabled: false,
         },
         {
-            label: 'Hide completed tracks',
-            tooltip: 'Hide tracks where you have completed battle 12',
+            label: 'Exclude completed tracks',
+            tooltip: 'Exclude tracks where you have completed all battles',
             key: 'hideCompleted',
             value: viewSettings.hideCompleted,
             disabled: false,
@@ -87,6 +87,12 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
             label: 'Ignore Rarity',
             key: 'ignoreRarity',
             value: teamsSettings.ignoreRarity,
+            disabled: false,
+        },
+        {
+            label: 'Ignore Bias',
+            key: 'ignoreRecommendedFirst',
+            value: teamsSettings.ignoreRecommendedFirst,
             disabled: false,
         },
     ];

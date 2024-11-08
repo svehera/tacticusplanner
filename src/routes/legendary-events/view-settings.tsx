@@ -62,26 +62,6 @@ const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
             </Popover>
         </>
     );
-    const lreSectionOptions: IViewOption[] = [
-        {
-            label: 'Alpha',
-            key: 'showAlpha',
-            value: viewPreferences.showAlpha,
-            disabled: viewPreferences.showAlpha && !viewPreferences.showBeta && !viewPreferences.showGamma,
-        },
-        {
-            label: 'Beta',
-            key: 'showBeta',
-            value: viewPreferences.showBeta,
-            disabled: viewPreferences.showBeta && !viewPreferences.showAlpha && !viewPreferences.showGamma,
-        },
-        {
-            label: 'Gamma',
-            key: 'showGamma',
-            value: viewPreferences.showGamma,
-            disabled: viewPreferences.showGamma && !viewPreferences.showAlpha && !viewPreferences.showBeta,
-        },
-    ];
 
     const wyoOptions: IViewOption[] = [
         {

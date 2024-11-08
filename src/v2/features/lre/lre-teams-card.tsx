@@ -10,46 +10,35 @@ import InfoIcon from '@mui/icons-material/Info';
 import { Card, CardContent, CardHeader, Checkbox, FormControlLabel } from '@mui/material';
 import { LreTile } from './lre-tile';
 import { SelectedTeamCard } from './selected-teams-card';
+import { TrackRequirementCheck } from 'src/v2/features/lre/track-requirement-check';
 
 interface Props {
     track: ILegendaryEventTrack;
     teams: ILreTeam[];
     startAddTeam: (section: LreTrackId, requirements: string[]) => void;
-    completedRequirements: string[];
+    progress: Record<string, number>;
     editTeam: (team: ILreTeam) => void;
+    deleteTeam: (teamId: string) => void;
+    restrictions: string[];
 }
 
-export const LreTeamsCard: React.FC<Props> = ({ track, completedRequirements, startAddTeam, teams: selectedTeams }) => {
+export const LreTeamsCard: React.FC<Props> = ({
+    track,
+    progress,
+    startAddTeam,
+    teams: selectedTeams,
+    editTeam,
+    deleteTeam,
+    restrictions,
+}) => {
     const gridRef = useRef<AgGridReact>(null);
 
-    const { viewPreferences, autoTeamsPreferences, leSelectedRequirements, selectedTeamOrder } =
-        useContext(StoreContext);
+    const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
-
-    const restrictions = useMemo(() => {
-        const event: ILegendaryEventSelectedRequirements = leSelectedRequirements[track.eventId] ?? {
-            id: track.eventId,
-            name: LegendaryEventEnum[track.eventId],
-            alpha: {},
-            beta: {},
-            gamma: {},
-        };
-        const section = event[track.section];
-        const result: string[] = [];
-
-        track.unitsRestrictions.forEach(x => {
-            const selected = section[x.name] !== undefined ? section[x.name] : x.selected;
-            if (selected && !completedRequirements.includes(x.name)) {
-                result.push(x.name);
-            }
-        });
-
-        return result;
-    }, [leSelectedRequirements, completedRequirements]);
 
     const gridTeam = useMemo(
         () => track.suggestTeam(autoTeamsPreferences, viewPreferences.onlyUnlocked, restrictions),
-        [autoTeamsPreferences, restrictions, viewPreferences.onlyUnlocked, selectedTeamOrder]
+        [autoTeamsPreferences, restrictions, viewPreferences.onlyUnlocked]
     );
 
     useEffect(() => {
@@ -76,10 +65,19 @@ export const LreTeamsCard: React.FC<Props> = ({ track, completedRequirements, st
         startAddTeam(track.section, restrictions);
     };
 
+    const handleAction = (team: ILreTeam) => (action: 'edit' | 'delete') => {
+        if (action === 'edit') {
+            editTeam(team);
+        }
+        if (action === 'delete') {
+            deleteTeam(team.id);
+        }
+    };
+
     return (
         <Card variant="outlined">
             <CardHeader
-                title={track.name + ' - ' + track.killPoints}
+                title={track.name}
                 subheader={
                     <div className="flex-box gap5">
                         <span style={{ fontStyle: 'italic', fontSize: '1rem' }}> vs {track.enemies.label}</span>
@@ -90,22 +88,23 @@ export const LreTeamsCard: React.FC<Props> = ({ track, completedRequirements, st
                 }
             />
             <CardContent>
-                <div className="flex-box wrap">
-                    {track.unitsRestrictions.map(resriction => (
-                        <FormControlLabel
-                            key={resriction.name}
-                            control={
-                                <Checkbox
-                                    checked={restrictions.includes(resriction.name)}
-                                    onChange={event => handleChange(event.target.checked, resriction.name)}
-                                    inputProps={{ 'aria-label': 'controlled' }}
-                                />
-                            }
-                            label={`(${resriction.points}) ${resriction.name}`}
-                        />
-                    ))}
+                <div className="flex-box around wrap">
+                    {track.unitsRestrictions
+                        .filter(x => !x.hide)
+                        .map(restriction => (
+                            <TrackRequirementCheck
+                                key={restriction.name}
+                                checked={restrictions.includes(restriction.name)}
+                                restriction={restriction}
+                                onCheckboxChange={value => handleChange(value, restriction.name)}
+                                progress={`${progress[restriction.name]}/14`}
+                            />
+                        ))}
                 </div>
-                <div className="flex-box column start" style={{ minHeight: 300, maxHeight: 300, overflow: 'auto' }}>
+                <br />
+                <div
+                    className="flex-box column gap1 start"
+                    style={{ minHeight: 300, maxHeight: 300, overflow: 'auto' }}>
                     {gridTeam.map(character => (
                         <LreTile
                             key={character.id}
@@ -117,10 +116,10 @@ export const LreTeamsCard: React.FC<Props> = ({ track, completedRequirements, st
                 </div>
                 {selectedTeams.length ? (
                     <>
-                        <h3>Selected Teams</h3>
+                        <h3>Selected Teams ({selectedTeams.length})</h3>
                         <div className="flex-box wrap">
                             {selectedTeams.map(team => (
-                                <SelectedTeamCard key={team.id} team={team} />
+                                <SelectedTeamCard key={team.id} team={team} menuItemSelect={handleAction(team)} />
                             ))}
                         </div>
                     </>

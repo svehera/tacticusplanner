@@ -7,10 +7,13 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { isMobile } from 'react-device-detect';
 import { LreAddTeam } from 'src/v2/features/lre/lre-add-team';
 import { LreEditTeam } from 'src/v2/features/lre/lre-edit-team';
+import { useLreProgress } from 'src/shared-components/le-progress.hooks';
+import { ILreTrackProgress } from 'src/v2/features/lre/lre.models';
 
 export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
     const { characters, viewPreferences, leSelectedTeams, leProgress } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
+    const { model: lreProgress } = useLreProgress(legendaryEvent);
 
     const [showAddTeam, setShowAddTeam] = useState(false);
     const [editTeam, setEditTeam] = useState<ILreTeam | null>(null);
@@ -33,35 +36,19 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
         setPreselectedRequirements(restrictions);
     };
 
-    const getCompletedRequirements = (section: LreTrackId): string[] => {
-        const eventProgress = leProgress[legendaryEvent.id];
-        const sectionProgress = eventProgress && eventProgress[section];
-        const track = legendaryEvent[section];
-
-        if (sectionProgress) {
-            const completedRequirements = Array.from({ length: sectionProgress.battles[0].length }, (_, i) =>
-                sectionProgress.battles.map(arr => arr[i])
-            )
-                .slice(2)
-                .map(x => x.every(battle => battle));
-
-            return track.unitsRestrictions
-                .map((x, index) => (completedRequirements[index] ? x.name : ''))
-                .filter(x => !!x);
-        }
-
-        return [];
+    const autoAddTeam = (section: LreTrackId, restrictions: string[], team: ICharacter2[]) => {
+        dispatch.leSelectedTeams({
+            type: 'AddTeam',
+            eventId: legendaryEvent.id,
+            team: {
+                id: '',
+                name: section,
+                section: section,
+                charactersIds: team.map(x => x.id),
+                restrictionsIds: restrictions,
+            },
+        });
     };
-
-    const alphaCompletedRequirements = useMemo(
-        () => getCompletedRequirements('alpha'),
-        [leProgress, legendaryEvent.id]
-    );
-    const betaCompletedRequirements = useMemo(() => getCompletedRequirements('beta'), [leProgress, legendaryEvent.id]);
-    const gammaCompletedRequirements = useMemo(
-        () => getCompletedRequirements('gamma'),
-        [leProgress, legendaryEvent.id]
-    );
 
     const addLreTeam = (team: ILreTeam) => {
         dispatch.leSelectedTeams({ type: 'AddTeam', eventId: legendaryEvent.id, team });
@@ -90,6 +77,17 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
         }
     };
 
+    const getReqProgressPerTrack = (trackProgress: ILreTrackProgress) => {
+        const completedReqs = trackProgress.battles.flatMap(x => x.requirementsProgress).filter(x => x.completed);
+        const result: Record<string, number> = {};
+
+        trackProgress.requirements.forEach(requirement => {
+            result[requirement.id] = completedReqs.filter(x => x.id === requirement.id).length;
+        });
+
+        return result;
+    };
+
     return (
         <div>
             <div
@@ -100,8 +98,10 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
                         track={legendaryEvent.alpha}
                         startAddTeam={startAddTeam}
                         editTeam={setEditTeam}
+                        autoAddTeam={autoAddTeam}
+                        deleteTeam={deleteTeam}
                         teams={selectedTeams.filter(x => x.section === 'alpha')}
-                        completedRequirements={viewPreferences.hideCompleted ? alphaCompletedRequirements : []}
+                        progress={getReqProgressPerTrack(lreProgress.tracksProgress.find(x => x.trackId == 'alpha')!)}
                     />
                 )}
                 {viewPreferences.showBeta && (
@@ -109,8 +109,10 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
                         track={legendaryEvent.beta}
                         startAddTeam={startAddTeam}
                         editTeam={setEditTeam}
+                        autoAddTeam={autoAddTeam}
+                        deleteTeam={deleteTeam}
                         teams={selectedTeams.filter(x => x.section === 'beta')}
-                        completedRequirements={viewPreferences.hideCompleted ? betaCompletedRequirements : []}
+                        progress={getReqProgressPerTrack(lreProgress.tracksProgress.find(x => x.trackId == 'beta')!)}
                     />
                 )}
                 {viewPreferences.showGamma && (
@@ -118,8 +120,10 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
                         track={legendaryEvent.gamma}
                         startAddTeam={startAddTeam}
                         editTeam={setEditTeam}
+                        autoAddTeam={autoAddTeam}
+                        deleteTeam={deleteTeam}
                         teams={selectedTeams.filter(x => x.section === 'gamma')}
-                        completedRequirements={viewPreferences.hideCompleted ? gammaCompletedRequirements : []}
+                        progress={getReqProgressPerTrack(lreProgress.tracksProgress.find(x => x.trackId == 'gamma')!)}
                     />
                 )}
             </div>

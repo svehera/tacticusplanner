@@ -201,6 +201,10 @@ code {
         justify-content: space-between;
     }
 
+    &.around {
+        justify-content: space-around;
+    }
+
     &.center {
         justify-content: center;
     }

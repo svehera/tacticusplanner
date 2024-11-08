@@ -828,5 +828,210 @@
             "primary": ["Master-Crafted Ammo", "Codex Astartes Page", "Plasma Coil"],
             "secondary": ["Master-Crafted Ammo", "Codex Astartes Page", "Technocrafted Strength"]
         }
+    ],
+    "_tson": [
+        {
+            "lvl": 1,
+            "primary": ["Minor Bionic Enhancement", "Round of Ammo", "Thick Skin"]
+        },
+        {
+            "lvl": 2,
+            "primary": ["Wires", "Auspex", "Pile of Salvage"]
+        },
+        {
+            "lvl": 3,
+            "primary": ["Adamantium Filaments", "Minor Bionic Enhancement", "Wires"]
+        },
+        {
+            "lvl": 4,
+            "primary": ["Targeting Link", "Round of Ammo", "Auspex"]
+        },
+        {
+            "lvl": 5,
+            "primary": ["Sophisticated Material", "Thick Skin", "Pile of Salvage"]
+        },
+        {
+            "lvl": 6,
+            "primary": ["Minor Bionic Enhancement", "Wires", "Adamantium Filaments"]
+        },
+        {
+            "lvl": 7,
+            "primary": ["Round of Ammo", "Auspex", "Targeting Link"]
+        },
+        {
+            "lvl": 8,
+            "primary": ["Thick Skin", "Pile of Salvage", "Sophisticated Material"]
+        },
+        {
+            "lvl": 9,
+            "primary": ["Wires", "Adamantium Filaments", "Advanced Filaments"]
+        },
+        {
+            "lvl": 10,
+            "primary": ["Auspex", "Targeting Link", "Attack Vector Data-Slate"]
+        },
+        {
+            "lvl": 11,
+            "primary": ["Pile of Salvage", "Sophisticated Material", "Mesh Weave"]
+        },
+        {
+            "lvl": 12,
+            "primary": ["Adamantium Filaments", "Reinforced Cables", "Bionic Enhancement"]
+        },
+        {
+            "lvl": 13,
+            "primary": ["Targeting Link", "Fine Micro-Generator", "Magazine"]
+        },
+        {
+            "lvl": 14,
+            "primary": ["Sophisticated Material", "Mesh Weave", "Sophisticated Material Ingot"]
+        },
+        {
+            "lvl": 15,
+            "primary": ["Reinforced Cables", "Advanced Filaments", "Bionic Enhancement"]
+        },
+        {
+            "lvl": 16,
+            "primary": ["Fine Micro-Generator", "Attack Vector Data-Slate", "Targeting Matrix"]
+        },
+        {
+            "lvl": 17,
+            "primary": ["Box of Salvage", "Air Purificator", "Sophisticated Material Ingot"]
+        },
+        {
+            "lvl": 18,
+            "primary": ["Advanced Filaments", "Reinforced Cables", "Stimm Injector"]
+        },
+        {
+            "lvl": 19,
+            "primary": ["Attack Vector Data-Slate", "Fine Micro-Generator", "Sensor Suite"]
+        },
+        {
+            "lvl": 20,
+            "primary": ["Air Purificator", "Mesh Weave", "Drone Controller"]
+        },
+        {
+            "lvl": 21,
+            "primary": ["Reinforced Cables", "Stimm Injector", "Advanced Bionics"]
+        },
+        {
+            "lvl": 22,
+            "primary": ["Fine Micro-Generator", "Sensor Suite", "Box of Ammo"]
+        },
+        {
+            "lvl": 23,
+            "primary": ["Box of Salvage", "Drone Controller", "Sophisticated Material Bar"]
+        },
+        {
+            "lvl": 24,
+            "primary": ["Stimm Injector", "Ancient Runes", "Electromantic Cable Bundle"]
+        },
+        {
+            "lvl": 25,
+            "primary": ["Sensor Suite", "Bionic Eye", "Powerful Micro-Generator"]
+        },
+        {
+            "lvl": 26,
+            "primary": ["Drone Controller", "Crate of Salvage", "Mesh Weave Garment"]
+        },
+        {
+            "lvl": 27,
+            "primary": ["Ancient Runes", "Kill Count", "Secret Agenda"]
+        },
+        {
+            "lvl": 28,
+            "primary": ["Bionic Eye", "Bionic Eye", "Bionic Neural Pathways"]
+        },
+        {
+            "lvl": 29,
+            "primary": ["Crate of Salvage", "Crate of Salvage", "Unyielding Rivets"]
+        },
+        {
+            "lvl": 30,
+            "primary": ["Kill Count", "Secret Agenda", "Advanced Stimm Injector"]
+        },
+        {
+            "lvl": 31,
+            "primary": ["Bionic Eye", "Bionic Neural Pathways", "Advanced Sensor Suite"]
+        },
+        {
+            "lvl": 32,
+            "primary": ["Crate of Salvage", "Unyielding Rivets", "Advanced Drone Controller"]
+        },
+        {
+            "lvl": 33,
+            "primary": ["Secret Agenda", "Weathering", "Ominous Xenos Glyphs"],
+            "secondary": ["Secret Agenda", "Weathering", "Mars-Pattern Bionics"]
+        },
+        {
+            "lvl": 34,
+            "primary": ["Bionic Neural Pathways", "Special Issue Ammo", "Anointed Micro-Generator"]
+        },
+        {
+            "lvl": 35,
+            "primary": ["Unyielding Rivets", "Revered Talisman", "Sophisticated Material Sheet"],
+            "secondary": ["Unyielding Rivets", "Revered Talisman", "Advanced Mesh Weave Garment"]
+        },
+        {
+            "lvl": 36,
+            "primary": ["Secret Agenda", "Weathering", "Engram Neurochip"]
+        },
+        {
+            "lvl": 37,
+            "primary": ["Bionic Neural Pathways", "Special Issue Ammo", "Archeotech Bionics"]
+        },
+        {
+            "lvl": 38,
+            "primary": ["Unyielding Rivets", "Revered Talisman", "Archeo-Tech Remnant"]
+        },
+        {
+            "lvl": 39,
+            "primary": ["Weathering", "Engram Neurochip", "Auto-Reactive Stimm Injector"]
+        },
+        {
+            "lvl": 40,
+            "primary": ["Special Issue Ammo", "Engram Neurochip", "Multi-Spectrum Sensor Suite"]
+        },
+        {
+            "lvl": 41,
+            "primary": ["Revered Talisman", "Engram Neurochip", "Sentry AI Drone Controller"]
+        },
+        {
+            "lvl": 42,
+            "primary": ["Weathering", "Engram Neurochip", "Relic Bionic Enhancement"],
+            "secondary": ["Weathering", "Engram Neurochip", "Portentious Xenos Glyphs"]
+        },
+        {
+            "lvl": 43,
+            "primary": ["Special Issue Ammo", "Engram Neurochip", "Autoloader"],
+            "secondary": ["Special Issue Ammo", "Engram Neurochip", "Overcapacitator"]
+        },
+        {
+            "lvl": 44,
+            "primary": ["Revered Talisman", "Engram Neurochip", "Mysterious Device"],
+            "secondary": ["Revered Talisman", "Engram Neurochip", "Sophisticated Material Plates"]
+        },
+        {
+            "lvl": 45,
+            "primary": ["Engram Neurochip", "Archeotech Bionics", "Ta'Lissera Bond"]
+        },
+        {
+            "lvl": 46,
+            "primary": ["Archeotech Bionics", "Archeo-Tech Remnant", "Target Lock"]
+        },
+        {
+            "lvl": 47,
+            "primary": ["Archeo-Tech Remnant", "Archeotech Bionics", "Iridium Plating"]
+        },
+        {
+            "lvl": 48,
+            "primary": ["Engram Neurochip", "Archeo-Tech Remnant", "Grand Strategy"],
+            "secondary": ["Engram Neurochip", "Archeo-Tech Remnant", "Technocrafted Constitution"]
+        },
+        {
+            "lvl": 49,
+            "primary": ["Archeotech Bionics", "Engram Neurochip", "Relic Micro-Generator"],
+            "secondary": ["Archeotech Bionics", "Engram Neurochip", "Technocrafted Strength"]
+        }
     ]
 }

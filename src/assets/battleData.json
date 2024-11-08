@@ -6867,5 +6867,64 @@
         "nodeNumber": 32,
         "reward": "Jain Zar",
         "expectedGold": 53
+    },
+    "SHME33": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 33,
+        "reward": "Scrolls",
+        "expectedGold": 53
+    },
+    "SHME34": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 34,
+        "reward": "Waystone",
+        "expectedGold": 53,
+        "slots": 4
+    },
+    "SHME35": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 35,
+        "reward": "Psytronome",
+        "expectedGold": 53
+    },
+    "SHME36": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 36,
+        "reward": "Wraithbone Plate",
+        "expectedGold": 53
+    },
+    "SHME37": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 37,
+        "reward": "Runes of Fate",
+        "expectedGold": 53
+    },
+    "SHME38": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 38,
+        "reward": "Bionic Neural Pathways",
+        "expectedGold": 53,
+        "slots": 3
+    },
+    "SHME39": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 39,
+        "reward": "Psychic Force Conduit",
+        "expectedGold": 53,
+        "slots": 4
+    },
+    "SHME40": {
+        "campaign": "Saim-Hann Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 40,
+        "reward": "Maugan Ra",
+        "expectedGold": 53
     }
 }
