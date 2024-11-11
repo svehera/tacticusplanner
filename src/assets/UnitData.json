@@ -1993,8 +1993,8 @@
             "id": 7,
             "finished": false,
             "eventStage": 2,
-            "nextEventDate": "TBA",
-            "nextEventDateUtc": ""
+            "nextEventDate": "December 8",
+            "nextEventDateUtc": "Sun, 8 December 2024 00:00:00 GMT"
         }
     },
     {
@@ -2140,9 +2140,9 @@
         "lre": {
             "id": 9,
             "finished": false,
-            "eventStage": 1,
-            "nextEventDate": "November 3",
-            "nextEventDateUtc": "Sun, 3 November 2024 00:00:00 GMT"
+            "eventStage": 2,
+            "nextEventDate": "TBA",
+            "nextEventDateUtc": ""
         }
     }
 ]
