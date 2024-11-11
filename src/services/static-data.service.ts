@@ -56,7 +56,7 @@ export class StaticDataService {
     static readonly activeLres = this.lreCharacters.filter(x => !x.lre?.finished);
     static readonly inactiveLres = this.lreCharacters.filter(x => !!x.lre?.finished);
 
-    static readonly activeLre = (() => {
+    static readonly activeLre: IUnitData = (() => {
         const now = new Date();
         const eightDays = 8;
         const currentLreDate = new Date(this.lreCharacters[0]!.lre!.nextEventDateUtc!);
@@ -65,10 +65,12 @@ export class StaticDataService {
         if (now < currentLreDate) {
             return this.lreCharacters[0];
         } else {
-            return this.lreCharacters.find(x => {
-                const eventDate = new Date(x.lre?.nextEventDateUtc ?? '');
-                return eventDate > now;
-            })!;
+            return (
+                this.lreCharacters.find(x => {
+                    const eventDate = new Date(x.lre?.nextEventDateUtc ?? '');
+                    return eventDate > now;
+                }) ?? this.lreCharacters[0]
+            );
         }
     })();
 
