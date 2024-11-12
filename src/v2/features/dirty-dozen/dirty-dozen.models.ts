@@ -11,5 +11,5 @@
     GuildRaid: number;
     GuildWar: number;
     Horde: number;
-    Modified Score: number;
+    ModifiedScore: number;
 }
