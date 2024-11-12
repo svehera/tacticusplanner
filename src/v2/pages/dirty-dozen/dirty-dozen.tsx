@@ -19,12 +19,12 @@ export const DirtyDozen = () => {
                 <span>
                     Based on{' '}
                     <Link
-                        to={'https://www.youtube.com/watch?v=KdNuWuZGgyU'}
+                        to={'https://www.youtube.com/watch?v=-yPF-kIQPf8'}
                         target={'_blank'}
                         rel="noopener noreferrer">
                         Nandi&apos;s infographics
                     </Link>{' '}
-                    (May 2024)
+                    (Oct 2024)
                 </span>
             </div>
             <div className="flex-row">
