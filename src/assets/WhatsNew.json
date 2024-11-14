@@ -44,6 +44,9 @@
             "minor": [
                 {
                     "text": "Updated Dirty Dozen table. Thanks ijriims for contribution"
+                },
+                {
+                    "text": "Updated characters icons that has been cropped. Thanks to Tech Priest Fred for providing icons"
                 }
             ],
             "bugFixes": [
