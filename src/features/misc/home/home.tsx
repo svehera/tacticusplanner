@@ -61,11 +61,12 @@ export const Home = () => {
 
     const announcments = () => {
         return (
-            <h2 style={{ textAlign: 'center' }}>
-                <a href="https://forms.gle/AhiqYtSAgQBmY9VW8" target="_blank" rel="noreferrer">
-                    Beginners Guide Contest (Until October 31st)
-                </a>
-            </h2>
+            // <h2 style={{ textAlign: 'center' }}>
+            //     <a href="https://forms.gle/AhiqYtSAgQBmY9VW8" target="_blank" rel="noreferrer">
+            //         Beginners Guide Contest (Until October 31st)
+            //     </a>
+            // </h2>
+            <></>
         );
     };
 

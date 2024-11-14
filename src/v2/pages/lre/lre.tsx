@@ -51,9 +51,9 @@ export const Lre: React.FC = () => {
             case LreSection.teams:
                 return <LegendaryEvent legendaryEvent={legendaryEvent} />;
             case LreSection.progress:
-                return <LeProgress sectionChange={() => {}} legendaryEvent={legendaryEvent} />;
+                return <LeProgress legendaryEvent={legendaryEvent} />;
             case LreSection.leaderboard:
-                return <PointsTable legendaryEvent={legendaryEvent} selectionChange={() => {}} />;
+                return <PointsTable legendaryEvent={legendaryEvent} />;
             default:
                 return <div>Default Content</div>;
         }

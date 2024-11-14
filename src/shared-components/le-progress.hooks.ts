@@ -19,7 +19,6 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
     const dispatch = useContext(DispatchContext);
 
     const [model, setModel] = useState(mapDtoToModel(leProgress[legendaryEvent.id], legendaryEvent));
-    console.log(model);
 
     const updateDto = (newModel: ILreProgressModel): ILreProgressModel => {
         dispatch.leProgress({ type: 'Update', value: mapModelToDto(newModel), eventId: newModel.eventId });
@@ -36,15 +35,15 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
         });
     };
 
-    const updateOccurenceProgress = (occurence: ILreOccurrenceProgress) => {
+    const updateOccurrenceProgress = (occurrence: ILreOccurrenceProgress) => {
         setModel(currModel => {
             const occurrenceProgress = currModel.occurrenceProgress;
-            occurrenceProgress[occurence.eventOccurrence - 1] = occurence;
+            occurrenceProgress[occurrence.eventOccurrence - 1] = occurrence;
             return updateDto({ ...currModel, occurrenceProgress: [...occurrenceProgress] });
         });
     };
 
-    const toggleBattleState = (trackId: LreTrackId, battleIndex: number, reqId: string) => {
+    const setBattleState = (trackId: LreTrackId, battleIndex: number, reqId: string, state: ProgressState) => {
         setModel(currModel => {
             const trackProgress = currModel.tracksProgress.find(x => x.trackId === trackId);
             if (!trackProgress) {
@@ -65,13 +64,7 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
                 LrePointsCategoryId.highScore,
             ];
 
-            if (reqProgress.completed) {
-                reqProgress.completed = false;
-                reqProgress.blocked = true;
-            } else if (reqProgress.blocked) {
-                reqProgress.blocked = false;
-                reqProgress.completed = false;
-            } else {
+            if (state === ProgressState.completed) {
                 reqProgress.completed = true;
                 reqProgress.blocked = false;
 
@@ -86,12 +79,18 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
                             x.blocked = false;
                         });
                 }
+            } else if (state === ProgressState.blocked) {
+                reqProgress.blocked = true;
+                reqProgress.completed = false;
+            } else {
+                reqProgress.completed = false;
+                reqProgress.blocked = false;
             }
             return updateDto({ ...currModel });
         });
     };
 
-    return { model, updateNotes, updateOccurenceProgress, toggleBattleState };
+    return { model, updateNotes, updateOccurrenceProgress, toggleBattleState: setBattleState };
 };
 
 const mapDtoToModel = (dto: ILreProgressDto | undefined, lre: ILegendaryEvent): ILreProgressModel => {
@@ -209,6 +208,10 @@ const mapDtoToModel = (dto: ILreProgressDto | undefined, lre: ILegendaryEvent): 
         tracksProgress,
         regularMissions: lre.regularMissions,
         premiumMissions: lre.premiumMissions,
+        pointsMilestones: lre.pointsMilestones,
+        chestsMilestones: lre.chestsMilestones,
+        progression: lre.progression,
+        shardsPerChest: lre.shardsPerChest,
     };
 };
 

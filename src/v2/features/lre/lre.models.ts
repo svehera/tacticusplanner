@@ -1,5 +1,5 @@
 ﻿import { LegendaryEventEnum, ProgressState } from 'src/models/enums';
-import { LreTrackId } from 'src/models/interfaces';
+import { IChestMilestone, ILEProgression, IPointsMilestone, LreTrackId } from 'src/models/interfaces';
 
 export enum LreSection {
     teams,
@@ -15,6 +15,11 @@ export interface ILreProgressModel {
     tracksProgress: ILreTrackProgress[];
     regularMissions: string[];
     premiumMissions: string[];
+
+    pointsMilestones: IPointsMilestone[];
+    chestsMilestones: IChestMilestone[];
+    progression: ILEProgression;
+    shardsPerChest: number;
 }
 
 export interface ILreOccurrenceProgress {

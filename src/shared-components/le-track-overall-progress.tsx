@@ -10,10 +10,11 @@ import { isMobile } from 'react-device-detect';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { LreTrackId } from 'src/models/interfaces';
+import { ProgressState } from 'src/models/enums';
 
 interface Props {
     track: ILreTrackProgress;
-    toggleBattleState: (trackId: LreTrackId, battleIndex: number, reqId: string) => void;
+    toggleBattleState: (trackId: LreTrackId, battleIndex: number, reqId: string, state: ProgressState) => void;
 }
 
 export const LreTrackOverallProgress: React.FC<Props> = ({ track, toggleBattleState }) => {
@@ -36,9 +37,13 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, toggleBattleSt
         );
     };
 
+    const completionPercentage = Math.round((currentPoints / track.totalPoints) * 100);
+
     return (
         <div className="flex-box start column" style={{ flex: 1, minWidth: 450 }}>
-            <h3>{track.trackName}</h3>
+            <h3>
+                {completionPercentage}% {track.trackName}
+            </h3>
             <div className="flex-box start column gap5">
                 {track.requirements.map(req => (
                     <div key={req.id} className="flex-box gap5">
@@ -81,7 +86,9 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, toggleBattleSt
                             <LreTrackBattleSummary
                                 key={battle.battleIndex}
                                 battle={battle}
-                                toggleState={req => toggleBattleState(track.trackId, battle.battleIndex, req.id)}
+                                toggleState={(req, state) =>
+                                    toggleBattleState(track.trackId, battle.battleIndex, req.id, state)
+                                }
                             />
                         ))}
                     </div>

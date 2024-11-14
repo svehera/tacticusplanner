@@ -1,29 +1,19 @@
 ﻿import React, { useContext, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { CellClassParams, ColDef, ColGroupDef, ICellRendererParams, ITooltipParams } from 'ag-grid-community';
-
-import {
-    ILegendaryEvent,
-    ILegendaryEventSelectedTeams,
-    ILegendaryEventTrack,
-    ILreTeam,
-    SelectedTeams,
-} from '../../models/interfaces';
-import { LegendaryEventEnum, Rank, Rarity } from '../../models/enums';
+import { ILegendaryEvent, ILegendaryEventTrack, ILreTeam } from 'src/models/interfaces';
+import { Rank } from 'src/models/enums';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
 import { sum, uniq } from 'lodash';
 import { CharactersSelection, ITableRow } from './legendary-events.interfaces';
-import { StoreContext } from '../../reducers/store.provider';
-import { CharacterTitle } from '../../shared-components/character-title';
+import { StoreContext } from 'src/reducers/store.provider';
+import { CharacterTitle } from 'src/shared-components/character-title';
 import { isMobile } from 'react-device-detect';
 import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { RarityImage } from 'src/shared-components/rarity-image';
 import { RankImage } from 'src/shared-components/rank-image';
 
-const PointsTable = (props: {
-    legendaryEvent: ILegendaryEvent;
-    selectionChange: (selection: CharactersSelection) => void;
-}) => {
+const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
     const { legendaryEvent } = props;
     const { leSelectedTeams } = useContext(StoreContext);
 
@@ -315,10 +305,7 @@ const PointsTable = (props: {
                         style={{ display: 'flex', flexDirection: 'row' }}
                         aria-labelledby="demo-radio-buttons-group-label"
                         value={selection}
-                        onChange={(_, value) => {
-                            setSelection(value as CharactersSelection);
-                            props.selectionChange(value as CharactersSelection);
-                        }}
+                        onChange={(_, value) => setSelection(value as CharactersSelection)}
                         name="radio-buttons-group">
                         <FormControlLabel
                             value={CharactersSelection.Selected}
