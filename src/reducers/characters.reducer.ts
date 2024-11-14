@@ -1,5 +1,5 @@
 ﻿import { ICharacter2, SetStateAction } from '../models/interfaces';
-import { Rank, Rarity } from '../models/enums';
+import { CharacterBias, Rank, Rarity } from '../models/enums';
 import { rankToLevel, rankToRarity, rarityToStars } from '../models/constants';
 
 export type CharactersAction =
@@ -42,9 +42,14 @@ export type CharactersAction =
           character: string;
           value: number;
       }
+    | {
+          type: 'UpdateBias';
+          recommendedFirst: string[];
+          recommendedLast: string[];
+      }
     | SetStateAction<ICharacter2[]>;
 
-export const charactersReducer = (state: ICharacter2[], action: CharactersAction) => {
+export const charactersReducer = (state: ICharacter2[], action: CharactersAction): ICharacter2[] => {
     switch (action.type) {
         case 'Set': {
             return action.value;
@@ -156,6 +161,18 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                 existingChar.upgrades = action.value;
             }
             return [...state];
+        }
+        case 'UpdateBias': {
+            const { recommendedFirst, recommendedLast } = action;
+
+            return state.map(c => ({
+                ...c,
+                bias: recommendedFirst.includes(c.name)
+                    ? CharacterBias.recommendFirst
+                    : recommendedLast.includes(c.name)
+                    ? CharacterBias.recommendLast
+                    : CharacterBias.None,
+            }));
         }
         default: {
             throw new Error();

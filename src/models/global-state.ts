@@ -9,7 +9,6 @@
     IGuildWar,
     IInsightsData,
     IInventory,
-    ILegendaryEventProgressState,
     ILegendaryEventSelectedRequirements,
     ILegendaryEventSelectedTeams,
     IPersonalCharacterData2,
@@ -27,6 +26,7 @@ import mowsData from 'src/v2/data/mows.json';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
+import { ILreProgressDto } from 'src/models/dto.interfaces';
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
@@ -40,7 +40,7 @@ export class GlobalState implements IGlobalState {
     readonly leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     readonly goals: IPersonalGoal[];
     readonly teams: IPersonalTeam[];
-    readonly leProgress: LegendaryEventData<ILegendaryEventProgressState>;
+    readonly leProgress: LegendaryEventData<ILreProgressDto>;
     readonly leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
     readonly campaignsProgress: ICampaignsProgress;
     readonly inventory: IInventory;
@@ -62,12 +62,6 @@ export class GlobalState implements IGlobalState {
         this.characters = GlobalState.initCharacters(chars);
         this.mows = GlobalState.initMows(personalData.mows);
 
-        for (const leProgressKey in this.leProgress) {
-            const leProgress = this.leProgress[+leProgressKey as LegendaryEventEnum];
-            if (leProgress) {
-                leProgress.notes = '';
-            }
-        }
         this.goals = GlobalState.fixNames(personalData.goals).map((goal, index) => {
             const relatedChar = this.characters.find(x => x.name === goal.character);
             return { ...goal, priority: index + 1, currentRank: relatedChar?.rank, currentRarity: relatedChar?.rarity };

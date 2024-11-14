@@ -12,7 +12,9 @@
     Faction,
     LegendaryEventEnum,
     LegendaryEvents,
+    LrePointsCategoryId,
     PersonalGoalType,
+    ProgressState,
     Rank,
     Rarity,
     RarityStars,
@@ -44,8 +46,9 @@ import { MowsAction } from 'src/reducers/mows.reducer';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 import { TeamsAction } from 'src/reducers/teams.reducer';
+import { ILreProgressDto } from 'src/models/dto.interfaces';
 
-export type LegendaryEventSection = 'alpha' | 'beta' | 'gamma';
+export type LreTrackId = 'alpha' | 'beta' | 'gamma';
 
 export interface UnitDataRaw {
     Name: string;
@@ -209,7 +212,7 @@ export interface ILegendaryEventTrackStatic {
 
 export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
     eventId: LegendaryEventEnum;
-    section: LegendaryEventSection;
+    section: LreTrackId;
     allowedUnits: ICharacter2[];
     unitsRestrictions: Array<ILegendaryEventTrackRequirement>;
 
@@ -233,6 +236,10 @@ export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
 }
 
 export interface ILegendaryEventTrackRequirement {
+    id?: string;
+    hide?: boolean;
+    iconId?: string;
+    index?: number;
     name: string;
     points: number;
     units: ICharacter2[];
@@ -247,6 +254,7 @@ export type DynamicProps = {
     ownedBy?: string[];
     potential?: number;
     power?: number;
+    teamId?: string; // LRE team id
     statsByOwner?: Array<{
         owner: string;
         rank: Rank;
@@ -258,7 +266,7 @@ export type DynamicProps = {
 };
 
 export interface IPersonalData {
-    version?: undefined;
+    version?: string;
     autoTeamsPreferences: IAutoTeamsPreferences;
     viewPreferences: IViewPreferences;
     selectedTeamOrder: ISelectedTeamsOrdering;
@@ -267,7 +275,7 @@ export interface IPersonalData {
     goals: IPersonalGoal[];
     legendaryEvents: ILegendaryEventsData | undefined;
     legendaryEvents3: ILegendaryEventsData3 | undefined;
-    legendaryEventsProgress: ILegendaryEventsProgressState;
+    legendaryEventsProgress: LegendaryEventData<ILreProgressDto>;
     legendaryEventSelectedRequirements: Record<LegendaryEventEnum, ILegendaryEventSelectedRequirements>;
     modifiedDate?: Date | string;
 }
@@ -278,7 +286,7 @@ export type SetStateAction<T> = { type: 'Set'; value: T };
 
 export interface IGlobalState {
     modifiedDate?: Date;
-    seenAppVersion?: string | null | undefined;
+    seenAppVersion?: string | null;
     autoTeamsPreferences: IAutoTeamsPreferences;
     viewPreferences: IViewPreferences;
     dailyRaidsPreferences: IDailyRaidsPreferences;
@@ -288,7 +296,7 @@ export interface IGlobalState {
     teams: IPersonalTeam[];
     selectedTeamOrder: ISelectedTeamsOrdering;
     leSelectedTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
-    leProgress: LegendaryEventData<ILegendaryEventProgressState>;
+    leProgress: LegendaryEventData<ILreProgressDto>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
@@ -339,7 +347,7 @@ export interface IPersonalData2 {
     goals: IPersonalGoal[];
     teams: IPersonalTeam[];
     leTeams: LegendaryEventData<ILegendaryEventSelectedTeams>;
-    leProgress: LegendaryEventData<ILegendaryEventProgressState>;
+    leProgress: LegendaryEventData<ILreProgressDto>;
     leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     campaignsProgress: ICampaignsProgress;
     inventory: IInventory;
@@ -396,9 +404,22 @@ export type SelectedRequirements = Record<string, boolean>;
 export interface ILegendaryEventSelectedTeams {
     id: LegendaryEventEnum;
     name: string;
+    teams: ILreTeam[];
     alpha: SelectedTeams;
     beta: SelectedTeams;
     gamma: SelectedTeams;
+}
+
+export interface ILreTeam {
+    id: string;
+    name: string;
+    section: LreTrackId;
+    restrictionsIds: string[];
+    charactersIds: string[];
+    /**
+     * Client Side only
+     */
+    characters?: ICharacter2[];
 }
 
 export interface ILegendaryEventSelectedRequirements {
@@ -413,37 +434,59 @@ export interface ILegendaryEventData {
     selectedTeams: ITableRow<string>[];
 }
 
-export interface IViewPreferences {
+export interface IViewOption<T = IViewPreferences> {
+    key: keyof T;
+    value: boolean;
+    label: string;
+    disabled: boolean;
+    tooltip?: string;
+}
+
+export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IWyoViewSettings {
     theme: 'light' | 'dark';
-    showAlpha: boolean;
-    showBeta: boolean;
-    showGamma: boolean;
-    lightWeight: boolean;
-    hideSelectedTeams: boolean;
-    autoTeams: boolean;
-    onlyUnlocked: boolean;
-    craftableItemsInInventory: boolean;
-    hideCompleted: boolean;
-    hideNames: boolean;
+    // autoTeams: boolean;
     wyoFilter: CharactersFilterBy;
     wyoOrder: CharactersOrderBy;
+    craftableItemsInInventory: boolean;
+    inventoryShowAlphabet: boolean;
+    inventoryShowPlusMinus: boolean;
+    goalsTableView: boolean;
+}
+
+export interface IWyoViewSettings {
     showBadges: boolean;
     showAbilitiesLevel: boolean;
     showBsValue: boolean;
     showPower: boolean;
     showCharacterLevel: boolean;
     showCharacterRarity: boolean;
-    inventoryShowAlphabet: boolean;
-    inventoryShowPlusMinus: boolean;
-    goalsTableView: boolean;
+}
+
+export interface ILreViewSettings {
+    lreGridView: boolean;
+    showAlpha: boolean;
+    showBeta: boolean;
+    showGamma: boolean;
+    onlyUnlocked: boolean;
+    hideCompleted: boolean;
+}
+
+export interface ILreTileSettings {
+    lreTileShowUnitIcon: boolean;
+    lreTileShowUnitRarity: boolean;
+    lreTileShowUnitRank: boolean;
+    lreTileShowUnitRankBackground: boolean;
+    lreTileShowUnitName: boolean;
+    lreTileShowUnitBias: boolean;
+    lreTileShowUnitActiveAbility: boolean;
+    lreTileShowUnitPassiveAbility: boolean;
 }
 
 export interface IAutoTeamsPreferences {
     preferCampaign: boolean;
     ignoreRarity: boolean;
     ignoreRank: boolean;
-    ignoreRecommendedFirst: boolean;
-    ignoreRecommendedLast: boolean;
+    ignoreRecommendedFirst: boolean; // ignore Bias
 }
 
 export interface IDailyRaidsPreferences {
@@ -533,58 +576,6 @@ export interface IPersonalGoal {
     secondAbilityLevel?: number;
 }
 
-export type ILegendaryEventsProgressState = Record<LegendaryEventEnum, ILegendaryEventProgressState>;
-
-export interface ILegendaryEventProgressState {
-    id: LegendaryEventEnum;
-    name: string;
-    alpha: ILegendaryEventProgressTrackState;
-    beta: ILegendaryEventProgressTrackState;
-    gamma: ILegendaryEventProgressTrackState;
-    regularMissions: number;
-    premiumMissions: number;
-    bundle?: number;
-    overview?: {
-        1: ILegendaryEventOverviewProgress;
-        2: ILegendaryEventOverviewProgress;
-        3: ILegendaryEventOverviewProgress;
-    };
-    notes: string;
-}
-
-export interface ILegendaryEventProgressTrackState {
-    battles: Array<boolean[]>;
-}
-
-export interface ILegendaryEventProgress {
-    alpha: ILegendaryEventProgressTrack;
-    beta: ILegendaryEventProgressTrack;
-    gamma: ILegendaryEventProgressTrack;
-    overview: {
-        1: ILegendaryEventOverviewProgress;
-        2: ILegendaryEventOverviewProgress;
-        3: ILegendaryEventOverviewProgress;
-    };
-    notes: string;
-}
-
-export interface ILegendaryEventOverviewProgress {
-    regularMissions: number;
-    premiumMissions: number;
-    bundle: number;
-}
-
-export interface ILegendaryEventProgressTrack {
-    name: 'alpha' | 'beta' | 'gamma';
-    battles: ILegendaryEventBattle[];
-}
-
-export interface ILegendaryEventBattle {
-    battleNumber: number;
-    state: boolean[];
-    requirements: ILegendaryEventTrackRequirement[];
-}
-
 export interface IWhatsNew {
     currentVersion: string;
     releaseNotes: IVersionReleaseNotes[];
@@ -671,10 +662,8 @@ export interface ICampaignBattleComposed {
     isCompleted?: boolean;
 }
 
-type MaterialName = string;
-
 export interface IRecipeData {
-    [material: MaterialName]: IMaterial;
+    [material: string]: IMaterial;
 }
 
 export interface IMaterial {
@@ -690,12 +679,12 @@ export interface IMaterial {
 }
 
 export interface IMaterialRecipeIngredient {
-    material: MaterialName | 'Gold'; // material name;
+    material: string | 'Gold'; // material name;
     count: number;
 }
 
 export interface IRecipeDataFull {
-    [material: MaterialName]: IMaterialFull;
+    [material: string]: IMaterialFull;
 }
 
 export interface IMaterialFull {
@@ -714,7 +703,7 @@ export interface IMaterialFull {
 
 export interface IMaterialRecipeIngredientFull {
     id: string;
-    label: MaterialName | 'Gold';
+    label: string | 'Gold';
     count: number;
     rarity: Rarity;
     stat: string;

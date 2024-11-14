@@ -1,7 +1,7 @@
 ﻿import React, { useMemo, useState } from 'react';
-import { ICharacter2, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
+import { ICharacter2 } from 'src/models/interfaces';
 import { FormControl, FormGroup, Grid, Input, MenuItem, Select } from '@mui/material';
-import { CharacterBias, Rank, Rarity, RarityStars } from 'src/models/enums';
+import { Rank, Rarity, RarityStars } from 'src/models/enums';
 import InputLabel from '@mui/material/InputLabel';
 import { getEnumValues, rankToString, rarityStarsToString } from 'src/shared-logic/functions';
 import { RankImage } from 'src/shared-components/rank-image';
@@ -58,7 +58,6 @@ export const CharacterDetails = ({
 
     const rarityEntries: number[] = getEnumValues(Rarity);
     const rankEntries: number[] = getEnumValues(Rank).filter(x => x === formData.rank || x <= maxRank);
-    const biasEntries: number[] = getEnumValues(CharacterBias);
 
     const getNativeSelectControl = (
         value: number,
@@ -141,8 +140,6 @@ export const CharacterDetails = ({
                     </FormControl>
                 </Grid>
             </Grid>
-
-            {getNativeSelectControl(formData.bias, 'LRE Bias', 'bias', biasEntries, value => CharacterBias[value])}
 
             {formData.rank > Rank.Locked ? (
                 <React.Fragment>

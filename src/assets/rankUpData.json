@@ -147,14 +147,7 @@
             "Armor Trim",
             "Cloak"
         ],
-        "Stone III": [
-            "Scrolls",
-            "Lesser Reliquary of Protection",
-            "Magazine",
-            "Fine Micro-Generator",
-            "Rebreather",
-            "Cloak"
-        ],
+        "Stone III": ["Scrolls", "Reliquary of Protection", "Magazine", "Fine Micro-Generator", "Rebreather", "Cloak"],
         "Iron I": [
             "Writings",
             "The Phoenix Ascendant",
@@ -303,7 +296,7 @@
         ],
         "Iron II": [
             "The Silver Eagle with Swords",
-            "Mission Objective",
+            "Reliquary of Protection",
             "Fine Auxiliary Core",
             "Prey-Sight",
             "Ceramite Lump",
@@ -7070,6 +7063,144 @@
             "Preternatural Defences"
         ]
     },
+    "PoM": {
+        "Stone I": [
+            "Nano Swarm",
+            "Mutation: Warped Muscles",
+            "Canister of Chemicals",
+            "Nasty Spikes",
+            "Sophisticated Material",
+            "Sophisticated Material"
+        ],
+        "Stone II": [
+            "Field Ration",
+            "Nano Swarm",
+            "Combat Stimms",
+            "Razorsharp Spikes",
+            "Mutation: Tough Skin",
+            "Mutation: Tough Skin"
+        ],
+        "Stone III": [
+            "Enriched Rations",
+            "Regenerating Nano Swarm",
+            "Otherworldly Energy",
+            "Canister of Chemicals",
+            "Air Purificator",
+            "Mutation: Scaly Skin"
+        ],
+        "Iron I": [
+            "Regenerating Nano Swarm",
+            "Mission Objective",
+            "Combat Stimms",
+            "Combat Stimms",
+            "Mutation: Scaly Skin",
+            "Sophisticated Material Ingot"
+        ],
+        "Iron II": [
+            "Enriched Rations",
+            "Battle Plan",
+            "Otherworldly Energy Reservoir",
+            "Slicing Claws",
+            "Subdermal Plating",
+            "Mutation: Scaly Skin"
+        ],
+        "Iron III": [
+            "Box of Rations",
+            "Mutation: Warped Lungs",
+            "Toxin Sacs",
+            "Advanced Combat Stimms",
+            "Sophisticated Material Ingot",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Adrenal Glands",
+            "Mutation: Warped Heart",
+            "Supernatural Sight",
+            "Classified Data-Slate",
+            "Mutation: Warped Skin",
+            "Sophisticated Material Bar"
+        ],
+        "Bronze II": [
+            "Adaptive Adrenal Glands",
+            "Otherworldly Nano Swarm",
+            "Classified Data-Slate",
+            "Refined Combat Stimms",
+            "Reinforced Chitin",
+            "Mutation: Warped Skin"
+        ],
+        "Bronze III": [
+            "Battle Scar",
+            "Exospine",
+            "Adaptive Toxin Sacs",
+            "Murderous Spikes",
+            "Adaptive Chitin Carapace",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Adaptive Adrenal Glands",
+            "Weathering",
+            "Adaptive Toxin Sacs",
+            "Warp Locus",
+            "Adaptive Chitin Carapace",
+            "Sophisticated Material Sheet"
+        ],
+        "Silver II": [
+            "Synaptic Augmentation",
+            "Mutation: Regenerative Blood",
+            "Hyper-Adaptive Toxin Sacs",
+            "Refined Combat Stimms",
+            "Adaptive Chitin Carapace",
+            "Mutation: Metallic Skin"
+        ],
+        "Silver III": [
+            "Adaptive Adrenal Glands",
+            "Grand Strategy",
+            "Adaptive Toxin Sacs",
+            "Imposing Horns",
+            "Psyk-Conductive Material",
+            "Sophisticated Material Plates"
+        ],
+        "Gold I": [
+            "Hyper-Adaptive Adrenal Glands",
+            "Advanced Exospine",
+            "Psychic Force Conduit",
+            "Hyperstim",
+            "Hyper-Adaptive Chitin Carapace",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold II": [
+            "Hypermetabolic Acceleration",
+            "Mutation: Otherworldly Power",
+            "Hyper-Adaptive Toxin Sacs",
+            "Imposing Horns",
+            "Hyper-Adaptive Chitin Carapace",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold III": [
+            "Hyper-Adaptive Adrenal Glands",
+            "Advanced Exospine",
+            "Implant Attack",
+            "Psychic Focus",
+            "Symbiotic Carapace",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Diamond I": [
+            "Hypermetabolic Acceleration",
+            "Grand Strategy",
+            "Implant Attack",
+            "Hyperstim",
+            "Symbiotic Carapace",
+            "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Hypermetabolic Acceleration",
+            "Monstrous Constitution",
+            "Implant Attack",
+            "Monstrous Strength",
+            "Symbiotic Carapace",
+            "Monstrous Defences"
+        ]
+    },
     "Angrax": {
         "Stone I": [
             "Wires",
@@ -11159,6 +11290,137 @@
             "Monstrous Strength",
             "Gene-Sire's Reliquant",
             "Monstrous Defences"
+        ]
+    },
+    "Hollan": {
+        "Stone I": [
+            "Nano Swarm",
+            "The Iron Phoenix",
+            "Canister of Chemicals",
+            "Nasty Spikes",
+            "Pile of Salvage",
+            "Sophisticated Material"
+        ],
+        "Stone II": [
+            "Scrolls",
+            "Healing Ointment",
+            "Combat Stimms",
+            "Razorsharp Spikes",
+            "Mutation: Tough Skin",
+            "Rebreather"
+        ],
+        "Stone III": [
+            "Writings",
+            "First Aid Kit",
+            "Single Power Pack",
+            "Canister of Chemicals",
+            "Box of Salvage",
+            "Cloak"
+        ],
+        "Iron I": [
+            "Regenerating Nano Swarm",
+            "Enriched Rations",
+            "Combat Stimms",
+            "Combat Stimms",
+            "Mutation: Scaly Skin",
+            "Sophisticated Material Ingot"
+        ],
+        "Iron II": ["Writings", "Box of Rations", "Power Pack Bundle", "Slicing Claws", "Crate of Salvage", "Cloak"],
+        "Iron III": [
+            "Grandiloquent Litanical",
+            "The Gold Phoenix",
+            "Proclamation Receiver",
+            "Advanced Combat Stimms",
+            "Adamantium Lump",
+            "Valuable Fabric"
+        ],
+        "Bronze I": [
+            "Wyrm-Form Sigil",
+            "The Phoenix Ascendant",
+            "High-Capacity Power Pack",
+            "Classified Data-Slate",
+            "Mutation: Warped Skin",
+            "Sophisticated Material Bar"
+        ],
+        "Bronze II": [
+            "Wyrm-Form Icon",
+            "Medical Supply Crate",
+            "Classified Data-Slate",
+            "Refined Combat Stimms",
+            "Industrial Padding",
+            "Fine Cloak"
+        ],
+        "Bronze III": [
+            "Metal Decorative Skull",
+            "Exquisite Medical Supplies",
+            "Proclamation Caster",
+            "Murderous Spikes",
+            "Industrial Protection Suit",
+            "Revered Talisman"
+        ],
+        "Silver I": [
+            "Wyrm-Form Icon",
+            "Secret Agenda",
+            "Proclamation Caster",
+            "Bionic Neural Pathways",
+            "Industrial Protection Suit",
+            "Sophisticated Material Sheet"
+        ],
+        "Silver II": [
+            "Gifts of the Star Children",
+            "Greater Reliquary of Protection",
+            "Proclamation Hailer",
+            "Refined Combat Stimms",
+            "Industrial Protection Suit",
+            "Decorated Cloak"
+        ],
+        "Silver III": [
+            "Wyrm-Form Icon",
+            "Grand Strategy",
+            "Proclamation Caster",
+            "Imposing Horns",
+            "Archeo-Tech Remnant",
+            "Sophisticated Material Plates"
+        ],
+        "Gold I": [
+            "Wyrm-Form Banner",
+            "Tome of Arcane Knowledge",
+            "Archeotech Bionics",
+            "Hyperstim",
+            "Industrial Carapace",
+            "Divine Cloak"
+        ],
+        "Gold II": [
+            "Biomorph Adaption",
+            "Legendary Reliquary of Protection",
+            "Proclamation Hailer",
+            "Imposing Horns",
+            "Industrial Carapace",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold III": [
+            "Wyrm-Form Banner",
+            "Advanced Exospine",
+            "Gene-Twisted Muscle",
+            "Plasma Coil",
+            "Gene-Sire's Reliquant",
+            "Divine Cloak"
+        ],
+        "Diamond I": [
+            "Biomorph Adaption",
+            "Tome of Arcane Knowledge",
+            "Gene-Twisted Muscle",
+            "Hyperstim",
+            "Gene-Sire's Reliquant",
+            "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Biomorph Adaption",
+            "Preternatural Constitution",
+            "Gene-Twisted Muscle",
+            "Preternatural Strength",
+            "Gene-Sire's Reliquant",
+            "Preternatural Defences"
         ]
     }
 }

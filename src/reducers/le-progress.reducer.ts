@@ -1,18 +1,19 @@
-﻿import { ILegendaryEventProgressState, LegendaryEventData, SetStateAction } from '../models/interfaces';
+﻿import { LegendaryEventData, SetStateAction } from '../models/interfaces';
 import { LegendaryEventEnum } from '../models/enums';
+import { ILreProgressDto } from 'src/models/dto.interfaces';
 
 export type LeProgressAction =
     | {
           type: 'Update';
           eventId: LegendaryEventEnum;
-          value: ILegendaryEventProgressState;
+          value: ILreProgressDto;
       }
-    | SetStateAction<LegendaryEventData<ILegendaryEventProgressState>>;
+    | SetStateAction<LegendaryEventData<ILreProgressDto>>;
 
 export const leProgressReducer = (
-    state: LegendaryEventData<ILegendaryEventProgressState>,
+    state: LegendaryEventData<ILreProgressDto>,
     action: LeProgressAction
-): LegendaryEventData<ILegendaryEventProgressState> => {
+): LegendaryEventData<ILreProgressDto> => {
     switch (action.type) {
         case 'Set': {
             return action.value;

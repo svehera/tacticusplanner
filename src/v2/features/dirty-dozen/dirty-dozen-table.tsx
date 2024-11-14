@@ -76,35 +76,10 @@ export const DirtyDozenTable = ({ characters, rows }: { characters: ICharacter2[
             },
         },
 
-        createScoreColumn('GRTyranid', 'Tyranids'),
-        createScoreColumn('GRNecron', 'Necron'),
-        createScoreColumn('GROrk', 'Ork'),
-        createScoreColumn('GRMortarion', 'Mortarion'),
-        createScoreColumn('GRScreamer', 'Screamer'),
-        createScoreColumn('GRRogalDorn', 'Rogal Dorn'),
-        createScoreColumn('GRAvatar', 'Avatar'),
-
-        {
-            headerName: 'Guild Raids',
-            width: 150,
-            valueGetter: (props: ValueGetterParams<IDirtyDozenChar>) => {
-                const character = props.data;
-                if (!character) {
-                    return 0;
-                }
-                return (
-                    character.GRTyranid +
-                    character.GRNecron +
-                    character.GROrk +
-                    character.GRMortarion +
-                    character.GRScreamer +
-                    character.GRRogalDorn +
-                    character.GRAvatar
-                );
-            },
-        },
-
+        createScoreColumn('Horde', 'Horde'),
         createScoreColumn('GuildWar', 'Guild War'),
+        createScoreColumn('GuildRaid', 'Guild Raid'),
+        createScoreColumn('ModifiedScore', 'Modified Score'),
     ]);
 
     return (

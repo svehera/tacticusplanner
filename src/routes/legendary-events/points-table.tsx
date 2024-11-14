@@ -1,83 +1,101 @@
-﻿import React, { ChangeEvent, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+﻿import React, { useContext, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import {
-    CellClassParams,
-    ColDef,
-    ColGroupDef,
-    ICellRendererParams,
-    ITooltipParams,
-    RowClassParams,
-    RowStyle,
-    ValueFormatterParams,
-} from 'ag-grid-community';
-
-import {
-    ICharacter2,
-    ILegendaryEvent,
-    ILegendaryEventSelectedTeams,
-    ILegendaryEventTrack,
-    SelectedTeams,
-} from '../../models/interfaces';
-import { LegendaryEventEnum, Rank, Rarity } from '../../models/enums';
+import { CellClassParams, ColDef, ColGroupDef, ICellRendererParams, ITooltipParams } from 'ag-grid-community';
+import { ILegendaryEvent, ILegendaryEventTrack, ILreTeam } from 'src/models/interfaces';
+import { Rank } from 'src/models/enums';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
-import { fitGridOnWindowResize, rankToString } from '../../shared-logic/functions';
 import { sum, uniq } from 'lodash';
 import { CharactersSelection, ITableRow } from './legendary-events.interfaces';
-import { StoreContext } from '../../reducers/store.provider';
-import { CharacterTitle } from '../../shared-components/character-title';
+import { StoreContext } from 'src/reducers/store.provider';
+import { CharacterTitle } from 'src/shared-components/character-title';
+import { isMobile } from 'react-device-detect';
+import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
+import { RarityImage } from 'src/shared-components/rarity-image';
+import { RankImage } from 'src/shared-components/rank-image';
 
-const PointsTable = (props: {
-    legendaryEvent: ILegendaryEvent;
-    selectionChange: (selection: CharactersSelection) => void;
-    short: boolean;
-}) => {
+const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
     const { legendaryEvent } = props;
-    const { leSelectedTeams, viewPreferences } = useContext(StoreContext);
-    const personalLegendaryEvent = useMemo<ILegendaryEventSelectedTeams>(() => {
-        const legendaryEventPersonal = leSelectedTeams[legendaryEvent.id];
-        return {
-            id: legendaryEvent.id,
-            name: LegendaryEventEnum[legendaryEvent.id],
-            alpha: legendaryEventPersonal?.alpha ?? {},
-            beta: legendaryEventPersonal?.beta ?? {},
-            gamma: legendaryEventPersonal?.gamma ?? {},
-        };
+    const { leSelectedTeams } = useContext(StoreContext);
+
+    const { teams } = leSelectedTeams[legendaryEvent.id] ?? { teams: [] };
+
+    const selectedChars = useMemo(() => {
+        return uniq(teams.flatMap(t => t.charactersIds));
     }, [legendaryEvent.id]);
 
-    const [selection, setSelection] = useState<CharactersSelection>(CharactersSelection.Selected);
+    const [selection, setSelection] = useState<CharactersSelection>(
+        selectedChars.length ? CharactersSelection.Selected : CharactersSelection.All
+    );
     const [filter, setFilter] = useState('');
 
     const gridRef = useRef<AgGridReact>(null);
 
     const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() => {
-        const shortTable: Array<ColDef | ColGroupDef> = [
+        return [
             {
-                headerName: 'Position',
-                field: 'position',
-                maxWidth: 50,
-                width: 50,
-                minWidth: 50,
-                sortable: true,
-                sort: 'asc',
-            },
-            {
-                field: 'name',
-                width: viewPreferences.hideNames ? 150 : 250,
-                sortable: true,
-                cellRenderer: (props: ICellRendererParams<ITableRow>) => {
-                    const row = props.data;
-                    if (row) {
-                        return (
-                            <CharacterTitle
-                                character={row.character}
-                                imageSize={30}
-                                hideName={viewPreferences.hideNames}
-                            />
-                        );
-                    }
-                },
+                headerName: 'Character',
+                pinned: !isMobile,
+                openByDefault: !isMobile,
                 cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
                 tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
+                children: [
+                    {
+                        headerName: 'Position',
+                        field: 'position',
+                        pinned: !isMobile,
+                        maxWidth: 50,
+                        width: 50,
+                        minWidth: 50,
+                        sortable: true,
+                        sort: 'asc',
+                    },
+                    {
+                        headerName: 'Name',
+                        width: isMobile ? 75 : 180,
+                        pinned: !isMobile,
+                        cellRenderer: (props: ICellRendererParams<ITableRow>) => {
+                            const character = props.data?.character;
+                            if (character) {
+                                return (
+                                    <CharacterTitle
+                                        character={character}
+                                        hideName={isMobile}
+                                        short={true}
+                                        imageSize={30}
+                                    />
+                                );
+                            }
+                        },
+                        cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
+                        tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
+                    },
+                    {
+                        headerName: 'Rarity',
+                        width: 80,
+                        columnGroupShow: 'open',
+                        pinned: !isMobile,
+                        valueGetter: (props: ValueGetterParams<ITableRow>) => {
+                            return props.data?.character.rarity;
+                        },
+                        cellRenderer: (props: ICellRendererParams<ITableRow>) => {
+                            const rarity = props.value ?? 0;
+                            return <RarityImage rarity={rarity} />;
+                        },
+                    },
+                    {
+                        headerName: 'Rank',
+                        width: 80,
+                        columnGroupShow: 'open',
+                        pinned: !isMobile,
+                        valueGetter: (props: ValueGetterParams<ITableRow>) => {
+                            return props.data?.character.rank;
+                        },
+                        cellRenderer: (props: ICellRendererParams<ITableRow>) => {
+                            const rank = props.value ?? 0;
+                            return <RankImage rank={rank} />;
+                        },
+                    },
+                ],
             },
             {
                 headerName: 'Total',
@@ -96,134 +114,73 @@ const PointsTable = (props: {
                     },
                 ],
             },
+            {
+                headerName: legendaryEvent.alpha.name,
+                children: [
+                    {
+                        field: 'alphaPoints',
+                        headerName: 'Points',
+                        width: 100,
+                        sortable: true,
+                    },
+                    {
+                        field: 'alphaSlots',
+                        headerName: selection === 'selected' ? 'Times selected' : 'Slots',
+                        width: 100,
+                        sortable: true,
+                    },
+                ],
+            },
+            {
+                headerName: legendaryEvent.beta.name,
+                children: [
+                    {
+                        field: 'betaPoints',
+                        headerName: 'Points',
+                        width: 100,
+                        sortable: true,
+                    },
+                    {
+                        field: 'betaSlots',
+                        headerName: selection === 'selected' ? 'Times selected' : 'Slots',
+                        width: 100,
+                        sortable: true,
+                    },
+                ],
+            },
+            {
+                headerName: legendaryEvent.gamma.name,
+                children: [
+                    {
+                        field: 'gammaPoints',
+                        headerName: 'Points',
+                        width: 100,
+                        sortable: true,
+                    },
+                    {
+                        field: 'gammaSlots',
+                        headerName: selection === 'selected' ? 'Times selected' : 'Slots',
+                        width: 100,
+                        sortable: true,
+                    },
+                ],
+            },
         ];
-        return props.short
-            ? shortTable
-            : [
-                  {
-                      headerName: 'Position',
-                      field: 'position',
-                      maxWidth: 50,
-                      width: 50,
-                      minWidth: 50,
-                      sortable: true,
-                      sort: 'asc',
-                  },
-                  {
-                      field: 'name',
-                      width: viewPreferences.hideNames ? 100 : 200,
-                      sortable: true,
-                      cellRenderer: (props: ICellRendererParams<ITableRow>) => {
-                          const row = props.data;
-                          if (row) {
-                              return (
-                                  <CharacterTitle
-                                      character={row.character}
-                                      imageSize={30}
-                                      hideName={viewPreferences.hideNames}
-                                  />
-                              );
-                          }
-                      },
-                      cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
-                      tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
-                  },
-                  {
-                      headerName: 'Total',
-                      children: [
-                          {
-                              field: 'totalPoints',
-                              headerName: 'Points',
-                              width: 100,
-                              sortable: true,
-                          },
-                          {
-                              field: 'totalSlots',
-                              headerName: selection === 'selected' ? 'Times selected' : 'Slots',
-                              width: 100,
-                              sortable: true,
-                          },
-                      ],
-                  },
-                  {
-                      headerName: legendaryEvent.alpha.name,
-                      children: [
-                          {
-                              field: 'alphaPoints',
-                              headerName: 'Points',
-                              width: 100,
-                              sortable: true,
-                          },
-                          {
-                              field: 'alphaSlots',
-                              headerName: selection === 'selected' ? 'Times selected' : 'Slots',
-                              width: 100,
-                              sortable: true,
-                          },
-                      ],
-                  },
-                  {
-                      headerName: legendaryEvent.beta.name,
-                      children: [
-                          {
-                              field: 'betaPoints',
-                              headerName: 'Points',
-                              width: 100,
-                              sortable: true,
-                          },
-                          {
-                              field: 'betaSlots',
-                              headerName: selection === 'selected' ? 'Times selected' : 'Slots',
-                              width: 100,
-                              sortable: true,
-                          },
-                      ],
-                  },
-                  {
-                      headerName: legendaryEvent.gamma.name,
-                      children: [
-                          {
-                              field: 'gammaPoints',
-                              headerName: 'Points',
-                              width: 100,
-                              sortable: true,
-                          },
-                          {
-                              field: 'gammaSlots',
-                              headerName: selection === 'selected' ? 'Times selected' : 'Slots',
-                              width: 100,
-                              sortable: true,
-                          },
-                      ],
-                  },
-              ];
     }, [selection]);
 
-    const selectedChars = useMemo(() => {
-        const alphaSection = legendaryEvent.alpha.unitsRestrictions.map(x => x.name);
-        const betaSection = legendaryEvent.beta.unitsRestrictions.map(x => x.name);
-        const gammaSection = legendaryEvent.gamma.unitsRestrictions.map(x => x.name);
-
-        const alphaChars = Object.entries(personalLegendaryEvent.alpha)
-            .filter(([key]) => alphaSection.includes(key))
-            .map(([_, value]) => value)
-            .flat();
-        const betaChars = Object.entries(personalLegendaryEvent.beta)
-            .filter(([key]) => betaSection.includes(key))
-            .map(([_, value]) => value)
-            .flat();
-        const gammaChars = Object.entries(personalLegendaryEvent.gamma)
-            .filter(([key]) => gammaSection.includes(key))
-            .map(([_, value]) => value)
-            .flat();
-
-        return uniq([...alphaChars, ...betaChars, ...gammaChars]);
-    }, [personalLegendaryEvent.id]);
-
     const selectedCharsRows: ITableRow[] = useMemo(() => {
-        const alpha = getPointsAndSlots(legendaryEvent.alpha, getRestrictionsByChar(personalLegendaryEvent.alpha));
-        const beta = getPointsAndSlots(legendaryEvent.beta, getRestrictionsByChar(personalLegendaryEvent.beta));
-        const gamma = getPointsAndSlots(legendaryEvent.gamma, getRestrictionsByChar(personalLegendaryEvent.gamma));
+        const alpha = getPointsAndSlots(
+            legendaryEvent.alpha,
+            getRestrictionsByChar(teams.filter(t => t.section === 'alpha'))
+        );
+        const beta = getPointsAndSlots(
+            legendaryEvent.beta,
+            getRestrictionsByChar(teams.filter(t => t.section === 'beta'))
+        );
+        const gamma = getPointsAndSlots(
+            legendaryEvent.gamma,
+            getRestrictionsByChar(teams.filter(t => t.section === 'gamma'))
+        );
 
         return legendaryEvent.allowedUnits
             .filter(x => selectedChars.includes(x.name))
@@ -251,16 +208,15 @@ const PointsTable = (props: {
                 totalSlots: (alpha[x.name]?.slots ?? 0) + (beta[x.name]?.slots ?? 0) + (gamma[x.name]?.slots ?? 0),
             }));
 
-        function getRestrictionsByChar(selectedTeams: SelectedTeams): Record<string, string[]> {
+        function getRestrictionsByChar(selectedTeams: ILreTeam[]): Record<string, string[]> {
             const result: Record<string, string[]> = {};
 
-            for (const key in selectedTeams) {
-                const values = selectedTeams[key];
-                values.forEach(value => {
-                    if (!result[value]) {
-                        result[value] = [];
+            for (const team of selectedTeams) {
+                team.charactersIds.forEach(character => {
+                    if (!result[character]) {
+                        result[character] = [];
                     }
-                    result[value].push(key);
+                    result[character] = uniq([...result[character], ...team.restrictionsIds]);
                 });
             }
             return result;
@@ -296,7 +252,7 @@ const PointsTable = (props: {
             }
             return result;
         }
-    }, [personalLegendaryEvent.id, filter]);
+    }, [legendaryEvent.id, filter]);
 
     const rows = useMemo<ITableRow[]>(() => {
         const chars =
@@ -335,6 +291,7 @@ const PointsTable = (props: {
         <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
                 <TextField
+                    size="small"
                     sx={{ margin: '10px', width: '300px' }}
                     label="Quick Filter"
                     variant="outlined"
@@ -347,11 +304,8 @@ const PointsTable = (props: {
                     <RadioGroup
                         style={{ display: 'flex', flexDirection: 'row' }}
                         aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue={CharactersSelection.Selected}
-                        onChange={(_, value) => {
-                            setSelection(value as CharactersSelection);
-                            props.selectionChange(value as CharactersSelection);
-                        }}
+                        value={selection}
+                        onChange={(_, value) => setSelection(value as CharactersSelection)}
                         name="radio-buttons-group">
                         <FormControlLabel
                             value={CharactersSelection.Selected}
@@ -366,8 +320,14 @@ const PointsTable = (props: {
                         <FormControlLabel value={CharactersSelection.All} control={<Radio />} label="All" />
                     </RadioGroup>
                 </FormControl>
+                {selection !== CharactersSelection.Selected && (
+                    <span>
+                        Take this list with the grain of salt, not everyone who scores the most points is the best LRE
+                        character
+                    </span>
+                )}
             </div>
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 150px)', width: '100%' }}>
+            <div className="ag-theme-material" style={{ height: 'calc(100vh - 250px)', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}
                     tooltipShowDelay={100}

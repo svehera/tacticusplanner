@@ -334,6 +334,9 @@ export const Characters = () => {
         .sort((a, b) => a - b)
         .map(x => x.toString());
 
+    const damageTypesOptions = uniq(characters.flatMap(x => x.damageTypes.all)).map(x => x.toString());
+    const traitsOptions = uniq(characters.flatMap(x => x.traits)).map(x => x.toString());
+
     const rows = useMemo(
         () =>
             characters.filter(
@@ -698,7 +701,7 @@ export const Characters = () => {
                             groupByFirstLetter
                             placeholder="Damage Types"
                             selectedValues={damageTypesFilter}
-                            values={Object.values(DamageType)}
+                            values={damageTypesOptions}
                             selectionChanges={damageTypeFilterChanged}
                         />
                         <MultipleSelectCheckmarks
@@ -706,7 +709,7 @@ export const Characters = () => {
                             groupByFirstLetter
                             placeholder="Traits"
                             selectedValues={traitsFilter}
-                            values={Object.values(Trait)}
+                            values={traitsOptions}
                             selectionChanges={traitsFilterChanged}
                         />
                         <MultipleSelectCheckmarks

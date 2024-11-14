@@ -180,7 +180,7 @@ export const GuildWarZones = () => {
                 </FlexBox>
                 {zoneStats.buff && (
                     <FlexBox gap={5}>
-                        <WarZoneBuffImage zoneId={zone.id} />
+                        <WarZoneBuffImage zoneId={zoneStats.iconId ?? zoneStats.id} />
                         <span style={{ fontSize: '1rem' }}>{zoneStats.buff}</span>
                     </FlexBox>
                 )}
@@ -374,7 +374,7 @@ const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style, play
                     zoneStats.buff ? (
                         <Tooltip title={zoneStats.buff} placement="top" arrow>
                             <div>
-                                <WarZoneBuffImage zoneId={zone.id} />
+                                <WarZoneBuffImage zoneId={zoneStats.iconId ?? zoneStats.id} />
                             </div>
                         </Tooltip>
                     ) : (

@@ -38,6 +38,7 @@
             "buff": "Global: Spawns 2 (3 when two Garrisons are still standing) Cadian Guardsmen supporting defenders. They are affected by all other defender buffs"
         },
         {
+            "inactive": true,
             "id": "troopGarrison",
             "name": "Landing Pad",
             "warScore": 15000,
@@ -50,6 +51,21 @@
                 "5": "Elite"
             },
             "buff": "Regional: Angels of Death. At the beginning of the defender's third turn, 2 Jump Pack Intercessors are summoned supporting the defenders. They are affected by all other defender buffs and their stats depend on the rarity cap of the defenders."
+        },
+        {
+            "id": "troopGarrison",
+            "iconId": "medicaeStation",
+            "name": "Medicae Station",
+            "warScore": 15000,
+            "count": 2,
+            "difficulty": {
+                "1": "Trooper",
+                "2": "Veteran",
+                "3": "Veteran",
+                "4": "Elite",
+                "5": "Elite"
+            },
+            "buff": "Global: All defending units have 25% increased Health"
         },
         {
             "id": "frontline",
@@ -134,6 +150,7 @@
             "buff": "Global: Valkyrie Strike. At the end of the first, third and fifth defender turn, marks a hex anywhere on the battlefield. At the beginning of the defender's next turn, units on the target hex and all surrounding hexes are hit with Hellstrike Missiles and lose an amount of Health depending on the rarity cap of the defenders."
         },
         {
+            "inactive": true,
             "id": "medicaeStation",
             "name": "Medicae Station",
             "warScore": 15000,
@@ -146,6 +163,21 @@
                 "5": "Elite"
             },
             "buff": "Global: All defending units have 60% increased Health"
+        },
+        {
+            "id": "medicaeStation",
+            "iconId": "warpRift",
+            "name": "Warp Rift",
+            "warScore": 15000,
+            "count": 1,
+            "difficulty": {
+                "1": "Trooper",
+                "2": "Veteran",
+                "3": "Veteran",
+                "4": "Elite",
+                "5": "Elite"
+            },
+            "buff": "Global: Thin Veil. Psyker Characters deal +20% more damage and when they are defeated, summon a random Daemon that has the same level as the defeated Psyker and is enemy to both attacker and defender."
         },
         {
             "id": "headQuarters",

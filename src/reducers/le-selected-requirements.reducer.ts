@@ -1,7 +1,7 @@
 ﻿import {
     ILegendaryEventSelectedRequirements,
     LegendaryEventData,
-    LegendaryEventSection,
+    LreTrackId,
     SetStateAction,
 } from '../models/interfaces';
 import { LegendaryEventEnum } from '../models/enums';
@@ -10,9 +10,14 @@ export type LeSelectedRequirementsAction =
     | {
           type: 'Update';
           eventId: LegendaryEventEnum;
-          section: LegendaryEventSection;
+          section: LreTrackId;
           restrictionName: string;
           selected: boolean;
+      }
+    | {
+          type: 'ClearAll';
+          eventId: LegendaryEventEnum;
+          section: LreTrackId;
       }
     | SetStateAction<LegendaryEventData<ILegendaryEventSelectedRequirements>>;
 
@@ -34,6 +39,21 @@ export const leSelectedRequirementsReducer = (
                 gamma: {},
             };
             legendaryEvent[section][restrictionName] = selected;
+            return { ...state, [action.eventId]: legendaryEvent };
+        }
+        case 'ClearAll': {
+            const { eventId, section } = action;
+            const legendaryEvent: ILegendaryEventSelectedRequirements = state[eventId] ?? {
+                id: eventId,
+                name: LegendaryEventEnum[eventId],
+                alpha: {},
+                beta: {},
+                gamma: {},
+            };
+            for (const restriction in legendaryEvent[section]) {
+                legendaryEvent[section][restriction] = false;
+            }
+
             return { ...state, [action.eventId]: legendaryEvent };
         }
         default: {

@@ -5,7 +5,7 @@
     ILegendaryEventTrackRequirement,
     ILegendaryEventTrackStatic,
     ISelectedTeamsOrdering,
-    LegendaryEventSection,
+    LreTrackId,
 } from '../interfaces';
 import { intersectionBy, orderBy, sum, uniqBy } from 'lodash';
 import { CharacterBias, LegendaryEventEnum, Rank } from '../enums';
@@ -21,7 +21,7 @@ export class LETrack implements ILegendaryEventTrack {
 
     constructor(
         public eventId: LegendaryEventEnum,
-        public section: LegendaryEventSection,
+        public section: LreTrackId,
         public allowedUnits: ICharacter2[],
         public unitsRestrictions: Array<ILegendaryEventTrackRequirement>,
         staticData: ILegendaryEventTrackStatic
@@ -29,7 +29,13 @@ export class LETrack implements ILegendaryEventTrack {
         this.name = staticData.name;
         this.killPoints = staticData.killPoints;
         this.battlesPoints = staticData.battlesPoints;
-        this.unitsRestrictions = orderBy(unitsRestrictions, 'points');
+        this.unitsRestrictions = orderBy(
+            unitsRestrictions.map((r, index) => ({
+                ...r,
+                id: `${LegendaryEventEnum[eventId].toLowerCase()}_${section}_${index}`,
+            })),
+            'points'
+        );
         this.enemies = staticData.enemies;
     }
 
@@ -118,8 +124,8 @@ export class LETrack implements ILegendaryEventTrack {
                 rarity: +unit.rarity,
                 requiredInCampaign: unit.requiredInCampaign,
                 points: unit.legendaryEvents[this.eventId].totalPoints,
-                alwaysRecommend: unit.bias === CharacterBias.AlwaysRecommend,
-                neverRecommend: unit.bias === CharacterBias.NeverRecommend,
+                alwaysRecommend: unit.bias === CharacterBias.recommendFirst,
+                neverRecommend: unit.bias === CharacterBias.recommendLast,
             }));
 
         if (this.isAutoTeams(settings)) {
@@ -131,7 +137,7 @@ export class LETrack implements ILegendaryEventTrack {
                 orders.push('desc');
             }
 
-            if (!settings.ignoreRecommendedLast) {
+            if (!settings.ignoreRecommendedFirst) {
                 iterates.push('neverRecommend');
                 orders.push('asc');
             }

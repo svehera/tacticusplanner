@@ -4,7 +4,6 @@
     IDailyRaids,
     IDailyRaidsPreferences,
     IInventory,
-    ILegendaryEventProgressState,
     ILegendaryEventSelectedRequirements,
     ILegendaryEventSelectedTeams,
     IPersonalCharacterData2,
@@ -16,11 +15,16 @@
     IViewPreferences,
     LegendaryEventData,
     IGuild,
+    LreTrackId,
+    ILreTeam,
+    SelectedTeams,
 } from '../models/interfaces';
-import { defaultData } from '../models/constants';
-import { Rank } from '../models/enums';
+import { v4 } from 'uuid';
+import { defaultData, getLegendaryEvent } from '../models/constants';
+import { LegendaryEventEnum, LrePointsCategoryId, Rank } from '../models/enums';
 import { IMowDb } from 'src/v2/features/characters/characters.models';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+import { ILreBattleProgressDto, ILreProgressDto, ILreRequirementsProgressDto } from 'src/models/dto.interfaces';
 
 export class PersonalDataLocalStorage {
     private readonly storePrefix = 'tp-';
@@ -58,11 +62,12 @@ export class PersonalDataLocalStorage {
                 goals: this.getItem<IPersonalGoal[]>('goals') ?? defaultData.goals,
                 selectedTeamOrder:
                     this.getItem<ISelectedTeamsOrdering>('selectedTeamOrder') ?? defaultData.selectedTeamOrder,
-                leTeams:
-                    this.getItem<LegendaryEventData<ILegendaryEventSelectedTeams>>('leTeams') ?? defaultData.leTeams,
-                leProgress:
-                    this.getItem<LegendaryEventData<ILegendaryEventProgressState>>('leProgress') ??
-                    defaultData.leProgress,
+                leTeams: migrateLreTeams(
+                    this.getItem<LegendaryEventData<ILegendaryEventSelectedTeams>>('leTeams') ?? defaultData.leTeams
+                ),
+                leProgress: migrateLreProgress(
+                    this.getItem<LegendaryEventData<ILreProgressDto>>('leProgress') ?? defaultData.leProgress
+                ),
                 leSelectedRequirements:
                     this.getItem<LegendaryEventData<ILegendaryEventSelectedRequirements>>('leSelectedRequirements') ??
                     defaultData.leSelectedRequirements,
@@ -101,7 +106,6 @@ export class PersonalDataLocalStorage {
                 }
             }
         }
-
         return result;
     }
 
@@ -207,6 +211,112 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
 
     return v1Data;
 };
+
+function migrateLreTeams(
+    teamsByEvent: LegendaryEventData<ILegendaryEventSelectedTeams>
+): LegendaryEventData<ILegendaryEventSelectedTeams> {
+    for (const teamsByEventKey in teamsByEvent) {
+        const eventTeams = teamsByEvent[teamsByEventKey as unknown as LegendaryEventEnum];
+        if (eventTeams && !eventTeams.teams?.length) {
+            populateTeams(eventTeams);
+        }
+    }
+
+    return teamsByEvent;
+}
+
+function populateTeams(data: ILegendaryEventSelectedTeams) {
+    const sections: LreTrackId[] = ['alpha', 'beta', 'gamma'];
+    const teams: ILreTeam[] = [];
+
+    // Helper function to compare two arrays for equality
+    function areArraysEqual(arr1: string[], arr2: string[]): boolean {
+        return arr1.length === arr2.length && arr1.every(char => arr2.includes(char));
+    }
+
+    sections.forEach(section => {
+        const selectedTeams: SelectedTeams = data[section];
+
+        Object.entries(selectedTeams).forEach(([restriction, characters]) => {
+            // Check if there's already a team with the same set of characters
+            const existingTeam = teams.find(
+                team => areArraysEqual(team.charactersIds, characters) && team.section === section
+            );
+
+            if (existingTeam) {
+                // If found, combine the restriction with the existing team's restrictions
+                if (!existingTeam.restrictionsIds.includes(restriction)) {
+                    existingTeam.restrictionsIds.push(restriction);
+                }
+            } else if (characters?.length) {
+                // If not found, create a new team
+                const team: ILreTeam = {
+                    id: v4(), // Replace with your UUID generation logic
+                    name: `Team ${teams.length + 1} - ${section}`, // Assigning Team 1, 2, 3, etc.
+                    section: section as LreTrackId,
+                    restrictionsIds: [restriction], // Initial restriction,
+                    charactersIds: characters, // Characters associated with this team
+                };
+                teams.push(team);
+            }
+        });
+    });
+
+    data.teams = teams; // Populate the teams field
+}
+
+function migrateLreProgress(progressByEvent: LegendaryEventData<ILreProgressDto>): LegendaryEventData<ILreProgressDto> {
+    for (const progressByEventKey in progressByEvent) {
+        const eventProgress = progressByEvent[progressByEventKey as unknown as LegendaryEventEnum];
+        if (eventProgress && !eventProgress.battlesProgress?.length) {
+            populateProgress(eventProgress);
+        }
+    }
+    return progressByEvent;
+}
+
+function populateProgress(data: ILreProgressDto) {
+    const sections: LreTrackId[] = ['alpha', 'beta', 'gamma'];
+    const battlesProgress: ILreBattleProgressDto[] = [];
+    const lre = getLegendaryEvent(data.id, []);
+    const killPointsIndex = 0;
+    const highScoreAndDefeatAllIndex = 1;
+
+    sections.forEach(section => {
+        const { battles } = data[section] ?? { battles: [] };
+        battles.forEach((battle, index) => {
+            const requirements: ILreRequirementsProgressDto[] = lre[section].unitsRestrictions.map(
+                (restriction, restrictionIndex) => ({
+                    id: restriction.name,
+                    state: +battle[restrictionIndex + 2],
+                })
+            );
+
+            requirements.push(
+                {
+                    id: LrePointsCategoryId.killScore,
+                    state: +battle[killPointsIndex],
+                },
+                {
+                    id: LrePointsCategoryId.defeatAll,
+                    state: +battle[highScoreAndDefeatAllIndex],
+                },
+                {
+                    id: LrePointsCategoryId.highScore,
+                    state: +battle[highScoreAndDefeatAllIndex],
+                }
+            );
+
+            battlesProgress.push({
+                trackId: section,
+                battleIndex: index,
+                requirements: requirements,
+            });
+        });
+    });
+
+    data.battlesProgress = battlesProgress; // Populate the teams field
+}
 
 export const isV1Data = (data: IPersonalData | IPersonalData2): data is IPersonalData => {
     const versionKey: keyof IPersonalData2 = 'schemaVersion';

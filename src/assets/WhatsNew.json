@@ -1,6 +1,66 @@
 ﻿{
-    "currentVersion": "1.6.4",
+    "currentVersion": "1.6.5",
     "releaseNotes": [
+        {
+            "version": "1.6.5",
+            "date": "November 15",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added new collectable units",
+                    "subPoints": [
+                        "Hollan, the Biophagus, unlockable in the ’Path of Ascension' event, starting November 17",
+                        "Shas'vre Vior'la Tson'ji, XV88 Broadside Battlesuit, unlockable in the Incursion event starting December 2",
+                        "Parasite of Mortrex (PoM), Invader Organism, unlockable in the (Epic!) Battle Pass season starting on December 15"
+                    ]
+                },
+                {
+                    "text": "Added new Campaign Battles: ‘Mirror Elite Saim-Hann’ part 5"
+                },
+                {
+                    "text": "Re-designed LRE planner UI/UX",
+                    "subPoints": [
+                        "Updated table view and added new card view",
+                        "Added possibility to have multiple teams per track",
+                        "Updated settings to have more granular LRE unit tile view settings",
+                        "Updated progress view to be more compact and added intermediate state"
+                    ],
+                    "images": [
+                        {
+                            "path": "teams.png"
+                        },
+                        {
+                            "path": "add.png"
+                        },
+                        {
+                            "path": "cards.png"
+                        },
+                        {
+                            "path": "progress.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated Dirty Dozen table. Thanks ijriims for contribution"
+                },
+                {
+                    "text": "Updated characters icons that has been cropped. Thanks to Tech Priest Fred for providing icons"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with missing damage types and traits on the Characters page (Count Casual)"
+                },
+                {
+                    "text": "Fixed issue Vitruvius are still at 400 shards instead of 500 (Peuchy)"
+                },
+                {
+                    "text": "Fixed issue Wrong component for Morvenn Vahl (Iron II) (Gorgoth)"
+                }
+            ]
+        },
         {
             "version": "1.6.4",
             "date": "October 15",
