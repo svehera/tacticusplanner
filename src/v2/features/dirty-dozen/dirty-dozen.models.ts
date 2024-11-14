@@ -8,5 +8,8 @@
     GRScreamer: number;
     GRRogalDorn: number;
     GRAvatar: number;
+    GuildRaid: number;
     GuildWar: number;
+    Horde: number;
+    ModifiedScore: number;
 }
