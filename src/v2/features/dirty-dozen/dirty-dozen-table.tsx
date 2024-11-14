@@ -76,7 +76,6 @@ export const DirtyDozenTable = ({ characters, rows }: { characters: ICharacter2[
             },
         },
 
-
         createScoreColumn('Horde', 'Horde'),
         createScoreColumn('GuildWar', 'Guild War'),
         createScoreColumn('GuildRaid', 'Guild Raid'),

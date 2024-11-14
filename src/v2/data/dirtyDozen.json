@@ -37,7 +37,7 @@
         "Horde": 2.0,
         "GuildRaid": 4.0,
         "GuildWar": 5.0,
-        "ModifiedScore": 3.80
+        "ModifiedScore": 3.8
     },
     {
         "Name": "Eldryon",
@@ -189,7 +189,7 @@
         "Horde": 4.5,
         "GuildRaid": 1.0,
         "GuildWar": 4.5,
-        "ModifiedScore": 2.40
+        "ModifiedScore": 2.4
     },
     {
         "Name": "Ahriman",
@@ -197,7 +197,7 @@
         "Horde": 2.5,
         "GuildRaid": 2.0,
         "GuildWar": 3.5,
-        "ModifiedScore": 2.40
+        "ModifiedScore": 2.4
     },
     {
         "Name": "Aethana",
@@ -221,7 +221,7 @@
         "Horde": 5.0,
         "GuildRaid": 1.0,
         "GuildWar": 3.5,
-        "ModifiedScore": 2.30
+        "ModifiedScore": 2.3
     },
     {
         "Name": "Maugan Ra",
