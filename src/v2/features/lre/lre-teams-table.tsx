@@ -5,7 +5,6 @@ import { CellClickedEvent, ColDef, ICellRendererParams, RowStyle } from 'ag-grid
 
 import {
     ICharacter2,
-    ILegendaryEventSelectedRequirements,
     ILegendaryEventTrack,
     ILegendaryEventTrackRequirement,
     ILreTeam,
@@ -149,13 +148,9 @@ export const LreTeamsTable: React.FC<Props> = ({
         unitsRestrictions: ILegendaryEventTrackRequirement[],
         selectedRequirements: string[]
     ): Array<ColDef> {
-        const columns: Array<ColDef> = unitsRestrictions.map((u, index) => ({
+        const columns: Array<ColDef> = unitsRestrictions.map(u => ({
             field: u.name,
-            colSpan: () => {
-                return index === 0 ? selectedRequirements.length : 1;
-            },
             headerName: `(${u.points}) ${u.name}`,
-            // hide: completedRestrictions.includes(u.name),
             headerComponentParams: {
                 onCheckboxChange: (selected: boolean) => handleChange(selected, u.name),
                 checked: selectedRequirements.includes(u.name),
@@ -174,11 +169,17 @@ export const LreTeamsTable: React.FC<Props> = ({
         );
 
         // Sort `columns` by using the order from `columnIds`, keeping unspecified columns in original order
-        return columns.sort((a, b) => {
+        columns.sort((a, b) => {
             const orderA = columnOrder[a.field!] !== undefined ? columnOrder[a.field!] : Infinity;
             const orderB = columnOrder[b.field!] !== undefined ? columnOrder[b.field!] : Infinity;
             return orderA - orderB;
         });
+
+        columns.forEach((column, index) => {
+            column.colSpan = () => (index === 0 ? selectedRequirements.length : 1);
+        });
+
+        return columns;
     }
 
     function getRows(teams: Record<string, Array<ICharacter2 | string | undefined>>): Array<ITableRow> {

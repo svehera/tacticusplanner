@@ -12,9 +12,7 @@
     Faction,
     LegendaryEventEnum,
     LegendaryEvents,
-    LrePointsCategoryId,
     PersonalGoalType,
-    ProgressState,
     Rank,
     Rarity,
     RarityStars,
@@ -388,6 +386,8 @@ export interface IDailyRaidsFilters {
     campaignTypes: CampaignType[];
     upgradesRarity: Rarity[];
     slotsCount?: number[];
+    enemiesTypes?: string[];
+    enemiesCount?: number[];
 }
 
 export interface ILegendaryEventsData {
@@ -633,6 +633,8 @@ export interface ICampaignBattle {
     slots?: number;
     enemiesAlliances?: string[];
     enemiesFactions?: string[];
+    enemiesTotal?: number;
+    enemiesTypes?: string[];
 }
 
 export interface ICampaignBattleComposed {
@@ -655,6 +657,8 @@ export interface ICampaignBattleComposed {
     enemiesAlliances: Alliance[];
     alliesFactions: Faction[];
     alliesAlliance: Alliance;
+    enemiesTotal: number;
+    enemiesTypes: string[];
     // new props for upgrades service
     isSelected?: boolean;
     isUnlocked?: boolean;

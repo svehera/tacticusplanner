@@ -223,6 +223,8 @@ export const defaultData: IPersonalData2 = {
             campaignTypes: [],
             upgradesRarity: [],
             slotsCount: [],
+            enemiesTypes: [],
+            enemiesCount: [],
         },
         raidedLocations: [],
         lastRefreshDateUTC: new Date().toUTCString(),

@@ -35,6 +35,7 @@ import { getEnumValues, rankToString } from '../shared-logic/functions';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import { IRankLookup } from 'src/v2/features/goals/goals.models';
 import { UnitType } from 'src/v2/features/characters/units.enums';
+import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
 export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;
@@ -551,59 +552,8 @@ export class StaticDataService {
                 if (!settings.filters) {
                     return true;
                 }
-                const {
-                    alliesFactions,
-                    alliesAlliance,
-                    enemiesAlliance,
-                    enemiesFactions,
-                    campaignTypes,
-                    upgradesRarity,
-                    slotsCount,
-                } = settings.filters;
 
-                if (slotsCount && slotsCount.length) {
-                    if (!slotsCount.includes(location.slots ?? 5)) {
-                        return false;
-                    }
-                }
-
-                if (upgradesRarity.length) {
-                    if (!upgradesRarity.includes(materialRarity)) {
-                        return false;
-                    }
-                }
-
-                if (campaignTypes.length) {
-                    if (!campaignTypes.includes(location.campaignType)) {
-                        return false;
-                    }
-                }
-
-                if (alliesAlliance.length) {
-                    if (!alliesAlliance.includes(location.alliesAlliance)) {
-                        return false;
-                    }
-                }
-
-                if (alliesFactions.length) {
-                    if (!location.alliesFactions.some(faction => alliesFactions.includes(faction))) {
-                        return false;
-                    }
-                }
-
-                if (enemiesAlliance.length) {
-                    if (!location.enemiesAlliances.some(alliance => enemiesAlliance.includes(alliance))) {
-                        return false;
-                    }
-                }
-
-                if (enemiesFactions.length) {
-                    if (!location.enemiesFactions.some(faction => enemiesFactions.includes(faction))) {
-                        return false;
-                    }
-                }
-
-                return true;
+                return UpgradesService.passLocationFilter(location, settings.filters, materialRarity);
             });
 
         return orderBy(unlockedLocations, ['energyPerItem', 'expectedGold'], ['asc', 'desc']);

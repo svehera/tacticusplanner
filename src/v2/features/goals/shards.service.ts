@@ -11,15 +11,7 @@
 } from 'src/v2/features/goals/goals.models';
 import { ICampaignBattleComposed, ICampaignsProgress } from 'src/models/interfaces';
 import { charsProgression, charsUnlockShards, rarityToStars } from 'src/models/constants';
-import {
-    Alliance,
-    Campaign,
-    CampaignsLocationsUsage,
-    CampaignType,
-    DailyRaidsStrategy,
-    PersonalGoalType,
-    Rarity,
-} from 'src/models/enums';
+import { Alliance, Campaign, CampaignsLocationsUsage, CampaignType, PersonalGoalType, Rarity } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import { orderBy, sum } from 'lodash';
@@ -174,6 +166,8 @@ export class ShardsService {
             enemiesAlliances: [],
             alliesFactions: [],
             alliesAlliance: Alliance.Chaos,
+            enemiesTypes: [],
+            enemiesTotal: 0,
         };
         return onslaughtLocation;
     }
