@@ -5,8 +5,33 @@
             "version": "1.6.6",
             "date": "November 18",
             "type": "Update",
-            "new": [],
-            "minor": [],
+            "new": [
+                {
+                    "text": "Updated Daily Raids filter to recommend locations by enemies types and enemies count",
+                    "subPoints": [
+                        "Thanks to all volunteers that helped collect data: SeventhSun, VitaMorte, Unlucky☆SirEldricIV, Cody212501"
+                    ],
+                    "images": [
+                        {
+                            "path": "filter1.png"
+                        },
+                        {
+                            "path": "filter2.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated Learn Campaigns table to include data about enemies types and enemies count",
+                    "route": "learn/campaigns",
+                    "images": [
+                        {
+                            "path": "campaigns.png"
+                        }
+                    ]
+                }
+            ],
             "bugFixes": [
                 {
                     "text": "Fixed issue with LRE planner when selection doesn't merge correctly on table view (SeventhSun)"

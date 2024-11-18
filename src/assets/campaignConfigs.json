@@ -1,4 +1,17 @@
 {
+    "SuperEarly": {
+        "type": "SuperEarly",
+        "energyCost": 3,
+        "dailyBattleCount": 3,
+        "dropRate": {
+            "common": 0,
+            "uncommon": 0,
+            "rare": 0,
+            "epic": 0,
+            "legendary": 0,
+            "shard": 0
+        }
+    },
     "Early": {
         "type": "Early",
         "energyCost": 5,

@@ -1,5 +1,5 @@
 ﻿import React, { useMemo } from 'react';
-import { Badge, DialogActions, DialogContent, DialogTitle, IconButton, Popover } from '@mui/material';
+import { Badge, DialogActions, DialogContent, DialogTitle, IconButton } from '@mui/material';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { IDailyRaidsFilters } from 'src/models/interfaces';
 import Button from '@mui/material/Button';
@@ -7,6 +7,7 @@ import { Alliance, CampaignType, Faction, Rarity, RarityString } from 'src/model
 import factionsData from 'src/v2/data/factions.json';
 import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
 import Dialog from '@mui/material/Dialog';
+import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 
 interface Props {
     filter: IDailyRaidsFilters;
@@ -22,6 +23,9 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
         []
     );
 
+    const enemiesTypeOptions = useMemo(() => CampaignsService.getPossibleEnemiesTypes(), []);
+    const enemiesCountOptions = useMemo(() => CampaignsService.getPossibleEnemiesCount().map(x => x.toString()), []);
+
     const filtersCount =
         +!!filter.enemiesAlliance.length +
         +!!filter.alliesAlliance.length +
@@ -29,6 +33,8 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
         +!!filter.enemiesFactions.length +
         +!!filter.upgradesRarity.length +
         +!!filter.slotsCount?.length +
+        +!!filter.enemiesTypes?.length +
+        +!!filter.enemiesCount?.length +
         +!!filter.campaignTypes.length;
 
     const handleClick = () => {
@@ -54,6 +60,8 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             campaignTypes: [],
             upgradesRarity: [],
             slotsCount: [],
+            enemiesTypes: [],
+            enemiesCount: [],
         });
         setCurrFilter({
             alliesFactions: [],
@@ -63,11 +71,13 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             campaignTypes: [],
             upgradesRarity: [],
             slotsCount: [],
+            enemiesTypes: [],
+            enemiesCount: [],
         });
         setOpen(false);
     };
 
-    const renderFilters = (type: 'allies' | 'enemies', alliance: Alliance[], factions: Faction[]) => {
+    const renderUnitsFilter = (type: 'allies' | 'enemies', alliance: Alliance[], factions: Faction[]) => {
         const allowedFactions = !alliance.length
             ? allFactions.map(x => x.faction)
             : allFactions.filter(x => alliance.includes(x.alliance)).map(x => x.faction);
@@ -93,13 +103,15 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
         };
 
         return (
-            <div className="flex-box column start gap5">
+            <div className="flex-box gap5">
                 <MultipleSelectCheckmarks
                     size="small"
                     placeholder="Alliances"
                     selectedValues={alliance}
                     values={Object.values(Alliance)}
                     selectionChanges={allianceFilterChanged}
+                    disableCloseOnSelect={false}
+                    minWidth={150}
                 />
 
                 <MultipleSelectCheckmarks
@@ -109,6 +121,8 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     selectedValues={factions}
                     values={allowedFactions}
                     selectionChanges={factionsFilterChanged}
+                    disableCloseOnSelect={false}
+                    minWidth={150}
                 />
             </div>
         );
@@ -124,34 +138,64 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
             <Dialog open={open} onClose={handleClose} fullWidth>
                 <DialogTitle>Raids Filters</DialogTitle>
                 <DialogContent>
-                    <h5>Deployable factions</h5>
-                    {renderFilters('allies', currFilter.alliesAlliance, currFilter.alliesFactions)}
+                    <h5>Allies</h5>
+                    {renderUnitsFilter('allies', currFilter.alliesAlliance, currFilter.alliesFactions)}
 
-                    <hr />
+                    <h5>Enemies</h5>
+                    {renderUnitsFilter('enemies', currFilter.enemiesAlliance, currFilter.enemiesFactions)}
 
-                    <h5>Enemies factions</h5>
-                    {renderFilters('enemies', currFilter.enemiesAlliance, currFilter.enemiesFactions)}
+                    <div className="flex-box gap5" style={{ marginTop: 10 }}>
+                        <MultipleSelectCheckmarks
+                            size="small"
+                            placeholder="Enemies Count"
+                            selectedValues={currFilter.enemiesCount?.map(x => x.toString()) ?? []}
+                            values={enemiesCountOptions}
+                            selectionChanges={values => {
+                                setCurrFilter({ ...currFilter, enemiesCount: values.map(x => +x) });
+                            }}
+                            disableCloseOnSelect={false}
+                            minWidth={150}
+                        />
+
+                        <MultipleSelectCheckmarks
+                            size="small"
+                            placeholder="Enemies Types"
+                            selectedValues={currFilter.enemiesTypes ?? []}
+                            values={enemiesTypeOptions}
+                            selectionChanges={values => {
+                                setCurrFilter({ ...currFilter, enemiesTypes: values });
+                            }}
+                            disableCloseOnSelect={false}
+                            minWidth={150}
+                        />
+                    </div>
 
                     <h5>Locations</h5>
-                    <MultipleSelectCheckmarks
-                        size="small"
-                        placeholder="Types"
-                        selectedValues={currFilter.campaignTypes}
-                        values={[CampaignType.Elite, CampaignType.Mirror, CampaignType.Normal, CampaignType.Early]}
-                        selectionChanges={values => {
-                            setCurrFilter({ ...currFilter, campaignTypes: values as CampaignType[] });
-                        }}
-                    />
+                    <div className="flex-box gap5">
+                        <MultipleSelectCheckmarks
+                            size="small"
+                            placeholder="Types"
+                            selectedValues={currFilter.campaignTypes}
+                            values={[CampaignType.Elite, CampaignType.Mirror, CampaignType.Normal, CampaignType.Early]}
+                            selectionChanges={values => {
+                                setCurrFilter({ ...currFilter, campaignTypes: values as CampaignType[] });
+                            }}
+                            disableCloseOnSelect={false}
+                            minWidth={150}
+                        />
 
-                    <MultipleSelectCheckmarks
-                        size="small"
-                        placeholder="Slots"
-                        selectedValues={currFilter.slotsCount?.map(x => x.toString()) ?? []}
-                        values={['3', '4', '5']}
-                        selectionChanges={values => {
-                            setCurrFilter({ ...currFilter, slotsCount: values.map(x => +x) });
-                        }}
-                    />
+                        <MultipleSelectCheckmarks
+                            size="small"
+                            placeholder="Slots"
+                            selectedValues={currFilter.slotsCount?.map(x => x.toString()) ?? []}
+                            values={['3', '4', '5']}
+                            selectionChanges={values => {
+                                setCurrFilter({ ...currFilter, slotsCount: values.map(x => +x) });
+                            }}
+                            disableCloseOnSelect={false}
+                            minWidth={150}
+                        />
+                    </div>
 
                     <h5>Upgrades</h5>
                     <MultipleSelectCheckmarks
@@ -165,6 +209,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                                 upgradesRarity: values.map(x => +Rarity[x as unknown as number]),
                             });
                         }}
+                        disableCloseOnSelect={false}
                     />
                 </DialogContent>
                 <DialogActions>

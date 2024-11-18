@@ -206,6 +206,7 @@ export enum CharacterBias {
 }
 
 export enum CampaignType {
+    SuperEarly = 'SuperEarly',
     Early = 'Early',
     EarlyChars = 'EarlyChars',
     EarlyMirrorChars = 'EarlyMirrorChars',

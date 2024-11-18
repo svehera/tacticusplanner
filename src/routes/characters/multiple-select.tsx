@@ -9,7 +9,9 @@ interface Props {
     size?: 'small' | 'medium';
     groupByFirstLetter?: boolean;
     sortByAlphabet?: boolean;
+    minWidth?: number;
     maxWidth?: number;
+    disableCloseOnSelect?: boolean;
 }
 
 export const MultipleSelectCheckmarks: React.FC<Props> = ({
@@ -20,7 +22,9 @@ export const MultipleSelectCheckmarks: React.FC<Props> = ({
     placeholder,
     groupByFirstLetter = false,
     sortByAlphabet = false,
+    minWidth = 300,
     maxWidth,
+    disableCloseOnSelect = true,
 }) => {
     const handleChange = (newValue: string[]) => {
         selectionChanges(newValue);
@@ -30,13 +34,13 @@ export const MultipleSelectCheckmarks: React.FC<Props> = ({
         <Autocomplete
             fullWidth
             multiple
-            disableCloseOnSelect
+            disableCloseOnSelect={disableCloseOnSelect}
             size={size}
             value={selectedValues}
             options={groupByFirstLetter || sortByAlphabet ? values.sort((a, b) => -b[0].localeCompare(a[0])) : values}
             groupBy={groupByFirstLetter ? option => option[0] : undefined}
             onChange={(_, value) => handleChange(value)}
-            sx={{ minWidth: 300, maxWidth }}
+            sx={{ minWidth, maxWidth }}
             renderInput={params => <TextField {...params} label={placeholder} />}
         />
     );

@@ -2,8 +2,6 @@
     ICampaignBattleComposed,
     ICampaignConfigs,
     ICampaignsData,
-    IDailyRaidsFilters,
-    IDailyRaidsPreferences,
     IDropRate,
     IRecipeData,
 } from 'src/models/interfaces';
@@ -13,7 +11,7 @@ import battleData from 'src/assets/battleData.json';
 import recipeData from 'src/assets/recipeData.json';
 
 import { Alliance, Campaign, CampaignType, Faction, Rarity } from 'src/models/enums';
-import { orderBy } from 'lodash';
+import { orderBy, uniq } from 'lodash';
 
 export class CampaignsService {
     private static readonly campaignConfigs: ICampaignConfigs = campaignConfigs;
@@ -30,6 +28,12 @@ export class CampaignsService {
         );
     }
 
+    public static getPossibleEnemiesTypes(): string[] {
+        return orderBy(uniq(Object.values(this.campaignsComposed).flatMap(x => x.enemiesTypes)));
+    }
+    public static getPossibleEnemiesCount(): number[] {
+        return orderBy(uniq(Object.values(this.campaignsComposed).map(x => x.enemiesTotal)), undefined, 'desc');
+    }
     static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
         const result: Record<string, ICampaignBattleComposed> = {};
         for (const battleDataKey in this.battleData) {
@@ -69,6 +73,8 @@ export class CampaignsService {
                 enemiesFactions: (battle.enemiesFactions ?? enemies.factions) as Faction[],
                 alliesAlliance: allies.alliance,
                 alliesFactions: allies.factions,
+                enemiesTotal: battle.enemiesTotal ?? 0,
+                enemiesTypes: battle.enemiesTypes ?? [],
             };
         }
 
