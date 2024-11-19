@@ -544,7 +544,7 @@ export class UpgradesService {
         }
 
         if (enemiesTypes?.length) {
-            if (location.enemiesTypes.some(enemyType => enemiesTypes.includes(enemyType))) {
+            if (!location.enemiesTypes.some(enemyType => enemiesTypes.includes(enemyType))) {
                 return false;
             }
         }
