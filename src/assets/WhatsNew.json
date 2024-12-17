@@ -27,8 +27,15 @@
                     ]
                 }
             ],
-            "minor": [],
+            "minor": [
+                {
+                    "text": "Updated LRE master table and leaderboard tables to not take into account extra points from the Defeat All enemies requirement (SeventhSun)"
+                }
+            ],
             "bugFixes": [
+                {
+                    "text": "Fixed issue with LRE UI x/14 shows as undefined/14 (SeventhSun)"
+                },
                 {
                     "text": "Fixed issue with LRE Completed Tracks not filtered from teams (Kinks)"
                 }

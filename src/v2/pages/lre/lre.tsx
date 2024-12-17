@@ -99,7 +99,9 @@ export const Lre: React.FC = () => {
                 )}
             </div>
 
-            <div style={{ marginTop: 10 }}>{renderTabContent()}</div>
+            <div style={{ marginTop: 10 }} key={legendaryEvent.id}>
+                {renderTabContent()}
+            </div>
 
             {showSettings && (
                 <LreSettings

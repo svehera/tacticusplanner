@@ -247,7 +247,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                 result[key] = {
                     name: key,
                     slots: restrictionsByChar[key].length,
-                    points: sum(restrictions.map(x => track.getRestrictionPoints(x))) + track.killPoints,
+                    points: sum(restrictions.map(x => track.getRestrictionPoints(x))),
                 };
             }
             return result;

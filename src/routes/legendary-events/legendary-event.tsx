@@ -90,9 +90,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
 
     return (
         <div>
-            <div
-                style={{ display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: 15, marginBottom: 10 }}
-                key={legendaryEvent.id}>
+            <div style={{ display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: 15, marginBottom: 10 }}>
                 {viewPreferences.showAlpha && (
                     <LegendaryEventTrack
                         track={legendaryEvent.alpha}
