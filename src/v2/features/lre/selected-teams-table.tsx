@@ -15,10 +15,9 @@ interface Props {
     rows: ITableRow[];
     editTeam: (teamId: string) => void;
     deleteTeam: (teamId: string) => void;
-    completedRequirements: string[];
 }
 
-export const SelectedTeamsTable: React.FC<Props> = ({ completedRequirements, rows, editTeam, deleteTeam, track }) => {
+export const SelectedTeamsTable: React.FC<Props> = ({ rows, editTeam, deleteTeam, track }) => {
     const { viewPreferences } = useContext(StoreContext);
     const gridRef = useRef<AgGridReact>(null);
 
@@ -61,15 +60,14 @@ export const SelectedTeamsTable: React.FC<Props> = ({ completedRequirements, row
     };
 
     const columnsDefs = useMemo<Array<ColDef>>(
-        () => getSectionColumns(track.unitsRestrictions),
-        [track.eventId, completedRequirements]
+        () => getSectionColumns(track.unitsRestrictions.filter(x => !x.hide)),
+        [track.eventId]
     );
 
     function getSectionColumns(unitsRestrictions: ILegendaryEventTrackRequirement[]): Array<ColDef> {
         return unitsRestrictions.map(u => ({
             field: u.name,
             headerName: u.name,
-            hide: completedRequirements.includes(u.name),
         }));
     }
 

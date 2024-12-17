@@ -553,7 +553,7 @@ export class StaticDataService {
                     return true;
                 }
 
-                return UpgradesService.passLocationFilter(location, settings.filters, materialRarity);
+                return CampaignsService.passLocationFilter(location, settings.filters, materialRarity);
             });
 
         return orderBy(unlockedLocations, ['energyPerItem', 'expectedGold'], ['asc', 'desc']);

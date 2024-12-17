@@ -469,7 +469,8 @@ export class UpgradesService {
                 const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
                 location.isUnlocked = location.nodeNumber <= campaignProgress;
                 location.isPassFilter =
-                    !settings.filters || this.passLocationFilter(location, settings.filters, combinedUpgrade.rarity);
+                    !settings.filters ||
+                    CampaignsService.passLocationFilter(location, settings.filters, combinedUpgrade.rarity);
                 location.isCompleted = completedLocations.some(locationId => location.id === locationId);
                 location.isSelected = location.isUnlocked && location.isPassFilter;
             }
@@ -518,80 +519,6 @@ export class UpgradesService {
                 ['desc', 'asc', 'desc']
             );
         }
-    }
-
-    public static passLocationFilter(
-        location: ICampaignBattleComposed,
-        filters: IDailyRaidsFilters,
-        materialRarity: Rarity
-    ): boolean {
-        const {
-            alliesFactions,
-            alliesAlliance,
-            enemiesAlliance,
-            enemiesFactions,
-            campaignTypes,
-            upgradesRarity,
-            slotsCount,
-            enemiesTypes,
-            enemiesCount,
-        } = filters;
-
-        if (enemiesCount?.length) {
-            if (!enemiesCount.includes(location.enemiesTotal)) {
-                return false;
-            }
-        }
-
-        if (enemiesTypes?.length) {
-            if (!location.enemiesTypes.some(enemyType => enemiesTypes.includes(enemyType))) {
-                return false;
-            }
-        }
-
-        if (slotsCount && slotsCount.length) {
-            if (!slotsCount.includes(location.slots ?? 5)) {
-                return false;
-            }
-        }
-
-        if (upgradesRarity.length) {
-            if (!upgradesRarity.includes(materialRarity)) {
-                return false;
-            }
-        }
-
-        if (campaignTypes.length) {
-            if (!campaignTypes.includes(location.campaignType)) {
-                return false;
-            }
-        }
-
-        if (alliesAlliance.length) {
-            if (!alliesAlliance.includes(location.alliesAlliance)) {
-                return false;
-            }
-        }
-
-        if (alliesFactions.length) {
-            if (!location.alliesFactions.some(faction => alliesFactions.includes(faction))) {
-                return false;
-            }
-        }
-
-        if (enemiesAlliance.length) {
-            if (!location.enemiesAlliances.some(alliance => enemiesAlliance.includes(alliance))) {
-                return false;
-            }
-        }
-
-        if (enemiesFactions.length) {
-            if (!location.enemiesFactions.some(faction => enemiesFactions.includes(faction))) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     public static updateInventory(

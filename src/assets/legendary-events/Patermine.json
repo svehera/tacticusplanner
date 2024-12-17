@@ -10,12 +10,12 @@
         "Defeat 30 Orks",
         "Defeat 75 Black Templars",
         "Defeat 100 Black Legion",
-        "Use abilities 15 times with Imperial  units, Deal 10k damage with Abilities",
+        "Use abilities 15 times with Imperial units, Deal 10k damage with Abilities",
         "Use abilities 20 times with Chaos units, Deal 15k damage with Abilities",
         "Use abilities 25 times with Xenos units, Deal 20k damage with Abilities",
-        "Play 3 Legendary Event Battles, Deal 25k Psychic damage",
-        "Play 3 Legendary Event Battles, Deal 25k Piercing damage",
-        "Play 3 Legendary Event Battles, Deal 25k Power damage"
+        "Play 3 Legendary Event Battles, Deal 25k Bolter damage",
+        "Play 3 Legendary Event Battles, Deal 25k Power damage",
+        "Play 3 Legendary Event Battles, Deal 25k Piercing damage"
     ],
     "premiumMissions": [
         "Win 1 battle without Summoning any units",

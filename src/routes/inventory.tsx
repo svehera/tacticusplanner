@@ -1,6 +1,14 @@
 ﻿import React, { useCallback, useContext, useMemo, useState } from 'react';
 
-import { FormControl, Input, InputAdornment } from '@mui/material';
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    FormControl,
+    Input,
+    InputAdornment,
+    TextField,
+} from '@mui/material';
 import { StaticDataService } from '../services';
 import { Rarity } from '../models/enums';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
@@ -18,6 +26,9 @@ import './inventory.scss';
 import { Conditional } from 'src/v2/components/conditional';
 import { ITableRow } from './inventory-models';
 import { InventoryItem } from 'src/routes/inventory-item';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { LeProgressOverviewMissions } from 'src/shared-components/le-progress-overview-missions';
+import { isMobile } from 'react-device-detect';
 
 interface Props {
     itemsFilter?: string[];
@@ -66,11 +77,28 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
         return map(groupBy(itemsList.filter(filterItem), 'rarity'), (items, rarity) => ({
             label: Rarity[+rarity],
             rarity: +rarity,
-            items: map(groupBy(items, 'alphabet'), (subItems, letter) => ({
-                letter,
-                subItems,
-            })),
-            itemsAll: items,
+            items: map(
+                groupBy(
+                    items.filter(x => !x.craftable),
+                    'alphabet'
+                ),
+                (subItems, letter) => ({
+                    letter,
+                    subItems,
+                })
+            ),
+            itemsCrafted: map(
+                groupBy(
+                    items.filter(x => x.craftable),
+                    'alphabet'
+                ),
+                (subItems, letter) => ({
+                    letter,
+                    subItems,
+                })
+            ),
+            itemsAll: items.filter(x => !x.craftable),
+            itemsAllCrafted: items.filter(x => x.craftable),
         }));
     }, [itemsList, filterItem]);
 
@@ -136,37 +164,89 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
 
             {itemsGrouped
                 .map(group => (
-                    <section key={group.rarity} className="inventory-items-group">
-                        <h2>
-                            <RarityImage rarity={group.rarity} /> {group.label}
-                        </h2>
-                        <article className="inventory-items">
-                            {viewPreferences.inventoryShowAlphabet &&
-                                group.items.map(group => (
-                                    <div key={group.letter} className="inventory-items-alphabet">
-                                        <div className="letter">{group.letter}</div>
-                                        {group.subItems.map(item => (
-                                            <InventoryItem
-                                                key={item.material}
-                                                data={item}
-                                                showIncDec={viewPreferences.inventoryShowPlusMinus}
-                                                dataUpdate={update}
-                                            />
-                                        ))}
-                                    </div>
-                                ))}
+                    <Accordion
+                        key={group.rarity}
+                        TransitionProps={{ unmountOnExit: true }}
+                        defaultExpanded={!isMobile && !viewPreferences.craftableItemsInInventory}>
+                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                            <h4 className="flex-box gap5">
+                                <RarityImage rarity={group.rarity} /> <span>{group.label}</span>
+                            </h4>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <section className="inventory-items-group">
+                                <article>
+                                    {viewPreferences.inventoryShowAlphabet && (
+                                        <div className="flex-box gap20">
+                                            <div className="inventory-items">
+                                                {group.itemsAllCrafted.length > 0 && <h3>Basic</h3>}
+                                                {group.items.map(group => (
+                                                    <div key={group.letter} className="inventory-items-alphabet">
+                                                        <div className="letter">{group.letter}</div>
+                                                        {group.subItems.map(item => (
+                                                            <InventoryItem
+                                                                key={item.material}
+                                                                data={item}
+                                                                showIncDec={viewPreferences.inventoryShowPlusMinus}
+                                                                dataUpdate={update}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            {group.itemsAllCrafted.length > 0 && (
+                                                <div className="inventory-items">
+                                                    <h3>Crafted</h3>
+                                                    {group.itemsCrafted.map(group => (
+                                                        <div key={group.letter} className="inventory-items-alphabet">
+                                                            <div className="letter">{group.letter}</div>
+                                                            {group.subItems.map(item => (
+                                                                <InventoryItem
+                                                                    key={item.material}
+                                                                    data={item}
+                                                                    showIncDec={viewPreferences.inventoryShowPlusMinus}
+                                                                    dataUpdate={update}
+                                                                />
+                                                            ))}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
 
-                            {!viewPreferences.inventoryShowAlphabet &&
-                                group.itemsAll.map(item => (
-                                    <InventoryItem
-                                        key={item.material}
-                                        data={item}
-                                        showIncDec={viewPreferences.inventoryShowPlusMinus}
-                                        dataUpdate={update}
-                                    />
-                                ))}
-                        </article>
-                    </section>
+                                    {!viewPreferences.inventoryShowAlphabet && (
+                                        <div className="flex-box gap20">
+                                            <div className="inventory-items">
+                                                {group.itemsAllCrafted.length > 0 && <h3>Basic</h3>}
+                                                {group.itemsAll.map(item => (
+                                                    <InventoryItem
+                                                        key={item.material}
+                                                        data={item}
+                                                        showIncDec={viewPreferences.inventoryShowPlusMinus}
+                                                        dataUpdate={update}
+                                                    />
+                                                ))}
+                                            </div>
+                                            {group.itemsAllCrafted.length > 0 && (
+                                                <div className="inventory-items">
+                                                    <h3>Crafted</h3>
+                                                    {group.itemsAllCrafted.map(item => (
+                                                        <InventoryItem
+                                                            key={item.material}
+                                                            data={item}
+                                                            showIncDec={viewPreferences.inventoryShowPlusMinus}
+                                                            dataUpdate={update}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
+                                </article>
+                            </section>
+                        </AccordionDetails>
+                    </Accordion>
                 ))
                 .reverse()}
         </>

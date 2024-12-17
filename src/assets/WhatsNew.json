@@ -1,6 +1,64 @@
 ﻿{
-    "currentVersion": "1.6.6",
+    "currentVersion": "1.6.7",
     "releaseNotes": [
+        {
+            "version": "1.6.7",
+            "date": "December 18",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added new collectable character",
+                    "subPoints": [
+                        "[Blood Angels] Nicodemus, Sanguinary Priest, unlockable in the ‘Insanguination’ event, starting December 22"
+                    ]
+                },
+                {
+                    "text": "Updated LRE dates",
+                    "subPoints": [
+                        "[Blood Angels] Mephiston, Lord of Death, unlockable in the second ‘Angels of Death‘ event, starting January 12"
+                    ]
+                },
+                {
+                    "text": "Updates according to balancing changes",
+                    "subPoints": [
+                        "Morvenn Vahl, stats changes and changed melee attack hits from 5 to 2",
+                        "Azrael, stats changes",
+                        "Pestillian, stats changes, Normal melee attack changed from Direct Damage to Toxic and Replaced Putrid Explosion trait with Explodes trait"
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated LRE master table and leaderboard tables to not take into account extra points from the Defeat All enemies requirement (SeventhSun)"
+                },
+                {
+                    "text": "For mobile devices reduced server push debounce time to one second instead of 10 seconds (Tani)"
+                },
+                {
+                    "text": "Added LRE track names to LRE teams table (SeventhSun)"
+                },
+                {
+                    "text": "Updated Inventory to show basic and crafted upgrades in separate columns (Peuchy)"
+                },
+                {
+                    "text": "Updated Inventory sections to be expandable and collapsable"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Corrected Anuphet stats values (Medon)"
+                },
+                {
+                    "text": "Fixed issue with Shards campaign nodes not being filtered according to the filter settings on the Daily Raids page (Peuchy)"
+                },
+                {
+                    "text": "Fixed issue with LRE UI x/14 shows as undefined/14 (SeventhSun)"
+                },
+                {
+                    "text": "Fixed issue with LRE Completed Tracks not filtered from teams (Kinks)"
+                }
+            ]
+        },
         {
             "version": "1.6.6",
             "date": "November 18",

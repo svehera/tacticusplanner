@@ -240,7 +240,7 @@ export const LreTeamsTable: React.FC<Props> = ({
                     columnDefs={columnsDefs}
                     components={components}
                     rowData={rows}
-                    headerHeight={75}
+                    headerHeight={90}
                     rowHeight={35}
                     getRowStyle={getRowStyle}
                     onGridReady={fitGridOnWindowResize(gridRef)}
@@ -254,7 +254,6 @@ export const LreTeamsTable: React.FC<Props> = ({
                         rows={selectedTeamsRows}
                         editTeam={editExistingTeam}
                         deleteTeam={deleteTeam}
-                        completedRequirements={[]}
                     />
                 </>
             ) : (

@@ -22,6 +22,7 @@ export const TrackRequirementCheck: React.FC<Props> = ({ restriction, checked, p
                 </Badge>
                 <LreReqImage iconId={restriction.iconId!} />
                 <span>{progress}</span>
+                <span style={{ fontSize: 10, maxHeight: 10 }}>{restriction.name}</span>
             </div>
         </AccessibleTooltip>
     );

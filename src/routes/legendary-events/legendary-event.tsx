@@ -11,7 +11,7 @@ import { useLreProgress } from 'src/shared-components/le-progress.hooks';
 import { ILreTrackProgress } from 'src/v2/features/lre/lre.models';
 
 export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
-    const { characters, viewPreferences, leSelectedTeams, leProgress } = useContext(StoreContext);
+    const { characters, viewPreferences, leSelectedTeams } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { model: lreProgress } = useLreProgress(legendaryEvent);
 
@@ -90,9 +90,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
 
     return (
         <div>
-            <div
-                style={{ display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: 15, marginBottom: 10 }}
-                key={legendaryEvent.id}>
+            <div style={{ display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: 15, marginBottom: 10 }}>
                 {viewPreferences.showAlpha && (
                     <LegendaryEventTrack
                         track={legendaryEvent.alpha}

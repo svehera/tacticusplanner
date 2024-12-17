@@ -10878,6 +10878,144 @@
             "Superaugmented Defences"
         ]
     },
+    "Nicodemus": {
+        "Stone I": [
+            "Healing Ointment",
+            "The Iron Phoenix",
+            "Canister of Chemicals",
+            "Weapon Anointment Oils",
+            "Armor Trim",
+            "Fine Purity Seal"
+        ],
+        "Stone II": [
+            "Field Ration",
+            "Healing Ointment",
+            "Combat Stimms",
+            "Blessed Weapon Oils",
+            "Purity Seal",
+            "Rebreather"
+        ],
+        "Stone III": [
+            "Enriched Rations",
+            "First Aid Kit",
+            "Frag Grenade",
+            "Basic Auxiliary Core",
+            "Blessed Tasset Plate",
+            "Cloak"
+        ],
+        "Iron I": [
+            "First Aid Kit",
+            "Reliquary of Protection",
+            "Combat Stimms",
+            "Locator Beacon",
+            "Oath Seal",
+            "Blessed Ceramite"
+        ],
+        "Iron II": [
+            "Enriched Rations",
+            "Sanctified Reliquary of Protection",
+            "Belt of Frag Grenades",
+            "Divinator Class Auspex",
+            "Artificer Tasset Plate",
+            "Cloak"
+        ],
+        "Iron III": [
+            "Box of Rations",
+            "The Gold Phoenix",
+            "Blood Shard Bolt",
+            "Powerful Auxiliary Core",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Bloodstone Tear",
+            "The Phoenix Ascendant",
+            "Box of Ammo",
+            "Classified Data-Slate",
+            "Blessed Purity Seal",
+            "Ceramite Bar"
+        ],
+        "Bronze II": [
+            "Bloodstone Pendant",
+            "Medical Supply Crate",
+            "Krak Grenade",
+            "Anointed Auxiliary Core",
+            "Artisan Plating",
+            "Fine Cloak"
+        ],
+        "Bronze III": [
+            "Metal Decorative Skull",
+            "Exquisite Medical Supplies",
+            "Quake Bolts",
+            "Sanctified Weapon Oils",
+            "Artisan of War Plating",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Bloodstone Pendant",
+            "Golden Ornamental Skull",
+            "Quake Bolts",
+            "Blessed Promethium Canister",
+            "Artisan of War Plating",
+            "Ceramite Sheet"
+        ],
+        "Silver II": [
+            "Blood Vial",
+            "Greater Reliquary of Protection",
+            "Decimator Bolts",
+            "Anointed Auxiliary Core",
+            "Artisan of War Plating",
+            "Decorated Cloak"
+        ],
+        "Silver III": [
+            "Bloodstone Pendant",
+            "Legendary Reliquary of Protection",
+            "Quake Bolts",
+            "Digital Weapons",
+            "Purity Seal of the Primarch",
+            "Ceramite Plates"
+        ],
+        "Gold I": [
+            "Bloodstone Icon",
+            "Tome of Arcane Knowledge",
+            "Archeotech Bionics",
+            "Relic Auxiliary Core",
+            "Angelic Plating",
+            "Divine Cloak"
+        ],
+        "Gold II": [
+            "Icon of the Angel",
+            "Legendary Reliquary of Protection",
+            "Decimator Bolts",
+            "Digital Weapons",
+            "Angelic Plating",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold III": [
+            "Bloodstone Icon",
+            "Tome of Arcane Knowledge",
+            "Archangel's Shard",
+            "Blessed Promethium Canister",
+            "Visage of Death",
+            "Divine Cloak"
+        ],
+        "Diamond I": [
+            "Icon of the Angel",
+            "Grand Strategy",
+            "Archangel's Shard",
+            "Hyperstim",
+            "Visage of Death",
+            "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Icon of the Angel",
+            "Superaugmented Constitution",
+            "Archangel's Shard",
+            "Superaugmented Strength",
+            "Visage of Death",
+            "Superaugmented Defences"
+        ]
+    },
     "Titus": {
         "Stone I": [
             "Ropes and Chains",

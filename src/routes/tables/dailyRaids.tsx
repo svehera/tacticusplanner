@@ -134,10 +134,11 @@ export const DailyRaids = () => {
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
                 raidedLocations: dailyRaids.raidedLocations,
+                filters: dailyRaids.filters,
             },
             ...shardsGoals
         );
-    }, [shardsGoals, dailyRaidsPreferences]);
+    }, [shardsGoals, dailyRaidsPreferences, dailyRaids.filters]);
 
     const actualEnergy = useMemo(() => {
         return dailyRaidsPreferences.dailyEnergy - estimatedShards.energyPerDay - dailyRaidsPreferences.shardsEnergy;
