@@ -26,6 +26,7 @@ import { guildReducer } from 'src/reducers/guildReducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
 import { enable as enableDarkMode, disable as disableDarkMode } from 'darkreader';
 import { teamsReducer } from 'src/reducers/teams.reducer';
+import { isMobile } from 'react-device-detect';
 
 export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const { isAuthenticated, setUser, setUserInfo, logout } = useAuth();
@@ -192,28 +193,31 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
         if (isAuthenticated) {
             clearTimeout(saveTimeoutId);
-            const timeoutId = setTimeout(() => {
-                setUserDataApi(storeValue)
-                    .then(({ data }) => {
-                        const { modifiedDateTicks } = data;
-                        localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
-                        enqueueSnackbar('Pushed local data to server.', { variant: 'success' });
-                    })
-                    .catch((err: AxiosError<IErrorResponse>) => {
-                        if (err.response?.status === 401) {
-                            enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
-                        } else if (err.response?.status === 409) {
-                            enqueueSnackbar(
-                                'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
-                                { variant: 'error' }
-                            );
-                        } else {
-                            enqueueSnackbar('Failed to push data to server. Please do manual back-up.', {
-                                variant: 'error',
-                            });
-                        }
-                    });
-            }, 10000);
+            const timeoutId = setTimeout(
+                () => {
+                    setUserDataApi(storeValue)
+                        .then(({ data }) => {
+                            const { modifiedDateTicks } = data;
+                            localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
+                            enqueueSnackbar('Pushed local data to server.', { variant: 'success' });
+                        })
+                        .catch((err: AxiosError<IErrorResponse>) => {
+                            if (err.response?.status === 401) {
+                                enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
+                            } else if (err.response?.status === 409) {
+                                enqueueSnackbar(
+                                    'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
+                                    { variant: 'error' }
+                                );
+                            } else {
+                                enqueueSnackbar('Failed to push data to server. Please do manual back-up.', {
+                                    variant: 'error',
+                                });
+                            }
+                        });
+                },
+                isMobile ? 1000 : 10000
+            );
             setSaveTimeoutId(timeoutId);
         }
     }, [modified]);

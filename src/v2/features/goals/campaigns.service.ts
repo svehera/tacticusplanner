@@ -2,6 +2,7 @@
     ICampaignBattleComposed,
     ICampaignConfigs,
     ICampaignsData,
+    IDailyRaidsFilters,
     IDropRate,
     IRecipeData,
 } from 'src/models/interfaces';
@@ -79,6 +80,80 @@ export class CampaignsService {
         }
 
         return result;
+    }
+
+    public static passLocationFilter(
+        location: ICampaignBattleComposed,
+        filters: IDailyRaidsFilters,
+        materialRarity?: Rarity
+    ): boolean {
+        const {
+            alliesFactions,
+            alliesAlliance,
+            enemiesAlliance,
+            enemiesFactions,
+            campaignTypes,
+            upgradesRarity,
+            slotsCount,
+            enemiesTypes,
+            enemiesCount,
+        } = filters;
+
+        if (enemiesCount?.length) {
+            if (!enemiesCount.includes(location.enemiesTotal)) {
+                return false;
+            }
+        }
+
+        if (enemiesTypes?.length) {
+            if (!location.enemiesTypes.some(enemyType => enemiesTypes.includes(enemyType))) {
+                return false;
+            }
+        }
+
+        if (slotsCount && slotsCount.length) {
+            if (!slotsCount.includes(location.slots ?? 5)) {
+                return false;
+            }
+        }
+
+        if (upgradesRarity.length && materialRarity) {
+            if (!upgradesRarity.includes(materialRarity)) {
+                return false;
+            }
+        }
+
+        if (campaignTypes.length) {
+            if (!campaignTypes.includes(location.campaignType)) {
+                return false;
+            }
+        }
+
+        if (alliesAlliance.length) {
+            if (!alliesAlliance.includes(location.alliesAlliance)) {
+                return false;
+            }
+        }
+
+        if (alliesFactions.length) {
+            if (!location.alliesFactions.some(faction => alliesFactions.includes(faction))) {
+                return false;
+            }
+        }
+
+        if (enemiesAlliance.length) {
+            if (!location.enemiesAlliances.some(alliance => enemiesAlliance.includes(alliance))) {
+                return false;
+            }
+        }
+
+        if (enemiesFactions.length) {
+            if (!location.enemiesFactions.some(faction => enemiesFactions.includes(faction))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private static getEnemiesAndAllies(campaign: Campaign): {

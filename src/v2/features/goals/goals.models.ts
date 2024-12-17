@@ -7,7 +7,12 @@
     Rarity,
     RarityStars,
 } from 'src/models/enums';
-import { ICampaignBattleComposed, ICampaignsProgress, IDailyRaidsPreferences } from 'src/models/interfaces';
+import {
+    ICampaignBattleComposed,
+    ICampaignsProgress,
+    IDailyRaidsFilters,
+    IDailyRaidsPreferences,
+} from 'src/models/interfaces';
 import { ICharacterAbilitiesMaterialsTotal, IXpEstimate } from 'src/v2/features/characters/characters.models';
 import { IMowMaterialsTotal } from 'src/v2/features/lookup/lookup.models';
 
@@ -113,6 +118,7 @@ export interface IEstimatedAscensionSettings {
     raidedLocations: IItemRaidLocation[];
     campaignsProgress: ICampaignsProgress;
     preferences: IDailyRaidsPreferences;
+    filters?: IDailyRaidsFilters;
 }
 
 export interface IEstimatedShards {

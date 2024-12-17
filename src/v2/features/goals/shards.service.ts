@@ -57,7 +57,9 @@ export class ShardsService {
             const previousShardsTokens = sum(result.filter((_, index) => index < i).map(x => x.onslaughtTokensTotal));
             const unlockedLocations = material.possibleLocations.filter(location => {
                 const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
-                return location.nodeNumber <= campaignProgress;
+                const isPassFilter =
+                    !settings.filters || CampaignsService.passLocationFilter(location, settings.filters);
+                return location.nodeNumber <= campaignProgress && isPassFilter;
             });
 
             const raidsLocations =
