@@ -254,7 +254,6 @@ export const LreTeamsTable: React.FC<Props> = ({
                         rows={selectedTeamsRows}
                         editTeam={editExistingTeam}
                         deleteTeam={deleteTeam}
-                        completedRequirements={[]}
                     />
                 </>
             ) : (

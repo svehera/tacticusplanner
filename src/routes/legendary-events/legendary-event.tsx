@@ -11,7 +11,7 @@ import { useLreProgress } from 'src/shared-components/le-progress.hooks';
 import { ILreTrackProgress } from 'src/v2/features/lre/lre.models';
 
 export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
-    const { characters, viewPreferences, leSelectedTeams, leProgress } = useContext(StoreContext);
+    const { characters, viewPreferences, leSelectedTeams } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { model: lreProgress } = useLreProgress(legendaryEvent);
 
