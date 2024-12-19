@@ -83,6 +83,18 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [guildWar, dispatchGuildWar] = React.useReducer(guildWarReducer, globalState.guildWar);
     const [guild, dispatchGuild] = React.useReducer(guildReducer, globalState.guild);
 
+    function startLoading(text?: string): void {
+        globalState.loadingText = text;
+        globalState.loading = true;
+        setGlobalState(globalState);
+    }
+
+    function endLoading(): void {
+        globalState.loadingText = undefined;
+        globalState.loading = false;
+        setGlobalState(globalState);
+    }
+
     function wrapDispatch<T>(dispatch: React.Dispatch<T>): React.Dispatch<T> {
         return (action: T) => {
             requestAnimationFrame(() => {
@@ -141,6 +153,8 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 setGlobalState(data);
             },
             seenAppVersion: wrapDispatch(setSeenAppVersion),
+            startLoading,
+            endLoading,
         }),
         [
             dispatchCharacters,
@@ -256,6 +270,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     modifiedDateTicks: serverModifiedDateTicks,
                     pendingTeamsCount,
                     rejectedTeamsCount,
+                    snowprintIdConnected,
                 } = response.data;
                 const serverLastModified = new Date(lastModifiedDate);
                 const isFirstLogin = !data;
@@ -267,6 +282,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     userId: id,
                     pendingTeamsCount,
                     rejectedTeamsCount,
+                    snowprintIdConnected,
                 });
                 const localModifiedDateTicks = localStorage.getItem('TP-ModifiedDateTicks');
 

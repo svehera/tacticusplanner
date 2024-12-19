@@ -14,7 +14,7 @@ import { LoginUserDialog } from './login-user-dialog';
 import { useAuth } from '../../contexts/auth';
 import { enqueueSnackbar } from 'notistack';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
-import { IPersonalData2 } from '../../models/interfaces';
+import { ICharacter2, IPersonalData2 } from '../../models/interfaces';
 import { GlobalState } from '../../models/global-state';
 import { RestoreBackupDialog } from './restore-backup-dialog';
 import ListItemText from '@mui/material/ListItemText';
@@ -26,10 +26,12 @@ import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import { UserRole } from 'src/models/enums';
 import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-dialog';
 import { isMobile } from 'react-device-detect';
+import { makeApiCall } from 'src/v2/api/makeApiCall';
+import { IMow } from 'src/v2/features/characters/characters.models';
 
 export const UserMenu = () => {
     const store = useContext(StoreContext);
-    const { setStore } = useContext(DispatchContext);
+    const dispatch = useContext(DispatchContext);
     const { isAuthenticated, logout, username, userInfo } = useAuth();
     const inputRef = useRef<HTMLInputElement>(null);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
@@ -85,7 +87,7 @@ export const UserMenu = () => {
                     const personalData: IPersonalData2 = convertData(JSON.parse(content));
                     personalData.modifiedDate = new Date();
 
-                    setStore(new GlobalState(personalData), true, false);
+                    dispatch.setStore(new GlobalState(personalData), true, false);
                     enqueueSnackbar('Import successful', { variant: 'success' });
                 } catch (error) {
                     enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
@@ -175,13 +177,25 @@ export const UserMenu = () => {
         };
     }
 
+    async function syncWithTacticus() {
+        dispatch.startLoading('Syncing data via Tacticus API. Please wait...');
+        const result = await makeApiCall<{ characters: ICharacter2[]; mows: IMow[] }>('GET', 'users/playerData');
+        dispatch.endLoading();
+
+        if (result.data) {
+            dispatch.mows({ type: 'SyncWithTacticus', mows: result.data.mows });
+            dispatch.characters({ type: 'SyncWithTacticus', characters: result.data.characters });
+            enqueueSnackbar('Successfully synced with Tacticus API', { variant: 'success' });
+        } else {
+            enqueueSnackbar('There was an error while syncing with Tacticus API', { variant: 'error' });
+        }
+    }
+
     return (
         <Box sx={{ display: 'flex', textAlign: 'center', justifyContent: 'flex-end' }}>
             <input ref={inputRef} style={{ display: 'none' }} type="file" accept=".json" onChange={handleFileUpload} />
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <span style={{ fontSize: 16, fontWeight: 700 }}>Hi, {username}</span>
-
-                {/*<Badge variant="dot" color="warning" invisible={!userInfo.pendingTeamsCount}>*/}
                 <Badge
                     color={hasRejectedGuides ? 'error' : 'warning'}
                     badgeContent={hasRejectedGuides ? userInfo.rejectedTeamsCount : userInfo.pendingTeamsCount}>
@@ -224,12 +238,32 @@ export const UserMenu = () => {
                         </MenuItem>
                     </div>
                 ) : (
-                    <MenuItem onClick={() => logout()}>
-                        <ListItemIcon>
-                            <LogoutIcon />
-                        </ListItemIcon>
-                        <ListItemText>Logout</ListItemText>
-                    </MenuItem>
+                    <>
+                        <MenuItem onClick={() => logout()}>
+                            <ListItemIcon>
+                                <LogoutIcon />
+                            </ListItemIcon>
+                            <ListItemText>Logout</ListItemText>
+                        </MenuItem>
+
+                        <Divider />
+
+                        {userInfo.snowprintIdConnected ? (
+                            <MenuItem onClick={syncWithTacticus}>
+                                <ListItemIcon>
+                                    <UploadIcon />
+                                </ListItemIcon>
+                                <ListItemText>Sync with Tacticus</ListItemText>
+                            </MenuItem>
+                        ) : (
+                            <MenuItem>
+                                <ListItemIcon>
+                                    <UploadIcon />
+                                </ListItemIcon>
+                                <ListItemText>Connect Snowprint ID</ListItemText>
+                            </MenuItem>
+                        )}
+                    </>
                 )}
 
                 <Divider />

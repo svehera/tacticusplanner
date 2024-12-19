@@ -12,6 +12,10 @@ export type MowsAction =
           mowId: string;
           abilities: [primary: number, secondary: number];
       }
+    | {
+          type: 'SyncWithTacticus';
+          mows: IMowDb[];
+      }
     | SetStateAction<IMow[]>;
 
 export const mowsReducer = (state: IMow[], action: MowsAction) => {
@@ -34,6 +38,29 @@ export const mowsReducer = (state: IMow[], action: MowsAction) => {
                 ...mow,
                 stars: mow.stars <= rarityStars ? rarityStars : mow.stars,
             };
+
+            return [...state];
+        }
+        case 'SyncWithTacticus': {
+            const { mows } = action;
+
+            for (const mow of mows) {
+                const existingMowIndex = state.findIndex(x => x.id === mow.id);
+                const existingMow = state[existingMowIndex];
+
+                if (!existingMow) {
+                    continue;
+                }
+                state[existingMowIndex] = {
+                    ...existingMow,
+                    unlocked: mow.unlocked,
+                    rarity: mow.rarity,
+                    stars: mow.stars,
+                    primaryAbilityLevel: mow.primaryAbilityLevel,
+                    secondaryAbilityLevel: mow.secondaryAbilityLevel,
+                    shards: mow.shards,
+                };
+            }
 
             return [...state];
         }
