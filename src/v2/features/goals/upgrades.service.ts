@@ -937,7 +937,6 @@ export class UpgradesService {
             console.log("null upgrade: '" + key + "'");
             return null;
         }
-        const canExpand: boolean = true;
         const expandedRecipe: IRecipeExpandedUpgrade = {
             id: upgrade.id,
             label: upgrade.label,
