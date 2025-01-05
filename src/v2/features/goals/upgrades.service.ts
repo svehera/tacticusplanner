@@ -11,6 +11,8 @@
     IEstimatedUpgrades,
     IItemRaidLocation,
     IRankLookup,
+    IRecipeExpandedUpgrade,
+    IRecipeExpandedUpgradeData,
     IUnitUpgrade,
     IUnitUpgradeRank,
     IUpgradeRaid,
@@ -18,12 +20,16 @@
     IUpgradesRaidsDay,
 } from 'src/v2/features/goals/goals.models';
 import {
+    CampaignsProgressionService,
+} from 'src/v2/features/goals/campaigns-progression';
+import {
     ICampaignBattle,
     ICampaignBattleComposed,
     ICampaignsData,
     ICampaignsProgress,
     IDailyRaidsFilters,
     IEstimatedRanksSettings,
+    IMaterial,
     IMaterialRecipeIngredient,
     IRankUpData,
     IRecipeData,
@@ -38,6 +44,7 @@ import recipeData from 'src/v2/data/recipeData.json';
 import battleData from 'src/assets/battleData.json';
 import { getEnumValues, rankToString } from 'src/shared-logic/functions';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
+import _ from 'lodash';
 
 export class UpgradesService {
     static readonly recipeData: IRecipeData = recipeData;
@@ -45,6 +52,7 @@ export class UpgradesService {
     static readonly battleData: ICampaignsData = battleData;
     static readonly baseUpgradesData: IBaseUpgradeData = this.composeBaseUpgrades();
     static readonly craftedUpgradesData: ICraftedUpgradeData = this.composeCraftedUpgrades();
+    static readonly recipeExandedUpgradeData: IRecipeExpandedUpgradeData = this.expandRecipeData();
 
     static readonly rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
     static getUpgradesEstimatedDays(
@@ -53,7 +61,7 @@ export class UpgradesService {
     ): IEstimatedUpgrades {
         const inventoryUpgrades = cloneDeep(settings.upgrades);
 
-        const unitsUpgrades = this.getUpgrades(inventoryUpgrades, goals);
+        const unitsUpgrades = this.getUpgrades(inventoryUpgrades, goals, settings);
 
         const combinedBaseMaterials = this.combineBaseMaterials(unitsUpgrades);
         this.populateLocationsData(combinedBaseMaterials, settings);
@@ -252,16 +260,143 @@ export class UpgradesService {
         return resultDays;
     }
 
+    public static baseUpgradeToString(upgrade: IBaseUpgrade): string {
+        var ret: string = "id: " + upgrade.id +
+            "\nlabel: " + upgrade.label +
+            "\nrarity: " + upgrade.rarity +
+            "\niconPath: " + upgrade.iconPath +
+            "\ncrafted: " + upgrade.crafted +
+            "\nstat: " + upgrade.stat;
+        for (const location of upgrade.locations) {
+            ret += "\nlocation: " + location.id;
+        }
+        return ret;
+    }
+    public static craftedUpgradeToString(upgrade: ICraftedUpgrade): string {
+        var ret: string = "id: " + upgrade.id +
+            "\nlabel: " + upgrade.label +
+            "\nrarity: " + upgrade.rarity +
+            "\niconPath: " + upgrade.iconPath +
+            "\ncrafted: " + upgrade.crafted +
+            "\nstat: " + upgrade.stat;
+        for (const material of upgrade.recipe) {
+            ret += "\n  " + material.count + "x " + material.id;
+        }
+        return ret;
+    }
+
+    // Given a material and quantity, returns how much energy it would
+    // take to farm the material if we choose the cheapest strategy
+    // guaranteed to pay. Which basically means as far as nodes go,
+    // elite > early > mirror > normal.
+    private static getCheapestEnergyToFarm(
+        material: string, count: number, farmableLocs: string[]
+    ): number {
+        if (farmableLocs.length === 0) {
+            return -1;
+        }
+        const campaignNodes = CampaignsService.getCampaignComposed();
+        const energyCost = new Map<string, int>([["Elite", 10], ["Early", 5], ["Mirror", 6], ["Normal", 6]]);
+        const normalDropRates = new Map<Rarity, number>(
+            [[Rarity.Common, 3 / 4.0], [Rarity.Uncommon, 4 / 7.0], [Rarity.Rare, 1 / 5.0], [Rarity.Epic, 1 / 7.0], [Rarity.Legendary, 1 / 12.0]]);
+        const mirrorDropRates = new Map<Rarity, number>(
+            [[Rarity.Common, 3 / 4.0], [Rarity.Uncommon, 4 / 7.0], [Rarity.Rare, 1 / 5.0], [Rarity.Epic, 1 / 7.0], [Rarity.Legendary, 1 / 12.0]]);
+        const eliteDropRates = new Map<string, Map<Rarity, number>>(
+            [[Rarity.Common, 3 / 2.0], [Rarity.Uncommon, 1.25], [Rarity.Rare, 13 / 12.0], [Rarity.Epic, 2 / 3.0], [Rarity.Legendary, 1 / 3.0]]);
+        const hasElite = farmableLocs.reduce((acc, loc) => acc || campaignNodes[loc].campaignType === CampaignType.Elite, false);
+        const hasMirror = farmableLocs.reduce((acc, loc) => acc || campaignNodes[loc].campaignType === CampaignType.Mirror, false);
+        const hasEarly = farmableLocs.reduce((acc, loc) => acc || (campaignNodes[loc].campaign === 'Indomitus' && campaignNodes.nodeNumber < 30), false);
+        if (hasElite) {
+            return 10 * Math.ceil(count / eliteDropRates.get(campaignNodes[farmableLocs[0]].rarityEnum));
+        } else if (hasEarly) {
+            return 5 * Math.ceil(count / normalDropRates.get(campaignNodes[farmableLocs[0]].rarityEnum));
+        } else if (hasMirror) {
+            return 6 * Math.ceil(count / mirrorDropRates.get(campaignNodes[farmableLocs[0]].rarityEnum));
+        } else {
+            return 6 * Math.ceil(count / normalDropRates.get(campaignNodes[farmableLocs[0]].rarityEnum));
+        }
+    }
+
+    // Holds information about the cheapest path to rank up a unit.
+    static CheapestRankUpInfo = class {
+        public unitId: string;
+        public totalEnergy: number;
+        public upgrades: Record<string, number>;
+        public unbeatenLocs: string[];
+        public constructor(unitId: string, totalEnergy: number, upgrades: Record<string, number>, unbeatenLocs: string[]) {
+            this.unitId = unitId;
+            this.totalEnergy = totalEnergy;
+            this.upgrades = upgrades;
+            this.unbeatenLocs = unbeatenLocs;
+        }
+    };
+
+    // Given the specified campaign progression, determines the cheapest
+    // cost to rank up a unit.
+    public static getCheapestRankUpCostWithCurrentCampaignProgression(
+        goal: ICharacterUpgradeRankGoal | ICharacterUpgradeMow,
+        baseMaterials: Record<string, number>,
+        settings: IEstimatedRanksSettings
+    ): CheapestRankUpInfo {
+        const upgradeLocs = this.getUpgradesLocations();
+        const campaignNodes = CampaignsService.getCampaignComposed();
+        var totalEnergy: number = 0;
+        var unbeatenLocs: string[] = [];
+        for (const [material, count] of Object.entries(baseMaterials)) {
+            var line = "  " + count + "x " + material;
+            var farmableLocs: string[] = [];
+            for (const index in upgradeLocs[material]) {
+                var loc: ICampaignBattleComposed = upgradeLocs[material][index];
+                if (settings.campaignsProgress[campaignNodes[loc].campaign] >= campaignNodes[loc].nodeNumber) {
+                    farmableLocs.push(loc);
+                } else {
+                    unbeatenLocs.push(loc);
+                }
+            }
+            if (farmableLocs.length > 0) {
+                totalEnergy += this.getCheapestEnergyToFarm(material, count, farmableLocs);
+            } else {
+                totalEnergy = -1;
+                break;
+            }
+        }
+        if (goal.rankEnd !== undefined && totalEnergy >= 0) {
+            console.log("Ranking up " + goal.unitName + " from " + goal.rankStart + " to " + goal.rankEnd + " costs " + totalEnergy + " energy using existing inventory.");
+        } else if (totalEnergy >= 0) {
+            console.log("Upgrading " + goal.unitName + " costs " + totalEnergy + " energy using existing inventory.");
+        } else {
+            console.log("Ranking up " + goal.unitName + " from " + goal.rankStart + " to " + goal.rankEnd +
+                " is currently blocked, because there are unfarmable materials.");
+        }
+        return new this.CheapestRankUpInfo(goal.unitId, totalEnergy, baseMaterials, unbeatenLocs);
+    }
+
+    static CheapestRankUpCost = class {
+        public unitId: string;
+        public rankUpInfo: CheapestRankUpInfo;
+        public upgrades: Record<string, number>;
+        public constructor(unitId: string, rankUpInfo: CheapestRankUpInfo, upgrades: Record<string, number>) {
+            this.unitId = unitId;
+            this.rankUpInfo = rankUpInfo;
+            this.upgrades = upgrades;
+        }
+    }
+
     public static getUpgrades(
         inventoryUpgrades: Record<string, number>,
-        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>,
+        settings: IEstimatedRanksSettings
     ): IUnitUpgrade[] {
-        return goals.map(goal => {
+        var craftedUpgrades = this.composeCraftedUpgrades();
+        var totalCost = 0;
+        var totalCostWithInventory = 0;
+        var result: IUnitUpgrade[] = [];
+        for (const goal of goals) {
             const upgradeRanks =
                 goal.type === PersonalGoalType.UpgradeRank
                     ? this.getCharacterUpgradeRank(goal)
                     : this.getMowUpgradeRank(goal);
-            const baseUpgradesTotal = this.getBaseUpgradesTotal(upgradeRanks, inventoryUpgrades);
+            const baseUpgradesTotal: Record<string, number> = this.getBaseUpgradesTotal(upgradeRanks, inventoryUpgrades);
 
             if (goal.upgradesRarity.length) {
                 // remove upgrades that do not match to selected rarities
@@ -288,15 +423,17 @@ export class UpgradesService {
                 return result;
             });
 
-            return {
-                goalId: goal.goalId,
-                unitId: goal.unitId,
-                label: goal.unitName,
-                upgradeRanks,
-                baseUpgradesTotal,
-                relatedUpgrades,
-            };
-        });
+            result.push(
+                {
+                    goalId: goal.goalId,
+                    unitId: goal.unitId,
+                    label: goal.unitName,
+                    upgradeRanks,
+                    baseUpgradesTotal,
+                    relatedUpgrades,
+                });
+        }
+        return result;
     }
 
     private static getTotalEstimates(
@@ -580,6 +717,10 @@ export class UpgradesService {
         return this.baseUpgradesData[upgradeId] ?? this.craftedUpgradesData[upgradeId];
     }
 
+    /**
+     * Applies all existing inventory in `inventoryUpgrades`, then returns the total
+     * count, per non-craftable material, required to reach the rank-up goal.
+     */
     private static getBaseUpgradesTotal(
         upgradeRanks: IUnitUpgradeRank[],
         inventoryUpgrades: Record<string, number>
@@ -656,6 +797,12 @@ export class UpgradesService {
         return baseUpgradesTotal;
     }
 
+    /**
+     * @param rankLookup The start and end rank of the goal, as well as any
+     *                   materials that have already been applied.
+     * @returns The number of each upgrade material necessary to hit the
+     *          upgrade rank.
+     */
     public static getCharacterUpgradeRank(rankLookup: IRankLookup): IUnitUpgradeRank[] {
         const characterRankUpData = this.rankUpData[rankLookup.unitName] ?? {};
 
@@ -694,7 +841,13 @@ export class UpgradesService {
         return upgradeRanks;
     }
 
-    private static getMowUpgradeRank(rankLookup: ICharacterUpgradeMow): IUnitUpgradeRank[] {
+    /**
+     * @param rankLookup The start and end ability level of the goal, as well as any
+     *                   materials that have already been applied.
+     * @returns The number of each upgrade material necessary to level up the
+     *          abilities.
+     */
+    public static getMowUpgradeRank(rankLookup: ICharacterUpgradeMow): IUnitUpgradeRank[] {
         const primaryUpgrades = MowLookupService.getUpgradesRaw(
             rankLookup.unitId,
             rankLookup.primaryStart,
@@ -718,6 +871,10 @@ export class UpgradesService {
         ];
     }
 
+    /**
+     * Returns an IBaseUpgradeData that holds non-craftable materials only. The
+     * locations are sorted in the order elite < early indom < mirror < normal.
+     */
     private static composeBaseUpgrades(): IBaseUpgradeData {
         const result: IBaseUpgradeData = {};
         const upgrades = Object.keys(this.recipeData);
@@ -726,10 +883,12 @@ export class UpgradesService {
         for (const upgradeName of upgrades) {
             const upgrade = this.recipeData[upgradeName];
 
+            // Filter out craftable upgrades, we only return base upgrades from here.
             if (upgrade.craftable) {
                 continue;
             }
 
+            // Get all the locations where this particular upgrade can be farmed.
             const locations = upgradeLocationsShort[upgrade.material] ?? [];
             const locationsComposed = orderBy(
                 locations.map(location => CampaignsService.campaignsComposed[location]),
@@ -751,6 +910,13 @@ export class UpgradesService {
         return result;
     }
 
+    /** 
+     * Returns an ICraftedUpgradeData that holds craftable materials only. The
+     * recipe contained is not expanded. For example, Infernal Armor Trim
+     * requires Daemonic Armor Trim, which requires Blasephemous Armor trim.
+     * Infernal Armor Trim's recipe only mentions the 2x Daemonic Armor Trim,
+     * not the 18x Blasphemous Armor Trim.
+     */
     private static composeCraftedUpgrades(): ICraftedUpgradeData {
         const result: ICraftedUpgradeData = {};
         const upgrades = Object.keys(this.recipeData);
@@ -784,6 +950,142 @@ export class UpgradesService {
         }
 
         return result;
+    }
+
+    /**
+     * Returns the expanded recipes for all materials, keyed by
+     * material ID. If a material is uncraftable, it is included,
+     * and expandedRecipe is empty.
+     */
+    private static expandRecipeData(): IRecipeExpandedUpgradeData {
+        const result: IRecipeExpandedUpgradeData = {};
+
+        result["Gold"] = {
+            id: "Gold",
+            label: "Gold",
+            rarity: Rarity.Common,
+            iconPath: "gold",
+            expandedRecipe: {},
+            crafted: false,
+            stat: "Gold",
+        };
+        // First fill in all of the base upgrades.
+        for (const key in this.baseUpgradesData) {
+            const baseUpgrade = this.baseUpgradesData[key];
+            result[baseUpgrade.id] = {
+                id: baseUpgrade.id,
+                label: baseUpgrade.label,
+                rarity: baseUpgrade.rarity,
+                iconPath: baseUpgrade.iconPath,
+                expandedRecipe: {},
+                crafted: false,
+                stat: baseUpgrade.stat,
+            }
+        }
+        // Now fill in all of the craftable upgrades that only have base upgrade materials.
+        for (const key in this.craftedUpgradesData) {
+            const craftedUpgrade = this.craftedUpgradesData[key];
+            if (craftedUpgrade.craftedUpgrades.length > 0) {
+                // We have to use more expansion, which we handle further below.
+                continue;
+            }
+            var expandedRecipe: Record<string, number> = {};
+            craftedUpgrade.recipe.forEach(recipeItem => { expandedRecipe[recipeItem.id] = recipeItem.count; });
+            result[craftedUpgrade.id] = {
+                id: craftedUpgrade.id,
+                label: craftedUpgrade.label,
+                rarity: craftedUpgrade.rarity,
+                iconPath: craftedUpgrade.iconPath,
+                expandedRecipe: expandedRecipe,
+                crafted: true,
+                stat: craftedUpgrade.stat,
+            };
+        }
+
+        // Finally, perform a BFS to fill in all expansions that
+        // have more than one additional layer.
+        //
+        // As of 2025-01-01, it takes three passes to fully expand all recipe data.
+        var passes: number = 0;
+        for (var moreToExpand: boolean = true; moreToExpand;) {
+            ++passes;
+            moreToExpand = false;
+            for (const key in this.craftedUpgradesData) {
+                if (result.hasOwnProperty(key)) continue;
+                const expandedRecipe: IRecipeExpandedUpgrade | null = this.expandRecipe(key, result);
+                if (!expandedRecipe) {
+                    moreToExpand = true;
+                    continue;
+                }
+                result[key] = expandedRecipe;
+                moreToExpand = true;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Adds the specified number of instances of the material to the recipe, initializing
+     * the entry if necessary.
+     * @param expandedRecipe The recipe to which we should add the item.
+     * @param recipeItem The material and count to add.
+     */
+    private static addIngredientsToExpandedRecipe(
+        expandedRecipe: IRecipeExpandedUpgrade, recipeItem: IMaterialRecipeIngredient): void {
+        if (expandedRecipe.expandedRecipe.hasOwnProperty(recipeItem.id)) {
+            expandedRecipe.expandedRecipe[recipeItem.id] += recipeItem.count;
+        } else {
+            expandedRecipe.expandedRecipe[recipeItem.id] = recipeItem.count;
+        }
+    }
+
+    /**
+     * Tries to expand the recipe for the given upgrade material
+     * using the results in expandedRecipeData.
+     * @param key The ID of the upgrade material to expand. 
+     * @param expandedRecipeData The existing materials we have already expanded.
+     * @returns the expanded data, or null if the recipe cannot be expanded
+     *          because one or more ingredients have yet to be expanded.
+     */
+    private static expandRecipe(key: string, expandedRecipeData: IRecipeExpandedUpgradeData): IRecipeExpandedUpgrade | null {
+        const upgrade = this.craftedUpgradesData[key];
+        if (!upgrade) {
+            console.log("null upgrade: '" + key + "'");
+            return null;
+        }
+        var canExpand: boolean = true;
+        var expandedRecipe: IRecipeExpandedUpgrade = {
+            id: upgrade.id,
+            label: upgrade.label,
+            rarity: upgrade.rarity,
+            iconPath: upgrade.iconPath,
+            expandedRecipe: {},
+            crafted: true,
+            stat: upgrade.stat,
+        };
+        var moreToExpand = false;
+        for (const recipeItem of upgrade.recipe) {
+            if (!expandedRecipeData.hasOwnProperty(recipeItem.id)) {
+                // We haven't expanded an ingredient yet, so we can't expand this recipe.
+                moreToExpand = true;
+                break;
+            }
+            if (!expandedRecipeData[recipeItem.id].crafted) {
+                // Simple ingredient, just add it.
+                this.addIngredientsToExpandedRecipe(expandedRecipe, { id: recipeItem.id, count: recipeItem.count });
+            } else {
+                for (const [material, count] of Object.entries(expandedRecipeData[recipeItem.id].expandedRecipe)) {
+                    this.addIngredientsToExpandedRecipe(expandedRecipe,
+                        { id: material, count: recipeItem.count * count });
+                }
+            }
+        }
+        if (moreToExpand) return null;
+        return expandedRecipe;
+    }
+
+    public static getUpgradeMaterial(material: string): IMaterial | undefined {
+        return recipeData[material];
     }
 
     private static getRecipe({ material: id, count: upgradeCount }: IMaterialRecipeIngredient): {
@@ -833,6 +1135,11 @@ export class UpgradesService {
         };
     }
 
+    // For each upgrade, returns a list of all nodes from which it can be farmed.
+    //
+    // The map key is the material name (e.g. "Classified Data-Slate") or, for character
+    // shards, the character name (e.g. "Aleph-Null"), the map value is
+    // ICampaignBattle.shortName (e.g. SHME31 for Saim-Hann Mirror Elite 31).
     static getUpgradesLocations(): Record<string, string[]> {
         const result: Record<string, string[]> = {};
         const battles: ICampaignBattle[] = [];
@@ -860,9 +1167,7 @@ export class UpgradesService {
             for (const upgradeId in upgrades) {
                 const upgrade = upgrades[upgradeId];
                 const requiredCount = upgrade.countByGoalId[goal.goalId];
-                if (!requiredCount) {
-                    continue;
-                }
+                if (!requiredCount) continue;
                 const acquiredCount = inventoryUpgrades[upgradeId] ?? 0;
                 inventoryUpgrades[upgradeId] = Math.max(acquiredCount - requiredCount, 0);
                 const estimate = this.getUpgradeEstimate(upgrade, requiredCount, acquiredCount);

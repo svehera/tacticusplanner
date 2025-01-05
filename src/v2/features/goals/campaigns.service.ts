@@ -35,7 +35,21 @@ export class CampaignsService {
     public static getPossibleEnemiesCount(): number[] {
         return orderBy(uniq(Object.values(this.campaignsComposed).map(x => x.enemiesTotal)), undefined, 'desc');
     }
-    static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
+
+    /**
+     * @param battle The battle in question.
+     * @param progress Our current campaign progress.
+     * @returns Whether we have already completed the given battle, given our current campaign progress.
+     */
+    public static hasCompletedBattle(battle: ICampaignBattleComposed, progress: ICampaignsProgress): boolean {
+        return progress[battle.campaign] >= battle.nodeNumber;
+    }
+
+    /**
+     * @returns a map from campaign node short ID (e.g. "SHME31" for Saim-Hann
+     *          Mirror Elite battle 31) to an ICampaignBattleComposed.
+     */
+    public static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
         const result: Record<string, ICampaignBattleComposed> = {};
         for (const battleDataKey in this.battleData) {
             const battle = this.battleData[battleDataKey];
@@ -43,7 +57,7 @@ export class CampaignsService {
             const config = this.campaignConfigs[battle.campaignType as CampaignType];
             const recipe = this.recipeData[battle.reward];
             if (!recipe) {
-                console.error(battle.reward, 'no recipe');
+                // console.error(battle.reward, 'no recipe');
             }
             const dropRateKey: keyof IDropRate = recipe?.rarity.toLowerCase() as keyof IDropRate;
 
@@ -156,7 +170,11 @@ export class CampaignsService {
         return true;
     }
 
-    private static getEnemiesAndAllies(campaign: Campaign): {
+    /**
+     * Returns which factions are enemies in the campaign, and which are allies. Any
+     * allies are usable in the campaign when enough deployment slots are available.
+     */
+    public static getEnemiesAndAllies(campaign: Campaign): {
         enemies: { alliance: Alliance; factions: Faction[] };
         allies: { alliance: Alliance; factions: Faction[] };
     } {
