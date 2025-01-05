@@ -70,6 +70,11 @@ export interface ICharacterUpgradeAbilities extends ICharacterRaidGoalSelectBase
     passiveEnd: number;
 }
 
+/**
+ * Represents data about a character-associated goal, including the starting
+ * and ending rank, the applied upgrades, and the rarity of upgrades to farm
+ * first.
+ */
 export interface IRankLookup {
     unitName: string;
     rankStart: Rank;
@@ -200,6 +205,11 @@ export interface IUnitUpgrade {
     relatedUpgrades: string[];
 }
 
+/**
+ * Contains the start and end rank of a particular goal, and
+ * all of the upgrade material necessary to hit that goal.
+ * Upgrade materials may appear multiple times in `upgrades`.
+ */
 export interface IUnitUpgradeRank {
     rankStart: Rank;
     rankEnd: Rank;
@@ -256,6 +266,25 @@ export interface ICraftedUpgrade {
     stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
 }
 
+/**
+ * Holds the fully-expanded recipe for an upgrade material. One can then
+ * reference the necessary IBaseUpgrade objects to get the full details.
+ * That is, to say, expandedRecipe contains only uncraftable materials. If
+ * this material is already uncraftable, expandedRecipe is empty.
+ */
+export interface IRecipeExpandedUpgrade {
+    id: string;
+    label: string;
+    rarity: Rarity;
+    iconPath: string;
+    expandedRecipe: Record<string, number>;
+    crafted: boolean;
+    stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
+}
+
+/**
+ * Holds a material and a count of how many of the material are needed.
+ */
 export interface IUpgradeRecipe {
     id: string;
     count: number;
@@ -263,3 +292,4 @@ export interface IUpgradeRecipe {
 
 export type IBaseUpgradeData = Record<string, IBaseUpgrade>;
 export type ICraftedUpgradeData = Record<string, ICraftedUpgrade>;
+export type IRecipeExpandedUpgradeData = Record<string, IRecipeExpandedUpgrade>;
