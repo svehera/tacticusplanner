@@ -46,7 +46,24 @@ export class UpgradesService {
     static readonly battleData: ICampaignsData = battleData;
     static readonly baseUpgradesData: IBaseUpgradeData = this.composeBaseUpgrades();
     static readonly craftedUpgradesData: ICraftedUpgradeData = this.composeCraftedUpgrades();
-    static readonly recipeExandedUpgradeData: IRecipeExpandedUpgradeData = this.expandRecipeData();
+    static readonly recipeExpandedUpgradeData: IRecipeExpandedUpgradeData = this.expandRecipeData();
+    public static readonly materialByLabel: Record<string, string> = this.createMaterialByLabelLookup();
+
+    /**
+     * @returns a lookup table keyed by material ID or material label pointing
+     *          to the material ID.
+     */
+    private static createMaterialByLabelLookup(): Record<string, string> {
+        const result: Record<string, string> = {};
+
+        Object.entries(this.recipeExpandedUpgradeData).forEach(data => {
+            const upgradeData = data[1];
+            result[upgradeData.label] = upgradeData.id;
+            result[upgradeData.id] = upgradeData.id;
+        });
+
+        return result;
+    }
 
     static readonly rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
     static getUpgradesEstimatedDays(
@@ -838,8 +855,8 @@ export class UpgradesService {
             stat: 'Gold',
         };
         // First fill in all of the base upgrades.
-        for (const key in this.baseUpgradesData) {
-            const baseUpgrade = this.baseUpgradesData[key];
+        Object.entries(this.baseUpgradesData).forEach(upgrade => {
+            const baseUpgrade = upgrade[1];
             result[baseUpgrade.id] = {
                 id: baseUpgrade.id,
                 label: baseUpgrade.label,
@@ -849,7 +866,8 @@ export class UpgradesService {
                 crafted: false,
                 stat: baseUpgrade.stat,
             };
-        }
+        });
+
         // Now fill in all of the craftable upgrades that only have base upgrade materials.
         for (const key in this.craftedUpgradesData) {
             const craftedUpgrade = this.craftedUpgradesData[key];
@@ -875,28 +893,30 @@ export class UpgradesService {
         // Finally, perform a BFS to fill in all expansions that
         // have more than one additional layer.
         //
-        // As of 2025-01-01, it takes three passes to fully expand all recipe data.
+        // As of 2025-01-01, it takes three passes (one of which is above) to fully expand all recipe data.
         let passes: number = 0;
+        const kNumExpectedPasses = 2;
         for (let moreToExpand: boolean = true; moreToExpand; ) {
             ++passes;
             moreToExpand = false;
-            for (const key in this.craftedUpgradesData) {
-                // hasOwnProperty is clearer, but eslint yells.
-                if (!result[key]) continue;
-                const expandedRecipe: IRecipeExpandedUpgrade | null = this.expandRecipe(key, result);
+            Object.entries(this.craftedUpgradesData).forEach(data => {
+                const material: ICraftedUpgrade = data[1];
+                const expandedRecipe: IRecipeExpandedUpgrade | null = this.expandRecipe(material.id, result);
                 if (!expandedRecipe) {
+                    if (passes >= kNumExpectedPasses) {
+                        console.log(passes + ": still haven't expanded base ingredient: '" + material.id + "'");
+                    }
                     moreToExpand = true;
-                    continue;
+                    return;
                 }
-                result[key] = expandedRecipe;
-                moreToExpand = true;
-            }
+                result[material.id] = expandedRecipe;
+            });
             if (passes > 100) {
                 console.log('Infinite loop in expandRecipeData');
                 break;
             }
         }
-        if (passes > 3) {
+        if (passes >= kNumExpectedPasses) {
             console.warn('New recipe requires more passes, please ask developers to investigate. passes=' + passes);
         }
         return result;
@@ -912,7 +932,6 @@ export class UpgradesService {
         expandedRecipe: IRecipeExpandedUpgrade,
         recipeItem: IMaterialRecipeIngredient
     ): void {
-        // hasOwnProperty is clearer, but eslint yells.
         if (expandedRecipe.expandedRecipe[recipeItem.material]) {
             expandedRecipe.expandedRecipe[recipeItem.material] += recipeItem.count;
         } else {
@@ -948,7 +967,6 @@ export class UpgradesService {
         };
         let moreToExpand = false;
         for (const recipeItem of upgrade.recipe) {
-            // hasOwnProperty is clearer, but eslint yells.
             if (!expandedRecipeData[recipeItem.id]) {
                 // We haven't expanded an ingredient yet, so we can't expand this recipe.
                 moreToExpand = true;
@@ -956,7 +974,10 @@ export class UpgradesService {
             }
             if (!expandedRecipeData[recipeItem.id].crafted) {
                 // Simple ingredient, just add it.
-                this.addIngredientsToExpandedRecipe(expandedRecipe, { id: recipeItem.id, count: recipeItem.count });
+                this.addIngredientsToExpandedRecipe(expandedRecipe, {
+                    material: recipeItem.id,
+                    count: recipeItem.count,
+                });
             } else {
                 for (const [material, count] of Object.entries(expandedRecipeData[recipeItem.id].expandedRecipe)) {
                     this.addIngredientsToExpandedRecipe(expandedRecipe, {
