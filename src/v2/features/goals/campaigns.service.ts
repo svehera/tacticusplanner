@@ -2,6 +2,7 @@
     ICampaignBattleComposed,
     ICampaignConfigs,
     ICampaignsData,
+    ICampaignsProgress,
     IDailyRaidsFilters,
     IDropRate,
     IRecipeData,
@@ -57,7 +58,11 @@ export class CampaignsService {
             const config = this.campaignConfigs[battle.campaignType as CampaignType];
             const recipe = this.recipeData[battle.reward];
             if (!recipe) {
-                console.error(battle.reward, 'no recipe');
+                if (battle.campaignType !== CampaignType.SuperEarly) {
+                    console.error(
+                        'no recipe for ' + battle.reward + ' from ' + battle.campaign + ' ' + battle.nodeNumber
+                    );
+                }
             }
             const dropRateKey: keyof IDropRate = recipe?.rarity.toLowerCase() as keyof IDropRate;
 
