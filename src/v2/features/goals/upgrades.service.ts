@@ -19,6 +19,7 @@
     IUpgradeRecipe,
     IUpgradesRaidsDay,
 } from 'src/v2/features/goals/goals.models';
+import { CampaignsProgressionService } from 'src/v2/features/goals/campaigns-progression';
 import {
     ICampaignBattle,
     ICampaignsData,
@@ -39,6 +40,7 @@ import recipeData from 'src/v2/data/recipeData.json';
 import battleData from 'src/assets/battleData.json';
 import { getEnumValues, rankToString } from 'src/shared-logic/functions';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
+import _ from 'lodash';
 
 export class UpgradesService {
     static readonly recipeData: IRecipeData = recipeData;
@@ -72,7 +74,7 @@ export class UpgradesService {
     ): IEstimatedUpgrades {
         const inventoryUpgrades = cloneDeep(settings.upgrades);
 
-        const unitsUpgrades = this.getUpgrades(inventoryUpgrades, goals);
+        const unitsUpgrades = this.getUpgrades(inventoryUpgrades, goals, settings);
 
         const combinedBaseMaterials = this.combineBaseMaterials(unitsUpgrades);
         this.populateLocationsData(combinedBaseMaterials, settings);
@@ -271,11 +273,201 @@ export class UpgradesService {
         return resultDays;
     }
 
+    public static baseUpgradeToString(upgrade: IBaseUpgrade): string {
+        let ret: string =
+            'id: ' +
+            upgrade.id +
+            '\nlabel: ' +
+            upgrade.label +
+            '\nrarity: ' +
+            upgrade.rarity +
+            '\niconPath: ' +
+            upgrade.iconPath +
+            '\ncrafted: ' +
+            upgrade.crafted +
+            '\nstat: ' +
+            upgrade.stat;
+        for (const location of upgrade.locations) {
+            ret += '\nlocation: ' + location.id;
+        }
+        return ret;
+    }
+    public static craftedUpgradeToString(upgrade: ICraftedUpgrade): string {
+        let ret: string =
+            'id: ' +
+            upgrade.id +
+            '\nlabel: ' +
+            upgrade.label +
+            '\nrarity: ' +
+            upgrade.rarity +
+            '\niconPath: ' +
+            upgrade.iconPath +
+            '\ncrafted: ' +
+            upgrade.crafted +
+            '\nstat: ' +
+            upgrade.stat;
+        for (const material of upgrade.recipe) {
+            ret += '\n  ' + material.count + 'x ' + material.id;
+        }
+        return ret;
+    }
+
+    // Given a material and quantity, returns how much energy it would
+    // take to farm the material if we choose the cheapest strategy
+    // guaranteed to pay. Which basically means as far as nodes go,
+    // elite > early > mirror > normal.
+    private static getCheapestEnergyToFarm(material: string, count: number, farmableLocs: string[]): number {
+        if (farmableLocs.length === 0) {
+            return -1;
+        }
+        const campaignNodes = CampaignsService.getCampaignComposed();
+        const energyCost = new Map<string, int>([
+            ['Elite', 10],
+            ['Early', 5],
+            ['Mirror', 6],
+            ['Normal', 6],
+        ]);
+        const normalDropRates = new Map<Rarity, number>([
+            [Rarity.Common, 3 / 4.0],
+            [Rarity.Uncommon, 4 / 7.0],
+            [Rarity.Rare, 1 / 5.0],
+            [Rarity.Epic, 1 / 7.0],
+            [Rarity.Legendary, 1 / 12.0],
+        ]);
+        const mirrorDropRates = new Map<Rarity, number>([
+            [Rarity.Common, 3 / 4.0],
+            [Rarity.Uncommon, 4 / 7.0],
+            [Rarity.Rare, 1 / 5.0],
+            [Rarity.Epic, 1 / 7.0],
+            [Rarity.Legendary, 1 / 12.0],
+        ]);
+        const eliteDropRates = new Map<string, Map<Rarity, number>>([
+            [Rarity.Common, 3 / 2.0],
+            [Rarity.Uncommon, 1.25],
+            [Rarity.Rare, 13 / 12.0],
+            [Rarity.Epic, 2 / 3.0],
+            [Rarity.Legendary, 1 / 3.0],
+        ]);
+        const hasElite = farmableLocs.reduce(
+            (acc, loc) => acc || campaignNodes[loc].campaignType === CampaignType.Elite,
+            false
+        );
+        const hasMirror = farmableLocs.reduce(
+            (acc, loc) => acc || campaignNodes[loc].campaignType === CampaignType.Mirror,
+            false
+        );
+        const hasEarly = farmableLocs.reduce(
+            (acc, loc) => acc || (campaignNodes[loc].campaign === 'Indomitus' && campaignNodes.nodeNumber < 30),
+            false
+        );
+        if (hasElite) {
+            return 10 * Math.ceil(count / eliteDropRates.get(campaignNodes[farmableLocs[0]].rarityEnum));
+        } else if (hasEarly) {
+            return 5 * Math.ceil(count / normalDropRates.get(campaignNodes[farmableLocs[0]].rarityEnum));
+        } else if (hasMirror) {
+            return 6 * Math.ceil(count / mirrorDropRates.get(campaignNodes[farmableLocs[0]].rarityEnum));
+        } else {
+            return 6 * Math.ceil(count / normalDropRates.get(campaignNodes[farmableLocs[0]].rarityEnum));
+        }
+    }
+
+    // Holds information about the cheapest path to rank up a unit.
+    static CheapestRankUpInfo = class {
+        public unitId: string;
+        public totalEnergy: number;
+        public upgrades: Record<string, number>;
+        public unbeatenLocs: string[];
+        public constructor(
+            unitId: string,
+            totalEnergy: number,
+            upgrades: Record<string, number>,
+            unbeatenLocs: string[]
+        ) {
+            this.unitId = unitId;
+            this.totalEnergy = totalEnergy;
+            this.upgrades = upgrades;
+            this.unbeatenLocs = unbeatenLocs;
+        }
+    };
+
+    // Given the specified campaign progression, determines the cheapest
+    // cost to rank up a unit.
+    public static getCheapestRankUpCostWithCurrentCampaignProgression(
+        goal: ICharacterUpgradeRankGoal | ICharacterUpgradeMow,
+        baseMaterials: Record<string, number>,
+        settings: IEstimatedRanksSettings
+    ): CheapestRankUpInfo {
+        const upgradeLocs = this.getUpgradesLocations();
+        const campaignNodes = CampaignsService.getCampaignComposed();
+        let totalEnergy: number = 0;
+        const unbeatenLocs: string[] = [];
+        for (const [material, count] of Object.entries(baseMaterials)) {
+            const line = '  ' + count + 'x ' + material;
+            const farmableLocs: string[] = [];
+            for (const index in upgradeLocs[material]) {
+                const loc: ICampaignBattleComposed = upgradeLocs[material][index];
+                if (settings.campaignsProgress[campaignNodes[loc].campaign] >= campaignNodes[loc].nodeNumber) {
+                    farmableLocs.push(loc);
+                } else {
+                    unbeatenLocs.push(loc);
+                }
+            }
+            if (farmableLocs.length > 0) {
+                totalEnergy += this.getCheapestEnergyToFarm(material, count, farmableLocs);
+            } else {
+                totalEnergy = -1;
+                break;
+            }
+        }
+        if (goal.rankEnd !== undefined && totalEnergy >= 0) {
+            console.log(
+                'Ranking up ' +
+                    goal.unitName +
+                    ' from ' +
+                    goal.rankStart +
+                    ' to ' +
+                    goal.rankEnd +
+                    ' costs ' +
+                    totalEnergy +
+                    ' energy using existing inventory.'
+            );
+        } else if (totalEnergy >= 0) {
+            console.log('Upgrading ' + goal.unitName + ' costs ' + totalEnergy + ' energy using existing inventory.');
+        } else {
+            console.log(
+                'Ranking up ' +
+                    goal.unitName +
+                    ' from ' +
+                    goal.rankStart +
+                    ' to ' +
+                    goal.rankEnd +
+                    ' is currently blocked, because there are unfarmable materials.'
+            );
+        }
+        return new this.CheapestRankUpInfo(goal.unitId, totalEnergy, baseMaterials, unbeatenLocs);
+    }
+
+    static CheapestRankUpCost = class {
+        public unitId: string;
+        public rankUpInfo: CheapestRankUpInfo;
+        public upgrades: Record<string, number>;
+        public constructor(unitId: string, rankUpInfo: CheapestRankUpInfo, upgrades: Record<string, number>) {
+            this.unitId = unitId;
+            this.rankUpInfo = rankUpInfo;
+            this.upgrades = upgrades;
+        }
+    };
+
     public static getUpgrades(
         inventoryUpgrades: Record<string, number>,
-        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>,
+        settings: IEstimatedRanksSettings
     ): IUnitUpgrade[] {
-        return goals.map(goal => {
+        const craftedUpgrades = this.composeCraftedUpgrades();
+        const totalCost = 0;
+        const totalCostWithInventory = 0;
+        const result: IUnitUpgrade[] = [];
+        for (const goal of goals) {
             const upgradeRanks =
                 goal.type === PersonalGoalType.UpgradeRank
                     ? this.getCharacterUpgradeRank(goal)
@@ -310,15 +502,16 @@ export class UpgradesService {
                 return result;
             });
 
-            return {
+            result.push({
                 goalId: goal.goalId,
                 unitId: goal.unitId,
                 label: goal.unitName,
                 upgradeRanks,
                 baseUpgradesTotal,
                 relatedUpgrades,
-            };
-        });
+            });
+        }
+        return result;
     }
 
     private static getTotalEstimates(
@@ -916,7 +1109,7 @@ export class UpgradesService {
                 break;
             }
         }
-        if (passes >= kNumExpectedPasses) {
+        if (passes > kNumExpectedPasses) {
             console.warn('New recipe requires more passes, please ask developers to investigate. passes=' + passes);
         }
         return result;

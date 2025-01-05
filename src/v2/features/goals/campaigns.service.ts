@@ -175,7 +175,11 @@ export class CampaignsService {
         return true;
     }
 
-    private static getEnemiesAndAllies(campaign: Campaign): {
+    /**
+     * Returns which factions are enemies in the campaign, and which are allies. Any
+     * allies are usable in the campaign when enough deployment slots are available.
+     */
+    public static getEnemiesAndAllies(campaign: Campaign): {
         enemies: { alliance: Alliance; factions: Faction[] };
         allies: { alliance: Alliance; factions: Faction[] };
     } {

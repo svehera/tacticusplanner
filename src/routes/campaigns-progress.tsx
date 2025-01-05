@@ -1,4 +1,4 @@
-﻿import { groupBy } from 'lodash';
+import { groupBy } from 'lodash';
 import React, { useContext } from 'react';
 import { Box, Grid, Input, Slider } from '@mui/material';
 
