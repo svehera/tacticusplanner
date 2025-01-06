@@ -1,13 +1,14 @@
 import { groupBy } from 'lodash';
 import React, { useContext } from 'react';
 import { Box, Grid, Input, Slider } from '@mui/material';
+import { Alliance, Campaign, Faction } from 'src/models/enums';
 
 import Typography from '@mui/material/Typography';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 import { campaignsNames } from '../models/constants';
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
 import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
-import { ICharacter2 } from 'src/models/interfaces';
+import { ICampaignsProgress, ICharacter2 } from 'src/models/interfaces';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
@@ -78,33 +79,19 @@ export const CampaignProgress = ({
         }
     };
 
-    const requiredFaction: Map<string, string> = new Map([
-        ['Indomitus', 'Ultramarines'],
-        ['Indomitus Mirror', 'Necrons'],
-        ['Fall of Cadia', 'Black Legion'],
-        ['Fall of Cadia Mirror', 'Astra Militarum'],
-        ['Octarius', 'Orks'],
-        ['Octarius Mirror', 'Black Templars'],
-        ['Saim-Hann', 'Aeldari'],
-        ['Saim-Hann Mirror', 'Thousand Sons'],
-    ]);
-    const alliances: Map<string, string> = new Map([
-        ['Indomitus', 'Imperial'],
-        ['Indomitus Mirror', 'Necrons'],
-        ['Fall of Cadia', 'Chaos'],
-        ['Fall of Cadia Mirror', 'Imperial'],
-        ['Octarius', 'Orks'],
-        ['Octarius Mirror', 'Imperial'],
-        ['Saim-Hann', 'Aeldari'],
-        ['Saim-Hann Mirror', 'Chaos'],
+    const requiredFaction: Map<keyof ICampaignsProgress, Faction> = new Map([
+        ['Indomitus' as keyof ICampaignsProgress, Faction.Ultramarines],
+        ['Indomitus Mirror' as keyof ICampaignsProgress, Faction.Necrons],
+        ['Fall of Cadia' as keyof ICampaignsProgress, Faction.Black_Legion],
+        ['Fall of Cadia Mirror' as keyof ICampaignsProgress, Faction.Astra_militarum],
+        ['Octarius' as keyof ICampaignsProgress, Faction.Orks],
+        ['Octarius Mirror' as keyof ICampaignsProgress, Faction.Black_Templars],
+        ['Saim-Hann' as keyof ICampaignsProgress, Faction.Aeldari],
+        ['Saim-Hann Mirror' as keyof ICampaignsProgress, Faction.Thousand_Sons],
     ]);
 
-    function getBaseCampaign(campaign: string): string {
-        let base: string = campaign;
-        if (base.endsWith('Elite')) {
-            base = base.substring(0, base.length - 6);
-        }
-        return base;
+    function getBaseCampaign(campaign: keyof ICampaignsProgress): keyof ICampaignsProgress {
+        return campaign.replace(' Elite', '') as keyof ICampaignsProgress;
     }
 
     function getCampaignFaction(campaign: string): string {
@@ -112,7 +99,7 @@ export const CampaignProgress = ({
         return faction != null ? faction : 'Ultramarines';
     }
 
-    function getRequiredCharacters(campaign: string): ICharacter2[] {
+    function getRequiredCharacters(campaign: keyof ICampaignsProgress): ICharacter2[] {
         let chars: ICharacter2[] = [];
         const faction: string = getCampaignFaction(getBaseCampaign(campaign));
         groupBy(CharactersService.filterUnits(characters, CharactersFilterBy.None, ''), 'faction')[faction].forEach(

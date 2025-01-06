@@ -32,7 +32,6 @@ export const CharacterTile = ({
 }) => {
     const viewContext = useContext(CharactersViewContext);
 
-    const isIgnored = false;
     const isUnlocked = character.rank > Rank.Locked;
     const isReleased = !character.releaseRarity;
     const unlockShards = isReleased
@@ -58,23 +57,13 @@ export const CharacterTile = ({
             : character.upgrades.length;
     const badgeColor =
         character.rank === maxRank ? 'warning' : needToAscend ? 'warning' : needToLevel ? 'secondary' : 'success';
-    let tileOpacity: double = 1;
-    if (isUnlocked) {
-        if (isIgnored) tileOpacity = 0.25;
-        else tileOpacity = 1;
-    } else {
-        tileOpacity = 0.5;
-    }
+    const tileOpacity: number = isUnlocked ? 1 : 0.5;
 
     return (
         <div
             className="character-tile"
             style={{
-                opacity: viewContext.getOpacity
-                    ? viewContext.getOpacity(character)
-                    : isUnlocked && !isIgnored
-                    ? tileOpacity
-                    : 0.25,
+                opacity: viewContext.getOpacity ? viewContext.getOpacity(character) : isUnlocked ? tileOpacity : 0.25,
                 cursor: onCharacterClick && !disableClick ? 'pointer' : undefined,
             }}
             onClick={onCharacterClick && !disableClick ? () => onCharacterClick!(character) : undefined}>

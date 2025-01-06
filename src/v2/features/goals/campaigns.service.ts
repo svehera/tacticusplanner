@@ -43,7 +43,8 @@ export class CampaignsService {
      * @returns Whether we have already completed the given battle, given our current campaign progress.
      */
     public static hasCompletedBattle(battle: ICampaignBattleComposed, progress: ICampaignsProgress): boolean {
-        return progress[battle.campaign] >= battle.nodeNumber;
+        if (battle.campaign == Campaign.Onslaught) return false;
+        return progress[battle.campaign as keyof ICampaignsProgress] >= battle.nodeNumber;
     }
 
     /**
@@ -66,7 +67,7 @@ export class CampaignsService {
             }
             const dropRateKey: keyof IDropRate = recipe?.rarity.toLowerCase() as keyof IDropRate;
 
-            const dropRate = config.dropRate[dropRateKey];
+            const dropRate = config.dropRate ? config.dropRate[dropRateKey] : 0;
             const energyPerItem = parseFloat((1 / (dropRate / config.energyCost)).toFixed(2));
 
             const { enemies, allies } = this.getEnemiesAndAllies(battle.campaign as Campaign);

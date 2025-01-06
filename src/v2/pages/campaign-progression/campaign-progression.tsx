@@ -1,5 +1,6 @@
 import React, { useContext, useMemo } from 'react';
 import { IUnitData } from 'src/v2/features/characters/characters.models';
+import { Rank } from 'src/models/enums';
 
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
 import { StoreContext } from 'src/reducers/store.provider';
@@ -90,6 +91,19 @@ export const CampaignProgression = () => {
         return getGoal(goalId)?.rankEnd ?? 1;
     }
 
+    function getRankLookupHref(goalId: string): string {
+        const rankStart = Math.max(getGoalRankStart(goalId), 1);
+        const rankEnd = getGoalRankEnd(goalId);
+        return (
+            '../../learn/rankLookup?character=' +
+            getGoalUnit(goalId)?.id +
+            '&rankStart=' +
+            Rank[rankStart] +
+            '&rankEnd=' +
+            Rank[Math.max(rankStart + 1, rankEnd)]
+        );
+    }
+
     return (
         <div key="root">
             This page is in beta. If you see bugs, or have features you would like
@@ -136,45 +150,51 @@ export const CampaignProgression = () => {
                     </ol>
                 </li>
             </ol>
-            <p>
-                Known Issues and Future Work
-                <ol>
-                    <li>
-                        The UI is bad. But I&apos;m a backend engineer, so I&apos;d need suggestions on how to spruce it
-                        up.
-                    </li>
-                    <li>
-                        Ignores current inventory but uses applied upgrades. The savings would be hard to parse if we
-                        used the current inventory.
-                    </li>
-                    <li>Doesn&apos;t work well with ascension/unlock goals.</li>
-                    <li>Ignores upgrade-ability goals.</li>
-                    <li>
-                        Machines of war are taken into consideration in total cost, but aren&apos;t displayed anywhere
-                        because they aren&apos;t relevant to campaigns.
-                    </li>
-                    <li>Character icons on rank-up goals should link to the rank-lookup page.</li>
-                    <li>Target rank icons should link to the goal page.</li>
-                    <li>The large campaign icons should link to the campaign&apos;s &apos;Learn&apos; page.</li>
-                    <li>
-                        Battles that unlock a material should display the character icons of all characters requiring
-                        the material.
-                    </li>
-                    <li>
-                        The amount saved should link to a small dialog or tooltip explaining the savings (computation
-                        with farmable nodes, new computation with this node).
-                    </li>
-                </ol>
-            </p>
+            <p />
+            Known Issues and Future Work
+            <ol>
+                <li>
+                    The UI is bad. But I&apos;m a backend engineer, so I&apos;d need suggestions on how to spruce it up.
+                </li>
+                <li>
+                    Ignores current inventory but uses applied upgrades. The savings would be hard to parse if we used
+                    the current inventory.
+                </li>
+                <li>Doesn&apos;t work well with ascension/unlock goals.</li>
+                <li>Ignores upgrade-ability goals.</li>
+                <li>
+                    Machines of war are taken into consideration in total cost, but aren&apos;t displayed anywhere
+                    because they aren&apos;t relevant to campaigns.
+                </li>
+                <li>
+                    <s>Rank-up goal costs should link to the rank-lookup page.</s>
+                </li>
+                <li>
+                    <s>Target rank icons should link to the goal page.</s>
+                </li>
+                <li>
+                    <s>The large campaign icons should link to the campaign&apos;s &apos;Learn&apos; page.</s>
+                </li>
+                <li>
+                    Battles that unlock a material should display the character icons of all characters requiring the
+                    material.
+                </li>
+                <li>
+                    The amount saved should link to a small dialog or tooltip explaining the savings (computation with
+                    farmable nodes, new computation with this node).
+                </li>
+            </ol>
             <h1>Campaign Progression</h1>
             {campaignDataArray.map((entry, ignored) => {
                 return (
-                    <div key="{entry[0]}">
+                    <div key={entry[0]}>
                         <table>
                             <tbody>
                                 <tr key="{entry[0]}_header_row">
                                     <td colSpan={2}>
-                                        <CampaignImage campaign={entry[0]} />
+                                        <a href="../../learn/campaigns">
+                                            <CampaignImage campaign={entry[0]} />
+                                        </a>
                                     </td>
                                     <td colSpan={7}>{entry[0]}</td>
                                 </tr>
@@ -187,11 +207,13 @@ export const CampaignProgression = () => {
                                         return (
                                             <tr key={goal[0]}>
                                                 <td>
-                                                    <CharacterImage
-                                                        icon={getGoalUnit(goal[0])?.icon ?? '(undefined)'}
-                                                        imageSize={30}
-                                                        tooltip={getGoalUnit(goal[0])?.icon}
-                                                    />
+                                                    <a href={getRankLookupHref(goal[0])}>
+                                                        <CharacterImage
+                                                            icon={getGoalUnit(goal[0])?.icon ?? '(undefined)'}
+                                                            imageSize={30}
+                                                            tooltip={getGoalUnit(goal[0])?.icon}
+                                                        />
+                                                    </a>
                                                 </td>
                                                 <td align="center">
                                                     <RankImage rank={getGoalRankStart(goal[0])} />
@@ -200,16 +222,27 @@ export const CampaignProgression = () => {
                                                     <ArrowForward />
                                                 </td>
                                                 <td align="center">
-                                                    <RankImage rank={getGoalRankEnd(goal[0])} />
+                                                    <a href="../../plan/goals">
+                                                        <RankImage rank={getGoalRankEnd(goal[0])} />
+                                                    </a>
                                                 </td>
-                                                {goal[1] >= 0 && <td>costs</td>}
                                                 {goal[1] >= 0 && (
                                                     <td>
-                                                        {goal[1]} <MiscIcon icon={'energy'} height={15} width={15} />
+                                                        <a href={getRankLookupHref(goal[0])}>costs</a>
+                                                    </td>
+                                                )}
+                                                {goal[1] >= 0 && (
+                                                    <td>
+                                                        <a href={getRankLookupHref(goal[0])}>
+                                                            {goal[1]}{' '}
+                                                            <MiscIcon icon={'energy'} height={15} width={15} />
+                                                        </a>
                                                     </td>
                                                 )}
                                                 {goal[1] < 0 && (
-                                                    <td colSpan="3">requires materials currently unfarmable.</td>
+                                                    <a href={getRankLookupHref(goal[0])}>
+                                                        <td colSpan="3">requires materials currently unfarmable.</td>
+                                                    </a>
                                                 )}
                                                 <td></td>
                                                 <td width="100%"></td>
