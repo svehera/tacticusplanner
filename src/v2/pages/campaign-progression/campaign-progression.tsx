@@ -1,4 +1,6 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { AgGridReact } from 'ag-grid-react';
+import { ColDef, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
 import { IUnitData } from 'src/v2/features/characters/characters.models';
 import { Rank } from 'src/models/enums';
 
@@ -24,8 +26,10 @@ import {
 } from 'src/v2/features/goals/goals.models';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { alignProperty } from '@mui/material/styles/cssUtils';
 
 export const CampaignProgression = () => {
+    const [gridApi, setGridApi] = useState<GridApi | undefined>();
     const { goals, characters, mows, campaignsProgress } = useContext(StoreContext);
 
     const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
@@ -104,219 +108,325 @@ export const CampaignProgression = () => {
         );
     }
 
+    function renderHeader(): string {
+        return (
+            <span>
+                This page is in beta.If you see bugs, or have features you would like
+                <br />
+                added, please contact cpunerd via{' '}
+                <a href="https://discord.gg/8mcWKVAYZf">
+                    Discord&apos;s Tacticus
+                    <br />
+                    Planner channel
+                </a>
+                .
+                <p />
+                Found this site helpful ? Consider using the maintainer& apos;s Refer - A - Friend code & apos; DUG - 38
+                - VAT & apos;.
+                <br />
+                Maybe also <a href="https://buymeacoffee.com/tacticusplanner"> buy</a> the site owner a coffee ?
+                <p />
+                Instructions:
+                <ol>
+                    <li>
+                        Enter your roster in the <a href="../../input/wyo">Who You Own</a> page.
+                    </li>
+                    <li>
+                        Enter your campaign progress in the{' '}
+                        <a href="../../input/campaignsProgress">Campaigns Progress</a> page.
+                    </li>
+                    <li>
+                        Enter your goals in the <a href="../../plan/goals">Goals</a> page.
+                    </li>
+                    <li>
+                        Review these results and adust your goals.
+                        <ol>
+                            <li>
+                                Consider the balance between spending energy to upgrade the necessary units and beating
+                                the requisite battles.
+                            </li>
+                            <li>
+                                Work towards the goals that have the biggest bang for your buck. Least energy spent
+                                yielding the most energy saved.
+                            </li>
+                            <li>
+                                Mark your goals complete as you progress, and revisit this page periodically for more
+                                advice.
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+                <p />
+                Known Issues and Future Work
+                <ol>
+                    <li>
+                        The UI is bad. But I&apos;m a backend engineer, so I&apos;d need suggestions on how to spruce it
+                        up.
+                    </li>
+                    <li>
+                        Ignores current inventory but uses applied upgrades. The savings would be hard to parse if we
+                        used the current inventory.
+                    </li>
+                    <li>Doesn&apos;t work well with ascension/unlock goals.</li>
+                    <li>
+                        Doesn&apos;t list nodes that unlock already-unlocked materials, which might allow one to farm
+                        more items faster (but not any more cheaply).
+                    </li>
+                    <li>Ignores upgrade-ability goals.</li>
+                    <li>
+                        Machines of war are taken into consideration in total cost, but aren&apos;t displayed anywhere
+                        because they aren&apos;t relevant to campaigns.
+                    </li>
+                    <li>
+                        <s>Rank-up goal costs should link to the rank-lookup page.</s>
+                    </li>
+                    <li>
+                        <s>Target rank icons should link to the goal page.</s>
+                    </li>
+                    <li>
+                        <s>The large campaign icons should link to the campaign&apos;s &apos;Learn&apos; page.</s>
+                    </li>
+                    <li>
+                        Battles that unlock a material should display the character icons of all characters requiring
+                        the material.
+                    </li>
+                    <li>
+                        The amount saved should link to a small dialog or tooltip explaining the savings (computation
+                        with farmable nodes, new computation with this node).
+                    </li>
+                </ol>
+            </span>
+        );
+    }
+
+    function getCampaignColumnDefs(): ColDef[] {
+        return [
+            {
+                headerName: 'A',
+                width: 35,
+                cellStyle: { align: 'center' },
+                cellRenderer: (params: any) => {
+                    if (!params.data.goalData || !params.data.goalData[0]) return '';
+                    const goalData = params.data.goalData[0];
+                    return (
+                        <a href={getRankLookupHref(goalData.goalId)}>
+                            <CharacterImage
+                                icon={getGoalUnit(goalData.goalId)?.icon ?? '(undefined)'}
+                                imageSize={30}
+                                tooltip={getGoalUnit(goalData.goalId)?.icon}
+                            />
+                        </a>
+                    );
+                },
+            },
+            {
+                headerName: 'B',
+                width: 60,
+                cellStyle: { align: 'center' },
+                cellRenderer: (params: any) => {
+                    if (!params.data.goalData || !params.data.goalData[0]) return '';
+                    const goalData = params.data.goalData[0];
+                    return (
+                        <div style={{ justifyContent: 'center' }}>
+                            <RankImage rank={getGoalRankStart(goalData.goalId)} />
+                        </div>
+                    );
+                },
+            },
+            {
+                headerName: 'C',
+                width: 35,
+                cellStyle: { align: 'center' },
+                cellRenderer: (params: any) => {
+                    if (!params.data.goalData || !params.data.goalData[0]) return '';
+                    return <ArrowForward />;
+                },
+            },
+            {
+                headerName: 'D',
+                width: 60,
+                cellStyle: { align: 'center' },
+                cellRenderer: (params: any) => {
+                    if (!params.data.goalData || !params.data.goalData[0]) return '';
+                    const goalData = params.data.goalData[0];
+                    return <RankImage rank={getGoalRankEnd(goalData.goalId)} />;
+                },
+            },
+            {
+                headerName: 'E',
+                cellRenderer: (params: any) => {
+                    if (!params.data.goalData || !params.data.goalData[0]) return '';
+                    const goalData = params.data.goalData[0];
+                    return (
+                        <span>
+                            costs {goalData.goalCost} <MiscIcon icon={'energy'} height={15} width={15} />
+                        </span>
+                    );
+                },
+            },
+        ];
+    }
+
+    function getCampaignGoalData(campaignData: CampaignData): any[] {
+        const rowData: any[] = [];
+        campaignData[1].goalCost.entries().forEach(goal => {
+            rowData.push({ goalData: [{ goalId: goal[0], goalCost: goal[1] }] });
+        });
+        return rowData;
+    }
+
+    function getMaterialColumnDefs(): ColDef[] {
+        return [
+            {
+                headerName: 'A',
+                autoHeight: true,
+                width: 70,
+                cellRenderer: (params: any) => {
+                    const savingsData = params.data.savingsData;
+                    if (!savingsData) return '';
+                    const savings: BattleSavings = savingsData[0].savings[1];
+                    return (
+                        <CampaignLocation
+                            key={savings.battle.id}
+                            location={savings.battle}
+                            short={true}
+                            unlocked={true}
+                        />
+                    );
+                },
+            },
+            {
+                headerName: 'B',
+                autoHeight: true,
+                width: 35,
+                cellRenderer: (params: any) => {
+                    const savingsData = params.data.savingsData;
+                    if (!savingsData) return '';
+                    return <ArrowForward />;
+                },
+            },
+            {
+                headerName: 'C',
+                autoHeight: true,
+                width: 35,
+                cellRenderer: (params: any) => {
+                    const savingsData = params.data.savingsData;
+                    if (!savingsData) return '';
+                    const savings: BattleSavings = savingsData[0].savings[1];
+                    if (UpgradesService.getUpgradeMaterial(savings.battle.reward)) {
+                        return (
+                            <UpgradeImage
+                                material={savings.battle.reward}
+                                iconPath={UpgradesService.getUpgradeMaterial(savings.battle.reward)?.icon ?? ''}
+                                rarity={savings.battle.rarityEnum}
+                                size={30}
+                            />
+                        );
+                    }
+                    return (
+                        <CharacterImage
+                            icon={getGoalShardsUnit(savings.battle.reward)?.icon ?? '(undefined)'}
+                            imageSize={30}
+                            tooltip={getGoalShardsUnit(savings.battle.reward)?.icon}
+                        />
+                    );
+                },
+            },
+            {
+                headerName: 'D',
+                autoHeight: true,
+                cellRenderer: (params: any) => {
+                    const savingsData = params.data.savingsData;
+                    if (!savingsData) return <span>Unimplemented</span>;
+                    const savings: BattleSavings = savingsData[0].savings[1];
+                    return <span>Goals require {getRequiredMaterialCount(savings.battle.reward)}x</span>;
+                },
+            },
+            {
+                headerName: 'E',
+                autoHeight: true,
+                cellRenderer: (params: any) => {
+                    const savingsData = params.data.savingsData;
+                    if (!savingsData) return <span>Unimplemented</span>;
+                    const savings: BattleSavings = savingsData[0].savings[1];
+                    if (savings.wouldUnlockFor.length > 0) {
+                        return <span>Unlocks the material.</span>;
+                    } else {
+                        return (
+                            <span>
+                                Saves {savings.savings} <MiscIcon icon={'energy'} height={15} width={15} />
+                            </span>
+                        );
+                    }
+                },
+            },
+            {
+                headerName: 'E',
+                autoHeight: true,
+                cellRenderer: (params: any) => {
+                    const savingsData = params.data.savingsData;
+                    if (!savingsData) return <span>Unimplemented</span>;
+                    const savings: BattleSavings = savingsData[0].savings[1];
+                    if (savings.wouldUnlockFor.length > 0) {
+                        return <span>Unlocks the material.</span>;
+                    } else {
+                        return (
+                            <span>
+                                Cumulative {savings.cumulativeSavings}{' '}
+                                <MiscIcon icon={'energy'} height={15} width={15} />
+                            </span>
+                        );
+                    }
+                },
+            },
+        ];
+    }
+
+    function getCampaignMaterialData(campaignData: CampaignData): any[] {
+        const rowData: any[] = [];
+        campaignData[1].savings.entries().forEach(battleSavings => {
+            rowData.push({ savingsData: [{ savings: battleSavings }] });
+        });
+        return rowData;
+    }
+
     return (
         <div key="root">
-            This page is in beta. If you see bugs, or have features you would like
-            <br />
-            added, please contact cpunerd via{' '}
-            <a href="https://discord.gg/8mcWKVAYZf">
-                Discord&apos;s Tacticus
-                <br />
-                Planner channel
-            </a>
-            .
-            <p />
-            Found this site helpful? Consider using the maintainer&apos;s Refer-A-Friend code &apos;DUG-38-VAT&apos;.
-            <br />
-            Maybe also <a href="https://buymeacoffee.com/tacticusplanner">buy</a> the site owner a coffee?
-            <p />
-            Instructions:
-            <ol>
-                <li>
-                    Enter your roster in the <a href="../../input/wyo">Who You Own</a> page.
-                </li>
-                <li>
-                    Enter your campaign progress in the <a href="../../input/campaignsProgress">Campaigns Progress</a>{' '}
-                    page.
-                </li>
-                <li>
-                    Enter your goals in the <a href="../../plan/goals">Goals</a> page.
-                </li>
-                <li>
-                    Review these results and adust your goals.
-                    <ol>
-                        <li>
-                            Consider the balance between spending energy to upgrade the necessary units and beating the
-                            requisite battles.
-                        </li>
-                        <li>
-                            Work towards the goals that have the biggest bang for your buck. Least energy spent yielding
-                            the most energy saved.
-                        </li>
-                        <li>
-                            Mark your goals complete as you progress, and revisit this page periodically for more
-                            advice.
-                        </li>
-                    </ol>
-                </li>
-            </ol>
-            <p />
-            Known Issues and Future Work
-            <ol>
-                <li>
-                    The UI is bad. But I&apos;m a backend engineer, so I&apos;d need suggestions on how to spruce it up.
-                </li>
-                <li>
-                    Ignores current inventory but uses applied upgrades. The savings would be hard to parse if we used
-                    the current inventory.
-                </li>
-                <li>Doesn&apos;t work well with ascension/unlock goals.</li>
-                <li>Ignores upgrade-ability goals.</li>
-                <li>
-                    Machines of war are taken into consideration in total cost, but aren&apos;t displayed anywhere
-                    because they aren&apos;t relevant to campaigns.
-                </li>
-                <li>
-                    <s>Rank-up goal costs should link to the rank-lookup page.</s>
-                </li>
-                <li>
-                    <s>Target rank icons should link to the goal page.</s>
-                </li>
-                <li>
-                    <s>The large campaign icons should link to the campaign&apos;s &apos;Learn&apos; page.</s>
-                </li>
-                <li>
-                    Battles that unlock a material should display the character icons of all characters requiring the
-                    material.
-                </li>
-                <li>
-                    The amount saved should link to a small dialog or tooltip explaining the savings (computation with
-                    farmable nodes, new computation with this node).
-                </li>
-            </ol>
+            {renderHeader()}
             <h1>Campaign Progression</h1>
             {campaignDataArray.map((entry, ignored) => {
+                const [goalDefs, setGoalDefs] = useState(getCampaignColumnDefs());
+                const [materialDefs, setMaterialDefs] = useState(getMaterialColumnDefs());
                 return (
-                    <div key={entry[0]}>
+                    <div key={'grid_' + entry[0]}>
+                        <p />
+                        <p />
                         <table>
                             <tbody>
-                                <tr key="{entry[0]}_header_row">
-                                    <td colSpan={2}>
-                                        <a href="../../learn/campaigns">
-                                            <CampaignImage campaign={entry[0]} />
-                                        </a>
+                                <tr>
+                                    <td>
+                                        <CampaignImage campaign={entry[0]} />
                                     </td>
-                                    <td colSpan={7}>{entry[0]}</td>
+                                    <td>{entry[0]}</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <table>
-                            <tbody>
-                                {Array.from(
-                                    entry[1].goalCost.entries().map((goal, ignored) => {
-                                        return (
-                                            <tr key={goal[0]}>
-                                                <td>
-                                                    <a href={getRankLookupHref(goal[0])}>
-                                                        <CharacterImage
-                                                            icon={getGoalUnit(goal[0])?.icon ?? '(undefined)'}
-                                                            imageSize={30}
-                                                            tooltip={getGoalUnit(goal[0])?.icon}
-                                                        />
-                                                    </a>
-                                                </td>
-                                                <td align="center">
-                                                    <RankImage rank={getGoalRankStart(goal[0])} />
-                                                </td>
-                                                <td>
-                                                    <ArrowForward />
-                                                </td>
-                                                <td align="center">
-                                                    <a href="../../plan/goals">
-                                                        <RankImage rank={getGoalRankEnd(goal[0])} />
-                                                    </a>
-                                                </td>
-                                                {goal[1] >= 0 && (
-                                                    <td>
-                                                        <a href={getRankLookupHref(goal[0])}>costs</a>
-                                                    </td>
-                                                )}
-                                                {goal[1] >= 0 && (
-                                                    <td>
-                                                        <a href={getRankLookupHref(goal[0])}>
-                                                            {goal[1]}{' '}
-                                                            <MiscIcon icon={'energy'} height={15} width={15} />
-                                                        </a>
-                                                    </td>
-                                                )}
-                                                {goal[1] < 0 && (
-                                                    <a href={getRankLookupHref(goal[0])}>
-                                                        <td colSpan="3">requires materials currently unfarmable.</td>
-                                                    </a>
-                                                )}
-                                                <td></td>
-                                                <td width="100%"></td>
-                                            </tr>
-                                        );
-                                    })
-                                )}
-                                {entry[1].savings.map((savings, battleNumber) => {
-                                    return (
-                                        <tr
-                                            key={
-                                                '&apos;' +
-                                                entry[0] +
-                                                '_battle_' +
-                                                savings.battle.campaign +
-                                                '_' +
-                                                savings.battle.nodeNumber +
-                                                '&apos;'
-                                            }>
-                                            <td>Beating</td>
-                                            <td colSpan={2}>
-                                                <CampaignLocation
-                                                    key={savings.battle.id}
-                                                    location={savings.battle}
-                                                    short={true}
-                                                    unlocked={true}
-                                                />
-                                            </td>
-                                            <td>yields</td>
-                                            <td>
-                                                {UpgradesService.getUpgradeMaterial(savings.battle.reward) && (
-                                                    <UpgradeImage
-                                                        material={savings.battle.reward}
-                                                        iconPath={
-                                                            UpgradesService.getUpgradeMaterial(savings.battle.reward)
-                                                                ?.icon ?? ''
-                                                        }
-                                                        rarity={savings.battle.rarityEnum}
-                                                        size={30}
-                                                    />
-                                                )}
-                                                {!UpgradesService.getUpgradeMaterial(savings.battle.reward) && (
-                                                    <CharacterImage
-                                                        icon={
-                                                            getGoalShardsUnit(savings.battle.reward)?.icon ??
-                                                            '(undefined)'
-                                                        }
-                                                        imageSize={30}
-                                                        tooltip={getGoalShardsUnit(savings.battle.reward)?.icon}
-                                                    />
-                                                )}
-                                            </td>
-                                            <td colSpan={2} width="100%">
-                                                (goals need <b>{getRequiredMaterialCount(savings.battle.reward)}x</b>),
-                                                {savings.wouldUnlockFor.length == 0 && (
-                                                    <span>
-                                                        saving {savings.savings}{' '}
-                                                        <MiscIcon icon={'energy'} height={15} width={15} /> (cumulative{' '}
-                                                        {savings.cumulativeSavings}{' '}
-                                                        <MiscIcon icon={'energy'} height={15} width={15} />
-                                                        ).
-                                                    </span>
-                                                )}
-                                                {savings.wouldUnlockFor.length > 0 && (
-                                                    <span> unlocking this material so it can be farmed.</span>
-                                                )}
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                        <br />
+                        <p />
+                        <p />
+                        <AgGridReact
+                            columnDefs={goalDefs}
+                            rowData={getCampaignGoalData(entry)}
+                            domLayout="autoHeight"
+                            headerHeight={0}
+                            rowHeight={32}></AgGridReact>
+                        {getCampaignMaterialData(entry).length > 0 && (
+                            <AgGridReact
+                                columnDefs={materialDefs}
+                                rowData={getCampaignMaterialData(entry)}
+                                domLayout="autoHeight"
+                                headerHeight={0}
+                                rowHeight={32}></AgGridReact>
+                        )}
                     </div>
                 );
             })}
