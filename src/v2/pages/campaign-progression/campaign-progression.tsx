@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
-import { IUnitData } from 'src/v2/features/characters/characters.models';
+import { IUnitData } from 'src/models/interfaces';
 import { Rank } from 'src/models/enums';
 
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
@@ -29,7 +29,6 @@ import { CampaignLocation } from 'src/shared-components/goals/campaign-location'
 import { alignProperty } from '@mui/material/styles/cssUtils';
 
 export const CampaignProgression = () => {
-    const [gridApi, setGridApi] = useState<GridApi | undefined>();
     const { goals, characters, mows, campaignsProgress } = useContext(StoreContext);
 
     const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
@@ -60,6 +59,7 @@ export const CampaignProgression = () => {
         return progression.materialFarmData.get(material)?.count ?? 0;
     }
 
+    /** @returns the goal with the given ID. */
     function getGoal(
         goalId: string
     ): ICharacterAscendGoal | ICharacterUnlockGoal | ICharacterUpgradeRankGoal | ICharacterUpgradeMow | undefined {
@@ -79,22 +79,45 @@ export const CampaignProgression = () => {
         return filtered[0];
     }
 
+    /** @returns the unit specified in the goal with the given ID. */
     function getGoalUnit(goalId: string): IUnitData | undefined {
-        return StaticDataService.getUnit(getGoal(goalId)?.unitId);
+        if (!getGoal(goalId)) return undefined;
+        return StaticDataService.getUnit(getGoal(goalId)!.unitId) ?? undefined;
     }
 
+    /** @returns the unit specified in the goal with the given ID. */
     function getGoalShardsUnit(characterName: string): IUnitData | undefined {
         return StaticDataService.getUnit(characterName);
     }
 
+    /**
+     * @returns the starting rank of the goal. If the
+     * goal is an unlock goal, returns 0, meaning 'Locked'.
+     */
     function getGoalRankStart(goalId: string): number {
-        return getGoal(goalId)?.rankStart ?? 0;
+        const goal = getGoal(goalId);
+        if (goal && 'rankStart' in goal) return goal.rankStart;
+        return 0;
     }
 
+    /**
+     * @returns the starting rank of the goal. If the
+     * goal is an unlock goal, returns 1, meaning stone1.
+     */
     function getGoalRankEnd(goalId: string): number {
-        return getGoal(goalId)?.rankEnd ?? 1;
+        // I have no idea why, but the typescript compiler in
+        // WebStorm thinks that we have to jump through all of
+        // these hoops here, but not in getGoalRankStart above.
+        const goal = getGoal(goalId);
+        let rankEnd: number = 1;
+        if (!goal) return 1;
+        Object.entries(goal).forEach(([key, value]) => {
+            if (key == 'rankEnd') rankEnd = value as number;
+        });
+        return rankEnd;
     }
 
+    /** @returns the web link to the rank-up lookup of the given goal. */
     function getRankLookupHref(goalId: string): string {
         const rankStart = Math.max(getGoalRankStart(goalId), 1);
         const rankEnd = getGoalRankEnd(goalId);
@@ -108,7 +131,8 @@ export const CampaignProgression = () => {
         );
     }
 
-    function renderHeader(): string {
+    /** @returns the header to display at the top of the page. */
+    function renderHeader(): any {
         return (
             <span>
                 This page is in beta.If you see bugs, or have features you would like
@@ -199,6 +223,10 @@ export const CampaignProgression = () => {
         );
     }
 
+    /**
+     * @returns the column defs for the grid that holds the character
+     * goals related to the campaign.
+     */
     function getCampaignColumnDefs(): ColDef[] {
         return [
             {
@@ -267,14 +295,22 @@ export const CampaignProgression = () => {
         ];
     }
 
+    /**
+     * @returns the row data for the grid that holds the character
+     * goals related to the campaign.
+     */
     function getCampaignGoalData(campaignData: CampaignData): any[] {
         const rowData: any[] = [];
-        campaignData[1].goalCost.entries().forEach(goal => {
-            rowData.push({ goalData: [{ goalId: goal[0], goalCost: goal[1] }] });
-        });
+        for (const [goalId, cost] of campaignData[1].goalCost) {
+            rowData.push({ goalData: [{ goalId: goalId, goalCost: cost }] });
+        }
         return rowData;
     }
 
+    /**
+     * @returns the column defs for the grid that holds the material
+     * requirements related to the campaign.
+     */
     function getMaterialColumnDefs(): ColDef[] {
         return [
             {
@@ -284,7 +320,7 @@ export const CampaignProgression = () => {
                 cellRenderer: (params: any) => {
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return '';
-                    const savings: BattleSavings = savingsData[0].savings[1];
+                    const savings: BattleSavings = savingsData[0].savings;
                     return (
                         <CampaignLocation
                             key={savings.battle.id}
@@ -312,7 +348,7 @@ export const CampaignProgression = () => {
                 cellRenderer: (params: any) => {
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return '';
-                    const savings: BattleSavings = savingsData[0].savings[1];
+                    const savings: BattleSavings = savingsData[0].savings;
                     if (UpgradesService.getUpgradeMaterial(savings.battle.reward)) {
                         return (
                             <UpgradeImage
@@ -338,7 +374,7 @@ export const CampaignProgression = () => {
                 cellRenderer: (params: any) => {
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
-                    const savings: BattleSavings = savingsData[0].savings[1];
+                    const savings: BattleSavings = savingsData[0].savings;
                     return <span>Goals require {getRequiredMaterialCount(savings.battle.reward)}x</span>;
                 },
             },
@@ -348,7 +384,7 @@ export const CampaignProgression = () => {
                 cellRenderer: (params: any) => {
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
-                    const savings: BattleSavings = savingsData[0].savings[1];
+                    const savings: BattleSavings = savingsData[0].savings;
                     if (savings.wouldUnlockFor.length > 0) {
                         return <span>Unlocks the material.</span>;
                     } else {
@@ -366,7 +402,7 @@ export const CampaignProgression = () => {
                 cellRenderer: (params: any) => {
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
-                    const savings: BattleSavings = savingsData[0].savings[1];
+                    const savings: BattleSavings = savingsData[0].savings;
                     if (savings.wouldUnlockFor.length > 0) {
                         return <span>Unlocks the material.</span>;
                     } else {
@@ -382,11 +418,15 @@ export const CampaignProgression = () => {
         ];
     }
 
+    /**
+     * @returns the row data for the grid that holds the material
+     * requirements related to the campaign.
+     */
     function getCampaignMaterialData(campaignData: CampaignData): any[] {
         const rowData: any[] = [];
-        campaignData[1].savings.entries().forEach(battleSavings => {
-            rowData.push({ savingsData: [{ savings: battleSavings }] });
-        });
+        for (const savings of campaignData[1].savings) {
+            rowData.push({ savingsData: [{ savings: savings }] });
+        }
         return rowData;
     }
 
