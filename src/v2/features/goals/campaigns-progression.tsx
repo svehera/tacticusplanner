@@ -35,7 +35,7 @@ import {
 import { rarityStringToNumber } from 'src/models/constants';
 import { CampaignType, DailyRaidsStrategy, PersonalGoalType, Rank, Rarity, RarityString } from 'src/models/enums';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
-import { IUnit, IUnitData } from 'src/v2/features/characters/characters.models';
+import { IUnit } from 'src/v2/features/characters/characters.models';
 import { cloneDeep, groupBy, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
 import { StaticDataService } from 'src/services/static-data.service';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
@@ -78,7 +78,8 @@ export class FarmData {
 
 /** Information about farming a particular material. */
 export class GoalData {
-    /** If we can farm to reach this goal, that is, at least one
+    /**
+     * If we can farm to reach this goal, that is, at least one
      * node for each necessary material is unlocked).
      */
     canFarm: boolean = true;
@@ -108,11 +109,6 @@ export class BattleSavings {
     /** The battle to beat to achieve these savings. */
     battle: ICampaignBattleComposed;
 
-    /** If beating this battle would unlock an as-of-yet unfarmable material
-     * needed for a character, specifies the character. In sorted order.
-     */
-    wouldUnlockFor: string[] = [];
-
     /**
      * The savings on our goals by beating only this node. This will be negative
      * if beating this node unlocks a material.
@@ -127,16 +123,21 @@ export class BattleSavings {
      */
     cumulativeSavings: number = 0;
 
+    /**
+     * If, without this battle, we can farm this material.
+     */
+    canFarmPrior: boolean = false;
+
     public constructor(
         battle: ICampaignBattleComposed,
-        wouldUnlockFor: string[],
         savings: number,
-        cumulativeSavings: number
+        cumulativeSavings: number,
+        canFarmPrior: boolean
     ) {
         this.battle = battle;
-        this.wouldUnlockFor = wouldUnlockFor;
         this.savings = savings;
         this.cumulativeSavings = cumulativeSavings;
+        this.canFarmPrior = canFarmPrior;
     }
 }
 
@@ -171,7 +172,10 @@ export class CampaignsProgressData {
      */
     data: Map<string, CampaignProgressData> = new Map<string, CampaignProgressData>();
 
-    /** Info about farming each material (or character shard). */
+    /**
+     * Info about farming each material (or character shard). The key is
+     * the upgrade ID, or for a shard, the unit ID.
+     */
     materialFarmData: Map<string, FarmData> = new Map<string, FarmData>();
 
     /**
@@ -260,10 +264,7 @@ export class CampaignsProgressionService {
         let totalCost: number = 0;
         for (const goal of goals) {
             const goalData: GoalData = this.computeGoalCost(goal, campaignProgress, inventoryUpgrades);
-            if (goalData.canFarm) {
-                // Only add the cost if we can farm everything.
-                totalCost += goalData.totalEnergy;
-            }
+            totalCost += goalData.totalEnergy;
             goalData.unfarmableLocations.forEach(x => {
                 nodesToBeat.get(x.campaign)?.push(x);
             });
@@ -287,7 +288,7 @@ export class CampaignsProgressionService {
                 if (result.materialFarmData.has(material)) {
                     const existingData = result.materialFarmData.get(material)!;
                     existingData.count += data.count;
-                    if (existingData.canFarm) existingData.totalEnergy += data.totalEnergy;
+                    existingData.totalEnergy += data.totalEnergy;
                 } else {
                     result.materialFarmData.set(material, data);
                 }
@@ -297,6 +298,9 @@ export class CampaignsProgressionService {
                 result.charactersNeedingMaterials.get(material)?.push(goal.unitId);
             });
         }
+        result.charactersNeedingMaterials.forEach((units, material) => {
+            result.charactersNeedingMaterials.set(material, uniq(units.sort()));
+        });
     }
 
     /**
@@ -346,8 +350,8 @@ export class CampaignsProgressionService {
 
         nodesToBeat = this.uniquifyNodesToBeat(nodesToBeat);
 
-        const newMaterialEnergy = new Map<string, number>();
         for (const campaign of nodesToBeat.keys()) {
+            const newMaterialEnergy = new Map<string, number>();
             if ((nodesToBeat.get(campaign)?.length ?? 0) == 0) continue;
             const nodes: ICampaignBattleComposed[] = nodesToBeat.get(campaign)!.sort((a, b) => {
                 return a.nodeNumber - b.nodeNumber;
@@ -363,36 +367,25 @@ export class CampaignsProgressionService {
                     continue;
                 }
                 const farmData = result.materialFarmData.get(battle.reward)!;
-                if (farmData.canFarm) {
-                    const newEnergyCost: number = this.getCostToFarmMaterial(
-                        battle.campaignType,
-                        farmData.count,
-                        battle.rarityEnum
-                    );
-                    const oldEnergy = newMaterialEnergy.get(battle.reward) ?? farmData.totalEnergy;
-                    if (farmData.campaignType == battle.campaignType) continue;
-                    if (oldEnergy > newEnergyCost) {
-                        cumulativeSavings += farmData.totalEnergy - newEnergyCost;
-                        result.data
-                            .get(campaign)
-                            ?.savings.push(
-                                new BattleSavings(battle, [], farmData.totalEnergy - newEnergyCost, cumulativeSavings)
-                            );
-                        newMaterialEnergy.set(battle.reward, newEnergyCost);
-                    }
-                } else {
-                    // By beating this battle, we unlock upgrade materials we couldn't previously farm.
+                const newEnergyCost: number = this.getCostToFarmMaterial(
+                    battle.campaignType,
+                    farmData.count,
+                    battle.rarityEnum
+                );
+                const oldEnergy = newMaterialEnergy.get(battle.reward) ?? farmData.totalEnergy;
+                if (oldEnergy - farmData.count > newEnergyCost || !farmData.canFarm) {
+                    cumulativeSavings += farmData.totalEnergy - newEnergyCost;
                     result.data
                         .get(campaign)
                         ?.savings.push(
                             new BattleSavings(
                                 battle,
-                                result.charactersNeedingMaterials.get(battle.reward) ?? [],
-                                -1,
-                                -1
+                                farmData.totalEnergy - newEnergyCost,
+                                cumulativeSavings,
+                                farmData.canFarm
                             )
                         );
-                    newMaterialEnergy.set(battle.reward, -1);
+                    newMaterialEnergy.set(battle.reward, newEnergyCost);
                 }
             }
         }
@@ -480,9 +473,9 @@ export class CampaignsProgressionService {
         );
         for (const material of sortedMaterials) {
             const count: number = materialReqs.materials[material];
-            const farmData: FarmData = this.getCostToFarm(material, count, campaignProgress, inventoryUpgrades);
+            const farmData: FarmData = this.getCostToFarm(goal, material, count, campaignProgress, inventoryUpgrades);
             result.canFarm = result.canFarm && farmData.canFarm;
-            result.totalEnergy = result.canFarm ? result.totalEnergy + farmData.totalEnergy : -1;
+            result.totalEnergy = result.totalEnergy + farmData.totalEnergy;
             result.farmData.set(material, farmData);
             farmData.farmableLocations.forEach(x => {
                 result.farmableLocations.push(x);
@@ -501,6 +494,7 @@ export class CampaignsProgressionService {
      * We say required because farming involves probabilities and a random number generator,
      * so the results are always an approximation.
      *
+     * @goal goal The goal for which we need to farm the material.
      * @param material The ID of the material to farm.
      * @param count The number of this material we need.
      * @param campaignProgress Our progress in the campaigns, dictating the nodes from
@@ -511,6 +505,7 @@ export class CampaignsProgressionService {
      *          nodes we can use now, and in the future.
      */
     public static getCostToFarm(
+        goal: ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUnlockGoal | ICharacterAscendGoal,
         material: string,
         count: number,
         campaignProgress: ICampaignsProgress,
@@ -528,7 +523,7 @@ export class CampaignsProgressionService {
         const hasElite = result.farmableLocations.filter(x => x.campaignType == CampaignType.Elite).length > 0;
         const hasEarly =
             result.farmableLocations.filter(
-                x => x.campaign == 'Indomitus' && x.type == CampaignType.Normal && x.nodeNumber < 30
+                x => x.campaign == 'Indomitus' && x.campaignType == CampaignType.Normal && x.nodeNumber < 30
             ).length > 0;
         const hasMirror = result.farmableLocations.filter(x => x.campaignType == CampaignType.Mirror).length > 0;
         const hasNormal = result.farmableLocations.filter(x => x.campaignType == CampaignType.Normal).length > 0;
@@ -546,7 +541,7 @@ export class CampaignsProgressionService {
             result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Normal, count, rarity!);
             result.campaignType = CampaignType.Normal;
         } else if (result.farmableLocations.length == 0) {
-            result.totalEnergy = -1;
+            result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Normal, count, rarity!);
             result.canFarm = false;
         } else {
             console.error('Unknown node type ' + CampaignType[result.farmableLocations[0].campaignType]);
@@ -589,11 +584,11 @@ export class CampaignsProgressionService {
             [Rarity.Legendary, 1 / 12.0],
         ]);
         const mirrorDropRates = new Map<Rarity, number>([
-            [Rarity.Common, 3 / 4.0],
-            [Rarity.Uncommon, 4 / 7.0],
-            [Rarity.Rare, 1 / 5.0],
-            [Rarity.Epic, 1 / 7.0],
-            [Rarity.Legendary, 1 / 12.0],
+            [Rarity.Common, 4 / 5.0],
+            [Rarity.Uncommon, 7 / 10.0],
+            [Rarity.Rare, 1 / 3.0],
+            [Rarity.Epic, 1 / 5.0],
+            [Rarity.Legendary, 1 / 11.0],
         ]);
         const eliteDropRates = new Map<Rarity, number>([
             [Rarity.Common, 3 / 2.0],
