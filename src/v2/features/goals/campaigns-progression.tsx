@@ -1,54 +1,26 @@
 import {
-    IBaseUpgrade,
-    IBaseUpgradeData,
     ICharacterAscendGoal,
     ICharacterUnlockGoal,
-    ICharacterUpgradeEstimate,
     ICharacterUpgradeMow,
-    ICharacterUpgradeRankEstimate,
     ICharacterUpgradeRankGoal,
-    ICombinedUpgrade,
-    ICraftedUpgrade,
-    ICraftedUpgradeData,
-    IEstimatedUpgrades,
-    IItemRaidLocation,
-    IRankLookup,
     IRecipeExpandedUpgrade,
-    IRecipeExpandedUpgradeData,
-    IUnitUpgrade,
-    IUnitUpgradeRank,
-    IUpgradeRaid,
-    IUpgradeRecipe,
-    IUpgradesRaidsDay,
 } from 'src/v2/features/goals/goals.models';
 import {
-    ICampaignBattle,
     ICampaignBattleComposed,
     ICampaignsData,
     ICampaignsProgress,
-    IDailyRaidsFilters,
-    IEstimatedRanksSettings,
-    IMaterialRecipeIngredient,
     IRankUpData,
     IRecipeData,
 } from 'src/models/interfaces';
-import { rarityStringToNumber } from 'src/models/constants';
-import { CampaignType, DailyRaidsStrategy, PersonalGoalType, Rank, Rarity, RarityString } from 'src/models/enums';
+import { CampaignType, PersonalGoalType, Rarity } from 'src/models/enums';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { cloneDeep, groupBy, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
 import { StaticDataService } from 'src/services/static-data.service';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
 import rankUpData from 'src/assets/rankUpData.json';
 import recipeData from 'src/v2/data/recipeData.json';
 import battleData from 'src/assets/battleData.json';
-import { getEnumValues, rankToString } from 'src/shared-logic/functions';
-import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 import { charsUnlockShards } from 'src/models/constants';
-import _ from 'lodash';
-import { getTypographyUtilityClass } from '@mui/material';
-import { AcUnitRounded } from '@mui/icons-material';
 
 /**
  * Information about farming a particular material.

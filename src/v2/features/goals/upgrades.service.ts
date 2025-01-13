@@ -19,7 +19,6 @@
     IUpgradeRecipe,
     IUpgradesRaidsDay,
 } from 'src/v2/features/goals/goals.models';
-import { CampaignsProgressionService } from 'src/v2/features/goals/campaigns-progression';
 import {
     ICampaignBattle,
     ICampaignsData,
@@ -40,7 +39,6 @@ import recipeData from 'src/v2/data/recipeData.json';
 import battleData from 'src/assets/battleData.json';
 import { getEnumValues, rankToString } from 'src/shared-logic/functions';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
-import _ from 'lodash';
 
 export class UpgradesService {
     static readonly recipeData: IRecipeData = recipeData;
@@ -74,7 +72,7 @@ export class UpgradesService {
     ): IEstimatedUpgrades {
         const inventoryUpgrades = cloneDeep(settings.upgrades);
 
-        const unitsUpgrades = this.getUpgrades(inventoryUpgrades, goals, settings);
+        const unitsUpgrades = this.getUpgrades(inventoryUpgrades, goals);
 
         const combinedBaseMaterials = this.combineBaseMaterials(unitsUpgrades);
         this.populateLocationsData(combinedBaseMaterials, settings);
@@ -273,53 +271,10 @@ export class UpgradesService {
         return resultDays;
     }
 
-    public static baseUpgradeToString(upgrade: IBaseUpgrade): string {
-        let ret: string =
-            'id: ' +
-            upgrade.id +
-            '\nlabel: ' +
-            upgrade.label +
-            '\nrarity: ' +
-            upgrade.rarity +
-            '\niconPath: ' +
-            upgrade.iconPath +
-            '\ncrafted: ' +
-            upgrade.crafted +
-            '\nstat: ' +
-            upgrade.stat;
-        for (const location of upgrade.locations) {
-            ret += '\nlocation: ' + location.id;
-        }
-        return ret;
-    }
-    public static craftedUpgradeToString(upgrade: ICraftedUpgrade): string {
-        let ret: string =
-            'id: ' +
-            upgrade.id +
-            '\nlabel: ' +
-            upgrade.label +
-            '\nrarity: ' +
-            upgrade.rarity +
-            '\niconPath: ' +
-            upgrade.iconPath +
-            '\ncrafted: ' +
-            upgrade.crafted +
-            '\nstat: ' +
-            upgrade.stat;
-        for (const material of upgrade.recipe) {
-            ret += '\n  ' + material.count + 'x ' + material.id;
-        }
-        return ret;
-    }
-
     public static getUpgrades(
         inventoryUpgrades: Record<string, number>,
-        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>,
-        settings: IEstimatedRanksSettings
+        goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>
     ): IUnitUpgrade[] {
-        const craftedUpgrades = this.composeCraftedUpgrades();
-        const totalCost = 0;
-        const totalCostWithInventory = 0;
         const result: IUnitUpgrade[] = [];
         for (const goal of goals) {
             const upgradeRanks =
@@ -1039,7 +994,7 @@ export class UpgradesService {
     }
 
     public static getUpgradeMaterial(material: string): IMaterial | undefined {
-        return this.recipeData[material];
+        return recipeData[material as keyof typeof recipeData];
     }
 
     private static getRecipe({ material: id, count: upgradeCount }: IMaterialRecipeIngredient): {
