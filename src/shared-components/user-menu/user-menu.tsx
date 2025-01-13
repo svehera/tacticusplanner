@@ -246,23 +246,23 @@ export const UserMenu = () => {
                             <ListItemText>Logout</ListItemText>
                         </MenuItem>
 
-                        <Divider />
+                        {/*<Divider />*/}
 
-                        {userInfo.snowprintIdConnected ? (
-                            <MenuItem onClick={syncWithTacticus}>
-                                <ListItemIcon>
-                                    <UploadIcon />
-                                </ListItemIcon>
-                                <ListItemText>Sync with Tacticus</ListItemText>
-                            </MenuItem>
-                        ) : (
-                            <MenuItem>
-                                <ListItemIcon>
-                                    <UploadIcon />
-                                </ListItemIcon>
-                                <ListItemText>Connect Snowprint ID</ListItemText>
-                            </MenuItem>
-                        )}
+                        {/*{userInfo.snowprintIdConnected ? (*/}
+                        {/*    <MenuItem onClick={syncWithTacticus}>*/}
+                        {/*        <ListItemIcon>*/}
+                        {/*            <UploadIcon />*/}
+                        {/*        </ListItemIcon>*/}
+                        {/*        <ListItemText>Sync with Tacticus</ListItemText>*/}
+                        {/*    </MenuItem>*/}
+                        {/*) : (*/}
+                        {/*    <MenuItem>*/}
+                        {/*        <ListItemIcon>*/}
+                        {/*            <UploadIcon />*/}
+                        {/*        </ListItemIcon>*/}
+                        {/*        <ListItemText>Connect Snowprint ID</ListItemText>*/}
+                        {/*    </MenuItem>*/}
+                        {/*)}*/}
                     </>
                 )}
 

@@ -1,4 +1,4 @@
-import { groupBy } from 'lodash';
+﻿import { groupBy } from 'lodash';
 import React, { useContext } from 'react';
 import { Box, Grid, Input, Slider } from '@mui/material';
 import { Alliance, Campaign, Faction } from 'src/models/enums';
@@ -95,7 +95,7 @@ export const CampaignProgress = ({
     }
 
     function getCampaignFaction(campaign: string): string {
-        const faction = requiredFaction.get(getBaseCampaign(campaign));
+        const faction = requiredFaction.get(getBaseCampaign(campaign as keyof ICampaignsProgress));
         return faction != null ? faction : 'Ultramarines';
     }
 
@@ -144,7 +144,7 @@ export const CampaignProgress = ({
                 </Grid>
             </Grid>
             <Grid>
-                {getRequiredCharacters(campaign).map(unit => {
+                {getRequiredCharacters(campaign as keyof ICampaignsProgress).map(unit => {
                     if (unit.unitType === UnitType.character) {
                         return (
                             <div key={"'char_tile_" + unit.name + "'"} style={{ float: 'left' }}>
