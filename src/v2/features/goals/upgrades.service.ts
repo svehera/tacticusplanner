@@ -19,7 +19,6 @@
     IUpgradeRecipe,
     IUpgradesRaidsDay,
 } from 'src/v2/features/goals/goals.models';
-import { CampaignsProgressionService } from 'src/v2/features/goals/campaigns-progression';
 import {
     ICampaignBattle,
     ICampaignsData,
@@ -59,7 +58,7 @@ export class UpgradesService {
         const result: Record<string, string> = {};
 
         Object.entries(this.recipeExpandedUpgradeData).forEach(data => {
-            const upgradeData = data[1];
+            const [_, upgradeData] = data;
             result[upgradeData.label] = upgradeData.id;
             result[upgradeData.id] = upgradeData.id;
         });

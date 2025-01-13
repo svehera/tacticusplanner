@@ -140,3 +140,5 @@ export class CampaignsProgressData {
 export class MaterialRequirements {
     materials: Record<string, number> = {};
 }
+
+export type CampaignData = [string, CampaignProgressData];
