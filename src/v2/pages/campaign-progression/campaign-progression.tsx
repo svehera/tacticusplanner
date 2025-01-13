@@ -458,7 +458,7 @@ export const CampaignProgression = () => {
      *          material.
      */
     function getCheapestNode(material: string): ICampaignBattleComposed | undefined {
-        let result: ICampaignBattleComposed = undefined;
+        let result: ICampaignBattleComposed | undefined = undefined;
         for (const loc of progression.materialFarmData.get(material)?.farmableLocations ?? []) {
             if (!result || isCampaignTypeMoreEfficient(loc.campaignType, result.campaignType)) {
                 result = loc;
@@ -467,6 +467,10 @@ export const CampaignProgression = () => {
         return result;
     }
 
+    /**
+     * @returns the tooltip text to display that gives human-readable language
+     *          describing how the savings were computed.
+     */
     function getSavingsTooltipText(material: string): string {
         const node = getCheapestNode(material);
         if (!node) return '(unfarmable)';

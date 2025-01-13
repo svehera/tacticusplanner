@@ -94,9 +94,13 @@ export const CampaignProgress = ({
         return campaign.replace(' Elite', '') as keyof ICampaignsProgress;
     }
 
-    function getCampaignFaction(campaign: string): string {
+    function getCampaignFaction(campaign: keyof ICampaignsProgress): string {
         const faction = requiredFaction.get(getBaseCampaign(campaign));
         return faction != null ? faction : 'Ultramarines';
+    }
+
+    function convertStringToCampaign(campaign: string): keyof ICampaignsProgress {
+        return campaign as keyof ICampaignsProgress;
     }
 
     function getRequiredCharacters(campaign: keyof ICampaignsProgress): ICharacter2[] {
@@ -144,7 +148,7 @@ export const CampaignProgress = ({
                 </Grid>
             </Grid>
             <Grid>
-                {getRequiredCharacters(campaign).map(unit => {
+                {getRequiredCharacters(convertStringToCampaign(campaign)).map(unit => {
                     if (unit.unitType === UnitType.character) {
                         return (
                             <div key={"'char_tile_" + unit.name + "'"} style={{ float: 'left' }}>
