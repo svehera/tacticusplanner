@@ -1,9 +1,17 @@
-﻿import React, { useContext } from 'react';
+import { groupBy } from 'lodash';
+import React, { useContext } from 'react';
 import { Box, Grid, Input, Slider } from '@mui/material';
+import { Alliance, Campaign, Faction } from 'src/models/enums';
+
 import Typography from '@mui/material/Typography';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 import { campaignsNames } from '../models/constants';
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
+import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
+import { ICampaignsProgress, ICharacter2 } from 'src/models/interfaces';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 
 export const CampaignsProgress = () => {
     const { campaignsProgress } = useContext(StoreContext);
@@ -52,6 +60,9 @@ export const CampaignProgress = ({
     value: number;
     setValue: (value: number) => void;
 }) => {
+    const { characters } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
+
     const handleSliderChange = (event: Event, newValue: number | number[]) => {
         setValue(newValue as number);
     };
@@ -68,6 +79,37 @@ export const CampaignProgress = ({
         }
     };
 
+    const requiredFaction: Map<keyof ICampaignsProgress, Faction> = new Map([
+        ['Indomitus' as keyof ICampaignsProgress, Faction.Ultramarines],
+        ['Indomitus Mirror' as keyof ICampaignsProgress, Faction.Necrons],
+        ['Fall of Cadia' as keyof ICampaignsProgress, Faction.Black_Legion],
+        ['Fall of Cadia Mirror' as keyof ICampaignsProgress, Faction.Astra_militarum],
+        ['Octarius' as keyof ICampaignsProgress, Faction.Orks],
+        ['Octarius Mirror' as keyof ICampaignsProgress, Faction.Black_Templars],
+        ['Saim-Hann' as keyof ICampaignsProgress, Faction.Aeldari],
+        ['Saim-Hann Mirror' as keyof ICampaignsProgress, Faction.Thousand_Sons],
+    ]);
+
+    function getBaseCampaign(campaign: keyof ICampaignsProgress): keyof ICampaignsProgress {
+        return campaign.replace(' Elite', '') as keyof ICampaignsProgress;
+    }
+
+    function getCampaignFaction(campaign: string): string {
+        const faction = requiredFaction.get(getBaseCampaign(campaign));
+        return faction != null ? faction : 'Ultramarines';
+    }
+
+    function getRequiredCharacters(campaign: keyof ICampaignsProgress): ICharacter2[] {
+        let chars: ICharacter2[] = [];
+        const faction: string = getCampaignFaction(getBaseCampaign(campaign));
+        groupBy(CharactersService.filterUnits(characters, CharactersFilterBy.None, ''), 'faction')[faction].forEach(
+            unit => {
+                const character = unit as ICharacter2;
+                if (character.requiredInCampaign) chars = chars.concat(character);
+            }
+        );
+        return chars;
+    }
     return (
         <Box sx={{ width: 250, opacity: value === max ? 0.5 : 1 }}>
             <Typography id="input-slider" gutterBottom>
@@ -100,6 +142,17 @@ export const CampaignProgress = ({
                         }}
                     />
                 </Grid>
+            </Grid>
+            <Grid>
+                {getRequiredCharacters(campaign).map(unit => {
+                    if (unit.unitType === UnitType.character) {
+                        return (
+                            <div key={"'char_tile_" + unit.name + "'"} style={{ float: 'left' }}>
+                                <CharacterTile key={unit.name} character={unit} onCharacterClick={() => {}} />
+                            </div>
+                        );
+                    }
+                })}
             </Grid>
         </Box>
     );

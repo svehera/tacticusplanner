@@ -250,7 +250,7 @@
         "Passive Ability": "Direct",
         "Number": 24,
         "ForcedSummons": false,
-        "RequiredInCampaign": true,
+        "RequiredInCampaign": false,
         "Icon": "Thutmose-removebg-preview.webp"
     },
     {
@@ -277,7 +277,7 @@
         "Passive Ability": "Energy",
         "Number": 25,
         "ForcedSummons": false,
-        "RequiredInCampaign": true,
+        "RequiredInCampaign": false,
         "Icon": "Anuphet.webp"
     },
     {
@@ -687,7 +687,7 @@
         "Passive Ability": "Physical",
         "Number": 11,
         "ForcedSummons": true,
-        "RequiredInCampaign": true,
+        "RequiredInCampaign": false,
         "Icon": "snotflogga-removebg-preview.webp"
     },
     {
@@ -761,7 +761,7 @@
         "Active Ability": "Direct",
         "Number": 14,
         "ForcedSummons": false,
-        "RequiredInCampaign": true,
+        "RequiredInCampaign": false,
         "Icon": "Tanksmasha-removebg-preview.webp"
     },
     {
@@ -1142,7 +1142,7 @@
         "Active Ability": "Heavy Round",
         "Number": 44,
         "ForcedSummons": false,
-        "RequiredInCampaign": true,
+        "RequiredInCampaign": false,
         "Icon": "Maugan_Ra-removebg-preview.webp"
     },
     {
@@ -1166,7 +1166,7 @@
         "Active Ability": "Piercing",
         "Number": 45,
         "ForcedSummons": false,
-        "RequiredInCampaign": true,
+        "RequiredInCampaign": false,
         "Icon": "Jain_Zar-removebg-preview.webp"
     },
     {
@@ -1366,7 +1366,7 @@
         "Name": "Arjac",
         "Title": "Champion of the Great Wolf",
         "Full Name": "Arjac Rockfist",
-        "Short Name": "Atjac",
+        "Short Name": "Arjac",
         "Faction": "Space Wolves",
         "Alliance": "Imperial",
         "Health": 10548,

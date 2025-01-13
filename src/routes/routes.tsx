@@ -6,6 +6,7 @@ import DesktopApp from '../desktop-app';
 import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
 import { dirtyDozenLazyRoute } from 'src/v2/pages/dirty-dozen/dirty-dozen.route';
 import { insightsLazyRoute } from 'src/v2/pages/insights/insights.route';
+import { campaignProgressionLazyRoute } from 'src/v2/pages/campaign-progression/campaign-progression.route';
 import { wyoLazyRoute } from 'src/v2/pages/who-you-own/who-you-own.route';
 import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.route';
 import { guildWarOffenseLazyRoute } from 'src/v2/pages/guild-war-offense/guild-war-offense.route';
@@ -64,6 +65,7 @@ const planRoutes: RouteObject[] = [
             return { Component: MasterTable };
         },
     },
+    campaignProgressionLazyRoute,
 ];
 
 const learnRoutes: RouteObject[] = [
