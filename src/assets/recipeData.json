@@ -7420,5 +7420,33 @@
         "stat": "Shard",
         "faction": "Aeldari",
         "rarity": "Shard"
+    },
+    "Vitruvius": {
+        "material": "Vitruvius",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Adeptus Mechanicus",
+        "rarity": "Shard"
+    },
+    "Actus": {
+        "material": "Actus",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Adeptus Mechanicus",
+        "rarity": "Shard"
+    },
+    "Tan Gi'Da": {
+        "material": "Tan Gi'Da",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Adeptus Mechanicus",
+        "rarity": "Shard"
+    },
+    "Exitor-Rho": {
+        "material": "Exitor-Rho",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Adeptus Mechanicus",
+        "rarity": "Shard"
     }
 }

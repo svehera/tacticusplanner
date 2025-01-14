@@ -233,6 +233,10 @@ export enum Campaign {
     SHE = 'Saim-Hann Elite',
     SHM = 'Saim-Hann Mirror',
     SHME = 'Saim-Hann Mirror Elite',
+    AMS = 'Adeptus Mechanicus Standard',
+    AMSC = 'Adeptus Mechanicus Standard Challenge',
+    AME = 'Adeptus Mechanicus Extremis',
+    AMEC = 'Adeptus Mechanicus Extremis Challenge',
     Onslaught = 'Onslaught',
 }
 

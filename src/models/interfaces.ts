@@ -845,27 +845,7 @@ export interface IEstimatedRanksSettings {
     upgrades: Record<string, number>;
 }
 
-export type ICampaignsProgress = {
-    Indomitus: number;
-    'Indomitus Mirror': number;
-    'Indomitus Elite': number;
-    'Indomitus Mirror Elite': number;
-
-    'Fall of Cadia': number;
-    'Fall of Cadia Mirror': number;
-    'Fall of Cadia Elite': number;
-    'Fall of Cadia Mirror Elite': number;
-
-    Octarius: number;
-    'Octarius Mirror': number;
-    'Octarius Elite': number;
-    'Octarius Mirror Elite': number;
-
-    'Saim-Hann': number;
-    'Saim-Hann Mirror': number;
-    'Saim-Hann Elite': number;
-    'Saim-Hann Mirror Elite': number;
-};
+export type ICampaignsProgress = Record<Campaign, number>;
 
 export interface IInventory {
     upgrades: Record<string, number>;

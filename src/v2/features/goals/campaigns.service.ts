@@ -307,6 +307,21 @@ export class CampaignsService {
                     },
                 };
             }
+            case Campaign.AMS:
+            case Campaign.AMSC:
+            case Campaign.AME:
+            case Campaign.AMEC: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Imperial,
+                        factions: [Faction.Astra_militarum, Faction.AdeptusMechanicus],
+                    },
+                    allies: {
+                        alliance: Alliance.Chaos,
+                        factions: [Faction.Death_Guard, Faction.WorldEaters],
+                    },
+                };
+            }
             default: {
                 return {
                     enemies: {

@@ -186,11 +186,14 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     'Saim-Hann Mirror': 0,
     'Saim-Hann Elite': 0,
     'Saim-Hann Mirror Elite': 0,
-};
 
-export const campaignsNames: Array<keyof ICampaignsProgress> = Object.keys(defaultCampaignsProgress) as Array<
-    keyof ICampaignsProgress
->;
+    'Adeptus Mechanicus Standard': 0,
+    'Adeptus Mechanicus Standard Challenges': 0,
+    'Adeptus Mechanicus Extremis': 0,
+    'Adeptus Mechanicus Extremis Challenges': 0,
+
+    Onslaught: 0,
+};
 
 export const defaultGWLayout: IGWLayoutZone[] = [
     { id: 'medicaeStation', players: [] },

@@ -966,7 +966,7 @@
         "Passive Ability": "Power",
         "Number": 32,
         "ForcedSummons": false,
-        "RequiredInCampaign": false,
+        "RequiredInCampaign": true,
         "Icon": "Maladus-removebg-preview.webp"
     },
     {
@@ -1014,7 +1014,7 @@
         "Passive Ability": "Blast",
         "Number": 34,
         "ForcedSummons": false,
-        "RequiredInCampaign": false,
+        "RequiredInCampaign": true,
         "Icon": "Pestillian-removebg-preview.webp"
     },
     {
@@ -1037,7 +1037,7 @@
         "Traits": ["Contagions of Nurgle", "Resilient"],
         "Number": 35,
         "ForcedSummons": false,
-        "RequiredInCampaign": false,
+        "RequiredInCampaign": true,
         "Icon": "Corrodius-removebg-preview.webp"
     },
     {

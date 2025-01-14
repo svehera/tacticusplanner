@@ -8850,5 +8850,657 @@
         "expectedGold": 53,
         "enemiesTotal": 11,
         "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Wraithguard"]
+    },
+    "AMS1": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 1,
+        "reward": "Ropes and Chains",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": ["Cadian Guardsman"]
+    },
+    "AMS2": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 2,
+        "reward": "Basic Auxiliary Core",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 3,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+    },
+    "AMS3": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 3,
+        "reward": "Adamantium Ore",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-Caster"]
+    },
+    "AMS4": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 4,
+        "reward": "Wires",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": ["Cadian Guardsman", "Skirarii Vanguard"]
+    },
+    "AMS5": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 5,
+        "reward": "Auspex",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 4,
+        "enemiesTypes": ["Skirarii Vanguard"]
+    },
+    "AMS6": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 6,
+        "reward": "Tan Gi'Da",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Skirarii Vanguard"]
+    },
+    "AMS7": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 7,
+        "reward": "Purity Seal",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 3,
+        "enemiesTypes": ["Skirarii Vanguard"]
+    },
+    "AMS8": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 8,
+        "reward": "Minor Bionic Enhancement",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+    },
+    "AMS9": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 9,
+        "reward": "Vox-Caster",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 4,
+        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+    },
+    "AMS10": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 10,
+        "reward": "Repair-Kit",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 4,
+        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+    },
+    "AMS11": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 11,
+        "reward": "Exitor-Rho",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+    },
+    "AMS12": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 12,
+        "reward": "Rebreather",
+        "expectedGold": 53,
+        "enemiesTotal": 5,
+        "slots": 4,
+        "enemiesTypes": ["Electro-Priest"]
+    },
+    "AMS13": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 13,
+        "reward": "Reinforced Cables",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 4,
+        "enemiesTypes": ["Electro-Priest"]
+    },
+    "AMS14": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 14,
+        "reward": "Plasma Cell",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer"]
+    },
+    "AMS15": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 15,
+        "reward": "Cloak",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 4,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer"]
+    },
+    "AMS16": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 16,
+        "reward": "Motive Force Capacitator",
+        "expectedGold": 53,
+        "enemiesTotal": 4,
+        "slots": 4,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer"]
+    },
+    "AMS17": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 17,
+        "reward": "Actus",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer"]
+    },
+    "AMS18": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 18,
+        "reward": "Fine Micro-Generator",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard"]
+    },
+    "AMS19": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 19,
+        "reward": "The Gold Phoenix",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Skirarii Vanguard"]
+    },
+    "AMS20": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 20,
+        "reward": "Oath Seal",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard"]
+    },
+    "AMS21": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 21,
+        "reward": "Cogwheel Crest",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer"]
+    },
+    "AMS22": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 22,
+        "reward": "Vitruvius",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer"]
+    },
+    "AMS23": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 23,
+        "reward": "Writings",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer", "Cadian Vox-Caster"]
+    },
+    "AMS24": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 24,
+        "reward": "Divinator Class Auspex",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer", "Cadian Lascannon Team"]
+    },
+    "AMS25": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 25,
+        "reward": "Air Purificator",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer", "Cadian Mortar Team"]
+    },
+    "AMS26": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 26,
+        "reward": "Reliquary of Protection",
+        "expectedGold": 53,
+        "enemiesTotal": 11,
+        "enemiesTypes": [
+            "Electro-Priest",
+            "Skirarii Vanguard",
+            "Tech-Priest Enginseer",
+            "Cadian Mortar Team",
+            "Cadian Vox-Caster"
+        ]
+    },
+    "AMS27": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 27,
+        "reward": "Metal Decorative Skull",
+        "expectedGold": 53,
+        "enemiesTotal": 5,
+        "slots": 3,
+        "enemiesTypes": ["Tech-Priest Enginseer"]
+    },
+    "AMS28": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 28,
+        "reward": "Bionic Eye",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": ["Tech-Priest Enginseer", "Cadian Mortar Team", "Cadian Vox-Caster"]
+    },
+    "AMS29": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 29,
+        "reward": "Crate of Salvage",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "enemiesTypes": [
+            "Electro-Priest",
+            "Skirarii Vanguard",
+            "Tech-Priest Enginseer",
+            "Cadian Mortar Team",
+            "Cadian Vox-Caster",
+            "Cadian Lascannon Team"
+        ]
+    },
+    "AMS30": {
+        "campaign": "Adeptus Mechanicus Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 30,
+        "reward": "Blessed Cogitator",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer"]
+    },
+
+    "AME1": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 1,
+        "reward": "Ropes and Chains",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 4,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+    },
+    "AME2": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 2,
+        "reward": "Basic Auxiliary Core",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 4,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-Caster"]
+    },
+    "AME3": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 3,
+        "reward": "Adamantium Ore",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 3,
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Lascannon Team", "Cadian Vox-Caster"]
+    },
+    "AME4": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 4,
+        "reward": "Wires",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team", "Skirarii Vanguard"]
+    },
+    "AME5": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 5,
+        "reward": "Auspex",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 4,
+        "enemiesTypes": ["Skirarii Vanguard"]
+    },
+    "AME6": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 6,
+        "reward": "Tan Gi'Da",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Skirarii Vanguard"]
+    },
+    "AME7": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 7,
+        "reward": "Purity Seal",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 3,
+        "enemiesTypes": ["Skirarii Vanguard"]
+    },
+    "AME8": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 8,
+        "reward": "Minor Bionic Enhancement",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 4,
+        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+    },
+    "AME9": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 9,
+        "reward": "Vox-Caster",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+    },
+    "AME10": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 10,
+        "reward": "Repair-Kit",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+    },
+    "AME11": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 11,
+        "reward": "Exitor-Rho",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+    },
+    "AME12": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 12,
+        "reward": "Rebreather",
+        "expectedGold": 53,
+        "enemiesTotal": 5,
+        "slots": 3,
+        "enemiesTypes": ["Electro-Priest"]
+    },
+    "AME13": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 13,
+        "reward": "Reinforced Cables",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": ["Electro-Priest"]
+    },
+    "AME14": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 14,
+        "reward": "Plasma Cell",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer"]
+    },
+    "AME15": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 15,
+        "reward": "Cloak",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer"]
+    },
+    "AME16": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 16,
+        "reward": "Motive Force Capacitator",
+        "expectedGold": 53,
+        "enemiesTotal": 5,
+        "slots": 3,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer"]
+    },
+    "AME17": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 17,
+        "reward": "Actus",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer"]
+    },
+    "AME18": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 18,
+        "reward": "Fine Micro-Generator",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 4,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard"]
+    },
+    "AME19": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 19,
+        "reward": "The Gold Phoenix",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard"]
+    },
+    "AME20": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 20,
+        "reward": "Oath Seal",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard"]
+    },
+    "AME21": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 21,
+        "reward": "Cogwheel Crest",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer"]
+    },
+    "AME22": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 22,
+        "reward": "Vitruvius",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer"]
+    },
+    "AME23": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 23,
+        "reward": "Writings",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer", "Cadian Vox-Caster"]
+    },
+    "AME24": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 24,
+        "reward": "Divinator Class Auspex",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 4,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer", "Cadian Lascannon Team"]
+    },
+    "AME25": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 25,
+        "reward": "Air Purificator",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer", "Cadian Mortar Team"]
+    },
+    "AME26": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 26,
+        "reward": "Reliquary of Protection",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": [
+            "Electro-Priest",
+            "Skirarii Vanguard",
+            "Tech-Priest Enginseer",
+            "Cadian Mortar Team",
+            "Cadian Vox-Caster"
+        ]
+    },
+    "AME27": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 27,
+        "reward": "Metal Decorative Skull",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Tech-Priest Enginseer", "Electro-Priest", "Skirarii Vanguard"]
+    },
+    "AME28": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 28,
+        "reward": "Bionic Eye",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Electro-Priest", "Cadian Mortar Team", "Cadian Vox-Caster"]
+    },
+    "AME29": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 29,
+        "reward": "Crate of Salvage",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": [
+            "Electro-Priest",
+            "Skirarii Vanguard",
+            "Tech-Priest Enginseer",
+            "Cadian Vox-Caster",
+            "Cadian Lascannon Team"
+        ]
+    },
+    "AME30": {
+        "campaign": "Adeptus Mechanicus Extremis",
+        "campaignType": "Mirror",
+        "nodeNumber": 30,
+        "reward": "Blessed Cogitator",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer"]
+    },
+
+    "AMSC1": {
+        "campaign": "Adeptus Mechanicus Standard Challenge",
+        "campaignType": "Normal",
+        "nodeNumber": 1,
+        "reward": "The Phoenix Ascendant",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-Caster"]
+    },
+    "AMSC2": {
+        "campaign": "Adeptus Mechanicus Standard Challenge",
+        "campaignType": "Normal",
+        "nodeNumber": 2,
+        "reward": "Golden Ornamental Skull",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Skirarii Vanguard"]
+    },
+    "AMSC3": {
+        "campaign": "Adeptus Mechanicus Standard Challenge",
+        "campaignType": "Normal",
+        "nodeNumber": 3,
+        "reward": "Bionic Neural Pathways",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Cadian Mortar Team"]
+    },
+
+    "AMEC1": {
+        "campaign": "Adeptus Mechanicus Extremis Challenge",
+        "campaignType": "Mirror",
+        "nodeNumber": 1,
+        "reward": "Unyielding Rivets",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-Caster", "Skirarii Vanguard"]
+    },
+    "AMEC2": {
+        "campaign": "Adeptus Mechanicus Extremis Challenge",
+        "campaignType": "Mirror",
+        "nodeNumber": 2,
+        "reward": "Archeo-Tech Remnant",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Skirarii Vanguard"]
+    },
+    "AMEC3": {
+        "campaign": "Adeptus Mechanicus Extremis Challenge",
+        "campaignType": "Mirror",
+        "nodeNumber": 3,
+        "reward": "Archeotech Bionics",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Skirarii Vanguard", "Cadian Mortar Team"]
     }
 }
