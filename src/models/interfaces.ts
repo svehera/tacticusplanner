@@ -45,6 +45,7 @@ import { UnitType } from 'src/v2/features/characters/units.enums';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 import { TeamsAction } from 'src/reducers/teams.reducer';
 import { ILreProgressDto } from 'src/models/dto.interfaces';
+import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
 
 export type LreTrackId = 'alpha' | 'beta' | 'gamma';
 
@@ -500,6 +501,7 @@ export interface IDailyRaidsPreferences {
     farmByPriorityOrder: boolean;
     farmStrategy: DailyRaidsStrategy;
     customSettings?: ICustomDailyRaidsSettings;
+    campaignEvent?: CampaignGroupType | 'none';
 }
 
 export type ICustomDailyRaidsSettings = Record<Rarity, CampaignType[]>;

@@ -272,6 +272,7 @@ export const defaultData: IPersonalData2 = {
         shardsEnergy: 0,
         farmByPriorityOrder: false,
         farmStrategy: DailyRaidsStrategy.leastEnergy,
+        campaignEvent: 'none',
     },
     mows: [],
     teams: [],
