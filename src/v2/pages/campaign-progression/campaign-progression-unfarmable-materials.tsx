@@ -1,4 +1,8 @@
 import React from 'react';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { StaticDataService } from 'src/services/static-data.service';
 
@@ -47,13 +51,23 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progre
         }
 
         return (
-            <table key="missing_materials">
-                <tbody>
-                    {Array.from(missingMaterials.values()).map(material => {
-                        return renderMissingMaterial(material);
-                    })}
-                </tbody>
-            </table>
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1-content"
+                    id="unfarmable-materials-accordion">
+                    Unfarmable Materials
+                </AccordionSummary>
+                <AccordionDetails>
+                    <table key="missing_materials">
+                        <tbody>
+                            {Array.from(missingMaterials.values()).map(material => {
+                                return renderMissingMaterial(material);
+                            })}
+                        </tbody>
+                    </table>
+                </AccordionDetails>
+            </Accordion>
         );
     }
 
