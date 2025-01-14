@@ -59,11 +59,43 @@ export const CampaignProgressionHeader = () => {
                             toggled off.
                         </li>
                         <li>It would be nice to have a radio box to hide completed campaigns.</li>
+                        <li>
+                            It would be nice to have a toggle next to each set of goals (ascension, rank up, materials)
+                            to hide/unhide.
+                        </li>
+                        <li>
+                            Make the UI mobile friendly.
+                            <ol>
+                                <li>Probably don&apos;t display goals on mobile.</li>
+                                <li>
+                                    Change each battle to its element that can span both vertically and horizontally.
+                                </li>
+                            </ol>
+                        </li>
+                        <li>
+                            It would be nice to be able to sort the campaigns.
+                            <ol>
+                                <li>
+                                    Biggest early payoff - If you can complete the next N (maybe 5) nodes, which
+                                    campaign gives the biggest win.
+                                </li>
+                                <li>Best payoff for completing the campaign.</li>
+                                <li>Which campaign early has the biggest impact on your highest priority character.</li>
+                                <li>
+                                    Which campaign at the end has the biggest impact on your highest priority character.
+                                </li>
+                            </ol>
+                        </li>
                     </ol>
                 </li>
                 <li>
                     Ignores current inventory but uses applied upgrades. The savings would be hard to parse, or worse,
                     misleading, if we were to use the current inventory.
+                </li>
+                <li>
+                    Mention at the top, where we list unfarmable materials, if our current inventory can already satisfy
+                    our requirements (e.g. we need two &apos;Ard Plates, and we cannot farm them, but we already own
+                    enough of them).
                 </li>
                 <li>
                     <s>Doesn&apos;t list savings forascension/unlock goals.</s>

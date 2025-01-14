@@ -6,13 +6,12 @@ import { CampaignData, CampaignsProgressData } from 'src/v2/features/campaign-pr
 
 import { CharacterImage } from 'src/shared-components/character-image';
 
-export const CampaignProgressionUnfarmableMaterials = ({
-    progression,
-    campaignDataArray,
-}: {
+interface Props {
     progression: CampaignsProgressData;
     campaignDataArray: CampaignData[];
-}) => {
+}
+
+export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progression, campaignDataArray }) => {
     /** Renders an information table row about a specific missing material. */
     function renderMissingMaterial(material: string): any {
         return (

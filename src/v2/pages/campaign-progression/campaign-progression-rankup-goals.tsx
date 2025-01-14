@@ -15,14 +15,13 @@ import { CharacterImage } from 'src/shared-components/character-image';
 import { MiscIcon } from 'src/shared-components/misc-icon';
 import { RankImage } from 'src/shared-components/rank-image';
 
-export const CampaignProgressionRankupGoals = ({
-    campaignData,
-    goals,
-}: {
+interface Props {
     campaignData: CampaignData;
     goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>;
-}) => {
-    const [goalDefs, setGoalDefs] = useState(getColumnDefs());
+}
+
+export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, goals }) => {
+    const [goalDefs] = useState(getColumnDefs());
 
     /** @returns the goal with the given ID. */
     function getGoal(goalId: string): ICharacterUpgradeRankGoal | ICharacterUpgradeMow | undefined {

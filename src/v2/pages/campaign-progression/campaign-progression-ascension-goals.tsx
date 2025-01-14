@@ -14,13 +14,12 @@ import { CharacterImage } from 'src/shared-components/character-image';
 import { RarityImage } from 'src/shared-components/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
 
-export const CampaignProgressionAscensionGoals = ({
-    campaignData,
-    goals,
-}: {
+interface Props {
     campaignData: CampaignData;
     goals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>;
-}) => {
+}
+
+export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignData, goals }) => {
     /** @returns the goal with the given ID. */
     function getGoal(goalId: string): ICharacterAscendGoal | ICharacterUnlockGoal | undefined {
         const filtered: Array<ICharacterAscendGoal | ICharacterUnlockGoal> = goals.filter(

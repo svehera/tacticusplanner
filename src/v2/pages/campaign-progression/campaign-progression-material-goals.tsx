@@ -21,14 +21,13 @@ import { MiscIcon } from 'src/shared-components/misc-icon';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { Tooltip } from '@mui/material';
 
-export const CampaignProgressionMaterialGoals = ({
-    campaignData,
-    progression,
-}: {
+interface Props {
     campaignData: CampaignData;
     progression: CampaignsProgressData;
-}) => {
-    const [colDefs, setColDefs] = useState(getColumnDefs());
+}
+
+export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData, progression }) => {
+    const [colDefs] = useState(getColumnDefs());
 
     /**
      * Returns the unit ID of each character that has a goal requiring at least
