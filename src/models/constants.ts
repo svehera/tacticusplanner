@@ -188,9 +188,9 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     'Saim-Hann Mirror Elite': 0,
 
     'Adeptus Mechanicus Standard': 0,
-    'Adeptus Mechanicus Standard Challenges': 0,
+    'Adeptus Mechanicus Standard Challenge': 0,
     'Adeptus Mechanicus Extremis': 0,
-    'Adeptus Mechanicus Extremis Challenges': 0,
+    'Adeptus Mechanicus Extremis Challenge': 0,
 
     Onslaught: 0,
 };
@@ -395,6 +395,4 @@ export const defaultData: IPersonalData2 = {
     },
 };
 
-export const killPointsIndex = 0;
-export const defeatAllEnemiesIndex = 1;
 export const goalsLimit = 50;
