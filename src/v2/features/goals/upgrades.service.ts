@@ -57,7 +57,7 @@ export class UpgradesService {
         const result: Record<string, string> = {};
 
         Object.entries(this.recipeExpandedUpgradeData).forEach(data => {
-            const upgradeData = data[1];
+            const [_, upgradeData] = data;
             result[upgradeData.label] = upgradeData.id;
             result[upgradeData.id] = upgradeData.id;
         });

@@ -94,8 +94,8 @@ export const CampaignProgress = ({
         return campaign.replace(' Elite', '') as keyof ICampaignsProgress;
     }
 
-    function getCampaignFaction(campaign: string): string {
-        const faction = requiredFaction.get(getBaseCampaign(campaign as keyof ICampaignsProgress));
+    function getCampaignFaction(campaign: keyof ICampaignsProgress): string {
+        const faction = requiredFaction.get(getBaseCampaign(campaign));
         return faction != null ? faction : 'Ultramarines';
     }
 
