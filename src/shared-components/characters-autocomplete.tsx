@@ -29,7 +29,11 @@ export const CharactersAutocomplete = ({
         const key = event.key;
         if (key === 'Enter') {
             const value = (event.target as HTMLInputElement).value ?? '';
-            const char = characters.find(x => x.name.toLowerCase().includes(value.toLowerCase()));
+            const char = characters.find(
+                x =>
+                    x.name.toLowerCase().includes(value.toLowerCase()) ||
+                    x.fullName.toLowerCase().includes(value.toLowerCase())
+            );
             if (char) {
                 updateValue(char);
             }
@@ -50,12 +54,12 @@ export const CharactersAutocomplete = ({
                 open={openAutocomplete}
                 onFocus={() => handleAutocompleteChange(true)}
                 onBlur={() => handleAutocompleteChange(false)}
-                getOptionLabel={option => option.name}
+                getOptionLabel={option => option.fullName}
                 isOptionEqualToValue={(option, value) => option.name === value.name}
                 renderOption={(props, option) => (
                     <CharacterTitle
                         {...props}
-                        key={option.name}
+                        key={option.id}
                         character={option}
                         short={shortChar}
                         onClick={() => updateValue(option)}
