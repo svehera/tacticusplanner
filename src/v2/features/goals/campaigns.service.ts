@@ -137,7 +137,8 @@ export class CampaignsService {
             }
         }
 
-        if (upgradesRarity.length && materialRarity) {
+        if (upgradesRarity.length && materialRarity != undefined) {
+            // console.log("location.reward materialRarity upgradesRarities { " + location.reward + " " + Rarity[materialRarity] + " { " + upgradesRarity.map((value: Rarity, index: number, arrary: Rarity[]) => Rarity[value]).join(", ") + " } }");
             if (!upgradesRarity.includes(materialRarity)) {
                 return false;
             }
