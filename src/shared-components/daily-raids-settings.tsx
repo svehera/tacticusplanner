@@ -6,6 +6,7 @@ import {
     FormControl,
     FormControlLabel,
     FormGroup,
+    FormHelperText,
     FormLabel,
     Input,
     InputLabel,
@@ -294,8 +295,13 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                             label="Campaign Event"
                             onChange={saveCampaignEventChanges}>
                             <MenuItem value={'none'}>None</MenuItem>
-                            <MenuItem value={CampaignGroupType.adMechCE}>Adeptus Mechanicus</MenuItem>
+                            <MenuItem value={CampaignGroupType.adMechCE} className="flex-box gap10">
+                                <span>Adeptus Mechanicus</span>
+                            </MenuItem>
                         </Select>
+                        <FormHelperText>
+                            Select your current Campaign Event to make it available for raids suggestions
+                        </FormHelperText>
                     </FormControl>
                 </FormGroup>
             </DialogContent>

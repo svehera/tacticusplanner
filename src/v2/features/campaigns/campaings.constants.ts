@@ -1,6 +1,7 @@
 import { Campaign, Faction } from 'src/models/enums';
 import { CampaignDifficulty, CampaignGroupType, CampaignReleaseType } from './campaigns.enums';
 import { ICampaignModel } from './campaigns.models';
+import { groupBy, mapValues } from 'lodash';
 
 export const campaignsList: ICampaignModel[] = [
     // Indomitus Campaigns
@@ -173,3 +174,12 @@ export const campaignsList: ICampaignModel[] = [
         difficulty: CampaignDifficulty.eventChallenge,
     },
 ];
+
+export const campaignsByGroup: Record<string, Campaign[]> = mapValues(groupBy(campaignsList, 'groupType'), value =>
+    value.map(x => x.id)
+);
+
+const campaignEvents: CampaignGroupType[] = [CampaignGroupType.adMechCE];
+export const campaignEventsLocations: Campaign[] = campaignsList
+    .filter(x => campaignEvents.includes(x.groupType))
+    .map(x => x.id);
