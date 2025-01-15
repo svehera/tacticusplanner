@@ -1,4 +1,8 @@
 import React, { useContext, useMemo } from 'react';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
 import { StoreContext } from 'src/reducers/store.provider';
@@ -130,29 +134,65 @@ export const CampaignProgression = () => {
             <h1>Campaign Progression</h1>
             {campaignDataArray.map((entry, ignored) => {
                 return (
-                    <div key={'grid_' + entry[0]}>
-                        <p />
-                        <p />
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <CampaignImage campaign={entry[0]} />
-                                    </td>
-                                    <td>{entry[0]}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p />
-                        <p />
-                        {getAscendGoalData(entry).length > 0 && (
-                            <CampaignProgressionAscensionGoals campaignData={entry} goals={shardsGoals} />
-                        )}
-                        {getRankUpGoalData(entry).length > 0 && (
-                            <CampaignProgressionRankupGoals campaignData={entry} goals={upgradeRankOrMowGoals} />
-                        )}
-                        {getCampaignMaterialData(entry).length > 0 && (
-                            <CampaignProgressionMaterialGoals campaignData={entry} progression={progression} />
+                    <div key={'accordion_' + entry[0]}>
+                        {entry[1].savings.length > 0 && (
+                            <Accordion defaultExpanded={entry[1].savings.length > 0}>
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1-content"
+                                    id={'accordion-details-' + entry[0]}>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <CampaignImage campaign={entry[0]} />
+                                                </td>
+                                                <td>{entry[0]}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <Accordion>
+                                        <AccordionSummary
+                                            expandIcon={<ExpandMoreIcon />}
+                                            aria-controls="panel1-content"
+                                            id={'ascend-goals-' + entry[0]}>
+                                            Ascension/Unlock Goals
+                                        </AccordionSummary>
+                                        <AccordionDetails>
+                                            {getAscendGoalData(entry).length > 0 && (
+                                                <CampaignProgressionAscensionGoals
+                                                    campaignData={entry}
+                                                    goals={shardsGoals}
+                                                />
+                                            )}
+                                        </AccordionDetails>
+                                    </Accordion>
+                                    <Accordion>
+                                        <AccordionSummary
+                                            expandIcon={<ExpandMoreIcon />}
+                                            aria-controls="panel1-content"
+                                            id={'rankup-goals-' + entry[0]}>
+                                            Rank-Up Goals
+                                        </AccordionSummary>
+                                        <AccordionDetails>
+                                            {getRankUpGoalData(entry).length > 0 && (
+                                                <CampaignProgressionRankupGoals
+                                                    campaignData={entry}
+                                                    goals={upgradeRankOrMowGoals}
+                                                />
+                                            )}
+                                        </AccordionDetails>
+                                    </Accordion>
+                                    {getCampaignMaterialData(entry).length > 0 && (
+                                        <CampaignProgressionMaterialGoals
+                                            campaignData={entry}
+                                            progression={progression}
+                                        />
+                                    )}
+                                </AccordionDetails>
+                            </Accordion>
                         )}
                     </div>
                 );
