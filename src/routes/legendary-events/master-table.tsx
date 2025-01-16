@@ -215,6 +215,7 @@ export const MasterTable = () => {
                             }
                         },
                         cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
+                        valueGetter: (params: ValueGetterParams<ITableRow>) => params.data?.character.name,
                         tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
                     },
                     {
