@@ -174,7 +174,7 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                         columnGroupShow: 'open',
                         headerName: 'Used',
                         valueGetter: params => {
-                            return params.data?.locations.filter(x => x.isSelected).map(x => x.id) ?? [];
+                            return params.data?.locations.filter(x => x.isSuggested).map(x => x.id) ?? [];
                         },
                         cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
                             const { data } = params;
@@ -227,7 +227,7 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                         columnGroupShow: 'open',
                         valueGetter: params => {
                             return (
-                                params.data?.locations.filter(x => !x.isSelected && x.isUnlocked).map(x => x.id) ?? []
+                                params.data?.locations.filter(x => !x.isSuggested && x.isUnlocked).map(x => x.id) ?? []
                             );
                         },
                         cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
