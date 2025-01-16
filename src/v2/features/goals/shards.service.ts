@@ -16,7 +16,7 @@ import { StaticDataService } from 'src/services';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import { orderBy, sum } from 'lodash';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
-import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaings.constants';
+import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaigns.constants';
 
 export class ShardsService {
     static getShardsEstimatedDays(
