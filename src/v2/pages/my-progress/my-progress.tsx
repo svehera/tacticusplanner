@@ -1,19 +1,15 @@
 import React, { useContext } from 'react';
-import { campaignsList } from 'src/v2/features/campaigns/campaings.constants';
-import { CampaignReleaseType } from 'src/v2/features/campaigns/campaigns.enums';
 import { CampaignProgress } from 'src/v2/features/campaigns/campaign-progress';
 import { groupBy } from 'lodash';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { Campaign } from 'src/models/enums';
+import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 
 export const MyProgress = () => {
     const { characters, campaignsProgress, viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
-    const standardCampaigns = campaignsList.filter(campaign => campaign.releaseType === CampaignReleaseType.standard);
-    const campaignEvents = campaignsList.filter(campaign => campaign.releaseType === CampaignReleaseType.event);
-
-    const standardCampaignsByGroup = Object.entries(groupBy(standardCampaigns, 'groupType'));
+    const standardCampaignsByGroup = Object.entries(groupBy(CampaignsService.standardCampaigns, 'groupType'));
 
     const updateCampaignProgress = (id: Campaign, value: number) => {
         dispatch.campaignsProgress({
@@ -44,7 +40,7 @@ export const MyProgress = () => {
 
             <h2>Campaign Events</h2>
             <div className="flex-box gap20 wrap">
-                {campaignEvents.map(campaign => (
+                {CampaignsService.campaignEvents.map(campaign => (
                     <CampaignProgress
                         key={campaign.id}
                         characters={characters}

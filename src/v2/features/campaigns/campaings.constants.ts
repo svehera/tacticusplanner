@@ -143,7 +143,7 @@ export const campaignsList: ICampaignModel[] = [
     // Adeptus Mechanicus Campaign Events
     {
         id: Campaign.AMS,
-        name: 'Ad Mech Standard',
+        name: 'Adeptus Mechanicus Standard',
         faction: Faction.Death_Guard,
         releaseType: CampaignReleaseType.event,
         groupType: CampaignGroupType.adMechCE,
@@ -151,7 +151,7 @@ export const campaignsList: ICampaignModel[] = [
     },
     {
         id: Campaign.AMSC,
-        name: 'Standard Challenges',
+        name: 'Adeptus Mechanicus Standard Challenge',
         faction: Faction.Death_Guard,
         releaseType: CampaignReleaseType.event,
         groupType: CampaignGroupType.adMechCE,
@@ -159,7 +159,7 @@ export const campaignsList: ICampaignModel[] = [
     },
     {
         id: Campaign.AME,
-        name: 'Ad Mech Extremis',
+        name: 'Adeptus Mechanicus Extremis',
         faction: Faction.Death_Guard,
         releaseType: CampaignReleaseType.event,
         groupType: CampaignGroupType.adMechCE,
@@ -167,7 +167,7 @@ export const campaignsList: ICampaignModel[] = [
     },
     {
         id: Campaign.AMEC,
-        name: 'Extremis Challenges',
+        name: 'Adeptus Mechanicus Extremis Challenge',
         faction: Faction.Death_Guard,
         releaseType: CampaignReleaseType.event,
         groupType: CampaignGroupType.adMechCE,
