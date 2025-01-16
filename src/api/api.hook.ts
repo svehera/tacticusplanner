@@ -1,4 +1,4 @@
-﻿import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
+﻿import axios, { AxiosRequestConfig, AxiosResponse, GenericAbortSignal, Method } from 'axios';
 
 const baseUrl = import.meta.env.VITE_API_HOST + '/api/';
 
@@ -6,7 +6,8 @@ export const callApi = <TData = any | null, TError = any | null, TResponse = TDa
     method: Method,
     url: string,
     data?: TData,
-    headers?: Record<string, string>
+    headers?: Record<string, string>,
+    signal?: GenericAbortSignal
 ): Promise<AxiosResponse<TResponse, TError>> => {
     const config: AxiosRequestConfig<TData> = {
         method,
@@ -18,6 +19,7 @@ export const callApi = <TData = any | null, TError = any | null, TResponse = TDa
             ...(headers ?? {}),
         },
         data: data,
+        signal,
     };
 
     return axios.request<TResponse>(config);

@@ -214,6 +214,7 @@ export class StaticDataService {
         const unitData: IUnitData = {
             id: rawData.Name,
             shortName: rawData['Short Name'],
+            fullName: rawData['Full Name'],
             unitType: UnitType.character,
             alliance: rawData.Alliance,
             faction: rawData.Faction,

@@ -186,11 +186,14 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     'Saim-Hann Mirror': 0,
     'Saim-Hann Elite': 0,
     'Saim-Hann Mirror Elite': 0,
-};
 
-export const campaignsNames: Array<keyof ICampaignsProgress> = Object.keys(defaultCampaignsProgress) as Array<
-    keyof ICampaignsProgress
->;
+    'Adeptus Mechanicus Standard': 0,
+    'Adeptus Mechanicus Standard Challenge': 0,
+    'Adeptus Mechanicus Extremis': 0,
+    'Adeptus Mechanicus Extremis Challenge': 0,
+
+    Onslaught: 0,
+};
 
 export const defaultGWLayout: IGWLayoutZone[] = [
     { id: 'medicaeStation', players: [] },
@@ -263,12 +266,14 @@ export const defaultData: IPersonalData2 = {
         lreTileShowUnitBias: true,
         lreTileShowUnitActiveAbility: true,
         lreTileShowUnitPassiveAbility: true,
+        myProgressShowCoreCharacters: true,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,
         shardsEnergy: 0,
         farmByPriorityOrder: false,
         farmStrategy: DailyRaidsStrategy.leastEnergy,
+        campaignEvent: 'none',
     },
     mows: [],
     teams: [],
@@ -392,6 +397,4 @@ export const defaultData: IPersonalData2 = {
     },
 };
 
-export const killPointsIndex = 0;
-export const defeatAllEnemiesIndex = 1;
 export const goalsLimit = 50;

@@ -9,6 +9,7 @@ import {
     IUserDataResponse,
 } from './api-interfaces';
 import { IPersonalData2 } from '../models/interfaces';
+import { GenericAbortSignal } from 'axios';
 
 export const registerUser = (username: string, password: string) =>
     callApi<IRegistrationResponse, IErrorResponse>('POST', 'RegisterUser', { username, password } as any);
@@ -28,10 +29,16 @@ export const getUserDataApi = () => callApi<IUserDataResponse, IErrorResponse>('
 export const getUsersApi = (username: string) =>
     callApi<IGetUser[], IErrorResponse>('GET', `users?username=${username}`);
 
-export const setUserDataApi = (userData: IPersonalData2) =>
-    callApi<IPersonalData2, IErrorResponse, IUserDataResponse>('PUT', 'users/me', userData, {
-        'TP-ModifiedDateTicks': localStorage.getItem('TP-ModifiedDateTicks') ?? '',
-    });
+export const setUserDataApi = (userData: IPersonalData2, signal?: GenericAbortSignal) =>
+    callApi<IPersonalData2, IErrorResponse, IUserDataResponse>(
+        'PUT',
+        'users/me',
+        userData,
+        {
+            'TP-ModifiedDateTicks': localStorage.getItem('TP-ModifiedDateTicks') ?? '',
+        },
+        signal
+    );
 
 export const resetUserPasswordApi = (username: string, password: string) =>
     callApi<IPersonalData2, IErrorResponse>('PUT', `users/${username}/resetPassword`, { username, password } as any);

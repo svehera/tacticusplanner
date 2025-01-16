@@ -15,14 +15,18 @@ export const CharacterTitle = ({
     hideName,
     short,
     imageSize,
+    fullName,
 }: {
     character: IUnit;
     showLockedWithOpacity?: boolean;
     hideName?: boolean;
     onClick?: () => void;
     short?: boolean;
+    fullName?: boolean;
     imageSize?: number;
 }) => {
+    const name = fullName ? character.fullName : character.shortName;
+
     if (isCharacter(character)) {
         const isUnlocked = character.rank > Rank.Locked;
 
@@ -43,7 +47,7 @@ export const CharacterTitle = ({
                     name={character.name}
                     imageSize={imageSize}
                 />
-                {!hideName && <span>{character.shortName}</span>}
+                {!hideName && <span>{name}</span>}
                 <RarityImage rarity={character.rarity} />
                 {isUnlocked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
                 <Tooltip
@@ -72,7 +76,7 @@ export const CharacterTitle = ({
                         />
                     </span>
                 </Tooltip>
-                {!hideName && <span>{character.shortName}</span>}
+                {!hideName && <span>{name}</span>}
             </div>
         );
 
@@ -83,7 +87,7 @@ export const CharacterTitle = ({
         return (
             <div className="flex-box gap5 p5" onClick={onClick}>
                 <CharacterImage icon={character.badgeIcon} imageSize={35} />
-                <span>{character.name}</span>
+                <span>{name}</span>
             </div>
         );
     }
