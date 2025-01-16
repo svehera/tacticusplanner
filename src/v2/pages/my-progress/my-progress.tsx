@@ -1,12 +1,11 @@
 import React, { useCallback, useContext } from 'react';
-import { campaignsList } from 'src/v2/features/campaigns/campaings.constants';
-import { CampaignReleaseType } from 'src/v2/features/campaigns/campaigns.enums';
 import { CampaignProgress } from 'src/v2/features/campaigns/campaign-progress';
 import { groupBy } from 'lodash';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { Campaign } from 'src/models/enums';
 import ViewSettings from 'src/routes/legendary-events/view-settings';
 import { ICampaignModel } from 'src/v2/features/campaigns/campaigns.models';
+import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 
 /**
  * MyProgress component to display and manage campaign progress.
@@ -17,10 +16,7 @@ export const MyProgress = () => {
     const { characters, campaignsProgress, viewPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
-    const standardCampaigns = campaignsList.filter(campaign => campaign.releaseType === CampaignReleaseType.standard);
-    const campaignEvents = campaignsList.filter(campaign => campaign.releaseType === CampaignReleaseType.event);
-
-    const standardCampaignsByGroup = Object.entries(groupBy(standardCampaigns, 'groupType'));
+    const standardCampaignsByGroup = Object.entries(groupBy(CampaignsService.standardCampaigns, 'groupType'));
 
     const updateCampaignProgress = (id: Campaign, value: number) => {
         dispatch.campaignsProgress({
@@ -56,9 +52,10 @@ export const MyProgress = () => {
                     </div>
                 ))}
             </div>
-
             <h2>Campaign Events</h2>
-            <div className="flex-box gap20 wrap">{campaignEvents.map(renderCampaignProgress)}</div>
+            <div className="flex-box gap20 wrap">
+                {CampaignsService.campaignEvents.map(renderCampaignProgress)}
+            </div>
         </>
     );
 };
