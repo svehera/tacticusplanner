@@ -459,6 +459,7 @@ export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IW
     inventoryShowAlphabet: boolean;
     inventoryShowPlusMinus: boolean;
     goalsTableView: boolean;
+    myProgressShowCoreCharacters: boolean;
 }
 
 export interface IWyoViewSettings {
@@ -669,7 +670,7 @@ export interface ICampaignBattleComposed {
     enemiesTotal: number;
     enemiesTypes: string[];
     // new props for upgrades service
-    isSelected?: boolean;
+    isSuggested?: boolean;
     isUnlocked?: boolean;
     isPassFilter?: boolean;
     isCompleted?: boolean;

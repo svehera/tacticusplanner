@@ -266,6 +266,7 @@ export const defaultData: IPersonalData2 = {
         lreTileShowUnitBias: true,
         lreTileShowUnitActiveAbility: true,
         lreTileShowUnitPassiveAbility: true,
+        myProgressShowCoreCharacters: true,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,

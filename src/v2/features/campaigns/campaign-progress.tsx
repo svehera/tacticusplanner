@@ -11,10 +11,15 @@ import { useDebounceCallback } from 'usehooks-ts';
 interface Props {
     characters: ICharacter2[];
     campaign: ICampaignModel;
-    progress: number;
-    changeProgress: (value: number) => void;
+    progress: number; // Initial progress of the campaign.
+    changeProgress: (value: number) => void; // Callback to update progress externally.
 }
 
+/**
+ * CampaignProgress Component
+ * Displays the progress of a campaign using a slider and input,
+ * and lists required characters for the campaign.
+ */
 export const CampaignProgress: React.FC<Props> = ({
     campaign,
     progress: initialProgress,
@@ -24,6 +29,7 @@ export const CampaignProgress: React.FC<Props> = ({
     const [currProgress, setCurrProgress] = useState(initialProgress);
     const debounceProgressChange = useDebounceCallback(changeProgress, 500);
 
+    // Get the maximum number of nodes based on the campaign difficulty.
     const getMaxNodes = (difficulty: CampaignDifficulty) => {
         switch (difficulty) {
             case CampaignDifficulty.standard:
@@ -41,6 +47,7 @@ export const CampaignProgress: React.FC<Props> = ({
         }
     };
 
+    //  Get the color based on the campaign difficulty.
     const getColor = (difficulty: CampaignDifficulty) => {
         switch (difficulty) {
             case CampaignDifficulty.elite:
@@ -53,9 +60,11 @@ export const CampaignProgress: React.FC<Props> = ({
 
     const max = useMemo(() => getMaxNodes(campaign.difficulty), [campaign.difficulty]);
     const color = useMemo(() => getColor(campaign.difficulty), [campaign.difficulty]);
-    const requiredCharacters = useMemo(
+
+    // Filter characters required for the campaign.
+    const coreCharacters = useMemo(
         () => characters.filter(x => x.faction === campaign.faction && x.requiredInCampaign),
-        []
+        [characters]
     );
 
     const updateProgress = (value: number): void => {
@@ -71,6 +80,9 @@ export const CampaignProgress: React.FC<Props> = ({
         updateProgress(event.target.value === '' ? 0 : Number(event.target.value));
     };
 
+    /**
+     * Handle blur events for the input field to ensure the progress value is within bounds.
+     */
     const handleBlur = () => {
         if (currProgress < 0) {
             updateProgress(0);
@@ -114,7 +126,7 @@ export const CampaignProgress: React.FC<Props> = ({
             </Grid>
             <Grid>
                 <div className="flex-box gap5">
-                    {requiredCharacters.map(unit => (
+                    {coreCharacters.map(unit => (
                         <CharacterTile key={unit.id} character={unit} />
                     ))}
                 </div>

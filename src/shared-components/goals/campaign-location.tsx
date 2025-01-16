@@ -10,6 +10,8 @@ interface Props {
 }
 
 export const CampaignLocation: React.FC<Props> = ({ location, unlocked, short = false }) => {
+    // Campaigns events has optional "Challenge" nodes 3B, 13B and 25B
+    // this function converts linear progression to proper labels
     const locationNumber = useMemo(() => {
         const challengeCampaigns = [Campaign.AMSC, Campaign.AMEC];
         if (challengeCampaigns.includes(location.campaign)) {

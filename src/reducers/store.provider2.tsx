@@ -39,6 +39,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
     const [modified, setModified] = useState(false);
     const [saveTimeoutId, setSaveTimeoutId] = useState<NodeJS.Timeout>();
+    const [abortController, setAbortController] = useState<AbortController>();
 
     const [modifiedDate, setModifiedDate] = useState(globalState.modifiedDate);
     const [seenAppVersion, setSeenAppVersion] = useState<string | undefined | null>(globalState.seenAppVersion);
@@ -206,16 +207,21 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         setModified(false);
 
         if (isAuthenticated) {
+            abortController?.abort();
             clearTimeout(saveTimeoutId);
+            const controller = new AbortController();
             const timeoutId = setTimeout(
                 () => {
-                    setUserDataApi(storeValue)
+                    setUserDataApi(storeValue, controller.signal)
                         .then(({ data }) => {
                             const { modifiedDateTicks } = data;
                             localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
                             enqueueSnackbar('Pushed local data to server.', { variant: 'success' });
                         })
                         .catch((err: AxiosError<IErrorResponse>) => {
+                            if (err.code === 'ERR_CANCELED') {
+                                return;
+                            }
                             if (err.response?.status === 401) {
                                 enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
                             } else if (err.response?.status === 409) {
@@ -233,6 +239,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 isMobile ? 1000 : 10000
             );
             setSaveTimeoutId(timeoutId);
+            setAbortController(controller);
         }
     }, [modified]);
 

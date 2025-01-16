@@ -180,6 +180,7 @@ export const campaignsByGroup: Record<string, Campaign[]> = mapValues(groupBy(ca
 );
 
 const campaignEvents: CampaignGroupType[] = [CampaignGroupType.adMechCE];
+
 export const campaignEventsLocations: Campaign[] = campaignsList
     .filter(x => campaignEvents.includes(x.groupType))
     .map(x => x.id);

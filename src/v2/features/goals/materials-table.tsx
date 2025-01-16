@@ -155,7 +155,7 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                         },
                         cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
                             const locations: ICampaignBattleComposed[] = props.data?.locations ?? [];
-                            const usedLocations = locations.filter(x => x.isSelected).length;
+                            const usedLocations = locations.filter(x => x.isSuggested).length;
                             const canBeUsedLocations = locations.filter(x => x.isUnlocked && x.isPassFilter).length;
                             const lockedLocations = locations.filter(x => !x.isUnlocked).length;
                             return (
@@ -182,7 +182,7 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                                 return (
                                     <div className="flex-box gap5 wrap">
                                         {data.locations
-                                            .filter(x => x.isSelected)
+                                            .filter(x => x.isSuggested)
                                             .map(location => (
                                                 <CampaignLocation
                                                     key={location.id}
@@ -236,7 +236,7 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                                 return (
                                     <div className="flex-box gap5 wrap">
                                         {data.locations
-                                            .filter(x => !x.isSelected && x.isUnlocked)
+                                            .filter(x => !x.isSuggested && x.isUnlocked)
                                             .map(location => (
                                                 <CampaignLocation
                                                     key={location.id}

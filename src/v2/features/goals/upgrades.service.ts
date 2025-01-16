@@ -132,7 +132,7 @@ export class UpgradesService {
         let upgradesToFarm = allUpgrades.filter(x => !x.isBlocked && !x.isFinished && x.energyLeft > 0);
         const raidedLocations = settings.completedLocations.filter(x => !x.isShardsLocation).map(x => x.id);
         const raidedUpgrades = allUpgrades.filter(x =>
-            x.locations.filter(location => location.isSelected).some(location => raidedLocations.includes(location.id))
+            x.locations.filter(location => location.isSuggested).some(location => raidedLocations.includes(location.id))
         );
 
         while (upgradesToFarm.length > 0) {
@@ -163,7 +163,7 @@ export class UpgradesService {
                     .flatMap(x => x.raidLocations)
                     .map(x => x.id);
                 const selectedLocations = material.locations.filter(
-                    location => location.isSelected && !plannedLocations.includes(location.id)
+                    location => location.isSuggested && !plannedLocations.includes(location.id)
                 );
 
                 const raidLocations: IItemRaidLocation[] = [];
@@ -261,7 +261,7 @@ export class UpgradesService {
 
             iteration++;
             upgradesToFarm = upgradesToFarm.filter(
-                x => x.energyLeft > Math.min(...x.locations.filter(c => c.isSelected).map(l => l.energyCost))
+                x => x.energyLeft > Math.min(...x.locations.filter(c => c.isSuggested).map(l => l.energyCost))
             );
             if (iteration > 1000) {
                 console.error('Infinite loop', resultDays);
@@ -353,7 +353,7 @@ export class UpgradesService {
             .filter(
                 x =>
                     x.daysTotal - average > average &&
-                    x.locations.some(location => location.isUnlocked && location.isPassFilter && !location.isSelected)
+                    x.locations.some(location => location.isUnlocked && location.isPassFilter && !location.isSuggested)
             )
             .map(x => x.id);
 
@@ -364,10 +364,10 @@ export class UpgradesService {
         for (const upgradeId of correctUpgradesLocations) {
             const upgrade = upgrades[upgradeId];
             const newLocation = upgrade.locations.find(
-                location => location.isUnlocked && location.isPassFilter && !location.isSelected
+                location => location.isUnlocked && location.isPassFilter && !location.isSuggested
             );
             if (newLocation) {
-                newLocation.isSelected = true;
+                newLocation.isSuggested = true;
             }
         }
 
@@ -384,7 +384,7 @@ export class UpgradesService {
     ): ICharacterUpgradeEstimate {
         const { id, label, rarity, iconPath, locations, relatedCharacters, relatedGoals } = upgrade;
 
-        const selectedLocations = locations.filter(x => x.isSelected);
+        const selectedLocations = locations.filter(x => x.isSuggested);
 
         const leftCount = Math.max(requiredCount - acquiredCount, 0);
 
@@ -487,6 +487,7 @@ export class UpgradesService {
         settings: IEstimatedRanksSettings
     ): void {
         const completedLocations = settings.completedLocations.map(location => location.id);
+        // get locations of the selected Campaign Event if there are any
         const currCampaignEventLocations = campaignsByGroup[settings.preferences.campaignEvent ?? ''] ?? [];
         for (const upgradeId in upgrades) {
             const combinedUpgrade = upgrades[upgradeId];
@@ -501,13 +502,16 @@ export class UpgradesService {
                     !settings.filters ||
                     CampaignsService.passLocationFilter(location, settings.filters, combinedUpgrade.rarity);
                 location.isCompleted = completedLocations.some(locationId => location.id === locationId);
-                location.isSelected =
+
+                // location can be suggested for raids only if it is unlocked, passed other filters
+                // and in case it is Campaign Event location user should have specific Campaign Event selected
+                location.isSuggested =
                     location.isUnlocked &&
                     location.isPassFilter &&
                     (!isCampaignEventLocation || isCampaignEventLocationAvailable);
             }
             const minEnergy = Math.min(
-                ...combinedUpgrade.locations.filter(x => x.isSelected).map(x => x.energyPerItem)
+                ...combinedUpgrade.locations.filter(x => x.isSuggested).map(x => x.energyPerItem)
             );
 
             if (
@@ -516,7 +520,7 @@ export class UpgradesService {
                 )
             ) {
                 for (const location of combinedUpgrade.locations) {
-                    location.isSelected = location.isSelected && location.energyPerItem === minEnergy;
+                    location.isSuggested = location.isSuggested && location.energyPerItem === minEnergy;
                 }
             }
 
@@ -525,11 +529,11 @@ export class UpgradesService {
                 settings.preferences.customSettings
             ) {
                 const locationTypes = [...settings.preferences.customSettings[combinedUpgrade.rarity]];
-                const selectedLocations = combinedUpgrade.locations.filter(x => x.isSelected);
+                const selectedLocations = combinedUpgrade.locations.filter(x => x.isSuggested);
                 let ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
                 if (ignoredLocations.length !== selectedLocations.length) {
                     for (const ignoredLocation of ignoredLocations) {
-                        ignoredLocation.isSelected = false;
+                        ignoredLocation.isSuggested = false;
                     }
                 } else {
                     if (locationTypes.includes(CampaignType.Elite) && !locationTypes.includes(CampaignType.Mirror)) {
@@ -538,7 +542,7 @@ export class UpgradesService {
 
                         if (ignoredLocations.length !== selectedLocations.length) {
                             for (const ignoredLocation of ignoredLocations) {
-                                ignoredLocation.isSelected = false;
+                                ignoredLocation.isSuggested = false;
                             }
                         }
                     }

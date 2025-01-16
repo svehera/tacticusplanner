@@ -1,12 +1,11 @@
 ﻿import React, { useContext } from 'react';
-import { Divider, FormControlLabel, FormGroup, Popover, Switch, Tooltip } from '@mui/material';
+import { FormControlLabel, FormGroup, Popover, Switch, Tooltip } from '@mui/material';
 import { IViewPreferences, IViewOption } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import Button from '@mui/material/Button';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Conditional } from 'src/v2/components/conditional';
 
-type OptionsPreset = 'wyo' | 'inventory';
+type OptionsPreset = 'wyo' | 'inventory' | 'myProgress';
 
 const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
     const dispatch = useContext(DispatchContext);
@@ -123,11 +122,20 @@ const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
         },
     ];
 
+    const myProgressOptions: IViewOption[] = [
+        {
+            label: 'Show core characters',
+            key: 'myProgressShowCoreCharacters',
+            value: viewPreferences.myProgressShowCoreCharacters,
+            disabled: false,
+        },
+    ];
+
     return (
         <FormGroup style={{ display: 'flex', flexDirection: 'row', height: preset === 'wyo' ? '55px' : 'unset' }}>
-            <Conditional condition={preset === 'wyo'}>{renderPopover(wyoOptions.map(renderOption))}</Conditional>
-
-            <Conditional condition={preset === 'inventory'}>{inventoryOptions.map(renderOption)}</Conditional>
+            {preset === 'wyo' && renderPopover(wyoOptions.map(renderOption))}
+            {preset === 'inventory' && inventoryOptions.map(renderOption)}
+            {preset === 'myProgress' && myProgressOptions.map(renderOption)}
         </FormGroup>
     );
 };

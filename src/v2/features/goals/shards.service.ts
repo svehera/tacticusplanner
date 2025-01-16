@@ -65,6 +65,9 @@ export class ShardsService {
                 const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
                 const isPassFilter =
                     !settings.filters || CampaignsService.passLocationFilter(location, settings.filters);
+
+                // location can be suggested for raids only if it is unlocked, passed other filters
+                // and in case it is Campaign Event location user should have specific Campaign Event selected
                 return (
                     location.nodeNumber <= campaignProgress &&
                     isPassFilter &&
