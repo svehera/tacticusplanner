@@ -18,16 +18,11 @@ import { teamsDesktopLazyRoute } from 'src/v2/pages/teams/teams.route';
 import { mowLookupDesktopLazyRoute } from 'src/v2/pages/mow-lookup/mow-lookup.route';
 import { guidesLazyRoute } from 'src/v2/pages/guides/guides.route';
 import { lreLazyRoute } from 'src/v2/pages/lre/lre-route';
+import { myProgressLazyRoute } from 'src/v2/pages/my-progress/my-progress.route';
 
-const inputRoutes: RouteObject[] = [
+export const globalInputRoutes: RouteObject[] = [
     wyoLazyRoute,
-    {
-        path: 'input/campaignsProgress',
-        async lazy() {
-            const { CampaignsProgress } = await import('./campaigns-progress');
-            return { Component: CampaignsProgress };
-        },
-    },
+    myProgressLazyRoute,
     {
         path: 'input/inventory',
         async lazy() {
@@ -38,7 +33,7 @@ const inputRoutes: RouteObject[] = [
     guildLazyRoute,
 ];
 
-const planRoutes: RouteObject[] = [
+export const globalPlanRoutes: RouteObject[] = [
     {
         path: 'plan/goals',
         async lazy() {
@@ -68,7 +63,7 @@ const planRoutes: RouteObject[] = [
     campaignProgressionLazyRoute,
 ];
 
-const learnRoutes: RouteObject[] = [
+export const globalLearnRoutes: RouteObject[] = [
     {
         path: 'learn/characters',
         async lazy() {
@@ -116,9 +111,9 @@ export const appRoutes: () => RouteObject[] = () => [
                     return { Component: Home };
                 },
             },
-            ...inputRoutes,
-            ...planRoutes,
-            ...learnRoutes,
+            ...globalInputRoutes,
+            ...globalPlanRoutes,
+            ...globalLearnRoutes,
             {
                 path: 'contacts',
                 async lazy() {

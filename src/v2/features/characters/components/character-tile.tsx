@@ -73,7 +73,7 @@ export const CharacterTile = ({
                     placement={'top'}
                     title={
                         <span>
-                            {character.name}
+                            {character.fullName}
                             <br />
                             Power: {numberToThousandsStringOld(CharactersPowerService.getCharacterPower(character))}
                             <br />

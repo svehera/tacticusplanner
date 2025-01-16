@@ -45,7 +45,11 @@ export const UnitsAutocomplete = <T extends IUnit>({
         const key = event.key;
         if (key === 'Enter') {
             const value = (event.target as HTMLInputElement).value ?? '';
-            const char = options.find(x => x.name.toLowerCase().includes(value.toLowerCase()));
+            const char = options.find(
+                x =>
+                    x.name.toLowerCase().includes(value.toLowerCase()) ||
+                    x.fullName.toLowerCase().includes(value.toLowerCase())
+            );
             if (char) {
                 updateValue(char);
             }
@@ -66,14 +70,15 @@ export const UnitsAutocomplete = <T extends IUnit>({
             open={openAutocomplete}
             onFocus={() => handleAutocompleteChange(true)}
             onBlur={() => handleAutocompleteChange(false)}
-            getOptionLabel={option => option.name}
+            getOptionLabel={option => option.fullName}
             isOptionEqualToValue={(option, value) => option.id === value.id}
             renderOption={(props, option) => (
                 <CharacterTitle
                     {...props}
                     key={option.name}
                     character={option}
-                    short={true}
+                    short
+                    fullName
                     onClick={() => updateValue(option)}
                 />
             )}

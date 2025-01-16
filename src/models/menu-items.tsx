@@ -27,6 +27,7 @@ import { teamsMenuItem } from 'src/v2/pages/teams/teams.menu-item';
 import { mowLookupMenuItem } from 'src/v2/pages/mow-lookup/mow-lookup.menu-item';
 import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';
 import { activeLreMenuItems, inactiveLreMenuItems } from 'src/v2/pages/lre/lre.menu-item';
+import { myProgressMenuItem } from 'src/v2/pages/my-progress/my-progress.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -44,7 +45,7 @@ export class MenuItemTP {
 
 export const menuItemById = {
     wyo: wyoMenuItem,
-    campaignsProgress: new MenuItemTP('Campaigns Progress', <AppRegistrationIcon />, '/input/campaignsProgress'),
+    myProgress: myProgressMenuItem,
     inventory: new MenuItemTP('Inventory', <InventoryIcon />, '/input/inventory'),
 
     goals: new MenuItemTP('Goals', <TrackChangesIcon />, '/plan/goals'),
@@ -74,7 +75,7 @@ export const menuItemById = {
 
 export const inputSubMenu: MenuItemTP[] = [
     menuItemById['wyo'],
-    menuItemById['campaignsProgress'],
+    menuItemById['myProgress'],
     menuItemById['inventory'],
     menuItemById['guild'],
 ];

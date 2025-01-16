@@ -45,6 +45,7 @@ import { UnitType } from 'src/v2/features/characters/units.enums';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 import { TeamsAction } from 'src/reducers/teams.reducer';
 import { ILreProgressDto } from 'src/models/dto.interfaces';
+import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
 
 export type LreTrackId = 'alpha' | 'beta' | 'gamma';
 
@@ -56,6 +57,7 @@ export interface UnitDataRaw {
     Damage: number;
     Armour: number;
     'Short Name': string;
+    'Full Name': string;
     'Initial rarity': RarityString;
     'Melee Damage': DamageType;
     'Melee Hits': number;
@@ -88,6 +90,7 @@ export interface IUnitData {
     alliance: Alliance;
     faction: Faction;
     name: string;
+    fullName: string;
     shortName: string;
     numberAdded: number;
     health: number;
@@ -500,6 +503,7 @@ export interface IDailyRaidsPreferences {
     farmByPriorityOrder: boolean;
     farmStrategy: DailyRaidsStrategy;
     customSettings?: ICustomDailyRaidsSettings;
+    campaignEvent?: CampaignGroupType | 'none';
 }
 
 export type ICustomDailyRaidsSettings = Record<Rarity, CampaignType[]>;
@@ -845,27 +849,7 @@ export interface IEstimatedRanksSettings {
     upgrades: Record<string, number>;
 }
 
-export type ICampaignsProgress = {
-    Indomitus: number;
-    'Indomitus Mirror': number;
-    'Indomitus Elite': number;
-    'Indomitus Mirror Elite': number;
-
-    'Fall of Cadia': number;
-    'Fall of Cadia Mirror': number;
-    'Fall of Cadia Elite': number;
-    'Fall of Cadia Mirror Elite': number;
-
-    Octarius: number;
-    'Octarius Mirror': number;
-    'Octarius Elite': number;
-    'Octarius Mirror Elite': number;
-
-    'Saim-Hann': number;
-    'Saim-Hann Mirror': number;
-    'Saim-Hann Elite': number;
-    'Saim-Hann Mirror Elite': number;
-};
+export type ICampaignsProgress = Record<Campaign, number>;
 
 export interface IInventory {
     upgrades: Record<string, number>;

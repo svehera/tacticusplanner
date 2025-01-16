@@ -1,9 +1,9 @@
 ﻿import React from 'react';
-import { RaidItemView } from 'src/v2/features/goals/raid-item-view';
 import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
 import { IItemRaidLocation, IShardsRaid } from 'src/v2/features/goals/goals.models';
 import { CharacterImage } from 'src/shared-components/character-image';
 import { CampaignType } from 'src/models/enums';
+import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 
 interface Props {
     shardsRaid: IShardsRaid;
@@ -45,7 +45,7 @@ export const ShardsItemInput: React.FC<Props> = ({ shardsRaid, handleAdd }) => {
                             style={{
                                 opacity: location.isCompleted ? 0.5 : 1,
                             }}>
-                            <RaidItemView location={location} />
+                            <CampaignLocation location={location} unlocked={true} />
                             <RaidItemInput
                                 defaultItemsObtained={defaultItemsObtained}
                                 isDisabled={!!location.isCompleted}

@@ -2,7 +2,7 @@
 import { getImageUrl } from 'src/shared-logic/functions';
 
 export const FactionImage = ({ faction }: { faction: string }) => {
-    const imageUrl = getImageUrl(`factions/${faction}`);
+    const imageUrl = getImageUrl(`factions/${faction}.png`);
 
     return (
         <img

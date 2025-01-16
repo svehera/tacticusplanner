@@ -39,6 +39,7 @@ import recipeData from 'src/v2/data/recipeData.json';
 import battleData from 'src/assets/battleData.json';
 import { getEnumValues, rankToString } from 'src/shared-logic/functions';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
+import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaings.constants';
 
 export class UpgradesService {
     static readonly recipeData: IRecipeData = recipeData;
@@ -486,17 +487,24 @@ export class UpgradesService {
         settings: IEstimatedRanksSettings
     ): void {
         const completedLocations = settings.completedLocations.map(location => location.id);
+        const currCampaignEventLocations = campaignsByGroup[settings.preferences.campaignEvent ?? ''] ?? [];
         for (const upgradeId in upgrades) {
             const combinedUpgrade = upgrades[upgradeId];
 
             for (const location of combinedUpgrade.locations) {
                 const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
+                const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign);
+                const isCampaignEventLocationAvailable = currCampaignEventLocations.includes(location.campaign);
+
                 location.isUnlocked = location.nodeNumber <= campaignProgress;
                 location.isPassFilter =
                     !settings.filters ||
                     CampaignsService.passLocationFilter(location, settings.filters, combinedUpgrade.rarity);
                 location.isCompleted = completedLocations.some(locationId => location.id === locationId);
-                location.isSelected = location.isUnlocked && location.isPassFilter;
+                location.isSelected =
+                    location.isUnlocked &&
+                    location.isPassFilter &&
+                    (!isCampaignEventLocation || isCampaignEventLocationAvailable);
             }
             const minEnergy = Math.min(
                 ...combinedUpgrade.locations.filter(x => x.isSelected).map(x => x.energyPerItem)

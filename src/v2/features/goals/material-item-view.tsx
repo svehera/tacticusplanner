@@ -1,7 +1,7 @@
 ﻿import React from 'react';
-import { RaidItemView } from 'src/v2/features/goals/raid-item-view';
 import { MaterialItemTitle } from 'src/v2/features/goals/material-item-title';
 import { IUpgradeRaid } from 'src/v2/features/goals/goals.models';
+import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 
 interface Props {
     upgradeRaid: IUpgradeRaid;
@@ -20,7 +20,7 @@ export const MaterialItemView: React.FC<Props> = ({ upgradeRaid }) => {
                             style={{
                                 justifyContent: 'space-between',
                             }}>
-                            <RaidItemView location={location} />
+                            <CampaignLocation location={location} unlocked={true} />
                         </li>
                     );
                 })}

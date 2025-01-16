@@ -6,10 +6,15 @@ import {
     FormControl,
     FormControlLabel,
     FormGroup,
+    FormHelperText,
     FormLabel,
     Input,
+    InputLabel,
+    MenuItem,
     Radio,
     RadioGroup,
+    Select,
+    SelectChangeEvent,
     Slider,
 } from '@mui/material';
 import { ICustomDailyRaidsSettings, IDailyRaidsPreferences } from '../models/interfaces';
@@ -24,6 +29,7 @@ import { DailyRaidsCustomLocations } from 'src/shared-components/daily-raids-cus
 import Dialog from '@mui/material/Dialog';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { isMobile } from 'react-device-detect';
+import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
 
 const defaultCustomSettings: ICustomDailyRaidsSettings = {
     [Rarity.Legendary]: [CampaignType.Elite, CampaignType.Mirror],
@@ -108,6 +114,13 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     function valueLabelFormat(value: number) {
         const mark = energyMarks.find(mark => mark.value === value);
         return mark ? mark.label : value;
+    }
+
+    function saveCampaignEventChanges(event: SelectChangeEvent<CampaignGroupType | 'none'>): void {
+        setDailyRaidsPreferencesForm(curr => ({
+            ...curr,
+            campaignEvent: event.target.value as CampaignGroupType | 'none',
+        }));
     }
 
     return (
@@ -272,6 +285,24 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                             />
                         )}
                     </div>
+
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Campaign Event</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={dailyRaidsPreferencesForm.campaignEvent ?? 'none'}
+                            label="Campaign Event"
+                            onChange={saveCampaignEventChanges}>
+                            <MenuItem value={'none'}>None</MenuItem>
+                            <MenuItem value={CampaignGroupType.adMechCE} className="flex-box gap10">
+                                <span>Adeptus Mechanicus</span>
+                            </MenuItem>
+                        </Select>
+                        <FormHelperText>
+                            Select your current Campaign Event to make it available for raids suggestions
+                        </FormHelperText>
+                    </FormControl>
                 </FormGroup>
             </DialogContent>
             <DialogActions>

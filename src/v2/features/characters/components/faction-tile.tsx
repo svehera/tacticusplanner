@@ -47,7 +47,7 @@ export const FactionsTile = ({
         <div className="faction">
             <h4 className="faction-title" style={{ backgroundColor: faction.color }}>
                 <div className="faction-icon">
-                    <FactionImage faction={faction.icon} />
+                    <FactionImage faction={faction.name} />
                     <span>{faction.name.toUpperCase()}</span>
                 </div>
                 <Conditional condition={showBsValue}>
