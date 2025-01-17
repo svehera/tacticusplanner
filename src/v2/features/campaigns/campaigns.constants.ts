@@ -8,6 +8,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.I,
         name: 'Indomitus',
+        displayName: 'Indomitus',
         faction: Faction.Ultramarines,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.indomitus,
@@ -16,6 +17,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.IE,
         name: 'Indomitus Elite',
+        displayName: 'Indomitus Elite',
         faction: Faction.Ultramarines,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.indomitus,
@@ -24,6 +26,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.IM,
         name: 'Indomitus Mirror',
+        displayName: 'Indomitus Mirror',
         faction: Faction.Necrons,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.indomitus,
@@ -32,6 +35,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.IME,
         name: 'Indomitus Mirror Elite',
+        displayName: 'Indomitus Mirror Elite',
         faction: Faction.Necrons,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.indomitus,
@@ -42,6 +46,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.FoC,
         name: 'Fall of Cadia',
+        displayName: 'Fall of Cadia',
         faction: Faction.Black_Legion,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.fallOfCadia,
@@ -50,6 +55,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.FoCE,
         name: 'Fall of Cadia Elite',
+        displayName: 'Fall of Cadia Elite',
         faction: Faction.Black_Legion,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.fallOfCadia,
@@ -58,6 +64,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.FoCM,
         name: 'Fall of Cadia Mirror',
+        displayName: 'Fall of Cadia Mirror',
         faction: Faction.Astra_militarum,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.fallOfCadia,
@@ -66,6 +73,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.FoCME,
         name: 'Fall of Cadia Mirror Elite',
+        displayName: 'Fall of Cadia Mirror Elite',
         faction: Faction.Astra_militarum,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.fallOfCadia,
@@ -76,6 +84,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.O,
         name: 'Octarius',
+        displayName: 'Octarius',
         faction: Faction.Orks,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.octarius,
@@ -84,6 +93,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.OE,
         name: 'Octarius Elite',
+        displayName: 'Octarius Elite',
         faction: Faction.Orks,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.octarius,
@@ -92,6 +102,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.OM,
         name: 'Octarius Mirror',
+        displayName: 'Octarius Mirror',
         faction: Faction.Black_Templars,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.octarius,
@@ -100,6 +111,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.OME,
         name: 'Octarius Mirror Elite',
+        displayName: 'Octarius Mirror Elite',
         faction: Faction.Black_Templars,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.octarius,
@@ -110,6 +122,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.SH,
         name: 'Saim-Hann',
+        displayName: 'Saim-Hann',
         faction: Faction.Aeldari,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.saimHann,
@@ -118,6 +131,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.SHE,
         name: 'Saim-Hann Elite',
+        displayName: 'Saim-Hann Elite',
         faction: Faction.Aeldari,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.saimHann,
@@ -126,6 +140,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.SHM,
         name: 'Saim-Hann Mirror',
+        displayName: 'Saim-Hann Mirror',
         faction: Faction.Thousand_Sons,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.saimHann,
@@ -134,6 +149,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.SHME,
         name: 'Saim-Hann Mirror Elite',
+        displayName: 'Saim-Hann Mirror Elite',
         faction: Faction.Thousand_Sons,
         releaseType: CampaignReleaseType.standard,
         groupType: CampaignGroupType.saimHann,
@@ -144,6 +160,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.AMS,
         name: 'Adeptus Mechanicus Standard',
+        displayName: 'AdMech Standard',
         faction: Faction.Death_Guard,
         releaseType: CampaignReleaseType.event,
         groupType: CampaignGroupType.adMechCE,
@@ -152,6 +169,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.AMSC,
         name: 'Adeptus Mechanicus Standard Challenge',
+        displayName: 'AMS Challenge',
         faction: Faction.Death_Guard,
         releaseType: CampaignReleaseType.event,
         groupType: CampaignGroupType.adMechCE,
@@ -160,6 +178,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.AME,
         name: 'Adeptus Mechanicus Extremis',
+        displayName: 'AdMech Extremis',
         faction: Faction.Death_Guard,
         releaseType: CampaignReleaseType.event,
         groupType: CampaignGroupType.adMechCE,
@@ -168,6 +187,7 @@ export const campaignsList: ICampaignModel[] = [
     {
         id: Campaign.AMEC,
         name: 'Adeptus Mechanicus Extremis Challenge',
+        displayName: 'AME Challenge',
         faction: Faction.Death_Guard,
         releaseType: CampaignReleaseType.event,
         groupType: CampaignGroupType.adMechCE,

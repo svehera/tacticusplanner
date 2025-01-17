@@ -11,9 +11,15 @@ export interface ICampaignModel {
     id: Campaign;
 
     /**
-     * The name of the campaign.
+     * The full name of the campaign.
      */
     name: string;
+
+    /**
+     * A potentially shorter version of the campaign in order to fit it on
+     * one line in the desktop "Campaign Progress" page.
+     */
+    displayName: string;
 
     /**
      * The faction required to beat campaign.

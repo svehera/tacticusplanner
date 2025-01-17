@@ -49,7 +49,6 @@ export class CampaignsProgressionService {
 
         for (const campaign of CampaignsService.allCampaigns) {
             result.campaignFactions.set(campaign.name, new Set<string>([campaign.faction]));
-            console.log(campaign.name + ' ' + campaign.faction);
         }
 
         for (const [campaign, factions] of result.campaignFactions.entries()) {
