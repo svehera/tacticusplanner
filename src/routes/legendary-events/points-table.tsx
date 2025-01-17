@@ -5,23 +5,32 @@ import { ILegendaryEvent, ILegendaryEventTrack, ILreTeam } from 'src/models/inte
 import { Rank } from 'src/models/enums';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
 import { sum, uniq } from 'lodash';
-import { CharactersSelection, ITableRow } from './legendary-events.interfaces';
+import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-events.interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
 import { CharacterTitle } from 'src/shared-components/character-title';
 import { isMobile } from 'react-device-detect';
 import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { RarityImage } from 'src/shared-components/rarity-image';
 import { RankImage } from 'src/shared-components/rank-image';
+import { useLreProgress } from 'src/shared-components/le-progress.hooks';
+import { useQueryState } from 'src/v2/hooks/query-state';
+import { LreService } from 'src/v2/features/lre/lre.service';
 
 const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
     const { legendaryEvent } = props;
     const { leSelectedTeams } = useContext(StoreContext);
+    const { model: leProgress } = useLreProgress(legendaryEvent);
 
     const { teams } = leSelectedTeams[legendaryEvent.id] ?? { teams: [] };
 
     const selectedChars = useMemo(() => {
         return uniq(teams.flatMap(t => t.charactersIds));
     }, [legendaryEvent.id]);
+    const [pointsCalculation, setPointsCalculation] = useQueryState<PointsCalculation>(
+        'pointsCalculation',
+        stringValue => (stringValue as PointsCalculation) ?? PointsCalculation.progressBased,
+        value => value
+    );
 
     const [selection, setSelection] = useState<CharactersSelection>(
         selectedChars.length ? CharactersSelection.Selected : CharactersSelection.All
@@ -242,17 +251,40 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                 }
             > = {};
 
+            let progressByRequirement: Record<string, number> = {};
+
+            if (pointsCalculation === PointsCalculation.progressBased) {
+                const trackProgress = leProgress.tracksProgress.filter(x => x.trackId === track.section)[0];
+                if (trackProgress) {
+                    progressByRequirement = LreService.getReqProgressPerTrack(trackProgress);
+                }
+            }
+
             for (const key in restrictionsByChar) {
                 const restrictions = restrictionsByChar[key];
                 result[key] = {
                     name: key,
                     slots: restrictionsByChar[key].length,
-                    points: sum(restrictions.map(x => track.getRestrictionPoints(x))),
+                    points: sum(
+                        restrictions.map(requirement => {
+                            if (pointsCalculation === PointsCalculation.absolute) {
+                                return track.getRestrictionPoints(requirement) * track.battlesPoints.length;
+                            }
+
+                            if (pointsCalculation === PointsCalculation.progressBased) {
+                                const progress = progressByRequirement[requirement] ?? 0;
+                                const battlesLeft = track.battlesPoints.length - progress;
+                                return track.getRestrictionPoints(requirement) * battlesLeft;
+                            }
+
+                            return 0;
+                        })
+                    ),
                 };
             }
             return result;
         }
-    }, [legendaryEvent.id, filter]);
+    }, [legendaryEvent.id, filter, pointsCalculation]);
 
     const rows = useMemo<ITableRow[]>(() => {
         const chars =
@@ -285,7 +317,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                 totalPoints: x.legendaryEvents[legendaryEvent.id].totalPoints,
                 totalSlots: x.legendaryEvents[legendaryEvent.id].totalSlots,
             }));
-    }, [selection, filter]);
+    }, [selection, filter, pointsCalculation]);
 
     return (
         <div>
@@ -320,7 +352,26 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                         <FormControlLabel value={CharactersSelection.All} control={<Radio />} label="All" />
                     </RadioGroup>
                 </FormControl>
-                {selection !== CharactersSelection.Selected && (
+                {selection === CharactersSelection.Selected ? (
+                    <FormControl>
+                        <FormLabel id="points-calcualtion-label" style={{ fontWeight: 700 }}>
+                            Points Calculation
+                        </FormLabel>
+                        <RadioGroup
+                            style={{ display: 'flex', flexDirection: 'row' }}
+                            aria-labelledby="points-calcualtion-label"
+                            value={pointsCalculation}
+                            onChange={(_, value) => setPointsCalculation(value as PointsCalculation)}
+                            name="radio-buttons-group">
+                            <FormControlLabel
+                                value={PointsCalculation.progressBased}
+                                control={<Radio />}
+                                label="Progress Based"
+                            />
+                            <FormControlLabel value={PointsCalculation.absolute} control={<Radio />} label="Absolute" />
+                        </RadioGroup>
+                    </FormControl>
+                ) : (
                     <span>
                         Take this list with the grain of salt, not everyone who scores the most points is the best LRE
                         character

@@ -7,6 +7,11 @@ export enum CharactersSelection {
     Selected = 'selected',
 }
 
+export enum PointsCalculation {
+    progressBased = 'progressBased',
+    absolute = 'absolute',
+}
+
 export interface ITableRow extends ICharLegendaryEvent {
     character: ICharacter2;
     tooltip: string;
