@@ -137,7 +137,7 @@ export class CampaignsService {
             }
         }
 
-        if (upgradesRarity.length && materialRarity) {
+        if (upgradesRarity.length && materialRarity != undefined) {
             if (!upgradesRarity.includes(materialRarity)) {
                 return false;
             }

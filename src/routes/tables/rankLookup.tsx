@@ -87,10 +87,11 @@ export const RankLookup = () => {
             materials: IMaterialFull[];
         }> = [];
 
-        let currRank = rankStart;
+        let currRank = rankStart < Rank.Stone1 ? Rank.Stone1 : rankStart;
+        const endRank = rankEnd < rankStart ? rankStart : rankEnd > Rank.Diamond3 ? Rank.Diamond3 : rankEnd;
         const upgradesCopy = upgrades.slice();
 
-        while (currRank !== rankEnd) {
+        while (currRank !== endRank) {
             const rankUpgrades = upgradesCopy.splice(0, 6);
             result.push({ rank1: currRank, rank2: currRank + 1, materials: rankUpgrades });
             currRank++;
@@ -98,8 +99,8 @@ export const RankLookup = () => {
 
         if (rankPoint5 && upgradesCopy.length) {
             result.push({
-                rank1: rankEnd,
-                rank2: rankEnd,
+                rank1: endRank,
+                rank2: endRank,
                 materials: upgradesCopy,
             });
         }
