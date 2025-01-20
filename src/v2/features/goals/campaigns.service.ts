@@ -2,6 +2,7 @@
     ICampaignBattleComposed,
     ICampaignConfigs,
     ICampaignsData,
+    ICampaignsProgress,
     IDailyRaidsFilters,
     IDropRate,
     IRecipeData,
@@ -13,12 +14,22 @@ import recipeData from 'src/assets/recipeData.json';
 
 import { Alliance, Campaign, CampaignType, Faction, Rarity } from 'src/models/enums';
 import { orderBy, uniq } from 'lodash';
+import { CampaignReleaseType } from 'src/v2/features/campaigns/campaigns.enums';
+import { campaignsList } from 'src/v2/features/campaigns/campaigns.constants';
 
 export class CampaignsService {
     private static readonly campaignConfigs: ICampaignConfigs = campaignConfigs;
     private static readonly battleData: ICampaignsData = battleData;
     private static readonly recipeData: IRecipeData = recipeData;
     public static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = this.getCampaignComposed();
+
+    public static readonly allCampaigns = campaignsList;
+    public static readonly standardCampaigns = campaignsList.filter(
+        campaign => campaign.releaseType === CampaignReleaseType.standard
+    );
+    public static readonly campaignEvents = campaignsList.filter(
+        campaign => campaign.releaseType === CampaignReleaseType.event
+    );
 
     public static selectBestLocations(availableLocations: ICampaignBattleComposed[]): ICampaignBattleComposed[] {
         const minEnergy = Math.min(...availableLocations.map(x => x.energyPerItem));
@@ -35,7 +46,22 @@ export class CampaignsService {
     public static getPossibleEnemiesCount(): number[] {
         return orderBy(uniq(Object.values(this.campaignsComposed).map(x => x.enemiesTotal)), undefined, 'desc');
     }
-    static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
+
+    /**
+     * @param battle The battle in question.
+     * @param progress Our current campaign progress.
+     * @returns Whether we have already completed the given battle, given our current campaign progress.
+     */
+    public static hasCompletedBattle(battle: ICampaignBattleComposed, progress: ICampaignsProgress): boolean {
+        if (battle.campaign == Campaign.Onslaught) return false;
+        return progress[battle.campaign as keyof ICampaignsProgress] >= battle.nodeNumber;
+    }
+
+    /**
+     * @returns a map from campaign node short ID (e.g. "SHME31" for Saim-Hann
+     *          Mirror Elite battle 31) to an ICampaignBattleComposed.
+     */
+    public static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
         const result: Record<string, ICampaignBattleComposed> = {};
         for (const battleDataKey in this.battleData) {
             const battle = this.battleData[battleDataKey];
@@ -43,11 +69,15 @@ export class CampaignsService {
             const config = this.campaignConfigs[battle.campaignType as CampaignType];
             const recipe = this.recipeData[battle.reward];
             if (!recipe) {
-                console.error(battle.reward, 'no recipe');
+                if (battle.campaignType !== CampaignType.SuperEarly) {
+                    console.error(
+                        'no recipe for ' + battle.reward + ' from ' + battle.campaign + ' ' + battle.nodeNumber
+                    );
+                }
             }
             const dropRateKey: keyof IDropRate = recipe?.rarity.toLowerCase() as keyof IDropRate;
 
-            const dropRate = config.dropRate[dropRateKey];
+            const dropRate = config.dropRate ? config.dropRate[dropRateKey] : 0;
             const energyPerItem = parseFloat((1 / (dropRate / config.energyCost)).toFixed(2));
 
             const { enemies, allies } = this.getEnemiesAndAllies(battle.campaign as Campaign);
@@ -117,7 +147,7 @@ export class CampaignsService {
             }
         }
 
-        if (upgradesRarity.length && materialRarity) {
+        if (upgradesRarity.length && materialRarity != undefined) {
             if (!upgradesRarity.includes(materialRarity)) {
                 return false;
             }
@@ -156,7 +186,11 @@ export class CampaignsService {
         return true;
     }
 
-    private static getEnemiesAndAllies(campaign: Campaign): {
+    /**
+     * Returns which factions are enemies in the campaign, and which are allies. Any
+     * allies are usable in the campaign when enough deployment slots are available.
+     */
+    public static getEnemiesAndAllies(campaign: Campaign): {
         enemies: { alliance: Alliance; factions: Faction[] };
         allies: { alliance: Alliance; factions: Faction[] };
     } {
@@ -280,6 +314,21 @@ export class CampaignsService {
                     allies: {
                         alliance: Alliance.Chaos,
                         factions: ChaosFactions,
+                    },
+                };
+            }
+            case Campaign.AMS:
+            case Campaign.AMSC:
+            case Campaign.AME:
+            case Campaign.AMEC: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Imperial,
+                        factions: [Faction.Astra_militarum, Faction.AdeptusMechanicus],
+                    },
+                    allies: {
+                        alliance: Alliance.Chaos,
+                        factions: [Faction.Death_Guard, Faction.WorldEaters],
                     },
                 };
             }

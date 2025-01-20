@@ -23,6 +23,7 @@ export interface IUserDataResponse {
     pendingTeamsCount: number;
     rejectedTeamsCount: number;
     modifiedDateTicks: string;
+    snowprintIdConnected: boolean;
     data: IPersonalData | IPersonalData2 | null;
 }
 

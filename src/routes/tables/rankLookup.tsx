@@ -9,7 +9,6 @@ import {
 import { StaticDataService } from '../../services';
 import { getEnumValues } from '../../shared-logic/functions';
 import { DailyRaidsStrategy, Rank, Rarity } from '../../models/enums';
-import { CharactersAutocomplete } from '../../shared-components/characters-autocomplete';
 import { StoreContext } from '../../reducers/store.provider';
 import { orderBy, sortBy, sum } from 'lodash';
 import { AgGridReact } from 'ag-grid-react';
@@ -24,6 +23,7 @@ import { ArrowForward, Info } from '@mui/icons-material';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import InfoIcon from '@mui/icons-material/Info';
+import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 
 export const RankLookup = () => {
     const { characters, campaignsProgress, inventory } = useContext(StoreContext);
@@ -87,10 +87,11 @@ export const RankLookup = () => {
             materials: IMaterialFull[];
         }> = [];
 
-        let currRank = rankStart;
+        let currRank = rankStart < Rank.Stone1 ? Rank.Stone1 : rankStart;
+        const endRank = rankEnd < rankStart ? rankStart : rankEnd > Rank.Diamond3 ? Rank.Diamond3 : rankEnd;
         const upgradesCopy = upgrades.slice();
 
-        while (currRank !== rankEnd) {
+        while (currRank !== endRank) {
             const rankUpgrades = upgradesCopy.splice(0, 6);
             result.push({ rank1: currRank, rank2: currRank + 1, materials: rankUpgrades });
             currRank++;
@@ -98,8 +99,8 @@ export const RankLookup = () => {
 
         if (rankPoint5 && upgradesCopy.length) {
             result.push({
-                rank1: rankEnd,
-                rank2: rankEnd,
+                rank1: endRank,
+                rank2: endRank,
                 materials: upgradesCopy,
             });
         }
@@ -320,10 +321,12 @@ export const RankLookup = () => {
                     alignItems: 'center',
                     gap: '20px',
                 }}>
-                <CharactersAutocomplete
-                    character={character}
-                    characters={charactersOptions}
-                    onCharacterChange={value => {
+                <UnitsAutocomplete
+                    label="Chracters"
+                    style={{ maxWidth: 300 }}
+                    unit={character}
+                    options={charactersOptions}
+                    onUnitChange={value => {
                         setCharacter(value);
 
                         setSearchParams(curr => {
@@ -336,7 +339,6 @@ export const RankLookup = () => {
                             return curr;
                         });
                     }}
-                    shortChar={true}
                 />
 
                 <div style={{ width: 200 }}>

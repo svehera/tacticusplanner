@@ -1,7 +1,6 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { useContext, useEffect, useState } from 'react';
 import './i18n/config';
 import { Outlet } from 'react-router-dom';
-import { StoreProvider } from './reducers/store.provider2';
 
 import { StaticDataService } from './services';
 import { useAuth } from 'src/contexts/auth';
@@ -9,10 +8,13 @@ import { LoginStatusDialog } from 'src/shared-components/user-menu/login-status-
 import { RegisterUserDialog } from 'src/shared-components/user-menu/register-user-dialog';
 import { LoginUserDialog } from 'src/shared-components/user-menu/login-user-dialog';
 import { SearchParamsStateProvider } from 'src/contexts/search-params.provider';
+import { StoreContext } from 'src/reducers/store.provider';
+import { Loader } from 'src/v2/components/loader';
 
 export const App = () => {
     localStorage.setItem('appVersion', StaticDataService.whatsNew.currentVersion);
     const { isAuthenticated } = useAuth();
+    const { loading, loadingText } = useContext(StoreContext);
 
     const [showLoginStatus, setShowLoginStatus] = useState(false);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
@@ -63,11 +65,10 @@ export const App = () => {
                 }}
             />
             <LoginUserDialog isOpen={showLoginUser} onClose={() => setShowLoginUser(false)} />
-            <StoreProvider>
-                <SearchParamsStateProvider>
-                    <Outlet />
-                </SearchParamsStateProvider>
-            </StoreProvider>
+            <SearchParamsStateProvider>
+                <Outlet />
+            </SearchParamsStateProvider>
+            <Loader loading={!!loading} loadingText={loadingText} />
         </React.Fragment>
     );
 };

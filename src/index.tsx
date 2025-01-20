@@ -14,6 +14,7 @@ import { closeSnackbar, SnackbarOrigin, SnackbarProvider } from 'notistack';
 import { isMobile } from 'react-device-detect';
 import { routes } from './app-routing';
 import { TitleProvider } from 'src/contexts/title.provider';
+import { StoreProvider } from 'src/reducers/store.provider2';
 
 const webSnackbarOrigin: SnackbarOrigin = { vertical: 'bottom', horizontal: 'right' };
 const mobileSnackbarOrigin: SnackbarOrigin = { vertical: 'top', horizontal: 'center' };
@@ -28,7 +29,9 @@ root.render(
                 anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
                 onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
             />
-            <RouterProvider router={routes} />
+            <StoreProvider>
+                <RouterProvider router={routes} />
+            </StoreProvider>
         </TitleProvider>
     </AuthProvider>
     // </React.StrictMode>

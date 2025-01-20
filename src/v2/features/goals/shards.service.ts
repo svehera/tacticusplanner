@@ -16,6 +16,7 @@ import { StaticDataService } from 'src/services';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import { orderBy, sum } from 'lodash';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
+import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaigns.constants';
 
 export class ShardsService {
     static getShardsEstimatedDays(
@@ -50,16 +51,28 @@ export class ShardsService {
         const materials = goals
             .map(goal => this.convertGoalToMaterial(goal))
             .filter(x => x.acquiredCount < x.requiredCount);
+        const currCampaignEventLocations = campaignsByGroup[settings.preferences.campaignEvent ?? ''] ?? [];
+
         const result: ICharacterShardsEstimate[] = [];
 
         for (let i = 0; i < materials.length; i++) {
             const material = materials[i];
             const previousShardsTokens = sum(result.filter((_, index) => index < i).map(x => x.onslaughtTokensTotal));
             const unlockedLocations = material.possibleLocations.filter(location => {
+                const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign);
+                const isCampaignEventLocationAvailable = currCampaignEventLocations.includes(location.campaign);
+
                 const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
                 const isPassFilter =
                     !settings.filters || CampaignsService.passLocationFilter(location, settings.filters);
-                return location.nodeNumber <= campaignProgress && isPassFilter;
+
+                // location can be suggested for raids only if it is unlocked, passed other filters
+                // and in case it is Campaign Event location user should have specific Campaign Event selected
+                return (
+                    location.nodeNumber <= campaignProgress &&
+                    isPassFilter &&
+                    (!isCampaignEventLocation || isCampaignEventLocationAvailable)
+                );
             });
 
             const raidsLocations =

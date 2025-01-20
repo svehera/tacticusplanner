@@ -45,6 +45,7 @@ import { UnitType } from 'src/v2/features/characters/units.enums';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 import { TeamsAction } from 'src/reducers/teams.reducer';
 import { ILreProgressDto } from 'src/models/dto.interfaces';
+import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
 
 export type LreTrackId = 'alpha' | 'beta' | 'gamma';
 
@@ -56,6 +57,7 @@ export interface UnitDataRaw {
     Damage: number;
     Armour: number;
     'Short Name': string;
+    'Full Name': string;
     'Initial rarity': RarityString;
     'Melee Damage': DamageType;
     'Melee Hits': number;
@@ -88,6 +90,7 @@ export interface IUnitData {
     alliance: Alliance;
     faction: Faction;
     name: string;
+    fullName: string;
     shortName: string;
     numberAdded: number;
     health: number;
@@ -301,6 +304,8 @@ export interface IGlobalState {
     dailyRaids: IDailyRaids;
     guildWar: IGuildWar;
     guild: IGuild;
+    loading?: boolean;
+    loadingText?: string;
 }
 
 export interface IUserInfo {
@@ -309,6 +314,7 @@ export interface IUserInfo {
     role: UserRole;
     pendingTeamsCount: number;
     rejectedTeamsCount: number;
+    snowprintIdConnected: boolean;
 }
 
 export interface IDispatchContext {
@@ -330,6 +336,8 @@ export interface IDispatchContext {
     guild: React.Dispatch<GuildAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
+    startLoading: (loadingText?: string) => void;
+    endLoading: () => void;
 }
 
 export interface IPersonalData2 {
@@ -451,6 +459,7 @@ export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IW
     inventoryShowAlphabet: boolean;
     inventoryShowPlusMinus: boolean;
     goalsTableView: boolean;
+    myProgressShowCoreCharacters: boolean;
 }
 
 export interface IWyoViewSettings {
@@ -495,6 +504,7 @@ export interface IDailyRaidsPreferences {
     farmByPriorityOrder: boolean;
     farmStrategy: DailyRaidsStrategy;
     customSettings?: ICustomDailyRaidsSettings;
+    campaignEvent?: CampaignGroupType | 'none';
 }
 
 export type ICustomDailyRaidsSettings = Record<Rarity, CampaignType[]>;
@@ -660,7 +670,7 @@ export interface ICampaignBattleComposed {
     enemiesTotal: number;
     enemiesTypes: string[];
     // new props for upgrades service
-    isSelected?: boolean;
+    isSuggested?: boolean;
     isUnlocked?: boolean;
     isPassFilter?: boolean;
     isCompleted?: boolean;
@@ -677,9 +687,9 @@ export interface IMaterial {
     craftable: boolean;
     stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
     icon?: string;
-    faction?: string; // if not specifor to faction then this property can be omitted ("undefined");
-    recipe?: Array<IMaterialRecipeIngredient>; // if material is not craftable recipe can be omitted ("undefined")
-    locations?: Array<string>; // campaigs locations campaigs can be in short form (IM12) or long (Indomitus mirros) depedings how you decisde to update battleData json.
+    faction?: string; // If not specific to a faction, this property can be omitted ("undefined").
+    recipe?: Array<IMaterialRecipeIngredient>; // If material is not craftable, recipe can be omitted ("undefined").
+    locations?: Array<string>; // Campaign locations can be in short form (IM12) or long (Indomitus mirros) depedings how you decide to update battleData json.
 }
 
 export interface IMaterialRecipeIngredient {
@@ -840,27 +850,7 @@ export interface IEstimatedRanksSettings {
     upgrades: Record<string, number>;
 }
 
-export type ICampaignsProgress = {
-    Indomitus: number;
-    'Indomitus Mirror': number;
-    'Indomitus Elite': number;
-    'Indomitus Mirror Elite': number;
-
-    'Fall of Cadia': number;
-    'Fall of Cadia Mirror': number;
-    'Fall of Cadia Elite': number;
-    'Fall of Cadia Mirror Elite': number;
-
-    Octarius: number;
-    'Octarius Mirror': number;
-    'Octarius Elite': number;
-    'Octarius Mirror Elite': number;
-
-    'Saim-Hann': number;
-    'Saim-Hann Mirror': number;
-    'Saim-Hann Elite': number;
-    'Saim-Hann Mirror Elite': number;
-};
+export type ICampaignsProgress = Record<Campaign, number>;
 
 export interface IInventory {
     upgrades: Record<string, number>;

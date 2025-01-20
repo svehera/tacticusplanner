@@ -1,9 +1,9 @@
 ﻿import React from 'react';
-import { RaidItemView } from 'src/v2/features/goals/raid-item-view';
 import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
 import { IUpgradeRaid, IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import Button from '@mui/material/Button';
+import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 
 interface Props {
     acquiredCount: number;
@@ -61,7 +61,7 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
                             style={{
                                 opacity: location.isCompleted ? 0.5 : 1,
                             }}>
-                            <RaidItemView location={location} />
+                            <CampaignLocation location={location} unlocked={true} />
                             <RaidItemInput
                                 defaultItemsObtained={defaultItemsObtained}
                                 isDisabled={location.isCompleted || upgradeRaid.isBlocked}

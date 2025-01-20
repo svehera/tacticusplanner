@@ -177,22 +177,24 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
                             <section className="inventory-items-group">
                                 <article>
                                     {viewPreferences.inventoryShowAlphabet && (
-                                        <div className="flex-box gap20">
-                                            <div className="inventory-items">
-                                                {group.itemsAllCrafted.length > 0 && <h3>Basic</h3>}
-                                                {group.items.map(group => (
-                                                    <div key={group.letter} className="inventory-items-alphabet">
-                                                        <div className="letter">{group.letter}</div>
-                                                        {group.subItems.map(item => (
-                                                            <InventoryItem
-                                                                key={item.material}
-                                                                data={item}
-                                                                showIncDec={viewPreferences.inventoryShowPlusMinus}
-                                                                dataUpdate={update}
-                                                            />
-                                                        ))}
-                                                    </div>
-                                                ))}
+                                        <div className="flex-box gap20" style={{ justifyContent: 'center' }}>
+                                            <div>
+                                                <div className="inventory-items">
+                                                    {group.itemsAllCrafted.length > 0 && <h3>Basic</h3>}
+                                                    {group.items.map(group => (
+                                                        <div key={group.letter} className="inventory-items-alphabet">
+                                                            <div className="letter">{group.letter}</div>
+                                                            {group.subItems.map(item => (
+                                                                <InventoryItem
+                                                                    key={item.material}
+                                                                    data={item}
+                                                                    showIncDec={viewPreferences.inventoryShowPlusMinus}
+                                                                    dataUpdate={update}
+                                                                />
+                                                            ))}
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
                                             {group.itemsAllCrafted.length > 0 && (
                                                 <div className="inventory-items">
@@ -217,6 +219,7 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
 
                                     {!viewPreferences.inventoryShowAlphabet && (
                                         <div className="flex-box gap20">
+                                            <div></div>
                                             <div className="inventory-items">
                                                 {group.itemsAllCrafted.length > 0 && <h3>Basic</h3>}
                                                 {group.itemsAll.map(item => (

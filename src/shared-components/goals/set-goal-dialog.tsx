@@ -27,7 +27,7 @@ import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { IgnoreRankRarity } from './ignore-rank-rarity';
 import { PrioritySelect } from 'src/shared-components/goals/priority-select';
 import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
-import { CampaignsUsageSelect } from 'src/shared-components/goals/campaings-usage-select';
+import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
 import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { SetAscendGoal } from 'src/shared-components/goals/set-ascend-goal';

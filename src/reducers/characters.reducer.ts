@@ -47,6 +47,10 @@ export type CharactersAction =
           recommendedFirst: string[];
           recommendedLast: string[];
       }
+    | {
+          type: 'SyncWithTacticus';
+          characters: ICharacter2[];
+      }
     | SetStateAction<ICharacter2[]>;
 
 export const charactersReducer = (state: ICharacter2[], action: CharactersAction): ICharacter2[] => {
@@ -91,6 +95,27 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                     existingChar.activeAbilityLevel,
                     existingChar.passiveAbilityLevel
                 );
+            }
+            return [...state];
+        }
+        case 'SyncWithTacticus': {
+            for (const updatedCharacter of action.characters) {
+                const existingChar = state.find(
+                    char =>
+                        char.name.toLowerCase() === updatedCharacter.name.toLowerCase() ||
+                        char.shortName.toLowerCase() === updatedCharacter.name.toLowerCase()
+                );
+
+                if (existingChar) {
+                    existingChar.rarity = updatedCharacter.rarity;
+                    existingChar.stars = updatedCharacter.stars;
+                    existingChar.rank = updatedCharacter.rank;
+                    existingChar.xp = updatedCharacter.xp;
+                    existingChar.shards = updatedCharacter.shards;
+                    existingChar.activeAbilityLevel = updatedCharacter.activeAbilityLevel;
+                    existingChar.passiveAbilityLevel = updatedCharacter.passiveAbilityLevel;
+                    existingChar.level = updatedCharacter.level;
+                }
             }
             return [...state];
         }

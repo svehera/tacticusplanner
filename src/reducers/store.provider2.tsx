@@ -39,6 +39,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
     const [modified, setModified] = useState(false);
     const [saveTimeoutId, setSaveTimeoutId] = useState<NodeJS.Timeout>();
+    const [abortController, setAbortController] = useState<AbortController>();
 
     const [modifiedDate, setModifiedDate] = useState(globalState.modifiedDate);
     const [seenAppVersion, setSeenAppVersion] = useState<string | undefined | null>(globalState.seenAppVersion);
@@ -82,6 +83,18 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [dailyRaids, dispatchDailyRaids] = React.useReducer(dailyRaidsReducer, globalState.dailyRaids);
     const [guildWar, dispatchGuildWar] = React.useReducer(guildWarReducer, globalState.guildWar);
     const [guild, dispatchGuild] = React.useReducer(guildReducer, globalState.guild);
+
+    function startLoading(text?: string): void {
+        globalState.loadingText = text;
+        globalState.loading = true;
+        setGlobalState(globalState);
+    }
+
+    function endLoading(): void {
+        globalState.loadingText = undefined;
+        globalState.loading = false;
+        setGlobalState(globalState);
+    }
 
     function wrapDispatch<T>(dispatch: React.Dispatch<T>): React.Dispatch<T> {
         return (action: T) => {
@@ -141,6 +154,8 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 setGlobalState(data);
             },
             seenAppVersion: wrapDispatch(setSeenAppVersion),
+            startLoading,
+            endLoading,
         }),
         [
             dispatchCharacters,
@@ -192,16 +207,21 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         setModified(false);
 
         if (isAuthenticated) {
+            abortController?.abort();
             clearTimeout(saveTimeoutId);
+            const controller = new AbortController();
             const timeoutId = setTimeout(
                 () => {
-                    setUserDataApi(storeValue)
+                    setUserDataApi(storeValue, controller.signal)
                         .then(({ data }) => {
                             const { modifiedDateTicks } = data;
                             localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
                             enqueueSnackbar('Pushed local data to server.', { variant: 'success' });
                         })
                         .catch((err: AxiosError<IErrorResponse>) => {
+                            if (err.code === 'ERR_CANCELED') {
+                                return;
+                            }
                             if (err.response?.status === 401) {
                                 enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
                             } else if (err.response?.status === 409) {
@@ -219,6 +239,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 isMobile ? 1000 : 10000
             );
             setSaveTimeoutId(timeoutId);
+            setAbortController(controller);
         }
     }, [modified]);
 
@@ -256,6 +277,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     modifiedDateTicks: serverModifiedDateTicks,
                     pendingTeamsCount,
                     rejectedTeamsCount,
+                    snowprintIdConnected,
                 } = response.data;
                 const serverLastModified = new Date(lastModifiedDate);
                 const isFirstLogin = !data;
@@ -267,6 +289,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     userId: id,
                     pendingTeamsCount,
                     rejectedTeamsCount,
+                    snowprintIdConnected,
                 });
                 const localModifiedDateTicks = localStorage.getItem('TP-ModifiedDateTicks');
 

@@ -57,12 +57,13 @@ export const CharacterTile = ({
             : character.upgrades.length;
     const badgeColor =
         character.rank === maxRank ? 'warning' : needToAscend ? 'warning' : needToLevel ? 'secondary' : 'success';
+    const tileOpacity: number = isUnlocked ? 1 : 0.5;
 
     return (
         <div
             className="character-tile"
             style={{
-                opacity: viewContext.getOpacity ? viewContext.getOpacity(character) : isUnlocked ? 1 : 0.5,
+                opacity: viewContext.getOpacity ? viewContext.getOpacity(character) : isUnlocked ? tileOpacity : 0.25,
                 cursor: onCharacterClick && !disableClick ? 'pointer' : undefined,
             }}
             onClick={onCharacterClick && !disableClick ? () => onCharacterClick!(character) : undefined}>
@@ -72,7 +73,7 @@ export const CharacterTile = ({
                     placement={'top'}
                     title={
                         <span>
-                            {character.name}
+                            {character.fullName}
                             <br />
                             Power: {numberToThousandsStringOld(CharactersPowerService.getCharacterPower(character))}
                             <br />

@@ -17,6 +17,7 @@ import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
 import { dirtyDozenMenuItem } from 'src/v2/pages/dirty-dozen/dirty-dozen.menu-item';
 import { insightsMenuItem } from 'src/v2/pages/insights/insights.menu-item';
 import { wyoMenuItem } from 'src/v2/pages/who-you-own/who-you-own.menu-item';
+import { campaignProgressionMenuItem } from 'src/v2/pages/campaign-progression/campaign-progression.menu-item';
 import { guildWarOffenseMenuItem } from 'src/v2/pages/guild-war-offense/guild-war-offense.menu-item';
 import { guildWarDefenseMenuItem } from 'src/v2/pages/guild-war-defense/guild-war-defense.menu-item';
 import { guildWarZonesMenuItem } from 'src/v2/pages/guild-war-layout/guild-war-zones-menu.item';
@@ -26,6 +27,7 @@ import { teamsMenuItem } from 'src/v2/pages/teams/teams.menu-item';
 import { mowLookupMenuItem } from 'src/v2/pages/mow-lookup/mow-lookup.menu-item';
 import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';
 import { activeLreMenuItems, inactiveLreMenuItems } from 'src/v2/pages/lre/lre.menu-item';
+import { myProgressMenuItem } from 'src/v2/pages/my-progress/my-progress.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -43,7 +45,7 @@ export class MenuItemTP {
 
 export const menuItemById = {
     wyo: wyoMenuItem,
-    campaignsProgress: new MenuItemTP('Campaigns Progress', <AppRegistrationIcon />, '/input/campaignsProgress'),
+    myProgress: myProgressMenuItem,
     inventory: new MenuItemTP('Inventory', <InventoryIcon />, '/input/inventory'),
 
     goals: new MenuItemTP('Goals', <TrackChangesIcon />, '/plan/goals'),
@@ -56,6 +58,7 @@ export const menuItemById = {
     campaigns: new MenuItemTP('Campaigns', <FormatListNumberedIcon />, '/learn/campaigns'),
     dirtyDozen: dirtyDozenMenuItem,
     insights: insightsMenuItem,
+    campaignProgression: campaignProgressionMenuItem,
 
     home: new MenuItemTP('Home', <HomeIcon />, '/home', 'Tacticus Planner'),
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
@@ -72,7 +75,7 @@ export const menuItemById = {
 
 export const inputSubMenu: MenuItemTP[] = [
     menuItemById['wyo'],
-    menuItemById['campaignsProgress'],
+    menuItemById['myProgress'],
     menuItemById['inventory'],
     menuItemById['guild'],
 ];
@@ -88,6 +91,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
     ]),
     new MenuItemTP('LRE', <TableChartIcon />, '', '', '', [menuItemById['leMasterTable'], ...activeLreMenuItems]),
     new MenuItemTP('LRE Archive', <TableChartIcon />, '', '', '', inactiveLreMenuItems),
+    menuItemById['campaignProgression'],
 ];
 
 export const planSubMenu: MenuItemTP[] = [

@@ -337,5 +337,13 @@
         "thankYou": "Amazing app. Thanks for creating this.",
         "resourceDescription": "",
         "resourceLink": ""
+    },
+    {
+        "name": "cpunerd",
+        "type": "Contributor",
+        "thankYou": "Thank you for leaving off your C++ for the Planner :) ©Severyn",
+        "resourceDescription": "Campaign Progression",
+        "resourceLink": "https://tacticusplanner.app/plan/campaignprogression",
+        "avatarIcon": "none.png"
     }
 ]

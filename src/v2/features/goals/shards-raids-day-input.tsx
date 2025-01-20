@@ -2,11 +2,10 @@
 import { Card, CardContent, CardHeader } from '@mui/material';
 import { IItemRaidLocation, IShardsRaid } from 'src/v2/features/goals/goals.models';
 import { ShardItemTitle } from 'src/v2/features/goals/shard-item-title';
-import { RaidItemView } from 'src/v2/features/goals/raid-item-view';
-import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
+import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 
 interface Props {
     shardRaids: IShardsRaid;
@@ -70,7 +69,7 @@ export const ShardsRaidsDayInput: React.FC<Props> = ({ shardRaids }) => {
                                     justifyContent: 'space-between',
                                     opacity: location.isCompleted ? 0.5 : 1,
                                 }}>
-                                <RaidItemView location={location} />
+                                <CampaignLocation location={location} unlocked={true} />
                             </li>
                         );
                     })}

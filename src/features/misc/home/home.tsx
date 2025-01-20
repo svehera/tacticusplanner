@@ -10,7 +10,6 @@ import { sum } from 'lodash';
 import { MiscIcon } from 'src/shared-components/misc-icon';
 
 import { LegendaryEventEnum, PersonalGoalType } from 'src/models/enums';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { StaticDataService } from 'src/services';
 import { CharacterImage } from 'src/shared-components/character-image';
 

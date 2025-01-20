@@ -214,6 +214,7 @@ export class StaticDataService {
         const unitData: IUnitData = {
             id: rawData.Name,
             shortName: rawData['Short Name'],
+            fullName: rawData['Full Name'],
             unitType: UnitType.character,
             alliance: rawData.Alliance,
             faction: rawData.Faction,
@@ -438,6 +439,14 @@ export class StaticDataService {
             };
         });
         return keepGold ? result : result.filter(x => x.id !== 'Gold');
+    }
+
+    /**
+     * @param id The unit ID of the character or MoW.
+     * @returns An IUnitData representation, or null.
+     */
+    public static getUnit(id: string): IUnitData | undefined {
+        return this.unitsData.find(x => x.id === id);
     }
 
     private static calculateMaterialData(

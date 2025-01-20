@@ -1,6 +1,122 @@
 ﻿{
-    "currentVersion": "1.6.7",
+    "currentVersion": "1.6.8",
     "releaseNotes": [
+        {
+            "version": "1.6.8",
+            "date": "January 20, 2025",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Welcome to cpunerd, our newest Contributor, who made significant contributions in this update!"
+                },
+                {
+                    "text": "[cpunerd] Introduced the Campaign Progression feature to simplify campaign planning.",
+                    "subPoints": [
+                        "You can navigate to the page via Plan -> Campaign Progression.",
+                        "Found this page helpful? Consider using cpunerd's Refer-A-Friend code 'DUG-38-VAT'."
+                    ],
+                    "route": "plan/campaignprogression",
+                    "images": [
+                        {
+                            "path": "cp1.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "First Campaign Event: ‘Adeptus Mechanicus’",
+                    "subPoints": [
+                        "Track progress on the \"My Progress\" page. Campaign Progress is renamed to My Progress",
+                        "Added a 'Campaign Event' option in Daily Raids settings. Select your current Campaign Event for tailored raid suggestions."
+                    ],
+                    "route": "input/myProgress",
+                    "images": [
+                        {
+                            "path": "ce1.png"
+                        },
+                        {
+                            "path": "ce2.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added new collectible characters",
+                    "subPoints": [
+                        "[Genestealer Cults] Isaak Starn, the Primus, unlockable in the ‘Path of Ascension’ event starting January 26.",
+                        "[Adeptus Mechanicus] Sy-Gex, Kathaphron Destroyer."
+                    ]
+                },
+                {
+                    "text": "Updated LRE dates",
+                    "subPoints": [
+                        "[Genestealer Cults] The Patermine, Genestealer Patriarch, unlockable in the second ‘Alien Majesty’ event starting February 16."
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added option to display core characters of each campaign on the My Progress page",
+                    "images": [
+                        {
+                            "path": "mp1.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Resolved issue with page redirection which should improve time of initial page load."
+                },
+                {
+                    "text": "Updated Learn Campaigns page to include new Campaign Event and some UI adjustments.",
+                    "route": "learn/campaigns?campaign=Adeptus+Mechanicus+Standard",
+                    "images": [
+                        {
+                            "path": "ce3.png"
+                        }
+                    ]
+                },
+                {
+                    "text": "Added \"Points Calculations\" options to the LRE leaderboard and LRE master table",
+                    "subPoints": [
+                        "\"Unearned Points Only\" - works only for selected characters, calculates points that specific character can score based on number of battles that left uncompleted.",
+                        "\"All Points\" - works only for all characters, calculates points that specific character can score overall."
+                    ],
+                    "route": "plan/leMasterTable?pointsCalculation=unearned",
+                    "images": [
+                        {
+                            "path": "lre1.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "[cpunerd] Fixed LRE Leaderboard sorting by name issue. (Reported by Morpholine)"
+                },
+                {
+                    "text": "Corrected names for Tyranids: Parasite of Mortrex and Winged Tyranid Prime. (Reported by SeventhSun)"
+                },
+                {
+                    "text": "[cpunerd] Resolved improper handling of rankStart=Locked in Rank Lookup. (Reported by SeventhSun)"
+                },
+                {
+                    "text": "[cpunerd] Fixed issue with Raids filter suggesting common upgrades incorrectly. (Reported by SeventhSun)"
+                },
+                {
+                    "text": "[cpunerd] Corrected a typo in Arjac's name. (Reported by WarAvatar)"
+                },
+                {
+                    "text": "[cpunerd] Fixed UI alignment issue where inventory section items were not centered. (Reported by SeventhSun)"
+                },
+                {
+                    "text": "Resolved logic issue causing 'Conflict - server overwrite' spam on mobile. (Reported by Tani)"
+                },
+                {
+                    "text": "Fixed Patermine Limited Event missions. (Reported by SeventhSun)"
+                },
+                {
+                    "text": "Updated the image for the Overcapacitator crafted upgrade. (Reported by Frenzy87)"
+                }
+            ]
+        },
         {
             "version": "1.6.7",
             "date": "December 18",

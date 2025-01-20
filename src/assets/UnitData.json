@@ -2,8 +2,8 @@
     {
         "Name": "Varro Tigurius",
         "Title": "Chief Librarian",
-        "Full Name": " Varro Tigurius",
-        "Short Name": "Varro",
+        "Full Name": "Varro Tigurius",
+        "Short Name": "Tigurius",
         "Faction": "Ultramarines",
         "Alliance": "Imperial",
         "Health": 6233,
@@ -250,7 +250,7 @@
         "Passive Ability": "Direct",
         "Number": 24,
         "ForcedSummons": false,
-        "RequiredInCampaign": true,
+        "RequiredInCampaign": false,
         "Icon": "Thutmose-removebg-preview.webp"
     },
     {
@@ -277,7 +277,7 @@
         "Passive Ability": "Energy",
         "Number": 25,
         "ForcedSummons": false,
-        "RequiredInCampaign": true,
+        "RequiredInCampaign": false,
         "Icon": "Anuphet.webp"
     },
     {
@@ -360,7 +360,7 @@
         "Name": "Thaddeus Noble",
         "Title": "Master of Ordnance",
         "Full Name": "Thaddeus Noble",
-        "Short Name": "Noble",
+        "Short Name": "Thaddeus",
         "Faction": "Astra Militarum",
         "Alliance": "Imperial",
         "Health": 4795,
@@ -687,7 +687,7 @@
         "Passive Ability": "Physical",
         "Number": 11,
         "ForcedSummons": true,
-        "RequiredInCampaign": true,
+        "RequiredInCampaign": false,
         "Icon": "snotflogga-removebg-preview.webp"
     },
     {
@@ -761,14 +761,14 @@
         "Active Ability": "Direct",
         "Number": 14,
         "ForcedSummons": false,
-        "RequiredInCampaign": true,
+        "RequiredInCampaign": false,
         "Icon": "Tanksmasha-removebg-preview.webp"
     },
     {
         "Name": "Boss Gulgortz",
         "Title": "Warboss",
         "Full Name": "Gulgortz Bulldoza",
-        "Short Name": "Boss G",
+        "Short Name": "Gulgortz",
         "Faction": "Orks",
         "Alliance": "Xenos",
         "Health": 9589,
@@ -966,14 +966,14 @@
         "Passive Ability": "Power",
         "Number": 32,
         "ForcedSummons": false,
-        "RequiredInCampaign": false,
+        "RequiredInCampaign": true,
         "Icon": "Maladus-removebg-preview.webp"
     },
     {
         "Name": "Nauseous Rotbone",
         "Title": "Plague Surgeon",
         "Full Name": "Nauseous Rotbone",
-        "Short Name": "Rotbone",
+        "Short Name": "Nauseous",
         "Faction": "Death guard",
         "Alliance": "Chaos",
         "Health": 11507,
@@ -1014,7 +1014,7 @@
         "Passive Ability": "Blast",
         "Number": 34,
         "ForcedSummons": false,
-        "RequiredInCampaign": false,
+        "RequiredInCampaign": true,
         "Icon": "Pestillian-removebg-preview.webp"
     },
     {
@@ -1037,7 +1037,7 @@
         "Traits": ["Contagions of Nurgle", "Resilient"],
         "Number": 35,
         "ForcedSummons": false,
-        "RequiredInCampaign": false,
+        "RequiredInCampaign": true,
         "Icon": "Corrodius-removebg-preview.webp"
     },
     {
@@ -1142,7 +1142,7 @@
         "Active Ability": "Heavy Round",
         "Number": 44,
         "ForcedSummons": false,
-        "RequiredInCampaign": true,
+        "RequiredInCampaign": false,
         "Icon": "Maugan_Ra-removebg-preview.webp"
     },
     {
@@ -1166,7 +1166,7 @@
         "Active Ability": "Piercing",
         "Number": 45,
         "ForcedSummons": false,
-        "RequiredInCampaign": true,
+        "RequiredInCampaign": false,
         "Icon": "Jain_Zar-removebg-preview.webp"
     },
     {
@@ -1366,7 +1366,7 @@
         "Name": "Arjac",
         "Title": "Champion of the Great Wolf",
         "Full Name": "Arjac Rockfist",
-        "Short Name": "Atjac",
+        "Short Name": "Arjac",
         "Faction": "Space Wolves",
         "Alliance": "Imperial",
         "Health": 10548,
@@ -1736,8 +1736,8 @@
     {
         "Name": "Winged Tyrant Prime",
         "Title": "",
-        "Full Name": "Winged Tyrant Prime",
-        "Short Name": "Winged Tyrant",
+        "Full Name": "Winged Tyranid Prime",
+        "Short Name": "Winged Prime",
         "Faction": "Tyranids",
         "Alliance": "Xenos",
         "Health": 9589,
@@ -1914,6 +1914,34 @@
         "ForcedSummons": false,
         "RequiredInCampaign": false,
         "Icon": "exitor-rho.webp"
+    },
+    {
+        "Name": "Sy-Gex",
+        "Title": "Kataphron Destroyer",
+        "Full Name": "Sy-Gex-KPH008/15.MK41",
+        "Short Name": "Sy-Gex",
+        "Faction": "Adeptus Mechanicus",
+        "Alliance": "Imperial",
+        "Health": 9103,
+        "Damage": 1643,
+        "Armour": 2398,
+        "Initial rarity": "Uncommon",
+        "Melee Damage": "Flame",
+        "Melee Hits": 4,
+        "Ranged Damage": "Physical",
+        "Ranged Hits": 4,
+        "Distance": 3,
+        "Movement": 2,
+        "Equipment1": "Crit",
+        "Equipment2": "Defense",
+        "Equipment3": "Crit Booster",
+        "Traits": ["Mechanical", "Heavy Weapon", "Overwatch", "Vehicle"],
+        "Active Ability": "Physical",
+        "Number": 85,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "sy-gex.webp",
+        "releaseDate": "2025-02-26T00:00:00Z"
     },
     {
         "Name": "Wrask",
@@ -2184,6 +2212,33 @@
         "releaseDate": "2024-10-13T00:00:00Z"
     },
     {
+        "Name": "Isaak",
+        "Title": "Primus",
+        "Full Name": "Isaak Starn",
+        "Short Name": "Isaak",
+        "Faction": "Genestealer Cults",
+        "Alliance": "Xenos",
+        "Health": 6707,
+        "Damage": 2874,
+        "Armour": 1344,
+        "Initial rarity": "Rare",
+        "Melee Damage": "Bio",
+        "Melee Hits": 3,
+        "Ranged Damage": "Bio",
+        "Ranged Hits": 1,
+        "Distance": 2,
+        "Movement": 3,
+        "Equipment1": "Crit",
+        "Equipment2": "Defense",
+        "Equipment3": "Crit Booster",
+        "Traits": ["Ambush"],
+        "Number": 84,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "isaak.webp",
+        "releaseDate": "2025-01-26T00:00:00Z"
+    },
+    {
         "Name": "Patermine",
         "Title": "Genestealer Patriarch",
         "Full Name": "The Patermine",
@@ -2212,8 +2267,8 @@
             "id": 9,
             "finished": false,
             "eventStage": 2,
-            "nextEventDate": "TBA",
-            "nextEventDateUtc": ""
+            "nextEventDate": "February 16",
+            "nextEventDateUtc": "Sun, 16 February 2025 00:00:00 GMT"
         }
     }
 ]

@@ -25,7 +25,7 @@ import {
     TextField,
 } from '@mui/material';
 import { groupBy, map, sum, uniq } from 'lodash';
-import { CharactersSelection, ITableRow } from './legendary-events.interfaces';
+import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-events.interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
 import { CharacterTitle } from 'src/shared-components/character-title';
 import { getLegendaryEvent } from 'src/models/constants';
@@ -38,18 +38,29 @@ import { StaticDataService } from 'src/services';
 import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { RarityImage } from 'src/shared-components/rarity-image';
 import { RankImage } from 'src/shared-components/rank-image';
+import { useQueryState } from 'src/v2/hooks/query-state';
+import { LreService } from 'src/v2/features/lre/lre.service';
+import { ILreProgressModel } from 'src/v2/features/lre/lre.models';
 
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>(
         StaticDataService.activeLres.map(x => x.lre!.id)
     );
 
-    const { leSelectedTeams, characters } = useContext(StoreContext);
+    const { leSelectedTeams, characters, leProgress } = useContext(StoreContext);
     const getSelectedTeams = (eventId: LegendaryEventEnum): ILreTeam[] => {
         const { teams } = leSelectedTeams[eventId] ?? { teams: [] };
         return teams;
     };
     const [filter, setFilter] = useState('');
+
+    const [pointsCalculation, setPointsCalculation] = useQueryState<PointsCalculation>(
+        'pointsCalculation',
+        stringValue => (stringValue as PointsCalculation) ?? PointsCalculation.unearned,
+        value => value
+    );
+
+    const gridRef = useRef<AgGridReact>(null);
 
     const getSelectedChars = (eventId: LegendaryEventEnum) => {
         const teams = getSelectedTeams(eventId);
@@ -66,18 +77,25 @@ export const MasterTable = () => {
         }> = [];
         activeLegendaryEvents.forEach(eventId => {
             const legendaryEvent = getLegendaryEvent(eventId, characters);
+            const legendaryEventProgress = LreService.mapProgressDtoToModel(
+                leProgress[legendaryEvent.id],
+                legendaryEvent
+            );
             const teams = getSelectedTeams(eventId);
             const selectedChars = getSelectedChars(eventId);
 
             const alpha = getPointsAndSlots(
+                legendaryEventProgress,
                 legendaryEvent.alpha,
                 getRestrictionsByChar(teams.filter(t => t.section === 'alpha'))
             );
             const beta = getPointsAndSlots(
+                legendaryEventProgress,
                 legendaryEvent.beta,
                 getRestrictionsByChar(teams.filter(t => t.section === 'beta'))
             );
             const gamma = getPointsAndSlots(
+                legendaryEventProgress,
                 legendaryEvent.gamma,
                 getRestrictionsByChar(teams.filter(t => t.section === 'gamma'))
             );
@@ -143,6 +161,7 @@ export const MasterTable = () => {
         }
 
         function getPointsAndSlots(
+            legendaryEventProgress: ILreProgressModel,
             track: ILegendaryEventTrack,
             restrictionsByChar: Record<string, string[]>
         ): Record<
@@ -162,23 +181,44 @@ export const MasterTable = () => {
                 }
             > = {};
 
+            let progressByRequirement: Record<string, number> = {};
+
+            if (pointsCalculation === PointsCalculation.unearned) {
+                const trackProgress = legendaryEventProgress.tracksProgress.filter(x => x.trackId === track.section)[0];
+                if (trackProgress) {
+                    progressByRequirement = LreService.getReqProgressPerTrack(trackProgress);
+                }
+            }
+
             for (const key in restrictionsByChar) {
                 const restrictions = restrictionsByChar[key];
                 result[key] = {
                     name: key,
                     slots: restrictionsByChar[key].length,
-                    points: sum(restrictions.map(x => track.getRestrictionPoints(x))),
+                    points: sum(
+                        restrictions.map(requirement => {
+                            if (pointsCalculation === PointsCalculation.all) {
+                                return track.getRestrictionPoints(requirement) * track.battlesPoints.length;
+                            }
+
+                            if (pointsCalculation === PointsCalculation.unearned) {
+                                const progress = progressByRequirement[requirement] ?? 0;
+                                const battlesLeft = track.battlesPoints.length - progress;
+                                return track.getRestrictionPoints(requirement) * battlesLeft;
+                            }
+
+                            return 0;
+                        })
+                    ),
                 };
             }
             return result;
         }
-    }, [filter, activeLegendaryEvents]);
+    }, [filter, activeLegendaryEvents, pointsCalculation]);
 
     const [selection, setSelection] = useState<CharactersSelection>(
         selectedCharsRows.length ? CharactersSelection.Selected : CharactersSelection.All
     );
-
-    const gridRef = useRef<AgGridReact>(null);
 
     const columnsDef: Array<ColDef | ColGroupDef> = useMemo(() => {
         return [
@@ -215,6 +255,7 @@ export const MasterTable = () => {
                             }
                         },
                         cellClass: (params: CellClassParams<ITableRow>) => params.data?.className,
+                        valueGetter: (params: ValueGetterParams<ITableRow>) => params.data?.character.name,
                         tooltipValueGetter: (params: ITooltipParams<ITableRow>) => params.data?.tooltip,
                     },
                     {
@@ -388,6 +429,26 @@ export const MasterTable = () => {
                         <FormControlLabel value={CharactersSelection.All} control={<Radio />} label="All" />
                     </RadioGroup>
                 </FormControl>
+                {selection === CharactersSelection.Selected && (
+                    <FormControl>
+                        <FormLabel id="points-calcualtion-label" style={{ fontWeight: 700 }}>
+                            Points Calculation
+                        </FormLabel>
+                        <RadioGroup
+                            style={{ display: 'flex', flexDirection: 'row' }}
+                            aria-labelledby="points-calcualtion-label"
+                            value={pointsCalculation}
+                            onChange={(_, value) => setPointsCalculation(value as PointsCalculation)}
+                            name="radio-buttons-group">
+                            <FormControlLabel
+                                value={PointsCalculation.unearned}
+                                control={<Radio />}
+                                label="Unearned Points Only"
+                            />
+                            <FormControlLabel value={PointsCalculation.all} control={<Radio />} label="All Points" />
+                        </RadioGroup>
+                    </FormControl>
+                )}
                 <FormControl style={{ width: 300 }}>
                     <InputLabel>Legendary Events</InputLabel>
                     <Select

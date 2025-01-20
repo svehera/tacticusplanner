@@ -10,47 +10,57 @@ import { StaticDataService } from 'src/services';
 import { fitGridOnWindowResize } from 'src/shared-logic/functions';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import { uniq } from 'lodash';
+import { isNil, uniq } from 'lodash';
+import { useQueryState } from 'src/v2/hooks/query-state';
+import { LreSection } from 'src/v2/features/lre/lre.models';
+import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { ICharacterUpgradeEstimate } from 'src/v2/features/goals/goals.models';
+import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { FactionImage } from 'src/v2/components/images/faction-image';
 
 export const Campaigns = () => {
     const gridRef = useRef<AgGridReact<ICampaignBattleComposed>>(null);
 
     const [columnDefs] = useState<Array<ColDef>>([
         {
-            headerName: '#',
-            colId: 'rowNumber',
-            valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
-            maxWidth: 50,
-            width: 50,
-            minWidth: 50,
-            pinned: true,
-        },
-        {
             headerName: 'Battle',
             pinned: true,
-            minWidth: 200,
-            valueGetter: (params: ValueGetterParams<ICampaignBattleComposed>) => {
-                const battle = params.data;
-                if (battle) {
-                    return battle.campaign + ' ' + battle.nodeNumber;
+            maxWidth: 100,
+            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
+                const location = params.data;
+                if (location) {
+                    return <CampaignLocation key={location.id} location={location} short={true} unlocked={true} />;
                 }
             },
         },
         {
             field: 'energyCost',
             headerName: 'Energy Cost',
+            maxWidth: 120,
         },
         {
             field: 'dailyBattleCount',
             headerName: 'Battles Count',
+            maxWidth: 120,
         },
         {
             field: 'dropRate',
             headerName: 'Drop Rate',
+            maxWidth: 120,
         },
         {
-            field: 'rarity',
+            field: 'rarityEnum',
             headerName: 'Rarity',
+            maxWidth: 80,
+            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
+                const { rarityEnum, dropRate } = params.data ?? {};
+                if (typeof rarityEnum === 'number' && rarityEnum >= 0) {
+                    return <RarityImage rarity={rarityEnum} />;
+                } else if (dropRate) {
+                    return 'Shard';
+                }
+            },
         },
         {
             field: 'reward',
@@ -60,10 +70,16 @@ export const Campaigns = () => {
         {
             field: 'slots',
             headerName: 'Slots',
+            maxWidth: 80,
+            valueGetter: (params: ValueGetterParams<ICampaignBattleComposed>) => {
+                const battle = params.data;
+                return battle?.slots ?? 5;
+            },
         },
         {
-            field: 'expectedGold',
-            headerName: 'Expected Gold',
+            field: 'enemiesTotal',
+            headerName: 'Enemies total',
+            maxWidth: 120,
         },
         {
             headerName: 'Enemies Factions',
@@ -82,10 +98,6 @@ export const Campaigns = () => {
                     </ul>
                 );
             },
-        },
-        {
-            field: 'enemiesTotal',
-            headerName: 'Enemies total',
         },
         {
             headerName: 'Enemies Types',
@@ -107,7 +119,11 @@ export const Campaigns = () => {
         },
     ]);
 
-    const [campaign, setCampaign] = useState(Campaign.I);
+    const [campaign, setCampaign] = useQueryState(
+        'campaign',
+        initQueryParam => initQueryParam ?? Campaign.I,
+        value => value.toString()
+    );
 
     const campaignsOptions = useMemo(() => Object.keys(StaticDataService.campaignsGrouped).sort(), []);
 
@@ -119,6 +135,7 @@ export const Campaigns = () => {
 
     const uniqEnemiesFactions = uniq(rows.flatMap(x => x.enemiesFactions));
     const uniqEnemiesTypes = uniq(rows.flatMap(x => x.enemiesTypes));
+    const threeSlotsNodes = uniq(rows.filter(x => x.slots === 3));
 
     return (
         <div>
@@ -138,12 +155,25 @@ export const Campaigns = () => {
                 </FormControl>
 
                 <div>
-                    <span className="bold"> Enemies factions:</span> {uniqEnemiesFactions.join(', ')}
+                    <span className="bold"> Enemies factions:</span>{' '}
+                    {uniqEnemiesFactions.map(x => (
+                        <FactionImage key={x} faction={x} />
+                    ))}
                 </div>
 
                 <div>
-                    <span className="bold"> Enemies types:</span> {uniqEnemiesTypes.join(', ')}
+                    <span className="bold"> Enemies types:</span>{' '}
+                    <span style={{ fontSize: 11 }}>{uniqEnemiesTypes.join(', ')}</span>
                 </div>
+
+                {!!threeSlotsNodes.length && (
+                    <div className="flex-box gap10 wrap">
+                        <span className="bold"> 3 Slots nodes:</span>
+                        {threeSlotsNodes.map(x => (
+                            <CampaignLocation key={x.id} location={x} unlocked={true} short={true} />
+                        ))}
+                    </div>
+                )}
             </div>
 
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 220px)', width: '100%' }}>

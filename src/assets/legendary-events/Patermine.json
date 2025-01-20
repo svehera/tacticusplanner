@@ -1,7 +1,7 @@
 ﻿{
     "id": 9,
     "name": "Patermine",
-    "wikiLink": "https://tacticus.fandom.com/wiki/LE-Patermine",
+    "wikiLink": "https://tacticus.fandom.com/wiki/LE-The_Patermine",
     "eventStage": 1,
     "nextEventDate": "November 3",
     "nextEventDateUtc": "Sun, 3 November 2024 00:00:00 GMT",
@@ -19,15 +19,15 @@
     ],
     "premiumMissions": [
         "Win 1 battle without Summoning any units",
-        "Defeat 30 enemies with Chaos units",
-        "Defeat 75 enemies with Xenos units",
-        "Defeat 100 enemies with Imperial units",
-        "Win 5 battles without deploying any Resilient characters",
-        "Win 5 battles without deploying any Big Target characters",
-        "Win 5 battles without deploying any Mechanical characters",
-        "Defeat 75 enemies with Psychic Damage",
-        "Defeat 75 enemies with Piercing Damage",
-        "Defeat 75 enemies with Power Damage"
+        "Defeat 30 enemies with Xenos units",
+        "Defeat 75 enemies with Imperial units",
+        "Defeat 100 enemies with Chaos units",
+        "Win 5 battles without deploying any Flying characters",
+        "Win 5 battles without deploying any Psyker characters",
+        "Win 5 battles without deploying any Final Vengeance characters",
+        "Defeat 75 enemies with Bolter Damage",
+        "Defeat 75 enemies with Power Damage",
+        "Defeat 75 enemies with Piercing Damage"
     ],
     "alpha": {
         "name": "Alpha (No Orks)",
