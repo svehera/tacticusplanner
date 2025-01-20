@@ -39,7 +39,7 @@ import recipeData from 'src/v2/data/recipeData.json';
 import battleData from 'src/assets/battleData.json';
 import { getEnumValues, rankToString } from 'src/shared-logic/functions';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
-import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaings.constants';
+import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaigns.constants';
 
 export class UpgradesService {
     static readonly recipeData: IRecipeData = recipeData;

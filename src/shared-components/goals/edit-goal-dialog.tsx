@@ -18,7 +18,7 @@ import { StaticDataService } from 'src/services';
 import { EditAscendGoal } from 'src/shared-components/goals/edit-ascend-goal';
 import { NumbersInput } from 'src/shared-components/goals/numbers-input';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { CampaignsUsageSelect } from 'src/shared-components/goals/campaings-usage-select';
+import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
 import { CharacterRaidGoalSelect, ICharacterAscendGoal, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
 import { CharacterImage } from 'src/shared-components/character-image';
 import { IUnit } from 'src/v2/features/characters/characters.models';

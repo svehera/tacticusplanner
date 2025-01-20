@@ -2,7 +2,7 @@
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { StarsSelect } from 'src/shared-components/stars-select';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { CampaignsUsageSelect } from 'src/shared-components/goals/campaings-usage-select';
+import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
 import { CampaignsLocationsUsage, Rarity, RarityStars } from 'src/models/enums';
 import { NumbersInput } from 'src/shared-components/goals/numbers-input';
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';

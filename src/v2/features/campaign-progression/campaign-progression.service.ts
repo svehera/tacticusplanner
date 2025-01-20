@@ -31,6 +31,7 @@ import rankUpData from 'src/assets/rankUpData.json';
 import recipeData from 'src/v2/data/recipeData.json';
 import battleData from 'src/assets/battleData.json';
 import { charsUnlockShards } from 'src/models/constants';
+import { ICampaignModel } from '../campaigns/campaigns.models';
 
 export class CampaignsProgressionService {
     static readonly recipeData: IRecipeData = recipeData;
@@ -45,22 +46,11 @@ export class CampaignsProgressionService {
      */
     private static getFactionCampaignMappings(): CampaignFactionMapping {
         const result = new CampaignFactionMapping();
-        result.campaignFactions.set('Indomitus', new Set<string>(['Ultramarines']));
-        result.campaignFactions.set('Indomitus Mirror', new Set<string>(['Necrons']));
-        result.campaignFactions.set('Fall of Cadia', new Set<string>(['Black Legion']));
-        result.campaignFactions.set('Fall of Cadia Mirror', new Set<string>(['Astra Militarum']));
-        result.campaignFactions.set('Octarius', new Set<string>(['Orks']));
-        result.campaignFactions.set('Octarius Mirror', new Set<string>(['Black Templars']));
-        result.campaignFactions.set('Saim-Hann', new Set<string>(['Aeldari']));
-        result.campaignFactions.set('Saim-Hann Mirror', new Set<string>(['Thousand Sons']));
-        result.campaignFactions.set('Indomitus Elite', new Set<string>(['Ultramarines']));
-        result.campaignFactions.set('Indomitus Mirror Elite', new Set<string>(['Necrons']));
-        result.campaignFactions.set('Fall of Cadia Elite', new Set<string>(['Black Legion']));
-        result.campaignFactions.set('Fall of Cadia Mirror Elite', new Set<string>(['Astra Militarum']));
-        result.campaignFactions.set('Octarius Elite', new Set<string>(['Orks']));
-        result.campaignFactions.set('Octarius Mirror Elite', new Set<string>(['Black Templars']));
-        result.campaignFactions.set('Saim-Hann Elite', new Set<string>(['Aeldari']));
-        result.campaignFactions.set('Saim-Hann Mirror Elite', new Set<string>(['Thousand Sons']));
+
+        for (const campaign of CampaignsService.allCampaigns) {
+            result.campaignFactions.set(campaign.name, new Set<string>([campaign.faction]));
+        }
+
         for (const [campaign, factions] of result.campaignFactions.entries()) {
             factions.forEach((key: string, faction: string) => {
                 if (!result.factionCampaigns.get(faction)) {
