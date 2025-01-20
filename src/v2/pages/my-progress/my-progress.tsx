@@ -53,9 +53,7 @@ export const MyProgress = () => {
                 ))}
             </div>
             <h2>Campaign Events</h2>
-            <div className="flex-box gap20 wrap">
-                {CampaignsService.campaignEvents.map(renderCampaignProgress)}
-            </div>
+            <div className="flex-box gap20 wrap">{CampaignsService.campaignEvents.map(renderCampaignProgress)}</div>
         </>
     );
 };

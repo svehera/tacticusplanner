@@ -17,7 +17,6 @@ import { orderBy, uniq } from 'lodash';
 import { CampaignReleaseType } from 'src/v2/features/campaigns/campaigns.enums';
 import { campaignsList } from 'src/v2/features/campaigns/campaigns.constants';
 
-
 export class CampaignsService {
     private static readonly campaignConfigs: ICampaignConfigs = campaignConfigs;
     private static readonly battleData: ICampaignsData = battleData;
