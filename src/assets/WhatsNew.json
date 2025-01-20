@@ -45,10 +45,10 @@
                 {
                     "text": "Added \"Points Calculations\" options to the LRE leaderboard and LRE master table",
                     "subPoints": [
-                        "Progress based points calculation - works only for selected characters, calculates points that specific character can score based on number of battles that left uncompleted.",
-                        "Absolute points calculation - works only for all characters, calculates points that specific character can score overall."
+                        "\"Unearned Points Only\" - works only for selected characters, calculates points that specific character can score based on number of battles that left uncompleted.",
+                        "\"All Points\" - works only for all characters, calculates points that specific character can score overall."
                     ],
-                    "route": "plan/leMasterTable?pointsCalculation=progressBased"
+                    "route": "plan/leMasterTable?pointsCalculation=unearned"
                 }
             ],
             "bugFixes": [

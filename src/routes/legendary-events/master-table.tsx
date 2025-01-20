@@ -56,7 +56,7 @@ export const MasterTable = () => {
 
     const [pointsCalculation, setPointsCalculation] = useQueryState<PointsCalculation>(
         'pointsCalculation',
-        stringValue => (stringValue as PointsCalculation) ?? PointsCalculation.progressBased,
+        stringValue => (stringValue as PointsCalculation) ?? PointsCalculation.unearned,
         value => value
     );
 
@@ -183,7 +183,7 @@ export const MasterTable = () => {
 
             let progressByRequirement: Record<string, number> = {};
 
-            if (pointsCalculation === PointsCalculation.progressBased) {
+            if (pointsCalculation === PointsCalculation.unearned) {
                 const trackProgress = legendaryEventProgress.tracksProgress.filter(x => x.trackId === track.section)[0];
                 if (trackProgress) {
                     progressByRequirement = LreService.getReqProgressPerTrack(trackProgress);
@@ -197,11 +197,11 @@ export const MasterTable = () => {
                     slots: restrictionsByChar[key].length,
                     points: sum(
                         restrictions.map(requirement => {
-                            if (pointsCalculation === PointsCalculation.absolute) {
+                            if (pointsCalculation === PointsCalculation.all) {
                                 return track.getRestrictionPoints(requirement) * track.battlesPoints.length;
                             }
 
-                            if (pointsCalculation === PointsCalculation.progressBased) {
+                            if (pointsCalculation === PointsCalculation.unearned) {
                                 const progress = progressByRequirement[requirement] ?? 0;
                                 const battlesLeft = track.battlesPoints.length - progress;
                                 return track.getRestrictionPoints(requirement) * battlesLeft;
@@ -441,11 +441,11 @@ export const MasterTable = () => {
                             onChange={(_, value) => setPointsCalculation(value as PointsCalculation)}
                             name="radio-buttons-group">
                             <FormControlLabel
-                                value={PointsCalculation.progressBased}
+                                value={PointsCalculation.unearned}
                                 control={<Radio />}
-                                label="Progress Based"
+                                label="Unearned Points Only"
                             />
-                            <FormControlLabel value={PointsCalculation.absolute} control={<Radio />} label="Absolute" />
+                            <FormControlLabel value={PointsCalculation.all} control={<Radio />} label="All Points" />
                         </RadioGroup>
                     </FormControl>
                 )}

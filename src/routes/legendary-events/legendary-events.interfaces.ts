@@ -8,8 +8,8 @@ export enum CharactersSelection {
 }
 
 export enum PointsCalculation {
-    progressBased = 'progressBased',
-    absolute = 'absolute',
+    unearned = 'unearned',
+    all = 'all',
 }
 
 export interface ITableRow extends ICharLegendaryEvent {
