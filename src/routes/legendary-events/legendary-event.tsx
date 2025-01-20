@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
+﻿import React, { useContext, useState } from 'react';
 
 import { ICharacter2, ILegendaryEvent, ILreTeam, LreTrackId } from 'src/models/interfaces';
 import { LegendaryEventTrack } from './legendary-event-track';
@@ -8,7 +8,7 @@ import { isMobile } from 'react-device-detect';
 import { LreAddTeam } from 'src/v2/features/lre/lre-add-team';
 import { LreEditTeam } from 'src/v2/features/lre/lre-edit-team';
 import { useLreProgress } from 'src/shared-components/le-progress.hooks';
-import { ILreTrackProgress } from 'src/v2/features/lre/lre.models';
+import { LreService } from 'src/v2/features/lre/lre.service';
 
 export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
     const { characters, viewPreferences, leSelectedTeams } = useContext(StoreContext);
@@ -77,17 +77,6 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
         }
     };
 
-    const getReqProgressPerTrack = (trackProgress: ILreTrackProgress) => {
-        const completedReqs = trackProgress.battles.flatMap(x => x.requirementsProgress).filter(x => x.completed);
-        const result: Record<string, number> = {};
-
-        trackProgress.requirements.forEach(requirement => {
-            result[requirement.id] = completedReqs.filter(x => x.id === requirement.id).length;
-        });
-
-        return result;
-    };
-
     return (
         <div>
             <div style={{ display: 'flex', flexWrap: isMobile ? 'wrap' : 'nowrap', gap: 15, marginBottom: 10 }}>
@@ -99,7 +88,9 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
                         autoAddTeam={autoAddTeam}
                         deleteTeam={deleteTeam}
                         teams={selectedTeams.filter(x => x.section === 'alpha')}
-                        progress={getReqProgressPerTrack(lreProgress.tracksProgress.find(x => x.trackId == 'alpha')!)}
+                        progress={LreService.getReqProgressPerTrack(
+                            lreProgress.tracksProgress.find(x => x.trackId == 'alpha')!
+                        )}
                     />
                 )}
                 {viewPreferences.showBeta && (
@@ -110,7 +101,9 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
                         autoAddTeam={autoAddTeam}
                         deleteTeam={deleteTeam}
                         teams={selectedTeams.filter(x => x.section === 'beta')}
-                        progress={getReqProgressPerTrack(lreProgress.tracksProgress.find(x => x.trackId == 'beta')!)}
+                        progress={LreService.getReqProgressPerTrack(
+                            lreProgress.tracksProgress.find(x => x.trackId == 'beta')!
+                        )}
                     />
                 )}
                 {viewPreferences.showGamma && (
@@ -121,7 +114,9 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
                         autoAddTeam={autoAddTeam}
                         deleteTeam={deleteTeam}
                         teams={selectedTeams.filter(x => x.section === 'gamma')}
-                        progress={getReqProgressPerTrack(lreProgress.tracksProgress.find(x => x.trackId == 'gamma')!)}
+                        progress={LreService.getReqProgressPerTrack(
+                            lreProgress.tracksProgress.find(x => x.trackId == 'gamma')!
+                        )}
                     />
                 )}
             </div>
