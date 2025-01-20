@@ -162,7 +162,8 @@ export const Campaigns = () => {
                 </div>
 
                 <div>
-                    <span className="bold"> Enemies types:</span> {uniqEnemiesTypes.join(', ')}
+                    <span className="bold"> Enemies types:</span>{' '}
+                    <span style={{ fontSize: 11 }}>{uniqEnemiesTypes.join(', ')}</span>
                 </div>
 
                 {!!threeSlotsNodes.length && (

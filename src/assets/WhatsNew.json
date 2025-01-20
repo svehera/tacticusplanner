@@ -3,7 +3,7 @@
     "releaseNotes": [
         {
             "version": "1.6.8",
-            "date": "January 17, 2025",
+            "date": "January 20, 2025",
             "type": "Update",
             "new": [
                 {
@@ -11,13 +11,31 @@
                 },
                 {
                     "text": "[cpunerd] Introduced the Campaign Progression feature to simplify campaign planning.",
-                    "route": "plan/campaignprogression"
+                    "subPoints": [
+                        "You can navigate to the page via Plan -> Campaign Progression.",
+                        "Found this page helpful? Consider using cpunerd's Refer-A-Friend code 'DUG-38-VAT'."
+                    ],
+                    "route": "plan/campaignprogression",
+                    "images": [
+                        {
+                            "path": "cp1.png"
+                        }
+                    ]
                 },
                 {
                     "text": "First Campaign Event: ‘Adeptus Mechanicus’",
                     "subPoints": [
-                        "Track progress on the \"My Progress\" page.",
+                        "Track progress on the \"My Progress\" page. Campaign Progress is renamed to My Progress",
                         "Added a 'Campaign Event' option in Daily Raids settings. Select your current Campaign Event for tailored raid suggestions."
+                    ],
+                    "route": "input/myProgress",
+                    "images": [
+                        {
+                            "path": "ce1.png"
+                        },
+                        {
+                            "path": "ce2.png"
+                        }
                     ]
                 },
                 {
@@ -36,11 +54,24 @@
             ],
             "minor": [
                 {
+                    "text": "Added option to display core characters of each campaign on the My Progress page",
+                    "images": [
+                        {
+                            "path": "mp1.png"
+                        }
+                    ]
+                },
+                {
                     "text": "Resolved issue with page redirection which should improve time of initial page load."
                 },
                 {
                     "text": "Updated Learn Campaigns page to include new Campaign Event and some UI adjustments.",
-                    "route": "learn/campaigns?campaign=Adeptus+Mechanicus+Standard"
+                    "route": "learn/campaigns?campaign=Adeptus+Mechanicus+Standard",
+                    "images": [
+                        {
+                            "path": "ce3.png"
+                        }
+                    ]
                 },
                 {
                     "text": "Added \"Points Calculations\" options to the LRE leaderboard and LRE master table",
@@ -48,7 +79,12 @@
                         "\"Unearned Points Only\" - works only for selected characters, calculates points that specific character can score based on number of battles that left uncompleted.",
                         "\"All Points\" - works only for all characters, calculates points that specific character can score overall."
                     ],
-                    "route": "plan/leMasterTable?pointsCalculation=unearned"
+                    "route": "plan/leMasterTable?pointsCalculation=unearned",
+                    "images": [
+                        {
+                            "path": "lre1.png"
+                        }
+                    ]
                 }
             ],
             "bugFixes": [
