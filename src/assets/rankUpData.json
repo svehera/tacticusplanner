@@ -11560,5 +11560,136 @@
             "Gene-Sire's Reliquant",
             "Preternatural Defences"
         ]
+    },
+    "Isaak": {
+        "Stone I": [
+            "Nano Swarm",
+            "Mutation: Warped Muscles",
+            "Canister of Chemicals",
+            "Nasty Spikes",
+            "Pile of Salvage",
+            "Sophisticated Material"
+        ],
+        "Stone II": [
+            "Mission Assignment",
+            "Ropes and Chains",
+            "Combat Stimms",
+            "Razorsharp Spikes",
+            "Mutation: Tough Skin",
+            "Rebreather"
+        ],
+        "Stone III": ["Mission Objective", "Holster and Pockets", "Vox-Caster", "Auspex", "Box of Salvage", "Cloak"],
+        "Iron I": [
+            "Regenerating Nano Swarm",
+            "Mission Objective",
+            "Combat Stimms",
+            "Fine Micro-Generator",
+            "Mutation: Scaly Skin",
+            "Sophisticated Material Ingot"
+        ],
+        "Iron II": [
+            "Mission Objective",
+            "Battle Plan",
+            "Adamantium Blades",
+            "Slicing Claws",
+            "Crate of Salvage",
+            "Cloak"
+        ],
+        "Iron III": [
+            "Battle Plan",
+            "Mutation: Warped Lungs",
+            "Proclamation Receiver",
+            "Powerful Micro-Generator",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Wyrm-Form Sigil",
+            "Mutation: Warped Heart",
+            "Prey-Sight",
+            "Krak Grenade",
+            "Mutation: Warped Skin",
+            "Sophisticated Material Bar"
+        ],
+        "Bronze II": [
+            "Wyrm-Form Icon",
+            "Utilitarian Belt",
+            "Classified Data-Slate",
+            "Anointed Micro-Generator",
+            "Industrial Padding",
+            "Fine Cloak"
+        ],
+        "Bronze III": [
+            "Battle Scar",
+            "Grand Helmet Trophy",
+            "Proclamation Caster",
+            "Murderous Spikes",
+            "Industrial Protection Suit",
+            "Revered Talisman"
+        ],
+        "Silver I": [
+            "Wyrm-Form Icon",
+            "Secret Agenda",
+            "Proclamation Caster",
+            "Relic Hilt",
+            "Industrial Protection Suit",
+            "Sophisticated Material Sheet"
+        ],
+        "Silver II": [
+            "Gifts of the Star Children",
+            "Mutation: Regenerative Blood",
+            "Proclamation Hailer",
+            "Anointed Micro-Generator",
+            "Industrial Protection Suit",
+            "Decorated Cloak"
+        ],
+        "Silver III": [
+            "Wyrm-Form Icon",
+            "Grand Strategy",
+            "Proclamation Caster",
+            "Imposing Horns",
+            "Archeo-Tech Remnant",
+            "Sophisticated Material Plates"
+        ],
+        "Gold I": [
+            "Wyrm-Form Banner",
+            "Grandiose Skull Ornament",
+            "Archeotech Bionics",
+            "Relic Micro-Generator",
+            "Industrial Carapace",
+            "Divine Cloak"
+        ],
+        "Gold II": [
+            "Biomorph Adaption",
+            "Mutation: Otherworldly Power",
+            "Proclamation Hailer",
+            "Imposing Horns",
+            "Industrial Carapace",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold III": [
+            "Wyrm-Form Banner",
+            "Advanced Exospine",
+            "Gene-Twisted Muscle",
+            "Powered Blade",
+            "Gene-Sire's Reliquant",
+            "Divine Cloak"
+        ],
+        "Diamond I": [
+            "Biomorph Adaption",
+            "Grand Strategy",
+            "Gene-Twisted Muscle",
+            "Hyperstim",
+            "Gene-Sire's Reliquant",
+            "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Biomorph Adaption",
+            "Preternatural Constitution",
+            "Gene-Twisted Muscle",
+            "Preternatural Strength",
+            "Gene-Sire's Reliquant",
+            "Preternatural Defences"
+        ]
     }
 }
