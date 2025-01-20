@@ -9919,6 +9919,144 @@
             "Technocrafted Defences"
         ]
     },
+    "Sy-Gex": {
+        "Stone I": [
+            "Ropes and Chains",
+            "The Iron Phoenix",
+            "Auspex",
+            "Weapon Anointment Oils",
+            "Sophisticated Material",
+            "Adamantium Ore"
+        ],
+        "Stone II": [
+            "Wires",
+            "Minor Bionic Enhancement",
+            "Fine Micro-Generator",
+            "Blessed Weapon Oils",
+            "Metal Joints",
+            "Purity Seal"
+        ],
+        "Stone III": [
+            "Reinforced Cables",
+            "Bionic Enhancement",
+            "Single Power Pack",
+            "Basic Auxiliary Core",
+            "Air Purificator",
+            "Oath Seal"
+        ],
+        "Iron I": [
+            "Holster and Pockets",
+            "Reinforced Cables",
+            "Fine Micro-Generator",
+            "Locator Beacon",
+            "Reinforced Scale-Plates",
+            "Adamantium Lump"
+        ],
+        "Iron II": [
+            "Reinforced Cables",
+            "Electromantic Cable Bundle",
+            "Power Pack Bundle",
+            "Divinator Class Auspex",
+            "Crate of Salvage",
+            "Oath Seal"
+        ],
+        "Iron III": [
+            "Electromantic Cable Bundle",
+            "The Gold Phoenix",
+            "Motive Force Capacitator",
+            "Powerful Auxiliary Core",
+            "Sophisticated Material Ingot",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Repair-Kit",
+            "The Phoenix Ascendant",
+            "High-Capacity Power Pack",
+            "Tank of Promethium",
+            "Scale-Plate Strand",
+            "Adamantium Bar"
+        ],
+        "Bronze II": [
+            "Servo-Arc Claw",
+            "Advanced Bionics",
+            "Bionic Eye",
+            "Anointed Auxiliary Core",
+            "Cogwheel Crest",
+            "Blessed Purity Seal"
+        ],
+        "Bronze III": [
+            "Metal Decorative Skull",
+            "Mars-Pattern Bionics",
+            "Enhanced Motive Force Capacitator",
+            "Sanctified Weapon Oils",
+            "Enhanced Cogwheel Crest",
+            "Unyielding Rivets"
+        ],
+        "Silver I": [
+            "Servo-Arc Claw",
+            "Weathering",
+            "Enhanced Motive Force Capacitator",
+            "Bionic Neural Pathways",
+            "Enhanced Cogwheel Crest",
+            "Adamantium Sheet"
+        ],
+        "Silver II": [
+            "Blessed Cogitator",
+            "Greater Reliquary of Protection",
+            "Relic Motive Force Capacitator",
+            "Anointed Auxiliary Core",
+            "Enhanced Cogwheel Crest",
+            "Grand Purity Seal"
+        ],
+        "Silver III": [
+            "Servo-Arc Claw",
+            "Grand Strategy",
+            "Enhanced Motive Force Capacitator",
+            "Digital Weapons",
+            "Archeo-Tech Remnant",
+            "Adamantium Plates"
+        ],
+        "Gold I": [
+            "Mechadendrite Hive",
+            "Relic Bionic Enhancement",
+            "Archeotech Bionics",
+            "Relic Auxiliary Core",
+            "Artificer Cogwheel Crest",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold II": [
+            "Sanctus Canister",
+            "Legendary Reliquary of Protection",
+            "Relic Motive Force Capacitator",
+            "Digital Weapons",
+            "Artificer Cogwheel Crest",
+            "Mysterious Device"
+        ],
+        "Gold III": [
+            "Mechadendrite Hive",
+            "Grandiose Skull Ornament",
+            "Prehensile Dataspike",
+            "Plasma Coil",
+            "Kataphron Armour",
+            "Seal of the Emperor's Protection"
+        ],
+        "Diamond I": [
+            "Sanctus Canister",
+            "Advanced Exospine",
+            "Prehensile Dataspike",
+            "Relic Micro-Generator",
+            "Kataphron Armour",
+            "Adamantium Plates"
+        ],
+        "Diamond II": [
+            "Sanctus Canister",
+            "Technocrafted Constitution",
+            "Prehensile Dataspike",
+            "Technocrafted Strength",
+            "Kataphron Armour",
+            "Technocrafted Defences"
+        ]
+    },
     "Wrask": {
         "Stone I": [
             "Minor Bionic Enhancement",
