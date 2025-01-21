@@ -354,6 +354,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     logout();
                     enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
                 } else {
+                    console.error(err);
                     enqueueSnackbar('Failed to fetch data from server. Try again later', { variant: 'error' });
                 }
             });
