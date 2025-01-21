@@ -495,7 +495,6 @@ export class CampaignsProgressionService {
     }
 
     /**
-     *
      * @param material The material to farm.
      * @param campaignProgress Our campaign progress thus far, which restricts our ability
      *             to farm certain materials more cheaply (e.g. if we haven't
@@ -520,6 +519,26 @@ export class CampaignsProgressionService {
             }
         });
 
+        return result;
+    }
+
+    /**
+     * @param battle The current battle that yields the reward.
+     * @returns A random battle in the same campaign, appearing before this
+     *          battle, that yields the same reward. Typically this would be
+     *          an elite node, and the base node would return the reward.
+     */
+    public static getBattleFromBaseCampaignWithSameReward(
+        battle: ICampaignBattleComposed,
+        farmData: FarmData | undefined
+    ): ICampaignBattleComposed | undefined {
+        if (farmData === undefined) return undefined;
+        if (battle.campaignType != CampaignType.Elite) return undefined;
+        const baseCampaign = battle.campaign.substring(0, battle.campaign.length - 6);
+        let result: ICampaignBattleComposed | undefined = undefined;
+        farmData.unfarmableLocations.forEach(x => {
+            if (x.campaign == baseCampaign && x.reward == battle.reward) result = x;
+        });
         return result;
     }
 }

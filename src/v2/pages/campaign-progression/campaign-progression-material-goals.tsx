@@ -174,7 +174,22 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     if (!savingsData) return <span>Unimplemented</span>;
                     const savings: BattleSavings = savingsData[0].savings;
                     if (!savings.canFarmPrior) {
-                        return <span>Unlocks the material.</span>;
+                        let tooltipText: string = '';
+                        const battle = CampaignsProgressionService.getBattleFromBaseCampaignWithSameReward(
+                            savings.battle,
+                            progression.materialFarmData.get(savings.battle.reward)
+                        );
+                        if (battle != undefined) {
+                            tooltipText =
+                                'Currently unfarmable, but will be unlocked in ' +
+                                battle.id +
+                                ' before reaching this battle.';
+                        }
+                        return (
+                            <Tooltip title={tooltipText}>
+                                <span>Unlocks the material{battle === undefined ? '' : '*'}</span>
+                            </Tooltip>
+                        );
                     } else {
                         return (
                             <Tooltip title={getSavingsTooltipText(savings.battle.reward)}>
@@ -193,7 +208,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return <span>Unimplemented</span>;
                     const savings: BattleSavings = savingsData[0].savings;
-                    if (savings && savings.canFarmPrior) {
+                    if (savings.canFarmPrior) {
                         return (
                             <span>
                                 Cumulative {savings.cumulativeSavings}{' '}
