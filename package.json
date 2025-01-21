@@ -77,8 +77,7 @@
     "lint-ci": "eslint --ext .ts,.tsx --ignore-path .gitignore  --quiet src",
     "lint": "eslint --ext .ts,.tsx --ignore-path .gitignore  --quiet --fix src",
     "format": "prettier src --write",
-    "format-ci": "prettier src --check",
-    "predeploy": "npm run build"
+    "format-ci": "prettier src --check"
   },
   "eslintConfig": {
     "extends": [
