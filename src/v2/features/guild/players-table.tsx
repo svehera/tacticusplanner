@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ICellRendererParams } from 'ag-grid-community';
+import { ColDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
 
 import './players-table.css';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
@@ -8,7 +8,6 @@ import { FlexBox } from 'src/v2/components/flex-box';
 import { Difficulty, Rarity } from 'src/models/enums';
 import { Badge } from '@mui/material';
 import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
-import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { mapValues, sum } from 'lodash';
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 

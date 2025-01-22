@@ -34,8 +34,8 @@ export const CharacterTitle = ({
             character.bias === CharacterBias.recommendFirst
                 ? starEmoji
                 : character.bias === CharacterBias.recommendLast
-                ? pooEmoji
-                : '';
+                  ? pooEmoji
+                  : '';
         const opacity = showLockedWithOpacity ? (isUnlocked ? 1 : 0.5) : 1;
         const cursor = onClick ? 'pointer' : undefined;
 
@@ -56,8 +56,8 @@ export const CharacterTitle = ({
                         character.bias === CharacterBias.recommendFirst
                             ? 'Always recommend first'
                             : character.bias === CharacterBias.recommendLast
-                            ? 'Always recommend last'
-                            : ''
+                              ? 'Always recommend last'
+                              : ''
                     }>
                     <span>{emoji}</span>
                 </Tooltip>

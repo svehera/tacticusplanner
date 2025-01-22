@@ -42,14 +42,14 @@ export const RankLookup = () => {
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        return queryParamsRank ? Rank[queryParamsRank] ?? Rank.Stone1 : Rank.Stone1;
+        return queryParamsRank ? (Rank[queryParamsRank] ?? Rank.Stone1) : Rank.Stone1;
     });
     const [rankEnd, setRankEnd] = useState<Rank>(() => {
         const queryParamsRank = searchParams.get('rankEnd');
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        return queryParamsRank ? Rank[queryParamsRank] ?? Rank.Stone2 : Rank.Stone2;
+        return queryParamsRank ? (Rank[queryParamsRank] ?? Rank.Stone2) : Rank.Stone2;
     });
     const [rankPoint5, setRankPoint5] = useState<boolean>(() => {
         const queryParamsRankPoint5 = searchParams.get('rankPoint5');
@@ -162,7 +162,7 @@ export const RankLookup = () => {
         </ul>
     );
 
-    const [columnDefs] = useState<Array<ColDef>>([
+    const [columnDefs] = useState<Array<ColDef<IMaterialEstimated2>>>([
         {
             headerName: '#',
             colId: 'rowNumber',
@@ -194,7 +194,7 @@ export const RankLookup = () => {
         },
         {
             valueGetter: params => {
-                return Math.max(params.data!.count - (inventory.upgrades[params.data!.id] ?? 0), 0);
+                return params.data ? Math.max(params.data.count - inventory.upgrades[params.data.id], 0) : 0;
             },
             headerName: 'Remaining',
             maxWidth: 90,

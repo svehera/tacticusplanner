@@ -25,13 +25,13 @@ export const AuthContext = createContext<IAuthContext>({
     isAuthenticated: !!localStorage.getItem(localStorageKey),
     token: localStorage.getItem(localStorageKey) ?? '',
     userInfo: {} as any,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+
     login(): void {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+
     logout(): void {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+
     setUser(): void {},
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+
     setUserInfo(): void {},
 });
 

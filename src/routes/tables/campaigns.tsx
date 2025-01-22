@@ -1,21 +1,17 @@
 ﻿import React, { useMemo, useRef, useState } from 'react';
 
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, RowStyle, RowClassParams, ICellRendererParams } from 'ag-grid-community';
+import { ColDef, RowStyle, RowClassParams, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
 
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { Campaign } from 'src/models/enums';
-import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { StaticDataService } from 'src/services';
-import { fitGridOnWindowResize } from 'src/shared-logic/functions';
+import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import { isNil, uniq } from 'lodash';
+import { uniq } from 'lodash';
 import { useQueryState } from 'src/v2/hooks/query-state';
-import { LreSection } from 'src/v2/features/lre/lre.models';
-import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { ICharacterUpgradeEstimate } from 'src/v2/features/goals/goals.models';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { FactionImage } from 'src/v2/components/images/faction-image';
 
@@ -184,7 +180,7 @@ export const Campaigns = () => {
                     columnDefs={columnDefs}
                     rowData={rows}
                     getRowStyle={getRowStyle}
-                    onGridReady={fitGridOnWindowResize(gridRef)}></AgGridReact>
+                    onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
             </div>
         </div>
     );

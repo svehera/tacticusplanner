@@ -2,10 +2,9 @@
 import './dirty-dozen-table.css';
 import { IDirtyDozenChar } from './dirty-dozen.models';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ColGroupDef, ICellRendererParams } from 'ag-grid-community';
+import { ColDef, ColGroupDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
 import { Score } from 'src/v2/features/dirty-dozen/dirty-dozen-score';
 import { CharacterTitle } from 'src/shared-components/character-title';
-import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { RarityImage } from 'src/shared-components/rarity-image';
 import { RankImage } from 'src/shared-components/rank-image';
 import { ICharacter2 } from 'src/models/interfaces';

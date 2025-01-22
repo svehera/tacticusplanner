@@ -4,7 +4,7 @@ import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ValueFormatterParams, ICellRendererParams } from 'ag-grid-community';
 
 import { StaticDataService } from 'src/services';
-import { fitGridOnWindowResize, stringToRank } from 'src/shared-logic/functions';
+import { useFitGridOnWindowResize, stringToRank } from 'src/shared-logic/functions';
 import { FormControl, FormControlLabel, MenuItem, Select, Switch, TextField, Tooltip } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import { Rank, Rarity, RarityString } from 'src/models/enums';
@@ -307,7 +307,7 @@ export const Upgrades = () => {
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true, wrapText: true }}
                     columnDefs={columnDefs}
                     rowData={rows}
-                    onGridReady={fitGridOnWindowResize(gridRef)}></AgGridReact>
+                    onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
             </div>
         </div>
     );

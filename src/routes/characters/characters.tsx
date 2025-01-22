@@ -1,7 +1,15 @@
 ﻿import React, { ChangeEvent, useCallback, useContext, useMemo, useRef, useState } from 'react';
 
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, RowStyle, RowClassParams, IRowNode, ICellRendererParams, ColGroupDef } from 'ag-grid-community';
+import {
+    ColDef,
+    RowStyle,
+    RowClassParams,
+    IRowNode,
+    ICellRendererParams,
+    ColGroupDef,
+    ValueGetterParams,
+} from 'ag-grid-community';
 
 import {
     Badge,
@@ -20,7 +28,7 @@ import { Alliance, DamageType, Rank, Trait } from 'src/models/enums';
 import { isMobile } from 'react-device-detect';
 import { CharacterTitle } from 'src/shared-components/character-title';
 import { StoreContext } from 'src/reducers/store.provider';
-import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
+// import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { RarityImage } from 'src/shared-components/rarity-image';
 import { RankImage } from 'src/shared-components/rank-image';
 import { useQueryState } from 'src/v2/hooks/query-state';
@@ -57,22 +65,22 @@ export const Characters = () => {
     const [minHitsFilter, setMinHitsFilter] = useQueryState<number | ''>(
         'minHits',
         filterParam => (filterParam ? Number.parseInt(filterParam) : ''),
-        queryParam => (queryParam > 0 ? queryParam?.toString() : '')
+        queryParam => (queryParam && queryParam > 0 ? queryParam?.toString() : '')
     );
     const [maxHitsFilter, setMaxHitsFilter] = useQueryState<number | ''>(
         'maxHits',
         filterParam => (filterParam ? Number.parseInt(filterParam) : ''),
-        queryParam => (queryParam > 0 ? queryParam?.toString() : '')
+        queryParam => (queryParam && queryParam > 0 ? queryParam?.toString() : '')
     );
     const [movementFilter, setMovementFilter] = useQueryState<number | ''>(
         'movement',
         filterParam => (filterParam ? Number.parseInt(filterParam) : ''),
-        queryParam => (queryParam > 0 ? queryParam?.toString() : '')
+        queryParam => (queryParam && queryParam > 0 ? queryParam?.toString() : '')
     );
     const [distanceFilter, setDistanceFilter] = useQueryState<number | ''>(
         'distance',
         filterParam => (filterParam ? Number.parseInt(filterParam) : ''),
-        queryParam => (queryParam > 0 ? queryParam?.toString() : '')
+        queryParam => (queryParam && queryParam > 0 ? queryParam?.toString() : '')
     );
     const [attackTypeFilter, setAttackTypeFilter] = useQueryState<string | ''>(
         'attackType',
@@ -87,7 +95,7 @@ export const Characters = () => {
         wrapText: true,
     };
 
-    const [columnDefs] = useState<Array<ColDef | ColGroupDef>>([
+    const [columnDefs] = useState<Array<ColDef<ICharacter2> | ColGroupDef>>([
         {
             headerName: 'Character',
             pinned: !isMobile,
@@ -413,10 +421,10 @@ export const Characters = () => {
         const hasDamageTypeFilter = damageTypesFilter.length > 0;
         const hasTraitsFilter = traitsFilter.length > 0;
         const hasAllianceFilter = allianceFilter.length > 0;
-        const hasMinHitsFilter = minHitsFilter > 0;
-        const hasMaxHitsFilter = maxHitsFilter > 0;
-        const hasMovementFilter = movementFilter > 0;
-        const hasDistanceFilter = distanceFilter > 0;
+        const hasMinHitsFilter = !!minHitsFilter && minHitsFilter > 0;
+        const hasMaxHitsFilter = !!maxHitsFilter && maxHitsFilter > 0;
+        const hasMovementFilter = !!movementFilter && movementFilter > 0;
+        const hasDistanceFilter = !!distanceFilter && distanceFilter > 0;
         const hasAttackTypeFilter = !!attackTypeFilter;
         return (
             hasMovementFilter ||
@@ -434,10 +442,10 @@ export const Characters = () => {
         const hasDamageTypeFilter = damageTypesFilter.length > 0;
         const hasTraitsFilter = traitsFilter.length > 0;
         const hasAllianceFilter = allianceFilter.length > 0;
-        const hasMinHitsFilter = minHitsFilter > 0;
-        const hasMaxHitsFilter = maxHitsFilter > 0;
-        const hasMovementFilter = movementFilter > 0;
-        const hasDistanceFilter = distanceFilter > 0;
+        const hasMinHitsFilter = !!minHitsFilter && minHitsFilter > 0;
+        const hasMaxHitsFilter = !!maxHitsFilter && maxHitsFilter > 0;
+        const hasMovementFilter = !!movementFilter && movementFilter > 0;
+        const hasDistanceFilter = !!distanceFilter && distanceFilter > 0;
         const hasAttackTypeFilter = !!attackTypeFilter;
         return (
             +hasMovementFilter +

@@ -79,8 +79,8 @@ export class ShardsService {
                 material.campaignsUsage === CampaignsLocationsUsage.LeastEnergy
                     ? CampaignsService.selectBestLocations(unlockedLocations)
                     : material.campaignsUsage === CampaignsLocationsUsage.BestTime
-                    ? unlockedLocations
-                    : [];
+                      ? unlockedLocations
+                      : [];
 
             const energyPerDay = sum(raidsLocations.map(x => x.energyPerDay));
 

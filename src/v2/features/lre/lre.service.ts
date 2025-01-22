@@ -173,8 +173,8 @@ export class LreService {
                             state: requirement.completed
                                 ? ProgressState.completed
                                 : requirement.blocked
-                                ? ProgressState.blocked
-                                : ProgressState.none,
+                                  ? ProgressState.blocked
+                                  : ProgressState.none,
                         }))
                         .filter(x => x.state !== ProgressState.none),
                 }))

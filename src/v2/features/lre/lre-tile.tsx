@@ -18,8 +18,8 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
         character.bias === CharacterBias.recommendFirst
             ? starEmoji
             : character.bias === CharacterBias.recommendLast
-            ? pooEmoji
-            : '';
+              ? pooEmoji
+              : '';
     const rankBackgroundCssClass = settings.lreTileShowUnitRankBackground
         ? ` ${Rank[character.rank].toLowerCase()}`
         : '';
@@ -41,8 +41,8 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
                         character.bias === CharacterBias.recommendFirst
                             ? 'Always recommend first'
                             : character.bias === CharacterBias.recommendLast
-                            ? 'Always recommend last'
-                            : ''
+                              ? 'Always recommend last'
+                              : ''
                     }>
                     <span>{emoji}</span>
                 </Tooltip>

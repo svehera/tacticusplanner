@@ -5,7 +5,7 @@ import { ICharacter2 } from '../models/interfaces';
 import { rankToLevel } from '../models/constants';
 import { isMobile } from 'react-device-detect';
 
-export const fitGridOnWindowResize = (gridRef: React.RefObject<AgGridReact>) => {
+export const useFitGridOnWindowResize = (gridRef: React.RefObject<AgGridReact | null>) => {
     function handleResize() {
         gridRef.current?.api.sizeColumnsToFit();
     }
@@ -164,7 +164,7 @@ export const getCompletionRateColor = (curr: number, total: number): string => {
 };
 
 export function getImageUrl(image: string): string {
-    return new URL(`../assets/images/${image}`, import.meta.url).href;
+    return new URL(`src/assets/images/${image}`, new URL(import.meta.url).origin).href;
 }
 
 export function formatDateWithOrdinal(date: Date, withYear: boolean = false): string {

@@ -48,7 +48,7 @@ export const MowUpgradesTable: React.FC<Props> = ({ rows, upgrades }) => {
         },
         {
             valueGetter: params => {
-                return Math.max((params.data?.requiredTotal ?? 0) - upgrades[params.data!.id] ?? 0, 0);
+                return params.data ? Math.max(params.data.requiredTotal - upgrades[params.data.id], 0) : 0;
             },
             headerName: 'Remaining',
             maxWidth: 90,

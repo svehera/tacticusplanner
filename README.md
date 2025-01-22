@@ -6,27 +6,21 @@ The development server and bundler are powered by [Vite](https://vitejs.dev/)
 
 ## Project Dependencies
 Major dependencies for this project include:
-- **react**: ^18.2.0
-- **react-router-dom**: ^6.15.0
-- **@mui/material**: ^5.14.4
-- **ag-grid-react**: ^30.0.6
-- **axios**: ^1.5.0
-- **lodash**: ^4.17.21
-- **notistack**: ^3.0.1
+- **react**: ^19.0.0
+- **react-router-dom**
+- **@mui/material**
+- **ag-grid-react**
 
 Major DEV dependencies:
-- **typescript**: ^4.9.5
-- **sass**: ^1.69.5
-- **vite**: ^4.5.1
-- **eslint**: ^8.46.0
-- **prettier**: ^3.0.3
-- **husky**: ^4.3.8
+- **typescript**
+- **sass**
+- **vite**
 
 ## Getting Started
 
 To contribute to this open-source project, follow these steps:
 
-1. Ensure that Node.js version 18.12.0 is installed. You can download it from [https://nodejs.org/](https://nodejs.org/).
+1. Ensure that Node.js version >20.0.0 is installed. You can download it from [https://nodejs.org/](https://nodejs.org/).
 
 2. **Fork the Repository:** Click the "Fork" button at the top right of the [repository page](https://github.com/svehera/tacticusplanner) to create your own fork.
 

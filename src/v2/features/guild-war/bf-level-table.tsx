@@ -1,13 +1,12 @@
 ﻿import React, { useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ICellRendererParams } from 'ag-grid-community';
+import { ColDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
 import { IGWZone } from './guild-war.models';
 
 import './bf-level-table.css';
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { FlexBox } from 'src/v2/components/flex-box';
-import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { sum } from 'lodash';
 import { Rarity } from 'src/models/enums';
 import { Badge } from '@mui/material';
