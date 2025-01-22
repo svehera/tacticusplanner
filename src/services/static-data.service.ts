@@ -35,6 +35,7 @@ import { getEnumValues, rankToString } from '../shared-logic/functions';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import { IRankLookup } from 'src/v2/features/goals/goals.models';
 import { UnitType } from 'src/v2/features/characters/units.enums';
+import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
 export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;
@@ -118,7 +119,7 @@ export class StaticDataService {
     static convertRecipeData(): IRecipeDataFull {
         const result: IRecipeDataFull = {};
         const upgrades = Object.keys(this.recipeData);
-        const upgradeLocations = this.getUpgradesLocations();
+        const upgradeLocations = UpgradesService.getUpgradesLocations();
 
         const getRecipe = (
             materialId: string,

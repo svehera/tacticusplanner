@@ -9,11 +9,11 @@ import Button from '@mui/material/Button';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
 
-import { ICharacter2, IMaterialRecipeIngredientFull } from '../models/interfaces';
+import { ICharacter2 } from '../models/interfaces';
 import { CharacterTitle } from './character-title';
 import { CharacterDetails } from '../mobile-routes/characters/character-details';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
-import { MiscIcon } from './misc-icon';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { Conditional } from 'src/v2/components/conditional';
 import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';

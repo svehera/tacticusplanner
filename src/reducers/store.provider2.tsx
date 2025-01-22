@@ -24,7 +24,6 @@ import { DispatchContext, StoreContext } from './store.provider';
 import { guildWarReducer } from 'src/reducers/guildWarReducer';
 import { guildReducer } from 'src/reducers/guildReducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
-import { enable as enableDarkMode, disable as disableDarkMode } from 'darkreader';
 import { teamsReducer } from 'src/reducers/teams.reducer';
 import { isMobile } from 'react-device-detect';
 
@@ -381,119 +380,6 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
         return () => clearInterval(timerId);
     }, []);
-
-    useEffect(() => {
-        switch (viewPreferences.theme) {
-            case 'dark': {
-                enableDarkMode(
-                    {
-                        brightness: 90,
-                        contrast: 90,
-                        sepia: 20,
-                    },
-                    {
-                        css: `
-                            .stone1 {
-                                background-color: #cdb3a0;
-                                color: black;
-                            }
-                            
-                            .stone2 {
-                                background-color: #b09a8a;
-                                color: black;
-                            }
-                            
-                            .stone3 {
-                                background-color: #8c827a;
-                                color: black;
-                            }
-                            
-                            .iron1 {
-                                background-color: #d9ead3;
-                                color: black;
-                            }
-                            
-                            .iron2 {
-                                background-color: #b6d7a8;
-                                color: black;
-                            }
-                            
-                            .iron3 {
-                                background-color: #93c47d;
-                                color: black;
-                            }
-                            
-                            .bronze1 {
-                                background-color: #f9cb9c;
-                                color: black;
-                            }
-                            
-                            .bronze2 {
-                                background-color: #f6b26b;
-                                color: black;
-                            }
-                            
-                            .bronze3 {
-                                background-color: #e69138;
-                                color: black;
-                            }
-                            
-                            .silver1 {
-                                background-color: #efefef;
-                                color: black;
-                            }
-                            
-                            .silver2 {
-                                background-color: #d9d9d9;
-                                color: black;
-                            }
-                            
-                            .silver3 {
-                                background-color: #cccccc;
-                                color: black;
-                            }
-                            
-                            .gold1 {
-                                background-color: #ffe599;
-                                color: black;
-                            }
-                            
-                            .gold2 {
-                                background-color: #ffd966;
-                                color: black;
-                            }
-                            
-                            .gold3 {
-                                background-color: #f1c232;
-                                color: black;
-                            }
-                            
-                            .diamond1 {
-                                background-color: #cfe2f3;
-                                color: black;
-                            }
-                            
-                            .diamond2 {
-                                background-color: #9fc5e8;
-                                color: black;
-                            }
-                            
-                            .diamond3 {
-                                background-color: #6fa8dc;
-                                color: black;
-                            }
-                        `,
-                    } as any
-                );
-                break;
-            }
-            default:
-            case 'light': {
-                disableDarkMode();
-                break;
-            }
-        }
-    }, [viewPreferences.theme]);
 
     return (
         <DispatchContext.Provider value={dispatch}>

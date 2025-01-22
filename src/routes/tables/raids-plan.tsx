@@ -2,7 +2,7 @@
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { FlexBox } from 'src/v2/components/flex-box';
-import { MiscIcon } from 'src/shared-components/misc-icon';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 import PendingIcon from '@mui/icons-material/Pending';
 import Button from '@mui/material/Button';
 import { isMobile } from 'react-device-detect';

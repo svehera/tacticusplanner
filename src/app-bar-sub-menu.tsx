@@ -23,11 +23,7 @@ export const AppBarSubMenu = ({ rootLabel, options }: { rootLabel: string; optio
                 <ListItemText primary={rootLabel} style={{ fontWeight: 500 }} />
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-            <Collapse
-                in={open}
-                timeout="auto"
-                unmountOnExit
-                sx={{ width: 150, position: 'absolute', zIndex: 1000, backgroundColor: '#1976d2' }}>
+            <Collapse in={open} timeout="auto" unmountOnExit sx={{ width: 150, position: 'absolute', zIndex: 1000 }}>
                 <List component="div" disablePadding>
                     {options.map(option => (
                         <MenuOption key={option.label} option={option} onOptionClick={() => setOpen(false)} />

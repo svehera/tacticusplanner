@@ -1,13 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
-body,
-#root {
+body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
         'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #fafbfb;
 }
+
+.MuiPaper-root {
+    /*@apply dark:bg-gray-navy;*/
+    background: red;
+}
+
+/*:root {*/
+/*    --mui-palette-background-paper: red*/
+/*    !* ...other variables *!*/
+/*}*/
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
@@ -213,16 +225,96 @@ code {
         width: 100%;
     }
 
-    @for $i from 1 through 20 {
-        &.gap#{$i} {
-            gap: #{$i}px;
-        }
+    .gap1 {
+        gap: 1px;
+    }
+    .gap2 {
+        gap: 2px;
+    }
+    .gap3 {
+        gap: 3px;
+    }
+    .gap4 {
+        gap: 4px;
+    }
+    .gap5 {
+        gap: 5px;
+    }
+    .gap6 {
+        gap: 6px;
+    }
+    .gap7 {
+        gap: 7px;
+    }
+    .gap8 {
+        gap: 8px;
+    }
+    .gap9 {
+        gap: 9px;
+    }
+    .gap10 {
+        gap: 10px;
+    }
+    .gap11 {
+        gap: 11px;
+    }
+    .gap12 {
+        gap: 12px;
+    }
+    .gap13 {
+        gap: 13px;
+    }
+    .gap14 {
+        gap: 14px;
+    }
+    .gap15 {
+        gap: 15px;
+    }
+    .gap16 {
+        gap: 16px;
+    }
+    .gap17 {
+        gap: 17px;
+    }
+    .gap18 {
+        gap: 18px;
+    }
+    .gap19 {
+        gap: 19px;
+    }
+    .gap20 {
+        gap: 20px;
     }
 
-    @for $i from 1 through 10 {
-        &.p#{$i} {
-            padding: #{$i}px;
-        }
+    .p1 {
+        padding: 1px;
+    }
+    .p2 {
+        padding: 2px;
+    }
+    .p3 {
+        padding: 3px;
+    }
+    .p4 {
+        padding: 4px;
+    }
+    .p5 {
+        padding: 5px;
+    }
+    .p6 {
+        padding: 6px;
+    }
+    .p7 {
+        padding: 7px;
+    }
+    .p8 {
+        padding: 8px;
+    }
+    .p9 {
+        padding: 9px;
+    }
+    .p10 {
+        padding: 10px;
     }
 }
 

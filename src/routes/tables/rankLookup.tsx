@@ -16,7 +16,7 @@ import { ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-commu
 import { useSearchParams } from 'react-router-dom';
 import { UpgradeImage } from '../../shared-components/upgrade-image';
 import { RankSelect } from '../../shared-components/rank-select';
-import { MiscIcon } from '../../shared-components/misc-icon';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { FormControlLabel, Popover, Switch } from '@mui/material';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { ArrowForward, Info } from '@mui/icons-material';

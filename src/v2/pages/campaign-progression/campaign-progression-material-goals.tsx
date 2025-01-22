@@ -17,7 +17,7 @@ import { StaticDataService } from 'src/services/static-data.service';
 import { ArrowForward } from '@mui/icons-material';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { CharacterImage } from 'src/shared-components/character-image';
-import { MiscIcon } from 'src/shared-components/misc-icon';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { Tooltip } from '@mui/material';
 

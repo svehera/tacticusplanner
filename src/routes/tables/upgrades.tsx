@@ -18,6 +18,7 @@ import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
 type Selection = 'Craftable' | 'Base Upgrades';
 
@@ -182,7 +183,7 @@ export const Upgrades = () => {
     }, [selection, showCharacters]);
 
     const rowsData = useMemo(() => {
-        const upgradesLocations = StaticDataService.getUpgradesLocations();
+        const upgradesLocations = UpgradesService.getUpgradesLocations();
         const upgrades = Object.values(StaticDataService.recipeData);
 
         const result: IUpgradesTableRow[] = upgrades.map(x => {

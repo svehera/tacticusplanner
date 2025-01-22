@@ -7,7 +7,7 @@ import { menuItemById } from 'src/models/menu-items';
 import { useNavigate } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import { sum } from 'lodash';
-import { MiscIcon } from 'src/shared-components/misc-icon';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 
 import { LegendaryEventEnum, PersonalGoalType } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
@@ -125,6 +125,7 @@ export const Home = () => {
                     <h3 style={{ textAlign: 'center' }}>{isEventStarted ? 'Ongoing ' : 'Upcoming '}Legendary Event</h3>
                     <Card
                         variant="outlined"
+                        classes="dark:bg-dark-navy"
                         onClick={navigateToNextLre}
                         sx={{
                             width: 350,

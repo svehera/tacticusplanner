@@ -16,7 +16,7 @@ import { FormControlLabel, Switch } from '@mui/material';
 import GridViewIcon from '@mui/icons-material/GridView';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { GoalsTable } from 'src/routes/goals/goals-table';
-import { MiscIcon } from 'src/shared-components/misc-icon';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
 import { goalsLimit, rankToLevel } from 'src/models/constants';
 import { sum } from 'lodash';
