@@ -1,6 +1,13 @@
 ﻿import React, { useContext, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { CellClassParams, ColDef, ColGroupDef, ICellRendererParams, ITooltipParams } from 'ag-grid-community';
+import {
+    CellClassParams,
+    ColDef,
+    ColGroupDef,
+    ICellRendererParams,
+    ITooltipParams,
+    ValueGetterParams,
+} from 'ag-grid-community';
 import { ILegendaryEvent, ILegendaryEventTrack, ILreTeam } from 'src/models/interfaces';
 import { Rank } from 'src/models/enums';
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
@@ -9,7 +16,6 @@ import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-e
 import { StoreContext } from 'src/reducers/store.provider';
 import { CharacterTitle } from 'src/shared-components/character-title';
 import { isMobile } from 'react-device-detect';
-import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { RarityImage } from 'src/shared-components/rarity-image';
 import { RankImage } from 'src/shared-components/rank-image';
 import { useLreProgress } from 'src/shared-components/le-progress.hooks';
@@ -291,8 +297,8 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
             selection === 'all'
                 ? legendaryEvent.allowedUnits
                 : selection === 'unlocked'
-                ? legendaryEvent.allowedUnits.filter(x => x.rank > Rank.Locked)
-                : [];
+                  ? legendaryEvent.allowedUnits.filter(x => x.rank > Rank.Locked)
+                  : [];
 
         return chars
             .sort(

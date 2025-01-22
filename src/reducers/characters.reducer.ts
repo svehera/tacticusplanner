@@ -77,14 +77,14 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                     updatedCharacter.activeAbilityLevel < 0
                         ? 0
                         : updatedCharacter.activeAbilityLevel > 50
-                        ? 50
-                        : updatedCharacter.activeAbilityLevel;
+                          ? 50
+                          : updatedCharacter.activeAbilityLevel;
                 existingChar.passiveAbilityLevel =
                     updatedCharacter.passiveAbilityLevel < 0
                         ? 0
                         : updatedCharacter.passiveAbilityLevel > 50
-                        ? 50
-                        : updatedCharacter.passiveAbilityLevel;
+                          ? 50
+                          : updatedCharacter.passiveAbilityLevel;
 
                 const updatedLevel =
                     updatedCharacter.level < 0 ? 0 : updatedCharacter.level > 50 ? 50 : updatedCharacter.level;
@@ -195,8 +195,8 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                 bias: recommendedFirst.includes(c.name)
                     ? CharacterBias.recommendFirst
                     : recommendedLast.includes(c.name)
-                    ? CharacterBias.recommendLast
-                    : CharacterBias.None,
+                      ? CharacterBias.recommendLast
+                      : CharacterBias.None,
             }));
         }
         default: {

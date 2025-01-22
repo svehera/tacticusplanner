@@ -185,8 +185,8 @@ export const ThankYouCard = ({
                     isContentMaker(contributor)
                         ? 'Content creator'
                         : !isYoutubeCreator(contributor)
-                        ? contributor.type
-                        : ''
+                          ? contributor.type
+                          : ''
                 }
             />
             <CardContent style={{ paddingTop: 0 }}>

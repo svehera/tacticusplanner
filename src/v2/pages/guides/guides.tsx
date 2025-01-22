@@ -294,7 +294,7 @@ export const Guides: React.FC = () => {
                 }
                 const approvedTeam = currentTeams.find(x => x.teamId === teamId);
                 if (approvedTeam) {
-                    approvedTeam.status == GuidesStatus.approved;
+                    approvedTeam.status = GuidesStatus.approved;
                 }
 
                 return currentTeams;
@@ -312,7 +312,7 @@ export const Guides: React.FC = () => {
             }
             const approvedTeam = currentTeams.find(x => x.teamId === teamId);
             if (approvedTeam) {
-                approvedTeam.status == GuidesStatus.rejected;
+                approvedTeam.status = GuidesStatus.rejected;
             }
 
             return currentTeams;

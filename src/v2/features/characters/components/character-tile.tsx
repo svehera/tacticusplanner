@@ -51,10 +51,10 @@ export const CharacterTile = ({
         character.rank === maxRank
             ? ''
             : needToAscend
-            ? '⇧'
-            : needToLevel
-            ? character.upgrades.length || '⇧'
-            : character.upgrades.length;
+              ? '⇧'
+              : needToLevel
+                ? character.upgrades.length || '⇧'
+                : character.upgrades.length;
     const badgeColor =
         character.rank === maxRank ? 'warning' : needToAscend ? 'warning' : needToLevel ? 'secondary' : 'success';
     const tileOpacity: number = isUnlocked ? 1 : 0.5;

@@ -119,7 +119,7 @@ export const UserMenu = () => {
             minute: 'numeric',
         };
         const formattedDate = new Intl.DateTimeFormat(navigator.language, options).format(date);
-        const realUsername = isAuthenticated ? username : localStorage.getItem('userOld') ?? username;
+        const realUsername = isAuthenticated ? username : (localStorage.getItem('userOld') ?? username);
 
         link.download = `${realUsername}-data-${formattedDate}.json`;
         link.click();
@@ -150,7 +150,6 @@ export const UserMenu = () => {
         let hash = 0;
         let i;
 
-        /* eslint-disable no-bitwise */
         for (i = 0; i < string.length; i += 1) {
             hash = string.charCodeAt(i) + ((hash << 5) - hash);
         }
@@ -161,7 +160,6 @@ export const UserMenu = () => {
             const value = (hash >> (i * 8)) & 0xff;
             color += `00${value.toString(16)}`.slice(-2);
         }
-        /* eslint-enable no-bitwise */
 
         return color;
     }
@@ -238,7 +236,7 @@ export const UserMenu = () => {
                         </MenuItem>
                     </div>
                 ) : (
-                    <>
+                    <div>
                         <MenuItem onClick={() => logout()}>
                             <ListItemIcon>
                                 <LogoutIcon />
@@ -263,7 +261,7 @@ export const UserMenu = () => {
                         {/*        <ListItemText>Connect Snowprint ID</ListItemText>*/}
                         {/*    </MenuItem>*/}
                         {/*)}*/}
-                    </>
+                    </div>
                 )}
 
                 <Divider />
