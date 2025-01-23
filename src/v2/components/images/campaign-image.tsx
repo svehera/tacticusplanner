@@ -3,7 +3,7 @@ import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { getImageUrl } from 'src/shared-logic/functions';
 
 export const CampaignImage = ({ campaign, size }: { campaign: string; size?: number }) => {
-    const image = getImageUrl(`campaings/${campaign}.png`);
+    const image = getImageUrl(`campaings/resized/${campaign}.png`);
 
     return (
         <AccessibleTooltip title={campaign}>

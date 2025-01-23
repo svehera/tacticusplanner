@@ -16,8 +16,8 @@ import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-e
 import { StoreContext } from 'src/reducers/store.provider';
 import { CharacterTitle } from 'src/shared-components/character-title';
 import { isMobile } from 'react-device-detect';
-import { RarityImage } from 'src/shared-components/rarity-image';
-import { RankImage } from 'src/shared-components/rank-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
 import { useLreProgress } from 'src/shared-components/le-progress.hooks';
 import { useQueryState } from 'src/v2/hooks/query-state';
 import { LreService } from 'src/v2/features/lre/lre.service';

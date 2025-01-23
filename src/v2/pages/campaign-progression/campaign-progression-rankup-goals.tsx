@@ -13,7 +13,7 @@ import { StaticDataService } from 'src/services/static-data.service';
 import { ArrowForward } from '@mui/icons-material';
 import { CharacterImage } from 'src/shared-components/character-image';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { RankImage } from 'src/shared-components/rank-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
 
 interface Props {
     campaignData: CampaignData;

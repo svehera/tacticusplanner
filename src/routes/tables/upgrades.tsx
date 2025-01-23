@@ -10,7 +10,7 @@ import InputLabel from '@mui/material/InputLabel';
 import { Rank, Rarity, RarityString } from 'src/models/enums';
 import { rarityStringToNumber } from 'src/models/constants';
 import { CharacterImage } from 'src/shared-components/character-image';
-import { RankImage } from 'src/shared-components/rank-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { isMobile } from 'react-device-detect';
 import { RarityImage } from 'src/v2/components/images/rarity-image';

@@ -16,7 +16,7 @@ import { groupBy, map, orderBy } from 'lodash';
 import { UpgradeImage } from '../shared-components/upgrade-image';
 import Button from '@mui/material/Button';
 import ViewSettings from './legendary-events/view-settings';
-import { RarityImage } from '../shared-components/rarity-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import IconButton from '@mui/material/IconButton';

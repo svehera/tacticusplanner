@@ -11,7 +11,7 @@ import { StaticDataService } from 'src/services/static-data.service';
 
 import { ArrowForward } from '@mui/icons-material';
 import { CharacterImage } from 'src/shared-components/character-image';
-import { RarityImage } from 'src/shared-components/rarity-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
 
 interface Props {

@@ -5,8 +5,8 @@ import { AgGridReact } from 'ag-grid-react';
 import { ColDef, ColGroupDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
 import { Score } from 'src/v2/features/dirty-dozen/dirty-dozen-score';
 import { CharacterTitle } from 'src/shared-components/character-title';
-import { RarityImage } from 'src/shared-components/rarity-image';
-import { RankImage } from 'src/shared-components/rank-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
 import { ICharacter2 } from 'src/models/interfaces';
 
 export const DirtyDozenTable = ({ characters, rows }: { characters: ICharacter2[]; rows: IDirtyDozenChar[] }) => {

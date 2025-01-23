@@ -13,7 +13,7 @@ export const CharacterImage = ({
     tooltip?: string;
     imageSize?: number;
 }) => {
-    const imageUrl = getImageUrl(`characters/${icon.replace('.webp', '.png')}`);
+    const imageUrl = getImageUrl(`characters/resized/${icon.replace('.webp', '.png')}`);
 
     const image = (
         <img

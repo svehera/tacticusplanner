@@ -8,7 +8,7 @@ export const ForgeBadgeImage = ({ rarity, size = 'medium' }: { rarity: Rarity; s
     if (!rarityString) {
         return <span>Invalid rarity</span>;
     }
-    const image = getImageUrl(`forgeBadges/${rarityString.toLowerCase()}.png`);
+    const image = getImageUrl(`forgeBadges/resized/${rarityString.toLowerCase()}.png`);
 
     return <img loading={'lazy'} style={{ pointerEvents: 'none' }} src={image} height={sizePx} alt={rarityString} />;
 };
