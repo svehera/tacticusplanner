@@ -32,7 +32,7 @@ const darkTheme = createTheme({
         MuiCard: {
             styleOverrides: {
                 root: {
-                    backgroundColor: '#2b2b2b', // Or any dark color you'd like
+                    backgroundColor: '#2b2b2b',
                 },
             },
         },

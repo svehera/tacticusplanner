@@ -164,7 +164,7 @@ export const getCompletionRateColor = (curr: number, total: number): string => {
 };
 
 export function getImageUrl(image: string): string {
-    return `/images/${image}`;
+    return new URL(`../assets/images/${image}`, import.meta.url).href;
 }
 
 export function formatDateWithOrdinal(date: Date, withYear: boolean = false): string {

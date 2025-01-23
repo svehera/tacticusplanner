@@ -6,7 +6,7 @@ import blueStar from 'src/assets/images/stars/blue star.png';
 
 export const StarsImage = ({ stars }: { stars: RarityStars }) => {
     if (stars === RarityStars.None) {
-        return <img style={{ visibility: 'hidden' }} src={blueStar} height={15} alt="none" />;
+        return <img style={{ visibility: 'hidden' }} src={blueStar} height={15} width={1} alt="none" />;
     }
 
     if (stars <= RarityStars.FiveStars) {
@@ -16,11 +16,12 @@ export const StarsImage = ({ stars }: { stars: RarityStars }) => {
                 style={{ pointerEvents: 'none', marginLeft: index > 0 ? -2 : 0 }}
                 src={goldStar}
                 height={stars === 5 && index === 2 ? 18 : 12}
+                width={stars === 5 && index === 2 ? 18 : 12}
                 alt="Gold star"
             />
         ));
 
-        return <div style={{ display: 'flex', alignItems: 'flex-end', height: 15 }}>{starsImages}</div>;
+        return <div className="flex items-end h-[15px]">{starsImages}</div>;
     }
 
     if (stars <= RarityStars.RedFiveStars) {
@@ -30,15 +31,16 @@ export const StarsImage = ({ stars }: { stars: RarityStars }) => {
                 style={{ pointerEvents: 'none', marginLeft: index > 0 ? -2 : 0 }}
                 src={redStar}
                 height={stars === 10 && index === 2 ? 18 : 12}
+                width={stars === 10 && index === 2 ? 18 : 12}
                 alt="Red star"
             />
         ));
 
-        return <div style={{ display: 'flex', alignItems: 'flex-end', height: 15 }}>{starsImages}</div>;
+        return <div className="flex items-end h-[15px]">{starsImages}</div>;
     }
 
     if (stars === RarityStars.BlueStar) {
-        return <img style={{ pointerEvents: 'none' }} src={blueStar} height={15} alt="Blue star" />;
+        return <img style={{ pointerEvents: 'none' }} src={blueStar} height={15} width={50} alt="Blue star" />;
     }
 
     return <span>Invalid stars</span>;

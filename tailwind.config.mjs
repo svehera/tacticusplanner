@@ -6,7 +6,7 @@ export default {
         extend: {
             colors: {
                 'dark-gray': '#232322',
-                'dark-navy': '#11171d',
+                'dark-navy': '#2b2b2b',
                 'soft-sand': '#d6cfc3',
             },
         },

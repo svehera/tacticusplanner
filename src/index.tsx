@@ -17,16 +17,9 @@ import { routes } from './app-routing';
 import { TitleProvider } from 'src/contexts/title.provider';
 import { StoreProvider } from 'src/reducers/store.provider2';
 import analytics from './monitoring/analytics';
-import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions } from 'ag-grid-community';
 
 const webSnackbarOrigin: SnackbarOrigin = { vertical: 'bottom', horizontal: 'right' };
 const mobileSnackbarOrigin: SnackbarOrigin = { vertical: 'top', horizontal: 'center' };
-
-// Register all community features
-ModuleRegistry.registerModules([AllCommunityModule]);
-
-// Mark all grids as using legacy themes
-provideGlobalGridOptions({ theme: 'legacy' });
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
