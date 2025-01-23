@@ -467,7 +467,7 @@ export const MasterTable = () => {
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
                                 <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
                                 <ListItemIcon>
-                                    <CharacterImage icon={x.icon} imageSize={30} />
+                                    <CharacterImage icon={x.icon} height={30} />
                                 </ListItemIcon>
                                 <ListItemText primary={x.name} />
                             </MenuItem>
@@ -479,7 +479,7 @@ export const MasterTable = () => {
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
                                 <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
                                 <ListItemIcon>
-                                    <CharacterImage icon={x.icon} imageSize={30} />
+                                    <CharacterImage icon={x.icon} height={30} />
                                 </ListItemIcon>
                                 <ListItemText primary={x.name} />
                             </MenuItem>

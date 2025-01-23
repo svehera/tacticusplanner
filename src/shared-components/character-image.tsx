@@ -5,13 +5,15 @@ import { AccessibleTooltip } from 'src/v2/components/tooltip';
 export const CharacterImage = ({
     icon,
     name,
-    imageSize,
+    height,
+    width,
     tooltip,
 }: {
     icon: string;
     name?: string;
     tooltip?: string;
-    imageSize?: number;
+    height?: number;
+    width?: number;
 }) => {
     const imageUrl = getImageUrl(`characters/resized/${icon.replace('.webp', '.png')}`);
 
@@ -20,7 +22,8 @@ export const CharacterImage = ({
             loading={'lazy'}
             style={{ pointerEvents: 'none', borderRadius: '50%' }}
             src={imageUrl}
-            height={imageSize ?? 50}
+            height={height ?? 50}
+            width={width ?? 'auto'}
             alt={name ?? icon}
         />
     );

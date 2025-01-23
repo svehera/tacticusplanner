@@ -213,7 +213,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
                     const { data } = params;
                     if (data) {
-                        return <CharacterImage icon={data.unitIcon} imageSize={30} tooltip={data.unitName} />;
+                        return <CharacterImage icon={data.unitIcon} height={30} tooltip={data.unitName} />;
                     }
                 },
                 sortable: false,

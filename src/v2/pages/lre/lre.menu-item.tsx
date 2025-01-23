@@ -8,7 +8,7 @@ import { IUnitData } from 'src/models/interfaces';
 const createMenuItem = (character: IUnitData) =>
     new MenuItem(
         character.name,
-        <CharacterImage icon={character.icon} imageSize={24} />,
+        <CharacterImage icon={character.icon} height={24} />,
         `/plan/lre?character=${LegendaryEventEnum[character.lre!.id]}`
     );
 

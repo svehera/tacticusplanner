@@ -135,7 +135,8 @@ export const Home = () => {
                         <CardHeader
                             title={
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    <CharacterImage icon={nextLeMenuItem.icon} /> {nextLeMenuItem.name}
+                                    <CharacterImage icon={nextLeMenuItem.icon} height={50} width={50} />{' '}
+                                    {nextLeMenuItem.name}
                                 </div>
                             }
                             subheader={formatMonthAndDay(isEventStarted ? nextLeDateEnd : nextLeDateStart)}
@@ -193,7 +194,7 @@ export const Home = () => {
                 <div>
                     <h3 style={{ textAlign: 'center' }}>Events calendar</h3>
                     <Zoom>
-                        <img src={eventsCalendarUrl} alt="Events Calendar" width={350} />
+                        <img src={eventsCalendarUrl} alt="Events Calendar" width={350} height={280} />
                     </Zoom>
                 </div>
             </div>

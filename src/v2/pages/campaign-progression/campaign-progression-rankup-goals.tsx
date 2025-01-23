@@ -114,7 +114,7 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
                         <a href={getRankLookupHref(goalData.goalId)}>
                             <CharacterImage
                                 icon={getGoalUnit(goalData.goalId)?.icon ?? '(undefined)'}
-                                imageSize={30}
+                                height={30}
                                 tooltip={getGoalUnit(goalData.goalId)?.icon}
                             />
                         </a>

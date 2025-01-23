@@ -41,12 +41,7 @@ export const CharacterTitle = ({
 
         const characterFull = (
             <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>
-                <CharacterImage
-                    key={character.name}
-                    icon={character.icon}
-                    name={character.name}
-                    imageSize={imageSize}
-                />
+                <CharacterImage key={character.name} icon={character.icon} name={character.name} height={imageSize} />
                 {!hideName && <span>{name}</span>}
                 <RarityImage rarity={character.rarity} />
                 {isUnlocked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
@@ -72,7 +67,7 @@ export const CharacterTitle = ({
                             key={character.name}
                             icon={character.icon}
                             name={character.name}
-                            imageSize={imageSize}
+                            height={imageSize}
                         />
                     </span>
                 </Tooltip>
@@ -86,7 +81,7 @@ export const CharacterTitle = ({
     if (isMow(character)) {
         return (
             <div className="flex-box gap5 p5" onClick={onClick}>
-                <CharacterImage icon={character.badgeIcon} imageSize={35} />
+                <CharacterImage icon={character.badgeIcon} height={35} />
                 <span>{name}</span>
             </div>
         );

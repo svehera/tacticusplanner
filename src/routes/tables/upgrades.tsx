@@ -61,7 +61,7 @@ export const Upgrades = () => {
                         <div key={x.id} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                             <Tooltip title={x.id}>
                                 <span>
-                                    <CharacterImage icon={x.icon} name={x.id} imageSize={30} />
+                                    <CharacterImage icon={x.icon} name={x.id} height={30} />
                                 </span>
                             </Tooltip>
                             <div>

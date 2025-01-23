@@ -27,7 +27,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
     return (
         <div className={'flex-box gap10 full-width' + rankBackgroundCssClass} onClick={() => onClick(character)}>
             {settings.lreTileShowUnitIcon && (
-                <CharacterImage key={character.name} icon={character.icon} name={character.name} imageSize={30} />
+                <CharacterImage key={character.name} icon={character.icon} name={character.name} height={30} />
             )}
             {settings.lreTileShowUnitRarity && <RarityImage rarity={character.rarity} />}
             {settings.lreTileShowUnitRank && <RankImage key={character.rank} rank={character.rank} />}

@@ -9,6 +9,8 @@ import {
     ICellRendererParams,
     ColGroupDef,
     ValueGetterParams,
+    AllCommunityModule,
+    themeBalham,
 } from 'ag-grid-community';
 
 import {
@@ -28,7 +30,6 @@ import { Alliance, DamageType, Rank, Trait } from 'src/models/enums';
 import { isMobile } from 'react-device-detect';
 import { CharacterTitle } from 'src/shared-components/character-title';
 import { StoreContext } from 'src/reducers/store.provider';
-// import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { useQueryState } from 'src/v2/hooks/query-state';
@@ -735,6 +736,8 @@ export const Characters = () => {
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}
+                    modules={[AllCommunityModule]}
+                    theme={themeBalham}
                     suppressCellFocus={true}
                     defaultColDef={defaultColDef}
                     columnDefs={columnDefs}

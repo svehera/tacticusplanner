@@ -233,7 +233,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                             <span key={savings.battle.id + '-' + savings.battle.reward + '-' + unitId}>
                                 <CharacterImage
                                     icon={StaticDataService.getUnit(unitId)?.icon ?? '(undefined)'}
-                                    imageSize={30}
+                                    height={30}
                                     tooltip={StaticDataService.getUnit(unitId)?.icon}
                                 />
                             </span>

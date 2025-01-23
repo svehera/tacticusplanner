@@ -79,7 +79,7 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
                     return (
                         <CharacterImage
                             icon={getGoalUnit(goalData.goalId)?.icon ?? '(undefined)'}
-                            imageSize={30}
+                            height={30}
                             tooltip={getGoalUnit(goalData.goalId)?.icon}
                         />
                     );

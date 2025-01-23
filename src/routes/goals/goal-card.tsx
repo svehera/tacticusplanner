@@ -328,7 +328,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                 title={
                     <div className="flex-box gap5">
                         <span>#{goal.priority}</span>
-                        <CharacterImage icon={goal.unitIcon} imageSize={30} />
+                        <CharacterImage icon={goal.unitIcon} height={30} />
                         <span style={{ fontSize: '1.2rem' }}>{goal.unitName}</span>
                     </div>
                 }
