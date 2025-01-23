@@ -16,6 +16,7 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
             style={{ pointerEvents: 'none' }}
             src={imageUrl}
             width={60}
+            height={80}
             alt={props.icon}
         />
     );
