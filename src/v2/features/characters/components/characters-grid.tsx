@@ -11,7 +11,7 @@ import { isUnlocked } from 'src/v2/features/characters/units.functions';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { MowTile } from 'src/v2/features/characters/components/mow-tile';
 
-export const CharactersGrid = ({
+const CharactersGridFn = ({
     characters,
     blockedCharacters = [],
     onAvailableCharacterClick,
@@ -61,3 +61,5 @@ export const CharactersGrid = ({
         </div>
     );
 };
+
+export const CharactersGrid = React.memo(CharactersGridFn);

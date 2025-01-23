@@ -250,7 +250,7 @@ export const defaultData: IPersonalData2 = {
         wyoOrder: CharactersOrderBy.Faction,
         showBadges: true,
         showAbilitiesLevel: true,
-        showBsValue: true,
+        showBsValue: false,
         showPower: true,
         showCharacterLevel: true,
         showCharacterRarity: true,

@@ -1,4 +1,4 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import React, { useContext, useEffect, useState } from 'react';
 
 import { isMobile } from 'react-device-detect';
 
@@ -28,7 +28,7 @@ interface Props {
     showPreviousUnit?: () => void;
 }
 
-export const CharacterItemDialog: React.FC<Props> = props => {
+const CharacterItemDialogFn: React.FC<Props> = props => {
     const { viewPreferences } = useContext(StoreContext);
     const [character, setCharacter] = useState(() => ({ ...props.character }));
     const [inventoryUpdate, setInventoryUpdate] = useState<IUpgradeRecipe[]>([]);
@@ -46,6 +46,10 @@ export const CharacterItemDialog: React.FC<Props> = props => {
 
     const power = CharactersPowerService.getCharacterPower(character);
     const bsValue = CharactersValueService.getCharacterValue(character);
+
+    useEffect(() => {
+        setCharacter(props.character);
+    }, [props.character]);
 
     return (
         <Dialog open={props.isOpen} onClose={props.onClose} fullScreen={isMobile}>
@@ -112,3 +116,5 @@ export const CharacterItemDialog: React.FC<Props> = props => {
         </Dialog>
     );
 };
+
+export const CharacterItemDialog = React.memo(CharacterItemDialogFn);

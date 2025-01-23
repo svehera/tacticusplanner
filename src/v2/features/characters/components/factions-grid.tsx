@@ -6,7 +6,7 @@ import { FactionsTile } from './faction-tile';
 
 import './factions-grid.scss';
 
-export const FactionsGrid = ({
+const FactionsGridFn = ({
     factions,
     onCharacterClick,
 }: {
@@ -22,4 +22,4 @@ export const FactionsGrid = ({
     );
 };
 
-export default React.memo(FactionsGrid);
+export const FactionsGrid = React.memo(FactionsGridFn);

@@ -107,37 +107,60 @@ export class CharactersService {
         }
     }
 
-    static orderByFaction(units: IUnit[], charactersOrderBy: CharactersOrderBy): IFaction[] {
+    static orderByFaction(
+        units: IUnit[],
+        charactersOrderBy: CharactersOrderBy,
+        includeBsValue = true,
+        includePower = true
+    ): IFaction[] {
         const factionCharacters = groupBy(units, 'faction');
-        const result: IFaction[] = factionsData
-            .filter(faction => factionCharacters[faction.name])
-            .map(faction => {
-                const characters = factionCharacters[faction.name];
-                return {
-                    ...faction,
-                    units: characters,
-                    bsValue: sum(characters.map(CharactersValueService.getCharacterValue)),
-                    power: sum(characters.map(CharactersPowerService.getCharacterPower)),
-                    unlockedCharacters: characters.filter(x => isUnlocked(x)).length,
-                };
+
+        // Derive relevant faction data in one pass
+        const result: IFaction[] = factionsData.reduce((acc: IFaction[], faction) => {
+            const characters = factionCharacters[faction.name];
+            if (!characters) return acc;
+
+            let bsValue = 0,
+                power = 0,
+                unlockedCharacters = 0;
+            characters.forEach(char => {
+                if (includeBsValue || charactersOrderBy === CharactersOrderBy.FactionValue) {
+                    bsValue += CharactersValueService.getCharacterValue(char);
+                }
+                if (includePower || charactersOrderBy === CharactersOrderBy.FactionPower) {
+                    power += CharactersPowerService.getCharacterPower(char);
+                }
+                if (isUnlocked(char)) unlockedCharacters++;
             });
+
+            acc.push({
+                ...faction,
+                units: characters,
+                bsValue,
+                power,
+                unlockedCharacters,
+            });
+            return acc;
+        }, []);
+
+        // Determine sort key based on the order parameter
         let orderByKey: keyof IFaction;
         switch (charactersOrderBy) {
-            case CharactersOrderBy.FactionValue: {
+            case CharactersOrderBy.FactionValue:
                 orderByKey = 'bsValue';
-                return orderBy(result, [orderByKey], ['desc']);
-            }
-            case CharactersOrderBy.FactionPower: {
+                break;
+            case CharactersOrderBy.FactionPower:
                 orderByKey = 'power';
-                return orderBy(result, [orderByKey], ['desc']);
-            }
-            case CharactersOrderBy.Faction: {
+                break;
+            case CharactersOrderBy.Faction:
                 orderByKey = 'unlockedCharacters';
-                return orderBy(result, [orderByKey], ['desc']);
-            }
+                break;
             default:
                 return result;
         }
+
+        // Sort using native sort
+        return result.sort((a, b) => b[orderByKey] - a[orderByKey]);
     }
 
     static capCharacterAtRarity(character: ICharacter2, rarity: Rarity): ICharacter2 {
