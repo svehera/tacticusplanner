@@ -11,16 +11,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.MuiPaper-root {
-    /*@apply dark:bg-gray-navy;*/
-    background: red;
-}
-
-/*:root {*/
-/*    --mui-palette-background-paper: red*/
-/*    !* ...other variables *!*/
-/*}*/
-
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

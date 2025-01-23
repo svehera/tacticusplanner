@@ -23,7 +23,12 @@ export const AppBarSubMenu = ({ rootLabel, options }: { rootLabel: string; optio
                 <ListItemText primary={rootLabel} style={{ fontWeight: 500 }} />
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-            <Collapse in={open} timeout="auto" unmountOnExit sx={{ width: 150, position: 'absolute', zIndex: 1000 }}>
+            <Collapse
+                in={open}
+                timeout="auto"
+                className="bg-blue dark:bg-charcoal"
+                unmountOnExit
+                sx={{ width: 150, position: 'absolute', zIndex: 1000 }}>
                 <List component="div" disablePadding>
                     {options.map(option => (
                         <MenuOption key={option.label} option={option} onOptionClick={() => setOpen(false)} />
@@ -63,13 +68,13 @@ const MenuOption: React.FC<{ option: MenuItemTP; onOptionClick: () => void }> = 
                 in={open}
                 timeout="auto"
                 unmountOnExit
+                className="bg-blue dark:bg-charcoal"
                 sx={{
                     position: 'absolute',
                     width: 150,
                     left: 150,
                     top: 0,
                     zIndex: 1001,
-                    backgroundColor: '#1976d2',
                 }}>
                 <List component="div" disablePadding>
                     {option.subMenu.map(subOption => (
