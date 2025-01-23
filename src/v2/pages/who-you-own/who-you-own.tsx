@@ -1,14 +1,12 @@
-﻿import React, { useContext, useEffect, useState } from 'react';
+﻿import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { isMobile } from 'react-device-detect';
 import { sum } from 'lodash';
 
-import { Conditional } from 'src/v2/components/conditional';
-
-import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
+import FactionsGrid from 'src/v2/features/characters/components/factions-grid';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { ViewControls } from 'src/v2/features/characters/components/view-controls';
+import ViewControls from 'src/v2/features/characters/components/view-controls';
 import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
@@ -60,26 +58,31 @@ export const WhoYouOwn = () => {
         return <></>;
     }
 
-    const charactersFiltered = CharactersService.filterUnits(
-        [...charactersDefault, ...mows],
-        viewControls.filterBy,
-        nameFilter
-    );
+    const charactersFiltered = useMemo(() => {
+        return CharactersService.filterUnits([...charactersDefault, ...mows], viewControls.filterBy, nameFilter);
+    }, [viewControls.filterBy, nameFilter]);
 
     const totalPower = sum(charactersFiltered.map(character => CharactersPowerService.getCharacterPower(character)));
     const totalValue = sum(charactersFiltered.map(character => CharactersValueService.getCharacterValue(character)));
 
-    const factions = CharactersService.orderByFaction(charactersFiltered, viewControls.orderBy);
-    const units = CharactersService.orderUnits(
-        factions.flatMap(f => f.units),
-        viewControls.orderBy
-    );
+    const factions = useMemo(() => {
+        return CharactersService.orderByFaction(charactersFiltered, viewControls.orderBy);
+    }, [charactersFiltered, viewControls.orderBy]);
 
-    const updatePreferences = (value: IViewControls) => {
-        setViewControls(value);
-        dispatch.viewPreferences({ type: 'Update', setting: 'wyoOrder', value: value.orderBy });
-        dispatch.viewPreferences({ type: 'Update', setting: 'wyoFilter', value: value.filterBy });
-    };
+    const units = useMemo(() => {
+        return CharactersService.orderUnits(
+            factions.flatMap(f => f.units),
+            viewControls.orderBy
+        );
+    }, [factions, viewControls.orderBy]);
+
+    const updatePreferences = useCallback(() => {
+        return (value: IViewControls) => {
+            setViewControls(value);
+            dispatch.viewPreferences({ type: 'Update', setting: 'wyoOrder', value: value.orderBy });
+            dispatch.viewPreferences({ type: 'Update', setting: 'wyoFilter', value: value.filterBy });
+        };
+    }, []);
 
     const updateMow = (mow: IMow) => {
         endEditUnit();
@@ -90,7 +93,7 @@ export const WhoYouOwn = () => {
         dispatch.mows({ type: 'Update', mow });
     };
 
-    const startEditUnit = (unit: IUnit): void => {
+    const startEditUnit = useCallback((unit: IUnit): void => {
         if (unit.unitType === UnitType.character) {
             setEditedCharacter(unit);
             setOpenCharacterItemDialog(true);
@@ -102,7 +105,7 @@ export const WhoYouOwn = () => {
             setOpenEditMowDialog(true);
             setOpenCharacterItemDialog(false);
         }
-    };
+    }, []);
 
     const startEditNextUnit = (currentUnit: IUnit): void => {
         const indexOfNextUnit = units.findIndex(x => x.id === currentUnit.id) + 1;
@@ -124,34 +127,27 @@ export const WhoYouOwn = () => {
         setOpenEditMowDialog(false);
     };
 
+    const factionsView = isFactionsView(viewControls.orderBy);
+    const charactersView = isCharactersView(viewControls.orderBy);
+
     return (
         <Box style={{ margin: 'auto' }}>
-            <CharactersViewContext.Provider
-                value={{
-                    showAbilitiesLevel: viewPreferences.showAbilitiesLevel,
-                    showBadges: viewPreferences.showBadges,
-                    showPower: viewPreferences.showPower,
-                    showBsValue: viewPreferences.showBsValue,
-                    showCharacterLevel: viewPreferences.showCharacterLevel,
-                    showCharacterRarity: viewPreferences.showCharacterRarity,
-                }}>
+            <CharactersViewContext.Provider value={viewPreferences}>
                 <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
                     {!!isLoggedIn && <ShareRoster isRosterShared={!!isRosterShared} />}
                     <TeamGraph units={charactersFiltered} />
                 </RosterHeader>
                 <ViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
 
-                <Conditional condition={isFactionsView(viewControls.orderBy)}>
-                    <FactionsGrid factions={factions} onCharacterClick={startEditUnit} />
-                </Conditional>
+                {factionsView && <FactionsGrid factions={factions} onCharacterClick={startEditUnit} />}
 
-                <Conditional condition={isCharactersView(viewControls.orderBy)}>
+                {charactersView && (
                     <CharactersGrid
                         characters={units}
                         onAvailableCharacterClick={startEditUnit}
                         onLockedCharacterClick={startEditUnit}
                     />
-                </Conditional>
+                )}
 
                 {editedCharacter && (
                     <CharacterItemDialog

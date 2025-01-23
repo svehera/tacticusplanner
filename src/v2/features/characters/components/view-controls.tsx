@@ -100,3 +100,5 @@ export const ViewControls = ({
         </FlexBox>
     );
 };
+
+export default React.memo(ViewControls);
