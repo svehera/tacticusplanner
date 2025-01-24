@@ -1,7 +1,15 @@
 ﻿import React, { useMemo, useRef, useState } from 'react';
 
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, RowStyle, RowClassParams, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
+import {
+    AllCommunityModule,
+    ColDef,
+    RowStyle,
+    RowClassParams,
+    ICellRendererParams,
+    ValueGetterParams,
+    themeBalham,
+} from 'ag-grid-community';
 
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { Campaign } from 'src/models/enums';
@@ -174,6 +182,8 @@ export const Campaigns = () => {
 
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 220px)', width: '100%' }}>
                 <AgGridReact
+                    modules={[AllCommunityModule]}
+                    theme={themeBalham}
                     ref={gridRef}
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
