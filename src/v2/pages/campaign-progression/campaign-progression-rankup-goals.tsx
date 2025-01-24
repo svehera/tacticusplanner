@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef } from 'ag-grid-community';
 import { Rank } from 'src/models/enums';
@@ -167,6 +168,8 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
 
     return (
         <AgGridReact
+            modules={[AllCommunityModule]}
+            theme={themeBalham}
             columnDefs={goalDefs}
             rowData={getGoalData(campaignData)}
             domLayout="autoHeight"

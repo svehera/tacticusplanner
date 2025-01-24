@@ -9,5 +9,7 @@ export const RarityImage = ({ rarity }: { rarity: Rarity }) => {
     }
     const image = getImageUrl(`rarity/resized/${rarityString.toLowerCase()}.png`);
 
-    return <img loading={'lazy'} style={{ pointerEvents: 'none' }} src={image} height={25} alt={rarityString} />;
+    return (
+        <img loading={'lazy'} style={{ pointerEvents: 'none' }} src={image} height={25} width={25} alt={rarityString} />
+    );
 };

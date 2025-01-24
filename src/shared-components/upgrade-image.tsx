@@ -21,6 +21,8 @@ export const UpgradeImage = ({
         const imagePath = iconPath || material.toLowerCase() + '.png';
         const image = getImageUrl(`upgrades/${imagePath}`);
 
+        console.log('material size { ' + material + ' ' + size + ' }');
+
         return (
             <AccessibleTooltip title={tooltip ?? material}>
                 <div style={{ width: size ?? 50, height: size ?? 50 }} className={'upgrade'}>

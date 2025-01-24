@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef } from 'ag-grid-community';
 import { CampaignType } from 'src/models/enums';
@@ -228,17 +229,22 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     const savings: BattleSavings = savingsData[0].savings;
                     const characters = getCharactersNeedingMaterial(savings.battle.reward);
                     if (characters.length == 0) return <span></span>;
-                    return characters.map((unitId, ignoredIndex) => {
-                        return (
-                            <span key={savings.battle.id + '-' + savings.battle.reward + '-' + unitId}>
-                                <CharacterImage
-                                    icon={StaticDataService.getUnit(unitId)?.icon ?? '(undefined)'}
-                                    height={30}
-                                    tooltip={StaticDataService.getUnit(unitId)?.icon}
-                                />
-                            </span>
-                        );
-                    });
+                    return (
+                        <div className="flex-box gap5 wrap" key={savings.battle.reward + '-' + savings.battle.id}>
+                            {characters.map((unitId, ignoredIndex) => {
+                                return (
+                                    <span key={unitId + '-' + savings.battle.reward + '-' + savings.battle.id}>
+                                        <CharacterImage
+                                            icon={StaticDataService.getUnit(unitId)?.icon ?? '(undefined)'}
+                                            height={30}
+                                            width={30}
+                                            tooltip={StaticDataService.getUnit(unitId)?.icon}
+                                        />
+                                    </span>
+                                );
+                            })}
+                        </div>
+                    );
                 },
             },
         ];
@@ -258,6 +264,8 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
 
     return (
         <AgGridReact
+            modules={[AllCommunityModule]}
+            theme={themeBalham}
             columnDefs={colDefs}
             rowData={getRowData()}
             domLayout="autoHeight"

@@ -27,6 +27,7 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progre
                             <CharacterImage
                                 icon={StaticDataService.getUnit(unitId)?.icon ?? '(undefined)'}
                                 height={30}
+                                width={30}
                                 tooltip={StaticDataService.getUnit(unitId)?.icon}
                             />
                         </td>,
