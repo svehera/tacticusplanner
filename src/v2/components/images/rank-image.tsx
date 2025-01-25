@@ -11,7 +11,14 @@ export const RankImage = ({ rank, rankPoint5, size = 30 }: { rank: Rank; rankPoi
     const image = getImageUrl(`ranks/resized/${rankTextValue.toLowerCase()}.png`);
     return (
         <>
-            <img loading={'lazy'} style={{ pointerEvents: 'none' }} src={image} height={size} alt={rankTextValue} />
+            <img
+                loading={'lazy'}
+                style={{ pointerEvents: 'none' }}
+                src={image}
+                height={size}
+                width={size}
+                alt={rankTextValue}
+            />
             {rankPoint5 && '.5'}
         </>
     );

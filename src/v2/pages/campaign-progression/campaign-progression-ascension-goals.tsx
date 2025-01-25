@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
+import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions, themeBalham } from 'ag-grid-community';
 import { ColDef } from 'ag-grid-community';
 
 import { ICharacterUnlockGoal, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
@@ -145,6 +146,8 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
 
     return (
         <AgGridReact
+            modules={[AllCommunityModule]}
+            theme={themeBalham}
             columnDefs={goalDefs}
             rowData={getGoalData(campaignData)}
             domLayout="autoHeight"

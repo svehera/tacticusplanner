@@ -1,4 +1,5 @@
 ﻿import React, { useContext, useMemo, useState } from 'react';
+import { AllCommunityModule, themeBalham } from 'ag-grid-community';
 
 import {
     ICharacter2,
@@ -405,6 +406,8 @@ export const RankLookup = () => {
                     className="ag-theme-material"
                     style={{ height: 50 + totalMaterials.length * 30, maxHeight: '40vh', width: '100%' }}>
                     <AgGridReact
+                        modules={[AllCommunityModule]}
+                        theme={themeBalham}
                         suppressCellFocus={true}
                         defaultColDef={{ suppressMovable: true, sortable: true, wrapText: true, autoHeight: true }}
                         rowHeight={60}

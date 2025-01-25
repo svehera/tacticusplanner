@@ -7,8 +7,14 @@ export const CampaignImage = ({ campaign, size }: { campaign: string; size?: num
 
     return (
         <AccessibleTooltip title={campaign}>
-            <span style={{ display: 'inline-block', height: size ?? 50 }}>
-                <img style={{ pointerEvents: 'none' }} src={image} height={size ?? 50} alt={campaign} />
+            <span style={{ display: 'inline-block', height: size ?? 50, width: size ?? 50 }}>
+                <img
+                    style={{ pointerEvents: 'none' }}
+                    src={image}
+                    height={size ?? 50}
+                    width={size ?? 50}
+                    alt={campaign}
+                />
             </span>
         </AccessibleTooltip>
     );
