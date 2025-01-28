@@ -1,7 +1,15 @@
 import React, { useContext, useEffect, useMemo, useRef } from 'react';
 
 import { AgGridReact } from 'ag-grid-react';
-import { CellClickedEvent, ColDef, ICellRendererParams, RowStyle, RowClassParams } from 'ag-grid-community';
+import {
+    AllCommunityModule,
+    CellClickedEvent,
+    ColDef,
+    ICellRendererParams,
+    RowStyle,
+    RowClassParams,
+    themeBalham,
+} from 'ag-grid-community';
 
 import {
     ICharacter2,
@@ -234,6 +242,8 @@ export const LreTeamsTable: React.FC<Props> = ({
                     border: '2px solid black',
                 }}>
                 <AgGridReact
+                    modules={[AllCommunityModule]}
+                    theme={themeBalham}
                     ref={gridRef}
                     defaultColDef={defaultColumnDef}
                     columnDefs={columnsDefs}
