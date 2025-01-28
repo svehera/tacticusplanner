@@ -1,12 +1,14 @@
 ﻿import React, { useContext, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import {
+    AllCommunityModule,
     CellClassParams,
     ColDef,
     ColGroupDef,
     ICellRendererParams,
     ITooltipParams,
     ValueGetterParams,
+    themeBalham,
 } from 'ag-grid-community';
 import { ILegendaryEvent, ILegendaryEventTrack, ILreTeam } from 'src/models/interfaces';
 import { Rank } from 'src/models/enums';
@@ -386,6 +388,8 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
             </div>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 250px)', width: '100%' }}>
                 <AgGridReact
+                    modules={[AllCommunityModule]}
+                    theme={themeBalham}
                     ref={gridRef}
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
