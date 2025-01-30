@@ -13,10 +13,8 @@ export const RankImage = ({ rank, rankPoint5, size = 30 }: { rank: Rank; rankPoi
         <>
             <img
                 loading={'lazy'}
-                style={{ pointerEvents: 'none' }}
+                style={{ pointerEvents: 'none', width: 'auto', height: 'auto', maxWidth: size, maxHeight: size }}
                 src={image}
-                height={size}
-                width={size}
                 alt={rankTextValue}
             />
             {rankPoint5 && '.5'}
