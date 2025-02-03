@@ -38,10 +38,12 @@ export const SharedRoster = () => {
     const shareToken = searchParams.get('shareToken');
 
     const hasValidParams = !!sharedUser && !!shareToken;
+
     if (!hasValidParams) {
         return <>Invalid page params</>;
     }
 
+    // eslint-disable-next-line react-compiler/react-compiler
     const { data, loading, error } = useGetSharedRoster(sharedUser, shareToken);
 
     if (loading) {

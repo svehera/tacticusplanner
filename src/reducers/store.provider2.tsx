@@ -84,15 +84,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [guild, dispatchGuild] = React.useReducer(guildReducer, globalState.guild);
 
     function startLoading(text?: string): void {
-        globalState.loadingText = text;
-        globalState.loading = true;
-        setGlobalState(globalState);
+        setGlobalState({ ...globalState, loadingText: text, loading: true });
     }
 
     function endLoading(): void {
-        globalState.loadingText = undefined;
-        globalState.loading = false;
-        setGlobalState(globalState);
+        setGlobalState({ ...globalState, loadingText: '', loading: false });
     }
 
     function wrapDispatch<T>(dispatch: React.Dispatch<T>): React.Dispatch<T> {

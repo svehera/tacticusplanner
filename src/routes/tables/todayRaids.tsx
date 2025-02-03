@@ -51,6 +51,7 @@ export const TodayRaids: React.FC<Props> = ({
                             upgradeRaid={raid}
                             addCount={(value, location) => {
                                 raid.acquiredCount += value;
+                                location.isCompleted = true;
                                 addUpgrades(raid.id, value, location);
                             }}
                             increment={() => {

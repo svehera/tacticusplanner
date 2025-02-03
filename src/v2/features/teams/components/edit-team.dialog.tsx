@@ -71,11 +71,14 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
         onClose();
     };
 
-    for (const guildRaidPrime of guildRaidPrimes) {
+    const grPrimes = [...guildRaidPrimes];
+    const grBosses = [...guildRaidBosses];
+
+    for (const guildRaidPrime of grPrimes) {
         guildRaidPrime.selected = selectedSubModes.includes(guildRaidPrime.value);
     }
 
-    for (const guildRaidBoss of guildRaidBosses) {
+    for (const guildRaidBoss of grBosses) {
         guildRaidBoss.selected = selectedSubModes.includes(guildRaidBoss.value);
     }
 

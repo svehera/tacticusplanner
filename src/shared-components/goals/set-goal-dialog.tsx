@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
+﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import {
     DialogActions,
@@ -91,10 +91,12 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             return [];
         }
 
-        const result = getEnumValues(Rank).filter(x => x > 0 && (!unit || x >= unit.rank) && x <= maxRank);
-        setForm(curr => ({ ...curr, targetRank: result[0] }));
-        return result;
+        return getEnumValues(Rank).filter(x => x > 0 && (!unit || x >= unit.rank) && x <= maxRank);
     }, [unit, maxRank]);
+
+    useEffect(() => {
+        setForm(curr => ({ ...curr, targetRank: rankValues[0] }));
+    }, [rankValues]);
 
     const allowedCharacters: IUnit[] = useMemo(() => {
         switch (form.type) {

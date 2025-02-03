@@ -66,7 +66,6 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
                                 defaultItemsObtained={defaultItemsObtained}
                                 isDisabled={location.isCompleted || upgradeRaid.isBlocked}
                                 addCount={value => {
-                                    location.isCompleted = true;
                                     addCount(value, location);
                                 }}
                             />

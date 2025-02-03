@@ -1,6 +1,7 @@
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import react from 'eslint-plugin-react';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import reactCompiler from 'eslint-plugin-react-compiler';
 import prettier from 'eslint-plugin-prettier';
 import globals from 'globals';
 import tsParser from '@typescript-eslint/parser';
@@ -29,6 +30,7 @@ export default [
             '@typescript-eslint': typescriptEslint,
             react,
             'react-refresh': reactRefresh,
+            'react-compiler': reactCompiler,
             prettier,
         },
 
@@ -62,6 +64,7 @@ export default [
             '@typescript-eslint/no-explicit-any': ['warn'],
             '@typescript-eslint/no-unused-vars': ['warn'],
             'react-refresh/only-export-components': 'error',
+            'react-compiler/react-compiler': 'error',
         },
     },
 ];

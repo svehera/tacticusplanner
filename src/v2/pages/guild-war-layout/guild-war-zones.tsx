@@ -125,6 +125,7 @@ export const GuildWarZones = () => {
 
         const players = activeLayout.zones[editZonePlayersIndex].players;
         if (editZonePlayer1) {
+            // eslint-disable-next-line react-compiler/react-compiler
             players[0] = player.username;
         }
 

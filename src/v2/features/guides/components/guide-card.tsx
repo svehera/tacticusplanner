@@ -46,6 +46,7 @@ export const GuideCard: React.FC<Props> = ({
 
     const dishonorGuide = () => {
         onHonor(false);
+        // eslint-disable-next-line react-compiler/react-compiler
         guide.likes--;
     };
 

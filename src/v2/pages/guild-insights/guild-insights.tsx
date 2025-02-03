@@ -32,11 +32,11 @@ export const GuildInsights = () => {
     });
     const [nameFilter, setNameFilter] = useState<string | null>(null);
 
+    const { data, loading } = useGetGuildInsights({ members: guild.members });
+
     if (!guild.members.length) {
         return <div>Populate guild members</div>;
     }
-
-    const { data, loading } = useGetGuildInsights({ members: guild.members });
 
     if (loading) {
         return <Loader loading={true} />;

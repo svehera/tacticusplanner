@@ -87,7 +87,7 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                     return inventory[params.data!.id] ?? 0;
                 },
                 valueSetter: event => {
-                    inventory[event.data.id] = event.newValue;
+                    updateMaterialQuantity(event.data.id, event.newValue);
                     return true;
                 },
                 headerName: 'Inventory',

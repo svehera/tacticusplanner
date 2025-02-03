@@ -58,19 +58,14 @@ export const RankLookup = () => {
         return !!queryParamsRankPoint5 && queryParamsRankPoint5 === 'true';
     });
 
-    const [message, setMessage] = useState<string>('Upgrades:');
-    const [totalGold, setTotalGold] = useState<number>(0);
-
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLElement | null>(null);
     const [materialRecipe, setMaterialRecipe] = React.useState<IMaterialFull | null>(null);
 
     const upgrades = useMemo<IMaterialFull[]>(() => {
         if (!character) {
-            setMessage('Select character');
             return [];
         }
 
-        setMessage('Upgrades:');
         return StaticDataService.getUpgrades({
             unitName: character.id,
             rankStart,
@@ -80,6 +75,14 @@ export const RankLookup = () => {
             upgradesRarity: [],
         });
     }, [character?.id, rankStart, rankEnd, rankPoint5]);
+
+    const message = (function () {
+        if (!character) {
+            return 'Select character';
+        }
+
+        return 'Upgrades:';
+    })();
 
     const groupByRanks = useMemo(() => {
         const result: Array<{
@@ -108,19 +111,6 @@ export const RankLookup = () => {
 
         return result;
     }, [upgrades, rankStart]);
-
-    const allMaterials = useMemo<IMaterialRecipeIngredientFull[]>(() => {
-        const result: IMaterialRecipeIngredientFull[] = StaticDataService.groupBaseMaterials(upgrades, true);
-        const goldIndex = result.findIndex(x => x.id === 'Gold');
-
-        if (goldIndex > -1) {
-            const [gold] = result.splice(goldIndex, 1);
-            setTotalGold(gold.count);
-        } else {
-            setTotalGold(0);
-        }
-        return orderBy(result, ['rarity', 'count'], ['desc', 'desc']);
-    }, [upgrades]);
 
     const totalMaterials = useMemo<IMaterialEstimated2[]>(() => {
         return orderBy(
@@ -393,7 +383,6 @@ export const RankLookup = () => {
             <div>
                 <div style={{ display: 'flex' }}>
                     <h3>Total</h3>
-                    {totalGold > 0 ? <h4 style={{ paddingInlineStart: 40 }}>Gold - {totalGold}</h4> : undefined}
                     {totalEnergy > 0 ? <h4 style={{ paddingInlineStart: 40 }}>Energy - {totalEnergy}</h4> : undefined}
                     {totalEnergy > 0 ? (
                         <h4 style={{ paddingInlineStart: 40 }}>
@@ -435,14 +424,6 @@ export const RankLookup = () => {
                             {renderMaterials(x.materials)}
                         </div>
                     ))}
-                    {/*<ul>*/}
-                    {/*    {upgrades.map((item, index) => (*/}
-                    {/*        <li key={item.id + index}>*/}
-
-                    {/*            <hr style={{ display: (index + 1) % 6 === 0 ? 'block' : 'none' }} />*/}
-                    {/*        </li>*/}
-                    {/*    ))}*/}
-                    {/*</ul>*/}
                     <Popover
                         open={!!materialRecipe}
                         anchorEl={anchorEl2}
