@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham, ValueFormatterParams } from 'ag-grid-community';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { Rarity } from 'src/models/enums';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
@@ -89,6 +89,8 @@ export const MowUpgradesTable: React.FC<Props> = ({ rows, upgrades }) => {
                 className="ag-theme-material"
                 style={{ height: 50 + rows.length * 60, maxHeight: '50vh', width: '100%' }}>
                 <AgGridReact
+                    modules={[AllCommunityModule]}
+                    theme={themeBalham}
                     suppressCellFocus={true}
                     defaultColDef={{ suppressMovable: true, sortable: true, wrapText: true, autoHeight: true }}
                     rowHeight={60}

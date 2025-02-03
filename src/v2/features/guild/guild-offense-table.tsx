@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
 
 import './players-table.css';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
@@ -79,6 +79,8 @@ export const GuildOffenseTable = ({
     return (
         <div className="ag-theme-material bf-table">
             <AgGridReact
+                modules={[AllCommunityModule]}
+                theme={themeBalham}
                 suppressCellFocus={true}
                 columnDefs={columnDefs}
                 rowHeight={40}

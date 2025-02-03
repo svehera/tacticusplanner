@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
 import { IGWZone } from './guild-war.models';
 
 import './bf-level-table.css';
@@ -78,6 +78,8 @@ export const BfLevelTable = ({ rows }: { rows: IGWZone[] }) => {
     return (
         <div className="ag-theme-material bf-table">
             <AgGridReact
+                modules={[AllCommunityModule]}
+                theme={themeBalham}
                 suppressCellFocus={true}
                 columnDefs={columnDefs}
                 pinnedBottomRowData={[totalRow]}

@@ -1,11 +1,13 @@
 ﻿import React, { useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import {
+    AllCommunityModule,
     ColDef,
     ColGroupDef,
     ICellRendererParams,
     ValueFormatterParams,
     CellEditingStoppedEvent,
+    themeBalham,
 } from 'ag-grid-community';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { isMobile } from 'react-device-detect';
@@ -281,6 +283,8 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                 </span>
             </div>
             <AgGridReact
+                modules={[AllCommunityModule]}
+                theme={themeBalham}
                 onCellEditingStopped={saveChanges}
                 suppressChangeDetection={true}
                 singleClickEdit={true}

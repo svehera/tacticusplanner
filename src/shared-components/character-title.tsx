@@ -68,6 +68,7 @@ export const CharacterTitle = ({
                             icon={character.icon}
                             name={character.name}
                             height={imageSize}
+                            width={imageSize}
                         />
                     </span>
                 </Tooltip>

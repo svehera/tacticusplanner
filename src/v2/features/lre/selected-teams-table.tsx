@@ -1,7 +1,15 @@
 ﻿import React, { useContext, useEffect, useMemo, useRef } from 'react';
 
 import { AgGridReact } from 'ag-grid-react';
-import { CellClickedEvent, ColDef, ICellRendererParams, RowClassParams, RowStyle } from 'ag-grid-community';
+import {
+    AllCommunityModule,
+    CellClickedEvent,
+    ColDef,
+    ICellRendererParams,
+    RowClassParams,
+    RowStyle,
+    themeBalham,
+} from 'ag-grid-community';
 
 import { LreTile } from 'src/v2/features/lre/lre-tile';
 import { StoreContext } from 'src/reducers/store.provider';
@@ -101,6 +109,8 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, editTeam, deleteTeam
                 border: '2px solid black',
             }}>
             <AgGridReact
+                modules={[AllCommunityModule]}
+                theme={themeBalham}
                 ref={gridRef}
                 rowData={rows}
                 rowHeight={35}
