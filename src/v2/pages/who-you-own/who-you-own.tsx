@@ -1,4 +1,4 @@
-﻿import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+﻿import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { isMobile } from 'react-device-detect';
@@ -8,8 +8,6 @@ import { FactionsGrid } from 'src/v2/features/characters/components/factions-gri
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { ViewControls } from 'src/v2/features/characters/components/view-controls';
 import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
-import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
-import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
 import { IMow, IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
@@ -74,13 +72,11 @@ export const WhoYouOwn = () => {
     const totalValue = useMemo(() => sum(factions.map(faction => faction.bsValue)), [factions]);
 
     const units = useMemo(() => {
-        return charactersView
-            ? CharactersService.orderUnits(
-                  factions.flatMap(f => f.units),
-                  viewControls.orderBy
-              )
-            : [];
-    }, [factions, viewControls.orderBy, charactersView]);
+        return CharactersService.orderUnits(
+            factions.flatMap(f => f.units),
+            viewControls.orderBy
+        );
+    }, [factions, viewControls.orderBy]);
 
     const updatePreferences = useCallback((value: IViewControls) => {
         setViewControls(value);

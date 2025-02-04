@@ -49,17 +49,23 @@ const icons = {
     },
 };
 
-export const MiscIcon = ({ icon, width, height }: { icon: keyof typeof icons; width?: number; height?: number }) => {
+export const MiscIcon = ({
+    icon,
+    width = 30,
+    height = 30,
+}: {
+    icon: keyof typeof icons;
+    width?: number;
+    height?: number;
+}) => {
     const details = icons[icon] ?? { file: '', label: icon };
     return (
-        <span style={{ display: 'inline-block', width: width ?? 30, height }}>
-            <img
-                style={{ pointerEvents: 'none' }}
-                src={details.file}
-                width={width ?? 30}
-                height={height}
-                alt={details.label}
-            />
-        </span>
+        <img
+            style={{ pointerEvents: 'none', height, width }}
+            src={details.file}
+            width={width}
+            height={height}
+            alt={details.label}
+        />
     );
 };
