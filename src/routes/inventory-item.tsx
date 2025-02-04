@@ -11,23 +11,25 @@ interface Props {
 }
 
 export const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate }) => {
-    const handleInputChange = (
-        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-        data: IInventoryUpgrade
-    ) => {
+    const [amount, setAmount] = React.useState<number | ''>(data.quantity);
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, upgradeId: string) => {
         const value = event.target.value === '' ? 0 : Number(event.target.value);
-        data.quantity = value > 1000 ? 1000 : value;
-        dataUpdate(data.material, data.quantity);
+        const result = value > 1000 ? 1000 : value;
+        dataUpdate(upgradeId, result);
+        setAmount(event.target.value === '' ? '' : Number(event.target.value));
     };
 
-    const increment = (data: IInventoryUpgrade) => {
-        data.quantity = Math.min(data.quantity + 1, 1000);
-        dataUpdate(data.material, data.quantity);
+    const increment = (upgradeId: string, value: number) => {
+        const result = Math.min(value + 1, 1000);
+        dataUpdate(upgradeId, result);
+        setAmount(result);
     };
 
-    const decrement = (data: IInventoryUpgrade) => {
-        data.quantity = Math.max(data.quantity - 1, 0);
-        dataUpdate(data.material, data.quantity);
+    const decrement = (upgradeId: string, value: number) => {
+        const result = Math.max(value - 1, 0);
+        dataUpdate(upgradeId, result);
+        setAmount(result);
     };
 
     return (
@@ -37,25 +39,31 @@ export const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate 
             </div>
             <Input
                 style={{ justifyContent: 'center' }}
-                value={data.quantity}
+                value={amount}
                 size="small"
                 onFocus={event => event.target.select()}
-                onChange={event => handleInputChange(event, data)}
+                onChange={event => handleInputChange(event, data.material)}
                 inputProps={{
                     step: 1,
                     min: 0,
                     max: 1000,
                     type: 'number',
-                    style: { width: data.quantity.toString().length * 10 },
+                    style: { width: amount.toString().length * 10 },
                     className: 'item-quantity-input',
                 }}
             />
             {showIncDec && (
                 <div>
-                    <Button size="small" className="w-[30px] !min-w-0" onClick={() => decrement(data)}>
+                    <Button
+                        size="small"
+                        className="w-[30px] !min-w-0"
+                        onClick={() => decrement(data.material, +amount)}>
                         -
                     </Button>
-                    <Button size="small" className="w-[30px] !min-w-0" onClick={() => increment(data)}>
+                    <Button
+                        size="small"
+                        className="w-[30px] !min-w-0"
+                        onClick={() => increment(data.material, +amount)}>
                         +
                     </Button>
                 </div>
