@@ -1,7 +1,7 @@
 ﻿import React, { useMemo, useRef, useState } from 'react';
 
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ValueFormatterParams, ICellRendererParams } from 'ag-grid-community';
+import { ColDef, ValueFormatterParams, ICellRendererParams, AllCommunityModule, themeBalham } from 'ag-grid-community';
 
 import { StaticDataService } from 'src/services';
 import { useFitGridOnWindowResize, stringToRank } from 'src/shared-logic/functions';
@@ -304,6 +304,8 @@ export const Upgrades = () => {
                 <AgGridReact
                     key={selection}
                     ref={gridRef}
+                    modules={[AllCommunityModule]}
+                    theme={themeBalham}
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true, wrapText: true }}
                     columnDefs={columnDefs}

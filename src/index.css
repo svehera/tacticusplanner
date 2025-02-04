@@ -1,6 +1,179 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer theme, components, utilities;
+@import 'tailwindcss/theme' layer(theme);
+@import 'tailwindcss/utilities' layer(utilities);
+
+@layer base {
+    :root {
+        --bg: var(--color-white);
+        --fg: var(--color-slate-950);
+
+        --primary: var(--color-blue-600);
+        --primary-fg: var(--color-white);
+
+        --secondary: var(--color-slate-100);
+        --secondary-fg: var(--color-slate-950);
+
+        --overlay: var(--color-white);
+        --overlay-fg: var(--color-slate-950);
+
+        --accent: var(--color-blue-600);
+        --accent-fg: var(--color-white);
+
+        --muted: var(--color-slate-100);
+        --muted-fg: var(--color-slate-600);
+
+        --success: var(--color-emerald-600);
+        --success-fg: var(--color-white);
+
+        --warning: var(--color-amber-400);
+        --warning-fg: var(--color-amber-950);
+
+        --danger: var(--color-red-600);
+        --danger-fg: var(--color-red-50);
+
+        --border: var(--color-slate-200);
+        --input: var(--color-slate-300);
+        --ring: var(--color-blue-600);
+
+        --navbar: var(--color-slate-50);
+        --navbar-fg: var(--color-slate-950);
+
+        --sidebar: var(--color-slate-50);
+        --sidebar-fg: var(--color-slate-950);
+
+        --chart-1: var(--color-blue-600);
+        --chart-2: var(--color-blue-400);
+        --chart-3: var(--color-blue-300);
+        --chart-4: var(--color-blue-200);
+        --chart-5: var(--color-blue-100);
+
+        --radius-lg: 0.5rem;
+        --radius-xs: calc(var(--radius-lg) * 0.5);
+        --radius-sm: calc(var(--radius-lg) * 0.75);
+        --radius-md: calc(var(--radius-lg) * 0.9);
+        --radius-xl: calc(var(--radius-lg) * 1.25);
+        --radius-2xl: calc(var(--radius-lg) * 1.5);
+        --radius-3xl: calc(var(--radius-lg) * 2);
+        --radius-4xl: calc(var(--radius-lg) * 3);
+
+        /*Rarity*/
+        --rarity-common: #cdb3a0;
+        --rarity-uncommon: #f9cb9c;
+        --rarity-rare: #efefef;
+        --rarity-epic: #ffe599;
+        --rarity-legendary: #cfe2f3;
+
+        /*Ranks*/
+        --rank-stone1: #cdb3a0;
+        --rank-stone2: #b09a8a;
+        --rank-stone3: #8c827a;
+
+        --rank-iron1: #d9ead3;
+        --rank-iron2: #b6d7a8;
+        --rank-iron3: #93c47d;
+
+        --rank-bronze1: #f9cb9c;
+        --rank-bronze2: #f6b26b;
+        --rank-bronze3: #e69138;
+
+        --rank-silver1: #efefef;
+        --rank-silver2: #d9d9d9;
+        --rank-silver3: #cccccc;
+
+        --rank-gold1: #ffe599;
+        --rank-gold2: #ffd966;
+        --rank-gold3: #f1c232;
+
+        --rank-diamond1: #cfe2f3;
+        --rank-diamond2: #9fc5e8;
+        --rank-diamond3: #6fa8dc;
+    }
+
+    .dark {
+        --bg: rgb(37, 38, 36);
+        --fg: rgba(214, 207, 195, 0.87);
+
+        --primary: var(--color-blue-600);
+        --primary-fg: var(--color-white);
+
+        --secondary: rgb(35, 35, 34);
+        --secondary-fg: var(--color-slate-50);
+
+        --accent: var(--color-blue-600);
+        --accent-fg: var(--color-white);
+
+        --muted: var(--color-slate-900);
+        --muted-fg: var(--color-slate-400);
+
+        --overlay: rgb(35, 35, 34);
+        --overlay-fg: var(--color-slate-50);
+
+        --success: var(--color-emerald-600);
+        --success-fg: var(--color-white);
+
+        --warning: var(--color-amber-400);
+        --warning-fg: var(--color-amber-950);
+
+        --danger: var(--color-red-600);
+        --danger-fg: var(--color-red-50);
+
+        --border: oklch(0.272 0.044 257.287);
+        --input: oklch(0.292 0.044 257.287);
+        --ring: var(--color-blue-600);
+
+        --navbar: rgb(45, 90, 134);
+        --navbar-fg: var(--color-slate-50);
+
+        --sidebar: oklch(0.158 0.042 265.755);
+        --sidebar-fg: var(--color-slate-50);
+
+        --chart-1: var(--color-blue-700);
+        --chart-2: var(--color-blue-500);
+        --chart-3: var(--color-blue-400);
+        --chart-4: var(--color-blue-300);
+        --chart-5: var(--color-blue-200);
+
+        /*Rarity*/
+        --rarity-common: #8a705d;
+        --rarity-uncommon: #b3845f;
+        --rarity-rare: #6b6b6b;
+        --rarity-epic: #a88a48;
+        --rarity-legendary: #5a7892;
+
+        /*Ranks*/
+        --rank-stone1: #8a705d;
+        --rank-stone2: #7a6455;
+        --rank-stone3: #5f554f;
+
+        --rank-iron1: #7a8c70;
+        --rank-iron2: #5c784d;
+        --rank-iron3: #466137;
+
+        --rank-bronze1: #b3845f;
+        --rank-bronze2: #a06a3d;
+        --rank-bronze3: #814a1c;
+
+        --rank-silver1: #6b6b6b;
+        --rank-silver2: #5a5a5a;
+        --rank-silver3: #4a4a4a;
+
+        --rank-gold1: #a88a48;
+        --rank-gold2: #96742e;
+        --rank-gold3: #7a5c20;
+
+        --rank-diamond1: #5a7892;
+        --rank-diamond2: #3e678d;
+        --rank-diamond3: #2b4b71;
+    }
+
+    h2 {
+        @apply text-2xl font-bold mb-2 mt-2;
+    }
+
+    h3 {
+        @apply text-lg font-bold mb-2 mt-2;
+    }
+}
 
 html,
 body {
@@ -9,6 +182,8 @@ body {
         'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    @apply bg-[var(--bg)] text-[var(--fg)];
 }
 
 code {
@@ -39,77 +214,64 @@ code {
 .gamma {
     background-color: #fce5cd;
 }
-
 .stone1 {
-    background-color: #cdb3a0;
+    background-color: var(--rank-stone1);
 }
-
 .stone2 {
-    background-color: #b09a8a;
+    background-color: var(--rank-stone2);
 }
-
 .stone3 {
-    background-color: #8c827a;
+    background-color: var(--rank-stone3);
 }
 
 .iron1 {
-    background-color: #d9ead3;
+    background-color: var(--rank-iron1);
 }
-
 .iron2 {
-    background-color: #b6d7a8;
+    background-color: var(--rank-iron2);
 }
-
 .iron3 {
-    background-color: #93c47d;
+    background-color: var(--rank-iron3);
 }
 
 .bronze1 {
-    background-color: #f9cb9c;
+    background-color: var(--rank-bronze1);
 }
-
 .bronze2 {
-    background-color: #f6b26b;
+    background-color: var(--rank-bronze2);
 }
-
 .bronze3 {
-    background-color: #e69138;
+    background-color: var(--rank-bronze3);
 }
 
 .silver1 {
-    background-color: #efefef;
+    background-color: var(--rank-silver1);
 }
-
 .silver2 {
-    background-color: #d9d9d9;
+    background-color: var(--rank-silver2);
 }
-
 .silver3 {
-    background-color: #cccccc;
+    background-color: var(--rank-silver3);
 }
 
 .gold1 {
-    background-color: #ffe599;
+    background-color: var(--rank-gold1);
 }
-
 .gold2 {
-    background-color: #ffd966;
+    background-color: var(--rank-gold2);
 }
-
 .gold3 {
-    background-color: #f1c232;
+    background-color: var(--rank-gold3);
 }
 
 .diamond1 {
-    background-color: #cfe2f3;
+    background-color: var(--rank-diamond1);
 }
-
 .diamond2 {
-    background-color: #9fc5e8;
+    background-color: var(--rank-diamond2);
 }
-
 .diamond3 {
-    background-color: #6fa8dc;
+    background-color: var(--rank-diamond3);
 }
 
 .ag-theme-material {
@@ -134,23 +296,23 @@ code {
 }
 
 .common {
-    background-color: #cdb3a0;
+    background-color: var(--rarity-common);
 }
 
 .uncommon {
-    background-color: #f9cb9c;
+    background-color: var(--rarity-uncommon);
 }
 
 .rare {
-    background-color: #efefef;
+    background-color: var(--rarity-rare);
 }
 
 .epic {
-    background-color: #ffe599;
+    background-color: var(--rarity-epic);
 }
 
 .legendary {
-    background-color: #cfe2f3;
+    background-color: var(--rarity-legendary);
 }
 
 .upgrade {

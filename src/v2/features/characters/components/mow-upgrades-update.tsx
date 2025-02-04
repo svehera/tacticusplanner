@@ -74,7 +74,7 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
     }, [updateInventory, inventoryUpdate]);
 
     return (
-        <>
+        <div className="flex items-center">
             <FormControlLabel
                 control={
                     <Checkbox
@@ -122,6 +122,6 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
                     </ul>
                 </div>
             </Popover>
-        </>
+        </div>
     );
 };

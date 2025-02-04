@@ -345,7 +345,7 @@ export const RankLookup = () => {
                         }}
                     />
                 </div>
-                <div className="flex-box gap10 wrap">
+                <div className="flex gap-5 items-center flex-wrap">
                     <div style={{ width: 200 }}>
                         <RankSelect
                             label={'Rank End'}

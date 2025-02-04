@@ -7,6 +7,8 @@ import {
     ICellRendererParams,
     ITooltipParams,
     ValueGetterParams,
+    AllCommunityModule,
+    themeBalham,
 } from 'ag-grid-community';
 
 import { ICharacter2, ILegendaryEventTrack, ILreTeam } from 'src/models/interfaces';
@@ -496,6 +498,8 @@ export const MasterTable = () => {
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 150px)', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}
+                    modules={[AllCommunityModule]}
+                    theme={themeBalham}
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
                     columnDefs={columnsDef}

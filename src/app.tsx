@@ -32,7 +32,21 @@ const darkTheme = createTheme({
         MuiCard: {
             styleOverrides: {
                 root: {
-                    backgroundColor: '#2b2b2b',
+                    backgroundColor: 'var(--overlay)',
+                },
+            },
+        },
+        MuiAccordion: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: 'var(--secondary)',
+                },
+            },
+        },
+        MuiToolbar: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: 'var(--navbar)',
                 },
             },
         },

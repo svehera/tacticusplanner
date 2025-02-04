@@ -28,9 +28,9 @@ export const MowUpgrades: React.FC<Props> = ({ primaryLevel, secondaryLevel, mow
         upgrades: Array<IBaseUpgrade | ICraftedUpgrade>
     ) => {
         return (
-            <div className="flex-box column gap10">
+            <div className="flex flex-col gap-3">
                 <span>{label}</span>
-                <div className="flex-box gap3">
+                <div className="flex gap-3">
                     <div style={{ width: 40, height: 40 }}>
                         <Badge badgeContent={<b>{materials.badges}</b>}>
                             <BadgeImage alliance={alliance} rarity={materials.rarity} size={size} />
@@ -53,8 +53,8 @@ export const MowUpgrades: React.FC<Props> = ({ primaryLevel, secondaryLevel, mow
                         <div style={{ width: 40, height: 40 }}></div>
                     )}
                 </div>
-                <div className="flex-box">
-                    <div className="flex-box gap3">
+                <div className="flex items-center">
+                    <div className="flex gap-1">
                         {upgrades.map((x, index) => (
                             <UpgradeImage
                                 key={x.id + index}

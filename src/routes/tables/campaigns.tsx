@@ -133,10 +133,6 @@ export const Campaigns = () => {
 
     const rows = useMemo(() => StaticDataService.campaignsGrouped[campaign], [campaign]);
 
-    const getRowStyle = (params: RowClassParams<ICampaignBattleComposed>): RowStyle => {
-        return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'lightsteelblue' : 'white' };
-    };
-
     const uniqEnemiesFactions = uniq(rows.flatMap(x => x.enemiesFactions));
     const uniqEnemiesTypes = uniq(rows.flatMap(x => x.enemiesTypes));
     const threeSlotsNodes = uniq(rows.filter(x => x.slots === 3));
@@ -189,7 +185,6 @@ export const Campaigns = () => {
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
                     columnDefs={columnDefs}
                     rowData={rows}
-                    getRowStyle={getRowStyle}
                     onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
             </div>
         </div>

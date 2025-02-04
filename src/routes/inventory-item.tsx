@@ -31,7 +31,7 @@ export const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate 
     };
 
     return (
-        <div key={data.material} className="flex flex-col">
+        <div key={data.material} className="flex flex-col max-w-[60px]">
             <div style={{ padding: '0 5px' }}>
                 <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />
             </div>
@@ -52,10 +52,10 @@ export const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate 
             />
             {showIncDec && (
                 <div>
-                    <Button size="small" className="w-[30px] min-w-0 !important" onClick={() => decrement(data)}>
+                    <Button size="small" className="w-[30px] !min-w-0" onClick={() => decrement(data)}>
                         -
                     </Button>
-                    <Button size="small" className="w-[30px] min-w-0 !important" onClick={() => increment(data)}>
+                    <Button size="small" className="w-[30px] !min-w-0" onClick={() => increment(data)}>
                         +
                     </Button>
                 </div>

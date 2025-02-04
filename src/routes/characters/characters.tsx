@@ -354,10 +354,6 @@ export const Characters = () => {
         [nameFilter, onlyUnlocked]
     );
 
-    const getRowStyle = (params: RowClassParams<ICharacter2>): RowStyle => {
-        return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'lightsteelblue' : 'white' };
-    };
-
     const onFilterTextBoxChanged = useCallback((change: ChangeEvent<HTMLInputElement>) => {
         setNameFilter(change.target.value);
     }, []);
@@ -742,7 +738,6 @@ export const Characters = () => {
                     defaultColDef={defaultColDef}
                     columnDefs={columnDefs}
                     rowData={rows}
-                    getRowStyle={getRowStyle}
                     onSortChanged={refreshRowNumberColumn}
                     onFilterChanged={refreshRowNumberColumn}
                     isExternalFilterPresent={isExternalFilterPresent}

@@ -26,7 +26,7 @@ export const AppBarSubMenu = ({ rootLabel, options }: { rootLabel: string; optio
             <Collapse
                 in={open}
                 timeout="auto"
-                className="bg-blue dark:bg-charcoal"
+                className="bg-[var(--navbar)]"
                 unmountOnExit
                 sx={{ width: 150, position: 'absolute', zIndex: 1000 }}>
                 <List component="div" disablePadding>
@@ -68,7 +68,7 @@ const MenuOption: React.FC<{ option: MenuItemTP; onOptionClick: () => void }> = 
                 in={open}
                 timeout="auto"
                 unmountOnExit
-                className="bg-blue dark:bg-charcoal"
+                className="bg-[var(--navbar)]"
                 sx={{
                     position: 'absolute',
                     width: 150,

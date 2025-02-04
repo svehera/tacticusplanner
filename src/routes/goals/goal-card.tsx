@@ -1,13 +1,12 @@
 ﻿import React, { useMemo } from 'react';
-import { PersonalGoalType, Rank } from '../../models/enums';
+import { PersonalGoalType, Rank } from 'src/models/enums';
 
 import { Card, CardContent, CardHeader } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 
-import { ArrowForward, DeleteForever, Edit, Info } from '@mui/icons-material';
-import { charsUnlockShards, rankToLevel, rarityToStars } from '../../models/constants';
+import { ArrowForward, DeleteForever, Edit } from '@mui/icons-material';
+import { charsUnlockShards, rarityToStars } from 'src/models/constants';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
 import { GoalsService } from 'src/v2/features/goals/goals.service';
@@ -26,7 +25,6 @@ import LinkIcon from '@mui/icons-material/Link';
 import { StaticDataService } from 'src/services';
 import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
-import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
 import { XpTotal } from 'src/v2/features/goals/xp-total';
 
 interface Props {
@@ -305,10 +303,10 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
     return (
         <Card
             variant="outlined"
+            className={isGoalCompleted ? '!bg-[var(--success)]' : ''}
             sx={{
                 width: 350,
                 minHeight: 200,
-                backgroundColor: isGoalCompleted ? 'lightgreen' : 'white',
             }}>
             <CardHeader
                 action={
