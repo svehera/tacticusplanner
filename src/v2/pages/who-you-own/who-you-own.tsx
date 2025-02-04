@@ -57,7 +57,7 @@ export const WhoYouOwn = () => {
 
     const charactersFiltered = useMemo(() => {
         return CharactersService.filterUnits([...charactersDefault, ...mows], viewControls.filterBy, nameFilter);
-    }, [viewControls.filterBy, nameFilter]);
+    }, [viewControls.filterBy, nameFilter, mows, charactersDefault]);
 
     const factions = useMemo(() => {
         return CharactersService.orderByFaction(

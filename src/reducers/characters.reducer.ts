@@ -60,7 +60,8 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
         }
         case 'Update': {
             const updatedCharacter = action.character;
-            const existingChar = state.find(char => char.name === updatedCharacter.name);
+            const existingCharIndex = state.findIndex(char => char.name === updatedCharacter.name);
+            const existingChar = state[existingCharIndex];
 
             if (existingChar) {
                 existingChar.rank = updatedCharacter.rank;
@@ -95,6 +96,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                     existingChar.activeAbilityLevel,
                     existingChar.passiveAbilityLevel
                 );
+                state[existingCharIndex] = { ...existingChar };
             }
             return [...state];
         }
