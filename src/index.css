@@ -35,7 +35,7 @@
         --input: var(--color-slate-300);
         --ring: var(--color-blue-600);
 
-        --navbar: var(--color-slate-50);
+        --navbar: #1976d2;
         --navbar-fg: var(--color-slate-950);
 
         --sidebar: var(--color-slate-50);
