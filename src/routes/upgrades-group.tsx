@@ -14,7 +14,7 @@ const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, 
         <section>
             <article>
                 {showAlphabet && (
-                    <div className="flex gap-10 flex-wrap">
+                    <div className="flex gap-10 flex-wrap justify-center">
                         <div>
                             {group.itemsAllCrafted.length > 0 && <h3>Basic</h3>}
                             <div className="flex gap-5 flex-wrap justify-center">
@@ -61,7 +61,7 @@ const UpgradesGroupFn: React.FC<Props> = ({ group, showPlusMinus, showAlphabet, 
                 )}
 
                 {!showAlphabet && (
-                    <div className="flex gap-10 flex-wrap">
+                    <div className="flex gap-10 flex-wrap justify-center">
                         <div>
                             {group.itemsAllCrafted.length > 0 && <h3>Basic</h3>}
                             <div className="flex gap-5 flex-wrap justify-center">
