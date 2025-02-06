@@ -49,9 +49,6 @@ export class GlobalState implements IGlobalState {
     readonly guild: IGuild;
     readonly mows: IMow[];
 
-    public loadingText?: string | undefined;
-    public loading?: boolean = false;
-
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
         this.autoTeamsPreferences = personalData.autoTeamsPreferences ?? defaultData.autoTeamsPreferences;

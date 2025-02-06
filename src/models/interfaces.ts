@@ -87,6 +87,7 @@ export interface UnitDataRaw {
 export interface IUnitData {
     unitType: UnitType.character;
     id: string;
+    tacticusId?: string;
     alliance: Alliance;
     faction: Faction;
     name: string;
@@ -304,8 +305,6 @@ export interface IGlobalState {
     dailyRaids: IDailyRaids;
     guildWar: IGuildWar;
     guild: IGuild;
-    loading?: boolean;
-    loadingText?: string;
 }
 
 export interface IUserInfo {
@@ -336,8 +335,6 @@ export interface IDispatchContext {
     guild: React.Dispatch<GuildAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
-    startLoading: (loadingText?: string) => void;
-    endLoading: () => void;
 }
 
 export interface IPersonalData2 {

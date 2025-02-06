@@ -12,7 +12,9 @@ import { AuthProvider } from './contexts/auth.provider';
 import { closeSnackbar, SnackbarOrigin, SnackbarProvider } from 'notistack';
 import { isMobile } from 'react-device-detect';
 import { routes } from './app-routing';
+import { PopupProvider } from 'react-popup-manager';
 import { TitleProvider } from 'src/contexts/title.provider';
+import { LoaderProvider } from 'src/contexts/loader.provider';
 import { StoreProvider } from 'src/reducers/store.provider2';
 import analytics from './monitoring/analytics';
 
@@ -25,14 +27,19 @@ root.render(
         <AnalyticsProvider instance={analytics}>
             <AuthProvider>
                 <TitleProvider>
-                    <SnackbarProvider
-                        autoHideDuration={5000}
-                        anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
-                        onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
-                    />
-                    <StoreProvider>
-                        <RouterProvider router={routes} />
-                    </StoreProvider>
+                    <LoaderProvider>
+                        <SnackbarProvider
+                            autoHideDuration={5000}
+                            anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
+                            onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
+                        />
+                        <StoreProvider>
+                            {/*// @ts-expect-error Ts being weird */}
+                            <PopupProvider>
+                                <RouterProvider router={routes} />
+                            </PopupProvider>
+                        </StoreProvider>
+                    </LoaderProvider>
                 </TitleProvider>
             </AuthProvider>
         </AnalyticsProvider>

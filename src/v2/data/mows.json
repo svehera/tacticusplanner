@@ -1,6 +1,7 @@
 ﻿[
     {
         "id": "_malleusRL",
+        "tacticusId": "astraOrdnanceBattery",
         "name": "Malleus RL",
         "title": "Field Ordnance Battery",
         "shortName": "Malleus RL",
@@ -12,6 +13,7 @@
     },
     {
         "id": "_forgefiend",
+        "tacticusId": "blackForgefiend",
         "name": "Forgefiend",
         "title": "Daemon Engine",
         "shortName": "Forgefiend",
@@ -23,6 +25,7 @@
     },
     {
         "id": "_biovore",
+        "tacticusId": "tyranBiovore",
         "name": "Biovore",
         "title": "Artillery Organism",
         "shortName": "Biovore",
@@ -34,6 +37,7 @@
     },
     {
         "id": "_galatian",
+        "tacticusId": "ultraDreadnought",
         "name": "Galatian",
         "title": "Redemptor Dreadnought",
         "shortName": "Galatian",
@@ -46,6 +50,7 @@
     },
     {
         "id": "_tson",
+        "tacticusId": "tauBroadside",
         "name": "Tson'Ji",
         "title": "XV88 Broadside Battlesuit",
         "shortName": "Tson",

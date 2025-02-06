@@ -33,9 +33,13 @@ const CharacterTileFn = ({
 
     const isUnlocked = character.rank > Rank.Locked;
     const isReleased = !character.releaseRarity;
+    const isLreFinished = !character.lre || character.lre?.finished;
 
     const unlockShards = useMemo(
-        () => (isReleased ? charsUnlockShards[character.rarity] : charsReleaseShards[character.releaseRarity!]),
+        () =>
+            isReleased || isLreFinished
+                ? charsUnlockShards[character.rarity]
+                : charsReleaseShards[character.releaseRarity!],
         [isReleased, character.releaseRarity, character.rarity]
     );
     const unlockProgress = useMemo(() => (character.shards / unlockShards) * 100, [character.shards, unlockShards]);
@@ -99,7 +103,7 @@ const CharacterTileFn = ({
                 {`${character.shards}/${unlockShards}`}
             </div>
         );
-    }, [isUnlocked]);
+    }, [isUnlocked, character.level, character.shards]);
 
     const renderTooltipTitle = useMemo(() => {
         return (

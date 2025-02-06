@@ -83,14 +83,6 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [guildWar, dispatchGuildWar] = React.useReducer(guildWarReducer, globalState.guildWar);
     const [guild, dispatchGuild] = React.useReducer(guildReducer, globalState.guild);
 
-    function startLoading(text?: string): void {
-        setGlobalState({ ...globalState, loadingText: text, loading: true });
-    }
-
-    function endLoading(): void {
-        setGlobalState({ ...globalState, loadingText: '', loading: false });
-    }
-
     function wrapDispatch<T>(dispatch: React.Dispatch<T>): React.Dispatch<T> {
         return (action: T) => {
             requestAnimationFrame(() => {
@@ -149,8 +141,6 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 setGlobalState(data);
             },
             seenAppVersion: wrapDispatch(setSeenAppVersion),
-            startLoading,
-            endLoading,
         }),
         [
             dispatchCharacters,

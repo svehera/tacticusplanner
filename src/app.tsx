@@ -11,6 +11,7 @@ import { SearchParamsStateProvider } from 'src/contexts/search-params.provider';
 import { StoreContext } from 'src/reducers/store.provider';
 import { Loader } from 'src/v2/components/loader';
 import { createTheme, ThemeProvider } from '@mui/material';
+import { useLoader } from 'src/contexts/loader.context';
 
 const lightTheme = createTheme({
     colorSchemes: {
@@ -56,7 +57,8 @@ const darkTheme = createTheme({
 export const App = () => {
     localStorage.setItem('appVersion', StaticDataService.whatsNew.currentVersion);
     const { isAuthenticated } = useAuth();
-    const { loading, loadingText, viewPreferences } = useContext(StoreContext);
+    const { viewPreferences } = useContext(StoreContext);
+    const { loading, loadingText } = useLoader();
 
     const [showLoginStatus, setShowLoginStatus] = useState(false);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
