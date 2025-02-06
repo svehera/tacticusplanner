@@ -183,6 +183,8 @@ export const UserMenu = () => {
             loader.endLoading();
 
             if (result.data) {
+                console.log('Tacticus API data for debug', result.data);
+
                 dispatch.mows({ type: 'SyncWithTacticus', units: result.data.player.units });
                 dispatch.characters({ type: 'SyncWithTacticus', units: result.data.player.units });
                 dispatch.inventory({ type: 'SyncWithTacticus', inventory: result.data.player.inventory });
@@ -251,12 +253,12 @@ export const UserMenu = () => {
                             <ListItemText>Logout</ListItemText>
                         </MenuItem>
 
-                        <MenuItem onClick={syncWithTacticus}>
-                            <ListItemIcon>
-                                <UploadIcon />
-                            </ListItemIcon>
-                            <ListItemText>Sync with Tacticus</ListItemText>
-                        </MenuItem>
+                        {/*<MenuItem onClick={syncWithTacticus}>*/}
+                        {/*    <ListItemIcon>*/}
+                        {/*        <UploadIcon />*/}
+                        {/*    </ListItemIcon>*/}
+                        {/*    <ListItemText>Sync with Tacticus</ListItemText>*/}
+                        {/*</MenuItem>*/}
 
                         {/*<Divider />*/}
 
