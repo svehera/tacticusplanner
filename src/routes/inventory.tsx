@@ -47,7 +47,7 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
                 : ['rarity', 'faction', 'material'],
             ['desc', 'asc', 'asc']
         );
-    }, [viewPreferences.inventoryShowAlphabet]);
+    }, [viewPreferences.inventoryShowAlphabet, inventory.upgrades]);
 
     const filterItem = useCallback(
         (item: IInventoryUpgrade) =>

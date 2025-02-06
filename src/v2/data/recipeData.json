@@ -8,6 +8,7 @@
         "icon": "Proclamation Receiver.png"
     },
     "Wyrm-Form Sigil": {
+        "tacticusId": "upgHpR036",
         "material": "Wyrm-Form Sigil",
         "faction": "Genestealer Cults",
         "craftable": false,
@@ -1082,13 +1083,16 @@
         "icon": "archeotech bionics.png"
     },
     "Archeo-Tech Remnant": {
+        "tacticusId": "upgArmL203",
         "material": "Archeo-Tech Remnant",
+        "label": "Archeotech Remnant",
         "craftable": false,
         "stat": "Armour",
         "rarity": "Legendary",
         "icon": "archeo-tech remnant.jpg"
     },
     "Ard Plate": {
+        "tacticusId": "upgArmR026",
         "material": "Ard Plate",
         "craftable": false,
         "stat": "Armour",
@@ -1118,6 +1122,7 @@
         "icon": "artificial vertebrae.png"
     },
     "Attack Vector Data-Slate": {
+        "tacticusId": "upgDmgU004",
         "material": "Attack Vector Data-Slate",
         "craftable": false,
         "stat": "Damage",
@@ -1220,6 +1225,7 @@
         "icon": "blessed promethium canister.png"
     },
     "Blessed Tabbard": {
+        "tacticusId": "upgArmR021",
         "material": "Blessed Tabbard",
         "label": "Blessed Tabard",
         "craftable": false,
@@ -1236,6 +1242,7 @@
         "icon": "blessed tasset plate.png"
     },
     "Blessing of Nurgle": {
+        "tacticusId": "upgHpL104",
         "material": "Blessing of Nurgle",
         "label": "Boon of Nurgle",
         "craftable": false,
@@ -1245,6 +1252,7 @@
         "icon": "blessing of nurgle.jpg"
     },
     "Blessing of the Dark Gods": {
+        "tacticusId": "upgHpL103",
         "material": "Blessing of the Dark Gods",
         "label": "Boon of the Dark Gods",
         "craftable": false,
@@ -1254,6 +1262,7 @@
         "icon": "blessing of the dark gods.jpg"
     },
     "Blessing of Tzeentch": {
+        "tacticusId": "upgHpL109",
         "material": "Blessing of Tzeentch",
         "label": "Boon of Tzeentch",
         "craftable": false,
@@ -1322,6 +1331,7 @@
         "icon": "chip damage.png"
     },
     "Classified Data-Slate": {
+        "tacticusId": "upgDmgR005",
         "material": "Classified Data-Slate",
         "craftable": false,
         "stat": "Damage",
@@ -1604,6 +1614,7 @@
         "icon": "marksman_s honour.png"
     },
     "Master-Crafted Ammo": {
+        "tacticusId": "upgDmgL001",
         "material": "Master-Crafted Ammo",
         "craftable": false,
         "stat": "Damage",
@@ -1842,6 +1853,7 @@
         "icon": "reliquary of vengeance.png"
     },
     "Repair-Kit": {
+        "tacticusId": "upgHpR001",
         "material": "Repair-Kit",
         "label": "Repair Tool",
         "craftable": false,

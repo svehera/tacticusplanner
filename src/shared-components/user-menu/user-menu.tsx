@@ -185,6 +185,7 @@ export const UserMenu = () => {
             if (result.data) {
                 dispatch.mows({ type: 'SyncWithTacticus', units: result.data.player.units });
                 dispatch.characters({ type: 'SyncWithTacticus', units: result.data.player.units });
+                dispatch.inventory({ type: 'SyncWithTacticus', inventory: result.data.player.inventory });
                 enqueueSnackbar('Successfully synced with Tacticus API', { variant: 'success' });
             } else {
                 enqueueSnackbar('There was an error while syncing with Tacticus API', { variant: 'error' });
@@ -250,12 +251,12 @@ export const UserMenu = () => {
                             <ListItemText>Logout</ListItemText>
                         </MenuItem>
 
-                        {/*<MenuItem onClick={syncWithTacticus}>*/}
-                        {/*    <ListItemIcon>*/}
-                        {/*        <UploadIcon />*/}
-                        {/*    </ListItemIcon>*/}
-                        {/*    <ListItemText>Sync with Tacticus</ListItemText>*/}
-                        {/*</MenuItem>*/}
+                        <MenuItem onClick={syncWithTacticus}>
+                            <ListItemIcon>
+                                <UploadIcon />
+                            </ListItemIcon>
+                            <ListItemText>Sync with Tacticus</ListItemText>
+                        </MenuItem>
 
                         {/*<Divider />*/}
 

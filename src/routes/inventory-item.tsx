@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { useEffect } from 'react';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { Input } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -31,6 +31,12 @@ export const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate 
         dataUpdate(upgradeId, result);
         setAmount(result);
     };
+
+    useEffect(() => {
+        if (amount !== data.quantity) {
+            setAmount(data.quantity);
+        }
+    }, [data.quantity]);
 
     return (
         <div key={data.material} className="flex flex-col max-w-[60px]">

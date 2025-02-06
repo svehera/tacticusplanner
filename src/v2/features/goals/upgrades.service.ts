@@ -40,11 +40,13 @@ import battleData from 'src/assets/battleData.json';
 import { getEnumValues, rankToString } from 'src/shared-logic/functions';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaigns.constants';
+import { TacticusUpgrade } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
 
 export class UpgradesService {
-    static readonly recipeData: IRecipeData = recipeData;
+    static readonly recipeDataByName: IRecipeData = recipeData;
     static readonly rankUpData: IRankUpData = rankUpData;
     static readonly battleData: ICampaignsData = battleData;
+    static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
     static readonly baseUpgradesData: IBaseUpgradeData = this.composeBaseUpgrades();
     static readonly craftedUpgradesData: ICraftedUpgradeData = this.composeCraftedUpgrades();
     static readonly recipeExpandedUpgradeData: IRecipeExpandedUpgradeData = this.expandRecipeData();
@@ -776,11 +778,11 @@ export class UpgradesService {
      */
     private static composeBaseUpgrades(): IBaseUpgradeData {
         const result: IBaseUpgradeData = {};
-        const upgrades = Object.keys(this.recipeData);
+        const upgrades = Object.keys(this.recipeDataByName);
         const upgradeLocationsShort = this.getUpgradesLocations();
 
         for (const upgradeName of upgrades) {
-            const upgrade = this.recipeData[upgradeName];
+            const upgrade = this.recipeDataByName[upgradeName];
 
             // Filter out craftable upgrades, we only return base upgrades from here.
             if (upgrade.craftable) {
@@ -818,10 +820,10 @@ export class UpgradesService {
      */
     private static composeCraftedUpgrades(): ICraftedUpgradeData {
         const result: ICraftedUpgradeData = {};
-        const upgrades = Object.keys(this.recipeData);
+        const upgrades = Object.keys(this.recipeDataByName);
 
         for (const upgradeName of upgrades) {
-            const upgrade = this.recipeData[upgradeName];
+            const upgrade = this.recipeDataByName[upgradeName];
 
             if (!upgrade.craftable) {
                 continue;
@@ -1016,7 +1018,7 @@ export class UpgradesService {
         const baseUpgrades: IUpgradeRecipe[] = [];
         const craftedUpgrades: IUpgradeRecipe[] = [];
 
-        const upgradeDetails = this.recipeData[id];
+        const upgradeDetails = this.recipeDataByName[id];
 
         if (!upgradeDetails) {
             return {
@@ -1105,6 +1107,33 @@ export class UpgradesService {
                 upgrades: orderBy(goalUpgrades, ['daysTotal', 'energyTotal'], ['desc', 'desc']),
             });
         }
+        return result;
+    }
+
+    static findUpgrade(upgrade: TacticusUpgrade): string | null {
+        const byName = this.recipeDataByName[upgrade.name];
+        if (byName) {
+            return byName.material;
+        }
+
+        const byTacticusId = this.recipeDataByTacticusId[upgrade.id];
+        if (byTacticusId) {
+            return byTacticusId.material;
+        }
+
+        return null;
+    }
+
+    private static composeByTacticusId(): Record<string, IMaterial> {
+        const result: Record<string, IMaterial> = {};
+
+        for (const materialName in this.recipeDataByName) {
+            const material = this.recipeDataByName[materialName];
+            if (material.tacticusId) {
+                result[material.tacticusId] = material;
+            }
+        }
+
         return result;
     }
 }

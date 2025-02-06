@@ -680,6 +680,7 @@ export interface IRecipeData {
 export interface IMaterial {
     material: string;
     label?: string;
+    tacticusId?: string;
     rarity: string;
     craftable: boolean;
     stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';

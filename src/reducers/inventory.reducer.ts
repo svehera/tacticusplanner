@@ -1,5 +1,7 @@
 ﻿import { IInventory, SetStateAction } from '../models/interfaces';
 import { defaultData } from '../models/constants';
+import { TacticusInventory } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
+import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
 
 export type InventoryAction =
     | {
@@ -18,6 +20,10 @@ export type InventoryAction =
       }
     | {
           type: 'ResetUpgrades';
+      }
+    | {
+          type: 'SyncWithTacticus';
+          inventory: TacticusInventory;
       }
     | SetStateAction<IInventory>;
 
@@ -46,6 +52,18 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
         }
         case 'ResetUpgrades': {
             return { ...state, upgrades: {} };
+        }
+        case 'SyncWithTacticus': {
+            const { upgrades } = action.inventory;
+            const result = { ...state.upgrades };
+
+            for (const upgrade of upgrades) {
+                const upgradeId: string | null = TacticusIntegrationService.getUpgradeId(upgrade);
+                if (upgradeId) {
+                    result[upgradeId] = upgrade.amount;
+                }
+            }
+            return { ...state, upgrades: result };
         }
         default: {
             throw new Error();
