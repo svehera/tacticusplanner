@@ -313,7 +313,7 @@ export interface IUserInfo {
     role: UserRole;
     pendingTeamsCount: number;
     rejectedTeamsCount: number;
-    snowprintIdConnected: boolean;
+    tacticusApiKey: string;
 }
 
 export interface IDispatchContext {

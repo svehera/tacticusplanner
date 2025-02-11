@@ -5,6 +5,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import RegisterIcon from '@mui/icons-material/PersonAdd';
 import UploadIcon from '@mui/icons-material/Upload';
+import SyncIcon from '@mui/icons-material/Sync';
 import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore';
 import { convertData, PersonalDataLocalStorage } from 'src/services';
 import DownloadIcon from '@mui/icons-material/Download';
@@ -26,14 +27,14 @@ import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import { UserRole } from 'src/models/enums';
 import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-dialog';
 import { isMobile } from 'react-device-detect';
-import { getTacticusPlayerData } from 'src/v2/features/tacticus-integration/tacticus-integration.endpoints';
-import { useLoader } from 'src/contexts/loader.context';
+import { usePopupManager } from 'react-popup-manager';
+import { TacticusIntegrationDialog } from 'src/v2/features/tacticus-integration/tacticus-integration.dialog';
 
 export const UserMenu = () => {
     const store = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
+    const popupManager = usePopupManager();
     const { isAuthenticated, logout, username, userInfo } = useAuth();
-    const loader = useLoader();
     const inputRef = useRef<HTMLInputElement>(null);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
@@ -176,26 +177,11 @@ export const UserMenu = () => {
         };
     }
 
-    async function syncWithTacticus() {
-        try {
-            loader.startLoading('Syncing data via Tacticus API. Please wait...');
-            const result = await getTacticusPlayerData();
-            loader.endLoading();
-
-            if (result.data) {
-                console.log('Tacticus API data for debug', result.data);
-
-                dispatch.mows({ type: 'SyncWithTacticus', units: result.data.player.units });
-                dispatch.characters({ type: 'SyncWithTacticus', units: result.data.player.units });
-                dispatch.inventory({ type: 'SyncWithTacticus', inventory: result.data.player.inventory });
-                enqueueSnackbar('Successfully synced with Tacticus API', { variant: 'success' });
-            } else {
-                enqueueSnackbar('There was an error while syncing with Tacticus API', { variant: 'error' });
-            }
-        } catch (e) {
-            console.error(e);
-            enqueueSnackbar('There was an error while syncing with Tacticus API', { variant: 'error' });
-        }
+    function syncWithTacticus(): void {
+        popupManager.open(TacticusIntegrationDialog, {
+            tacticusApiKey: userInfo.tacticusApiKey,
+            onClose: () => {},
+        });
     }
 
     return (
@@ -245,48 +231,35 @@ export const UserMenu = () => {
                         </MenuItem>
                     </div>
                 ) : (
-                    <div>
-                        <MenuItem onClick={() => logout()}>
-                            <ListItemIcon>
-                                <LogoutIcon />
-                            </ListItemIcon>
-                            <ListItemText>Logout</ListItemText>
-                        </MenuItem>
-
-                        {/*<MenuItem onClick={syncWithTacticus}>*/}
-                        {/*    <ListItemIcon>*/}
-                        {/*        <UploadIcon />*/}
-                        {/*    </ListItemIcon>*/}
-                        {/*    <ListItemText>Sync with Tacticus</ListItemText>*/}
-                        {/*</MenuItem>*/}
-
-                        {/*<Divider />*/}
-
-                        {/*{userInfo.snowprintIdConnected ? (*/}
-
-                        {/*) : (*/}
-                        {/*    <MenuItem>*/}
-                        {/*        <ListItemIcon>*/}
-                        {/*            <UploadIcon />*/}
-                        {/*        </ListItemIcon>*/}
-                        {/*        <ListItemText>Connect Snowprint ID</ListItemText>*/}
-                        {/*    </MenuItem>*/}
-                        {/*)}*/}
-                    </div>
+                    <MenuItem onClick={() => logout()}>
+                        <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        <ListItemText>Logout</ListItemText>
+                    </MenuItem>
                 )}
 
                 <Divider />
+                {isAuthenticated && (
+                    <MenuItem onClick={syncWithTacticus}>
+                        <ListItemIcon>
+                            <SyncIcon />
+                        </ListItemIcon>
+                        <ListItemText>Sync via Tacticus API</ListItemText>
+                    </MenuItem>
+                )}
+
                 <MenuItem onClick={() => inputRef.current?.click()}>
                     <ListItemIcon>
                         <UploadIcon />
                     </ListItemIcon>
-                    <ListItemText>Import</ListItemText>
+                    <ListItemText>Import JSON</ListItemText>
                 </MenuItem>
                 <MenuItem onClick={() => downloadJson()}>
                     <ListItemIcon>
                         <DownloadIcon />
                     </ListItemIcon>
-                    <ListItemText>Export</ListItemText>
+                    <ListItemText>Export JSON</ListItemText>
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={() => restoreData()}>

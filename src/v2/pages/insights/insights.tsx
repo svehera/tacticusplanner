@@ -13,7 +13,7 @@ import { ViewControls } from 'src/v2/features/characters/components/view-control
 import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
-import { IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
+import { IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
@@ -49,6 +49,9 @@ export const Insights = () => {
                     Registered users: <b>{data.registeredUsers}</b>{' '}
                 </p>
                 <p>
+                    Tacticus API integrations: <b>{data.tacticusIntegrations}</b>{' '}
+                </p>
+                <p>
                     Active users last 30 days: <b>{data.activeLast30Days}</b>{' '}
                 </p>
                 <p>
@@ -77,6 +80,9 @@ export const Insights = () => {
         <Box style={{ margin: 'auto' }}>
             <p>
                 Registered users: <b>{data.registeredUsers}</b>
+            </p>
+            <p>
+                Tacticus API integrations: <b>{data.tacticusIntegrations}</b>
             </p>
             <p>
                 Active users last 30 days: <b>{data.activeLast30Days}</b>
