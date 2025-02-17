@@ -72,10 +72,10 @@ export const FactionsTile = ({
             <div className={`characters-box ${factionClass}`}>
                 {faction.units.map(unit => {
                     if (unit.unitType === UnitType.character) {
-                        return <CharacterTile key={unit.name} character={unit} onCharacterClick={onCharacterClick} />;
+                        return <CharacterTile key={unit.id} character={unit} onCharacterClick={onCharacterClick} />;
                     }
                     if (unit.unitType === UnitType.mow) {
-                        return <MowTile key={unit.name} mow={unit} onClick={onCharacterClick} />;
+                        return <MowTile key={unit.id} mow={unit} onClick={onCharacterClick} />;
                     }
                 })}
             </div>

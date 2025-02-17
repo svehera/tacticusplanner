@@ -1,6 +1,6 @@
 ﻿import React, { useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ICellRendererParams } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
 
 import './players-table.css';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
@@ -8,7 +8,6 @@ import { FlexBox } from 'src/v2/components/flex-box';
 import { Rarity } from 'src/models/enums';
 import { Badge } from '@mui/material';
 import { IGuildWarOffensePlayer } from 'src/v2/features/guild/guild.models';
-import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { mapValues, sum } from 'lodash';
 
 export const GuildOffenseTable = ({
@@ -80,6 +79,8 @@ export const GuildOffenseTable = ({
     return (
         <div className="ag-theme-material bf-table">
             <AgGridReact
+                modules={[AllCommunityModule]}
+                theme={themeBalham}
                 suppressCellFocus={true}
                 columnDefs={columnDefs}
                 rowHeight={40}

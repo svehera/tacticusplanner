@@ -1,6 +1,6 @@
 ﻿import { Rarity } from 'src/models/enums';
 
-export interface ITableRow {
+export interface IInventoryUpgrade {
     material: string;
     label: string;
     rarity: Rarity;
@@ -10,4 +10,18 @@ export interface ITableRow {
     iconPath: string;
     faction: string;
     alphabet: string;
+}
+
+export interface IUpgradesAlphabetGroup {
+    letter: string;
+    subItems: IInventoryUpgrade[];
+}
+
+export interface IUpgradesGroup {
+    label: string;
+    rarity: Rarity;
+    items: IUpgradesAlphabetGroup[];
+    itemsCrafted: IUpgradesAlphabetGroup[];
+    itemsAll: IInventoryUpgrade[];
+    itemsAllCrafted: IInventoryUpgrade[];
 }

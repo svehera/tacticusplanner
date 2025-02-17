@@ -38,10 +38,10 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
                     {upgradeRaid.acquiredCount}/{upgradeRaid.requiredCount}
                 </span>
                 <div className="flex-box">
-                    <Button size="small" className="item-quantity-button" onClick={decrement}>
+                    <Button size="small" className="w-[30px] !min-w-0" onClick={decrement}>
                         -
                     </Button>
-                    <Button size="small" className="item-quantity-button" onClick={increment}>
+                    <Button size="small" className="w-[30px] !min-w-0" onClick={increment}>
                         +
                     </Button>
                 </div>
@@ -66,7 +66,6 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
                                 defaultItemsObtained={defaultItemsObtained}
                                 isDisabled={location.isCompleted || upgradeRaid.isBlocked}
                                 addCount={value => {
-                                    location.isCompleted = true;
                                     addCount(value, location);
                                 }}
                             />

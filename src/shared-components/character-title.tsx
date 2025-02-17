@@ -34,19 +34,14 @@ export const CharacterTitle = ({
             character.bias === CharacterBias.recommendFirst
                 ? starEmoji
                 : character.bias === CharacterBias.recommendLast
-                ? pooEmoji
-                : '';
+                  ? pooEmoji
+                  : '';
         const opacity = showLockedWithOpacity ? (isUnlocked ? 1 : 0.5) : 1;
         const cursor = onClick ? 'pointer' : undefined;
 
         const characterFull = (
             <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>
-                <CharacterImage
-                    key={character.name}
-                    icon={character.icon}
-                    name={character.name}
-                    imageSize={imageSize}
-                />
+                <CharacterImage key={character.name} icon={character.icon} name={character.name} height={imageSize} />
                 {!hideName && <span>{name}</span>}
                 <RarityImage rarity={character.rarity} />
                 {isUnlocked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
@@ -56,8 +51,8 @@ export const CharacterTitle = ({
                         character.bias === CharacterBias.recommendFirst
                             ? 'Always recommend first'
                             : character.bias === CharacterBias.recommendLast
-                            ? 'Always recommend last'
-                            : ''
+                              ? 'Always recommend last'
+                              : ''
                     }>
                     <span>{emoji}</span>
                 </Tooltip>
@@ -72,7 +67,8 @@ export const CharacterTitle = ({
                             key={character.name}
                             icon={character.icon}
                             name={character.name}
-                            imageSize={imageSize}
+                            height={imageSize}
+                            width={imageSize}
                         />
                     </span>
                 </Tooltip>
@@ -86,7 +82,7 @@ export const CharacterTitle = ({
     if (isMow(character)) {
         return (
             <div className="flex-box gap5 p5" onClick={onClick}>
-                <CharacterImage icon={character.badgeIcon} imageSize={35} />
+                <CharacterImage icon={character.badgeIcon} height={35} />
                 <span>{name}</span>
             </div>
         );

@@ -49,9 +49,6 @@ export class GlobalState implements IGlobalState {
     readonly guild: IGuild;
     readonly mows: IMow[];
 
-    public loadingText?: string | undefined;
-    public loading?: boolean = false;
-
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
         this.autoTeamsPreferences = personalData.autoTeamsPreferences ?? defaultData.autoTeamsPreferences;
@@ -59,13 +56,13 @@ export class GlobalState implements IGlobalState {
 
         this.selectedTeamOrder = personalData.selectedTeamOrder;
         this.leSelectedRequirements = personalData.leSelectedRequirements;
-        this.leSelectedTeams = GlobalState.fixNames(personalData.leTeams);
+        this.leSelectedTeams = personalData.leTeams;
         this.leProgress = personalData.leProgress;
-        const chars = GlobalState.fixNames(personalData.characters);
+        const chars = personalData.characters;
         this.characters = GlobalState.initCharacters(chars);
         this.mows = GlobalState.initMows(personalData.mows);
 
-        this.goals = GlobalState.fixNames(personalData.goals).map((goal, index) => {
+        this.goals = personalData.goals.map((goal, index) => {
             const relatedChar = this.characters.find(x => x.name === goal.character);
             return { ...goal, priority: index + 1, currentRank: relatedChar?.rank, currentRarity: relatedChar?.rarity };
         });
@@ -73,7 +70,7 @@ export class GlobalState implements IGlobalState {
         this.modifiedDate = personalData.modifiedDate;
         this.seenAppVersion = personalData.seenAppVersion;
         this.campaignsProgress = personalData.campaignsProgress ?? defaultData.campaignsProgress;
-        this.inventory = GlobalState.fixNames(personalData.inventory ?? defaultData.inventory);
+        this.inventory = personalData.inventory ?? defaultData.inventory;
         this.dailyRaids = personalData.dailyRaids ?? defaultData.dailyRaids;
         this.guildWar = personalData.guildWar ?? defaultData.guildWar;
         this.guild = personalData.guild ?? defaultData.guild;
@@ -176,23 +173,6 @@ export class GlobalState implements IGlobalState {
 
         // Check if the day difference is less than or equal to 2
         return dayDifference <= 3;
-    }
-
-    static fixNames<T>(obj: T): T {
-        const fixName = {
-            'Abaddon The Despolier': 'Abaddon The Despoiler',
-            'Actus Folgorosus': 'Actus',
-            'Blessed Tabard': 'Blessed Tabbard',
-        };
-
-        let result = JSON.stringify(obj);
-
-        for (const fixNameKey in fixName) {
-            const value = fixName[fixNameKey as keyof typeof fixName];
-            result = result.replaceAll(fixNameKey, value);
-        }
-
-        return JSON.parse(result);
     }
 
     static toStore(value: IGlobalState): IPersonalData2 {

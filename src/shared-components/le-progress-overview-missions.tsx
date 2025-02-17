@@ -20,7 +20,7 @@ export const LeProgressOverviewMissions: React.FC<Props> = ({ occurence, progres
         }
     };
     return (
-        <div style={{ flex: 1, minWidth: 450 }}>
+        <div style={{ flex: 1, minWidth: 450 }} className="mr-2">
             <h3>
                 <span className="bold">{getEventName()}</span>
                 <span className="italic">
@@ -28,7 +28,7 @@ export const LeProgressOverviewMissions: React.FC<Props> = ({ occurence, progres
                 </span>
             </h3>
 
-            <div className="flex-box gap10 wrap">
+            <div className="flex gap-5 flex-wrap items-center">
                 <NumberInput
                     fullWidth
                     label={'Free missions ' + occurence.freeMissionsProgress + '/10'}

@@ -1,4 +1,5 @@
 ﻿import React, { useMemo } from 'react';
+import { AllCommunityModule, themeBalham } from 'ag-grid-community';
 import { IMowLevelMaterials } from 'src/v2/features/lookup/lookup.models';
 import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
@@ -139,6 +140,8 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
                 width: '100%',
             }}>
             <AgGridReact
+                modules={[AllCommunityModule]}
+                theme={themeBalham}
                 defaultColDef={{
                     suppressMovable: true,
                     sortable: true,

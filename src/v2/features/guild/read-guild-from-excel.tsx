@@ -1,10 +1,11 @@
 ﻿import React, { ChangeEvent, useRef } from 'react';
-import readXlsxFile from 'read-excel-file';
+import readXlsxFile, { Schema } from 'read-excel-file';
 import Dialog from '@mui/material/Dialog';
 import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Button from '@mui/material/Button';
 import { enqueueSnackbar } from 'notistack';
 import { IGuildMember } from 'src/models/interfaces';
+import { ParseWithoutSchemaOptions } from 'read-excel-file/types';
 
 interface Props {
     onImport: (guildUsers: IGuildMember[]) => void;
@@ -26,7 +27,7 @@ export const ImportGuildExcel: React.FC<Props> = ({ onImport }) => {
         const file = event.target.files?.[0];
 
         if (file) {
-            const schema = {
+            const schema: Schema<IGuildMember> = {
                 Username: {
                     prop: 'username',
                     type: String,

@@ -1,14 +1,17 @@
 ﻿import React, { useContext, useMemo, useRef, useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { CellClassParams, ColDef, ColGroupDef, ICellRendererParams, ITooltipParams } from 'ag-grid-community';
-
 import {
-    ICharacter2,
-    ILegendaryEventSelectedTeams,
-    ILegendaryEventTrack,
-    ILreTeam,
-    SelectedTeams,
-} from 'src/models/interfaces';
+    CellClassParams,
+    ColDef,
+    ColGroupDef,
+    ICellRendererParams,
+    ITooltipParams,
+    ValueGetterParams,
+    AllCommunityModule,
+    themeBalham,
+} from 'ag-grid-community';
+
+import { ICharacter2, ILegendaryEventTrack, ILreTeam } from 'src/models/interfaces';
 import { LegendaryEventEnum, Rank } from 'src/models/enums';
 import {
     Checkbox,
@@ -35,9 +38,8 @@ import { CharacterImage } from 'src/shared-components/character-image';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { isMobile } from 'react-device-detect';
 import { StaticDataService } from 'src/services';
-import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
-import { RarityImage } from 'src/shared-components/rarity-image';
-import { RankImage } from 'src/shared-components/rank-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
 import { useQueryState } from 'src/v2/hooks/query-state';
 import { LreService } from 'src/v2/features/lre/lre.service';
 import { ILreProgressModel } from 'src/v2/features/lre/lre.models';
@@ -111,7 +113,7 @@ export const MasterTable = () => {
                     return bTotal - aTotal;
                 })
                 .filter(x => (filter ? x.name.toLowerCase().includes(filter.toLowerCase()) : true))
-                .map((x, index) => ({
+                .map(x => ({
                     character: x,
                     characterId: x.name,
                     eventId,
@@ -341,8 +343,8 @@ export const MasterTable = () => {
                 selection === 'all'
                     ? legendaryEvent.allowedUnits
                     : selection === 'unlocked'
-                    ? legendaryEvent.allowedUnits.filter(x => x.rank > Rank.Locked)
-                    : [];
+                      ? legendaryEvent.allowedUnits.filter(x => x.rank > Rank.Locked)
+                      : [];
             const eventCharacters = chars
                 .sort(
                     (a, b) =>
@@ -467,7 +469,7 @@ export const MasterTable = () => {
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
                                 <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
                                 <ListItemIcon>
-                                    <CharacterImage icon={x.icon} imageSize={30} />
+                                    <CharacterImage icon={x.icon} height={30} />
                                 </ListItemIcon>
                                 <ListItemText primary={x.name} />
                             </MenuItem>
@@ -479,7 +481,7 @@ export const MasterTable = () => {
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
                                 <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
                                 <ListItemIcon>
-                                    <CharacterImage icon={x.icon} imageSize={30} />
+                                    <CharacterImage icon={x.icon} height={30} />
                                 </ListItemIcon>
                                 <ListItemText primary={x.name} />
                             </MenuItem>
@@ -496,6 +498,8 @@ export const MasterTable = () => {
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 150px)', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}
+                    modules={[AllCommunityModule]}
+                    theme={themeBalham}
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
                     columnDefs={columnsDef}

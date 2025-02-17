@@ -9,8 +9,6 @@ interface Props {
 }
 
 export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
-    const [goal, setGoal] = React.useState<string>('unlock');
-
     const totalPoints = useMemo(() => {
         return sum(model.tracksProgress.map(x => x.totalPoints));
     }, []);
@@ -102,33 +100,40 @@ export const LeNextGoalProgress: React.FC<Props> = ({ model }) => {
         return model.chestsMilestones.length;
     }, [currentCurrency]);
 
-    const chestsForNextGoal = useMemo(() => {
-        const chestsForUnlock = model.progression.unlock / model.shardsPerChest;
-        const chestsFor4Stars = (model.progression.unlock + model.progression.fourStars) / model.shardsPerChest;
-        const chestsFor5Stars =
-            (model.progression.unlock + model.progression.fourStars + model.progression.fiveStars) /
-            model.shardsPerChest;
-        const chestsForBlueStar =
-            (model.progression.unlock +
-                model.progression.fourStars +
-                model.progression.fiveStars +
-                model.progression.blueStar) /
-            model.shardsPerChest;
+    const chestsForUnlock = model.progression.unlock / model.shardsPerChest;
+    const chestsFor4Stars = (model.progression.unlock + model.progression.fourStars) / model.shardsPerChest;
+    const chestsFor5Stars =
+        (model.progression.unlock + model.progression.fourStars + model.progression.fiveStars) / model.shardsPerChest;
+    const chestsForBlueStar =
+        (model.progression.unlock +
+            model.progression.fourStars +
+            model.progression.fiveStars +
+            model.progression.blueStar) /
+        model.shardsPerChest;
 
+    const chestsForNextGoal = useMemo(() => {
         if (currentChests < chestsForUnlock) {
-            setGoal('unlock');
             return Math.ceil(chestsForUnlock);
         } else if (currentChests < chestsFor4Stars) {
-            setGoal('4 stars');
             return Math.ceil(chestsFor4Stars);
         } else if (currentChests < chestsFor5Stars) {
-            setGoal('5 stars');
             return Math.ceil(chestsFor5Stars);
         }
 
-        setGoal('blue star');
         return Math.ceil(chestsForBlueStar);
     }, [currentChests]);
+
+    const goal = (function () {
+        if (currentChests < chestsForUnlock) {
+            return 'unlock';
+        } else if (currentChests < chestsFor4Stars) {
+            return '4 stars';
+        } else if (currentChests < chestsFor5Stars) {
+            return '5 stars';
+        }
+
+        return 'blue star';
+    })();
 
     const currencyForUnlock = useMemo(() => {
         return model.chestsMilestones

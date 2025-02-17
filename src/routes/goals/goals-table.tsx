@@ -1,6 +1,6 @@
 ﻿import React, { useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ICellRendererParams } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
 import { PersonalGoalType, Rank } from 'src/models/enums';
 import {
     CharacterRaidGoalSelect,
@@ -213,7 +213,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
                     const { data } = params;
                     if (data) {
-                        return <CharacterImage icon={data.unitIcon} imageSize={30} tooltip={data.unitName} />;
+                        return <CharacterImage icon={data.unitIcon} height={30} width={30} tooltip={data.unitName} />;
                     }
                 },
                 sortable: false,
@@ -351,6 +351,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 width: '100%',
             }}>
             <AgGridReact
+                modules={[AllCommunityModule]}
+                theme={themeBalham}
                 defaultColDef={{
                     suppressMovable: true,
                     sortable: true,

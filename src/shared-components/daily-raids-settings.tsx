@@ -129,8 +129,9 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
             <DialogContent>
                 <FormGroup style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: '0 20px' }}>
                     <div>
-                        <Typography className="flex-box gap5">
-                            <b>{energyMarks[dailyEnergy].value}</b> <MiscIcon icon={'energy'} width={15} /> per day
+                        <Typography className="flex items-center gap-1">
+                            <b>{energyMarks[dailyEnergy].value}</b> <MiscIcon icon={'energy'} width={20} height={20} />{' '}
+                            per day
                         </Typography>
                         <Slider
                             aria-label="Restricted values"

@@ -36,14 +36,14 @@ export const RankGoalSelect: React.FC<Props> = ({ allowedValues, rank, onChange,
     };
 
     return (
-        <div className="flex-box gap10 full-width">
+        <div className="flex gap-3">
             <RankSelect
                 label={'Target Rank'}
                 rankValues={allowedValues}
                 value={form.rank}
                 valueChanges={handleRankChange}
             />
-            <div className="flex-box">
+            <div className="flex items-center">
                 <FormControlLabel
                     label="Point Five"
                     control={

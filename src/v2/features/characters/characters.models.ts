@@ -15,6 +15,7 @@ export interface IFactionStatic {
 
 export interface IMowStatic {
     id: string;
+    tacticusId: string;
     name: string;
     title: string;
     shortName: string;

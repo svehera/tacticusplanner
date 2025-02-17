@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>((props, ref) => {
-    const imageUrl = getImageUrl(`portraits/${props.icon}`);
+    const imageUrl = getImageUrl(`portraits/resized/${props.icon}`);
 
     return (
         <img
@@ -16,6 +16,7 @@ export const CharacterPortraitImage = React.forwardRef<HTMLImageElement, Props>(
             style={{ pointerEvents: 'none' }}
             src={imageUrl}
             width={60}
+            height={80}
             alt={props.icon}
         />
     );

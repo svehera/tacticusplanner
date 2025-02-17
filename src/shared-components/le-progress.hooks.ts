@@ -2,7 +2,11 @@ import { useContext, useState } from 'react';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { ILegendaryEvent, LreTrackId } from 'src/models/interfaces';
 import { LrePointsCategoryId, ProgressState } from 'src/models/enums';
-import { ILreOccurrenceProgress, ILreProgressModel } from 'src/v2/features/lre/lre.models';
+import {
+    ILreBattleRequirementsProgress,
+    ILreOccurrenceProgress,
+    ILreProgressModel,
+} from 'src/v2/features/lre/lre.models';
 import { useDebounceCallback } from 'usehooks-ts';
 import { LreService } from 'src/v2/features/lre/lre.service';
 
@@ -41,18 +45,18 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
 
     const setBattleState = (trackId: LreTrackId, battleIndex: number, reqId: string, state: ProgressState) => {
         setModel(currModel => {
-            const trackProgress = currModel.tracksProgress.find(x => x.trackId === trackId);
-            if (!trackProgress) {
-                return currModel;
-            }
-            const battleProgress = trackProgress.battles.find(x => x.battleIndex === battleIndex);
-            if (!battleProgress) {
-                return currModel;
-            }
-            const reqProgress = battleProgress.requirementsProgress.find(x => x.id === reqId);
-            if (!reqProgress) {
-                return currModel;
-            }
+            const trackProgressIndex = currModel.tracksProgress.findIndex(x => x.trackId === trackId);
+            if (trackProgressIndex === -1) return currModel;
+
+            const trackProgress = currModel.tracksProgress[trackProgressIndex];
+            const battleProgressIndex = trackProgress.battles.findIndex(x => x.battleIndex === battleIndex);
+            if (battleProgressIndex === -1) return currModel;
+
+            const battleProgress = trackProgress.battles[battleProgressIndex];
+            const reqProgressIndex = battleProgress.requirementsProgress.findIndex(x => x.id === reqId);
+            if (reqProgressIndex === -1) return currModel;
+
+            const reqProgress = battleProgress.requirementsProgress[reqProgressIndex];
 
             const autoCompleteReqs = [
                 LrePointsCategoryId.defeatAll,
@@ -60,29 +64,46 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
                 LrePointsCategoryId.highScore,
             ];
 
+            let updatedReqProgress: ILreBattleRequirementsProgress;
+            let updatedRequirementsProgress = [...battleProgress.requirementsProgress];
+
             if (state === ProgressState.completed) {
-                reqProgress.completed = true;
-                reqProgress.blocked = false;
+                updatedReqProgress = { ...reqProgress, completed: true, blocked: false };
 
                 if (
                     !autoCompleteReqs.includes(reqProgress.id as LrePointsCategoryId) ||
                     reqProgress.id === LrePointsCategoryId.defeatAll
                 ) {
-                    battleProgress.requirementsProgress
-                        .filter(x => autoCompleteReqs.includes(x.id as LrePointsCategoryId))
-                        .forEach(x => {
-                            x.completed = true;
-                            x.blocked = false;
-                        });
+                    updatedRequirementsProgress = updatedRequirementsProgress.map(req =>
+                        autoCompleteReqs.includes(req.id as LrePointsCategoryId)
+                            ? { ...req, completed: true, blocked: false }
+                            : req
+                    );
                 }
             } else if (state === ProgressState.blocked) {
-                reqProgress.blocked = true;
-                reqProgress.completed = false;
+                updatedReqProgress = { ...reqProgress, completed: false, blocked: true };
             } else {
-                reqProgress.completed = false;
-                reqProgress.blocked = false;
+                updatedReqProgress = { ...reqProgress, completed: false, blocked: false };
             }
-            return updateDto({ ...currModel });
+
+            updatedRequirementsProgress[reqProgressIndex] = updatedReqProgress;
+            const updatedBattleProgress = {
+                ...battleProgress,
+                requirementsProgress: updatedRequirementsProgress,
+            };
+
+            const updatedBattles = [...trackProgress.battles];
+            updatedBattles[battleProgressIndex] = updatedBattleProgress;
+
+            const updatedTrackProgress = {
+                ...trackProgress,
+                battles: updatedBattles,
+            };
+
+            const updatedTracksProgress = [...currModel.tracksProgress];
+            updatedTracksProgress[trackProgressIndex] = updatedTrackProgress;
+
+            return updateDto({ ...currModel, tracksProgress: updatedTracksProgress });
         });
     };
 

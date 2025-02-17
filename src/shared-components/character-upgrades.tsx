@@ -4,10 +4,10 @@ import Button from '@mui/material/Button';
 import { Info, Warning } from '@mui/icons-material';
 import { UpgradeImage } from './upgrade-image';
 import { StoreContext } from '../reducers/store.provider';
-import { MiscIcon } from './misc-icon';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 
 import './character-upgrades.css';
-import { cloneDeep, groupBy, map } from 'lodash';
+import { cloneDeep, groupBy } from 'lodash';
 import { Rank } from 'src/models/enums';
 import { IBaseUpgrade, ICraftedUpgrade, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';

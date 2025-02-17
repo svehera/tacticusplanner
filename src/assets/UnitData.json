@@ -512,8 +512,8 @@
     {
         "Name": "Abaddon The Despoiler",
         "Title": "Warmaster of the Imperium Nihilus",
-        "Full Name": "Ezekyle Abbadon",
-        "Short Name": "Abbadon",
+        "Full Name": "Ezekyle Abaddon",
+        "Short Name": "Abaddon",
         "Faction": "Black Legion",
         "Alliance": "Chaos",
         "Health": 8439,
@@ -1941,7 +1941,7 @@
         "ForcedSummons": false,
         "RequiredInCampaign": false,
         "Icon": "sy-gex.webp",
-        "releaseDate": "2025-02-26T00:00:00Z"
+        "releaseDate": "2025-01-26T00:00:00Z"
     },
     {
         "Name": "Wrask",
@@ -2155,9 +2155,9 @@
         "lre": {
             "id": 8,
             "finished": false,
-            "eventStage": 2,
-            "nextEventDate": "January 12",
-            "nextEventDateUtc": "Sun, 12 January 2025 00:00:00 GMT"
+            "eventStage": 3,
+            "nextEventDate": "TBA",
+            "nextEventDateUtc": ""
         }
     },
     {

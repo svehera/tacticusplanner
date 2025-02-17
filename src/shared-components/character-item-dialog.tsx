@@ -1,4 +1,4 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import React, { useContext, useEffect, useState } from 'react';
 
 import { isMobile } from 'react-device-detect';
 
@@ -9,11 +9,11 @@ import Button from '@mui/material/Button';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
 
-import { ICharacter2, IMaterialRecipeIngredientFull } from '../models/interfaces';
+import { ICharacter2 } from '../models/interfaces';
 import { CharacterTitle } from './character-title';
 import { CharacterDetails } from '../mobile-routes/characters/character-details';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
-import { MiscIcon } from './misc-icon';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { Conditional } from 'src/v2/components/conditional';
 import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
@@ -28,7 +28,7 @@ interface Props {
     showPreviousUnit?: () => void;
 }
 
-export const CharacterItemDialog: React.FC<Props> = props => {
+const CharacterItemDialogFn: React.FC<Props> = props => {
     const { viewPreferences } = useContext(StoreContext);
     const [character, setCharacter] = useState(() => ({ ...props.character }));
     const [inventoryUpdate, setInventoryUpdate] = useState<IUpgradeRecipe[]>([]);
@@ -46,6 +46,10 @@ export const CharacterItemDialog: React.FC<Props> = props => {
 
     const power = CharactersPowerService.getCharacterPower(character);
     const bsValue = CharactersValueService.getCharacterValue(character);
+
+    useEffect(() => {
+        setCharacter(props.character);
+    }, [props.character]);
 
     return (
         <Dialog open={props.isOpen} onClose={props.onClose} fullScreen={isMobile}>
@@ -112,3 +116,5 @@ export const CharacterItemDialog: React.FC<Props> = props => {
         </Dialog>
     );
 };
+
+export const CharacterItemDialog = React.memo(CharacterItemDialogFn);

@@ -1,4 +1,5 @@
 ﻿import { defineConfig } from 'vite';
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import react from '@vitejs/plugin-react';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 import browserslistToEsbuild from 'browserslist-to-esbuild';
@@ -11,10 +12,21 @@ export default defineConfig({
         react({
             jsxImportSource: '@emotion/react',
             babel: {
-                plugins: ['@emotion/babel-plugin'],
+                plugins: ['babel-plugin-react-compiler', '@emotion/babel-plugin'],
             },
         }),
         viteTsconfigPaths(),
+        ViteImageOptimizer({
+            png: {
+                quality: 80,
+            },
+            jpeg: {
+                quality: 75,
+            },
+            webp: {
+                quality: 75,
+            },
+        }),
     ],
     server: {
         // this ensures that the browser opens upon server start
@@ -27,7 +39,8 @@ export default defineConfig({
     },
     resolve: {
         alias: {
-            src: "/src",
+            src: '/src',
+            '@': '/src',
         },
     },
 });

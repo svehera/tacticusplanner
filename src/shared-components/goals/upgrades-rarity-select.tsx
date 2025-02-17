@@ -11,7 +11,7 @@ interface Props {
 
 export const UpgradesRaritySelect: React.FC<Props> = ({ upgradesRarity, upgradesRarityChange }) => {
     return (
-        <div className="flex-box gap5 full-width">
+        <div className="flex gap-3 items-center">
             <MultipleSelectCheckmarks
                 placeholder="Upgrades rarity"
                 selectedValues={upgradesRarity.map(x => Rarity[x])}

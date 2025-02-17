@@ -83,18 +83,20 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
         return () => clearInterval(intervalId);
     }, [contributorsList.length]);
 
-    return contributorsList.length ? (
+    const currentContributor = contributorsList[activeContributorIndex];
+
+    return (
         <FlexBox style={{ flexDirection: 'column' }}>
             <Button style={{ textAlign: 'center' }} component={Link} to={isMobile ? '/mobile/ty' : '/ty'}>
                 Thank you cards
             </Button>
 
-            {sliderMode ? (
+            {sliderMode && currentContributor ? (
                 <div style={{ display: 'flex', justifyContent: 'center', minHeight: 400, gap: 10 }}>
-                    {isMobile && <ThankYouCard contributor={contributorsList[activeContributorIndex]} hide={hide} />}
+                    {isMobile && <ThankYouCard contributor={currentContributor} hide={hide} />}
                     {!isMobile && (
                         <>
-                            <ThankYouCard contributor={contributorsList[activeContributorIndex]} hide={hide} />
+                            <ThankYouCard contributor={currentContributor} hide={hide} />
                             <ThankYouCard contributor={contributorsList[activeContributorIndex + 1]} hide={hide} />
                             <ThankYouCard contributor={contributorsList[activeContributorIndex + 2]} hide={hide} />
                         </>
@@ -108,8 +110,6 @@ export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
                 </div>
             )}
         </FlexBox>
-    ) : (
-        <></>
     );
 };
 
@@ -185,8 +185,8 @@ export const ThankYouCard = ({
                     isContentMaker(contributor)
                         ? 'Content creator'
                         : !isYoutubeCreator(contributor)
-                        ? contributor.type
-                        : ''
+                          ? contributor.type
+                          : ''
                 }
             />
             <CardContent style={{ paddingTop: 0 }}>

@@ -38,22 +38,22 @@ export const MyProgress = () => {
                 />
             );
         },
-        [viewPreferences.myProgressShowCoreCharacters]
+        [viewPreferences.myProgressShowCoreCharacters, campaignsProgress]
     );
 
     return (
         <>
             <ViewSettings preset="myProgress" />
             <h2>Standard Campaigns</h2>
-            <div className="flex-box gap20 column start">
+            <div className="flex flex-col gap-10 justify-start">
                 {standardCampaignsByGroup.map(([group, campaigns]) => (
-                    <div key={group} className="flex-box gap20 wrap">
+                    <div key={group} className="flex gap-10 flex-wrap">
                         {campaigns.map(renderCampaignProgress)}
                     </div>
                 ))}
             </div>
             <h2>Campaign Events</h2>
-            <div className="flex-box gap20 wrap">{CampaignsService.campaignEvents.map(renderCampaignProgress)}</div>
+            <div className="flex gap-10 flex-wrap">{CampaignsService.campaignEvents.map(renderCampaignProgress)}</div>
         </>
     );
 };

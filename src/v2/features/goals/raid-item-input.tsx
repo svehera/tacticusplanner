@@ -33,7 +33,7 @@ export const RaidItemInput: React.FC<Props> = ({ defaultItemsObtained, isDisable
     return (
         <div className="flex-box">
             <div className="flex-box start" style={{ maxWidth: 90 }}>
-                <Button size="small" className="raid-item-button" onClick={decrement} disabled={isDisabled}>
+                <Button size="small" className="w-[30px] !min-w-0" onClick={decrement} disabled={isDisabled}>
                     -
                 </Button>
                 <Input
@@ -49,7 +49,7 @@ export const RaidItemInput: React.FC<Props> = ({ defaultItemsObtained, isDisable
                         className: 'raid-item-input',
                     }}
                 />
-                <Button size="small" className="raid-item-button" onClick={increment} disabled={isDisabled}>
+                <Button size="small" className="w-[30px] !min-w-0" onClick={increment} disabled={isDisabled}>
                     +
                 </Button>
             </div>

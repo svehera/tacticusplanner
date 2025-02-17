@@ -8,7 +8,7 @@ import { RankImage } from 'src/v2/components/images/rank-image';
 import { Rank, Rarity, RarityStars } from 'src/models/enums';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ICellRendererParams } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
 import { rarityCaps } from 'src/v2/features/characters/characters.contants';
 import { IRarityCap } from 'src/v2/features/characters/characters.models';
 import { StarsImage } from 'src/v2/components/images/stars-image';
@@ -95,6 +95,8 @@ export const PotentialInfo: React.FC = () => {
                     </p>
                     <div className="ag-theme-material" style={{ height: 220 }}>
                         <AgGridReact
+                            modules={[AllCommunityModule]}
+                            theme={themeBalham}
                             suppressCellFocus={true}
                             columnDefs={columnDefs}
                             rowHeight={35}

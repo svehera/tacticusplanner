@@ -1,16 +1,16 @@
 ﻿import React, { useMemo, useRef, useState } from 'react';
 
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ValueFormatterParams, ICellRendererParams } from 'ag-grid-community';
+import { ColDef, ValueFormatterParams, ICellRendererParams, AllCommunityModule, themeBalham } from 'ag-grid-community';
 
 import { StaticDataService } from 'src/services';
-import { fitGridOnWindowResize, stringToRank } from 'src/shared-logic/functions';
+import { useFitGridOnWindowResize, stringToRank } from 'src/shared-logic/functions';
 import { FormControl, FormControlLabel, MenuItem, Select, Switch, TextField, Tooltip } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import { Rank, Rarity, RarityString } from 'src/models/enums';
 import { rarityStringToNumber } from 'src/models/constants';
 import { CharacterImage } from 'src/shared-components/character-image';
-import { RankImage } from 'src/shared-components/rank-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { isMobile } from 'react-device-detect';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
@@ -18,6 +18,7 @@ import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
 type Selection = 'Craftable' | 'Base Upgrades';
 
@@ -60,7 +61,7 @@ export const Upgrades = () => {
                         <div key={x.id} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                             <Tooltip title={x.id}>
                                 <span>
-                                    <CharacterImage icon={x.icon} name={x.id} imageSize={30} />
+                                    <CharacterImage icon={x.icon} name={x.id} height={30} />
                                 </span>
                             </Tooltip>
                             <div>
@@ -182,7 +183,7 @@ export const Upgrades = () => {
     }, [selection, showCharacters]);
 
     const rowsData = useMemo(() => {
-        const upgradesLocations = StaticDataService.getUpgradesLocations();
+        const upgradesLocations = UpgradesService.getUpgradesLocations();
         const upgrades = Object.values(StaticDataService.recipeData);
 
         const result: IUpgradesTableRow[] = upgrades.map(x => {
@@ -303,11 +304,13 @@ export const Upgrades = () => {
                 <AgGridReact
                     key={selection}
                     ref={gridRef}
+                    modules={[AllCommunityModule]}
+                    theme={themeBalham}
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true, wrapText: true }}
                     columnDefs={columnDefs}
                     rowData={rows}
-                    onGridReady={fitGridOnWindowResize(gridRef)}></AgGridReact>
+                    onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
             </div>
         </div>
     );

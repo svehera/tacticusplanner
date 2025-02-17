@@ -1,6 +1,8 @@
 ﻿import { SetStateAction } from '../models/interfaces';
 import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
 import { rarityToStars } from 'src/models/constants';
+import { TacticusUnit } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
+import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
 
 export type MowsAction =
     | {
@@ -14,7 +16,7 @@ export type MowsAction =
       }
     | {
           type: 'SyncWithTacticus';
-          mows: IMowDb[];
+          units: TacticusUnit[];
       }
     | SetStateAction<IMow[]>;
 
@@ -42,23 +44,27 @@ export const mowsReducer = (state: IMow[], action: MowsAction) => {
             return [...state];
         }
         case 'SyncWithTacticus': {
-            const { mows } = action;
+            const { units } = action;
 
-            for (const mow of mows) {
-                const existingMowIndex = state.findIndex(x => x.id === mow.id);
+            for (const tacticusUnit of units) {
+                const existingMowIndex = state.findIndex(x => x.tacticusId === tacticusUnit.id);
                 const existingMow = state[existingMowIndex];
 
                 if (!existingMow) {
                     continue;
                 }
+                const [rarity, stars] = TacticusIntegrationService.convertProgressionIndex(
+                    tacticusUnit.progressionIndex
+                );
+
                 state[existingMowIndex] = {
                     ...existingMow,
-                    unlocked: mow.unlocked,
-                    rarity: mow.rarity,
-                    stars: mow.stars,
-                    primaryAbilityLevel: mow.primaryAbilityLevel,
-                    secondaryAbilityLevel: mow.secondaryAbilityLevel,
-                    shards: mow.shards,
+                    unlocked: true,
+                    rarity,
+                    stars,
+                    primaryAbilityLevel: tacticusUnit.abilities[0].level,
+                    secondaryAbilityLevel: tacticusUnit.abilities[1].level,
+                    shards: tacticusUnit.shards,
                 };
             }
 

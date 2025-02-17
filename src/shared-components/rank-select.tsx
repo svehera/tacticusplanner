@@ -2,7 +2,7 @@
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { Rank } from '../models/enums';
 import { rankToString } from '../shared-logic/functions';
-import { RankImage } from './rank-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
 import React from 'react';
 
 export const RankSelect = ({

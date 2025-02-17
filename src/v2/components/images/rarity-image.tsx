@@ -7,7 +7,14 @@ export const RarityImage = ({ rarity }: { rarity: Rarity }) => {
     if (!rarityString) {
         return <span>Invalid rarity</span>;
     }
-    const image = getImageUrl(`rarity/${rarityString.toLowerCase()}.png`);
+    const image = getImageUrl(`rarity/resized/${rarityString.toLowerCase()}.png`);
 
-    return <img loading={'lazy'} style={{ pointerEvents: 'none' }} src={image} height={25} alt={rarityString} />;
+    return (
+        <img
+            loading={'lazy'}
+            style={{ pointerEvents: 'none', maxWidth: 25, maxHeight: 25, width: 'auto', height: 'auto' }}
+            src={image}
+            alt={rarityString}
+        />
+    );
 };

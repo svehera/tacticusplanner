@@ -1,13 +1,20 @@
 ﻿import React, { useContext, useEffect, useMemo, useRef } from 'react';
 
 import { AgGridReact } from 'ag-grid-react';
-import { CellClickedEvent, ColDef, ICellRendererParams, RowSpanParams, RowStyle } from 'ag-grid-community';
+import {
+    AllCommunityModule,
+    CellClickedEvent,
+    ColDef,
+    ICellRendererParams,
+    RowClassParams,
+    RowStyle,
+    themeBalham,
+} from 'ag-grid-community';
 
 import { LreTile } from 'src/v2/features/lre/lre-tile';
-import { RowClassParams } from 'ag-grid-community/dist/lib/entities/gridOptions';
 import { StoreContext } from 'src/reducers/store.provider';
 import { ICharacter2, ILegendaryEventTrack, ILegendaryEventTrackRequirement, ITableRow } from 'src/models/interfaces';
-import { fitGridOnWindowResize } from 'src/shared-logic/functions';
+import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
 import { isMobile } from 'react-device-detect';
 
 interface Props {
@@ -102,6 +109,8 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, editTeam, deleteTeam
                 border: '2px solid black',
             }}>
             <AgGridReact
+                modules={[AllCommunityModule]}
+                theme={themeBalham}
                 ref={gridRef}
                 rowData={rows}
                 rowHeight={35}
@@ -109,7 +118,7 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, editTeam, deleteTeam
                 defaultColDef={defaultColumnDef}
                 columnDefs={columnsDefs}
                 onCellClicked={handleCellCLick}
-                onGridReady={fitGridOnWindowResize(gridRef)}></AgGridReact>
+                onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
         </div>
     );
 };

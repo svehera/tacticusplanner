@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AllCommunityModule, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef } from 'ag-grid-community';
 import { Rank } from 'src/models/enums';
@@ -12,8 +13,8 @@ import { StaticDataService } from 'src/services/static-data.service';
 
 import { ArrowForward } from '@mui/icons-material';
 import { CharacterImage } from 'src/shared-components/character-image';
-import { MiscIcon } from 'src/shared-components/misc-icon';
-import { RankImage } from 'src/shared-components/rank-image';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
 
 interface Props {
     campaignData: CampaignData;
@@ -114,7 +115,7 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
                         <a href={getRankLookupHref(goalData.goalId)}>
                             <CharacterImage
                                 icon={getGoalUnit(goalData.goalId)?.icon ?? '(undefined)'}
-                                imageSize={30}
+                                height={30}
                                 tooltip={getGoalUnit(goalData.goalId)?.icon}
                             />
                         </a>
@@ -167,6 +168,8 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
 
     return (
         <AgGridReact
+            modules={[AllCommunityModule]}
+            theme={themeBalham}
             columnDefs={goalDefs}
             rowData={getGoalData(campaignData)}
             domLayout="autoHeight"

@@ -16,7 +16,7 @@ export const BadgeImage = ({
     if (!rarityString) {
         return <span>Invalid rarity</span>;
     }
-    const image = getImageUrl(`badges/${alliance.toLowerCase()}-${rarityString.toLowerCase()}.png`);
+    const image = getImageUrl(`badges/resized/${alliance.toLowerCase()}-${rarityString.toLowerCase()}.png`);
 
     return <img loading={'lazy'} style={{ pointerEvents: 'none' }} src={image} height={sizePx} alt={alliance} />;
 };

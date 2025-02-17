@@ -5,6 +5,7 @@ export interface IInsightsResponse {
     activeLast7Days: number;
     activeLast30Days: number;
     registeredUsers: number;
+    tacticusIntegrations: number;
     averageRosterDataCreationTime: Date;
     userData: IPersonalCharacterData2[];
     mows: IMowDb[];

@@ -87,6 +87,7 @@ export interface UnitDataRaw {
 export interface IUnitData {
     unitType: UnitType.character;
     id: string;
+    tacticusId?: string;
     alliance: Alliance;
     faction: Faction;
     name: string;
@@ -304,8 +305,6 @@ export interface IGlobalState {
     dailyRaids: IDailyRaids;
     guildWar: IGuildWar;
     guild: IGuild;
-    loading?: boolean;
-    loadingText?: string;
 }
 
 export interface IUserInfo {
@@ -314,7 +313,7 @@ export interface IUserInfo {
     role: UserRole;
     pendingTeamsCount: number;
     rejectedTeamsCount: number;
-    snowprintIdConnected: boolean;
+    tacticusApiKey: string;
 }
 
 export interface IDispatchContext {
@@ -336,8 +335,6 @@ export interface IDispatchContext {
     guild: React.Dispatch<GuildAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined | null>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
-    startLoading: (loadingText?: string) => void;
-    endLoading: () => void;
 }
 
 export interface IPersonalData2 {
@@ -460,6 +457,7 @@ export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IW
     inventoryShowPlusMinus: boolean;
     goalsTableView: boolean;
     myProgressShowCoreCharacters: boolean;
+    apiIntegrationSyncOptions: string[];
 }
 
 export interface IWyoViewSettings {
@@ -683,6 +681,7 @@ export interface IRecipeData {
 export interface IMaterial {
     material: string;
     label?: string;
+    tacticusId?: string;
     rarity: string;
     craftable: boolean;
     stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';

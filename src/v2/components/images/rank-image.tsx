@@ -8,10 +8,15 @@ export const RankImage = ({ rank, rankPoint5, size = 30 }: { rank: Rank; rankPoi
     }
 
     const rankTextValue = Rank[rank];
-    const image = getImageUrl(`ranks/${rankTextValue.toLowerCase()}.png`);
+    const image = getImageUrl(`ranks/resized/${rankTextValue.toLowerCase()}.png`);
     return (
         <>
-            <img loading={'lazy'} style={{ pointerEvents: 'none' }} src={image} height={size} alt={rankTextValue} />
+            <img
+                loading={'lazy'}
+                style={{ pointerEvents: 'none', width: 'auto', height: 'auto', maxWidth: size, maxHeight: size }}
+                src={image}
+                alt={rankTextValue}
+            />
             {rankPoint5 && '.5'}
         </>
     );

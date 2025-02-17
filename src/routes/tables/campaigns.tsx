@@ -1,21 +1,25 @@
 ﻿import React, { useMemo, useRef, useState } from 'react';
 
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, RowStyle, RowClassParams, ICellRendererParams } from 'ag-grid-community';
+import {
+    AllCommunityModule,
+    ColDef,
+    RowStyle,
+    RowClassParams,
+    ICellRendererParams,
+    ValueGetterParams,
+    themeBalham,
+} from 'ag-grid-community';
 
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { Campaign } from 'src/models/enums';
-import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
 import { StaticDataService } from 'src/services';
-import { fitGridOnWindowResize } from 'src/shared-logic/functions';
+import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import { isNil, uniq } from 'lodash';
+import { uniq } from 'lodash';
 import { useQueryState } from 'src/v2/hooks/query-state';
-import { LreSection } from 'src/v2/features/lre/lre.models';
-import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { ICharacterUpgradeEstimate } from 'src/v2/features/goals/goals.models';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { FactionImage } from 'src/v2/components/images/faction-image';
 
@@ -129,10 +133,6 @@ export const Campaigns = () => {
 
     const rows = useMemo(() => StaticDataService.campaignsGrouped[campaign], [campaign]);
 
-    const getRowStyle = (params: RowClassParams<ICampaignBattleComposed>): RowStyle => {
-        return { background: (params.node.rowIndex ?? 0) % 2 === 0 ? 'lightsteelblue' : 'white' };
-    };
-
     const uniqEnemiesFactions = uniq(rows.flatMap(x => x.enemiesFactions));
     const uniqEnemiesTypes = uniq(rows.flatMap(x => x.enemiesTypes));
     const threeSlotsNodes = uniq(rows.filter(x => x.slots === 3));
@@ -178,13 +178,14 @@ export const Campaigns = () => {
 
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 220px)', width: '100%' }}>
                 <AgGridReact
+                    modules={[AllCommunityModule]}
+                    theme={themeBalham}
                     ref={gridRef}
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
                     columnDefs={columnDefs}
                     rowData={rows}
-                    getRowStyle={getRowStyle}
-                    onGridReady={fitGridOnWindowResize(gridRef)}></AgGridReact>
+                    onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
             </div>
         </div>
     );

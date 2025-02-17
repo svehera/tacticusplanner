@@ -35,7 +35,7 @@ export const EditAscendGoal: React.FC<Props> = ({ goal, possibleLocations, unloc
 
     return (
         <>
-            <div className="flex-box gap10 full-width">
+            <div className="flex gap-3">
                 <RaritySelect
                     label={'Current Rarity'}
                     rarityValues={rarityValues}
@@ -51,7 +51,7 @@ export const EditAscendGoal: React.FC<Props> = ({ goal, possibleLocations, unloc
                 />
             </div>
 
-            <div className="flex-box gap10 full-width">
+            <div className="flex gap-3">
                 <StarsSelect
                     label={'Current stars'}
                     starsValues={starsEntries}
@@ -66,7 +66,7 @@ export const EditAscendGoal: React.FC<Props> = ({ goal, possibleLocations, unloc
                 />
             </div>
 
-            <div className="flex-box gap5 wrap">
+            <div className="flex gap-2">
                 {possibleLocations.map(location => (
                     <CampaignLocation
                         key={location.id}
@@ -77,7 +77,7 @@ export const EditAscendGoal: React.FC<Props> = ({ goal, possibleLocations, unloc
             </div>
 
             {!!possibleLocations.length && (
-                <div className="flex-box gap10 full-width">
+                <div className="flex gap-3">
                     <div style={{ width: '50%' }}>
                         <CampaignsUsageSelect
                             disabled={!unlockedLocations.length}

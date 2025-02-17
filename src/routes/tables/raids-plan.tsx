@@ -2,7 +2,7 @@
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { FlexBox } from 'src/v2/components/flex-box';
-import { MiscIcon } from 'src/shared-components/misc-icon';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 import PendingIcon from '@mui/icons-material/Pending';
 import Button from '@mui/material/Button';
 import { isMobile } from 'react-device-detect';
@@ -87,7 +87,7 @@ export const RaidsPlan: React.FC<Props> = ({
         <Accordion>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                    <div className="flex-box gap5 wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
+                    <div className="flex gap-2 items-center flex-wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                         <span>
                             Raids plan (<b>{daysTotal}</b> Days |
                         </span>
@@ -109,7 +109,7 @@ export const RaidsPlan: React.FC<Props> = ({
                 {!!estimatedRanks.relatedUpgrades.length && (
                     <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <div className="flex-box gap5" style={{ fontSize: isMobile ? 16 : 20 }}>
+                            <div className="flex gap-2 items-center flex-wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <InventoryIcon />
                                 <b>{estimatedRanks.relatedUpgrades.length}</b> related upgrades (Inventory)
                             </div>
@@ -122,7 +122,7 @@ export const RaidsPlan: React.FC<Props> = ({
                 {!!estimatedRanks.inProgressMaterials.length && (
                     <Accordion TransitionProps={{ unmountOnExit: !grid1Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <div className="flex-box gap5" style={{ fontSize: isMobile ? 16 : 20 }}>
+                            <div className="flex gap-2 items-center flex-wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <PendingIcon color={'primary'} />
                                 <b>{estimatedRanks.inProgressMaterials.length}</b> in progress upgrades
                             </div>
@@ -140,7 +140,7 @@ export const RaidsPlan: React.FC<Props> = ({
                 {!!estimatedRanks.finishedMaterials.length && (
                     <Accordion TransitionProps={{ unmountOnExit: !grid3Loaded }}>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <div className="flex-box gap5" style={{ fontSize: isMobile ? 16 : 20 }}>
+                            <div className="flex gap-2 items-center flex-wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
                                 <CheckCircleIcon color={'success'} /> <b>{estimatedRanks.finishedMaterials.length}</b>{' '}
                                 finished upgrades
                             </div>
@@ -160,7 +160,9 @@ export const RaidsPlan: React.FC<Props> = ({
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <AccessibleTooltip
                                 title={`You don't any have location for ${estimatedRanks.blockedMaterials.length} upgrades`}>
-                                <div className="flex-box gap5" style={{ fontSize: isMobile ? 16 : 20 }}>
+                                <div
+                                    className="flex gap-2 items-center flex-wrap"
+                                    style={{ fontSize: isMobile ? 16 : 20 }}>
                                     <Warning color={'warning'} />
                                     <b>{estimatedRanks.blockedMaterials.length}</b> blocked upgrades
                                 </div>
@@ -186,7 +188,9 @@ export const RaidsPlan: React.FC<Props> = ({
                     <Accordion>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <FlexBox style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-                                <div className="flex-box gap5 wrap" style={{ fontSize: isMobile ? 16 : 20 }}>
+                                <div
+                                    className="flex gap-2 items-center flex-wrap"
+                                    style={{ fontSize: isMobile ? 16 : 20 }}>
                                     <span>
                                         Shards Raids (<b>{estimatedShards.daysTotal}</b> Days |
                                     </span>

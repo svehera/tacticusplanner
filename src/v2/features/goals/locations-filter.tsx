@@ -103,7 +103,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
         };
 
         return (
-            <div className="flex-box gap5">
+            <div className="flex items-center gap-3">
                 <MultipleSelectCheckmarks
                     size="small"
                     placeholder="Alliances"
@@ -144,7 +144,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     <h5>Enemies</h5>
                     {renderUnitsFilter('enemies', currFilter.enemiesAlliance, currFilter.enemiesFactions)}
 
-                    <div className="flex-box gap5" style={{ marginTop: 10 }}>
+                    <div className="flex items-center gap-3" style={{ marginTop: 10 }}>
                         <MultipleSelectCheckmarks
                             size="small"
                             placeholder="Enemies Count"
@@ -171,7 +171,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     </div>
 
                     <h5>Locations</h5>
-                    <div className="flex-box gap5">
+                    <div className="flex items-center gap-3">
                         <MultipleSelectCheckmarks
                             size="small"
                             placeholder="Types"

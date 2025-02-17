@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-material.css';
 import 'react-medium-image-zoom/dist/styles.css';
-import './index.scss';
+import './index.css';
 
 import reportWebVitals from './monitoring/reportWebVitals';
 
@@ -14,7 +12,9 @@ import { AuthProvider } from './contexts/auth.provider';
 import { closeSnackbar, SnackbarOrigin, SnackbarProvider } from 'notistack';
 import { isMobile } from 'react-device-detect';
 import { routes } from './app-routing';
+import { PopupProvider } from 'react-popup-manager';
 import { TitleProvider } from 'src/contexts/title.provider';
+import { LoaderProvider } from 'src/contexts/loader.provider';
 import { StoreProvider } from 'src/reducers/store.provider2';
 import analytics from './monitoring/analytics';
 
@@ -23,23 +23,27 @@ const mobileSnackbarOrigin: SnackbarOrigin = { vertical: 'top', horizontal: 'cen
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-    // <React.StrictMode>
-    <AnalyticsProvider instance={analytics}>
-        <AuthProvider>
-            <TitleProvider>
-                <SnackbarProvider
-                    autoHideDuration={5000}
-                    anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
-                    onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
-                />
-                <StoreProvider>
-                    <RouterProvider router={routes} />
-                </StoreProvider>
-            </TitleProvider>
-        </AuthProvider>
-    </AnalyticsProvider>
-
-    // </React.StrictMode>
+    <React.StrictMode>
+        <AnalyticsProvider instance={analytics}>
+            <AuthProvider>
+                <TitleProvider>
+                    <LoaderProvider>
+                        <SnackbarProvider
+                            autoHideDuration={5000}
+                            anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
+                            onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
+                        />
+                        <StoreProvider>
+                            {/*// @ts-expect-error Ts being weird */}
+                            <PopupProvider>
+                                <RouterProvider router={routes} />
+                            </PopupProvider>
+                        </StoreProvider>
+                    </LoaderProvider>
+                </TitleProvider>
+            </AuthProvider>
+        </AnalyticsProvider>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

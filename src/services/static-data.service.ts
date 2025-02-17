@@ -119,7 +119,7 @@ export class StaticDataService {
     static convertRecipeData(): IRecipeDataFull {
         const result: IRecipeDataFull = {};
         const upgrades = Object.keys(this.recipeData);
-        const upgradeLocations = this.getUpgradesLocations();
+        const upgradeLocations = UpgradesService.getUpgradesLocations();
 
         const getRecipe = (
             materialId: string,
@@ -335,7 +335,6 @@ export class StaticDataService {
                 })
                 .filter(x => !!x);
 
-            // eslint-disable-next-line no-constant-condition
             if (character.rankPoint5) {
                 const lastRankUpgrades = characterUpgrades[rankToString(character.rankEnd)];
                 if (lastRankUpgrades) {
@@ -465,7 +464,7 @@ export class StaticDataService {
             const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
             return location.nodeNumber <= campaignProgress;
         });
-        const selectedLocations = bestLocations?.length ? bestLocations : material.locationsComposed ?? [];
+        const selectedLocations = bestLocations?.length ? bestLocations : (material.locationsComposed ?? []);
 
         const ownedCount = ownedUpgrades[material.id] ?? 0;
         const craftedCount = craftedBasedUpgrades[material.id] ?? 0;
@@ -513,12 +512,12 @@ export class StaticDataService {
         const dailyBattles = sum(selectedLocations.map(x => x.dailyBattleCount));
         const locations = selectedLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
         const missingLocationsString = !bestLocations.length
-            ? material.locationsComposed
+            ? (material.locationsComposed
                   ?.filter(x => {
                       return !bestLocations.some(y => x.campaign === y.campaign && x.nodeNumber === y.nodeNumber);
                   })
                   .map(x => x.campaign + ' ' + x.nodeNumber)
-                  .join(', ') ?? ''
+                  .join(', ') ?? '')
             : lockedLocations.map(x => x.campaign + ' ' + x.nodeNumber).join(', ');
 
         return {

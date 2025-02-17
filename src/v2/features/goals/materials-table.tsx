@@ -1,10 +1,17 @@
 ﻿import React, { useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ColGroupDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
+import {
+    AllCommunityModule,
+    ColDef,
+    ColGroupDef,
+    ICellRendererParams,
+    ValueFormatterParams,
+    CellEditingStoppedEvent,
+    themeBalham,
+} from 'ag-grid-community';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { isMobile } from 'react-device-detect';
 import { Rarity } from 'src/models/enums';
-import { CellEditingStoppedEvent } from 'ag-grid-community/dist/lib/events';
 import InfoIcon from '@mui/icons-material/Info';
 import { ICharacterUpgradeEstimate } from 'src/v2/features/goals/goals.models';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
@@ -80,7 +87,7 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                     return inventory[params.data!.id] ?? 0;
                 },
                 valueSetter: event => {
-                    inventory[event.data.id] = event.newValue;
+                    updateMaterialQuantity(event.data.id, event.newValue);
                     return true;
                 },
                 headerName: 'Inventory',
@@ -276,6 +283,8 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                 </span>
             </div>
             <AgGridReact
+                modules={[AllCommunityModule]}
+                theme={themeBalham}
                 onCellEditingStopped={saveChanges}
                 suppressChangeDetection={true}
                 singleClickEdit={true}

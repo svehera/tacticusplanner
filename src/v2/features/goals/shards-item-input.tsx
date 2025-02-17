@@ -15,6 +15,7 @@ export const ShardsItemInput: React.FC<Props> = ({ shardsRaid, handleAdd }) => {
 
     const handleAddCount = (value: number, location: IItemRaidLocation) => {
         handleAdd(shardsRaid.characterId, value, location);
+        // eslint-disable-next-line react-compiler/react-compiler
         shardsRaid.acquiredCount += value;
         location.isCompleted = true;
     };

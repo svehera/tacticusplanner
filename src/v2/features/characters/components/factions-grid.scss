@@ -1,4 +1,6 @@
-﻿$factionsCount: 18;
+﻿@use 'sass:math';
+
+$factionsCount: 18;
 
 $columnCount5: 5;
 $columnCount4: 4;
@@ -8,7 +10,7 @@ $columnCount2: 2;
 $maxWidth: 525;
 
 @mixin responsiveGrid($columns, $maxWidth) {
-    $roundedRows: ceil(calc($factionsCount / $columns));
+    $roundedRows: math.ceil(calc($factionsCount / $columns));
     @media (max-width: #{$maxWidth}px) {
         grid-template-rows: repeat(#{$roundedRows}, 1fr);
     }
@@ -21,7 +23,7 @@ $maxWidth: 525;
     justify-content: center;
 
     /* 5 columns */
-    $roundedRows5: ceil(calc($factionsCount / $columnCount5));
+    $roundedRows5: math.ceil(calc($factionsCount / $columnCount5));
     grid-template-rows: repeat(#{$roundedRows5}, 1fr);
 
     /* Media queries for different column configurations */

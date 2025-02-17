@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
+import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions, themeBalham } from 'ag-grid-community';
 import { ColDef } from 'ag-grid-community';
 
 import { ICharacterUnlockGoal, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
@@ -11,7 +12,7 @@ import { StaticDataService } from 'src/services/static-data.service';
 
 import { ArrowForward } from '@mui/icons-material';
 import { CharacterImage } from 'src/shared-components/character-image';
-import { RarityImage } from 'src/shared-components/rarity-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
 
 interface Props {
@@ -79,7 +80,7 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
                     return (
                         <CharacterImage
                             icon={getGoalUnit(goalData.goalId)?.icon ?? '(undefined)'}
-                            imageSize={30}
+                            height={30}
                             tooltip={getGoalUnit(goalData.goalId)?.icon}
                         />
                     );
@@ -145,6 +146,8 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
 
     return (
         <AgGridReact
+            modules={[AllCommunityModule]}
+            theme={themeBalham}
             columnDefs={goalDefs}
             rowData={getGoalData(campaignData)}
             domLayout="autoHeight"

@@ -10,11 +10,55 @@ import { LoginUserDialog } from 'src/shared-components/user-menu/login-user-dial
 import { SearchParamsStateProvider } from 'src/contexts/search-params.provider';
 import { StoreContext } from 'src/reducers/store.provider';
 import { Loader } from 'src/v2/components/loader';
+import { createTheme, ThemeProvider } from '@mui/material';
+import { useLoader } from 'src/contexts/loader.context';
+
+const lightTheme = createTheme({
+    colorSchemes: {
+        light: true,
+    },
+    palette: {
+        mode: 'light', // Ensure the mode is set to dark for dark mode
+    },
+});
+
+const darkTheme = createTheme({
+    colorSchemes: {
+        dark: true,
+    },
+    palette: {
+        mode: 'dark', // Ensure the mode is set to dark for dark mode
+    },
+    components: {
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: 'var(--overlay)',
+                },
+            },
+        },
+        MuiAccordion: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: 'var(--secondary)',
+                },
+            },
+        },
+        MuiToolbar: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: 'var(--navbar)',
+                },
+            },
+        },
+    },
+});
 
 export const App = () => {
     localStorage.setItem('appVersion', StaticDataService.whatsNew.currentVersion);
     const { isAuthenticated } = useAuth();
-    const { loading, loadingText } = useContext(StoreContext);
+    const { viewPreferences } = useContext(StoreContext);
+    const { loading, loadingText } = useLoader();
 
     const [showLoginStatus, setShowLoginStatus] = useState(false);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
@@ -48,7 +92,7 @@ export const App = () => {
     };
 
     return (
-        <React.Fragment>
+        <ThemeProvider theme={viewPreferences.theme === 'dark' ? darkTheme : lightTheme}>
             {showLoginStatus && (
                 <LoginStatusDialog
                     onClose={handleClose}
@@ -69,6 +113,6 @@ export const App = () => {
                 <Outlet />
             </SearchParamsStateProvider>
             <Loader loading={!!loading} loadingText={loadingText} />
-        </React.Fragment>
+        </ThemeProvider>
     );
 };

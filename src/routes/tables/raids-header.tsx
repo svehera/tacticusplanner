@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import LinkIcon from '@mui/icons-material/Link';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { MiscIcon } from 'src/shared-components/misc-icon';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ClearIcon from '@mui/icons-material/Clear';
 import DailyRaidsSettings from 'src/shared-components/daily-raids-settings';

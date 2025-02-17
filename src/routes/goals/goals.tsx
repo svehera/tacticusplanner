@@ -16,7 +16,7 @@ import { FormControlLabel, Switch } from '@mui/material';
 import GridViewIcon from '@mui/icons-material/GridView';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { GoalsTable } from 'src/routes/goals/goals-table';
-import { MiscIcon } from 'src/shared-components/misc-icon';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
 import { goalsLimit, rankToLevel } from 'src/models/constants';
 import { sum } from 'lodash';
@@ -211,7 +211,7 @@ export const Goals = () => {
 
     return (
         <div>
-            <div className="flex-box gap10 wrap">
+            <div className="flex gap-5 flex-wrap items-center">
                 <Button
                     size="small"
                     variant={'contained'}
@@ -245,7 +245,7 @@ export const Goals = () => {
 
             {!!upgradeRankOrMowGoals.length && (
                 <div>
-                    <div className="flex-box gap5 wrap" style={{ fontSize: 20, margin: '20px 0' }}>
+                    <div className="flex gap5 flex-wrap items-center" style={{ fontSize: 20, margin: '20px 0' }}>
                         <span>
                             Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
                         </span>
@@ -258,7 +258,7 @@ export const Goals = () => {
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (
-                        <div className="flex-box gap10 wrap goals" style={{ alignItems: 'unset' }}>
+                        <div className="flex gap-3 flex-wrap">
                             {upgradeRankOrMowGoals.map(goal => (
                                 <GoalCard
                                     key={goal.goalId}
@@ -295,7 +295,7 @@ export const Goals = () => {
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (
-                        <div className="flex-box gap10 wrap goals" style={{ alignItems: 'unset' }}>
+                        <div className="flex gap-3 flex-wrap">
                             {shardsGoals.map(goal => (
                                 <GoalCard
                                     key={goal.goalId}
@@ -324,7 +324,7 @@ export const Goals = () => {
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (
-                        <div className="flex-box gap10 wrap goals" style={{ alignItems: 'unset' }}>
+                        <div className="flex gap-3 flex-wrap">
                             {upgradeAbilities.map(goal => (
                                 <GoalCard
                                     key={goal.goalId}

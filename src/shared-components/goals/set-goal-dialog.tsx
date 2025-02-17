@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
+﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import {
     DialogActions,
@@ -91,10 +91,12 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             return [];
         }
 
-        const result = getEnumValues(Rank).filter(x => x > 0 && (!unit || x >= unit.rank) && x <= maxRank);
-        setForm(curr => ({ ...curr, targetRank: result[0] }));
-        return result;
+        return getEnumValues(Rank).filter(x => x > 0 && (!unit || x >= unit.rank) && x <= maxRank);
     }, [unit, maxRank]);
+
+    useEffect(() => {
+        setForm(curr => ({ ...curr, targetRank: rankValues[0] }));
+    }, [rankValues]);
 
     const allowedCharacters: IUnit[] = useMemo(() => {
         switch (form.type) {
@@ -218,7 +220,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 </DialogTitle>
 
                 <DialogContent style={{ paddingTop: 10 }}>
-                    <Box id="set-goal-form" className="flex-box column gap20 full-width start">
+                    <Box id="set-goal-form" className="flex flex-col gap-5">
                         <Conditional
                             condition={[
                                 PersonalGoalType.UpgradeRank,
@@ -228,7 +230,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             <IgnoreRankRarity value={ignoreRankRarity} onChange={setIgnoreRankRarity} />
                         </Conditional>
 
-                        <div className="flex-box gap10 full-width">
+                        <div className="flex gap-3">
                             <FormControl fullWidth>
                                 <InputLabel id="goal-type-label">Goal Type</InputLabel>
                                 <Select<PersonalGoalType>
@@ -275,7 +277,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
                         {form.type === PersonalGoalType.MowAbilities && isMow(unit) && (
                             <>
-                                <div className="flex-box gap5 full-width between">
+                                <div className="flex gap-3">
                                     <NumberInput
                                         key={unit.id + 'primary'}
                                         fullWidth
@@ -317,7 +319,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
                         {form.type === PersonalGoalType.CharacterAbilities && isCharacter(unit) && (
                             <>
-                                <div className="flex-box gap5 full-width between">
+                                <div className="flex gap-3">
                                     <NumberInput
                                         key={unit.id + 'primary'}
                                         fullWidth

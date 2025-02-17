@@ -150,11 +150,11 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
-            <DialogTitle style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
+            <DialogTitle className="flex gap3 items-center">
                 <span>Edit {PersonalGoalType[goal.type]} Goal</span> <CharacterImage icon={goal.unitIcon} />
             </DialogTitle>
             <DialogContent style={{ paddingTop: 20 }}>
-                <Box id="edit-goal-form" className="flex-box column gap20 full-width start">
+                <Box id="edit-goal-form" className="flex flex-col gap-5">
                     <PrioritySelect
                         value={form.priority}
                         maxValue={goals.length}
@@ -163,7 +163,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
                     {form.type === PersonalGoalType.UpgradeRank && (
                         <>
-                            <div className="flex-box gap10 between full-width wrap">
+                            <div className="flex gap-5">
                                 <RankSelect
                                     label={'Current Rank'}
                                     rankValues={currentRankValues}
@@ -210,7 +210,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
                     {form.type === PersonalGoalType.MowAbilities && isMow(unit) && (
                         <>
-                            <div className="flex-box gap5 full-width between">
+                            <div className="flex gap-3">
                                 <NumberInput
                                     fullWidth
                                     label="Primary current level"
@@ -236,7 +236,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     }}
                                 />
                             </div>
-                            <div className="flex-box gap5 full-width between">
+                            <div className="flex gap-3">
                                 <NumberInput
                                     fullWidth
                                     label="Secondary current level"
@@ -295,7 +295,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
                     {form.type === PersonalGoalType.CharacterAbilities && isCharacter(unit) && (
                         <>
-                            <div className="flex-box gap5 full-width between">
+                            <div className="flex gap-3">
                                 <NumberInput
                                     fullWidth
                                     label="Active current level"
@@ -321,7 +321,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     }}
                                 />
                             </div>
-                            <div className="flex-box gap5 full-width between">
+                            <div className="flex gap-3">
                                 <NumberInput
                                     fullWidth
                                     label="Passive current level"
@@ -357,7 +357,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 value={form.shards}
                                 valueChange={value => setForm(curr => ({ ...curr, shards: value }))}
                             />
-                            <div className="flex-box gap5 wrap">
+                            <div className="flex gap-2 flex-wrap">
                                 {possibleLocations.map(location => (
                                     <CampaignLocation
                                         key={location.id}

@@ -4,6 +4,7 @@
     display: grid;
     grid-auto-flow: row;
     justify-content: center;
+    margin-top: 10px;
 
     grid-template-rows: repeat(5, 1fr);
     grid-template-columns: repeat(3, minmax(180px, 400px));
@@ -11,6 +12,4 @@
     @media (max-width: 800px) {
         grid-template-columns: repeat(3, minmax(33%, 400px));
     }
-
-    margin-top: 10px;
 }

@@ -1,17 +1,13 @@
-﻿import React, { useContext, useEffect, useState } from 'react';
+﻿import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { isMobile } from 'react-device-detect';
 import { sum } from 'lodash';
 
-import { Conditional } from 'src/v2/components/conditional';
-
 import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { ViewControls } from 'src/v2/features/characters/components/view-controls';
 import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
-import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
-import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
 import { IMow, IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
@@ -40,10 +36,8 @@ export const WhoYouOwn = () => {
         orderBy: viewPreferences.wyoOrder,
     });
     const [nameFilter, setNameFilter] = useState<string | null>(null);
-    const [openCharacterItemDialog, setOpenCharacterItemDialog] = React.useState(false);
     const [editedCharacter, setEditedCharacter] = React.useState<ICharacter2 | null>(null);
     const [editedInventory, setEditedInventory] = React.useState<Record<string, number>>({});
-    const [openEditMowDialog, setOpenEditMowDialog] = React.useState(false);
     const [editedMow, setEditedMow] = React.useState<IMow | null>(null);
 
     const [searchParams] = useSearchParams();
@@ -54,55 +48,62 @@ export const WhoYouOwn = () => {
     const hasShareParams = !!sharedUser && !!shareToken;
 
     if (hasShareParams) {
-        useEffect(() => {
-            navigate((isMobile ? '/mobile' : '') + `/sharedRoster?username=${sharedUser}&shareToken=${shareToken}`);
-        }, []);
+        navigate((isMobile ? '/mobile' : '') + `/sharedRoster?username=${sharedUser}&shareToken=${shareToken}`);
         return <></>;
     }
 
-    const charactersFiltered = CharactersService.filterUnits(
-        [...charactersDefault, ...mows],
-        viewControls.filterBy,
-        nameFilter
-    );
+    const factionsView = isFactionsView(viewControls.orderBy);
+    const charactersView = isCharactersView(viewControls.orderBy);
 
-    const totalPower = sum(charactersFiltered.map(character => CharactersPowerService.getCharacterPower(character)));
-    const totalValue = sum(charactersFiltered.map(character => CharactersValueService.getCharacterValue(character)));
+    const charactersFiltered = useMemo(() => {
+        return CharactersService.filterUnits([...charactersDefault, ...mows], viewControls.filterBy, nameFilter);
+    }, [viewControls.filterBy, nameFilter, mows, charactersDefault]);
 
-    const factions = CharactersService.orderByFaction(charactersFiltered, viewControls.orderBy);
-    const units = CharactersService.orderUnits(
-        factions.flatMap(f => f.units),
-        viewControls.orderBy
-    );
+    const factions = useMemo(() => {
+        return CharactersService.orderByFaction(
+            charactersFiltered,
+            viewControls.orderBy,
+            viewPreferences.showBsValue,
+            viewPreferences.showPower
+        );
+    }, [charactersFiltered, viewControls.orderBy, viewPreferences.showBsValue, viewPreferences.showPower]);
 
-    const updatePreferences = (value: IViewControls) => {
+    const totalPower = useMemo(() => sum(factions.map(faction => faction.power)), [factions]);
+    const totalValue = useMemo(() => sum(factions.map(faction => faction.bsValue)), [factions]);
+
+    const units = useMemo(() => {
+        return CharactersService.orderUnits(
+            factions.flatMap(f => f.units),
+            viewControls.orderBy
+        );
+    }, [factions, viewControls.orderBy]);
+
+    const updatePreferences = useCallback((value: IViewControls) => {
         setViewControls(value);
         dispatch.viewPreferences({ type: 'Update', setting: 'wyoOrder', value: value.orderBy });
         dispatch.viewPreferences({ type: 'Update', setting: 'wyoFilter', value: value.filterBy });
-    };
+    }, []);
 
-    const updateMow = (mow: IMow) => {
+    const updateMow = useCallback((mow: IMow) => {
         endEditUnit();
         dispatch.inventory({
             type: 'DecrementUpgradeQuantity',
             upgrades: Object.entries(editedInventory).map(([id, count]) => ({ id, count })),
         });
         dispatch.mows({ type: 'Update', mow });
-    };
+    }, []);
 
-    const startEditUnit = (unit: IUnit): void => {
+    const startEditUnit = useCallback((unit: IUnit): void => {
         if (unit.unitType === UnitType.character) {
             setEditedCharacter(unit);
-            setOpenCharacterItemDialog(true);
-            setOpenEditMowDialog(false);
+            setEditedMow(null);
         }
 
         if (unit.unitType === UnitType.mow) {
             setEditedMow(unit);
-            setOpenEditMowDialog(true);
-            setOpenCharacterItemDialog(false);
+            setEditedCharacter(null);
         }
-    };
+    }, []);
 
     const startEditNextUnit = (currentUnit: IUnit): void => {
         const indexOfNextUnit = units.findIndex(x => x.id === currentUnit.id) + 1;
@@ -116,48 +117,35 @@ export const WhoYouOwn = () => {
         startEditUnit(previousUnit);
     };
 
-    const endEditUnit = (): void => {
+    const endEditUnit = useCallback((): void => {
         setEditedCharacter(null);
-        setOpenCharacterItemDialog(false);
-
         setEditedMow(null);
-        setOpenEditMowDialog(false);
-    };
+    }, []);
 
     return (
         <Box style={{ margin: 'auto' }}>
-            <CharactersViewContext.Provider
-                value={{
-                    showAbilitiesLevel: viewPreferences.showAbilitiesLevel,
-                    showBadges: viewPreferences.showBadges,
-                    showPower: viewPreferences.showPower,
-                    showBsValue: viewPreferences.showBsValue,
-                    showCharacterLevel: viewPreferences.showCharacterLevel,
-                    showCharacterRarity: viewPreferences.showCharacterRarity,
-                }}>
+            <CharactersViewContext.Provider value={viewPreferences}>
                 <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
                     {!!isLoggedIn && <ShareRoster isRosterShared={!!isRosterShared} />}
                     <TeamGraph units={charactersFiltered} />
                 </RosterHeader>
                 <ViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
 
-                <Conditional condition={isFactionsView(viewControls.orderBy)}>
-                    <FactionsGrid factions={factions} onCharacterClick={startEditUnit} />
-                </Conditional>
+                {factionsView && <FactionsGrid factions={factions} onCharacterClick={startEditUnit} />}
 
-                <Conditional condition={isCharactersView(viewControls.orderBy)}>
+                {charactersView && (
                     <CharactersGrid
                         characters={units}
                         onAvailableCharacterClick={startEditUnit}
                         onLockedCharacterClick={startEditUnit}
                     />
-                </Conditional>
+                )}
 
                 {editedCharacter && (
                     <CharacterItemDialog
                         key={editedCharacter.id}
                         character={editedCharacter}
-                        isOpen={openCharacterItemDialog}
+                        isOpen={!!editedCharacter}
                         showNextUnit={() => startEditNextUnit(editedCharacter)}
                         showPreviousUnit={() => startEditPreviousUnit(editedCharacter)}
                         onClose={endEditUnit}
@@ -169,7 +157,7 @@ export const WhoYouOwn = () => {
                         key={editedMow.id}
                         mow={editedMow}
                         saveChanges={updateMow}
-                        isOpen={openEditMowDialog}
+                        isOpen={!!editedMow}
                         onClose={endEditUnit}
                         inventory={inventory.upgrades}
                         showNextUnit={updatedMow => {

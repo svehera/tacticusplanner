@@ -2,12 +2,18 @@
 import './dirty-dozen-table.css';
 import { IDirtyDozenChar } from './dirty-dozen.models';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ColGroupDef, ICellRendererParams } from 'ag-grid-community';
+import {
+    AllCommunityModule,
+    ColDef,
+    ColGroupDef,
+    ICellRendererParams,
+    ValueGetterParams,
+    themeBalham,
+} from 'ag-grid-community';
 import { Score } from 'src/v2/features/dirty-dozen/dirty-dozen-score';
 import { CharacterTitle } from 'src/shared-components/character-title';
-import { ValueGetterParams } from 'ag-grid-community/dist/lib/entities/colDef';
-import { RarityImage } from 'src/shared-components/rarity-image';
-import { RankImage } from 'src/shared-components/rank-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
 import { ICharacter2 } from 'src/models/interfaces';
 
 export const DirtyDozenTable = ({ characters, rows }: { characters: ICharacter2[]; rows: IDirtyDozenChar[] }) => {
@@ -85,6 +91,8 @@ export const DirtyDozenTable = ({ characters, rows }: { characters: ICharacter2[
     return (
         <div className="ag-theme-material dirty-dozen-table">
             <AgGridReact
+                modules={[AllCommunityModule]}
+                theme={themeBalham}
                 suppressCellFocus={true}
                 defaultColDef={defaultColDef}
                 columnDefs={columnDefs}

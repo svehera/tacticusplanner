@@ -1,4 +1,5 @@
 ﻿import React, { useContext, useMemo, useState } from 'react';
+import { AllCommunityModule, themeBalham } from 'ag-grid-community';
 
 import {
     ICharacter2,
@@ -16,7 +17,7 @@ import { ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-commu
 import { useSearchParams } from 'react-router-dom';
 import { UpgradeImage } from '../../shared-components/upgrade-image';
 import { RankSelect } from '../../shared-components/rank-select';
-import { MiscIcon } from '../../shared-components/misc-icon';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { FormControlLabel, Popover, Switch } from '@mui/material';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { ArrowForward, Info } from '@mui/icons-material';
@@ -42,14 +43,14 @@ export const RankLookup = () => {
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        return queryParamsRank ? Rank[queryParamsRank] ?? Rank.Stone1 : Rank.Stone1;
+        return queryParamsRank ? (Rank[queryParamsRank] ?? Rank.Stone1) : Rank.Stone1;
     });
     const [rankEnd, setRankEnd] = useState<Rank>(() => {
         const queryParamsRank = searchParams.get('rankEnd');
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        return queryParamsRank ? Rank[queryParamsRank] ?? Rank.Stone2 : Rank.Stone2;
+        return queryParamsRank ? (Rank[queryParamsRank] ?? Rank.Stone2) : Rank.Stone2;
     });
     const [rankPoint5, setRankPoint5] = useState<boolean>(() => {
         const queryParamsRankPoint5 = searchParams.get('rankPoint5');
@@ -57,19 +58,14 @@ export const RankLookup = () => {
         return !!queryParamsRankPoint5 && queryParamsRankPoint5 === 'true';
     });
 
-    const [message, setMessage] = useState<string>('Upgrades:');
-    const [totalGold, setTotalGold] = useState<number>(0);
-
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLElement | null>(null);
     const [materialRecipe, setMaterialRecipe] = React.useState<IMaterialFull | null>(null);
 
     const upgrades = useMemo<IMaterialFull[]>(() => {
         if (!character) {
-            setMessage('Select character');
             return [];
         }
 
-        setMessage('Upgrades:');
         return StaticDataService.getUpgrades({
             unitName: character.id,
             rankStart,
@@ -79,6 +75,14 @@ export const RankLookup = () => {
             upgradesRarity: [],
         });
     }, [character?.id, rankStart, rankEnd, rankPoint5]);
+
+    const message = (function () {
+        if (!character) {
+            return 'Select character';
+        }
+
+        return 'Upgrades:';
+    })();
 
     const groupByRanks = useMemo(() => {
         const result: Array<{
@@ -107,19 +111,6 @@ export const RankLookup = () => {
 
         return result;
     }, [upgrades, rankStart]);
-
-    const allMaterials = useMemo<IMaterialRecipeIngredientFull[]>(() => {
-        const result: IMaterialRecipeIngredientFull[] = StaticDataService.groupBaseMaterials(upgrades, true);
-        const goldIndex = result.findIndex(x => x.id === 'Gold');
-
-        if (goldIndex > -1) {
-            const [gold] = result.splice(goldIndex, 1);
-            setTotalGold(gold.count);
-        } else {
-            setTotalGold(0);
-        }
-        return orderBy(result, ['rarity', 'count'], ['desc', 'desc']);
-    }, [upgrades]);
 
     const totalMaterials = useMemo<IMaterialEstimated2[]>(() => {
         return orderBy(
@@ -162,7 +153,7 @@ export const RankLookup = () => {
         </ul>
     );
 
-    const [columnDefs] = useState<Array<ColDef>>([
+    const [columnDefs] = useState<Array<ColDef<IMaterialEstimated2>>>([
         {
             headerName: '#',
             colId: 'rowNumber',
@@ -194,7 +185,7 @@ export const RankLookup = () => {
         },
         {
             valueGetter: params => {
-                return Math.max(params.data.count - inventory.upgrades[params.data!.id] ?? 0, 0);
+                return params.data ? Math.max(params.data.count - inventory.upgrades[params.data.id], 0) : 0;
             },
             headerName: 'Remaining',
             maxWidth: 90,
@@ -354,7 +345,7 @@ export const RankLookup = () => {
                         }}
                     />
                 </div>
-                <div className="flex-box gap10 wrap">
+                <div className="flex gap-5 items-center flex-wrap">
                     <div style={{ width: 200 }}>
                         <RankSelect
                             label={'Rank End'}
@@ -392,7 +383,6 @@ export const RankLookup = () => {
             <div>
                 <div style={{ display: 'flex' }}>
                     <h3>Total</h3>
-                    {totalGold > 0 ? <h4 style={{ paddingInlineStart: 40 }}>Gold - {totalGold}</h4> : undefined}
                     {totalEnergy > 0 ? <h4 style={{ paddingInlineStart: 40 }}>Energy - {totalEnergy}</h4> : undefined}
                     {totalEnergy > 0 ? (
                         <h4 style={{ paddingInlineStart: 40 }}>
@@ -405,6 +395,8 @@ export const RankLookup = () => {
                     className="ag-theme-material"
                     style={{ height: 50 + totalMaterials.length * 30, maxHeight: '40vh', width: '100%' }}>
                     <AgGridReact
+                        modules={[AllCommunityModule]}
+                        theme={themeBalham}
                         suppressCellFocus={true}
                         defaultColDef={{ suppressMovable: true, sortable: true, wrapText: true, autoHeight: true }}
                         rowHeight={60}
@@ -432,14 +424,6 @@ export const RankLookup = () => {
                             {renderMaterials(x.materials)}
                         </div>
                     ))}
-                    {/*<ul>*/}
-                    {/*    {upgrades.map((item, index) => (*/}
-                    {/*        <li key={item.id + index}>*/}
-
-                    {/*            <hr style={{ display: (index + 1) % 6 === 0 ? 'block' : 'none' }} />*/}
-                    {/*        </li>*/}
-                    {/*    ))}*/}
-                    {/*</ul>*/}
                     <Popover
                         open={!!materialRecipe}
                         anchorEl={anchorEl2}

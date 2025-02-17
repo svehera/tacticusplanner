@@ -5,7 +5,7 @@ import { ICharacter2 } from '../models/interfaces';
 import { rankToLevel } from '../models/constants';
 import { isMobile } from 'react-device-detect';
 
-export const fitGridOnWindowResize = (gridRef: React.RefObject<AgGridReact>) => {
+export const useFitGridOnWindowResize = (gridRef: React.RefObject<AgGridReact | null>) => {
     function handleResize() {
         gridRef.current?.api.sizeColumnsToFit();
     }
