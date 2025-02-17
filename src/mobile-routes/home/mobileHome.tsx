@@ -14,13 +14,14 @@ import { menuItemById } from 'src/models/menu-items';
 import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
 import { usePwaInstall } from '@/v2/hooks/usePwaInstall';
 import { AddToHomeScreen } from '@/v2/features/pwa/addToHomeScreen';
+import { isMobile } from 'react-device-detect';
 
 export const MobileHome = () => {
     const { seenAppVersion } = useContext(StoreContext);
     const navigate = useNavigate();
-    const { deviceLink, isInstalled, deferredPrompt } = usePwaInstall();
+    const { deviceLink, isInstalled } = usePwaInstall();
 
-    const [showPwaInstall, setShowPwaInstall] = useState(!isInstalled);
+    const [showPwaInstall, setShowPwaInstall] = useState(isMobile);
     const [showWhatsNew, setShowWhatsNew] = useState(false);
 
     const seenNewVersion = useMemo(() => {
@@ -71,14 +72,9 @@ export const MobileHome = () => {
                 <UserMenu />
             </div>
 
-            {showPwaInstall && deviceLink && (
-                <AddToHomeScreen
-                    link={deviceLink}
-                    installEvent={deferredPrompt}
-                    dismiss={() => setShowPwaInstall(false)}
-                />
+            {!isInstalled && showPwaInstall && (
+                <AddToHomeScreen link={deviceLink} dismiss={() => setShowPwaInstall(false)} />
             )}
-
             <Home />
 
             <WhatsNewDialog isOpen={showWhatsNew} onClose={() => setShowWhatsNew(false)} />
