@@ -241,7 +241,7 @@ export const UserMenu = () => {
                 )}
 
                 <Divider />
-                {isAuthenticated && (
+                {isAuthenticated && userInfo.role === UserRole.admin && (
                     <MenuItem onClick={syncWithTacticus}>
                         <ListItemIcon>
                             <SyncIcon />
