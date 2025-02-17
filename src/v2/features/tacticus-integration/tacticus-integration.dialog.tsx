@@ -100,7 +100,10 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({ isOpen, onClose, ta
                         unexpected issues
                         <br />
                         Acquire API key{' '}
-                        <a href="https://public-api-staging.loki.snowprintstudios.com/" target="_blank" rel="noreferrer">
+                        <a
+                            href="https://public-api-staging.loki.snowprintstudios.com/"
+                            target="_blank"
+                            rel="noreferrer">
                             here
                         </a>
                     </Modal.Description>
