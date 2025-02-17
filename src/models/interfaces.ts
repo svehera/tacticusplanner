@@ -457,6 +457,7 @@ export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IW
     inventoryShowPlusMinus: boolean;
     goalsTableView: boolean;
     myProgressShowCoreCharacters: boolean;
+    apiIntegrationSyncOptions: string[];
 }
 
 export interface IWyoViewSettings {

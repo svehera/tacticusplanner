@@ -5,6 +5,7 @@ export interface TacticusPlayerResponse {
 export interface TacticusPlayer {
     units: TacticusUnit[];
     inventory: TacticusInventory;
+    progress: TacticusProgress;
 }
 
 export interface TacticusInventory {
@@ -74,4 +75,21 @@ export interface TacticusUpgrade {
     id: string;
     name: string;
     amount: number;
+}
+
+export interface TacticusProgress {
+    campaigns: TacticusCampaignProgress[]; // List of CampaignProgress objects
+}
+
+export interface TacticusCampaignProgress {
+    id: string; // Example: "campaign2"
+    name: string; // Example: "Fall of Cadia"
+    type: string; // Example: "Standard"
+    battles: TacticusCampaignLevel[]; // List of CampaignLevel objects
+}
+
+export interface TacticusCampaignLevel {
+    battleIndex: number; // Example: 10
+    attemptsLeft: number; // Example: 2
+    attemptsUsed: number; // Example: 3
 }

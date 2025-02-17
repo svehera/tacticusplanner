@@ -38,7 +38,7 @@ export const MyProgress = () => {
                 />
             );
         },
-        [viewPreferences.myProgressShowCoreCharacters]
+        [viewPreferences.myProgressShowCoreCharacters, campaignsProgress]
     );
 
     return (

@@ -35,10 +35,10 @@ export const UserMenu = () => {
     const dispatch = useContext(DispatchContext);
     const popupManager = usePopupManager();
     const { isAuthenticated, logout, username, userInfo } = useAuth();
+    const [showAdminTools, setShowAdminTools] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
-    const [showAdminTools, setShowAdminTools] = useState(false);
     const [showRestoreBackup, setShowRestoreBackup] = useState(false);
     const [showOverrideDataWarning, setShowOverrideDataWarning] = useState(false);
     const userMenuControls = usePopUpControls();
@@ -180,6 +180,7 @@ export const UserMenu = () => {
     function syncWithTacticus(): void {
         popupManager.open(TacticusIntegrationDialog, {
             tacticusApiKey: userInfo.tacticusApiKey,
+            initialSyncOptions: store.viewPreferences.apiIntegrationSyncOptions,
             onClose: () => {},
         });
     }

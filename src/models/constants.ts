@@ -267,6 +267,7 @@ export const defaultData: IPersonalData2 = {
         lreTileShowUnitActiveAbility: true,
         lreTileShowUnitPassiveAbility: true,
         myProgressShowCoreCharacters: true,
+        apiIntegrationSyncOptions: ['roster', 'inventory', 'campaignProgress'],
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Grid, Input, Slider } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
@@ -28,6 +28,10 @@ export const CampaignProgress: React.FC<Props> = ({
 }) => {
     const [currProgress, setCurrProgress] = useState(initialProgress);
     const debounceProgressChange = useDebounceCallback(changeProgress, 500);
+
+    useEffect(() => {
+        setCurrProgress(initialProgress);
+    }, [initialProgress]);
 
     // Get the maximum number of nodes based on the campaign difficulty.
     const getMaxNodes = (difficulty: CampaignDifficulty) => {

@@ -2155,9 +2155,9 @@
         "lre": {
             "id": 8,
             "finished": false,
-            "eventStage": 2,
-            "nextEventDate": "January 12",
-            "nextEventDateUtc": "Sun, 12 January 2025 00:00:00 GMT"
+            "eventStage": 3,
+            "nextEventDate": "TBA",
+            "nextEventDateUtc": ""
         }
     },
     {

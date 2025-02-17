@@ -1,6 +1,54 @@
-@layer theme, components, utilities;
+@layer theme, base, components, utilities;
 @import 'tailwindcss/theme' layer(theme);
 @import 'tailwindcss/utilities' layer(utilities);
+/*@import 'tailwindcss';*/
+@plugin 'tailwindcss-animate';
+
+@theme {
+    --color-border: var(--border);
+    --color-input: var(--input);
+
+    --color-ring: var(--ring);
+
+    --color-bg: var(--bg);
+    --color-fg: var(--fg);
+
+    --color-primary: var(--primary);
+    --color-primary-fg: var(--primary-fg);
+
+    --color-secondary: var(--secondary);
+    --color-secondary-fg: var(--secondary-fg);
+
+    --color-accent: var(--accent);
+    --color-accent-fg: var(--accent-fg);
+
+    --color-success: var(--success);
+    --color-success-fg: var(--success-fg);
+
+    --color-danger: var(--danger);
+    --color-danger-fg: var(--danger-fg);
+
+    --color-warning: var(--warning);
+    --color-warning-fg: var(--warning-fg);
+
+    --color-muted: var(--muted);
+    --color-muted-fg: var(--muted-fg);
+
+    --color-overlay: var(--overlay);
+    --color-overlay-fg: var(--overlay-fg);
+
+    --color-navbar: var(--navbar);
+    --color-navbar-fg: var(--navbar-fg);
+
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-fg: var(--sidebar-fg);
+
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+}
 
 @layer base {
     :root {
@@ -102,7 +150,7 @@
         --accent: var(--color-blue-600);
         --accent-fg: var(--color-white);
 
-        --muted: var(--color-slate-900);
+        --muted: oklch(0.21 0.006 285.885);
         --muted-fg: var(--color-slate-400);
 
         --overlay: rgb(35, 35, 34);
@@ -172,6 +220,32 @@
 
     h3 {
         @apply text-lg font-bold mb-2 mt-2;
+    }
+
+    /*!*Workaround for tailwind default styles reset. Need to do this partially to not break everything*!*/
+    *,
+    ::backdrop,
+    :after,
+    :before {
+        box-sizing: border-box;
+        border: 0 solid;
+        margin: 0;
+        padding: 0;
+    }
+
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+        font: inherit;
+        font-feature-settings: inherit;
+        font-variation-settings: inherit;
+        letter-spacing: inherit;
+        color: inherit;
+        opacity: 1;
+        background-color: #0000;
+        border-radius: 0;
     }
 }
 
