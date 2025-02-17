@@ -30,12 +30,11 @@ export const RankLookup = () => {
     const { characters, campaignsProgress, inventory } = useContext(StoreContext);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const charactersOptions = sortBy(characters, 'name');
     const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
     const [character, setCharacter] = useState<ICharacter2 | null>(() => {
         const queryParamsCharacter = searchParams.get('character');
 
-        return characters.find(x => x.name === queryParamsCharacter) ?? charactersOptions[0];
+        return characters.find(x => x.name === queryParamsCharacter) ?? characters[0];
     });
 
     const [rankStart, setRankStart] = useState<Rank>(() => {
@@ -316,7 +315,7 @@ export const RankLookup = () => {
                     label="Chracters"
                     style={{ maxWidth: 300 }}
                     unit={character}
-                    options={charactersOptions}
+                    options={characters}
                     onUnitChange={value => {
                         setCharacter(value);
 
