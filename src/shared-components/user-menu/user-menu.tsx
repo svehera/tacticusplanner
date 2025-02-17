@@ -241,14 +241,14 @@ export const UserMenu = () => {
                 )}
 
                 <Divider />
-                {isAuthenticated && (
-                    <MenuItem onClick={syncWithTacticus}>
-                        <ListItemIcon>
-                            <SyncIcon />
-                        </ListItemIcon>
-                        <ListItemText>Sync via Tacticus API</ListItemText>
-                    </MenuItem>
-                )}
+                {/*{isAuthenticated && (*/}
+                {/*    <MenuItem onClick={syncWithTacticus}>*/}
+                {/*        <ListItemIcon>*/}
+                {/*            <SyncIcon />*/}
+                {/*        </ListItemIcon>*/}
+                {/*        <ListItemText>Sync via Tacticus API</ListItemText>*/}
+                {/*    </MenuItem>*/}
+                {/*)}*/}
 
                 <MenuItem onClick={() => inputRef.current?.click()}>
                     <ListItemIcon>

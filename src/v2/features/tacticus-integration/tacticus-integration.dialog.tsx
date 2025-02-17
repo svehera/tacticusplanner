@@ -98,6 +98,11 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({ isOpen, onClose, ta
                     <Modal.Description>
                         Disclaimer:The Planner is in early stage of integration with Tacticus API. There could be
                         unexpected issues
+                        <br />
+                        Acquire API key{' '}
+                        <a href="https://public-api-staging.loki.snowprintstudios.com/" target="_blank" rel="noreferrer">
+                            here
+                        </a>
                     </Modal.Description>
                 </Modal.Header>
                 <Modal.Body className="pb-1">
@@ -110,7 +115,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({ isOpen, onClose, ta
                             description="Enter your Tacticus API key"
                             value={apiKey}
                             onChange={setApiKey}
-                            autoComplete="off"
+                            autoComplete="new-password"
                             isRevealable
                         />
                         <Button intent="primary" isDisabled={apiKey === currentApiKey} onPress={updateApiKey}>
