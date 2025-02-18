@@ -49,6 +49,14 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({ isOpen, onClose, ta
                         campaigns: result.data.player.progress.campaigns,
                     });
                 }
+
+                if (syncOptions.includes('raidedLocations')) {
+                    dispatch.dailyRaids({
+                        type: 'SyncWithTacticus',
+                        progress: result.data.player.progress.campaigns,
+                    });
+                }
+
                 enqueueSnackbar('Successfully synced with Tacticus API', { variant: 'success' });
             } else {
                 enqueueSnackbar('There was an error while syncing with Tacticus API', { variant: 'error' });
@@ -127,6 +135,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({ isOpen, onClose, ta
                         <Checkbox value="roster">Roster (Characters and MoWs)</Checkbox>
                         <Checkbox value="inventory">Inventory (Upgrades)</Checkbox>
                         <Checkbox value="campaignProgress">Campaign Progress (Campaign Events excluded)</Checkbox>
+                        <Checkbox value="raidedLocations">Daily Raids (raided locations)</Checkbox>
                     </CheckboxGroup>
                 </Modal.Body>
                 <Modal.Footer>

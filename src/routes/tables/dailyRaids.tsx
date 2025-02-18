@@ -156,7 +156,14 @@ export const DailyRaids = () => {
             },
             ...upgradeRankOrMowGoals
         );
-    }, [actualEnergy, upgradeRankOrMowGoals, dailyRaidsPreferences, dailyRaids.filters, upgrades]);
+    }, [
+        actualEnergy,
+        upgradeRankOrMowGoals,
+        dailyRaidsPreferences,
+        dailyRaids.filters,
+        upgrades,
+        dailyRaids.raidedLocations,
+    ]);
 
     const hasShardsEnergy = dailyRaidsPreferences.shardsEnergy > 0 || estimatedShards.energyPerDay > 0;
     const energyDescription = hasShardsEnergy
