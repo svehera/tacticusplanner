@@ -1,4 +1,4 @@
-﻿import React, { useContext, useEffect } from 'react';
+﻿import React, { useContext } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -15,16 +15,6 @@ const ThemeSwitch = () => {
     const switchToLightTheme = () => {
         dispatch.viewPreferences({ type: 'Update', setting: 'theme', value: 'light' });
     };
-
-    useEffect(() => {
-        if (viewPreferences.theme === 'dark') {
-            document.documentElement.classList.add('dark');
-            document.documentElement.setAttribute('data-ag-theme-mode', 'dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-            document.documentElement.removeAttribute('data-ag-theme-mode');
-        }
-    }, [viewPreferences.theme]);
 
     return (
         <IconButton color="inherit">

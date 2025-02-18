@@ -72,6 +72,16 @@ export const App = () => {
         }
     }, []);
 
+    useEffect(() => {
+        if (viewPreferences.theme === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-ag-theme-mode', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.removeAttribute('data-ag-theme-mode');
+        }
+    }, [viewPreferences.theme]);
+
     const handleContinue = () => {
         localStorage.setItem('lastVisit', new Date().toISOString());
         setShowLoginStatus(false);
