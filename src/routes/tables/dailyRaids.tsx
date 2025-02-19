@@ -37,6 +37,7 @@ export const DailyRaids = () => {
     const [hasChanges, setHasChanges] = React.useState<boolean>(false);
     const [upgrades, setUpgrades] = React.useState<Record<string, number>>(inventory.upgrades);
     const [units, setUnits] = React.useState<IUnit[]>([...storeCharacters, ...storeMows]);
+    const [raidedLocations, setRaidedLocations] = React.useState<IItemRaidLocation[]>(dailyRaids.raidedLocations);
 
     const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
         return GoalsService.prepareGoals(goals, units, true);
@@ -109,6 +110,7 @@ export const DailyRaids = () => {
     const refresh = () => {
         setUpgrades({ ...inventory.upgrades });
         setUnits([...storeCharacters, ...storeMows]);
+        setRaidedLocations([...dailyRaids.raidedLocations]);
         setHasChanges(false);
     };
 
@@ -118,6 +120,7 @@ export const DailyRaids = () => {
         setTimeout(() => {
             setUpgrades({ ...inventory.upgrades });
             setUnits([...storeCharacters, ...storeMows]);
+            setRaidedLocations([]);
         }, 100);
     };
 
@@ -151,12 +154,12 @@ export const DailyRaids = () => {
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: upgrades,
-                completedLocations: dailyRaids.raidedLocations?.filter(x => !x.isShardsLocation) ?? [],
+                completedLocations: raidedLocations?.filter(x => !x.isShardsLocation) ?? [],
                 filters: dailyRaids.filters,
             },
             ...upgradeRankOrMowGoals
         );
-    }, [actualEnergy, upgradeRankOrMowGoals, dailyRaidsPreferences, dailyRaids.filters, upgrades]);
+    }, [actualEnergy, upgradeRankOrMowGoals, dailyRaidsPreferences, dailyRaids.filters, upgrades, raidedLocations]);
 
     const hasShardsEnergy = dailyRaidsPreferences.shardsEnergy > 0 || estimatedShards.energyPerDay > 0;
     const energyDescription = hasShardsEnergy
@@ -169,7 +172,7 @@ export const DailyRaids = () => {
         <div>
             <RaidsHeader
                 actualDailyEnergy={energyDescription}
-                refreshDisabled={!hasChanges}
+                refreshDisabled={!hasChanges && dailyRaids.raidedLocations.length === raidedLocations.length}
                 refreshHandle={refresh}
                 resetDisabled={!dailyRaids.raidedLocations?.length}
                 resetHandler={resetDay}>

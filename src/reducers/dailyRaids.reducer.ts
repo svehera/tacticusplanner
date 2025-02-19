@@ -1,6 +1,9 @@
 ﻿import { IDailyRaids, IDailyRaidsFilters, SetStateAction } from '../models/interfaces';
-import { defaultData } from '../models/constants';
+import { defaultData, idToCampaign } from '../models/constants';
 import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
+import { TacticusCampaignProgress } from '@/v2/features/tacticus-integration/tacticus-integration.models';
+import { Campaign } from 'src/models/enums';
+import { CampaignsService } from '@/v2/features/goals/campaigns.service';
 
 export type DailyRaidsAction =
     | {
@@ -17,6 +20,10 @@ export type DailyRaidsAction =
           type: 'UpdateFilters';
           value: IDailyRaidsFilters;
       }
+    | {
+          type: 'SyncWithTacticus';
+          progress: TacticusCampaignProgress[];
+      }
     | SetStateAction<IDailyRaids>;
 
 export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction): IDailyRaids => {
@@ -29,6 +36,35 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                 ...state,
                 raidedLocations: [...state.raidedLocations, action.location],
             };
+        }
+        case 'SyncWithTacticus': {
+            const raidedLocations: IItemRaidLocation[] = [];
+
+            for (const campaign of action.progress) {
+                const completedBattles = campaign.battles.filter(battle => battle.attemptsUsed !== 0);
+                if (completedBattles.length > 0) {
+                    const campaignName = idToCampaign[campaign.id];
+                    const campaignShortId = Object.keys(Campaign).find(
+                        key => Campaign[key as keyof typeof Campaign] === campaignName
+                    );
+                    if (campaignShortId) {
+                        for (const battle of completedBattles) {
+                            const campaignComposed =
+                                CampaignsService.campaignsComposed[campaignShortId + (battle.battleIndex + 1)];
+                            raidedLocations.push({
+                                ...campaignComposed,
+                                raidsCount: battle.attemptsUsed,
+                                energySpent: battle.attemptsUsed * campaignComposed.energyCost,
+                                farmedItems: battle.attemptsUsed * campaignComposed.dropRate,
+                                isShardsLocation: false,
+                                isCompleted: battle.attemptsLeft === 0,
+                            });
+                        }
+                    }
+                }
+            }
+
+            return { ...state, raidedLocations };
         }
         case 'ResetCompletedBattles': {
             return { ...state, raidedLocations: [] };

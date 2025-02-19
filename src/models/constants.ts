@@ -1,4 +1,5 @@
 ﻿import {
+    Campaign,
     CharacterReleaseRarity,
     DailyRaidsStrategy,
     Difficulty,
@@ -267,7 +268,7 @@ export const defaultData: IPersonalData2 = {
         lreTileShowUnitActiveAbility: true,
         lreTileShowUnitPassiveAbility: true,
         myProgressShowCoreCharacters: true,
-        apiIntegrationSyncOptions: ['roster', 'inventory', 'campaignProgress'],
+        apiIntegrationSyncOptions: ['roster', 'inventory', 'campaignProgress', 'raidedLocations'],
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,
@@ -399,3 +400,25 @@ export const defaultData: IPersonalData2 = {
 };
 
 export const goalsLimit = 50;
+
+export const idToCampaign: Record<string, Campaign> = {
+    campaign1: Campaign.I,
+    campaign2: Campaign.FoC,
+    campaign3: Campaign.O,
+    campaign4: Campaign.SH,
+
+    mirror1: Campaign.IM,
+    mirror2: Campaign.FoCM,
+    mirror3: Campaign.OM,
+    mirror4: Campaign.SHM,
+
+    elite1: Campaign.IE,
+    elite2: Campaign.FoCE,
+    elite3: Campaign.OE,
+    elite4: Campaign.SHE,
+
+    eliteMirror1: Campaign.IME,
+    eliteMirror2: Campaign.FoCME,
+    eliteMirror3: Campaign.OME,
+    eliteMirror4: Campaign.SHME,
+};
