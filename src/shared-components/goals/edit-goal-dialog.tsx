@@ -172,6 +172,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                         setForm(curr => ({ ...curr, rankStart: value, upgrades: [] }))
                                     }
                                 />
+                            </div>
+                            <div className="flex gap-5">
                                 <RankGoalSelect
                                     allowedValues={targetRankValues}
                                     rank={form.rankEnd}
