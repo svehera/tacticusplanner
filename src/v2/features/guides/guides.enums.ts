@@ -23,4 +23,5 @@ export enum LreCharacter {
     vitruvius = '_vitruvius',
     mephiston = '_mephiston',
     patermine = '_patermine',
+    dante = '_dante',
 }
