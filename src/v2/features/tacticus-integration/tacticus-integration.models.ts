@@ -10,6 +10,7 @@ export interface TacticusPlayer {
 
 export interface TacticusInventory {
     upgrades: TacticusUpgrade[];
+    shards: TacticusShard[];
 }
 
 export interface TacticusAbility {
@@ -72,6 +73,12 @@ export interface TacticusUnit {
 }
 
 export interface TacticusUpgrade {
+    id: string;
+    name: string;
+    amount: number;
+}
+
+export interface TacticusShard {
     id: string;
     name: string;
     amount: number;

@@ -17,8 +17,16 @@ export const useSyncWithTacticus = () => {
             if (result.data) {
                 console.log('Tacticus API data for debug', result.data);
                 if (syncOptions.includes('roster')) {
-                    dispatch.mows({ type: 'SyncWithTacticus', units: result.data.player.units });
-                    dispatch.characters({ type: 'SyncWithTacticus', units: result.data.player.units });
+                    dispatch.mows({
+                        type: 'SyncWithTacticus',
+                        units: result.data.player.units,
+                        shards: result.data.player.inventory.shards,
+                    });
+                    dispatch.characters({
+                        type: 'SyncWithTacticus',
+                        units: result.data.player.units,
+                        shards: result.data.player.inventory.shards,
+                    });
                 }
 
                 if (syncOptions.includes('inventory')) {
