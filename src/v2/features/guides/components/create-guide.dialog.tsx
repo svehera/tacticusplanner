@@ -125,20 +125,30 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
     })();
 
     useEffect(() => {
-        const includeMowSlot = [GameMode.guildRaids, GameMode.guildWar, GameMode.tournamentArena].includes(gameMode);
-        if (includeMowSlot && !teamSlots.some(slot => slot.unitType === UnitType.mow)) {
-            setTeamSlots(prev => [
-                ...prev,
-                {
-                    slotNumber: 6,
-                    unitType: UnitType.mow,
-                    slotType: SlotType.core,
-                    unitIds: [],
-                },
-            ]);
-        } else {
-            setTeamSlots(prev => prev.filter(x => x.unitType !== UnitType.mow));
-        }
+        setTeamSlots(prev => {
+            const includeMowSlot = [GameMode.guildRaids, GameMode.guildWar, GameMode.tournamentArena].includes(
+                gameMode
+            );
+            const hasMowSlot = prev.some(slot => slot.unitType === UnitType.mow);
+
+            if (includeMowSlot && !hasMowSlot) {
+                return [
+                    ...prev,
+                    {
+                        slotNumber: 6,
+                        unitType: UnitType.mow,
+                        slotType: SlotType.core,
+                        unitIds: [],
+                    },
+                ];
+            }
+
+            if (!includeMowSlot && hasMowSlot) {
+                return prev.filter(slot => slot.unitType !== UnitType.mow);
+            }
+
+            return prev;
+        });
     }, [gameMode]);
 
     return (
@@ -277,7 +287,7 @@ export const CreateGuideDialog: React.FC<Props> = ({ onClose, units, addTeam }) 
 
                         <div
                             key={+isOpenSelectDialog}
-                            className="flex-box gap5 start"
+                            className="flex gap-[5px]"
                             onClick={() => setIsOpenSelectDialog(true)}>
                             {teamSlots.map(slot => (
                                 <TeamSlotEdit
