@@ -18,7 +18,7 @@ export const TeamView: React.FC<Props> = ({ slots, units, expanded = false }) =>
     const withMow = mow && mow.slotType !== SlotType.none;
 
     return (
-        <div className="flex-box gap5 start">
+        <div className="flex gap-[5px]">
             {characters.map(slot => (
                 <TeamSlotView key={slot.slotNumber} units={units} slot={slot} expanded={expanded} />
             ))}

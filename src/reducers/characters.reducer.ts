@@ -1,7 +1,7 @@
 ﻿import { ICharacter2, SetStateAction } from '../models/interfaces';
 import { CharacterBias, Rank, Rarity } from '../models/enums';
 import { rankToLevel, rankToRarity, rarityToStars } from '../models/constants';
-import { TacticusUnit } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
+import { TacticusShard, TacticusUnit } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
 
 export type CharactersAction =
@@ -52,6 +52,7 @@ export type CharactersAction =
     | {
           type: 'SyncWithTacticus';
           units: TacticusUnit[];
+          shards: TacticusShard[];
       }
     | SetStateAction<ICharacter2[]>;
 
@@ -104,9 +105,18 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                 ...state.map(char => {
                     const tacticusUnit = action.units.find(
                         unit =>
+                            unit.id.toLowerCase() === char.tacticusId?.toLowerCase() ||
                             unit.name.toLowerCase() === char.name.toLowerCase() ||
                             unit.name.toLowerCase() === char.shortName.toLowerCase() ||
                             unit.name.toLowerCase() === char.fullName.toLowerCase()
+                    );
+
+                    const tacticusUnitShards = action.shards.find(
+                        inventoryShard =>
+                            inventoryShard.id.toLowerCase() === char.tacticusId?.toLowerCase() ||
+                            inventoryShard.name.toLowerCase().includes(char.name.toLowerCase()) ||
+                            inventoryShard.name.toLowerCase().includes(char.shortName.toLowerCase()) ||
+                            inventoryShard.name.toLowerCase().includes(char.fullName.toLowerCase())
                     );
 
                     if (tacticusUnit) {
@@ -139,6 +149,11 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                             activeAbilityLevel: tacticusUnit.abilities[0].level,
                             passiveAbilityLevel: tacticusUnit.abilities[1].level,
                             level: tacticusUnit.xpLevel,
+                        };
+                    } else if (tacticusUnitShards) {
+                        return {
+                            ...char,
+                            shards: tacticusUnitShards.amount,
                         };
                     }
 

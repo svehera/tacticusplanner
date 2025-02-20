@@ -1,7 +1,7 @@
-﻿import { SetStateAction } from '../models/interfaces';
+﻿import { SetStateAction } from '@/models/interfaces';
 import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
 import { rarityToStars } from 'src/models/constants';
-import { TacticusUnit } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
+import { TacticusShard, TacticusUnit } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
 
 export type MowsAction =
@@ -17,6 +17,7 @@ export type MowsAction =
     | {
           type: 'SyncWithTacticus';
           units: TacticusUnit[];
+          shards: TacticusShard[];
       }
     | SetStateAction<IMow[]>;
 
@@ -44,31 +45,34 @@ export const mowsReducer = (state: IMow[], action: MowsAction) => {
             return [...state];
         }
         case 'SyncWithTacticus': {
-            const { units } = action;
+            const { units, shards } = action;
 
-            for (const tacticusUnit of units) {
-                const existingMowIndex = state.findIndex(x => x.tacticusId === tacticusUnit.id);
-                const existingMow = state[existingMowIndex];
+            return state.map(existingMow => {
+                const tacticusUnit = units.find(u => u.id === existingMow.tacticusId);
+                const tacticusShards = shards.find(s => s.id === existingMow.tacticusId);
+                if (tacticusUnit) {
+                    const [rarity, stars] = TacticusIntegrationService.convertProgressionIndex(
+                        tacticusUnit.progressionIndex
+                    );
 
-                if (!existingMow) {
-                    continue;
+                    return {
+                        ...existingMow,
+                        unlocked: true,
+                        rarity,
+                        stars,
+                        primaryAbilityLevel: tacticusUnit.abilities[0].level,
+                        secondaryAbilityLevel: tacticusUnit.abilities[1].level,
+                        shards: tacticusUnit.shards,
+                    };
+                } else if (tacticusShards) {
+                    return {
+                        ...existingMow,
+                        shards: tacticusShards.amount,
+                    };
                 }
-                const [rarity, stars] = TacticusIntegrationService.convertProgressionIndex(
-                    tacticusUnit.progressionIndex
-                );
 
-                state[existingMowIndex] = {
-                    ...existingMow,
-                    unlocked: true,
-                    rarity,
-                    stars,
-                    primaryAbilityLevel: tacticusUnit.abilities[0].level,
-                    secondaryAbilityLevel: tacticusUnit.abilities[1].level,
-                    shards: tacticusUnit.shards,
-                };
-            }
-
-            return [...state];
+                return existingMow;
+            });
         }
         case 'UpdateAbilities': {
             const { mowId, abilities } = action;
