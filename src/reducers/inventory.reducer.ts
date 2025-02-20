@@ -55,7 +55,7 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
         }
         case 'SyncWithTacticus': {
             const { upgrades } = action.inventory;
-            const result = { ...state.upgrades };
+            const result: Record<string, number> = {};
 
             for (const upgrade of upgrades) {
                 const upgradeId: string | null = TacticusIntegrationService.getUpgradeId(upgrade);
