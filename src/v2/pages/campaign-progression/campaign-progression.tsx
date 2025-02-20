@@ -129,12 +129,17 @@ export const CampaignProgression = () => {
 
     /**
      * @returns a string representing the current battle to
-     * be completed for the given campaign.
+     * be completed for the given campaign. This is only ever
+     * called for incomplete campaigns.
      */
     function getCampaignProgress(campaign: string): any {
-        Object.entries(campaignsProgress).forEach(([key, value]) => {});
-        // TODO(cpunerd): Implement this function.
-        return <></>;
+        let ret = <>Completed</>;
+        Object.entries(campaignsProgress).forEach(([key, value]) => {
+            if (key == campaign) {
+                ret = <div>Last Completed Battle: {value}</div>;
+            }
+        });
+        return ret;
     }
 
     return (
@@ -156,9 +161,10 @@ export const CampaignProgression = () => {
                                             <tr>
                                                 <td>
                                                     <CampaignImage campaign={entry[0]} />
-                                                    {getCampaignProgress(entry[0])}
                                                 </td>
                                                 <td>{entry[0]}</td>
+                                                <td>-</td>
+                                                <td>{getCampaignProgress(entry[0])}</td>
                                             </tr>
                                         </tbody>
                                     </table>
