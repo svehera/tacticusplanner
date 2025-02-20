@@ -57,7 +57,7 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                                 energySpent: battle.attemptsUsed * campaignComposed.energyCost,
                                 farmedItems: battle.attemptsUsed * campaignComposed.dropRate,
                                 isShardsLocation: false,
-                                isCompleted: battle.attemptsLeft === 0,
+                                isCompleted: battle.attemptsLeft < battle.attemptsUsed,
                             });
                         }
                     }
