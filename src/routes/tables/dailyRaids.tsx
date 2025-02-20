@@ -21,10 +21,15 @@ import { RaidsHeader } from 'src/routes/tables/raids-header';
 
 import './dailyRaids.scss';
 import { IUnit } from 'src/v2/features/characters/characters.models';
+import { useAuth } from '@/contexts/auth';
+import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
+    const { userInfo } = useAuth();
+    const { syncWithTacticus } = useSyncWithTacticus();
     const {
+        viewPreferences,
         dailyRaids,
         characters: storeCharacters,
         mows: storeMows,
@@ -42,6 +47,8 @@ export const DailyRaids = () => {
     const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
         return GoalsService.prepareGoals(goals, units, true);
     }, [goals, units]);
+
+    const hasSync = viewPreferences.apiIntegrationSyncOptions.includes('raidedLocations') && !!userInfo.tacticusApiKey;
 
     const handleUpgradesAdd = (upgradeId: string, value: number, location: IItemRaidLocation | null) => {
         setHasChanges(true);
@@ -114,6 +121,14 @@ export const DailyRaids = () => {
         setHasChanges(false);
     };
 
+    const sync = () => {
+        syncWithTacticus(viewPreferences.apiIntegrationSyncOptions).then(() => {
+            setTimeout(() => {
+                refresh();
+            }, 300);
+        });
+    };
+
     const resetDay = () => {
         dispatch.dailyRaids({ type: 'ResetCompletedBattles' });
         setHasChanges(false);
@@ -171,6 +186,8 @@ export const DailyRaids = () => {
     return (
         <div>
             <RaidsHeader
+                hasSync={hasSync}
+                syncHandle={sync}
                 actualDailyEnergy={energyDescription}
                 refreshDisabled={!hasChanges && dailyRaids.raidedLocations.length === raidedLocations.length}
                 refreshHandle={refresh}

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 import LinkIcon from '@mui/icons-material/Link';
 import SettingsIcon from '@mui/icons-material/Settings';
+import SyncIcon from '@mui/icons-material/Sync';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -13,8 +14,10 @@ interface Props extends React.PropsWithChildren {
     actualDailyEnergy: string;
     resetHandler: () => void;
     refreshHandle: () => void;
+    syncHandle: () => void;
     resetDisabled: boolean;
     refreshDisabled: boolean;
+    hasSync: boolean;
 }
 
 export const RaidsHeader: React.FC<Props> = ({
@@ -24,6 +27,8 @@ export const RaidsHeader: React.FC<Props> = ({
     resetDisabled,
     resetHandler,
     refreshHandle,
+    hasSync,
+    syncHandle,
 }) => {
     const [openSettings, setOpenSettings] = React.useState<boolean>(false);
 
@@ -48,13 +53,34 @@ export const RaidsHeader: React.FC<Props> = ({
                 </div>
 
                 <div className="flex-box gap10" style={{ paddingBottom: 10 }}>
+                    {hasSync && (
+                        <Button size="small" variant={'contained'} color={'primary'} onClick={syncHandle}>
+                            {isMobile ? (
+                                <>
+                                    <SyncIcon />
+                                </>
+                            ) : (
+                                <>
+                                    <SyncIcon /> Sync
+                                </>
+                            )}
+                        </Button>
+                    )}
                     <Button
                         size="small"
                         variant={'contained'}
                         color={'success'}
                         disabled={refreshDisabled}
                         onClick={refreshHandle}>
-                        <RefreshIcon /> Refresh
+                        {isMobile ? (
+                            <>
+                                <RefreshIcon />
+                            </>
+                        ) : (
+                            <>
+                                <RefreshIcon /> Refresh
+                            </>
+                        )}
                     </Button>
                     <Button
                         size="small"
