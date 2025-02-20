@@ -72,7 +72,7 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
         return [
             {
                 headerName: 'A',
-                width: 35,
+                width: 45,
                 cellStyle: { align: 'center' },
                 cellRenderer: (params: any) => {
                     if (!params.data.goalData || !params.data.goalData[0]) return '';

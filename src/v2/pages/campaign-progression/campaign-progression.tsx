@@ -127,6 +127,16 @@ export const CampaignProgression = () => {
         return rowData;
     }
 
+    /**
+     * @returns a string representing the current battle to
+     * be completed for the given campaign.
+     */
+    function getCampaignProgress(campaign: string): any {
+        Object.entries(campaignsProgress).forEach(([key, value]) => {});
+        // TODO(cpunerd): Implement this function.
+        return <></>;
+    }
+
     return (
         <div key="root">
             <CampaignProgressionHeader />
@@ -146,6 +156,7 @@ export const CampaignProgression = () => {
                                             <tr>
                                                 <td>
                                                     <CampaignImage campaign={entry[0]} />
+                                                    {getCampaignProgress(entry[0])}
                                                 </td>
                                                 <td>{entry[0]}</td>
                                             </tr>
