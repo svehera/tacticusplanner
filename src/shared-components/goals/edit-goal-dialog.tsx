@@ -1,4 +1,4 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import React, { useContext, useMemo, useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -12,6 +12,7 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { RankSelect } from '../rank-select';
 import { CharacterUpgrades } from '../character-upgrades';
 import { rarityToMaxRank } from 'src/models/constants';
+import { IgnoreRankRarity } from './ignore-rank-rarity';
 import { PrioritySelect } from 'src/shared-components/goals/priority-select';
 import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { StaticDataService } from 'src/services';
@@ -127,11 +128,16 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
         setForm(curr => ({ ...curr, [key]: value }));
     };
 
+    const [ignoreRankRarity, setIgnoreRankRarity] = React.useState(false);
+
+    const maxRank = useMemo(() => {
+        return ignoreRankRarity ? Rank.Diamond3 : rarityToMaxRank[unit?.rarity ?? 0];
+    }, [unit?.rarity, ignoreRankRarity]);
+
     let currentRankValues: number[] = [];
     let targetRankValues: number[] = [];
 
     if (form.type === PersonalGoalType.UpgradeRank) {
-        const maxRank = Math.max(rarityToMaxRank[form.rarity], form.rankEnd);
         currentRankValues = getEnumValues(Rank).filter(x => x > 0 && x <= form.rankEnd!);
         targetRankValues = getEnumValues(Rank).filter(x => x > 0 && x >= form.rankStart && x <= maxRank);
     }
@@ -163,6 +169,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
                     {form.type === PersonalGoalType.UpgradeRank && (
                         <>
+                            <div className="flex gap-5">
+                                <IgnoreRankRarity value={ignoreRankRarity} onChange={setIgnoreRankRarity} />
+                            </div>
                             <div className="flex gap-5">
                                 <RankSelect
                                     label={'Current Rank'}
