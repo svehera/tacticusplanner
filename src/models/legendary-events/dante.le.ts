@@ -19,10 +19,10 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
             noXenos,
             [
                 {
-                    name: 'Psychic',
+                    name: 'Psyker',
                     points: 90,
-                    units: filter(noXenos).byDamageType(DamageType.Psychic),
-                    iconId: 'psychic',
+                    units: filter(noXenos).byTrait(Trait.Psyker),
+                    iconId: 'psyker',
                     index: 0,
                 },
                 {
@@ -69,7 +69,7 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                     name: 'No Power',
                     points: 75,
                     units: filter(noChaos).byDamageType(DamageType.Power, true),
-                    iconId: 'power',
+                    iconId: 'no_power',
                     index: 0,
                 },
                 {
@@ -83,14 +83,14 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                     name: 'Deep Strike',
                     points: 75,
                     units: filter(noChaos).byTrait(Trait.DeepStrike),
-                    iconId: 'no_summons',
+                    iconId: 'deep strike',
                     index: 2,
                 },
                 {
                     name: 'Chain',
                     points: 90,
                     units: filter(noChaos).byDamageType(DamageType.Chain),
-                    iconId: 'melee',
+                    iconId: 'chain',
                     index: 3,
                 },
                 {
@@ -120,7 +120,7 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                     index: 0,
                 },
                 {
-                    name: 'No Power Damage',
+                    name: 'No Power',
                     points: 50,
                     units: filter(noImperial).byDamageType(DamageType.Power, true),
                     iconId: 'no_power',
@@ -130,7 +130,7 @@ export class DanteLegendaryEvent extends LegendaryEventBase {
                     name: 'Terminator',
                     points: 65,
                     units: filter(noImperial).byTrait(Trait.TerminatorArmour),
-                    iconId: 'terminatorArmor',
+                    iconId: 'terminator',
                     index: 2,
                 },
                 {

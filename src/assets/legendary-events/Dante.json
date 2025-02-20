@@ -6,28 +6,28 @@
     "nextEventDate": "March 23",
     "nextEventDateUtc": "Sun, 23 March 2025 00:00:00 GMT",
     "regularMissions": [
-        "Play one Legendary Event Battle, Deal 1000 damage",
-        "Defeat 30 Orks",
-        "Defeat 75 Black Templars",
-        "Defeat 100 Black Legion",
+        "Defeat 5 waves of enemies in any wave-based game mode, Deal 1000 damage",
+        "Defeat 30 Necrons",
+        "Defeat 75 Black Legion",
+        "Defeat 100 Astra Militarum",
         "Use abilities 15 times with Imperial units, Deal 10k damage with Abilities",
-        "Use abilities 20 times with Chaos units, Deal 15k damage with Abilities",
-        "Use abilities 25 times with Xenos units, Deal 20k damage with Abilities",
-        "Play 3 Legendary Event Battles, Deal 25k Bolter damage",
-        "Play 3 Legendary Event Battles, Deal 25k Power damage",
-        "Play 3 Legendary Event Battles, Deal 25k Piercing damage"
+        "Use abilities 20 times with Xenos units, Deal 15k damage with Abilities",
+        "Use abilities 25 times with Chaos units, Deal 20k damage with Abilities",
+        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Plasma damage",
+        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Chain damage",
+        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Flame damage"
     ],
     "premiumMissions": [
         "Win 1 battle without Summoning any units",
-        "Defeat 30 enemies with Xenos units",
-        "Defeat 75 enemies with Imperial units",
+        "Defeat 30 enemies with Imperial units",
+        "Defeat 75 enemies with Xenos units",
         "Defeat 100 enemies with Chaos units",
-        "Win 5 battles without deploying any Flying characters",
-        "Win 5 battles without deploying any Psyker characters",
-        "Win 5 battles without deploying any Final Vengeance characters",
-        "Defeat 75 enemies with Bolter Damage",
-        "Defeat 75 enemies with Power Damage",
-        "Defeat 75 enemies with Piercing Damage"
+        "Win 5 battles without deploying any Heavy Weapon characters",
+        "Win 5 battles without deploying any Terrifying characters",
+        "Win 5 battles without deploying any Infiltrate characters",
+        "Defeat 75 enemies with Plasma Damage",
+        "Defeat 75 enemies with Chain Damage",
+        "Defeat 75 enemies with Flame Damage"
     ],
     "alpha": {
         "name": "Alpha (No Xenos)",
@@ -36,7 +36,7 @@
             "link": "https://tacticus.fandom.com/wiki/Necrons#NPC_Units"
         },
         "killPoints": 40,
-        "battlesPoints": [27, 31, 38, 41, 40, 53, 51, 45, 43, 58, 43, 48, 58, 47]
+        "battlesPoints": [27, 32, 38, 41, 40, 43, 42, 50, 44, 40, 47, 48, 59, 44]
     },
     "beta": {
         "name": "Beta (No Chaos)",
@@ -45,7 +45,7 @@
             "link": "https://tacticus.fandom.com/wiki/Black_Legion#NPC_Units"
         },
         "killPoints": 26,
-        "battlesPoints": [24, 31, 33, 37, 40, 34, 39, 37, 44, 42, 47, 45, 41, 52]
+        "battlesPoints": [36, 44, 42, 45, 45, 46, 58, 50, 64, 42, 49, 51, 54, 67]
     },
     "gamma": {
         "name": "Gamma (No Imperial)",
@@ -53,8 +53,8 @@
             "label": "Astra Militarum/Blood Angels",
             "link": "https://tacticus.fandom.com/wiki/Astra_Militarum#NPC_Units"
         },
-        "killPoints": 38,
-        "battlesPoints": [33, 49, 44, 46, 42, 53, 52, 56, 53, 50, 50, 50, 57, 65]
+        "killPoints": 28,
+        "battlesPoints": [39, 36, 44, 50, 47, 44, 48, 52, 48, 48, 50, 56, 56, 61]
     },
     "pointsMilestones": [
         {

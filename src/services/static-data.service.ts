@@ -213,6 +213,7 @@ export class StaticDataService {
     static convertUnitData(rawData: UnitDataRaw): IUnitData {
         const unitData: IUnitData = {
             id: rawData.Name,
+            tacticusId: rawData.tacticusId,
             shortName: rawData['Short Name'],
             fullName: rawData['Full Name'],
             unitType: UnitType.character,

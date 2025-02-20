@@ -81,6 +81,7 @@ export interface UnitDataRaw {
     Icon: string;
     ReleaseRarity?: CharacterReleaseRarity;
     releaseDate?: string;
+    tacticusId?: string;
     lre?: ILreCharacterStaticData;
 }
 
