@@ -106,7 +106,7 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
         return [
             {
                 headerName: 'A',
-                width: 35,
+                width: 45,
                 cellStyle: { align: 'center' },
                 cellRenderer: (params: any) => {
                     if (!params.data.goalData || !params.data.goalData[0]) return '';

@@ -139,7 +139,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
             {
                 headerName: 'C',
                 autoHeight: true,
-                width: 35,
+                width: 45,
                 cellRenderer: (params: any) => {
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return '';
