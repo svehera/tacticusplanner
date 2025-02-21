@@ -21,6 +21,7 @@ import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild
 import { KharnLegendaryEvent } from 'src/models/legendary-events/kharn.le';
 import { MephistonLegendaryEvent } from 'src/models/legendary-events/mephiston.le';
 import { PatermineLegendaryEvent } from 'src/models/legendary-events/patermine.le';
+import { DanteLegendaryEvent } from 'src/models/legendary-events/dante.le';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,
@@ -141,20 +142,22 @@ export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {
 
 export const getLegendaryEvent = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
     switch (id) {
-        case LegendaryEventEnum.Shadowsun:
-            return new ShadowSunLegendaryEvent(characters);
         case LegendaryEventEnum.AunShi:
             return new AunShiLegendaryEvent(characters);
-        case LegendaryEventEnum.Ragnar:
-            return new RagnarLegendaryEvent(characters);
-        case LegendaryEventEnum.Vitruvius:
-            return new VitruviusLegendaryEvent(characters);
+        case LegendaryEventEnum.Dante:
+            return new DanteLegendaryEvent(characters);
         case LegendaryEventEnum.Kharn:
             return new KharnLegendaryEvent(characters);
         case LegendaryEventEnum.Mephiston:
             return new MephistonLegendaryEvent(characters);
         case LegendaryEventEnum.Patermine:
             return new PatermineLegendaryEvent(characters);
+        case LegendaryEventEnum.Ragnar:
+            return new RagnarLegendaryEvent(characters);
+        case LegendaryEventEnum.Shadowsun:
+            return new ShadowSunLegendaryEvent(characters);
+        case LegendaryEventEnum.Vitruvius:
+            return new VitruviusLegendaryEvent(characters);
         default:
             return new ShadowSunLegendaryEvent(characters);
     }

@@ -176,7 +176,13 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                             size="small"
                             placeholder="Types"
                             selectedValues={currFilter.campaignTypes}
-                            values={[CampaignType.Elite, CampaignType.Mirror, CampaignType.Normal, CampaignType.Early]}
+                            values={[
+                                CampaignType.Elite,
+                                CampaignType.Extremis,
+                                CampaignType.Mirror,
+                                CampaignType.Normal,
+                                CampaignType.Early,
+                            ]}
                             selectionChanges={values => {
                                 setCurrFilter({ ...currFilter, campaignTypes: values as CampaignType[] });
                             }}

@@ -186,6 +186,19 @@ export class CampaignsService {
         return true;
     }
 
+    public static getItemAcquiredPerEnergyUsed(campaignType: CampaignType, rarity: Rarity) {
+        const config = this.campaignConfigs[campaignType];
+        const dropRateKey: keyof IDropRate = Rarity[rarity].toLowerCase() as keyof IDropRate;
+        const dropRate = config.dropRate[dropRateKey];
+        if (!dropRate) {
+            return 0;
+        }
+
+        const itemsPerEnergy = dropRate / config.energyCost;
+
+        return parseFloat(itemsPerEnergy.toFixed(3));
+    }
+
     /**
      * Returns which factions are enemies in the campaign, and which are allies. Any
      * allies are usable in the campaign when enough deployment slots are available.

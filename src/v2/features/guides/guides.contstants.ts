@@ -10,6 +10,7 @@ import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter } from 'src/v2/features/characters/units.functions';
 import { capitalize, intersection } from 'lodash';
 import mowsData from 'src/v2/data/mows.json';
+import { DanteLegendaryEvent } from 'src/models/legendary-events/dante.le';
 import { PatermineLegendaryEvent } from 'src/models/legendary-events/patermine.le';
 
 export const lreCharacters: IMenuOption[] = [
@@ -33,6 +34,11 @@ export const lreCharacters: IMenuOption[] = [
         label: 'Patermine (1/3)',
         selected: false,
     },
+    {
+        value: LreCharacter.dante,
+        label: 'Dante (1/3)',
+        selected: false,
+    },
 ];
 
 export const getLre = (character: LreCharacter, characters: ICharacter2[] = []): ILegendaryEvent => {
@@ -45,6 +51,8 @@ export const getLre = (character: LreCharacter, characters: ICharacter2[] = []):
             return new VitruviusLegendaryEvent(characters);
         case LreCharacter.patermine:
             return new PatermineLegendaryEvent(characters);
+        case LreCharacter.dante:
+            return new DanteLegendaryEvent(characters);
     }
 };
 

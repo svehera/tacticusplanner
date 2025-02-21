@@ -211,7 +211,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, slots, units }) => 
                         Toggle between &ldquo;Core&ldquo; and &ldquo;Flex&ldquo; slot types by clicking on the slot type
                     </span>
                 </Typography>
-                <div className="flex-box gap5 start">
+                <div className="flex gap-[5px]">
                     {lineup.map(slot => (
                         <TeamSlotEdit
                             key={slot.slotNumber}

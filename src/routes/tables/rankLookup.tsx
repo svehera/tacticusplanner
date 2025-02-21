@@ -410,10 +410,10 @@ export const RankLookup = () => {
                     <InfoIcon color="primary" />
                     <span>Click on the upgrade to view recipe</span>
                 </div>
-                <div className="flex-box gap20 wrap start">
+                <div className="flex gap-5 flex-wrap">
                     {groupByRanks.map((x, index) => (
                         <div key={index}>
-                            <div className="flex-box gap3 center">
+                            <div className="flex gap-[3px] justify-center">
                                 <RankImage rank={x.rank1} /> <ArrowForward />
                                 <RankImage
                                     rank={x.rank2}

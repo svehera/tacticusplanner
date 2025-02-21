@@ -1,6 +1,53 @@
 ﻿{
-    "currentVersion": "1.6.8",
+    "currentVersion": "1.6.9",
     "releaseNotes": [
+        {
+            "version": "1.6.9",
+            "date": "February 21, 2025",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added Dante character and LRE. Thank to cpunerd (Kharnage) for helping.",
+                    "route": "plan/lre?character=Dante"
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Updated Extremis campaign event nodes drop rate. Thank to FMG for giving a hand."
+                },
+                {
+                    "text": "[cpunerd] Updated reward for Indomitus Mirror Elite 7 from Psychic Force Conduit to Archeo-Tech Remnant. (Reported by SeventhSun)"
+                },
+                {
+                    "text": "Added \"Sync\" button to daily raids UI to simplify sync on mobile version. (Requested by Szarekh)"
+                },
+                {
+                    "text": "Updated daily raids settings custom locations selector to include Extremis and Indomitus early nodes",
+                    "images": [
+                        {
+                            "path": "daily.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with guides instances not opening and causing page go blank. (Reported by ImYaHuckleberry)"
+                },
+                {
+                    "text": "Fixed issue with API sync not updating locked characters shards"
+                },
+                {
+                    "text": "Fixed issue with API sync after which daily raids recommended to add values with negative numbers. (Reported by BlatantFix)"
+                },
+                {
+                    "text": "Fixed issue with API sync not updating inventory upgrades with zero values. (Reported by Janson)"
+                },
+                {
+                    "text": "[cpunerd] Fixed upgrades images are size on Campaign Progression page. (Reported by Juan)"
+                }
+            ]
+        },
         {
             "version": "1.6.8",
             "date": "January 20, 2025",

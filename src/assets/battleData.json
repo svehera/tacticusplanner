@@ -6587,7 +6587,7 @@
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
         "nodeNumber": 7,
-        "reward": "Psychic Force Conduit",
+        "reward": "Archeo-Tech Remnant",
         "expectedGold": 83,
         "enemiesTotal": 12,
         "enemiesTypes": ["Heavy Intercessor", "Cadian Guardsman"]
@@ -9153,7 +9153,7 @@
 
     "AME1": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 1,
         "reward": "Ropes and Chains",
         "expectedGold": 53,
@@ -9163,7 +9163,7 @@
     },
     "AME2": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 2,
         "reward": "Basic Auxiliary Core",
         "expectedGold": 53,
@@ -9173,7 +9173,7 @@
     },
     "AME3": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 3,
         "reward": "Adamantium Ore",
         "expectedGold": 53,
@@ -9183,7 +9183,7 @@
     },
     "AME4": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 4,
         "reward": "Wires",
         "expectedGold": 53,
@@ -9193,7 +9193,7 @@
     },
     "AME5": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 5,
         "reward": "Auspex",
         "expectedGold": 53,
@@ -9203,7 +9203,7 @@
     },
     "AME6": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 6,
         "reward": "Tan Gi'Da",
         "expectedGold": 53,
@@ -9212,7 +9212,7 @@
     },
     "AME7": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 7,
         "reward": "Purity Seal",
         "expectedGold": 53,
@@ -9222,7 +9222,7 @@
     },
     "AME8": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 8,
         "reward": "Minor Bionic Enhancement",
         "expectedGold": 53,
@@ -9232,7 +9232,7 @@
     },
     "AME9": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 9,
         "reward": "Vox-Caster",
         "expectedGold": 53,
@@ -9242,7 +9242,7 @@
     },
     "AME10": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 10,
         "reward": "Repair-Kit",
         "expectedGold": 53,
@@ -9251,7 +9251,7 @@
     },
     "AME11": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 11,
         "reward": "Exitor-Rho",
         "expectedGold": 53,
@@ -9260,7 +9260,7 @@
     },
     "AME12": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 12,
         "reward": "Rebreather",
         "expectedGold": 53,
@@ -9270,7 +9270,7 @@
     },
     "AME13": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 13,
         "reward": "Reinforced Cables",
         "expectedGold": 53,
@@ -9280,7 +9280,7 @@
     },
     "AME14": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 14,
         "reward": "Plasma Cell",
         "expectedGold": 53,
@@ -9289,7 +9289,7 @@
     },
     "AME15": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 15,
         "reward": "Cloak",
         "expectedGold": 53,
@@ -9298,7 +9298,7 @@
     },
     "AME16": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 16,
         "reward": "Motive Force Capacitator",
         "expectedGold": 53,
@@ -9308,7 +9308,7 @@
     },
     "AME17": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 17,
         "reward": "Actus",
         "expectedGold": 53,
@@ -9317,7 +9317,7 @@
     },
     "AME18": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 18,
         "reward": "Fine Micro-Generator",
         "expectedGold": 53,
@@ -9327,7 +9327,7 @@
     },
     "AME19": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 19,
         "reward": "The Gold Phoenix",
         "expectedGold": 53,
@@ -9336,7 +9336,7 @@
     },
     "AME20": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 20,
         "reward": "Oath Seal",
         "expectedGold": 53,
@@ -9346,7 +9346,7 @@
     },
     "AME21": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 21,
         "reward": "Cogwheel Crest",
         "expectedGold": 53,
@@ -9355,7 +9355,7 @@
     },
     "AME22": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 22,
         "reward": "Vitruvius",
         "expectedGold": 53,
@@ -9364,7 +9364,7 @@
     },
     "AME23": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 23,
         "reward": "Writings",
         "expectedGold": 53,
@@ -9373,7 +9373,7 @@
     },
     "AME24": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 24,
         "reward": "Divinator Class Auspex",
         "expectedGold": 53,
@@ -9383,7 +9383,7 @@
     },
     "AME25": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 25,
         "reward": "Air Purificator",
         "expectedGold": 53,
@@ -9392,7 +9392,7 @@
     },
     "AME26": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 26,
         "reward": "Reliquary of Protection",
         "expectedGold": 53,
@@ -9407,7 +9407,7 @@
     },
     "AME27": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 27,
         "reward": "Metal Decorative Skull",
         "expectedGold": 53,
@@ -9416,7 +9416,7 @@
     },
     "AME28": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 28,
         "reward": "Bionic Eye",
         "expectedGold": 53,
@@ -9425,7 +9425,7 @@
     },
     "AME29": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 29,
         "reward": "Crate of Salvage",
         "expectedGold": 53,
@@ -9440,7 +9440,7 @@
     },
     "AME30": {
         "campaign": "Adeptus Mechanicus Extremis",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 30,
         "reward": "Blessed Cogitator",
         "expectedGold": 53,
@@ -9478,7 +9478,7 @@
 
     "AMEC1": {
         "campaign": "Adeptus Mechanicus Extremis Challenge",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 1,
         "reward": "Unyielding Rivets",
         "expectedGold": 53,
@@ -9487,7 +9487,7 @@
     },
     "AMEC2": {
         "campaign": "Adeptus Mechanicus Extremis Challenge",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 2,
         "reward": "Archeo-Tech Remnant",
         "expectedGold": 53,
@@ -9496,7 +9496,7 @@
     },
     "AMEC3": {
         "campaign": "Adeptus Mechanicus Extremis Challenge",
-        "campaignType": "Mirror",
+        "campaignType": "Extremis",
         "nodeNumber": 3,
         "reward": "Archeotech Bionics",
         "expectedGold": 53,

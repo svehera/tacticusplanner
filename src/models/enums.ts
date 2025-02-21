@@ -182,6 +182,7 @@ export enum LegendaryEventEnum {
     Kharn = 7,
     Mephiston = 8,
     Patermine = 9,
+    Dante = 10,
 }
 
 export enum PersonalGoalType {
@@ -214,6 +215,7 @@ export enum CampaignType {
     Mirror = 'Mirror',
     Elite = 'Elite',
     Onslaught = 'Onslaught',
+    Extremis = 'Extremis',
 }
 
 export enum Campaign {
