@@ -215,6 +215,7 @@ export enum CampaignType {
     Mirror = 'Mirror',
     Elite = 'Elite',
     Onslaught = 'Onslaught',
+    Extremis = 'Extremis',
 }
 
 export enum Campaign {

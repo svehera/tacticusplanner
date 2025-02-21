@@ -124,7 +124,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     }
 
     return (
-        <Dialog open={open} onClose={close} fullWidth fullScreen={isMobile}>
+        <Dialog open={open} onClose={close} fullWidth maxWidth={'md'} fullScreen={isMobile}>
             <DialogTitle>Raids settings</DialogTitle>
             <DialogContent>
                 <FormGroup style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: '0 20px' }}>
@@ -148,7 +148,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                         />
                     </div>
 
-                    <div className="flex-box between wrap" style={{ alignItems: 'unset' }}>
+                    <div className="flex flex-wrap gap-10" style={{ alignItems: 'unset' }}>
                         <FormControl>
                             <FormLabel id="radio-buttons-group" style={{ fontWeight: 'bold' }}>
                                 Raids order/grouping:
@@ -229,7 +229,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                         </FormControl>
                     </div>
 
-                    <div className="flex-box between wrap">
+                    <div className="flex flex-wrap gap-10">
                         <FormControl>
                             <FormLabel id="radio-buttons-group2" style={{ fontWeight: 'bold' }}>
                                 Locations selection:
@@ -278,6 +278,10 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
 
                         {dailyRaidsPreferencesForm.farmStrategy === DailyRaidsStrategy.custom && (
                             <DailyRaidsCustomLocations
+                                hasCE={
+                                    !!dailyRaidsPreferencesForm.campaignEvent &&
+                                    dailyRaidsPreferencesForm.campaignEvent !== 'none'
+                                }
                                 settings={customLocationsSettings}
                                 settingsChange={value => {
                                     setCustomLocationsSettings(value);

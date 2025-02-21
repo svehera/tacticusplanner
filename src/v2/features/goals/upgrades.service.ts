@@ -530,7 +530,7 @@ export class UpgradesService {
                 settings.preferences.farmStrategy === DailyRaidsStrategy.custom &&
                 settings.preferences.customSettings
             ) {
-                const locationTypes = [...settings.preferences.customSettings[combinedUpgrade.rarity]];
+                let locationTypes = [...settings.preferences.customSettings[combinedUpgrade.rarity]];
                 const selectedLocations = combinedUpgrade.locations.filter(x => x.isSuggested);
                 let ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
                 if (ignoredLocations.length !== selectedLocations.length) {
@@ -538,8 +538,20 @@ export class UpgradesService {
                         ignoredLocation.isSuggested = false;
                     }
                 } else {
-                    if (locationTypes.includes(CampaignType.Elite) && !locationTypes.includes(CampaignType.Mirror)) {
-                        locationTypes.push(CampaignType.Mirror);
+                    // Adjust for dependencies
+                    const needsUpdate = new Set<CampaignType>();
+
+                    if (locationTypes.includes(CampaignType.Elite) && !locationTypes.includes(CampaignType.Extremis)) {
+                        needsUpdate.add(CampaignType.Extremis);
+                    }
+
+                    if (locationTypes.includes(CampaignType.Extremis) && !locationTypes.includes(CampaignType.Mirror)) {
+                        needsUpdate.add(CampaignType.Mirror);
+                    }
+
+                    if (needsUpdate.size > 0) {
+                        locationTypes = [...locationTypes, ...needsUpdate];
+
                         ignoredLocations = selectedLocations.filter(x => !locationTypes.includes(x.campaignType));
 
                         if (ignoredLocations.length !== selectedLocations.length) {

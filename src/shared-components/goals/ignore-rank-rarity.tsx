@@ -12,7 +12,7 @@ export const IgnoreRankRarity: React.FC<{
     return (
         <FlexBox>
             <FormControlLabel
-                label="Ignore Rank/Rarity restrictions"
+                label="Ignore Unlock/Rarity restrictions"
                 control={
                     <Switch
                         checked={value}
@@ -23,7 +23,7 @@ export const IgnoreRankRarity: React.FC<{
             />
             <AccessibleTooltip
                 title={
-                    'If you toggle on this switch then you will be able to set Upgrade Rank goal for a character you have not unlocked or ascended to required rarity yet'
+                    'If you toggle on this switch then you will be able to set goal for a character you have not unlocked or ascended to required rarity yet'
                 }>
                 <Info color="primary" />
             </AccessibleTooltip>

@@ -1,16 +1,22 @@
-﻿import React from 'react';
+﻿import React, { useMemo, useState } from 'react';
 import { CampaignType, Rarity } from 'src/models/enums';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import Checkbox from '@mui/material/Checkbox';
 import { ICustomDailyRaidsSettings } from 'src/models/interfaces';
 import { uniq } from 'lodash';
+import { CampaignsService } from '@/v2/features/goals/campaigns.service';
+import { Badge, FormControlLabel, Switch } from '@mui/material';
+import { Info } from '@mui/icons-material';
+import { AccessibleTooltip } from '@/v2/components/tooltip';
 
 interface Props {
+    hasCE: boolean;
     settings: ICustomDailyRaidsSettings;
     settingsChange: (value: ICustomDailyRaidsSettings) => void;
 }
 
-export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsChange }) => {
+export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsChange, hasCE }) => {
+    const [showDroprates, setShowDroprates] = useState<boolean>(false);
     const rarities: Rarity[] = [Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon, Rarity.Common];
 
     const handleChange = (rarity: Rarity, checked: boolean, campaignTypes: CampaignType[]) => {
@@ -23,43 +29,75 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
         });
     };
 
+    const campaignTypes = useMemo(() => {
+        const defaultList = [CampaignType.Elite, CampaignType.Early, CampaignType.Mirror, CampaignType.Normal];
+        if (!hasCE) {
+            return defaultList;
+        }
+
+        return [CampaignType.Extremis, ...defaultList];
+    }, [hasCE]);
+
+    const campaignLabels: Partial<Record<CampaignType, string>> = {
+        [CampaignType.Early]: 'Indomitus 15-29',
+        [CampaignType.Elite]: 'Elite',
+        [CampaignType.Mirror]: 'Mirror',
+        [CampaignType.Normal]: 'Normal',
+        [CampaignType.Extremis]: 'Extremis CE',
+    };
+
     return (
-        <div className="flex-box">
-            <div className="flex-box column">
-                <div style={{ height: 24 }} className="flex-box"></div>
-                <div style={{ height: 42 }} className="flex-box">
-                    Elite
+        <div className="flex">
+            <div className="flex flex-col">
+                <div className="h-6">
+                    <FormControlLabel
+                        control={<Switch value={showDroprates} onChange={(_, checked) => setShowDroprates(checked)} />}
+                        label={
+                            <div className="flex items-center text-fg">
+                                <span>Show Rates&nbsp;</span>
+                                <AccessibleTooltip title={'Energy conversion efficiency per 1 energy used'}>
+                                    <Info color="primary" />
+                                </AccessibleTooltip>
+                            </div>
+                        }
+                    />
                 </div>
-                <div style={{ height: 42 }} className="flex-box">
-                    Mirror
-                </div>
-                <div style={{ height: 42 }} className="flex-box">
-                    Normal
-                </div>
+                {campaignTypes.map(type => (
+                    <div key={type} className="h-[42px] flex items-center justify-center font-medium">
+                        {campaignLabels[type]}
+                    </div>
+                ))}
             </div>
-            <div className="flex-box">
+
+            <div className="flex">
                 {rarities.map(rarity => {
                     const value = settings[rarity];
+
                     return (
-                        <div key={rarity} className="flex-box column">
+                        <div key={rarity} className="flex flex-col items-center mx-2">
                             <RarityImage rarity={rarity} />
-                            <Checkbox
-                                disabled={!value.includes(CampaignType.Mirror) && !value.includes(CampaignType.Normal)}
-                                checked={value.includes(CampaignType.Elite)}
-                                onChange={event =>
-                                    handleChange(rarity, event.target.checked, [CampaignType.Elite, CampaignType.Early])
-                                }
-                            />
-                            <Checkbox
-                                disabled={!value.includes(CampaignType.Elite) && !value.includes(CampaignType.Normal)}
-                                checked={value.includes(CampaignType.Mirror)}
-                                onChange={event => handleChange(rarity, event.target.checked, [CampaignType.Mirror])}
-                            />
-                            <Checkbox
-                                disabled={!value.includes(CampaignType.Mirror) && !value.includes(CampaignType.Elite)}
-                                checked={value.includes(CampaignType.Normal)}
-                                onChange={event => handleChange(rarity, event.target.checked, [CampaignType.Normal])}
-                            />
+                            {campaignTypes.map(type => (
+                                <div
+                                    key={type}
+                                    className="flex flex-col gap-3 min-h-[42px] min-w-[42px] justify-center">
+                                    {!showDroprates ? (
+                                        <Checkbox
+                                            className="mt-2"
+                                            checked={value.includes(type)}
+                                            onChange={event => handleChange(rarity, event.target.checked, [type])}
+                                        />
+                                    ) : (
+                                        <Badge
+                                            className="cursor-pointer"
+                                            badgeContent="✓"
+                                            invisible={!value.includes(type)}
+                                            color="primary"
+                                            onClick={() => handleChange(rarity, !value.includes(type), [type])}>
+                                            <span>{CampaignsService.getItemAcquiredPerEnergyUsed(type, rarity)}</span>
+                                        </Badge>
+                                    )}
+                                </div>
+                            ))}
                         </div>
                     );
                 })}
