@@ -12,9 +12,11 @@ import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { LegendaryEventEnum, PersonalGoalType } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 import { CharacterImage } from 'src/shared-components/character-image';
+import { useAuth } from '@/contexts/auth';
 
 export const Home = () => {
     const navigate = useNavigate();
+    const { userInfo } = useAuth();
     const { goals, dailyRaids } = useContext(StoreContext);
     const nextLeMenuItem = StaticDataService.activeLre;
     const goalsMenuItem = menuItemById['goals'];
@@ -58,38 +60,34 @@ export const Home = () => {
     const timeToEnd = timeLeftToFutureDate(nextLeDateEnd);
     const isEventStarted = timeToStart === 'Finished';
 
-    const announcments = () => {
+    const announcements = () => {
+        if (userInfo.tacticusApiKey) {
+            return <></>;
+        }
+
         return (
-            <div style={{ textAlign: 'center', padding: '25px 0px 50px 0px' }}>
-                <h2 style={{ textAlign: 'center' }}>Exciting News from WH40k Tacticus!</h2>
+            <div style={{ textAlign: 'center', padding: '25px 0 50px' }}>
+                <h2>Exciting News from WH40k Tacticus!</h2>
                 <p>
-                    We’re excited to announce that player API keys are now available. Use your key to easily upload your
-                    Tacticus roster to{' '}
-                    <a href="https://TacticusPlanner.app" target="_blank" rel="noreferrer">
-                        TacticusPlanner.app
-                    </a>{' '}
+                    We&apos;re thrilled to announce that player API keys are now available! Use your key to effortlessly
+                    upload your Tacticus roster to the Planner.
                 </p>
                 <p>
-                    For more details, please check out our{' '}
-                    <a href="https://tacticusplanner.app/faq" target="_blank" rel="noreferrer">
+                    For more details, check out our{' '}
+                    <a href="/faq" target="_blank" rel="noreferrer">
                         FAQ
                     </a>{' '}
-                    or access additional information via the user menu.
+                    or find additional information in the user menu.
                 </p>
             </div>
-            // <h2 style={{ textAlign: 'center' }}>
-            //     <a href="https://forms.gle/AhiqYtSAgQBmY9VW8" target="_blank" rel="noreferrer">
-            //         Beginners Guide Contest (Until October 31st)
-            //     </a>
-            // </h2>
         );
     };
 
     return (
         <div>
-            {announcments()}
+            {announcements()}
             <Thanks sliderMode={true} />
-            {announcments()}
+            {/*{announcments()}*/}
             <div
                 style={{
                     display: 'flex',
