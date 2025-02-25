@@ -121,12 +121,11 @@ export const DailyRaids = () => {
         setHasChanges(false);
     };
 
-    const sync = () => {
-        syncWithTacticus(viewPreferences.apiIntegrationSyncOptions).then(() => {
-            setTimeout(() => {
-                refresh();
-            }, 300);
-        });
+    const sync = async () => {
+        await syncWithTacticus(viewPreferences.apiIntegrationSyncOptions);
+        setTimeout(() => {
+            refresh();
+        }, 500);
     };
 
     const resetDay = () => {

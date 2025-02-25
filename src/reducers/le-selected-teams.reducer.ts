@@ -50,7 +50,7 @@ export const leSelectedTeamsReducer = (
             const newTeam: ILreTeam = { ...team, id: v4() };
             delete newTeam.characters;
 
-            legendaryEvent.teams.push(newTeam);
+            legendaryEvent.teams = [...legendaryEvent.teams, newTeam];
 
             return { ...state, [eventId]: { ...legendaryEvent } };
         }
@@ -74,14 +74,15 @@ export const leSelectedTeamsReducer = (
                 return state;
             }
 
-            const currentTeam = legendaryEvent.teams.find(x => x.id === teamId);
+            const currentTeamIndex = legendaryEvent.teams.findIndex(x => x.id === teamId);
 
-            if (!currentTeam) {
+            if (currentTeamIndex < 0) {
                 return state;
             }
 
-            currentTeam.name = name;
-            currentTeam.charactersIds = charactersIds;
+            legendaryEvent.teams = [...legendaryEvent.teams];
+
+            legendaryEvent.teams[currentTeamIndex] = { ...legendaryEvent.teams[currentTeamIndex], name, charactersIds };
 
             return { ...state, [eventId]: { ...legendaryEvent } };
         }

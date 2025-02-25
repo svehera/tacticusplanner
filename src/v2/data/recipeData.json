@@ -1564,6 +1564,7 @@
         "icon": "key of ignorance.jpg"
     },
     "Kill Count": {
+        "tacticusId": "upgHpR018",
         "material": "Kill Count",
         "craftable": false,
         "stat": "Health",
@@ -2149,6 +2150,7 @@
         "icon": "weapon anointment oils.jpg"
     },
     "Weapon Parts": {
+        "tacticusId": "upgDmgC012",
         "material": "Weapon Parts",
         "craftable": false,
         "stat": "Damage",

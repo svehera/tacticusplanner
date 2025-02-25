@@ -184,7 +184,7 @@ export const RankLookup = () => {
         },
         {
             valueGetter: params => {
-                return params.data ? Math.max(params.data.count - inventory.upgrades[params.data.id], 0) : 0;
+                return params.data ? Math.max(params.data.count - (inventory.upgrades[params.data.id] ?? 0), 0) : 0;
             },
             headerName: 'Remaining',
             maxWidth: 90,
