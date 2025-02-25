@@ -20,8 +20,8 @@ export const Faq = () => {
                 maxWidth: isMobile ? undefined : 800,
             }}>
             <p>
-                Bellow you&apos;ll find answers to the most common questions you may have on the Tacticus Planner app.
-                If you still can&apos;t find the answer you&apos;re looking for, just{' '}
+                Below you&apos;ll find answers to the most common questions you may have on the Tacticus Planner app. If
+                you still can&apos;t find the answer you&apos;re looking for, just{' '}
                 <Link to={'../contacts'}>Contact me</Link>
             </p>
             {map(itemsByCategories, (items, category) => (

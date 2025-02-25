@@ -60,12 +60,28 @@ export const Home = () => {
 
     const announcments = () => {
         return (
+            <div style={{ textAlign: 'center', padding: '25px 0px 50px 0px' }}>
+                <h2 style={{ textAlign: 'center' }}>Exciting News from WH40k Tacticus!</h2>
+                <p>
+                    We’re excited to announce that player API keys are now available. Use your key to easily upload your
+                    Tacticus roster to{' '}
+                    <a href="https://TacticusPlanner.app" target="_blank" rel="noreferrer">
+                        TacticusPlanner.app
+                    </a>{' '}
+                </p>
+                <p>
+                    For more details, please check out our{' '}
+                    <a href="https://tacticusplanner.app/faq" target="_blank" rel="noreferrer">
+                        FAQ
+                    </a>{' '}
+                    or access additional information via the user menu.
+                </p>
+            </div>
             // <h2 style={{ textAlign: 'center' }}>
             //     <a href="https://forms.gle/AhiqYtSAgQBmY9VW8" target="_blank" rel="noreferrer">
             //         Beginners Guide Contest (Until October 31st)
             //     </a>
             // </h2>
-            <></>
         );
     };
 
