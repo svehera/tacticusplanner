@@ -4,6 +4,7 @@ import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 import { TacticusCampaignProgress } from '@/v2/features/tacticus-integration/tacticus-integration.models';
 import { Campaign } from 'src/models/enums';
 import { CampaignsService } from '@/v2/features/goals/campaigns.service';
+import { campaignEventsLocations } from '@/v2/features/campaigns/campaigns.constants';
 
 export type DailyRaidsAction =
     | {
@@ -38,7 +39,10 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
             };
         }
         case 'SyncWithTacticus': {
-            const raidedLocations: IItemRaidLocation[] = [];
+            // Workaround to not reset CE data automatically
+            const raidedLocations: IItemRaidLocation[] = state.raidedLocations.filter(x =>
+                campaignEventsLocations.includes(x.campaign)
+            );
 
             for (const campaign of action.progress) {
                 const completedBattles = campaign.battles.filter(battle => battle.attemptsUsed !== 0);
