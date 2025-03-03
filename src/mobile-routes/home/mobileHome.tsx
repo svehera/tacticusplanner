@@ -1,4 +1,4 @@
-﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
+﻿import React, { useContext, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Badge, Tooltip } from '@mui/material';
 import ThemeSwitch from '../../shared-components/theme-switch';
@@ -15,11 +15,13 @@ import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
 import { usePwaInstall } from '@/v2/hooks/usePwaInstall';
 import { AddToHomeScreen } from '@/v2/features/pwa/addToHomeScreen';
 import { isMobile } from 'react-device-detect';
+import { useBmcWidget } from '@/v2/hooks/useBmcWidget';
 
 export const MobileHome = () => {
     const { seenAppVersion } = useContext(StoreContext);
     const navigate = useNavigate();
     const { deviceLink, isInstalled } = usePwaInstall();
+    useBmcWidget();
 
     const [showPwaInstall, setShowPwaInstall] = useState(isMobile);
     const [showWhatsNew, setShowWhatsNew] = useState(false);
