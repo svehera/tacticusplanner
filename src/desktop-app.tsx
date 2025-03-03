@@ -3,14 +3,11 @@ import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
 import TopAppBar from './app-bar';
-import { useBmcWidget } from '@/v2/hooks/useBmcWidget';
 
 const DesktopApp = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const preferredView = localStorage.getItem('preferredView');
-
-    useBmcWidget();
 
     useEffect(() => {
         const redirect = searchParams.get('redirect');
