@@ -178,7 +178,7 @@ export const Characters = () => {
         {
             valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                 StatCalculatorService.calculateHealth(
-                    props.data?.id,
+                    props.data?.id ?? '',
                     Rarity.Legendary,
                     RarityStars.BlueStar,
                     Rank.Diamond3
@@ -189,7 +189,7 @@ export const Characters = () => {
         {
             valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                 StatCalculatorService.calculateDamage(
-                    props.data?.id,
+                    props.data?.id ?? '',
                     Rarity.Legendary,
                     RarityStars.BlueStar,
                     Rank.Diamond3
@@ -200,7 +200,7 @@ export const Characters = () => {
         {
             valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                 StatCalculatorService.calculateArmor(
-                    props.data?.id,
+                    props.data?.id ?? '',
                     Rarity.Legendary,
                     RarityStars.BlueStar,
                     Rank.Diamond3

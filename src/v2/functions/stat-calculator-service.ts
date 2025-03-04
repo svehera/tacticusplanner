@@ -17,7 +17,7 @@ export class StatCalculatorService {
      * @returns the health of the given unit, given their current rarity, rank,
      *          and equipment. -1 if the unit can't be found.
      */
-    static getHealth(unit: ICharacter2 | null): number {
+    static getHealth(unit: ICharacter2 | undefined): number {
         if (unit == null) return 0;
         return this.calculateHealth(unit!.id, unit!.rarity, unit!.stars, unit!.rank);
     }
@@ -26,7 +26,7 @@ export class StatCalculatorService {
      * @returns the damage of the given unit, given their current rarity, rank,
      *          and equipment. -1 if the unit can't be found.
      */
-    static getDamage(unit: ICharacter2 | null): number {
+    static getDamage(unit: ICharacter2 | undefined): number {
         if (unit == null) return 0;
         return this.calculateDamage(unit!.id, unit!.rarity, unit!.stars, unit!.rank);
     }
@@ -35,7 +35,7 @@ export class StatCalculatorService {
      * @returns the armor of the given unit, given their current rarity, rank,
      *          and equipment. -1 if the unit can't be found.
      */
-    static getArmor(unit: ICharacter2 | null): number {
+    static getArmor(unit: ICharacter2 | undefined): number {
         if (unit == null) return 0;
         return this.calculateArmor(unit!.id, unit!.rarity, unit!.stars, unit!.rank);
     }
@@ -51,8 +51,7 @@ export class StatCalculatorService {
             baseStat *
                 Math.pow(1.25205, rankValue) *
                 (1 + 0.1 * rarityValue) *
-                (1 + Math.min(0.05 * rankValue, 0.3) * incisusHack),
-            0
+                (1 + Math.min(0.05 * rankValue, 0.3) * incisusHack)
         );
     }
 
