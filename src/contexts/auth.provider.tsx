@@ -11,7 +11,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     const [token, setToken] = useState(localStorage.getItem(localStorageKey) ?? '');
     const [username, setUsername] = useState(localStorage.getItem(localStorageUserKey) ?? 'Tactician');
     const [shareToken, setShareToken] = useState<string | undefined>('');
-    const [userInfo, setUserInfo] = useState<IUserInfo>({} as any);
+    const [userInfo, setUserInfo] = useState<IUserInfo>({ tacticusApiKey: 'key' } as any);
 
     const login = (accessToken: string) => {
         setIsAuthenticated(true);
