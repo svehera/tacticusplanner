@@ -1,32 +1,31 @@
-﻿import React, { useState } from 'react';
+﻿import React from 'react';
 import './dirty-dozen-table.css';
 import { IDirtyDozenChar } from './dirty-dozen.models';
 import { AgGridReact } from 'ag-grid-react';
-import {
-    AllCommunityModule,
-    ColDef,
-    ColGroupDef,
-    ICellRendererParams,
-    ValueGetterParams,
-    themeBalham,
-} from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
 import { Score } from 'src/v2/features/dirty-dozen/dirty-dozen-score';
 import { CharacterTitle } from 'src/shared-components/character-title';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { ICharacter2 } from 'src/models/interfaces';
 
-export const DirtyDozenTable = ({ characters, rows }: { characters: ICharacter2[]; rows: IDirtyDozenChar[] }) => {
+interface Props {
+    characters: ICharacter2[];
+    rows: IDirtyDozenChar[];
+    columns: Array<[string, string]>;
+}
+
+export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) => {
     const defaultColDef: ColDef<IDirtyDozenChar> = {
         sortable: true,
         resizable: true,
     };
 
-    const createScoreColumn = (field: keyof IDirtyDozenChar, headerName: string): ColDef<IDirtyDozenChar> => {
+    const createScoreColumn = (field: string, headerName: string): ColDef<IDirtyDozenChar> => {
         return {
             field,
             headerName,
-            width: 100,
+            width: 80,
             cellRenderer: (params: ICellRendererParams<IDirtyDozenChar, number>) => {
                 const { value } = params;
                 return <Score value={value ?? 0} />;
@@ -36,15 +35,16 @@ export const DirtyDozenTable = ({ characters, rows }: { characters: ICharacter2[
         } as ColDef<IDirtyDozenChar>;
     };
 
-    const [columnDefs] = useState<Array<ColDef | ColGroupDef>>([
+    const columnDefs: Array<ColDef> = [
         {
+            headerName: '#',
             field: 'Position',
-            maxWidth: 90,
+            maxWidth: 30,
         },
         {
             field: 'Name',
             headerName: 'Name',
-            width: 200,
+            width: 150,
             cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {
                 const characterId = props.data?.Name;
                 const character = characters.find(x => x.name === characterId);
@@ -57,7 +57,7 @@ export const DirtyDozenTable = ({ characters, rows }: { characters: ICharacter2[
         },
         {
             headerName: 'Rarity',
-            width: 80,
+            width: 60,
             valueGetter: (props: ValueGetterParams<IDirtyDozenChar>) => {
                 const characterId = props.data?.Name;
                 const character = characters.find(x => x.name === characterId);
@@ -70,7 +70,7 @@ export const DirtyDozenTable = ({ characters, rows }: { characters: ICharacter2[
         },
         {
             headerName: 'Rank',
-            width: 80,
+            width: 60,
             valueGetter: (props: ValueGetterParams<IDirtyDozenChar>) => {
                 const characterId = props.data?.Name;
                 const character = characters.find(x => x.name === characterId);
@@ -81,12 +81,14 @@ export const DirtyDozenTable = ({ characters, rows }: { characters: ICharacter2[
                 return <RankImage rank={rank} />;
             },
         },
-
-        createScoreColumn('Horde', 'Horde'),
-        createScoreColumn('GuildWar', 'Guild War'),
-        createScoreColumn('GuildRaid', 'Guild Raid'),
-        createScoreColumn('ModifiedScore', 'Modified Score'),
-    ]);
+        {
+            headerName: 'GR Team',
+            field: 'GRTeam',
+            width: 80,
+            hide: !rows.some(x => !!x.GRTeam),
+        },
+        ...columns.map(([field, header]) => createScoreColumn(field, header)),
+    ];
 
     return (
         <div className="ag-theme-material dirty-dozen-table">

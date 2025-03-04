@@ -23,27 +23,25 @@ const mobileSnackbarOrigin: SnackbarOrigin = { vertical: 'top', horizontal: 'cen
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-    <React.StrictMode>
-        <AnalyticsProvider instance={analytics}>
-            <AuthProvider>
-                <TitleProvider>
-                    <LoaderProvider>
-                        <SnackbarProvider
-                            autoHideDuration={5000}
-                            anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
-                            onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
-                        />
-                        <StoreProvider>
-                            {/*// @ts-expect-error Ts being weird */}
-                            <PopupProvider>
-                                <RouterProvider router={routes} />
-                            </PopupProvider>
-                        </StoreProvider>
-                    </LoaderProvider>
-                </TitleProvider>
-            </AuthProvider>
-        </AnalyticsProvider>
-    </React.StrictMode>
+    <AnalyticsProvider instance={analytics}>
+        <AuthProvider>
+            <TitleProvider>
+                <LoaderProvider>
+                    <SnackbarProvider
+                        autoHideDuration={5000}
+                        anchorOrigin={isMobile ? mobileSnackbarOrigin : webSnackbarOrigin}
+                        onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
+                    />
+                    <StoreProvider>
+                        {/*// @ts-expect-error Ts being weird */}
+                        <PopupProvider>
+                            <RouterProvider router={routes} />
+                        </PopupProvider>
+                    </StoreProvider>
+                </LoaderProvider>
+            </TitleProvider>
+        </AuthProvider>
+    </AnalyticsProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

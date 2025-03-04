@@ -13,8 +13,10 @@ import { LegendaryEventEnum, PersonalGoalType } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 import { CharacterImage } from 'src/shared-components/character-image';
 import { useAuth } from '@/contexts/auth';
+import { useBmcWidget } from '@/v2/hooks/useBmcWidget';
 
 export const Home = () => {
+    useBmcWidget();
     const navigate = useNavigate();
     const { userInfo } = useAuth();
     const { goals, dailyRaids } = useContext(StoreContext);
