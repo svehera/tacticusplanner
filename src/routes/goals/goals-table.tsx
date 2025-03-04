@@ -275,7 +275,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                         if (data.type == PersonalGoalType.UpgradeRank) {
                             return (
                                 <div className="flex gap-[3px] justify-left">
-                                    <MiscIcon icon="health" size="15" />
+                                    <MiscIcon icon="health" width={15} height={15} />
                                     {StatCalculatorService.calculateHealth(
                                         data.unitId,
                                         data.rarity,
@@ -294,7 +294,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                         } else if (data.type == PersonalGoalType.Ascend) {
                             return (
                                 <div className="flex gap-[3px] justify-left">
-                                    <MiscIcon icon="health" size="15" />
+                                    <MiscIcon icon="health" width={15} height={15} />
                                     {StatCalculatorService.calculateHealth(
                                         data.unitId,
                                         getUnitRarity(data.unitId),
@@ -323,7 +323,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                         if (data.type == PersonalGoalType.UpgradeRank) {
                             return (
                                 <div className="flex gap-[3px] justify-left">
-                                    <MiscIcon icon="damage" size="15" />
+                                    <MiscIcon icon="damage" width={15} height={15} />
                                     {StatCalculatorService.calculateDamage(
                                         data.unitId,
                                         data.rarity,
@@ -342,7 +342,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                         } else if (data.type == PersonalGoalType.Ascend) {
                             return (
                                 <div className="flex gap-[3px] justify-left">
-                                    <MiscIcon icon="damage" size="15" />
+                                    <MiscIcon icon="damage" width={15} height={15} />
                                     {StatCalculatorService.calculateDamage(
                                         data.unitId,
                                         getUnitRarity(data.unitId),
@@ -371,7 +371,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                         if (data.type == PersonalGoalType.UpgradeRank) {
                             return (
                                 <div className="flex gap-[3px] justify-left">
-                                    <MiscIcon icon="armour" size="15" />
+                                    <MiscIcon icon="armour" width={15} height={15} />
                                     {StatCalculatorService.calculateArmor(
                                         data.unitId,
                                         data.rarity,
@@ -390,7 +390,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                         } else if (data.type == PersonalGoalType.Ascend) {
                             return (
                                 <div className="flex gap-[3px] justify-left">
-                                    <MiscIcon icon="armour" size="15" />
+                                    <MiscIcon icon="armour" width={15} height={15} />
                                     {StatCalculatorService.calculateArmor(
                                         data.unitId,
                                         getUnitRarity(data.unitId),
