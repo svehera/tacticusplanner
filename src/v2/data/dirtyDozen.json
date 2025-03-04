@@ -1,243 +1,1022 @@
 [
     {
-        "Name": "Sho'Syl",
-        "Position": 1,
-        "Horde": 5,
-        "GuildRaid": 3.6,
-        "GuildWar": 5,
-        "ModifiedScore": 4.18
+        "version": "1.26 - February 2025",
+        "youtubeLink": "https://www.youtube.com/watch?v=-dLelwx08vc",
+        "columns": [
+            ["ModifiedScore", "Score"],
+            ["Horde", "Horde"],
+            ["War", "War"],
+            ["Raid", "Raid"],
+            ["GRCawl", "Cawl"],
+            ["GRMagnus", "Magnus"],
+            ["GRAvatar", "Avatar"],
+            ["GRRogalDorn", "Rogal Dorn"],
+            ["GRScreamer", "Screamer"],
+            ["GRMortarion", "Mortarion"],
+            ["GROrk", "Ork"],
+            ["GRNecron", "Necron"],
+            ["GRTyranid", "Tyranids"]
+        ],
+        "characters": [
+            {
+                "Name": "Tan Gi'Da",
+                "Position": 1,
+                "Horde": 4.5,
+                "War": 4.5,
+                "Raid": 3.6,
+                "ModifiedScore": 3.93,
+                "GRTyranid": 5.0,
+                "GRRogalDorn": 4.5,
+                "GRNecron": 5.0,
+                "GRAvatar": 4.5,
+                "GROrk": 1.0,
+                "GRMagnus": 3.0,
+                "GRMortarion": 4.0,
+                "GRCawl": 0.0,
+                "GRScreamer": 5.0,
+                "GRTeam": "Mech (Core)"
+            },
+            {
+                "Name": "Boss Gulgortz",
+                "Position": 2,
+                "Horde": 4.5,
+                "War": 5.0,
+                "Raid": 3.3,
+                "ModifiedScore": 3.9,
+                "GRTyranid": 4.5,
+                "GRRogalDorn": 3.0,
+                "GRNecron": 5.0,
+                "GRAvatar": 4.5,
+                "GROrk": 0.0,
+                "GRMagnus": 4.0,
+                "GRMortarion": 2.0,
+                "GRCawl": 3.0,
+                "GRScreamer": 4.0,
+                "GRTeam": "Mech/Multi-Hit"
+            },
+            {
+                "Name": "Actus",
+                "Position": 3,
+                "Horde": 4.0,
+                "War": 3.5,
+                "Raid": 3.6,
+                "ModifiedScore": 3.63,
+                "GRTyranid": 5.0,
+                "GRRogalDorn": 4.5,
+                "GRNecron": 5.0,
+                "GRAvatar": 4.5,
+                "GROrk": 1.0,
+                "GRMagnus": 3.0,
+                "GRMortarion": 4.0,
+                "GRCawl": 0.0,
+                "GRScreamer": 5.0,
+                "GRTeam": "Mech (Core)"
+            },
+            {
+                "Name": "Sho'Syl",
+                "Position": 4,
+                "Horde": 4.5,
+                "War": 4.5,
+                "Raid": 3.1,
+                "ModifiedScore": 3.63,
+                "GRTyranid": 3.5,
+                "GRRogalDorn": 4.5,
+                "GRNecron": 5.0,
+                "GRAvatar": 3.0,
+                "GROrk": 1.0,
+                "GRMagnus": 2.0,
+                "GRMortarion": 2.0,
+                "GRCawl": 1.5,
+                "GRScreamer": 5.0,
+                "GRTeam": "Mech"
+            },
+            {
+                "Name": "Snotflogga",
+                "Position": 5,
+                "Horde": 5.0,
+                "War": 5.0,
+                "Raid": 2.7,
+                "ModifiedScore": 3.63,
+                "GRTeam": "Multi-Hit"
+            },
+            {
+                "Name": "Ragnar Blackmane",
+                "Position": 6,
+                "Horde": 2.0,
+                "War": 4.5,
+                "Raid": 3.9,
+                "ModifiedScore": 3.63,
+                "GRTyranid": 3.5,
+                "GRRogalDorn": 4.5,
+                "GRNecron": 3.5,
+                "GRAvatar": 4.0,
+                "GROrk": 5.0,
+                "GRMagnus": 5.0,
+                "GRMortarion": 1.5,
+                "GRCawl": 4.5,
+                "GRScreamer": 3.5,
+                "GRTeam": "Multi-Hit (Core)"
+            },
+            {
+                "Name": "Vitruvius",
+                "Position": 7,
+                "Horde": 2.5,
+                "War": 3.5,
+                "Raid": 3.9,
+                "ModifiedScore": 3.57,
+                "GRTyranid": 5.0,
+                "GRRogalDorn": 4.0,
+                "GRNecron": 5.0,
+                "GRAvatar": 4.0,
+                "GROrk": 4.0,
+                "GRMagnus": 4.0,
+                "GRMortarion": 4.5,
+                "GRCawl": 0.0,
+                "GRScreamer": 5.0,
+                "GRTeam": "Mech"
+            },
+            {
+                "Name": "Kharn",
+                "Position": 8,
+                "Horde": 3.0,
+                "War": 5.0,
+                "Raid": 3.1,
+                "ModifiedScore": 3.47,
+                "GRTyranid": 3.0,
+                "GRRogalDorn": 3.0,
+                "GRNecron": 5.0,
+                "GRAvatar": 3.0,
+                "GROrk": 3.0,
+                "GRMagnus": 4.5,
+                "GRMortarion": 1.5,
+                "GRCawl": 4.0,
+                "GRScreamer": 3.0,
+                "GRTeam": "Multi-Hit (Core)"
+            },
+            {
+                "Name": "Exitor-Rho",
+                "Position": 9,
+                "Horde": 2.5,
+                "War": 3.5,
+                "Raid": 3.9,
+                "ModifiedScore": 3.37,
+                "GRTyranid": 5.0,
+                "GRRogalDorn": 4.5,
+                "GRNecron": 3.5,
+                "GRAvatar": 4.5,
+                "GROrk": 1.5,
+                "GRMagnus": 3.0,
+                "GRMortarion": 4.0,
+                "GRCawl": 0.0,
+                "GRScreamer": 5.0,
+                "GRTeam": "Mech (Core)"
+            },
+            {
+                "Name": "Aun'Shi",
+                "Position": 10,
+                "Horde": 2.5,
+                "War": 4.0,
+                "Raid": 3.3,
+                "ModifiedScore": 3.37,
+                "GRTyranid": 3.0,
+                "GRRogalDorn": 4.0,
+                "GRNecron": 2.5,
+                "GRAvatar": 4.0,
+                "GROrk": 3.5,
+                "GRMagnus": 4.5,
+                "GRMortarion": 1.5,
+                "GRCawl": 4.0,
+                "GRScreamer": 2.5,
+                "GRTeam": "Multi-Hit (Core)"
+            },
+            {
+                "Name": "Marneus Calgar",
+                "Position": 11,
+                "Horde": 3.5,
+                "War": 3.5,
+                "Raid": 3.1,
+                "ModifiedScore": 3.23,
+                "GRTyranid": 3.0,
+                "GRRogalDorn": 3.5,
+                "GRNecron": 3.0,
+                "GRAvatar": 3.5,
+                "GROrk": 3.5,
+                "GRMagnus": 3.5,
+                "GRMortarion": 1.0,
+                "GRCawl": 3.5,
+                "GRScreamer": 3.0,
+                "GRTeam": "Multi-Hit"
+            },
+            {
+                "Name": "Abraxas",
+                "Position": 12,
+                "Horde": 4.5,
+                "War": 4.0,
+                "Raid": 2.6,
+                "ModifiedScore": 3.23,
+                "GRTeam": "Psyker (Core)"
+            },
+            {
+                "Position": 13,
+                "Name": "Bellator",
+                "ModifiedScore": 3.17,
+                "Horde": 4.5,
+                "War": 4.0,
+                "Raid": 2.4,
+                "GRTeam": "Multi-Hit"
+            },
+            {
+                "Name": "Eldryon",
+                "Position": 14,
+                "Horde": 2.5,
+                "War": 3.0,
+                "Raid": 3.3,
+                "ModifiedScore": 3.1,
+                "GRTyranid": 4.0,
+                "GRRogalDorn": 4.0,
+                "GRNecron": 4.0,
+                "GRAvatar": 0.0,
+                "GROrk": 4.5,
+                "GRMagnus": 1.5,
+                "GRMortarion": 4.0,
+                "GRCawl": 4.0,
+                "GRScreamer": 4.0,
+                "GRTeam": "Multi-Hit"
+            },
+            {
+                "Position": 15,
+                "Name": "Re'Vas",
+                "ModifiedScore": 2.97,
+                "Horde": 3.5,
+                "War": 4.0,
+                "Raid": 2.4,
+                "GRTeam": "Multi-Hit"
+            },
+            {
+                "Position": 16,
+                "Name": "Aleph-Null",
+                "ModifiedScore": 2.93,
+                "Horde": 4.0,
+                "War": 4.0,
+                "Raid": 2.2,
+                "GRTeam": "Mech"
+            },
+            {
+                "Name": "Anuphet",
+                "Position": 16,
+                "Horde": 3.0,
+                "War": 3.0,
+                "Raid": 2.9,
+                "ModifiedScore": 2.93,
+                "GRTyranid": 4.0,
+                "GRRogalDorn": 3.0,
+                "GRNecron": 0.0,
+                "GRAvatar": 4.0,
+                "GROrk": 1.0,
+                "GRMagnus": 3.0,
+                "GRMortarion": 1.0,
+                "GRCawl": 2.0,
+                "GRScreamer": 5.0,
+                "GRTeam": "Mech"
+            },
+            {
+                "Position": 18,
+                "Name": "Ancient Thoread",
+                "ModifiedScore": 2.8,
+                "Horde": 2.5,
+                "War": 3.0,
+                "Raid": 2.8,
+                "GRTeam": "Mech"
+            },
+            {
+                "Position": 19,
+                "Name": "Isabella",
+                "ModifiedScore": 2.77,
+                "Horde": 5.0,
+                "War": 4.5,
+                "Raid": 1.4
+            },
+            {
+                "Position": 20,
+                "Name": "Ulf",
+                "ModifiedScore": 2.6,
+                "Horde": 3.0,
+                "War": 3.5,
+                "Raid": 2.2,
+                "GRTeam": "Multi-Hit"
+            },
+            {
+                "Position": 20,
+                "Name": "Nicodemus",
+                "ModifiedScore": 2.6,
+                "Horde": 4.5,
+                "War": 4.0,
+                "Raid": 1.5
+            },
+            {
+                "Position": 20,
+                "Name": "Mataneo",
+                "ModifiedScore": 2.6,
+                "Horde": 4.5,
+                "War": 4.5,
+                "Raid": 1.3
+            },
+            {
+                "Position": 20,
+                "Name": "Winged Tyrant Prime",
+                "ModifiedScore": 2.6,
+                "Horde": 4.0,
+                "War": 4.5,
+                "Raid": 1.5
+            },
+            {
+                "Position": 24,
+                "Name": "Brother Jaeger",
+                "ModifiedScore": 2.57,
+                "Horde": 4.5,
+                "War": 4.5,
+                "Raid": 1.3
+            },
+            {
+                "Position": 25,
+                "Name": "High Marshal Helbrecht",
+                "ModifiedScore": 2.53,
+                "Horde": 2.5,
+                "War": 2.5,
+                "Raid": 2.6,
+                "GRTeam": "Multi-Hit"
+            },
+            {
+                "Position": 26,
+                "Name": "Aethana",
+                "ModifiedScore": 2.5,
+                "Horde": 1.5,
+                "War": 3.0,
+                "Raid": 2.7,
+                "GRTeam": "Multi-Hit"
+            },
+            {
+                "Position": 26,
+                "Name": "Isaak",
+                "ModifiedScore": 2.5,
+                "Horde": 3.0,
+                "War": 4.5,
+                "Raid": 1.7
+            },
+            {
+                "Position": 28,
+                "Name": "Gibbascrapz",
+                "ModifiedScore": 2.47,
+                "Horde": 3.0,
+                "War": 4.0,
+                "Raid": 1.8
+            },
+            {
+                "Position": 29,
+                "Name": "Ahriman",
+                "ModifiedScore": 2.4,
+                "Horde": 2.5,
+                "War": 3.5,
+                "Raid": 2.0,
+                "GRTeam": "Psyker"
+            },
+            {
+                "Position": 30,
+                "Name": "Roswitha",
+                "ModifiedScore": 2.26,
+                "Horde": 1.5,
+                "War": 2.5,
+                "Raid": 2.6,
+                "GRTeam": "Psyker"
+            }
+        ]
     },
     {
-        "Name": "Tan Gi'Da",
-        "Position": 2,
-        "Horde": 4.5,
-        "GuildRaid": 3.9,
-        "GuildWar": 4.5,
-        "ModifiedScore": 4.16
+        "version": "1.22 - October 2024",
+        "youtubeLink": "https://www.youtube.com/watch?v=-yPF-kIQPf8",
+        "columns": [
+            ["ModifiedScore", "Score"],
+            ["Horde", "Horde"],
+            ["GuildRaid", "Raid"],
+            ["GuildWar", "War"]
+        ],
+        "characters": [
+            {
+                "Name": "Sho'Syl",
+                "Position": 1,
+                "Horde": 5,
+                "GuildRaid": 3.6,
+                "GuildWar": 5,
+                "ModifiedScore": 4.18
+            },
+            {
+                "Name": "Tan Gi'Da",
+                "Position": 2,
+                "Horde": 4.5,
+                "GuildRaid": 3.9,
+                "GuildWar": 4.5,
+                "ModifiedScore": 4.16
+            },
+            {
+                "Name": "Marneus Calgar",
+                "Position": 3,
+                "Horde": 4.5,
+                "GuildRaid": 3.8,
+                "GuildWar": 4.5,
+                "ModifiedScore": 4.09
+            },
+            {
+                "Name": "Exitor-Rho",
+                "Position": 4,
+                "Horde": 3.0,
+                "GuildRaid": 4.1,
+                "GuildWar": 4.0,
+                "ModifiedScore": 3.84
+            },
+            {
+                "Name": "Ragnar Blackmane",
+                "Position": 5,
+                "Horde": 2.0,
+                "GuildRaid": 4.0,
+                "GuildWar": 5.0,
+                "ModifiedScore": 3.8
+            },
+            {
+                "Name": "Eldryon",
+                "Position": 6,
+                "Horde": 2.5,
+                "GuildRaid": 3.9,
+                "GuildWar": 4.0,
+                "ModifiedScore": 3.63
+            },
+            {
+                "Name": "Actus",
+                "Position": 7,
+                "Horde": 3.5,
+                "GuildRaid": 3.9,
+                "GuildWar": 2.5,
+                "ModifiedScore": 3.56
+            },
+            {
+                "Name": "Re'Vas",
+                "Position": 8,
+                "Horde": 4.0,
+                "GuildRaid": 2.8,
+                "GuildWar": 5.0,
+                "ModifiedScore": 3.45
+            },
+            {
+                "Name": "Kharn",
+                "Position": 9,
+                "Horde": 3.0,
+                "GuildRaid": 3.1,
+                "GuildWar": 5.0,
+                "ModifiedScore": 3.44
+            },
+            {
+                "Name": "Bellator",
+                "Position": 10,
+                "Horde": 5.0,
+                "GuildRaid": 2.8,
+                "GuildWar": 3.0,
+                "ModifiedScore": 3.29
+            },
+            {
+                "Name": "Abraxas",
+                "Position": 11,
+                "Horde": 4.0,
+                "GuildRaid": 2.6,
+                "GuildWar": 4.0,
+                "ModifiedScore": 3.18
+            },
+            {
+                "Name": "Boss Gulgortz",
+                "Position": 12,
+                "Horde": 4.0,
+                "GuildRaid": 2.3,
+                "GuildWar": 4.5,
+                "ModifiedScore": 3.09
+            },
+            {
+                "Name": "Anuphet",
+                "Position": 13,
+                "Horde": 3.0,
+                "GuildRaid": 3.1,
+                "GuildWar": 3.0,
+                "ModifiedScore": 3.08
+            },
+            {
+                "Name": "Aun'Shi",
+                "Position": 14,
+                "Horde": 2.5,
+                "GuildRaid": 2.9,
+                "GuildWar": 4.0,
+                "ModifiedScore": 3.06
+            },
+            {
+                "Name": "Aleph-Null",
+                "Position": 15,
+                "Horde": 4.0,
+                "GuildRaid": 1.9,
+                "GuildWar": 4.0,
+                "ModifiedScore": 2.76
+            },
+            {
+                "Name": "High Marshal Helbrecht",
+                "Position": 16,
+                "Horde": 2.5,
+                "GuildRaid": 2.9,
+                "GuildWar": 2.5,
+                "ModifiedScore": 2.73
+            },
+            {
+                "Name": "Isabella",
+                "Position": 17,
+                "Horde": 5.0,
+                "GuildRaid": 1.2,
+                "GuildWar": 4.5,
+                "ModifiedScore": 2.61
+            },
+            {
+                "Name": "Ulf",
+                "Position": 18,
+                "Horde": 3.0,
+                "GuildRaid": 2.1,
+                "GuildWar": 3.5,
+                "ModifiedScore": 2.58
+            },
+            {
+                "Name": "Thaddeus Noble",
+                "Position": 19,
+                "Horde": 2.0,
+                "GuildRaid": 2.1,
+                "GuildWar": 4.5,
+                "ModifiedScore": 2.54
+            },
+            {
+                "Name": "Mataneo",
+                "Position": 20,
+                "Horde": 4.5,
+                "GuildRaid": 1.2,
+                "GuildWar": 4.5,
+                "ModifiedScore": 2.51
+            },
+            {
+                "Name": "Gibbascrapz",
+                "Position": 21,
+                "Horde": 3.0,
+                "GuildRaid": 1.8,
+                "GuildWar": 4.0,
+                "ModifiedScore": 2.45
+            },
+            {
+                "Name": "Snotflogga",
+                "Position": 22,
+                "Horde": 4.5,
+                "GuildRaid": 1.1,
+                "GuildWar": 4.5,
+                "ModifiedScore": 2.44
+            },
+            {
+                "Name": "Roswitha",
+                "Position": 23,
+                "Horde": 1.5,
+                "GuildRaid": 2.7,
+                "GuildWar": 2.5,
+                "ModifiedScore": 2.41
+            },
+            {
+                "Name": "Brother Jaeger",
+                "Position": 24,
+                "Horde": 4.5,
+                "GuildRaid": 1.0,
+                "GuildWar": 4.5,
+                "ModifiedScore": 2.4
+            },
+            {
+                "Name": "Ahriman",
+                "Position": 25,
+                "Horde": 2.5,
+                "GuildRaid": 2.0,
+                "GuildWar": 3.5,
+                "ModifiedScore": 2.4
+            },
+            {
+                "Name": "Aethana",
+                "Position": 26,
+                "Horde": 1.5,
+                "GuildRaid": 2.8,
+                "GuildWar": 2.0,
+                "ModifiedScore": 2.35
+            },
+            {
+                "Name": "Nauseous Rotbone",
+                "Position": 27,
+                "Horde": 5.0,
+                "GuildRaid": 0.9,
+                "GuildWar": 4.0,
+                "ModifiedScore": 2.33
+            },
+            {
+                "Name": "Brother Burchard",
+                "Position": 28,
+                "Horde": 5.0,
+                "GuildRaid": 1.0,
+                "GuildWar": 3.5,
+                "ModifiedScore": 2.3
+            },
+            {
+                "Name": "Maugan Ra",
+                "Position": 29,
+                "Horde": 2.0,
+                "GuildRaid": 2.3,
+                "GuildWar": 2.5,
+                "ModifiedScore": 2.29
+            },
+            {
+                "Name": "Celestine",
+                "Position": 30,
+                "Horde": 2.0,
+                "GuildRaid": 1.4,
+                "GuildWar": 5.0,
+                "ModifiedScore": 2.26
+            }
+        ]
     },
     {
-        "Name": "Marneus Calgar",
-        "Position": 3,
-        "Horde": 4.5,
-        "GuildRaid": 3.8,
-        "GuildWar": 4.5,
-        "ModifiedScore": 4.09
-    },
-    {
-        "Name": "Exitor-Rho",
-        "Position": 4,
-        "Horde": 3.0,
-        "GuildRaid": 4.1,
-        "GuildWar": 4.0,
-        "ModifiedScore": 3.84
-    },
-    {
-        "Name": "Ragnar Blackmane",
-        "Position": 5,
-        "Horde": 2.0,
-        "GuildRaid": 4.0,
-        "GuildWar": 5.0,
-        "ModifiedScore": 3.8
-    },
-    {
-        "Name": "Eldryon",
-        "Position": 6,
-        "Horde": 2.5,
-        "GuildRaid": 3.9,
-        "GuildWar": 4.0,
-        "ModifiedScore": 3.63
-    },
-    {
-        "Name": "Actus",
-        "Position": 7,
-        "Horde": 3.5,
-        "GuildRaid": 3.9,
-        "GuildWar": 2.5,
-        "ModifiedScore": 3.56
-    },
-    {
-        "Name": "Re'Vas",
-        "Position": 8,
-        "Horde": 4.0,
-        "GuildRaid": 2.8,
-        "GuildWar": 5.0,
-        "ModifiedScore": 3.45
-    },
-    {
-        "Name": "Kharn",
-        "Position": 9,
-        "Horde": 3.0,
-        "GuildRaid": 3.1,
-        "GuildWar": 5.0,
-        "ModifiedScore": 3.44
-    },
-    {
-        "Name": "Bellator",
-        "Position": 10,
-        "Horde": 5.0,
-        "GuildRaid": 2.8,
-        "GuildWar": 3.0,
-        "ModifiedScore": 3.29
-    },
-    {
-        "Name": "Abraxas",
-        "Position": 11,
-        "Horde": 4.0,
-        "GuildRaid": 2.6,
-        "GuildWar": 4.0,
-        "ModifiedScore": 3.18
-    },
-    {
-        "Name": "Boss Gulgortz",
-        "Position": 12,
-        "Horde": 4.0,
-        "GuildRaid": 2.3,
-        "GuildWar": 4.5,
-        "ModifiedScore": 3.09
-    },
-    {
-        "Name": "Anuphet",
-        "Position": 13,
-        "Horde": 3.0,
-        "GuildRaid": 3.1,
-        "GuildWar": 3.0,
-        "ModifiedScore": 3.08
-    },
-    {
-        "Name": "Aun'Shi",
-        "Position": 14,
-        "Horde": 2.5,
-        "GuildRaid": 2.9,
-        "GuildWar": 4.0,
-        "ModifiedScore": 3.06
-    },
-    {
-        "Name": "Aleph-Null",
-        "Position": 15,
-        "Horde": 4.0,
-        "GuildRaid": 1.9,
-        "GuildWar": 4.0,
-        "ModifiedScore": 2.76
-    },
-    {
-        "Name": "High Marshal Helbrecht",
-        "Position": 16,
-        "Horde": 2.5,
-        "GuildRaid": 2.9,
-        "GuildWar": 2.5,
-        "ModifiedScore": 2.73
-    },
-    {
-        "Name": "Isabella",
-        "Position": 17,
-        "Horde": 5.0,
-        "GuildRaid": 1.2,
-        "GuildWar": 4.5,
-        "ModifiedScore": 2.61
-    },
-    {
-        "Name": "Ulf",
-        "Position": 18,
-        "Horde": 3.0,
-        "GuildRaid": 2.1,
-        "GuildWar": 3.5,
-        "ModifiedScore": 2.58
-    },
-    {
-        "Name": "Thaddeus Noble",
-        "Position": 19,
-        "Horde": 2.0,
-        "GuildRaid": 2.1,
-        "GuildWar": 4.5,
-        "ModifiedScore": 2.54
-    },
-    {
-        "Name": "Mataneo",
-        "Position": 20,
-        "Horde": 4.5,
-        "GuildRaid": 1.2,
-        "GuildWar": 4.5,
-        "ModifiedScore": 2.51
-    },
-    {
-        "Name": "Gibbascrapz",
-        "Position": 21,
-        "Horde": 3.0,
-        "GuildRaid": 1.8,
-        "GuildWar": 4.0,
-        "ModifiedScore": 2.45
-    },
-    {
-        "Name": "Snotflogga",
-        "Position": 22,
-        "Horde": 4.5,
-        "GuildRaid": 1.1,
-        "GuildWar": 4.5,
-        "ModifiedScore": 2.44
-    },
-    {
-        "Name": "Roswitha",
-        "Position": 23,
-        "Horde": 1.5,
-        "GuildRaid": 2.7,
-        "GuildWar": 2.5,
-        "ModifiedScore": 2.41
-    },
-    {
-        "Name": "Brother Jaeger",
-        "Position": 24,
-        "Horde": 4.5,
-        "GuildRaid": 1.0,
-        "GuildWar": 4.5,
-        "ModifiedScore": 2.4
-    },
-    {
-        "Name": "Ahriman",
-        "Position": 25,
-        "Horde": 2.5,
-        "GuildRaid": 2.0,
-        "GuildWar": 3.5,
-        "ModifiedScore": 2.4
-    },
-    {
-        "Name": "Aethana",
-        "Position": 26,
-        "Horde": 1.5,
-        "GuildRaid": 2.8,
-        "GuildWar": 2.0,
-        "ModifiedScore": 2.35
-    },
-    {
-        "Name": "Nauseous Rotbone",
-        "Position": 27,
-        "Horde": 5.0,
-        "GuildRaid": 0.9,
-        "GuildWar": 4.0,
-        "ModifiedScore": 2.33
-    },
-    {
-        "Name": "Brother Burchard",
-        "Position": 28,
-        "Horde": 5.0,
-        "GuildRaid": 1.0,
-        "GuildWar": 3.5,
-        "ModifiedScore": 2.3
-    },
-    {
-        "Name": "Maugan Ra",
-        "Position": 29,
-        "Horde": 2.0,
-        "GuildRaid": 2.3,
-        "GuildWar": 2.5,
-        "ModifiedScore": 2.29
-    },
-
-    {
-        "Name": "Celestine",
-        "Position": 30,
-        "Horde": 2.0,
-        "GuildRaid": 1.4,
-        "GuildWar": 5.0,
-        "ModifiedScore": 2.26
+        "version": "1.18 - May 2024",
+        "youtubeLink": "https://www.youtube.com/watch?v=KdNuWuZGgyU",
+        "columns": [
+            ["GRAvatar", "Avatar"],
+            ["GRRogalDorn", "Rogal Dorn"],
+            ["GRScreamer", "Screamer"],
+            ["GRMortarion", "Mortarion"],
+            ["GROrk", "Ork"],
+            ["GRNecron", "Necron"],
+            ["GRTyranid", "Tyranids"],
+            ["GuildWar", "Guild War"]
+        ],
+        "characters": [
+            {
+                "Name": "Ragnar Blackmane",
+                "Position": 1,
+                "GRTyranid": 4.5,
+                "GRNecron": 4.5,
+                "GROrk": 4.5,
+                "GRMortarion": 1.5,
+                "GRScreamer": 4.5,
+                "GRRogalDorn": 5,
+                "GRAvatar": 4,
+                "GuildWar": 4.5
+            },
+            {
+                "Name": "Eldryon",
+                "Position": 2,
+                "GRTyranid": 5,
+                "GRNecron": 5,
+                "GROrk": 5,
+                "GRMortarion": 3.5,
+                "GRScreamer": 5,
+                "GRRogalDorn": 5,
+                "GRAvatar": 0,
+                "GuildWar": 3.5
+            },
+            {
+                "Name": "Marneus Calgar",
+                "Position": 3,
+                "GRTyranid": 4.5,
+                "GRNecron": 4,
+                "GROrk": 4.5,
+                "GRMortarion": 1.5,
+                "GRScreamer": 3.5,
+                "GRRogalDorn": 4,
+                "GRAvatar": 3,
+                "GuildWar": 5
+            },
+            {
+                "Name": "Exitor-Rho",
+                "Position": 4,
+                "GRTyranid": 3.5,
+                "GRNecron": 4.5,
+                "GROrk": 2,
+                "GRMortarion": 3,
+                "GRScreamer": 5,
+                "GRRogalDorn": 2.5,
+                "GRAvatar": 3.5,
+                "GuildWar": 3.5
+            },
+            {
+                "Name": "Re'Vas",
+                "Position": 5,
+                "GRTyranid": 2.5,
+                "GRNecron": 4.5,
+                "GROrk": 3.5,
+                "GRMortarion": 1.5,
+                "GRScreamer": 2.5,
+                "GRRogalDorn": 2.5,
+                "GRAvatar": 2.5,
+                "GuildWar": 4.5
+            },
+            {
+                "Name": "Tan Gi'Da",
+                "Position": 6,
+                "GRTyranid": 3.5,
+                "GRNecron": 3,
+                "GROrk": 1.5,
+                "GRMortarion": 3,
+                "GRScreamer": 4,
+                "GRRogalDorn": 2,
+                "GRAvatar": 3.5,
+                "GuildWar": 3.5
+            },
+            {
+                "Name": "Actus",
+                "Position": 7,
+                "GRTyranid": 3,
+                "GRNecron": 3.5,
+                "GROrk": 1,
+                "GRMortarion": 3,
+                "GRScreamer": 4,
+                "GRRogalDorn": 2,
+                "GRAvatar": 3,
+                "GuildWar": 3.5
+            },
+            {
+                "Name": "Aun'Shi",
+                "Position": 8,
+                "GRTyranid": 4,
+                "GRNecron": 2,
+                "GROrk": 1.5,
+                "GRMortarion": 1.5,
+                "GRScreamer": 3.5,
+                "GRRogalDorn": 4,
+                "GRAvatar": 3,
+                "GuildWar": 3
+            },
+            {
+                "Name": "Maugan Ra",
+                "Position": 9,
+                "GRTyranid": 3.5,
+                "GRNecron": 4,
+                "GROrk": 3.5,
+                "GRMortarion": 2,
+                "GRScreamer": 3.5,
+                "GRRogalDorn": 2,
+                "GRAvatar": 0,
+                "GuildWar": 3
+            },
+            {
+                "Name": "Bellator",
+                "Position": 10,
+                "GRTyranid": 5,
+                "GRNecron": 2.5,
+                "GROrk": 4,
+                "GRMortarion": 1,
+                "GRScreamer": 3,
+                "GRRogalDorn": 1.5,
+                "GRAvatar": 2.5,
+                "GuildWar": 2.5
+            },
+            {
+                "Name": "Sho'Syl",
+                "Position": 11,
+                "GRTyranid": 2,
+                "GRNecron": 2.5,
+                "GROrk": 1.5,
+                "GRMortarion": 1.5,
+                "GRScreamer": 3.5,
+                "GRRogalDorn": 2,
+                "GRAvatar": 3,
+                "GuildWar": 4
+            },
+            {
+                "Name": "Aethana",
+                "Position": 12,
+                "GRTyranid": 3,
+                "GRNecron": 4,
+                "GROrk": 4,
+                "GRMortarion": 1.5,
+                "GRScreamer": 3.5,
+                "GRRogalDorn": 4.5,
+                "GRAvatar": 0,
+                "GuildWar": 2
+            },
+            {
+                "Name": "Abraxas",
+                "Position": 13,
+                "GRTyranid": 2,
+                "GRNecron": 1.5,
+                "GROrk": 2,
+                "GRMortarion": 4.5,
+                "GRScreamer": 1.5,
+                "GRRogalDorn": 2.5,
+                "GRAvatar": 3,
+                "GuildWar": 3.5
+            },
+            {
+                "Name": "Thaddeus Noble",
+                "Position": 14,
+                "GRTyranid": 2.5,
+                "GRNecron": 2.5,
+                "GROrk": 1,
+                "GRMortarion": 2,
+                "GRScreamer": 1.5,
+                "GRRogalDorn": 0,
+                "GRAvatar": 2.5,
+                "GuildWar": 4
+            },
+            {
+                "Name": "Ahriman",
+                "Position": 15,
+                "GRTyranid": 1.5,
+                "GRNecron": 1.5,
+                "GROrk": 2,
+                "GRMortarion": 4,
+                "GRScreamer": 1.5,
+                "GRRogalDorn": 2.5,
+                "GRAvatar": 3,
+                "GuildWar": 3.5
+            },
+            {
+                "Name": "Aleph-Null",
+                "Position": 16,
+                "GRTyranid": 3,
+                "GRNecron": 0,
+                "GROrk": 1.5,
+                "GRMortarion": 3.5,
+                "GRScreamer": 2,
+                "GRRogalDorn": 1,
+                "GRAvatar": 3,
+                "GuildWar": 4
+            },
+            {
+                "Name": "Ulf",
+                "Position": 17,
+                "GRTyranid": 2,
+                "GRNecron": 2,
+                "GROrk": 2,
+                "GRMortarion": 1,
+                "GRScreamer": 3.5,
+                "GRRogalDorn": 1.5,
+                "GRAvatar": 3,
+                "GuildWar": 3.5
+            },
+            {
+                "Name": "Yazaghor",
+                "Position": 18,
+                "GRTyranid": 1.5,
+                "GRNecron": 1.5,
+                "GROrk": 2,
+                "GRMortarion": 4,
+                "GRScreamer": 1,
+                "GRRogalDorn": 2.5,
+                "GRAvatar": 3,
+                "GuildWar": 3
+            },
+            {
+                "Name": "Roswitha",
+                "Position": 19,
+                "GRTyranid": 4,
+                "GRNecron": 1,
+                "GROrk": 1,
+                "GRMortarion": 4.5,
+                "GRScreamer": 1,
+                "GRRogalDorn": 1,
+                "GRAvatar": 2.5,
+                "GuildWar": 3
+            },
+            {
+                "Name": "Neurothrope",
+                "Position": 20,
+                "GRTyranid": 0,
+                "GRNecron": 1.5,
+                "GROrk": 2,
+                "GRMortarion": 4.5,
+                "GRScreamer": 0,
+                "GRRogalDorn": 3,
+                "GRAvatar": 4,
+                "GuildWar": 2.5
+            },
+            {
+                "Name": "Celestine",
+                "Position": 21,
+                "GRTyranid": 1.5,
+                "GRNecron": 1,
+                "GROrk": 1,
+                "GRMortarion": 1,
+                "GRScreamer": 1.5,
+                "GRRogalDorn": 1.5,
+                "GRAvatar": 2,
+                "GuildWar": 4.5
+            },
+            {
+                "Name": "Darkstrider",
+                "Position": 22,
+                "GRTyranid": 2,
+                "GRNecron": 3.5,
+                "GROrk": 2.5,
+                "GRMortarion": 1.5,
+                "GRScreamer": 2,
+                "GRRogalDorn": 2,
+                "GRAvatar": 1.5,
+                "GuildWar": 2
+            },
+            {
+                "Name": "Volk",
+                "Position": 23,
+                "GRTyranid": 2.5,
+                "GRNecron": 2.5,
+                "GROrk": 1.5,
+                "GRMortarion": 2,
+                "GRScreamer": 2,
+                "GRRogalDorn": 1.5,
+                "GRAvatar": 1.5,
+                "GuildWar": 2.5
+            },
+            {
+                "Name": "Isabella",
+                "Position": 24,
+                "GRTyranid": 1,
+                "GRNecron": 1,
+                "GROrk": 1,
+                "GRMortarion": 1.5,
+                "GRScreamer": 1.5,
+                "GRRogalDorn": 1,
+                "GRAvatar": 1.5,
+                "GuildWar": 4.5
+            },
+            {
+                "Name": "Snotflogga",
+                "Position": 25,
+                "GRTyranid": 2,
+                "GRNecron": 1.5,
+                "GROrk": 0,
+                "GRMortarion": 1,
+                "GRScreamer": 2,
+                "GRRogalDorn": 1.5,
+                "GRAvatar": 1.5,
+                "GuildWar": 4
+            },
+            {
+                "Name": "Macer",
+                "Position": 26,
+                "GRTyranid": 1.5,
+                "GRNecron": 1.5,
+                "GROrk": 2,
+                "GRMortarion": 1.5,
+                "GRScreamer": 1.5,
+                "GRRogalDorn": 2,
+                "GRAvatar": 1.5,
+                "GuildWar": 3
+            },
+            {
+                "Name": "High Marshal Helbrecht",
+                "Position": 27,
+                "GRTyranid": 4.5,
+                "GRNecron": 1,
+                "GROrk": 1,
+                "GRMortarion": 2,
+                "GRScreamer": 1,
+                "GRRogalDorn": 1.5,
+                "GRAvatar": 1.5,
+                "GuildWar": 2.5
+            },
+            {
+                "Name": "Jain Zar",
+                "Position": 28,
+                "GRTyranid": 2,
+                "GRNecron": 1,
+                "GROrk": 1,
+                "GRMortarion": 1,
+                "GRScreamer": 2,
+                "GRRogalDorn": 3,
+                "GRAvatar": 0,
+                "GuildWar": 3.5
+            },
+            {
+                "Name": "Sword Brother Godswyl",
+                "Position": 29,
+                "GRTyranid": 1.5,
+                "GRNecron": 1.5,
+                "GROrk": 1.5,
+                "GRMortarion": 1,
+                "GRScreamer": 1.5,
+                "GRRogalDorn": 1.5,
+                "GRAvatar": 1.5,
+                "GuildWar": 3.5
+            },
+            {
+                "Name": "Commissar Yarrick",
+                "Position": 30,
+                "GRTyranid": 2.5,
+                "GRNecron": 2.5,
+                "GROrk": 1,
+                "GRMortarion": 2,
+                "GRScreamer": 1.5,
+                "GRRogalDorn": 0,
+                "GRAvatar": 1.5,
+                "GuildWar": 3
+            }
+        ]
     }
 ]
