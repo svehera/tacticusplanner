@@ -161,36 +161,51 @@ export const Characters = () => {
         },
 
         {
+            valueGetter: (props: ValueGetterParams<ICharacter2>) => StatCalculatorService.getHealth(props.data),
+            headerName: 'Current Health',
+            width: 100,
+        },
+        {
+            valueGetter: (props: ValueGetterParams<ICharacter2>) => StatCalculatorService.getDamage(props.data),
+            headerName: 'Current Damage',
+            width: 100,
+        },
+        {
+            valueGetter: (props: ValueGetterParams<ICharacter2>) => StatCalculatorService.getArmor(props.data),
+            headerName: 'Current Armour',
+            width: 100,
+        },
+        {
             valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                 StatCalculatorService.calculateHealth(
-                    props.data?.id ?? '',
+                    props.data?.id,
                     Rarity.Legendary,
                     RarityStars.BlueStar,
                     Rank.Diamond3
                 ),
-            headerName: 'Health D3',
+            headerName: 'D3 Health',
             width: 100,
         },
         {
             valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                 StatCalculatorService.calculateDamage(
-                    props.data?.id ?? '',
+                    props.data?.id,
                     Rarity.Legendary,
                     RarityStars.BlueStar,
                     Rank.Diamond3
                 ),
-            headerName: 'Damage D3',
+            headerName: 'D3 Damage',
             width: 100,
         },
         {
             valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                 StatCalculatorService.calculateArmor(
-                    props.data?.id ?? '',
+                    props.data?.id,
                     Rarity.Legendary,
                     RarityStars.BlueStar,
                     Rank.Diamond3
                 ),
-            headerName: 'Armour D3',
+            headerName: 'D3 Armour',
             width: 100,
         },
         {
