@@ -1,6 +1,6 @@
 ﻿import { cloneDeep, groupBy, map, orderBy, sortBy, sum, sumBy, uniq } from 'lodash';
 
-import unitsData from '../assets/NewUnitData.json';
+import unitsData from '../assets/UnitData.json';
 
 import whatsNew from '../assets/WhatsNew.json';
 import contributors from '../assets/contributors/thankYou.json';
