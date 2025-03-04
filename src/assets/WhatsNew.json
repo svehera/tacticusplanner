@@ -1,6 +1,41 @@
 ﻿{
-    "currentVersion": "1.6.9",
+    "currentVersion": "1.7.0",
     "releaseNotes": [
+        {
+            "version": "1.7.0",
+            "date": "March 4",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Updated Nandi's Dirty Dozen to February 2025 data",
+                    "subPoints": [
+                        "Added possibility to switch between older versions of the Dirty Dozen",
+                        "Added Guild Raid team affiliation"
+                    ],
+                    "route": "learn/dirtyDozen",
+                    "images": [
+                        {
+                            "path": "dirty.png"
+                        }
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "Added Buy Me a coffee (trooper) widget to home screen",
+                    "images": [
+                        {
+                            "path": "bmc1.png"
+                        }
+                    ]
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed issue with Exremis campaign raids being overridden. (Reported by František)"
+                }
+            ]
+        },
         {
             "version": "1.6.9",
             "date": "February 21, 2025",
