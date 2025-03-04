@@ -24,9 +24,10 @@ import {
     TextField,
 } from '@mui/material';
 
+import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
 import { MultipleSelectCheckmarks } from './multiple-select';
 import { ICharacter2 } from 'src/models/interfaces';
-import { Alliance, DamageType, Rank, Trait } from 'src/models/enums';
+import { Alliance, DamageType, Rank, Rarity, RarityStars, Trait } from 'src/models/enums';
 import { isMobile } from 'react-device-detect';
 import { CharacterTitle } from 'src/shared-components/character-title';
 import { StoreContext } from 'src/reducers/store.provider';
@@ -160,17 +161,35 @@ export const Characters = () => {
         },
 
         {
-            field: 'health',
+            valueGetter: (props: ValueGetterParams<ICharacter2>) =>
+                StatCalculatorService.calculateHealth(
+                    props.data?.id ?? '',
+                    Rarity.Legendary,
+                    RarityStars.BlueStar,
+                    Rank.Diamond3
+                ),
             headerName: 'Health D3',
             width: 100,
         },
         {
-            field: 'damage',
+            valueGetter: (props: ValueGetterParams<ICharacter2>) =>
+                StatCalculatorService.calculateDamage(
+                    props.data?.id ?? '',
+                    Rarity.Legendary,
+                    RarityStars.BlueStar,
+                    Rank.Diamond3
+                ),
             headerName: 'Damage D3',
             width: 100,
         },
         {
-            field: 'armour',
+            valueGetter: (props: ValueGetterParams<ICharacter2>) =>
+                StatCalculatorService.calculateArmor(
+                    props.data?.id ?? '',
+                    Rarity.Legendary,
+                    RarityStars.BlueStar,
+                    Rank.Diamond3
+                ),
             headerName: 'Armour D3',
             width: 100,
         },
