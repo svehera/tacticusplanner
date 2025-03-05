@@ -142,6 +142,8 @@ export enum DamageType {
     Pulse = 'Pulse',
     Melta = 'Melta',
     Eviscerate = 'Eviscerate',
+    Bio = 'Bio',
+    Toxic = 'Toxic',
 }
 
 export enum Rank {
