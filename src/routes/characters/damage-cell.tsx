@@ -17,7 +17,7 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
     const computeDamvarInfArmour = (damage: number, hits: number, damageType: DamageType | undefined) => {
         if (damageType == undefined) return <>N/A</>;
         if (hits == 0) return <>N/A</>;
-        return <>{Math.round(damage * hits * computePierce(damageType!))}</>;
+        return <>{Math.round(damage * hits * computePierce(damageType))}</>;
     };
 
     /** @returns the pierce ratio for the specified damage type, or -1 if the type is invalid. */
