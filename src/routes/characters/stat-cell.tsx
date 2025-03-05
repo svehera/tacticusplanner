@@ -8,9 +8,20 @@ interface Props {
     rank: Rank;
     rarity: Rarity;
     rarityStars: RarityStars;
+    numHealthUpgrades: number;
+    numDamageUpgrades: number;
+    numArmorUpgrades: number;
 }
 
-export const StatCell: React.FC<Props> = ({ characterId, rank, rarity, rarityStars }) => {
+export const StatCell: React.FC<Props> = ({
+    characterId,
+    rank,
+    rarity,
+    rarityStars,
+    numHealthUpgrades,
+    numDamageUpgrades,
+    numArmorUpgrades,
+}) => {
     return (
         <table>
             <tbody>
@@ -18,19 +29,37 @@ export const StatCell: React.FC<Props> = ({ characterId, rank, rarity, raritySta
                     <td>
                         <MiscIcon icon={'health'} width={15} height={15} />
                     </td>
-                    <td>{StatCalculatorService.calculateHealth(characterId, rarity, rarityStars, rank)}</td>
+                    <td>
+                        {StatCalculatorService.calculateHealth(
+                            characterId,
+                            rarity,
+                            rarityStars,
+                            rank,
+                            numHealthUpgrades
+                        )}
+                    </td>
                 </tr>
                 <tr>
                     <td>
                         <MiscIcon icon={'damage'} width={15} height={15} />
                     </td>
-                    <td>{StatCalculatorService.calculateDamage(characterId, rarity, rarityStars, rank)}</td>
+                    <td>
+                        {StatCalculatorService.calculateDamage(
+                            characterId,
+                            rarity,
+                            rarityStars,
+                            rank,
+                            numDamageUpgrades
+                        )}
+                    </td>
                 </tr>
                 <tr>
                     <td>
                         <MiscIcon icon={'armour'} width={15} height={15} />
                     </td>
-                    <td>{StatCalculatorService.calculateArmor(characterId, rarity, rarityStars, rank)}</td>
+                    <td>
+                        {StatCalculatorService.calculateArmor(characterId, rarity, rarityStars, rank, numArmorUpgrades)}
+                    </td>
                 </tr>
             </tbody>
         </table>

@@ -252,6 +252,15 @@ export const Characters = () => {
                                     rank={props.data?.rank ?? Rank.Stone1}
                                     rarity={props.data?.rarity ?? Rarity.Common}
                                     rarityStars={props.data?.rarityStars ?? RarityStars.None}
+                                    numHealthUpgrades={StatCalculatorService.countHealthUpgrades(
+                                        props.data as ICharacter2
+                                    )}
+                                    numDamageUpgrades={StatCalculatorService.countDamageUpgrades(
+                                        props.data as ICharacter2
+                                    )}
+                                    numArmorUpgrades={StatCalculatorService.countArmorUpgrades(
+                                        props.data as ICharacter2
+                                    )}
                                 />
                             );
                         },
@@ -287,6 +296,9 @@ export const Characters = () => {
                                     rank={props.data?.rank ?? Rank.Stone1}
                                     rarity={props.data?.rarity ?? Rarity.Common}
                                     rarityStars={props.data?.rarityStars ?? RarityStars.None}
+                                    numDamageUpgrades={StatCalculatorService.countDamageUpgrades(
+                                        props.data as ICharacter2
+                                    )}
                                 />
                             );
                         },
@@ -306,6 +318,15 @@ export const Characters = () => {
                                     rank={targetRank}
                                     rarity={targetRarity}
                                     rarityStars={targetStars}
+                                    numHealthUpgrades={StatCalculatorService.countHealthUpgrades(
+                                        props.data as ICharacter2
+                                    )}
+                                    numDamageUpgrades={StatCalculatorService.countDamageUpgrades(
+                                        props.data as ICharacter2
+                                    )}
+                                    numArmorUpgrades={StatCalculatorService.countArmorUpgrades(
+                                        props.data as ICharacter2
+                                    )}
                                 />
                             );
                         },
@@ -319,7 +340,8 @@ export const Characters = () => {
                                 props.data?.id ?? '',
                                 targetRarity,
                                 targetStars,
-                                targetRank
+                                targetRank,
+                                0
                             ),
                         width: 80,
                     },
@@ -332,7 +354,8 @@ export const Characters = () => {
                                 props.data?.id ?? '',
                                 targetRarity,
                                 targetStars,
-                                targetRank
+                                targetRank,
+                                0
                             ),
                         width: 80,
                     },
@@ -345,7 +368,8 @@ export const Characters = () => {
                                 props.data?.id ?? '',
                                 targetRarity,
                                 targetStars,
-                                targetRank
+                                targetRank,
+                                0
                             ),
                         width: 80,
                     },
@@ -359,6 +383,7 @@ export const Characters = () => {
                                     rank={targetRank}
                                     rarity={targetRarity}
                                     rarityStars={targetStars}
+                                    numDamageUpgrades={0}
                                 />
                             );
                         },
