@@ -12,6 +12,8 @@ import {
     ValueGetterParams,
     AllCommunityModule,
     themeBalham,
+    RefreshCellsParams,
+    Column,
 } from 'ag-grid-community';
 
 import {
@@ -48,6 +50,8 @@ import { StarsSelect } from 'src/shared-components/stars-select';
 import { t } from 'i18next';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { DamageCell } from './damage-cell';
+import { StatCell } from './stat-cell';
 
 export const Characters = () => {
     const gridRef = useRef<AgGridReact<ICharacter2>>(null);
@@ -101,25 +105,21 @@ export const Characters = () => {
         if (rarity < targetRarity) {
             setTargetRarity(rarity);
             setTargetStars(computeMaxStars(rarity));
-            setTargetRank(rarityToMaxRank[rarity]);
+            if (targetRank > rarityToMaxRank[rarity]) {
+                setTargetRank(rarityToMaxRank[rarity]);
+            }
         } else if (rarity > targetRarity) {
             setTargetRarity(rarity);
             setTargetStars(computeMinStars(rarity));
         }
-        console.log('refreshing grid');
-        gridRef.current?.api.refreshCells();
     };
 
     const onTargetStarsChanged = (stars: RarityStars) => {
         setTargetStars(stars);
-        console.log('refreshing grid');
-        gridRef.current?.api.refreshCells();
     };
 
     const onTargetRankChanged = (rank: Rank) => {
         setTargetRank(rank);
-        console.log('refreshing grid');
-        gridRef.current?.api.refreshCells();
     };
 
     const [damageTypesFilter, setDamageTypesFilter] = useQueryState<DamageType[]>(
@@ -170,64 +170,8 @@ export const Characters = () => {
         wrapText: true,
     };
 
-    const computePierce = (damageType: DamageType) => {
-        switch (damageType) {
-            case DamageType.Bio:
-                return 0.3;
-            case DamageType.Blast:
-                return 0.15;
-            case DamageType.Bolter:
-                return 0.2;
-            case DamageType.Chain:
-                return 0.15;
-            case DamageType.Direct:
-                return 1.0;
-            case DamageType.Energy:
-                return 0.3;
-            case DamageType.Eviscerate:
-                return 0.5;
-            case DamageType.Flame:
-                return 0.25;
-            case DamageType.HeavyRound:
-                return 0.55;
-            case DamageType.Las:
-                return 0.1;
-            case DamageType.Melta:
-                return 0.75;
-            case DamageType.Molecular:
-                return 0.6;
-            case DamageType.Particle:
-                return 0.35;
-            case DamageType.Physical:
-                return 0.01;
-            case DamageType.Piercing:
-                return 0.8;
-            case DamageType.Plasma:
-                return 0.6;
-            case DamageType.Power:
-                return 0.4;
-            case DamageType.Projectile:
-                return 0.15;
-            case DamageType.Pulse:
-                return 0.2;
-            case DamageType.Psychic:
-                return 1.0;
-            case DamageType.Toxic:
-                return 0.7;
-            default:
-                console.log(damageType);
-                return -1;
-        }
-    };
-
-    /** @returns the computed damage with this attack against infinite armor. */
-    const computeDamvarInfArmour = (damage: number, hits: number, damageType: DamageType | undefined) => {
-        if (damageType == undefined) return <>N/A</>;
-        if (hits == 0) return <></>;
-        return <>{Math.round(damage * hits * computePierce(damageType!))}</>;
-    };
-
-    const columnDefs = useMemo(
+    // const [columnDefs] = useState<Array<ColDef<ICharacter2> | ColGroupDef>>([
+    const columnDefs = useMemo<Array<ColDef<ICharacter2> | ColGroupDef>>(
         () => [
             {
                 headerName: 'Character',
@@ -303,28 +247,12 @@ export const Characters = () => {
                         columnGroupShow: 'closed',
                         cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
                             return (
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <MiscIcon icon={'health'} width={15} height={15} />
-                                            </td>
-                                            <td>{StatCalculatorService.getHealth(props.data)}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <MiscIcon icon={'damage'} width={15} height={15} />
-                                            </td>
-                                            <td>{StatCalculatorService.getDamage(props.data)}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <MiscIcon icon={'armour'} width={15} height={15} />
-                                            </td>
-                                            <td>{StatCalculatorService.getArmor(props.data)}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <StatCell
+                                    characterId={props.data?.id ?? ''}
+                                    rank={props.data?.rank ?? Rank.Stone1}
+                                    rarity={props.data?.rarity ?? Rarity.Common}
+                                    rarityStars={props.data?.rarityStars ?? RarityStars.None}
+                                />
                             );
                         },
                     },
@@ -354,53 +282,12 @@ export const Characters = () => {
                         headerName: 'DAMVAR',
                         cellRenderer: (props: ValueGetterParams<ICharacter2>) => {
                             return (
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <th></th>
-                                            <th style={{ backgroundColor: '#CCCCCC' }}>
-                                                {' '}
-                                                vs <MiscIcon icon={'armour'} width={15} height={15} /> 0{' '}
-                                            </th>
-                                            <th style={{ backgroundColor: '#DDDDDD' }}>
-                                                {' '}
-                                                vs <MiscIcon icon={'armour'} width={15} height={15} /> &infin;{' '}
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th style={{ backgroundColor: '#CCCCCC' }}>melee </th>
-                                            <td style={{ backgroundColor: '#FFFFFF' }}>
-                                                {StatCalculatorService.getDamage(props.data) *
-                                                    (props.data?.meleeHits ?? 0)}
-                                            </td>
-                                            <td style={{ backgroundColor: '#EEEEEE' }}>
-                                                {computeDamvarInfArmour(
-                                                    StatCalculatorService.getDamage(props.data),
-                                                    props.data?.meleeHits ?? 0,
-                                                    props.data?.damageTypes.melee ?? undefined
-                                                )}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th style={{ backgroundColor: '#DDDDDD' }}>range </th>
-                                            <td style={{ backgroundColor: '#EEEEEE' }}>
-                                                {(props.data?.rangeHits ?? 0) == 0 ? (
-                                                    <>N/A</>
-                                                ) : (
-                                                    StatCalculatorService.getDamage(props.data) *
-                                                    (props.data?.rangeHits ?? 0)
-                                                )}
-                                            </td>
-                                            <td style={{ backgroundColor: '#FFFFFF' }}>
-                                                {computeDamvarInfArmour(
-                                                    StatCalculatorService.getDamage(props.data),
-                                                    props.data?.rangeHits ?? 0,
-                                                    props.data?.damageTypes.range ?? undefined
-                                                )}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <DamageCell
+                                    character={props.data as ICharacter2}
+                                    rank={props.data?.rank ?? Rank.Stone1}
+                                    rarity={props.data?.rarity ?? Rarity.Common}
+                                    rarityStars={props.data?.rarityStars ?? RarityStars.None}
+                                />
                             );
                         },
                     },
@@ -411,56 +298,21 @@ export const Characters = () => {
                 children: [
                     {
                         columnGroupShow: 'closed',
+                        colId: 'Target Stats',
                         cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
                             return (
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <MiscIcon icon={'health'} width={15} height={15} />
-                                            </td>
-                                            <td>
-                                                {StatCalculatorService.calculateHealth(
-                                                    props.data?.id ?? '',
-                                                    targetRarity,
-                                                    targetStars,
-                                                    targetRank
-                                                )}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <MiscIcon icon={'damage'} width={15} height={15} />
-                                            </td>
-                                            <td>
-                                                {StatCalculatorService.calculateDamage(
-                                                    props.data?.id ?? '',
-                                                    targetRarity,
-                                                    targetStars,
-                                                    targetRank
-                                                )}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <MiscIcon icon={'armour'} width={15} height={15} />
-                                            </td>
-                                            <td>
-                                                {StatCalculatorService.calculateArmor(
-                                                    props.data?.id ?? '',
-                                                    targetRarity,
-                                                    targetStars,
-                                                    targetRank
-                                                )}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <StatCell
+                                    characterId={props.data?.id ?? ''}
+                                    rank={targetRank}
+                                    rarity={targetRarity}
+                                    rarityStars={targetStars}
+                                />
                             );
                         },
                     },
                     {
                         columnGroupShow: 'open',
+                        colId: 'Target Health',
                         headerName: 'Health',
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                             StatCalculatorService.calculateHealth(
@@ -473,6 +325,7 @@ export const Characters = () => {
                     },
                     {
                         columnGroupShow: 'open',
+                        colId: 'Target Damage',
                         headerName: 'Damage',
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                             StatCalculatorService.calculateDamage(
@@ -485,6 +338,7 @@ export const Characters = () => {
                     },
                     {
                         columnGroupShow: 'open',
+                        colId: 'Target Armour',
                         headerName: 'Armour',
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
                             StatCalculatorService.calculateArmor(
@@ -500,73 +354,12 @@ export const Characters = () => {
                         headerName: 'DAMVAR',
                         cellRenderer: (props: ValueGetterParams<ICharacter2>) => {
                             return (
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <th></th>
-                                            <th style={{ backgroundColor: '#CCCCCC' }}>
-                                                {' '}
-                                                vs <MiscIcon icon={'armour'} width={15} height={15} /> 0{' '}
-                                            </th>
-                                            <th style={{ backgroundColor: '#DDDDDD' }}>
-                                                {' '}
-                                                vs <MiscIcon icon={'armour'} width={15} height={15} /> &infin;{' '}
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th style={{ backgroundColor: '#CCCCCC' }}>melee </th>
-                                            <td style={{ backgroundColor: '#FFFFFF' }}>
-                                                {StatCalculatorService.calculateDamage(
-                                                    props.data?.id ?? '',
-                                                    targetRarity,
-                                                    targetStars,
-                                                    targetRank
-                                                ) * (props.data?.meleeHits ?? 0)}
-                                            </td>
-                                            <td style={{ backgroundColor: '#EEEEEE' }}>
-                                                {computeDamvarInfArmour(
-                                                    StatCalculatorService.calculateDamage(
-                                                        props.data?.id ?? '',
-                                                        targetRarity,
-                                                        targetStars,
-                                                        targetRank
-                                                    ),
-                                                    props.data?.meleeHits ?? 0,
-                                                    props.data?.damageTypes.melee ?? undefined
-                                                )}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th style={{ backgroundColor: '#DDDDDD' }}>range </th>
-                                            <td style={{ backgroundColor: '#EEEEEE' }}>
-                                                {(props.data?.rangeHits ?? 0) == 0 ? (
-                                                    <>N/A</>
-                                                ) : (
-                                                    StatCalculatorService.calculateDamage(
-                                                        props.data?.id ?? '',
-                                                        targetRarity,
-                                                        targetStars,
-                                                        targetRank
-                                                    ) *
-                                                    (props.data?.meleeHits ?? 0) *
-                                                    (props.data?.rangeHits ?? 0)
-                                                )}
-                                            </td>
-                                            <td style={{ backgroundColor: '#FFFFFF' }}>
-                                                {computeDamvarInfArmour(
-                                                    StatCalculatorService.calculateDamage(
-                                                        props.data?.id ?? '',
-                                                        targetRarity,
-                                                        targetStars,
-                                                        targetRank
-                                                    ),
-                                                    props.data?.rangeHits ?? 0,
-                                                    props.data?.damageTypes.range ?? undefined
-                                                )}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <DamageCell
+                                    character={props.data as ICharacter2}
+                                    rank={targetRank}
+                                    rarity={targetRarity}
+                                    rarityStars={targetStars}
+                                />
                             );
                         },
                     },
@@ -1167,7 +960,8 @@ export const Characters = () => {
                     onSortChanged={refreshRowNumberColumn}
                     onFilterChanged={refreshRowNumberColumn}
                     isExternalFilterPresent={isExternalFilterPresent}
-                    doesExternalFilterPass={doesExternalFilterPass}></AgGridReact>
+                    doesExternalFilterPass={doesExternalFilterPass}
+                />
             </div>
         </div>
     );
