@@ -9,9 +9,10 @@ interface Props {
     rank: Rank;
     rarity: Rarity;
     rarityStars: RarityStars;
+    numDamageUpgrades: number;
 }
 
-export const DamageCell: React.FC<Props> = ({ character, rank, rarity, rarityStars }) => {
+export const DamageCell: React.FC<Props> = ({ character, rank, rarity, rarityStars, numDamageUpgrades }) => {
     /** @returns the computed damage with this attack against infinite armor. */
     const computeDamvarInfArmour = (damage: number, hits: number, damageType: DamageType | undefined) => {
         if (damageType == undefined) return <>N/A</>;
@@ -88,12 +89,23 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                     <tr>
                         <th style={{ backgroundColor: '#CCCCCC' }}>melee </th>
                         <td style={{ backgroundColor: '#FFFFFF' }}>
-                            {StatCalculatorService.calculateDamage(character.id, rarity, rarityStars, rank) *
-                                (character.meleeHits ?? 0)}
+                            {StatCalculatorService.calculateDamage(
+                                character.id,
+                                rarity,
+                                rarityStars,
+                                rank,
+                                numDamageUpgrades
+                            ) * (character.meleeHits ?? 0)}
                         </td>
                         <td style={{ backgroundColor: '#EEEEEE' }}>
                             {computeDamvarInfArmour(
-                                StatCalculatorService.calculateDamage(character.id, rarity, rarityStars, rank),
+                                StatCalculatorService.calculateDamage(
+                                    character.id,
+                                    rarity,
+                                    rarityStars,
+                                    rank,
+                                    numDamageUpgrades
+                                ),
                                 character.meleeHits ?? 0,
                                 character.damageTypes.melee ?? undefined
                             )}
@@ -105,13 +117,24 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                             {(character.rangeHits ?? 0) == 0 ? (
                                 <>N/A</>
                             ) : (
-                                StatCalculatorService.calculateDamage(character.id, rarity, rarityStars, rank) *
-                                (character.rangeHits ?? 0)
+                                StatCalculatorService.calculateDamage(
+                                    character.id,
+                                    rarity,
+                                    rarityStars,
+                                    rank,
+                                    numDamageUpgrades
+                                ) * (character.rangeHits ?? 0)
                             )}
                         </td>
                         <td style={{ backgroundColor: '#FFFFFF' }}>
                             {computeDamvarInfArmour(
-                                StatCalculatorService.calculateDamage(character.id, rarity, rarityStars, rank),
+                                StatCalculatorService.calculateDamage(
+                                    character.id,
+                                    rarity,
+                                    rarityStars,
+                                    rank,
+                                    numDamageUpgrades
+                                ),
                                 character.rangeHits ?? 0,
                                 character.damageTypes.range ?? undefined
                             )}
