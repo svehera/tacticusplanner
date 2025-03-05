@@ -204,7 +204,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
                             {form.rankStart > Rank.Locked && (
                                 <CharacterUpgrades
-                                    characterName={unit.id}
+                                    character={unit}
                                     upgrades={form.appliedUpgrades}
                                     rank={form.rankStart}
                                     upgradesChanges={(upgrades, updateInventory) => {

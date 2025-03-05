@@ -12,15 +12,18 @@ import { Rank } from 'src/models/enums';
 import { IBaseUpgrade, ICraftedUpgrade, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { UpgradeControl } from 'src/shared-components/upgrade-control';
+import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+import { StaticDataService } from 'src/services';
+import { ICharacter2 } from 'src/models/interfaces';
 
 interface Props {
-    characterName: string;
+    character: ICharacter2;
     rank: Rank;
     upgrades: string[];
     upgradesChanges: (upgrades: string[], updateInventory: IUpgradeRecipe[]) => void;
 }
 
-export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, rank, characterName }) => {
+export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, rank, character }) => {
     const { inventory } = useContext(StoreContext);
 
     const [formData, setFormData] = useState({
@@ -45,7 +48,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
 
     const possibleUpgrades: Array<IBaseUpgrade | ICraftedUpgrade> = useMemo(() => {
         const [rankUpgrades] = UpgradesService.getCharacterUpgradeRank({
-            unitName: characterName,
+            unitName: character.name,
             rankStart: rank,
             rankEnd: rank + 1,
             appliedUpgrades: [],
@@ -102,7 +105,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             upgradesToConsider = newUpgrades;
         } else {
             const previousRankUpgradesList = UpgradesService.getCharacterUpgradeRank({
-                unitName: characterName,
+                unitName: character.name,
                 rankStart: formData.originalRank,
                 rankEnd: rank,
                 appliedUpgrades: formData.originalUpgrades,
@@ -152,6 +155,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             <div style={{ display: 'flex' }}>
                 <div className="upgrades-column">
                     <MiscIcon icon={'health'} height={30} />
+                    {StatCalculatorService.getHealth(character)}
                     {healthUpgrades.map((x, index) => (
                         <UpgradeControl
                             key={x.id + index}
@@ -163,6 +167,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                 </div>
                 <div className="upgrades-column">
                     <MiscIcon icon={'damage'} />
+                    {StatCalculatorService.getDamage(character)}
                     {damageUpgrades.map((x, index) => (
                         <UpgradeControl
                             key={x.id + index}
@@ -174,6 +179,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                 </div>
                 <div className="upgrades-column">
                     <MiscIcon icon={'armour'} height={30} />
+                    {StatCalculatorService.getArmor(character)}
                     {armourUpgrades.map((x, index) => (
                         <UpgradeControl
                             key={x.id + index}
