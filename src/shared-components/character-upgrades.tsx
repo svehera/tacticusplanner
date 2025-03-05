@@ -16,6 +16,7 @@ import { findAndRemoveItem } from 'src/shared-logic/functions';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
 import { StaticDataService } from 'src/services';
 import { ICharacter2 } from 'src/models/interfaces';
+import { IUnit } from 'src/v2/features/characters/characters.models';
 
 interface Props {
     character: ICharacter2;
