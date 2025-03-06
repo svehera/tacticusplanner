@@ -34,8 +34,8 @@ export const CampaignProgressionHeader = () => {
                             Enter your roster in the <a href="../../input/wyo">Who You Own</a> page.
                         </li>
                         <li>
-                            Enter your campaign progress in the{' '}
-                            <a href="../../input/campaignsProgress">Campaigns Progress</a> page.
+                            Enter your campaign progress in the <a href="../../input/myProgress">Campaigns Progress</a>{' '}
+                            page.
                         </li>
                         <li>
                             Enter your goals in the <a href="../../plan/goals">Goals</a> page.
