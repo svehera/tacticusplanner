@@ -22,6 +22,10 @@ export const StatCell: React.FC<Props> = ({
     numDamageUpgrades,
     numArmorUpgrades,
 }) => {
+    const health = StatCalculatorService.calculateHealth(characterId, rarity, rarityStars, rank, numHealthUpgrades);
+    const damage = StatCalculatorService.calculateDamage(characterId, rarity, rarityStars, rank, numDamageUpgrades);
+    const armor = StatCalculatorService.calculateArmor(characterId, rarity, rarityStars, rank, numArmorUpgrades);
+
     return (
         <table>
             <tbody>
@@ -29,37 +33,19 @@ export const StatCell: React.FC<Props> = ({
                     <td>
                         <MiscIcon icon={'health'} width={15} height={15} />
                     </td>
-                    <td>
-                        {StatCalculatorService.calculateHealth(
-                            characterId,
-                            rarity,
-                            rarityStars,
-                            rank,
-                            numHealthUpgrades
-                        )}
-                    </td>
+                    <td>{health}</td>
                 </tr>
                 <tr>
                     <td>
                         <MiscIcon icon={'damage'} width={15} height={15} />
                     </td>
-                    <td>
-                        {StatCalculatorService.calculateDamage(
-                            characterId,
-                            rarity,
-                            rarityStars,
-                            rank,
-                            numDamageUpgrades
-                        )}
-                    </td>
+                    <td>{damage}</td>
                 </tr>
                 <tr>
                     <td>
                         <MiscIcon icon={'armour'} width={15} height={15} />
                     </td>
-                    <td>
-                        {StatCalculatorService.calculateArmor(characterId, rarity, rarityStars, rank, numArmorUpgrades)}
-                    </td>
+                    <td>{armor}</td>
                 </tr>
             </tbody>
         </table>

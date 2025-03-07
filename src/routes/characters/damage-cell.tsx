@@ -77,67 +77,83 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                 <tbody>
                     <tr>
                         <th></th>
-                        <th style={{ backgroundColor: '#CCCCCC' }}>
-                            {' '}
-                            vs <MiscIcon icon={'armour'} width={15} height={15} /> 0{' '}
+                        <th>
+                            <div className="bg-cyan-500/25">
+                                {' '}
+                                vs <MiscIcon icon={'armour'} width={15} height={15} /> 0{' '}
+                            </div>
                         </th>
-                        <th style={{ backgroundColor: '#DDDDDD' }}>
-                            {' '}
-                            vs <MiscIcon icon={'armour'} width={15} height={15} /> &infin;{' '}
+                        <th>
+                            <div className="bg-cyan-500/50">
+                                {' '}
+                                vs <MiscIcon icon={'armour'} width={15} height={15} /> &infin;{' '}
+                            </div>
                         </th>
                     </tr>
                     <tr>
-                        <th style={{ backgroundColor: '#CCCCCC' }}>melee </th>
-                        <td style={{ backgroundColor: '#FFFFFF' }}>
-                            {StatCalculatorService.calculateDamage(
-                                character.id,
-                                rarity,
-                                rarityStars,
-                                rank,
-                                numDamageUpgrades
-                            ) * (character.meleeHits ?? 0)}
-                        </td>
-                        <td style={{ backgroundColor: '#EEEEEE' }}>
-                            {computeDamvarInfArmour(
-                                StatCalculatorService.calculateDamage(
+                        <th>
+                            <div className="bg-cyan-500/25">melee</div>
+                        </th>
+                        <td>
+                            <div className="bg-cyan-500/50">
+                                {StatCalculatorService.calculateDamage(
                                     character.id,
                                     rarity,
                                     rarityStars,
                                     rank,
                                     numDamageUpgrades
-                                ),
-                                character.meleeHits ?? 0,
-                                character.damageTypes.melee ?? undefined
-                            )}
+                                ) * (character.meleeHits ?? 0)}
+                            </div>
+                        </td>
+                        <td>
+                            <div className="bg-cyan-500/25">
+                                {computeDamvarInfArmour(
+                                    StatCalculatorService.calculateDamage(
+                                        character.id,
+                                        rarity,
+                                        rarityStars,
+                                        rank,
+                                        numDamageUpgrades
+                                    ),
+                                    character.meleeHits ?? 0,
+                                    character.damageTypes.melee ?? undefined
+                                )}
+                            </div>
                         </td>
                     </tr>
                     <tr>
-                        <th style={{ backgroundColor: '#DDDDDD' }}>range </th>
-                        <td style={{ backgroundColor: '#EEEEEE' }}>
-                            {(character.rangeHits ?? 0) == 0 ? (
-                                <>N/A</>
-                            ) : (
-                                StatCalculatorService.calculateDamage(
-                                    character.id,
-                                    rarity,
-                                    rarityStars,
-                                    rank,
-                                    numDamageUpgrades
-                                ) * (character.rangeHits ?? 0)
-                            )}
+                        <th>
+                            <div className="bg-cyan-500/50">range</div>
+                        </th>
+                        <td>
+                            <div className="bg-cyan-500/25">
+                                {(character.rangeHits ?? 0) == 0 ? (
+                                    <>N/A</>
+                                ) : (
+                                    StatCalculatorService.calculateDamage(
+                                        character.id,
+                                        rarity,
+                                        rarityStars,
+                                        rank,
+                                        numDamageUpgrades
+                                    ) * (character.rangeHits ?? 0)
+                                )}
+                            </div>
                         </td>
-                        <td style={{ backgroundColor: '#FFFFFF' }}>
-                            {computeDamvarInfArmour(
-                                StatCalculatorService.calculateDamage(
-                                    character.id,
-                                    rarity,
-                                    rarityStars,
-                                    rank,
-                                    numDamageUpgrades
-                                ),
-                                character.rangeHits ?? 0,
-                                character.damageTypes.range ?? undefined
-                            )}
+                        <td>
+                            <div className="bg-cyan-500/50">
+                                {computeDamvarInfArmour(
+                                    StatCalculatorService.calculateDamage(
+                                        character.id,
+                                        rarity,
+                                        rarityStars,
+                                        rank,
+                                        numDamageUpgrades
+                                    ),
+                                    character.rangeHits ?? 0,
+                                    character.damageTypes.range ?? undefined
+                                )}
+                            </div>
                         </td>
                     </tr>
                 </tbody>
