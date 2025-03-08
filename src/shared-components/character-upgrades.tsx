@@ -56,11 +56,6 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
         return rankUpgrades.upgrades.map(x => UpgradesService.getUpgrade(x));
     }, [rank]);
 
-    const hasDuplicateUpgrades = useMemo(() => {
-        const upgrades = groupBy(possibleUpgrades.map(x => x.id));
-        return Object.values(upgrades).some(x => x.length === 2);
-    }, [possibleUpgrades]);
-
     const healthUpgrades = useMemo(() => possibleUpgrades.filter(x => x.stat === 'Health'), [possibleUpgrades]);
     const damageUpgrades = useMemo(() => possibleUpgrades.filter(x => x.stat === 'Damage'), [possibleUpgrades]);
     const armourUpgrades = useMemo(() => possibleUpgrades.filter(x => x.stat === 'Armour'), [possibleUpgrades]);
@@ -161,11 +156,6 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
 
     return (
         <div>
-            {hasDuplicateUpgrades && (
-                <div className="flex-box gap3">
-                    <Warning color="warning" /> Duplicated upgrades will be applied both at once
-                </div>
-            )}
             <div style={{ display: 'flex' }}>
                 <div className="upgrades-column">
                     <MiscIcon icon={'health'} height={30} />
