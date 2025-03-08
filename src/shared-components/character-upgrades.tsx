@@ -79,8 +79,18 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             const isNewUpgrade = rank !== formData.originalRank || !formData.originalUpgrades.includes(value);
             newUpgrades = isNewUpgrade ? [...formData.newUpgrades, value] : formData.newUpgrades;
         } else {
-            currentUpgrades = formData.currentUpgrades.filter(x => x !== value);
-            newUpgrades = formData.newUpgrades.filter(x => x !== value);
+            const c_idx = formData.currentUpgrades.indexOf(value);
+            const n_idx = formData.newUpgrades.indexOf(value);
+
+            currentUpgrades = [...formData.currentUpgrades];
+            if (c_idx !== -1) {
+                currentUpgrades.splice(c_idx, 1);
+            }
+
+            newUpgrades = [...formData.newUpgrades];
+            if (n_idx !== -1) {
+                newUpgrades.splice(c_idx, 1);
+            }
         }
 
         if (!newUpgrades.length) {
@@ -95,7 +105,9 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
     };
 
     const topLevelUpgrades = useMemo<Array<IBaseUpgrade | ICraftedUpgrade>>(() => {
-        const newUpgrades = possibleUpgrades.filter(x => formData.newUpgrades.includes(x.id));
+        const newUpgrades = formData.newUpgrades
+            .map(x => possibleUpgrades.find(y => y.id == x))
+            .filter(x => x !== undefined);
         let upgradesToConsider: Array<IBaseUpgrade | ICraftedUpgrade>;
 
         if (rank <= formData.originalRank) {
@@ -142,6 +154,17 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
         }
     }, [rank]);
 
+    const upgradeStack = [...formData.currentUpgrades];
+
+    const pop = (us: string[], find: string) => {
+        const upgrade = us.indexOf(find);
+        if (upgrade === -1) {
+            return false;
+        }
+        us.splice(upgrade, 1);
+        return true;
+    };
+
     return (
         <div>
             {hasDuplicateUpgrades && (
@@ -156,7 +179,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                         <UpgradeControl
                             key={x.id + index}
                             upgrade={x}
-                            checked={formData.currentUpgrades.includes(x.id)}
+                            checked={pop(upgradeStack, x.id)}
                             checkedChanges={value => handleUpgradeChange(value, x.id)}
                         />
                     ))}
@@ -167,7 +190,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                         <UpgradeControl
                             key={x.id + index}
                             upgrade={x}
-                            checked={formData.currentUpgrades.includes(x.id)}
+                            checked={pop(upgradeStack, x.id)}
                             checkedChanges={value => handleUpgradeChange(value, x.id)}
                         />
                     ))}
@@ -178,7 +201,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                         <UpgradeControl
                             key={x.id + index}
                             upgrade={x}
-                            checked={formData.currentUpgrades.includes(x.id)}
+                            checked={pop(upgradeStack, x.id)}
                             checkedChanges={value => handleUpgradeChange(value, x.id)}
                         />
                     ))}
@@ -189,7 +212,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                     <UpgradeControl
                         key={x.id + index}
                         upgrade={x}
-                        checked={formData.currentUpgrades.includes(x.id)}
+                        checked={pop(upgradeStack, x.id)}
                         checkedChanges={value => handleUpgradeChange(value, x.id)}
                     />
                 ))}
