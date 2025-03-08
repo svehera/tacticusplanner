@@ -12,6 +12,7 @@ import { Rank } from 'src/models/enums';
 import { IBaseUpgrade, ICraftedUpgrade, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { UpgradeControl } from 'src/shared-components/upgrade-control';
+import { findAndRemoveItem } from 'src/shared-logic/functions';
 
 interface Props {
     characterName: string;
@@ -65,16 +66,6 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
         [possibleUpgrades]
     );
 
-    /* Return true if the item existed in the array. The first matching item in the array will be removed */
-    const findAndRemoveItem = (arr: string[], x: string) => {
-        const itemIdx = arr.indexOf(x);
-        if (itemIdx === -1) {
-            return false;
-        }
-        arr.splice(itemIdx, 1);
-        return true;
-    };
-
     const handleUpgradeChange = (checked: boolean, value: string) => {
         let currentUpgrades: string[];
         let newUpgrades: string[];
@@ -103,9 +94,13 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
     };
 
     const topLevelUpgrades = useMemo<Array<IBaseUpgrade | ICraftedUpgrade>>(() => {
+        // We need to be careful not to remove duplicates from the list here, in
+        // order to correctly calculate the inventory changes when there are duplicate
+        // upgrades for the current rank.
         const newUpgrades = formData.newUpgrades
-            .map(x => possibleUpgrades.find(y => y.id == x))
+            .map(x => possibleUpgrades.find(y => y.id === x))
             .filter(x => x !== undefined);
+
         let upgradesToConsider: Array<IBaseUpgrade | ICraftedUpgrade>;
 
         if (rank <= formData.originalRank) {
@@ -152,6 +147,12 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
         }
     }, [rank]);
 
+    // When each upgrade control is being created it needs to know if
+    // the upgrade has already been used by a previous control in order to avoid
+    // duplicate upgrades causing all controls for that upgrade type to be checked
+    //
+    // This is done by creating a copy of the current upgrades and removing the
+    // item used to check the previous controls.
     const upgradeStack = [...formData.currentUpgrades];
 
     return (
