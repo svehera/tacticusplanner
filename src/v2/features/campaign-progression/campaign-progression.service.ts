@@ -240,7 +240,7 @@ export class CampaignsProgressionService {
     }
 
     /**
-     * Computes the cheapest cost to reach a specific goal, given existing
+     * Computes the cheapest cost to reach a specific goal, ignoring existing
      * inventory. Uses nodes, if available, in the following order: Elite,
      * Early Indom, Mirror, Normal. Does not modify `inventoryUpgrades`.
      *
@@ -351,6 +351,7 @@ export class CampaignsProgressionService {
             farmableLocations: this.getFarmableLocations(material, campaignProgress),
             unfarmableLocations: this.getUnfarmableLocations(material, campaignProgress),
         };
+        const hasExtremis = result.farmableLocations.filter(x => x.campaignType == CampaignType.Extremis).length > 0;
         const hasElite = result.farmableLocations.filter(x => x.campaignType == CampaignType.Elite).length > 0;
         const hasEarly =
             result.farmableLocations.filter(
@@ -359,7 +360,10 @@ export class CampaignsProgressionService {
         const hasMirror = result.farmableLocations.filter(x => x.campaignType == CampaignType.Mirror).length > 0;
         const hasNormal = result.farmableLocations.filter(x => x.campaignType == CampaignType.Normal).length > 0;
         const rarity = UpgradesService.recipeExpandedUpgradeData[material]?.rarity ?? undefined;
-        if (hasElite) {
+        if (hasExtremis) {
+            result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Extremis, count, rarity!);
+            result.campaignType = CampaignType.Extremis;
+        } else if (hasElite) {
             result.totalEnergy = this.getCostToFarmMaterial(CampaignType.Elite, count, rarity!);
             result.campaignType = CampaignType.Elite;
         } else if (hasEarly) {
@@ -397,6 +401,8 @@ export class CampaignsProgressionService {
                 return 3;
             case CampaignType.Elite:
                 return 10;
+            case CampaignType.Extremis:
+                return 6;
         }
         return -1;
     }
@@ -428,6 +434,13 @@ export class CampaignsProgressionService {
             [Rarity.Epic, 2 / 3.0],
             [Rarity.Legendary, 1 / 3.0],
         ]);
+        const extremisDropRates = new Map<Rarity, number>([
+            [Rarity.Common, 0.9375],
+            [Rarity.Uncommon, 0.75],
+            [Rarity.Rare, 2 / 3.0],
+            [Rarity.Epic, 1 / 3.0],
+            [Rarity.Legendary, 1 / 7.0],
+        ]);
         switch (type) {
             case CampaignType.Normal:
             case CampaignType.Early:
@@ -436,6 +449,8 @@ export class CampaignsProgressionService {
                 return mirrorDropRates.get(rarity) ?? -1;
             case CampaignType.Elite:
                 return eliteDropRates.get(rarity) ?? -1;
+            case CampaignType.Extremis:
+                return extremisDropRates.get(rarity) ?? -1;
         }
         return -1;
     }
@@ -449,9 +464,11 @@ export class CampaignsProgressionService {
      */
     public static getCostToFarmMaterial(type: CampaignType, count: number, rarity: Rarity): number {
         if (rarity === undefined) {
-            // For character shards, elite nodes drop 25 shards per 24 pulls. All other nodes drop 3
-            // shards per 10 pulls.
-            if (type == CampaignType.Elite) {
+            // For character shards, elite nodes drop 25 shards per 24 pulls. Extermis nodes drop at
+            // a rate of 61.54%. All other nodes drop 3 shards per 10 pulls.
+            if (type == CampaignType.Extremis) {
+                return 6 * Math.ceil(count * 0.6154);
+            } else if (type == CampaignType.Elite) {
                 return 10 * Math.ceil((count * 24) / 25.0);
             } else if (type == CampaignType.Early) {
                 return 5 * Math.ceil((count * 10) / 3.0);
