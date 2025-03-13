@@ -46,6 +46,7 @@ import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 import { TeamsAction } from 'src/reducers/teams.reducer';
 import { ILreProgressDto } from 'src/models/dto.interfaces';
 import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
+import { StringNullableChain } from 'lodash';
 
 export type LreTrackId = 'alpha' | 'beta' | 'gamma';
 
@@ -632,6 +633,19 @@ export interface ICampaignsData {
     [campaignKey: string]: ICampaignBattle;
 }
 
+/**
+ * When we have more detailed information about a campaign battle, this holds
+ * the information on a particular type of enemy. If @rarity is specified, it
+ * means that the enemy is a character, not an NPC.
+ */
+export interface IDetailedEnemy {
+    count: number;
+    name: string;
+    rank: string;
+    stars: number;
+    rarity?: string;
+}
+
 export interface ICampaignBattle {
     shortName?: string;
     campaign: Campaign | string;
@@ -644,6 +658,7 @@ export interface ICampaignBattle {
     enemiesFactions?: string[];
     enemiesTotal?: number;
     enemiesTypes?: string[];
+    detailedEnemyTypes?: IDetailedEnemy[];
 }
 
 export interface ICampaignBattleComposed {
@@ -668,6 +683,7 @@ export interface ICampaignBattleComposed {
     alliesAlliance: Alliance;
     enemiesTotal: number;
     enemiesTypes: string[];
+    detailedEnemyTypes?: IDetailedEnemy[];
     // new props for upgrades service
     isSuggested?: boolean;
     isUnlocked?: boolean;

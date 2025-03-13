@@ -10,6 +10,7 @@
 
 import campaignConfigs from 'src/assets/campaignConfigs.json';
 import battleData from 'src/assets/battleData.json';
+import newBattleData from 'src/assets/newBattleData.json';
 import recipeData from 'src/assets/recipeData.json';
 
 import { Alliance, Campaign, CampaignType, Faction, Rarity } from 'src/models/enums';
@@ -19,7 +20,7 @@ import { campaignsList } from 'src/v2/features/campaigns/campaigns.constants';
 
 export class CampaignsService {
     private static readonly campaignConfigs: ICampaignConfigs = campaignConfigs;
-    private static readonly battleData: ICampaignsData = battleData;
+    private static readonly battleData: ICampaignsData = newBattleData;
     private static readonly recipeData: IRecipeData = recipeData;
     public static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = this.getCampaignComposed();
 
@@ -106,6 +107,7 @@ export class CampaignsService {
                 alliesFactions: allies.factions,
                 enemiesTotal: battle.enemiesTotal ?? 0,
                 enemiesTypes: battle.enemiesTypes ?? [],
+                detailedEnemyTypes: battle.detailedEnemyTypes ?? [],
             };
         }
 
