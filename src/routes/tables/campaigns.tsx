@@ -112,13 +112,35 @@ export const Campaigns = () => {
                 }
             },
             cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                return (
-                    <ul style={{ margin: 0, paddingLeft: 20 }}>
-                        {(params.value as string[]).map(x => (
-                            <li key={x}>{x}</li>
-                        ))}
-                    </ul>
-                );
+                if ((params.data as ICampaignBattleComposed) == undefined) {
+                    return <></>;
+                }
+                const battle: ICampaignBattleComposed = params.data as ICampaignBattleComposed;
+                console.log(battle.detailedEnemyTypes?.length ?? -1);
+                if (battle.detailedEnemyTypes) {
+                    return (
+                        <ul style={{ margin: 0, paddingLeft: 20 }}>
+                            {battle.detailedEnemyTypes.map(x => (
+                                <li key={x.name + ' ' + x.rank + ' ' + x.stars}>
+                                    {x.count}x {x.rank} ({x.stars} stars)
+                                    <img
+                                        src={'../../' + StaticDataService.getNpcIconPath(x.name)}
+                                        width={23}
+                                        height={30}
+                                    />
+                                </li>
+                            ))}
+                        </ul>
+                    );
+                } else {
+                    return (
+                        <ul style={{ margin: 0, paddingLeft: 20 }}>
+                            {(params.value as string[]).map(x => (
+                                <li key={x}>{x}</li>
+                            ))}
+                        </ul>
+                    );
+                }
             },
         },
     ]);
