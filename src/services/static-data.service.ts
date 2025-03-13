@@ -7,6 +7,7 @@ import contributors from '../assets/contributors/thankYou.json';
 import contentCreators from '../assets/contributors/contentCreators.json';
 
 import battleData from '../assets/battleData.json';
+import newBattleData from '../assets/newBattleData.json';
 import recipeData from '../assets/recipeData.json';
 import rankUpData from '../assets/rankUpData.json';
 
@@ -40,6 +41,7 @@ import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;
     static readonly battleData: ICampaignsData = battleData;
+    static readonly newBattleData: ICampaignsData = newBattleData;
     static readonly recipeData: IRecipeData = recipeData;
     static readonly rankUpData: IRankUpData = rankUpData;
     static readonly contributors: IContributor[] = contributors;
@@ -545,6 +547,22 @@ export class StaticDataService {
             characters: material.characters,
             priority: material.priority,
         };
+    }
+
+    /** @returns the image asset for the NPC, which is allowed to be a character. */
+    public static getNpcIconPath(npc: string): string {
+        const prefix: string = 'src/assets/images/npcs';
+        const map: Record<string, string> = {
+            'Flayed One': 'flayed_one.png',
+            'Necron Warrior': 'necron_warrior.png',
+            'Scarab Swarm': 'scarab_swarm.png',
+            Deathmark: 'deathmark.png',
+            'Ophydian Destroyer': 'ophydian_destroyer.png',
+        };
+        if (map[npc]) {
+            return prefix + '/' + map[npc];
+        }
+        return '(unknown)';
     }
 
     private static selectBestLocations(

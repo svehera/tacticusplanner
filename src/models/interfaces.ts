@@ -641,7 +641,6 @@ export interface ICampaignsData {
 export interface IDetailedEnemy {
     count: number;
     name: string;
-    faction: string;
     rank: string;
     stars: number;
     rarity?: string;
@@ -684,6 +683,7 @@ export interface ICampaignBattleComposed {
     alliesAlliance: Alliance;
     enemiesTotal: number;
     enemiesTypes: string[];
+    detailedEnemyTypes?: IDetailedEnemy[];
     // new props for upgrades service
     isSuggested?: boolean;
     isUnlocked?: boolean;
