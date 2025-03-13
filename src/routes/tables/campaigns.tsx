@@ -125,7 +125,7 @@ export const Campaigns = () => {
                                     {x.count}x {x.rank} ({x.stars} stars)
                                     <img
                                         src={'../../' + StaticDataService.getNpcIconPath(x.name)}
-                                        width={30}
+                                        width={23}
                                         height={30}
                                     />
                                 </li>
