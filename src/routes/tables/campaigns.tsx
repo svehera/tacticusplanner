@@ -12,7 +12,7 @@ import {
 } from 'ag-grid-community';
 
 import { ICampaignBattleComposed } from 'src/models/interfaces';
-import { Campaign } from 'src/models/enums';
+import { Campaign, Rank, Rarity, RarityStars } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
 import { FormControl, MenuItem, Select } from '@mui/material';
@@ -22,6 +22,9 @@ import { useQueryState } from 'src/v2/hooks/query-state';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { FactionImage } from 'src/v2/components/images/faction-image';
+
+import { NpcPortrait } from './npc-portrait';
+import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
 export const Campaigns = () => {
     const gridRef = useRef<AgGridReact<ICampaignBattleComposed>>(null);
@@ -116,21 +119,13 @@ export const Campaigns = () => {
                     return <></>;
                 }
                 const battle: ICampaignBattleComposed = params.data as ICampaignBattleComposed;
-                console.log(battle.detailedEnemyTypes?.length ?? -1);
                 if (battle.detailedEnemyTypes) {
                     return (
-                        <ul style={{ margin: 0, paddingLeft: 20 }}>
-                            {battle.detailedEnemyTypes.map(x => (
-                                <li key={x.name + ' ' + x.rank + ' ' + x.stars}>
-                                    {x.count}x {x.rank} ({x.stars} stars)
-                                    <img
-                                        src={'../../' + StaticDataService.getNpcIconPath(x.name)}
-                                        width={23}
-                                        height={30}
-                                    />
-                                </li>
-                            ))}
-                        </ul>
+                        <center>
+                            <div style={{ position: 'relative' }}>
+                                <CampaignBattleEnemies enemies={battle.detailedEnemyTypes} scale={0.2} />
+                            </div>
+                        </center>
                     );
                 } else {
                     return (

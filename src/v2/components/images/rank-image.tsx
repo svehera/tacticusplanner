@@ -2,13 +2,25 @@
 import { Rank } from 'src/models/enums';
 import { getImageUrl } from 'src/shared-logic/functions';
 
-export const RankImage = ({ rank, rankPoint5, size = 30 }: { rank: Rank; rankPoint5?: boolean; size?: number }) => {
+export const RankImage = ({
+    rank,
+    rankPoint5,
+    size = 30,
+    resized = false,
+}: {
+    rank: Rank;
+    rankPoint5?: boolean;
+    size?: number;
+    resized?: boolean;
+}) => {
     if (!rank) {
         return <span>{Rank[Rank.Locked]}</span>;
     }
 
     const rankTextValue = Rank[rank];
-    const image = getImageUrl(`ranks/resized/${rankTextValue.toLowerCase()}.png`);
+    const image = resized
+        ? getImageUrl(`ranks/resized/${rankTextValue.toLowerCase()}.png`)
+        : getImageUrl(`ranks/${rankTextValue.toLowerCase()}.png`);
     return (
         <>
             <img
