@@ -23,7 +23,6 @@ import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { FactionImage } from 'src/v2/components/images/faction-image';
 
-import { NpcPortrait } from './npc-portrait';
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
 export const Campaigns = () => {

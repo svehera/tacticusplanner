@@ -224,7 +224,7 @@
                 "stars": 0
             },
             {
-                "name": "Makhotep",
+                "name": "Makhoptep",
                 "count": 1,
                 "rank": "Stone 3",
                 "stars": 2
@@ -2310,7 +2310,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 8,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoC10": {
         "campaign": "Fall of Cadia",
@@ -2320,7 +2328,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "FoC11": {
         "campaign": "Fall of Cadia",
@@ -2330,7 +2352,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "FoC12": {
         "campaign": "Fall of Cadia",
@@ -2340,7 +2382,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "FoC13": {
         "campaign": "Fall of Cadia",
@@ -2350,7 +2412,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "FoC14": {
         "campaign": "Fall of Cadia",
@@ -2360,7 +2436,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "FoC15": {
         "campaign": "Fall of Cadia",
@@ -2369,7 +2465,34 @@
         "reward": "Kut Skoden",
         "expectedGold": 59,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Kut Skoden",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 2,
+                "rarity": "Uncommon"
+            }
+        ]
     },
     "FoC16": {
         "campaign": "Fall of Cadia",
@@ -2379,7 +2502,21 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 10,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoC17": {
         "campaign": "Fall of Cadia",
@@ -2388,7 +2525,21 @@
         "reward": "Kill Count",
         "expectedGold": 59,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoC18": {
         "campaign": "Fall of Cadia",
@@ -2397,7 +2548,21 @@
         "reward": "Healing Ointment",
         "expectedGold": 59,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 5,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "FoC19": {
         "campaign": "Fall of Cadia",
@@ -2407,7 +2572,21 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "FoC2": {
         "campaign": "Fall of Cadia",
@@ -2417,7 +2596,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "FoC20": {
         "campaign": "Fall of Cadia",
@@ -2427,7 +2620,15 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 8,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "FoC21": {
         "campaign": "Fall of Cadia",
@@ -2437,7 +2638,27 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "FoC22": {
         "campaign": "Fall of Cadia",
@@ -2446,7 +2667,21 @@
         "reward": "Battle Scar",
         "expectedGold": 59,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "FoC23": {
         "campaign": "Fall of Cadia",
@@ -2455,7 +2690,21 @@
         "reward": "Blessed Tasset Plate",
         "expectedGold": 59,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "FoC24": {
         "campaign": "Fall of Cadia",
@@ -2465,7 +2714,21 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "FoC25": {
         "campaign": "Fall of Cadia",
@@ -2474,7 +2737,27 @@
         "reward": "Scrolls",
         "expectedGold": 59,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoC26": {
         "campaign": "Fall of Cadia",
@@ -2484,7 +2767,27 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "FoC27": {
         "campaign": "Fall of Cadia",
@@ -2494,7 +2797,21 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 11,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "FoC28": {
         "campaign": "Fall of Cadia",
@@ -2504,7 +2821,21 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 8,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "FoC29": {
         "campaign": "Fall of Cadia",
@@ -2513,7 +2844,27 @@
         "reward": "Frag Grenade",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "FoC3": {
         "campaign": "Fall of Cadia",
@@ -2523,7 +2874,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "FoC30": {
         "campaign": "Fall of Cadia",
@@ -2532,7 +2903,28 @@
         "reward": "Sibyll",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Sibyll",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 3,
+                "rarity": "Uncommon"
+            }
+        ]
     },
     "FoC31": {
         "campaign": "Fall of Cadia",
@@ -2542,7 +2934,27 @@
         "expectedGold": 65,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "FoC32": {
         "campaign": "Fall of Cadia",
@@ -2551,7 +2963,27 @@
         "reward": "Basic Auxiliary Core",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "FoC33": {
         "campaign": "Fall of Cadia",
@@ -2560,7 +2992,27 @@
         "reward": "Barrel of Promethium",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoC34": {
         "campaign": "Fall of Cadia",
@@ -2569,7 +3021,21 @@
         "reward": "Plasma Cell",
         "expectedGold": 65,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "FoC35": {
         "campaign": "Fall of Cadia",
@@ -2578,7 +3044,27 @@
         "reward": "Attack Vector Data-Slate",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoC36": {
         "campaign": "Fall of Cadia",
@@ -2587,7 +3073,27 @@
         "reward": "Mutation: Warped Lungs",
         "expectedGold": 65,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoC37": {
         "campaign": "Fall of Cadia",
@@ -2597,7 +3103,27 @@
         "expectedGold": 65,
         "slots": 4,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoC38": {
         "campaign": "Fall of Cadia",
@@ -2607,7 +3133,21 @@
         "expectedGold": 65,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoC39": {
         "campaign": "Fall of Cadia",
@@ -2616,7 +3156,27 @@
         "reward": "Mutation: Scaly Skin",
         "expectedGold": 65,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "FoC4": {
         "campaign": "Fall of Cadia",
@@ -2626,7 +3186,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoC40": {
         "campaign": "Fall of Cadia",
@@ -2635,7 +3215,21 @@
         "reward": "Reinforced Cables",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoC41": {
         "campaign": "Fall of Cadia",
@@ -2644,7 +3238,27 @@
         "reward": "Helmet Trophy",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "FoC42": {
         "campaign": "Fall of Cadia",
@@ -2654,7 +3268,27 @@
         "expectedGold": 65,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoC43": {
         "campaign": "Fall of Cadia",
@@ -2664,7 +3298,27 @@
         "expectedGold": 65,
         "slots": 4,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "FoC44": {
         "campaign": "Fall of Cadia",
@@ -2673,7 +3327,21 @@
         "reward": "Weapon Anointment Oils",
         "expectedGold": 65,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 7,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "FoC45": {
         "campaign": "Fall of Cadia",
@@ -2682,7 +3350,34 @@
         "reward": "Thaddeus Noble",
         "expectedGold": 71,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Thaddeus Noble",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 5,
+                "rarity": "Rare"
+            }
+        ]
     },
     "FoC46": {
         "campaign": "Fall of Cadia",
@@ -2691,7 +3386,27 @@
         "reward": "Purity Seal",
         "expectedGold": 71,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoC47": {
         "campaign": "Fall of Cadia",
@@ -2700,7 +3415,27 @@
         "reward": "Can of Promethium",
         "expectedGold": 71,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 8,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoC48": {
         "campaign": "Fall of Cadia",
@@ -2710,7 +3445,21 @@
         "expectedGold": 71,
         "slots": 4,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 10,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoC49": {
         "campaign": "Fall of Cadia",
@@ -2719,7 +3468,33 @@
         "reward": "The Silver Aquila",
         "expectedGold": 71,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 3
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "B ronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoC5": {
         "campaign": "Fall of Cadia",
@@ -2729,7 +3504,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoC50": {
         "campaign": "Fall of Cadia",
@@ -2738,7 +3521,21 @@
         "reward": "Field Ration",
         "expectedGold": 71,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "FoC51": {
         "campaign": "Fall of Cadia",
@@ -2747,7 +3544,21 @@
         "reward": "Beast Hide",
         "expectedGold": 71,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "FoC52": {
         "campaign": "Fall of Cadia",
@@ -2757,7 +3568,27 @@
         "expectedGold": 71,
         "slots": 4,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "FoC53": {
         "campaign": "Fall of Cadia",
@@ -2766,7 +3597,27 @@
         "reward": "Entrenching Tool",
         "expectedGold": 71,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "FoC54": {
         "campaign": "Fall of Cadia",
@@ -2775,7 +3626,21 @@
         "reward": "Icon of Vengeance",
         "expectedGold": 71,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoC55": {
         "campaign": "Fall of Cadia",
@@ -2785,7 +3650,21 @@
         "expectedGold": 71,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoC56": {
         "campaign": "Fall of Cadia",
@@ -2794,7 +3673,27 @@
         "reward": "Eye of Horus",
         "expectedGold": 71,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoC57": {
         "campaign": "Fall of Cadia",
@@ -2803,7 +3702,21 @@
         "reward": "Hymn of Martyrs",
         "expectedGold": 71,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 8,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoC58": {
         "campaign": "Fall of Cadia",
@@ -2812,7 +3725,21 @@
         "reward": "Combat Stimms",
         "expectedGold": 71,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon team",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoC59": {
         "campaign": "Fall of Cadia",
@@ -2821,7 +3748,21 @@
         "reward": "Unnatural Vapour Dispenser",
         "expectedGold": 71,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 8,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 7,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoC6": {
         "campaign": "Fall of Cadia",
@@ -2831,7 +3772,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "FoC60": {
         "campaign": "Fall of Cadia",
@@ -2840,7 +3795,28 @@
         "reward": "Celestine",
         "expectedGold": 77,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Celestine",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 8,
+                "rarity": "Legendary"
+            }
+        ]
     },
     "FoC61": {
         "campaign": "Fall of Cadia",
@@ -2850,7 +3826,27 @@
         "expectedGold": 77,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoC62": {
         "campaign": "Fall of Cadia",
@@ -2859,7 +3855,27 @@
         "reward": "Classified Data-Slate",
         "expectedGold": 77,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "FoC63": {
         "campaign": "Fall of Cadia",
@@ -2868,7 +3884,33 @@
         "reward": "Air Purificator",
         "expectedGold": 77,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoC64": {
         "campaign": "Fall of Cadia",
@@ -2877,7 +3919,15 @@
         "reward": "The Phoenix Ascendant",
         "expectedGold": 77,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 10,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "FoC65": {
         "campaign": "Fall of Cadia",
@@ -2886,7 +3936,21 @@
         "reward": "Blasphemous Armor Trim",
         "expectedGold": 77,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 6,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "FoC66": {
         "campaign": "Fall of Cadia",
@@ -2895,7 +3959,21 @@
         "reward": "Repair-Kit",
         "expectedGold": 77,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "FoC67": {
         "campaign": "Fall of Cadia",
@@ -2904,7 +3982,15 @@
         "reward": "Zeidos Ribbon",
         "expectedGold": 77,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoC68": {
         "campaign": "Fall of Cadia",
@@ -2913,7 +3999,15 @@
         "reward": "Plague Bell",
         "expectedGold": 77,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon team",
+                "count": 8,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoC69": {
         "campaign": "Fall of Cadia",
@@ -2923,7 +4017,27 @@
         "expectedGold": 77,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "FoC7": {
         "campaign": "Fall of Cadia",
@@ -2932,7 +4046,27 @@
         "reward": "Armor Trim",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "FoC70": {
         "campaign": "Fall of Cadia",
@@ -2941,7 +4075,15 @@
         "reward": "Flak Plates",
         "expectedGold": 77,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 11,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "FoC71": {
         "campaign": "Fall of Cadia",
@@ -2950,7 +4092,27 @@
         "reward": "Wraithbone Plate",
         "expectedGold": 77,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 6,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "FoC72": {
         "campaign": "Fall of Cadia",
@@ -2959,7 +4121,21 @@
         "reward": "Golden Ornamental Skull",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "FoC73": {
         "campaign": "Fall of Cadia",
@@ -2968,7 +4144,27 @@
         "reward": "Blessed Promethium Canister",
         "expectedGold": 77,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 8,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "FoC74": {
         "campaign": "Fall of Cadia",
@@ -2977,7 +4173,21 @@
         "reward": "Revered Talisman",
         "expectedGold": 77,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 6,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "FoC75": {
         "campaign": "Fall of Cadia",
@@ -2986,7 +4196,34 @@
         "reward": "Castellan Creed",
         "expectedGold": 83,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Castellan Creed",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 8,
+                "rarity": "Legendary"
+            }
+        ]
     },
     "FoC8": {
         "campaign": "Fall of Cadia",
@@ -2995,7 +4232,27 @@
         "reward": "Vox-Caster",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "FoC9": {
         "campaign": "Fall of Cadia",
@@ -3004,7 +4261,21 @@
         "reward": "Mutation: Tough Skin",
         "expectedGold": 53,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 9,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "O1": {
         "campaign": "Octarius",
@@ -4576,7 +5847,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 4,
-        "enemiesTypes": ["Inceptor", "Eliminator"]
+        "enemiesTypes": ["Inceptor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "IM10": {
         "campaign": "Indomitus Mirror",
@@ -4586,7 +5871,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "IM11": {
         "campaign": "Indomitus Mirror",
@@ -4598,7 +5903,27 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Inceptor", "Eliminator"]
+        "enemiesTypes": ["Inceptor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "IM12": {
         "campaign": "Indomitus Mirror",
@@ -4608,7 +5933,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 4,
-        "enemiesTypes": ["Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "IM13": {
         "campaign": "Indomitus Mirror",
@@ -4618,7 +5957,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "IM14": {
         "campaign": "Indomitus Mirror",
@@ -4628,7 +5987,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "IM15": {
         "campaign": "Indomitus Mirror",
@@ -4637,7 +6016,34 @@
         "reward": "Vindicta",
         "expectedGold": 59,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Vindicta",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 2,
+                "rarity": "Uncommon"
+            }
+        ]
     },
     "IM16": {
         "campaign": "Indomitus Mirror",
@@ -4646,7 +6052,21 @@
         "reward": "Zeidos Ribbon",
         "expectedGold": 59,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 9,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "IM17": {
         "campaign": "Indomitus Mirror",
@@ -4656,7 +6076,27 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "IM18": {
         "campaign": "Indomitus Mirror",
@@ -4666,7 +6106,27 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "IM19": {
         "campaign": "Indomitus Mirror",
@@ -4675,7 +6135,33 @@
         "reward": "Bionic Eye",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "IM2": {
         "campaign": "Indomitus Mirror",
@@ -4687,7 +6173,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 5,
-        "enemiesTypes": ["Inceptor", "Eliminator"]
+        "enemiesTypes": ["Inceptor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "IM20": {
         "campaign": "Indomitus Mirror",
@@ -4696,7 +6196,27 @@
         "reward": "The Phoenix Ascendant",
         "expectedGold": 59,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "IM21": {
         "campaign": "Indomitus Mirror",
@@ -4707,7 +6227,27 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator"]
+        "enemiesTypes": ["Inceptor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Inceptor",
+                "count": 5,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "IM22": {
         "campaign": "Indomitus Mirror",
@@ -4716,7 +6256,27 @@
         "reward": "Viridian Energy Tesseract",
         "expectedGold": 59,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "IM23": {
         "campaign": "Indomitus Mirror",
@@ -4725,7 +6285,27 @@
         "reward": "Ancient Runes",
         "expectedGold": 59,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "IM24": {
         "campaign": "Indomitus Mirror",
@@ -4734,7 +6314,39 @@
         "reward": "Chip Damage",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "IM25": {
         "campaign": "Indomitus Mirror",
@@ -4744,7 +6356,27 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "IM26": {
         "campaign": "Indomitus Mirror",
@@ -4753,7 +6385,33 @@
         "reward": "Blessed Promethium Canister",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "IM27": {
         "campaign": "Indomitus Mirror",
@@ -4764,7 +6422,27 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator"]
+        "enemiesTypes": ["Inceptor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "IM28": {
         "campaign": "Indomitus Mirror",
@@ -4773,7 +6451,27 @@
         "reward": "Special Issue Ammo",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "IM29": {
         "campaign": "Indomitus Mirror",
@@ -4784,7 +6482,27 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator"]
+        "enemiesTypes": ["Inceptor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 6,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "IM3": {
         "campaign": "Indomitus Mirror",
@@ -4794,7 +6512,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "IM30": {
         "campaign": "Indomitus Mirror",
@@ -4803,7 +6541,28 @@
         "reward": "Bellator",
         "expectedGold": 65,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bellator",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 4,
+                "rarity": "Uncommon"
+            },
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "IM31": {
         "campaign": "Indomitus Mirror",
@@ -4812,7 +6571,27 @@
         "reward": "Terminator Honours",
         "expectedGold": 65,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "IM32": {
         "campaign": "Indomitus Mirror",
@@ -4822,7 +6601,27 @@
         "expectedGold": 65,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "IM33": {
         "campaign": "Indomitus Mirror",
@@ -4831,7 +6630,33 @@
         "reward": "Hymn of Martyrs",
         "expectedGold": 65,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "IM34": {
         "campaign": "Indomitus Mirror",
@@ -4842,7 +6667,27 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Inceptor", "Eliminator"]
+        "enemiesTypes": ["Inceptor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "IM35": {
         "campaign": "Indomitus Mirror",
@@ -4852,7 +6697,27 @@
         "expectedGold": 65,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "IM36": {
         "campaign": "Indomitus Mirror",
@@ -4861,7 +6726,27 @@
         "reward": "Bloodstone Tear",
         "expectedGold": 65,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "IM37": {
         "campaign": "Indomitus Mirror",
@@ -4871,7 +6756,27 @@
         "expectedGold": 65,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "IM38": {
         "campaign": "Indomitus Mirror",
@@ -4881,7 +6786,27 @@
         "expectedGold": 65,
         "slots": 4,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "IM39": {
         "campaign": "Indomitus Mirror",
@@ -4890,7 +6815,27 @@
         "reward": "Sensor Suite",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "IM4": {
         "campaign": "Indomitus Mirror",
@@ -4902,7 +6847,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 5,
-        "enemiesTypes": ["Eliminator"]
+        "enemiesTypes": ["Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Stone2",
+                "stars": 0
+            }
+        ]
     },
     "IM40": {
         "campaign": "Indomitus Mirror",
@@ -4911,7 +6870,33 @@
         "reward": "Mutation: Scaly Skin",
         "expectedGold": 65,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 8,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "IM41": {
         "campaign": "Indomitus Mirror",
@@ -4920,7 +6905,27 @@
         "reward": "Reliquary of Protection",
         "expectedGold": 65,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "IM42": {
         "campaign": "Indomitus Mirror",
@@ -4930,7 +6935,27 @@
         "expectedGold": 65,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "IM43": {
         "campaign": "Indomitus Mirror",
@@ -4939,7 +6964,27 @@
         "reward": "Reconstitution Protocols",
         "expectedGold": 65,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "IM44": {
         "campaign": "Indomitus Mirror",
@@ -4949,7 +6994,27 @@
         "expectedGold": 65,
         "slots": 3,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "IM45": {
         "campaign": "Indomitus Mirror",
@@ -4958,7 +7023,34 @@
         "reward": "Certus",
         "expectedGold": 71,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Certus",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 4,
+                "rarity": "Rare"
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "IM46": {
         "campaign": "Indomitus Mirror",
@@ -4967,7 +7059,27 @@
         "reward": "Advanced Filaments",
         "expectedGold": 71,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "IM47": {
         "campaign": "Indomitus Mirror",
@@ -4976,7 +7088,33 @@
         "reward": "Adamantium Filaments",
         "expectedGold": 71,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "IM48": {
         "campaign": "Indomitus Mirror",
@@ -4985,7 +7123,27 @@
         "reward": "Blood Shard Bolt",
         "expectedGold": 71,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "IM49": {
         "campaign": "Indomitus Mirror",
@@ -4994,7 +7152,27 @@
         "reward": "Sophisticated Material",
         "expectedGold": 71,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "IM5": {
         "campaign": "Indomitus Mirror",
@@ -5006,7 +7184,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 5,
-        "enemiesTypes": ["Inceptor", "Eliminator"]
+        "enemiesTypes": ["Inceptor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "IM50": {
         "campaign": "Indomitus Mirror",
@@ -5016,7 +7208,27 @@
         "expectedGold": 71,
         "slots": 4,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "IM51": {
         "campaign": "Indomitus Mirror",
@@ -5025,7 +7237,27 @@
         "reward": "Single Power Pack",
         "expectedGold": 71,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "IM52": {
         "campaign": "Indomitus Mirror",
@@ -5035,7 +7267,27 @@
         "expectedGold": 71,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "IM53": {
         "campaign": "Indomitus Mirror",
@@ -5044,7 +7296,27 @@
         "reward": "Healing Ointment",
         "expectedGold": 71,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "IM54": {
         "campaign": "Indomitus Mirror",
@@ -5053,7 +7325,21 @@
         "reward": "Subdermal Plating",
         "expectedGold": 71,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 8,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "IM55": {
         "campaign": "Indomitus Mirror",
@@ -5065,7 +7351,15 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 5,
-        "enemiesTypes": ["Eliminator"]
+        "enemiesTypes": ["Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "IM56": {
         "campaign": "Indomitus Mirror",
@@ -5074,7 +7368,21 @@
         "reward": "Can of Promethium",
         "expectedGold": 71,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 8,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "IM57": {
         "campaign": "Indomitus Mirror",
@@ -5083,7 +7391,27 @@
         "reward": "Minor Bionic Enhancement",
         "expectedGold": 71,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "IM58": {
         "campaign": "Indomitus Mirror",
@@ -5092,7 +7420,27 @@
         "reward": "Adamantium Ore",
         "expectedGold": 71,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "IM59": {
         "campaign": "Indomitus Mirror",
@@ -5101,7 +7449,27 @@
         "reward": "Auspex",
         "expectedGold": 71,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "IM6": {
         "campaign": "Indomitus Mirror",
@@ -5111,7 +7479,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "IM60": {
         "campaign": "Indomitus Mirror",
@@ -5120,7 +7508,40 @@
         "reward": "Varro Tigurius",
         "expectedGold": 77,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Incisus",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 6
+            },
+            {
+                "name": "Varro Tigurius",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 6,
+                "rarity": "Epic"
+            }
+        ]
     },
     "IM61": {
         "campaign": "Indomitus Mirror",
@@ -5129,7 +7550,27 @@
         "reward": "Artisan Plating",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "IM62": {
         "campaign": "Indomitus Mirror",
@@ -5139,7 +7580,27 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "IM63": {
         "campaign": "Indomitus Mirror",
@@ -5149,7 +7610,21 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "IM64": {
         "campaign": "Indomitus Mirror",
@@ -5158,7 +7633,27 @@
         "reward": "Fine Micro-Generator",
         "expectedGold": 77,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "IM65": {
         "campaign": "Indomitus Mirror",
@@ -5167,7 +7662,27 @@
         "reward": "Plasma Cell",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "IM66": {
         "campaign": "Indomitus Mirror",
@@ -5176,7 +7691,27 @@
         "reward": "The Silver Aquila",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "IM67": {
         "campaign": "Indomitus Mirror",
@@ -5187,7 +7722,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 6,
-        "enemiesTypes": ["Inceptor", "Eliminator"]
+        "enemiesTypes": ["Inceptor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "IM68": {
         "campaign": "Indomitus Mirror",
@@ -5196,7 +7745,27 @@
         "reward": "Blood Vial",
         "expectedGold": 77,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 8,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "IM69": {
         "campaign": "Indomitus Mirror",
@@ -5205,7 +7774,27 @@
         "reward": "Blessed Cogitator",
         "expectedGold": 77,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "IM7": {
         "campaign": "Indomitus Mirror",
@@ -5215,7 +7804,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "IM70": {
         "campaign": "Indomitus Mirror",
@@ -5225,7 +7834,27 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "IM71": {
         "campaign": "Indomitus Mirror",
@@ -5234,7 +7863,27 @@
         "reward": "Engrammatic Entangler",
         "expectedGold": 77,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Eliminator",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "IM72": {
         "campaign": "Indomitus Mirror",
@@ -5244,7 +7893,27 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 8
+            }
+        ]
     },
     "IM73": {
         "campaign": "Indomitus Mirror",
@@ -5253,7 +7922,27 @@
         "reward": "Rose of Martyrs",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Eliminator",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "IM74": {
         "campaign": "Indomitus Mirror",
@@ -5264,7 +7953,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator"]
+        "enemiesTypes": ["Inceptor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 6,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "IM75": {
         "campaign": "Indomitus Mirror",
@@ -5273,7 +7976,57 @@
         "reward": "Marneus Calgar",
         "expectedGold": 83,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bellator",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 4,
+                "rarity": "Uncommon"
+            },
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Marneus Calgar",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 8,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Certus",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 4,
+                "rarity": "Rare"
+            },
+            {
+                "name": "Incisus",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Varro Tigurius",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 6,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Vindicta",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 2,
+                "rarity": "Uncommon"
+            }
+        ]
     },
     "IM8": {
         "campaign": "Indomitus Mirror",
@@ -5283,7 +8036,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "IM9": {
         "campaign": "Indomitus Mirror",
@@ -5293,7 +8060,33 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "FoCM1": {
         "campaign": "Fall of Cadia Mirror",
@@ -8120,7 +10913,27 @@
         "reward": "Armor Trim",
         "expectedGold": 83,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "FoCE10": {
         "campaign": "Fall of Cadia Elite",
@@ -8130,7 +10943,27 @@
         "expectedGold": 91.5,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 9
+            }
+        ]
     },
     "FoCE11": {
         "campaign": "Fall of Cadia Elite",
@@ -8140,7 +10973,21 @@
         "expectedGold": 91.5,
         "slots": 3,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "FoCE12": {
         "campaign": "Fall of Cadia Elite",
@@ -8150,7 +10997,27 @@
         "expectedGold": 91.5,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCE13": {
         "campaign": "Fall of Cadia Elite",
@@ -8159,7 +11026,27 @@
         "reward": "Mutation: Scaly Skin",
         "expectedGold": 91.5,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCE14": {
         "campaign": "Fall of Cadia Elite",
@@ -8169,7 +11056,27 @@
         "expectedGold": 91.5,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "FoCE15": {
         "campaign": "Fall of Cadia Elite",
@@ -8178,7 +11085,33 @@
         "reward": "Kill Count",
         "expectedGold": 91.5,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCE16": {
         "campaign": "Fall of Cadia Elite",
@@ -8187,7 +11120,34 @@
         "reward": "Sibyll",
         "expectedGold": 91.5,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Sibyll",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            }
+        ]
     },
     "FoCE17": {
         "campaign": "Fall of Cadia Elite",
@@ -8196,7 +11156,27 @@
         "reward": "Sigil of Decay",
         "expectedGold": 101,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Mortar Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Mortar Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCE18": {
         "campaign": "Fall of Cadia Elite",
@@ -8205,7 +11185,21 @@
         "reward": "Chainaxe Teeth",
         "expectedGold": 101,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "FoCE19": {
         "campaign": "Fall of Cadia Elite",
@@ -8215,7 +11209,27 @@
         "expectedGold": 101,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "FoCE2": {
         "campaign": "Fall of Cadia Elite",
@@ -8225,7 +11239,27 @@
         "expectedGold": 83,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoCE20": {
         "campaign": "Fall of Cadia Elite",
@@ -8234,7 +11268,27 @@
         "reward": "Plague Bell",
         "expectedGold": 101,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCE21": {
         "campaign": "Fall of Cadia Elite",
@@ -8243,7 +11297,27 @@
         "reward": "Blasphemous Armor Trim",
         "expectedGold": 101,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "FoCE22": {
         "campaign": "Fall of Cadia Elite",
@@ -8253,7 +11327,27 @@
         "expectedGold": 101,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "FoCE23": {
         "campaign": "Fall of Cadia Elite",
@@ -8263,7 +11357,27 @@
         "expectedGold": 101,
         "slots": 4,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "FoCE24": {
         "campaign": "Fall of Cadia Elite",
@@ -8272,7 +11386,34 @@
         "reward": "Thaddeus Noble",
         "expectedGold": 101,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Thaddeus Noble",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            }
+        ]
     },
     "FoCE25": {
         "campaign": "Fall of Cadia Elite",
@@ -8281,7 +11422,27 @@
         "reward": "Entrenching Tool",
         "expectedGold": 108,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "FoCE26": {
         "campaign": "Fall of Cadia Elite",
@@ -8291,7 +11452,21 @@
         "expectedGold": 108,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Diamond 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "FoCE27": {
         "campaign": "Fall of Cadia Elite",
@@ -8301,7 +11476,27 @@
         "expectedGold": 108,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Diamond 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Diamond 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "FoCE28": {
         "campaign": "Fall of Cadia Elite",
@@ -8311,7 +11506,27 @@
         "expectedGold": 108,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Diamond 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCE29": {
         "campaign": "Fall of Cadia Elite",
@@ -8321,7 +11536,21 @@
         "expectedGold": 108,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Diamond 1",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 11
+            }
+        ]
     },
     "FoCE3": {
         "campaign": "Fall of Cadia Elite",
@@ -8330,7 +11559,21 @@
         "reward": "Icon of Vengeance",
         "expectedGold": 83,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoCE30": {
         "campaign": "Fall of Cadia Elite",
@@ -8339,7 +11582,27 @@
         "reward": "Metal Decorative Skull",
         "expectedGold": 108,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Diamond 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 11
+            }
+        ]
     },
     "FoCE31": {
         "campaign": "Fall of Cadia Elite",
@@ -8348,7 +11611,27 @@
         "reward": "Warp Locus",
         "expectedGold": 108,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Diamond 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Diamond 1",
+                "stars": 10
+            }
+        ]
     },
     "FoCE32": {
         "campaign": "Fall of Cadia Elite",
@@ -8357,7 +11640,34 @@
         "reward": "Celestine",
         "expectedGold": 108,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Diamond 1",
+                "stars": 10
+            },
+            {
+                "name": "Celestine",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10,
+                "rarity": "Legendary"
+            }
+        ]
     },
     "FoCE33": {
         "campaign": "Fall of Cadia Elite",
@@ -8367,7 +11677,21 @@
         "expectedGold": 108,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Diamond 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "FoCE34": {
         "campaign": "Fall of Cadia Elite",
@@ -8377,7 +11701,27 @@
         "expectedGold": 108,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCE35": {
         "campaign": "Fall of Cadia Elite",
@@ -8386,7 +11730,27 @@
         "reward": "Artificial Vertebrae",
         "expectedGold": 108,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Diamond 2",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 4,
+                "rank": "Diamond 2",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Diamond 1",
+                "stars": 11
+            }
+        ]
     },
     "FoCE36": {
         "campaign": "Fall of Cadia Elite",
@@ -8396,7 +11760,27 @@
         "expectedGold": 108,
         "slots": 4,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Diamond 2",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Diamond 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 11
+            }
+        ]
     },
     "FoCE37": {
         "campaign": "Fall of Cadia Elite",
@@ -8405,7 +11789,27 @@
         "reward": "Golden Ornamental Skull",
         "expectedGold": 108,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Lascannon Team", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Lascannon Team", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Diamond 1",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 1,
+                "rank": "Diamond 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 5,
+                "rank": "Gold 3",
+                "stars": 11
+            }
+        ]
     },
     "FoCE38": {
         "campaign": "Fall of Cadia Elite",
@@ -8414,7 +11818,21 @@
         "reward": "Blessing of the Dark Gods",
         "expectedGold": 108,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 9,
+                "rank": "Diamond 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "rank": "Diamond 1",
+                "stars": 10
+            }
+        ]
     },
     "FoCE39": {
         "campaign": "Fall of Cadia Elite",
@@ -8423,7 +11841,21 @@
         "reward": "Honourifica Imperialis",
         "expectedGold": 108,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Diamond 2",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 6,
+                "rank": "Gold 3",
+                "stars": 11
+            }
+        ]
     },
     "FoCE4": {
         "campaign": "Fall of Cadia Elite",
@@ -8432,7 +11864,21 @@
         "reward": "Cloak",
         "expectedGold": 83,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "FoCE40": {
         "campaign": "Fall of Cadia Elite",
@@ -8441,7 +11887,40 @@
         "reward": "Castellan Creed",
         "expectedGold": 108,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Diamond 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Diamond 1",
+                "stars": 11
+            },
+            {
+                "name": "Castellan Creed",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10,
+                "rarity": "Legendary"
+            }
+        ]
     },
     "FoCE5": {
         "campaign": "Fall of Cadia Elite",
@@ -8451,7 +11930,15 @@
         "expectedGold": 83,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 9,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "FoCE6": {
         "campaign": "Fall of Cadia Elite",
@@ -8461,7 +11948,27 @@
         "expectedGold": 83,
         "slots": 3,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "FoCE7": {
         "campaign": "Fall of Cadia Elite",
@@ -8470,7 +11977,27 @@
         "reward": "Mutation: Warped Heart",
         "expectedGold": 83,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "FoCE8": {
         "campaign": "Fall of Cadia Elite",
@@ -8479,7 +12006,34 @@
         "reward": "Kut Skoden",
         "expectedGold": 83,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Kut Skoden",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            }
+        ]
     },
     "FoCE9": {
         "campaign": "Fall of Cadia Elite",
@@ -8488,7 +12042,27 @@
         "reward": "Nasty Spikes",
         "expectedGold": 91.5,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman", "Cadian Mortar Team"]
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman", "Cadian Mortar Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "OE1": {
         "campaign": "Octarius Elite",
@@ -8889,7 +12463,27 @@
         "reward": "Sophisticated Material",
         "expectedGold": 83,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "IME10": {
         "campaign": "Indomitus Mirror Elite",
@@ -8898,7 +12492,33 @@
         "reward": "Tainted Text",
         "expectedGold": 91.5,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Eliminator", "Inceptor", "Heavy Intercessor", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Inceptor", "Heavy Intercessor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "IME11": {
         "campaign": "Indomitus Mirror Elite",
@@ -8907,7 +12527,33 @@
         "reward": "Inferno Bolts",
         "expectedGold": 91.5,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Heavy Intercessor", "Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Heavy Intercessor", "Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Eliminator",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "IME12": {
         "campaign": "Indomitus Mirror Elite",
@@ -8916,7 +12562,27 @@
         "reward": "Ritual Implements",
         "expectedGold": 91.5,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "IME13": {
         "campaign": "Indomitus Mirror Elite",
@@ -8925,7 +12591,33 @@
         "reward": "Secret Agenda",
         "expectedGold": 91.5,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Heavy Intercessor", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Heavy Intercessor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "IME14": {
         "campaign": "Indomitus Mirror Elite",
@@ -8934,7 +12626,33 @@
         "reward": "Blessing of Tzeentch",
         "expectedGold": 91.5,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "IME15": {
         "campaign": "Indomitus Mirror Elite",
@@ -8945,7 +12663,27 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 5,
-        "enemiesTypes": ["Eliminator", "Inceptor", "Heavy Intercessor"]
+        "enemiesTypes": ["Eliminator", "Inceptor", "Heavy Intercessor"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "IME16": {
         "campaign": "Indomitus Mirror Elite",
@@ -8954,7 +12692,28 @@
         "reward": "Bellator",
         "expectedGold": 91.5,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bellator",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "IME17": {
         "campaign": "Indomitus Mirror Elite",
@@ -8963,7 +12722,27 @@
         "reward": "Motive Force Capacitator",
         "expectedGold": 101,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "IME18": {
         "campaign": "Indomitus Mirror Elite",
@@ -8974,7 +12753,33 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 6,
-        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor"]
+        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "IME19": {
         "campaign": "Indomitus Mirror Elite",
@@ -8983,7 +12788,27 @@
         "reward": "The Silver Eagle with Swords",
         "expectedGold": 101,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "IME2": {
         "campaign": "Indomitus Mirror Elite",
@@ -8992,7 +12817,27 @@
         "reward": "Reconstitution Protocols",
         "expectedGold": 83,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "IME20": {
         "campaign": "Indomitus Mirror Elite",
@@ -9001,7 +12846,21 @@
         "reward": "Sensor Suite",
         "expectedGold": 101,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Heavy Intercessor", "Cadian Guardsman"]
+        "enemiesTypes": ["Heavy Intercessor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "IME21": {
         "campaign": "Indomitus Mirror Elite",
@@ -9010,7 +12869,27 @@
         "reward": "Adamantium Filaments",
         "expectedGold": 101,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "IME22": {
         "campaign": "Indomitus Mirror Elite",
@@ -9019,7 +12898,33 @@
         "reward": "Cogwheel Crest",
         "expectedGold": 101,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "IME23": {
         "campaign": "Indomitus Mirror Elite",
@@ -9028,7 +12933,33 @@
         "reward": "Purity Seal",
         "expectedGold": 101,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "IME24": {
         "campaign": "Indomitus Mirror Elite",
@@ -9037,7 +12968,40 @@
         "reward": "Certus",
         "expectedGold": 101,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Certus",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 10,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "IME25": {
         "campaign": "Indomitus Mirror Elite",
@@ -9046,7 +13010,33 @@
         "reward": "Reinforced Scale-Plates",
         "expectedGold": 108,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "IME26": {
         "campaign": "Indomitus Mirror Elite",
@@ -9055,7 +13045,27 @@
         "reward": "Drone Controller",
         "expectedGold": 108,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "IME27": {
         "campaign": "Indomitus Mirror Elite",
@@ -9066,7 +13076,27 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 5,
-        "enemiesTypes": ["Heavy Intercessor", "Inceptor", "Eliminator"]
+        "enemiesTypes": ["Heavy Intercessor", "Inceptor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "IME28": {
         "campaign": "Indomitus Mirror Elite",
@@ -9077,7 +13107,33 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor"]
+        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 11
+            }
+        ]
     },
     "IME29": {
         "campaign": "Indomitus Mirror Elite",
@@ -9086,7 +13142,33 @@
         "reward": "Bloodstone Tear",
         "expectedGold": 108,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Heavy Intercessor", "Cadian Guardsman"]
+        "enemiesTypes": ["Heavy Intercessor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "IME3": {
         "campaign": "Indomitus Mirror Elite",
@@ -9095,7 +13177,27 @@
         "reward": "Viridian Energy Tesseract",
         "expectedGold": 83,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "IME30": {
         "campaign": "Indomitus Mirror Elite",
@@ -9104,7 +13206,33 @@
         "reward": "Blood Vial",
         "expectedGold": 108,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 9,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "IME31": {
         "campaign": "Indomitus Mirror Elite",
@@ -9113,7 +13241,33 @@
         "reward": "Engram Neurochip",
         "expectedGold": 108,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "IME32": {
         "campaign": "Indomitus Mirror Elite",
@@ -9122,7 +13276,34 @@
         "reward": "Varro Tigurius",
         "expectedGold": 108,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Varro Tigurius",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 11,
+                "rarity": "Legendary"
+            }
+        ]
     },
     "IME33": {
         "campaign": "Indomitus Mirror Elite",
@@ -9131,7 +13312,33 @@
         "reward": "Blood Shard Bolt",
         "expectedGold": 108,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "IME34": {
         "campaign": "Indomitus Mirror Elite",
@@ -9140,7 +13347,21 @@
         "reward": "Artisan Plating",
         "expectedGold": 108,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Inceptor",
+                "count": 5,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "IME35": {
         "campaign": "Indomitus Mirror Elite",
@@ -9149,7 +13370,21 @@
         "reward": "Stimm Injector",
         "expectedGold": 108,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Heavy Intercessor", "Cadian Guardsman"]
+        "enemiesTypes": ["Heavy Intercessor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "IME36": {
         "campaign": "Indomitus Mirror Elite",
@@ -9158,7 +13393,33 @@
         "reward": "Greater Reliquary of Vengeance",
         "expectedGold": 108,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Heavy Intercessor", "Inceptor", "Eliminator", "Cadian Guardsman"]
+        "enemiesTypes": ["Heavy Intercessor", "Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "IME37": {
         "campaign": "Indomitus Mirror Elite",
@@ -9169,7 +13430,27 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 6,
-        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor"]
+        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "IME38": {
         "campaign": "Indomitus Mirror Elite",
@@ -9178,7 +13459,21 @@
         "reward": "Archeo-Tech Remnant",
         "expectedGold": 108,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 8,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 11
+            }
+        ]
     },
     "IME39": {
         "campaign": "Indomitus Mirror Elite",
@@ -9189,7 +13484,33 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor"]
+        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "IME4": {
         "campaign": "Indomitus Mirror Elite",
@@ -9198,7 +13519,27 @@
         "reward": "Artificial Vertebrae",
         "expectedGold": 83,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Eliminator", "Heavy Intercessor", "Cadian Guardsman"]
+        "enemiesTypes": ["Eliminator", "Heavy Intercessor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "IME40": {
         "campaign": "Indomitus Mirror Elite",
@@ -9209,7 +13550,34 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor"]
+        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Marneus Calgar",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 11,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "IME5": {
         "campaign": "Indomitus Mirror Elite",
@@ -9220,7 +13588,27 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 6,
-        "enemiesTypes": ["Eliminator", "Inceptor", "Heavy Intercessor"]
+        "enemiesTypes": ["Eliminator", "Inceptor", "Heavy Intercessor"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 8
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 8
+            }
+        ]
     },
     "IME6": {
         "campaign": "Indomitus Mirror Elite",
@@ -9231,7 +13619,27 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 5,
-        "enemiesTypes": ["Inceptor", "Heavy Intercessor", "Eliminator"]
+        "enemiesTypes": ["Inceptor", "Heavy Intercessor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "IME7": {
         "campaign": "Indomitus Mirror Elite",
@@ -9240,7 +13648,21 @@
         "reward": "Archeo-Tech Remnant",
         "expectedGold": 83,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Heavy Intercessor", "Cadian Guardsman"]
+        "enemiesTypes": ["Heavy Intercessor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 10,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "IME8": {
         "campaign": "Indomitus Mirror Elite",
@@ -9249,7 +13671,40 @@
         "reward": "Vindicta",
         "expectedGold": 83,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor", "Cadian Guardsman"]
+        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Vindicta",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5,
+                "rarity": "Rare"
+            }
+        ]
     },
     "IME9": {
         "campaign": "Indomitus Mirror Elite",
@@ -9260,7 +13715,27 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Ultramarines"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Heavy Intercessor"]
+        "enemiesTypes": ["Inceptor", "Eliminator", "Heavy Intercessor"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoCME1": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -11800,7 +16275,6 @@
         "enemiesTotal": 7,
         "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer"]
     },
-
     "AME1": {
         "campaign": "Adeptus Mechanicus Extremis",
         "campaignType": "Extremis",
@@ -12097,7 +16571,6 @@
         "enemiesTotal": 7,
         "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer"]
     },
-
     "AMSC1": {
         "campaign": "Adeptus Mechanicus Standard Challenge",
         "campaignType": "Normal",
@@ -12125,7 +16598,6 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Cadian Mortar Team"]
     },
-
     "AMEC1": {
         "campaign": "Adeptus Mechanicus Extremis Challenge",
         "campaignType": "Extremis",

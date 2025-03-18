@@ -13,11 +13,15 @@ export const RankImage = ({
     size?: number;
     resized?: boolean;
 }) => {
-    if (!rank) {
+    if (!rank || rank > Rank.Diamond3) {
         return <span>{Rank[Rank.Locked]}</span>;
     }
 
+    console.log('rank = ', rank);
+
     const rankTextValue = Rank[rank];
+
+    console.log('rankTextValue = ', rankTextValue);
     const image = resized
         ? getImageUrl(`ranks/resized/${rankTextValue.toLowerCase()}.png`)
         : getImageUrl(`ranks/${rankTextValue.toLowerCase()}.png`);
