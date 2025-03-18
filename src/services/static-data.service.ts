@@ -562,6 +562,10 @@ export class StaticDataService {
         if (map[npc]) {
             return prefix + '/' + map[npc];
         }
+        const unit = unitsData.find(x => x.Name === npc);
+        if (unit != undefined) {
+            return 'src/assets/images/portraits/' + unit.Icon;
+        }
         return '(unknown)';
     }
 
