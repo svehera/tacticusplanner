@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { ColDef } from 'ag-grid-community';
@@ -29,6 +30,7 @@ interface Props {
 
 export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData, progression }) => {
     const [colDefs] = useState(getColumnDefs());
+    const [mobileColDefs] = useState(getMobileColumnDefs());
 
     /**
      * Returns the unit ID of each character that has a goal requiring at least
@@ -100,6 +102,118 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
             ) +
             ' energy, before beating this node.'
         );
+    }
+
+    /**
+     * @returns the mobile column defs for the grid that holds the material
+     * requirements related to the campaign.
+     */
+    function getMobileColumnDefs(): ColDef[] {
+        return [
+            {
+                headerName: 'Battle',
+                autoHeight: true,
+                width: 70,
+                cellRenderer: (params: any) => {
+                    const savingsData = params.data.savingsData;
+                    if (!savingsData) return '';
+                    const savings: BattleSavings = savingsData[0].savings;
+                    return (
+                        <CampaignLocation
+                            key={savings.battle.id}
+                            location={savings.battle}
+                            short={true}
+                            unlocked={true}
+                        />
+                    );
+                },
+            },
+            {
+                headerName: 'Mat.',
+                autoHeight: true,
+                width: 45,
+                cellRenderer: (params: any) => {
+                    const savingsData = params.data.savingsData;
+                    if (!savingsData) return '';
+                    const savings: BattleSavings = savingsData[0].savings;
+                    if (UpgradesService.getUpgradeMaterial(savings.battle.reward)) {
+                        return (
+                            <UpgradeImage
+                                material={savings.battle.reward}
+                                iconPath={UpgradesService.getUpgradeMaterial(savings.battle.reward)?.icon ?? ''}
+                                rarity={savings.battle.rarityEnum}
+                                size={30}
+                            />
+                        );
+                    }
+                    return <div></div>;
+                },
+            },
+            {
+                headerName: '#',
+                autoHeight: true,
+                flex: 1,
+                cellRenderer: (params: any) => {
+                    const savingsData = params.data.savingsData;
+                    if (!savingsData) return <span>Unimplemented</span>;
+                    const savings: BattleSavings = savingsData[0].savings;
+                    return <span>{getRequiredMaterialCount(savings.battle.reward)}x</span>;
+                },
+            },
+            {
+                headerName: 'Savings',
+                autoHeight: true,
+                flex: 2,
+                cellRenderer: (params: any) => {
+                    const savingsData = params.data.savingsData;
+                    if (!savingsData) return <span>Unimplemented</span>;
+                    const savings: BattleSavings = savingsData[0].savings;
+                    if (!savings.canFarmPrior) {
+                        let tooltipText: string = '';
+                        const battle = CampaignsProgressionService.getBattleFromBaseCampaignWithSameReward(
+                            savings.battle,
+                            progression.materialFarmData.get(savings.battle.reward)
+                        );
+                        if (battle != undefined) {
+                            tooltipText =
+                                'Currently unfarmable, but will be unlocked in ' +
+                                battle.id +
+                                ' before reaching this battle.';
+                        }
+                        return (
+                            <Tooltip title={tooltipText}>
+                                <span>Unlocks{battle === undefined ? '' : '*'}</span>
+                            </Tooltip>
+                        );
+                    } else {
+                        return (
+                            <Tooltip title={getSavingsTooltipText(savings.battle.reward)}>
+                                <span>
+                                    {savings.savings} <MiscIcon icon={'energy'} height={15} width={15} />
+                                </span>
+                            </Tooltip>
+                        );
+                    }
+                },
+            },
+            {
+                headerName: 'Cum. Savings',
+                autoHeight: true,
+                flex: 2,
+                cellRenderer: (params: any) => {
+                    const savingsData = params.data.savingsData;
+                    if (!savingsData) return <span>Unimplemented</span>;
+                    const savings: BattleSavings = savingsData[0].savings;
+                    if (savings.canFarmPrior) {
+                        return (
+                            <span>
+                                {savings.cumulativeSavings} <MiscIcon icon={'energy'} height={15} width={15} />
+                            </span>
+                        );
+                    }
+                },
+            },
+        ];
     }
 
     /**
@@ -266,10 +380,10 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
         <AgGridReact
             modules={[AllCommunityModule]}
             theme={themeBalham}
-            columnDefs={colDefs}
+            columnDefs={isMobile ? mobileColDefs : colDefs}
             rowData={getRowData()}
             domLayout="autoHeight"
-            headerHeight={0}
+            headerHeight={isMobile ? 20 : 0}
             rowHeight={32}
         />
     );

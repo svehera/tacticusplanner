@@ -118,7 +118,7 @@ export const Campaigns = () => {
                     return <></>;
                 }
                 const battle: ICampaignBattleComposed = params.data as ICampaignBattleComposed;
-                if (battle.detailedEnemyTypes) {
+                if (battle.detailedEnemyTypes && battle.detailedEnemyTypes.length > 0) {
                     return (
                         <center>
                             <div style={{ position: 'relative' }}>
