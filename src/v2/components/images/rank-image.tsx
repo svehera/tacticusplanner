@@ -17,11 +17,8 @@ export const RankImage = ({
         return <span>{Rank[Rank.Locked]}</span>;
     }
 
-    console.log('rank = ', rank);
-
     const rankTextValue = Rank[rank];
 
-    console.log('rankTextValue = ', rankTextValue);
     const image = resized
         ? getImageUrl(`ranks/resized/${rankTextValue.toLowerCase()}.png`)
         : getImageUrl(`ranks/${rankTextValue.toLowerCase()}.png`);

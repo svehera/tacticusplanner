@@ -1,4 +1,5 @@
 ﻿import React, { useMemo, useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
 import { AgGridReact } from 'ag-grid-react';
 import {
@@ -24,9 +25,33 @@ import { CampaignLocation } from 'src/shared-components/goals/campaign-location'
 import { FactionImage } from 'src/v2/components/images/faction-image';
 
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
+import { CampaignBattle } from './campaign-battle';
 
 export const Campaigns = () => {
     const gridRef = useRef<AgGridReact<ICampaignBattleComposed>>(null);
+
+    const [mobileColumnDefs] = useState<Array<ColDef>>([
+        {
+            headerName: 'Battle',
+            pinned: true,
+            maxWidth: 100,
+            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
+                const location = params.data;
+                if (location) {
+                    return <CampaignLocation key={location.id} location={location} short={true} unlocked={true} />;
+                }
+            },
+        },
+        {
+            headerName: 'Details',
+            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
+                const location = params.data;
+                if (location) {
+                    return <CampaignBattle key={location.id} battle={location} scale={0.5} />;
+                }
+            },
+        },
+    ]);
 
     const [columnDefs] = useState<Array<ColDef>>([
         {
@@ -199,7 +224,7 @@ export const Campaigns = () => {
                     ref={gridRef}
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
-                    columnDefs={columnDefs}
+                    columnDefs={isMobile ? mobileColumnDefs : columnDefs}
                     rowData={rows}
                     onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
             </div>
