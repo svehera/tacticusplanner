@@ -8,17 +8,17 @@
         "enemiesTotal": 7,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -32,17 +32,17 @@
         "enemiesTotal": 7,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 4,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -56,17 +56,17 @@
         "enemiesTotal": 6,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -79,17 +79,17 @@
         "enemiesTotal": 12,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 5,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 7,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 7,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -102,17 +102,17 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 5,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -125,17 +125,17 @@
         "enemiesTotal": 7,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -148,17 +148,17 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 5,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -171,17 +171,17 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 5,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -194,17 +194,17 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 6,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -217,23 +217,23 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 5,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Makhoptep",
-            "count": 1,
-            "rank": "Stone 3",
-            "stars": 2
+            {
+                "name": "Makhotep",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -246,17 +246,17 @@
         "enemiesTotal": 7,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 0
             }
         ]
     },
@@ -269,17 +269,17 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 4,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 0
             }
         ]
     },
@@ -292,17 +292,17 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 4,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -315,29 +315,29 @@
         "enemiesTotal": 7,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Stone 2",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
             }
         ]
     },
@@ -350,23 +350,23 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 4,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             }
         ]
     },
@@ -379,29 +379,29 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 4,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Deathmark",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
             }
         ]
     },
@@ -414,29 +414,29 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 4,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Deathmark",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
             }
         ]
     },
@@ -449,23 +449,23 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 4,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Deathmark",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 5,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -478,23 +478,23 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -508,29 +508,29 @@
         "slots": 3,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
             }
         ]
     },
@@ -543,23 +543,23 @@
         "enemiesTotal": 7,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
             }
         ]
     },
@@ -572,29 +572,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -608,11 +608,11 @@
         "enemiesTotal": 6,
         "enemiesTypes": ["Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 6,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 0
             }
         ]
     },
@@ -625,23 +625,23 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
             }
         ]
     },
@@ -654,29 +654,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 5,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Imospekh",
-            "count": 1,
-            "rank": "Stone 3",
-            "stars": 3
+            {
+                "name": "Imospekh",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 3
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
             }
         ]
     },
@@ -689,29 +689,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 3,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Deathmark",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -724,35 +724,35 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Stone 1",
-            "stars": 1
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 1
             }
         ]
     },
@@ -765,29 +765,29 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 3,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -800,29 +800,29 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -835,29 +835,29 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -870,29 +870,29 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ],
         "slots": 3
@@ -906,41 +906,41 @@
         "enemiesTotal": 12,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 3,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -953,29 +953,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 3,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -988,35 +988,35 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Stone 3",
-            "stars": 0
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ],
         "slots": 3
@@ -1030,29 +1030,29 @@
         "enemiesTotal": 12,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 4,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 3,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -1065,29 +1065,29 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Scarab Swarm", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 3,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -1100,29 +1100,29 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 3,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
             }
         ],
         "slots": 4
@@ -1136,29 +1136,29 @@
         "enemiesTotal": 11,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 3,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 3,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -1171,29 +1171,29 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Necron Warrior", "Scarab Swarm", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 4,
-            "rank": "Iron 4",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 4,
+                "rank": "Iron 4",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
             }
         ]
     },
@@ -1206,29 +1206,29 @@
         "enemiesTotal": 12,
         "enemiesTypes": ["Scarab Swarm", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Aleph-Null",
-            "count": 1,
-            "rank": "Iron 2",
-            "stars": 4
+            {
+                "name": "Aleph-Null",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 4
             },
-          {
-            "name": "Deathmark",
-            "count": 5,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Deathmark",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 4,
-            "rank": "Stone 1",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
             }
         ]
     },
@@ -1241,29 +1241,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
             }
         ]
     },
@@ -1276,29 +1276,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Flayed One",
-            "count": 4,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             }
         ]
     },
@@ -1311,41 +1311,41 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Stone 2",
-            "stars": 0
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
             }
         ],
         "slots": 3
@@ -1359,29 +1359,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 3,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 4,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             }
         ]
     },
@@ -1394,35 +1394,35 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             }
         ]
     },
@@ -1435,23 +1435,23 @@
         "enemiesTotal": 11,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 4,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 3,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Scarab Swarm",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
             }
         ]
     },
@@ -1464,29 +1464,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 3,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Scarab Swarm",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
             }
         ]
     },
@@ -1499,29 +1499,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 3,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Scarab Swarm",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
             }
         ]
     },
@@ -1534,29 +1534,29 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Flayed One",
-            "count": 4,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             }
         ],
         "slots": 3
@@ -1570,29 +1570,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             }
         ],
         "slots": 3
@@ -1606,23 +1606,23 @@
         "enemiesTotal": 12,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 5,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Flayed One",
+                "count": 5,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 5,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 5,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             }
         ]
     },
@@ -1635,23 +1635,23 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 3,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Bronze 1",
-            "stars": 5
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 5
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             }
         ]
     },
@@ -1664,23 +1664,23 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Flayed One",
-            "count": 5,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
             }
         ],
         "slots": 3
@@ -1694,23 +1694,23 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 3,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 4,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Scarab Swarm",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
             }
         ]
     },
@@ -1723,41 +1723,41 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Stone 3",
-            "stars": 1
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
             },
-          {
-            "name": "Thutmose",
-            "count": 1,
-            "rank": "Bronze 1",
-            "stars": 5
+            {
+                "name": "Thutmose",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 5
             }
         ]
     },
@@ -1770,29 +1770,29 @@
         "enemiesTotal": 12,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 4,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
             }
         ]
     },
@@ -1805,35 +1805,35 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             }
         ],
         "slots": 3
@@ -1847,29 +1847,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             }
         ]
     },
@@ -1882,29 +1882,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 4,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             }
         ]
     },
@@ -1917,29 +1917,29 @@
         "enemiesTotal": 12,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 3,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Scarab Swarm",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
             }
         ]
     },
@@ -1952,29 +1952,29 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             }
         ],
         "slots": 3
@@ -1988,23 +1988,23 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 3,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Flayed One",
-            "count": 6,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Flayed One",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
             }
         ]
     },
@@ -2017,35 +2017,35 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
             }
         ]
     },
@@ -2058,35 +2058,35 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Iron 1",
-            "stars": 1
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
             }
         ],
         "slots": 3
@@ -2100,29 +2100,29 @@
         "enemiesTotal": 11,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 4,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
             }
         ]
     },
@@ -2135,23 +2135,23 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 5,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Deathmark",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
             }
         ]
     },
@@ -2164,29 +2164,29 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 2
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
             }
         ],
         "slots": 3
@@ -2200,29 +2200,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Scarab Swarm", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 4,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Deathmark",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Bronze 1",
-            "stars": 5
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 5
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
             }
         ]
     },
@@ -2235,29 +2235,29 @@
         "enemiesTotal": 12,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 5,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Deathmark",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
             }
         ]
     },
@@ -2270,35 +2270,35 @@
         "enemiesTotal": 11,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Anuphet",
-            "count": 1,
-            "rank": "Bronze 2",
-            "stars": 5
+            {
+                "name": "Anuphet",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 5
             },
-          {
-            "name": "Deathmark",
-            "count": 3,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Deathmark",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Iron 2",
-            "stars": 3
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 3
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Iron 3",
-            "stars": 2
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
             }
         ]
     },
@@ -6755,29 +6755,29 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Flayed One", "Scarab Swarm", "Necron Warrior", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Bronze 1",
-            "stars": 5
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 5
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Bronze 1",
-            "stars": 5
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 5
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Bronze 3",
-            "stars": 4
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 4
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
             }
         ]
     },
@@ -6791,29 +6791,29 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Bronze 3",
-            "stars": 4
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 4
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "silver 1",
-            "stars": 4
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "silver 1",
+                "stars": 4
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Silver 1",
-            "stars": 4
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 4
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Bronze 2",
-            "stars": 4
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 4
             }
         ]
     },
@@ -6826,23 +6826,23 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Deathmark", "Scarab Swarm", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 4,
-            "rank": "Silver 1",
-            "stars": 7
+            {
+                "name": "Deathmark",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 7
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Silver 1",
-            "stars": 7
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Silver 1",
-            "stars": 7
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
             }
         ]
     },
@@ -6855,23 +6855,23 @@
         "enemiesTotal": 7,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Silver 2",
-            "stars": 8
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 2,
-            "rank": "Bronze 2",
-            "stars": 4
+            {
+                "name": "Ophydian Destroyer",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 4
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 3,
-            "rank": "Silver 1",
-            "stars": 7
+            {
+                "name": "Scarab Swarm",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
             }
         ]
     },
@@ -6885,29 +6885,29 @@
         "enemiesTotal": 5,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Scarab Swarm", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Bronze 3",
-            "stars": 7
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 7
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
             }
         ]
     },
@@ -6921,17 +6921,17 @@
         "enemiesTotal": 4,
         "enemiesTypes": ["Flayed One", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Bronze 3",
-            "stars": 5
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
             }
         ]
     },
@@ -6944,29 +6944,29 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Flayed One", "Necron Warrior", "Scarab Swarm", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Silver 2",
-            "stars": 8
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Silver 1",
-            "stars": 7
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
             }
         ]
     },
@@ -6979,35 +6979,35 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Flayed One", "Necron Warrior", "Deathmark", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Silver 2",
-            "stars": 8
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Silver 1",
-            "stars": 7
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
             },
-          {
-            "name": "Imospekh",
-            "count": 1,
-            "rank": "Silver 2",
-            "stars": 6
+            {
+                "name": "Imospekh",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 6
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Silver 1",
-            "stars": 7
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Bronze 2",
-            "stars": 4
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 4
             }
         ]
     },
@@ -7020,23 +7020,23 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Flayed One", "Necron Warrior", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Silver 2",
-            "stars": 8
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
             },
-          {
-            "name": "Flayed One",
-            "count": 4,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Silver 2",
-            "stars": 8
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
             }
         ]
     },
@@ -7049,29 +7049,29 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Scarab Swarm", "Flayed One", "Necron Warrior", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 3,
-            "rank": "Silver 2",
-            "stars": 8
+            {
+                "name": "Deathmark",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
             }
         ]
     },
@@ -7085,23 +7085,23 @@
         "enemiesTotal": 6,
         "enemiesTypes": ["Flayed One", "Necron Warrior", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Silver 2",
-            "stars": 9
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Silver 2",
-            "stars": 8
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Silver 2",
-            "stars": 8
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
             }
         ]
     },
@@ -7114,23 +7114,23 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Flayed One", "Necron Warrior", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Bronze 3",
-            "stars": 7
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
             },
-          {
-            "name": "Flayed One",
-            "count": 4,
-            "rank": "Bronz 2",
-            "stars": 4
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Bronz 2",
+                "stars": 4
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Bronz 3",
-            "stars": 4
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Bronz 3",
+                "stars": 4
             }
         ]
     },
@@ -7143,29 +7143,29 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Deathmark", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 3,
-            "rank": "Silver 2",
-            "stars": 9
+            {
+                "name": "Deathmark",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Silver 2",
-            "stars": 9
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Silver 1",
-            "stars": 4
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 4
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Silver 2",
-            "stars": 8
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
             }
         ]
     },
@@ -7179,35 +7179,35 @@
         "enemiesTotal": 11,
         "enemiesTypes": ["Flayed One", "Necron Warrior", "Scarab Swarm", "Deathmark", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
             },
-          {
-            "name": "Flayed One",
-            "count": 4,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Bronze 3",
-            "stars": 7
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 7
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Silver 1",
-            "stars": 4
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 4
             }
         ]
     },
@@ -7220,35 +7220,35 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Scarab Swarm", "Flayed One", "Necron Warrior", "Deathmark", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Silver 2",
-            "stars": 9
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Silver 2",
-            "stars": 9
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Silver 2",
-            "stars": 8
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Silver 1",
-            "stars": 7
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Silver 2",
-            "stars": 8
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
             }
         ]
     },
@@ -7261,29 +7261,29 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Silver 2",
-            "stars": 8
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Silver 2",
-            "stars": 9
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Silver 2",
-            "stars": 9
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 9
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 2,
-            "rank": "Silver 1",
-            "stars": 7
+            {
+                "name": "Ophydian Destroyer",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
             }
         ]
     },
@@ -7296,35 +7296,35 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Ophydian Destroyer", "Deathmark", "Scarab Swarm", "Necron Warrior"],
         "detailedEnemyTypes": [
-          {
-            "name": "Aleph-Null",
-            "count": 1,
-            "rank": "Silver 3",
-            "stars": 7
+            {
+                "name": "Aleph-Null",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 7
             },
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Silver 3",
-            "stars": 8
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 2,
-            "rank": "Bronze 3",
-            "stars": 7
+            {
+                "name": "Ophydian Destroyer",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Silver 2",
-            "stars": 8
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
             }
         ]
     },
@@ -7337,23 +7337,23 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 11
             },
-          {
-            "name": "Flayed One",
-            "count": 4,
-            "rank": "Silver 3",
-            "stars": 8
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 8
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 11
             }
         ]
     },
@@ -7367,23 +7367,23 @@
         "enemiesTotal": 6,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Silver 3",
-            "stars": 8
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 11
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Silver 2",
-            "stars": 9
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
             }
         ]
     },
@@ -7397,29 +7397,29 @@
         "enemiesTotal": 6,
         "enemiesTypes": ["Scarab Swarm", "Flayed One", "Necron Warrior", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 1,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Deathmark",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 11
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Silver 3",
-            "stars": 8
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 11
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 11
             }
         ]
     },
@@ -7433,29 +7433,29 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Flayed One", "Scarab Swarm", "Necron Warrior", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Silver 3",
-            "stars": 8
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
             },
-          {
-            "name": "Flayed One",
-            "count": 4,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 11
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Silver 3",
-            "stars": 8
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Silver 2",
-            "stars": 9
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
             }
         ]
     },
@@ -7468,29 +7468,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Ophydian Destroyer", "Scarab Swarm", "Flayed One", "Necron Warrior"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 11
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Silver 3",
-            "stars": 8
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 2,
-            "rank": "Silver 1",
-            "stars": 9
+            {
+                "name": "Ophydian Destroyer",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Silver 3",
-            "stars": 8
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
             }
         ]
     },
@@ -7503,29 +7503,29 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Flayed One", "Necron Warrior", "Scarab Swarm", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Bronze 3",
-            "stars": 4
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 4
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Bronze 2",
-            "stars": 4
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 4
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Bronze 1",
-            "stars": 4
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 4
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 3,
-            "rank": "Bronze 2",
-            "stars": 4
+            {
+                "name": "Scarab Swarm",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 4
             }
         ]
     },
@@ -7538,29 +7538,29 @@
         "enemiesTotal": 8,
         "enemiesTypes": ["Ophydian Destroyer", "Flayed One", "Necron Warrior", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Gold 1",
-            "stars": 10
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Gold 1",
-            "stars": 10
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Gold 1",
-            "stars": 10
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Silver 2",
-            "stars": 9
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
             }
         ]
     },
@@ -7574,29 +7574,29 @@
         "enemiesTotal": 7,
         "enemiesTypes": ["Deathmark", "Flayed One", "Necron Warrior", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 3,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Deathmark",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 11
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Gold 1",
-            "stars": 10
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Gold 1",
-            "stars": 10
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 10
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Silver 2",
-            "stars": 9
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
             }
         ]
     },
@@ -7609,29 +7609,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Flayed One", "Necron Warrior", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 11
             },
-          {
-            "name": "Flayed One",
-            "count": 4,
-            "rank": "Gold 1",
-            "stars": 10
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Gold 1",
-            "stars": 10
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
             },
-          {
-            "name": "Thutmose",
-            "count": 1,
-            "rank": "Gold 1",
-            "stars": 8
+            {
+                "name": "Thutmose",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 8
             }
         ]
     },
@@ -7644,23 +7644,23 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Flayed One", "Necron Warrior", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Gold 1",
-            "stars": 11
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 11
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Gold 2",
-            "stars": 10
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Gold 1",
-            "stars": 11
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 11
             }
         ]
     },
@@ -7674,23 +7674,23 @@
         "enemiesTotal": 6,
         "enemiesTypes": ["Ophydian Destroyer", "Flayed One", "Necron Warrior"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Gold 2",
-            "stars": 10
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Gold 2",
-            "stars": 11
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 11
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 11
             }
         ]
     },
@@ -7704,29 +7704,29 @@
         "enemiesTotal": 12,
         "enemiesTypes": ["Scarab Swarm", "Flayed One", "Necron Warrior", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 11
             },
-          {
-            "name": "Flayed One",
-            "count": 6,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Flayed One",
+                "count": 6,
+                "rank": "Silver 3",
+                "stars": 11
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 11
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Silver 3",
-            "stars": 8
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
             }
         ]
     },
@@ -7740,29 +7740,29 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Deathmark", "Flayed One", "Necron Warrior", "Scarab Swarm"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Gold 2",
-            "stars": 11
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
             },
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Gold 2",
-            "stars": 11
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 11
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Gold 2",
-            "stars": 10
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Gold 1",
-            "stars": 11
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 11
             }
         ]
     },
@@ -7776,29 +7776,29 @@
         "enemiesTotal": 6,
         "enemiesTypes": ["Ophydian Destroyer", "Flayed One", "Deathmark", "Necron Warrior"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 3,
-            "rank": "Gold 3",
-            "stars": 11
+            {
+                "name": "Deathmark",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 11
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Gold 3",
-            "stars": 11
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Gold 3",
+                "stars": 11
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Gold 3",
-            "stars": 11
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Gold 3",
+                "stars": 11
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Silver 3",
-            "stars": 8
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
             }
         ]
     },
@@ -7811,23 +7811,23 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Scarab Swarm", "Flayed One", "Necron Warrior"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Gold 3",
-            "stars": 11
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Gold 3",
+                "stars": 11
             },
-          {
-            "name": "Necron Warrior",
-            "count": 5,
-            "rank": "Gold 3",
-            "stars": 11
+            {
+                "name": "Necron Warrior",
+                "count": 5,
+                "rank": "Gold 3",
+                "stars": 11
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Gold 3",
-            "stars": 10
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Gold 3",
+                "stars": 10
             }
         ]
     },
@@ -7840,29 +7840,29 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Deathmark", "Necron Warrior", "Scarab Swarm", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 4,
-            "rank": "Gold 3",
-            "stars": 10
+            {
+                "name": "Deathmark",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 10
             },
-          {
-            "name": "Flayed One",
-            "count": 1,
-            "rank": "Gold 2",
-            "stars": 11
+            {
+                "name": "Flayed One",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 11
             },
-          {
-            "name": "Necron Warrior",
-            "count": 2,
-            "rank": "Gold 2",
-            "stars": 11
+            {
+                "name": "Necron Warrior",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Gold 3",
-            "stars": 10
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Gold 3",
+                "stars": 10
             }
         ]
     },
@@ -7876,29 +7876,29 @@
         "enemiesTotal": 6,
         "enemiesTypes": ["Flayed One", "Scarab Swarm", "Necron Warrior", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Bronze 3",
-            "stars": 4
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 4
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Bronze 3",
-            "stars": 4
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 4
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Bronze 3",
-            "stars": 7
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 7
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "Bronze 3",
-            "stars": 4
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 4
             }
         ]
     },
@@ -7911,29 +7911,29 @@
         "enemiesTotal": 12,
         "enemiesTypes": ["Ophydian Destroyer", "Necron Warrior", "Scarab Swarm", "Flayed One"],
         "detailedEnemyTypes": [
-          {
-            "name": "Anuphet",
-            "count": 1,
-            "rank": "Gold 2",
-            "stars": 9
+            {
+                "name": "Anuphet",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 9
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Gold 1",
-            "stars": 10
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
             },
-          {
-            "name": "Necron Warrior",
-            "count": 5,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Necron Warrior",
+                "count": 5,
+                "rank": "Silver 3",
+                "stars": 11
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 2,
-            "rank": "Silver 3",
-            "stars": 11
+            {
+                "name": "Ophydian Destroyer",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 11
             }
         ]
     },
@@ -7946,29 +7946,29 @@
         "enemiesTotal": 11,
         "enemiesTypes": ["Flayed One", "Necron Warrior", "Scarab Swarm", "Deathmark"],
         "detailedEnemyTypes": [
-          {
-            "name": "Deathmark",
-            "count": 2,
-            "rank": "Bronze 3",
-            "stars": 7
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
             },
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Bronze 3",
-            "stars": 7
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
             },
-          {
-            "name": "Necron Warrior",
-            "count": 4,
-            "rank": "Bronze 3",
-            "stars": 7
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 3,
-            "rank": "Bronze 2",
-            "stars": 4
+            {
+                "name": "Scarab Swarm",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 4
             }
         ]
     },
@@ -7981,23 +7981,23 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Flayed One", "Necron Warrior", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Bronze 3",
-            "stars": 7
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
             },
-          {
-            "name": "Necron Warrior",
-            "count": 5,
-            "rank": "Silver 1",
-            "stars": 4
+            {
+                "name": "Necron Warrior",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 4
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Bronze 1",
-            "stars": 4
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 4
             }
         ]
     },
@@ -8010,29 +8010,29 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Flayed One", "Necron Warrior", "Scarab Swarm", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 3,
-            "rank": "Silver 1",
-            "stars": 4
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 4
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Bronze 3",
-            "stars": 7
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 2,
-            "rank": "Bronze 1",
-            "stars": 3
+            {
+                "name": "Ophydian Destroyer",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Bronze 2",
-            "stars": 4
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 4
             }
         ]
     },
@@ -8045,35 +8045,35 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Flayed One", "Necron Warrior", "Scarab Swarm", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "Bronze 3",
-            "stars": 4
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 4
             },
-          {
-            "name": "Makhotep",
-            "count": 1,
-            "rank": "Silver 1",
-            "stars": 6
+            {
+                "name": "Makhotep",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 6
             },
-          {
-            "name": "Necron Warrior",
-            "count": 3,
-            "rank": "Bronze 3",
-            "stars": 4
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 4
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Bronze 2",
-            "stars": 4
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 4
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 2,
-            "rank": "Bronze 3",
-            "stars": 4
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 4
             }
         ]
     },
@@ -8087,29 +8087,29 @@
         "enemiesTotal": 5,
         "enemiesTypes": ["Necron Warrior", "Flayed One", "Scarab Swarm", "Ophydian Destroyer"],
         "detailedEnemyTypes": [
-          {
-            "name": "Flayed One",
-            "count": 2,
-            "rank": "silver 1",
-            "stars": 4
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "silver 1",
+                "stars": 4
             },
-          {
-            "name": "Necron Warrior",
-            "count": 1,
-            "rank": "Silver 1",
-            "stars": 7
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
             },
-          {
-            "name": "Ophydian Destroyer",
-            "count": 1,
-            "rank": "Bronze 1",
-            "stars": 4
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 4
             },
-          {
-            "name": "Scarab Swarm",
-            "count": 1,
-            "rank": "bronze 3",
-            "stars": 7
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "bronze 3",
+                "stars": 7
             }
         ]
     },
@@ -12154,4 +12154,3 @@
         "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Skirarii Vanguard", "Cadian Mortar Team"]
     }
 }
-
