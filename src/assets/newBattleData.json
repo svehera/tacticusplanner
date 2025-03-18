@@ -227,7 +227,8 @@
                 "name": "Makhoptep",
                 "count": 1,
                 "rank": "Stone 3",
-                "stars": 2
+                "stars": 2,
+                "rarity": "Uncommon"
             },
             {
                 "name": "Necron Warrior",
@@ -670,7 +671,8 @@
                 "name": "Imospekh",
                 "count": 1,
                 "rank": "Stone 3",
-                "stars": 3
+                "stars": 3,
+                "rarity": "Uncommon"
             },
             {
                 "name": "Necron Warrior",
@@ -1210,7 +1212,8 @@
                 "name": "Aleph-Null",
                 "count": 1,
                 "rank": "Iron 2",
-                "stars": 4
+                "stars": 4,
+                "rarity": "Uncommon"
             },
             {
                 "name": "Deathmark",
@@ -1757,7 +1760,8 @@
                 "name": "Thutmose",
                 "count": 1,
                 "rank": "Bronze 1",
-                "stars": 5
+                "stars": 5,
+                "rarity": "Rare"
             }
         ]
     },
@@ -2274,7 +2278,8 @@
                 "name": "Anuphet",
                 "count": 1,
                 "rank": "Bronze 2",
-                "stars": 5
+                "stars": 5,
+                "rarity": "Rare"
             },
             {
                 "name": "Deathmark",
@@ -9788,7 +9793,8 @@
                 "name": "Imospekh",
                 "count": 1,
                 "rank": "Silver 2",
-                "stars": 6
+                "stars": 6,
+                "rarity": "Epic"
             },
             {
                 "name": "Necron Warrior",
@@ -10093,7 +10099,8 @@
                 "name": "Aleph-Null",
                 "count": 1,
                 "rank": "Silver 3",
-                "stars": 7
+                "stars": 7,
+                "rarity": "Epic"
             },
             {
                 "name": "Deathmark",
@@ -10424,7 +10431,8 @@
                 "name": "Thutmose",
                 "count": 1,
                 "rank": "Gold 1",
-                "stars": 8
+                "stars": 8,
+                "rarity": "Epic"
             }
         ]
     },
@@ -10708,7 +10716,8 @@
                 "name": "Anuphet",
                 "count": 1,
                 "rank": "Gold 2",
-                "stars": 9
+                "stars": 9,
+                "rarity": "Legendary"
             },
             {
                 "name": "Flayed One",
@@ -10848,7 +10857,8 @@
                 "name": "Makhotep",
                 "count": 1,
                 "rank": "Silver 1",
-                "stars": 6
+                "stars": 6,
+                "rarity": "Rare"
             },
             {
                 "name": "Necron Warrior",
