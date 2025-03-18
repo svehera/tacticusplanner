@@ -118,6 +118,7 @@ export class StaticDataService {
         return result;
     }
 
+    // Converts the static JSON in recipeData to an IRecipeDataFull object.
     static convertRecipeData(): IRecipeDataFull {
         const result: IRecipeDataFull = {};
         const upgrades = Object.keys(this.recipeData);
@@ -319,7 +320,12 @@ export class StaticDataService {
         }
     }
 
-    public static getUpgrades(...characters: Array<IRankLookup>): IMaterialFull[] {
+    /**
+     * @param characters The set of rank-up character goals to analyze.
+     * @returns The full set of uncraftable upgrade materials needed to meet the
+     *          specified rank-up goals.
+     */
+    public static getUpgradeMaterialsToRankUp(...characters: Array<IRankLookup>): IMaterialFull[] {
         const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
         const result: IMaterialFull[] = [];
         let priority = 0;
@@ -410,6 +416,13 @@ export class StaticDataService {
         return orderBy(result, ['daysOfBattles', 'totalEnergy', 'rarity', 'count'], ['desc', 'desc', 'desc', 'desc']);
     }
 
+    /**
+     *
+     * @param upgrades The set of full upgrade materials, including both crafted
+     *                 and base materials.
+     * @param keepGold Whether or not to keep track of gold in the results.
+     * @returns
+     */
     public static groupBaseMaterials(upgrades: IMaterialFull[], keepGold = false) {
         const groupedData = groupBy(
             upgrades.flatMap(x => {
