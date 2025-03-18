@@ -37,13 +37,22 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
     const verticalMargin = 30;
 
     const parseRank = (rank: string): Rank => {
-        if (rank.startsWith('Stone')) return Rank.Stone1 + parseInt(rank[6]);
-        if (rank.startsWith('Iron')) return Rank.Iron1 + parseInt(rank[5]);
-        if (rank.startsWith('Bronze')) return Rank.Bronze1 + parseInt(rank[7]);
-        if (rank.startsWith('Silver')) return Rank.Silver1 + parseInt(rank[7]);
-        if (rank.startsWith('Gold')) return Rank.Gold1 + parseInt(rank[5]);
-        if (rank.startsWith('Diamond')) return Rank.Diamond1 + parseInt(rank[8]);
+        if (rank.startsWith('Stone')) return Rank.Stone1 + parseInt(rank[6]) - 1;
+        if (rank.startsWith('Iron')) return Rank.Iron1 + parseInt(rank[5]) - 1;
+        if (rank.startsWith('Bronze')) return Rank.Bronze1 + parseInt(rank[7]) - 1;
+        if (rank.startsWith('Silver')) return Rank.Silver1 + parseInt(rank[7]) - 1;
+        if (rank.startsWith('Gold')) return Rank.Gold1 + parseInt(rank[5]) - 1;
+        if (rank.startsWith('Diamond')) return Rank.Diamond1 + parseInt(rank[8]) - 1;
         return Rank.Locked;
+    };
+
+    const parseRarity = (rarity: string): Rarity => {
+        if (rarity == 'Common') return Rarity.Common;
+        if (rarity == 'Uncommon') return Rarity.Uncommon;
+        if (rarity == 'Rare') return Rarity.Rare;
+        if (rarity == 'Epic') return Rarity.Epic;
+        if (rarity == 'Legendary') return Rarity.Legendary;
+        return Rarity.Common;
     };
 
     const getEnemies = () => {
@@ -59,7 +68,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
                         <NpcPortrait
                             name={enemy.name}
                             rank={parseRank(enemy.rank)}
-                            rarity={Rarity.Common}
+                            rarity={parseRarity(enemy.rarity ?? 'Common')}
                             stars={enemy.stars}
                         />
                     </div>

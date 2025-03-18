@@ -1,5 +1,5 @@
 import React from 'react';
-import { Rank, Rarity, RarityStars } from 'src/models/enums';
+import { Rank, Rarity, RarityStars, RarityString } from 'src/models/enums';
 import goldStar from 'src/assets/images/stars/star small.png';
 import redStar from 'src/assets/images/stars/red star small.png';
 import blueStar from 'src/assets/images/stars/blue star.png';
@@ -23,7 +23,8 @@ interface Props {
  * @returns An NPC portrait very similar to what you'd get in game. The portrait
  *          frame is 202(width) x 267(height) pixels. There is some overhang
  *          though. The stars rise above the frame as much as 15 pixels, and the
- *          rank ribbon sticks out to the left as much as 15 pixels.
+ *          rank ribbon sticks out to the left as much as 15 pixels, and to the
+ *          bottom as much as 7 pixels.
  */
 export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
     // All coordinates here are relative to the top-left corner (0, 0).
@@ -33,9 +34,10 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
     const fifthStarSize = 52;
 
     const getFrame = (rarity: Rarity) => {
+        const icons = ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary'];
         return (
             <img
-                src={'../../src/assets/images/rarity_frames/common.png'}
+                src={'../../src/assets/images/rarity_frames/' + icons[rarity as number] + '.png'}
                 style={{
                     position: 'absolute',
                     top: 0,
