@@ -1179,7 +1179,7 @@
         },
         {
             "lvl": 36,
-            "primary": ["Weathering", "Weathering", "Boon of Nurgle"]
+            "primary": ["Weathering", "Weathering", "Blessing of Nurgle"]
         },
         {
             "lvl": 37,
@@ -1191,34 +1191,34 @@
         },
         {
             "lvl": 39,
-            "primary": ["Weathering", "Boon of Nurgle", "Bell of Despair"]
+            "primary": ["Weathering", "Blessing of Nurgle", "Bell of Despair"]
         },
         {
             "lvl": 40,
-            "primary": ["Warp Locus", "Boon of Nurgle", "Sigil of Eternal Decay"]
+            "primary": ["Warp Locus", "Blessing of Nurgle", "Sigil of Eternal Decay"]
         },
         {
             "lvl": 41,
-            "primary": ["Unyielding Rivets", "Boon of Nurgle", "Immaterial Shroud"]
+            "primary": ["Unyielding Rivets", "Blessing of Nurgle", "Immaterial Shroud"]
         },
         {
             "lvl": 42,
-            "primary": ["Weathering", "Boon of Nurgle", "Grandiose Skull Ornament"],
-            "secondary": ["Weathering", "Boon of Nurgle", "Mutation: Otherworldly Power"]
+            "primary": ["Weathering", "Blessing of Nurgle", "Grandiose Skull Ornament"],
+            "secondary": ["Weathering", "Blessing of Nurgle", "Mutation: Otherworldly Power"]
         },
         {
             "lvl": 43,
-            "primary": ["Warp Locus", "Boon of Nurgle", "Psychic Focus"],
-            "secondary": ["Warp Locus", "Boon of Nurgle", "Imposing Horns"]
+            "primary": ["Warp Locus", "Blessing of Nurgle", "Psychic Focus"],
+            "secondary": ["Warp Locus", "Blessing of Nurgle", "Imposing Horns"]
         },
         {
             "lvl": 44,
-            "primary": ["Unyielding Rivets", "Boon of Nurgle", "Mutation: Impenetrable Skin"],
-            "secondary": ["Unyielding Rivets", "Boon of Nurgle", "Ceramite Plates"]
+            "primary": ["Unyielding Rivets", "Blessing of Nurgle", "Mutation: Impenetrable Skin"],
+            "secondary": ["Unyielding Rivets", "Blessing of Nurgle", "Ceramite Plates"]
         },
         {
             "lvl": 45,
-            "primary": ["Boon of Nurgle", "Psychic Force Conduit", "Mark of Nurgle"]
+            "primary": ["Blessing of Nurgle", "Psychic Force Conduit", "Mark of Nurgle"]
         },
         {
             "lvl": 46,
@@ -1230,13 +1230,13 @@
         },
         {
             "lvl": 48,
-            "primary": ["Boon of Nurgle", "Archeo-Tech Remnant", "Grand Strategy"],
-            "secondary": ["Boon of Nurgle", "Archeo-Tech Remnant", "Technocrafted Constitution"]
+            "primary": ["Blessing of Nurgle", "Archeo-Tech Remnant", "Grand Strategy"],
+            "secondary": ["Blessing of Nurgle", "Archeo-Tech Remnant", "Technocrafted Constitution"]
         },
         {
             "lvl": 49,
-            "primary": ["Psychic Force Conduit", "Boon of Nurgle", "Relic Auxiliary Core"],
-            "secondary": ["Psychic Force Conduit", "Boon of Nurgle", "Technocrafted Strength"]
+            "primary": ["Psychic Force Conduit", "Blessing of Nurgle", "Relic Auxiliary Core"],
+            "secondary": ["Psychic Force Conduit", "Blessing of Nurgle", "Technocrafted Strength"]
         }
     ]
 }
