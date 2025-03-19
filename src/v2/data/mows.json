@@ -60,5 +60,18 @@
         "initialRarity": "Common",
         "deployableAlliance": "Imperial",
         "releaseDate": "2024-12-02T00:00:00Z"
+    },
+    {
+        "id": "_plagueburst",
+        "tacticusId": "deathCrawler",
+        "name": "Plagueburst Crawler",
+        "title": "Daemon Engine",
+        "shortName": "Plagueburst",
+        "fullName": "Plagueburst Crawler",
+        "alliance": "Chaos",
+        "faction": "Death guard",
+        "initialRarity": "Common",
+        "deployableAlliance": "Chaos",
+        "releaseDate": "2025-03-17T00:00:00Z"
     }
 ]
