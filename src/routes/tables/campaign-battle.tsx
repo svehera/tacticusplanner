@@ -1,5 +1,5 @@
-import React, { JSX, useMemo } from 'react';
-import { ICampaignBattleComposed, IDetailedEnemy } from 'src/models/interfaces';
+import React from 'react';
+import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { StaticDataService } from 'src/services';
@@ -55,7 +55,7 @@ export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
                         <td align="center">
                             <div>
                                 {getReward()}
-                                {battle.dropRate ? (battle.dropRate * 100).toFixed(2) + '%' : '(N/A)'}
+                                {battle.dropRate ? `${(battle.dropRate * 100).toFixed(2)}%` : '(N/A)'}
                             </div>
                             <div>Character Slots: {battle.slots ?? 5}</div>
                         </td>

@@ -9,7 +9,7 @@
                 {
                     "text": "(cpunerd) Improved 'Learn > Campaigns'",
                     "subPoints": [
-                        "Added more details about enemies to 'Learn > Campaigns'. Currently Indomitus, Indomitus Mirror, and Fall of Cadia are complete. The rest are in progress. Thanks to Towen for the the data collection.",
+                        "Added more details about enemies to 'Learn > Campaigns'. Currently Indomitus, Indomitus Mirror, and Fall of Cadia are complete. The rest are in progress. Thanks to Towen for the data collection.",
                         "Made the page mobile friendly."
                     ],
                     "images": [{ "path": "enemy_details.png" }, { "path": "mobile_campaigns.png" }]
@@ -19,7 +19,7 @@
                     "subPoints": [
                         "Added character stats in the details page under 'Input > Who You Own'. Equipment is not yet considered.",
                         "Added character stats at configurable level under 'Learn > Characters'.",
-                        "Added DAMVAR against zero armor and infinite amor under expanded character stats at 'Learn > Characters.'"
+                        "Added DAMVAR against zero armor and infinite armor under expanded character stats at 'Learn > Characters.'"
                     ],
                     "images": [{ "path": "wyo_stats.png" }, { "path": "character_stats.png" }, { "path": "damvar.png" }]
                 },

@@ -202,9 +202,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 }}
                             />
 
-                            {form.rankStart > Rank.Locked && (
+                            {isCharacter(unit) && form.rankStart > Rank.Locked && (
                                 <CharacterUpgrades
-                                    character={unit as ICharacter2}
+                                    character={unit}
                                     upgrades={form.appliedUpgrades}
                                     rank={form.rankStart}
                                     upgradesChanges={(upgrades, updateInventory) => {

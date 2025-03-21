@@ -46,7 +46,6 @@ import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 import { TeamsAction } from 'src/reducers/teams.reducer';
 import { ILreProgressDto } from 'src/models/dto.interfaces';
 import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
-import { StringNullableChain } from 'lodash';
 
 export type LreTrackId = 'alpha' | 'beta' | 'gamma';
 

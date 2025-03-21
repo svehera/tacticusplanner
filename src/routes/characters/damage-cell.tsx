@@ -66,7 +66,6 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
             case DamageType.Toxic:
                 return 0.7;
             default:
-                console.log(damageType);
                 return -1;
         }
     };

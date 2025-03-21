@@ -39,7 +39,7 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                 const finalCount = raidedLocations[battleIndex].raidsCount + action.location.raidsCount;
                 raidedLocations[battleIndex] = {
                     ...raidedLocations[battleIndex],
-                    raidsCount: raidedLocations[battleIndex].raidsCount + action.location.raidsCount,
+                    raidsCount: finalCount,
                     isCompleted: finalCount === action.location.dailyBattleCount,
                 };
                 return {

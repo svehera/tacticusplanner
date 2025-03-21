@@ -139,10 +139,10 @@ export const Campaigns = () => {
                 }
             },
             cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                if ((params.data as ICampaignBattleComposed) == undefined) {
+                if (!params.data) {
                     return <></>;
                 }
-                const battle: ICampaignBattleComposed = params.data as ICampaignBattleComposed;
+                const battle = params.data;
                 if (battle.detailedEnemyTypes && battle.detailedEnemyTypes.length > 0) {
                     return (
                         <center>
