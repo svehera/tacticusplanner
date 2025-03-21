@@ -49,10 +49,12 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
             <ul style={{ width: '100%', paddingInlineStart: 15 }}>
                 {upgradeRaid.raidLocations.map(location => {
                     const maxObtained = Math.round(location.farmedItems);
-                    const defaultItemsObtained =
+                    const defaultItemsObtained = Math.max(
                         maxObtained + acquiredCount > upgradeRaid.requiredCount
                             ? upgradeRaid.requiredCount - acquiredCount
-                            : maxObtained;
+                            : maxObtained,
+                        0
+                    );
 
                     return (
                         <li

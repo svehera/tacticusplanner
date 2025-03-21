@@ -689,6 +689,7 @@ export interface ICampaignBattleComposed {
     isUnlocked?: boolean;
     isPassFilter?: boolean;
     isCompleted?: boolean;
+    isStarted?: boolean;
 }
 
 export interface IRecipeData {

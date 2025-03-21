@@ -33,6 +33,21 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
             return action.value ?? defaultData.dailyRaids;
         }
         case 'AddCompletedBattle': {
+            const battleIndex = state.raidedLocations.findIndex(x => x.id === action.location.id);
+            if (battleIndex >= 0) {
+                const raidedLocations = [...state.raidedLocations];
+                const finalCount = raidedLocations[battleIndex].raidsCount + action.location.raidsCount;
+                raidedLocations[battleIndex] = {
+                    ...raidedLocations[battleIndex],
+                    raidsCount: raidedLocations[battleIndex].raidsCount + action.location.raidsCount,
+                    isCompleted: finalCount === action.location.dailyBattleCount,
+                };
+                return {
+                    ...state,
+                    raidedLocations,
+                };
+            }
+
             return {
                 ...state,
                 raidedLocations: [...state.raidedLocations, action.location],
