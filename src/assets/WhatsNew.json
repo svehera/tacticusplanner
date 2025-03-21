@@ -30,10 +30,24 @@
                         "Fixed a bug with incorrectly calculated savings in campaign progression for extremis nodes in campaign events."
                     ],
                     "images": [{ "path": "mobile_campaign_progression.png" }]
+                },
+                {
+                    "text": "(laserian403) Added Plague Burst Crawler to the 'Who You Own' page."
                 }
             ],
-            "minor": [],
-            "bugFixes": []
+            "minor": [
+                {
+                    "text": "(irvinesj) Updated duplicate upgrades handling."
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed upgrades syncing via Tacticus API for some crafted upgrades."
+                },
+                {
+                    "text": "Fixed bug with daily raids upgrades order while syncing with Tacticus API."
+                }
+            ]
         },
         {
             "version": "1.7.0",
