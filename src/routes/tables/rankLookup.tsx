@@ -60,12 +60,16 @@ export const RankLookup = () => {
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLElement | null>(null);
     const [materialRecipe, setMaterialRecipe] = React.useState<IMaterialFull | null>(null);
 
+    /**
+     * Holds the set of uncraftable upgrade materials needed to rank up this
+     * character.
+     */
     const upgrades = useMemo<IMaterialFull[]>(() => {
         if (!character) {
             return [];
         }
 
-        return StaticDataService.getUpgrades({
+        return StaticDataService.getUpgradeMaterialsToRankUp({
             unitName: character.id,
             rankStart,
             rankEnd,

@@ -238,7 +238,7 @@ export const CharacterDetails = ({
                     </Grid>
 
                     <CharacterUpgrades
-                        characterName={character.name}
+                        character={character}
                         upgrades={character.upgrades}
                         rank={character.rank}
                         upgradesChanges={(upgrades, updateInventory) => {

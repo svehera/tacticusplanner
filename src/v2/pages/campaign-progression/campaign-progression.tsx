@@ -1,4 +1,5 @@
 import React, { useContext, useMemo } from 'react';
+import { isMobile } from 'react-device-detect';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -162,9 +163,13 @@ export const CampaignProgression = () => {
                                                 <td>
                                                     <CampaignImage campaign={entry[0]} />
                                                 </td>
-                                                <td>{entry[0]}</td>
-                                                <td>-</td>
-                                                <td>{getCampaignProgress(entry[0])}</td>
+                                                {!isMobile && (
+                                                    <>
+                                                        <td>{entry[0]}</td>
+                                                        <td> - </td>
+                                                        <td>{getCampaignProgress(entry[0])}</td>
+                                                    </>
+                                                )}
                                             </tr>
                                         </tbody>
                                     </table>

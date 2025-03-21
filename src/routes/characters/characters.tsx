@@ -3,6 +3,7 @@
 import { AgGridReact } from 'ag-grid-react';
 import {
     ColDef,
+    GridApi,
     RowStyle,
     RowClassParams,
     IRowNode,
@@ -11,6 +12,8 @@ import {
     ValueGetterParams,
     AllCommunityModule,
     themeBalham,
+    RefreshCellsParams,
+    Column,
 } from 'ag-grid-community';
 
 import {
@@ -26,12 +29,8 @@ import {
 
 import { MultipleSelectCheckmarks } from './multiple-select';
 import { ICharacter2 } from 'src/models/interfaces';
-import { Alliance, DamageType, Rank, Trait } from 'src/models/enums';
-import { isMobile } from 'react-device-detect';
-import { CharacterTitle } from 'src/shared-components/character-title';
+import { Alliance, DamageType, Rank, Rarity, RarityStars, Trait } from 'src/models/enums';
 import { StoreContext } from 'src/reducers/store.provider';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { RankImage } from 'src/v2/components/images/rank-image';
 import { useQueryState } from 'src/v2/hooks/query-state';
 import { uniq } from 'lodash';
 import InputLabel from '@mui/material/InputLabel';
@@ -39,9 +38,26 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import { getEnumValues } from 'src/shared-logic/functions';
+import { RankSelect } from 'src/shared-components/rank-select';
+import { StarsSelect } from 'src/shared-components/stars-select';
+import { RaritySelect } from 'src/shared-components/rarity-select';
+import { useCharacters } from './characters-column-defs';
 
 export const Characters = () => {
     const gridRef = useRef<AgGridReact<ICharacter2>>(null);
+
+    const {
+        columnDefs,
+        targetRarity,
+        targetStars,
+        targetRank,
+        rankValues,
+        starValues,
+        onTargetRarityChanged,
+        onTargetStarsChanged,
+        onTargetRankChanged,
+    } = useCharacters();
 
     const [nameFilter, setNameFilter] = useState<string>('');
     const [onlyUnlocked, setOnlyUnlocked] = useState<boolean>(false);
@@ -95,239 +111,6 @@ export const Characters = () => {
         autoHeight: true,
         wrapText: true,
     };
-
-    const [columnDefs] = useState<Array<ColDef<ICharacter2> | ColGroupDef>>([
-        {
-            headerName: 'Character',
-            pinned: !isMobile,
-            openByDefault: !isMobile,
-            children: [
-                {
-                    headerName: '#',
-                    colId: 'rowNumber',
-                    valueGetter: params => (params.node?.rowIndex ?? 0) + 1,
-                    maxWidth: 50,
-                    width: 50,
-                    pinned: !isMobile,
-                },
-                {
-                    headerName: 'Name',
-                    width: isMobile ? 75 : 200,
-                    pinned: !isMobile,
-                    cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                        const character = props.data;
-                        if (character) {
-                            return (
-                                <CharacterTitle character={character} hideName={isMobile} short={true} imageSize={30} />
-                            );
-                        }
-                    },
-                },
-                {
-                    headerName: 'Rarity',
-                    width: 80,
-                    columnGroupShow: 'open',
-                    pinned: !isMobile,
-                    valueGetter: (props: ValueGetterParams<ICharacter2>) => {
-                        return props.data?.rarity;
-                    },
-                    cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                        const rarity = props.value ?? 0;
-                        return <RarityImage rarity={rarity} />;
-                    },
-                },
-                {
-                    headerName: 'Rank',
-                    width: 80,
-                    columnGroupShow: 'open',
-                    pinned: !isMobile,
-                    valueGetter: (props: ValueGetterParams<ICharacter2>) => {
-                        return props.data?.rank;
-                    },
-                    cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                        const rank = props.value ?? 0;
-                        return <RankImage rank={rank} />;
-                    },
-                },
-                {
-                    field: 'faction',
-                    headerName: 'Faction',
-                    width: 170,
-                    columnGroupShow: 'open',
-                    pinned: !isMobile,
-                },
-            ],
-        },
-
-        {
-            field: 'health',
-            headerName: 'Health D3',
-            width: 100,
-        },
-        {
-            field: 'damage',
-            headerName: 'Damage D3',
-            width: 100,
-        },
-        {
-            field: 'armour',
-            headerName: 'Armour D3',
-            width: 100,
-        },
-        {
-            field: 'damageTypes.all',
-            headerName: 'Damage Types',
-            width: 120,
-            cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                const damageTypes: DamageType[] = props.value ?? [];
-                return (
-                    <ul style={{ margin: 0, paddingInlineStart: 20 }}>
-                        {damageTypes.map(x => (
-                            <li key={x}>{x}</li>
-                        ))}
-                    </ul>
-                );
-            },
-        },
-        {
-            field: 'traits',
-            headerName: 'Traits',
-            width: 180,
-            cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                const traits: Trait[] = props.value ?? [];
-                return (
-                    <ul style={{ margin: 0, paddingInlineStart: 20 }}>
-                        {traits.map(x => (
-                            <li key={x}>{x}</li>
-                        ))}
-                    </ul>
-                );
-            },
-        },
-        {
-            headerName: 'Stats',
-            headerTooltip: 'Movement-Melee-Range-Distance',
-            children: [
-                {
-                    headerName: 'All',
-                    width: 150,
-                    columnGroupShow: 'closed',
-                    cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                        const data = props.data;
-                        return (
-                            data && (
-                                <ul style={{ margin: 0, paddingInlineStart: 20 }}>
-                                    <li>Movement - {data.movement}</li>
-                                    <li>Melee - {data.meleeHits}</li>
-                                    {data.rangeHits && <li>Range - {data.rangeHits}</li>}
-                                    {data.rangeDistance && <li>Distance - {data.rangeDistance}</li>}
-                                </ul>
-                            )
-                        );
-                    },
-                },
-                {
-                    field: 'movement',
-                    headerName: 'Movement',
-                    width: 100,
-                    columnGroupShow: 'open',
-                },
-                {
-                    field: 'meleeHits',
-                    headerName: 'Melee',
-                    width: 100,
-                    columnGroupShow: 'open',
-                },
-                {
-                    field: 'rangeHits',
-                    headerName: 'Range',
-                    width: 100,
-                    columnGroupShow: 'open',
-                },
-                {
-                    field: 'rangeDistance',
-                    headerName: 'Distance',
-                    width: 100,
-                    columnGroupShow: 'open',
-                },
-            ],
-        },
-        {
-            headerName: 'Equipment',
-            children: [
-                {
-                    headerName: 'All',
-                    width: 180,
-                    columnGroupShow: 'closed',
-                    cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                        const data = props.data;
-                        return (
-                            data && (
-                                <ul style={{ margin: 0, paddingInlineStart: 20 }}>
-                                    <li>Slot 1 - {data.equipment1}</li>
-                                    <li>Slot 2 - {data.equipment2}</li>
-                                    <li>Slot 3 - {data.equipment3}</li>
-                                </ul>
-                            )
-                        );
-                    },
-                },
-                {
-                    field: 'equipment1',
-                    headerName: 'Slot 1',
-                    width: 100,
-                    columnGroupShow: 'open',
-                },
-                {
-                    field: 'equipment2',
-                    headerName: 'Slot 2',
-                    width: 100,
-                    columnGroupShow: 'open',
-                },
-                {
-                    field: 'equipment3',
-                    headerName: 'Slot 3',
-                    width: 100,
-                    columnGroupShow: 'open',
-                },
-            ],
-        },
-        {
-            headerName: 'Misc',
-            children: [
-                {
-                    headerName: 'All',
-                    width: 180,
-                    columnGroupShow: 'closed',
-                    cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
-                        const data = props.data;
-                        return (
-                            data && (
-                                <ul style={{ margin: 0, paddingInlineStart: 20 }}>
-                                    {data.requiredInCampaign && <li>Required for Campaigns</li>}
-                                    {data.forcedSummons && <li>Forced summons</li>}
-                                </ul>
-                            )
-                        );
-                    },
-                },
-                {
-                    field: 'requiredInCampaign',
-                    headerName: 'Campaign',
-                    cellRenderer: 'agCheckboxCellRenderer',
-                    width: 100,
-                    columnGroupShow: 'open',
-                },
-                {
-                    field: 'forcedSummons',
-                    headerName: 'Forced Summons',
-                    cellRenderer: 'agCheckboxCellRenderer',
-                    width: 100,
-                    columnGroupShow: 'open',
-                },
-            ],
-        },
-    ]);
 
     const { characters } = useContext(StoreContext);
 
@@ -729,6 +512,32 @@ export const Characters = () => {
                 </>
             )}
 
+            <div className="flex gap-[3px] justify-left">
+                <div style={{ width: 200 }}>
+                    <RaritySelect
+                        label={'Target Rarity'}
+                        rarityValues={getEnumValues(Rarity)}
+                        value={targetRarity}
+                        valueChanges={value => onTargetRarityChanged(value)}
+                    />
+                </div>
+                <div style={{ width: 200 }}>
+                    <StarsSelect
+                        label={'Target Stars'}
+                        starsValues={starValues}
+                        value={targetStars}
+                        valueChanges={value => onTargetStarsChanged(value)}
+                    />
+                </div>
+                <div style={{ width: 200 }}>
+                    <RankSelect
+                        label={'Target Rank'}
+                        rankValues={rankValues}
+                        value={targetRank}
+                        valueChanges={value => onTargetRankChanged(value)}
+                    />
+                </div>
+            </div>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}
@@ -741,7 +550,8 @@ export const Characters = () => {
                     onSortChanged={refreshRowNumberColumn}
                     onFilterChanged={refreshRowNumberColumn}
                     isExternalFilterPresent={isExternalFilterPresent}
-                    doesExternalFilterPass={doesExternalFilterPass}></AgGridReact>
+                    doesExternalFilterPass={doesExternalFilterPass}
+                />
             </div>
         </div>
     );

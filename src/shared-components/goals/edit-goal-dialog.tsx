@@ -4,7 +4,7 @@ import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/mater
 import Button from '@mui/material/Button';
 
 import Box from '@mui/material/Box';
-import { ICampaignsProgress } from 'src/models/interfaces';
+import { ICampaignsProgress, ICharacter2 } from 'src/models/interfaces';
 import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { enqueueSnackbar } from 'notistack';
@@ -204,7 +204,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
                             {form.rankStart > Rank.Locked && (
                                 <CharacterUpgrades
-                                    characterName={unit.id}
+                                    character={unit as ICharacter2}
                                     upgrades={form.appliedUpgrades}
                                     rank={form.rankStart}
                                     upgradesChanges={(upgrades, updateInventory) => {

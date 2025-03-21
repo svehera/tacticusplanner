@@ -1,4 +1,5 @@
 ﻿import React, { useMemo, useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
 import { AgGridReact } from 'ag-grid-react';
 import {
@@ -12,7 +13,7 @@ import {
 } from 'ag-grid-community';
 
 import { ICampaignBattleComposed } from 'src/models/interfaces';
-import { Campaign } from 'src/models/enums';
+import { Campaign, Rank, Rarity, RarityStars } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
 import { FormControl, MenuItem, Select } from '@mui/material';
@@ -23,8 +24,34 @@ import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { FactionImage } from 'src/v2/components/images/faction-image';
 
+import { CampaignBattleEnemies } from './campaign-battle-enemies';
+import { CampaignBattle } from './campaign-battle';
+
 export const Campaigns = () => {
     const gridRef = useRef<AgGridReact<ICampaignBattleComposed>>(null);
+
+    const [mobileColumnDefs] = useState<Array<ColDef>>([
+        {
+            headerName: 'Battle',
+            pinned: true,
+            maxWidth: 100,
+            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
+                const location = params.data;
+                if (location) {
+                    return <CampaignLocation key={location.id} location={location} short={true} unlocked={true} />;
+                }
+            },
+        },
+        {
+            headerName: 'Details',
+            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
+                const location = params.data;
+                if (location) {
+                    return <CampaignBattle key={location.id} battle={location} scale={0.5} />;
+                }
+            },
+        },
+    ]);
 
     const [columnDefs] = useState<Array<ColDef>>([
         {
@@ -112,13 +139,27 @@ export const Campaigns = () => {
                 }
             },
             cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                return (
-                    <ul style={{ margin: 0, paddingLeft: 20 }}>
-                        {(params.value as string[]).map(x => (
-                            <li key={x}>{x}</li>
-                        ))}
-                    </ul>
-                );
+                if ((params.data as ICampaignBattleComposed) == undefined) {
+                    return <></>;
+                }
+                const battle: ICampaignBattleComposed = params.data as ICampaignBattleComposed;
+                if (battle.detailedEnemyTypes && battle.detailedEnemyTypes.length > 0) {
+                    return (
+                        <center>
+                            <div style={{ position: 'relative' }}>
+                                <CampaignBattleEnemies enemies={battle.detailedEnemyTypes} scale={0.2} />
+                            </div>
+                        </center>
+                    );
+                } else {
+                    return (
+                        <ul style={{ margin: 0, paddingLeft: 20 }}>
+                            {(params.value as string[]).map(x => (
+                                <li key={x}>{x}</li>
+                            ))}
+                        </ul>
+                    );
+                }
             },
         },
     ]);
@@ -183,7 +224,7 @@ export const Campaigns = () => {
                     ref={gridRef}
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
-                    columnDefs={columnDefs}
+                    columnDefs={isMobile ? mobileColumnDefs : columnDefs}
                     rowData={rows}
                     onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
             </div>

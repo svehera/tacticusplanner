@@ -7,6 +7,7 @@ import contributors from '../assets/contributors/thankYou.json';
 import contentCreators from '../assets/contributors/contentCreators.json';
 
 import battleData from '../assets/battleData.json';
+import newBattleData from '../assets/newBattleData.json';
 import recipeData from '../assets/recipeData.json';
 import rankUpData from '../assets/rankUpData.json';
 
@@ -40,6 +41,7 @@ import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;
     static readonly battleData: ICampaignsData = battleData;
+    static readonly newBattleData: ICampaignsData = newBattleData;
     static readonly recipeData: IRecipeData = recipeData;
     static readonly rankUpData: IRankUpData = rankUpData;
     static readonly contributors: IContributor[] = contributors;
@@ -116,6 +118,7 @@ export class StaticDataService {
         return result;
     }
 
+    // Converts the static JSON in recipeData to an IRecipeDataFull object.
     static convertRecipeData(): IRecipeDataFull {
         const result: IRecipeDataFull = {};
         const upgrades = Object.keys(this.recipeData);
@@ -317,7 +320,12 @@ export class StaticDataService {
         }
     }
 
-    public static getUpgrades(...characters: Array<IRankLookup>): IMaterialFull[] {
+    /**
+     * @param characters The set of rank-up character goals to analyze.
+     * @returns The full set of uncraftable upgrade materials needed to meet the
+     *          specified rank-up goals.
+     */
+    public static getUpgradeMaterialsToRankUp(...characters: Array<IRankLookup>): IMaterialFull[] {
         const rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
         const result: IMaterialFull[] = [];
         let priority = 0;
@@ -408,6 +416,13 @@ export class StaticDataService {
         return orderBy(result, ['daysOfBattles', 'totalEnergy', 'rarity', 'count'], ['desc', 'desc', 'desc', 'desc']);
     }
 
+    /**
+     *
+     * @param upgrades The set of full upgrade materials, including both crafted
+     *                 and base materials.
+     * @param keepGold Whether or not to keep track of gold in the results.
+     * @returns
+     */
     public static groupBaseMaterials(upgrades: IMaterialFull[], keepGold = false) {
         const groupedData = groupBy(
             upgrades.flatMap(x => {
@@ -545,6 +560,33 @@ export class StaticDataService {
             characters: material.characters,
             priority: material.priority,
         };
+    }
+
+    /** @returns the image asset for the NPC, which is allowed to be a character. */
+    public static getNpcIconPath(npc: string): string {
+        const prefix: string = 'src/assets/images/npcs';
+        const map: Record<string, string> = {
+            'Flayed One': 'flayed_one.png',
+            'Necron Warrior': 'necron_warrior.png',
+            'Scarab Swarm': 'scarab_swarm.png',
+            Deathmark: 'deathmark.png',
+            'Ophydian Destroyer': 'ophydian_destroyer.png',
+            'Cadian Guardsman': 'cadian_guardsman.png',
+            'Cadian Lascannon team': 'lascannon.png',
+            'Cadian Vox-Caster': 'vox_caster.png',
+            'Cadian Mortar Team': 'mortar_team.png',
+            Eliminator: 'eliminator.png',
+            Inceptor: 'inceptor.png',
+            'Heavy Intercessor': 'intercessor.png',
+        };
+        if (map[npc]) {
+            return prefix + '/' + map[npc];
+        }
+        const unit = unitsData.find(x => x.Name === npc);
+        if (unit != undefined) {
+            return 'src/assets/images/portraits/' + unit.Icon;
+        }
+        return '(unknown)';
     }
 
     private static selectBestLocations(
