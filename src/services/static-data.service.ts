@@ -574,7 +574,7 @@ export class StaticDataService {
             'Cadian Guardsman': 'cadian_guardsman.png',
             'Cadian Lascannon team': 'lascannon.png',
             'Cadian Vox-Caster': 'vox_caster.png',
-            'Cadian Mortar Team': 'mortar.png',
+            'Cadian Mortar Team': 'mortar_team.png',
             Eliminator: 'eliminator.png',
             Inceptor: 'inceptor.png',
             'Heavy Intercessor': 'intercessor.png',
