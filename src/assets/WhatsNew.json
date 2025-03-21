@@ -1,6 +1,14 @@
 ﻿{
-    "currentVersion": "1.7.0",
+    "currentVersion": "1.7.1",
     "releaseNotes": [
+        {
+            "version": "1.7.1",
+            "date": "March 21",
+            "type": "Update",
+            "new": [],
+            "minor": [],
+            "bugFixes": []
+        },
         {
             "version": "1.7.0",
             "date": "March 4",
