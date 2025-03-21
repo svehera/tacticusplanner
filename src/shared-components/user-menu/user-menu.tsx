@@ -289,7 +289,7 @@ export const UserMenu = () => {
 
                 <Divider />
 
-                {userInfo.role === UserRole.admin && (
+                {[UserRole.admin, UserRole.moderator].includes(userInfo.role) && (
                     <MenuItem onClick={() => setShowAdminTools(true)}>
                         <ListItemIcon>
                             <SupervisorAccountIcon />
