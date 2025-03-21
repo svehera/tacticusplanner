@@ -8,8 +8,20 @@ interface Props {
     scale: number;
 }
 
+/**
+ * Displays a grid of enemies, similar to what you see in game when you open a
+ * campaign-battle dialog.
+ *
+ * @param enemies The enemies to display. Each enemy must have a name, rank,
+ *                and stars. Bosses can also have a rarity.
+ * @param scale The scale of the grid. 1 is full size (which can be very large).
+ */
 export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
+    // The total number of enemies in this battle.
     const numEnemies = useMemo(() => enemies.reduce((acc, enemy) => acc + enemy.count, 0), [enemies]);
+
+    // How many enemies we show in each row, based on how many enemies we have
+    // in total. Faster than doing the math.
     const enemiesInCols = [
         [0],
         [1],
@@ -36,6 +48,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
     const horizontalMargin = 20;
     const verticalMargin = 30;
 
+    /** @returns The enum rep of a rank. Defaults to Locked. */
     const parseRank = (rank: string): Rank => {
         if (rank.startsWith('Stone')) return Rank.Stone1 + parseInt(rank[6]) - 1;
         if (rank.startsWith('Iron')) return Rank.Iron1 + parseInt(rank[5]) - 1;
@@ -46,6 +59,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
         return Rank.Locked;
     };
 
+    /** @returns The enum rep of a rarity. Defaults to Common. */
     const parseRarity = (rarity: string): Rarity => {
         if (rarity == 'Common') return Rarity.Common;
         if (rarity == 'Uncommon') return Rarity.Uncommon;
@@ -55,6 +69,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
         return Rarity.Common;
     };
 
+    /** @returns The grid of enemies, as an array without any scaling. */
     const getEnemies = () => {
         let row = 0;
         let left = horizontalMargin;
@@ -87,6 +102,7 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
         });
         return elems;
     };
+
     return (
         <div
             style={{
