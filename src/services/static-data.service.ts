@@ -564,7 +564,7 @@ export class StaticDataService {
 
     /** @returns the image asset for the NPC, which is allowed to be a character. */
     public static getNpcIconPath(npc: string): string {
-        const prefix: string = 'src/assets/images/npcs';
+        const prefix: string = 'npcs';
         const map: Record<string, string> = {
             'Flayed One': 'flayed_one.png',
             'Necron Warrior': 'necron_warrior.png',
