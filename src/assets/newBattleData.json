@@ -8101,7 +8101,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM10": {
         "campaign": "Fall of Cadia Mirror",
@@ -8111,7 +8119,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM11": {
         "campaign": "Fall of Cadia Mirror",
@@ -8121,7 +8149,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM12": {
         "campaign": "Fall of Cadia Mirror",
@@ -8131,7 +8179,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "FoCM13": {
         "campaign": "Fall of Cadia Mirror",
@@ -8141,7 +8209,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "FoCM14": {
         "campaign": "Fall of Cadia Mirror",
@@ -8151,7 +8239,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "FoCM15": {
         "campaign": "Fall of Cadia Mirror",
@@ -8160,7 +8268,34 @@
         "reward": "Angrax",
         "expectedGold": 59,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Angrax",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2,
+                "rarity": "Uncommon"
+            },
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "FoCM16": {
         "campaign": "Fall of Cadia Mirror",
@@ -8170,7 +8305,27 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "FoCM17": {
         "campaign": "Fall of Cadia Mirror",
@@ -8180,7 +8335,27 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "FoCM18": {
         "campaign": "Fall of Cadia Mirror",
@@ -8189,7 +8364,21 @@
         "reward": "The Iron Phoenix",
         "expectedGold": 59,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "FoCM19": {
         "campaign": "Fall of Cadia Mirror",
@@ -8199,7 +8388,15 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Traitor Guardsman"]
+        "enemiesTypes": ["Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Traitor Guardsman",
+                "count": 11,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "FoCM2": {
         "campaign": "Fall of Cadia Mirror",
@@ -8209,7 +8406,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM20": {
         "campaign": "Fall of Cadia Mirror",
@@ -8218,7 +8429,21 @@
         "reward": "Targeting Link",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM21": {
         "campaign": "Fall of Cadia Mirror",
@@ -8227,7 +8452,27 @@
         "reward": "Nasty Spikes",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM22": {
         "campaign": "Fall of Cadia Mirror",
@@ -8236,7 +8481,15 @@
         "reward": "Rebreather",
         "expectedGold": 59,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM23": {
         "campaign": "Fall of Cadia Mirror",
@@ -8245,7 +8498,27 @@
         "reward": "Weapon Parts",
         "expectedGold": 59,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM24": {
         "campaign": "Fall of Cadia Mirror",
@@ -8254,7 +8527,21 @@
         "reward": "Mutation: Warped Muscles",
         "expectedGold": 59,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 4
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM25": {
         "campaign": "Fall of Cadia Mirror",
@@ -8263,7 +8550,21 @@
         "reward": "Warp Locus",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "FoCM26": {
         "campaign": "Fall of Cadia Mirror",
@@ -8272,7 +8573,27 @@
         "reward": "Blessed Promethium Canister",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "FoCM27": {
         "campaign": "Fall of Cadia Mirror",
@@ -8281,7 +8602,27 @@
         "reward": "Golden Ornamental Skull",
         "expectedGold": 59,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM28": {
         "campaign": "Fall of Cadia Mirror",
@@ -8291,7 +8632,27 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM29": {
         "campaign": "Fall of Cadia Mirror",
@@ -8300,7 +8661,27 @@
         "reward": "Bionic Neural Pathways",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM3": {
         "campaign": "Fall of Cadia Mirror",
@@ -8309,7 +8690,21 @@
         "reward": "Locator Beacon",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM30": {
         "campaign": "Fall of Cadia Mirror",
@@ -8318,7 +8713,34 @@
         "reward": "Archimatos",
         "expectedGold": 65,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Archimatos",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 4,
+                "rarity": "Uncommon"
+            },
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM31": {
         "campaign": "Fall of Cadia Mirror",
@@ -8327,7 +8749,27 @@
         "reward": "Terminator Honours",
         "expectedGold": 65,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM32": {
         "campaign": "Fall of Cadia Mirror",
@@ -8336,7 +8778,21 @@
         "reward": "Bionic Eye",
         "expectedGold": 65,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM33": {
         "campaign": "Fall of Cadia Mirror",
@@ -8345,7 +8801,27 @@
         "reward": "Waystone",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 4
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM34": {
         "campaign": "Fall of Cadia Mirror",
@@ -8355,7 +8831,21 @@
         "expectedGold": 65,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "FoCM35": {
         "campaign": "Fall of Cadia Mirror",
@@ -8364,7 +8854,27 @@
         "reward": "Mesh Weave",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "FoCM36": {
         "campaign": "Fall of Cadia Mirror",
@@ -8373,7 +8883,21 @@
         "reward": "Special Issue Ammo",
         "expectedGold": 65,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "FoCM37": {
         "campaign": "Fall of Cadia Mirror",
@@ -8383,7 +8907,21 @@
         "expectedGold": 65,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM38": {
         "campaign": "Fall of Cadia Mirror",
@@ -8392,7 +8930,21 @@
         "reward": "Valuable Fabric",
         "expectedGold": 65,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM39": {
         "campaign": "Fall of Cadia Mirror",
@@ -8401,7 +8953,27 @@
         "reward": "Satchel",
         "expectedGold": 65,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "FoCM4": {
         "campaign": "Fall of Cadia Mirror",
@@ -8411,7 +8983,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM40": {
         "campaign": "Fall of Cadia Mirror",
@@ -8420,7 +9006,27 @@
         "reward": "Crate of Salvage",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM41": {
         "campaign": "Fall of Cadia Mirror",
@@ -8429,7 +9035,15 @@
         "reward": "Classified Data-Slate",
         "expectedGold": 65,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM42": {
         "campaign": "Fall of Cadia Mirror",
@@ -8438,7 +9052,27 @@
         "reward": "Battle Scar",
         "expectedGold": 65,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM43": {
         "campaign": "Fall of Cadia Mirror",
@@ -8447,7 +9081,27 @@
         "reward": "Zeidos Ribbon",
         "expectedGold": 65,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "FoCM44": {
         "campaign": "Fall of Cadia Mirror",
@@ -8456,7 +9110,21 @@
         "reward": "Icon of Vengeance",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "FoCM45": {
         "campaign": "Fall of Cadia Mirror",
@@ -8465,7 +9133,34 @@
         "reward": "Volk",
         "expectedGold": 71,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Volk",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 5,
+                "rarity": "Rare"
+            }
+        ]
     },
     "FoCM46": {
         "campaign": "Fall of Cadia Mirror",
@@ -8475,7 +9170,21 @@
         "expectedGold": 71,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM47": {
         "campaign": "Fall of Cadia Mirror",
@@ -8484,7 +9193,15 @@
         "reward": "Artificer Tasset Plate",
         "expectedGold": 71,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Traitor Guardsman"]
+        "enemiesTypes": ["Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Traitor Guardsman",
+                "count": 11,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM48": {
         "campaign": "Fall of Cadia Mirror",
@@ -8493,7 +9210,21 @@
         "reward": "Wraithbone Plate",
         "expectedGold": 71,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM49": {
         "campaign": "Fall of Cadia Mirror",
@@ -8502,7 +9233,27 @@
         "reward": "The Phoenix Ascendant",
         "expectedGold": 71,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM5": {
         "campaign": "Fall of Cadia Mirror",
@@ -8512,7 +9263,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 8,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM50": {
         "campaign": "Fall of Cadia Mirror",
@@ -8522,7 +9287,27 @@
         "expectedGold": 71,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM51": {
         "campaign": "Fall of Cadia Mirror",
@@ -8532,7 +9317,27 @@
         "expectedGold": 71,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 4
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM52": {
         "campaign": "Fall of Cadia Mirror",
@@ -8542,7 +9347,21 @@
         "expectedGold": 71,
         "slots": 4,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "FoCM53": {
         "campaign": "Fall of Cadia Mirror",
@@ -8551,7 +9370,27 @@
         "reward": "Unnatural Vapour Dispenser",
         "expectedGold": 71,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM54": {
         "campaign": "Fall of Cadia Mirror",
@@ -8560,7 +9399,27 @@
         "reward": "Helmet Trophy",
         "expectedGold": 71,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM55": {
         "campaign": "Fall of Cadia Mirror",
@@ -8569,7 +9428,27 @@
         "reward": "Eye of Horus",
         "expectedGold": 71,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM56": {
         "campaign": "Fall of Cadia Mirror",
@@ -8578,7 +9457,21 @@
         "reward": "Combat Stimms",
         "expectedGold": 71,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM57": {
         "campaign": "Fall of Cadia Mirror",
@@ -8587,7 +9480,27 @@
         "reward": "Reinforced Cables",
         "expectedGold": 71,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "FoCM58": {
         "campaign": "Fall of Cadia Mirror",
@@ -8596,7 +9509,27 @@
         "reward": "Reinforced Scale-Plates",
         "expectedGold": 71,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM59": {
         "campaign": "Fall of Cadia Mirror",
@@ -8605,7 +9538,27 @@
         "reward": "Entrenching Tool",
         "expectedGold": 71,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM6": {
         "campaign": "Fall of Cadia Mirror",
@@ -8615,7 +9568,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 10,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM60": {
         "campaign": "Fall of Cadia Mirror",
@@ -8624,7 +9585,34 @@
         "reward": "Haarken Worldclaimer",
         "expectedGold": 77,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Haarken Worldclaimer",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 6,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM61": {
         "campaign": "Fall of Cadia Mirror",
@@ -8633,7 +9621,27 @@
         "reward": "Air Purificator",
         "expectedGold": 77,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM62": {
         "campaign": "Fall of Cadia Mirror",
@@ -8643,7 +9651,27 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "FoCM63": {
         "campaign": "Fall of Cadia Mirror",
@@ -8653,7 +9681,21 @@
         "expectedGold": 77,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM64": {
         "campaign": "Fall of Cadia Mirror",
@@ -8662,7 +9704,27 @@
         "reward": "Sigil of Decay",
         "expectedGold": 77,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM65": {
         "campaign": "Fall of Cadia Mirror",
@@ -8671,7 +9733,27 @@
         "reward": "Blasphemous Armor Trim",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM66": {
         "campaign": "Fall of Cadia Mirror",
@@ -8681,7 +9763,27 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM67": {
         "campaign": "Fall of Cadia Mirror",
@@ -8690,7 +9792,15 @@
         "reward": "Blessed Corset Armor",
         "expectedGold": 77,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "FoCM68": {
         "campaign": "Fall of Cadia Mirror",
@@ -8699,7 +9809,27 @@
         "reward": "Gifts of the Star Children",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM69": {
         "campaign": "Fall of Cadia Mirror",
@@ -8709,7 +9839,27 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM7": {
         "campaign": "Fall of Cadia Mirror",
@@ -8719,7 +9869,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 4,
-        "enemiesTypes": ["Chaos Terminator"]
+        "enemiesTypes": ["Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM70": {
         "campaign": "Fall of Cadia Mirror",
@@ -8728,7 +9886,27 @@
         "reward": "Flak Plates",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "FoCM71": {
         "campaign": "Fall of Cadia Mirror",
@@ -8737,7 +9915,21 @@
         "reward": "Blessing of the Dark Gods",
         "expectedGold": 77,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "FoCM72": {
         "campaign": "Fall of Cadia Mirror",
@@ -8746,7 +9938,27 @@
         "reward": "Blessing of Nurgle",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "FoCM73": {
         "campaign": "Fall of Cadia Mirror",
@@ -8756,7 +9968,21 @@
         "expectedGold": 77,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "FoCM74": {
         "campaign": "Fall of Cadia Mirror",
@@ -8765,7 +9991,15 @@
         "reward": "Greater Reliquary of Vengeance",
         "expectedGold": 77,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Chaos Terminator"]
+        "enemiesTypes": ["Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM75": {
         "campaign": "Fall of Cadia Mirror",
@@ -8774,7 +10008,28 @@
         "reward": "Abaddon The Despoiler",
         "expectedGold": 83,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Abaddon The Despoiler",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 3
+            }
+        ]
     },
     "FoCM8": {
         "campaign": "Fall of Cadia Mirror",
@@ -8784,7 +10039,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "FoCM9": {
         "campaign": "Fall of Cadia Mirror",
@@ -8794,7 +10063,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "OM1": {
         "campaign": "Octarius Mirror",
@@ -13755,7 +15044,15 @@
         "expectedGold": 83,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "FoCME10": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13764,7 +15061,27 @@
         "reward": "Rose of Martyrs",
         "expectedGold": 91.5,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoCME11": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13773,7 +15090,21 @@
         "reward": "Key of Ignorance",
         "expectedGold": 91.5,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Chaos Terminator", "Traitor Guardsman"]
+        "enemiesTypes": ["Chaos Terminator", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME12": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13783,7 +15114,21 @@
         "expectedGold": 91.5,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "FoCME13": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13793,7 +15138,27 @@
         "expectedGold": 91.5,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoCME14": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13803,7 +15168,21 @@
         "expectedGold": 91.5,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoCME15": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13812,7 +15191,27 @@
         "reward": "Relic Hilt",
         "expectedGold": 91.5,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Havoc",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "FoCME16": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13821,7 +15220,34 @@
         "reward": "Archimatos",
         "expectedGold": 91.5,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Archimatos",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Bloodletter",
+                "count": 8,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "FoCME17": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13830,7 +15256,21 @@
         "reward": "Hymn of Martyrs",
         "expectedGold": 101,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "FoCME18": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13840,7 +15280,27 @@
         "expectedGold": 101,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "FoCME19": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13849,7 +15309,27 @@
         "reward": "Proclamation Receiver",
         "expectedGold": 101,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Havoc",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "FoCME2": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13859,7 +15339,27 @@
         "expectedGold": 83,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Havoc",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "FoCME20": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13868,7 +15368,21 @@
         "reward": "Sigil of Decay",
         "expectedGold": 101,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "FoCME21": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13878,7 +15392,15 @@
         "expectedGold": 101,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Traitor Guardsman"]
+        "enemiesTypes": ["Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Traitor Guardsman",
+                "count": 8,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME22": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13887,7 +15409,27 @@
         "reward": "Blessed Corset Armor",
         "expectedGold": 101,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "FoCME23": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13896,7 +15438,21 @@
         "reward": "Dark Hood",
         "expectedGold": 101,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "FoCME24": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13905,7 +15461,34 @@
         "reward": "Volk",
         "expectedGold": 101,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Havoc",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Volk",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 11,
+                "rarity": "Legendary"
+            }
+        ]
     },
     "FoCME25": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13914,7 +15497,21 @@
         "reward": "Industrial Padding",
         "expectedGold": 108,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Havoc", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Havoc",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 9,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME26": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13924,7 +15521,21 @@
         "expectedGold": 108,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME27": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13933,7 +15544,27 @@
         "reward": "Single Power Pack",
         "expectedGold": 108,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Havoc",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 11
+            }
+        ]
     },
     "FoCME28": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13943,7 +15574,21 @@
         "expectedGold": 108,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Chaos Terminator", "Traitor Guardsman"]
+        "enemiesTypes": ["Chaos Terminator", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME29": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13953,7 +15598,21 @@
         "expectedGold": 108,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoCME3": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13963,7 +15622,27 @@
         "expectedGold": 83,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "FoCME30": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13972,7 +15651,27 @@
         "reward": "Gifts of the Star Children",
         "expectedGold": 108,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "FoCME31": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13981,7 +15680,27 @@
         "reward": "Blessing of Nurgle",
         "expectedGold": 108,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "FoCME32": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13990,7 +15709,34 @@
         "reward": "Haarken Worldclaimer",
         "expectedGold": 108,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Haarken Worldclaimer",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 11,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "FoCME33": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13999,7 +15745,15 @@
         "reward": "Minor Bionic Enhancement",
         "expectedGold": 108,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 8,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME34": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14008,7 +15762,21 @@
         "reward": "Eye of Horus",
         "expectedGold": 108,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME35": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14017,7 +15785,27 @@
         "reward": "Icon of Vengeance",
         "expectedGold": 108,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME36": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14027,7 +15815,21 @@
         "expectedGold": 108,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Diamond 1",
+                "stars": 11
+            }
+        ]
     },
     "FoCME37": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14036,7 +15838,27 @@
         "reward": "Blessing of the Dark Gods",
         "expectedGold": 108,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "FoCME38": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14046,7 +15868,27 @@
         "expectedGold": 108,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Havoc",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 11
+            }
+        ]
     },
     "FoCME39": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14055,7 +15897,15 @@
         "reward": "Psyk-Conductive Material",
         "expectedGold": 108,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 12,
+                "rank": "Gold 3",
+                "stars": 11
+            }
+        ]
     },
     "FoCME4": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14064,7 +15914,21 @@
         "reward": "Flak Plates",
         "expectedGold": 83,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Havoc", "Bloodletter"]
+        "enemiesTypes": ["Havoc", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCME40": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14073,7 +15937,28 @@
         "reward": "Abaddon The Despoiler",
         "expectedGold": 108,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Havoc", "Chaos Terminator"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Abaddon The Despoiler",
+                "count": 1,
+                "rank": "Gold 3",
+                "stars": 10,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 7,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME5": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14083,7 +15968,27 @@
         "expectedGold": 83,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "FoCME6": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14092,7 +15997,27 @@
         "reward": "Honourifica Imperialis",
         "expectedGold": 83,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "FoCME7": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14101,7 +16026,21 @@
         "reward": "Psyk-Conductive Material",
         "expectedGold": 83,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 9,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoCME8": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14110,7 +16049,40 @@
         "reward": "Angrax",
         "expectedGold": 83,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Angrax",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Havoc",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "FoCME9": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14120,7 +16092,21 @@
         "expectedGold": 91.5,
         "slots": 4,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Havoc", "Bloodletter"]
+        "enemiesTypes": ["Havoc", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 8,
+                "rank": "Silver 2",
+                "stars": 7
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "OME1": {
         "campaign": "Octarius Mirror Elite",

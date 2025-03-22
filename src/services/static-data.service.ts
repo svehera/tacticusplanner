@@ -578,6 +578,10 @@ export class StaticDataService {
             Eliminator: 'eliminator.png',
             Inceptor: 'inceptor.png',
             'Heavy Intercessor': 'intercessor.png',
+            Bloodletter: 'blood_letter.png',
+            'Chaos Terminator': 'chaos_terminator.png',
+            'Traitor Guardsman': 'traitor_guardsman.png',
+            Havoc: 'chaos_havoc.png',
         };
         if (map[npc]) {
             return prefix + '/' + map[npc];
