@@ -584,7 +584,7 @@ export class StaticDataService {
         }
         const unit = unitsData.find(x => x.Name === npc);
         if (unit != undefined) {
-            return 'src/assets/images/portraits/' + unit.Icon;
+            return 'portraits/' + unit.Icon;
         }
         return '(unknown)';
     }
