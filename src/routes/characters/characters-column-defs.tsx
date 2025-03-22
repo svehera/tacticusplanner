@@ -150,7 +150,7 @@ export const useCharacters = () => {
                                     characterId={props.data?.id ?? ''}
                                     rank={props.data?.rank ?? Rank.Stone1}
                                     rarity={props.data?.rarity ?? Rarity.Common}
-                                    rarityStars={props.data?.rarityStars ?? RarityStars.None}
+                                    rarityStars={props.data?.stars ?? RarityStars.None}
                                     numHealthUpgrades={StatCalculatorService.countHealthUpgrades(
                                         props.data as ICharacter2
                                     )}
@@ -194,7 +194,7 @@ export const useCharacters = () => {
                                     character={props.data as ICharacter2}
                                     rank={props.data?.rank ?? Rank.Stone1}
                                     rarity={props.data?.rarity ?? Rarity.Common}
-                                    rarityStars={props.data?.rarityStars ?? RarityStars.None}
+                                    rarityStars={props.data?.stars ?? RarityStars.None}
                                     numDamageUpgrades={StatCalculatorService.countDamageUpgrades(
                                         props.data as ICharacter2
                                     )}
