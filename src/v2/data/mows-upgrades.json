@@ -1033,5 +1033,210 @@
             "primary": ["Archeotech Bionics", "Engram Neurochip", "Relic Micro-Generator"],
             "secondary": ["Archeotech Bionics", "Engram Neurochip", "Technocrafted Strength"]
         }
+    ],
+    "_plagueburst": [
+        {
+            "lvl": 1,
+            "primary": ["Ropes and Chains", "Otherworldly Energy", "Mutation: Tough Skin"]
+        },
+        {
+            "lvl": 2,
+            "primary": ["Wires", "Basic Auxiliary Core", "Adamantium Ore"]
+        },
+        {
+            "lvl": 3,
+            "primary": ["Mutation: Warped Muscles", "Ropes and Chains", "Wires"]
+        },
+        {
+            "lvl": 4,
+            "primary": ["Nasty Spikes", "Otherworldly Energy", "Basic Auxiliary Core"]
+        },
+        {
+            "lvl": 5,
+            "primary": ["Rebreather", "Mutation: Tough Skin", "Adamantium Ore"]
+        },
+        {
+            "lvl": 6,
+            "primary": ["Ropes and Chains", "Wires", "Mutation: Warped Muscles"]
+        },
+        {
+            "lvl": 7,
+            "primary": ["Otherworldly Energy", "Basic Auxiliary Core", "Nasty Spikes"]
+        },
+        {
+            "lvl": 8,
+            "primary": ["Mutation: Tough Skin", "Adamantium Lump", "Rebreather"]
+        },
+        {
+            "lvl": 9,
+            "primary": ["Wires", "Mutation: Warped Muscles", "Mutation: Warped Lungs"]
+        },
+        {
+            "lvl": 10,
+            "primary": ["Basic Auxiliary Core", "Nasty Spikes", "Slicing Claws"]
+        },
+        {
+            "lvl": 11,
+            "primary": ["Adamantium Ore", "Rebreather", "Mutation: Scaly Skin"]
+        },
+        {
+            "lvl": 12,
+            "primary": ["Mutation: Warped Muscles", "Reinforced Cables", "Holster and Pockets"]
+        },
+        {
+            "lvl": 13,
+            "primary": ["Nasty Spikes", "Locator Beacon", "Otherworldly Energy Reservoir"]
+        },
+        {
+            "lvl": 14,
+            "primary": ["Rebreather", "Mutation: Scaly Skin", "Adamantium Lump"]
+        },
+        {
+            "lvl": 15,
+            "primary": ["Reinforced Cables", "Mutation: Scaly Skin", "Holster and Pockets"]
+        },
+        {
+            "lvl": 16,
+            "primary": ["Locator Beacon", "Slicing Claws", "Razorsharp Spikes"]
+        },
+        {
+            "lvl": 17,
+            "primary": ["Advanced Rebreather", "Ceramite Lump", "Adamantium Lump"]
+        },
+        {
+            "lvl": 18,
+            "primary": ["Mutation: Warped Lungs", "Reinforced Cables", "Plague Bell"]
+        },
+        {
+            "lvl": 19,
+            "primary": ["Slicing Claws", "Locator Beacon", "Sigil of Decay"]
+        },
+        {
+            "lvl": 20,
+            "primary": ["Ceramite Lump", "Mutation: Scaly Skin", "Unnatural Vapour Dispenser"]
+        },
+        {
+            "lvl": 21,
+            "primary": ["Reinforced Cables", "Plague Bell", "Utilitarian Belt"]
+        },
+        {
+            "lvl": 22,
+            "primary": ["Locator Beacon", "Sigil of Decay", "Supernatural Sight"]
+        },
+        {
+            "lvl": 23,
+            "primary": ["Advanced Rebreather", "Unnatural Vapour Dispenser", "Ceramite Bar"]
+        },
+        {
+            "lvl": 24,
+            "primary": ["Death Bell", "Mutation: Warped Heart", "Electromantic Cable Bundle"]
+        },
+        {
+            "lvl": 25,
+            "primary": ["Sigil of Decay", "Tank of Promethium", "Powerful Auxiliary Core"]
+        },
+        {
+            "lvl": 26,
+            "primary": ["Blasphemous Armor Trim", "Crate of Salvage", "Mutation: Warped Skin"]
+        },
+        {
+            "lvl": 27,
+            "primary": ["Mutation: Warped Heart", "Battle Scar", "Weathering"]
+        },
+        {
+            "lvl": 28,
+            "primary": ["Tank of Promethium", "Tank of Promethium", "Blessed Promethium Canister"]
+        },
+        {
+            "lvl": 29,
+            "primary": ["Crate of Salvage", "Crate of Salvage", "Unyielding Rivets"]
+        },
+        {
+            "lvl": 30,
+            "primary": ["Battle Scar", "Weathering", "Death Bell"]
+        },
+        {
+            "lvl": 31,
+            "primary": ["Tank of Promethium", "Blessed Promethium Canister", "Sigil of Inevitable Decay"]
+        },
+        {
+            "lvl": 32,
+            "primary": ["Crate of Salvage", "Unyielding Rivets", "Death Shroud"]
+        },
+        {
+            "lvl": 33,
+            "primary": ["Weathering", "Weathering", "Mutation: Regenerative Blood"],
+            "secondary": ["Weathering", "Weathering", "Grand Helmet Trophy"]
+        },
+        {
+            "lvl": 34,
+            "primary": ["Blessed Promethium Canister", "Warp Locus", "Anointed Auxiliary Core"]
+        },
+        {
+            "lvl": 35,
+            "primary": ["Unyielding Rivets", "Unyielding Rivets", "Ceramite Sheet"],
+            "secondary": ["Unyielding Rivets", "Unyielding Rivets", "Mutation: Metallic Skin"]
+        },
+        {
+            "lvl": 36,
+            "primary": ["Weathering", "Weathering", "Blessing of Nurgle"]
+        },
+        {
+            "lvl": 37,
+            "primary": ["Blessed Promethium Canister", "Warp Locus", "Psychic Force Conduit"]
+        },
+        {
+            "lvl": 38,
+            "primary": ["Unyielding Rivets", "Unyielding Rivets", "Archeo-Tech Remnant"]
+        },
+        {
+            "lvl": 39,
+            "primary": ["Weathering", "Blessing of Nurgle", "Bell of Despair"]
+        },
+        {
+            "lvl": 40,
+            "primary": ["Warp Locus", "Blessing of Nurgle", "Sigil of Eternal Decay"]
+        },
+        {
+            "lvl": 41,
+            "primary": ["Unyielding Rivets", "Blessing of Nurgle", "Immaterial Shroud"]
+        },
+        {
+            "lvl": 42,
+            "primary": ["Weathering", "Blessing of Nurgle", "Grandiose Skull Ornament"],
+            "secondary": ["Weathering", "Blessing of Nurgle", "Mutation: Otherworldly Power"]
+        },
+        {
+            "lvl": 43,
+            "primary": ["Warp Locus", "Blessing of Nurgle", "Psychic Focus"],
+            "secondary": ["Warp Locus", "Blessing of Nurgle", "Imposing Horns"]
+        },
+        {
+            "lvl": 44,
+            "primary": ["Unyielding Rivets", "Blessing of Nurgle", "Mutation: Impenetrable Skin"],
+            "secondary": ["Unyielding Rivets", "Blessing of Nurgle", "Ceramite Plates"]
+        },
+        {
+            "lvl": 45,
+            "primary": ["Blessing of Nurgle", "Psychic Force Conduit", "Mark of Nurgle"]
+        },
+        {
+            "lvl": 46,
+            "primary": ["Psychic Force Conduit", "Archeo-Tech Remnant", "Virulent Rounds"]
+        },
+        {
+            "lvl": 47,
+            "primary": ["Archeo-Tech Remnant", "Psychic Force Conduit", "Cloud of Flies"]
+        },
+        {
+            "lvl": 48,
+            "primary": ["Blessing of Nurgle", "Archeo-Tech Remnant", "Grand Strategy"],
+            "secondary": ["Blessing of Nurgle", "Archeo-Tech Remnant", "Technocrafted Constitution"]
+        },
+        {
+            "lvl": 49,
+            "primary": ["Psychic Force Conduit", "Blessing of Nurgle", "Relic Auxiliary Core"],
+            "secondary": ["Psychic Force Conduit", "Blessing of Nurgle", "Technocrafted Strength"]
+        }
     ]
 }

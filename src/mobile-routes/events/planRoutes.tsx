@@ -7,6 +7,7 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { PlanLeRoutes } from 'src/mobile-routes/events/leRoutes';
 import Button from '@mui/material/Button';
 import { PlanGuildWarRoutes } from 'src/mobile-routes/events/guildWarRoutes';
+import { campaignProgressionMenuItem } from 'src/v2/pages/campaign-progression/campaign-progression.menu-item';
 
 enum SelectedRoutes {
     all,
@@ -26,7 +27,7 @@ export const PlanRoutes = () => {
         <div style={{ display: 'flex', gap: 10, flexDirection: 'column', alignItems: 'center' }}>
             {selectedRoutes === SelectedRoutes.all ? (
                 <>
-                    {[goalsMenuItem, dailyRaidsMenuItem, teamsMenuItem].map(menuItem => (
+                    {[goalsMenuItem, dailyRaidsMenuItem, teamsMenuItem, campaignProgressionMenuItem].map(menuItem => (
                         <Card
                             variant="outlined"
                             key={menuItem.label}

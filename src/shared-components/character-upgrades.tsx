@@ -12,15 +12,20 @@ import { Rank } from 'src/models/enums';
 import { IBaseUpgrade, ICraftedUpgrade, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { UpgradeControl } from 'src/shared-components/upgrade-control';
+import { findAndRemoveItem } from 'src/shared-logic/functions';
+import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+import { StaticDataService } from 'src/services';
+import { ICharacter2 } from 'src/models/interfaces';
+import { IUnit } from 'src/v2/features/characters/characters.models';
 
 interface Props {
-    characterName: string;
+    character: ICharacter2;
     rank: Rank;
     upgrades: string[];
     upgradesChanges: (upgrades: string[], updateInventory: IUpgradeRecipe[]) => void;
 }
 
-export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, rank, characterName }) => {
+export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, rank, character }) => {
     const { inventory } = useContext(StoreContext);
 
     const [formData, setFormData] = useState({
@@ -45,7 +50,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
 
     const possibleUpgrades: Array<IBaseUpgrade | ICraftedUpgrade> = useMemo(() => {
         const [rankUpgrades] = UpgradesService.getCharacterUpgradeRank({
-            unitName: characterName,
+            unitName: character.name,
             rankStart: rank,
             rankEnd: rank + 1,
             appliedUpgrades: [],
@@ -55,11 +60,6 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
 
         return rankUpgrades.upgrades.map(x => UpgradesService.getUpgrade(x));
     }, [rank]);
-
-    const hasDuplicateUpgrades = useMemo(() => {
-        const upgrades = groupBy(possibleUpgrades.map(x => x.id));
-        return Object.values(upgrades).some(x => x.length === 2);
-    }, [possibleUpgrades]);
 
     const healthUpgrades = useMemo(() => possibleUpgrades.filter(x => x.stat === 'Health'), [possibleUpgrades]);
     const damageUpgrades = useMemo(() => possibleUpgrades.filter(x => x.stat === 'Damage'), [possibleUpgrades]);
@@ -79,8 +79,11 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
             const isNewUpgrade = rank !== formData.originalRank || !formData.originalUpgrades.includes(value);
             newUpgrades = isNewUpgrade ? [...formData.newUpgrades, value] : formData.newUpgrades;
         } else {
-            currentUpgrades = formData.currentUpgrades.filter(x => x !== value);
-            newUpgrades = formData.newUpgrades.filter(x => x !== value);
+            currentUpgrades = [...formData.currentUpgrades];
+            findAndRemoveItem(currentUpgrades, value);
+
+            newUpgrades = [...formData.newUpgrades];
+            findAndRemoveItem(newUpgrades, value);
         }
 
         if (!newUpgrades.length) {
@@ -95,14 +98,20 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
     };
 
     const topLevelUpgrades = useMemo<Array<IBaseUpgrade | ICraftedUpgrade>>(() => {
-        const newUpgrades = possibleUpgrades.filter(x => formData.newUpgrades.includes(x.id));
+        // We need to be careful not to remove duplicates from the list here, in
+        // order to correctly calculate the inventory changes when there are duplicate
+        // upgrades for the current rank.
+        const newUpgrades = formData.newUpgrades
+            .map(x => possibleUpgrades.find(y => y.id === x))
+            .filter(x => x !== undefined);
+
         let upgradesToConsider: Array<IBaseUpgrade | ICraftedUpgrade>;
 
         if (rank <= formData.originalRank) {
             upgradesToConsider = newUpgrades;
         } else {
             const previousRankUpgradesList = UpgradesService.getCharacterUpgradeRank({
-                unitName: characterName,
+                unitName: character.name,
                 rankStart: formData.originalRank,
                 rankEnd: rank,
                 appliedUpgrades: formData.originalUpgrades,
@@ -142,43 +151,49 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
         }
     }, [rank]);
 
+    // When each upgrade control is being created it needs to know if
+    // the upgrade has already been used by a previous control in order to avoid
+    // duplicate upgrades causing all controls for that upgrade type to be checked
+    //
+    // This is done by creating a copy of the current upgrades and removing the
+    // item used to check the previous controls.
+    const upgradeStack = [...formData.currentUpgrades];
+
     return (
         <div>
-            {hasDuplicateUpgrades && (
-                <div className="flex-box gap3">
-                    <Warning color="warning" /> Duplicated upgrades will be applied both at once
-                </div>
-            )}
             <div style={{ display: 'flex' }}>
                 <div className="upgrades-column">
                     <MiscIcon icon={'health'} height={30} />
+                    {StatCalculatorService.getHealth(character)}
                     {healthUpgrades.map((x, index) => (
                         <UpgradeControl
                             key={x.id + index}
                             upgrade={x}
-                            checked={formData.currentUpgrades.includes(x.id)}
+                            checked={findAndRemoveItem(upgradeStack, x.id)}
                             checkedChanges={value => handleUpgradeChange(value, x.id)}
                         />
                     ))}
                 </div>
                 <div className="upgrades-column">
                     <MiscIcon icon={'damage'} />
+                    {StatCalculatorService.getDamage(character)}
                     {damageUpgrades.map((x, index) => (
                         <UpgradeControl
                             key={x.id + index}
                             upgrade={x}
-                            checked={formData.currentUpgrades.includes(x.id)}
+                            checked={findAndRemoveItem(upgradeStack, x.id)}
                             checkedChanges={value => handleUpgradeChange(value, x.id)}
                         />
                     ))}
                 </div>
                 <div className="upgrades-column">
                     <MiscIcon icon={'armour'} height={30} />
+                    {StatCalculatorService.getArmor(character)}
                     {armourUpgrades.map((x, index) => (
                         <UpgradeControl
                             key={x.id + index}
                             upgrade={x}
-                            checked={formData.currentUpgrades.includes(x.id)}
+                            checked={findAndRemoveItem(upgradeStack, x.id)}
                             checkedChanges={value => handleUpgradeChange(value, x.id)}
                         />
                     ))}
@@ -189,7 +204,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                     <UpgradeControl
                         key={x.id + index}
                         upgrade={x}
-                        checked={formData.currentUpgrades.includes(x.id)}
+                        checked={findAndRemoveItem(upgradeStack, x.id)}
                         checkedChanges={value => handleUpgradeChange(value, x.id)}
                     />
                 ))}

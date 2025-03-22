@@ -49,6 +49,7 @@ export const MultipleSelect: React.FC<Props> = ({
         } = event;
         const newValue = typeof value === 'string' ? value.split(',') : value;
         for (const option of options) {
+            // eslint-disable-next-line react-compiler/react-compiler
             option.selected = newValue.includes(option.value);
         }
         optionsChange(newValue);

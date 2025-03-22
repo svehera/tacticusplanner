@@ -136,7 +136,6 @@ export class UpgradesService {
         const raidedUpgrades = allUpgrades.filter(x =>
             x.locations.filter(location => location.isSuggested).some(location => raidedLocations.includes(location.id))
         );
-
         while (upgradesToFarm.length > 0) {
             const isFirstDay = iteration === 0;
             const raids: IUpgradeRaid[] = [];
@@ -144,8 +143,10 @@ export class UpgradesService {
 
             if (isFirstDay && raidedUpgrades.length) {
                 for (const raidedUpgrade of uniqBy(raidedUpgrades, 'id')) {
-                    const raidLocations = settings.completedLocations.filter(x =>
-                        raidedUpgrade.locations.some(location => location.id === x.id)
+                    const raidLocations = settings.completedLocations.filter(
+                        x =>
+                            x.dailyBattleCount === x.raidsCount &&
+                            raidedUpgrade.locations.some(location => location.id === x.id)
                     );
                     raids.push({
                         ...raidedUpgrade,
@@ -171,15 +172,18 @@ export class UpgradesService {
                 const raidLocations: IItemRaidLocation[] = [];
 
                 for (const location of selectedLocations) {
-                    const locationDailyEnergy = location.energyCost * location.dailyBattleCount;
+                    const completedLocation = settings.completedLocations.find(x => x.id === location.id);
                     if (isFirstDay && location.isCompleted) {
-                        const completedLocation = settings.completedLocations.find(x => x.id === location.id);
                         if (completedLocation) {
                             raidLocations.push(completedLocation);
-                            energyLeft -= completedLocation.energySpent;
                         }
                         continue;
                     }
+
+                    const attemptsLeft = isFirstDay
+                        ? location.dailyBattleCount - (completedLocation?.raidsCount ?? 0)
+                        : location.dailyBattleCount;
+                    const locationDailyEnergy = location.energyCost * attemptsLeft;
 
                     if (material.energyLeft > locationDailyEnergy) {
                         if (energyLeft > locationDailyEnergy) {
@@ -188,7 +192,7 @@ export class UpgradesService {
 
                             raidLocations.push({
                                 ...location,
-                                raidsCount: location.dailyBattleCount,
+                                raidsCount: attemptsLeft,
                                 farmedItems: locationDailyEnergy / location.energyPerItem,
                                 energySpent: locationDailyEnergy,
                                 isShardsLocation: false,
@@ -199,8 +203,7 @@ export class UpgradesService {
 
                     if (energyLeft > material.energyLeft) {
                         const numberOfBattles = Math.floor(material.energyLeft / location.energyCost);
-                        const maxNumberOfBattles =
-                            numberOfBattles > location.dailyBattleCount ? location.dailyBattleCount : numberOfBattles;
+                        const maxNumberOfBattles = numberOfBattles > attemptsLeft ? attemptsLeft : numberOfBattles;
 
                         if (numberOfBattles <= 0) {
                             continue;
@@ -219,8 +222,7 @@ export class UpgradesService {
                         });
                     } else if (energyLeft > location.energyCost) {
                         const numberOfBattles = Math.floor(energyLeft / location.energyCost);
-                        const maxNumberOfBattles =
-                            numberOfBattles > location.dailyBattleCount ? location.dailyBattleCount : numberOfBattles;
+                        const maxNumberOfBattles = numberOfBattles > attemptsLeft ? attemptsLeft : numberOfBattles;
 
                         if (numberOfBattles <= 0) {
                             continue;
@@ -488,7 +490,7 @@ export class UpgradesService {
         upgrades: Record<string, ICombinedUpgrade>,
         settings: IEstimatedRanksSettings
     ): void {
-        const completedLocations = settings.completedLocations.map(location => location.id);
+        const completedLocations = settings.completedLocations;
         // get locations of the selected Campaign Event if there are any
         const currCampaignEventLocations = campaignsByGroup[settings.preferences.campaignEvent ?? ''] ?? [];
         for (const upgradeId in upgrades) {
@@ -503,7 +505,16 @@ export class UpgradesService {
                 location.isPassFilter =
                     !settings.filters ||
                     CampaignsService.passLocationFilter(location, settings.filters, combinedUpgrade.rarity);
-                location.isCompleted = completedLocations.some(locationId => location.id === locationId);
+                location.isCompleted = completedLocations.some(
+                    completedLocation =>
+                        location.id === completedLocation.id &&
+                        completedLocation.dailyBattleCount === completedLocation.raidsCount
+                );
+                location.isStarted = completedLocations.some(
+                    completedLocation =>
+                        location.id === completedLocation.id &&
+                        completedLocation.dailyBattleCount !== completedLocation.raidsCount
+                );
 
                 // location can be suggested for raids only if it is unlocked, passed other filters
                 // and in case it is Campaign Event location user should have specific Campaign Event selected

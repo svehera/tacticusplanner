@@ -3510,6 +3510,7 @@
     },
     "Ded 'Ard Plate": {
         "material": "Ded 'Ard Plate",
+        "tacticusId": "upgArmE026C",
         "rarity": "Epic",
         "stat": "Armour",
         "faction": "Orks",
@@ -3787,6 +3788,8 @@
     },
     "Filligrane Psytronome": {
         "material": "Filligrane Psytronome",
+        "label": "Filigrane Psytronome",
+        "tacticusId": "upgDmgE028C",
         "rarity": "Epic",
         "stat": "Damage",
         "faction": "Aeldari",
@@ -3805,6 +3808,8 @@
     },
     "Filligrane Wraithbone Plate": {
         "material": "Filligrane Wraithbone Plate",
+        "label": "Filigrane Wraithbone Plate",
+        "tacticusId": "upgArmE028C",
         "rarity": "Epic",
         "stat": "Armour",
         "faction": "Aeldari",

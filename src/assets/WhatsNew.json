@@ -1,6 +1,54 @@
 ﻿{
-    "currentVersion": "1.7.0",
+    "currentVersion": "1.7.1",
     "releaseNotes": [
+        {
+            "version": "1.7.1",
+            "date": "March 21",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "(cpunerd) Improved 'Learn > Campaigns'",
+                    "subPoints": [
+                        "Added more details about enemies to 'Learn > Campaigns'. Currently Indomitus, Indomitus Mirror, and Fall of Cadia are complete. The rest are in progress. Thanks to Towen for the data collection.",
+                        "Made the page mobile friendly."
+                    ],
+                    "images": [{ "path": "enemy_details.png" }, { "path": "mobile_campaigns.png" }]
+                },
+                {
+                    "text": "(cpunerd) Improved Character Stats.",
+                    "subPoints": [
+                        "Added character stats in the details page under 'Input > Who You Own'. Equipment is not yet considered.",
+                        "Added character stats at configurable level under 'Learn > Characters'.",
+                        "Added DAMVAR against zero armor and infinite armor under expanded character stats at 'Learn > Characters.'"
+                    ],
+                    "images": [{ "path": "wyo_stats.png" }, { "path": "character_stats.png" }, { "path": "damvar.png" }]
+                },
+                {
+                    "text": "(cpunerd) Plan > Campaign Progression",
+                    "subPoints": [
+                        "Added 'Plan > Campaign Progression' to the mobile site.",
+                        "Fixed a bug with incorrectly calculated savings in campaign progression for extremis nodes in campaign events."
+                    ],
+                    "images": [{ "path": "mobile_campaign_progression.png" }]
+                },
+                {
+                    "text": "(laserian403) Added Plague Burst Crawler to the 'Who You Own' page."
+                }
+            ],
+            "minor": [
+                {
+                    "text": "(irvinesj) Updated duplicate upgrades handling."
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "Fixed upgrades syncing via Tacticus API for some crafted upgrades."
+                },
+                {
+                    "text": "Fixed bug with daily raids upgrades order while syncing with Tacticus API."
+                }
+            ]
+        },
         {
             "version": "1.7.0",
             "date": "March 4",

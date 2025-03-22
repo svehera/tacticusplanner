@@ -30,12 +30,13 @@ export const CampaignProgressionHeader = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                     <ol>
+                        <li>Sync with the Tacticus API. If you do, skip the next two steps (roster and progress).</li>
                         <li>
                             Enter your roster in the <a href="../../input/wyo">Who You Own</a> page.
                         </li>
                         <li>
-                            Enter your campaign progress in the{' '}
-                            <a href="../../input/campaignsProgress">Campaigns Progress</a> page.
+                            Enter your campaign progress in the <a href="../../input/myProgress">Campaigns Progress</a>{' '}
+                            page.
                         </li>
                         <li>
                             Enter your goals in the <a href="../../plan/goals">Goals</a> page.
@@ -53,7 +54,7 @@ export const CampaignProgressionHeader = () => {
                                 </li>
                                 <li>
                                     Mark your goals complete as you progress, and revisit this page periodically for
-                                    more advice.
+                                    more advice. Remember to sync to update your campaign progress.
                                 </li>
                             </ol>
                         </li>
