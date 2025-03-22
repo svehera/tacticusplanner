@@ -36,7 +36,6 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
 
     const getFrame = (rarity: Rarity) => {
         const icons = ['common', 'uncommon', 'rare', 'epic', 'legendary'];
-        console.log('rarity_frames/' + icons[rarity as number] + '.png');
         const imageUrl = getImageUrl('rarity_frames/' + icons[rarity as number] + '.png');
         return (
             <img
