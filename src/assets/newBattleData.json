@@ -4290,7 +4290,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 4,
-        "enemiesTypes": ["Initiate"]
+        "enemiesTypes": ["Initiate"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "O10": {
         "campaign": "Octarius",
@@ -4302,7 +4310,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "O11": {
         "campaign": "Octarius",
@@ -4314,7 +4342,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "O12": {
         "campaign": "Octarius",
@@ -4326,7 +4374,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "O13": {
         "campaign": "Octarius",
@@ -4336,7 +4404,15 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Initiate"]
+        "enemiesTypes": ["Initiate"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "O14": {
         "campaign": "Octarius",
@@ -4346,7 +4422,15 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Initiate"]
+        "enemiesTypes": ["Initiate"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 7,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "O15": {
         "campaign": "Octarius",
@@ -4356,7 +4440,22 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Initiate"]
+        "enemiesTypes": ["Initiate"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Brother Burchard",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 2,
+                "rarity": "Uncommon"
+            },
+            {
+                "name": "Initiate",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "O16": {
         "campaign": "Octarius",
@@ -4366,7 +4465,15 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Initiate"]
+        "enemiesTypes": ["Initiate"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 7,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "O17": {
         "campaign": "Octarius",
@@ -4376,7 +4483,15 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Initiate"]
+        "enemiesTypes": ["Initiate"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "O18": {
         "campaign": "Octarius",
@@ -4386,7 +4501,15 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate"]
+        "enemiesTypes": ["Initiate"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 8,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "O19": {
         "campaign": "Octarius",
@@ -4395,7 +4518,21 @@
         "reward": "Slicing Claws",
         "expectedGold": 59,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Initiate", "Neophyte"]
+        "enemiesTypes": ["Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "O2": {
         "campaign": "Octarius",
@@ -4405,7 +4542,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Initiate"]
+        "enemiesTypes": ["Initiate"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "O20": {
         "campaign": "Octarius",
@@ -4414,7 +4559,21 @@
         "reward": "Ceramite Lump",
         "expectedGold": 59,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate", "Neophyte"]
+        "enemiesTypes": ["Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Neophyte",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "O21": {
         "campaign": "Octarius",
@@ -4423,7 +4582,21 @@
         "reward": "Reliquary of Protection",
         "expectedGold": 59,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Initiate", "Neophyte"]
+        "enemiesTypes": ["Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Neophyte",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "O22": {
         "campaign": "Octarius",
@@ -4433,7 +4606,21 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "O23": {
         "campaign": "Octarius",
@@ -4442,7 +4629,21 @@
         "reward": "Mesh Weave",
         "expectedGold": 59,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 5,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "O24": {
         "campaign": "Octarius",
@@ -4452,7 +4653,21 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "O25": {
         "campaign": "Octarius",
@@ -4462,7 +4677,27 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "O26": {
         "campaign": "Octarius",
@@ -4471,7 +4706,27 @@
         "reward": "Oath Seal",
         "expectedGold": 59,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "O27": {
         "campaign": "Octarius",
@@ -4480,7 +4735,27 @@
         "reward": "Reinforced Cables",
         "expectedGold": 59,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "O28": {
         "campaign": "Octarius",
@@ -4489,7 +4764,27 @@
         "reward": "The Gold Phoenix",
         "expectedGold": 59,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "O29": {
         "campaign": "Octarius",
@@ -4498,7 +4793,27 @@
         "reward": "Subdermal Plating",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "O3": {
         "campaign": "Octarius",
@@ -4508,7 +4823,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Initiate"]
+        "enemiesTypes": ["Initiate"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "O30": {
         "campaign": "Octarius",
@@ -4517,7 +4840,34 @@
         "reward": "Sword Brother Godswyl",
         "expectedGold": 65,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Sword Brother Godswyl",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2,
+                "rarity": "Common"
+            },
+            {
+                "name": "Initiate",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "O31": {
         "campaign": "Octarius",
@@ -4526,7 +4876,27 @@
         "reward": "Helmet Trophy",
         "expectedGold": 65,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "O32": {
         "campaign": "Octarius",
@@ -4536,7 +4906,27 @@
         "expectedGold": 65,
         "slots": 34,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "O33": {
         "campaign": "Octarius",
@@ -4545,7 +4935,27 @@
         "reward": "Advanced Rebreather",
         "expectedGold": 65,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "O34": {
         "campaign": "Octarius",
@@ -4554,7 +4964,27 @@
         "reward": "Kill Count",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "O35": {
         "campaign": "Octarius",
@@ -4565,7 +4995,33 @@
         "enemiesAlliances": ["Xenos", "Imperial"],
         "enemiesFactions": ["Tyranids", "Black Templars"],
         "enemiesTotal": 11,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster", "Hormagaunt"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster", "Hormagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 6,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "O36": {
         "campaign": "Octarius",
@@ -4576,7 +5032,15 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Hormagaunt"]
+        "enemiesTypes": ["Hormagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 9,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "O37": {
         "campaign": "Octarius",
@@ -4588,7 +5052,21 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "O38": {
         "campaign": "Octarius",
@@ -4600,7 +5078,21 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Termagant",
+                "count": 5,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "O39": {
         "campaign": "Octarius",
@@ -4612,7 +5104,15 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 6,
-        "enemiesTypes": ["Ripper Swarm"]
+        "enemiesTypes": ["Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ripper Swarm",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "O4": {
         "campaign": "Octarius",
@@ -4622,7 +5122,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Initiate"]
+        "enemiesTypes": ["Initiate"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "O40": {
         "campaign": "Octarius",
@@ -4634,7 +5142,15 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Ripper Swarm"]
+        "enemiesTypes": ["Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ripper Swarm",
+                "count": 10,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "O41": {
         "campaign": "Octarius",
@@ -4645,7 +5161,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "O42": {
         "campaign": "Octarius",
@@ -4656,7 +5192,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "O43": {
         "campaign": "Octarius",
@@ -4667,7 +5223,39 @@
         "enemiesAlliances": ["Xenos", "Imperial"],
         "enemiesFactions": ["Tyranids", "Black Templars"],
         "enemiesTotal": 13,
-        "enemiesTypes": ["Initiate", "Neophyte", "Hormagaunt", "Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Hormagaunt", "Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Termagant",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "O44": {
         "campaign": "Octarius",
@@ -4685,6 +5273,44 @@
             "Hormagaunt",
             "Termagaunt",
             "Ripper Swarm"
+        ],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            }
         ]
     },
     "O45": {
@@ -4696,7 +5322,40 @@
         "enemiesAlliances": ["Xenos", "Imperial"],
         "enemiesFactions": ["Tyranids", "Black Templars"],
         "enemiesTotal": 13,
-        "enemiesTypes": ["Initiate", "Neophyte", "Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Termagant",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Ancient Thoread",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 5,
+                "rarity": "Rare"
+            }
+        ]
     },
     "O46": {
         "campaign": "Octarius",
@@ -4706,7 +5365,21 @@
         "expectedGold": 71,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Initiate", "Neophyte"]
+        "enemiesTypes": ["Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "O47": {
         "campaign": "Octarius",
@@ -4717,7 +5390,33 @@
         "enemiesAlliances": ["Xenos", "Imperial"],
         "enemiesFactions": ["Tyranids", "Black Templars"],
         "enemiesTotal": 11,
-        "enemiesTypes": ["Initiate", "Neophyte", "Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "O48": {
         "campaign": "Octarius",
@@ -4728,7 +5427,33 @@
         "enemiesAlliances": ["Xenos", "Imperial"],
         "enemiesFactions": ["Tyranids", "Black Templars"],
         "enemiesTotal": 11,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster", "Ripper Swarm"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 5,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "O49": {
         "campaign": "Octarius",
@@ -4737,7 +5462,21 @@
         "reward": "Mutation: Warped Heart",
         "expectedGold": 71,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "O5": {
         "campaign": "Octarius",
@@ -4749,7 +5488,15 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks"],
         "enemiesTotal": 5,
-        "enemiesTypes": ["Ork Boy"]
+        "enemiesTypes": ["Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "O50": {
         "campaign": "Octarius",
@@ -4761,7 +5508,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "O51": {
         "campaign": "Octarius",
@@ -4772,7 +5539,27 @@
         "enemiesAlliances": ["Xenos", "Imperial"],
         "enemiesFactions": ["Tyranids", "Astra Militarum"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Cadian Guardsman"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "O52": {
         "campaign": "Octarius",
@@ -4783,7 +5570,21 @@
         "enemiesAlliances": ["Xenos", "Imperial"],
         "enemiesFactions": ["Tyranids", "Astra Militarum"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Ripper Swarm", "Cadian Guardsman"]
+        "enemiesTypes": ["Ripper Swarm", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "O53": {
         "campaign": "Octarius",
@@ -4794,7 +5595,15 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 12,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "O54": {
         "campaign": "Octarius",
@@ -4805,7 +5614,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "O55": {
         "campaign": "Octarius",
@@ -4816,7 +5639,27 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum", "Black Templars"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Initiate", "Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Initiate", "Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "O56": {
         "campaign": "Octarius",
@@ -4827,7 +5670,33 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum", "Black Templars"],
         "enemiesTotal": 11,
-        "enemiesTypes": ["Initiate", "Neophyte", "Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "O57": {
         "campaign": "Octarius",
@@ -4839,7 +5708,27 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum", "Black Templars"],
         "enemiesTotal": 11,
-        "enemiesTypes": ["Initiate", "Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Initiate", "Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "O58": {
         "campaign": "Octarius",
@@ -4850,7 +5739,27 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum", "Black Templars"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Initiate With Pyreblaster", "Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Initiate With Pyreblaster", "Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "O59": {
         "campaign": "Octarius",
@@ -4861,7 +5770,33 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum", "Black Templars"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "O6": {
         "campaign": "Octarius",
@@ -4873,7 +5808,15 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks"],
         "enemiesTotal": 6,
-        "enemiesTypes": ["Ork Boy"]
+        "enemiesTypes": ["Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "O60": {
         "campaign": "Octarius",
@@ -4882,7 +5825,34 @@
         "reward": "Brother Jaeger",
         "expectedGold": 77,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Brother Jaeger",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Neophyte",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "O61": {
         "campaign": "Octarius",
@@ -4891,7 +5861,27 @@
         "reward": "Industrial Padding",
         "expectedGold": 77,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "O62": {
         "campaign": "Octarius",
@@ -4903,7 +5893,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 8,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "O63": {
         "campaign": "Octarius",
@@ -4914,7 +5918,39 @@
         "enemiesAlliances": ["Imperial", "Xenos"],
         "enemiesFactions": ["Astra Militarum", "Black Templars", "Tyranids"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Initiate", "Cadian Guardsman", "Termagaunt", "Hormagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Initiate", "Cadian Guardsman", "Termagaunt", "Hormagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "O64": {
         "campaign": "Octarius",
@@ -4925,7 +5961,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "O65": {
         "campaign": "Octarius",
@@ -4934,7 +5990,27 @@
         "reward": "Weapon Anointment Oils",
         "expectedGold": 77,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 5
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 4
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 7
+            }
+        ]
     },
     "O66": {
         "campaign": "Octarius",
@@ -4944,7 +6020,21 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Ork Boy", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 4
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Bronze 2",
+                "stars": 5
+            }
+        ]
     },
     "O67": {
         "campaign": "Octarius",
@@ -4956,7 +6046,27 @@
         "enemiesAlliances": ["Xenos", "Imperial"],
         "enemiesFactions": ["Tyranids", "Black Templars"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Initiate", "Neophyte", "Termagaunt"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Termagant",
+                "count": 6,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "O68": {
         "campaign": "Octarius",
@@ -4967,7 +6077,27 @@
         "enemiesAlliances": ["Imperial", "Xenos"],
         "enemiesFactions": ["Astra Militarum", "Black Templars", "Tyranids"],
         "enemiesTotal": 13,
-        "enemiesTypes": ["Cadian Guardsman", "Initiate With Pyreblaster", "Hormagaunt"]
+        "enemiesTypes": ["Cadian Guardsman", "Initiate With Pyreblaster", "Hormagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 6,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "O69": {
         "campaign": "Octarius",
@@ -4978,7 +6108,27 @@
         "enemiesAlliances": ["Imperial", "Xenos"],
         "enemiesFactions": ["Astra Militarum", "Black Templars", "Tyranids"],
         "enemiesTotal": 13,
-        "enemiesTypes": ["Cadian Guardsman", "Initiate", "Hormagaunt"]
+        "enemiesTypes": ["Cadian Guardsman", "Initiate", "Hormagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 6,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "O7": {
         "campaign": "Octarius",
@@ -4989,7 +6139,15 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Grot"]
+        "enemiesTypes": ["Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 9,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "O70": {
         "campaign": "Octarius",
@@ -5000,7 +6158,45 @@
         "enemiesAlliances": ["Xenos", "Imperial"],
         "enemiesFactions": ["Tyranids", "Black Templars"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster", "Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster", "Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 7
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "O71": {
         "campaign": "Octarius",
@@ -5009,7 +6205,27 @@
         "reward": "Adamantium Ore",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster", "Neophyte"]
+        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "O72": {
         "campaign": "Octarius",
@@ -5020,7 +6236,33 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum", "Black Templars"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Lascannon Team", "Initiate With Pyreblaster", "Initiate", "Neophyte"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Initiate With Pyreblaster", "Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "O73": {
         "campaign": "Octarius",
@@ -5031,7 +6273,33 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum", "Black Templars"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Lascannon Team", "Initiate With Pyreblaster", "Initiate", "Neophyte"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Initiate With Pyreblaster", "Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 2
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "O74": {
         "campaign": "Octarius",
@@ -5050,6 +6318,50 @@
             "Termagaunt",
             "Hormagaunt",
             "Ripper Swarm"
+        ],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Termagant",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
         ]
     },
     "O75": {
@@ -5061,7 +6373,40 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum", "Black Templars"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Lascannon Team", "Initiate With Pyreblaster", "Initiate", "Neophyte"]
+        "enemiesTypes": ["Cadian Lascannon Team", "Initiate With Pyreblaster", "Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "High Marshal Helbrecht",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 8,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "O8": {
         "campaign": "Octarius",
@@ -5072,7 +6417,21 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Grot", "Grot Tank"]
+        "enemiesTypes": ["Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 7,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "O9": {
         "campaign": "Octarius",
@@ -5083,7 +6442,21 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Grot", "Grot Tank"]
+        "enemiesTypes": ["Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "SH1": {
         "campaign": "Saim-Hann",
@@ -8101,7 +9474,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM10": {
         "campaign": "Fall of Cadia Mirror",
@@ -8111,7 +9492,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM11": {
         "campaign": "Fall of Cadia Mirror",
@@ -8121,7 +9522,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM12": {
         "campaign": "Fall of Cadia Mirror",
@@ -8131,7 +9552,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "FoCM13": {
         "campaign": "Fall of Cadia Mirror",
@@ -8141,7 +9582,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "FoCM14": {
         "campaign": "Fall of Cadia Mirror",
@@ -8151,7 +9612,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "FoCM15": {
         "campaign": "Fall of Cadia Mirror",
@@ -8160,7 +9641,34 @@
         "reward": "Angrax",
         "expectedGold": 59,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Angrax",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2,
+                "rarity": "Uncommon"
+            },
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "FoCM16": {
         "campaign": "Fall of Cadia Mirror",
@@ -8170,7 +9678,27 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "FoCM17": {
         "campaign": "Fall of Cadia Mirror",
@@ -8180,7 +9708,27 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "FoCM18": {
         "campaign": "Fall of Cadia Mirror",
@@ -8189,7 +9737,21 @@
         "reward": "The Iron Phoenix",
         "expectedGold": 59,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "FoCM19": {
         "campaign": "Fall of Cadia Mirror",
@@ -8199,7 +9761,15 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Traitor Guardsman"]
+        "enemiesTypes": ["Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Traitor Guardsman",
+                "count": 11,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "FoCM2": {
         "campaign": "Fall of Cadia Mirror",
@@ -8209,7 +9779,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM20": {
         "campaign": "Fall of Cadia Mirror",
@@ -8218,7 +9802,21 @@
         "reward": "Targeting Link",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM21": {
         "campaign": "Fall of Cadia Mirror",
@@ -8227,7 +9825,27 @@
         "reward": "Nasty Spikes",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM22": {
         "campaign": "Fall of Cadia Mirror",
@@ -8236,7 +9854,15 @@
         "reward": "Rebreather",
         "expectedGold": 59,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM23": {
         "campaign": "Fall of Cadia Mirror",
@@ -8245,7 +9871,27 @@
         "reward": "Weapon Parts",
         "expectedGold": 59,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM24": {
         "campaign": "Fall of Cadia Mirror",
@@ -8254,7 +9900,21 @@
         "reward": "Mutation: Warped Muscles",
         "expectedGold": 59,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 4
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM25": {
         "campaign": "Fall of Cadia Mirror",
@@ -8263,7 +9923,21 @@
         "reward": "Warp Locus",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "FoCM26": {
         "campaign": "Fall of Cadia Mirror",
@@ -8272,7 +9946,27 @@
         "reward": "Blessed Promethium Canister",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "FoCM27": {
         "campaign": "Fall of Cadia Mirror",
@@ -8281,7 +9975,27 @@
         "reward": "Golden Ornamental Skull",
         "expectedGold": 59,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM28": {
         "campaign": "Fall of Cadia Mirror",
@@ -8291,7 +10005,27 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM29": {
         "campaign": "Fall of Cadia Mirror",
@@ -8300,7 +10034,27 @@
         "reward": "Bionic Neural Pathways",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM3": {
         "campaign": "Fall of Cadia Mirror",
@@ -8309,7 +10063,21 @@
         "reward": "Locator Beacon",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM30": {
         "campaign": "Fall of Cadia Mirror",
@@ -8318,7 +10086,34 @@
         "reward": "Archimatos",
         "expectedGold": 65,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Archimatos",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 4,
+                "rarity": "Uncommon"
+            },
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM31": {
         "campaign": "Fall of Cadia Mirror",
@@ -8327,7 +10122,27 @@
         "reward": "Terminator Honours",
         "expectedGold": 65,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "FoCM32": {
         "campaign": "Fall of Cadia Mirror",
@@ -8336,7 +10151,21 @@
         "reward": "Bionic Eye",
         "expectedGold": 65,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM33": {
         "campaign": "Fall of Cadia Mirror",
@@ -8345,7 +10174,27 @@
         "reward": "Waystone",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 4
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM34": {
         "campaign": "Fall of Cadia Mirror",
@@ -8355,7 +10204,21 @@
         "expectedGold": 65,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "FoCM35": {
         "campaign": "Fall of Cadia Mirror",
@@ -8364,7 +10227,27 @@
         "reward": "Mesh Weave",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "FoCM36": {
         "campaign": "Fall of Cadia Mirror",
@@ -8373,7 +10256,21 @@
         "reward": "Special Issue Ammo",
         "expectedGold": 65,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "FoCM37": {
         "campaign": "Fall of Cadia Mirror",
@@ -8383,7 +10280,21 @@
         "expectedGold": 65,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM38": {
         "campaign": "Fall of Cadia Mirror",
@@ -8392,7 +10303,21 @@
         "reward": "Valuable Fabric",
         "expectedGold": 65,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM39": {
         "campaign": "Fall of Cadia Mirror",
@@ -8401,7 +10326,27 @@
         "reward": "Satchel",
         "expectedGold": 65,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "FoCM4": {
         "campaign": "Fall of Cadia Mirror",
@@ -8411,7 +10356,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM40": {
         "campaign": "Fall of Cadia Mirror",
@@ -8420,7 +10379,27 @@
         "reward": "Crate of Salvage",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM41": {
         "campaign": "Fall of Cadia Mirror",
@@ -8429,7 +10408,15 @@
         "reward": "Classified Data-Slate",
         "expectedGold": 65,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM42": {
         "campaign": "Fall of Cadia Mirror",
@@ -8438,7 +10425,27 @@
         "reward": "Battle Scar",
         "expectedGold": 65,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM43": {
         "campaign": "Fall of Cadia Mirror",
@@ -8447,7 +10454,27 @@
         "reward": "Zeidos Ribbon",
         "expectedGold": 65,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "FoCM44": {
         "campaign": "Fall of Cadia Mirror",
@@ -8456,7 +10483,21 @@
         "reward": "Icon of Vengeance",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 3
+            }
+        ]
     },
     "FoCM45": {
         "campaign": "Fall of Cadia Mirror",
@@ -8465,7 +10506,34 @@
         "reward": "Volk",
         "expectedGold": 71,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Volk",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 5,
+                "rarity": "Rare"
+            }
+        ]
     },
     "FoCM46": {
         "campaign": "Fall of Cadia Mirror",
@@ -8475,7 +10543,21 @@
         "expectedGold": 71,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "FoCM47": {
         "campaign": "Fall of Cadia Mirror",
@@ -8484,7 +10566,15 @@
         "reward": "Artificer Tasset Plate",
         "expectedGold": 71,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Traitor Guardsman"]
+        "enemiesTypes": ["Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Traitor Guardsman",
+                "count": 11,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM48": {
         "campaign": "Fall of Cadia Mirror",
@@ -8493,7 +10583,21 @@
         "reward": "Wraithbone Plate",
         "expectedGold": 71,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM49": {
         "campaign": "Fall of Cadia Mirror",
@@ -8502,7 +10606,27 @@
         "reward": "The Phoenix Ascendant",
         "expectedGold": 71,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM5": {
         "campaign": "Fall of Cadia Mirror",
@@ -8512,7 +10636,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 8,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM50": {
         "campaign": "Fall of Cadia Mirror",
@@ -8522,7 +10660,27 @@
         "expectedGold": 71,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM51": {
         "campaign": "Fall of Cadia Mirror",
@@ -8532,7 +10690,27 @@
         "expectedGold": 71,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 4
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM52": {
         "campaign": "Fall of Cadia Mirror",
@@ -8542,7 +10720,21 @@
         "expectedGold": 71,
         "slots": 4,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "FoCM53": {
         "campaign": "Fall of Cadia Mirror",
@@ -8551,7 +10743,27 @@
         "reward": "Unnatural Vapour Dispenser",
         "expectedGold": 71,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM54": {
         "campaign": "Fall of Cadia Mirror",
@@ -8560,7 +10772,27 @@
         "reward": "Helmet Trophy",
         "expectedGold": 71,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM55": {
         "campaign": "Fall of Cadia Mirror",
@@ -8569,7 +10801,27 @@
         "reward": "Eye of Horus",
         "expectedGold": 71,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM56": {
         "campaign": "Fall of Cadia Mirror",
@@ -8578,7 +10830,21 @@
         "reward": "Combat Stimms",
         "expectedGold": 71,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM57": {
         "campaign": "Fall of Cadia Mirror",
@@ -8587,7 +10853,27 @@
         "reward": "Reinforced Cables",
         "expectedGold": 71,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "FoCM58": {
         "campaign": "Fall of Cadia Mirror",
@@ -8596,7 +10882,27 @@
         "reward": "Reinforced Scale-Plates",
         "expectedGold": 71,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM59": {
         "campaign": "Fall of Cadia Mirror",
@@ -8605,7 +10911,27 @@
         "reward": "Entrenching Tool",
         "expectedGold": 71,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM6": {
         "campaign": "Fall of Cadia Mirror",
@@ -8615,7 +10941,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 10,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM60": {
         "campaign": "Fall of Cadia Mirror",
@@ -8624,7 +10958,34 @@
         "reward": "Haarken Worldclaimer",
         "expectedGold": 77,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Haarken Worldclaimer",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 6,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM61": {
         "campaign": "Fall of Cadia Mirror",
@@ -8633,7 +10994,27 @@
         "reward": "Air Purificator",
         "expectedGold": 77,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM62": {
         "campaign": "Fall of Cadia Mirror",
@@ -8643,7 +11024,27 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "FoCM63": {
         "campaign": "Fall of Cadia Mirror",
@@ -8653,7 +11054,21 @@
         "expectedGold": 77,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM64": {
         "campaign": "Fall of Cadia Mirror",
@@ -8662,7 +11077,27 @@
         "reward": "Sigil of Decay",
         "expectedGold": 77,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM65": {
         "campaign": "Fall of Cadia Mirror",
@@ -8671,7 +11106,27 @@
         "reward": "Blasphemous Armor Trim",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM66": {
         "campaign": "Fall of Cadia Mirror",
@@ -8681,7 +11136,27 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM67": {
         "campaign": "Fall of Cadia Mirror",
@@ -8690,7 +11165,15 @@
         "reward": "Blessed Corset Armor",
         "expectedGold": 77,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "FoCM68": {
         "campaign": "Fall of Cadia Mirror",
@@ -8699,7 +11182,27 @@
         "reward": "Gifts of the Star Children",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCM69": {
         "campaign": "Fall of Cadia Mirror",
@@ -8709,7 +11212,27 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM7": {
         "campaign": "Fall of Cadia Mirror",
@@ -8719,7 +11242,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 4,
-        "enemiesTypes": ["Chaos Terminator"]
+        "enemiesTypes": ["Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "FoCM70": {
         "campaign": "Fall of Cadia Mirror",
@@ -8728,7 +11259,27 @@
         "reward": "Flak Plates",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "FoCM71": {
         "campaign": "Fall of Cadia Mirror",
@@ -8737,7 +11288,21 @@
         "reward": "Blessing of the Dark Gods",
         "expectedGold": 77,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "FoCM72": {
         "campaign": "Fall of Cadia Mirror",
@@ -8746,7 +11311,27 @@
         "reward": "Blessing of Nurgle",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "FoCM73": {
         "campaign": "Fall of Cadia Mirror",
@@ -8756,7 +11341,21 @@
         "expectedGold": 77,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "FoCM74": {
         "campaign": "Fall of Cadia Mirror",
@@ -8765,7 +11364,15 @@
         "reward": "Greater Reliquary of Vengeance",
         "expectedGold": 77,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Chaos Terminator"]
+        "enemiesTypes": ["Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "FoCM75": {
         "campaign": "Fall of Cadia Mirror",
@@ -8774,7 +11381,28 @@
         "reward": "Abaddon The Despoiler",
         "expectedGold": 83,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Abaddon The Despoiler",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 3
+            }
+        ]
     },
     "FoCM8": {
         "campaign": "Fall of Cadia Mirror",
@@ -8784,7 +11412,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "FoCM9": {
         "campaign": "Fall of Cadia Mirror",
@@ -8794,7 +11436,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "OM1": {
         "campaign": "Octarius Mirror",
@@ -12082,7 +14744,33 @@
         "expectedGold": 83,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Neophyte",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "OE10": {
         "campaign": "Octarius Elite",
@@ -12092,7 +14780,33 @@
         "expectedGold": 91.5,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "OE11": {
         "campaign": "Octarius Elite",
@@ -12101,7 +14815,27 @@
         "reward": "Adamantium Filaments",
         "expectedGold": 91.5,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Neophyte",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "OE12": {
         "campaign": "Octarius Elite",
@@ -12110,7 +14844,27 @@
         "reward": "Reinforced Cables",
         "expectedGold": 91.5,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Neophyte",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "OE13": {
         "campaign": "Octarius Elite",
@@ -12120,7 +14874,27 @@
         "expectedGold": 91.5,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte"]
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "OE14": {
         "campaign": "Octarius Elite",
@@ -12129,7 +14903,27 @@
         "reward": "Plasma Cell",
         "expectedGold": 91.5,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Neophyte",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "OE15": {
         "campaign": "Octarius Elite",
@@ -12138,7 +14932,33 @@
         "reward": "Crate of Salvage",
         "expectedGold": 91.5,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Neophyte",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "OE16": {
         "campaign": "Octarius Elite",
@@ -12147,7 +14967,28 @@
         "reward": "Sword Brother Godswyl",
         "expectedGold": 91.5,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Sword Brother Godswyl",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "OE17": {
         "campaign": "Octarius Elite",
@@ -12156,7 +14997,21 @@
         "reward": "Iron Jaw",
         "expectedGold": 101,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 5,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "OE18": {
         "campaign": "Octarius Elite",
@@ -12166,7 +15021,27 @@
         "expectedGold": 101,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Neophyte",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "OE19": {
         "campaign": "Octarius Elite",
@@ -12177,7 +15052,33 @@
         "enemiesAlliances": ["Xenos", "Imperial"],
         "enemiesFactions": ["Tyranids", "Black Templars"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Initiate", "Neophyte", "Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "OE2": {
         "campaign": "Octarius Elite",
@@ -12186,7 +15087,33 @@
         "reward": "Chip Damage",
         "expectedGold": 83,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "OE20": {
         "campaign": "Octarius Elite",
@@ -12197,7 +15124,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "OE21": {
         "campaign": "Octarius Elite",
@@ -12209,7 +15156,21 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Termagant",
+                "count": 5,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "OE22": {
         "campaign": "Octarius Elite",
@@ -12218,7 +15179,33 @@
         "reward": "Beast Hide",
         "expectedGold": 101,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "OE23": {
         "campaign": "Octarius Elite",
@@ -12227,7 +15214,27 @@
         "reward": "Kustom Gubbinz",
         "expectedGold": 101,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte"]
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "OE24": {
         "campaign": "Octarius Elite",
@@ -12236,7 +15243,40 @@
         "reward": "Ancient Thoread",
         "expectedGold": 101,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Initiate",
+                "count": 5,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Ancient Thoread",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10,
+                "rarity": "Legendary"
+            }
+        ]
     },
     "OE25": {
         "campaign": "Octarius Elite",
@@ -12245,7 +15285,21 @@
         "reward": "Chain of Zeal",
         "expectedGold": 108,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Initiate", "Neophyte"]
+        "enemiesTypes": ["Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Neophyte",
+                "count": 5,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "OE26": {
         "campaign": "Octarius Elite",
@@ -12255,7 +15309,27 @@
         "expectedGold": 108,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Aggressor", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Aggressor", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 10
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "OE27": {
         "campaign": "Octarius Elite",
@@ -12264,7 +15338,21 @@
         "reward": "Blessed Tabbard",
         "expectedGold": 108,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "OE28": {
         "campaign": "Octarius Elite",
@@ -12273,7 +15361,21 @@
         "reward": "Bones of the Paragons",
         "expectedGold": 108,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Initiate", "Neophyte"]
+        "enemiesTypes": ["Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 6,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "OE29": {
         "campaign": "Octarius Elite",
@@ -12282,7 +15384,21 @@
         "reward": "Runes of Fate",
         "expectedGold": 108,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Neophyte",
+                "count": 5,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "OE3": {
         "campaign": "Octarius Elite",
@@ -12292,7 +15408,21 @@
         "expectedGold": 83,
         "slots": 4,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "OE30": {
         "campaign": "Octarius Elite",
@@ -12302,7 +15432,27 @@
         "expectedGold": 108,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Aggressor", "Initiate", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Aggressor", "Initiate", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "OE31": {
         "campaign": "Octarius Elite",
@@ -12311,7 +15461,27 @@
         "reward": "Relic Hilt",
         "expectedGold": 108,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Initiate", "Cadian Lascannon Team", "Cadian Guardsman"]
+        "enemiesTypes": ["Initiate", "Cadian Lascannon Team", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 1,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Initiate",
+                "count": 7,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "OE32": {
         "campaign": "Octarius Elite",
@@ -12320,7 +15490,40 @@
         "reward": "Brother Jaeger",
         "expectedGold": 108,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Brother Jaeger",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "OE33": {
         "campaign": "Octarius Elite",
@@ -12331,7 +15534,33 @@
         "enemiesAlliances": ["Xenos", "Imperial"],
         "enemiesFactions": ["Tyranids", "Black Templars"],
         "enemiesTotal": 13,
-        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster", "Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster", "Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Termagant",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "OE34": {
         "campaign": "Octarius Elite",
@@ -12343,7 +15572,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Diamond 1",
+                "stars": 10
+            }
+        ]
     },
     "OE35": {
         "campaign": "Octarius Elite",
@@ -12353,7 +15602,27 @@
         "expectedGold": 108,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte"]
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "OE36": {
         "campaign": "Octarius Elite",
@@ -12364,7 +15633,39 @@
         "enemiesAlliances": ["Xenos", "Imperial"],
         "enemiesFactions": ["Tyranids", "Black Templars"],
         "enemiesTotal": 13,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Termagant",
+                "count": 2,
+                "rank": "Diamond 1",
+                "stars": 10
+            }
+        ]
     },
     "OE37": {
         "campaign": "Octarius Elite",
@@ -12373,7 +15674,27 @@
         "reward": "Bionic Neural Pathways",
         "expectedGold": 108,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 5,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "OE38": {
         "campaign": "Octarius Elite",
@@ -12382,7 +15703,33 @@
         "reward": "Kustom Gubbinz",
         "expectedGold": 108,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Neophyte",
+                "count": 5,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "OE39": {
         "campaign": "Octarius Elite",
@@ -12391,7 +15738,27 @@
         "reward": "Mjod",
         "expectedGold": 108,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "OE4": {
         "campaign": "Octarius Elite",
@@ -12400,7 +15767,21 @@
         "reward": "Box of Salvage",
         "expectedGold": 83,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"]
+        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 8,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "OE40": {
         "campaign": "Octarius Elite",
@@ -12411,7 +15792,40 @@
         "enemiesTotal": 11,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum", "Black Templars"],
-        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Initiate", "Neophyte", "Initiate With Pyreblaster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "High Marshal Helbrecht",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Initiate",
+                "count": 5,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "OE5": {
         "campaign": "Octarius Elite",
@@ -12421,7 +15835,27 @@
         "expectedGold": 83,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte"]
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Initiate",
+                "count": 7,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Neophyte",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "OE6": {
         "campaign": "Octarius Elite",
@@ -12432,7 +15866,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Grot", "Ork Boy", "Grot Tank"]
+        "enemiesTypes": ["Grot", "Ork Boy", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Grot Tank",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 8
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "OE7": {
         "campaign": "Octarius Elite",
@@ -12443,7 +15897,45 @@
         "enemiesAlliances": ["Xenos", "Imperial"],
         "enemiesFactions": ["Orks", "Black Templars"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster", "Grot", "Ork Boy"]
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster", "Grot", "Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Neophyte",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "OE8": {
         "campaign": "Octarius Elite",
@@ -12454,7 +15946,40 @@
         "enemiesAlliances": ["Xenos", "Imperial"],
         "enemiesFactions": ["Orks", "Black Templars"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Ork Boy"]
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Brother Burchard",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Ork Boy",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "OE9": {
         "campaign": "Octarius Elite",
@@ -12464,7 +15989,21 @@
         "expectedGold": 91.5,
         "slots": 4,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Initiate", "Neophyte"]
+        "enemiesTypes": ["Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "IME1": {
         "campaign": "Indomitus Mirror Elite",
@@ -13755,7 +17294,15 @@
         "expectedGold": 83,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "FoCME10": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13764,7 +17311,27 @@
         "reward": "Rose of Martyrs",
         "expectedGold": 91.5,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoCME11": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13773,7 +17340,21 @@
         "reward": "Key of Ignorance",
         "expectedGold": 91.5,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Chaos Terminator", "Traitor Guardsman"]
+        "enemiesTypes": ["Chaos Terminator", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME12": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13783,7 +17364,21 @@
         "expectedGold": 91.5,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "FoCME13": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13793,7 +17388,27 @@
         "expectedGold": 91.5,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoCME14": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13803,7 +17418,21 @@
         "expectedGold": 91.5,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoCME15": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13812,7 +17441,27 @@
         "reward": "Relic Hilt",
         "expectedGold": 91.5,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Havoc",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "FoCME16": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13821,7 +17470,34 @@
         "reward": "Archimatos",
         "expectedGold": 91.5,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Archimatos",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Bloodletter",
+                "count": 8,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "FoCME17": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13830,7 +17506,21 @@
         "reward": "Hymn of Martyrs",
         "expectedGold": 101,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "FoCME18": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13840,7 +17530,27 @@
         "expectedGold": 101,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "FoCME19": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13849,7 +17559,27 @@
         "reward": "Proclamation Receiver",
         "expectedGold": 101,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Havoc",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "FoCME2": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13859,7 +17589,27 @@
         "expectedGold": 83,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Havoc",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "FoCME20": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13868,7 +17618,21 @@
         "reward": "Sigil of Decay",
         "expectedGold": 101,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "FoCME21": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13878,7 +17642,15 @@
         "expectedGold": 101,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Traitor Guardsman"]
+        "enemiesTypes": ["Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Traitor Guardsman",
+                "count": 8,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME22": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13887,7 +17659,27 @@
         "reward": "Blessed Corset Armor",
         "expectedGold": 101,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "FoCME23": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13896,7 +17688,21 @@
         "reward": "Dark Hood",
         "expectedGold": 101,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "FoCME24": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13905,7 +17711,34 @@
         "reward": "Volk",
         "expectedGold": 101,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Havoc",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Volk",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 11,
+                "rarity": "Legendary"
+            }
+        ]
     },
     "FoCME25": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13914,7 +17747,21 @@
         "reward": "Industrial Padding",
         "expectedGold": 108,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Havoc", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Havoc",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 9,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME26": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13924,7 +17771,21 @@
         "expectedGold": 108,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME27": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13933,7 +17794,27 @@
         "reward": "Single Power Pack",
         "expectedGold": 108,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Havoc",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 11
+            }
+        ]
     },
     "FoCME28": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13943,7 +17824,21 @@
         "expectedGold": 108,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Chaos Terminator", "Traitor Guardsman"]
+        "enemiesTypes": ["Chaos Terminator", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME29": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13953,7 +17848,21 @@
         "expectedGold": 108,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoCME3": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13963,7 +17872,27 @@
         "expectedGold": 83,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "FoCME30": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13972,7 +17901,27 @@
         "reward": "Gifts of the Star Children",
         "expectedGold": 108,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "FoCME31": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13981,7 +17930,27 @@
         "reward": "Blessing of Nurgle",
         "expectedGold": 108,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "FoCME32": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13990,7 +17959,34 @@
         "reward": "Haarken Worldclaimer",
         "expectedGold": 108,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Haarken Worldclaimer",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 11,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "FoCME33": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -13999,7 +17995,15 @@
         "reward": "Minor Bionic Enhancement",
         "expectedGold": 108,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 8,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME34": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14008,7 +18012,21 @@
         "reward": "Eye of Horus",
         "expectedGold": 108,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "rank": "Gold 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME35": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14017,7 +18035,27 @@
         "reward": "Icon of Vengeance",
         "expectedGold": 108,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME36": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14027,7 +18065,21 @@
         "expectedGold": 108,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Diamond 1",
+                "stars": 11
+            }
+        ]
     },
     "FoCME37": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14036,7 +18088,27 @@
         "reward": "Blessing of the Dark Gods",
         "expectedGold": 108,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "FoCME38": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14046,7 +18118,27 @@
         "expectedGold": 108,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Gold 3",
+                "stars": 11
+            },
+            {
+                "name": "Havoc",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 11
+            }
+        ]
     },
     "FoCME39": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14055,7 +18147,15 @@
         "reward": "Psyk-Conductive Material",
         "expectedGold": 108,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Bloodletter"]
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 12,
+                "rank": "Gold 3",
+                "stars": 11
+            }
+        ]
     },
     "FoCME4": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14064,7 +18164,21 @@
         "reward": "Flak Plates",
         "expectedGold": 83,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Havoc", "Bloodletter"]
+        "enemiesTypes": ["Havoc", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "FoCME40": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14073,7 +18187,28 @@
         "reward": "Abaddon The Despoiler",
         "expectedGold": 108,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Havoc", "Chaos Terminator"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Abaddon The Despoiler",
+                "count": 1,
+                "rank": "Gold 3",
+                "stars": 10,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 7,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "FoCME5": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14083,7 +18218,27 @@
         "expectedGold": 83,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "FoCME6": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14092,7 +18247,27 @@
         "reward": "Honourifica Imperialis",
         "expectedGold": 83,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "FoCME7": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14101,7 +18276,21 @@
         "reward": "Psyk-Conductive Material",
         "expectedGold": 83,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter"]
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 9,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "FoCME8": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14110,7 +18299,40 @@
         "reward": "Angrax",
         "expectedGold": 83,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter", "Traitor Guardsman"]
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Angrax",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Havoc",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "FoCME9": {
         "campaign": "Fall of Cadia Mirror Elite",
@@ -14120,7 +18342,21 @@
         "expectedGold": 91.5,
         "slots": 4,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Havoc", "Bloodletter"]
+        "enemiesTypes": ["Havoc", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 8,
+                "rank": "Silver 2",
+                "stars": 7
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "OME1": {
         "campaign": "Octarius Mirror Elite",
