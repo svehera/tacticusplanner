@@ -5,6 +5,7 @@ import redStar from 'src/assets/images/stars/red star small.png';
 import blueStar from 'src/assets/images/stars/blue star.png';
 import { StaticDataService } from 'src/services';
 import { RankImage } from 'src/v2/components/images/rank-image';
+import { getImageUrl } from 'src/shared-logic/functions';
 
 interface Props {
     name: string;
@@ -51,9 +52,10 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
     };
 
     const getNpcPortrait = (name: string) => {
+        const imageUrl = getImageUrl(StaticDataService.getNpcIconPath(name));
         return (
             <img
-                src={'../../' + StaticDataService.getNpcIconPath(name)}
+                src={imageUrl}
                 width={frameWidth}
                 height={frameHeight}
                 style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }}
