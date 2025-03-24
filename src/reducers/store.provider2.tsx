@@ -263,6 +263,8 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     pendingTeamsCount,
                     rejectedTeamsCount,
                     tacticusApiKey,
+                    tacticusGuildApiKey,
+                    tacticusUserId,
                 } = response.data;
                 const serverLastModified = new Date(lastModifiedDate);
                 const isFirstLogin = !data;
@@ -275,6 +277,8 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     pendingTeamsCount,
                     rejectedTeamsCount,
                     tacticusApiKey,
+                    tacticusGuildApiKey,
+                    tacticusUserId,
                 });
                 const localModifiedDateTicks = localStorage.getItem('TP-ModifiedDateTicks');
 

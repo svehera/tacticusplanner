@@ -1,3 +1,5 @@
+import { Rarity } from '@/models/enums';
+
 export interface TacticusPlayerResponse {
     player: TacticusPlayer;
 }
@@ -99,4 +101,72 @@ export interface TacticusCampaignLevel {
     battleIndex: number; // Example: 10
     attemptsLeft: number; // Example: 2
     attemptsUsed: number; // Example: 3
+}
+
+export interface TacticusGuildResponse {
+    guild: TacticusGuild;
+}
+
+export interface TacticusGuild {
+    guildId: string;
+    guildTag: string;
+    name: string;
+    level: number;
+    members: TacticusGuildMember[];
+    guildRaidSeasons: number[];
+}
+
+export interface TacticusGuildMember {
+    userId: string;
+    role: TacticusGuildRole;
+    level: number;
+    lastActivityOn?: string | null;
+}
+
+export enum TacticusGuildRole {
+    MEMBER = 0,
+    OFFICER = 1,
+    CO_LEADER = 2,
+    LEADER = 3,
+}
+
+export interface TacticusGuildRaidResponse {
+    season: number;
+    seasonConfigId: string;
+    entries: TacticusGuildRaidEntry[];
+}
+
+export interface TacticusGuildRaidEntry {
+    userId: string;
+    tier: number;
+    set: number;
+    encounterIndex: number;
+    remainingHp: number;
+    maxHp: number;
+    encounterType: TacticusEncounterType;
+    unitId: string;
+    type: string;
+    rarity: Rarity;
+    damageDealt: number;
+    damageType: TacticusDamageType;
+    startedOn?: number | null;
+    completedOn?: number | null;
+    heroDetails: TacticusGuildRaidUnit[];
+    machineOfWarDetails?: TacticusGuildRaidUnit;
+    globalConfigHash: string;
+}
+
+export interface TacticusGuildRaidUnit {
+    unitId: string;
+    power: number;
+}
+
+export enum TacticusEncounterType {
+    SideBoss = 0,
+    Boss = 1,
+}
+
+export enum TacticusDamageType {
+    Bomb = 0,
+    Battle = 1,
 }

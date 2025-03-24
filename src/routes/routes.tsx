@@ -19,6 +19,7 @@ import { mowLookupDesktopLazyRoute } from 'src/v2/pages/mow-lookup/mow-lookup.ro
 import { guidesLazyRoute } from 'src/v2/pages/guides/guides.route';
 import { lreLazyRoute } from 'src/v2/pages/lre/lre-route';
 import { myProgressLazyRoute } from 'src/v2/pages/my-progress/my-progress.route';
+import { guildApiLazyRoute } from '@/v2/pages/guild-api/guild-api.route';
 
 export const globalInputRoutes: RouteObject[] = [
     wyoLazyRoute,
@@ -97,6 +98,7 @@ export const globalLearnRoutes: RouteObject[] = [
     guildInsightsLazyRoute,
     mowLookupDesktopLazyRoute,
     guidesLazyRoute,
+    guildApiLazyRoute,
 ];
 
 export const appRoutes: () => RouteObject[] = () => [

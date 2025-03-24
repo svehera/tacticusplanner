@@ -315,6 +315,8 @@ export interface IUserInfo {
     pendingTeamsCount: number;
     rejectedTeamsCount: number;
     tacticusApiKey: string;
+    tacticusUserId: string;
+    tacticusGuildApiKey: string;
 }
 
 export interface IDispatchContext {

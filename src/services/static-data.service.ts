@@ -37,6 +37,7 @@ import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import { IRankLookup } from 'src/v2/features/goals/goals.models';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+import { NearMe } from '@mui/icons-material';
 
 export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;
@@ -573,11 +574,27 @@ export class StaticDataService {
             'Ophydian Destroyer': 'ophydian_destroyer.png',
             'Cadian Guardsman': 'cadian_guardsman.png',
             'Cadian Lascannon team': 'lascannon.png',
+            'Cadian Lascannon Team': 'lascannon.png',
             'Cadian Vox-Caster': 'vox_caster.png',
             'Cadian Mortar Team': 'mortar_team.png',
             Eliminator: 'eliminator.png',
             Inceptor: 'inceptor.png',
             'Heavy Intercessor': 'intercessor.png',
+            Bloodletter: 'blood_letter.png',
+            'Chaos Terminator': 'chaos_terminator.png',
+            'Traitor Guardsman': 'traitor_guardsman.png',
+            Havoc: 'chaos_havoc.png',
+            Campaign: 'campaign.png',
+            Initiate: 'initiate.png',
+            Neophyte: 'neophyte.png',
+            'Initiate with Pyreblaster': 'pyreblaster.png',
+            Aggressor: 'aggressor.png',
+            'Ork Boy': 'ork_boy.png',
+            Grot: 'grot.png',
+            'Grot Tank': 'grot_tank.png',
+            Hormagaunt: 'hormagaunt.png',
+            Termagant: 'termagaunt.png',
+            'Ripper Swarm': 'ripper_swarm.png',
         };
         if (map[npc]) {
             return prefix + '/' + map[npc];
@@ -586,7 +603,8 @@ export class StaticDataService {
         if (unit != undefined) {
             return 'portraits/' + unit.Icon;
         }
-        return '(unknown)';
+        console.log('unknown npc - ' + npc);
+        return 'unknown-' + npc;
     }
 
     private static selectBestLocations(
