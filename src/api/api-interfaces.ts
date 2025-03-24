@@ -24,6 +24,8 @@ export interface IUserDataResponse {
     rejectedTeamsCount: number;
     modifiedDateTicks: string;
     tacticusApiKey: string;
+    tacticusUserId: string;
+    tacticusGuildApiKey: string;
     data: IPersonalData | IPersonalData2 | null;
 }
 
