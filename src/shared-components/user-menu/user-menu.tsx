@@ -180,6 +180,8 @@ export const UserMenu = () => {
     function syncWithTacticus(): void {
         popupManager.open(TacticusIntegrationDialog, {
             tacticusApiKey: userInfo.tacticusApiKey,
+            tacticusUserId: userInfo.tacticusUserId,
+            tacticusGuildApiKey: userInfo.tacticusGuildApiKey,
             initialSyncOptions: store.viewPreferences.apiIntegrationSyncOptions,
             onClose: () => {},
         });

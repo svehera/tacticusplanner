@@ -28,6 +28,7 @@ import { mowLookupMenuItem } from 'src/v2/pages/mow-lookup/mow-lookup.menu-item'
 import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';
 import { activeLreMenuItems, inactiveLreMenuItems } from 'src/v2/pages/lre/lre.menu-item';
 import { myProgressMenuItem } from 'src/v2/pages/my-progress/my-progress.menu-item';
+import { guildApiMenuItem } from '@/v2/pages/guild-api/guild-api.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -69,6 +70,7 @@ export const menuItemById = {
     offense: guildWarOffenseMenuItem,
     zones: guildWarZonesMenuItem,
     guild: guildMenuItem,
+    guildApi: guildApiMenuItem,
     guildInsights: guildInsightsMenuItem,
     teams: teamsMenuItem,
     guides: guidesMenuItem,
@@ -116,6 +118,7 @@ export const learnSubMenu: MenuItemTP[] = [
     menuItemById['campaigns'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
+    menuItemById['guildApi'],
     menuItemById['guildInsights'],
 ];
 
