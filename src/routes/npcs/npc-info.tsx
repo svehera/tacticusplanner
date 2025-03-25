@@ -20,6 +20,7 @@ import {
 } from 'ag-grid-community';
 import { INpcData } from 'src/models/interfaces';
 import { FactionImage } from 'src/v2/components/images/faction-image';
+import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
 
 export const NpcInfo: React.FC = () => {
     const gridRef = useRef<AgGridReact<INpcData>>(null);
@@ -124,7 +125,10 @@ export const NpcInfo: React.FC = () => {
                     return (
                         <ul>
                             <li>Chance: {npc.critChance! * 100}%</li>
-                            <li>Damage: {npc.critDamage!}</li>
+                            <li>
+                                Damage:
+                                {StatCalculatorService.calculateStat(npc.critDamage!, npc.name, stars, rank, 0)}
+                            </li>
                         </ul>
                     );
                 },
@@ -138,7 +142,10 @@ export const NpcInfo: React.FC = () => {
                     return (
                         <ul>
                             <li>Chance: {npc.blockChance! * 100}%</li>
-                            <li>Damage: {npc.blockDamage!}%</li>
+                            <li>
+                                Damage:
+                                {StatCalculatorService.calculateStat(npc.blockDamage!, npc.name, stars, rank, 0)}
+                            </li>
                         </ul>
                     );
                 },

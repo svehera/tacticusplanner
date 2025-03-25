@@ -132,7 +132,7 @@ export class StatCalculatorService {
      * @param numAppliedUpgrades the number of applied upgrades related to this stat the unit has.
      * @returns The computed value of the stat.
      */
-    private static calculateStat(
+    public static calculateStat(
         baseStat: number,
         unitId: string,
         rarityStars: RarityStars,
