@@ -55,8 +55,8 @@ export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent
                         placeholder="Notes"
                         multiline
                         value={model.notes}
-                        helperText={model.notes.length + '/1000'}
-                        onChange={event => updateNotes(event.target.value.slice(0, 1000))}
+                        helperText={model.notes.length + '/10000'}
+                        onChange={event => updateNotes(event.target.value.slice(0, 10000))}
                     />
 
                     {model.occurrenceProgress.map(occurrence => (
