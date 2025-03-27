@@ -1,4 +1,4 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
+﻿import React, { useContext, useMemo, useState, useRef } from 'react';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { PersonalGoalType, Rank } from 'src/models/enums';
@@ -41,6 +41,10 @@ export const Goals = () => {
 
     const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
     const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
+
+    const upgradeRankOrMowGoalsContainerRef = useRef<HTMLDivElement>(null);
+    const shardsGoalsContainerRef = useRef<HTMLDivElement>(null);
+    const abilitiesContainerRef = useRef<HTMLDivElement>(null);
 
     const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities } = useMemo(() => {
         return GoalsService.prepareGoals(goals, [...characters, ...mows], false);
@@ -258,13 +262,15 @@ export const Goals = () => {
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (
-                        <div className="flex gap-3 flex-wrap">
+                        <div className="flex gap-3 flex-wrap" ref={upgradeRankOrMowGoalsContainerRef}>
                             {upgradeRankOrMowGoals.map(goal => (
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
                                     goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                    containerRef={upgradeRankOrMowGoalsContainerRef}
+                                    goalList={upgradeRankOrMowGoals}
                                 />
                             ))}
                         </div>
@@ -295,13 +301,15 @@ export const Goals = () => {
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (
-                        <div className="flex gap-3 flex-wrap">
+                        <div className="flex gap-3 flex-wrap" ref={shardsGoalsContainerRef}>
                             {shardsGoals.map(goal => (
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
                                     goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                    containerRef={shardsGoalsContainerRef}
+                                    goalList={shardsGoals}
                                 />
                             ))}
                         </div>
@@ -324,13 +332,15 @@ export const Goals = () => {
                         </span>
                     </div>
                     {!viewPreferences.goalsTableView && (
-                        <div className="flex gap-3 flex-wrap">
+                        <div className="flex gap-3 flex-wrap" ref={abilitiesContainerRef}>
                             {upgradeAbilities.map(goal => (
                                 <GoalCard
                                     key={goal.goalId}
                                     goal={goal}
                                     goalEstimate={goalsEstimate.find(x => x.goalId === goal.goalId)}
                                     menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                    containerRef={abilitiesContainerRef}
+                                    goalList={upgradeAbilities}
                                 />
                             ))}
                         </div>

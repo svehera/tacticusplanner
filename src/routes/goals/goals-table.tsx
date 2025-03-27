@@ -30,7 +30,6 @@ import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service'
 import { StaticDataService } from 'src/services';
 import { StoreContext } from 'src/reducers/store.provider';
 import { ICharacter2 } from 'src/models/interfaces';
-
 interface Props {
     rows: CharacterRaidGoalSelect[];
     estimate: IGoalEstimate[];
