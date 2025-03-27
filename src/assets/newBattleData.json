@@ -6466,7 +6466,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 3,
-        "enemiesTypes": ["Rubric Marine"]
+        "enemiesTypes": ["Rubric Marine"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "SH10": {
         "campaign": "Saim-Hann",
@@ -6478,7 +6486,21 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 11,
-        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"]
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "SH11": {
         "campaign": "Saim-Hann",
@@ -6490,7 +6512,21 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"]
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "SH12": {
         "campaign": "Saim-Hann",
@@ -6500,7 +6536,15 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Pink Horror"]
+        "enemiesTypes": ["Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "SH13": {
         "campaign": "Saim-Hann",
@@ -6512,7 +6556,21 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Pink Horror", "Traitor Guardsman"]
+        "enemiesTypes": ["Pink Horror", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "SH14": {
         "campaign": "Saim-Hann",
@@ -6524,7 +6582,27 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Traitor Guardsman"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "SH15": {
         "campaign": "Saim-Hann",
@@ -6534,7 +6612,28 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Toth",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 2,
+                "rarity": "Uncommon"
+            }
+        ]
     },
     "SH16": {
         "campaign": "Saim-Hann",
@@ -6546,7 +6645,21 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"]
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SH17": {
         "campaign": "Saim-Hann",
@@ -6558,7 +6671,15 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 8,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SH18": {
         "campaign": "Saim-Hann",
@@ -6569,7 +6690,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "SH19": {
         "campaign": "Saim-Hann",
@@ -6580,7 +6715,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 8,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "SH2": {
         "campaign": "Saim-Hann",
@@ -6590,7 +6739,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 4,
-        "enemiesTypes": ["Rubric Marine"]
+        "enemiesTypes": ["Rubric Marine"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "SH20": {
         "campaign": "Saim-Hann",
@@ -6601,7 +6758,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum"],
         "enemiesTotal": 11,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "SH21": {
         "campaign": "Saim-Hann",
@@ -6612,7 +6783,21 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"]
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "SH22": {
         "campaign": "Saim-Hann",
@@ -6622,7 +6807,15 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Pink Horror"]
+        "enemiesTypes": ["Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 8,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "SH23": {
         "campaign": "Saim-Hann",
@@ -6634,7 +6827,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "SH24": {
         "campaign": "Saim-Hann",
@@ -6646,7 +6853,15 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Guardsman"]
+        "enemiesTypes": ["Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 12,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SH25": {
         "campaign": "Saim-Hann",
@@ -6657,7 +6872,27 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 11,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Traitor Guardsman"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "SH26": {
         "campaign": "Saim-Hann",
@@ -6668,7 +6903,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 5,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "SH27": {
         "campaign": "Saim-Hann",
@@ -6679,7 +6928,27 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Traitor Guardsman"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "SH28": {
         "campaign": "Saim-Hann",
@@ -6690,7 +6959,27 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Traitor Guardsman"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "SH29": {
         "campaign": "Saim-Hann",
@@ -6701,7 +6990,27 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Traitor Guardsman"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "SH3": {
         "campaign": "Saim-Hann",
@@ -6711,7 +7020,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 4,
-        "enemiesTypes": ["Rubric Marine"]
+        "enemiesTypes": ["Rubric Marine"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "SH30": {
         "campaign": "Saim-Hann",
@@ -6722,7 +7039,34 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Traitor Guardsman"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Abraxas",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 5,
+                "rarity": "Rare"
+            },
+            {
+                "name": "Pink Horror",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "SH31": {
         "campaign": "Saim-Hann",
@@ -6732,7 +7076,15 @@
         "expectedGold": 65,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Screamer"]
+        "enemiesTypes": ["Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Screamer",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SH32": {
         "campaign": "Saim-Hann",
@@ -6742,7 +7094,15 @@
         "expectedGold": 65,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Screamer"]
+        "enemiesTypes": ["Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Screamer",
+                "count": 7,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SH33": {
         "campaign": "Saim-Hann",
@@ -6752,7 +7112,15 @@
         "expectedGold": 65,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Screamer"]
+        "enemiesTypes": ["Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Screamer",
+                "count": 9,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SH34": {
         "campaign": "Saim-Hann",
@@ -6762,7 +7130,21 @@
         "expectedGold": 65,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Pink Horror", "Screamer"]
+        "enemiesTypes": ["Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Screamer",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "SH35": {
         "campaign": "Saim-Hann",
@@ -6772,7 +7154,21 @@
         "expectedGold": 65,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Pink Horror", "Screamer"]
+        "enemiesTypes": ["Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Screamer",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "SH36": {
         "campaign": "Saim-Hann",
@@ -6781,7 +7177,15 @@
         "reward": "Artificial Vertebrae",
         "expectedGold": 65,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Rubric Marine"]
+        "enemiesTypes": ["Rubric Marine"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SH37": {
         "campaign": "Saim-Hann",
@@ -6790,7 +7194,15 @@
         "reward": "Key of Ignorance",
         "expectedGold": 65,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine"]
+        "enemiesTypes": ["Rubric Marine"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 7,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SH38": {
         "campaign": "Saim-Hann",
@@ -6799,7 +7211,21 @@
         "reward": "Wolf Tail Talisman",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Rubric Marine", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Screamer",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "SH39": {
         "campaign": "Saim-Hann",
@@ -6809,7 +7235,21 @@
         "expectedGold": 65,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Rubric Marine", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Screamer",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SH4": {
         "campaign": "Saim-Hann",
@@ -6819,7 +7259,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Rubric Marine"]
+        "enemiesTypes": ["Rubric Marine"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "SH40": {
         "campaign": "Saim-Hann",
@@ -6828,7 +7276,21 @@
         "reward": "Repair-Kit",
         "expectedGold": 65,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Screamer",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SH41": {
         "campaign": "Saim-Hann",
@@ -6837,7 +7299,27 @@
         "reward": "Inferno Bolts",
         "expectedGold": 65,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Screamer",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SH42": {
         "campaign": "Saim-Hann",
@@ -6846,7 +7328,27 @@
         "reward": "Classified Data-Slate",
         "expectedGold": 65,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Screamer",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SH43": {
         "campaign": "Saim-Hann",
@@ -6855,7 +7357,33 @@
         "reward": "Reliquary of Vengeance",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Pink Horror",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Screamer",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 1
+            }
+        ]
     },
     "SH44": {
         "campaign": "Saim-Hann",
@@ -6864,7 +7392,27 @@
         "reward": "Psytronome",
         "expectedGold": 65,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Screamer",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "SH45": {
         "campaign": "Saim-Hann",
@@ -6873,7 +7421,34 @@
         "reward": "Yazaghor",
         "expectedGold": 71,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 5,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 4,
+                "rank": "Srtone 3",
+                "stars": 1
+            },
+            {
+                "name": "Screamer",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Yazaghor",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2,
+                "rarity": "Uncommon"
+            }
+        ]
     },
     "SH46": {
         "campaign": "Saim-Hann",
@@ -6883,7 +7458,21 @@
         "expectedGold": 71,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Screamer",
+                "count": 5,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SH47": {
         "campaign": "Saim-Hann",
@@ -6893,7 +7482,21 @@
         "expectedGold": 71,
         "slots": 3,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SH48": {
         "campaign": "Saim-Hann",
@@ -6903,7 +7506,21 @@
         "expectedGold": 71,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "SH49": {
         "campaign": "Saim-Hann",
@@ -6913,7 +7530,15 @@
         "expectedGold": 71,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Screamer"]
+        "enemiesTypes": ["Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Screamer",
+                "count": 7,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "SH5": {
         "campaign": "Saim-Hann",
@@ -6923,7 +7548,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "SH50": {
         "campaign": "Saim-Hann",
@@ -6932,7 +7571,27 @@
         "reward": "Wolf Tooth Necklace",
         "expectedGold": 71,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Screamer",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "SH51": {
         "campaign": "Saim-Hann",
@@ -6942,7 +7601,21 @@
         "expectedGold": 71,
         "slots": 4,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Pink Horror", "Screamer"]
+        "enemiesTypes": ["Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Screamer",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "SH52": {
         "campaign": "Saim-Hann",
@@ -6952,7 +7625,21 @@
         "expectedGold": 71,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SH53": {
         "campaign": "Saim-Hann",
@@ -6962,7 +7649,21 @@
         "expectedGold": 71,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Screamer",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "SH54": {
         "campaign": "Saim-Hann",
@@ -6971,7 +7672,27 @@
         "reward": "Artificer Tasset Plate",
         "expectedGold": 71,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Screamer",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SH55": {
         "campaign": "Saim-Hann",
@@ -6980,7 +7701,21 @@
         "reward": "Enriched Rations",
         "expectedGold": 71,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SH56": {
         "campaign": "Saim-Hann",
@@ -6989,7 +7724,21 @@
         "reward": "Dark Hood",
         "expectedGold": 71,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Pink Horror", "Screamer"]
+        "enemiesTypes": ["Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Screamer",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "SH57": {
         "campaign": "Saim-Hann",
@@ -6999,7 +7748,15 @@
         "expectedGold": 71,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Screamer"]
+        "enemiesTypes": ["Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Screamer",
+                "count": 7,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "SH58": {
         "campaign": "Saim-Hann",
@@ -7009,7 +7766,15 @@
         "expectedGold": 71,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Pink Horror"]
+        "enemiesTypes": ["Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 8,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SH59": {
         "campaign": "Saim-Hann",
@@ -7020,7 +7785,15 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Aeldari"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 9,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "SH6": {
         "campaign": "Saim-Hann",
@@ -7032,7 +7805,21 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"]
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "SH60": {
         "campaign": "Saim-Hann",
@@ -7041,7 +7828,34 @@
         "reward": "Thaumachus",
         "expectedGold": 77,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Screamer",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Thaumachus",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 5,
+                "rarity": "Rare"
+            }
+        ]
     },
     "SH61": {
         "campaign": "Saim-Hann",
@@ -7050,7 +7864,21 @@
         "reward": "Nano Swarm",
         "expectedGold": 77,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Pink Horror", "Screamer"]
+        "enemiesTypes": ["Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Screamer",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "SH62": {
         "campaign": "Saim-Hann",
@@ -7059,7 +7887,27 @@
         "reward": "Beast Hide",
         "expectedGold": 77,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Screamer",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "SH63": {
         "campaign": "Saim-Hann",
@@ -7068,7 +7916,15 @@
         "reward": "Artificial Vertebrae",
         "expectedGold": 77,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Rubric Marine"]
+        "enemiesTypes": ["Rubric Marine"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "SH64": {
         "campaign": "Saim-Hann",
@@ -7077,7 +7933,27 @@
         "reward": "Mutation: Warped Lungs",
         "expectedGold": 77,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Screamer",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "SH65": {
         "campaign": "Saim-Hann",
@@ -7087,7 +7963,21 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Rubric Marine", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Screamer",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "SH66": {
         "campaign": "Saim-Hann",
@@ -7096,7 +7986,15 @@
         "reward": "Rebreather",
         "expectedGold": 77,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Pink Horror"]
+        "enemiesTypes": ["Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 9,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "SH67": {
         "campaign": "Saim-Hann",
@@ -7105,7 +8003,21 @@
         "reward": "Warp Locus",
         "expectedGold": 77,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "SH68": {
         "campaign": "Saim-Hann",
@@ -7114,7 +8026,15 @@
         "reward": "Enriched Rations",
         "expectedGold": 77,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Screamer"]
+        "enemiesTypes": ["Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Screamer",
+                "count": 8,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "SH69": {
         "campaign": "Saim-Hann",
@@ -7123,7 +8043,27 @@
         "reward": "Purity Seal",
         "expectedGold": 77,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Screamer",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "SH7": {
         "campaign": "Saim-Hann",
@@ -7135,7 +8075,21 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 5,
-        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"]
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "SH70": {
         "campaign": "Saim-Hann",
@@ -7145,7 +8099,27 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Screamer",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "SH71": {
         "campaign": "Saim-Hann",
@@ -7155,7 +8129,21 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Pink Horror", "Screamer"]
+        "enemiesTypes": ["Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Screamer",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "SH72": {
         "campaign": "Saim-Hann",
@@ -7164,7 +8152,21 @@
         "reward": "Mutation: Scaly Skin",
         "expectedGold": 77,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "SH73": {
         "campaign": "Saim-Hann",
@@ -7173,7 +8175,27 @@
         "reward": "Golden Ornamental Skull",
         "expectedGold": 77,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Screamer",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "SH74": {
         "campaign": "Saim-Hann",
@@ -7182,7 +8204,15 @@
         "reward": "Advanced Rebreather",
         "expectedGold": 77,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine"]
+        "enemiesTypes": ["Rubric Marine"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 7,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "SH75": {
         "campaign": "Saim-Hann",
@@ -7191,7 +8221,29 @@
         "reward": "Ahriman",
         "expectedGold": 83,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Rubric Marine"]
+        "enemiesTypes": ["Rubric Marine"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ahriman",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 10,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 6,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Toth",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5,
+                "rarity": "Rare"
+            }
+        ]
     },
     "SH8": {
         "campaign": "Saim-Hann",
@@ -7202,7 +8254,21 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"]
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "SH9": {
         "campaign": "Saim-Hann",
@@ -7213,7 +8279,21 @@
         "enemiesAlliances": ["Chaos"],
         "enemiesFactions": ["Black Legion", "Thousand Sons"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"]
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "IM1": {
         "campaign": "Indomitus Mirror",
@@ -11466,7 +12546,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Ork Boy", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "OM10": {
         "campaign": "Octarius Mirror",
@@ -11476,7 +12570,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "OM11": {
         "campaign": "Octarius Mirror",
@@ -11486,7 +12600,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "OM12": {
         "campaign": "Octarius Mirror",
@@ -11496,7 +12630,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "OM13": {
         "campaign": "Octarius Mirror",
@@ -11506,7 +12660,15 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Ork Boy"]
+        "enemiesTypes": ["Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "OM14": {
         "campaign": "Octarius Mirror",
@@ -11516,7 +12678,21 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Ork Boy", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "OM15": {
         "campaign": "Octarius Mirror",
@@ -11526,7 +12702,28 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Ork Boy", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Snappawrecka",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 2,
+                "rarity": "Uncommon"
+            }
+        ]
     },
     "OM16": {
         "campaign": "Octarius Mirror",
@@ -11536,7 +12733,21 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Ork Boy", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "OM17": {
         "campaign": "Octarius Mirror",
@@ -11546,7 +12757,27 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "OM18": {
         "campaign": "Octarius Mirror",
@@ -11556,7 +12787,27 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "OM19": {
         "campaign": "Octarius Mirror",
@@ -11566,7 +12817,27 @@
         "expectedGold": 59,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "OM2": {
         "campaign": "Octarius Mirror",
@@ -11576,7 +12847,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Ork Boy", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "OM20": {
         "campaign": "Octarius Mirror",
@@ -11586,7 +12871,27 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "OM21": {
         "campaign": "Octarius Mirror",
@@ -11596,7 +12901,21 @@
         "expectedGold": 59,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "OM22": {
         "campaign": "Octarius Mirror",
@@ -11605,7 +12924,21 @@
         "reward": "Armor Trim",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "OM23": {
         "campaign": "Octarius Mirror",
@@ -11614,7 +12947,27 @@
         "reward": "Mesh Weave",
         "expectedGold": 59,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "OM24": {
         "campaign": "Octarius Mirror",
@@ -11623,7 +12976,15 @@
         "reward": "Blessed Tasset Plate",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy"]
+        "enemiesTypes": ["Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ork Boy",
+                "count": 9,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "OM25": {
         "campaign": "Octarius Mirror",
@@ -11632,7 +12993,27 @@
         "reward": "Reinforced Scale-Plates",
         "expectedGold": 59,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 5,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Grot Tank",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "OM26": {
         "campaign": "Octarius Mirror",
@@ -11641,7 +13022,15 @@
         "reward": "Round of Ammo",
         "expectedGold": 59,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Grot Tank"]
+        "enemiesTypes": ["Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 6,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "OM27": {
         "campaign": "Octarius Mirror",
@@ -11650,7 +13039,27 @@
         "reward": "Adamantium Ore",
         "expectedGold": 59,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "OM28": {
         "campaign": "Octarius Mirror",
@@ -11659,7 +13068,27 @@
         "reward": "Barrel of Promethium",
         "expectedGold": 59,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "OM29": {
         "campaign": "Octarius Mirror",
@@ -11668,7 +13097,27 @@
         "reward": "Fine Micro-Generator",
         "expectedGold": 59,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "OM3": {
         "campaign": "Octarius Mirror",
@@ -11678,7 +13127,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "OM30": {
         "campaign": "Octarius Mirror",
@@ -11687,7 +13150,28 @@
         "reward": "Gibbascrapz",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Gibbascrapz",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2,
+                "rarity": "Uncommon"
+            },
+            {
+                "name": "Grot Tank",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "OM31": {
         "campaign": "Octarius Mirror",
@@ -11697,7 +13181,27 @@
         "expectedGold": 65,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "OM32": {
         "campaign": "Octarius Mirror",
@@ -11706,7 +13210,27 @@
         "reward": "Can of Promethium",
         "expectedGold": 65,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "OM33": {
         "campaign": "Octarius Mirror",
@@ -11715,7 +13239,27 @@
         "reward": "Writings",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "OM34": {
         "campaign": "Octarius Mirror",
@@ -11726,7 +13270,33 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids", "Orks"],
         "enemiesTotal": 13,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank", "Hormagaunt"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank", "Hormagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 3
+            },
+            {
+                "name": "Grot Tank",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "OM35": {
         "campaign": "Octarius Mirror",
@@ -11737,7 +13307,15 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Hormagaunt"]
+        "enemiesTypes": ["Hormagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 10,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "OM36": {
         "campaign": "Octarius Mirror",
@@ -11748,7 +13326,21 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Termagant",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "OM37": {
         "campaign": "Octarius Mirror",
@@ -11760,7 +13352,21 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "OM38": {
         "campaign": "Octarius Mirror",
@@ -11772,7 +13378,21 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "OM39": {
         "campaign": "Octarius Mirror",
@@ -11783,7 +13403,15 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Ripper Swarm"]
+        "enemiesTypes": ["Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ripper Swarm",
+                "count": 8,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "OM4": {
         "campaign": "Octarius Mirror",
@@ -11793,7 +13421,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Ork Boy", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "OM40": {
         "campaign": "Octarius Mirror",
@@ -11804,7 +13446,21 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ripper Swarm", "Termagaunt"]
+        "enemiesTypes": ["Ripper Swarm", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ripper Swarm",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Termagant",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "OM41": {
         "campaign": "Octarius Mirror",
@@ -11815,7 +13471,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "OM42": {
         "campaign": "Octarius Mirror",
@@ -11826,7 +13502,33 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm", "Tyranid Warrior"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm", "Tyranid Warrior"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "OM43": {
         "campaign": "Octarius Mirror",
@@ -11835,7 +13537,21 @@
         "reward": "Locator Beacon",
         "expectedGold": 65,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Grot", "Grot Tank"]
+        "enemiesTypes": ["Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 6,
+                "rank": "Bronze 2",
+                "stars": 5
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "OM44": {
         "campaign": "Octarius Mirror",
@@ -11844,7 +13560,15 @@
         "reward": "Reliquary of Protection",
         "expectedGold": 65,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot"]
+        "enemiesTypes": ["Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 12,
+                "rank": "Bronze 2",
+                "stars": 7
+            }
+        ]
     },
     "OM45": {
         "campaign": "Octarius Mirror",
@@ -11853,7 +13577,28 @@
         "reward": "Snotflogga",
         "expectedGold": 71,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot", "Grot Tank"]
+        "enemiesTypes": ["Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 8,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 5
+            },
+            {
+                "name": "SnotFlogga",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 5,
+                "rarity": "Rare"
+            }
+        ]
     },
     "OM46": {
         "campaign": "Octarius Mirror",
@@ -11863,7 +13608,27 @@
         "expectedGold": 71,
         "slots": 4,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "OM47": {
         "campaign": "Octarius Mirror",
@@ -11874,7 +13639,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "OM48": {
         "campaign": "Octarius Mirror",
@@ -11885,7 +13670,33 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm", "Tyranid Warrior"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm", "Tyranid Warrior"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Termagant",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "OM49": {
         "campaign": "Octarius Mirror",
@@ -11896,7 +13707,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "OM5": {
         "campaign": "Octarius Mirror",
@@ -11906,7 +13737,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "OM50": {
         "campaign": "Octarius Mirror",
@@ -11917,7 +13762,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Termagaunt", "Ripper Swarm", "Tyranid Warrior"]
+        "enemiesTypes": ["Termagaunt", "Ripper Swarm", "Tyranid Warrior"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Termagant",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "OM51": {
         "campaign": "Octarius Mirror",
@@ -11926,7 +13791,27 @@
         "reward": "The Gold Phoenix",
         "expectedGold": 71,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 6,
+                "rank": "Bronze 2",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 7
+            }
+        ]
     },
     "OM52": {
         "campaign": "Octarius Mirror",
@@ -11936,7 +13821,27 @@
         "expectedGold": 71,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 4
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 5
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 5
+            }
+        ]
     },
     "OM53": {
         "campaign": "Octarius Mirror",
@@ -11947,7 +13852,39 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids", "Orks"],
         "enemiesTotal": 13,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank", "Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank", "Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 7
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "OM54": {
         "campaign": "Octarius Mirror",
@@ -11956,7 +13893,27 @@
         "reward": "Wolf Tail Talisman",
         "expectedGold": 71,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "OM55": {
         "campaign": "Octarius Mirror",
@@ -11967,7 +13924,33 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm", "Tyranid Warrior"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt", "Ripper Swarm", "Tyranid Warrior"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "OM56": {
         "campaign": "Octarius Mirror",
@@ -11977,7 +13960,15 @@
         "expectedGold": 71,
         "slots": 3,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Ork Boy"]
+        "enemiesTypes": ["Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 7
+            }
+        ]
     },
     "OM57": {
         "campaign": "Octarius Mirror",
@@ -11989,7 +13980,33 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids", "Orks"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Ork Boy", "Grot", "Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "OM58": {
         "campaign": "Octarius Mirror",
@@ -12000,7 +14017,45 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids", "Orks"],
         "enemiesTotal": 13,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank", "Hormagaunt", "Termagaunt", "Tyranid Warrior"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank", "Hormagaunt", "Termagaunt", "Tyranid Warrior"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 7
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "OM59": {
         "campaign": "Octarius Mirror",
@@ -12009,7 +14064,27 @@
         "reward": "Chain of Zeal",
         "expectedGold": 71,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 6
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "OM6": {
         "campaign": "Octarius Mirror",
@@ -12019,7 +14094,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Ork Boy", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "OM60": {
         "campaign": "Octarius Mirror",
@@ -12028,7 +14117,34 @@
         "reward": "Tanksmasha",
         "expectedGold": 77,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 5
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Tanksmasha",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 7,
+                "rarity": "Epic"
+            }
+        ]
     },
     "OM61": {
         "campaign": "Octarius Mirror",
@@ -12037,7 +14153,27 @@
         "reward": "Bad Moon Teef",
         "expectedGold": 77,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 5
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "OM62": {
         "campaign": "Octarius Mirror",
@@ -12047,7 +14183,27 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 7
+            }
+        ]
     },
     "OM63": {
         "campaign": "Octarius Mirror",
@@ -12057,7 +14213,27 @@
         "expectedGold": 77,
         "slots": 3,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Grot Tank",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 5
+            }
+        ]
     },
     "OM64": {
         "campaign": "Octarius Mirror",
@@ -12066,7 +14242,15 @@
         "reward": "Wolf Tooth Necklace",
         "expectedGold": 77,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Ork Boy"]
+        "enemiesTypes": ["Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ork Boy",
+                "count": 8,
+                "rank": "Bronze 2",
+                "stars": 7
+            }
+        ]
     },
     "OM65": {
         "campaign": "Octarius Mirror",
@@ -12077,7 +14261,39 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids", "Orks"],
         "enemiesTotal": 13,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank", "Termagaunt", "Hormagaunt"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank", "Termagaunt", "Hormagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 6
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 7
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "OM66": {
         "campaign": "Octarius Mirror",
@@ -12086,7 +14302,27 @@
         "reward": "Blessed Tabbard",
         "expectedGold": 77,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 6
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "OM67": {
         "campaign": "Octarius Mirror",
@@ -12097,7 +14333,21 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "OM68": {
         "campaign": "Octarius Mirror",
@@ -12106,7 +14356,21 @@
         "reward": "Synaptic Augmentation",
         "expectedGold": 77,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Ork Boy", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 6
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "OM69": {
         "campaign": "Octarius Mirror",
@@ -12117,7 +14381,33 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids", "Orks"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Ork Boy", "Termagaunt", "Hormagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Ork Boy", "Termagaunt", "Hormagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 6
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "OM7": {
         "campaign": "Octarius Mirror",
@@ -12127,7 +14417,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Grot"]
+        "enemiesTypes": ["Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 9,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "OM70": {
         "campaign": "Octarius Mirror",
@@ -12138,7 +14436,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Termagaunt", "Hormagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Termagaunt", "Hormagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "OM71": {
         "campaign": "Octarius Mirror",
@@ -12148,7 +14466,15 @@
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Grot"]
+        "enemiesTypes": ["Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 10,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "OM72": {
         "campaign": "Octarius Mirror",
@@ -12157,7 +14483,27 @@
         "reward": "Kustom Gubbinz",
         "expectedGold": 77,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 6
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 6
+            }
+        ]
     },
     "OM73": {
         "campaign": "Octarius Mirror",
@@ -12168,7 +14514,33 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 8,
-        "enemiesTypes": ["Tyranid Warrior", "Termagaunt", "Hormagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Tyranid Warrior", "Termagaunt", "Hormagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "OM74": {
         "campaign": "Octarius Mirror",
@@ -12177,7 +14549,27 @@
         "reward": "Runes of Fate",
         "expectedGold": 77,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 6
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 6
+            }
+        ]
     },
     "OM75": {
         "campaign": "Octarius Mirror",
@@ -12186,7 +14578,34 @@
         "reward": "Boss Gulgortz",
         "expectedGold": 83,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 5
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Gulgortz",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 8,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "OM8": {
         "campaign": "Octarius Mirror",
@@ -12195,7 +14614,21 @@
         "reward": "Wires",
         "expectedGold": 53,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Ork Boy", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 9,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "OM9": {
         "campaign": "Octarius Mirror",
@@ -12204,7 +14637,15 @@
         "reward": "Single Power Pack",
         "expectedGold": 53,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Ork Boy"]
+        "enemiesTypes": ["Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "IE1": {
         "campaign": "Indomitus Elite",
@@ -18365,7 +20806,33 @@
         "reward": "Fine Purity Seal",
         "expectedGold": 83,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot Tank", "Grot", "Ork Boy", "Stromboy"]
+        "enemiesTypes": ["Grot Tank", "Grot", "Ork Boy", "Stromboy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 1
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "StormBoy",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 6
+            }
+        ]
     },
     "OME10": {
         "campaign": "Octarius Mirror Elite",
@@ -18374,7 +20841,27 @@
         "reward": "Adrenal Glands",
         "expectedGold": 91.5,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 6
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 6
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Silver 2",
+                "stars": 6
+            }
+        ]
     },
     "OME11": {
         "campaign": "Octarius Mirror Elite",
@@ -18383,7 +20870,27 @@
         "reward": "Wolf Tail Talisman",
         "expectedGold": 91.5,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 6
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Silver 2",
+                "stars": 7
+            }
+        ]
     },
     "OME12": {
         "campaign": "Octarius Mirror Elite",
@@ -18392,7 +20899,27 @@
         "reward": "Key of Ignorance",
         "expectedGold": 91.5,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Stromboy"]
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Stromboy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Silver 2",
+                "stars": 6
+            },
+            {
+                "name": "StormBoy",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 6
+            }
+        ]
     },
     "OME13": {
         "campaign": "Octarius Mirror Elite",
@@ -18401,7 +20928,21 @@
         "reward": "The Iron Phoenix",
         "expectedGold": 91.5,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Ork Boy", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 7,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "OME14": {
         "campaign": "Octarius Mirror Elite",
@@ -18410,7 +20951,27 @@
         "reward": "Terminator Honours",
         "expectedGold": 91.5,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot"]
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 6
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "OME15": {
         "campaign": "Octarius Mirror Elite",
@@ -18419,7 +20980,27 @@
         "reward": "Archeotech Bionics",
         "expectedGold": 91.5,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Ork Boy", "Grot Tank", "Stromboy"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank", "Stromboy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Ork Boy",
+                "count": 7,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "StormBoy",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 6
+            }
+        ]
     },
     "OME16": {
         "campaign": "Octarius Mirror Elite",
@@ -18428,7 +21009,34 @@
         "reward": "Gibbascrapz",
         "expectedGold": 91.5,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot"]
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Gibbascrapz",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 6
+            }
+        ]
     },
     "OME17": {
         "campaign": "Octarius Mirror Elite",
@@ -18437,7 +21045,27 @@
         "reward": "Toxin Sacs",
         "expectedGold": 101,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 5,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 7
+            }
+        ]
     },
     "OME18": {
         "campaign": "Octarius Mirror Elite",
@@ -18446,7 +21074,33 @@
         "reward": "Wolf Tooth Necklace",
         "expectedGold": 101,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot Tank", "Stromboy", "Ork Boy", "Grot"]
+        "enemiesTypes": ["Grot Tank", "Stromboy", "Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 10
+            },
+            {
+                "name": "Grot Tank",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "StormBoy",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 7
+            }
+        ]
     },
     "OME19": {
         "campaign": "Octarius Mirror Elite",
@@ -18455,7 +21109,27 @@
         "reward": "Chapter Pendant",
         "expectedGold": 101,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot"]
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 10
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "OME2": {
         "campaign": "Octarius Mirror Elite",
@@ -18464,7 +21138,27 @@
         "reward": "Righteous Candle",
         "expectedGold": 83,
         "enemiesTotal": 11,
-        "enemiesTypes": []
+        "enemiesTypes": [],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 5
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 8
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 5
+            }
+        ]
     },
     "OME20": {
         "campaign": "Octarius Mirror Elite",
@@ -18473,7 +21167,27 @@
         "reward": "Canister of Chemicals",
         "expectedGold": 101,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot Tank", "Grot", "Ork Boy"]
+        "enemiesTypes": ["Grot Tank", "Grot", "Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 7,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 10
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "OME21": {
         "campaign": "Octarius Mirror Elite",
@@ -18482,7 +21196,33 @@
         "reward": "Lesser Reliquary of Protection",
         "expectedGold": 101,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot", "Stromboy"]
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot", "Stromboy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 5,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "StormBoy",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "OME22": {
         "campaign": "Octarius Mirror Elite",
@@ -18491,7 +21231,21 @@
         "reward": "Reinforced Chitin",
         "expectedGold": 101,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Grot Tank", "Ork Boy"]
+        "enemiesTypes": ["Grot Tank", "Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "OME23": {
         "campaign": "Octarius Mirror Elite",
@@ -18500,7 +21254,27 @@
         "reward": "Beast Hide",
         "expectedGold": 101,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot"]
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 6,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "OME24": {
         "campaign": "Octarius Mirror Elite",
@@ -18509,7 +21283,34 @@
         "reward": "Snotflogga",
         "expectedGold": 101,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 6,
+                "rank": "Silver 3",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Snotflogga",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 10,
+                "rarity": "Legendary"
+            }
+        ]
     },
     "OME25": {
         "campaign": "Octarius Mirror Elite",
@@ -18518,7 +21319,27 @@
         "reward": "Dark Hood",
         "expectedGold": 108,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot Tank", "Grot", "Ork Boy"]
+        "enemiesTypes": ["Grot Tank", "Grot", "Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 6,
+                "rank": "Silver 3",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Gold 1",
+                "stars": 11
+            }
+        ]
     },
     "OME26": {
         "campaign": "Octarius Mirror Elite",
@@ -18527,7 +21348,27 @@
         "reward": "Nano Swarm",
         "expectedGold": 108,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 7,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 11
+            }
+        ]
     },
     "OME27": {
         "campaign": "Octarius Mirror Elite",
@@ -18538,7 +21379,21 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 5,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 11
+            }
+        ]
     },
     "OME28": {
         "campaign": "Octarius Mirror Elite",
@@ -18549,7 +21404,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Tyranid Warrior", "Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Tyranid Warrior", "Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 5,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "OME29": {
         "campaign": "Octarius Mirror Elite",
@@ -18560,7 +21435,33 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Tyranid Warrior", "Hormagaunt", "Termagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Tyranid Warrior", "Hormagaunt", "Termagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "OME3": {
         "campaign": "Octarius Mirror Elite",
@@ -18569,7 +21470,27 @@
         "reward": "Chain of Zeal",
         "expectedGold": 83,
         "enemiesTotal": 11,
-        "enemiesTypes": []
+        "enemiesTypes": [],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 6,
+                "rank": "Slver 1",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 5
+            }
+        ]
     },
     "OME30": {
         "campaign": "Octarius Mirror Elite",
@@ -18580,7 +21501,33 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Tyranid Warrior", "Termagaunt", "Hormagaunt", "Ripper Swarm"]
+        "enemiesTypes": ["Tyranid Warrior", "Termagaunt", "Hormagaunt", "Ripper Swarm"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Ripper Swarm",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "OME31": {
         "campaign": "Octarius Mirror Elite",
@@ -18591,7 +21538,27 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Tyranids"],
         "enemiesTotal": 10,
-        "enemiesTypes": ["Tyranid Warrior", "Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Tyranid Warrior", "Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Hormagaunt",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Termagant",
+                "count": 6,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "OME32": {
         "campaign": "Octarius Mirror Elite",
@@ -18600,7 +21567,34 @@
         "reward": "Tanksmasha",
         "expectedGold": 108,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"]
+        "enemiesTypes": ["Ork Boy", "Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Tanksmasha",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 10,
+                "rarity": "Legendary"
+            }
+        ]
     },
     "OME33": {
         "campaign": "Octarius Mirror Elite",
@@ -18611,7 +21605,39 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks", "Tyranids"],
         "enemiesTotal": 13,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot", "Hormagaunt", "Termagaunt"]
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot", "Hormagaunt", "Termagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Termagant",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "OME34": {
         "campaign": "Octarius Mirror Elite",
@@ -18622,7 +21648,33 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks", "Tyranids"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Ork Boy", "Grot Tank", "Tyranid Warrior", "Hormagaunt"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank", "Tyranid Warrior", "Hormagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 11
+            }
+        ]
     },
     "OME35": {
         "campaign": "Octarius Mirror Elite",
@@ -18633,7 +21685,33 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks", "Tyranids"],
         "enemiesTotal": 13,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Tyranid Warrior", "Hormagaunt"]
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Tyranid Warrior", "Hormagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 11
+            }
+        ]
     },
     "OME36": {
         "campaign": "Octarius Mirror Elite",
@@ -18644,7 +21722,33 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks", "Tyranids"],
         "enemiesTotal": 9,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Tyranid Warrior", "Hormagaunt"]
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Tyranid Warrior", "Hormagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "OME37": {
         "campaign": "Octarius Mirror Elite",
@@ -18655,7 +21759,33 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks", "Tyranids"],
         "enemiesTotal": 13,
-        "enemiesTypes": ["Tyranid Warrior", "Hormagaunt", "Termagaunt", "Grot Tank"]
+        "enemiesTypes": ["Tyranid Warrior", "Hormagaunt", "Termagaunt", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Termagant",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 11
+            }
+        ]
     },
     "OME38": {
         "campaign": "Octarius Mirror Elite",
@@ -18666,7 +21796,33 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks", "Tyranids"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Tyranid Warrior", "Hormagaunt", "Termagaunt", "Grot Tank"]
+        "enemiesTypes": ["Tyranid Warrior", "Hormagaunt", "Termagaunt", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 5,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Termagant",
+                "count": 1,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "OME39": {
         "campaign": "Octarius Mirror Elite",
@@ -18677,7 +21833,39 @@
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks", "Tyranids"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot", "Tyranid Warrior", "Hormagaunt"]
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot", "Tyranid Warrior", "Hormagaunt"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Grot Tank",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Hormagaunt",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Tyranid Warrior",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 11
+            }
+        ]
     },
     "OME4": {
         "campaign": "Octarius Mirror Elite",
@@ -18686,7 +21874,27 @@
         "reward": "Blessed Tabbard",
         "expectedGold": 83,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Stromboy", "Grot Tank", "Ork Boy"]
+        "enemiesTypes": ["Stromboy", "Grot Tank", "Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 5
+            },
+            {
+                "name": "StormBoy",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "OME40": {
         "campaign": "Octarius Mirror Elite",
@@ -18695,7 +21903,34 @@
         "reward": "Boss Gulgortz",
         "expectedGold": 108,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot"]
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Gulgortz",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 10,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "OME5": {
         "campaign": "Octarius Mirror Elite",
@@ -18704,7 +21939,27 @@
         "reward": "Special Issue Ammo",
         "expectedGold": 83,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Grot Tank", "Grot", "Ork Boy"]
+        "enemiesTypes": ["Grot Tank", "Grot", "Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Slver 1",
+                "stars": 9
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "OME6": {
         "campaign": "Octarius Mirror Elite",
@@ -18713,7 +21968,21 @@
         "reward": "Bones of the Paragons",
         "expectedGold": 83,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot Tank", "Grot"]
+        "enemiesTypes": ["Grot Tank", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 9,
+                "rank": "Silver 2",
+                "stars": 6
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 6
+            }
+        ]
     },
     "OME7": {
         "campaign": "Octarius Mirror Elite",
@@ -18722,7 +21991,27 @@
         "reward": "Purity Seal of the Primarch",
         "expectedGold": 83,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"]
+        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "OME8": {
         "campaign": "Octarius Mirror Elite",
@@ -18731,7 +22020,34 @@
         "reward": "Snappawrecka",
         "expectedGold": 83,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Stromboy"]
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Stromboy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 8
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 8
+            },
+            {
+                "name": "Snappawrecka",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            },
+            {
+                "name": "StormBoy",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 5
+            }
+        ]
     },
     "OME9": {
         "campaign": "Octarius Mirror Elite",
@@ -18740,7 +22056,27 @@
         "reward": "Weapon Anointment Oils",
         "expectedGold": 91.5,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot", "Grot Tank", "Ork Boy"]
+        "enemiesTypes": ["Grot", "Grot Tank", "Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 6
+            },
+            {
+                "name": "Grot Tank",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 6
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "SHM1": {
         "campaign": "Saim-Hann Mirror",
@@ -19475,7 +22811,21 @@
         "reward": "Plasma Cell",
         "expectedGold": 53,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Rubric Marine", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Screamer",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 9
+            }
+        ]
     },
     "SHE2": {
         "campaign": "Saim-Hann Elite",
@@ -19484,7 +22834,15 @@
         "reward": "Waystone",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Pink Horror"]
+        "enemiesTypes": ["Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 7,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "SHE3": {
         "campaign": "Saim-Hann Elite",
@@ -19493,7 +22851,21 @@
         "reward": "Psytronome",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Pink Horror", "Screamer"]
+        "enemiesTypes": ["Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Screamer",
+                "count": 7,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "SHE4": {
         "campaign": "Saim-Hann Elite",
@@ -19502,7 +22874,27 @@
         "reward": "Wraithbone Plate",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Pink Horror", "Screamer", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Pink Horror", "Screamer", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Screamer",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "SHE5": {
         "campaign": "Saim-Hann Elite",
@@ -19512,7 +22904,21 @@
         "reward": "Advanced Filaments",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Screamer", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Screamer", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Screamer",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "SHE6": {
         "campaign": "Saim-Hann Elite",
@@ -19521,7 +22927,21 @@
         "reward": "Runes of Fate",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "SHE7": {
         "campaign": "Saim-Hann Elite",
@@ -19531,7 +22951,33 @@
         "reward": "Ancient Runes",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Screamer",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "SHE8": {
         "campaign": "Saim-Hann Elite",
@@ -19540,7 +22986,28 @@
         "reward": "Toth",
         "expectedGold": 53,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Screamer", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Screamer", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Screamer",
+                "count": 9,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Toth",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            }
+        ]
     },
     "SHE9": {
         "campaign": "Saim-Hann Elite",
@@ -19550,7 +23017,15 @@
         "reward": "Mesh Weave",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Screamer"]
+        "enemiesTypes": ["Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Screamer",
+                "count": 7,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "SHE10": {
         "campaign": "Saim-Hann Elite",
@@ -19560,7 +23035,27 @@
         "reward": "The Iron Phoenix",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Screamer",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "SHE11": {
         "campaign": "Saim-Hann Elite",
@@ -19569,7 +23064,27 @@
         "reward": "Lesser Reliquary of Protection",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Pink Horror", "Screamer", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Pink Horror", "Screamer", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Screamer",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "SHE12": {
         "campaign": "Saim-Hann Elite",
@@ -19578,7 +23093,21 @@
         "reward": "Wolf Tail Talisman",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Pink Horror", "Screamer"]
+        "enemiesTypes": ["Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 6,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Screamer",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "SHE13": {
         "campaign": "Saim-Hann Elite",
@@ -19587,7 +23116,27 @@
         "reward": "Key of Ignorance",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "SHE14": {
         "campaign": "Saim-Hann Elite",
@@ -19596,7 +23145,27 @@
         "reward": "Attack Vector Data-Slate",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Screamer",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "SHE15": {
         "campaign": "Saim-Hann Elite",
@@ -19605,7 +23174,21 @@
         "reward": "Classified Data-Slate",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Pink Horror", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Pink Horror", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 6,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "SHE16": {
         "campaign": "Saim-Hann Elite",
@@ -19614,7 +23197,28 @@
         "reward": "Abraxas",
         "expectedGold": 53,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Pink Horror", "Screamer"]
+        "enemiesTypes": ["Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Abraxas",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Pink Horror",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Screamer",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "SHE17": {
         "campaign": "Saim-Hann Elite",
@@ -19626,7 +23230,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum"],
         "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "SHE18": {
         "campaign": "Saim-Hann Elite",
@@ -19638,7 +23256,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum"],
         "enemiesTotal": 6,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "SHE19": {
         "campaign": "Saim-Hann Elite",
@@ -19647,7 +23279,27 @@
         "reward": "Wolf Tooth Necklace",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "SHE20": {
         "campaign": "Saim-Hann Elite",
@@ -19657,7 +23309,21 @@
         "reward": "Chapter Pendant",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Pink Horror", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Pink Horror", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "SHE21": {
         "campaign": "Saim-Hann Elite",
@@ -19666,7 +23332,27 @@
         "reward": "Writings",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Screamer",
+                "count": 5,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "SHE22": {
         "campaign": "Saim-Hann Elite",
@@ -19676,7 +23362,15 @@
         "reward": "Nano Swarm",
         "expectedGold": 53,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Rubric Marine"]
+        "enemiesTypes": ["Rubric Marine"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 5,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "SHE23": {
         "campaign": "Saim-Hann Elite",
@@ -19686,7 +23380,27 @@
         "reward": "The Silver Scope",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Pink Horror", "Screamer", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Pink Horror", "Screamer", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Screamer",
+                "count": 5,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "SHE24": {
         "campaign": "Saim-Hann Elite",
@@ -19696,7 +23410,34 @@
         "reward": "Yazaghor",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 6,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Yazaghor",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10,
+                "rarity": "Legendary"
+            }
+        ]
     },
     "SHE25": {
         "campaign": "Saim-Hann Elite",
@@ -19706,7 +23447,27 @@
         "reward": "Beast Hide",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Screamer",
+                "count": 5,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "SHE26": {
         "campaign": "Saim-Hann Elite",
@@ -19716,7 +23477,27 @@
         "reward": "Dark Hood",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Pink Horror", "Screamer", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Pink Horror", "Screamer", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Screamer",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "SHE27": {
         "campaign": "Saim-Hann Elite",
@@ -19726,7 +23507,21 @@
         "reward": "Hypermaterial Shifter",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Pink Horror", "Screamer"]
+        "enemiesTypes": ["Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Screamer",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "SHE28": {
         "campaign": "Saim-Hann Elite",
@@ -19735,7 +23530,21 @@
         "reward": "Round of Ammo",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "SHE29": {
         "campaign": "Saim-Hann Elite",
@@ -19745,7 +23554,21 @@
         "reward": "Frag Grenade",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Pink Horror", "Screamer"]
+        "enemiesTypes": ["Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Ailver 3",
+                "stars": 8
+            },
+            {
+                "name": "Screamer",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "SHE30": {
         "campaign": "Saim-Hann Elite",
@@ -19754,7 +23577,33 @@
         "reward": "Mjod",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Screamer",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "SHE31": {
         "campaign": "Saim-Hann Elite",
@@ -19763,7 +23612,21 @@
         "reward": "Stone Guardian Fragment",
         "expectedGold": 53,
         "enemiesTotal": 4,
-        "enemiesTypes": ["Rubric Marine", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Rubric Marine", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "SHE32": {
         "campaign": "Saim-Hann Elite",
@@ -19772,7 +23635,34 @@
         "reward": "Thaumachus",
         "expectedGold": 53,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 6,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Screamer",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Thaumachus",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 9,
+                "rarity": "Legendary"
+            }
+        ]
     },
     "SHE33": {
         "campaign": "Saim-Hann Elite",
@@ -19781,7 +23671,27 @@
         "reward": "Cloak",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 4,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Screamer",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "SHE34": {
         "campaign": "Saim-Hann Elite",
@@ -19790,7 +23700,21 @@
         "reward": "Air Purificator",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Pink Horror", "Screamer"]
+        "enemiesTypes": ["Pink Horror", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Screamer",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "SHE35": {
         "campaign": "Saim-Hann Elite",
@@ -19800,7 +23724,15 @@
         "reward": "Valuable Fabric",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Pink Horror"]
+        "enemiesTypes": ["Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 7,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "SHE36": {
         "campaign": "Saim-Hann Elite",
@@ -19810,7 +23742,21 @@
         "reward": "Tainted Text",
         "expectedGold": 53,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Rubric Marine", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Rubric Marine", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "SHE37": {
         "campaign": "Saim-Hann Elite",
@@ -19819,7 +23765,21 @@
         "reward": "Inferno Bolts",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror"]
+        "enemiesTypes": ["Rubric Marine", "Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 8,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "SHE38": {
         "campaign": "Saim-Hann Elite",
@@ -19828,7 +23788,27 @@
         "reward": "Ritual Implements",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Pink Horror", "Screamer", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Pink Horror", "Screamer", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Screamer",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 11
+            }
+        ]
     },
     "SHE39": {
         "campaign": "Saim-Hann Elite",
@@ -19837,7 +23817,21 @@
         "reward": "Blessing of Tzeentch",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Rubric Marine", "Screamer"]
+        "enemiesTypes": ["Rubric Marine", "Screamer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Screamer",
+                "count": 6,
+                "rank": "Diamond 1",
+                "stars": 10
+            }
+        ]
     },
     "SHE40": {
         "campaign": "Saim-Hann Elite",
@@ -19846,7 +23840,35 @@
         "reward": "Ahriman",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Rubric Marine", "Scarab Occult Terminator"]
+        "enemiesTypes": ["Rubric Marine", "Scarab Occult Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ahriman",
+                "count": 1,
+                "rank": "Gold 2",
+                "stars": 11,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 6,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Scarab Occult Terminator",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Toth",
+                "count": 1,
+                "rank": "Gold 3",
+                "stars": 11,
+                "rarity": "Legendary"
+            }
+        ]
     },
     "SHME1": {
         "campaign": "Saim-Hann Mirror Elite",
