@@ -347,6 +347,21 @@ export class CampaignsService {
                     },
                 };
             }
+            case Campaign.TyS:
+            case Campaign.TySC:
+            case Campaign.TyE:
+            case Campaign.TyEC: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Tyranids],
+                    },
+                    allies: {
+                        alliance: Alliance.Imperial,
+                        factions: [Faction.Ultramarines, Faction.BloodAngels],
+                    },
+                };
+            }
             default: {
                 return {
                     enemies: {
