@@ -10613,7 +10613,7 @@
         "Stone I": [
             "Ropes and Chains",
             "Mutation: Warped Muscles",
-            "Weapon Parts",
+            "Canister of Chemicals",
             "Nasty Spikes",
             "Armor Trim",
             "Rebreather"
@@ -10621,7 +10621,7 @@
         "Stone II": [
             "Chip Damage",
             "Minor Bionic Enhancement",
-            "Plasma Cell",
+            "Combat Stimms",
             "Razorsharp Spikes",
             "Mutation: Tough Skin",
             "Mutation: Tough Skin"
@@ -10629,7 +10629,7 @@
         "Stone III": [
             "Helmet Trophy",
             "Bionic Enhancement",
-            "Vox-Caster",
+            "Otherworldly Energy",
             "Canister of Chemicals",
             "Blessed Tasset Plate",
             "Mutation: Scaly Skin"
@@ -10637,7 +10637,7 @@
         "Iron I": [
             "Holster and Pockets",
             "Helmet Trophy",
-            "Plasma Cell",
+            "Combat Stimms",
             "Combat Stimms",
             "Mutation: Scaly Skin",
             "Adamantium Lump"
@@ -10645,9 +10645,9 @@
         "Iron II": [
             "Helmet Trophy",
             "Grand Skull Trophy",
-            "Adamantium Blades",
+            "Otherworldly Energy Reservoir",
             "Slicing Claws",
-            "Artificer Tasset Plate",
+            "Crate of Salvage",
             "Mutation: Scaly Skin"
         ],
         "Iron III": [
@@ -10661,7 +10661,7 @@
         "Bronze I": [
             "Brazen Jaws",
             "Mutation: Warped Heart",
-            "Prey-Sight",
+            "Supernatural Sight",
             "Bionic Eye",
             "Mutation: Warped Skin",
             "Ceramite Bar"
@@ -10669,7 +10669,7 @@
         "Bronze II": [
             "Blessed Brazen Jaws",
             "Advanced Bionics",
-            "Krak Grenade",
+            "Classified Data-Slate",
             "Refined Combat Stimms",
             "Cadaere Renissum",
             "Mutation: Warped Skin"
@@ -10684,7 +10684,7 @@
         ],
         "Silver I": [
             "Blessed Brazen Jaws",
-            "Golden Ornamental Skull",
+            "Weathering",
             "Blessed Chainaxe Teeth",
             "Bionic Neural Pathways",
             "Blessed Cadaere Renissum",
@@ -10703,7 +10703,7 @@
             "Grandiose Skull Ornament",
             "Blessed Chainaxe Teeth",
             "Imposing Horns",
-            "Archeo-Tech Remnant",
+            "Archeotech Remnant",
             "Ceramite Plates"
         ],
         "Gold I": [
@@ -10726,7 +10726,7 @@
             "Exalted Brazen Jaws",
             "Grandiose Skull Ornament",
             "Butcher's Nails",
-            "Powered Blade",
+            "Psychic Focus",
             "Collar of Khorne",
             "Mutation: Impenetrable Skin"
         ],
@@ -10734,17 +10734,17 @@
             "Mark of Khorne",
             "Grandiose Skull Ornament",
             "Butcher's Nails",
-            "Plasma Coil",
+            "Hyperstim",
             "Collar of Khorne",
             "Ceramite Plates"
         ],
         "Diamond II": [
             "Mark of Khorne",
-            "Monstrous Constitution",
+            "Preternatural Constitution",
             "Butcher's Nails",
-            "Monstrous Strength",
+            "Preternatural Strength",
             "Collar of Khorne",
-            "Monstrous Defences"
+            "Preternatural Defences"
         ]
     },
     "Mataneo": {
