@@ -53,6 +53,7 @@ export const menuItemById = {
     dailyRaids: new MenuItemTP('Daily Raids', <EventRepeatIcon />, '/plan/dailyRaids'),
     leMasterTable: new MenuItemTP('Master Table', <TableChartIcon />, '/plan/leMasterTable'),
     characters: new MenuItemTP('Characters', <Diversity3Icon />, '/learn/characters'),
+    npcs: new MenuItemTP('NPCs', <Diversity3Icon />, '/learn/npcs'),
     upgrades: new MenuItemTP('Upgrades', <ListIcon />, '/learn/upgrades'),
     rankLookup: new MenuItemTP('Rank Lookup', <MilitaryTechIcon />, '/learn/rankLookup'),
     mowLookup: mowLookupMenuItem,
@@ -110,6 +111,7 @@ export const planSubMenu: MenuItemTP[] = [
 export const learnSubMenu: MenuItemTP[] = [
     menuItemById['guides'],
     menuItemById['characters'],
+    menuItemById['npcs'],
     menuItemById['upgrades'],
     menuItemById['rankLookup'],
     menuItemById['mowLookup'],
