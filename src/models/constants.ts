@@ -197,6 +197,11 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     'Adeptus Mechanicus Extremis Challenge': 0,
 
     Onslaught: 0,
+
+    [Campaign.TyS]: 0,
+    [Campaign.TySC]: 0,
+    [Campaign.TyE]: 0,
+    [Campaign.TyEC]: 0,
 };
 
 export const defaultGWLayout: IGWLayoutZone[] = [
