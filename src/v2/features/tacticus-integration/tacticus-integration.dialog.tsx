@@ -123,9 +123,10 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                             isRevealable
                         />
                         <TextField
+                            isDisabled
                             name={`apikey-${Math.random()}`}
                             type="password"
-                            label="Guild API key"
+                            label="Guild API key (In Progress)"
                             className="w-[80%]"
                             value={guildApiKey}
                             onChange={setGuildApiKey}
@@ -133,9 +134,10 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                             isRevealable
                         />
                         <TextField
+                            isDisabled
                             name={`apikey-${Math.random()}`}
                             type="password"
-                            label="Tacticus User ID"
+                            label="Tacticus User ID (In Progress)"
                             className="w-[80%]"
                             value={userId}
                             onChange={setUserId}

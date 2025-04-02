@@ -9,7 +9,6 @@
 } from 'src/models/interfaces';
 
 import campaignConfigs from 'src/assets/campaignConfigs.json';
-import battleData from 'src/assets/battleData.json';
 import newBattleData from 'src/assets/newBattleData.json';
 import recipeData from 'src/assets/recipeData.json';
 
@@ -347,10 +346,10 @@ export class CampaignsService {
                     },
                 };
             }
-            case Campaign.TyS:
-            case Campaign.TySC:
-            case Campaign.TyE:
-            case Campaign.TyEC: {
+            case Campaign.TS:
+            case Campaign.TSC:
+            case Campaign.TE:
+            case Campaign.TEC: {
                 return {
                     enemies: {
                         alliance: Alliance.Xenos,

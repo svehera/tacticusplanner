@@ -196,7 +196,7 @@ export const campaignsList: ICampaignModel[] = [
 
     // Tyranids Campaign Events
     {
-        id: Campaign.TyS,
+        id: Campaign.TS,
         name: 'Tyranids Standard',
         displayName: 'Tyranids Standard',
         faction: Faction.Ultramarines,
@@ -205,7 +205,7 @@ export const campaignsList: ICampaignModel[] = [
         difficulty: CampaignDifficulty.eventStandard,
     },
     {
-        id: Campaign.TySC,
+        id: Campaign.TSC,
         name: 'Tyranids Standard Challenge',
         displayName: 'Tyranids Standard Challenge',
         faction: Faction.Ultramarines,
@@ -214,7 +214,7 @@ export const campaignsList: ICampaignModel[] = [
         difficulty: CampaignDifficulty.eventChallenge,
     },
     {
-        id: Campaign.TyE,
+        id: Campaign.TE,
         name: 'Tyranids Extremis',
         displayName: 'Tyranids Extremis',
         faction: Faction.Ultramarines,
@@ -223,7 +223,7 @@ export const campaignsList: ICampaignModel[] = [
         difficulty: CampaignDifficulty.eventExtremis,
     },
     {
-        id: Campaign.TyEC,
+        id: Campaign.TEC,
         name: 'Tyranids Extremis Challenge',
         displayName: 'Tyranids Extremis Challenge',
         faction: Faction.Ultramarines,

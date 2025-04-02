@@ -24,26 +24,6 @@ export enum Faction {
     BloodAngels = 'Blood Angels',
     GenestealerCults = 'Genestealer Cults',
 }
-export enum Faction2 {
-    Ultramarines,
-    Black_Legion,
-    Orks = 'Orks',
-    ADEPTA_SORORITAS = 'Adepta Sororitas',
-    Necrons = 'Necrons',
-    Astra_militarum = 'Astra Militarum',
-    Death_Guard = 'Death guard',
-    Black_Templars = 'Black Templars',
-    Aeldari = 'Aeldari',
-    Space_Wolves = 'Space Wolves',
-    T_Au = "T'au Empire",
-    Dark_Angels = 'Dark Angels',
-    Thousand_Sons = 'Thousand Sons',
-    Tyranids = 'Tyranids',
-    AdeptusMechanicus = 'Adeptus Mechanicus',
-    WorldEaters = 'World Eaters',
-    BloodAngels = 'Blood Angels',
-    GenestealerCults = 'Genestealer Cults',
-}
 
 export enum RarityString {
     Common = 'Common',
@@ -261,10 +241,10 @@ export enum Campaign {
     AMSC = 'Adeptus Mechanicus Standard Challenge',
     AME = 'Adeptus Mechanicus Extremis',
     AMEC = 'Adeptus Mechanicus Extremis Challenge',
-    TyS = 'Tyranids Standard',
-    TySC = 'Tyranids Standard Challenge',
-    TyE = 'Tyranids Extremis',
-    TyEC = 'Tyranids Extremis Challenge',
+    TS = 'Tyranids Standard',
+    TSC = 'Tyranids Standard Challenge',
+    TE = 'Tyranids Extremis',
+    TEC = 'Tyranids Extremis Challenge',
     Onslaught = 'Onslaught',
 }
 

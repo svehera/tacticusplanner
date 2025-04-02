@@ -6,7 +6,7 @@ import whatsNew from '../assets/WhatsNew.json';
 import contributors from '../assets/contributors/thankYou.json';
 import contentCreators from '../assets/contributors/contentCreators.json';
 
-import battleData from '../assets/battleData.json';
+import battleData from '../assets/newBattleData.json';
 import npcData from '../assets/NpcData.json';
 import newBattleData from '../assets/newBattleData.json';
 import recipeData from '../assets/recipeData.json';

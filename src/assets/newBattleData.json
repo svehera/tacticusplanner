@@ -24898,5 +24898,629 @@
         "expectedGold": 53,
         "enemiesTotal": 12,
         "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Skirarii Vanguard", "Cadian Mortar Team"]
+    },
+    "TS1": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 1,
+        "reward": "Nano Swarm",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": ["Hormagaunt"]
+    },
+    "TS2": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 2,
+        "reward": "Canister of Chemicals",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 3,
+        "enemiesTypes": ["Hormagaunt"]
+    },
+    "TS3": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 3,
+        "reward": "Sophisticated Material",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": ["Hormagaunt", "Termagaunt"]
+    },
+    "TS4": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 4,
+        "reward": "Mutation: Warped Muscles",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 5,
+        "enemiesTypes": []
+    },
+    "TS5": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 5,
+        "reward": "Otherworldly Energy",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TS6": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 6,
+        "reward": "Deathleaper",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TS7": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 7,
+        "reward": "Mutation: Tough Skin",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TS8": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 8,
+        "reward": "Field Ration",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TS9": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 9,
+        "reward": "Nasty Spikes",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TS10": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 10,
+        "reward": "Adrenal Glands",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TS11": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 11,
+        "reward": "Winged Tyrant Prime",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "enemiesTypes": []
+    },
+    "TS12": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 12,
+        "reward": "Pile of Salvage",
+        "expectedGold": 53,
+        "enemiesTotal": 5,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TS13": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 13,
+        "reward": "Enriched Rations",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TS14": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 14,
+        "reward": "Combat Stimms",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TS15": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 15,
+        "reward": "Air Purificator",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TS16": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 16,
+        "reward": "Toxin Sacs",
+        "expectedGold": 53,
+        "enemiesTotal": 4,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TS17": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 17,
+        "reward": "Neurothrope",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": []
+    },
+    "TS18": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 18,
+        "reward": "Slicing Claws",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": []
+    },
+    "TS19": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 19,
+        "reward": "Mission Objective",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TS20": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 20,
+        "reward": "Mutation: Scaly Skin",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "enemiesTypes": []
+    },
+    "TS21": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 21,
+        "reward": "Reinforced Chitin",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TS22": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 22,
+        "reward": "PoM",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TS23": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 23,
+        "reward": "Mutation: Warped Lungs",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TS24": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 24,
+        "reward": "Barrel of Promethium",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TS25": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 25,
+        "reward": "Box of Salvage",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TS26": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 26,
+        "reward": "Battle Scar",
+        "expectedGold": 53,
+        "enemiesTotal": 11,
+        "enemiesTypes": []
+    },
+    "TS27": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 27,
+        "reward": "Classified Data-Slate",
+        "expectedGold": 53,
+        "enemiesTotal": 5,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TS28": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 28,
+        "reward": "Subdermal Plating",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TS29": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 29,
+        "reward": "Synaptic Augmentation",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "enemiesTypes": []
+    },
+    "TS30": {
+        "campaign": "Tyranids Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 30,
+        "reward": "Tyrant Guard",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": []
+    },
+    "TE1": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 1,
+        "reward": "Nano Swarm",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TE2": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 2,
+        "reward": "Canister of Chemicals",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TE3": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 3,
+        "reward": "Sophisticated Material",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TE4": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 4,
+        "reward": "Mutation: Warped Muscles",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TE5": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 5,
+        "reward": "Otherworldly Energy",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TE6": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 6,
+        "reward": "Deathleaper",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TE7": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 7,
+        "reward": "Mutation: Tough Skin",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TE8": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 8,
+        "reward": "Field Ration",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TE9": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 9,
+        "reward": "Nasty Spikes",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TE10": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 10,
+        "reward": "Adrenal Glands",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TE11": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 11,
+        "reward": "Winged Tyrant Prime",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TE12": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 12,
+        "reward": "Pile of Salvage",
+        "expectedGold": 53,
+        "enemiesTotal": 5,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TE13": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 13,
+        "reward": "Enriched Rations",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TE14": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 14,
+        "reward": "Combat Stimms",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": []
+    },
+    "TE15": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 15,
+        "reward": "Air Purificator",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TE16": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 16,
+        "reward": "Toxin Sacs",
+        "expectedGold": 53,
+        "enemiesTotal": 5,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TE17": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 17,
+        "reward": "Neurothrope",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": []
+    },
+    "TE18": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 18,
+        "reward": "Slicing Claws",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TE19": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 19,
+        "reward": "Mission Objective",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": []
+    },
+    "TE20": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 20,
+        "reward": "Mutation: Scaly Skin",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TE21": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 21,
+        "reward": "Reinforced Chitin",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": []
+    },
+    "TE22": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 22,
+        "reward": "PoM",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TE23": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 23,
+        "reward": "Mutation: Warped Lungs",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TE24": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 24,
+        "reward": "Barrel of Promethium",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TE25": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 25,
+        "reward": "Box of Salvage",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": []
+    },
+    "TE26": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 26,
+        "reward": "Battle Scar",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TE27": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 27,
+        "reward": "Classified Data-Slate",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TE28": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 28,
+        "reward": "Subdermal Plating",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": []
+    },
+    "TE29": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 29,
+        "reward": "Synaptic Augmentation",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TE30": {
+        "campaign": "Tyranids Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 30,
+        "reward": "Tyrant Guard",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": []
+    },
+    "TSC1": {
+        "campaign": "Tyranids Standard Challenge",
+        "campaignType": "Normal",
+        "nodeNumber": 1,
+        "reward": "Mutation: Warped Heart",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TSC2": {
+        "campaign": "Tyranids Standard Challenge",
+        "campaignType": "Normal",
+        "nodeNumber": 2,
+        "reward": "Weathering",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": []
+    },
+    "TSC3": {
+        "campaign": "Tyranids Standard Challenge",
+        "campaignType": "Normal",
+        "nodeNumber": 3,
+        "reward": "Warp Locus",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TEC1": {
+        "campaign": "Tyranids Extremis Challenge",
+        "campaignType": "Extremis",
+        "nodeNumber": 1,
+        "reward": "Duplicate Organ",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": []
+    },
+    "TEC2": {
+        "campaign": "Tyranids Extremis Challenge",
+        "campaignType": "Extremis",
+        "nodeNumber": 2,
+        "reward": "Psyk-Conductive Material",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TEC3": {
+        "campaign": "Tyranids Extremis Challenge",
+        "campaignType": "Extremis",
+        "nodeNumber": 3,
+        "reward": "Psychic Force Conduit",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "enemiesTypes": []
     }
 }

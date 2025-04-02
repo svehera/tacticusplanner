@@ -36,7 +36,7 @@ import { cloneDeep, groupBy, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
 
 import rankUpData from 'src/assets/rankUpData.json';
 import recipeData from 'src/v2/data/recipeData.json';
-import battleData from 'src/assets/battleData.json';
+import battleData from 'src/assets/newBattleData.json';
 import { getEnumValues, rankToString } from 'src/shared-logic/functions';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaigns.constants';
