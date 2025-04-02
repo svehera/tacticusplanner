@@ -7448,5 +7448,40 @@
         "stat": "Shard",
         "faction": "Adeptus Mechanicus",
         "rarity": "Shard"
+    },
+    "Winged Tyrant Prime": {
+        "material": "Winged Tyrant Prime",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Tyranids",
+        "rarity": "Shard"
+    },
+    "Deathleaper": {
+        "material": "Deathleaper",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Tyranids",
+        "rarity": "Shard"
+    },
+    "PoM": {
+        "material": "PoM",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Tyranids",
+        "rarity": "Shard"
+    },
+    "Tyrant Guard": {
+        "material": "Tyrant Guard",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Tyranids",
+        "rarity": "Shard"
+    },
+    "Neurothrope": {
+        "material": "Neurothrope",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Tyranids",
+        "rarity": "Shard"
     }
 }

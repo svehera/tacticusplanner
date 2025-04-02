@@ -198,10 +198,10 @@ const defaultCampaignsProgress: ICampaignsProgress = {
 
     Onslaught: 0,
 
-    [Campaign.TyS]: 0,
-    [Campaign.TySC]: 0,
-    [Campaign.TyE]: 0,
-    [Campaign.TyEC]: 0,
+    [Campaign.TS]: 0,
+    [Campaign.TSC]: 0,
+    [Campaign.TE]: 0,
+    [Campaign.TEC]: 0,
 };
 
 export const defaultGWLayout: IGWLayoutZone[] = [
