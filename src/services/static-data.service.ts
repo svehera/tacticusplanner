@@ -672,7 +672,9 @@ export class StaticDataService {
             [Faction.Black_Legion, ['Bloodletter', 'Chaos Terminator', 'Traitor Guardsman', 'Havoc']],
             [Faction.Black_Templars, ['Initiate', 'Neophyte', 'Initiate with Pyreblaster', 'Aggressor']],
             [Faction.Orks, ['Ork Boy', 'Grot', 'Grot Tank']],
-            [Faction.Tyranids, ['Hormagaunt', 'Termagant', 'Ripper Swarm']],
+            [Faction.Tyranids, ['Hormagaunt', 'Termagant', 'Ripper Swarm', 'Tyranid Warrior']],
+            [Faction.Thousand_Sons, ['Rubric Marine', 'Pink Horror', 'Screamer', 'Scarab Occult Terminator']],
+            [Faction.Aeldari, ['Guardian']],
         ]);
     }
 
@@ -705,9 +707,16 @@ export class StaticDataService {
             'Ork Boy': 'ork_boy.png',
             Grot: 'grot.png',
             'Grot Tank': 'grot_tank.png',
+            'Storm Boy': 'storm_boy.png',
             Hormagaunt: 'hormagaunt.png',
             Termagant: 'termagaunt.png',
             'Ripper Swarm': 'ripper_swarm.png',
+            'Tyranid Warrior': 'tyranid_warrior.png',
+            'Rubric Marine': 'rubric_marine.webp',
+            'Pink Horror': 'pink_horror.webp',
+            Screamer: 'screamer_of_tzeentch.webp',
+            Guardian: 'guardian.webp',
+            'Scarab Occult Terminator': 'scarab_occult_terminator.webp',
         };
         if (map[npc]) {
             return prefix + '/' + map[npc];
