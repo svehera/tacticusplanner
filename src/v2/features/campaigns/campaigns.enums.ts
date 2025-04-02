@@ -43,6 +43,11 @@ export enum CampaignGroupType {
      * Campaign Event: Adeptus Mechanicus storyline.
      */
     adMechCE = 'AdMech',
+
+    /**
+     * Campaign Event: Tyranids storyline.
+     */
+    tyranidCE = 'Tyranids',
 }
 
 /**
