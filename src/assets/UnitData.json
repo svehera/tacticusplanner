@@ -2068,7 +2068,7 @@
             "finished": false,
             "eventStage": 3,
             "nextEventDate": "TBA",
-            "nextEventDateUtc": ""
+            "nextEventDateUtc": "Sun, 27 April 2025 00:00:00 GMT"
         }
     },
     {
@@ -2212,9 +2212,9 @@
         "lre": {
             "id": 10,
             "finished": false,
-            "eventStage": 1,
-            "nextEventDate": "March 23",
-            "nextEventDateUtc": "Sun, 23 March 2025 00:00:00 GMT"
+            "eventStage": 2,
+            "nextEventDate": "TBA",
+            "nextEventDateUtc": ""
         }
     },
     {

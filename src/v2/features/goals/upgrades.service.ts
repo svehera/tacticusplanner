@@ -303,9 +303,9 @@ export class UpgradesService {
 
             const relatedUpgrades: string[] = upgradeRanks.flatMap(x => {
                 const result: string[] = [...x.upgrades];
-                const upgrades: Array<IBaseUpgrade | ICraftedUpgrade> = x.upgrades.map(upgrade =>
-                    this.getUpgrade(upgrade)
-                );
+                const upgrades: Array<IBaseUpgrade | ICraftedUpgrade> = x.upgrades
+                    .map(upgrade => this.getUpgrade(upgrade))
+                    .filter(x => !!x);
                 for (const upgrade of upgrades) {
                     if (upgrade.crafted) {
                         result.push(...upgrade.baseUpgrades.map(x => x.id));
@@ -707,6 +707,9 @@ export class UpgradesService {
         for (const upgradeRank of upgradeRanks) {
             for (const upgrade of upgradeRank.upgrades) {
                 const upgradeData = this.getUpgrade(upgrade);
+                if (!upgradeData) {
+                    continue;
+                }
 
                 if (upgradeData.crafted) {
                     topLevelCraftedUpgrades[upgrade] = (topLevelCraftedUpgrades[upgrade] ?? 0) + 1;
