@@ -12,7 +12,6 @@ import { NpcPortrait } from 'src/routes/tables/npc-portrait';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
 import { DamageIcon } from './damage-icon';
-import { IModifiersAndBuffs } from 'src/models/interfaces';
 
 interface Props {
     onCharacterChange: (
@@ -23,8 +22,7 @@ interface Props {
         faction: Faction,
         rank: Rank,
         rarity: Rarity,
-        stars: RarityStars,
-        buffs: IModifiersAndBuffs
+        stars: RarityStars
     ) => void;
 }
 
@@ -238,7 +236,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
                     <div>
                         <div className="m-3 flex-box gap5" style={{ position: 'relative' }}>
                             <MiscIcon icon={'melee'} width={20} height={20} />
-                            <DamageIcon icon={meleeDamageType} width={22} height={20} />
+                            <DamageIcon icon={meleeDamageType!} width={22} height={20} />
                             <div style={{ width: 20 }} />
                             <span>{meleeHits}</span>
                             <MiscIcon icon={'hits'} width={20} height={20} />
