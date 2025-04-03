@@ -193,6 +193,44 @@ export const campaignsList: ICampaignModel[] = [
         groupType: CampaignGroupType.adMechCE,
         difficulty: CampaignDifficulty.eventChallenge,
     },
+
+    // Tyranids Campaign Events
+    {
+        id: Campaign.TS,
+        name: 'Tyranids Standard',
+        displayName: 'Tyranids Standard',
+        faction: Faction.Ultramarines,
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.tyranidCE,
+        difficulty: CampaignDifficulty.eventStandard,
+    },
+    {
+        id: Campaign.TSC,
+        name: 'Tyranids Standard Challenge',
+        displayName: 'Tyranids Standard Challenge',
+        faction: Faction.Ultramarines,
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.tyranidCE,
+        difficulty: CampaignDifficulty.eventChallenge,
+    },
+    {
+        id: Campaign.TE,
+        name: 'Tyranids Extremis',
+        displayName: 'Tyranids Extremis',
+        faction: Faction.Ultramarines,
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.tyranidCE,
+        difficulty: CampaignDifficulty.eventExtremis,
+    },
+    {
+        id: Campaign.TEC,
+        name: 'Tyranids Extremis Challenge',
+        displayName: 'Tyranids Extremis Challenge',
+        faction: Faction.Ultramarines,
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.tyranidCE,
+        difficulty: CampaignDifficulty.eventChallenge,
+    },
 ];
 
 export const campaignsByGroup: Record<string, Campaign[]> = mapValues(groupBy(campaignsList, 'groupType'), value =>

@@ -29,9 +29,8 @@ import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
 import rankUpData from 'src/assets/rankUpData.json';
 import recipeData from 'src/v2/data/recipeData.json';
-import battleData from 'src/assets/battleData.json';
+import battleData from 'src/assets/newBattleData.json';
 import { charsUnlockShards } from 'src/models/constants';
-import { ICampaignModel } from '../campaigns/campaigns.models';
 
 export class CampaignsProgressionService {
     static readonly recipeData: IRecipeData = recipeData;

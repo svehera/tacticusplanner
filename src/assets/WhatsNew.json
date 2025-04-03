@@ -1,6 +1,28 @@
 ﻿{
-    "currentVersion": "1.7.1",
+    "currentVersion": "1.7.2",
     "releaseNotes": [
+        {
+            "version": "1.7.2",
+            "date": "April 3",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "(cpunerd) Added 1.27 update data",
+                    "subPoints": [
+                        "Added [World Eaters] Tarvakh, Master of Executions, unlockable in the ‘For the Blood God’ event, starting on April 6",
+                        "Added [Genestealer Cults] Judh Lhaska, Kelermorph, unlockable via the Battle Pass starting on 30th of March",
+                        "Added New Campaign Event: ‘Tyranids’ — Starting April 3"
+                    ]
+                },
+                {
+                    "text": "(cpunerd) Added 'Learn > NPCs' page",
+                    "route": "learn/npcs",
+                    "images": [{ "path": "npcs.png" }]
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
         {
             "version": "1.7.1",
             "date": "March 21",

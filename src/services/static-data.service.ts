@@ -6,7 +6,8 @@ import whatsNew from '../assets/WhatsNew.json';
 import contributors from '../assets/contributors/thankYou.json';
 import contentCreators from '../assets/contributors/contentCreators.json';
 
-import battleData from '../assets/battleData.json';
+import battleData from '../assets/newBattleData.json';
+import npcData from '../assets/NpcData.json';
 import newBattleData from '../assets/newBattleData.json';
 import recipeData from '../assets/recipeData.json';
 import rankUpData from '../assets/rankUpData.json';
@@ -23,6 +24,8 @@ import {
     IMaterialEstimated2,
     IMaterialFull,
     IMaterialRecipeIngredientFull,
+    INpcData,
+    INpcsRaw,
     IRankUpData,
     IRecipeData,
     IRecipeDataFull,
@@ -30,7 +33,7 @@ import {
     IWhatsNew,
     UnitDataRaw,
 } from '../models/interfaces';
-import { Faction, Rank, Rarity, RarityString } from '../models/enums';
+import { Alliance, Faction, Rank, Rarity, RarityString } from '../models/enums';
 import { rarityStringToNumber, rarityToStars } from '../models/constants';
 import { getEnumValues, rankToString } from '../shared-logic/functions';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
@@ -38,11 +41,13 @@ import { IRankLookup } from 'src/v2/features/goals/goals.models';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { NearMe } from '@mui/icons-material';
+import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
 
 export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;
     static readonly battleData: ICampaignsData = battleData;
     static readonly newBattleData: ICampaignsData = newBattleData;
+    static readonly npcData: INpcsRaw = npcData;
     static readonly recipeData: IRecipeData = recipeData;
     static readonly rankUpData: IRankUpData = rankUpData;
     static readonly contributors: IContributor[] = contributors;
@@ -80,6 +85,95 @@ export class StaticDataService {
 
     static readonly campaignsGrouped: Record<string, ICampaignBattleComposed[]> = this.getCampaignGrouped();
     static readonly recipeDataFull: IRecipeDataFull = this.convertRecipeData();
+    static readonly npcDataFull: INpcData[] = this.convertNpcData();
+
+    private static parseFaction(faction: string): Faction | undefined {
+        switch (faction) {
+            case 'Ultramarines':
+                return Faction.Ultramarines;
+            case 'Adeptus Mechanicus':
+                return Faction.AdeptusMechanicus;
+            case 'Astra Militarum':
+                return Faction.Astra_militarum;
+            case 'Black Legion':
+                return Faction.Black_Legion;
+            case 'Black Templars':
+                return Faction.Black_Templars;
+            case 'Orks':
+                return Faction.Orks;
+            case 'Necrons':
+                return Faction.Necrons;
+            case 'Death Guard':
+                return Faction.Death_Guard;
+            case 'Aeldari':
+                return Faction.Aeldari;
+            case "T'au":
+                return Faction.T_Au;
+            case 'Thousand Sons':
+                return Faction.Thousand_Sons;
+            case 'Tyranids':
+                return Faction.Tyranids;
+            case 'World Eaters':
+                return Faction.WorldEaters;
+            case 'Adepta Sororitas':
+                return Faction.ADEPTA_SORORITAS;
+            default:
+                return undefined;
+        }
+    }
+
+    private static parseAlliance(alliance: string): Alliance | undefined {
+        switch (alliance) {
+            // Towen gave us this data, and he didn't capitalize xenos. /shrug.
+            case 'xenos':
+                return Alliance.Xenos;
+            case 'Chaos':
+                return Alliance.Chaos;
+            case 'Imperial':
+                return Alliance.Imperial;
+            default:
+                return undefined;
+        }
+    }
+
+    private static convertNpcData(): INpcData[] {
+        let data: INpcData[] = [];
+
+        data = npcData.npcs.map(npc => {
+            const faction: Faction = this.parseFaction(npc.faction) ?? Faction.Ultramarines;
+            const alliance: Alliance = this.parseAlliance(npc.alliance) ?? Alliance.Imperial;
+            const ret: INpcData = {
+                name: npc.name,
+                faction: faction,
+                alliance: alliance,
+                movement: npc.movement,
+                meleeHits: npc.meleeHits,
+                meleeType: npc.meleeType,
+                health: npc.health,
+                damage: npc.damage,
+                armor: npc.armor,
+                traits: npc.traits,
+                activeAbilities: npc.activeAbilities,
+                passiveAbilities: npc.passiveAbilities,
+            };
+            if (npc.rangeHits) {
+                ret.rangeHits = npc.rangeHits!;
+                ret.rangeType = npc.rangeType!;
+                ret.range = npc.range!;
+            }
+            if (npc.critChance) {
+                ret.critChance = npc.critChance!;
+                ret.critDamage = npc.critDamage!;
+            }
+            if (npc.blockChance) {
+                ret.blockChance = npc.blockChance!;
+                ret.blockDamage = npc.blockDamage!;
+            }
+            return ret;
+        });
+
+        return data;
+    }
 
     static getItemLocations = (itemId: string): ICampaignBattleComposed[] => {
         const possibleLocations: ICampaignBattleComposed[] = [];
@@ -563,6 +657,27 @@ export class StaticDataService {
         };
     }
 
+    /**
+     * @returns all known NPCs by faction. Human readable, and accepted by
+     *          `getNpcIconPath`.
+     */
+    public static getNpcs(): Map<Faction, string[]> {
+        return new Map<Faction, string[]>([
+            [Faction.Necrons, ['Flayed One', 'Necron Warrior', 'Scarab Swarm', 'Deathmark', 'Ophydian Destroyer']],
+            [
+                Faction.Astra_militarum,
+                ['Cadian Guardsman', 'Cadian Lascannon Team', 'Cadian Vox-Caster', 'Cadian Mortar Team'],
+            ],
+            [Faction.Ultramarines, ['Eliminator', 'Inceptor', 'Heavy Intercessor']],
+            [Faction.Black_Legion, ['Bloodletter', 'Chaos Terminator', 'Traitor Guardsman', 'Havoc']],
+            [Faction.Black_Templars, ['Initiate', 'Neophyte', 'Initiate with Pyreblaster', 'Aggressor']],
+            [Faction.Orks, ['Ork Boy', 'Grot', 'Grot Tank']],
+            [Faction.Tyranids, ['Hormagaunt', 'Termagant', 'Ripper Swarm', 'Tyranid Warrior']],
+            [Faction.Thousand_Sons, ['Rubric Marine', 'Pink Horror', 'Screamer', 'Scarab Occult Terminator']],
+            [Faction.Aeldari, ['Guardian']],
+        ]);
+    }
+
     /** @returns the image asset for the NPC, which is allowed to be a character. */
     public static getNpcIconPath(npc: string): string {
         const prefix: string = 'npcs';
@@ -592,9 +707,16 @@ export class StaticDataService {
             'Ork Boy': 'ork_boy.png',
             Grot: 'grot.png',
             'Grot Tank': 'grot_tank.png',
+            'Storm Boy': 'storm_boy.png',
             Hormagaunt: 'hormagaunt.png',
             Termagant: 'termagaunt.png',
             'Ripper Swarm': 'ripper_swarm.png',
+            'Tyranid Warrior': 'tyranid_warrior.png',
+            'Rubric Marine': 'rubric_marine.webp',
+            'Pink Horror': 'pink_horror.webp',
+            Screamer: 'screamer_of_tzeentch.webp',
+            Guardian: 'guardian.webp',
+            'Scarab Occult Terminator': 'scarab_occult_terminator.webp',
         };
         if (map[npc]) {
             return prefix + '/' + map[npc];

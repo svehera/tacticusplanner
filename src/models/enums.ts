@@ -241,6 +241,10 @@ export enum Campaign {
     AMSC = 'Adeptus Mechanicus Standard Challenge',
     AME = 'Adeptus Mechanicus Extremis',
     AMEC = 'Adeptus Mechanicus Extremis Challenge',
+    TS = 'Tyranids Standard',
+    TSC = 'Tyranids Standard Challenge',
+    TE = 'Tyranids Extremis',
+    TEC = 'Tyranids Extremis Challenge',
     Onslaught = 'Onslaught',
 }
 

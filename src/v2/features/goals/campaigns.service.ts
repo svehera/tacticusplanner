@@ -9,7 +9,6 @@
 } from 'src/models/interfaces';
 
 import campaignConfigs from 'src/assets/campaignConfigs.json';
-import battleData from 'src/assets/battleData.json';
 import newBattleData from 'src/assets/newBattleData.json';
 import recipeData from 'src/assets/recipeData.json';
 
@@ -344,6 +343,21 @@ export class CampaignsService {
                     allies: {
                         alliance: Alliance.Chaos,
                         factions: [Faction.Death_Guard, Faction.WorldEaters],
+                    },
+                };
+            }
+            case Campaign.TS:
+            case Campaign.TSC:
+            case Campaign.TE:
+            case Campaign.TEC: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.Tyranids],
+                    },
+                    allies: {
+                        alliance: Alliance.Imperial,
+                        factions: [Faction.Ultramarines, Faction.BloodAngels],
                     },
                 };
             }

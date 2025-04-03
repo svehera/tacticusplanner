@@ -9,16 +9,29 @@ import { useSyncWithTacticus } from './useSyncWithTacticus';
 
 interface Props extends DialogProps {
     tacticusApiKey: string;
+    tacticusUserId: string;
+    tacticusGuildApiKey: string;
     initialSyncOptions: string[];
 }
 
-export const TacticusIntegrationDialog: React.FC<Props> = ({ isOpen, onClose, tacticusApiKey, initialSyncOptions }) => {
+export const TacticusIntegrationDialog: React.FC<Props> = ({
+    isOpen,
+    onClose,
+    tacticusApiKey,
+    tacticusUserId,
+    tacticusGuildApiKey,
+    initialSyncOptions,
+}) => {
     const loader = useLoader();
     const auth = useAuth();
     const { syncWithTacticus } = useSyncWithTacticus();
 
     const [apiKey, setApiKey] = useState<string>(tacticusApiKey);
     const [currentApiKey, setCurrentApiKey] = useState<string>(tacticusApiKey);
+    const [guildApiKey, setGuildApiKey] = useState<string>(tacticusGuildApiKey);
+    const [currentGuildApiKey, setCurrentGuildApiKey] = useState<string>(tacticusGuildApiKey);
+    const [userId, setUserId] = useState<string>(tacticusUserId);
+    const [currentUserId, setCurrentUserId] = useState<string>(tacticusUserId);
     const [syncOptions, setSyncOptions] = useState<Array<string>>(initialSyncOptions);
 
     async function syncWithTacticusApi() {
@@ -27,25 +40,29 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({ isOpen, onClose, ta
     }
 
     async function updateApiKey() {
-        loader.startLoading('Updating Tacticus API key. Please wait...');
+        loader.startLoading('Updating settings. Please wait...');
         try {
-            const response = await updateTacticusApiKey(apiKey);
+            const response = await updateTacticusApiKey(apiKey, guildApiKey, userId);
 
             if (!response.data) {
-                enqueueSnackbar('Failed to update Tacticus API key', { variant: 'error' });
+                enqueueSnackbar('Failed to update settings', { variant: 'error' });
                 return;
             }
 
-            auth.setUserInfo({ ...auth.userInfo, tacticusApiKey: apiKey });
+            auth.setUserInfo({
+                ...auth.userInfo,
+                tacticusApiKey: apiKey,
+                tacticusGuildApiKey: guildApiKey,
+                tacticusUserId: userId,
+            });
             setCurrentApiKey(apiKey);
-            if (apiKey) {
-                enqueueSnackbar('Tacticus API key is set', { variant: 'success' });
-            } else {
-                enqueueSnackbar('Tacticus API key is removed', { variant: 'success' });
-            }
+            setCurrentGuildApiKey(guildApiKey);
+            setCurrentUserId(userId);
+
+            enqueueSnackbar('Settings updated', { variant: 'success' });
         } catch (error) {
             console.error(error);
-            enqueueSnackbar('Failed to update Tacticus API key', { variant: 'error' });
+            enqueueSnackbar('Failed to update settings', { variant: 'error' });
         } finally {
             loader.endLoading();
         }
@@ -94,18 +111,47 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({ isOpen, onClose, ta
 
                     <br />
 
-                    <div className="flex justify-between items-center">
+                    <div className="flex flex-col justify-between items-center">
                         <TextField
                             name={`apikey-${Math.random()}`}
                             type="password"
-                            label="Your API key"
+                            label="Personal API key"
                             className="w-[80%]"
                             value={apiKey}
                             onChange={setApiKey}
                             autoComplete="new-password"
                             isRevealable
                         />
-                        <Button intent="primary" isDisabled={apiKey === currentApiKey} onPress={updateApiKey}>
+                        <TextField
+                            isDisabled
+                            name={`apikey-${Math.random()}`}
+                            type="password"
+                            label="Guild API key (In Progress)"
+                            className="w-[80%]"
+                            value={guildApiKey}
+                            onChange={setGuildApiKey}
+                            autoComplete="new-password"
+                            isRevealable
+                        />
+                        <TextField
+                            isDisabled
+                            name={`apikey-${Math.random()}`}
+                            type="password"
+                            label="Tacticus User ID (In Progress)"
+                            className="w-[80%]"
+                            value={userId}
+                            onChange={setUserId}
+                            autoComplete="new-password"
+                            isRevealable
+                        />
+                        <Button
+                            intent="primary"
+                            isDisabled={
+                                apiKey === currentApiKey &&
+                                guildApiKey === currentGuildApiKey &&
+                                userId === currentUserId
+                            }
+                            onPress={updateApiKey}>
                             Update
                         </Button>
                     </div>

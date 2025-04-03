@@ -28,6 +28,7 @@ import { mowLookupMenuItem } from 'src/v2/pages/mow-lookup/mow-lookup.menu-item'
 import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';
 import { activeLreMenuItems, inactiveLreMenuItems } from 'src/v2/pages/lre/lre.menu-item';
 import { myProgressMenuItem } from 'src/v2/pages/my-progress/my-progress.menu-item';
+import { guildApiMenuItem } from '@/v2/pages/guild-api/guild-api.menu-item';
 
 export class MenuItemTP {
     constructor(
@@ -52,6 +53,7 @@ export const menuItemById = {
     dailyRaids: new MenuItemTP('Daily Raids', <EventRepeatIcon />, '/plan/dailyRaids'),
     leMasterTable: new MenuItemTP('Master Table', <TableChartIcon />, '/plan/leMasterTable'),
     characters: new MenuItemTP('Characters', <Diversity3Icon />, '/learn/characters'),
+    npcs: new MenuItemTP('NPCs', <Diversity3Icon />, '/learn/npcs'),
     upgrades: new MenuItemTP('Upgrades', <ListIcon />, '/learn/upgrades'),
     rankLookup: new MenuItemTP('Rank Lookup', <MilitaryTechIcon />, '/learn/rankLookup'),
     mowLookup: mowLookupMenuItem,
@@ -68,6 +70,7 @@ export const menuItemById = {
     offense: guildWarOffenseMenuItem,
     zones: guildWarZonesMenuItem,
     guild: guildMenuItem,
+    guildApi: guildApiMenuItem,
     guildInsights: guildInsightsMenuItem,
     teams: teamsMenuItem,
     guides: guidesMenuItem,
@@ -108,12 +111,14 @@ export const planSubMenu: MenuItemTP[] = [
 export const learnSubMenu: MenuItemTP[] = [
     menuItemById['guides'],
     menuItemById['characters'],
+    menuItemById['npcs'],
     menuItemById['upgrades'],
     menuItemById['rankLookup'],
     menuItemById['mowLookup'],
     menuItemById['campaigns'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
+    // menuItemById['guildApi'],
     menuItemById['guildInsights'],
 ];
 
