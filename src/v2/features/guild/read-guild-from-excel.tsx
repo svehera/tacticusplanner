@@ -36,6 +36,14 @@ export const ImportGuildExcel: React.FC<Props> = ({ onImport }) => {
                     prop: 'shareToken',
                     type: String,
                 },
+                InGameName: {
+                    prop: 'inGameName',
+                    type: String,
+                },
+                InGameUserId: {
+                    prop: 'userId',
+                    type: String,
+                },
             };
 
             readXlsxFile<IGuildMember>(file, { schema }).then(({ rows, errors }) => {

@@ -114,6 +114,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                     <div className="flex flex-col justify-between items-center">
                         <TextField
                             name={`apikey-${Math.random()}`}
+                            description="Used to fetch Player data. Player scope is required for this key"
                             type="password"
                             label="Personal API key"
                             className="w-[80%]"
@@ -123,10 +124,10 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                             isRevealable
                         />
                         <TextField
-                            isDisabled
-                            name={`apikey-${Math.random()}`}
+                            name={`guildApikey-${Math.random()}`}
+                            description="Used to fetch Guid Raid data. Ask your guild leader or co-leader to generate API jey with 'Guild Raid' and 'Guild' scopes"
                             type="password"
-                            label="Guild API key (In Progress)"
+                            label="Guild API key"
                             className="w-[80%]"
                             value={guildApiKey}
                             onChange={setGuildApiKey}
@@ -134,10 +135,10 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                             isRevealable
                         />
                         <TextField
-                            isDisabled
                             name={`apikey-${Math.random()}`}
                             type="password"
-                            label="Tacticus User ID (In Progress)"
+                            description="Used to identify your account in the Guid Raid data"
+                            label="Tacticus User ID"
                             className="w-[80%]"
                             value={userId}
                             onChange={setUserId}
