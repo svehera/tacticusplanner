@@ -717,6 +717,9 @@ export class StaticDataService {
             Screamer: 'screamer_of_tzeentch.webp',
             Guardian: 'guardian.webp',
             'Scarab Occult Terminator': 'scarab_occult_terminator.webp',
+            'Harlequin Player': 'harlequin.webp',
+            Warlock: 'warlock.webp',
+            Wraithguard: 'wraithguard.webp',
         };
         if (map[npc]) {
             return prefix + '/' + map[npc];
