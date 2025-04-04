@@ -11,6 +11,7 @@ import {
 import { Rarity } from 'src/models/enums';
 import { getTacticusGuildRaidData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
 import { mapUserIdToName } from './user-id-mapper';
+import { IGuildMember } from '@/models/interfaces';
 
 // Type for aggregated user data
 interface UserSummary {
@@ -140,7 +141,9 @@ const DateRenderer: React.FC<{ value: number | null | undefined }> = ({ value })
     return <span>{date.toLocaleString()}</span>;
 };
 
-export const TacticusGuildRaidVisualization: React.FC = () => {
+export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: string) => string }> = ({
+    userIdMapper,
+}) => {
     const [raidData, setRaidData] = useState<TacticusGuildRaidResponse | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -187,7 +190,7 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
         {
             field: 'userId',
             headerName: 'User Nickname',
-            valueGetter: col => mapUserIdToName(col.data?.userId ?? '000'),
+            valueGetter: col => userIdMapper(col.data?.userId ?? '000'),
             sortable: true,
         },
         {
@@ -257,6 +260,7 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
             sortable: true,
             filter: true,
             width: 180,
+            sort: 'desc',
         },
         {
             headerName: 'Completed',
@@ -315,9 +319,9 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
         // Most active user
         let mostActiveUser = '';
         let mostActiveCount = 0;
-        userParticipation.forEach((count, user) => {
+        userParticipation.forEach((count, user: string) => {
             if (count > mostActiveCount) {
-                mostActiveUser = user;
+                mostActiveUser = userIdMapper(user);
                 mostActiveCount = count;
             }
         });
@@ -326,7 +330,9 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
         const highestDamage = filteredEntries.reduce((max, entry) => Math.max(max, entry.damageDealt), 0);
 
         // User with highest damage
-        const userWithHighestDamage = filteredEntries.find(entry => entry.damageDealt === highestDamage)?.userId || '';
+        const userWithHighestDamage = userIdMapper(
+            filteredEntries.find(entry => entry.damageDealt === highestDamage)?.userId || ''
+        );
 
         // Attacks that defeated enemies (remaining HP = 0)
         const defeatedEnemies = filteredEntries.filter(entry => entry.remainingHp === 0).length;
@@ -352,14 +358,14 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
     if (loading) {
         return (
             <div className="flex items-center justify-center h-64">
-                <div className="text-lg text-gray-600">Loading raid data...</div>
+                <div className="text-muted-fg">Loading raid data...</div>
             </div>
         );
     }
 
     if (error) {
         return (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+            <div className="bg-danger/20 border border-danger/70 text-danger-fg px-4 py-3 rounded">
                 <p>{error}</p>
             </div>
         );
@@ -367,7 +373,7 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
 
     if (!raidData) {
         return (
-            <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded">
+            <div className="bg-warning/20 border border-warning/70 text-warning-fg px-4 py-3 rounded">
                 <p>No raid data available.</p>
             </div>
         );
@@ -376,54 +382,148 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
     // Get unique tiers for filter dropdown
     const units = [...new Set(raidData.entries.map(entry => entry.unitId))].sort();
 
-    const summaryColumnDefs = useMemo<ColDef<UserSummary>[]>(
-        () => [
-            {
-                field: 'userId',
-                headerName: 'User Nickname',
-                valueGetter: col => mapUserIdToName(col.data?.userId ?? '000'),
-                sortable: true,
-            },
-            { field: 'userId', headerName: 'Player ID', filter: true },
-            {
-                field: 'totalDamageDealt',
-                headerName: 'Total Damage',
-                filter: 'agNumberColumnFilter',
-                valueFormatter: params => params.value.toLocaleString(),
-            },
-            { field: 'attackCount', headerName: 'Total Attacks' },
-            { field: 'bossCount', headerName: 'Boss Attacks' },
-            { field: 'sideBossCount', headerName: 'Side Boss Attacks' },
-            { field: 'battleCount', headerName: 'Battle Attacks' },
-            { field: 'bombCount', headerName: 'Bomb Attacks' },
-            {
-                field: 'highestDamage',
-                headerName: 'Highest Damage',
-                valueFormatter: params => params.value.toLocaleString(),
-            },
+    // Add this component near other renderers
+    const BombStatusRenderer: React.FC<{ data: UserSummary }> = ({ data }) => {
+        const BOMB_COOLDOWN_HOURS = 18;
+        const lastBombTime = filteredEntries
+            .filter(
+                entry =>
+                    entry.userId === data.userId &&
+                    entry.damageType === TacticusDamageType.Bomb &&
+                    entry.completedOn != null
+            )
+            .map(entry => entry.completedOn! * 1000) // Convert seconds to milliseconds
+            .sort((a, b) => b - a)[0];
 
-            {
-                headerName: 'Avg Damage/Attack',
-                valueGetter: (params: ValueGetterParams) => {
-                    return params.data.attackCount > 0 ? params.data.totalDamageDealt / params.data.attackCount : 0;
-                },
-                valueFormatter: params => Math.round(params.value).toLocaleString(),
+        if (!lastBombTime) {
+            return <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">Available</span>;
+        }
+
+        const timeSince = Date.now() - lastBombTime;
+        const timeUntilNext = BOMB_COOLDOWN_HOURS * 60 * 60 * 1000 - timeSince;
+
+        if (timeUntilNext <= 0) {
+            return <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">Available</span>;
+        }
+
+        const hoursLeft = Math.floor(timeUntilNext / (1000 * 60 * 60));
+        const minutesLeft = Math.floor((timeUntilNext % (1000 * 60 * 60)) / (1000 * 60));
+
+        return (
+            <span className="text-sm">
+                {hoursLeft}h {minutesLeft}m
+            </span>
+        );
+    };
+
+    const TokenStatusRenderer: React.FC<{ data: UserSummary }> = ({ data }) => {
+        const TOKEN_REGEN_HOURS = 12;
+        const millisecondsPerToken = TOKEN_REGEN_HOURS * 60 * 60 * 1000;
+        const now = Date.now();
+
+        // Get the most recent battle
+        const lastBattle = filteredEntries
+            .filter(
+                entry =>
+                    entry.userId === data.userId &&
+                    entry.damageType === TacticusDamageType.Battle &&
+                    entry.startedOn != null
+            )
+            .map(entry => entry.startedOn! * 1000) // Convert to milliseconds
+            .sort((a, b) => b - a)[0]; // Get most recent
+
+        // If no battles found
+        if (!lastBattle) {
+            return (
+                <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">
+                    No battles yet
+                </span>
+            );
+        }
+
+        // Calculate time since last battle
+        const timeSinceLastBattle = now - lastBattle;
+        const hoursSince = Math.floor(timeSinceLastBattle / (1000 * 60 * 60));
+        const minutesSince = Math.floor((timeSinceLastBattle % (1000 * 60 * 60)) / (1000 * 60));
+
+        // If more than 12 hours passed
+        if (timeSinceLastBattle >= millisecondsPerToken) {
+            return (
+                <div className="text-sm">
+                    <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">Available</span>
+                    <span className="ml-2 text-gray-500">
+                        ({hoursSince}h {minutesSince}m since last)
+                    </span>
+                </div>
+            );
+        }
+
+        return (
+            <span className="text-sm">
+                {hoursSince}h {minutesSince}m since last attack
+            </span>
+        );
+    };
+
+    const summaryColumnDefs: ColDef<UserSummary>[] = [
+        {
+            field: 'userId',
+            headerName: 'User Nickname',
+            valueGetter: col => userIdMapper(col.data?.userId ?? '000'),
+            sortable: true,
+        },
+        { field: 'userId', headerName: 'Player ID', filter: true },
+        {
+            field: 'totalDamageDealt',
+            headerName: 'Total Damage',
+            filter: 'agNumberColumnFilter',
+            valueFormatter: params => params.value.toLocaleString(),
+        },
+        {
+            headerName: 'Bomb Status',
+            field: 'userId',
+            cellRenderer: BombStatusRenderer,
+            sortable: false,
+            width: 120,
+        },
+        {
+            headerName: 'Token Status',
+            field: 'userId',
+            cellRenderer: TokenStatusRenderer,
+            sortable: false,
+            width: 120,
+        },
+        { field: 'attackCount', headerName: 'Total Attacks' },
+        { field: 'bossCount', headerName: 'Boss Attacks' },
+        { field: 'sideBossCount', headerName: 'Side Boss Attacks' },
+        { field: 'battleCount', headerName: 'Battle Attacks' },
+        { field: 'bombCount', headerName: 'Bomb Attacks' },
+        {
+            field: 'highestDamage',
+            headerName: 'Highest Damage',
+            valueFormatter: params => params.value.toLocaleString(),
+        },
+
+        {
+            headerName: 'Avg Damage/Attack',
+            valueGetter: (params: ValueGetterParams) => {
+                return params.data.attackCount > 0 ? params.data.totalDamageDealt / params.data.attackCount : 0;
             },
-            {
-                headerName: 'Most Used Heroes',
-                field: 'topHeroes',
-                width: 200,
-                valueFormatter: params => {
-                    const topHeroes = [...params.value.entries()]
-                        .sort((a, b) => b[1] - a[1])
-                        .slice(0, 3)
-                        .map(([key]) => key);
-                    return topHeroes.join(', ');
-                },
+            valueFormatter: params => Math.round(params.value).toLocaleString(),
+        },
+        {
+            headerName: 'Most Used Heroes',
+            field: 'topHeroes',
+            width: 200,
+            valueFormatter: params => {
+                const topHeroes = [...params.value.entries()]
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3)
+                    .map(([key]) => key);
+                return topHeroes.join(', ');
             },
-        ],
-        []
-    );
+        },
+    ];
 
     const summaryData = useMemo(() => {
         // Generate summary data by user
@@ -493,7 +593,7 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
             </div>
 
             {/* Filters */}
-            <div className="bg-white rounded-lg shadow p-4 mb-6">
+            {/* <div className="bg-white rounded-lg shadow p-4 mb-6">
                 <h2 className="text-lg font-semibold mb-3">Filters</h2>
                 <div className="flex flex-wrap gap-4">
                     <div>
@@ -511,26 +611,30 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
                         </select>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* Stats Dashboard */}
             {stats && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                    <div className="bg-white rounded-lg shadow p-4">
-                        <div className="text-gray-500 text-sm">Total Damage</div>
-                        <div className="text-2xl font-bold mt-1">{stats.totalDamage.toLocaleString()}</div>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div className="bg-overlay rounded-lg shadow p-4">
+                        <div className="text-muted-fg text-sm">Total Damage</div>
+                        <div className="text-2xl font-bold mt-1 text-overlay-fg">
+                            {stats.totalDamage.toLocaleString()}
+                        </div>
                     </div>
-                    <div className="bg-white rounded-lg shadow p-4">
-                        <div className="text-gray-500 text-sm">Average Damage</div>
-                        <div className="text-2xl font-bold mt-1">{Math.round(stats.avgDamage).toLocaleString()}</div>
+                    <div className="bg-overlay rounded-lg shadow p-4">
+                        <div className="text-muted-fg text-sm">Average Damage</div>
+                        <div className="text-2xl font-bold mt-1 text-overlay-fg">
+                            {Math.round(stats.avgDamage).toLocaleString()}
+                        </div>
                     </div>
-                    <div className="bg-white rounded-lg shadow p-4">
-                        <div className="text-gray-500 text-sm">Participants</div>
-                        <div className="text-2xl font-bold mt-1">{stats.userCount}</div>
+                    <div className="bg-overlay rounded-lg shadow p-4">
+                        <div className="text-muted-fg text-sm">Participants</div>
+                        <div className="text-2xl font-bold mt-1 text-overlay-fg">{stats.userCount}</div>
                     </div>
-                    <div className="bg-white rounded-lg shadow p-4">
-                        <div className="text-gray-500 text-sm">Enemies Defeated</div>
-                        <div className="text-2xl font-bold mt-1">{stats.defeatedEnemies}</div>
+                    <div className="bg-overlay rounded-lg shadow p-4">
+                        <div className="text-muted-fg text-sm">Enemies Defeated</div>
+                        <div className="text-2xl font-bold mt-1 text-overlay-fg">{stats.defeatedEnemies}</div>
                     </div>
                 </div>
             )}
@@ -538,18 +642,18 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
             {/* Attack Type Breakdown */}
             {stats && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <div className="bg-white rounded-lg shadow p-4">
-                        <h2 className="text-lg font-semibold mb-3">Attack Types</h2>
+                    <div className="bg-overlay rounded-lg shadow p-4">
+                        <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Attack Types</h2>
                         <div className="flex h-8 rounded-md overflow-hidden">
                             <div
-                                className="bg-blue-500 h-full text-white flex items-center justify-center text-sm"
+                                className="bg-accent text-accent-fg flex items-center justify-center text-sm"
                                 style={{
                                     width: `${(stats.battleAttacks / (stats.battleAttacks + stats.bombAttacks)) * 100}%`,
                                 }}>
                                 {stats.battleAttacks} Battle
                             </div>
                             <div
-                                className="bg-purple-500 h-full text-white flex items-center justify-center text-sm"
+                                className="bg-secondary text-secondary-fg flex items-center justify-center text-sm"
                                 style={{
                                     width: `${(stats.bombAttacks / (stats.battleAttacks + stats.bombAttacks)) * 100}%`,
                                 }}>
@@ -557,18 +661,18 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-white rounded-lg shadow p-4">
-                        <h2 className="text-lg font-semibold mb-3">Encounter Types</h2>
+                    <div className="bg-overlay rounded-lg shadow p-4">
+                        <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Encounter Types</h2>
                         <div className="flex h-8 rounded-md overflow-hidden">
                             <div
-                                className="bg-red-500 h-full text-white flex items-center justify-center text-sm"
+                                className="bg-danger text-danger-fg flex items-center justify-center text-sm"
                                 style={{
                                     width: `${(stats.bossEncounters / (stats.bossEncounters + stats.sideBossEncounters)) * 100}%`,
                                 }}>
                                 {stats.bossEncounters} Boss
                             </div>
                             <div
-                                className="bg-amber-500 h-full text-white flex items-center justify-center text-sm"
+                                className="bg-warning text-warning-fg flex items-center justify-center text-sm"
                                 style={{
                                     width: `${(stats.sideBossEncounters / (stats.bossEncounters + stats.sideBossEncounters)) * 100}%`,
                                 }}>
@@ -582,12 +686,12 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
             {/* Top Performers */}
             {stats && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <div className="bg-white rounded-lg shadow p-4">
-                        <h2 className="text-lg font-semibold mb-3">Most Active</h2>
+                    <div className="bg-overlay rounded-lg shadow p-4">
+                        <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Most Active</h2>
                         <div className="flex items-center">
-                            <div className="bg-indigo-100 p-3 rounded-full mr-4">
+                            <div className="bg-accent/20 p-3 rounded-full mr-4">
                                 <svg
-                                    className="h-6 w-6 text-indigo-600"
+                                    className="h-6 w-6 text-accent"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -600,17 +704,17 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
                                 </svg>
                             </div>
                             <div>
-                                <div className="font-medium">{stats.mostActiveUser}</div>
-                                <div className="text-sm text-gray-500">{stats.mostActiveCount} attacks</div>
+                                <div className="font-medium text-overlay-fg">{stats.mostActiveUser}</div>
+                                <div className="text-sm text-muted-fg">{stats.mostActiveCount} attacks</div>
                             </div>
                         </div>
                     </div>
-                    <div className="bg-white rounded-lg shadow p-4">
-                        <h2 className="text-lg font-semibold mb-3">Highest Damage</h2>
+                    <div className="bg-overlay rounded-lg shadow p-4">
+                        <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Highest Damage</h2>
                         <div className="flex items-center">
-                            <div className="bg-red-100 p-3 rounded-full mr-4">
+                            <div className="bg-danger/20 p-3 rounded-full mr-4">
                                 <svg
-                                    className="h-6 w-6 text-red-600"
+                                    className="h-6 w-6 text-danger"
                                     fill="none"
                                     stroke="currentColor"
                                     viewBox="0 0 24 24"
@@ -623,8 +727,8 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
                                 </svg>
                             </div>
                             <div>
-                                <div className="font-medium">{stats.userWithHighestDamage}</div>
-                                <div className="text-sm text-gray-500">
+                                <div className="font-medium text-overlay-fg">{stats.userWithHighestDamage}</div>
+                                <div className="text-sm text-muted-fg">
                                     {stats.highestDamage.toLocaleString()} damage
                                 </div>
                             </div>
@@ -634,8 +738,8 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
             )}
 
             {/* Player Summary Table */}
-            <div className="bg-white rounded-lg shadow p-4 mb-6">
-                <h2 className="text-lg font-semibold mb-3">Player Summary</h2>
+            <div className="bg-overlay rounded-lg shadow p-4 mb-6">
+                <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Player Summary</h2>
                 <div className="ag-theme-alpine w-full h-96">
                     <AgGridReact
                         modules={[AllCommunityModule]}
@@ -650,8 +754,8 @@ export const TacticusGuildRaidVisualization: React.FC = () => {
             </div>
 
             {/* Raid Entries Table */}
-            <div className="bg-white rounded-lg shadow p-4">
-                <h2 className="text-lg font-semibold mb-3">Raid Attacks</h2>
+            <div className="bg-overlay rounded-lg shadow p-4">
+                <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Raid Attacks</h2>
                 <div className="ag-theme-alpine w-full h-96">
                     <AgGridReact
                         modules={[AllCommunityModule]}

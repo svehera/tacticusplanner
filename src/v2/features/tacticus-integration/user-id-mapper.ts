@@ -1,3 +1,5 @@
+import { IGuildMember } from '@/models/interfaces';
+
 const adjectives = [
     'Vengeful',
     'Imperial',
@@ -63,16 +65,23 @@ const units = [
     'Vanguard',
 ];
 
-export const mapUserIdToName = (userId: string): string => {
-    const bytes = userId.replace(/-/g, '').split('');
+export const mapUserIdToName =
+    (members: IGuildMember[]) =>
+    (userId: string): string => {
+        const existingUser = members.find(member => member.userId === userId);
+        if (existingUser) {
+            return existingUser.inGameName || existingUser.username;
+        }
 
-    const adjIndex = parseInt(bytes[0] + bytes[1], 16) % adjectives.length;
-    const factionIndex = parseInt(bytes[2] + bytes[3], 16) % factions.length;
-    const unitIndex = parseInt(bytes[4] + bytes[5], 16) % units.length;
-    const number = parseInt(bytes.slice(-2).join(''), 16) % 100;
+        const bytes = userId.replace(/-/g, '').split('');
 
-    return `${adjectives[adjIndex]}${factions[factionIndex]}${units[unitIndex]}${number}`;
-};
+        const adjIndex = parseInt(bytes[0] + bytes[1], 16) % adjectives.length;
+        const factionIndex = parseInt(bytes[2] + bytes[3], 16) % factions.length;
+        const unitIndex = parseInt(bytes[4] + bytes[5], 16) % units.length;
+        const number = parseInt(bytes.slice(-2).join(''), 16) % 100;
+
+        return `${adjectives[adjIndex]}${factions[factionIndex]}${units[unitIndex]}${number}`;
+    };
 
 // Example outputs:
 // VengefulUltramarineChampion42

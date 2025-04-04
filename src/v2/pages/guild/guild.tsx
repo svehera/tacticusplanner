@@ -33,23 +33,18 @@ export const Guild: React.FC = () => {
         setEditedMembers(guild.members);
     }, [guild.members]);
 
-    const updateUsername = (value: string, index: number) => {
-        const user = editedMembers.find(x => x.index === index);
-        if (user) {
-            user.username = value;
-            setEditedMembers([...editedMembers]);
+    const handleFieldChange = (index: number) => (field: keyof IGuildMember, value: string) => {
+        const existingUserIndex = editedMembers.findIndex(x => x.index === index);
+        if (existingUserIndex >= 0) {
+            const updatedMembers = [...editedMembers];
+            updatedMembers[existingUserIndex] = {
+                ...updatedMembers[existingUserIndex],
+                [field]: value,
+            };
+            setEditedMembers(updatedMembers);
         } else {
-            setEditedMembers([...editedMembers, { username: value, shareToken: '', index }]);
-        }
-    };
-
-    const updateShareToken = (value: string, index: number) => {
-        const user = editedMembers.find(x => x.index === index);
-        if (user) {
-            user.shareToken = value;
-            setEditedMembers([...editedMembers]);
-        } else {
-            setEditedMembers([...editedMembers, { username: '', shareToken: value, index }]);
+            const newMember: IGuildMember = { username: '', shareToken: '', index, [field]: value };
+            setEditedMembers([...editedMembers, newMember]);
         }
     };
 
@@ -106,11 +101,13 @@ export const Guild: React.FC = () => {
                 <div className="flex-box column">
                     <Typography color="error">Some users data is not valid:</Typography>
                     <ul>
-                        {data.invalidUsers.map(x => (
-                            <li key={x.username}>
-                                <b>{x.username}</b> - {x.reason}
-                            </li>
-                        ))}
+                        {data.invalidUsers
+                            .filter(x => !!x.username)
+                            .map(x => (
+                                <li key={x.username}>
+                                    <b>{x.username}</b> - {x.reason}
+                                </li>
+                            ))}
                     </ul>
                 </div>
             )}
@@ -134,13 +131,13 @@ export const Guild: React.FC = () => {
                             shareToken: '',
                             index: i,
                         };
+
                         return (
                             <GuildMemberInput
                                 key={i}
                                 index={i}
                                 member={guildMember}
-                                onUsernameChange={value => updateUsername(value, i)}
-                                onShareTokenChange={value => updateShareToken(value, i)}
+                                onFieldChange={handleFieldChange(i)}
                             />
                         );
                     })}

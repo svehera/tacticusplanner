@@ -417,6 +417,8 @@ export interface IGuild {
 export interface IGuildMember {
     username: string;
     shareToken: string;
+    userId?: string;
+    inGameName?: string;
     index: number;
 }
 
