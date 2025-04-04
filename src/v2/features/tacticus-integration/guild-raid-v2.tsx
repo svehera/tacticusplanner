@@ -19,13 +19,16 @@ import { RarityImage } from '@/v2/components/images/rarity-image';
 interface UserSummary {
     userId: string;
     totalDamageDealt: number;
-    attackCount: number;
+    battleBossCount: number;
+    battleSideBossCount: number;
     bombCount: number;
-    battleCount: number;
-    bossCount: number;
-    sideBossCount: number;
     highestDamage: number;
-    topHeroes: Map<string, number>; // Array of hero names
+    bossDamage: number; // Changed from legendaryBossDamage
+    sideBossDamage: number; // Changed from legendarySideBossDamage
+    topHeroes: Map<string, number>;
+    topMachinesOfWar: Map<string, number>;
+    topBosses: Map<string, number>;
+    topSideBosses: Map<string, number>;
 }
 
 // Helper functions for better display
@@ -484,7 +487,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             sortable: true,
             filter: true,
         },
-        { field: 'userId', headerName: 'Player ID', width: 100, filter: true },
+        { field: 'userId', headerName: 'User ID', width: 100, filter: true },
         {
             headerName: 'Bomb Status',
             field: 'userId',
@@ -504,24 +507,40 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             headerName: 'Total Damage',
             filter: 'agNumberColumnFilter',
             valueFormatter: params => params.value.toLocaleString(),
+            width: 120,
         },
-        { field: 'attackCount', headerName: 'Total Attacks' },
-        { field: 'bossCount', headerName: 'Boss Attacks' },
-        { field: 'sideBossCount', headerName: 'Side Boss Attacks' },
-        { field: 'battleCount', headerName: 'Battle Attacks' },
-        { field: 'bombCount', headerName: 'Bomb Attacks' },
         {
-            field: 'highestDamage',
-            headerName: 'Highest Damage',
-            valueFormatter: params => params.value.toLocaleString(),
+            field: 'battleBossCount',
+            headerName: 'Boss Battles',
+            width: 80,
         },
-
         {
-            headerName: 'Avg Damage/Attack',
+            field: 'battleSideBossCount',
+            headerName: 'Side Boss Battles',
+            width: 80,
+        },
+        {
+            field: 'bombCount',
+            headerName: 'Bomb Attacks',
+            width: 80,
+        },
+        {
+            headerName: 'Avg Dmg/Boss', // Updated header
             valueGetter: (params: ValueGetterParams) => {
-                return params.data.attackCount > 0 ? params.data.totalDamageDealt / params.data.attackCount : 0;
+                return params.data.battleBossCount > 0 ? params.data.bossDamage / params.data.battleBossCount : 0;
             },
             valueFormatter: params => Math.round(params.value).toLocaleString(),
+            width: 120,
+        },
+        {
+            headerName: 'Avg Dmg/Side Boss', // Updated header
+            valueGetter: (params: ValueGetterParams) => {
+                return params.data.battleSideBossCount > 0
+                    ? params.data.sideBossDamage / params.data.battleSideBossCount
+                    : 0;
+            },
+            valueFormatter: params => Math.round(params.value).toLocaleString(),
+            width: 120,
         },
         {
             headerName: 'Most Used Heroes',
@@ -535,10 +554,52 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                 return topHeroes.join(', ');
             },
         },
+        {
+            headerName: 'Most Used MoW',
+            field: 'topMachinesOfWar',
+            width: 200,
+            valueFormatter: params => {
+                const topMoW = [...params.value.entries()]
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3)
+                    .map(([key]) => key);
+                return topMoW.join(', ');
+            },
+        },
+        {
+            headerName: 'Most Encountered Bosses',
+            field: 'topBosses',
+            width: 200,
+            valueFormatter: params => {
+                if (!params.value) return '';
+                const topBosses = [...params.value.entries()]
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3)
+                    .map(([key, count]) => `${key}(${count})`);
+                return topBosses.join(', ');
+            },
+        },
+        {
+            headerName: 'Most Encountered Side Bosses',
+            field: 'topSideBosses',
+            width: 200,
+            valueFormatter: params => {
+                if (!params.value) return '';
+                const topSideBosses = [...params.value.entries()]
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3)
+                    .map(([key, count]) => `${key}(${count})`);
+                return topSideBosses.join(', ');
+            },
+        },
+        {
+            field: 'highestDamage',
+            headerName: 'Highest Damage',
+            valueFormatter: params => params.value.toLocaleString(),
+        },
     ];
 
     const summaryData = useMemo(() => {
-        // Generate summary data by user
         const userMap = new Map<string, UserSummary>();
 
         filteredEntries.forEach(entry => {
@@ -546,30 +607,39 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                 userMap.set(entry.userId, {
                     userId: entry.userId,
                     totalDamageDealt: 0,
-                    attackCount: 0,
+                    battleBossCount: 0,
+                    battleSideBossCount: 0,
                     bombCount: 0,
-                    battleCount: 0,
-                    bossCount: 0,
-                    sideBossCount: 0,
                     highestDamage: 0,
+                    bossDamage: 0,
+                    sideBossDamage: 0,
                     topHeroes: new Map(),
+                    topMachinesOfWar: new Map(),
+                    topBosses: new Map(),
+                    topSideBosses: new Map(),
                 });
             }
 
             const userSummary = userMap.get(entry.userId)!;
             userSummary.totalDamageDealt += entry.damageDealt;
-            userSummary.attackCount += 1;
 
             if (entry.damageType === TacticusDamageType.Bomb) {
                 userSummary.bombCount += 1;
             } else {
-                userSummary.battleCount += 1;
-            }
-
-            if (entry.encounterType === TacticusEncounterType.Boss) {
-                userSummary.bossCount += 1;
-            } else {
-                userSummary.sideBossCount += 1;
+                // Battle attacks
+                if (entry.encounterType === TacticusEncounterType.Boss) {
+                    userSummary.battleBossCount += 1;
+                    userSummary.bossDamage += entry.damageDealt;
+                    // Track boss encounters
+                    userSummary.topBosses.set(entry.type, (userSummary.topBosses.get(entry.type) || 0) + 1);
+                } else {
+                    userSummary.battleSideBossCount += 1;
+                    userSummary.sideBossDamage += entry.damageDealt;
+                    // Track side boss encounters
+                    const match = entry.unitId.match(/MiniBoss\d+(.+)/);
+                    const unitId = match ? match[1] : entry.unitId;
+                    userSummary.topSideBosses.set(unitId, (userSummary.topSideBosses.get(unitId) || 0) + 1);
+                }
             }
 
             // Track highest damage
@@ -581,6 +651,14 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             entry.heroDetails.forEach(hero => {
                 userSummary.topHeroes.set(hero.unitId, (userSummary.topHeroes.get(hero.unitId) || 0) + 1);
             });
+
+            // Track top machines of war
+            if (entry.machineOfWarDetails?.unitId) {
+                userSummary.topMachinesOfWar.set(
+                    entry.machineOfWarDetails.unitId,
+                    (userSummary.topMachinesOfWar.get(entry.machineOfWarDetails.unitId) || 0) + 1
+                );
+            }
         });
 
         return Array.from(userMap.values());
