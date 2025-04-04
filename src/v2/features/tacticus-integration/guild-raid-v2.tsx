@@ -52,6 +52,24 @@ const getRarityLabel = (rarity: Rarity): string => {
     }
 };
 
+const TOKEN_REGEN_HOURS = 12;
+const millisecondsPerToken = TOKEN_REGEN_HOURS * 60 * 60 * 1000;
+interface TokenStatus {
+    count: number;
+    reloadStart: number;
+}
+
+const updateTokenTo = (tokenState: TokenStatus, time: number): void => {
+    const restored = Math.floor((time - tokenState.reloadStart) / millisecondsPerToken);
+    if (restored + tokenState.count >= 3) {
+        tokenState.count = 3;
+        tokenState.reloadStart = time;
+    } else {
+        tokenState.count += restored;
+        tokenState.reloadStart += restored * millisecondsPerToken;
+    }
+};
+
 // Component for rendering HP bar
 const HPBarRenderer: React.FC<{ value: number; data: TacticusGuildRaidEntry }> = ({ value, data }) => {
     const percentage = ((data.maxHp - data.remainingHp) / data.maxHp) * 100;
@@ -417,52 +435,54 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     };
 
     const TokenStatusRenderer: React.FC<{ data: UserSummary }> = ({ data }) => {
-        const TOKEN_REGEN_HOURS = 12;
-        const millisecondsPerToken = TOKEN_REGEN_HOURS * 60 * 60 * 1000;
         const now = Date.now();
 
-        // Get the most recent battle
-        const lastBattle = filteredEntries
+        // Initialize with worst case scenario:
+        // season started at first damage, user had played his 3 token at the exact end of last season
+        // 2 tokens recharged from the 24H inter season
+        const firstEntryStart = raidData.entries.find(entry => entry.startedOn !== null)?.startedOn ?? 0 * 1000;
+        const seasonStart = firstEntryStart === 0 ? now : firstEntryStart;
+        const tokenStatus = {
+            count: 2,
+            reloadStart: seasonStart,
+        };
+
+        raidData.entries
             .filter(
                 entry =>
                     entry.userId === data.userId &&
                     entry.damageType === TacticusDamageType.Battle &&
                     entry.startedOn != null
             )
-            .map(entry => entry.startedOn! * 1000) // Convert to milliseconds
-            .sort((a, b) => b - a)[0]; // Get most recent
+            .forEach(entry => {
+                updateTokenTo(tokenStatus, entry.startedOn! * 1000);
+                tokenStatus.count--;
+                if (tokenStatus.count < 0) {
+                    tokenStatus.count = 0;
+                    tokenStatus.reloadStart = entry.startedOn! * 1000;
+                }
+            });
+        updateTokenTo(tokenStatus, now);
 
-        // If no battles found
-        if (!lastBattle) {
+        if (tokenStatus.count > 0) {
+            // If tokens are avaiable, show the number
             return (
                 <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">
-                    No battles yet
+                    {tokenStatus.count} token{tokenStatus.count > 1 ? 's' : ''} available
+                </span>
+            );
+        } else {
+            // Otherwise show cooldown until next token
+            const timeReloading = now - tokenStatus.reloadStart;
+            const cooldown = millisecondsPerToken - timeReloading;
+            const hoursCooldown = Math.floor(cooldown / (1000 * 60 * 60));
+            const minutesCooldown = Math.floor((cooldown % (1000 * 60 * 60)) / (1000 * 60));
+            return (
+                <span className="text-sm">
+                    {hoursCooldown}h {minutesCooldown}m remaining cooldown
                 </span>
             );
         }
-
-        // Calculate time since last battle
-        const timeSinceLastBattle = now - lastBattle;
-        const hoursSince = Math.floor(timeSinceLastBattle / (1000 * 60 * 60));
-        const minutesSince = Math.floor((timeSinceLastBattle % (1000 * 60 * 60)) / (1000 * 60));
-
-        // If more than 12 hours passed
-        if (timeSinceLastBattle >= millisecondsPerToken) {
-            return (
-                <div className="text-sm">
-                    <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">Available</span>
-                    <span className="ml-2 text-gray-500">
-                        ({hoursSince}h {minutesSince}m since last)
-                    </span>
-                </div>
-            );
-        }
-
-        return (
-            <span className="text-sm">
-                {hoursSince}h {minutesSince}m since last attack
-            </span>
-        );
     };
 
     const summaryColumnDefs: ColDef<UserSummary>[] = [
