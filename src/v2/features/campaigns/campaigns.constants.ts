@@ -237,7 +237,7 @@ export const campaignsByGroup: Record<string, Campaign[]> = mapValues(groupBy(ca
     value.map(x => x.id)
 );
 
-const campaignEvents: CampaignGroupType[] = [CampaignGroupType.adMechCE];
+const campaignEvents: CampaignGroupType[] = [CampaignGroupType.adMechCE, CampaignGroupType.tyranidCE];
 
 export const campaignEventsLocations: Campaign[] = campaignsList
     .filter(x => campaignEvents.includes(x.groupType))

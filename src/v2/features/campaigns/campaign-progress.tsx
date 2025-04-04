@@ -67,8 +67,17 @@ export const CampaignProgress: React.FC<Props> = ({
 
     // Filter characters required for the campaign.
     const coreCharacters = useMemo(
-        () => characters.filter(x => x.faction === campaign.faction && x.requiredInCampaign),
-        [characters]
+        () =>
+            characters.filter(x => {
+                if (x.campaignsRequiredIn == undefined) return false;
+                return x.campaignsRequiredIn!.reduce((inCampaign, campaignPrefix) => {
+                    if (campaign.name.indexOf('Mirror') != -1 && campaignPrefix.indexOf('Mirror') == -1) {
+                        return inCampaign;
+                    }
+                    return inCampaign || campaign.name.startsWith(campaignPrefix);
+                }, false);
+            }),
+        [characters, campaign]
     );
 
     const updateProgress = (value: number): void => {
