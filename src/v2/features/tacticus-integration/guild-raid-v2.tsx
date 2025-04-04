@@ -455,7 +455,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         // Initialize with worst case scenario:
         // season started at first damage, user had played his 3 token at the exact end of last season
         // 2 tokens recharged from the 24H inter season
-        const firstEntryStart = raidData.entries.find(entry => entry.startedOn !== null)?.startedOn ?? 0 * 1000;
+        const firstEntryStart = (raidData.entries.find(entry => entry.startedOn !== null)?.startedOn ?? 0) * 1000;
         const seasonStart = firstEntryStart === 0 ? now : firstEntryStart;
         const tokenStatus = {
             count: 2,
