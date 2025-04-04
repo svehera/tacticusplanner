@@ -482,7 +482,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         updateTokenTo(tokenStatus, now);
 
         if (tokenStatus.count > 0) {
-            // If tokens are avaiable, show the number
+            // If tokens are available, show the number
             return (
                 <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">
                     {tokenStatus.count} token{tokenStatus.count > 1 ? 's' : ''} available
