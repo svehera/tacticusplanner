@@ -62,6 +62,7 @@ interface TokenStatus {
 const updateTokenTo = (tokenState: TokenStatus, time: number): void => {
     const restored = Math.floor((time - tokenState.reloadStart) / millisecondsPerToken);
     if (restored + tokenState.count >= 3) {
+        // Player has capped, now we have the exact count and time
         tokenState.count = 3;
         tokenState.reloadStart = time;
     } else {
@@ -458,6 +459,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                 updateTokenTo(tokenStatus, entry.startedOn! * 1000);
                 tokenStatus.count--;
                 if (tokenStatus.count < 0) {
+                    // Estimation was too pessimist, let's refine according to this datapoint
                     tokenStatus.count = 0;
                     tokenStatus.reloadStart = entry.startedOn! * 1000;
                 }
