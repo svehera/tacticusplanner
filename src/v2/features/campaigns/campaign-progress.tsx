@@ -74,7 +74,7 @@ export const CampaignProgress: React.FC<Props> = ({
                     if (campaign.name.indexOf('Mirror') != -1 && campaignPrefix.indexOf('Mirror') == -1) {
                         return inCampaign;
                     }
-                    return campaign.name.startsWith(campaignPrefix);
+                    return inCampaign || campaign.name.startsWith(campaignPrefix);
                 }, false);
             }),
         [characters, campaign]
