@@ -333,6 +333,7 @@ export class StaticDataService {
             movement: rawData.Movement,
             forcedSummons: rawData.ForcedSummons,
             requiredInCampaign: rawData.RequiredInCampaign,
+            campaignsRequiredIn: rawData.CampaignsRequiredIn,
             legendaryEvents: {} as ICharLegendaryEvents,
             traits: rawData.Traits,
             icon: rawData.Icon,

@@ -17,6 +17,7 @@ export const MyProgress = () => {
     const dispatch = useContext(DispatchContext);
 
     const standardCampaignsByGroup = Object.entries(groupBy(CampaignsService.standardCampaigns, 'groupType'));
+    const campaignEventsByGroup = Object.entries(groupBy(CampaignsService.campaignEvents, 'groupType'));
 
     const updateCampaignProgress = (id: Campaign, value: number) => {
         dispatch.campaignsProgress({
@@ -53,7 +54,13 @@ export const MyProgress = () => {
                 ))}
             </div>
             <h2>Campaign Events</h2>
-            <div className="flex gap-10 flex-wrap">{CampaignsService.campaignEvents.map(renderCampaignProgress)}</div>
+            <div className="flex gap-10 flex-wrap">
+                {campaignEventsByGroup.map(([group, campaigns]) => (
+                    <div key={group} className="flex gap-10 flex-wrap">
+                        {campaigns.map(renderCampaignProgress)}
+                    </div>
+                ))}
+            </div>
         </>
     );
 };
