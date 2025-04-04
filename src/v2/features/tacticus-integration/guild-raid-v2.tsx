@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { AllCommunityModule, ColDef, themeBalham, ValueGetterParams } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham, ValueGetterParams } from 'ag-grid-community';
 import {
     TacticusDamageType,
     TacticusEncounterType,
@@ -12,6 +12,8 @@ import { Rarity } from 'src/models/enums';
 import { getTacticusGuildRaidData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
 import { mapUserIdToName } from './user-id-mapper';
 import { IGuildMember } from '@/models/interfaces';
+import { ITableRow } from '@/routes/legendary-events/legendary-events.interfaces';
+import { RarityImage } from '@/v2/components/images/rarity-image';
 
 // Type for aggregated user data
 interface UserSummary {
@@ -104,8 +106,8 @@ const DamageTypeRenderer: React.FC<{ value: TacticusDamageType }> = ({ value }) 
 const DurationRenderer: React.FC<{ data: TacticusGuildRaidEntry }> = ({ data }) => {
     if (!data.startedOn || !data.completedOn) return <span>N/A</span>;
 
-    const startTime = new Date(data.startedOn);
-    const endTime = new Date(data.completedOn);
+    const startTime = new Date(data.startedOn * 1000);
+    const endTime = new Date(data.completedOn * 1000);
     const durationMs = endTime.getTime() - startTime.getTime();
 
     // Format duration
@@ -116,20 +118,6 @@ const DurationRenderer: React.FC<{ data: TacticusGuildRaidEntry }> = ({ data }) 
         <span>
             {minutes}m {seconds}s
         </span>
-    );
-};
-
-// Component for rendering unit details
-const UnitDetailsRenderer: React.FC<{ value: TacticusGuildRaidUnit[] }> = ({ value }) => {
-    if (!value || value.length === 0) return <span>No heroes</span>;
-
-    const totalPower = value.reduce((sum, unit) => sum + unit.power, 0);
-
-    return (
-        <div>
-            <div className="font-medium text-sm">{value.length} Heroes</div>
-            <div className="text-xs text-gray-500">Total Power: {totalPower.toLocaleString()}</div>
-        </div>
     );
 };
 
@@ -148,7 +136,6 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [userFilters, setUserFilters] = useState<string[]>([]);
-    // const [selectedTier, setSelectedTier] = useState<number | null>(null);
     const [selectedUnitType, setSelectedUnitType] = useState<string | null>(null);
     const [filteredEntries, setFilteredEntries] = useState<TacticusGuildRaidEntry[]>([]);
 
@@ -160,7 +147,6 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                 setRaidData(response.data ?? null);
                 setLoading(false);
 
-                // Extract unique users and tiers for filtering
                 const uniqueUsers = [...new Set(response.data?.entries.map(entry => entry.userId))];
                 setUserFilters(uniqueUsers);
                 setFilteredEntries(response.data?.entries ?? []);
@@ -186,12 +172,13 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     }, [raidData, selectedUnitType]);
 
     // AG Grid column definitions
-    const columnDefs: ColDef<any>[] = [
+    const columnDefs: ColDef<TacticusGuildRaidEntry>[] = [
         {
             field: 'userId',
             headerName: 'User Nickname',
             valueGetter: col => userIdMapper(col.data?.userId ?? '000'),
             sortable: true,
+            filter: true,
         },
         {
             headerName: 'User ID',
@@ -201,18 +188,22 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             width: 120,
         },
         {
-            headerName: 'Tier',
-            field: 'tier',
+            headerName: 'Rarity',
+            field: 'rarity',
             sortable: true,
             filter: true,
             width: 80,
+            cellRenderer: (props: ICellRendererParams<TacticusGuildRaidEntry>) => {
+                const rarity = props.value ?? 0;
+                return <RarityImage rarity={rarity} />;
+            },
         },
         {
-            headerName: 'Set',
-            field: 'set',
+            headerName: 'Enemy Type',
+            field: 'type',
             sortable: true,
             filter: true,
-            width: 80,
+            width: 140,
         },
         {
             headerName: 'Encounter',
@@ -223,19 +214,31 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             width: 130,
         },
         {
-            headerName: 'Enemy Type',
-            field: 'type',
+            headerName: 'Unit ID',
+            field: 'unitId',
             sortable: true,
             filter: true,
             width: 140,
+            valueGetter: params => {
+                if (params.data?.encounterType === TacticusEncounterType.SideBoss) {
+                    const match = params.data.unitId.match(/MiniBoss\d+(.+)/);
+                    return match ? match[1] : params.data.unitId;
+                }
+
+                if (params.data?.encounterType === TacticusEncounterType.Boss) {
+                    return params.data.type;
+                }
+
+                return params.data?.unitId;
+            },
         },
         {
-            headerName: 'HP',
-            field: 'damageDealt',
-            cellRenderer: HPBarRenderer,
+            headerName: 'Attack Type',
+            field: 'damageType',
+            cellRenderer: DamageTypeRenderer,
             sortable: true,
             filter: true,
-            width: 240,
+            width: 130,
         },
         {
             headerName: 'Damage',
@@ -246,12 +249,36 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             width: 120,
         },
         {
-            headerName: 'Attack Type',
-            field: 'damageType',
-            cellRenderer: DamageTypeRenderer,
+            headerName: 'Heroes',
+            field: 'heroDetails',
+            sortable: false,
+            filter: true,
+            width: 150,
+            valueFormatter: params => params.value?.map((unit: TacticusGuildRaidUnit) => unit.unitId).join(', '),
+        },
+        {
+            headerName: 'MoW',
+            field: 'machineOfWarDetails',
+            sortable: false,
+            filter: true,
+            width: 150,
+            valueFormatter: params => params.value?.unitId,
+        },
+        {
+            headerName: 'HP',
+            field: 'damageDealt',
+            cellRenderer: HPBarRenderer,
             sortable: true,
             filter: true,
-            width: 130,
+            width: 240,
+        },
+        {
+            headerName: 'Duration',
+            field: 'completedOn',
+            cellRenderer: DurationRenderer,
+            sortable: true,
+            filter: true,
+            width: 120,
         },
         {
             headerName: 'Started',
@@ -269,22 +296,6 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             sortable: true,
             filter: true,
             width: 180,
-        },
-        {
-            headerName: 'Duration',
-            field: 'completedOn',
-            cellRenderer: DurationRenderer,
-            sortable: true,
-            filter: true,
-            width: 120,
-        },
-        {
-            headerName: 'Heroes',
-            field: 'heroDetails',
-            cellRenderer: UnitDetailsRenderer,
-            sortable: false,
-            filter: false,
-            width: 150,
         },
     ];
 
@@ -471,14 +482,9 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             headerName: 'User Nickname',
             valueGetter: col => userIdMapper(col.data?.userId ?? '000'),
             sortable: true,
+            filter: true,
         },
-        { field: 'userId', headerName: 'Player ID', filter: true },
-        {
-            field: 'totalDamageDealt',
-            headerName: 'Total Damage',
-            filter: 'agNumberColumnFilter',
-            valueFormatter: params => params.value.toLocaleString(),
-        },
+        { field: 'userId', headerName: 'Player ID', width: 100, filter: true },
         {
             headerName: 'Bomb Status',
             field: 'userId',
@@ -492,6 +498,12 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             cellRenderer: TokenStatusRenderer,
             sortable: false,
             width: 120,
+        },
+        {
+            field: 'totalDamageDealt',
+            headerName: 'Total Damage',
+            filter: 'agNumberColumnFilter',
+            valueFormatter: params => params.value.toLocaleString(),
         },
         { field: 'attackCount', headerName: 'Total Attacks' },
         { field: 'bossCount', headerName: 'Boss Attacks' },
