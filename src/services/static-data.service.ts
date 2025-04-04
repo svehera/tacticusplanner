@@ -124,8 +124,10 @@ export class StaticDataService {
 
     private static parseAlliance(alliance: string): Alliance | undefined {
         switch (alliance) {
-            // Towen gave us this data, and he didn't capitalize xenos. /shrug.
+            // Towen gave us this data, and he wasn't consistent in capitalizizing xenos. /shrug.
             case 'xenos':
+                return Alliance.Xenos;
+            case 'Xenos':
                 return Alliance.Xenos;
             case 'Chaos':
                 return Alliance.Chaos;
@@ -675,7 +677,7 @@ export class StaticDataService {
             [Faction.Orks, ['Ork Boy', 'Grot', 'Grot Tank']],
             [Faction.Tyranids, ['Hormagaunt', 'Termagant', 'Ripper Swarm', 'Tyranid Warrior']],
             [Faction.Thousand_Sons, ['Rubric Marine', 'Pink Horror', 'Screamer', 'Scarab Occult Terminator']],
-            [Faction.Aeldari, ['Guardian']],
+            [Faction.Aeldari, ['Guardian', 'Warlock', 'Harlequin Player', 'Wraithguard']],
         ]);
     }
 
@@ -718,6 +720,9 @@ export class StaticDataService {
             Screamer: 'screamer_of_tzeentch.webp',
             Guardian: 'guardian.webp',
             'Scarab Occult Terminator': 'scarab_occult_terminator.webp',
+            'Harlequin Player': 'harlequin.webp',
+            Warlock: 'warlock.webp',
+            Wraithguard: 'wraithguard.webp',
         };
         if (map[npc]) {
             return prefix + '/' + map[npc];

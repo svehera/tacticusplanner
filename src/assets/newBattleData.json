@@ -20833,7 +20833,7 @@
                 "stars": 7
             },
             {
-                "name": "StormBoy",
+                "name": "Storm Boy",
                 "count": 3,
                 "rank": "Bronze 3",
                 "stars": 6
@@ -20920,7 +20920,7 @@
                 "stars": 6
             },
             {
-                "name": "StormBoy",
+                "name": "Storm Boy",
                 "count": 2,
                 "rank": "Silver 2",
                 "stars": 6
@@ -21001,7 +21001,7 @@
                 "stars": 8
             },
             {
-                "name": "StormBoy",
+                "name": "Storm Boy",
                 "count": 2,
                 "rank": "Silver 2",
                 "stars": 6
@@ -21101,7 +21101,7 @@
                 "stars": 10
             },
             {
-                "name": "StormBoy",
+                "name": "Storm Boy",
                 "count": 4,
                 "rank": "Silver 3",
                 "stars": 7
@@ -21223,7 +21223,7 @@
                 "stars": 10
             },
             {
-                "name": "StormBoy",
+                "name": "Storm Boy",
                 "count": 1,
                 "rank": "Silver 2",
                 "stars": 8
@@ -21895,7 +21895,7 @@
                 "stars": 5
             },
             {
-                "name": "StormBoy",
+                "name": "Storm Boy",
                 "count": 3,
                 "rank": "Silver 1",
                 "stars": 7
@@ -21924,7 +21924,7 @@
                 "stars": 10
             },
             {
-                "name": "Gulgortz",
+                "name": "Boss Gulgortz",
                 "count": 1,
                 "rank": "Gold 1",
                 "stars": 10,
@@ -22048,7 +22048,7 @@
                 "rarity": "Epic"
             },
             {
-                "name": "StormBoy",
+                "name": "Storm Boy",
                 "count": 3,
                 "rank": "Silver 1",
                 "stars": 5
@@ -22092,7 +22092,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 4,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "SHM2": {
         "campaign": "Saim-Hann Mirror",
@@ -22102,7 +22110,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "SHM3": {
         "campaign": "Saim-Hann Mirror",
@@ -22112,7 +22128,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "SHM4": {
         "campaign": "Saim-Hann Mirror",
@@ -22122,7 +22146,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 7,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "SHM5": {
         "campaign": "Saim-Hann Mirror",
@@ -22132,7 +22164,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 8,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "SHM6": {
         "campaign": "Saim-Hann Mirror",
@@ -22142,7 +22182,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "SHM7": {
         "campaign": "Saim-Hann Mirror",
@@ -22152,7 +22206,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "SHM8": {
         "campaign": "Saim-Hann Mirror",
@@ -22162,7 +22224,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "SHM9": {
         "campaign": "Saim-Hann Mirror",
@@ -22172,7 +22248,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "SHM10": {
         "campaign": "Saim-Hann Mirror",
@@ -22182,7 +22272,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 10,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "SHM11": {
         "campaign": "Saim-Hann Mirror",
@@ -22192,7 +22290,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "SHM12": {
         "campaign": "Saim-Hann Mirror",
@@ -22202,7 +22314,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 4,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SHM13": {
         "campaign": "Saim-Hann Mirror",
@@ -22212,7 +22332,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Warlock",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "SHM14": {
         "campaign": "Saim-Hann Mirror",
@@ -22222,7 +22356,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
     },
     "SHM15": {
         "campaign": "Saim-Hann Mirror",
@@ -22232,7 +22380,28 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Calandis",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 2,
+                "rarity": "Common"
+            },
+            {
+                "name": "Guardian",
+                "count": 8,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
     },
     "SHM16": {
         "campaign": "Saim-Hann Mirror",
@@ -22242,7 +22411,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "SHM17": {
         "campaign": "Saim-Hann Mirror",
@@ -22251,7 +22434,21 @@
         "reward": "Weapon Anointment Oils",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "SHM18": {
         "campaign": "Saim-Hann Mirror",
@@ -22261,7 +22458,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "SHM19": {
         "campaign": "Saim-Hann Mirror",
@@ -22271,7 +22488,21 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Harlequin Player",
+                "count": 7,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "SHM20": {
         "campaign": "Saim-Hann Mirror",
@@ -22281,7 +22512,21 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "SHM21": {
         "campaign": "Saim-Hann Mirror",
@@ -22291,7 +22536,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
     },
     "SHM22": {
         "campaign": "Saim-Hann Mirror",
@@ -22301,7 +22566,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "SHM23": {
         "campaign": "Saim-Hann Mirror",
@@ -22311,7 +22596,21 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "SHM24": {
         "campaign": "Saim-Hann Mirror",
@@ -22321,7 +22620,21 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Stone 3",
+                "stars": 1
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SHM25": {
         "campaign": "Saim-Hann Mirror",
@@ -22331,7 +22644,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Stone 3",
+                "stars": 1
+            }
+        ]
     },
     "SHM26": {
         "campaign": "Saim-Hann Mirror",
@@ -22340,7 +22673,21 @@
         "reward": "Reinforced Cables",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SHM27": {
         "campaign": "Saim-Hann Mirror",
@@ -22349,7 +22696,27 @@
         "reward": "Blessed Tasset Plate",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Warlock",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SHM28": {
         "campaign": "Saim-Hann Mirror",
@@ -22359,7 +22726,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Iron 1",
+                "stars": 1
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SHM29": {
         "campaign": "Saim-Hann Mirror",
@@ -22368,7 +22755,27 @@
         "reward": "Ancient Runes",
         "expectedGold": 53,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
     },
     "SHM30": {
         "campaign": "Saim-Hann Mirror",
@@ -22377,7 +22784,34 @@
         "reward": "Aethana",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aethana",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 2,
+                "rarity": "Uncommon"
+            },
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Iron 1",
+                "stars": 2
+            }
+        ]
     },
     "SHM31": {
         "campaign": "Saim-Hann Mirror",
@@ -22387,7 +22821,15 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 7,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SHM32": {
         "campaign": "Saim-Hann Mirror",
@@ -22396,7 +22838,27 @@
         "reward": "Tainted Text",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 3,
+                "rank": "Orin 2",
+                "stars": 2
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Iron 1",
+                "stars": 2
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SHM33": {
         "campaign": "Saim-Hann Mirror",
@@ -22405,7 +22867,27 @@
         "reward": "Mutation: Tough Skin",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SHM34": {
         "campaign": "Saim-Hann Mirror",
@@ -22414,7 +22896,15 @@
         "reward": "The Silver Aquila",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Harlequin Player"]
+        "enemiesTypes": ["Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Harlequin Player",
+                "count": 7,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SHM35": {
         "campaign": "Saim-Hann Mirror",
@@ -22423,7 +22913,21 @@
         "reward": "Lesser Reliquary of Protection",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 7,
+                "rank": "Iron 3",
+                "stars": 4
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SHM36": {
         "campaign": "Saim-Hann Mirror",
@@ -22433,7 +22937,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "SHM37": {
         "campaign": "Saim-Hann Mirror",
@@ -22443,7 +22967,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 8,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "SHM38": {
         "campaign": "Saim-Hann Mirror",
@@ -22452,7 +22990,21 @@
         "reward": "Mission Assignment",
         "expectedGold": 53,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 7,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "SHM39": {
         "campaign": "Saim-Hann Mirror",
@@ -22462,7 +23014,15 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 8,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "SHM40": {
         "campaign": "Saim-Hann Mirror",
@@ -22472,7 +23032,15 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Harlequin Player"]
+        "enemiesTypes": ["Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Harlequin Player",
+                "count": 6,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "SHM41": {
         "campaign": "Saim-Hann Mirror",
@@ -22481,7 +23049,27 @@
         "reward": "Helmet Trophy",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SHM42": {
         "campaign": "Saim-Hann Mirror",
@@ -22490,7 +23078,21 @@
         "reward": "Classified Data-Slate",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Iron 3",
+                "stars": 4
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "SHM43": {
         "campaign": "Saim-Hann Mirror",
@@ -22499,7 +23101,27 @@
         "reward": "Psytronome",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 7,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SHM44": {
         "campaign": "Saim-Hann Mirror",
@@ -22508,7 +23130,27 @@
         "reward": "Inferno Bolts",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "SHM45": {
         "campaign": "Saim-Hann Mirror",
@@ -22517,7 +23159,34 @@
         "reward": "Eldryon",
         "expectedGold": 53,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eldryon",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 5,
+                "rarity": "Rare"
+            },
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SHM46": {
         "campaign": "Saim-Hann Mirror",
@@ -22526,7 +23195,27 @@
         "reward": "Bladesman's Honour",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 2,
+                "rank": "Iron 2",
+                "stars": 2
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Iron 2",
+                "stars": 2
+            }
+        ]
     },
     "SHM47": {
         "campaign": "Saim-Hann Mirror",
@@ -22538,7 +23227,39 @@
         "enemiesAlliances": ["Imperial", "Xenos"],
         "enemiesFactions": ["Astra Militarum", "Aeldari"],
         "enemiesTotal": 12,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 4
+            }
+        ]
     },
     "SHM48": {
         "campaign": "Saim-Hann Mirror",
@@ -22550,7 +23271,39 @@
         "enemiesAlliances": ["Imperial", "Xenos"],
         "enemiesFactions": ["Astra Militarum", "Aeldari"],
         "enemiesTotal": 11,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Guardian",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 3
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 4
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "SHM49": {
         "campaign": "Saim-Hann Mirror",
@@ -22562,7 +23315,21 @@
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Astra Militarum"],
         "enemiesTotal": 6,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "SHM50": {
         "campaign": "Saim-Hann Mirror",
@@ -22572,7 +23339,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 4
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "SHM51": {
         "campaign": "Saim-Hann Mirror",
@@ -22582,7 +23363,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Harlequin Player"]
+        "enemiesTypes": ["Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Harlequin Player",
+                "count": 7,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "SHM52": {
         "campaign": "Saim-Hann Mirror",
@@ -22592,7 +23381,21 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 8,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Iron 3",
+                "stars": 4
+            }
+        ]
     },
     "SHM53": {
         "campaign": "Saim-Hann Mirror",
@@ -22601,7 +23404,27 @@
         "reward": "Oath Seal",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Warlock",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 4
+            }
+        ]
     },
     "SHM54": {
         "campaign": "Saim-Hann Mirror",
@@ -22611,7 +23434,15 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 11,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "SHM55": {
         "campaign": "Saim-Hann Mirror",
@@ -22621,7 +23452,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "SHM56": {
         "campaign": "Saim-Hann Mirror",
@@ -22631,7 +23482,21 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Harlequin Player",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "SHM57": {
         "campaign": "Saim-Hann Mirror",
@@ -22641,7 +23506,21 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "SHM58": {
         "campaign": "Saim-Hann Mirror",
@@ -22650,7 +23529,27 @@
         "reward": "Ritual Implements",
         "expectedGold": 53,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Warlock",
+                "count": 3,
+                "rank": "Iron 3",
+                "stars": 4
+            }
+        ]
     },
     "SHM59": {
         "campaign": "Saim-Hann Mirror",
@@ -22659,7 +23558,15 @@
         "reward": "Revered Talisman",
         "expectedGold": 53,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Harlequin Player"]
+        "enemiesTypes": ["Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Harlequin Player",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "SHM60": {
         "campaign": "Saim-Hann Mirror",
@@ -22668,7 +23575,34 @@
         "reward": "Jain Zar",
         "expectedGold": 53,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Iron 3",
+                "stars": 4
+            },
+            {
+                "name": "Jain Zar",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 8,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Iron 3",
+                "stars": 2
+            }
+        ]
     },
     "SHM61": {
         "campaign": "Saim-Hann Mirror",
@@ -22677,7 +23611,21 @@
         "reward": "Satchel",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Harlequin Player",
+                "count": 6,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            }
+        ]
     },
     "SHM62": {
         "campaign": "Saim-Hann Mirror",
@@ -22686,7 +23634,27 @@
         "reward": "Mutation: Tough Skin",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 7,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "SHM63": {
         "campaign": "Saim-Hann Mirror",
@@ -22696,7 +23664,21 @@
         "slots": 4,
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "SHM64": {
         "campaign": "Saim-Hann Mirror",
@@ -22706,7 +23688,27 @@
         "slots": 4,
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "SHM65": {
         "campaign": "Saim-Hann Mirror",
@@ -22715,7 +23717,21 @@
         "reward": "Divinator Class Auspex",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Harlequin Player",
+                "count": 5,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Warlock",
+                "count": 3,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "SHM66": {
         "campaign": "Saim-Hann Mirror",
@@ -22725,7 +23741,15 @@
         "slots": 4,
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 7,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "SHM67": {
         "campaign": "Saim-Hann Mirror",
@@ -22735,7 +23759,21 @@
         "slots": 3,
         "expectedGold": 53,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "SHM68": {
         "campaign": "Saim-Hann Mirror",
@@ -22744,7 +23782,15 @@
         "reward": "The Silver Eagle with Swords",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Harlequin Player"]
+        "enemiesTypes": ["Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Harlequin Player",
+                "count": 9,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "SHM69": {
         "campaign": "Saim-Hann Mirror",
@@ -22753,7 +23799,21 @@
         "reward": "Blessed Promethium Canister",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "SHM70": {
         "campaign": "Saim-Hann Mirror",
@@ -22762,7 +23822,15 @@
         "reward": "The Silver Scope",
         "expectedGold": 53,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 11,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "SHM71": {
         "campaign": "Saim-Hann Mirror",
@@ -22771,7 +23839,27 @@
         "reward": "Battle Scar",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "SHM72": {
         "campaign": "Saim-Hann Mirror",
@@ -22780,7 +23868,27 @@
         "reward": "Runes of Fate",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "SHM73": {
         "campaign": "Saim-Hann Mirror",
@@ -22789,7 +23897,21 @@
         "reward": "Secret Agenda",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "SHM74": {
         "campaign": "Saim-Hann Mirror",
@@ -22798,7 +23920,27 @@
         "reward": "Blessing of Tzeentch",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Warlock",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 6
+            }
+        ]
     },
     "SHM75": {
         "campaign": "Saim-Hann Mirror",
@@ -22807,7 +23949,34 @@
         "reward": "Maugan Ra",
         "expectedGold": 53,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Bronze 2",
+                "stars": 6
+            },
+            {
+                "name": "Maugan Ra",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 8,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            }
+        ]
     },
     "SHE1": {
         "campaign": "Saim-Hann Elite",
@@ -23884,7 +25053,21 @@
         "reward": "Adamantium Ore",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 8
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
     },
     "SHME2": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -23894,7 +25077,21 @@
         "reward": "Tainted Text",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            }
+        ]
     },
     "SHME3": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -23904,7 +25101,21 @@
         "reward": "Inferno Bolts",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "SHME4": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -23913,7 +25124,33 @@
         "reward": "Ritual Implements",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Wraithguard",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "SHME5": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -23923,7 +25160,21 @@
         "reward": "Warp Locus",
         "expectedGold": 53,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "SHME6": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -23933,7 +25184,21 @@
         "reward": "Blessing of Tzeentch",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Wraithguard",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "SHME7": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -23942,7 +25207,27 @@
         "reward": "Psychic Force Conduit",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Warlock",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "SHME8": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -23951,7 +25236,40 @@
         "reward": "Calandis",
         "expectedGold": 53,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Calandis",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 8,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Warlock",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Wraithguard",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "SHME9": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -23961,7 +25279,15 @@
         "reward": "Nasty Spikes",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Harlequin Player"]
+        "enemiesTypes": ["Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Harlequin Player",
+                "count": 7,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "SHME10": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -23970,7 +25296,27 @@
         "reward": "The Silver Aquila",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Warlock", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Wraithguard",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "SHME11": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -23980,7 +25326,27 @@
         "reward": "Ballistics Data",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian", "Warlock", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Warlock", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Wraithguard",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "SHME12": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -23989,7 +25355,21 @@
         "reward": "Mission Assignment",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "SHME13": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -23998,7 +25378,21 @@
         "reward": "Brazen Jaws",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "SHME14": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24007,7 +25401,33 @@
         "reward": "Weathering",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 6,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Wraithguard",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "SHME15": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24016,7 +25436,21 @@
         "reward": "Relic Hilt",
         "expectedGold": 53,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "SHME16": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24025,7 +25459,34 @@
         "reward": "Aethana",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Warlock", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aethana",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 11,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Wraithguard",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "SHME17": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24035,7 +25496,21 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
     },
     "SHME18": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24045,7 +25520,21 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Harlequin Player",
+                "count": 6,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "SHME19": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24055,7 +25544,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Warlock", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Warlock",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Wraithguard",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
     },
     "SHME20": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24064,7 +25573,21 @@
         "reward": "Chainaxe Teeth",
         "expectedGold": 53,
         "enemiesTotal": 5,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "SHME21": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24073,7 +25596,21 @@
         "reward": "Mutation: Warped Muscles",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "SHME22": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24082,7 +25619,27 @@
         "reward": "Purity Seal",
         "expectedGold": 53,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
     },
     "SHME23": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24091,7 +25648,15 @@
         "reward": "Satchel",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian"]
+        "enemiesTypes": ["Guardian"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 7,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "SHME24": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24100,7 +25665,40 @@
         "reward": "Eldryon",
         "expectedGold": 53,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eldryon",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Wraithguard",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
     },
     "SHME25": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24110,7 +25708,15 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Harlequin Player"]
+        "enemiesTypes": ["Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Harlequin Player",
+                "count": 7,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "SHME26": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24119,7 +25725,21 @@
         "reward": "Cadaere Renissum",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 5,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Warlock",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "SHME27": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24128,7 +25748,27 @@
         "reward": "Otherworldly Energy",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Guardian", "Harlequin Player", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Harlequin Player", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Wraithguard",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "SHME28": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24138,7 +25778,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "SHME29": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24147,7 +25807,27 @@
         "reward": "The Silver Eagle with Swords",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Harlequin Player", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Harlequin Player", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 5,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Wraithguard",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
     },
     "SHME30": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24156,7 +25836,21 @@
         "reward": "Weapon Anointment Oils",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "SHME31": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24165,7 +25859,21 @@
         "reward": "Boon of Khorne",
         "expectedGold": 53,
         "enemiesTotal": 4,
-        "enemiesTypes": ["Warlock", "Wraithguard"]
+        "enemiesTypes": ["Warlock", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Wraithguard",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "SHME32": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24174,7 +25882,40 @@
         "reward": "Jain Zar",
         "expectedGold": 53,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Jain Zar",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 11,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Wraithguard",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
     },
     "SHME33": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24183,7 +25924,21 @@
         "reward": "Scrolls",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock"]
+        "enemiesTypes": ["Guardian", "Warlock"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 7,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "SHME34": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24192,7 +25947,21 @@
         "reward": "Waystone",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Guardian", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "SHME35": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24202,7 +25971,27 @@
         "expectedGold": 53,
         "slots": 4,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Guardian", "Warlock", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Warlock", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 6,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Wraithguard",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "SHME36": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24211,7 +26000,21 @@
         "reward": "Wraithbone Plate",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Harlequin Player",
+                "count": 6,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "SHME37": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24220,7 +26023,27 @@
         "reward": "Runes of Fate",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Guardian", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 3,
+                "rank": "Gold 3",
+                "stars": 10
+            },
+            {
+                "name": "Warlock",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Wraithguard",
+                "count": 2,
+                "rank": "Gold 2",
+                "stars": 10
+            }
+        ]
     },
     "SHME38": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24230,7 +26053,27 @@
         "expectedGold": 53,
         "slots": 3,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Guardian", "Harlequin Player", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Harlequin Player", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 11
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Wraithguard",
+                "count": 1,
+                "rank": "GOld 1",
+                "stars": 10
+            }
+        ]
     },
     "SHME39": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24239,7 +26082,27 @@
         "reward": "Psychic Force Conduit",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Warlock",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 10
+            }
+        ]
     },
     "SHME40": {
         "campaign": "Saim-Hann Mirror Elite",
@@ -24248,7 +26111,40 @@
         "reward": "Maugan Ra",
         "expectedGold": 53,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Wraithguard"]
+        "enemiesTypes": ["Guardian", "Warlock", "Harlequin Player", "Wraithguard"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Guardian",
+                "count": 4,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Harlequin Player",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Maugan Ra",
+                "count": 1,
+                "rank": "Gold 3",
+                "stars": 11,
+                "rarity": "Legendary"
+            },
+            {
+                "name": "Warlock",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Wraithguard",
+                "count": 1,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
     },
     "AMS1": {
         "campaign": "Adeptus Mechanicus Standard",
