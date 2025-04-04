@@ -57,6 +57,7 @@ const getRarityLabel = (rarity: Rarity): string => {
     }
 };
 
+const MAX_TOKEN = 3;
 const TOKEN_REGEN_HOURS = 12;
 const millisecondsPerToken = TOKEN_REGEN_HOURS * 60 * 60 * 1000;
 interface TokenStatus {
@@ -66,9 +67,9 @@ interface TokenStatus {
 
 const updateTokenTo = (tokenState: TokenStatus, time: number): void => {
     const restored = Math.floor((time - tokenState.reloadStart) / millisecondsPerToken);
-    if (restored + tokenState.count >= 3) {
+    if (restored + tokenState.count >= MAX_TOKEN) {
         // Player has capped, now we have the exact count and time
-        tokenState.count = 3;
+        tokenState.count = MAX_TOKEN;
         tokenState.reloadStart = time;
     } else {
         tokenState.count += restored;
