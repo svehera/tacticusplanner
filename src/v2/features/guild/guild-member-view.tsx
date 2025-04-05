@@ -12,10 +12,13 @@ interface Props {
 }
 
 export const GuildMemberView: React.FC<Props> = ({ index, member }) => {
+    const hasShareLink = member.username && member.shareToken;
+    const hasInGameInfo = member.inGameName && member.userId;
+
     return (
         <FlexBox gap={5} style={{ minWidth: !isMobile ? 450 : 'unset' }}>
             <span>{index + 1}.</span>
-            {member.username && member.shareToken && (
+            {hasShareLink && (
                 <IconButton
                     size="small"
                     component={Link}
@@ -28,9 +31,20 @@ export const GuildMemberView: React.FC<Props> = ({ index, member }) => {
                 </IconButton>
             )}
 
-            <b>{member.username}</b>
-            {member.username && <span>:</span>}
-            <span>{member.shareToken && member.shareToken.slice(0, 5) + '...'}</span>
+            {hasShareLink && <b>{member.username}</b>}
+            {hasShareLink && hasInGameInfo && <span>|</span>}
+            {hasInGameInfo && (
+                <>
+                    <b>{member.inGameName}</b>
+                    <span>({member.userId})</span>
+                </>
+            )}
+            {hasShareLink && (
+                <>
+                    <span>:</span>
+                    <span>{member.shareToken.slice(0, 5) + '...'}</span>
+                </>
+            )}
         </FlexBox>
     );
 };

@@ -78,6 +78,15 @@ export interface UnitDataRaw {
     Number: number;
     ForcedSummons: boolean;
     RequiredInCampaign: boolean;
+    /**
+     * The prefix of each campaign in which this character is required. Some examples:
+     * - 'Maladus' would be ['Adeptus Mechanicus']
+     * - 'Bellator' would be ['Indomitus', 'Tyranids']
+     *
+     * By using prefixes, we ensure that the elite, extremis, and challenge campaigns
+     * will be included in the list of required campaigns.
+     */
+    CampaignsRequiredIn?: string[];
     Icon: string;
     ReleaseRarity?: CharacterReleaseRarity;
     releaseDate?: string;
@@ -111,6 +120,7 @@ export interface IUnitData {
     movement: number;
     forcedSummons: boolean;
     requiredInCampaign: boolean;
+    campaignsRequiredIn?: string[];
     icon: string;
     legendaryEvents: ICharLegendaryEvents;
     lre?: ILreCharacterStaticData;
@@ -417,6 +427,8 @@ export interface IGuild {
 export interface IGuildMember {
     username: string;
     shareToken: string;
+    userId?: string;
+    inGameName?: string;
     index: number;
 }
 

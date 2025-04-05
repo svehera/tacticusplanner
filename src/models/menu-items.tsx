@@ -120,7 +120,7 @@ export const learnSubMenu: MenuItemTP[] = [
     menuItemById['campaigns'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
-    // menuItemById['guildApi'],
+    menuItemById['guildApi'],
     menuItemById['guildInsights'],
 ];
 

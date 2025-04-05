@@ -4,6 +4,7 @@ import { TacticusGuild, TacticusGuildMember, TacticusGuildRole } from './tacticu
 import { getTacticusGuildData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
 import { AllCommunityModule, ColDef, themeBalham } from 'ag-grid-community';
 import { mapUserIdToName } from '@/v2/features/tacticus-integration/user-id-mapper';
+import { IGuildMember } from '@/models/interfaces';
 
 // Helper function to convert role enum to readable string
 const getRoleLabel = (role: TacticusGuildRole): string => {
@@ -65,7 +66,9 @@ const RoleRenderer: React.FC<{ value: TacticusGuildRole }> = ({ value }) => {
     );
 };
 
-export const TacticusGuildVisualization: React.FC = () => {
+export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: string) => string }> = ({
+    userIdMapper,
+}) => {
     const [guildData, setGuildData] = useState<TacticusGuild | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -86,7 +89,7 @@ export const TacticusGuildVisualization: React.FC = () => {
         {
             field: 'userId',
             headerName: 'User Nickname',
-            valueGetter: col => mapUserIdToName(col.data?.userId ?? '000'),
+            valueGetter: col => userIdMapper(col.data?.userId ?? '000'),
             sortable: true,
         },
         {
