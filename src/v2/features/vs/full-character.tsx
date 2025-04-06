@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Faction, Rank, Rarity, RarityStars } from 'src/models/enums';
 import { FactionSelect } from 'src/routes/npcs/faction-select';
 import { RankSelect } from 'src/shared-components/rank-select';
@@ -101,6 +101,25 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
         }
     };
 
+    const onCharacterChanged = (newCharacter: string) => {
+        setCharacter(newCharacter);
+    };
+
+    const onRankChanged = (newRank: Rank) => {
+        setRank(newRank);
+    };
+
+    const onStarsChanged = (newStars: RarityStars) => {
+        setStars(newStars);
+    };
+
+    useEffect(() => {
+        const unit = StaticDataService.unitsData.find(unit => unit.id === character);
+        const charId = unit != undefined ? unit.id : undefined;
+        const npcName = charId == undefined ? character : undefined;
+        onCharacterChange(charId, npcName, faction, rank, rarity, stars);
+    }, [character, faction, rank, rarity, stars]);
+
     const isPlayableCharacter = useMemo(() => {
         return StaticDataService.unitsData.find(unit => unit.id === character) != undefined;
     }, [character]);
@@ -164,8 +183,6 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
         return StaticDataService.npcDataFull.find(npc => npc.name === character)?.range;
     }, [character]);
 
-    console.log(rangeDamageType);
-
     return (
         <div className="flex-box gap10">
             <div>
@@ -182,7 +199,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
                         label={'Character'}
                         value={character}
                         idsAndNames={idsAndNames}
-                        valueChanges={(value: string) => setCharacter(value)}
+                        valueChanges={(value: string) => onCharacterChanged(value)}
                     />
                 </div>
                 <div className="m-3">
@@ -198,7 +215,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
                         label="Stars"
                         value={stars}
                         starsValues={starValues}
-                        valueChanges={stars => setStars(stars)}
+                        valueChanges={stars => onStarsChanged(stars)}
                     />
                 </div>
                 <div className="m-3">
@@ -206,7 +223,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
                         label="Rank"
                         value={rank}
                         rankValues={rankValues}
-                        valueChanges={rank => setRank(rank)}
+                        valueChanges={rank => onRankChanged(rank)}
                     />
                 </div>
                 <div className="m-3">

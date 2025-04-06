@@ -1,9 +1,50 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { FullCharacter } from './full-character';
+import { Faction, Rank, Rarity, RarityStars } from 'src/models/enums';
+import { DamageChart } from './damage-chart';
 
 export const Versus: React.FC = () => {
+    const [char1Id, setChar1Id] = React.useState<string>('Varro Tigurius');
+    const [char1Faction, setChar1Faction] = React.useState<Faction>(Faction.Ultramarines);
+    const [char1Rank, setChar1Rank] = React.useState<Rank>(Rank.Stone1);
+    const [char1Rarity, setChar1Rarity] = React.useState<Rarity>(Rarity.Common);
+    const [char1Stars, setChar1Stars] = React.useState<RarityStars>(RarityStars.None);
+
+    const [char2Id, setChar2Id] = React.useState<string>('Varro Tigurius');
+    const [char2Faction, setChar2Faction] = React.useState<Faction>(Faction.Ultramarines);
+    const [char2Rank, setChar2Rank] = React.useState<Rank>(Rank.Stone1);
+    const [char2Rarity, setChar2Rarity] = React.useState<Rarity>(Rarity.Common);
+    const [char2Stars, setChar2Stars] = React.useState<RarityStars>(RarityStars.None);
+
+    const damageChart = useMemo(() => {
+        return (
+            <DamageChart
+                char1Id={char1Id}
+                char1Faction={char1Faction}
+                char1Rank={char1Rank}
+                char1Rarity={char1Rarity}
+                char1Stars={char1Stars}
+                char2Id={char2Id}
+                char2Faction={char2Faction}
+                char2Rank={char2Rank}
+                char2Rarity={char2Rarity}
+                char2Stars={char2Stars}
+            />
+        );
+    }, [
+        char1Id,
+        char1Faction,
+        char1Rank,
+        char1Rarity,
+        char1Stars,
+        char2Id,
+        char2Faction,
+        char2Rank,
+        char2Rarity,
+        char2Stars,
+    ]);
     return (
         <div>
             <Accordion defaultExpanded={true}>
@@ -56,18 +97,29 @@ export const Versus: React.FC = () => {
                     </ul>
                 </AccordionDetails>
             </Accordion>
-            <div className="flex-box gap10">
-                <FullCharacter
-                    onCharacterChange={(characterId, npcName, faction, rank, rarity, stars) => {
-                        console.log(characterId, npcName, faction, rank, rarity, stars);
-                    }}
-                />
-                <span>vs</span>
-                <FullCharacter
-                    onCharacterChange={(characterId, npcName, faction, rank, rarity, stars) => {
-                        console.log(characterId, npcName, faction, rank, rarity, stars);
-                    }}
-                />
+            <div>
+                <div className="flex-box gap10">
+                    <FullCharacter
+                        onCharacterChange={(characterId, npcName, faction, rank, rarity, stars) => {
+                            setChar1Id(characterId ?? npcName!);
+                            setChar1Faction(faction);
+                            setChar1Rank(rank);
+                            setChar1Rarity(rarity);
+                            setChar1Stars(stars);
+                        }}
+                    />
+                    <span>vs</span>
+                    <FullCharacter
+                        onCharacterChange={(characterId, npcName, faction, rank, rarity, stars) => {
+                            setChar2Id(characterId ?? npcName!);
+                            setChar2Faction(faction);
+                            setChar2Rank(rank);
+                            setChar2Rarity(rarity);
+                            setChar2Stars(stars);
+                        }}
+                    />
+                </div>
+                <div>{damageChart}</div>
             </div>
         </div>
     );
