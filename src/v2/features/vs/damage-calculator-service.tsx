@@ -1,3 +1,4 @@
+import { assert } from 'console';
 import { DamageType, Faction, Rank, Rarity, RarityStars, Trait } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
@@ -40,6 +41,7 @@ export class DamageCalculatorService {
             gravis: unit.traits.includes(Trait.MKXGravis),
         };
     }
+
     static runAttackSimulations(
         damage: number,
         hits: number,
@@ -48,11 +50,17 @@ export class DamageCalculatorService {
         totalSims: number
     ): number[] {
         const ret: number[] = [];
-        const minDamage = hits * this.getDamageFrom1Hit(damage * 0.8, type, defender.armor, defender.gravis);
-        const maxDamage = hits * this.getDamageFrom1Hit(damage * 1.2, type, defender.armor, defender.gravis);
+        const minDamage = Math.max(
+            1,
+            hits * this.getDamageFrom1Hit(damage * 0.8, type, defender.armor, defender.gravis)
+        );
+        const maxDamage = Math.max(
+            1,
+            hits * this.getDamageFrom1Hit(damage * 1.2, type, defender.armor, defender.gravis)
+        );
         ret.push(Math.min(minDamage, defender.health));
         ret.push(Math.min(maxDamage, defender.health));
-        for (let i = 1; i + 1 < totalSims; ++i) {
+        for (let i = 2; i < totalSims; ++i) {
             let totalDamage: number = 0;
             for (let j = 0; j < hits; ++j) {
                 const rng = 1 + (Math.round(Math.random() * 41) - 20) / 100.0;
@@ -61,7 +69,8 @@ export class DamageCalculatorService {
             totalDamage = Math.min(totalDamage, defender.health);
             ret.push(totalDamage);
         }
-        return ret.sort();
+        ret.sort((a, b) => b - a);
+        return ret;
     }
 
     private static getPierce(type: DamageType): number {
@@ -109,7 +118,7 @@ export class DamageCalculatorService {
             case DamageType.Toxic:
                 return 70;
         }
-        return 0;
+        return 1;
     }
 
     private static convertDamageType(type: string | undefined): DamageType | undefined {
@@ -118,7 +127,7 @@ export class DamageCalculatorService {
     }
 
     private static getDamageFrom1Hit(damage: number, type: DamageType, armor: number, gravis: boolean): number {
-        const damageWithPierce = (damage * this.getPierce(type)) / 100;
+        const damageWithPierce = (damage * this.getPierce(type)) / 100.0;
         const damageOverArmor = damage - armor;
         const totalDamage = Math.round(Math.max(damageWithPierce, damageOverArmor));
         if (gravis) return this.getDamageFrom1Hit(totalDamage, type, armor, false);

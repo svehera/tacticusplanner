@@ -61,29 +61,31 @@ export const DamageChart: React.FC<Props> = ({
             : undefined;
     }, [attacker, defender, totalSims]);
 
-    const sims = useMemo(() => {
+    const data = useMemo(() => {
         const ret = [];
         for (let i = 0; i < 101; ++i) {
             const index = Math.round((i / 100) * (meleeSims.length - 1));
             ret.push({
                 index: i,
                 melee: meleeSims[index],
-                range: rangeSims ? rangeSims[index] : undefined,
+                range: rangeSims != undefined ? rangeSims[index] : undefined,
+                health: defender.health,
             });
-            console.log('{ ' + ret[i].index + ' ' + ret[i].melee + ' ' + ret[i].range + ' }');
         }
         return ret;
-    }, [meleeSims, rangeSims]);
+    }, [defender, meleeSims, rangeSims]);
     return (
         <div>
             <LineChart
-                dataset={sims}
+                dataset={data}
                 xAxis={[{ id: 'Percentile', dataKey: 'index', scaleType: 'linear' }]}
                 series={[
+                    { id: 'Defender Health', dataKey: 'health', type: 'line', showMark: false },
                     { id: 'Melee', dataKey: 'melee', type: 'line', showMark: false },
                     { id: 'Range', dataKey: 'range', type: 'line', showMark: false },
                 ]}
                 height={200}
+                grid={{ vertical: true, horizontal: true }}
             />
         </div>
     );

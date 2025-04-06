@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { Faction, Rank, Rarity, RarityStars } from 'src/models/enums';
 import { FactionSelect } from 'src/routes/npcs/faction-select';
 import { RankSelect } from 'src/shared-components/rank-select';
@@ -12,6 +12,10 @@ import { NpcPortrait } from 'src/routes/tables/npc-portrait';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
 import { DamageIcon } from './damage-icon';
+import { set } from 'lodash';
+import { StoreContext } from 'src/reducers/store.provider';
+import { EquipmentSelect } from './equipment-select';
+import { EquipmentType } from 'src/models/interfaces';
 
 interface Props {
     onCharacterChange: (
@@ -27,11 +31,18 @@ interface Props {
 }
 
 export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
+    const storeContext = useContext(StoreContext);
+
     const [faction, setFaction] = useState<Faction>(Faction.Ultramarines);
     const [character, setCharacter] = useState<string>('Varro Tigurius');
     const [rank, setRank] = useState<Rank>(Rank.Stone1);
     const [rarity, setRarity] = useState<Rarity>(Rarity.Common);
     const [stars, setStars] = useState<RarityStars>(RarityStars.None);
+    const [equipmentSlots, setEquipmentSlots] = useState<(EquipmentType | undefined)[]>([
+        undefined,
+        undefined,
+        undefined,
+    ]);
 
     const minStarsMap: Map<Rarity, RarityStars> = new Map([
         [Rarity.Common, RarityStars.None],
@@ -97,11 +108,19 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
             StaticDataService.unitsData.forEach(unit => {
                 if (unit.faction === newFaction) arr.push(unit.id);
             });
-            setCharacter(arr[0]);
+            onCharacterChanged(arr[0]);
         }
     };
 
     const onCharacterChanged = (newCharacter: string) => {
+        const unit = storeContext.characters.find(unit => unit.id === newCharacter);
+        if (unit != undefined) {
+            setFaction(unit.faction);
+            setRank(unit.rank);
+            setRarity(unit.rarity);
+            setStars(unit.stars);
+            console.log(newCharacter + ': ' + unit.equipment1 + ' ' + unit.equipment2 + ' ' + unit.equipment3);
+        }
         setCharacter(newCharacter);
     };
 
@@ -225,6 +244,11 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
                         rankValues={rankValues}
                         valueChanges={rank => onRankChanged(rank)}
                     />
+                </div>
+                <div className="m-3">
+                    <EquipmentSelect faction={faction} type={equipmentSlots[0]} rarity={rarity} />
+                    <EquipmentSelect faction={faction} type={equipmentSlots[1]} rarity={rarity} />
+                    <EquipmentSelect faction={faction} type={equipmentSlots[2]} rarity={rarity} />
                 </div>
                 <div className="m-3">
                     <NpcPortrait name={character} rank={rank} rarity={rarity} stars={stars} />
