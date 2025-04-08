@@ -1,10 +1,10 @@
-﻿import React, { useMemo } from 'react';
+﻿import React, { useContext, useMemo, useState } from 'react';
 import { PersonalGoalType, Rank } from 'src/models/enums';
 
 import { Card, CardContent, CardHeader } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 
-import { ArrowForward, DeleteForever, Edit } from '@mui/icons-material';
+import { ArrowForward, DeleteForever, DragHandle, Edit } from '@mui/icons-material';
 import { charsUnlockShards, rarityToStars } from 'src/models/constants';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
@@ -26,14 +26,19 @@ import { StaticDataService } from 'src/services';
 import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import { XpTotal } from 'src/v2/features/goals/xp-total';
+import { DispatchContext } from 'src/reducers/store.provider';
 
 interface Props {
     goal: CharacterRaidGoalSelect;
     goalEstimate?: IGoalEstimate;
     menuItemSelect?: (item: 'edit' | 'delete') => void;
+    containerRef?: React.RefObject<HTMLDivElement | null>;
+    goalList?: CharacterRaidGoalSelect[];
 }
 
-export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: passed }) => {
+export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: passed, containerRef, goalList }) => {
+    const dispatch = useContext(DispatchContext);
+
     const goalEstimate: IGoalEstimate = passed ?? {
         daysLeft: 0,
         daysTotal: 0,
@@ -300,6 +305,46 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
         }
     };
 
+    const [isDragging, setIsDragging] = useState(false);
+
+    const draggable = !isGoalCompleted && isDragging;
+
+    const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+        setIsDragging(false);
+
+        // Get the current card's position and calculate new position
+        const cards = containerRef?.current?.querySelectorAll('.MuiCard-root');
+        if (!cards) {
+            return;
+        }
+        const currentCard = e.currentTarget;
+        const currentIndex = Array.from(cards).indexOf(currentCard);
+        const mouseY = e.clientY;
+
+        // Find potential new position based on mouse position
+        let newPosition = currentIndex;
+        cards.forEach((card, index) => {
+            const rect = card.getBoundingClientRect();
+            if (mouseY > rect.top && mouseY < rect.bottom && index !== currentIndex) {
+                newPosition = index;
+            }
+        });
+
+        // For debugging
+        console.log(`Current position: ${currentIndex}, Potential new position: ${newPosition}`);
+
+        // Find priority of card in newPosition
+        const priority = goalList?.[newPosition]?.priority;
+        if (!priority) {
+            return;
+        }
+
+        console.log(`Priority: ${priority}`);
+
+        const updatedGoal = { ...goal, priority: priority };
+        dispatch.goals({ type: 'Update', goal: updatedGoal });
+    };
+
     return (
         <Card
             variant="outlined"
@@ -307,15 +352,27 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
             sx={{
                 width: 350,
                 minHeight: 200,
-            }}>
+                cursor: draggable ? 'grab' : 'default',
+            }}
+            draggable={draggable}
+            onDragEnd={handleDragEnd}>
             <CardHeader
                 action={
                     menuItemSelect ? (
                         <>
                             {!isGoalCompleted ? (
-                                <IconButton onClick={() => menuItemSelect('edit')}>
-                                    <Edit fontSize="small" />
-                                </IconButton>
+                                <>
+                                    <IconButton
+                                        className="drag-handle"
+                                        sx={{ cursor: 'grab' }}
+                                        aria-label="Drag to reorder goal"
+                                        onMouseDown={() => setIsDragging(true)}>
+                                        <DragHandle fontSize="small" />
+                                    </IconButton>
+                                    <IconButton onClick={() => menuItemSelect('edit')}>
+                                        <Edit fontSize="small" />
+                                    </IconButton>
+                                </>
                             ) : undefined}
                             <IconButton onClick={() => menuItemSelect('delete')}>
                                 <DeleteForever fontSize="small" />
