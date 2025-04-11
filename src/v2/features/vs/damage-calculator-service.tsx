@@ -121,7 +121,7 @@ export class DamageCalculatorService {
         for (let i = 2; i < totalSims; ++i) {
             let totalDamage: number = 0;
             let canCrit = attacker.critChance != undefined;
-            let canBlock = defender.blockChance != undefined;
+            let canBlock = type != DamageType.Psychic && defender.blockChance != undefined;
             for (let j = 0; j < hits; ++j) {
                 const isCrit = canCrit && Math.random() * 100 <= attacker.critChance!;
                 canCrit = canCrit && isCrit;
