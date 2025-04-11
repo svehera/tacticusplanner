@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { Faction, Rank, Rarity, RarityStars } from 'src/models/enums';
+import { Equipment, Faction, Rank, Rarity, RarityStars } from 'src/models/enums';
 import { FactionSelect } from 'src/routes/npcs/faction-select';
 import { RankSelect } from 'src/shared-components/rank-select';
 import { RaritySelect } from 'src/shared-components/rarity-select';
@@ -12,10 +12,11 @@ import { NpcPortrait } from 'src/routes/tables/npc-portrait';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
 import { DamageIcon } from './damage-icon';
-import { set } from 'lodash';
 import { StoreContext } from 'src/reducers/store.provider';
 import { EquipmentSelect } from './equipment-select';
-import { EquipmentType } from 'src/models/interfaces';
+import { EquipmentType, IEquipment } from 'src/models/interfaces';
+import { IEquipmentSpec } from './versus-interfaces';
+import { DamageCalculatorService } from './damage-calculator-service';
 
 interface Props {
     onCharacterChange: (
@@ -26,10 +27,12 @@ interface Props {
         faction: Faction,
         rank: Rank,
         rarity: Rarity,
-        stars: RarityStars
+        stars: RarityStars,
+        equipment: IEquipmentSpec[]
     ) => void;
 }
 
+/** Display an entire selection, portrait, and stat profile for a character. */
 export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
     const storeContext = useContext(StoreContext);
 
@@ -38,12 +41,12 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
     const [rank, setRank] = useState<Rank>(Rank.Stone1);
     const [rarity, setRarity] = useState<Rarity>(Rarity.Common);
     const [stars, setStars] = useState<RarityStars>(RarityStars.None);
-    const [equipmentSlots, setEquipmentSlots] = useState<(EquipmentType | undefined)[]>([
-        undefined,
-        undefined,
-        undefined,
-    ]);
+    const [canUseEquipment, setCanUseEquipment] = useState<boolean>(true);
+    const [equipmentSlot1, setEquipmentSlot1] = useState<IEquipmentSpec>({ type: EquipmentType.Crit });
+    const [equipmentSlot2, setEquipmentSlot2] = useState<IEquipmentSpec>({ type: EquipmentType.Defensive });
+    const [equipmentSlot3, setEquipmentSlot3] = useState<IEquipmentSpec>({ type: EquipmentType.CritBooster });
 
+    /** Maps rarity to the minimum number of stars to achieve that rarity. */
     const minStarsMap: Map<Rarity, RarityStars> = new Map([
         [Rarity.Common, RarityStars.None],
         [Rarity.Uncommon, RarityStars.TwoStars],
@@ -88,6 +91,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
         return ret;
     }, [faction]);
 
+    /** Adjusts stars and rank if necessary with a change to rarity. */
     const onRarityChanged = (newRarity: Rarity) => {
         if (newRarity < rarity) {
             setRarity(newRarity);
@@ -101,6 +105,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
         }
     };
 
+    /** Resets the character display to the first character in the faction. */
     const onFactionChanged = (newFaction: Faction) => {
         if (faction != newFaction) {
             setFaction(newFaction);
@@ -112,15 +117,47 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
         }
     };
 
+    const onEquipmentSlot1Changed = (equipment: IEquipmentSpec) => {
+        setEquipmentSlot1(equipment);
+    };
+
+    const onEquipmentSlot2Changed = (equipment: IEquipmentSpec) => {
+        setEquipmentSlot2(equipment);
+    };
+
+    const onEquipmentSlot3Changed = (equipment: IEquipmentSpec) => {
+        setEquipmentSlot3(equipment);
+    };
+
+    /** Parses a string representing an equipment type. */
+    const parseEquipmentType = (type: string): EquipmentType => {
+        const parsed: EquipmentType | undefined = EquipmentType[type as keyof typeof EquipmentType];
+        if (parsed == undefined) {
+            if (type == 'Defense') return EquipmentType.Defensive;
+            if (type == 'Crit Booster') return EquipmentType.CritBooster;
+            if (type == 'Block Booster') return EquipmentType.BlockBooster;
+            if (type == 'Block') return EquipmentType.Block;
+            if (type == 'Crit') return EquipmentType.Crit;
+            console.error(`Failed to parse equipment type: ${type}`);
+        }
+        return parsed!;
+    };
+
+    /** Updates the display with information about the new character. */
     const onCharacterChanged = (newCharacter: string) => {
         const unit = storeContext.characters.find(unit => unit.id === newCharacter);
-        if (unit != undefined) {
-            setFaction(unit.faction);
-            setRank(unit.rank);
-            setRarity(unit.rarity);
-            setStars(unit.stars);
-            console.log(newCharacter + ': ' + unit.equipment1 + ' ' + unit.equipment2 + ' ' + unit.equipment3);
+        if (unit == undefined) {
+            setCanUseEquipment(false);
+        } else {
+            setCanUseEquipment(true);
         }
+        setFaction(unit.faction);
+        setRank(unit.rank);
+        setRarity(unit.rarity);
+        setStars(unit.stars);
+        setEquipmentSlot1({ type: parseEquipmentType(unit.equipment1) });
+        setEquipmentSlot2({ type: parseEquipmentType(unit.equipment2) });
+        setEquipmentSlot3({ type: parseEquipmentType(unit.equipment3) });
         setCharacter(newCharacter);
     };
 
@@ -136,64 +173,32 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
         const unit = StaticDataService.unitsData.find(unit => unit.id === character);
         const charId = unit != undefined ? unit.id : undefined;
         const npcName = charId == undefined ? character : undefined;
-        onCharacterChange(charId, npcName, faction, rank, rarity, stars);
-    }, [character, faction, rank, rarity, stars]);
+        onCharacterChange(charId, npcName, faction, rank, rarity, stars, [
+            equipmentSlot1,
+            equipmentSlot2,
+            equipmentSlot3,
+        ]);
+    }, [character, faction, rank, rarity, stars, equipmentSlot1, equipmentSlot2, equipmentSlot3]);
 
     const isPlayableCharacter = useMemo(() => {
         return StaticDataService.unitsData.find(unit => unit.id === character) != undefined;
     }, [character]);
 
-    const health = useMemo(() => {
-        if (isPlayableCharacter) {
-            return StatCalculatorService.calculateHealth(character, rarity, stars, rank, 0);
-        } else {
-            return StatCalculatorService.calculateNpcHealth(character, stars, rank);
-        }
-    }, [character, rank, rarity, stars]);
+    const stats = useMemo(() => {
+        return DamageCalculatorService.getUnitData(character, faction, rank, rarity, stars, [
+            equipmentSlot1,
+            equipmentSlot2,
+            equipmentSlot3,
+        ]);
+    }, [character, rank, rarity, stars, equipmentSlot1, equipmentSlot2, equipmentSlot3]);
 
-    const damage = useMemo(() => {
-        if (isPlayableCharacter) {
-            return StatCalculatorService.calculateDamage(character, rarity, stars, rank, 0);
-        } else {
-            return StatCalculatorService.calculateNpcDamage(character, stars, rank);
-        }
-    }, [character, rank, rarity, stars]);
-
-    const armor = useMemo(() => {
-        if (isPlayableCharacter) {
-            return StatCalculatorService.calculateArmor(character, rarity, stars, rank, 0);
-        } else {
-            return StatCalculatorService.calculateNpcArmor(character, stars, rank);
-        }
-    }, [character, rank, rarity, stars]);
-
-    const meleeDamageType = useMemo(() => {
-        if (isPlayableCharacter) {
-            return StaticDataService.unitsData.find(unit => unit.id === character)?.damageTypes.melee;
-        }
-        return StaticDataService.npcDataFull.find(npc => npc.name === character)?.meleeType;
-    }, [character]);
-
-    const meleeHits = useMemo(() => {
-        if (isPlayableCharacter) {
-            return StaticDataService.unitsData.find(unit => unit.id === character)?.meleeHits;
-        }
-        return StaticDataService.npcDataFull.find(npc => npc.name === character)?.meleeHits;
-    }, [character]);
-
-    const rangeDamageType = useMemo(() => {
-        if (isPlayableCharacter) {
-            return StaticDataService.unitsData.find(unit => unit.id === character)?.damageTypes.range;
-        }
-        return StaticDataService.npcDataFull.find(npc => npc.name === character)?.rangeType;
-    }, [character]);
-
-    const rangeHits = useMemo(() => {
-        if (isPlayableCharacter) {
-            return StaticDataService.unitsData.find(unit => unit.id === character)?.rangeHits;
-        }
-        return StaticDataService.npcDataFull.find(npc => npc.name === character)?.rangeHits;
-    }, [character]);
+    const health = useMemo(() => stats.health, [stats]);
+    const damage = useMemo(() => stats.damage, [stats]);
+    const armor = useMemo(() => stats.armor, [stats]);
+    const meleeDamageType = useMemo(() => stats.meleeType, [stats]);
+    const meleeHits = useMemo(() => stats.meleeHits, [stats]);
+    const rangeDamageType = useMemo(() => stats.rangeType, [stats]);
+    const rangeHits = useMemo(() => stats.rangeHits, [stats]);
 
     const range = useMemo(() => {
         if (isPlayableCharacter) {
@@ -201,6 +206,51 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
         }
         return StaticDataService.npcDataFull.find(npc => npc.name === character)?.range;
     }, [character]);
+
+    const equipmentSlot1Display = useMemo(() => {
+        return (
+            <EquipmentSelect
+                faction={faction}
+                equipment={equipmentSlot1}
+                maxRarity={rarity}
+                onEquipmentChange={onEquipmentSlot1Changed}
+            />
+        );
+    }, [faction, rarity, equipmentSlot1]);
+
+    const equipmentSlot2Display = useMemo(() => {
+        return (
+            <EquipmentSelect
+                faction={faction}
+                equipment={equipmentSlot2}
+                maxRarity={rarity}
+                onEquipmentChange={onEquipmentSlot2Changed}
+            />
+        );
+    }, [faction, rarity, equipmentSlot2]);
+
+    const equipmentSlot3Display = useMemo(() => {
+        return (
+            <EquipmentSelect
+                faction={faction}
+                equipment={equipmentSlot3}
+                maxRarity={rarity}
+                onEquipmentChange={onEquipmentSlot3Changed}
+            />
+        );
+    }, [faction, rarity, equipmentSlot3]);
+
+    const equipmentDisplay = useMemo(() => {
+        return (
+            canUseEquipment && (
+                <div className="flex-box gap5">
+                    <div style={{ minWidth: 110 }}>{equipmentSlot1Display}</div>
+                    <div style={{ minWidth: 110 }}>{equipmentSlot2Display}</div>
+                    <div style={{ minWidth: 110 }}>{equipmentSlot3Display}</div>
+                </div>
+            )
+        );
+    }, [canUseEquipment, equipmentSlot1Display, equipmentSlot2Display, equipmentSlot3Display]);
 
     return (
         <div className="flex-box gap10">
@@ -245,11 +295,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
                         valueChanges={rank => onRankChanged(rank)}
                     />
                 </div>
-                <div className="m-3">
-                    <EquipmentSelect faction={faction} type={equipmentSlots[0]} rarity={rarity} />
-                    <EquipmentSelect faction={faction} type={equipmentSlots[1]} rarity={rarity} />
-                    <EquipmentSelect faction={faction} type={equipmentSlots[2]} rarity={rarity} />
-                </div>
+                <div>{equipmentDisplay}</div>
                 <div className="m-3">
                     <NpcPortrait name={character} rank={rank} rarity={rarity} stars={stars} />
                 </div>

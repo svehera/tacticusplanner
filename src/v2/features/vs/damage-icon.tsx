@@ -47,6 +47,7 @@ const icons = {
     toxic: { file: toxicIcon, label: 'Toxic' },
 };
 
+/** Shows the icon for a particular type of damage (e.g. Piercing). */
 export const DamageIcon = ({
     icon,
     width = 30,

@@ -1,68 +1,86 @@
 import InputLabel from '@mui/material/InputLabel';
 import { FormControl, MenuItem, Select } from '@mui/material';
-import { Faction, Rank, Rarity, RarityStars } from 'src/models/enums';
+import { Equipment, Faction, Rarity, RarityString } from 'src/models/enums';
 import React, { useMemo } from 'react';
-import { EquipmentType } from 'src/models/interfaces';
+import { EquipmentType, IEquipment } from 'src/models/interfaces';
+import { StaticDataService } from 'src/services';
+import { getImageUrl } from 'src/shared-logic/functions';
+import { IEquipmentSpec } from './versus-interfaces';
 
 interface Props {
     faction: Faction;
-    type: EquipmentType | undefined;
-    rarity: Rarity;
+    equipment: IEquipmentSpec;
+    maxRarity: Rarity;
+    onEquipmentChange: (equipment: IEquipmentSpec) => void;
 }
 
-interface Equipment {
-    type: string;
-    rarity: Rarity;
-    level: number;
-}
-
-export const EquipmentSelect: React.FC<Props> = ({ faction, type, rarity }) => {
-    const getEquipmentLabel = (type: EquipmentType): string => {
-        if (type == undefined) return '';
-        if (type == EquipmentType.Defensive) return 'Armor';
-        return EquipmentType[type as keyof typeof EquipmentType];
-    };
-
-    const formatLabel = (equipment: Equipment): string => {
-        return Rarity[equipment.rarity] + ' - Level ' + equipment.level;
-    };
-
-    const availableEquipment = useMemo(() => {
-        const equipment: Equipment[] = [];
-        const rarityIndex = Rarity.Common;
-        if (type == undefined) return equipment;
-        while (rarityIndex <= rarity) {
-            const maxLevel = rarityIndex * 2 + 1;
-            for (let i = 1; i <= maxLevel; i++) {
-                equipment.push({
-                    type: type == EquipmentType.Defensive ? 'Armor' : getEquipmentLabel(type),
-                    rarity: rarityIndex,
-                    level: i,
+/**
+ * Presents an equipment selector, allowing the user to select a relevant piece
+ * of equipment and the level of the equipment. Understands which factions can
+ * use which equipment, and which types of equipment are relevant for this slot.
+ */
+export const EquipmentSelect: React.FC<Props> = ({ faction, equipment, maxRarity, onEquipmentChange }) => {
+    const availableEquipment = useMemo((): IEquipmentSpec[] => {
+        const newEquipment: IEquipmentSpec[] = [];
+        newEquipment.push({ type: equipment.type } as IEquipmentSpec);
+        StaticDataService.equipmentData.forEach(equip => {
+            if (equip.factions.find(otherFaction => faction == otherFaction) == undefined) return;
+            if (equip.slot != equipment.type) return;
+            if (equip.rarity > maxRarity) return;
+            for (let i = 0; i < Math.max(equip.boost1.length, equip.boost2.length); i++) {
+                newEquipment.push({
+                    type: equipment.type,
+                    equipment: equip,
+                    level: i + 1,
                 });
-                if (type === EquipmentType.Defensive) {
-                    equipment.push({
-                        type: 'Armor+Health',
-                        rarity: rarityIndex,
-                        level: i,
-                    });
-                }
             }
+        });
+        return newEquipment;
+    }, [equipment, faction, maxRarity]);
+
+    const equipmentIndex = useMemo(() => {
+        if (equipment.equipment == undefined) return 0;
+        return availableEquipment.findIndex(
+            equip => equip.equipment?.displayName == equipment.equipment?.displayName && equip.level == equipment.level
+        );
+    }, [availableEquipment, equipment]);
+
+    const getIcon = (equipment: IEquipmentSpec) => {
+        if (equipment.equipment == undefined) {
+            return getImageUrl(StaticDataService.getEquipmentTypeIconPath(equipment.type));
         }
-        return equipment;
-    }, [type, rarity]);
+        return getImageUrl(StaticDataService.getEquipmentIconPath(equipment.equipment));
+    };
+
+    const getDisplay = (equipment: IEquipmentSpec) => {
+        return (
+            <span>
+                <img src={getIcon(equipment)} width={30} height={30} /> {equipment.level ? 'L' : ''}
+                {equipment.level}
+            </span>
+        );
+    };
+
+    const getMenuItemKey = (equipment: IEquipmentSpec) => {
+        if (equipment.equipment == undefined) {
+            return equipment.type;
+        }
+        return equipment.equipment.displayName + '_level_' + equipment.level;
+    };
 
     return (
         <FormControl fullWidth>
-            <InputLabel>{EquipmentType[type as keyof typeof EquipmentType]}</InputLabel>
-            <Select<Equipment>
-                label={formatLabel(availableEquipment[0])}
-                value={availableEquipment[0]}
-                onChange={event => console.log(event.target.value)}>
+            <InputLabel>{Equipment[equipment.type as keyof typeof EquipmentType]}</InputLabel>
+            <Select<IEquipmentSpec>
+                label={''}
+                value={availableEquipment[equipmentIndex]}
+                onChange={event => onEquipmentChange(event.target.value as IEquipmentSpec)}>
                 {availableEquipment.map(equipment => (
-                    <MenuItem key={formatLabel(equipment)} value={equipment}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
-                            <span>{formatLabel(equipment)}</span>
-                        </div>
+                    <MenuItem
+                        key={getMenuItemKey(equipment)}
+                        value={equipment}
+                        onClick={() => onEquipmentChange(equipment)}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>{getDisplay(equipment)}</div>
                     </MenuItem>
                 ))}
             </Select>

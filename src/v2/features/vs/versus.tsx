@@ -1,22 +1,40 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { FullCharacter } from './full-character';
 import { Faction, Rank, Rarity, RarityStars } from 'src/models/enums';
 import { DamageChart } from './damage-chart';
+import { StaticDataService } from 'src/services';
+import { EquipmentType, IEquipment } from 'src/models/interfaces';
+import { getImageUrl } from 'src/shared-logic/functions';
+import { IEquipmentSpec } from './versus-interfaces';
 
+/**
+ * Main site for the Versus page, showing stats and a damage graph for two
+ * characters.
+ */
 export const Versus: React.FC = () => {
     const [char1Id, setChar1Id] = React.useState<string>('Varro Tigurius');
     const [char1Faction, setChar1Faction] = React.useState<Faction>(Faction.Ultramarines);
     const [char1Rank, setChar1Rank] = React.useState<Rank>(Rank.Stone1);
     const [char1Rarity, setChar1Rarity] = React.useState<Rarity>(Rarity.Common);
     const [char1Stars, setChar1Stars] = React.useState<RarityStars>(RarityStars.None);
+    const [char1Equipment, setChar1Equipment] = React.useState<IEquipmentSpec[]>([
+        { type: EquipmentType.Crit },
+        { type: EquipmentType.Defensive },
+        { type: EquipmentType.CritBooster },
+    ]);
 
     const [char2Id, setChar2Id] = React.useState<string>('Varro Tigurius');
     const [char2Faction, setChar2Faction] = React.useState<Faction>(Faction.Ultramarines);
     const [char2Rank, setChar2Rank] = React.useState<Rank>(Rank.Stone1);
     const [char2Rarity, setChar2Rarity] = React.useState<Rarity>(Rarity.Common);
     const [char2Stars, setChar2Stars] = React.useState<RarityStars>(RarityStars.None);
+    const [char2Equipment, setChar2Equipment] = React.useState<IEquipmentSpec[]>([
+        { type: EquipmentType.Crit },
+        { type: EquipmentType.Defensive },
+        { type: EquipmentType.CritBooster },
+    ]);
 
     const damageChart = useMemo(() => {
         return (
@@ -26,11 +44,13 @@ export const Versus: React.FC = () => {
                 char1Rank={char1Rank}
                 char1Rarity={char1Rarity}
                 char1Stars={char1Stars}
+                char1Equipment={char1Equipment}
                 char2Id={char2Id}
                 char2Faction={char2Faction}
                 char2Rank={char2Rank}
                 char2Rarity={char2Rarity}
                 char2Stars={char2Stars}
+                char2Equipment={char2Equipment}
             />
         );
     }, [
@@ -39,11 +59,13 @@ export const Versus: React.FC = () => {
         char1Rank,
         char1Rarity,
         char1Stars,
+        char1Equipment,
         char2Id,
         char2Faction,
         char2Rank,
         char2Rarity,
         char2Stars,
+        char2Equipment,
     ]);
     return (
         <div>
@@ -100,22 +122,24 @@ export const Versus: React.FC = () => {
             <div>
                 <div className="flex-box gap10">
                     <FullCharacter
-                        onCharacterChange={(characterId, npcName, faction, rank, rarity, stars) => {
+                        onCharacterChange={(characterId, npcName, faction, rank, rarity, stars, equipment) => {
                             setChar1Id(characterId ?? npcName!);
                             setChar1Faction(faction);
                             setChar1Rank(rank);
                             setChar1Rarity(rarity);
                             setChar1Stars(stars);
+                            setChar1Equipment(equipment);
                         }}
                     />
                     <span>vs</span>
                     <FullCharacter
-                        onCharacterChange={(characterId, npcName, faction, rank, rarity, stars) => {
+                        onCharacterChange={(characterId, npcName, faction, rank, rarity, stars, equipment) => {
                             setChar2Id(characterId ?? npcName!);
                             setChar2Faction(faction);
                             setChar2Rank(rank);
                             setChar2Rarity(rarity);
                             setChar2Stars(stars);
+                            setChar2Equipment(equipment);
                         }}
                     />
                 </div>

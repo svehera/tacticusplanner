@@ -5,6 +5,7 @@ import { StaticDataService } from 'src/services';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
 import { DamageCalculatorService } from './damage-calculator-service';
 import { LineChart } from '@mui/x-charts';
+import { IEquipmentSpec } from './versus-interfaces';
 
 interface Props {
     char1Id: string;
@@ -12,37 +13,58 @@ interface Props {
     char1Rank: Rank;
     char1Rarity: Rarity;
     char1Stars: RarityStars;
+    char1Equipment: IEquipmentSpec[];
 
     char2Id: string;
     char2Faction: Faction;
     char2Rank: Rank;
     char2Rarity: Rarity;
     char2Stars: RarityStars;
+    char2Equipment: IEquipmentSpec[];
 }
 
+/**
+ * Shows a damage graph of one character versus another.
+ */
 export const DamageChart: React.FC<Props> = ({
     char1Id,
     char1Faction,
     char1Rank,
     char1Rarity,
     char1Stars,
+    char1Equipment,
     char2Id,
     char2Faction,
     char2Rank,
     char2Rarity,
     char2Stars,
+    char2Equipment,
 }) => {
     const totalSims: number = 10000;
     const attacker = useMemo(() => {
-        return DamageCalculatorService.getUnitData(char1Id, char1Faction, char1Rank, char1Rarity, char1Stars);
-    }, [char1Id, char1Faction, char1Rank, char1Rarity, char1Stars]);
+        return DamageCalculatorService.getUnitData(
+            char1Id,
+            char1Faction,
+            char1Rank,
+            char1Rarity,
+            char1Stars,
+            char1Equipment
+        );
+    }, [char1Id, char1Faction, char1Rank, char1Rarity, char1Stars, char1Equipment]);
     const defender = useMemo(() => {
-        return DamageCalculatorService.getUnitData(char2Id, char2Faction, char2Rank, char2Rarity, char2Stars);
-    }, [char2Id, char2Faction, char2Rank, char2Rarity, char2Stars]);
+        return DamageCalculatorService.getUnitData(
+            char2Id,
+            char2Faction,
+            char2Rank,
+            char2Rarity,
+            char2Stars,
+            char2Equipment
+        );
+    }, [char2Id, char2Faction, char2Rank, char2Rarity, char2Stars, char2Equipment]);
 
     const meleeSims = useMemo(() => {
         return DamageCalculatorService.runAttackSimulations(
-            attacker.damage,
+            attacker,
             attacker.meleeHits,
             attacker.meleeType,
             defender,
@@ -52,7 +74,7 @@ export const DamageChart: React.FC<Props> = ({
     const rangeSims = useMemo(() => {
         return attacker.rangeHits != undefined
             ? DamageCalculatorService.runAttackSimulations(
-                  attacker.damage,
+                  attacker,
                   attacker.rangeHits!,
                   attacker.rangeType!,
                   defender,
