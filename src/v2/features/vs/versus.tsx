@@ -108,9 +108,15 @@ export const Versus: React.FC = () => {
                     </ul>
                     <b>Work Planned</b>
                     <ul>
-                        <li>If you own a character, change the selectors to your character&squot;s current stats.</li>
-                        <li>Graph percentile damage chart</li>
-                        <li>Factor in equipment</li>
+                        <li>
+                            <s>If you own a character, change the selectors to your character&squot;s current stats.</s>
+                        </li>
+                        <li>
+                            <s>Graph percentile damage chart</s>
+                        </li>
+                        <li>
+                            <s>Factor in equipment</s>
+                        </li>
                         <li>Factor in map-based damage modifiers (e.g. high ground, trench).</li>
                         <li>Factor in modifiers from the characters&squot; traits.</li>
                         <li>Factor in modifiers from the characters&squot; passive abilities.</li>
