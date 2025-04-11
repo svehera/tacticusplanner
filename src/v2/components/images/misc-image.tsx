@@ -9,6 +9,9 @@ import blackstoneIcon from 'src/assets/images/icons/blackstone.png';
 import deploymentIcon from 'src/assets/images/icons/deployment.png';
 import warTokenIcon from 'src/assets/images/icons/warToken.png';
 import mowIcon from 'src/assets/images/icons/mow.png';
+import hitsIcon from 'src/assets/images/icons/hits.webp';
+import meleeIcon from 'src/assets/images/icons/melee.png';
+import rangedIcon from 'src/assets/images/icons/ranged.png';
 
 const icons = {
     armour: {
@@ -46,6 +49,18 @@ const icons = {
     mow: {
         file: mowIcon,
         label: 'Machine of War',
+    },
+    melee: {
+        file: meleeIcon,
+        label: 'Melee',
+    },
+    ranged: {
+        file: rangedIcon,
+        label: 'Ranged',
+    },
+    hits: {
+        file: hitsIcon,
+        label: 'Hits',
     },
 };
 

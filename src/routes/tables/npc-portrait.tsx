@@ -87,6 +87,7 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
     const getStarImage = (star: string, left: number, top: number, width: number, height: number, zIndex: number) => {
         return (
             <img
+                key={left}
                 src={star}
                 style={{
                     pointerEvents: 'none',
