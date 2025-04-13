@@ -2,7 +2,7 @@ import { DamageType, Faction, Rank, Rarity, RarityStars, Trait } from 'src/model
 import { StaticDataService } from 'src/services';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
 import { IEquipmentSpec } from './versus-interfaces';
-import { EquipmentType } from 'src/models/interfaces';
+import { EquipmentType, INpcData, IUnitData } from 'src/models/interfaces';
 
 export interface DamageUnitData {
     damage: number;
@@ -16,7 +16,7 @@ export interface DamageUnitData {
     meleeType: DamageType;
     rangeHits?: number;
     rangeType?: DamageType;
-    gravis: boolean;
+    relevantTraits: Trait[];
 }
 
 /**
@@ -24,6 +24,60 @@ export interface DamageUnitData {
  * another. Typical use is to call runAttackSimulations and graph the result.
  */
 export class DamageCalculatorService {
+    static readonly relevantTraits: Trait[] = [
+        Trait.BeastSlayer,
+        Trait.BigTarget,
+        Trait.Camouflage,
+        Trait.Daemon,
+        Trait.Dakka,
+        Trait.Diminutive,
+        Trait.Emplacement,
+        Trait.GetStuckIn,
+        Trait.Immune,
+        Trait.LetTheGalaxyBurn,
+        Trait.MKXGravis,
+        Trait.Parry,
+        Trait.Resilient,
+        Trait.Swarm,
+        Trait.Terrifying,
+        Trait.Vehicle,
+    ];
+
+    static convertNpcTrait(unit: string, trait: string): Trait | undefined {
+        let ret: Trait | undefined = undefined;
+        Object.entries(Trait).forEach(([key, value]) => {
+            if (trait == value) {
+                ret = Trait[key as keyof typeof Trait];
+            }
+        });
+        if (ret == undefined) {
+            if (trait == 'Battle fatigue') return Trait.BattleFatigue;
+            if (trait == 'Mk X Gravis') return Trait.MKXGravis;
+            if (trait == 'Suppressive fire') return Trait.SuppressiveFire;
+            if (trait == '2-man Team') return Trait.TwoManTeam;
+        }
+        return ret;
+    }
+
+    static isRelevantTrait(unit: string, trait: string): boolean {
+        const strongTrait = this.convertNpcTrait(unit, trait);
+        if (strongTrait == undefined) {
+            console.error('unknown trait ' + trait);
+            return false;
+        }
+        return this.relevantTraits.includes(strongTrait);
+    }
+
+    static getRelevantNpcTraits(npc: INpcData): Trait[] {
+        return npc.traits
+            .filter(trait => this.isRelevantTrait(npc.name, trait))
+            .map(trait => Trait[trait as keyof typeof Trait]);
+    }
+
+    static getRelevantCharacterTraits(character: IUnitData): Trait[] {
+        return character.traits.filter(trait => this.relevantTraits.includes(trait));
+    }
+
     static getUnitData(
         id: string,
         faction: Faction,
@@ -42,7 +96,7 @@ export class DamageCalculatorService {
                 meleeType: this.convertDamageType(npc.meleeType)!,
                 rangeHits: npc.rangeHits,
                 rangeType: this.convertDamageType(npc.rangeType),
-                gravis: npc.traits.includes('MK X Gravis'),
+                relevantTraits: this.getRelevantNpcTraits(npc),
             };
         }
         const unit = StaticDataService.unitsData.find(unit => unit.id === id)!;
@@ -54,7 +108,7 @@ export class DamageCalculatorService {
             meleeType: unit.damageTypes.melee,
             rangeHits: unit.rangeHits,
             rangeType: unit.damageTypes.range,
-            gravis: unit.traits.includes(Trait.MKXGravis),
+            relevantTraits: this.getRelevantCharacterTraits(unit),
         };
         equipment.forEach(equip => (unitData = this.adjustUnitData(unitData, equip)));
         return unitData;
@@ -102,6 +156,8 @@ export class DamageCalculatorService {
         const damage: number = attacker.damage;
         const critDamage: number = attacker.critDamage ?? 0;
         const blockDamage: number = defender.blockDamage ?? 0;
+        // Modifiers happen after the second pass through gravis, they happen before
+        // blocks, and they are not subject to the usual 20% variance.
         const minDamage = Math.max(
             1,
             hits *
@@ -109,12 +165,12 @@ export class DamageCalculatorService {
                     Math.max(0, damage * 0.8 - blockDamage * 1.2),
                     type,
                     defender.armor,
-                    defender.gravis
+                    defender.relevantTraits.includes(Trait.MKXGravis)
                 )
         );
         const maxDamage = Math.max(
             1,
-            hits * this.getDamageFrom1Hit((damage + critDamage) * 1.2, type, defender.armor, false)
+            hits * this.getDamageFrom1Hit((damage + critDamage) * 1.2, type, defender.armor, /*gravis=*/ false)
         );
         ret.push(Math.min(minDamage, defender.health));
         ret.push(Math.min(maxDamage, defender.health));
@@ -134,7 +190,7 @@ export class DamageCalculatorService {
                         (damage + (isCrit ? critDamage : 0)) * rng1,
                         type,
                         defender.armor,
-                        defender.gravis && !isCrit
+                        !isCrit && defender.relevantTraits.includes(Trait.MKXGravis)
                     )
                 );
                 const blockedDamage = blockDamage * rng2;

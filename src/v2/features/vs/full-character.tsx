@@ -150,14 +150,14 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
             setCanUseEquipment(false);
         } else {
             setCanUseEquipment(true);
+            setFaction(unit.faction);
+            setRank(unit.rank);
+            setRarity(unit.rarity);
+            setStars(unit.stars);
+            setEquipmentSlot1({ type: parseEquipmentType(unit.equipment1) });
+            setEquipmentSlot2({ type: parseEquipmentType(unit.equipment2) });
+            setEquipmentSlot3({ type: parseEquipmentType(unit.equipment3) });
         }
-        setFaction(unit.faction);
-        setRank(unit.rank);
-        setRarity(unit.rarity);
-        setStars(unit.stars);
-        setEquipmentSlot1({ type: parseEquipmentType(unit.equipment1) });
-        setEquipmentSlot2({ type: parseEquipmentType(unit.equipment2) });
-        setEquipmentSlot3({ type: parseEquipmentType(unit.equipment3) });
         setCharacter(newCharacter);
     };
 

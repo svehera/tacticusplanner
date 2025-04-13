@@ -117,9 +117,13 @@ export const Versus: React.FC = () => {
                         <li>
                             <s>Factor in equipment</s>
                         </li>
+                        <li>Factor in stateless modifiers (e.g. MK X Gravis) from the characters&squot; traits.</li>
+                        <li>Factor in stateless modifiers from the characters&squot; passive abilities.</li>
+                        <li>Factor in stateless modifiers from other characters&squot; active abilities.</li>
                         <li>Factor in map-based damage modifiers (e.g. high ground, trench).</li>
-                        <li>Factor in modifiers from the characters&squot; traits.</li>
-                        <li>Factor in modifiers from the characters&squot; passive abilities.</li>
+                        <li>
+                            Factor in statefull modifiers (e.g. Terminator Armor) from the characters&squot; traits.
+                        </li>
                         <li>Factor in modifiers from other characters&squot; passive abilities.</li>
                         <li>Factor in modifiers from other characters&squot; active abilities (e.g. Waaaagh!).</li>
                     </ul>
