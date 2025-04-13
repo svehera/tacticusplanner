@@ -10,10 +10,11 @@ export interface DamageUnitData {
     health: number;
     critDamage?: number;
     critChance?: number;
-    blockDamage?: number;
-    blockChance?: number;
+    blockDamages: number[];
+    blockChances: number[];
     meleeHits: number;
     meleeType: DamageType;
+    meleeModifiers: number;
     rangeHits?: number;
     rangeType?: DamageType;
     relevantTraits: Trait[];
@@ -28,8 +29,9 @@ export class DamageCalculatorService {
         Trait.BeastSlayer,
         Trait.BigTarget,
         Trait.Camouflage,
+        Trait.CloseCombatWeakness,
+        Trait.ContagionsOfNurgle,
         Trait.Daemon,
-        Trait.Dakka,
         Trait.Diminutive,
         Trait.Emplacement,
         Trait.GetStuckIn,
@@ -40,8 +42,59 @@ export class DamageCalculatorService {
         Trait.Resilient,
         Trait.Swarm,
         Trait.Terrifying,
+        Trait.TwoManTeam,
         Trait.Vehicle,
     ];
+
+    static modifyAttacker(attacker: DamageUnitData, attackerTraits: Trait[], defenderTraits: Trait[]): DamageUnitData {
+        const ret = { ...attacker };
+
+        if (
+            attackerTraits.includes(Trait.BeastSlayer) &&
+            (defenderTraits.includes(Trait.BigTarget) || defenderTraits.includes(Trait.Vehicle))
+        ) {
+            ret.meleeModifiers *= 1.1;
+        }
+        if (defenderTraits.includes(Trait.Camouflage)) {
+            if (attacker.rangeHits != undefined) {
+                ret.rangeHits = Math.max(attacker.rangeHits - 1, 1);
+            }
+        }
+        if (attackerTraits.includes(Trait.CloseCombatWeakness)) {
+            ret.meleeModifiers *= 0.5;
+        }
+        if (defenderTraits.includes(Trait.Diminutive)) {
+            ret.meleeHits = Math.max(attacker.meleeHits - 1, 1);
+            if (ret.rangeHits != undefined) {
+                ret.meleeHits = Math.max(ret.rangeHits - 1, 1);
+            }
+        }
+        if (attackerTraits.includes(Trait.Emplacement)) {
+            ret.meleeModifiers *= 0.5;
+        }
+        if (defenderTraits.includes(Trait.Diminutive)) {
+            ret.meleeHits = Math.max(attacker.meleeHits - 1, 1);
+        }
+        if (defenderTraits.includes(Trait.Terrifying)) {
+            ret.meleeModifiers *= 0.7;
+        }
+
+        return ret;
+    }
+
+    static modifyDefender(defender: DamageUnitData, attackerTraits: Trait[], defenderTraits: Trait[]): DamageUnitData {
+        const ret = { ...defender };
+        if (defenderTraits.includes(Trait.BeastSlayer)) {
+            ret.blockChances.push(10);
+            ret.blockChances.push(defender.health / 5);
+        }
+        if (!attackerTraits.includes(Trait.Immune)) {
+            if (attackerTraits.includes(Trait.ContagionsOfNurgle)) {
+                ret.armor *= Math.round(0.8);
+            }
+        }
+        return ret;
+    }
 
     static convertNpcTrait(unit: string, trait: string): Trait | undefined {
         let ret: Trait | undefined = undefined;
@@ -78,6 +131,18 @@ export class DamageCalculatorService {
         return character.traits.filter(trait => this.relevantTraits.includes(trait));
     }
 
+    static modifyWithTraits(traits: Trait[], data: DamageUnitData): DamageUnitData {
+        if (traits.includes(Trait.Daemon)) {
+            data.blockChances.push(25);
+            data.blockDamages.push(data.health / 2);
+        }
+        if (traits.includes(Trait.BeastSlayer)) {
+            data.blockChances.push(10);
+            data.blockChances.push(data.health / 5);
+        }
+        return data;
+    }
+
     static getUnitData(
         id: string,
         faction: Faction,
@@ -88,16 +153,19 @@ export class DamageCalculatorService {
     ): DamageUnitData {
         const npc = StaticDataService.npcDataFull.find(npc => npc.name === id);
         if (npc != undefined) {
-            return {
+            return this.modifyWithTraits(this.getRelevantNpcTraits(npc), {
                 damage: StatCalculatorService.calculateNpcDamage(npc.name, stars, rank),
                 armor: StatCalculatorService.calculateNpcArmor(npc.name, stars, rank),
                 health: StatCalculatorService.calculateNpcHealth(npc.name, stars, rank),
                 meleeHits: npc.meleeHits,
                 meleeType: this.convertDamageType(npc.meleeType)!,
+                meleeModifiers: 100,
+                blockChances: [],
+                blockDamages: [],
                 rangeHits: npc.rangeHits,
                 rangeType: this.convertDamageType(npc.rangeType),
                 relevantTraits: this.getRelevantNpcTraits(npc),
-            };
+            });
         }
         const unit = StaticDataService.unitsData.find(unit => unit.id === id)!;
         let unitData: DamageUnitData = {
@@ -106,21 +174,31 @@ export class DamageCalculatorService {
             health: StatCalculatorService.calculateHealth(unit.id, rarity, stars, rank, 0),
             meleeHits: unit.meleeHits,
             meleeType: unit.damageTypes.melee,
+            meleeModifiers: 100,
+            blockChances: [],
+            blockDamages: [],
             rangeHits: unit.rangeHits,
             rangeType: unit.damageTypes.range,
             relevantTraits: this.getRelevantCharacterTraits(unit),
         };
         equipment.forEach(equip => (unitData = this.adjustUnitData(unitData, equip)));
-        return unitData;
+        return this.modifyWithTraits(unit.traits, unitData);
     }
 
     static adjustUnitData(unitData: DamageUnitData, equipment: IEquipmentSpec): DamageUnitData {
         if (equipment.equipment == undefined) return unitData;
         if (equipment.type == EquipmentType.Block || equipment.type == EquipmentType.BlockBooster) {
-            if (unitData.blockChance == undefined) unitData.blockChance = 0;
-            if (unitData.blockDamage == undefined) unitData.blockDamage = 0;
-            unitData.blockChance += equipment.equipment.chance!;
-            unitData.blockDamage += equipment.equipment.boost1[equipment.level! - 1];
+            let chance = unitData.blockChances.length == 0 ? 0 : unitData.blockChances[0];
+            let damage = unitData.blockDamages.length == 0 ? 0 : unitData.blockDamages[0];
+            chance += equipment.equipment.chance!;
+            damage += equipment.equipment.boost1[equipment.level! - 1];
+            if (unitData.blockChances.length == 0) {
+                unitData.blockChances.push(chance);
+                unitData.blockDamages.push(damage);
+            } else {
+                unitData.blockChances[0] = chance;
+                unitData.blockDamages[0] = damage;
+            }
         } else if (equipment.type == EquipmentType.Crit || equipment.type == EquipmentType.CritBooster) {
             // Crit items always come in order. First crit, then maybe second crit, then maybe crit booster.
             if (unitData.critChance == undefined) unitData.critChance = 0;
@@ -152,6 +230,8 @@ export class DamageCalculatorService {
         defender: DamageUnitData,
         totalSims: number
     ): number[] {
+        attacker = this.modifyAttacker(attacker, attacker.relevantTraits, defender.relevantTraits);
+        defender = this.modifyDefender(defender, attacker.relevantTraits, defender.relevantTraits);
         const ret: number[] = [];
         const damage: number = attacker.damage;
         const critDamage: number = attacker.critDamage ?? 0;
@@ -174,6 +254,8 @@ export class DamageCalculatorService {
         );
         ret.push(Math.min(minDamage, defender.health));
         ret.push(Math.min(maxDamage, defender.health));
+        // TODO - adjust hits for Get Stuck In.
+        // TODO - adjust hits for Let The Galaxy Burn.
         for (let i = 2; i < totalSims; ++i) {
             let totalDamage: number = 0;
             let canCrit = attacker.critChance != undefined;
@@ -198,6 +280,9 @@ export class DamageCalculatorService {
             }
             totalDamage = Math.min(totalDamage, defender.health);
             ret.push(totalDamage);
+            // TODO - deal with Resilient.
+            // TODO - deal with Swarm.
+            // TODO - deal with Two-Man Team.
         }
         ret.sort((a, b) => b - a);
         return ret;
