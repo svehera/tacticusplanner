@@ -1732,7 +1732,8 @@
         "Number": 89,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "forcas.webp"
+        "Icon": "forcas.webp",
+        "releaseDate": "2025-05-11T00:00:00Z"
     },
     {
         "Name": "Neurothrope",
