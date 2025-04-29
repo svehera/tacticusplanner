@@ -22,6 +22,7 @@ import { KharnLegendaryEvent } from 'src/models/legendary-events/kharn.le';
 import { MephistonLegendaryEvent } from 'src/models/legendary-events/mephiston.le';
 import { PatermineLegendaryEvent } from 'src/models/legendary-events/patermine.le';
 import { DanteLegendaryEvent } from 'src/models/legendary-events/dante.le';
+import { CustodesLegendaryEvent } from 'src/models/legendary-events/custodes.le';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,
@@ -144,6 +145,8 @@ export const getLegendaryEvent = (id: LegendaryEventEnum, characters: ICharacter
     switch (id) {
         case LegendaryEventEnum.AunShi:
             return new AunShiLegendaryEvent(characters);
+        case LegendaryEventEnum.Custodes:
+            return new CustodesLegendaryEvent(characters);
         case LegendaryEventEnum.Dante:
             return new DanteLegendaryEvent(characters);
         case LegendaryEventEnum.Kharn:
