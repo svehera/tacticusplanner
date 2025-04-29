@@ -109,8 +109,8 @@
     },
     {
         "alliance": "Imperial",
-        "name": "Adeptus Custodes",
-        "icon": "Adeptus Custodes.png",
+        "name": "Unknown",
+        "icon": "_.png",
         "color": "#D4AF37"
     }
 ]

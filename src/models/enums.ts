@@ -23,7 +23,7 @@ export enum Faction {
     WorldEaters = 'World Eaters',
     BloodAngels = 'Blood Angels',
     GenestealerCults = 'Genestealer Cults',
-    AdeptusCustodes = 'Adeptus Custodes',
+    AdeptusCustodes = 'Unknown',
 }
 
 export enum RarityString {
@@ -196,7 +196,7 @@ export enum LegendaryEventEnum {
     Mephiston = 8,
     Patermine = 9,
     Dante = 10,
-    Custodes = 11,
+    Unknown = 11,
 }
 
 export enum PersonalGoalType {

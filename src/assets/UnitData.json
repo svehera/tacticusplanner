@@ -2409,11 +2409,11 @@
         }
     },
     {
-        "Name": "Custodes",
-        "Title": "Unknown Custodes",
-        "Full Name": "Unknown Custodes",
-        "Short Name": "Custodes",
-        "Faction": "Adeptus Custodes",
+        "Name": "Unknown",
+        "Title": "Unknown",
+        "Full Name": "Unknown",
+        "Short Name": "Unknown",
+        "Faction": "Unknown",
         "Alliance": "Imperial",
         "Health": 1,
         "Damage": 1,
@@ -2429,7 +2429,7 @@
         "Number": 90,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "custodes.webp",
+        "Icon": "unset.webp",
         "releaseDate": "2025-06-01T00:00:00Z",
         "ReleaseRarity": 6,
         "lre": {

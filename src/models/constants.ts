@@ -145,7 +145,7 @@ export const getLegendaryEvent = (id: LegendaryEventEnum, characters: ICharacter
     switch (id) {
         case LegendaryEventEnum.AunShi:
             return new AunShiLegendaryEvent(characters);
-        case LegendaryEventEnum.Custodes:
+        case LegendaryEventEnum.Unknown:
             return new CustodesLegendaryEvent(characters);
         case LegendaryEventEnum.Dante:
             return new DanteLegendaryEvent(characters);
