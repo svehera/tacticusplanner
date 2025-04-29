@@ -106,5 +106,11 @@
         "name": "Genestealer Cults",
         "icon": "Genestealer Cults.png",
         "color": "#CE7140"
+    },
+    {
+        "alliance": "Imperial",
+        "name": "Adeptus Custodes",
+        "icon": "Adeptus Custodes.png",
+        "color": "#D4AF37"
     }
 ]
