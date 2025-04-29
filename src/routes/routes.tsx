@@ -20,6 +20,7 @@ import { guidesLazyRoute } from 'src/v2/pages/guides/guides.route';
 import { lreLazyRoute } from 'src/v2/pages/lre/lre-route';
 import { myProgressLazyRoute } from 'src/v2/pages/my-progress/my-progress.route';
 import { guildApiLazyRoute } from '@/v2/pages/guild-api/guild-api.route';
+import { versusLazyRoute } from '@/v2/features/vs/versus.route';
 
 export const globalInputRoutes: RouteObject[] = [
     wyoLazyRoute,
@@ -79,6 +80,7 @@ export const globalLearnRoutes: RouteObject[] = [
             return { Component: NpcInfo };
         },
     },
+    versusLazyRoute,
     {
         path: 'learn/upgrades',
         async lazy() {
