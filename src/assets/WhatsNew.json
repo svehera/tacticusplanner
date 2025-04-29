@@ -9,11 +9,16 @@
                 {
                     "text": "Added 1.28 update data",
                     "subPoints": [
+                        "(cpunerd) Significant shuffle of upgrade materials in elite nodes. Changes to normal/mirror nodes are not yet known/shown.",
                         "(laserian403) Added [Dark Angels] Forcas Oathsworn, Inner Circle Companion, unlockable in the ‘Inner Circle’ event, starting on May 11"
                     ]
                 },
                 {
                     "text": "(cpunerd) Added 'Learn > Versus' page",
+                    "subPoints": [
+                        "This page is a major work in progress.",
+                        "Pick two characters/NPCs, select rank and rarity, see how much damage one does to the other."
+                    ],
                     "route": "learn/versus"
                 }
             ],
