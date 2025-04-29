@@ -1732,7 +1732,8 @@
         "Number": 89,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
-        "Icon": "forcas.webp"
+        "Icon": "forcas.webp",
+        "releaseDate": "2025-05-11T00:00:00Z"
     },
     {
         "Name": "Neurothrope",
@@ -2405,6 +2406,38 @@
             "eventStage": 3,
             "nextEventDate": "TBA",
             "nextEventDateUtc": ""
+        }
+    },
+    {
+        "Name": "Custodes",
+        "Title": "Unknown Custodes",
+        "Full Name": "Unknown Custodes",
+        "Short Name": "Custodes",
+        "Faction": "Adeptus Custodes",
+        "Alliance": "Imperial",
+        "Health": 1,
+        "Damage": 1,
+        "Armour": 1,
+        "Initial rarity": "Legendary",
+        "Melee Damage": "Physical",
+        "Melee Hits": 1,
+        "Movement": 1,
+        "Equipment1": "Crit",
+        "Equipment2": "Block",
+        "Equipment3": "Crit Booster",
+        "Traits": [],
+        "Number": 90,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "custodes.webp",
+        "releaseDate": "2025-06-01T00:00:00Z",
+        "ReleaseRarity": 6,
+        "lre": {
+            "id": 11,
+            "finished": false,
+            "eventStage": 1,
+            "nextEventDate": "01 June",
+            "nextEventDateUtc": "Sun, 01 June 2025 00:00:00 GMT"
         }
     }
 ]

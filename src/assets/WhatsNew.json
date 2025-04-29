@@ -1,6 +1,25 @@
 ﻿{
-    "currentVersion": "1.7.2",
+    "currentVersion": "1.7.3",
     "releaseNotes": [
+        {
+            "version": "1.7.3",
+            "date": "April 29",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "Added 1.28 update data",
+                    "subPoints": [
+                        "(laserian403) Added [Dark Angels] Forcas Oathsworn, Inner Circle Companion, unlockable in the ‘Inner Circle’ event, starting on May 11"
+                    ]
+                },
+                {
+                    "text": "(cpunerd) Added 'Learn > Versus' page",
+                    "route": "learn/versus"
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
         {
             "version": "1.7.2",
             "date": "April 3",
