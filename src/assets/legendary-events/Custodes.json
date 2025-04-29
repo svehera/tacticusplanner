@@ -14,7 +14,7 @@
     "alpha": {
         "name": "Alpha (No Chaos)",
         "enemies": {
-            "label": "Thousand Suns",
+            "label": "Thousand Sons",
             "link": "https://tacticus.fandom.com/wiki/Thousand_Sons#NPC_Units"
         },
         "killPoints": 40,
@@ -32,7 +32,7 @@
     "gamma": {
         "name": "Gamma (No Xenos)",
         "enemies": {
-            "label": "Genestealer Cults/Tyranids",
+            "label": "Genestealer Cults & Tyranids",
             "link": "https://tacticus.fandom.com/wiki/Genestealer_Cults#NPC_Units"
         },
         "killPoints": 28,
