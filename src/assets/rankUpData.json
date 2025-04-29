@@ -2607,6 +2607,144 @@
             "Superaugmented Defences"
         ]
     },
+    "Forcas": {
+        "Stone I": [
+            "Ropes and Chains",
+            "The Iron Phoenix",
+            "Auspex",
+            "Weapon Anointment Oils",
+            "Armor Trim",
+            "Fine Purity Seal"
+        ],
+        "Stone II": [
+            "Lesser Reliquary of Protection",
+            "Minor Bionic Enhancement",
+            "Fine Micro-Generator",
+            "Blessed Weapon Oils",
+            "Rebreather",
+            "Purity Seal"
+        ],
+        "Stone III": [
+            "Reliquary of Protection",
+            "Bionic Enhancement",
+            "Vox-Caster",
+            "Can of Promethium",
+            "Blessed Tasset Plate",
+            "Oath Seal"
+        ],
+        "Iron I": [
+            "Holster and Pockets",
+            "Mission Objective",
+            "Fine Micro-Generator",
+            "Barrel of Promethium",
+            "Cloak",
+            "Blessed Ceramite"
+        ],
+        "Iron II": [
+            "Reliquary of Protection",
+            "Battle Plan",
+            "Adamantium Blades",
+            "Divinator Class Auspex",
+            "Artificer Tasset Plate",
+            "Oath Seal"
+        ],
+        "Iron III": [
+            "Sanctified Reliquary of Protection",
+            "The Gold Phoenix",
+            "Chapter Pendant",
+            "Advanced Combat Stimms",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Key of Ignorance",
+            "The Phoenix Ascendant",
+            "Prey-Sight",
+            "Classified Data-Slate",
+            "Fine Cloak",
+            "Ceramite Bar"
+        ],
+        "Bronze II": [
+            "Key of Knowledge",
+            "Advanced Bionics",
+            "Krak Grenade",
+            "Belt of Krak Grenades",
+            "Dark Hood",
+            "Blessed Purity Seal"
+        ],
+        "Bronze III": [
+            "Battle Scar",
+            "Mars-Pattern Bionics",
+            "Bolts of Judgement",
+            "Sanctified Weapon Oils",
+            "Calibanite Hood",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Key of Knowledge",
+            "Secret Agenda",
+            "Bolts of Judgement",
+            "Relic Hilt",
+            "Calibanite Hood",
+            "Ceramite Sheet"
+        ],
+        "Silver II": [
+            "Stone Guardian Fragment",
+            "Greater Reliquary of Protection",
+            "Bolts of Furious Vengeance",
+            "Belt of Krak Grenades",
+            "Inner Circle Hood",
+            "Grand Purity Seal"
+        ],
+        "Silver III": [
+            "Key of Achrabael",
+            "Grand Strategy",
+            "Bolts of Judgement",
+            "Digital Weapons",
+            "Archeo-Tech Remnant",
+            "Ceramite Plates"
+        ],
+        "Gold I": [
+            "Key of Achrabael",
+            "Relic Bionic Enhancement",
+            "Master-Crafted Ammo",
+            "Blessed Promethium Tank",
+            "Inner Circle Hood",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold II": [
+            "Perfidious Relic of the Unforgiven",
+            "Legendary Reliquary of Protection",
+            "Bolts of Furious Vengeance",
+            "Digital Weapons",
+            "Inner Circle Hood",
+            "Divine Cloak"
+        ],
+        "Gold III": [
+            "Key of Achrabael",
+            "Grandiose Skull Ornament",
+            "Arbiter's Gaze",
+            "Powered Blade",
+            "Shroud of Heroes",
+            "Seal of the Emperor's Protection"
+        ],
+        "Diamond I": [
+            "Perfidious Relic of the Unforgiven",
+            "Legendary Reliquary of Protection",
+            "Arbiter's Gaze",
+            "Relic Micro-Generator",
+            "Shroud of Heroes",
+            "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Perfidious Relic of the Unforgiven",
+            "Superaugmented Constitution",
+            "Arbiter's Gaze",
+            "Superaugmented Strength",
+            "Shroud of Heroes",
+            "Superaugmented Defences"
+        ]
+    },
     "Ulf": {
         "Stone I": [
             "Ropes and Chains",
