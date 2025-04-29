@@ -82,7 +82,7 @@ export class CustodesLegendaryEvent extends LegendaryEventBase {
                 {
                     name: 'Mechanical',
                     points: 75,
-                    units: filter(noImperial).byTrait(Trait.Mechanical),
+                    units: filter(noImperial).isMechanical(),
                     iconId: 'mechanical',
                     index: 2,
                 },
