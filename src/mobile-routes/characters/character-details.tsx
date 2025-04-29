@@ -1,4 +1,4 @@
-﻿import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ICharacter2 } from 'src/models/interfaces';
 import { FormControl, FormGroup, Grid, Input, MenuItem, Select } from '@mui/material';
 import { Rank, Rarity, RarityStars } from 'src/models/enums';
