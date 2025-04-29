@@ -5,12 +5,8 @@
     "eventStage": 1,
     "nextEventDate": "June 1",
     "nextEventDateUtc": "Sun, 01 June 2025 00:00:00 GMT",
-    "regularMissions": [
-        "TBA"
-    ],
-    "premiumMissions": [
-        "TBA"
-    ],
+    "regularMissions": ["TBA"],
+    "premiumMissions": ["TBA"],
     "alpha": {
         "name": "Alpha (No Chaos)",
         "enemies": {
