@@ -2363,7 +2363,7 @@
         "Melee Damage": "Projectile",
         "Melee Hits": 3,
         "Ranged Damage": "Projectile",
-        "Ranged Hits": 1,
+        "Ranged Hits": 3,
         "Distance": 2,
         "Movement": 3,
         "Equipment1": "Crit",
