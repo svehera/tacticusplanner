@@ -106,5 +106,11 @@
         "name": "Genestealer Cults",
         "icon": "Genestealer Cults.png",
         "color": "#CE7140"
+    },
+    {
+        "alliance": "Imperial",
+        "name": "Unknown",
+        "icon": "_.png",
+        "color": "#808080"
     }
 ]

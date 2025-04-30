@@ -141,18 +141,10 @@ export class StatCalculatorService {
     ): number {
         const rankValue: number = StatCalculatorService.getRankForComputation(rank);
         const rarityValue: number = rarityStars as number;
-        // According to Towen, SP buffed Incisus at some point, and he's now
-        // literally the only character that has a special calculation for his
-        // stats.
-        const incisusHack: number = unitId === 'Incisus' ? 1 : 0;
         const upgradeBoost =
             (baseStat * Math.pow(1.25205, rankValue + 1) - baseStat * Math.pow(1.25205, rankValue)) / 2.0;
         return Math.round(
-            upgradeBoost * numAppliedUpgrades +
-                baseStat *
-                    Math.pow(1.25205, rankValue) *
-                    (1 + 0.1 * rarityValue) *
-                    (1 + Math.min(0.05 * rankValue, 0.3) * incisusHack)
+            upgradeBoost * numAppliedUpgrades + baseStat * Math.pow(1.25205, rankValue) * (1 + 0.1 * rarityValue)
         );
     }
 

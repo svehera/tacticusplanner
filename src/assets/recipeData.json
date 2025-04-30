@@ -1,4 +1,32 @@
 {
+    "Arcane Genetic Alchemy": {
+        "material": "Arcane Genetic Alchemy",
+        "craftable": false,
+        "stat": "Health",
+        "rarity": "Legendary",
+        "icon": "arcane genetic alchemy.jpg"
+    },
+    "Auramite Wing": {
+        "material": "Auramite Wing",
+        "craftable": false,
+        "stat": "Armour",
+        "rarity": "Rare",
+        "icon": "auramite wing.jpg"
+    },
+    "Flawless Terran Gem": {
+        "material": "Flawless Terran Gem",
+        "craftable": false,
+        "stat": "Health",
+        "rarity": "Rare",
+        "icon": "flawless terran gem.jpg"
+    },
+    "Integrated Bolt Feeder": {
+        "material": "Integrated Bolt Feeder",
+        "craftable": false,
+        "stat": "Damage",
+        "rarity": "Rare",
+        "icon": "integrated bolt feeder.jpg"
+    },
     "Proclamation Receiver": {
         "material": "Proclamation Receiver",
         "faction": "Genestealer Cults",

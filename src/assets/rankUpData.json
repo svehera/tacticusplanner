@@ -2607,6 +2607,144 @@
             "Superaugmented Defences"
         ]
     },
+    "Forcas": {
+        "Stone I": [
+            "Ropes and Chains",
+            "The Iron Phoenix",
+            "Auspex",
+            "Weapon Anointment Oils",
+            "Armor Trim",
+            "Fine Purity Seal"
+        ],
+        "Stone II": [
+            "Lesser Reliquary of Protection",
+            "Minor Bionic Enhancement",
+            "Fine Micro-Generator",
+            "Blessed Weapon Oils",
+            "Rebreather",
+            "Purity Seal"
+        ],
+        "Stone III": [
+            "Reliquary of Protection",
+            "Bionic Enhancement",
+            "Vox-Caster",
+            "Can of Promethium",
+            "Blessed Tasset Plate",
+            "Oath Seal"
+        ],
+        "Iron I": [
+            "Holster and Pockets",
+            "Mission Objective",
+            "Fine Micro-Generator",
+            "Barrel of Promethium",
+            "Cloak",
+            "Blessed Ceramite"
+        ],
+        "Iron II": [
+            "Reliquary of Protection",
+            "Battle Plan",
+            "Adamantium Blades",
+            "Divinator Class Auspex",
+            "Artificer Tasset Plate",
+            "Oath Seal"
+        ],
+        "Iron III": [
+            "Sanctified Reliquary of Protection",
+            "The Gold Phoenix",
+            "Chapter Pendant",
+            "Advanced Combat Stimms",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Key of Ignorance",
+            "The Phoenix Ascendant",
+            "Prey-Sight",
+            "Classified Data-Slate",
+            "Fine Cloak",
+            "Ceramite Bar"
+        ],
+        "Bronze II": [
+            "Key of Knowledge",
+            "Advanced Bionics",
+            "Krak Grenade",
+            "Belt of Krak Grenades",
+            "Dark Hood",
+            "Blessed Purity Seal"
+        ],
+        "Bronze III": [
+            "Battle Scar",
+            "Mars-Pattern Bionics",
+            "Bolts of Judgement",
+            "Sanctified Weapon Oils",
+            "Calibanite Hood",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Key of Knowledge",
+            "Secret Agenda",
+            "Bolts of Judgement",
+            "Relic Hilt",
+            "Calibanite Hood",
+            "Ceramite Sheet"
+        ],
+        "Silver II": [
+            "Stone Guardian Fragment",
+            "Greater Reliquary of Protection",
+            "Bolts of Furious Vengeance",
+            "Belt of Krak Grenades",
+            "Inner Circle Hood",
+            "Grand Purity Seal"
+        ],
+        "Silver III": [
+            "Key of Achrabael",
+            "Grand Strategy",
+            "Bolts of Judgement",
+            "Digital Weapons",
+            "Archeo-Tech Remnant",
+            "Ceramite Plates"
+        ],
+        "Gold I": [
+            "Key of Achrabael",
+            "Relic Bionic Enhancement",
+            "Master-Crafted Ammo",
+            "Blessed Promethium Tank",
+            "Inner Circle Hood",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold II": [
+            "Perfidious Relic of the Unforgiven",
+            "Legendary Reliquary of Protection",
+            "Bolts of Furious Vengeance",
+            "Digital Weapons",
+            "Inner Circle Hood",
+            "Divine Cloak"
+        ],
+        "Gold III": [
+            "Key of Achrabael",
+            "Grandiose Skull Ornament",
+            "Arbiter's Gaze",
+            "Powered Blade",
+            "Shroud of Heroes",
+            "Seal of the Emperor's Protection"
+        ],
+        "Diamond I": [
+            "Perfidious Relic of the Unforgiven",
+            "Legendary Reliquary of Protection",
+            "Arbiter's Gaze",
+            "Relic Micro-Generator",
+            "Shroud of Heroes",
+            "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Perfidious Relic of the Unforgiven",
+            "Superaugmented Constitution",
+            "Arbiter's Gaze",
+            "Superaugmented Strength",
+            "Shroud of Heroes",
+            "Superaugmented Defences"
+        ]
+    },
     "Ulf": {
         "Stone I": [
             "Ropes and Chains",
@@ -12235,6 +12373,144 @@
             "Preternatural Strength",
             "Gene-Sire's Reliquant",
             "Preternatural Defences"
+        ]
+    },
+    "Unknown": {
+        "Stone I": [
+            "Ropes and Chains",
+            "The Iron Phoenix",
+            "Auspex",
+            "Weapon Anointment Oils",
+            "Fine Purity Seal",
+            "Armor Trim"
+        ],
+        "Stone II": [
+            "Lesser Reliquary of Protection",
+            "Minor Bionic Enhancement",
+            "Fine Micro-Generator",
+            "Blessed Weapon Oils",
+            "Purity Seal",
+            "Purity Seal"
+        ],
+        "Stone III": [
+            "Reliquary of Protection",
+            "Bionic Enhancement",
+            "Vox-Caster",
+            "Basic Auxiliary Core",
+            "Ceramite Lump",
+            "Oath Seal"
+        ],
+        "Iron I": [
+            "Holster and Pockets",
+            "Mission Objective",
+            "Fine Micro-Generator",
+            "Locator Beacon",
+            "Oath Seal",
+            "Adamantium Lump"
+        ],
+        "Iron II": [
+            "Reliquary of Protection",
+            "Battle Plan",
+            "Adamantium Blades",
+            "Divinator Class Auspex",
+            "Artificer Tasset Plate",
+            "Oath Seal"
+        ],
+        "Iron III": [
+            "Sanctified Reliquary of Protection",
+            "The Gold Phoenix",
+            "Blood Shard Bolt",
+            "Powerful Auxiliary Core",
+            "Blessed Ceramite",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Bloodstone Tear",
+            "The Phoenix Ascendant",
+            "Prey-Sight",
+            "Classified Data-Slate",
+            "Blessed Purity Seal",
+            "Impressive Armor Trim"
+        ],
+        "Bronze II": [
+            "Bloodstone Pendant",
+            "Advanced Bionics",
+            "Krak Grenade",
+            "Anointed Auxiliary Core",
+            "Artisan Plating",
+            "Blessed Purity Seal"
+        ],
+        "Bronze III": [
+            "Battle Scar",
+            "Mars-Pattern Bionics",
+            "Quake Bolts",
+            "Sanctified Weapon Oils",
+            "Artisan of War Plating",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Bloodstone Pendant",
+            "Terminator Honours",
+            "Quake Bolts",
+            "Relic Hilt",
+            "Artisan of War Plating",
+            "Ancient Tasset Plate"
+        ],
+        "Silver II": [
+            "Blood Vial",
+            "Greater Reliquary of Protection",
+            "Decimator Bolts",
+            "Anointed Auxiliary Core",
+            "Artisan of War Plating",
+            "Grand Purity Seal"
+        ],
+        "Silver III": [
+            "Bloodstone Pendant",
+            "Grand Strategy",
+            "Quake Bolts",
+            "Digital Weapons",
+            "Purity Seal of the Primarch",
+            "Ancient Tasset Plate"
+        ],
+        "Gold I": [
+            "Bloodstone Icon",
+            "Relic Bionic Enhancement",
+            "Archeotech Bionics",
+            "Relic Auxiliary Core",
+            "Angelic Plating",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold II": [
+            "Icon of the Angel",
+            "Legendary Reliquary of Protection",
+            "Decimator Bolts",
+            "Digital Weapons",
+            "Angelic Plating",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold III": [
+            "Bloodstone Icon",
+            "Grandiose Skull Ornament",
+            "Archangel's Shard",
+            "Powered Blade",
+            "Visage of Death",
+            "Seal of the Emperor's Protection"
+        ],
+        "Diamond I": [
+            "Icon of the Angel",
+            "Legendary Reliquary of Protection",
+            "Archangel's Shard",
+            "Relic Micro-Generator",
+            "Visage of Death",
+            "Relic Tasset Plate"
+        ],
+        "Diamond II": [
+            "Icon of the Angel",
+            "Superaugmented Constitution",
+            "Archangel's Shard",
+            "Superaugmented Strength",
+            "Visage of Death",
+            "Superaugmented Defences"
         ]
     }
 }

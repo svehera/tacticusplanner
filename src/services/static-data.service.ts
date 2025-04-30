@@ -7,12 +7,14 @@ import contributors from '../assets/contributors/thankYou.json';
 import contentCreators from '../assets/contributors/contentCreators.json';
 
 import battleData from '../assets/newBattleData.json';
+import rawEquipmentData from '../assets/EquipmentData.json';
 import npcData from '../assets/NpcData.json';
 import newBattleData from '../assets/newBattleData.json';
 import recipeData from '../assets/recipeData.json';
 import rankUpData from '../assets/rankUpData.json';
 
 import {
+    EquipmentType,
     ICampaignBattle,
     ICampaignBattleComposed,
     ICampaignsData,
@@ -20,6 +22,7 @@ import {
     ICharLegendaryEvents,
     IContentCreator,
     IContributor,
+    IEquipment,
     IEstimatedRanksSettings,
     IMaterialEstimated2,
     IMaterialFull,
@@ -33,7 +36,7 @@ import {
     IWhatsNew,
     UnitDataRaw,
 } from '../models/interfaces';
-import { Alliance, Faction, Rank, Rarity, RarityString } from '../models/enums';
+import { Alliance, EquipmentClass, Faction, Rank, Rarity, RarityString } from '../models/enums';
 import { rarityStringToNumber, rarityToStars } from '../models/constants';
 import { getEnumValues, rankToString } from '../shared-logic/functions';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
@@ -47,6 +50,7 @@ export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;
     static readonly battleData: ICampaignsData = battleData;
     static readonly newBattleData: ICampaignsData = newBattleData;
+    static readonly equipmentData: IEquipment[] = this.convertEquipmentData();
     static readonly npcData: INpcsRaw = npcData;
     static readonly recipeData: IRecipeData = recipeData;
     static readonly rankUpData: IRankUpData = rankUpData;
@@ -99,6 +103,12 @@ export class StaticDataService {
                 return Faction.Black_Legion;
             case 'Black Templars':
                 return Faction.Black_Templars;
+            case 'Blood Angels':
+                return Faction.BloodAngels;
+            case 'Dark Angels':
+                return Faction.Dark_Angels;
+            case 'Genestealer Cults':
+                return Faction.GenestealerCults;
             case 'Orks':
                 return Faction.Orks;
             case 'Necrons':
@@ -108,6 +118,7 @@ export class StaticDataService {
             case 'Aeldari':
                 return Faction.Aeldari;
             case "T'au":
+            case "T'au Empire":
                 return Faction.T_Au;
             case 'Thousand Sons':
                 return Faction.Thousand_Sons;
@@ -117,6 +128,8 @@ export class StaticDataService {
                 return Faction.WorldEaters;
             case 'Adepta Sororitas':
                 return Faction.ADEPTA_SORORITAS;
+            case 'Space Wolves':
+                return Faction.Space_Wolves;
             default:
                 return undefined;
         }
@@ -681,6 +694,45 @@ export class StaticDataService {
         ]);
     }
 
+    private static getEquipmentTypeIconPathComponent(slot: EquipmentType): string {
+        switch (slot) {
+            case EquipmentType.Block:
+            case EquipmentType.Crit:
+            case EquipmentType.Defensive:
+                return EquipmentType[slot as keyof typeof EquipmentType];
+            case EquipmentType.BlockBooster:
+                return 'Booster_Block';
+            case EquipmentType.CritBooster:
+                return 'Booster_Crit';
+        }
+    }
+
+    public static getEquipmentIconPath(equipment: IEquipment): string {
+        const prefix = 'equipment/ui_icon_item_I';
+        const type = this.getEquipmentTypeIconPathComponent(equipment.slot);
+        const rarity = RarityString[Rarity[equipment.rarity] as keyof typeof RarityString].substring(0, 1);
+        const id = equipment.snowprintId.toString().padStart(3, '0');
+        return [prefix, type, rarity].join('_') + id + '.png';
+    }
+
+    public static getEquipmentTypeIconPath(slot: EquipmentType): string {
+        let icon: string = '';
+        switch (slot) {
+            case EquipmentType.Block:
+            case EquipmentType.Crit:
+            case EquipmentType.Defensive:
+                icon = EquipmentType[slot as keyof typeof EquipmentType] + '_Item';
+                break;
+            case EquipmentType.BlockBooster:
+                icon = 'Block_Booster';
+                break;
+            case EquipmentType.CritBooster:
+                icon = 'Crit_Booster';
+                break;
+        }
+        return 'equipment/' + icon + '_Icon.webp';
+    }
+
     /** @returns the image asset for the NPC, which is allowed to be a character. */
     public static getNpcIconPath(npc: string): string {
         const prefix: string = 'npcs';
@@ -754,5 +806,78 @@ export class StaticDataService {
             });
 
         return orderBy(unlockedLocations, ['energyPerItem', 'expectedGold'], ['asc', 'desc']);
+    }
+
+    private static parseEquipmentType(type: string): EquipmentType {
+        const parsed = EquipmentType[type as keyof typeof EquipmentType];
+        if (parsed == undefined) {
+            if (type == 'Defense') return EquipmentType.Defensive;
+            console.error("Couldn't parse equipment type: " + type);
+            return EquipmentType.Block;
+        }
+        return parsed;
+    }
+
+    private static parseEquipmentClass(clazz: string): EquipmentClass {
+        const parsed = EquipmentClass[clazz as keyof typeof EquipmentClass];
+        if (parsed == undefined) {
+            console.error("Couldn't parse equipment class: " + clazz);
+            return EquipmentClass.BoltPistol;
+        }
+        return parsed;
+    }
+
+    private static parseEquipmentRarity(rarity: string): Rarity {
+        const parsed = rarityStringToNumber[rarity as RarityString];
+        if (parsed == undefined) {
+            console.error("Couldn't parse equipment rarity: " + rarity);
+            return Rarity.Common;
+        }
+        return parsed;
+    }
+
+    /**
+     * Converts the raw equipment data from JSON into something that more
+     * strongly typed.
+     */
+    private static convertEquipmentData(): IEquipment[] {
+        const ret: IEquipment[] = [];
+        Object.entries(rawEquipmentData).forEach(([_, equipment]) => {
+            const slot = this.parseEquipmentType(equipment.slot);
+            const clazz = this.parseEquipmentClass(equipment.clazz);
+            const snowprintId = equipment.snowprintId;
+            const displayName = equipment.displayName;
+            const rarity = this.parseEquipmentRarity(equipment.rarity);
+            const chance: number | undefined = equipment.chance;
+            const factions: Faction[] = [];
+            equipment.factions.forEach((faction: string) => {
+                const parsedFaction = this.parseFaction(faction);
+                if (parsedFaction == undefined) {
+                    console.log("couldn't parse faction: " + faction);
+                } else {
+                    factions.push(parsedFaction!);
+                }
+            });
+            const boost1: number[] = [];
+            equipment.boost1.forEach((boost: number) => {
+                boost1.push(boost);
+            });
+            const boost2: number[] = [];
+            equipment.boost2.forEach((boost: number) => {
+                boost2.push(boost);
+            });
+            ret.push({
+                slot,
+                clazz,
+                snowprintId,
+                displayName,
+                rarity,
+                chance,
+                factions,
+                boost1,
+                boost2,
+            } as IEquipment);
+        });
+        return ret;
     }
 }
