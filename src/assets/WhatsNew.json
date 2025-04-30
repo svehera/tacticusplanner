@@ -590,7 +590,7 @@
                 {
                     "text": "Added learn Guides feature. This is the first iteration for the feature so please share your feedback",
                     "subPoints": [
-                        "Find or create guides for specific game modes (Guid Raids, Tournament Arena, Guild Wars)",
+                        "Find or create guides for specific game modes (Guild Raids, Tournament Arena, Guild Wars)",
                         "Anyone can view/share guides but only logged in users can create a guide",
                         "Guide will be moderated before being publicly available",
                         "Team in the guide can consist of 5 characters and 1 mow. Each slot can be turned into \"flex\" and fit up to 3 characters. MoW slot is optional"
@@ -629,7 +629,7 @@
                     "text": "Added popup that shows up when user is not logged in. You can still use app without account"
                 },
                 {
-                    "text": "Included MoWs data into Insights and Guid Insights",
+                    "text": "Included MoWs data into Insights and Guild Insights",
                     "route": "learn/insights",
                     "images": [
                         {
@@ -1455,7 +1455,7 @@
                     ]
                 },
                 {
-                    "text": "Updated Guid War defense page",
+                    "text": "Updated Guild War defense page",
                     "subPoints": [
                         "Added \"Zone difficulty\" selector instead of BF level and Section selectors",
                         "Moved total teams to the battle field levels info table"

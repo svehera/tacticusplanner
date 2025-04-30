@@ -125,7 +125,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                         />
                         <TextField
                             name={`guildApikey-${Math.random()}`}
-                            description="Used to fetch Guid Raid data. Ask your guild leader or co-leader to generate API jey with 'Guild Raid' and 'Guild' scopes"
+                            description="Used to fetch Guild Raid data. Ask your guild leader or co-leader to generate API key with 'Guild Raid' and 'Guild' scopes"
                             type="password"
                             label="Guild API key"
                             className="w-[80%]"
@@ -137,7 +137,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                         <TextField
                             name={`apikey-${Math.random()}`}
                             type="password"
-                            description="Used to identify your account in the Guid Raid data"
+                            description="Used to identify your account in the Guild Raid data"
                             label="Tacticus User ID"
                             className="w-[80%]"
                             value={userId}
