@@ -23,7 +23,7 @@ export enum Faction {
     WorldEaters = 'World Eaters',
     BloodAngels = 'Blood Angels',
     GenestealerCults = 'Genestealer Cults',
-    AdeptusCustodes = 'Unknown',
+    Unknown = 'Unknown',
 }
 
 export enum RarityString {

@@ -4,9 +4,9 @@ import { filter } from './filters';
 import { LegendaryEventBase } from './base.le';
 import { LETrack } from './base.le.track';
 
-import staticData from '../../assets/legendary-events/Custodes.json';
+import staticData from '../../assets/legendary-events/Unknown.json';
 
-export class CustodesLegendaryEvent extends LegendaryEventBase {
+export class UnknownLegendaryEvent extends LegendaryEventBase {
     constructor(unitsData: Array<ICharacter2>) {
         super(unitsData, staticData);
     }
