@@ -76,10 +76,7 @@ export const EquipmentSelect: React.FC<Props> = ({ faction, equipment, maxRarity
                 value={availableEquipment[equipmentIndex]}
                 onChange={event => onEquipmentChange(event.target.value as IEquipmentSpec)}>
                 {availableEquipment.map(equipment => (
-                    <MenuItem
-                        key={getMenuItemKey(equipment)}
-                        value={equipment}
-                        onClick={() => onEquipmentChange(equipment)}>
+                    <MenuItem key={getMenuItemKey(equipment)} onClick={() => onEquipmentChange(equipment)}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>{getDisplay(equipment)}</div>
                     </MenuItem>
                 ))}

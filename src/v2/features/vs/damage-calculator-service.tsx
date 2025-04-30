@@ -235,7 +235,7 @@ export class DamageCalculatorService {
         const ret: number[] = [];
         const damage: number = attacker.damage;
         const critDamage: number = attacker.critDamage ?? 0;
-        const blockDamage: number = defender.blockDamage ?? 0;
+        const blockDamage: number = defender.blockDamages[0] ?? 0;
         // Modifiers happen after the second pass through gravis, they happen before
         // blocks, and they are not subject to the usual 20% variance.
         const minDamage = Math.max(
@@ -259,11 +259,11 @@ export class DamageCalculatorService {
         for (let i = 2; i < totalSims; ++i) {
             let totalDamage: number = 0;
             let canCrit = attacker.critChance != undefined;
-            let canBlock = type != DamageType.Psychic && defender.blockChance != undefined;
+            let canBlock = type != DamageType.Psychic && defender.blockChances[0] != undefined;
             for (let j = 0; j < hits; ++j) {
                 const isCrit = canCrit && Math.random() * 100 <= attacker.critChance!;
                 canCrit = canCrit && isCrit;
-                const isBlock = canBlock && Math.random() * 100 <= defender.blockChance!;
+                const isBlock = canBlock && Math.random() * 100 <= defender.blockChances[0]!;
                 canBlock = canBlock && isBlock;
                 const rng1 = 1 + (Math.round(Math.random() * 41) - 20) / 100.0;
                 const rng2 = 1 + (Math.round(Math.random() * 41) - 20) / 100.0;
