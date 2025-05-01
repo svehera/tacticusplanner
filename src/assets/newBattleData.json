@@ -4,7 +4,7 @@
         "campaignType": "SuperEarly",
         "nodeNumber": 6,
         "reward": "",
-        "expectedGold": 12.5,
+        "expectedGold": 7.5,
         "enemiesTotal": 7,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
@@ -27,7 +27,7 @@
         "campaignType": "SuperEarly",
         "nodeNumber": 7,
         "reward": "",
-        "expectedGold": 12.5,
+        "expectedGold": 7.5,
         "slots": 3,
         "enemiesTotal": 7,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
@@ -51,7 +51,7 @@
         "campaignType": "SuperEarly",
         "nodeNumber": 8,
         "reward": "",
-        "expectedGold": 12.5,
+        "expectedGold": 7.5,
         "slots": 3,
         "enemiesTotal": 6,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
@@ -75,7 +75,7 @@
         "campaignType": "SuperEarly",
         "nodeNumber": 9,
         "reward": "",
-        "expectedGold": 12.5,
+        "expectedGold": 7.5,
         "enemiesTotal": 12,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
@@ -98,7 +98,7 @@
         "campaignType": "SuperEarly",
         "nodeNumber": 10,
         "reward": "",
-        "expectedGold": 12.5,
+        "expectedGold": 7.5,
         "enemiesTotal": 8,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
@@ -121,7 +121,7 @@
         "campaignType": "SuperEarly",
         "nodeNumber": 11,
         "reward": "",
-        "expectedGold": 12.5,
+        "expectedGold": 7.5,
         "enemiesTotal": 7,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
@@ -144,7 +144,7 @@
         "campaignType": "SuperEarly",
         "nodeNumber": 12,
         "reward": "",
-        "expectedGold": 12.5,
+        "expectedGold": 7.5,
         "enemiesTotal": 9,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
@@ -167,7 +167,7 @@
         "campaignType": "SuperEarly",
         "nodeNumber": 13,
         "reward": "",
-        "expectedGold": 12.5,
+        "expectedGold": 7.5,
         "enemiesTotal": 8,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
@@ -190,7 +190,7 @@
         "campaignType": "SuperEarly",
         "nodeNumber": 14,
         "reward": "",
-        "expectedGold": 12.5,
+        "expectedGold": 7.5,
         "enemiesTotal": 8,
         "enemiesTypes": ["Necron Warrior", "Flayed One"],
         "detailedEnemyTypes": [
@@ -2270,7 +2270,7 @@
         "campaignType": "Normal",
         "nodeNumber": 75,
         "reward": "Anuphet",
-        "expectedGold": 50,
+        "expectedGold": 25,
         "enemiesTotal": 11,
         "enemiesTypes": ["Scarab Swarm", "Necron Warrior", "Flayed One", "Deathmark"],
         "detailedEnemyTypes": [
@@ -2321,6 +2321,213 @@
                 "name": "Cadian Guardsman",
                 "count": 8,
                 "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "FoC2": {
+        "campaign": "Fall of Cadia",
+        "campaignType": "Normal",
+        "nodeNumber": 2,
+        "reward": "Nasty Spikes",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
+    },
+    "FoC3": {
+        "campaign": "Fall of Cadia",
+        "campaignType": "Normal",
+        "nodeNumber": 3,
+        "reward": "Wires",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
+    },
+    "FoC4": {
+        "campaign": "Fall of Cadia",
+        "campaignType": "Normal",
+        "nodeNumber": 4,
+        "reward": "Satchel",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "FoC5": {
+        "campaign": "Fall of Cadia",
+        "campaignType": "Normal",
+        "nodeNumber": 5,
+        "reward": "Ropes and Chains",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "FoC6": {
+        "campaign": "Fall of Cadia",
+        "campaignType": "Normal",
+        "nodeNumber": 6,
+        "reward": "Chip Damage",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 4,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
+    },
+    "FoC7": {
+        "campaign": "Fall of Cadia",
+        "campaignType": "Normal",
+        "nodeNumber": 7,
+        "reward": "Armor Trim",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Lascannon team",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
+    },
+    "FoC8": {
+        "campaign": "Fall of Cadia",
+        "campaignType": "Normal",
+        "nodeNumber": 8,
+        "reward": "Vox-Caster",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
+    },
+    "FoC9": {
+        "campaign": "Fall of Cadia",
+        "campaignType": "Normal",
+        "nodeNumber": 9,
+        "reward": "Mutation: Tough Skin",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 9,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Stone 2",
                 "stars": 0
             }
         ]
@@ -2593,30 +2800,6 @@
             }
         ]
     },
-    "FoC2": {
-        "campaign": "Fall of Cadia",
-        "campaignType": "Normal",
-        "nodeNumber": 2,
-        "reward": "Nasty Spikes",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 6,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Cadian Lascannon team",
-                "count": 2,
-                "rank": "Stone 2",
-                "stars": 0
-            }
-        ]
-    },
     "FoC20": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
@@ -2868,36 +3051,6 @@
                 "count": 3,
                 "rank": "Iron 3",
                 "stars": 3
-            }
-        ]
-    },
-    "FoC3": {
-        "campaign": "Fall of Cadia",
-        "campaignType": "Normal",
-        "nodeNumber": 3,
-        "reward": "Wires",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 5,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Cadian Lascannon team",
-                "count": 1,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Cadian Lascannon team",
-                "count": 2,
-                "rank": "Stone 2",
-                "stars": 1
             }
         ]
     },
@@ -3183,36 +3336,7 @@
             }
         ]
     },
-    "FoC4": {
-        "campaign": "Fall of Cadia",
-        "campaignType": "Normal",
-        "nodeNumber": 4,
-        "reward": "Satchel",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 4,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Cadian Lascannon team",
-                "count": 1,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Cadian Vox-Caster",
-                "count": 1,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
+
     "FoC40": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
@@ -3501,24 +3625,7 @@
             }
         ]
     },
-    "FoC5": {
-        "campaign": "Fall of Cadia",
-        "campaignType": "Normal",
-        "nodeNumber": 5,
-        "reward": "Ropes and Chains",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 6,
-        "enemiesTypes": ["Cadian Vox-Caster"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Vox-Caster",
-                "count": 6,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
+
     "FoC50": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
@@ -3769,30 +3876,7 @@
             }
         ]
     },
-    "FoC6": {
-        "campaign": "Fall of Cadia",
-        "campaignType": "Normal",
-        "nodeNumber": 6,
-        "reward": "Chip Damage",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 6,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Lascannon team",
-                "count": 2,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Cadian Vox-Caster",
-                "count": 4,
-                "rank": "Stone 2",
-                "stars": 0
-            }
-        ]
-    },
+
     "FoC60": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
@@ -4044,35 +4128,7 @@
             }
         ]
     },
-    "FoC7": {
-        "campaign": "Fall of Cadia",
-        "campaignType": "Normal",
-        "nodeNumber": 7,
-        "reward": "Armor Trim",
-        "expectedGold": 53,
-        "enemiesTotal": 6,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Lascannon team",
-                "count": 1,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Cadian Lascannon team",
-                "count": 2,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Cadian Vox-Caster",
-                "count": 3,
-                "rank": "Stone 2",
-                "stars": 0
-            }
-        ]
-    },
+
     "FoC70": {
         "campaign": "Fall of Cadia",
         "campaignType": "Normal",
@@ -4230,58 +4286,7 @@
             }
         ]
     },
-    "FoC8": {
-        "campaign": "Fall of Cadia",
-        "campaignType": "Normal",
-        "nodeNumber": 8,
-        "reward": "Vox-Caster",
-        "expectedGold": 53,
-        "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster", "Cadian Lascannon Team"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 1,
-                "rank": "Stone 2",
-                "stars": 1
-            },
-            {
-                "name": "Cadian Lascannon team",
-                "count": 3,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Cadian Vox-Caster",
-                "count": 3,
-                "rank": "Stone 2",
-                "stars": 0
-            }
-        ]
-    },
-    "FoC9": {
-        "campaign": "Fall of Cadia",
-        "campaignType": "Normal",
-        "nodeNumber": 9,
-        "reward": "Mutation: Tough Skin",
-        "expectedGold": 53,
-        "enemiesTotal": 12,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 9,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Cadian Lascannon team",
-                "count": 3,
-                "rank": "Stone 2",
-                "stars": 0
-            }
-        ]
-    },
+
     "O1": {
         "campaign": "Octarius",
         "campaignType": "Normal",
@@ -4295,6 +4300,169 @@
             {
                 "name": "Initiate",
                 "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "O2": {
+        "campaign": "Octarius",
+        "campaignType": "Normal",
+        "nodeNumber": 2,
+        "reward": "Wires",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Initiate"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "O3": {
+        "campaign": "Octarius",
+        "campaignType": "Normal",
+        "nodeNumber": 3,
+        "reward": "Chip Damage",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Initiate"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "O4": {
+        "campaign": "Octarius",
+        "campaignType": "Normal",
+        "nodeNumber": 4,
+        "reward": "Nasty Spikes",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Initiate"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
+    },
+    "O5": {
+        "campaign": "Octarius",
+        "campaignType": "Normal",
+        "nodeNumber": 5,
+        "reward": "Thick Skin",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "O6": {
+        "campaign": "Octarius",
+        "campaignType": "Normal",
+        "nodeNumber": 6,
+        "reward": "Metal Joints",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "O7": {
+        "campaign": "Octarius",
+        "campaignType": "Normal",
+        "nodeNumber": 7,
+        "reward": "Adamantium Filaments",
+        "expectedGold": 53,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 9,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
+    },
+    "O8": {
+        "campaign": "Octarius",
+        "campaignType": "Normal",
+        "nodeNumber": 8,
+        "reward": "Weapon Parts",
+        "expectedGold": 53,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 7,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "O9": {
+        "campaign": "Octarius",
+        "campaignType": "Normal",
+        "nodeNumber": 9,
+        "reward": "Combat Stimms",
+        "expectedGold": 53,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Grot", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
                 "rank": "Stone 1",
                 "stars": 0
             }
@@ -4534,24 +4702,7 @@
             }
         ]
     },
-    "O2": {
-        "campaign": "Octarius",
-        "campaignType": "Normal",
-        "nodeNumber": 2,
-        "reward": "Wires",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 5,
-        "enemiesTypes": ["Initiate"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Initiate",
-                "count": 5,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
+
     "O20": {
         "campaign": "Octarius",
         "campaignType": "Normal",
@@ -4815,24 +4966,7 @@
             }
         ]
     },
-    "O3": {
-        "campaign": "Octarius",
-        "campaignType": "Normal",
-        "nodeNumber": 3,
-        "reward": "Chip Damage",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 6,
-        "enemiesTypes": ["Initiate"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Initiate",
-                "count": 6,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
+
     "O30": {
         "campaign": "Octarius",
         "campaignType": "Normal",
@@ -5114,24 +5248,7 @@
             }
         ]
     },
-    "O4": {
-        "campaign": "Octarius",
-        "campaignType": "Normal",
-        "nodeNumber": 4,
-        "reward": "Nasty Spikes",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 5,
-        "enemiesTypes": ["Initiate"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Initiate",
-                "count": 5,
-                "rank": "Stone 2",
-                "stars": 0
-            }
-        ]
-    },
+
     "O40": {
         "campaign": "Octarius",
         "campaignType": "Normal",
@@ -5478,26 +5595,7 @@
             }
         ]
     },
-    "O5": {
-        "campaign": "Octarius",
-        "campaignType": "Normal",
-        "nodeNumber": 5,
-        "reward": "Thick Skin",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesAlliances": ["Xenos"],
-        "enemiesFactions": ["Orks"],
-        "enemiesTotal": 5,
-        "enemiesTypes": ["Ork Boy"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Ork Boy",
-                "count": 5,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
+
     "O50": {
         "campaign": "Octarius",
         "campaignType": "Normal",
@@ -5798,26 +5896,7 @@
             }
         ]
     },
-    "O6": {
-        "campaign": "Octarius",
-        "campaignType": "Normal",
-        "nodeNumber": 6,
-        "reward": "Metal Joints",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesAlliances": ["Xenos"],
-        "enemiesFactions": ["Orks"],
-        "enemiesTotal": 6,
-        "enemiesTypes": ["Ork Boy"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Ork Boy",
-                "count": 6,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
+
     "O60": {
         "campaign": "Octarius",
         "campaignType": "Normal",
@@ -6130,25 +6209,7 @@
             }
         ]
     },
-    "O7": {
-        "campaign": "Octarius",
-        "campaignType": "Normal",
-        "nodeNumber": 7,
-        "reward": "Adamantium Filaments",
-        "expectedGold": 53,
-        "enemiesAlliances": ["Xenos"],
-        "enemiesFactions": ["Orks"],
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Grot"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 9,
-                "rank": "Stone 2",
-                "stars": 0
-            }
-        ]
-    },
+
     "O70": {
         "campaign": "Octarius",
         "campaignType": "Normal",
@@ -6408,56 +6469,7 @@
             }
         ]
     },
-    "O8": {
-        "campaign": "Octarius",
-        "campaignType": "Normal",
-        "nodeNumber": 8,
-        "reward": "Weapon Parts",
-        "expectedGold": 53,
-        "enemiesAlliances": ["Xenos"],
-        "enemiesFactions": ["Orks"],
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Grot", "Grot Tank"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 7,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Grot Tank",
-                "count": 2,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
-    "O9": {
-        "campaign": "Octarius",
-        "campaignType": "Normal",
-        "nodeNumber": 9,
-        "reward": "Combat Stimms",
-        "expectedGold": 53,
-        "enemiesAlliances": ["Xenos"],
-        "enemiesFactions": ["Orks"],
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Grot", "Grot Tank"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 6,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Grot Tank",
-                "count": 2,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
+
     "SH1": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
@@ -6472,6 +6484,186 @@
                 "name": "Rubric Marine",
                 "count": 3,
                 "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "SH2": {
+        "campaign": "Saim-Hann",
+        "campaignType": "Normal",
+        "nodeNumber": 2,
+        "reward": "Scrolls",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 4,
+        "enemiesTypes": ["Rubric Marine"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "SH3": {
+        "campaign": "Saim-Hann",
+        "campaignType": "Normal",
+        "nodeNumber": 3,
+        "reward": "Targeting Link",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 4,
+        "enemiesTypes": ["Rubric Marine"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "SH4": {
+        "campaign": "Saim-Hann",
+        "campaignType": "Normal",
+        "nodeNumber": 4,
+        "reward": "Vox-Caster",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Rubric Marine"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "SH5": {
+        "campaign": "Saim-Hann",
+        "campaignType": "Normal",
+        "nodeNumber": 5,
+        "reward": "Armor Trim",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Rubric Marine", "Pink Horror"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Pink Horror",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "SH6": {
+        "campaign": "Saim-Hann",
+        "campaignType": "Normal",
+        "nodeNumber": 6,
+        "reward": "Sophisticated Material",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
+    },
+    "SH7": {
+        "campaign": "Saim-Hann",
+        "campaignType": "Normal",
+        "nodeNumber": 7,
+        "reward": "Mutation: Warped Muscles",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
+    },
+    "SH8": {
+        "campaign": "Saim-Hann",
+        "campaignType": "Normal",
+        "nodeNumber": 8,
+        "reward": "Ropes and Chains",
+        "expectedGold": 53,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "SH9": {
+        "campaign": "Saim-Hann",
+        "campaignType": "Normal",
+        "nodeNumber": 9,
+        "reward": "Nasty Spikes",
+        "expectedGold": 53,
+        "enemiesAlliances": ["Chaos"],
+        "enemiesFactions": ["Black Legion", "Thousand Sons"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Rubric Marine",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Stone 2",
                 "stars": 0
             }
         ]
@@ -6731,24 +6923,7 @@
             }
         ]
     },
-    "SH2": {
-        "campaign": "Saim-Hann",
-        "campaignType": "Normal",
-        "nodeNumber": 2,
-        "reward": "Scrolls",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 4,
-        "enemiesTypes": ["Rubric Marine"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Rubric Marine",
-                "count": 4,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
+
     "SH20": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
@@ -7012,24 +7187,7 @@
             }
         ]
     },
-    "SH3": {
-        "campaign": "Saim-Hann",
-        "campaignType": "Normal",
-        "nodeNumber": 3,
-        "reward": "Targeting Link",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 4,
-        "enemiesTypes": ["Rubric Marine"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Rubric Marine",
-                "count": 4,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
+
     "SH30": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
@@ -7251,24 +7409,7 @@
             }
         ]
     },
-    "SH4": {
-        "campaign": "Saim-Hann",
-        "campaignType": "Normal",
-        "nodeNumber": 4,
-        "reward": "Vox-Caster",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 5,
-        "enemiesTypes": ["Rubric Marine"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Rubric Marine",
-                "count": 5,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
+
     "SH40": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
@@ -7540,30 +7681,7 @@
             }
         ]
     },
-    "SH5": {
-        "campaign": "Saim-Hann",
-        "campaignType": "Normal",
-        "nodeNumber": 5,
-        "reward": "Armor Trim",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 5,
-        "enemiesTypes": ["Rubric Marine", "Pink Horror"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Pink Horror",
-                "count": 3,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Rubric Marine",
-                "count": 2,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
+
     "SH50": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
@@ -7795,32 +7913,7 @@
             }
         ]
     },
-    "SH6": {
-        "campaign": "Saim-Hann",
-        "campaignType": "Normal",
-        "nodeNumber": 6,
-        "reward": "Sophisticated Material",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesAlliances": ["Chaos"],
-        "enemiesFactions": ["Black Legion", "Thousand Sons"],
-        "enemiesTotal": 7,
-        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Rubric Marine",
-                "count": 2,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Traitor Guardsman",
-                "count": 5,
-                "rank": "Stone 2",
-                "stars": 0
-            }
-        ]
-    },
+
     "SH60": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
@@ -7913,7 +8006,7 @@
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 63,
-        "reward": "Artificial Vertebrae",
+        "reward": "Flawless Terran Gem",
         "expectedGold": 77,
         "enemiesTotal": 5,
         "enemiesTypes": ["Rubric Marine"],
@@ -7930,7 +8023,7 @@
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 64,
-        "reward": "Mutation: Warped Lungs",
+        "reward": "Integrated Bolt Feeder",
         "expectedGold": 77,
         "enemiesTotal": 8,
         "enemiesTypes": ["Rubric Marine", "Pink Horror", "Screamer"],
@@ -8065,37 +8158,12 @@
             }
         ]
     },
-    "SH7": {
-        "campaign": "Saim-Hann",
-        "campaignType": "Normal",
-        "nodeNumber": 7,
-        "reward": "Mutation: Warped Muscles",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesAlliances": ["Chaos"],
-        "enemiesFactions": ["Black Legion", "Thousand Sons"],
-        "enemiesTotal": 5,
-        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Rubric Marine",
-                "count": 3,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Traitor Guardsman",
-                "count": 2,
-                "rank": "Stone 2",
-                "stars": 0
-            }
-        ]
-    },
+
     "SH70": {
         "campaign": "Saim-Hann",
         "campaignType": "Normal",
         "nodeNumber": 70,
-        "reward": "Blessed Tasset Plate",
+        "reward": "Auramite Wing",
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 9,
@@ -8245,56 +8313,6 @@
             }
         ]
     },
-    "SH8": {
-        "campaign": "Saim-Hann",
-        "campaignType": "Normal",
-        "nodeNumber": 8,
-        "reward": "Ropes and Chains",
-        "expectedGold": 53,
-        "enemiesAlliances": ["Chaos"],
-        "enemiesFactions": ["Black Legion", "Thousand Sons"],
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Rubric Marine",
-                "count": 4,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Traitor Guardsman",
-                "count": 4,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
-    "SH9": {
-        "campaign": "Saim-Hann",
-        "campaignType": "Normal",
-        "nodeNumber": 9,
-        "reward": "Nasty Spikes",
-        "expectedGold": 53,
-        "enemiesAlliances": ["Chaos"],
-        "enemiesFactions": ["Black Legion", "Thousand Sons"],
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Rubric Marine", "Traitor Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Rubric Marine",
-                "count": 3,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Traitor Guardsman",
-                "count": 5,
-                "rank": "Stone 2",
-                "stars": 0
-            }
-        ]
-    },
     "IM1": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
@@ -8318,6 +8336,234 @@
                 "count": 2,
                 "rank": "Stone 1",
                 "stars": 0
+            }
+        ]
+    },
+    "IM2": {
+        "campaign": "Indomitus Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 2,
+        "reward": "Weapon Parts",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Inceptor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "IM3": {
+        "campaign": "Indomitus Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 3,
+        "reward": "Mutation: Warped Muscles",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "IM4": {
+        "campaign": "Indomitus Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 4,
+        "reward": "Wires",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Eliminator",
+                "count": 1,
+                "rank": "Stone2",
+                "stars": 0
+            }
+        ]
+    },
+    "IM5": {
+        "campaign": "Indomitus Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 5,
+        "reward": "Helmet Trophy",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Inceptor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
+    },
+    "IM6": {
+        "campaign": "Indomitus Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 6,
+        "reward": "Combat Stimms",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
+    },
+    "IM7": {
+        "campaign": "Indomitus Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 7,
+        "reward": "Reinforced Cables",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "IM8": {
+        "campaign": "Indomitus Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 8,
+        "reward": "Reinforced Scale-Plates",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
+    },
+    "IM9": {
+        "campaign": "Indomitus Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 9,
+        "reward": "Air Purificator",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 1
             }
         ]
     },
@@ -8618,32 +8864,6 @@
                 "count": 2,
                 "rank": "Stone 3",
                 "stars": 1
-            }
-        ]
-    },
-    "IM2": {
-        "campaign": "Indomitus Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 2,
-        "reward": "Weapon Parts",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesAlliances": ["Imperial"],
-        "enemiesFactions": ["Ultramarines"],
-        "enemiesTotal": 5,
-        "enemiesTypes": ["Inceptor", "Eliminator"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Eliminator",
-                "count": 3,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Inceptor",
-                "count": 2,
-                "rank": "Stone 1",
-                "stars": 0
             }
         ]
     },
@@ -8962,36 +9182,6 @@
             }
         ]
     },
-    "IM3": {
-        "campaign": "Indomitus Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 3,
-        "reward": "Mutation: Warped Muscles",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 7,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 3,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Eliminator",
-                "count": 2,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Inceptor",
-                "count": 2,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
     "IM30": {
         "campaign": "Indomitus Mirror",
         "campaignType": "EarlyMirrorChars",
@@ -9292,32 +9482,6 @@
                 "count": 2,
                 "rank": "Bronze 1",
                 "stars": 3
-            }
-        ]
-    },
-    "IM4": {
-        "campaign": "Indomitus Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 4,
-        "reward": "Wires",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesAlliances": ["Imperial"],
-        "enemiesFactions": ["Ultramarines"],
-        "enemiesTotal": 5,
-        "enemiesTypes": ["Eliminator"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Eliminator",
-                "count": 4,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Eliminator",
-                "count": 1,
-                "rank": "Stone2",
-                "stars": 0
             }
         ]
     },
@@ -9632,32 +9796,6 @@
             }
         ]
     },
-    "IM5": {
-        "campaign": "Indomitus Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 5,
-        "reward": "Helmet Trophy",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesAlliances": ["Imperial"],
-        "enemiesFactions": ["Ultramarines"],
-        "enemiesTotal": 5,
-        "enemiesTypes": ["Inceptor", "Eliminator"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Eliminator",
-                "count": 3,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Inceptor",
-                "count": 2,
-                "rank": "Stone 2",
-                "stars": 0
-            }
-        ]
-    },
     "IM50": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
@@ -9803,7 +9941,7 @@
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 55,
-        "reward": "Lesser Reliquary of Vengeance",
+        "reward": "Rose of Martyrs",
         "expectedGold": 71,
         "slots": 4,
         "enemiesAlliances": ["Imperial"],
@@ -9926,36 +10064,6 @@
                 "count": 3,
                 "rank": "Bronze 3",
                 "stars": 5
-            }
-        ]
-    },
-    "IM6": {
-        "campaign": "Indomitus Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 6,
-        "reward": "Combat Stimms",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 6,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 1,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Eliminator",
-                "count": 2,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Inceptor",
-                "count": 2,
-                "rank": "Stone 2",
-                "stars": 0
             }
         ]
     },
@@ -10254,36 +10362,6 @@
             }
         ]
     },
-    "IM7": {
-        "campaign": "Indomitus Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 7,
-        "reward": "Reinforced Cables",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 4,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Eliminator",
-                "count": 3,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Inceptor",
-                "count": 1,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
     "IM70": {
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
@@ -10318,7 +10396,7 @@
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 71,
-        "reward": "Engrammatic Entangler",
+        "reward": "Arcane Genetic Alchemy",
         "expectedGold": 77,
         "enemiesTotal": 12,
         "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
@@ -10347,7 +10425,7 @@
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 72,
-        "reward": "Holy Chaplet",
+        "reward": "Stone Guardian Fragment",
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 9,
@@ -10377,7 +10455,7 @@
         "campaign": "Indomitus Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 73,
-        "reward": "Rose of Martyrs",
+        "reward": "Engrammatic Entangler",
         "expectedGold": 77,
         "enemiesTotal": 10,
         "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
@@ -10486,66 +10564,6 @@
             }
         ]
     },
-    "IM8": {
-        "campaign": "Indomitus Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 8,
-        "reward": "Reinforced Scale-Plates",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Eliminator", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 6,
-                "rank": "Stone 2",
-                "stars": 1
-            },
-            {
-                "name": "Eliminator",
-                "count": 2,
-                "rank": "Stone 2",
-                "stars": 1
-            }
-        ]
-    },
-    "IM9": {
-        "campaign": "Indomitus Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 9,
-        "reward": "Air Purificator",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 4,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Eliminator",
-                "count": 2,
-                "rank": "Stone 2",
-                "stars": 1
-            },
-            {
-                "name": "Inceptor",
-                "count": 1,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Inceptor",
-                "count": 1,
-                "rank": "Stone 2",
-                "stars": 1
-            }
-        ]
-    },
     "FoCM1": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
@@ -10559,6 +10577,191 @@
             {
                 "name": "Bloodletter",
                 "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "FoCM2": {
+        "campaign": "Fall of Cadia Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 2,
+        "reward": "Field Ration",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 5,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "FoCM3": {
+        "campaign": "Fall of Cadia Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 3,
+        "reward": "Locator Beacon",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "FoCM4": {
+        "campaign": "Fall of Cadia Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 4,
+        "reward": "Slicing Claws",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 7,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "FoCM5": {
+        "campaign": "Fall of Cadia Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 5,
+        "reward": "Mutation: Scaly Skin",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 8,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "FoCM6": {
+        "campaign": "Fall of Cadia Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 6,
+        "reward": "Lesser Reliquary of Protection",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 10,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "FoCM7": {
+        "campaign": "Fall of Cadia Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 7,
+        "reward": "Fine Purity Seal",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 4,
+        "enemiesTypes": ["Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "FoCM8": {
+        "campaign": "Fall of Cadia Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 8,
+        "reward": "Box of Salvage",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
+    },
+    "FoCM9": {
+        "campaign": "Fall of Cadia Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 9,
+        "reward": "Pile of Salvage",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 4,
+                "rank": "Stone 1",
+                "stars": 0
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
                 "rank": "Stone 1",
                 "stars": 0
             }
@@ -10851,30 +11054,6 @@
             }
         ]
     },
-    "FoCM2": {
-        "campaign": "Fall of Cadia Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 2,
-        "reward": "Field Ration",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 6,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Bloodletter",
-                "count": 5,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Chaos Terminator",
-                "count": 1,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
     "FoCM20": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
@@ -11133,29 +11312,6 @@
                 "count": 4,
                 "rank": "Iron 2",
                 "stars": 2
-            }
-        ]
-    },
-    "FoCM3": {
-        "campaign": "Fall of Cadia Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 3,
-        "reward": "Locator Beacon",
-        "expectedGold": 53,
-        "enemiesTotal": 6,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Bloodletter",
-                "count": 4,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Chaos Terminator",
-                "count": 2,
-                "rank": "Stone 1",
-                "stars": 0
             }
         ]
     },
@@ -11428,30 +11584,6 @@
             }
         ]
     },
-    "FoCM4": {
-        "campaign": "Fall of Cadia Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 4,
-        "reward": "Slicing Claws",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Bloodletter",
-                "count": 7,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Chaos Terminator",
-                "count": 1,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
     "FoCM40": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
@@ -11705,30 +11837,6 @@
                 "count": 4,
                 "rank": "Bronze 3",
                 "stars": 5
-            }
-        ]
-    },
-    "FoCM5": {
-        "campaign": "Fall of Cadia Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 5,
-        "reward": "Mutation: Scaly Skin",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Bloodletter",
-                "count": 8,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Chaos Terminator",
-                "count": 1,
-                "rank": "Stone 1",
-                "stars": 0
             }
         ]
     },
@@ -12013,24 +12121,6 @@
             }
         ]
     },
-    "FoCM6": {
-        "campaign": "Fall of Cadia Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 6,
-        "reward": "Lesser Reliquary of Protection",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 10,
-        "enemiesTypes": ["Bloodletter"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Bloodletter",
-                "count": 10,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
     "FoCM60": {
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
@@ -12288,7 +12378,7 @@
         "campaign": "Fall of Cadia Mirror",
         "campaignType": "Mirror",
         "nodeNumber": 69,
-        "reward": "Nasty Spikes",
+        "reward": "Holy Chaplet",
         "expectedGold": 77,
         "slots": 4,
         "enemiesTotal": 8,
@@ -12311,24 +12401,6 @@
                 "count": 2,
                 "rank": "Bronze 2",
                 "stars": 6
-            }
-        ]
-    },
-    "FoCM7": {
-        "campaign": "Fall of Cadia Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 7,
-        "reward": "Fine Purity Seal",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 4,
-        "enemiesTypes": ["Chaos Terminator"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Chaos Terminator",
-                "count": 4,
-                "rank": "Stone 1",
-                "stars": 0
             }
         ]
     },
@@ -12484,60 +12556,6 @@
             }
         ]
     },
-    "FoCM8": {
-        "campaign": "Fall of Cadia Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 8,
-        "reward": "Box of Salvage",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 7,
-        "enemiesTypes": ["Bloodletter", "Chaos Terminator"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Bloodletter",
-                "count": 6,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Chaos Terminator",
-                "count": 1,
-                "rank": "Stone 2",
-                "stars": 0
-            }
-        ]
-    },
-    "FoCM9": {
-        "campaign": "Fall of Cadia Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 9,
-        "reward": "Pile of Salvage",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Bloodletter", "Traitor Guardsman", "Chaos Terminator"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Bloodletter",
-                "count": 4,
-                "rank": "Stone 1",
-                "stars": 0
-            },
-            {
-                "name": "Chaos Terminator",
-                "count": 1,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Traitor Guardsman",
-                "count": 3,
-                "rank": "Stone 1",
-                "stars": 0
-            }
-        ]
-    },
     "OM1": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
@@ -12559,6 +12577,184 @@
                 "count": 2,
                 "rank": "Stone 2",
                 "stars": 0
+            }
+        ]
+    },
+    "OM2": {
+        "campaign": "Octarius Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 2,
+        "reward": "Canister of Chemicals",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
+    },
+    "OM3": {
+        "campaign": "Octarius Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 3,
+        "reward": "Weapon Parts",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "OM4": {
+        "campaign": "Octarius Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 4,
+        "reward": "Frag Grenade",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Stone 1",
+                "stars": 0
+            }
+        ]
+    },
+    "OM5": {
+        "campaign": "Octarius Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 5,
+        "reward": "Standard-Issue Tourniquet",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
+    },
+    "OM6": {
+        "campaign": "Octarius Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 6,
+        "reward": "Healing Ointment",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 1,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Stone 2",
+                "stars": 0
+            }
+        ]
+    },
+    "OM7": {
+        "campaign": "Octarius Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 7,
+        "reward": "Rebreather",
+        "expectedGold": 53,
+        "slots": 3,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 9,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
+    },
+    "OM8": {
+        "campaign": "Octarius Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 8,
+        "reward": "Wires",
+        "expectedGold": 53,
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Ork Boy", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 9,
+                "rank": "Stone 2",
+                "stars": 0
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Stone 2",
+                "stars": 1
+            }
+        ]
+    },
+    "OM9": {
+        "campaign": "Octarius Mirror",
+        "campaignType": "Mirror",
+        "nodeNumber": 9,
+        "reward": "Single Power Pack",
+        "expectedGold": 53,
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Stone 2",
+                "stars": 1
             }
         ]
     },
@@ -12839,30 +13035,6 @@
             }
         ]
     },
-    "OM2": {
-        "campaign": "Octarius Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 2,
-        "reward": "Canister of Chemicals",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 7,
-        "enemiesTypes": ["Ork Boy", "Grot"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 5,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Ork Boy",
-                "count": 2,
-                "rank": "Stone 2",
-                "stars": 0
-            }
-        ]
-    },
     "OM20": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
@@ -13116,30 +13288,6 @@
                 "count": 5,
                 "rank": "Iron 2",
                 "stars": 2
-            }
-        ]
-    },
-    "OM3": {
-        "campaign": "Octarius Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 3,
-        "reward": "Weapon Parts",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 3,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Ork Boy",
-                "count": 6,
-                "rank": "Stone 1",
-                "stars": 0
             }
         ]
     },
@@ -13410,30 +13558,6 @@
                 "count": 8,
                 "rank": "Bronze 1",
                 "stars": 3
-            }
-        ]
-    },
-    "OM4": {
-        "campaign": "Octarius Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 4,
-        "reward": "Frag Grenade",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Ork Boy", "Grot"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 2,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Ork Boy",
-                "count": 6,
-                "rank": "Stone 1",
-                "stars": 0
             }
         ]
     },
@@ -13726,30 +13850,6 @@
                 "count": 4,
                 "rank": "Bronze 3",
                 "stars": 7
-            }
-        ]
-    },
-    "OM5": {
-        "campaign": "Octarius Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 5,
-        "reward": "Standard-Issue Tourniquet",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Ork Boy", "Grot"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 6,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Ork Boy",
-                "count": 3,
-                "rank": "Stone 2",
-                "stars": 0
             }
         ]
     },
@@ -14086,30 +14186,6 @@
             }
         ]
     },
-    "OM6": {
-        "campaign": "Octarius Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 6,
-        "reward": "Healing Ointment",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 7,
-        "enemiesTypes": ["Ork Boy", "Grot"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 1,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Ork Boy",
-                "count": 6,
-                "rank": "Stone 2",
-                "stars": 0
-            }
-        ]
-    },
     "OM60": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
@@ -14409,24 +14485,6 @@
             }
         ]
     },
-    "OM7": {
-        "campaign": "Octarius Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 7,
-        "reward": "Rebreather",
-        "expectedGold": 53,
-        "slots": 3,
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Grot"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 9,
-                "rank": "Stone 2",
-                "stars": 1
-            }
-        ]
-    },
     "OM70": {
         "campaign": "Octarius Mirror",
         "campaignType": "Mirror",
@@ -14607,46 +14665,6 @@
             }
         ]
     },
-    "OM8": {
-        "campaign": "Octarius Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 8,
-        "reward": "Wires",
-        "expectedGold": 53,
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Ork Boy", "Grot"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 9,
-                "rank": "Stone 2",
-                "stars": 0
-            },
-            {
-                "name": "Ork Boy",
-                "count": 2,
-                "rank": "Stone 2",
-                "stars": 1
-            }
-        ]
-    },
-    "OM9": {
-        "campaign": "Octarius Mirror",
-        "campaignType": "Mirror",
-        "nodeNumber": 9,
-        "reward": "Single Power Pack",
-        "expectedGold": 53,
-        "enemiesTotal": 5,
-        "enemiesTypes": ["Ork Boy"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Ork Boy",
-                "count": 5,
-                "rank": "Stone 2",
-                "stars": 1
-            }
-        ]
-    },
     "IE1": {
         "campaign": "Indomitus Elite",
         "campaignType": "Elite",
@@ -14679,6 +14697,283 @@
                 "count": 2,
                 "rank": "Bronze 1",
                 "stars": 3
+            }
+        ]
+    },
+    "IE2": {
+        "campaign": "Indomitus Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 2,
+        "reward": "Weapon Anointment Oils",
+        "expectedGold": 83,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Flayed One", "Necron Warrior", "Deathmark"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Flayed One",
+                "count": 4,
+                "rank": "Bronz 2",
+                "stars": 4
+            },
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Bronz 3",
+                "stars": 4
+            }
+        ]
+    },
+    "IE3": {
+        "campaign": "Indomitus Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 3,
+        "reward": "Reliquary of Vengeance",
+        "expectedGold": 83,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Flayed One", "Necron Warrior", "Scarab Swarm", "Ophydian Destroyer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 4
+            },
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 4
+            },
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 4
+            },
+            {
+                "name": "Scarab Swarm",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 4
+            }
+        ]
+    },
+    "IE4": {
+        "campaign": "Indomitus Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 4,
+        "reward": "Greater Reliquary of Vengeance",
+        "expectedGold": 83,
+        "slots": 3,
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Flayed One", "Scarab Swarm", "Necron Warrior", "Deathmark"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 4
+            },
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 4
+            },
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 4
+            }
+        ]
+    },
+    "IE5": {
+        "campaign": "Indomitus Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 5,
+        "reward": "The Gold Phoenix",
+        "expectedGold": 83,
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Flayed One", "Necron Warrior", "Scarab Swarm", "Deathmark"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Deathmark",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Necron Warrior",
+                "count": 4,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Scarab Swarm",
+                "count": 3,
+                "rank": "Bronze 2",
+                "stars": 4
+            }
+        ]
+    },
+    "IE6": {
+        "campaign": "Indomitus Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 6,
+        "reward": "Codex Astartes Page",
+        "expectedGold": 83,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Flayed One", "Necron Warrior", "Ophydian Destroyer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Necron Warrior",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 4
+            },
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 4
+            }
+        ]
+    },
+    "IE7": {
+        "campaign": "Indomitus Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 7,
+        "reward": "Metal Decorative Skull",
+        "expectedGold": 83,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Flayed One", "Necron Warrior", "Scarab Swarm", "Ophydian Destroyer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Flayed One",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 4
+            },
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Ophydian Destroyer",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 3
+            },
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Bronze 2",
+                "stars": 4
+            }
+        ]
+    },
+    "IE8": {
+        "campaign": "Indomitus Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 8,
+        "reward": "Makhotep",
+        "expectedGold": 83,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Flayed One", "Necron Warrior", "Scarab Swarm", "Ophydian Destroyer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 4
+            },
+            {
+                "name": "Makhotep",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 6,
+                "rarity": "Rare"
+            },
+            {
+                "name": "Necron Warrior",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 4
+            },
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Bronze 2",
+                "stars": 4
+            },
+            {
+                "name": "Scarab Swarm",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 4
+            }
+        ]
+    },
+    "IE9": {
+        "campaign": "Indomitus Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 9,
+        "reward": "Oath Seal",
+        "expectedGold": 91.5,
+        "slots": 3,
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Necron Warrior", "Flayed One", "Scarab Swarm", "Ophydian Destroyer"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Flayed One",
+                "count": 2,
+                "rank": "silver 1",
+                "stars": 4
+            },
+            {
+                "name": "Necron Warrior",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Ophydian Destroyer",
+                "count": 1,
+                "rank": "Bronze 1",
+                "stars": 4
+            },
+            {
+                "name": "Scarab Swarm",
+                "count": 1,
+                "rank": "bronze 3",
+                "stars": 7
             }
         ]
     },
@@ -15004,35 +15299,6 @@
                 "count": 2,
                 "rank": "Silver 2",
                 "stars": 8
-            }
-        ]
-    },
-    "IE2": {
-        "campaign": "Indomitus Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 2,
-        "reward": "Weapon Anointment Oils",
-        "expectedGold": 83,
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Flayed One", "Necron Warrior", "Deathmark"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Deathmark",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 7
-            },
-            {
-                "name": "Flayed One",
-                "count": 4,
-                "rank": "Bronz 2",
-                "stars": 4
-            },
-            {
-                "name": "Necron Warrior",
-                "count": 3,
-                "rank": "Bronz 3",
-                "stars": 4
             }
         ]
     },
@@ -15397,41 +15663,6 @@
             }
         ]
     },
-    "IE3": {
-        "campaign": "Indomitus Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 3,
-        "reward": "Reliquary of Vengeance",
-        "expectedGold": 83,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Flayed One", "Necron Warrior", "Scarab Swarm", "Ophydian Destroyer"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Flayed One",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 4
-            },
-            {
-                "name": "Necron Warrior",
-                "count": 3,
-                "rank": "Bronze 2",
-                "stars": 4
-            },
-            {
-                "name": "Ophydian Destroyer",
-                "count": 1,
-                "rank": "Bronze 1",
-                "stars": 4
-            },
-            {
-                "name": "Scarab Swarm",
-                "count": 3,
-                "rank": "Bronze 2",
-                "stars": 4
-            }
-        ]
-    },
     "IE30": {
         "campaign": "Indomitus Elite",
         "campaignType": "Elite",
@@ -15770,42 +16001,6 @@
             }
         ]
     },
-    "IE4": {
-        "campaign": "Indomitus Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 4,
-        "reward": "Greater Reliquary of Vengeance",
-        "expectedGold": 83,
-        "slots": 3,
-        "enemiesTotal": 6,
-        "enemiesTypes": ["Flayed One", "Scarab Swarm", "Necron Warrior", "Deathmark"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Deathmark",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 4
-            },
-            {
-                "name": "Flayed One",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 4
-            },
-            {
-                "name": "Necron Warrior",
-                "count": 1,
-                "rank": "Bronze 3",
-                "stars": 7
-            },
-            {
-                "name": "Scarab Swarm",
-                "count": 1,
-                "rank": "Bronze 3",
-                "stars": 4
-            }
-        ]
-    },
     "IE40": {
         "campaign": "Indomitus Elite",
         "campaignType": "Elite",
@@ -15848,183 +16043,6 @@
             }
         ]
     },
-    "IE5": {
-        "campaign": "Indomitus Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 5,
-        "reward": "The Gold Phoenix",
-        "expectedGold": 83,
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Flayed One", "Necron Warrior", "Scarab Swarm", "Deathmark"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Deathmark",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 7
-            },
-            {
-                "name": "Flayed One",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 7
-            },
-            {
-                "name": "Necron Warrior",
-                "count": 4,
-                "rank": "Bronze 3",
-                "stars": 7
-            },
-            {
-                "name": "Scarab Swarm",
-                "count": 3,
-                "rank": "Bronze 2",
-                "stars": 4
-            }
-        ]
-    },
-    "IE6": {
-        "campaign": "Indomitus Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 6,
-        "reward": "Codex Astartes Page",
-        "expectedGold": 83,
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Flayed One", "Necron Warrior", "Ophydian Destroyer"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Flayed One",
-                "count": 3,
-                "rank": "Bronze 3",
-                "stars": 7
-            },
-            {
-                "name": "Necron Warrior",
-                "count": 5,
-                "rank": "Silver 1",
-                "stars": 4
-            },
-            {
-                "name": "Ophydian Destroyer",
-                "count": 1,
-                "rank": "Bronze 1",
-                "stars": 4
-            }
-        ]
-    },
-    "IE7": {
-        "campaign": "Indomitus Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 7,
-        "reward": "Metal Decorative Skull",
-        "expectedGold": 83,
-        "enemiesTotal": 10,
-        "enemiesTypes": ["Flayed One", "Necron Warrior", "Scarab Swarm", "Ophydian Destroyer"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Flayed One",
-                "count": 3,
-                "rank": "Silver 1",
-                "stars": 4
-            },
-            {
-                "name": "Necron Warrior",
-                "count": 3,
-                "rank": "Bronze 3",
-                "stars": 7
-            },
-            {
-                "name": "Ophydian Destroyer",
-                "count": 2,
-                "rank": "Bronze 1",
-                "stars": 3
-            },
-            {
-                "name": "Scarab Swarm",
-                "count": 2,
-                "rank": "Bronze 2",
-                "stars": 4
-            }
-        ]
-    },
-    "IE8": {
-        "campaign": "Indomitus Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 8,
-        "reward": "Makhotep",
-        "expectedGold": 83,
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Flayed One", "Necron Warrior", "Scarab Swarm", "Ophydian Destroyer"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Flayed One",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 4
-            },
-            {
-                "name": "Makhotep",
-                "count": 1,
-                "rank": "Silver 1",
-                "stars": 6,
-                "rarity": "Rare"
-            },
-            {
-                "name": "Necron Warrior",
-                "count": 3,
-                "rank": "Bronze 3",
-                "stars": 4
-            },
-            {
-                "name": "Ophydian Destroyer",
-                "count": 1,
-                "rank": "Bronze 2",
-                "stars": 4
-            },
-            {
-                "name": "Scarab Swarm",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 4
-            }
-        ]
-    },
-    "IE9": {
-        "campaign": "Indomitus Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 9,
-        "reward": "Oath Seal",
-        "expectedGold": 91.5,
-        "slots": 3,
-        "enemiesTotal": 5,
-        "enemiesTypes": ["Necron Warrior", "Flayed One", "Scarab Swarm", "Ophydian Destroyer"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Flayed One",
-                "count": 2,
-                "rank": "silver 1",
-                "stars": 4
-            },
-            {
-                "name": "Necron Warrior",
-                "count": 1,
-                "rank": "Silver 1",
-                "stars": 7
-            },
-            {
-                "name": "Ophydian Destroyer",
-                "count": 1,
-                "rank": "Bronze 1",
-                "stars": 4
-            },
-            {
-                "name": "Scarab Swarm",
-                "count": 1,
-                "rank": "bronze 3",
-                "stars": 7
-            }
-        ]
-    },
     "FoCE1": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
@@ -16051,6 +16069,224 @@
                 "count": 2,
                 "rank": "Silver 3",
                 "stars": 8
+            }
+        ]
+    },
+    "FoCE2": {
+        "campaign": "Fall of Cadia Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 2,
+        "reward": "Eye of Horus",
+        "expectedGold": 83,
+        "slots": 4,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
+    },
+    "FoCE3": {
+        "campaign": "Fall of Cadia Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 3,
+        "reward": "Icon of Vengeance",
+        "expectedGold": 83,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
+    },
+    "FoCE4": {
+        "campaign": "Fall of Cadia Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 4,
+        "reward": "Blasphemous Armor Trim",
+        "expectedGold": 83,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Lascannon team",
+                "count": 3,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
+    },
+    "FoCE5": {
+        "campaign": "Fall of Cadia Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 5,
+        "reward": "Mutation: Warped Lungs",
+        "expectedGold": 83,
+        "slots": 4,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 9,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
+    },
+    "FoCE6": {
+        "campaign": "Fall of Cadia Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 6,
+        "reward": "Blessing of the Dark Gods",
+        "expectedGold": 83,
+        "slots": 3,
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 2,
+                "rank": "Gold 1",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
+    },
+    "FoCE7": {
+        "campaign": "Fall of Cadia Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 7,
+        "reward": "Kill Count",
+        "expectedGold": 83,
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Guardsman", "Cadian Vox-Caster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Gold 2",
+                "stars": 10
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Silver 3",
+                "stars": 8
+            }
+        ]
+    },
+    "FoCE8": {
+        "campaign": "Fall of Cadia Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 8,
+        "reward": "Kut Skoden",
+        "expectedGold": 83,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 4,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 1,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Kut Skoden",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            }
+        ]
+    },
+    "FoCE9": {
+        "campaign": "Fall of Cadia Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 9,
+        "reward": "Mutation: Scaly Skin",
+        "expectedGold": 91.5,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman", "Cadian Mortar Team"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 6,
+                "rank": "Gold 2",
+                "stars": 11
+            },
+            {
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Cadian Vox-Caster",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
             }
         ]
     },
@@ -16350,36 +16586,6 @@
             }
         ]
     },
-    "FoCE2": {
-        "campaign": "Fall of Cadia Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 2,
-        "reward": "Eye of Horus",
-        "expectedGold": 83,
-        "slots": 4,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-Caster", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 3,
-                "rank": "Silver 3",
-                "stars": 10
-            },
-            {
-                "name": "Cadian Lascannon team",
-                "count": 3,
-                "rank": "Silver 3",
-                "stars": 10
-            },
-            {
-                "name": "Cadian Vox-Caster",
-                "count": 2,
-                "rank": "Silver 1",
-                "stars": 9
-            }
-        ]
-    },
     "FoCE20": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
@@ -16671,29 +16877,6 @@
             }
         ]
     },
-    "FoCE3": {
-        "campaign": "Fall of Cadia Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 3,
-        "reward": "Icon of Vengeance",
-        "expectedGold": 83,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 6,
-                "rank": "Gold 2",
-                "stars": 10
-            },
-            {
-                "name": "Cadian Mortar Team",
-                "count": 2,
-                "rank": "Silver 1",
-                "stars": 9
-            }
-        ]
-    },
     "FoCE30": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
@@ -16976,29 +17159,6 @@
             }
         ]
     },
-    "FoCE4": {
-        "campaign": "Fall of Cadia Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 4,
-        "reward": "Blasphemous Armor Trim",
-        "expectedGold": 83,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 5,
-                "rank": "Gold 2",
-                "stars": 10
-            },
-            {
-                "name": "Cadian Lascannon team",
-                "count": 3,
-                "rank": "Gold 1",
-                "stars": 10
-            }
-        ]
-    },
     "FoCE40": {
         "campaign": "Fall of Cadia Elite",
         "campaignType": "Elite",
@@ -17041,148 +17201,6 @@
             }
         ]
     },
-    "FoCE5": {
-        "campaign": "Fall of Cadia Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 5,
-        "reward": "Mutation: Warped Lungs",
-        "expectedGold": 83,
-        "slots": 4,
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 9,
-                "rank": "Gold 1",
-                "stars": 10
-            }
-        ]
-    },
-    "FoCE6": {
-        "campaign": "Fall of Cadia Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 6,
-        "reward": "Blessing of the Dark Gods",
-        "expectedGold": 83,
-        "slots": 3,
-        "enemiesTotal": 5,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 2,
-                "rank": "Gold 1",
-                "stars": 10
-            },
-            {
-                "name": "Cadian Mortar Team",
-                "count": 1,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Cadian Vox-Caster",
-                "count": 2,
-                "rank": "Silver 2",
-                "stars": 8
-            }
-        ]
-    },
-    "FoCE7": {
-        "campaign": "Fall of Cadia Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 7,
-        "reward": "Kill Count",
-        "expectedGold": 83,
-        "enemiesTotal": 7,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Guardsman", "Cadian Vox-Caster"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 3,
-                "rank": "Gold 2",
-                "stars": 10
-            },
-            {
-                "name": "Cadian Mortar Team",
-                "count": 2,
-                "rank": "Silver 2",
-                "stars": 8
-            },
-            {
-                "name": "Cadian Vox-Caster",
-                "count": 2,
-                "rank": "Silver 3",
-                "stars": 8
-            }
-        ]
-    },
-    "FoCE8": {
-        "campaign": "Fall of Cadia Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 8,
-        "reward": "Kut Skoden",
-        "expectedGold": 83,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 4,
-                "rank": "Gold 2",
-                "stars": 11
-            },
-            {
-                "name": "Cadian Mortar Team",
-                "count": 2,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Cadian Vox-Caster",
-                "count": 1,
-                "rank": "Silver 3",
-                "stars": 8
-            },
-            {
-                "name": "Kut Skoden",
-                "count": 1,
-                "rank": "Silver 2",
-                "stars": 7,
-                "rarity": "Epic"
-            }
-        ]
-    },
-    "FoCE9": {
-        "campaign": "Fall of Cadia Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 9,
-        "reward": "Mutation: Scaly Skin",
-        "expectedGold": 91.5,
-        "enemiesTotal": 10,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Guardsman", "Cadian Mortar Team"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 6,
-                "rank": "Gold 2",
-                "stars": 11
-            },
-            {
-                "name": "Cadian Mortar Team",
-                "count": 2,
-                "rank": "Silver 2",
-                "stars": 8
-            },
-            {
-                "name": "Cadian Vox-Caster",
-                "count": 2,
-                "rank": "Silver 2",
-                "stars": 9
-            }
-        ]
-    },
     "OE1": {
         "campaign": "Octarius Elite",
         "campaignType": "Elite",
@@ -17216,6 +17234,266 @@
                 "count": 1,
                 "rank": "Silver 1",
                 "stars": 7
+            }
+        ]
+    },
+    "OE2": {
+        "campaign": "Octarius Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 2,
+        "reward": "Bad Moon Teef",
+        "expectedGold": 83,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
+    },
+    "OE3": {
+        "campaign": "Octarius Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 3,
+        "reward": "Iron Jaw",
+        "expectedGold": 83,
+        "slots": 4,
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Neophyte", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
+    },
+    "OE4": {
+        "campaign": "Octarius Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 4,
+        "reward": "Ard Plate",
+        "expectedGold": 83,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 8,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
+    },
+    "OE5": {
+        "campaign": "Octarius Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 5,
+        "reward": "Helmet Trophy",
+        "expectedGold": 83,
+        "slots": 3,
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Initiate",
+                "count": 7,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Neophyte",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
+    },
+    "OE6": {
+        "campaign": "Octarius Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 6,
+        "reward": "Kustom Gubbinz",
+        "expectedGold": 83,
+        "enemiesAlliances": ["Xenos"],
+        "enemiesFactions": ["Orks"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Grot", "Ork Boy", "Grot Tank"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Grot Tank",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 8
+            },
+            {
+                "name": "Ork Boy",
+                "count": 5,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
+    },
+    "OE7": {
+        "campaign": "Octarius Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 7,
+        "reward": "Battle Scar",
+        "expectedGold": 83,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Orks", "Black Templars"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster", "Grot", "Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Grot",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Initiate",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Initiate with Pyreblaster",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Neophyte",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
+    },
+    "OE8": {
+        "campaign": "Octarius Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 8,
+        "reward": "Brother Burchard",
+        "expectedGold": 83,
+        "enemiesAlliances": ["Xenos", "Imperial"],
+        "enemiesFactions": ["Orks", "Black Templars"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Aggressor",
+                "count": 2,
+                "rank": "Bronze 1",
+                "stars": 6
+            },
+            {
+                "name": "Brother Burchard",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Neophyte",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Ork Boy",
+                "count": 1,
+                "rank": "Iron 1",
+                "stars": 1
+            }
+        ]
+    },
+    "OE9": {
+        "campaign": "Octarius Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 9,
+        "reward": "Box of Salvage",
+        "expectedGold": 91.5,
+        "slots": 4,
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Initiate", "Neophyte"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Initiate",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Neophyte",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
             }
         ]
     },
@@ -17527,41 +17805,6 @@
             }
         ]
     },
-    "OE2": {
-        "campaign": "Octarius Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 2,
-        "reward": "Bad Moon Teef",
-        "expectedGold": 83,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Aggressor",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 9
-            },
-            {
-                "name": "Initiate",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 9
-            },
-            {
-                "name": "Initiate with Pyreblaster",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 7
-            },
-            {
-                "name": "Neophyte",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 9
-            }
-        ]
-    },
     "OE20": {
         "campaign": "Octarius Elite",
         "campaignType": "Elite",
@@ -17844,30 +18087,6 @@
                 "count": 5,
                 "rank": "Gold 2",
                 "stars": 10
-            }
-        ]
-    },
-    "OE3": {
-        "campaign": "Octarius Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 3,
-        "reward": "Iron Jaw",
-        "expectedGold": 83,
-        "slots": 4,
-        "enemiesTotal": 5,
-        "enemiesTypes": ["Neophyte", "Initiate With Pyreblaster"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Initiate",
-                "count": 4,
-                "rank": "Silver 2",
-                "stars": 8
-            },
-            {
-                "name": "Initiate with Pyreblaster",
-                "count": 1,
-                "rank": "Silver 2",
-                "stars": 9
             }
         ]
     },
@@ -18207,29 +18426,6 @@
             }
         ]
     },
-    "OE4": {
-        "campaign": "Octarius Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 4,
-        "reward": "Ard Plate",
-        "expectedGold": 83,
-        "enemiesTotal": 10,
-        "enemiesTypes": ["Initiate", "Initiate With Pyreblaster"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Initiate",
-                "count": 8,
-                "rank": "Silver 1",
-                "stars": 7
-            },
-            {
-                "name": "Initiate with Pyreblaster",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 9
-            }
-        ]
-    },
     "OE40": {
         "campaign": "Octarius Elite",
         "campaignType": "Elite",
@@ -18274,184 +18470,6 @@
             }
         ]
     },
-    "OE5": {
-        "campaign": "Octarius Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 5,
-        "reward": "Helmet Trophy",
-        "expectedGold": 83,
-        "slots": 3,
-        "enemiesTotal": 6,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Aggressor",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 7
-            },
-            {
-                "name": "Initiate",
-                "count": 7,
-                "rank": "Silver 1",
-                "stars": 7
-            },
-            {
-                "name": "Neophyte",
-                "count": 1,
-                "rank": "Silver 1",
-                "stars": 7
-            }
-        ]
-    },
-    "OE6": {
-        "campaign": "Octarius Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 6,
-        "reward": "Kustom Gubbinz",
-        "expectedGold": 83,
-        "enemiesAlliances": ["Xenos"],
-        "enemiesFactions": ["Orks"],
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Grot", "Ork Boy", "Grot Tank"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 3,
-                "rank": "Silver 2",
-                "stars": 8
-            },
-            {
-                "name": "Grot Tank",
-                "count": 1,
-                "rank": "Silver 1",
-                "stars": 8
-            },
-            {
-                "name": "Ork Boy",
-                "count": 5,
-                "rank": "Silver 2",
-                "stars": 8
-            }
-        ]
-    },
-    "OE7": {
-        "campaign": "Octarius Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 7,
-        "reward": "Battle Scar",
-        "expectedGold": 83,
-        "enemiesAlliances": ["Xenos", "Imperial"],
-        "enemiesFactions": ["Orks", "Black Templars"],
-        "enemiesTotal": 12,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Initiate With Pyreblaster", "Grot", "Ork Boy"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Aggressor",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 7
-            },
-            {
-                "name": "Grot",
-                "count": 2,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Initiate",
-                "count": 2,
-                "rank": "Silver 1",
-                "stars": 7
-            },
-            {
-                "name": "Initiate with Pyreblaster",
-                "count": 1,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Neophyte",
-                "count": 1,
-                "rank": "Silver 1",
-                "stars": 7
-            },
-            {
-                "name": "Ork Boy",
-                "count": 4,
-                "rank": "Silver 1",
-                "stars": 9
-            }
-        ]
-    },
-    "OE8": {
-        "campaign": "Octarius Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 8,
-        "reward": "Brother Burchard",
-        "expectedGold": 83,
-        "enemiesAlliances": ["Xenos", "Imperial"],
-        "enemiesFactions": ["Orks", "Black Templars"],
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Aggressor", "Initiate", "Neophyte", "Ork Boy"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Aggressor",
-                "count": 2,
-                "rank": "Bronze 1",
-                "stars": 6
-            },
-            {
-                "name": "Brother Burchard",
-                "count": 1,
-                "rank": "Silver 2",
-                "stars": 7,
-                "rarity": "Epic"
-            },
-            {
-                "name": "Initiate",
-                "count": 3,
-                "rank": "Silver 2",
-                "stars": 8
-            },
-            {
-                "name": "Neophyte",
-                "count": 2,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Ork Boy",
-                "count": 1,
-                "rank": "Iron 1",
-                "stars": 1
-            }
-        ]
-    },
-    "OE9": {
-        "campaign": "Octarius Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 9,
-        "reward": "Box of Salvage",
-        "expectedGold": 91.5,
-        "slots": 4,
-        "enemiesTotal": 6,
-        "enemiesTypes": ["Initiate", "Neophyte"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Initiate",
-                "count": 3,
-                "rank": "Silver 2",
-                "stars": 9
-            },
-            {
-                "name": "Neophyte",
-                "count": 3,
-                "rank": "Silver 2",
-                "stars": 9
-            }
-        ]
-    },
     "IME1": {
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
@@ -18478,6 +18496,251 @@
                 "count": 2,
                 "rank": "Silver 1",
                 "stars": 7
+            }
+        ]
+    },
+    "IME2": {
+        "campaign": "Indomitus Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 2,
+        "reward": "Reconstitution Protocols",
+        "expectedGold": 83,
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            }
+        ]
+    },
+    "IME3": {
+        "campaign": "Indomitus Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 3,
+        "reward": "Viridian Energy Tesseract",
+        "expectedGold": 83,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 3,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
+    },
+    "IME4": {
+        "campaign": "Indomitus Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 4,
+        "reward": "Artificial Vertebrae",
+        "expectedGold": 83,
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Eliminator", "Heavy Intercessor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 7,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Eliminator",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
+    },
+    "IME5": {
+        "campaign": "Indomitus Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 5,
+        "reward": "Bionic Neural Pathways",
+        "expectedGold": 83,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Eliminator", "Inceptor", "Heavy Intercessor"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 8
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Inceptor",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 8
+            }
+        ]
+    },
+    "IME6": {
+        "campaign": "Indomitus Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 6,
+        "reward": "Engrammatic Entangler",
+        "expectedGold": 83,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Inceptor", "Heavy Intercessor", "Eliminator"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Inceptor",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            }
+        ]
+    },
+    "IME7": {
+        "campaign": "Indomitus Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 7,
+        "reward": "Archeo-Tech Remnant",
+        "expectedGold": 83,
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Heavy Intercessor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 10,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
+    },
+    "IME8": {
+        "campaign": "Indomitus Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 8,
+        "reward": "Vindicta",
+        "expectedGold": 83,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor", "Cadian Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Cadian Guardsman",
+                "count": 5,
+                "rank": "Silver 3",
+                "stars": 8
+            },
+            {
+                "name": "Eliminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Inceptor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Vindicta",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5,
+                "rarity": "Rare"
+            }
+        ]
+    },
+    "IME9": {
+        "campaign": "Indomitus Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 9,
+        "reward": "Targeting Link",
+        "expectedGold": 91.5,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["Ultramarines"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Inceptor", "Eliminator", "Heavy Intercessor"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Eliminator",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Heavy Intercessor",
+                "count": 1,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Inceptor",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
             }
         ]
     },
@@ -18803,35 +19066,6 @@
                 "count": 2,
                 "rank": "Gold 1",
                 "stars": 10
-            }
-        ]
-    },
-    "IME2": {
-        "campaign": "Indomitus Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 2,
-        "reward": "Reconstitution Protocols",
-        "expectedGold": 83,
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 5,
-                "rank": "Silver 2",
-                "stars": 8
-            },
-            {
-                "name": "Eliminator",
-                "count": 3,
-                "rank": "Bronze 3",
-                "stars": 9
-            },
-            {
-                "name": "Inceptor",
-                "count": 3,
-                "rank": "Bronze 3",
-                "stars": 9
             }
         ]
     },
@@ -19166,35 +19400,6 @@
             }
         ]
     },
-    "IME3": {
-        "campaign": "Indomitus Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 3,
-        "reward": "Viridian Energy Tesseract",
-        "expectedGold": 83,
-        "enemiesTotal": 10,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 3,
-                "rank": "Silver 3",
-                "stars": 8
-            },
-            {
-                "name": "Eliminator",
-                "count": 3,
-                "rank": "Bronze 3",
-                "stars": 9
-            },
-            {
-                "name": "Inceptor",
-                "count": 4,
-                "rank": "Silver 1",
-                "stars": 7
-            }
-        ]
-    },
     "IME30": {
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
@@ -19508,35 +19713,6 @@
             }
         ]
     },
-    "IME4": {
-        "campaign": "Indomitus Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 4,
-        "reward": "Artificial Vertebrae",
-        "expectedGold": 83,
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Eliminator", "Heavy Intercessor", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 7,
-                "rank": "Silver 2",
-                "stars": 8
-            },
-            {
-                "name": "Eliminator",
-                "count": 3,
-                "rank": "Silver 1",
-                "stars": 7
-            },
-            {
-                "name": "Inceptor",
-                "count": 1,
-                "rank": "Silver 1",
-                "stars": 7
-            }
-        ]
-    },
     "IME40": {
         "campaign": "Indomitus Mirror Elite",
         "campaignType": "Elite",
@@ -19575,164 +19751,6 @@
             }
         ]
     },
-    "IME5": {
-        "campaign": "Indomitus Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 5,
-        "reward": "Bionic Neural Pathways",
-        "expectedGold": 83,
-        "enemiesAlliances": ["Imperial"],
-        "enemiesFactions": ["Ultramarines"],
-        "enemiesTotal": 6,
-        "enemiesTypes": ["Eliminator", "Inceptor", "Heavy Intercessor"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Eliminator",
-                "count": 2,
-                "rank": "Silver 1",
-                "stars": 8
-            },
-            {
-                "name": "Heavy Intercessor",
-                "count": 1,
-                "rank": "Silver 1",
-                "stars": 7
-            },
-            {
-                "name": "Inceptor",
-                "count": 3,
-                "rank": "Silver 1",
-                "stars": 8
-            }
-        ]
-    },
-    "IME6": {
-        "campaign": "Indomitus Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 6,
-        "reward": "Engrammatic Entangler",
-        "expectedGold": 83,
-        "enemiesAlliances": ["Imperial"],
-        "enemiesFactions": ["Ultramarines"],
-        "enemiesTotal": 5,
-        "enemiesTypes": ["Inceptor", "Heavy Intercessor", "Eliminator"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Eliminator",
-                "count": 2,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Heavy Intercessor",
-                "count": 1,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Inceptor",
-                "count": 2,
-                "rank": "Silver 2",
-                "stars": 8
-            }
-        ]
-    },
-    "IME7": {
-        "campaign": "Indomitus Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 7,
-        "reward": "Archeo-Tech Remnant",
-        "expectedGold": 83,
-        "enemiesTotal": 12,
-        "enemiesTypes": ["Heavy Intercessor", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 10,
-                "rank": "Silver 2",
-                "stars": 8
-            },
-            {
-                "name": "Heavy Intercessor",
-                "count": 2,
-                "rank": "Silver 1",
-                "stars": 9
-            }
-        ]
-    },
-    "IME8": {
-        "campaign": "Indomitus Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 8,
-        "reward": "Vindicta",
-        "expectedGold": 83,
-        "enemiesTotal": 10,
-        "enemiesTypes": ["Heavy Intercessor", "Eliminator", "Inceptor", "Cadian Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Cadian Guardsman",
-                "count": 5,
-                "rank": "Silver 3",
-                "stars": 8
-            },
-            {
-                "name": "Eliminator",
-                "count": 2,
-                "rank": "Silver 1",
-                "stars": 7
-            },
-            {
-                "name": "Heavy Intercessor",
-                "count": 1,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Inceptor",
-                "count": 1,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Vindicta",
-                "count": 1,
-                "rank": "Bronze 3",
-                "stars": 5,
-                "rarity": "Rare"
-            }
-        ]
-    },
-    "IME9": {
-        "campaign": "Indomitus Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 9,
-        "reward": "Targeting Link",
-        "expectedGold": 91.5,
-        "enemiesAlliances": ["Imperial"],
-        "enemiesFactions": ["Ultramarines"],
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Inceptor", "Eliminator", "Heavy Intercessor"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Eliminator",
-                "count": 4,
-                "rank": "Silver 1",
-                "stars": 7
-            },
-            {
-                "name": "Heavy Intercessor",
-                "count": 1,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Inceptor",
-                "count": 4,
-                "rank": "Silver 1",
-                "stars": 9
-            }
-        ]
-    },
     "FoCME1": {
         "campaign": "Fall of Cadia Mirror Elite",
         "campaignType": "Elite",
@@ -19748,6 +19766,237 @@
                 "count": 7,
                 "rank": "Silver 1",
                 "stars": 7
+            }
+        ]
+    },
+    "FoCME2": {
+        "campaign": "Fall of Cadia Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 2,
+        "reward": "Zeidos Ribbon",
+        "expectedGold": 83,
+        "slots": 3,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Havoc",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 5
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 6,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
+    },
+    "FoCME3": {
+        "campaign": "Fall of Cadia Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 3,
+        "reward": "Entrenching Tool",
+        "expectedGold": 83,
+        "slots": 4,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 5,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
+    },
+    "FoCME4": {
+        "campaign": "Fall of Cadia Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 4,
+        "reward": "Flak Plates",
+        "expectedGold": 83,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Havoc", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 6,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 5
+            }
+        ]
+    },
+    "FoCME5": {
+        "campaign": "Fall of Cadia Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 5,
+        "reward": "Blessed Promethium Canister",
+        "expectedGold": 83,
+        "slots": 4,
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 9
+            }
+        ]
+    },
+    "FoCME6": {
+        "campaign": "Fall of Cadia Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 6,
+        "reward": "Honourifica Imperialis",
+        "expectedGold": 83,
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 8
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 7
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 7,
+                "rank": "Gold 1",
+                "stars": 10
+            }
+        ]
+    },
+    "FoCME7": {
+        "campaign": "Fall of Cadia Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 7,
+        "reward": "Relic Hilt",
+        "expectedGold": 83,
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Chaos Terminator", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 9,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
+    },
+    "FoCME8": {
+        "campaign": "Fall of Cadia Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 8,
+        "reward": "Angrax",
+        "expectedGold": 83,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Angrax",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Bloodletter",
+                "count": 2,
+                "rank": "Silver 2",
+                "stars": 9
+            },
+            {
+                "name": "Chaos Terminator",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Havoc",
+                "count": 1,
+                "rank": "Bronze 3",
+                "stars": 9
+            },
+            {
+                "name": "Traitor Guardsman",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
+    },
+    "FoCME9": {
+        "campaign": "Fall of Cadia Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 9,
+        "reward": "Weapon Parts",
+        "expectedGold": 91.5,
+        "slots": 4,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Havoc", "Bloodletter"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Bloodletter",
+                "count": 8,
+                "rank": "Silver 2",
+                "stars": 7
+            },
+            {
+                "name": "Havoc",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 9
             }
         ]
     },
@@ -20028,36 +20277,6 @@
             }
         ]
     },
-    "FoCME2": {
-        "campaign": "Fall of Cadia Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 2,
-        "reward": "Zeidos Ribbon",
-        "expectedGold": 83,
-        "slots": 3,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Traitor Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Chaos Terminator",
-                "count": 1,
-                "rank": "Bronze 3",
-                "stars": 5
-            },
-            {
-                "name": "Havoc",
-                "count": 1,
-                "rank": "Bronze 3",
-                "stars": 5
-            },
-            {
-                "name": "Traitor Guardsman",
-                "count": 6,
-                "rank": "Silver 2",
-                "stars": 9
-            }
-        ]
-    },
     "FoCME20": {
         "campaign": "Fall of Cadia Mirror Elite",
         "campaignType": "Elite",
@@ -20307,36 +20526,6 @@
                 "name": "Chaos Terminator",
                 "count": 2,
                 "rank": "Silver 1",
-                "stars": 9
-            }
-        ]
-    },
-    "FoCME3": {
-        "campaign": "Fall of Cadia Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 3,
-        "reward": "Entrenching Tool",
-        "expectedGold": 83,
-        "slots": 4,
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Bloodletter",
-                "count": 3,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Chaos Terminator",
-                "count": 1,
-                "rank": "Bronze 3",
-                "stars": 7
-            },
-            {
-                "name": "Traitor Guardsman",
-                "count": 5,
-                "rank": "Silver 2",
                 "stars": 9
             }
         ]
@@ -20604,29 +20793,6 @@
             }
         ]
     },
-    "FoCME4": {
-        "campaign": "Fall of Cadia Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 4,
-        "reward": "Flak Plates",
-        "expectedGold": 83,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Havoc", "Bloodletter"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Bloodletter",
-                "count": 6,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Havoc",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 5
-            }
-        ]
-    },
     "FoCME40": {
         "campaign": "Fall of Cadia Mirror Elite",
         "campaignType": "Elite",
@@ -20654,154 +20820,6 @@
                 "count": 2,
                 "rank": "Silver 3",
                 "stars": 10
-            }
-        ]
-    },
-    "FoCME5": {
-        "campaign": "Fall of Cadia Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 5,
-        "reward": "Blessed Promethium Canister",
-        "expectedGold": 83,
-        "slots": 4,
-        "enemiesTotal": 8,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Bloodletter",
-                "count": 3,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Chaos Terminator",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 7
-            },
-            {
-                "name": "Traitor Guardsman",
-                "count": 3,
-                "rank": "Silver 2",
-                "stars": 9
-            }
-        ]
-    },
-    "FoCME6": {
-        "campaign": "Fall of Cadia Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 6,
-        "reward": "Honourifica Imperialis",
-        "expectedGold": 83,
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Havoc", "Bloodletter", "Traitor Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Bloodletter",
-                "count": 2,
-                "rank": "Silver 2",
-                "stars": 8
-            },
-            {
-                "name": "Havoc",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 7
-            },
-            {
-                "name": "Traitor Guardsman",
-                "count": 7,
-                "rank": "Gold 1",
-                "stars": 10
-            }
-        ]
-    },
-    "FoCME7": {
-        "campaign": "Fall of Cadia Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 7,
-        "reward": "Relic Hilt",
-        "expectedGold": 83,
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Chaos Terminator", "Bloodletter"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Bloodletter",
-                "count": 9,
-                "rank": "Bronze 3",
-                "stars": 9
-            },
-            {
-                "name": "Chaos Terminator",
-                "count": 2,
-                "rank": "Silver 1",
-                "stars": 9
-            }
-        ]
-    },
-    "FoCME8": {
-        "campaign": "Fall of Cadia Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 8,
-        "reward": "Angrax",
-        "expectedGold": 83,
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Havoc", "Chaos Terminator", "Bloodletter", "Traitor Guardsman"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Angrax",
-                "count": 1,
-                "rank": "Silver 2",
-                "stars": 7,
-                "rarity": "Epic"
-            },
-            {
-                "name": "Bloodletter",
-                "count": 2,
-                "rank": "Silver 2",
-                "stars": 9
-            },
-            {
-                "name": "Chaos Terminator",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 9
-            },
-            {
-                "name": "Havoc",
-                "count": 1,
-                "rank": "Bronze 3",
-                "stars": 9
-            },
-            {
-                "name": "Traitor Guardsman",
-                "count": 3,
-                "rank": "Silver 1",
-                "stars": 7
-            }
-        ]
-    },
-    "FoCME9": {
-        "campaign": "Fall of Cadia Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 9,
-        "reward": "Weapon Parts",
-        "expectedGold": 91.5,
-        "slots": 4,
-        "enemiesTotal": 10,
-        "enemiesTypes": ["Havoc", "Bloodletter"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Bloodletter",
-                "count": 8,
-                "rank": "Silver 2",
-                "stars": 7
-            },
-            {
-                "name": "Havoc",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 9
             }
         ]
     },
@@ -20837,6 +20855,239 @@
                 "count": 3,
                 "rank": "Bronze 3",
                 "stars": 6
+            }
+        ]
+    },
+    "OME2": {
+        "campaign": "Octarius Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 2,
+        "reward": "Righteous Candle",
+        "expectedGold": 83,
+        "enemiesTotal": 11,
+        "enemiesTypes": [],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 5,
+                "rank": "Silver 1",
+                "stars": 5
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Bronze 3",
+                "stars": 8
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 5
+            }
+        ]
+    },
+    "OME3": {
+        "campaign": "Octarius Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 3,
+        "reward": "Chain of Zeal",
+        "expectedGold": 83,
+        "enemiesTotal": 11,
+        "enemiesTypes": [],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 6,
+                "rank": "Slver 1",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Ork Boy",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 5
+            }
+        ]
+    },
+    "OME4": {
+        "campaign": "Octarius Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 4,
+        "reward": "Blessed Tabbard",
+        "expectedGold": 83,
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Stromboy", "Grot Tank", "Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 5
+            },
+            {
+                "name": "Storm Boy",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
+    },
+    "OME5": {
+        "campaign": "Octarius Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 5,
+        "reward": "Special Issue Ammo",
+        "expectedGold": 83,
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Grot Tank", "Grot", "Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Slver 1",
+                "stars": 9
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Ork Boy",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            }
+        ]
+    },
+    "OME6": {
+        "campaign": "Octarius Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 6,
+        "reward": "Bones of the Paragons",
+        "expectedGold": 83,
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Grot Tank", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 9,
+                "rank": "Silver 2",
+                "stars": 6
+            },
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 2",
+                "stars": 6
+            }
+        ]
+    },
+    "OME7": {
+        "campaign": "Octarius Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 7,
+        "reward": "Purity Seal of the Primarch",
+        "expectedGold": 83,
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 7
+            },
+            {
+                "name": "Grot Tank",
+                "count": 2,
+                "rank": "Silver 1",
+                "stars": 9
+            },
+            {
+                "name": "Ork Boy",
+                "count": 6,
+                "rank": "Silver 1",
+                "stars": 9
+            }
+        ]
+    },
+    "OME8": {
+        "campaign": "Octarius Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 8,
+        "reward": "Snappawrecka",
+        "expectedGold": 83,
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Stromboy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot Tank",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 8
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 8
+            },
+            {
+                "name": "Snappawrecka",
+                "count": 1,
+                "rank": "Silver 2",
+                "stars": 7,
+                "rarity": "Epic"
+            },
+            {
+                "name": "Storm Boy",
+                "count": 3,
+                "rank": "Silver 1",
+                "stars": 5
+            }
+        ]
+    },
+    "OME9": {
+        "campaign": "Octarius Mirror Elite",
+        "campaignType": "Elite",
+        "nodeNumber": 9,
+        "reward": "Weapon Anointment Oils",
+        "expectedGold": 91.5,
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Grot", "Grot Tank", "Ork Boy"],
+        "detailedEnemyTypes": [
+            {
+                "name": "Grot",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 6
+            },
+            {
+                "name": "Grot Tank",
+                "count": 4,
+                "rank": "Silver 2",
+                "stars": 6
+            },
+            {
+                "name": "Ork Boy",
+                "count": 4,
+                "rank": "Silver 1",
+                "stars": 9
             }
         ]
     },
@@ -21134,35 +21385,6 @@
                 "count": 3,
                 "rank": "Silver 3",
                 "stars": 10
-            }
-        ]
-    },
-    "OME2": {
-        "campaign": "Octarius Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 2,
-        "reward": "Righteous Candle",
-        "expectedGold": 83,
-        "enemiesTotal": 11,
-        "enemiesTypes": [],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 5,
-                "rank": "Silver 1",
-                "stars": 5
-            },
-            {
-                "name": "Grot Tank",
-                "count": 2,
-                "rank": "Bronze 3",
-                "stars": 8
-            },
-            {
-                "name": "Ork Boy",
-                "count": 4,
-                "rank": "Silver 1",
-                "stars": 5
             }
         ]
     },
@@ -21466,35 +21688,6 @@
                 "count": 2,
                 "rank": "Silver 1",
                 "stars": 9
-            }
-        ]
-    },
-    "OME3": {
-        "campaign": "Octarius Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 3,
-        "reward": "Chain of Zeal",
-        "expectedGold": 83,
-        "enemiesTotal": 11,
-        "enemiesTypes": [],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 6,
-                "rank": "Slver 1",
-                "stars": 7
-            },
-            {
-                "name": "Grot Tank",
-                "count": 3,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Ork Boy",
-                "count": 2,
-                "rank": "Silver 1",
-                "stars": 5
             }
         ]
     },
@@ -21873,35 +22066,6 @@
             }
         ]
     },
-    "OME4": {
-        "campaign": "Octarius Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 4,
-        "reward": "Blessed Tabbard",
-        "expectedGold": 83,
-        "enemiesTotal": 9,
-        "enemiesTypes": ["Stromboy", "Grot Tank", "Ork Boy"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot Tank",
-                "count": 2,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Ork Boy",
-                "count": 4,
-                "rank": "Silver 1",
-                "stars": 5
-            },
-            {
-                "name": "Storm Boy",
-                "count": 3,
-                "rank": "Silver 1",
-                "stars": 7
-            }
-        ]
-    },
     "OME40": {
         "campaign": "Octarius Mirror Elite",
         "campaignType": "Elite",
@@ -21935,152 +22099,6 @@
                 "count": 5,
                 "rank": "Gold 2",
                 "stars": 10
-            }
-        ]
-    },
-    "OME5": {
-        "campaign": "Octarius Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 5,
-        "reward": "Special Issue Ammo",
-        "expectedGold": 83,
-        "enemiesTotal": 10,
-        "enemiesTypes": ["Grot Tank", "Grot", "Ork Boy"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 4,
-                "rank": "Slver 1",
-                "stars": 9
-            },
-            {
-                "name": "Grot Tank",
-                "count": 3,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Ork Boy",
-                "count": 3,
-                "rank": "Silver 1",
-                "stars": 7
-            }
-        ]
-    },
-    "OME6": {
-        "campaign": "Octarius Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 6,
-        "reward": "Bones of the Paragons",
-        "expectedGold": 83,
-        "enemiesTotal": 12,
-        "enemiesTypes": ["Grot Tank", "Grot"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 9,
-                "rank": "Silver 2",
-                "stars": 6
-            },
-            {
-                "name": "Grot Tank",
-                "count": 3,
-                "rank": "Silver 2",
-                "stars": 6
-            }
-        ]
-    },
-    "OME7": {
-        "campaign": "Octarius Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 7,
-        "reward": "Purity Seal of the Primarch",
-        "expectedGold": 83,
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Ork Boy", "Grot Tank", "Grot"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 3,
-                "rank": "Silver 1",
-                "stars": 7
-            },
-            {
-                "name": "Grot Tank",
-                "count": 2,
-                "rank": "Silver 1",
-                "stars": 9
-            },
-            {
-                "name": "Ork Boy",
-                "count": 6,
-                "rank": "Silver 1",
-                "stars": 9
-            }
-        ]
-    },
-    "OME8": {
-        "campaign": "Octarius Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 8,
-        "reward": "Snappawrecka",
-        "expectedGold": 83,
-        "enemiesTotal": 11,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Stromboy"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot Tank",
-                "count": 3,
-                "rank": "Silver 1",
-                "stars": 8
-            },
-            {
-                "name": "Ork Boy",
-                "count": 4,
-                "rank": "Silver 1",
-                "stars": 8
-            },
-            {
-                "name": "Snappawrecka",
-                "count": 1,
-                "rank": "Silver 2",
-                "stars": 7,
-                "rarity": "Epic"
-            },
-            {
-                "name": "Storm Boy",
-                "count": 3,
-                "rank": "Silver 1",
-                "stars": 5
-            }
-        ]
-    },
-    "OME9": {
-        "campaign": "Octarius Mirror Elite",
-        "campaignType": "Elite",
-        "nodeNumber": 9,
-        "reward": "Weapon Anointment Oils",
-        "expectedGold": 91.5,
-        "enemiesTotal": 12,
-        "enemiesTypes": ["Grot", "Grot Tank", "Ork Boy"],
-        "detailedEnemyTypes": [
-            {
-                "name": "Grot",
-                "count": 4,
-                "rank": "Silver 2",
-                "stars": 6
-            },
-            {
-                "name": "Grot Tank",
-                "count": 4,
-                "rank": "Silver 2",
-                "stars": 6
-            },
-            {
-                "name": "Ork Boy",
-                "count": 4,
-                "rank": "Silver 1",
-                "stars": 9
             }
         ]
     },
