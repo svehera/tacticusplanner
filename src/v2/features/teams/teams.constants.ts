@@ -20,6 +20,11 @@ export const gameModes: IMenuOption[] = [
         label: 'Guild War',
         selected: false,
     },
+    {
+        value: GameMode.survival,
+        label: 'Survival',
+        selected: false,
+    },
 ];
 
 export const gameModesForGuides: IMenuOption[] = [

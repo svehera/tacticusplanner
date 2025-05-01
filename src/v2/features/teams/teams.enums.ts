@@ -4,6 +4,7 @@
     guildWar = '_gw',
     legendaryRelease = '_lre',
     incursion = '_inc',
+    survival = '_sur',
 }
 
 export enum GuildRaidBoss {
