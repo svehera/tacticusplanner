@@ -9,7 +9,7 @@ import { BfSectionSelect } from 'src/v2/features/guild-war/bf-section-select';
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 import { Team } from 'src/v2/features/characters/components/team';
 import { ICharacter2 } from 'src/models/interfaces';
-import { Conditional } from 'src/v2/components/conditional';
+import { Conditional } from '@/fsd/5-shared/ui';
 import { CharacterItemDialog } from 'src/shared-components/character-item-dialog';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { SelectTeamDialog } from 'src/v2/features/characters/components/select-team-dialog';

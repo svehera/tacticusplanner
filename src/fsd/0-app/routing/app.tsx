@@ -1,8 +1,8 @@
 ﻿import React, { useContext, useEffect, useState } from 'react';
-import './i18n/config';
+import '@/i18n/config';
 import { Outlet } from 'react-router-dom';
 
-import { StaticDataService } from './services';
+import { StaticDataService } from '@/services';
 import { useAuth } from 'src/contexts/auth';
 import { LoginStatusDialog } from 'src/shared-components/user-menu/login-status-dialog';
 import { RegisterUserDialog } from 'src/shared-components/user-menu/register-user-dialog';

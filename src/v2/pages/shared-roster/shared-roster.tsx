@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { sum } from 'lodash';
 
-import { Conditional } from 'src/v2/components/conditional';
+import { Conditional } from '@/fsd/5-shared/ui';
 import { Loader } from 'src/v2/components/loader';
 
 import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';

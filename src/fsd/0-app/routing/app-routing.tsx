@@ -1,7 +1,7 @@
-﻿import { createBrowserRouter, useRouteError } from 'react-router-dom';
-import { appRoutes } from './routes/routes';
-import { mobileAppRoutes } from './mobile-routes/routes';
-import React from 'react';
+﻿import React from 'react';
+import { createBrowserRouter, useRouteError } from 'react-router-dom';
+import { appRoutes } from './desktop-routes';
+import { mobileAppRoutes } from './mobile-routes';
 import { App } from './app';
 
 export const routes = createBrowserRouter([

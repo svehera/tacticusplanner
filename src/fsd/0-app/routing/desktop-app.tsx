@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
 
-import TopAppBar from './app-bar';
+import { TopAppBar } from '@/fsd/2-widgets';
 
 const DesktopApp = () => {
     const navigate = useNavigate();
@@ -36,7 +36,7 @@ const DesktopApp = () => {
 
     return (
         <div style={{ width: '100%', height: '100%' }}>
-            <TopAppBar></TopAppBar>
+            <TopAppBar />
             <div style={{ margin: '10px 20px' }}>
                 <Outlet />
             </div>

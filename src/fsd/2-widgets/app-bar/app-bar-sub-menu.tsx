@@ -1,10 +1,8 @@
 ﻿import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Collapse, List, ListItemButton } from '@mui/material';
-import ListItemText from '@mui/material/ListItemText';
+import { Collapse, List, ListItemButton, ListItemText } from '@mui/material';
 import { ChevronLeft, ChevronRight, ExpandLess, ExpandMore } from '@mui/icons-material';
-import { MenuItemTP } from './models/menu-items';
-import { Conditional } from 'src/v2/components/conditional';
+import { MenuItemTP, Conditional } from '@/fsd/5-shared/ui';
 
 export const AppBarSubMenu = ({ rootLabel, options }: { rootLabel: string; options: Array<MenuItemTP> }) => {
     const [open, setOpen] = React.useState(false);

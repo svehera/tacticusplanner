@@ -2,7 +2,7 @@
 import Box from '@mui/material/Box';
 import { sum } from 'lodash';
 
-import { Conditional } from 'src/v2/components/conditional';
+import { Conditional } from '@/fsd/5-shared/ui';
 
 import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
 import { CharactersService } from 'src/v2/features/characters/characters.service';

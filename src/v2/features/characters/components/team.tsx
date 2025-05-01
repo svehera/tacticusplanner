@@ -4,7 +4,7 @@ import { CharacterTile } from 'src/v2/features/characters/components/character-t
 import { unsetCharacter } from 'src/v2/features/characters/characters.contants';
 
 import './team.scss';
-import { Conditional } from 'src/v2/components/conditional';
+import { Conditional } from '@/fsd/5-shared/ui';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 
 type Props = {

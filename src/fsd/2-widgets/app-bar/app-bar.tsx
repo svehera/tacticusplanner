@@ -1,4 +1,4 @@
-﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
+﻿import React, { useContext, useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
@@ -8,17 +8,20 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Badge, Divider, ListItemIcon, Menu, MenuItem, Tooltip, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { bmcLink, discordInvitationLink, isTabletOrMobileMediaQuery } from './models/constants';
-import { usePopUpControls } from './hooks/pop-up-controls';
-import { UserMenu } from './shared-components/user-menu/user-menu';
-import ThemeSwitch from './shared-components/theme-switch';
-import { AppBarSubMenu } from './app-bar-sub-menu';
-
-import { StoreContext } from './reducers/store.provider';
-import { WhatsNewDialog } from './shared-components/whats-new.dialog';
-import { DiscordIcon } from './shared-components/icons/discord.icon';
-import CampaignIcon from '@mui/icons-material/Campaign';
 import ListItemText from '@mui/material/ListItemText';
+import IconButton from '@mui/material/IconButton';
+import CampaignIcon from '@mui/icons-material/Campaign';
+
+import { UserMenu } from '@/shared-components/user-menu/user-menu';
+import ThemeSwitch from '@/shared-components/theme-switch';
+import { WhatsNewDialog } from '@/shared-components/whats-new.dialog';
+import { DiscordIcon } from '@/shared-components/icons/discord.icon';
+import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
+
+import { bmcLink, discordInvitationLink, isTabletOrMobileMediaQuery } from '@/models/constants';
+import { usePopUpControls } from '@/hooks/pop-up-controls';
+
+import { StoreContext } from '@/reducers/store.provider';
 import {
     inputSubMenu,
     learnSubMenu,
@@ -27,13 +30,13 @@ import {
     miscMenuItems,
     planSubMenu,
     planSubMenuWeb,
-} from './models/menu-items';
-import IconButton from '@mui/material/IconButton';
+} from '@/models/menu-items';
 import { FlexBox } from 'src/v2/components/flex-box';
-import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
 import { useTitle } from 'src/contexts/title.context';
 
-const TopAppBar = () => {
+import { AppBarSubMenu } from './app-bar-sub-menu';
+
+export const TopAppBar = () => {
     const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
     const location = useLocation();
     const navigate = useNavigate();
@@ -189,5 +192,3 @@ const TopAppBar = () => {
         </Box>
     );
 };
-
-export default TopAppBar;

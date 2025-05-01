@@ -22,7 +22,7 @@ import { enqueueSnackbar } from 'notistack';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { CharacterTitle } from '../character-title';
 import { goalsLimit, rarityToMaxRank } from 'src/models/constants';
-import { Conditional } from 'src/v2/components/conditional';
+import { Conditional } from '@/fsd/5-shared/ui';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { IgnoreRankRarity } from './ignore-rank-rarity';
 import { PrioritySelect } from 'src/shared-components/goals/priority-select';

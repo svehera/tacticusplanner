@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import { menuItemById } from 'src/models/menu-items';
 import Typography from '@mui/material/Typography';
 import { FlexBox } from 'src/v2/components/flex-box';
-import { Conditional } from 'src/v2/components/conditional';
+import { Conditional } from '@/fsd/5-shared/ui';
 import { useTitle } from 'src/contexts/title.context';
 
 const MobileApp = () => {

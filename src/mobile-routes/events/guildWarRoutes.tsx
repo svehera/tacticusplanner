@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { StaticDataService } from '../../services';
 import { CharacterImage } from '../../shared-components/character-image';
 import { menuItemById } from '../../models/menu-items';
-import { Conditional } from 'src/v2/components/conditional';
+import { Conditional } from '@/fsd/5-shared/ui';
 
 export const PlanGuildWarRoutes = () => {
     const navigate = useNavigate();
