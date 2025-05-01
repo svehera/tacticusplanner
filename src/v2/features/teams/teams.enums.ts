@@ -16,6 +16,7 @@ export enum GuildRaidBoss {
     screamerKiller = '_screamer',
     szarekh = '_szarekh',
     tervigon = '_tervigon',
+    cawl = '_cawl',
 }
 
 export enum TaMode {
