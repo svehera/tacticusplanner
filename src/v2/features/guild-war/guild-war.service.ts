@@ -1,7 +1,9 @@
-﻿import guildWarData from 'src/v2/data/guildWar.json';
-import { IGWData, IGWDataRaw, IGWZone } from './guild-war.models';
+﻿import { groupBy, mapValues } from 'lodash';
+
 import { Difficulty, Rarity } from 'src/models/enums';
-import { groupBy, mapValues } from 'lodash';
+import guildWarData from 'src/v2/data/guildWar.json';
+
+import { IGWData, IGWDataRaw, IGWZone } from './guild-war.models';
 
 export class GuildWarService {
     static readonly defaultRarityCaps = [

@@ -1,15 +1,16 @@
 ﻿import React from 'react';
+import { isMobile } from 'react-device-detect';
 
 import { Conditional } from '@/fsd/5-shared/ui';
+
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { MowTile } from 'src/v2/features/characters/components/mow-tile';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+import { isUnlocked } from 'src/v2/features/characters/units.functions';
 
 import { CharacterTile } from './character-tile';
 
 import './characters-grid.scss';
-import { isMobile } from 'react-device-detect';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isUnlocked } from 'src/v2/features/characters/units.functions';
-import { UnitType } from 'src/v2/features/characters/units.enums';
-import { MowTile } from 'src/v2/features/characters/components/mow-tile';
 
 const CharactersGridFn = ({
     characters,

@@ -1,9 +1,10 @@
-import React from 'react';
-import { cn } from '@/shared/lib/classes';
 import { LoaderIcon } from 'lucide-react';
+import React from 'react';
 import { ProgressBar } from 'react-aria-components';
 import type { VariantProps } from 'tailwind-variants';
 import { tv } from 'tailwind-variants';
+
+import { cn } from '@/shared/lib/classes';
 
 const loaderStyles = tv({
     base: 'relative',

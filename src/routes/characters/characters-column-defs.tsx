@@ -1,16 +1,18 @@
 import { ColDef, ColGroupDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
 import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { rarityToMaxRank } from 'src/models/constants';
+import { DamageType, Rank, Rarity, RarityStars, Trait } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
 import { CharacterTitle } from 'src/shared-components/character-title';
+import { getEnumValues } from 'src/shared-logic/functions';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { StatCell } from './stat-cell';
-import { DamageType, Rank, Rarity, RarityStars, Trait } from 'src/models/enums';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+
 import { DamageCell } from './damage-cell';
-import { rarityToMaxRank } from 'src/models/constants';
-import { getEnumValues } from 'src/shared-logic/functions';
+import { StatCell } from './stat-cell';
 
 export const useCharacters = () => {
     const [targetRarity, setTargetRarity] = useState<Rarity>(Rarity.Legendary);

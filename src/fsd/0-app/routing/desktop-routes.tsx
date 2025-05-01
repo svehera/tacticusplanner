@@ -1,26 +1,27 @@
 ﻿import React from 'react';
-
 import { RouteObject } from 'react-router-dom';
 
-import DesktopApp from './desktop-app';
-import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
-import { dirtyDozenLazyRoute } from 'src/v2/pages/dirty-dozen/dirty-dozen.route';
-import { insightsLazyRoute } from 'src/v2/pages/insights/insights.route';
+import { versusLazyRoute } from '@/v2/features/vs/versus.route';
+
+import { guildApiLazyRoute } from '@/v2/pages/guild-api/guild-api.route';
 import { campaignProgressionLazyRoute } from 'src/v2/pages/campaign-progression/campaign-progression.route';
-import { wyoLazyRoute } from 'src/v2/pages/who-you-own/who-you-own.route';
-import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.route';
-import { guildWarOffenseLazyRoute } from 'src/v2/pages/guild-war-offense/guild-war-offense.route';
-import { guildWarDefenseLazyRoute } from 'src/v2/pages/guild-war-defense/guild-war-defense.route';
-import { guildWarZonesLazyRoute } from 'src/v2/pages/guild-war-layout/guild-war-zones.route';
+import { dirtyDozenLazyRoute } from 'src/v2/pages/dirty-dozen/dirty-dozen.route';
+import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
+import { guidesLazyRoute } from 'src/v2/pages/guides/guides.route';
 import { guildLazyRoute } from 'src/v2/pages/guild/guild.route';
 import { guildInsightsLazyRoute } from 'src/v2/pages/guild-insights/guild-insights.route';
-import { teamsDesktopLazyRoute } from 'src/v2/pages/teams/teams.route';
-import { mowLookupDesktopLazyRoute } from 'src/v2/pages/mow-lookup/mow-lookup.route';
-import { guidesLazyRoute } from 'src/v2/pages/guides/guides.route';
+import { guildWarDefenseLazyRoute } from 'src/v2/pages/guild-war-defense/guild-war-defense.route';
+import { guildWarZonesLazyRoute } from 'src/v2/pages/guild-war-layout/guild-war-zones.route';
+import { guildWarOffenseLazyRoute } from 'src/v2/pages/guild-war-offense/guild-war-offense.route';
+import { insightsLazyRoute } from 'src/v2/pages/insights/insights.route';
 import { lreLazyRoute } from 'src/v2/pages/lre/lre-route';
+import { mowLookupDesktopLazyRoute } from 'src/v2/pages/mow-lookup/mow-lookup.route';
 import { myProgressLazyRoute } from 'src/v2/pages/my-progress/my-progress.route';
-import { guildApiLazyRoute } from '@/v2/pages/guild-api/guild-api.route';
-import { versusLazyRoute } from '@/v2/features/vs/versus.route';
+import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.route';
+import { teamsDesktopLazyRoute } from 'src/v2/pages/teams/teams.route';
+import { wyoLazyRoute } from 'src/v2/pages/who-you-own/who-you-own.route';
+
+import DesktopApp from './desktop-app';
 
 export const globalInputRoutes: RouteObject[] = [
     wyoLazyRoute,

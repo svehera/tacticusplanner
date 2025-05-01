@@ -1,5 +1,5 @@
-﻿import { IAutoTeamsPreferences, SetStateAction } from '../models/interfaces';
-import { defaultData } from '../models/constants';
+﻿import { defaultData } from '../models/constants';
+import { IAutoTeamsPreferences, SetStateAction } from '../models/interfaces';
 
 export type AutoTeamsPreferencesAction =
     | {

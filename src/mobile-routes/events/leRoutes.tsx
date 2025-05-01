@@ -1,10 +1,11 @@
-﻿import React from 'react';
-import { Card, CardContent, CardHeader } from '@mui/material';
+﻿import { Card, CardContent, CardHeader } from '@mui/material';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { LegendaryEventEnum } from 'src/models/enums';
+import { menuItemById } from 'src/models/menu-items';
 import { StaticDataService } from 'src/services';
 import { CharacterImage } from 'src/shared-components/character-image';
-import { menuItemById } from 'src/models/menu-items';
-import { LegendaryEventEnum } from 'src/models/enums';
 
 export const PlanLeRoutes = () => {
     const navigate = useNavigate();

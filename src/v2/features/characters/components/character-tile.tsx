@@ -1,24 +1,23 @@
-﻿import React, { useCallback, useContext, useMemo } from 'react';
-import { Badge, Tooltip } from '@mui/material';
+﻿import { Badge, Tooltip } from '@mui/material';
+import { orderBy } from 'lodash';
+import React, { useCallback, useContext, useMemo } from 'react';
 
-import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
-import { StarsImage } from 'src/v2/components/images/stars-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { RankImage } from 'src/v2/components/images/rank-image';
-
-import { Rank } from 'src/models/enums';
 import { charsReleaseShards, charsUnlockShards } from 'src/models/constants';
+import { Rank } from 'src/models/enums';
+import { ICharacter2 } from 'src/models/interfaces';
 import { needToAscendCharacter, needToLevelCharacter } from 'src/shared-logic/functions';
-
-import './character-tile.css';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
+import { RankImage } from 'src/v2/components/images/rank-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { StarsImage } from 'src/v2/components/images/stars-image';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
-
 import { numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
+
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
-import { ICharacter2 } from 'src/models/interfaces';
-import { orderBy } from 'lodash';
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+
+import './character-tile.css';
 
 const CharacterTileFn = ({
     character,

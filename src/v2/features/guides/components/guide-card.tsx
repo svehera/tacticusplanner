@@ -1,22 +1,24 @@
-﻿import React from 'react';
-import { IGuide } from 'src/v2/features/guides/guides.models';
-import { Card, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
+﻿import EditIcon from '@mui/icons-material/Edit';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import EditIcon from '@mui/icons-material/Edit';
-import IconButton from '@mui/material/IconButton';
+import ShareIcon from '@mui/icons-material/Share';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { TokenImage } from 'src/v2/components/images/token-image';
-import { TeamView } from 'src/v2/features/guides/components/team-view';
-import { GuidesStatus } from 'src/v2/features/guides/guides.enums';
+import { Card, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { TokenImage } from 'src/v2/components/images/token-image';
 import { RichTextViewer } from 'src/v2/components/inputs/rich-text-viewer';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import Button from '@mui/material/Button';
+
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { TeamView } from 'src/v2/features/guides/components/team-view';
 import { getDisplayName } from 'src/v2/features/guides/guides.contstants';
+import { GuidesStatus } from 'src/v2/features/guides/guides.enums';
+import { IGuide } from 'src/v2/features/guides/guides.models';
 
 interface Props {
     team: IGuide;

@@ -1,9 +1,10 @@
-﻿import React from 'react';
-import { AgGridReact } from 'ag-grid-react';
+﻿import { AgGridReact } from 'ag-grid-react';
+import React from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { rankToLevel } from '../models/constants';
 import { Rank, Rarity, RarityStars } from '../models/enums';
 import { ICharacter2 } from '../models/interfaces';
-import { rankToLevel } from '../models/constants';
-import { isMobile } from 'react-device-detect';
 
 export const useFitGridOnWindowResize = (gridRef: React.RefObject<AgGridReact | null>) => {
     function handleResize() {

@@ -1,24 +1,24 @@
-﻿import React, { useMemo, useRef, useState } from 'react';
-
-import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ValueFormatterParams, ICellRendererParams, AllCommunityModule, themeBalham } from 'ag-grid-community';
-
-import { StaticDataService } from 'src/services';
-import { useFitGridOnWindowResize, stringToRank } from 'src/shared-logic/functions';
-import { FormControl, FormControlLabel, MenuItem, Select, Switch, TextField, Tooltip } from '@mui/material';
+﻿import { FormControl, FormControlLabel, MenuItem, Select, Switch, TextField, Tooltip } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import { Rank, Rarity, RarityString } from 'src/models/enums';
-import { rarityStringToNumber } from 'src/models/constants';
-import { CharacterImage } from 'src/shared-components/character-image';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
+import { ColDef, ValueFormatterParams, ICellRendererParams, AllCommunityModule, themeBalham } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import React, { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
+
+import { rarityStringToNumber } from 'src/models/constants';
+import { Rank, Rarity, RarityString } from 'src/models/enums';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
-import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';
+import { StaticDataService } from 'src/services';
+import { CharacterImage } from 'src/shared-components/character-image';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { UpgradeImage } from 'src/shared-components/upgrade-image';
+import { useFitGridOnWindowResize, stringToRank } from 'src/shared-logic/functions';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';
 
 type Selection = 'Craftable' | 'Base Upgrades';
 

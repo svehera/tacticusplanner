@@ -1,19 +1,19 @@
-﻿import React, { useContext } from 'react';
-import Zoom from 'react-medium-image-zoom';
-import { Thanks } from 'src/shared-components/thanks';
-import { StoreContext } from 'src/reducers/store.provider';
-import { Card, CardContent, CardHeader } from '@mui/material';
-import { menuItemById } from 'src/models/menu-items';
-import { useNavigate } from 'react-router-dom';
-import { isMobile } from 'react-device-detect';
+﻿import { Card, CardContent, CardHeader } from '@mui/material';
 import { sum } from 'lodash';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
+import React, { useContext } from 'react';
+import { isMobile } from 'react-device-detect';
+import Zoom from 'react-medium-image-zoom';
+import { useNavigate } from 'react-router-dom';
 
-import { LegendaryEventEnum, PersonalGoalType } from 'src/models/enums';
-import { StaticDataService } from 'src/services';
-import { CharacterImage } from 'src/shared-components/character-image';
 import { useAuth } from '@/contexts/auth';
 import { useBmcWidget } from '@/v2/hooks/useBmcWidget';
+import { LegendaryEventEnum, PersonalGoalType } from 'src/models/enums';
+import { menuItemById } from 'src/models/menu-items';
+import { StoreContext } from 'src/reducers/store.provider';
+import { StaticDataService } from 'src/services';
+import { CharacterImage } from 'src/shared-components/character-image';
+import { Thanks } from 'src/shared-components/thanks';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 
 export const Home = () => {
     useBmcWidget();

@@ -1,5 +1,6 @@
-﻿import { IPersonalCharacter, IPersonalData, IPersonalData2 } from '../models/interfaces';
-import { UserRole } from 'src/models/enums';
+﻿import { UserRole } from 'src/models/enums';
+
+import { IPersonalCharacter, IPersonalData, IPersonalData2 } from '../models/interfaces';
 
 export interface ILoginResponse {
     accessToken: string;

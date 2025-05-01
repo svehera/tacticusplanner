@@ -1,6 +1,6 @@
-import { onCLS, onINP, onLCP, onTTFB, onFCP } from 'web-vitals/attribution';
+import { onCLS, onINP, onLCP, onTTFB, onFCP, MetricWithAttribution } from 'web-vitals/attribution';
+
 import analytics from './analytics';
-import { MetricWithAttribution } from 'web-vitals/src/types/base';
 
 const reportWebVitals = (onReport: (metric: MetricWithAttribution) => void) => {
     const sendMetric = (metric: MetricWithAttribution) => {

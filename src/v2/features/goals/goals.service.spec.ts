@@ -1,5 +1,4 @@
-﻿import { GoalsService } from 'src/v2/features/goals/goals.service';
-import {
+﻿import {
     Alliance,
     CampaignsLocationsUsage,
     Faction,
@@ -9,12 +8,14 @@ import {
     RarityStars,
 } from 'src/models/enums';
 import { ICharacter2, IPersonalGoal } from 'src/models/interfaces';
+
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import {
     ICharacterAscendGoal,
     ICharacterUnlockGoal,
     ICharacterUpgradeRankGoal,
 } from 'src/v2/features/goals/goals.models';
+import { GoalsService } from 'src/v2/features/goals/goals.service';
 
 describe('Goal service', () => {
     describe('convertToTypedGoal', () => {

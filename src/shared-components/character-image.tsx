@@ -1,6 +1,8 @@
 ﻿import React from 'react';
-import { getImageUrl } from '../shared-logic/functions';
+
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { getImageUrl } from '../shared-logic/functions';
 
 export const CharacterImage = ({
     icon,

@@ -1,7 +1,6 @@
-import React, { useContext, useMemo, useState } from 'react';
-
-import { ICharacter2, ILegendaryEvent, ILreTeam, LreTrackId } from 'src/models/interfaces';
-import { isMobile } from 'react-device-detect';
+import AddIcon from '@mui/icons-material/Add';
+import CloseIcon from '@mui/icons-material/Close';
+import WarningIcon from '@mui/icons-material/Warning';
 import {
     Checkbox,
     DialogActions,
@@ -11,15 +10,17 @@ import {
     FormControlLabel,
     TextField,
 } from '@mui/material';
-import { LreTile } from 'src/v2/features/lre/lre-tile';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
+import React, { useContext, useMemo, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { ICharacter2, ILegendaryEvent, ILreTeam, LreTrackId } from 'src/models/interfaces';
+import { StoreContext } from 'src/reducers/store.provider';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
 import { IMenuOption } from 'src/v2/models/menu-option';
-import { StoreContext } from 'src/reducers/store.provider';
-import CloseIcon from '@mui/icons-material/Close';
-import WarningIcon from '@mui/icons-material/Warning';
-import AddIcon from '@mui/icons-material/Add';
+
+import { LreTile } from 'src/v2/features/lre/lre-tile';
 
 interface Props {
     lre: ILegendaryEvent;

@@ -1,31 +1,34 @@
-﻿import React, { useEffect, useMemo, useState } from 'react';
-import { useAuth } from '../contexts/auth';
-import { convertData, PersonalDataLocalStorage } from '../services';
-import { GlobalState } from '../models/global-state';
-import { charactersReducer } from './characters.reducer';
-import { goalsReducer } from './goals.reducer';
-import { viewPreferencesReducer } from './view-settings.reducer';
-import { dailyRaidsPreferencesReducer } from './daily-raids-settings.reducer';
-import { autoTeamsPreferencesReducer } from './auto-teams-settings.reducer';
-import { selectedTeamsOrderReducer } from './selected-teams-order.reducer';
-import { leSelectedRequirementsReducer } from './le-selected-requirements.reducer';
-import { leSelectedTeamsReducer } from './le-selected-teams.reducer';
-import { leProgressReducer } from './le-progress.reducer';
-import { campaignsProgressReducer } from './campaigns-progress.reducer';
-import { inventoryReducer } from './inventory.reducer';
-import { dailyRaidsReducer } from './dailyRaids.reducer';
-import { IDispatchContext, IGlobalState } from '../models/interfaces';
-import { getUserDataApi, setUserDataApi } from '../api/api-functions';
-import { enqueueSnackbar } from 'notistack';
-import { AxiosError } from 'axios';
-import { IErrorResponse } from '../api/api-interfaces';
+﻿import { AxiosError } from 'axios';
 import { isEqual } from 'lodash';
-import { DispatchContext, StoreContext } from './store.provider';
-import { guildWarReducer } from 'src/reducers/guildWarReducer';
+import { enqueueSnackbar } from 'notistack';
+import React, { useEffect, useMemo, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+
 import { guildReducer } from 'src/reducers/guildReducer';
+import { guildWarReducer } from 'src/reducers/guildWarReducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
 import { teamsReducer } from 'src/reducers/teams.reducer';
-import { isMobile } from 'react-device-detect';
+
+import { getUserDataApi, setUserDataApi } from '../api/api-functions';
+import { IErrorResponse } from '../api/api-interfaces';
+import { useAuth } from '../contexts/auth';
+import { GlobalState } from '../models/global-state';
+import { IDispatchContext, IGlobalState } from '../models/interfaces';
+import { convertData, PersonalDataLocalStorage } from '../services';
+
+import { autoTeamsPreferencesReducer } from './auto-teams-settings.reducer';
+import { campaignsProgressReducer } from './campaigns-progress.reducer';
+import { charactersReducer } from './characters.reducer';
+import { dailyRaidsPreferencesReducer } from './daily-raids-settings.reducer';
+import { dailyRaidsReducer } from './dailyRaids.reducer';
+import { goalsReducer } from './goals.reducer';
+import { inventoryReducer } from './inventory.reducer';
+import { leProgressReducer } from './le-progress.reducer';
+import { leSelectedRequirementsReducer } from './le-selected-requirements.reducer';
+import { leSelectedTeamsReducer } from './le-selected-teams.reducer';
+import { selectedTeamsOrderReducer } from './selected-teams-order.reducer';
+import { DispatchContext, StoreContext } from './store.provider';
+import { viewPreferencesReducer } from './view-settings.reducer';
 
 export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const { isAuthenticated, setUser, setUserInfo, logout } = useAuth();

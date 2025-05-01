@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+
 import { getImageUrl } from 'src/shared-logic/functions';
 
 export const FactionImage = ({ faction }: { faction: string }) => {

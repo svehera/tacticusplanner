@@ -1,5 +1,5 @@
-﻿import { ICharacter2 } from '../interfaces';
-import { Alliance, DamageType, Faction, Trait } from '../enums';
+﻿import { Alliance, DamageType, Faction, Trait } from '../enums';
+import { ICharacter2 } from '../interfaces';
 
 export const filter = (characters: ICharacter2[]) => ({
     byAlliance: (alliance: Alliance, not = false) =>

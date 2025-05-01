@@ -1,4 +1,34 @@
-﻿import {
+﻿import React from 'react';
+
+import { ILreProgressDto } from 'src/models/dto.interfaces';
+import { GuildAction } from 'src/reducers/guildReducer';
+import { GuildWarAction } from 'src/reducers/guildWarReducer';
+import { MowsAction } from 'src/reducers/mows.reducer';
+import { TeamsAction } from 'src/reducers/teams.reducer';
+
+import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
+import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
+import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
+import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
+import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
+import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+
+import { AutoTeamsPreferencesAction } from '../reducers/auto-teams-settings.reducer';
+import { CampaignsProgressAction } from '../reducers/campaigns-progress.reducer';
+import { CharactersAction } from '../reducers/characters.reducer';
+import { DailyRaidsPreferencesAction } from '../reducers/daily-raids-settings.reducer';
+import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
+import { GoalsAction } from '../reducers/goals.reducer';
+import { InventoryAction } from '../reducers/inventory.reducer';
+import { LeProgressAction } from '../reducers/le-progress.reducer';
+import { LeSelectedRequirementsAction } from '../reducers/le-selected-requirements.reducer';
+import { LeSelectedTeamsAction } from '../reducers/le-selected-teams.reducer';
+import { SelectedTeamsOrderingAction } from '../reducers/selected-teams-order.reducer';
+import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
+
+import {
     Alliance,
     Campaign,
     CampaignsLocationsUsage,
@@ -21,32 +51,6 @@
     Trait,
     UserRole,
 } from './enums';
-import React from 'react';
-import { CharactersAction } from '../reducers/characters.reducer';
-import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
-import { AutoTeamsPreferencesAction } from '../reducers/auto-teams-settings.reducer';
-import { SelectedTeamsOrderingAction } from '../reducers/selected-teams-order.reducer';
-import { LeSelectedRequirementsAction } from '../reducers/le-selected-requirements.reducer';
-import { LeSelectedTeamsAction } from '../reducers/le-selected-teams.reducer';
-import { LeProgressAction } from '../reducers/le-progress.reducer';
-import { GoalsAction } from '../reducers/goals.reducer';
-import { CampaignsProgressAction } from '../reducers/campaigns-progress.reducer';
-import { DailyRaidsPreferencesAction } from '../reducers/daily-raids-settings.reducer';
-import { InventoryAction } from '../reducers/inventory.reducer';
-import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
-import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
-import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
-import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
-import { GuildWarAction } from 'src/reducers/guildWarReducer';
-import { GuildAction } from 'src/reducers/guildReducer';
-import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
-import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
-import { MowsAction } from 'src/reducers/mows.reducer';
-import { UnitType } from 'src/v2/features/characters/units.enums';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
-import { TeamsAction } from 'src/reducers/teams.reducer';
-import { ILreProgressDto } from 'src/models/dto.interfaces';
-import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
 
 export type LreTrackId = 'alpha' | 'beta' | 'gamma';
 

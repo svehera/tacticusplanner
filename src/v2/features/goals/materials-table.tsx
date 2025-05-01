@@ -1,5 +1,4 @@
-﻿import React, { useMemo } from 'react';
-import { AgGridReact } from 'ag-grid-react';
+﻿import InfoIcon from '@mui/icons-material/Info';
 import {
     AllCommunityModule,
     ColDef,
@@ -9,13 +8,16 @@ import {
     CellEditingStoppedEvent,
     themeBalham,
 } from 'ag-grid-community';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
+import { AgGridReact } from 'ag-grid-react';
+import React, { useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
+
 import { Rarity } from 'src/models/enums';
-import InfoIcon from '@mui/icons-material/Info';
-import { ICharacterUpgradeEstimate } from 'src/v2/features/goals/goals.models';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { UpgradeImage } from 'src/shared-components/upgrade-image';
+
+import { ICharacterUpgradeEstimate } from 'src/v2/features/goals/goals.models';
 
 interface Props {
     rows: ICharacterUpgradeEstimate[];

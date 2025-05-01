@@ -1,7 +1,9 @@
-﻿import React, { ReactNode } from 'react';
-import { Autocomplete, TextField } from '@mui/material';
-import { IUnit } from 'src/v2/features/characters/characters.models';
+﻿import { Autocomplete, TextField } from '@mui/material';
+import React, { ReactNode } from 'react';
+
 import { CharacterTitle } from 'src/shared-components/character-title';
+
+import { IUnit } from 'src/v2/features/characters/characters.models';
 
 interface Props<T extends IUnit> {
     unit: T | T[] | null;

@@ -1,21 +1,22 @@
-﻿import React, { useMemo, useState } from 'react';
-import { useDebounceValue } from 'usehooks-ts';
-import { isMobile } from 'react-device-detect';
-import { cloneDeep } from 'lodash';
-
+﻿import InfoIcon from '@mui/icons-material/Info';
 import { DialogActions, DialogContent, DialogTitle, TextField, Typography } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import { cloneDeep } from 'lodash';
+import React, { useMemo, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+import { useDebounceValue } from 'usehooks-ts';
+
 import { Alliance } from 'src/models/enums';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
 import { IMenuOption } from 'src/v2/models/menu-option';
-import { ITeamSlot } from 'src/v2/features/guides/guides.models';
+
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 import { TeamSlotEdit } from 'src/v2/features/guides/components/team-slot-edit';
 import { UnitsGrid } from 'src/v2/features/guides/components/units-grid';
 import { SlotType } from 'src/v2/features/guides/guides.enums';
-import InfoIcon from '@mui/icons-material/Info';
+import { ITeamSlot } from 'src/v2/features/guides/guides.models';
 
 type Props = {
     units: IUnit[];

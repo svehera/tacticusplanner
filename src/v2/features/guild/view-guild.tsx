@@ -1,8 +1,9 @@
-﻿import React from 'react';
-import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
+﻿import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
+
 import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
 import { PlayersTable } from 'src/v2/features/guild/players-table';
 

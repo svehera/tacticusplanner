@@ -1,14 +1,13 @@
-import React from 'react';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import React from 'react';
 
 import { StaticDataService } from 'src/services/static-data.service';
+import { CharacterImage } from 'src/shared-components/character-image';
 
 import { CampaignData, CampaignsProgressData } from 'src/v2/features/campaign-progression/campaign-progression.models';
-
-import { CharacterImage } from 'src/shared-components/character-image';
 
 interface Props {
     progression: CampaignsProgressData;

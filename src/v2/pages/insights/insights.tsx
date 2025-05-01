@@ -1,29 +1,28 @@
-﻿import React, { useContext, useState } from 'react';
-import Box from '@mui/material/Box';
+﻿import Box from '@mui/material/Box';
 import { sum } from 'lodash';
+import React, { useContext, useState } from 'react';
+
+import { GlobalState } from 'src/models/global-state';
+import { StoreContext } from 'src/reducers/store.provider';
+import { Loader } from 'src/v2/components/loader';
 
 import { Conditional } from '@/fsd/5-shared/ui';
 
-import { useGetInsights } from 'src/v2/features/insights/insights.endpoint';
-
-import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
-import { ViewControls } from 'src/v2/features/characters/components/view-controls';
-import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
-import { IViewControls } from 'src/v2/features/characters/characters.models';
-import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
-import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
-import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
-import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
-
-import { Loader } from 'src/v2/components/loader';
-import { GlobalState } from 'src/models/global-state';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { StoreContext } from 'src/reducers/store.provider';
+import { IViewControls } from 'src/v2/features/characters/characters.models';
+import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
+import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
+import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
 import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
+import { ViewControls } from 'src/v2/features/characters/components/view-controls';
+import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
+import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
+import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
+import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
+import { useGetInsights } from 'src/v2/features/insights/insights.endpoint';
 
 export const Insights = () => {
     const { viewPreferences } = useContext(StoreContext);

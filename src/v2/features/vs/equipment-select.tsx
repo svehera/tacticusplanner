@@ -1,10 +1,12 @@
-import InputLabel from '@mui/material/InputLabel';
 import { FormControl, MenuItem, Select } from '@mui/material';
-import { Equipment, Faction, Rarity, RarityString } from 'src/models/enums';
+import InputLabel from '@mui/material/InputLabel';
 import React, { useMemo } from 'react';
+
+import { Equipment, Faction, Rarity, RarityString } from 'src/models/enums';
 import { EquipmentType, IEquipment } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 import { getImageUrl } from 'src/shared-logic/functions';
+
 import { IEquipmentSpec } from './versus-interfaces';
 
 interface Props {

@@ -1,6 +1,6 @@
-﻿import React from 'react';
-import { FormControl, MenuItem, Select } from '@mui/material';
+﻿import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
+import React from 'react';
 
 interface Props {
     maxValue: number;

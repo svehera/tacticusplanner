@@ -1,9 +1,11 @@
-﻿import InputLabel from '@mui/material/InputLabel';
-import { FormControl, MenuItem, Select } from '@mui/material';
-import { Rarity } from '../models/enums';
+﻿import { FormControl, MenuItem, Select } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
 import React from 'react';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
+
 import { FlexBox } from 'src/v2/components/flex-box';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+
+import { Rarity } from '../models/enums';
 
 export const RaritySelect = ({
     rarityValues,

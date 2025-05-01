@@ -1,7 +1,9 @@
+import { groupBy, mapValues } from 'lodash';
+
 import { Campaign, Faction } from 'src/models/enums';
+
 import { CampaignDifficulty, CampaignGroupType, CampaignReleaseType } from './campaigns.enums';
 import { ICampaignModel } from './campaigns.models';
-import { groupBy, mapValues } from 'lodash';
 
 export const campaignsList: ICampaignModel[] = [
     // Indomitus Campaigns

@@ -1,16 +1,18 @@
-import React from 'react';
-import { ILreTrackProgress } from 'src/v2/features/lre/lre.models';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
 import { sum } from 'lodash';
+import React from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { ProgressState } from 'src/models/enums';
+import { LreTrackId } from 'src/models/interfaces';
+import { LreTrackBattleSummary } from 'src/shared-components/le-track-battle';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { LreReqImage } from 'src/v2/components/images/lre-req-image';
-import { LreTrackBattleSummary } from 'src/shared-components/le-track-battle';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import { isMobile } from 'react-device-detect';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { LreTrackId } from 'src/models/interfaces';
-import { ProgressState } from 'src/models/enums';
+
+import { ILreTrackProgress } from 'src/v2/features/lre/lre.models';
 
 interface Props {
     track: ILreTrackProgress;

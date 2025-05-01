@@ -1,8 +1,9 @@
-﻿import React from 'react';
-import { FormControl, MenuItem, Select } from '@mui/material';
+﻿import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 
 type Props = {
     value: number;

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { AuthProvider } from 'src/contexts/auth.provider';
 import { LoaderProvider } from 'src/contexts/loader.provider';
 import { TitleProvider } from 'src/contexts/title.provider';

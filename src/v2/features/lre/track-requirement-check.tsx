@@ -1,8 +1,9 @@
-﻿import { IHeaderParams } from 'ag-grid-community';
-import React from 'react';
-import { Check } from '@mui/icons-material';
-import { ILegendaryEventTrackRequirement } from 'src/models/interfaces';
+﻿import { Check } from '@mui/icons-material';
 import { Badge } from '@mui/material';
+import { IHeaderParams } from 'ag-grid-community';
+import React from 'react';
+
+import { ILegendaryEventTrackRequirement } from 'src/models/interfaces';
 import { LreReqImage } from 'src/v2/components/images/lre-req-image';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 

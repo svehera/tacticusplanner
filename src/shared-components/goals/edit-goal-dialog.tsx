@@ -1,33 +1,36 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import Button from '@mui/material/Button';
-
+﻿import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
-import { ICampaignsProgress, ICharacter2 } from 'src/models/interfaces';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
-import { getEnumValues } from 'src/shared-logic/functions';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
 import { enqueueSnackbar } from 'notistack';
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { RankSelect } from '../rank-select';
-import { CharacterUpgrades } from '../character-upgrades';
+import React, { useContext, useMemo, useState } from 'react';
+
 import { rarityToMaxRank } from 'src/models/constants';
-import { IgnoreRankRarity } from './ignore-rank-rarity';
-import { PrioritySelect } from 'src/shared-components/goals/priority-select';
-import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
+import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
+import { ICampaignsProgress, ICharacter2 } from 'src/models/interfaces';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { EditAscendGoal } from 'src/shared-components/goals/edit-ascend-goal';
-import { NumbersInput } from 'src/shared-components/goals/numbers-input';
+import { CharacterImage } from 'src/shared-components/character-image';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
-import { CharacterRaidGoalSelect, ICharacterAscendGoal, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
-import { CharacterImage } from 'src/shared-components/character-image';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
-import { NumberInput } from 'src/v2/components/inputs/number-input';
+import { EditAscendGoal } from 'src/shared-components/goals/edit-ascend-goal';
+import { NumbersInput } from 'src/shared-components/goals/numbers-input';
+import { PrioritySelect } from 'src/shared-components/goals/priority-select';
+import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
+import { getEnumValues } from 'src/shared-logic/functions';
+import { NumberInput } from 'src/v2/components/inputs/number-input';
+
+import { IUnit } from 'src/v2/features/characters/characters.models';
 import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
 import { MowUpgradesUpdate } from 'src/v2/features/characters/components/mow-upgrades-update';
+import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
+import { CharacterRaidGoalSelect, ICharacterAscendGoal, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
+
+import { CharacterUpgrades } from '../character-upgrades';
+import { RankSelect } from '../rank-select';
+
+import { IgnoreRankRarity } from './ignore-rank-rarity';
 
 interface Props {
     isOpen: boolean;

@@ -1,6 +1,7 @@
-﻿import { IPersonalGoal, SetStateAction } from '../models/interfaces';
-import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
+﻿import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
 import { GoalsService } from 'src/v2/features/goals/goals.service';
+
+import { IPersonalGoal, SetStateAction } from '../models/interfaces';
 
 export type GoalsAction =
     | {

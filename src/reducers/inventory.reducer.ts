@@ -1,7 +1,8 @@
-﻿import { IInventory, SetStateAction } from '../models/interfaces';
-import { defaultData } from '../models/constants';
-import { TacticusInventory } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
+﻿import { TacticusInventory } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
+
+import { defaultData } from '../models/constants';
+import { IInventory, SetStateAction } from '../models/interfaces';
 
 export type InventoryAction =
     | {

@@ -1,22 +1,23 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
-
+﻿import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import React, { useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import Button from '@mui/material/Button';
-import { ICharacter2 } from 'src/models/interfaces';
-import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
-import { unsetCharacter } from 'src/v2/features/characters/characters.contants';
-import { FlexBox } from 'src/v2/components/flex-box';
-import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { Rarity } from 'src/models/enums';
-import { Conditional } from '@/fsd/5-shared/ui';
+import { ICharacter2 } from 'src/models/interfaces';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { FlexBox } from 'src/v2/components/flex-box';
+
+import { Conditional } from '@/fsd/5-shared/ui';
+
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { unsetCharacter } from 'src/v2/features/characters/characters.contants';
 import { IUnit } from 'src/v2/features/characters/characters.models';
+import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
+import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 
 type Props = {
     teamName: string;

@@ -1,6 +1,6 @@
-﻿import React, { useState } from 'react';
+﻿import { FormControl, Input } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import { FormControl, Input } from '@mui/material';
+import React, { useState } from 'react';
 
 interface Props {
     label: string;

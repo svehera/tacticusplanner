@@ -1,6 +1,5 @@
-import Analytics from 'analytics';
-// @ts-expect-error googleAnalytics does not provide types
 import googleAnalytics from '@analytics/google-analytics';
+import Analytics from 'analytics';
 
 const analytics = Analytics({
     app: 'Tacticus Planner',

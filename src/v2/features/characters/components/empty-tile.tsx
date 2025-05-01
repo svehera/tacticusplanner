@@ -1,12 +1,12 @@
 ﻿import React from 'react';
 
+import { Rank, RarityStars } from 'src/models/enums';
+import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
 
 import './character-tile.css';
-import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { Rank, RarityStars } from 'src/models/enums';
-import { RankImage } from 'src/v2/components/images/rank-image';
 
 interface Props {
     onClick?: () => void;

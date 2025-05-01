@@ -1,7 +1,8 @@
-﻿import React from 'react';
+﻿import ShareIcon from '@mui/icons-material/Share';
 import { Badge, Tooltip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import ShareIcon from '@mui/icons-material/Share';
+import React from 'react';
+
 import { ShareRosterDialog } from './share-roster-dialog';
 
 export const ShareRoster = ({ isRosterShared }: { isRosterShared: boolean }) => {

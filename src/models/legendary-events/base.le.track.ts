@@ -1,4 +1,7 @@
-﻿import {
+﻿import { intersectionBy, orderBy, sum, uniqBy } from 'lodash';
+
+import { CharacterBias, LegendaryEventEnum, Rank } from '../enums';
+import {
     IAutoTeamsPreferences,
     ICharacter2,
     ILegendaryEventTrack,
@@ -7,8 +10,6 @@
     ISelectedTeamsOrdering,
     LreTrackId,
 } from '../interfaces';
-import { intersectionBy, orderBy, sum, uniqBy } from 'lodash';
-import { CharacterBias, LegendaryEventEnum, Rank } from '../enums';
 
 export class LETrack implements ILegendaryEventTrack {
     name: string;

@@ -1,13 +1,15 @@
 import { useContext, useState } from 'react';
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { ILegendaryEvent, LreTrackId } from 'src/models/interfaces';
+import { useDebounceCallback } from 'usehooks-ts';
+
 import { LrePointsCategoryId, ProgressState } from 'src/models/enums';
+import { ILegendaryEvent, LreTrackId } from 'src/models/interfaces';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+
 import {
     ILreBattleRequirementsProgress,
     ILreOccurrenceProgress,
     ILreProgressModel,
 } from 'src/v2/features/lre/lre.models';
-import { useDebounceCallback } from 'usehooks-ts';
 import { LreService } from 'src/v2/features/lre/lre.service';
 
 export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {

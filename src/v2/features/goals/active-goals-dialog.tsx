@@ -1,13 +1,15 @@
-﻿import React, { useEffect, useMemo, useState } from 'react';
+﻿import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import { Checkbox, DialogActions, DialogContent, DialogTitle, FormControlLabel } from '@mui/material';
-import TrackChangesIcon from '@mui/icons-material/TrackChanges';
-import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
-import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
-import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
+import Dialog from '@mui/material/Dialog';
+import React, { useEffect, useMemo, useState } from 'react';
+
 import { PersonalGoalType } from 'src/models/enums';
-import { CharactersRaidsGoal } from 'src/v2/features/goals/characters-raids-goal';
+import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
+import { CharactersRaidsGoal } from 'src/v2/features/goals/characters-raids-goal';
+import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
 
 interface Props {
     goals: CharacterRaidGoalSelect[];

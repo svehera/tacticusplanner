@@ -1,12 +1,14 @@
-﻿import React from 'react';
-import { CircularProgress, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+﻿import { CircularProgress, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import { isMobile } from 'react-device-detect';
-import { IGuildWarOffensePlayer } from 'src/v2/features/guild/guild.models';
-import { GuildOffenseTable } from 'src/v2/features/guild/guild-offense-table';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { sum } from 'lodash';
+import React from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { MiscIcon } from 'src/v2/components/images/misc-image';
+
+import { GuildOffenseTable } from 'src/v2/features/guild/guild-offense-table';
+import { IGuildWarOffensePlayer } from 'src/v2/features/guild/guild.models';
 
 interface Props {
     loading: boolean;

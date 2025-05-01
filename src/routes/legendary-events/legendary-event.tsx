@@ -1,14 +1,15 @@
 ﻿import React, { useContext, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
 import { ICharacter2, ILegendaryEvent, ILreTeam, LreTrackId } from 'src/models/interfaces';
-import { LegendaryEventTrack } from './legendary-event-track';
-
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { isMobile } from 'react-device-detect';
+import { useLreProgress } from 'src/shared-components/le-progress.hooks';
+
 import { LreAddTeam } from 'src/v2/features/lre/lre-add-team';
 import { LreEditTeam } from 'src/v2/features/lre/lre-edit-team';
-import { useLreProgress } from 'src/shared-components/le-progress.hooks';
 import { LreService } from 'src/v2/features/lre/lre.service';
+
+import { LegendaryEventTrack } from './legendary-event-track';
 
 export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
     const { characters, viewPreferences, leSelectedTeams } = useContext(StoreContext);

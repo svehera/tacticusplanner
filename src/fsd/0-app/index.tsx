@@ -5,7 +5,6 @@ import 'react-medium-image-zoom/dist/styles.css';
 import './index.css';
 
 import reportWebVitals from './monitoring/reportWebVitals';
-
 import { FirstPartyProviders } from './providers/first-party.providers';
 import { ThirdPartyProviders } from './providers/third-party.providers';
 

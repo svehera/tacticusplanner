@@ -1,10 +1,11 @@
-﻿import { ICharacter2 } from 'src/models/interfaces';
+﻿import { rankToLevel } from 'src/models/constants';
 import { Rank } from 'src/models/enums';
-import { rankToLevel } from 'src/models/constants';
+import { ICharacter2 } from 'src/models/interfaces';
 
-import { needToAscendCharacter } from './need-to-ascend';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { UnitType } from 'src/v2/features/characters/units.enums';
+
+import { needToAscendCharacter } from './need-to-ascend';
 
 export const needToLevelCharacter = (unit: IUnit) => {
     if (unit.unitType === UnitType.mow) {

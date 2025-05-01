@@ -1,16 +1,18 @@
-﻿import React, { useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+﻿import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isMobile } from 'react-device-detect';
-import { ICreateGuide, ITeamSlot } from 'src/v2/features/guides/guides.models';
-import { TeamSlotEdit } from 'src/v2/features/guides/components/team-slot-edit';
-import { SelectTeamDialog } from 'src/v2/features/guides/components/select-team-dialog';
-import { RichTextEditor } from 'src/v2/components/inputs/rich-text-editor';
+import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
+import React, { useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
+
+import { RichTextEditor } from 'src/v2/components/inputs/rich-text-editor';
+
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { SelectTeamDialog } from 'src/v2/features/guides/components/select-team-dialog';
+import { TeamSlotEdit } from 'src/v2/features/guides/components/team-slot-edit';
 import { SlotType } from 'src/v2/features/guides/guides.enums';
+import { ICreateGuide, ITeamSlot } from 'src/v2/features/guides/guides.models';
 
 interface Props {
     units: IUnit[];

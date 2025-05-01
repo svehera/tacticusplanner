@@ -1,7 +1,7 @@
-﻿import React, { useContext, useMemo, useRef, useState } from 'react';
+﻿import { AgGridReact } from 'ag-grid-react';
+import React, { useContext, useMemo, useRef, useState } from 'react';
 
-import { AgGridReact } from 'ag-grid-react';
-
+import { LegendaryEventEnum } from 'src/models/enums';
 import {
     ICharacter2,
     ILegendaryEventSelectedRequirements,
@@ -9,11 +9,10 @@ import {
     ILreTeam,
     LreTrackId,
 } from 'src/models/interfaces';
-
 import { StoreContext } from 'src/reducers/store.provider';
+
 import { LreTeamsCard } from 'src/v2/features/lre/lre-teams-card';
 import { LreTeamsTable } from 'src/v2/features/lre/lre-teams-table';
-import { LegendaryEventEnum } from 'src/models/enums';
 
 interface Props {
     track: ILegendaryEventTrack;

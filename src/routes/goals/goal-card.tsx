@@ -1,31 +1,31 @@
-﻿import React, { useMemo } from 'react';
-import { PersonalGoalType, Rank } from 'src/models/enums';
-
+﻿import { ArrowForward, DeleteForever, Edit } from '@mui/icons-material';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LinkIcon from '@mui/icons-material/Link';
 import { Card, CardContent, CardHeader } from '@mui/material';
+import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import React, { useMemo } from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
 
-import { ArrowForward, DeleteForever, Edit } from '@mui/icons-material';
 import { charsUnlockShards, rarityToStars } from 'src/models/constants';
-import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
-import { GoalsService } from 'src/v2/features/goals/goals.service';
+import { PersonalGoalType, Rank } from 'src/models/enums';
+import { StaticDataService } from 'src/services';
 import { CharacterImage } from 'src/shared-components/character-image';
-import { StarsImage } from 'src/v2/components/images/stars-image';
+import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+import { CampaignImage } from 'src/v2/components/images/campaign-image';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { ShardsService } from 'src/v2/features/goals/shards.service';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { CampaignImage } from 'src/v2/components/images/campaign-image';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { isMobile } from 'react-device-detect';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import LinkIcon from '@mui/icons-material/Link';
-import { StaticDataService } from 'src/services';
-import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
+import { StarsImage } from 'src/v2/components/images/stars-image';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
+import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
+import { GoalsService } from 'src/v2/features/goals/goals.service';
+import { ShardsService } from 'src/v2/features/goals/shards.service';
 import { XpTotal } from 'src/v2/features/goals/xp-total';
+import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
 
 interface Props {
     goal: CharacterRaidGoalSelect;

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 import { isMobile } from 'react-device-detect';
+import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { TopAppBar } from '@/fsd/2-widgets';
 

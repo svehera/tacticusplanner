@@ -1,4 +1,5 @@
-﻿import React, { useCallback, useContext } from 'react';
+﻿import { Warning } from '@mui/icons-material';
+import InfoIcon from '@mui/icons-material/Info';
 import {
     DialogActions,
     DialogContent,
@@ -17,19 +18,21 @@ import {
     SelectChangeEvent,
     Slider,
 } from '@mui/material';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import Typography from '@mui/material/Typography';
+import React, { useCallback, useContext } from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { CampaignType, DailyRaidsStrategy, Rarity } from 'src/models/enums';
+import { DailyRaidsCustomLocations } from 'src/shared-components/daily-raids-custom-locations';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
+
 import { ICustomDailyRaidsSettings, IDailyRaidsPreferences } from '../models/interfaces';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import InfoIcon from '@mui/icons-material/Info';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { CampaignType, DailyRaidsStrategy, Rarity } from 'src/models/enums';
-import { Warning } from '@mui/icons-material';
-import { DailyRaidsCustomLocations } from 'src/shared-components/daily-raids-custom-locations';
-import Dialog from '@mui/material/Dialog';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { isMobile } from 'react-device-detect';
-import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
 
 const defaultCustomSettings: ICustomDailyRaidsSettings = {
     [Rarity.Legendary]: [CampaignType.Elite, CampaignType.Mirror],

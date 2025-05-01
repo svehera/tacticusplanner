@@ -1,10 +1,12 @@
-﻿import React from 'react';
-import { Card, CardContent, CardHeader } from '@mui/material';
+﻿import { Card, CardContent, CardHeader } from '@mui/material';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { Conditional } from '@/fsd/5-shared/ui';
+
+import { menuItemById } from '../../models/menu-items';
 import { StaticDataService } from '../../services';
 import { CharacterImage } from '../../shared-components/character-image';
-import { menuItemById } from '../../models/menu-items';
-import { Conditional } from '@/fsd/5-shared/ui';
 
 export const PlanGuildWarRoutes = () => {
     const navigate = useNavigate();

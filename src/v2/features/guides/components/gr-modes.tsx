@@ -1,8 +1,10 @@
 ﻿import React, { useEffect, useMemo, useState } from 'react';
+
+import { Faction } from 'src/models/enums';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { grEncounterToFaction, guildRaidBosses, guildRaidPrimes } from 'src/v2/features/teams/teams.constants';
-import { Faction } from 'src/models/enums';
 
 interface Props {
     units: IUnit[];

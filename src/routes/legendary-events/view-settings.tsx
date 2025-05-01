@@ -1,9 +1,11 @@
-﻿import React, { useContext } from 'react';
+﻿import SettingsIcon from '@mui/icons-material/Settings';
 import { FormControlLabel, FormGroup, Popover, Switch, Tooltip } from '@mui/material';
-import { IViewPreferences, IViewOption } from 'src/models/interfaces';
-import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import Button from '@mui/material/Button';
-import SettingsIcon from '@mui/icons-material/Settings';
+import React, { useContext } from 'react';
+
+import { IViewPreferences, IViewOption } from 'src/models/interfaces';
+
+import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 
 type OptionsPreset = 'wyo' | 'inventory' | 'myProgress';
 

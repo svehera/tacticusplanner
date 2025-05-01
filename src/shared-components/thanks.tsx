@@ -1,14 +1,17 @@
-﻿import React, { useEffect, useMemo, useState } from 'react';
-import { Card, CardContent, CardHeader } from '@mui/material';
-import { isMobile } from 'react-device-detect';
-import { StaticDataService } from '../services';
-import { ContributorImage } from './contributor-image';
-import { Link, useNavigate } from 'react-router-dom';
-import { IContentCreator, IContributor, IYoutubeCreator } from '../models/interfaces';
-import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
+﻿import { Card, CardContent, CardHeader } from '@mui/material';
 import Button from '@mui/material/Button';
-import { FlexBox } from 'src/v2/components/flex-box';
 import axios from 'axios';
+import React, { useEffect, useMemo, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
+import { FlexBox } from 'src/v2/components/flex-box';
+
+import { IContentCreator, IContributor, IYoutubeCreator } from '../models/interfaces';
+import { StaticDataService } from '../services';
+
+import { ContributorImage } from './contributor-image';
 
 export const Thanks = ({ sliderMode }: { sliderMode?: boolean }) => {
     const [activeContributorIndex, setActiveContributorIndex] = useState<number>(0);

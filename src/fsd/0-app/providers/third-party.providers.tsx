@@ -4,8 +4,9 @@ import { isMobile } from 'react-device-detect';
 import { PopupProvider } from 'react-popup-manager';
 import { RouterProvider } from 'react-router-dom';
 import { AnalyticsProvider } from 'use-analytics';
-import { routes } from '../routing/app-routing';
+
 import analytics from '../monitoring/analytics';
+import { routes } from '../routing/app-routing';
 
 const webSnackbarOrigin: SnackbarOrigin = { vertical: 'bottom', horizontal: 'right' };
 const mobileSnackbarOrigin: SnackbarOrigin = { vertical: 'top', horizontal: 'center' };

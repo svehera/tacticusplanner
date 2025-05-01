@@ -1,7 +1,9 @@
 import React, { JSX, useMemo } from 'react';
-import { IDetailedEnemy } from 'src/models/interfaces';
-import { NpcPortrait } from './npc-portrait';
+
 import { Rank, Rarity } from 'src/models/enums';
+import { IDetailedEnemy } from 'src/models/interfaces';
+
+import { NpcPortrait } from './npc-portrait';
 
 interface Props {
     enemies: IDetailedEnemy[];

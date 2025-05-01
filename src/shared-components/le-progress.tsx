@@ -1,13 +1,15 @@
-﻿import React from 'react';
-import { ILegendaryEvent } from '../models/interfaces';
-import { useLreProgress } from 'src/shared-components/le-progress.hooks';
-import { LeNextGoalProgress } from 'src/shared-components/le-next-goal-progress';
+﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, TextField } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { LeProgressOverviewMissions } from 'src/shared-components/le-progress-overview-missions';
-import { LreTrackOverallProgress } from 'src/shared-components/le-track-overall-progress';
 import { sum } from 'lodash';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { LeNextGoalProgress } from 'src/shared-components/le-next-goal-progress';
+import { LeProgressOverviewMissions } from 'src/shared-components/le-progress-overview-missions';
+import { useLreProgress } from 'src/shared-components/le-progress.hooks';
+import { LreTrackOverallProgress } from 'src/shared-components/le-track-overall-progress';
+
+import { ILegendaryEvent } from '../models/interfaces';
 
 export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
     const { model, updateNotes, updateOccurrenceProgress, toggleBattleState } = useLreProgress(legendaryEvent);

@@ -1,12 +1,13 @@
-﻿import {
+﻿import { v4 } from 'uuid';
+
+import { LegendaryEventEnum } from '../models/enums';
+import {
     ILegendaryEventSelectedTeams,
     ILreTeam,
     LegendaryEventData,
     LreTrackId,
     SetStateAction,
 } from '../models/interfaces';
-import { v4 } from 'uuid';
-import { LegendaryEventEnum } from '../models/enums';
 
 export type LeSelectedTeamsAction =
     | {

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Rank, Rarity, RarityStars, RarityString } from 'src/models/enums';
-import goldStar from 'src/assets/images/stars/star small.png';
-import redStar from 'src/assets/images/stars/red star small.png';
+
 import blueStar from 'src/assets/images/stars/blue star.png';
+import redStar from 'src/assets/images/stars/red star small.png';
+import goldStar from 'src/assets/images/stars/star small.png';
+import { Rank, Rarity, RarityStars, RarityString } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
-import { RankImage } from 'src/v2/components/images/rank-image';
 import { getImageUrl } from 'src/shared-logic/functions';
+import { RankImage } from 'src/v2/components/images/rank-image';
 
 interface Props {
     name: string;

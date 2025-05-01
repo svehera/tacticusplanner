@@ -1,28 +1,27 @@
-﻿import React, { useContext, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import Box from '@mui/material/Box';
+﻿import Box from '@mui/material/Box';
 import { sum } from 'lodash';
+import React, { useContext, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-import { Conditional } from '@/fsd/5-shared/ui';
+import { GlobalState } from 'src/models/global-state';
+import { StoreContext } from 'src/reducers/store.provider';
 import { Loader } from 'src/v2/components/loader';
 
-import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { ViewControls } from 'src/v2/features/characters/components/view-controls';
-import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
+import { Conditional } from '@/fsd/5-shared/ui';
+
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
-import { IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
-import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
-import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
-import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
-
-import { useGetSharedRoster } from 'src/v2/features/share/share-roster.endpoints';
-
-import { StoreContext } from 'src/reducers/store.provider';
-import { GlobalState } from 'src/models/global-state';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
+import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
+import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
+import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
 import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
+import { ViewControls } from 'src/v2/features/characters/components/view-controls';
+import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
+import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
+import { useGetSharedRoster } from 'src/v2/features/share/share-roster.endpoints';
 
 export const SharedRoster = () => {
     const { viewPreferences } = useContext(StoreContext);

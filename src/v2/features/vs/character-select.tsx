@@ -1,10 +1,11 @@
-import React from 'react';
-import InputLabel from '@mui/material/InputLabel';
 import { FormControl, MenuItem, Select } from '@mui/material';
-import { FlexBox } from 'src/v2/components/flex-box';
+import InputLabel from '@mui/material/InputLabel';
+import React from 'react';
+
 import { StaticDataService } from 'src/services';
 import { CharacterImage } from 'src/shared-components/character-image';
 import { getImageUrl } from 'src/shared-logic/functions';
+import { FlexBox } from 'src/v2/components/flex-box';
 
 interface Props {
     label: string;

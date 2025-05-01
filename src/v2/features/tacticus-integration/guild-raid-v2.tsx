@@ -1,6 +1,14 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham, ValueGetterParams } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import React, { useState, useEffect, useMemo } from 'react';
+
+import { IGuildMember } from '@/models/interfaces';
+import { ITableRow } from '@/routes/legendary-events/legendary-events.interfaces';
+import { RarityImage } from '@/v2/components/images/rarity-image';
+import { Rarity } from 'src/models/enums';
+
+import { getTacticusGuildRaidData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
+
 import {
     TacticusDamageType,
     TacticusEncounterType,
@@ -8,12 +16,7 @@ import {
     TacticusGuildRaidResponse,
     TacticusGuildRaidUnit,
 } from './tacticus-integration.models';
-import { Rarity } from 'src/models/enums';
-import { getTacticusGuildRaidData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
 import { mapUserIdToName } from './user-id-mapper';
-import { IGuildMember } from '@/models/interfaces';
-import { ITableRow } from '@/routes/legendary-events/legendary-events.interfaces';
-import { RarityImage } from '@/v2/components/images/rarity-image';
 
 // Type for aggregated user data
 interface UserSummary {

@@ -1,12 +1,14 @@
-﻿import React, { useMemo } from 'react';
+﻿import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { Badge, DialogActions, DialogContent, DialogTitle, IconButton } from '@mui/material';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import { IDailyRaidsFilters } from 'src/models/interfaces';
 import Button from '@mui/material/Button';
-import { Alliance, CampaignType, Faction, Rarity, RarityString } from 'src/models/enums';
-import factionsData from 'src/v2/data/factions.json';
-import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
 import Dialog from '@mui/material/Dialog';
+import React, { useMemo } from 'react';
+
+import { Alliance, CampaignType, Faction, Rarity, RarityString } from 'src/models/enums';
+import { IDailyRaidsFilters } from 'src/models/interfaces';
+import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
+import factionsData from 'src/v2/data/factions.json';
+
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 
 interface Props {

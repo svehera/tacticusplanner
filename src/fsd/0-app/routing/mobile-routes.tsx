@@ -1,11 +1,11 @@
 ﻿import React from 'react';
-
 import { redirect, RouteObject } from 'react-router-dom';
 
-import MobileApp from './mobile-app';
 import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
 import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.route';
+
 import { globalInputRoutes, globalLearnRoutes, globalPlanRoutes } from './desktop-routes';
+import MobileApp from './mobile-app';
 
 const inputRoutes: RouteObject[] = [
     {

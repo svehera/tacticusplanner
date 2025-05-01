@@ -1,5 +1,6 @@
-﻿import { IGuildMember, IInsightsData, IPersonalCharacterData2 } from 'src/models/interfaces';
-import { Difficulty, Rarity } from 'src/models/enums';
+﻿import { Difficulty, Rarity } from 'src/models/enums';
+import { IGuildMember, IInsightsData, IPersonalCharacterData2 } from 'src/models/interfaces';
+
 import { IMowDb } from 'src/v2/features/characters/characters.models';
 
 export interface IGuildInfoRequest {

@@ -1,6 +1,7 @@
 ﻿import React from 'react';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
 import { getImageUrl } from 'src/shared-logic/functions';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
 export const CampaignImage = ({ campaign, size = 50 }: { campaign: string; size?: number }) => {
     const image = getImageUrl(`campaings/resized/${campaign}.png`);

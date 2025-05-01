@@ -1,6 +1,18 @@
-﻿import React, { ChangeEvent, useCallback, useContext, useMemo, useRef, useState } from 'react';
-
-import { AgGridReact } from 'ag-grid-react';
+﻿import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import {
+    Badge,
+    FormControl,
+    FormControlLabel,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
+    Switch,
+    TextField,
+} from '@mui/material';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import InputLabel from '@mui/material/InputLabel';
 import {
     ColDef,
     GridApi,
@@ -15,34 +27,21 @@ import {
     RefreshCellsParams,
     Column,
 } from 'ag-grid-community';
-
-import {
-    Badge,
-    FormControl,
-    FormControlLabel,
-    MenuItem,
-    Select,
-    SelectChangeEvent,
-    Switch,
-    TextField,
-} from '@mui/material';
-
-import { MultipleSelectCheckmarks } from './multiple-select';
-import { ICharacter2 } from 'src/models/interfaces';
-import { Alliance, DamageType, Rank, Rarity, RarityStars, Trait } from 'src/models/enums';
-import { StoreContext } from 'src/reducers/store.provider';
-import { useQueryState } from 'src/v2/hooks/query-state';
+import { AgGridReact } from 'ag-grid-react';
 import { uniq } from 'lodash';
-import InputLabel from '@mui/material/InputLabel';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
-import { getEnumValues } from 'src/shared-logic/functions';
+import React, { ChangeEvent, useCallback, useContext, useMemo, useRef, useState } from 'react';
+
+import { Alliance, DamageType, Rank, Rarity, RarityStars, Trait } from 'src/models/enums';
+import { ICharacter2 } from 'src/models/interfaces';
+import { StoreContext } from 'src/reducers/store.provider';
 import { RankSelect } from 'src/shared-components/rank-select';
-import { StarsSelect } from 'src/shared-components/stars-select';
 import { RaritySelect } from 'src/shared-components/rarity-select';
+import { StarsSelect } from 'src/shared-components/stars-select';
+import { getEnumValues } from 'src/shared-logic/functions';
+import { useQueryState } from 'src/v2/hooks/query-state';
+
 import { useCharacters } from './characters-column-defs';
+import { MultipleSelectCheckmarks } from './multiple-select';
 
 export const Characters = () => {
     const gridRef = useRef<AgGridReact<ICharacter2>>(null);

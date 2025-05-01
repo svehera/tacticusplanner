@@ -1,10 +1,10 @@
-import { ICharacter2, ILegendaryEventTrack } from '../interfaces';
+import staticData from '../../assets/legendary-events/Unknown.json';
 import { Alliance, DamageType, Trait } from '../enums';
-import { filter } from './filters';
+import { ICharacter2, ILegendaryEventTrack } from '../interfaces';
+
 import { LegendaryEventBase } from './base.le';
 import { LETrack } from './base.le.track';
-
-import staticData from '../../assets/legendary-events/Unknown.json';
+import { filter } from './filters';
 
 export class UnknownLegendaryEvent extends LegendaryEventBase {
     constructor(unitsData: Array<ICharacter2>) {

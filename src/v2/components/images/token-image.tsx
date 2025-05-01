@@ -1,7 +1,9 @@
 ﻿import React from 'react';
+
 import { getImageUrl } from 'src/shared-logic/functions';
-import { GameMode } from 'src/v2/features/teams/teams.enums';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { GameMode } from 'src/v2/features/teams/teams.enums';
 
 export const TokenImage = ({ gameMode }: { gameMode: GameMode }) => {
     const image = getImageUrl(`modes/${gameMode}.png`);

@@ -1,9 +1,11 @@
-﻿import React from 'react';
+﻿import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import { FormControl, MenuItem, Select } from '@mui/material';
-import { Rarity } from '../models/enums';
+import React from 'react';
+
 import { FlexBox } from 'src/v2/components/flex-box';
 import { StarsImage } from 'src/v2/components/images/stars-image';
+
+import { Rarity } from '../models/enums';
 
 interface Props {
     label: string;

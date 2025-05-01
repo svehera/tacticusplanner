@@ -1,11 +1,13 @@
-﻿import React from 'react';
-import { IMowMaterialsTotal } from 'src/v2/features/lookup/lookup.models';
+﻿import { Badge } from '@mui/material';
+import React from 'react';
+
 import { Alliance, Rarity } from 'src/models/enums';
-import { ComponentImage } from 'src/v2/components/images/component-image';
-import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
-import { Badge } from '@mui/material';
 import { BadgeImage } from 'src/v2/components/images/badge-image';
+import { ComponentImage } from 'src/v2/components/images/component-image';
 import { ForgeBadgeImage } from 'src/v2/components/images/forge-badge-image';
+import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
+
+import { IMowMaterialsTotal } from 'src/v2/features/lookup/lookup.models';
 
 interface Props {
     total: IMowMaterialsTotal;

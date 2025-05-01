@@ -1,30 +1,31 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
-import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
-import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
-import { PersonalGoalType, Rank } from 'src/models/enums';
-
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { Link } from 'react-router-dom';
-import { isMobile } from 'react-device-detect';
-import Button from '@mui/material/Button';
+﻿import GridViewIcon from '@mui/icons-material/GridView';
 import LinkIcon from '@mui/icons-material/Link';
-import { GoalCard } from 'src/routes/goals/goal-card';
-import { GoalsService } from 'src/v2/features/goals/goals.service';
-import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
-import { ShardsService } from 'src/v2/features/goals/shards.service';
-import { FormControlLabel, Switch } from '@mui/material';
-import GridViewIcon from '@mui/icons-material/GridView';
 import TableRowsIcon from '@mui/icons-material/TableRows';
-import { GoalsTable } from 'src/routes/goals/goals-table';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
-import { goalsLimit, rankToLevel } from 'src/models/constants';
+import { FormControlLabel, Switch } from '@mui/material';
+import Button from '@mui/material/Button';
 import { sum } from 'lodash';
-import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
-import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';
+import React, { useContext, useMemo, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
+
+import { goalsLimit, rankToLevel } from 'src/models/constants';
+import { PersonalGoalType, Rank } from 'src/models/enums';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+import { GoalCard } from 'src/routes/goals/goal-card';
+import { GoalsTable } from 'src/routes/goals/goals-table';
+import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
+import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
+
+import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';
+import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
+import { GoalsService } from 'src/v2/features/goals/goals.service';
+import { ShardsService } from 'src/v2/features/goals/shards.service';
+import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 
 export const Goals = () => {
     const {

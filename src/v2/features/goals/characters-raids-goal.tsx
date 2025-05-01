@@ -1,14 +1,16 @@
-﻿import React from 'react';
+﻿import { ArrowForward, Edit } from '@mui/icons-material';
 import { Checkbox, FormControlLabel, IconButton } from '@mui/material';
-import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { RankImage } from 'src/v2/components/images/rank-image';
+import React from 'react';
+
+import { rarityToStars } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
 import { CharacterImage } from 'src/shared-components/character-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { ArrowForward, Edit } from '@mui/icons-material';
+import { RankImage } from 'src/v2/components/images/rank-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
-import { rarityToStars } from 'src/models/constants';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
 
 interface Props {
     goal: CharacterRaidGoalSelect;

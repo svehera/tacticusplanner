@@ -1,14 +1,15 @@
-﻿import React from 'react';
+﻿import { Badge } from '@mui/material';
+import React from 'react';
 
-import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 import { Alliance } from 'src/models/enums';
+import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { BadgeImage } from 'src/v2/components/images/badge-image';
-import { Badge } from '@mui/material';
 import { ComponentImage } from 'src/v2/components/images/component-image';
 import { ForgeBadgeImage } from 'src/v2/components/images/forge-badge-image';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
-import { IMowLevelMaterials } from 'src/v2/features/lookup/lookup.models';
+
 import { IBaseUpgrade, ICraftedUpgrade } from 'src/v2/features/goals/goals.models';
+import { IMowLevelMaterials } from 'src/v2/features/lookup/lookup.models';
+import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 
 interface Props {
     mowId: string;

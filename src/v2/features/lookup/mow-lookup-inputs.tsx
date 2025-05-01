@@ -1,9 +1,11 @@
 ﻿import React, { useEffect } from 'react';
-import { IMow } from 'src/v2/features/characters/characters.models';
-import { useQueryState } from 'src/v2/hooks/query-state';
+
 import { CharacterImage } from 'src/shared-components/character-image';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
 import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
+import { useQueryState } from 'src/v2/hooks/query-state';
+
+import { IMow } from 'src/v2/features/characters/characters.models';
 import { IMowLookupInputs } from 'src/v2/features/lookup/lookup.models';
 
 interface Props {

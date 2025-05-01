@@ -1,10 +1,12 @@
+import { LineChart } from '@mui/x-charts';
 import React, { JSX, useMemo } from 'react';
+
 import { DamageType, Faction, Rank, Rarity, RarityStars, Trait } from 'src/models/enums';
 import { IDamageTypes, INpcData } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+
 import { DamageCalculatorService } from './damage-calculator-service';
-import { LineChart } from '@mui/x-charts';
 import { IEquipmentSpec } from './versus-interfaces';
 
 interface Props {

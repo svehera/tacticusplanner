@@ -1,6 +1,7 @@
-﻿import React from 'react';
-import { FormControl, MenuItem, Select } from '@mui/material';
+﻿import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
+import React from 'react';
+
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 
 type Props = {

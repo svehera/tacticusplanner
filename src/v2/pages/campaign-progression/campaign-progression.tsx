@@ -1,27 +1,28 @@
-import React, { useContext, useMemo } from 'react';
-import { isMobile } from 'react-device-detect';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import React, { useContext, useMemo } from 'react';
+import { isMobile } from 'react-device-detect';
 
-import { CampaignImage } from 'src/v2/components/images/campaign-image';
 import { StoreContext } from 'src/reducers/store.provider';
-import { CampaignData } from 'src/v2/features/campaign-progression/campaign-progression.models';
-import { CampaignProgressionAscensionGoals } from 'src/v2/pages/campaign-progression/campaign-progression-ascension-goals';
-import { CampaignProgressionMaterialGoals } from 'src/v2/pages/campaign-progression/campaign-progression-material-goals';
-import { CampaignProgressionRankupGoals } from 'src/v2/pages/campaign-progression/campaign-progression-rankup-goals';
-import { CampaignProgressionHeader } from 'src/v2/pages/campaign-progression/campaign-progression-header';
-import { CampaignProgressionUnfarmableMaterials } from 'src/v2/pages/campaign-progression/campaign-progression-unfarmable-materials';
-import { CampaignsProgressionService } from 'src/v2/features/campaign-progression/campaign-progression.service';
+import { CampaignImage } from 'src/v2/components/images/campaign-image';
 
-import { GoalsService } from 'src/v2/features/goals/goals.service';
+import { CampaignData } from 'src/v2/features/campaign-progression/campaign-progression.models';
+import { CampaignsProgressionService } from 'src/v2/features/campaign-progression/campaign-progression.service';
 import {
     ICharacterUpgradeRankGoal,
     ICharacterUpgradeMow,
     ICharacterUnlockGoal,
     ICharacterAscendGoal,
 } from 'src/v2/features/goals/goals.models';
+import { GoalsService } from 'src/v2/features/goals/goals.service';
+
+import { CampaignProgressionAscensionGoals } from 'src/v2/pages/campaign-progression/campaign-progression-ascension-goals';
+import { CampaignProgressionHeader } from 'src/v2/pages/campaign-progression/campaign-progression-header';
+import { CampaignProgressionMaterialGoals } from 'src/v2/pages/campaign-progression/campaign-progression-material-goals';
+import { CampaignProgressionRankupGoals } from 'src/v2/pages/campaign-progression/campaign-progression-rankup-goals';
+import { CampaignProgressionUnfarmableMaterials } from 'src/v2/pages/campaign-progression/campaign-progression-unfarmable-materials';
 
 export const CampaignProgression = () => {
     const { goals, characters, mows, campaignsProgress } = useContext(StoreContext);

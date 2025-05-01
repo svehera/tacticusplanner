@@ -1,30 +1,30 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
-import { AllCommunityModule, themeBalham } from 'ag-grid-community';
+﻿import { ArrowForward, Info } from '@mui/icons-material';
+import InfoIcon from '@mui/icons-material/Info';
+import { FormControlLabel, Popover, Switch } from '@mui/material';
+import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import { orderBy, sortBy, sum } from 'lodash';
+import React, { useContext, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
+import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
+import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { DailyRaidsStrategy, Rank, Rarity } from '../../models/enums';
 import {
     ICharacter2,
     IMaterialEstimated2,
     IMaterialFull,
     IMaterialRecipeIngredientFull,
 } from '../../models/interfaces';
-import { StaticDataService } from '../../services';
-import { getEnumValues } from '../../shared-logic/functions';
-import { DailyRaidsStrategy, Rank, Rarity } from '../../models/enums';
 import { StoreContext } from '../../reducers/store.provider';
-import { orderBy, sortBy, sum } from 'lodash';
-import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
-import { useSearchParams } from 'react-router-dom';
-import { UpgradeImage } from '../../shared-components/upgrade-image';
+import { StaticDataService } from '../../services';
 import { RankSelect } from '../../shared-components/rank-select';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { FormControlLabel, Popover, Switch } from '@mui/material';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { ArrowForward, Info } from '@mui/icons-material';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import InfoIcon from '@mui/icons-material/Info';
-import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
+import { UpgradeImage } from '../../shared-components/upgrade-image';
+import { getEnumValues } from '../../shared-logic/functions';
 
 export const RankLookup = () => {
     const { characters, campaignsProgress, inventory } = useContext(StoreContext);

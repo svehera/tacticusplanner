@@ -1,15 +1,17 @@
-﻿import React, { useState } from 'react';
-import { AgGridReact } from 'ag-grid-react';
+﻿import { Badge } from '@mui/material';
 import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import { mapValues, sum } from 'lodash';
+import React, { useState } from 'react';
+
+import { Difficulty, Rarity } from 'src/models/enums';
+import { FlexBox } from 'src/v2/components/flex-box';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+
+import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
+import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 
 import './players-table.css';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { FlexBox } from 'src/v2/components/flex-box';
-import { Difficulty, Rarity } from 'src/models/enums';
-import { Badge } from '@mui/material';
-import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
-import { mapValues, sum } from 'lodash';
-import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 
 export const PlayersTable = ({
     rows,

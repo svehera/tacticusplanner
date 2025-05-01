@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { InventoryItem } from 'src/routes/inventory-item';
+
 import { IUpgradesGroup } from './inventory-models';
 
 interface Props {

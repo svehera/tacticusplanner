@@ -1,8 +1,9 @@
-import React, { useMemo } from 'react';
-import { Tooltip } from '@mui/material';
 import { Info as InfoIcon } from '@mui/icons-material';
-import { ILreProgressModel, ILreTrackProgress } from 'src/v2/features/lre/lre.models';
+import { Tooltip } from '@mui/material';
 import { sum } from 'lodash';
+import React, { useMemo } from 'react';
+
+import { ILreProgressModel, ILreTrackProgress } from 'src/v2/features/lre/lre.models';
 
 interface Props {
     model: ILreProgressModel;

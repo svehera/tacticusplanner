@@ -1,14 +1,13 @@
-﻿import React, { useContext, useState } from 'react';
+﻿import Info from '@mui/icons-material/Info';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Info from '@mui/icons-material/Info';
-
-import dirtyDozen from 'src/v2/data/dirtyDozen.json';
 
 import { StoreContext } from 'src/reducers/store.provider';
+import dirtyDozen from 'src/v2/data/dirtyDozen.json';
 
 import { DirtyDozenTable } from 'src/v2/features/dirty-dozen/dirty-dozen-table';
 import { IDirtyDozen } from 'src/v2/features/dirty-dozen/dirty-dozen.models';
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 export const DirtyDozen = () => {
     const { characters } = useContext(StoreContext);

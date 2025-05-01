@@ -1,27 +1,18 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-
+﻿import CampaignIcon from '@mui/icons-material/Campaign';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Badge, Divider, ListItemIcon, Menu, MenuItem, Tooltip, useMediaQuery } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import { Badge, Divider, ListItemIcon, Menu, MenuItem, Tooltip, useMediaQuery } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import ListItemText from '@mui/material/ListItemText';
-import IconButton from '@mui/material/IconButton';
-import CampaignIcon from '@mui/icons-material/Campaign';
+import React, { useContext, useMemo, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { UserMenu } from '@/shared-components/user-menu/user-menu';
-import ThemeSwitch from '@/shared-components/theme-switch';
-import { WhatsNewDialog } from '@/shared-components/whats-new.dialog';
-import { DiscordIcon } from '@/shared-components/icons/discord.icon';
-import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
-
-import { bmcLink, discordInvitationLink, isTabletOrMobileMediaQuery } from '@/models/constants';
 import { usePopUpControls } from '@/hooks/pop-up-controls';
-
-import { StoreContext } from '@/reducers/store.provider';
+import { bmcLink, discordInvitationLink, isTabletOrMobileMediaQuery } from '@/models/constants';
 import {
     inputSubMenu,
     learnSubMenu,
@@ -31,8 +22,14 @@ import {
     planSubMenu,
     planSubMenuWeb,
 } from '@/models/menu-items';
-import { FlexBox } from 'src/v2/components/flex-box';
+import { StoreContext } from '@/reducers/store.provider';
+import { DiscordIcon } from '@/shared-components/icons/discord.icon';
+import ThemeSwitch from '@/shared-components/theme-switch';
+import { UserMenu } from '@/shared-components/user-menu/user-menu';
+import { WhatsNewDialog } from '@/shared-components/whats-new.dialog';
 import { useTitle } from 'src/contexts/title.context';
+import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
+import { FlexBox } from 'src/v2/components/flex-box';
 
 import { AppBarSubMenu } from './app-bar-sub-menu';
 

@@ -1,15 +1,15 @@
-﻿import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
-import { Home, Input, School as Learn, TrackChanges as Plan } from '@mui/icons-material';
-
+﻿import { Home, Input, School as Learn, TrackChanges as Plan } from '@mui/icons-material';
+import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import React, { useMemo } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-import Box from '@mui/material/Box';
-import { menuItemById } from 'src/models/menu-items';
-import Typography from '@mui/material/Typography';
-import { FlexBox } from 'src/v2/components/flex-box';
-import { Conditional } from '@/fsd/5-shared/ui';
 import { useTitle } from 'src/contexts/title.context';
+import { menuItemById } from 'src/models/menu-items';
+import { FlexBox } from 'src/v2/components/flex-box';
+
+import { Conditional } from '@/fsd/5-shared/ui';
 
 const MobileApp = () => {
     const location = useLocation();

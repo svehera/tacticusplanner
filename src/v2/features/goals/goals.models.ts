@@ -13,8 +13,10 @@ import {
     IDailyRaidsFilters,
     IDailyRaidsPreferences,
 } from 'src/models/interfaces';
+
 import { ICharacterAbilitiesMaterialsTotal, IXpEstimate } from 'src/v2/features/characters/characters.models';
 import { IMowMaterialsTotal } from 'src/v2/features/lookup/lookup.models';
+
 import { rarityCaps } from '../characters/characters.contants';
 
 export type CharacterRaidGoalSelect =

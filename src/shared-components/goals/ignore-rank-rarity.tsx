@@ -1,7 +1,7 @@
-﻿import React from 'react';
+﻿import { Info } from '@mui/icons-material';
 import { FormControlLabel, Switch } from '@mui/material';
+import React from 'react';
 
-import { Info } from '@mui/icons-material';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 

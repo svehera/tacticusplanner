@@ -1,5 +1,5 @@
-﻿import * as React from 'react';
-import { Autocomplete, TextField } from '@mui/material';
+﻿import { Autocomplete, TextField } from '@mui/material';
+import * as React from 'react';
 
 interface Props {
     values: string[];

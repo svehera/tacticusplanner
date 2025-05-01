@@ -1,9 +1,10 @@
 ﻿import React from 'react';
-import { MenuItem } from 'src/v2/models/menu-item';
-import { StaticDataService } from 'src/services';
-import { CharacterImage } from 'src/shared-components/character-image';
+
 import { LegendaryEventEnum } from 'src/models/enums';
 import { IUnitData } from 'src/models/interfaces';
+import { StaticDataService } from 'src/services';
+import { CharacterImage } from 'src/shared-components/character-image';
+import { MenuItem } from 'src/v2/models/menu-item';
 
 const createMenuItem = (character: IUnitData) =>
     new MenuItem(

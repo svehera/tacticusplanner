@@ -1,6 +1,7 @@
-﻿import { SetStateAction } from '../models/interfaces';
+﻿import { GoalsService } from 'src/v2/features/goals/goals.service';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
-import { GoalsService } from 'src/v2/features/goals/goals.service';
+
+import { SetStateAction } from '../models/interfaces';
 
 export type TeamsAction =
     | {
