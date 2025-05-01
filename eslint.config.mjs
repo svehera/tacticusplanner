@@ -1,4 +1,5 @@
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import * as pluginImportX from 'eslint-plugin-import-x';
 import react from 'eslint-plugin-react';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import reactCompiler from 'eslint-plugin-react-compiler';
@@ -25,13 +26,15 @@ export default [
         'plugin:react/recommended',
         'prettier'
     ),
+    pluginImportX.flatConfigs.recommended,
+    pluginImportX.flatConfigs.typescript,
     {
         plugins: {
             '@typescript-eslint': typescriptEslint,
             react,
             'react-refresh': reactRefresh,
             'react-compiler': reactCompiler,
-            prettier,
+            prettier,     
         },
 
         languageOptions: {
@@ -65,6 +68,27 @@ export default [
             '@typescript-eslint/no-unused-vars': ['warn'],
             'react-refresh/only-export-components': 'error',
             'react-compiler/react-compiler': 'error',
+            "import-x/order": [
+            2,
+            {
+                alphabetize: {
+                    order: 'asc',
+                    caseInsensitive: true,
+                },
+                pathGroupsExcludedImportTypes: ["builtin"],
+                groups: ["builtin", "external", "internal", "parent", "sibling", "index"],
+
+                // experimental features
+                'newlines-between': 'always',
+                // pathGroups: REVERSED_FS_LAYERS.map(
+                //     (layer) => ({
+                //         pattern: `**/?(*)${layer}{,/**}`,
+                //         group: "internal",
+                //         position: "after",
+                //     }),
+                // ),
+            },
+        ],
         },
     },
 ];
