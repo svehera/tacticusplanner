@@ -10,7 +10,7 @@ import analytics from '../monitoring/analytics';
 const webSnackbarOrigin: SnackbarOrigin = { vertical: 'bottom', horizontal: 'right' };
 const mobileSnackbarOrigin: SnackbarOrigin = { vertical: 'top', horizontal: 'center' };
 
-export const ThirdPartyProviders: React.FC<React.PropsWithChildren> = ({ children }) => {
+export const ThirdPartyProviders: React.FC = () => {
     return (
         <AnalyticsProvider instance={analytics}>
             <SnackbarProvider
@@ -19,7 +19,12 @@ export const ThirdPartyProviders: React.FC<React.PropsWithChildren> = ({ childre
                 onEntered={(node, isAppearing, key) => (node.onclick = () => closeSnackbar(key))}
             />
 
-            {/*// @ts-expect-error Ts being weird */}
+            {/* 
+                TypeScript is unable to infer the correct types for PopupProvider here.
+                This might be due to a mismatch between the PopupProvider's type definitions and its usage.
+                TODO: Investigate the type definitions for PopupProvider and resolve this error if possible.
+            */}
+            {/* @ts-expect-error Ts being weird */}
             <PopupProvider>
                 <RouterProvider router={routes} />
             </PopupProvider>

@@ -69,7 +69,7 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
             {
                 path: 'ty',
                 async lazy() {
-                    const { Thanks } = await import('../../../shared-components/thanks');
+                    const { Thanks } = await import('@/shared-components/thanks');
                     return { Component: Thanks };
                 },
             },

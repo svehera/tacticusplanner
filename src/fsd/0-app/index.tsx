@@ -9,7 +9,9 @@ import reportWebVitals from './monitoring/reportWebVitals';
 import { FirstPartyProviders } from './providers/first-party.providers';
 import { ThirdPartyProviders } from './providers/third-party.providers';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const container = document.getElementById('root');
+if (!container) throw new Error('Root element not found');
+const root = ReactDOM.createRoot(container);
 root.render(
     <FirstPartyProviders>
         <ThirdPartyProviders />
