@@ -1,12 +1,14 @@
-import React, { useEffect, useMemo, useState } from 'react';
 import { Box, Grid, Input, Slider } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useDebounceCallback } from 'usehooks-ts';
+
+import { ICharacter2 } from 'src/models/interfaces';
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
 import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
-import { ICampaignModel } from './campaigns.models';
+
 import { CampaignDifficulty } from './campaigns.enums';
-import { ICharacter2 } from 'src/models/interfaces';
-import { useDebounceCallback } from 'usehooks-ts';
+import { ICampaignModel } from './campaigns.models';
 
 interface Props {
     characters: ICharacter2[];

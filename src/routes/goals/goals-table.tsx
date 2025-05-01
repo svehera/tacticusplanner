@@ -1,35 +1,36 @@
-﻿import React, { useContext, useMemo } from 'react';
-import { AgGridReact } from 'ag-grid-react';
+﻿import { ArrowForward, DeleteForever, Edit, Info } from '@mui/icons-material';
+import LinkIcon from '@mui/icons-material/Link';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import React, { useContext, useMemo } from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
+
+import { charsUnlockShards, rarityToStars } from 'src/models/constants';
 import { PersonalGoalType, Rank, RarityStars } from 'src/models/enums';
+import { ICharacter2 } from 'src/models/interfaces';
+import { StoreContext } from 'src/reducers/store.provider';
+import { StaticDataService } from 'src/services';
+import { CharacterImage } from 'src/shared-components/character-image';
+import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { StarsImage } from 'src/v2/components/images/stars-image';
+import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import {
     CharacterRaidGoalSelect,
     ICharacterUpgradeMow,
     ICharacterUpgradeRankGoal,
     IGoalEstimate,
 } from 'src/v2/features/goals/goals.models';
-import { CharacterImage } from 'src/shared-components/character-image';
-import { charsUnlockShards, rarityToStars } from 'src/models/constants';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { ArrowForward, DeleteForever, Edit, Info } from '@mui/icons-material';
-import { StarsImage } from 'src/v2/components/images/stars-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import { isMobile } from 'react-device-detect';
-import LinkIcon from '@mui/icons-material/Link';
-import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import IconButton from '@mui/material/IconButton';
-import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
 import { XpTotal } from 'src/v2/features/goals/xp-total';
-import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
-import { StaticDataService } from 'src/services';
-import { StoreContext } from 'src/reducers/store.provider';
-import { ICharacter2 } from 'src/models/interfaces';
 
 interface Props {
     rows: CharacterRaidGoalSelect[];

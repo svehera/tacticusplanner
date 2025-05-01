@@ -1,5 +1,5 @@
-﻿import React from 'react';
-import { ClickAwayListener, Tooltip } from '@mui/material';
+﻿import { ClickAwayListener, Tooltip } from '@mui/material';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
 
 interface Props {

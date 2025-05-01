@@ -1,7 +1,5 @@
-﻿import React, { useMemo, useRef, useState } from 'react';
-import { isMobile } from 'react-device-detect';
-
-import { AgGridReact } from 'ag-grid-react';
+﻿import { FormControl, MenuItem, Select } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
 import {
     AllCommunityModule,
     ColDef,
@@ -11,21 +9,22 @@ import {
     ValueGetterParams,
     themeBalham,
 } from 'ag-grid-community';
-
-import { ICampaignBattleComposed } from 'src/models/interfaces';
-import { Campaign, Rank, Rarity, RarityStars } from 'src/models/enums';
-import { StaticDataService } from 'src/services';
-import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
-import { FormControl, MenuItem, Select } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
+import { AgGridReact } from 'ag-grid-react';
 import { uniq } from 'lodash';
-import { useQueryState } from 'src/v2/hooks/query-state';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { FactionImage } from 'src/v2/components/images/faction-image';
+import React, { useMemo, useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
-import { CampaignBattleEnemies } from './campaign-battle-enemies';
+import { Campaign, Rank, Rarity, RarityStars } from 'src/models/enums';
+import { ICampaignBattleComposed } from 'src/models/interfaces';
+import { StaticDataService } from 'src/services';
+import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
+import { FactionImage } from 'src/v2/components/images/faction-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { useQueryState } from 'src/v2/hooks/query-state';
+
 import { CampaignBattle } from './campaign-battle';
+import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
 export const Campaigns = () => {
     const gridRef = useRef<AgGridReact<ICampaignBattleComposed>>(null);

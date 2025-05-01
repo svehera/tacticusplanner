@@ -1,9 +1,10 @@
-﻿import React from 'react';
-import { Badge, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+﻿import { Badge, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import { isMobile } from 'react-device-detect';
 import IconButton from '@mui/material/IconButton';
+import React from 'react';
+import { isMobile } from 'react-device-detect';
+
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 
 export const DeploymentStatus: React.FC<

@@ -1,6 +1,6 @@
 ﻿import { SetStateAction } from '@/models/interfaces';
-import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
 import { rarityToStars } from 'src/models/constants';
+import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
 import { TacticusShard, TacticusUnit } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
 

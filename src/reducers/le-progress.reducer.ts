@@ -1,6 +1,7 @@
-﻿import { LegendaryEventData, SetStateAction } from '../models/interfaces';
+﻿import { ILreProgressDto } from 'src/models/dto.interfaces';
+
 import { LegendaryEventEnum } from '../models/enums';
-import { ILreProgressDto } from 'src/models/dto.interfaces';
+import { LegendaryEventData, SetStateAction } from '../models/interfaces';
 
 export type LeProgressAction =
     | {

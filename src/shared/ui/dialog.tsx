@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-
 import { XIcon } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
 import type { HeadingProps } from 'react-aria-components';
 import { Button as ButtonPrimitive, Dialog as DialogPrimitive, Heading, Text } from 'react-aria-components';
 import { tv } from 'tailwind-variants';
 
 import { useMediaQuery } from '@/shared/lib/use-media-query';
+
 import { Button, type ButtonProps } from './button';
 
 const dialogStyles = tv({

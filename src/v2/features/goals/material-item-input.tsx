@@ -1,9 +1,10 @@
-﻿import React from 'react';
-import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
-import { IUpgradeRaid, IItemRaidLocation } from 'src/v2/features/goals/goals.models';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
-import Button from '@mui/material/Button';
+﻿import Button from '@mui/material/Button';
+import React from 'react';
+
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { UpgradeImage } from 'src/shared-components/upgrade-image';
+import { IUpgradeRaid, IItemRaidLocation } from 'src/v2/features/goals/goals.models';
+import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
 
 interface Props {
     acquiredCount: number;

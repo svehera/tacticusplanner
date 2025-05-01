@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link as LinkPrimitive, type LinkProps as LinkPrimitiveProps, composeRenderProps } from 'react-aria-components';
+
 import { linkStyles } from './link-styles';
 interface LinkProps extends LinkPrimitiveProps {
     intent?: 'primary' | 'secondary' | 'unstyled';

@@ -1,5 +1,11 @@
 ﻿import { groupBy, mapValues, orderBy, sum } from 'lodash';
+
+import { Alliance, Rarity } from 'src/models/enums';
+import mowCommonMaterial from 'src/v2/data/mow-lvl-up-common.json';
+import mowUpgradesRaw from 'src/v2/data/mows-upgrades.json';
 import { IMow } from 'src/v2/features/characters/characters.models';
+import { IBaseUpgrade, ICraftedUpgrade, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
+import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import {
     IMowLevelMaterials,
     IMowLevelUpgrade,
@@ -8,12 +14,6 @@ import {
     IMowMaterialsTotal,
     IMowUpgrade,
 } from 'src/v2/features/lookup/lookup.models';
-
-import mowCommonMaterial from 'src/v2/data/mow-lvl-up-common.json';
-import mowUpgradesRaw from 'src/v2/data/mows-upgrades.json';
-import { Alliance, Rarity } from 'src/models/enums';
-import { IBaseUpgrade, ICraftedUpgrade, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
-import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
 export class MowLookupService {
     private static mowLevelUpCommon: IMowLevelUpgrade[] = mowCommonMaterial;

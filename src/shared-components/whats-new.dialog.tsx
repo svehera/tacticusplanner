@@ -1,18 +1,20 @@
-﻿import React, { useContext } from 'react';
-import Dialog from '@mui/material/Dialog';
+﻿import CloseIcon from '@mui/icons-material/Close';
 import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import IconButton from '@mui/material/IconButton';
+import React, { useContext } from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
+
+import { IReleaseNote, IVersionReleaseNotes } from '../models/interfaces';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 import { StaticDataService } from '../services';
-import { IReleaseNote, IVersionReleaseNotes } from '../models/interfaces';
+
 import { WhatsNewImage } from './whatsnew-image';
-import { Link } from 'react-router-dom';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 
 import './whats-new-dialog.css';
-import { isMobile } from 'react-device-detect';
 
 export const WhatsNewDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const { seenAppVersion } = useContext(StoreContext);

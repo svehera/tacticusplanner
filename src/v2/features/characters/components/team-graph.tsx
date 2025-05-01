@@ -1,16 +1,16 @@
-import React from 'react';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { isMobile } from 'react-device-detect';
-
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
-
 import { ResponsiveLine } from '@nivo/line';
-import { InfoTeamGraphBox } from './info-team-graph-box';
+import React from 'react';
+import { isMobile } from 'react-device-detect';
+
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { IUnit } from 'src/v2/features/characters/characters.models';
+
+import { InfoTeamGraphBox } from './info-team-graph-box';
 
 interface Props {
     units: IUnit[];

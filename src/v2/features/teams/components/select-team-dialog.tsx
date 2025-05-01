@@ -1,20 +1,20 @@
-﻿import React, { useMemo, useState } from 'react';
-
-import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
+﻿import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
-import { ICharacter2 } from 'src/models/interfaces';
-import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
-import { Alliance, Rarity } from 'src/models/enums';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { IMow, IUnit } from 'src/v2/features/characters/characters.models';
-import { TeamView } from 'src/v2/features/teams/components/team-view';
-import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
+import Dialog from '@mui/material/Dialog';
+import { orderBy } from 'lodash';
+import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useDebounceValue } from 'usehooks-ts';
+
+import { Alliance, Rarity } from 'src/models/enums';
+import { ICharacter2 } from 'src/models/interfaces';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
+import { IMow, IUnit } from 'src/v2/features/characters/characters.models';
+import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
+import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
+import { TeamView } from 'src/v2/features/teams/components/team-view';
 import { IMenuOption } from 'src/v2/models/menu-option';
-import { orderBy } from 'lodash';
 
 type Props = {
     units: IUnit[];

@@ -1,17 +1,18 @@
-﻿import React, { useContext, useEffect, useState } from 'react';
-import '@/i18n/config';
+﻿import { createTheme, ThemeProvider } from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+
+import '@/i18n/config';
 
 import { StaticDataService } from '@/services';
 import { useAuth } from 'src/contexts/auth';
-import { LoginStatusDialog } from 'src/shared-components/user-menu/login-status-dialog';
-import { RegisterUserDialog } from 'src/shared-components/user-menu/register-user-dialog';
-import { LoginUserDialog } from 'src/shared-components/user-menu/login-user-dialog';
+import { useLoader } from 'src/contexts/loader.context';
 import { SearchParamsStateProvider } from 'src/contexts/search-params.provider';
 import { StoreContext } from 'src/reducers/store.provider';
+import { LoginStatusDialog } from 'src/shared-components/user-menu/login-status-dialog';
+import { LoginUserDialog } from 'src/shared-components/user-menu/login-user-dialog';
+import { RegisterUserDialog } from 'src/shared-components/user-menu/register-user-dialog';
 import { Loader } from 'src/v2/components/loader';
-import { createTheme, ThemeProvider } from '@mui/material';
-import { useLoader } from 'src/contexts/loader.context';
 
 const lightTheme = createTheme({
     colorSchemes: {

@@ -1,5 +1,5 @@
-import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { CampaignType } from 'src/models/enums';
+import { ICampaignBattleComposed } from 'src/models/interfaces';
 
 /**
  * Information about farming a particular material.

@@ -1,14 +1,13 @@
-﻿import React, { useContext } from 'react';
-import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import Button from '@mui/material/Button';
-
+﻿import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Box from '@mui/material/Box';
-
-import { DispatchContext } from '../../reducers/store.provider';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
 import { enqueueSnackbar } from 'notistack';
-import { GlobalState } from '../../models/global-state';
+import React, { useContext } from 'react';
+
 import { defaultData } from '../../models/constants';
+import { GlobalState } from '../../models/global-state';
+import { DispatchContext } from '../../reducers/store.provider';
 
 export const OverrideDataDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: (proceed: boolean) => void }) => {
     const { setStore } = useContext(DispatchContext);

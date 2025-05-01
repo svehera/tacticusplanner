@@ -1,4 +1,15 @@
-﻿import {
+﻿import { v4 } from 'uuid';
+
+import { DanteLegendaryEvent } from 'src/models/legendary-events/dante.le';
+import { KharnLegendaryEvent } from 'src/models/legendary-events/kharn.le';
+import { MephistonLegendaryEvent } from 'src/models/legendary-events/mephiston.le';
+import { PatermineLegendaryEvent } from 'src/models/legendary-events/patermine.le';
+import { UnknownLegendaryEvent } from 'src/models/legendary-events/unknown';
+import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
+import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
+import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
+
+import {
     Campaign,
     CharacterReleaseRarity,
     DailyRaidsStrategy,
@@ -14,15 +25,6 @@ import { ICampaignsProgress, ICharacter2, ICharProgression, IPersonalData2 } fro
 import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from './legendary-events';
 import { RagnarLegendaryEvent } from './legendary-events/ragnar.le';
 import { VitruviusLegendaryEvent } from './legendary-events/vitruvius.le';
-import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
-import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
-import { v4 } from 'uuid';
-import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
-import { KharnLegendaryEvent } from 'src/models/legendary-events/kharn.le';
-import { MephistonLegendaryEvent } from 'src/models/legendary-events/mephiston.le';
-import { PatermineLegendaryEvent } from 'src/models/legendary-events/patermine.le';
-import { DanteLegendaryEvent } from 'src/models/legendary-events/dante.le';
-import { UnknownLegendaryEvent } from 'src/models/legendary-events/unknown';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,

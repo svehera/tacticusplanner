@@ -1,7 +1,8 @@
-﻿import React from 'react';
-import { FormControlLabel, Switch } from '@mui/material';
-import { ILreOccurrenceProgress } from 'src/v2/features/lre/lre.models';
+﻿import { FormControlLabel, Switch } from '@mui/material';
+import React from 'react';
+
 import { NumberInput } from 'src/v2/components/inputs/number-input';
+import { ILreOccurrenceProgress } from 'src/v2/features/lre/lre.models';
 
 interface Props {
     occurence: ILreOccurrenceProgress;

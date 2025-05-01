@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import { ILreTeam } from 'src/models/interfaces';
+import { DeleteForever, Edit } from '@mui/icons-material';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import { DeleteForever, Edit } from '@mui/icons-material';
-import { LreTile } from 'src/v2/features/lre/lre-tile';
+import React, { useContext } from 'react';
+
+import { ILreTeam } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
+import { LreTile } from 'src/v2/features/lre/lre-tile';
 import { IMenuOption } from 'src/v2/models/menu-option';
 
 interface Props {

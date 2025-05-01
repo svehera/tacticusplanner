@@ -1,4 +1,5 @@
 ﻿import { makeApiCall } from 'src/v2/api/makeApiCall';
+
 import { ICreateGuide, IGetGuidesResponse, IGuide } from './guides.models';
 
 export const getTeamsApi = (queryParams: string) => {

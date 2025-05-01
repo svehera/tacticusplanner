@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+
 import { getImageUrl } from '../shared-logic/functions';
 
 export const ContributorImage = ({

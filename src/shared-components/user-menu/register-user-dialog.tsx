@@ -1,6 +1,4 @@
-﻿import React, { useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import {
+﻿import {
     Backdrop,
     CircularProgress,
     DialogActions,
@@ -10,13 +8,16 @@ import {
     FormHelperText,
     Input,
 } from '@mui/material';
-import Button from '@mui/material/Button';
-import { registerUser } from '../../api/api-functions';
-import { AxiosError } from 'axios';
-import { IErrorResponse } from '../../api/api-interfaces';
-import { enqueueSnackbar } from 'notistack';
-import InputLabel from '@mui/material/InputLabel';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import InputLabel from '@mui/material/InputLabel';
+import { AxiosError } from 'axios';
+import { enqueueSnackbar } from 'notistack';
+import React, { useState } from 'react';
+
+import { registerUser } from '../../api/api-functions';
+import { IErrorResponse } from '../../api/api-interfaces';
 
 export const RegisterUserDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: (success: boolean) => void }) => {
     const [registerForm, setRegisterForm] = useState({

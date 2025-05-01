@@ -1,5 +1,6 @@
-import { CampaignDifficulty, CampaignGroupType, CampaignReleaseType } from './campaigns.enums';
 import { Campaign, Faction } from 'src/models/enums';
+
+import { CampaignDifficulty, CampaignGroupType, CampaignReleaseType } from './campaigns.enums';
 
 /**
  * Represents the structure of a campaign with its unique attributes.

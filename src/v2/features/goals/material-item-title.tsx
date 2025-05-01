@@ -1,9 +1,10 @@
-﻿import { IMaterialRaid } from 'src/models/interfaces';
+﻿import { Warning } from '@mui/icons-material';
+import { Tooltip } from '@mui/material';
 import React from 'react';
+
+import { IMaterialRaid } from 'src/models/interfaces';
 import { CharacterImage } from 'src/shared-components/character-image';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
-import { Warning } from '@mui/icons-material';
-import { Tooltip } from '@mui/material';
 import { IUpgradeRaid } from 'src/v2/features/goals/goals.models';
 
 interface Props {

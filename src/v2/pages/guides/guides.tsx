@@ -1,9 +1,24 @@
-﻿import { Badge, Fab, Tab, Tabs } from '@mui/material';
+﻿import AddIcon from '@mui/icons-material/Add';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import { Badge, Fab, Tab, Tabs } from '@mui/material';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import { enqueueSnackbar } from 'notistack';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { useQueryState } from 'src/v2/hooks/query-state';
+import { isMobile } from 'react-device-detect';
+import { useSearchParams } from 'react-router-dom';
+
 import { useAuth } from 'src/contexts/auth';
 import { UserRole } from 'src/models/enums';
-import { ICreateGuide, IGetGuidesQueryParams, IGuide, IGuideFilter } from 'src/v2/features/guides/guides.models';
+import { StoreContext } from 'src/reducers/store.provider';
+import { Loader } from 'src/v2/components/loader';
+import { CreateGuideDialog } from 'src/v2/features/guides/components/create-guide.dialog';
+import { EditGuideDialog } from 'src/v2/features/guides/components/edit-guide.dialog';
+import { GuideCard } from 'src/v2/features/guides/components/guide-card';
+import { GuideView } from 'src/v2/features/guides/components/guide-view';
+import { GuidesFilter } from 'src/v2/features/guides/components/guides-filter';
+import { RejectReasonDialog } from 'src/v2/features/guides/components/reject-reason.dialog';
 import {
     approveTeamApi,
     createTeamApi,
@@ -13,23 +28,9 @@ import {
     removeHonorTeamApi,
     updateTeamApi,
 } from 'src/v2/features/guides/guides.endpoint';
-import { Loader } from 'src/v2/components/loader';
-import AddIcon from '@mui/icons-material/Add';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
-import { CreateGuideDialog } from 'src/v2/features/guides/components/create-guide.dialog';
-import { StoreContext } from 'src/reducers/store.provider';
-import { GuideCard } from 'src/v2/features/guides/components/guide-card';
-import { GuideView } from 'src/v2/features/guides/components/guide-view';
 import { GuidesGroup, GuidesStatus } from 'src/v2/features/guides/guides.enums';
-import { RejectReasonDialog } from 'src/v2/features/guides/components/reject-reason.dialog';
-import { enqueueSnackbar } from 'notistack';
-import { isMobile } from 'react-device-detect';
-import { EditGuideDialog } from 'src/v2/features/guides/components/edit-guide.dialog';
-import { GuidesFilter } from 'src/v2/features/guides/components/guides-filter';
-import { useSearchParams } from 'react-router-dom';
-import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
+import { ICreateGuide, IGetGuidesQueryParams, IGuide, IGuideFilter } from 'src/v2/features/guides/guides.models';
+import { useQueryState } from 'src/v2/hooks/query-state';
 
 export const Guides: React.FC = () => {
     const { characters, mows } = useContext(StoreContext);

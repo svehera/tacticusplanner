@@ -1,15 +1,18 @@
-﻿import React, { useState } from 'react';
-import { AgGridReact } from 'ag-grid-react';
+﻿import { Badge } from '@mui/material';
 import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import { sum } from 'lodash';
+import React, { useState } from 'react';
+
+import { Rarity } from 'src/models/enums';
+import { FlexBox } from 'src/v2/components/flex-box';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
+
 import { IGWZone } from './guild-war.models';
 
 import './bf-level-table.css';
-import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { FlexBox } from 'src/v2/components/flex-box';
-import { sum } from 'lodash';
-import { Rarity } from 'src/models/enums';
-import { Badge } from '@mui/material';
+
 export const BfLevelTable = ({ rows }: { rows: IGWZone[] }) => {
     const [columnDefs] = useState<Array<ColDef>>([
         {

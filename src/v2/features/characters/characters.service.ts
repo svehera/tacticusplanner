@@ -1,23 +1,23 @@
 ﻿import { groupBy, orderBy, sum } from 'lodash';
 
-import { ICharacter2, IPersonalCharacterData2 } from 'src/models/interfaces';
+import { charsUnlockShards } from 'src/models/constants';
 import { Rank, Rarity } from 'src/models/enums';
+import { ICharacter2, IPersonalCharacterData2 } from 'src/models/interfaces';
+import factionsData from 'src/v2/data/factions.json';
+import { rarityCaps } from 'src/v2/features/characters/characters.contants';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+import { isCharacter, isMow, isUnlocked } from 'src/v2/features/characters/units.functions';
+
+import { CharactersPowerService } from './characters-power.service';
+import { CharactersValueService } from './characters-value.service';
+import { IFaction, IMow, IUnit } from './characters.models';
 import { CharactersFilterBy } from './enums/characters-filter-by';
-import { needToAscendCharacter } from './functions/need-to-ascend';
-import { needToLevelCharacter } from './functions/need-to-level';
+import { CharactersOrderBy } from './enums/characters-order-by';
 import { filterChaos } from './functions/filter-by-chaos';
 import { filterImperial } from './functions/filter-by-imperial';
 import { filterXenos } from './functions/filter-by-xenos';
-import { CharactersOrderBy } from './enums/characters-order-by';
-import { IFaction, IMow, IUnit } from './characters.models';
-
-import factionsData from 'src/v2/data/factions.json';
-import { CharactersPowerService } from './characters-power.service';
-import { CharactersValueService } from './characters-value.service';
-import { rarityCaps } from 'src/v2/features/characters/characters.contants';
-import { isCharacter, isMow, isUnlocked } from 'src/v2/features/characters/units.functions';
-import { UnitType } from 'src/v2/features/characters/units.enums';
-import { charsUnlockShards } from 'src/models/constants';
+import { needToAscendCharacter } from './functions/need-to-ascend';
+import { needToLevelCharacter } from './functions/need-to-level';
 
 export class CharactersService {
     static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter: string | null): IUnit[] {

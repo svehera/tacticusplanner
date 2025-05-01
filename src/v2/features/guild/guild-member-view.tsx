@@ -1,10 +1,11 @@
-﻿import React from 'react';
+﻿import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { IconButton } from '@mui/material';
+import React from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
+
 import { IGuildMember } from 'src/models/interfaces';
 import { FlexBox } from 'src/v2/components/flex-box';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import { isMobile } from 'react-device-detect';
-import { IconButton } from '@mui/material';
-import { Link } from 'react-router-dom';
 
 interface Props {
     index: number;

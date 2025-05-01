@@ -1,11 +1,10 @@
-﻿import React, { ReactElement } from 'react';
+﻿import React from 'react';
+
 import { ICharacter2 } from 'src/models/interfaces';
-import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
 import { unsetCharacter } from 'src/v2/features/characters/characters.contants';
+import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
 
 import './team.scss';
-import { Conditional } from '@/fsd/5-shared/ui';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 
 type Props = {
     characters: ICharacter2[];

@@ -1,13 +1,14 @@
-﻿import xpData from 'src/v2/data/xp.json';
+﻿import { groupBy, mapValues, sum } from 'lodash';
+
+import { Alliance, Rarity } from 'src/models/enums';
+import abilitiesLvlUpJson from 'src/v2/data/characters-lvl-up-abilities.json';
+import xpData from 'src/v2/data/xp.json';
 import {
     ICharacterAbilitiesMaterialsTotal,
     ICharacterAbilityLevel,
     ICharacterAbilityLevelRaw,
     IXpLevel,
 } from 'src/v2/features/characters/characters.models';
-import abilitiesLvlUpJson from 'src/v2/data/characters-lvl-up-abilities.json';
-import { Alliance, Rarity } from 'src/models/enums';
-import { groupBy, mapValues, sum } from 'lodash';
 
 export class CharactersAbilitiesService {
     private static abilitiesLvlUpRaw: ICharacterAbilityLevelRaw[] = abilitiesLvlUpJson;

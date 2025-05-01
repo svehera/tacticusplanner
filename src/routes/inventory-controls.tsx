@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import ClearIcon from '@mui/icons-material/Clear';
 import { FormControl, InputAdornment } from '@mui/material';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import IconButton from '@mui/material/IconButton';
-import ClearIcon from '@mui/icons-material/Clear';
-import Button from '@mui/material/Button';
+import React, { useState } from 'react';
+
 import ViewSettings from 'src/routes/legendary-events/view-settings';
 
 interface Props {

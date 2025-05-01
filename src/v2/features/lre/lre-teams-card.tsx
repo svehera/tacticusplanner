@@ -1,16 +1,15 @@
-import React, { useContext, useEffect, useMemo, useRef } from 'react';
-
-import { AgGridReact } from 'ag-grid-react';
-
-import { ILegendaryEventSelectedRequirements, ILegendaryEventTrack, ILreTeam, LreTrackId } from 'src/models/interfaces';
-import { LegendaryEventEnum } from 'src/models/enums';
-
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import InfoIcon from '@mui/icons-material/Info';
 import { Card, CardContent, CardHeader, Checkbox, FormControlLabel } from '@mui/material';
+import { AgGridReact } from 'ag-grid-react';
+import React, { useContext, useEffect, useMemo, useRef } from 'react';
+
+import { LegendaryEventEnum } from 'src/models/enums';
+import { ILegendaryEventSelectedRequirements, ILegendaryEventTrack, ILreTeam, LreTrackId } from 'src/models/interfaces';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+import { TrackRequirementCheck } from 'src/v2/features/lre/track-requirement-check';
+
 import { LreTile } from './lre-tile';
 import { SelectedTeamCard } from './selected-teams-card';
-import { TrackRequirementCheck } from 'src/v2/features/lre/track-requirement-check';
 
 interface Props {
     track: ILegendaryEventTrack;

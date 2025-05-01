@@ -1,18 +1,24 @@
-﻿import { cloneDeep, groupBy, map, orderBy, sortBy, sum, sumBy, uniq } from 'lodash';
+﻿import { NearMe } from '@mui/icons-material';
+import { cloneDeep, groupBy, map, orderBy, sortBy, sum, sumBy, uniq } from 'lodash';
 
-import unitsData from '../assets/UnitData.json';
+import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
+import { IRankLookup } from 'src/v2/features/goals/goals.models';
+import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
-import whatsNew from '../assets/WhatsNew.json';
-import contributors from '../assets/contributors/thankYou.json';
 import contentCreators from '../assets/contributors/contentCreators.json';
-
-import battleData from '../assets/newBattleData.json';
+import contributors from '../assets/contributors/thankYou.json';
 import rawEquipmentData from '../assets/EquipmentData.json';
-import npcData from '../assets/NpcData.json';
+import battleData from '../assets/newBattleData.json';
 import newBattleData from '../assets/newBattleData.json';
-import recipeData from '../assets/recipeData.json';
+import npcData from '../assets/NpcData.json';
 import rankUpData from '../assets/rankUpData.json';
-
+import recipeData from '../assets/recipeData.json';
+import unitsData from '../assets/UnitData.json';
+import whatsNew from '../assets/WhatsNew.json';
+import { rarityStringToNumber, rarityToStars } from '../models/constants';
+import { Alliance, EquipmentClass, Faction, Rank, Rarity, RarityString } from '../models/enums';
 import {
     EquipmentType,
     ICampaignBattle,
@@ -36,15 +42,7 @@ import {
     IWhatsNew,
     UnitDataRaw,
 } from '../models/interfaces';
-import { Alliance, EquipmentClass, Faction, Rank, Rarity, RarityString } from '../models/enums';
-import { rarityStringToNumber, rarityToStars } from '../models/constants';
 import { getEnumValues, rankToString } from '../shared-logic/functions';
-import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
-import { IRankLookup } from 'src/v2/features/goals/goals.models';
-import { UnitType } from 'src/v2/features/characters/units.enums';
-import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
-import { NearMe } from '@mui/icons-material';
-import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
 
 export class StaticDataService {
     static readonly whatsNew: IWhatsNew = whatsNew;

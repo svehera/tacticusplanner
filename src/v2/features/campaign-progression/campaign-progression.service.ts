@@ -1,10 +1,9 @@
-import {
-    ICharacterAscendGoal,
-    ICharacterUnlockGoal,
-    ICharacterUpgradeMow,
-    ICharacterUpgradeRankGoal,
-    IRecipeExpandedUpgrade,
-} from 'src/v2/features/goals/goals.models';
+import { uniq } from 'lodash';
+
+import battleData from 'src/assets/newBattleData.json';
+import rankUpData from 'src/assets/rankUpData.json';
+import { charsUnlockShards } from 'src/models/constants';
+import { CampaignType, PersonalGoalType, Rarity } from 'src/models/enums';
 import {
     ICampaignBattleComposed,
     ICampaignsData,
@@ -12,6 +11,8 @@ import {
     IRankUpData,
     IRecipeData,
 } from 'src/models/interfaces';
+import { StaticDataService } from 'src/services/static-data.service';
+import recipeData from 'src/v2/data/recipeData.json';
 import {
     BattleSavings,
     CampaignFactionMapping,
@@ -21,16 +22,15 @@ import {
     GoalData,
     MaterialRequirements,
 } from 'src/v2/features/campaign-progression/campaign-progression.models';
-import { CampaignType, PersonalGoalType, Rarity } from 'src/models/enums';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
-import { uniq } from 'lodash';
-import { StaticDataService } from 'src/services/static-data.service';
+import {
+    ICharacterAscendGoal,
+    ICharacterUnlockGoal,
+    ICharacterUpgradeMow,
+    ICharacterUpgradeRankGoal,
+    IRecipeExpandedUpgrade,
+} from 'src/v2/features/goals/goals.models';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
-
-import rankUpData from 'src/assets/rankUpData.json';
-import recipeData from 'src/v2/data/recipeData.json';
-import battleData from 'src/assets/newBattleData.json';
-import { charsUnlockShards } from 'src/models/constants';
 
 export class CampaignsProgressionService {
     static readonly recipeData: IRecipeData = recipeData;

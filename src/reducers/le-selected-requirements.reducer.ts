@@ -1,10 +1,10 @@
-﻿import {
+﻿import { LegendaryEventEnum } from '../models/enums';
+import {
     ILegendaryEventSelectedRequirements,
     LegendaryEventData,
     LreTrackId,
     SetStateAction,
 } from '../models/interfaces';
-import { LegendaryEventEnum } from '../models/enums';
 
 export type LeSelectedRequirementsAction =
     | {

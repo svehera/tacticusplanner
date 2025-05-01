@@ -1,4 +1,7 @@
-﻿import {
+﻿import { sortBy, sum, uniqBy } from 'lodash';
+
+import { LegendaryEventEnum } from '../enums';
+import {
     ICharacter2,
     IChestMilestone,
     ILegendaryEvent,
@@ -8,8 +11,6 @@
     IPointsMilestone,
     ITableRow,
 } from '../interfaces';
-import { sortBy, sum, uniqBy } from 'lodash';
-import { LegendaryEventEnum } from '../enums';
 
 export abstract class LegendaryEventBase implements ILegendaryEvent {
     alpha: ILegendaryEventTrack;

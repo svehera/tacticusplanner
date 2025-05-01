@@ -1,12 +1,14 @@
-import React, { useEffect, useMemo } from 'react';
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { FullCharacter } from './full-character';
+import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import React, { useEffect, useMemo } from 'react';
+
 import { Faction, Rank, Rarity, RarityStars } from 'src/models/enums';
-import { DamageChart } from './damage-chart';
-import { StaticDataService } from 'src/services';
 import { EquipmentType, IEquipment } from 'src/models/interfaces';
+import { StaticDataService } from 'src/services';
 import { getImageUrl } from 'src/shared-logic/functions';
+
+import { DamageChart } from './damage-chart';
+import { FullCharacter } from './full-character';
 import { IEquipmentSpec } from './versus-interfaces';
 
 /**

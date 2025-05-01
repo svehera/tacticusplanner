@@ -1,6 +1,6 @@
-﻿import { IMenuOption } from 'src/v2/models/menu-option';
+﻿import { Faction } from 'src/models/enums';
 import { GameMode, GuildRaidBoss, GwMode, TaMode } from 'src/v2/features/teams/teams.enums';
-import { Faction } from 'src/models/enums';
+import { IMenuOption } from 'src/v2/models/menu-option';
 
 export const anyOption: IMenuOption = { label: 'Any', selected: false, value: 'any' };
 

@@ -1,19 +1,4 @@
-﻿import React, { useContext, useMemo, useRef, useState } from 'react';
-import { AgGridReact } from 'ag-grid-react';
-import {
-    CellClassParams,
-    ColDef,
-    ColGroupDef,
-    ICellRendererParams,
-    ITooltipParams,
-    ValueGetterParams,
-    AllCommunityModule,
-    themeBalham,
-} from 'ag-grid-community';
-
-import { ICharacter2, ILegendaryEventTrack, ILreTeam } from 'src/models/interfaces';
-import { LegendaryEventEnum, Rank } from 'src/models/enums';
-import {
+﻿import {
     Checkbox,
     Divider,
     FormControl,
@@ -27,22 +12,38 @@ import {
     SelectChangeEvent,
     TextField,
 } from '@mui/material';
-import { groupBy, map, sum, uniq } from 'lodash';
-import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-events.interfaces';
-import { StoreContext } from 'src/reducers/store.provider';
-import { CharacterTitle } from 'src/shared-components/character-title';
-import { getLegendaryEvent } from 'src/models/constants';
 import InputLabel from '@mui/material/InputLabel';
 import ListItemText from '@mui/material/ListItemText';
-import { CharacterImage } from 'src/shared-components/character-image';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import {
+    CellClassParams,
+    ColDef,
+    ColGroupDef,
+    ICellRendererParams,
+    ITooltipParams,
+    ValueGetterParams,
+    AllCommunityModule,
+    themeBalham,
+} from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import { groupBy, map, sum, uniq } from 'lodash';
+import React, { useContext, useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { getLegendaryEvent } from 'src/models/constants';
+import { LegendaryEventEnum, Rank } from 'src/models/enums';
+import { ICharacter2, ILegendaryEventTrack, ILreTeam } from 'src/models/interfaces';
+import { StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { CharacterImage } from 'src/shared-components/character-image';
+import { CharacterTitle } from 'src/shared-components/character-title';
 import { RankImage } from 'src/v2/components/images/rank-image';
-import { useQueryState } from 'src/v2/hooks/query-state';
-import { LreService } from 'src/v2/features/lre/lre.service';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { ILreProgressModel } from 'src/v2/features/lre/lre.models';
+import { LreService } from 'src/v2/features/lre/lre.service';
+import { useQueryState } from 'src/v2/hooks/query-state';
+
+import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-events.interfaces';
 
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>(

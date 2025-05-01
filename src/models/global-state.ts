@@ -1,4 +1,15 @@
-﻿import {
+﻿import { ILreProgressDto } from 'src/models/dto.interfaces';
+import mowsData from 'src/v2/data/mows.json';
+import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
+import { IMow, IMowDb, IMowStatic } from 'src/v2/features/characters/characters.models';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+
+import { StaticDataService } from '../services';
+
+import { defaultData, rankToLevel, rankToRarity, rarityStringToNumber, rarityToStars } from './constants';
+import { CharacterBias, LegendaryEventEnum, Rank, Rarity, RarityStars } from './enums';
+import {
     IAutoTeamsPreferences,
     ICampaignsProgress,
     ICharacter2,
@@ -18,15 +29,6 @@
     IViewPreferences,
     LegendaryEventData,
 } from './interfaces';
-import { StaticDataService } from '../services';
-import { CharacterBias, LegendaryEventEnum, Rank, Rarity, RarityStars } from './enums';
-import { defaultData, rankToLevel, rankToRarity, rarityStringToNumber, rarityToStars } from './constants';
-import { IMow, IMowDb, IMowStatic } from 'src/v2/features/characters/characters.models';
-import mowsData from 'src/v2/data/mows.json';
-import { UnitType } from 'src/v2/features/characters/units.enums';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
-import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
-import { ILreProgressDto } from 'src/models/dto.interfaces';
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;

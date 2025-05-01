@@ -1,9 +1,10 @@
 ﻿import React from 'react';
-import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
-import { IItemRaidLocation, IShardsRaid } from 'src/v2/features/goals/goals.models';
-import { CharacterImage } from 'src/shared-components/character-image';
+
 import { CampaignType } from 'src/models/enums';
+import { CharacterImage } from 'src/shared-components/character-image';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { IItemRaidLocation, IShardsRaid } from 'src/v2/features/goals/goals.models';
+import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
 
 interface Props {
     shardsRaid: IShardsRaid;

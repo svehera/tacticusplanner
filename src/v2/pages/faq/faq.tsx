@@ -1,11 +1,12 @@
-﻿import React from 'react';
-import faqData from 'src/v2/data/faq.json';
-import { IFaqItem } from 'src/v2/features/faq/faq.models';
+﻿import Box from '@mui/material/Box';
 import { groupBy, map } from 'lodash';
-import { FaqCategory } from 'src/v2/features/faq/faq-category';
-import Box from '@mui/material/Box';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
+
+import faqData from 'src/v2/data/faq.json';
+import { FaqCategory } from 'src/v2/features/faq/faq-category';
+import { IFaqItem } from 'src/v2/features/faq/faq.models';
 
 export const Faq = () => {
     const data: IFaqItem[] = faqData.items;

@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
-import { AgGridReact } from 'ag-grid-react';
-import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions, themeBalham } from 'ag-grid-community';
-import { ColDef } from 'ag-grid-community';
-
-import { ICharacterUnlockGoal, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
-
-import { CampaignData } from 'src/v2/features/campaign-progression/campaign-progression.models';
-import { IUnitData } from 'src/models/interfaces';
-
-import { StaticDataService } from 'src/services/static-data.service';
-
 import { ArrowForward } from '@mui/icons-material';
+import { ColDef, AllCommunityModule, ModuleRegistry, provideGlobalGridOptions, themeBalham  } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import React, { useState } from 'react';
+
+import { IUnitData } from 'src/models/interfaces';
+import { StaticDataService } from 'src/services/static-data.service';
 import { CharacterImage } from 'src/shared-components/character-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
+import { CampaignData } from 'src/v2/features/campaign-progression/campaign-progression.models';
+import { ICharacterUnlockGoal, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
 
 interface Props {
     campaignData: CampaignData;

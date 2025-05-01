@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { DamageType, Rank, Rarity, RarityStars } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
 import { MiscIcon } from 'src/v2/components/images/misc-image';

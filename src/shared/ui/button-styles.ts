@@ -1,4 +1,5 @@
 import { tv } from 'tailwind-variants';
+
 import { focusButtonStyles } from '@/shared/ui/primitive';
 
 export const buttonStyles = tv({

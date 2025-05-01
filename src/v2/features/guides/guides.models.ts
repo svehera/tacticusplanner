@@ -1,6 +1,7 @@
-﻿import { GameMode } from 'src/v2/features/teams/teams.enums';
+﻿import { UnitType } from 'src/v2/features/characters/units.enums';
+import { GameMode } from 'src/v2/features/teams/teams.enums';
+
 import { SlotType, GuidesGroup, GuidesStatus } from './guides.enums';
-import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export interface IGetGuidesQueryParams {
     group?: GuidesGroup;

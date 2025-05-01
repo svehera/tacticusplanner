@@ -1,4 +1,10 @@
-﻿import {
+﻿import { orderBy, uniq } from 'lodash';
+
+import campaignConfigs from 'src/assets/campaignConfigs.json';
+import newBattleData from 'src/assets/newBattleData.json';
+import recipeData from 'src/assets/recipeData.json';
+import { Alliance, Campaign, CampaignType, Faction, Rarity } from 'src/models/enums';
+import {
     ICampaignBattleComposed,
     ICampaignConfigs,
     ICampaignsData,
@@ -7,15 +13,8 @@
     IDropRate,
     IRecipeData,
 } from 'src/models/interfaces';
-
-import campaignConfigs from 'src/assets/campaignConfigs.json';
-import newBattleData from 'src/assets/newBattleData.json';
-import recipeData from 'src/assets/recipeData.json';
-
-import { Alliance, Campaign, CampaignType, Faction, Rarity } from 'src/models/enums';
-import { orderBy, uniq } from 'lodash';
-import { CampaignReleaseType } from 'src/v2/features/campaigns/campaigns.enums';
 import { campaignsList } from 'src/v2/features/campaigns/campaigns.constants';
+import { CampaignReleaseType } from 'src/v2/features/campaigns/campaigns.enums';
 
 export class CampaignsService {
     private static readonly campaignConfigs: ICampaignConfigs = campaignConfigs;

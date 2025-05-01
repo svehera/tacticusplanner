@@ -1,7 +1,11 @@
-﻿import React, { useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent, DialogTitle, Divider, FormControlLabel } from '@mui/material';
+﻿import { DialogActions, DialogContent, DialogTitle, Divider, FormControlLabel } from '@mui/material';
 import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import Dialog from '@mui/material/Dialog';
+import React, { useState } from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { CharacterBias, Rank, Rarity } from 'src/models/enums';
 import {
     IAutoTeamsPreferences,
     ICharacter2,
@@ -9,11 +13,8 @@ import {
     ILreViewSettings,
     IViewOption,
 } from 'src/models/interfaces';
-import Checkbox from '@mui/material/Checkbox';
-import { LreTile } from 'src/v2/features/lre/lre-tile';
-import { CharacterBias, Rank, Rarity } from 'src/models/enums';
-import { isMobile } from 'react-device-detect';
 import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
+import { LreTile } from 'src/v2/features/lre/lre-tile';
 
 interface Props {
     lreViewSettings: ILreViewSettings & ILreTileSettings;

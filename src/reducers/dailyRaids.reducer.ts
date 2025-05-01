@@ -1,10 +1,11 @@
-﻿import { IDailyRaids, IDailyRaidsFilters, SetStateAction } from '../models/interfaces';
-import { defaultData, idToCampaign } from '../models/constants';
-import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
+﻿import { campaignEventsLocations } from '@/v2/features/campaigns/campaigns.constants';
+import { CampaignsService } from '@/v2/features/goals/campaigns.service';
 import { TacticusCampaignProgress } from '@/v2/features/tacticus-integration/tacticus-integration.models';
 import { Campaign } from 'src/models/enums';
-import { CampaignsService } from '@/v2/features/goals/campaigns.service';
-import { campaignEventsLocations } from '@/v2/features/campaigns/campaigns.constants';
+import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
+
+import { defaultData, idToCampaign } from '../models/constants';
+import { IDailyRaids, IDailyRaidsFilters, SetStateAction } from '../models/interfaces';
 
 export type DailyRaidsAction =
     | {

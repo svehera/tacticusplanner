@@ -1,4 +1,12 @@
-﻿import {
+﻿import { v4 } from 'uuid';
+
+import { ILreBattleProgressDto, ILreProgressDto, ILreRequirementsProgressDto } from 'src/models/dto.interfaces';
+import { IMowDb } from 'src/v2/features/characters/characters.models';
+import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+
+import { defaultData, getLegendaryEvent } from '../models/constants';
+import { LegendaryEventEnum, LrePointsCategoryId, Rank } from '../models/enums';
+import {
     IAutoTeamsPreferences,
     ICampaignsProgress,
     IDailyRaids,
@@ -19,12 +27,6 @@
     ILreTeam,
     SelectedTeams,
 } from '../models/interfaces';
-import { v4 } from 'uuid';
-import { defaultData, getLegendaryEvent } from '../models/constants';
-import { LegendaryEventEnum, LrePointsCategoryId, Rank } from '../models/enums';
-import { IMowDb } from 'src/v2/features/characters/characters.models';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
-import { ILreBattleProgressDto, ILreProgressDto, ILreRequirementsProgressDto } from 'src/models/dto.interfaces';
 
 export class PersonalDataLocalStorage {
     private readonly storePrefix = 'tp-';

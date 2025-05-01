@@ -1,24 +1,25 @@
-﻿import React, { useEffect, useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent, DialogTitle, Step, StepLabel, Stepper, TextField } from '@mui/material';
+﻿import { DialogActions, DialogContent, DialogTitle, Step, StepLabel, Stepper, TextField } from '@mui/material';
 import Button from '@mui/material/Button';
-import { GameMode } from 'src/v2/features/teams/teams.enums';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { gameModesForGuides, gwSubModes, taSubModes } from 'src/v2/features/teams/teams.constants';
-import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
-import { isMobile } from 'react-device-detect';
-import { ICreateGuide, ITeamSlot } from 'src/v2/features/guides/guides.models';
-import { UnitType } from 'src/v2/features/characters/units.enums';
-import { SlotType } from 'src/v2/features/guides/guides.enums';
-import { TeamSlotEdit } from 'src/v2/features/guides/components/team-slot-edit';
-import { SelectTeamDialog } from 'src/v2/features/guides/components/select-team-dialog';
-import { RichTextEditor } from 'src/v2/components/inputs/rich-text-editor';
+import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
+import React, { useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
-import { LreModes } from 'src/v2/features/guides/components/lre-modes';
+
+import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
+import { RichTextEditor } from 'src/v2/components/inputs/rich-text-editor';
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+import { GuildRaidsModes } from 'src/v2/features/guides/components/gr-modes';
 import { GuidePreview } from 'src/v2/features/guides/components/guide-preview';
 import { IncursionModes } from 'src/v2/features/guides/components/incursion-modes';
-import { GuildRaidsModes } from 'src/v2/features/guides/components/gr-modes';
+import { LreModes } from 'src/v2/features/guides/components/lre-modes';
+import { SelectTeamDialog } from 'src/v2/features/guides/components/select-team-dialog';
+import { TeamSlotEdit } from 'src/v2/features/guides/components/team-slot-edit';
+import { SlotType } from 'src/v2/features/guides/guides.enums';
+import { ICreateGuide, ITeamSlot } from 'src/v2/features/guides/guides.models';
+import { gameModesForGuides, gwSubModes, taSubModes } from 'src/v2/features/teams/teams.constants';
+import { GameMode } from 'src/v2/features/teams/teams.enums';
 
 interface Props {
     onClose: () => void;

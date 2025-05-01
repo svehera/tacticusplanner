@@ -1,13 +1,16 @@
-﻿import React from 'react';
-import './dirty-dozen-table.css';
-import { IDirtyDozenChar } from './dirty-dozen.models';
+﻿import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
-import { Score } from 'src/v2/features/dirty-dozen/dirty-dozen-score';
-import { CharacterTitle } from 'src/shared-components/character-title';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { RankImage } from 'src/v2/components/images/rank-image';
+import React from 'react';
+
 import { ICharacter2 } from 'src/models/interfaces';
+import { CharacterTitle } from 'src/shared-components/character-title';
+import { RankImage } from 'src/v2/components/images/rank-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { Score } from 'src/v2/features/dirty-dozen/dirty-dozen-score';
+
+import { IDirtyDozenChar } from './dirty-dozen.models';
+
+import './dirty-dozen-table.css';
 
 interface Props {
     characters: ICharacter2[];

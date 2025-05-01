@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { DialogProps } from 'src/v2/models/dialog.props';
-import { updateTacticusApiKey } from './tacticus-integration.endpoints';
 import { enqueueSnackbar } from 'notistack';
-import { useLoader } from 'src/contexts/loader.context';
-import { Button, Checkbox, CheckboxGroup, Modal, TextField } from '@/shared/ui';
+import React, { useState } from 'react';
+
 import { useAuth } from '@/contexts/auth';
+import { Button, Checkbox, CheckboxGroup, Modal, TextField } from '@/shared/ui';
+import { useLoader } from 'src/contexts/loader.context';
+import { DialogProps } from 'src/v2/models/dialog.props';
+
+import { updateTacticusApiKey } from './tacticus-integration.endpoints';
 import { useSyncWithTacticus } from './useSyncWithTacticus';
 
 interface Props extends DialogProps {

@@ -1,4 +1,9 @@
-﻿import {
+﻿import { rarityToStars } from 'src/models/constants';
+import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
+import { IPersonalGoal } from 'src/models/interfaces';
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
+import {
     CharacterRaidGoalSelect,
     ICharacterAscendGoal,
     ICharacterRaidGoalSelectBase,
@@ -8,11 +13,6 @@
     ICharacterUpgradeRankGoal,
     IGoalEstimate,
 } from 'src/v2/features/goals/goals.models';
-import { IPersonalGoal } from 'src/models/interfaces';
-import { rarityToStars } from 'src/models/constants';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 
 export class GoalsService {
     static prepareGoals(

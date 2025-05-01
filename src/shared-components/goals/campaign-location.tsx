@@ -1,7 +1,8 @@
 ﻿import React, { useMemo } from 'react';
+
+import { Campaign } from 'src/models/enums';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
-import { Campaign } from 'src/models/enums';
 
 interface Props {
     location: ICampaignBattleComposed;

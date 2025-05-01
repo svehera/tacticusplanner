@@ -1,20 +1,21 @@
-﻿import React from 'react';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
-import { GameMode } from 'src/v2/features/teams/teams.enums';
-import { ICharacter2 } from 'src/models/interfaces';
-import { IMow } from 'src/v2/features/characters/characters.models';
+﻿import { DeleteForever, Edit } from '@mui/icons-material';
+import InfoIcon from '@mui/icons-material/Info';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import { DeleteForever, Edit } from '@mui/icons-material';
-import { TeamView } from 'src/v2/features/teams/components/team-view';
+import { sum } from 'lodash';
+import React from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { ICharacter2 } from 'src/models/interfaces';
+import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import InfoIcon from '@mui/icons-material/Info';
-import { getCompletionRateColor } from 'src/shared-logic/functions';
+import { IMow } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { sum } from 'lodash';
+import { TeamView } from 'src/v2/features/teams/components/team-view';
 import { allModes } from 'src/v2/features/teams/teams.constants';
-import { isMobile } from 'react-device-detect';
+import { GameMode } from 'src/v2/features/teams/teams.enums';
+import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
 interface Props {
     teams: IPersonalTeam[];

@@ -1,34 +1,33 @@
-﻿import React from 'react';
-
-import ListIcon from '@mui/icons-material/List';
-import InventoryIcon from '@mui/icons-material/Inventory';
-import HomeIcon from '@mui/icons-material/Home';
-import TrackChangesIcon from '@mui/icons-material/TrackChanges';
+﻿import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
-import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
-import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import EventRepeatIcon from '@mui/icons-material/EventRepeat';
-import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
+import HomeIcon from '@mui/icons-material/Home';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import ListIcon from '@mui/icons-material/List';
+import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import TableChartIcon from '@mui/icons-material/TableChart';
+import TrackChangesIcon from '@mui/icons-material/TrackChanges';
+import React from 'react';
 
-import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
-import { dirtyDozenMenuItem } from 'src/v2/pages/dirty-dozen/dirty-dozen.menu-item';
-import { insightsMenuItem } from 'src/v2/pages/insights/insights.menu-item';
-import { wyoMenuItem } from 'src/v2/pages/who-you-own/who-you-own.menu-item';
+import { guildApiMenuItem } from '@/v2/pages/guild-api/guild-api.menu-item';
 import { campaignProgressionMenuItem } from 'src/v2/pages/campaign-progression/campaign-progression.menu-item';
-import { guildWarOffenseMenuItem } from 'src/v2/pages/guild-war-offense/guild-war-offense.menu-item';
-import { guildWarDefenseMenuItem } from 'src/v2/pages/guild-war-defense/guild-war-defense.menu-item';
-import { guildWarZonesMenuItem } from 'src/v2/pages/guild-war-layout/guild-war-zones-menu.item';
+import { dirtyDozenMenuItem } from 'src/v2/pages/dirty-dozen/dirty-dozen.menu-item';
+import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
+import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';
 import { guildMenuItem } from 'src/v2/pages/guild/guild.menu-item';
 import { guildInsightsMenuItem } from 'src/v2/pages/guild-insights/guild-insights.menu-item';
-import { teamsMenuItem } from 'src/v2/pages/teams/teams.menu-item';
-import { mowLookupMenuItem } from 'src/v2/pages/mow-lookup/mow-lookup.menu-item';
-import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';
+import { guildWarDefenseMenuItem } from 'src/v2/pages/guild-war-defense/guild-war-defense.menu-item';
+import { guildWarZonesMenuItem } from 'src/v2/pages/guild-war-layout/guild-war-zones-menu.item';
+import { guildWarOffenseMenuItem } from 'src/v2/pages/guild-war-offense/guild-war-offense.menu-item';
+import { insightsMenuItem } from 'src/v2/pages/insights/insights.menu-item';
 import { activeLreMenuItems, inactiveLreMenuItems } from 'src/v2/pages/lre/lre.menu-item';
+import { mowLookupMenuItem } from 'src/v2/pages/mow-lookup/mow-lookup.menu-item';
 import { myProgressMenuItem } from 'src/v2/pages/my-progress/my-progress.menu-item';
-import { guildApiMenuItem } from '@/v2/pages/guild-api/guild-api.menu-item';
+import { teamsMenuItem } from 'src/v2/pages/teams/teams.menu-item';
+import { wyoMenuItem } from 'src/v2/pages/who-you-own/who-you-own.menu-item';
 
 export class MenuItemTP {
     constructor(

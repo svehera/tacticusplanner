@@ -1,12 +1,13 @@
-﻿import React from 'react';
-import HelpIcon from '@mui/icons-material/Help';
+﻿import HelpIcon from '@mui/icons-material/Help';
 import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
+import IconButton from '@mui/material/IconButton';
+import React from 'react';
+import { isMobile } from 'react-device-detect';
+
 import { BfLevelTable } from 'src/v2/features/guild-war/bf-level-table';
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
-import { isMobile } from 'react-device-detect';
-import IconButton from '@mui/material/IconButton';
 
 export const BattlefieldInfo: React.FC = () => {
     const [open, setOpen] = React.useState(false);

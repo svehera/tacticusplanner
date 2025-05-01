@@ -1,5 +1,5 @@
-﻿import React, { CSSProperties, MouseEventHandler } from 'react';
-import { Property } from 'csstype';
+﻿import { Property } from 'csstype';
+import React, { CSSProperties, MouseEventHandler } from 'react';
 import { isMobile } from 'react-device-detect';
 
 export const FlexBox = ({

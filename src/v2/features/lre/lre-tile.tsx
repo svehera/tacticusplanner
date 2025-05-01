@@ -1,11 +1,12 @@
-import React from 'react';
 import { Tooltip } from '@mui/material';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { ICharacter2, ILreTileSettings } from 'src/models/interfaces';
-import { CharacterBias, Rank } from 'src/models/enums';
+import React from 'react';
+
 import { pooEmoji, starEmoji } from 'src/models/constants';
+import { CharacterBias, Rank } from 'src/models/enums';
+import { ICharacter2, ILreTileSettings } from 'src/models/interfaces';
 import { CharacterImage } from 'src/shared-components/character-image';
+import { RankImage } from 'src/v2/components/images/rank-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
 
 interface Props {
     character: ICharacter2;

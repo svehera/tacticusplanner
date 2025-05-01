@@ -1,12 +1,15 @@
-﻿import React from 'react';
-import { CharacterBias, Rank } from '../models/enums';
-import { pooEmoji, starEmoji } from '../models/constants';
-import { CharacterImage } from './character-image';
-import { Tooltip } from '@mui/material';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
+﻿import { Tooltip } from '@mui/material';
+import React from 'react';
+
 import { RankImage } from 'src/v2/components/images/rank-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
+
+import { pooEmoji, starEmoji } from '../models/constants';
+import { CharacterBias, Rank } from '../models/enums';
+
+import { CharacterImage } from './character-image';
 
 export const CharacterTitle = ({
     character,

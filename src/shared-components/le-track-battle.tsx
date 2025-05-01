@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
 import { Checkbox } from '@mui/material';
-import { ILreBattleProgress, ILreBattleRequirementsProgress } from 'src/v2/features/lre/lre.models';
-import { ProgressState } from 'src/models/enums';
+import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { ProgressState } from 'src/models/enums';
+import { ILreBattleProgress, ILreBattleRequirementsProgress } from 'src/v2/features/lre/lre.models';
 
 interface Props {
     battle: ILreBattleProgress;

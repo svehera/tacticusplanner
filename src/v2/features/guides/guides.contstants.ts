@@ -1,17 +1,19 @@
-﻿import { IMenuOption } from 'src/v2/models/menu-option';
-import { LreCharacter } from './guides.enums';
+﻿import { capitalize, intersection } from 'lodash';
+
+import { ICharacter2, ILegendaryEvent } from 'src/models/interfaces';
+import { DanteLegendaryEvent } from 'src/models/legendary-events/dante.le';
 import { KharnLegendaryEvent } from 'src/models/legendary-events/kharn.le';
 import { MephistonLegendaryEvent } from 'src/models/legendary-events/mephiston.le';
+import { PatermineLegendaryEvent } from 'src/models/legendary-events/patermine.le';
 import { VitruviusLegendaryEvent } from 'src/models/legendary-events/vitruvius.le';
-import { GameMode } from 'src/v2/features/teams/teams.enums';
-import { allModes, gameModesForGuides } from 'src/v2/features/teams/teams.constants';
-import { ICharacter2, ILegendaryEvent } from 'src/models/interfaces';
+import mowsData from 'src/v2/data/mows.json';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter } from 'src/v2/features/characters/units.functions';
-import { capitalize, intersection } from 'lodash';
-import mowsData from 'src/v2/data/mows.json';
-import { DanteLegendaryEvent } from 'src/models/legendary-events/dante.le';
-import { PatermineLegendaryEvent } from 'src/models/legendary-events/patermine.le';
+import { allModes, gameModesForGuides } from 'src/v2/features/teams/teams.constants';
+import { GameMode } from 'src/v2/features/teams/teams.enums';
+import { IMenuOption } from 'src/v2/models/menu-option';
+
+import { LreCharacter } from './guides.enums';
 
 export const lreCharacters: IMenuOption[] = [
     {

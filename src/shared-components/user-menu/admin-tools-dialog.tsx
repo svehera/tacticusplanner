@@ -1,18 +1,17 @@
-﻿import React, { useState } from 'react';
-import Dialog from '@mui/material/Dialog';
+﻿import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import DownloadIcon from '@mui/icons-material/Download';
 import { DialogActions, DialogContent, DialogTitle, FormControl, Input } from '@mui/material';
-import Button from '@mui/material/Button';
-
 import Box from '@mui/material/Box';
-
-import { enqueueSnackbar } from 'notistack';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
+import { enqueueSnackbar } from 'notistack';
+import React, { useState } from 'react';
+
 import { changeUserRoleApi, getUsersApi, resetUserPasswordApi } from 'src/api/api-functions';
 import { IGetUser } from 'src/api/api-interfaces';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import DownloadIcon from '@mui/icons-material/Download';
-import IconButton from '@mui/material/IconButton';
 
 export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const [resetPasswordForm, setResetPasswordForm] = useState({

@@ -1,6 +1,7 @@
-﻿import React from 'react';
-import { FormControl, FormHelperText, MenuItem, Select } from '@mui/material';
+﻿import { FormControl, FormHelperText, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
+import React from 'react';
+
 import { CampaignsLocationsUsage } from 'src/models/enums';
 
 interface Props {

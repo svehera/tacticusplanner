@@ -1,20 +1,22 @@
-﻿import React, { useContext, useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+﻿import CampaignIcon from '@mui/icons-material/Campaign';
 import { Badge, Tooltip } from '@mui/material';
-import ThemeSwitch from '../../shared-components/theme-switch';
-import { UserMenu } from '../../shared-components/user-menu/user-menu';
-import { bmcLink, discordInvitationLink } from '../../models/constants';
-import CampaignIcon from '@mui/icons-material/Campaign';
-import { StoreContext } from '../../reducers/store.provider';
-import { WhatsNewDialog } from '../../shared-components/whats-new.dialog';
 import IconButton from '@mui/material/IconButton';
-import { DiscordIcon } from '../../shared-components/icons/discord.icon';
-import { Home } from '../../features/misc/home/home';
+import React, { useContext, useMemo, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { AddToHomeScreen } from '@/v2/features/pwa/addToHomeScreen';
+import { usePwaInstall } from '@/v2/hooks/usePwaInstall';
 import { menuItemById } from 'src/models/menu-items';
 import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
-import { usePwaInstall } from '@/v2/hooks/usePwaInstall';
-import { AddToHomeScreen } from '@/v2/features/pwa/addToHomeScreen';
-import { isMobile } from 'react-device-detect';
+
+import { Home } from '../../features/misc/home/home';
+import { bmcLink, discordInvitationLink } from '../../models/constants';
+import { StoreContext } from '../../reducers/store.provider';
+import { DiscordIcon } from '../../shared-components/icons/discord.icon';
+import ThemeSwitch from '../../shared-components/theme-switch';
+import { UserMenu } from '../../shared-components/user-menu/user-menu';
+import { WhatsNewDialog } from '../../shared-components/whats-new.dialog';
 
 export const MobileHome = () => {
     const { seenAppVersion } = useContext(StoreContext);

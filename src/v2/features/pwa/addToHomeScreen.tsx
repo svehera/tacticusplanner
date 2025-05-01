@@ -1,6 +1,7 @@
-import React from 'react';
-import { Button, Link, buttonStyles } from '@/shared/ui';
 import { XIcon } from 'lucide-react';
+import React from 'react';
+
+import { Button, Link, buttonStyles } from '@/shared/ui';
 
 interface Props {
     link: string;

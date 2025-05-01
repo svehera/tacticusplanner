@@ -1,5 +1,5 @@
-import React from 'react';
 import { CheckIcon, MinusIcon } from 'lucide-react';
+import React from 'react';
 import type {
     CheckboxGroupProps as CheckboxGroupPrimitiveProps,
     CheckboxProps as CheckboxPrimitiveProps,
@@ -13,6 +13,7 @@ import {
 import { tv } from 'tailwind-variants';
 
 import { cn } from '@/shared/lib/classes';
+
 import { Description, FieldError, Label } from './field';
 import { composeTailwindRenderProps } from './primitive';
 

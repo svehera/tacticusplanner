@@ -1,14 +1,3 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { Faction, Rank, Rarity, RarityStars } from 'src/models/enums';
-import { RankSelect } from 'src/shared-components/rank-select';
-import { StarsSelect } from 'src/shared-components/stars-select';
-import { getEnumValues, getImageUrl, useFitGridOnWindowResize } from 'src/shared-logic/functions';
-import { NpcPortrait } from '../tables/npc-portrait';
-import { StaticDataService } from 'src/services';
-import { FactionSelect } from './faction-select';
-import { NpcSelect } from './npc-select';
-import { StatCell } from '../characters/stat-cell';
-import { AgGridReact } from 'ag-grid-react';
 import {
     AllCommunityModule,
     ColDef,
@@ -18,9 +7,23 @@ import {
     ValueGetterParams,
     themeBalham,
 } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
+
+import { Faction, Rank, Rarity, RarityStars } from 'src/models/enums';
 import { INpcData } from 'src/models/interfaces';
+import { StaticDataService } from 'src/services';
+import { RankSelect } from 'src/shared-components/rank-select';
+import { StarsSelect } from 'src/shared-components/stars-select';
+import { getEnumValues, getImageUrl, useFitGridOnWindowResize } from 'src/shared-logic/functions';
 import { FactionImage } from 'src/v2/components/images/faction-image';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+
+import { StatCell } from '../characters/stat-cell';
+import { NpcPortrait } from '../tables/npc-portrait';
+
+import { FactionSelect } from './faction-select';
+import { NpcSelect } from './npc-select';
 
 export const NpcInfo: React.FC = () => {
     const gridRef = useRef<AgGridReact<INpcData>>(null);

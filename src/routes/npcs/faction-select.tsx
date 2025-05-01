@@ -1,5 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React from 'react';
+
 import { Faction } from 'src/models/enums';
 import { FactionImage } from 'src/v2/components/images/faction-image';
 

@@ -1,4 +1,7 @@
-﻿import { callApi } from './api.hook';
+﻿import { GenericAbortSignal } from 'axios';
+
+import { IPersonalData2 } from '../models/interfaces';
+
 import {
     ICharactersResponse,
     IErrorResponse,
@@ -8,8 +11,7 @@ import {
     IShareTokenResponse,
     IUserDataResponse,
 } from './api-interfaces';
-import { IPersonalData2 } from '../models/interfaces';
-import { GenericAbortSignal } from 'axios';
+import { callApi } from './api.hook';
 
 export const registerUser = (username: string, password: string) =>
     callApi<IRegistrationResponse, IErrorResponse>('POST', 'RegisterUser', { username, password } as any);

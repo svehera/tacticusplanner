@@ -1,9 +1,11 @@
-﻿import InputLabel from '@mui/material/InputLabel';
-import { FormControl, MenuItem, Select } from '@mui/material';
+﻿import { FormControl, MenuItem, Select } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import React from 'react';
+
+import { RankImage } from 'src/v2/components/images/rank-image';
+
 import { Rank } from '../models/enums';
 import { rankToString } from '../shared-logic/functions';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import React from 'react';
 
 export const RankSelect = ({
     rankValues,

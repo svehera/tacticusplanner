@@ -1,11 +1,12 @@
-﻿import { useTitle } from 'src/contexts/title.context';
-import { useQueryState } from 'src/v2/hooks/query-state';
+﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
+
+import { useTitle } from 'src/contexts/title.context';
+import { getLegendaryEvent } from 'src/models/constants';
 import { LegendaryEventEnum } from 'src/models/enums';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import { StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
 import { LreSection } from 'src/v2/features/lre/lre.models';
-import { getLegendaryEvent } from 'src/models/constants';
-import { StoreContext } from 'src/reducers/store.provider';
+import { useQueryState } from 'src/v2/hooks/query-state';
 
 export const useLre = () => {
     const { setHeaderTitle } = useTitle();

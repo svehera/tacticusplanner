@@ -1,9 +1,10 @@
-import React, { useCallback, useContext } from 'react';
-import { CampaignProgress } from 'src/v2/features/campaigns/campaign-progress';
 import { groupBy } from 'lodash';
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+import React, { useCallback, useContext } from 'react';
+
 import { Campaign } from 'src/models/enums';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import ViewSettings from 'src/routes/legendary-events/view-settings';
+import { CampaignProgress } from 'src/v2/features/campaigns/campaign-progress';
 import { ICampaignModel } from 'src/v2/features/campaigns/campaigns.models';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 

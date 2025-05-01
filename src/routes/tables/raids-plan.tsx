@@ -1,22 +1,23 @@
-﻿import React, { useEffect, useMemo } from 'react';
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+﻿import { Warning } from '@mui/icons-material';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import InfoIcon from '@mui/icons-material/Info';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import PendingIcon from '@mui/icons-material/Pending';
+import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
+import Button from '@mui/material/Button';
+import React, { useEffect, useMemo } from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { Inventory } from 'src/routes/inventory';
+import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
-import PendingIcon from '@mui/icons-material/Pending';
-import Button from '@mui/material/Button';
-import { isMobile } from 'react-device-detect';
-import { MaterialsTable } from 'src/v2/features/goals/materials-table';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { Warning } from '@mui/icons-material';
-import InfoIcon from '@mui/icons-material/Info';
-import { ShardsRaidsDayInput } from 'src/v2/features/goals/shards-raids-day-input';
-import { RaidsDayView } from 'src/v2/features/goals/raids-day-view';
 import { IEstimatedShards, IEstimatedUpgrades } from 'src/v2/features/goals/goals.models';
-import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import InventoryIcon from '@mui/icons-material/Inventory';
-import { Inventory } from 'src/routes/inventory';
+import { MaterialsTable } from 'src/v2/features/goals/materials-table';
+import { RaidsDayView } from 'src/v2/features/goals/raids-day-view';
+import { ShardsRaidsDayInput } from 'src/v2/features/goals/shards-raids-day-input';
 
 interface Props {
     estimatedShards: IEstimatedShards;

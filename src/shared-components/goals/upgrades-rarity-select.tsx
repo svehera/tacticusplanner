@@ -1,8 +1,9 @@
-﻿import React from 'react';
-import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
+﻿import { Info } from '@mui/icons-material';
+import React from 'react';
+
 import { Rarity, RarityString } from 'src/models/enums';
+import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { Info } from '@mui/icons-material';
 
 interface Props {
     upgradesRarity: Rarity[];

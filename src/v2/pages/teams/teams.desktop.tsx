@@ -1,18 +1,19 @@
-﻿import React, { useContext, useMemo } from 'react';
-import AddIcon from '@mui/icons-material/Add';
+﻿import AddIcon from '@mui/icons-material/Add';
+import LinkIcon from '@mui/icons-material/Link';
 import { Fab, TextField } from '@mui/material';
-import { AddTeamDialog } from 'src/v2/features/teams/components/add-team.dialog';
+import Button from '@mui/material/Button';
+import React, { useContext, useMemo } from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
+import { useDebounceValue } from 'usehooks-ts';
+
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
-import { TeamsGrid } from 'src/v2/features/teams/components/teams-grid';
+import { AddTeamDialog } from 'src/v2/features/teams/components/add-team.dialog';
 import { EditTeamDialog } from 'src/v2/features/teams/components/edit-team.dialog';
-import { useDebounceValue } from 'usehooks-ts';
+import { TeamsGrid } from 'src/v2/features/teams/components/teams-grid';
 import { allModes } from 'src/v2/features/teams/teams.constants';
-import { Link } from 'react-router-dom';
-import { isMobile } from 'react-device-detect';
-import LinkIcon from '@mui/icons-material/Link';
-import Button from '@mui/material/Button';
+import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
 export const Teams = () => {
     const dispatch = useContext(DispatchContext);

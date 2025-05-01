@@ -1,15 +1,14 @@
-﻿import React from 'react';
-import { FormControl, MenuItem, Select } from '@mui/material';
+﻿import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
+import React from 'react';
 
-import { FlexBox } from 'src/v2/components/flex-box';
-
+import ViewSettings from 'src/routes/legendary-events/view-settings';
 import { getEnumValues } from 'src/shared-logic/functions';
+import { FlexBox } from 'src/v2/components/flex-box';
 
 import { IViewControls } from '../characters.models';
 import { CharactersFilterBy } from '../enums/characters-filter-by';
 import { CharactersOrderBy } from '../enums/characters-order-by';
-import ViewSettings from 'src/routes/legendary-events/view-settings';
 
 export const ViewControls = ({
     viewControls,

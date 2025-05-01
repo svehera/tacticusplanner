@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useMemo, useRef } from 'react';
-
-import { AgGridReact } from 'ag-grid-react';
+import InfoIcon from '@mui/icons-material/Info';
+import Button from '@mui/material/Button';
 import {
     AllCommunityModule,
     CellClickedEvent,
@@ -10,6 +9,9 @@ import {
     RowClassParams,
     themeBalham,
 } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import React, { useContext, useEffect, useMemo, useRef } from 'react';
+import { isMobile } from 'react-device-detect';
 
 import {
     ICharacter2,
@@ -19,14 +21,10 @@ import {
     ITableRow,
     LreTrackId,
 } from 'src/models/interfaces';
-
-import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { isMobile } from 'react-device-detect';
-import InfoIcon from '@mui/icons-material/Info';
+import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
 import { LreTile } from 'src/v2/features/lre/lre-tile';
 import { SelectedTeamsTable } from 'src/v2/features/lre/selected-teams-table';
-import Button from '@mui/material/Button';
 import { TrackRequirementCheck } from 'src/v2/features/lre/track-requirement-check';
 
 interface Props {

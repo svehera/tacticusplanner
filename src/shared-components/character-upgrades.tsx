@@ -1,22 +1,23 @@
-﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
+﻿import { Info } from '@mui/icons-material';
 import { Checkbox, FormControlLabel, Popover } from '@mui/material';
 import Button from '@mui/material/Button';
-import { Info, Warning } from '@mui/icons-material';
-import { UpgradeImage } from './upgrade-image';
-import { StoreContext } from '../reducers/store.provider';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { cloneDeep } from 'lodash';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 
-import './character-upgrades.css';
-import { cloneDeep, groupBy } from 'lodash';
 import { Rank } from 'src/models/enums';
-import { IBaseUpgrade, ICraftedUpgrade, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
-import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+import { ICharacter2 } from 'src/models/interfaces';
 import { UpgradeControl } from 'src/shared-components/upgrade-control';
 import { findAndRemoveItem } from 'src/shared-logic/functions';
+import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { IBaseUpgrade, ICraftedUpgrade, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
+import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
-import { StaticDataService } from 'src/services';
-import { ICharacter2 } from 'src/models/interfaces';
-import { IUnit } from 'src/v2/features/characters/characters.models';
+
+import { StoreContext } from '../reducers/store.provider';
+
+import { UpgradeImage } from './upgrade-image';
+
+import './character-upgrades.css';
 
 interface Props {
     character: ICharacter2;

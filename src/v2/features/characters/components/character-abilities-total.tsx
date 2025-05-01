@@ -1,9 +1,10 @@
-﻿import React from 'react';
+﻿import { Badge } from '@mui/material';
+import React from 'react';
+
 import { Rarity } from 'src/models/enums';
-import { Badge } from '@mui/material';
 import { BadgeImage } from 'src/v2/components/images/badge-image';
-import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
 import { ICharacterAbilitiesMaterialsTotal } from 'src/v2/features/characters/characters.models';
+import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
 
 export const CharacterAbilitiesTotal: React.FC<ICharacterAbilitiesMaterialsTotal> = ({ gold, badges, alliance }) => {
     return (

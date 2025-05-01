@@ -1,4 +1,5 @@
 ﻿import { useCallback, useContext, useEffect, useState } from 'react';
+
 import { SearchParamsStateContext } from 'src/contexts/search-params.context';
 
 type NullableString = string | null | undefined;

@@ -1,7 +1,7 @@
-﻿import React from 'react';
-import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
+﻿import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
