@@ -13,6 +13,7 @@ import { menuItemById } from 'src/models/menu-items';
 import { StoreContext } from 'src/reducers/store.provider';
 
 import { useAuth } from '@/fsd/5-shared/model';
+import { getImageUrl } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -30,7 +31,11 @@ export const DesktopHome = () => {
     const nextLeMenuItem = CharactersService.activeLre;
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
-    const eventsCalendarUrl = 'https://tacticucplannerstorage.blob.core.windows.net/files/events-calendar.png';
+
+    const calendarUrls: { current?: string; next?: string } = {
+        current: getImageUrl('calendar/calendar_20250330.png'),
+        next: getImageUrl('calendar/calendar_20250504.png'),
+    };
 
     const topPriorityGoal = goals[0];
     const unlockGoals = goals.filter(x => x.type === PersonalGoalType.Unlock).length;
@@ -216,9 +221,31 @@ export const DesktopHome = () => {
 
                 <div>
                     <h3 style={{ textAlign: 'center' }}>Events calendar</h3>
-                    <Zoom>
-                        <img src={eventsCalendarUrl} alt="Events Calendar" width={350} height={280} />
-                    </Zoom>
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            justifyContent: 'center',
+                            gap: 10,
+                        }}>
+                        {!!calendarUrls.current && (
+                            <div>
+                                {!!calendarUrls.next && <h4 style={{ textAlign: 'center' }}>Current Season</h4>}
+                                <Zoom>
+                                    <img src={calendarUrls.current} alt="Events Calendar" width={350} height={280} />
+                                </Zoom>
+                            </div>
+                        )}
+
+                        {!!calendarUrls.next && (
+                            <div>
+                                <h4 style={{ textAlign: 'center' }}>Next Season</h4>
+                                <Zoom>
+                                    <img src={calendarUrls.next} alt="Next Calendar" width={350} height={280} />
+                                </Zoom>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
