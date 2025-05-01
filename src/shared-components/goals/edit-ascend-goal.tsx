@@ -9,6 +9,7 @@ import { NumbersInput } from 'src/shared-components/goals/numbers-input';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { StarsSelect } from 'src/shared-components/stars-select';
 import { getEnumValues } from 'src/shared-logic/functions';
+
 import { ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
 
 interface Props {

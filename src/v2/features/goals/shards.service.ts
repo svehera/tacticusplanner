@@ -4,6 +4,7 @@ import { charsProgression, charsUnlockShards, rarityToStars } from 'src/models/c
 import { Alliance, Campaign, CampaignsLocationsUsage, CampaignType, PersonalGoalType, Rarity } from 'src/models/enums';
 import { ICampaignBattleComposed, ICampaignsProgress } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
+
 import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaigns.constants';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import {

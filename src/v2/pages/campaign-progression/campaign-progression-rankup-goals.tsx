@@ -1,5 +1,5 @@
 import { ArrowForward } from '@mui/icons-material';
-import { ColDef, AllCommunityModule, themeBalham  } from 'ag-grid-community';
+import { ColDef, AllCommunityModule, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 
@@ -9,6 +9,7 @@ import { StaticDataService } from 'src/services/static-data.service';
 import { CharacterImage } from 'src/shared-components/character-image';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { RankImage } from 'src/v2/components/images/rank-image';
+
 import { CampaignData } from 'src/v2/features/campaign-progression/campaign-progression.models';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from 'src/v2/features/goals/goals.models';
 

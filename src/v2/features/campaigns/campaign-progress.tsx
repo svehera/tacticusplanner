@@ -5,6 +5,7 @@ import { useDebounceCallback } from 'usehooks-ts';
 
 import { ICharacter2 } from 'src/models/interfaces';
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
+
 import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
 
 import { CampaignDifficulty } from './campaigns.enums';

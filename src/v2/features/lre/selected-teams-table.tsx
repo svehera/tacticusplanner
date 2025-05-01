@@ -14,6 +14,7 @@ import { isMobile } from 'react-device-detect';
 import { ICharacter2, ILegendaryEventTrack, ILegendaryEventTrackRequirement, ITableRow } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
 import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
+
 import { LreTile } from 'src/v2/features/lre/lre-tile';
 
 interface Props {

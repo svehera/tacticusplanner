@@ -7,6 +7,7 @@ import { isMobile } from 'react-device-detect';
 
 import { StoreContext } from 'src/reducers/store.provider';
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
+
 import { CampaignData } from 'src/v2/features/campaign-progression/campaign-progression.models';
 import { CampaignsProgressionService } from 'src/v2/features/campaign-progression/campaign-progression.service';
 import {
@@ -16,6 +17,7 @@ import {
     ICharacterAscendGoal,
 } from 'src/v2/features/goals/goals.models';
 import { GoalsService } from 'src/v2/features/goals/goals.service';
+
 import { CampaignProgressionAscensionGoals } from 'src/v2/pages/campaign-progression/campaign-progression-ascension-goals';
 import { CampaignProgressionHeader } from 'src/v2/pages/campaign-progression/campaign-progression-header';
 import { CampaignProgressionMaterialGoals } from 'src/v2/pages/campaign-progression/campaign-progression-material-goals';

@@ -16,6 +16,8 @@ import { GoalsTable } from 'src/routes/goals/goals-table';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
+
 import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';
 import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
 import { IUnit } from 'src/v2/features/characters/characters.models';
@@ -24,7 +26,6 @@ import { GoalsService } from 'src/v2/features/goals/goals.service';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
-import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
 
 export const Goals = () => {
     const {

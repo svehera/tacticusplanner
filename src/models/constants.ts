@@ -5,6 +5,7 @@ import { KharnLegendaryEvent } from 'src/models/legendary-events/kharn.le';
 import { MephistonLegendaryEvent } from 'src/models/legendary-events/mephiston.le';
 import { PatermineLegendaryEvent } from 'src/models/legendary-events/patermine.le';
 import { UnknownLegendaryEvent } from 'src/models/legendary-events/unknown';
+
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
 import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';

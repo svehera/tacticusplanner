@@ -3,6 +3,7 @@ import { AgGridReact } from 'ag-grid-react';
 import React, { useState, useEffect } from 'react';
 
 import { IGuildMember } from '@/models/interfaces';
+
 import { getTacticusGuildData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
 import { mapUserIdToName } from '@/v2/features/tacticus-integration/user-id-mapper';
 

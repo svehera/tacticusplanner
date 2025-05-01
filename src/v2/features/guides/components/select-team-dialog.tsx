@@ -9,13 +9,14 @@ import { useDebounceValue } from 'usehooks-ts';
 
 import { Alliance } from 'src/models/enums';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
+import { IMenuOption } from 'src/v2/models/menu-option';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 import { TeamSlotEdit } from 'src/v2/features/guides/components/team-slot-edit';
 import { UnitsGrid } from 'src/v2/features/guides/components/units-grid';
 import { SlotType } from 'src/v2/features/guides/guides.enums';
 import { ITeamSlot } from 'src/v2/features/guides/guides.models';
-import { IMenuOption } from 'src/v2/models/menu-option';
 
 type Props = {
     units: IUnit[];

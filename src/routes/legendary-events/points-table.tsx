@@ -21,8 +21,9 @@ import { CharacterTitle } from 'src/shared-components/character-title';
 import { useLreProgress } from 'src/shared-components/le-progress.hooks';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { LreService } from 'src/v2/features/lre/lre.service';
 import { useQueryState } from 'src/v2/hooks/query-state';
+
+import { LreService } from 'src/v2/features/lre/lre.service';
 
 import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-events.interfaces';
 

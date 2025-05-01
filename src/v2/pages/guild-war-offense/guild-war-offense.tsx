@@ -6,7 +6,6 @@ import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
-import { Conditional } from '@/fsd/5-shared/ui';
 import { Rank, Rarity } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
@@ -17,6 +16,9 @@ import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { Loader } from 'src/v2/components/loader';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { Conditional } from '@/fsd/5-shared/ui';
+
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';

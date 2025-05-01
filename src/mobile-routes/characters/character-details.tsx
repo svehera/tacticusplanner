@@ -10,6 +10,7 @@ import { getEnumValues, rankToString, rarityStarsToString } from 'src/shared-log
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
+
 import { IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
 
 export const CharacterDetails = ({

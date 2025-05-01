@@ -6,6 +6,7 @@ import { ICharacter2 } from 'src/models/interfaces';
 import { CharacterTitle } from 'src/shared-components/character-title';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
+
 import { Score } from 'src/v2/features/dirty-dozen/dirty-dozen-score';
 
 import { IDirtyDozenChar } from './dirty-dozen.models';

@@ -25,6 +25,7 @@ import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { WarZoneBuffImage } from 'src/v2/components/images/war-zone-buff-image';
 import { Loader } from 'src/v2/components/loader';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
 import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';

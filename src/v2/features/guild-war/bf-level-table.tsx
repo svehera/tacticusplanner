@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { Rarity } from 'src/models/enums';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
+
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 
 import { IGWZone } from './guild-war.models';

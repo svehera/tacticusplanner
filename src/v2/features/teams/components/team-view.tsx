@@ -3,6 +3,7 @@ import React from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { ICharacter2 } from 'src/models/interfaces';
+
 import { IMow, IUnit } from 'src/v2/features/characters/characters.models';
 import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
 import { EmptyTile } from 'src/v2/features/characters/components/empty-tile';

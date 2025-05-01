@@ -11,6 +11,7 @@ import { LreTrackId } from 'src/models/interfaces';
 import { LreTrackBattleSummary } from 'src/shared-components/le-track-battle';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { LreReqImage } from 'src/v2/components/images/lre-req-image';
+
 import { ILreTrackProgress } from 'src/v2/features/lre/lre.models';
 
 interface Props {

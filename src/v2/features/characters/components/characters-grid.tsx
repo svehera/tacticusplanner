@@ -2,6 +2,7 @@
 import { isMobile } from 'react-device-detect';
 
 import { Conditional } from '@/fsd/5-shared/ui';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { MowTile } from 'src/v2/features/characters/components/mow-tile';
 import { UnitType } from 'src/v2/features/characters/units.enums';

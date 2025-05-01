@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter } from 'src/v2/features/characters/units.functions';
 import { SlotType } from 'src/v2/features/guides/guides.enums';

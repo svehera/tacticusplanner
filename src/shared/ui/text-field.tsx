@@ -1,4 +1,3 @@
-import type { TextInputDOMProps } from '@react-types/shared';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import React, { useState } from 'react';
 import {
@@ -6,6 +5,8 @@ import {
     TextField as TextFieldPrimitive,
     type TextFieldProps as TextFieldPrimitiveProps,
 } from 'react-aria-components';
+
+import type { TextInputDOMProps } from '@react-types/shared';
 
 import type { FieldProps } from './field';
 import { Description, FieldError, FieldGroup, Input, Label } from './field';

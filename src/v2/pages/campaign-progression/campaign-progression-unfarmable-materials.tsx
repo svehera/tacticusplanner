@@ -6,6 +6,7 @@ import React from 'react';
 
 import { StaticDataService } from 'src/services/static-data.service';
 import { CharacterImage } from 'src/shared-components/character-image';
+
 import { CampaignData, CampaignsProgressData } from 'src/v2/features/campaign-progression/campaign-progression.models';
 
 interface Props {

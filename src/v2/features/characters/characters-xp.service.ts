@@ -1,4 +1,5 @@
 ﻿import xpData from 'src/v2/data/xp.json';
+
 import { IXpEstimate, IXpLevel } from 'src/v2/features/characters/characters.models';
 
 export class CharactersXpService {

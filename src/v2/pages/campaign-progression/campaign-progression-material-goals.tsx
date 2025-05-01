@@ -1,6 +1,6 @@
 import { ArrowForward } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
-import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions, themeBalham, ColDef  } from 'ag-grid-community';
+import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions, themeBalham, ColDef } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -12,6 +12,7 @@ import { CharacterImage } from 'src/shared-components/character-image';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
+
 import {
     BattleSavings,
     CampaignData,

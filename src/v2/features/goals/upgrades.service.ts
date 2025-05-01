@@ -16,6 +16,7 @@ import {
 } from 'src/models/interfaces';
 import { getEnumValues, rankToString } from 'src/shared-logic/functions';
 import recipeData from 'src/v2/data/recipeData.json';
+
 import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaigns.constants';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import {

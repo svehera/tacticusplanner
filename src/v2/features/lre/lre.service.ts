@@ -3,6 +3,7 @@ import { orderBy, sum } from 'lodash';
 import { ILreBattleProgressDto, ILreOverviewDto, ILreProgressDto } from 'src/models/dto.interfaces';
 import { LegendaryEventEnum, LrePointsCategoryId, ProgressState } from 'src/models/enums';
 import { ILegendaryEvent, LreTrackId } from 'src/models/interfaces';
+
 import {
     ILreBattleProgress,
     ILreBattleRequirementsProgress,

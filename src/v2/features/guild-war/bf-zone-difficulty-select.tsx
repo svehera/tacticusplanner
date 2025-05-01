@@ -6,6 +6,7 @@ import { Difficulty, Rarity } from 'src/models/enums';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { DifficultyImage } from 'src/v2/components/images/difficulty-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
+
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 
 type Props = {

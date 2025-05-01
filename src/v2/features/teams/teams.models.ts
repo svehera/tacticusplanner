@@ -1,6 +1,7 @@
 ﻿import { v4 } from 'uuid';
 
 import { Rarity } from 'src/models/enums';
+
 import { GameMode } from 'src/v2/features/teams/teams.enums';
 
 export interface IPersonalTeam {

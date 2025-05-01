@@ -5,8 +5,9 @@ import { getLegendaryEvent } from 'src/models/constants';
 import { LegendaryEventEnum } from 'src/models/enums';
 import { StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { LreSection } from 'src/v2/features/lre/lre.models';
 import { useQueryState } from 'src/v2/hooks/query-state';
+
+import { LreSection } from 'src/v2/features/lre/lre.models';
 
 export const useLre = () => {
     const { setHeaderTitle } = useTitle();

@@ -16,6 +16,7 @@ import { Rarity } from 'src/models/enums';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
+
 import { ICharacterUpgradeEstimate } from 'src/v2/features/goals/goals.models';
 
 interface Props {

@@ -3,6 +3,7 @@
 import { Alliance, Rarity } from 'src/models/enums';
 import mowCommonMaterial from 'src/v2/data/mow-lvl-up-common.json';
 import mowUpgradesRaw from 'src/v2/data/mows-upgrades.json';
+
 import { IMow } from 'src/v2/features/characters/characters.models';
 import { IBaseUpgrade, ICraftedUpgrade, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';

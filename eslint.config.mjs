@@ -1,15 +1,16 @@
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import * as pluginImportX from 'eslint-plugin-import-x';
-import react from 'eslint-plugin-react';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import reactCompiler from 'eslint-plugin-react-compiler';
-import prettier from 'eslint-plugin-prettier';
-import globals from 'globals';
-import tsParser from '@typescript-eslint/parser';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import js from '@eslint/js';
+
 import { FlatCompat } from '@eslint/eslintrc';
+import js from '@eslint/js';
+import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import * as pluginImportX from 'eslint-plugin-import-x';
+import prettier from 'eslint-plugin-prettier';
+import react from 'eslint-plugin-react';
+import reactCompiler from 'eslint-plugin-react-compiler';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import globals from 'globals';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,6 +19,17 @@ const compat = new FlatCompat({
     recommendedConfig: js.configs.recommended,
     allConfig: js.configs.all,
 });
+
+const FS_LAYERS = [
+    'app',
+    'pages',
+    'widgets',
+    'features',
+    'entities',
+    'shared',
+];
+
+const REVERSED_FS_LAYERS = [...FS_LAYERS].reverse();
 
 export default [
     ...compat.extends(
@@ -68,25 +80,25 @@ export default [
             '@typescript-eslint/no-unused-vars': ['warn'],
             'react-refresh/only-export-components': 'error',
             'react-compiler/react-compiler': 'error',
-            "import-x/order": [
+            'import-x/order': [
             2,
             {
                 alphabetize: {
                     order: 'asc',
                     caseInsensitive: true,
                 },
-                pathGroupsExcludedImportTypes: ["builtin"],
-                groups: ["builtin", "external", "internal", "parent", "sibling", "index"],
+                pathGroupsExcludedImportTypes: ['builtin'],
+                groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
 
                 // experimental features
                 'newlines-between': 'always',
-                // pathGroups: REVERSED_FS_LAYERS.map(
-                //     (layer) => ({
-                //         pattern: `**/?(*)${layer}{,/**}`,
-                //         group: "internal",
-                //         position: "after",
-                //     }),
-                // ),
+                pathGroups: REVERSED_FS_LAYERS.map(
+                    (layer) => ({
+                        pattern: `**/?(*)${layer}{,/**}`,
+                        group: 'internal',
+                        position: 'after',
+                    }),
+                ),
             },
         ],
         },

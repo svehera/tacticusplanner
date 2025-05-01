@@ -5,6 +5,7 @@ import React, { useEffect, useMemo } from 'react';
 
 import { Alliance } from 'src/models/enums';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
+
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 

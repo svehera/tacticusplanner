@@ -5,6 +5,7 @@ import { CampaignLocation } from 'src/shared-components/goals/campaign-location'
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
+
 import { IItemRaidLocation, IShardsRaid } from 'src/v2/features/goals/goals.models';
 import { ShardItemTitle } from 'src/v2/features/goals/shard-item-title';
 

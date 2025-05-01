@@ -1,5 +1,6 @@
 ﻿import { ILreProgressDto } from 'src/models/dto.interfaces';
 import mowsData from 'src/v2/data/mows.json';
+
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { IMow, IMowDb, IMowStatic } from 'src/v2/features/characters/characters.models';
 import { UnitType } from 'src/v2/features/characters/units.enums';

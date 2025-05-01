@@ -1,6 +1,7 @@
 ﻿import { rankToLevel } from 'src/models/constants';
 import { Rank } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 

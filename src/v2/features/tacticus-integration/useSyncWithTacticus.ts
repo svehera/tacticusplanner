@@ -3,6 +3,7 @@ import { useContext } from 'react';
 
 import { useLoader } from '@/contexts/loader.context';
 import { DispatchContext } from '@/reducers/store.provider';
+
 import { getTacticusPlayerData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
 
 export const useSyncWithTacticus = () => {

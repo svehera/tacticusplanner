@@ -20,6 +20,8 @@ import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import {
     CharacterRaidGoalSelect,
@@ -30,7 +32,6 @@ import {
 import { ShardsService } from 'src/v2/features/goals/shards.service';
 import { XpTotal } from 'src/v2/features/goals/xp-total';
 import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
-import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
 
 interface Props {
     rows: CharacterRaidGoalSelect[];

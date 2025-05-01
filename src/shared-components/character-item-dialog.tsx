@@ -5,13 +5,15 @@ import Dialog from '@mui/material/Dialog';
 import React, { useContext, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { Conditional } from '@/fsd/5-shared/ui';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
+
+import { Conditional } from '@/fsd/5-shared/ui';
+
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
 import { IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
-import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
 
 import { CharacterDetails } from '../mobile-routes/characters/character-details';
 import { ICharacter2 } from '../models/interfaces';

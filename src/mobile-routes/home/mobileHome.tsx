@@ -5,10 +5,11 @@ import React, { useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { AddToHomeScreen } from '@/v2/features/pwa/addToHomeScreen';
 import { usePwaInstall } from '@/v2/hooks/usePwaInstall';
 import { menuItemById } from 'src/models/menu-items';
 import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
+
+import { AddToHomeScreen } from '@/v2/features/pwa/addToHomeScreen';
 
 import { Home } from '../../features/misc/home/home';
 import { bmcLink, discordInvitationLink } from '../../models/constants';

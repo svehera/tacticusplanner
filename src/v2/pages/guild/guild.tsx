@@ -7,12 +7,14 @@ import React, { useContext, useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
-import { Conditional } from '@/fsd/5-shared/ui';
 import { IGuildMember } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { Loader } from 'src/v2/components/loader';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { Conditional } from '@/fsd/5-shared/ui';
+
 import { GuildMemberInput } from 'src/v2/features/guild/guild-member-input';
 import { GuildMemberView } from 'src/v2/features/guild/guild-member-view';
 import { useValidateGuildMembers } from 'src/v2/features/guild/guild.endpoint';

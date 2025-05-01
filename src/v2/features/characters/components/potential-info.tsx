@@ -12,6 +12,7 @@ import { FlexBox } from 'src/v2/components/flex-box';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
+
 import { rarityCaps } from 'src/v2/features/characters/characters.contants';
 import { IRarityCap } from 'src/v2/features/characters/characters.models';
 

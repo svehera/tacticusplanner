@@ -18,8 +18,9 @@ import { isMobile } from 'react-device-detect';
 import { ICharacter2, ILegendaryEvent, ILreTeam, LreTrackId } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
-import { LreTile } from 'src/v2/features/lre/lre-tile';
 import { IMenuOption } from 'src/v2/models/menu-option';
+
+import { LreTile } from 'src/v2/features/lre/lre-tile';
 
 interface Props {
     lre: ILegendaryEvent;

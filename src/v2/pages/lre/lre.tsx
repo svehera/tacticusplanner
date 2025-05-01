@@ -12,9 +12,11 @@ import { LegendaryEvent } from 'src/routes/legendary-events/legendary-event';
 import PointsTable from 'src/routes/legendary-events/points-table';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 import { LeProgress } from 'src/shared-components/le-progress';
+
 import { LreSectionsSettings } from 'src/v2/features/lre/lre-sections-settings';
 import { LreSettings } from 'src/v2/features/lre/lre-settings';
 import { LreSection } from 'src/v2/features/lre/lre.models';
+
 import { useLre } from 'src/v2/pages/lre/lre-hook';
 
 export const Lre: React.FC = () => {

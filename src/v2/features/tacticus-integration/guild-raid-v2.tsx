@@ -5,8 +5,9 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { IGuildMember } from '@/models/interfaces';
 import { ITableRow } from '@/routes/legendary-events/legendary-events.interfaces';
 import { RarityImage } from '@/v2/components/images/rarity-image';
-import { getTacticusGuildRaidData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
 import { Rarity } from 'src/models/enums';
+
+import { getTacticusGuildRaidData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
 
 import {
     TacticusDamageType,

@@ -13,6 +13,8 @@ import { useAuth } from 'src/contexts/auth';
 import { UserRole } from 'src/models/enums';
 import { StoreContext } from 'src/reducers/store.provider';
 import { Loader } from 'src/v2/components/loader';
+import { useQueryState } from 'src/v2/hooks/query-state';
+
 import { CreateGuideDialog } from 'src/v2/features/guides/components/create-guide.dialog';
 import { EditGuideDialog } from 'src/v2/features/guides/components/edit-guide.dialog';
 import { GuideCard } from 'src/v2/features/guides/components/guide-card';
@@ -30,7 +32,6 @@ import {
 } from 'src/v2/features/guides/guides.endpoint';
 import { GuidesGroup, GuidesStatus } from 'src/v2/features/guides/guides.enums';
 import { ICreateGuide, IGetGuidesQueryParams, IGuide, IGuideFilter } from 'src/v2/features/guides/guides.models';
-import { useQueryState } from 'src/v2/hooks/query-state';
 
 export const Guides: React.FC = () => {
     const { characters, mows } = useContext(StoreContext);

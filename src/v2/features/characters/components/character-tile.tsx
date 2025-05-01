@@ -11,10 +11,11 @@ import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
+
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
 
 import './character-tile.css';
 

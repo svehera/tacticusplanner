@@ -9,6 +9,7 @@ import { ICharacter2 } from 'src/models/interfaces';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
+
 import { IMow } from 'src/v2/features/characters/characters.models';
 import { SelectTeamDialog } from 'src/v2/features/teams/components/select-team-dialog';
 import { TeamView } from 'src/v2/features/teams/components/team-view';

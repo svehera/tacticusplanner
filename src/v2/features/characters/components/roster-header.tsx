@@ -1,12 +1,14 @@
 ﻿import { TextField } from '@mui/material';
 import React, { useContext } from 'react';
 
-import { Conditional } from '@/fsd/5-shared/ui';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
+
+import { Conditional } from '@/fsd/5-shared/ui';
+
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 
 import { InfoBox } from './info-box';
 

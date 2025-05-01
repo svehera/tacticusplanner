@@ -8,6 +8,7 @@ import { PlanGuildWarRoutes } from 'src/mobile-routes/events/guildWarRoutes';
 import { PlanLeRoutes } from 'src/mobile-routes/events/leRoutes';
 import { menuItemById } from 'src/models/menu-items';
 import { StaticDataService } from 'src/services';
+
 import { campaignProgressionMenuItem } from 'src/v2/pages/campaign-progression/campaign-progression.menu-item';
 
 enum SelectedRoutes {

@@ -23,6 +23,7 @@ import {
 } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
+
 import { LreTile } from 'src/v2/features/lre/lre-tile';
 import { SelectedTeamsTable } from 'src/v2/features/lre/selected-teams-table';
 import { TrackRequirementCheck } from 'src/v2/features/lre/track-requirement-check';

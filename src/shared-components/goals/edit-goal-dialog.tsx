@@ -20,6 +20,7 @@ import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
 import { MowUpgradesUpdate } from 'src/v2/features/characters/components/mow-upgrades-update';

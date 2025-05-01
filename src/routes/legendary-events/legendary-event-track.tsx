@@ -10,6 +10,7 @@ import {
     LreTrackId,
 } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
+
 import { LreTeamsCard } from 'src/v2/features/lre/lre-teams-card';
 import { LreTeamsTable } from 'src/v2/features/lre/lre-teams-table';
 

@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
+
 import { IBaseUpgrade, ICraftedUpgrade } from 'src/v2/features/goals/goals.models';
 
 interface Props {

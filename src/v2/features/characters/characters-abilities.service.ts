@@ -3,6 +3,7 @@
 import { Alliance, Rarity } from 'src/models/enums';
 import abilitiesLvlUpJson from 'src/v2/data/characters-lvl-up-abilities.json';
 import xpData from 'src/v2/data/xp.json';
+
 import {
     ICharacterAbilitiesMaterialsTotal,
     ICharacterAbilityLevel,

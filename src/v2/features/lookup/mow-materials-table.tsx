@@ -1,4 +1,4 @@
-﻿import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams  } from 'ag-grid-community';
+﻿import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useMemo } from 'react';
 
@@ -6,8 +6,9 @@ import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { BadgeImage } from 'src/v2/components/images/badge-image';
 import { ComponentImage } from 'src/v2/components/images/component-image';
 import { ForgeBadgeImage } from 'src/v2/components/images/forge-badge-image';
-import { IMowLevelMaterials } from 'src/v2/features/lookup/lookup.models';
 import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
+
+import { IMowLevelMaterials } from 'src/v2/features/lookup/lookup.models';
 
 interface Props {
     rows: IMowLevelMaterials[];

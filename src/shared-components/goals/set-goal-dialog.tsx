@@ -16,7 +16,6 @@ import { enqueueSnackbar } from 'notistack';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 
-import { Conditional } from '@/fsd/5-shared/ui';
 import { goalsLimit, rarityToMaxRank } from 'src/models/constants';
 import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityStars } from 'src/models/enums';
 import { ICampaignsProgress, IPersonalGoal } from 'src/models/interfaces';
@@ -32,6 +31,9 @@ import { getEnumValues } from 'src/shared-logic/functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
 import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { Conditional } from '@/fsd/5-shared/ui';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 

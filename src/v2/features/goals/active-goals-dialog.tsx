@@ -6,6 +6,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import { PersonalGoalType } from 'src/models/enums';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { CharactersRaidsGoal } from 'src/v2/features/goals/characters-raids-goal';
 import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';

@@ -19,6 +19,7 @@ import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
 import { GoalsService } from 'src/v2/features/goals/goals.service';

@@ -8,6 +8,7 @@ import { Alliance, CampaignType, Faction, Rarity, RarityString } from 'src/model
 import { IDailyRaidsFilters } from 'src/models/interfaces';
 import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
 import factionsData from 'src/v2/data/factions.json';
+
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 
 interface Props {

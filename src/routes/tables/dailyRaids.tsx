@@ -2,12 +2,13 @@
 import React, { useContext, useMemo } from 'react';
 
 import { useAuth } from '@/contexts/auth';
-import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
 import { IDailyRaidsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { RaidsHeader } from 'src/routes/tables/raids-header';
 import { RaidsPlan } from 'src/routes/tables/raids-plan';
 import { TodayRaids } from 'src/routes/tables/todayRaids';
+
+import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { ActiveGoalsDialog } from 'src/v2/features/goals/active-goals-dialog';
 import {

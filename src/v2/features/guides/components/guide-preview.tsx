@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { RichTextViewer } from 'src/v2/components/inputs/rich-text-viewer';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { TeamView } from 'src/v2/features/guides/components/team-view';
 import { getDisplayName } from 'src/v2/features/guides/guides.contstants';

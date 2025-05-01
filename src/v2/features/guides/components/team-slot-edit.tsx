@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 
 import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { isCharacter } from 'src/v2/features/characters/units.functions';

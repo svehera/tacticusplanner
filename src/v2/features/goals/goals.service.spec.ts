@@ -8,6 +8,7 @@
     RarityStars,
 } from 'src/models/enums';
 import { ICharacter2, IPersonalGoal } from 'src/models/interfaces';
+
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import {
     ICharacterAscendGoal,

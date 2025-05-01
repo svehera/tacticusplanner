@@ -1,6 +1,7 @@
 ﻿import { clamp } from 'lodash';
 
 import { Rarity } from 'src/models/enums';
+
 import { GuildWarTeamType } from 'src/v2/features/guild-war/guild-war.models';
 
 import { defaultData } from '../models/constants';

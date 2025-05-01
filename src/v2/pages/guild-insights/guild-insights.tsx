@@ -2,11 +2,13 @@
 import { sum } from 'lodash';
 import React, { useContext, useState } from 'react';
 
-import { Conditional } from '@/fsd/5-shared/ui';
 import { GlobalState } from 'src/models/global-state';
 import { StoreContext } from 'src/reducers/store.provider';
 import { Loader } from 'src/v2/components/loader';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { Conditional } from '@/fsd/5-shared/ui';
+
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { ProgressState } from 'src/models/enums';
+
 import { ILreBattleProgress, ILreBattleRequirementsProgress } from 'src/v2/features/lre/lre.models';
 
 interface Props {

@@ -1,4 +1,5 @@
 ﻿import { Alliance, Rarity } from 'src/models/enums';
+
 import { IMow } from 'src/v2/features/characters/characters.models';
 import { IBaseUpgrade, ICraftedUpgrade } from 'src/v2/features/goals/goals.models';
 

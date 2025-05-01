@@ -5,8 +5,9 @@ import React, { useContext } from 'react';
 
 import { ILreTeam } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
-import { LreTile } from 'src/v2/features/lre/lre-tile';
 import { IMenuOption } from 'src/v2/models/menu-option';
+
+import { LreTile } from 'src/v2/features/lre/lre-tile';
 
 interface Props {
     team: ILreTeam;

@@ -4,6 +4,7 @@ import { isMobile } from 'react-device-detect';
 import { ICharacter2, ILegendaryEvent, ILreTeam, LreTrackId } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { useLreProgress } from 'src/shared-components/le-progress.hooks';
+
 import { LreAddTeam } from 'src/v2/features/lre/lre-add-team';
 import { LreEditTeam } from 'src/v2/features/lre/lre-edit-team';
 import { LreService } from 'src/v2/features/lre/lre.service';

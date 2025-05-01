@@ -2,6 +2,7 @@
 import React, { ReactNode } from 'react';
 
 import { CharacterTitle } from 'src/shared-components/character-title';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 
 interface Props<T extends IUnit> {

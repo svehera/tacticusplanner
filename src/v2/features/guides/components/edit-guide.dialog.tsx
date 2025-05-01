@@ -7,6 +7,7 @@ import { isMobile } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
 
 import { RichTextEditor } from 'src/v2/components/inputs/rich-text-editor';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { SelectTeamDialog } from 'src/v2/features/guides/components/select-team-dialog';
 import { TeamSlotEdit } from 'src/v2/features/guides/components/team-slot-edit';

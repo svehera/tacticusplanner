@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { MiscIcon } from 'src/v2/components/images/misc-image';
+
 import { IItemRaidLocation, IShardsRaid, IUpgradeRaid } from 'src/v2/features/goals/goals.models';
 import { MaterialItemInput } from 'src/v2/features/goals/material-item-input';
 import { ShardsItemInput } from 'src/v2/features/goals/shards-item-input';

@@ -14,6 +14,7 @@ import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import { FlexBox } from 'src/v2/components/flex-box';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
 import { IEstimatedShards, IEstimatedUpgrades } from 'src/v2/features/goals/goals.models';
 import { MaterialsTable } from 'src/v2/features/goals/materials-table';
 import { RaidsDayView } from 'src/v2/features/goals/raids-day-view';

@@ -5,6 +5,7 @@ import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
 import faqData from 'src/v2/data/faq.json';
+
 import { FaqCategory } from 'src/v2/features/faq/faq-category';
 import { IFaqItem } from 'src/v2/features/faq/faq.models';
 

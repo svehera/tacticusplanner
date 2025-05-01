@@ -2,6 +2,7 @@
 
 import { getImageUrl } from 'src/shared-logic/functions';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
 import { GameMode } from 'src/v2/features/teams/teams.enums';
 
 export const TokenImage = ({ gameMode }: { gameMode: GameMode }) => {

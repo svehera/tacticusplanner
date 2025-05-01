@@ -39,9 +39,10 @@ import { CharacterImage } from 'src/shared-components/character-image';
 import { CharacterTitle } from 'src/shared-components/character-title';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { useQueryState } from 'src/v2/hooks/query-state';
+
 import { ILreProgressModel } from 'src/v2/features/lre/lre.models';
 import { LreService } from 'src/v2/features/lre/lre.service';
-import { useQueryState } from 'src/v2/hooks/query-state';
 
 import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-events.interfaces';
 

@@ -16,6 +16,7 @@ import { useFitGridOnWindowResize, stringToRank } from 'src/shared-logic/functio
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
+
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';
 

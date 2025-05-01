@@ -4,6 +4,7 @@ import { charsUnlockShards } from 'src/models/constants';
 import { Rank, Rarity } from 'src/models/enums';
 import { ICharacter2, IPersonalCharacterData2 } from 'src/models/interfaces';
 import factionsData from 'src/v2/data/factions.json';
+
 import { rarityCaps } from 'src/v2/features/characters/characters.contants';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { isCharacter, isMow, isUnlocked } from 'src/v2/features/characters/units.functions';

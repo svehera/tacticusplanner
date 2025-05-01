@@ -3,7 +3,8 @@ import { cloneDeep, sum } from 'lodash';
 import { Rank, Rarity, RarityStars } from 'src/models/enums';
 import { ICharacterRankRange, IMaterialFull, IMaterialRecipeIngredientFull } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services/static-data.service';
-import { getEnumValues, rankToString  } from 'src/shared-logic/functions';
+import { getEnumValues, rankToString } from 'src/shared-logic/functions';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter, isUnlocked } from 'src/v2/features/characters/units.functions';
 

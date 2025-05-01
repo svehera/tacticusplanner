@@ -14,6 +14,7 @@ import { getEnumValues } from 'src/shared-logic/functions';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
+
 import { IMow } from 'src/v2/features/characters/characters.models';
 import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
 import { MowUpgradesUpdate } from 'src/v2/features/characters/components/mow-upgrades-update';

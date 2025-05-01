@@ -9,6 +9,7 @@ import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
 import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
 
 interface Props {

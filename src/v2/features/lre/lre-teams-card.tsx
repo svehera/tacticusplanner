@@ -6,6 +6,7 @@ import React, { useContext, useEffect, useMemo, useRef } from 'react';
 import { LegendaryEventEnum } from 'src/models/enums';
 import { ILegendaryEventSelectedRequirements, ILegendaryEventTrack, ILreTeam, LreTrackId } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+
 import { TrackRequirementCheck } from 'src/v2/features/lre/track-requirement-check';
 
 import { LreTile } from './lre-tile';

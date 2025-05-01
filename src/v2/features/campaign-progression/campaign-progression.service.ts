@@ -13,6 +13,7 @@ import {
 } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services/static-data.service';
 import recipeData from 'src/v2/data/recipeData.json';
+
 import {
     BattleSavings,
     CampaignFactionMapping,
