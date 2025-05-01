@@ -232,7 +232,12 @@ export const DesktopHome = () => {
                             <div>
                                 {!!calendarUrls.next && <h4 style={{ textAlign: 'center' }}>Current Season</h4>}
                                 <Zoom>
-                                    <img src={calendarUrls.current} alt="Events Calendar" width={350} height={280} />
+                                    <img
+                                        src={calendarUrls.current}
+                                        alt="Current Season Events Calendar"
+                                        width={350}
+                                        height={280}
+                                    />
                                 </Zoom>
                             </div>
                         )}
@@ -241,7 +246,12 @@ export const DesktopHome = () => {
                             <div>
                                 <h4 style={{ textAlign: 'center' }}>Next Season</h4>
                                 <Zoom>
-                                    <img src={calendarUrls.next} alt="Next Calendar" width={350} height={280} />
+                                    <img
+                                        src={calendarUrls.next}
+                                        alt="Next Season Events Calendar"
+                                        width={350}
+                                        height={280}
+                                    />
                                 </Zoom>
                             </div>
                         )}
