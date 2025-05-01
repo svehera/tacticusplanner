@@ -1,7 +1,7 @@
 ﻿import { ArrowForward, Info } from '@mui/icons-material';
 import InfoIcon from '@mui/icons-material/Info';
 import { FormControlLabel, Popover, Switch } from '@mui/material';
-import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams, ValueFormatterParams  } from 'ag-grid-community';
+import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { orderBy, sortBy, sum } from 'lodash';
 import React, { useContext, useMemo, useState } from 'react';
