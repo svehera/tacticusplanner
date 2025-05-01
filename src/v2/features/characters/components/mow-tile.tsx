@@ -7,7 +7,7 @@ import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { charsUnlockShards } from 'src/models/constants';
 
 import './character-tile.css';
-import { Conditional } from 'src/v2/components/conditional';
+import { Conditional } from '@/fsd/5-shared/ui';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 

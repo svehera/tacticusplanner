@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { Conditional } from 'src/v2/components/conditional';
+import { Conditional } from '@/fsd/5-shared/ui';
 
 import { CharacterTile } from './character-tile';
 

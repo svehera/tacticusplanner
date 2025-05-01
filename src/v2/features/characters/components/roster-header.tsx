@@ -9,7 +9,7 @@ import { InfoBox } from './info-box';
 
 import './roster-header.scss';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { Conditional } from 'src/v2/components/conditional';
+import { Conditional } from '@/fsd/5-shared/ui';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
 export const RosterHeader = ({

@@ -2,16 +2,16 @@
 
 import { redirect, RouteObject } from 'react-router-dom';
 
-import MobileApp from '../mobile-app';
+import MobileApp from './mobile-app';
 import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
 import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.route';
-import { globalInputRoutes, globalLearnRoutes, globalPlanRoutes } from 'src/routes/routes';
+import { globalInputRoutes, globalLearnRoutes, globalPlanRoutes } from './desktop-routes';
 
 const inputRoutes: RouteObject[] = [
     {
         path: 'input',
         async lazy() {
-            const { InputRoutes } = await import('./events/inputRoutes');
+            const { InputRoutes } = await import('@/mobile-routes/events/inputRoutes');
             return { Component: InputRoutes };
         },
     },
@@ -22,7 +22,7 @@ const planRoutes: RouteObject[] = [
     {
         path: 'plan',
         async lazy() {
-            const { PlanRoutes } = await import('./events/planRoutes');
+            const { PlanRoutes } = await import('@/mobile-routes/events/planRoutes');
             return { Component: PlanRoutes };
         },
     },
@@ -33,7 +33,7 @@ const learnRoutes: RouteObject[] = [
     {
         path: 'learn',
         async lazy() {
-            const { LearnRoutes } = await import('./events/learnRoutes');
+            const { LearnRoutes } = await import('@/mobile-routes/events/learnRoutes');
             return { Component: LearnRoutes };
         },
     },
@@ -52,7 +52,7 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
             {
                 path: 'home',
                 async lazy() {
-                    const { MobileHome } = await import('./home/mobileHome');
+                    const { MobileHome } = await import('@/mobile-routes/home/mobileHome');
                     return { Component: MobileHome };
                 },
             },
@@ -62,14 +62,14 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
             {
                 path: 'contacts',
                 async lazy() {
-                    const { Contacts } = await import('../routes/contacts/contacts');
+                    const { Contacts } = await import('@/routes/contacts/contacts');
                     return { Component: Contacts };
                 },
             },
             {
                 path: 'ty',
                 async lazy() {
-                    const { Thanks } = await import('../shared-components/thanks');
+                    const { Thanks } = await import('../../../shared-components/thanks');
                     return { Component: Thanks };
                 },
             },

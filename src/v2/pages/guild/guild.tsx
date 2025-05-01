@@ -4,7 +4,7 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { GuildMemberInput } from 'src/v2/features/guild/guild-member-input';
 import { Tooltip } from '@mui/material';
 import Button from '@mui/material/Button';
-import { Conditional } from 'src/v2/components/conditional';
+import { Conditional } from '@/fsd/5-shared/ui';
 import { GuildMemberView } from 'src/v2/features/guild/guild-member-view';
 import IconButton from '@mui/material/IconButton';
 import SavedSearchIcon from '@mui/icons-material/SavedSearch';

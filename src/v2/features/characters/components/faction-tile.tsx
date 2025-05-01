@@ -9,7 +9,7 @@ import { CharacterTile } from './character-tile';
 
 import './faction-tile.scss';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { Conditional } from 'src/v2/components/conditional';
+import { Conditional } from '@/fsd/5-shared/ui';
 import { ICharacter2 } from 'src/models/interfaces';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { UnitType } from 'src/v2/features/characters/units.enums';

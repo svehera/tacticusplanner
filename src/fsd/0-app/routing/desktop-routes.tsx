@@ -2,7 +2,7 @@
 
 import { RouteObject } from 'react-router-dom';
 
-import DesktopApp from '../desktop-app';
+import DesktopApp from './desktop-app';
 import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
 import { dirtyDozenLazyRoute } from 'src/v2/pages/dirty-dozen/dirty-dozen.route';
 import { insightsLazyRoute } from 'src/v2/pages/insights/insights.route';
@@ -28,7 +28,7 @@ export const globalInputRoutes: RouteObject[] = [
     {
         path: 'input/inventory',
         async lazy() {
-            const { Inventory } = await import('./inventory');
+            const { Inventory } = await import('@/routes/inventory');
             return { Component: Inventory };
         },
     },
@@ -39,14 +39,14 @@ export const globalPlanRoutes: RouteObject[] = [
     {
         path: 'plan/goals',
         async lazy() {
-            const { Goals } = await import('./goals/goals');
+            const { Goals } = await import('@/routes/goals/goals');
             return { Component: Goals };
         },
     },
     {
         path: 'plan/dailyRaids',
         async lazy() {
-            const { DailyRaids } = await import('./tables/dailyRaids');
+            const { DailyRaids } = await import('@/routes/tables/dailyRaids');
             return { Component: DailyRaids };
         },
     },
@@ -58,7 +58,7 @@ export const globalPlanRoutes: RouteObject[] = [
     {
         path: 'plan/leMasterTable',
         async lazy() {
-            const { MasterTable } = await import('./legendary-events/master-table');
+            const { MasterTable } = await import('@/routes/legendary-events/master-table');
             return { Component: MasterTable };
         },
     },
@@ -69,14 +69,14 @@ export const globalLearnRoutes: RouteObject[] = [
     {
         path: 'learn/characters',
         async lazy() {
-            const { Characters } = await import('./characters/characters');
+            const { Characters } = await import('@/routes/characters/characters');
             return { Component: Characters };
         },
     },
     {
         path: 'learn/npcs',
         async lazy() {
-            const { NpcInfo } = await import('./npcs/npc-info');
+            const { NpcInfo } = await import('@/routes/npcs/npc-info');
             return { Component: NpcInfo };
         },
     },
@@ -84,21 +84,21 @@ export const globalLearnRoutes: RouteObject[] = [
     {
         path: 'learn/upgrades',
         async lazy() {
-            const { Upgrades } = await import('./tables/upgrades');
+            const { Upgrades } = await import('@/routes/tables/upgrades');
             return { Component: Upgrades };
         },
     },
     {
         path: 'learn/rankLookup',
         async lazy() {
-            const { RankLookup } = await import('./tables/rankLookup');
+            const { RankLookup } = await import('@/routes/tables/rankLookup');
             return { Component: RankLookup };
         },
     },
     {
         path: 'learn/campaigns',
         async lazy() {
-            const { Campaigns } = await import('./tables/campaigns');
+            const { Campaigns } = await import('@/routes/tables/campaigns');
             return { Component: Campaigns };
         },
     },
@@ -118,7 +118,7 @@ export const appRoutes: () => RouteObject[] = () => [
             {
                 path: 'home',
                 async lazy() {
-                    const { Home } = await import('../features/misc/home/home');
+                    const { Home } = await import('@/features/misc/home/home');
                     return { Component: Home };
                 },
             },
@@ -128,14 +128,14 @@ export const appRoutes: () => RouteObject[] = () => [
             {
                 path: 'contacts',
                 async lazy() {
-                    const { Contacts } = await import('./contacts/contacts');
+                    const { Contacts } = await import('@/routes/contacts/contacts');
                     return { Component: Contacts };
                 },
             },
             {
                 path: 'ty',
                 async lazy() {
-                    const { Thanks } = await import('../shared-components/thanks');
+                    const { Thanks } = await import('@/shared-components/thanks');
                     return { Component: Thanks };
                 },
             },
