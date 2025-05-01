@@ -20,6 +20,11 @@ export const gameModes: IMenuOption[] = [
         label: 'Guild War',
         selected: false,
     },
+    {
+        value: GameMode.survival,
+        label: 'Survival',
+        selected: false,
+    },
 ];
 
 export const gameModesForGuides: IMenuOption[] = [
@@ -43,6 +48,11 @@ export const guildRaidBosses: IMenuOption[] = [
     {
         value: GuildRaidBoss.avatar,
         label: 'Avatar',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.cawl,
+        label: 'Belisarius Cawl',
         selected: false,
     },
     {
@@ -96,6 +106,16 @@ export const guildRaidPrimes: IMenuOption[] = [
     {
         value: GuildRaidBoss.avatar + rightSidePrimeSuffix,
         label: 'Eldryon (Avatar)',
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.cawl + leftSidePrimeSuffix,
+        label: "Tan Gi'da (Cawl)",
+        selected: false,
+    },
+    {
+        value: GuildRaidBoss.cawl + rightSidePrimeSuffix,
+        label: 'Actus (Cawl)',
         selected: false,
     },
     {
@@ -225,6 +245,9 @@ export const grEncounterToFaction: Record<string, Faction> = {
     [GuildRaidBoss.avatar]: Faction.Aeldari,
     [GuildRaidBoss.avatar + leftSidePrimeSuffix]: Faction.Aeldari,
     [GuildRaidBoss.avatar + rightSidePrimeSuffix]: Faction.Aeldari,
+    [GuildRaidBoss.cawl]: Faction.AdeptusMechanicus,
+    [GuildRaidBoss.cawl + leftSidePrimeSuffix]: Faction.AdeptusMechanicus,
+    [GuildRaidBoss.cawl + rightSidePrimeSuffix]: Faction.AdeptusMechanicus,
     [GuildRaidBoss.ghazghkull]: Faction.Orks,
     [GuildRaidBoss.ghazghkull + leftSidePrimeSuffix]: Faction.Orks,
     [GuildRaidBoss.ghazghkull + rightSidePrimeSuffix]: Faction.Orks,

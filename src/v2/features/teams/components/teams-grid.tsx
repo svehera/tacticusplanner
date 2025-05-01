@@ -28,6 +28,7 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
     const guildRaidTeams = teams.filter(x => x.primaryGameMode === GameMode.guildRaids);
     const taTeams = teams.filter(x => x.primaryGameMode === GameMode.tournamentArena);
     const gwTeams = teams.filter(x => x.primaryGameMode === GameMode.guildWar);
+    const survivalTeams = teams.filter(x => x.primaryGameMode === GameMode.survival);
 
     const renderTeam = (team: IPersonalTeam) => {
         const teamCharacters = team.lineup.map(id => characters.find(character => id === character.id)!);
@@ -156,6 +157,13 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
                 <div>
                     <h2>Guild War</h2>
                     <div className="flex gap-3 flex-wrap items-center">{gwTeams.map(renderCappedTeam)}</div>
+                </div>
+            )}
+
+            {!!survivalTeams.length && (
+                <div>
+                    <h2>Survival</h2>
+                    <div className="flex gap-3 flex-wrap items-center">{survivalTeams.map(renderCappedTeam)}</div>
                 </div>
             )}
         </div>
