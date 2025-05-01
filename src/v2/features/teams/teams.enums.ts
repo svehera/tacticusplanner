@@ -4,6 +4,7 @@
     guildWar = '_gw',
     legendaryRelease = '_lre',
     incursion = '_inc',
+    survival = '_sur',
 }
 
 export enum GuildRaidBoss {
@@ -16,6 +17,7 @@ export enum GuildRaidBoss {
     screamerKiller = '_screamer',
     szarekh = '_szarekh',
     tervigon = '_tervigon',
+    cawl = '_cawl',
 }
 
 export enum TaMode {
