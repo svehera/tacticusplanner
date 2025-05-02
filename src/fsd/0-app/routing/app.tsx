@@ -57,9 +57,6 @@ const darkTheme = createTheme({
 });
 
 export const App = () => {
-    useEffect(() => {
-        localStorage.setItem('appVersion', currentVersion);
-    }, [currentVersion]);
     const { isAuthenticated } = useAuth();
     const { viewPreferences } = useContext(StoreContext);
     const { loading, loadingText } = useLoader();
@@ -67,6 +64,10 @@ export const App = () => {
     const [showLoginStatus, setShowLoginStatus] = useState(false);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
+
+    useEffect(() => {
+        localStorage.setItem('appVersion', currentVersion);
+    }, [currentVersion]);
 
     useEffect(() => {
         const lastVisit = localStorage.getItem('lastVisit');
