@@ -7,9 +7,8 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { useTitle } from 'src/contexts/title.context';
 import { menuItemById } from 'src/models/menu-items';
-import { FlexBox } from 'src/v2/components/flex-box';
 
-import { Conditional } from '@/fsd/5-shared/ui';
+import { FlexBox, Conditional } from '@/fsd/5-shared/ui';
 
 const MobileApp = () => {
     const location = useLocation();

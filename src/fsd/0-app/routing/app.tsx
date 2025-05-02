@@ -4,7 +4,6 @@ import { Outlet } from 'react-router-dom';
 
 import '@/i18n/config';
 
-import { StaticDataService } from '@/services';
 import { useAuth } from 'src/contexts/auth';
 import { useLoader } from 'src/contexts/loader.context';
 import { SearchParamsStateProvider } from 'src/contexts/search-params.provider';
@@ -13,6 +12,8 @@ import { LoginStatusDialog } from 'src/shared-components/user-menu/login-status-
 import { LoginUserDialog } from 'src/shared-components/user-menu/login-user-dialog';
 import { RegisterUserDialog } from 'src/shared-components/user-menu/register-user-dialog';
 import { Loader } from 'src/v2/components/loader';
+
+import { currentVersion } from 'src/fsd/3-features/whats-new';
 
 const lightTheme = createTheme({
     colorSchemes: {
@@ -56,7 +57,6 @@ const darkTheme = createTheme({
 });
 
 export const App = () => {
-    localStorage.setItem('appVersion', StaticDataService.whatsNew.currentVersion);
     const { isAuthenticated } = useAuth();
     const { viewPreferences } = useContext(StoreContext);
     const { loading, loadingText } = useLoader();
@@ -64,6 +64,10 @@ export const App = () => {
     const [showLoginStatus, setShowLoginStatus] = useState(false);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
+
+    useEffect(() => {
+        localStorage.setItem('appVersion', currentVersion);
+    }, [currentVersion]);
 
     useEffect(() => {
         const lastVisit = localStorage.getItem('lastVisit');

@@ -5,8 +5,9 @@ import { mapValues, sum } from 'lodash';
 import React, { useState } from 'react';
 
 import { Difficulty, Rarity } from 'src/models/enums';
-import { FlexBox } from 'src/v2/components/flex-box';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
+
+import { FlexBox } from '@/fsd/5-shared/ui';
 
 import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';

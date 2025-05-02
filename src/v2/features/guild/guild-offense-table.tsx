@@ -5,8 +5,9 @@ import { mapValues, sum } from 'lodash';
 import React, { useState } from 'react';
 
 import { Rarity } from 'src/models/enums';
-import { FlexBox } from 'src/v2/components/flex-box';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
+
+import { FlexBox } from '@/fsd/5-shared/ui';
 
 import { IGuildWarOffensePlayer } from 'src/v2/features/guild/guild.models';
 

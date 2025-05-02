@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { getImageUrl } from '../shared-logic/functions';
+import { getImageUrl } from '@/fsd/5-shared/ui';
 
 export const WhatsNewImage = ({ path, imageSize }: { path: string; imageSize?: number }) => {
     const image = getImageUrl(`whatsnew/${path}`);

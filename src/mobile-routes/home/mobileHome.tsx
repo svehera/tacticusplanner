@@ -7,19 +7,20 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { usePwaInstall } from '@/v2/hooks/usePwaInstall';
 import { menuItemById } from 'src/models/menu-items';
-import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
+
+import { discordInvitationLink, bmcLink } from '@/fsd/5-shared/ui';
+import { DiscordIcon, BmcIcon } from '@/fsd/5-shared/ui/icons';
 
 import { AddToHomeScreen } from '@/v2/features/pwa/addToHomeScreen';
+import { WhatsNewDialog } from 'src/fsd/3-features/whats-new';
 
 import { Home } from '../../features/misc/home/home';
-import { bmcLink, discordInvitationLink } from '../../models/constants';
-import { StoreContext } from '../../reducers/store.provider';
-import { DiscordIcon } from '../../shared-components/icons/discord.icon';
+import { DispatchContext, StoreContext } from '../../reducers/store.provider';
 import ThemeSwitch from '../../shared-components/theme-switch';
 import { UserMenu } from '../../shared-components/user-menu/user-menu';
-import { WhatsNewDialog } from '../../shared-components/whats-new.dialog';
 
 export const MobileHome = () => {
+    const dispatch = useContext(DispatchContext);
     const { seenAppVersion } = useContext(StoreContext);
     const navigate = useNavigate();
     const { deviceLink, isInstalled } = usePwaInstall();
@@ -32,17 +33,12 @@ export const MobileHome = () => {
         return currentAppVersion === seenAppVersion;
     }, [seenAppVersion]);
 
-    // useEffect(() => {
-    //     const timeout = setTimeout(() => {
-    //         if (!seenNewVersion) {
-    //             setShowWhatsNew(true);
-    //         }
-    //     }, 3000);
-    //
-    //     return () => {
-    //         clearTimeout(timeout);
-    //     };
-    // }, []);
+    const handleWhatsNewClose = () => {
+        const currentAppVersion = localStorage.getItem('appVersion');
+        if (seenAppVersion !== currentAppVersion) {
+            dispatch.seenAppVersion(currentAppVersion);
+        }
+    };
 
     return (
         <div>
@@ -80,7 +76,13 @@ export const MobileHome = () => {
             )}
             <Home />
 
-            <WhatsNewDialog isOpen={showWhatsNew} onClose={() => setShowWhatsNew(false)} />
+            <WhatsNewDialog
+                isOpen={showWhatsNew}
+                onClose={() => {
+                    handleWhatsNewClose();
+                    setShowWhatsNew(false);
+                }}
+            />
         </div>
     );
 };

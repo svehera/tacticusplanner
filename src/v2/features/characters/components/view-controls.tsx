@@ -4,7 +4,8 @@ import React from 'react';
 
 import ViewSettings from 'src/routes/legendary-events/view-settings';
 import { getEnumValues } from 'src/shared-logic/functions';
-import { FlexBox } from 'src/v2/components/flex-box';
+
+import { FlexBox } from '@/fsd/5-shared/ui';
 
 import { IViewControls } from '../characters.models';
 import { CharactersFilterBy } from '../enums/characters-filter-by';
