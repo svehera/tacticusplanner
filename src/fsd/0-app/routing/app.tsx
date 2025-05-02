@@ -57,7 +57,9 @@ const darkTheme = createTheme({
 });
 
 export const App = () => {
-    localStorage.setItem('appVersion', currentVersion);
+    useEffect(() => {
+        localStorage.setItem('appVersion', currentVersion);
+    }, [currentVersion]);
     const { isAuthenticated } = useAuth();
     const { viewPreferences } = useContext(StoreContext);
     const { loading, loadingText } = useLoader();
