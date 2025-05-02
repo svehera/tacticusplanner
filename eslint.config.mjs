@@ -21,14 +21,7 @@ const compat = new FlatCompat({
     allConfig: js.configs.all,
 });
 
-const FS_LAYERS = [
-    'app',
-    'pages',
-    'widgets',
-    'features',
-    'entities',
-    'shared',
-];
+const FS_LAYERS = ['app', 'pages', 'widgets', 'features', 'entities', 'shared'];
 
 const REVERSED_FS_LAYERS = [...FS_LAYERS].reverse();
 
@@ -78,7 +71,7 @@ export default [
                 { type: 'features', pattern: '3-features/*' },
                 { type: 'entities', pattern: '4-entities/*' },
                 { type: 'shared', pattern: '5-shared/*' },
-            ]
+            ],
         },
 
         rules: {
@@ -108,46 +101,102 @@ export default [
 
                     // experimental features
                     'newlines-between': 'always',
-                    pathGroups: REVERSED_FS_LAYERS.map(
-                        (layer) => ({
-                            pattern: `**/?(*)${layer}{,/**}`,
-                            group: 'internal',
-                            position: 'after',
-                        }),
-                    ),
+                    pathGroups: REVERSED_FS_LAYERS.map(layer => ({
+                        pattern: `**/?(*)${layer}{,/**}`,
+                        group: 'internal',
+                        position: 'after',
+                    })),
                 },
-
             ],
-            'boundaries/element-types': ['error', {
-                default: 'disallow',
-                message: '${file.type} is not allowed to import ${dependency.type}',
-                rules: [
-                    {
-                        from: 'app',
-                        allow: ['app', 'shared', 'entities', 'features', 'widgets', 'pages'],
-                    },
-                    {
-                        from: 'pages',
-                        allow: ['shared', 'entities', 'features', 'widgets'],
-                    },
-                    {
-                        from: 'widgets',
-                        allow: ['shared', 'entities', 'features'],
-                    },
-                    {
-                        from: 'features',
-                        allow: ['shared', 'entities'],
-                    },
-                    {
-                        from: 'entities',
-                        allow: ['shared'],
-                    },
-                    {
-                        from: 'shared',
-                        allow: [],
-                    }
-                ]
-            }]
+            'boundaries/element-types': [
+                'error',
+                {
+                    default: 'disallow',
+                    message: '${file.type} is not allowed to import ${dependency.type}',
+                    rules: [
+                        {
+                            from: 'app',
+                            allow: ['app', 'shared', 'entities', 'features', 'widgets', 'pages'],
+                        },
+                        {
+                            from: 'pages',
+                            allow: ['shared', 'entities', 'features', 'widgets'],
+                        },
+                        {
+                            from: 'widgets',
+                            allow: ['shared', 'entities', 'features'],
+                        },
+                        {
+                            from: 'features',
+                            allow: ['shared', 'entities'],
+                        },
+                        {
+                            from: 'entities',
+                            allow: ['shared'],
+                        },
+                        {
+                            from: 'shared',
+                            allow: [],
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    {
+        files: [
+            // 'src/fsd/**/*.{ts,tsx}', TODO after fully refactor to FSD remove
+            'src/fsd/1-pages/**/*.{ts,tsx}',
+            'src/fsd/2-widgets/**/*.{ts,tsx}',
+            'src/fsd/3-features/**/*.{ts,tsx}',
+            'src/fsd/4-entities/**/*.{ts,tsx}',
+            'src/fsd/5-shared/**/*.{ts,tsx}',
+        ],
+        rules: {
+            'import-x/no-internal-modules': [
+                'error',
+                {
+                    allow: [
+                        '**/*(0-app|1-pages|2-widgets|3-features|4-entities|5-shared)',
+                        '**/5-shared/*(ui|model|api)',
+                        '**/node_modules/**',
+                        './',
+                    ],
+                },
+            ],
+            'no-restricted-imports': [
+                'error',
+                {
+                    patterns: [
+                        {
+                            // Prevent importing from internal files, only allow public API entry points
+                            group: [
+                                '0-app/*/!(index|index.ts)',
+                                '1-pages/*/!(index|index.ts)',
+                                '2-widgets/*/!(index|index.ts)',
+                                '3-features/*/!(index|index.ts)',
+                                '4-entities/*/!(index|index.ts)',
+                                '5-shared/*/!(index|index.ts)',
+
+                                // Block imports from deep paths (more than one level beyond the slice)
+                                '0-app/*/*/**',
+                                '1-pages/*/*/**',
+                                '2-widgets/*/*/**',
+                                '3-features/*/*/**',
+                                '4-entities/*/*/**',
+                                '5-shared/*/*/**',
+                            ],
+                            message:
+                                'Import only from public API (index.ts). Direct imports from implementation files are not allowed.',
+                        },
+                        {
+                            group: ['../../*'],
+                            message:
+                                'Relative parent imports are not allowed. Use absolute imports with layer names instead.',
+                        },
+                    ],
+                },
+            ],
         },
     },
 ];
