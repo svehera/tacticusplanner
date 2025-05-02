@@ -1,13 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 
-import { TopAppBar } from '@/fsd/2-widgets';
+import { useTitle } from 'src/contexts/title.context';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+
+import { TopAppBar } from '@/fsd/2-widgets/app-bar';
 
 const DesktopApp = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const preferredView = localStorage.getItem('preferredView');
+    const { headerTitle } = useTitle();
+
+    const dispatch = useContext(DispatchContext);
+    const { seenAppVersion } = useContext(StoreContext);
 
     useEffect(() => {
         const redirect = searchParams.get('redirect');
@@ -34,9 +41,20 @@ const DesktopApp = () => {
         }
     }, []);
 
+    const handleWhatsNewClose = () => {
+        const currentAppVersion = localStorage.getItem('appVersion');
+        if (seenAppVersion !== currentAppVersion) {
+            dispatch.seenAppVersion(currentAppVersion);
+        }
+    };
+
     return (
         <div style={{ width: '100%', height: '100%' }}>
-            <TopAppBar />
+            <TopAppBar
+                headerTitle={headerTitle}
+                seenAppVersion={seenAppVersion ?? ''}
+                onCloseWhatsNew={handleWhatsNewClose}
+            />
             <div style={{ margin: '10px 20px' }}>
                 <Outlet />
             </div>

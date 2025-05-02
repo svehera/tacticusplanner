@@ -3,7 +3,6 @@ import React from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { IGuildMember } from 'src/models/interfaces';
-import { FlexBox } from 'src/v2/components/flex-box';
 
 interface Props {
     index: number;

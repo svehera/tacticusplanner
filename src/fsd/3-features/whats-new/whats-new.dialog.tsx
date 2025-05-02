@@ -4,38 +4,26 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
-import React, { useContext } from 'react';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
-import { IReleaseNote, IVersionReleaseNotes } from '../models/interfaces';
-import { DispatchContext, StoreContext } from '../reducers/store.provider';
-import { StaticDataService } from '../services';
+import { WhatsNewImage } from './whats-new-image';
+import { releaseNotes } from './whats-new.data';
+import { IReleaseNote, IVersionReleaseNotes } from './whats-new.model';
 
-import { WhatsNewImage } from './whatsnew-image';
+interface Props {
+    isOpen: boolean;
+    onClose: () => void;
+}
 
-import './whats-new-dialog.css';
-
-export const WhatsNewDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
-    const { seenAppVersion } = useContext(StoreContext);
-    const dispatch = useContext(DispatchContext);
-
-    const whatsNew = StaticDataService.whatsNew;
-
-    const handleClose = () => {
-        const currentAppVersion = localStorage.getItem('appVersion');
-        if (seenAppVersion !== currentAppVersion) {
-            dispatch.seenAppVersion(currentAppVersion);
-        }
-        onClose();
-    };
-
+export const WhatsNewDialog: React.FC<Props> = ({ isOpen, onClose }) => {
     return (
         <Dialog open={isOpen} fullWidth>
             <DialogTitle>{"What's New"}</DialogTitle>
             <IconButton
                 aria-label="close"
-                onClick={handleClose}
+                onClick={onClose}
                 sx={{
                     position: 'absolute',
                     right: 8,
@@ -45,14 +33,14 @@ export const WhatsNewDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: 
                 <CloseIcon />
             </IconButton>
             <DialogContent>
-                <Box className="whats-new">
-                    {whatsNew.releaseNotes.map(x => (
+                <Box className="m-5">
+                    {releaseNotes.map(x => (
                         <VersionReleaseNotes key={x.version} releaseNotes={x} />
                     ))}
                 </Box>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} variant={'contained'}>
+                <Button onClick={onClose} variant={'contained'}>
                     OK
                 </Button>
             </DialogActions>
@@ -97,9 +85,9 @@ const ReleaseNotes = ({
     return (
         <div>
             <h3>{subtitle}</h3>
-            <ul>
+            <ul className="pb-3">
                 {releaseNotes.map((releaseNote, index) => (
-                    <li key={index}>
+                    <li key={index} className="pb-3">
                         {releaseNote.text}{' '}
                         {releaseNote.route && !isMobile ? (
                             <span>
@@ -112,9 +100,12 @@ const ReleaseNotes = ({
                             </span>
                         ) : undefined}
                         {!releaseNote.subPoints?.length ? undefined : (
-                            <ul>
+                            <ul className="pl-5">
                                 {releaseNote.subPoints.map((subPoint, subPointIndex) => (
-                                    <li key={subPointIndex}> {subPoint}</li>
+                                    <li key={subPointIndex} className="pb-2">
+                                        {' '}
+                                        {subPoint}
+                                    </li>
                                 ))}
                             </ul>
                         )}

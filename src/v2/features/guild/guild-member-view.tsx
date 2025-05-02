@@ -5,7 +5,8 @@ import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
 import { IGuildMember } from 'src/models/interfaces';
-import { FlexBox } from 'src/v2/components/flex-box';
+
+import { FlexBox } from '@/fsd/5-shared/ui';
 
 interface Props {
     index: number;

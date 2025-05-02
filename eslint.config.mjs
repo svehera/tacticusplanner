@@ -63,6 +63,9 @@ export default [
                     alwaysTryTypes: true,
                     project: './tsconfig.json',
                 },
+                node: {
+                    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+                },
             },
             'boundaries/elements': [
                 { type: 'app', pattern: '0-app/*' },
@@ -157,8 +160,9 @@ export default [
                 'error',
                 {
                     allow: [
-                        '**/*(0-app|1-pages|2-widgets|3-features|4-entities|5-shared)',
+                        '**/*(0-app|1-pages|2-widgets|3-features|4-entities|5-shared)/*',
                         '**/5-shared/*(ui|model|api)',
+                        '**/5-shared/ui/*',
                         '**/node_modules/**',
                         './',
                     ],

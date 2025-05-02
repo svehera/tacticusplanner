@@ -8,10 +8,11 @@ import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 
 import { Rank, Rarity, RarityStars } from 'src/models/enums';
-import { FlexBox } from 'src/v2/components/flex-box';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
+
+import { FlexBox } from '@/fsd/5-shared/ui';
 
 import { rarityCaps } from 'src/v2/features/characters/characters.contants';
 import { IRarityCap } from 'src/v2/features/characters/characters.models';

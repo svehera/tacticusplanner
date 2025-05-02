@@ -2,8 +2,9 @@
 import InputLabel from '@mui/material/InputLabel';
 import React from 'react';
 
-import { FlexBox } from 'src/v2/components/flex-box';
 import { StarsImage } from 'src/v2/components/images/stars-image';
+
+import { FlexBox } from '@/fsd/5-shared/ui';
 
 import { Rarity } from '../models/enums';
 

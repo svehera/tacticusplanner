@@ -1,12 +1,12 @@
 ﻿import { Card, CardContent, CardHeader } from '@mui/material';
 import Button from '@mui/material/Button';
 import axios from 'axios';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
-import { FlexBox } from 'src/v2/components/flex-box';
+import { FlexBox } from '@/fsd/5-shared/ui';
+import { BmcIcon } from 'src/fsd/5-shared/ui/icons';
 
 import { IContentCreator, IContributor, IYoutubeCreator } from '../models/interfaces';
 import { StaticDataService } from '../services';

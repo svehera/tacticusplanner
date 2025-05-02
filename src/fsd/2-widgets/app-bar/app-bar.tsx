@@ -1,4 +1,5 @@
-﻿import CampaignIcon from '@mui/icons-material/Campaign';
+﻿/* eslint-disable import-x/no-internal-modules */
+import CampaignIcon from '@mui/icons-material/Campaign';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Badge, Divider, ListItemIcon, Menu, MenuItem, Tooltip, useMediaQuery } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
@@ -8,38 +9,45 @@ import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { usePopUpControls } from '@/hooks/pop-up-controls';
-import { bmcLink, discordInvitationLink, isTabletOrMobileMediaQuery } from '@/models/constants';
 import {
     inputSubMenu,
     learnSubMenu,
     menuItemById,
-    MenuItemTP,
     miscMenuItems,
     planSubMenu,
     planSubMenuWeb,
-} from '@/models/menu-items';
-import { StoreContext } from '@/reducers/store.provider';
-import { DiscordIcon } from '@/shared-components/icons/discord.icon';
-import ThemeSwitch from '@/shared-components/theme-switch';
-import { UserMenu } from '@/shared-components/user-menu/user-menu';
-import { WhatsNewDialog } from '@/shared-components/whats-new.dialog';
-import { useTitle } from 'src/contexts/title.context';
-import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
-import { FlexBox } from 'src/v2/components/flex-box';
+} from '@/models/menu-items'; // TODO refactor for FSD
+import ThemeSwitch from '@/shared-components/theme-switch'; // TODO refactor for FSD
+import { UserMenu } from '@/shared-components/user-menu/user-menu'; // TODO refactor for FSD
+
+import {
+    FlexBox,
+    MenuItemTP,
+    bmcLink,
+    discordInvitationLink,
+    isTabletOrMobileMediaQuery,
+    usePopUpControls,
+} from '@/fsd/5-shared/ui';
+import { DiscordIcon, BmcIcon } from '@/fsd/5-shared/ui/icons';
+
+import { WhatsNewDialog } from 'src/fsd/3-features/whats-new';
 
 import { AppBarSubMenu } from './app-bar-sub-menu';
 
-export const TopAppBar = () => {
+interface Props {
+    headerTitle: string;
+    seenAppVersion: string;
+    onCloseWhatsNew: () => void;
+}
+
+export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onCloseWhatsNew }) => {
     const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
     const location = useLocation();
     const navigate = useNavigate();
-    const { headerTitle } = useTitle();
     const navigationMenuControls = usePopUpControls();
-    const { seenAppVersion } = useContext(StoreContext);
 
     const [showWhatsNew, setShowWhatsNew] = useState(false);
 
@@ -59,18 +67,6 @@ export const TopAppBar = () => {
             return 'Tacticus Planner';
         }
     }, [location.pathname, headerTitle]);
-
-    // useEffect(() => {
-    //     const timeout = setTimeout(() => {
-    //         if (!seenNewVersion) {
-    //             setShowWhatsNew(true);
-    //         }
-    //     }, 3000);
-    //
-    //     return () => {
-    //         clearTimeout(timeout);
-    //     };
-    // }, []);
 
     const nav = isTabletOrMobile ? undefined : (
         <div style={{ display: 'flex', alignItems: 'center', marginInlineEnd: 20 }}>
@@ -185,7 +181,13 @@ export const TopAppBar = () => {
                     </div>
                 </Toolbar>
             </AppBar>
-            <WhatsNewDialog isOpen={showWhatsNew} onClose={() => setShowWhatsNew(false)} />
+            <WhatsNewDialog
+                isOpen={showWhatsNew}
+                onClose={() => {
+                    onCloseWhatsNew();
+                    setShowWhatsNew(false);
+                }}
+            />
         </Box>
     );
 };

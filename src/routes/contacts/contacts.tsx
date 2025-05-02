@@ -2,9 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { BmcIcon } from 'src/shared-components/icons/bmc.icon';
-
-import { bmcLink, discordInvitationLink } from '../../models/constants';
+import { discordInvitationLink, bmcLink } from '@/fsd/5-shared/ui';
+import { BmcIcon } from '@/fsd/5-shared/ui/icons';
 
 export const Contacts = () => {
     return (

@@ -19,12 +19,13 @@ import { isMobile } from 'react-device-detect';
 import { Difficulty, Rank } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
-import { FlexBox } from 'src/v2/components/flex-box';
 import { DifficultyImage } from 'src/v2/components/images/difficulty-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { WarZoneBuffImage } from 'src/v2/components/images/war-zone-buff-image';
 import { Loader } from 'src/v2/components/loader';
 import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { FlexBox } from '@/fsd/5-shared/ui';
 
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';

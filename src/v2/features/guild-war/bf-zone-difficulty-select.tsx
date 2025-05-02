@@ -1,11 +1,12 @@
 ﻿import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { Difficulty, Rarity } from 'src/models/enums';
-import { FlexBox } from 'src/v2/components/flex-box';
 import { DifficultyImage } from 'src/v2/components/images/difficulty-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
+
+import { FlexBox } from '@/fsd/5-shared/ui';
 
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
 

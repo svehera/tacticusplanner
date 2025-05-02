@@ -5,7 +5,8 @@ import React from 'react';
 import { StaticDataService } from 'src/services';
 import { CharacterImage } from 'src/shared-components/character-image';
 import { getImageUrl } from 'src/shared-logic/functions';
-import { FlexBox } from 'src/v2/components/flex-box';
+
+import { FlexBox } from '@/fsd/5-shared/ui';
 
 interface Props {
     label: string;

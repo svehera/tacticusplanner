@@ -16,7 +16,6 @@ import npcData from '../assets/NpcData.json';
 import rankUpData from '../assets/rankUpData.json';
 import recipeData from '../assets/recipeData.json';
 import unitsData from '../assets/UnitData.json';
-import whatsNew from '../assets/WhatsNew.json';
 import { rarityStringToNumber, rarityToStars } from '../models/constants';
 import { Alliance, EquipmentClass, Faction, Rank, Rarity, RarityString } from '../models/enums';
 import {
@@ -39,13 +38,11 @@ import {
     IRecipeData,
     IRecipeDataFull,
     IUnitData,
-    IWhatsNew,
     UnitDataRaw,
 } from '../models/interfaces';
 import { getEnumValues, rankToString } from '../shared-logic/functions';
 
 export class StaticDataService {
-    static readonly whatsNew: IWhatsNew = whatsNew;
     static readonly battleData: ICampaignsData = battleData;
     static readonly newBattleData: ICampaignsData = newBattleData;
     static readonly equipmentData: IEquipment[] = this.convertEquipmentData();
