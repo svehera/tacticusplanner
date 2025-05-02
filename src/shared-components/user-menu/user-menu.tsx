@@ -25,7 +25,8 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { convertData, PersonalDataLocalStorage } from 'src/services';
 import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-dialog';
 
-import { usePopUpControls } from 'src/fsd/5-shared/ui';
+-import { usePopUpControls } from 'src/fsd/5-shared/ui';
++import { usePopUpControls } from '@/fsd/5-shared/ui';
 
 import { TacticusIntegrationDialog } from 'src/v2/features/tacticus-integration/tacticus-integration.dialog';
 
