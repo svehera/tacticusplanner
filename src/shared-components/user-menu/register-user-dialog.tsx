@@ -16,8 +16,9 @@ import { AxiosError } from 'axios';
 import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 
-import { registerUser } from '../../api/api-functions';
-import { IErrorResponse } from '../../api/api-interfaces';
+import { IErrorResponse } from '@/fsd/5-shared/api';
+
+import { registerUser } from './auth.endpoints';
 
 export const RegisterUserDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: (success: boolean) => void }) => {
     const [registerForm, setRegisterForm] = useState({

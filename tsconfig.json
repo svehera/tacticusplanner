@@ -18,8 +18,8 @@
         "sourceMap": true,
         "jsx": "react-jsx",
         "paths": {
-            "src/*": ["./src/*"],
             "@/*": ["./src/*"],
+            "src/*": ["./src/*"],
         }
     },
     "include": ["src"]

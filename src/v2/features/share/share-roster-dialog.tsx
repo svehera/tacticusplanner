@@ -9,9 +9,10 @@ import { enqueueSnackbar } from 'notistack';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { createShareToken, refreshShareToken, removeShareToken } from 'src/api/api-functions';
 import { useAuth } from 'src/contexts/auth';
 import { Loader } from 'src/v2/components/loader';
+
+import { createShareToken, refreshShareToken, removeShareToken } from './share-roster.endpoints';
 
 export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const [loading, setLoading] = React.useState(false);
@@ -35,7 +36,7 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
             setLoading(true);
 
             createShareToken()
-                .then(response => setUser(response.data.username, response.data.shareToken))
+                .then(response => setUser(response.data?.username ?? '', response.data?.shareToken))
                 .finally(() => setLoading(false));
         }
     };
@@ -49,7 +50,7 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
             setLoading(true);
 
             refreshShareToken()
-                .then(response => setUser(response.data.username, response.data.shareToken))
+                .then(response => setUser(response.data?.username ?? '', response.data?.shareToken))
                 .finally(() => setLoading(false));
         }
     };

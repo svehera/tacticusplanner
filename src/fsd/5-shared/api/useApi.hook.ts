@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import API from './api';
 import { IErrorResponse } from './api.models';
 
-const useApi = <TResponse, TRequestBody = any>(
+export const useApi = <TResponse, TRequestBody = any>(
     method: Method,
     url: string,
     body?: TRequestBody,
@@ -51,5 +51,3 @@ const useApi = <TResponse, TRequestBody = any>(
 
     return { loading, error, data };
 };
-
-export default useApi;

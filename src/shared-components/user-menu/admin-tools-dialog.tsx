@@ -9,9 +9,10 @@ import InputLabel from '@mui/material/InputLabel';
 import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 
-import { changeUserRoleApi, getUsersApi, resetUserPasswordApi } from 'src/api/api-functions';
-import { IGetUser } from 'src/api/api-interfaces';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
+
+import { resetUserPasswordApi, changeUserRoleApi, getUsersApi } from './admin.endpoints';
+import { IGetUser } from './admin.model';
 
 export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const [resetPasswordForm, setResetPasswordForm] = useState({
@@ -45,10 +46,10 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
     const searchUsers = () => {
         getUsersApi(resetPasswordForm.username)
             .then(result => {
-                setUsersList(result.data);
-                if (!result.data.length) {
+                if (!result.data?.length) {
                     enqueueSnackbar('No users', { variant: 'warning' });
                 }
+                setUsersList(result.data ?? []);
             })
             .catch(() => enqueueSnackbar('Failed to find users', { variant: 'error' }));
     };

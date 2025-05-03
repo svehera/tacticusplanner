@@ -7,3 +7,8 @@ export interface ICharactersResponse {
     characters: IPersonalCharacterData2[];
     mows: Array<IMowDb>;
 }
+
+export interface IShareTokenResponse {
+    username: string;
+    shareToken: string;
+}
