@@ -2,8 +2,9 @@ import { NoBackpackOutlined } from '@mui/icons-material';
 import React from 'react';
 
 import { Rank, Rarity, RarityStars } from 'src/models/enums';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 interface Props {
     characterId?: string;

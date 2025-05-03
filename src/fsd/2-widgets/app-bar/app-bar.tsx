@@ -1,5 +1,4 @@
-﻿/* eslint-disable import-x/no-internal-modules */
-import CampaignIcon from '@mui/icons-material/Campaign';
+﻿import CampaignIcon from '@mui/icons-material/Campaign';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Badge, Divider, ListItemIcon, Menu, MenuItem, Tooltip, useMediaQuery } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
@@ -19,8 +18,11 @@ import {
     miscMenuItems,
     planSubMenu,
     planSubMenuWeb,
+    // eslint-disable-next-line import-x/no-internal-modules
 } from '@/models/menu-items'; // TODO refactor for FSD
+// eslint-disable-next-line import-x/no-internal-modules
 import ThemeSwitch from '@/shared-components/theme-switch'; // TODO refactor for FSD
+// eslint-disable-next-line import-x/no-internal-modules
 import { UserMenu } from '@/shared-components/user-menu/user-menu'; // TODO refactor for FSD
 
 import {

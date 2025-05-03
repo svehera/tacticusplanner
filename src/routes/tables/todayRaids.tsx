@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IItemRaidLocation, IShardsRaid, IUpgradeRaid } from 'src/v2/features/goals/goals.models';
 import { MaterialItemInput } from 'src/v2/features/goals/material-item-input';

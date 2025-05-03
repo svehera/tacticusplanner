@@ -139,7 +139,7 @@ export default [
                         },
                         {
                             from: 'shared',
-                            allow: [],
+                            allow: ['shared'],
                         },
                     ],
                 },

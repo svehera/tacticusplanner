@@ -9,9 +9,8 @@ import { enqueueSnackbar } from 'notistack';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { Loader } from 'src/v2/components/loader';
-
 import { useAuth } from '@/fsd/5-shared/model';
+import { LoaderWithText } from '@/fsd/5-shared/ui';
 
 import { createShareToken, refreshShareToken, removeShareToken } from './share-roster.endpoints';
 
@@ -103,7 +102,7 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
             <DialogActions>
                 <Button onClick={onClose}>Close</Button>
             </DialogActions>
-            <Loader loading={loading} />
+            <LoaderWithText loading={loading} />
         </Dialog>
     );
 };

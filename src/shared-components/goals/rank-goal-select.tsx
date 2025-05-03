@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react';
 
 import { Rank } from 'src/models/enums';
 import { RankSelect } from 'src/shared-components/rank-select';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 interface Props {
     allowedValues: Rank[];

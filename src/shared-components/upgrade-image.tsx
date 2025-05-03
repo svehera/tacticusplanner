@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 import { Rarity } from '../models/enums';
 import { getImageUrl } from '../shared-logic/functions';

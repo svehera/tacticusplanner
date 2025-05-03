@@ -5,7 +5,8 @@ import React from 'react';
 
 import { ILegendaryEventTrackRequirement } from 'src/models/interfaces';
 import { LreReqImage } from 'src/v2/components/images/lre-req-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 interface Props {
     checked: boolean;

@@ -52,7 +52,7 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
             {
                 path: 'home',
                 async lazy() {
-                    const { MobileHome } = await import('@/mobile-routes/home/mobileHome');
+                    const { MobileHome } = await import('@/fsd/1-pages/home');
                     return { Component: MobileHome };
                 },
             },
@@ -69,7 +69,7 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
             {
                 path: 'ty',
                 async lazy() {
-                    const { Thanks } = await import('@/shared-components/thanks');
+                    const { Thanks } = await import('@/fsd/3-features/thank-you/thanks');
                     return { Component: Thanks };
                 },
             },

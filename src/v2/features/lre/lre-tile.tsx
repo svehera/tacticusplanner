@@ -4,9 +4,10 @@ import React from 'react';
 import { pooEmoji, starEmoji } from 'src/models/constants';
 import { CharacterBias, Rank } from 'src/models/enums';
 import { ICharacter2, ILreTileSettings } from 'src/models/interfaces';
-import { CharacterImage } from 'src/shared-components/character-image';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
 
 interface Props {
     character: ICharacter2;
@@ -31,7 +32,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
             style={{ columnGap: '10px' }}
             onClick={() => onClick(character)}>
             {settings.lreTileShowUnitIcon && (
-                <CharacterImage
+                <CharacterShardIcon
                     key={character.name}
                     icon={character.icon}
                     name={character.name}

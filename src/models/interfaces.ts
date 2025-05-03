@@ -879,30 +879,6 @@ export interface IInventory {
     upgrades: Record<string, number>;
 }
 
-export interface IContributor {
-    name: string;
-    type: string;
-    thankYou: string;
-    resourceDescription: string;
-    resourceLink: string;
-    avatarIcon?: string;
-}
-
-export interface IContentCreator {
-    name: string;
-    youtubeLink: string;
-    thankYou: string;
-    avatarIcon: string;
-    resourceIcon: string;
-    resourceLink: string;
-}
-
-export interface IYoutubeCreator {
-    name: string;
-    youtubeVideoId: string;
-    avatarLink: string;
-}
-
 /**
  * Information about equipment coming directly from a spreadsheet, with a tiny
  * bit of massaging into JSON. Most of this was gathered by Towen (thanks so

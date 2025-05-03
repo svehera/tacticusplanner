@@ -119,8 +119,8 @@ export const appRoutes: () => RouteObject[] = () => [
             {
                 path: 'home',
                 async lazy() {
-                    const { Home } = await import('@/features/misc/home/home');
-                    return { Component: Home };
+                    const { DesktopHome } = await import('@/fsd/1-pages/home');
+                    return { Component: DesktopHome };
                 },
             },
             ...globalInputRoutes,
@@ -136,7 +136,7 @@ export const appRoutes: () => RouteObject[] = () => [
             {
                 path: 'ty',
                 async lazy() {
-                    const { Thanks } = await import('@/shared-components/thanks');
+                    const { Thanks } = await import('@/fsd/3-features/thank-you/thanks');
                     return { Component: Thanks };
                 },
             },

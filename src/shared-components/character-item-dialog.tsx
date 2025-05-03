@@ -5,11 +5,10 @@ import Dialog from '@mui/material/Dialog';
 import React, { useContext, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
 
-import { Conditional } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, Conditional  } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';

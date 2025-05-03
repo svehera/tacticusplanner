@@ -35,11 +35,12 @@ import { LegendaryEventEnum, Rank } from 'src/models/enums';
 import { ICharacter2, ILegendaryEventTrack, ILreTeam } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { CharacterImage } from 'src/shared-components/character-image';
 import { CharacterTitle } from 'src/shared-components/character-title';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { useQueryState } from 'src/v2/hooks/query-state';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
 
 import { ILreProgressModel } from 'src/v2/features/lre/lre.models';
 import { LreService } from 'src/v2/features/lre/lre.service';
@@ -471,7 +472,7 @@ export const MasterTable = () => {
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
                                 <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
                                 <ListItemIcon>
-                                    <CharacterImage icon={x.icon} height={30} />
+                                    <CharacterShardIcon icon={x.icon} height={30} />
                                 </ListItemIcon>
                                 <ListItemText primary={x.name} />
                             </MenuItem>
@@ -483,7 +484,7 @@ export const MasterTable = () => {
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
                                 <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
                                 <ListItemIcon>
-                                    <CharacterImage icon={x.icon} height={30} />
+                                    <CharacterShardIcon icon={x.icon} height={30} />
                                 </ListItemIcon>
                                 <ListItemText primary={x.name} />
                             </MenuItem>

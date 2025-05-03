@@ -5,9 +5,10 @@ import React, { useState } from 'react';
 
 import { IUnitData } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services/static-data.service';
-import { CharacterImage } from 'src/shared-components/character-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
 
 import { CampaignData } from 'src/v2/features/campaign-progression/campaign-progression.models';
 import { ICharacterUnlockGoal, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
@@ -75,7 +76,7 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
                     if (!params.data.goalData || !params.data.goalData[0]) return '';
                     const goalData = params.data.goalData[0];
                     return (
-                        <CharacterImage
+                        <CharacterShardIcon
                             icon={getGoalUnit(goalData.goalId)?.icon ?? '(undefined)'}
                             height={30}
                             tooltip={getGoalUnit(goalData.goalId)?.icon}

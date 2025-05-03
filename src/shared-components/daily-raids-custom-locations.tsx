@@ -4,10 +4,11 @@ import Checkbox from '@mui/material/Checkbox';
 import { uniq } from 'lodash';
 import React, { useMemo, useState } from 'react';
 
-import { AccessibleTooltip } from '@/v2/components/tooltip';
 import { CampaignType, Rarity } from 'src/models/enums';
 import { ICustomDailyRaidsSettings } from 'src/models/interfaces';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 import { CampaignsService } from '@/v2/features/goals/campaigns.service';
 

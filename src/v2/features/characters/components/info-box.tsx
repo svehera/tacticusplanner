@@ -4,7 +4,8 @@ import { Popover, IconButton } from '@mui/material';
 import React from 'react';
 
 import wyoInfo from 'src/assets/images/wyo_info.png';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 export const InfoBox = () => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);

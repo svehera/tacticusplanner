@@ -12,9 +12,9 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { CharacterItemDialog } from 'src/shared-components/character-item-dialog';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
-import { FlexBox, Conditional } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, FlexBox, Conditional  } from '@/fsd/5-shared/ui';
+
 
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { CharactersService } from 'src/v2/features/characters/characters.service';

@@ -11,10 +11,9 @@ import { isMobile } from 'react-device-detect';
 
 import { Inventory } from 'src/routes/inventory';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
-import { FlexBox } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, FlexBox  } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IEstimatedShards, IEstimatedUpgrades } from 'src/v2/features/goals/goals.models';
 import { MaterialsTable } from 'src/v2/features/goals/materials-table';

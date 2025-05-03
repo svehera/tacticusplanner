@@ -22,10 +22,10 @@ import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { DifficultyImage } from 'src/v2/components/images/difficulty-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { WarZoneBuffImage } from 'src/v2/components/images/war-zone-buff-image';
-import { Loader } from 'src/v2/components/loader';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
-import { FlexBox } from '@/fsd/5-shared/ui';
+import { LoaderWithText, AccessibleTooltip , FlexBox  } from '@/fsd/5-shared/ui';
+
+
 
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
@@ -198,7 +198,7 @@ export const GuildWarZones = () => {
 
     return (
         <>
-            {loading && <Loader loading={true} />}
+            {loading && <LoaderWithText loading={true} />}
             <FlexBox justifyContent={'center'} gap={10}>
                 <BfLevelSelect value={activeLayout.bfLevel} valueChange={handleBfLevelChange} />
 

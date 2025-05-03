@@ -8,10 +8,11 @@ import React, { useContext, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { DailyRaidsStrategy, Rank, Rarity } from '../../models/enums';
 import {

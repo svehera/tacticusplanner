@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 export const DeploymentStatus: React.FC<
     React.PropsWithChildren & { charactersLeft: number; onClearAll: () => void }

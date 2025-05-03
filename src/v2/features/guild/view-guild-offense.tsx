@@ -5,7 +5,7 @@ import { sum } from 'lodash';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { MiscIcon } from 'src/v2/components/images/misc-image';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { GuildOffenseTable } from 'src/v2/features/guild/guild-offense-table';
 import { IGuildWarOffensePlayer } from 'src/v2/features/guild/guild.models';

@@ -6,10 +6,10 @@ import { StoreContext } from 'src/reducers/store.provider';
 import { LoginStatusDialog } from 'src/shared-components/user-menu/login-status-dialog';
 import { LoginUserDialog } from 'src/shared-components/user-menu/login-user-dialog';
 import { RegisterUserDialog } from 'src/shared-components/user-menu/register-user-dialog';
-import { Loader } from 'src/v2/components/loader';
 
 import { initI18n } from '@/fsd/5-shared/i18n';
 import { useAuth } from '@/fsd/5-shared/model';
+import { LoaderWithText } from '@/fsd/5-shared/ui';
 import { SearchParamsStateProvider, useLoader } from '@/fsd/5-shared/ui/contexts';
 
 import { currentVersion } from '@/fsd/3-features/whats-new';
@@ -128,7 +128,7 @@ export const App = () => {
             <SearchParamsStateProvider>
                 <Outlet />
             </SearchParamsStateProvider>
-            <Loader loading={!!loading} loadingText={loadingText} />
+            <LoaderWithText loading={!!loading} loadingText={loadingText} />
         </ThemeProvider>
     );
 };

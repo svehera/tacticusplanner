@@ -9,7 +9,8 @@ import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
 import DailyRaidsSettings from 'src/shared-components/daily-raids-settings';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 interface Props extends React.PropsWithChildren {
     actualDailyEnergy: string;

@@ -7,10 +7,9 @@ import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 
+import { CharacterShardIcon } from '../fsd/4-entities/character/ui/character-shard.icon';
 import { pooEmoji, starEmoji } from '../models/constants';
 import { CharacterBias, Rank } from '../models/enums';
-
-import { CharacterImage } from './character-image';
 
 export const CharacterTitle = ({
     character,
@@ -45,7 +44,12 @@ export const CharacterTitle = ({
 
         const characterFull = (
             <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>
-                <CharacterImage key={character.name} icon={character.icon} name={character.name} height={imageSize} />
+                <CharacterShardIcon
+                    key={character.name}
+                    icon={character.icon}
+                    name={character.name}
+                    height={imageSize}
+                />
                 {!hideName && <span>{name}</span>}
                 <RarityImage rarity={character.rarity} />
                 {isUnlocked ? <RankImage key={character.rank} rank={character.rank} /> : undefined}
@@ -67,7 +71,7 @@ export const CharacterTitle = ({
             <div style={{ display: 'flex', gap: 10, alignItems: 'center', opacity, cursor }} onClick={onClick}>
                 <Tooltip title={character.name} leaveDelay={1000} placement="top">
                     <span style={{ height: imageSize }}>
-                        <CharacterImage
+                        <CharacterShardIcon
                             key={character.name}
                             icon={character.icon}
                             name={character.name}
@@ -86,7 +90,7 @@ export const CharacterTitle = ({
     if (isMow(character)) {
         return (
             <div className="flex-box gap5 p5" onClick={onClick}>
-                <CharacterImage icon={character.badgeIcon} height={35} />
+                <CharacterShardIcon icon={character.badgeIcon} height={35} />
                 <span>{name}</span>
             </div>
         );

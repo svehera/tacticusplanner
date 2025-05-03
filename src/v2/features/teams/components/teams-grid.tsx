@@ -9,7 +9,8 @@ import { isMobile } from 'react-device-detect';
 import { ICharacter2 } from 'src/models/interfaces';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 import { IMow } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';

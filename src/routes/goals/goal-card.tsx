@@ -11,14 +11,16 @@ import { Link } from 'react-router-dom';
 import { charsUnlockShards, rarityToStars } from 'src/models/constants';
 import { PersonalGoalType, Rank } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
-import { CharacterImage } from 'src/shared-components/character-image';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
 
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
@@ -326,7 +328,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                 title={
                     <div className="flex-box gap5">
                         <span>#{goal.priority}</span>
-                        <CharacterImage icon={goal.unitIcon} height={30} />
+                        <CharacterShardIcon icon={goal.unitIcon} height={30} />
                         <span style={{ fontSize: '1.2rem' }}>{goal.unitName}</span>
                     </div>
                 }
