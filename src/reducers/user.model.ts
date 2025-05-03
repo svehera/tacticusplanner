@@ -1,4 +1,4 @@
-﻿import { UserRole } from 'src/models/enums';
+﻿import { UserRole } from '@/fsd/5-shared/model';
 
 import { IPersonalData, IPersonalData2 } from '../models/interfaces';
 

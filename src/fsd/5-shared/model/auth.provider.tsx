@@ -1,9 +1,7 @@
 ﻿import React, { PropsWithChildren, useState } from 'react';
 
-import { UserRole } from 'src/models/enums';
-import { IUserInfo } from 'src/models/interfaces';
-
 import { AuthContext } from './auth';
+import { IUserInfo } from './user-info.model';
 
 const localStorageKey = 'token';
 const localStorageUserKey = 'user';

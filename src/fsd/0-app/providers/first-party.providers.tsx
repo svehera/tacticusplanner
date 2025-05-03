@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { AuthProvider } from 'src/contexts/auth.provider';
-import { LoaderProvider } from 'src/contexts/loader.provider';
-import { TitleProvider } from 'src/contexts/title.provider';
 import { StoreProvider } from 'src/reducers/store.provider2';
+
+import { AuthProvider } from '@/fsd/5-shared/model';
+import { LoaderProvider, TitleProvider } from '@/fsd/5-shared/ui/contexts';
 
 export const FirstPartyProviders: React.FC<React.PropsWithChildren> = ({ children }) => {
     return (

@@ -5,7 +5,6 @@ import { isMobile } from 'react-device-detect';
 import Zoom from 'react-medium-image-zoom';
 import { useNavigate } from 'react-router-dom';
 
-import { useAuth } from '@/contexts/auth';
 import { useBmcWidget } from '@/v2/hooks/useBmcWidget';
 import { LegendaryEventEnum, PersonalGoalType } from 'src/models/enums';
 import { menuItemById } from 'src/models/menu-items';
@@ -14,6 +13,8 @@ import { StaticDataService } from 'src/services';
 import { CharacterImage } from 'src/shared-components/character-image';
 import { Thanks } from 'src/shared-components/thanks';
 import { MiscIcon } from 'src/v2/components/images/misc-image';
+
+import { useAuth } from '@/fsd/5-shared/model';
 
 export const Home = () => {
     useBmcWidget();

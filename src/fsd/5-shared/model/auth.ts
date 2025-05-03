@@ -1,9 +1,8 @@
 ﻿import { createContext, useContext } from 'react';
 
-import { UserRole } from 'src/models/enums';
-import { IUserInfo } from 'src/models/interfaces';
+import { IUserInfo } from './user-info.model';
 
-export interface IAuthContext {
+interface IAuthContext {
     username: string;
     shareToken?: string;
     isAuthenticated: boolean;

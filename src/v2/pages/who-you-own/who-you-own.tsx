@@ -4,10 +4,11 @@ import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { useAuth } from 'src/contexts/auth';
 import { ICharacter2 } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { CharacterItemDialog } from 'src/shared-components/character-item-dialog';
+
+import { useAuth } from '@/fsd/5-shared/model';
 
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { IMow, IUnit, IViewControls } from 'src/v2/features/characters/characters.models';

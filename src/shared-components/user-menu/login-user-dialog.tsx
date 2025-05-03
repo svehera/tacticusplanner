@@ -16,8 +16,7 @@ import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 
 import { IErrorResponse } from '@/fsd/5-shared/api';
-
-import { useAuth } from '../../contexts/auth';
+import { useAuth } from '@/fsd/5-shared/model';
 
 import { loginUser } from './auth.endpoints';
 

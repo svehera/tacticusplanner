@@ -10,8 +10,8 @@ import { mowsReducer } from 'src/reducers/mows.reducer';
 import { teamsReducer } from 'src/reducers/teams.reducer';
 
 import { IErrorResponse } from '@/fsd/5-shared/api';
+import { useAuth } from '@/fsd/5-shared/model';
 
-import { useAuth } from '../contexts/auth';
 import { GlobalState } from '../models/global-state';
 import { IDispatchContext, IGlobalState } from '../models/interfaces';
 import { convertData, PersonalDataLocalStorage } from '../services';

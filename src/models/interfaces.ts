@@ -49,7 +49,6 @@ import {
     RarityStars,
     RarityString,
     Trait,
-    UserRole,
 } from './enums';
 
 export type LreTrackId = 'alpha' | 'beta' | 'gamma';
@@ -369,17 +368,6 @@ export interface IGlobalState {
     dailyRaids: IDailyRaids;
     guildWar: IGuildWar;
     guild: IGuild;
-}
-
-export interface IUserInfo {
-    username: string;
-    userId: number;
-    role: UserRole;
-    pendingTeamsCount: number;
-    rejectedTeamsCount: number;
-    tacticusApiKey: string;
-    tacticusUserId: string;
-    tacticusGuildApiKey: string;
 }
 
 export interface IDispatchContext {

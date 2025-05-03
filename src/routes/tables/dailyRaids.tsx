@@ -1,12 +1,13 @@
 ﻿import { enqueueSnackbar } from 'notistack';
 import React, { useContext, useMemo } from 'react';
 
-import { useAuth } from '@/contexts/auth';
 import { IDailyRaidsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { RaidsHeader } from 'src/routes/tables/raids-header';
 import { RaidsPlan } from 'src/routes/tables/raids-plan';
 import { TodayRaids } from 'src/routes/tables/todayRaids';
+
+import { useAuth } from '@/fsd/5-shared/model';
 
 import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
 import { IUnit } from 'src/v2/features/characters/characters.models';

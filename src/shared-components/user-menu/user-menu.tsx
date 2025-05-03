@@ -17,14 +17,13 @@ import { isMobile } from 'react-device-detect';
 import { usePopupManager } from 'react-popup-manager';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { useAuth } from 'src/contexts/auth';
-import { UserRole } from 'src/models/enums';
 import { GlobalState } from 'src/models/global-state';
 import { IPersonalData2 } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { convertData, PersonalDataLocalStorage } from 'src/services';
 import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-dialog';
 
+import { useAuth, UserRole } from '@/fsd/5-shared/model';
 import { usePopUpControls } from '@/fsd/5-shared/ui';
 
 import { TacticusIntegrationDialog } from 'src/v2/features/tacticus-integration/tacticus-integration.dialog';

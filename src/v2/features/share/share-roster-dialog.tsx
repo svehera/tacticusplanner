@@ -9,8 +9,9 @@ import { enqueueSnackbar } from 'notistack';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { useAuth } from 'src/contexts/auth';
 import { Loader } from 'src/v2/components/loader';
+
+import { useAuth } from '@/fsd/5-shared/model';
 
 import { createShareToken, refreshShareToken, removeShareToken } from './share-roster.endpoints';
 

@@ -2,8 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 
-import { useTitle } from 'src/contexts/title.context';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+
+import { useTitle } from '@/fsd/5-shared/ui/contexts';
 
 import { TopAppBar } from '@/fsd/2-widgets/app-bar';
 

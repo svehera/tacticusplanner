@@ -267,12 +267,6 @@ export enum DailyRaidsStrategy {
     custom,
 }
 
-export enum UserRole {
-    user = 0,
-    moderator = 1,
-    admin = 2,
-}
-
 export enum ProgressState {
     none = 0,
     completed = 1,

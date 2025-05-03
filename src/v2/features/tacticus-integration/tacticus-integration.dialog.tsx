@@ -1,10 +1,10 @@
 import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 
-import { useAuth } from '@/contexts/auth';
-import { useLoader } from 'src/contexts/loader.context';
 import { DialogProps } from 'src/v2/models/dialog.props';
 
+import { useAuth } from '@/fsd/5-shared/model';
+import { useLoader } from '@/fsd/5-shared/ui/contexts';
 import { Button, Checkbox, CheckboxGroup, Modal, TextField } from '@/shared/ui';
 
 import { updateTacticusApiKey } from './tacticus-integration.endpoints';
