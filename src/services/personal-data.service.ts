@@ -1,16 +1,19 @@
 ﻿import { v4 } from 'uuid';
 
-import { ILreBattleProgressDto, ILreProgressDto, ILreRequirementsProgressDto } from 'src/models/dto.interfaces';
-
 import { Rank } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
 
 import { getLre } from '@/fsd/3-features/lre';
+import {
+    ILreProgressDto,
+    ILreBattleProgressDto,
+    ILreRequirementsProgressDto,
+    LrePointsCategoryId,
+} from '@/fsd/3-features/lre-progress';
 import { IMowDb } from 'src/v2/features/characters/characters.models';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
 import { defaultData } from '../models/constants';
-import { LrePointsCategoryId } from '../models/enums';
 import {
     IAutoTeamsPreferences,
     ICampaignsProgress,

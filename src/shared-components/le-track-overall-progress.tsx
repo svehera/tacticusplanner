@@ -6,13 +6,13 @@ import { sum } from 'lodash';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { ProgressState } from 'src/models/enums';
 import { LreTrackBattleSummary } from 'src/shared-components/le-track-battle';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { LreReqImage } from 'src/v2/components/images/lre-req-image';
 
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
+import { ProgressState } from '@/fsd/3-features/lre-progress';
 import { ILreTrackProgress } from 'src/v2/features/lre/lre.models';
 
 interface Props {

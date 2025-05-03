@@ -1,6 +1,5 @@
 ﻿import React from 'react';
 
-import { ILreProgressDto } from 'src/models/dto.interfaces';
 import { GuildAction } from 'src/reducers/guildReducer';
 import { GuildWarAction } from 'src/reducers/guildWarReducer';
 import { MowsAction } from 'src/reducers/mows.reducer';
@@ -12,6 +11,7 @@ import { DamageType, Trait, Rank, CharacterBias } from '@/fsd/4-entities/charact
 import { Faction } from '@/fsd/4-entities/faction';
 import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
 
+import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
 import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
 import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
