@@ -1,4 +1,4 @@
-﻿import { Rarity } from 'src/models/enums';
+﻿import { Rarity } from '@/fsd/5-shared/model';
 
 export interface IInventoryUpgrade {
     material: string;

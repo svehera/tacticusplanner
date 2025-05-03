@@ -4,9 +4,10 @@ import { AgGridReact } from 'ag-grid-react';
 import { mapValues, sum } from 'lodash';
 import React, { useState } from 'react';
 
-import { Difficulty, Rarity } from 'src/models/enums';
+import { Difficulty } from 'src/models/enums';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 
+import { Rarity } from '@/fsd/5-shared/model';
 import { FlexBox } from '@/fsd/5-shared/ui';
 
 import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';

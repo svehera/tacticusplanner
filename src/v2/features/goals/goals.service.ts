@@ -1,6 +1,8 @@
 ﻿import { rarityToStars } from 'src/models/constants';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
+import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { IPersonalGoal } from 'src/models/interfaces';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';

@@ -17,7 +17,7 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 
 import { goalsLimit, rarityToMaxRank } from 'src/models/constants';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityStars } from 'src/models/enums';
+import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { ICampaignsProgress, IPersonalGoal } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
@@ -31,7 +31,10 @@ import { getEnumValues } from 'src/shared-logic/functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
 import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 
+import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';

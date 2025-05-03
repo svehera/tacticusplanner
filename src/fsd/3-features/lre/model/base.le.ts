@@ -1,23 +1,24 @@
 ﻿import { sortBy, sum, uniqBy } from 'lodash';
 
-import { LegendaryEventEnum } from '../enums';
+// eslint-disable-next-line import-x/no-internal-modules
+import { ICharacter2 } from '@/models/interfaces';
+
 import {
-    ICharacter2,
-    IChestMilestone,
-    ILegendaryEvent,
-    ILegendaryEventStatic,
-    ILegendaryEventTrack,
-    ILEProgression,
+    LegendaryEventEnum,
     IPointsMilestone,
-    ITableRow,
-} from '../interfaces';
+    IChestMilestone,
+    ILEProgression,
+    ILegendaryEventStatic,
+} from '@/fsd/4-entities/lre';
+
+import { ILegendaryEvent, ILegendaryEventTrack } from '../lre.model';
 
 export abstract class LegendaryEventBase implements ILegendaryEvent {
     alpha: ILegendaryEventTrack;
     beta: ILegendaryEventTrack;
     gamma: ILegendaryEventTrack;
 
-    suggestedTeams: ITableRow[] = [];
+    suggestedTeams: Array<Record<string, ICharacter2 | string>> = [];
 
     readonly id: LegendaryEventEnum;
     readonly name: string;

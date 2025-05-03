@@ -1,8 +1,11 @@
-﻿import { TacticusShard, TacticusUnit } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
+﻿import { Rarity } from '@/fsd/5-shared/model';
+
+import { Rank, CharacterBias } from '@/fsd/4-entities/character';
+
+import { TacticusShard, TacticusUnit } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
 
 import { rankToLevel, rankToRarity, rarityToStars } from '../models/constants';
-import { CharacterBias, Rank, Rarity } from '../models/enums';
 import { ICharacter2, SetStateAction } from '../models/interfaces';
 
 export type CharactersAction =

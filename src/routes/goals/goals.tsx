@@ -9,7 +9,7 @@ import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
 import { goalsLimit, rankToLevel } from 'src/models/constants';
-import { PersonalGoalType, Rank } from 'src/models/enums';
+import { PersonalGoalType } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { GoalCard } from 'src/routes/goals/goal-card';
 import { GoalsTable } from 'src/routes/goals/goals-table';
@@ -18,6 +18,8 @@ import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
 
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';
 import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';

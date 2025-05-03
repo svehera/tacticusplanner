@@ -2,11 +2,15 @@
 
 import { ILreBattleProgressDto, ILreProgressDto, ILreRequirementsProgressDto } from 'src/models/dto.interfaces';
 
+import { Rank } from '@/fsd/4-entities/character';
+import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
+
+import { getLre } from '@/fsd/3-features/lre';
 import { IMowDb } from 'src/v2/features/characters/characters.models';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
-import { defaultData, getLegendaryEvent } from '../models/constants';
-import { LegendaryEventEnum, LrePointsCategoryId, Rank } from '../models/enums';
+import { defaultData } from '../models/constants';
+import { LrePointsCategoryId } from '../models/enums';
 import {
     IAutoTeamsPreferences,
     ICampaignsProgress,
@@ -24,7 +28,6 @@ import {
     IViewPreferences,
     LegendaryEventData,
     IGuild,
-    LreTrackId,
     ILreTeam,
     SelectedTeams,
 } from '../models/interfaces';
@@ -281,7 +284,7 @@ function migrateLreProgress(progressByEvent: LegendaryEventData<ILreProgressDto>
 function populateProgress(data: ILreProgressDto) {
     const sections: LreTrackId[] = ['alpha', 'beta', 'gamma'];
     const battlesProgress: ILreBattleProgressDto[] = [];
-    const lre = getLegendaryEvent(data.id, []);
+    const lre = getLre(data.id, []);
     const killPointsIndex = 0;
     const highScoreAndDefeatAllIndex = 1;
 

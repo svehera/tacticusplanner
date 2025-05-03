@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 import { rarityToMaxRank } from 'src/models/constants';
-import { Equipment, Faction, Rank, Rarity, RarityStars } from 'src/models/enums';
-import { EquipmentType, IEquipment } from 'src/models/interfaces';
+import { EquipmentType } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
 import { FactionSelect } from 'src/routes/npcs/faction-select';
 import { NpcPortrait } from 'src/routes/tables/npc-portrait';
@@ -11,9 +10,12 @@ import { RankSelect } from 'src/shared-components/rank-select';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { StarsSelect } from 'src/shared-components/stars-select';
 import { getEnumValues } from 'src/shared-logic/functions';
-import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
 
+import { RarityStars, Rarity } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { Rank } from '@/fsd/4-entities/character';
+import { Faction } from '@/fsd/4-entities/faction';
 
 import { CharacterSelect } from './character-select';
 import { DamageCalculatorService } from './damage-calculator-service';

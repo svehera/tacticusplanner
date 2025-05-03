@@ -1,0 +1,41 @@
+// eslint-disable-next-line import-x/no-internal-modules
+import { ICharacter2 } from '@/models/interfaces';
+
+import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
+
+import {
+    AunShiLegendaryEvent,
+    UnknownLegendaryEvent,
+    DanteLegendaryEvent,
+    KharnLegendaryEvent,
+    MephistonLegendaryEvent,
+    PatermineLegendaryEvent,
+    RagnarLegendaryEvent,
+    ShadowSunLegendaryEvent,
+    VitruviusLegendaryEvent,
+} from './model';
+
+export const getLre = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
+    switch (id) {
+        case LegendaryEventEnum.AunShi:
+            return new AunShiLegendaryEvent(characters);
+        case LegendaryEventEnum.Unknown:
+            return new UnknownLegendaryEvent(characters);
+        case LegendaryEventEnum.Dante:
+            return new DanteLegendaryEvent(characters);
+        case LegendaryEventEnum.Kharn:
+            return new KharnLegendaryEvent(characters);
+        case LegendaryEventEnum.Mephiston:
+            return new MephistonLegendaryEvent(characters);
+        case LegendaryEventEnum.Patermine:
+            return new PatermineLegendaryEvent(characters);
+        case LegendaryEventEnum.Ragnar:
+            return new RagnarLegendaryEvent(characters);
+        case LegendaryEventEnum.Shadowsun:
+            return new ShadowSunLegendaryEvent(characters);
+        case LegendaryEventEnum.Vitruvius:
+            return new VitruviusLegendaryEvent(characters);
+        default:
+            return new ShadowSunLegendaryEvent(characters);
+    }
+};

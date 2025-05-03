@@ -9,7 +9,7 @@ import { LeProgressOverviewMissions } from 'src/shared-components/le-progress-ov
 import { useLreProgress } from 'src/shared-components/le-progress.hooks';
 import { LreTrackOverallProgress } from 'src/shared-components/le-track-overall-progress';
 
-import { ILegendaryEvent } from '../models/interfaces';
+import { ILegendaryEvent } from '@/fsd/3-features/lre';
 
 export const LeProgress = ({ legendaryEvent }: { legendaryEvent: ILegendaryEvent }) => {
     const { model, updateNotes, updateOccurrenceProgress, toggleBattleState } = useLreProgress(legendaryEvent);

@@ -6,8 +6,8 @@ import { enqueueSnackbar } from 'notistack';
 import React, { useContext, useMemo, useState } from 'react';
 
 import { rarityToMaxRank } from 'src/models/constants';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enums';
-import { ICampaignsProgress, ICharacter2 } from 'src/models/interfaces';
+import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
+import { ICampaignsProgress } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
@@ -20,7 +20,7 @@ import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarit
 import { getEnumValues } from 'src/shared-logic/functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { CharacterShardIcon, Rank } from '@/fsd/4-entities/character';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';

@@ -1,6 +1,8 @@
 import { groupBy, mapValues } from 'lodash';
 
-import { Campaign, Faction } from 'src/models/enums';
+import { Campaign } from 'src/models/enums';
+
+import { Faction } from '@/fsd/4-entities/faction';
 
 import { CampaignDifficulty, CampaignGroupType, CampaignReleaseType } from './campaigns.enums';
 import { ICampaignModel } from './campaigns.models';

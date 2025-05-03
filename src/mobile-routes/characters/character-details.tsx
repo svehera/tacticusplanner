@@ -3,13 +3,16 @@ import InputLabel from '@mui/material/InputLabel';
 import React, { useMemo, useState } from 'react';
 
 import { rarityToMaxRank, rarityToMaxStars, rarityToStars } from 'src/models/constants';
-import { Rank, Rarity, RarityStars } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
 import { CharacterUpgrades } from 'src/shared-components/character-upgrades';
 import { getEnumValues, rankToString, rarityStarsToString } from 'src/shared-logic/functions';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
+
+import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 import { IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
 

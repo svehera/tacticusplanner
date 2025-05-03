@@ -16,7 +16,7 @@ import { CommonProps } from '@mui/material/OverridableComponent';
 import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { Difficulty, Rank } from 'src/models/enums';
+import { Difficulty } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { DifficultyImage } from 'src/v2/components/images/difficulty-image';
@@ -24,6 +24,8 @@ import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { WarZoneBuffImage } from 'src/v2/components/images/war-zone-buff-image';
 
 import { LoaderWithText, AccessibleTooltip, FlexBox } from '@/fsd/5-shared/ui';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';

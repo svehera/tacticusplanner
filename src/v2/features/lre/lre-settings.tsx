@@ -5,7 +5,6 @@ import Dialog from '@mui/material/Dialog';
 import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { CharacterBias, Rank, Rarity } from 'src/models/enums';
 import {
     IAutoTeamsPreferences,
     ICharacter2,
@@ -14,6 +13,10 @@ import {
     IViewOption,
 } from 'src/models/interfaces';
 import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
+
+import { Rarity } from '@/fsd/5-shared/model';
+
+import { CharacterBias, Rank } from '@/fsd/4-entities/character';
 
 import { LreTile } from 'src/v2/features/lre/lre-tile';
 

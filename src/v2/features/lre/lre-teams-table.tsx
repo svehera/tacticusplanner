@@ -13,17 +13,13 @@ import { AgGridReact } from 'ag-grid-react';
 import React, { useContext, useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import {
-    ICharacter2,
-    ILegendaryEventTrack,
-    ILegendaryEventTrackRequirement,
-    ILreTeam,
-    ITableRow,
-    LreTrackId,
-} from 'src/models/interfaces';
+import { ICharacter2, ILreTeam, ITableRow } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
 
+import { LreTrackId } from '@/fsd/4-entities/lre';
+
+import { ILegendaryEventTrack, ILegendaryEventTrackRequirement } from '@/fsd/3-features/lre';
 import { LreTile } from 'src/v2/features/lre/lre-tile';
 import { SelectedTeamsTable } from 'src/v2/features/lre/selected-teams-table';
 import { TrackRequirementCheck } from 'src/v2/features/lre/track-requirement-check';

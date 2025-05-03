@@ -1,5 +1,6 @@
-﻿import { Faction } from 'src/models/enums';
-import { IMenuOption } from 'src/v2/models/menu-option';
+﻿import { IMenuOption } from 'src/v2/models/menu-option';
+
+import { Faction } from '@/fsd/4-entities/faction';
 
 import { GameMode, GuildRaidBoss, GwMode, TaMode } from 'src/v2/features/teams/teams.enums';
 

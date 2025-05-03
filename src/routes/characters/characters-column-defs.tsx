@@ -3,13 +3,16 @@ import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { rarityToMaxRank } from 'src/models/constants';
-import { DamageType, Rank, Rarity, RarityStars, Trait } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
 import { CharacterTitle } from 'src/shared-components/character-title';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+
+import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+
+import { Rank, DamageType, Trait } from '@/fsd/4-entities/character';
 
 import { DamageCell } from './damage-cell';
 import { StatCell } from './stat-cell';

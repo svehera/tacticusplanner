@@ -1,20 +1,12 @@
 ﻿import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import {
-    AllCommunityModule,
-    ColDef,
-    RowStyle,
-    RowClassParams,
-    ICellRendererParams,
-    ValueGetterParams,
-    themeBalham,
-} from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { uniq } from 'lodash';
 import React, { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { Campaign, Rank, Rarity, RarityStars } from 'src/models/enums';
+import { Campaign } from 'src/models/enums';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';

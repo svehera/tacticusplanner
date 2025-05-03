@@ -7,10 +7,11 @@ import React from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { ProgressState } from 'src/models/enums';
-import { LreTrackId } from 'src/models/interfaces';
 import { LreTrackBattleSummary } from 'src/shared-components/le-track-battle';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { LreReqImage } from 'src/v2/components/images/lre-req-image';
+
+import { LreTrackId } from '@/fsd/4-entities/lre';
 
 import { ILreTrackProgress } from 'src/v2/features/lre/lre.models';
 

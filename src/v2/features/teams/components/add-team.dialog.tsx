@@ -6,11 +6,12 @@ import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { Rarity } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
+
+import { Rarity } from '@/fsd/5-shared/model';
 
 import { IMow } from 'src/v2/features/characters/characters.models';
 import { SelectTeamDialog } from 'src/v2/features/teams/components/select-team-dialog';

@@ -6,7 +6,6 @@ import React, { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { rarityStringToNumber } from 'src/models/constants';
-import { Rank, Rarity, RarityString } from 'src/models/enums';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
@@ -15,9 +14,10 @@ import { useFitGridOnWindowResize, stringToRank } from 'src/shared-logic/functio
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 
+import { Rarity, RarityString } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { Rank, CharacterShardIcon } from '@/fsd/4-entities/character';
 
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';

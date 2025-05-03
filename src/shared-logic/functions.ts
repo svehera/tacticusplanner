@@ -2,8 +2,11 @@
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
+import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
+
 import { rankToLevel } from '../models/constants';
-import { Rank, Rarity, RarityStars } from '../models/enums';
 import { ICharacter2 } from '../models/interfaces';
 
 export const useFitGridOnWindowResize = (gridRef: React.RefObject<AgGridReact | null>) => {

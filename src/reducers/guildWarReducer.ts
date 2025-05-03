@@ -1,6 +1,6 @@
 ﻿import { clamp } from 'lodash';
 
-import { Rarity } from 'src/models/enums';
+import { Rarity } from '@/fsd/5-shared/model';
 
 import { GuildWarTeamType } from 'src/v2/features/guild-war/guild-war.models';
 

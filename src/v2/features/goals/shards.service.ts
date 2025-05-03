@@ -1,9 +1,11 @@
 ﻿import { orderBy, sum } from 'lodash';
 
 import { charsProgression, charsUnlockShards, rarityToStars } from 'src/models/constants';
-import { Alliance, Campaign, CampaignsLocationsUsage, CampaignType, PersonalGoalType, Rarity } from 'src/models/enums';
+import { Campaign, CampaignsLocationsUsage, CampaignType, PersonalGoalType } from 'src/models/enums';
 import { ICampaignBattleComposed, ICampaignsProgress } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
+
+import { Alliance, Rarity } from '@/fsd/5-shared/model';
 
 import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaigns.constants';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';

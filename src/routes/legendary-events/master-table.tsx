@@ -30,9 +30,7 @@ import { groupBy, map, sum, uniq } from 'lodash';
 import React, { useContext, useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { getLegendaryEvent } from 'src/models/constants';
-import { LegendaryEventEnum, Rank } from 'src/models/enums';
-import { ICharacter2, ILegendaryEventTrack, ILreTeam } from 'src/models/interfaces';
+import { ICharacter2, ILreTeam } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
 import { CharacterTitle } from 'src/shared-components/character-title';
@@ -40,8 +38,10 @@ import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { useQueryState } from 'src/v2/hooks/query-state';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { CharacterShardIcon, Rank } from '@/fsd/4-entities/character';
+import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
+import { getLre, ILegendaryEventTrack } from '@/fsd/3-features/lre';
 import { ILreProgressModel } from 'src/v2/features/lre/lre.models';
 import { LreService } from 'src/v2/features/lre/lre.service';
 
@@ -81,7 +81,7 @@ export const MasterTable = () => {
             slots: number;
         }> = [];
         activeLegendaryEvents.forEach(eventId => {
-            const legendaryEvent = getLegendaryEvent(eventId, characters);
+            const legendaryEvent = getLre(eventId, characters);
             const legendaryEventProgress = LreService.mapProgressDtoToModel(
                 leProgress[legendaryEvent.id],
                 legendaryEvent
@@ -341,7 +341,7 @@ export const MasterTable = () => {
         }> = [];
 
         activeLegendaryEvents.forEach(eventId => {
-            const legendaryEvent = getLegendaryEvent(eventId, characters);
+            const legendaryEvent = getLre(eventId, characters);
             const chars =
                 selection === 'all'
                     ? legendaryEvent.allowedUnits

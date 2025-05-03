@@ -1,4 +1,6 @@
-﻿import { Rank, Rarity } from 'src/models/enums';
+﻿import { Rarity } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { UnitType } from 'src/v2/features/characters/units.enums';

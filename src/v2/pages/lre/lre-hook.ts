@@ -1,13 +1,14 @@
 ﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 
-import { getLegendaryEvent } from 'src/models/constants';
-import { LegendaryEventEnum } from 'src/models/enums';
 import { StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
 import { useQueryState } from 'src/v2/hooks/query-state';
 
 import { useTitle } from '@/fsd/5-shared/ui/contexts';
 
+import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
+
+import { getLre } from '@/fsd/3-features/lre';
 import { LreSection } from 'src/v2/features/lre/lre.models';
 
 export const useLre = () => {
@@ -46,7 +47,7 @@ export const useLre = () => {
         }
     }, [legendaryEventId]);
 
-    const legendaryEvent = useMemo(() => getLegendaryEvent(legendaryEventId, characters), [legendaryEventId]);
+    const legendaryEvent = useMemo(() => getLre(legendaryEventId, characters), [legendaryEventId]);
 
     return { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab };
 };

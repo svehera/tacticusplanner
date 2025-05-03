@@ -1,7 +1,8 @@
 ﻿import React from 'react';
 
-import { Rarity } from 'src/models/enums';
 import { getImageUrl } from 'src/shared-logic/functions';
+
+import { Rarity } from '@/fsd/5-shared/model';
 
 export const RarityImage = ({ rarity }: { rarity: Rarity }) => {
     const rarityString = Rarity[rarity];

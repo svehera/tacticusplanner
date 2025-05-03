@@ -1,5 +1,10 @@
-﻿import { Alliance, DamageType, Faction, Trait } from '../enums';
-import { ICharacter2 } from '../interfaces';
+﻿// eslint-disable-next-line import-x/no-internal-modules
+import { ICharacter2 } from '@/models/interfaces';
+
+import { Alliance } from '@/fsd/5-shared/model';
+
+import { DamageType, Trait } from '@/fsd/4-entities/character';
+import { Faction } from '@/fsd/4-entities/faction';
 
 export const filter = (characters: ICharacter2[]) => ({
     byAlliance: (alliance: Alliance, not = false) =>

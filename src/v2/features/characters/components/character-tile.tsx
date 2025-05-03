@@ -3,7 +3,6 @@ import { orderBy } from 'lodash';
 import React, { useCallback, useContext, useMemo } from 'react';
 
 import { charsReleaseShards, charsUnlockShards } from 'src/models/constants';
-import { Rank } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
 import { needToAscendCharacter, needToLevelCharacter } from 'src/shared-logic/functions';
 import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
@@ -13,6 +12,8 @@ import { StarsImage } from 'src/v2/components/images/stars-image';
 import { numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
 
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';

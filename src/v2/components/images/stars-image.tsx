@@ -3,7 +3,8 @@
 import blueStar from 'src/assets/images/stars/blue star.png';
 import redStar from 'src/assets/images/stars/red star small.png';
 import goldStar from 'src/assets/images/stars/star small.png';
-import { RarityStars } from 'src/models/enums';
+
+import { RarityStars } from '@/fsd/5-shared/model';
 
 export const StarsImage = ({ stars }: { stars: RarityStars }) => {
     if (stars === RarityStars.None) {

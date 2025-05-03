@@ -3,7 +3,7 @@ import { uniq } from 'lodash';
 import battleData from 'src/assets/newBattleData.json';
 import rankUpData from 'src/assets/rankUpData.json';
 import { charsUnlockShards } from 'src/models/constants';
-import { CampaignType, PersonalGoalType, Rarity } from 'src/models/enums';
+import { CampaignType, PersonalGoalType } from 'src/models/enums';
 import {
     ICampaignBattleComposed,
     ICampaignsData,
@@ -13,6 +13,8 @@ import {
 } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services/static-data.service';
 import recipeData from 'src/v2/data/recipeData.json';
+
+import { Rarity } from '@/fsd/5-shared/model';
 
 import {
     BattleSavings,

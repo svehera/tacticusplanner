@@ -1,9 +1,12 @@
 ﻿import { groupBy, orderBy, sum } from 'lodash';
 
 import { charsUnlockShards } from 'src/models/constants';
-import { Rank, Rarity } from 'src/models/enums';
 import { ICharacter2, IPersonalCharacterData2 } from 'src/models/interfaces';
 import factionsData from 'src/v2/data/factions.json';
+
+import { Rarity } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 import { rarityCaps } from 'src/v2/features/characters/characters.contants';
 import { UnitType } from 'src/v2/features/characters/units.enums';

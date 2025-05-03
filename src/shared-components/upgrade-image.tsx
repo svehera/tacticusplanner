@@ -1,8 +1,8 @@
 ﻿import React from 'react';
 
+import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
-import { Rarity } from '../models/enums';
 import { getImageUrl } from '../shared-logic/functions';
 
 export const UpgradeImage = ({

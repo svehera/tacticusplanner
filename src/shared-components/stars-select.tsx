@@ -4,9 +4,8 @@ import React from 'react';
 
 import { StarsImage } from 'src/v2/components/images/stars-image';
 
+import { Rarity } from '@/fsd/5-shared/model';
 import { FlexBox } from '@/fsd/5-shared/ui';
-
-import { Rarity } from '../models/enums';
 
 interface Props {
     label: string;

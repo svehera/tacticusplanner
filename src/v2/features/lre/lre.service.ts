@@ -1,9 +1,11 @@
 import { orderBy, sum } from 'lodash';
 
 import { ILreBattleProgressDto, ILreOverviewDto, ILreProgressDto } from 'src/models/dto.interfaces';
-import { LegendaryEventEnum, LrePointsCategoryId, ProgressState } from 'src/models/enums';
-import { ILegendaryEvent, LreTrackId } from 'src/models/interfaces';
+import { LrePointsCategoryId, ProgressState } from 'src/models/enums';
 
+import { LreTrackId, LegendaryEventEnum } from '@/fsd/4-entities/lre';
+
+import { ILegendaryEvent } from '@/fsd/3-features/lre';
 import {
     ILreBattleProgress,
     ILreBattleRequirementsProgress,

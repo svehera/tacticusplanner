@@ -1,6 +1,12 @@
-﻿import staticData from '../../assets/legendary-events/Mephiston.json';
-import { Alliance, DamageType, Trait } from '../enums';
-import { ICharacter2, ILegendaryEventTrack } from '../interfaces';
+﻿// eslint-disable-next-line import-x/no-internal-modules
+import { ICharacter2 } from '@/models/interfaces';
+
+import { Alliance } from '@/fsd/5-shared/model';
+
+import { DamageType, Trait } from '@/fsd/4-entities/character';
+import { mephiston as staticData } from '@/fsd/4-entities/lre';
+
+import { ILegendaryEventTrack } from '../lre.model';
 
 import { LegendaryEventBase } from './base.le';
 import { LETrack } from './base.le.track';

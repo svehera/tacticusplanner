@@ -9,20 +9,19 @@ import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
 import { charsUnlockShards, rarityToStars } from 'src/models/constants';
-import { PersonalGoalType, Rank, RarityStars } from 'src/models/enums';
+import { PersonalGoalType } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
-import { StaticDataService } from 'src/services';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
 
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { RarityStars } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { CharacterShardIcon, Rank } from '@/fsd/4-entities/character';
 
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import {
