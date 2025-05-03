@@ -2,9 +2,10 @@
 
 import { Rank, RarityStars } from 'src/models/enums';
 import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import './character-tile.css';
 

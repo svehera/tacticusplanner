@@ -5,9 +5,8 @@ import { useSearchParams } from 'react-router-dom';
 
 import { GlobalState } from 'src/models/global-state';
 import { StoreContext } from 'src/reducers/store.provider';
-import { Loader } from 'src/v2/components/loader';
 
-import { Conditional } from '@/fsd/5-shared/ui';
+import { LoaderWithText, Conditional } from '@/fsd/5-shared/ui';
 
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
@@ -46,7 +45,7 @@ export const SharedRoster = () => {
     const { data, loading, error } = useGetSharedRoster(sharedUser, shareToken);
 
     if (loading) {
-        return <Loader loading={true} />;
+        return <LoaderWithText loading={true} />;
     }
 
     if (error) {

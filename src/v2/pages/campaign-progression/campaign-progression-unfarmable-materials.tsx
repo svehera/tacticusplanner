@@ -5,7 +5,8 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import React from 'react';
 
 import { StaticDataService } from 'src/services/static-data.service';
-import { CharacterImage } from 'src/shared-components/character-image';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
 
 import { CampaignData, CampaignsProgressData } from 'src/v2/features/campaign-progression/campaign-progression.models';
 
@@ -23,7 +24,7 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progre
                 {progression.charactersNeedingMaterials.get(material)?.map((unitId, ignored) => {
                     return [
                         <td key={'missing_material-' + material + '-character-' + unitId}>
-                            <CharacterImage
+                            <CharacterShardIcon
                                 icon={StaticDataService.getUnit(unitId)?.icon ?? '(undefined)'}
                                 height={30}
                                 width={30}

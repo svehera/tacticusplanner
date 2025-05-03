@@ -49,7 +49,6 @@ import {
     RarityStars,
     RarityString,
     Trait,
-    UserRole,
 } from './enums';
 
 export type LreTrackId = 'alpha' | 'beta' | 'gamma';
@@ -369,17 +368,6 @@ export interface IGlobalState {
     dailyRaids: IDailyRaids;
     guildWar: IGuildWar;
     guild: IGuild;
-}
-
-export interface IUserInfo {
-    username: string;
-    userId: number;
-    role: UserRole;
-    pendingTeamsCount: number;
-    rejectedTeamsCount: number;
-    tacticusApiKey: string;
-    tacticusUserId: string;
-    tacticusGuildApiKey: string;
 }
 
 export interface IDispatchContext {
@@ -889,30 +877,6 @@ export type ICampaignsProgress = Record<Campaign, number>;
 
 export interface IInventory {
     upgrades: Record<string, number>;
-}
-
-export interface IContributor {
-    name: string;
-    type: string;
-    thankYou: string;
-    resourceDescription: string;
-    resourceLink: string;
-    avatarIcon?: string;
-}
-
-export interface IContentCreator {
-    name: string;
-    youtubeLink: string;
-    thankYou: string;
-    avatarIcon: string;
-    resourceIcon: string;
-    resourceLink: string;
-}
-
-export interface IYoutubeCreator {
-    name: string;
-    youtubeVideoId: string;
-    avatarLink: string;
 }
 
 /**

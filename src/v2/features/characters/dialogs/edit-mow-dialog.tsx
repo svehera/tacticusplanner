@@ -7,13 +7,15 @@ import { isMobile } from 'react-device-detect';
 
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
 import { Rarity, RarityStars } from 'src/models/enums';
-import { CharacterImage } from 'src/shared-components/character-image';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { StarsSelect } from 'src/shared-components/stars-select';
 import { getEnumValues } from 'src/shared-logic/functions';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
 
 import { IMow } from 'src/v2/features/characters/characters.models';
 import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
@@ -67,7 +69,7 @@ export const EditMowDialog: React.FC<Props> = ({
                     </IconButton>
                 )}
                 <div className="flex-box gap10">
-                    <CharacterImage icon={mow.badgeIcon} />
+                    <CharacterShardIcon icon={mow.badgeIcon} />
                     <span>{mow.name}</span>
                     <RarityImage rarity={mow.rarity} />
                     <MiscIcon icon={'mow'} width={22} height={25} />

@@ -9,9 +9,9 @@ import { guildWarReducer } from 'src/reducers/guildWarReducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
 import { teamsReducer } from 'src/reducers/teams.reducer';
 
-import { getUserDataApi, setUserDataApi } from '../api/api-functions';
-import { IErrorResponse } from '../api/api-interfaces';
-import { useAuth } from '../contexts/auth';
+import { IErrorResponse } from '@/fsd/5-shared/api';
+import { useAuth } from '@/fsd/5-shared/model';
+
 import { GlobalState } from '../models/global-state';
 import { IDispatchContext, IGlobalState } from '../models/interfaces';
 import { convertData, PersonalDataLocalStorage } from '../services';
@@ -28,6 +28,7 @@ import { leSelectedRequirementsReducer } from './le-selected-requirements.reduce
 import { leSelectedTeamsReducer } from './le-selected-teams.reducer';
 import { selectedTeamsOrderReducer } from './selected-teams-order.reducer';
 import { DispatchContext, StoreContext } from './store.provider';
+import { setUserDataApi, getUserDataApi } from './user.endpoints';
 import { viewPreferencesReducer } from './view-settings.reducer';
 
 export const StoreProvider = ({ children }: React.PropsWithChildren) => {
@@ -255,6 +256,12 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         }
         getUserDataApi()
             .then(response => {
+                if (!response.data) {
+                    console.error(response.error);
+                    enqueueSnackbar('Failed to fetch data from server. Try again later', { variant: 'error' });
+                    return;
+                }
+
                 const {
                     data,
                     username,

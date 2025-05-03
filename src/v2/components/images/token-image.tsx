@@ -1,7 +1,8 @@
 ﻿import React from 'react';
 
 import { getImageUrl } from 'src/shared-logic/functions';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 import { GameMode } from 'src/v2/features/teams/teams.enums';
 

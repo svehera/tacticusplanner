@@ -9,13 +9,15 @@ import { rarityStringToNumber } from 'src/models/constants';
 import { Rank, Rarity, RarityString } from 'src/models/enums';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
-import { CharacterImage } from 'src/shared-components/character-image';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { useFitGridOnWindowResize, stringToRank } from 'src/shared-logic/functions';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
 
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';
@@ -61,7 +63,7 @@ export const Upgrades = () => {
                         <div key={x.id} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                             <Tooltip title={x.id}>
                                 <span>
-                                    <CharacterImage icon={x.icon} name={x.id} height={30} />
+                                    <CharacterShardIcon icon={x.icon} name={x.id} height={30} />
                                 </span>
                             </Tooltip>
                             <div>

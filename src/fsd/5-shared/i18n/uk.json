@@ -1,0 +1,21 @@
+﻿{
+    "common": {
+        "register": "Реєстрація",
+        "login": "Вхід",
+        "ok": "OK",
+        "close": "Закрити"
+    },
+    "auth": {
+        "pleaseLoginTitle": "Будь ласка, уввійдіть"
+    },
+    "whatsNew": {
+        "title": "Що нового",
+        "sections": {
+            "new": "Нове",
+            "minor": "Незначні зміни",
+            "bugFixes": "Виправлення помилок"
+        },
+        "link": "посилання",
+        "versionFormat": "{{type}} - {{version}} ({{date}})"
+    }
+}

@@ -2,9 +2,7 @@
 import { FormControlLabel, Switch } from '@mui/material';
 import React from 'react';
 
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-
-import { FlexBox } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, FlexBox } from '@/fsd/5-shared/ui';
 
 export const IgnoreRankRarity: React.FC<{
     value: boolean;

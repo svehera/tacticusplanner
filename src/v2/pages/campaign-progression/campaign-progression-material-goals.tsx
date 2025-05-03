@@ -8,10 +8,12 @@ import { isMobile } from 'react-device-detect';
 import { CampaignType } from 'src/models/enums';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services/static-data.service';
-import { CharacterImage } from 'src/shared-components/character-image';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
 
 import {
     BattleSavings,
@@ -346,7 +348,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                             {characters.map((unitId, ignoredIndex) => {
                                 return (
                                     <span key={unitId + '-' + savings.battle.reward + '-' + savings.battle.id}>
-                                        <CharacterImage
+                                        <CharacterShardIcon
                                             icon={StaticDataService.getUnit(unitId)?.icon ?? '(undefined)'}
                                             height={30}
                                             width={30}

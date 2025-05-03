@@ -3,7 +3,8 @@ import React from 'react';
 
 import { Rarity, RarityString } from 'src/models/enums';
 import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 interface Props {
     upgradesRarity: Rarity[];

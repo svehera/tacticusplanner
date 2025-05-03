@@ -11,8 +11,9 @@ import { RankSelect } from 'src/shared-components/rank-select';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { StarsSelect } from 'src/shared-components/stars-select';
 import { getEnumValues } from 'src/shared-logic/functions';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharacterSelect } from './character-select';
 import { DamageCalculatorService } from './damage-calculator-service';

@@ -3,8 +3,9 @@ import React from 'react';
 
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
-import { CharacterImage } from 'src/shared-components/character-image';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
 
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
@@ -22,7 +23,7 @@ export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
                 return (
                     <div>
                         <Tooltip title={upgrade.label}>
-                            <CharacterImage
+                            <CharacterShardIcon
                                 icon={character.icon}
                                 name={upgrade.label}
                                 height={30}

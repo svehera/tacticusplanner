@@ -1,0 +1,227 @@
+﻿import { Card, CardContent, CardHeader } from '@mui/material';
+import { sum } from 'lodash';
+import React, { useContext } from 'react';
+import { isMobile } from 'react-device-detect';
+import Zoom from 'react-medium-image-zoom';
+import { useNavigate } from 'react-router-dom';
+
+// eslint-disable-next-line import-x/no-internal-modules
+import { LegendaryEventEnum, PersonalGoalType } from 'src/models/enums';
+// eslint-disable-next-line import-x/no-internal-modules
+import { menuItemById } from 'src/models/menu-items';
+// eslint-disable-next-line import-x/no-internal-modules
+import { StoreContext } from 'src/reducers/store.provider';
+// eslint-disable-next-line import-x/no-internal-modules
+import { StaticDataService } from 'src/services';
+
+import { useAuth } from '@/fsd/5-shared/model';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
+
+import { Thanks } from '@/fsd/3-features/thank-you';
+
+import { useBmcWidget } from './useBmcWidget';
+
+export const DesktopHome = () => {
+    useBmcWidget();
+    const navigate = useNavigate();
+    const { userInfo } = useAuth();
+    const { goals, dailyRaids } = useContext(StoreContext);
+    const nextLeMenuItem = StaticDataService.activeLre;
+    const goalsMenuItem = menuItemById['goals'];
+    const dailyRaidsMenuItem = menuItemById['dailyRaids'];
+    const eventsCalendarUrl = 'https://tacticucplannerstorage.blob.core.windows.net/files/events-calendar.png';
+
+    const topPriorityGoal = goals[0];
+    const unlockGoals = goals.filter(x => x.type === PersonalGoalType.Unlock).length;
+    const ascendGoals = goals.filter(x => x.type === PersonalGoalType.Ascend).length;
+    const upgradeRankGoals = goals.filter(x => x.type === PersonalGoalType.UpgradeRank).length;
+
+    const navigateToNextLre = () => {
+        const route = `/plan/lre?character=${LegendaryEventEnum[nextLeMenuItem.lre!.id]}`;
+        navigate(isMobile ? '/mobile' + route : route);
+    };
+
+    function formatMonthAndDay(date: Date): string {
+        const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
+
+    function timeLeftToFutureDate(targetDate: Date): string {
+        const currentDate = new Date();
+        const timeDifference = targetDate.getTime() - currentDate.getTime();
+
+        // Calculate days, hours, and minutes
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+        // Format the result
+        const result = days === 0 ? `${hours} h left` : `${days} Days ${hours} h left`;
+
+        return timeDifference >= 0 ? result : 'Finished';
+    }
+
+    const nextLeDateStart = new Date(nextLeMenuItem.lre!.nextEventDateUtc!);
+    const nextLeDateEnd = new Date(
+        new Date(nextLeMenuItem.lre!.nextEventDateUtc!).setDate(nextLeDateStart.getDate() + 7)
+    );
+    const timeToStart = timeLeftToFutureDate(nextLeDateStart);
+    const timeToEnd = timeLeftToFutureDate(nextLeDateEnd);
+    const isEventStarted = timeToStart === 'Finished';
+
+    const announcements = () => {
+        if (userInfo.tacticusApiKey) {
+            return <></>;
+        }
+
+        return (
+            <div style={{ textAlign: 'center', padding: '25px 0 50px' }}>
+                <h2>Exciting News from WH40k Tacticus!</h2>
+                <p>
+                    We&apos;re thrilled to announce that player API keys are now available! Use your key to effortlessly
+                    upload your Tacticus roster to the Planner.
+                </p>
+                <p>
+                    For more details, check out our{' '}
+                    <a href="/faq" target="_blank" rel="noreferrer">
+                        FAQ
+                    </a>{' '}
+                    or find additional information in the user menu.
+                </p>
+            </div>
+        );
+    };
+
+    return (
+        <div>
+            {announcements()}
+            <Thanks sliderMode={true} />
+            {/*{announcments()}*/}
+            <div
+                style={{
+                    display: 'flex',
+                    gap: 10,
+                    flexWrap: 'wrap',
+                    alignItems: 'flex-start',
+                    justifyContent: 'center',
+                }}>
+                <div>
+                    <h3 style={{ textAlign: 'center' }}>Daily Raids</h3>
+                    <Card
+                        variant="outlined"
+                        onClick={() =>
+                            navigate(isMobile ? dailyRaidsMenuItem.routeMobile : dailyRaidsMenuItem.routeWeb)
+                        }
+                        sx={{
+                            width: 350,
+                            minHeight: 200,
+                            cursor: 'pointer',
+                        }}>
+                        <CardHeader
+                            title={
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                    {dailyRaidsMenuItem.icon}{' '}
+                                    {dailyRaids.raidedLocations?.length + ' locations raided today'}
+                                </div>
+                            }
+                            subheader={
+                                <span>
+                                    {sum(dailyRaids.raidedLocations?.map(x => x.energySpent))}{' '}
+                                    <MiscIcon icon={'energy'} width={15} height={15} />
+                                    {' spent'}
+                                </span>
+                            }
+                        />
+                        <CardContent>
+                            <ul style={{ margin: 0 }}>
+                                {dailyRaids.raidedLocations.map(x => (
+                                    <li key={x.id}>
+                                        {x.raidsCount}x {x.campaign} {x.nodeNumber}
+                                    </li>
+                                ))}
+                            </ul>
+                        </CardContent>
+                    </Card>
+                </div>
+
+                <div>
+                    <h3 style={{ textAlign: 'center' }}>{isEventStarted ? 'Ongoing ' : 'Upcoming '}Legendary Event</h3>
+                    <Card
+                        variant="outlined"
+                        classes="dark:bg-dark-navy"
+                        onClick={navigateToNextLre}
+                        sx={{
+                            width: 350,
+                            minHeight: 200,
+                            cursor: 'pointer',
+                        }}>
+                        <CardHeader
+                            title={
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                    <CharacterShardIcon icon={nextLeMenuItem.icon} height={50} width={50} />{' '}
+                                    {nextLeMenuItem.name}
+                                </div>
+                            }
+                            subheader={formatMonthAndDay(isEventStarted ? nextLeDateEnd : nextLeDateStart)}
+                        />
+                        <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
+                            {isEventStarted ? timeToEnd : timeToStart}
+                        </CardContent>
+                    </Card>
+                </div>
+
+                {!!goals.length && (
+                    <div>
+                        <h3 style={{ textAlign: 'center' }}>Your Goals</h3>
+                        <Card
+                            variant="outlined"
+                            onClick={() => navigate(isMobile ? goalsMenuItem.routeMobile : goalsMenuItem.routeWeb)}
+                            sx={{
+                                width: 350,
+                                minHeight: 200,
+                                cursor: 'pointer',
+                            }}>
+                            <CardHeader
+                                title={
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                        {goalsMenuItem.icon} {goalsMenuItem.label}
+                                    </div>
+                                }
+                            />
+                            <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
+                                {!!unlockGoals && (
+                                    <span>
+                                        <b>Unlock</b> {unlockGoals} characters
+                                    </span>
+                                )}
+                                {!!ascendGoals && (
+                                    <span>
+                                        <b>Ascend</b> {ascendGoals} characters
+                                    </span>
+                                )}
+                                {!!upgradeRankGoals && (
+                                    <span>
+                                        <b>Upgrade rank</b> for {upgradeRankGoals} characters
+                                    </span>
+                                )}
+                                {!!topPriorityGoal?.notes && (
+                                    <span>
+                                        <b>Top priority goal notes:</b> {topPriorityGoal.notes}
+                                    </span>
+                                )}
+                            </CardContent>
+                        </Card>
+                    </div>
+                )}
+
+                <div>
+                    <h3 style={{ textAlign: 'center' }}>Events calendar</h3>
+                    <Zoom>
+                        <img src={eventsCalendarUrl} alt="Events Calendar" width={350} height={280} />
+                    </Zoom>
+                </div>
+            </div>
+        </div>
+    );
+};

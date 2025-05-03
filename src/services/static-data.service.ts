@@ -1,14 +1,10 @@
-﻿import { NearMe } from '@mui/icons-material';
-import { cloneDeep, groupBy, map, orderBy, sortBy, sum, sumBy, uniq } from 'lodash';
+﻿import { cloneDeep, groupBy, map, orderBy, sortBy, sum, sumBy, uniq } from 'lodash';
 
-import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import { IRankLookup } from 'src/v2/features/goals/goals.models';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
-import contentCreators from '../assets/contributors/contentCreators.json';
-import contributors from '../assets/contributors/thankYou.json';
 import rawEquipmentData from '../assets/EquipmentData.json';
 import battleData from '../assets/newBattleData.json';
 import newBattleData from '../assets/newBattleData.json';
@@ -25,8 +21,6 @@ import {
     ICampaignsData,
     ICampaignsProgress,
     ICharLegendaryEvents,
-    IContentCreator,
-    IContributor,
     IEquipment,
     IEstimatedRanksSettings,
     IMaterialEstimated2,
@@ -49,8 +43,6 @@ export class StaticDataService {
     static readonly npcData: INpcsRaw = npcData;
     static readonly recipeData: IRecipeData = recipeData;
     static readonly rankUpData: IRankUpData = rankUpData;
-    static readonly contributors: IContributor[] = contributors;
-    static readonly contentCreators: IContentCreator[] = contentCreators;
 
     static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = CampaignsService.campaignsComposed;
 

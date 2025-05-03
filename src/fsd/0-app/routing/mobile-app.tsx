@@ -5,10 +5,10 @@ import Typography from '@mui/material/Typography';
 import React, { useMemo } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
-import { useTitle } from 'src/contexts/title.context';
 import { menuItemById } from 'src/models/menu-items';
 
 import { FlexBox, Conditional } from '@/fsd/5-shared/ui';
+import { useTitle } from '@/fsd/5-shared/ui/contexts';
 
 const MobileApp = () => {
     const location = useLocation();

@@ -4,13 +4,12 @@ import React, { useContext } from 'react';
 
 import { charsUnlockShards } from 'src/models/constants';
 import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
 
-import { Conditional } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';

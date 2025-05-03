@@ -13,14 +13,16 @@ import { PersonalGoalType, Rank, RarityStars } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { CharacterImage } from 'src/shared-components/character-image';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
 
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import {
@@ -237,7 +239,9 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
                     const { data } = params;
                     if (data) {
-                        return <CharacterImage icon={data.unitIcon} height={30} width={30} tooltip={data.unitName} />;
+                        return (
+                            <CharacterShardIcon icon={data.unitIcon} height={30} width={30} tooltip={data.unitName} />
+                        );
                     }
                 },
                 sortable: false,

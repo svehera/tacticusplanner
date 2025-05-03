@@ -10,7 +10,6 @@ import { CampaignsLocationsUsage, PersonalGoalType, Rank } from 'src/models/enum
 import { ICampaignsProgress, ICharacter2 } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { CharacterImage } from 'src/shared-components/character-image';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
 import { EditAscendGoal } from 'src/shared-components/goals/edit-ascend-goal';
@@ -20,6 +19,8 @@ import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
@@ -160,7 +161,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
             <DialogTitle className="flex gap3 items-center">
-                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <CharacterImage icon={goal.unitIcon} />
+                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <CharacterShardIcon icon={goal.unitIcon} />
             </DialogTitle>
             <DialogContent style={{ paddingTop: 20 }}>
                 <Box id="edit-goal-form" className="flex flex-col gap-5">

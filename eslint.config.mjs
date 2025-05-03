@@ -7,7 +7,7 @@ import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import boundaries from 'eslint-plugin-boundaries';
 import * as pluginImportX from 'eslint-plugin-import-x';
-import prettier from 'eslint-plugin-prettier';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import react from 'eslint-plugin-react';
 import reactCompiler from 'eslint-plugin-react-compiler';
 import reactRefresh from 'eslint-plugin-react-refresh';
@@ -26,12 +26,7 @@ const FS_LAYERS = ['app', 'pages', 'widgets', 'features', 'entities', 'shared'];
 const REVERSED_FS_LAYERS = [...FS_LAYERS].reverse();
 
 export default [
-    ...compat.extends(
-        'eslint:recommended',
-        'plugin:@typescript-eslint/recommended',
-        'plugin:react/recommended',
-        'prettier'
-    ),
+    ...compat.extends('eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react/recommended'),
     pluginImportX.flatConfigs.recommended,
     pluginImportX.flatConfigs.typescript,
     {
@@ -41,7 +36,6 @@ export default [
             'react-refresh': reactRefresh,
             'react-compiler': reactCompiler,
             boundaries,
-            prettier,
         },
 
         languageOptions: {
@@ -139,7 +133,7 @@ export default [
                         },
                         {
                             from: 'shared',
-                            allow: [],
+                            allow: ['shared'],
                         },
                     ],
                 },
@@ -161,7 +155,7 @@ export default [
                 {
                     allow: [
                         '**/*(0-app|1-pages|2-widgets|3-features|4-entities|5-shared)/*',
-                        '**/5-shared/*(ui|model|api)',
+                        '**/5-shared/*(ui|model|api|i18n)',
                         '**/5-shared/ui/*',
                         '**/node_modules/**',
                         './',
@@ -203,4 +197,5 @@ export default [
             ],
         },
     },
+    eslintPluginPrettierRecommended,
 ];

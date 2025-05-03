@@ -9,10 +9,8 @@ import { Link } from 'react-router-dom';
 
 import { IGuildMember } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { Loader } from 'src/v2/components/loader';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
 
-import { FlexBox, Conditional } from '@/fsd/5-shared/ui';
+import { LoaderWithText, AccessibleTooltip, FlexBox, Conditional } from '@/fsd/5-shared/ui';
 
 import { GuildMemberInput } from 'src/v2/features/guild/guild-member-input';
 import { GuildMemberView } from 'src/v2/features/guild/guild-member-view';
@@ -73,7 +71,7 @@ export const Guild: React.FC = () => {
 
     return (
         <FlexBox style={{ flexDirection: 'column' }} gap={10}>
-            {loading && <Loader loading={true} />}
+            {loading && <LoaderWithText loading={true} />}
             <FlexBox justifyContent={'center'} gap={10} style={{ marginTop: 10 }}>
                 <ImportGuildExcel onImport={saveGuildMembers} />
                 <ImportUserLink onImport={importViaLink} />

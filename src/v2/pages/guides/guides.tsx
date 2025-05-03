@@ -9,11 +9,11 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useSearchParams } from 'react-router-dom';
 
-import { useAuth } from 'src/contexts/auth';
-import { UserRole } from 'src/models/enums';
 import { StoreContext } from 'src/reducers/store.provider';
-import { Loader } from 'src/v2/components/loader';
 import { useQueryState } from 'src/v2/hooks/query-state';
+
+import { useAuth, UserRole } from '@/fsd/5-shared/model';
+import { LoaderWithText } from '@/fsd/5-shared/ui';
 
 import { CreateGuideDialog } from 'src/v2/features/guides/components/create-guide.dialog';
 import { EditGuideDialog } from 'src/v2/features/guides/components/edit-guide.dialog';
@@ -517,7 +517,7 @@ export const Guides: React.FC = () => {
                 {isModerator && <Tab label="Pending" />}
                 {isModerator && <Tab label="Rejected" />}
             </Tabs>
-            {loading && <Loader loading={true} />}
+            {loading && <LoaderWithText loading={true} />}
             {openCreateTeamDialog && (
                 <CreateGuideDialog
                     units={[...characters, ...mows]}

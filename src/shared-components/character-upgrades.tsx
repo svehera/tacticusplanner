@@ -8,8 +8,9 @@ import { Rank } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
 import { UpgradeControl } from 'src/shared-components/upgrade-control';
 import { findAndRemoveItem } from 'src/shared-logic/functions';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IBaseUpgrade, ICraftedUpgrade, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';

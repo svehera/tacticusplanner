@@ -26,8 +26,9 @@ import { isMobile } from 'react-device-detect';
 
 import { CampaignType, DailyRaidsStrategy, Rarity } from 'src/models/enums';
 import { DailyRaidsCustomLocations } from 'src/shared-components/daily-raids-custom-locations';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
 

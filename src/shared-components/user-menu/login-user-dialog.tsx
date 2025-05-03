@@ -15,9 +15,10 @@ import { AxiosError } from 'axios';
 import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 
-import { loginUser } from '../../api/api-functions';
-import { IErrorResponse } from '../../api/api-interfaces';
-import { useAuth } from '../../contexts/auth';
+import { IErrorResponse } from '@/fsd/5-shared/api';
+import { useAuth } from '@/fsd/5-shared/model';
+
+import { loginUser } from './auth.endpoints';
 
 export const LoginUserDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const [loginForm, setLoginForm] = useState({
@@ -59,8 +60,8 @@ export const LoginUserDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose:
                     onClick={() => {
                         setOpen(true);
                         loginUser(loginForm.username, loginForm.password)
-                            .then(data => {
-                                login(data.data.accessToken);
+                            .then(response => {
+                                login(response.data?.accessToken ?? '');
                                 onClose();
                             })
                             .catch((err: AxiosError<IErrorResponse>) => {

@@ -15,8 +15,9 @@ import { GoalCard } from 'src/routes/goals/goal-card';
 import { GoalsTable } from 'src/routes/goals/goals-table';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';
 import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
