@@ -7,7 +7,7 @@ import { isMobile } from 'react-device-detect';
 
 import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
 
-import { AccessibleTooltip, Conditional  } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';

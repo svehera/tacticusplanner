@@ -10,9 +10,7 @@ import { Link } from 'react-router-dom';
 import { IGuildMember } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
-import { LoaderWithText, AccessibleTooltip , FlexBox, Conditional  } from '@/fsd/5-shared/ui';
-
-
+import { LoaderWithText, AccessibleTooltip, FlexBox, Conditional } from '@/fsd/5-shared/ui';
 
 import { GuildMemberInput } from 'src/v2/features/guild/guild-member-input';
 import { GuildMemberView } from 'src/v2/features/guild/guild-member-view';

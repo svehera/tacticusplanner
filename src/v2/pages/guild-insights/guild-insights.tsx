@@ -5,9 +5,7 @@ import React, { useContext, useState } from 'react';
 import { GlobalState } from 'src/models/global-state';
 import { StoreContext } from 'src/reducers/store.provider';
 
-import { LoaderWithText, AccessibleTooltip , Conditional  } from '@/fsd/5-shared/ui';
-
-
+import { LoaderWithText, AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';

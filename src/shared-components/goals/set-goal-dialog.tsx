@@ -31,8 +31,7 @@ import { getEnumValues } from 'src/shared-logic/functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
 import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 
-import { AccessibleTooltip, Conditional  } from '@/fsd/5-shared/ui';
-
+import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';

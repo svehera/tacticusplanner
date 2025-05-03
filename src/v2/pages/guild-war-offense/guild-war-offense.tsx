@@ -13,7 +13,7 @@ import { CharacterItemDialog } from 'src/shared-components/character-item-dialog
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 
-import { AccessibleTooltip, Conditional, FlexBox  } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, Conditional, FlexBox } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';

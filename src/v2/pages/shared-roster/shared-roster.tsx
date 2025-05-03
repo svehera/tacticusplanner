@@ -6,8 +6,7 @@ import { useSearchParams } from 'react-router-dom';
 import { GlobalState } from 'src/models/global-state';
 import { StoreContext } from 'src/reducers/store.provider';
 
-import { LoaderWithText, Conditional  } from '@/fsd/5-shared/ui';
-
+import { LoaderWithText, Conditional } from '@/fsd/5-shared/ui';
 
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
