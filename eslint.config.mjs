@@ -161,7 +161,7 @@ export default [
                 {
                     allow: [
                         '**/*(0-app|1-pages|2-widgets|3-features|4-entities|5-shared)/*',
-                        '**/5-shared/*(ui|model|api)',
+                        '**/5-shared/*(ui|model|api|i18n)',
                         '**/5-shared/ui/*',
                         '**/node_modules/**',
                         './',

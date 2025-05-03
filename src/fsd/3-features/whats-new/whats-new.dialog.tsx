@@ -6,6 +6,7 @@ import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { WhatsNewImage } from './whats-new-image';
@@ -18,11 +19,12 @@ interface Props {
 }
 
 export const WhatsNewDialog: React.FC<Props> = ({ isOpen, onClose }) => {
+    const { t } = useTranslation();
     return (
         <Dialog open={isOpen} fullWidth>
-            <DialogTitle>{"What's New"}</DialogTitle>
+            <DialogTitle>{t('whatsNew.title')}</DialogTitle>
             <IconButton
-                aria-label="close"
+                aria-label={t('common.close')}
                 onClick={onClose}
                 sx={{
                     position: 'absolute',
@@ -41,7 +43,7 @@ export const WhatsNewDialog: React.FC<Props> = ({ isOpen, onClose }) => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose} variant={'contained'}>
-                    OK
+                    {t('common.ok')}
                 </Button>
             </DialogActions>
         </Dialog>
@@ -49,22 +51,35 @@ export const WhatsNewDialog: React.FC<Props> = ({ isOpen, onClose }) => {
 };
 
 const VersionReleaseNotes = ({ releaseNotes }: { releaseNotes: IVersionReleaseNotes }) => {
+    const { t } = useTranslation();
     return (
         <div>
             <h2>
-                {releaseNotes.type} - {releaseNotes.version} ({releaseNotes.date})
+                {t('whatsNew.versionFormat', {
+                    type: releaseNotes.type,
+                    version: releaseNotes.version,
+                    date: releaseNotes.date,
+                })}
             </h2>
             {!releaseNotes.new.length ? undefined : (
-                <ReleaseNotes subtitle="New" version={releaseNotes.version} releaseNotes={releaseNotes.new} />
+                <ReleaseNotes
+                    subtitle={t('whatsNew.sections.new')}
+                    version={releaseNotes.version}
+                    releaseNotes={releaseNotes.new}
+                />
             )}
 
             {!releaseNotes.minor.length ? undefined : (
-                <ReleaseNotes subtitle="Minor" version={releaseNotes.version} releaseNotes={releaseNotes.minor} />
+                <ReleaseNotes
+                    subtitle={t('whatsNew.sections.minor')}
+                    version={releaseNotes.version}
+                    releaseNotes={releaseNotes.minor}
+                />
             )}
 
             {!releaseNotes.bugFixes.length ? undefined : (
                 <ReleaseNotes
-                    subtitle="Bug Fixes"
+                    subtitle={t('whatsNew.sections.bugFixes')}
                     version={releaseNotes.version}
                     releaseNotes={releaseNotes.bugFixes}
                 />
@@ -78,10 +93,11 @@ const ReleaseNotes = ({
     releaseNotes,
     version,
 }: {
-    subtitle: 'New' | 'Minor' | 'Bug Fixes';
+    subtitle: string;
     version: string;
     releaseNotes: IReleaseNote[];
 }) => {
+    const { t } = useTranslation();
     return (
         <div>
             <h3>{subtitle}</h3>
@@ -91,12 +107,12 @@ const ReleaseNotes = ({
                         {releaseNote.text}{' '}
                         {releaseNote.route && !isMobile ? (
                             <span>
-                                (<Link to={releaseNote.route}>link</Link>)
+                                (<Link to={releaseNote.route}>{t('whatsNew.link')}</Link>)
                             </span>
                         ) : undefined}
                         {releaseNote.mobileRoute && isMobile ? (
                             <span>
-                                (<Link to={releaseNote.mobileRoute}>link</Link>)
+                                (<Link to={releaseNote.mobileRoute}>{t('whatsNew.link')}</Link>)
                             </span>
                         ) : undefined}
                         {!releaseNote.subPoints?.length ? undefined : (

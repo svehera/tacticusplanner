@@ -1,7 +1,9 @@
 ﻿{
     "common": {
         "register": "Register",
-        "login": "Login"
+        "login": "Login",
+        "ok": "OK",
+        "close": "Close"
     },
 
     "auth": {
@@ -16,5 +18,15 @@
     },
     "teams": {
         "guidePlaceholder": "Explain the team strategy and role of each unit in the team. Add links to video guides if such exist"
+    },
+    "whatsNew": {
+        "title": "What's New",
+        "sections": {
+            "new": "New",
+            "minor": "Minor",
+            "bugFixes": "Bug Fixes"
+        },
+        "link": "link",
+        "versionFormat": "{{type}} - {{version}} ({{date}})"
     }
 }
