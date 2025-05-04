@@ -1,4 +1,6 @@
-﻿import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
+﻿import { describe, it, expect } from 'vitest';
+
+import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { ICharacter2, IPersonalGoal } from 'src/models/interfaces';
 
 import { Alliance, Rarity, RarityStars } from '@/fsd/5-shared/model';
