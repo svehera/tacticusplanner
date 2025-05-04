@@ -1,5 +1,10 @@
 ﻿import { cloneDeep, groupBy, map, orderBy, sortBy, sum, sumBy, uniq } from 'lodash';
 
+import { Alliance, RarityString, Rarity } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
+import { Faction } from '@/fsd/4-entities/faction';
+
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import { IRankLookup } from 'src/v2/features/goals/goals.models';
@@ -13,7 +18,7 @@ import rankUpData from '../assets/rankUpData.json';
 import recipeData from '../assets/recipeData.json';
 import unitsData from '../assets/UnitData.json';
 import { rarityStringToNumber, rarityToStars } from '../models/constants';
-import { Alliance, EquipmentClass, Faction, Rank, Rarity, RarityString } from '../models/enums';
+import { EquipmentClass } from '../models/enums';
 import {
     EquipmentType,
     ICampaignBattle,

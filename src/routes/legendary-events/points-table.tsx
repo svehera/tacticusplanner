@@ -14,8 +14,7 @@ import { sum, uniq } from 'lodash';
 import React, { useContext, useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { Rank } from 'src/models/enums';
-import { ILegendaryEvent, ILegendaryEventTrack, ILreTeam } from 'src/models/interfaces';
+import { ILreTeam } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
 import { CharacterTitle } from 'src/shared-components/character-title';
 import { useLreProgress } from 'src/shared-components/le-progress.hooks';
@@ -23,6 +22,9 @@ import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { useQueryState } from 'src/v2/hooks/query-state';
 
+import { Rank } from '@/fsd/4-entities/character';
+
+import { ILegendaryEvent, ILegendaryEventTrack } from '@/fsd/3-features/lre';
 import { LreService } from 'src/v2/features/lre/lre.service';
 
 import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-events.interfaces';

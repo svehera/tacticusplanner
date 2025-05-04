@@ -1,11 +1,11 @@
 ﻿import React from 'react';
 
-import { LegendaryEventEnum } from 'src/models/enums';
 import { IUnitData } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 import { MenuItem } from 'src/v2/models/menu-item';
 
 import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 const createMenuItem = (character: IUnitData) =>
     new MenuItem(

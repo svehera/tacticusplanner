@@ -1,10 +1,13 @@
 ﻿import React, { useContext, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { ICharacter2, ILegendaryEvent, ILreTeam, LreTrackId } from 'src/models/interfaces';
+import { ICharacter2, ILreTeam } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { useLreProgress } from 'src/shared-components/le-progress.hooks';
 
+import { LreTrackId } from '@/fsd/4-entities/lre';
+
+import { ILegendaryEvent } from '@/fsd/3-features/lre';
 import { LreAddTeam } from 'src/v2/features/lre/lre-add-team';
 import { LreEditTeam } from 'src/v2/features/lre/lre-edit-team';
 import { LreService } from 'src/v2/features/lre/lre.service';

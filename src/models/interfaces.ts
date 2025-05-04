@@ -1,11 +1,17 @@
 ﻿import React from 'react';
 
-import { ILreProgressDto } from 'src/models/dto.interfaces';
 import { GuildAction } from 'src/reducers/guildReducer';
 import { GuildWarAction } from 'src/reducers/guildWarReducer';
 import { MowsAction } from 'src/reducers/mows.reducer';
 import { TeamsAction } from 'src/reducers/teams.reducer';
 
+import { Alliance, RarityString, Rarity, RarityStars } from '@/fsd/5-shared/model';
+
+import { DamageType, Trait, Rank, CharacterBias } from '@/fsd/4-entities/character';
+import { Faction } from '@/fsd/4-entities/faction';
+import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
+
+import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
 import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
 import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
@@ -29,29 +35,16 @@ import { SelectedTeamsOrderingAction } from '../reducers/selected-teams-order.re
 import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
 
 import {
-    Alliance,
     Campaign,
     CampaignsLocationsUsage,
     CampaignType,
-    CharacterBias,
     CharacterReleaseRarity,
     DailyRaidsStrategy,
-    DamageType,
     Difficulty,
     Equipment,
     EquipmentClass,
-    Faction,
-    LegendaryEventEnum,
-    LegendaryEvents,
     PersonalGoalType,
-    Rank,
-    Rarity,
-    RarityStars,
-    RarityString,
-    Trait,
 } from './enums';
-
-export type LreTrackId = 'alpha' | 'beta' | 'gamma';
 
 export interface UnitDataRaw {
     Name: string;
@@ -210,105 +203,6 @@ export interface ICharLegendaryEvent {
 
     totalPoints: number;
     totalSlots: number;
-}
-
-export interface ILegendaryEvent extends ILegendaryEventStatic {
-    id: LegendaryEventEnum;
-    alpha: ILegendaryEventTrack;
-    beta: ILegendaryEventTrack;
-    gamma: ILegendaryEventTrack;
-
-    suggestedTeams: ITableRow[];
-    allowedUnits: Array<ICharacter2>;
-    battlesCount: number;
-}
-
-export interface ILegendaryEventStatic {
-    id: number;
-    name: string;
-    wikiLink: string;
-    eventStage: number;
-    nextEventDate: string;
-    nextEventDateUtc?: string;
-
-    regularMissions: string[];
-    premiumMissions: string[];
-
-    alpha: ILegendaryEventTrackStatic;
-    beta: ILegendaryEventTrackStatic;
-    gamma: ILegendaryEventTrackStatic;
-
-    pointsMilestones: IPointsMilestone[];
-    chestsMilestones: IChestMilestone[];
-
-    shardsPerChest: number;
-    battlesCount: number;
-    constraintsCount: number;
-    progression: ILEProgression;
-}
-
-export interface ILEProgression {
-    unlock: number;
-    fourStars: number;
-    fiveStars: number;
-    blueStar: number;
-}
-
-export interface IPointsMilestone {
-    milestone: number;
-    cumulativePoints: number;
-    engramPayout: number;
-}
-
-export interface IChestMilestone {
-    chestLevel: number;
-    engramCost: number;
-}
-
-export interface ILegendaryEventTrackStatic {
-    name: string;
-    killPoints: number;
-    battlesPoints: number[];
-    enemies: {
-        label: string;
-        link: string;
-    };
-}
-
-export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
-    eventId: LegendaryEventEnum;
-    section: LreTrackId;
-    allowedUnits: ICharacter2[];
-    unitsRestrictions: Array<ILegendaryEventTrackRequirement>;
-
-    getCharacterPoints(char: ICharacter2): number;
-
-    getCharacterSlots(char: ICharacter2): number;
-
-    getRestrictionPoints(name: string): number;
-
-    suggestTeams(
-        settings: IAutoTeamsPreferences | ISelectedTeamsOrdering,
-        onlyUnlocked: boolean,
-        restrictions: string[]
-    ): Record<string, Array<ICharacter2 | undefined>>;
-
-    suggestTeam(
-        settings: IAutoTeamsPreferences | ISelectedTeamsOrdering,
-        onlyUnlocked: boolean,
-        restrictions: string[]
-    ): Array<ICharacter2>;
-}
-
-export interface ILegendaryEventTrackRequirement {
-    id?: string;
-    hide?: boolean;
-    iconId?: string;
-    index?: number;
-    name: string;
-    points: number;
-    units: ICharacter2[];
-    selected?: boolean;
 }
 
 export type ITableRow<T = ICharacter2 | string> = Record<string, T>;
@@ -577,7 +471,6 @@ export interface IPersonalCharacterData {
     rank: Rank;
     rarity: Rarity;
     rarityStars: RarityStars;
-    leSelection: LegendaryEvents;
     alwaysRecommend?: boolean;
     neverRecommend?: boolean;
     bias: CharacterBias;

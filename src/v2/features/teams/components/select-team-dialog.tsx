@@ -6,10 +6,11 @@ import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useDebounceValue } from 'usehooks-ts';
 
-import { Alliance, Rarity } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
 import { IMenuOption } from 'src/v2/models/menu-option';
+
+import { Rarity, Alliance } from '@/fsd/5-shared/model';
 
 import { IMow, IUnit } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';

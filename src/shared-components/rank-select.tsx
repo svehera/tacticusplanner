@@ -4,7 +4,8 @@ import React from 'react';
 
 import { RankImage } from 'src/v2/components/images/rank-image';
 
-import { Rank } from '../models/enums';
+import { Rank } from '@/fsd/4-entities/character';
+
 import { rankToString } from '../shared-logic/functions';
 
 export const RankSelect = ({

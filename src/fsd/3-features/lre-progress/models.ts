@@ -1,5 +1,6 @@
-import { LegendaryEventEnum, LrePointsCategoryId, ProgressState } from 'src/models/enums';
-import { LreTrackId } from 'src/models/interfaces';
+import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
+
+import { LrePointsCategoryId, ProgressState } from './enums';
 
 export interface ILreProgressDto {
     id: LegendaryEventEnum;

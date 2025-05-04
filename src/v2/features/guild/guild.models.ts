@@ -1,5 +1,7 @@
-﻿import { Difficulty, Rarity } from 'src/models/enums';
+﻿import { Difficulty } from 'src/models/enums';
 import { IGuildMember, IInsightsData, IPersonalCharacterData2 } from 'src/models/interfaces';
+
+import { Rarity } from '@/fsd/5-shared/model';
 
 import { IMowDb } from 'src/v2/features/characters/characters.models';
 

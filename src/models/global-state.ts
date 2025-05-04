@@ -1,6 +1,10 @@
-﻿import { ILreProgressDto } from 'src/models/dto.interfaces';
-import mowsData from 'src/v2/data/mows.json';
+﻿import mowsData from 'src/v2/data/mows.json';
 
+import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+
+import { CharacterBias, Rank } from '@/fsd/4-entities/character';
+
+import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { IMow, IMowDb, IMowStatic } from 'src/v2/features/characters/characters.models';
 import { UnitType } from 'src/v2/features/characters/units.enums';
@@ -9,7 +13,6 @@ import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 import { StaticDataService } from '../services';
 
 import { defaultData, rankToLevel, rankToRarity, rarityStringToNumber, rarityToStars } from './constants';
-import { CharacterBias, LegendaryEventEnum, Rank, Rarity, RarityStars } from './enums';
 import {
     IAutoTeamsPreferences,
     ICampaignsProgress,

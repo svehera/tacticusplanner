@@ -1,7 +1,10 @@
-import { Rank, Rarity, RarityStars } from 'src/models/enums';
-import { ICharacter2, IRankUpData, IUnitData } from 'src/models/interfaces';
+import { ICharacter2 } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 import { rankToString } from 'src/shared-logic/functions';
+
+import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 export class StatCalculatorService {
     // The following NPC ability levels were gathered by Towen. They map to

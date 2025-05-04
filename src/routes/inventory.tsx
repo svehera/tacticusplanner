@@ -8,7 +8,8 @@ import { InventoryControls } from 'src/routes/inventory-controls';
 import { UpgradesGroup } from 'src/routes/upgrades-group';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 
-import { Rarity } from '../models/enums';
+import { Rarity } from '@/fsd/5-shared/model';
+
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
 import { StaticDataService } from '../services';
 

@@ -6,7 +6,7 @@ import Zoom from 'react-medium-image-zoom';
 import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line import-x/no-internal-modules
-import { LegendaryEventEnum, PersonalGoalType } from 'src/models/enums';
+import { PersonalGoalType } from 'src/models/enums';
 // eslint-disable-next-line import-x/no-internal-modules
 import { menuItemById } from 'src/models/menu-items';
 // eslint-disable-next-line import-x/no-internal-modules
@@ -18,6 +18,7 @@ import { useAuth } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 import { Thanks } from '@/fsd/3-features/thank-you';
 

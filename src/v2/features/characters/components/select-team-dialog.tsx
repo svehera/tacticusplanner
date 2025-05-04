@@ -4,11 +4,11 @@ import Dialog from '@mui/material/Dialog';
 import React, { useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { Rarity } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 
+import { Rarity } from '@/fsd/5-shared/model';
 import { FlexBox, Conditional } from '@/fsd/5-shared/ui';
 
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';

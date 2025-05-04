@@ -1,10 +1,12 @@
 import { useContext, useState } from 'react';
 import { useDebounceCallback } from 'usehooks-ts';
 
-import { LrePointsCategoryId, ProgressState } from 'src/models/enums';
-import { ILegendaryEvent, LreTrackId } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
+import { LreTrackId } from '@/fsd/4-entities/lre';
+
+import { ILegendaryEvent } from '@/fsd/3-features/lre';
+import { LrePointsCategoryId, ProgressState } from '@/fsd/3-features/lre-progress';
 import {
     ILreBattleRequirementsProgress,
     ILreOccurrenceProgress,

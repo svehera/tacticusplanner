@@ -6,14 +6,16 @@ import React, { useContext, useEffect, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
-import { Rank, Rarity } from 'src/models/enums';
 import { ICharacter2 } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { CharacterItemDialog } from 'src/shared-components/character-item-dialog';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 
+import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, FlexBox, Conditional } from '@/fsd/5-shared/ui';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { CharactersService } from 'src/v2/features/characters/characters.service';

@@ -1,4 +1,4 @@
-﻿import { Alliance, Rarity } from 'src/models/enums';
+﻿import { Rarity, Alliance } from '@/fsd/5-shared/model';
 
 import { IMow } from 'src/v2/features/characters/characters.models';
 import { IBaseUpgrade, ICraftedUpgrade } from 'src/v2/features/goals/goals.models';

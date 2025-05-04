@@ -1,9 +1,9 @@
 ﻿import { Info } from '@mui/icons-material';
 import React from 'react';
 
-import { Rarity, RarityString } from 'src/models/enums';
 import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
 
+import { Rarity, RarityString } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 interface Props {

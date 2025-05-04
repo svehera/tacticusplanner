@@ -3,7 +3,7 @@
 import battleData from 'src/assets/newBattleData.json';
 import rankUpData from 'src/assets/rankUpData.json';
 import { rarityStringToNumber } from 'src/models/constants';
-import { CampaignType, DailyRaidsStrategy, PersonalGoalType, Rank, Rarity, RarityString } from 'src/models/enums';
+import { CampaignType, DailyRaidsStrategy, PersonalGoalType } from 'src/models/enums';
 import {
     ICampaignBattle,
     ICampaignsData,
@@ -16,6 +16,10 @@ import {
 } from 'src/models/interfaces';
 import { getEnumValues, rankToString } from 'src/shared-logic/functions';
 import recipeData from 'src/v2/data/recipeData.json';
+
+import { RarityString, Rarity } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaigns.constants';
 import { CampaignsService } from 'src/v2/features/goals/campaigns.service';

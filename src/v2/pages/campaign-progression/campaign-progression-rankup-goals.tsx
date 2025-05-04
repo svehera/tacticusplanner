@@ -3,14 +3,13 @@ import { ColDef, AllCommunityModule, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 
-import { Rank } from 'src/models/enums';
 import { IUnitData } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services/static-data.service';
 import { RankImage } from 'src/v2/components/images/rank-image';
 
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { Rank, CharacterShardIcon } from '@/fsd/4-entities/character';
 
 import { CampaignData } from 'src/v2/features/campaign-progression/campaign-progression.models';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from 'src/v2/features/goals/goals.models';

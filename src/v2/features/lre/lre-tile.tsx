@@ -2,12 +2,11 @@ import { Tooltip } from '@mui/material';
 import React from 'react';
 
 import { pooEmoji, starEmoji } from 'src/models/constants';
-import { CharacterBias, Rank } from 'src/models/enums';
 import { ICharacter2, ILreTileSettings } from 'src/models/interfaces';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { CharacterBias, CharacterShardIcon, Rank } from '@/fsd/4-entities/character';
 
 interface Props {
     character: ICharacter2;

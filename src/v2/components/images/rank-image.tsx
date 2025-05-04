@@ -1,7 +1,8 @@
 ﻿import React from 'react';
 
-import { Rank } from 'src/models/enums';
 import { getImageUrl } from 'src/shared-logic/functions';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 export const RankImage = ({
     rank,

@@ -3,10 +3,13 @@ import React from 'react';
 import blueStar from 'src/assets/images/stars/blue star.png';
 import redStar from 'src/assets/images/stars/red star small.png';
 import goldStar from 'src/assets/images/stars/star small.png';
-import { Rank, Rarity, RarityStars, RarityString } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 import { getImageUrl } from 'src/shared-logic/functions';
 import { RankImage } from 'src/v2/components/images/rank-image';
+
+import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 interface Props {
     name: string;

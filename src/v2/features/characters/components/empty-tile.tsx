@@ -1,11 +1,13 @@
 ﻿import React from 'react';
 
-import { Rank, RarityStars } from 'src/models/enums';
 import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { StarsImage } from 'src/v2/components/images/stars-image';
 
+import { RarityStars } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 import './character-tile.css';
 

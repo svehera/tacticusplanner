@@ -3,8 +3,9 @@ import { Checkbox, FormControlLabel, Popover } from '@mui/material';
 import Button from '@mui/material/Button';
 import React, { useEffect, useMemo } from 'react';
 
-import { Alliance } from 'src/models/enums';
 import { UpgradeImage } from 'src/shared-components/upgrade-image';
+
+import { Alliance } from '@/fsd/5-shared/model';
 
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';

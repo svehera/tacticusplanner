@@ -3,7 +3,7 @@
 import campaignConfigs from 'src/assets/campaignConfigs.json';
 import newBattleData from 'src/assets/newBattleData.json';
 import recipeData from 'src/assets/recipeData.json';
-import { Alliance, Campaign, CampaignType, Faction, Rarity } from 'src/models/enums';
+import { Campaign, CampaignType } from 'src/models/enums';
 import {
     ICampaignBattleComposed,
     ICampaignConfigs,
@@ -13,6 +13,10 @@ import {
     IDropRate,
     IRecipeData,
 } from 'src/models/interfaces';
+
+import { Rarity, Alliance } from '@/fsd/5-shared/model';
+
+import { Faction } from '@/fsd/4-entities/faction';
 
 import { campaignsList } from 'src/v2/features/campaigns/campaigns.constants';
 import { CampaignReleaseType } from 'src/v2/features/campaigns/campaigns.enums';

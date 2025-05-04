@@ -1,6 +1,7 @@
-﻿import { ILreProgressDto } from 'src/models/dto.interfaces';
+﻿import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
-import { LegendaryEventEnum } from '../models/enums';
+import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
+
 import { LegendaryEventData, SetStateAction } from '../models/interfaces';
 
 export type LeProgressAction =

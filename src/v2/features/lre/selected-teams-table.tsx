@@ -11,10 +11,11 @@ import { AgGridReact } from 'ag-grid-react';
 import React, { useContext, useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { ICharacter2, ILegendaryEventTrack, ILegendaryEventTrackRequirement, ITableRow } from 'src/models/interfaces';
+import { ICharacter2, ITableRow } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
 import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
 
+import { ILegendaryEventTrack, ILegendaryEventTrackRequirement } from '@/fsd/3-features/lre';
 import { LreTile } from 'src/v2/features/lre/lre-tile';
 
 interface Props {

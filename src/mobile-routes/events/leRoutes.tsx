@@ -2,11 +2,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { LegendaryEventEnum } from 'src/models/enums';
 import { menuItemById } from 'src/models/menu-items';
 import { StaticDataService } from 'src/services';
 
 import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 export const PlanLeRoutes = () => {
     const navigate = useNavigate();

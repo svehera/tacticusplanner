@@ -3,7 +3,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import { FormControlLabel, Popover, Switch } from '@mui/material';
 import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { orderBy, sortBy, sum } from 'lodash';
+import { orderBy, sum } from 'lodash';
 import React, { useContext, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
@@ -11,10 +11,13 @@ import { CampaignLocation } from 'src/shared-components/goals/campaign-location'
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 
+import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { DailyRaidsStrategy, Rank, Rarity } from '../../models/enums';
+import { Rank } from '@/fsd/4-entities/character';
+
+import { DailyRaidsStrategy } from '../../models/enums';
 import {
     ICharacter2,
     IMaterialEstimated2,

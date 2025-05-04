@@ -1,15 +1,12 @@
 ﻿import { intersectionBy, orderBy, sum, uniqBy } from 'lodash';
 
-import { CharacterBias, LegendaryEventEnum, Rank } from '../enums';
-import {
-    IAutoTeamsPreferences,
-    ICharacter2,
-    ILegendaryEventTrack,
-    ILegendaryEventTrackRequirement,
-    ILegendaryEventTrackStatic,
-    ISelectedTeamsOrdering,
-    LreTrackId,
-} from '../interfaces';
+// eslint-disable-next-line import-x/no-internal-modules
+import { IAutoTeamsPreferences, ICharacter2, ISelectedTeamsOrdering } from '@/models/interfaces';
+
+import { Rank, CharacterBias } from '@/fsd/4-entities/character';
+import { LegendaryEventEnum, ILegendaryEventTrackStatic, LreTrackId } from '@/fsd/4-entities/lre';
+
+import { ILegendaryEventTrack, ILegendaryEventTrackRequirement } from '../lre.model';
 
 export class LETrack implements ILegendaryEventTrack {
     name: string;
