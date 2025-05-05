@@ -5,12 +5,10 @@ import React, { useMemo } from 'react';
 import { Equipment } from 'src/models/enums';
 import { EquipmentType } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
+import { DamageCalculatorService } from './damage-calculator-service';
 import { getImageUrl } from 'src/shared-logic/functions';
-
 import { Rarity } from '@/fsd/5-shared/model';
-
 import { Faction } from '@/fsd/4-entities/faction';
-
 import { IEquipmentSpec } from './versus-interfaces';
 
 interface Props {
