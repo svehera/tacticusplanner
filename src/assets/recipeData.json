@@ -4,28 +4,230 @@
         "craftable": false,
         "stat": "Health",
         "rarity": "Legendary",
-        "icon": "arcane genetic alchemy.jpg"
+        "icon": "arcane genetic alchemy.jpg",
+        "faction": "Adeptus Custodes"
     },
     "Auramite Wing": {
         "material": "Auramite Wing",
         "craftable": false,
         "stat": "Armour",
         "rarity": "Rare",
-        "icon": "auramite wing.jpg"
+        "icon": "auramite wing.jpg",
+        "faction": "Adeptus Custodes"
     },
     "Flawless Terran Gem": {
         "material": "Flawless Terran Gem",
         "craftable": false,
         "stat": "Health",
         "rarity": "Rare",
-        "icon": "flawless terran gem.jpg"
+        "icon": "flawless terran gem.jpg",
+        "faction": "Adeptus Custodes"
     },
     "Integrated Bolt Feeder": {
         "material": "Integrated Bolt Feeder",
         "craftable": false,
         "stat": "Damage",
         "rarity": "Rare",
-        "icon": "integrated bolt feeder.jpg"
+        "icon": "integrated bolt feeder.jpg",
+        "faction": "Adeptus Custodes"
+    },
+    "Flawless Gem Embellishment": {
+        "material": "Flawless Gem Embellishment",
+        "faction": "Adeptus Custodes",
+        "craftable": true,
+        "stat": "Health",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Flawless Terran Gem",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ],
+        "icon": "Flawless Gem Embellishment.jpg"
+    },
+    "Embellished Bolt Feeder": {
+        "material": "Embellished Bolt Feeder",
+        "faction": "Adeptus Custodes",
+        "craftable": true,
+        "stat": "Damage",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Integrated Bolt Feeder",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ],
+        "icon": "Embellished Bolt Feeder.jpg"
+    },
+    "Auramite Wing Embellishment": {
+        "material": "Auramite Wing Embellishment",
+        "faction": "Adeptus Custodes",
+        "craftable": true,
+        "stat": "Armour",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Auramite Wing",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ],
+        "icon": "Auramite Wing Embellishment.jpg"
+    },
+    "Adorned Bolt Feeder": {
+        "material": "Adorned Bolt Feeder",
+        "faction": "Adeptus Custodes",
+        "craftable": true,
+        "stat": "Damage",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Embellished Bolt Feeder",
+                "count": 2
+            },
+            {
+                "material": "Sanctified Weapon Oils",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Adorned Bolt Feeder.jpg"
+    },
+    "Flawless Gem Adornment": {
+        "material": "Flawless Gem Adornment",
+        "faction": "Adeptus Custodes",
+        "craftable": true,
+        "stat": "Health",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Flawless Gem Embellishment",
+                "count": 2
+            },
+            {
+                "material": "Exospine",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Flawless Gem Adornment.jpg"
+    },
+    "Auramite Wing Adornment": {
+        "material": "Auramite Wing Adornment",
+        "faction": "Adeptus Custodes",
+        "craftable": true,
+        "stat": "Armour",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Auramite Wing Embellishment",
+                "count": 2
+            },
+            {
+                "material": "Adamantium Sheet",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Auramite Wing Adornment.jpg"
+    },
+    "Defensor Refractor Generator": {
+        "material": "Defensor Refractor Generator",
+        "faction": "Adeptus Custodes",
+        "craftable": true,
+        "stat": "Health",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Arcane Genetic Alchemy",
+                "count": 9
+            },
+            {
+                "material": "Medical Supply Crate",
+                "count": 1
+            },
+            {
+                "material": "Duplicate Organ",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Defensor Refractor Generator.jpg"
+    },
+    "Panoptispex": {
+        "material": "Panoptispex",
+        "faction": "Adeptus Custodes",
+        "craftable": true,
+        "stat": "Damage",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Arcane Genetic Alchemy",
+                "count": 9
+            },
+            {
+                "material": "Advanced Combat Stimms",
+                "count": 1
+            },
+            {
+                "material": "Duplicate Organ",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Panoptispex.jpg"
+    },
+    "Adamantine Thread Cloak": {
+        "material": "Adamantine Thread Cloak",
+        "faction": "Adeptus Custodes",
+        "craftable": true,
+        "stat": "Armour",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Arcane Genetic Alchemy",
+                "count": 9
+            },
+            {
+                "material": "Grand Skull Trophy",
+                "count": 1
+            },
+            {
+                "material": "Revered Talisman",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ],
+        "icon": "Adamantine Thread Cloak.jpg"
     },
     "Proclamation Receiver": {
         "material": "Proclamation Receiver",
