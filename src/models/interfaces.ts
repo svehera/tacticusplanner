@@ -672,7 +672,7 @@ export interface IMaterialRecipeIngredientFull {
 }
 
 export interface IRankUpData {
-    [character: string]: IRankUpData2;
+    [character: string]: IRankUpData2 | undefined;
 }
 
 export interface IRankUpData2 {

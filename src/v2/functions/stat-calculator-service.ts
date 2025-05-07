@@ -75,7 +75,7 @@ export class StatCalculatorService {
         if (unit == undefined) return 0;
         const characterUpgrades = StaticDataService.rankUpData[unit.id];
         let count: number = 0;
-        if (unit.rank == Rank.Diamond3) return 0;
+        if (unit.rank == Rank.Diamond3 || typeof characterUpgrades === 'undefined') return 0;
         const upgrades = characterUpgrades[rankToString(unit.rank)];
         if (unit.upgrades.findIndex(u => u === upgrades[firstUpgradeIndex]) != -1) ++count;
         if (unit.upgrades.findIndex(u => u === upgrades[secondUpgradeIndex]) != -1) ++count;
