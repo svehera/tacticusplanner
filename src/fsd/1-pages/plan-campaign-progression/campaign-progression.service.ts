@@ -202,7 +202,10 @@ export class CampaignsProgressionService {
                     battle.rarityEnum
                 );
                 const oldEnergy = newMaterialEnergy.get(battle.reward) ?? farmData.totalEnergy;
-                if (oldEnergy - farmData.count > newEnergyCost || !farmData.canFarm) {
+                if (battle.reward === 'Cloak') {
+                    console.debug(`Cloak:`, { campaign, oldEnergy, newEnergyCost, count: farmData.count });
+                }
+                if (oldEnergy - farmData.count / 2 > newEnergyCost || !farmData.canFarm) {
                     cumulativeSavings += farmData.totalEnergy - newEnergyCost;
                     result.data
                         .get(campaign)
