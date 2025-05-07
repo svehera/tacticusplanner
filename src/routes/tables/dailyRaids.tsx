@@ -1,28 +1,29 @@
-﻿import React, { useContext, useMemo } from 'react';
-import { enqueueSnackbar } from 'notistack';
+﻿import { enqueueSnackbar } from 'notistack';
+import React, { useContext, useMemo } from 'react';
 
 import { IDailyRaidsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+import { RaidsHeader } from 'src/routes/tables/raids-header';
+import { RaidsPlan } from 'src/routes/tables/raids-plan';
+import { TodayRaids } from 'src/routes/tables/todayRaids';
+
+import { useAuth } from '@/fsd/5-shared/model';
+
+import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { ActiveGoalsDialog } from 'src/v2/features/goals/active-goals-dialog';
 import {
     CharacterRaidGoalSelect,
     IEstimatedShards,
     IEstimatedUpgrades,
     IItemRaidLocation,
 } from 'src/v2/features/goals/goals.models';
+import { GoalsService } from 'src/v2/features/goals/goals.service';
 import { LocationsFilter } from 'src/v2/features/goals/locations-filter';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
-import { GoalsService } from 'src/v2/features/goals/goals.service';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 
-import { TodayRaids } from 'src/routes/tables/todayRaids';
-import { ActiveGoalsDialog } from 'src/v2/features/goals/active-goals-dialog';
-import { RaidsPlan } from 'src/routes/tables/raids-plan';
-import { RaidsHeader } from 'src/routes/tables/raids-header';
-
 import './dailyRaids.scss';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { useAuth } from '@/contexts/auth';
-import { useSyncWithTacticus } from '@/v2/features/tacticus-integration/useSyncWithTacticus';
 
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);

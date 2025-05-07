@@ -1,7 +1,10 @@
-import { Rank, Rarity, RarityStars } from 'src/models/enums';
-import { ICharacter2, IRankUpData, IUnitData } from 'src/models/interfaces';
+import { ICharacter2 } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 import { rankToString } from 'src/shared-logic/functions';
+
+import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 export class StatCalculatorService {
     // The following NPC ability levels were gathered by Towen. They map to
@@ -72,7 +75,7 @@ export class StatCalculatorService {
         if (unit == undefined) return 0;
         const characterUpgrades = StaticDataService.rankUpData[unit.id];
         let count: number = 0;
-        if (unit.rank == Rank.Diamond3) return 0;
+        if (unit.rank == Rank.Diamond3 || typeof characterUpgrades === 'undefined') return 0;
         const upgrades = characterUpgrades[rankToString(unit.rank)];
         if (unit.upgrades.findIndex(u => u === upgrades[firstUpgradeIndex]) != -1) ++count;
         if (unit.upgrades.findIndex(u => u === upgrades[secondUpgradeIndex]) != -1) ++count;

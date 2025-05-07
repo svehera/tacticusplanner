@@ -1,8 +1,11 @@
-import { NoBackpackOutlined } from '@mui/icons-material';
 import React from 'react';
-import { Rank, Rarity, RarityStars } from 'src/models/enums';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
+
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+
+import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { Rank } from '@/fsd/4-entities/character';
 
 interface Props {
     characterId?: string;

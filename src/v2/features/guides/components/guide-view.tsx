@@ -1,12 +1,13 @@
-﻿import React from 'react';
-import { IGuide } from 'src/v2/features/guides/guides.models';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import Dialog from '@mui/material/Dialog';
-import { GuideCard } from 'src/v2/features/guides/components/guide-card';
-import { isMobile } from 'react-device-detect';
-import { DialogActions } from '@mui/material';
+﻿import { DialogActions } from '@mui/material';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import React from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { GuideCard } from 'src/v2/features/guides/components/guide-card';
 import { GuidesStatus } from 'src/v2/features/guides/guides.enums';
+import { IGuide } from 'src/v2/features/guides/guides.models';
 
 interface Props {
     onClose: () => void;

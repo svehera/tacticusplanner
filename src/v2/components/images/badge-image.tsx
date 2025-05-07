@@ -1,6 +1,8 @@
 ﻿import React from 'react';
-import { Alliance, Rarity } from 'src/models/enums';
+
 import { getImageUrl } from 'src/shared-logic/functions';
+
+import { Rarity, Alliance } from '@/fsd/5-shared/model';
 
 export const BadgeImage = ({
     alliance,

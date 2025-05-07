@@ -1,8 +1,8 @@
-﻿import React from 'react';
-import { IGuildMember } from 'src/models/interfaces';
-import { FlexBox } from 'src/v2/components/flex-box';
-import { TextField } from '@mui/material';
+﻿import { TextField } from '@mui/material';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { IGuildMember } from 'src/models/interfaces';
 
 interface Props {
     index: number;

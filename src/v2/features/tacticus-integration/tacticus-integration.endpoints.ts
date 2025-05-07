@@ -1,4 +1,5 @@
-import { makeApiCall } from 'src/v2/api/makeApiCall';
+import { makeApiCall } from '@/fsd/5-shared/api';
+
 import {
     TacticusGuildRaidResponse,
     TacticusGuildResponse,

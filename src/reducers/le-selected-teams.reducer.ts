@@ -1,12 +1,8 @@
-﻿import {
-    ILegendaryEventSelectedTeams,
-    ILreTeam,
-    LegendaryEventData,
-    LreTrackId,
-    SetStateAction,
-} from '../models/interfaces';
-import { v4 } from 'uuid';
-import { LegendaryEventEnum } from '../models/enums';
+﻿import { v4 } from 'uuid';
+
+import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
+
+import { ILegendaryEventSelectedTeams, ILreTeam, LegendaryEventData, SetStateAction } from '../models/interfaces';
 
 export type LeSelectedTeamsAction =
     | {

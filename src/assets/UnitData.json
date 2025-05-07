@@ -1718,8 +1718,8 @@
         "Faction": "Dark Angels",
         "Alliance": "Imperial",
         "Health": 90,
-        "Damage": 21,
-        "Armour": 12,
+        "Damage": 12,
+        "Armour": 21,
         "Initial rarity": "Rare",
         "Melee Damage": "Power",
         "Active Ability": "Power",
@@ -2119,7 +2119,7 @@
         "ReleaseRarity": 6,
         "lre": {
             "id": 7,
-            "finished": false,
+            "finished": true,
             "eventStage": 3,
             "nextEventDate": "TBA",
             "nextEventDateUtc": "Sun, 27 April 2025 00:00:00 GMT"

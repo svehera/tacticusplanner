@@ -1,10 +1,13 @@
-import React from 'react';
-import { ICampaignBattleComposed } from 'src/models/interfaces';
-import { CampaignBattleEnemies } from './campaign-battle-enemies';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
-import { StaticDataService } from 'src/services';
 import { Tooltip } from '@mui/material';
-import { CharacterImage } from 'src/shared-components/character-image';
+import React from 'react';
+
+import { ICampaignBattleComposed } from 'src/models/interfaces';
+import { StaticDataService } from 'src/services';
+import { UpgradeImage } from 'src/shared-components/upgrade-image';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
+
+import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
 interface Props {
     battle: ICampaignBattleComposed;
@@ -20,7 +23,7 @@ export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
                 return (
                     <div>
                         <Tooltip title={upgrade.label}>
-                            <CharacterImage
+                            <CharacterShardIcon
                                 icon={character.icon}
                                 name={upgrade.label}
                                 height={30}

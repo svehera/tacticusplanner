@@ -1,5 +1,5 @@
-﻿import { IDailyRaidsPreferences, SetStateAction } from '../models/interfaces';
-import { defaultData } from '../models/constants';
+﻿import { defaultData } from '../models/constants';
+import { IDailyRaidsPreferences, SetStateAction } from '../models/interfaces';
 
 export type DailyRaidsPreferencesAction =
     | {

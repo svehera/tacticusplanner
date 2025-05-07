@@ -1,8 +1,9 @@
-﻿import { defineConfig } from 'vite';
-import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+﻿/// <reference types="vitest/config" />
 import react from '@vitejs/plugin-react';
-import viteTsconfigPaths from 'vite-tsconfig-paths';
 import browserslistToEsbuild from 'browserslist-to-esbuild';
+import { defineConfig } from 'vite';
+import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+import viteTsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
     // depending on your application, base can also be "/"
@@ -41,6 +42,16 @@ export default defineConfig({
         alias: {
             src: '/src',
             '@': '/src',
+        },
+    },
+    test: {
+        globals: true,
+        environment: 'jsdom',
+        setupFiles: ['./src/setupTests.ts'],
+        coverage: {
+            provider: 'v8',
+            reporter: ['text', 'html'],
+            exclude: ['node_modules/', 'src/setupTests.ts'],
         },
     },
 });

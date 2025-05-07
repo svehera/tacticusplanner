@@ -1,7 +1,10 @@
-﻿import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
-import { Info } from '@mui/icons-material';
+﻿import { Info } from '@mui/icons-material';
 import React from 'react';
+
+import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+
 import { IXpEstimate } from 'src/v2/features/characters/characters.models';
 
 export const XpTotal: React.FC<IXpEstimate> = ({ legendaryBooks, currentLevel, targetLevel, xpLeft, gold }) => {

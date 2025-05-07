@@ -1,19 +1,13 @@
-﻿import React, { useContext, useMemo, useRef, useState } from 'react';
+﻿import React, { useContext, useMemo } from 'react';
 
-import { AgGridReact } from 'ag-grid-react';
-
-import {
-    ICharacter2,
-    ILegendaryEventSelectedRequirements,
-    ILegendaryEventTrack,
-    ILreTeam,
-    LreTrackId,
-} from 'src/models/interfaces';
-
+import { ICharacter2, ILegendaryEventSelectedRequirements, ILreTeam } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
+
+import { LreTrackId, LegendaryEventEnum } from '@/fsd/4-entities/lre';
+
+import { ILegendaryEventTrack } from '@/fsd/3-features/lre';
 import { LreTeamsCard } from 'src/v2/features/lre/lre-teams-card';
 import { LreTeamsTable } from 'src/v2/features/lre/lre-teams-table';
-import { LegendaryEventEnum } from 'src/models/enums';
 
 interface Props {
     track: ILegendaryEventTrack;

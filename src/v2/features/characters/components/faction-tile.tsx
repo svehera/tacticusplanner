@@ -1,19 +1,20 @@
 ﻿import React, { useContext, useMemo } from 'react';
 
 import { FactionImage } from 'src/v2/components/images/faction-image';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
 
+import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { MowTile } from 'src/v2/features/characters/components/mow-tile';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+
 import { IFaction, IUnit } from '../characters.models';
+
 import { CharacterTile } from './character-tile';
 
 import './faction-tile.scss';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { Conditional } from 'src/v2/components/conditional';
-import { ICharacter2 } from 'src/models/interfaces';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { UnitType } from 'src/v2/features/characters/units.enums';
-import { MowTile } from 'src/v2/features/characters/components/mow-tile';
 
 export const FactionsTile = ({
     faction,

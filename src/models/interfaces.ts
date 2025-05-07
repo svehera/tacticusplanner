@@ -1,54 +1,50 @@
-﻿import {
-    Alliance,
+﻿import React from 'react';
+
+import { GuildAction } from 'src/reducers/guildReducer';
+import { GuildWarAction } from 'src/reducers/guildWarReducer';
+import { MowsAction } from 'src/reducers/mows.reducer';
+import { TeamsAction } from 'src/reducers/teams.reducer';
+
+import { Alliance, RarityString, Rarity, RarityStars } from '@/fsd/5-shared/model';
+
+import { DamageType, Trait, Rank, CharacterBias } from '@/fsd/4-entities/character';
+import { Faction } from '@/fsd/4-entities/faction';
+import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
+
+import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
+import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
+import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
+import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
+import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
+import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
+import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
+
+import { AutoTeamsPreferencesAction } from '../reducers/auto-teams-settings.reducer';
+import { CampaignsProgressAction } from '../reducers/campaigns-progress.reducer';
+import { CharactersAction } from '../reducers/characters.reducer';
+import { DailyRaidsPreferencesAction } from '../reducers/daily-raids-settings.reducer';
+import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
+import { GoalsAction } from '../reducers/goals.reducer';
+import { InventoryAction } from '../reducers/inventory.reducer';
+import { LeProgressAction } from '../reducers/le-progress.reducer';
+import { LeSelectedRequirementsAction } from '../reducers/le-selected-requirements.reducer';
+import { LeSelectedTeamsAction } from '../reducers/le-selected-teams.reducer';
+import { SelectedTeamsOrderingAction } from '../reducers/selected-teams-order.reducer';
+import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
+
+import {
     Campaign,
     CampaignsLocationsUsage,
     CampaignType,
-    CharacterBias,
     CharacterReleaseRarity,
     DailyRaidsStrategy,
-    DamageType,
     Difficulty,
     Equipment,
     EquipmentClass,
-    Faction,
-    LegendaryEventEnum,
-    LegendaryEvents,
     PersonalGoalType,
-    Rank,
-    Rarity,
-    RarityStars,
-    RarityString,
-    Trait,
-    UserRole,
 } from './enums';
-import React from 'react';
-import { CharactersAction } from '../reducers/characters.reducer';
-import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
-import { AutoTeamsPreferencesAction } from '../reducers/auto-teams-settings.reducer';
-import { SelectedTeamsOrderingAction } from '../reducers/selected-teams-order.reducer';
-import { LeSelectedRequirementsAction } from '../reducers/le-selected-requirements.reducer';
-import { LeSelectedTeamsAction } from '../reducers/le-selected-teams.reducer';
-import { LeProgressAction } from '../reducers/le-progress.reducer';
-import { GoalsAction } from '../reducers/goals.reducer';
-import { CampaignsProgressAction } from '../reducers/campaigns-progress.reducer';
-import { DailyRaidsPreferencesAction } from '../reducers/daily-raids-settings.reducer';
-import { InventoryAction } from '../reducers/inventory.reducer';
-import { DailyRaidsAction } from '../reducers/dailyRaids.reducer';
-import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
-import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
-import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
-import { GuildWarAction } from 'src/reducers/guildWarReducer';
-import { GuildAction } from 'src/reducers/guildReducer';
-import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
-import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
-import { MowsAction } from 'src/reducers/mows.reducer';
-import { UnitType } from 'src/v2/features/characters/units.enums';
-import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
-import { TeamsAction } from 'src/reducers/teams.reducer';
-import { ILreProgressDto } from 'src/models/dto.interfaces';
-import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
-
-export type LreTrackId = 'alpha' | 'beta' | 'gamma';
 
 export interface UnitDataRaw {
     Name: string;
@@ -209,105 +205,6 @@ export interface ICharLegendaryEvent {
     totalSlots: number;
 }
 
-export interface ILegendaryEvent extends ILegendaryEventStatic {
-    id: LegendaryEventEnum;
-    alpha: ILegendaryEventTrack;
-    beta: ILegendaryEventTrack;
-    gamma: ILegendaryEventTrack;
-
-    suggestedTeams: ITableRow[];
-    allowedUnits: Array<ICharacter2>;
-    battlesCount: number;
-}
-
-export interface ILegendaryEventStatic {
-    id: number;
-    name: string;
-    wikiLink: string;
-    eventStage: number;
-    nextEventDate: string;
-    nextEventDateUtc?: string;
-
-    regularMissions: string[];
-    premiumMissions: string[];
-
-    alpha: ILegendaryEventTrackStatic;
-    beta: ILegendaryEventTrackStatic;
-    gamma: ILegendaryEventTrackStatic;
-
-    pointsMilestones: IPointsMilestone[];
-    chestsMilestones: IChestMilestone[];
-
-    shardsPerChest: number;
-    battlesCount: number;
-    constraintsCount: number;
-    progression: ILEProgression;
-}
-
-export interface ILEProgression {
-    unlock: number;
-    fourStars: number;
-    fiveStars: number;
-    blueStar: number;
-}
-
-export interface IPointsMilestone {
-    milestone: number;
-    cumulativePoints: number;
-    engramPayout: number;
-}
-
-export interface IChestMilestone {
-    chestLevel: number;
-    engramCost: number;
-}
-
-export interface ILegendaryEventTrackStatic {
-    name: string;
-    killPoints: number;
-    battlesPoints: number[];
-    enemies: {
-        label: string;
-        link: string;
-    };
-}
-
-export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
-    eventId: LegendaryEventEnum;
-    section: LreTrackId;
-    allowedUnits: ICharacter2[];
-    unitsRestrictions: Array<ILegendaryEventTrackRequirement>;
-
-    getCharacterPoints(char: ICharacter2): number;
-
-    getCharacterSlots(char: ICharacter2): number;
-
-    getRestrictionPoints(name: string): number;
-
-    suggestTeams(
-        settings: IAutoTeamsPreferences | ISelectedTeamsOrdering,
-        onlyUnlocked: boolean,
-        restrictions: string[]
-    ): Record<string, Array<ICharacter2 | undefined>>;
-
-    suggestTeam(
-        settings: IAutoTeamsPreferences | ISelectedTeamsOrdering,
-        onlyUnlocked: boolean,
-        restrictions: string[]
-    ): Array<ICharacter2>;
-}
-
-export interface ILegendaryEventTrackRequirement {
-    id?: string;
-    hide?: boolean;
-    iconId?: string;
-    index?: number;
-    name: string;
-    points: number;
-    units: ICharacter2[];
-    selected?: boolean;
-}
-
 export type ITableRow<T = ICharacter2 | string> = Record<string, T>;
 export type ICharacter2 = IUnitData & IPersonalCharacterData2 & DynamicProps;
 
@@ -365,17 +262,6 @@ export interface IGlobalState {
     dailyRaids: IDailyRaids;
     guildWar: IGuildWar;
     guild: IGuild;
-}
-
-export interface IUserInfo {
-    username: string;
-    userId: number;
-    role: UserRole;
-    pendingTeamsCount: number;
-    rejectedTeamsCount: number;
-    tacticusApiKey: string;
-    tacticusUserId: string;
-    tacticusGuildApiKey: string;
 }
 
 export interface IDispatchContext {
@@ -585,7 +471,6 @@ export interface IPersonalCharacterData {
     rank: Rank;
     rarity: Rarity;
     rarityStars: RarityStars;
-    leSelection: LegendaryEvents;
     alwaysRecommend?: boolean;
     neverRecommend?: boolean;
     bias: CharacterBias;
@@ -646,29 +531,6 @@ export interface IPersonalGoal {
     unitId?: string;
     firstAbilityLevel?: number;
     secondAbilityLevel?: number;
-}
-
-export interface IWhatsNew {
-    currentVersion: string;
-    releaseNotes: IVersionReleaseNotes[];
-}
-
-export interface IVersionReleaseNotes {
-    version: string;
-    date: string;
-    type: string;
-    new: IReleaseNote[];
-    minor: IReleaseNote[];
-    bugFixes: IReleaseNote[];
-}
-
-export interface IReleaseNote {
-    text: string;
-    route?: string;
-    mobileRoute?: string;
-    imagePath?: string;
-    subPoints?: string[];
-    images?: Array<{ path: string; size?: number }>;
 }
 
 export type ICampaignConfigs = {
@@ -810,7 +672,7 @@ export interface IMaterialRecipeIngredientFull {
 }
 
 export interface IRankUpData {
-    [character: string]: IRankUpData2;
+    [character: string]: IRankUpData2 | undefined;
 }
 
 export interface IRankUpData2 {
@@ -908,30 +770,6 @@ export type ICampaignsProgress = Record<Campaign, number>;
 
 export interface IInventory {
     upgrades: Record<string, number>;
-}
-
-export interface IContributor {
-    name: string;
-    type: string;
-    thankYou: string;
-    resourceDescription: string;
-    resourceLink: string;
-    avatarIcon?: string;
-}
-
-export interface IContentCreator {
-    name: string;
-    youtubeLink: string;
-    thankYou: string;
-    avatarIcon: string;
-    resourceIcon: string;
-    resourceLink: string;
-}
-
-export interface IYoutubeCreator {
-    name: string;
-    youtubeVideoId: string;
-    avatarLink: string;
 }
 
 /**

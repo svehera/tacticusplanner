@@ -1,19 +1,4 @@
-﻿import React, { useContext, useMemo, useRef, useState } from 'react';
-import { AgGridReact } from 'ag-grid-react';
-import {
-    CellClassParams,
-    ColDef,
-    ColGroupDef,
-    ICellRendererParams,
-    ITooltipParams,
-    ValueGetterParams,
-    AllCommunityModule,
-    themeBalham,
-} from 'ag-grid-community';
-
-import { ICharacter2, ILegendaryEventTrack, ILreTeam } from 'src/models/interfaces';
-import { LegendaryEventEnum, Rank } from 'src/models/enums';
-import {
+﻿import {
     Checkbox,
     Divider,
     FormControl,
@@ -27,22 +12,40 @@ import {
     SelectChangeEvent,
     TextField,
 } from '@mui/material';
-import { groupBy, map, sum, uniq } from 'lodash';
-import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-events.interfaces';
-import { StoreContext } from 'src/reducers/store.provider';
-import { CharacterTitle } from 'src/shared-components/character-title';
-import { getLegendaryEvent } from 'src/models/constants';
 import InputLabel from '@mui/material/InputLabel';
 import ListItemText from '@mui/material/ListItemText';
-import { CharacterImage } from 'src/shared-components/character-image';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import {
+    CellClassParams,
+    ColDef,
+    ColGroupDef,
+    ICellRendererParams,
+    ITooltipParams,
+    ValueGetterParams,
+    AllCommunityModule,
+    themeBalham,
+} from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import { groupBy, map, sum, uniq } from 'lodash';
+import React, { useContext, useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { ICharacter2, ILreTeam } from 'src/models/interfaces';
+import { StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { CharacterTitle } from 'src/shared-components/character-title';
 import { RankImage } from 'src/v2/components/images/rank-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { useQueryState } from 'src/v2/hooks/query-state';
-import { LreService } from 'src/v2/features/lre/lre.service';
+
+import { CharacterShardIcon, Rank } from '@/fsd/4-entities/character';
+import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
+
+import { getLre, ILegendaryEventTrack } from '@/fsd/3-features/lre';
 import { ILreProgressModel } from 'src/v2/features/lre/lre.models';
+import { LreService } from 'src/v2/features/lre/lre.service';
+
+import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-events.interfaces';
 
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>(
@@ -78,7 +81,7 @@ export const MasterTable = () => {
             slots: number;
         }> = [];
         activeLegendaryEvents.forEach(eventId => {
-            const legendaryEvent = getLegendaryEvent(eventId, characters);
+            const legendaryEvent = getLre(eventId, characters);
             const legendaryEventProgress = LreService.mapProgressDtoToModel(
                 leProgress[legendaryEvent.id],
                 legendaryEvent
@@ -338,7 +341,7 @@ export const MasterTable = () => {
         }> = [];
 
         activeLegendaryEvents.forEach(eventId => {
-            const legendaryEvent = getLegendaryEvent(eventId, characters);
+            const legendaryEvent = getLre(eventId, characters);
             const chars =
                 selection === 'all'
                     ? legendaryEvent.allowedUnits
@@ -469,7 +472,7 @@ export const MasterTable = () => {
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
                                 <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
                                 <ListItemIcon>
-                                    <CharacterImage icon={x.icon} height={30} />
+                                    <CharacterShardIcon icon={x.icon} height={30} />
                                 </ListItemIcon>
                                 <ListItemText primary={x.name} />
                             </MenuItem>
@@ -481,7 +484,7 @@ export const MasterTable = () => {
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
                                 <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
                                 <ListItemIcon>
-                                    <CharacterImage icon={x.icon} height={30} />
+                                    <CharacterShardIcon icon={x.icon} height={30} />
                                 </ListItemIcon>
                                 <ListItemText primary={x.name} />
                             </MenuItem>

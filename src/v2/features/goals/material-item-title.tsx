@@ -1,9 +1,12 @@
-﻿import { IMaterialRaid } from 'src/models/interfaces';
-import React from 'react';
-import { CharacterImage } from 'src/shared-components/character-image';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
-import { Warning } from '@mui/icons-material';
+﻿import { Warning } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
+import React from 'react';
+
+import { IMaterialRaid } from 'src/models/interfaces';
+import { UpgradeImage } from 'src/shared-components/upgrade-image';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
+
 import { IUpgradeRaid } from 'src/v2/features/goals/goals.models';
 
 interface Props {

@@ -1,20 +1,20 @@
-﻿import { GoalsService } from 'src/v2/features/goals/goals.service';
-import {
-    Alliance,
-    CampaignsLocationsUsage,
-    Faction,
-    PersonalGoalType,
-    Rank,
-    Rarity,
-    RarityStars,
-} from 'src/models/enums';
+﻿import { describe, it, expect } from 'vitest';
+
+import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { ICharacter2, IPersonalGoal } from 'src/models/interfaces';
+
+import { Alliance, Rarity, RarityStars } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
+import { Faction } from '@/fsd/4-entities/faction';
+
 import { UnitType } from 'src/v2/features/characters/units.enums';
 import {
     ICharacterAscendGoal,
     ICharacterUnlockGoal,
     ICharacterUpgradeRankGoal,
 } from 'src/v2/features/goals/goals.models';
+import { GoalsService } from 'src/v2/features/goals/goals.service';
 
 describe('Goal service', () => {
     describe('convertToTypedGoal', () => {

@@ -1,7 +1,8 @@
-﻿import React, { useEffect } from 'react';
-import { ILreViewSettings, IViewOption } from 'src/models/interfaces';
-import { FormControl, FormControlLabel, Radio, RadioGroup, Switch } from '@mui/material';
+﻿import { FormControl, FormControlLabel, Radio, RadioGroup, Switch } from '@mui/material';
+import React, { useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { ILreViewSettings, IViewOption } from 'src/models/interfaces';
 
 interface Props {
     lreViewSettings: ILreViewSettings;

@@ -1,9 +1,11 @@
-﻿import React from 'react';
+﻿import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import { FormControl, MenuItem, Select } from '@mui/material';
-import { Rarity } from '../models/enums';
-import { FlexBox } from 'src/v2/components/flex-box';
+import React from 'react';
+
 import { StarsImage } from 'src/v2/components/images/stars-image';
+
+import { Rarity } from '@/fsd/5-shared/model';
+import { FlexBox } from '@/fsd/5-shared/ui';
 
 interface Props {
     label: string;

@@ -1,22 +1,21 @@
-﻿import React, { useContext } from 'react';
-import { Tooltip } from '@mui/material';
-
-import { StarsImage } from 'src/v2/components/images/stars-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
+﻿import { Tooltip } from '@mui/material';
+import { orderBy } from 'lodash';
+import React, { useContext } from 'react';
 
 import { charsUnlockShards } from 'src/models/constants';
+import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { StarsImage } from 'src/v2/components/images/stars-image';
+import { numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
+
+import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { IMow } from 'src/v2/features/characters/characters.models';
 
 import './character-tile.css';
-import { Conditional } from 'src/v2/components/conditional';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-
-import { numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
-import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
-import { IMow } from 'src/v2/features/characters/characters.models';
-import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { orderBy } from 'lodash';
 
 interface Props {
     mow: IMow;

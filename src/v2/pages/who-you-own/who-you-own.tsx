@@ -1,28 +1,28 @@
-﻿import React, { useCallback, useContext, useMemo, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import { isMobile } from 'react-device-detect';
+﻿import Box from '@mui/material/Box';
 import { sum } from 'lodash';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { ViewControls } from 'src/v2/features/characters/components/view-controls';
-import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
-import { IMow, IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
-import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
-import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
-import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
-import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
-
-import { ShareRoster } from 'src/v2/features/share/share-roster';
-
+import { ICharacter2 } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { CharacterItemDialog } from 'src/shared-components/character-item-dialog';
-import { ICharacter2 } from 'src/models/interfaces';
-import { useAuth } from 'src/contexts/auth';
+
+import { useAuth } from '@/fsd/5-shared/model';
+
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { UnitType } from 'src/v2/features/characters/units.enums';
+import { IMow, IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
+import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
+import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
+import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
+import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
+import { ViewControls } from 'src/v2/features/characters/components/view-controls';
 import { EditMowDialog } from 'src/v2/features/characters/dialogs/edit-mow-dialog';
+import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
+import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
+import { UnitType } from 'src/v2/features/characters/units.enums';
+import { ShareRoster } from 'src/v2/features/share/share-roster';
 
 export const WhoYouOwn = () => {
     const { characters: charactersDefault, mows, viewPreferences, inventory } = useContext(StoreContext);

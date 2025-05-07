@@ -1,5 +1,4 @@
 ﻿import { ICharacter2, ICharLegendaryEvent } from '../../models/interfaces';
-import { Rank, Rarity } from '../../models/enums';
 
 export enum CharactersSelection {
     All = 'all',

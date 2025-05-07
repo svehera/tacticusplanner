@@ -1,9 +1,4 @@
-﻿import React, { useContext, useMemo } from 'react';
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { FlexBox } from 'src/v2/components/flex-box';
-
-import { IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
-import {
+﻿import {
     Badge,
     Card,
     CardContent,
@@ -16,24 +11,32 @@ import {
     Tooltip,
 } from '@mui/material';
 import Button from '@mui/material/Button';
-import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
-import { BfLevelSelect } from 'src/v2/features/guild-war/bf-level-select';
-import { DifficultyImage } from 'src/v2/components/images/difficulty-image';
-import { isMobile } from 'react-device-detect';
-import './guild-war-zones.scss';
-import { CommonProps } from '@mui/material/OverridableComponent';
-import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
-import { Loader } from 'src/v2/components/loader';
-import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
-import { Difficulty, Rank } from 'src/models/enums';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
 import Dialog from '@mui/material/Dialog';
-import { PlayersTable } from 'src/v2/features/guild/players-table';
+import { CommonProps } from '@mui/material/OverridableComponent';
+import React, { useContext, useMemo } from 'react';
+import { isMobile } from 'react-device-detect';
+
+import { Difficulty } from 'src/models/enums';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
-import { WarZoneBuffImage } from 'src/v2/components/images/war-zone-buff-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { ViewGuild } from 'src/v2/features/guild/view-guild';
+import { DifficultyImage } from 'src/v2/components/images/difficulty-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { WarZoneBuffImage } from 'src/v2/components/images/war-zone-buff-image';
+
+import { LoaderWithText, AccessibleTooltip, FlexBox } from '@/fsd/5-shared/ui';
+
+import { Rank } from '@/fsd/4-entities/character';
+
+import { CharactersService } from 'src/v2/features/characters/characters.service';
+import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
+import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
+import { PlayersTable } from 'src/v2/features/guild/players-table';
+import { ViewGuild } from 'src/v2/features/guild/view-guild';
+import { BfLevelSelect } from 'src/v2/features/guild-war/bf-level-select';
+import { IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
+import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
+
+import './guild-war-zones.scss';
 
 export const GuildWarZones = () => {
     const { guildWar, guild } = useContext(StoreContext);
@@ -195,7 +198,7 @@ export const GuildWarZones = () => {
 
     return (
         <>
-            {loading && <Loader loading={true} />}
+            {loading && <LoaderWithText loading={true} />}
             <FlexBox justifyContent={'center'} gap={10}>
                 <BfLevelSelect value={activeLayout.bfLevel} valueChange={handleBfLevelChange} />
 

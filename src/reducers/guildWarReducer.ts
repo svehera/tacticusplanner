@@ -1,8 +1,11 @@
-﻿import { IGuildWar, SetStateAction } from '../models/interfaces';
-import { defaultData } from '../models/constants';
-import { Rarity } from 'src/models/enums';
+﻿import { clamp } from 'lodash';
+
+import { Rarity } from '@/fsd/5-shared/model';
+
 import { GuildWarTeamType } from 'src/v2/features/guild-war/guild-war.models';
-import { clamp } from 'lodash';
+
+import { defaultData } from '../models/constants';
+import { IGuildWar, SetStateAction } from '../models/interfaces';
 
 export type GuildWarAction =
     | {

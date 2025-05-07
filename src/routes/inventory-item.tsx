@@ -1,7 +1,9 @@
-﻿import React, { useEffect } from 'react';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
-import { Input } from '@mui/material';
+﻿import { Input } from '@mui/material';
 import Button from '@mui/material/Button';
+import React, { useEffect } from 'react';
+
+import { UpgradeImage } from 'src/shared-components/upgrade-image';
+
 import { IInventoryUpgrade } from './inventory-models';
 
 interface Props {

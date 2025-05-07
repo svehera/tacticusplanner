@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
-import { AllCommunityModule, themeBalham } from 'ag-grid-community';
+import { ArrowForward } from '@mui/icons-material';
+import { ColDef, AllCommunityModule, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef } from 'ag-grid-community';
-import { Rank } from 'src/models/enums';
+import React, { useState } from 'react';
 
-import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from 'src/v2/features/goals/goals.models';
+import { IUnitData } from 'src/models/interfaces';
+import { StaticDataService } from 'src/services/static-data.service';
+import { RankImage } from 'src/v2/components/images/rank-image';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { Rank, CharacterShardIcon } from '@/fsd/4-entities/character';
 
 import { CampaignData } from 'src/v2/features/campaign-progression/campaign-progression.models';
-import { IUnitData } from 'src/models/interfaces';
-
-import { StaticDataService } from 'src/services/static-data.service';
-
-import { ArrowForward } from '@mui/icons-material';
-import { CharacterImage } from 'src/shared-components/character-image';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { RankImage } from 'src/v2/components/images/rank-image';
+import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from 'src/v2/features/goals/goals.models';
 
 interface Props {
     campaignData: CampaignData;
@@ -113,7 +111,7 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
                     const goalData = params.data.goalData[0];
                     return (
                         <a href={getRankLookupHref(goalData.goalId)}>
-                            <CharacterImage
+                            <CharacterShardIcon
                                 icon={getGoalUnit(goalData.goalId)?.icon ?? '(undefined)'}
                                 height={30}
                                 tooltip={getGoalUnit(goalData.goalId)?.icon}

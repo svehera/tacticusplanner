@@ -1,8 +1,11 @@
-import { getTacticusPlayerData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
 import { enqueueSnackbar } from 'notistack';
 import { useContext } from 'react';
+
 import { DispatchContext } from '@/reducers/store.provider';
-import { useLoader } from '@/contexts/loader.context';
+
+import { useLoader } from '@/fsd/5-shared/ui/contexts';
+
+import { getTacticusPlayerData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
 
 export const useSyncWithTacticus = () => {
     const dispatch = useContext(DispatchContext);

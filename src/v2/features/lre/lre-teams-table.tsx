@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useMemo, useRef } from 'react';
-
-import { AgGridReact } from 'ag-grid-react';
+import InfoIcon from '@mui/icons-material/Info';
+import Button from '@mui/material/Button';
 import {
     AllCommunityModule,
     CellClickedEvent,
@@ -10,23 +9,19 @@ import {
     RowClassParams,
     themeBalham,
 } from 'ag-grid-community';
-
-import {
-    ICharacter2,
-    ILegendaryEventTrack,
-    ILegendaryEventTrackRequirement,
-    ILreTeam,
-    ITableRow,
-    LreTrackId,
-} from 'src/models/interfaces';
-
-import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+import { AgGridReact } from 'ag-grid-react';
+import React, { useContext, useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
-import InfoIcon from '@mui/icons-material/Info';
+
+import { ICharacter2, ILreTeam, ITableRow } from 'src/models/interfaces';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
+
+import { LreTrackId } from '@/fsd/4-entities/lre';
+
+import { ILegendaryEventTrack, ILegendaryEventTrackRequirement } from '@/fsd/3-features/lre';
 import { LreTile } from 'src/v2/features/lre/lre-tile';
 import { SelectedTeamsTable } from 'src/v2/features/lre/selected-teams-table';
-import Button from '@mui/material/Button';
 import { TrackRequirementCheck } from 'src/v2/features/lre/track-requirement-check';
 
 interface Props {

@@ -1,13 +1,17 @@
-﻿import React, { useMemo, useState } from 'react';
-import { CampaignType, Rarity } from 'src/models/enums';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import Checkbox from '@mui/material/Checkbox';
-import { ICustomDailyRaidsSettings } from 'src/models/interfaces';
-import { uniq } from 'lodash';
-import { CampaignsService } from '@/v2/features/goals/campaigns.service';
+﻿import { Info } from '@mui/icons-material';
 import { Badge, FormControlLabel, Switch } from '@mui/material';
-import { Info } from '@mui/icons-material';
-import { AccessibleTooltip } from '@/v2/components/tooltip';
+import Checkbox from '@mui/material/Checkbox';
+import { uniq } from 'lodash';
+import React, { useMemo, useState } from 'react';
+
+import { CampaignType } from 'src/models/enums';
+import { ICustomDailyRaidsSettings } from 'src/models/interfaces';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+
+import { Rarity } from '@/fsd/5-shared/model';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+
+import { CampaignsService } from '@/v2/features/goals/campaigns.service';
 
 interface Props {
     hasCE: boolean;

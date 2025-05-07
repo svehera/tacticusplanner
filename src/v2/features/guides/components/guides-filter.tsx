@@ -1,15 +1,17 @@
-﻿import React, { ChangeEvent, useCallback, useState } from 'react';
-import { GameMode } from 'src/v2/features/teams/teams.enums';
-import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
-import { anyOption, gameModesForGuides, gwSubModes, taSubModes } from 'src/v2/features/teams/teams.constants';
-import { TextField } from '@mui/material';
-import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { IGuideFilter } from 'src/v2/features/guides/guides.models';
+﻿import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
+import React, { ChangeEvent, useCallback, useState } from 'react';
+
+import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
+import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
+
+import { IUnit } from 'src/v2/features/characters/characters.models';
 import { GuildRaidsModesFilter } from 'src/v2/features/guides/components/gr-modes-filter';
 import { IncursionModesFilter } from 'src/v2/features/guides/components/incursion-modes-filter';
 import { LreModesFilter } from 'src/v2/features/guides/components/lre-modes-filter';
+import { IGuideFilter } from 'src/v2/features/guides/guides.models';
+import { anyOption, gameModesForGuides, gwSubModes, taSubModes } from 'src/v2/features/teams/teams.constants';
+import { GameMode } from 'src/v2/features/teams/teams.enums';
 
 interface Props {
     units: IUnit[];

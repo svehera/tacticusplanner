@@ -1,9 +1,9 @@
-﻿import React from 'react';
+﻿import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Typography from '@mui/material/Typography';
+import React from 'react';
 
 import { IFaqItem } from './faq.models';
 

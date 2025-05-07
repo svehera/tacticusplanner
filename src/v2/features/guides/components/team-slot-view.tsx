@@ -1,10 +1,12 @@
-﻿import React from 'react';
-import { ITeamSlot } from 'src/v2/features/guides/guides.models';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { SlotType } from 'src/v2/features/guides/guides.enums';
-import { Badge, Tooltip } from '@mui/material';
+﻿import { Badge, Tooltip } from '@mui/material';
+import React from 'react';
+
 import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
+
+import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter } from 'src/v2/features/characters/units.functions';
+import { SlotType } from 'src/v2/features/guides/guides.enums';
+import { ITeamSlot } from 'src/v2/features/guides/guides.models';
 
 import './team-slot-edit.scss';
 

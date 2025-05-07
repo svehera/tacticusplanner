@@ -1,20 +1,18 @@
-﻿import React from 'react';
-import { enqueueSnackbar } from 'notistack';
-
-import Dialog from '@mui/material/Dialog';
-import Button from '@mui/material/Button';
-import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-
+﻿import AddIcon from '@mui/icons-material/Add';
+import CancelIcon from '@mui/icons-material/Cancel';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import CancelIcon from '@mui/icons-material/Cancel';
-import AddIcon from '@mui/icons-material/Add';
-
-import { createShareToken, refreshShareToken, removeShareToken } from 'src/api/api-functions';
-import { useAuth } from 'src/contexts/auth';
-
-import { Loader } from 'src/v2/components/loader';
+import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import { enqueueSnackbar } from 'notistack';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { useAuth } from '@/fsd/5-shared/model';
+import { LoaderWithText } from '@/fsd/5-shared/ui';
+
+import { createShareToken, refreshShareToken, removeShareToken } from './share-roster.endpoints';
 
 export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const [loading, setLoading] = React.useState(false);
@@ -38,7 +36,7 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
             setLoading(true);
 
             createShareToken()
-                .then(response => setUser(response.data.username, response.data.shareToken))
+                .then(response => setUser(response.data?.username ?? '', response.data?.shareToken))
                 .finally(() => setLoading(false));
         }
     };
@@ -52,7 +50,7 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
             setLoading(true);
 
             refreshShareToken()
-                .then(response => setUser(response.data.username, response.data.shareToken))
+                .then(response => setUser(response.data?.username ?? '', response.data?.shareToken))
                 .finally(() => setLoading(false));
         }
     };
@@ -104,7 +102,7 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
             <DialogActions>
                 <Button onClick={onClose}>Close</Button>
             </DialogActions>
-            <Loader loading={loading} />
+            <LoaderWithText loading={loading} />
         </Dialog>
     );
 };

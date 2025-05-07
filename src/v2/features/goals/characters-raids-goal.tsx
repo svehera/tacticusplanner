@@ -1,14 +1,18 @@
-﻿import React from 'react';
+﻿import { ArrowForward, Edit } from '@mui/icons-material';
 import { Checkbox, FormControlLabel, IconButton } from '@mui/material';
-import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { PersonalGoalType } from 'src/models/enums';
-import { CharacterImage } from 'src/shared-components/character-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { ArrowForward, Edit } from '@mui/icons-material';
-import { StarsImage } from 'src/v2/components/images/stars-image';
+import React from 'react';
+
 import { rarityToStars } from 'src/models/constants';
+import { PersonalGoalType } from 'src/models/enums';
+import { RankImage } from 'src/v2/components/images/rank-image';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { StarsImage } from 'src/v2/components/images/stars-image';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
+
+import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
 
 interface Props {
     goal: CharacterRaidGoalSelect;
@@ -108,7 +112,7 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                     </IconButton>
                     <AccessibleTooltip title={goal.unitName}>
                         <div>
-                            <CharacterImage icon={goal.unitIcon} name={goal.unitName} />
+                            <CharacterShardIcon icon={goal.unitIcon} name={goal.unitName} />
                         </div>
                     </AccessibleTooltip>
                     {getGoalInfo(goal)}

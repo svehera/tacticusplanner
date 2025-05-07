@@ -1,6 +1,4 @@
-﻿import React, { useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import {
+﻿import {
     Backdrop,
     CircularProgress,
     DialogActions,
@@ -9,14 +7,18 @@ import {
     FormControl,
     Input,
 } from '@mui/material';
-import Button from '@mui/material/Button';
-import { loginUser } from '../../api/api-functions';
-import { useAuth } from '../../contexts/auth';
-import { AxiosError } from 'axios';
-import { IErrorResponse } from '../../api/api-interfaces';
-import { enqueueSnackbar } from 'notistack';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
 import InputLabel from '@mui/material/InputLabel';
+import { AxiosError } from 'axios';
+import { enqueueSnackbar } from 'notistack';
+import React, { useState } from 'react';
+
+import { IErrorResponse } from '@/fsd/5-shared/api';
+import { useAuth } from '@/fsd/5-shared/model';
+
+import { loginUser } from './auth.endpoints';
 
 export const LoginUserDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const [loginForm, setLoginForm] = useState({
@@ -58,8 +60,8 @@ export const LoginUserDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose:
                     onClick={() => {
                         setOpen(true);
                         loginUser(loginForm.username, loginForm.password)
-                            .then(data => {
-                                login(data.data.accessToken);
+                            .then(response => {
+                                login(response.data?.accessToken ?? '');
                                 onClose();
                             })
                             .catch((err: AxiosError<IErrorResponse>) => {

@@ -1,14 +1,16 @@
-﻿import React from 'react';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import { isMobile } from 'react-device-detect';
+﻿import ClearIcon from '@mui/icons-material/Clear';
 import LinkIcon from '@mui/icons-material/Link';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SyncIcon from '@mui/icons-material/Sync';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import RefreshIcon from '@mui/icons-material/Refresh';
-import ClearIcon from '@mui/icons-material/Clear';
+import Button from '@mui/material/Button';
+import React from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
+
 import DailyRaidsSettings from 'src/shared-components/daily-raids-settings';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 interface Props extends React.PropsWithChildren {
     actualDailyEnergy: string;

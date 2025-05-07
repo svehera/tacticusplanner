@@ -1,12 +1,14 @@
-﻿import React, { useEffect, useMemo } from 'react';
-
-import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
-import { Alliance } from 'src/models/enums';
+﻿import { Info } from '@mui/icons-material';
 import { Checkbox, FormControlLabel, Popover } from '@mui/material';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import Button from '@mui/material/Button';
-import { Info } from '@mui/icons-material';
+import React, { useEffect, useMemo } from 'react';
+
+import { UpgradeImage } from 'src/shared-components/upgrade-image';
+
+import { Alliance } from '@/fsd/5-shared/model';
+
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 
 interface Props {
     mowId: string;

@@ -1,4 +1,29 @@
-﻿import {
+﻿import { cloneDeep, groupBy, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
+
+import battleData from 'src/assets/newBattleData.json';
+import rankUpData from 'src/assets/rankUpData.json';
+import { rarityStringToNumber } from 'src/models/constants';
+import { CampaignType, DailyRaidsStrategy, PersonalGoalType } from 'src/models/enums';
+import {
+    ICampaignBattle,
+    ICampaignsData,
+    ICampaignsProgress,
+    IEstimatedRanksSettings,
+    IMaterial,
+    IMaterialRecipeIngredient,
+    IRankUpData,
+    IRecipeData,
+} from 'src/models/interfaces';
+import { getEnumValues, rankToString } from 'src/shared-logic/functions';
+import recipeData from 'src/v2/data/recipeData.json';
+
+import { RarityString, Rarity } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
+
+import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaigns.constants';
+import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
+import {
     IBaseUpgrade,
     IBaseUpgradeData,
     ICharacterUpgradeEstimate,
@@ -19,27 +44,7 @@
     IUpgradeRecipe,
     IUpgradesRaidsDay,
 } from 'src/v2/features/goals/goals.models';
-import {
-    ICampaignBattle,
-    ICampaignsData,
-    ICampaignsProgress,
-    IEstimatedRanksSettings,
-    IMaterial,
-    IMaterialRecipeIngredient,
-    IRankUpData,
-    IRecipeData,
-} from 'src/models/interfaces';
-import { rarityStringToNumber } from 'src/models/constants';
-import { CampaignType, DailyRaidsStrategy, PersonalGoalType, Rank, Rarity, RarityString } from 'src/models/enums';
-import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
-import { cloneDeep, groupBy, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
-
-import rankUpData from 'src/assets/rankUpData.json';
-import recipeData from 'src/v2/data/recipeData.json';
-import battleData from 'src/assets/newBattleData.json';
-import { getEnumValues, rankToString } from 'src/shared-logic/functions';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
-import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaigns.constants';
 import { TacticusUpgrade } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
 
 export class UpgradesService {

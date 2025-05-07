@@ -1,0 +1,32 @@
+﻿{
+    "common": {
+        "register": "Register",
+        "login": "Login",
+        "ok": "OK",
+        "close": "Close"
+    },
+
+    "auth": {
+        "notLoggedIn": {
+            "useWithoutAccount": "Use without account",
+            "title": "You are not logged in",
+            "subtitle": "Would you like to continue using the app without logging in, or would you prefer to register/login?",
+            "continueExplanation": "if you want to use app without account (some functionality might be limited)",
+            "registerExplanation": "in case you want to create a new account",
+            "loginExplanation": "in case you have existing account"
+        }
+    },
+    "teams": {
+        "guidePlaceholder": "Explain the team strategy and role of each unit in the team. Add links to video guides if such exist"
+    },
+    "whatsNew": {
+        "title": "What's New",
+        "sections": {
+            "new": "New",
+            "minor": "Minor",
+            "bugFixes": "Bug Fixes"
+        },
+        "link": "link",
+        "versionFormat": "{{type}} - {{version}} ({{date}})"
+    }
+}

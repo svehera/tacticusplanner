@@ -1,4 +1,10 @@
-﻿import {
+﻿import { orderBy, uniq } from 'lodash';
+
+import campaignConfigs from 'src/assets/campaignConfigs.json';
+import newBattleData from 'src/assets/newBattleData.json';
+import recipeData from 'src/assets/recipeData.json';
+import { Campaign, CampaignType } from 'src/models/enums';
+import {
     ICampaignBattleComposed,
     ICampaignConfigs,
     ICampaignsData,
@@ -8,14 +14,12 @@
     IRecipeData,
 } from 'src/models/interfaces';
 
-import campaignConfigs from 'src/assets/campaignConfigs.json';
-import newBattleData from 'src/assets/newBattleData.json';
-import recipeData from 'src/assets/recipeData.json';
+import { Rarity, Alliance } from '@/fsd/5-shared/model';
 
-import { Alliance, Campaign, CampaignType, Faction, Rarity } from 'src/models/enums';
-import { orderBy, uniq } from 'lodash';
-import { CampaignReleaseType } from 'src/v2/features/campaigns/campaigns.enums';
+import { Faction } from '@/fsd/4-entities/faction';
+
 import { campaignsList } from 'src/v2/features/campaigns/campaigns.constants';
+import { CampaignReleaseType } from 'src/v2/features/campaigns/campaigns.enums';
 
 export class CampaignsService {
     private static readonly campaignConfigs: ICampaignConfigs = campaignConfigs;

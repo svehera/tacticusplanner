@@ -1,21 +1,21 @@
-﻿import React, { useContext, useEffect } from 'react';
-import { FlexBox } from 'src/v2/components/flex-box';
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { GuildMemberInput } from 'src/v2/features/guild/guild-member-input';
+﻿import SavedSearchIcon from '@mui/icons-material/SavedSearch';
 import { Tooltip } from '@mui/material';
 import Button from '@mui/material/Button';
-import { Conditional } from 'src/v2/components/conditional';
-import { GuildMemberView } from 'src/v2/features/guild/guild-member-view';
 import IconButton from '@mui/material/IconButton';
-import SavedSearchIcon from '@mui/icons-material/SavedSearch';
-import { Link } from 'react-router-dom';
-import { isMobile } from 'react-device-detect';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { ImportGuildExcel } from 'src/v2/features/guild/read-guild-from-excel';
-import { IGuildMember } from 'src/models/interfaces';
-import { useValidateGuildMembers } from 'src/v2/features/guild/guild.endpoint';
-import { Loader } from 'src/v2/components/loader';
 import Typography from '@mui/material/Typography';
+import React, { useContext, useEffect } from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
+
+import { IGuildMember } from 'src/models/interfaces';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+
+import { LoaderWithText, AccessibleTooltip, FlexBox, Conditional } from '@/fsd/5-shared/ui';
+
+import { GuildMemberInput } from 'src/v2/features/guild/guild-member-input';
+import { GuildMemberView } from 'src/v2/features/guild/guild-member-view';
+import { useValidateGuildMembers } from 'src/v2/features/guild/guild.endpoint';
+import { ImportGuildExcel } from 'src/v2/features/guild/read-guild-from-excel';
 import { ImportUserLink } from 'src/v2/features/guild/read-user-from-link';
 
 export const Guild: React.FC = () => {
@@ -71,7 +71,7 @@ export const Guild: React.FC = () => {
 
     return (
         <FlexBox style={{ flexDirection: 'column' }} gap={10}>
-            {loading && <Loader loading={true} />}
+            {loading && <LoaderWithText loading={true} />}
             <FlexBox justifyContent={'center'} gap={10} style={{ marginTop: 10 }}>
                 <ImportGuildExcel onImport={saveGuildMembers} />
                 <ImportUserLink onImport={importViaLink} />

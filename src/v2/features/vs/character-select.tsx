@@ -1,10 +1,13 @@
-import React from 'react';
-import InputLabel from '@mui/material/InputLabel';
 import { FormControl, MenuItem, Select } from '@mui/material';
-import { FlexBox } from 'src/v2/components/flex-box';
+import InputLabel from '@mui/material/InputLabel';
+import React from 'react';
+
 import { StaticDataService } from 'src/services';
-import { CharacterImage } from 'src/shared-components/character-image';
 import { getImageUrl } from 'src/shared-logic/functions';
+
+import { FlexBox } from '@/fsd/5-shared/ui';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
 
 interface Props {
     label: string;
@@ -22,7 +25,7 @@ export const CharacterSelect: React.FC<Props> = ({ label, idsAndNames, value, va
     const getImageComponent = (id: string) => {
         const unit = StaticDataService.unitsData.find(unit => unit.id === id);
         if (unit != undefined) {
-            return <CharacterImage icon={unit.icon} name={unit.name} height={30} width={30} tooltip={unit.name} />;
+            return <CharacterShardIcon icon={unit.icon} name={unit.name} height={30} width={30} tooltip={unit.name} />;
         } else {
             return getNpcPortrait(id);
         }

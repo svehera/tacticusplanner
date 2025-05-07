@@ -1,8 +1,13 @@
-import { DamageType, Faction, Rank, Rarity, RarityStars, Trait } from 'src/models/enums';
+import { EquipmentType, INpcData, IUnitData } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+
+import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+
+import { DamageType, Trait, Rank } from '@/fsd/4-entities/character';
+import { Faction } from '@/fsd/4-entities/faction';
+
 import { IEquipmentSpec } from './versus-interfaces';
-import { EquipmentType, INpcData, IUnitData } from 'src/models/interfaces';
 
 export interface DamageUnitData {
     damage: number;

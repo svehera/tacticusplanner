@@ -1,6 +1,6 @@
-﻿import React from 'react';
-import AddIcon from '@mui/icons-material/Add';
+﻿import AddIcon from '@mui/icons-material/Add';
 import { Fab } from '@mui/material';
+import React from 'react';
 
 export const Teams = () => {
     const [openCreateTeamDialog, setOpenCreateTeamDialog] = React.useState(false);

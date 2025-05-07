@@ -1,5 +1,8 @@
+import { Campaign } from 'src/models/enums';
+
+import { Faction } from '@/fsd/4-entities/faction';
+
 import { CampaignDifficulty, CampaignGroupType, CampaignReleaseType } from './campaigns.enums';
-import { Campaign, Faction } from 'src/models/enums';
 
 /**
  * Represents the structure of a campaign with its unique attributes.

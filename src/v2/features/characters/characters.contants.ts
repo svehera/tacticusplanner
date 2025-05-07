@@ -1,5 +1,9 @@
 ﻿import { ICharacter2 } from 'src/models/interfaces';
-import { Rank, Rarity, RarityStars } from 'src/models/enums';
+
+import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
+
 import { IRarityCap } from 'src/v2/features/characters/characters.models';
 import { UnitType } from 'src/v2/features/characters/units.enums';
 

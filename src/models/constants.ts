@@ -1,28 +1,15 @@
-﻿import {
-    Campaign,
-    CharacterReleaseRarity,
-    DailyRaidsStrategy,
-    Difficulty,
-    LegendaryEventEnum,
-    PersonalGoalType,
-    Rank,
-    Rarity,
-    RarityStars,
-    RarityString,
-} from './enums';
-import { ICampaignsProgress, ICharacter2, ICharProgression, IPersonalData2 } from './interfaces';
-import { AunShiLegendaryEvent, ShadowSunLegendaryEvent } from './legendary-events';
-import { RagnarLegendaryEvent } from './legendary-events/ragnar.le';
-import { VitruviusLegendaryEvent } from './legendary-events/vitruvius.le';
+﻿import { v4 } from 'uuid';
+
+import { RarityString, Rarity, RarityStars } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
+
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
-import { v4 } from 'uuid';
 import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
-import { KharnLegendaryEvent } from 'src/models/legendary-events/kharn.le';
-import { MephistonLegendaryEvent } from 'src/models/legendary-events/mephiston.le';
-import { PatermineLegendaryEvent } from 'src/models/legendary-events/patermine.le';
-import { DanteLegendaryEvent } from 'src/models/legendary-events/dante.le';
-import { UnknownLegendaryEvent } from 'src/models/legendary-events/unknown';
+
+import { Campaign, CharacterReleaseRarity, DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';
+import { ICampaignsProgress, ICharProgression, IPersonalData2 } from './interfaces';
 
 export const rarityStringToNumber: Record<RarityString, Rarity> = {
     [RarityString.Common]: Rarity.Common,
@@ -141,37 +128,8 @@ export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {
     [CharacterReleaseRarity.Legendary]: 400,
 };
 
-export const getLegendaryEvent = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
-    switch (id) {
-        case LegendaryEventEnum.AunShi:
-            return new AunShiLegendaryEvent(characters);
-        case LegendaryEventEnum.Unknown:
-            return new UnknownLegendaryEvent(characters);
-        case LegendaryEventEnum.Dante:
-            return new DanteLegendaryEvent(characters);
-        case LegendaryEventEnum.Kharn:
-            return new KharnLegendaryEvent(characters);
-        case LegendaryEventEnum.Mephiston:
-            return new MephistonLegendaryEvent(characters);
-        case LegendaryEventEnum.Patermine:
-            return new PatermineLegendaryEvent(characters);
-        case LegendaryEventEnum.Ragnar:
-            return new RagnarLegendaryEvent(characters);
-        case LegendaryEventEnum.Shadowsun:
-            return new ShadowSunLegendaryEvent(characters);
-        case LegendaryEventEnum.Vitruvius:
-            return new VitruviusLegendaryEvent(characters);
-        default:
-            return new ShadowSunLegendaryEvent(characters);
-    }
-};
-export const isTabletOrMobileMediaQuery = '(max-width: 1000px)';
-
 export const pooEmoji = String.fromCodePoint(parseInt('1F4A9', 16));
 export const starEmoji = String.fromCodePoint(parseInt('1F31F', 16));
-
-export const discordInvitationLink = 'https://discord.gg/8mcWKVAYZf';
-export const bmcLink = 'https://www.buymeacoffee.com/tacticusplanner';
 
 const defaultCampaignsProgress: ICampaignsProgress = {
     Indomitus: 75,

@@ -1,5 +1,6 @@
 ﻿import { useCallback, useContext, useEffect, useState } from 'react';
-import { SearchParamsStateContext } from 'src/contexts/search-params.context';
+
+import { SearchParamsStateContext } from '@/fsd/5-shared/ui/contexts';
 
 type NullableString = string | null | undefined;
 

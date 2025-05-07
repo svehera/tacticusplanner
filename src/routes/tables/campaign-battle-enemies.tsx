@@ -1,7 +1,12 @@
 import React, { JSX, useMemo } from 'react';
+
 import { IDetailedEnemy } from 'src/models/interfaces';
+
+import { Rarity } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
+
 import { NpcPortrait } from './npc-portrait';
-import { Rank, Rarity } from 'src/models/enums';
 
 interface Props {
     enemies: IDetailedEnemy[];

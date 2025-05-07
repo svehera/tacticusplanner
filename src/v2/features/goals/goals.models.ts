@@ -1,21 +1,18 @@
-﻿import {
-    Alliance,
-    CampaignsLocationsUsage,
-    Faction,
-    PersonalGoalType,
-    Rank,
-    Rarity,
-    RarityStars,
-} from 'src/models/enums';
+﻿import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import {
     ICampaignBattleComposed,
     ICampaignsProgress,
     IDailyRaidsFilters,
     IDailyRaidsPreferences,
 } from 'src/models/interfaces';
+
+import { Alliance, Rarity, RarityStars } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
+import { Faction } from '@/fsd/4-entities/faction';
+
 import { ICharacterAbilitiesMaterialsTotal, IXpEstimate } from 'src/v2/features/characters/characters.models';
 import { IMowMaterialsTotal } from 'src/v2/features/lookup/lookup.models';
-import { rarityCaps } from '../characters/characters.contants';
 
 export type CharacterRaidGoalSelect =
     | ICharacterUpgradeRankGoal

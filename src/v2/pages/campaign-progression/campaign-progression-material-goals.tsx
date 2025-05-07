@@ -1,27 +1,27 @@
+import { ArrowForward } from '@mui/icons-material';
+import { Tooltip } from '@mui/material';
+import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions, themeBalham, ColDef } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions, themeBalham } from 'ag-grid-community';
-import { AgGridReact } from 'ag-grid-react';
-import { ColDef } from 'ag-grid-community';
+
 import { CampaignType } from 'src/models/enums';
+import { ICampaignBattleComposed } from 'src/models/interfaces';
+import { StaticDataService } from 'src/services/static-data.service';
+import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { UpgradeImage } from 'src/shared-components/upgrade-image';
+
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
 
 import {
     BattleSavings,
     CampaignData,
     CampaignsProgressData,
 } from 'src/v2/features/campaign-progression/campaign-progression.models';
-import { ICampaignBattleComposed } from 'src/models/interfaces';
-
 import { CampaignsProgressionService } from 'src/v2/features/campaign-progression/campaign-progression.service';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
-import { StaticDataService } from 'src/services/static-data.service';
-
-import { ArrowForward } from '@mui/icons-material';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { CharacterImage } from 'src/shared-components/character-image';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
-import { Tooltip } from '@mui/material';
 
 interface Props {
     campaignData: CampaignData;
@@ -348,7 +348,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                             {characters.map((unitId, ignoredIndex) => {
                                 return (
                                     <span key={unitId + '-' + savings.battle.reward + '-' + savings.battle.id}>
-                                        <CharacterImage
+                                        <CharacterShardIcon
                                             icon={StaticDataService.getUnit(unitId)?.icon ?? '(undefined)'}
                                             height={30}
                                             width={30}

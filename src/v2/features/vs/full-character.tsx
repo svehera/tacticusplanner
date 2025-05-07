@@ -1,22 +1,27 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import { Equipment, Faction, Rank, Rarity, RarityStars } from 'src/models/enums';
+
+import { rarityToMaxRank } from 'src/models/constants';
+import { EquipmentType } from 'src/models/interfaces';
+import { StoreContext } from 'src/reducers/store.provider';
 import { FactionSelect } from 'src/routes/npcs/faction-select';
+import { NpcPortrait } from 'src/routes/tables/npc-portrait';
+import { StaticDataService } from 'src/services';
 import { RankSelect } from 'src/shared-components/rank-select';
 import { RaritySelect } from 'src/shared-components/rarity-select';
-import { getEnumValues } from 'src/shared-logic/functions';
 import { StarsSelect } from 'src/shared-components/stars-select';
-import { rarityToMaxRank } from 'src/models/constants';
-import { StaticDataService } from 'src/services';
+import { getEnumValues } from 'src/shared-logic/functions';
+
+import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { Rank } from '@/fsd/4-entities/character';
+import { Faction } from '@/fsd/4-entities/faction';
+
 import { CharacterSelect } from './character-select';
-import { NpcPortrait } from 'src/routes/tables/npc-portrait';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
-import { DamageIcon } from './damage-icon';
-import { StoreContext } from 'src/reducers/store.provider';
-import { EquipmentSelect } from './equipment-select';
-import { EquipmentType, IEquipment } from 'src/models/interfaces';
-import { IEquipmentSpec } from './versus-interfaces';
 import { DamageCalculatorService } from './damage-calculator-service';
+import { DamageIcon } from './damage-icon';
+import { EquipmentSelect } from './equipment-select';
+import { IEquipmentSpec } from './versus-interfaces';
 
 interface Props {
     onCharacterChange: (

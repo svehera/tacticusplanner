@@ -1,19 +1,19 @@
-﻿import React, { useCallback, useContext, useMemo, useState } from 'react';
-
+﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
-import { StaticDataService } from '../services';
-import { Rarity } from '../models/enums';
-import { DispatchContext, StoreContext } from '../reducers/store.provider';
 import { groupBy, map, orderBy } from 'lodash';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
+import { InventoryControls } from 'src/routes/inventory-controls';
+import { UpgradesGroup } from 'src/routes/upgrades-group';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
 
-import { IInventoryUpgrade, IUpgradesGroup } from './inventory-models';
+import { Rarity } from '@/fsd/5-shared/model';
 
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { isMobile } from 'react-device-detect';
-import { UpgradesGroup } from 'src/routes/upgrades-group';
-import { InventoryControls } from 'src/routes/inventory-controls';
+import { DispatchContext, StoreContext } from '../reducers/store.provider';
+import { StaticDataService } from '../services';
+
+import { IInventoryUpgrade, IUpgradesGroup } from './inventory-models';
 
 interface Props {
     itemsFilter?: string[];

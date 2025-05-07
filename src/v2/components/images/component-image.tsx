@@ -1,6 +1,8 @@
 ﻿import React from 'react';
-import { Alliance } from 'src/models/enums';
+
 import { getImageUrl } from 'src/shared-logic/functions';
+
+import { Alliance } from '@/fsd/5-shared/model';
 
 export const ComponentImage = ({ alliance, size = 'medium' }: { alliance: Alliance; size?: 'small' | 'medium' }) => {
     const sizePx = size === 'medium' ? 35 : 25;

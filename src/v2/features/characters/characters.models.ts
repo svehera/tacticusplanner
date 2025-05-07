@@ -1,8 +1,14 @@
 ﻿import { DynamicProps, ICharacter2 } from 'src/models/interfaces';
-import { CharactersOrderBy } from './enums/characters-order-by';
-import { CharactersFilterBy } from './enums/characters-filter-by';
-import { Alliance, Faction, Rank, Rarity, RarityStars, RarityString } from 'src/models/enums';
+
+import { Alliance, RarityString, Rarity, RarityStars } from '@/fsd/5-shared/model';
+
+import { Rank } from '@/fsd/4-entities/character';
+import { Faction } from '@/fsd/4-entities/faction';
+
 import { UnitType } from 'src/v2/features/characters/units.enums';
+
+import { CharactersFilterBy } from './enums/characters-filter-by';
+import { CharactersOrderBy } from './enums/characters-order-by';
 
 export type IUnit = ICharacter2 | IMow;
 

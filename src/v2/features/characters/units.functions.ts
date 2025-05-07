@@ -1,7 +1,9 @@
-﻿import { IMow, IUnit } from 'src/v2/features/characters/characters.models';
+﻿import { ICharacter2 } from 'src/models/interfaces';
+
+import { Rank } from '@/fsd/4-entities/character';
+
+import { IMow, IUnit } from 'src/v2/features/characters/characters.models';
 import { UnitType } from 'src/v2/features/characters/units.enums';
-import { Rank } from 'src/models/enums';
-import { ICharacter2 } from 'src/models/interfaces';
 
 export function isCharacter(unit: IUnit | null): unit is ICharacter2 {
     return !!unit && unit.unitType === UnitType.character;

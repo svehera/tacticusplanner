@@ -1,10 +1,12 @@
-﻿import { IHeaderParams } from 'ag-grid-community';
-import React from 'react';
-import { Check } from '@mui/icons-material';
-import { ILegendaryEventTrackRequirement } from 'src/models/interfaces';
+﻿import { Check } from '@mui/icons-material';
 import { Badge } from '@mui/material';
+import React from 'react';
+
 import { LreReqImage } from 'src/v2/components/images/lre-req-image';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+
+import { ILegendaryEventTrackRequirement } from '@/fsd/3-features/lre';
 
 interface Props {
     checked: boolean;

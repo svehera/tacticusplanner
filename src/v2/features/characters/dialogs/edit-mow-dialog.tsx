@@ -1,22 +1,23 @@
-﻿import React, { useMemo, useState } from 'react';
-
+﻿import { ArrowBack, ArrowForward } from '@mui/icons-material';
+import { DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, IconButton, Switch } from '@mui/material';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { DialogActions, DialogContent, DialogTitle, FormControlLabel, Grid, IconButton, Switch } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import Button from '@mui/material/Button';
-
-import { IMow } from 'src/v2/features/characters/characters.models';
-import { CharacterImage } from 'src/shared-components/character-image';
-import { Rarity, RarityStars } from 'src/models/enums';
-import { getEnumValues } from 'src/shared-logic/functions';
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { NumberInput } from 'src/v2/components/inputs/number-input';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { StarsSelect } from 'src/shared-components/stars-select';
-import { ArrowBack, ArrowForward } from '@mui/icons-material';
+import { getEnumValues } from 'src/shared-logic/functions';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { NumberInput } from 'src/v2/components/inputs/number-input';
+
+import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
+
+import { IMow } from 'src/v2/features/characters/characters.models';
 import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
 import { MowUpgradesUpdate } from 'src/v2/features/characters/components/mow-upgrades-update';
 
@@ -68,7 +69,7 @@ export const EditMowDialog: React.FC<Props> = ({
                     </IconButton>
                 )}
                 <div className="flex-box gap10">
-                    <CharacterImage icon={mow.badgeIcon} />
+                    <CharacterShardIcon icon={mow.badgeIcon} />
                     <span>{mow.name}</span>
                     <RarityImage rarity={mow.rarity} />
                     <MiscIcon icon={'mow'} width={22} height={25} />

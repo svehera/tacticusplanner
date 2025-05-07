@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { AgGridReact } from 'ag-grid-react';
-import { TacticusGuild, TacticusGuildMember, TacticusGuildRole } from './tacticus-integration.models';
-import { getTacticusGuildData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
 import { AllCommunityModule, ColDef, themeBalham } from 'ag-grid-community';
-import { mapUserIdToName } from '@/v2/features/tacticus-integration/user-id-mapper';
+import { AgGridReact } from 'ag-grid-react';
+import React, { useState, useEffect } from 'react';
+
 import { IGuildMember } from '@/models/interfaces';
+
+import { getTacticusGuildData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
+import { mapUserIdToName } from '@/v2/features/tacticus-integration/user-id-mapper';
+
+import { TacticusGuild, TacticusGuildMember, TacticusGuildRole } from './tacticus-integration.models';
 
 // Helper function to convert role enum to readable string
 const getRoleLabel = (role: TacticusGuildRole): string => {

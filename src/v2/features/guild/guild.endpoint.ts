@@ -1,4 +1,5 @@
-﻿import useApi from 'src/v2/api/useApi.hook';
+﻿import { useApi } from '@/fsd/5-shared/api';
+
 import {
     IGuildInfoRequest,
     IGuildInsightsResponse,

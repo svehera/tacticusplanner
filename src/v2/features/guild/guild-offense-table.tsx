@@ -1,14 +1,17 @@
-﻿import React, { useState } from 'react';
-import { AgGridReact } from 'ag-grid-react';
+﻿import { Badge } from '@mui/material';
 import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import { mapValues, sum } from 'lodash';
+import React, { useState } from 'react';
+
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+
+import { Rarity } from '@/fsd/5-shared/model';
+import { FlexBox } from '@/fsd/5-shared/ui';
+
+import { IGuildWarOffensePlayer } from 'src/v2/features/guild/guild.models';
 
 import './players-table.css';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { FlexBox } from 'src/v2/components/flex-box';
-import { Rarity } from 'src/models/enums';
-import { Badge } from '@mui/material';
-import { IGuildWarOffensePlayer } from 'src/v2/features/guild/guild.models';
-import { mapValues, sum } from 'lodash';
 
 export const GuildOffenseTable = ({
     rows,

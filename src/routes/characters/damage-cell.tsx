@@ -1,8 +1,12 @@
 import React from 'react';
-import { DamageType, Rank, Rarity, RarityStars } from 'src/models/enums';
+
 import { ICharacter2 } from 'src/models/interfaces';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
 import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+
+import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { Rank, DamageType } from '@/fsd/4-entities/character';
 
 interface Props {
     character: ICharacter2;

@@ -1,5 +1,5 @@
-﻿import { IGuild, IGuildMember, SetStateAction } from '../models/interfaces';
-import { defaultData } from '../models/constants';
+﻿import { defaultData } from '../models/constants';
+import { IGuild, IGuildMember, SetStateAction } from '../models/interfaces';
 
 export type GuildAction =
     | SetStateAction<IGuild>

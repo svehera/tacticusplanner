@@ -1,14 +1,13 @@
-﻿import React, { useContext, useEffect, useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import Button from '@mui/material/Button';
-
+﻿import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import { enqueueSnackbar } from 'notistack';
+import React, { useContext, useEffect, useState } from 'react';
 
+import { GlobalState } from '../../models/global-state';
 import { IPersonalData2 } from '../../models/interfaces';
 import { DispatchContext } from '../../reducers/store.provider';
-import { enqueueSnackbar } from 'notistack';
-import { GlobalState } from '../../models/global-state';
 import { PersonalDataLocalStorage } from '../../services';
 
 export const RestoreBackupDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {

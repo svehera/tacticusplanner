@@ -1,20 +1,23 @@
-﻿import React, { useContext } from 'react';
-import { useLre } from 'src/v2/pages/lre/lre-hook';
-import { LreSettings } from 'src/v2/features/lre/lre-settings';
-import { Divider, Switch, Tab, Tabs } from '@mui/material';
+﻿import GridViewIcon from '@mui/icons-material/GridView';
 import SettingsIcon from '@mui/icons-material/Settings';
+import TableRowsIcon from '@mui/icons-material/TableRows';
+import { Divider, Switch, Tab, Tabs } from '@mui/material';
 import Button from '@mui/material/Button';
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { LreSection } from 'src/v2/features/lre/lre.models';
-import { LreSectionsSettings } from 'src/v2/features/lre/lre-sections-settings';
-import { IAutoTeamsPreferences, ILreViewSettings } from 'src/models/interfaces';
+import React, { useContext } from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { IAutoTeamsPreferences, ILreViewSettings } from 'src/models/interfaces';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { LegendaryEvent } from 'src/routes/legendary-events/legendary-event';
-import { LeProgress } from 'src/shared-components/le-progress';
 import PointsTable from 'src/routes/legendary-events/points-table';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
-import GridViewIcon from '@mui/icons-material/GridView';
-import TableRowsIcon from '@mui/icons-material/TableRows';
+import { LeProgress } from 'src/shared-components/le-progress';
+
+import { LreSectionsSettings } from 'src/v2/features/lre/lre-sections-settings';
+import { LreSettings } from 'src/v2/features/lre/lre-settings';
+import { LreSection } from 'src/v2/features/lre/lre.models';
+
+import { useLre } from 'src/v2/pages/lre/lre-hook';
 
 export const Lre: React.FC = () => {
     const { viewPreferences, autoTeamsPreferences, characters } = useContext(StoreContext);

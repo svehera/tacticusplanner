@@ -1,5 +1,10 @@
-﻿import { LegendaryEventEnum, ProgressState } from 'src/models/enums';
-import { IChestMilestone, ILEProgression, IPointsMilestone, LreTrackId } from 'src/models/interfaces';
+﻿import {
+    LegendaryEventEnum,
+    IPointsMilestone,
+    IChestMilestone,
+    ILEProgression,
+    LreTrackId,
+} from '@/fsd/4-entities/lre';
 
 export enum LreSection {
     teams,

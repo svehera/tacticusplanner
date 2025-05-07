@@ -1,24 +1,24 @@
-﻿import React, { useContext, useEffect, useState } from 'react';
-
+﻿import { ArrowBack, ArrowForward } from '@mui/icons-material';
+import { DialogActions, DialogContent, DialogTitle, IconButton } from '@mui/material';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import React, { useContext, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { DialogActions, DialogContent, DialogTitle, IconButton } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import Button from '@mui/material/Button';
+import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
+
+import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
 import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
-
-import { ICharacter2 } from '../models/interfaces';
-import { CharacterTitle } from './character-title';
-import { CharacterDetails } from '../mobile-routes/characters/character-details';
-import { DispatchContext, StoreContext } from '../reducers/store.provider';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { Conditional } from 'src/v2/components/conditional';
-import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import { IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
+
+import { CharacterDetails } from '../mobile-routes/characters/character-details';
+import { ICharacter2 } from '../models/interfaces';
+import { DispatchContext, StoreContext } from '../reducers/store.provider';
+
+import { CharacterTitle } from './character-title';
 
 interface Props {
     character: ICharacter2;

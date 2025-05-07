@@ -1,11 +1,13 @@
-﻿import React from 'react';
-
-import './units-grid.scss';
+﻿import { Tooltip } from '@mui/material';
+import React from 'react';
 import { isMobile } from 'react-device-detect';
+
+import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { isCharacter } from 'src/v2/features/characters/units.functions';
-import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
-import { Tooltip } from '@mui/material';
+
+import './units-grid.scss';
 
 interface Props {
     units: IUnit[];

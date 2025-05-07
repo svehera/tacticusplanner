@@ -1,6 +1,4 @@
-﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
-import Dialog from '@mui/material/Dialog';
-import {
+﻿import {
     DialogActions,
     DialogContent,
     DialogTitle,
@@ -10,32 +8,40 @@ import {
     SelectChangeEvent,
     TextField,
 } from '@mui/material';
-import Button from '@mui/material/Button';
-
 import Box from '@mui/material/Box';
-import { ICampaignsProgress, IPersonalGoal } from 'src/models/interfaces';
-import { v4 } from 'uuid';
-import { CampaignsLocationsUsage, PersonalGoalType, Rank, Rarity, RarityStars } from 'src/models/enums';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
 import InputLabel from '@mui/material/InputLabel';
-import { getEnumValues } from 'src/shared-logic/functions';
 import { enqueueSnackbar } from 'notistack';
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { CharacterTitle } from '../character-title';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
+import { v4 } from 'uuid';
+
 import { goalsLimit, rarityToMaxRank } from 'src/models/constants';
-import { Conditional } from 'src/v2/components/conditional';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { IgnoreRankRarity } from './ignore-rank-rarity';
-import { PrioritySelect } from 'src/shared-components/goals/priority-select';
-import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
-import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
+import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
+import { ICampaignsProgress, IPersonalGoal } from 'src/models/interfaces';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
+import { PrioritySelect } from 'src/shared-components/goals/priority-select';
+import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { SetAscendGoal } from 'src/shared-components/goals/set-ascend-goal';
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
-import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
-import { NumberInput } from 'src/v2/components/inputs/number-input';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
+import { getEnumValues } from 'src/shared-logic/functions';
+import { NumberInput } from 'src/v2/components/inputs/number-input';
+import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
+
+import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
+
+import { Rank } from '@/fsd/4-entities/character';
+
+import { IUnit } from 'src/v2/features/characters/characters.models';
+import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
+
+import { CharacterTitle } from '../character-title';
+
+import { IgnoreRankRarity } from './ignore-rank-rarity';
 
 const getDefaultForm = (priority: number): IPersonalGoal => ({
     id: v4(),

@@ -1,6 +1,8 @@
 ﻿import React from 'react';
-import { Rarity } from 'src/models/enums';
+
 import { getImageUrl } from 'src/shared-logic/functions';
+
+import { Rarity } from '@/fsd/5-shared/model';
 
 export const ForgeBadgeImage = ({ rarity, size = 'medium' }: { rarity: Rarity; size?: 'small' | 'medium' }) => {
     const sizePx = size === 'medium' ? 35 : 25;

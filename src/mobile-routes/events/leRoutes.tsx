@@ -1,10 +1,12 @@
-﻿import React from 'react';
-import { Card, CardContent, CardHeader } from '@mui/material';
+﻿import { Card, CardContent, CardHeader } from '@mui/material';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { StaticDataService } from 'src/services';
-import { CharacterImage } from 'src/shared-components/character-image';
+
 import { menuItemById } from 'src/models/menu-items';
-import { LegendaryEventEnum } from 'src/models/enums';
+import { StaticDataService } from 'src/services';
+
+import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 export const PlanLeRoutes = () => {
     const navigate = useNavigate();
@@ -42,7 +44,7 @@ export const PlanLeRoutes = () => {
                         <CardHeader
                             title={
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    <CharacterImage icon={le.icon} name={le.name} /> {le.name}
+                                    <CharacterShardIcon icon={le.icon} name={le.name} /> {le.name}
                                 </div>
                             }
                             subheader={'Legendary Event'}

@@ -1,5 +1,6 @@
-﻿import { Rarity } from 'src/models/enums';
-import { ICharacter2 } from 'src/models/interfaces';
+﻿import { ICharacter2 } from 'src/models/interfaces';
+
+import { Rarity } from '@/fsd/5-shared/model';
 
 export type ZoneId =
     | 'armoury'

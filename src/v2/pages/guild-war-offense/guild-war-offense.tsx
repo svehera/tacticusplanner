@@ -1,33 +1,35 @@
-﻿import React, { useContext, useMemo } from 'react';
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { BattlefieldInfo } from 'src/v2/features/guild-war/battlefield-info';
-import { Team } from 'src/v2/features/characters/components/team';
-import { ICharacter2 } from 'src/models/interfaces';
-import { Conditional } from 'src/v2/components/conditional';
-import { CharacterItemDialog } from 'src/shared-components/character-item-dialog';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { SelectTeamDialog } from 'src/v2/features/characters/components/select-team-dialog';
-import { CharactersService } from 'src/v2/features/characters/characters.service';
-import { groupBy, mapValues, orderBy, sum } from 'lodash';
-import InfoIcon from '@mui/icons-material/Info';
-import { AccessibleTooltip } from 'src/v2/components/tooltip';
-import { PotentialInfo } from 'src/v2/features/characters/components/potential-info';
-import { Rank, Rarity } from 'src/models/enums';
-import { GuildWarTeamType, IGWTeamWithCharacters } from 'src/v2/features/guild-war/guild-war.models';
-import Button from '@mui/material/Button';
+﻿import InfoIcon from '@mui/icons-material/Info';
 import { Card, CardActions, CardContent, CardHeader, Input } from '@mui/material';
-import { getCompletionRateColor } from 'src/shared-logic/functions';
-import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import { groupBy, mapValues, orderBy, sum } from 'lodash';
+import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
-import { DeploymentStatus } from 'src/v2/features/guild-war/deployment-status';
+import { Link } from 'react-router-dom';
+
+import { ICharacter2 } from 'src/models/interfaces';
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+import { CharacterItemDialog } from 'src/shared-components/character-item-dialog';
+import { getCompletionRateColor } from 'src/shared-logic/functions';
+import { RarityImage } from 'src/v2/components/images/rarity-image';
+
+import { Rarity } from '@/fsd/5-shared/model';
+import { AccessibleTooltip, Conditional, FlexBox } from '@/fsd/5-shared/ui';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { Rank } from '@/fsd/4-entities/character';
+
+import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
+import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
-import { MiscIcon } from 'src/v2/components/images/misc-image';
-import { FlexBox } from 'src/v2/components/flex-box';
+import { PotentialInfo } from 'src/v2/features/characters/components/potential-info';
+import { SelectTeamDialog } from 'src/v2/features/characters/components/select-team-dialog';
+import { Team } from 'src/v2/features/characters/components/team';
 import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
-import { Loader } from 'src/v2/components/loader';
 import { IGuildWarOffensePlayer } from 'src/v2/features/guild/guild.models';
 import { ViewGuildOffense } from 'src/v2/features/guild/view-guild-offense';
+import { BattlefieldInfo } from 'src/v2/features/guild-war/battlefield-info';
+import { DeploymentStatus } from 'src/v2/features/guild-war/deployment-status';
+import { GuildWarTeamType, IGWTeamWithCharacters } from 'src/v2/features/guild-war/guild-war.models';
 
 export const GuildWarOffense = () => {
     const { guild, guildWar, characters, viewPreferences } = useContext(StoreContext);

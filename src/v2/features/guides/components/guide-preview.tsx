@@ -1,11 +1,13 @@
-﻿import React from 'react';
-import Typography from '@mui/material/Typography';
-import { TeamView } from 'src/v2/features/guides/components/team-view';
+﻿import Typography from '@mui/material/Typography';
+import React from 'react';
+
 import { RichTextViewer } from 'src/v2/components/inputs/rich-text-viewer';
-import { GameMode } from 'src/v2/features/teams/teams.enums';
-import { ITeamSlot } from 'src/v2/features/guides/guides.models';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
+import { TeamView } from 'src/v2/features/guides/components/team-view';
 import { getDisplayName } from 'src/v2/features/guides/guides.contstants';
+import { ITeamSlot } from 'src/v2/features/guides/guides.models';
+import { GameMode } from 'src/v2/features/teams/teams.enums';
 
 interface Props {
     teamName: string;
