@@ -22,6 +22,7 @@ import { mapUserIdToName } from './user-id-mapper';
 // Type for aggregated user data
 interface UserSummary {
     userId: string;
+    tokenStatus: TokenStatus;
     totalDamageDealt: number;
     battleBossCount: number;
     battleSideBossCount: number;
@@ -63,7 +64,8 @@ const getRarityLabel = (rarity: Rarity): string => {
 
 const MAX_TOKEN = 3;
 const TOKEN_REGEN_HOURS = 12;
-const millisecondsPerToken = TOKEN_REGEN_HOURS * 60 * 60 * 1000;
+const HOUR = 60 * 60 * 1000;
+const millisecondsPerToken = TOKEN_REGEN_HOURS * HOUR;
 interface TokenStatus {
     count: number;
     reloadStart: number;
@@ -71,12 +73,14 @@ interface TokenStatus {
 
 const updateTokenTo = (tokenState: TokenStatus, time: number): void => {
     const restored = Math.floor((time - tokenState.reloadStart) / millisecondsPerToken);
-    if (restored + tokenState.count >= MAX_TOKEN) {
-        // Player has capped, now we have the exact count and time
+    tokenState.count += restored;
+    if (tokenState.count >= MAX_TOKEN) {
+        // Player has capped at this point in time, now we have the exact values
         tokenState.count = MAX_TOKEN;
+        // Reload hasn't started before `time`
         tokenState.reloadStart = time;
     } else {
-        tokenState.count += restored;
+        // reload started when last token was restored
         tokenState.reloadStart += restored * millisecondsPerToken;
     }
 };
@@ -455,54 +459,28 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     };
 
     const TokenStatusRenderer: React.FC<{ data: UserSummary }> = ({ data }) => {
+        const tokenStatus = data.tokenStatus;
         const now = Date.now();
 
-        // Initialize with worst case scenario:
-        // season started at first damage, user had played his 3 token at the exact end of last season
-        // 2 tokens recharged from the 24H inter season
-        const firstEntryStart = (raidData.entries.find(entry => entry.startedOn !== null)?.startedOn ?? 0) * 1000;
-        const seasonStart = firstEntryStart === 0 ? now : firstEntryStart;
-        const tokenStatus = {
-            count: 2,
-            reloadStart: seasonStart,
-        };
-
-        raidData.entries
-            .filter(
-                entry =>
-                    entry.userId === data.userId &&
-                    entry.damageType === TacticusDamageType.Battle &&
-                    entry.startedOn != null
-            )
-            .forEach(entry => {
-                updateTokenTo(tokenStatus, entry.startedOn! * 1000);
-                tokenStatus.count--;
-                if (tokenStatus.count < 0) {
-                    // Estimation was too pessimist, let's refine according to this datapoint
-                    tokenStatus.count = 0;
-                    tokenStatus.reloadStart = entry.startedOn! * 1000;
-                }
-            });
-        updateTokenTo(tokenStatus, now);
-
-        if (tokenStatus.count > 0) {
-            // If tokens are available, show the number
+        if (tokenStatus.count === MAX_TOKEN) {
             return (
                 <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">
-                    {tokenStatus.count} token{tokenStatus.count > 1 ? 's' : ''} available
+                    {tokenStatus.count} tokens available
                 </span>
             );
         } else {
-            // Otherwise show cooldown until next token
             const timeReloading = now - tokenStatus.reloadStart;
             const cooldown = millisecondsPerToken - timeReloading;
-            const hoursCooldown = Math.floor(cooldown / (1000 * 60 * 60));
-            const minutesCooldown = Math.floor((cooldown % (1000 * 60 * 60)) / (1000 * 60));
-            return (
-                <span className="text-sm">
-                    {hoursCooldown}h {minutesCooldown}m remaining cooldown
-                </span>
-            );
+            const hoursCooldown = Math.round(cooldown / HOUR);
+            if (tokenStatus.count > 0) {
+                return (
+                    <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">
+                        {tokenStatus.count} token{tokenStatus.count > 1 ? 's' : ''}, {hoursCooldown}h cooldown
+                    </span>
+                );
+            } else {
+                return <span className="text-sm">no token, {hoursCooldown}h cooldown</span>;
+            }
         }
     };
 
@@ -526,7 +504,15 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             headerName: 'Token Status',
             field: 'userId',
             cellRenderer: TokenStatusRenderer,
-            sortable: false,
+            sortable: true,
+            comparator: (data1: UserSummary, data2: UserSummary) => {
+                const tokenDiff = data1.tokenStatus.count - data2.tokenStatus.count;
+                if (tokenDiff !== 0) {
+                    return tokenDiff;
+                }
+                // the oldest (i.e. smallest) the reloadStart, the more token we have
+                return data2.tokenStatus.reloadStart - data1.tokenStatus.reloadStart;
+            },
             width: 120,
         },
         {
@@ -627,12 +613,24 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     ];
 
     const summaryData = useMemo(() => {
+        const now = Date.now();
+
+        // Worst case scenario: season started at first damage
+        const firstEntryStart = (raidData.entries.find(entry => entry.startedOn !== null)?.startedOn ?? 0) * 1000;
+        const seasonStart = firstEntryStart === 0 ? now : firstEntryStart;
+
         const userMap = new Map<string, UserSummary>();
 
         filteredEntries.forEach(entry => {
             if (!userMap.has(entry.userId)) {
                 userMap.set(entry.userId, {
                     userId: entry.userId,
+                    // Worst case scenario: user had played his 3 token at the exact end of last season
+                    // 2 tokens recharged from the 24H inter season
+                    tokenStatus: {
+                        count: 2,
+                        reloadStart: seasonStart,
+                    },
                     totalDamageDealt: 0,
                     battleBossCount: 0,
                     battleSideBossCount: 0,
@@ -667,6 +665,20 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                     const unitId = match ? match[1] : entry.unitId;
                     userSummary.topSideBosses.set(unitId, (userSummary.topSideBosses.get(unitId) || 0) + 1);
                 }
+
+                if (entry.startedOn !== undefined) {
+                    // update token status at entry.startedOn
+
+                    updateTokenTo(userSummary.tokenStatus, entry.startedOn! * 1000);
+                    // one token was used for this battle attack
+                    userSummary.tokenStatus.count--;
+
+                    if (userSummary.tokenStatus.count < 0) {
+                        // Estimation was too pessimist, let's refine according to this datapoint
+                        userSummary.tokenStatus.count = 0;
+                        userSummary.tokenStatus.reloadStart = entry.startedOn! * 1000;
+                    }
+                }
             }
 
             // Track highest damage
@@ -687,6 +699,9 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                 );
             }
         });
+
+        // Advance token status to now
+        userMap.values().forEach(userSummary => updateTokenTo(userSummary.tokenStatus, now));
 
         return Array.from(userMap.values());
     }, [filteredEntries]);
