@@ -4,28 +4,32 @@
         "craftable": false,
         "stat": "Health",
         "rarity": "Legendary",
-        "icon": "arcane genetic alchemy.jpg"
+        "icon": "arcane genetic alchemy.jpg",
+        "faction": "Adeptus Custodes"
     },
     "Auramite Wing": {
         "material": "Auramite Wing",
         "craftable": false,
         "stat": "Armour",
         "rarity": "Rare",
-        "icon": "auramite wing.jpg"
+        "icon": "auramite wing.jpg",
+        "faction": "Adeptus Custodes"
     },
     "Flawless Terran Gem": {
         "material": "Flawless Terran Gem",
         "craftable": false,
         "stat": "Health",
         "rarity": "Rare",
-        "icon": "flawless terran gem.jpg"
+        "icon": "flawless terran gem.jpg",
+        "faction": "Adeptus Custodes"
     },
     "Integrated Bolt Feeder": {
         "material": "Integrated Bolt Feeder",
         "craftable": false,
         "stat": "Damage",
         "rarity": "Rare",
-        "icon": "integrated bolt feeder.jpg"
+        "icon": "integrated bolt feeder.jpg",
+        "faction": "Adeptus Custodes"
     },
     "Proclamation Receiver": {
         "material": "Proclamation Receiver",

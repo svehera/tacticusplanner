@@ -4,7 +4,7 @@ import { ICharacter2 } from '@/models/interfaces';
 import { Alliance } from '@/fsd/5-shared/model';
 
 import { Trait, DamageType } from '@/fsd/4-entities/character';
-import { unknown as staticData } from '@/fsd/4-entities/lre';
+import { trajann as staticData } from '@/fsd/4-entities/lre';
 
 import { ILegendaryEventTrack } from '../lre.model';
 
@@ -12,7 +12,7 @@ import { LegendaryEventBase } from './base.le';
 import { LETrack } from './base.le.track';
 import { filter } from './filters';
 
-export class UnknownLegendaryEvent extends LegendaryEventBase {
+export class TrajannLegendaryEvent extends LegendaryEventBase {
     constructor(unitsData: Array<ICharacter2>) {
         super(unitsData, staticData);
     }
