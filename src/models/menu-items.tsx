@@ -47,7 +47,7 @@ export const menuItemById = {
     wyo: wyoMenuItem,
     myProgress: myProgressMenuItem,
     inventory: new MenuItemTP('Inventory', <InventoryIcon />, '/input/inventory'),
-
+    equipment: new MenuItemTP('Equipment', <InventoryIcon />, '/input/equipment'),
     goals: new MenuItemTP('Goals', <TrackChangesIcon />, '/plan/goals'),
     dailyRaids: new MenuItemTP('Daily Raids', <EventRepeatIcon />, '/plan/dailyRaids'),
     leMasterTable: new MenuItemTP('Master Table', <TableChartIcon />, '/plan/leMasterTable'),
@@ -80,6 +80,7 @@ export const inputSubMenu: MenuItemTP[] = [
     menuItemById['wyo'],
     menuItemById['myProgress'],
     menuItemById['inventory'],
+    menuItemById['equipment'],
     menuItemById['guild'],
 ];
 
