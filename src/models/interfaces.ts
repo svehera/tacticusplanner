@@ -437,6 +437,7 @@ export interface ILreTileSettings {
     lreTileShowUnitBias: boolean;
     lreTileShowUnitActiveAbility: boolean;
     lreTileShowUnitPassiveAbility: boolean;
+    lreTileShowUnitHealTraits: boolean;
 }
 
 export interface IAutoTeamsPreferences {

@@ -5,8 +5,9 @@ import { pooEmoji, starEmoji } from 'src/models/constants';
 import { ICharacter2, ILreTileSettings } from 'src/models/interfaces';
 import { RankImage } from 'src/v2/components/images/rank-image';
 import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { TraitImage } from 'src/v2/components/images/trait-image';
 
-import { CharacterBias, CharacterShardIcon, Rank } from '@/fsd/4-entities/character';
+import { CharacterBias, CharacterShardIcon, Rank, Trait } from '@/fsd/4-entities/character';
 
 interface Props {
     character: ICharacter2;
@@ -24,6 +25,11 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
     const rankBackgroundCssClass = settings.lreTileShowUnitRankBackground
         ? ` ${Rank[character.rank].toLowerCase()}`
         : '';
+
+    const showHealTrait =
+        settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait['Healer']);
+    const showMechanicTrait =
+        settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait['Mechanic']);
 
     return (
         <div
@@ -44,6 +50,20 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
             {settings.lreTileShowUnitName && <span>{character.shortName}</span>}
             {settings.lreTileShowUnitActiveAbility && <span>A{character.activeAbilityLevel}</span>}
             {settings.lreTileShowUnitPassiveAbility && <span>P{character.passiveAbilityLevel}</span>}
+            {showHealTrait && (
+                <Tooltip placement="top" title="Healer">
+                    <span>
+                        <TraitImage trait={Trait['Healer']} width={20} height={20} />
+                    </span>
+                </Tooltip>
+            )}
+            {showMechanicTrait && (
+                <Tooltip placement="top" title="Mechanic">
+                    <span>
+                        <TraitImage trait={Trait['Mechanic']} width={20} height={20} />
+                    </span>
+                </Tooltip>
+            )}
             {settings.lreTileShowUnitBias && character.bias !== CharacterBias.None && (
                 <Tooltip
                     placement="top"

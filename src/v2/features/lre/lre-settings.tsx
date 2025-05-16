@@ -151,6 +151,12 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
             value: viewSettings.lreTileShowUnitBias,
             disabled: false,
         },
+        {
+            label: 'Healer/Mechanic',
+            key: 'lreTileShowUnitHealTraits',
+            value: viewSettings.lreTileShowUnitHealTraits,
+            disabled: false,
+        },
     ];
 
     const renderOption = (option: IViewOption<ILreViewSettings & ILreTileSettings & IAutoTeamsPreferences>) => {
@@ -180,6 +186,7 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
         rarity: Rarity.Legendary,
         activeAbilityLevel: 35,
         passiveAbilityLevel: 35,
+        traits: ['Act of Faith', 'Healer'],
     } as ICharacter2;
 
     return (
