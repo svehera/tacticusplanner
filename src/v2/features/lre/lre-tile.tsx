@@ -26,8 +26,10 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
         ? ` ${Rank[character.rank].toLowerCase()}`
         : '';
 
-    const isHealer = character.traits && character.traits.includes(Trait['Healer']);
-    const isMechanic = character.traits && character.traits.includes(Trait['Mechanic']);
+    const showHealTrait =
+        settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait['Healer']);
+    const showMechanicTrait =
+        settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait['Mechanic']);
 
     return (
         <div
@@ -48,14 +50,14 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
             {settings.lreTileShowUnitName && <span>{character.shortName}</span>}
             {settings.lreTileShowUnitActiveAbility && <span>A{character.activeAbilityLevel}</span>}
             {settings.lreTileShowUnitPassiveAbility && <span>P{character.passiveAbilityLevel}</span>}
-            {isHealer && (
+            {showHealTrait && (
                 <Tooltip placement="top" title="Healer">
                     <span>
                         <TraitImage trait={Trait['Healer']} width={20} height={20} />
                     </span>
                 </Tooltip>
             )}
-            {isMechanic && (
+            {showMechanicTrait && (
                 <Tooltip placement="top" title="Mechanic">
                     <span>
                         <TraitImage trait={Trait['Mechanic']} width={20} height={20} />
