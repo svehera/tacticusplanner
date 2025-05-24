@@ -12,7 +12,11 @@
                 }
             ],
             "minor": [],
-            "bugFixes": []
+            "bugFixes": [
+                {
+                    "text": "(Hecubha) Fixed React hooks error in learn > guild page"
+                }
+            ]
         },
         {
             "version": "1.7.3",
