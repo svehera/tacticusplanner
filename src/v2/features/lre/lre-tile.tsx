@@ -1,13 +1,15 @@
 import { Tooltip } from '@mui/material';
 import React from 'react';
 
-import { pooEmoji, starEmoji } from 'src/models/constants';
 import { ICharacter2, ILreTileSettings } from 'src/models/interfaces';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { TraitImage } from 'src/v2/components/images/trait-image';
 
-import { CharacterBias, CharacterShardIcon, Rank, Trait } from '@/fsd/4-entities/character';
+import { Trait, Rank } from '@/fsd/5-shared/model';
+import { pooEmoji, starEmoji, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+
+import { CharacterBias } from '@/fsd/4-entities/character';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
 interface Props {
     character: ICharacter2;
@@ -37,7 +39,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
             style={{ columnGap: '10px' }}
             onClick={() => onClick(character)}>
             {settings.lreTileShowUnitIcon && (
-                <CharacterShardIcon
+                <UnitShardIcon
                     key={character.name}
                     icon={character.icon}
                     name={character.name}
@@ -45,8 +47,8 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
                     width={30}
                 />
             )}
-            {settings.lreTileShowUnitRarity && <RarityImage rarity={character.rarity} />}
-            {settings.lreTileShowUnitRank && <RankImage key={character.rank} rank={character.rank} />}
+            {settings.lreTileShowUnitRarity && <RarityIcon rarity={character.rarity} />}
+            {settings.lreTileShowUnitRank && <RankIcon key={character.rank} rank={character.rank} />}
             {settings.lreTileShowUnitName && <span>{character.shortName}</span>}
             {settings.lreTileShowUnitActiveAbility && <span>A{character.activeAbilityLevel}</span>}
             {settings.lreTileShowUnitPassiveAbility && <span>P{character.passiveAbilityLevel}</span>}

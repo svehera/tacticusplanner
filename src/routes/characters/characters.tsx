@@ -13,20 +13,7 @@ import {
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
-import {
-    ColDef,
-    GridApi,
-    RowStyle,
-    RowClassParams,
-    IRowNode,
-    ICellRendererParams,
-    ColGroupDef,
-    ValueGetterParams,
-    AllCommunityModule,
-    themeBalham,
-    RefreshCellsParams,
-    Column,
-} from 'ag-grid-community';
+import { ColDef, IRowNode, AllCommunityModule, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { uniq } from 'lodash';
 import React, { ChangeEvent, useCallback, useContext, useMemo, useRef, useState } from 'react';
@@ -36,12 +23,10 @@ import { StoreContext } from 'src/reducers/store.provider';
 import { RankSelect } from 'src/shared-components/rank-select';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { StarsSelect } from 'src/shared-components/stars-select';
-import { getEnumValues } from 'src/shared-logic/functions';
 import { useQueryState } from 'src/v2/hooks/query-state';
 
-import { Rarity, Alliance } from '@/fsd/5-shared/model';
-
-import { DamageType, Trait, Rank } from '@/fsd/4-entities/character';
+import { getEnumValues } from '@/fsd/5-shared/lib';
+import { Rarity, Alliance, DamageType, Trait, Rank } from '@/fsd/5-shared/model';
 
 import { useCharacters } from './characters-column-defs';
 import { MultipleSelectCheckmarks } from './multiple-select';

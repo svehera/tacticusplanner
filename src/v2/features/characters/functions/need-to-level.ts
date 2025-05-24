@@ -1,10 +1,8 @@
 ﻿import { rankToLevel } from 'src/models/constants';
-import { ICharacter2 } from 'src/models/interfaces';
 
-import { Rank } from '@/fsd/4-entities/character';
+import { UnitType, Rank } from '@/fsd/5-shared/model';
 
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { UnitType } from 'src/v2/features/characters/units.enums';
+import { IUnit } from '@/fsd/4-entities/unit';
 
 import { needToAscendCharacter } from './need-to-ascend';
 

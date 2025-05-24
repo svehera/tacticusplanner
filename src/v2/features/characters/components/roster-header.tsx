@@ -1,8 +1,7 @@
 ﻿import { TextField } from '@mui/material';
 import React, { useContext } from 'react';
 
-import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
-
+import { numberToThousandsString, numberToThousandsStringOld } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { AccessibleTooltip, FlexBox, Conditional } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 

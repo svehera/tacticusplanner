@@ -3,9 +3,11 @@ import { AgGridReact } from 'ag-grid-react';
 import React from 'react';
 
 import { ICharacter2 } from 'src/models/interfaces';
-import { CharacterTitle } from 'src/shared-components/character-title';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
+
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+
+import { CharacterTitle } from '@/fsd/4-entities/character/ui/character-title';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
 import { Score } from 'src/v2/features/dirty-dozen/dirty-dozen-score';
 
@@ -69,7 +71,7 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
             },
             cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {
                 const rarity = props.value ?? 0;
-                return <RarityImage rarity={rarity} />;
+                return <RarityIcon rarity={rarity} />;
             },
         },
         {
@@ -82,7 +84,7 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
             },
             cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {
                 const rank = props.value ?? 0;
-                return <RankImage rank={rank} />;
+                return <RankIcon rank={rank} />;
             },
         },
         {

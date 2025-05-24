@@ -2,10 +2,9 @@
 import InputLabel from '@mui/material/InputLabel';
 import React from 'react';
 
-import { StarsImage } from 'src/v2/components/images/stars-image';
-
 import { Rarity } from '@/fsd/5-shared/model';
 import { FlexBox } from '@/fsd/5-shared/ui';
+import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
 
 interface Props {
     label: string;
@@ -22,7 +21,7 @@ export const StarsSelect: React.FC<Props> = ({ starsValues, valueChanges, value,
                 {starsValues.map(star => (
                     <MenuItem key={star} value={star}>
                         <FlexBox gap={5}>
-                            <StarsImage stars={star} />
+                            <StarsIcon stars={star} />
                         </FlexBox>
                     </MenuItem>
                 ))}

@@ -1,9 +1,6 @@
-// eslint-disable-next-line import-x/no-internal-modules
-import { ICharacter2 } from '@/models/interfaces';
+import { Alliance, Trait, DamageType } from '@/fsd/5-shared/model';
 
-import { Alliance } from '@/fsd/5-shared/model';
-
-import { Trait, DamageType } from '@/fsd/4-entities/character';
+import { ICharacter2 } from '@/fsd/4-entities/character';
 import { trajann as staticData } from '@/fsd/4-entities/lre';
 
 import { ILegendaryEventTrack } from '../lre.model';

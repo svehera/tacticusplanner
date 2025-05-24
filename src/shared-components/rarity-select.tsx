@@ -2,10 +2,9 @@
 import InputLabel from '@mui/material/InputLabel';
 import React from 'react';
 
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-
 import { Rarity } from '@/fsd/5-shared/model';
 import { FlexBox } from '@/fsd/5-shared/ui';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 export const RaritySelect = ({
     rarityValues,
@@ -25,7 +24,7 @@ export const RaritySelect = ({
                 {rarityValues.map(rarity => (
                     <MenuItem key={rarity} value={rarity}>
                         <FlexBox gap={5}>
-                            <RarityImage rarity={rarity} /> {Rarity[rarity]}
+                            <RarityIcon rarity={rarity} /> {Rarity[rarity]}
                         </FlexBox>
                     </MenuItem>
                 ))}

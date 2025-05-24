@@ -2,7 +2,7 @@
 
 import { getImageUrl } from 'src/shared-logic/functions';
 
-import { getTraitFromLabel, Trait } from '@/fsd/4-entities/character/trait.enum';
+import { getTraitFromLabel, Trait } from '@/fsd/5-shared/model/enums/trait.enum';
 
 export const TraitImage = ({ trait, width, height }: { trait: Trait; width: number; height: number }) => {
     const traitString = getTraitFromLabel(trait);

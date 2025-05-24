@@ -1,22 +1,21 @@
 ﻿import mowsData from 'src/v2/data/mows.json';
 
-import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
 
-import { CharacterBias, Rank } from '@/fsd/4-entities/character';
+import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
+import { CharacterBias, ICharacter2 } from '@/fsd/4-entities/character';
+import { IMow, IMowDb, IMowStatic } from '@/fsd/4-entities/mow';
+import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
+import { UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
-import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
-import { IMow, IMowDb, IMowStatic } from 'src/v2/features/characters/characters.models';
-import { UnitType } from 'src/v2/features/characters/units.enums';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
 
 import { StaticDataService } from '../services';
 
-import { defaultData, rankToLevel, rankToRarity, rarityStringToNumber, rarityToStars } from './constants';
+import { defaultData, rankToLevel, rankToRarity } from './constants';
 import {
     IAutoTeamsPreferences,
-    ICampaignsProgress,
-    ICharacter2,
     IDailyRaids,
     IDailyRaidsPreferences,
     IGlobalState,
@@ -93,12 +92,12 @@ export class GlobalState implements IGlobalState {
             const rankLevel = rankToLevel[(rank - 1) as Rank];
             const rankRarity = rankToRarity[rank];
             const rarity = Math.max(personalCharData?.rarity ?? staticData.initialRarity, rankRarity) as Rarity;
-            const stars = Math.max(personalCharData?.stars ?? 0, rarityToStars[rarity]);
+            const stars = Math.max(personalCharData?.stars ?? 0, RarityMapper.toStars[rarity]);
             const activeLevel = Math.max(personalCharData?.activeAbilityLevel ?? 1, 1);
             const passiveLevel = Math.max(personalCharData?.passiveAbilityLevel ?? 1, 1);
             const level = Math.max(personalCharData?.level ?? 1, rankLevel, activeLevel, passiveLevel);
             const upgrades = personalCharData?.upgrades
-                ? personalCharData.upgrades.filter(StaticDataService.isValidaUpgrade)
+                ? personalCharData.upgrades.filter(UpgradesService.isValidUpgrade)
                 : [];
 
             const combinedData: IPersonalCharacterData2 = {
@@ -137,8 +136,8 @@ export class GlobalState implements IGlobalState {
         const mowsStatic = mowsData as IMowStatic[];
         return mowsStatic.map(staticData => {
             const dbMow = dbMows?.find(c => c.id === staticData.id);
-            const initialRarity = rarityStringToNumber[staticData.initialRarity];
-            const initialRarityStars = rarityToStars[rarityStringToNumber[staticData.initialRarity]];
+            const initialRarity = RarityMapper.stringToNumber[staticData.initialRarity];
+            const initialRarityStars = RarityMapper.toStars[RarityMapper.stringToNumber[staticData.initialRarity]];
             const isReleased = staticData.releaseDate
                 ? this.isAtLeast3DaysBefore(new Date(staticData.releaseDate))
                 : true;

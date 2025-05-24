@@ -1,55 +1,44 @@
-﻿import { cloneDeep, groupBy, map, orderBy, sortBy, sum, sumBy, uniq } from 'lodash';
+﻿import { cloneDeep, groupBy, orderBy, sortBy, sum, uniq } from 'lodash';
 
-import { Alliance, RarityString, Rarity } from '@/fsd/5-shared/model';
+import { getEnumValues } from '@/fsd/5-shared/lib';
+import {
+    Alliance,
+    RarityString,
+    Rarity,
+    Faction,
+    Rank,
+    rankToString,
+    UnitType,
+    RarityMapper,
+} from '@/fsd/5-shared/model';
 
-import { Rank } from '@/fsd/4-entities/character';
-import { Faction } from '@/fsd/4-entities/faction';
-
-import { UnitType } from 'src/v2/features/characters/units.enums';
-import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
-import { IRankLookup } from 'src/v2/features/goals/goals.models';
-import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+import {
+    ICampaignsData,
+    ICampaignBattleComposed,
+    CampaignsService,
+    ICampaignsProgress,
+} from '@/fsd/4-entities/campaign';
+import { IRankUpData, IUnitData, UnitDataRaw, ICharLegendaryEvents, IRankLookup } from '@/fsd/4-entities/character';
+import { IMaterialRecipeIngredientFull, IMaterialFull, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import rawEquipmentData from '../assets/EquipmentData.json';
-import battleData from '../assets/newBattleData.json';
-import newBattleData from '../assets/newBattleData.json';
 import npcData from '../assets/NpcData.json';
-import rankUpData from '../assets/rankUpData.json';
-import recipeData from '../assets/recipeData.json';
 import unitsData from '../assets/UnitData.json';
-import { rarityStringToNumber, rarityToStars } from '../models/constants';
+import newBattleData from '../fsd/4-entities/campaign/data/newBattleData.json';
+import rankUpData from '../fsd/4-entities/character/data/rankUpData.json';
 import { EquipmentClass } from '../models/enums';
 import {
     EquipmentType,
-    ICampaignBattle,
-    ICampaignBattleComposed,
-    ICampaignsData,
-    ICampaignsProgress,
-    ICharLegendaryEvents,
     IEquipment,
     IEstimatedRanksSettings,
     IMaterialEstimated2,
-    IMaterialFull,
-    IMaterialRecipeIngredientFull,
     INpcData,
-    INpcsRaw,
-    IRankUpData,
-    IRecipeData,
-    IRecipeDataFull,
-    IUnitData,
-    UnitDataRaw,
 } from '../models/interfaces';
-import { getEnumValues, rankToString } from '../shared-logic/functions';
 
 export class StaticDataService {
-    static readonly battleData: ICampaignsData = battleData;
     static readonly newBattleData: ICampaignsData = newBattleData;
     static readonly equipmentData: IEquipment[] = this.convertEquipmentData();
-    static readonly npcData: INpcsRaw = npcData;
-    static readonly recipeData: IRecipeData = recipeData;
     static readonly rankUpData: IRankUpData = rankUpData;
-
-    static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = CampaignsService.campaignsComposed;
 
     static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
     static readonly lreCharacters: IUnitData[] = orderBy(
@@ -80,7 +69,6 @@ export class StaticDataService {
     })();
 
     static readonly campaignsGrouped: Record<string, ICampaignBattleComposed[]> = this.getCampaignGrouped();
-    static readonly recipeDataFull: IRecipeDataFull = this.convertRecipeData();
     static readonly npcDataFull: INpcData[] = this.convertNpcData();
 
     private static parseFaction(faction: string): Faction | undefined {
@@ -184,7 +172,7 @@ export class StaticDataService {
 
     static getItemLocations = (itemId: string): ICampaignBattleComposed[] => {
         const possibleLocations: ICampaignBattleComposed[] = [];
-        const characterShardsData = StaticDataService.recipeDataFull[itemId];
+        const characterShardsData = UpgradesService.recipeDataFull[itemId];
         if (characterShardsData) {
             const fullData = characterShardsData.allMaterials && characterShardsData.allMaterials[0];
             if (fullData) {
@@ -196,123 +184,8 @@ export class StaticDataService {
     };
 
     static getCampaignGrouped(): Record<string, ICampaignBattleComposed[]> {
-        const allBattles = sortBy(Object.values(this.campaignsComposed), 'nodeNumber');
+        const allBattles = sortBy(Object.values(CampaignsService.campaignsComposed), 'nodeNumber');
         return groupBy(allBattles, 'campaign');
-    }
-
-    static isValidaUpgrade(upgrade: string): boolean {
-        return Object.hasOwn(recipeData, upgrade);
-    }
-
-    static getUpgradesLocations(): Record<string, string[]> {
-        const result: Record<string, string[]> = {};
-        const battles: ICampaignBattle[] = [];
-        for (const battleDataKey in this.battleData) {
-            battles.push({ ...this.battleData[battleDataKey], shortName: battleDataKey });
-        }
-
-        const groupedData = groupBy(battles, 'reward');
-
-        for (const key in groupedData) {
-            result[key] = groupedData[key].map(x => x.shortName ?? '');
-        }
-
-        return result;
-    }
-
-    // Converts the static JSON in recipeData to an IRecipeDataFull object.
-    static convertRecipeData(): IRecipeDataFull {
-        const result: IRecipeDataFull = {};
-        const upgrades = Object.keys(this.recipeData);
-        const upgradeLocations = UpgradesService.getUpgradesLocations();
-
-        const getRecipe = (
-            materialId: string,
-            count: number,
-            allMaterials: IMaterialRecipeIngredientFull[]
-        ): IMaterialRecipeIngredientFull => {
-            const upgrade = this.recipeData[materialId];
-            const locations = upgradeLocations[materialId] ?? [];
-
-            if (!upgrade || !upgrade.recipe?.length) {
-                const item: IMaterialRecipeIngredientFull = {
-                    id: materialId,
-                    label: upgrade?.label ?? upgrade?.material,
-                    count,
-                    rarity: rarityStringToNumber[upgrade?.rarity as RarityString],
-                    stat: upgrade?.stat ?? '',
-                    locations: locations,
-                    craftable: upgrade?.craftable,
-                    locationsComposed: locations.map(x => this.campaignsComposed[x]),
-                    iconPath: upgrade?.icon ?? '',
-                    characters: [],
-                    priority: 0,
-                };
-                allMaterials.push(item);
-                return item;
-            } else {
-                return {
-                    id: materialId,
-                    label: upgrade.label ?? upgrade.material,
-                    count,
-                    stat: upgrade.stat,
-                    craftable: upgrade.craftable,
-                    locations: locations,
-                    locationsComposed: locations.map(x => this.campaignsComposed[x]),
-                    rarity: rarityStringToNumber[upgrade.rarity as RarityString],
-                    recipe: upgrade.recipe.map(item => getRecipe(item.material, count * item.count, allMaterials)),
-                    iconPath: upgrade.icon ?? '',
-                    characters: [],
-                    priority: 0,
-                };
-            }
-        };
-
-        for (const upgradeName of upgrades) {
-            const upgrade = this.recipeData[upgradeName];
-            if (!upgrade.craftable) {
-                result[upgradeName] = {
-                    id: upgrade.material,
-                    label: upgrade.label ?? upgrade.material,
-                    stat: upgrade.stat,
-                    rarity: rarityStringToNumber[upgrade.rarity as RarityString],
-                    craftable: upgrade.craftable,
-                    allMaterials: [getRecipe(upgrade.material, 1, [])],
-                    iconPath: upgrade.icon ?? '',
-                };
-            } else {
-                const allMaterials: IMaterialRecipeIngredientFull[] = [];
-                result[upgradeName] = {
-                    id: upgrade.material,
-                    label: upgrade.label ?? upgrade.material,
-                    stat: upgrade.stat,
-                    rarity: rarityStringToNumber[upgrade.rarity as RarityString],
-                    craftable: upgrade.craftable,
-                    recipe: upgrade.recipe?.map(item => getRecipe(item.material, item.count, allMaterials)),
-                    iconPath: upgrade.icon ?? '',
-                };
-
-                const groupedData = groupBy(allMaterials, 'id');
-
-                result[upgradeName].allMaterials = map(groupedData, (items, material) => ({
-                    id: material,
-                    count: sumBy(items, 'count'),
-                    quantity: 0,
-                    countLeft: 0,
-                    label: items[0].label,
-                    craftable: items[0].craftable,
-                    rarity: items[0].rarity,
-                    stat: items[0].stat,
-                    locations: items[0].locations,
-                    locationsComposed: items[0].locationsComposed,
-                    iconPath: items[0].iconPath ?? '',
-                    characters: [],
-                    priority: 0,
-                }));
-            }
-        }
-
-        return result;
     }
 
     static convertUnitData(rawData: UnitDataRaw): IUnitData {
@@ -329,8 +202,8 @@ export class StaticDataService {
             health: rawData.Health,
             damage: rawData.Damage,
             armour: rawData.Armour,
-            initialRarity: rarityStringToNumber[rawData['Initial rarity']],
-            rarityStars: rarityToStars[rarityStringToNumber[rawData['Initial rarity']]],
+            initialRarity: RarityMapper.stringToNumber[rawData['Initial rarity'] as RarityString],
+            rarityStars: RarityMapper.toStars[RarityMapper.stringToNumber[rawData['Initial rarity'] as RarityString]],
             equipment1: rawData.Equipment1,
             equipment2: rawData.Equipment2,
             equipment3: rawData.Equipment3,
@@ -464,7 +337,7 @@ export class StaticDataService {
             }
 
             const upgrades: IMaterialFull[] = rankUpgrades.map(upgrade => {
-                const recipe = StaticDataService.recipeDataFull[upgrade];
+                const recipe = UpgradesService.recipeDataFull[upgrade];
                 if (!recipe) {
                     // console.error('Recipe for ' + upgrade + ' is not found');
 
@@ -504,7 +377,7 @@ export class StaticDataService {
     }
 
     public static getAllMaterials(settings: IEstimatedRanksSettings, upgrades: IMaterialFull[]): IMaterialEstimated2[] {
-        const result = this.groupBaseMaterials(upgrades)
+        const result = UpgradesService.groupBaseMaterials(upgrades)
             .map(x =>
                 this.calculateMaterialData(
                     settings.campaignsProgress,
@@ -517,46 +390,6 @@ export class StaticDataService {
             .filter(x => !!x) as IMaterialEstimated2[];
 
         return orderBy(result, ['daysOfBattles', 'totalEnergy', 'rarity', 'count'], ['desc', 'desc', 'desc', 'desc']);
-    }
-
-    /**
-     *
-     * @param upgrades The set of full upgrade materials, including both crafted
-     *                 and base materials.
-     * @param keepGold Whether or not to keep track of gold in the results.
-     * @returns
-     */
-    public static groupBaseMaterials(upgrades: IMaterialFull[], keepGold = false) {
-        const groupedData = groupBy(
-            upgrades.flatMap(x => {
-                const result = x.allMaterials ?? [];
-                if (x.character) {
-                    result.forEach(material => {
-                        material.priority = x.priority ?? 0;
-                        material.characters = [...material.characters, x.character!];
-                    });
-                }
-                return result;
-            }),
-            'id'
-        );
-
-        const result: IMaterialRecipeIngredientFull[] = map(groupedData, (items, material) => {
-            return {
-                id: material,
-                count: sumBy(items, 'count'),
-                label: items[0].label,
-                rarity: items[0].rarity,
-                iconPath: items[0].iconPath,
-                stat: items[0].stat,
-                craftable: items[0].craftable,
-                locations: items[0].locations,
-                priority: items[0].priority,
-                characters: uniq(items.flatMap(item => item.characters)),
-                locationsComposed: items[0].locations?.map(location => StaticDataService.campaignsComposed[location]),
-            };
-        });
-        return keepGold ? result : result.filter(x => x.id !== 'Gold');
     }
 
     /**
@@ -820,7 +653,7 @@ export class StaticDataService {
     }
 
     private static parseEquipmentRarity(rarity: string): Rarity {
-        const parsed = rarityStringToNumber[rarity as RarityString];
+        const parsed = RarityMapper.stringToNumber[rarity as RarityString];
         if (parsed == undefined) {
             console.error("Couldn't parse equipment rarity: " + rarity);
             return Rarity.Common;

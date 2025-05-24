@@ -1,12 +1,11 @@
-﻿import { Campaign } from 'src/models/enums';
+﻿import { Campaign, CampaignsService, ICampaingsFilters } from '@/fsd/4-entities/campaign';
+import { campaignEventsLocations } from '@/fsd/4-entities/campaign/campaigns.constants';
 
-import { campaignEventsLocations } from '@/v2/features/campaigns/campaigns.constants';
-import { CampaignsService } from '@/v2/features/goals/campaigns.service';
 import { TacticusCampaignProgress } from '@/v2/features/tacticus-integration/tacticus-integration.models';
 import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 
 import { defaultData, idToCampaign } from '../models/constants';
-import { IDailyRaids, IDailyRaidsFilters, SetStateAction } from '../models/interfaces';
+import { IDailyRaids, SetStateAction } from '../models/interfaces';
 
 export type DailyRaidsAction =
     | {
@@ -21,7 +20,7 @@ export type DailyRaidsAction =
       }
     | {
           type: 'UpdateFilters';
-          value: IDailyRaidsFilters;
+          value: ICampaingsFilters;
       }
     | {
           type: 'SyncWithTacticus';

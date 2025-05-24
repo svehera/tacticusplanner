@@ -1,4 +1,5 @@
-﻿import { UnitType } from 'src/v2/features/characters/units.enums';
+﻿import { UnitType } from '@/fsd/5-shared/model';
+
 import { GameMode } from 'src/v2/features/teams/teams.enums';
 
 import { SlotType, GuidesGroup, GuidesStatus } from './guides.enums';

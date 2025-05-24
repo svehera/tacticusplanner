@@ -6,8 +6,7 @@ import { StaticDataService } from 'src/services';
 import { getImageUrl } from 'src/shared-logic/functions';
 
 import { FlexBox } from '@/fsd/5-shared/ui';
-
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 interface Props {
     label: string;
@@ -25,7 +24,7 @@ export const CharacterSelect: React.FC<Props> = ({ label, idsAndNames, value, va
     const getImageComponent = (id: string) => {
         const unit = StaticDataService.unitsData.find(unit => unit.id === id);
         if (unit != undefined) {
-            return <CharacterShardIcon icon={unit.icon} name={unit.name} height={30} width={30} tooltip={unit.name} />;
+            return <UnitShardIcon icon={unit.icon} name={unit.name} height={30} width={30} tooltip={unit.name} />;
         } else {
             return getNpcPortrait(id);
         }

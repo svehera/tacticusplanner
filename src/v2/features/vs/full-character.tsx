@@ -11,11 +11,8 @@ import { RaritySelect } from 'src/shared-components/rarity-select';
 import { StarsSelect } from 'src/shared-components/stars-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 
-import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { RarityStars, Rarity, Rank, Faction } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
-
-import { Rank } from '@/fsd/4-entities/character';
-import { Faction } from '@/fsd/4-entities/faction';
 
 import { CharacterSelect } from './character-select';
 import { DamageCalculatorService } from './damage-calculator-service';

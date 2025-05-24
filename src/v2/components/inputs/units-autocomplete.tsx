@@ -1,9 +1,9 @@
 ﻿import { Autocomplete, TextField } from '@mui/material';
 import React, { ReactNode } from 'react';
 
-import { CharacterTitle } from 'src/shared-components/character-title';
+import { UnitTitle } from '@/fsd/4-entities/unit/unit-title';
 
-import { IUnit } from 'src/v2/features/characters/characters.models';
+import { IUnit } from '@/v2/features/characters/characters.models';
 
 interface Props<T extends IUnit> {
     unit: T | T[] | null;
@@ -75,7 +75,7 @@ export const UnitsAutocomplete = <T extends IUnit>({
             getOptionLabel={option => option.fullName}
             isOptionEqualToValue={(option, value) => option.id === value.id}
             renderOption={(props, option) => (
-                <CharacterTitle
+                <UnitTitle
                     {...props}
                     key={option.name}
                     character={option}

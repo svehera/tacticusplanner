@@ -14,9 +14,9 @@ import {
 } from 'src/models/interfaces';
 import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rarity, Rank } from '@/fsd/5-shared/model';
 
-import { CharacterBias, Rank } from '@/fsd/4-entities/character';
+import { CharacterBias } from '@/fsd/4-entities/character';
 
 import { LreTile } from 'src/v2/features/lre/lre-tile';
 

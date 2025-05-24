@@ -1,14 +1,15 @@
 import { ArrowForward } from '@mui/icons-material';
-import { ColDef, AllCommunityModule, ModuleRegistry, provideGlobalGridOptions, themeBalham } from 'ag-grid-community';
+import { ColDef, AllCommunityModule, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 
-import { IUnitData } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services/static-data.service';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { StarsImage } from 'src/v2/components/images/stars-image';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
+
+import { IUnitData } from '@/fsd/4-entities/character';
 
 import { CampaignData } from 'src/v2/features/campaign-progression/campaign-progression.models';
 import { ICharacterUnlockGoal, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
@@ -76,7 +77,7 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
                     if (!params.data.goalData || !params.data.goalData[0]) return '';
                     const goalData = params.data.goalData[0];
                     return (
-                        <CharacterShardIcon
+                        <UnitShardIcon
                             icon={getGoalUnit(goalData.goalId)?.icon ?? '(undefined)'}
                             height={30}
                             tooltip={getGoalUnit(goalData.goalId)?.icon}
@@ -92,7 +93,7 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
                     if (!params.data.goalData || !params.data.goalData[0]) return '';
                     const goalData = params.data.goalData[0];
                     const goal: ICharacterAscendGoal = getAscensionGoal(goalData.goalId)!;
-                    return <RarityImage rarity={goal.rarityStart} />;
+                    return <RarityIcon rarity={goal.rarityStart} />;
                 },
             },
             {
@@ -103,7 +104,7 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
                     if (!params.data.goalData || !params.data.goalData[0]) return '';
                     const goalData = params.data.goalData[0];
                     const goal: ICharacterAscendGoal = getAscensionGoal(goalData.goalId)!;
-                    return <StarsImage stars={goal.starsStart} />;
+                    return <StarsIcon stars={goal.starsStart} />;
                 },
             },
             {
@@ -123,7 +124,7 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
                     if (!params.data.goalData || !params.data.goalData[0]) return '';
                     const goalData = params.data.goalData[0];
                     const goal: ICharacterAscendGoal = getAscensionGoal(goalData.goalId)!;
-                    return <RarityImage rarity={goal.rarityEnd} />;
+                    return <RarityIcon rarity={goal.rarityEnd} />;
                 },
             },
             {
@@ -134,7 +135,7 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ campaignDat
                     if (!params.data.goalData || !params.data.goalData[0]) return '';
                     const goalData = params.data.goalData[0];
                     const goal: ICharacterAscendGoal = getAscensionGoal(goalData.goalId)!;
-                    return <StarsImage stars={goal.starsEnd} />;
+                    return <StarsIcon stars={goal.starsEnd} />;
                 },
             },
         ];

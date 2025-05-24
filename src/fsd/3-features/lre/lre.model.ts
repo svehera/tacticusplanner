@@ -1,6 +1,7 @@
 // eslint-disable-next-line import-x/no-internal-modules
-import { ITableRow, ICharacter2, IAutoTeamsPreferences, ISelectedTeamsOrdering } from '@/models/interfaces';
+import { ITableRow, IAutoTeamsPreferences, ISelectedTeamsOrdering } from '@/models/interfaces';
 
+import { ICharacter2 } from '@/fsd/4-entities/character';
 import {
     ILegendaryEventStatic,
     ILegendaryEventTrackStatic,

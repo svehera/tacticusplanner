@@ -31,15 +31,13 @@ import { getEnumValues } from 'src/shared-logic/functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
 import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 
-import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Rarity, RarityStars, Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 
-import { Rank } from '@/fsd/4-entities/character';
+import { UnitTitle } from '@/fsd/4-entities/unit/unit-title';
+import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
-
-import { CharacterTitle } from '../character-title';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
 
@@ -222,7 +220,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
             <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
                 <DialogTitle className="flex-box gap15">
-                    <span>Set Goal</span> {!!unit && <CharacterTitle character={unit} />}
+                    <span>Set Goal</span> {!!unit && <UnitTitle character={unit} />}
                 </DialogTitle>
 
                 <DialogContent style={{ paddingTop: 10 }}>

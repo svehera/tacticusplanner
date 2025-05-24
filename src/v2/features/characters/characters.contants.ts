@@ -1,11 +1,8 @@
-﻿import { ICharacter2 } from 'src/models/interfaces';
+﻿import { RarityStars, Rarity, Rank, UnitType } from '@/fsd/5-shared/model';
 
-import { RarityStars, Rarity } from '@/fsd/5-shared/model';
-
-import { Rank } from '@/fsd/4-entities/character';
+import { ICharacter2 } from '@/fsd/4-entities/character';
 
 import { IRarityCap } from 'src/v2/features/characters/characters.models';
-import { UnitType } from 'src/v2/features/characters/units.enums';
 
 export const unsetCharacter: Partial<ICharacter2> = {
     unitType: UnitType.character,

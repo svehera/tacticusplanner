@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { menuItemById } from 'src/models/menu-items';
 import { StaticDataService } from 'src/services';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 export const PlanLeRoutes = () => {
@@ -44,7 +45,7 @@ export const PlanLeRoutes = () => {
                         <CardHeader
                             title={
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    <CharacterShardIcon icon={le.icon} name={le.name} /> {le.name}
+                                    <UnitShardIcon icon={le.icon} name={le.name} /> {le.name}
                                 </div>
                             }
                             subheader={'Legendary Event'}

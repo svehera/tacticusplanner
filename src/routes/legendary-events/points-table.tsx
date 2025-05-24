@@ -16,13 +16,14 @@ import { isMobile } from 'react-device-detect';
 
 import { ILreTeam } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
-import { CharacterTitle } from 'src/shared-components/character-title';
 import { useLreProgress } from 'src/shared-components/le-progress.hooks';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { useQueryState } from 'src/v2/hooks/query-state';
 
-import { Rank } from '@/fsd/4-entities/character';
+import { Rank } from '@/fsd/5-shared/model';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+
+import { CharacterTitle } from '@/fsd/4-entities/character/ui/character-title';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
 import { ILegendaryEvent, ILegendaryEventTrack } from '@/fsd/3-features/lre';
 import { LreService } from 'src/v2/features/lre/lre.service';
@@ -101,7 +102,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                         },
                         cellRenderer: (props: ICellRendererParams<ITableRow>) => {
                             const rarity = props.value ?? 0;
-                            return <RarityImage rarity={rarity} />;
+                            return <RarityIcon rarity={rarity} />;
                         },
                     },
                     {
@@ -114,7 +115,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                         },
                         cellRenderer: (props: ICellRendererParams<ITableRow>) => {
                             const rank = props.value ?? 0;
-                            return <RankImage rank={rank} />;
+                            return <RankIcon rank={rank} />;
                         },
                     },
                 ],

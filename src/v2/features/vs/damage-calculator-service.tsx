@@ -1,11 +1,9 @@
-import { EquipmentType, INpcData, IUnitData } from 'src/models/interfaces';
+import { EquipmentType, INpcData } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
-import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
 
-import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { RarityStars, Rarity, DamageType, Faction, Rank, Trait } from '@/fsd/5-shared/model';
 
-import { DamageType, Trait, Rank } from '@/fsd/4-entities/character';
-import { Faction } from '@/fsd/4-entities/faction';
+import { IUnitData, StatsCalculatorService } from '@/fsd/4-entities/character';
 
 import { IEquipmentSpec } from './versus-interfaces';
 
@@ -159,9 +157,9 @@ export class DamageCalculatorService {
         const npc = StaticDataService.npcDataFull.find(npc => npc.name === id);
         if (npc != undefined) {
             return this.modifyWithTraits(this.getRelevantNpcTraits(npc), {
-                damage: StatCalculatorService.calculateNpcDamage(npc.name, stars, rank),
-                armor: StatCalculatorService.calculateNpcArmor(npc.name, stars, rank),
-                health: StatCalculatorService.calculateNpcHealth(npc.name, stars, rank),
+                damage: StatsCalculatorService.calculateNpcDamage(npc.name, stars, rank),
+                armor: StatsCalculatorService.calculateNpcArmor(npc.name, stars, rank),
+                health: StatsCalculatorService.calculateNpcHealth(npc.name, stars, rank),
                 meleeHits: npc.meleeHits,
                 meleeType: this.convertDamageType(npc.meleeType)!,
                 meleeModifiers: 100,
@@ -174,9 +172,9 @@ export class DamageCalculatorService {
         }
         const unit = StaticDataService.unitsData.find(unit => unit.id === id)!;
         let unitData: DamageUnitData = {
-            damage: StatCalculatorService.calculateDamage(unit.id, rarity, stars, rank, 0),
-            armor: StatCalculatorService.calculateArmor(unit.id, rarity, stars, rank, 0),
-            health: StatCalculatorService.calculateHealth(unit.id, rarity, stars, rank, 0),
+            damage: StatsCalculatorService.calculateDamage(unit.id, rarity, stars, rank, 0),
+            armor: StatsCalculatorService.calculateArmor(unit.id, rarity, stars, rank, 0),
+            health: StatsCalculatorService.calculateHealth(unit.id, rarity, stars, rank, 0),
             meleeHits: unit.meleeHits,
             meleeType: unit.damageTypes.melee,
             meleeModifiers: 100,

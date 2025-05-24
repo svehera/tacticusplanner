@@ -2,14 +2,14 @@
 import {
     ICampaignBattleComposed,
     ICampaignsProgress,
-    IDailyRaidsFilters,
+    ICampaingsFilters,
     IDailyRaidsPreferences,
 } from 'src/models/interfaces';
 
-import { Alliance, Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Alliance, Faction, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
-import { Rank } from '@/fsd/4-entities/character';
-import { Faction } from '@/fsd/4-entities/faction';
+import { IRankLookup, IUnitUpgradeRank } from '@/fsd/4-entities/character';
+import { IBaseUpgrade } from '@/fsd/4-entities/upgrade';
 
 import { ICharacterAbilitiesMaterialsTotal, IXpEstimate } from 'src/v2/features/characters/characters.models';
 import { IMowMaterialsTotal } from 'src/v2/features/lookup/lookup.models';
@@ -68,20 +68,6 @@ export interface ICharacterUpgradeAbilities extends ICharacterRaidGoalSelectBase
     passiveEnd: number;
 }
 
-/**
- * Represents data about a character-associated goal, including the starting
- * and ending rank, the applied upgrades, and the rarity of upgrades to farm
- * first.
- */
-export interface IRankLookup {
-    unitName: string;
-    rankStart: Rank;
-    rankEnd: Rank;
-    appliedUpgrades: string[];
-    rankPoint5: boolean;
-    upgradesRarity: Rarity[];
-}
-
 export interface IGoalEstimate {
     goalId: string;
     daysTotal: number;
@@ -121,7 +107,7 @@ export interface IEstimatedAscensionSettings {
     raidedLocations: IItemRaidLocation[];
     campaignsProgress: ICampaignsProgress;
     preferences: IDailyRaidsPreferences;
-    filters?: IDailyRaidsFilters;
+    filters?: ICampaingsFilters;
 }
 
 export interface IEstimatedShards {
@@ -203,31 +189,9 @@ export interface IUnitUpgrade {
     relatedUpgrades: string[];
 }
 
-/**
- * Contains the start and end rank of a particular goal, and
- * all of the upgrade material necessary to hit that goal.
- * Upgrade materials may appear multiple times in `upgrades`.
- */
-export interface IUnitUpgradeRank {
-    rankStart: Rank;
-    rankEnd: Rank;
-    rankPoint5: boolean;
-    upgrades: string[];
-}
-
 export interface ICharacterUpgradeRankEstimate {
     goalId: string;
     upgrades: ICharacterUpgradeEstimate[];
-}
-
-export interface IBaseUpgrade {
-    id: string;
-    label: string;
-    rarity: Rarity;
-    iconPath: string;
-    locations: ICampaignBattleComposed[];
-    crafted: false;
-    stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
 }
 
 export interface ICombinedUpgrade extends IBaseUpgrade {
@@ -252,18 +216,6 @@ export interface ICharacterUpgradeEstimate extends IBaseUpgrade {
     isFinished: boolean;
 }
 
-export interface ICraftedUpgrade {
-    id: string;
-    label: string;
-    rarity: Rarity;
-    iconPath: string;
-    baseUpgrades: IUpgradeRecipe[];
-    craftedUpgrades: IUpgradeRecipe[];
-    recipe: IUpgradeRecipe[];
-    crafted: true;
-    stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
-}
-
 /**
  * Holds the fully-expanded recipe for an upgrade material. One can then
  * reference the necessary IBaseUpgrade objects to get the full details.
@@ -280,14 +232,4 @@ export interface IRecipeExpandedUpgrade {
     stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
 }
 
-/**
- * Holds a material and a count of how many of the material are needed.
- */
-export interface IUpgradeRecipe {
-    id: string;
-    count: number;
-}
-
-export type IBaseUpgradeData = Record<string, IBaseUpgrade>;
-export type ICraftedUpgradeData = Record<string, ICraftedUpgrade>;
 export type IRecipeExpandedUpgradeData = Record<string, IRecipeExpandedUpgrade>;

@@ -1,14 +1,21 @@
 ﻿import { orderBy, sum } from 'lodash';
 
-import { charsProgression, charsUnlockShards, rarityToStars } from 'src/models/constants';
-import { Campaign, CampaignsLocationsUsage, CampaignType, PersonalGoalType } from 'src/models/enums';
-import { ICampaignBattleComposed, ICampaignsProgress } from 'src/models/interfaces';
+import { charsProgression, charsUnlockShards } from 'src/models/constants';
+import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 
-import { Alliance, Rarity } from '@/fsd/5-shared/model';
+import { Alliance, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
-import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaigns.constants';
-import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
+import {
+    CampaignsService,
+    ICampaignBattleComposed,
+    CampaignType,
+    Campaign,
+    campaignEventsLocations,
+    campaignsByGroup,
+    ICampaignsProgress,
+} from '@/fsd/4-entities/campaign';
+
 import {
     ICharacterAscendGoal,
     ICharacterShardsEstimate,
@@ -240,7 +247,7 @@ export class ShardsService {
 
     public static getTargetShards(goal: ICharacterAscendGoal): number {
         const currentCharProgression = goal.rarityStart + goal.starsStart;
-        const targetProgression = goal.rarityEnd + (goal.starsEnd || rarityToStars[goal.rarityEnd]);
+        const targetProgression = goal.rarityEnd + (goal.starsEnd || RarityMapper.toStars[goal.rarityEnd]);
 
         let targetShards = 0;
 
@@ -255,7 +262,7 @@ export class ShardsService {
     public static getTargetShardsForMow(goal: ICharacterUpgradeMow): number {
         const currentCharProgression = goal.rarity + goal.stars;
         const targetRarity = MowLookupService.getRarityFromLevel(Math.max(goal.primaryEnd, goal.secondaryEnd));
-        const targetProgression = targetRarity + rarityToStars[targetRarity];
+        const targetProgression = targetRarity + RarityMapper.toStars[targetRarity];
 
         let targetShards = 0;
 

@@ -15,9 +15,8 @@ import { StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
 
 import { useAuth } from '@/fsd/5-shared/model';
-import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 import { Thanks } from '@/fsd/3-features/thank-you';
@@ -160,7 +159,7 @@ export const DesktopHome = () => {
                         <CardHeader
                             title={
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    <CharacterShardIcon icon={nextLeMenuItem.icon} height={50} width={50} />{' '}
+                                    <UnitShardIcon icon={nextLeMenuItem.icon} height={50} width={50} />{' '}
                                     {nextLeMenuItem.name}
                                 </div>
                             }

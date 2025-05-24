@@ -5,11 +5,10 @@ import redStar from 'src/assets/images/stars/red star small.png';
 import goldStar from 'src/assets/images/stars/star small.png';
 import { StaticDataService } from 'src/services';
 import { getImageUrl } from 'src/shared-logic/functions';
-import { RankImage } from 'src/v2/components/images/rank-image';
 
-import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
 
-import { Rank } from '@/fsd/4-entities/character';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
 interface Props {
     name: string;
@@ -153,7 +152,7 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
         const top = frameHeight - size + overhang;
         return (
             <div style={{ position: 'absolute', top: top, left: left, zIndex: 4 }}>
-                <RankImage rank={rank} size={size} resized={false} />
+                <RankIcon rank={rank} size={size} resized={false} />
             </div>
         );
     };
