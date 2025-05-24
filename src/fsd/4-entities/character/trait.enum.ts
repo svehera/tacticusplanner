@@ -49,53 +49,14 @@ export enum Trait {
     WeaverOfFates = 'Weaver of Fates',
 }
 
-export enum TraitString {
-    'Act of Faith' = 'ActOfFaith',
-    'Ambush' = 'Ambush',
-    'Battle Fatigue' = 'BattleFatigue',
-    'Beast Slayer' = 'BeastSlayer',
-    'Big Target' = 'BigTarget',
-    'Camouflage' = 'Camouflage',
-    'Close Combat Weakness' = 'CloseCombatWeakness',
-    'Contagions of Nurgle' = 'ContagionsOfNurgle',
-    'Crushing Strike' = 'CrushingStrike',
-    'Daemon' = 'Daemon',
-    'Dakka' = 'Dakka',
-    'Deep Strike' = 'DeepStrike',
-    'Diminutive' = 'Diminutive',
-    'Emplacement' = 'Emplacement',
-    'Explodes' = 'Explodes',
-    'Final Vengeance' = 'FinalVengeance',
-    'Flying' = 'Flying',
-    'Get Stuck In' = 'GetStuckIn',
-    'Healer' = 'Healer',
-    'Heavy Weapon' = 'HeavyWeapon',
-    'Immune' = 'Immune',
-    'Impervious' = 'Impervious',
-    'Indirect Fire' = 'IndirectFire',
-    'Infiltrate' = 'Infiltrate',
-    'Instinctive Behaviour' = 'InstinctiveBehaviour',
-    'Let the Galaxy Burn' = 'LetTheGalaxyBurn',
-    'Living Metal' = 'LivingMetal',
-    'Mechanic' = 'Mechanic',
-    'Mechanical' = 'Mechanical',
-    'MK X Gravis' = 'MKXGravis',
-    'Mounted' = 'Mounted',
-    'Overwatch' = 'Overwatch',
-    'Parry' = 'Parry',
-    'Psyker' = 'Psyker',
-    'Putrid Explosion' = 'PutridExplosion',
-    'Rapid Assault' = 'RapidAssault',
-    'Resilient' = 'Resilient',
-    'Shadow in the Warp' = 'ShadowInTheWarp',
-    'Summon' = 'Summon',
-    'Suppressive Fire' = 'SuppressiveFire',
-    'Swarm' = 'Swarm',
-    'Synapse' = 'Synapse',
-    'Terminator Armour' = 'TerminatorArmour',
-    'Terrifying' = 'Terrifying',
-    'Two-Man Team' = 'TwoManTeam',
-    'Unstoppable' = 'Unstoppable',
-    'Vehicle' = 'Vehicle',
-    'Weaver of Fates' = 'WeaverOfFates',
+const labelToTraitMap: Record<string, Trait> = Object.entries(Trait).reduce(
+    (acc, [key, value]) => {
+        acc[value] = Trait[key as keyof typeof Trait];
+        return acc;
+    },
+    {} as Record<string, Trait>
+);
+
+export function getTraitFromLabel(label: string): Trait | undefined {
+    return labelToTraitMap[label];
 }

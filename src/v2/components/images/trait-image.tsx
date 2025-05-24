@@ -2,10 +2,10 @@
 
 import { getImageUrl } from 'src/shared-logic/functions';
 
-import { Trait, TraitString } from '@/fsd/4-entities/character/trait.enum';
+import { getTraitFromLabel, Trait } from '@/fsd/4-entities/character/trait.enum';
 
 export const TraitImage = ({ trait, width, height }: { trait: Trait; width: number; height: number }) => {
-    const traitString = TraitString[trait];
+    const traitString = getTraitFromLabel(trait);
     if (!traitString) {
         return <span>Invalid trait</span>;
     }

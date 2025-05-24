@@ -1,6 +1,19 @@
 ﻿{
-    "currentVersion": "1.7.3",
+    "currentVersion": "1.7.4",
     "releaseNotes": [
+        {
+            "version": "1.7.4",
+            "date": "May 24",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "(laserian403) Added Healer/Mechanic trait icons to LRE planner",
+                    "images": [{ "path": "icons.png" }]
+                }
+            ],
+            "minor": [],
+            "bugFixes": []
+        },
         {
             "version": "1.7.3",
             "date": "April 29",
