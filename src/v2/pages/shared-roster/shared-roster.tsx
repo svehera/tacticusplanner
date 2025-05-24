@@ -8,8 +8,9 @@ import { StoreContext } from 'src/reducers/store.provider';
 
 import { LoaderWithText, Conditional } from '@/fsd/5-shared/ui';
 
-import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
-import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
+import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
+import { CharactersValueService } from '@/fsd/4-entities/unit/characters-value.service';
+
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';

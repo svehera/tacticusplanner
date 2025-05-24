@@ -2,8 +2,8 @@
 import React from 'react';
 
 import { BadgeImage } from 'src/v2/components/images/badge-image';
-import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
 
+import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { Rarity } from '@/fsd/5-shared/model';
 
 import { ICharacterAbilitiesMaterialsTotal } from 'src/v2/features/characters/characters.models';

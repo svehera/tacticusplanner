@@ -9,13 +9,11 @@ import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
 import { RaritySelect } from 'src/shared-components/rarity-select';
 import { StarsSelect } from 'src/shared-components/stars-select';
 import { getEnumValues } from 'src/shared-logic/functions';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
 
 import { RarityStars, Rarity } from '@/fsd/5-shared/model';
-import { MiscIcon } from '@/fsd/5-shared/ui/icons';
-
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { IMow } from 'src/v2/features/characters/characters.models';
 import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
@@ -69,9 +67,9 @@ export const EditMowDialog: React.FC<Props> = ({
                     </IconButton>
                 )}
                 <div className="flex-box gap10">
-                    <CharacterShardIcon icon={mow.badgeIcon} />
+                    <UnitShardIcon icon={mow.badgeIcon} />
                     <span>{mow.name}</span>
-                    <RarityImage rarity={mow.rarity} />
+                    <RarityIcon rarity={mow.rarity} />
                     <MiscIcon icon={'mow'} width={22} height={25} />
                 </div>
                 {showNextUnit && (

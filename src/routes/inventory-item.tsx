@@ -2,7 +2,7 @@
 import Button from '@mui/material/Button';
 import React, { useEffect } from 'react';
 
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
+import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
 import { IInventoryUpgrade } from './inventory-models';
 

@@ -1,47 +1,16 @@
 ﻿import { v4 } from 'uuid';
 
-import { RarityString, Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Rank, Rarity, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
 
-import { Rank } from '@/fsd/4-entities/character';
+import { ICampaignsProgress, Campaign } from '@/fsd/4-entities/campaign';
+import { CharacterReleaseRarity } from '@/fsd/4-entities/character';
 
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
 import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
 
-import { Campaign, CharacterReleaseRarity, DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';
-import { ICampaignsProgress, ICharProgression, IPersonalData2 } from './interfaces';
-
-export const rarityStringToNumber: Record<RarityString, Rarity> = {
-    [RarityString.Common]: Rarity.Common,
-    [RarityString.Uncommon]: Rarity.Uncommon,
-    [RarityString.Rare]: Rarity.Rare,
-    [RarityString.Epic]: Rarity.Epic,
-    [RarityString.Legendary]: Rarity.Legendary,
-};
-
-export const rarityToStars: Record<Rarity, RarityStars> = {
-    [Rarity.Common]: RarityStars.None,
-    [Rarity.Uncommon]: RarityStars.TwoStars,
-    [Rarity.Rare]: RarityStars.FourStars,
-    [Rarity.Epic]: RarityStars.RedOneStar,
-    [Rarity.Legendary]: RarityStars.RedThreeStars,
-};
-
-export const rarityToMaxStars: Record<Rarity, RarityStars> = {
-    [Rarity.Common]: RarityStars.TwoStars,
-    [Rarity.Uncommon]: RarityStars.FourStars,
-    [Rarity.Rare]: RarityStars.RedOneStar,
-    [Rarity.Epic]: RarityStars.RedThreeStars,
-    [Rarity.Legendary]: RarityStars.BlueStar,
-};
-
-export const rarityToMaxRank: Record<Rarity, Rank> = {
-    [Rarity.Common]: Rank.Iron1,
-    [Rarity.Uncommon]: Rank.Bronze1,
-    [Rarity.Rare]: Rank.Silver1,
-    [Rarity.Epic]: Rank.Gold1,
-    [Rarity.Legendary]: Rank.Diamond3,
-};
+import { DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';
+import { ICharProgression, IPersonalData2 } from './interfaces';
 
 export const rankToLevel: Record<Rank, number> = {
     [Rank.Locked - 1]: 0,
@@ -127,9 +96,6 @@ export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {
     [CharacterReleaseRarity.LegendaryOld]: 150,
     [CharacterReleaseRarity.Legendary]: 400,
 };
-
-export const pooEmoji = String.fromCodePoint(parseInt('1F4A9', 16));
-export const starEmoji = String.fromCodePoint(parseInt('1F31F', 16));
 
 const defaultCampaignsProgress: ICampaignsProgress = {
     Indomitus: 75,
@@ -392,3 +358,9 @@ export const idToCampaign: Record<string, Campaign> = {
     eliteMirror3: Campaign.OME,
     eliteMirror4: Campaign.SHME,
 };
+
+// Re-export from RarityMapper for backward compatibility
+export const rarityToStars = RarityMapper.toStars;
+export const rarityToMaxStars = RarityMapper.toMaxStars;
+export const rarityToMaxRank = RarityMapper.toMaxRank;
+export const rarityStringToNumber = RarityMapper.stringToNumber;

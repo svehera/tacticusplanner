@@ -3,8 +3,9 @@
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
 import { IMenuOption } from 'src/v2/models/menu-option';
 
+import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isCharacter } from 'src/v2/features/characters/units.functions';
 import { getLre, getLreGuideData, lreCharacters } from 'src/v2/features/guides/guides.contstants';
 import { LreCharacter } from 'src/v2/features/guides/guides.enums';
 import { lreSections } from 'src/v2/features/teams/teams.constants';

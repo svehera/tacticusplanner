@@ -5,18 +5,24 @@ import { GuildWarAction } from 'src/reducers/guildWarReducer';
 import { MowsAction } from 'src/reducers/mows.reducer';
 import { TeamsAction } from 'src/reducers/teams.reducer';
 
-import { Alliance, RarityString, Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Alliance, Faction, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
-import { DamageType, Trait, Rank, CharacterBias } from '@/fsd/4-entities/character';
-import { Faction } from '@/fsd/4-entities/faction';
+import {
+    ICampaignsProgress,
+    ICampaingsFilters,
+    CampaignGroupType,
+    CampaignType,
+    ICampaignBattleComposed,
+    IDetailedEnemy,
+} from '@/fsd/4-entities/campaign';
+import { CharacterBias, ICharacter2, ICharLegendaryEvent } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
+import { IMow, IMowDb } from '@/fsd/4-entities/mow';
+import { IMaterialFull, IMaterialRecipeIngredientFull } from '@/fsd/4-entities/upgrade';
 
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
-import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
-import { IMow, IMowDb } from 'src/v2/features/characters/characters.models';
 import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
 import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
-import { UnitType } from 'src/v2/features/characters/units.enums';
 import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
@@ -34,96 +40,7 @@ import { LeSelectedTeamsAction } from '../reducers/le-selected-teams.reducer';
 import { SelectedTeamsOrderingAction } from '../reducers/selected-teams-order.reducer';
 import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
 
-import {
-    Campaign,
-    CampaignsLocationsUsage,
-    CampaignType,
-    CharacterReleaseRarity,
-    DailyRaidsStrategy,
-    Difficulty,
-    Equipment,
-    EquipmentClass,
-    PersonalGoalType,
-} from './enums';
-
-export interface UnitDataRaw {
-    Name: string;
-    Faction: Faction;
-    Alliance: Alliance;
-    Health: number;
-    Damage: number;
-    Armour: number;
-    'Short Name': string;
-    'Full Name': string;
-    'Initial rarity': RarityString;
-    'Melee Damage': DamageType;
-    'Melee Hits': number;
-    'Ranged Damage'?: DamageType;
-    'Ranged Hits'?: number;
-    Distance?: number;
-    Movement: number;
-    'Trait 1'?: Trait;
-    'Trait 2'?: Trait;
-    'Trait 3'?: Trait;
-    'Trait 4'?: Trait;
-    Traits: Trait[];
-    'Active Ability'?: DamageType;
-    'Passive Ability'?: DamageType;
-    Equipment1: Equipment;
-    Equipment2: Equipment;
-    Equipment3: Equipment;
-    Number: number;
-    ForcedSummons: boolean;
-    RequiredInCampaign: boolean;
-    /**
-     * The prefix of each campaign in which this character is required. Some examples:
-     * - 'Maladus' would be ['Adeptus Mechanicus']
-     * - 'Bellator' would be ['Indomitus', 'Tyranids']
-     *
-     * By using prefixes, we ensure that the elite, extremis, and challenge campaigns
-     * will be included in the list of required campaigns.
-     */
-    CampaignsRequiredIn?: string[];
-    Icon: string;
-    ReleaseRarity?: CharacterReleaseRarity;
-    releaseDate?: string;
-    tacticusId?: string;
-    lre?: ILreCharacterStaticData;
-}
-
-export interface IUnitData {
-    unitType: UnitType.character;
-    id: string;
-    tacticusId?: string;
-    alliance: Alliance;
-    faction: Faction;
-    name: string;
-    fullName: string;
-    shortName: string;
-    numberAdded: number;
-    health: number;
-    damage: number;
-    armour: number;
-    initialRarity: Rarity;
-    rarityStars: RarityStars;
-    damageTypes: IDamageTypes;
-    traits: Trait[];
-    equipment1: Equipment;
-    equipment2: Equipment;
-    equipment3: Equipment;
-    meleeHits: number;
-    rangeHits?: number;
-    rangeDistance?: number;
-    movement: number;
-    forcedSummons: boolean;
-    requiredInCampaign: boolean;
-    campaignsRequiredIn?: string[];
-    icon: string;
-    legendaryEvents: ICharLegendaryEvents;
-    lre?: ILreCharacterStaticData;
-    releaseRarity?: CharacterReleaseRarity;
-    releaseDate?: string;
-}
+import { CampaignsLocationsUsage, DailyRaidsStrategy, Difficulty, EquipmentClass, PersonalGoalType } from './enums';
 
 export interface INpcDataRaw {
     name: string;
@@ -173,56 +90,7 @@ export interface INpcData {
     passiveAbilities: string[];
 }
 
-export interface ILreCharacterStaticData {
-    id: LegendaryEventEnum;
-    finished: boolean;
-    eventStage: number;
-    nextEventDate: string;
-    nextEventDateUtc?: string;
-}
-
-export interface IDamageTypes {
-    all: DamageType[];
-    melee: DamageType;
-    range?: DamageType;
-    activeAbility?: DamageType;
-    passiveAbility?: DamageType;
-}
-
-export type ICharLegendaryEvents = Record<LegendaryEventEnum, ICharLegendaryEvent>;
-
-export interface ICharLegendaryEvent {
-    alphaPoints: number;
-    alphaSlots: number;
-
-    betaPoints: number;
-    betaSlots: number;
-
-    gammaPoints: number;
-    gammaSlots: number;
-
-    totalPoints: number;
-    totalSlots: number;
-}
-
 export type ITableRow<T = ICharacter2 | string> = Record<string, T>;
-export type ICharacter2 = IUnitData & IPersonalCharacterData2 & DynamicProps;
-
-export type DynamicProps = {
-    numberOfUnlocked?: number;
-    ownedBy?: string[];
-    potential?: number;
-    power?: number;
-    teamId?: string; // LRE team id
-    statsByOwner?: Array<{
-        owner: string;
-        rank: Rank;
-        activeAbilityLevel: number;
-        passiveAbilityLevel: number;
-        primaryAbilityLevel: number;
-        secondaryAbilityLevel: number;
-    }>;
-};
 
 export interface IPersonalData {
     version?: string;
@@ -328,21 +196,9 @@ export interface IGuildWar {
 }
 
 export interface IDailyRaids {
-    filters: IDailyRaidsFilters;
+    filters: ICampaingsFilters;
     raidedLocations: IItemRaidLocation[];
     lastRefreshDateUTC: string;
-}
-
-export interface IDailyRaidsFilters {
-    enemiesAlliance: Alliance[];
-    enemiesFactions: Faction[];
-    alliesAlliance: Alliance[];
-    alliesFactions: Faction[];
-    campaignTypes: CampaignType[];
-    upgradesRarity: Rarity[];
-    slotsCount?: number[];
-    enemiesTypes?: string[];
-    enemiesCount?: number[];
 }
 
 export interface ILegendaryEventsData {
@@ -534,152 +390,6 @@ export interface IPersonalGoal {
     secondAbilityLevel?: number;
 }
 
-export type ICampaignConfigs = {
-    [campaignType in `${CampaignType}`]: ICampaignConfig;
-};
-
-export interface ICampaignConfig {
-    type: CampaignType | string;
-    energyCost: number;
-    dailyBattleCount: number;
-    dropRate: IDropRate;
-}
-
-export interface IDropRate {
-    common: number;
-    uncommon: number;
-    rare: number;
-    epic: number;
-    legendary: number;
-    shard: number;
-}
-
-export interface ICampaignsData {
-    [campaignKey: string]: ICampaignBattle;
-}
-
-/**
- * When we have more detailed information about a campaign battle, this holds
- * the information on a particular type of enemy. If @rarity is specified, it
- * means that the enemy is a character, not an NPC.
- */
-export interface IDetailedEnemy {
-    count: number;
-    name: string;
-    rank: string;
-    stars: number;
-    rarity?: string;
-}
-
-export interface ICampaignBattle {
-    shortName?: string;
-    campaign: Campaign | string;
-    campaignType: CampaignType | string;
-    nodeNumber: number;
-    reward: string; // material name or hero name in case farming shards
-    expectedGold: number;
-    slots?: number;
-    enemiesAlliances?: string[];
-    enemiesFactions?: string[];
-    enemiesTotal?: number;
-    enemiesTypes?: string[];
-    detailedEnemyTypes?: IDetailedEnemy[];
-}
-
-export interface ICampaignBattleComposed {
-    id: string;
-    campaign: Campaign;
-    campaignType: CampaignType;
-    energyCost: number;
-    dailyBattleCount: number;
-    dropRate: number;
-    energyPerItem: number;
-    itemsPerDay: number;
-    energyPerDay: number;
-    nodeNumber: number;
-    rarity: string;
-    rarityEnum: Rarity;
-    reward: string; // material name or hero name in case farming shards
-    expectedGold: number;
-    slots?: number;
-    enemiesFactions: Faction[];
-    enemiesAlliances: Alliance[];
-    alliesFactions: Faction[];
-    alliesAlliance: Alliance;
-    enemiesTotal: number;
-    enemiesTypes: string[];
-    detailedEnemyTypes?: IDetailedEnemy[];
-    // new props for upgrades service
-    isSuggested?: boolean;
-    isUnlocked?: boolean;
-    isPassFilter?: boolean;
-    isCompleted?: boolean;
-    isStarted?: boolean;
-}
-
-export interface IRecipeData {
-    [material: string]: IMaterial;
-}
-
-export interface IMaterial {
-    material: string;
-    label?: string;
-    tacticusId?: string;
-    rarity: string;
-    craftable: boolean;
-    stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
-    icon?: string;
-    faction?: string; // If not specific to a faction, this property can be omitted ("undefined").
-    recipe?: Array<IMaterialRecipeIngredient>; // If material is not craftable, recipe can be omitted ("undefined").
-    locations?: Array<string>; // Campaign locations can be in short form (IM12) or long (Indomitus mirros) depedings how you decide to update battleData json.
-}
-
-export interface IMaterialRecipeIngredient {
-    material: string | 'Gold'; // material name;
-    count: number;
-}
-
-export interface IRecipeDataFull {
-    [material: string]: IMaterialFull;
-}
-
-export interface IMaterialFull {
-    id: string;
-    label: string;
-    rarity: Rarity;
-    craftable: boolean;
-    stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
-    faction?: string; // if not specifor to faction then this property can be omitted ("undefined");
-    recipe?: Array<IMaterialRecipeIngredientFull>; // if material is not craftable recipe can be omitted ("undefined")
-    allMaterials?: IMaterialRecipeIngredientFull[];
-    iconPath: string;
-    character?: string;
-    priority?: number;
-}
-
-export interface IMaterialRecipeIngredientFull {
-    id: string;
-    label: string | 'Gold';
-    count: number;
-    rarity: Rarity;
-    stat: string;
-    craftable: boolean;
-    recipe?: IMaterialRecipeIngredientFull[];
-    locations?: Array<string>;
-    locationsComposed?: Array<ICampaignBattleComposed>;
-    iconPath: string;
-    characters: string[];
-    priority: number;
-}
-
-export interface IRankUpData {
-    [character: string]: IRankUpData2 | undefined;
-}
-
-export interface IRankUpData2 {
-    [rank: string]: string[];
-}
-
 export enum EquipmentType {
     Crit = 'Crit',
     Block = 'Block',
@@ -741,14 +451,6 @@ export interface IRaidLocation {
     energySpent: number;
 }
 
-export interface ICharacterRankRange {
-    id: string;
-    rankStart: Rank;
-    rankEnd: Rank;
-    appliedUpgrades: string[];
-    rankPoint5: boolean;
-}
-
 export interface IEstimatedRanks {
     raids: IDailyRaid[];
     upgrades: IMaterialFull[];
@@ -763,11 +465,9 @@ export interface IEstimatedRanksSettings {
     campaignsProgress: ICampaignsProgress;
     dailyEnergy: number;
     preferences: IDailyRaidsPreferences;
-    filters?: IDailyRaidsFilters;
+    filters?: ICampaingsFilters;
     upgrades: Record<string, number>;
 }
-
-export type ICampaignsProgress = Record<Campaign, number>;
 
 export interface IInventory {
     upgrades: Record<string, number>;
@@ -851,3 +551,17 @@ export interface IEquipment {
     /** See @IEquipmentRaw.boost2. */
     boost2: number[];
 }
+
+// Re-export types from FSD entities
+export type {
+    ICampaignsProgress,
+    ICampaingsFilters,
+    ICampaignBattleComposed,
+    IDetailedEnemy,
+    ICharacter2,
+    ICharLegendaryEvent,
+    IMow,
+    IMowDb,
+    IMaterialFull,
+    IMaterialRecipeIngredientFull,
+};

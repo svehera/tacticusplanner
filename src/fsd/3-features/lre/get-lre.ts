@@ -1,6 +1,4 @@
-// eslint-disable-next-line import-x/no-internal-modules
-import { ICharacter2 } from '@/models/interfaces';
-
+import { ICharacter2 } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 import {

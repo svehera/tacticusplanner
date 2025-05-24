@@ -2,10 +2,11 @@
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { IPersonalGoal } from 'src/models/interfaces';
 
-import { Rank } from '@/fsd/4-entities/character';
+import { Rank } from '@/fsd/5-shared/model';
+
+import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 import {
     CharacterRaidGoalSelect,
     ICharacterAscendGoal,

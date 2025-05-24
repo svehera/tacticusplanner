@@ -4,24 +4,20 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import React, { useMemo } from 'react';
 
-import { CampaignType } from 'src/models/enums';
-import { IDailyRaidsFilters } from 'src/models/interfaces';
 import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
 import factionsData from 'src/v2/data/factions.json';
 
-import { Alliance, Rarity, RarityString } from '@/fsd/5-shared/model';
+import { Alliance, Faction, Rarity, RarityString } from '@/fsd/5-shared/model';
 
-import { Faction } from '@/fsd/4-entities/faction';
-
-import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
+import { CampaignsService, CampaignType, ICampaingsFilters } from '@/fsd/4-entities/campaign';
 
 interface Props {
-    filter: IDailyRaidsFilters;
-    filtersChange: (value: IDailyRaidsFilters) => void;
+    filter: ICampaingsFilters;
+    filtersChange: (value: ICampaingsFilters) => void;
 }
 
 export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
-    const [currFilter, setCurrFilter] = React.useState<IDailyRaidsFilters>(filter);
+    const [currFilter, setCurrFilter] = React.useState<ICampaingsFilters>(filter);
     const [open, setOpen] = React.useState<boolean>(false);
 
     const allFactions = useMemo(

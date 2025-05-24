@@ -4,14 +4,17 @@ import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { ICharacter2 } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { CharacterItemDialog } from 'src/shared-components/character-item-dialog';
 
-import { useAuth } from '@/fsd/5-shared/model';
+import { useAuth, UnitType } from '@/fsd/5-shared/model';
 
+import { ICharacter2 } from '@/fsd/4-entities/character';
+import { IMow } from '@/fsd/4-entities/mow';
+import { IUnit } from '@/fsd/4-entities/unit';
+
+import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { IMow, IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
+import { IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
@@ -21,7 +24,6 @@ import { ViewControls } from 'src/v2/features/characters/components/view-control
 import { EditMowDialog } from 'src/v2/features/characters/dialogs/edit-mow-dialog';
 import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
-import { UnitType } from 'src/v2/features/characters/units.enums';
 import { ShareRoster } from 'src/v2/features/share/share-roster';
 
 export const WhoYouOwn = () => {

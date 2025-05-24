@@ -5,9 +5,7 @@ import Dialog from '@mui/material/Dialog';
 import { enqueueSnackbar } from 'notistack';
 import React, { useContext, useMemo, useState } from 'react';
 
-import { rarityToMaxRank } from 'src/models/constants';
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
-import { ICampaignsProgress } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
@@ -20,15 +18,19 @@ import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarit
 import { getEnumValues } from 'src/shared-logic/functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
 
-import { CharacterShardIcon, Rank } from '@/fsd/4-entities/character';
+import { Rank, RarityMapper } from '@/fsd/5-shared/model';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { IUnit } from 'src/v2/features/characters/characters.models';
+import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
+import { IUnit } from '@/fsd/4-entities/unit';
+import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
+import { IUpgradeRecipe } from '@/fsd/4-entities/upgrade';
+
+import { CharacterUpgrades } from '@/fsd/3-features/character-details';
 import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
 import { MowUpgradesUpdate } from 'src/v2/features/characters/components/mow-upgrades-update';
-import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
-import { CharacterRaidGoalSelect, ICharacterAscendGoal, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
+import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
 
-import { CharacterUpgrades } from '../character-upgrades';
 import { RankSelect } from '../rank-select';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
@@ -135,7 +137,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     const [ignoreRankRarity, setIgnoreRankRarity] = React.useState(false);
 
     const maxRank = useMemo(() => {
-        return ignoreRankRarity ? Rank.Diamond3 : rarityToMaxRank[unit?.rarity ?? 0];
+        return ignoreRankRarity ? Rank.Diamond3 : RarityMapper.toMaxRank[unit?.rarity ?? 0];
     }, [unit?.rarity, ignoreRankRarity]);
 
     let currentRankValues: number[] = [];
@@ -161,7 +163,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
             <DialogTitle className="flex gap3 items-center">
-                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <CharacterShardIcon icon={goal.unitIcon} />
+                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <UnitShardIcon icon={goal.unitIcon} />
             </DialogTitle>
             <DialogContent style={{ paddingTop: 20 }}>
                 <Box id="edit-goal-form" className="flex flex-col gap-5">

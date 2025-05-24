@@ -2,17 +2,13 @@ import { ColDef, ColGroupDef, ICellRendererParams, ValueGetterParams } from 'ag-
 import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { rarityToMaxRank } from 'src/models/constants';
-import { ICharacter2 } from 'src/models/interfaces';
-import { CharacterTitle } from 'src/shared-components/character-title';
-import { getEnumValues } from 'src/shared-logic/functions';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
+import { getEnumValues } from '@/fsd/5-shared/lib';
+import { RarityStars, Rarity, DamageType, Rank, Trait, RarityMapper } from '@/fsd/5-shared/model';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
-import { RarityStars, Rarity } from '@/fsd/5-shared/model';
-
-import { Rank, DamageType, Trait } from '@/fsd/4-entities/character';
+import { ICharacter2, StatsCalculatorService } from '@/fsd/4-entities/character';
+import { CharacterTitle } from '@/fsd/4-entities/character/ui/character-title';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
 import { DamageCell } from './damage-cell';
 import { StatCell } from './stat-cell';
@@ -35,7 +31,7 @@ export const useCharacters = () => {
     }, [targetRarity]);
 
     const maxRank = useMemo(() => {
-        return rarityToMaxRank[targetRarity];
+        return RarityMapper.toMaxRank[targetRarity];
     }, [targetRarity]);
 
     const minStars = useMemo(() => {
@@ -56,10 +52,11 @@ export const useCharacters = () => {
 
     const onTargetRarityChanged = (rarity: Rarity) => {
         if (rarity < targetRarity) {
+            const maxRank = RarityMapper.toMaxRank[rarity];
             setTargetRarity(rarity);
             setTargetStars(minStarsMap.get(rarity + 1) ?? RarityStars.BlueStar);
-            if (targetRank > rarityToMaxRank[rarity]) {
-                setTargetRank(rarityToMaxRank[rarity]);
+            if (targetRank > maxRank) {
+                setTargetRank(maxRank);
             }
         } else if (rarity > targetRarity) {
             setTargetRarity(rarity);
@@ -118,7 +115,7 @@ export const useCharacters = () => {
                         },
                         cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
                             const rarity = props.value ?? 0;
-                            return <RarityImage rarity={rarity} />;
+                            return <RarityIcon rarity={rarity} />;
                         },
                     },
                     {
@@ -131,7 +128,7 @@ export const useCharacters = () => {
                         },
                         cellRenderer: (props: ICellRendererParams<ICharacter2>) => {
                             const rank = props.value ?? 0;
-                            return <RankImage rank={rank} />;
+                            return <RankIcon rank={rank} />;
                         },
                     },
                     {
@@ -156,13 +153,13 @@ export const useCharacters = () => {
                                     rank={props.data?.rank ?? Rank.Stone1}
                                     rarity={props.data?.rarity ?? Rarity.Common}
                                     rarityStars={props.data?.stars ?? RarityStars.None}
-                                    numHealthUpgrades={StatCalculatorService.countHealthUpgrades(
+                                    numHealthUpgrades={StatsCalculatorService.countHealthUpgrades(
                                         props.data as ICharacter2
                                     )}
-                                    numDamageUpgrades={StatCalculatorService.countDamageUpgrades(
+                                    numDamageUpgrades={StatsCalculatorService.countDamageUpgrades(
                                         props.data as ICharacter2
                                     )}
-                                    numArmorUpgrades={StatCalculatorService.countArmorUpgrades(
+                                    numArmorUpgrades={StatsCalculatorService.countArmorUpgrades(
                                         props.data as ICharacter2
                                     )}
                                 />
@@ -173,21 +170,21 @@ export const useCharacters = () => {
                         columnGroupShow: 'open',
                         headerName: 'Health',
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
-                            StatCalculatorService.getHealth(props.data),
+                            StatsCalculatorService.getHealth(props.data),
                         width: 80,
                     },
                     {
                         columnGroupShow: 'open',
                         headerName: 'Damage',
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
-                            StatCalculatorService.getDamage(props.data),
+                            StatsCalculatorService.getDamage(props.data),
                         width: 80,
                     },
                     {
                         columnGroupShow: 'open',
                         headerName: 'Armour',
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
-                            StatCalculatorService.getArmor(props.data),
+                            StatsCalculatorService.getArmor(props.data),
                         width: 80,
                     },
                     {
@@ -200,7 +197,7 @@ export const useCharacters = () => {
                                     rank={props.data?.rank ?? Rank.Stone1}
                                     rarity={props.data?.rarity ?? Rarity.Common}
                                     rarityStars={props.data?.stars ?? RarityStars.None}
-                                    numDamageUpgrades={StatCalculatorService.countDamageUpgrades(
+                                    numDamageUpgrades={StatsCalculatorService.countDamageUpgrades(
                                         props.data as ICharacter2
                                     )}
                                 />
@@ -222,13 +219,13 @@ export const useCharacters = () => {
                                     rank={targetRank}
                                     rarity={targetRarity}
                                     rarityStars={targetStars}
-                                    numHealthUpgrades={StatCalculatorService.countHealthUpgrades(
+                                    numHealthUpgrades={StatsCalculatorService.countHealthUpgrades(
                                         props.data as ICharacter2
                                     )}
-                                    numDamageUpgrades={StatCalculatorService.countDamageUpgrades(
+                                    numDamageUpgrades={StatsCalculatorService.countDamageUpgrades(
                                         props.data as ICharacter2
                                     )}
-                                    numArmorUpgrades={StatCalculatorService.countArmorUpgrades(
+                                    numArmorUpgrades={StatsCalculatorService.countArmorUpgrades(
                                         props.data as ICharacter2
                                     )}
                                 />
@@ -240,7 +237,7 @@ export const useCharacters = () => {
                         colId: 'Target Health',
                         headerName: 'Health',
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
-                            StatCalculatorService.calculateHealth(
+                            StatsCalculatorService.calculateHealth(
                                 props.data?.id ?? '',
                                 targetRarity,
                                 targetStars,
@@ -254,7 +251,7 @@ export const useCharacters = () => {
                         colId: 'Target Damage',
                         headerName: 'Damage',
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
-                            StatCalculatorService.calculateDamage(
+                            StatsCalculatorService.calculateDamage(
                                 props.data?.id ?? '',
                                 targetRarity,
                                 targetStars,
@@ -268,7 +265,7 @@ export const useCharacters = () => {
                         colId: 'Target Armour',
                         headerName: 'Armour',
                         valueGetter: (props: ValueGetterParams<ICharacter2>) =>
-                            StatCalculatorService.calculateArmor(
+                            StatsCalculatorService.calculateArmor(
                                 props.data?.id ?? '',
                                 targetRarity,
                                 targetStars,

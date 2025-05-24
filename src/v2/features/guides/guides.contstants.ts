@@ -4,6 +4,8 @@ import { ICharacter2 } from 'src/models/interfaces';
 import mowsData from 'src/v2/data/mows.json';
 import { IMenuOption } from 'src/v2/models/menu-option';
 
+import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
+
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
 import { VitruviusLegendaryEvent } from '@/fsd/3-features/lre/model/4-vitruvius.le';
 import { KharnLegendaryEvent } from '@/fsd/3-features/lre/model/5-kharn.le';
@@ -11,7 +13,6 @@ import { MephistonLegendaryEvent } from '@/fsd/3-features/lre/model/6-mephiston.
 import { PatermineLegendaryEvent } from '@/fsd/3-features/lre/model/7-patermine.le';
 import { DanteLegendaryEvent } from '@/fsd/3-features/lre/model/8-dante.le';
 import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isCharacter } from 'src/v2/features/characters/units.functions';
 import { allModes, gameModesForGuides } from 'src/v2/features/teams/teams.constants';
 import { GameMode } from 'src/v2/features/teams/teams.enums';
 

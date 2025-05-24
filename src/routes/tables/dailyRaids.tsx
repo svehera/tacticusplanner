@@ -1,7 +1,7 @@
 ﻿import { enqueueSnackbar } from 'notistack';
 import React, { useContext, useMemo } from 'react';
 
-import { IDailyRaidsFilters } from 'src/models/interfaces';
+import { ICampaingsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { RaidsHeader } from 'src/routes/tables/raids-header';
 import { RaidsPlan } from 'src/routes/tables/raids-plan';
@@ -136,7 +136,7 @@ export const DailyRaids = () => {
         }, 100);
     };
 
-    const saveFilterChanges = (filters: IDailyRaidsFilters) => {
+    const saveFilterChanges = (filters: ICampaingsFilters) => {
         dispatch.dailyRaids({
             type: 'UpdateFilters',
             value: filters,

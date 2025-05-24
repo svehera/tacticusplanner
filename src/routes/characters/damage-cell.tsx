@@ -1,12 +1,9 @@
 import React from 'react';
 
-import { ICharacter2 } from 'src/models/interfaces';
-import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
-
-import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { RarityStars, Rarity, DamageType, Rank } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { Rank, DamageType } from '@/fsd/4-entities/character';
+import { ICharacter2, StatsCalculatorService } from '@/fsd/4-entities/character';
 
 interface Props {
     character: ICharacter2;
@@ -99,7 +96,7 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                         </th>
                         <td>
                             <div className="bg-cyan-500/50">
-                                {StatCalculatorService.calculateDamage(
+                                {StatsCalculatorService.calculateDamage(
                                     character.id,
                                     rarity,
                                     rarityStars,
@@ -111,7 +108,7 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                         <td>
                             <div className="bg-cyan-500/25">
                                 {computeDamvarInfArmour(
-                                    StatCalculatorService.calculateDamage(
+                                    StatsCalculatorService.calculateDamage(
                                         character.id,
                                         rarity,
                                         rarityStars,
@@ -133,7 +130,7 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                                 {(character.rangeHits ?? 0) == 0 ? (
                                     <>N/A</>
                                 ) : (
-                                    StatCalculatorService.calculateDamage(
+                                    StatsCalculatorService.calculateDamage(
                                         character.id,
                                         rarity,
                                         rarityStars,
@@ -146,7 +143,7 @@ export const DamageCell: React.FC<Props> = ({ character, rank, rarity, raritySta
                         <td>
                             <div className="bg-cyan-500/50">
                                 {computeDamvarInfArmour(
-                                    StatCalculatorService.calculateDamage(
+                                    StatsCalculatorService.calculateDamage(
                                         character.id,
                                         rarity,
                                         rarityStars,

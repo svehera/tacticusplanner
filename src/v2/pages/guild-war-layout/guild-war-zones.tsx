@@ -20,12 +20,11 @@ import { Difficulty } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 import { DifficultyImage } from 'src/v2/components/images/difficulty-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { WarZoneBuffImage } from 'src/v2/components/images/war-zone-buff-image';
 
+import { Rank } from '@/fsd/5-shared/model';
 import { LoaderWithText, AccessibleTooltip, FlexBox } from '@/fsd/5-shared/ui';
-
-import { Rank } from '@/fsd/4-entities/character';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { useGetGuildRosters } from 'src/v2/features/guild/guild.endpoint';
@@ -175,7 +174,7 @@ export const GuildWarZones = () => {
                 <FlexBox gap={5} style={{ fontSize: '1.1rem' }}>
                     <div className="flex-box gap3">
                         {caps.map((rarity, index) => (
-                            <RarityImage key={index} rarity={rarity} />
+                            <RarityIcon key={index} rarity={rarity} />
                         ))}
                     </div>
                     <span>{zoneStats.warScore.toString().slice(0, 2)}K</span>
@@ -368,7 +367,7 @@ const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style, play
                     <FlexBox gap={5}>
                         <DifficultyImage difficulty={difficultyEnum} withColor />
                         <Badge badgeContent={maxRarityCount}>
-                            <RarityImage rarity={maxRarity} />
+                            <RarityIcon rarity={maxRarity} />
                         </Badge>
                         <span>{zoneStats.warScore.toString().slice(0, 2)}K</span>
                         <span>{difficulty}</span>

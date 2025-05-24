@@ -8,15 +8,15 @@ import React, { useContext, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { RankImage } from 'src/v2/components/images/rank-image';
 import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rarity, Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { Rank } from '@/fsd/4-entities/character';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
+import { UpgradeImage } from '../../fsd/4-entities/upgrade/upgrade-image';
 import { DailyRaidsStrategy } from '../../models/enums';
 import {
     ICharacter2,
@@ -27,7 +27,6 @@ import {
 import { StoreContext } from '../../reducers/store.provider';
 import { StaticDataService } from '../../services';
 import { RankSelect } from '../../shared-components/rank-select';
-import { UpgradeImage } from '../../shared-components/upgrade-image';
 import { getEnumValues } from '../../shared-logic/functions';
 
 export const RankLookup = () => {
@@ -422,8 +421,8 @@ export const RankLookup = () => {
                     {groupByRanks.map((x, index) => (
                         <div key={index}>
                             <div className="flex gap-[3px] justify-center">
-                                <RankImage rank={x.rank1} /> <ArrowForward />
-                                <RankImage
+                                <RankIcon rank={x.rank1} /> <ArrowForward />
+                                <RankIcon
                                     rank={x.rank2}
                                     rankPoint5={x.rank1 === rankEnd && x.rank2 === rankEnd && rankPoint5}
                                 />

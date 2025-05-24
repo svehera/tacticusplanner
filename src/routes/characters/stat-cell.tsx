@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
-
-import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { Rank } from '@/fsd/4-entities/character';
+import { StatsCalculatorService } from '@/fsd/4-entities/character';
 
 interface Props {
     characterId?: string;
@@ -29,7 +27,7 @@ export const StatCell: React.FC<Props> = ({
     numArmorUpgrades,
 }) => {
     const health = characterId
-        ? StatCalculatorService.calculateHealth(
+        ? StatsCalculatorService.calculateHealth(
               characterId,
               rarity ?? Rarity.Common,
               rarityStars,
@@ -37,11 +35,11 @@ export const StatCell: React.FC<Props> = ({
               numHealthUpgrades
           )
         : npc
-          ? StatCalculatorService.calculateNpcHealth(npc, rarityStars, rank)
+          ? StatsCalculatorService.calculateNpcHealth(npc, rarityStars, rank)
           : -1;
 
     const damage = characterId
-        ? StatCalculatorService.calculateDamage(
+        ? StatsCalculatorService.calculateDamage(
               characterId,
               rarity ?? Rarity.Common,
               rarityStars,
@@ -49,11 +47,11 @@ export const StatCell: React.FC<Props> = ({
               numDamageUpgrades
           )
         : npc
-          ? StatCalculatorService.calculateNpcDamage(npc, rarityStars, rank)
+          ? StatsCalculatorService.calculateNpcDamage(npc, rarityStars, rank)
           : -1;
 
     const armor = characterId
-        ? StatCalculatorService.calculateArmor(
+        ? StatsCalculatorService.calculateArmor(
               characterId,
               rarity ?? Rarity.Common,
               rarityStars,
@@ -61,7 +59,7 @@ export const StatCell: React.FC<Props> = ({
               numArmorUpgrades
           )
         : npc
-          ? StatCalculatorService.calculateNpcArmor(npc, rarityStars, rank)
+          ? StatsCalculatorService.calculateNpcArmor(npc, rarityStars, rank)
           : -1;
 
     return (

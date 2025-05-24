@@ -6,12 +6,13 @@ import { isMobile } from 'react-device-detect';
 
 import { InventoryControls } from 'src/routes/inventory-controls';
 import { UpgradesGroup } from 'src/routes/upgrades-group';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 
 import { Rarity } from '@/fsd/5-shared/model';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+
+import { UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
-import { StaticDataService } from '../services';
 
 import { IInventoryUpgrade, IUpgradesGroup } from './inventory-models';
 
@@ -28,7 +29,7 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
 
     const itemsList = useMemo<IInventoryUpgrade[]>(() => {
         return orderBy(
-            Object.values(StaticDataService.recipeData)
+            Object.values(UpgradesService.recipeDataByName)
                 .filter(item => item.stat !== 'Shard' && (!itemsFilter.length || itemsFilter.includes(item.material)))
                 .map(x => ({
                     material: x.material,
@@ -120,7 +121,7 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
                 <Accordion key={group.rarity} defaultExpanded={!isMobile && !viewPreferences.craftableItemsInInventory}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                         <h2 className="flex gap-1 items-center">
-                            <RarityImage rarity={group.rarity} /> <span>{group.label}</span>
+                            <RarityIcon rarity={group.rarity} /> <span>{group.label}</span>
                         </h2>
                     </AccordionSummary>
                     <AccordionDetails>

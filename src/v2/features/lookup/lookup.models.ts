@@ -1,7 +1,7 @@
 ﻿import { Rarity, Alliance } from '@/fsd/5-shared/model';
 
-import { IMow } from 'src/v2/features/characters/characters.models';
-import { IBaseUpgrade, ICraftedUpgrade } from 'src/v2/features/goals/goals.models';
+import { IMow } from '@/fsd/4-entities/mow';
+import { IBaseUpgrade, ICraftedUpgrade } from '@/fsd/4-entities/upgrade';
 
 export interface IMowLookupInputs {
     mow: IMow | null;

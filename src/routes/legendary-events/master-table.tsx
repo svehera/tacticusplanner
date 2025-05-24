@@ -33,12 +33,14 @@ import { isMobile } from 'react-device-detect';
 import { ICharacter2, ILreTeam } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { CharacterTitle } from 'src/shared-components/character-title';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { useQueryState } from 'src/v2/hooks/query-state';
 
-import { CharacterShardIcon, Rank } from '@/fsd/4-entities/character';
+import { Rank } from '@/fsd/5-shared/model';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+
+import { CharacterTitle } from '@/fsd/4-entities/character/ui/character-title';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 import { getLre, ILegendaryEventTrack } from '@/fsd/3-features/lre';
@@ -273,7 +275,7 @@ export const MasterTable = () => {
                         },
                         cellRenderer: (props: ICellRendererParams<ITableRow>) => {
                             const rarity = props.value ?? 0;
-                            return <RarityImage rarity={rarity} />;
+                            return <RarityIcon rarity={rarity} />;
                         },
                     },
                     {
@@ -286,7 +288,7 @@ export const MasterTable = () => {
                         },
                         cellRenderer: (props: ICellRendererParams<ITableRow>) => {
                             const rank = props.value ?? 0;
-                            return <RankImage rank={rank} />;
+                            return <RankIcon rank={rank} />;
                         },
                     },
                 ],
@@ -472,7 +474,7 @@ export const MasterTable = () => {
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
                                 <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
                                 <ListItemIcon>
-                                    <CharacterShardIcon icon={x.icon} height={30} />
+                                    <UnitShardIcon icon={x.icon} height={30} />
                                 </ListItemIcon>
                                 <ListItemText primary={x.name} />
                             </MenuItem>
@@ -484,7 +486,7 @@ export const MasterTable = () => {
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
                                 <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
                                 <ListItemIcon>
-                                    <CharacterShardIcon icon={x.icon} height={30} />
+                                    <UnitShardIcon icon={x.icon} height={30} />
                                 </ListItemIcon>
                                 <ListItemText primary={x.name} />
                             </MenuItem>

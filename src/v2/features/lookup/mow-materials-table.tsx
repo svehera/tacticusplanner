@@ -2,11 +2,13 @@
 import { AgGridReact } from 'ag-grid-react';
 import React, { useMemo } from 'react';
 
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { BadgeImage } from 'src/v2/components/images/badge-image';
 import { ComponentImage } from 'src/v2/components/images/component-image';
 import { ForgeBadgeImage } from 'src/v2/components/images/forge-badge-image';
-import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
+
+import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
+
+import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
 import { IMowLevelMaterials } from 'src/v2/features/lookup/lookup.models';
 

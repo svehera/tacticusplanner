@@ -2,16 +2,12 @@ import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import React, { useMemo } from 'react';
 
-import { Equipment } from 'src/models/enums';
 import { EquipmentType } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 import { getImageUrl } from 'src/shared-logic/functions';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { Equipment, Faction, Rarity } from '@/fsd/5-shared/model';
 
-import { Faction } from '@/fsd/4-entities/faction';
-
-import { DamageCalculatorService } from './damage-calculator-service';
 import { IEquipmentSpec } from './versus-interfaces';
 
 interface Props {

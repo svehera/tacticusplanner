@@ -4,7 +4,7 @@ import { NumberInput } from 'src/v2/components/inputs/number-input';
 import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 import { useQueryState } from 'src/v2/hooks/query-state';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IMow } from 'src/v2/features/characters/characters.models';
 import { IMowLookupInputs } from 'src/v2/features/lookup/lookup.models';
@@ -59,7 +59,7 @@ export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange })
 
     return (
         <div className="flex-box gap20 wrap">
-            {mow && <CharacterShardIcon icon={mow.badgeIcon} />}
+            {mow && <UnitShardIcon icon={mow.badgeIcon} />}
             <UnitsAutocomplete style={{ maxWidth: 250 }} unit={mow} options={mows} onUnitChange={setMow} />
             <div className="flex-box gap15 p10">
                 <span>Primary:</span>

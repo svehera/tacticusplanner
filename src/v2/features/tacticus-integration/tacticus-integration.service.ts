@@ -1,8 +1,8 @@
 import xpData from 'src/v2/data/xp.json';
 
-import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
 
-import { Rank } from '@/fsd/4-entities/character';
+import { CharacterUpgradesService } from '@/fsd/4-entities/character';
 
 import { IXpLevel } from 'src/v2/features/characters/characters.models';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
@@ -37,7 +37,7 @@ export class TacticusIntegrationService {
     }
 
     static convertUpgrades(unitName: string, rank: Rank, upgradesIndexes: number[]): string[] {
-        const [rankUp] = UpgradesService.getCharacterUpgradeRank({
+        const [rankUp] = CharacterUpgradesService.getCharacterUpgradeRank({
             unitName,
             rankStart: rank,
             rankEnd: rank + 1,

@@ -1,14 +1,15 @@
 ﻿import { Badge } from '@mui/material';
 import React from 'react';
 
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { BadgeImage } from 'src/v2/components/images/badge-image';
 import { ComponentImage } from 'src/v2/components/images/component-image';
 import { ForgeBadgeImage } from 'src/v2/components/images/forge-badge-image';
 
 import { Alliance } from '@/fsd/5-shared/model';
 
-import { IBaseUpgrade, ICraftedUpgrade } from 'src/v2/features/goals/goals.models';
+import { IBaseUpgrade, ICraftedUpgrade } from '@/fsd/4-entities/upgrade';
+import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
+
 import { IMowLevelMaterials } from 'src/v2/features/lookup/lookup.models';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 

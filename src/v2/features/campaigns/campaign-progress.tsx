@@ -3,13 +3,13 @@ import Typography from '@mui/material/Typography';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDebounceCallback } from 'usehooks-ts';
 
-import { ICharacter2 } from 'src/models/interfaces';
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
 
-import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
+import { ICampaignModel } from '@/fsd/4-entities/campaign';
+import { CampaignDifficulty } from '@/fsd/4-entities/campaign/enums';
+import { ICharacter2 } from '@/fsd/4-entities/character';
 
-import { CampaignDifficulty } from './campaigns.enums';
-import { ICampaignModel } from './campaigns.models';
+import { CharacterTile } from 'src/v2/features/characters/components/character-tile';
 
 interface Props {
     characters: ICharacter2[];

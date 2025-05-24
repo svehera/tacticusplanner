@@ -15,15 +15,15 @@ import { GoalCard } from 'src/routes/goals/goal-card';
 import { GoalsTable } from 'src/routes/goals/goals-table';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
-import { numberToThousandsString } from 'src/v2/functions/number-to-thousands-string';
 
+import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
+import { Rank } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { Rank } from '@/fsd/4-entities/character';
+import { IUnit } from '@/fsd/4-entities/unit';
 
 import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';
 import { CharactersXpService } from 'src/v2/features/characters/characters-xp.service';
-import { IUnit } from 'src/v2/features/characters/characters.models';
 import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
 import { GoalsService } from 'src/v2/features/goals/goals.service';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
