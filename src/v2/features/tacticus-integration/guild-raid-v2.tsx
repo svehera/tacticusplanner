@@ -393,32 +393,8 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
     const stats = calculateStats();
 
-    if (loading) {
-        return (
-            <div className="flex items-center justify-center h-64">
-                <div className="text-muted-fg">Loading raid data...</div>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="bg-danger/20 border border-danger/70 text-danger-fg px-4 py-3 rounded">
-                <p>{error}</p>
-            </div>
-        );
-    }
-
-    if (!raidData) {
-        return (
-            <div className="bg-warning/20 border border-warning/70 text-warning-fg px-4 py-3 rounded">
-                <p>No raid data available.</p>
-            </div>
-        );
-    }
-
     // Get unique tiers for filter dropdown
-    const units = [...new Set(raidData.entries.map(entry => entry.unitId))].sort();
+    const units = raidData === null ? [] : [...new Set(raidData.entries.map(entry => entry.unitId))].sort();
 
     // Add this component near other renderers
     const BombStatusRenderer: React.FC<{ data: UserSummary }> = ({ data }) => {
@@ -460,14 +436,14 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         // Initialize with worst case scenario:
         // season started at first damage, user had played his 3 token at the exact end of last season
         // 2 tokens recharged from the 24H inter season
-        const firstEntryStart = (raidData.entries.find(entry => entry.startedOn !== null)?.startedOn ?? 0) * 1000;
+        const firstEntryStart = (raidData!.entries.find(entry => entry.startedOn !== null)?.startedOn ?? 0) * 1000;
         const seasonStart = firstEntryStart === 0 ? now : firstEntryStart;
         const tokenStatus = {
             count: 2,
             reloadStart: seasonStart,
         };
 
-        raidData.entries
+        raidData!.entries
             .filter(
                 entry =>
                     entry.userId === data.userId &&
@@ -627,6 +603,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     ];
 
     const summaryData = useMemo(() => {
+        if (raidData === null) return [];
         const userMap = new Map<string, UserSummary>();
 
         filteredEntries.forEach(entry => {
@@ -690,6 +667,30 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
         return Array.from(userMap.values());
     }, [filteredEntries]);
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-64">
+                <div className="text-muted-fg">Loading raid data...</div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="bg-danger/20 border border-danger/70 text-danger-fg px-4 py-3 rounded">
+                <p>{error}</p>
+            </div>
+        );
+    }
+
+    if (!raidData) {
+        return (
+            <div className="bg-warning/20 border border-warning/70 text-warning-fg px-4 py-3 rounded">
+                <p>No raid data available.</p>
+            </div>
+        );
+    }
 
     return (
         <div className="container mx-auto p-4">
