@@ -25,7 +25,6 @@ export const FactionsTile = ({
 }) => {
     const factionPower = numberToThousandsString(faction.power);
     const factionValue = numberToThousandsString(faction.bsValue);
-    const isCompleteFaction = faction.units.length >= 5;
     const factionClass = useMemo(() => {
         const isComplete = faction.units.length === 5;
         const isIncomplete = faction.units.length < 5;

@@ -48,3 +48,15 @@ export enum Trait {
     Vehicle = 'Vehicle',
     WeaverOfFates = 'Weaver of Fates',
 }
+
+const labelToTraitMap: Record<string, Trait> = Object.entries(Trait).reduce(
+    (acc, [key, value]) => {
+        acc[value] = Trait[key as keyof typeof Trait];
+        return acc;
+    },
+    {} as Record<string, Trait>
+);
+
+export function getTraitFromLabel(label: string): Trait | undefined {
+    return labelToTraitMap[label];
+}
