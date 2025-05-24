@@ -236,6 +236,7 @@ export const defaultData: IPersonalData2 = {
         lreTileShowUnitBias: true,
         lreTileShowUnitActiveAbility: true,
         lreTileShowUnitPassiveAbility: true,
+        lreTileShowUnitHealTraits: true,
         myProgressShowCoreCharacters: true,
         apiIntegrationSyncOptions: ['roster', 'inventory', 'campaignProgress', 'raidedLocations'],
     },
