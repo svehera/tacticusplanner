@@ -6,4 +6,4 @@ export { KharnLegendaryEvent } from './5-kharn.le';
 export { MephistonLegendaryEvent } from './6-mephiston.le';
 export { PatermineLegendaryEvent } from './7-patermine.le';
 export { DanteLegendaryEvent } from './8-dante.le';
-export { UnknownLegendaryEvent } from './9-unknown';
+export { TrajannLegendaryEvent } from './9-trajann.le';

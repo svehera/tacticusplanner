@@ -12374,5 +12374,419 @@
             "Gene-Sire's Reliquant",
             "Preternatural Defences"
         ]
+    },
+    "Aesoth": {
+        "Stone I": [
+            "Ropes and Chains",
+            "The Iron Phoenix",
+            "Basic Auxiliary Core",
+            "Weapon Anointment Oils",
+            "Armor Trim",
+            "Sophisticated Material"
+        ],
+        "Stone II": [
+            "Lesser Reliquary of Protection",
+            "Minor Bionic Enhancement",
+            "Locator Beacon",
+            "Blessed Weapon Oils",
+            "Purity Seal",
+            "Purity Seal"
+        ],
+        "Stone III": [
+            "Reliquary of Protection",
+            "Bionic Enhancement",
+            "Single Power Pack",
+            "Auspex",
+            "Blessed Tasset Plate",
+            "Oath Seal"
+        ],
+        "Iron I": [
+            "Holster and Pockets",
+            "Mission Objective",
+            "Locator Beacon",
+            "Fine Micro-Generator",
+            "Oath Seal",
+            "Sophisticated Material Ingot"
+        ],
+        "Iron II": [
+            "Reliquary of Protection",
+            "Battle Plan",
+            "Power Pack Bundle",
+            "Divinator Class Auspex",
+            "Artificer Tasset Plate",
+            "Oath Seal"
+        ],
+        "Iron III": [
+            "Sanctified Reliquary of Protection",
+            "The Gold Phoenix",
+            "Integrated Bolt Feeder",
+            "Powerful Micro-Generator",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Flawless Terran Gem",
+            "The Phoenix Ascendant",
+            "High-Capacity Power Pack",
+            "Krak Grenade",
+            "Blessed Purity Seal",
+            "Sophisticated Material Bar"
+        ],
+        "Bronze II": [
+            "Flawless Gem Embellishment",
+            "Advanced Bionics",
+            "Classified Data-Slate",
+            "Anointed Micro-Generator",
+            "Auramite Wing",
+            "Blessed Purity Seal"
+        ],
+        "Bronze III": [
+            "The Phoenix Ascendant",
+            "Mars-Pattern Bionics",
+            "Embellished Bolt Feeder",
+            "Sanctified Weapon Oils",
+            "Auramite Wing Embellishment",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Flawless Gem Embellishment",
+            "Secret Agenda",
+            "Embellished Bolt Feeder",
+            "Bionic Neural Pathways",
+            "Auramite Wing Embellishment",
+            "Sophisticated Material Sheet"
+        ],
+        "Silver II": [
+            "Arcane Genetic Alchemy",
+            "Greater Reliquary of Protection",
+            "Adorned Bolt Feeder",
+            "Anointed Micro-Generator",
+            "Auramite Wing Embellishment",
+            "Grand Purity Seal"
+        ],
+        "Silver III": [
+            "Flawless Gem Embellishment",
+            "Grand Strategy",
+            "Embellished Bolt Feeder",
+            "Digital Weapons",
+            "Archeo-Tech Remnant",
+            "Sophisticated Material Plates"
+        ],
+        "Gold I": [
+            "Flawless Gem Adornment",
+            "Relic Bionic Enhancement",
+            "Archeotech Bionics",
+            "Relic Micro-Generator",
+            "Auramite Wing Adornment",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold II": [
+            "Defensor Refractor Generator",
+            "Legendary Reliquary of Protection",
+            "Adorned Bolt Feeder",
+            "Digital Weapons",
+            "Auramite Wing Adornment",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold III": [
+            "Flawless Gem Adornment",
+            "Grandiose Skull Ornament",
+            "Panoptispex",
+            "Plasma Coil",
+            "Adamantine Thread Cloak",
+            "Seal of the Emperor's Protection"
+        ],
+        "Diamond I": [
+            "Defensor Refractor Generator",
+            "Legendary Reliquary of Protection",
+            "Panoptispex",
+            "Relic Auxiliary Core",
+            "Adamantine Thread Cloak",
+            "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Defensor Refractor Generator",
+            "Superaugmented Constitution",
+            "Panoptispex",
+            "Superaugmented Strength",
+            "Adamantine Thread Cloak",
+            "Superaugmented Defences"
+        ]
+    },
+    "Kariyan": {
+        "Stone I": [
+            "Ropes and Chains",
+            "The Iron Phoenix",
+            "Basic Auxiliary Core",
+            "Weapon Anointment Oils",
+            "Armor Trim",
+            "Sophisticated Material"
+        ],
+        "Stone II": [
+            "Lesser Reliquary of Protection",
+            "Minor Bionic Enhancement",
+            "Locator Beacon",
+            "Blessed Weapon Oils",
+            "Purity Seal",
+            "Rebreather"
+        ],
+        "Stone III": [
+            "Reliquary of Protection",
+            "Bionic Enhancement",
+            "Vox-Caster",
+            "Auspex",
+            "Blessed Tasset Plate",
+            "Cloak"
+        ],
+        "Iron I": [
+            "Holster and Pockets",
+            "Mission Objective",
+            "Locator Beacon",
+            "Fine Micro-Generator",
+            "Oath Seal",
+            "Sophisticated Material Ingot"
+        ],
+        "Iron II": [
+            "Reliquary of Protection",
+            "Battle Plan",
+            "Adamantium Blades",
+            "Divinator Class Auspex",
+            "Artificer Tasset Plate",
+            "Cloak"
+        ],
+        "Iron III": [
+            "Sanctified Reliquary of Protection",
+            "The Gold Phoenix",
+            "Integrated Bolt Feeder",
+            "Powerful Micro-Generator",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Flawless Terran Gem",
+            "The Phoenix Ascendant",
+            "Prey-Sight",
+            "Krak Grenade",
+            "Blessed Purity Seal",
+            "Sophisticated Material Bar"
+        ],
+        "Bronze II": [
+            "Flawless Gem Embellishment",
+            "Advanced Bionics",
+            "Classified Data-Slate",
+            "Anointed Micro-Generator",
+            "Auramite Wing",
+            "Fine Cloak"
+        ],
+        "Bronze III": [
+            "The Phoenix Ascendant",
+            "Mars-Pattern Bionics",
+            "Embellished Bolt Feeder",
+            "Sanctified Weapon Oils",
+            "Auramite Wing Embellishment",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Flawless Gem Embellishment",
+            "Secret Agenda",
+            "Embellished Bolt Feeder",
+            "Relic Hilt",
+            "Auramite Wing Embellishment",
+            "Sophisticated Material Sheet"
+        ],
+        "Silver II": [
+            "Arcane Genetic Alchemy",
+            "Greater Reliquary of Protection",
+            "Adorned Bolt Feeder",
+            "Anointed Micro-Generator",
+            "Auramite Wing Embellishment",
+            "Decorated Cloak"
+        ],
+        "Silver III": [
+            "Flawless Gem Embellishment",
+            "Grand Strategy",
+            "Embellished Bolt Feeder",
+            "Digital Weapons",
+            "Archeo-Tech Remnant",
+            "Sophisticated Material Plates"
+        ],
+        "Gold I": [
+            "Flawless Gem Adornment",
+            "Relic Bionic Enhancement",
+            "Archeotech Bionics",
+            "Relic Micro-Generator",
+            "Auramite Wing Adornment",
+            "Divine Cloak"
+        ],
+        "Gold II": [
+            "Defensor Refractor Generator",
+            "Legendary Reliquary of Protection",
+            "Adorned Bolt Feeder",
+            "Digital Weapons",
+            "Auramite Wing Adornment",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold III": [
+            "Flawless Gem Adornment",
+            "Grandiose Skull Ornament",
+            "Panoptispex",
+            "Powered Blade",
+            "Adamantine Thread Cloak",
+            "Divine Cloak"
+        ],
+        "Diamond I": [
+            "Defensor Refractor Generator",
+            "Legendary Reliquary of Protection",
+            "Panoptispex",
+            "Relic Auxiliary Core",
+            "Adamantine Thread Cloak",
+            "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Defensor Refractor Generator",
+            "Superaugmented Constitution",
+            "Panoptispex",
+            "Superaugmented Strength",
+            "Adamantine Thread Cloak",
+            "Superaugmented Defences"
+        ]
+    },
+    "Trajann": {
+        "Stone I": [
+            "Ropes and Chains",
+            "The Iron Phoenix",
+            "Basic Auxiliary Core",
+            "Weapon Anointment Oils",
+            "Armor Trim",
+            "Sophisticated Material"
+        ],
+        "Stone II": [
+            "Lesser Reliquary of Protection",
+            "Minor Bionic Enhancement",
+            "Locator Beacon",
+            "Blessed Weapon Oils",
+            "Purity Seal",
+            "Rebreather"
+        ],
+        "Stone III": [
+            "Reliquary of Protection",
+            "Bionic Enhancement",
+            "Round of Ammo",
+            "Auspex",
+            "Blessed Tasset Plate",
+            "Cloak"
+        ],
+        "Iron I": [
+            "Holster and Pockets",
+            "Mission Objective",
+            "Locator Beacon",
+            "Fine Micro-Generator",
+            "Oath Seal",
+            "Sophisticated Material Ingot"
+        ],
+        "Iron II": [
+            "Reliquary of Protection",
+            "Battle Plan",
+            "Magazine",
+            "Divinator Class Auspex",
+            "Artificer Tasset Plate",
+            "Cloak"
+        ],
+        "Iron III": [
+            "Sanctified Reliquary of Protection",
+            "The Gold Phoenix",
+            "Integrated Bolt Feeder",
+            "Powerful Micro-Generator",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Flawless Terran Gem",
+            "The Phoenix Ascendant",
+            "Box of Ammo",
+            "Classified Data-Slate",
+            "Blessed Purity Seal",
+            "Sophisticated Material Bar"
+        ],
+        "Bronze II": [
+            "Flawless Gem Embellishment",
+            "Advanced Bionics",
+            "Classified Data-Slate",
+            "Anointed Micro-Generator",
+            "Auramite Wing",
+            "Fine Cloak"
+        ],
+        "Bronze III": [
+            "The Phoenix Ascendant",
+            "Mars-Pattern Bionics",
+            "Embellished Bolt Feeder",
+            "Sanctified Weapon Oils",
+            "Auramite Wing Embellishment",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Flawless Gem Embellishment",
+            "Secret Agenda",
+            "Embellished Bolt Feeder",
+            "Relic Hilt",
+            "Auramite Wing Embellishment",
+            "Sophisticated Material Sheet"
+        ],
+        "Silver II": [
+            "Arcane Genetic Alchemy",
+            "Greater Reliquary of Protection",
+            "Adorned Bolt Feeder",
+            "Anointed Micro-Generator",
+            "Auramite Wing Embellishment",
+            "Decorated Cloak"
+        ],
+        "Silver III": [
+            "Flawless Gem Embellishment",
+            "Grand Strategy",
+            "Embellished Bolt Feeder",
+            "Digital Weapons",
+            "Archeo-Tech Remnant",
+            "Sophisticated Material Plates"
+        ],
+        "Gold I": [
+            "Flawless Gem Adornment",
+            "Relic Bionic Enhancement",
+            "Master-Crafted Ammo",
+            "Relic Micro-Generator",
+            "Auramite Wing Adornment",
+            "Divine Cloak"
+        ],
+        "Gold II": [
+            "Defensor Refractor Generator",
+            "Legendary Reliquary of Protection",
+            "Adorned Bolt Feeder",
+            "Digital Weapons",
+            "Auramite Wing Adornment",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold III": [
+            "Flawless Gem Adornment",
+            "Grandiose Skull Ornament",
+            "Panoptispex",
+            "Autoloader",
+            "Adamantine Thread Cloak",
+            "Divine Cloak"
+        ],
+        "Diamond I": [
+            "Defensor Refractor Generator",
+            "Legendary Reliquary of Protection",
+            "Panoptispex",
+            "Relic Auxiliary Core",
+            "Adamantine Thread Cloak",
+            "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Defensor Refractor Generator",
+            "Superaugmented Constitution",
+            "Panoptispex",
+            "Superaugmented Strength",
+            "Adamantine Thread Cloak",
+            "Superaugmented Defences"
+        ]
     }
 }
