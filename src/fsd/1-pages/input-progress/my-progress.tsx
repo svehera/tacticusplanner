@@ -1,12 +1,14 @@
 import { groupBy } from 'lodash';
 import React, { useCallback, useContext } from 'react';
 
-import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+// eslint-disable-next-line import-x/no-internal-modules
+import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { CampaignsService, Campaign, ICampaignModel } from '@/fsd/4-entities/campaign';
 
 import { ViewSettings } from '@/fsd/3-features/view-settings';
-import { CampaignProgress } from 'src/v2/features/campaigns/campaign-progress';
+
+import { CampaignProgress } from './campaign-progress';
 
 /**
  * MyProgress component to display and manage campaign progress.

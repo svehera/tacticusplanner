@@ -12,6 +12,7 @@ import TableChartIcon from '@mui/icons-material/TableChart';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import React from 'react';
 
+import { myProgressMenuItem } from '@/fsd/1-pages/input-progress/my-progress.menu-item';
 import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
@@ -25,7 +26,6 @@ import { guildWarZonesMenuItem } from 'src/v2/pages/guild-war-layout/guild-war-z
 import { guildWarOffenseMenuItem } from 'src/v2/pages/guild-war-offense/guild-war-offense.menu-item';
 import { insightsMenuItem } from 'src/v2/pages/insights/insights.menu-item';
 import { activeLreMenuItems, inactiveLreMenuItems } from 'src/v2/pages/lre/lre.menu-item';
-import { myProgressMenuItem } from 'src/v2/pages/my-progress/my-progress.menu-item';
 import { teamsMenuItem } from 'src/v2/pages/teams/teams.menu-item';
 import { wyoMenuItem } from 'src/v2/pages/who-you-own/who-you-own.menu-item';
 
