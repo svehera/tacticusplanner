@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import { PlanGuildWarRoutes } from 'src/mobile-routes/events/guildWarRoutes';
 import { PlanLeRoutes } from 'src/mobile-routes/events/leRoutes';
 import { menuItemById } from 'src/models/menu-items';
-import { StaticDataService } from 'src/services';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 

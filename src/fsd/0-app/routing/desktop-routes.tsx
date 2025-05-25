@@ -92,7 +92,7 @@ export const globalLearnRoutes: RouteObject[] = [
     {
         path: 'learn/rankLookup',
         async lazy() {
-            const { RankLookup } = await import('@/routes/tables/rankLookup');
+            const { RankLookup } = await import('@/fsd/1-pages/learn-characters');
             return { Component: RankLookup };
         },
     },

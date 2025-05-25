@@ -7,27 +7,25 @@ import { orderBy, sum } from 'lodash';
 import React, { useContext, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
+// eslint-disable-next-line import-x/no-internal-modules
+import { StoreContext } from '@/reducers/store.provider';
 
+import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
-import { RankSelect } from '@/fsd/4-entities/character';
-import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
-
-import { UpgradeImage } from '../../fsd/4-entities/upgrade/upgrade-image';
-import { DailyRaidsStrategy } from '../../models/enums';
+import { CampaignLocation } from '@/fsd/4-entities/campaign';
+import { RankSelect, RankIcon, ICharacter2 } from '@/fsd/4-entities/character';
+import { UnitsAutocomplete } from '@/fsd/4-entities/unit';
 import {
-    ICharacter2,
-    IMaterialEstimated2,
     IMaterialFull,
     IMaterialRecipeIngredientFull,
-} from '../../models/interfaces';
-import { StoreContext } from '../../reducers/store.provider';
-import { StaticDataService } from '../../services';
-import { getEnumValues } from '../../shared-logic/functions';
+    UpgradeImage,
+    IMaterialEstimated2,
+} from '@/fsd/4-entities/upgrade';
+
+import { RankLookupService } from './rank-lookup.service';
 
 export const RankLookup = () => {
     const { characters, campaignsProgress, inventory } = useContext(StoreContext);
@@ -72,7 +70,7 @@ export const RankLookup = () => {
             return [];
         }
 
-        return StaticDataService.getUpgradeMaterialsToRankUp({
+        return RankLookupService.getUpgradeMaterialsToRankUp({
             unitName: character.id,
             rankStart,
             rankEnd,
@@ -120,21 +118,7 @@ export const RankLookup = () => {
 
     const totalMaterials = useMemo<IMaterialEstimated2[]>(() => {
         return orderBy(
-            StaticDataService.getAllMaterials(
-                {
-                    completedLocations: [],
-                    campaignsProgress: campaignsProgress,
-                    dailyEnergy: 0,
-                    upgrades: inventory.upgrades,
-                    preferences: {
-                        farmStrategy: DailyRaidsStrategy.allLocations,
-                        farmByPriorityOrder: false,
-                        dailyEnergy: 0,
-                        shardsEnergy: 0,
-                    },
-                },
-                upgrades
-            ),
+            RankLookupService.getAllMaterials(campaignsProgress, inventory.upgrades, upgrades),
             ['rarity', 'count', 'expectedEnergy'],
             ['desc', 'desc', 'desc']
         );

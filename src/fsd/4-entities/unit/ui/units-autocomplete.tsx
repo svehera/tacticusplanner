@@ -1,9 +1,9 @@
 ﻿import { Autocomplete, TextField } from '@mui/material';
-import React, { ReactNode } from 'react';
+import React from 'react';
 
-import { UnitTitle } from '@/fsd/4-entities/unit/unit-title';
+import { IUnit } from '../model';
 
-import { IUnit } from '@/v2/features/characters/characters.models';
+import { UnitTitle } from './unit-title';
 
 interface Props<T extends IUnit> {
     unit: T | T[] | null;

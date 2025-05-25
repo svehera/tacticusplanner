@@ -18,7 +18,7 @@ import {
 import { CharacterBias, ICharacter2, ICharLegendaryEvent } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
 import { IMow, IMowDb } from '@/fsd/4-entities/mow';
-import { IMaterialFull, IMaterialRecipeIngredientFull } from '@/fsd/4-entities/upgrade';
+import { IMaterialFull, IMaterialRecipeIngredientFull, IMaterialEstimated2 } from '@/fsd/4-entities/upgrade';
 
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
 import { IViewPreferences } from '@/fsd/3-features/view-settings';
@@ -288,32 +288,6 @@ export interface IPersonalGoal {
     unitId?: string;
     firstAbilityLevel?: number;
     secondAbilityLevel?: number;
-}
-
-export interface IMaterialEstimated2 {
-    id: string;
-    label: string;
-    expectedEnergy: number;
-    numberOfBattles: number;
-    totalEnergy: number;
-    dailyEnergy: number;
-    locations: ICampaignBattleComposed[];
-    possibleLocations: ICampaignBattleComposed[];
-    unlockedLocations: string[];
-    locationsString: string;
-    missingLocationsString: string;
-    daysOfBattles: number;
-    dailyBattles: number;
-    count: number;
-    craftedCount: number;
-    rarity: Rarity;
-    // energyPerBattle: number;
-    quantity: number;
-    countLeft: number;
-    iconPath: string;
-    characters: string[];
-    priority: number;
-    isBlocked: boolean;
 }
 
 export interface IDailyRaid {

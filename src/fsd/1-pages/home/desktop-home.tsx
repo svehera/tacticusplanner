@@ -11,8 +11,6 @@ import { PersonalGoalType } from 'src/models/enums';
 import { menuItemById } from 'src/models/menu-items';
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
-// eslint-disable-next-line import-x/no-internal-modules
-import { StaticDataService } from 'src/services';
 
 import { useAuth } from '@/fsd/5-shared/model';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';

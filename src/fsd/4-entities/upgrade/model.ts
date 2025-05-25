@@ -65,6 +65,32 @@ export interface IMaterialRecipeIngredientFull {
     priority: number;
 }
 
+export interface IMaterialEstimated2 {
+    id: string;
+    label: string;
+    expectedEnergy: number;
+    numberOfBattles: number;
+    totalEnergy: number;
+    dailyEnergy: number;
+    locations: ICampaignBattleComposed[];
+    possibleLocations: ICampaignBattleComposed[];
+    unlockedLocations: string[];
+    locationsString: string;
+    missingLocationsString: string;
+    daysOfBattles: number;
+    dailyBattles: number;
+    count: number;
+    craftedCount: number;
+    rarity: Rarity;
+    // energyPerBattle: number;
+    quantity: number;
+    countLeft: number;
+    iconPath: string;
+    characters: string[];
+    priority: number;
+    isBlocked: boolean;
+}
+
 export interface IRecipeData {
     [material: string]: IMaterial;
 }
