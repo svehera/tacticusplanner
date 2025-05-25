@@ -1,17 +1,13 @@
 ﻿import { Badge } from '@mui/material';
 import React from 'react';
 
-import { BadgeImage } from 'src/v2/components/images/badge-image';
-import { ComponentImage } from 'src/v2/components/images/component-image';
-import { ForgeBadgeImage } from 'src/v2/components/images/forge-badge-image';
-
 import { Alliance } from '@/fsd/5-shared/model';
+import { BadgeImage, ComponentImage, ForgeBadgeImage } from '@/fsd/5-shared/ui/icons';
 
-import { IBaseUpgrade, ICraftedUpgrade } from '@/fsd/4-entities/upgrade';
-import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
+import { IBaseUpgrade, ICraftedUpgrade, UpgradeImage } from '@/fsd/4-entities/upgrade/@x/mow';
 
-import { IMowLevelMaterials } from 'src/v2/features/lookup/lookup.models';
-import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
+import { IMowLevelMaterials } from './model';
+import { MowsService } from './mows.service';
 
 interface Props {
     mowId: string;
@@ -22,8 +18,8 @@ interface Props {
 
 export const MowUpgrades: React.FC<Props> = ({ primaryLevel, secondaryLevel, mowId, alliance }) => {
     const size = 'medium';
-    const [primary] = MowLookupService.getMaterialsList(mowId, mowId, alliance, [primaryLevel + 1]);
-    const [secondary] = MowLookupService.getMaterialsList(mowId, mowId, alliance, [secondaryLevel + 1]);
+    const [primary] = MowsService.getMaterialsList(mowId, mowId, alliance, [primaryLevel + 1]);
+    const [secondary] = MowsService.getMaterialsList(mowId, mowId, alliance, [secondaryLevel + 1]);
 
     const renderAbility = (
         label: string,

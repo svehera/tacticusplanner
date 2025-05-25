@@ -17,7 +17,8 @@ import {
 import { IBaseUpgrade } from '@/fsd/4-entities/upgrade';
 
 import { ICharacterAbilitiesMaterialsTotal, IXpEstimate } from 'src/v2/features/characters/characters.models';
-import { IMowMaterialsTotal } from 'src/v2/features/lookup/lookup.models';
+
+import { IMowMaterialsTotal } from '@/fsd/1-pages/learn-mow/lookup.models';
 
 export type CharacterRaidGoalSelect =
     | ICharacterUpgradeRankGoal

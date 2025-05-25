@@ -22,10 +22,8 @@ import {
     ICharacterUnlockGoal,
     ICharacterAscendGoal,
 } from '@/fsd/4-entities/goal';
+import { MowsService } from '@/fsd/4-entities/mow';
 import { IRecipeExpandedUpgrade, UpgradesService } from '@/fsd/4-entities/upgrade';
-
-// eslint-disable-next-line import-x/no-internal-modules
-import { MowLookupService } from '@/v2/features/lookup/mow-lookup.service';
 
 import {
     CampaignFactionMapping,
@@ -325,13 +323,13 @@ export class CampaignsProgressionService {
      *          abilities.
      */
     public static getMowUpgradeRank(rankLookup: ICharacterUpgradeMow): IUnitUpgradeRank[] {
-        const primaryUpgrades = MowLookupService.getUpgradesRaw(
+        const primaryUpgrades = MowsService.getUpgradesRaw(
             rankLookup.unitId,
             rankLookup.primaryStart,
             rankLookup.primaryEnd,
             'primary'
         );
-        const secondaryUpgrades = MowLookupService.getUpgradesRaw(
+        const secondaryUpgrades = MowsService.getUpgradesRaw(
             rankLookup.unitId,
             rankLookup.secondaryStart,
             rankLookup.secondaryEnd,

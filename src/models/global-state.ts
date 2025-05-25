@@ -1,10 +1,8 @@
-﻿import mowsData from 'src/v2/data/mows.json';
-
-import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
+﻿import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
 
 import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
-import { IMow, IMowDb, IMowStatic } from '@/fsd/4-entities/mow';
+import { IMow, IMowDb, IMowStatic, mowsData } from '@/fsd/4-entities/mow';
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
 
@@ -131,8 +129,7 @@ export class GlobalState implements IGlobalState {
     }
 
     static initMows(dbMows: Partial<IMowDb & IInsightsData>[], totalUsers?: number): Array<IMow> {
-        const mowsStatic = mowsData as IMowStatic[];
-        return mowsStatic.map(staticData => {
+        return mowsData.map(staticData => {
             const dbMow = dbMows?.find(c => c.id === staticData.id);
             const initialRarity = RarityMapper.stringToNumber[staticData.initialRarity];
             const initialRarityStars = RarityMapper.toStars[RarityMapper.stringToNumber[staticData.initialRarity]];

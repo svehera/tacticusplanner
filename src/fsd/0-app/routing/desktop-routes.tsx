@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import { RouteObject } from 'react-router-dom';
 
+import { mowLookupDesktopLazyRoute } from '@/fsd/1-pages/learn-mow';
 import { versusLazyRoute } from '@/fsd/1-pages/learn-versus';
 import { campaignProgressionLazyRoute } from '@/fsd/1-pages/plan-campaign-progression';
 import { guildApiLazyRoute } from '@/v2/pages/guild-api/guild-api.route';
@@ -14,7 +15,6 @@ import { guildWarZonesLazyRoute } from 'src/v2/pages/guild-war-layout/guild-war-
 import { guildWarOffenseLazyRoute } from 'src/v2/pages/guild-war-offense/guild-war-offense.route';
 import { insightsLazyRoute } from 'src/v2/pages/insights/insights.route';
 import { lreLazyRoute } from 'src/v2/pages/lre/lre-route';
-import { mowLookupDesktopLazyRoute } from 'src/v2/pages/mow-lookup/mow-lookup.route';
 import { myProgressLazyRoute } from 'src/v2/pages/my-progress/my-progress.route';
 import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.route';
 import { teamsDesktopLazyRoute } from 'src/v2/pages/teams/teams.route';

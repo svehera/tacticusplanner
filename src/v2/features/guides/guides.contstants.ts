@@ -1,9 +1,9 @@
 ﻿import { capitalize, intersection } from 'lodash';
 
 import { ICharacter2 } from 'src/models/interfaces';
-import mowsData from 'src/v2/data/mows.json';
 import { IMenuOption } from 'src/v2/models/menu-option';
 
+import { mowsData } from '@/fsd/4-entities/mow';
 import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';

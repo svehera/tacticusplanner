@@ -10,6 +10,7 @@ import { Rank } from '@/fsd/5-shared/model';
 import { ICampaignsProgress, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
 import { CharacterUpgradesService, IUnitUpgradeRank } from '@/fsd/4-entities/character';
+import { MowsService } from '@/fsd/4-entities/mow';
 import {
     IBaseUpgrade,
     ICraftedUpgrade,
@@ -29,7 +30,6 @@ import {
     IUpgradeRaid,
     IUpgradesRaidsDay,
 } from 'src/v2/features/goals/goals.models';
-import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 
 export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
@@ -301,13 +301,13 @@ export class UpgradesService {
      *          abilities.
      */
     public static getMowUpgradeRank(rankLookup: ICharacterUpgradeMow): IUnitUpgradeRank[] {
-        const primaryUpgrades = MowLookupService.getUpgradesRaw(
+        const primaryUpgrades = MowsService.getUpgradesRaw(
             rankLookup.unitId,
             rankLookup.primaryStart,
             rankLookup.primaryEnd,
             'primary'
         );
-        const secondaryUpgrades = MowLookupService.getUpgradesRaw(
+        const secondaryUpgrades = MowsService.getUpgradesRaw(
             rankLookup.unitId,
             rankLookup.secondaryStart,
             rankLookup.secondaryEnd,

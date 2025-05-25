@@ -5,14 +5,17 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import { sortBy } from 'lodash';
 import React, { useContext, useMemo, useState } from 'react';
 
+// eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
 
-import { IMowLookupInputs } from 'src/v2/features/lookup/lookup.models';
-import { MowLookupInputs } from 'src/v2/features/lookup/mow-lookup-inputs';
-import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
-import { MowMaterialsTable } from 'src/v2/features/lookup/mow-materials-table';
-import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
-import { MowUpgradesTable } from 'src/v2/features/lookup/mow-upgrades-table';
+import { MowsService } from '@/fsd/4-entities/mow';
+
+import { IMowLookupInputs } from './lookup.models';
+import { MowLookupInputs } from './mow-lookup-inputs';
+import { MowLookupService } from './mow-lookup.service';
+import { MowMaterialsTable } from './mow-materials-table';
+import { MowMaterialsTotal } from './mow-materials-total';
+import { MowUpgradesTable } from './mow-upgrades-table';
 
 export const MowLookup = () => {
     const { mows, inventory } = useContext(StoreContext);
@@ -27,8 +30,7 @@ export const MowLookup = () => {
     });
 
     const mowMaterials = useMemo(
-        () =>
-            inputs.mow ? MowLookupService.getMaterialsList(inputs.mow.id, inputs.mow.name, inputs.mow.alliance) : [],
+        () => (inputs.mow ? MowsService.getMaterialsList(inputs.mow.id, inputs.mow.name, inputs.mow.alliance) : []),
         [inputs.mow?.id]
     );
 

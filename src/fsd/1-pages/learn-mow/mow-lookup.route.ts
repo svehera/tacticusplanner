@@ -7,11 +7,3 @@ export const mowLookupDesktopLazyRoute: RouteObject = {
         return { Component: MowLookup };
     },
 };
-
-export const mowLookupMobileLazyRoute: RouteObject = {
-    path: 'learn/mowLookup',
-    async lazy() {
-        const { MowLookup } = await import('./mow-lookup.desktop');
-        return { Component: MowLookup };
-    },
-};

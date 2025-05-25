@@ -27,7 +27,6 @@ import {
     IShardMaterial,
     IShardsRaid,
 } from 'src/v2/features/goals/goals.models';
-import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 
 export class ShardsService {
     static getShardsEstimatedDays(
@@ -261,7 +260,7 @@ export class ShardsService {
 
     public static getTargetShardsForMow(goal: ICharacterUpgradeMow): number {
         const currentCharProgression = goal.rarity + goal.stars;
-        const targetRarity = MowLookupService.getRarityFromLevel(Math.max(goal.primaryEnd, goal.secondaryEnd));
+        const targetRarity = RarityMapper.getRarityFromLevel(Math.max(goal.primaryEnd, goal.secondaryEnd));
         const targetProgression = targetRarity + RarityMapper.toStars[targetRarity];
 
         let targetShards = 0;

@@ -27,10 +27,10 @@ import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { SetAscendGoal } from 'src/shared-components/goals/set-ascend-goal';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
-import { NumberInput } from 'src/v2/components/inputs/number-input';
 
 import { Rarity, RarityStars, Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
+import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { UnitTitle } from '@/fsd/4-entities/unit/ui/unit-title';

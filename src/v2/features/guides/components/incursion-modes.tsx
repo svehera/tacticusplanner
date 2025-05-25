@@ -1,9 +1,9 @@
 ﻿import React, { useEffect, useMemo, useState } from 'react';
 
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
-import mowsData from 'src/v2/data/mows.json';
 import { IMenuOption } from 'src/v2/models/menu-option';
 
+import { mowsData } from '@/fsd/4-entities/mow';
 import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';

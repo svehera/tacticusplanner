@@ -1,14 +1,11 @@
 ﻿import { Badge } from '@mui/material';
 import React from 'react';
 
-import { BadgeImage } from 'src/v2/components/images/badge-image';
-import { ComponentImage } from 'src/v2/components/images/component-image';
-import { ForgeBadgeImage } from 'src/v2/components/images/forge-badge-image';
-
-import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
+import { numberToThousandsString } from '@/fsd/5-shared/lib';
 import { Rarity, Alliance } from '@/fsd/5-shared/model';
+import { BadgeImage, ComponentImage, ForgeBadgeImage } from '@/fsd/5-shared/ui/icons';
 
-import { IMowMaterialsTotal } from 'src/v2/features/lookup/lookup.models';
+import { IMowMaterialsTotal } from './lookup.models';
 
 interface Props {
     total: IMowMaterialsTotal;

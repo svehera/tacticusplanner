@@ -1,14 +1,13 @@
 ﻿import React, { useEffect } from 'react';
 
-import { NumberInput } from 'src/v2/components/inputs/number-input';
-
 import { useQueryState } from '@/fsd/5-shared/lib';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { NumberInput } from '@/fsd/5-shared/ui/input';
 
-import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
+import { IMow } from '@/fsd/4-entities/mow';
+import { UnitsAutocomplete } from '@/fsd/4-entities/unit';
 
-import { IMow } from 'src/v2/features/characters/characters.models';
-import { IMowLookupInputs } from 'src/v2/features/lookup/lookup.models';
+import { IMowLookupInputs } from './lookup.models';
 
 interface Props {
     mows: IMow[];

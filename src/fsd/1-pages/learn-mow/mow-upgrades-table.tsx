@@ -3,12 +3,12 @@ import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
-import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
+import { CampaignLocation } from '@/fsd/4-entities/campaign';
+import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
-import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';
+import { IMowUpgrade } from './lookup.models';
 
 interface Props {
     rows: IMowUpgrade[];

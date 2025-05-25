@@ -1,10 +1,9 @@
 ﻿import { Badge } from '@mui/material';
 import React from 'react';
 
-import { BadgeImage } from 'src/v2/components/images/badge-image';
-
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { Rarity } from '@/fsd/5-shared/model';
+import { BadgeImage } from '@/fsd/5-shared/ui/icons/badge-image';
 
 import { ICharacterAbilitiesMaterialsTotal } from 'src/v2/features/characters/characters.models';
 

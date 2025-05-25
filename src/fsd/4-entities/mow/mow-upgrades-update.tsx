@@ -5,10 +5,9 @@ import React, { useEffect, useMemo } from 'react';
 
 import { Alliance } from '@/fsd/5-shared/model';
 
-import { UpgradesService } from '@/fsd/4-entities/upgrade';
-import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
+import { UpgradesService, UpgradeImage } from '@/fsd/4-entities/upgrade/@x/mow';
 
-import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
+import { MowsService } from './mows.service';
 
 interface Props {
     mowId: string;
@@ -41,10 +40,10 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
         );
 
         const primary = primaryLevels.length
-            ? MowLookupService.getMaterialsList(mowId, mowId, Alliance.Imperial, primaryLevels)
+            ? MowsService.getMaterialsList(mowId, mowId, Alliance.Imperial, primaryLevels)
             : [];
         const secondary = secondaryLevels.length
-            ? MowLookupService.getMaterialsList(mowId, mowId, Alliance.Imperial, secondaryLevels)
+            ? MowsService.getMaterialsList(mowId, mowId, Alliance.Imperial, secondaryLevels)
             : [];
 
         const totalUpgrades = [
