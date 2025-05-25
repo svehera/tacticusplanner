@@ -1,9 +1,9 @@
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import React from 'react';
 
-import { MenuItem } from 'src/v2/models/menu-item';
+import { MenuItemTP } from '@/fsd/5-shared/ui';
 
-export const campaignProgressionMenuItem = new MenuItem(
+export const campaignProgressionMenuItem = new MenuItemTP(
     'Campaign Progression',
     <HowToRegIcon />,
     '/plan/campaignprogression'

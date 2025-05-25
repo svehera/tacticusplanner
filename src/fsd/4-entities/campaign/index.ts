@@ -7,6 +7,7 @@ export type {
     ICampaignsData,
     ICampaignBattle,
 } from './model';
+export { battleData } from './data';
 export { CampaignsService } from './campaigns.service';
 export { Campaign, CampaignType, CampaignGroupType } from './enums';
 export { campaignsList, campaignsByGroup, campaignEventsLocations } from './campaigns.constants';

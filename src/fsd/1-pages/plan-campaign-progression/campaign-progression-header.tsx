@@ -155,5 +155,3 @@ export const CampaignProgressionHeader = () => {
         </span>
     );
 };
-
-export default CampaignProgressionHeader;

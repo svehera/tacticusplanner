@@ -8,7 +8,7 @@ import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
-import { CampaignData, CampaignsProgressData } from 'src/v2/features/campaign-progression/campaign-progression.models';
+import { CampaignData, CampaignsProgressData } from './campaign-progression.models';
 
 interface Props {
     progression: CampaignsProgressData;

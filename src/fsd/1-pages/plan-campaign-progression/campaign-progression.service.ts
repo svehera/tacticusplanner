@@ -1,46 +1,43 @@
 import { uniq } from 'lodash';
 
-import { charsUnlockShards } from 'src/models/constants';
-import { PersonalGoalType } from 'src/models/enums';
-
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rank, Rarity } from '@/fsd/5-shared/model';
 
 import {
-    ICampaignBattleComposed,
+    battleData,
     CampaignsService,
-    ICampaignsProgress,
     CampaignType,
-    ICampaignsData,
+    ICampaignBattleComposed,
+    ICampaignsProgress,
 } from '@/fsd/4-entities/campaign';
-import battleData from '@/fsd/4-entities/campaign/data/newBattleData.json';
-import { CharactersService, CharacterUpgradesService, IRankUpData } from '@/fsd/4-entities/character';
-import rankUpData from '@/fsd/4-entities/character/data/characters-ranks.data.json';
-import { IRecipeData } from '@/fsd/4-entities/upgrade';
-import recipeData from '@/fsd/4-entities/upgrade/data/recipeData.json';
+import {
+    CharactersService,
+    CharacterUpgradesService,
+    charsUnlockShards,
+    IUnitUpgradeRank,
+} from '@/fsd/4-entities/character';
+import {
+    PersonalGoalType,
+    ICharacterUpgradeRankGoal,
+    ICharacterUpgradeMow,
+    ICharacterUnlockGoal,
+    ICharacterAscendGoal,
+} from '@/fsd/4-entities/goal';
+import { IRecipeExpandedUpgrade, UpgradesService } from '@/fsd/4-entities/upgrade';
+
+// eslint-disable-next-line import-x/no-internal-modules
+import { MowLookupService } from '@/v2/features/lookup/mow-lookup.service';
 
 import {
-    BattleSavings,
     CampaignFactionMapping,
-    CampaignProgressData,
     CampaignsProgressData,
-    FarmData,
     GoalData,
+    CampaignProgressData,
+    BattleSavings,
     MaterialRequirements,
-} from 'src/v2/features/campaign-progression/campaign-progression.models';
-import {
-    ICharacterAscendGoal,
-    ICharacterUnlockGoal,
-    ICharacterUpgradeMow,
-    ICharacterUpgradeRankGoal,
-    IRecipeExpandedUpgrade,
-} from 'src/v2/features/goals/goals.models';
-import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+    FarmData,
+} from './campaign-progression.models';
 
 export class CampaignsProgressionService {
-    static readonly recipeData: IRecipeData = recipeData;
-    static readonly rankUpData: IRankUpData = rankUpData;
-    static readonly battleData: ICampaignsData = battleData;
-    static readonly campaignData: Record<string, ICampaignBattleComposed> = CampaignsService.getCampaignComposed();
     static readonly campaignFactionMapping = this.getFactionCampaignMappings();
 
     /**
@@ -63,7 +60,7 @@ export class CampaignsProgressionService {
             });
         }
         Object.entries(battleData).forEach(([battleId, battle]) => {
-            CampaignsService.getCampaignComposed()[battleId].alliesFactions.forEach(faction => {
+            CampaignsService.campaignsComposed[battleId].alliesFactions.forEach(faction => {
                 result.campaignFactions.get(battle.campaign)?.add(faction);
                 if (!result.factionCampaigns.get(faction)) {
                     result.factionCampaigns.set(faction, new Set<string>());
@@ -267,7 +264,7 @@ export class CampaignsProgressionService {
             const upgradeRanks =
                 goal.type === PersonalGoalType.UpgradeRank
                     ? CharacterUpgradesService.getCharacterUpgradeRank(goal as ICharacterUpgradeRankGoal)
-                    : UpgradesService.getMowUpgradeRank(goal as ICharacterUpgradeMow);
+                    : CampaignsProgressionService.getMowUpgradeRank(goal as ICharacterUpgradeMow);
 
             for (const unitUpgrade of upgradeRanks) {
                 for (const upgradeMaterial of unitUpgrade.upgrades) {
@@ -319,6 +316,36 @@ export class CampaignsProgressionService {
         }
 
         return result;
+    }
+
+    /**
+     * @param rankLookup The start and end ability level of the goal, as well as any
+     *                   materials that have already been applied.
+     * @returns The number of each upgrade material necessary to level up the
+     *          abilities.
+     */
+    public static getMowUpgradeRank(rankLookup: ICharacterUpgradeMow): IUnitUpgradeRank[] {
+        const primaryUpgrades = MowLookupService.getUpgradesRaw(
+            rankLookup.unitId,
+            rankLookup.primaryStart,
+            rankLookup.primaryEnd,
+            'primary'
+        );
+        const secondaryUpgrades = MowLookupService.getUpgradesRaw(
+            rankLookup.unitId,
+            rankLookup.secondaryStart,
+            rankLookup.secondaryEnd,
+            'secondary'
+        );
+
+        return [
+            {
+                rankStart: Rank.Diamond3,
+                rankEnd: Rank.Diamond3,
+                upgrades: [...primaryUpgrades, ...secondaryUpgrades],
+                rankPoint5: false,
+            },
+        ];
     }
 
     /**
@@ -501,7 +528,7 @@ export class CampaignsProgressionService {
     ): ICampaignBattleComposed[] {
         const result: ICampaignBattleComposed[] = [];
 
-        Object.entries(CampaignsService.getCampaignComposed()).forEach(([campaign, battle]) => {
+        Object.entries(CampaignsService.campaignsComposed).forEach(([_, battle]) => {
             if (
                 this.getMaterialId(battle.reward) === this.getMaterialId(material) &&
                 CampaignsService.hasCompletedBattle(battle, campaignProgress)
@@ -528,7 +555,7 @@ export class CampaignsProgressionService {
         const result: ICampaignBattleComposed[] = [];
 
         let count = 0;
-        Object.entries(CampaignsService.getCampaignComposed()).forEach(([campaign, battle]) => {
+        Object.entries(CampaignsService.campaignsComposed).forEach(([_, battle]) => {
             if (
                 this.getMaterialId(battle.reward) == this.getMaterialId(material) &&
                 !CampaignsService.hasCompletedBattle(battle, campaignProgress)

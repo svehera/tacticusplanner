@@ -5,22 +5,14 @@ import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { CampaignType } from 'src/models/enums';
-import { ICampaignBattleComposed } from 'src/models/interfaces';
-
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { CampaignLocation, CampaignType, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 import { CharactersService } from '@/fsd/4-entities/character';
-import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
+import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
-import {
-    BattleSavings,
-    CampaignData,
-    CampaignsProgressData,
-} from 'src/v2/features/campaign-progression/campaign-progression.models';
-import { CampaignsProgressionService } from 'src/v2/features/campaign-progression/campaign-progression.service';
-import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+import { BattleSavings, CampaignData, CampaignsProgressData } from './campaign-progression.models';
+import { CampaignsProgressionService } from './campaign-progression.service';
 
 interface Props {
     campaignData: CampaignData;

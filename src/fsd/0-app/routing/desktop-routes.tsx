@@ -2,8 +2,8 @@
 import { RouteObject } from 'react-router-dom';
 
 import { versusLazyRoute } from '@/fsd/1-pages/learn-versus';
+import { campaignProgressionLazyRoute } from '@/fsd/1-pages/plan-campaign-progression';
 import { guildApiLazyRoute } from '@/v2/pages/guild-api/guild-api.route';
-import { campaignProgressionLazyRoute } from 'src/v2/pages/campaign-progression/campaign-progression.route';
 import { dirtyDozenLazyRoute } from 'src/v2/pages/dirty-dozen/dirty-dozen.route';
 import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
 import { guidesLazyRoute } from 'src/v2/pages/guides/guides.route';

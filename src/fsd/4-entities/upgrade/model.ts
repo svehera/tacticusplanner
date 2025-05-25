@@ -113,5 +113,23 @@ export interface IMaterialRecipeIngredient {
     count: number;
 }
 
+/**
+ * Holds the fully-expanded recipe for an upgrade material. One can then
+ * reference the necessary IBaseUpgrade objects to get the full details.
+ * That is, to say, expandedRecipe contains only uncraftable materials. If
+ * this material is already uncraftable, expandedRecipe is empty.
+ */
+export interface IRecipeExpandedUpgrade {
+    id: string;
+    label: string;
+    rarity: Rarity;
+    iconPath: string;
+    expandedRecipe: Record<string, number>;
+    crafted: boolean;
+    stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
+}
+
+export type IRecipeExpandedUpgradeData = Record<string, IRecipeExpandedUpgrade>;
+
 export type IBaseUpgradeData = Record<string, IBaseUpgrade>;
 export type ICraftedUpgradeData = Record<string, ICraftedUpgrade>;

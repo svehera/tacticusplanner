@@ -12,8 +12,8 @@ import TableChartIcon from '@mui/icons-material/TableChart';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import React from 'react';
 
+import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 import { guildApiMenuItem } from '@/v2/pages/guild-api/guild-api.menu-item';
-import { campaignProgressionMenuItem } from 'src/v2/pages/campaign-progression/campaign-progression.menu-item';
 import { dirtyDozenMenuItem } from 'src/v2/pages/dirty-dozen/dirty-dozen.menu-item';
 import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
 import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';

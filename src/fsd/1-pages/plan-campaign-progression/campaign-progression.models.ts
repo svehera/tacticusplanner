@@ -1,5 +1,4 @@
-import { CampaignType } from 'src/models/enums';
-import { ICampaignBattleComposed } from 'src/models/interfaces';
+import { CampaignType, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 
 /**
  * Information about farming a particular material.

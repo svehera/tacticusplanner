@@ -80,23 +80,6 @@ export const charsProgression: Record<number, ICharProgression> = {
     [Rarity.Legendary + RarityStars.BlueStar]: { shards: 500, orbs: 20, rarity: Rarity.Legendary },
 };
 
-export const charsUnlockShards: Record<Rarity, number> = {
-    [Rarity.Common]: 40,
-    [Rarity.Uncommon]: 80,
-    [Rarity.Rare]: 130,
-    [Rarity.Epic]: 250,
-    [Rarity.Legendary]: 500,
-};
-
-export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {
-    [CharacterReleaseRarity.Common]: 40,
-    [CharacterReleaseRarity.Uncommon]: 100,
-    [CharacterReleaseRarity.Rare]: 280,
-    [CharacterReleaseRarity.Epic]: 400,
-    [CharacterReleaseRarity.LegendaryOld]: 150,
-    [CharacterReleaseRarity.Legendary]: 400,
-};
-
 const defaultCampaignsProgress: ICampaignsProgress = {
     Indomitus: 75,
     'Indomitus Mirror': 75,
@@ -364,3 +347,5 @@ export const rarityToStars = RarityMapper.toStars;
 export const rarityToMaxStars = RarityMapper.toMaxStars;
 export const rarityToMaxRank = RarityMapper.toMaxRank;
 export const rarityStringToNumber = RarityMapper.stringToNumber;
+
+export { charsUnlockShards, charsReleaseShards } from '@/fsd/4-entities/character';

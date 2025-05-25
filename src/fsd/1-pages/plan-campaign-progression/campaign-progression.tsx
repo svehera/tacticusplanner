@@ -5,25 +5,27 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
+// eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
 
-import { CampaignImage } from '@/fsd/4-entities/campaign/campaign.icon';
-
-import { CampaignData } from 'src/v2/features/campaign-progression/campaign-progression.models';
-import { CampaignsProgressionService } from 'src/v2/features/campaign-progression/campaign-progression.service';
+import { CampaignImage } from '@/fsd/4-entities/campaign';
 import {
     ICharacterUpgradeRankGoal,
     ICharacterUpgradeMow,
     ICharacterUnlockGoal,
     ICharacterAscendGoal,
-} from 'src/v2/features/goals/goals.models';
+} from '@/fsd/4-entities/goal';
+
+// eslint-disable-next-line import-x/no-internal-modules
 import { GoalsService } from 'src/v2/features/goals/goals.service';
 
-import { CampaignProgressionAscensionGoals } from 'src/v2/pages/campaign-progression/campaign-progression-ascension-goals';
-import { CampaignProgressionHeader } from 'src/v2/pages/campaign-progression/campaign-progression-header';
-import { CampaignProgressionMaterialGoals } from 'src/v2/pages/campaign-progression/campaign-progression-material-goals';
-import { CampaignProgressionRankupGoals } from 'src/v2/pages/campaign-progression/campaign-progression-rankup-goals';
-import { CampaignProgressionUnfarmableMaterials } from 'src/v2/pages/campaign-progression/campaign-progression-unfarmable-materials';
+import { CampaignProgressionAscensionGoals } from './campaign-progression-ascension-goals';
+import { CampaignProgressionHeader } from './campaign-progression-header';
+import { CampaignProgressionMaterialGoals } from './campaign-progression-material-goals';
+import { CampaignProgressionRankupGoals } from './campaign-progression-rankup-goals';
+import { CampaignProgressionUnfarmableMaterials } from './campaign-progression-unfarmable-materials';
+import { CampaignData } from './campaign-progression.models';
+import { CampaignsProgressionService } from './campaign-progression.service';
 
 export const CampaignProgression = () => {
     const { goals, characters, mows, campaignsProgress } = useContext(StoreContext);

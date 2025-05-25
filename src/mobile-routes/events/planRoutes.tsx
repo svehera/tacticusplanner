@@ -10,7 +10,7 @@ import { menuItemById } from 'src/models/menu-items';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
-import { campaignProgressionMenuItem } from 'src/v2/pages/campaign-progression/campaign-progression.menu-item';
+import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 
 enum SelectedRoutes {
     all,
