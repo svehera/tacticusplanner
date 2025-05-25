@@ -1,11 +1,9 @@
-// eslint-disable-next-line import-x/no-internal-modules
-import { ICharacter2 } from '@/models/interfaces';
-
+import { ICharacter2 } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 import {
     AunShiLegendaryEvent,
-    UnknownLegendaryEvent,
+    TrajannLegendaryEvent,
     DanteLegendaryEvent,
     KharnLegendaryEvent,
     MephistonLegendaryEvent,
@@ -19,8 +17,8 @@ export const getLre = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
     switch (id) {
         case LegendaryEventEnum.AunShi:
             return new AunShiLegendaryEvent(characters);
-        case LegendaryEventEnum.Unknown:
-            return new UnknownLegendaryEvent(characters);
+        case LegendaryEventEnum.Trajann:
+            return new TrajannLegendaryEvent(characters);
         case LegendaryEventEnum.Dante:
             return new DanteLegendaryEvent(characters);
         case LegendaryEventEnum.Kharn:

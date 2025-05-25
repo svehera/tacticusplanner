@@ -1,5 +1,6 @@
 import armourIcon from './armour.webp';
 import blackstoneIcon from './blackstone.png';
+import blueStar from './blue star.png';
 import deploymentIcon from './deployment.png';
 import damageIcon from './dmg.webp';
 import energyIcon from './energy.png';
@@ -9,6 +10,8 @@ import meleeIcon from './melee.png';
 import mowIcon from './mow.png';
 import powerIcon from './power.png';
 import rangedIcon from './ranged.png';
+import redStar from './red star small.png';
+import goldStar from './star small.png';
 import warTokenIcon from './warToken.png';
 
 export const tacticusIcons = {
@@ -60,4 +63,10 @@ export const tacticusIcons = {
         file: hitsIcon,
         label: 'Hits',
     },
+};
+
+export const starsIcons = {
+    blueStar,
+    redStar,
+    goldStar,
 };

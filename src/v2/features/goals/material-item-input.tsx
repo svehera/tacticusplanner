@@ -2,7 +2,8 @@
 import React from 'react';
 
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
+
+import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
 import { IUpgradeRaid, IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';

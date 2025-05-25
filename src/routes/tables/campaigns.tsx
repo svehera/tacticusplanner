@@ -6,14 +6,15 @@ import { uniq } from 'lodash';
 import React, { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { Campaign } from 'src/models/enums';
+import { Campaign } from '@/models/enums';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
 import { FactionImage } from 'src/v2/components/images/faction-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 import { useQueryState } from 'src/v2/hooks/query-state';
+
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { CampaignBattle } from './campaign-battle';
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
@@ -78,7 +79,7 @@ export const Campaigns = () => {
             cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
                 const { rarityEnum, dropRate } = params.data ?? {};
                 if (typeof rarityEnum === 'number' && rarityEnum >= 0) {
-                    return <RarityImage rarity={rarityEnum} />;
+                    return <RarityIcon rarity={rarityEnum} />;
                 } else if (dropRate) {
                     return 'Shard';
                 }

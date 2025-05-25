@@ -5,21 +5,21 @@ import { AgGridReact } from 'ag-grid-react';
 import React, { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { rarityStringToNumber } from 'src/models/constants';
+import { rarityStringToNumber } from '@/models/constants';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
 import { useFitGridOnWindowResize, stringToRank } from 'src/shared-logic/functions';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 
-import { Rarity, RarityString } from '@/fsd/5-shared/model';
-import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { Rarity, RarityString, Rank } from '@/fsd/5-shared/model';
+import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
-import { Rank, CharacterShardIcon } from '@/fsd/4-entities/character';
+import { CampaignsService } from '@/fsd/4-entities/campaign';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
+import { UpgradesService } from '@/fsd/4-entities/upgrade';
+import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
-import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
 import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';
 
 type Selection = 'Craftable' | 'Base Upgrades';
@@ -63,12 +63,12 @@ export const Upgrades = () => {
                         <div key={x.id} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                             <Tooltip title={x.id}>
                                 <span>
-                                    <CharacterShardIcon icon={x.icon} name={x.id} height={30} />
+                                    <UnitShardIcon icon={x.icon} name={x.id} height={30} />
                                 </span>
                             </Tooltip>
                             <div>
                                 {x.ranks.map(rank => (
-                                    <RankImage key={rank} rank={rank} />
+                                    <RankIcon key={rank} rank={rank} />
                                 ))}
                             </div>
                         </div>
@@ -118,7 +118,7 @@ export const Upgrades = () => {
                 cellRenderer: (params: ICellRendererParams<IUpgradesTableRow>) => {
                     const { data } = params;
                     if (data) {
-                        return <RarityImage rarity={data.rarity} />;
+                        return <RarityIcon rarity={data.rarity} />;
                     }
                 },
                 cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),
@@ -185,8 +185,8 @@ export const Upgrades = () => {
     }, [selection, showCharacters]);
 
     const rowsData = useMemo(() => {
-        const upgradesLocations = UpgradesService.getUpgradesLocations();
-        const upgrades = Object.values(StaticDataService.recipeData);
+        const upgradesLocations = CampaignsService.getUpgradesLocations();
+        const upgrades = Object.values(UpgradesService.recipeDataByName);
 
         const result: IUpgradesTableRow[] = upgrades.map(x => {
             const characters: Array<{
@@ -216,7 +216,9 @@ export const Upgrades = () => {
                 }
             }
 
-            const locations = upgradesLocations[x.material]?.map(x => StaticDataService.campaignsComposed[x]);
+            const locations = upgradesLocations[x.material]?.map(
+                (locationId: string) => CampaignsService.campaignsComposed[locationId]
+            );
             const partOf = upgrades
                 .filter(m => m.recipe?.some(u => u.material === x.material) ?? false)
                 .map(u => u.label ?? u.material)

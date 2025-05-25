@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IShardsRaid } from 'src/v2/features/goals/goals.models';
 
@@ -12,7 +12,7 @@ export const ShardItemTitle: React.FC<Props> = ({ shardRaid }) => {
     return (
         <div className="flex-box gap10">
             <div className="flex-box column" style={{ fontSize: 16 }}>
-                <CharacterShardIcon icon={shardRaid.iconPath} />
+                <UnitShardIcon icon={shardRaid.iconPath} />
                 <span>
                     {shardRaid.acquiredCount}/{shardRaid.requiredCount}
                 </span>

@@ -24,14 +24,14 @@ import Typography from '@mui/material/Typography';
 import React, { useCallback, useContext } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { CampaignType, DailyRaidsStrategy } from 'src/models/enums';
+import { DailyRaidsStrategy } from 'src/models/enums';
 import { DailyRaidsCustomLocations } from 'src/shared-components/daily-raids-custom-locations';
 
 import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CampaignGroupType } from 'src/v2/features/campaigns/campaigns.enums';
+import { CampaignType, CampaignGroupType } from '@/fsd/4-entities/campaign';
 
 import { ICustomDailyRaidsSettings, IDailyRaidsPreferences } from '../models/interfaces';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';

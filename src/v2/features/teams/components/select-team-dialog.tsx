@@ -12,10 +12,11 @@ import { IMenuOption } from 'src/v2/models/menu-option';
 
 import { Rarity, Alliance } from '@/fsd/5-shared/model';
 
+import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
+
 import { IMow, IUnit } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
-import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 import { TeamView } from 'src/v2/features/teams/components/team-view';
 
 type Props = {

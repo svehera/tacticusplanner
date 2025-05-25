@@ -1,10 +1,8 @@
 import React, { JSX, useMemo } from 'react';
 
-import { IDetailedEnemy } from 'src/models/interfaces';
+import { IDetailedEnemy } from '@/models/interfaces';
 
-import { Rarity } from '@/fsd/5-shared/model';
-
-import { Rank } from '@/fsd/4-entities/character';
+import { Rarity, Rank } from '@/fsd/5-shared/model';
 
 import { NpcPortrait } from './npc-portrait';
 

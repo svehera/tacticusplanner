@@ -6,14 +6,13 @@ import { INpcData } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 import { RankSelect } from 'src/shared-components/rank-select';
 import { StarsSelect } from 'src/shared-components/stars-select';
-import { getEnumValues, getImageUrl, useFitGridOnWindowResize } from 'src/shared-logic/functions';
+import { getImageUrl, useFitGridOnWindowResize } from 'src/shared-logic/functions';
 import { FactionImage } from 'src/v2/components/images/faction-image';
-import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
 
-import { RarityStars } from '@/fsd/5-shared/model';
+import { getEnumValues } from '@/fsd/5-shared/lib';
+import { Faction, Rank, RarityStars } from '@/fsd/5-shared/model';
 
-import { Rank } from '@/fsd/4-entities/character';
-import { Faction } from '@/fsd/4-entities/faction';
+import { StatsCalculatorService } from '@/fsd/4-entities/character';
 
 import { StatCell } from '../characters/stat-cell';
 
@@ -122,7 +121,7 @@ export const NpcInfo: React.FC = () => {
                             <li>Chance: {npc.critChance! * 100}%</li>
                             <li>
                                 Damage:
-                                {StatCalculatorService.calculateStat(npc.critDamage!, npc.name, stars, rank, 0)}
+                                {StatsCalculatorService.calculateStat(npc.critDamage!, npc.name, stars, rank, 0)}
                             </li>
                         </ul>
                     );
@@ -139,7 +138,7 @@ export const NpcInfo: React.FC = () => {
                             <li>Chance: {npc.blockChance! * 100}%</li>
                             <li>
                                 Damage:
-                                {StatCalculatorService.calculateStat(npc.blockDamage!, npc.name, stars, rank, 0)}
+                                {StatsCalculatorService.calculateStat(npc.blockDamage!, npc.name, stars, rank, 0)}
                             </li>
                         </ul>
                     );

@@ -13,14 +13,14 @@ import { PersonalGoalType } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 import { CampaignImage } from 'src/v2/components/images/campaign-image';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { StarsImage } from 'src/v2/components/images/stars-image';
 
+import { Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
-import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
 
-import { CharacterShardIcon, Rank } from '@/fsd/4-entities/character';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/goals.models';
@@ -70,16 +70,16 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             <div className="flex-box gap5">
                                 {!isSameRarity && (
                                     <>
-                                        <RarityImage rarity={goal.rarityStart} /> <ArrowForward />
-                                        <RarityImage rarity={goal.rarityEnd} />
-                                        {!isMinStars && <StarsImage stars={goal.starsEnd} />}
+                                        <RarityIcon rarity={goal.rarityStart} /> <ArrowForward />
+                                        <RarityIcon rarity={goal.rarityEnd} />
+                                        {!isMinStars && <StarsIcon stars={goal.starsEnd} />}
                                     </>
                                 )}
 
                                 {isSameRarity && (
                                     <>
-                                        <StarsImage stars={goal.starsStart} /> <ArrowForward />
-                                        <StarsImage stars={goal.starsEnd} />
+                                        <StarsIcon stars={goal.starsStart} /> <ArrowForward />
+                                        <StarsIcon stars={goal.starsEnd} />
                                     </>
                                 )}
                             </div>
@@ -126,12 +126,12 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                     <div>
                         <div className="flex-box between">
                             <div className="flex-box gap3">
-                                <RankImage rank={goal.rankStart} /> <ArrowForward />
-                                <RankImage rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
+                                <RankIcon rank={goal.rankStart} /> <ArrowForward />
+                                <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
                                 {!!goal.upgradesRarity.length && (
                                     <div className="flex-box gap3">
                                         {goal.upgradesRarity.map(x => (
-                                            <RarityImage key={x} rarity={x} />
+                                            <RarityIcon key={x} rarity={x} />
                                         ))}
                                     </div>
                                 )}
@@ -188,7 +188,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                             {!!goal.upgradesRarity.length && (
                                 <div className="flex-box gap3">
                                     {goal.upgradesRarity.map(x => (
-                                        <RarityImage key={x} rarity={x} />
+                                        <RarityIcon key={x} rarity={x} />
                                     ))}
                                 </div>
                             )}
@@ -328,7 +328,7 @@ export const GoalCard: React.FC<Props> = ({ goal, menuItemSelect, goalEstimate: 
                 title={
                     <div className="flex-box gap5">
                         <span>#{goal.priority}</span>
-                        <CharacterShardIcon icon={goal.unitIcon} height={30} />
+                        <UnitShardIcon icon={goal.unitIcon} height={30} />
                         <span style={{ fontSize: '1.2rem' }}>{goal.unitName}</span>
                     </div>
                 }

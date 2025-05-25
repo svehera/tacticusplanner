@@ -2,14 +2,11 @@ import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import React, { useMemo } from 'react';
 
-import { Equipment } from 'src/models/enums';
 import { EquipmentType } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 import { getImageUrl } from 'src/shared-logic/functions';
 
-import { Rarity } from '@/fsd/5-shared/model';
-
-import { Faction } from '@/fsd/4-entities/faction';
+import { Equipment, Faction, Rarity } from '@/fsd/5-shared/model';
 
 import { IEquipmentSpec } from './versus-interfaces';
 
@@ -77,12 +74,15 @@ export const EquipmentSelect: React.FC<Props> = ({ faction, equipment, maxRarity
     return (
         <FormControl fullWidth>
             <InputLabel>{Equipment[equipment.type as keyof typeof EquipmentType]}</InputLabel>
-            <Select<IEquipmentSpec>
+            <Select<string>
                 label={''}
-                value={availableEquipment[equipmentIndex]}
-                onChange={event => onEquipmentChange(event.target.value as IEquipmentSpec)}>
+                value={JSON.stringify(availableEquipment[equipmentIndex])}
+                onChange={event => onEquipmentChange(JSON.parse(event.target.value) as IEquipmentSpec)}>
                 {availableEquipment.map(equipment => (
-                    <MenuItem key={getMenuItemKey(equipment)} onClick={() => onEquipmentChange(equipment)}>
+                    <MenuItem
+                        key={getMenuItemKey(equipment)}
+                        value={JSON.stringify(equipment)}
+                        onClick={() => onEquipmentChange(equipment)}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>{getDisplay(equipment)}</div>
                     </MenuItem>
                 ))}

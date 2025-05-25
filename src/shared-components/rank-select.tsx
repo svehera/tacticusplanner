@@ -2,11 +2,9 @@
 import InputLabel from '@mui/material/InputLabel';
 import React from 'react';
 
-import { RankImage } from 'src/v2/components/images/rank-image';
+import { Rank, rankToString } from '@/fsd/5-shared/model';
 
-import { Rank } from '@/fsd/4-entities/character';
-
-import { rankToString } from '../shared-logic/functions';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
 export const RankSelect = ({
     rankValues,
@@ -27,7 +25,7 @@ export const RankSelect = ({
                     <MenuItem key={rank} value={rank}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
                             <span>{rankToString(rank)}</span>
-                            <RankImage rank={rank} />
+                            <RankIcon rank={rank} />
                         </div>
                     </MenuItem>
                 ))}

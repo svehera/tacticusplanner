@@ -1,6 +1,7 @@
 ﻿import { v4 } from 'uuid';
 
-import { Rank } from '@/fsd/4-entities/character';
+import { Rank } from '@/fsd/5-shared/model';
+
 import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
 
 import { getLre } from '@/fsd/3-features/lre';

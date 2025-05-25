@@ -3,9 +3,11 @@ import React from 'react';
 
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+
+import { UpgradesService } from '@/fsd/4-entities/upgrade';
+import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
@@ -16,14 +18,14 @@ interface Props {
 
 export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
     const getReward = () => {
-        const upgrade = StaticDataService.recipeDataFull[battle.reward];
+        const upgrade = UpgradesService.recipeDataFull[battle.reward];
         if (upgrade) {
             const character = StaticDataService.getUnit(upgrade.label);
             if (character) {
                 return (
                     <div>
                         <Tooltip title={upgrade.label}>
-                            <CharacterShardIcon
+                            <UnitShardIcon
                                 icon={character.icon}
                                 name={upgrade.label}
                                 height={30}

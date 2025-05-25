@@ -2,7 +2,7 @@
 
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
 
-import { Faction } from '@/fsd/4-entities/faction';
+import { Faction } from '@/fsd/5-shared/model';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { grEncounterToFaction, guildRaidBosses, guildRaidPrimes } from 'src/v2/features/teams/teams.constants';

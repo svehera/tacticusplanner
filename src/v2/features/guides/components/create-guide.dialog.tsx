@@ -9,8 +9,10 @@ import { useTranslation } from 'react-i18next';
 import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
 import { RichTextEditor } from 'src/v2/components/inputs/rich-text-editor';
 
-import { IUnit } from 'src/v2/features/characters/characters.models';
-import { UnitType } from 'src/v2/features/characters/units.enums';
+import { UnitType } from '@/fsd/5-shared/model';
+
+import { IUnit } from '@/fsd/4-entities/unit';
+
 import { GuildRaidsModes } from 'src/v2/features/guides/components/gr-modes';
 import { GuidePreview } from 'src/v2/features/guides/components/guide-preview';
 import { IncursionModes } from 'src/v2/features/guides/components/incursion-modes';

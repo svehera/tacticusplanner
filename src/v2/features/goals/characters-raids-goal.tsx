@@ -4,13 +4,13 @@ import React from 'react';
 
 import { rarityToStars } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { StarsImage } from 'src/v2/components/images/stars-image';
 
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
 import { CharacterRaidGoalSelect } from 'src/v2/features/goals/goals.models';
 
@@ -32,16 +32,16 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                         <div className="flex-box gap5">
                             {!isSameRarity && (
                                 <>
-                                    <RarityImage rarity={goal.rarityStart} /> <ArrowForward />
-                                    <RarityImage rarity={goal.rarityEnd} />
-                                    {!isMinStars && <StarsImage stars={goal.starsEnd} />}
+                                    <RarityIcon rarity={goal.rarityStart} /> <ArrowForward />
+                                    <RarityIcon rarity={goal.rarityEnd} />
+                                    {!isMinStars && <StarsIcon stars={goal.starsEnd} />}
                                 </>
                             )}
 
                             {isSameRarity && (
                                 <>
-                                    <StarsImage stars={goal.starsStart} /> <ArrowForward />
-                                    <StarsImage stars={goal.starsEnd} />
+                                    <StarsIcon stars={goal.starsStart} /> <ArrowForward />
+                                    <StarsIcon stars={goal.starsEnd} />
                                 </>
                             )}
                         </div>
@@ -52,12 +52,12 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                 return (
                     <AccessibleTooltip title={"Upgrade character's rank"}>
                         <div className="flex-box gap3">
-                            <RankImage rank={goal.rankStart} /> <ArrowForward />
-                            <RankImage rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
+                            <RankIcon rank={goal.rankStart} /> <ArrowForward />
+                            <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
                             {!!goal.upgradesRarity.length && (
                                 <div className="flex-box gap3">
                                     {goal.upgradesRarity.map(x => (
-                                        <RarityImage key={x} rarity={x} />
+                                        <RarityIcon key={x} rarity={x} />
                                     ))}
                                 </div>
                             )}
@@ -89,7 +89,7 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                         {!!goal.upgradesRarity.length && (
                             <div className="flex-box gap3">
                                 {goal.upgradesRarity.map(x => (
-                                    <RarityImage key={x} rarity={x} />
+                                    <RarityIcon key={x} rarity={x} />
                                 ))}
                             </div>
                         )}
@@ -112,7 +112,7 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                     </IconButton>
                     <AccessibleTooltip title={goal.unitName}>
                         <div>
-                            <CharacterShardIcon icon={goal.unitIcon} name={goal.unitName} />
+                            <UnitShardIcon icon={goal.unitIcon} name={goal.unitName} />
                         </div>
                     </AccessibleTooltip>
                     {getGoalInfo(goal)}

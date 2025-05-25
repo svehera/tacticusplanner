@@ -4,9 +4,9 @@ import React, { useState, useEffect, useMemo } from 'react';
 
 import { IGuildMember } from '@/models/interfaces';
 import { ITableRow } from '@/routes/legendary-events/legendary-events.interfaces';
-import { RarityImage } from '@/v2/components/images/rarity-image';
 
 import { Rarity } from '@/fsd/5-shared/model';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { getTacticusGuildRaidData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
 
@@ -226,7 +226,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             width: 80,
             cellRenderer: (props: ICellRendererParams<TacticusGuildRaidEntry>) => {
                 const rarity = props.value ?? 0;
-                return <RarityImage rarity={rarity} />;
+                return <RarityIcon rarity={rarity} />;
             },
         },
         {
@@ -397,32 +397,8 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
     const stats = calculateStats();
 
-    if (loading) {
-        return (
-            <div className="flex items-center justify-center h-64">
-                <div className="text-muted-fg">Loading raid data...</div>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="bg-danger/20 border border-danger/70 text-danger-fg px-4 py-3 rounded">
-                <p>{error}</p>
-            </div>
-        );
-    }
-
-    if (!raidData) {
-        return (
-            <div className="bg-warning/20 border border-warning/70 text-warning-fg px-4 py-3 rounded">
-                <p>No raid data available.</p>
-            </div>
-        );
-    }
-
     // Get unique tiers for filter dropdown
-    const units = [...new Set(raidData.entries.map(entry => entry.unitId))].sort();
+    const units = raidData === null ? [] : [...new Set(raidData.entries.map(entry => entry.unitId))].sort();
 
     // Add this component near other renderers
     const BombStatusRenderer: React.FC<{ data: UserSummary }> = ({ data }) => {
@@ -613,6 +589,8 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     ];
 
     const summaryData = useMemo(() => {
+        if (raidData === null) return [];
+
         const now = Date.now();
 
         // Worst case scenario: season started at first damage
@@ -705,6 +683,30 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
         return Array.from(userMap.values());
     }, [filteredEntries]);
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center h-64">
+                <div className="text-muted-fg">Loading raid data...</div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="bg-danger/20 border border-danger/70 text-danger-fg px-4 py-3 rounded">
+                <p>{error}</p>
+            </div>
+        );
+    }
+
+    if (!raidData) {
+        return (
+            <div className="bg-warning/20 border border-warning/70 text-warning-fg px-4 py-3 rounded">
+                <p>No raid data available.</p>
+            </div>
+        );
+    }
 
     return (
         <div className="container mx-auto p-4">

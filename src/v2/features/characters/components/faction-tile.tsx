@@ -1,16 +1,18 @@
 ﻿import React, { useContext, useMemo } from 'react';
 
 import { FactionImage } from 'src/v2/components/images/faction-image';
-import { numberToThousandsString, numberToThousandsStringOld } from 'src/v2/functions/number-to-thousands-string';
 
+import { numberToThousandsString, numberToThousandsStringOld } from '@/fsd/5-shared/lib';
+import { UnitType } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
+import { IUnit } from '@/fsd/4-entities/unit';
+
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { MowTile } from 'src/v2/features/characters/components/mow-tile';
-import { UnitType } from 'src/v2/features/characters/units.enums';
 
-import { IFaction, IUnit } from '../characters.models';
+import { IFaction } from '../characters.models';
 
 import { CharacterTile } from './character-tile';
 
@@ -25,7 +27,6 @@ export const FactionsTile = ({
 }) => {
     const factionPower = numberToThousandsString(faction.power);
     const factionValue = numberToThousandsString(faction.bsValue);
-    const isCompleteFaction = faction.units.length >= 5;
     const factionClass = useMemo(() => {
         const isComplete = faction.units.length === 5;
         const isIncomplete = faction.units.length < 5;

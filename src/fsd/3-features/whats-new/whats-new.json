@@ -1,6 +1,26 @@
 ﻿{
-    "currentVersion": "1.7.3",
+    "currentVersion": "1.7.4",
     "releaseNotes": [
+        {
+            "version": "1.7.4",
+            "date": "May 24",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "(laserian403) Added Adeptus Custodes faction to the planner, and their 3 new units - Aesoth, Kariyan and Trajann"
+                },
+                {
+                    "text": "(laserian403) Added Healer/Mechanic trait icons to LRE planner",
+                    "images": [{ "path": "icons.png" }]
+                }
+            ],
+            "minor": [],
+            "bugFixes": [
+                {
+                    "text": "(Hecubha) Fixed React hooks error in learn > guild page"
+                }
+            ]
+        },
         {
             "version": "1.7.3",
             "date": "April 29",

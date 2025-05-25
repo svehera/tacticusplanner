@@ -14,9 +14,9 @@ import {
 } from 'src/models/interfaces';
 import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rarity, Rank } from '@/fsd/5-shared/model';
 
-import { CharacterBias, Rank } from '@/fsd/4-entities/character';
+import { CharacterBias } from '@/fsd/4-entities/character';
 
 import { LreTile } from 'src/v2/features/lre/lre-tile';
 
@@ -151,6 +151,12 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
             value: viewSettings.lreTileShowUnitBias,
             disabled: false,
         },
+        {
+            label: 'Healer/Mechanic',
+            key: 'lreTileShowUnitHealTraits',
+            value: viewSettings.lreTileShowUnitHealTraits,
+            disabled: false,
+        },
     ];
 
     const renderOption = (option: IViewOption<ILreViewSettings & ILreTileSettings & IAutoTeamsPreferences>) => {
@@ -180,6 +186,7 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
         rarity: Rarity.Legendary,
         activeAbilityLevel: 35,
         passiveAbilityLevel: 35,
+        traits: ['Act of Faith', 'Healer'],
     } as ICharacter2;
 
     return (

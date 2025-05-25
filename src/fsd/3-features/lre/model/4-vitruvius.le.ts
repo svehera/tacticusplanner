@@ -1,10 +1,6 @@
-﻿// eslint-disable-next-line import-x/no-internal-modules
-import { ICharacter2 } from '@/models/interfaces';
+﻿import { Alliance, DamageType, Trait, Faction } from '@/fsd/5-shared/model';
 
-import { Alliance } from '@/fsd/5-shared/model';
-
-import { DamageType, Trait } from '@/fsd/4-entities/character';
-import { Faction } from '@/fsd/4-entities/faction';
+import { ICharacter2 } from '@/fsd/4-entities/character';
 import { vitruvius as staticData } from '@/fsd/4-entities/lre';
 
 import { ILegendaryEventTrack } from '../lre.model';

@@ -8,9 +8,9 @@ import { isMobile } from 'react-device-detect';
 
 import { ICharacter2 } from 'src/models/interfaces';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { IMow } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
@@ -126,7 +126,7 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
                     title={
                         <span style={{ fontSize: '1.2rem' }}>
                             <div className="flex-box gap5" style={{ fontSize: 18 }}>
-                                <RarityImage rarity={team.rarityCap} />
+                                <RarityIcon rarity={team.rarityCap} />
                                 <span>{team.name}</span>
                             </div>
                         </span>
