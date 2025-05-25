@@ -1,8 +1,7 @@
-import { EquipmentType } from 'src/models/interfaces';
-
 import { RarityStars, Rarity, DamageType, Faction, Rank, Trait } from '@/fsd/5-shared/model';
 
 import { CharactersService, ICharacterData } from '@/fsd/4-entities/character';
+import { EquipmentType } from '@/fsd/4-entities/equipment';
 import { INpcData, NpcService } from '@/fsd/4-entities/npc';
 import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 

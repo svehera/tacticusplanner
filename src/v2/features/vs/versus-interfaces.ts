@@ -1,4 +1,4 @@
-import { EquipmentType, IEquipment } from 'src/models/interfaces';
+import { EquipmentType, IEquipment } from '@/fsd/4-entities/equipment';
 
 /**
  * Holds the selected equipment. If equipment is undefined, it means the user

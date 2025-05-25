@@ -2,11 +2,10 @@ import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import React, { useMemo } from 'react';
 
-import { EquipmentType } from 'src/models/interfaces';
-import { StaticDataService } from 'src/services';
-import { getImageUrl } from 'src/shared-logic/functions';
-
 import { Equipment, Faction, Rarity } from '@/fsd/5-shared/model';
+import { getImageUrl } from '@/fsd/5-shared/ui';
+
+import { EquipmentService, EquipmentType } from '@/fsd/4-entities/equipment';
 
 import { IEquipmentSpec } from './versus-interfaces';
 
@@ -26,7 +25,7 @@ export const EquipmentSelect: React.FC<Props> = ({ faction, equipment, maxRarity
     const availableEquipment = useMemo((): IEquipmentSpec[] => {
         const newEquipment: IEquipmentSpec[] = [];
         newEquipment.push({ type: equipment.type } as IEquipmentSpec);
-        StaticDataService.equipmentData.forEach(equip => {
+        EquipmentService.equipmentData.forEach(equip => {
             if (equip.factions.find(otherFaction => faction == otherFaction) == undefined) return;
             if (equip.slot != equipment.type) return;
             if (equip.rarity > maxRarity) return;
@@ -50,9 +49,9 @@ export const EquipmentSelect: React.FC<Props> = ({ faction, equipment, maxRarity
 
     const getIcon = (equipment: IEquipmentSpec) => {
         if (equipment.equipment == undefined) {
-            return getImageUrl(StaticDataService.getEquipmentTypeIconPath(equipment.type));
+            return getImageUrl(EquipmentService.getEquipmentTypeIconPath(equipment.type));
         }
-        return getImageUrl(StaticDataService.getEquipmentIconPath(equipment.equipment));
+        return getImageUrl(EquipmentService.getEquipmentIconPath(equipment.equipment));
     };
 
     const getDisplay = (equipment: IEquipmentSpec) => {
