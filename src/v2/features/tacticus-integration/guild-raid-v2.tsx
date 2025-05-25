@@ -1,4 +1,11 @@
-import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham, ValueGetterParams } from 'ag-grid-community';
+import {
+    AllCommunityModule,
+    ColDef,
+    ICellRendererParams,
+    ITooltipParams,
+    themeBalham,
+    ValueGetterParams,
+} from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState, useEffect, useMemo } from 'react';
 
@@ -69,6 +76,7 @@ const millisecondsPerToken = TOKEN_REGEN_HOURS * HOUR;
 interface TokenStatus {
     count: number;
     reloadStart: number;
+    exact: boolean;
 }
 
 const updateTokenTo = (tokenState: TokenStatus, time: number): void => {
@@ -79,6 +87,7 @@ const updateTokenTo = (tokenState: TokenStatus, time: number): void => {
         tokenState.count = MAX_TOKEN;
         // Reload hasn't started before `time`
         tokenState.reloadStart = time;
+        tokenState.exact = true;
     } else {
         // reload started when last token was restored
         tokenState.reloadStart += restored * millisecondsPerToken;
@@ -490,6 +499,13 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                 return tokenStatus2.reloadStart - tokenStatus1.reloadStart;
             },
             width: 120,
+            tooltipValueGetter: (param: ITooltipParams) => {
+                if (param.data.tokenStatus.exact) {
+                    return 'Token estimation should be exact unless tokens were lost or restored';
+                } else {
+                    return 'Token estimation is pessimistic by up to 12 hours';
+                }
+            },
         },
         {
             field: 'totalDamageDealt',
@@ -608,6 +624,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                     tokenStatus: {
                         count: 2,
                         reloadStart: seasonStart,
+                        exact: false,
                     },
                     totalDamageDealt: 0,
                     battleBossCount: 0,
@@ -883,6 +900,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                         defaultColDef={{
                             resizable: true,
                         }}
+                        tooltipShowDelay={500}
                     />
                 </div>
             </div>
