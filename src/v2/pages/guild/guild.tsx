@@ -69,35 +69,12 @@ export const Guild: React.FC = () => {
         }
     };
 
-    const syncGuild = (members: IGuildMember[]) => {
-        useEffect(() => {
-            getTacticusGuildData()
-                .then(response => {
-                    setGuildData(response.data?.guild ?? null);
-                    setLoading(false);
-                })
-                .catch(error => {
-                    setError(error);
-                });
-        }, []);
-    };
-
     return (
         <FlexBox style={{ flexDirection: 'column' }} gap={10}>
             {loading && <LoaderWithText loading={true} />}
             <FlexBox justifyContent={'center'} gap={10} style={{ marginTop: 10 }}>
                 <ImportGuildExcel onImport={saveGuildMembers} />
                 <ImportUserLink onImport={importViaLink} />
-                <Button
-                    variant={'contained'}
-                    onClick={() => {
-                        if (editMode) {
-                            saveGuildMembers(editedMembers);
-                        }
-                        setEditMode(value => !value);
-                    }}>
-                    Sync guild
-                </Button>
                 <Tooltip
                     title={'Populate Usernames and share tokens from the planner app'}
                     open={editMode}
