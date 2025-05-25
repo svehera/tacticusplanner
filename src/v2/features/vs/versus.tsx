@@ -2,9 +2,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import React, { useMemo, useState } from 'react';
 
-import { EquipmentType } from 'src/models/interfaces';
-
 import { RarityStars, Rarity, Faction, Rank } from '@/fsd/5-shared/model';
+
+import { EquipmentType } from '@/fsd/4-entities/equipment';
 
 import { DamageChart } from './damage-chart';
 import { FullCharacter } from './full-character';

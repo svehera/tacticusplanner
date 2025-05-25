@@ -7,11 +7,11 @@ import { isMobile } from 'react-device-detect';
 
 import { CampaignType } from 'src/models/enums';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
-import { StaticDataService } from 'src/services/static-data.service';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { CharactersService } from '@/fsd/4-entities/character';
 import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
 import {
@@ -348,10 +348,10 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                                 return (
                                     <span key={unitId + '-' + savings.battle.reward + '-' + savings.battle.id}>
                                         <UnitShardIcon
-                                            icon={StaticDataService.getUnit(unitId)?.icon ?? '(undefined)'}
+                                            icon={CharactersService.getUnit(unitId)?.icon ?? '(undefined)'}
                                             height={30}
                                             width={30}
-                                            tooltip={StaticDataService.getUnit(unitId)?.icon}
+                                            tooltip={CharactersService.getUnit(unitId)?.icon}
                                         />
                                     </span>
                                 );

@@ -1,10 +1,11 @@
 ﻿import React, { useEffect } from 'react';
 
 import { NumberInput } from 'src/v2/components/inputs/number-input';
-import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
-import { useQueryState } from 'src/v2/hooks/query-state';
 
+import { useQueryState } from '@/fsd/5-shared/lib';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+
+import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
 
 import { IMow } from 'src/v2/features/characters/characters.models';
 import { IMowLookupInputs } from 'src/v2/features/lookup/lookup.models';

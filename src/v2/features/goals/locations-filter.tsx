@@ -4,10 +4,10 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import React, { useMemo } from 'react';
 
-import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
 import factionsData from 'src/v2/data/factions.json';
 
 import { Alliance, Faction, Rarity, RarityString } from '@/fsd/5-shared/model';
+import { MultipleSelectCheckmarks } from '@/fsd/5-shared/ui';
 
 import { CampaignsService, CampaignType, ICampaingsFilters } from '@/fsd/4-entities/campaign';
 

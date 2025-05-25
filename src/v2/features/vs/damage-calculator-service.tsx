@@ -1,9 +1,9 @@
-import { EquipmentType, INpcData } from 'src/models/interfaces';
-import { StaticDataService } from 'src/services';
-
 import { RarityStars, Rarity, DamageType, Faction, Rank, Trait } from '@/fsd/5-shared/model';
 
-import { IUnitData, StatsCalculatorService } from '@/fsd/4-entities/character';
+import { CharactersService, ICharacterData } from '@/fsd/4-entities/character';
+import { EquipmentType } from '@/fsd/4-entities/equipment';
+import { INpcData, NpcService } from '@/fsd/4-entities/npc';
+import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
 import { IEquipmentSpec } from './versus-interfaces';
 
@@ -130,7 +130,7 @@ export class DamageCalculatorService {
             .map(trait => Trait[trait as keyof typeof Trait]);
     }
 
-    static getRelevantCharacterTraits(character: IUnitData): Trait[] {
+    static getRelevantCharacterTraits(character: ICharacterData): Trait[] {
         return character.traits.filter(trait => this.relevantTraits.includes(trait));
     }
 
@@ -154,7 +154,7 @@ export class DamageCalculatorService {
         stars: RarityStars,
         equipment: IEquipmentSpec[]
     ): DamageUnitData {
-        const npc = StaticDataService.npcDataFull.find(npc => npc.name === id);
+        const npc = NpcService.npcDataFull.find(npc => npc.name === id);
         if (npc != undefined) {
             return this.modifyWithTraits(this.getRelevantNpcTraits(npc), {
                 damage: StatsCalculatorService.calculateNpcDamage(npc.name, stars, rank),
@@ -170,7 +170,7 @@ export class DamageCalculatorService {
                 relevantTraits: this.getRelevantNpcTraits(npc),
             });
         }
-        const unit = StaticDataService.unitsData.find(unit => unit.id === id)!;
+        const unit = CharactersService.charactersData.find(unit => unit.id === id)!;
         let unitData: DamageUnitData = {
             damage: StatsCalculatorService.calculateDamage(unit.id, rarity, stars, rank, 0),
             armor: StatsCalculatorService.calculateArmor(unit.id, rarity, stars, rank, 0),

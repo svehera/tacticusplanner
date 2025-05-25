@@ -8,24 +8,23 @@ import { StoreContext } from 'src/reducers/store.provider';
 
 import { LoaderWithText, Conditional } from '@/fsd/5-shared/ui';
 
-import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
-import { CharactersValueService } from '@/fsd/4-entities/unit/characters-value.service';
+import { CharactersPowerService, CharactersValueService } from '@/fsd/4-entities/unit';
 
+import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-features/view-settings';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { IUnit, IViewControls } from 'src/v2/features/characters/characters.models';
+import { IUnit } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
 import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
 import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
-import { ViewControls } from 'src/v2/features/characters/components/view-controls';
 import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
 import { useGetSharedRoster } from 'src/v2/features/share/share-roster.endpoints';
 
 export const SharedRoster = () => {
     const { viewPreferences } = useContext(StoreContext);
-    const [viewControls, setViewControls] = useState<IViewControls>({
+    const [viewControls, setViewControls] = useState<ICharactersViewControls>({
         filterBy: viewPreferences.wyoFilter,
         orderBy: viewPreferences.wyoOrder,
     });
@@ -82,7 +81,7 @@ export const SharedRoster = () => {
                 <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter}>
                     <TeamGraph units={charactersFiltered} />
                 </RosterHeader>
-                <ViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
+                <CharactersViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
 
                 <Conditional condition={isFactionsView(viewControls.orderBy)}>
                     <FactionsGrid factions={factions} />

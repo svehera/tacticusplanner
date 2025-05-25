@@ -6,7 +6,8 @@ import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { StoreContext } from 'src/reducers/store.provider';
-import { CampaignImage } from 'src/v2/components/images/campaign-image';
+
+import { CampaignImage } from '@/fsd/4-entities/campaign/campaign.icon';
 
 import { CampaignData } from 'src/v2/features/campaign-progression/campaign-progression.models';
 import { CampaignsProgressionService } from 'src/v2/features/campaign-progression/campaign-progression.service';

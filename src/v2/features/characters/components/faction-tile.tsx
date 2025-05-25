@@ -1,12 +1,11 @@
 ﻿import React, { useContext, useMemo } from 'react';
 
-import { FactionImage } from 'src/v2/components/images/faction-image';
-
 import { numberToThousandsString, numberToThousandsStringOld } from '@/fsd/5-shared/lib';
 import { UnitType } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
+import { FactionImage } from '@/fsd/4-entities/faction';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';

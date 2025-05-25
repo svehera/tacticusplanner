@@ -2,11 +2,10 @@
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-
 import { Rarity } from '@/fsd/5-shared/model';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
 import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';

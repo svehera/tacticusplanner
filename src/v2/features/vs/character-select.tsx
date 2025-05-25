@@ -2,11 +2,13 @@ import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import React from 'react';
 
-import { StaticDataService } from 'src/services';
 import { getImageUrl } from 'src/shared-logic/functions';
 
 import { FlexBox } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CharactersService } from '@/fsd/4-entities/character';
+import { NpcService } from '@/fsd/4-entities/npc';
 
 interface Props {
     label: string;
@@ -18,11 +20,11 @@ interface Props {
 /** A drop-down selector for characters. */
 export const CharacterSelect: React.FC<Props> = ({ label, idsAndNames, value, valueChanges }) => {
     const getNpcPortrait = (npc: string) => {
-        const imageUrl = getImageUrl(StaticDataService.getNpcIconPath(npc));
+        const imageUrl = getImageUrl(NpcService.getNpcIconPath(npc));
         return <img src={imageUrl} width={20} height={30} />;
     };
     const getImageComponent = (id: string) => {
-        const unit = StaticDataService.unitsData.find(unit => unit.id === id);
+        const unit = CharactersService.charactersData.find(unit => unit.id === id);
         if (unit != undefined) {
             return <UnitShardIcon icon={unit.icon} name={unit.name} height={30} width={30} tooltip={unit.name} />;
         } else {

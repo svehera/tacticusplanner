@@ -8,7 +8,6 @@ import React, { useContext, useMemo, useState } from 'react';
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
 import { EditAscendGoal } from 'src/shared-components/goals/edit-ascend-goal';
 import { NumbersInput } from 'src/shared-components/goals/numbers-input';
@@ -22,6 +21,8 @@ import { Rank, RarityMapper } from '@/fsd/5-shared/model';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { RankSelect } from '@/fsd/4-entities/character';
 import { IUnit } from '@/fsd/4-entities/unit';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 import { IUpgradeRecipe } from '@/fsd/4-entities/upgrade';
@@ -30,8 +31,6 @@ import { CharacterUpgrades } from '@/fsd/3-features/character-details';
 import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
 import { MowUpgradesUpdate } from 'src/v2/features/characters/components/mow-upgrades-update';
 import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
-
-import { RankSelect } from '../rank-select';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
 

@@ -13,12 +13,12 @@ import { isCharacter, isMow, isUnlocked } from '@/fsd/4-entities/unit/units.func
 
 import { rarityCaps } from 'src/v2/features/characters/characters.contants';
 
+import { CharactersFilterBy } from '../../../fsd/4-entities/character/characters-filter-by.enum';
+import { CharactersOrderBy } from '../../../fsd/4-entities/character/characters-order-by.enum';
 import { CharactersPowerService } from '../../../fsd/4-entities/unit/characters-power.service';
 import { CharactersValueService } from '../../../fsd/4-entities/unit/characters-value.service';
 
 import { IFaction } from './characters.models';
-import { CharactersFilterBy } from './enums/characters-filter-by';
-import { CharactersOrderBy } from './enums/characters-order-by';
 import { filterChaos } from './functions/filter-by-chaos';
 import { filterImperial } from './functions/filter-by-imperial';
 import { filterXenos } from './functions/filter-by-xenos';

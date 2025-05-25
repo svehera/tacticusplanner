@@ -3,10 +3,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { menuItemById } from 'src/models/menu-items';
-import { StaticDataService } from 'src/services';
 
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
+import { CharactersService } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 export const PlanLeRoutes = () => {
@@ -30,7 +30,7 @@ export const PlanLeRoutes = () => {
                 />
             </Card>
 
-            {StaticDataService.lreCharacters.map(le => {
+            {CharactersService.lreCharacters.map(le => {
                 const isFinished = !!le.lre?.finished;
                 return (
                     <Card

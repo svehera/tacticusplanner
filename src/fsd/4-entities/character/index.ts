@@ -1,8 +1,9 @@
 export * from './ui';
+export { rankUpData } from './data';
 export type {
     ICharacter2,
     ICharacterRankRange,
-    IUnitData,
+    ICharacterData,
     IRankUpData,
     UnitDataRaw,
     ICharLegendaryEvents,
@@ -12,5 +13,7 @@ export type {
 } from './model';
 export { CharacterBias } from './bias.enum';
 export { CharacterReleaseRarity } from './character-release-rarity.enum';
-export { StatsCalculatorService } from './stats-calculator.service';
 export { CharacterUpgradesService } from './character-upgrades.service';
+export { CharactersService } from './chracters.service';
+export { CharactersFilterBy } from './characters-filter-by.enum';
+export { CharactersOrderBy } from './characters-order-by.enum';

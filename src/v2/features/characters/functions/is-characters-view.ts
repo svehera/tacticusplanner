@@ -1,4 +1,4 @@
-﻿import { CharactersOrderBy } from '../enums/characters-order-by';
+﻿import { CharactersOrderBy } from '../../../../fsd/4-entities/character/characters-order-by.enum';
 
 export const isCharactersView = (orderBy: CharactersOrderBy): boolean => {
     return [

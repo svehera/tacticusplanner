@@ -1,5 +1,7 @@
-import { IRankUpData } from '../model';
+import { IRankUpData, UnitDataRaw } from '../model';
 
-import rankUpDataJson from './rankUpData.json';
+import charactersRanksJson from './characters-ranks.data.json';
+import charactersJson from './characters.data.json';
 
-export const rankUpData: IRankUpData = rankUpDataJson;
+export const rankUpData: IRankUpData = charactersRanksJson;
+export const charactersData: UnitDataRaw[] = charactersJson;

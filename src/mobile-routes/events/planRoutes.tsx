@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { PlanGuildWarRoutes } from 'src/mobile-routes/events/guildWarRoutes';
 import { PlanLeRoutes } from 'src/mobile-routes/events/leRoutes';
 import { menuItemById } from 'src/models/menu-items';
-import { StaticDataService } from 'src/services';
+
+import { CharactersService } from '@/fsd/4-entities/character';
 
 import { campaignProgressionMenuItem } from 'src/v2/pages/campaign-progression/campaign-progression.menu-item';
 
@@ -88,7 +89,7 @@ export const PlanRoutes = () => {
                         <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
                             <ul>
                                 <li>Master Table</li>
-                                {StaticDataService.lreCharacters
+                                {CharactersService.lreCharacters
                                     .filter(x => !x.lre?.finished)
                                     .map(le => (
                                         <li key={le.name}>{le.name}</li>

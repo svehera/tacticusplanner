@@ -1,11 +1,11 @@
 ﻿import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 import { StoreContext } from 'src/reducers/store.provider';
-import { StaticDataService } from 'src/services';
-import { useQueryState } from 'src/v2/hooks/query-state';
 
+import { useQueryState } from '@/fsd/5-shared/lib';
 import { useTitle } from '@/fsd/5-shared/ui/contexts';
 
+import { CharactersService } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 import { getLre } from '@/fsd/3-features/lre';
@@ -37,7 +37,7 @@ export const useLre = () => {
     const changeTab = (_: React.SyntheticEvent, value: LreSection) => setSection(value);
 
     useEffect(() => {
-        const relatedLre = StaticDataService.lreCharacters.find(x => x.lre!.id === legendaryEventId);
+        const relatedLre = CharactersService.lreCharacters.find(x => x.lre!.id === legendaryEventId);
         if (relatedLre) {
             setHeaderTitle(
                 relatedLre.lre!.finished

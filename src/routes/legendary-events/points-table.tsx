@@ -17,8 +17,8 @@ import { isMobile } from 'react-device-detect';
 import { ILreTeam } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
 import { useLreProgress } from 'src/shared-components/le-progress.hooks';
-import { useQueryState } from 'src/v2/hooks/query-state';
 
+import { useQueryState } from '@/fsd/5-shared/lib';
 import { Rank } from '@/fsd/5-shared/model';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 

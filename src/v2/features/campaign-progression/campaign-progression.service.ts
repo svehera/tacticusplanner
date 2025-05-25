@@ -2,7 +2,6 @@ import { uniq } from 'lodash';
 
 import { charsUnlockShards } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
-import { StaticDataService } from 'src/services/static-data.service';
 
 import { Rarity } from '@/fsd/5-shared/model';
 
@@ -14,8 +13,8 @@ import {
     ICampaignsData,
 } from '@/fsd/4-entities/campaign';
 import battleData from '@/fsd/4-entities/campaign/data/newBattleData.json';
-import { CharacterUpgradesService, IRankUpData } from '@/fsd/4-entities/character';
-import rankUpData from '@/fsd/4-entities/character/data/rankUpData.json';
+import { CharactersService, CharacterUpgradesService, IRankUpData } from '@/fsd/4-entities/character';
+import rankUpData from '@/fsd/4-entities/character/data/characters-ranks.data.json';
 import { IRecipeData } from '@/fsd/4-entities/upgrade';
 import recipeData from '@/fsd/4-entities/upgrade/data/recipeData.json';
 
@@ -104,7 +103,7 @@ export class CampaignsProgressionService {
             goalData.unfarmableLocations.forEach(x => {
                 nodesToBeat.get(x.campaign)?.push(x);
             });
-            const unit = StaticDataService.getUnit(goal.unitId);
+            const unit = CharactersService.getUnit(goal.unitId);
             if (!unit) {
                 console.error("Couldn't find unit '" + goal.unitId + "'.");
                 continue;

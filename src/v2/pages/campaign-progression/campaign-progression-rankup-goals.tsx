@@ -3,12 +3,10 @@ import { ColDef, AllCommunityModule, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 
-import { StaticDataService } from 'src/services/static-data.service';
-
 import { Rank } from '@/fsd/5-shared/model';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { IUnitData } from '@/fsd/4-entities/character';
+import { CharactersService, ICharacterData } from '@/fsd/4-entities/character';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
 import { CampaignData } from 'src/v2/features/campaign-progression/campaign-progression.models';
@@ -50,9 +48,9 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
     }
 
     /** @returns the unit specified in the goal with the given ID. */
-    function getGoalUnit(goalId: string): IUnitData | undefined {
+    function getGoalUnit(goalId: string): ICharacterData | undefined {
         if (!getGoal(goalId)) return undefined;
-        return StaticDataService.getUnit(getGoal(goalId)!.unitId) ?? undefined;
+        return CharactersService.getUnit(getGoal(goalId)!.unitId) ?? undefined;
     }
 
     /**
