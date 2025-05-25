@@ -6,10 +6,10 @@ import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
 
-import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
 import { RichTextEditor } from 'src/v2/components/inputs/rich-text-editor';
 
 import { UnitType } from '@/fsd/5-shared/model';
+import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
 import { IUnit } from '@/fsd/4-entities/unit';
 

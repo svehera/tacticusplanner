@@ -1,5 +1,6 @@
 export * from './contexts';
 export { MenuItemTP } from './menu-item';
+export type { IMenuOption } from './menu-option';
 export { Conditional } from './conditional';
 export { usePopUpControls } from './pop-up-controls';
 export { FlexBox } from './flex-box';

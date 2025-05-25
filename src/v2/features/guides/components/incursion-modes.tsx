@@ -1,7 +1,8 @@
 ﻿import React, { useEffect, useMemo, useState } from 'react';
 
-import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
 import { IMenuOption } from 'src/v2/models/menu-option';
+
+import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
 import { mowsData } from '@/fsd/4-entities/mow';
 import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
