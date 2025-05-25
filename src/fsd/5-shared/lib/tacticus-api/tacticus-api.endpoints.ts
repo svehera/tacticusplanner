@@ -1,10 +1,6 @@
 import { makeApiCall } from '@/fsd/5-shared/api';
 
-import {
-    TacticusGuildRaidResponse,
-    TacticusGuildResponse,
-    TacticusPlayerResponse,
-} from './tacticus-integration.models';
+import { TacticusGuildRaidResponse, TacticusGuildResponse, TacticusPlayerResponse } from './tacticus-api.models';
 
 export const getTacticusPlayerData = () => makeApiCall<TacticusPlayerResponse>('GET', 'users/playerData');
 export const getTacticusGuildData = () => makeApiCall<TacticusGuildResponse>('GET', 'guild');

@@ -1,7 +1,7 @@
 ﻿import { defaultData, idToCampaign } from '@/models/constants';
 import { ICampaignsProgress, SetStateAction } from '@/models/interfaces';
 
-import { TacticusCampaignProgress } from '@/v2/features/tacticus-integration/tacticus-integration.models';
+import { TacticusCampaignProgress } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 
 export type CampaignsProgressAction =
     | {

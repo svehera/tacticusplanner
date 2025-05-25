@@ -4,6 +4,7 @@ import { DailyRaidsStrategy, PersonalGoalType } from 'src/models/enums';
 import { IEstimatedRanksSettings } from 'src/models/interfaces';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
+import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 import { Rank } from '@/fsd/5-shared/model';
 
 import { ICampaignsProgress, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
@@ -29,7 +30,6 @@ import {
     IUpgradesRaidsDay,
 } from 'src/v2/features/goals/goals.models';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
-import { TacticusUpgrade } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
 
 export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
