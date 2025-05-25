@@ -8,7 +8,6 @@ import { isMobile } from 'react-device-detect';
 import { rarityStringToNumber } from '@/models/constants';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { useFitGridOnWindowResize, stringToRank } from 'src/shared-logic/functions';
 
 import { Rarity, RarityString, Rank } from '@/fsd/5-shared/model';
@@ -16,6 +15,8 @@ import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { CampaignsService } from '@/fsd/4-entities/campaign';
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { CharactersService } from '@/fsd/4-entities/character';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
 import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
@@ -201,7 +202,7 @@ export const Upgrades = () => {
                 for (const rank in ranks) {
                     const upgrades = ranks[rank];
                     if (upgrades.includes(x.material)) {
-                        const charData = StaticDataService.unitsData.find(x => x.name === character);
+                        const charData = CharactersService.charactersData.find(x => x.name === character);
                         const existingChar = characters.find(x => x.id === character);
                         if (existingChar) {
                             existingChar.ranks.push(stringToRank(rank));

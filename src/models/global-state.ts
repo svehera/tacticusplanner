@@ -3,15 +3,13 @@
 import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
 
 import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
-import { CharacterBias, ICharacter2 } from '@/fsd/4-entities/character';
+import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow, IMowDb, IMowStatic } from '@/fsd/4-entities/mow';
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
-
-import { StaticDataService } from '../services';
 
 import { defaultData, rankToLevel, rankToRarity } from './constants';
 import {
@@ -86,7 +84,7 @@ export class GlobalState implements IGlobalState {
         chars: Partial<IPersonalCharacterData2 & IInsightsData>[],
         totalUsers?: number
     ): Array<ICharacter2> {
-        return StaticDataService.unitsData.map(staticData => {
+        return CharactersService.charactersData.map(staticData => {
             const personalCharData = chars.find(c => c.name === staticData.name);
             const rank = personalCharData?.rank ?? Rank.Locked;
             const rankLevel = rankToLevel[(rank - 1) as Rank];

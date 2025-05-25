@@ -6,15 +6,10 @@ import { uniq } from 'lodash';
 import React, { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { Campaign } from '@/models/enums';
-import { ICampaignBattleComposed } from 'src/models/interfaces';
-import { StaticDataService } from 'src/services';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
+import { useFitGridOnWindowResize, useQueryState } from '@/fsd/5-shared/lib';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
-import { useQueryState } from '@/fsd/5-shared/lib';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
-
+import { Campaign, ICampaignBattleComposed, CampaignLocation, CampaignsService } from '@/fsd/4-entities/campaign';
 import { FactionImage } from '@/fsd/4-entities/faction';
 
 import { CampaignBattle } from './campaign-battle';
@@ -163,9 +158,9 @@ export const Campaigns = () => {
         value => value.toString()
     );
 
-    const campaignsOptions = useMemo(() => Object.keys(StaticDataService.campaignsGrouped).sort(), []);
+    const campaignsOptions = useMemo(() => Object.keys(CampaignsService.campaignsGrouped).sort(), []);
 
-    const rows = useMemo(() => StaticDataService.campaignsGrouped[campaign], [campaign]);
+    const rows = useMemo(() => CampaignsService.campaignsGrouped[campaign], [campaign]);
 
     const uniqEnemiesFactions = uniq(rows.flatMap(x => x.enemiesFactions));
     const uniqEnemiesTypes = uniq(rows.flatMap(x => x.enemiesTypes));
@@ -182,7 +177,7 @@ export const Campaigns = () => {
                         onChange={event => setCampaign(event.target.value as Campaign)}>
                         {campaignsOptions.map(value => (
                             <MenuItem key={value} value={value}>
-                                {value} ({StaticDataService.campaignsGrouped[value].length})
+                                {value} ({CampaignsService.campaignsGrouped[value].length})
                             </MenuItem>
                         ))}
                     </Select>

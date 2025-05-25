@@ -7,13 +7,13 @@ import { orderBy, sum } from 'lodash';
 import React, { useContext, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 
 import { Rarity, Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { RankSelect } from '@/fsd/4-entities/character';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 

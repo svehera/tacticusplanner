@@ -21,7 +21,6 @@ import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { ICampaignsProgress, IPersonalGoal } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
 import { PrioritySelect } from 'src/shared-components/goals/priority-select';
 import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
@@ -34,6 +33,7 @@ import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 import { Rarity, RarityStars, Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { UnitTitle } from '@/fsd/4-entities/unit/unit-title';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 

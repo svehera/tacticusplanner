@@ -1,9 +1,8 @@
 import { EquipmentType } from 'src/models/interfaces';
-import { StaticDataService } from 'src/services';
 
 import { RarityStars, Rarity, DamageType, Faction, Rank, Trait } from '@/fsd/5-shared/model';
 
-import { IUnitData } from '@/fsd/4-entities/character';
+import { CharactersService, ICharacterData } from '@/fsd/4-entities/character';
 import { INpcData, NpcService } from '@/fsd/4-entities/npc';
 import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
@@ -132,7 +131,7 @@ export class DamageCalculatorService {
             .map(trait => Trait[trait as keyof typeof Trait]);
     }
 
-    static getRelevantCharacterTraits(character: IUnitData): Trait[] {
+    static getRelevantCharacterTraits(character: ICharacterData): Trait[] {
         return character.traits.filter(trait => this.relevantTraits.includes(trait));
     }
 
@@ -172,7 +171,7 @@ export class DamageCalculatorService {
                 relevantTraits: this.getRelevantNpcTraits(npc),
             });
         }
-        const unit = StaticDataService.unitsData.find(unit => unit.id === id)!;
+        const unit = CharactersService.charactersData.find(unit => unit.id === id)!;
         let unitData: DamageUnitData = {
             damage: StatsCalculatorService.calculateDamage(unit.id, rarity, stars, rank, 0),
             armor: StatsCalculatorService.calculateArmor(unit.id, rarity, stars, rank, 0),

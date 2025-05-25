@@ -32,13 +32,13 @@ import { isMobile } from 'react-device-detect';
 
 import { ICharacter2, ILreTeam } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
-import { StaticDataService } from 'src/services';
 
 import { useQueryState } from '@/fsd/5-shared/lib';
 import { Rank } from '@/fsd/5-shared/model';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
+import { CharactersService } from '@/fsd/4-entities/character';
 import { CharacterTitle } from '@/fsd/4-entities/character/ui/character-title';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
@@ -51,7 +51,7 @@ import { CharactersSelection, ITableRow, PointsCalculation } from './legendary-e
 
 export const MasterTable = () => {
     const [activeLegendaryEvents, setActiveLegendaryEvents] = React.useState<LegendaryEventEnum[]>(
-        StaticDataService.activeLres.map(x => x.lre!.id)
+        CharactersService.activeLres.map(x => x.lre!.id)
     );
 
     const { leSelectedTeams, characters, leProgress } = useContext(StoreContext);
@@ -470,7 +470,7 @@ export const MasterTable = () => {
                                 })
                                 .join(', ')
                         }>
-                        {StaticDataService.activeLres.map(x => (
+                        {CharactersService.activeLres.map(x => (
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
                                 <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
                                 <ListItemIcon>
@@ -482,7 +482,7 @@ export const MasterTable = () => {
 
                         <Divider />
 
-                        {StaticDataService.inactiveLres.map(x => (
+                        {CharactersService.inactiveLres.map(x => (
                             <MenuItem key={x.lre!.id} value={x.lre!.id}>
                                 <Checkbox checked={activeLegendaryEvents.indexOf(x.lre!.id) > -1} />
                                 <ListItemIcon>

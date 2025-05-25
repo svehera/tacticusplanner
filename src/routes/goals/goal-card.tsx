@@ -12,7 +12,6 @@ import { charsUnlockShards, rarityToStars } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
 import { StaticDataService } from 'src/services';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import { CampaignImage } from 'src/v2/components/images/campaign-image';
 
 import { Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
@@ -20,6 +19,7 @@ import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
 
+import { CampaignImage } from '@/fsd/4-entities/campaign/campaign.icon';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';

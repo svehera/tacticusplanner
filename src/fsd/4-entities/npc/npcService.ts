@@ -1,6 +1,6 @@
-import { StaticDataService } from '@/services';
-
 import { Alliance, Faction } from '@/fsd/5-shared/model';
+
+import { CharactersService } from '@/fsd/4-entities/character/@x/npc';
 
 import { npcData } from './data';
 import { INpcData } from './model';
@@ -9,7 +9,7 @@ export class NpcService {
     static readonly npcDataFull: INpcData[] = this.convertNpcData();
 
     /** @returns the image asset for the NPC, which is allowed to be a character. */
-    public static getNpcIconPath(npc: string): string {
+    public static getNpcIconPath(name: string): string {
         const prefix: string = 'npcs';
         const map: Record<string, string> = {
             'Flayed One': 'flayed_one.png',
@@ -51,15 +51,15 @@ export class NpcService {
             Warlock: 'warlock.webp',
             Wraithguard: 'wraithguard.webp',
         };
-        if (map[npc]) {
-            return prefix + '/' + map[npc];
+        if (map[name]) {
+            return prefix + '/' + map[name];
         }
-        const unit = StaticDataService.unitsData.find(x => x.name === npc);
+        const unit = CharactersService.charactersData.find(x => x.name === name);
         if (unit != undefined) {
             return 'portraits/' + unit.icon;
         }
-        console.log('unknown npc - ' + npc);
-        return 'unknown-' + npc;
+        console.log('unknown npc - ' + name);
+        return 'unknown-' + name;
     }
 
     private static convertNpcData(): INpcData[] {

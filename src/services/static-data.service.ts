@@ -1,15 +1,14 @@
-﻿import { cloneDeep, groupBy, orderBy, sortBy, sum, uniq } from 'lodash';
+﻿import { cloneDeep, orderBy, sum } from 'lodash';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
-import { RarityString, Rarity, Faction, Rank, rankToString, UnitType, RarityMapper } from '@/fsd/5-shared/model';
+import { RarityString, Rarity, Faction, Rank, rankToString, RarityMapper } from '@/fsd/5-shared/model';
 
 import { ICampaignBattleComposed, CampaignsService, ICampaignsProgress } from '@/fsd/4-entities/campaign';
-import { IRankUpData, IUnitData, UnitDataRaw, ICharLegendaryEvents, IRankLookup } from '@/fsd/4-entities/character';
+import { IRankUpData, IRankLookup } from '@/fsd/4-entities/character';
+import rankUpData from '@/fsd/4-entities/character/data/characters-ranks.data.json';
 import { IMaterialRecipeIngredientFull, IMaterialFull, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import rawEquipmentData from '../assets/EquipmentData.json';
-import unitsData from '../assets/UnitData.json';
-import rankUpData from '../fsd/4-entities/character/data/rankUpData.json';
 import { EquipmentClass } from '../models/enums';
 import { EquipmentType, IEquipment, IEstimatedRanksSettings, IMaterialEstimated2 } from '../models/interfaces';
 
@@ -17,35 +16,6 @@ export class StaticDataService {
     static readonly equipmentData: IEquipment[] = this.convertEquipmentData();
     static readonly rankUpData: IRankUpData = rankUpData;
 
-    static readonly unitsData: IUnitData[] = (unitsData as UnitDataRaw[]).map(this.convertUnitData);
-    static readonly lreCharacters: IUnitData[] = orderBy(
-        this.unitsData.filter(unit => !!unit.lre),
-        ['lre.finished', x => new Date(x.lre?.nextEventDateUtc ?? '').getTime()],
-        ['asc', 'asc']
-    );
-
-    static readonly activeLres = this.lreCharacters.filter(x => !x.lre?.finished);
-    static readonly inactiveLres = this.lreCharacters.filter(x => !!x.lre?.finished);
-
-    static readonly activeLre: IUnitData = (() => {
-        const now = new Date();
-        const eightDays = 8;
-        const currentLreDate = new Date(this.lreCharacters[0]!.lre!.nextEventDateUtc!);
-        currentLreDate.setDate(currentLreDate.getDate() + eightDays);
-
-        if (now < currentLreDate) {
-            return this.lreCharacters[0];
-        } else {
-            return (
-                this.lreCharacters.find(x => {
-                    const eventDate = new Date(x.lre?.nextEventDateUtc ?? '');
-                    return eventDate > now;
-                }) ?? this.lreCharacters[0]
-            );
-        }
-    })();
-
-    static readonly campaignsGrouped: Record<string, ICampaignBattleComposed[]> = this.getCampaignGrouped();
     private static parseFaction(faction: string): Faction | undefined {
         switch (faction) {
             case 'Ultramarines':
@@ -102,85 +72,6 @@ export class StaticDataService {
 
         return possibleLocations;
     };
-
-    static getCampaignGrouped(): Record<string, ICampaignBattleComposed[]> {
-        const allBattles = sortBy(Object.values(CampaignsService.campaignsComposed), 'nodeNumber');
-        return groupBy(allBattles, 'campaign');
-    }
-
-    static convertUnitData(rawData: UnitDataRaw): IUnitData {
-        const unitData: IUnitData = {
-            id: rawData.Name,
-            tacticusId: rawData.tacticusId,
-            shortName: rawData['Short Name'],
-            fullName: rawData['Full Name'],
-            unitType: UnitType.character,
-            alliance: rawData.Alliance,
-            faction: rawData.Faction,
-            name: rawData.Name,
-            numberAdded: rawData.Number,
-            health: rawData.Health,
-            damage: rawData.Damage,
-            armour: rawData.Armour,
-            initialRarity: RarityMapper.stringToNumber[rawData['Initial rarity'] as RarityString],
-            rarityStars: RarityMapper.toStars[RarityMapper.stringToNumber[rawData['Initial rarity'] as RarityString]],
-            equipment1: rawData.Equipment1,
-            equipment2: rawData.Equipment2,
-            equipment3: rawData.Equipment3,
-            meleeHits: rawData['Melee Hits'],
-            rangeHits: rawData['Ranged Hits'],
-            rangeDistance: rawData.Distance,
-            movement: rawData.Movement,
-            forcedSummons: rawData.ForcedSummons,
-            requiredInCampaign: rawData.RequiredInCampaign,
-            campaignsRequiredIn: rawData.CampaignsRequiredIn,
-            legendaryEvents: {} as ICharLegendaryEvents,
-            traits: rawData.Traits,
-            icon: rawData.Icon,
-            damageTypes: {
-                all: [rawData['Melee Damage']],
-                melee: rawData['Melee Damage'],
-            },
-            releaseRarity: rawData.ReleaseRarity,
-            releaseDate: rawData.releaseDate,
-            lre: rawData.lre,
-        };
-
-        if (rawData['Ranged Damage']) {
-            unitData.damageTypes.all.push(rawData['Ranged Damage']);
-            unitData.damageTypes.range = rawData['Ranged Damage'];
-        }
-        if (rawData['Active Ability']) {
-            unitData.damageTypes.all.push(rawData['Active Ability']);
-            unitData.damageTypes.activeAbility = rawData['Active Ability'];
-        }
-        if (rawData['Passive Ability']) {
-            unitData.damageTypes.all.push(rawData['Passive Ability']);
-            unitData.damageTypes.passiveAbility = rawData['Passive Ability'];
-        }
-        unitData.damageTypes.all = uniq(unitData.damageTypes.all);
-
-        const isReleased = unitData.releaseDate
-            ? StaticDataService.isAtLeast3DaysBefore(new Date(unitData.releaseDate))
-            : true;
-
-        unitData.icon = isReleased ? unitData.icon : 'comingSoon.webp';
-
-        return unitData;
-    }
-
-    static isAtLeast3DaysBefore(releaseDate: Date): boolean {
-        const today = new Date();
-
-        // Calculate the difference in time
-        const timeDifference = releaseDate.getTime() - today.getTime();
-
-        // Convert time difference from milliseconds to days
-        const dayDifference = timeDifference / (1000 * 3600 * 24);
-
-        // Check if the day difference is less than or equal to 2
-        return dayDifference <= 3;
-    }
 
     static getFactionPray(faction: Faction): string {
         switch (faction) {
@@ -310,14 +201,6 @@ export class StaticDataService {
             .filter(x => !!x) as IMaterialEstimated2[];
 
         return orderBy(result, ['daysOfBattles', 'totalEnergy', 'rarity', 'count'], ['desc', 'desc', 'desc', 'desc']);
-    }
-
-    /**
-     * @param id The unit ID of the character or MoW.
-     * @returns An IUnitData representation, or null.
-     */
-    public static getUnit(id: string): IUnitData | undefined {
-        return this.unitsData.find(x => x.id === id);
     }
 
     private static calculateMaterialData(

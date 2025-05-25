@@ -99,7 +99,7 @@ export const globalLearnRoutes: RouteObject[] = [
     {
         path: 'learn/campaigns',
         async lazy() {
-            const { Campaigns } = await import('@/routes/tables/campaigns');
+            const { Campaigns } = await import('@/fsd/1-pages/learn-campaigns/campaigns');
             return { Component: Campaigns };
         },
     },

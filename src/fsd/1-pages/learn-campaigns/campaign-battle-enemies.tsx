@@ -1,9 +1,8 @@
 import React, { JSX, useMemo } from 'react';
 
-import { IDetailedEnemy } from '@/models/interfaces';
-
 import { Rarity, Rank } from '@/fsd/5-shared/model';
 
+import { IDetailedEnemy } from '@/fsd/4-entities/campaign';
 import { NpcPortrait } from '@/fsd/4-entities/npc';
 
 interface Props {
@@ -79,10 +78,12 @@ export const CampaignBattleEnemies: React.FC<Props> = ({ enemies, scale }) => {
         let top = verticalMargin;
         let enemiesInRow = 0;
         const elems: JSX.Element[] = [];
-        enemies.forEach((enemy, index) => {
+        enemies.forEach(enemy => {
             for (let i = 0; i < enemy.count; i++) {
                 elems.push(
-                    <div key={row * maxPerRow + i} style={{ position: 'absolute', left: left, top: top }}>
+                    <div
+                        key={row * maxPerRow + i + enemy.name + enemy.rank + enemy.rarity}
+                        style={{ position: 'absolute', left: left, top: top }}>
                         <NpcPortrait
                             name={enemy.name}
                             rank={parseRank(enemy.rank)}

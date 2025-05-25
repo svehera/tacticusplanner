@@ -2,7 +2,7 @@ import { StaticDataService } from '@/services';
 
 import { RarityStars, Rarity, Rank, rankToString } from '@/fsd/5-shared/model';
 
-import { ICharacter2 } from '@/fsd/4-entities/character/@x/unit';
+import { ICharacter2, CharactersService } from '@/fsd/4-entities/character/@x/unit';
 import { NpcService } from '@/fsd/4-entities/npc/@x/unit';
 
 export class StatsCalculatorService {
@@ -161,7 +161,7 @@ export class StatsCalculatorService {
         rank: Rank,
         numAppliedUpgrades: number
     ): number {
-        const unit = StaticDataService.unitsData.find(u => u.id === unitId);
+        const unit = CharactersService.charactersData.find(u => u.id === unitId);
         return StatsCalculatorService.calculateStat(unit?.health ?? -1, unitId, rarityStars, rank, numAppliedUpgrades);
     }
 
@@ -176,7 +176,7 @@ export class StatsCalculatorService {
         rank: Rank,
         numAppliedUpgrades: number
     ): number {
-        const unit = StaticDataService.unitsData.find(u => u.id === unitId);
+        const unit = CharactersService.charactersData.find(u => u.id === unitId);
         return StatsCalculatorService.calculateStat(unit?.damage ?? -1, unitId, rarityStars, rank, numAppliedUpgrades);
     }
 
@@ -191,7 +191,7 @@ export class StatsCalculatorService {
         rank: Rank,
         numAppliedUpgrades: number
     ): number {
-        const unit = StaticDataService.unitsData.find(u => u.id === unitId);
+        const unit = CharactersService.charactersData.find(u => u.id === unitId);
         return StatsCalculatorService.calculateStat(unit?.armour ?? -1, unitId, rarityStars, rank, numAppliedUpgrades);
     }
 
