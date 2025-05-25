@@ -48,7 +48,7 @@ export class CampaignsService {
      * @returns a map from campaign node short ID (e.g. "SHME31" for Saim-Hann
      *          Mirror Elite battle 31) to an ICampaignBattleComposed.
      */
-    public static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
+    private static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
         const result: Record<string, ICampaignBattleComposed> = {};
         for (const battleDataKey in battleData) {
             const battle = battleData[battleDataKey];

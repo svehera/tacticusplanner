@@ -2,7 +2,7 @@
 import Button from '@mui/material/Button';
 import React, { ChangeEvent, useCallback, useState } from 'react';
 
-import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
+import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
 import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
 

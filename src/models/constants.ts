@@ -3,9 +3,7 @@
 import { Rank, Rarity, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
 
 import { ICampaignsProgress, Campaign } from '@/fsd/4-entities/campaign';
-import { CharacterReleaseRarity } from '@/fsd/4-entities/character';
-import { CharactersFilterBy } from '@/fsd/4-entities/character/characters-filter-by.enum';
-import { CharactersOrderBy } from '@/fsd/4-entities/character/characters-order-by.enum';
+import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
 
 import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
 
@@ -78,23 +76,6 @@ export const charsProgression: Record<number, ICharProgression> = {
     [Rarity.Legendary + RarityStars.RedFourStars]: { shards: 150, orbs: 10, rarity: Rarity.Legendary },
     [Rarity.Legendary + RarityStars.RedFiveStars]: { shards: 250, orbs: 15, rarity: Rarity.Legendary },
     [Rarity.Legendary + RarityStars.BlueStar]: { shards: 500, orbs: 20, rarity: Rarity.Legendary },
-};
-
-export const charsUnlockShards: Record<Rarity, number> = {
-    [Rarity.Common]: 40,
-    [Rarity.Uncommon]: 80,
-    [Rarity.Rare]: 130,
-    [Rarity.Epic]: 250,
-    [Rarity.Legendary]: 500,
-};
-
-export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {
-    [CharacterReleaseRarity.Common]: 40,
-    [CharacterReleaseRarity.Uncommon]: 100,
-    [CharacterReleaseRarity.Rare]: 280,
-    [CharacterReleaseRarity.Epic]: 400,
-    [CharacterReleaseRarity.LegendaryOld]: 150,
-    [CharacterReleaseRarity.Legendary]: 400,
 };
 
 const defaultCampaignsProgress: ICampaignsProgress = {
@@ -364,3 +345,5 @@ export const rarityToStars = RarityMapper.toStars;
 export const rarityToMaxStars = RarityMapper.toMaxStars;
 export const rarityToMaxRank = RarityMapper.toMaxRank;
 export const rarityStringToNumber = RarityMapper.stringToNumber;
+
+export { charsUnlockShards, charsReleaseShards } from '@/fsd/4-entities/character';

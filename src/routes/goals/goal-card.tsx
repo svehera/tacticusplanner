@@ -27,7 +27,8 @@ import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/go
 import { GoalsService } from 'src/v2/features/goals/goals.service';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
 import { XpTotal } from 'src/v2/features/goals/xp-total';
-import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
+
+import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 
 interface Props {
     goal: CharacterRaidGoalSelect;

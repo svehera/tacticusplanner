@@ -17,3 +17,4 @@ export { CharacterUpgradesService } from './character-upgrades.service';
 export { CharactersService } from './chracters.service';
 export { CharactersFilterBy } from './characters-filter-by.enum';
 export { CharactersOrderBy } from './characters-order-by.enum';
+export { charsUnlockShards, charsReleaseShards } from './constants';

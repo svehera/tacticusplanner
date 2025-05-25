@@ -5,11 +5,11 @@ import React, { useContext } from 'react';
 import { charsUnlockShards } from 'src/models/constants';
 import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
 
-import { numberToThousandsStringOld } from '@/fsd/5-shared/lib/number-to-thousands-string';
+import { numberToThousandsStringOld } from '@/fsd/5-shared/lib';
 import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 import { MiscIcon, RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
+import { CharactersPowerService } from '@/fsd/4-entities/unit';
 
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { IMow } from 'src/v2/features/characters/characters.models';

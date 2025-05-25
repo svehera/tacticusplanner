@@ -1,4 +1,4 @@
-﻿import { getEnumValues, useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
+﻿import { getEnumValues, useFitGridOnWindowResize, getCompletionRateColor } from '@/fsd/5-shared/lib';
 import { Rarity, Rank } from '@/fsd/5-shared/model';
 
 import { rankToLevel } from '../models/constants';
@@ -20,26 +20,6 @@ export const needToLevelCharacter = (character: ICharacter2) => {
         character.level < rankToLevel[character.rank] &&
         6 - (rankToLevel[character.rank] - character.level) <= character.upgrades.length
     );
-};
-
-export const getCompletionRateColor = (curr: number, total: number): string => {
-    if (!curr) {
-        return 'white';
-    }
-
-    const completionPercentage = (curr / total) * 100;
-
-    if (completionPercentage === 100) {
-        return 'green';
-    } else if (completionPercentage >= 75) {
-        return 'lightgreen';
-    } else if (completionPercentage >= 50) {
-        return 'yellow';
-    } else if (completionPercentage >= 25) {
-        return 'orange';
-    } else {
-        return 'lightcoral';
-    }
 };
 
 export function getImageUrl(image: string): string {
@@ -72,4 +52,4 @@ function getDaySuffix(day: number) {
 }
 
 // Re-export from shared lib
-export { getEnumValues, useFitGridOnWindowResize };
+export { getEnumValues, useFitGridOnWindowResize, getCompletionRateColor };

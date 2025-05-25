@@ -1,11 +1,13 @@
 ﻿import React from 'react';
 import { RouteObject } from 'react-router-dom';
 
-import { versusLazyRoute } from '@/v2/features/vs/versus.route';
-
+import { myProgressLazyRoute } from '@/fsd/1-pages/input-progress/my-progress.route';
+import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';
+import { mowLookupDesktopLazyRoute } from '@/fsd/1-pages/learn-mow';
+import { versusLazyRoute } from '@/fsd/1-pages/learn-versus';
+import { campaignProgressionLazyRoute } from '@/fsd/1-pages/plan-campaign-progression';
+import { lreLazyRoute } from '@/fsd/1-pages/plan-lre';
 import { guildApiLazyRoute } from '@/v2/pages/guild-api/guild-api.route';
-import { campaignProgressionLazyRoute } from 'src/v2/pages/campaign-progression/campaign-progression.route';
-import { dirtyDozenLazyRoute } from 'src/v2/pages/dirty-dozen/dirty-dozen.route';
 import { faqLazyRoute } from 'src/v2/pages/faq/faq.route';
 import { guidesLazyRoute } from 'src/v2/pages/guides/guides.route';
 import { guildLazyRoute } from 'src/v2/pages/guild/guild.route';
@@ -14,9 +16,6 @@ import { guildWarDefenseLazyRoute } from 'src/v2/pages/guild-war-defense/guild-w
 import { guildWarZonesLazyRoute } from 'src/v2/pages/guild-war-layout/guild-war-zones.route';
 import { guildWarOffenseLazyRoute } from 'src/v2/pages/guild-war-offense/guild-war-offense.route';
 import { insightsLazyRoute } from 'src/v2/pages/insights/insights.route';
-import { lreLazyRoute } from 'src/v2/pages/lre/lre-route';
-import { mowLookupDesktopLazyRoute } from 'src/v2/pages/mow-lookup/mow-lookup.route';
-import { myProgressLazyRoute } from 'src/v2/pages/my-progress/my-progress.route';
 import { sharedRosterRoute } from 'src/v2/pages/shared-roster/shared-roster.route';
 import { teamsDesktopLazyRoute } from 'src/v2/pages/teams/teams.route';
 import { wyoLazyRoute } from 'src/v2/pages/who-you-own/who-you-own.route';
@@ -59,7 +58,7 @@ export const globalPlanRoutes: RouteObject[] = [
     {
         path: 'plan/leMasterTable',
         async lazy() {
-            const { MasterTable } = await import('@/routes/legendary-events/master-table');
+            const { MasterTable } = await import('@/fsd/1-pages/plan-lre/master-table');
             return { Component: MasterTable };
         },
     },

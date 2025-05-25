@@ -32,4 +32,24 @@ export class RarityMapper {
         [RarityString.Epic]: Rarity.Epic,
         [RarityString.Legendary]: Rarity.Legendary,
     };
+
+    public static getRarityFromLevel(level: number): Rarity {
+        if (level <= 8) {
+            return Rarity.Common;
+        }
+
+        if (level <= 17) {
+            return Rarity.Uncommon;
+        }
+
+        if (level <= 26) {
+            return Rarity.Rare;
+        }
+
+        if (level <= 35) {
+            return Rarity.Epic;
+        }
+
+        return Rarity.Legendary;
+    }
 }

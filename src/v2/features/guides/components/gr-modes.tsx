@@ -1,8 +1,7 @@
 ﻿import React, { useEffect, useMemo, useState } from 'react';
 
-import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
-
 import { Faction } from '@/fsd/5-shared/model';
+import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';
 import { grEncounterToFaction, guildRaidBosses, guildRaidPrimes } from 'src/v2/features/teams/teams.constants';
