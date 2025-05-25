@@ -3,11 +3,12 @@ import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { StoreContext } from 'src/reducers/store.provider';
-import dirtyDozen from 'src/v2/data/dirtyDozen.json';
+// eslint-disable-next-line import-x/no-internal-modules
+import { StoreContext } from '@/reducers/store.provider';
 
-import { DirtyDozenTable } from 'src/v2/features/dirty-dozen/dirty-dozen-table';
-import { IDirtyDozen } from 'src/v2/features/dirty-dozen/dirty-dozen.models';
+import { DirtyDozenTable } from './dirty-dozen-table';
+import dirtyDozen from './dirty-dozen.data.json';
+import { IDirtyDozen } from './dirty-dozen.models';
 
 export const DirtyDozen = () => {
     const { characters } = useContext(StoreContext);

@@ -2,15 +2,11 @@
 import { AgGridReact } from 'ag-grid-react';
 import React from 'react';
 
-import { ICharacter2 } from 'src/models/interfaces';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
-import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { CharacterTitle, ICharacter2, RankIcon } from '@/fsd/4-entities/character';
 
-import { CharacterTitle } from '@/fsd/4-entities/character/ui/character-title';
-import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
-
-import { Score } from 'src/v2/features/dirty-dozen/dirty-dozen-score';
-
+import { Score } from './dirty-dozen-score';
 import { IDirtyDozenChar } from './dirty-dozen.models';
 
 import './dirty-dozen-table.css';
