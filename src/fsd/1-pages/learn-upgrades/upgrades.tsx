@@ -5,23 +5,13 @@ import { AgGridReact } from 'ag-grid-react';
 import React, { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { rarityStringToNumber } from '@/models/constants';
-import { ICampaignBattleComposed } from 'src/models/interfaces';
-import { StaticDataService } from 'src/services';
-import { useFitGridOnWindowResize, stringToRank } from 'src/shared-logic/functions';
+import { useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
+import { Rarity, RarityString, Rank, stringToRank, RarityMapper } from '@/fsd/5-shared/model';
+import { MiscIcon, UnitShardIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
 
-import { Rarity, RarityString, Rank } from '@/fsd/5-shared/model';
-import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
-
-import { CampaignsService } from '@/fsd/4-entities/campaign';
-import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
-import { CharactersService } from '@/fsd/4-entities/character';
-import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
-import { UpgradesService } from '@/fsd/4-entities/upgrade';
-import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
-
-import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';
+import { CampaignsService, CampaignLocation, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
+import { CharactersService, RankIcon, rankUpData } from '@/fsd/4-entities/character';
+import { UpgradesService, UpgradeImage, IBaseUpgrade } from '@/fsd/4-entities/upgrade';
 
 type Selection = 'Craftable' | 'Base Upgrades';
 
@@ -150,7 +140,7 @@ export const Upgrades = () => {
                     {
                         field: 'locations',
                         headerName: 'Locations',
-                        cellRenderer: (params: ICellRendererParams<IMowUpgrade>) => {
+                        cellRenderer: (params: ICellRendererParams<IBaseUpgrade>) => {
                             const { data } = params;
                             if (data) {
                                 return (
@@ -196,8 +186,8 @@ export const Upgrades = () => {
                 ranks: Rank[];
             }> = [];
 
-            for (const character in StaticDataService.rankUpData) {
-                const ranks = StaticDataService.rankUpData[character];
+            for (const character in rankUpData) {
+                const ranks = rankUpData[character];
 
                 for (const rank in ranks) {
                     const upgrades = ranks[rank];
@@ -229,7 +219,7 @@ export const Upgrades = () => {
                 upgradeId: x.material,
                 upgradeIcon: x.icon ?? '',
                 faction: x.faction ?? '',
-                rarity: rarityStringToNumber[x.rarity as unknown as RarityString],
+                rarity: RarityMapper.stringToNumber[x.rarity as unknown as RarityString],
                 type: x.stat,
                 locations,
                 partOf,

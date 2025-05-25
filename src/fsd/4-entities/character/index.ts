@@ -1,4 +1,5 @@
 export * from './ui';
+export { rankUpData } from './data';
 export type {
     ICharacter2,
     ICharacterRankRange,

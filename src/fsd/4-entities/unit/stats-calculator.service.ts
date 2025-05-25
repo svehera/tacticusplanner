@@ -1,8 +1,6 @@
-import { StaticDataService } from '@/services';
-
 import { RarityStars, Rarity, Rank, rankToString } from '@/fsd/5-shared/model';
 
-import { ICharacter2, CharactersService } from '@/fsd/4-entities/character/@x/unit';
+import { ICharacter2, CharactersService, rankUpData } from '@/fsd/4-entities/character/@x/unit';
 import { NpcService } from '@/fsd/4-entities/npc/@x/unit';
 
 export class StatsCalculatorService {
@@ -72,7 +70,7 @@ export class StatsCalculatorService {
         secondUpgradeIndex: number
     ): number {
         if (unit == undefined) return 0;
-        const characterUpgrades = StaticDataService.rankUpData[unit.id];
+        const characterUpgrades = rankUpData[unit.id];
         let count: number = 0;
         if (unit.rank == Rank.Diamond3 || typeof characterUpgrades === 'undefined') return 0;
         const upgrades = characterUpgrades[rankToString(unit.rank)];

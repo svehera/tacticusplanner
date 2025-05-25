@@ -4,15 +4,12 @@ import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Faction, Rank, rankToString } from '@/fsd/5-shared/model';
 
 import { ICampaignBattleComposed, CampaignsService, ICampaignsProgress } from '@/fsd/4-entities/campaign';
-import { IRankUpData, IRankLookup } from '@/fsd/4-entities/character';
-import rankUpData from '@/fsd/4-entities/character/data/characters-ranks.data.json';
+import { IRankLookup, rankUpData } from '@/fsd/4-entities/character';
 import { IMaterialRecipeIngredientFull, IMaterialFull, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { IEstimatedRanksSettings, IMaterialEstimated2 } from '../models/interfaces';
 
 export class StaticDataService {
-    static readonly rankUpData: IRankUpData = rankUpData;
-
     static getItemLocations = (itemId: string): ICampaignBattleComposed[] => {
         const possibleLocations: ICampaignBattleComposed[] = [];
         const characterShardsData = UpgradesService.recipeDataFull[itemId];
@@ -71,7 +68,7 @@ export class StaticDataService {
         let priority = 0;
         for (const character of characters) {
             priority++;
-            const characterUpgrades = StaticDataService.rankUpData[character.unitName];
+            const characterUpgrades = rankUpData[character.unitName];
             if (!characterUpgrades) {
                 continue;
             }
