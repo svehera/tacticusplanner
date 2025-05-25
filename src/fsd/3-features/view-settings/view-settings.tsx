@@ -3,13 +3,14 @@ import { FormControlLabel, FormGroup, Popover, Switch, Tooltip } from '@mui/mate
 import Button from '@mui/material/Button';
 import React, { useContext } from 'react';
 
-import { IViewPreferences, IViewOption } from 'src/models/interfaces';
+// eslint-disable-next-line import-x/no-internal-modules
+import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { DispatchContext, StoreContext } from '../../reducers/store.provider';
+import { IViewPreferences, IViewOption } from './model';
 
 type OptionsPreset = 'wyo' | 'inventory' | 'myProgress';
 
-const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
+export const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
     const dispatch = useContext(DispatchContext);
     const { viewPreferences } = useContext(StoreContext);
     const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
@@ -141,5 +142,3 @@ const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
         </FormGroup>
     );
 };
-
-export default ViewSettings;

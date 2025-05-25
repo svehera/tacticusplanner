@@ -4,8 +4,8 @@ import { ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow, IMowDb } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
-import { CharactersFilterBy } from './enums/characters-filter-by';
-import { CharactersOrderBy } from './enums/characters-order-by';
+import { CharactersFilterBy } from '../../../fsd/4-entities/character/characters-filter-by.enum';
+import { CharactersOrderBy } from '../../../fsd/4-entities/character/characters-order-by.enum';
 
 export interface IFactionStatic {
     alliance: string;
@@ -26,11 +26,6 @@ export interface IFaction extends IFactionStatic {
     bsValue: number;
     unlockedCharacters: number;
     units: IUnit[];
-}
-
-export interface IViewControls {
-    orderBy: CharactersOrderBy;
-    filterBy: CharactersFilterBy;
 }
 
 export interface ICharactersContext {

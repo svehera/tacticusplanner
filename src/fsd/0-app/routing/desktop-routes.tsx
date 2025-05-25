@@ -29,7 +29,7 @@ export const globalInputRoutes: RouteObject[] = [
     {
         path: 'input/inventory',
         async lazy() {
-            const { Inventory } = await import('@/routes/inventory');
+            const { Inventory } = await import('@/fsd/1-pages/input-inventory');
             return { Component: Inventory };
         },
     },

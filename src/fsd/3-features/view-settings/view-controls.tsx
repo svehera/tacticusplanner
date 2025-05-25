@@ -2,23 +2,22 @@
 import InputLabel from '@mui/material/InputLabel';
 import React from 'react';
 
-import ViewSettings from 'src/routes/legendary-events/view-settings';
-import { getEnumValues } from 'src/shared-logic/functions';
-
+import { getEnumValues } from '@/fsd/5-shared/lib';
 import { FlexBox } from '@/fsd/5-shared/ui';
 
-import { IViewControls } from '../characters.models';
-import { CharactersFilterBy } from '../enums/characters-filter-by';
-import { CharactersOrderBy } from '../enums/characters-order-by';
+import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
 
-export const ViewControls = ({
+import { ICharactersViewControls } from './model';
+import { ViewSettings } from './view-settings';
+
+export const CharactersViewControls = ({
     viewControls,
     viewControlsChanges,
 }: {
-    viewControls: IViewControls;
-    viewControlsChanges: (viewControls: IViewControls) => void;
+    viewControls: ICharactersViewControls;
+    viewControlsChanges: (viewControls: ICharactersViewControls) => void;
 }) => {
-    const updatePreferences = (setting: keyof IViewControls, value: number) => {
+    const updatePreferences = (setting: keyof ICharactersViewControls, value: number) => {
         viewControlsChanges({ ...viewControls, [setting]: value });
     };
 
@@ -76,7 +75,7 @@ export const ViewControls = ({
     const getSelectControl = (
         label: string,
         value: number,
-        name: keyof IViewControls,
+        name: keyof ICharactersViewControls,
         entries: Array<number>,
         getName: (value: number) => string
     ) => (
@@ -100,5 +99,3 @@ export const ViewControls = ({
         </FlexBox>
     );
 };
-
-export default React.memo(ViewControls);

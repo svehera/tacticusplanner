@@ -21,8 +21,7 @@ import { IMow, IMowDb } from '@/fsd/4-entities/mow';
 import { IMaterialFull, IMaterialRecipeIngredientFull } from '@/fsd/4-entities/upgrade';
 
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
-import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
-import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
+import { IViewPreferences } from '@/fsd/3-features/view-settings';
 import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
@@ -243,57 +242,6 @@ export interface ILegendaryEventSelectedRequirements {
 
 export interface ILegendaryEventData {
     selectedTeams: ITableRow<string>[];
-}
-
-export interface IViewOption<T = IViewPreferences> {
-    key: keyof T;
-    value: boolean;
-    label: string;
-    disabled: boolean;
-    tooltip?: string;
-}
-
-export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IWyoViewSettings {
-    theme: 'light' | 'dark';
-    // autoTeams: boolean;
-    wyoFilter: CharactersFilterBy;
-    wyoOrder: CharactersOrderBy;
-    craftableItemsInInventory: boolean;
-    inventoryShowAlphabet: boolean;
-    inventoryShowPlusMinus: boolean;
-    goalsTableView: boolean;
-    myProgressShowCoreCharacters: boolean;
-    apiIntegrationSyncOptions: string[];
-}
-
-export interface IWyoViewSettings {
-    showBadges: boolean;
-    showAbilitiesLevel: boolean;
-    showBsValue: boolean;
-    showPower: boolean;
-    showCharacterLevel: boolean;
-    showCharacterRarity: boolean;
-}
-
-export interface ILreViewSettings {
-    lreGridView: boolean;
-    showAlpha: boolean;
-    showBeta: boolean;
-    showGamma: boolean;
-    onlyUnlocked: boolean;
-    hideCompleted: boolean;
-}
-
-export interface ILreTileSettings {
-    lreTileShowUnitIcon: boolean;
-    lreTileShowUnitRarity: boolean;
-    lreTileShowUnitRank: boolean;
-    lreTileShowUnitRankBackground: boolean;
-    lreTileShowUnitName: boolean;
-    lreTileShowUnitBias: boolean;
-    lreTileShowUnitActiveAbility: boolean;
-    lreTileShowUnitPassiveAbility: boolean;
-    lreTileShowUnitHealTraits: boolean;
 }
 
 export interface IAutoTeamsPreferences {
@@ -565,3 +513,11 @@ export type {
     IMaterialFull,
     IMaterialRecipeIngredientFull,
 };
+
+export type {
+    IViewPreferences,
+    IViewOption,
+    ILreViewSettings,
+    IWyoViewSettings,
+    ILreTileSettings,
+} from '@/fsd/3-features/view-settings';

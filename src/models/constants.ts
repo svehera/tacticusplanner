@@ -4,9 +4,9 @@ import { Rank, Rarity, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
 
 import { ICampaignsProgress, Campaign } from '@/fsd/4-entities/campaign';
 import { CharacterReleaseRarity } from '@/fsd/4-entities/character';
+import { CharactersFilterBy } from '@/fsd/4-entities/character/characters-filter-by.enum';
+import { CharactersOrderBy } from '@/fsd/4-entities/character/characters-order-by.enum';
 
-import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
-import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
 import { GuildWarTeamType, IGWLayoutZone } from 'src/v2/features/guild-war/guild-war.models';
 
 import { DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';

@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { InventoryItem } from 'src/routes/inventory-item';
-
+import { InventoryItem } from './inventory-item';
 import { IUpgradesGroup } from './inventory-models';
 
 interface Props {

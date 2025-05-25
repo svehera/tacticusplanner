@@ -6,7 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import React, { useState } from 'react';
 
-import ViewSettings from 'src/routes/legendary-events/view-settings';
+import { ViewSettings } from '@/fsd/3-features/view-settings';
 
 interface Props {
     nameFilter: string;

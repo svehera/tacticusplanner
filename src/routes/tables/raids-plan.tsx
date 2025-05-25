@@ -9,7 +9,6 @@ import Button from '@mui/material/Button';
 import React, { useEffect, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { Inventory } from 'src/routes/inventory';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
 import { AccessibleTooltip, FlexBox } from '@/fsd/5-shared/ui';
@@ -19,6 +18,8 @@ import { IEstimatedShards, IEstimatedUpgrades } from 'src/v2/features/goals/goal
 import { MaterialsTable } from 'src/v2/features/goals/materials-table';
 import { RaidsDayView } from 'src/v2/features/goals/raids-day-view';
 import { ShardsRaidsDayInput } from 'src/v2/features/goals/shards-raids-day-input';
+
+import { Inventory } from '@/fsd/1-pages/input-inventory';
 
 interface Props {
     estimatedShards: IEstimatedShards;

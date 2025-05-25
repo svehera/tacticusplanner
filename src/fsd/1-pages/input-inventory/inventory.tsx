@@ -4,17 +4,17 @@ import { groupBy, map, orderBy } from 'lodash';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { InventoryControls } from 'src/routes/inventory-controls';
-import { UpgradesGroup } from 'src/routes/upgrades-group';
+// eslint-disable-next-line import-x/no-internal-modules
+import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Rarity } from '@/fsd/5-shared/model';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
 
-import { DispatchContext, StoreContext } from '../reducers/store.provider';
-
+import { InventoryControls } from './inventory-controls';
 import { IInventoryUpgrade, IUpgradesGroup } from './inventory-models';
+import { UpgradesGroup } from './upgrades-group';
 
 interface Props {
     itemsFilter?: string[];
