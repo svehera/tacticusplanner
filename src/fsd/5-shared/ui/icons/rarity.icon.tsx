@@ -9,7 +9,7 @@ export const RarityIcon = ({ rarity }: { rarity: Rarity }) => {
     if (!rarityString) {
         return <span>Invalid rarity</span>;
     }
-    const image = getImageUrl(`rarity/resized/${rarityString.toLowerCase()}.png`);
+    const image = getImageUrl(`rarity/resized/legendary.png`);
 
     return (
         <img

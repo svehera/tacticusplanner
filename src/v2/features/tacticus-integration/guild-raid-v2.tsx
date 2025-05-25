@@ -478,16 +478,16 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         },
         {
             headerName: 'Token Status',
-            field: 'userId',
+            field: 'tokenStatus',
             cellRenderer: TokenStatusRenderer,
             sortable: true,
-            comparator: (data1: UserSummary, data2: UserSummary) => {
-                const tokenDiff = data1.tokenStatus.count - data2.tokenStatus.count;
+            comparator: (tokenStatus1: TokenStatus, tokenStatus2: TokenStatus) => {
+                const tokenDiff = tokenStatus1.count - tokenStatus2.count;
                 if (tokenDiff !== 0) {
                     return tokenDiff;
                 }
-                // the oldest (i.e. smallest) the reloadStart, the more token we have
-                return data2.tokenStatus.reloadStart - data1.tokenStatus.reloadStart;
+                // The oldest the reloadStart, the more token we have
+                return tokenStatus2.reloadStart - tokenStatus1.reloadStart;
             },
             width: 120,
         },

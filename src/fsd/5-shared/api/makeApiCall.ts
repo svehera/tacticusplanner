@@ -2,6 +2,8 @@
 
 import API from './api';
 import { IErrorResponse } from './api.models';
+import guild from './guild.json';
+import guildRaid from './guildRaid.json';
 
 export const makeApiCall = <TResponse, TRequestBody = any>(
     method: Method,
@@ -9,6 +11,12 @@ export const makeApiCall = <TResponse, TRequestBody = any>(
     body?: TRequestBody
 ): Promise<{ data: TResponse | null; error: string | null }> => {
     const fetchData = async () => {
+        switch (url) {
+            case 'guild':
+                return { data: guild, error: null };
+            case 'guildRaid':
+                return { data: guildRaid, error: null };
+        }
         try {
             const response = await API<TResponse, AxiosResponse<TResponse>, TRequestBody>({
                 url: url,

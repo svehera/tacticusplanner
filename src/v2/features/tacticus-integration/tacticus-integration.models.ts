@@ -168,5 +168,5 @@ export enum TacticusEncounterType {
 
 export enum TacticusDamageType {
     Bomb = 0,
-    Battle = 1,
+    Battle = 'Battle',
 }
