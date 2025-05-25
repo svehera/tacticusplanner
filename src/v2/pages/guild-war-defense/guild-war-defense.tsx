@@ -8,15 +8,13 @@ import { Link } from 'react-router-dom';
 
 import { ICharacter2 } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { CharacterItemDialog } from 'src/shared-components/character-item-dialog';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rarity, Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, FlexBox, Conditional } from '@/fsd/5-shared/ui';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
-import { Rank } from '@/fsd/4-entities/character';
-
+import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { PotentialInfo } from 'src/v2/features/characters/components/potential-info';
@@ -222,7 +220,7 @@ const TeamCard: React.FC<{
                 title={
                     <FlexBox justifyContent={'space-between'}>
                         <FlexBox gap={5} style={{ fontSize: 18 }}>
-                            <RarityImage rarity={team.rarityCap} />
+                            <RarityIcon rarity={team.rarityCap} />
                             <span>{team.name}</span>
                         </FlexBox>
                         <FlexBox gap={5} style={{ fontSize: 16 }}>

@@ -62,7 +62,7 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
             {
                 path: 'contacts',
                 async lazy() {
-                    const { Contacts } = await import('@/routes/contacts/contacts');
+                    const { Contacts } = await import('@/fsd/1-pages/contacts');
                     return { Component: Contacts };
                 },
             },

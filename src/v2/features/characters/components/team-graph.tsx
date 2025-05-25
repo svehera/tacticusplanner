@@ -7,7 +7,8 @@ import { ResponsiveLine } from '@nivo/line';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
-import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
+import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
 
 import { InfoTeamGraphBox } from './info-team-graph-box';

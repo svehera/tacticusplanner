@@ -1,20 +1,22 @@
 import { uniq } from 'lodash';
 
-import battleData from 'src/assets/newBattleData.json';
-import rankUpData from 'src/assets/rankUpData.json';
 import { charsUnlockShards } from 'src/models/constants';
-import { CampaignType, PersonalGoalType } from 'src/models/enums';
-import {
-    ICampaignBattleComposed,
-    ICampaignsData,
-    ICampaignsProgress,
-    IRankUpData,
-    IRecipeData,
-} from 'src/models/interfaces';
-import { StaticDataService } from 'src/services/static-data.service';
-import recipeData from 'src/v2/data/recipeData.json';
+import { PersonalGoalType } from 'src/models/enums';
 
 import { Rarity } from '@/fsd/5-shared/model';
+
+import {
+    ICampaignBattleComposed,
+    CampaignsService,
+    ICampaignsProgress,
+    CampaignType,
+    ICampaignsData,
+} from '@/fsd/4-entities/campaign';
+import battleData from '@/fsd/4-entities/campaign/data/newBattleData.json';
+import { CharactersService, CharacterUpgradesService, IRankUpData } from '@/fsd/4-entities/character';
+import rankUpData from '@/fsd/4-entities/character/data/characters-ranks.data.json';
+import { IRecipeData } from '@/fsd/4-entities/upgrade';
+import recipeData from '@/fsd/4-entities/upgrade/data/recipeData.json';
 
 import {
     BattleSavings,
@@ -25,7 +27,6 @@ import {
     GoalData,
     MaterialRequirements,
 } from 'src/v2/features/campaign-progression/campaign-progression.models';
-import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 import {
     ICharacterAscendGoal,
     ICharacterUnlockGoal,
@@ -102,7 +103,7 @@ export class CampaignsProgressionService {
             goalData.unfarmableLocations.forEach(x => {
                 nodesToBeat.get(x.campaign)?.push(x);
             });
-            const unit = StaticDataService.getUnit(goal.unitId);
+            const unit = CharactersService.getUnit(goal.unitId);
             if (!unit) {
                 console.error("Couldn't find unit '" + goal.unitId + "'.");
                 continue;
@@ -261,12 +262,11 @@ export class CampaignsProgressionService {
     ): GoalData {
         const materialReqs = new MaterialRequirements();
         if (goal.type == PersonalGoalType.Unlock) {
-            const unlockGoal = goal as ICharacterUnlockGoal;
             this.addToMaterials(materialReqs, goal.unitName, charsUnlockShards[goal.rarity] - goal.shards);
         } else {
             const upgradeRanks =
                 goal.type === PersonalGoalType.UpgradeRank
-                    ? UpgradesService.getCharacterUpgradeRank(goal as ICharacterUpgradeRankGoal)
+                    ? CharacterUpgradesService.getCharacterUpgradeRank(goal as ICharacterUpgradeRankGoal)
                     : UpgradesService.getMowUpgradeRank(goal as ICharacterUpgradeMow);
 
             for (const unitUpgrade of upgradeRanks) {

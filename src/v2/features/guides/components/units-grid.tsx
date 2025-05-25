@@ -4,8 +4,9 @@ import { isMobile } from 'react-device-detect';
 
 import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
 
+import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isCharacter } from 'src/v2/features/characters/units.functions';
 
 import './units-grid.scss';
 

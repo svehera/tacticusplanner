@@ -1,12 +1,12 @@
-﻿import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham, ValueFormatterParams } from 'ag-grid-community';
+﻿import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-
 import { Rarity } from '@/fsd/5-shared/model';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
 import { IMowUpgrade } from 'src/v2/features/lookup/lookup.models';
 
@@ -62,7 +62,7 @@ export const MowUpgradesTable: React.FC<Props> = ({ rows, upgrades }) => {
             cellRenderer: (params: ICellRendererParams<IMowUpgrade>) => {
                 const { data } = params;
                 if (data) {
-                    return <RarityImage rarity={data.rarity} />;
+                    return <RarityIcon rarity={data.rarity} />;
                 }
             },
             cellClass: params => Rarity[params.data?.rarity ?? 0].toLowerCase(),

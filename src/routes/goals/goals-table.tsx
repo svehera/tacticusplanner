@@ -1,4 +1,4 @@
-﻿import { ArrowForward, DeleteForever, Edit, Info } from '@mui/icons-material';
+﻿import { ArrowForward, DeleteForever, Edit } from '@mui/icons-material';
 import LinkIcon from '@mui/icons-material/Link';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -8,20 +8,19 @@ import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
-import { charsUnlockShards, rarityToStars } from 'src/models/constants';
+import { charsUnlockShards } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
-import { ICharacter2 } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-import { StarsImage } from 'src/v2/components/images/stars-image';
-import { StatCalculatorService } from 'src/v2/functions/stat-calculator-service';
 
-import { RarityStars } from '@/fsd/5-shared/model';
-import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { Rank, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
+import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
 
-import { CharacterShardIcon, Rank } from '@/fsd/4-entities/character';
+import { ICharacter2 } from '@/fsd/4-entities/character';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
+import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import {
@@ -62,7 +61,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
         switch (goal.type) {
             case PersonalGoalType.Ascend: {
                 const isSameRarity = goal.rarityStart === goal.rarityEnd;
-                const minStars = rarityToStars[goal.rarityEnd];
+                const minStars = RarityMapper.toStars[goal.rarityEnd];
                 const isMinStars = minStars === goal.starsEnd;
 
                 const targetShards = ShardsService.getTargetShards(goal);
@@ -72,16 +71,16 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                             <div className="flex-box gap5">
                                 {!isSameRarity && (
                                     <>
-                                        <RarityImage rarity={goal.rarityStart} /> <ArrowForward />
-                                        <RarityImage rarity={goal.rarityEnd} />
-                                        {!isMinStars && <StarsImage stars={goal.starsEnd} />}
+                                        <RarityIcon rarity={goal.rarityStart} /> <ArrowForward />
+                                        <RarityIcon rarity={goal.rarityEnd} />
+                                        {!isMinStars && <StarsIcon stars={goal.starsEnd} />}
                                     </>
                                 )}
 
                                 {isSameRarity && (
                                     <>
-                                        <StarsImage stars={goal.starsStart} /> <ArrowForward />
-                                        <StarsImage stars={goal.starsEnd} />
+                                        <StarsIcon stars={goal.starsStart} /> <ArrowForward />
+                                        <StarsIcon stars={goal.starsEnd} />
                                     </>
                                 )}
                             </div>
@@ -101,12 +100,12 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                     <div>
                         <div className="flex-box between">
                             <div className="flex-box gap3">
-                                <RankImage rank={goal.rankStart} /> <ArrowForward />
-                                <RankImage rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
+                                <RankIcon rank={goal.rankStart} /> <ArrowForward />
+                                <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
                                 {!!goal.upgradesRarity.length && (
                                     <div className="flex-box gap3">
                                         {goal.upgradesRarity.map(x => (
-                                            <RarityImage key={x} rarity={x} />
+                                            <RarityIcon key={x} rarity={x} />
                                         ))}
                                     </div>
                                 )}
@@ -140,7 +139,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                             {!!goal.upgradesRarity.length && (
                                 <div className="flex-box gap3">
                                     {goal.upgradesRarity.map(x => (
-                                        <RarityImage key={x} rarity={x} />
+                                        <RarityIcon key={x} rarity={x} />
                                     ))}
                                 </div>
                             )}
@@ -238,9 +237,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                 cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
                     const { data } = params;
                     if (data) {
-                        return (
-                            <CharacterShardIcon icon={data.unitIcon} height={30} width={30} tooltip={data.unitName} />
-                        );
+                        return <UnitShardIcon icon={data.unitIcon} height={30} width={30} tooltip={data.unitName} />;
                     }
                 },
                 sortable: false,
@@ -285,15 +282,15 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                             return (
                                 <div className="flex gap-[3px] justify-left">
                                     <MiscIcon icon="health" width={15} height={15} />
-                                    {StatCalculatorService.calculateHealth(
+                                    {StatsCalculatorService.calculateHealth(
                                         data.unitId,
                                         data.rarity,
                                         getUnitStars(data.unitId),
                                         data.rankStart,
-                                        StatCalculatorService.countHealthUpgrades(getUnit(data.unitId))
+                                        StatsCalculatorService.countHealthUpgrades(getUnit(data.unitId))
                                     )}
                                     <ArrowForward width={15} height={15} />
-                                    {StatCalculatorService.calculateHealth(
+                                    {StatsCalculatorService.calculateHealth(
                                         data.unitId,
                                         data.rarity,
                                         getUnitStars(data.unitId),
@@ -306,20 +303,20 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                             return (
                                 <div className="flex gap-[3px] justify-left">
                                     <MiscIcon icon="health" width={15} height={15} />
-                                    {StatCalculatorService.calculateHealth(
+                                    {StatsCalculatorService.calculateHealth(
                                         data.unitId,
                                         data.rarityStart,
                                         data.starsStart,
                                         getUnitRank(data.unitId),
-                                        StatCalculatorService.countHealthUpgrades(getUnit(data.unitId))
+                                        StatsCalculatorService.countHealthUpgrades(getUnit(data.unitId))
                                     )}
                                     <ArrowForward width={15} height={15} />
-                                    {StatCalculatorService.calculateHealth(
+                                    {StatsCalculatorService.calculateHealth(
                                         data.unitId,
                                         data.rarityEnd,
                                         data.starsEnd,
                                         getUnitRank(data.unitId),
-                                        StatCalculatorService.countHealthUpgrades(getUnit(data.unitId))
+                                        StatsCalculatorService.countHealthUpgrades(getUnit(data.unitId))
                                     )}
                                 </div>
                             );
@@ -337,15 +334,15 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                             return (
                                 <div className="flex gap-[3px] justify-left">
                                     <MiscIcon icon="damage" width={15} height={15} />
-                                    {StatCalculatorService.calculateDamage(
+                                    {StatsCalculatorService.calculateDamage(
                                         data.unitId,
                                         data.rarity,
                                         getUnitStars(data.unitId),
                                         data.rankStart,
-                                        StatCalculatorService.countDamageUpgrades(getUnit(data.unitId))
+                                        StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))
                                     )}
                                     <ArrowForward width={15} height={15} />
-                                    {StatCalculatorService.calculateDamage(
+                                    {StatsCalculatorService.calculateDamage(
                                         data.unitId,
                                         data.rarity,
                                         getUnitStars(data.unitId),
@@ -358,20 +355,20 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                             return (
                                 <div className="flex gap-[3px] justify-left">
                                     <MiscIcon icon="damage" width={15} height={15} />
-                                    {StatCalculatorService.calculateDamage(
+                                    {StatsCalculatorService.calculateDamage(
                                         data.unitId,
                                         data.rarityStart,
                                         data.starsStart,
                                         getUnitRank(data.unitId),
-                                        StatCalculatorService.countDamageUpgrades(getUnit(data.unitId))
+                                        StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))
                                     )}
                                     <ArrowForward width={15} height={15} />
-                                    {StatCalculatorService.calculateDamage(
+                                    {StatsCalculatorService.calculateDamage(
                                         data.unitId,
                                         data.rarityEnd,
                                         data.starsEnd,
                                         getUnitRank(data.unitId),
-                                        StatCalculatorService.countDamageUpgrades(getUnit(data.unitId))
+                                        StatsCalculatorService.countDamageUpgrades(getUnit(data.unitId))
                                     )}
                                 </div>
                             );
@@ -389,15 +386,15 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                             return (
                                 <div className="flex gap-[3px] justify-left">
                                     <MiscIcon icon="armour" width={15} height={15} />
-                                    {StatCalculatorService.calculateArmor(
+                                    {StatsCalculatorService.calculateArmor(
                                         data.unitId,
                                         data.rarity,
                                         getUnitStars(data.unitId),
                                         data.rankStart,
-                                        StatCalculatorService.countArmorUpgrades(getUnit(data.unitId))
+                                        StatsCalculatorService.countArmorUpgrades(getUnit(data.unitId))
                                     )}
                                     <ArrowForward width={15} height={15} />
-                                    {StatCalculatorService.calculateArmor(
+                                    {StatsCalculatorService.calculateArmor(
                                         data.unitId,
                                         data.rarity,
                                         getUnitStars(data.unitId),
@@ -410,20 +407,20 @@ export const GoalsTable: React.FC<Props> = ({ rows, estimate, menuItemSelect }) 
                             return (
                                 <div className="flex gap-[3px] justify-left">
                                     <MiscIcon icon="armour" width={15} height={15} />
-                                    {StatCalculatorService.calculateArmor(
+                                    {StatsCalculatorService.calculateArmor(
                                         data.unitId,
                                         data.rarityStart,
                                         data.starsStart,
                                         getUnitRank(data.unitId),
-                                        StatCalculatorService.countArmorUpgrades(getUnit(data.unitId))
+                                        StatsCalculatorService.countArmorUpgrades(getUnit(data.unitId))
                                     )}
                                     <ArrowForward width={15} height={15} />
-                                    {StatCalculatorService.calculateArmor(
+                                    {StatsCalculatorService.calculateArmor(
                                         data.unitId,
                                         data.rarityEnd,
                                         data.starsEnd,
                                         getUnitRank(data.unitId),
-                                        StatCalculatorService.countArmorUpgrades(getUnit(data.unitId))
+                                        StatsCalculatorService.countArmorUpgrades(getUnit(data.unitId))
                                     )}
                                 </div>
                             );

@@ -29,7 +29,7 @@ export const globalInputRoutes: RouteObject[] = [
     {
         path: 'input/inventory',
         async lazy() {
-            const { Inventory } = await import('@/routes/inventory');
+            const { Inventory } = await import('@/fsd/1-pages/input-inventory');
             return { Component: Inventory };
         },
     },
@@ -70,14 +70,14 @@ export const globalLearnRoutes: RouteObject[] = [
     {
         path: 'learn/characters',
         async lazy() {
-            const { Characters } = await import('@/routes/characters/characters');
-            return { Component: Characters };
+            const { LearnCharacters } = await import('@/fsd/1-pages/learn-characters');
+            return { Component: LearnCharacters };
         },
     },
     {
         path: 'learn/npcs',
         async lazy() {
-            const { NpcInfo } = await import('@/routes/npcs/npc-info');
+            const { NpcInfo } = await import('@/fsd/1-pages/learn-npcs');
             return { Component: NpcInfo };
         },
     },
@@ -85,21 +85,21 @@ export const globalLearnRoutes: RouteObject[] = [
     {
         path: 'learn/upgrades',
         async lazy() {
-            const { Upgrades } = await import('@/routes/tables/upgrades');
+            const { Upgrades } = await import('@/fsd/1-pages/learn-upgrades');
             return { Component: Upgrades };
         },
     },
     {
         path: 'learn/rankLookup',
         async lazy() {
-            const { RankLookup } = await import('@/routes/tables/rankLookup');
+            const { RankLookup } = await import('@/fsd/1-pages/learn-characters');
             return { Component: RankLookup };
         },
     },
     {
         path: 'learn/campaigns',
         async lazy() {
-            const { Campaigns } = await import('@/routes/tables/campaigns');
+            const { Campaigns } = await import('@/fsd/1-pages/learn-campaigns/campaigns');
             return { Component: Campaigns };
         },
     },
@@ -129,7 +129,7 @@ export const appRoutes: () => RouteObject[] = () => [
             {
                 path: 'contacts',
                 async lazy() {
-                    const { Contacts } = await import('@/routes/contacts/contacts');
+                    const { Contacts } = await import('@/fsd/1-pages/contacts');
                     return { Component: Contacts };
                 },
             },

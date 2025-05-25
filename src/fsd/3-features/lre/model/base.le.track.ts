@@ -1,9 +1,11 @@
 ﻿import { intersectionBy, orderBy, sum, uniqBy } from 'lodash';
 
 // eslint-disable-next-line import-x/no-internal-modules
-import { IAutoTeamsPreferences, ICharacter2, ISelectedTeamsOrdering } from '@/models/interfaces';
+import { IAutoTeamsPreferences, ISelectedTeamsOrdering } from '@/models/interfaces';
 
-import { Rank, CharacterBias } from '@/fsd/4-entities/character';
+import { Rank } from '@/fsd/5-shared/model';
+
+import { ICharacter2, CharacterBias } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, ILegendaryEventTrackStatic, LreTrackId } from '@/fsd/4-entities/lre';
 
 import { ILegendaryEventTrack, ILegendaryEventTrackRequirement } from '../lre.model';

@@ -12,8 +12,9 @@ import { IMenuOption } from 'src/v2/models/menu-option';
 
 import { Alliance } from '@/fsd/5-shared/model';
 
+import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
+
 import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
 import { TeamSlotEdit } from 'src/v2/features/guides/components/team-slot-edit';
 import { UnitsGrid } from 'src/v2/features/guides/components/units-grid';
 import { SlotType } from 'src/v2/features/guides/guides.enums';

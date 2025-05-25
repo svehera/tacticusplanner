@@ -1,10 +1,7 @@
 import { LineChart } from '@mui/x-charts';
 import React, { useMemo } from 'react';
 
-import { RarityStars, Rarity } from '@/fsd/5-shared/model';
-
-import { Rank } from '@/fsd/4-entities/character';
-import { Faction } from '@/fsd/4-entities/faction';
+import { RarityStars, Rarity, Faction, Rank } from '@/fsd/5-shared/model';
 
 import { DamageCalculatorService } from './damage-calculator-service';
 import { IEquipmentSpec } from './versus-interfaces';

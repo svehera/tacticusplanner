@@ -12,11 +12,11 @@ import {
     ILreViewSettings,
     IViewOption,
 } from 'src/models/interfaces';
-import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rarity, Rank } from '@/fsd/5-shared/model';
+import { MultipleSelectCheckmarks } from '@/fsd/5-shared/ui';
 
-import { CharacterBias, Rank } from '@/fsd/4-entities/character';
+import { CharacterBias } from '@/fsd/4-entities/character';
 
 import { LreTile } from 'src/v2/features/lre/lre-tile';
 

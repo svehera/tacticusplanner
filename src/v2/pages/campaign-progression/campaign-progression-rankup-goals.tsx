@@ -3,13 +3,11 @@ import { ColDef, AllCommunityModule, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 
-import { IUnitData } from 'src/models/interfaces';
-import { StaticDataService } from 'src/services/static-data.service';
-import { RankImage } from 'src/v2/components/images/rank-image';
+import { Rank } from '@/fsd/5-shared/model';
+import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { MiscIcon } from '@/fsd/5-shared/ui/icons';
-
-import { Rank, CharacterShardIcon } from '@/fsd/4-entities/character';
+import { CharactersService, ICharacterData } from '@/fsd/4-entities/character';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
 import { CampaignData } from 'src/v2/features/campaign-progression/campaign-progression.models';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from 'src/v2/features/goals/goals.models';
@@ -50,9 +48,9 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
     }
 
     /** @returns the unit specified in the goal with the given ID. */
-    function getGoalUnit(goalId: string): IUnitData | undefined {
+    function getGoalUnit(goalId: string): ICharacterData | undefined {
         if (!getGoal(goalId)) return undefined;
-        return StaticDataService.getUnit(getGoal(goalId)!.unitId) ?? undefined;
+        return CharactersService.getUnit(getGoal(goalId)!.unitId) ?? undefined;
     }
 
     /**
@@ -111,7 +109,7 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
                     const goalData = params.data.goalData[0];
                     return (
                         <a href={getRankLookupHref(goalData.goalId)}>
-                            <CharacterShardIcon
+                            <UnitShardIcon
                                 icon={getGoalUnit(goalData.goalId)?.icon ?? '(undefined)'}
                                 height={30}
                                 tooltip={getGoalUnit(goalData.goalId)?.icon}
@@ -127,7 +125,7 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
                 cellRenderer: (params: any) => {
                     if (!params.data.goalData || !params.data.goalData[0]) return '';
                     const goalData = params.data.goalData[0];
-                    return <RankImage rank={getGoalRankStart(goalData.goalId)} />;
+                    return <RankIcon rank={getGoalRankStart(goalData.goalId)} />;
                 },
             },
             {
@@ -146,7 +144,7 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
                 cellRenderer: (params: any) => {
                     if (!params.data.goalData || !params.data.goalData[0]) return '';
                     const goalData = params.data.goalData[0];
-                    return <RankImage rank={getGoalRankEnd(goalData.goalId)} />;
+                    return <RankIcon rank={getGoalRankEnd(goalData.goalId)} />;
                 },
             },
             {

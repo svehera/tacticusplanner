@@ -1,13 +1,11 @@
 ﻿import React from 'react';
 
 import { CharacterPortraitImage } from 'src/v2/components/images/character-portrait.image';
-import { RankImage } from 'src/v2/components/images/rank-image';
-import { StarsImage } from 'src/v2/components/images/stars-image';
 
-import { RarityStars } from '@/fsd/5-shared/model';
-import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityStars, Rank } from '@/fsd/5-shared/model';
+import { MiscIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
-import { Rank } from '@/fsd/4-entities/character';
+import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
 import './character-tile.css';
 
@@ -24,7 +22,7 @@ export const EmptyTile: React.FC<Props> = ({ onClick, isMow = false }) => {
                 cursor: onClick ? 'pointer' : undefined,
             }}
             onClick={onClick ? () => onClick!() : undefined}>
-            <StarsImage stars={RarityStars.None} />
+            <StarsIcon stars={RarityStars.None} />
             <div>
                 <CharacterPortraitImage icon={'unset.webp'} />
 
@@ -35,7 +33,7 @@ export const EmptyTile: React.FC<Props> = ({ onClick, isMow = false }) => {
                 <div className="character-level">1</div>
             </div>
             <div className="character-rarity-rank">
-                {isMow ? <MiscIcon icon={'mow'} width={22} height={25} /> : <RankImage rank={Rank.Stone1} />}
+                {isMow ? <MiscIcon icon={'mow'} width={22} height={25} /> : <RankIcon rank={Rank.Stone1} />}
             </div>
         </div>
     );

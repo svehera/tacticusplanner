@@ -1,13 +1,10 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
-import { EquipmentType } from 'src/models/interfaces';
+import { RarityStars, Rarity, Faction, Rank } from '@/fsd/5-shared/model';
 
-import { RarityStars, Rarity } from '@/fsd/5-shared/model';
-
-import { Rank } from '@/fsd/4-entities/character';
-import { Faction } from '@/fsd/4-entities/faction';
+import { EquipmentType } from '@/fsd/4-entities/equipment';
 
 import { DamageChart } from './damage-chart';
 import { FullCharacter } from './full-character';
@@ -18,23 +15,23 @@ import { IEquipmentSpec } from './versus-interfaces';
  * characters.
  */
 export const Versus: React.FC = () => {
-    const [char1Id, setChar1Id] = React.useState<string>('Varro Tigurius');
-    const [char1Faction, setChar1Faction] = React.useState<Faction>(Faction.Ultramarines);
-    const [char1Rank, setChar1Rank] = React.useState<Rank>(Rank.Stone1);
-    const [char1Rarity, setChar1Rarity] = React.useState<Rarity>(Rarity.Common);
-    const [char1Stars, setChar1Stars] = React.useState<RarityStars>(RarityStars.None);
-    const [char1Equipment, setChar1Equipment] = React.useState<IEquipmentSpec[]>([
+    const [char1Id, setChar1Id] = useState<string>('Varro Tigurius');
+    const [char1Faction, setChar1Faction] = useState<Faction>(Faction.Ultramarines);
+    const [char1Rank, setChar1Rank] = useState<Rank>(Rank.Stone1);
+    const [char1Rarity, setChar1Rarity] = useState<Rarity>(Rarity.Common);
+    const [char1Stars, setChar1Stars] = useState<RarityStars>(RarityStars.None);
+    const [char1Equipment, setChar1Equipment] = useState<IEquipmentSpec[]>([
         { type: EquipmentType.Crit },
         { type: EquipmentType.Defensive },
         { type: EquipmentType.CritBooster },
     ]);
 
-    const [char2Id, setChar2Id] = React.useState<string>('Varro Tigurius');
-    const [char2Faction, setChar2Faction] = React.useState<Faction>(Faction.Ultramarines);
-    const [char2Rank, setChar2Rank] = React.useState<Rank>(Rank.Stone1);
-    const [char2Rarity, setChar2Rarity] = React.useState<Rarity>(Rarity.Common);
-    const [char2Stars, setChar2Stars] = React.useState<RarityStars>(RarityStars.None);
-    const [char2Equipment, setChar2Equipment] = React.useState<IEquipmentSpec[]>([
+    const [char2Id, setChar2Id] = useState<string>('Varro Tigurius');
+    const [char2Faction, setChar2Faction] = useState<Faction>(Faction.Ultramarines);
+    const [char2Rank, setChar2Rank] = useState<Rank>(Rank.Stone1);
+    const [char2Rarity, setChar2Rarity] = useState<Rarity>(Rarity.Common);
+    const [char2Stars, setChar2Stars] = useState<RarityStars>(RarityStars.None);
+    const [char2Equipment, setChar2Equipment] = useState<IEquipmentSpec[]>([
         { type: EquipmentType.Crit },
         { type: EquipmentType.Defensive },
         { type: EquipmentType.CritBooster },

@@ -1,59 +1,42 @@
-﻿import { cloneDeep, groupBy, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
+﻿import { cloneDeep, mean, orderBy, sum, uniq, uniqBy } from 'lodash';
 
-import battleData from 'src/assets/newBattleData.json';
-import rankUpData from 'src/assets/rankUpData.json';
-import { rarityStringToNumber } from 'src/models/constants';
-import { CampaignType, DailyRaidsStrategy, PersonalGoalType } from 'src/models/enums';
-import {
-    ICampaignBattle,
-    ICampaignsData,
-    ICampaignsProgress,
-    IEstimatedRanksSettings,
-    IMaterial,
-    IMaterialRecipeIngredient,
-    IRankUpData,
-    IRecipeData,
-} from 'src/models/interfaces';
-import { getEnumValues, rankToString } from 'src/shared-logic/functions';
-import recipeData from 'src/v2/data/recipeData.json';
+import { DailyRaidsStrategy, PersonalGoalType } from 'src/models/enums';
+import { IEstimatedRanksSettings } from 'src/models/interfaces';
 
-import { RarityString, Rarity } from '@/fsd/5-shared/model';
+import { getEnumValues } from '@/fsd/5-shared/lib';
+import { Rank, Rarity } from '@/fsd/5-shared/model';
 
-import { Rank } from '@/fsd/4-entities/character';
-
-import { campaignEventsLocations, campaignsByGroup } from 'src/v2/features/campaigns/campaigns.constants';
-import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
+import { ICampaignsProgress, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
+import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
+import { CharacterUpgradesService, IUnitUpgradeRank } from '@/fsd/4-entities/character';
 import {
     IBaseUpgrade,
-    IBaseUpgradeData,
+    ICraftedUpgrade,
+    IMaterial,
+    IMaterialRecipeIngredient,
+    UpgradesService as FsdUpgradesService,
+} from '@/fsd/4-entities/upgrade';
+import recipeData from '@/fsd/4-entities/upgrade/data/recipeData.json';
+
+import {
     ICharacterUpgradeEstimate,
     ICharacterUpgradeMow,
     ICharacterUpgradeRankEstimate,
     ICharacterUpgradeRankGoal,
     ICombinedUpgrade,
-    ICraftedUpgrade,
-    ICraftedUpgradeData,
     IEstimatedUpgrades,
     IItemRaidLocation,
-    IRankLookup,
     IRecipeExpandedUpgrade,
     IRecipeExpandedUpgradeData,
     IUnitUpgrade,
-    IUnitUpgradeRank,
     IUpgradeRaid,
-    IUpgradeRecipe,
     IUpgradesRaidsDay,
 } from 'src/v2/features/goals/goals.models';
 import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
 import { TacticusUpgrade } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
 
 export class UpgradesService {
-    static readonly recipeDataByName: IRecipeData = recipeData;
-    static readonly rankUpData: IRankUpData = rankUpData;
-    static readonly battleData: ICampaignsData = battleData;
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
-    static readonly baseUpgradesData: IBaseUpgradeData = this.composeBaseUpgrades();
-    static readonly craftedUpgradesData: ICraftedUpgradeData = this.composeCraftedUpgrades();
     static readonly recipeExpandedUpgradeData: IRecipeExpandedUpgradeData = this.expandRecipeData();
     public static readonly materialByLabel: Record<string, string> = this.createMaterialByLabelLookup();
 
@@ -289,7 +272,7 @@ export class UpgradesService {
         for (const goal of goals) {
             const upgradeRanks =
                 goal.type === PersonalGoalType.UpgradeRank
-                    ? this.getCharacterUpgradeRank(goal)
+                    ? CharacterUpgradesService.getCharacterUpgradeRank(goal)
                     : this.getMowUpgradeRank(goal);
             const baseUpgradesTotal: Record<string, number> = this.getBaseUpgradesTotal(
                 upgradeRanks,
@@ -299,7 +282,7 @@ export class UpgradesService {
             if (goal.upgradesRarity.length) {
                 // remove upgrades that do not match to selected rarities
                 for (const upgradeId in baseUpgradesTotal) {
-                    const upgradeData = this.baseUpgradesData[upgradeId];
+                    const upgradeData = FsdUpgradesService.baseUpgradesData[upgradeId];
                     if (upgradeData && !goal.upgradesRarity.includes(upgradeData.rarity)) {
                         delete baseUpgradesTotal[upgradeId];
                     }
@@ -309,7 +292,7 @@ export class UpgradesService {
             const relatedUpgrades: string[] = upgradeRanks.flatMap(x => {
                 const result: string[] = [...x.upgrades];
                 const upgrades: Array<IBaseUpgrade | ICraftedUpgrade> = x.upgrades
-                    .map(upgrade => this.getUpgrade(upgrade))
+                    .map(upgrade => FsdUpgradesService.getUpgrade(upgrade))
                     .filter(x => !!x);
                 for (const upgrade of upgrades) {
                     if (upgrade.crafted) {
@@ -467,7 +450,7 @@ export class UpgradesService {
                 const upgradeCount = character.baseUpgradesTotal[upgradeId];
 
                 const combinedUpgrade: ICombinedUpgrade = result[upgradeId] ?? {
-                    ...this.baseUpgradesData[upgradeId],
+                    ...FsdUpgradesService.baseUpgradesData[upgradeId],
                     requiredCount: 0,
                     countByGoalId: {},
                     relatedCharacters: [],
@@ -587,65 +570,6 @@ export class UpgradesService {
         }
     }
 
-    public static updateInventory(
-        inventory: Record<string, number>,
-        upgrades: Array<IBaseUpgrade | ICraftedUpgrade>
-    ): {
-        inventoryUpdate: Record<string, number>;
-        inventoryUpgrades: Array<IBaseUpgrade | ICraftedUpgrade>;
-    } {
-        const inventoryUpdate: Record<string, number> = {};
-
-        const processUpgrade = (upgrade: IBaseUpgrade | ICraftedUpgrade, count: number): void => {
-            if (!upgrade.crafted) {
-                // Base upgrade, simply decrement
-                inventoryUpdate[upgrade.id] = (inventoryUpdate[upgrade.id] ?? 0) + count;
-            } else {
-                // Crafted upgrade
-                const availableCount = inventory[upgrade.id] ?? 0;
-
-                if (availableCount >= count) {
-                    // Enough crafted upgrades available in inventory
-                    inventoryUpdate[upgrade.id] = (inventoryUpdate[upgrade.id] ?? 0) + count;
-                    inventory[upgrade.id] -= count; // Decrement inventory
-                } else {
-                    // Not enough crafted upgrades, need to process recipe
-                    inventoryUpdate[upgrade.id] = (inventoryUpdate[upgrade.id] ?? 0) + availableCount;
-                    inventory[upgrade.id] = 0; // Deplete inventory
-
-                    const remainingCount = count - availableCount;
-                    for (const recipeItem of (upgrade as ICraftedUpgrade).recipe) {
-                        const upgradeData = this.getUpgrade(recipeItem.id);
-
-                        if (!upgradeData) {
-                            return;
-                        }
-
-                        processUpgrade(upgradeData, recipeItem.count * remainingCount);
-                    }
-                }
-            }
-        };
-
-        upgrades.forEach(upgrade => {
-            processUpgrade(upgrade, 1);
-        });
-
-        // Filter out items with 0 count in the inventoryUpdate
-        const filteredInventoryUpdate: Record<string, number> = Object.fromEntries(
-            Object.entries(inventoryUpdate).filter(materialAndCount => materialAndCount[1] > 0)
-        );
-
-        return {
-            inventoryUpdate: filteredInventoryUpdate,
-            inventoryUpgrades: Object.keys(filteredInventoryUpdate).map(upgradeId => this.getUpgrade(upgradeId)),
-        };
-    }
-
-    public static getUpgrade(upgradeId: string): IBaseUpgrade | ICraftedUpgrade {
-        return this.baseUpgradesData[upgradeId] ?? this.craftedUpgradesData[upgradeId];
-    }
-
     /**
      * Applies all existing inventory in `inventoryUpgrades`, then returns the total
      * count, per non-craftable material, required to reach the rank-up goal.
@@ -673,7 +597,7 @@ export class UpgradesService {
                     craftedUpgrades[craftedUpgrade] = requiredCount - acquiredCount;
                 }
 
-                const craftedUpgradeData = this.craftedUpgradesData[craftedUpgrade];
+                const craftedUpgradeData = FsdUpgradesService.craftedUpgradesData[craftedUpgrade];
                 const craftedUpgradeCount = craftedUpgrades[craftedUpgrade];
 
                 if (craftedUpgradeData) {
@@ -711,7 +635,7 @@ export class UpgradesService {
 
         for (const upgradeRank of upgradeRanks) {
             for (const upgrade of upgradeRank.upgrades) {
-                const upgradeData = this.getUpgrade(upgrade);
+                const upgradeData = FsdUpgradesService.getUpgrade(upgrade);
                 if (!upgradeData) {
                     continue;
                 }
@@ -727,50 +651,6 @@ export class UpgradesService {
         processCraftedUpgrade(topLevelCraftedUpgrades);
 
         return baseUpgradesTotal;
-    }
-
-    /**
-     * @param rankLookup The start and end rank of the goal, as well as any
-     *                   materials that have already been applied.
-     * @returns The number of each upgrade material necessary to hit the
-     *          upgrade rank.
-     */
-    public static getCharacterUpgradeRank(rankLookup: IRankLookup): IUnitUpgradeRank[] {
-        const characterRankUpData = this.rankUpData[rankLookup.unitName] ?? {};
-
-        const ranksRange = this.rankEntries.filter(r => r >= rankLookup.rankStart && r < rankLookup.rankEnd);
-        const upgradeRanks: IUnitUpgradeRank[] = [];
-
-        for (const rank of ranksRange) {
-            const upgrades = characterRankUpData[rankToString(rank)] ?? [];
-            upgradeRanks.push({
-                rankStart: rank,
-                rankEnd: rank + 1,
-                rankPoint5: false,
-                upgrades: upgrades,
-            });
-        }
-
-        if (rankLookup.rankPoint5) {
-            const lastRankUpgrades = characterRankUpData[rankToString(rankLookup.rankEnd)] ?? [];
-            // select every even upgrade (top row in game)
-            const rankPoint5Upgrades = lastRankUpgrades.filter((_, index) => (index + 1) % 2 !== 0);
-
-            upgradeRanks.push({
-                rankStart: rankLookup.rankEnd,
-                rankEnd: rankLookup.rankEnd,
-                rankPoint5: true,
-                upgrades: rankPoint5Upgrades,
-            });
-        }
-
-        if (rankLookup.appliedUpgrades.length && upgradeRanks.length) {
-            const currentRank = upgradeRanks[0];
-            currentRank.upgrades = currentRank.upgrades.filter(
-                upgrade => upgrade && !rankLookup.appliedUpgrades.includes(upgrade)
-            );
-        }
-        return upgradeRanks;
     }
 
     /**
@@ -804,87 +684,6 @@ export class UpgradesService {
     }
 
     /**
-     * Returns an IBaseUpgradeData that holds non-craftable materials only. The
-     * locations are sorted in the order elite < early indom < mirror < normal.
-     */
-    private static composeBaseUpgrades(): IBaseUpgradeData {
-        const result: IBaseUpgradeData = {};
-        const upgrades = Object.keys(this.recipeDataByName);
-        const upgradeLocationsShort = this.getUpgradesLocations();
-
-        for (const upgradeName of upgrades) {
-            const upgrade = this.recipeDataByName[upgradeName];
-
-            // Filter out craftable upgrades, we only return base upgrades from here.
-            if (upgrade.craftable) {
-                continue;
-            }
-
-            // Get all the locations where this particular upgrade can be farmed.
-            const locations = upgradeLocationsShort[upgrade.material] ?? [];
-            const locationsComposed = orderBy(
-                locations.map(location => CampaignsService.campaignsComposed[location]),
-                ['dropRate', 'nodeNumber'],
-                ['desc', 'desc']
-            );
-
-            result[upgradeName] = {
-                id: upgrade.material,
-                label: upgrade.label ?? upgrade.material,
-                rarity: rarityStringToNumber[upgrade.rarity as RarityString],
-                locations: locationsComposed,
-                iconPath: upgrade.icon!,
-                crafted: false,
-                stat: upgrade.stat,
-            };
-        }
-
-        return result;
-    }
-
-    /**
-     * Returns an ICraftedUpgradeData that holds craftable materials only. The
-     * recipe contained is not expanded. For example, Infernal Armor Trim
-     * requires Daemonic Armor Trim, which requires Blasephemous Armor trim.
-     * Infernal Armor Trim's recipe only mentions the 2x Daemonic Armor Trim,
-     * not the 18x Blasphemous Armor Trim.
-     */
-    private static composeCraftedUpgrades(): ICraftedUpgradeData {
-        const result: ICraftedUpgradeData = {};
-        const upgrades = Object.keys(this.recipeDataByName);
-
-        for (const upgradeName of upgrades) {
-            const upgrade = this.recipeDataByName[upgradeName];
-
-            if (!upgrade.craftable) {
-                continue;
-            }
-
-            const id = upgrade.material;
-
-            const recipeDetails = upgrade.recipe?.map(item => this.getRecipe(item)) ?? [];
-
-            result[upgradeName] = {
-                id,
-                label: upgrade.label ?? id,
-                rarity: rarityStringToNumber[upgrade.rarity as RarityString],
-                iconPath: upgrade.icon!,
-                baseUpgrades: recipeDetails.flatMap(x => x.baseUpgrades),
-                craftedUpgrades: recipeDetails.flatMap(x => x.craftedUpgrades),
-                recipe:
-                    upgrade.recipe?.map(x => ({
-                        id: x.material,
-                        count: x.count,
-                    })) ?? [],
-                crafted: true,
-                stat: upgrade.stat,
-            };
-        }
-
-        return result;
-    }
-
-    /**
      * @returns the expanded recipes for all materials, keyed by
      * material ID. If a material is uncraftable, it is included
      * in the result, but its expandedRecipe field is empty.
@@ -902,7 +701,7 @@ export class UpgradesService {
             stat: 'Gold',
         };
         // First fill in all of the base upgrades.
-        Object.entries(this.baseUpgradesData).forEach(upgrade => {
+        Object.entries(FsdUpgradesService.baseUpgradesData).forEach(upgrade => {
             const baseUpgrade = upgrade[1];
             result[baseUpgrade.id] = {
                 id: baseUpgrade.id,
@@ -916,8 +715,8 @@ export class UpgradesService {
         });
 
         // Now fill in all of the craftable upgrades that only have base upgrade materials.
-        for (const key in this.craftedUpgradesData) {
-            const craftedUpgrade = this.craftedUpgradesData[key];
+        for (const key in FsdUpgradesService.craftedUpgradesData) {
+            const craftedUpgrade = FsdUpgradesService.craftedUpgradesData[key];
             if (craftedUpgrade.craftedUpgrades.length > 0) {
                 // We have to use more expansion, which we handle further below.
                 continue;
@@ -946,7 +745,7 @@ export class UpgradesService {
         for (let moreToExpand: boolean = true; moreToExpand; ) {
             ++passes;
             moreToExpand = false;
-            Object.entries(this.craftedUpgradesData).forEach(data => {
+            Object.entries(FsdUpgradesService.craftedUpgradesData).forEach(data => {
                 const material: ICraftedUpgrade = data[1];
                 const expandedRecipe: IRecipeExpandedUpgrade | null = this.expandRecipe(material.id, result);
                 if (!expandedRecipe) {
@@ -998,7 +797,7 @@ export class UpgradesService {
         key: string,
         expandedRecipeData: IRecipeExpandedUpgradeData
     ): IRecipeExpandedUpgrade | null {
-        const upgrade = this.craftedUpgradesData[key];
+        const upgrade = FsdUpgradesService.craftedUpgradesData[key];
         if (!upgrade) {
             console.log("null upgrade: '" + key + "'");
             return null;
@@ -1042,76 +841,6 @@ export class UpgradesService {
         return recipeData[material as keyof typeof recipeData];
     }
 
-    private static getRecipe({ material: id, count: upgradeCount }: IMaterialRecipeIngredient): {
-        baseUpgrades: IUpgradeRecipe[];
-        craftedUpgrades: IUpgradeRecipe[];
-    } {
-        const baseUpgrades: IUpgradeRecipe[] = [];
-        const craftedUpgrades: IUpgradeRecipe[] = [];
-
-        const upgradeDetails = this.recipeDataByName[id];
-
-        if (!upgradeDetails) {
-            return {
-                baseUpgrades: [],
-                craftedUpgrades: [],
-            };
-        }
-
-        if (!upgradeDetails.craftable) {
-            baseUpgrades.push({
-                id: id,
-                count: upgradeCount,
-            });
-        }
-
-        if (upgradeDetails.craftable) {
-            craftedUpgrades.push({
-                id: id,
-                count: upgradeCount,
-            });
-
-            if (upgradeDetails.recipe) {
-                const recipeDetails = upgradeDetails.recipe.map(upgrade =>
-                    this.getRecipe({ material: upgrade.material, count: upgrade.count * upgradeCount })
-                );
-
-                for (const recipeDetail of recipeDetails) {
-                    baseUpgrades.push(...recipeDetail.baseUpgrades);
-                    craftedUpgrades.push(...recipeDetail.craftedUpgrades);
-                }
-            }
-        }
-
-        return {
-            baseUpgrades,
-            craftedUpgrades,
-        };
-    }
-
-    /**
-     * @returns for each upgrade, a list of all nodes from which it can be
-     *          farmed. The key is the material name (e.g. "Classified Data-Slate") or,
-     *          for character shards, the character name (e.g. "Aleph-Null").
-     *          The map value is ICampaignBattle.shortName (e.g. SHME31 for
-     *          Saim-Hann Mirror Elite 31).
-     */
-    static getUpgradesLocations(): Record<string, string[]> {
-        const result: Record<string, string[]> = {};
-        const battles: ICampaignBattle[] = [];
-        for (const battleDataKey in this.battleData) {
-            battles.push({ ...this.battleData[battleDataKey], shortName: battleDataKey });
-        }
-
-        const groupedData = groupBy(battles, 'reward');
-
-        for (const key in groupedData) {
-            result[key] = groupedData[key].map(x => x.shortName ?? '');
-        }
-
-        return result;
-    }
-
     private static getEstimatesByPriority(
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>,
         upgrades: Record<string, ICombinedUpgrade>,
@@ -1142,7 +871,7 @@ export class UpgradesService {
     }
 
     static findUpgrade(upgrade: TacticusUpgrade): string | null {
-        const byName = this.recipeDataByName[upgrade.name];
+        const byName = FsdUpgradesService.recipeDataByName[upgrade.name];
         if (byName) {
             return byName.material;
         }
@@ -1158,8 +887,8 @@ export class UpgradesService {
     private static composeByTacticusId(): Record<string, IMaterial> {
         const result: Record<string, IMaterial> = {};
 
-        for (const materialName in this.recipeDataByName) {
-            const material = this.recipeDataByName[materialName];
+        for (const materialName in FsdUpgradesService.recipeDataByName) {
+            const material = FsdUpgradesService.recipeDataByName[materialName];
             if (material.tacticusId) {
                 result[material.tacticusId] = material;
             }

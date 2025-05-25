@@ -1,19 +1,18 @@
 import { ArrowForward } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
-import { AllCommunityModule, ModuleRegistry, provideGlobalGridOptions, themeBalham, ColDef } from 'ag-grid-community';
+import { AllCommunityModule, themeBalham, ColDef } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { CampaignType } from 'src/models/enums';
 import { ICampaignBattleComposed } from 'src/models/interfaces';
-import { StaticDataService } from 'src/services/static-data.service';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
 
-import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { CharactersService } from '@/fsd/4-entities/character';
+import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
 import {
     BattleSavings,
@@ -348,11 +347,11 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                             {characters.map((unitId, ignoredIndex) => {
                                 return (
                                     <span key={unitId + '-' + savings.battle.reward + '-' + savings.battle.id}>
-                                        <CharacterShardIcon
-                                            icon={StaticDataService.getUnit(unitId)?.icon ?? '(undefined)'}
+                                        <UnitShardIcon
+                                            icon={CharactersService.getUnit(unitId)?.icon ?? '(undefined)'}
                                             height={30}
                                             width={30}
-                                            tooltip={StaticDataService.getUnit(unitId)?.icon}
+                                            tooltip={CharactersService.getUnit(unitId)?.icon}
                                         />
                                     </span>
                                 );

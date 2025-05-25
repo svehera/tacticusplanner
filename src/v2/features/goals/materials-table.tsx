@@ -13,10 +13,11 @@ import React, { useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { ICampaignBattleComposed } from 'src/models/interfaces';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
 
 import { Rarity } from '@/fsd/5-shared/model';
+
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
 import { ICharacterUpgradeEstimate } from 'src/v2/features/goals/goals.models';
 

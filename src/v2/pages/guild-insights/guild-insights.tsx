@@ -7,24 +7,22 @@ import { StoreContext } from 'src/reducers/store.provider';
 
 import { LoaderWithText, AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 
-import { CharactersPowerService } from 'src/v2/features/characters/characters-power.service';
-import { CharactersValueService } from 'src/v2/features/characters/characters-value.service';
+import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
+import { CharactersPowerService, CharactersValueService } from '@/fsd/4-entities/unit';
+
+import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-features/view-settings';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
 import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
-import { ViewControls } from 'src/v2/features/characters/components/view-controls';
-import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
-import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
 import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
 import { useGetGuildInsights } from 'src/v2/features/guild/guild.endpoint';
 
 export const GuildInsights = () => {
     const { viewPreferences, guild } = useContext(StoreContext);
-    const [viewControls, setViewControls] = useState<IViewControls>({
+    const [viewControls, setViewControls] = useState<ICharactersViewControls>({
         filterBy: CharactersFilterBy.None,
         orderBy: CharactersOrderBy.Faction,
     });
@@ -85,7 +83,7 @@ export const GuildInsights = () => {
                     showCharacterRarity: viewPreferences.showCharacterRarity,
                 }}>
                 <RosterHeader totalValue={totalValue} totalPower={totalPower} filterChanges={setNameFilter} />
-                <ViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
+                <CharactersViewControls viewControls={viewControls} viewControlsChanges={setViewControls} />
 
                 <Conditional condition={isFactionsView(viewControls.orderBy)}>
                     <FactionsGrid factions={factions} />

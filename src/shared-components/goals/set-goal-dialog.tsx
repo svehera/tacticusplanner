@@ -21,7 +21,6 @@ import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { ICampaignsProgress, IPersonalGoal } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
 import { PrioritySelect } from 'src/shared-components/goals/priority-select';
 import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
@@ -29,17 +28,16 @@ import { SetAscendGoal } from 'src/shared-components/goals/set-ascend-goal';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
-import { UnitsAutocomplete } from 'src/v2/components/inputs/units-autocomplete';
 
-import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Rarity, RarityStars, Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 
-import { Rank } from '@/fsd/4-entities/character';
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
+import { UnitTitle } from '@/fsd/4-entities/unit/ui/unit-title';
+import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
+import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 
 import { IUnit } from 'src/v2/features/characters/characters.models';
-import { isCharacter, isMow } from 'src/v2/features/characters/units.functions';
-
-import { CharacterTitle } from '../character-title';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
 
@@ -222,7 +220,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
             <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
                 <DialogTitle className="flex-box gap15">
-                    <span>Set Goal</span> {!!unit && <CharacterTitle character={unit} />}
+                    <span>Set Goal</span> {!!unit && <UnitTitle character={unit} />}
                 </DialogTitle>
 
                 <DialogContent style={{ paddingTop: 10 }}>

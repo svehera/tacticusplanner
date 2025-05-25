@@ -5,8 +5,8 @@ import mowUpgradesRaw from 'src/v2/data/mows-upgrades.json';
 
 import { Rarity, Alliance } from '@/fsd/5-shared/model';
 
-import { IBaseUpgrade, ICraftedUpgrade, IUpgradeRecipe } from 'src/v2/features/goals/goals.models';
-import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
+import { IBaseUpgrade, ICraftedUpgrade, IUpgradeRecipe, UpgradesService } from '@/fsd/4-entities/upgrade';
+
 import {
     IMowLevelMaterials,
     IMowLevelUpgrade,

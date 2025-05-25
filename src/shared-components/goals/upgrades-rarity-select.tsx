@@ -1,10 +1,8 @@
 ﻿import { Info } from '@mui/icons-material';
 import React from 'react';
 
-import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
-
 import { Rarity, RarityString } from '@/fsd/5-shared/model';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { MultipleSelectCheckmarks, AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 interface Props {
     upgradesRarity: Rarity[];

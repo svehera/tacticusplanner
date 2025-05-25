@@ -1,9 +1,10 @@
 ﻿import React from 'react';
 
 import { CampaignType } from 'src/models/enums';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 
 import { IItemRaidLocation, IShardsRaid } from 'src/v2/features/goals/goals.models';
 import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';
@@ -26,7 +27,7 @@ export const ShardsItemInput: React.FC<Props> = ({ shardsRaid, handleAdd }) => {
     return (
         <div className="flex-box" style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>
             <div className="flex-box column" style={{ fontSize: 16 }}>
-                <CharacterShardIcon icon={shardsRaid.iconPath} />
+                <UnitShardIcon icon={shardsRaid.iconPath} />
                 <span>
                     {shardsRaid.acquiredCount}/{shardsRaid.requiredCount}
                 </span>

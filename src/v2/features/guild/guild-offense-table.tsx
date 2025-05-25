@@ -4,10 +4,9 @@ import { AgGridReact } from 'ag-grid-react';
 import { mapValues, sum } from 'lodash';
 import React, { useState } from 'react';
 
-import { RarityImage } from 'src/v2/components/images/rarity-image';
-
 import { Rarity } from '@/fsd/5-shared/model';
 import { FlexBox } from '@/fsd/5-shared/ui';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { IGuildWarOffensePlayer } from 'src/v2/features/guild/guild.models';
 
@@ -68,7 +67,7 @@ export const GuildOffenseTable = ({
                             if (slotsCount) {
                                 return (
                                     <Badge key={rarity} badgeContent={slotsCount}>
-                                        <RarityImage rarity={rarity} />
+                                        <RarityIcon rarity={rarity} />
                                     </Badge>
                                 );
                             }

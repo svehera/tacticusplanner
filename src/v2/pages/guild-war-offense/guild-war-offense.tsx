@@ -8,16 +8,14 @@ import { Link } from 'react-router-dom';
 
 import { ICharacter2 } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { CharacterItemDialog } from 'src/shared-components/character-item-dialog';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rarity, Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Conditional, FlexBox } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
-import { Rank } from '@/fsd/4-entities/character';
-
+import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
@@ -239,7 +237,7 @@ export const GuildWarOffense = () => {
             if (slotsCount) {
                 return (
                     <div key={rarity} className="flex-box gap3">
-                        <RarityImage rarity={rarity} /> x{slotsCount}
+                        <RarityIcon rarity={rarity} /> x{slotsCount}
                     </div>
                 );
             }
@@ -260,7 +258,7 @@ export const GuildWarOffense = () => {
             if (slotsCount) {
                 return (
                     <div key={rarity} className="flex-box gap3">
-                        <RarityImage rarity={rarity} /> x{slotsCount}
+                        <RarityIcon rarity={rarity} /> x{slotsCount}
                     </div>
                 );
             }
@@ -401,7 +399,7 @@ const TeamCard: React.FC<{
                 title={
                     <FlexBox justifyContent={'space-between'}>
                         <div className="flex-box gap5" style={{ fontSize: 18 }}>
-                            <RarityImage rarity={team.rarityCap} />
+                            <RarityIcon rarity={team.rarityCap} />
                             <span>{team.name}</span>
                         </div>
                         <div className="flex-box gap5" style={{ fontSize: 16 }}>

@@ -1,22 +1,24 @@
 ﻿import { groupBy, orderBy, sum } from 'lodash';
 
 import { charsUnlockShards } from 'src/models/constants';
-import { ICharacter2, IPersonalCharacterData2 } from 'src/models/interfaces';
+import { IPersonalCharacterData2 } from 'src/models/interfaces';
 import factionsData from 'src/v2/data/factions.json';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rank, Rarity, UnitType } from '@/fsd/5-shared/model';
 
-import { Rank } from '@/fsd/4-entities/character';
+import { ICharacter2 } from '@/fsd/4-entities/character';
+import { IMow } from '@/fsd/4-entities/mow';
+import { IUnit } from '@/fsd/4-entities/unit';
+import { isCharacter, isMow, isUnlocked } from '@/fsd/4-entities/unit/units.functions';
 
 import { rarityCaps } from 'src/v2/features/characters/characters.contants';
-import { UnitType } from 'src/v2/features/characters/units.enums';
-import { isCharacter, isMow, isUnlocked } from 'src/v2/features/characters/units.functions';
 
-import { CharactersPowerService } from './characters-power.service';
-import { CharactersValueService } from './characters-value.service';
-import { IFaction, IMow, IUnit } from './characters.models';
-import { CharactersFilterBy } from './enums/characters-filter-by';
-import { CharactersOrderBy } from './enums/characters-order-by';
+import { CharactersFilterBy } from '../../../fsd/4-entities/character/characters-filter-by.enum';
+import { CharactersOrderBy } from '../../../fsd/4-entities/character/characters-order-by.enum';
+import { CharactersPowerService } from '../../../fsd/4-entities/unit/characters-power.service';
+import { CharactersValueService } from '../../../fsd/4-entities/unit/characters-value.service';
+
+import { IFaction } from './characters.models';
 import { filterChaos } from './functions/filter-by-chaos';
 import { filterImperial } from './functions/filter-by-imperial';
 import { filterXenos } from './functions/filter-by-xenos';

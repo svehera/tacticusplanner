@@ -5,10 +5,10 @@ import { mapValues, sum } from 'lodash';
 import React, { useState } from 'react';
 
 import { Difficulty } from 'src/models/enums';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 
 import { Rarity } from '@/fsd/5-shared/model';
 import { FlexBox } from '@/fsd/5-shared/ui';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { IGuildWarPlayer } from 'src/v2/features/guild/guild.models';
 import { GuildWarService } from 'src/v2/features/guild-war/guild-war.service';
@@ -67,7 +67,7 @@ export const PlayersTable = ({
                             if (slotsCount) {
                                 return (
                                     <Badge key={rarity} badgeContent={slotsCount}>
-                                        <RarityImage rarity={rarity} />
+                                        <RarityIcon rarity={rarity} />
                                     </Badge>
                                 );
                             }

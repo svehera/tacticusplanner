@@ -67,6 +67,7 @@ export default [
                 { type: 'widgets', pattern: '2-widgets/*' },
                 { type: 'features', pattern: '3-features/*' },
                 { type: 'entities', pattern: '4-entities/*' },
+                { type: 'cross-import', pattern: '**/@x/**' },
                 { type: 'shared', pattern: '5-shared/*' },
             ],
         },
@@ -114,22 +115,26 @@ export default [
                         {
                             from: 'app',
                             allow: ['app', 'shared', 'entities', 'features', 'widgets', 'pages'],
+                            disallow: ['cross-import'],
                         },
                         {
                             from: 'pages',
                             allow: ['shared', 'entities', 'features', 'widgets'],
+                            disallow: ['cross-import'],
                         },
                         {
                             from: 'widgets',
                             allow: ['shared', 'entities', 'features'],
+                            disallow: ['cross-import'],
                         },
                         {
                             from: 'features',
                             allow: ['shared', 'entities'],
+                            disallow: ['cross-import'],
                         },
                         {
                             from: 'entities',
-                            allow: ['shared'],
+                            allow: ['shared', 'cross-import'],
                         },
                         {
                             from: 'shared',
@@ -157,6 +162,8 @@ export default [
                         '**/*(0-app|1-pages|2-widgets|3-features|4-entities|5-shared)/*',
                         '**/5-shared/*(ui|model|api|i18n)',
                         '**/5-shared/ui/*',
+                        /** Allow @x cross-imports only within entities */
+                        '**/4-entities/*/@x/*',
                         '**/node_modules/**',
                         './',
                     ],

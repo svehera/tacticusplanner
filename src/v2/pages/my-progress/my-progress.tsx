@@ -1,13 +1,12 @@
 import { groupBy } from 'lodash';
 import React, { useCallback, useContext } from 'react';
 
-import { Campaign } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import ViewSettings from 'src/routes/legendary-events/view-settings';
 
+import { CampaignsService, Campaign, ICampaignModel } from '@/fsd/4-entities/campaign';
+
+import { ViewSettings } from '@/fsd/3-features/view-settings';
 import { CampaignProgress } from 'src/v2/features/campaigns/campaign-progress';
-import { ICampaignModel } from 'src/v2/features/campaigns/campaigns.models';
-import { CampaignsService } from 'src/v2/features/goals/campaigns.service';
 
 /**
  * MyProgress component to display and manage campaign progress.

@@ -4,9 +4,9 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import React from 'react';
 
-import { StaticDataService } from 'src/services/static-data.service';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { CharactersService } from '@/fsd/4-entities/character';
 
 import { CampaignData, CampaignsProgressData } from 'src/v2/features/campaign-progression/campaign-progression.models';
 
@@ -21,14 +21,14 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({ progre
         return (
             <tr key={'missing_material-' + material}>
                 <td>Cannot currently farm {material}, needed by</td>
-                {progression.charactersNeedingMaterials.get(material)?.map((unitId, ignored) => {
+                {progression.charactersNeedingMaterials.get(material)?.map(unitId => {
                     return [
                         <td key={'missing_material-' + material + '-character-' + unitId}>
-                            <CharacterShardIcon
-                                icon={StaticDataService.getUnit(unitId)?.icon ?? '(undefined)'}
+                            <UnitShardIcon
+                                icon={CharactersService.getUnit(unitId)?.icon ?? '(undefined)'}
                                 height={30}
                                 width={30}
-                                tooltip={StaticDataService.getUnit(unitId)?.icon}
+                                tooltip={CharactersService.getUnit(unitId)?.icon}
                             />
                         </td>,
                     ];

@@ -1,6 +1,6 @@
-﻿import { Rarity } from '@/fsd/5-shared/model';
+﻿import { Rarity, Rank } from '@/fsd/5-shared/model';
 
-import { Rank, CharacterBias } from '@/fsd/4-entities/character';
+import { CharacterBias } from '@/fsd/4-entities/character';
 
 import { TacticusShard, TacticusUnit } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';

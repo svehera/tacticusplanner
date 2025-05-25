@@ -4,14 +4,13 @@ import Checkbox from '@mui/material/Checkbox';
 import { uniq } from 'lodash';
 import React, { useMemo, useState } from 'react';
 
-import { CampaignType } from 'src/models/enums';
 import { ICustomDailyRaidsSettings } from 'src/models/interfaces';
-import { RarityImage } from 'src/v2/components/images/rarity-image';
 
 import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
-import { CampaignsService } from '@/v2/features/goals/campaigns.service';
+import { CampaignType, CampaignsService } from '@/fsd/4-entities/campaign';
 
 interface Props {
     hasCE: boolean;
@@ -79,7 +78,7 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
 
                     return (
                         <div key={rarity} className="flex flex-col items-center mx-2">
-                            <RarityImage rarity={rarity} />
+                            <RarityIcon rarity={rarity} />
                             {campaignTypes.map(type => (
                                 <div
                                     key={type}

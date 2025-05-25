@@ -11,13 +11,11 @@ import { PersonalGoalType } from 'src/models/enums';
 import { menuItemById } from 'src/models/menu-items';
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
-// eslint-disable-next-line import-x/no-internal-modules
-import { StaticDataService } from 'src/services';
 
 import { useAuth } from '@/fsd/5-shared/model';
-import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { CharactersService } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 import { Thanks } from '@/fsd/3-features/thank-you';
@@ -29,7 +27,7 @@ export const DesktopHome = () => {
     const navigate = useNavigate();
     const { userInfo } = useAuth();
     const { goals, dailyRaids } = useContext(StoreContext);
-    const nextLeMenuItem = StaticDataService.activeLre;
+    const nextLeMenuItem = CharactersService.activeLre;
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
     const eventsCalendarUrl = 'https://tacticucplannerstorage.blob.core.windows.net/files/events-calendar.png';
@@ -160,7 +158,7 @@ export const DesktopHome = () => {
                         <CardHeader
                             title={
                                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                                    <CharacterShardIcon icon={nextLeMenuItem.icon} height={50} width={50} />{' '}
+                                    <UnitShardIcon icon={nextLeMenuItem.icon} height={50} width={50} />{' '}
                                     {nextLeMenuItem.name}
                                 </div>
                             }

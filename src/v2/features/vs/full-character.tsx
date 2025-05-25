@@ -1,21 +1,17 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 import { rarityToMaxRank } from 'src/models/constants';
-import { EquipmentType } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
-import { FactionSelect } from 'src/routes/npcs/faction-select';
-import { NpcPortrait } from 'src/routes/tables/npc-portrait';
-import { StaticDataService } from 'src/services';
-import { RankSelect } from 'src/shared-components/rank-select';
-import { RaritySelect } from 'src/shared-components/rarity-select';
-import { StarsSelect } from 'src/shared-components/stars-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 
-import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { RarityStars, Rarity, Rank, Faction } from '@/fsd/5-shared/model';
+import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { Rank } from '@/fsd/4-entities/character';
-import { Faction } from '@/fsd/4-entities/faction';
+import { CharactersService, RankSelect } from '@/fsd/4-entities/character';
+import { EquipmentType } from '@/fsd/4-entities/equipment';
+import { FactionSelect } from '@/fsd/4-entities/faction';
+import { NpcPortrait, NpcService } from '@/fsd/4-entities/npc';
 
 import { CharacterSelect } from './character-select';
 import { DamageCalculatorService } from './damage-calculator-service';
@@ -87,10 +83,10 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
 
     const idsAndNames = useMemo(() => {
         const ret: string[] = [];
-        StaticDataService.unitsData.forEach(unit => {
+        CharactersService.charactersData.forEach(unit => {
             if (unit.faction === faction) ret.push(unit.id);
         });
-        StaticDataService.npcDataFull.forEach(npc => {
+        NpcService.npcDataFull.forEach(npc => {
             if (npc.faction === faction) ret.push(npc.name);
         });
         return ret;
@@ -115,7 +111,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
         if (faction != newFaction) {
             setFaction(newFaction);
             const arr: string[] = [];
-            StaticDataService.unitsData.forEach(unit => {
+            CharactersService.charactersData.forEach(unit => {
                 if (unit.faction === newFaction) arr.push(unit.id);
             });
             onCharacterChanged(arr[0]);
@@ -175,7 +171,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
     };
 
     useEffect(() => {
-        const unit = StaticDataService.unitsData.find(unit => unit.id === character);
+        const unit = CharactersService.charactersData.find(unit => unit.id === character);
         const charId = unit != undefined ? unit.id : undefined;
         const npcName = charId == undefined ? character : undefined;
         onCharacterChange(charId, npcName, faction, rank, rarity, stars, [
@@ -186,7 +182,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
     }, [character, faction, rank, rarity, stars, equipmentSlot1, equipmentSlot2, equipmentSlot3]);
 
     const isPlayableCharacter = useMemo(() => {
-        return StaticDataService.unitsData.find(unit => unit.id === character) != undefined;
+        return CharactersService.charactersData.find(unit => unit.id === character) != undefined;
     }, [character]);
 
     const stats = useMemo(() => {
@@ -207,9 +203,9 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
 
     const range = useMemo(() => {
         if (isPlayableCharacter) {
-            return StaticDataService.unitsData.find(unit => unit.id === character)?.rangeDistance;
+            return CharactersService.charactersData.find(unit => unit.id === character)?.rangeDistance;
         }
-        return StaticDataService.npcDataFull.find(npc => npc.name === character)?.range;
+        return NpcService.npcDataFull.find(npc => npc.name === character)?.range;
     }, [character]);
 
     const equipmentSlot1Display = useMemo(() => {

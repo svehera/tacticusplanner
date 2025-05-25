@@ -2,10 +2,7 @@
 import { Tooltip } from '@mui/material';
 import React from 'react';
 
-import { IMaterialRaid } from 'src/models/interfaces';
-import { UpgradeImage } from 'src/shared-components/upgrade-image';
-
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
+import { UpgradeImage } from '@/fsd/4-entities/upgrade/upgrade-image';
 
 import { IUpgradeRaid } from 'src/v2/features/goals/goals.models';
 

@@ -1,12 +1,13 @@
 ﻿import React from 'react';
 import { isMobile } from 'react-device-detect';
 
+import { UnitType } from '@/fsd/5-shared/model';
 import { Conditional } from '@/fsd/5-shared/ui';
 
-import { IUnit } from 'src/v2/features/characters/characters.models';
+import { IUnit } from '@/fsd/4-entities/unit';
+import { isUnlocked } from '@/fsd/4-entities/unit/units.functions';
+
 import { MowTile } from 'src/v2/features/characters/components/mow-tile';
-import { UnitType } from 'src/v2/features/characters/units.enums';
-import { isUnlocked } from 'src/v2/features/characters/units.functions';
 
 import { CharacterTile } from './character-tile';
 
