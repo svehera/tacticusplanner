@@ -2,16 +2,13 @@ import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag
 import { AgGridReact } from 'ag-grid-react';
 import React, { useMemo, useRef, useState } from 'react';
 
-import { INpcData } from 'src/models/interfaces';
-import { StaticDataService } from 'src/services';
-import { getImageUrl, useFitGridOnWindowResize } from 'src/shared-logic/functions';
-import { FactionImage } from 'src/v2/components/images/faction-image';
-
-import { getEnumValues } from '@/fsd/5-shared/lib';
+import { getEnumValues, useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
 import { Rank, RarityStars } from '@/fsd/5-shared/model';
-import { StarsSelect } from '@/fsd/5-shared/ui';
+import { getImageUrl, StarsSelect } from '@/fsd/5-shared/ui';
 
 import { RankSelect } from '@/fsd/4-entities/character';
+import { FactionImage } from '@/fsd/4-entities/faction';
+import { INpcData, NpcService } from '@/fsd/4-entities/npc';
 import { StatsCalculatorService, StatCell } from '@/fsd/4-entities/unit';
 
 export const NpcInfo: React.FC = () => {
@@ -35,7 +32,7 @@ export const NpcInfo: React.FC = () => {
                 cellRenderer: (params: ICellRendererParams<INpcData>) => {
                     const npc = params.data;
                     if (npc == undefined) return <></>;
-                    const imageUrl = getImageUrl(StaticDataService.getNpcIconPath(npc.name));
+                    const imageUrl = getImageUrl(NpcService.getNpcIconPath(npc.name));
                     return <img src={imageUrl} width={60} height={80} />;
                 },
             },
@@ -213,7 +210,7 @@ export const NpcInfo: React.FC = () => {
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
                     columnDefs={columnDefs}
-                    rowData={StaticDataService.npcDataFull}
+                    rowData={NpcService.npcDataFull}
                     onGridReady={useFitGridOnWindowResize(gridRef)}></AgGridReact>
             </div>
         </div>

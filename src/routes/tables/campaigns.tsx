@@ -11,10 +11,11 @@ import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
-import { FactionImage } from 'src/v2/components/images/faction-image';
 
 import { useQueryState } from '@/fsd/5-shared/lib';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+
+import { FactionImage } from '@/fsd/4-entities/faction';
 
 import { CampaignBattle } from './campaign-battle';
 import { CampaignBattleEnemies } from './campaign-battle-enemies';

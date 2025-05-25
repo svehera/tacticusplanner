@@ -41,54 +41,6 @@ import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
 
 import { CampaignsLocationsUsage, DailyRaidsStrategy, Difficulty, EquipmentClass, PersonalGoalType } from './enums';
 
-export interface INpcDataRaw {
-    name: string;
-    faction: string;
-    alliance: string;
-    movement: number;
-    meleeHits: number;
-    meleeType: string;
-    rangeHits?: number;
-    rangeType?: string;
-    range?: number;
-    health: number;
-    damage: number;
-    armor: number;
-    critChance?: number;
-    critDamage?: number;
-    blockChance?: number;
-    blockDamage?: number;
-    traits: string[];
-    activeAbilities: string[];
-    passiveAbilities: string[];
-}
-
-export interface INpcsRaw {
-    npcs: INpcDataRaw[];
-}
-
-export interface INpcData {
-    name: string;
-    faction: Faction;
-    alliance: Alliance;
-    movement: number;
-    meleeHits: number;
-    meleeType: string;
-    rangeHits?: number;
-    rangeType?: string;
-    range?: number;
-    health: number;
-    damage: number;
-    armor: number;
-    critChance?: number;
-    critDamage?: number;
-    blockChance?: number;
-    blockDamage?: number;
-    traits: string[];
-    activeAbilities: string[];
-    passiveAbilities: string[];
-}
-
 export type ITableRow<T = ICharacter2 | string> = Record<string, T>;
 
 export interface IPersonalData {

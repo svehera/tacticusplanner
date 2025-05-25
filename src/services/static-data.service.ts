@@ -1,42 +1,19 @@
 ﻿import { cloneDeep, groupBy, orderBy, sortBy, sum, uniq } from 'lodash';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
-import {
-    Alliance,
-    RarityString,
-    Rarity,
-    Faction,
-    Rank,
-    rankToString,
-    UnitType,
-    RarityMapper,
-} from '@/fsd/5-shared/model';
+import { RarityString, Rarity, Faction, Rank, rankToString, UnitType, RarityMapper } from '@/fsd/5-shared/model';
 
-import {
-    ICampaignsData,
-    ICampaignBattleComposed,
-    CampaignsService,
-    ICampaignsProgress,
-} from '@/fsd/4-entities/campaign';
+import { ICampaignBattleComposed, CampaignsService, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { IRankUpData, IUnitData, UnitDataRaw, ICharLegendaryEvents, IRankLookup } from '@/fsd/4-entities/character';
 import { IMaterialRecipeIngredientFull, IMaterialFull, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import rawEquipmentData from '../assets/EquipmentData.json';
-import npcData from '../assets/NpcData.json';
 import unitsData from '../assets/UnitData.json';
-import newBattleData from '../fsd/4-entities/campaign/data/newBattleData.json';
 import rankUpData from '../fsd/4-entities/character/data/rankUpData.json';
 import { EquipmentClass } from '../models/enums';
-import {
-    EquipmentType,
-    IEquipment,
-    IEstimatedRanksSettings,
-    IMaterialEstimated2,
-    INpcData,
-} from '../models/interfaces';
+import { EquipmentType, IEquipment, IEstimatedRanksSettings, IMaterialEstimated2 } from '../models/interfaces';
 
 export class StaticDataService {
-    static readonly newBattleData: ICampaignsData = newBattleData;
     static readonly equipmentData: IEquipment[] = this.convertEquipmentData();
     static readonly rankUpData: IRankUpData = rankUpData;
 
@@ -69,8 +46,6 @@ export class StaticDataService {
     })();
 
     static readonly campaignsGrouped: Record<string, ICampaignBattleComposed[]> = this.getCampaignGrouped();
-    static readonly npcDataFull: INpcData[] = this.convertNpcData();
-
     private static parseFaction(faction: string): Faction | undefined {
         switch (faction) {
             case 'Ultramarines':
@@ -113,61 +88,6 @@ export class StaticDataService {
             default:
                 return undefined;
         }
-    }
-
-    private static parseAlliance(alliance: string): Alliance | undefined {
-        switch (alliance) {
-            // Towen gave us this data, and he wasn't consistent in capitalizizing xenos. /shrug.
-            case 'xenos':
-                return Alliance.Xenos;
-            case 'Xenos':
-                return Alliance.Xenos;
-            case 'Chaos':
-                return Alliance.Chaos;
-            case 'Imperial':
-                return Alliance.Imperial;
-            default:
-                return undefined;
-        }
-    }
-
-    private static convertNpcData(): INpcData[] {
-        let data: INpcData[] = [];
-
-        data = npcData.npcs.map(npc => {
-            const faction: Faction = this.parseFaction(npc.faction) ?? Faction.Ultramarines;
-            const alliance: Alliance = this.parseAlliance(npc.alliance) ?? Alliance.Imperial;
-            const ret: INpcData = {
-                name: npc.name,
-                faction: faction,
-                alliance: alliance,
-                movement: npc.movement,
-                meleeHits: npc.meleeHits,
-                meleeType: npc.meleeType,
-                health: npc.health,
-                damage: npc.damage,
-                armor: npc.armor,
-                traits: npc.traits,
-                activeAbilities: npc.activeAbilities,
-                passiveAbilities: npc.passiveAbilities,
-            };
-            if (npc.rangeHits) {
-                ret.rangeHits = npc.rangeHits!;
-                ret.rangeType = npc.rangeType!;
-                ret.range = npc.range!;
-            }
-            if (npc.critChance) {
-                ret.critChance = npc.critChance!;
-                ret.critDamage = npc.critDamage!;
-            }
-            if (npc.blockChance) {
-                ret.blockChance = npc.blockChance!;
-                ret.blockDamage = npc.blockDamage!;
-            }
-            return ret;
-        });
-
-        return data;
     }
 
     static getItemLocations = (itemId: string): ICampaignBattleComposed[] => {
@@ -498,27 +418,6 @@ export class StaticDataService {
         };
     }
 
-    /**
-     * @returns all known NPCs by faction. Human readable, and accepted by
-     *          `getNpcIconPath`.
-     */
-    public static getNpcs(): Map<Faction, string[]> {
-        return new Map<Faction, string[]>([
-            [Faction.Necrons, ['Flayed One', 'Necron Warrior', 'Scarab Swarm', 'Deathmark', 'Ophydian Destroyer']],
-            [
-                Faction.Astra_militarum,
-                ['Cadian Guardsman', 'Cadian Lascannon Team', 'Cadian Vox-Caster', 'Cadian Mortar Team'],
-            ],
-            [Faction.Ultramarines, ['Eliminator', 'Inceptor', 'Heavy Intercessor']],
-            [Faction.Black_Legion, ['Bloodletter', 'Chaos Terminator', 'Traitor Guardsman', 'Havoc']],
-            [Faction.Black_Templars, ['Initiate', 'Neophyte', 'Initiate with Pyreblaster', 'Aggressor']],
-            [Faction.Orks, ['Ork Boy', 'Grot', 'Grot Tank']],
-            [Faction.Tyranids, ['Hormagaunt', 'Termagant', 'Ripper Swarm', 'Tyranid Warrior']],
-            [Faction.Thousand_Sons, ['Rubric Marine', 'Pink Horror', 'Screamer', 'Scarab Occult Terminator']],
-            [Faction.Aeldari, ['Guardian', 'Warlock', 'Harlequin Player', 'Wraithguard']],
-        ]);
-    }
-
     private static getEquipmentTypeIconPathComponent(slot: EquipmentType): string {
         switch (slot) {
             case EquipmentType.Block:
@@ -556,60 +455,6 @@ export class StaticDataService {
                 break;
         }
         return 'equipment/' + icon + '_Icon.webp';
-    }
-
-    /** @returns the image asset for the NPC, which is allowed to be a character. */
-    public static getNpcIconPath(npc: string): string {
-        const prefix: string = 'npcs';
-        const map: Record<string, string> = {
-            'Flayed One': 'flayed_one.png',
-            'Necron Warrior': 'necron_warrior.png',
-            'Scarab Swarm': 'scarab_swarm.png',
-            Deathmark: 'deathmark.png',
-            'Ophydian Destroyer': 'ophydian_destroyer.png',
-            'Cadian Guardsman': 'cadian_guardsman.png',
-            'Cadian Lascannon team': 'lascannon.png',
-            'Cadian Lascannon Team': 'lascannon.png',
-            'Cadian Vox-Caster': 'vox_caster.png',
-            'Cadian Mortar Team': 'mortar_team.png',
-            Eliminator: 'eliminator.png',
-            Inceptor: 'inceptor.png',
-            'Heavy Intercessor': 'intercessor.png',
-            Bloodletter: 'blood_letter.png',
-            'Chaos Terminator': 'chaos_terminator.png',
-            'Traitor Guardsman': 'traitor_guardsman.png',
-            Havoc: 'chaos_havoc.png',
-            Campaign: 'campaign.png',
-            Initiate: 'initiate.png',
-            Neophyte: 'neophyte.png',
-            'Initiate with Pyreblaster': 'pyreblaster.png',
-            Aggressor: 'aggressor.png',
-            'Ork Boy': 'ork_boy.png',
-            Grot: 'grot.png',
-            'Grot Tank': 'grot_tank.png',
-            'Storm Boy': 'storm_boy.png',
-            Hormagaunt: 'hormagaunt.png',
-            Termagant: 'termagaunt.png',
-            'Ripper Swarm': 'ripper_swarm.png',
-            'Tyranid Warrior': 'tyranid_warrior.png',
-            'Rubric Marine': 'rubric_marine.webp',
-            'Pink Horror': 'pink_horror.webp',
-            Screamer: 'screamer_of_tzeentch.webp',
-            Guardian: 'guardian.webp',
-            'Scarab Occult Terminator': 'scarab_occult_terminator.webp',
-            'Harlequin Player': 'harlequin.webp',
-            Warlock: 'warlock.webp',
-            Wraithguard: 'wraithguard.webp',
-        };
-        if (map[npc]) {
-            return prefix + '/' + map[npc];
-        }
-        const unit = unitsData.find(x => x.Name === npc);
-        if (unit != undefined) {
-            return 'portraits/' + unit.Icon;
-        }
-        console.log('unknown npc - ' + npc);
-        return 'unknown-' + npc;
     }
 
     private static selectBestLocations(

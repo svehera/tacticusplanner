@@ -3,8 +3,6 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { rarityToMaxRank } from 'src/models/constants';
 import { EquipmentType } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
-import { FactionSelect } from 'src/routes/npcs/faction-select';
-import { NpcPortrait } from 'src/routes/tables/npc-portrait';
 import { StaticDataService } from 'src/services';
 import { getEnumValues } from 'src/shared-logic/functions';
 
@@ -13,6 +11,8 @@ import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { RankSelect } from '@/fsd/4-entities/character';
+import { FactionSelect } from '@/fsd/4-entities/faction';
+import { NpcPortrait, NpcService } from '@/fsd/4-entities/npc';
 
 import { CharacterSelect } from './character-select';
 import { DamageCalculatorService } from './damage-calculator-service';
@@ -87,7 +87,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
         StaticDataService.unitsData.forEach(unit => {
             if (unit.faction === faction) ret.push(unit.id);
         });
-        StaticDataService.npcDataFull.forEach(npc => {
+        NpcService.npcDataFull.forEach(npc => {
             if (npc.faction === faction) ret.push(npc.name);
         });
         return ret;
@@ -206,7 +206,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
         if (isPlayableCharacter) {
             return StaticDataService.unitsData.find(unit => unit.id === character)?.rangeDistance;
         }
-        return StaticDataService.npcDataFull.find(npc => npc.name === character)?.range;
+        return NpcService.npcDataFull.find(npc => npc.name === character)?.range;
     }, [character]);
 
     const equipmentSlot1Display = useMemo(() => {

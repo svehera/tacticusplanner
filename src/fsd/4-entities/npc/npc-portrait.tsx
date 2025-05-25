@@ -1,14 +1,16 @@
+/* eslint-disable import-x/no-internal-modules */
 import React from 'react';
 
 import blueStar from 'src/assets/images/stars/blue star.png';
 import redStar from 'src/assets/images/stars/red star small.png';
 import goldStar from 'src/assets/images/stars/star small.png';
-import { StaticDataService } from 'src/services';
-import { getImageUrl } from 'src/shared-logic/functions';
 
 import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
+import { getImageUrl } from '@/fsd/5-shared/ui';
 
-import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
+import { RankIcon } from '@/fsd/4-entities/character/@x/npc';
+
+import { NpcService } from './npcService';
 
 interface Props {
     name: string;
@@ -56,7 +58,7 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
     };
 
     const getNpcPortrait = (name: string) => {
-        const imageUrl = getImageUrl(StaticDataService.getNpcIconPath(name));
+        const imageUrl = getImageUrl(NpcService.getNpcIconPath(name));
         return (
             <img
                 src={imageUrl}

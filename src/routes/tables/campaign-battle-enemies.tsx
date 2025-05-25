@@ -4,7 +4,7 @@ import { IDetailedEnemy } from '@/models/interfaces';
 
 import { Rarity, Rank } from '@/fsd/5-shared/model';
 
-import { NpcPortrait } from './npc-portrait';
+import { NpcPortrait } from '@/fsd/4-entities/npc';
 
 interface Props {
     enemies: IDetailedEnemy[];

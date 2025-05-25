@@ -1,31 +1,8 @@
-﻿import { AgGridReact } from 'ag-grid-react';
-import React from 'react';
-import { isMobile } from 'react-device-detect';
-
-import { getEnumValues } from '@/fsd/5-shared/lib';
+﻿import { getEnumValues, useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
 import { Rarity, Rank } from '@/fsd/5-shared/model';
 
 import { rankToLevel } from '../models/constants';
 import { ICharacter2 } from '../models/interfaces';
-
-export const useFitGridOnWindowResize = (gridRef: React.RefObject<AgGridReact | null>) => {
-    function handleResize() {
-        gridRef.current?.api.sizeColumnsToFit();
-    }
-
-    React.useEffect(() => {
-        if (isMobile) {
-            return;
-        }
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    });
-
-    return handleResize;
-};
 
 export const needToAscendCharacter = (character: ICharacter2) => {
     const maxCommon = character.rarity === Rarity.Common && character.rank === Rank.Iron1;
@@ -138,4 +115,4 @@ function getDaySuffix(day: number) {
 }
 
 // Re-export from shared lib
-export { getEnumValues };
+export { getEnumValues, useFitGridOnWindowResize };

@@ -77,7 +77,7 @@ export const globalLearnRoutes: RouteObject[] = [
     {
         path: 'learn/npcs',
         async lazy() {
-            const { NpcInfo } = await import('@/routes/npcs/npc-info');
+            const { NpcInfo } = await import('@/fsd/1-pages/learn-npcs');
             return { Component: NpcInfo };
         },
     },

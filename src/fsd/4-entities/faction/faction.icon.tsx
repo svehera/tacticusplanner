@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { getImageUrl } from 'src/shared-logic/functions';
+import { getImageUrl } from '@/fsd/5-shared/ui';
 
 export const FactionImage = ({ faction }: { faction: string }) => {
     const imageUrl = getImageUrl(`factions/${faction}.png`);

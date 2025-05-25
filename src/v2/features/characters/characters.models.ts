@@ -4,9 +4,6 @@ import { ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow, IMowDb } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
-import { CharactersFilterBy } from '../../../fsd/4-entities/character/characters-filter-by.enum';
-import { CharactersOrderBy } from '../../../fsd/4-entities/character/characters-order-by.enum';
-
 export interface IFactionStatic {
     alliance: string;
     name: string;

@@ -1,9 +1,9 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React from 'react';
 
-import { FactionImage } from 'src/v2/components/images/faction-image';
-
 import { Faction } from '@/fsd/5-shared/model';
+
+import { FactionImage } from './faction.icon';
 
 interface Props {
     label: string;

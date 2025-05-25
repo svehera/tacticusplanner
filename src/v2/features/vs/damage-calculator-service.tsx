@@ -1,9 +1,10 @@
-import { EquipmentType, INpcData } from 'src/models/interfaces';
+import { EquipmentType } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
 
 import { RarityStars, Rarity, DamageType, Faction, Rank, Trait } from '@/fsd/5-shared/model';
 
 import { IUnitData } from '@/fsd/4-entities/character';
+import { INpcData, NpcService } from '@/fsd/4-entities/npc';
 import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
 import { IEquipmentSpec } from './versus-interfaces';
@@ -155,7 +156,7 @@ export class DamageCalculatorService {
         stars: RarityStars,
         equipment: IEquipmentSpec[]
     ): DamageUnitData {
-        const npc = StaticDataService.npcDataFull.find(npc => npc.name === id);
+        const npc = NpcService.npcDataFull.find(npc => npc.name === id);
         if (npc != undefined) {
             return this.modifyWithTraits(this.getRelevantNpcTraits(npc), {
                 damage: StatsCalculatorService.calculateNpcDamage(npc.name, stars, rank),
