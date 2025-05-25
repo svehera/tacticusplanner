@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 
-import { rarityToMaxRank } from 'src/models/constants';
-import { StoreContext } from 'src/reducers/store.provider';
-import { getEnumValues } from 'src/shared-logic/functions';
+// eslint-disable-next-line import-x/no-internal-modules
+import { StoreContext } from '@/reducers/store.provider';
 
-import { RarityStars, Rarity, Rank, Faction } from '@/fsd/5-shared/model';
+import { getEnumValues } from '@/fsd/5-shared/lib';
+import { RarityStars, Rarity, Rank, Faction, RarityMapper } from '@/fsd/5-shared/model';
 import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
-import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { DamageIcon, MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService, RankSelect } from '@/fsd/4-entities/character';
 import { EquipmentType } from '@/fsd/4-entities/equipment';
@@ -15,7 +15,6 @@ import { NpcPortrait, NpcService } from '@/fsd/4-entities/npc';
 
 import { CharacterSelect } from './character-select';
 import { DamageCalculatorService } from './damage-calculator-service';
-import { DamageIcon } from './damage-icon';
 import { EquipmentSelect } from './equipment-select';
 import { IEquipmentSpec } from './versus-interfaces';
 
@@ -61,7 +60,7 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
     }, [rarity]);
 
     const maxRank = useMemo(() => {
-        return rarityToMaxRank[rarity];
+        return RarityMapper.toMaxRank[rarity];
     }, [rarity]);
 
     const minStars = useMemo(() => {
@@ -94,11 +93,12 @@ export const FullCharacter: React.FC<Props> = ({ onCharacterChange }) => {
 
     /** Adjusts stars and rank if necessary with a change to rarity. */
     const onRarityChanged = (newRarity: Rarity) => {
+        const maxRank = RarityMapper.toMaxRank[newRarity];
         if (newRarity < rarity) {
             setRarity(newRarity);
             setStars(minStarsMap.get(newRarity + 1) ?? RarityStars.BlueStar);
-            if (rank > rarityToMaxRank[newRarity]) {
-                setRank(rarityToMaxRank[newRarity]);
+            if (rank > maxRank) {
+                setRank(maxRank);
             }
         } else if (newRarity > rarity) {
             setRarity(newRarity);

@@ -4,4 +4,5 @@ export { MiscIcon } from './misc.icon';
 export { RarityIcon } from './rarity.icon';
 export { StarsIcon } from './stars.icon';
 export { UnitShardIcon } from './unit-shard.icon';
+export { DamageIcon } from './damage-icon';
 export { pooEmoji, starEmoji } from './emojies';

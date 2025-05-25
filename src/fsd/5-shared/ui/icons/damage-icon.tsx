@@ -1,3 +1,4 @@
+/* eslint-disable import-x/no-internal-modules */
 import React from 'react';
 
 import bioIcon from 'src/assets/images/damage/bio.webp';

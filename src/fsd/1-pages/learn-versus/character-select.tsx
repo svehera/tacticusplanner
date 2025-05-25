@@ -2,9 +2,7 @@ import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import React from 'react';
 
-import { getImageUrl } from 'src/shared-logic/functions';
-
-import { FlexBox } from '@/fsd/5-shared/ui';
+import { FlexBox, getImageUrl } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
