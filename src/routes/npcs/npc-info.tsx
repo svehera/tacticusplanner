@@ -4,25 +4,20 @@ import React, { useMemo, useRef, useState } from 'react';
 
 import { INpcData } from 'src/models/interfaces';
 import { StaticDataService } from 'src/services';
-import { RankSelect } from 'src/shared-components/rank-select';
-import { StarsSelect } from 'src/shared-components/stars-select';
 import { getImageUrl, useFitGridOnWindowResize } from 'src/shared-logic/functions';
 import { FactionImage } from 'src/v2/components/images/faction-image';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
-import { Faction, Rank, RarityStars } from '@/fsd/5-shared/model';
+import { Rank, RarityStars } from '@/fsd/5-shared/model';
+import { StarsSelect } from '@/fsd/5-shared/ui';
 
-import { StatsCalculatorService } from '@/fsd/4-entities/character';
-
-import { StatCell } from '../characters/stat-cell';
+import { RankSelect } from '@/fsd/4-entities/character';
+import { StatsCalculatorService, StatCell } from '@/fsd/4-entities/unit';
 
 export const NpcInfo: React.FC = () => {
     const gridRef = useRef<AgGridReact<INpcData>>(null);
-    const [faction, setFaction] = useState<Faction>(Faction.Necrons);
-    const [npc, setNpc] = useState<string>('');
     const [stars, setStars] = useState<RarityStars>(RarityStars.None);
     const [rank, setRank] = useState<Rank>(Rank.Stone1);
-    const npcs = useMemo(() => StaticDataService.getNpcs().get(faction) ?? [], [faction]);
 
     const onStarsChange = (value: RarityStars) => {
         setStars(value);

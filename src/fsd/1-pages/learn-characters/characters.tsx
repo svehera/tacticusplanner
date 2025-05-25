@@ -18,20 +18,18 @@ import { AgGridReact } from 'ag-grid-react';
 import { uniq } from 'lodash';
 import React, { ChangeEvent, useCallback, useContext, useMemo, useRef, useState } from 'react';
 
-import { ICharacter2 } from 'src/models/interfaces';
+// eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
-import { RankSelect } from 'src/shared-components/rank-select';
-import { RaritySelect } from 'src/shared-components/rarity-select';
-import { StarsSelect } from 'src/shared-components/stars-select';
-import { useQueryState } from 'src/v2/hooks/query-state';
 
-import { getEnumValues } from '@/fsd/5-shared/lib';
+import { useQueryState, getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Alliance, DamageType, Trait, Rank } from '@/fsd/5-shared/model';
+import { MultipleSelectCheckmarks, RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
+
+import { ICharacter2, RankSelect } from '@/fsd/4-entities/character';
 
 import { useCharacters } from './characters-column-defs';
-import { MultipleSelectCheckmarks } from './multiple-select';
 
-export const Characters = () => {
+export const LearnCharacters = () => {
     const gridRef = useRef<AgGridReact<ICharacter2>>(null);
 
     const {

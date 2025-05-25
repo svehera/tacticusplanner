@@ -33,8 +33,8 @@ import { isMobile } from 'react-device-detect';
 import { ICharacter2, ILreTeam } from 'src/models/interfaces';
 import { StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { useQueryState } from 'src/v2/hooks/query-state';
 
+import { useQueryState } from '@/fsd/5-shared/lib';
 import { Rank } from '@/fsd/5-shared/model';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';

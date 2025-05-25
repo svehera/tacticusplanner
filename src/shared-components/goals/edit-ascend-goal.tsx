@@ -6,11 +6,10 @@ import { ICampaignBattleComposed } from 'src/models/interfaces';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { CampaignsUsageSelect } from 'src/shared-components/goals/campaigns-usage-select';
 import { NumbersInput } from 'src/shared-components/goals/numbers-input';
-import { RaritySelect } from 'src/shared-components/rarity-select';
-import { StarsSelect } from 'src/shared-components/stars-select';
-import { getEnumValues } from 'src/shared-logic/functions';
 
+import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 
 import { ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
 

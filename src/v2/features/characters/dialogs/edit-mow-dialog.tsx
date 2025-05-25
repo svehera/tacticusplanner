@@ -6,12 +6,11 @@ import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
-import { RaritySelect } from 'src/shared-components/rarity-select';
-import { StarsSelect } from 'src/shared-components/stars-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 import { NumberInput } from 'src/v2/components/inputs/number-input';
 
 import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { StarsSelect, RaritySelect } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 

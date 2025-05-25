@@ -12,8 +12,8 @@ import { StaticDataService } from 'src/services';
 import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 import { useFitGridOnWindowResize } from 'src/shared-logic/functions';
 import { FactionImage } from 'src/v2/components/images/faction-image';
-import { useQueryState } from 'src/v2/hooks/query-state';
 
+import { useQueryState } from '@/fsd/5-shared/lib';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
 import { CampaignBattle } from './campaign-battle';

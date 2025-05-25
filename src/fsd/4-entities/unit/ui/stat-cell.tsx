@@ -3,7 +3,7 @@ import React from 'react';
 import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { StatsCalculatorService } from '@/fsd/4-entities/character';
+import { StatsCalculatorService } from '../stats-calculator.service';
 
 interface Props {
     characterId?: string;

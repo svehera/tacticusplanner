@@ -12,9 +12,9 @@ import {
     ILreViewSettings,
     IViewOption,
 } from 'src/models/interfaces';
-import { MultipleSelectCheckmarks } from 'src/routes/characters/multiple-select';
 
 import { Rarity, Rank } from '@/fsd/5-shared/model';
+import { MultipleSelectCheckmarks } from '@/fsd/5-shared/ui';
 
 import { CharacterBias } from '@/fsd/4-entities/character';
 

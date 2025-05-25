@@ -2,8 +2,8 @@
 
 import { StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { useQueryState } from 'src/v2/hooks/query-state';
 
+import { useQueryState } from '@/fsd/5-shared/lib';
 import { useTitle } from '@/fsd/5-shared/ui/contexts';
 
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';

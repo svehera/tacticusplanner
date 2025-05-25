@@ -3,25 +3,29 @@ import InputLabel from '@mui/material/InputLabel';
 import React from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model';
-import { FlexBox } from '@/fsd/5-shared/ui';
-import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
 
-interface Props {
+import { FlexBox } from './flex-box';
+import { RarityIcon } from './icons';
+
+export const RaritySelect = ({
+    rarityValues,
+    valueChanges,
+    value,
+    label,
+}: {
     label: string;
-    starsValues: number[];
+    rarityValues: number[];
     value: number;
     valueChanges: (value: number) => void;
-}
-
-export const StarsSelect: React.FC<Props> = ({ starsValues, valueChanges, value, label }) => {
+}) => {
     return (
         <FormControl fullWidth>
             <InputLabel>{label}</InputLabel>
             <Select<Rarity> label={label} value={value} onChange={event => valueChanges(+event.target.value)}>
-                {starsValues.map(star => (
-                    <MenuItem key={star} value={star}>
+                {rarityValues.map(rarity => (
+                    <MenuItem key={rarity} value={rarity}>
                         <FlexBox gap={5}>
-                            <StarsIcon stars={star} />
+                            <RarityIcon rarity={rarity} /> {Rarity[rarity]}
                         </FlexBox>
                     </MenuItem>
                 ))}

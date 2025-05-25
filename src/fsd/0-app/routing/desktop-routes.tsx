@@ -70,8 +70,8 @@ export const globalLearnRoutes: RouteObject[] = [
     {
         path: 'learn/characters',
         async lazy() {
-            const { Characters } = await import('@/routes/characters/characters');
-            return { Component: Characters };
+            const { LearnCharacters } = await import('@/fsd/1-pages/learn-characters');
+            return { Component: LearnCharacters };
         },
     },
     {

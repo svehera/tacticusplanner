@@ -2,7 +2,7 @@ import { StaticDataService } from '@/services';
 
 import { RarityStars, Rarity, Rank, rankToString } from '@/fsd/5-shared/model';
 
-import { ICharacter2 } from './model';
+import { ICharacter2 } from '@/fsd/4-entities/character/@x/unit';
 
 export class StatsCalculatorService {
     // The following NPC ability levels were gathered by Towen. They map to

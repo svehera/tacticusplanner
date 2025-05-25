@@ -6,13 +6,13 @@ import { StoreContext } from 'src/reducers/store.provider';
 import { FactionSelect } from 'src/routes/npcs/faction-select';
 import { NpcPortrait } from 'src/routes/tables/npc-portrait';
 import { StaticDataService } from 'src/services';
-import { RankSelect } from 'src/shared-components/rank-select';
-import { RaritySelect } from 'src/shared-components/rarity-select';
-import { StarsSelect } from 'src/shared-components/stars-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 
 import { RarityStars, Rarity, Rank, Faction } from '@/fsd/5-shared/model';
+import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+
+import { RankSelect } from '@/fsd/4-entities/character';
 
 import { CharacterSelect } from './character-select';
 import { DamageCalculatorService } from './damage-calculator-service';

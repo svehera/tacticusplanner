@@ -14,6 +14,7 @@ import { Rarity, Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
+import { RankSelect } from '@/fsd/4-entities/character';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
 
 import { UpgradeImage } from '../../fsd/4-entities/upgrade/upgrade-image';
@@ -26,7 +27,6 @@ import {
 } from '../../models/interfaces';
 import { StoreContext } from '../../reducers/store.provider';
 import { StaticDataService } from '../../services';
-import { RankSelect } from '../../shared-components/rank-select';
 import { getEnumValues } from '../../shared-logic/functions';
 
 export const RankLookup = () => {

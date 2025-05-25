@@ -3,7 +3,9 @@ import React from 'react';
 import { RarityStars, Rarity, DamageType, Rank } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { ICharacter2, StatsCalculatorService } from '@/fsd/4-entities/character';
+import { ICharacter2 } from '@/fsd/4-entities/character/@x/unit';
+
+import { StatsCalculatorService } from '../stats-calculator.service';
 
 interface Props {
     character: ICharacter2;

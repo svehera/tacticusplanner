@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Rank, rankToString } from '@/fsd/5-shared/model';
 
-import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
+import { RankIcon } from './rank.icon';
 
 export const RankSelect = ({
     rankValues,

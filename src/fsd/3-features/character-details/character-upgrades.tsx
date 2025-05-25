@@ -11,7 +11,8 @@ import { findAndRemoveItem } from '@/fsd/5-shared/lib';
 import { Rank } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { ICharacter2, StatsCalculatorService, CharacterUpgradesService } from '@/fsd/4-entities/character';
+import { ICharacter2, CharacterUpgradesService } from '@/fsd/4-entities/character';
+import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 import {
     IBaseUpgrade,
     ICraftedUpgrade,

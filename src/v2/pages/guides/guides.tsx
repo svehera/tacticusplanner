@@ -10,8 +10,8 @@ import { isMobile } from 'react-device-detect';
 import { useSearchParams } from 'react-router-dom';
 
 import { StoreContext } from 'src/reducers/store.provider';
-import { useQueryState } from 'src/v2/hooks/query-state';
 
+import { useQueryState } from '@/fsd/5-shared/lib';
 import { useAuth, UserRole } from '@/fsd/5-shared/model';
 import { LoaderWithText } from '@/fsd/5-shared/ui';
 

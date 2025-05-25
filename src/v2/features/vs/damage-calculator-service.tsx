@@ -3,7 +3,8 @@ import { StaticDataService } from 'src/services';
 
 import { RarityStars, Rarity, DamageType, Faction, Rank, Trait } from '@/fsd/5-shared/model';
 
-import { IUnitData, StatsCalculatorService } from '@/fsd/4-entities/character';
+import { IUnitData } from '@/fsd/4-entities/character';
+import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
 import { IEquipmentSpec } from './versus-interfaces';
 

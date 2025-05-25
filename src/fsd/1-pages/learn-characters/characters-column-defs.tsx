@@ -4,14 +4,10 @@ import { isMobile } from 'react-device-detect';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { RarityStars, Rarity, DamageType, Rank, Trait, RarityMapper } from '@/fsd/5-shared/model';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
-import { ICharacter2, StatsCalculatorService } from '@/fsd/4-entities/character';
-import { CharacterTitle } from '@/fsd/4-entities/character/ui/character-title';
-import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
-
-import { DamageCell } from './damage-cell';
-import { StatCell } from './stat-cell';
+import { ICharacter2, CharacterTitle, RankIcon } from '@/fsd/4-entities/character';
+import { StatCell, DamageCell, StatsCalculatorService } from '@/fsd/4-entities/unit';
 
 export const useCharacters = () => {
     const [targetRarity, setTargetRarity] = useState<Rarity>(Rarity.Legendary);
