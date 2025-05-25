@@ -1,6 +1,3 @@
-// eslint-disable-next-line import-x/no-internal-modules
-import { ITableRow, IAutoTeamsPreferences, ISelectedTeamsOrdering } from '@/models/interfaces';
-
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import {
     ILegendaryEventStatic,
@@ -9,13 +6,15 @@ import {
     LreTrackId,
 } from '@/fsd/4-entities/lre';
 
+export type ILreTableRow<T = ICharacter2 | string> = Record<string, T>;
+
 export interface ILegendaryEvent extends ILegendaryEventStatic {
     id: LegendaryEventEnum;
     alpha: ILegendaryEventTrack;
     beta: ILegendaryEventTrack;
     gamma: ILegendaryEventTrack;
 
-    suggestedTeams: ITableRow[];
+    suggestedTeams: ILreTableRow[];
     allowedUnits: Array<ICharacter2>;
     battlesCount: number;
 }
@@ -54,4 +53,38 @@ export interface ILegendaryEventTrackRequirement {
     points: number;
     units: ICharacter2[];
     selected?: boolean;
+}
+
+export interface ILreTeam {
+    id: string;
+    name: string;
+    section: LreTrackId;
+    restrictionsIds: string[];
+    charactersIds: string[];
+    /**
+     * Client Side only
+     */
+    characters?: ICharacter2[];
+}
+
+export interface ILegendaryEventSelectedRequirements {
+    id: LegendaryEventEnum;
+    name: string;
+    alpha: SelectedRequirements;
+    beta: SelectedRequirements;
+    gamma: SelectedRequirements;
+}
+
+export type SelectedRequirements = Record<string, boolean>;
+
+export interface IAutoTeamsPreferences {
+    preferCampaign: boolean;
+    ignoreRarity: boolean;
+    ignoreRank: boolean;
+    ignoreRecommendedFirst: boolean; // ignore Bias
+}
+
+export interface ISelectedTeamsOrdering {
+    orderBy: 'name' | 'rank' | 'rarity';
+    direction: 'asc' | 'desc';
 }

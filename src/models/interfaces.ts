@@ -18,11 +18,11 @@ import {
 import { CharacterBias, ICharacter2, ICharLegendaryEvent } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
 import { IMow, IMowDb } from '@/fsd/4-entities/mow';
-import { IMaterialFull, IMaterialRecipeIngredientFull } from '@/fsd/4-entities/upgrade';
+import { IMaterialFull, IMaterialRecipeIngredientFull, IMaterialEstimated2 } from '@/fsd/4-entities/upgrade';
 
+import { IAutoTeamsPreferences, ILegendaryEventSelectedRequirements, ILreTeam } from '@/fsd/3-features/lre';
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
-import { CharactersFilterBy } from 'src/v2/features/characters/enums/characters-filter-by';
-import { CharactersOrderBy } from 'src/v2/features/characters/enums/characters-order-by';
+import { IViewPreferences } from '@/fsd/3-features/view-settings';
 import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 import { IGWLayout, IGWTeam } from 'src/v2/features/guild-war/guild-war.models';
 import { IPersonalTeam } from 'src/v2/features/teams/teams.models';
@@ -40,55 +40,7 @@ import { LeSelectedTeamsAction } from '../reducers/le-selected-teams.reducer';
 import { SelectedTeamsOrderingAction } from '../reducers/selected-teams-order.reducer';
 import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
 
-import { CampaignsLocationsUsage, DailyRaidsStrategy, Difficulty, EquipmentClass, PersonalGoalType } from './enums';
-
-export interface INpcDataRaw {
-    name: string;
-    faction: string;
-    alliance: string;
-    movement: number;
-    meleeHits: number;
-    meleeType: string;
-    rangeHits?: number;
-    rangeType?: string;
-    range?: number;
-    health: number;
-    damage: number;
-    armor: number;
-    critChance?: number;
-    critDamage?: number;
-    blockChance?: number;
-    blockDamage?: number;
-    traits: string[];
-    activeAbilities: string[];
-    passiveAbilities: string[];
-}
-
-export interface INpcsRaw {
-    npcs: INpcDataRaw[];
-}
-
-export interface INpcData {
-    name: string;
-    faction: Faction;
-    alliance: Alliance;
-    movement: number;
-    meleeHits: number;
-    meleeType: string;
-    rangeHits?: number;
-    rangeType?: string;
-    range?: number;
-    health: number;
-    damage: number;
-    armor: number;
-    critChance?: number;
-    critDamage?: number;
-    blockChance?: number;
-    blockDamage?: number;
-    traits: string[];
-    activeAbilities: string[];
-    passiveAbilities: string[];
-}
+import { CampaignsLocationsUsage, DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';
 
 export type ITableRow<T = ICharacter2 | string> = Record<string, T>;
 
@@ -210,7 +162,6 @@ export interface ILegendaryEventsData {
 export type ILegendaryEventsData3 = Record<LegendaryEventEnum, ILegendaryEventSelectedTeams>;
 
 export type SelectedTeams = Record<string, string[]>;
-export type SelectedRequirements = Record<string, boolean>;
 
 export interface ILegendaryEventSelectedTeams {
     id: LegendaryEventEnum;
@@ -221,86 +172,8 @@ export interface ILegendaryEventSelectedTeams {
     gamma: SelectedTeams;
 }
 
-export interface ILreTeam {
-    id: string;
-    name: string;
-    section: LreTrackId;
-    restrictionsIds: string[];
-    charactersIds: string[];
-    /**
-     * Client Side only
-     */
-    characters?: ICharacter2[];
-}
-
-export interface ILegendaryEventSelectedRequirements {
-    id: LegendaryEventEnum;
-    name: string;
-    alpha: SelectedRequirements;
-    beta: SelectedRequirements;
-    gamma: SelectedRequirements;
-}
-
 export interface ILegendaryEventData {
     selectedTeams: ITableRow<string>[];
-}
-
-export interface IViewOption<T = IViewPreferences> {
-    key: keyof T;
-    value: boolean;
-    label: string;
-    disabled: boolean;
-    tooltip?: string;
-}
-
-export interface IViewPreferences extends ILreViewSettings, ILreTileSettings, IWyoViewSettings {
-    theme: 'light' | 'dark';
-    // autoTeams: boolean;
-    wyoFilter: CharactersFilterBy;
-    wyoOrder: CharactersOrderBy;
-    craftableItemsInInventory: boolean;
-    inventoryShowAlphabet: boolean;
-    inventoryShowPlusMinus: boolean;
-    goalsTableView: boolean;
-    myProgressShowCoreCharacters: boolean;
-    apiIntegrationSyncOptions: string[];
-}
-
-export interface IWyoViewSettings {
-    showBadges: boolean;
-    showAbilitiesLevel: boolean;
-    showBsValue: boolean;
-    showPower: boolean;
-    showCharacterLevel: boolean;
-    showCharacterRarity: boolean;
-}
-
-export interface ILreViewSettings {
-    lreGridView: boolean;
-    showAlpha: boolean;
-    showBeta: boolean;
-    showGamma: boolean;
-    onlyUnlocked: boolean;
-    hideCompleted: boolean;
-}
-
-export interface ILreTileSettings {
-    lreTileShowUnitIcon: boolean;
-    lreTileShowUnitRarity: boolean;
-    lreTileShowUnitRank: boolean;
-    lreTileShowUnitRankBackground: boolean;
-    lreTileShowUnitName: boolean;
-    lreTileShowUnitBias: boolean;
-    lreTileShowUnitActiveAbility: boolean;
-    lreTileShowUnitPassiveAbility: boolean;
-    lreTileShowUnitHealTraits: boolean;
-}
-
-export interface IAutoTeamsPreferences {
-    preferCampaign: boolean;
-    ignoreRarity: boolean;
-    ignoreRank: boolean;
-    ignoreRecommendedFirst: boolean; // ignore Bias
 }
 
 export interface IDailyRaidsPreferences {
@@ -390,40 +263,6 @@ export interface IPersonalGoal {
     secondAbilityLevel?: number;
 }
 
-export enum EquipmentType {
-    Crit = 'Crit',
-    Block = 'Block',
-    CritBooster = 'Crit Booster',
-    BlockBooster = 'Block Booster',
-    Defensive = 'Defensive',
-}
-
-export interface IMaterialEstimated2 {
-    id: string;
-    label: string;
-    expectedEnergy: number;
-    numberOfBattles: number;
-    totalEnergy: number;
-    dailyEnergy: number;
-    locations: ICampaignBattleComposed[];
-    possibleLocations: ICampaignBattleComposed[];
-    unlockedLocations: string[];
-    locationsString: string;
-    missingLocationsString: string;
-    daysOfBattles: number;
-    dailyBattles: number;
-    count: number;
-    craftedCount: number;
-    rarity: Rarity;
-    // energyPerBattle: number;
-    quantity: number;
-    countLeft: number;
-    iconPath: string;
-    characters: string[];
-    priority: number;
-    isBlocked: boolean;
-}
-
 export interface IDailyRaid {
     raids: IMaterialRaid[];
     energyLeft: number;
@@ -473,85 +312,6 @@ export interface IInventory {
     upgrades: Record<string, number>;
 }
 
-/**
- * Information about equipment coming directly from a spreadsheet, with a tiny
- * bit of massaging into JSON. Most of this was gathered by Towen (thanks so
- * much).
- */
-export interface IEquipmentRaw {
-    /** What kind of equipment this is (e.g. Crit). */
-    slot: string;
-
-    /** The class of equipment, e.g. Greaves, VoidBlade. */
-    clazz: string;
-
-    /**
-     * The ID that SP uses to identify this object. You can use this ID to
-     * determine the icon path.
-     */
-    snowprintId: number;
-
-    /** The in-game name of the item. */
-    displayName: string;
-
-    /** The rarity of the item. */
-    rarity: string;
-
-    /** For equipment with RNG, the chance (or boost to chance) they provide. */
-    chance: number;
-
-    /** The factions that can equip this item. */
-    factions: string[];
-
-    /**
-     * The primary boost this item gives. For defensive items, this is health.
-     * So it's expected that this can be empty (e.g. for greaves).
-     *
-     * The index represents the level of the item.
-     */
-    boost1: number[];
-
-    /**
-     * The secondary boost this item gives. For defensive items, this is armor.
-     * Most items do not yield two boosts, so this is often empty.
-     *
-     * The index represents the level of the item.
-     */
-    boost2: number[];
-}
-
-/**
- * Similar to IEquipmentRaw, but with the types converted to enums.
- */
-export interface IEquipment {
-    /** See @IEquipmentRaw.slot. */
-    slot: EquipmentType;
-
-    /** See @IEquipmentRaw.clazz. */
-    clazz: EquipmentClass;
-
-    /** See @IEquipmentRaw.snowprintId. */
-    snowprintId: number;
-
-    /** See @IEquipmentRaw.displayName. */
-    displayName: string;
-
-    /** See @IEquipmentRaw.rarity. */
-    rarity: Rarity;
-
-    /** See @IEquipmentRaw.chance. */
-    chance?: number;
-
-    /** See @IEquipmentRaw.factions. */
-    factions: Faction[];
-
-    /** See @IEquipmentRaw.boost1. */
-    boost1: number[];
-
-    /** See @IEquipmentRaw.boost2. */
-    boost2: number[];
-}
-
 // Re-export types from FSD entities
 export type {
     ICampaignsProgress,
@@ -564,4 +324,15 @@ export type {
     IMowDb,
     IMaterialFull,
     IMaterialRecipeIngredientFull,
+    ILreTeam,
+    ILegendaryEventSelectedRequirements,
+    IAutoTeamsPreferences,
 };
+
+export type {
+    IViewPreferences,
+    IViewOption,
+    ILreViewSettings,
+    IWyoViewSettings,
+    ILreTileSettings,
+} from '@/fsd/3-features/view-settings';

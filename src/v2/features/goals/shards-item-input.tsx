@@ -1,9 +1,10 @@
 ﻿import React from 'react';
 
 import { CampaignType } from 'src/models/enums';
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
 
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 
 import { IItemRaidLocation, IShardsRaid } from 'src/v2/features/goals/goals.models';
 import { RaidItemInput } from 'src/v2/features/goals/raid-item-input';

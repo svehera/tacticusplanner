@@ -1,4 +1,5 @@
-﻿import { TacticusInventory } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
+﻿import { TacticusInventory } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
+
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
 
 import { defaultData } from '../models/constants';

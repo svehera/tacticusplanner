@@ -65,6 +65,32 @@ export interface IMaterialRecipeIngredientFull {
     priority: number;
 }
 
+export interface IMaterialEstimated2 {
+    id: string;
+    label: string;
+    expectedEnergy: number;
+    numberOfBattles: number;
+    totalEnergy: number;
+    dailyEnergy: number;
+    locations: ICampaignBattleComposed[];
+    possibleLocations: ICampaignBattleComposed[];
+    unlockedLocations: string[];
+    locationsString: string;
+    missingLocationsString: string;
+    daysOfBattles: number;
+    dailyBattles: number;
+    count: number;
+    craftedCount: number;
+    rarity: Rarity;
+    // energyPerBattle: number;
+    quantity: number;
+    countLeft: number;
+    iconPath: string;
+    characters: string[];
+    priority: number;
+    isBlocked: boolean;
+}
+
 export interface IRecipeData {
     [material: string]: IMaterial;
 }
@@ -86,6 +112,24 @@ export interface IMaterialRecipeIngredient {
     material: string | 'Gold'; // material name;
     count: number;
 }
+
+/**
+ * Holds the fully-expanded recipe for an upgrade material. One can then
+ * reference the necessary IBaseUpgrade objects to get the full details.
+ * That is, to say, expandedRecipe contains only uncraftable materials. If
+ * this material is already uncraftable, expandedRecipe is empty.
+ */
+export interface IRecipeExpandedUpgrade {
+    id: string;
+    label: string;
+    rarity: Rarity;
+    iconPath: string;
+    expandedRecipe: Record<string, number>;
+    crafted: boolean;
+    stat: string | 'Health' | 'Damage' | 'Armour' | 'Shard';
+}
+
+export type IRecipeExpandedUpgradeData = Record<string, IRecipeExpandedUpgrade>;
 
 export type IBaseUpgradeData = Record<string, IBaseUpgrade>;
 export type ICraftedUpgradeData = Record<string, ICraftedUpgrade>;

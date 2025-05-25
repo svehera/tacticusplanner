@@ -20,6 +20,7 @@ import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-
 import { Rank } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
+import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 import { CharactersAbilitiesService } from 'src/v2/features/characters/characters-abilities.service';
@@ -28,7 +29,8 @@ import { CharacterRaidGoalSelect, IGoalEstimate } from 'src/v2/features/goals/go
 import { GoalsService } from 'src/v2/features/goals/goals.service';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
-import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
+
+import { MowLookupService } from '@/fsd/1-pages/learn-mow/mow-lookup.service';
 
 export const Goals = () => {
     const {
@@ -154,11 +156,7 @@ export const Goals = () => {
                         xpEstimate,
                     } as IGoalEstimate;
                 } else {
-                    const mowMaterials = MowLookupService.getMaterialsList(
-                        goal.unitId,
-                        goal.unitName,
-                        goal.unitAlliance
-                    );
+                    const mowMaterials = MowsService.getMaterialsList(goal.unitId, goal.unitName, goal.unitAlliance);
 
                     const primaryAbility = mowMaterials.slice(goal.primaryStart - 1, goal.primaryEnd - 1);
                     const secondaryAbility = mowMaterials.slice(goal.secondaryStart - 1, goal.secondaryEnd - 1);

@@ -1,8 +1,9 @@
 ﻿import { SetStateAction } from '@/models/interfaces';
 import { rarityToStars } from 'src/models/constants';
 
+import { TacticusShard, TacticusUnit } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
+
 import { IMow, IMowDb } from '@/v2/features/characters/characters.models';
-import { TacticusShard, TacticusUnit } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
 import { TacticusIntegrationService } from 'src/v2/features/tacticus-integration/tacticus-integration.service';
 
 export type MowsAction =

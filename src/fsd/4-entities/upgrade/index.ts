@@ -7,6 +7,9 @@ export type {
     IRecipeData,
     IMaterial,
     IMaterialRecipeIngredient,
+    IMaterialEstimated2,
+    IRecipeExpandedUpgrade,
+    IRecipeExpandedUpgradeData,
 } from './model';
 export { UpgradeImage } from './upgrade-image';
 export { UpgradeControl } from './upgrade-control';

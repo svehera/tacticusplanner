@@ -7,7 +7,6 @@ import {
     Rank,
     Rarity,
     RarityStars,
-    RarityString,
     Trait,
     UnitType,
 } from '@/fsd/5-shared/model';
@@ -65,30 +64,30 @@ export interface ICharLegendaryEvent {
 
 export interface UnitDataRaw {
     Name: string;
-    Faction: Faction;
-    Alliance: Alliance;
+    Faction: string;
+    Alliance: string;
     Health: number;
     Damage: number;
     Armour: number;
     'Short Name': string;
     'Full Name': string;
-    'Initial rarity': RarityString;
-    'Melee Damage': DamageType;
+    'Initial rarity': string;
+    'Melee Damage': string;
     'Melee Hits': number;
-    'Ranged Damage'?: DamageType;
+    'Ranged Damage'?: string;
     'Ranged Hits'?: number;
     Distance?: number;
     Movement: number;
-    'Trait 1'?: Trait;
-    'Trait 2'?: Trait;
-    'Trait 3'?: Trait;
-    'Trait 4'?: Trait;
-    Traits: Trait[];
-    'Active Ability'?: DamageType;
-    'Passive Ability'?: DamageType;
-    Equipment1: Equipment;
-    Equipment2: Equipment;
-    Equipment3: Equipment;
+    'Trait 1'?: string;
+    'Trait 2'?: string;
+    'Trait 3'?: string;
+    'Trait 4'?: string;
+    Traits: string[];
+    'Active Ability'?: string;
+    'Passive Ability'?: string;
+    Equipment1: string;
+    Equipment2: string;
+    Equipment3: string;
     Number: number;
     ForcedSummons: boolean;
     RequiredInCampaign: boolean;
@@ -102,13 +101,13 @@ export interface UnitDataRaw {
      */
     CampaignsRequiredIn?: string[];
     Icon: string;
-    ReleaseRarity?: CharacterReleaseRarity;
+    ReleaseRarity?: number;
     releaseDate?: string;
     tacticusId?: string;
     lre?: ILreCharacterStaticData;
 }
 
-export interface IUnitData {
+export interface ICharacterData {
     unitType: UnitType.character;
     id: string;
     tacticusId?: string;
@@ -158,7 +157,7 @@ export interface IRankUpData2 {
     [rank: string]: string[];
 }
 
-export type ICharacter2 = IUnitData & IPersonalCharacterData2 & DynamicProps;
+export type ICharacter2 = ICharacterData & IPersonalCharacterData2 & DynamicProps;
 
 /**
  * Contains the start and end rank of a particular goal, and

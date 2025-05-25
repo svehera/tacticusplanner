@@ -1,6 +1,6 @@
 ﻿import React from 'react';
 
-import { CampaignLocation } from 'src/shared-components/goals/campaign-location';
+import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 
 import { IUpgradeRaid } from 'src/v2/features/goals/goals.models';
 import { MaterialItemTitle } from 'src/v2/features/goals/material-item-title';

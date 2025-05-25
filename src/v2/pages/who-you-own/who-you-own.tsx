@@ -13,14 +13,13 @@ import { IMow } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 import { CharacterItemDialog } from '@/fsd/3-features/character-details/character-item-dialog';
+import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-features/view-settings';
 import { CharactersViewContext } from 'src/v2/features/characters/characters-view.context';
-import { IViewControls } from 'src/v2/features/characters/characters.models';
 import { CharactersService } from 'src/v2/features/characters/characters.service';
 import { CharactersGrid } from 'src/v2/features/characters/components/characters-grid';
 import { FactionsGrid } from 'src/v2/features/characters/components/factions-grid';
 import { RosterHeader } from 'src/v2/features/characters/components/roster-header';
 import { TeamGraph } from 'src/v2/features/characters/components/team-graph';
-import { ViewControls } from 'src/v2/features/characters/components/view-controls';
 import { EditMowDialog } from 'src/v2/features/characters/dialogs/edit-mow-dialog';
 import { isCharactersView } from 'src/v2/features/characters/functions/is-characters-view';
 import { isFactionsView } from 'src/v2/features/characters/functions/is-factions-view';
@@ -33,7 +32,7 @@ export const WhoYouOwn = () => {
 
     const { token: isLoggedIn, shareToken: isRosterShared } = useAuth();
 
-    const [viewControls, setViewControls] = useState<IViewControls>({
+    const [viewControls, setViewControls] = useState<ICharactersViewControls>({
         filterBy: viewPreferences.wyoFilter,
         orderBy: viewPreferences.wyoOrder,
     });
@@ -80,7 +79,7 @@ export const WhoYouOwn = () => {
         );
     }, [factions, viewControls.orderBy]);
 
-    const updatePreferences = useCallback((value: IViewControls) => {
+    const updatePreferences = useCallback((value: ICharactersViewControls) => {
         setViewControls(value);
         dispatch.viewPreferences({ type: 'Update', setting: 'wyoOrder', value: value.orderBy });
         dispatch.viewPreferences({ type: 'Update', setting: 'wyoFilter', value: value.filterBy });
@@ -131,7 +130,7 @@ export const WhoYouOwn = () => {
                     {!!isLoggedIn && <ShareRoster isRosterShared={!!isRosterShared} />}
                     <TeamGraph units={charactersFiltered} />
                 </RosterHeader>
-                <ViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
+                <CharactersViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
 
                 {factionsView && <FactionsGrid factions={factions} onCharacterClick={startEditUnit} />}
 

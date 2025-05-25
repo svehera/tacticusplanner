@@ -1,2 +1,10 @@
 export { getLre } from './get-lre';
-export type { ILegendaryEvent, ILegendaryEventTrack, ILegendaryEventTrackRequirement } from './lre.model';
+export type {
+    ILegendaryEvent,
+    ILegendaryEventTrack,
+    ILegendaryEventTrackRequirement,
+    ILreTeam,
+    ILegendaryEventSelectedRequirements,
+    SelectedRequirements,
+    IAutoTeamsPreferences,
+} from './lre.model';

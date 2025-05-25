@@ -1,4 +1,4 @@
-import { groupBy, orderBy, uniq } from 'lodash';
+import { groupBy, orderBy, sortBy, uniq } from 'lodash';
 
 import { Alliance, Faction, Rarity } from '@/fsd/5-shared/model';
 
@@ -18,6 +18,8 @@ export class CampaignsService {
         campaign => campaign.releaseType === CampaignReleaseType.event
     );
     public static readonly campaignsComposed: Record<string, ICampaignBattleComposed> = this.getCampaignComposed();
+
+    static readonly campaignsGrouped: Record<string, ICampaignBattleComposed[]> = this.getCampaignGrouped();
 
     /**
      * @returns for each upgrade, a list of all nodes from which it can be
@@ -46,7 +48,7 @@ export class CampaignsService {
      * @returns a map from campaign node short ID (e.g. "SHME31" for Saim-Hann
      *          Mirror Elite battle 31) to an ICampaignBattleComposed.
      */
-    public static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
+    private static getCampaignComposed(): Record<string, ICampaignBattleComposed> {
         const result: Record<string, ICampaignBattleComposed> = {};
         for (const battleDataKey in battleData) {
             const battle = battleData[battleDataKey];
@@ -96,6 +98,11 @@ export class CampaignsService {
         }
 
         return result;
+    }
+
+    static getCampaignGrouped(): Record<string, ICampaignBattleComposed[]> {
+        const allBattles = sortBy(Object.values(CampaignsService.campaignsComposed), 'nodeNumber');
+        return groupBy(allBattles, 'campaign');
     }
 
     public static selectBestLocations(availableLocations: ICampaignBattleComposed[]): ICampaignBattleComposed[] {

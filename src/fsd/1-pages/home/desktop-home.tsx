@@ -11,12 +11,11 @@ import { PersonalGoalType } from 'src/models/enums';
 import { menuItemById } from 'src/models/menu-items';
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
-// eslint-disable-next-line import-x/no-internal-modules
-import { StaticDataService } from 'src/services';
 
 import { useAuth } from '@/fsd/5-shared/model';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
+import { CharactersService } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 import { Thanks } from '@/fsd/3-features/thank-you';
@@ -28,7 +27,7 @@ export const DesktopHome = () => {
     const navigate = useNavigate();
     const { userInfo } = useAuth();
     const { goals, dailyRaids } = useContext(StoreContext);
-    const nextLeMenuItem = StaticDataService.activeLre;
+    const nextLeMenuItem = CharactersService.activeLre;
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
     const eventsCalendarUrl = 'https://tacticucplannerstorage.blob.core.windows.net/files/events-calendar.png';

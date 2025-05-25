@@ -6,18 +6,18 @@ import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
-import { RaritySelect } from 'src/shared-components/rarity-select';
-import { StarsSelect } from 'src/shared-components/stars-select';
 import { getEnumValues } from 'src/shared-logic/functions';
-import { NumberInput } from 'src/v2/components/inputs/number-input';
 
 import { RarityStars, Rarity } from '@/fsd/5-shared/model';
+import { StarsSelect, RaritySelect } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
+import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
+
+import { MowUpgrades } from '@/fsd/4-entities/mow/mow-upgrades';
+import { MowUpgradesUpdate } from '@/fsd/4-entities/mow/mow-upgrades-update';
 
 import { IMow } from 'src/v2/features/characters/characters.models';
-import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
-import { MowUpgradesUpdate } from 'src/v2/features/characters/components/mow-upgrades-update';
 
 interface Props {
     mow: IMow;

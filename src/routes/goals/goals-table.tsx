@@ -18,8 +18,9 @@ import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
 
-import { ICharacter2, StatsCalculatorService } from '@/fsd/4-entities/character';
+import { ICharacter2 } from '@/fsd/4-entities/character';
 import { RankIcon } from '@/fsd/4-entities/character/ui/rank.icon';
+import { StatsCalculatorService } from '@/fsd/4-entities/unit';
 
 import { CharacterAbilitiesTotal } from 'src/v2/features/characters/components/character-abilities-total';
 import {
@@ -30,7 +31,8 @@ import {
 } from 'src/v2/features/goals/goals.models';
 import { ShardsService } from 'src/v2/features/goals/shards.service';
 import { XpTotal } from 'src/v2/features/goals/xp-total';
-import { MowMaterialsTotal } from 'src/v2/features/lookup/mow-materials-total';
+
+import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 
 interface Props {
     rows: CharacterRaidGoalSelect[];

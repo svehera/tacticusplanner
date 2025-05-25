@@ -12,9 +12,12 @@ import TableChartIcon from '@mui/icons-material/TableChart';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import React from 'react';
 
+import { myProgressMenuItem } from '@/fsd/1-pages/input-progress/my-progress.menu-item';
+import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
+import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
+import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
+import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
 import { guildApiMenuItem } from '@/v2/pages/guild-api/guild-api.menu-item';
-import { campaignProgressionMenuItem } from 'src/v2/pages/campaign-progression/campaign-progression.menu-item';
-import { dirtyDozenMenuItem } from 'src/v2/pages/dirty-dozen/dirty-dozen.menu-item';
 import { faqMenuItem } from 'src/v2/pages/faq/faq.menu-item';
 import { guidesMenuItem } from 'src/v2/pages/guides/guides-menu.item';
 import { guildMenuItem } from 'src/v2/pages/guild/guild.menu-item';
@@ -23,9 +26,6 @@ import { guildWarDefenseMenuItem } from 'src/v2/pages/guild-war-defense/guild-wa
 import { guildWarZonesMenuItem } from 'src/v2/pages/guild-war-layout/guild-war-zones-menu.item';
 import { guildWarOffenseMenuItem } from 'src/v2/pages/guild-war-offense/guild-war-offense.menu-item';
 import { insightsMenuItem } from 'src/v2/pages/insights/insights.menu-item';
-import { activeLreMenuItems, inactiveLreMenuItems } from 'src/v2/pages/lre/lre.menu-item';
-import { mowLookupMenuItem } from 'src/v2/pages/mow-lookup/mow-lookup.menu-item';
-import { myProgressMenuItem } from 'src/v2/pages/my-progress/my-progress.menu-item';
 import { teamsMenuItem } from 'src/v2/pages/teams/teams.menu-item';
 import { wyoMenuItem } from 'src/v2/pages/who-you-own/who-you-own.menu-item';
 
@@ -108,7 +108,7 @@ export const planSubMenu: MenuItemTP[] = [
     ...activeLreMenuItems,
 ];
 
-export const learnSubMenu: MenuItemTP[] = [
+export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['guides'],
     menuItemById['characters'],
     menuItemById['npcs'],
@@ -117,6 +117,23 @@ export const learnSubMenu: MenuItemTP[] = [
     menuItemById['rankLookup'],
     menuItemById['mowLookup'],
     menuItemById['campaigns'],
+    menuItemById['dirtyDozen'],
+    menuItemById['insights'],
+    menuItemById['guildApi'],
+    menuItemById['guildInsights'],
+];
+
+export const learnSubMenu: MenuItemTP[] = [
+    new MenuItemTP('Tacticus', <TableChartIcon />, '', '', '', [
+        menuItemById['rankLookup'],
+        menuItemById['mowLookup'],
+        menuItemById['characters'],
+        menuItemById['npcs'],
+        menuItemById['upgrades'],
+        menuItemById['campaigns'],
+    ]),
+    menuItemById['guides'],
+    menuItemById['versus'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
     menuItemById['guildApi'],

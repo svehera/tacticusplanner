@@ -9,22 +9,16 @@ import {
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState, useEffect, useMemo } from 'react';
 
-import { IGuildMember } from '@/models/interfaces';
-import { ITableRow } from '@/routes/legendary-events/legendary-events.interfaces';
-
-import { Rarity } from '@/fsd/5-shared/model';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
-
-import { getTacticusGuildRaidData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
-
 import {
-    TacticusDamageType,
     TacticusEncounterType,
+    TacticusDamageType,
     TacticusGuildRaidEntry,
     TacticusGuildRaidResponse,
+    getTacticusGuildRaidData,
     TacticusGuildRaidUnit,
-} from './tacticus-integration.models';
-import { mapUserIdToName } from './user-id-mapper';
+} from '@/fsd/5-shared/lib/tacticus-api';
+import { Rarity } from '@/fsd/5-shared/model';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 // Type for aggregated user data
 interface UserSummary {

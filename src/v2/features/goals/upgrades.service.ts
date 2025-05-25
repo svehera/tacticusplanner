@@ -4,19 +4,19 @@ import { DailyRaidsStrategy, PersonalGoalType } from 'src/models/enums';
 import { IEstimatedRanksSettings } from 'src/models/interfaces';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
-import { Rank, Rarity } from '@/fsd/5-shared/model';
+import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
+import { Rank } from '@/fsd/5-shared/model';
 
 import { ICampaignsProgress, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
 import { CharacterUpgradesService, IUnitUpgradeRank } from '@/fsd/4-entities/character';
+import { MowsService } from '@/fsd/4-entities/mow';
 import {
     IBaseUpgrade,
     ICraftedUpgrade,
     IMaterial,
-    IMaterialRecipeIngredient,
     UpgradesService as FsdUpgradesService,
 } from '@/fsd/4-entities/upgrade';
-import recipeData from '@/fsd/4-entities/upgrade/data/recipeData.json';
 
 import {
     ICharacterUpgradeEstimate,
@@ -26,35 +26,13 @@ import {
     ICombinedUpgrade,
     IEstimatedUpgrades,
     IItemRaidLocation,
-    IRecipeExpandedUpgrade,
-    IRecipeExpandedUpgradeData,
     IUnitUpgrade,
     IUpgradeRaid,
     IUpgradesRaidsDay,
 } from 'src/v2/features/goals/goals.models';
-import { MowLookupService } from 'src/v2/features/lookup/mow-lookup.service';
-import { TacticusUpgrade } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
 
 export class UpgradesService {
     static readonly recipeDataByTacticusId: Record<string, IMaterial> = this.composeByTacticusId();
-    static readonly recipeExpandedUpgradeData: IRecipeExpandedUpgradeData = this.expandRecipeData();
-    public static readonly materialByLabel: Record<string, string> = this.createMaterialByLabelLookup();
-
-    /**
-     * @returns a lookup table keyed by material ID or material label pointing
-     *          to the material ID.
-     */
-    private static createMaterialByLabelLookup(): Record<string, string> {
-        const result: Record<string, string> = {};
-
-        Object.entries(this.recipeExpandedUpgradeData).forEach(data => {
-            const [_, upgradeData] = data;
-            result[upgradeData.label] = upgradeData.id;
-            result[upgradeData.id] = upgradeData.id;
-        });
-
-        return result;
-    }
 
     static readonly rankEntries: number[] = getEnumValues(Rank).filter(x => x > 0);
     static getUpgradesEstimatedDays(
@@ -314,6 +292,36 @@ export class UpgradesService {
             });
         }
         return result;
+    }
+
+    /**
+     * @param rankLookup The start and end ability level of the goal, as well as any
+     *                   materials that have already been applied.
+     * @returns The number of each upgrade material necessary to level up the
+     *          abilities.
+     */
+    public static getMowUpgradeRank(rankLookup: ICharacterUpgradeMow): IUnitUpgradeRank[] {
+        const primaryUpgrades = MowsService.getUpgradesRaw(
+            rankLookup.unitId,
+            rankLookup.primaryStart,
+            rankLookup.primaryEnd,
+            'primary'
+        );
+        const secondaryUpgrades = MowsService.getUpgradesRaw(
+            rankLookup.unitId,
+            rankLookup.secondaryStart,
+            rankLookup.secondaryEnd,
+            'secondary'
+        );
+
+        return [
+            {
+                rankStart: Rank.Diamond3,
+                rankEnd: Rank.Diamond3,
+                upgrades: [...primaryUpgrades, ...secondaryUpgrades],
+                rankPoint5: false,
+            },
+        ];
     }
 
     private static getTotalEstimates(
@@ -651,194 +659,6 @@ export class UpgradesService {
         processCraftedUpgrade(topLevelCraftedUpgrades);
 
         return baseUpgradesTotal;
-    }
-
-    /**
-     * @param rankLookup The start and end ability level of the goal, as well as any
-     *                   materials that have already been applied.
-     * @returns The number of each upgrade material necessary to level up the
-     *          abilities.
-     */
-    public static getMowUpgradeRank(rankLookup: ICharacterUpgradeMow): IUnitUpgradeRank[] {
-        const primaryUpgrades = MowLookupService.getUpgradesRaw(
-            rankLookup.unitId,
-            rankLookup.primaryStart,
-            rankLookup.primaryEnd,
-            'primary'
-        );
-        const secondaryUpgrades = MowLookupService.getUpgradesRaw(
-            rankLookup.unitId,
-            rankLookup.secondaryStart,
-            rankLookup.secondaryEnd,
-            'secondary'
-        );
-
-        return [
-            {
-                rankStart: Rank.Diamond3,
-                rankEnd: Rank.Diamond3,
-                upgrades: [...primaryUpgrades, ...secondaryUpgrades],
-                rankPoint5: false,
-            },
-        ];
-    }
-
-    /**
-     * @returns the expanded recipes for all materials, keyed by
-     * material ID. If a material is uncraftable, it is included
-     * in the result, but its expandedRecipe field is empty.
-     */
-    private static expandRecipeData(): IRecipeExpandedUpgradeData {
-        const result: IRecipeExpandedUpgradeData = {};
-
-        result['Gold'] = {
-            id: 'Gold',
-            label: 'Gold',
-            rarity: Rarity.Common,
-            iconPath: 'gold',
-            expandedRecipe: {},
-            crafted: false,
-            stat: 'Gold',
-        };
-        // First fill in all of the base upgrades.
-        Object.entries(FsdUpgradesService.baseUpgradesData).forEach(upgrade => {
-            const baseUpgrade = upgrade[1];
-            result[baseUpgrade.id] = {
-                id: baseUpgrade.id,
-                label: baseUpgrade.label,
-                rarity: baseUpgrade.rarity,
-                iconPath: baseUpgrade.iconPath,
-                expandedRecipe: {},
-                crafted: false,
-                stat: baseUpgrade.stat,
-            };
-        });
-
-        // Now fill in all of the craftable upgrades that only have base upgrade materials.
-        for (const key in FsdUpgradesService.craftedUpgradesData) {
-            const craftedUpgrade = FsdUpgradesService.craftedUpgradesData[key];
-            if (craftedUpgrade.craftedUpgrades.length > 0) {
-                // We have to use more expansion, which we handle further below.
-                continue;
-            }
-            const expandedRecipe: Record<string, number> = {};
-            craftedUpgrade.recipe.forEach(recipeItem => {
-                expandedRecipe[recipeItem.id] = recipeItem.count;
-            });
-            result[craftedUpgrade.id] = {
-                id: craftedUpgrade.id,
-                label: craftedUpgrade.label,
-                rarity: craftedUpgrade.rarity,
-                iconPath: craftedUpgrade.iconPath,
-                expandedRecipe: expandedRecipe,
-                crafted: true,
-                stat: craftedUpgrade.stat,
-            };
-        }
-
-        // Finally, perform a BFS to fill in all expansions that
-        // have more than one additional layer.
-        //
-        // As of 2025-01-01, it takes three passes (one of which is above) to fully expand all recipe data.
-        let passes: number = 0;
-        const kNumExpectedPasses = 2;
-        for (let moreToExpand: boolean = true; moreToExpand; ) {
-            ++passes;
-            moreToExpand = false;
-            Object.entries(FsdUpgradesService.craftedUpgradesData).forEach(data => {
-                const material: ICraftedUpgrade = data[1];
-                const expandedRecipe: IRecipeExpandedUpgrade | null = this.expandRecipe(material.id, result);
-                if (!expandedRecipe) {
-                    if (passes >= kNumExpectedPasses) {
-                        console.log(passes + ": still haven't expanded base ingredient: '" + material.id + "'");
-                    }
-                    moreToExpand = true;
-                    return;
-                }
-                result[material.id] = expandedRecipe;
-            });
-            if (passes > 100) {
-                console.log('Infinite loop in expandRecipeData');
-                break;
-            }
-        }
-        if (passes > kNumExpectedPasses) {
-            console.warn('New recipe requires more passes, please ask developers to investigate. passes=' + passes);
-        }
-        return result;
-    }
-
-    /**
-     * Adds the specified number of instances of the material to the recipe, initializing
-     * the entry if necessary.
-     * @param expandedRecipe The recipe to which we should add the item.
-     * @param recipeItem The material and count to add.
-     */
-    private static addIngredientsToExpandedRecipe(
-        expandedRecipe: IRecipeExpandedUpgrade,
-        recipeItem: IMaterialRecipeIngredient
-    ): void {
-        if (expandedRecipe.expandedRecipe[recipeItem.material]) {
-            expandedRecipe.expandedRecipe[recipeItem.material] += recipeItem.count;
-        } else {
-            expandedRecipe.expandedRecipe[recipeItem.material] = recipeItem.count;
-        }
-    }
-
-    /**
-     * Tries to expand the recipe for the given upgrade material
-     * using the results in expandedRecipeData.
-     * @param key The ID of the upgrade material to expand.
-     * @param expandedRecipeData The existing materials we have already expanded.
-     * @returns the expanded data, or null if the recipe cannot be expanded
-     *          because one or more ingredients have yet to be expanded.
-     */
-    private static expandRecipe(
-        key: string,
-        expandedRecipeData: IRecipeExpandedUpgradeData
-    ): IRecipeExpandedUpgrade | null {
-        const upgrade = FsdUpgradesService.craftedUpgradesData[key];
-        if (!upgrade) {
-            console.log("null upgrade: '" + key + "'");
-            return null;
-        }
-        const expandedRecipe: IRecipeExpandedUpgrade = {
-            id: upgrade.id,
-            label: upgrade.label,
-            rarity: upgrade.rarity,
-            iconPath: upgrade.iconPath,
-            expandedRecipe: {},
-            crafted: true,
-            stat: upgrade.stat,
-        };
-        let moreToExpand = false;
-        for (const recipeItem of upgrade.recipe) {
-            if (!expandedRecipeData[recipeItem.id]) {
-                // We haven't expanded an ingredient yet, so we can't expand this recipe.
-                moreToExpand = true;
-                break;
-            }
-            if (!expandedRecipeData[recipeItem.id].crafted) {
-                // Simple ingredient, just add it.
-                this.addIngredientsToExpandedRecipe(expandedRecipe, {
-                    material: recipeItem.id,
-                    count: recipeItem.count,
-                });
-            } else {
-                for (const [material, count] of Object.entries(expandedRecipeData[recipeItem.id].expandedRecipe)) {
-                    this.addIngredientsToExpandedRecipe(expandedRecipe, {
-                        material: material,
-                        count: recipeItem.count * count,
-                    });
-                }
-            }
-        }
-        if (moreToExpand) return null;
-        return expandedRecipe;
-    }
-
-    public static getUpgradeMaterial(material: string): IMaterial | undefined {
-        return recipeData[material as keyof typeof recipeData];
     }
 
     private static getEstimatesByPriority(
