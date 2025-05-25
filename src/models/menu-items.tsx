@@ -108,7 +108,7 @@ export const planSubMenu: MenuItemTP[] = [
     ...activeLreMenuItems,
 ];
 
-export const learnSubMenu: MenuItemTP[] = [
+export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['guides'],
     menuItemById['characters'],
     menuItemById['npcs'],
@@ -117,6 +117,23 @@ export const learnSubMenu: MenuItemTP[] = [
     menuItemById['rankLookup'],
     menuItemById['mowLookup'],
     menuItemById['campaigns'],
+    menuItemById['dirtyDozen'],
+    menuItemById['insights'],
+    menuItemById['guildApi'],
+    menuItemById['guildInsights'],
+];
+
+export const learnSubMenu: MenuItemTP[] = [
+    new MenuItemTP('Tacticus', <TableChartIcon />, '', '', '', [
+        menuItemById['rankLookup'],
+        menuItemById['mowLookup'],
+        menuItemById['characters'],
+        menuItemById['npcs'],
+        menuItemById['upgrades'],
+        menuItemById['campaigns'],
+    ]),
+    menuItemById['guides'],
+    menuItemById['versus'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
     menuItemById['guildApi'],
