@@ -23,6 +23,7 @@ import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 // Type for aggregated user data
 interface UserSummary {
     userId: string;
+    lastBombTime: number;
     tokenStatus: TokenStatus;
     totalDamageDealt: number;
     battleBossCount: number;
@@ -406,15 +407,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     // Add this component near other renderers
     const BombStatusRenderer: React.FC<{ data: UserSummary }> = ({ data }) => {
         const BOMB_COOLDOWN_HOURS = 18;
-        const lastBombTime = filteredEntries
-            .filter(
-                entry =>
-                    entry.userId === data.userId &&
-                    entry.damageType === TacticusDamageType.Bomb &&
-                    entry.completedOn != null
-            )
-            .map(entry => entry.completedOn! * 1000) // Convert seconds to milliseconds
-            .sort((a, b) => b - a)[0];
+        const lastBombTime = data.lastBombTime;
 
         if (!lastBombTime) {
             return <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">Available</span>;
@@ -474,10 +467,11 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         { field: 'userId', headerName: 'User ID', width: 100, filter: true },
         {
             headerName: 'Bomb Status',
-            field: 'userId',
+            field: 'lastBombTime',
             cellRenderer: BombStatusRenderer,
-            sortable: false,
+            sortable: true,
             width: 120,
+            comparator: (lastBombTime1: number, lastBombTime2: number) => lastBombTime2 - lastBombTime1,
         },
         {
             headerName: 'Token Status',
@@ -613,6 +607,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             if (!userMap.has(entry.userId)) {
                 userMap.set(entry.userId, {
                     userId: entry.userId,
+                    lastBombTime: 0,
                     // Worst case scenario: user had played his 3 token at the exact end of last season
                     // 2 tokens recharged from the 24H inter season
                     tokenStatus: {
@@ -639,6 +634,9 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
             if (entry.damageType === TacticusDamageType.Bomb) {
                 userSummary.bombCount += 1;
+                if (entry.completedOn !== undefined) {
+                    userSummary.lastBombTime = entry.completedOn! * 1000;
+                }
             } else {
                 // Battle attacks
                 if (entry.encounterType === TacticusEncounterType.Boss) {
