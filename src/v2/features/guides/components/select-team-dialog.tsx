@@ -7,10 +7,10 @@ import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useDebounceValue } from 'usehooks-ts';
 
-import { MultipleSelect } from 'src/v2/components/inputs/multiple-select';
 import { IMenuOption } from 'src/v2/models/menu-option';
 
 import { Alliance } from '@/fsd/5-shared/model';
+import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 

@@ -1,7 +1,8 @@
-﻿import { Campaign, CampaignsService, ICampaingsFilters } from '@/fsd/4-entities/campaign';
+﻿import { TacticusCampaignProgress } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
+
+import { Campaign, CampaignsService, ICampaingsFilters } from '@/fsd/4-entities/campaign';
 import { campaignEventsLocations } from '@/fsd/4-entities/campaign/campaigns.constants';
 
-import { TacticusCampaignProgress } from '@/v2/features/tacticus-integration/tacticus-integration.models';
 import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
 
 import { defaultData, idToCampaign } from '../models/constants';

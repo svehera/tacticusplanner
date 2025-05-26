@@ -20,6 +20,7 @@ import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
 import { IMow, IMowDb } from '@/fsd/4-entities/mow';
 import { IMaterialFull, IMaterialRecipeIngredientFull, IMaterialEstimated2 } from '@/fsd/4-entities/upgrade';
 
+import { IAutoTeamsPreferences, ILegendaryEventSelectedRequirements, ILreTeam } from '@/fsd/3-features/lre';
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
 import { IViewPreferences } from '@/fsd/3-features/view-settings';
 import { IItemRaidLocation } from 'src/v2/features/goals/goals.models';
@@ -161,7 +162,6 @@ export interface ILegendaryEventsData {
 export type ILegendaryEventsData3 = Record<LegendaryEventEnum, ILegendaryEventSelectedTeams>;
 
 export type SelectedTeams = Record<string, string[]>;
-export type SelectedRequirements = Record<string, boolean>;
 
 export interface ILegendaryEventSelectedTeams {
     id: LegendaryEventEnum;
@@ -172,35 +172,8 @@ export interface ILegendaryEventSelectedTeams {
     gamma: SelectedTeams;
 }
 
-export interface ILreTeam {
-    id: string;
-    name: string;
-    section: LreTrackId;
-    restrictionsIds: string[];
-    charactersIds: string[];
-    /**
-     * Client Side only
-     */
-    characters?: ICharacter2[];
-}
-
-export interface ILegendaryEventSelectedRequirements {
-    id: LegendaryEventEnum;
-    name: string;
-    alpha: SelectedRequirements;
-    beta: SelectedRequirements;
-    gamma: SelectedRequirements;
-}
-
 export interface ILegendaryEventData {
     selectedTeams: ITableRow<string>[];
-}
-
-export interface IAutoTeamsPreferences {
-    preferCampaign: boolean;
-    ignoreRarity: boolean;
-    ignoreRank: boolean;
-    ignoreRecommendedFirst: boolean; // ignore Bias
 }
 
 export interface IDailyRaidsPreferences {
@@ -351,6 +324,9 @@ export type {
     IMowDb,
     IMaterialFull,
     IMaterialRecipeIngredientFull,
+    ILreTeam,
+    ILegendaryEventSelectedRequirements,
+    IAutoTeamsPreferences,
 };
 
 export type {

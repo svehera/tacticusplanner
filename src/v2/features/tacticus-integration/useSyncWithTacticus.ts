@@ -3,9 +3,8 @@ import { useContext } from 'react';
 
 import { DispatchContext } from '@/reducers/store.provider';
 
-import { useLoader } from '@/fsd/5-shared/ui/contexts';
-
-import { getTacticusPlayerData } from '@/v2/features/tacticus-integration/tacticus-integration.endpoints';
+import { getTacticusPlayerData } from '@/fsd/5-shared/lib/tacticus-api';
+import { useLoader } from '@/fsd/5-shared/ui';
 
 export const useSyncWithTacticus = () => {
     const dispatch = useContext(DispatchContext);

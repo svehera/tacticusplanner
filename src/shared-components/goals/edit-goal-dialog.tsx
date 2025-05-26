@@ -15,21 +15,21 @@ import { PrioritySelect } from 'src/shared-components/goals/priority-select';
 import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
-import { NumberInput } from 'src/v2/components/inputs/number-input';
 
 import { Rank, RarityMapper } from '@/fsd/5-shared/model';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
 import { ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
 import { RankSelect } from '@/fsd/4-entities/character';
+import { MowUpgrades } from '@/fsd/4-entities/mow/mow-upgrades';
+import { MowUpgradesUpdate } from '@/fsd/4-entities/mow/mow-upgrades-update';
 import { IUnit } from '@/fsd/4-entities/unit';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 import { IUpgradeRecipe } from '@/fsd/4-entities/upgrade';
 
 import { CharacterUpgrades } from '@/fsd/3-features/character-details';
-import { MowUpgrades } from 'src/v2/features/characters/components/mow-upgrades';
-import { MowUpgradesUpdate } from 'src/v2/features/characters/components/mow-upgrades-update';
 import { CharacterRaidGoalSelect, ICharacterAscendGoal } from 'src/v2/features/goals/goals.models';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';

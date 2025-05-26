@@ -1,12 +1,12 @@
 import xpData from 'src/v2/data/xp.json';
 
+import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api';
 import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
 
 import { CharacterUpgradesService } from '@/fsd/4-entities/character';
 
 import { IXpLevel } from 'src/v2/features/characters/characters.models';
 import { UpgradesService } from 'src/v2/features/goals/upgrades.service';
-import { TacticusUpgrade } from 'src/v2/features/tacticus-integration/tacticus-integration.models';
 
 export class TacticusIntegrationService {
     static convertProgressionIndex(progressionIndex: number): [Rarity, RarityStars] {
