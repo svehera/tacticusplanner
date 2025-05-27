@@ -26,6 +26,7 @@ export enum Trait {
     InstinctiveBehaviour = 'Instinctive Behaviour',
     LetTheGalaxyBurn = 'Let the Galaxy Burn',
     LivingMetal = 'Living Metal',
+    MartialKaTah = "Martial Ka'tah",
     Mechanic = 'Mechanic',
     Mechanical = 'Mechanical',
     MKXGravis = 'MK X Gravis',
