@@ -5,8 +5,30 @@
     "eventStage": 1,
     "nextEventDate": "June 1",
     "nextEventDateUtc": "Sun, 01 June 2025 00:00:00 GMT",
-    "regularMissions": ["TBA"],
-    "premiumMissions": ["TBA"],
+    "regularMissions": [
+        "Defeat 5 waves of enemies in any wave-based game mode, Deal 1000 damage",
+        "Defeat 30 Thousand Sons",
+        "Defeat 75 Ultramarines",
+        "Defeat 100 Genestealer Cults",
+        "Use abilities 15 times with Imperial units, Deal 10k damage with Abilities",
+        "Use abilities 20 times with Xenos units, Deal 15k damage with Abilities",
+        "Use abilities 25 times with Chaos units, Deal 20k damage with Abilities",
+        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Piercing damage",
+        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Power damage",
+        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Chain damage"
+    ],
+    "premiumMissions": [
+        "Win 1 battle without Summoning any units",
+        "Defeat 30 enemies with Imperial units",
+        "Defeat 75 enemies with Xenos units",
+        "Defeat 100 enemies with Chaos units",
+        "Win 5 battles without deploying any Crushing Strike characters",
+        "Win 5 battles without deploying any Big Target characters",
+        "Win 5 battles without deploying any Heavy Weapon characters",
+        "Defeat 75 enemies with Piercing Damage",
+        "Defeat 75 enemies with Power Damage",
+        "Defeat 75 enemies with Chain Damage"
+    ],
     "alpha": {
         "name": "Alpha (No Chaos)",
         "enemies": {
