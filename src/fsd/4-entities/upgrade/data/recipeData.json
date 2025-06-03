@@ -47,7 +47,7 @@
                 "count": 215
             }
         ],
-        "icon": "Flawless Gem Embellishment.jpg"
+        "icon": "flawless gem embellishment.jpg"
     },
     "Embellished Bolt Feeder": {
         "material": "Embellished Bolt Feeder",
@@ -65,7 +65,7 @@
                 "count": 215
             }
         ],
-        "icon": "Embellished Bolt Feeder.jpg"
+        "icon": "embellished bolt feeder.jpg"
     },
     "Auramite Wing Embellishment": {
         "material": "Auramite Wing Embellishment",
@@ -83,7 +83,7 @@
                 "count": 215
             }
         ],
-        "icon": "Auramite Wing Embellishment.jpg"
+        "icon": "auramite wing embellishment.jpg"
     },
     "Adorned Bolt Feeder": {
         "material": "Adorned Bolt Feeder",
@@ -105,7 +105,7 @@
                 "count": 650
             }
         ],
-        "icon": "Adorned Bolt Feeder.jpg"
+        "icon": "adorned bolt feeder.jpg"
     },
     "Flawless Gem Adornment": {
         "material": "Flawless Gem Adornment",
@@ -127,7 +127,7 @@
                 "count": 650
             }
         ],
-        "icon": "Flawless Gem Adornment.jpg"
+        "icon": "flawless gem adornment.jpg"
     },
     "Auramite Wing Adornment": {
         "material": "Auramite Wing Adornment",
@@ -149,7 +149,7 @@
                 "count": 650
             }
         ],
-        "icon": "Auramite Wing Adornment.jpg"
+        "icon": "auramite wing adornment.jpg"
     },
     "Defensor Refractor Generator": {
         "material": "Defensor Refractor Generator",
@@ -175,7 +175,7 @@
                 "count": 650
             }
         ],
-        "icon": "Defensor Refractor Generator.jpg"
+        "icon": "defensor refractor generator.jpg"
     },
     "Panoptispex": {
         "material": "Panoptispex",
@@ -201,7 +201,7 @@
                 "count": 650
             }
         ],
-        "icon": "Panoptispex.jpg"
+        "icon": "panoptispex.jpg"
     },
     "Adamantine Thread Cloak": {
         "material": "Adamantine Thread Cloak",
@@ -227,7 +227,7 @@
                 "count": 650
             }
         ],
-        "icon": "Adamantine Thread Cloak.jpg"
+        "icon": "adamantine thread cloak.jpg"
     },
     "Proclamation Receiver": {
         "material": "Proclamation Receiver",
