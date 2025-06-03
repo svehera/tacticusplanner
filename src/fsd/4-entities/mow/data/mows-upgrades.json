@@ -1238,5 +1238,211 @@
             "primary": ["Psychic Force Conduit", "Blessing of Nurgle", "Relic Auxiliary Core"],
             "secondary": ["Psychic Force Conduit", "Blessing of Nurgle", "Technocrafted Strength"]
         }
+    ],
+
+    "_exorcist": [
+        {
+            "lvl": 1,
+            "primary": ["Ropes and Chains", "Frag Grenade", "Purity Seal"]
+        },
+        {
+            "lvl": 2,
+            "primary": ["Lesser Reliquary of Protection", "Can of Promethium", "Armor Trim"]
+        },
+        {
+            "lvl": 3,
+            "primary": ["The Iron Phoenix", "Ropes and Chains", "Lesser Reliquary of Protection"]
+        },
+        {
+            "lvl": 4,
+            "primary": ["Weapon Anointment Oils", "Frag Grenade", "Can of Promethium"]
+        },
+        {
+            "lvl": 5,
+            "primary": ["Fine Purity Seal", "Purity Seal", "Armor Trim"]
+        },
+        {
+            "lvl": 6,
+            "primary": ["Ropes and Chains", "Lesser Reliquary of Protection", "The Iron Phoenix"]
+        },
+        {
+            "lvl": 7,
+            "primary": ["Frag Grenade", "Can of Promethium", "Weapon Anointment Oils"]
+        },
+        {
+            "lvl": 8,
+            "primary": ["Purity Seal", "Armor Trim", "Fine Purity Seal"]
+        },
+        {
+            "lvl": 9,
+            "primary": ["Lesser Reliquary of Protection", "The Iron Phoenix", "The Gold Phoenix"]
+        },
+        {
+            "lvl": 10,
+            "primary": ["Can of Promethium", "Weapon Anointment Oils", "Divinator Class Auspex"]
+        },
+        {
+            "lvl": 11,
+            "primary": ["Armor Trim", "Fine Purity Seal", "Oath Seal"]
+        },
+        {
+            "lvl": 12,
+            "primary": ["The Iron Phoenix", "Reliquary of Protection", "Holster and Pockets"]
+        },
+        {
+            "lvl": 13,
+            "primary": ["Weapon Anointment Oils", "Barrel of Promethium", "Belt of Frag Grenades"]
+        },
+        {
+            "lvl": 14,
+            "primary": ["Fine Purity Seal", "Oath Seal", "Blessed Ceramite"]
+        },
+        {
+            "lvl": 15,
+            "primary": ["Reliquary of Protection", "The Gold Phoenix", "Holster and Pockets"]
+        },
+        {
+            "lvl": 16,
+            "primary": ["Barrel of Promethium", "Divinator Class Auspex", "Blessed Weapon Oils"]
+        },
+        {
+            "lvl": 17,
+            "primary": ["Blessed Tasset Plate", "Ceramite Lump", "Blessed Ceramite"]
+        },
+        {
+            "lvl": 18,
+            "primary": ["The Gold Phoenix", "Reliquary of Protection", "Rose of Martyrs"]
+        },
+        {
+            "lvl": 19,
+            "primary": ["Divinator Class Auspex", "Barrel of Promethium", "Hymn of Martyrs"]
+        },
+        {
+            "lvl": 20,
+            "primary": ["Ceramite Lump", "Oath Seal", "Blessed Corset Armor"]
+        },
+        {
+            "lvl": 21,
+            "primary": ["Reliquary of Protection", "Rose of Martyrs", "Utilitarian Belt"]
+        },
+        {
+            "lvl": 22,
+            "primary": ["Barrel of Promethium", "Hymn of Martyrs", "Box of Ammo"]
+        },
+        {
+            "lvl": 23,
+            "primary": ["Blessed Tasset Plate", "Blessed Corset Armor", "Ceramite Bar"]
+        },
+        {
+            "lvl": 24,
+            "primary": ["Rose of Martyrs", "The Phoenix Ascendant", "Sanctified Reliquary of Protection"]
+        },
+        {
+            "lvl": 25,
+            "primary": ["Hymn of Martyrs", "Krak Grenade", "Advanced Combat Stimms"]
+        },
+        {
+            "lvl": 26,
+            "primary": ["Blessed Corset Armor", "Crate of Salvage", "Blessed Purity Seal"]
+        },
+        {
+            "lvl": 27,
+            "primary": ["The Phoenix Ascendant", "The Phoenix Ascendant", "Golden Ornamental Skull"]
+        },
+        {
+            "lvl": 28,
+            "primary": ["Krak Grenade", "Krak Grenade", "Special Issue Ammo"]
+        },
+        {
+            "lvl": 29,
+            "primary": ["Crate of Salvage", "Crate of Salvage", "Revered Talisman"]
+        },
+        {
+            "lvl": 30,
+            "primary": ["The Phoenix Ascendant", "Golden Ornamental Skull", "Roses of Sacrifice"]
+        },
+        {
+            "lvl": 31,
+            "primary": ["Krak Grenade", "Special Issue Ammo", "Hymn of Sacrifice"]
+        },
+        {
+            "lvl": 32,
+            "primary": ["Crate of Salvage", "Revered Talisman", "Sanctified Corset Armor"]
+        },
+        {
+            "lvl": 33,
+            "primary": ["Golden Ornamental Skull", "Golden Ornamental Skull", "Greater Reliquary of Protection"],
+            "secondary": ["Golden Ornamental Skull", "Golden Ornamental Skull", "Grand Helmet Trophy"]
+        },
+        {
+            "lvl": 34,
+            "primary": ["Special Issue Ammo", "Blessed Promethium Canister", "Belt of Krak Grenades"]
+        },
+        {
+            "lvl": 35,
+            "primary": ["Revered Talisman", "Unyielding Rivets", "Ceramite Sheet"],
+            "secondary": ["Revered Talisman", "Unyielding Rivets", "Grand Purity Seal"]
+        },
+        {
+            "lvl": 36,
+            "primary": ["Golden Ornamental Skull", "Golden Ornamental Skull", "Holy Chaplet"]
+        },
+        {
+            "lvl": 37,
+            "primary": ["Special Issue Ammo", "Blessed Promethium Canister", "Master-Crafted Ammo"]
+        },
+        {
+            "lvl": 38,
+            "primary": ["Revered Talisman", "Unyielding Rivets", "Purity Seal of the Primarch"]
+        },
+        {
+            "lvl": 39,
+            "primary": ["Golden Ornamental Skull", "Holy Chaplet", "Roses of The Divine"]
+        },
+        {
+            "lvl": 40,
+            "primary": ["Blessed Promethium Canister", "Holy Chaplet", "Hymn of The Divine"]
+        },
+        {
+            "lvl": 41,
+            "primary": ["Unyielding Rivets", "Holy Chaplet", "Holy Corset Armor"]
+        },
+        {
+            "lvl": 42,
+            "primary": ["Golden Ornamental Skull", "Holy Chaplet", "Grandiose Skull Ornament"],
+            "secondary": ["Golden Ornamental Skull", "Holy Chaplet", "Legendary Reliquary of Protection"]
+        },
+        {
+            "lvl": 43,
+            "primary": ["Blessed Promethium Canister", "Holy Chaplet", "Blessed Promethium Canister"],
+            "secondary": ["Blessed Promethium Canister", "Holy Chaplet", "Digital Weapons"]
+        },
+        {
+            "lvl": 44,
+            "primary": ["Unyielding Rivets", "Holy Chaplet", "Seal of the Emperor's Protection"],
+            "secondary": ["Unyielding Rivets", "Holy Chaplet", "Ceramite Plates"]
+        },
+        {
+            "lvl": 45,
+            "primary": ["Holy Chaplet", "Master-Crafted Ammo", "Simulacrum Sanctorum"]
+        },
+        {
+            "lvl": 46,
+            "primary": ["Master-Crafted Ammo", "Purity Seal of the Primarch", "Blessed Bolts"]
+        },
+        {
+            "lvl": 47,
+            "primary": ["Purity Seal of the Primarch", "Master-Crafted Ammo", "Sabbat-Pattern Visor"]
+        },
+        {
+            "lvl": 48,
+            "primary": ["Holy Chaplet", "Purity Seal of the Primarch", "Legendary Reliquary of Protection"],
+            "secondary": ["Holy Chaplet", "Purity Seal of the Primarch", "Technocrafted Constitution"]
+        },
+        {
+            "lvl": 49,
+            "primary": ["Master-Crafted Ammo", "Holy Chaplet", "Blessed Promethium Tank"],
+            "secondary": ["Master-Crafted Ammo", "Holy Chaplet", "Technocrafted Strength"]
+        }
     ]
 }

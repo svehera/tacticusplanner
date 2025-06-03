@@ -73,5 +73,18 @@
         "initialRarity": "Common",
         "deployableAlliance": "Xenos",
         "releaseDate": "2025-03-17T00:00:00Z"
+    },
+    {
+        "id": "_exorcist",
+        "tacticusId": "",
+        "name": "Exorcist",
+        "title": "Artillery Tank",
+        "shortName": "Exorcist",
+        "fullName": "Exorcist",
+        "alliance": "Imperial",
+        "faction": "Adepta Sororitas",
+        "initialRarity": "Common",
+        "deployableAlliance": "Xenos",
+        "releaseDate": "2025-06-30T00:00:00Z"
     }
 ]
