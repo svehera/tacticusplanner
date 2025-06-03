@@ -2222,7 +2222,7 @@
         "Equipment1": "Crit",
         "Equipment2": "Block",
         "Equipment3": "Crit Booster",
-        "Traits": ["Psyker", "Terrifying"],
+        "Traits": ["Psyker", "Rapid Assault", "Terrifying"],
         "Number": 78,
         "ForcedSummons": false,
         "RequiredInCampaign": false,
