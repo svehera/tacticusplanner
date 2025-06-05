@@ -145,7 +145,7 @@
         "Equipment1": "Crit",
         "Equipment2": "Defense",
         "Equipment3": "Crit Booster",
-        "Traits": ["Final Vengeance"],
+        "Traits": ["Beast Slayer", "Final Vengeance"],
         "Active Ability": "Bolter",
         "Number": 79,
         "ForcedSummons": false,
