@@ -5,16 +5,38 @@
     "eventStage": 1,
     "nextEventDate": "June 1",
     "nextEventDateUtc": "Sun, 01 June 2025 00:00:00 GMT",
-    "regularMissions": ["TBA"],
-    "premiumMissions": ["TBA"],
+    "regularMissions": [
+        "Defeat 5 waves of enemies in any wave-based game mode, Deal 1000 damage",
+        "Defeat 30 Thousand Sons",
+        "Defeat 75 Ultramarines",
+        "Defeat 100 Genestealer Cults",
+        "Use abilities 15 times with Imperial units, Deal 10k damage with Abilities",
+        "Use abilities 20 times with Xenos units, Deal 15k damage with Abilities",
+        "Use abilities 25 times with Chaos units, Deal 20k damage with Abilities",
+        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Piercing damage",
+        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Power damage",
+        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Chain damage"
+    ],
+    "premiumMissions": [
+        "Win 1 battle without Summoning any units",
+        "Defeat 30 enemies with Imperial units",
+        "Defeat 75 enemies with Xenos units",
+        "Defeat 100 enemies with Chaos units",
+        "Win 5 battles without deploying any Crushing Strike characters",
+        "Win 5 battles without deploying any Big Target characters",
+        "Win 5 battles without deploying any Heavy Weapon characters",
+        "Defeat 75 enemies with Piercing Damage",
+        "Defeat 75 enemies with Power Damage",
+        "Defeat 75 enemies with Chain Damage"
+    ],
     "alpha": {
         "name": "Alpha (No Chaos)",
         "enemies": {
             "label": "Thousand Sons",
             "link": "https://tacticus.fandom.com/wiki/Thousand_Sons#NPC_Units"
         },
-        "killPoints": 40,
-        "battlesPoints": [27, 32, 38, 41, 40, 43, 42, 50, 44, 40, 47, 48, 59, 44]
+        "killPoints": 37,
+        "battlesPoints": [30, 28, 34, 42, 50, 47, 38, 50, 45, 42, 39, 55, 57, 53]
     },
     "beta": {
         "name": "Beta (No Imperial)",
@@ -23,7 +45,7 @@
             "link": "https://tacticus.fandom.com/wiki/Ultramarines#NPC_Units"
         },
         "killPoints": 26,
-        "battlesPoints": [36, 44, 42, 45, 45, 46, 58, 50, 64, 42, 49, 51, 54, 67]
+        "battlesPoints": [31, 35, 46, 52, 51, 52, 50, 49, 53, 54, 45, 54, 58, 59]
     },
     "gamma": {
         "name": "Gamma (No Xenos)",
@@ -31,8 +53,8 @@
             "label": "Genestealer Cults & Tyranids",
             "link": "https://tacticus.fandom.com/wiki/Genestealer_Cults#NPC_Units"
         },
-        "killPoints": 28,
-        "battlesPoints": [39, 36, 44, 50, 47, 44, 48, 52, 48, 48, 50, 56, 56, 61]
+        "killPoints": 32,
+        "battlesPoints": [29, 33, 46, 48, 51, 53, 50, 51, 48, 38, 51, 47, 51, 53]
     },
     "pointsMilestones": [
         {

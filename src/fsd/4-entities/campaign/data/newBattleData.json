@@ -26407,7 +26407,7 @@
         "campaign": "Adeptus Mechanicus Standard",
         "campaignType": "Normal",
         "nodeNumber": 26,
-        "reward": "Reliquary of Protection",
+        "reward": "Metal Decorative Skull",
         "expectedGold": 53,
         "enemiesTotal": 11,
         "enemiesTypes": [
@@ -26422,7 +26422,7 @@
         "campaign": "Adeptus Mechanicus Standard",
         "campaignType": "Normal",
         "nodeNumber": 27,
-        "reward": "Metal Decorative Skull",
+        "reward": "Bionic Eye",
         "expectedGold": 53,
         "enemiesTotal": 5,
         "slots": 3,
@@ -26432,7 +26432,7 @@
         "campaign": "Adeptus Mechanicus Standard",
         "campaignType": "Normal",
         "nodeNumber": 28,
-        "reward": "Bionic Eye",
+        "reward": "Crate of Salvage",
         "expectedGold": 53,
         "enemiesTotal": 7,
         "slots": 3,
@@ -26442,7 +26442,7 @@
         "campaign": "Adeptus Mechanicus Standard",
         "campaignType": "Normal",
         "nodeNumber": 29,
-        "reward": "Crate of Salvage",
+        "reward": "Blessed Cogitator",
         "expectedGold": 53,
         "enemiesTotal": 12,
         "enemiesTypes": [
@@ -26458,7 +26458,7 @@
         "campaign": "Adeptus Mechanicus Standard",
         "campaignType": "Normal",
         "nodeNumber": 30,
-        "reward": "Blessed Cogitator",
+        "reward": "Sy-Gex",
         "expectedGold": 53,
         "enemiesTotal": 7,
         "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer"]
@@ -26706,7 +26706,7 @@
         "campaign": "Adeptus Mechanicus Extremis",
         "campaignType": "Extremis",
         "nodeNumber": 26,
-        "reward": "Reliquary of Protection",
+        "reward": "Metal Decorative Skull",
         "expectedGold": 53,
         "enemiesTotal": 10,
         "enemiesTypes": [
@@ -26721,7 +26721,7 @@
         "campaign": "Adeptus Mechanicus Extremis",
         "campaignType": "Extremis",
         "nodeNumber": 27,
-        "reward": "Metal Decorative Skull",
+        "reward": "Bionic Eye",
         "expectedGold": 53,
         "enemiesTotal": 8,
         "enemiesTypes": ["Tech-Priest Enginseer", "Electro-Priest", "Skirarii Vanguard"]
@@ -26730,7 +26730,7 @@
         "campaign": "Adeptus Mechanicus Extremis",
         "campaignType": "Extremis",
         "nodeNumber": 28,
-        "reward": "Bionic Eye",
+        "reward": "Crate of Salvage",
         "expectedGold": 53,
         "enemiesTotal": 9,
         "enemiesTypes": ["Electro-Priest", "Cadian Mortar Team", "Cadian Vox-Caster"]
@@ -26739,7 +26739,7 @@
         "campaign": "Adeptus Mechanicus Extremis",
         "campaignType": "Extremis",
         "nodeNumber": 29,
-        "reward": "Crate of Salvage",
+        "reward": "Blessed Cogitator",
         "expectedGold": 53,
         "enemiesTotal": 10,
         "enemiesTypes": [
@@ -26754,7 +26754,7 @@
         "campaign": "Adeptus Mechanicus Extremis",
         "campaignType": "Extremis",
         "nodeNumber": 30,
-        "reward": "Blessed Cogitator",
+        "reward": "Sy-Gex",
         "expectedGold": 53,
         "enemiesTotal": 7,
         "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer"]
