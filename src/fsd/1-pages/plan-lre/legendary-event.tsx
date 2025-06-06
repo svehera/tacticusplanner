@@ -27,7 +27,13 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
 
     const selectedTeams: ILreTeam[] = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
 
+    // Compute virtual attributes (not saved in JSON) for display on LRE team cards.
     selectedTeams.forEach(team => {
+        team.points = 0;
+        for (const id of team.restrictionsIds) {
+            team.points += legendaryEvent[team.section].getRestrictionPoints(id);
+        }
+
         team.characters = team.charactersIds.map(id => {
             const character = characters.find(x => x.id === id);
 

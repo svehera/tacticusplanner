@@ -65,6 +65,7 @@ export interface ILreTeam {
      * Client Side only
      */
     characters?: ICharacter2[];
+    points?: number;
 }
 
 export interface ILegendaryEventSelectedRequirements {
