@@ -7,10 +7,12 @@ import React, { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { useFitGridOnWindowResize, useQueryState } from '@/fsd/5-shared/lib';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { Campaign, ICampaignBattleComposed, CampaignLocation, CampaignsService } from '@/fsd/4-entities/campaign';
+import { CharactersService } from '@/fsd/4-entities/character';
 import { FactionImage } from '@/fsd/4-entities/faction';
+import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { CampaignBattle } from './campaign-battle';
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
@@ -85,6 +87,23 @@ export const Campaigns = () => {
             field: 'reward',
             headerName: 'Reward',
             minWidth: 170,
+            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
+                const { reward } = params.data ?? {};
+                if (!reward) return undefined;
+                const upgrade = UpgradesService.getUpgrade(reward);
+                if (!upgrade) return reward;
+
+                if (upgrade.stat !== 'Shard') {
+                    return (
+                        <UpgradeImage material={upgrade.label} iconPath={upgrade.iconPath} rarity={upgrade.rarity} />
+                    );
+                }
+
+                const char = upgrade.stat === 'Shard' && CharactersService.getUnit(reward);
+                if (char) return <UnitShardIcon name={reward} icon={char.icon} />;
+
+                return reward;
+            },
         },
         {
             field: 'slots',

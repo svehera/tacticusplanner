@@ -7695,6 +7695,13 @@
         "faction": "Adeptus Mechanicus",
         "rarity": "Shard"
     },
+    "Sy-Gex": {
+        "material": "Sy-Gex",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Adeptus Mechanicus",
+        "rarity": "Shard"
+    },
     "Winged Tyrant Prime": {
         "material": "Winged Tyrant Prime",
         "craftable": false,
