@@ -920,8 +920,8 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             {/* Player Summary Table */}
             <div className="bg-overlay rounded-lg shadow p-4 mb-6">
                 <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Player Summary</h2>
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-                    <div style={{ marginTop: 1 }}>
+                <div className="flex flex-wrap items-center gap-4 mb-6">
+                    <div>
                         <FormControlLabel
                             control={
                                 <Checkbox
@@ -933,14 +933,14 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                             label={'@ prefix'}
                         />
                     </div>
-                    <div className="font-medium text-overlay-fg">Users with bombs</div>
-                    <div style={{ marginTop: 1 }}>
+                    <div className="flex items-center gap-2">
+                        <span className="font-medium text-overlay-fg">Users with bombs:</span>
                         <Button onClick={() => copyUsersWithBomb()} color={'inherit'}>
                             <ContentCopyIcon /> Copy
                         </Button>
                     </div>
-                    <div className="font-medium text-overlay-fg">Users with tokens</div>
-                    <div style={{ marginTop: 1 }}>
+                    <div className="flex items-center gap-2">
+                        <span className="font-medium text-overlay-fg">Users with bombs:</span>
                         <Button onClick={() => copyUsersWithToken()} color={'inherit'}>
                             <ContentCopyIcon /> Copy
                         </Button>
