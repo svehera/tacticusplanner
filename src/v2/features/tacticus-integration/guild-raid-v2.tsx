@@ -66,7 +66,9 @@ const getRarityLabel = (rarity: Rarity): string => {
 
 const MAX_TOKEN = 3;
 const TOKEN_REGEN_HOURS = 12;
-const HOUR = 60 * 60 * 1000;
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
 const millisecondsPerToken = TOKEN_REGEN_HOURS * HOUR;
 interface TokenStatus {
     count: number;
@@ -414,14 +416,14 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         }
 
         const timeSince = Date.now() - lastBombTime;
-        const timeUntilNext = BOMB_COOLDOWN_HOURS * 60 * 60 * 1000 - timeSince;
+        const timeUntilNext = BOMB_COOLDOWN_HOURS * HOUR - timeSince;
 
         if (timeUntilNext <= 0) {
             return <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">Available</span>;
         }
 
-        const hoursLeft = Math.floor(timeUntilNext / (1000 * 60 * 60));
-        const minutesLeft = Math.floor((timeUntilNext % (1000 * 60 * 60)) / (1000 * 60));
+        const hoursLeft = Math.floor(timeUntilNext / HOUR);
+        const minutesLeft = Math.floor((timeUntilNext % HOUR) / MINUTE);
 
         return (
             <span className="text-sm">
@@ -477,6 +479,18 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             headerName: 'Token Status',
             field: 'tokenStatus',
             cellRenderer: TokenStatusRenderer,
+            valueFormatter: params => {
+                const tokenStatus = params.value;
+                if (tokenStatus.count === MAX_TOKEN) return `${tokenStatus.count} tokens available`;
+                const timeReloading = Date.now() - tokenStatus.reloadStart;
+                const cooldown = millisecondsPerToken - timeReloading;
+                const hoursCooldown = Math.round(cooldown / HOUR);
+                if (tokenStatus.count > 0) {
+                    return `${tokenStatus.count} token${tokenStatus.count > 1 ? 's' : ''}, ${hoursCooldown}h cooldown`;
+                } else {
+                    return `no token, ${hoursCooldown}h cooldown`;
+                }
+            },
             sortable: true,
             comparator: (tokenStatus1: TokenStatus, tokenStatus2: TokenStatus) => {
                 const tokenDiff = tokenStatus1.count - tokenStatus2.count;
