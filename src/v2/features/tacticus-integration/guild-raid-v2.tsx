@@ -1,3 +1,5 @@
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { Button, Checkbox, FormControlLabel } from '@mui/material';
 import {
     AllCommunityModule,
     ColDef,
@@ -7,6 +9,7 @@ import {
     ValueGetterParams,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
+import { enqueueSnackbar } from 'notistack';
 import React, { useState, useEffect, useMemo } from 'react';
 
 import {
@@ -404,19 +407,29 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     // Get unique tiers for filter dropdown
     const units = raidData === null ? [] : [...new Set(raidData.entries.map(entry => entry.unitId))].sort();
 
-    // Add this component near other renderers
-    const BombStatusRenderer: React.FC<{ data: UserSummary }> = ({ data }) => {
+    const getTimeUntilNextBomb = (userSummary: UserSummary) => {
         const BOMB_COOLDOWN_HOURS = 18;
-        const lastBombTime = data.lastBombTime;
+        const lastBombTime = userSummary.lastBombTime;
 
         if (!lastBombTime) {
-            return <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">Available</span>;
+            return 0;
         }
 
         const timeSince = Date.now() - lastBombTime;
-        const timeUntilNext = BOMB_COOLDOWN_HOURS * 60 * 60 * 1000 - timeSince;
+        let timeUntilNext = BOMB_COOLDOWN_HOURS * 60 * 60 * 1000 - timeSince;
 
-        if (timeUntilNext <= 0) {
+        if (timeUntilNext < 0) {
+            timeUntilNext = 0;
+        }
+
+        return timeUntilNext;
+    };
+
+    // Add this component near other renderers
+    const BombStatusRenderer: React.FC<{ data: UserSummary }> = ({ data }) => {
+        const timeUntilNext = getTimeUntilNextBomb(data);
+
+        if (timeUntilNext === 0) {
             return <span className="px-2 py-1 rounded bg-green-100 text-green-800 text-xs font-medium">Available</span>;
         }
 
@@ -693,6 +706,30 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         return Array.from(userMap.values());
     }, [filteredEntries]);
 
+    const [usePrefixForCopyUser, setSsePrefixForCopyUser] = useState<boolean>(true);
+
+    const getPrefixForCopyUser = () => (usePrefixForCopyUser ? '@' : '');
+
+    const copyUsersWithBomb = () => {
+        const usersWithBomb = summaryData
+            .filter((userSummary: UserSummary) => getTimeUntilNextBomb(userSummary) === 0)
+            .map((userSummary: UserSummary) => getPrefixForCopyUser() + userIdMapper(userSummary.userId));
+
+        navigator.clipboard
+            .writeText(usersWithBomb.join(' '))
+            .then(r => enqueueSnackbar('Copied', { variant: 'success' }));
+    };
+
+    const copyUsersWithToken = () => {
+        const usersWithTokens = summaryData
+            .filter((userSummary: UserSummary) => userSummary.tokenStatus.count > 0)
+            .map((userSummary: UserSummary) => getPrefixForCopyUser() + userIdMapper(userSummary.userId));
+
+        navigator.clipboard
+            .writeText(usersWithTokens.join(' '))
+            .then(r => enqueueSnackbar('Copied', { variant: 'success' }));
+    };
+
     if (loading) {
         return (
             <div className="flex items-center justify-center h-64">
@@ -883,6 +920,32 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             {/* Player Summary Table */}
             <div className="bg-overlay rounded-lg shadow p-4 mb-6">
                 <h2 className="text-lg font-semibold mb-3 text-overlay-fg">Player Summary</h2>
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
+                    <div style={{ marginTop: 1 }}>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={usePrefixForCopyUser}
+                                    onChange={event => setSsePrefixForCopyUser(!usePrefixForCopyUser)}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                />
+                            }
+                            label={'@ prefix'}
+                        />
+                    </div>
+                    <div className="font-medium text-overlay-fg">Users with bombs</div>
+                    <div style={{ marginTop: 1 }}>
+                        <Button onClick={() => copyUsersWithBomb()} color={'inherit'}>
+                            <ContentCopyIcon /> Copy
+                        </Button>
+                    </div>
+                    <div className="font-medium text-overlay-fg">Users with tokens</div>
+                    <div style={{ marginTop: 1 }}>
+                        <Button onClick={() => copyUsersWithToken()} color={'inherit'}>
+                            <ContentCopyIcon /> Copy
+                        </Button>
+                    </div>
+                </div>
                 <div className="ag-theme-alpine w-full h-96">
                     <AgGridReact
                         modules={[AllCommunityModule]}
