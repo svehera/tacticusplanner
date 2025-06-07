@@ -706,7 +706,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         return Array.from(userMap.values());
     }, [filteredEntries]);
 
-    const [usePrefixForCopyUser, setSsePrefixForCopyUser] = useState<boolean>(true);
+    const [usePrefixForCopyUser, setSePrefixForCopyUser] = useState<boolean>(true);
 
     const getPrefixForCopyUser = () => (usePrefixForCopyUser ? '@' : '');
 
@@ -926,7 +926,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                             control={
                                 <Checkbox
                                     checked={usePrefixForCopyUser}
-                                    onChange={event => setSsePrefixForCopyUser(!usePrefixForCopyUser)}
+                                    onChange={event => setSePrefixForCopyUser(!usePrefixForCopyUser)}
                                     inputProps={{ 'aria-label': 'controlled' }}
                                 />
                             }
