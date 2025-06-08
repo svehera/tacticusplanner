@@ -127,11 +127,24 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return '';
                     const savings: BattleSavings = savingsData[0].savings;
-                    if (UpgradesService.getUpgradeMaterial(savings.battle.reward)) {
+                    const reward = UpgradesService.getUpgradeMaterial(savings.battle.reward);
+                    if (reward && reward.stat === 'Shard') {
+                        const char = CharactersService.getUnit(reward.material);
+                        if (char)
+                            return (
+                                <UnitShardIcon
+                                    name={reward.material}
+                                    icon={char.icon}
+                                    height={30}
+                                    width={30}
+                                    tooltip={`${reward.material} shards`}
+                                />
+                            );
+                    } else if (reward) {
                         return (
                             <UpgradeImage
                                 material={savings.battle.reward}
-                                iconPath={UpgradesService.getUpgradeMaterial(savings.battle.reward)?.icon ?? ''}
+                                iconPath={reward?.icon ?? ''}
                                 rarity={savings.battle.rarityEnum}
                                 size={30}
                             />
@@ -249,11 +262,24 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                     const savingsData = params.data.savingsData;
                     if (!savingsData) return '';
                     const savings: BattleSavings = savingsData[0].savings;
-                    if (UpgradesService.getUpgradeMaterial(savings.battle.reward)) {
+                    const reward = UpgradesService.getUpgradeMaterial(savings.battle.reward);
+                    if (reward && reward.stat === 'Shard') {
+                        const char = CharactersService.getUnit(reward.material);
+                        if (char)
+                            return (
+                                <UnitShardIcon
+                                    name={reward.material}
+                                    icon={char.icon}
+                                    height={30}
+                                    width={30}
+                                    tooltip={`${reward.material} shards`}
+                                />
+                            );
+                    } else if (reward) {
                         return (
                             <UpgradeImage
                                 material={savings.battle.reward}
-                                iconPath={UpgradesService.getUpgradeMaterial(savings.battle.reward)?.icon ?? ''}
+                                iconPath={reward?.icon ?? ''}
                                 rarity={savings.battle.rarityEnum}
                                 size={30}
                             />
