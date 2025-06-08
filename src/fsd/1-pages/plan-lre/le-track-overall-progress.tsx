@@ -2,8 +2,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
+import Button from '@mui/material/Button';
 import { sum } from 'lodash';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { getCompletionRateColor } from '@/fsd/5-shared/lib';
@@ -42,6 +43,20 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, toggleBattleSt
 
     const completionPercentage = Math.round((currentPoints / track.totalPoints) * 100);
 
+    const setAll = () => {
+        const state = completionPercentage === 100 ? ProgressState.none : ProgressState.completed;
+        track.battles.forEach(battle => {
+            battle.requirementsProgress.forEach(req => {
+                toggleBattleState(
+                    track.trackId,
+                    battle.battleIndex,
+                    req.id,
+                    state ? ProgressState.completed : ProgressState.none
+                );
+            });
+        });
+    };
+
     return (
         <div className="flex-box start column" style={{ flex: 1, minWidth: 450 }}>
             <h3>
@@ -79,6 +94,12 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, toggleBattleSt
                     </span>
                 </AccordionSummary>
                 <AccordionDetails>
+                    <div className="flex-box gap5 column">
+                        <Button variant="outlined" onClick={setAll}>
+                            Toggle
+                        </Button>
+                        <br />
+                    </div>
                     <div className="flex-box gap18" style={{ marginInlineStart: 35 }}>
                         {track.requirements.map(req => (
                             <LreReqImage key={req.id} iconId={req.iconId} tooltip={req.name} />
