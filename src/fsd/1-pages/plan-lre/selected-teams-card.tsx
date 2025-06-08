@@ -17,6 +17,8 @@ interface Props {
 
 export const SelectedTeamCard: React.FC<Props> = ({ team, menuItemSelect }) => {
     const { viewPreferences } = useContext(StoreContext);
+    let subheader = team.restrictionsIds.join(', ');
+    if (team.points) subheader += ` (${team.points} points)`;
     return (
         <Card
             variant="outlined"
@@ -36,7 +38,7 @@ export const SelectedTeamCard: React.FC<Props> = ({ team, menuItemSelect }) => {
                     </>
                 }
                 title={team.name}
-                subheader={team.restrictionsIds.join(', ')}
+                subheader={subheader}
             />
             <CardContent className="flex-box column gap1 start" style={{ minHeight: 150 }}>
                 {team.characters?.map(x => <LreTile key={x.id} character={x} settings={viewPreferences} />)}
