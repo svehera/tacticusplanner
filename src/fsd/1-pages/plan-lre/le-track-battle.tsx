@@ -64,7 +64,6 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, toggleState }) 
     }, [battle]);
 
     const handleToggleAll = () => {
-        console.log('handleToggleAll called');
         battle.requirementsProgress.forEach(req => {
             toggleState(req, allCompleted ? ProgressState.none : ProgressState.completed);
         });
