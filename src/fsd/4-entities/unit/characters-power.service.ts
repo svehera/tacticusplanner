@@ -1,7 +1,7 @@
 import { RarityStars, Rarity, Rank } from '@/fsd/5-shared/model';
 
 import { IUnit } from './model';
-import { isCharacter, isUnlocked } from './units.functions';
+import { isCharacter, isMow, isUnlocked } from './units.functions';
 
 export class CharactersPowerService {
     public static getCharacterAbilityPower(unit: IUnit): number {
@@ -13,17 +13,24 @@ export class CharactersPowerService {
         if (isCharacter(unit)) {
             const abilityPower =
                 abilityWeight *
-                CharactersPowerService.getRarityCoeff(unit.rarity) *
+                CharactersPowerService.getRarityCoeff(unit, unit.rarity) *
                 (CharactersPowerService.getAbilityCoeff(unit.activeAbilityLevel) +
                     CharactersPowerService.getAbilityCoeff(unit.passiveAbilityLevel));
             return Math.round(abilityPower);
-        } else {
+        } else if (isMow(unit)) {
             const abilityPower =
+                // MoW have abilities but no attributes.
+                // Their stars and rarities scale differently than characters.
+                4 *
                 abilityWeight *
-                CharactersPowerService.getRarityCoeff(unit.rarity) *
+                (1 +
+                    CharactersPowerService.getRarityCoeff(unit, unit.rarity) +
+                    CharactersPowerService.getStarsCoeff(unit, unit.stars)) *
                 (CharactersPowerService.getAbilityCoeff(unit.primaryAbilityLevel) +
                     CharactersPowerService.getAbilityCoeff(unit.secondaryAbilityLevel));
             return Math.round(abilityPower);
+        } else {
+            return 0;
         }
     }
 
@@ -39,7 +46,7 @@ export class CharactersPowerService {
         const attributesWeight = 3000000 / 9326;
         const attributePower =
             attributesWeight *
-            CharactersPowerService.getStarsCoeff(unit.stars) *
+            CharactersPowerService.getStarsCoeff(unit, unit.stars) *
             (CharactersPowerService.getRankCoeff(unit.rank) + upgradeBoost * (unit.upgrades?.length ?? 0));
 
         return Math.round(attributePower);
@@ -70,19 +77,37 @@ export class CharactersPowerService {
         }
     }
 
-    public static getRarityCoeff(rarity: Rarity): number {
-        switch (rarity) {
-            case Rarity.Common:
-            default:
-                return 1.0;
-            case Rarity.Uncommon:
-                return 1.2;
-            case Rarity.Rare:
-                return 1.4;
-            case Rarity.Epic:
-                return 1.6;
-            case Rarity.Legendary:
-                return 1.8;
+    public static getRarityCoeff(unit: IUnit, rarity: Rarity): number {
+        if (isCharacter(unit)) {
+            switch (rarity) {
+                case Rarity.Common:
+                default:
+                    return 1.0;
+                case Rarity.Uncommon:
+                    return 1.2;
+                case Rarity.Rare:
+                    return 1.4;
+                case Rarity.Epic:
+                    return 1.6;
+                case Rarity.Legendary:
+                    return 1.8;
+            }
+        } else if (isMow(unit)) {
+            switch (rarity) {
+                case Rarity.Common:
+                default:
+                    return 0.0;
+                case Rarity.Uncommon:
+                    return 0.05;
+                case Rarity.Rare:
+                    return 0.1;
+                case Rarity.Epic:
+                    return 0.15;
+                case Rarity.Legendary:
+                    return 0.2;
+            }
+        } else {
+            return 0;
         }
     }
 
@@ -131,34 +156,67 @@ export class CharactersPowerService {
         }
     }
 
-    public static getStarsCoeff(rank: RarityStars): number {
-        switch (rank) {
-            case RarityStars.OneStar:
-                return 1.1;
-            case RarityStars.TwoStars:
-                return 1.2;
-            case RarityStars.ThreeStars:
-                return 1.3;
-            case RarityStars.FourStars:
-                return 1.4;
-            case RarityStars.FiveStars:
-                return 1.5;
-            case RarityStars.RedOneStar:
-                return 1.6;
-            case RarityStars.RedTwoStars:
-                return 1.7;
-            case RarityStars.RedThreeStars:
-                return 1.8;
-            case RarityStars.RedFourStars:
-                return 1.9;
-            case RarityStars.RedFiveStars:
-                return 2.0;
-            case RarityStars.BlueStar:
-                return 2.1;
+    public static getStarsCoeff(unit: IUnit, rank: RarityStars): number {
+        if (isCharacter(unit)) {
+            switch (rank) {
+                case RarityStars.OneStar:
+                    return 1.1;
+                case RarityStars.TwoStars:
+                    return 1.2;
+                case RarityStars.ThreeStars:
+                    return 1.3;
+                case RarityStars.FourStars:
+                    return 1.4;
+                case RarityStars.FiveStars:
+                    return 1.5;
+                case RarityStars.RedOneStar:
+                    return 1.6;
+                case RarityStars.RedTwoStars:
+                    return 1.7;
+                case RarityStars.RedThreeStars:
+                    return 1.8;
+                case RarityStars.RedFourStars:
+                    return 1.9;
+                case RarityStars.RedFiveStars:
+                    return 2.0;
+                case RarityStars.BlueStar:
+                    return 2.1;
 
-            case RarityStars.None:
-            default:
-                return 1.0;
+                case RarityStars.None:
+                default:
+                    return 1.0;
+            }
+        } else if (isMow(unit)) {
+            switch (rank) {
+                case RarityStars.OneStar:
+                    return 0.05;
+                case RarityStars.TwoStars:
+                    return 0.1;
+                case RarityStars.ThreeStars:
+                    return 0.15;
+                case RarityStars.FourStars:
+                    return 0.2;
+                case RarityStars.FiveStars:
+                    return 0.25;
+                case RarityStars.RedOneStar:
+                    return 0.3;
+                case RarityStars.RedTwoStars:
+                    return 0.35;
+                case RarityStars.RedThreeStars:
+                    return 0.4;
+                case RarityStars.RedFourStars:
+                    return 0.45;
+                case RarityStars.RedFiveStars:
+                    return 0.5;
+                case RarityStars.BlueStar:
+                    return 0.6;
+
+                case RarityStars.None:
+                default:
+                    return 0.0;
+            }
         }
+
+        return 0;
     }
 }
