@@ -948,13 +948,13 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                         />
                     </div>
                     <div className="flex items-center gap-2">
-                        <span className="font-medium text-overlay-fg">Users with bombs:</span>
+                        <span className="font-medium text-overlay-fg">Users with bomb:</span>
                         <Button onClick={() => copyUsersWithBomb()} color={'inherit'}>
                             <ContentCopyIcon /> Copy
                         </Button>
                     </div>
                     <div className="flex items-center gap-2">
-                        <span className="font-medium text-overlay-fg">Users with bombs:</span>
+                        <span className="font-medium text-overlay-fg">Users with tokens:</span>
                         <Button onClick={() => copyUsersWithToken()} color={'inherit'}>
                             <ContentCopyIcon /> Copy
                         </Button>
