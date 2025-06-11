@@ -709,10 +709,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         );
 
         // Number of available tokens at calculation time
-        const availableTokens = summaryData.reduce(
-            (acc, userSummmary) => acc + (userSummmary?.tokenStatus?.count ?? 0),
-            0
-        );
+        const availableTokens = summaryData.reduce((acc, userSummmary) => acc + userSummmary.tokenStatus.count, 0);
 
         return {
             totalDamage,
