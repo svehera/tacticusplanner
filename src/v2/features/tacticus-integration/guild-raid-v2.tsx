@@ -339,73 +339,6 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         },
     ];
 
-    // Calculate summary statistics
-    const calculateStats = () => {
-        if (!raidData || !filteredEntries.length) return null;
-
-        // Total damage dealt across all entries
-        const totalDamage = filteredEntries.reduce((sum, entry) => sum + entry.damageDealt, 0);
-
-        // Average damage per entry
-        const avgDamage = totalDamage / filteredEntries.length;
-
-        // Count of battle vs bomb attacks
-        const battleAttacks = filteredEntries.filter(entry => entry.damageType === TacticusDamageType.Battle).length;
-        const bombAttacks = filteredEntries.filter(entry => entry.damageType === TacticusDamageType.Bomb).length;
-
-        // Boss vs Side Boss encounters
-        const bossEncounters = filteredEntries.filter(
-            entry => entry.encounterType === TacticusEncounterType.Boss
-        ).length;
-        const sideBossEncounters = filteredEntries.filter(
-            entry => entry.encounterType === TacticusEncounterType.SideBoss
-        ).length;
-
-        // User participation count
-        const userParticipation = new Map();
-        filteredEntries.forEach(entry => {
-            userParticipation.set(entry.userId, (userParticipation.get(entry.userId) || 0) + 1);
-        });
-
-        // Most active user
-        let mostActiveUser = '';
-        let mostActiveCount = 0;
-        userParticipation.forEach((count, user: string) => {
-            if (count > mostActiveCount) {
-                mostActiveUser = userIdMapper(user);
-                mostActiveCount = count;
-            }
-        });
-
-        // Highest damage in a single attack
-        const highestDamage = filteredEntries.reduce((max, entry) => Math.max(max, entry.damageDealt), 0);
-
-        // User with highest damage
-        const userWithHighestDamage = userIdMapper(
-            filteredEntries.find(entry => entry.damageDealt === highestDamage)?.userId || ''
-        );
-
-        // Attacks that defeated enemies (remaining HP = 0)
-        const defeatedEnemies = filteredEntries.filter(entry => entry.remainingHp === 0).length;
-
-        return {
-            totalDamage,
-            avgDamage,
-            battleAttacks,
-            bombAttacks,
-            bossEncounters,
-            sideBossEncounters,
-            mostActiveUser,
-            mostActiveCount,
-            highestDamage,
-            userWithHighestDamage,
-            defeatedEnemies,
-            userCount: userParticipation.size,
-        };
-    };
-
-    const stats = calculateStats();
-
     // Get unique tiers for filter dropdown
     const units = raidData === null ? [] : [...new Set(raidData.entries.map(entry => entry.unitId))].sort();
 
@@ -720,6 +653,84 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         return Array.from(userMap.values());
     }, [filteredEntries]);
 
+    // Calculate summary statistics
+    const calculateStats = () => {
+        if (!raidData || !filteredEntries.length) return null;
+
+        // Total damage dealt across all entries
+        const totalDamage = filteredEntries.reduce((sum, entry) => sum + entry.damageDealt, 0);
+
+        // Average damage per entry
+        const avgDamage = totalDamage / filteredEntries.length;
+
+        // Count of battle vs bomb attacks
+        const battleAttacks = filteredEntries.filter(entry => entry.damageType === TacticusDamageType.Battle).length;
+        const bombAttacks = filteredEntries.filter(entry => entry.damageType === TacticusDamageType.Bomb).length;
+
+        // Boss vs Side Boss encounters
+        const bossEncounters = filteredEntries.filter(
+            entry => entry.encounterType === TacticusEncounterType.Boss
+        ).length;
+        const sideBossEncounters = filteredEntries.filter(
+            entry => entry.encounterType === TacticusEncounterType.SideBoss
+        ).length;
+
+        // User participation count
+        const userParticipation = new Map();
+        filteredEntries.forEach(entry => {
+            userParticipation.set(entry.userId, (userParticipation.get(entry.userId) || 0) + 1);
+        });
+
+        // Most active user
+        let mostActiveUser = '';
+        let mostActiveCount = 0;
+        userParticipation.forEach((count, user: string) => {
+            if (count > mostActiveCount) {
+                mostActiveUser = userIdMapper(user);
+                mostActiveCount = count;
+            }
+        });
+
+        // Highest damage in a single attack
+        const highestDamage = filteredEntries.reduce((max, entry) => Math.max(max, entry.damageDealt), 0);
+
+        // User with highest damage
+        const userWithHighestDamage = userIdMapper(
+            filteredEntries.find(entry => entry.damageDealt === highestDamage)?.userId || ''
+        );
+
+        // Attacks that defeated enemies (remaining HP = 0)
+        const defeatedEnemies = filteredEntries.filter(entry => entry.remainingHp === 0).length;
+
+        // Number of available bombs at calculation time
+        const availableBombs = summaryData.reduce(
+            (acc, userSummmary) => acc + (getTimeUntilNextBomb(userSummmary) === 0 ? 1 : 0),
+            0
+        );
+
+        // Number of available tokens at calculation time
+        const availableTokens = summaryData.reduce((acc, userSummmary) => acc + userSummmary.tokenStatus.count, 0);
+
+        return {
+            totalDamage,
+            avgDamage,
+            battleAttacks,
+            bombAttacks,
+            bossEncounters,
+            sideBossEncounters,
+            mostActiveUser,
+            mostActiveCount,
+            highestDamage,
+            userWithHighestDamage,
+            defeatedEnemies,
+            userCount: userParticipation.size,
+            availableBombs,
+            availableTokens,
+        };
+    };
+
+    const stats = useMemo(() => calculateStats(), [summaryData]);
+
     const [usePrefixForCopyUser, setSePrefixForCopyUser] = useState<boolean>(true);
 
     const getPrefixForCopyUser = () => (usePrefixForCopyUser ? '@' : '');
@@ -829,6 +840,14 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                     <div className="bg-overlay rounded-lg shadow p-4">
                         <div className="text-muted-fg text-sm">Enemies Defeated</div>
                         <div className="text-2xl font-bold mt-1 text-overlay-fg">{stats.defeatedEnemies}</div>
+                    </div>
+                    <div className="bg-overlay rounded-lg shadow p-4">
+                        <div className="text-muted-fg text-sm">Available Bombs</div>
+                        <div className="text-2xl font-bold mt-1 text-overlay-fg">{stats.availableBombs}</div>
+                    </div>
+                    <div className="bg-overlay rounded-lg shadow p-4">
+                        <div className="text-muted-fg text-sm">Available Tokens</div>
+                        <div className="text-2xl font-bold mt-1 text-overlay-fg">{stats.availableTokens}</div>
                     </div>
                 </div>
             )}
