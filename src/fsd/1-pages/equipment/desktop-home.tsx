@@ -1,22 +1,19 @@
 import { Tooltip } from '@mui/material';
 import React from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules
-import { StaticDataService } from 'src/services';
-// eslint-disable-next-line import-x/no-internal-modules
-import { FactionImage } from 'src/v2/components/images/faction-image';
-// eslint-disable-next-line import-x/no-internal-modules
-import { RarityImage } from 'src/v2/components/images/rarity-image';
+import { Faction } from '@/fsd/5-shared/model';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { CharactersService } from '@/fsd/4-entities/character';
+import { EquipmentService, IEquipment } from '@/fsd/4-entities/equipment';
+import { FactionImage } from '@/fsd/4-entities/faction';
 
-import { CharacterShardIcon } from '@/fsd/4-entities/character';
-
-function parseSlotType(slotType) {
+function parseSlotType(slotType: string): string {
     return slotType === 'Defense' ? 'Defensive' : slotType;
 }
 
 function indexUnits(unitsData) {
+    console.debug({ unitsData });
     const ud = Object.values(unitsData).reduce<{ [key: string]: string | object }>(
         (acc, unitData) => {
             // console.debug('unitData', unitData);
@@ -46,9 +43,9 @@ function indexUnits(unitsData) {
     return ud;
 }
 
-function indexEquipment(equipmentData) {
+function indexEquipment(equipmentData: IEquipment[]) {
     console.debug(`indexEquipment`, equipmentData);
-    const ed = StaticDataService.equipmentData.reduce(
+    const ed = equipmentData.reduce(
         (acc, item) => {
             const slotType = parseSlotType(item.slot);
 
@@ -74,10 +71,10 @@ function indexEquipment(equipmentData) {
     return ed;
 }
 
-const unitIndex = indexUnits(StaticDataService.unitsData);
-const equipmentIndex = indexEquipment(StaticDataService.equipmentData);
+const unitIndex = indexUnits(CharactersService.charactersData);
+const equipmentIndex = indexEquipment(EquipmentService.equipmentData);
 
-function unitsForSlot(factions, slot) {
+function unitsForSlot(factions: Faction[], slot) {
     const xx = factions.reduce((acc, faction) => {
         const units = unitIndex.byFaction[faction][slot];
 
@@ -98,6 +95,7 @@ function equipmentForSlot(faction, slot) {
 export const DesktopHome = () => {
     return (
         <>
+            <h2>By Character</h2>
             <table>
                 <thead>
                     <tr>
@@ -114,7 +112,7 @@ export const DesktopHome = () => {
                             <td>
                                 <Tooltip title={k} key={k}>
                                     <span>
-                                        <CharacterShardIcon icon={v.icon} name={k} height={30} />
+                                        <UnitShardIcon icon={v.icon} name={k} height={30} />
                                     </span>
                                 </Tooltip>
                             </td>
@@ -139,6 +137,8 @@ export const DesktopHome = () => {
                     ))}
                 </tbody>
             </table>
+
+            <h2>By Equipment</h2>
             <table>
                 <thead>
                     <tr>
@@ -172,7 +172,7 @@ export const DesktopHome = () => {
                                 {Object.entries(unitsForSlot(v.factions, v.slotType)).map(([unit, { icon }]) => (
                                     <Tooltip title={unit} key={unit}>
                                         <span>
-                                            <CharacterShardIcon icon={icon} name={unit} height={30} />
+                                            <UnitShardIcon icon={icon} name={unit} height={30} />
                                         </span>
                                     </Tooltip>
                                 ))}
