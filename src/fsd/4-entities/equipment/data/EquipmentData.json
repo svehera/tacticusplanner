@@ -1657,6 +1657,17 @@
         "boost1": [66, 80, 93, 106, 126, 140, 181],
         "boost2": []
     },
+    "Ancient Quantum Shield": {
+        "slot": "Block",
+        "clazz": "QuantumShield",
+        "snowprintId": 7,
+        "displayName": "Ancient Quantum Shield",
+        "rarity": "Epic",
+        "chance": 35,
+        "factions": ["Necrons"],
+        "boost1": [140, 181, 221, 262, 302, 343, 388, 494, 600],
+        "boost2": []
+    },
     "Transdimensional Quantum Shield": {
         "slot": "Block",
         "clazz": "QuantumShield",
