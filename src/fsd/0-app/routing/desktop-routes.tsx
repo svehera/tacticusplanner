@@ -32,13 +32,6 @@ export const globalInputRoutes: RouteObject[] = [
             return { Component: Inventory };
         },
     },
-    {
-        path: 'input/equipment',
-        async lazy() {
-            const { DesktopHome } = await import('@/fsd/1-pages/equipment');
-            return { Component: DesktopHome };
-        },
-    },
     guildLazyRoute,
 ];
 
