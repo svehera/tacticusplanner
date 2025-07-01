@@ -32,10 +32,18 @@ export const DesktopHome = () => {
     const goalsMenuItem = menuItemById['goals'];
     const dailyRaidsMenuItem = menuItemById['dailyRaids'];
 
+    // TODO: delete this old calendar code and associated images once PR is approved,
+    // and uncomment the below up-to-date (as of 1 July 2025) code.
     const calendarUrls: { current?: string; next?: string } = {
         current: getImageUrl('calendar/calendar_20250330.png'),
         next: getImageUrl('calendar/calendar_20250504.png'),
     };
+
+    // const calendarUrls: { current?: string; next?: string } = {
+    //     current: getImageUrl('calendar/calendar_20250608.png'),
+    //     // Uncomment when calendar image is ready
+    //     // next: getImageUrl('calendar/calendar_20250713.png'),
+    // };
 
     const topPriorityGoal = goals[0];
     const unlockGoals = goals.filter(x => x.type === PersonalGoalType.Unlock).length;
