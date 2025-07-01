@@ -12,18 +12,8 @@ import { FactionImage } from '@/fsd/4-entities/faction';
 export const Equipment = () => {
     const gridRef = useRef<AgGridReact<IEquipment>>(null);
     const [nameFilter, setNameFilter] = useState<string>('');
-    const [showCharacters, setshowCharacters] = useState<boolean>(false);
-
-    const rows = useMemo((): IEquipment[] => EquipmentService.equipmentData, []);
-
-    // const { slot, factions } = params.data || {};
-    // const characters = CharactersService.charactersData.filter(char => {
-    //     return (
-    //         slot &&
-    //         factions?.includes(char.faction) &&
-    //         [char.equipment1, char.equipment2, char.equipment3].includes(CharactersService.parseEquipmentType(slot))
-    //     );
-    // });
+    const [showCharacters, setShowCharacters] = useState<boolean>(false);
+    const rows = useMemo((): IEquipment[] => EquipmentService.equipmentData || [], []);
 
     const charactersForEquipment = useMemo(() => {
         const charactersByEquipment = new Map<string, typeof CharactersService.charactersData>();
@@ -201,15 +191,16 @@ export const Equipment = () => {
                     control={
                         <Switch
                             checked={showCharacters}
-                            value={showCharacters}
-                            onChange={event => setshowCharacters(event.target.checked)}
+                            onChange={event => setShowCharacters(event.target.checked)}
                             slotProps={{ input: { 'aria-label': 'controlled' } }}
                         />
                     }
                     label="Show Characters"
                 />
             </div>
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 220px)', width: '100%' }}>
+            <div
+                className="ag-theme-material"
+                style={{ height: 'calc(100vh - 12rem)', minHeight: '400px', width: '100%' }}>
                 <AgGridReact
                     ref={gridRef}
                     modules={[AllCommunityModule]}
