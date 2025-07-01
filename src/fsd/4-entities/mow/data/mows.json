@@ -76,7 +76,7 @@
     },
     {
         "id": "_exorcist",
-        "tacticusId": "",
+        "tacticusId": "adeptExorcist",
         "name": "Exorcist",
         "title": "Artillery Tank",
         "shortName": "Exorcist",
