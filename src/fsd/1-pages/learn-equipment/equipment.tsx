@@ -14,14 +14,38 @@ export const Equipment = () => {
     const [nameFilter, setNameFilter] = useState<string>('');
     const [showCharacters, setshowCharacters] = useState<boolean>(false);
 
-    const rows = useMemo((): IEquipment[] => {
-        if (!EquipmentService.equipmentData || !Array.isArray(EquipmentService.equipmentData)) {
-            console.warn('Equipment data is not available or malformed');
-            return [];
-        }
+    const rows = useMemo((): IEquipment[] => EquipmentService.equipmentData, []);
 
-        return EquipmentService.equipmentData;
-    }, []);
+    // const { slot, factions } = params.data || {};
+    // const characters = CharactersService.charactersData.filter(char => {
+    //     return (
+    //         slot &&
+    //         factions?.includes(char.faction) &&
+    //         [char.equipment1, char.equipment2, char.equipment3].includes(CharactersService.parseEquipmentType(slot))
+    //     );
+    // });
+
+    const charactersForEquipment = useMemo(() => {
+        const charactersByEquipment = new Map<string, typeof CharactersService.charactersData>();
+
+        rows.forEach(row => {
+            const { displayName, slot, factions } = row;
+            if (!charactersByEquipment.has(displayName)) {
+                const characters = CharactersService.charactersData.filter(char => {
+                    return (
+                        slot &&
+                        factions?.includes(char.faction) &&
+                        [char.equipment1, char.equipment2, char.equipment3].includes(
+                            CharactersService.parseEquipmentType(slot)
+                        )
+                    );
+                });
+                charactersByEquipment.set(displayName, characters);
+            }
+        });
+
+        return charactersByEquipment;
+    }, [rows]);
 
     const columnDefs = useMemo<Array<ColDef<IEquipment>>>(() => {
         return [
@@ -49,7 +73,6 @@ export const Equipment = () => {
             },
             {
                 headerName: 'Rarity',
-                field: 'rarity',
                 width: 60,
                 cellRenderer: (params: ICellRendererParams<IEquipment>) => {
                     return typeof params.data?.rarity !== 'undefined' && <RarityIcon rarity={params.data?.rarity} />;
@@ -123,7 +146,6 @@ export const Equipment = () => {
             },
             {
                 headerName: 'Factions',
-                field: 'factions',
                 minWidth: 100,
                 cellRenderer: (params: ICellRendererParams<IEquipment>) => (
                     <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
@@ -143,16 +165,9 @@ export const Equipment = () => {
                 flex: 1,
                 hide: !showCharacters,
                 cellRenderer: (params: ICellRendererParams<IEquipment>) => {
-                    const { slot, factions } = params.data || {};
-                    const characters = CharactersService.charactersData.filter(char => {
-                        return (
-                            slot &&
-                            factions?.includes(char.faction) &&
-                            [char.equipment1, char.equipment2, char.equipment3].includes(
-                                CharactersService.parseEquipmentType(slot)
-                            )
-                        );
-                    });
+                    const { displayName } = params.data || {};
+                    if (!displayName) return '';
+                    const characters = charactersForEquipment.get(displayName) || [];
 
                     return (
                         <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
