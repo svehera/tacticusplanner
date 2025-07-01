@@ -173,7 +173,7 @@ export const Equipment = () => {
                 },
             },
         ];
-    }, [showCharacters]);
+    }, [showCharacters, charactersForEquipment]);
 
     const filteredRows = useMemo(() => {
         return rows.filter(row => row.displayName.toLowerCase().includes(nameFilter.toLowerCase()));
