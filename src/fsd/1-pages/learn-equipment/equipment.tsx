@@ -3,49 +3,43 @@ import { ColDef, ICellRendererParams, AllCommunityModule, themeBalham } from 'ag
 import { AgGridReact } from 'ag-grid-react';
 import React, { useMemo, useRef, useState } from 'react';
 
-import { Rarity } from '@/fsd/5-shared/model';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { EquipmentService } from '@/fsd/4-entities/equipment';
+import { EquipmentIcon, EquipmentService, EquipmentTypeIcon, IEquipment } from '@/fsd/4-entities/equipment';
 import { FactionImage } from '@/fsd/4-entities/faction';
 
-export interface IEquipmentTableRow {
-    displayName: string;
-    slot: string;
-    clazz: string;
-    rarity: Rarity;
-    factions: string[];
-    chance: number;
-    boost1: number[];
-    boost2: number[];
-}
-
 export const Equipment = () => {
-    const gridRef = useRef<AgGridReact<IEquipmentTableRow>>(null);
+    const gridRef = useRef<AgGridReact<IEquipment>>(null);
     const [nameFilter, setNameFilter] = useState<string>('');
     const [showCharacters, setshowCharacters] = useState<boolean>(false);
 
-    const rows = useMemo((): IEquipmentTableRow[] => {
-        return EquipmentService.equipmentData.map(equip => ({
-            displayName: equip.displayName,
-            slot: equip.slot,
-            clazz: equip.clazz,
-            rarity: equip.rarity,
-            factions: equip.factions,
-            chance: equip.chance ?? 0,
-            boost1: equip.boost1,
-            boost2: equip.boost2,
-        }));
+    const rows = useMemo((): IEquipment[] => {
+        if (!EquipmentService.equipmentData || !Array.isArray(EquipmentService.equipmentData)) {
+            console.warn('Equipment data is not available or malformed');
+            return [];
+        }
+
+        return EquipmentService.equipmentData;
     }, []);
 
-    const columnDefs = useMemo<Array<ColDef<IEquipmentTableRow>>>(() => {
+    const columnDefs = useMemo<Array<ColDef<IEquipment>>>(() => {
         return [
             {
-                headerName: 'Name',
-                field: 'displayName',
+                headerName: 'Equipment',
                 minWidth: 120,
                 flex: 1,
+                cellRenderer: (params: ICellRendererParams<IEquipment>) => {
+                    const equipment = params.data;
+                    return equipment ? (
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                            <EquipmentIcon equipment={equipment} width={30} height={30} />
+                            {equipment?.displayName}
+                        </span>
+                    ) : (
+                        ''
+                    );
+                },
             },
             {
                 headerName: 'Class',
@@ -57,20 +51,30 @@ export const Equipment = () => {
                 headerName: 'Rarity',
                 field: 'rarity',
                 width: 60,
-                cellRenderer: (params: ICellRendererParams<IEquipmentTableRow>) => {
+                cellRenderer: (params: ICellRendererParams<IEquipment>) => {
                     return typeof params.data?.rarity !== 'undefined' && <RarityIcon rarity={params.data?.rarity} />;
                 },
             },
             {
                 headerName: 'Slot',
-                field: 'slot',
-                minWidth: 100,
+                minWidth: 50,
+                cellRenderer: (params: ICellRendererParams<IEquipment>) => {
+                    const equipment = params.data;
+                    return equipment ? (
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                            <EquipmentTypeIcon equipmentType={equipment.slot} width={25} height={25} />
+                            {equipment?.slot}
+                        </span>
+                    ) : (
+                        ''
+                    );
+                },
             },
             {
                 headerName: 'Boost by Level',
                 minWidth: 100,
                 flex: 1,
-                cellRenderer: (params: ICellRendererParams<IEquipmentTableRow>) => {
+                cellRenderer: (params: ICellRendererParams<IEquipment>) => {
                     const { chance, slot, boost1, boost2 } = params.data || {};
                     switch (slot) {
                         case 'Block':
@@ -121,7 +125,7 @@ export const Equipment = () => {
                 headerName: 'Factions',
                 field: 'factions',
                 minWidth: 100,
-                cellRenderer: (params: ICellRendererParams<IEquipmentTableRow>) => (
+                cellRenderer: (params: ICellRendererParams<IEquipment>) => (
                     <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
                         {params.data?.factions.map(faction => (
                             <Tooltip title={faction} key={faction}>
@@ -138,7 +142,7 @@ export const Equipment = () => {
                 minWidth: 100,
                 flex: 1,
                 hide: !showCharacters,
-                cellRenderer: (params: ICellRendererParams<IEquipmentTableRow>) => {
+                cellRenderer: (params: ICellRendererParams<IEquipment>) => {
                     const { slot, factions } = params.data || {};
                     const characters = CharactersService.charactersData.filter(char => {
                         return (
