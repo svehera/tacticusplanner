@@ -1,6 +1,7 @@
 import { ILegendaryEventStatic } from '../static-data.model';
 
 import aunshiJson from './1-Aunshi.json';
+import luciusJson from './10-Lucius.json';
 import shadowsunJson from './2-Shadowsun.json';
 import ragnarJson from './3-Ragnar.json';
 import vitruviusJson from './4-Vitruvius.json';
@@ -19,3 +20,4 @@ export const ragnar: ILegendaryEventStatic = ragnarJson;
 export const shadowsun: ILegendaryEventStatic = shadowsunJson;
 export const trajann: ILegendaryEventStatic = trajannJson;
 export const vitruvius: ILegendaryEventStatic = vitruviusJson;
+export const lucius: ILegendaryEventStatic = luciusJson;
