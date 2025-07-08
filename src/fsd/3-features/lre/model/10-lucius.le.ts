@@ -63,43 +63,45 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
 
     protected getBetaTrack(unitsData: Array<ICharacter2>): ILegendaryEventTrack {
         const noChaos = filter(unitsData).byAlliance(Alliance.Chaos, true);
+        const noChaosOrTyranids = filter(noChaos).byFaction(Faction.Tyranids, true);
+
         return new LETrack(
             this.id,
             'beta',
-            noChaos,
+            noChaosOrTyranids,
             [
                 {
                     name: 'Heavy Weapon',
                     points: 95,
-                    units: filter(noChaos).byTrait(Trait.HeavyWeapon),
+                    units: filter(noChaosOrTyranids).byTrait(Trait.HeavyWeapon),
                     iconId: 'heavy_weapon',
                     index: 0,
                 },
                 {
                     name: 'Piercing',
                     points: 65,
-                    units: filter(noChaos).byDamageType(DamageType.Piercing),
+                    units: filter(noChaosOrTyranids).byDamageType(DamageType.Piercing),
                     iconId: 'piercing',
                     index: 1,
                 },
                 {
                     name: 'Unstoppable',
                     points: 95,
-                    units: filter(noChaos).byTrait(Trait.Unstoppable),
+                    units: filter(noChaosOrTyranids).byTrait(Trait.Unstoppable),
                     iconId: 'unstoppable',
                     index: 2,
                 },
                 {
                     name: 'Physical',
                     points: 45,
-                    units: filter(noChaos).byDamageType(DamageType.Physical),
+                    units: filter(noChaosOrTyranids).byDamageType(DamageType.Physical),
                     iconId: 'physical',
                     index: 3,
                 },
                 {
                     name: 'Max 2 hits',
                     points: 75,
-                    units: filter(noChaos).byMaxHits(2),
+                    units: filter(noChaosOrTyranids).byMaxHits(2),
                     iconId: 'hits',
                     index: 4,
                 },
