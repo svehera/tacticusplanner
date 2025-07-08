@@ -2509,7 +2509,7 @@
         "Melee Hits": 3,
         "Movement": 3,
         "Equipment1": "Crit",
-        "Equipment2": "Defensive",
+        "Equipment2": "Defense",
         "Equipment3": "Crit Booster",
         "Traits": ["Parry", "Terrifying"],
         "Active Ability": "Power",
