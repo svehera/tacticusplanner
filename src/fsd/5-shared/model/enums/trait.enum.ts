@@ -44,6 +44,7 @@ export enum Trait {
     Synapse = 'Synapse',
     TerminatorArmour = 'Terminator Armour',
     Terrifying = 'Terrifying',
+    ThrillSeekers = 'Thrill Seekers',
     TwoManTeam = 'Two-Man Team',
     Unstoppable = 'Unstoppable',
     Vehicle = 'Vehicle',

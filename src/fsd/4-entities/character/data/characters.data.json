@@ -2493,5 +2493,38 @@
             "nextEventDate": "01 June",
             "nextEventDateUtc": "Sun, 01 June 2025 00:00:00 GMT"
         }
+    },
+    {
+        "Name": "Lucius",
+        "Title": "Champion of Slaanesh",
+        "Full Name": "Lucius the Eternal",
+        "Short Name": "Lucius",
+        "Faction": "Emperor's Children",
+        "Alliance": "Chaos",
+        "Health": 1,
+        "Damage": 1,
+        "Armour": 1,
+        "Initial rarity": "Legendary",
+        "Melee Damage": "Power",
+        "Melee Hits": 6,
+        "Movement": 4,
+        "Equipment1": "Crit",
+        "Equipment2": "Block",
+        "Equipment3": "Crit Booster",
+        "Traits": ["Thrill Seekers", "Parry"],
+        "Active Ability": "Eviscerate",
+        "Number": 93,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "lucius.webp",
+        "releaseDate": "",
+        "ReleaseRarity": 6,
+        "lre": {
+            "id": 12,
+            "finished": false,
+            "eventStage": 1,
+            "nextEventDate": "10 August",
+            "nextEventDateUtc": "Sun, 10 August 2025 00:00:00 GMT"
+        }
     }
 ]

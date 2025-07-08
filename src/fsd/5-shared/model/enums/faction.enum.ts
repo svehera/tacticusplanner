@@ -18,4 +18,5 @@ export enum Faction {
     BloodAngels = 'Blood Angels',
     GenestealerCults = 'Genestealer Cults',
     AdeptusCustodes = 'Adeptus Custodes',
+    EmperorsChildren = "Emperor's Children",
 }
