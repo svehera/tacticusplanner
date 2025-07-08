@@ -21,21 +21,20 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
             : character.bias === CharacterBias.recommendLast
               ? pooEmoji
               : '';
-    const rankBackgroundCssClass = settings.lreTileShowUnitRankBackground
-        ? ` ${Rank[character.rank].toLowerCase()}`
-        : '';
-
+    const rankBackgroundCssClass =
+        settings.lreTileShowUnitRankBackground && character.rank ? ` ${Rank[character.rank]?.toLowerCase()}` : '';
     const showHealTrait =
         settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait['Healer']);
     const showMechanicTrait =
         settings.lreTileShowUnitHealTraits && character.traits && character.traits.includes(Trait['Mechanic']);
-
+    const showShardIcon = settings.lreTileShowUnitIcon && character.name && character.icon;
+    const showRarity = settings.lreTileShowUnitRarity && typeof character.rarity !== 'undefined';
     return (
         <div
             className={'flex-box gap10 full-width ' + rankBackgroundCssClass}
             style={{ columnGap: '10px' }}
             onClick={() => onClick(character)}>
-            {settings.lreTileShowUnitIcon && (
+            {showShardIcon && (
                 <UnitShardIcon
                     key={character.name}
                     icon={character.icon}
@@ -44,9 +43,9 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
                     width={30}
                 />
             )}
-            {settings.lreTileShowUnitRarity && <RarityIcon rarity={character.rarity} />}
+            {showRarity && <RarityIcon rarity={character.rarity} />}
             {settings.lreTileShowUnitRank && <RankIcon key={character.rank} rank={character.rank} />}
-            {settings.lreTileShowUnitName && <span>{character.shortName}</span>}
+            {settings.lreTileShowUnitName && <span>{character.shortName || 'Invalid Unit'}</span>}
             {settings.lreTileShowUnitActiveAbility && <span>A{character.activeAbilityLevel}</span>}
             {settings.lreTileShowUnitPassiveAbility && <span>P{character.passiveAbilityLevel}</span>}
             {showHealTrait && (
