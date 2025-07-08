@@ -89,6 +89,13 @@ export const globalLearnRoutes: RouteObject[] = [
         },
     },
     {
+        path: 'learn/equipment',
+        async lazy() {
+            const { Equipment } = await import('@/fsd/1-pages/learn-equipment');
+            return { Component: Equipment };
+        },
+    },
+    {
         path: 'learn/rankLookup',
         async lazy() {
             const { RankLookup } = await import('@/fsd/1-pages/learn-characters');

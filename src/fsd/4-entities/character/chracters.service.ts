@@ -68,9 +68,9 @@ export class CharactersService {
             armour: rawData.Armour,
             initialRarity: RarityMapper.stringToNumber[rawData['Initial rarity'] as RarityString],
             rarityStars: RarityMapper.toStars[RarityMapper.stringToNumber[rawData['Initial rarity'] as RarityString]],
-            equipment1: rawData.Equipment1 as Equipment,
-            equipment2: rawData.Equipment2 as Equipment,
-            equipment3: rawData.Equipment3 as Equipment,
+            equipment1: CharactersService.parseEquipmentType(rawData.Equipment1),
+            equipment2: CharactersService.parseEquipmentType(rawData.Equipment2),
+            equipment3: CharactersService.parseEquipmentType(rawData.Equipment3),
             meleeHits: rawData['Melee Hits'],
             rangeHits: rawData['Ranged Hits'],
             rangeDistance: rawData.Distance,
@@ -111,6 +111,11 @@ export class CharactersService {
         unitData.icon = isReleased ? unitData.icon : 'comingSoon.webp';
 
         return unitData;
+    }
+
+    public static parseEquipmentType(equip: string): Equipment {
+        const e = equip === 'Defense' ? 'Defensive' : equip;
+        return e as Equipment;
     }
 
     static isAtLeast3DaysBefore(releaseDate: Date): boolean {
