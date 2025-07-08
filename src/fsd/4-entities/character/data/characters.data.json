@@ -2493,5 +2493,31 @@
             "nextEventDate": "01 June",
             "nextEventDateUtc": "Sun, 01 June 2025 00:00:00 GMT"
         }
+    },
+    {
+        "Name": "Atlacoya",
+        "Title": "Vigilator",
+        "Full Name": "Atlacoya",
+        "Short Name": "Atlacoya",
+        "Faction": "Adeptus Custodes",
+        "Alliance": "Imperial",
+        "Health": 1,
+        "Damage": 1,
+        "Armour": 1,
+        "Initial rarity": "Rare",
+        "Melee Damage": "Power",
+        "Melee Hits": 3,
+        "Movement": 3,
+        "Equipment1": "Crit",
+        "Equipment2": "Defensive",
+        "Equipment3": "Crit Booster",
+        "Traits": ["Parry", "Terrifying"],
+        "Active Ability": "Power",
+        "Number": 94,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "atlacoya.webp",
+        "releaseDate": "",
+        "ReleaseRarity": 3
     }
 ]
