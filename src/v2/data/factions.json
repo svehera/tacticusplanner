@@ -110,7 +110,13 @@
     {
         "alliance": "Imperial",
         "name": "Adeptus Custodes",
-        "icon": "_.png",
+        "icon": "Adeptus Custodes.png",
         "color": "#652129"
+    },
+    {
+        "alliance": "Chaos",
+        "name": "Emperor's Children",
+        "icon": "Emperor's Children.png",
+        "color": "#DF6CC5"
     }
 ]

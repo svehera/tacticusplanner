@@ -5,7 +5,7 @@ import React, { useMemo } from 'react';
 import { Equipment, Faction, Rarity } from '@/fsd/5-shared/model';
 import { getImageUrl } from '@/fsd/5-shared/ui';
 
-import { EquipmentService, EquipmentType } from '@/fsd/4-entities/equipment';
+import { EquipmentIcon, EquipmentService, EquipmentType, EquipmentTypeIcon } from '@/fsd/4-entities/equipment';
 
 import { IEquipmentSpec } from './versus-interfaces';
 
@@ -47,17 +47,18 @@ export const EquipmentSelect: React.FC<Props> = ({ faction, equipment, maxRarity
         );
     }, [availableEquipment, equipment]);
 
-    const getIcon = (equipment: IEquipmentSpec) => {
-        if (equipment.equipment == undefined) {
-            return getImageUrl(EquipmentService.getEquipmentTypeIconPath(equipment.type));
-        }
-        return getImageUrl(EquipmentService.getEquipmentIconPath(equipment.equipment));
-    };
-
     const getDisplay = (equipment: IEquipmentSpec) => {
+        if (typeof equipment.equipment === 'undefined') {
+            return (
+                <span>
+                    <EquipmentTypeIcon equipmentType={equipment.type} width={30} height={30} />
+                </span>
+            );
+        }
+
         return (
             <span>
-                <img src={getIcon(equipment)} width={30} height={30} /> {equipment.level ? 'L' : ''}
+                <EquipmentIcon equipment={equipment.equipment} width={30} height={30} /> {equipment.level ? 'L' : ''}
                 {equipment.level}
             </span>
         );

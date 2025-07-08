@@ -2121,8 +2121,8 @@
             "id": 7,
             "finished": true,
             "eventStage": 3,
-            "nextEventDate": "TBA",
-            "nextEventDateUtc": "Sun, 27 April 2025 00:00:00 GMT"
+            "nextEventDate": "",
+            "nextEventDateUtc": ""
         }
     },
     {
@@ -2233,8 +2233,8 @@
             "id": 8,
             "finished": false,
             "eventStage": 3,
-            "nextEventDate": "TBA",
-            "nextEventDateUtc": ""
+            "nextEventDate": "July 6",
+            "nextEventDateUtc": "Sun, 06 July 2025 00:00:00 GMT"
         }
     },
     {
@@ -2489,9 +2489,68 @@
         "lre": {
             "id": 11,
             "finished": false,
-            "eventStage": 1,
-            "nextEventDate": "01 June",
-            "nextEventDateUtc": "Sun, 01 June 2025 00:00:00 GMT"
+            "eventStage": 2,
+            "nextEventDate": "TBA",
+            "nextEventDateUtc": ""
         }
+    },
+    {
+        "Name": "Lucius",
+        "Title": "Champion of Slaanesh",
+        "Full Name": "Lucius the Eternal",
+        "Short Name": "Lucius",
+        "Faction": "Emperor's Children",
+        "Alliance": "Chaos",
+        "Health": 1,
+        "Damage": 1,
+        "Armour": 1,
+        "Initial rarity": "Legendary",
+        "Melee Damage": "Power",
+        "Melee Hits": 6,
+        "Movement": 4,
+        "Equipment1": "Crit",
+        "Equipment2": "Block",
+        "Equipment3": "Crit Booster",
+        "Traits": ["Thrill Seekers", "Parry"],
+        "Active Ability": "Eviscerate",
+        "Number": 93,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "lucius.webp",
+        "releaseDate": "2025-08-10T00:00:00Z",
+        "ReleaseRarity": 6,
+        "lre": {
+            "id": 12,
+            "finished": false,
+            "eventStage": 1,
+            "nextEventDate": "10 August",
+            "nextEventDateUtc": "Sun, 10 August 2025 00:00:00 GMT"
+        }
+    },
+    {
+        "Name": "Atlacoya",
+        "Title": "Vigilator",
+        "Full Name": "Atlacoya",
+        "Short Name": "Atlacoya",
+        "Faction": "Adeptus Custodes",
+        "Alliance": "Imperial",
+        "Health": 1,
+        "Damage": 1,
+        "Armour": 1,
+        "Initial rarity": "Rare",
+        "Melee Damage": "Power",
+        "Melee Hits": 3,
+        "Movement": 3,
+        "Equipment1": "Crit",
+        "Equipment2": "Defense",
+        "Equipment3": "Crit Booster",
+        "Traits": ["Parry", "Terrifying"],
+        "Active Ability": "Power",
+        "Number": 94,
+        "ForcedSummons": false,
+        "RequiredInCampaign": false,
+        "Icon": "atlacoya.webp",
+        "releaseDate": "2025-07-20T00:00:00Z",
+        "ReleaseRarity": 3
     }
 ]

@@ -1,60 +1,60 @@
-﻿{
-    "id": 8,
-    "name": "Mephiston",
-    "wikiLink": "https://tacticus.fandom.com/wiki/LE-Mephiston",
-    "eventStage": 3,
-    "nextEventDate": "July 6",
-    "nextEventDateUtc": "Sun, 06 July 2025 00:00:00 GMT",
+{
+    "id": 12,
+    "name": "Lucius",
+    "wikiLink": "https://tacticus.fandom.com/wiki/Legendary_Character_Events",
+    "eventStage": 1,
+    "nextEventDate": "August 10",
+    "nextEventDateUtc": "Sun, 10 August 2025 00:00:00 GMT",
     "regularMissions": [
-        "Play one Legendary Event Battle, Deal 1000 damage",
-        "Defeat 30 Astra Militarum",
-        "Defeat 75 Death Guard",
-        "Defeat 100 Aeldari",
-        "Use abilities 15 times with Chaos  units, Deal 10k damage with Abilities",
+        "Defeat 5 waves of enemies in any wave-based game mode, Deal 1000 damage",
+        "Defeat 30 Thousand Sons",
+        "Defeat 75 Ultramarines",
+        "Defeat 100 Genestealer Cults",
+        "Use abilities 15 times with Imperial units, Deal 10k damage with Abilities",
         "Use abilities 20 times with Xenos units, Deal 15k damage with Abilities",
-        "Use abilities 25 times with Imperial units, Deal 20k damage with Abilities",
-        "Play 3 Legendary Event Battles, Deal 25k Psychic damage",
-        "Play 3 Legendary Event Battles, Deal 25k Piercing damage",
-        "Play 3 Legendary Event Battles, Deal 25k Power damage"
+        "Use abilities 25 times with Chaos units, Deal 20k damage with Abilities",
+        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Piercing damage",
+        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Power damage",
+        "Defeat 15 waves of enemies in any wave-based game mode, Deal 25k Chain damage"
     ],
     "premiumMissions": [
         "Win 1 battle without Summoning any units",
-        "Defeat 30 enemies with Chaos units",
+        "Defeat 30 enemies with Imperial units",
         "Defeat 75 enemies with Xenos units",
-        "Defeat 100 enemies with Imperial units",
-        "Win 5 battles without deploying any Resilient characters",
+        "Defeat 100 enemies with Chaos units",
+        "Win 5 battles without deploying any Crushing Strike characters",
         "Win 5 battles without deploying any Big Target characters",
-        "Win 5 battles without deploying any Mechanical characters",
-        "Defeat 75 enemies with Psychic Damage",
+        "Win 5 battles without deploying any Heavy Weapon characters",
         "Defeat 75 enemies with Piercing Damage",
-        "Defeat 75 enemies with Power Damage"
+        "Defeat 75 enemies with Power Damage",
+        "Defeat 75 enemies with Chain Damage"
     ],
     "alpha": {
-        "name": "Alpha (No Imperials)",
-        "enemies": {
-            "label": "Astra Militarum",
-            "link": "https://tacticus.fandom.com/wiki/Astra_Militarum#NPC_Units"
-        },
-        "killPoints": 31,
-        "battlesPoints": [34, 37, 48, 45, 45, 46, 40, 47, 48, 55, 51, 51, 53, 58]
-    },
-    "beta": {
-        "name": "Beta (No Chaos)",
-        "enemies": {
-            "label": "Black Legion & Death Guard",
-            "link": "https://tacticus.fandom.com/wiki/Death_Guard#NPC_Units"
-        },
-        "killPoints": 37,
-        "battlesPoints": [31, 37, 45, 49, 49, 51, 38, 46, 51, 35, 42, 45, 49, 48]
-    },
-    "gamma": {
-        "name": "Gamma (Imperial Only)",
+        "name": "Alpha (No Xenos)",
         "enemies": {
             "label": "Aeldari",
             "link": "https://tacticus.fandom.com/wiki/Aeldari#NPC_Units"
         },
-        "killPoints": 34,
-        "battlesPoints": [31, 31, 45, 42, 56, 47, 47, 48, 48, 49, 42, 51, 45, 55]
+        "killPoints": 37,
+        "battlesPoints": [30, 28, 34, 42, 50, 47, 38, 50, 45, 42, 39, 55, 57, 53]
+    },
+    "beta": {
+        "name": "Beta (No Chaos)",
+        "enemies": {
+            "label": "Tyranids",
+            "link": "https://tacticus.fandom.com/wiki/Tyranids#NPC_Units"
+        },
+        "killPoints": 26,
+        "battlesPoints": [31, 35, 46, 52, 51, 52, 50, 49, 53, 54, 45, 54, 58, 59]
+    },
+    "gamma": {
+        "name": "Gamma (No Imperials)",
+        "enemies": {
+            "label": "Ultramarines & Astra Militarum",
+            "link": "https://tacticus.fandom.com/wiki/Ultramarines#NPC_Units"
+        },
+        "killPoints": 32,
+        "battlesPoints": [29, 33, 46, 48, 51, 53, 50, 51, 48, 38, 51, 47, 51, 53]
     },
     "pointsMilestones": [
         {
