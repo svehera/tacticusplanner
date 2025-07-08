@@ -1,4 +1,32 @@
 {
+    "Outrageous Padding": {
+        "material": "Outrageous Padding",
+        "craftable": false,
+        "stat": "Health",
+        "rarity": "Rare",
+        "faction": "Emperor's Children"
+    },
+    "Vox Grill Amplifier": {
+        "material": "Vox Grill Amplifier",
+        "craftable": false,
+        "stat": "Damage",
+        "rarity": "Rare",
+        "faction": "Emperor's Children"
+    },
+    "Lavish Helmet Crest": {
+        "material": "Lavish Helmet Crest",
+        "craftable": false,
+        "stat": "Armour",
+        "rarity": "Rare",
+        "faction": "Emperor's Children"
+    },
+    "Boon of Slaanesh": {
+        "material": "Boon of Slaanesh",
+        "craftable": false,
+        "stat": "Health",
+        "rarity": "Legendary",
+        "faction": "Emperor's Children"
+    },
     "Arcane Genetic Alchemy": {
         "material": "Arcane Genetic Alchemy",
         "craftable": false,
