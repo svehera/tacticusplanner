@@ -2121,8 +2121,8 @@
             "id": 7,
             "finished": true,
             "eventStage": 3,
-            "nextEventDate": "TBA",
-            "nextEventDateUtc": "Sun, 27 April 2025 00:00:00 GMT"
+            "nextEventDate": "",
+            "nextEventDateUtc": ""
         }
     },
     {
@@ -2233,8 +2233,8 @@
             "id": 8,
             "finished": false,
             "eventStage": 3,
-            "nextEventDate": "TBA",
-            "nextEventDateUtc": ""
+            "nextEventDate": "July 6",
+            "nextEventDateUtc": "Sun, 06 July 2025 00:00:00 GMT"
         }
     },
     {
@@ -2489,9 +2489,9 @@
         "lre": {
             "id": 11,
             "finished": false,
-            "eventStage": 1,
-            "nextEventDate": "01 June",
-            "nextEventDateUtc": "Sun, 01 June 2025 00:00:00 GMT"
+            "eventStage": 2,
+            "nextEventDate": "TBA",
+            "nextEventDateUtc": ""
         }
     }
 ]
