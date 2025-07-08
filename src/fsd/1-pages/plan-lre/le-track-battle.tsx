@@ -1,5 +1,5 @@
-import { Checkbox } from '@mui/material';
-import React, { useState } from 'react';
+import { Button, Checkbox } from '@mui/material';
+import React, { useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { ProgressState } from '@/fsd/3-features/lre-progress';
@@ -59,6 +59,16 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, toggleState }) 
         }
     };
 
+    const allCompleted = useMemo((): boolean => {
+        return battle.requirementsProgress.every(req => req.completed);
+    }, [battle]);
+
+    const handleToggleAll = () => {
+        battle.requirementsProgress.forEach(req => {
+            toggleState(req, allCompleted ? ProgressState.none : ProgressState.completed);
+        });
+    };
+
     return (
         <div className="flex-box">
             <span className="bold" style={{ marginInlineEnd: 10, minWidth: 18 }}>
@@ -78,6 +88,9 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, toggleState }) 
                     />
                 ))}
             </div>
+            <Button variant="outlined" onClick={handleToggleAll}>
+                Toggle
+            </Button>
         </div>
     );
 };
