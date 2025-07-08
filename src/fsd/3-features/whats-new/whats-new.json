@@ -1,6 +1,58 @@
 ﻿{
-    "currentVersion": "1.7.4",
+    "currentVersion": "1.7.5",
     "releaseNotes": [
+        {
+            "version": "1.7.5",
+            "date": "July 8",
+            "type": "Update",
+            "new": [
+                {
+                    "text": "(laserian403) Added Emperor's Children faction to the planner",
+                    "subPoints": [
+                        "Added Lucius, the Eternal character with full LRE (Legendary Release Event) support",
+                        "Added Emperor's Children base upgrades and their campaign node locations"
+                    ]
+                },
+                {
+                    "text": "(laserian403) Added Atlacoya character to Adeptus Custodes faction"
+                },
+                {
+                    "text": "(laserian403) Added Learn > Equipment page",
+                    "subPoints": [
+                        "New comprehensive equipment reference page",
+                        "Shows equipment icons and types for better visualization"
+                    ],
+                    "route": "learn/equipment"
+                },
+                {
+                    "text": "(unrstuart) Enhanced LRE planner functionality",
+                    "subPoints": [
+                        "Added ability to toggle individual rows in a track or entire columns",
+                        "Improved user experience for LRE progress tracking"
+                    ]
+                },
+                {
+                    "text": "(laserian403) Updated events calendar with latest images",
+                    "subPoints": [
+                        "Added calendar images for June and July 2025",
+                        "Improved calendar display on home page"
+                    ]
+                }
+            ],
+            "minor": [
+                {
+                    "text": "(laserian403) Added tacticusId for Exorcist MOW to improve API sync compatibility"
+                },
+                {
+                    "text": "(laserian403) Updated LRE dates and stages for current events"
+                }
+            ],
+            "bugFixes": [
+                {
+                    "text": "(laserian403) Fixed LRE crash when invalid characters are selected"
+                }
+            ]
+        },
         {
             "version": "1.7.4",
             "date": "May 24",
