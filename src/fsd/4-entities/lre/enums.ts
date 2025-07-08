@@ -9,4 +9,5 @@ export enum LegendaryEventEnum {
     Patermine = 9,
     Dante = 10,
     Trajann = 11,
+    Lucius = 12,
 }

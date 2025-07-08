@@ -11,12 +11,15 @@ import {
     RagnarLegendaryEvent,
     ShadowSunLegendaryEvent,
     VitruviusLegendaryEvent,
+    LuciusLegendaryEvent,
 } from './model';
 
 export const getLre = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
     switch (id) {
         case LegendaryEventEnum.AunShi:
             return new AunShiLegendaryEvent(characters);
+        case LegendaryEventEnum.Lucius:
+            return new LuciusLegendaryEvent(characters);
         case LegendaryEventEnum.Trajann:
             return new TrajannLegendaryEvent(characters);
         case LegendaryEventEnum.Dante:

@@ -7,3 +7,4 @@ export { MephistonLegendaryEvent } from './6-mephiston.le';
 export { PatermineLegendaryEvent } from './7-patermine.le';
 export { DanteLegendaryEvent } from './8-dante.le';
 export { TrajannLegendaryEvent } from './9-trajann.le';
+export { LuciusLegendaryEvent } from './10-lucius.le';
