@@ -32,24 +32,22 @@ export const UpgradeImage = ({
                         onError={() => setImgError(true)}
                     />
                 ) : (
-                    <AccessibleTooltip title={material}>
-                        <div
-                            style={{
-                                height,
-                                width,
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                fontSize: `clamp(8px, ${width / 4.5}px, 14px)`,
-                                textAlign: 'center',
-                                overflow: 'hidden',
-                                whiteSpace: 'pre-wrap',
-                                wordBreak: 'break-word',
-                                lineHeight: '0.9',
-                            }}>
-                            {material}
-                        </div>
-                    </AccessibleTooltip>
+                    <div
+                        style={{
+                            height,
+                            width,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: `clamp(8px, ${width / 4.5}px, 14px)`,
+                            textAlign: 'center',
+                            overflow: 'hidden',
+                            whiteSpace: 'pre-wrap',
+                            wordBreak: 'break-word',
+                            lineHeight: '0.9',
+                        }}>
+                        {material}
+                    </div>
                 )}
             </div>
         </AccessibleTooltip>
