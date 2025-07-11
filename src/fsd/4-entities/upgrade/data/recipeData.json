@@ -1,4 +1,193 @@
 {
+    "Abhorrent Senses": {
+        "material": "Abhorrent Senses",
+        "faction": "Emperor's Children",
+        "craftable": true,
+        "stat": "Armour",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Boon of Slaanesh",
+                "count": 9
+            },
+            {
+                "material": "Electromantic Cable Bundle",
+                "count": 1
+            },
+            {
+                "material": "Revered Talisman",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ]
+    },
+    "Amplified Senses": {
+        "material": "Amplified Senses",
+        "faction": "Emperor's Children",
+        "craftable": true,
+        "stat": "Damage",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Boon of Slaanesh",
+                "count": 9
+            },
+            {
+                "material": "Advanced Combat Stimms",
+                "count": 1
+            },
+            {
+                "material": "Bionic Neural Pathways",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ]
+    },
+    "Mark of Slaanesh": {
+        "material": "Mark of Slaanesh",
+        "faction": "Emperor's Children",
+        "craftable": true,
+        "stat": "Health",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Boon of Slaanesh",
+                "count": 9
+            },
+            {
+                "material": "Grand Skull Trophy",
+                "count": 1
+            },
+            {
+                "material": "Warp Locus",
+                "count": 6
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ]
+    },
+    "Lavish Helmet Plume": {
+        "material": "Lavish Helmet Plume",
+        "faction": "Emperor's Children",
+        "craftable": true,
+        "stat": "Armour",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Lavish Helmet Spike",
+                "count": 2
+            },
+            {
+                "material": "Mutation: Metallic Skin",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ]
+    },
+    "Lavish Helmet Spike": {
+        "material": "Lavish Helmet Spike",
+        "faction": "Emperor's Children",
+        "craftable": true,
+        "stat": "Armour",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Lavish Helmet Crest",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ]
+    },
+    "Siren Amplifier": {
+        "material": "Siren Amplifier",
+        "faction": "Emperor's Children",
+        "craftable": true,
+        "stat": "Damage",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Sonic Greave Amplifier",
+                "count": 2
+            },
+            {
+                "material": "Murderous Spikes",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ]
+    },
+    "Sonic Greave Amplifier": {
+        "material": "Sonic Greave Amplifier",
+        "faction": "Emperor's Children",
+        "craftable": true,
+        "stat": "Damage",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Vox Grill Amplifier",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ]
+    },
+    "Outrageous Grimace": {
+        "material": "Outrageous Grimace",
+        "faction": "Emperor's Children",
+        "craftable": true,
+        "stat": "Health",
+        "rarity": "Legendary",
+        "recipe": [
+            {
+                "material": "Outrageous Adornment",
+                "count": 2
+            },
+            {
+                "material": "Mutation: Regenerative Blood",
+                "count": 1
+            },
+            {
+                "material": "Gold",
+                "count": 650
+            }
+        ]
+    },
+    "Outrageous Adornment": {
+        "material": "Outrageous Adornment",
+        "faction": "Emperor's Children",
+        "craftable": true,
+        "stat": "Health",
+        "rarity": "Epic",
+        "recipe": [
+            {
+                "material": "Outrageous Padding",
+                "count": 9
+            },
+            {
+                "material": "Gold",
+                "count": 215
+            }
+        ]
+    },
     "Outrageous Padding": {
         "material": "Outrageous Padding",
         "craftable": false,
@@ -147,7 +336,7 @@
                 "count": 2
             },
             {
-                "material": "Exospine",
+                "material": "Greater Reliquary of Protection",
                 "count": 1
             },
             {
@@ -169,7 +358,7 @@
                 "count": 2
             },
             {
-                "material": "Adamantium Sheet",
+                "material": "Grand Purity Seal",
                 "count": 1
             },
             {
@@ -191,11 +380,11 @@
                 "count": 9
             },
             {
-                "material": "Medical Supply Crate",
+                "material": "Powerful Micro-Generator",
                 "count": 1
             },
             {
-                "material": "Duplicate Organ",
+                "material": "Hypermaterial Shifter",
                 "count": 6
             },
             {
@@ -217,11 +406,11 @@
                 "count": 9
             },
             {
-                "material": "Advanced Combat Stimms",
+                "material": "Prey-Sight",
                 "count": 1
             },
             {
-                "material": "Duplicate Organ",
+                "material": "Bionic Neural Pathways",
                 "count": 6
             },
             {
@@ -243,11 +432,11 @@
                 "count": 9
             },
             {
-                "material": "Grand Skull Trophy",
+                "material": "Fine Cloak",
                 "count": 1
             },
             {
-                "material": "Revered Talisman",
+                "material": "Adamantium Sheet",
                 "count": 6
             },
             {
