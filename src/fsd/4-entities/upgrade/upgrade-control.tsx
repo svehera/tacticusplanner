@@ -28,7 +28,7 @@ export const UpgradeControl: React.FC<Props> = ({ upgrade, checked, checkedChang
                         gap: 10,
                         opacity: checked ? 1 : 0.5,
                     }}>
-                    <UpgradeImage material={upgrade.label} iconPath={upgrade.iconPath} rarity={upgrade.rarity} />
+                    <UpgradeImage material={upgrade.label} iconPath={upgrade.iconPath} />
                 </div>
             }
         />

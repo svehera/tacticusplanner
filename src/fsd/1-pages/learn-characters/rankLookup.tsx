@@ -134,7 +134,7 @@ export const RankLookup = () => {
                 <li key={item.id}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                         <span className={Rarity[item.rarity]?.toLowerCase()}>{Rarity[item.rarity]}</span> -{' '}
-                        <UpgradeImage material={item.label} rarity={item.rarity} iconPath={item.iconPath} size={30} /> -{' '}
+                        <UpgradeImage material={item.label} iconPath={item.iconPath} size={30} /> -{' '}
                         <span style={{ fontWeight: 'bold' }}>{item.count}</span>
                     </div>
                     {item.recipe?.length ? renderUpgradesMaterials(item.recipe) : undefined}
@@ -155,7 +155,7 @@ export const RankLookup = () => {
             cellRenderer: (params: ICellRendererParams<IMaterialEstimated2>) => {
                 const { data } = params;
                 if (data) {
-                    return <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />;
+                    return <UpgradeImage material={data.label} iconPath={data.iconPath} />;
                 }
             },
             equals: () => true,
@@ -268,7 +268,7 @@ export const RankLookup = () => {
                     {healthUpgrades.map((x, index) => {
                         return (
                             <div key={x.id + index} onClick={event => handleRecipeClick(event.currentTarget, x)}>
-                                <UpgradeImage material={x.label} iconPath={x.iconPath} rarity={x.rarity} />
+                                <UpgradeImage material={x.label} iconPath={x.iconPath} />
                             </div>
                         );
                     })}
@@ -277,7 +277,7 @@ export const RankLookup = () => {
                     <MiscIcon icon={'damage'} height={30} />
                     {damageUpgrades.map((x, index) => (
                         <div key={x.id + index} onClick={event => handleRecipeClick(event.currentTarget, x)}>
-                            <UpgradeImage material={x.label} iconPath={x.iconPath} rarity={x.rarity} />
+                            <UpgradeImage material={x.label} iconPath={x.iconPath} />
                         </div>
                     ))}
                 </div>
@@ -285,7 +285,7 @@ export const RankLookup = () => {
                     <MiscIcon icon={'armour'} height={30} />
                     {armourUpgrades.map((x, index) => (
                         <div key={x.id + index} onClick={event => handleRecipeClick(event.currentTarget, x)}>
-                            <UpgradeImage material={x.label} iconPath={x.iconPath} rarity={x.rarity} />
+                            <UpgradeImage material={x.label} iconPath={x.iconPath} />
                         </div>
                     ))}
                 </div>
@@ -432,7 +432,6 @@ export const RankLookup = () => {
                                     -{' '}
                                     <UpgradeImage
                                         material={materialRecipe.label}
-                                        rarity={materialRecipe.rarity}
                                         iconPath={materialRecipe.iconPath}
                                         size={30}
                                     />

@@ -142,12 +142,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                             );
                     } else if (reward) {
                         return (
-                            <UpgradeImage
-                                material={savings.battle.reward}
-                                iconPath={reward?.icon ?? ''}
-                                rarity={savings.battle.rarityEnum}
-                                size={30}
-                            />
+                            <UpgradeImage material={savings.battle.reward} iconPath={reward?.icon ?? ''} size={30} />
                         );
                     }
                     return <div></div>;
@@ -277,12 +272,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                             );
                     } else if (reward) {
                         return (
-                            <UpgradeImage
-                                material={savings.battle.reward}
-                                iconPath={reward?.icon ?? ''}
-                                rarity={savings.battle.rarityEnum}
-                                size={30}
-                            />
+                            <UpgradeImage material={savings.battle.reward} iconPath={reward?.icon ?? ''} size={30} />
                         );
                     }
                     return <div></div>;

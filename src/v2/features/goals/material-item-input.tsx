@@ -23,7 +23,6 @@ export const MaterialItemInput: React.FC<Props> = ({ upgradeRaid, acquiredCount,
             <div className="flex-box column">
                 <UpgradeImage
                     material={upgradeRaid.label}
-                    rarity={upgradeRaid.rarity}
                     iconPath={upgradeRaid.iconPath}
                     tooltip={
                         <div>

@@ -43,7 +43,7 @@ export const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate 
     return (
         <div key={data.material} className="flex flex-col max-w-[60px]">
             <div style={{ padding: '0 5px' }}>
-                <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />
+                <UpgradeImage material={data.label} iconPath={data.iconPath} />
             </div>
             <Input
                 style={{ justifyContent: 'center' }}

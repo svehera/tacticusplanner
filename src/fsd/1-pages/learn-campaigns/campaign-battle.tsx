@@ -36,7 +36,7 @@ export const CampaignBattle: React.FC<Props> = ({ battle, scale }) => {
             }
             return (
                 <Tooltip title={upgrade.label}>
-                    <UpgradeImage material={upgrade.label} iconPath={upgrade.iconPath} rarity={upgrade.rarity} />
+                    <UpgradeImage material={upgrade.label} iconPath={upgrade.iconPath} />
                 </Tooltip>
             );
         }

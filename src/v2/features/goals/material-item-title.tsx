@@ -14,11 +14,7 @@ export const MaterialItemTitle: React.FC<Props> = ({ upgradeRaid }) => {
     return (
         <div className="flex-box gap10">
             <div className="flex-box column">
-                <UpgradeImage
-                    material={upgradeRaid.label}
-                    rarity={upgradeRaid.rarity}
-                    iconPath={upgradeRaid.iconPath}
-                />
+                <UpgradeImage material={upgradeRaid.label} iconPath={upgradeRaid.iconPath} />
                 <span>
                     {upgradeRaid.acquiredCount}/{upgradeRaid.requiredCount}
                 </span>
