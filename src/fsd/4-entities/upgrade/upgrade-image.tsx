@@ -1,45 +1,55 @@
-﻿import React from 'react';
+﻿import React, { useState } from 'react';
 
-import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
 
 export const UpgradeImage = ({
     material,
     iconPath,
-    rarity,
     size,
     tooltip,
 }: {
     material: string;
     iconPath: string;
-    rarity?: Rarity;
     size?: number;
     tooltip?: React.ReactNode;
 }) => {
-    try {
-        // const
-        const imagePath = iconPath || material.toLowerCase() + '.png';
-        const image = getImageUrl(`upgrades/${imagePath}`);
+    const [imgError, setImgError] = useState(false);
+    const width = size ?? 50;
+    const height = size ?? 50;
+    const imagePath = iconPath || material.toLowerCase() + '.png';
+    const image = getImageUrl(`upgrades/${imagePath}`);
 
-        return (
-            <AccessibleTooltip title={tooltip ?? material}>
-                <div style={{ width: size ?? 50, height: size ?? 50 }} className={'upgrade'}>
+    return (
+        <AccessibleTooltip title={tooltip ?? material}>
+            <div style={{ width, height }} className={'upgrade'}>
+                {!imgError ? (
                     <img
                         loading={'lazy'}
-                        style={{}}
                         src={image}
-                        height={size ?? 50}
-                        width={size ?? 50}
+                        height={height}
+                        width={width}
                         alt={material}
+                        onError={() => setImgError(true)}
                     />
-                </div>
-            </AccessibleTooltip>
-        );
-    } catch (error) {
-        return (
-            <AccessibleTooltip title={material}>
-                <div>{material}</div>
-            </AccessibleTooltip>
-        );
-    }
+                ) : (
+                    <div
+                        style={{
+                            height,
+                            width,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: `clamp(8px, ${width / 4.5}px, 14px)`,
+                            textAlign: 'center',
+                            overflow: 'hidden',
+                            whiteSpace: 'pre-wrap',
+                            wordBreak: 'break-word',
+                            lineHeight: '0.9',
+                        }}>
+                        {material}
+                    </div>
+                )}
+            </div>
+        </AccessibleTooltip>
+    );
 };

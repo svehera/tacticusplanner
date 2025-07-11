@@ -44,7 +44,7 @@ export const MaterialsTable: React.FC<Props> = ({ rows, updateMaterialQuantity, 
                     cellRenderer: (params: ICellRendererParams<ICharacterUpgradeEstimate>) => {
                         const { data } = params;
                         if (data) {
-                            return <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />;
+                            return <UpgradeImage material={data.label} iconPath={data.iconPath} />;
                         }
                     },
                     valueFormatter: () => {

@@ -94,9 +94,7 @@ export const Campaigns = () => {
                 if (!upgrade) return reward;
 
                 if (upgrade.stat !== 'Shard') {
-                    return (
-                        <UpgradeImage material={upgrade.label} iconPath={upgrade.iconPath} rarity={upgrade.rarity} />
-                    );
+                    return <UpgradeImage material={upgrade.label} iconPath={upgrade.iconPath} />;
                 }
 
                 const char = upgrade.stat === 'Shard' && CharactersService.getUnit(reward);

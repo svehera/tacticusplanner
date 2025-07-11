@@ -251,7 +251,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                                     gap: 10,
                                     paddingBottom: 10,
                                 }}>
-                                <UpgradeImage material={x.label} rarity={x.rarity} iconPath={x.iconPath} />{' '}
+                                <UpgradeImage material={x.label} iconPath={x.iconPath} />{' '}
                                 {inventory.upgrades[x.id] ?? 0} - {inventoryUpdate[x.id]} ={' '}
                                 {(inventory.upgrades[x.id] ?? 0) - inventoryUpdate[x.id] < 0
                                     ? 0

@@ -31,7 +31,7 @@ export const MowUpgradesTable: React.FC<Props> = ({ rows, upgrades }) => {
             cellRenderer: (params: ICellRendererParams<IMowUpgrade>) => {
                 const { data } = params;
                 if (data) {
-                    return <UpgradeImage material={data.label} rarity={data.rarity} iconPath={data.iconPath} />;
+                    return <UpgradeImage material={data.label} iconPath={data.iconPath} />;
                 }
             },
             sortable: false,

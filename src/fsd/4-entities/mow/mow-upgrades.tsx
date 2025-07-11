@@ -55,13 +55,7 @@ export const MowUpgrades: React.FC<Props> = ({ primaryLevel, secondaryLevel, mow
                 <div className="flex items-center">
                     <div className="flex gap-1">
                         {upgrades.map((x, index) => (
-                            <UpgradeImage
-                                key={x.id + index}
-                                material={x.label}
-                                iconPath={x.iconPath}
-                                rarity={x.rarity}
-                                size={40}
-                            />
+                            <UpgradeImage key={x.id + index} material={x.label} iconPath={x.iconPath} size={40} />
                         ))}
                     </div>
                 </div>

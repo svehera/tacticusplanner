@@ -113,8 +113,8 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
                                     gap: 10,
                                     paddingBottom: 10,
                                 }}>
-                                <UpgradeImage material={x.label} rarity={x.rarity} iconPath={x.iconPath} />{' '}
-                                {inventory[x.id] ?? 0} - {inventoryUpdate[x.id]} ={' '}
+                                <UpgradeImage material={x.label} iconPath={x.iconPath} /> {inventory[x.id] ?? 0} -{' '}
+                                {inventoryUpdate[x.id]} ={' '}
                                 {(inventory[x.id] ?? 0) - inventoryUpdate[x.id] < 0
                                     ? 0
                                     : (inventory[x.id] ?? 0) - inventoryUpdate[x.id]}
