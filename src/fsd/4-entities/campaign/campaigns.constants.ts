@@ -233,6 +233,43 @@ export const campaignsList: ICampaignModel[] = [
         groupType: CampaignGroupType.tyranidCE,
         difficulty: CampaignDifficulty.eventChallenge,
     },
+    // T'au Empire Campaign Events
+    {
+        id: Campaign.TAS,
+        name: "T'au Empire Standard",
+        displayName: "T'au Standard",
+        faction: Faction.GenestealerCults,
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.tauCE,
+        difficulty: CampaignDifficulty.eventStandard,
+    },
+    {
+        id: Campaign.TASC,
+        name: "T'au Empire Standard Challenge",
+        displayName: "T'au Standard Challenge",
+        faction: Faction.GenestealerCults,
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.tauCE,
+        difficulty: CampaignDifficulty.eventChallenge,
+    },
+    {
+        id: Campaign.TAE,
+        name: "T'au Empire Extremis",
+        displayName: "T'au Extremis",
+        faction: Faction.GenestealerCults,
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.tauCE,
+        difficulty: CampaignDifficulty.eventExtremis,
+    },
+    {
+        id: Campaign.TAEC,
+        name: "T'au Empire Extremis Challenge",
+        displayName: "T'au Extremis Challenge",
+        faction: Faction.GenestealerCults,
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.tauCE,
+        difficulty: CampaignDifficulty.eventChallenge,
+    },
 ];
 
 export const campaignsByGroup: Record<string, Campaign[]> = mapValues(groupBy(campaignsList, 'groupType'), value =>

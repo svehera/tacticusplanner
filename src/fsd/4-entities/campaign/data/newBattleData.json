@@ -27436,5 +27436,629 @@
         "expectedGold": 53,
         "enemiesTotal": 12,
         "enemiesTypes": []
+    },
+    "TAS1": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 1,
+        "reward": "Nano Swarm",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": ["Hormagaunt"]
+    },
+    "TAS2": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 2,
+        "reward": "Canister of Chemicals",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 3,
+        "enemiesTypes": ["Hormagaunt"]
+    },
+    "TAS3": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 3,
+        "reward": "Sophisticated Material",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": ["Hormagaunt", "Termagaunt"]
+    },
+    "TAS4": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 4,
+        "reward": "Mutation: Warped Muscles",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 5,
+        "enemiesTypes": []
+    },
+    "TAS5": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 5,
+        "reward": "Otherworldly Energy",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAS6": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 6,
+        "reward": "Deathleaper",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TAS7": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 7,
+        "reward": "Mutation: Tough Skin",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TAS8": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 8,
+        "reward": "Field Ration",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TAS9": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 9,
+        "reward": "Nasty Spikes",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAS10": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 10,
+        "reward": "Adrenal Glands",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAS11": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 11,
+        "reward": "Winged Tyrant Prime",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "enemiesTypes": []
+    },
+    "TAS12": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 12,
+        "reward": "Pile of Salvage",
+        "expectedGold": 53,
+        "enemiesTotal": 5,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAS13": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 13,
+        "reward": "Enriched Rations",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAS14": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 14,
+        "reward": "Combat Stimms",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAS15": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 15,
+        "reward": "Air Purificator",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAS16": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 16,
+        "reward": "Toxin Sacs",
+        "expectedGold": 53,
+        "enemiesTotal": 4,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAS17": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 17,
+        "reward": "Neurothrope",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": []
+    },
+    "TAS18": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 18,
+        "reward": "Slicing Claws",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": []
+    },
+    "TAS19": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 19,
+        "reward": "Mission Objective",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TAS20": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 20,
+        "reward": "Mutation: Scaly Skin",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "enemiesTypes": []
+    },
+    "TAS21": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 21,
+        "reward": "Reinforced Chitin",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TAS22": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 22,
+        "reward": "PoM",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TAS23": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 23,
+        "reward": "Mutation: Warped Lungs",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TAS24": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 24,
+        "reward": "Barrel of Promethium",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TAS25": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 25,
+        "reward": "Box of Salvage",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TAS26": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 26,
+        "reward": "Battle Scar",
+        "expectedGold": 53,
+        "enemiesTotal": 11,
+        "enemiesTypes": []
+    },
+    "TAS27": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 27,
+        "reward": "Classified Data-Slate",
+        "expectedGold": 53,
+        "enemiesTotal": 5,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TAS28": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 28,
+        "reward": "Subdermal Plating",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TAS29": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 29,
+        "reward": "Synaptic Augmentation",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "enemiesTypes": []
+    },
+    "TAS30": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 30,
+        "reward": "Tyrant Guard",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": []
+    },
+    "TAE1": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 1,
+        "reward": "Nano Swarm",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAE2": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 2,
+        "reward": "Canister of Chemicals",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAE3": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 3,
+        "reward": "Sophisticated Material",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TAE4": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 4,
+        "reward": "Mutation: Warped Muscles",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAE5": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 5,
+        "reward": "Otherworldly Energy",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAE6": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 6,
+        "reward": "Deathleaper",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TAE7": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 7,
+        "reward": "Mutation: Tough Skin",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TAE8": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 8,
+        "reward": "Field Ration",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAE9": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 9,
+        "reward": "Nasty Spikes",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAE10": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 10,
+        "reward": "Adrenal Glands",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TAE11": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 11,
+        "reward": "Winged Tyrant Prime",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TAE12": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 12,
+        "reward": "Pile of Salvage",
+        "expectedGold": 53,
+        "enemiesTotal": 5,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TAE13": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 13,
+        "reward": "Enriched Rations",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAE14": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 14,
+        "reward": "Combat Stimms",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": []
+    },
+    "TAE15": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 15,
+        "reward": "Air Purificator",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TAE16": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 16,
+        "reward": "Toxin Sacs",
+        "expectedGold": 53,
+        "enemiesTotal": 5,
+        "slots": 3,
+        "enemiesTypes": []
+    },
+    "TAE17": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 17,
+        "reward": "Neurothrope",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": []
+    },
+    "TAE18": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 18,
+        "reward": "Slicing Claws",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAE19": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 19,
+        "reward": "Mission Objective",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": []
+    },
+    "TAE20": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 20,
+        "reward": "Mutation: Scaly Skin",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAE21": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 21,
+        "reward": "Reinforced Chitin",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": []
+    },
+    "TAE22": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 22,
+        "reward": "PoM",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TAE23": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 23,
+        "reward": "Mutation: Warped Lungs",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TAE24": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 24,
+        "reward": "Barrel of Promethium",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 4,
+        "enemiesTypes": []
+    },
+    "TAE25": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 25,
+        "reward": "Box of Salvage",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": []
+    },
+    "TAE26": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 26,
+        "reward": "Battle Scar",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TAE27": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 27,
+        "reward": "Classified Data-Slate",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TAE28": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 28,
+        "reward": "Subdermal Plating",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": []
+    },
+    "TAE29": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 29,
+        "reward": "Synaptic Augmentation",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TAE30": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 30,
+        "reward": "Tyrant Guard",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "enemiesTypes": []
+    },
+    "TASC1": {
+        "campaign": "T'au Empire Standard Challenge",
+        "campaignType": "Normal",
+        "nodeNumber": 1,
+        "reward": "Mutation: Warped Heart",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TASC2": {
+        "campaign": "T'au Empire Standard Challenge",
+        "campaignType": "Normal",
+        "nodeNumber": 2,
+        "reward": "Weathering",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": []
+    },
+    "TASC3": {
+        "campaign": "T'au Empire Standard Challenge",
+        "campaignType": "Normal",
+        "nodeNumber": 3,
+        "reward": "Warp Locus",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "enemiesTypes": []
+    },
+    "TAEC1": {
+        "campaign": "T'au Empire Extremis Challenge",
+        "campaignType": "Extremis",
+        "nodeNumber": 1,
+        "reward": "Duplicate Organ",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "enemiesTypes": []
+    },
+    "TAEC2": {
+        "campaign": "T'au Empire Extremis Challenge",
+        "campaignType": "Extremis",
+        "nodeNumber": 2,
+        "reward": "Psyk-Conductive Material",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "enemiesTypes": []
+    },
+    "TAEC3": {
+        "campaign": "T'au Empire Extremis Challenge",
+        "campaignType": "Extremis",
+        "nodeNumber": 3,
+        "reward": "Psychic Force Conduit",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "enemiesTypes": []
     }
 }
