@@ -1,7 +1,7 @@
 {
     "id": 10,
     "name": "Dante",
-    "wikiLink": "https://tacticus.fandom.com/wiki/LE-Dante",
+    "wikiLink": "https://tacticus.wiki.gg/wiki/LE-Dante",
     "eventStage": 1,
     "nextEventDate": "March 23",
     "nextEventDateUtc": "Sun, 23 March 2025 00:00:00 GMT",
@@ -33,7 +33,7 @@
         "name": "Alpha (No Xenos)",
         "enemies": {
             "label": "Necrons",
-            "link": "https://tacticus.fandom.com/wiki/Necrons#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Necrons#NPC_Units"
         },
         "killPoints": 40,
         "battlesPoints": [27, 32, 38, 41, 40, 43, 42, 50, 44, 40, 47, 48, 59, 44]
@@ -42,7 +42,7 @@
         "name": "Beta (No Chaos)",
         "enemies": {
             "label": "Black Legion",
-            "link": "https://tacticus.fandom.com/wiki/Black_Legion#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Black_Legion#NPC_Units"
         },
         "killPoints": 26,
         "battlesPoints": [36, 44, 42, 45, 45, 46, 58, 50, 64, 42, 49, 51, 54, 67]
@@ -51,7 +51,7 @@
         "name": "Gamma (No Imperial)",
         "enemies": {
             "label": "Astra Militarum/Blood Angels",
-            "link": "https://tacticus.fandom.com/wiki/Astra_Militarum#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Astra_Militarum#NPC_Units"
         },
         "killPoints": 28,
         "battlesPoints": [39, 36, 44, 50, 47, 44, 48, 52, 48, 48, 50, 56, 56, 61]
