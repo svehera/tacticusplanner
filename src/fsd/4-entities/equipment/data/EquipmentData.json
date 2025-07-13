@@ -166,7 +166,7 @@
         "displayName": "Ceremonial Knife",
         "rarity": "Common",
         "chance": 25,
-        "factions": ["Astra Militarum", "Aeldari", "T'au Empire", "Thousand Sons"],
+        "factions": ["Astra Militarum", "Aeldari", "T'au Empire", "Thousand Sons", "Adeptus Custodes"],
         "boost1": [18, 27, 41],
         "boost2": []
     },
@@ -177,7 +177,7 @@
         "displayName": "Fine Ceremonial Knife",
         "rarity": "Uncommon",
         "chance": 25,
-        "factions": ["Astra Militarum", "Aeldari", "T'au Empire", "Thousand Sons"],
+        "factions": ["Astra Militarum", "Aeldari", "T'au Empire", "Thousand Sons", "Adeptus Custodes"],
         "boost1": [41, 52, 65, 84, 102],
         "boost2": []
     },
@@ -188,7 +188,7 @@
         "displayName": "Adorned Ceremonial Knife",
         "rarity": "Rare",
         "chance": 25,
-        "factions": ["Astra Militarum", "Aeldari", "T'au Empire", "Thousand Sons"],
+        "factions": ["Astra Militarum", "Aeldari", "T'au Empire", "Thousand Sons", "Adeptus Custodes"],
         "boost1": [92, 111, 129, 147, 168, 196, 252],
         "boost2": []
     },
@@ -199,7 +199,7 @@
         "displayName": "Ancient Ceremonial Knife",
         "rarity": "Epic",
         "chance": 25,
-        "factions": ["Astra Militarum", "Aeldari", "T'au Empire", "Thousand Sons"],
+        "factions": ["Astra Militarum", "Aeldari", "T'au Empire", "Thousand Sons", "Adeptus Custodes"],
         "boost1": [195, 252, 308, 364, 421, 477, 540, 687, 835],
         "boost2": []
     },
@@ -210,7 +210,7 @@
         "displayName": "Relic Ceremonial Knife",
         "rarity": "Legendary",
         "chance": 25,
-        "factions": ["Astra Militarum", "Aeldari", "T'au Empire", "Thousand Sons"],
+        "factions": ["Astra Militarum", "Aeldari", "T'au Empire", "Thousand Sons", "Adeptus Custodes"],
         "boost1": [480, 544, 692, 841, 915, 990, 1064, 1139, 1213, 1287, 1446],
         "boost2": []
     },
@@ -593,6 +593,7 @@
             "World Eaters",
             "Blood Angels",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [15, 20, 34],
@@ -624,6 +625,7 @@
             "World Eaters",
             "Blood Angels",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [34, 43, 54, 70, 85],
@@ -655,6 +657,7 @@
             "World Eaters",
             "Blood Angels",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [77, 93, 108, 123, 141, 164, 211],
@@ -686,6 +689,7 @@
             "World Eaters",
             "Blood Angels",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [165, 213, 261, 308, 356, 404, 457, 582, 707],
@@ -717,6 +721,7 @@
             "World Eaters",
             "Blood Angels",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [400, 453, 577, 701, 763, 825, 887, 949, 1011, 1073, 1205],
@@ -748,6 +753,7 @@
             "Adeptus Mechanicus",
             "World Eaters",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [5, 8, 12],
@@ -779,6 +785,7 @@
             "Adeptus Mechanicus",
             "World Eaters",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [11, 14, 18, 23, 28],
@@ -810,6 +817,7 @@
             "Adeptus Mechanicus",
             "World Eaters",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [25, 30, 35, 40, 46, 54, 69],
@@ -841,6 +849,7 @@
             "Adeptus Mechanicus",
             "World Eaters",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [48, 62, 76, 90, 104, 118, 133, 170, 206],
@@ -872,6 +881,7 @@
             "Adeptus Mechanicus",
             "World Eaters",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [110, 125, 159, 193, 210, 227, 244, 261, 278, 295, 332],
@@ -892,7 +902,8 @@
             "Space Wolves",
             "Dark Angels",
             "Adeptus Mechanicus",
-            "Blood Angels"
+            "Blood Angels",
+            "Adeptus Custodes"
         ],
         "boost1": [5, 8, 12],
         "boost2": []
@@ -912,7 +923,8 @@
             "Space Wolves",
             "Dark Angels",
             "Adeptus Mechanicus",
-            "Blood Angels"
+            "Blood Angels",
+            "Adeptus Custodes"
         ],
         "boost1": [11, 14, 18, 23, 28],
         "boost2": []
@@ -932,7 +944,8 @@
             "Space Wolves",
             "Dark Angels",
             "Adeptus Mechanicus",
-            "Blood Angels"
+            "Blood Angels",
+            "Adeptus Custodes"
         ],
         "boost1": [25, 30, 35, 40, 46, 54, 69],
         "boost2": []
@@ -952,7 +965,8 @@
             "Space Wolves",
             "Dark Angels",
             "Adeptus Mechanicus",
-            "Blood Angels"
+            "Blood Angels",
+            "Adeptus Custodes"
         ],
         "boost1": [48, 62, 76, 90, 104, 118, 133, 170, 206],
         "boost2": []
@@ -972,7 +986,8 @@
             "Space Wolves",
             "Dark Angels",
             "Adeptus Mechanicus",
-            "Blood Angels"
+            "Blood Angels",
+            "Adeptus Custodes"
         ],
         "boost1": [110, 125, 159, 193, 210, 227, 244, 261, 278, 295, 332],
         "boost2": []
@@ -1226,7 +1241,7 @@
         "displayName": "Mantle",
         "rarity": "Common",
         "chance": 0,
-        "factions": ["Adepta Sororitas", "Astra Militarum", "Aeldari", "Adeptus Mechanicus"],
+        "factions": ["Adepta Sororitas", "Astra Militarum", "Aeldari", "Adeptus Mechanicus", "Adeptus Custodes"],
         "boost1": [7, 11, 16],
         "boost2": [4, 6, 10]
     },
@@ -1237,7 +1252,7 @@
         "displayName": "Fine Mantle",
         "rarity": "Uncommon",
         "chance": 0,
-        "factions": ["Adepta Sororitas", "Astra Militarum", "Aeldari", "Adeptus Mechanicus"],
+        "factions": ["Adepta Sororitas", "Astra Militarum", "Aeldari", "Adeptus Mechanicus", "Adeptus Custodes"],
         "boost1": [16, 21, 26, 33, 50],
         "boost2": [9, 12, 15, 19, 23]
     },
@@ -1248,7 +1263,7 @@
         "displayName": "Ceremonial Mantle",
         "rarity": "Rare",
         "chance": 0,
-        "factions": ["Adepta Sororitas", "Astra Militarum", "Aeldari", "Adeptus Mechanicus"],
+        "factions": ["Adepta Sororitas", "Astra Militarum", "Aeldari", "Adeptus Mechanicus", "Adeptus Custodes"],
         "boost1": [38, 46, 54, 61, 70, 81, 104],
         "boost2": [20, 24, 28, 32, 37, 43, 55]
     },
@@ -1259,7 +1274,7 @@
         "displayName": "Highly Decorated Mantle",
         "rarity": "Epic",
         "chance": 0,
-        "factions": ["Adepta Sororitas", "Astra Militarum", "Aeldari", "Adeptus Mechanicus"],
+        "factions": ["Adepta Sororitas", "Astra Militarum", "Aeldari", "Adeptus Mechanicus", "Adeptus Custodes"],
         "boost1": [77, 100, 122, 144, 166, 189, 213, 272, 330],
         "boost2": [43, 56, 68, 81, 93, 106, 119, 152, 185]
     },
@@ -1270,7 +1285,7 @@
         "displayName": "Divine Mantle",
         "rarity": "Legendary",
         "chance": 0,
-        "factions": ["Adepta Sororitas", "Astra Militarum", "Aeldari", "Adeptus Mechanicus"],
+        "factions": ["Adepta Sororitas", "Astra Militarum", "Aeldari", "Adeptus Mechanicus", "Adeptus Custodes"],
         "boost1": [188, 213, 271, 330, 359, 388, 417, 446, 475, 504, 567],
         "boost2": [105, 119, 152, 184, 201, 217, 233, 249, 266, 282, 317]
     },
@@ -1464,6 +1479,7 @@
             "World Eaters",
             "Blood Angels",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [],
@@ -1494,6 +1510,7 @@
             "World Eaters",
             "Blood Angels",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [],
@@ -1524,6 +1541,7 @@
             "World Eaters",
             "Blood Angels",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [],
@@ -1554,6 +1572,7 @@
             "World Eaters",
             "Blood Angels",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [],
@@ -1584,6 +1603,7 @@
             "World Eaters",
             "Blood Angels",
             "Genestealer Cults",
+            "Adeptus Custodes",
             "Emperor's Children"
         ],
         "boost1": [],
@@ -1706,7 +1726,7 @@
         "displayName": "Refractor Shield",
         "rarity": "Common",
         "chance": 20,
-        "factions": ["Adepta Sororitas", "Astra Militarum", "Adeptus Mechanicus"],
+        "factions": ["Adepta Sororitas", "Astra Militarum", "Adeptus Mechanicus", "Adeptus Custodes"],
         "boost1": [23, 35, 53],
         "boost2": []
     },
@@ -1717,7 +1737,7 @@
         "displayName": "Blessed Refractor Shield",
         "rarity": "Uncommon",
         "chance": 20,
-        "factions": ["Adepta Sororitas", "Astra Militarum", "Adeptus Mechanicus"],
+        "factions": ["Adepta Sororitas", "Astra Militarum", "Adeptus Mechanicus", "Adeptus Custodes"],
         "boost1": [51, 65, 81, 104, 127],
         "boost2": []
     },
@@ -1728,7 +1748,7 @@
         "displayName": "Sanctified Field",
         "rarity": "Rare",
         "chance": 20,
-        "factions": ["Adepta Sororitas", "Astra Militarum", "World Eaters"],
+        "factions": ["Adepta Sororitas", "Astra Militarum", "World Eaters", "Adeptus Custodes"],
         "boost1": [115, 138, 161, 184, 210, 244, 315],
         "boost2": []
     },
@@ -1739,7 +1759,7 @@
         "displayName": "Master-Crafted Refractor Field",
         "rarity": "Epic",
         "chance": 20,
-        "factions": ["Adepta Sororitas", "Astra Militarum", "Adeptus Mechanicus"],
+        "factions": ["Adepta Sororitas", "Astra Militarum", "Adeptus Mechanicus", "Adeptus Custodes"],
         "boost1": [245, 316, 387, 458, 529, 599, 678, 873, 1049],
         "boost2": []
     },
@@ -1750,7 +1770,7 @@
         "displayName": "Relic Refractor Field",
         "rarity": "Legendary",
         "chance": 20,
-        "factions": ["Adepta Sororitas", "Astra Militarum", "Adeptus Mechanicus"],
+        "factions": ["Adepta Sororitas", "Astra Militarum", "Adeptus Mechanicus", "Adeptus Custodes"],
         "boost1": [600, 679, 865, 1051, 1144, 1237, 1330, 1423, 1516, 1609, 1807],
         "boost2": []
     },

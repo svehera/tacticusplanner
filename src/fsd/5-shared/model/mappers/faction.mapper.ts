@@ -39,6 +39,10 @@ export function parseFaction(faction: string): Faction | undefined {
             return Faction.ADEPTA_SORORITAS;
         case 'Space Wolves':
             return Faction.Space_Wolves;
+        case 'Adeptus Custodes':
+            return Faction.AdeptusCustodes;
+        case "Emperor's Children":
+            return Faction.EmperorsChildren;
         default:
             return undefined;
     }
