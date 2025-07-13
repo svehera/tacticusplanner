@@ -16,7 +16,7 @@ export const UpgradeImage = ({
     const [imgError, setImgError] = useState(false);
     const width = size ?? 50;
     const height = size ?? 50;
-    const imagePath = iconPath || material?.toLowerCase() + '.png';
+    const imagePath = iconPath || material.toLowerCase() + '.png';
     const image = getImageUrl(`upgrades/${imagePath}`);
 
     return (
