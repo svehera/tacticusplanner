@@ -1427,6 +1427,7 @@
         "Melee Hits": 3,
         "Ranged Damage": "Psychic",
         "Ranged Hits": 2,
+        "Distance": 2,
         "Movement": 2,
         "Equipment1": "Crit",
         "Equipment2": "Block",
