@@ -1748,7 +1748,7 @@
         "displayName": "Sanctified Field",
         "rarity": "Rare",
         "chance": 20,
-        "factions": ["Adepta Sororitas", "Astra Militarum", "World Eaters", "Adeptus Custodes"],
+        "factions": ["Adepta Sororitas", "Astra Militarum", "Adeptus Mechanicus", "Adeptus Custodes"],
         "boost1": [115, 138, 161, 184, 210, 244, 315],
         "boost2": []
     },
