@@ -1,7 +1,7 @@
 ﻿{
     "id": 8,
     "name": "Mephiston",
-    "wikiLink": "https://tacticus.fandom.com/wiki/LE-Mephiston",
+    "wikiLink": "https://tacticus.wiki.gg/wiki/LE-Mephiston",
     "eventStage": 3,
     "nextEventDate": "Finished",
     "regularMissions": [
@@ -32,7 +32,7 @@
         "name": "Alpha (No Imperials)",
         "enemies": {
             "label": "Astra Militarum",
-            "link": "https://tacticus.fandom.com/wiki/Astra_Militarum#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Astra_Militarum#NPC_Units"
         },
         "killPoints": 31,
         "battlesPoints": [34, 37, 48, 45, 45, 46, 40, 47, 48, 55, 51, 51, 53, 58]
@@ -41,7 +41,7 @@
         "name": "Beta (No Chaos)",
         "enemies": {
             "label": "Black Legion & Death Guard",
-            "link": "https://tacticus.fandom.com/wiki/Death_Guard#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Death_Guard#NPC_Units"
         },
         "killPoints": 37,
         "battlesPoints": [31, 37, 45, 49, 49, 51, 38, 46, 51, 35, 42, 45, 49, 48]
@@ -50,7 +50,7 @@
         "name": "Gamma (Imperial Only)",
         "enemies": {
             "label": "Aeldari",
-            "link": "https://tacticus.fandom.com/wiki/Aeldari#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Aeldari#NPC_Units"
         },
         "killPoints": 34,
         "battlesPoints": [31, 31, 45, 42, 56, 47, 47, 48, 48, 49, 42, 51, 45, 55]
