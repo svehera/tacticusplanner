@@ -407,7 +407,7 @@ export class UpgradesService {
             if (!upgrade || !upgrade.recipe?.length) {
                 const item: IMaterialRecipeIngredientFull = {
                     id: materialId,
-                    label: upgrade?.label ?? upgrade?.material,
+                    label: upgrade?.label ?? upgrade?.material ?? materialId,
                     count,
                     rarity: RarityMapper.stringToNumber[upgrade?.rarity as RarityString],
                     stat: upgrade?.stat ?? '',

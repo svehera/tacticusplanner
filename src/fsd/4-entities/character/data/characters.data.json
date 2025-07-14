@@ -1427,6 +1427,7 @@
         "Melee Hits": 3,
         "Ranged Damage": "Psychic",
         "Ranged Hits": 2,
+        "Distance": 2,
         "Movement": 2,
         "Equipment1": "Crit",
         "Equipment2": "Block",
@@ -2231,10 +2232,10 @@
         "releaseDate": "2024-08-25T00:00:00Z",
         "lre": {
             "id": 8,
-            "finished": false,
+            "finished": true,
             "eventStage": 3,
-            "nextEventDate": "July 6",
-            "nextEventDateUtc": "Sun, 06 July 2025 00:00:00 GMT"
+            "nextEventDate": "",
+            "nextEventDateUtc": ""
         }
     },
     {
