@@ -12788,5 +12788,143 @@
             "Adamantine Thread Cloak",
             "Superaugmented Defences"
         ]
+    },
+    "Atlacoya": {
+        "Stone I": [
+            "Ropes and Chains",
+            "The Iron Phoenix",
+            "Auspex",
+            "Weapon Anointment Oils",
+            "Armor Trim",
+            "Sophisticated Material"
+        ],
+        "Stone II": [
+            "Chip Damage",
+            "Minor Bionic Enhancement",
+            "Fine Micro-Generator",
+            "Blessed Weapon Oils",
+            "Purity Seal",
+            "Rebreather"
+        ],
+        "Stone III": [
+            "Helmet Trophy",
+            "Bionic Enhancement",
+            "Vox-Caster",
+            "Can of Promethium",
+            "Blessed Tasset Plate",
+            "Cloak"
+        ],
+        "Iron I": [
+            "Holster and Pockets",
+            "Reliquary of Protection",
+            "Fine Micro-Generator",
+            "Barrel of Promethium",
+            "Oath Seal",
+            "Sophisticated Material Ingot"
+        ],
+        "Iron II": [
+            "Helmet Trophy",
+            "Sanctified Reliquary of Protection",
+            "Adamantium Blades",
+            "Divinator Class Auspex",
+            "Artificer Tasset Plate",
+            "Cloak"
+        ],
+        "Iron III": [
+            "Grand Skull Trophy",
+            "The Gold Phoenix",
+            "Integrated Bolt Feeder",
+            "Advanced Combat Stimms",
+            "Adamantium Lump",
+            "Valuable Fabric"
+        ],
+        "Bronze I": [
+            "Flawless Terran Gem",
+            "The Phoenix Ascendant",
+            "Prey-Sight",
+            "Tank of Promethium",
+            "Blessed Purity Seal",
+            "Sophisticated Material Bar"
+        ],
+        "Bronze II": [
+            "Flawless Gem Embellishment",
+            "Advanced Bionics",
+            "Classified Data-Slate",
+            "Belt of Krak Grenades",
+            "Auramite Wing",
+            "Fine Cloak"
+        ],
+        "Bronze III": [
+            "The Phoenix Ascendant",
+            "Mars-Pattern Bionics",
+            "Embellished Bolt Feeder",
+            "Sanctified Weapon Oils",
+            "Auramite Wing Embellishment",
+            "Revered Talisman"
+        ],
+        "Silver I": [
+            "Flawless Gem Embellishment",
+            "Secret Agenda",
+            "Embellished Bolt Feeder",
+            "Warp Locus",
+            "Auramite Wing Embellishment",
+            "Sophisticated Material Sheet"
+        ],
+        "Silver II": [
+            "Arcane Genetic Alchemy",
+            "Greater Reliquary of Protection",
+            "Adorned Bolt Feeder",
+            "Belt of Krak Grenades",
+            "Auramite Wing Embellishment",
+            "Decorated Cloak"
+        ],
+        "Silver III": [
+            "Flawless Gem Embellishment",
+            "Legendary Reliquary of Protection",
+            "Embellished Bolt Feeder",
+            "Digital Weapons",
+            "Psyk-Conductive Material",
+            "Sophisticated Material Plates"
+        ],
+        "Gold I": [
+            "Flawless Gem Adornment",
+            "Relic Bionic Enhancement",
+            "Psychic Force Conduit",
+            "Blessed Promethium Tank",
+            "Auramite Wing Adornment",
+            "Divine Cloak"
+        ],
+        "Gold II": [
+            "Defensor Refractor Generator",
+            "Legendary Reliquary of Protection",
+            "Adorned Bolt Feeder",
+            "Digital Weapons",
+            "Auramite Wing Adornment",
+            "Seal of the Emperor's Protection"
+        ],
+        "Gold III": [
+            "Flawless Gem Adornment",
+            "Grandiose Skull Ornament",
+            "Panoptispex",
+            "Powered Blade",
+            "Adamantine Thread Cloak",
+            "Divine Cloak"
+        ],
+        "Diamond I": [
+            "Defensor Refractor Generator",
+            "Grandiose Skull Ornament",
+            "Panoptispex",
+            "Relic Micro-Generator",
+            "Adamantine Thread Cloak",
+            "Sophisticated Material Plates"
+        ],
+        "Diamond II": [
+            "Defensor Refractor Generator",
+            "Superaugmented Constitution",
+            "Panoptispex",
+            "Superaugmented Strength",
+            "Adamantine Thread Cloak",
+            "Superaugmented Defences"
+        ]
     }
 }
