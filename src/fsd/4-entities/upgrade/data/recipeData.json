@@ -7953,5 +7953,40 @@
         "stat": "Shard",
         "faction": "Tyranids",
         "rarity": "Shard"
+    },
+    "Re'Vas": {
+        "material": "Re'Vas",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Tau Empire",
+        "rarity": "Shard"
+    },
+    "Sho'Syl": {
+        "material": "Sho'Syl",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Tau Empire",
+        "rarity": "Shard"
+    },
+    "Shadowsun": {
+        "material": "Shadowsun",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Tau Empire",
+        "rarity": "Shard"
+    },
+    "Darkstrider": {
+        "material": "Darkstrider",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Tau Empire",
+        "rarity": "Shard"
+    },
+    "Aun'Shi": {
+        "material": "Aun'Shi",
+        "craftable": false,
+        "stat": "Shard",
+        "faction": "Tau Empire",
+        "rarity": "Shard"
     }
 }
