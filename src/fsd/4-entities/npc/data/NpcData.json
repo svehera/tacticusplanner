@@ -644,9 +644,9 @@
             "rangeHits": 4,
             "rangeType": "Pulse",
             "range": 2,
-            "health": 1,
-            "damage": 1,
-            "armor": 1,
+            "health": 256,
+            "damage": 144,
+            "armor": 29,
             "traits": ["Camouflage", "Close Combat Weakness", "Flying", "Infiltrate"],
             "activeAbilities": ["Forward Observers", "Wall of Mirrors"],
             "passiveAbilities": []
