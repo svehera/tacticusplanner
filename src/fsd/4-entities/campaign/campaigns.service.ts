@@ -379,6 +379,21 @@ export class CampaignsService {
                     },
                 };
             }
+            case Campaign.TAS:
+            case Campaign.TASC:
+            case Campaign.TAE:
+            case Campaign.TAEC: {
+                return {
+                    enemies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.T_Au, Faction.Astra_militarum],
+                    },
+                    allies: {
+                        alliance: Alliance.Xenos,
+                        factions: [Faction.GenestealerCults, Faction.Tyranids],
+                    },
+                };
+            }
             default: {
                 return {
                     enemies: {

@@ -1427,6 +1427,7 @@
         "Melee Hits": 3,
         "Ranged Damage": "Psychic",
         "Ranged Hits": 2,
+        "Distance": 2,
         "Movement": 2,
         "Equipment1": "Crit",
         "Equipment2": "Block",
@@ -2231,10 +2232,10 @@
         "releaseDate": "2024-08-25T00:00:00Z",
         "lre": {
             "id": 8,
-            "finished": false,
+            "finished": true,
             "eventStage": 3,
-            "nextEventDate": "July 6",
-            "nextEventDateUtc": "Sun, 06 July 2025 00:00:00 GMT"
+            "nextEventDate": "",
+            "nextEventDateUtc": ""
         }
     },
     {
@@ -2291,7 +2292,8 @@
         "Traits": ["Ambush", "Healer"],
         "Number": 81,
         "ForcedSummons": false,
-        "RequiredInCampaign": false,
+        "RequiredInCampaign": true,
+        "CampaignsRequiredIn": ["T'au Empire"],
         "Icon": "hollan.webp",
         "releaseDate": "2024-11-17T00:00:00Z"
     },
@@ -2318,7 +2320,8 @@
         "Traits": ["Ambush", "Psyker"],
         "Number": 79,
         "ForcedSummons": true,
-        "RequiredInCampaign": false,
+        "RequiredInCampaign": true,
+        "CampaignsRequiredIn": ["T'au Empire"],
         "Icon": "xybia.webp",
         "releaseDate": "2024-10-13T00:00:00Z"
     },
@@ -2372,7 +2375,8 @@
         "Traits": ["Ambush", "Beast Slayer"],
         "Number": 87,
         "ForcedSummons": false,
-        "RequiredInCampaign": false,
+        "RequiredInCampaign": true,
+        "CampaignsRequiredIn": ["T'au Empire"],
         "Icon": "judh.webp"
     },
     {
@@ -2534,9 +2538,9 @@
         "Short Name": "Atlacoya",
         "Faction": "Adeptus Custodes",
         "Alliance": "Imperial",
-        "Health": 1,
-        "Damage": 1,
-        "Armour": 1,
+        "Health": 80,
+        "Damage": 30,
+        "Armour": 19,
         "Initial rarity": "Rare",
         "Melee Damage": "Power",
         "Melee Hits": 3,

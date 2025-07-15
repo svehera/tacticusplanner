@@ -43,9 +43,7 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
                     visible: true,
                     alphabet: (x.label ?? x.material)[0].toUpperCase(),
                 })),
-            viewPreferences.inventoryShowAlphabet
-                ? ['rarity', 'material', 'faction']
-                : ['rarity', 'faction', 'material'],
+            viewPreferences.inventoryShowAlphabet ? ['rarity', 'label', 'faction'] : ['rarity', 'faction', 'label'],
             ['desc', 'asc', 'asc']
         );
     }, [viewPreferences.inventoryShowAlphabet, inventory.upgrades]);

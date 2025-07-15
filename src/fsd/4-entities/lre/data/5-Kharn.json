@@ -1,7 +1,7 @@
 ﻿{
     "id": 7,
     "name": "Kharn",
-    "wikiLink": "https://tacticus.fandom.com/wiki/LE-Kharn",
+    "wikiLink": "https://tacticus.wiki.gg/wiki/LE-Kharn",
     "eventStage": 3,
     "nextEventDate": "Finished",
     "regularMissions": [
@@ -32,7 +32,7 @@
         "name": "Alpha (No Imperials)",
         "enemies": {
             "label": "Ultramarines & Astra Militarum",
-            "link": "https://tacticus.fandom.com/wiki/Ultramarines#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Ultramarines#NPC_Units"
         },
         "killPoints": 27,
         "battlesPoints": [38, 40, 44, 51, 55, 51, 45, 48, 53, 47, 46, 54, 54, 60]
@@ -41,7 +41,7 @@
         "name": "Beta (No Tyranids)",
         "enemies": {
             "label": "Tyranids",
-            "link": "https://tacticus.fandom.com/wiki/Tyranids#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Tyranids#NPC_Units"
         },
         "killPoints": 35,
         "battlesPoints": [34, 36, 41, 46, 43, 41, 48, 41, 58, 44, 42, 44, 54, 58]
@@ -50,7 +50,7 @@
         "name": "Gamma (No Thousand Sons)",
         "enemies": {
             "label": "Thousand Sons",
-            "link": "https://tacticus.fandom.com/wiki/Thousand_Sons#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Thousand_Sons#NPC_Units"
         },
         "killPoints": 39,
         "battlesPoints": [26, 38, 43, 40, 52, 35, 47, 57, 36, 41, 40, 43, 51, 53]

@@ -1,7 +1,7 @@
 ﻿{
     "id": 9,
     "name": "Patermine",
-    "wikiLink": "https://tacticus.fandom.com/wiki/LE-The_Patermine",
+    "wikiLink": "https://tacticus.wiki.gg/wiki/LE-The_Patermine",
     "eventStage": 2,
     "nextEventDate": "TBA",
     "nextEventDateUtc": "",
@@ -33,7 +33,7 @@
         "name": "Alpha (No Orks)",
         "enemies": {
             "label": "Orks",
-            "link": "https://tacticus.fandom.com/wiki/Orks#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Orks#NPC_Units"
         },
         "killPoints": 36,
         "battlesPoints": [27, 31, 38, 41, 40, 53, 51, 45, 43, 58, 43, 48, 58, 47]
@@ -42,7 +42,7 @@
         "name": "Beta (No Imperials)",
         "enemies": {
             "label": "Black Templars",
-            "link": "https://tacticus.fandom.com/wiki/Black_Templars#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Black_Templars#NPC_Units"
         },
         "killPoints": 47,
         "battlesPoints": [24, 31, 33, 37, 40, 34, 39, 37, 44, 42, 47, 45, 41, 52]
@@ -51,7 +51,7 @@
         "name": "Gamma (No Chaos)",
         "enemies": {
             "label": "Black Legion",
-            "link": "https://tacticus.fandom.com/wiki/Black_Legion#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Black_Legion#NPC_Units"
         },
         "killPoints": 25,
         "battlesPoints": [33, 49, 44, 46, 42, 53, 52, 56, 53, 50, 50, 50, 57, 65]

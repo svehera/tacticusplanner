@@ -1,7 +1,7 @@
 {
     "id": 12,
     "name": "Lucius",
-    "wikiLink": "https://tacticus.fandom.com/wiki/Legendary_Character_Events",
+    "wikiLink": "https://tacticus.wiki.gg/wiki/Legendary_Character_Events",
     "eventStage": 1,
     "nextEventDate": "August 10",
     "nextEventDateUtc": "Sun, 10 August 2025 00:00:00 GMT",
@@ -33,7 +33,7 @@
         "name": "Alpha (No Xenos)",
         "enemies": {
             "label": "Aeldari",
-            "link": "https://tacticus.fandom.com/wiki/Aeldari#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Aeldari#NPC_Units"
         },
         "killPoints": 37,
         "battlesPoints": [30, 28, 34, 42, 50, 47, 38, 50, 45, 42, 39, 55, 57, 53]
@@ -42,7 +42,7 @@
         "name": "Beta (No Chaos)",
         "enemies": {
             "label": "Tyranids",
-            "link": "https://tacticus.fandom.com/wiki/Tyranids#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Tyranids#NPC_Units"
         },
         "killPoints": 26,
         "battlesPoints": [31, 35, 46, 52, 51, 52, 50, 49, 53, 54, 45, 54, 58, 59]
@@ -51,7 +51,7 @@
         "name": "Gamma (No Imperials)",
         "enemies": {
             "label": "Ultramarines & Astra Militarum",
-            "link": "https://tacticus.fandom.com/wiki/Ultramarines#NPC_Units"
+            "link": "https://tacticus.wiki.gg/wiki/Ultramarines#NPC_Units"
         },
         "killPoints": 32,
         "battlesPoints": [29, 33, 46, 48, 51, 53, 50, 51, 48, 38, 51, 47, 51, 53]

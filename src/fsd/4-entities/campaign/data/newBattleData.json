@@ -27436,5 +27436,685 @@
         "expectedGold": 53,
         "enemiesTotal": 12,
         "enemiesTypes": []
+    },
+    "TAS1": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 1,
+        "reward": "Mission Assignment",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 3,
+        "enemiesTypes": ["Cadian Guardsman"]
+    },
+    "TAS2": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 2,
+        "reward": "Targeting Link",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 5,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team"]
+    },
+    "TAS3": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 3,
+        "reward": "Metal Joints",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 5,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+    },
+    "TAS4": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 4,
+        "reward": "Wires",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 5,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-Caster"]
+    },
+    "TAS5": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 5,
+        "reward": "Basic Auxiliary Core",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 4,
+        "enemiesTypes": ["Fire Warrior"]
+    },
+    "TAS6": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 6,
+        "reward": "Re'Vas",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 5,
+        "enemiesTypes": ["Fire Warrior", "Re'Vas"]
+    },
+    "TAS7": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 7,
+        "reward": "Sophisticated Material",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 4,
+        "enemiesTypes": ["Fire Warrior"]
+    },
+    "TAS8": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 8,
+        "reward": "Adamantium Filaments",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 3,
+        "enemiesTypes": ["Shield Drone", "Fire Warrior"]
+    },
+    "TAS9": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 9,
+        "reward": "Single Power Pack",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": ["Shield Drone", "Fire Warrior"]
+    },
+    "TAS10": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 10,
+        "reward": "Stimm Injector",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 4,
+        "enemiesTypes": ["Shield Drone", "Fire Warrior"]
+    },
+    "TAS11": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 11,
+        "reward": "Sho'Syl",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 5,
+        "enemiesTypes": ["Shield Drone", "Fire Warrior", "Sho'Syl"]
+    },
+    "TAS12": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 12,
+        "reward": "Adamantium Ore",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 3,
+        "enemiesTypes": ["Kroot"]
+    },
+    "TAS13": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 13,
+        "reward": "Mission Objective",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 4,
+        "enemiesTypes": ["Kroot"]
+    },
+    "TAS14": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 14,
+        "reward": "Attack Vector Data-Slate",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 5,
+        "enemiesTypes": ["Fire Warrior", "Kroot"]
+    },
+    "TAS15": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 15,
+        "reward": "Box of Salvage",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 5,
+        "enemiesTypes": ["Fire Warrior", "Kroot"]
+    },
+    "TAS16": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 16,
+        "reward": "Sensor Suite",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 5,
+        "enemiesTypes": ["Shield Drone", "Fire Warrior", "Kroot"]
+    },
+    "TAS17": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 17,
+        "reward": "Darkstrider",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 5,
+        "enemiesTypes": ["Stealth Battlesuit", "Sniper Drone", "Darkstrider", "Fire Warrior"]
+    },
+    "TAS18": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 18,
+        "reward": "Locator Beacon",
+        "expectedGold": 53,
+        "enemiesTotal": 5,
+        "slots": 5,
+        "enemiesTypes": ["Stealth Battlesuit"]
+    },
+    "TAS19": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 19,
+        "reward": "Artificial Vertebrae",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 5,
+        "enemiesTypes": ["Shield Drone", "Stealth Battlesuit", "Fire Warrior"]
+    },
+    "TAS20": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 20,
+        "reward": "Mesh Weave",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 5,
+        "enemiesTypes": ["Stealth Battlesuit", "Sniper Drone", "Fire Warrior"]
+    },
+    "TAS21": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 21,
+        "reward": "Drone Controller",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "slots": 5,
+        "enemiesTypes": ["Stealth Battlesuit", "Shield Drone", "Sniper Drone", "Fire Warrior"]
+    },
+    "TAS22": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 22,
+        "reward": "Shadowsun",
+        "expectedGold": 53,
+        "enemiesTotal": 11,
+        "slots": 5,
+        "enemiesTypes": ["Shield Drone", "Stealth Battlesuit", "Sniper Drone", "Fire Warrior", "Shadowsun"]
+    },
+    "TAS23": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 23,
+        "reward": "Advanced Filaments",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 4,
+        "enemiesTypes": ["Stealth Battlesuit", "Kroot"]
+    },
+    "TAS24": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 24,
+        "reward": "Barrel of Promethium",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "slots": 5,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman", "Cadian Vox-Caster"]
+    },
+    "TAS25": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 25,
+        "reward": "Air Purificator",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 5,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman", "Cadian Vox-Caster"]
+    },
+    "TAS26": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 26,
+        "reward": "Kill Count",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 3,
+        "enemiesTypes": ["Shield Drone", "Fire Warrior", "Kroot"]
+    },
+    "TAS27": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 27,
+        "reward": "Tank of Promethium",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 5,
+        "enemiesTypes": ["Shield Drone", "Stealth Battlesuit", "Fire Warrior"]
+    },
+    "TAS28": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 28,
+        "reward": "Valuable Fabric",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 3,
+        "enemiesTypes": ["Stealth Battlesuit", "Sniper Drone", "Fire Warrior"]
+    },
+    "TAS29": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 29,
+        "reward": "Engram Neurochip",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "slots": 5,
+        "enemiesTypes": ["Stealth Battlesuit", "Sniper Drone", "Fire Warrior", "Kroot"]
+    },
+    "TAS30": {
+        "campaign": "T'au Empire Standard",
+        "campaignType": "Normal",
+        "nodeNumber": 30,
+        "reward": "Aun'Shi",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 5,
+        "enemiesTypes": ["Stealth Battlesuit", "Shield Drone", "Fire Warrior", "Riptide"]
+    },
+
+    "TASC1": {
+        "campaign": "T'au Empire Standard Challenge",
+        "campaignType": "Normal",
+        "nodeNumber": 1,
+        "reward": "Ancient Runes",
+        "expectedGold": 53,
+        "enemiesTotal": 11,
+        "slots": 5,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Mortar Team", "Cadian Vox-Caster"]
+    },
+    "TASC2": {
+        "campaign": "T'au Empire Standard Challenge",
+        "campaignType": "Normal",
+        "nodeNumber": 2,
+        "reward": "Secret Agenda",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 3,
+        "enemiesTypes": ["Shield Drone", "Stealth Battlesuit", "Fire Warrior"]
+    },
+    "TASC3": {
+        "campaign": "T'au Empire Standard Challenge",
+        "campaignType": "Normal",
+        "nodeNumber": 3,
+        "reward": "Bionic Neural Pathways",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 5,
+        "enemiesTypes": [
+            "Shield Drone",
+            "Stealth Battlesuit",
+            "Sniper Drone",
+            "Darkstrider",
+            "Re'Vas",
+            "Sho'Syl",
+            "Fire Warrior",
+            "Aun'Shi",
+            "Shadowsun"
+        ]
+    },
+    "TAE1": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 1,
+        "reward": "Mission Assignment",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": ["Cadian Guardsman"]
+    },
+    "TAE2": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 2,
+        "reward": "Targeting Link",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "slots": 5,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman"]
+    },
+    "TAE3": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 3,
+        "reward": "Metal Joints",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 5,
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Vox-Caster"]
+    },
+    "TAE4": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 4,
+        "reward": "Wires",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 5,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman", "Cadian Vox-Caster"]
+    },
+    "TAE5": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 5,
+        "reward": "Basic Auxiliary Core",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 4,
+        "enemiesTypes": ["Fire Warrior"]
+    },
+    "TAE6": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 6,
+        "reward": "Re'Vas",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 5,
+        "enemiesTypes": ["Fire Warrior", "Re'Vas"]
+    },
+    "TAE7": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 7,
+        "reward": "Sophisticated Material",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 4,
+        "enemiesTypes": ["Fire Warrior"]
+    },
+    "TAE8": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 8,
+        "reward": "Adamantium Filaments",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 3,
+        "enemiesTypes": ["Shield Drone", "Fire Warrior"]
+    },
+    "TAE9": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 9,
+        "reward": "Single Power Pack",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": ["Shield Drone", "Fire Warrior"]
+    },
+    "TAE10": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 10,
+        "reward": "Stimm Injector",
+        "expectedGold": 53,
+        "enemiesTotal": 11,
+        "slots": 4,
+        "enemiesTypes": ["Shield Drone", "Fire Warrior"]
+    },
+    "TAE11": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 11,
+        "reward": "Sho'Syl",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "slots": 5,
+        "enemiesTypes": ["Shield Drone", "Sniper Drone", "Sho'Syl", "Fire Warrior"]
+    },
+    "TAE12": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 12,
+        "reward": "Adamantium Ore",
+        "expectedGold": 53,
+        "enemiesTotal": 4,
+        "slots": 3,
+        "enemiesTypes": ["Kroot"]
+    },
+    "TAE13": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 13,
+        "reward": "Mission Objective",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 4,
+        "enemiesTypes": ["Kroot"]
+    },
+    "TAE14": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 14,
+        "reward": "Attack Vector Data-Slate",
+        "expectedGold": 53,
+        "enemiesTotal": 9,
+        "slots": 5,
+        "enemiesTypes": ["Fire Warrior", "Kroot"]
+    },
+    "TAE15": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 15,
+        "reward": "Box of Salvage",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "slots": 5,
+        "enemiesTypes": ["Fire Warrior", "Kroot"]
+    },
+    "TAE16": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 16,
+        "reward": "Sensor Suite",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 5,
+        "enemiesTypes": ["Shield Drone", "Fire Warrior", "Kroot"]
+    },
+    "TAE17": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 17,
+        "reward": "Darkstrider",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "slots": 5,
+        "enemiesTypes": ["Stealth Battlesuit", "Sniper Drone", "Darkstrider", "Fire Warrior", "Kroot"]
+    },
+    "TAE18": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 18,
+        "reward": "Locator Beacon",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 5,
+        "enemiesTypes": ["Stealth Battlesuit"]
+    },
+    "TAE19": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 19,
+        "reward": "Artificial Vertebrae",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "slots": 5,
+        "enemiesTypes": ["Shield Drone", "Stealth Battlesuit", "Fire Warrior"]
+    },
+    "TAE20": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 20,
+        "reward": "Mesh Weave",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 5,
+        "enemiesTypes": ["Stealth Battlesuit", "Sniper Drone", "Fire Warrior"]
+    },
+    "TAE21": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 21,
+        "reward": "Drone Controller",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "slots": 5,
+        "enemiesTypes": ["Stealth Battlesuit", "Shield Drone", "Sniper Drone", "Fire Warrior"]
+    },
+    "TAE22": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 22,
+        "reward": "Shadowsun",
+        "expectedGold": 53,
+        "enemiesTotal": 11,
+        "slots": 5,
+        "enemiesTypes": ["Shield Drone", "Stealth Battlesuit", "Sniper Drone", "Fire Warrior", "Shadowsun"]
+    },
+    "TAE23": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 23,
+        "reward": "Advanced Filaments",
+        "expectedGold": 53,
+        "enemiesTotal": 6,
+        "slots": 4,
+        "enemiesTypes": ["Stealth Battlesuit", "Kroot"]
+    },
+    "TAE24": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 24,
+        "reward": "Barrel of Promethium",
+        "expectedGold": 53,
+        "enemiesTotal": 11,
+        "slots": 5,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Guardsman", "Cadian Vox-Caster"]
+    },
+    "TAE25": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 25,
+        "reward": "Air Purificator",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 5,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Mortar Team", "Cadian Guardsman", "Cadian Vox-Caster"]
+    },
+    "TAE26": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 26,
+        "reward": "Kill Count",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": ["Fire Warrior", "Kroot"]
+    },
+    "TAE27": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 27,
+        "reward": "Tank of Promethium",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 5,
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-Caster"]
+    },
+    "TAE28": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 28,
+        "reward": "Valuable Fabric",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 3,
+        "enemiesTypes": ["Stealth Battlesuit"]
+    },
+    "TAE29": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 29,
+        "reward": "Engram Neurochip",
+        "expectedGold": 53,
+        "enemiesTotal": 11,
+        "slots": 5,
+        "enemiesTypes": ["Shield Drone", "Stealth Battlesuit", "Sniper Drone", "Fire Warrior", "Kroot"]
+    },
+    "TAE30": {
+        "campaign": "T'au Empire Extremis",
+        "campaignType": "Extremis",
+        "nodeNumber": 30,
+        "reward": "Aun'Shi",
+        "expectedGold": 53,
+        "enemiesTotal": 8,
+        "slots": 5,
+        "enemiesTypes": ["Stealth Battlesuit", "Shield Drone", "Fire Warrior", "Riptide"]
+    },
+    "TAEC1": {
+        "campaign": "T'au Empire Extremis Challenge",
+        "campaignType": "Extremis",
+        "nodeNumber": 1,
+        "reward": "Revered Talisman",
+        "expectedGold": 53,
+        "enemiesTotal": 12,
+        "slots": 5,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Mortar Team", "Cadian Guardsman", "Cadian Vox-Caster"]
+    },
+    "TAEC2": {
+        "campaign": "T'au Empire Extremis Challenge",
+        "campaignType": "Extremis",
+        "nodeNumber": 2,
+        "reward": "Archeo-Tech Remnant",
+        "expectedGold": 53,
+        "enemiesTotal": 7,
+        "slots": 3,
+        "enemiesTypes": ["Shield Drone", "Stealth Battlesuit", "Fire Warrior"]
+    },
+    "TAEC3": {
+        "campaign": "T'au Empire Extremis Challenge",
+        "campaignType": "Extremis",
+        "nodeNumber": 3,
+        "reward": "Master-Crafted Ammo",
+        "expectedGold": 53,
+        "enemiesTotal": 10,
+        "slots": 5,
+        "enemiesTypes": [
+            "Shield Drone",
+            "Stealth Battlesuit",
+            "Sniper Drone",
+            "Darkstrider",
+            "Re'Vas",
+            "Sho'Syl",
+            "Aun'Shi",
+            "Shadowsun"
+        ]
     }
 }

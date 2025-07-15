@@ -35,6 +35,10 @@ export enum Campaign {
     TSC = 'Tyranids Standard Challenge',
     TE = 'Tyranids Extremis',
     TEC = 'Tyranids Extremis Challenge',
+    TAS = "T'au Empire Standard",
+    TASC = "T'au Empire Standard Challenge",
+    TAE = "T'au Empire Extremis",
+    TAEC = "T'au Empire Extremis Challenge",
     Onslaught = 'Onslaught',
 }
 
@@ -88,6 +92,11 @@ export enum CampaignGroupType {
      * Campaign Event: Tyranids storyline.
      */
     tyranidCE = 'Tyranids',
+
+    /**
+     * Campaign Event: T'au Empire storyline.
+     */
+    tauCE = "T'au Empire",
 }
 
 /**
