@@ -596,9 +596,9 @@
             "rangeHits": 2,
             "rangeType": "Projectile",
             "range": 2,
-            "health": 1,
-            "damage": 1,
-            "armor": 1,
+            "health": 45,
+            "damage": 25,
+            "armor": 5,
             "traits": ["Camouflage", "Infiltrate", "Rapid Assault"],
             "activeAbilities": [],
             "passiveAbilities": ["Hunter's Instincts"]
