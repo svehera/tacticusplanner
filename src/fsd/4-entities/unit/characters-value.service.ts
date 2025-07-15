@@ -102,10 +102,7 @@ export class CharactersValueService {
         const result: IMaterialRecipeIngredientFull[] = UpgradesService.groupBaseMaterials(upgrades, true);
         return Math.ceil(
             sum(
-                result
-                    // filter out Gold, which has an undefined label
-                    .filter(x => x.label !== undefined)
-                    .map(x => x.count * MaterialBS[x.rarity])
+                result.filter(x => x.label !== undefined && x.label !== 'Gold').map(x => x.count * MaterialBS[x.rarity])
             )
         );
     }
