@@ -50,6 +50,11 @@ export class NpcService {
             'Harlequin Player': 'harlequin.webp',
             Warlock: 'warlock.webp',
             Wraithguard: 'wraithguard.webp',
+            Kroot: 'kroot.png',
+            'Fire Warrior': 'fire_warrior.png',
+            'Shield Drone': 'shield_drone.png',
+            'Stealth Battlesuit': 'stealth_battlesuit.png',
+            'Sniper Drone': 'sniper_drone.png',
         };
         if (map[name]) {
             return prefix + '/' + map[name];

@@ -2292,7 +2292,8 @@
         "Traits": ["Ambush", "Healer"],
         "Number": 81,
         "ForcedSummons": false,
-        "RequiredInCampaign": false,
+        "RequiredInCampaign": true,
+        "CampaignsRequiredIn": ["T'au Empire"],
         "Icon": "hollan.webp",
         "releaseDate": "2024-11-17T00:00:00Z"
     },
@@ -2319,7 +2320,8 @@
         "Traits": ["Ambush", "Psyker"],
         "Number": 79,
         "ForcedSummons": true,
-        "RequiredInCampaign": false,
+        "RequiredInCampaign": true,
+        "CampaignsRequiredIn": ["T'au Empire"],
         "Icon": "xybia.webp",
         "releaseDate": "2024-10-13T00:00:00Z"
     },
@@ -2373,7 +2375,8 @@
         "Traits": ["Ambush", "Beast Slayer"],
         "Number": 87,
         "ForcedSummons": false,
-        "RequiredInCampaign": false,
+        "RequiredInCampaign": true,
+        "CampaignsRequiredIn": ["T'au Empire"],
         "Icon": "judh.webp"
     },
     {
