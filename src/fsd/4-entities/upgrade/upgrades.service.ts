@@ -532,7 +532,7 @@ export class UpgradesService {
 
     private static getFarmableCharacters(): IMaterialFull['id'][] {
         const chars: IMaterialFull['id'][] = [];
-        return Object.values(this.recipeDataFull).reduce((acc, upgrade) => {
+        return Object.values(UpgradesService.recipeDataFull).reduce((acc, upgrade) => {
             if (upgrade.stat === 'Shard') acc.push(upgrade.id);
             return acc;
         }, chars);
