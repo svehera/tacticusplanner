@@ -7,5 +7,5 @@
     Imperial,
     Xenos,
     MoW,
-    CantFarm,
+    Unfarmable,
 }

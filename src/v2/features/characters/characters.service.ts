@@ -56,7 +56,7 @@ export class CharactersService {
                 return filteredCharactersByName.filter(filterXenos);
             case CharactersFilterBy.MoW:
                 return filteredCharactersByName.filter(isMow);
-            case CharactersFilterBy.CantFarm:
+            case CharactersFilterBy.Unfarmable:
                 if (typeof farmableChars === 'undefined') farmableChars = new Set(UpgradesService.farmableCharacters);
 
                 return filteredCharactersByName.filter(char => {
