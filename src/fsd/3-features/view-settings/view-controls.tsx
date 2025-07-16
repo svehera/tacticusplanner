@@ -67,6 +67,8 @@ export const CharactersViewControls = ({
                 return 'MoW only';
             case CharactersFilterBy.None:
                 return 'None';
+            case CharactersFilterBy.CantFarm:
+                return "Can't Farm";
             default:
                 return '';
         }

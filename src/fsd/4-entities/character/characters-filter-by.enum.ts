@@ -7,4 +7,5 @@
     Imperial,
     Xenos,
     MoW,
+    CantFarm,
 }
