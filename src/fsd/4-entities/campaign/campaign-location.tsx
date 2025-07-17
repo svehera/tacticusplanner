@@ -14,7 +14,14 @@ export const CampaignLocation: React.FC<Props> = ({ location, unlocked, short = 
     // Campaigns events has optional "Challenge" nodes 3B, 13B and 25B
     // this function converts linear progression to proper labels
     const locationNumber = useMemo(() => {
-        const challengeCampaigns = [Campaign.AMSC, Campaign.AMEC];
+        const challengeCampaigns = [
+            Campaign.AMSC,
+            Campaign.AMEC,
+            Campaign.TSC,
+            Campaign.TEC,
+            Campaign.TASC,
+            Campaign.TAEC,
+        ];
         if (challengeCampaigns.includes(location.campaign)) {
             switch (location.nodeNumber) {
                 case 1:
