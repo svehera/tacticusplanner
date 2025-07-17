@@ -30,7 +30,7 @@ export const CampaignLocation: React.FC<Props> = ({ location, unlocked, short = 
 
     return (
         <div
-            className="flex-box gap5"
+            className="flex-box gap2"
             style={{
                 opacity: unlocked ? 1 : 0.5,
             }}>
