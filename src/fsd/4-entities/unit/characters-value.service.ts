@@ -103,8 +103,8 @@ export class CharactersValueService {
         return Math.ceil(
             sum(
                 result
-                    // filter out Gold, which has an undefined label
-                    .filter(x => x.label !== undefined)
+                    // filter out Gold and an undefined labels
+                    .filter(x => x.label !== undefined && x.label !== 'Gold')
                     .map(x => x.count * MaterialBS[x.rarity])
             )
         );
