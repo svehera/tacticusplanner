@@ -208,7 +208,7 @@ export const RankLookup = () => {
                 const { data } = params;
                 if (data) {
                     return (
-                        <div className="flex-box gap5 wrap">
+                        <div className="flex-box wrap" style={{ gap: '5px' }}>
                             {data.possibleLocations.map(location => (
                                 <CampaignLocation
                                     key={location.id}
