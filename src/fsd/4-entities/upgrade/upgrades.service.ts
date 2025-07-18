@@ -28,6 +28,7 @@ export class UpgradesService {
     static readonly recipeDataFull: IRecipeDataFull = this.convertRecipeData();
     static readonly recipeExpandedUpgradeData: IRecipeExpandedUpgradeData = this.expandRecipeData();
     public static readonly materialByLabel: Record<string, string> = this.createMaterialByLabelLookup();
+    public static readonly farmableCharacters: IMaterialFull['id'][] = this.getFarmableCharacters();
 
     /**
      * @returns a lookup table keyed by material ID or material label pointing
@@ -527,5 +528,13 @@ export class UpgradesService {
 
     static isValidUpgrade(upgrade: string): boolean {
         return Object.hasOwn(recipeDataByName, upgrade);
+    }
+
+    private static getFarmableCharacters(): IMaterialFull['id'][] {
+        const chars: IMaterialFull['id'][] = [];
+        return Object.values(UpgradesService.recipeDataFull).reduce((acc, upgrade) => {
+            if (upgrade.stat === 'Shard') acc.push(upgrade.id);
+            return acc;
+        }, chars);
     }
 }
