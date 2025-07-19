@@ -10,6 +10,7 @@ import { ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 import { isCharacter, isMow, isUnlocked } from '@/fsd/4-entities/unit/units.functions';
+import { IMaterialFull, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { rarityCaps } from 'src/v2/features/characters/characters.contants';
 
@@ -30,6 +31,8 @@ export class CharactersService {
         const filteredCharactersByName = nameFilter
             ? characters.filter(x => x.name.toLowerCase().includes(nameFilter.toLowerCase()))
             : characters;
+
+        let farmableChars: Set<IMaterialFull['id']> | undefined;
 
         switch (filterBy) {
             case CharactersFilterBy.NeedToAscend:
@@ -53,6 +56,12 @@ export class CharactersService {
                 return filteredCharactersByName.filter(filterXenos);
             case CharactersFilterBy.MoW:
                 return filteredCharactersByName.filter(isMow);
+            case CharactersFilterBy.Unfarmable:
+                if (typeof farmableChars === 'undefined') farmableChars = new Set(UpgradesService.farmableCharacters);
+
+                return filteredCharactersByName.filter(char => {
+                    return !isMow(char) && !farmableChars?.has(char.id);
+                });
             case CharactersFilterBy.None:
             default:
                 return filteredCharactersByName;
