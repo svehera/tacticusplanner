@@ -156,7 +156,7 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
                                 {getMilestone(token.milestoneAchievedIndex)}
                             </td>
                             <td className="px-4">{token.track}</td>
-                            <td className="px-4 text-right">{token.battleNumber}</td>
+                            <td className="px-4 text-right">{token.battleNumber + 1}</td>
                             <td className="px-4 flex justify-center">
                                 {token.restricts.map(restrict =>
                                     restrict.id === '_killPoints' || restrict.id === '_highScore' ? (
