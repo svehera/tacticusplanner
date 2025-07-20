@@ -9,7 +9,7 @@ import { isMobile } from 'react-device-detect';
 
 import { getCompletionRateColor } from '@/fsd/5-shared/lib';
 
-import { LreReqImage, LreTrackId } from '@/fsd/4-entities/lre';
+import { LegendaryEventEnum, LreReqImage, LreTokenImage, LreTrackId } from '@/fsd/4-entities/lre';
 
 import { ProgressState } from '@/fsd/3-features/lre-progress';
 
@@ -18,10 +18,11 @@ import { ILreTrackProgress } from './lre.models';
 
 interface Props {
     track: ILreTrackProgress;
+    legendaryEventId: LegendaryEventEnum;
     toggleBattleState: (trackId: LreTrackId, battleIndex: number, reqId: string, state: ProgressState) => void;
 }
 
-export const LreTrackOverallProgress: React.FC<Props> = ({ track, toggleBattleState }) => {
+export const LreTrackOverallProgress: React.FC<Props> = ({ track, legendaryEventId, toggleBattleState }) => {
     const currentPoints = sum(
         track.battles
             .flatMap(x => x.requirementsProgress)
@@ -44,7 +45,11 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, toggleBattleSt
     const completionPercentage = Math.round((currentPoints / track.totalPoints) * 100);
 
     const setAll = () => {
-        const state = completionPercentage === 100 ? ProgressState.none : ProgressState.completed;
+        const completedBattles = track.battles
+            .map(battle => battle.requirementsProgress.filter(req => req.completed).length)
+            .reduce((a, b) => a + b, 0);
+        const state = completedBattles === 8 * 14 ? ProgressState.none : ProgressState.completed;
+
         track.battles.forEach(battle => {
             battle.requirementsProgress.forEach(req => {
                 toggleBattleState(track.trackId, battle.battleIndex, req.id, state);
@@ -98,11 +103,14 @@ export const LreTrackOverallProgress: React.FC<Props> = ({ track, toggleBattleSt
                         {track.requirements.map(req => (
                             <LreReqImage key={req.id} iconId={req.iconId} tooltip={req.name} />
                         ))}
+                        <LreTokenImage />
                     </div>
                     <div className="flex-box column">
                         {track.battles.map(battle => (
                             <LreTrackBattleSummary
                                 key={battle.battleIndex}
+                                legendaryEventId={legendaryEventId}
+                                trackId={track.trackId}
                                 battle={battle}
                                 toggleState={(req, state) =>
                                     toggleBattleState(track.trackId, battle.battleIndex, req.id, state)
