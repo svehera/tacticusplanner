@@ -47,6 +47,7 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
             selected: false,
         },
     ];
+    const [expectedBattleClears, setExpectedBattleClears] = useState<number>(14);
     const [teamName, setTeamName] = useState<string>(preselectedTrackId);
     const [trackId, setTrackId] = useState<LreTrackId>(preselectedTrackId);
     const [restrictions, setRestrictions] = useState<string[]>(preselectedRequirements);
@@ -72,6 +73,7 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
             section: trackId,
             characters: selectedTeam,
             charactersIds: selectedTeam.map(x => x.id),
+            expectedBattleClears: expectedBattleClears,
             restrictionsIds: restrictions,
         });
     };
@@ -126,6 +128,20 @@ export const LreAddTeam: React.FC<Props> = ({ lre, preselectedTrackId, preselect
                         variant="outlined"
                         value={teamName}
                         onChange={event => setTeamName(event.target.value.slice(0, 50))}
+                    />
+                    <TextField
+                        fullWidth
+                        label="Tokenomics: Expected Battles Cleared"
+                        variant="outlined"
+                        type="number"
+                        value={expectedBattleClears}
+                        onChange={event => {
+                            const value = parseInt(event.target.value, 10);
+                            if (!isNaN(value) && value > 0) {
+                                setExpectedBattleClears(value);
+                            }
+                        }}
+                        inputProps={{ min: 1, max: 14 }}
                     />
                 </div>
                 <div className="flex-box wrap" style={{ paddingTop: '10px' }}>

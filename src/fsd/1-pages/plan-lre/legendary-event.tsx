@@ -73,6 +73,7 @@ export const LegendaryEvent = ({ legendaryEvent }: { legendaryEvent: ILegendaryE
             teamId: team.id,
             name: team.name,
             charactersIds: team.charactersIds,
+            expectedBattleClears: team.expectedBattleClears,
         });
         setEditTeam(null);
     };
