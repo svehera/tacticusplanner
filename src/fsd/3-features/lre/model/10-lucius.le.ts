@@ -53,7 +53,7 @@ export class LuciusLegendaryEvent extends LegendaryEventBase {
                     name: 'No Bolter',
                     points: 60,
                     units: filter(noXenos).byDamageType(DamageType.Bolter, true),
-                    iconId: 'piercing',
+                    iconId: 'no_bolter',
                     index: 4,
                 },
             ],
