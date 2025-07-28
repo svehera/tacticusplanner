@@ -323,7 +323,7 @@ export class TokenEstimationService {
         team: ILreTeam
     ): ILreRequirements[] {
         if (battle.completed) return [];
-        if ((team.expectedBattleClears ?? 14) < battle.battleIndex) {
+        if ((team.expectedBattleClears ?? 13) <= battle.battleIndex) {
             return [];
         }
         const clearedRestrictions: ILreRequirements[] = [];
