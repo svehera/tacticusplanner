@@ -31,6 +31,7 @@ export interface IWyoViewSettings {
 }
 
 export interface ILreViewSettings {
+    lreGoalsPreview: boolean;
     lreGridView: boolean;
     showAlpha: boolean;
     showBeta: boolean;

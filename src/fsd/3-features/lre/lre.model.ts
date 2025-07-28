@@ -57,10 +57,26 @@ export interface ILegendaryEventTrackRequirement {
 
 export interface ILreTeam {
     id: string;
+
     name: string;
+    /**
+     * Which track this team covers, e.g. alpha.
+     *
+     * TODO: Rename this to trackId.
+     */
     section: LreTrackId;
+
+    /**
+     * The restrictions the given team meets.
+     */
     restrictionsIds: string[];
+
     charactersIds: string[];
+    /**
+     * The number of battles this team is expected to clear against the
+     * given restrictions in the specified track.
+     */
+    expectedBattleClears?: number;
     /**
      * Client Side only
      */

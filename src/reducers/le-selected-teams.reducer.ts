@@ -21,6 +21,7 @@ export type LeSelectedTeamsAction =
           teamId: string;
           name: string;
           charactersIds: string[];
+          expectedBattleClears?: number;
       }
     | SetStateAction<LegendaryEventData<ILegendaryEventSelectedTeams>>;
 
@@ -63,7 +64,7 @@ export const leSelectedTeamsReducer = (
             return { ...state, [eventId]: { ...legendaryEvent } };
         }
         case 'UpdateTeam': {
-            const { eventId, teamId, name, charactersIds } = action;
+            const { eventId, teamId, name, charactersIds, expectedBattleClears } = action;
             const legendaryEvent = state[eventId];
 
             if (!legendaryEvent) {
@@ -78,7 +79,12 @@ export const leSelectedTeamsReducer = (
 
             legendaryEvent.teams = [...legendaryEvent.teams];
 
-            legendaryEvent.teams[currentTeamIndex] = { ...legendaryEvent.teams[currentTeamIndex], name, charactersIds };
+            legendaryEvent.teams[currentTeamIndex] = {
+                ...legendaryEvent.teams[currentTeamIndex],
+                name,
+                charactersIds,
+                expectedBattleClears,
+            };
 
             return { ...state, [eventId]: { ...legendaryEvent } };
         }

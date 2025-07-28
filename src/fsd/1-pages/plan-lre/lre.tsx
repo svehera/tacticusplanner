@@ -50,6 +50,10 @@ export const Lre: React.FC = () => {
         dispatch.viewPreferences({ type: 'Update', setting: 'lreGridView', value: gridView });
     };
 
+    const updateGoalsPreview = (preview: boolean): void => {
+        dispatch.viewPreferences({ type: 'Update', setting: 'lreGoalsPreview', value: preview });
+    };
+
     const { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab } = useLre();
 
     const renderTabContent = () => {
@@ -67,6 +71,10 @@ export const Lre: React.FC = () => {
 
     function toggleView() {
         updateView(!viewPreferences.lreGridView);
+    }
+
+    function toggleGoalsPreview() {
+        updateGoalsPreview(!viewPreferences.lreGoalsPreview);
     }
 
     return (
@@ -91,6 +99,10 @@ export const Lre: React.FC = () => {
 
                 {[LreSection.teams].includes(section) && (
                     <div className="flex-box gap10 wrap">
+                        <div className="flex-box" onClick={toggleGoalsPreview}>
+                            Goals Preview
+                            <Switch checked={viewPreferences.lreGoalsPreview} />
+                        </div>
                         <div className="flex-box" onClick={toggleView}>
                             <TableRowsIcon color={!viewPreferences.lreGridView ? 'primary' : 'disabled'} />
                             <Switch checked={viewPreferences.lreGridView} />
