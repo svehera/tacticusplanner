@@ -14,7 +14,7 @@ export const RankIcon = ({
     size?: number;
     resized?: boolean;
 }) => {
-    if (!rank || rank > Rank.Diamond3) {
+    if (!rank || rank > Rank.Adamantine3) {
         return <span>{Rank[Rank.Locked]}</span>;
     }
 

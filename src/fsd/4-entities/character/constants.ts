@@ -8,6 +8,8 @@ export const charsUnlockShards: Record<Rarity, number> = {
     [Rarity.Rare]: 130,
     [Rarity.Epic]: 250,
     [Rarity.Legendary]: 500,
+    // Mythic characters must be ascended from Legendary, there are no unlockables
+    [Rarity.Mythic]: 0,
 };
 
 export const charsReleaseShards: Record<CharacterReleaseRarity, number> = {

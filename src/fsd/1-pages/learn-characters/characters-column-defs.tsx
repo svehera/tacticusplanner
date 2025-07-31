@@ -11,7 +11,7 @@ import { StatCell, DamageCell, StatsCalculatorService } from '@/fsd/4-entities/u
 
 export const useCharacters = () => {
     const [targetRarity, setTargetRarity] = useState<Rarity>(Rarity.Legendary);
-    const [targetStars, setTargetStars] = useState<RarityStars>(RarityStars.BlueStar);
+    const [targetStars, setTargetStars] = useState<RarityStars>(RarityStars.BlueOneStar);
     const [targetRank, setTargetRank] = useState<Rank>(Rank.Diamond3);
 
     const minStarsMap: Map<Rarity, RarityStars> = new Map([
@@ -35,7 +35,7 @@ export const useCharacters = () => {
     }, [targetRarity]);
 
     const maxStars = useMemo(() => {
-        return minStarsMap.get(targetRarity + 1) ?? RarityStars.BlueStar;
+        return minStarsMap.get(targetRarity + 1) ?? RarityStars.BlueOneStar;
     }, [targetRarity]);
 
     const rankValues = useMemo(() => {
@@ -50,7 +50,7 @@ export const useCharacters = () => {
         if (rarity < targetRarity) {
             const maxRank = RarityMapper.toMaxRank[rarity];
             setTargetRarity(rarity);
-            setTargetStars(minStarsMap.get(rarity + 1) ?? RarityStars.BlueStar);
+            setTargetStars(minStarsMap.get(rarity + 1) ?? RarityStars.BlueOneStar);
             if (targetRank > maxRank) {
                 setTargetRank(maxRank);
             }
