@@ -11,4 +11,7 @@ export enum RarityStars {
     RedFourStars,
     RedFiveStars,
     BlueOneStar,
+    BlueTwoStars,
+    BlueThreeStars,
+    AdamantineWings,
 }

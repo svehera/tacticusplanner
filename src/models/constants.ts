@@ -31,6 +31,10 @@ export const rankToLevel: Record<Rank, number> = {
     [Rank.Diamond1]: 47,
     [Rank.Diamond2]: 50,
     [Rank.Diamond3]: 50,
+    // Adamantine rank levels are an unconfirmed guess based on early info.
+    [Rank.Adamantine1]: 55,
+    [Rank.Adamantine2]: 60,
+    [Rank.Adamantine3]: 65,
 };
 
 export const rankToRarity: Record<Rank, Rarity> = {
@@ -53,6 +57,9 @@ export const rankToRarity: Record<Rank, Rarity> = {
     [Rank.Diamond1]: Rarity.Legendary,
     [Rank.Diamond2]: Rarity.Legendary,
     [Rank.Diamond3]: Rarity.Legendary,
+    [Rank.Adamantine1]: Rarity.Mythic,
+    [Rank.Adamantine2]: Rarity.Mythic,
+    [Rank.Adamantine3]: Rarity.Mythic,
 };
 
 export const charsProgression: Record<number, ICharProgression> = {
