@@ -1,5 +1,5 @@
 ﻿import { Autocomplete, TextField } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { IUnit } from '../model';
 
@@ -24,7 +24,7 @@ export const UnitsAutocomplete = <T extends IUnit>({
     onUnitsChange = () => {},
     label = 'Unit',
 }: Props<T>) => {
-    const [openAutocomplete, setOpenAutocomplete] = React.useState(false);
+    const [openAutocomplete, setOpenAutocomplete] = useState(false);
 
     const updateValue = (value: T | T[] | null): void => {
         if (Array.isArray(value)) {
