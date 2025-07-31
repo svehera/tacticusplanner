@@ -72,7 +72,7 @@ export const UnitsAutocomplete = <T extends IUnit>({
             open={openAutocomplete}
             onFocus={() => handleAutocompleteChange(true)}
             onBlur={() => handleAutocompleteChange(false)}
-            getOptionLabel={option => option.fullName}
+            getOptionLabel={option => option.name}
             isOptionEqualToValue={(option, value) => option.id === value.id}
             renderOption={(props, option) => (
                 <UnitTitle
