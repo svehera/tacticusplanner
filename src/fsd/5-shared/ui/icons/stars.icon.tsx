@@ -39,7 +39,7 @@ export const StarsIcon = ({ stars }: { stars: RarityStars }) => {
         return <div className="flex items-end h-[15px]">{starsImages}</div>;
     }
 
-    if (stars === RarityStars.BlueStar) {
+    if (stars === RarityStars.BlueOneStar) {
         return (
             <img style={{ pointerEvents: 'none' }} src={starsIcons.blueStar} height={15} width={50} alt="Blue star" />
         );

@@ -14,7 +14,7 @@ export class RarityMapper {
         [Rarity.Uncommon]: RarityStars.FourStars,
         [Rarity.Rare]: RarityStars.RedOneStar,
         [Rarity.Epic]: RarityStars.RedThreeStars,
-        [Rarity.Legendary]: RarityStars.BlueStar,
+        [Rarity.Legendary]: RarityStars.BlueOneStar,
     };
 
     public static toMaxRank: Record<Rarity, Rank> = {

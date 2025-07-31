@@ -123,7 +123,7 @@ export const NpcPortrait: React.FC<Props> = ({ name, rank, rarity, stars }) => {
 
     const getStars = (stars: RarityStars) => {
         if (stars === RarityStars.None) return <></>;
-        if (stars === RarityStars.BlueStar) return getBlueStar();
+        if (stars === RarityStars.BlueOneStar) return getBlueStar();
         let numStars = stars as number;
         let star = goldStar;
         const overlap = 15;

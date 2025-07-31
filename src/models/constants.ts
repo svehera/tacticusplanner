@@ -75,7 +75,7 @@ export const charsProgression: Record<number, ICharProgression> = {
 
     [Rarity.Legendary + RarityStars.RedFourStars]: { shards: 150, orbs: 10, rarity: Rarity.Legendary },
     [Rarity.Legendary + RarityStars.RedFiveStars]: { shards: 250, orbs: 15, rarity: Rarity.Legendary },
-    [Rarity.Legendary + RarityStars.BlueStar]: { shards: 500, orbs: 20, rarity: Rarity.Legendary },
+    [Rarity.Legendary + RarityStars.BlueOneStar]: { shards: 500, orbs: 20, rarity: Rarity.Legendary },
 };
 
 const defaultCampaignsProgress: ICampaignsProgress = {
