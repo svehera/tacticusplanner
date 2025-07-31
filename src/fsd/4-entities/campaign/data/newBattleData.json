@@ -20830,7 +20830,7 @@
         "reward": "Fine Purity Seal",
         "expectedGold": 83,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot Tank", "Grot", "Ork Boy", "Stromboy"],
+        "enemiesTypes": ["Grot Tank", "Grot", "Ork Boy", "Storm Boy"],
         "detailedEnemyTypes": [
             {
                 "name": "Grot",
@@ -20923,7 +20923,7 @@
         "reward": "Blessed Tabbard",
         "expectedGold": 83,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Stromboy", "Grot Tank", "Ork Boy"],
+        "enemiesTypes": ["Storm Boy", "Grot Tank", "Ork Boy"],
         "detailedEnemyTypes": [
             {
                 "name": "Grot Tank",
@@ -21033,7 +21033,7 @@
         "reward": "Snappawrecka",
         "expectedGold": 83,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Stromboy"],
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Storm Boy"],
         "detailedEnemyTypes": [
             {
                 "name": "Grot Tank",
@@ -21156,7 +21156,7 @@
         "reward": "The Iron Phoenix",
         "expectedGold": 91.5,
         "enemiesTotal": 11,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Stromboy"],
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Storm Boy"],
         "detailedEnemyTypes": [
             {
                 "name": "Grot Tank",
@@ -21237,7 +21237,7 @@
         "reward": "Archeotech Bionics",
         "expectedGold": 91.5,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Ork Boy", "Grot Tank", "Stromboy"],
+        "enemiesTypes": ["Ork Boy", "Grot Tank", "Storm Boy"],
         "detailedEnemyTypes": [
             {
                 "name": "Grot Tank",
@@ -21331,7 +21331,7 @@
         "reward": "Wolf Tooth Necklace",
         "expectedGold": 101,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot Tank", "Stromboy", "Ork Boy", "Grot"],
+        "enemiesTypes": ["Grot Tank", "Storm Boy", "Ork Boy", "Grot"],
         "detailedEnemyTypes": [
             {
                 "name": "Grot",
@@ -21424,7 +21424,7 @@
         "reward": "Chip Damage",
         "expectedGold": 101,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot", "Stromboy"],
+        "enemiesTypes": ["Grot Tank", "Ork Boy", "Grot", "Storm Boy"],
         "detailedEnemyTypes": [
             {
                 "name": "Grot",
@@ -26202,7 +26202,7 @@
         "expectedGold": 53,
         "enemiesTotal": 7,
         "slots": 4,
-        "enemiesTypes": ["Cadian Guardsman", "Skirarii Vanguard"]
+        "enemiesTypes": ["Cadian Guardsman", "Skitarii Vanguard"]
     },
     "AMS5": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26212,7 +26212,7 @@
         "expectedGold": 53,
         "enemiesTotal": 9,
         "slots": 4,
-        "enemiesTypes": ["Skirarii Vanguard"]
+        "enemiesTypes": ["Skitarii Vanguard"]
     },
     "AMS6": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26221,7 +26221,7 @@
         "reward": "Tan Gi'Da",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Skirarii Vanguard"]
+        "enemiesTypes": ["Skitarii Vanguard"]
     },
     "AMS7": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26231,7 +26231,7 @@
         "expectedGold": 53,
         "enemiesTotal": 6,
         "slots": 3,
-        "enemiesTypes": ["Skirarii Vanguard"]
+        "enemiesTypes": ["Skitarii Vanguard"]
     },
     "AMS8": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26241,7 +26241,7 @@
         "expectedGold": 53,
         "enemiesTotal": 7,
         "slots": 3,
-        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+        "enemiesTypes": ["Skitarii Vanguard", "Tech-Priest Enginseer"]
     },
     "AMS9": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26251,7 +26251,7 @@
         "expectedGold": 53,
         "enemiesTotal": 8,
         "slots": 4,
-        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+        "enemiesTypes": ["Skitarii Vanguard", "Tech-Priest Enginseer"]
     },
     "AMS10": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26261,7 +26261,7 @@
         "expectedGold": 53,
         "enemiesTotal": 9,
         "slots": 4,
-        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+        "enemiesTypes": ["Skitarii Vanguard", "Tech-Priest Enginseer"]
     },
     "AMS11": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26270,7 +26270,7 @@
         "reward": "Exitor-Rho",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+        "enemiesTypes": ["Skitarii Vanguard", "Tech-Priest Enginseer"]
     },
     "AMS12": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26338,7 +26338,7 @@
         "reward": "Fine Micro-Generator",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard"]
     },
     "AMS19": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26347,7 +26347,7 @@
         "reward": "The Gold Phoenix",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Skirarii Vanguard"]
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Skitarii Vanguard"]
     },
     "AMS20": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26356,7 +26356,7 @@
         "reward": "Oath Seal",
         "expectedGold": 53,
         "enemiesTotal": 6,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard"]
     },
     "AMS21": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26365,7 +26365,7 @@
         "reward": "Cogwheel Crest",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard", "Tech-Priest Enginseer"]
     },
     "AMS22": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26374,7 +26374,7 @@
         "reward": "Vitruvius",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard", "Tech-Priest Enginseer"]
     },
     "AMS23": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26383,7 +26383,7 @@
         "reward": "Writings",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard", "Tech-Priest Enginseer", "Cadian Vox-Caster"]
     },
     "AMS24": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26392,7 +26392,7 @@
         "reward": "Divinator Class Auspex",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard", "Tech-Priest Enginseer", "Cadian Lascannon Team"]
     },
     "AMS25": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26401,7 +26401,7 @@
         "reward": "Air Purificator",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer", "Cadian Mortar Team"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard", "Tech-Priest Enginseer", "Cadian Mortar Team"]
     },
     "AMS26": {
         "campaign": "Adeptus Mechanicus Standard",
@@ -26412,7 +26412,7 @@
         "enemiesTotal": 11,
         "enemiesTypes": [
             "Electro-Priest",
-            "Skirarii Vanguard",
+            "Skitarii Vanguard",
             "Tech-Priest Enginseer",
             "Cadian Mortar Team",
             "Cadian Vox-Caster"
@@ -26447,7 +26447,7 @@
         "enemiesTotal": 12,
         "enemiesTypes": [
             "Electro-Priest",
-            "Skirarii Vanguard",
+            "Skitarii Vanguard",
             "Tech-Priest Enginseer",
             "Cadian Mortar Team",
             "Cadian Vox-Caster",
@@ -26501,7 +26501,7 @@
         "expectedGold": 53,
         "enemiesTotal": 7,
         "slots": 4,
-        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team", "Skirarii Vanguard"]
+        "enemiesTypes": ["Cadian Vox-Caster", "Cadian Lascannon Team", "Skitarii Vanguard"]
     },
     "AME5": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26511,7 +26511,7 @@
         "expectedGold": 53,
         "enemiesTotal": 10,
         "slots": 4,
-        "enemiesTypes": ["Skirarii Vanguard"]
+        "enemiesTypes": ["Skitarii Vanguard"]
     },
     "AME6": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26520,7 +26520,7 @@
         "reward": "Tan Gi'Da",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Skirarii Vanguard"]
+        "enemiesTypes": ["Skitarii Vanguard"]
     },
     "AME7": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26530,7 +26530,7 @@
         "expectedGold": 53,
         "enemiesTotal": 8,
         "slots": 3,
-        "enemiesTypes": ["Skirarii Vanguard"]
+        "enemiesTypes": ["Skitarii Vanguard"]
     },
     "AME8": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26540,7 +26540,7 @@
         "expectedGold": 53,
         "enemiesTotal": 6,
         "slots": 4,
-        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+        "enemiesTypes": ["Skitarii Vanguard", "Tech-Priest Enginseer"]
     },
     "AME9": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26550,7 +26550,7 @@
         "expectedGold": 53,
         "enemiesTotal": 7,
         "slots": 4,
-        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+        "enemiesTypes": ["Skitarii Vanguard", "Tech-Priest Enginseer"]
     },
     "AME10": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26559,7 +26559,7 @@
         "reward": "Repair-Kit",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+        "enemiesTypes": ["Skitarii Vanguard", "Tech-Priest Enginseer"]
     },
     "AME11": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26568,7 +26568,7 @@
         "reward": "Exitor-Rho",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Skirarii Vanguard", "Tech-Priest Enginseer"]
+        "enemiesTypes": ["Skitarii Vanguard", "Tech-Priest Enginseer"]
     },
     "AME12": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26635,7 +26635,7 @@
         "expectedGold": 53,
         "enemiesTotal": 6,
         "slots": 4,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard"]
     },
     "AME19": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26644,7 +26644,7 @@
         "reward": "The Gold Phoenix",
         "expectedGold": 53,
         "enemiesTotal": 7,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard"]
     },
     "AME20": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26654,7 +26654,7 @@
         "expectedGold": 53,
         "enemiesTotal": 7,
         "slots": 4,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard"]
     },
     "AME21": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26663,7 +26663,7 @@
         "reward": "Cogwheel Crest",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard", "Tech-Priest Enginseer"]
     },
     "AME22": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26672,7 +26672,7 @@
         "reward": "Vitruvius",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard", "Tech-Priest Enginseer"]
     },
     "AME23": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26681,7 +26681,7 @@
         "reward": "Writings",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer", "Cadian Vox-Caster"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard", "Tech-Priest Enginseer", "Cadian Vox-Caster"]
     },
     "AME24": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26691,7 +26691,7 @@
         "expectedGold": 53,
         "enemiesTotal": 8,
         "slots": 4,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer", "Cadian Lascannon Team"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard", "Tech-Priest Enginseer", "Cadian Lascannon Team"]
     },
     "AME25": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26700,7 +26700,7 @@
         "reward": "Air Purificator",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Electro-Priest", "Skirarii Vanguard", "Tech-Priest Enginseer", "Cadian Mortar Team"]
+        "enemiesTypes": ["Electro-Priest", "Skitarii Vanguard", "Tech-Priest Enginseer", "Cadian Mortar Team"]
     },
     "AME26": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26711,7 +26711,7 @@
         "enemiesTotal": 10,
         "enemiesTypes": [
             "Electro-Priest",
-            "Skirarii Vanguard",
+            "Skitarii Vanguard",
             "Tech-Priest Enginseer",
             "Cadian Mortar Team",
             "Cadian Vox-Caster"
@@ -26724,7 +26724,7 @@
         "reward": "Bionic Eye",
         "expectedGold": 53,
         "enemiesTotal": 8,
-        "enemiesTypes": ["Tech-Priest Enginseer", "Electro-Priest", "Skirarii Vanguard"]
+        "enemiesTypes": ["Tech-Priest Enginseer", "Electro-Priest", "Skitarii Vanguard"]
     },
     "AME28": {
         "campaign": "Adeptus Mechanicus Extremis",
@@ -26744,7 +26744,7 @@
         "enemiesTotal": 10,
         "enemiesTypes": [
             "Electro-Priest",
-            "Skirarii Vanguard",
+            "Skitarii Vanguard",
             "Tech-Priest Enginseer",
             "Cadian Vox-Caster",
             "Cadian Lascannon Team"
@@ -26775,7 +26775,7 @@
         "reward": "Golden Ornamental Skull",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Skirarii Vanguard"]
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Skitarii Vanguard"]
     },
     "AMSC3": {
         "campaign": "Adeptus Mechanicus Standard Challenge",
@@ -26793,7 +26793,7 @@
         "reward": "Unyielding Rivets",
         "expectedGold": 53,
         "enemiesTotal": 9,
-        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-Caster", "Skirarii Vanguard"]
+        "enemiesTypes": ["Cadian Guardsman", "Cadian Lascannon Team", "Cadian Vox-Caster", "Skitarii Vanguard"]
     },
     "AMEC2": {
         "campaign": "Adeptus Mechanicus Extremis Challenge",
@@ -26802,7 +26802,7 @@
         "reward": "Archeo-Tech Remnant",
         "expectedGold": 53,
         "enemiesTotal": 10,
-        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Skirarii Vanguard"]
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Skitarii Vanguard"]
     },
     "AMEC3": {
         "campaign": "Adeptus Mechanicus Extremis Challenge",
@@ -26811,7 +26811,7 @@
         "reward": "Archeotech Bionics",
         "expectedGold": 53,
         "enemiesTotal": 12,
-        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Skirarii Vanguard", "Cadian Mortar Team"]
+        "enemiesTypes": ["Electro-Priest", "Tech-Priest Enginseer", "Skitarii Vanguard", "Cadian Mortar Team"]
     },
     "TS1": {
         "campaign": "Tyranids Standard",
