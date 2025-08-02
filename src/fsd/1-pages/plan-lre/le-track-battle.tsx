@@ -1,19 +1,33 @@
 import { Button, Checkbox } from '@mui/material';
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+
+// eslint-disable-next-line import-x/no-internal-modules, import-x/order
+import { ILreTeam } from '@/models/interfaces';
+
+// eslint-disable-next-line import-x/no-internal-modules
+import { StoreContext } from '@/reducers/store.provider';
+
+import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
 
 import { ProgressState } from '@/fsd/3-features/lre-progress';
 
 import { ILreBattleProgress, ILreBattleRequirementsProgress } from './lre.models';
+import { TokenEstimationService } from './token-estimation-service';
 
 interface Props {
     battle: ILreBattleProgress;
+    trackId: LreTrackId;
+    legendaryEventId: LegendaryEventEnum;
     toggleState: (req: ILreBattleRequirementsProgress, state: ProgressState) => void;
 }
 
-export const LreTrackBattleSummary: React.FC<Props> = ({ battle, toggleState }) => {
+export const LreTrackBattleSummary: React.FC<Props> = ({ battle, trackId, legendaryEventId, toggleState }) => {
     const [longPressTimer, setLongPressTimer] = useState<NodeJS.Timeout | null>(null);
     const longPressDelay = 500; // Delay in ms to trigger long press
+
+    const { leSelectedTeams } = useContext(StoreContext);
+    const selectedTeams: ILreTeam[] = leSelectedTeams[legendaryEventId]?.teams ?? [];
 
     const handleClick = (event: React.MouseEvent, req: ILreBattleRequirementsProgress) => {
         if (isMobile) {
@@ -69,6 +83,19 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, toggleState }) 
         });
     };
 
+    const estimatedTokens = () => {
+        const numTokens = TokenEstimationService.computeMinimumTokensToClearBattle(
+            selectedTeams
+                .filter(team => team.section === trackId)
+                .filter(team => (team.expectedBattleClears ?? 14) >= battle.battleIndex + 1)
+        );
+        return (
+            <span className={'bold'} style={{ marginInlineEnd: '10px', minWidth: '42px' }}>
+                <center>{numTokens === undefined ? '-' : numTokens}</center>
+            </span>
+        );
+    };
+
     return (
         <div className="flex-box">
             <span className="bold" style={{ marginInlineEnd: 10, minWidth: 18 }}>
@@ -87,6 +114,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, toggleState }) 
                         inputProps={{ 'aria-label': 'controlled' }}
                     />
                 ))}
+                {estimatedTokens()}
             </div>
             <Button variant="outlined" onClick={handleToggleAll}>
                 Toggle

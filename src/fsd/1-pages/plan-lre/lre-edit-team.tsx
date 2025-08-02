@@ -26,6 +26,7 @@ interface Props {
 
 export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, deleteTeam }) => {
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
+    const [expectedBattleClears, setExpectedBattleClears] = useState<number>(team.expectedBattleClears ?? 14);
     const [teamName, setTeamName] = useState<string>(team.name);
     const [selectedTeam, setSelectedTeam] = useState<ICharacter2[]>(team.characters ?? []);
 
@@ -39,6 +40,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
             ...team,
             name: teamName,
             charactersIds: selectedTeam.map(x => x.id),
+            expectedBattleClears: expectedBattleClears,
         });
     };
 
@@ -69,6 +71,10 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
         );
     };
 
+    const clampExpectedBattles = (value: number) => {
+        return Math.max(1, Math.min(value, 14));
+    };
+
     return (
         <Dialog open={true} fullWidth onClose={onClose} maxWidth="md" fullScreen={isMobile}>
             <DialogTitle>Edit LRE Team</DialogTitle>
@@ -81,6 +87,20 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, onClose, saveTeam, del
                         variant="outlined"
                         value={teamName}
                         onChange={event => setTeamName(event.target.value.slice(0, 50))}
+                    />
+                    <TextField
+                        style={{ width: 200 }}
+                        label="Battle Clears"
+                        variant="outlined"
+                        type="number"
+                        value={clampExpectedBattles(expectedBattleClears)}
+                        onChange={event => {
+                            const value = parseInt(event.target.value, 10);
+                            if (!isNaN(value)) {
+                                setExpectedBattleClears(clampExpectedBattles(value));
+                            }
+                        }}
+                        // inputProps={{ min: 1, max: 14, step: 1 }}
                     />
                 </div>
                 <div className="flex-box wrap" style={{ paddingTop: '10px' }}>

@@ -43,6 +43,8 @@ export interface ILreTrackProgress {
     totalPoints: number;
     battlesPoints: number[];
     requirements: ILreRequirements[];
+
+    /** The battles in this track. In reverse order, e.g. battle 14 is the first. */
     battles: ILreBattleProgress[];
 }
 
