@@ -39,7 +39,7 @@
         "battlesPoints": [30, 28, 34, 42, 50, 47, 38, 50, 45, 42, 39, 55, 57, 53]
     },
     "beta": {
-        "name": "Beta (No Chaos)",
+        "name": "Beta (No Chaos or Tyranids)",
         "enemies": {
             "label": "Tyranids",
             "link": "https://tacticus.wiki.gg/wiki/Tyranids#NPC_Units"

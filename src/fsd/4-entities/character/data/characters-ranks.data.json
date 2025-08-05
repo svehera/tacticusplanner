@@ -12926,5 +12926,143 @@
             "Adamantine Thread Cloak",
             "Superaugmented Defences"
         ]
+    },
+    "Lucius": {
+        "Stone I": [
+            "Ropes and Chains",
+            "Mutation: Warped Muscles",
+            "Canister of Chemicals",
+            "Nasty Spikes",
+            "Armor Trim",
+            "Rebreather"
+        ],
+        "Stone II": [
+            "Chip Damage",
+            "Ropes and Chains",
+            "Combat Stimms",
+            "Razorsharp Spikes",
+            "Mutation: Tough Skin",
+            "Mutation: Tough Skin"
+        ],
+        "Stone III": [
+            "Helmet Trophy",
+            "Holster and Pockets",
+            "Vox-Caster",
+            "Canister of Chemicals",
+            "Blessed Tasset Plate",
+            "Mutation: Scaly Skin"
+        ],
+        "Iron I": [
+            "Holster and Pockets",
+            "Helmet Trophy",
+            "Combat Stimms",
+            "Combat Stimms",
+            "Mutation: Scaly Skin",
+            "Adamantium Lump"
+        ],
+        "Iron II": [
+            "Helmet Trophy",
+            "Grand Skull Trophy",
+            "Adamantium Blades",
+            "Slicing Claws",
+            "Subdermal Plating",
+            "Mutation: Scaly Skin"
+        ],
+        "Iron III": [
+            "Grand Skull Trophy",
+            "Mutation: Warped Lungs",
+            "Vox Grill Amplifier",
+            "Advanced Combat Stimms",
+            "Adamantium Lump",
+            "Subdermal Plating"
+        ],
+        "Bronze I": [
+            "Outrageous Padding",
+            "Mutation: Warped Heart",
+            "Prey-Sight",
+            "Classified Data-Slate",
+            "Mutation: Warped Skin",
+            "Ceramite Bar"
+        ],
+        "Bronze II": [
+            "Outrageous Adornment",
+            "Utilitarian Belt",
+            "Tank of Promethium",
+            "Refined Combat Stimms",
+            "Lavish Helmet Crest",
+            "Mutation: Warped Skin"
+        ],
+        "Bronze III": [
+            "Battle Scar",
+            "Grand Helmet Trophy",
+            "Sonic Greave Amplifier",
+            "Murderous Spikes",
+            "Lavish Helmet Spike",
+            "Duplicate Organ"
+        ],
+        "Silver I": [
+            "Outrageous Adornment",
+            "Secret Agenda",
+            "Sonic Greave Amplifier",
+            "Relic Hilt",
+            "Lavish Helmet Spike",
+            "Ceramite Sheet"
+        ],
+        "Silver II": [
+            "Boon of Slaanesh",
+            "Mutation: Regenerative Blood",
+            "Siren Amplifier",
+            "Refined Combat Stimms",
+            "Lavish Helmet Spike",
+            "Mutation: Metallic Skin"
+        ],
+        "Silver III": [
+            "Outrageous Adornment",
+            "Grandiose Skull Ornament",
+            "Sonic Greave Amplifier",
+            "Imposing Horns",
+            "Archeo-Tech Remnant",
+            "Ceramite Plates"
+        ],
+        "Gold I": [
+            "Outrageous Grimace",
+            "Grandiose Skull Ornament",
+            "Archeotech Bionics",
+            "Hyperstim",
+            "Lavish Helmet Plume",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold II": [
+            "Mark of Slaanesh",
+            "Mutation: Otherworldly Power",
+            "Siren Amplifier",
+            "Imposing Horns",
+            "Lavish Helmet Plume",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Gold III": [
+            "Outrageous Grimace",
+            "Grandiose Skull Ornament",
+            "Amplified Senses",
+            "Powered Blade",
+            "Abhorrent Plating",
+            "Mutation: Impenetrable Skin"
+        ],
+        "Diamond I": [
+            "Mark of Slaanesh",
+            "Grandiose Skull Ornament",
+            "Amplified Senses",
+            "Relic Micro-Generator",
+            "Abhorrent Plating",
+            "Ceramite Plates"
+        ],
+        "Diamond II": [
+            "Mark of Slaanesh",
+            "Superaugmented Constitution",
+            "Amplified Senses",
+            "Superaugmented Strength",
+            "Abhorrent Plating",
+            "Superaugmented Defences"
+        ]
     }
 }
