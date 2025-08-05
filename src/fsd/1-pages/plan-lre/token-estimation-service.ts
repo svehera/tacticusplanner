@@ -1,4 +1,4 @@
-import { _, rest } from 'lodash';
+import { cloneDeep } from 'lodash';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { ILreTeam } from '@/models/interfaces';
@@ -178,7 +178,7 @@ export class TokenEstimationService {
      */
     public static computeAllTokenUsage(tracksProgress: ILreTrackProgress[], teams: ILreTeam[]): TokenUse[] {
         const tokens: TokenUse[] = [];
-        const tracks: ILreTrackProgress[] = _.cloneDeep(tracksProgress);
+        const tracks: ILreTrackProgress[] = cloneDeep(tracksProgress);
         tracks.forEach(track => {
             track.battles.forEach(battle => {
                 battle.completed =
