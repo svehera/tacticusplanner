@@ -110,7 +110,7 @@ export const LeTokenTable = ({ tokens, currentPoints }: { tokens: TokenUse[]; cu
                         <td className="text-center justify-center">
                             <span style={{ color: getTextColor(2 - milestone.packsPerRound) }}>
                                 {milestone.packsPerRound == 2
-                                    ? 'with both backs'
+                                    ? 'with both packs'
                                     : milestone.packsPerRound == 1
                                       ? 'with premium missions'
                                       : 'with free missions'}
