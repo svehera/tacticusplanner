@@ -93,7 +93,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, onClick = () => 
 
     const rarity = useMemo(() => {
         return viewPreferences.lreGoalsPreview ? Math.max(character.rarity, rarityFromRank) : character.rarity;
-    }, [character, viewPreferences.lreGoalsPreview]);
+    }, [character.rarity, rarityFromRank, viewPreferences.lreGoalsPreview]);
 
     const emoji =
         character.bias === CharacterBias.recommendFirst
