@@ -230,6 +230,9 @@ export class CharactersService {
     }
 
     public static groupByRarityPools(availableCharacters: IPersonalCharacterData2[]): Record<Rarity, number> {
+        const mythicPool = availableCharacters.filter(
+            x => x.rarity === Rarity.Mythic && x.rank >= Rank.Adamantine1
+        ).length;
         const legendaryPool = availableCharacters.filter(
             x => x.rarity === Rarity.Legendary && x.rank >= Rank.Gold1
         ).length;
@@ -240,6 +243,7 @@ export class CharactersService {
         ).length;
 
         return {
+            [Rarity.Mythic]: mythicPool,
             [Rarity.Legendary]: legendaryPool,
             [Rarity.Epic]: epicPool,
             [Rarity.Rare]: rarePool,
