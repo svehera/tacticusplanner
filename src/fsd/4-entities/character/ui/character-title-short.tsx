@@ -21,7 +21,7 @@ export const CharacterTitleShort = ({
     fullName?: boolean;
     imageSize?: number;
 }) => {
-    const name = fullName ? character.fullName : character.shortName;
+    const name = fullName ? character.fullName : character.name;
 
     const isUnlocked = character.rank > Rank.Locked;
 
