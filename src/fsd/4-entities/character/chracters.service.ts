@@ -52,10 +52,24 @@ export class CharactersService {
         return this.charactersData.find(x => x.id === id);
     }
 
+    /**
+     * Snowprint's internal assets refer to damage type as damage profile, and
+     * they use a different string. This converts from their string to our enum.
+     * @param rawData The raw data from Snowprint.
+     * @returns The converted DamageType.
+     */
+    private static convertSnowprintDamageProfile(rawData: string): DamageType {
+        const ret: DamageType = DamageType[rawData as keyof typeof DamageType] || DamageType.Physical;
+        if (ret == DamageType.Physical && rawData !== 'Physical') {
+            console.warn(`Unknown damage profile: ${rawData}`);
+        }
+        return ret;
+    }
+
     private static convertUnitData(rawData: UnitDataRaw): ICharacterData {
         const unitData: ICharacterData = {
             id: rawData.Name,
-            tacticusId: rawData.tacticusId,
+            snowprintId: rawData.id,
             shortName: rawData['Short Name'],
             fullName: rawData['Full Name'],
             unitType: UnitType.character,
@@ -75,15 +89,17 @@ export class CharactersService {
             rangeHits: rawData['Ranged Hits'],
             rangeDistance: rawData.Distance,
             movement: rawData.Movement,
-            forcedSummons: rawData.ForcedSummons,
-            requiredInCampaign: rawData.RequiredInCampaign,
+            forcedSummons: rawData.ForcedSummons ?? false,
+            requiredInCampaign: rawData.RequiredInCampaign ?? false,
             campaignsRequiredIn: rawData.CampaignsRequiredIn,
             legendaryEvents: {} as ICharLegendaryEvents,
             traits: rawData.Traits as Trait[],
             icon: rawData.Icon,
             damageTypes: {
-                all: [rawData['Melee Damage'] as DamageType],
-                melee: rawData['Melee Damage'] as DamageType,
+                all: [this.convertSnowprintDamageProfile(rawData['Melee Damage'])],
+                melee: this.convertSnowprintDamageProfile(rawData['Melee Damage']),
+                activeAbility: [],
+                passiveAbility: [],
             },
             releaseRarity: rawData.ReleaseRarity,
             releaseDate: rawData.releaseDate,
@@ -91,16 +107,22 @@ export class CharactersService {
         };
 
         if (rawData['Ranged Damage']) {
-            unitData.damageTypes.all.push(rawData['Ranged Damage'] as DamageType);
-            unitData.damageTypes.range = rawData['Ranged Damage'] as DamageType;
+            unitData.damageTypes.all.push(this.convertSnowprintDamageProfile(rawData['Ranged Damage']));
+            unitData.damageTypes.range = this.convertSnowprintDamageProfile(rawData['Ranged Damage']);
         }
         if (rawData['Active Ability']) {
-            unitData.damageTypes.all.push(rawData['Active Ability'] as DamageType);
-            unitData.damageTypes.activeAbility = rawData['Active Ability'] as DamageType;
+            rawData['Active Ability'].forEach(x => {
+                const damageType = this.convertSnowprintDamageProfile(x);
+                unitData.damageTypes.all.push(damageType);
+                unitData.damageTypes.activeAbility.push(damageType);
+            });
         }
         if (rawData['Passive Ability']) {
-            unitData.damageTypes.all.push(rawData['Passive Ability'] as DamageType);
-            unitData.damageTypes.passiveAbility = rawData['Passive Ability'] as DamageType;
+            rawData['Passive Ability'].forEach(x => {
+                const damageType = this.convertSnowprintDamageProfile(x);
+                unitData.damageTypes.all.push(damageType);
+                unitData.damageTypes.passiveAbility.push(damageType);
+            });
         }
         unitData.damageTypes.all = uniq(unitData.damageTypes.all);
 

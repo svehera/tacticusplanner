@@ -109,7 +109,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                 ...state.map(char => {
                     const tacticusUnit = action.units.find(
                         unit =>
-                            unit.id.toLowerCase() === char.tacticusId?.toLowerCase() ||
+                            unit.id.toLowerCase() === char.id.toLowerCase() ||
                             unit.name.toLowerCase() === char.name.toLowerCase() ||
                             unit.name.toLowerCase() === char.shortName.toLowerCase() ||
                             unit.name.toLowerCase() === char.fullName.toLowerCase()
@@ -117,7 +117,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
 
                     const tacticusUnitShards = action.shards.find(
                         inventoryShard =>
-                            inventoryShard.id.toLowerCase() === char.tacticusId?.toLowerCase() ||
+                            inventoryShard.id.toLowerCase() === char.id.toLowerCase() ||
                             inventoryShard.name.toLowerCase().includes(char.name.toLowerCase()) ||
                             inventoryShard.name.toLowerCase().includes(char.shortName.toLowerCase()) ||
                             inventoryShard.name.toLowerCase().includes(char.fullName.toLowerCase())

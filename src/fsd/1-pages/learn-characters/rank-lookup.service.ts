@@ -59,6 +59,7 @@ export class RankLookupService {
                     // console.error('Recipe for ' + upgrade + ' is not found');
 
                     return {
+                        snowprintId: '',
                         rarity: 0,
                         craftable: false,
                         iconPath: upgrade,

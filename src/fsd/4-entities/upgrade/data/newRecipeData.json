@@ -1,86 +1,98 @@
 {
     "upgArmC001": {
         "material": "Purity Seal",
+        "snowprintId": "upgArmC001",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint/upgArmC001.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmC001.png",
         "craftable": false
     },
     "upgArmC002": {
         "material": "Fine Purity Seal",
+        "snowprintId": "upgArmC002",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint/upgArmC002.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmC002.png",
         "craftable": false
     },
     "upgArmC003": {
         "material": "Pile of Salvage",
+        "snowprintId": "upgArmC003",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint/upgArmC003.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmC003.png",
         "craftable": false
     },
     "upgArmC004": {
         "material": "Adamantium Ore",
+        "snowprintId": "upgArmC004",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint/upgArmC004.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmC004.png",
         "craftable": false
     },
     "upgArmC005": {
         "material": "Sophisticated Material",
+        "snowprintId": "upgArmC005",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint/upgArmC005.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmC005.png",
         "craftable": false
     },
     "upgArmC006": {
         "material": "Rebreather",
+        "snowprintId": "upgArmC006",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint/upgArmC006.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmC006.png",
         "craftable": false
     },
     "upgArmC007": {
         "material": "Mutation: Tough Skin",
+        "snowprintId": "upgArmC007",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint/upgArmC007.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmC007.png",
         "craftable": false
     },
     "upgArmC011": {
         "material": "Filaments",
+        "snowprintId": "upgArmC011",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint/upgArmC011.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmC011.png",
         "craftable": false
     },
     "upgArmC012": {
         "material": "Metal Joints",
+        "snowprintId": "upgArmC012",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint/upgArmC012.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmC012.png",
         "craftable": false
     },
     "upgArmC013": {
         "material": "Armor Trim",
+        "snowprintId": "upgArmC013",
         "rarity": "Common",
         "stat": "Armour",
-        "icon": "snowprint/upgArmC013.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmC013.png",
         "craftable": false
     },
     "upgArmCS": {
         "material": "Coming soon",
+        "snowprintId": "upgArmCS",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmCS.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmCS.png",
         "craftable": false
     },
     "upgArmE001C": {
         "material": "Grand Purity Seal",
+        "snowprintId": "upgArmE001C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE001C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE001C.png",
         "craftable": true,
         "recipe": [
             {
@@ -99,9 +111,10 @@
     },
     "upgArmE002C": {
         "material": "Adamantium Sheet",
+        "snowprintId": "upgArmE002C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE002C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -120,9 +133,10 @@
     },
     "upgArmE003C": {
         "material": "Sophisticated Material Sheet",
+        "snowprintId": "upgArmE003C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE003C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE003C.png",
         "craftable": true,
         "recipe": [
             {
@@ -141,9 +155,10 @@
     },
     "upgArmE004C": {
         "material": "Ceramite Sheet",
+        "snowprintId": "upgArmE004C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE004C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -162,9 +177,10 @@
     },
     "upgArmE005C": {
         "material": "Mutation: Metallic Skin",
+        "snowprintId": "upgArmE005C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE005C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE005C.png",
         "craftable": true,
         "recipe": [
             {
@@ -183,9 +199,10 @@
     },
     "upgArmE006C": {
         "material": "Ancient Tasset Plate",
+        "snowprintId": "upgArmE006C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE006C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE006C.png",
         "craftable": true,
         "recipe": [
             {
@@ -204,9 +221,10 @@
     },
     "upgArmE007C": {
         "material": "Death Shroud",
+        "snowprintId": "upgArmE007C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE007C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -217,30 +235,34 @@
     },
     "upgArmE008": {
         "material": "Hypermaterial Shifter",
+        "snowprintId": "upgArmE008",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE008.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE008.png",
         "craftable": false
     },
     "upgArmE009": {
         "material": "Revered Talisman",
+        "snowprintId": "upgArmE009",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE009.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE009.png",
         "craftable": false
     },
     "upgArmE010": {
         "material": "Unyielding Rivets",
+        "snowprintId": "upgArmE010",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE010.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE010.png",
         "craftable": false
     },
     "upgArmE011C": {
         "material": "Decorated Cloak",
+        "snowprintId": "upgArmE011C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE011C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE011C.png",
         "craftable": true,
         "recipe": [
             {
@@ -259,9 +281,10 @@
     },
     "upgArmE012C": {
         "material": "Sturdy Segments",
+        "snowprintId": "upgArmE012C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE012C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE012C.png",
         "craftable": true,
         "recipe": [
             {
@@ -280,16 +303,18 @@
     },
     "upgArmE013": {
         "material": "Duplicate Organ",
+        "snowprintId": "upgArmE013",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE013.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE013.png",
         "craftable": false
     },
     "upgArmE014C": {
         "material": "Advanced Mesh Weave Garment",
+        "snowprintId": "upgArmE014C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE014C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE014C.png",
         "craftable": true,
         "recipe": [
             {
@@ -308,9 +333,10 @@
     },
     "upgArmE021C": {
         "material": "Crusader's Tabard",
+        "snowprintId": "upgArmE021C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE021C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE021C.png",
         "craftable": true,
         "recipe": [
             {
@@ -321,9 +347,10 @@
     },
     "upgArmE022C": {
         "material": "Sanctified Corset Armor",
+        "snowprintId": "upgArmE022C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE022C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE022C.png",
         "craftable": true,
         "recipe": [
             {
@@ -334,9 +361,10 @@
     },
     "upgArmE023C": {
         "material": "Daemonic Armor Trim",
+        "snowprintId": "upgArmE023C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE023C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE023C.png",
         "craftable": true,
         "recipe": [
             {
@@ -347,9 +375,10 @@
     },
     "upgArmE025C": {
         "material": "High-grade Flak Plates",
+        "snowprintId": "upgArmE025C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE025C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE025C.png",
         "craftable": true,
         "recipe": [
             {
@@ -360,9 +389,10 @@
     },
     "upgArmE026C": {
         "material": "Ded 'ard Plate",
+        "snowprintId": "upgArmE026C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE026C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE026C.png",
         "craftable": true,
         "recipe": [
             {
@@ -373,9 +403,10 @@
     },
     "upgArmE027C": {
         "material": "Advanced Drone Controller",
+        "snowprintId": "upgArmE027C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE027C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE027C.png",
         "craftable": true,
         "recipe": [
             {
@@ -386,9 +417,10 @@
     },
     "upgArmE028C": {
         "material": "Filigrane Wraithbone Plate",
+        "snowprintId": "upgArmE028C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE028C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE028C.png",
         "craftable": true,
         "recipe": [
             {
@@ -399,9 +431,10 @@
     },
     "upgArmE029C": {
         "material": "Cabalistic Implements",
+        "snowprintId": "upgArmE029C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE029C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE029C.png",
         "craftable": true,
         "recipe": [
             {
@@ -412,9 +445,10 @@
     },
     "upgArmE031C": {
         "material": "Ice Troll Hide",
+        "snowprintId": "upgArmE031C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE031C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE031C.png",
         "craftable": true,
         "recipe": [
             {
@@ -425,9 +459,10 @@
     },
     "upgArmE032C": {
         "material": "Calibanite Hood",
+        "snowprintId": "upgArmE032C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE032C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE032C.png",
         "craftable": true,
         "recipe": [
             {
@@ -438,9 +473,10 @@
     },
     "upgArmE033C": {
         "material": "Adaptive Chitin Carapace",
+        "snowprintId": "upgArmE033C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE033C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE033C.png",
         "craftable": true,
         "recipe": [
             {
@@ -451,9 +487,10 @@
     },
     "upgArmE034C": {
         "material": "Enhanced Cogwheel Crest",
+        "snowprintId": "upgArmE034C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE034C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE034C.png",
         "craftable": true,
         "recipe": [
             {
@@ -464,9 +501,10 @@
     },
     "upgArmE035C": {
         "material": "Artisan of War Plating",
+        "snowprintId": "upgArmE035C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE035C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE035C.png",
         "craftable": true,
         "recipe": [
             {
@@ -477,9 +515,10 @@
     },
     "upgArmE036C": {
         "material": "Industrial Protection Suit",
+        "snowprintId": "upgArmE036C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE036C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE036C.png",
         "craftable": true,
         "recipe": [
             {
@@ -490,9 +529,10 @@
     },
     "upgArmE037C": {
         "material": "Auramite Wing Embellishment",
+        "snowprintId": "upgArmE037C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE037C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE037C.png",
         "craftable": true,
         "recipe": [
             {
@@ -503,9 +543,10 @@
     },
     "upgArmE038C": {
         "material": "Blessed Cadaere Renissum",
+        "snowprintId": "upgArmE038C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE038C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE038C.png",
         "craftable": true,
         "recipe": [
             {
@@ -516,9 +557,10 @@
     },
     "upgArmE039C": {
         "material": "Lavish Helmet Spike",
+        "snowprintId": "upgArmE039C",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmE039C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmE039C.png",
         "craftable": true,
         "recipe": [
             {
@@ -529,23 +571,26 @@
     },
     "upgArmECS": {
         "material": "Coming soon",
+        "snowprintId": "upgArmECS",
         "rarity": "Epic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmECS.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmECS.png",
         "craftable": false
     },
     "upgArmL001": {
         "material": "Purity Seal of the Primarch",
+        "snowprintId": "upgArmL001",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL001.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL001.png",
         "craftable": false
     },
     "upgArmL002C": {
         "material": "Adamantium Plates",
+        "snowprintId": "upgArmL002C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL002C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -560,9 +605,10 @@
     },
     "upgArmL003C": {
         "material": "Sophisticated Material Plates",
+        "snowprintId": "upgArmL003C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL003C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL003C.png",
         "craftable": true,
         "recipe": [
             {
@@ -577,9 +623,10 @@
     },
     "upgArmL004C": {
         "material": "Ceramite Plates",
+        "snowprintId": "upgArmL004C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL004C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -594,9 +641,10 @@
     },
     "upgArmL005C": {
         "material": "Mutation: Impervious Skin",
+        "snowprintId": "upgArmL005C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL005C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL005C.png",
         "craftable": true,
         "recipe": [
             {
@@ -611,9 +659,10 @@
     },
     "upgArmL006C": {
         "material": "Grand Tasset Plate",
+        "snowprintId": "upgArmL006C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL006C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL006C.png",
         "craftable": true,
         "recipe": [
             {
@@ -628,9 +677,10 @@
     },
     "upgArmL007C": {
         "material": "Immaterial Shroud",
+        "snowprintId": "upgArmL007C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL007C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -645,16 +695,18 @@
     },
     "upgArmL008": {
         "material": "Transdimensional Sanctum",
+        "snowprintId": "upgArmL008",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL008.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL008.png",
         "craftable": false
     },
     "upgArmL008C": {
         "material": "Sturdy Plates",
+        "snowprintId": "upgArmL008C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL008C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -669,9 +721,10 @@
     },
     "upgArmL009C": {
         "material": "Mysterious Device",
+        "snowprintId": "upgArmL009C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL009C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL009C.png",
         "craftable": true,
         "recipe": [
             {
@@ -686,9 +739,10 @@
     },
     "upgArmL010C": {
         "material": "Seal of the Emperor's Protection",
+        "snowprintId": "upgArmL010C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL010C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL010C.png",
         "craftable": true,
         "recipe": [
             {
@@ -703,9 +757,10 @@
     },
     "upgArmL011C": {
         "material": "Divine Cloak",
+        "snowprintId": "upgArmL011C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL011C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL011C.png",
         "craftable": true,
         "recipe": [
             {
@@ -720,9 +775,10 @@
     },
     "upgArmL021C": {
         "material": "Tabard of Righteous Wrath",
+        "snowprintId": "upgArmL021C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL021C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL021C.png",
         "craftable": true,
         "recipe": [
             {
@@ -737,9 +793,10 @@
     },
     "upgArmL022C": {
         "material": "Holy Corset Armor",
+        "snowprintId": "upgArmL022C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL022C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL022C.png",
         "craftable": true,
         "recipe": [
             {
@@ -754,9 +811,10 @@
     },
     "upgArmL023C": {
         "material": "Infernal Armor Trim",
+        "snowprintId": "upgArmL023C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL023C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL023C.png",
         "craftable": true,
         "recipe": [
             {
@@ -771,9 +829,10 @@
     },
     "upgArmL025C": {
         "material": "Artificer Flak Plates",
+        "snowprintId": "upgArmL025C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL025C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL025C.png",
         "craftable": true,
         "recipe": [
             {
@@ -788,9 +847,10 @@
     },
     "upgArmL026C": {
         "material": "Ded Shiny 'ard Plate",
+        "snowprintId": "upgArmL026C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL026C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL026C.png",
         "craftable": true,
         "recipe": [
             {
@@ -805,9 +865,10 @@
     },
     "upgArmL027C": {
         "material": "Sentry AI Drone Controller",
+        "snowprintId": "upgArmL027C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL027C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL027C.png",
         "craftable": true,
         "recipe": [
             {
@@ -822,9 +883,10 @@
     },
     "upgArmL028C": {
         "material": "Soul-Bonded Wraithbone Plate",
+        "snowprintId": "upgArmL028C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL028C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL028C.png",
         "craftable": true,
         "recipe": [
             {
@@ -839,9 +901,10 @@
     },
     "upgArmL029C": {
         "material": "Great Cult Implements",
+        "snowprintId": "upgArmL029C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL029C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL029C.png",
         "craftable": true,
         "recipe": [
             {
@@ -856,9 +919,10 @@
     },
     "upgArmL031C": {
         "material": "Ice Wyrm Hide",
+        "snowprintId": "upgArmL031C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL031C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL031C.png",
         "craftable": true,
         "recipe": [
             {
@@ -873,9 +937,10 @@
     },
     "upgArmL032C": {
         "material": "Inner Circle Hood",
+        "snowprintId": "upgArmL032C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL032C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL032C.png",
         "craftable": true,
         "recipe": [
             {
@@ -890,9 +955,10 @@
     },
     "upgArmL033C": {
         "material": "Hyper-Adaptive Chitin Carapace",
+        "snowprintId": "upgArmL033C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL033C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL033C.png",
         "craftable": true,
         "recipe": [
             {
@@ -907,9 +973,10 @@
     },
     "upgArmL034C": {
         "material": "Artificer Cogwheel Crest",
+        "snowprintId": "upgArmL034C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL034C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL034C.png",
         "craftable": true,
         "recipe": [
             {
@@ -924,9 +991,10 @@
     },
     "upgArmL035C": {
         "material": "Angelic Plating",
+        "snowprintId": "upgArmL035C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL035C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL035C.png",
         "craftable": true,
         "recipe": [
             {
@@ -941,9 +1009,10 @@
     },
     "upgArmL036C": {
         "material": "Industrial Carapace",
+        "snowprintId": "upgArmL036C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL036C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL036C.png",
         "craftable": true,
         "recipe": [
             {
@@ -958,9 +1027,10 @@
     },
     "upgArmL037C": {
         "material": "Auramite Wing Adornment",
+        "snowprintId": "upgArmL037C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL037C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL037C.png",
         "craftable": true,
         "recipe": [
             {
@@ -975,9 +1045,10 @@
     },
     "upgArmL038C": {
         "material": "Exalted Cadaere Renissum",
+        "snowprintId": "upgArmL038C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL038C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL038C.png",
         "craftable": true,
         "recipe": [
             {
@@ -992,9 +1063,10 @@
     },
     "upgArmL039C": {
         "material": "Lavish Helmet Plume",
+        "snowprintId": "upgArmL039C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL039C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL039C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1009,9 +1081,10 @@
     },
     "upgArmL120C": {
         "material": "Adamantine Mantle",
+        "snowprintId": "upgArmL120C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL120C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL120C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1030,9 +1103,10 @@
     },
     "upgArmL121C": {
         "material": "Octarian Crusade Seal",
+        "snowprintId": "upgArmL121C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL121C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL121C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1051,9 +1125,10 @@
     },
     "upgArmL122C": {
         "material": "Sabbat-Pattern Visor",
+        "snowprintId": "upgArmL122C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL122C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL122C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1072,9 +1147,10 @@
     },
     "upgArmL123C": {
         "material": "Black Rune",
+        "snowprintId": "upgArmL123C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL123C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL123C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1093,9 +1169,10 @@
     },
     "upgArmL124C": {
         "material": "Cloud of Flies",
+        "snowprintId": "upgArmL124C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL124C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL124C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1114,9 +1191,10 @@
     },
     "upgArmL125C": {
         "material": "Bastion Honour",
+        "snowprintId": "upgArmL125C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL125C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL125C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1135,9 +1213,10 @@
     },
     "upgArmL126C": {
         "material": "Bosspole",
+        "snowprintId": "upgArmL126C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL126C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL126C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1156,9 +1235,10 @@
     },
     "upgArmL127C": {
         "material": "Iridium Plating",
+        "snowprintId": "upgArmL127C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL127C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL127C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1177,9 +1257,10 @@
     },
     "upgArmL128C": {
         "material": "Scriptures of Fortune",
+        "snowprintId": "upgArmL128C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL128C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL128C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1198,9 +1279,10 @@
     },
     "upgArmL129C": {
         "material": "Warpweave Robe",
+        "snowprintId": "upgArmL129C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL129C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL129C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1219,9 +1301,10 @@
     },
     "upgArmL130C": {
         "material": "Transdimensional Sanctum",
+        "snowprintId": "upgArmL130C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL130C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL130C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1240,9 +1323,10 @@
     },
     "upgArmL131C": {
         "material": "Runic Tasset Plate",
+        "snowprintId": "upgArmL131C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL131C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL131C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1261,9 +1345,10 @@
     },
     "upgArmL132C": {
         "material": "Shroud of Heroes",
+        "snowprintId": "upgArmL132C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL132C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL132C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1282,9 +1367,10 @@
     },
     "upgArmL133C": {
         "material": "Symbiotic Carapace",
+        "snowprintId": "upgArmL133C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL133C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL133C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1303,9 +1389,10 @@
     },
     "upgArmL134C": {
         "material": "Kataphron Armour",
+        "snowprintId": "upgArmL134C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL134C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL134C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1324,9 +1411,10 @@
     },
     "upgArmL135C": {
         "material": "Visage of Death",
+        "snowprintId": "upgArmL135C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL135C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL135C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1345,9 +1433,10 @@
     },
     "upgArmL136C": {
         "material": "Gene-sire's Reliquant",
+        "snowprintId": "upgArmL136C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL136C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL136C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1366,9 +1455,10 @@
     },
     "upgArmL137C": {
         "material": "Adamantine Thread Cloak",
+        "snowprintId": "upgArmL137C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL137C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL137C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1387,9 +1477,10 @@
     },
     "upgArmL138C": {
         "material": "Collar of Khorne",
+        "snowprintId": "upgArmL138C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL138C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL138C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1408,9 +1499,10 @@
     },
     "upgArmL139C": {
         "material": "Abhorrent Plating",
+        "snowprintId": "upgArmL139C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL139C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL139C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1429,30 +1521,34 @@
     },
     "upgArmL202": {
         "material": "Psyk-Conductive Material",
+        "snowprintId": "upgArmL202",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL202.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL202.png",
         "craftable": false
     },
     "upgArmL203": {
         "material": "Archeotech Remnant",
+        "snowprintId": "upgArmL203",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL203.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL203.png",
         "craftable": false
     },
     "upgArmL204": {
         "material": "Ancient Alloy",
+        "snowprintId": "upgArmL204",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL204.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL204.png",
         "craftable": false
     },
     "upgArmL211C": {
         "material": "Monstrous Defences",
+        "snowprintId": "upgArmL211C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL211C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL211C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1471,9 +1567,10 @@
     },
     "upgArmL212C": {
         "material": "Preternatural Defences",
+        "snowprintId": "upgArmL212C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL212C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL212C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1492,9 +1589,10 @@
     },
     "upgArmL213C": {
         "material": "Superaugmented Defences",
+        "snowprintId": "upgArmL213C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL213C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL213C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1513,9 +1611,10 @@
     },
     "upgArmL214C": {
         "material": "Technocrafted Defences",
+        "snowprintId": "upgArmL214C",
         "rarity": "Legendary",
         "stat": "Armour",
-        "icon": "snowprint/upgArmL214C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmL214C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1534,9 +1633,10 @@
     },
     "upgArmM211C": {
         "material": "Seal of Indomitability",
+        "snowprintId": "upgArmM211C",
         "rarity": "Mythic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmM211C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmM211C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1555,9 +1655,10 @@
     },
     "upgArmM212C": {
         "material": "Mutation: Impenetrable Skin",
+        "snowprintId": "upgArmM212C",
         "rarity": "Mythic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmM212C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmM212C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1576,9 +1677,10 @@
     },
     "upgArmM213C": {
         "material": "Magnificient Garment",
+        "snowprintId": "upgArmM213C",
         "rarity": "Mythic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmM213C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmM213C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1597,9 +1699,10 @@
     },
     "upgArmM214C": {
         "material": "Warforged Safeguard",
+        "snowprintId": "upgArmM214C",
         "rarity": "Mythic",
         "stat": "Armour",
-        "icon": "snowprint/upgArmM214C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmM214C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1618,9 +1721,10 @@
     },
     "upgArmR001C": {
         "material": "Blessed Purity Seal",
+        "snowprintId": "upgArmR001C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR001C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR001C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1639,9 +1743,10 @@
     },
     "upgArmR002C": {
         "material": "Sophisticated Material Bar",
+        "snowprintId": "upgArmR002C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR002C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1656,9 +1761,10 @@
     },
     "upgArmR003C": {
         "material": "Ceramite Bar",
+        "snowprintId": "upgArmR003C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR003C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR003C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1673,9 +1779,10 @@
     },
     "upgArmR004C": {
         "material": "Mutation: Warped Skin",
+        "snowprintId": "upgArmR004C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR004C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1694,23 +1801,26 @@
     },
     "upgArmR005": {
         "material": "Artificer Tasset Plate",
+        "snowprintId": "upgArmR005",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR005.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR005.png",
         "craftable": false
     },
     "upgArmR006": {
         "material": "Crate of Salvage",
+        "snowprintId": "upgArmR006",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR006.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR006.png",
         "craftable": false
     },
     "upgArmR007C": {
         "material": "Adamantium Bar",
+        "snowprintId": "upgArmR007C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR007C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1725,9 +1835,10 @@
     },
     "upgArmR008C": {
         "material": "Sturdy Parts",
+        "snowprintId": "upgArmR008C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR008C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1742,23 +1853,26 @@
     },
     "upgArmR009": {
         "material": "Unnatural Vapour Dispenser",
+        "snowprintId": "upgArmR009",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR009.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR009.png",
         "craftable": false
     },
     "upgArmR010": {
         "material": "Valuable Fabric",
+        "snowprintId": "upgArmR010",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR010.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR010.png",
         "craftable": false
     },
     "upgArmR012C": {
         "material": "Impressive Armor Trim",
+        "snowprintId": "upgArmR012C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR012C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR012C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1777,9 +1891,10 @@
     },
     "upgArmR013C": {
         "material": "Fine Cloak",
+        "snowprintId": "upgArmR013C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR013C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR013C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1798,9 +1913,10 @@
     },
     "upgArmR014C": {
         "material": "Mesh Weave Garment",
+        "snowprintId": "upgArmR014C",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR014C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR014C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1819,156 +1935,178 @@
     },
     "upgArmR015": {
         "material": "Subdermal Plating",
+        "snowprintId": "upgArmR015",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR015.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR015.png",
         "craftable": false
     },
     "upgArmR021": {
         "material": "Blessed Tabard",
+        "snowprintId": "upgArmR021",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR021.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR021.png",
         "craftable": false
     },
     "upgArmR022": {
         "material": "Blessed Corset Armor",
+        "snowprintId": "upgArmR022",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR022.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR022.png",
         "craftable": false
     },
     "upgArmR023": {
         "material": "Blasphemous Armor Trim",
+        "snowprintId": "upgArmR023",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR023.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR023.png",
         "craftable": false
     },
     "upgArmR025": {
         "material": "Flak Plates",
+        "snowprintId": "upgArmR025",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR025.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR025.png",
         "craftable": false
     },
     "upgArmR026": {
         "material": "'ard Plate",
+        "snowprintId": "upgArmR026",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR026.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR026.png",
         "craftable": false
     },
     "upgArmR027": {
         "material": "Drone Controller",
+        "snowprintId": "upgArmR027",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR027.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR027.png",
         "craftable": false
     },
     "upgArmR028": {
         "material": "Wraithbone Plate",
+        "snowprintId": "upgArmR028",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR028.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR028.png",
         "craftable": false
     },
     "upgArmR029": {
         "material": "Ritual Implements",
+        "snowprintId": "upgArmR029",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR029.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR029.png",
         "craftable": false
     },
     "upgArmR031": {
         "material": "Beast Hide",
+        "snowprintId": "upgArmR031",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR031.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR031.png",
         "craftable": false
     },
     "upgArmR032": {
         "material": "Dark Hood",
+        "snowprintId": "upgArmR032",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR032.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR032.png",
         "craftable": false
     },
     "upgArmR033": {
         "material": "Reinforced Chitin",
+        "snowprintId": "upgArmR033",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR033.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR033.png",
         "craftable": false
     },
     "upgArmR034": {
         "material": "Cogwheel Crest",
+        "snowprintId": "upgArmR034",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR034.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR034.png",
         "craftable": false
     },
     "upgArmR035": {
         "material": "Artisan Plating",
+        "snowprintId": "upgArmR035",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR035.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR035.png",
         "craftable": false
     },
     "upgArmR036": {
         "material": "Industrial Padding",
+        "snowprintId": "upgArmR036",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR036.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR036.png",
         "craftable": false
     },
     "upgArmR037": {
         "material": "Auramite Wing",
+        "snowprintId": "upgArmR037",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR037.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR037.png",
         "craftable": false
     },
     "upgArmR038": {
         "material": "Cadaere Renissum",
+        "snowprintId": "upgArmR038",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR038.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR038.png",
         "craftable": false
     },
     "upgArmR039": {
         "material": "Lavish Helmet Crest",
+        "snowprintId": "upgArmR039",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmR039.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmR039.png",
         "craftable": false
     },
     "upgArmRCS": {
         "material": "Coming soon",
+        "snowprintId": "upgArmRCS",
         "rarity": "Rare",
         "stat": "Armour",
-        "icon": "snowprint/upgArmRCS.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmRCS.png",
         "craftable": false
     },
     "upgArmU001": {
         "material": "Oath Seal",
+        "snowprintId": "upgArmU001",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint/upgArmU001.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmU001.png",
         "craftable": false
     },
     "upgArmU002": {
         "material": "Box of Salvage",
+        "snowprintId": "upgArmU002",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint/upgArmU002.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmU002.png",
         "craftable": false
     },
     "upgArmU003C": {
         "material": "Adamantium Lump",
+        "snowprintId": "upgArmU003C",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint/upgArmU003C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmU003C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1979,9 +2117,10 @@
     },
     "upgArmU004C": {
         "material": "Sophisticated Material Ingot",
+        "snowprintId": "upgArmU004C",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint/upgArmU004C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmU004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -1992,44 +2131,50 @@
     },
     "upgArmU005": {
         "material": "Ceramite Lump",
+        "snowprintId": "upgArmU005",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint/upgArmU005.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmU005.png",
         "craftable": false
     },
     "upgArmU006": {
         "material": "Advanced Filaments",
+        "snowprintId": "upgArmU006",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint/upgArmU006.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmU006.png",
         "craftable": false
     },
     "upgArmU007": {
         "material": "Mutation: Scaly Skin",
+        "snowprintId": "upgArmU007",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint/upgArmU007.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmU007.png",
         "craftable": false
     },
     "upgArmU008": {
         "material": "Advanced Rebreather",
+        "snowprintId": "upgArmU008",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint/upgArmU008.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmU008.png",
         "craftable": false
     },
     "upgArmU009": {
         "material": "Blessed Tasset Plate",
+        "snowprintId": "upgArmU009",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint/upgArmU009.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmU009.png",
         "craftable": false
     },
     "upgArmU010C": {
         "material": "Blessed Ceramite",
+        "snowprintId": "upgArmU010C",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint/upgArmU010C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmU010C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2040,16 +2185,18 @@
     },
     "upgArmU012": {
         "material": "Reinforced Scale-Plates",
+        "snowprintId": "upgArmU012",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint/upgArmU012.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmU012.png",
         "craftable": false
     },
     "upgArmU012C": {
         "material": "Sturdy Pieces",
+        "snowprintId": "upgArmU012C",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint/upgArmU012C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmU012C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2060,142 +2207,162 @@
     },
     "upgArmU013": {
         "material": "Cloak",
+        "snowprintId": "upgArmU013",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint/upgArmU013.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmU013.png",
         "craftable": false
     },
     "upgArmU014": {
         "material": "Mesh Weave",
+        "snowprintId": "upgArmU014",
         "rarity": "Uncommon",
         "stat": "Armour",
-        "icon": "snowprint/upgArmU014.png",
+        "icon": "snowprint_assets/upgrade_materials/upgArmU014.png",
         "craftable": false
     },
     "upgDmgC001": {
         "material": "Round of Ammo",
+        "snowprintId": "upgDmgC001",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC001.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC001.png",
         "craftable": false
     },
     "upgDmgC002": {
         "material": "Frag Grenade",
+        "snowprintId": "upgDmgC002",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC002.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC002.png",
         "craftable": false
     },
     "upgDmgC003": {
         "material": "Canister of Chemicals",
+        "snowprintId": "upgDmgC003",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC003.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC003.png",
         "craftable": false
     },
     "upgDmgC004": {
         "material": "Can of Promethium",
+        "snowprintId": "upgDmgC004",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC004.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC004.png",
         "craftable": false
     },
     "upgDmgC005": {
         "material": "Ballistics Data",
+        "snowprintId": "upgDmgC005",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC005.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC005.png",
         "craftable": false
     },
     "upgDmgC006": {
         "material": "Lesser Reliquary of Vengeance",
+        "snowprintId": "upgDmgC006",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC006.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC006.png",
         "craftable": false
     },
     "upgDmgC007": {
         "material": "Single Power Pack",
+        "snowprintId": "upgDmgC007",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC007.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC007.png",
         "craftable": false
     },
     "upgDmgC008": {
         "material": "Otherworldly Energy",
+        "snowprintId": "upgDmgC008",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC008.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC008.png",
         "craftable": false
     },
     "upgDmgC009": {
         "material": "Basic Auxiliary Core",
+        "snowprintId": "upgDmgC009",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC009.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC009.png",
         "craftable": false
     },
     "upgDmgC010": {
         "material": "Auspex",
+        "snowprintId": "upgDmgC010",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC010.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC010.png",
         "craftable": false
     },
     "upgDmgC011": {
         "material": "Weapon Anointment Oils",
+        "snowprintId": "upgDmgC011",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC011.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC011.png",
         "craftable": false
     },
     "upgDmgC012": {
         "material": "Weapon parts",
+        "snowprintId": "upgDmgC012",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC012.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC012.png",
         "craftable": false
     },
     "upgDmgC013": {
         "material": "Vox-Caster",
+        "snowprintId": "upgDmgC013",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC013.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC013.png",
         "craftable": false
     },
     "upgDmgC014": {
         "material": "Nasty Spikes",
+        "snowprintId": "upgDmgC014",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC014.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC014.png",
         "craftable": false
     },
     "upgDmgC015": {
         "material": "Targeting Link",
+        "snowprintId": "upgDmgC015",
         "rarity": "Common",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgC015.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgC015.png",
         "craftable": false
     },
     "upgDmgCS": {
         "material": "Coming soon",
+        "snowprintId": "upgDmgCS",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgCS.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgCS.png",
         "craftable": false
     },
     "upgDmgE001": {
         "material": "Special Issue Ammo",
+        "snowprintId": "upgDmgE001",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE001.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE001.png",
         "craftable": false
     },
     "upgDmgE002C": {
         "material": "Belt of Krak Grenades",
+        "snowprintId": "upgDmgE002C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE002C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2214,30 +2381,34 @@
     },
     "upgDmgE003": {
         "material": "Blessed Promethium Canister",
+        "snowprintId": "upgDmgE003",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE003.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE003.png",
         "craftable": false
     },
     "upgDmgE004": {
         "material": "Bionic Neural Pathways",
+        "snowprintId": "upgDmgE004",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE004.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE004.png",
         "craftable": false
     },
     "upgDmgE005": {
         "material": "Greater Reliquary of Vengeance",
+        "snowprintId": "upgDmgE005",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE005.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE005.png",
         "craftable": false
     },
     "upgDmgE006C": {
         "material": "Anointed Micro-Generator",
+        "snowprintId": "upgDmgE006C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE006C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE006C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2256,9 +2427,10 @@
     },
     "upgDmgE007C": {
         "material": "Plasma Cell Crate",
+        "snowprintId": "upgDmgE007C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE007C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2277,9 +2449,10 @@
     },
     "upgDmgE008C": {
         "material": "Anointed Auxiliary Core",
+        "snowprintId": "upgDmgE008C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE008C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2298,9 +2471,10 @@
     },
     "upgDmgE009C": {
         "material": "Refined Combat Stimms",
+        "snowprintId": "upgDmgE009C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE009C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE009C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2319,23 +2493,26 @@
     },
     "upgDmgE010": {
         "material": "Warp Locus",
+        "snowprintId": "upgDmgE010",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE010.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE010.png",
         "craftable": false
     },
     "upgDmgE011": {
         "material": "Elaborate Hilt",
+        "snowprintId": "upgDmgE011",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE011.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE011.png",
         "craftable": false
     },
     "upgDmgE021C": {
         "material": "Chain of Righteous Zeal",
+        "snowprintId": "upgDmgE021C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE021C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE021C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2346,9 +2523,10 @@
     },
     "upgDmgE022C": {
         "material": "Hymn of Sacrifice",
+        "snowprintId": "upgDmgE022C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE022C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE022C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2359,9 +2537,10 @@
     },
     "upgDmgE023C": {
         "material": "Icon of Daemonic Vengeance",
+        "snowprintId": "upgDmgE023C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE023C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE023C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2372,9 +2551,10 @@
     },
     "upgDmgE024C": {
         "material": "Sigil of Inevitable Decay",
+        "snowprintId": "upgDmgE024C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE024C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE024C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2385,9 +2565,10 @@
     },
     "upgDmgE025C": {
         "material": "Veteran's Entrenching Tool",
+        "snowprintId": "upgDmgE025C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE025C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE025C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2398,9 +2579,10 @@
     },
     "upgDmgE026C": {
         "material": "Brutal Iron Jaw",
+        "snowprintId": "upgDmgE026C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE026C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE026C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2411,9 +2593,10 @@
     },
     "upgDmgE027C": {
         "material": "Advanced Sensor Suite",
+        "snowprintId": "upgDmgE027C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE027C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE027C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2424,9 +2607,10 @@
     },
     "upgDmgE028C": {
         "material": "Filigrane Psytronome",
+        "snowprintId": "upgDmgE028C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE028C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE028C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2437,9 +2621,10 @@
     },
     "upgDmgE029C": {
         "material": "Ensorcelled Infusion",
+        "snowprintId": "upgDmgE029C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE029C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE029C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2450,9 +2635,10 @@
     },
     "upgDmgE031C": {
         "material": "Thunderwolf Tooth Necklace",
+        "snowprintId": "upgDmgE031C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE031C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE031C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2463,9 +2649,10 @@
     },
     "upgDmgE032C": {
         "material": "Bolts of Judgement",
+        "snowprintId": "upgDmgE032C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE032C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE032C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2476,9 +2663,10 @@
     },
     "upgDmgE033C": {
         "material": "Adaptive Toxin Sacs",
+        "snowprintId": "upgDmgE033C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE033C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE033C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2489,9 +2677,10 @@
     },
     "upgDmgE034C": {
         "material": "Enhanced Motive Force Capacitator",
+        "snowprintId": "upgDmgE034C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE034C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE034C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2502,9 +2691,10 @@
     },
     "upgDmgE035C": {
         "material": "Quake Bolts",
+        "snowprintId": "upgDmgE035C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE035C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE035C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2515,9 +2705,10 @@
     },
     "upgDmgE036C": {
         "material": "Proclamation Caster",
+        "snowprintId": "upgDmgE036C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE036C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE036C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2528,9 +2719,10 @@
     },
     "upgDmgE037C": {
         "material": "Embellished Bolt Feeder",
+        "snowprintId": "upgDmgE037C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE037C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE037C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2541,9 +2733,10 @@
     },
     "upgDmgE038C": {
         "material": "Blessed Chainaxe Teeth",
+        "snowprintId": "upgDmgE038C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE038C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE038C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2554,9 +2747,10 @@
     },
     "upgDmgE039C": {
         "material": "Sonic Greave Amplifier",
+        "snowprintId": "upgDmgE039C",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgE039C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgE039C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2567,23 +2761,26 @@
     },
     "upgDmgECS": {
         "material": "Coming soon",
+        "snowprintId": "upgDmgECS",
         "rarity": "Epic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgECS.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgECS.png",
         "craftable": false
     },
     "upgDmgL001": {
         "material": "Master-crafted Ammo",
+        "snowprintId": "upgDmgL001",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL001.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL001.png",
         "craftable": false
     },
     "upgDmgL002C": {
         "material": "Blessed Promethium Tank",
+        "snowprintId": "upgDmgL002C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL002C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2602,16 +2799,18 @@
     },
     "upgDmgL003": {
         "material": "Archeotech Bionics",
+        "snowprintId": "upgDmgL003",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL003.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL003.png",
         "craftable": false
     },
     "upgDmgL004C": {
         "material": "Legendary Reliquary of Vengeance",
+        "snowprintId": "upgDmgL004C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL004C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2630,9 +2829,10 @@
     },
     "upgDmgL005C": {
         "material": "Optimal Micro-Generator",
+        "snowprintId": "upgDmgL005C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL005C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL005C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2647,9 +2847,10 @@
     },
     "upgDmgL006C": {
         "material": "Optimal Relic Auxiliary Core",
+        "snowprintId": "upgDmgL006C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL006C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL006C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2664,9 +2865,10 @@
     },
     "upgDmgL007C": {
         "material": "Autoloader",
+        "snowprintId": "upgDmgL007C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL007C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2685,9 +2887,10 @@
     },
     "upgDmgL008C": {
         "material": "Powered Blade",
+        "snowprintId": "upgDmgL008C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL008C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2706,9 +2909,10 @@
     },
     "upgDmgL009C": {
         "material": "Hyperstim",
+        "snowprintId": "upgDmgL009C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL009C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL009C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2727,9 +2931,10 @@
     },
     "upgDmgL010C": {
         "material": "Psychic Focus",
+        "snowprintId": "upgDmgL010C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL010C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL010C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2748,9 +2953,10 @@
     },
     "upgDmgL012C": {
         "material": "Plasma Coil",
+        "snowprintId": "upgDmgL012C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL012C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL012C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2765,9 +2971,10 @@
     },
     "upgDmgL015C": {
         "material": "Digital Weapons",
+        "snowprintId": "upgDmgL015C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL015C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL015C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2782,9 +2989,10 @@
     },
     "upgDmgL016C": {
         "material": "Imposing Horns",
+        "snowprintId": "upgDmgL016C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL016C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL016C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2799,9 +3007,10 @@
     },
     "upgDmgL017C": {
         "material": "Overcapacitator",
+        "snowprintId": "upgDmgL017C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL017C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL017C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2816,9 +3025,10 @@
     },
     "upgDmgL021C": {
         "material": "Chain of Zealous Wrath",
+        "snowprintId": "upgDmgL021C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL021C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL021C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2833,9 +3043,10 @@
     },
     "upgDmgL022C": {
         "material": "Hymn of the Divine",
+        "snowprintId": "upgDmgL022C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL022C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL022C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2850,9 +3061,10 @@
     },
     "upgDmgL023C": {
         "material": "Icon of Infernal Vengeance",
+        "snowprintId": "upgDmgL023C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL023C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL023C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2867,9 +3079,10 @@
     },
     "upgDmgL024C": {
         "material": "Sigil of Eternal Decay",
+        "snowprintId": "upgDmgL024C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL024C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL024C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2884,9 +3097,10 @@
     },
     "upgDmgL025C": {
         "material": "Heirloom Entrenching Tool",
+        "snowprintId": "upgDmgL025C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL025C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL025C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2901,9 +3115,10 @@
     },
     "upgDmgL026C": {
         "material": "Ded Brutal Iron Jaw",
+        "snowprintId": "upgDmgL026C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL026C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL026C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2918,9 +3133,10 @@
     },
     "upgDmgL027C": {
         "material": "Multi-Spectrum Sensor Suite",
+        "snowprintId": "upgDmgL027C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL027C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL027C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2935,9 +3151,10 @@
     },
     "upgDmgL028C": {
         "material": "Soul-Bonded Psytronome",
+        "snowprintId": "upgDmgL028C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL028C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL028C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2952,9 +3169,10 @@
     },
     "upgDmgL029C": {
         "material": "Warpflame Infusion",
+        "snowprintId": "upgDmgL029C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL029C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL029C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2969,9 +3187,10 @@
     },
     "upgDmgL030C": {
         "material": "Extermination Protocols",
+        "snowprintId": "upgDmgL030C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL030C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL030C.png",
         "craftable": true,
         "recipe": [
             {
@@ -2986,9 +3205,10 @@
     },
     "upgDmgL031C": {
         "material": "Kraken Tooth Necklace",
+        "snowprintId": "upgDmgL031C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL031C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL031C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3003,9 +3223,10 @@
     },
     "upgDmgL032C": {
         "material": "Bolts of Furious Vengeance",
+        "snowprintId": "upgDmgL032C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL032C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL032C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3020,9 +3241,10 @@
     },
     "upgDmgL033C": {
         "material": "Hyper-Adaptive Toxin Sacs",
+        "snowprintId": "upgDmgL033C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL033C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL033C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3037,9 +3259,10 @@
     },
     "upgDmgL034C": {
         "material": "Optimal Motive Force Capacitator",
+        "snowprintId": "upgDmgL034C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL034C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL034C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3054,9 +3277,10 @@
     },
     "upgDmgL035C": {
         "material": "Decimator Bolts",
+        "snowprintId": "upgDmgL035C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL035C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL035C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3071,9 +3295,10 @@
     },
     "upgDmgL036C": {
         "material": "Proclamation Hailer",
+        "snowprintId": "upgDmgL036C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL036C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL036C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3088,9 +3313,10 @@
     },
     "upgDmgL037C": {
         "material": "Adorned Bolt Feeder",
+        "snowprintId": "upgDmgL037C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL037C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL037C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3105,9 +3331,10 @@
     },
     "upgDmgL038C": {
         "material": "Exalted Chainaxe Teeth",
+        "snowprintId": "upgDmgL038C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL038C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL038C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3122,9 +3349,10 @@
     },
     "upgDmgL039C": {
         "material": "Siren Amplifier",
+        "snowprintId": "upgDmgL039C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL039C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL039C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3139,9 +3367,10 @@
     },
     "upgDmgL120C": {
         "material": "Hellfury Bolts",
+        "snowprintId": "upgDmgL120C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL120C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL120C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3160,9 +3389,10 @@
     },
     "upgDmgL121C": {
         "material": "Witchseeker Bolts",
+        "snowprintId": "upgDmgL121C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL121C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL121C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3181,9 +3411,10 @@
     },
     "upgDmgL122C": {
         "material": "Blessed Bolts",
+        "snowprintId": "upgDmgL122C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL122C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL122C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3202,9 +3433,10 @@
     },
     "upgDmgL123C": {
         "material": "Daemon Shells",
+        "snowprintId": "upgDmgL123C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL123C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL123C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3223,9 +3455,10 @@
     },
     "upgDmgL124C": {
         "material": "Virulent Rounds",
+        "snowprintId": "upgDmgL124C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL124C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL124C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3244,9 +3477,10 @@
     },
     "upgDmgL125C": {
         "material": "Medallion Resolute",
+        "snowprintId": "upgDmgL125C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL125C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL125C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3265,9 +3499,10 @@
     },
     "upgDmgL126C": {
         "material": "Snazzy Dakka",
+        "snowprintId": "upgDmgL126C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL126C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL126C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3286,9 +3521,10 @@
     },
     "upgDmgL127C": {
         "material": "Target Lock",
+        "snowprintId": "upgDmgL127C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL127C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL127C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3307,9 +3543,10 @@
     },
     "upgDmgL128C": {
         "material": "Scriptures of Battle",
+        "snowprintId": "upgDmgL128C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL128C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL128C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3328,9 +3565,10 @@
     },
     "upgDmgL129C": {
         "material": "Boonstone",
+        "snowprintId": "upgDmgL129C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL129C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL129C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3349,9 +3587,10 @@
     },
     "upgDmgL130C": {
         "material": "Molecular Vaporiser",
+        "snowprintId": "upgDmgL130C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL130C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL130C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3370,9 +3609,10 @@
     },
     "upgDmgL131C": {
         "material": "Frostblade",
+        "snowprintId": "upgDmgL131C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL131C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL131C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3391,9 +3631,10 @@
     },
     "upgDmgL132C": {
         "material": "Arbiter's Gaze",
+        "snowprintId": "upgDmgL132C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL132C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL132C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3412,9 +3653,10 @@
     },
     "upgDmgL133C": {
         "material": "Implant Attack",
+        "snowprintId": "upgDmgL133C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL133C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL133C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3433,9 +3675,10 @@
     },
     "upgDmgL134C": {
         "material": "Prehensile Dataspike",
+        "snowprintId": "upgDmgL134C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL134C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL134C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3454,9 +3697,10 @@
     },
     "upgDmgL135C": {
         "material": "Archangel's Shard",
+        "snowprintId": "upgDmgL135C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL135C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL135C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3475,9 +3719,10 @@
     },
     "upgDmgL136C": {
         "material": "Gene-twisted Muscle",
+        "snowprintId": "upgDmgL136C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL136C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL136C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3496,9 +3741,10 @@
     },
     "upgDmgL137C": {
         "material": "Panoptispex",
+        "snowprintId": "upgDmgL137C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL137C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL137C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3517,9 +3763,10 @@
     },
     "upgDmgL138C": {
         "material": "Butcher's Nails",
+        "snowprintId": "upgDmgL138C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL138C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL138C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3538,9 +3785,10 @@
     },
     "upgDmgL139C": {
         "material": "Amplified Senses",
+        "snowprintId": "upgDmgL139C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL139C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL139C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3559,23 +3807,26 @@
     },
     "upgDmgL202": {
         "material": "Psychic Force Conduit",
+        "snowprintId": "upgDmgL202",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL202.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL202.png",
         "craftable": false
     },
     "upgDmgL204": {
         "material": "Ancient Power Cell",
+        "snowprintId": "upgDmgL204",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL204.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL204.png",
         "craftable": false
     },
     "upgDmgL211C": {
         "material": "Monstrous Strength",
+        "snowprintId": "upgDmgL211C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL211C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL211C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3594,9 +3845,10 @@
     },
     "upgDmgL212C": {
         "material": "Preternatural Strength",
+        "snowprintId": "upgDmgL212C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL212C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL212C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3615,9 +3867,10 @@
     },
     "upgDmgL213C": {
         "material": "Superaugmented Strength",
+        "snowprintId": "upgDmgL213C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL213C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL213C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3636,9 +3889,10 @@
     },
     "upgDmgL214C": {
         "material": "Technocrafted Strength",
+        "snowprintId": "upgDmgL214C",
         "rarity": "Legendary",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgL214C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgL214C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3657,9 +3911,10 @@
     },
     "upgDmgM211C": {
         "material": "Arcane Substances",
+        "snowprintId": "upgDmgM211C",
         "rarity": "Mythic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgM211C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgM211C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3678,9 +3933,10 @@
     },
     "upgDmgM212C": {
         "material": "Sundering Talons",
+        "snowprintId": "upgDmgM212C",
         "rarity": "Mythic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgM212C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgM212C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3699,9 +3955,10 @@
     },
     "upgDmgM213C": {
         "material": "Ancient Weapon Augmentation",
+        "snowprintId": "upgDmgM213C",
         "rarity": "Mythic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgM213C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgM213C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3720,9 +3977,10 @@
     },
     "upgDmgM214C": {
         "material": "Ancient Power Source",
+        "snowprintId": "upgDmgM214C",
         "rarity": "Mythic",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgM214C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgM214C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3741,9 +3999,10 @@
     },
     "upgDmgR001C": {
         "material": "Box of Ammo",
+        "snowprintId": "upgDmgR001C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR001C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR001C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3758,23 +4017,26 @@
     },
     "upgDmgR002": {
         "material": "Krak Grenade",
+        "snowprintId": "upgDmgR002",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR002.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR002.png",
         "craftable": false
     },
     "upgDmgR003": {
         "material": "Tank of Promethium",
+        "snowprintId": "upgDmgR003",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR003.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR003.png",
         "craftable": false
     },
     "upgDmgR004C": {
         "material": "Plasma Cell Bundle",
+        "snowprintId": "upgDmgR004C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR004C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3789,30 +4051,34 @@
     },
     "upgDmgR005": {
         "material": "Classified Data-slate",
+        "snowprintId": "upgDmgR005",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR005.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR005.png",
         "craftable": false
     },
     "upgDmgR006": {
         "material": "Bionic Eye",
+        "snowprintId": "upgDmgR006",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR006.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR006.png",
         "craftable": false
     },
     "upgDmgR007": {
         "material": "Bladesman's Honour",
+        "snowprintId": "upgDmgR007",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR007.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR007.png",
         "craftable": false
     },
     "upgDmgR008C": {
         "material": "High-capacity Power Pack",
+        "snowprintId": "upgDmgR008C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR008C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3827,16 +4093,18 @@
     },
     "upgDmgR009": {
         "material": "Viridian Energy Tesseract",
+        "snowprintId": "upgDmgR009",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR009.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR009.png",
         "craftable": false
     },
     "upgDmgR010C": {
         "material": "Powerful Micro-Generator",
+        "snowprintId": "upgDmgR010C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR010C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR010C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3855,9 +4123,10 @@
     },
     "upgDmgR011C": {
         "material": "Powerful Auxiliary Core",
+        "snowprintId": "upgDmgR011C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR011C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR011C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3876,9 +4145,10 @@
     },
     "upgDmgR012C": {
         "material": "Advanced Combat Stimms",
+        "snowprintId": "upgDmgR012C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR012C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR012C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3893,9 +4163,10 @@
     },
     "upgDmgR015C": {
         "material": "Sanctified Weapon Oils",
+        "snowprintId": "upgDmgR015C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR015C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR015C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3910,9 +4181,10 @@
     },
     "upgDmgR016C": {
         "material": "Murderous Spikes",
+        "snowprintId": "upgDmgR016C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR016C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR016C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3927,9 +4199,10 @@
     },
     "upgDmgR017C": {
         "material": "Ratiocination Targeting",
+        "snowprintId": "upgDmgR017C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR017C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR017C.png",
         "craftable": true,
         "recipe": [
             {
@@ -3944,135 +4217,154 @@
     },
     "upgDmgR021": {
         "material": "Chain of Zeal",
+        "snowprintId": "upgDmgR021",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR021.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR021.png",
         "craftable": false
     },
     "upgDmgR022": {
         "material": "Hymn of Martyrs",
+        "snowprintId": "upgDmgR022",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR022.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR022.png",
         "craftable": false
     },
     "upgDmgR023": {
         "material": "Icon of Vengeance",
+        "snowprintId": "upgDmgR023",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR023.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR023.png",
         "craftable": false
     },
     "upgDmgR024": {
         "material": "Sigil of Decay",
+        "snowprintId": "upgDmgR024",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR024.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR024.png",
         "craftable": false
     },
     "upgDmgR025": {
         "material": "Entrenching Tool",
+        "snowprintId": "upgDmgR025",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR025.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR025.png",
         "craftable": false
     },
     "upgDmgR026": {
         "material": "Iron Jaw",
+        "snowprintId": "upgDmgR026",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR026.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR026.png",
         "craftable": false
     },
     "upgDmgR027": {
         "material": "Sensor Suite",
+        "snowprintId": "upgDmgR027",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR027.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR027.png",
         "craftable": false
     },
     "upgDmgR028": {
         "material": "Psytronome",
+        "snowprintId": "upgDmgR028",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR028.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR028.png",
         "craftable": false
     },
     "upgDmgR029": {
         "material": "Inferno Bolts",
+        "snowprintId": "upgDmgR029",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR029.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR029.png",
         "craftable": false
     },
     "upgDmgR031": {
         "material": "Wolf Tooth Necklace",
+        "snowprintId": "upgDmgR031",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR031.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR031.png",
         "craftable": false
     },
     "upgDmgR032": {
         "material": "Chapter Pendant",
+        "snowprintId": "upgDmgR032",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR032.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR032.png",
         "craftable": false
     },
     "upgDmgR033": {
         "material": "Toxin Sacs",
+        "snowprintId": "upgDmgR033",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR033.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR033.png",
         "craftable": false
     },
     "upgDmgR034": {
         "material": "Motive Force Capacitator",
+        "snowprintId": "upgDmgR034",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR034.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR034.png",
         "craftable": false
     },
     "upgDmgR035": {
         "material": "Blood Shard Bolt",
+        "snowprintId": "upgDmgR035",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR035.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR035.png",
         "craftable": false
     },
     "upgDmgR036": {
         "material": "Proclamation Receiver",
+        "snowprintId": "upgDmgR036",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR036.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR036.png",
         "craftable": false
     },
     "upgDmgR037": {
         "material": "Integrated Bolt Feeder",
+        "snowprintId": "upgDmgR037",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR037.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR037.png",
         "craftable": false
     },
     "upgDmgR038": {
         "material": "Chainaxe Teeth",
+        "snowprintId": "upgDmgR038",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR038.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR038.png",
         "craftable": false
     },
     "upgDmgR039": {
         "material": "Vox Grill Amplifier",
+        "snowprintId": "upgDmgR039",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR039.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR039.png",
         "craftable": false
     },
     "upgDmgR13C": {
         "material": "Prey-Sight",
+        "snowprintId": "upgDmgR13C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR13C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR13C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4091,9 +4383,10 @@
     },
     "upgDmgR14C": {
         "material": "Supernatural Sight",
+        "snowprintId": "upgDmgR14C",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgR14C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgR14C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4112,16 +4405,18 @@
     },
     "upgDmgRCS": {
         "material": "Coming soon",
+        "snowprintId": "upgDmgRCS",
         "rarity": "Rare",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgRCS.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgRCS.png",
         "craftable": false
     },
     "upgDmgU001C": {
         "material": "Magazine",
+        "snowprintId": "upgDmgU001C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU001C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU001C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4132,9 +4427,10 @@
     },
     "upgDmgU002C": {
         "material": "Belt of Frag Grenades",
+        "snowprintId": "upgDmgU002C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU002C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4145,37 +4441,42 @@
     },
     "upgDmgU003": {
         "material": "Barrel of Promethium",
+        "snowprintId": "upgDmgU003",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU003.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU003.png",
         "craftable": false
     },
     "upgDmgU004": {
         "material": "Attack Vector Data-slate",
+        "snowprintId": "upgDmgU004",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU004.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU004.png",
         "craftable": false
     },
     "upgDmgU005": {
         "material": "Reliquary of Vengeance",
+        "snowprintId": "upgDmgU005",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU005.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU005.png",
         "craftable": false
     },
     "upgDmgU006": {
         "material": "Marksman's Honour",
+        "snowprintId": "upgDmgU006",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU006.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU006.png",
         "craftable": false
     },
     "upgDmgU007C": {
         "material": "Power Pack Bundle",
+        "snowprintId": "upgDmgU007C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU007C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4186,9 +4487,10 @@
     },
     "upgDmgU008C": {
         "material": "Otherworldly Energy Reservoir",
+        "snowprintId": "upgDmgU008C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU008C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4199,37 +4501,42 @@
     },
     "upgDmgU009": {
         "material": "Plasma Cell",
+        "snowprintId": "upgDmgU009",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU009.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU009.png",
         "craftable": false
     },
     "upgDmgU010": {
         "material": "Fine Micro-Generator",
+        "snowprintId": "upgDmgU010",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU010.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU010.png",
         "craftable": false
     },
     "upgDmgU011": {
         "material": "Divinator Class Auspex",
+        "snowprintId": "upgDmgU011",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU011.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU011.png",
         "craftable": false
     },
     "upgDmgU012": {
         "material": "Locator Beacon",
+        "snowprintId": "upgDmgU012",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU012.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU012.png",
         "craftable": false
     },
     "upgDmgU013C": {
         "material": "Fine Auxiliary Core",
+        "snowprintId": "upgDmgU013C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU013C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU013C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4240,16 +4547,18 @@
     },
     "upgDmgU014": {
         "material": "Combat Stimms",
+        "snowprintId": "upgDmgU014",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU014.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU014.png",
         "craftable": false
     },
     "upgDmgU015C": {
         "material": "Blessed Weapon Oils",
+        "snowprintId": "upgDmgU015C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU015C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU015C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4264,9 +4573,10 @@
     },
     "upgDmgU016C": {
         "material": "Razor-sharp Spikes",
+        "snowprintId": "upgDmgU016C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU016C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU016C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4281,9 +4591,10 @@
     },
     "upgDmgU017C": {
         "material": "Targeting Matrix",
+        "snowprintId": "upgDmgU017C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU017C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU017C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4298,9 +4609,10 @@
     },
     "upgDmgU018C": {
         "material": "Adamantium Blades",
+        "snowprintId": "upgDmgU018C",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU018C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU018C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4315,128 +4627,146 @@
     },
     "upgDmgU019": {
         "material": "Slicing Claws",
+        "snowprintId": "upgDmgU019",
         "rarity": "Uncommon",
         "stat": "Damage",
-        "icon": "snowprint/upgDmgU019.png",
+        "icon": "snowprint_assets/upgrade_materials/upgDmgU019.png",
         "craftable": false
     },
     "upgHpC001": {
         "material": "Field Ration",
+        "snowprintId": "upgHpC001",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC001.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC001.png",
         "craftable": false
     },
     "upgHpC002": {
         "material": "Minor Bionic Enhancement",
+        "snowprintId": "upgHpC002",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC002.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC002.png",
         "craftable": false
     },
     "upgHpC003": {
         "material": "Lesser Reliquary of Protection",
+        "snowprintId": "upgHpC003",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC003.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC003.png",
         "craftable": false
     },
     "upgHpC004": {
         "material": "The Iron Phoenix",
+        "snowprintId": "upgHpC004",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC004.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC004.png",
         "craftable": false
     },
     "upgHpC005": {
         "material": "The Silver Aquila",
+        "snowprintId": "upgHpC005",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC005.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC005.png",
         "craftable": false
     },
     "upgHpC006": {
         "material": "Standard-Issue Tourniquet",
+        "snowprintId": "upgHpC006",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC006.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC006.png",
         "craftable": false
     },
     "upgHpC007": {
         "material": "Healing Ointment",
+        "snowprintId": "upgHpC007",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC007.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC007.png",
         "craftable": false
     },
     "upgHpC008": {
         "material": "Thick Skin",
+        "snowprintId": "upgHpC008",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC008.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC008.png",
         "craftable": false
     },
     "upgHpC009": {
         "material": "Nano Swarm",
+        "snowprintId": "upgHpC009",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC009.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC009.png",
         "craftable": false
     },
     "upgHpC010": {
         "material": "Mutation: Warped Muscles",
+        "snowprintId": "upgHpC010",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC010.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC010.png",
         "craftable": false
     },
     "upgHpC013": {
         "material": "Chip Damage",
+        "snowprintId": "upgHpC013",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC013.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC013.png",
         "craftable": false
     },
     "upgHpC014": {
         "material": "Wires",
+        "snowprintId": "upgHpC014",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC014.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC014.png",
         "craftable": false
     },
     "upgHpC015": {
         "material": "Ropes and Chains",
+        "snowprintId": "upgHpC015",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC015.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC015.png",
         "craftable": false
     },
     "upgHpC016": {
         "material": "Scrolls",
+        "snowprintId": "upgHpC016",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC016.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC016.png",
         "craftable": false
     },
     "upgHpC017": {
         "material": "Mission Assignment",
+        "snowprintId": "upgHpC017",
         "rarity": "Common",
         "stat": "Health",
-        "icon": "snowprint/upgHpC017.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpC017.png",
         "craftable": false
     },
     "upgHpCS": {
         "material": "Coming soon",
+        "snowprintId": "upgHpCS",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpCS.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpCS.png",
         "craftable": false
     },
     "upgHpE001C": {
         "material": "Advanced Bionics",
+        "snowprintId": "upgHpE001C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE001C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE001C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4455,9 +4785,10 @@
     },
     "upgHpE002C": {
         "material": "Greater Reliquary of Protection",
+        "snowprintId": "upgHpE002C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE002C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4476,16 +4807,18 @@
     },
     "upgHpE003": {
         "material": "Terminator Honours",
+        "snowprintId": "upgHpE003",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE003.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE003.png",
         "craftable": false
     },
     "upgHpE004C": {
         "material": "Necrodermis Nano Scarab Swarm",
+        "snowprintId": "upgHpE004C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE004C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4504,9 +4837,10 @@
     },
     "upgHpE005C": {
         "material": "Nob Teef",
+        "snowprintId": "upgHpE005C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE005C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE005C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4517,9 +4851,10 @@
     },
     "upgHpE006C": {
         "material": "Exquisite Medical Supplies",
+        "snowprintId": "upgHpE006C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE006C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE006C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4538,9 +4873,10 @@
     },
     "upgHpE007C": {
         "material": "Grand Helmet Trophy",
+        "snowprintId": "upgHpE007C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE007C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4559,9 +4895,10 @@
     },
     "upgHpE008C": {
         "material": "Mutation: Regenerative Blood",
+        "snowprintId": "upgHpE008C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE008C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4580,9 +4917,10 @@
     },
     "upgHpE009C": {
         "material": "Resurrection Protocols",
+        "snowprintId": "upgHpE009C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE009C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE009C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4593,9 +4931,10 @@
     },
     "upgHpE011C": {
         "material": "Royal Phylactery",
+        "snowprintId": "upgHpE011C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE011C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE011C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4606,16 +4945,18 @@
     },
     "upgHpE012": {
         "material": "Golden Ornamental Skull",
+        "snowprintId": "upgHpE012",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE012.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE012.png",
         "craftable": false
     },
     "upgHpE013C": {
         "material": "Exospine",
+        "snowprintId": "upgHpE013C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE013C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE013C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4634,9 +4975,10 @@
     },
     "upgHpE014C": {
         "material": "Ominous Xenos Glyphs",
+        "snowprintId": "upgHpE014C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE014C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE014C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4655,23 +4997,26 @@
     },
     "upgHpE015": {
         "material": "Weathering",
+        "snowprintId": "upgHpE015",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE015.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE015.png",
         "craftable": false
     },
     "upgHpE017": {
         "material": "Secret Agenda",
+        "snowprintId": "upgHpE017",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE017.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE017.png",
         "craftable": false
     },
     "upgHpE021C": {
         "material": "Lights of Purgation",
+        "snowprintId": "upgHpE021C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE021C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE021C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4682,9 +5027,10 @@
     },
     "upgHpE022C": {
         "material": "Roses of Sacrifice",
+        "snowprintId": "upgHpE022C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE022C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE022C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4695,9 +5041,10 @@
     },
     "upgHpE023C": {
         "material": "Warp Touched Eye of Horus",
+        "snowprintId": "upgHpE023C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE023C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE023C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4708,9 +5055,10 @@
     },
     "upgHpE024C": {
         "material": "Death Bell",
+        "snowprintId": "upgHpE024C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE024C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE024C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4721,9 +5069,10 @@
     },
     "upgHpE025C": {
         "material": "Epaulettes",
+        "snowprintId": "upgHpE025C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE025C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE025C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4734,9 +5083,10 @@
     },
     "upgHpE027C": {
         "material": "Advanced Stimm Injector",
+        "snowprintId": "upgHpE027C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE027C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE027C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4747,9 +5097,10 @@
     },
     "upgHpE028C": {
         "material": "Spirit Stone",
+        "snowprintId": "upgHpE028C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE028C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE028C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4760,9 +5111,10 @@
     },
     "upgHpE029C": {
         "material": "Malefic Scroll",
+        "snowprintId": "upgHpE029C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE029C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE029C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4773,9 +5125,10 @@
     },
     "upgHpE031C": {
         "material": "Runic Talisman",
+        "snowprintId": "upgHpE031C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE031C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE031C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4786,9 +5139,10 @@
     },
     "upgHpE032C": {
         "material": "Key of Knowledge",
+        "snowprintId": "upgHpE032C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE032C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE032C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4799,9 +5153,10 @@
     },
     "upgHpE033C": {
         "material": "Adaptive Adrenal Glands",
+        "snowprintId": "upgHpE033C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE033C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE033C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4812,9 +5167,10 @@
     },
     "upgHpE034C": {
         "material": "Servo-Arc Claw",
+        "snowprintId": "upgHpE034C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE034C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE034C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4825,9 +5181,10 @@
     },
     "upgHpE035C": {
         "material": "Bloodstone Pendant",
+        "snowprintId": "upgHpE035C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE035C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE035C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4838,9 +5195,10 @@
     },
     "upgHpE036C": {
         "material": "Wyrm-form Icon",
+        "snowprintId": "upgHpE036C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE036C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE036C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4851,9 +5209,10 @@
     },
     "upgHpE037C": {
         "material": "Flawless Gem Embellishment",
+        "snowprintId": "upgHpE037C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE037C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE037C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4864,9 +5223,10 @@
     },
     "upgHpE038C": {
         "material": "Blessed Brazen Jaws",
+        "snowprintId": "upgHpE038C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE038C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE038C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4877,9 +5237,10 @@
     },
     "upgHpE039C": {
         "material": "Outrageous Adornment",
+        "snowprintId": "upgHpE039C",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpE039C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpE039C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4890,16 +5251,18 @@
     },
     "upgHpECS": {
         "material": "Coming soon",
+        "snowprintId": "upgHpECS",
         "rarity": "Epic",
         "stat": "Health",
-        "icon": "snowprint/upgHpECS.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpECS.png",
         "craftable": false
     },
     "upgHpL001C": {
         "material": "Optimal Bionic Enhancement",
+        "snowprintId": "upgHpL001C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL001C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL001C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4918,9 +5281,10 @@
     },
     "upgHpL002C": {
         "material": "Legendary Reliquary of Protection",
+        "snowprintId": "upgHpL002C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL002C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL002C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4939,9 +5303,10 @@
     },
     "upgHpL005C": {
         "material": "Ancient Nano Scarab Swarm",
+        "snowprintId": "upgHpL005C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL005C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL005C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4956,9 +5321,10 @@
     },
     "upgHpL006C": {
         "material": "Shiny Boss Teef",
+        "snowprintId": "upgHpL006C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL006C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL006C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4973,9 +5339,10 @@
     },
     "upgHpL007C": {
         "material": "Protocol of the Eternal Guardian",
+        "snowprintId": "upgHpL007C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL007C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL007C.png",
         "craftable": true,
         "recipe": [
             {
@@ -4990,9 +5357,10 @@
     },
     "upgHpL008C": {
         "material": "Phylacterine Hive",
+        "snowprintId": "upgHpL008C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL008C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL008C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5011,9 +5379,10 @@
     },
     "upgHpL009C": {
         "material": "Grandiose Skull Ornament",
+        "snowprintId": "upgHpL009C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL009C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL009C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5032,16 +5401,18 @@
     },
     "upgHpL010": {
         "material": "Engrammatic Entangler",
+        "snowprintId": "upgHpL010",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL010.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL010.png",
         "craftable": false
     },
     "upgHpL011C": {
         "material": "Tome of Arcane Knowledge",
+        "snowprintId": "upgHpL011C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL011C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL011C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5060,9 +5431,10 @@
     },
     "upgHpL012C": {
         "material": "Mutation: Otherworldly Power",
+        "snowprintId": "upgHpL012C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL012C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL012C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5081,9 +5453,10 @@
     },
     "upgHpL013C": {
         "material": "Advanced Exospine",
+        "snowprintId": "upgHpL013C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL013C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL013C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5102,9 +5475,10 @@
     },
     "upgHpL014C": {
         "material": "Portentous Xenos Glyphs",
+        "snowprintId": "upgHpL014C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL014C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL014C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5123,9 +5497,10 @@
     },
     "upgHpL017C": {
         "material": "Grand Strategy",
+        "snowprintId": "upgHpL017C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL017C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL017C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5144,9 +5519,10 @@
     },
     "upgHpL021C": {
         "material": "Candelabrum of Burning Wrath",
+        "snowprintId": "upgHpL021C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL021C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL021C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5161,9 +5537,10 @@
     },
     "upgHpL022C": {
         "material": "Roses of the Divine",
+        "snowprintId": "upgHpL022C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL022C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL022C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5178,9 +5555,10 @@
     },
     "upgHpL023C": {
         "material": "Infernal Eye of Horus",
+        "snowprintId": "upgHpL023C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL023C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL023C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5195,9 +5573,10 @@
     },
     "upgHpL024C": {
         "material": "Bell of Despair",
+        "snowprintId": "upgHpL024C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL024C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL024C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5212,9 +5591,10 @@
     },
     "upgHpL025C": {
         "material": "Epaulettes of Renown",
+        "snowprintId": "upgHpL025C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL025C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL025C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5229,9 +5609,10 @@
     },
     "upgHpL027C": {
         "material": "Auto-Reactive Stimm Injector",
+        "snowprintId": "upgHpL027C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL027C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL027C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5246,9 +5627,10 @@
     },
     "upgHpL028C": {
         "material": "Resplendent Spirit Stone",
+        "snowprintId": "upgHpL028C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL028C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL028C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5263,9 +5645,10 @@
     },
     "upgHpL029C": {
         "material": "Athenaean Scroll",
+        "snowprintId": "upgHpL029C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL029C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL029C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5280,9 +5663,10 @@
     },
     "upgHpL031C": {
         "material": "Talisman of Storms",
+        "snowprintId": "upgHpL031C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL031C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL031C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5297,9 +5681,10 @@
     },
     "upgHpL032C": {
         "material": "Key of Achrabael",
+        "snowprintId": "upgHpL032C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL032C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL032C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5314,9 +5699,10 @@
     },
     "upgHpL033C": {
         "material": "Hyper-Adaptive Adrenal Glands",
+        "snowprintId": "upgHpL033C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL033C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL033C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5331,9 +5717,10 @@
     },
     "upgHpL034C": {
         "material": "Mechadendrite Hive",
+        "snowprintId": "upgHpL034C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL034C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL034C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5348,9 +5735,10 @@
     },
     "upgHpL035C": {
         "material": "Bloodstone Icon",
+        "snowprintId": "upgHpL035C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL035C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL035C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5365,9 +5753,10 @@
     },
     "upgHpL036C": {
         "material": "Wyrm-form Banner",
+        "snowprintId": "upgHpL036C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL036C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL036C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5382,9 +5771,10 @@
     },
     "upgHpL037C": {
         "material": "Flawless Gem Adornment",
+        "snowprintId": "upgHpL037C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL037C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL037C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5399,9 +5789,10 @@
     },
     "upgHpL038C": {
         "material": "Exalted Brazen Jaws",
+        "snowprintId": "upgHpL038C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL038C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL038C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5416,9 +5807,10 @@
     },
     "upgHpL039C": {
         "material": "Outrageous Grimace",
+        "snowprintId": "upgHpL039C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL039C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL039C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5433,142 +5825,162 @@
     },
     "upgHpL100": {
         "material": "Codex Astartes Page",
+        "snowprintId": "upgHpL100",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL100.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL100.png",
         "craftable": false
     },
     "upgHpL101": {
         "material": "Bones of the Paragons",
+        "snowprintId": "upgHpL101",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL101.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL101.png",
         "craftable": false
     },
     "upgHpL102": {
         "material": "Holy Chaplet",
+        "snowprintId": "upgHpL102",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL102.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL102.png",
         "craftable": false
     },
     "upgHpL103": {
         "material": "Boon of the Dark Gods",
+        "snowprintId": "upgHpL103",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL103.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL103.png",
         "craftable": false
     },
     "upgHpL104": {
         "material": "Boon of Nurgle",
+        "snowprintId": "upgHpL104",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL104.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL104.png",
         "craftable": false
     },
     "upgHpL105": {
         "material": "Honourifica Imperialis",
+        "snowprintId": "upgHpL105",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL105.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL105.png",
         "craftable": false
     },
     "upgHpL106": {
         "material": "Kustom Gubbinz",
+        "snowprintId": "upgHpL106",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL106.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL106.png",
         "craftable": false
     },
     "upgHpL107": {
         "material": "Engram Neurochip",
+        "snowprintId": "upgHpL107",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL107.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL107.png",
         "craftable": false
     },
     "upgHpL108": {
         "material": "Runes of Fate",
+        "snowprintId": "upgHpL108",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL108.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL108.png",
         "craftable": false
     },
     "upgHpL109": {
         "material": "Boon of Tzeentch",
+        "snowprintId": "upgHpL109",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL109.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL109.png",
         "craftable": false
     },
     "upgHpL111": {
         "material": "Mjod",
+        "snowprintId": "upgHpL111",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL111.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL111.png",
         "craftable": false
     },
     "upgHpL112": {
         "material": "Stone Guardian Fragment",
+        "snowprintId": "upgHpL112",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL112.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL112.png",
         "craftable": false
     },
     "upgHpL113": {
         "material": "Synaptic Augmentation",
+        "snowprintId": "upgHpL113",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL113.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL113.png",
         "craftable": false
     },
     "upgHpL114": {
         "material": "Blessed Cogitator",
+        "snowprintId": "upgHpL114",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL114.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL114.png",
         "craftable": false
     },
     "upgHpL115": {
         "material": "Blood Vial",
+        "snowprintId": "upgHpL115",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL115.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL115.png",
         "craftable": false
     },
     "upgHpL116": {
         "material": "Gifts of the Star Children",
+        "snowprintId": "upgHpL116",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL116.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL116.png",
         "craftable": false
     },
     "upgHpL117": {
         "material": "Arcane Genetic Alchemy",
+        "snowprintId": "upgHpL117",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL117.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL117.png",
         "craftable": false
     },
     "upgHpL118": {
         "material": "Boon of Khorne",
+        "snowprintId": "upgHpL118",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL118.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL118.png",
         "craftable": false
     },
     "upgHpL119": {
         "material": "Boon of Slaanesh",
+        "snowprintId": "upgHpL119",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL119.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL119.png",
         "craftable": false
     },
     "upgHpL120C": {
         "material": "Codex Astartes",
+        "snowprintId": "upgHpL120C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL120C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL120C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5587,9 +5999,10 @@
     },
     "upgHpL121C": {
         "material": "Tannhauser's Bones",
+        "snowprintId": "upgHpL121C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL121C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL121C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5608,9 +6021,10 @@
     },
     "upgHpL122C": {
         "material": "Simulacrum Sanctorum",
+        "snowprintId": "upgHpL122C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL122C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL122C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5629,9 +6043,10 @@
     },
     "upgHpL123C": {
         "material": "Mark of Chaos Undivided",
+        "snowprintId": "upgHpL123C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL123C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL123C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5650,9 +6065,10 @@
     },
     "upgHpL124C": {
         "material": "Mark of Nurgle",
+        "snowprintId": "upgHpL124C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL124C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL124C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5671,9 +6087,10 @@
     },
     "upgHpL125C": {
         "material": "Sash of Honors",
+        "snowprintId": "upgHpL125C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL125C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL125C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5692,9 +6109,10 @@
     },
     "upgHpL126C": {
         "material": "Cybork Body Parts",
+        "snowprintId": "upgHpL126C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL126C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL126C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5713,9 +6131,10 @@
     },
     "upgHpL127C": {
         "material": "Ta'lissera Bond",
+        "snowprintId": "upgHpL127C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL127C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL127C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5734,9 +6153,10 @@
     },
     "upgHpL128C": {
         "material": "Scriptures of Fate",
+        "snowprintId": "upgHpL128C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL128C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL128C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5755,9 +6175,10 @@
     },
     "upgHpL129C": {
         "material": "Mark of Tzeentch",
+        "snowprintId": "upgHpL129C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL129C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL129C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5776,9 +6197,10 @@
     },
     "upgHpL131C": {
         "material": "Personal Saga",
+        "snowprintId": "upgHpL131C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL131C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL131C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5797,9 +6219,10 @@
     },
     "upgHpL132C": {
         "material": "Perfidious Relic of the Unforgiven",
+        "snowprintId": "upgHpL132C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL132C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL132C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5818,9 +6241,10 @@
     },
     "upgHpL133C": {
         "material": "Hypermetabolic Acceleration",
+        "snowprintId": "upgHpL133C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL133C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL133C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5839,9 +6263,10 @@
     },
     "upgHpL134C": {
         "material": "Sanctus Canister",
+        "snowprintId": "upgHpL134C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL134C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL134C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5860,9 +6285,10 @@
     },
     "upgHpL135C": {
         "material": "Icon of the Angel",
+        "snowprintId": "upgHpL135C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL135C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL135C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5881,9 +6307,10 @@
     },
     "upgHpL136C": {
         "material": "Biomorph Adaption",
+        "snowprintId": "upgHpL136C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL136C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL136C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5902,9 +6329,10 @@
     },
     "upgHpL137C": {
         "material": "Defensor Refractor Generator",
+        "snowprintId": "upgHpL137C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL137C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL137C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5923,9 +6351,10 @@
     },
     "upgHpL138C": {
         "material": "Mark of Khorne",
+        "snowprintId": "upgHpL138C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL138C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL138C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5944,9 +6373,10 @@
     },
     "upgHpL139C": {
         "material": "Mark of Slaanesh",
+        "snowprintId": "upgHpL139C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL139C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL139C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5965,9 +6395,10 @@
     },
     "upgHpL211C": {
         "material": "Monstrous Constitution",
+        "snowprintId": "upgHpL211C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL211C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL211C.png",
         "craftable": true,
         "recipe": [
             {
@@ -5986,9 +6417,10 @@
     },
     "upgHpL212C": {
         "material": "Preternatural Constitution",
+        "snowprintId": "upgHpL212C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL212C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL212C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6007,9 +6439,10 @@
     },
     "upgHpL213C": {
         "material": "Superaugmented Constitution",
+        "snowprintId": "upgHpL213C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL213C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL213C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6028,9 +6461,10 @@
     },
     "upgHpL214C": {
         "material": "Technocrafted Constitution",
+        "snowprintId": "upgHpL214C",
         "rarity": "Legendary",
         "stat": "Health",
-        "icon": "snowprint/upgHpL214C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpL214C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6049,51 +6483,58 @@
     },
     "upgHpM001": {
         "material": "Imperial Aquila",
+        "snowprintId": "upgHpM001",
         "rarity": "Mythic",
         "stat": "Health",
-        "icon": "snowprint/upgHpM001.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpM001.png",
         "craftable": false
     },
     "upgHpM002": {
         "material": "Mutant Form",
+        "snowprintId": "upgHpM002",
         "rarity": "Mythic",
         "stat": "Health",
-        "icon": "snowprint/upgHpM002.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpM002.png",
         "craftable": false
     },
     "upgHpM003": {
         "material": "Ancient Inscription",
+        "snowprintId": "upgHpM003",
         "rarity": "Mythic",
         "stat": "Health",
-        "icon": "snowprint/upgHpM003.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpM003.png",
         "craftable": false
     },
     "upgHpM004": {
         "material": "Venerable Battle Mark",
+        "snowprintId": "upgHpM004",
         "rarity": "Mythic",
         "stat": "Health",
-        "icon": "snowprint/upgHpM004.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpM004.png",
         "craftable": false
     },
     "upgHpR001": {
         "material": "Repair Tool",
+        "snowprintId": "upgHpR001",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR001.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR001.png",
         "craftable": false
     },
     "upgHpR002": {
         "material": "Metal Decorative Skull",
+        "snowprintId": "upgHpR002",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR002.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR002.png",
         "craftable": false
     },
     "upgHpR003C": {
         "material": "Box of Rations",
+        "snowprintId": "upgHpR003C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR003C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR003C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6108,9 +6549,10 @@
     },
     "upgHpR004C": {
         "material": "Purifier",
+        "snowprintId": "upgHpR004C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR004C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6125,16 +6567,18 @@
     },
     "upgHpR005": {
         "material": "The Phoenix Ascendant",
+        "snowprintId": "upgHpR005",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR005.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR005.png",
         "craftable": false
     },
     "upgHpR006C": {
         "material": "Medical Supply Crate",
+        "snowprintId": "upgHpR006C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR006C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR006C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6149,23 +6593,26 @@
     },
     "upgHpR007": {
         "material": "Zeidos Ribbon",
+        "snowprintId": "upgHpR007",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR007.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR007.png",
         "craftable": false
     },
     "upgHpR008": {
         "material": "Mutation: Warped Heart",
+        "snowprintId": "upgHpR008",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR008.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR008.png",
         "craftable": false
     },
     "upgHpR009C": {
         "material": "Otherworldly Nano Swarm",
+        "snowprintId": "upgHpR009C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR009C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR009C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6180,23 +6627,26 @@
     },
     "upgHpR010": {
         "material": "Bad Moon Teef",
+        "snowprintId": "upgHpR010",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR010.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR010.png",
         "craftable": false
     },
     "upgHpR011": {
         "material": "Reconstitution Protocols",
+        "snowprintId": "upgHpR011",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR011.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR011.png",
         "craftable": false
     },
     "upgHpR012C": {
         "material": "Electromantic Cable Bundle",
+        "snowprintId": "upgHpR012C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR012C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR012C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6211,9 +6661,10 @@
     },
     "upgHpR013C": {
         "material": "Utilitarian Belt",
+        "snowprintId": "upgHpR013C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR013C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR013C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6228,16 +6679,18 @@
     },
     "upgHpR014": {
         "material": "Ancient Runes",
+        "snowprintId": "upgHpR014",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR014.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR014.png",
         "craftable": false
     },
     "upgHpR015C": {
         "material": "Grand Skull Trophy",
+        "snowprintId": "upgHpR015C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR015C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR015C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6256,9 +6709,10 @@
     },
     "upgHpR016C": {
         "material": "Grandiloquent Litanical",
+        "snowprintId": "upgHpR016C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR016C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR016C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6277,9 +6731,10 @@
     },
     "upgHpR017C": {
         "material": "Battle Plan",
+        "snowprintId": "upgHpR017C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR017C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR017C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6294,23 +6749,26 @@
     },
     "upgHpR018": {
         "material": "Kill Count",
+        "snowprintId": "upgHpR018",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR018.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR018.png",
         "craftable": false
     },
     "upgHpR019": {
         "material": "Battle Scar",
+        "snowprintId": "upgHpR019",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR019.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR019.png",
         "craftable": false
     },
     "upgHpR020C": {
         "material": "Sanctified Reliquary of Protection",
+        "snowprintId": "upgHpR020C",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR020C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR020C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6325,142 +6783,162 @@
     },
     "upgHpR021": {
         "material": "Righteous Candle",
+        "snowprintId": "upgHpR021",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR021.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR021.png",
         "craftable": false
     },
     "upgHpR022": {
         "material": "Rose of Martyrs",
+        "snowprintId": "upgHpR022",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR022.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR022.png",
         "craftable": false
     },
     "upgHpR023": {
         "material": "Eye of Horus",
+        "snowprintId": "upgHpR023",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR023.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR023.png",
         "craftable": false
     },
     "upgHpR024": {
         "material": "Plague Bell",
+        "snowprintId": "upgHpR024",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR024.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR024.png",
         "craftable": false
     },
     "upgHpR027": {
         "material": "Stimm Injector",
+        "snowprintId": "upgHpR027",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR027.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR027.png",
         "craftable": false
     },
     "upgHpR028": {
         "material": "Waystone",
+        "snowprintId": "upgHpR028",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR028.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR028.png",
         "craftable": false
     },
     "upgHpR029": {
         "material": "Tainted Text",
+        "snowprintId": "upgHpR029",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR029.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR029.png",
         "craftable": false
     },
     "upgHpR031": {
         "material": "Wolf Tail Talisman",
+        "snowprintId": "upgHpR031",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR031.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR031.png",
         "craftable": false
     },
     "upgHpR032": {
         "material": "Key of Ignorance",
+        "snowprintId": "upgHpR032",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR032.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR032.png",
         "craftable": false
     },
     "upgHpR033": {
         "material": "Adrenal Glands",
+        "snowprintId": "upgHpR033",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR033.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR033.png",
         "craftable": false
     },
     "upgHpR035": {
         "material": "Bloodstone Tear",
+        "snowprintId": "upgHpR035",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR035.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR035.png",
         "craftable": false
     },
     "upgHpR036": {
         "material": "Wyrm-form Sigil",
+        "snowprintId": "upgHpR036",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR036.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR036.png",
         "craftable": false
     },
     "upgHpR037": {
         "material": "Flawless Terran Gem",
+        "snowprintId": "upgHpR037",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR037.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR037.png",
         "craftable": false
     },
     "upgHpR038": {
         "material": "Brazen Jaws",
+        "snowprintId": "upgHpR038",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR038.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR038.png",
         "craftable": false
     },
     "upgHpR039": {
         "material": "Outrageous Padding",
+        "snowprintId": "upgHpR039",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpR039.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpR039.png",
         "craftable": false
     },
     "upgHpRCS": {
         "material": "Coming soon",
+        "snowprintId": "upgHpRCS",
         "rarity": "Rare",
         "stat": "Health",
-        "icon": "snowprint/upgHpRCS.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpRCS.png",
         "craftable": false
     },
     "upgHpU001": {
         "material": "Enriched Rations",
+        "snowprintId": "upgHpU001",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU001.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU001.png",
         "craftable": false
     },
     "upgHpU002": {
         "material": "Reliquary of Protection",
+        "snowprintId": "upgHpU002",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU002.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU002.png",
         "craftable": false
     },
     "upgHpU003": {
         "material": "The Silver Scope",
+        "snowprintId": "upgHpU003",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU003.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU003.png",
         "craftable": false
     },
     "upgHpU004C": {
         "material": "Bionic Enhancement",
+        "snowprintId": "upgHpU004C",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU004C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU004C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6471,9 +6949,10 @@
     },
     "upgHpU005C": {
         "material": "First Aid Kit",
+        "snowprintId": "upgHpU005C",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU005C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU005C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6484,37 +6963,42 @@
     },
     "upgHpU006": {
         "material": "The Gold Phoenix",
+        "snowprintId": "upgHpU006",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU006.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU006.png",
         "craftable": false
     },
     "upgHpU007": {
         "material": "Advanced Filaments",
+        "snowprintId": "upgHpU007",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU007.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU007.png",
         "craftable": false
     },
     "upgHpU008": {
         "material": "The Silver Eagle with Swords",
+        "snowprintId": "upgHpU008",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU008.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU008.png",
         "craftable": false
     },
     "upgHpU009": {
         "material": "Mutation: Warped Lungs",
+        "snowprintId": "upgHpU009",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU009.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU009.png",
         "craftable": false
     },
     "upgHpU010C": {
         "material": "Regenerating Nano Swarm",
+        "snowprintId": "upgHpU010C",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU010C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU010C.png",
         "craftable": true,
         "recipe": [
             {
@@ -6525,51 +7009,58 @@
     },
     "upgHpU012": {
         "material": "Helmet Trophy",
+        "snowprintId": "upgHpU012",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU012.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU012.png",
         "craftable": false
     },
     "upgHpU013": {
         "material": "Artificial Vertebrae",
+        "snowprintId": "upgHpU013",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU013.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU013.png",
         "craftable": false
     },
     "upgHpU014": {
         "material": "Reinforced Cables",
+        "snowprintId": "upgHpU014",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU014.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU014.png",
         "craftable": false
     },
     "upgHpU015": {
         "material": "Satchel",
+        "snowprintId": "upgHpU015",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU015.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU015.png",
         "craftable": false
     },
     "upgHpU016": {
         "material": "Writings",
+        "snowprintId": "upgHpU016",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU016.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU016.png",
         "craftable": false
     },
     "upgHpU017": {
         "material": "Mission Objective",
+        "snowprintId": "upgHpU017",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU017.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU017.png",
         "craftable": false
     },
     "upgHpU018C": {
         "material": "Holster and Pockets",
+        "snowprintId": "upgHpU018C",
         "rarity": "Uncommon",
         "stat": "Health",
-        "icon": "snowprint/upgHpU018C.png",
+        "icon": "snowprint_assets/upgrade_materials/upgHpU018C.png",
         "craftable": true,
         "recipe": [
             {

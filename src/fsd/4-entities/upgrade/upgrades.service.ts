@@ -290,6 +290,7 @@ export class UpgradesService {
 
             result[upgradeName] = {
                 id: upgrade.material,
+                snowprintId: upgrade.snowprintId,
                 label: upgrade.label ?? upgrade.material,
                 rarity: RarityMapper.stringToNumber[upgrade.rarity as RarityString],
                 locations: locationsComposed,
@@ -408,6 +409,7 @@ export class UpgradesService {
             if (!upgrade || !upgrade.recipe?.length) {
                 const item: IMaterialRecipeIngredientFull = {
                     id: materialId,
+                    snowprintId: upgrade.snowprintId,
                     label: upgrade?.label ?? upgrade?.material ?? materialId,
                     count,
                     rarity: RarityMapper.stringToNumber[upgrade?.rarity as RarityString],
@@ -424,6 +426,7 @@ export class UpgradesService {
             } else {
                 return {
                     id: materialId,
+                    snowprintId: upgrade.snowprintId,
                     label: upgrade.label ?? upgrade.material,
                     count,
                     stat: upgrade.stat,
@@ -444,6 +447,7 @@ export class UpgradesService {
             if (!upgrade.craftable) {
                 result[upgradeName] = {
                     id: upgrade.material,
+                    snowprintId: upgrade.snowprintId,
                     label: upgrade.label ?? upgrade.material,
                     stat: upgrade.stat,
                     rarity: RarityMapper.stringToNumber[upgrade.rarity as RarityString],
@@ -455,6 +459,7 @@ export class UpgradesService {
                 const allMaterials: IMaterialRecipeIngredientFull[] = [];
                 result[upgradeName] = {
                     id: upgrade.material,
+                    snowprintId: upgrade.snowprintId,
                     label: upgrade.label ?? upgrade.material,
                     stat: upgrade.stat,
                     rarity: RarityMapper.stringToNumber[upgrade.rarity as RarityString],
@@ -467,6 +472,7 @@ export class UpgradesService {
 
                 result[upgradeName].allMaterials = map(groupedData, (items, material) => ({
                     id: material,
+                    snowprintId: items[0].snowprintId,
                     count: sumBy(items, 'count'),
                     quantity: 0,
                     countLeft: 0,
@@ -511,6 +517,7 @@ export class UpgradesService {
         const result: IMaterialRecipeIngredientFull[] = map(groupedData, (items, material) => {
             return {
                 id: material,
+                snowprintId: items[0].snowprintId,
                 count: sumBy(items, 'count'),
                 label: items[0].label,
                 rarity: items[0].rarity,

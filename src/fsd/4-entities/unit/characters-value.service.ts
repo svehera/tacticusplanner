@@ -57,6 +57,7 @@ export class CharactersValueService {
                 const recipe = UpgradesService.recipeDataFull[upgrade];
                 if (!recipe) {
                     return {
+                        snowprintId: '',
                         rarity: 0,
                         craftable: false,
                         iconPath: upgrade,

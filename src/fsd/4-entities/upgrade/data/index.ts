@@ -1,5 +1,5 @@
 import { IRecipeData } from '../model';
 
-import recipeDataJson from './recipeData.json';
+import recipeDataJson from './newRecipeData.json';
 
 export const recipeDataByName: IRecipeData = recipeDataJson;

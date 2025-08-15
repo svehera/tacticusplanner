@@ -34,8 +34,8 @@ export interface IDamageTypes {
     all: DamageType[];
     melee: DamageType;
     range?: DamageType;
-    activeAbility?: DamageType;
-    passiveAbility?: DamageType;
+    activeAbility: DamageType[];
+    passiveAbility: DamageType[];
 }
 
 export interface ILreCharacterStaticData {
@@ -113,7 +113,7 @@ export interface UnitDataRaw {
 export interface ICharacterData {
     unitType: UnitType.character;
     id: string;
-    tacticusId?: string;
+    snowprintId?: string;
     alliance: Alliance;
     faction: Faction;
     name: string;

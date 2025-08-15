@@ -382,7 +382,7 @@ export class UpgradesService {
         requiredCount: number,
         acquiredCount: number
     ): ICharacterUpgradeEstimate {
-        const { id, label, rarity, iconPath, locations, relatedCharacters, relatedGoals } = upgrade;
+        const { id, snowprintId, label, rarity, iconPath, locations, relatedCharacters, relatedGoals } = upgrade;
 
         const selectedLocations = locations.filter(x => x.isSuggested);
 
@@ -390,6 +390,7 @@ export class UpgradesService {
 
         const estimate: ICharacterUpgradeEstimate = {
             id,
+            snowprintId,
             label,
             rarity,
             iconPath,
