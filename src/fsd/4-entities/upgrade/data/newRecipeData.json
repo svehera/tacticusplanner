@@ -1,0 +1,6585 @@
+{
+    "upgArmC001": {
+        "material": "Purity Seal",
+        "rarity": "Common",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmC001.png",
+        "craftable": false
+    },
+    "upgArmC002": {
+        "material": "Fine Purity Seal",
+        "rarity": "Common",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmC002.png",
+        "craftable": false
+    },
+    "upgArmC003": {
+        "material": "Pile of Salvage",
+        "rarity": "Common",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmC003.png",
+        "craftable": false
+    },
+    "upgArmC004": {
+        "material": "Adamantium Ore",
+        "rarity": "Common",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmC004.png",
+        "craftable": false
+    },
+    "upgArmC005": {
+        "material": "Sophisticated Material",
+        "rarity": "Common",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmC005.png",
+        "craftable": false
+    },
+    "upgArmC006": {
+        "material": "Rebreather",
+        "rarity": "Common",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmC006.png",
+        "craftable": false
+    },
+    "upgArmC007": {
+        "material": "Mutation: Tough Skin",
+        "rarity": "Common",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmC007.png",
+        "craftable": false
+    },
+    "upgArmC011": {
+        "material": "Filaments",
+        "rarity": "Common",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmC011.png",
+        "craftable": false
+    },
+    "upgArmC012": {
+        "material": "Metal Joints",
+        "rarity": "Common",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmC012.png",
+        "craftable": false
+    },
+    "upgArmC013": {
+        "material": "Armor Trim",
+        "rarity": "Common",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmC013.png",
+        "craftable": false
+    },
+    "upgArmCS": {
+        "material": "Coming soon",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmCS.png",
+        "craftable": false
+    },
+    "upgArmE001C": {
+        "material": "Grand Purity Seal",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE001C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR001C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR002",
+                "count": 4
+            },
+            {
+                "material": "upgArmC002",
+                "count": 4
+            }
+        ]
+    },
+    "upgArmE002C": {
+        "material": "Adamantium Sheet",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE002C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR019",
+                "count": 6
+            },
+            {
+                "material": "upgArmU003C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgU004",
+                "count": 6
+            }
+        ]
+    },
+    "upgArmE003C": {
+        "material": "Sophisticated Material Sheet",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE003C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR005",
+                "count": 6
+            },
+            {
+                "material": "upgArmU004C",
+                "count": 1
+            },
+            {
+                "material": "upgArmU006",
+                "count": 6
+            }
+        ]
+    },
+    "upgArmE004C": {
+        "material": "Ceramite Sheet",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE004C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR015",
+                "count": 6
+            },
+            {
+                "material": "upgArmU010C",
+                "count": 1
+            },
+            {
+                "material": "upgArmU005",
+                "count": 6
+            }
+        ]
+    },
+    "upgArmE005C": {
+        "material": "Mutation: Metallic Skin",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE005C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR004C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR008",
+                "count": 4
+            },
+            {
+                "material": "upgHpC008",
+                "count": 4
+            }
+        ]
+    },
+    "upgArmE006C": {
+        "material": "Ancient Tasset Plate",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE006C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR012C",
+                "count": 1
+            },
+            {
+                "material": "upgArmR005",
+                "count": 4
+            },
+            {
+                "material": "upgHpC015",
+                "count": 4
+            }
+        ]
+    },
+    "upgArmE007C": {
+        "material": "Death Shroud",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE007C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR009",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE008": {
+        "material": "Hypermaterial Shifter",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE008.png",
+        "craftable": false
+    },
+    "upgArmE009": {
+        "material": "Revered Talisman",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE009.png",
+        "craftable": false
+    },
+    "upgArmE010": {
+        "material": "Unyielding Rivets",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE010.png",
+        "craftable": false
+    },
+    "upgArmE011C": {
+        "material": "Decorated Cloak",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE011C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR013C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR002",
+                "count": 4
+            },
+            {
+                "material": "upgHpC015",
+                "count": 4
+            }
+        ]
+    },
+    "upgArmE012C": {
+        "material": "Sturdy Segments",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE012C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR006",
+                "count": 6
+            },
+            {
+                "material": "upgArmU012C",
+                "count": 1
+            },
+            {
+                "material": "upgArmU002",
+                "count": 6
+            }
+        ]
+    },
+    "upgArmE013": {
+        "material": "Duplicate Organ",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE013.png",
+        "craftable": false
+    },
+    "upgArmE014C": {
+        "material": "Advanced Mesh Weave Garment",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE014C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR014C",
+                "count": 1
+            },
+            {
+                "material": "upgArmR010",
+                "count": 4
+            },
+            {
+                "material": "upgDmgC015",
+                "count": 4
+            }
+        ]
+    },
+    "upgArmE021C": {
+        "material": "Crusader's Tabard",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE021C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR021",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE022C": {
+        "material": "Sanctified Corset Armor",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE022C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR022",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE023C": {
+        "material": "Daemonic Armor Trim",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE023C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR023",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE025C": {
+        "material": "High-grade Flak Plates",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE025C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR025",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE026C": {
+        "material": "Ded 'ard Plate",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE026C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR026",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE027C": {
+        "material": "Advanced Drone Controller",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE027C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR027",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE028C": {
+        "material": "Filigrane Wraithbone Plate",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE028C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR028",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE029C": {
+        "material": "Cabalistic Implements",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE029C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR029",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE031C": {
+        "material": "Ice Troll Hide",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE031C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR031",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE032C": {
+        "material": "Calibanite Hood",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE032C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR032",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE033C": {
+        "material": "Adaptive Chitin Carapace",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE033C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR033",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE034C": {
+        "material": "Enhanced Cogwheel Crest",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE034C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR034",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE035C": {
+        "material": "Artisan of War Plating",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE035C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR035",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE036C": {
+        "material": "Industrial Protection Suit",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE036C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR036",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE037C": {
+        "material": "Auramite Wing Embellishment",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE037C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR037",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE038C": {
+        "material": "Blessed Cadaere Renissum",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE038C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR038",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE039C": {
+        "material": "Lavish Helmet Spike",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmE039C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR039",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmECS": {
+        "material": "Coming soon",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmECS.png",
+        "craftable": false
+    },
+    "upgArmL001": {
+        "material": "Purity Seal of the Primarch",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL001.png",
+        "craftable": false
+    },
+    "upgArmL002C": {
+        "material": "Adamantium Plates",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL002C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE002C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE015",
+                "count": 3
+            }
+        ]
+    },
+    "upgArmL003C": {
+        "material": "Sophisticated Material Plates",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL003C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE003C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE008",
+                "count": 3
+            }
+        ]
+    },
+    "upgArmL004C": {
+        "material": "Ceramite Plates",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL004C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE004C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE010",
+                "count": 3
+            }
+        ]
+    },
+    "upgArmL005C": {
+        "material": "Mutation: Impervious Skin",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL005C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE015",
+                "count": 5
+            },
+            {
+                "material": "upgArmR004C",
+                "count": 3
+            }
+        ]
+    },
+    "upgArmL006C": {
+        "material": "Grand Tasset Plate",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL006C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE010",
+                "count": 5
+            },
+            {
+                "material": "upgArmR012C",
+                "count": 3
+            }
+        ]
+    },
+    "upgArmL007C": {
+        "material": "Immaterial Shroud",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL007C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE007C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE005C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL008": {
+        "material": "Transdimensional Sanctum",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL008.png",
+        "craftable": false
+    },
+    "upgArmL008C": {
+        "material": "Sturdy Plates",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL008C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE012C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE009",
+                "count": 3
+            }
+        ]
+    },
+    "upgArmL009C": {
+        "material": "Mysterious Device",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL009C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE008",
+                "count": 5
+            },
+            {
+                "material": "upgArmR014C",
+                "count": 3
+            }
+        ]
+    },
+    "upgArmL010C": {
+        "material": "Seal of the Emperor's Protection",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL010C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE003",
+                "count": 5
+            },
+            {
+                "material": "upgArmR001C",
+                "count": 3
+            }
+        ]
+    },
+    "upgArmL011C": {
+        "material": "Divine Cloak",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL011C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE009",
+                "count": 5
+            },
+            {
+                "material": "upgArmR013C",
+                "count": 3
+            }
+        ]
+    },
+    "upgArmL021C": {
+        "material": "Tabard of Righteous Wrath",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL021C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE021C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE001C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL022C": {
+        "material": "Holy Corset Armor",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL022C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE022C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE001C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL023C": {
+        "material": "Infernal Armor Trim",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL023C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE023C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE005C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL025C": {
+        "material": "Artificer Flak Plates",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL025C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE025C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE012C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL026C": {
+        "material": "Ded Shiny 'ard Plate",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL026C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE026C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE012C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL027C": {
+        "material": "Sentry AI Drone Controller",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL027C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE027C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE014C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL028C": {
+        "material": "Soul-Bonded Wraithbone Plate",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL028C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE028C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE014C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL029C": {
+        "material": "Great Cult Implements",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL029C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE029C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE005C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL031C": {
+        "material": "Ice Wyrm Hide",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL031C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE031C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE001C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL032C": {
+        "material": "Inner Circle Hood",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL032C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE032C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE001C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL033C": {
+        "material": "Hyper-Adaptive Chitin Carapace",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL033C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE033C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE005C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL034C": {
+        "material": "Artificer Cogwheel Crest",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL034C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE034C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE001C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL035C": {
+        "material": "Angelic Plating",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL035C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE035C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE001C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL036C": {
+        "material": "Industrial Carapace",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL036C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE036C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE012C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL037C": {
+        "material": "Auramite Wing Adornment",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL037C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE037C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE001C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL038C": {
+        "material": "Exalted Cadaere Renissum",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL038C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE038C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE005C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL039C": {
+        "material": "Lavish Helmet Plume",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL039C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE039C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE005C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL120C": {
+        "material": "Adamantine Mantle",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL120C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL100",
+                "count": 9
+            },
+            {
+                "material": "upgArmR013C",
+                "count": 1
+            },
+            {
+                "material": "upgArmR005",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL121C": {
+        "material": "Octarian Crusade Seal",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL121C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL101",
+                "count": 9
+            },
+            {
+                "material": "upgHpR016C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgR003",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL122C": {
+        "material": "Sabbat-Pattern Visor",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL122C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL102",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR13C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgR006",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL123C": {
+        "material": "Black Rune",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL123C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL103",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR14C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR014",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL124C": {
+        "material": "Cloud of Flies",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL124C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL104",
+                "count": 9
+            },
+            {
+                "material": "upgHpR009C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR019",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL125C": {
+        "material": "Bastion Honour",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL125C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL105",
+                "count": 9
+            },
+            {
+                "material": "upgHpR017C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR005",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL126C": {
+        "material": "Bosspole",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL126C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL106",
+                "count": 9
+            },
+            {
+                "material": "upgHpR015C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR018",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL127C": {
+        "material": "Iridium Plating",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL127C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL107",
+                "count": 9
+            },
+            {
+                "material": "upgArmR002C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgR005",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL128C": {
+        "material": "Scriptures of Fortune",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL128C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL108",
+                "count": 9
+            },
+            {
+                "material": "upgHpR016C",
+                "count": 1
+            },
+            {
+                "material": "upgArmR010",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL129C": {
+        "material": "Warpweave Robe",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL129C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL109",
+                "count": 9
+            },
+            {
+                "material": "upgArmR014C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR008",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL130C": {
+        "material": "Transdimensional Sanctum",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL130C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL010",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR011C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgR006",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL131C": {
+        "material": "Runic Tasset Plate",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL131C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL111",
+                "count": 9
+            },
+            {
+                "material": "upgArmR003C",
+                "count": 1
+            },
+            {
+                "material": "upgArmR005",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL132C": {
+        "material": "Shroud of Heroes",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL132C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL112",
+                "count": 9
+            },
+            {
+                "material": "upgArmR013C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgR005",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL133C": {
+        "material": "Symbiotic Carapace",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL133C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL113",
+                "count": 9
+            },
+            {
+                "material": "upgArmR004C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR008",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL134C": {
+        "material": "Kataphron Armour",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL134C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL114",
+                "count": 9
+            },
+            {
+                "material": "upgHpR012C",
+                "count": 1
+            },
+            {
+                "material": "upgArmR015",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL135C": {
+        "material": "Visage of Death",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL135C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL115",
+                "count": 9
+            },
+            {
+                "material": "upgArmR012C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR019",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL136C": {
+        "material": "Gene-sire's Reliquant",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL136C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL116",
+                "count": 9
+            },
+            {
+                "material": "upgHpR015C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR002",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL137C": {
+        "material": "Adamantine Thread Cloak",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL137C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL117",
+                "count": 9
+            },
+            {
+                "material": "upgArmR007C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR014",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL138C": {
+        "material": "Collar of Khorne",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL138C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL118",
+                "count": 9
+            },
+            {
+                "material": "upgHpR013C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR018",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL139C": {
+        "material": "Abhorrent Plating",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL139C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL119",
+                "count": 9
+            },
+            {
+                "material": "upgHpR012C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR002",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmL202": {
+        "material": "Psyk-Conductive Material",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL202.png",
+        "craftable": false
+    },
+    "upgArmL203": {
+        "material": "Archeotech Remnant",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL203.png",
+        "craftable": false
+    },
+    "upgArmL204": {
+        "material": "Ancient Alloy",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL204.png",
+        "craftable": false
+    },
+    "upgArmL211C": {
+        "material": "Monstrous Defences",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL211C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmL203",
+                "count": 8
+            },
+            {
+                "material": "upgArmL202",
+                "count": 8
+            },
+            {
+                "material": "upgArmE009",
+                "count": 8
+            }
+        ]
+    },
+    "upgArmL212C": {
+        "material": "Preternatural Defences",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL212C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmL202",
+                "count": 8
+            },
+            {
+                "material": "upgArmL001",
+                "count": 8
+            },
+            {
+                "material": "upgArmE008",
+                "count": 8
+            }
+        ]
+    },
+    "upgArmL213C": {
+        "material": "Superaugmented Defences",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL213C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmL001",
+                "count": 8
+            },
+            {
+                "material": "upgArmL204",
+                "count": 8
+            },
+            {
+                "material": "upgArmE013",
+                "count": 8
+            }
+        ]
+    },
+    "upgArmL214C": {
+        "material": "Technocrafted Defences",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmL214C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmL204",
+                "count": 8
+            },
+            {
+                "material": "upgArmL203",
+                "count": 8
+            },
+            {
+                "material": "upgArmE010",
+                "count": 8
+            }
+        ]
+    },
+    "upgArmM211C": {
+        "material": "Seal of Indomitability",
+        "rarity": "Mythic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmM211C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmL001",
+                "count": 3
+            },
+            {
+                "material": "upgHpM001",
+                "count": 6
+            },
+            {
+                "material": "upgArmL010C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmM212C": {
+        "material": "Mutation: Impenetrable Skin",
+        "rarity": "Mythic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmM212C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmL202",
+                "count": 3
+            },
+            {
+                "material": "upgHpM002",
+                "count": 6
+            },
+            {
+                "material": "upgArmL005C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmM213C": {
+        "material": "Magnificient Garment",
+        "rarity": "Mythic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmM213C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmL204",
+                "count": 3
+            },
+            {
+                "material": "upgHpM003",
+                "count": 6
+            },
+            {
+                "material": "upgArmL011C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmM214C": {
+        "material": "Warforged Safeguard",
+        "rarity": "Mythic",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmM214C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmL203",
+                "count": 3
+            },
+            {
+                "material": "upgHpM004",
+                "count": 6
+            },
+            {
+                "material": "upgArmL006C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmR001C": {
+        "material": "Blessed Purity Seal",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR001C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmU001",
+                "count": 5
+            },
+            {
+                "material": "upgArmC001",
+                "count": 3
+            },
+            {
+                "material": "upgHpC016",
+                "count": 3
+            }
+        ]
+    },
+    "upgArmR002C": {
+        "material": "Sophisticated Material Bar",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR002C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmU006",
+                "count": 5
+            },
+            {
+                "material": "upgArmC005",
+                "count": 6
+            }
+        ]
+    },
+    "upgArmR003C": {
+        "material": "Ceramite Bar",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR003C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmU005",
+                "count": 5
+            },
+            {
+                "material": "upgArmC002",
+                "count": 6
+            }
+        ]
+    },
+    "upgArmR004C": {
+        "material": "Mutation: Warped Skin",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR004C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmU007",
+                "count": 5
+            },
+            {
+                "material": "upgArmC007",
+                "count": 3
+            },
+            {
+                "material": "upgHpC010",
+                "count": 3
+            }
+        ]
+    },
+    "upgArmR005": {
+        "material": "Artificer Tasset Plate",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR005.png",
+        "craftable": false
+    },
+    "upgArmR006": {
+        "material": "Crate of Salvage",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR006.png",
+        "craftable": false
+    },
+    "upgArmR007C": {
+        "material": "Adamantium Bar",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR007C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmU002",
+                "count": 5
+            },
+            {
+                "material": "upgArmC004",
+                "count": 6
+            }
+        ]
+    },
+    "upgArmR008C": {
+        "material": "Sturdy Parts",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR008C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmU002",
+                "count": 5
+            },
+            {
+                "material": "upgArmC012",
+                "count": 6
+            }
+        ]
+    },
+    "upgArmR009": {
+        "material": "Unnatural Vapour Dispenser",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR009.png",
+        "craftable": false
+    },
+    "upgArmR010": {
+        "material": "Valuable Fabric",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR010.png",
+        "craftable": false
+    },
+    "upgArmR012C": {
+        "material": "Impressive Armor Trim",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR012C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmU009",
+                "count": 5
+            },
+            {
+                "material": "upgArmC013",
+                "count": 4
+            },
+            {
+                "material": "upgHpC013",
+                "count": 2
+            }
+        ]
+    },
+    "upgArmR013C": {
+        "material": "Fine Cloak",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR013C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmU013",
+                "count": 5
+            },
+            {
+                "material": "upgArmC006",
+                "count": 4
+            },
+            {
+                "material": "upgHpC015",
+                "count": 2
+            }
+        ]
+    },
+    "upgArmR014C": {
+        "material": "Mesh Weave Garment",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR014C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmU014",
+                "count": 5
+            },
+            {
+                "material": "upgArmC011",
+                "count": 4
+            },
+            {
+                "material": "upgDmgC015",
+                "count": 2
+            }
+        ]
+    },
+    "upgArmR015": {
+        "material": "Subdermal Plating",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR015.png",
+        "craftable": false
+    },
+    "upgArmR021": {
+        "material": "Blessed Tabard",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR021.png",
+        "craftable": false
+    },
+    "upgArmR022": {
+        "material": "Blessed Corset Armor",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR022.png",
+        "craftable": false
+    },
+    "upgArmR023": {
+        "material": "Blasphemous Armor Trim",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR023.png",
+        "craftable": false
+    },
+    "upgArmR025": {
+        "material": "Flak Plates",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR025.png",
+        "craftable": false
+    },
+    "upgArmR026": {
+        "material": "'ard Plate",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR026.png",
+        "craftable": false
+    },
+    "upgArmR027": {
+        "material": "Drone Controller",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR027.png",
+        "craftable": false
+    },
+    "upgArmR028": {
+        "material": "Wraithbone Plate",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR028.png",
+        "craftable": false
+    },
+    "upgArmR029": {
+        "material": "Ritual Implements",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR029.png",
+        "craftable": false
+    },
+    "upgArmR031": {
+        "material": "Beast Hide",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR031.png",
+        "craftable": false
+    },
+    "upgArmR032": {
+        "material": "Dark Hood",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR032.png",
+        "craftable": false
+    },
+    "upgArmR033": {
+        "material": "Reinforced Chitin",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR033.png",
+        "craftable": false
+    },
+    "upgArmR034": {
+        "material": "Cogwheel Crest",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR034.png",
+        "craftable": false
+    },
+    "upgArmR035": {
+        "material": "Artisan Plating",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR035.png",
+        "craftable": false
+    },
+    "upgArmR036": {
+        "material": "Industrial Padding",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR036.png",
+        "craftable": false
+    },
+    "upgArmR037": {
+        "material": "Auramite Wing",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR037.png",
+        "craftable": false
+    },
+    "upgArmR038": {
+        "material": "Cadaere Renissum",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR038.png",
+        "craftable": false
+    },
+    "upgArmR039": {
+        "material": "Lavish Helmet Crest",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmR039.png",
+        "craftable": false
+    },
+    "upgArmRCS": {
+        "material": "Coming soon",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmRCS.png",
+        "craftable": false
+    },
+    "upgArmU001": {
+        "material": "Oath Seal",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmU001.png",
+        "craftable": false
+    },
+    "upgArmU002": {
+        "material": "Box of Salvage",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmU002.png",
+        "craftable": false
+    },
+    "upgArmU003C": {
+        "material": "Adamantium Lump",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmU003C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmC004",
+                "count": 6
+            }
+        ]
+    },
+    "upgArmU004C": {
+        "material": "Sophisticated Material Ingot",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmU004C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmC005",
+                "count": 6
+            }
+        ]
+    },
+    "upgArmU005": {
+        "material": "Ceramite Lump",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmU005.png",
+        "craftable": false
+    },
+    "upgArmU006": {
+        "material": "Advanced Filaments",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmU006.png",
+        "craftable": false
+    },
+    "upgArmU007": {
+        "material": "Mutation: Scaly Skin",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmU007.png",
+        "craftable": false
+    },
+    "upgArmU008": {
+        "material": "Advanced Rebreather",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmU008.png",
+        "craftable": false
+    },
+    "upgArmU009": {
+        "material": "Blessed Tasset Plate",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmU009.png",
+        "craftable": false
+    },
+    "upgArmU010C": {
+        "material": "Blessed Ceramite",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmU010C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmC002",
+                "count": 6
+            }
+        ]
+    },
+    "upgArmU012": {
+        "material": "Reinforced Scale-Plates",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmU012.png",
+        "craftable": false
+    },
+    "upgArmU012C": {
+        "material": "Sturdy Pieces",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmU012C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmC003",
+                "count": 6
+            }
+        ]
+    },
+    "upgArmU013": {
+        "material": "Cloak",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmU013.png",
+        "craftable": false
+    },
+    "upgArmU014": {
+        "material": "Mesh Weave",
+        "rarity": "Uncommon",
+        "stat": "Armour",
+        "icon": "snowprint/upgArmU014.png",
+        "craftable": false
+    },
+    "upgDmgC001": {
+        "material": "Round of Ammo",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC001.png",
+        "craftable": false
+    },
+    "upgDmgC002": {
+        "material": "Frag Grenade",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC002.png",
+        "craftable": false
+    },
+    "upgDmgC003": {
+        "material": "Canister of Chemicals",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC003.png",
+        "craftable": false
+    },
+    "upgDmgC004": {
+        "material": "Can of Promethium",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC004.png",
+        "craftable": false
+    },
+    "upgDmgC005": {
+        "material": "Ballistics Data",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC005.png",
+        "craftable": false
+    },
+    "upgDmgC006": {
+        "material": "Lesser Reliquary of Vengeance",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC006.png",
+        "craftable": false
+    },
+    "upgDmgC007": {
+        "material": "Single Power Pack",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC007.png",
+        "craftable": false
+    },
+    "upgDmgC008": {
+        "material": "Otherworldly Energy",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC008.png",
+        "craftable": false
+    },
+    "upgDmgC009": {
+        "material": "Basic Auxiliary Core",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC009.png",
+        "craftable": false
+    },
+    "upgDmgC010": {
+        "material": "Auspex",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC010.png",
+        "craftable": false
+    },
+    "upgDmgC011": {
+        "material": "Weapon Anointment Oils",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC011.png",
+        "craftable": false
+    },
+    "upgDmgC012": {
+        "material": "Weapon parts",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC012.png",
+        "craftable": false
+    },
+    "upgDmgC013": {
+        "material": "Vox-Caster",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC013.png",
+        "craftable": false
+    },
+    "upgDmgC014": {
+        "material": "Nasty Spikes",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC014.png",
+        "craftable": false
+    },
+    "upgDmgC015": {
+        "material": "Targeting Link",
+        "rarity": "Common",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgC015.png",
+        "craftable": false
+    },
+    "upgDmgCS": {
+        "material": "Coming soon",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgCS.png",
+        "craftable": false
+    },
+    "upgDmgE001": {
+        "material": "Special Issue Ammo",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE001.png",
+        "craftable": false
+    },
+    "upgDmgE002C": {
+        "material": "Belt of Krak Grenades",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE002C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR013C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgR002",
+                "count": 4
+            },
+            {
+                "material": "upgDmgC003",
+                "count": 4
+            }
+        ]
+    },
+    "upgDmgE003": {
+        "material": "Blessed Promethium Canister",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE003.png",
+        "craftable": false
+    },
+    "upgDmgE004": {
+        "material": "Bionic Neural Pathways",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE004.png",
+        "craftable": false
+    },
+    "upgDmgE005": {
+        "material": "Greater Reliquary of Vengeance",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE005.png",
+        "craftable": false
+    },
+    "upgDmgE006C": {
+        "material": "Anointed Micro-Generator",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE006C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR010C",
+                "count": 1
+            },
+            {
+                "material": "upgArmR006",
+                "count": 4
+            },
+            {
+                "material": "upgArmC011",
+                "count": 4
+            }
+        ]
+    },
+    "upgDmgE007C": {
+        "material": "Plasma Cell Crate",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE007C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR004C",
+                "count": 1
+            },
+            {
+                "material": "upgArmR006",
+                "count": 4
+            },
+            {
+                "material": "upgDmgC012",
+                "count": 4
+            }
+        ]
+    },
+    "upgDmgE008C": {
+        "material": "Anointed Auxiliary Core",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE008C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR011C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgR003",
+                "count": 4
+            },
+            {
+                "material": "upgHpC014",
+                "count": 4
+            }
+        ]
+    },
+    "upgDmgE009C": {
+        "material": "Refined Combat Stimms",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE009C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR012C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgR003",
+                "count": 4
+            },
+            {
+                "material": "upgHpC006",
+                "count": 4
+            }
+        ]
+    },
+    "upgDmgE010": {
+        "material": "Warp Locus",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE010.png",
+        "craftable": false
+    },
+    "upgDmgE011": {
+        "material": "Elaborate Hilt",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE011.png",
+        "craftable": false
+    },
+    "upgDmgE021C": {
+        "material": "Chain of Righteous Zeal",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE021C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR021",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE022C": {
+        "material": "Hymn of Sacrifice",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE022C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR022",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE023C": {
+        "material": "Icon of Daemonic Vengeance",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE023C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR023",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE024C": {
+        "material": "Sigil of Inevitable Decay",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE024C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR024",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE025C": {
+        "material": "Veteran's Entrenching Tool",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE025C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR025",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE026C": {
+        "material": "Brutal Iron Jaw",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE026C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR026",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE027C": {
+        "material": "Advanced Sensor Suite",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE027C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR027",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE028C": {
+        "material": "Filigrane Psytronome",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE028C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR028",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE029C": {
+        "material": "Ensorcelled Infusion",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE029C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR029",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE031C": {
+        "material": "Thunderwolf Tooth Necklace",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE031C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR031",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE032C": {
+        "material": "Bolts of Judgement",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE032C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR032",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE033C": {
+        "material": "Adaptive Toxin Sacs",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE033C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR033",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE034C": {
+        "material": "Enhanced Motive Force Capacitator",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE034C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR034",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE035C": {
+        "material": "Quake Bolts",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE035C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR035",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE036C": {
+        "material": "Proclamation Caster",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE036C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR036",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE037C": {
+        "material": "Embellished Bolt Feeder",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE037C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR037",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE038C": {
+        "material": "Blessed Chainaxe Teeth",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE038C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR038",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE039C": {
+        "material": "Sonic Greave Amplifier",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgE039C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR039",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgECS": {
+        "material": "Coming soon",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgECS.png",
+        "craftable": false
+    },
+    "upgDmgL001": {
+        "material": "Master-crafted Ammo",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL001.png",
+        "craftable": false
+    },
+    "upgDmgL002C": {
+        "material": "Blessed Promethium Tank",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL002C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE003",
+                "count": 7
+            },
+            {
+                "material": "upgDmgR003",
+                "count": 7
+            },
+            {
+                "material": "upgDmgR004C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL003": {
+        "material": "Archeotech Bionics",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL003.png",
+        "craftable": false
+    },
+    "upgDmgL004C": {
+        "material": "Legendary Reliquary of Vengeance",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL004C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE005",
+                "count": 7
+            },
+            {
+                "material": "upgDmgU005",
+                "count": 7
+            },
+            {
+                "material": "upgDmgR015C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL005C": {
+        "material": "Optimal Micro-Generator",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL005C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE006C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE017",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL006C": {
+        "material": "Optimal Relic Auxiliary Core",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL006C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE008C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE010",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL007C": {
+        "material": "Autoloader",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL007C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE001",
+                "count": 7
+            },
+            {
+                "material": "upgDmgR002",
+                "count": 7
+            },
+            {
+                "material": "upgDmgR001C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL008C": {
+        "material": "Powered Blade",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL008C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE011",
+                "count": 7
+            },
+            {
+                "material": "upgHpR018",
+                "count": 7
+            },
+            {
+                "material": "upgDmgR010C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL009C": {
+        "material": "Hyperstim",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL009C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE004",
+                "count": 7
+            },
+            {
+                "material": "upgHpR019",
+                "count": 7
+            },
+            {
+                "material": "upgDmgR012C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL010C": {
+        "material": "Psychic Focus",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL010C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE010",
+                "count": 7
+            },
+            {
+                "material": "upgHpR002",
+                "count": 7
+            },
+            {
+                "material": "upgDmgR14C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL012C": {
+        "material": "Plasma Coil",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL012C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE007C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgE003",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL015C": {
+        "material": "Digital Weapons",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL015C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR015C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR13C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL016C": {
+        "material": "Imposing Horns",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL016C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR016C",
+                "count": 2
+            },
+            {
+                "material": "upgHpR015C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL017C": {
+        "material": "Overcapacitator",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL017C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR017C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR008C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL021C": {
+        "material": "Chain of Zealous Wrath",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL021C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE021C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR015C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL022C": {
+        "material": "Hymn of the Divine",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL022C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE022C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR015C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL023C": {
+        "material": "Icon of Infernal Vengeance",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL023C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE023C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR016C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL024C": {
+        "material": "Sigil of Eternal Decay",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL024C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE024C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR016C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL025C": {
+        "material": "Heirloom Entrenching Tool",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL025C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE025C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR015C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL026C": {
+        "material": "Ded Brutal Iron Jaw",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL026C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE026C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR016C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL027C": {
+        "material": "Multi-Spectrum Sensor Suite",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL027C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE027C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR017C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL028C": {
+        "material": "Soul-Bonded Psytronome",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL028C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE028C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR017C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL029C": {
+        "material": "Warpflame Infusion",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL029C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE029C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR016C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL030C": {
+        "material": "Extermination Protocols",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL030C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR009",
+                "count": 18
+            },
+            {
+                "material": "upgDmgR017C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL031C": {
+        "material": "Kraken Tooth Necklace",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL031C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE031C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR015C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL032C": {
+        "material": "Bolts of Furious Vengeance",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL032C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE032C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR015C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL033C": {
+        "material": "Hyper-Adaptive Toxin Sacs",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL033C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE033C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR016C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL034C": {
+        "material": "Optimal Motive Force Capacitator",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL034C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE034C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR015C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL035C": {
+        "material": "Decimator Bolts",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL035C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE035C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR015C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL036C": {
+        "material": "Proclamation Hailer",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL036C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE036C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR017C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL037C": {
+        "material": "Adorned Bolt Feeder",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL037C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE037C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR015C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL038C": {
+        "material": "Exalted Chainaxe Teeth",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL038C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE038C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR016C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL039C": {
+        "material": "Siren Amplifier",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL039C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE039C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgR016C",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgL120C": {
+        "material": "Hellfury Bolts",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL120C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL100",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR13C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE001",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL121C": {
+        "material": "Witchseeker Bolts",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL121C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL101",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR13C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE001",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL122C": {
+        "material": "Blessed Bolts",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL122C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL102",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR14C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE001",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL123C": {
+        "material": "Daemon Shells",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL123C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL103",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR14C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE001",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL124C": {
+        "material": "Virulent Rounds",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL124C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL104",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR14C",
+                "count": 1
+            },
+            {
+                "material": "upgHpE015",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL125C": {
+        "material": "Medallion Resolute",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL125C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL105",
+                "count": 9
+            },
+            {
+                "material": "upgHpR017C",
+                "count": 1
+            },
+            {
+                "material": "upgArmE009",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL126C": {
+        "material": "Snazzy Dakka",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL126C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL106",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR001C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE003",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL127C": {
+        "material": "Target Lock",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL127C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL107",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR13C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE004",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL128C": {
+        "material": "Scriptures of Battle",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL128C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL108",
+                "count": 9
+            },
+            {
+                "material": "upgHpR017C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE010",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL129C": {
+        "material": "Boonstone",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL129C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL109",
+                "count": 9
+            },
+            {
+                "material": "upgArmU004C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgE010",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL130C": {
+        "material": "Molecular Vaporiser",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL130C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL010",
+                "count": 9
+            },
+            {
+                "material": "upgHpR009C",
+                "count": 1
+            },
+            {
+                "material": "upgArmE008",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL131C": {
+        "material": "Frostblade",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL131C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL111",
+                "count": 9
+            },
+            {
+                "material": "upgDmgU018C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgE011",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL132C": {
+        "material": "Arbiter's Gaze",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL132C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL112",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR017C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE004",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL133C": {
+        "material": "Implant Attack",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL133C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL113",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR14C",
+                "count": 1
+            },
+            {
+                "material": "upgArmE013",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL134C": {
+        "material": "Prehensile Dataspike",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL134C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL114",
+                "count": 9
+            },
+            {
+                "material": "upgHpR012C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE004",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL135C": {
+        "material": "Archangel's Shard",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL135C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL115",
+                "count": 9
+            },
+            {
+                "material": "upgHpR016C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE011",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL136C": {
+        "material": "Gene-twisted Muscle",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL136C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL116",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR012C",
+                "count": 1
+            },
+            {
+                "material": "upgArmE013",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL137C": {
+        "material": "Panoptispex",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL137C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL117",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR13C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE004",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL138C": {
+        "material": "Butcher's Nails",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL138C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL118",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR012C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE004",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL139C": {
+        "material": "Amplified Senses",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL139C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL119",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR012C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE004",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgL202": {
+        "material": "Psychic Force Conduit",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL202.png",
+        "craftable": false
+    },
+    "upgDmgL204": {
+        "material": "Ancient Power Cell",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL204.png",
+        "craftable": false
+    },
+    "upgDmgL211C": {
+        "material": "Monstrous Strength",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL211C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgL202",
+                "count": 8
+            },
+            {
+                "material": "upgDmgL003",
+                "count": 8
+            },
+            {
+                "material": "upgDmgE003",
+                "count": 8
+            }
+        ]
+    },
+    "upgDmgL212C": {
+        "material": "Preternatural Strength",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL212C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgL001",
+                "count": 8
+            },
+            {
+                "material": "upgDmgL202",
+                "count": 8
+            },
+            {
+                "material": "upgDmgE010",
+                "count": 8
+            }
+        ]
+    },
+    "upgDmgL213C": {
+        "material": "Superaugmented Strength",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL213C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgL204",
+                "count": 8
+            },
+            {
+                "material": "upgDmgL001",
+                "count": 8
+            },
+            {
+                "material": "upgDmgE011",
+                "count": 8
+            }
+        ]
+    },
+    "upgDmgL214C": {
+        "material": "Technocrafted Strength",
+        "rarity": "Legendary",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgL214C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgL003",
+                "count": 8
+            },
+            {
+                "material": "upgDmgL204",
+                "count": 8
+            },
+            {
+                "material": "upgDmgE004",
+                "count": 8
+            }
+        ]
+    },
+    "upgDmgM211C": {
+        "material": "Arcane Substances",
+        "rarity": "Mythic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgM211C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgL202",
+                "count": 3
+            },
+            {
+                "material": "upgHpM003",
+                "count": 6
+            },
+            {
+                "material": "upgDmgL009C",
+                "count": 1
+            }
+        ]
+    },
+    "upgDmgM212C": {
+        "material": "Sundering Talons",
+        "rarity": "Mythic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgM212C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgL003",
+                "count": 3
+            },
+            {
+                "material": "upgHpM002",
+                "count": 6
+            },
+            {
+                "material": "upgDmgL008C",
+                "count": 1
+            }
+        ]
+    },
+    "upgDmgM213C": {
+        "material": "Ancient Weapon Augmentation",
+        "rarity": "Mythic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgM213C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgL001",
+                "count": 3
+            },
+            {
+                "material": "upgHpM001",
+                "count": 6
+            },
+            {
+                "material": "upgDmgL007C",
+                "count": 1
+            }
+        ]
+    },
+    "upgDmgM214C": {
+        "material": "Ancient Power Source",
+        "rarity": "Mythic",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgM214C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgL204",
+                "count": 3
+            },
+            {
+                "material": "upgHpM004",
+                "count": 6
+            },
+            {
+                "material": "upgDmgL010C",
+                "count": 1
+            }
+        ]
+    },
+    "upgDmgR001C": {
+        "material": "Box of Ammo",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR001C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmU002",
+                "count": 5
+            },
+            {
+                "material": "upgDmgC001",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgR002": {
+        "material": "Krak Grenade",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR002.png",
+        "craftable": false
+    },
+    "upgDmgR003": {
+        "material": "Tank of Promethium",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR003.png",
+        "craftable": false
+    },
+    "upgDmgR004C": {
+        "material": "Plasma Cell Bundle",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR004C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgU009",
+                "count": 5
+            },
+            {
+                "material": "upgDmgC003",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgR005": {
+        "material": "Classified Data-slate",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR005.png",
+        "craftable": false
+    },
+    "upgDmgR006": {
+        "material": "Bionic Eye",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR006.png",
+        "craftable": false
+    },
+    "upgDmgR007": {
+        "material": "Bladesman's Honour",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR007.png",
+        "craftable": false
+    },
+    "upgDmgR008C": {
+        "material": "High-capacity Power Pack",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR008C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgU009",
+                "count": 5
+            },
+            {
+                "material": "upgDmgC007",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgR009": {
+        "material": "Viridian Energy Tesseract",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR009.png",
+        "craftable": false
+    },
+    "upgDmgR010C": {
+        "material": "Powerful Micro-Generator",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR010C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgU010",
+                "count": 5
+            },
+            {
+                "material": "upgArmC012",
+                "count": 4
+            },
+            {
+                "material": "upgDmgC007",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgR011C": {
+        "material": "Powerful Auxiliary Core",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR011C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgU010",
+                "count": 2
+            },
+            {
+                "material": "upgDmgC009",
+                "count": 6
+            },
+            {
+                "material": "upgHpU014",
+                "count": 3
+            }
+        ]
+    },
+    "upgDmgR012C": {
+        "material": "Advanced Combat Stimms",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR012C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgU014",
+                "count": 5
+            },
+            {
+                "material": "upgHpC007",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgR015C": {
+        "material": "Sanctified Weapon Oils",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR015C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgU015C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgU003",
+                "count": 5
+            }
+        ]
+    },
+    "upgDmgR016C": {
+        "material": "Murderous Spikes",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR016C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgU016C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgU019",
+                "count": 5
+            }
+        ]
+    },
+    "upgDmgR017C": {
+        "material": "Ratiocination Targeting",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR017C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgU017C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgU004",
+                "count": 5
+            }
+        ]
+    },
+    "upgDmgR021": {
+        "material": "Chain of Zeal",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR021.png",
+        "craftable": false
+    },
+    "upgDmgR022": {
+        "material": "Hymn of Martyrs",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR022.png",
+        "craftable": false
+    },
+    "upgDmgR023": {
+        "material": "Icon of Vengeance",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR023.png",
+        "craftable": false
+    },
+    "upgDmgR024": {
+        "material": "Sigil of Decay",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR024.png",
+        "craftable": false
+    },
+    "upgDmgR025": {
+        "material": "Entrenching Tool",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR025.png",
+        "craftable": false
+    },
+    "upgDmgR026": {
+        "material": "Iron Jaw",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR026.png",
+        "craftable": false
+    },
+    "upgDmgR027": {
+        "material": "Sensor Suite",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR027.png",
+        "craftable": false
+    },
+    "upgDmgR028": {
+        "material": "Psytronome",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR028.png",
+        "craftable": false
+    },
+    "upgDmgR029": {
+        "material": "Inferno Bolts",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR029.png",
+        "craftable": false
+    },
+    "upgDmgR031": {
+        "material": "Wolf Tooth Necklace",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR031.png",
+        "craftable": false
+    },
+    "upgDmgR032": {
+        "material": "Chapter Pendant",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR032.png",
+        "craftable": false
+    },
+    "upgDmgR033": {
+        "material": "Toxin Sacs",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR033.png",
+        "craftable": false
+    },
+    "upgDmgR034": {
+        "material": "Motive Force Capacitator",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR034.png",
+        "craftable": false
+    },
+    "upgDmgR035": {
+        "material": "Blood Shard Bolt",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR035.png",
+        "craftable": false
+    },
+    "upgDmgR036": {
+        "material": "Proclamation Receiver",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR036.png",
+        "craftable": false
+    },
+    "upgDmgR037": {
+        "material": "Integrated Bolt Feeder",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR037.png",
+        "craftable": false
+    },
+    "upgDmgR038": {
+        "material": "Chainaxe Teeth",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR038.png",
+        "craftable": false
+    },
+    "upgDmgR039": {
+        "material": "Vox Grill Amplifier",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR039.png",
+        "craftable": false
+    },
+    "upgDmgR13C": {
+        "material": "Prey-Sight",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR13C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgU012",
+                "count": 5
+            },
+            {
+                "material": "upgDmgC010",
+                "count": 3
+            },
+            {
+                "material": "upgDmgC013",
+                "count": 3
+            }
+        ]
+    },
+    "upgDmgR14C": {
+        "material": "Supernatural Sight",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgR14C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgU011",
+                "count": 5
+            },
+            {
+                "material": "upgDmgC008",
+                "count": 3
+            },
+            {
+                "material": "upgDmgC005",
+                "count": 3
+            }
+        ]
+    },
+    "upgDmgRCS": {
+        "material": "Coming soon",
+        "rarity": "Rare",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgRCS.png",
+        "craftable": false
+    },
+    "upgDmgU001C": {
+        "material": "Magazine",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU001C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgC001",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgU002C": {
+        "material": "Belt of Frag Grenades",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU002C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgC002",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgU003": {
+        "material": "Barrel of Promethium",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU003.png",
+        "craftable": false
+    },
+    "upgDmgU004": {
+        "material": "Attack Vector Data-slate",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU004.png",
+        "craftable": false
+    },
+    "upgDmgU005": {
+        "material": "Reliquary of Vengeance",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU005.png",
+        "craftable": false
+    },
+    "upgDmgU006": {
+        "material": "Marksman's Honour",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU006.png",
+        "craftable": false
+    },
+    "upgDmgU007C": {
+        "material": "Power Pack Bundle",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU007C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgC007",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgU008C": {
+        "material": "Otherworldly Energy Reservoir",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU008C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgC008",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgU009": {
+        "material": "Plasma Cell",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU009.png",
+        "craftable": false
+    },
+    "upgDmgU010": {
+        "material": "Fine Micro-Generator",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU010.png",
+        "craftable": false
+    },
+    "upgDmgU011": {
+        "material": "Divinator Class Auspex",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU011.png",
+        "craftable": false
+    },
+    "upgDmgU012": {
+        "material": "Locator Beacon",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU012.png",
+        "craftable": false
+    },
+    "upgDmgU013C": {
+        "material": "Fine Auxiliary Core",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU013C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgC009",
+                "count": 6
+            }
+        ]
+    },
+    "upgDmgU014": {
+        "material": "Combat Stimms",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU014.png",
+        "craftable": false
+    },
+    "upgDmgU015C": {
+        "material": "Blessed Weapon Oils",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU015C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgC011",
+                "count": 4
+            },
+            {
+                "material": "upgDmgC003",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgU016C": {
+        "material": "Razor-sharp Spikes",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU016C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgC014",
+                "count": 4
+            },
+            {
+                "material": "upgDmgC012",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgU017C": {
+        "material": "Targeting Matrix",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU017C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgC015",
+                "count": 4
+            },
+            {
+                "material": "upgDmgC005",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgU018C": {
+        "material": "Adamantium Blades",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU018C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgC012",
+                "count": 4
+            },
+            {
+                "material": "upgHpC013",
+                "count": 2
+            }
+        ]
+    },
+    "upgDmgU019": {
+        "material": "Slicing Claws",
+        "rarity": "Uncommon",
+        "stat": "Damage",
+        "icon": "snowprint/upgDmgU019.png",
+        "craftable": false
+    },
+    "upgHpC001": {
+        "material": "Field Ration",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC001.png",
+        "craftable": false
+    },
+    "upgHpC002": {
+        "material": "Minor Bionic Enhancement",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC002.png",
+        "craftable": false
+    },
+    "upgHpC003": {
+        "material": "Lesser Reliquary of Protection",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC003.png",
+        "craftable": false
+    },
+    "upgHpC004": {
+        "material": "The Iron Phoenix",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC004.png",
+        "craftable": false
+    },
+    "upgHpC005": {
+        "material": "The Silver Aquila",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC005.png",
+        "craftable": false
+    },
+    "upgHpC006": {
+        "material": "Standard-Issue Tourniquet",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC006.png",
+        "craftable": false
+    },
+    "upgHpC007": {
+        "material": "Healing Ointment",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC007.png",
+        "craftable": false
+    },
+    "upgHpC008": {
+        "material": "Thick Skin",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC008.png",
+        "craftable": false
+    },
+    "upgHpC009": {
+        "material": "Nano Swarm",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC009.png",
+        "craftable": false
+    },
+    "upgHpC010": {
+        "material": "Mutation: Warped Muscles",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC010.png",
+        "craftable": false
+    },
+    "upgHpC013": {
+        "material": "Chip Damage",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC013.png",
+        "craftable": false
+    },
+    "upgHpC014": {
+        "material": "Wires",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC014.png",
+        "craftable": false
+    },
+    "upgHpC015": {
+        "material": "Ropes and Chains",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC015.png",
+        "craftable": false
+    },
+    "upgHpC016": {
+        "material": "Scrolls",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC016.png",
+        "craftable": false
+    },
+    "upgHpC017": {
+        "material": "Mission Assignment",
+        "rarity": "Common",
+        "stat": "Health",
+        "icon": "snowprint/upgHpC017.png",
+        "craftable": false
+    },
+    "upgHpCS": {
+        "material": "Coming soon",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpCS.png",
+        "craftable": false
+    },
+    "upgHpE001C": {
+        "material": "Advanced Bionics",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE001C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR006",
+                "count": 6
+            },
+            {
+                "material": "upgHpU004C",
+                "count": 1
+            },
+            {
+                "material": "upgHpU014",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpE002C": {
+        "material": "Greater Reliquary of Protection",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE002C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR005",
+                "count": 6
+            },
+            {
+                "material": "upgHpU007",
+                "count": 6
+            },
+            {
+                "material": "upgArmC001",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpE003": {
+        "material": "Terminator Honours",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE003.png",
+        "craftable": false
+    },
+    "upgHpE004C": {
+        "material": "Necrodermis Nano Scarab Swarm",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE004C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR009C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR014",
+                "count": 4
+            },
+            {
+                "material": "upgArmC005",
+                "count": 4
+            }
+        ]
+    },
+    "upgHpE005C": {
+        "material": "Nob Teef",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE005C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR010",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE006C": {
+        "material": "Exquisite Medical Supplies",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE006C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR006C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgR003",
+                "count": 4
+            },
+            {
+                "material": "upgHpC007",
+                "count": 4
+            }
+        ]
+    },
+    "upgHpE007C": {
+        "material": "Grand Helmet Trophy",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE007C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR015C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR018",
+                "count": 4
+            },
+            {
+                "material": "upgDmgC014",
+                "count": 4
+            }
+        ]
+    },
+    "upgHpE008C": {
+        "material": "Mutation: Regenerative Blood",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE008C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR008",
+                "count": 6
+            },
+            {
+                "material": "upgHpU009",
+                "count": 6
+            },
+            {
+                "material": "upgHpC010",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpE009C": {
+        "material": "Resurrection Protocols",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE009C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR011",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE011C": {
+        "material": "Royal Phylactery",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE011C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR011",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE012": {
+        "material": "Golden Ornamental Skull",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE012.png",
+        "craftable": false
+    },
+    "upgHpE013C": {
+        "material": "Exospine",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE013C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR012C",
+                "count": 1
+            },
+            {
+                "material": "upgArmR015",
+                "count": 4
+            },
+            {
+                "material": "upgArmC011",
+                "count": 4
+            }
+        ]
+    },
+    "upgHpE014C": {
+        "material": "Ominous Xenos Glyphs",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE014C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR014",
+                "count": 6
+            },
+            {
+                "material": "upgHpU016",
+                "count": 6
+            },
+            {
+                "material": "upgDmgC008",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpE015": {
+        "material": "Weathering",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE015.png",
+        "craftable": false
+    },
+    "upgHpE017": {
+        "material": "Secret Agenda",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE017.png",
+        "craftable": false
+    },
+    "upgHpE021C": {
+        "material": "Lights of Purgation",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE021C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR021",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE022C": {
+        "material": "Roses of Sacrifice",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE022C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR022",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE023C": {
+        "material": "Warp Touched Eye of Horus",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE023C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR023",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE024C": {
+        "material": "Death Bell",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE024C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR024",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE025C": {
+        "material": "Epaulettes",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE025C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR007",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE027C": {
+        "material": "Advanced Stimm Injector",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE027C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR027",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE028C": {
+        "material": "Spirit Stone",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE028C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR028",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE029C": {
+        "material": "Malefic Scroll",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE029C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR029",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE031C": {
+        "material": "Runic Talisman",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE031C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR031",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE032C": {
+        "material": "Key of Knowledge",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE032C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR032",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE033C": {
+        "material": "Adaptive Adrenal Glands",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE033C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR033",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE034C": {
+        "material": "Servo-Arc Claw",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE034C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR001",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE035C": {
+        "material": "Bloodstone Pendant",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE035C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR035",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE036C": {
+        "material": "Wyrm-form Icon",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE036C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR036",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE037C": {
+        "material": "Flawless Gem Embellishment",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE037C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR037",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE038C": {
+        "material": "Blessed Brazen Jaws",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE038C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR038",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpE039C": {
+        "material": "Outrageous Adornment",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpE039C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR039",
+                "count": 9
+            }
+        ]
+    },
+    "upgHpECS": {
+        "material": "Coming soon",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpECS.png",
+        "craftable": false
+    },
+    "upgHpL001C": {
+        "material": "Optimal Bionic Enhancement",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL001C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE001C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR004C",
+                "count": 2
+            },
+            {
+                "material": "upgDmgU012",
+                "count": 2
+            }
+        ]
+    },
+    "upgHpL002C": {
+        "material": "Legendary Reliquary of Protection",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL002C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE002C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR016C",
+                "count": 2
+            },
+            {
+                "material": "upgArmU001",
+                "count": 2
+            }
+        ]
+    },
+    "upgHpL005C": {
+        "material": "Ancient Nano Scarab Swarm",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL005C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE004C",
+                "count": 2
+            },
+            {
+                "material": "upgHpC009",
+                "count": 5
+            }
+        ]
+    },
+    "upgHpL006C": {
+        "material": "Shiny Boss Teef",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL006C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE005C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE014C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL007C": {
+        "material": "Protocol of the Eternal Guardian",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL007C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE009C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE014C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL008C": {
+        "material": "Phylacterine Hive",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL008C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL010",
+                "count": 9
+            },
+            {
+                "material": "upgHpR009C",
+                "count": 1
+            },
+            {
+                "material": "upgArmE008",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL009C": {
+        "material": "Grandiose Skull Ornament",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL009C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE012",
+                "count": 5
+            },
+            {
+                "material": "upgArmR012C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR015C",
+                "count": 2
+            }
+        ]
+    },
+    "upgHpL010": {
+        "material": "Engrammatic Entangler",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL010.png",
+        "craftable": false
+    },
+    "upgHpL011C": {
+        "material": "Tome of Arcane Knowledge",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL011C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgE010",
+                "count": 5
+            },
+            {
+                "material": "upgHpR016C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgR14C",
+                "count": 2
+            }
+        ]
+    },
+    "upgHpL012C": {
+        "material": "Mutation: Otherworldly Power",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL012C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE008C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgR016C",
+                "count": 2
+            },
+            {
+                "material": "upgHpU009",
+                "count": 2
+            }
+        ]
+    },
+    "upgHpL013C": {
+        "material": "Advanced Exospine",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL013C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE013C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR006C",
+                "count": 2
+            },
+            {
+                "material": "upgArmU014",
+                "count": 2
+            }
+        ]
+    },
+    "upgHpL014C": {
+        "material": "Portentous Xenos Glyphs",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL014C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE014C",
+                "count": 1
+            },
+            {
+                "material": "upgHpR017C",
+                "count": 2
+            },
+            {
+                "material": "upgArmU006",
+                "count": 2
+            }
+        ]
+    },
+    "upgHpL017C": {
+        "material": "Grand Strategy",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL017C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE017",
+                "count": 5
+            },
+            {
+                "material": "upgHpR017C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgR001C",
+                "count": 2
+            }
+        ]
+    },
+    "upgHpL021C": {
+        "material": "Candelabrum of Burning Wrath",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL021C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE021C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE002C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL022C": {
+        "material": "Roses of the Divine",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL022C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE022C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE002C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL023C": {
+        "material": "Infernal Eye of Horus",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL023C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE023C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE008C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL024C": {
+        "material": "Bell of Despair",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL024C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE024C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE008C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL025C": {
+        "material": "Epaulettes of Renown",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL025C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE025C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE002C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL027C": {
+        "material": "Auto-Reactive Stimm Injector",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL027C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE027C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE014C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL028C": {
+        "material": "Resplendent Spirit Stone",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL028C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE028C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE014C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL029C": {
+        "material": "Athenaean Scroll",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL029C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE029C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE008C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL031C": {
+        "material": "Talisman of Storms",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL031C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE031C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE002C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL032C": {
+        "material": "Key of Achrabael",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL032C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE032C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE002C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL033C": {
+        "material": "Hyper-Adaptive Adrenal Glands",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL033C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE033C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE008C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL034C": {
+        "material": "Mechadendrite Hive",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL034C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE034C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE002C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL035C": {
+        "material": "Bloodstone Icon",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL035C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE035C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE002C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL036C": {
+        "material": "Wyrm-form Banner",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL036C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE036C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE014C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL037C": {
+        "material": "Flawless Gem Adornment",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL037C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE037C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE002C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL038C": {
+        "material": "Exalted Brazen Jaws",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL038C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE038C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE008C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL039C": {
+        "material": "Outrageous Grimace",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL039C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE039C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE008C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpL100": {
+        "material": "Codex Astartes Page",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL100.png",
+        "craftable": false
+    },
+    "upgHpL101": {
+        "material": "Bones of the Paragons",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL101.png",
+        "craftable": false
+    },
+    "upgHpL102": {
+        "material": "Holy Chaplet",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL102.png",
+        "craftable": false
+    },
+    "upgHpL103": {
+        "material": "Boon of the Dark Gods",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL103.png",
+        "craftable": false
+    },
+    "upgHpL104": {
+        "material": "Boon of Nurgle",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL104.png",
+        "craftable": false
+    },
+    "upgHpL105": {
+        "material": "Honourifica Imperialis",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL105.png",
+        "craftable": false
+    },
+    "upgHpL106": {
+        "material": "Kustom Gubbinz",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL106.png",
+        "craftable": false
+    },
+    "upgHpL107": {
+        "material": "Engram Neurochip",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL107.png",
+        "craftable": false
+    },
+    "upgHpL108": {
+        "material": "Runes of Fate",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL108.png",
+        "craftable": false
+    },
+    "upgHpL109": {
+        "material": "Boon of Tzeentch",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL109.png",
+        "craftable": false
+    },
+    "upgHpL111": {
+        "material": "Mjod",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL111.png",
+        "craftable": false
+    },
+    "upgHpL112": {
+        "material": "Stone Guardian Fragment",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL112.png",
+        "craftable": false
+    },
+    "upgHpL113": {
+        "material": "Synaptic Augmentation",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL113.png",
+        "craftable": false
+    },
+    "upgHpL114": {
+        "material": "Blessed Cogitator",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL114.png",
+        "craftable": false
+    },
+    "upgHpL115": {
+        "material": "Blood Vial",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL115.png",
+        "craftable": false
+    },
+    "upgHpL116": {
+        "material": "Gifts of the Star Children",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL116.png",
+        "craftable": false
+    },
+    "upgHpL117": {
+        "material": "Arcane Genetic Alchemy",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL117.png",
+        "craftable": false
+    },
+    "upgHpL118": {
+        "material": "Boon of Khorne",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL118.png",
+        "craftable": false
+    },
+    "upgHpL119": {
+        "material": "Boon of Slaanesh",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL119.png",
+        "craftable": false
+    },
+    "upgHpL120C": {
+        "material": "Codex Astartes",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL120C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL100",
+                "count": 9
+            },
+            {
+                "material": "upgHpR017C",
+                "count": 1
+            },
+            {
+                "material": "upgHpE003",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL121C": {
+        "material": "Tannhauser's Bones",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL121C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL101",
+                "count": 9
+            },
+            {
+                "material": "upgHpR020C",
+                "count": 1
+            },
+            {
+                "material": "upgArmE009",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL122C": {
+        "material": "Simulacrum Sanctorum",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL122C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL102",
+                "count": 9
+            },
+            {
+                "material": "upgHpR020C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE003",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL123C": {
+        "material": "Mark of Chaos Undivided",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL123C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL103",
+                "count": 9
+            },
+            {
+                "material": "upgHpR015C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE010",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL124C": {
+        "material": "Mark of Nurgle",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL124C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL104",
+                "count": 9
+            },
+            {
+                "material": "upgHpR015C",
+                "count": 1
+            },
+            {
+                "material": "upgHpE015",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL125C": {
+        "material": "Sash of Honors",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL125C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL105",
+                "count": 9
+            },
+            {
+                "material": "upgHpR013C",
+                "count": 1
+            },
+            {
+                "material": "upgHpE012",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL126C": {
+        "material": "Cybork Body Parts",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL126C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL106",
+                "count": 9
+            },
+            {
+                "material": "upgHpR004C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE004",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL127C": {
+        "material": "Ta'lissera Bond",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL127C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL107",
+                "count": 9
+            },
+            {
+                "material": "upgHpR006C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE011",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL128C": {
+        "material": "Scriptures of Fate",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL128C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL108",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR14C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE010",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL129C": {
+        "material": "Mark of Tzeentch",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL129C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL109",
+                "count": 9
+            },
+            {
+                "material": "upgHpR017C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE010",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL131C": {
+        "material": "Personal Saga",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL131C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL111",
+                "count": 9
+            },
+            {
+                "material": "upgHpR015C",
+                "count": 1
+            },
+            {
+                "material": "upgHpE003",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL132C": {
+        "material": "Perfidious Relic of the Unforgiven",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL132C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL112",
+                "count": 9
+            },
+            {
+                "material": "upgArmR012C",
+                "count": 1
+            },
+            {
+                "material": "upgHpE017",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL133C": {
+        "material": "Hypermetabolic Acceleration",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL133C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL113",
+                "count": 9
+            },
+            {
+                "material": "upgHpR006C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE003",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL134C": {
+        "material": "Sanctus Canister",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL134C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL114",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR012C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE003",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL135C": {
+        "material": "Icon of the Angel",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL135C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL115",
+                "count": 9
+            },
+            {
+                "material": "upgHpR020C",
+                "count": 1
+            },
+            {
+                "material": "upgHpE012",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL136C": {
+        "material": "Biomorph Adaption",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL136C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL116",
+                "count": 9
+            },
+            {
+                "material": "upgHpR006C",
+                "count": 1
+            },
+            {
+                "material": "upgArmE013",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL137C": {
+        "material": "Defensor Refractor Generator",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL137C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL117",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR010C",
+                "count": 1
+            },
+            {
+                "material": "upgArmE008",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL138C": {
+        "material": "Mark of Khorne",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL138C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL118",
+                "count": 9
+            },
+            {
+                "material": "upgHpR015C",
+                "count": 1
+            },
+            {
+                "material": "upgHpE012",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL139C": {
+        "material": "Mark of Slaanesh",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL139C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpL119",
+                "count": 9
+            },
+            {
+                "material": "upgHpR015C",
+                "count": 1
+            },
+            {
+                "material": "upgDmgE010",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpL211C": {
+        "material": "Monstrous Constitution",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL211C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgL003",
+                "count": 8
+            },
+            {
+                "material": "upgArmL203",
+                "count": 8
+            },
+            {
+                "material": "upgHpE015",
+                "count": 8
+            }
+        ]
+    },
+    "upgHpL212C": {
+        "material": "Preternatural Constitution",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL212C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgL202",
+                "count": 8
+            },
+            {
+                "material": "upgArmL202",
+                "count": 8
+            },
+            {
+                "material": "upgHpE017",
+                "count": 8
+            }
+        ]
+    },
+    "upgHpL213C": {
+        "material": "Superaugmented Constitution",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL213C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgL001",
+                "count": 8
+            },
+            {
+                "material": "upgArmL001",
+                "count": 8
+            },
+            {
+                "material": "upgHpE003",
+                "count": 8
+            }
+        ]
+    },
+    "upgHpL214C": {
+        "material": "Technocrafted Constitution",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint/upgHpL214C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgL204",
+                "count": 8
+            },
+            {
+                "material": "upgArmL204",
+                "count": 8
+            },
+            {
+                "material": "upgHpE012",
+                "count": 8
+            }
+        ]
+    },
+    "upgHpM001": {
+        "material": "Imperial Aquila",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpM001.png",
+        "craftable": false
+    },
+    "upgHpM002": {
+        "material": "Mutant Form",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpM002.png",
+        "craftable": false
+    },
+    "upgHpM003": {
+        "material": "Ancient Inscription",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpM003.png",
+        "craftable": false
+    },
+    "upgHpM004": {
+        "material": "Venerable Battle Mark",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint/upgHpM004.png",
+        "craftable": false
+    },
+    "upgHpR001": {
+        "material": "Repair Tool",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR001.png",
+        "craftable": false
+    },
+    "upgHpR002": {
+        "material": "Metal Decorative Skull",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR002.png",
+        "craftable": false
+    },
+    "upgHpR003C": {
+        "material": "Box of Rations",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR003C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpU001",
+                "count": 5
+            },
+            {
+                "material": "upgHpC001",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpR004C": {
+        "material": "Purifier",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR004C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmU008",
+                "count": 5
+            },
+            {
+                "material": "upgDmgC010",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpR005": {
+        "material": "The Phoenix Ascendant",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR005.png",
+        "craftable": false
+    },
+    "upgHpR006C": {
+        "material": "Medical Supply Crate",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR006C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgU014",
+                "count": 5
+            },
+            {
+                "material": "upgHpC006",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpR007": {
+        "material": "Zeidos Ribbon",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR007.png",
+        "craftable": false
+    },
+    "upgHpR008": {
+        "material": "Mutation: Warped Heart",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR008.png",
+        "craftable": false
+    },
+    "upgHpR009C": {
+        "material": "Otherworldly Nano Swarm",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR009C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmU006",
+                "count": 5
+            },
+            {
+                "material": "upgHpC009",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpR010": {
+        "material": "Bad Moon Teef",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR010.png",
+        "craftable": false
+    },
+    "upgHpR011": {
+        "material": "Reconstitution Protocols",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR011.png",
+        "craftable": false
+    },
+    "upgHpR012C": {
+        "material": "Electromantic Cable Bundle",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR012C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpU014",
+                "count": 5
+            },
+            {
+                "material": "upgHpC014",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpR013C": {
+        "material": "Utilitarian Belt",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR013C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpU007",
+                "count": 5
+            },
+            {
+                "material": "upgHpU018C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpR014": {
+        "material": "Ancient Runes",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR014.png",
+        "craftable": false
+    },
+    "upgHpR015C": {
+        "material": "Grand Skull Trophy",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR015C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpU012",
+                "count": 5
+            },
+            {
+                "material": "upgArmC003",
+                "count": 4
+            },
+            {
+                "material": "upgHpC013",
+                "count": 2
+            }
+        ]
+    },
+    "upgHpR016C": {
+        "material": "Grandiloquent Litanical",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR016C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpU016",
+                "count": 5
+            },
+            {
+                "material": "upgHpC016",
+                "count": 4
+            },
+            {
+                "material": "upgDmgC013",
+                "count": 2
+            }
+        ]
+    },
+    "upgHpR017C": {
+        "material": "Battle Plan",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR017C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpU017",
+                "count": 5
+            },
+            {
+                "material": "upgHpC017",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpR018": {
+        "material": "Kill Count",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR018.png",
+        "craftable": false
+    },
+    "upgHpR019": {
+        "material": "Battle Scar",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR019.png",
+        "craftable": false
+    },
+    "upgHpR020C": {
+        "material": "Sanctified Reliquary of Protection",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR020C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpU002",
+                "count": 5
+            },
+            {
+                "material": "upgHpC003",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpR021": {
+        "material": "Righteous Candle",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR021.png",
+        "craftable": false
+    },
+    "upgHpR022": {
+        "material": "Rose of Martyrs",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR022.png",
+        "craftable": false
+    },
+    "upgHpR023": {
+        "material": "Eye of Horus",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR023.png",
+        "craftable": false
+    },
+    "upgHpR024": {
+        "material": "Plague Bell",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR024.png",
+        "craftable": false
+    },
+    "upgHpR027": {
+        "material": "Stimm Injector",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR027.png",
+        "craftable": false
+    },
+    "upgHpR028": {
+        "material": "Waystone",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR028.png",
+        "craftable": false
+    },
+    "upgHpR029": {
+        "material": "Tainted Text",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR029.png",
+        "craftable": false
+    },
+    "upgHpR031": {
+        "material": "Wolf Tail Talisman",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR031.png",
+        "craftable": false
+    },
+    "upgHpR032": {
+        "material": "Key of Ignorance",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR032.png",
+        "craftable": false
+    },
+    "upgHpR033": {
+        "material": "Adrenal Glands",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR033.png",
+        "craftable": false
+    },
+    "upgHpR035": {
+        "material": "Bloodstone Tear",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR035.png",
+        "craftable": false
+    },
+    "upgHpR036": {
+        "material": "Wyrm-form Sigil",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR036.png",
+        "craftable": false
+    },
+    "upgHpR037": {
+        "material": "Flawless Terran Gem",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR037.png",
+        "craftable": false
+    },
+    "upgHpR038": {
+        "material": "Brazen Jaws",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR038.png",
+        "craftable": false
+    },
+    "upgHpR039": {
+        "material": "Outrageous Padding",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpR039.png",
+        "craftable": false
+    },
+    "upgHpRCS": {
+        "material": "Coming soon",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint/upgHpRCS.png",
+        "craftable": false
+    },
+    "upgHpU001": {
+        "material": "Enriched Rations",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU001.png",
+        "craftable": false
+    },
+    "upgHpU002": {
+        "material": "Reliquary of Protection",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU002.png",
+        "craftable": false
+    },
+    "upgHpU003": {
+        "material": "The Silver Scope",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU003.png",
+        "craftable": false
+    },
+    "upgHpU004C": {
+        "material": "Bionic Enhancement",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU004C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpC002",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpU005C": {
+        "material": "First Aid Kit",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU005C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpC007",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpU006": {
+        "material": "The Gold Phoenix",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU006.png",
+        "craftable": false
+    },
+    "upgHpU007": {
+        "material": "Advanced Filaments",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU007.png",
+        "craftable": false
+    },
+    "upgHpU008": {
+        "material": "The Silver Eagle with Swords",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU008.png",
+        "craftable": false
+    },
+    "upgHpU009": {
+        "material": "Mutation: Warped Lungs",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU009.png",
+        "craftable": false
+    },
+    "upgHpU010C": {
+        "material": "Regenerating Nano Swarm",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU010C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpC009",
+                "count": 6
+            }
+        ]
+    },
+    "upgHpU012": {
+        "material": "Helmet Trophy",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU012.png",
+        "craftable": false
+    },
+    "upgHpU013": {
+        "material": "Artificial Vertebrae",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU013.png",
+        "craftable": false
+    },
+    "upgHpU014": {
+        "material": "Reinforced Cables",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU014.png",
+        "craftable": false
+    },
+    "upgHpU015": {
+        "material": "Satchel",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU015.png",
+        "craftable": false
+    },
+    "upgHpU016": {
+        "material": "Writings",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU016.png",
+        "craftable": false
+    },
+    "upgHpU017": {
+        "material": "Mission Objective",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU017.png",
+        "craftable": false
+    },
+    "upgHpU018C": {
+        "material": "Holster and Pockets",
+        "rarity": "Uncommon",
+        "stat": "Health",
+        "icon": "snowprint/upgHpU018C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpC015",
+                "count": 3
+            },
+            {
+                "material": "upgHpC006",
+                "count": 3
+            }
+        ]
+    }
+}
