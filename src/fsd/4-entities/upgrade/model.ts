@@ -38,6 +38,7 @@ export interface IRecipeDataFull {
 
 export interface IMaterialFull {
     id: string;
+    snowprintId: string;
     label: string;
     rarity: Rarity;
     craftable: boolean;
@@ -52,6 +53,7 @@ export interface IMaterialFull {
 
 export interface IMaterialRecipeIngredientFull {
     id: string;
+    snowprintId: string;
     label: string | 'Gold';
     count: number;
     rarity: Rarity;
